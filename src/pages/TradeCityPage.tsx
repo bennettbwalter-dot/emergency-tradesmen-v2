@@ -68,34 +68,45 @@ export default function TradeCityPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative bg-primary overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/90" />
-          <div className="absolute top-10 right-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
+        <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+          {/* Background layers */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
           
-          <div className="relative container-wide py-12 md:py-20">
+          {/* Glow effects */}
+          <div className="absolute top-10 right-10 w-72 h-72 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
+          
+          <div className="relative container-wide py-16 md:py-24">
             <div className="max-w-3xl">
-              <nav className="flex items-center gap-2 text-primary-foreground/60 text-sm mb-6">
-                <Link to="/" className="hover:text-primary-foreground">Home</Link>
-                <span>/</span>
-                <span className="text-primary-foreground">Emergency {tradeInfo.name}</span>
-                <span>/</span>
-                <span className="text-primary-foreground">{cityName}</span>
+              {/* Breadcrumb */}
+              <nav className="flex items-center gap-2 text-muted-foreground text-sm mb-8">
+                <Link to="/" className="hover:text-gold transition-colors">Home</Link>
+                <span className="text-gold/50">/</span>
+                <span className="text-foreground">Emergency {tradeInfo.name}</span>
+                <span className="text-gold/50">/</span>
+                <span className="text-gold">{cityName}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/20 text-success mb-6 animate-fade-up">
+              {/* Availability badge */}
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8 animate-fade-up">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
-                <span className="text-sm font-medium">{tradeInfo.name}s available now in {cityName}</span>
+                <span className="text-sm font-medium uppercase tracking-wider text-gold">{tradeInfo.name}s available now in {cityName}</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6 animate-fade-up">
-                Emergency {tradeInfo.name} in {cityName}
-                <span className="block text-accent text-3xl md:text-4xl mt-2">Available Now – 24/7</span>
+              {/* Main headline */}
+              <h1 className="mb-6 animate-fade-up">
+                <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
+                  Emergency {tradeInfo.name}
+                </span>
+                <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
+                  in {cityName}
+                </span>
               </h1>
               
-              <p className="text-lg text-primary-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl">
+              <p className="text-lg text-muted-foreground mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed">
                 Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now. 
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
@@ -107,21 +118,23 @@ export default function TradeCityPage() {
                     Call Now: 0800 123 4567
                   </a>
                 </Button>
-                <div className="flex items-center gap-2 text-primary-foreground/70">
-                  <Clock className="w-5 h-5" />
-                  <span>Response in {averageResponseTime}</span>
+                <div className="flex items-center gap-3 text-muted-foreground px-6 py-3 border border-border/50 rounded-sm">
+                  <Clock className="w-5 h-5 text-gold" />
+                  <span className="uppercase tracking-wider text-sm">Response in {averageResponseTime}</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Trust Section */}
-        <section className="container-wide py-12 -mt-6 relative z-10">
+        {/* Trust Section - Certifications */}
+        <section className="container-wide py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map((cert, index) => (
-              <div key={index} className="flex items-center gap-3 p-4 bg-card rounded-xl border border-border shadow-sm">
-                <Shield className="w-5 h-5 text-success flex-shrink-0" />
+              <div key={index} className="flex items-center gap-3 p-5 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-colors">
+                <div className="w-10 h-10 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-gold" />
+                </div>
                 <span className="text-sm font-medium text-foreground">{cert}</span>
               </div>
             ))}
@@ -129,22 +142,25 @@ export default function TradeCityPage() {
         </section>
 
         {/* Services Section */}
-        <section className="container-wide py-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
-            Emergency {tradeInfo.name} Services We Cover in {cityName}
-          </h2>
+        <section className="container-wide py-16">
+          <div className="text-center mb-10">
+            <p className="text-gold uppercase tracking-luxury text-sm mb-4">What We Cover</p>
+            <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
+              Emergency {tradeInfo.name} Services in {cityName}
+            </h2>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className="flex items-start gap-4 p-5 bg-card rounded-xl border border-border hover:border-accent/50 transition-colors"
+                className="group flex items-start gap-4 p-6 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-full bg-trust-light flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-5 h-5 text-trust" />
+                <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/10 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">{service}</h3>
+                  <h3 className="font-display text-lg text-foreground tracking-wide">{service}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     Available 24/7 with fast response times
                   </p>
@@ -159,46 +175,52 @@ export default function TradeCityPage() {
           <CTABanner trade={tradeInfo.name} city={cityName} />
         </section>
 
-        {/* Local Coverage */}
-        <section className="container-wide py-12">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-card rounded-xl border border-border p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <MapPin className="w-6 h-6 text-accent" />
-                <h2 className="text-xl font-bold text-foreground">Areas We Cover Near {cityName}</h2>
+        {/* Local Coverage & Pricing */}
+        <section className="container-wide py-16">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Areas Covered */}
+            <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-gold" />
+                </div>
+                <h2 className="font-display text-xl tracking-wide text-foreground">Areas We Cover Near {cityName}</h2>
               </div>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-6">
                 Our emergency {tradeInfo.name.toLowerCase()} network covers {cityName} and the surrounding areas, ensuring fast response times wherever you are.
               </p>
               <div className="flex flex-wrap gap-2">
                 {serviceAreas.map((area) => (
-                  <span key={area} className="px-3 py-1 bg-secondary rounded-full text-sm text-foreground">
+                  <span key={area} className="px-4 py-2 bg-secondary/50 border border-border/50 rounded-full text-sm text-foreground">
                     {area}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="bg-card rounded-xl border border-border p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <PoundSterling className="w-6 h-6 text-accent" />
-                <h2 className="text-xl font-bold text-foreground">Transparent Pricing</h2>
+            {/* Pricing */}
+            <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center">
+                  <PoundSterling className="w-6 h-6 text-gold" />
+                </div>
+                <h2 className="font-display text-xl tracking-wide text-foreground">Transparent Pricing</h2>
               </div>
               <p className="text-muted-foreground mb-4">
                 Emergency {tradeInfo.name.toLowerCase()} call-outs in {cityName} typically range from:
               </p>
-              <div className="text-3xl font-bold text-foreground mb-4">{emergencyPriceRange}</div>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-success" />
+              <div className="font-display text-4xl text-gold mb-6 tracking-wide">{emergencyPriceRange}</div>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
                   No hidden charges
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-success" />
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
                   Price confirmed before work starts
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-success" />
+                <li className="flex items-center gap-3">
+                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
                   Weekend/evening rates may apply
                 </li>
               </ul>
@@ -212,28 +234,38 @@ export default function TradeCityPage() {
         </section>
 
         {/* Trust Badges */}
-        <section className="container-wide py-12">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
-            Why Choose Our Emergency {tradeInfo.name} Service?
-          </h2>
+        <section className="container-wide py-16">
+          <div className="text-center mb-10">
+            <p className="text-gold uppercase tracking-luxury text-sm mb-4">Why Us</p>
+            <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
+              Why Choose Our Emergency {tradeInfo.name} Service?
+            </h2>
+          </div>
           <TrustBadges />
         </section>
 
         {/* Final CTA */}
-        <section className="container-wide py-12">
-          <div className="text-center bg-secondary rounded-2xl p-8 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Call Now to Speak to an Emergency {tradeInfo.name} in {cityName}
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              Our lines are open 24 hours a day, 7 days a week. One quick call connects you with a local, verified professional.
-            </p>
-            <Button variant="cta" size="xl" asChild>
-              <a href="tel:08001234567" className="flex items-center gap-3">
-                <Phone className="w-5 h-5" />
-                0800 123 4567
-              </a>
-            </Button>
+        <section className="container-wide py-16">
+          <div className="relative text-center bg-card rounded-lg border border-gold/30 p-10 md:p-16 overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+            
+            <div className="relative z-10">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-6">Get Help Now</p>
+              <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-4">
+                Call Now to Speak to an Emergency {tradeInfo.name} in {cityName}
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                Our lines are open 24 hours a day, 7 days a week. One quick call connects you with a local, verified professional.
+              </p>
+              <Button variant="hero" size="xl" asChild>
+                <a href="tel:08001234567" className="flex items-center gap-3">
+                  <Phone className="w-5 h-5" />
+                  0800 123 4567
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
       </main>

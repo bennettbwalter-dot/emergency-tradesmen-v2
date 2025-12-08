@@ -17,15 +17,21 @@ export function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
-      <div className="bg-card rounded-2xl shadow-2xl p-2 border border-border">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto">
+      <div className="relative bg-card/80 backdrop-blur-md rounded-lg border border-border/50 p-2 glow-gold">
+        {/* Decorative corner accents */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-gold/40 rounded-tl-lg" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-gold/40 rounded-tr-lg" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-gold/40 rounded-bl-lg" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-gold/40 rounded-br-lg" />
+        
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2">
           <div className="relative">
-            <Wrench className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Wrench className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gold/70" />
             <select
               value={selectedTrade}
               onChange={(e) => setSelectedTrade(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 rounded-xl bg-secondary text-foreground border-0 appearance-none cursor-pointer font-medium focus:ring-2 focus:ring-accent focus:outline-none"
+              className="w-full h-14 pl-12 pr-10 rounded-md bg-secondary/50 text-foreground border border-border/30 appearance-none cursor-pointer font-medium focus:ring-1 focus:ring-gold/50 focus:border-gold/50 focus:outline-none transition-all"
             >
               <option value="">Select trade...</option>
               {trades.map((trade) => (
@@ -37,11 +43,11 @@ export function SearchForm() {
           </div>
 
           <div className="relative">
-            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gold/70" />
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 rounded-xl bg-secondary text-foreground border-0 appearance-none cursor-pointer font-medium focus:ring-2 focus:ring-accent focus:outline-none"
+              className="w-full h-14 pl-12 pr-10 rounded-md bg-secondary/50 text-foreground border border-border/30 appearance-none cursor-pointer font-medium focus:ring-1 focus:ring-gold/50 focus:border-gold/50 focus:outline-none transition-all"
             >
               <option value="">Select city...</option>
               {cities.map((city) => (
