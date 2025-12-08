@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -75,6 +76,11 @@ export default {
         trust: {
           DEFAULT: "hsl(var(--trust))",
           light: "hsl(var(--trust-light))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
         },
       },
       borderRadius: {

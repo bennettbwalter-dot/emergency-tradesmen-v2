@@ -5,7 +5,7 @@ import { SearchForm } from "@/components/SearchForm";
 import { TrustBadges } from "@/components/TrustBadges";
 import { TradeCard } from "@/components/TradeCard";
 import { trades, cities } from "@/lib/trades";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -25,47 +25,68 @@ const Index = () => {
 
       <main>
         {/* Hero Section */}
-        <section className="relative bg-primary overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/90" />
-          <div className="absolute top-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-64 h-64 bg-accent/10 rounded-full blur-2xl" />
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+          {/* Background layers */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
           
-          <div className="relative container-wide py-16 md:py-24">
-            <div className="max-w-3xl mx-auto text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/20 text-success mb-6 animate-fade-up">
+          {/* Decorative gold rings */}
+          <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float">
+            <div className="absolute inset-0 rounded-full border border-gold/30" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
+            <div className="absolute inset-8 rounded-full border border-gold/20" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
+          </div>
+          
+          {/* Glow effects */}
+          <div className="absolute top-20 right-20 w-96 h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
+          <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px]" />
+          
+          <div className="relative container-wide py-20 md:py-32">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Availability badge */}
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8 animate-fade-up">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
-                <span className="text-sm font-medium">Tradespeople available right now</span>
+                <span className="text-sm font-medium uppercase tracking-wider text-gold">Tradespeople Available Now</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 animate-fade-up text-balance">
-                Emergency Tradesmen
-                <span className="block text-accent">When You Need Them Most</span>
+              {/* Main headline */}
+              <h1 className="mb-8 animate-fade-up">
+                <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4">
+                  EMERGENCY
+                </span>
+                <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-gold">
+                  TRADESMEN
+                </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 animate-fade-up-delay-1">
+              {/* Tagline */}
+              <p className="text-lg md:text-xl text-muted-foreground mb-4 animate-fade-up-delay-1 tracking-wide uppercase">
+                When You Need Them Most
+              </p>
+              
+              <p className="text-base text-muted-foreground/80 mb-12 animate-fade-up-delay-1 max-w-2xl mx-auto">
                 24/7 verified plumbers, electricians, locksmiths & gas engineers. 
                 Fast response across the UK. No call-out fee if we can't help.
               </p>
             </div>
 
-            <div className="animate-fade-up-delay-2">
+            <div className="animate-fade-up-delay-2 mb-12">
               <SearchForm />
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8 text-primary-foreground/70 text-sm animate-fade-up-delay-3">
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
+            <div className="flex flex-wrap items-center justify-center gap-8 text-muted-foreground text-sm animate-fade-up-delay-3">
+              <span className="flex items-center gap-2 uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
                 30-60 min response
               </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
+              <span className="flex items-center gap-2 uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
                 Fully insured
               </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
+              <span className="flex items-center gap-2 uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
                 Transparent pricing
               </span>
             </div>
@@ -73,14 +94,15 @@ const Index = () => {
         </section>
 
         {/* Trust Badges */}
-        <section className="container-wide py-12 -mt-6 relative z-10">
+        <section className="container-wide py-16">
           <TrustBadges />
         </section>
 
         {/* Emergency Services */}
-        <section className="container-wide py-12">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <section className="container-wide py-16">
+          <div className="text-center mb-12">
+            <p className="text-gold uppercase tracking-luxury text-sm mb-4">Our Expertise</p>
+            <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
               Emergency Trade Services
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -97,23 +119,26 @@ const Index = () => {
         </section>
 
         {/* Popular Cities */}
-        <section className="bg-secondary py-12">
+        <section className="py-16 border-t border-b border-border/30">
           <div className="container-wide">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
-              Find Emergency Help in Your City
-            </h2>
+            <div className="text-center mb-10">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Coverage</p>
+              <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
+                Find Emergency Help in Your City
+              </h2>
+            </div>
             
             <div className="flex flex-wrap justify-center gap-3">
               {cities.slice(0, 20).map((city) => (
                 <Link
                   key={city}
                   to={`/emergency-plumber/${city.toLowerCase()}`}
-                  className="px-4 py-2 bg-card rounded-full border border-border text-sm font-medium text-foreground hover:border-accent hover:text-accent transition-colors"
+                  className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
                 >
                   {city}
                 </Link>
               ))}
-              <span className="px-4 py-2 text-sm text-muted-foreground">
+              <span className="px-5 py-2.5 text-sm text-muted-foreground">
                 + {cities.length - 20} more cities
               </span>
             </div>
@@ -121,21 +146,24 @@ const Index = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="container-wide py-16">
-          <div className="relative overflow-hidden rounded-2xl bg-primary p-8 md:p-12 text-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80" />
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+        <section className="container-wide py-20">
+          <div className="relative overflow-hidden rounded-lg border border-gold/30 bg-card p-10 md:p-16 text-center">
+            {/* Decorative elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
             
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-6">24/7 Availability</p>
+              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-6">
                 Need Help Right Now?
               </h2>
-              <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
+              <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
                 Our team is standing by 24/7 to connect you with a local emergency tradesperson. 
                 One call is all it takes.
               </p>
               
-              <Button variant="hero" asChild>
+              <Button variant="hero" size="xl" asChild>
                 <a href="tel:08001234567" className="flex items-center gap-3">
                   <Phone className="w-5 h-5" />
                   Call Now: 0800 123 4567
