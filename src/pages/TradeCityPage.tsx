@@ -5,14 +5,16 @@ import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
 import { CTABanner } from "@/components/CTABanner";
 import { TrustBadges } from "@/components/TrustBadges";
+import { BusinessCard } from "@/components/BusinessCard";
 import { Button } from "@/components/ui/button";
 import { generateTradePageData } from "@/lib/trades";
+import { getBusinessListings } from "@/lib/businesses";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function TradeCityPage() {
   const { tradePath, city } = useParams<{ tradePath: string; city: string }>();
-  
+
   if (!tradePath || !city) {
     return <Navigate to="/" replace />;
   }
@@ -26,16 +28,19 @@ export default function TradeCityPage() {
     return <Navigate to="/" replace />;
   }
 
-  const { 
-    trade: tradeInfo, 
-    city: cityName, 
-    serviceAreas, 
-    averageResponseTime, 
-    emergencyPriceRange, 
-    certifications, 
-    services, 
-    faqs 
+  const {
+    trade: tradeInfo,
+    city: cityName,
+    serviceAreas,
+    averageResponseTime,
+    emergencyPriceRange,
+    certifications,
+    services,
+    faqs
   } = pageData;
+
+  // Get business listings for this city and trade
+  const businesses = getBusinessListings(cityName, tradeInfo.slug);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -54,8 +59,8 @@ export default function TradeCityPage() {
     <>
       <Helmet>
         <title>Emergency {tradeInfo.name} in {cityName} – Open 24/7 | Fast Response</title>
-        <meta 
-          name="description" 
+        <meta
+          name="description"
           content={`Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
         />
         <link rel="canonical" href={`https://emergencytrades.co.uk/emergency-${trade}/${city}`} />
@@ -72,10 +77,10 @@ export default function TradeCityPage() {
           {/* Background layers */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
-          
+
           {/* Glow effects */}
           <div className="absolute top-10 right-10 w-72 h-72 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
-          
+
           <div className="relative container-wide py-16 md:py-24">
             <div className="max-w-3xl">
               {/* Breadcrumb */}
@@ -95,7 +100,7 @@ export default function TradeCityPage() {
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-gold">{tradeInfo.name}s available now in {cityName}</span>
               </div>
-              
+
               {/* Main headline */}
               <h1 className="mb-6 animate-fade-up">
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
@@ -105,9 +110,9 @@ export default function TradeCityPage() {
                   in {cityName}
                 </span>
               </h1>
-              
+
               <p className="text-lg text-muted-foreground mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed">
-                Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now. 
+                Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
@@ -149,11 +154,11 @@ export default function TradeCityPage() {
               Emergency {tradeInfo.name} Services in {cityName}
             </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {services.map((service, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="group flex items-start gap-4 p-6 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/10 transition-colors">
@@ -228,6 +233,28 @@ export default function TradeCityPage() {
           </div>
         </section>
 
+        {/* Business Listings - only show if we have listings for this city/trade */}
+        {businesses && businesses.length > 0 && (
+          <section className="container-wide py-16 border-t border-border/30">
+            <div className="text-center mb-12">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Local Providers</p>
+              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+                Top {tradeInfo.name}s in {cityName}
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                We've partnered with the best local {tradeInfo.name.toLowerCase()}s in {cityName}.
+                All are verified, insured, and ready to help 24/7.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {businesses.map((business, index) => (
+                <BusinessCard key={business.id} business={business} rank={index + 1} />
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* FAQs */}
         <section className="container-wide">
           <FAQSection faqs={faqs} trade={tradeInfo.name} city={cityName} />
@@ -250,7 +277,7 @@ export default function TradeCityPage() {
             {/* Decorative elements */}
             <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-            
+
             <div className="relative z-10">
               <p className="text-gold uppercase tracking-luxury text-sm mb-6">Get Help Now</p>
               <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-4">
