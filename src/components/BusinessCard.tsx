@@ -65,16 +65,29 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
 
                 {/* Action buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
-                    <Button
-                        asChild
-                        variant="hero"
-                        className="flex-1"
-                    >
-                        <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
-                            <Phone className="w-4 h-4" />
-                            Call Now
-                        </a>
-                    </Button>
+                    {business.phone ? (
+                        <Button
+                            asChild
+                            variant="hero"
+                            className="flex-1"
+                        >
+                            <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
+                                <Phone className="w-4 h-4" />
+                                Call Now
+                            </a>
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="secondary"
+                            className="flex-1 cursor-not-allowed opacity-50"
+                            disabled
+                        >
+                            <span className="flex items-center justify-center gap-2">
+                                <Phone className="w-4 h-4" />
+                                No Phone
+                            </span>
+                        </Button>
+                    )}
                     {business.website && (
                         <Button
                             asChild
@@ -95,15 +108,17 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
                 </div>
 
                 {/* Phone number display */}
-                <div className="mt-4 pt-4 border-t border-border/30">
-                    <a
-                        href={`tel:${business.phone}`}
-                        className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
-                    >
-                        <Phone className="w-3.5 h-3.5" />
-                        {business.phone}
-                    </a>
-                </div>
+                {business.phone && (
+                    <div className="mt-4 pt-4 border-t border-border/30">
+                        <a
+                            href={`tel:${business.phone}`}
+                            className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
+                        >
+                            <Phone className="w-3.5 h-3.5" />
+                            {business.phone}
+                        </a>
+                    </div>
+                )}
             </div>
 
             {/* Hover effect overlay */}

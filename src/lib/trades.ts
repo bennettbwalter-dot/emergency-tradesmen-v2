@@ -49,6 +49,42 @@ export const cities = [
   "Tamworth",
   "Nuneaton",
   "Rugby",
+  "Bath",
+  "Brighton & Hove",
+  "Bristol",
+  "Canterbury",
+  "Carlisle",
+  "Chelmsford",
+  "Chester",
+  "Chichester",
+  "Colchester",
+  "Durham",
+  "Ely",
+  "Exeter",
+  "Lancaster",
+  "Lichfield",
+  "Lincoln",
+  "London",
+  "Newcastle-upon-Tyne",
+  "Plymouth",
+  "Portsmouth",
+  "Ripon",
+  "Salford",
+  "Salisbury",
+  "Southampton",
+  "Southend-on-Sea",
+  "St Albans",
+  "Sunderland",
+  "Truro",
+  "Wakefield",
+  "Wells",
+  "Winchester",
+  "Westminster",
+  "Warrington",
+  "Wigan",
+  "Middlesbrough",
+  "Blackpool",
+  "Barnsley",
 ] as const;
 
 export type Trade = typeof trades[number];
@@ -68,7 +104,7 @@ export interface TradePageData {
 export function generateTradePageData(tradeSlug: string, cityName: string): TradePageData | null {
   const trade = trades.find(t => t.slug === tradeSlug);
   const city = cities.find(c => c.toLowerCase() === cityName.toLowerCase());
-  
+
   if (!trade || !city) return null;
 
   const serviceAreaMap: Record<string, string[]> = {

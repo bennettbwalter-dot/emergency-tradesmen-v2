@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export function Header() {
   return (
@@ -18,22 +19,16 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            <Link 
-              to="/" 
-              className="text-sm uppercase tracking-luxury text-muted-foreground hover:text-gold transition-colors"
-            >
-              Services
+            <Link to="/emergency-electrician/all-locations" className="text-sm font-medium hover:text-gold transition-colors">
+              Electrician
             </Link>
-            <Link 
-              to="/" 
-              className="text-sm uppercase tracking-luxury text-muted-foreground hover:text-gold transition-colors"
-            >
+            <Link to="/emergency-plumber/all-locations" className="text-sm font-medium hover:text-gold transition-colors">
+              Plumber
+            </Link>
+            <Link to="/locations" className="text-sm font-medium hover:text-gold transition-colors">
               Locations
             </Link>
-            <Link 
-              to="/" 
-              className="text-sm uppercase tracking-luxury text-muted-foreground hover:text-gold transition-colors"
-            >
+            <Link to="/about" className="text-sm font-medium hover:text-gold transition-colors">
               About
             </Link>
           </nav>
@@ -43,7 +38,9 @@ export function Header() {
               <Clock className="w-4 h-4 text-gold" />
               <span className="uppercase tracking-wider text-xs">Open 24/7</span>
             </div>
-            
+
+            <ModeToggle />
+
             <Button variant="luxury" size="lg" asChild>
               <a href="tel:08001234567" className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
