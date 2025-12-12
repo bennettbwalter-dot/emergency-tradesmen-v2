@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { trades, cities } from "@/lib/trades";
+import { Newsletter } from "./Newsletter";
 
 export function Footer() {
   return (
@@ -8,17 +9,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full border border-gold/50 flex items-center justify-center bg-gold/5">
-                <span className="text-gold font-display text-xl font-semibold">ET</span>
-              </div>
+              <img src="/et-logo.jpg" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
               <div>
                 <span className="font-display text-xl tracking-wide text-foreground">Emergency</span>
                 <span className="font-display text-xl tracking-wide text-gold">Trades</span>
               </div>
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Connecting you with trusted local tradespeople for emergency repairs, 24 hours a day, 7 days a week.
             </p>
+            <Newsletter />
           </div>
 
           <div>
@@ -56,18 +56,7 @@ export function Footer() {
           <div>
             <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h4>
             <div className="space-y-4">
-              <div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">24/7 Emergency Line</p>
-                <a
-                  href="tel:08001234567"
-                  className="block font-display text-2xl text-gold hover:text-gold-light transition-colors duration-300 tracking-wide"
-                >
-                  0800 123 4567
-                </a>
-                <p className="text-muted-foreground text-sm mt-1">
-                  Free to call from mobiles and landlines
-                </p>
-              </div>
+              {/* Phone number removed as per cleanup request */}
 
               <div className="pt-4 border-t border-border/30">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Email Support</p>

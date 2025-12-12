@@ -1,169 +1,137 @@
-import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { useAuth } from "@/contexts/AuthContext";
-import { AuthModal } from "@/components/AuthModal";
-import { useToast } from "@/hooks/use-toast";
-
-const tiers = [
-    {
-        name: "Free Starter",
-        price: "£0",
-        description: "Perfect for new tradesmen establishing their presence.",
-        features: [
-            "Basic Business Profile",
-            "Listed in 1 Category",
-            "Standard Support",
-            "Receive Direct Calls",
-        ],
-        cta: "Get Started",
-        priceId: null,
-        popular: false,
-    },
-    {
-        name: "Professional",
-        price: "£29",
-        period: "/month",
-        description: "For growing businesses wanting more leads.",
-        features: [
-            "Enhanced Business Profile",
-            "Listed in 3 Categories",
-            "Priority Listing Placement",
-            "Verified Business Badge",
-            "Photo Gallery (Unlimited)",
-            "Analytics Dashboard",
-        ],
-        cta: "Start Free Trial",
-        priceId: "price_1Sd9xAARLaUTbUu469jyT4Ss",
-        popular: true,
-    },
-    {
-        name: "Enterprise",
-        price: "£99",
-        period: "/month",
-        description: "Maximum visibility for established companies.",
-        features: [
-            "Premium Profile + Video",
-            "Listed in All Categories",
-            "Top of Search Results Service",
-            "Dedicated Account Manager",
-            "Featured on Homepage",
-            "Instant Lead Notifications",
-        ],
-        cta: "Contact Sales",
-        priceId: "price_1Sd9zMARLaUTbUu4oWIneNFS",
-        popular: false,
-    },
-];
+import { Button } from "@/components/ui/button";
+import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
 
 export default function PricingPage() {
-    const { isAuthenticated } = useAuth();
-    const { toast } = useToast();
-
-    const handlePlanSelect = (tierName: string, priceId: string | null) => {
-        if (isAuthenticated) {
-            if (!priceId) {
-                toast({
-                    title: "Plan Activated",
-                    description: "You are now on the Free Starter plan.",
-                });
-                return;
-            }
-
-            // Redirect to Stripe Checkout
-            toast({
-                title: "Redirecting to Stripe",
-                description: `Opening checkout for ${tierName}...`,
-            });
-
-            // Open Stripe checkout in new tab (using Payment Links approach)
-            // In production, you'd create a checkout session via Edge Function
-            window.open(`https://buy.stripe.com/${priceId}`, '_blank');
-        }
+    const handleContactUs = () => {
+        window.location.href = "mailto:emergencytradesmen@outlook.com?subject=Pro%20Subscription%20Inquiry";
     };
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <>
             <Header />
+            <main className="min-h-screen bg-background py-20">
+                <div className="container-wide">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h1 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+                            Boost Your Business with <span className="text-gold">Premium</span>
+                        </h1>
+                        <p className="text-xl text-muted-foreground">
+                            Get priority ranking, enhanced trust signals, and 3x more leads.
+                        </p>
+                    </div>
 
-            <main className="flex-grow bg-background">
-                <div className="py-24 sm:py-32">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                        <div className="mx-auto max-w-4xl text-center">
-                            <h2 className="text-base font-semibold leading-7 text-gold">For Tradespeople</h2>
-                            <p className="mt-2 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                                Choose the right plan for your business
-                            </p>
-                            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                                Join thousands of tradespeople getting more work through Emergency Tradesmen.
-                                No hidden fees, cancel anytime.
-                            </p>
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {/* Free Tier */}
+                        <div className="bg-card border border-border rounded-xl p-8 flex flex-col">
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-bold text-foreground">Basic Listing</h3>
+                                <div className="mt-2 text-3xl font-bold text-foreground">£0 <span className="text-base font-normal text-muted-foreground">/ forever</span></div>
+                            </div>
+                            <ul className="space-y-4 mb-8 flex-1">
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center"><Check className="w-4 h-4 text-primary" /></div>
+                                    <span className="text-muted-foreground">Standard listing</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center"><Check className="w-4 h-4 text-primary" /></div>
+                                    <span className="text-muted-foreground">Basic contact details</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center"><Check className="w-4 h-4 text-primary" /></div>
+                                    <span className="text-muted-foreground">Receive reviews</span>
+                                </li>
+                            </ul>
+                            <Button variant="outline" className="w-full" disabled>
+                                Current Plan
+                            </Button>
                         </div>
 
-                        <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:gap-x-12">
-                            {tiers.map((tier) => (
-                                <div
-                                    key={tier.name}
-                                    className={`rounded-3xl p-8 ring-1 ring-border xl:p-10 transition-all duration-300 hover:shadow-2xl hover:scale-105 ${tier.popular ? 'bg-secondary/50 ring-gold shadow-gold/10 relative overflow-hidden' : 'bg-card'
-                                        }`}
-                                >
-                                    {tier.popular && (
-                                        <div className="absolute top-0 right-0 -mr-2 -mt-2 w-24 h-24 overflow-hidden">
-                                            <div className="absolute top-0 right-0 transform translate-x-10 translate-y-6 rotate-45 bg-gold text-primary-foreground text-xs font-bold py-1 px-10 text-center">
-                                                POPULAR
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className="flex items-center justify-between gap-x-4">
-                                        <h3 id={tier.name} className="text-lg font-semibold leading-8 text-foreground">
-                                            {tier.name}
-                                        </h3>
-                                    </div>
-                                    <p className="mt-4 text-sm leading-6 text-muted-foreground">{tier.description}</p>
-                                    <p className="mt-6 flex items-baseline gap-x-1">
-                                        <span className="text-4xl font-bold tracking-tight text-foreground">{tier.price}</span>
-                                        {tier.period && <span className="text-sm font-semibold leading-6 text-muted-foreground">{tier.period}</span>}
-                                    </p>
-
-                                    {isAuthenticated ? (
-                                        <Button
-                                            className={`mt-6 w-full ${tier.popular ? 'bg-gold hover:bg-gold/90 text-primary-foreground' : ''}`}
-                                            variant={tier.popular ? "default" : "outline"}
-                                            onClick={() => handlePlanSelect(tier.name, tier.priceId)}
-                                        >
-                                            {tier.cta}
-                                        </Button>
-                                    ) : (
-                                        <AuthModal
-                                            trigger={
-                                                <Button
-                                                    className={`mt-6 w-full ${tier.popular ? 'bg-gold hover:bg-gold/90 text-primary-foreground' : ''}`}
-                                                    variant={tier.popular ? "default" : "outline"}
-                                                >
-                                                    {tier.cta}
-                                                </Button>
-                                            }
-                                            defaultTab="register"
-                                        />
-                                    )}
-
-                                    <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-muted-foreground">
-                                        {tier.features.map((feature) => (
-                                            <li key={feature} className="flex gap-x-3 text-foreground">
-                                                <Check className="h-6 w-5 flex-none text-gold" aria-hidden="true" />
-                                                {feature}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                        {/* Monthly Pro */}
+                        <div className="relative bg-card border border-gold/50 rounded-xl p-8 flex flex-col shadow-2xl shadow-gold/5 overflow-hidden">
+                            <div className="absolute top-0 right-0 bg-gold text-black text-xs font-bold px-4 py-1 rounded-bl-xl uppercase tracking-wider">
+                                Most Popular
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-bold text-gold flex items-center gap-2">
+                                    <Zap className="w-6 h-6 fill-current" /> Pro Monthly
+                                </h3>
+                                <div className="mt-2 text-3xl font-bold text-foreground">£29 <span className="text-base font-normal text-muted-foreground">/ month</span></div>
+                            </div>
+                            <ul className="space-y-4 mb-8 flex-1">
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><TrendingUp className="w-4 h-4 text-gold" /></div>
+                                    <span className="text-foreground font-medium">Priority Top Ranking</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><Shield className="w-4 h-4 text-gold" /></div>
+                                    <span className="text-foreground font-medium">"Featured" Badge</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><Star className="w-4 h-4 text-gold" /></div>
+                                    <span className="text-foreground font-medium">Enhanced Profile</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><Check className="w-4 h-4 text-gold" /></div>
+                                    <span className="text-foreground font-medium">Lead Notifications</span>
+                                </li>
+                            </ul>
+                            <Button
+                                variant="hero"
+                                className="w-full h-12 text-lg"
+                                onClick={() => window.open('https://checkout.revolut.com/pay/23683af0-9b18-41a3-8d5f-3dec9f64c419', '_blank')}
+                            >
+                                Get Pro Monthly
+                            </Button>
                         </div>
+
+                        {/* Yearly Pro */}
+                        <div className="relative bg-card border border-emerald-500/50 rounded-xl p-8 flex flex-col shadow-2xl shadow-emerald-500/5 overflow-hidden">
+                            <div className="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-1 rounded-bl-xl uppercase tracking-wider">
+                                Best Value
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-bold text-emerald-500 flex items-center gap-2">
+                                    <Crown className="w-6 h-6 fill-current" /> Pro Yearly
+                                </h3>
+                                <div className="mt-2 text-3xl font-bold text-foreground">£99 <span className="text-base font-normal text-muted-foreground">/ year</span></div>
+                                <p className="text-sm text-emerald-500 font-medium mt-1">Save £249 (over 70% off!)</p>
+                            </div>
+                            <ul className="space-y-4 mb-8 flex-1">
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><TrendingUp className="w-4 h-4 text-emerald-500" /></div>
+                                    <span className="text-foreground font-medium">Priority Top Ranking</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><Shield className="w-4 h-4 text-emerald-500" /></div>
+                                    <span className="text-foreground font-medium">"Featured" Badge</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><Star className="w-4 h-4 text-emerald-500" /></div>
+                                    <span className="text-foreground font-medium">Enhanced Profile</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><Check className="w-4 h-4 text-emerald-500" /></div>
+                                    <span className="text-foreground font-medium">Lead Notifications</span>
+                                </li>
+                            </ul>
+                            <Button
+                                className="w-full h-12 text-lg bg-emerald-500 hover:bg-emerald-600 text-white"
+                                onClick={() => window.open('https://checkout.revolut.com/pay/17b71aef-f805-4974-a7fe-fb136b083b61', '_blank')}
+                            >
+                                Get Pro Yearly
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div className="text-center mt-12 text-muted-foreground">
+                        <p>Payment processing via Revolut coming soon. Contact us to set up your subscription.</p>
                     </div>
                 </div>
             </main>
-
             <Footer />
-        </div>
+        </>
     );
 }

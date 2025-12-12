@@ -37,7 +37,9 @@ interface AuthContextType {
     register: (name: string, email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
     signOut: () => Promise<void>;
+
     updateUser: (updates: Partial<User>) => void;
+    loginWithGoogle: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -137,6 +139,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
+    const loginWithGoogle = async () => {
+        setIsLoading(true);
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent',
+                    },
+                },
+            });
+            if (error) throw error;
+        } catch (error) {
+            console.error("Error logging in with Google:", error);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const logout = async () => {
         await supabase.auth.signOut();
         setUser(null);
@@ -168,6 +191,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 isAuthenticated: !!user,
                 isLoading,
                 login,
+                loginWithGoogle,
                 register,
                 logout,
                 signOut: logout, // Add signOut as an alias to logout

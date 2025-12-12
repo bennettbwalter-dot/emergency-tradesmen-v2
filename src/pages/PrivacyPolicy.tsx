@@ -123,7 +123,7 @@ export default function PrivacyPolicy() {
                                     We may share your information with third-party service providers who perform services on our behalf:
                                 </p>
                                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                                    <li>Payment processors (Stripe)</li>
+                                    <li>Payment processors</li>
                                     <li>Email service providers</li>
                                     <li>Analytics providers (Google Analytics)</li>
                                     <li>Cloud hosting providers (Supabase)</li>
@@ -180,7 +180,7 @@ export default function PrivacyPolicy() {
                                     <li>Encrypted data storage</li>
                                     <li>Regular security audits</li>
                                     <li>Access controls and authentication</li>
-                                    <li>Secure payment processing through Stripe</li>
+                                    <li>Secure payment processing through our payment provider</li>
                                 </ul>
                                 <p className="text-muted-foreground mt-4">
                                     However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.

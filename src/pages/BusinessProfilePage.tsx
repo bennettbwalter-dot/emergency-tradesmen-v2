@@ -46,9 +46,30 @@ export default function BusinessProfilePage() {
         loadPhotos();
     }, [businessId]);
 
-    // Generate consistent mock data for this business
-    const mockReviews = generateMockReviews(business.id, business.reviewCount > 0 ? business.reviewCount : 12);
-    const reviewStats = calculateReviewStats(mockReviews);
+    // Use the real featured review if available
+    const realReviews = business.featuredReview ? [{
+        id: `review-${business.id}`,
+        businessId: business.id,
+        userId: 'verified-user',
+        userName: "Verified Google User",
+        userInitials: "G",
+        rating: business.rating,
+        title: "Verified Review",
+        comment: business.featuredReview,
+        date: new Date().toISOString(),
+        verified: true,
+        helpful: 1,
+        notHelpful: 0,
+    }] : [];
+
+    const reviewStats = calculateReviewStats(realReviews);
+
+    // If we have a real Google rating/count but only 1 review text, 
+    // we should still reflect the aggregate stats in the stats object
+    if (business.reviewCount > 0) {
+        reviewStats.totalReviews = business.reviewCount;
+        reviewStats.averageRating = business.rating;
+    }
 
     const formattedTrade = trade.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
@@ -330,7 +351,7 @@ export default function BusinessProfilePage() {
                                     />
                                 </div>
                                 <ReviewsSection
-                                    reviews={mockReviews}
+                                    reviews={realReviews}
                                     stats={reviewStats}
                                     businessName={business.name}
                                 />

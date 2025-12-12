@@ -41,6 +41,16 @@ export interface Business {
     trade?: string;
     city?: string;
     photos?: BusinessPhoto[];
+    tier?: 'free' | 'paid';
+    priority_score?: number;
+    // Premium subscriber fields
+    logo_url?: string;
+    premium_description?: string;
+    services_offered?: string[];
+    coverage_areas?: string[];
+    is_premium?: boolean;
+    owner_user_id?: string;
+    whatsapp_number?: string;
 }
 
 export interface BusinessListings {

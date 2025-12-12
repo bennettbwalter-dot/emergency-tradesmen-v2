@@ -133,7 +133,7 @@ export default function TermsOfService() {
                                     For premium subscriptions:
                                 </p>
                                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                                    <li>Payments are processed securely through Stripe</li>
+                                    <li>Payments are processed securely through our payment provider</li>
                                     <li>Subscriptions renew automatically unless cancelled</li>
                                     <li>Refunds are subject to our refund policy</li>
                                     <li>Prices may change with 30 days' notice</li>

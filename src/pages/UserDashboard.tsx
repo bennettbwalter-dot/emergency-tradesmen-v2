@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, CalendarDays } from "lucide-react";
+import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, CalendarDays, Zap } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
 import { getUserBookings, cancelBooking, formatBookingDate, formatTimeSlot, getUrgencyColor, getStatusColor } from "@/lib/bookings";
 import { useToast } from "@/hooks/use-toast";
@@ -31,7 +31,7 @@ export default function UserDashboard() {
     }
 
     if (!isAuthenticated || !user) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/login?redirect=/user/dashboard" replace />;
     }
 
     return (
@@ -53,6 +53,18 @@ export default function UserDashboard() {
                                 </div>
                                 <CardTitle>{user.name}</CardTitle>
                                 <CardDescription>{user.email}</CardDescription>
+                                {/* Upgrade Button for businesses */}
+                                <div className="mt-4">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="w-full border-gold text-gold hover:bg-gold hover:text-white"
+                                        onClick={() => window.location.href = '/pricing'}
+                                    >
+                                        <Zap className="w-4 h-4 mr-2" />
+                                        Upgrade Business
+                                    </Button>
+                                </div>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4 text-sm">
@@ -108,11 +120,7 @@ export default function UserDashboard() {
                                 </TabsContent>
 
                                 <TabsContent value="settings" className="animate-fade-up">
-                                    <div className="p-12 text-center text-muted-foreground bg-card rounded-lg border border-border/50">
-                                        <Settings className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                                        <h3 className="text-lg font-medium mb-2">Account Settings</h3>
-                                        <p>Password change and notification preferences coming soon.</p>
-                                    </div>
+                                    <SettingsTab />
                                 </TabsContent>
                             </Tabs>
                         </div>
@@ -397,6 +405,138 @@ function BookingsTab({ userId }: { userId: string }) {
                     </div>
                 </Card>
             ))}
+        </div>
+    );
+}
+
+function SettingsTab() {
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [isChanging, setIsChanging] = useState(false);
+    const { toast } = useToast();
+
+    const handlePasswordChange = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Validation
+        if (newPassword.length < 6) {
+            toast({
+                title: "Password too short",
+                description: "Password must be at least 6 characters.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            toast({
+                title: "Passwords don't match",
+                description: "Please make sure both passwords are the same.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        setIsChanging(true);
+
+        try {
+            // Import supabase directly for auth operations
+            const { supabase } = await import("@/lib/supabase");
+
+            const { error } = await supabase.auth.updateUser({
+                password: newPassword
+            });
+
+            if (error) {
+                throw error;
+            }
+
+            toast({
+                title: "Password updated",
+                description: "Your password has been changed successfully."
+            });
+
+            // Clear form
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
+        } catch (error: any) {
+            toast({
+                title: "Error changing password",
+                description: error.message || "Please try again later.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsChanging(false);
+        }
+    };
+
+    return (
+        <div className="space-y-6">
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <Settings className="w-5 h-5 text-gold" />
+                        Change Password
+                    </CardTitle>
+                    <CardDescription>
+                        Update your password to keep your account secure.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handlePasswordChange} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="newPassword">New Password</Label>
+                            <Input
+                                id="newPassword"
+                                type="password"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                placeholder="Enter new password"
+                                required
+                                minLength={6}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                            <Input
+                                id="confirmPassword"
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirm new password"
+                                required
+                                minLength={6}
+                            />
+                        </div>
+                        <div className="flex justify-end pt-4">
+                            <Button
+                                type="submit"
+                                disabled={isChanging}
+                                className="bg-gold hover:bg-gold/90 text-gold-foreground"
+                            >
+                                {isChanging ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                                Update Password
+                            </Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>Notification Preferences</CardTitle>
+                    <CardDescription>
+                        Manage how you receive updates and alerts.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-muted-foreground text-sm">
+                        Email notification preferences coming soon.
+                    </p>
+                </CardContent>
+            </Card>
         </div>
     );
 }

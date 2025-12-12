@@ -16,12 +16,15 @@ import About from "./pages/About";
 import PricingPage from "./pages/PricingPage";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AuthPage from "./pages/AuthPage";
+import PremiumProfileEditor from "./pages/PremiumProfileEditor";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import BusinessesPage from "./pages/admin/Businesses";
 import PhotosPage from "./pages/admin/Photos";
 import ReviewsPage from "./pages/admin/Reviews";
 import QuotesPage from "./pages/admin/Quotes";
+import SubscriptionsPage from "./pages/admin/Subscriptions";
 import { SimpleThemeProvider } from "@/components/simple-theme";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BottomNav } from "@/components/BottomNav";
@@ -45,6 +48,8 @@ const App = () => (
                 <InstallPWA />
                 <CookieConsent />
                 <Routes>
+                  <Route path="/login" element={<AuthPage defaultTab="login" />} />
+                  <Route path="/register" element={<AuthPage defaultTab="register" />} />
                   <Route path="/" element={<Index />} />
                   <Route path="/user/dashboard" element={<UserDashboard />} />
                   <Route path="/compare" element={<ComparePage />} />
@@ -54,6 +59,7 @@ const App = () => (
                   <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
                   <Route path="/terms" element={<TermsOfService />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/premium-profile" element={<PremiumProfileEditor />} />
 
                   {/* Admin Routes */}
                   <Route path="/admin" element={<AdminLayout />}>
@@ -62,6 +68,7 @@ const App = () => (
                     <Route path="quotes" element={<QuotesPage />} />
                     <Route path="photos" element={<PhotosPage />} />
                     <Route path="reviews" element={<ReviewsPage />} />
+                    <Route path="subscriptions" element={<SubscriptionsPage />} />
                   </Route>
 
                   <Route path="/:tradePath/:city" element={<TradeCityPage />} />

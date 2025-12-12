@@ -24,7 +24,7 @@ export function AdminLayout() {
     const isAdmin = user?.email === 'admin@example.com' || user?.email?.includes('bennett');
 
     if (!user) {
-        return <Navigate to="/" replace />;
+        return <Navigate to={`/login?redirect=${location.pathname}`} replace />;
     }
 
     if (!isAdmin) {
@@ -44,6 +44,7 @@ export function AdminLayout() {
     const navItems = [
         { path: "/admin", icon: LayoutDashboard, label: "Dashboard" },
         { path: "/admin/businesses", icon: Building2, label: "Businesses" },
+        { path: "/admin/subscriptions", icon: FileText, label: "Subscriptions" },
         { path: "/admin/quotes", icon: FileText, label: "Quotes" },
         { path: "/admin/reviews", icon: Star, label: "Reviews" },
         { path: "/admin/photos", icon: Image, label: "Photos" },
@@ -64,7 +65,10 @@ export function AdminLayout() {
                 {/* Logo/Header */}
                 <div className="p-6 border-b border-border flex items-center justify-between">
                     {sidebarOpen && (
-                        <h1 className="font-display text-xl text-gold">ET Admin</h1>
+                        <div className="flex items-center gap-2">
+                            <img src="/et-logo.jpg" alt="ET Logo" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
+                            <h1 className="font-display text-xl text-gold">Admin</h1>
+                        </div>
                     )}
                     <button
                         onClick={() => setSidebarOpen(!sidebarOpen)}
