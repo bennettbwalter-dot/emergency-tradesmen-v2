@@ -4,18 +4,21 @@ import { Footer } from "@/components/Footer";
 import { SearchForm } from "@/components/SearchForm";
 import { TrustBadges } from "@/components/TrustBadges";
 import { TradeCard } from "@/components/TradeCard";
+import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 import { trades, cities } from "@/lib/trades";
-import { Phone } from "lucide-react";
+import { Phone, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 
 const Index = () => {
   return (
     <>
       <Helmet>
         <title>Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More</title>
-        <meta 
-          name="description" 
+        <meta
+          name="description"
           content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK. Fast response, verified professionals."
         />
         <link rel="canonical" href="https://emergencytrades.co.uk" />
@@ -29,54 +32,101 @@ const Index = () => {
           {/* Background layers */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
-          
+
           {/* Decorative gold rings */}
           <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float">
             <div className="absolute inset-0 rounded-full border border-gold/30" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
             <div className="absolute inset-8 rounded-full border border-gold/20" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
           </div>
-          
+
           {/* Glow effects */}
           <div className="absolute top-20 right-20 w-96 h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
           <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px]" />
-          
+
           <div className="relative container-wide py-20 md:py-32">
             <div className="max-w-4xl mx-auto text-center">
               {/* Availability badge */}
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8 animate-fade-up">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8"
+              >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-gold">Tradespeople Available Now</span>
-              </div>
-              
+              </motion.div>
+
               {/* Main headline */}
-              <h1 className="mb-8 animate-fade-up">
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mb-8"
+              >
                 <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4">
                   EMERGENCY
                 </span>
                 <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-gold">
                   TRADESMEN
                 </span>
-              </h1>
-              
+              </motion.h1>
+
               {/* Tagline */}
-              <p className="text-lg md:text-xl text-muted-foreground mb-4 animate-fade-up-delay-1 tracking-wide uppercase">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-muted-foreground mb-4 tracking-wide uppercase"
+              >
                 When You Need Them Most
-              </p>
-              
-              <p className="text-base text-muted-foreground/80 mb-12 animate-fade-up-delay-1 max-w-2xl mx-auto">
-                24/7 verified plumbers, electricians, locksmiths & gas engineers. 
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-base text-muted-foreground/80 mb-12 max-w-2xl mx-auto"
+              >
+                24/7 verified plumbers, electricians, locksmiths & gas engineers.
                 Fast response across the UK. No call-out fee if we can't help.
-              </p>
+              </motion.p>
             </div>
 
-            <div className="animate-fade-up-delay-2 mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="mb-8"
+            >
               <SearchForm />
-            </div>
+            </motion.div>
 
-            <div className="flex flex-wrap items-center justify-center gap-8 text-muted-foreground text-sm animate-fade-up-delay-3">
+            {/* AI Triage CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex justify-center mb-12"
+            >
+              <EmergencyTriageModal
+                trigger={
+                  <Button variant="outline" size="lg" className="border-gold/50 text-gold hover:bg-gold/10 hover:text-gold">
+                    <Zap className="w-5 h-5 mr-2" />
+                    Not sure what you need? Get Help Now
+                  </Button>
+                }
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-wrap items-center justify-center gap-8 text-muted-foreground text-sm"
+            >
               <span className="flex items-center gap-2 uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
                 30-60 min response
@@ -89,7 +139,7 @@ const Index = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-gold"></span>
                 Transparent pricing
               </span>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -100,20 +150,34 @@ const Index = () => {
 
         {/* Emergency Services */}
         <section className="container-wide py-16">
-          <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
             <p className="text-gold uppercase tracking-luxury text-sm mb-4">Our Expertise</p>
             <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
               Emergency Trade Services
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              From burst pipes to power cuts, our verified professionals handle all urgent repairs. 
+              From burst pipes to power cuts, our verified professionals handle all urgent repairs.
               Available 24 hours, every day of the year.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {trades.map((trade) => (
-              <TradeCard key={trade.slug} trade={trade} />
+            {trades.map((trade, index) => (
+              <motion.div
+                key={trade.slug}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <TradeCard trade={trade} />
+              </motion.div>
             ))}
           </div>
         </section>
@@ -127,7 +191,7 @@ const Index = () => {
                 Find Emergency Help in Your City
               </h2>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-3">
               {cities.slice(0, 20).map((city) => (
                 <Link
@@ -152,23 +216,38 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-            
+
             <div className="relative z-10">
               <p className="text-gold uppercase tracking-luxury text-sm mb-6">24/7 Availability</p>
               <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-6">
                 Need Help Right Now?
               </h2>
+
+              <div className="mb-8 -mx-6 md:mx-auto max-w-4xl">
+                <AvailabilityCarousel />
+              </div>
+
               <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-                Our team is standing by 24/7 to connect you with a local emergency tradesperson. 
+                Our team is standing by 24/7 to connect you with a local emergency tradesperson.
                 One call is all it takes.
               </p>
-              
-              <Button variant="hero" size="xl" asChild>
-                <a href="tel:08001234567" className="flex items-center gap-3">
-                  <Phone className="w-5 h-5" />
-                  Call Now: 0800 123 4567
-                </a>
-              </Button>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <EmergencyTriageModal
+                  trigger={
+                    <Button variant="hero" size="xl">
+                      <Zap className="w-5 h-5 mr-2" />
+                      Get Help Now
+                    </Button>
+                  }
+                />
+                <Button variant="outline" size="xl" asChild>
+                  <a href="tel:08001234567" className="flex items-center gap-3">
+                    <Phone className="w-5 h-5" />
+                    Call: 0800 123 4567
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>

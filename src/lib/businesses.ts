@@ -1,3 +1,30 @@
+export interface PricingTier {
+    name: string;
+    description: string;
+    features: string[];
+}
+
+export interface Pricing {
+    callOutFee: number;
+    hourlyRate: number;
+    emergency24hSurcharge?: number; // Percentage (e.g., 50 for 50% extra)
+    minimumCharge?: number;
+    typicalJobs?: {
+        name: string;
+        priceRange: string;
+        duration: string;
+    }[];
+    whatsIncluded: string[];
+    tier?: 'budget' | 'standard' | 'premium';
+}
+
+export interface BusinessPhoto {
+    id: string;
+    url: string;
+    isPrimary: boolean;
+    altText?: string;
+}
+
 export interface Business {
     id: string;
     name: string;
@@ -9,6 +36,11 @@ export interface Business {
     phone?: string;
     website?: string;
     featuredReview?: string;
+    pricing?: Pricing;
+    isAvailableNow?: boolean;
+    trade?: string;
+    city?: string;
+    photos?: BusinessPhoto[];
 }
 
 export interface BusinessListings {
@@ -527,7 +559,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1582 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `luton-gas-${i + 1}`,
@@ -538,7 +570,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1582 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `luton-glaz-${i + 1}`,
@@ -549,7 +581,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1582 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.luton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `luton-drain-${i + 1}`,
@@ -560,7 +592,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1582 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.luton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.luton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     manchester: {
@@ -1126,7 +1158,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `manchester-gas-${i + 1}`,
@@ -1137,7 +1169,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `manchester-glaz-${i + 1}`,
@@ -1148,7 +1180,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `manchester-drain-${i + 1}`,
@@ -1159,7 +1191,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.manchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.manchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     birmingham: {
@@ -1798,7 +1830,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 121 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `birmingham-gas-${i + 1}`,
@@ -1809,7 +1841,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 121 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `birmingham-glaz-${i + 1}`,
@@ -1820,7 +1852,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 121 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.birmingham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `birmingham-drain-${i + 1}`,
@@ -1831,7 +1863,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 121 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.birmingham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.birmingham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     leeds: {
@@ -2337,7 +2369,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 113 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `leeds-gas-${i + 1}`,
@@ -2348,7 +2380,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 113 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `leeds-glaz-${i + 1}`,
@@ -2359,7 +2391,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 113 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leeds${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `leeds-drain-${i + 1}`,
@@ -2370,7 +2402,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 113 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.leeds${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.leeds${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     sheffield: {
@@ -2985,7 +3017,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 114 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `sheffield-gas-${i + 1}`,
@@ -2996,7 +3028,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 114 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `sheffield-glaz-${i + 1}`,
@@ -3007,7 +3039,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 114 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sheffield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `sheffield-drain-${i + 1}`,
@@ -3018,7 +3050,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 114 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.sheffield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.sheffield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     nottingham: {
@@ -3610,7 +3642,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 115 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `nottingham-gas-${i + 1}`,
@@ -3621,7 +3653,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 115 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `nottingham-glaz-${i + 1}`,
@@ -3632,7 +3664,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 115 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nottingham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `nottingham-drain-${i + 1}`,
@@ -3643,7 +3675,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 115 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.nottingham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.nottingham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     leicester: {
@@ -4264,7 +4296,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 116 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `leicester-gas-${i + 1}`,
@@ -4275,7 +4307,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 116 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `leicester-glaz-${i + 1}`,
@@ -4286,7 +4318,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 116 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.leicester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `leicester-drain-${i + 1}`,
@@ -4297,7 +4329,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 116 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.leicester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.leicester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     derby: {
@@ -4927,7 +4959,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1332 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `derby-gas-${i + 1}`,
@@ -4938,7 +4970,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1332 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `derby-glaz-${i + 1}`,
@@ -4949,7 +4981,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1332 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.derby${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `derby-drain-${i + 1}`,
@@ -4960,7 +4992,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1332 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.derby${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.derby${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     coventry: {
@@ -5591,7 +5623,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `coventry-gas-${i + 1}`,
@@ -5602,7 +5634,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `coventry-glaz-${i + 1}`,
@@ -5613,7 +5645,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.coventry${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `coventry-drain-${i + 1}`,
@@ -5624,7 +5656,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.coventry${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.coventry${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     wolverhampton: {
@@ -6244,7 +6276,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1902 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `wolverhampton-gas-${i + 1}`,
@@ -6255,7 +6287,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1902 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `wolverhampton-glaz-${i + 1}`,
@@ -6266,7 +6298,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1902 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wolverhampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `wolverhampton-drain-${i + 1}`,
@@ -6277,7 +6309,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1902 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wolverhampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wolverhampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "stoke-on-trent": {
@@ -6887,7 +6919,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1782 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `stoke-on-trent-gas-${i + 1}`,
@@ -6898,7 +6930,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1782 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `stoke-on-trent-glaz-${i + 1}`,
@@ -6909,7 +6941,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1782 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.stoke-on-trent${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `stoke-on-trent-drain-${i + 1}`,
@@ -6920,7 +6952,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1782 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.stoke-on-trent${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.stoke-on-trent${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     liverpool: {
@@ -7533,7 +7565,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 151 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `liverpool-gas-${i + 1}`,
@@ -7544,7 +7576,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 151 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `liverpool-glaz-${i + 1}`,
@@ -7555,7 +7587,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 151 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.liverpool${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `liverpool-drain-${i + 1}`,
@@ -7566,7 +7598,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 151 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.liverpool${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.liverpool${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     preston: {
@@ -8188,7 +8220,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1772 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `preston-gas-${i + 1}`,
@@ -8199,7 +8231,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1772 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `preston-glaz-${i + 1}`,
@@ -8210,7 +8242,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1772 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.preston${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `preston-drain-${i + 1}`,
@@ -8221,7 +8253,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1772 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.preston${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.preston${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     bolton: {
@@ -8846,7 +8878,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1204 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `bolton-gas-${i + 1}`,
@@ -8857,7 +8889,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1204 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `bolton-glaz-${i + 1}`,
@@ -8868,7 +8900,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1204 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bolton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `bolton-drain-${i + 1}`,
@@ -8879,7 +8911,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1204 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bolton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bolton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     oldham: {
@@ -9481,7 +9513,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `oldham-gas-${i + 1}`,
@@ -9492,7 +9524,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `oldham-glaz-${i + 1}`,
@@ -9503,7 +9535,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oldham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `oldham-drain-${i + 1}`,
@@ -9514,7 +9546,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.oldham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.oldham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     rochdale: {
@@ -10123,7 +10155,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1706 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `rochdale-gas-${i + 1}`,
@@ -10134,7 +10166,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1706 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `rochdale-glaz-${i + 1}`,
@@ -10145,7 +10177,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1706 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rochdale${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `rochdale-drain-${i + 1}`,
@@ -10156,7 +10188,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1706 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.rochdale${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.rochdale${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     bradford: {
@@ -10754,7 +10786,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1274 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `bradford-gas-${i + 1}`,
@@ -10765,7 +10797,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1274 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `bradford-glaz-${i + 1}`,
@@ -10776,7 +10808,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1274 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bradford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `bradford-drain-${i + 1}`,
@@ -10787,7 +10819,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1274 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bradford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bradford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     huddersfield: {
@@ -11393,7 +11425,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1484 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `huddersfield-gas-${i + 1}`,
@@ -11404,7 +11436,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1484 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `huddersfield-glaz-${i + 1}`,
@@ -11415,7 +11447,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1484 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.huddersfield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `huddersfield-drain-${i + 1}`,
@@ -11426,7 +11458,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1484 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.huddersfield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.huddersfield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     york: {
@@ -12022,7 +12054,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1904 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `york-gas-${i + 1}`,
@@ -12033,7 +12065,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1904 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `york-glaz-${i + 1}`,
@@ -12044,7 +12076,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1904 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.york${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `york-drain-${i + 1}`,
@@ -12055,7 +12087,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1904 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.york${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.york${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     hull: {
@@ -12655,7 +12687,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1482 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `hull-gas-${i + 1}`,
@@ -12666,7 +12698,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1482 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `hull-glaz-${i + 1}`,
@@ -12677,7 +12709,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1482 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hull${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `hull-drain-${i + 1}`,
@@ -12688,7 +12720,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1482 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.hull${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.hull${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     doncaster: {
@@ -13285,7 +13317,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1302 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `doncaster-gas-${i + 1}`,
@@ -13296,7 +13328,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1302 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `doncaster-glaz-${i + 1}`,
@@ -13307,7 +13339,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1302 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.doncaster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `doncaster-drain-${i + 1}`,
@@ -13318,7 +13350,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1302 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.doncaster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.doncaster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     northampton: {
@@ -13782,7 +13814,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1604 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `northampton-gas-${i + 1}`,
@@ -13793,7 +13825,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1604 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `northampton-glaz-${i + 1}`,
@@ -13804,7 +13836,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1604 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.northampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `northampton-drain-${i + 1}`,
@@ -13815,7 +13847,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1604 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.northampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.northampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "milton-keynes": {
@@ -14388,7 +14420,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1908 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `milton-keynes-gas-${i + 1}`,
@@ -14399,7 +14431,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1908 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `milton-keynes-glaz-${i + 1}`,
@@ -14410,7 +14442,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1908 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.milton-keynes${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `milton-keynes-drain-${i + 1}`,
@@ -14421,7 +14453,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1908 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.milton-keynes${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.milton-keynes${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     bedford: {
@@ -15009,7 +15041,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1234 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `bedford-gas-${i + 1}`,
@@ -15020,7 +15052,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1234 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `bedford-glaz-${i + 1}`,
@@ -15031,7 +15063,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1234 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bedford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `bedford-drain-${i + 1}`,
@@ -15042,7 +15074,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1234 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bedford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bedford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     peterborough: {
@@ -15643,7 +15675,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1733 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `peterborough-gas-${i + 1}`,
@@ -15654,7 +15686,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1733 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `peterborough-glaz-${i + 1}`,
@@ -15665,7 +15697,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1733 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.peterborough${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `peterborough-drain-${i + 1}`,
@@ -15676,7 +15708,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1733 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.peterborough${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.peterborough${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     cambridge: {
@@ -16271,7 +16303,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1223 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `cambridge-gas-${i + 1}`,
@@ -16282,7 +16314,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1223 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `cambridge-glaz-${i + 1}`,
@@ -16293,7 +16325,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1223 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cambridge${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `cambridge-drain-${i + 1}`,
@@ -16304,7 +16336,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1223 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cambridge${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cambridge${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     norwich: {
@@ -16901,7 +16933,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1603 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `norwich-gas-${i + 1}`,
@@ -16912,7 +16944,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1603 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `norwich-glaz-${i + 1}`,
@@ -16923,7 +16955,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1603 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.norwich${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `norwich-drain-${i + 1}`,
@@ -16934,7 +16966,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1603 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.norwich${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.norwich${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     ipswich: {
@@ -17529,7 +17561,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1473 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `ipswich-gas-${i + 1}`,
@@ -17540,7 +17572,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1473 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `ipswich-glaz-${i + 1}`,
@@ -17551,7 +17583,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1473 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ipswich${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `ipswich-drain-${i + 1}`,
@@ -17562,7 +17594,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1473 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ipswich${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ipswich${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     reading: {
@@ -18159,7 +18191,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 118 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `reading-gas-${i + 1}`,
@@ -18170,7 +18202,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 118 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `reading-glaz-${i + 1}`,
@@ -18181,7 +18213,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 118 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.reading${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `reading-drain-${i + 1}`,
@@ -18192,7 +18224,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 118 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.reading${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.reading${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     oxford: {
@@ -18795,7 +18827,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1865 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `oxford-gas-${i + 1}`,
@@ -18806,7 +18838,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1865 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `oxford-glaz-${i + 1}`,
@@ -18817,7 +18849,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1865 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.oxford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `oxford-drain-${i + 1}`,
@@ -18828,7 +18860,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1865 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.oxford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.oxford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     swindon: {
@@ -19432,7 +19464,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1793 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `swindon-gas-${i + 1}`,
@@ -19443,7 +19475,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1793 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `swindon-glaz-${i + 1}`,
@@ -19454,7 +19486,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1793 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.swindon${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `swindon-drain-${i + 1}`,
@@ -19465,7 +19497,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1793 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.swindon${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.swindon${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     cheltenham: {
@@ -20065,7 +20097,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1242 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `cheltenham-gas-${i + 1}`,
@@ -20076,7 +20108,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1242 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `cheltenham-glaz-${i + 1}`,
@@ -20087,7 +20119,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1242 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cheltenham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `cheltenham-drain-${i + 1}`,
@@ -20098,7 +20130,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1242 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cheltenham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cheltenham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     gloucester: {
@@ -20692,7 +20724,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1452 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `gloucester-gas-${i + 1}`,
@@ -20703,7 +20735,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1452 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `gloucester-glaz-${i + 1}`,
@@ -20714,7 +20746,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1452 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.gloucester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `gloucester-drain-${i + 1}`,
@@ -20725,7 +20757,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1452 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.gloucester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.gloucester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     worcester: {
@@ -21327,7 +21359,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1905 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `worcester-gas-${i + 1}`,
@@ -21338,7 +21370,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1905 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `worcester-glaz-${i + 1}`,
@@ -21349,7 +21381,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1905 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.worcester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `worcester-drain-${i + 1}`,
@@ -21360,7 +21392,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1905 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.worcester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.worcester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     hereford: {
@@ -21958,7 +21990,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1432 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `hereford-gas-${i + 1}`,
@@ -21969,7 +22001,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1432 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `hereford-glaz-${i + 1}`,
@@ -21980,7 +22012,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1432 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.hereford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `hereford-drain-${i + 1}`,
@@ -21991,7 +22023,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1432 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.hereford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.hereford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     shrewsbury: {
@@ -22585,7 +22617,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1743 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `shrewsbury-gas-${i + 1}`,
@@ -22596,7 +22628,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1743 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `shrewsbury-glaz-${i + 1}`,
@@ -22607,7 +22639,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1743 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.shrewsbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `shrewsbury-drain-${i + 1}`,
@@ -22618,7 +22650,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1743 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.shrewsbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.shrewsbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     telford: {
@@ -23198,7 +23230,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1952 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `telford-gas-${i + 1}`,
@@ -23209,7 +23241,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1952 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `telford-glaz-${i + 1}`,
@@ -23220,7 +23252,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1952 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.telford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `telford-drain-${i + 1}`,
@@ -23231,7 +23263,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1952 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.telford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.telford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     cannock: {
@@ -23467,7 +23499,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.manchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `cannock-gas-${i + 1}`,
@@ -23478,7 +23510,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cannock${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cannock${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `cannock-glaz-${i + 1}`,
@@ -23489,7 +23521,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cannock${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.cannock${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `cannock-drain-${i + 1}`,
@@ -23500,7 +23532,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cannock${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.cannock${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     tamworth: {
@@ -24072,7 +24104,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1827 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `tamworth-gas-${i + 1}`,
@@ -24083,7 +24115,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1827 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `tamworth-glaz-${i + 1}`,
@@ -24094,7 +24126,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1827 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.tamworth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `tamworth-drain-${i + 1}`,
@@ -24105,7 +24137,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1827 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.tamworth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.tamworth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     nuneaton: {
@@ -25364,7 +25396,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `nuneaton-gas-${i + 1}`,
@@ -25375,7 +25407,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `nuneaton-glaz-${i + 1}`,
@@ -25386,7 +25418,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.nuneaton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `nuneaton-drain-${i + 1}`,
@@ -25397,7 +25429,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 24 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.nuneaton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.nuneaton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     rugby: {
@@ -25757,7 +25789,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1788 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `rugby-gas-${i + 1}`,
@@ -25768,7 +25800,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1788 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `rugby-glaz-${i + 1}`,
@@ -25779,7 +25811,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1788 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.rugby${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `rugby-drain-${i + 1}`,
@@ -25790,7 +25822,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1788 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.rugby${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.rugby${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     bath: {
@@ -25860,7 +25892,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1225 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `bath-gas-${i + 1}`,
@@ -25871,7 +25903,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1225 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `bath-glaz-${i + 1}`,
@@ -25882,7 +25914,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1225 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bath${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `bath-drain-${i + 1}`,
@@ -25893,7 +25925,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1225 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bath${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bath${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "brighton-&-hove": {
@@ -26006,7 +26038,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1273 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `brighton-&-hove-gas-${i + 1}`,
@@ -26017,7 +26049,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1273 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `brighton-&-hove-glaz-${i + 1}`,
@@ -26028,7 +26060,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1273 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.brighton--hove${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `brighton-&-hove-drain-${i + 1}`,
@@ -26039,7 +26071,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1273 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.brighton--hove${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.brighton--hove${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     bristol: {
@@ -26341,7 +26373,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 117 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `bristol-gas-${i + 1}`,
@@ -26352,7 +26384,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 117 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `bristol-glaz-${i + 1}`,
@@ -26363,7 +26395,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 117 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `bristol-drain-${i + 1}`,
@@ -26374,7 +26406,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 117 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bristol${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.bristol${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     canterbury: {
@@ -26431,7 +26463,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 117 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.bristol${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `canterbury-gas-${i + 1}`,
@@ -26442,7 +26474,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1227 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.canterbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.canterbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `canterbury-glaz-${i + 1}`,
@@ -26453,7 +26485,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1227 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.canterbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.canterbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `canterbury-drain-${i + 1}`,
@@ -26464,7 +26496,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1227 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.canterbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.canterbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     carlisle: {
@@ -26511,7 +26543,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1228 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `carlisle-gas-${i + 1}`,
@@ -26522,7 +26554,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1228 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `carlisle-glaz-${i + 1}`,
@@ -26533,7 +26565,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1228 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.carlisle${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `carlisle-drain-${i + 1}`,
@@ -26544,7 +26576,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1228 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.carlisle${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.carlisle${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     chelmsford: {
@@ -26621,7 +26653,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1245 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `chelmsford-gas-${i + 1}`,
@@ -26632,7 +26664,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1245 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `chelmsford-glaz-${i + 1}`,
@@ -26643,7 +26675,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1245 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chelmsford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `chelmsford-drain-${i + 1}`,
@@ -26654,7 +26686,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1245 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chelmsford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chelmsford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     chester: {
@@ -26711,7 +26743,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1244 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `chester-gas-${i + 1}`,
@@ -26722,7 +26754,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1244 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `chester-glaz-${i + 1}`,
@@ -26733,7 +26765,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1244 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `chester-drain-${i + 1}`,
@@ -26744,7 +26776,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1244 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     chichester: {
@@ -26811,7 +26843,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1243 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `chichester-gas-${i + 1}`,
@@ -26822,7 +26854,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1243 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `chichester-glaz-${i + 1}`,
@@ -26833,7 +26865,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1243 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.chichester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `chichester-drain-${i + 1}`,
@@ -26844,7 +26876,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1243 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chichester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.chichester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     colchester: {
@@ -26931,7 +26963,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1206 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `colchester-gas-${i + 1}`,
@@ -26942,7 +26974,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1206 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `colchester-glaz-${i + 1}`,
@@ -26953,7 +26985,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1206 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.colchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `colchester-drain-${i + 1}`,
@@ -26964,7 +26996,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1206 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.colchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.colchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     durham: {
@@ -27023,7 +27055,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `durham-gas-${i + 1}`,
@@ -27034,7 +27066,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `durham-glaz-${i + 1}`,
@@ -27045,7 +27077,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.durham${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `durham-drain-${i + 1}`,
@@ -27056,7 +27088,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.durham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.durham${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     ely: {
@@ -27103,7 +27135,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1353 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `ely-gas-${i + 1}`,
@@ -27114,7 +27146,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1353 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `ely-glaz-${i + 1}`,
@@ -27125,7 +27157,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1353 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ely${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `ely-drain-${i + 1}`,
@@ -27136,7 +27168,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1353 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ely${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ely${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     exeter: {
@@ -27202,7 +27234,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1392 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `exeter-gas-${i + 1}`,
@@ -27213,7 +27245,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1392 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `exeter-glaz-${i + 1}`,
@@ -27224,7 +27256,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1392 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.exeter${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `exeter-drain-${i + 1}`,
@@ -27235,7 +27267,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1392 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.exeter${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.exeter${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     lancaster: {
@@ -27281,7 +27313,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1524 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `lancaster-gas-${i + 1}`,
@@ -27292,7 +27324,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1524 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `lancaster-glaz-${i + 1}`,
@@ -27303,7 +27335,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1524 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lancaster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `lancaster-drain-${i + 1}`,
@@ -27314,7 +27346,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1524 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lancaster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lancaster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     lichfield: {
@@ -27392,7 +27424,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `lichfield-gas-${i + 1}`,
@@ -27403,7 +27435,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `lichfield-glaz-${i + 1}`,
@@ -27414,7 +27446,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lichfield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `lichfield-drain-${i + 1}`,
@@ -27425,7 +27457,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1543 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lichfield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lichfield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     lincoln: {
@@ -27502,7 +27534,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1522 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `lincoln-gas-${i + 1}`,
@@ -27513,7 +27545,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1522 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `lincoln-glaz-${i + 1}`,
@@ -27524,7 +27556,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1522 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.lincoln${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `lincoln-drain-${i + 1}`,
@@ -27535,7 +27567,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1522 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lincoln${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.lincoln${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     london: {
@@ -27915,7 +27947,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `london-gas-${i + 1}`,
@@ -27926,7 +27958,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `london-glaz-${i + 1}`,
@@ -27937,7 +27969,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `london-drain-${i + 1}`,
@@ -27948,7 +27980,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.london${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.london${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "newcastle-upon-tyne": {
@@ -28035,7 +28067,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.london${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `newcastle-upon-tyne-gas-${i + 1}`,
@@ -28046,7 +28078,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle-upon-tyne${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle-upon-tyne${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `newcastle-upon-tyne-glaz-${i + 1}`,
@@ -28057,7 +28089,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle-upon-tyne${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle-upon-tyne${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `newcastle-upon-tyne-drain-${i + 1}`,
@@ -28068,7 +28100,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.newcastle-upon-tyne${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.newcastle-upon-tyne${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     plymouth: {
@@ -28137,7 +28169,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1752 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `plymouth-gas-${i + 1}`,
@@ -28148,7 +28180,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1752 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `plymouth-glaz-${i + 1}`,
@@ -28159,7 +28191,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1752 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.plymouth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `plymouth-drain-${i + 1}`,
@@ -28170,7 +28202,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1752 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.plymouth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.plymouth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     portsmouth: {
@@ -28236,7 +28268,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `portsmouth-gas-${i + 1}`,
@@ -28247,7 +28279,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `portsmouth-glaz-${i + 1}`,
@@ -28258,7 +28290,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.portsmouth${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `portsmouth-drain-${i + 1}`,
@@ -28269,7 +28301,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.portsmouth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.portsmouth${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     ripon: {
@@ -28339,7 +28371,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1765 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `ripon-gas-${i + 1}`,
@@ -28350,7 +28382,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1765 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `ripon-glaz-${i + 1}`,
@@ -28361,7 +28393,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1765 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.ripon${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `ripon-drain-${i + 1}`,
@@ -28372,7 +28404,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1765 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ripon${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.ripon${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     salford: {
@@ -28438,7 +28470,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `salford-gas-${i + 1}`,
@@ -28449,7 +28481,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `salford-glaz-${i + 1}`,
@@ -28460,7 +28492,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salford${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `salford-drain-${i + 1}`,
@@ -28471,7 +28503,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 161 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.salford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.salford${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     salisbury: {
@@ -28540,7 +28572,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1722 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `salisbury-gas-${i + 1}`,
@@ -28551,7 +28583,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1722 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `salisbury-glaz-${i + 1}`,
@@ -28562,7 +28594,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1722 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.salisbury${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `salisbury-drain-${i + 1}`,
@@ -28573,7 +28605,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1722 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.salisbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.salisbury${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     southampton: {
@@ -28650,7 +28682,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `southampton-gas-${i + 1}`,
@@ -28661,7 +28693,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `southampton-glaz-${i + 1}`,
@@ -28672,7 +28704,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southampton${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `southampton-drain-${i + 1}`,
@@ -28683,7 +28715,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 23 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.southampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.southampton${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "st-albans": {
@@ -28786,7 +28818,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1727 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `st-albans-gas-${i + 1}`,
@@ -28797,7 +28829,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1727 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `st-albans-glaz-${i + 1}`,
@@ -28808,7 +28840,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1727 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.st-albans${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `st-albans-drain-${i + 1}`,
@@ -28819,7 +28851,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1727 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.st-albans${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.st-albans${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "southend-on-sea": {
@@ -28922,7 +28954,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1702 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `southend-on-sea-gas-${i + 1}`,
@@ -28933,7 +28965,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1702 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `southend-on-sea-glaz-${i + 1}`,
@@ -28944,7 +28976,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1702 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.southend-on-sea${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `southend-on-sea-drain-${i + 1}`,
@@ -28955,7 +28987,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1702 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.southend-on-sea${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.southend-on-sea${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     sunderland: {
@@ -29036,7 +29068,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `sunderland-gas-${i + 1}`,
@@ -29047,7 +29079,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `sunderland-glaz-${i + 1}`,
@@ -29058,7 +29090,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.sunderland${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `sunderland-drain-${i + 1}`,
@@ -29069,7 +29101,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.sunderland${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.sunderland${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     truro: {
@@ -29128,7 +29160,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1872 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `truro-gas-${i + 1}`,
@@ -29139,7 +29171,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1872 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `truro-glaz-${i + 1}`,
@@ -29150,7 +29182,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1872 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.truro${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `truro-drain-${i + 1}`,
@@ -29161,7 +29193,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1872 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.truro${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.truro${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     wakefield: {
@@ -29242,7 +29274,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1924 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `wakefield-gas-${i + 1}`,
@@ -29253,7 +29285,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1924 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `wakefield-glaz-${i + 1}`,
@@ -29264,7 +29296,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1924 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wakefield${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `wakefield-drain-${i + 1}`,
@@ -29275,7 +29307,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1924 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wakefield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wakefield${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     wells: {
@@ -29323,7 +29355,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1749 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `wells-gas-${i + 1}`,
@@ -29334,7 +29366,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1749 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `wells-glaz-${i + 1}`,
@@ -29345,7 +29377,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1749 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wells${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `wells-drain-${i + 1}`,
@@ -29356,7 +29388,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1749 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wells${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wells${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     westminster: {
@@ -29415,7 +29447,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `westminster-gas-${i + 1}`,
@@ -29426,7 +29458,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `westminster-glaz-${i + 1}`,
@@ -29437,7 +29469,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.westminster${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `westminster-drain-${i + 1}`,
@@ -29448,7 +29480,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 20 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.westminster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.westminster${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     winchester: {
@@ -29518,7 +29550,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1962 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `winchester-gas-${i + 1}`,
@@ -29529,7 +29561,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1962 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `winchester-glaz-${i + 1}`,
@@ -29540,7 +29572,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1962 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.winchester${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `winchester-drain-${i + 1}`,
@@ -29551,7 +29583,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1962 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.winchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.winchester${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "warrington": {
@@ -29610,7 +29642,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1925 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `warrington-gas-${i + 1}`,
@@ -29621,7 +29653,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1925 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `warrington-glaz-${i + 1}`,
@@ -29632,7 +29664,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1925 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.warrington${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `warrington-drain-${i + 1}`,
@@ -29643,7 +29675,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1925 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.warrington${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.warrington${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "wigan": {
@@ -29735,7 +29767,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1942 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `wigan-gas-${i + 1}`,
@@ -29746,7 +29778,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1942 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `wigan-glaz-${i + 1}`,
@@ -29757,7 +29789,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1942 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.wigan${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `wigan-drain-${i + 1}`,
@@ -29768,7 +29800,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1942 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wigan${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.wigan${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "middlesbrough": {
@@ -29860,7 +29892,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1642 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `middlesbrough-gas-${i + 1}`,
@@ -29871,7 +29903,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1642 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `middlesbrough-glaz-${i + 1}`,
@@ -29882,7 +29914,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1642 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.middlesbrough${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `middlesbrough-drain-${i + 1}`,
@@ -29893,7 +29925,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1642 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.middlesbrough${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.middlesbrough${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "blackpool": {
@@ -30007,7 +30039,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1253 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `blackpool-gas-${i + 1}`,
@@ -30018,7 +30050,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1253 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `blackpool-glaz-${i + 1}`,
@@ -30029,7 +30061,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1253 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.blackpool${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `blackpool-drain-${i + 1}`,
@@ -30040,7 +30072,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1253 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.blackpool${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.blackpool${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     "barnsley": {
@@ -30110,7 +30142,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1226 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
         "gas-engineer": Array.from({ length: 25 }, (_, i) => ({
             id: `barnsley-gas-${i + 1}`,
@@ -30121,7 +30153,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1226 ${[300100, 400200, 500300, 600400, 700500, 800600, 900700, 100800, 200900, 301010, 402020, 503030, 604040, 705050, 806060, 907070, 108080, 209090, 311111, 422222, 533333, 644444, 755555, 866666, 977777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['gasengineer', 'gassafe', 'boilerrepair', 'gasservices'][Math.floor(i / 6)]}.co.uk` })
         })),
         glazier: Array.from({ length: 25 }, (_, i) => ({
             id: `barnsley-glaz-${i + 1}`,
@@ -30132,7 +30164,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1226 ${[400100, 500200, 600300, 700400, 800500, 900600, 100700, 200800, 300900, 401010, 502020, 603030, 704040, 805050, 906060, 107070, 208080, 309090, 411111, 522222, 633333, 744444, 855555, 966666, 177777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.barnsley${['glazier', 'glass', 'glazing247', 'windowrepair'][Math.floor(i / 6)]}.co.uk` })
         })),
         "drain-specialist": Array.from({ length: 20 }, (_, i) => ({
             id: `barnsley-drain-${i + 1}`,
@@ -30143,7 +30175,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 1226 ${[500100, 600200, 700300, 800400, 900500, 100600, 200700, 300800, 400900, 501010, 602020, 703030, 804040, 905050, 106060, 207070, 308080, 409090, 511111, 622222][i]}`,
-            ...([1, 5, 9, 14].includes(i) && { website: `http://www.barnsley${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i/5)]}.co.uk` })
+            ...([1, 5, 9, 14].includes(i) && { website: `http://www.barnsley${['drains', 'drainage', 'drainunblocking', 'drainspecialists'][Math.floor(i / 5)]}.co.uk` })
         })),
     },
     newcastle: {
@@ -30404,7 +30436,7 @@ export const businessListings: BusinessListings = {
             hours: "Open 24 hours",
             isOpen24Hours: true,
             phone: `+44 191 ${[200100, 300200, 400300, 500400, 600500, 700600, 800700, 900800, 100900, 201010, 302020, 403030, 504040, 605050, 706060, 807070, 908080, 109090, 211111, 322222, 433333, 544444, 655555, 766666, 877777][i]}`,
-            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i/6)]}.co.uk` })
+            ...([1, 6, 11, 18].includes(i) && { website: `http://www.newcastle${['locksmiths', 'locks', 'locksmith247', 'keycutting'][Math.floor(i / 6)]}.co.uk` })
         })),
     },
     // Moved Derby plumbers to correct location
@@ -30419,3 +30451,15 @@ export function getBusinessListings(city: string, trade: string): Business[] | n
     return businessListings[normalizedCity]?.[normalizedTrade] || null;
 }
 
+
+export function getBusinessById(id: string): { business: Business; city: string; trade: string } | null {
+    for (const city in businessListings) {
+        for (const trade in businessListings[city]) {
+            const business = businessListings[city][trade].find(b => b.id === id);
+            if (business) {
+                return { business, city, trade };
+            }
+        }
+    }
+    return null;
+}

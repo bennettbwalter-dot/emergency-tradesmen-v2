@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { Phone, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
+import { UserMenu } from "@/components/UserMenu";
+import { useComparison } from "@/contexts/ComparisonContext";
+import { Badge } from "@/components/ui/badge";
 
 export function Header() {
   return (
@@ -19,17 +22,16 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            <Link to="/emergency-electrician/all-locations" className="text-sm font-medium hover:text-gold transition-colors">
-              Electrician
-            </Link>
-            <Link to="/emergency-plumber/all-locations" className="text-sm font-medium hover:text-gold transition-colors">
-              Plumber
-            </Link>
-            <Link to="/locations" className="text-sm font-medium hover:text-gold transition-colors">
-              Locations
-            </Link>
+
             <Link to="/about" className="text-sm font-medium hover:text-gold transition-colors">
               About
+            </Link>
+            <Link to="/tradesmen" className="text-sm font-medium hover:text-gold transition-colors">
+              For Tradesmen
+            </Link>
+            <Link to="/compare" className="text-sm font-medium hover:text-gold transition-colors flex items-center gap-1">
+              Compare
+              <ComparisonBadge />
             </Link>
           </nav>
 
@@ -39,6 +41,7 @@ export function Header() {
               <span className="uppercase tracking-wider text-xs">Open 24/7</span>
             </div>
 
+            <UserMenu />
             <ModeToggle />
 
             <Button variant="luxury" size="lg" asChild>
@@ -52,5 +55,16 @@ export function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+function ComparisonBadge() {
+  const { items } = useComparison();
+  if (items.length === 0) return null;
+
+  return (
+    <Badge variant="secondary" className="h-5 px-1.5 text-[10px] bg-gold/20 text-gold hover:bg-gold/30 ml-1">
+      {items.length}
+    </Badge>
   );
 }

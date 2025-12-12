@@ -61,6 +61,59 @@
     --sidebar-ring: 38 65% 55%;
   }
 
+  .light {
+    /* Light mode - bright and clean */
+    --background: 0 0% 98%;
+    --foreground: 20 8% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 8% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 8% 12%;
+
+    --primary: 38 65% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 15% 92%;
+    --secondary-foreground: 20 8% 12%;
+
+    --muted: 40 10% 90%;
+    --muted-foreground: 20 8% 40%;
+
+    --accent: 38 65% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 38 65% 55%;
+
+    --success: 142 50% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 65% 50%;
+    --warning-foreground: 0 0% 100%;
+    --urgent: 24 80% 50%;
+    --urgent-foreground: 0 0% 100%;
+    --trust: 38 65% 55%;
+    --trust-light: 38 30% 95%;
+
+    --gold: 38 65% 50%;
+    --gold-light: 38 50% 60%;
+    --gold-dark: 38 70% 35%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 20 8% 12%;
+    --sidebar-primary: 38 65% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 15% 92%;
+    --sidebar-accent-foreground: 20 8% 12%;
+    --sidebar-border: 40 15% 85%;
+    --sidebar-ring: 38 65% 55%;
+  }
+
   .dark {
     --background: 20 8% 4%;
     --foreground: 40 25% 95%;

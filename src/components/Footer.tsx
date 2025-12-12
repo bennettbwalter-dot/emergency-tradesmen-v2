@@ -3,7 +3,7 @@ import { trades, cities } from "@/lib/trades";
 
 export function Footer() {
   return (
-    <footer className="bg-primary border-t border-border/50 py-16 mt-16">
+    <footer className="bg-primary border-t border-border/50 pt-16 pb-24 md:pb-16 mt-16">
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
@@ -26,7 +26,7 @@ export function Footer() {
             <ul className="space-y-3">
               {trades.map((trade) => (
                 <li key={trade.slug}>
-                  <Link 
+                  <Link
                     to={`/emergency-${trade.slug}/manchester`}
                     className="text-muted-foreground hover:text-gold text-sm transition-colors duration-300"
                   >
@@ -42,7 +42,7 @@ export function Footer() {
             <ul className="space-y-3">
               {cities.slice(0, 6).map((city) => (
                 <li key={city}>
-                  <Link 
+                  <Link
                     to={`/emergency-plumber/${city.toLowerCase()}`}
                     className="text-muted-foreground hover:text-gold text-sm transition-colors duration-300"
                   >
@@ -54,17 +54,32 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">24/7 Emergency Line</h4>
-            <a 
-              href="tel:08001234567" 
-              className="block font-display text-3xl text-gold hover:text-gold-light transition-colors duration-300 tracking-wide"
-            >
-              0800 123 4567
-            </a>
-            <p className="text-muted-foreground text-sm mt-3">
-              Free to call from mobiles and landlines
-            </p>
-            
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h4>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">24/7 Emergency Line</p>
+                <a
+                  href="tel:08001234567"
+                  className="block font-display text-2xl text-gold hover:text-gold-light transition-colors duration-300 tracking-wide"
+                >
+                  0800 123 4567
+                </a>
+                <p className="text-muted-foreground text-sm mt-1">
+                  Free to call from mobiles and landlines
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-border/30">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Email Support</p>
+                <a
+                  href="mailto:emergencytradesmen@outlook.com"
+                  className="text-sm text-gold hover:text-gold-light transition-colors duration-300"
+                >
+                  emergencytradesmen@outlook.com
+                </a>
+              </div>
+            </div>
+
             <div className="mt-8 pt-6 border-t border-border/30">
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
                 Trusted by thousands across the UK
@@ -79,11 +94,14 @@ export function Footer() {
               &copy; {new Date().getFullYear()} EmergencyTrades. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link to="/" className="text-muted-foreground hover:text-gold text-sm transition-colors">
+              <Link to="/privacy" className="text-muted-foreground hover:text-gold text-sm transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/" className="text-muted-foreground hover:text-gold text-sm transition-colors">
+              <Link to="/terms" className="text-muted-foreground hover:text-gold text-sm transition-colors">
                 Terms of Service
+              </Link>
+              <Link to="/about" className="text-muted-foreground hover:text-gold text-sm transition-colors">
+                About Us
               </Link>
             </div>
           </div>

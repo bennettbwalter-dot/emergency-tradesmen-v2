@@ -1,19 +1,32 @@
 import { useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
 import { CTABanner } from "@/components/CTABanner";
 import { TrustBadges } from "@/components/TrustBadges";
 import { BusinessCard } from "@/components/BusinessCard";
+import { BusinessCardSkeleton } from "@/components/BusinessCardSkeleton";
+import { SearchFilterBar } from "@/components/SearchFilterBar";
+import { ReviewsSection } from "@/components/ReviewsSection";
+import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Button } from "@/components/ui/button";
 import { generateTradePageData } from "@/lib/trades";
 import { getBusinessListings } from "@/lib/businesses";
+import { fetchBusinesses } from "@/lib/businessService";
+import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
+import { useBusinessFilters } from "@/hooks/useBusinessFilters";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { IframeMap } from "@/components/IframeMap";
+import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
+import type { Business } from "@/lib/businesses";
 
 export default function TradeCityPage() {
   const { tradePath, city } = useParams<{ tradePath: string; city: string }>();
+  const [businesses, setBusinesses] = useState<Business[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   if (!tradePath || !city) {
     return <Navigate to="/" replace />;
@@ -22,25 +35,63 @@ export default function TradeCityPage() {
   // Extract trade from path like "emergency-plumber" -> "plumber"
   const trade = tradePath.replace("emergency-", "");
 
+
   const pageData = generateTradePageData(trade, city);
 
   if (!pageData) {
     return <Navigate to="/" replace />;
   }
 
-  const {
-    trade: tradeInfo,
-    city: cityName,
-    serviceAreas,
-    averageResponseTime,
-    emergencyPriceRange,
-    certifications,
-    services,
-    faqs
-  } = pageData;
 
-  // Get business listings for this city and trade
-  const businesses = getBusinessListings(cityName, tradeInfo.slug);
+
+
+  const tradeInfo = pageData?.trade || { slug: '', name: 'Tradesperson', icon: '🔧' };
+  const cityName = pageData?.city || 'your area';
+
+  const serviceAreas = pageData?.serviceAreas || [];
+  const averageResponseTime = pageData?.averageResponseTime || '30-60 minutes';
+  const emergencyPriceRange = pageData?.emergencyPriceRange || '£75 - £150';
+  const certifications = pageData?.certifications || [];
+  const services = pageData?.services || [];
+  const faqs = pageData?.faqs || [];
+
+  // Fetch real businesses from Supabase
+  useEffect(() => {
+    async function loadBusinesses() {
+      setIsLoading(true);
+      try {
+        const realBusinesses = await fetchBusinesses(tradeInfo.slug, cityName);
+
+        // If no real businesses found, fallback to mock data
+        if (realBusinesses.length === 0) {
+          console.log(`No real businesses found for ${tradeInfo.slug} in ${cityName}, using mock data`);
+          const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
+          setBusinesses(mockBusinesses);
+        } else {
+          console.log(`Loaded ${realBusinesses.length} real businesses from database`);
+          setBusinesses(realBusinesses);
+        }
+      } catch (error) {
+        console.error('Error loading businesses:', error);
+        // Fallback to mock data on error
+        const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
+        setBusinesses(mockBusinesses);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadBusinesses();
+  }, [tradeInfo.slug, cityName]);
+
+  // Apply filters and sorting
+  const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
+    useBusinessFilters(businesses);
+
+  // Generate mock reviews for demonstration
+  // In production, these would come from a database
+  const mockReviews = generateMockReviews(`${cityName}-${tradeInfo.slug}`, 24);
+  const reviewStats = calculateReviewStats(mockReviews);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -55,6 +106,8 @@ export default function TradeCityPage() {
     telephone: "0800 123 4567",
   };
 
+
+
   return (
     <>
       <Helmet>
@@ -63,7 +116,7 @@ export default function TradeCityPage() {
           name="description"
           content={`Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
         />
-        <link rel="canonical" href={`https://emergencytrades.co.uk/emergency-${trade}/${city}`} />
+        <link rel="canonical" href={`https://emergencytrades.co.uk/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}
         </script>
@@ -74,16 +127,12 @@ export default function TradeCityPage() {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-          {/* Background layers */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
-
-          {/* Glow effects */}
           <div className="absolute top-10 right-10 w-72 h-72 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
 
           <div className="relative container-wide py-16 md:py-24">
             <div className="max-w-3xl">
-              {/* Breadcrumb */}
               <nav className="flex items-center gap-2 text-muted-foreground text-sm mb-8">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
@@ -92,7 +141,6 @@ export default function TradeCityPage() {
                 <span className="text-gold">{cityName}</span>
               </nav>
 
-              {/* Availability badge */}
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8 animate-fade-up">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
@@ -101,7 +149,6 @@ export default function TradeCityPage() {
                 <span className="text-sm font-medium uppercase tracking-wider text-gold">{tradeInfo.name}s available now in {cityName}</span>
               </div>
 
-              {/* Main headline */}
               <h1 className="mb-6 animate-fade-up">
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
                   Emergency {tradeInfo.name}
@@ -132,7 +179,7 @@ export default function TradeCityPage() {
           </div>
         </section>
 
-        {/* Trust Section - Certifications */}
+        {/* Trust Section */}
         <section className="container-wide py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map((cert, index) => (
@@ -147,32 +194,57 @@ export default function TradeCityPage() {
         </section>
 
         {/* Services Section */}
-        <section className="container-wide py-16">
-          <div className="text-center mb-10">
-            <p className="text-gold uppercase tracking-luxury text-sm mb-4">What We Cover</p>
-            <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
-              Emergency {tradeInfo.name} Services in {cityName}
-            </h2>
+        <section className="container-wide py-16 bg-card/30">
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <h2 className="text-3xl font-display text-foreground mb-4">Services We Provide</h2>
+            <p className="text-muted-foreground">Comprehensive emergency {tradeInfo.name.toLowerCase()} solutions for {cityName} and surrounding areas.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <div
-                key={index}
-                className="group flex items-start gap-4 p-6 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/10 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-gold" />
-                </div>
+              <div key={index} className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border/50">
+                <CheckCircle className="w-5 h-5 text-gold shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-display text-lg text-foreground tracking-wide">{service}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Available 24/7 with fast response times
-                  </p>
+                  <h3 className="font-semibold text-foreground mb-2">{service}</h3>
+                  <p className="text-sm text-muted-foreground">Expert handling of all {service.toLowerCase()} situations.</p>
                 </div>
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Listings Section */}
+        <section className="container-wide py-16">
+          <div className="mb-8">
+            <SearchFilterBar
+              filters={filters}
+              onFiltersChange={setFilters}
+              totalCount={totalCount}
+              resultsCount={resultsCount}
+            />
+          </div>
+
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-foreground">
+              Top Rated {tradeInfo.name}s in {cityName}
+            </h2>
+            <p className="text-muted-foreground">
+              Found {totalCount} verified professionals nearby
+            </p>
+          </div>
+
+          {isLoading ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <BusinessCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredBusinesses.map((business, index) => (
+                <BusinessCard key={business.id} business={business} rank={index + 1} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* CTA Banner */}
@@ -180,10 +252,9 @@ export default function TradeCityPage() {
           <CTABanner trade={tradeInfo.name} city={cityName} />
         </section>
 
-        {/* Local Coverage & Pricing */}
+        {/* Coverage & Pricing */}
         <section className="container-wide py-16">
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Areas Covered */}
             <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center">
@@ -191,113 +262,66 @@ export default function TradeCityPage() {
                 </div>
                 <h2 className="font-display text-xl tracking-wide text-foreground">Areas We Cover Near {cityName}</h2>
               </div>
-              <p className="text-muted-foreground mb-6">
-                Our emergency {tradeInfo.name.toLowerCase()} network covers {cityName} and the surrounding areas, ensuring fast response times wherever you are.
-              </p>
               <div className="flex flex-wrap gap-2">
-                {serviceAreas.map((area) => (
-                  <span key={area} className="px-4 py-2 bg-secondary/50 border border-border/50 rounded-full text-sm text-foreground">
+                {serviceAreas.map((area, i) => (
+                  <div key={i} className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground">
                     {area}
-                  </span>
+                  </div>
                 ))}
               </div>
             </div>
-
-            {/* Pricing */}
             <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center">
                   <PoundSterling className="w-6 h-6 text-gold" />
                 </div>
-                <h2 className="font-display text-xl tracking-wide text-foreground">Transparent Pricing</h2>
+                <h2 className="font-display text-xl tracking-wide text-foreground">Emergency Rates</h2>
               </div>
-              <p className="text-muted-foreground mb-4">
-                Emergency {tradeInfo.name.toLowerCase()} call-outs in {cityName} typically range from:
-              </p>
-              <div className="font-display text-4xl text-gold mb-6 tracking-wide">{emergencyPriceRange}</div>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
-                  No hidden charges
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
-                  Price confirmed before work starts
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-4 h-4 text-gold flex-shrink-0" />
-                  Weekend/evening rates may apply
-                </li>
-              </ul>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center pb-4 border-b border-border/50">
+                  <span className="text-muted-foreground">Call Out Fee</span>
+                  <span className="font-semibold text-foreground">Included</span>
+                </div>
+                <div className="flex justify-between items-center pb-4 border-b border-border/50">
+                  <span className="text-muted-foreground">Hourly Rate</span>
+                  <span className="font-semibold text-foreground">{emergencyPriceRange}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Estimates</span>
+                  <span className="font-semibold text-foreground">Free</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Business Listings - only show if we have listings for this city/trade */}
-        {businesses && businesses.length > 0 && (
-          <section className="container-wide py-16 border-t border-border/30">
-            <div className="text-center mb-12">
-              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Local Providers</p>
-              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                Top {tradeInfo.name}s in {cityName}
-              </h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                We've partnered with the best local {tradeInfo.name.toLowerCase()}s in {cityName}.
-                All are verified, insured, and ready to help 24/7.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {businesses.map((business, index) => (
-                <BusinessCard key={business.id} business={business} rank={index + 1} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* FAQs */}
-        <section className="container-wide">
-          <FAQSection faqs={faqs} trade={tradeInfo.name} city={cityName} />
-        </section>
-
-        {/* Trust Badges */}
         <section className="container-wide py-16">
-          <div className="text-center mb-10">
-            <p className="text-gold uppercase tracking-luxury text-sm mb-4">Why Us</p>
-            <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
-              Why Choose Our Emergency {tradeInfo.name} Service?
-            </h2>
-          </div>
-          <TrustBadges />
+          <ReviewsSection
+            reviews={mockReviews}
+            stats={reviewStats}
+            businessName={`${tradeInfo.name} in ${cityName}`}
+          />
         </section>
 
-        {/* Final CTA */}
         <section className="container-wide py-16">
-          <div className="relative text-center bg-card rounded-lg border border-gold/30 p-10 md:p-16 overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-
-            <div className="relative z-10">
-              <p className="text-gold uppercase tracking-luxury text-sm mb-6">Get Help Now</p>
-              <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-4">
-                Call Now to Speak to an Emergency {tradeInfo.name} in {cityName}
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                Our lines are open 24 hours a day, 7 days a week. One quick call connects you with a local, verified professional.
-              </p>
-              <Button variant="hero" size="xl" asChild>
-                <a href="tel:08001234567" className="flex items-center gap-3">
-                  <Phone className="w-5 h-5" />
-                  0800 123 4567
-                </a>
-              </Button>
-            </div>
-          </div>
+          <FAQSection
+            faqs={faqs}
+            trade={tradeInfo.name}
+            city={cityName}
+          />
         </section>
+
+        <section className="container-wide py-12">
+          <IframeMap city={cityName} />
+        </section>
+
       </main>
 
       <Footer />
+      <WriteReviewModal
+        businessName={`${tradeInfo.name} in ${cityName}`}
+        businessId={`generic-${cityName}-${tradeInfo.slug}`}
+      />
     </>
   );
 }
