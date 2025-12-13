@@ -3,6 +3,7 @@ import { Phone, Clock, Star, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fetchBusinesses } from "@/lib/businessService";
 import type { Business } from "@/lib/businesses";
+import { Link } from "react-router-dom";
 
 interface CTABannerProps {
   trade: string;
@@ -117,10 +118,10 @@ export function CTABanner({ trade, city }: CTABannerProps) {
               Call: {spotlightBusiness.phone}
             </a>
           ) : (
-            <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
+            <Link to="/contact" className="flex items-center gap-3">
               <Phone className="w-5 h-5" />
-              Get Help Now
-            </a>
+              Contact Us
+            </Link>
           )}
         </Button>
       </div>

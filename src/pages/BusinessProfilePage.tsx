@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { IframeMap } from "@/components/IframeMap";
+import { BusinessContactForm } from "@/components/BusinessContactForm";
 
 import { db } from "@/lib/db";
 
@@ -432,6 +433,15 @@ export default function BusinessProfilePage() {
                                         />
                                     </div>
                                 </div>
+
+                                {/* Contact This Business Form - Premium Only */}
+                                {(business.tier === 'paid' || business.is_premium) && (
+                                    <BusinessContactForm
+                                        businessId={business.id}
+                                        businessName={business.name}
+                                        ownerUserId={business.owner_user_id}
+                                    />
+                                )}
 
                                 {/* Map View - Only for Premium/Paid Businesses */}
                                 {(business.tier === 'paid' || business.is_premium) ? (

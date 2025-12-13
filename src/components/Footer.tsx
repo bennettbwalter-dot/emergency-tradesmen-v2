@@ -59,13 +59,13 @@ export function Footer() {
               {/* Phone number removed as per cleanup request */}
 
               <div className="pt-4 border-t border-border/30">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Email Support</p>
-                <a
-                  href="mailto:emergencytradesmen@outlook.com"
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Contact Us</p>
+                <Link
+                  to="/contact"
                   className="text-sm text-gold hover:text-gold-light transition-colors duration-300"
                 >
-                  emergencytradesmen@outlook.com
-                </a>
+                  Send us a message →
+                </Link>
               </div>
             </div>
 

@@ -25,12 +25,12 @@ interface BusinessData {
     photos: string[];
     premium_description: string | null;
     services_offered: string[];
-    coverage_areas: string[];
     whatsapp_number: string | null;
     selected_locations: string[];
     plan_type: string;
     website: string | null;
     hidden_reviews: string[];
+    contact_name: string | null;
 }
 
 const SERVICE_OPTIONS = [
@@ -60,13 +60,14 @@ export default function PremiumProfileEditor() {
     const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
     const [description, setDescription] = useState("");
     const [selectedServices, setSelectedServices] = useState<string[]>([]);
-    const [coverageAreas, setCoverageAreas] = useState("");
     const [whatsappNumber, setWhatsappNumber] = useState("");
     const [selectedTrade, setSelectedTrade] = useState("");
     const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
     const [planType, setPlanType] = useState("basic");
     const [website, setWebsite] = useState("");
     const [hiddenReviews, setHiddenReviews] = useState<string[]>([]);
+    const [companyName, setCompanyName] = useState("");
+    const [contactName, setContactName] = useState("");
 
     // Calculate location limit based on plan and developer status
     const locationLimit = getLocationLimit(planType, user?.email);
@@ -156,12 +157,12 @@ export default function PremiumProfileEditor() {
                 photos: data.photos || [],
                 premium_description: data.premium_description || null,
                 services_offered: data.services_offered || [],
-                coverage_areas: data.coverage_areas || [],
                 whatsapp_number: data.whatsapp_number || null,
                 selected_locations: data.selected_locations || [],
                 plan_type: data.plan_type || 'basic',
                 website: data.website || null,
                 hidden_reviews: data.hidden_reviews || [],
+                contact_name: data.contact_name || null,
             };
 
             setBusiness(businessData);
@@ -169,13 +170,14 @@ export default function PremiumProfileEditor() {
             setPhotoPreviews(businessData.photos);
             setDescription(businessData.premium_description || "");
             setSelectedServices(businessData.services_offered);
-            setCoverageAreas(businessData.coverage_areas.join(", "));
             setWhatsappNumber(businessData.whatsapp_number || "");
             setSelectedTrade(businessData.trade);
             setSelectedLocations(businessData.selected_locations);
             setPlanType(businessData.plan_type);
             setWebsite(businessData.website || "");
             setHiddenReviews(businessData.hidden_reviews);
+            setCompanyName(businessData.name || "");
+            setContactName(businessData.contact_name || "");
             setLoading(false);
         };
 
@@ -295,13 +297,14 @@ export default function PremiumProfileEditor() {
             const { error } = await supabase
                 .from('businesses')
                 .update({
+                    name: companyName,
+                    contact_name: contactName || null,
                     trade: selectedTrade,
                     selected_locations: selectedLocations,
                     logo_url: finalLogoUrl,
                     photos: allPhotoUrls,
                     premium_description: description,
                     services_offered: selectedServices,
-                    coverage_areas: coverageAreas.split(',').map(a => a.trim()).filter(Boolean),
                     whatsapp_number: whatsappNumber || null,
                     website: website || null,
                     hidden_reviews: hiddenReviews,
@@ -379,6 +382,42 @@ export default function PremiumProfileEditor() {
                     </div>
 
                     <div className="grid gap-8">
+                        {/* Company Name */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <Building2 className="w-5 h-5 text-gold" /> Company Name
+                                <Badge variant="destructive" className="ml-2 text-xs">Required</Badge>
+                            </h2>
+                            <Input
+                                value={companyName}
+                                onChange={(e) => setCompanyName(e.target.value)}
+                                placeholder="e.g., Smith's Emergency Plumbing"
+                                className="max-w-md"
+                            />
+                            <p className="text-sm text-muted-foreground mt-2">
+                                This is how your business will appear on listings.
+                            </p>
+                        </div>
+
+                        {/* Contact Person Name */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                Contact Person Name
+                            </h2>
+                            <Input
+                                value={contactName}
+                                onChange={(e) => setContactName(e.target.value)}
+                                placeholder="e.g., John Smith"
+                                className="max-w-md"
+                            />
+                            <p className="text-sm text-muted-foreground mt-2">
+                                The name of the main contact for this business (optional, for internal use).
+                            </p>
+                        </div>
+
                         {/* Trade Selection - Required */}
                         <div className="bg-card border border-border rounded-xl p-6">
                             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -548,17 +587,6 @@ export default function PremiumProfileEditor() {
                                     </Badge>
                                 ))}
                             </div>
-                        </div>
-
-                        {/* Coverage Areas */}
-                        <div className="bg-card border border-border rounded-xl p-6">
-                            <h2 className="text-xl font-semibold mb-4">Coverage Areas</h2>
-                            <Input
-                                value={coverageAreas}
-                                onChange={(e) => setCoverageAreas(e.target.value)}
-                                placeholder="e.g., London, Manchester, Birmingham (comma separated)"
-                            />
-                            <p className="text-sm text-muted-foreground mt-2">Enter the cities/areas you serve, separated by commas</p>
                         </div>
 
                         {/* WhatsApp Number */}

@@ -290,10 +290,10 @@ const Index = () => {
                   }
                 />
                 <Button variant="outline" size="xl" asChild>
-                  <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
+                  <Link to="/contact" className="flex items-center gap-3">
                     <Phone className="w-5 h-5" />
-                    Email Us
-                  </a>
+                    Contact Us
+                  </Link>
                 </Button>
               </div>
             </div>

@@ -35,9 +35,9 @@ export function Header() {
 
           <div className="flex items-center gap-4">
             <Button variant="default" size="sm" asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
-              <a href="mailto:emergencytradesmen@outlook.com">
-                Get Help Now
-              </a>
+              <Link to="/contact">
+                Contact
+              </Link>
             </Button>
             <UserMenu />
             <ModeToggle />

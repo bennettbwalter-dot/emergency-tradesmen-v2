@@ -182,10 +182,10 @@ export default function TradeCityPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-2">
                 <Button variant="hero" asChild>
-                  <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
+                  <Link to="/contact" className="flex items-center gap-3">
                     <Phone className="w-5 h-5" />
-                    Get Help Now
-                  </a>
+                    Contact Us
+                  </Link>
                 </Button>
                 <div className="flex items-center gap-3 text-muted-foreground px-6 py-3 border border-border/50 rounded-sm">
                   <Clock className="w-5 h-5 text-gold" />

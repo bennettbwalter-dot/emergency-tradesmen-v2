@@ -22,6 +22,7 @@ import PaymentCancelPage from "./pages/PaymentCancelPage";
 import AuthPage from "./pages/AuthPage";
 import PremiumProfileEditor from "./pages/PremiumProfileEditor";
 import ClaimBusinessPage from "./pages/ClaimBusinessPage";
+import ContactPage from "./pages/ContactPage";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import BusinessesPage from "./pages/admin/Businesses";
@@ -70,6 +71,7 @@ const App = () => (
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/payment/success" element={<PaymentSuccessPage />} />
                     <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
 
                     {/* Admin Routes */}
                     <Route path="/admin" element={<AdminLayout />}>
