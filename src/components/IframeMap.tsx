@@ -3,10 +3,12 @@ import mapConfig from "@/config/maps.json";
 
 interface IframeMapProps {
     city: string;
+    businessName?: string;
+    address?: string;
     className?: string;
 }
 
-export function IframeMap({ city, className = "w-full h-full min-h-[300px]" }: IframeMapProps) {
+export function IframeMap({ city, businessName, address, className = "w-full h-full min-h-[300px]" }: IframeMapProps) {
     const { user } = useAuth();
 
     // 1. Check for user-specific map config if user is logged in
@@ -16,8 +18,15 @@ export function IframeMap({ city, className = "w-full h-full min-h-[300px]" }: I
     const cityMapUrl = (mapConfig.cities as Record<string, string>)[city];
 
     // 3. Fallback to dynamic search embed
+    // If business details are present, search for the specific business to show its Google listing (and reviews)
+    let query = city + " UK";
+    if (businessName) {
+        // Prefer "Name, Address" > "Name, City" > "City"
+        query = address ? `${businessName}, ${address}` : `${businessName}, ${city}, UK`;
+    }
+
     // Note: Using the basic embed format which doesn't require an API key for search queries
-    const dynamicUrl = `https://maps.google.com/maps?q=${encodeURIComponent(city + " UK")}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+    const dynamicUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
 
     const mapUrl = userMapUrl || cityMapUrl || dynamicUrl;
 

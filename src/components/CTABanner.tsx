@@ -111,10 +111,17 @@ export function CTABanner({ trade, city }: CTABannerProps) {
         </div>
 
         <Button variant="hero" size="xl" asChild className="shrink-0">
-          <a href="tel:08001234567" className="flex items-center gap-3">
-            <Phone className="w-5 h-5" />
-            Call: {spotlightBusiness?.phone || "0800 123 4567"}
-          </a>
+          {spotlightBusiness?.phone ? (
+            <a href={`tel:${spotlightBusiness.phone}`} className="flex items-center gap-3">
+              <Phone className="w-5 h-5" />
+              Call: {spotlightBusiness.phone}
+            </a>
+          ) : (
+            <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
+              <Phone className="w-5 h-5" />
+              Get Help Now
+            </a>
+          )}
         </Button>
       </div>
     </section>

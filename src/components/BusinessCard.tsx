@@ -105,6 +105,15 @@ export function BusinessCard({ business, rank, tradeName = "Tradesperson", cityN
     };
 
     const isAvailable = isBusinessCurrentlyOpen(business.hours, business.isOpen24Hours);
+
+    // Check real-time availability (Live Ping)
+    const lastPing = business.last_available_ping ? new Date(business.last_available_ping) : null;
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    const isLive = lastPing && lastPing > oneHourAgo;
+
+    const showAvailable = isLive || isAvailable; // Real-time ping overrides hours? Or just adds to it. 
+    // Let's say if isLive is true, they are DEFINITELY available.
+
     const isPaid = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
 
     return (
@@ -176,13 +185,13 @@ export function BusinessCard({ business, rank, tradeName = "Tradesperson", cityN
                     <span className="text-sm text-muted-foreground">
                         ({business.reviewCount} {business.reviewCount === 1 ? 'review' : 'reviews'})
                     </span>
-                    {isAvailable ? (
+                    {showAvailable ? (
                         <span className="ml-auto inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium uppercase tracking-wider bg-green-500/10 text-green-500 rounded-full border border-green-500/30">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 ${isLive ? 'duration-75' : ''}`}></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            Available Now
+                            {isLive ? "Live Now" : "Available Now"}
                         </span>
                     ) : (
                         <span className="ml-auto px-3 py-1 text-xs font-medium uppercase tracking-wider bg-red-500/10 text-red-500 rounded-full border border-red-500/30">

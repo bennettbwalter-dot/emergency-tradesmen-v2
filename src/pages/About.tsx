@@ -37,9 +37,9 @@ export default function About() {
                                 </p>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>
-                                        <a href="tel:08001234567" className="flex items-center gap-2">
+                                        <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-2">
                                             <Phone className="w-5 h-5" />
-                                            Call 0800 123 4567
+                                            Get Help Now
                                         </a>
                                     </Button>
                                 </div>
@@ -168,7 +168,7 @@ export default function About() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button variant="luxury" size="xl" asChild>
-                                <a href="tel:08001234567" className="min-w-[200px]">Call Now</a>
+                                <a href="mailto:emergencytradesmen@outlook.com" className="min-w-[200px]">Get Help Now</a>
                             </Button>
                             <Button variant="outline" size="xl" className="bg-transparent border-white/20 text-white hover:bg-white/10" asChild>
                                 <a href="/locations">Find a Tradesperson</a>

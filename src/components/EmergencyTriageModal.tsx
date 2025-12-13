@@ -81,6 +81,9 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
     const [selectedUrgency, setSelectedUrgency] = useState<UrgencyLevel | "">("");
     const [postcode, setPostcode] = useState("");
 
+    // Geolocation hook
+    const { getLocation, loading: geoLoading } = useGeolocation();
+
     const currentTrade = TRADE_OPTIONS.find((t) => t.id === selectedTrade);
 
     const steps: Step[] = ["trade", "problem", "urgency", "location", "results"];
@@ -141,7 +144,7 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
         setIsOpen(false);
         // Navigate to the trade/city page
         const citySlug = postcode.split(" ")[0].toLowerCase() || "london";
-        navigate(`/emergency-${selectedTrade}/${citySlug}`);
+        navigate(`/${selectedTrade}/${citySlug}`);
     };
 
     // Get triage results
@@ -344,9 +347,9 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
                             {/* Action buttons */}
                             <div className="flex flex-col gap-3">
                                 <Button variant="hero" size="lg" asChild>
-                                    <a href="tel:08001234567">
+                                    <a href="mailto:emergencytradesmen@outlook.com">
                                         <Phone className="w-4 h-4 mr-2" />
-                                        Call Now: 0800 123 4567
+                                        Email Us
                                     </a>
                                 </Button>
                                 <Button variant="outline" onClick={handleViewBusinesses}>

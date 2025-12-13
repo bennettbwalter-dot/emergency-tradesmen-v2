@@ -5,21 +5,32 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
-import { Upload, X, Save, Crown, Check, Image as ImageIcon, Building2 } from "lucide-react";
+import { trades, cities } from "@/lib/trades";
+import { getLocationLimit, isDeveloper } from "@/lib/subscriptionService";
+import { Switch } from "@/components/ui/switch";
+import { Upload, X, Save, Crown, Check, Image as ImageIcon, Building2, MapPin, Briefcase, Globe, Star, EyeOff } from "lucide-react";
 
 interface BusinessData {
     id: string;
     name: string;
+    trade: string;
     logo_url: string | null;
     photos: string[];
     premium_description: string | null;
     services_offered: string[];
     coverage_areas: string[];
     whatsapp_number: string | null;
+    selected_locations: string[];
+    plan_type: string;
+    website: string | null;
+    hidden_reviews: string[];
 }
 
 const SERVICE_OPTIONS = [
@@ -51,6 +62,15 @@ export default function PremiumProfileEditor() {
     const [selectedServices, setSelectedServices] = useState<string[]>([]);
     const [coverageAreas, setCoverageAreas] = useState("");
     const [whatsappNumber, setWhatsappNumber] = useState("");
+    const [selectedTrade, setSelectedTrade] = useState("");
+    const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+    const [planType, setPlanType] = useState("basic");
+    const [website, setWebsite] = useState("");
+    const [hiddenReviews, setHiddenReviews] = useState<string[]>([]);
+
+    // Calculate location limit based on plan and developer status
+    const locationLimit = getLocationLimit(planType, user?.email);
+    const isDevUser = isDeveloper(user?.email);
 
     // Redirect if not authenticated
     useEffect(() => {
@@ -64,25 +84,98 @@ export default function PremiumProfileEditor() {
         const loadBusiness = async () => {
             if (!user) return;
 
-            const { data, error } = await supabase
+            let { data, error } = await supabase
                 .from('businesses')
-                .select('id, name, logo_url, photos, premium_description, services_offered, coverage_areas, whatsapp_number')
-                .eq('owner_user_id', user.id)
+                .select('id, name, trade, logo_url, photos, premium_description, services_offered, coverage_areas, whatsapp_number, selected_locations, plan_type, website, hidden_reviews')
+                .eq('owner_id', user.id) // Try owner_id first
                 .single();
 
-            if (error) {
+            if (!data) {
+                // Try alternate column if schema changed
+                const { data: altData } = await supabase
+                    .from('businesses')
+                    .select('id, name, trade, logo_url, photos, premium_description, services_offered, coverage_areas, whatsapp_number, selected_locations, plan_type, website, hidden_reviews')
+                    .eq('owner_user_id', user.id)
+                    .single();
+                data = altData;
+            }
+
+            // Developer Auto-Create Logic
+            const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
+            if (!data && user.email && devEmails.includes(user.email.toLowerCase())) {
+                console.log("Developer account missing business. Auto-creating...");
+                const businessId = `dev-test-${Date.now()}`;
+                const { data: newBusiness, error: createError } = await supabase
+                    .from('businesses')
+                    .insert({
+                        id: businessId,
+                        slug: `dev-test-business-${Date.now()}`,
+                        owner_user_id: user.id,
+                        name: "Developer Test Business",
+                        trade: "electrician",
+                        city: "London",
+                        email: user.email,
+                        phone: user.phone || "07700900000",
+                        is_premium: true,
+                        tier: 'paid',
+                        verified: true,
+                        hours: '24/7 Emergency Service',
+                        is_open_24_hours: true
+                    })
+                    .select()
+                    .single();
+
+                if (newBusiness) {
+                    data = newBusiness;
+                    toast({
+                        title: "Test Business Created",
+                        description: "A dummy business profile has been created for testing.",
+                    });
+                } else if (createError) {
+                    console.error("Failed to auto-create business:", createError);
+                    toast({
+                        title: "Auto-create failed",
+                        description: createError.message || "Could not create test business",
+                        variant: "destructive"
+                    });
+                }
+            }
+
+            if (!data) {
                 // No business found - user needs to contact admin
                 setLoading(false);
                 return;
             }
 
-            setBusiness(data);
-            setLogoPreview(data.logo_url);
-            setPhotoPreviews(data.photos || []);
-            setDescription(data.premium_description || "");
-            setSelectedServices(data.services_offered || []);
-            setCoverageAreas((data.coverage_areas || []).join(", "));
-            setWhatsappNumber(data.whatsapp_number || "");
+            // Ensure data has all required fields
+            const businessData: BusinessData = {
+                id: data.id,
+                name: data.name,
+                trade: data.trade || '',
+                logo_url: data.logo_url || null,
+                photos: data.photos || [],
+                premium_description: data.premium_description || null,
+                services_offered: data.services_offered || [],
+                coverage_areas: data.coverage_areas || [],
+                whatsapp_number: data.whatsapp_number || null,
+                selected_locations: data.selected_locations || [],
+                plan_type: data.plan_type || 'basic',
+                website: data.website || null,
+                hidden_reviews: data.hidden_reviews || [],
+            };
+
+            setBusiness(businessData);
+            setLogoPreview(businessData.logo_url);
+            setPhotoPreviews(businessData.photos);
+            setDescription(businessData.premium_description || "");
+            setSelectedServices(businessData.services_offered);
+            setCoverageAreas(businessData.coverage_areas.join(", "));
+            setWhatsappNumber(businessData.whatsapp_number || "");
+            setSelectedTrade(businessData.trade);
+            setSelectedLocations(businessData.selected_locations);
+            setPlanType(businessData.plan_type);
+            setWebsite(businessData.website || "");
+            setHiddenReviews(businessData.hidden_reviews);
             setLoading(false);
         };
 
@@ -127,6 +220,36 @@ export default function PremiumProfileEditor() {
     const handleSave = async () => {
         if (!business || !user) return;
 
+        // Validation: Trade is required
+        if (!selectedTrade) {
+            toast({
+                title: "Trade required",
+                description: "Please select your trade before saving.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        // Validation: At least one location required
+        if (selectedLocations.length === 0) {
+            toast({
+                title: "Location required",
+                description: "Please select at least one service location.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        // Validation: Location limit (unless developer)
+        if (!isDevUser && selectedLocations.length > locationLimit) {
+            toast({
+                title: "Location limit exceeded",
+                description: `Your plan allows ${locationLimit} location(s). Please remove some or upgrade.`,
+                variant: "destructive"
+            });
+            return;
+        }
+
         setSaving(true);
 
         try {
@@ -168,16 +291,20 @@ export default function PremiumProfileEditor() {
             const existingUrls = photoPreviews.filter(url => url.startsWith('http'));
             const allPhotoUrls = [...existingUrls, ...finalPhotoUrls];
 
-            // Update business record
+            // Update business record with all fields including trade and locations
             const { error } = await supabase
                 .from('businesses')
                 .update({
+                    trade: selectedTrade,
+                    selected_locations: selectedLocations,
                     logo_url: finalLogoUrl,
                     photos: allPhotoUrls,
                     premium_description: description,
                     services_offered: selectedServices,
                     coverage_areas: coverageAreas.split(',').map(a => a.trim()).filter(Boolean),
                     whatsapp_number: whatsappNumber || null,
+                    website: website || null,
+                    hidden_reviews: hiddenReviews,
                     is_premium: true,
                     tier: 'paid'
                 })
@@ -252,6 +379,82 @@ export default function PremiumProfileEditor() {
                     </div>
 
                     <div className="grid gap-8">
+                        {/* Trade Selection - Required */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <Briefcase className="w-5 h-5 text-gold" /> Your Trade
+                                <Badge variant="destructive" className="ml-2 text-xs">Required</Badge>
+                            </h2>
+                            <Select value={selectedTrade} onValueChange={setSelectedTrade}>
+                                <SelectTrigger className="w-full md:w-1/2">
+                                    <SelectValue placeholder="Select your trade..." />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {trades.map((trade) => (
+                                        <SelectItem key={trade.slug} value={trade.slug}>
+                                            {trade.icon} {trade.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            <p className="text-sm text-muted-foreground mt-2">
+                                This determines which trade category your listing appears in.
+                            </p>
+                        </div>
+
+                        {/* Location Selection */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <MapPin className="w-5 h-5 text-gold" /> Service Locations
+                                <Badge variant="outline" className="ml-2 text-xs">
+                                    {selectedLocations.length}/{isDevUser ? '∞' : locationLimit}
+                                </Badge>
+                                {isDevUser && <Badge className="bg-purple-500 text-xs">Dev Override</Badge>}
+                            </h2>
+                            <div className="flex flex-wrap gap-2 mb-4">
+                                {selectedLocations.map((loc) => (
+                                    <Badge key={loc} variant="secondary" className="px-3 py-1">
+                                        {loc}
+                                        <button
+                                            onClick={() => setSelectedLocations(prev => prev.filter(l => l !== loc))}
+                                            className="ml-2 hover:text-red-500"
+                                        >
+                                            <X className="w-3 h-3" />
+                                        </button>
+                                    </Badge>
+                                ))}
+                            </div>
+                            {(selectedLocations.length < locationLimit || isDevUser) && (
+                                <Select
+                                    value=""
+                                    onValueChange={(city) => {
+                                        if (!selectedLocations.includes(city)) {
+                                            setSelectedLocations(prev => [...prev, city]);
+                                        }
+                                    }}
+                                >
+                                    <SelectTrigger className="w-full md:w-1/2">
+                                        <SelectValue placeholder="Add a location..." />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {cities.filter(c => !selectedLocations.includes(c)).map((city) => (
+                                            <SelectItem key={city} value={city}>
+                                                {city}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            )}
+                            <p className="text-sm text-muted-foreground mt-2">
+                                {isDevUser
+                                    ? "Developer mode: Unlimited locations"
+                                    : planType === 'pro' || planType === 'enterprise'
+                                        ? "Pro plan: Up to 3 locations (£99/year)"
+                                        : "Basic plan: 1 location (£29/month). Upgrade for more!"
+                                }
+                            </p>
+                        </div>
+
                         {/* Logo Upload */}
                         <div className="bg-card border border-border rounded-xl p-6">
                             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -375,6 +578,45 @@ export default function PremiumProfileEditor() {
                                 Customers will see a WhatsApp button on your listing to message you directly.
                                 Enter your number in international format (e.g., 447123456789 for UK).
                             </p>
+                        </div>
+
+                        {/* Website Link */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <Globe className="w-5 h-5 text-blue-500" /> Website Link
+                                <Badge className="bg-gold text-xs">Premium</Badge>
+                            </h2>
+                            <Input
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                                placeholder="https://www.yourwebsite.com"
+                                type="url"
+                            />
+                            <p className="text-sm text-muted-foreground mt-2">
+                                Add your website URL to appear on your listing. Premium feature only.
+                            </p>
+                        </div>
+
+                        {/* Review Visibility */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <Star className="w-5 h-5 text-yellow-500" /> Review Visibility
+                                <Badge className="bg-gold text-xs">Premium</Badge>
+                            </h2>
+                            <div className="space-y-4">
+                                <p className="text-muted-foreground">
+                                    As a premium member, you can hide individual reviews from your public listing.
+                                    Once you receive reviews, they will appear here with toggles to show/hide each one.
+                                </p>
+                                {hiddenReviews.length > 0 ? (
+                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                        <EyeOff className="w-4 h-4" />
+                                        <span>{hiddenReviews.length} review(s) currently hidden</span>
+                                    </div>
+                                ) : (
+                                    <p className="text-sm text-green-600">All reviews are visible on your listing.</p>
+                                )}
+                            </div>
                         </div>
 
                         {/* Save Button */}

@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === "development" && componentTagger(),
-    VitePWA({
+    // mode === "development" && componentTagger(),
+    /* VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'placeholder.svg'],
       manifest: {
@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => ({
           }
         ]
       }
-    })
+    }) */
   ].filter(Boolean),
   resolve: {
     alias: {

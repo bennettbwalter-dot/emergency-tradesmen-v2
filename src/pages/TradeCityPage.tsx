@@ -19,7 +19,7 @@ import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import { IframeMap } from "@/components/IframeMap";
+import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import type { Business } from "@/lib/businesses";
 
@@ -120,7 +120,7 @@ export default function TradeCityPage() {
       name: cityName,
     },
     openingHours: "Mo-Su 00:00-23:59",
-    telephone: "0800 123 4567",
+    email: "emergencytradesmen@outlook.com",
   };
 
 
@@ -182,9 +182,9 @@ export default function TradeCityPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-2">
                 <Button variant="hero" asChild>
-                  <a href="tel:08001234567" className="flex items-center gap-3">
+                  <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
                     <Phone className="w-5 h-5" />
-                    Call Now: 0800 123 4567
+                    Get Help Now
                   </a>
                 </Button>
                 <div className="flex items-center gap-3 text-muted-foreground px-6 py-3 border border-border/50 rounded-sm">
@@ -328,9 +328,7 @@ export default function TradeCityPage() {
           />
         </section>
 
-        <section className="container-wide py-12">
-          <IframeMap city={cityName} />
-        </section>
+
 
       </main>
 

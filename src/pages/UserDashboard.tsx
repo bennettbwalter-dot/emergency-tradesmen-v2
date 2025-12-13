@@ -16,11 +16,74 @@ import { getUserBookings, cancelBooking, formatBookingDate, formatTimeSlot, getU
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChatSystem } from "@/components/ChatSystem";
+import { supabase } from "@/lib/supabase";
 
 export default function UserDashboard() {
     const { user, isAuthenticated, isLoading, updateUser } = useAuth();
     const [searchParams] = useSearchParams();
     const defaultTab = searchParams.get("tab") || "profile";
+    const { toast } = useToast();
+
+    // Availability & Premium State
+    const [isAvailable, setIsAvailable] = useState(false);
+    const [businessProfile, setBusinessProfile] = useState<any>(null);
+    const [isPremium, setIsPremium] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            checkAvailability();
+            checkPremiumStatus();
+        }
+    }, [user]);
+
+    async function checkPremiumStatus() {
+        // Import dynamically to avoid circular dependencies if any
+        const { hasAccess } = await import("@/lib/subscriptionService");
+        const premium = await hasAccess('professional');
+        console.log("Checking premium status for user:", user.email, "Is Premium:", premium);
+        setIsPremium(premium);
+    }
+
+    async function checkAvailability() {
+        const { data } = await supabase
+            .from('businesses')
+            .select('*')
+            .eq('owner_id', user?.id)
+            .single();
+
+        if (data) {
+            setBusinessProfile(data);
+            const lastPing = data.last_available_ping ? new Date(data.last_available_ping) : null;
+            // Available if pinged in last 60 minutes
+            const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+            setIsAvailable(lastPing && lastPing > oneHourAgo);
+        }
+    }
+
+    async function toggleAvailability() {
+        if (!businessProfile) return;
+
+        const newStatus = !isAvailable;
+        const pingTime = newStatus ? new Date().toISOString() : null;
+
+        setIsAvailable(newStatus); // Optimistic update
+
+        const { error } = await supabase
+            .from('businesses')
+            .update({ last_available_ping: pingTime })
+            .eq('id', businessProfile.id);
+
+        if (error) {
+            console.error('Error updating availability', error);
+            setIsAvailable(!newStatus); // Revert
+            toast({ title: "Error", description: "Could not update status", variant: "destructive" });
+        } else {
+            toast({
+                title: newStatus ? "You are LIVE!" : "You are offline",
+                description: newStatus ? "Customers can see you are available now." : "Your availability badge is hidden."
+            });
+        }
+    }
 
     if (isLoading) {
         return (
@@ -50,20 +113,59 @@ export default function UserDashboard() {
                                             {user.name.split(" ").map(n => n[0]).join("").substring(0, 2)}
                                         </AvatarFallback>
                                     </Avatar>
+                                    {/* Availability Status Dot on Avatar */}
+                                    {isAvailable && (
+                                        <span className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full animate-pulse" title="You are Online" />
+                                    )}
                                 </div>
                                 <CardTitle>{user.name}</CardTitle>
                                 <CardDescription>{user.email}</CardDescription>
-                                {/* Upgrade Button for businesses */}
+
+                                {/* Availability Toggle Button */}
+                                {businessProfile && (
+                                    <div className="mt-4 p-3 bg-secondary/30 rounded-lg border border-border">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <span className="text-sm font-medium">Availability</span>
+                                            <div
+                                                className={`w-10 h-5 rounded-full p-0.5 cursor-pointer transition-colors duration-300 ${isAvailable ? 'bg-green-500' : 'bg-slate-300'}`}
+                                                onClick={toggleAvailability}
+                                            >
+                                                <div className={`w-4 h-4 rounded-full bg-white shadow-sm transform transition-transform duration-300 ${isAvailable ? 'translate-x-5' : 'translate-x-0'}`} />
+                                            </div>
+                                        </div>
+                                        <p className="text-xs text-muted-foreground text-left">
+                                            {isAvailable ? "You are visible as 'Reviewing Quotes'" : "Set to 'Offline'"}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Upgrade Button / Premium Controls */}
                                 <div className="mt-4">
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="w-full border-gold text-gold hover:bg-gold hover:text-white"
-                                        onClick={() => window.location.href = '/pricing'}
-                                    >
-                                        <Zap className="w-4 h-4 mr-2" />
-                                        Upgrade Business
-                                    </Button>
+                                    {isPremium ? (
+                                        <div className="space-y-2">
+                                            <Badge className="w-full justify-center py-1 bg-gradient-to-r from-gold to-yellow-500 text-black border-none">
+                                                <Zap className="w-3 h-3 mr-1 fill-current" /> Premium Active
+                                            </Badge>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                className="w-full border-gold text-gold hover:bg-gold hover:text-white"
+                                                onClick={() => window.location.href = '/premium-profile'}
+                                            >
+                                                Edit Premium Profile
+                                            </Button>
+                                        </div>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="w-full border-gold text-gold hover:bg-gold hover:text-white"
+                                            onClick={() => window.location.href = '/pricing'}
+                                        >
+                                            <Zap className="w-4 h-4 mr-2" />
+                                            Upgrade Business
+                                        </Button>
+                                    )}
                                 </div>
                             </CardHeader>
                             <CardContent>

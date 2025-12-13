@@ -39,6 +39,21 @@ export async function getUserSubscription(): Promise<Subscription | null> {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return null;
 
+    // Developer Bypass
+    const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
+    if (user.email && devEmails.includes(user.email.toLowerCase())) {
+        console.log("Bypassing subscription check for developer:", user.email);
+        return {
+            id: 'dev-bypass-id',
+            userId: user.id,
+            plan: 'enterprise',
+            status: 'active',
+            subscriptionExpiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+    }
+
     const { data, error } = await supabase
         .from('subscriptions')
         .select('*')
@@ -105,6 +120,15 @@ export async function upsertSubscription(subscription: Partial<Subscription>): P
 
 // Check if user has a specific plan or higher (with expiry check)
 export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Promise<boolean> {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // Developer Bypass Check
+    const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
+    if (user?.email && devEmails.includes(user.email.toLowerCase())) {
+        console.log("Access granted via developer bypass");
+        return true;
+    }
+
     const subscription = await getUserSubscription();
     if (!subscription) return false;
 
@@ -208,3 +232,38 @@ function mapSubscription(row: any): Subscription {
         updatedAt: row.updated_at,
     };
 }
+
+// Developer emails with bypass permissions
+export const DEV_EMAILS = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
+
+// Check if email is a developer/admin
+export function isDeveloper(email?: string | null): boolean {
+    if (!email) return false;
+    return DEV_EMAILS.includes(email.toLowerCase());
+}
+
+// Get location limit based on plan type
+// basic (£29) = 1 location, pro (£99) = 3 locations, developer = unlimited
+export function getLocationLimit(planType: string, email?: string | null): number {
+    // Developer bypass - unlimited locations
+    if (isDeveloper(email)) return 99;
+
+    // Plan-based limits
+    if (planType === 'pro' || planType === 'enterprise') return 3;
+    return 1; // basic plan
+}
+
+// Get plan type display name
+export function getPlanDisplayName(planType: string): string {
+    switch (planType) {
+        case 'pro':
+        case 'enterprise':
+            return 'Pro (£99/year)';
+        case 'basic':
+        case 'professional':
+            return 'Basic (£29/month)';
+        default:
+            return 'Basic';
+    }
+}
+

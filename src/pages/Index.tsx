@@ -13,6 +13,34 @@ import { motion } from "framer-motion";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 
 const Index = () => {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Emergency Tradesmen UK",
+    url: "https://emergencytrades.co.uk",
+    logo: "https://emergencytrades.co.uk/logo.png",
+    description: "Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "emergencytradesmen@outlook.com",
+      contactType: "customer service",
+      availableLanguage: "English"
+    },
+    sameAs: []
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Emergency Tradesmen UK",
+    url: "https://emergencytrades.co.uk",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://emergencytrades.co.uk/{trade}/{city}",
+      "query-input": "required name=trade name=city"
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -22,6 +50,26 @@ const Index = () => {
           content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK. Fast response, verified professionals."
         />
         <link rel="canonical" href="https://emergencytrades.co.uk" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://emergencytrades.co.uk" />
+        <meta property="og:title" content="Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More" />
+        <meta property="og:description" content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK." />
+        <meta property="og:image" content="https://emergencytrades.co.uk/og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More" />
+        <meta name="twitter:description" content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers." />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(websiteSchema)}
+        </script>
       </Helmet>
 
       <Header />
@@ -242,9 +290,9 @@ const Index = () => {
                   }
                 />
                 <Button variant="outline" size="xl" asChild>
-                  <a href="tel:08001234567" className="flex items-center gap-3">
+                  <a href="mailto:emergencytradesmen@outlook.com" className="flex items-center gap-3">
                     <Phone className="w-5 h-5" />
-                    Call: 0800 123 4567
+                    Email Us
                   </a>
                 </Button>
               </div>

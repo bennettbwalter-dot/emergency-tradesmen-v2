@@ -192,5 +192,40 @@ export const db = {
 
             if (error) throw error;
         }
+    },
+
+    businesses: {
+        /**
+         * Get business claim status
+         */
+        async getClaimStatus(businessId: string) {
+            const { data, error } = await supabase
+                .from('businesses')
+                .select('id, name, claim_status, owner_id, verified')
+                .eq('id', businessId)
+                .maybeSingle(); // Use maybeSingle as it might not exist in DB yet if we only have it in static
+
+            if (error) {
+                console.error("Error fetching business status:", error);
+                return null;
+            }
+            return data;
+        },
+
+        /**
+         * Claim a business
+         */
+        async claim(businessId: string, contactEmail: string, contactPhone: string) {
+            // We use the RPC function we defined in migration 013
+            const { data, error } = await supabase
+                .rpc('claim_business', {
+                    business_id_param: businessId,
+                    contact_email_param: contactEmail,
+                    contact_phone_param: contactPhone
+                });
+
+            if (error) throw error;
+            return data;
+        }
     }
 };

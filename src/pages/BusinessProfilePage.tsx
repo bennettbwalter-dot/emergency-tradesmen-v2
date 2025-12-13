@@ -18,12 +18,16 @@ import {
     Star, MapPin, Phone, Clock, ExternalLink, Shield, CheckCircle,
     Award, ThumbsUp, Calendar, ArrowLeft, Image as ImageIcon
 } from "lucide-react";
+import { InteractiveMap } from "@/components/InteractiveMap";
 import { IframeMap } from "@/components/IframeMap";
+
+import { db } from "@/lib/db";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
     const [photos, setPhotos] = useState<any[]>([]);
     const [photosLoading, setPhotosLoading] = useState(true);
+    const [claimStatus, setClaimStatus] = useState<{ status: string, verified: boolean } | null>(null);
 
     const data = businessId ? getBusinessById(businessId) : null;
 
@@ -33,17 +37,28 @@ export default function BusinessProfilePage() {
 
     const { business, city, trade } = data;
 
-    // Fetch real photos from database
+    // Fetch real photos and claim status from database
     useEffect(() => {
-        async function loadPhotos() {
+        async function loadData() {
             if (businessId) {
                 setPhotosLoading(true);
-                const businessPhotos = await fetchBusinessPhotos(businessId);
+                // Parallel fetch
+                const [businessPhotos, statusData] = await Promise.all([
+                    fetchBusinessPhotos(businessId),
+                    db.businesses.getClaimStatus(businessId)
+                ]);
+
                 setPhotos(businessPhotos);
+                if (statusData) {
+                    setClaimStatus({
+                        status: statusData.claim_status || 'unclaimed',
+                        verified: statusData.verified || false
+                    });
+                }
                 setPhotosLoading(false);
             }
         }
-        loadPhotos();
+        loadData();
     }, [businessId]);
 
     // Use the real featured review if available
@@ -418,13 +433,38 @@ export default function BusinessProfilePage() {
                                     </div>
                                 </div>
 
-                                {/* Map View */}
-                                <div className="bg-card rounded-xl border border-border/50 p-1 overflow-hidden h-64 relative">
-                                    <IframeMap
-                                        city={formattedCity}
-                                        className="w-full h-full rounded-lg"
-                                    />
-                                </div>
+                                {/* Map View - Only for Premium/Paid Businesses */}
+                                {(business.tier === 'paid' || business.is_premium) ? (
+                                    <div className="bg-card rounded-xl border border-border/50 p-1 overflow-hidden h-64 relative">
+                                        <InteractiveMap
+                                            city={formattedCity}
+                                            className="w-full h-full rounded-lg"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="bg-card rounded-xl border border-border/50 p-1 overflow-hidden h-64 relative">
+                                        <IframeMap
+                                            city={formattedCity}
+                                            businessName={business.name}
+                                            address={business.address}
+                                            className="w-full h-full rounded-lg"
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Claim Business Button */}
+                                {(!business.verified && (!claimStatus || (claimStatus.status === 'unclaimed' && !claimStatus.verified))) && (
+                                    <div className="bg-secondary/30 rounded-xl p-4 border border-border/50 text-center">
+                                        <p className="text-sm text-muted-foreground mb-3">
+                                            Is this your business?
+                                        </p>
+                                        <Button asChild variant="outline" className="w-full border-gold/30 hover:bg-gold/10 hover:text-gold">
+                                            <Link to={`/business/claim/${business.id}`}>
+                                                Claim This Business
+                                            </Link>
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
