@@ -7,7 +7,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('Supabase credentials not found. Auth will not work.');
 }
 
+// Fallback to avoid crash if env vars are missing (prevents blank screen)
 export const supabase = createClient(
-    supabaseUrl || '',
-    supabaseAnonKey || ''
+    supabaseUrl || 'https://placeholder.supabase.co',
+    supabaseAnonKey || 'placeholder-key'
 );
