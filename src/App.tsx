@@ -119,7 +119,7 @@ const App = () => {
                     <BottomNav />
                     <LiveChat />
                     <FloatingBackButton />
-                    <CustomCursor />
+                    {/* <CustomCursor /> */}
                   </BrowserRouter>
                 </TooltipProvider>
               </ComparisonProvider>

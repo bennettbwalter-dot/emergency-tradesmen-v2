@@ -56,9 +56,10 @@ export default function TradeCityPage() {
 
         // If no real businesses found, fallback to mock data
         if (realBusinesses.length === 0) {
-          console.log(`No real businesses found for ${tradeInfo.slug} in ${cityName}, using mock data`);
+          console.log(`No real businesses found for ${tradeInfo.slug} in ${cityName}, trying fallback`); // Added debug log
           const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
-          setBusinesses(mockBusinesses);
+          console.log(`Fallback returned:`, mockBusinesses); // Added debug log
+          setBusinesses(mockBusinesses || []);
         } else {
           console.log(`Loaded ${realBusinesses.length} real businesses from database`);
           setBusinesses(realBusinesses);
@@ -74,7 +75,7 @@ export default function TradeCityPage() {
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName, pageData]);
+  }, [tradeInfo.slug, cityName]);
 
   // Apply filters and sorting
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
