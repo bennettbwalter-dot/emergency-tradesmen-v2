@@ -221,8 +221,8 @@ function mapSubscription(row: any): Subscription {
     return {
         id: row.id,
         userId: row.user_id,
-        paymentCustomerId: row.payment_customer_id || row.stripe_customer_id,
-        paymentSubscriptionId: row.payment_subscription_id || row.stripe_subscription_id,
+        paymentCustomerId: row.payment_customer_id,
+        paymentSubscriptionId: row.payment_subscription_id,
         plan: row.plan,
         status: row.status,
         subscriptionExpiresAt: row.subscription_expires_at,

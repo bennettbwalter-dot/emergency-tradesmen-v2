@@ -581,7 +581,7 @@ export function BookingModal({
                                     <Label>Preferred Contact Method *</Label>
                                     <RadioGroup
                                         value={formData.preferredContactMethod}
-                                        onValueChange={(value: any) => updateField("preferredContactMethod", value)}
+                                        onValueChange={(value: "phone" | "email" | "either") => updateField("preferredContactMethod", value)}
                                         className="flex gap-4"
                                     >
                                         <label className="flex items-center gap-2 cursor-pointer">

@@ -43,7 +43,7 @@ export default function TermsOfService() {
                         <h2 className="text-xl font-semibold text-slate-800 mb-3">4. Business Accounts & Payments</h2>
                         <p className="text-slate-600">
                             Service Providers subscribing to our "Pro" or "Premium" plans agree to pay the subscription fees indicated
-                            at the time of purchase. Payments are processed via third-party providers including Revolut and Stripe.
+                            at the time of purchase. Payments are processed via third-party providers including Revolut.
                             Subscriptions auto-renew unless canceled prior to the renewal date.
                         </p>
                     </section>

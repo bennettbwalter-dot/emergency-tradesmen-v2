@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
                         </p>
                         <ul className="list-disc pl-5 text-slate-600 space-y-2 mt-2">
                             <li><strong>Google Maps:</strong> For location and mapping services.</li>
-                            <li><strong>Revolut & Stripe:</strong> For secure payment processing.</li>
+                            <li><strong>Revolut:</strong> For secure payment processing.</li>
                             <li><strong>Supabase:</strong> For database hosting and authentication.</li>
                             <li><strong>EmailOctopus:</strong> For email marketing campaigns.</li>
                         </ul>

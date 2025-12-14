@@ -16,7 +16,7 @@ import { MessageButton } from "@/components/MessageButton";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import {
     Star, MapPin, Phone, Clock, ExternalLink, Shield, CheckCircle,
-    Award, ThumbsUp, Calendar, ArrowLeft, Image as ImageIcon
+    Award, ThumbsUp, Calendar, ArrowLeft
 } from "lucide-react";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { IframeMap } from "@/components/IframeMap";

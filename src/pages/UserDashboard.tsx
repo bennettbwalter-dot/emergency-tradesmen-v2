@@ -45,18 +45,19 @@ export default function UserDashboard() {
     }
 
     async function checkAvailability() {
-        const { data } = await supabase
+        const { data: businesses } = await supabase
             .from('businesses')
             .select('*')
-            .eq('owner_id', user?.id)
-            .single();
+            .eq('owner_id', user?.id);
+
+        const data = businesses?.[0];
 
         if (data) {
             setBusinessProfile(data);
             const lastPing = data.last_available_ping ? new Date(data.last_available_ping) : null;
             // Available if pinged in last 60 minutes
             const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-            setIsAvailable(lastPing && lastPing > oneHourAgo);
+            setIsAvailable(!!(lastPing && lastPing > oneHourAgo));
         }
     }
 

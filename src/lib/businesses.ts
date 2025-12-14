@@ -42,6 +42,7 @@ export interface Business {
     city?: string;
     photos?: BusinessPhoto[];
     tier?: 'free' | 'paid';
+    verified?: boolean;
     priority_score?: number;
     // Premium subscriber fields
     logo_url?: string;

@@ -28,22 +28,11 @@ export default function TradeCityPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  if (!tradePath || !city) {
-    return <Navigate to="/" replace />;
-  }
-
   // Extract trade from path like "emergency-plumber" -> "plumber"
-  const trade = tradePath.replace("emergency-", "");
+  const trade = tradePath ? tradePath.replace("emergency-", "") : "";
 
 
-  const pageData = generateTradePageData(trade, city);
-
-  if (!pageData) {
-    return <Navigate to="/" replace />;
-  }
-
-
-
+  const pageData = generateTradePageData(trade, city || "");
 
   const tradeInfo = pageData?.trade || { slug: '', name: 'Tradesperson', icon: '🔧' };
   const cityName = pageData?.city || 'your area';
@@ -57,6 +46,9 @@ export default function TradeCityPage() {
 
   // Fetch real businesses from Supabase
   useEffect(() => {
+    // Only fetch if we have valid data
+    if (!tradeInfo.slug || !cityName || !pageData) return;
+
     async function loadBusinesses() {
       setIsLoading(true);
       try {
@@ -82,11 +74,20 @@ export default function TradeCityPage() {
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName]);
+  }, [tradeInfo.slug, cityName, pageData]);
 
   // Apply filters and sorting
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
+
+  // Early returns must happen AFTER hooks
+  if (!tradePath || !city) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (!pageData) {
+    return <Navigate to="/" replace />;
+  }
 
   // Extract real verified reviews from the listings
   // This aggregates the "featuredReview" from the top businesses in this city
