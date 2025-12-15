@@ -38,6 +38,7 @@ import { LiveChat } from "@/components/LiveChat";
 import { CookieConsent } from "@/components/CookieConsent";
 import { FloatingBackButton } from "@/components/FloatingBackButton";
 import { CustomCursor } from "@/components/CustomCursor";
+import { AuthRedirectHandler } from "@/components/AuthRedirectHandler";
 
 const queryClient = new QueryClient();
 
@@ -84,6 +85,7 @@ const App = () => {
                   <BrowserRouter>
                     <InstallPWA />
                     <CookieConsent />
+                    <AuthRedirectHandler />
                     <Routes>
                       <Route path="/login" element={<AuthPage defaultTab="login" />} />
                       <Route path="/register" element={<AuthPage defaultTab="register" />} />
@@ -119,7 +121,7 @@ const App = () => {
                     <BottomNav />
                     <LiveChat />
                     <FloatingBackButton />
-                    {/* <CustomCursor /> */}
+                    <CustomCursor />
                   </BrowserRouter>
                 </TooltipProvider>
               </ComparisonProvider>
