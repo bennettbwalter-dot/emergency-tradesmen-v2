@@ -425,9 +425,17 @@ const Index = () => {
           <section className="container-wide py-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Image Side */}
-
-
-              {/* Text Side */}
+              <div className="order-2 lg:order-1 relative group">
+                <div className="absolute inset-0 bg-gold/20 blur-2xl rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+                <div className="relative rounded-3xl overflow-hidden border border-gold/20 shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
+                  <img
+                    src="/breakdown-recovery.png"
+                    alt="Emergency Breakdown Recovery at Night"
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </div>              {/* Text Side */}
               <div className="order-1 lg:order-2">
                 <p className="text-gold uppercase tracking-luxury text-sm mb-4">Roadside Assistance</p>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
