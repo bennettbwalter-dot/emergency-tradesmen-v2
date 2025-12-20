@@ -1,5 +1,4 @@
 import { AuthProvider } from "@/contexts/AuthContext";
-import { ComparisonProvider } from "@/contexts/ComparisonContext";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -29,7 +28,6 @@ const TradeCityPage = lazy(() => import("./pages/TradeCityPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const BusinessProfilePage = lazy(() => import("./pages/BusinessProfilePage"));
-const ComparePage = lazy(() => import("./pages/ComparePage"));
 const About = lazy(() => import("./pages/About"));
 const PricingPage = lazy(() => import("./pages/PricingPage"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
@@ -102,63 +100,60 @@ const App = () => {
           <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""} libraries={["places"]}>
             <AuthProvider>
               <ChatbotProvider>
-                <ComparisonProvider>
-                  <TooltipProvider>
-                    <Toaster />
-                    <Sonner />
-                    <ThemeToggle />
-                    <BrowserRouter>
-                      <Suspense fallback={<PageLoader />}>
-                        <AnalyticsTracker />
-                        <InstallPWA />
-                        <CookieConsent />
-                        <AuthRedirectHandler />
-                        <Routes>
-                          <Route path="/login" element={<AuthPage defaultTab="login" />} />
-                          <Route path="/register" element={<AuthPage defaultTab="register" />} />
-                          <Route path="/" element={<Index />} />
-                          <Route path="/user/dashboard" element={<UserDashboard />} />
-                          <Route path="/compare" element={<ComparePage />} />
-                          <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-                          <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
-                          <Route path="/premium-profile" element={<PremiumProfileEditor />} />
-                          <Route path="/about" element={<About />} />
-                          <Route path="/pricing" element={<PricingPage />} />
-                          <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
-                          <Route path="/terms" element={<TermsOfService />} />
-                          <Route path="/privacy" element={<PrivacyPolicy />} />
-                          <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                          <Route path="/payment/cancel" element={<PaymentCancelPage />} />
-                          <Route path="/contact" element={<ContactPage />} />
-                          <Route path="/blog" element={<BlogPage />} />
-                          <Route path="/blog/:slug" element={<BlogPostPage />} />
-                          <Route path="/faq" element={<FAQ />} />
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  <ThemeToggle />
+                  <BrowserRouter>
+                    <Suspense fallback={<PageLoader />}>
+                      <AnalyticsTracker />
+                      <InstallPWA />
+                      <CookieConsent />
+                      <AuthRedirectHandler />
+                      <Routes>
+                        <Route path="/login" element={<AuthPage defaultTab="login" />} />
+                        <Route path="/register" element={<AuthPage defaultTab="register" />} />
+                        <Route path="/" element={<Index />} />
+                        <Route path="/user/dashboard" element={<UserDashboard />} />
+                        <Route path="/business/:businessId" element={<BusinessProfilePage />} />
+                        <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
+                        <Route path="/premium-profile" element={<PremiumProfileEditor />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/pricing" element={<PricingPage />} />
+                        <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
+                        <Route path="/terms" element={<TermsOfService />} />
+                        <Route path="/privacy" element={<PrivacyPolicy />} />
+                        <Route path="/payment/success" element={<PaymentSuccessPage />} />
+                        <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/blog" element={<BlogPage />} />
+                        <Route path="/blog/:slug" element={<BlogPostPage />} />
+                        <Route path="/faq" element={<FAQ />} />
 
-                          <Route path="/admin" element={<AdminLayout />}>
-                            <Route index element={<AdminDashboard />} />
-                            <Route path="businesses" element={<BusinessesPage />} />
+                        <Route path="/admin" element={<AdminLayout />}>
+                          <Route index element={<AdminDashboard />} />
+                          <Route path="businesses" element={<BusinessesPage />} />
 
-                            <Route path="profile-editor" element={<AdminProfileEditor />} />
-                            <Route path="availability" element={<AdminAvailability />} />
+                          <Route path="profile-editor" element={<AdminProfileEditor />} />
+                          <Route path="availability" element={<AdminAvailability />} />
 
-                            <Route path="photos" element={<PhotosPage />} />
-                            <Route path="reviews" element={<ReviewsPage />} />
-                            <Route path="subscriptions" element={<SubscriptionsPage />} />
-                            <Route path="export" element={<DataExportPage />} />
-                          </Route>
+                          <Route path="photos" element={<PhotosPage />} />
+                          <Route path="reviews" element={<ReviewsPage />} />
+                          <Route path="subscriptions" element={<SubscriptionsPage />} />
+                          <Route path="export" element={<DataExportPage />} />
+                        </Route>
 
-                          <Route path="/:tradePath/:city" element={<TradeCityPage />} />
-                          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                          <Route path="*" element={<NotFound />} />
-                        </Routes>
-                        <BottomNav />
-                        <LiveChat />
-                        <FloatingBackButton />
-                        <CustomCursor />
-                      </Suspense>
-                    </BrowserRouter>
-                  </TooltipProvider>
-                </ComparisonProvider>
+                        <Route path="/:tradePath/:city" element={<TradeCityPage />} />
+                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                      <BottomNav />
+                      <LiveChat />
+                      <FloatingBackButton />
+                      <CustomCursor />
+                    </Suspense>
+                  </BrowserRouter>
+                </TooltipProvider>
               </ChatbotProvider>
             </AuthProvider>
           </APIProvider>

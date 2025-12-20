@@ -6,7 +6,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { AuthModal } from "./AuthModal";
 import { Business } from "@/lib/businesses";
-import { useComparison } from "@/contexts/ComparisonContext";
 import { useToast } from "@/components/ui/use-toast";
 import { trackEvent } from "@/lib/analytics";
 
@@ -18,10 +17,7 @@ interface BusinessCardProps {
 export function BusinessCard({ business, rank }: BusinessCardProps) {
   const { isAuthenticated } = useAuth();
   const [liked, setLiked] = useState(false);
-  const { addToComparison, removeFromComparison, isInComparison } = useComparison();
   const { toast } = useToast();
-
-  const inComparison = isInComparison(business.id);
 
   // Trade Icon Logic
   let TradeIcon = Wrench;
@@ -268,22 +264,6 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             </Button>
           )}
 
-          {/* Compare Button */}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (inComparison) removeFromComparison(business.id);
-              else addToComparison(business.id);
-              toast({ title: inComparison ? "Removed from comparison" : "Added to comparison" });
-            }}
-            className={`w-full py-2 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${isPremium
-              ? "text-[#D4AF37] border border-[#D4AF37]/30 rounded-lg hover:bg-[#D4AF37]/10 mt-2"
-              : "text-muted-foreground hover:text-gold border border-border/30 rounded-lg hover:border-gold/30 mt-2"
-              }`}
-          >
-            <TrendingUp className="w-3 h-3" />
-            {inComparison ? 'In Comparison' : 'Compare'}
-          </button>
         </div>
       </div>
     </div>

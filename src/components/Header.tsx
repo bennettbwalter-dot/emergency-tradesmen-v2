@@ -3,8 +3,6 @@ import { Phone, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/UserMenu";
-import { useComparison } from "@/contexts/ComparisonContext";
-import { Badge } from "@/components/ui/badge";
 
 export function Header() {
   return (
@@ -30,10 +28,6 @@ export function Header() {
                 Tradesmen Sign Up
               </Link>
             </Button>
-            <Link to="/compare" className="text-sm font-medium hover:text-gold transition-colors flex items-center gap-1">
-              Compare
-              <ComparisonBadge />
-            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -48,16 +42,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
-}
-
-function ComparisonBadge() {
-  const { items } = useComparison();
-  if (items.length === 0) return null;
-
-  return (
-    <Badge variant="secondary" className="h-5 px-1.5 text-[10px] bg-gold/20 text-gold hover:bg-gold/30 ml-1">
-      {items.length}
-    </Badge>
   );
 }
