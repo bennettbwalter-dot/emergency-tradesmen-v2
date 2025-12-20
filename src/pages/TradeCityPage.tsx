@@ -31,7 +31,6 @@ export default function TradeCityPage() {
   // Extract trade from path like "emergency-plumber" -> "plumber"
   const trade = tradePath ? tradePath.replace("emergency-", "") : "";
 
-
   const pageData = generateTradePageData(trade, city || "");
 
   const tradeInfo = pageData?.trade || { slug: '', name: 'Tradesperson', icon: '🔧' };
@@ -43,6 +42,20 @@ export default function TradeCityPage() {
   const certifications = pageData?.certifications || [];
   const services = pageData?.services || [];
   const faqs = pageData?.faqs || [];
+
+  // Map of trade-specific background images for hero
+  const tradeHeroImages: Record<string, string> = {
+    'plumber': 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop',
+    'electrician': 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop',
+    'locksmith': 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop',
+    'gas-engineer': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop',
+    'drain-specialist': 'https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=2070&auto=format&fit=crop',
+    'glazier': 'https://images.unsplash.com/photo-1621350612918-0fb68bf71e1b?q=80&w=800&auto=format&fit=crop',
+    'breakdown': 'https://images.unsplash.com/photo-1563229283-1419fba55a90?q=80&w=800&auto=format&fit=crop',
+    'default': 'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'
+  };
+
+  const heroImage = tradeHeroImages[trade] || tradeHeroImages.default;
 
   // Fetch real businesses from Supabase
   useEffect(() => {
@@ -56,12 +69,9 @@ export default function TradeCityPage() {
 
         // If no real businesses found, fallback to mock data
         if (realBusinesses.length === 0) {
-          console.log(`No real businesses found for ${tradeInfo.slug} in ${cityName}, trying fallback`); // Added debug log
           const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
-          console.log(`Fallback returned:`, mockBusinesses); // Added debug log
           setBusinesses(mockBusinesses || []);
         } else {
-          console.log(`Loaded ${realBusinesses.length} real businesses from database`);
           setBusinesses(realBusinesses);
         }
       } catch (error) {
@@ -82,29 +92,24 @@ export default function TradeCityPage() {
     useBusinessFilters(businesses);
 
   // Early returns must happen AFTER hooks
-  if (!tradePath || !city) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!pageData) {
+  if (!tradePath || !city || !pageData) {
     return <Navigate to="/" replace />;
   }
 
   // Extract real verified reviews from the listings
-  // This aggregates the "featuredReview" from the top businesses in this city
   const realReviews = businesses
     .filter(b => b.featuredReview && b.rating >= 4.0)
     .slice(0, 8)
-    .map((b, i) => ({
+    .map((b) => ({
       id: `real-review-${b.id}`,
       businessId: b.id,
       userId: `user-${b.id}`,
-      userName: "Verified Customer", // Privacy: We don't have full names in the summary data
+      userName: "Verified Customer",
       userInitials: "VC",
       rating: b.rating,
       title: "Verified Google Review",
       comment: b.featuredReview!,
-      date: new Date().toISOString(), // We don't store review dates in summary, defaulting to recent
+      date: new Date().toISOString(),
       verified: true,
       helpful: Math.floor(Math.random() * 5),
       notHelpful: 0,
@@ -125,8 +130,6 @@ export default function TradeCityPage() {
     email: "emergencytradesmen@outlook.com",
   };
 
-
-
   return (
     <>
       <Helmet>
@@ -146,32 +149,39 @@ export default function TradeCityPage() {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
-          <div className="absolute top-10 right-10 w-72 h-72 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={heroImage}
+              alt={`Emergency ${tradeInfo.name} ${cityName}`}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-primary/80 to-background" />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
 
-          <div className="relative container-wide py-16 md:py-24">
+          <div className="relative container-wide py-16 md:py-24 z-10">
             <div className="max-w-3xl">
-              <nav className="flex items-center gap-2 text-muted-foreground text-sm mb-8">
+              <nav className="flex items-center gap-2 text-white/50 text-sm mb-8">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
-                <span className="text-foreground">Emergency {tradeInfo.name}</span>
+                <span className="text-white">Emergency {tradeInfo.name}</span>
                 <span className="text-gold/50">/</span>
                 <span className="text-gold">{cityName}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-white/5 backdrop-blur-sm mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-black/40 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-white">
-                  {tradeInfo.name}s <span className="text-gold">available now</span> in {cityName}
+                  {tradeInfo.name}s <span className="text-gold font-bold">available now</span> in {cityName}
                 </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
-                <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
+                <span className="block font-display text-4xl md:text-6xl tracking-wide text-white mb-2">
                   Emergency {tradeInfo.name}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
@@ -179,7 +189,7 @@ export default function TradeCityPage() {
                 </span>
               </h1>
 
-              <p className="text-lg text-muted-foreground mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed">
+              <p className="text-lg text-white/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed">
                 Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
@@ -198,9 +208,9 @@ export default function TradeCityPage() {
                   <Phone className="w-5 h-5" />
                   Contact Us
                 </Button>
-                <div className="flex items-center gap-3 text-muted-foreground px-6 py-3 border border-border/50 rounded-sm">
+                <div className="flex items-center gap-3 text-white/70 px-6 py-3 border border-white/20 rounded-sm bg-white/5 backdrop-blur-sm">
                   <Clock className="w-5 h-5 text-gold" />
-                  <span className="uppercase tracking-wider text-sm">Response in {averageResponseTime}</span>
+                  <span className="uppercase tracking-wider text-sm font-bold">Response in {averageResponseTime}</span>
                 </div>
               </div>
             </div>
@@ -229,7 +239,7 @@ export default function TradeCityPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <div key={index} className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border/50">
+              <div key={index} className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border/50 hover:border-gold/20 transition-all">
                 <CheckCircle className="w-5 h-5 text-gold shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-foreground mb-2">{service}</h3>
@@ -338,9 +348,6 @@ export default function TradeCityPage() {
             city={cityName}
           />
         </section>
-
-
-
       </main>
 
       <Footer />

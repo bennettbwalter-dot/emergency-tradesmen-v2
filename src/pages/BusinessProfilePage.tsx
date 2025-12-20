@@ -400,36 +400,60 @@ export default function BusinessProfilePage() {
                         <div className="lg:col-span-2 space-y-20">
 
                             {/* About Section */}
-                            <section className="space-y-8">
-                                <h2 className="font-display text-4xl text-white font-medium">About {business.name}</h2>
-                                <div className="max-w-3xl space-y-6">
-                                    <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
-                                        {business.name} is a trusted <span className="text-gold font-medium">24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions.
-                                    </p>
-
-                                    <div className="space-y-4 pt-4">
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-0.5">
-                                                <CheckCircle className="w-4 h-4" />
-                                            </div>
-                                            <p className="text-lg text-white/90 font-medium tracking-tight">Rapid <span className="text-gold">emergency response</span> time</p>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-0.5">
-                                                <CheckCircle className="w-4 h-4" />
-                                            </div>
-                                            <p className="text-lg text-white/90 font-medium tracking-tight">Fully <span className="text-white">qualified & insured</span> {trade}s</p>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-0.5">
-                                                <CheckCircle className="w-4 h-4" />
-                                            </div>
-                                            <p className="text-lg text-white/90 font-medium tracking-tight">Local, <span className="text-white">trusted</span>, and verified</p>
-                                        </div>
+                            <section className="space-y-12">
+                                {/* Trade Action Image */}
+                                <div className="relative rounded-2xl overflow-hidden aspect-[21/9] border border-white/10 shadow-2xl group">
+                                    <img
+                                        src={trade === 'electrician' ? 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop' :
+                                            trade === 'plumber' ? 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop' :
+                                                trade === 'locksmith' ? 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop' :
+                                                    trade === 'gas-engineer' ? 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop' :
+                                                        'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'}
+                                        alt={`${formattedTrade} at work`}
+                                        className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent"></div>
+                                    <div className="absolute bottom-6 left-8">
+                                        <Badge className="bg-gold text-black hover:bg-gold/90 font-bold px-4 py-1.5 rounded-full mb-2">
+                                            Certified {formattedTrade}
+                                        </Badge>
                                     </div>
+                                </div>
 
-                                    <div className="prose prose-invert prose-neutral max-w-none text-white/60 leading-relaxed whitespace-pre-line pt-4 italic font-light">
-                                        {description}
+                                <div className="space-y-8">
+                                    <div className="flex items-center gap-4">
+                                        <div className="text-4xl">{tradeInfo?.icon || '🔧'}</div>
+                                        <h2 className="font-display text-4xl text-white font-medium">About {business.name}</h2>
+                                    </div>
+                                    <div className="max-w-3xl space-y-6">
+                                        <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
+                                            {business.name} is a trusted <span className="text-gold font-medium">24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions.
+                                        </p>
+
+                                        <div className="space-y-4 pt-4">
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
+                                                    <CheckCircle className="w-4 h-4" />
+                                                </div>
+                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Rapid <span className="text-gold">emergency response</span> time</p>
+                                            </div>
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
+                                                    <CheckCircle className="w-4 h-4" />
+                                                </div>
+                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Fully <span className="text-white">qualified & insured</span> {trade}s</p>
+                                            </div>
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
+                                                    <CheckCircle className="w-4 h-4" />
+                                                </div>
+                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Local, <span className="text-white">trusted</span>, and verified</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="prose prose-invert prose-neutral max-w-none text-white/60 leading-relaxed whitespace-pre-line pt-4 italic font-light text-lg">
+                                            {description}
+                                        </div>
                                     </div>
                                 </div>
                             </section>

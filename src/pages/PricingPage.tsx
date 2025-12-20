@@ -2,6 +2,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
 
 export default function PricingPage() {
@@ -15,6 +16,19 @@ export default function PricingPage() {
             <main className="min-h-screen bg-background py-20">
                 <div className="container-wide">
                     <div className="text-center max-w-3xl mx-auto mb-16">
+                        <div className="relative w-full h-64 md:h-80 rounded-3xl overflow-hidden mb-12 border border-gold/20 shadow-2xl">
+                            <img
+                                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop"
+                                alt="Professional tradesman"
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+                                <Badge className="bg-gold text-black hover:bg-gold/90 font-bold px-6 py-2 rounded-full text-sm">
+                                    Join Our Premium Network
+                                </Badge>
+                            </div>
+                        </div>
                         <h1 className="font-display text-4xl md:text-5xl text-foreground mb-6">
                             Boost Your Business with <span className="text-gold">Premium</span>
                         </h1>
