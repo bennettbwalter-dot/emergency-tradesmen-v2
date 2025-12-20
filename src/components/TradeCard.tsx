@@ -1,17 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { Trade } from "@/lib/trades";
 import { motion } from "framer-motion";
+import { useGeolocation } from "@/hooks/useGeolocation";
+import { useChatbot } from "@/contexts/ChatbotContext";
+import { useEffect } from "react";
 
 interface TradeCardProps {
   trade: Trade;
   city?: string;
 }
 
-export function TradeCard({ trade, city = "manchester" }: TradeCardProps) {
+export function TradeCard({ trade, city }: TradeCardProps) {
+  const navigate = useNavigate();
+  const { detectedCity, setDetectedTrade, setDetectedCity } = useChatbot();
+  const { getLocation, place } = useGeolocation();
+
+  // If city is already detected from chatbot or props, use it
+  const targetCity = city || detectedCity;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Set the trade in context
+    setDetectedTrade(trade.slug);
+    
+    // If we already have a city, navigate immediately
+    if (targetCity) {
+      navigate(`/emergency-${trade.slug}/${targetCity.toLowerCase()}`);
+    } else {
+      // Otherwise, trigger location detection
+      getLocation();
+      // The navigation will happen via the SearchForm's auto-routing effect
+    }
+  };
+
+  // Handle location result
+  useEffect(() => {
+    if (place?.city && !targetCity) {
+      setDetectedCity(place.city);
+      navigate(`/emergency-${trade.slug}/${place.city.toLowerCase()}`);
+    }
+  }, [place, targetCity, trade.slug, navigate, setDetectedCity]);
+
   return (
     <Link
-      to={`/emergency-${trade.slug}/${city.toLowerCase()}`}
+      to={`/emergency-${trade.slug}/${targetCity ? targetCity.toLowerCase() : 'london'}`}
+      onClick={handleClick}
       className="block"
     >
       <motion.div

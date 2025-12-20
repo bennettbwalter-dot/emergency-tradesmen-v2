@@ -215,13 +215,14 @@ export const db = {
         /**
          * Claim a business
          */
-        async claim(businessId: string, contactEmail: string, contactPhone: string) {
-            // We use the RPC function we defined in migration 013
+        async claim(businessId: string, contactEmail: string, contactPhone: string, proofDocuments: string[] = []) {
+            // We use the RPC function we defined in migration 013 (updated in 018)
             const { data, error } = await supabase
                 .rpc('claim_business', {
                     business_id_param: businessId,
                     contact_email_param: contactEmail,
-                    contact_phone_param: contactPhone
+                    contact_phone_param: contactPhone,
+                    proof_docs_param: proofDocuments
                 });
 
             if (error) throw error;
@@ -229,3 +230,4 @@ export const db = {
         }
     }
 };
+

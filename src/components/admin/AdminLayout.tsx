@@ -10,7 +10,12 @@ import {
     FileText,
     LogOut,
     Menu,
-    X
+    X,
+    Calendar,
+    Settings,
+    Download,
+    Edit3,
+    BarChart3
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -44,11 +49,12 @@ export function AdminLayout() {
     const navItems = [
         { path: "/admin", icon: LayoutDashboard, label: "Dashboard" },
         { path: "/admin/businesses", icon: Building2, label: "Businesses" },
+        { path: "/admin/profile-editor", icon: Edit3, label: "Profile Editor" },
+        { path: "/admin/availability", icon: Calendar, label: "Availability" },
         { path: "/admin/subscriptions", icon: FileText, label: "Subscriptions" },
-        { path: "/admin/quotes", icon: FileText, label: "Quotes" },
         { path: "/admin/reviews", icon: Star, label: "Reviews" },
         { path: "/admin/photos", icon: Image, label: "Photos" },
-        { path: "/admin/users", icon: Users, label: "Users" },
+        { path: "/admin/export", icon: Download, label: "Data Export" },
     ];
 
     const handleSignOut = async () => {
@@ -66,7 +72,7 @@ export function AdminLayout() {
                 <div className="p-6 border-b border-border flex items-center justify-between">
                     {sidebarOpen && (
                         <div className="flex items-center gap-2">
-                            <img src="/et-logo.jpg" alt="ET Logo" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
+                            <img src="/et-logo-new.png" alt="ET Logo" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
                             <h1 className="font-display text-xl text-gold">Admin</h1>
                         </div>
                     )}

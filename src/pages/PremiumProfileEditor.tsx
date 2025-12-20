@@ -81,106 +81,104 @@ export default function PremiumProfileEditor() {
     }, [isAuthenticated, navigate]);
 
     // Load user's business
-    useEffect(() => {
-        const loadBusiness = async () => {
-            if (!user) return;
+    const loadBusiness = async () => {
+        if (!user) return;
 
-            let { data, error } = await supabase
+        // Load the user's business from Supabase
+        const { data, error } = await supabase
+            .from('businesses')
+            .select('id, name, trade, logo_url, photos, premium_description, services_offered, whatsapp_number, selected_locations, plan_type, website, hidden_reviews, contact_name')
+            .eq('owner_user_id', user.id)
+            .order('created_at', { ascending: false })
+            .limit(1);
+
+        if (error) {
+            console.error("Error loading business:", error);
+            setLoading(false);
+            return;
+        }
+
+        let businessData: BusinessData;
+
+        if (data && data.length > 0) {
+            const d = data[0];
+            businessData = {
+                id: d.id,
+                name: d.name || "",
+                trade: d.trade || "plumber",
+                logo_url: d.logo_url,
+                photos: d.photos || [],
+                premium_description: d.premium_description || "",
+                services_offered: d.services_offered || [],
+                whatsapp_number: d.whatsapp_number || null,
+                selected_locations: d.selected_locations || [],
+                plan_type: d.plan_type || 'basic',
+                website: d.website || null,
+                hidden_reviews: d.hidden_reviews || [],
+                contact_name: d.contact_name || null
+            };
+        } else {
+            // Auto-create if none exists
+            const businessId = `dev-test-${Date.now()}`;
+            const { data: newBusiness, error: createError } = await supabase
                 .from('businesses')
-                .select('id, name, trade, logo_url, photos, premium_description, services_offered, coverage_areas, whatsapp_number, selected_locations, plan_type, website, hidden_reviews')
-                .eq('owner_id', user.id) // Try owner_id first
+                .insert({
+                    id: businessId,
+                    slug: `dev-test-business-${Date.now()}`,
+                    owner_user_id: user.id,
+                    name: "Your Business Name",
+                    trade: "plumber",
+                    city: "London",
+                    email: user.email,
+                    phone: user.phone || "07700900000",
+                    is_premium: true,
+                    tier: 'paid',
+                    verified: true,
+                    hours: '24/7 Emergency Service',
+                    is_open_24_hours: true
+                })
+                .select()
                 .single();
 
-            if (!data) {
-                // Try alternate column if schema changed
-                const { data: altData } = await supabase
-                    .from('businesses')
-                    .select('id, name, trade, logo_url, photos, premium_description, services_offered, coverage_areas, whatsapp_number, selected_locations, plan_type, website, hidden_reviews')
-                    .eq('owner_user_id', user.id)
-                    .single();
-                data = altData;
-            }
-
-            // Developer Auto-Create Logic
-            const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
-            if (!data && user.email && devEmails.includes(user.email.toLowerCase())) {
-                console.log("Developer account missing business. Auto-creating...");
-                const businessId = `dev-test-${Date.now()}`;
-                const { data: newBusiness, error: createError } = await supabase
-                    .from('businesses')
-                    .insert({
-                        id: businessId,
-                        slug: `dev-test-business-${Date.now()}`,
-                        owner_user_id: user.id,
-                        name: "Developer Test Business",
-                        trade: "electrician",
-                        city: "London",
-                        email: user.email,
-                        phone: user.phone || "07700900000",
-                        is_premium: true,
-                        tier: 'paid',
-                        verified: true,
-                        hours: '24/7 Emergency Service',
-                        is_open_24_hours: true
-                    })
-                    .select()
-                    .single();
-
-                if (newBusiness) {
-                    data = newBusiness;
-                    toast({
-                        title: "Test Business Created",
-                        description: "A dummy business profile has been created for testing.",
-                    });
-                } else if (createError) {
-                    console.error("Failed to auto-create business:", createError);
-                    toast({
-                        title: "Auto-create failed",
-                        description: createError.message || "Could not create test business",
-                        variant: "destructive"
-                    });
-                }
-            }
-
-            if (!data) {
-                // No business found - user needs to contact admin
+            if (createError) {
                 setLoading(false);
                 return;
             }
 
-            // Ensure data has all required fields
-            const businessData: BusinessData = {
-                id: data.id,
-                name: data.name,
-                trade: data.trade || '',
-                logo_url: data.logo_url || null,
-                photos: data.photos || [],
-                premium_description: data.premium_description || null,
-                services_offered: data.services_offered || [],
-                whatsapp_number: data.whatsapp_number || null,
-                selected_locations: data.selected_locations || [],
-                plan_type: data.plan_type || 'basic',
-                website: data.website || null,
-                hidden_reviews: data.hidden_reviews || [],
-                contact_name: data.contact_name || null,
+            businessData = {
+                id: newBusiness.id,
+                name: newBusiness.name || "Your Business Name",
+                trade: newBusiness.trade || "plumber",
+                logo_url: newBusiness.logo_url,
+                photos: newBusiness.photos || [],
+                premium_description: newBusiness.premium_description || "",
+                services_offered: newBusiness.services_offered || [],
+                whatsapp_number: newBusiness.whatsapp_number || null,
+                selected_locations: newBusiness.selected_locations || [],
+                plan_type: 'paid',
+                website: newBusiness.website || null,
+                hidden_reviews: newBusiness.hidden_reviews || [],
+                contact_name: newBusiness.contact_name || null
             };
+        }
 
-            setBusiness(businessData);
-            setLogoPreview(businessData.logo_url);
-            setPhotoPreviews(businessData.photos);
-            setDescription(businessData.premium_description || "");
-            setSelectedServices(businessData.services_offered);
-            setWhatsappNumber(businessData.whatsapp_number || "");
-            setSelectedTrade(businessData.trade);
-            setSelectedLocations(businessData.selected_locations);
-            setPlanType(businessData.plan_type);
-            setWebsite(businessData.website || "");
-            setHiddenReviews(businessData.hidden_reviews);
-            setCompanyName(businessData.name || "");
-            setContactName(businessData.contact_name || "");
-            setLoading(false);
-        };
+        setBusiness(businessData);
+        setLogoPreview(businessData.logo_url);
+        setPhotoPreviews(businessData.photos);
+        setDescription(businessData.premium_description || "");
+        setSelectedServices(businessData.services_offered);
+        setWhatsappNumber(businessData.whatsapp_number || "");
+        setSelectedTrade(businessData.trade);
+        setSelectedLocations(businessData.selected_locations);
+        setPlanType(businessData.plan_type);
+        setWebsite(businessData.website || "");
+        setHiddenReviews(businessData.hidden_reviews);
+        setCompanyName(businessData.name || "");
+        setContactName(businessData.contact_name || "");
+        setLoading(false);
+    };
 
+    useEffect(() => {
         loadBusiness();
     }, [user]);
 
@@ -300,6 +298,7 @@ export default function PremiumProfileEditor() {
                     name: companyName,
                     contact_name: contactName || null,
                     trade: selectedTrade,
+                    city: selectedLocations[0], // Sync city field
                     selected_locations: selectedLocations,
                     logo_url: finalLogoUrl,
                     photos: allPhotoUrls,
@@ -309,7 +308,8 @@ export default function PremiumProfileEditor() {
                     website: website || null,
                     hidden_reviews: hiddenReviews,
                     is_premium: true,
-                    tier: 'paid'
+                    tier: 'paid',
+                    verified: true // Auto-verify on save
                 })
                 .eq('id', business.id);
 

@@ -59,3 +59,4 @@ export const sendBookingNotification = async (tradesmanEmail: string, bookingDet
     `;
     return sendEmail({ to: tradesmanEmail, subject, html });
 };
+

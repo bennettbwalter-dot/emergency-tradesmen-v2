@@ -23,10 +23,18 @@ export default function BusinessesPage() {
 
     async function loadBusinesses() {
         setIsLoading(true);
-        const { data, error } = await supabase
+        // Fetch businesses (increased limit to handle 10K+ businesses)
+        const { data: bizData, error, count } = await supabase
             .from('businesses')
-            .select('*')
-            .order('created_at', { ascending: false });
+            .select('*', { count: 'exact' })
+            .order('created_at', { ascending: false })
+            .range(0, 20000); // Fetch up to 20,000 businesses
+
+        // Fetch active subscriptions
+        const { data: subData } = await supabase
+            .from('subscriptions')
+            .select('user_id, plan, status')
+            .eq('status', 'active');
 
         if (error) {
             console.error('Error loading businesses:', error);
@@ -36,7 +44,13 @@ export default function BusinessesPage() {
                 variant: "destructive",
             });
         } else {
-            setBusinesses(data || []);
+            // Merge premium status
+            const merged = (bizData || []).map(biz => ({
+                ...biz,
+                is_premium: subData?.some(s => s.user_id === biz.owner_user_id)
+            }));
+            setBusinesses(merged);
+            console.log(`Loaded ${count} total businesses (showing ${merged.length})`);
         }
         setIsLoading(false);
     }
@@ -190,9 +204,18 @@ export default function BusinessesPage() {
                             {filteredBusinesses.map((business) => (
                                 <tr key={business.id} className="border-b border-border hover:bg-secondary/50">
                                     <td className="p-4">
-                                        <div>
-                                            <div className="font-medium">{business.name}</div>
-                                            <div className="text-sm text-muted-foreground">{business.phone}</div>
+                                        <div className="flex items-start gap-2">
+                                            <div>
+                                                <div className="font-medium flex items-center gap-2">
+                                                    {business.name}
+                                                    {business.is_premium && (
+                                                        <span className="bg-gold/10 text-gold text-[10px] px-1.5 py-0.5 rounded border border-gold/20 font-bold uppercase">
+                                                            PRO
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className="text-sm text-muted-foreground">{business.phone}</div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td className="p-4 capitalize">{business.trade}</td>
@@ -207,8 +230,8 @@ export default function BusinessesPage() {
                                         <button
                                             onClick={() => toggleVerified(business.id, business.verified)}
                                             className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${business.verified
-                                                    ? "bg-green-500/10 text-green-500"
-                                                    : "bg-gray-500/10 text-gray-500"
+                                                ? "bg-green-500/10 text-green-500"
+                                                : "bg-gray-500/10 text-gray-500"
                                                 }`}
                                         >
                                             {business.verified ? (

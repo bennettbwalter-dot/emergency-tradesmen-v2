@@ -28,6 +28,7 @@ import {
 } from "@/lib/quotes";
 import { db } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
+import { trackEvent } from "@/lib/analytics";
 
 interface QuoteRequestModalProps {
     businessName: string;
@@ -129,6 +130,8 @@ export function QuoteRequestModal({
                 description: "The business will contact you shortly with a quote.",
             });
 
+            trackEvent("Conversion", "Quote Request", `${businessName} (${businessId})`);
+
             // Reset and close
             setFormData({ urgency: "today", preferredContactMethod: "either" });
             setErrors({});
@@ -165,6 +168,14 @@ export function QuoteRequestModal({
                         Fill in the details below and we'll get you a quote as soon as possible
                     </DialogDescription>
                 </DialogHeader>
+
+                {/* Emergency Warning */}
+                <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 mb-4">
+                    <p className="text-sm text-red-600 dark:text-red-400 font-medium flex items-center gap-2">
+                        <span className="text-lg">⚠️</span>
+                        <span>For emergencies, <strong>call immediately</strong> instead of requesting a quote. Quote requests are for non-urgent work only.</span>
+                    </p>
+                </div>
 
                 {/* Progress Steps */}
                 <div className="flex items-center justify-between mb-6 px-4">
@@ -514,3 +525,4 @@ export function QuoteRequestModal({
         </Dialog>
     );
 }
+

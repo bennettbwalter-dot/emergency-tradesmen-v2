@@ -5,6 +5,7 @@ export const trades = [
   { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥" },
   { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿" },
   { slug: "glazier", name: "Glazier", icon: "🪟" },
+  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗" },
 ] as const;
 
 export const cities = [

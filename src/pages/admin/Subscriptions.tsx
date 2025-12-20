@@ -47,23 +47,37 @@ export default function SubscriptionsPage() {
     const loadSubscriptions = async () => {
         setLoading(true);
 
-        // Get all subscriptions with user info
-        const { data, error } = await supabase
+        // Get all subscriptions
+        const { data: subs, error: subsError } = await supabase
             .from('subscriptions')
             .select('*')
             .order('updated_at', { ascending: false });
 
-        if (error) {
+        // Get all businesses for mapping names
+        const { data: businesses } = await supabase
+            .from('businesses')
+            .select('name, owner_user_id');
+
+        if (subsError) {
             toast({
                 title: "Error loading subscriptions",
-                description: error.message,
+                description: subsError.message,
                 variant: "destructive"
             });
             setLoading(false);
             return;
         }
 
-        setSubscriptions(data || []);
+        // Map business names to subscriptions
+        const mappedSubs = (subs || []).map(sub => {
+            const biz = businesses?.find(b => b.owner_user_id === sub.user_id);
+            return {
+                ...sub,
+                user_email: biz?.name || sub.user_id.substring(0, 8) // Fallback to ID
+            };
+        });
+
+        setSubscriptions(mappedSubs);
         setLoading(false);
     };
 
@@ -186,11 +200,11 @@ export default function SubscriptionsPage() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>User ID</TableHead>
+                            <TableHead>Business/User</TableHead>
                             <TableHead>Plan</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Stripe IDs</TableHead>
                             <TableHead>Expires</TableHead>
-                            <TableHead>Last Updated</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -210,38 +224,44 @@ export default function SubscriptionsPage() {
                         ) : (
                             filteredSubscriptions.map((sub) => (
                                 <TableRow key={sub.id}>
-                                    <TableCell className="font-mono text-xs">
-                                        {sub.user_id.substring(0, 8)}...
+                                    <TableCell>
+                                        <div className="font-medium text-sm text-foreground truncate max-w-[150px]">
+                                            {(sub as any).user_email}
+                                        </div>
                                     </TableCell>
                                     <TableCell>
-                                        <Badge variant="outline" className="capitalize">
-                                            {sub.plan}
+                                        <Badge variant="outline" className={`capitalize ${sub.plan === 'enterprise' ? 'border-emerald-500 text-emerald-500' : sub.plan === 'professional' ? 'border-gold text-gold' : ''}`}>
+                                            {sub.plan === 'enterprise' ? 'Pro Yearly' : sub.plan === 'professional' ? 'Pro Monthly' : sub.plan}
                                         </Badge>
                                     </TableCell>
                                     <TableCell>
                                         {getStatusBadge(sub.status, sub.subscription_expires_at)}
                                     </TableCell>
                                     <TableCell>
-                                        {formatDate(sub.subscription_expires_at)}
+                                        <div className="text-[10px] font-mono text-muted-foreground">
+                                            {(sub as any).payment_customer_id && <div className="truncate w-24">CUS: {(sub as any).payment_customer_id}</div>}
+                                            {(sub as any).payment_subscription_id && <div className="truncate w-24">SUB: {(sub as any).payment_subscription_id}</div>}
+                                        </div>
                                     </TableCell>
-                                    <TableCell className="text-muted-foreground text-sm">
-                                        {new Date(sub.updated_at).toLocaleDateString('en-GB')}
+                                    <TableCell>
+                                        {formatDate(sub.subscription_expires_at)}
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex gap-2 justify-end">
                                             <Button
                                                 size="sm"
                                                 variant="outline"
+                                                className="h-7 text-xs"
                                                 onClick={() => handleMarkAsPaid(sub.user_id, 'professional')}
                                             >
-                                                +30 Days
+                                                +30d
                                             </Button>
                                             <Button
                                                 size="sm"
-                                                className="bg-emerald-500 hover:bg-emerald-600"
+                                                className="h-7 text-xs bg-emerald-500 hover:bg-emerald-600"
                                                 onClick={() => handleMarkAsPaid(sub.user_id, 'enterprise')}
                                             >
-                                                +1 Year
+                                                +1y
                                             </Button>
                                         </div>
                                     </TableCell>

@@ -1,247 +1,278 @@
-
 import { Link } from "react-router-dom";
-import { Star, MapPin, Phone, ShieldCheck, Zap, Heart, MessageSquareQuote, Factory, Wrench, TrendingUp, Clock, Key } from "lucide-react";
+import { Mail, Star, MapPin, Phone, ShieldCheck, Zap, Heart, MessageSquareQuote, Factory, Wrench, TrendingUp, Clock, Key, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-// import { db } from "@/lib/db"; // Commented out to prevent crashes for now
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { AuthModal } from "./AuthModal";
-import { QuoteRequestModal } from "./QuoteRequestModal";
 import { Business } from "@/lib/businesses";
 import { useComparison } from "@/contexts/ComparisonContext";
-import { useToast } from "@/components/ui/use-toast"; // Changed to useToast hook
+import { useToast } from "@/components/ui/use-toast";
+import { trackEvent } from "@/lib/analytics";
 
 interface BusinessCardProps {
-    business: Business;
-    rank: number;
+  business: Business;
+  rank: number;
 }
 
 export function BusinessCard({ business, rank }: BusinessCardProps) {
-    const { isAuthenticated } = useAuth();
-    const [liked, setLiked] = useState(false);
-    const { addToComparison, removeFromComparison, isInComparison } = useComparison(); // Fixed destructuring
-    const { toast } = useToast();
+  const { isAuthenticated } = useAuth();
+  const [liked, setLiked] = useState(false);
+  const { addToComparison, removeFromComparison, isInComparison } = useComparison();
+  const { toast } = useToast();
 
-    const inComparison = isInComparison(business.id); // Fixed usage
+  const inComparison = isInComparison(business.id);
 
-    // Trade Icon Logic
-    let TradeIcon = Wrench;
-    if (business.trade === 'electrician') TradeIcon = Zap;
-    if (business.trade === 'plumber') TradeIcon = Wrench;
-    if (business.trade === 'locksmith') TradeIcon = Key;
-    if (business.trade === 'glazier') TradeIcon = Factory;
+  // Trade Icon Logic
+  let TradeIcon = Wrench;
+  if (business.trade === 'electrician') TradeIcon = Zap;
+  else if (business.trade === 'plumber') TradeIcon = Wrench;
+  else if (business.trade === 'locksmith') TradeIcon = Key;
+  else if (business.trade === 'glazier') TradeIcon = Factory;
 
-    // Just use Wrench as default if unknown
-    const tradeName = business.trade ? business.trade.charAt(0).toUpperCase() + business.trade.slice(1) : "Tradesperson";
+  const tradeName = business.trade ? business.trade.charAt(0).toUpperCase() + business.trade.slice(1) : "Tradesperson";
 
-    const handleFavorite = async () => {
-        if (!isAuthenticated) return;
-        // Mock functionality for now
-        setLiked(!liked);
-    };
+  const handleFavorite = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isAuthenticated) return;
+    setLiked(!liked);
+  };
 
-    // Availability Logic
-    const isAvailable = true; // For emergency trades, default to available or use logic
+  // Availability Logic
+  const lastPing = business.last_available_ping ? new Date(business.last_available_ping) : null;
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  const isLive = lastPing && lastPing > oneHourAgo;
+  const isAvailable = true; // Default for emergency trades
+  const showAvailable = isLive || business.isOpen24Hours || isAvailable;
 
-    // Check real-time availability (Live Ping)
-    const lastPing = business.last_available_ping ? new Date(business.last_available_ping) : null;
-    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-    const isLive = lastPing && lastPing > oneHourAgo;
+  const isPremium = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
 
-    const showAvailable = isLive || business.isOpen24Hours || isAvailable;
+  // Logo Placeholder Logic
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+  };
 
-    const isPaid = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
+  return (
+    <div
+      className={`group relative rounded-xl border transition-all duration-500 overflow-hidden h-full flex flex-col ${isPremium
+        ? "bg-[#0A1A14] border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/20"
+        : "bg-card border-border/50 hover:border-gold/30 hover:shadow-2xl hover:shadow-gold/10 hover:-translate-y-1"
+        }`}
+    >
+      {/* Background Marble/Grain Texture Overlay (Premium Only) */}
+      {isPremium && (
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/marble-similar.png')] mix-blend-overlay" />
+      )}
 
-    return (
-        <div
-            className={`group relative bg-card rounded-lg border hover:shadow-2xl hover:shadow-gold/10 hover:-translate-y-1 transition-[shadow,border-color,transform] duration-300 overflow-hidden aspect-[4/5] flex flex-col ${isPaid
-                ? "border-gold/50 shadow-lg shadow-gold/5 bg-gradient-to-br from-card to-gold/5"
-                : "border-border/50 hover:border-gold/30"
-                }`}
-        >
-            {/* Rank badge / Featured Badge */}
-            <div className={`absolute top-4 left-4 z-10 rounded-full flex items-center justify-center ${isPaid
-                ? "px-3 h-7 bg-gold text-black font-bold text-xs uppercase tracking-wide shadow-md"
-                : "w-10 h-10 bg-gold/10 border border-gold/30 font-display text-gold font-bold"
-                }`}>
-                {isPaid ? (
-                    <span className="flex items-center gap-1">
-                        <Zap className="w-3 h-3 fill-black" />
-                        Featured
-                    </span>
-                ) : (
-                    <span>{rank}</span>
-                )}
+      {/* Header section with Featured Badge and Logo */}
+      <div className="relative p-6 pb-0">
+        <div className="flex items-start justify-between mb-4">
+          {/* Featured Badge / Rank Badge */}
+          {isPremium ? (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              <Zap className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Featured</span>
             </div>
-
-            {/* Favorite Button */}
-            <div className="absolute top-4 right-4 z-10">
-                {isAuthenticated ? (
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`rounded-full hover:bg-gold/10 ${liked ? 'text-red-500 hover:text-red-600' : 'text-muted-foreground hover:text-gold'}`}
-                        onClick={(e) => { e.preventDefault(); handleFavorite(); }}
-                    >
-                        <Heart className={`w-5 h-5 ${liked ? 'fill-current' : ''}`} />
-                    </Button>
-                ) : (
-                    <AuthModal
-                        trigger={
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-full text-muted-foreground hover:text-gold hover:bg-gold/10"
-                            >
-                                <Heart className="w-5 h-5" />
-                            </Button>
-                        }
-                        defaultTab="register"
-                    />
-                )}
+          ) : (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center font-display text-gold text-sm font-bold">
+                {rank}
+              </div>
+              <h3 className="font-display text-xl tracking-tight leading-none text-foreground">
+                <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors">
+                  {business.name}
+                </Link>
+              </h3>
             </div>
+          )}
 
-            <div className="p-6 pt-16 flex-1 flex flex-col">
-                {/* Business name */}
-                <h3 className="font-display text-xl tracking-wide text-foreground mb-3 pr-4">
-                    <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors">
-                        {business.name}
-                    </Link>
-                </h3>
-
-                {/* Rating section */}
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="flex items-center gap-1.5">
-                        <Star className="w-4 h-4 fill-gold text-gold" />
-                        <span className="font-semibold text-foreground">{business.rating.toFixed(1)}</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">
-                        ({business.reviewCount} {business.reviewCount === 1 ? 'review' : 'reviews'})
-                    </span>
-                    {showAvailable ? (
-                        <span className="ml-auto inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium uppercase tracking-wider bg-green-500/10 text-green-500 rounded-full border border-green-500/30">
-                            <span className="relative flex h-2 w-2">
-                                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 ${isLive ? 'duration-75' : ''}`}></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                            {isLive ? "Live Now" : "Available Now"}
-                        </span>
-                    ) : (
-                        <span className="ml-auto px-3 py-1 text-xs font-medium uppercase tracking-wider bg-red-500/10 text-red-500 rounded-full border border-red-500/30">
-                            Closed
-                        </span>
-                    )}
-                </div>
-
-                {/* Business details */}
-                <div className="space-y-2.5 mb-5 text-sm">
-                    {business.address && (
-                        <div className="flex items-start gap-2.5 text-muted-foreground">
-                            <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold/70" />
-                            <span>{business.address}</span>
-                        </div>
-                    )}
-                    <div className="flex items-center gap-2.5 text-muted-foreground">
-                        <Clock className="w-4 h-4 flex-shrink-0 text-gold/70" />
-                        <span>{business.hours || "24/7 Emergency"}</span>
-                    </div>
-                    {business.rating >= 4.8 && (
-                        <div className="flex items-center gap-2.5 text-gold">
-                            <ShieldCheck className="w-4 h-4 flex-shrink-0" />
-                            <span>Smart Price Guarantee</span>
-                        </div>
-                    )}
-                </div>
-
-                {/* Featured review */}
-                {business.featuredReview && (
-                    <div className="mb-5 p-4 bg-secondary/30 rounded-lg border border-border/30">
-                        <div className="flex gap-2 items-start">
-                            <MessageSquareQuote className="w-4 h-4 text-gold/70 flex-shrink-0 mt-0.5" />
-                            <p className="text-sm text-muted-foreground italic">
-                                "{business.featuredReview}"
-                            </p>
-                        </div>
-                    </div>
-                )}
-
-                {/* Action buttons */}
-                <div className="grid grid-cols-2 gap-2 mb-3 mt-auto">
-                    {business.phone ? (
-                        <Button
-                            asChild
-                            variant="default"
-                            className={`bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-400 hover:to-gold text-black font-bold border-0 ${isPaid && business.whatsapp_number ? "" : "col-span-2"}`}
-                        >
-                            <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
-                                <Phone className="w-4 h-4" />
-                                Call Now
-                            </a>
-                        </Button>
-                    ) : (
-                        <Button
-                            variant="secondary"
-                            className={`cursor-not-allowed opacity-50 ${isPaid && business.whatsapp_number ? "" : "col-span-2"}`}
-                            disabled
-                        >
-                            <span className="flex items-center justify-center gap-2">
-                                <Phone className="w-4 h-4" />
-                                No Phone
-                            </span>
-                        </Button>
-                    )}
-
-                    {/* WhatsApp Button - Premium Only */}
-                    {isPaid && business.whatsapp_number && (
-                        <Button
-                            asChild
-                            className="bg-green-500 hover:bg-green-600 text-white"
-                        >
-                            <a
-                                href={`https://wa.me/${business.whatsapp_number.replace(/\D/g, '')}?text=${encodeURIComponent(`Hi, I found ${business.name} on Emergency Tradesmen and would like to enquire about your services.`)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2"
-                            >
-                                WhatsApp
-                            </a>
-                        </Button>
-                    )}
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                    <QuoteRequestModal
-                        businessName={business.name}
-                        businessId={business.id}
-                        tradeName={tradeName}
-                        variant="outline"
-                        className="border-gold/30 hover:bg-gold/5 hover:text-gold"
-                    />
-
-                    <Button
-                        variant="outline"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (inComparison) {
-                                removeFromComparison(business.id);
-                                toast({ title: "Removed from comparison" });
-                            } else {
-                                addToComparison(business.id);
-                                toast({ title: "Added to comparison" });
-                            }
-                        }}
-                        className={`border-gold/30 hover:bg-gold/5 hover:text-gold ${inComparison ? 'bg-gold/10 border-gold' : ''}`}
-                    >
-                        <TrendingUp className="w-4 h-4 mr-1" />
-                        {inComparison ? 'In Comparison' : 'Compare'}
-                    </Button>
-                </div>
-
-            </div>
-
-            {/* Hover effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/0 via-gold/0 to-gold/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          {/* Favorite heart icon */}
+          <button
+            onClick={handleFavorite}
+            className={`transition-colors duration-300 ${liked ? 'text-red-500' : 'text-muted-foreground hover:text-gold'}`}
+          >
+            <Heart className={`w-5 h-5 ${liked ? 'fill-current' : ''}`} />
+          </button>
         </div>
-    );
+
+        {/* Business Hero (Logo + Name) - ONLY FOR PREMIUM */}
+        {isPremium && (
+          <div className="flex flex-col items-start gap-5 mt-2">
+            {/* Logo Placeholder / Image */}
+            <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border transition-all duration-300 bg-white shadow-[0_0_20px_rgba(16,185,129,0.1)] border-emerald-500/20 p-2">
+              {business.logo_url ? (
+                <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain" />
+              ) : (
+                <div className="flex flex-col items-center justify-center">
+                  <span className="text-xl font-bold text-emerald-600">
+                    {getInitials(business.name)}
+                  </span>
+                  <TradeIcon className="w-4 h-4 mt-1 text-emerald-500/50" />
+                </div>
+              )}
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500/80" />
+                Verified Partner
+              </div>
+              <h3 className="font-display tracking-tight leading-tight line-clamp-2 text-[#D4AF37] text-2xl">
+                <Link to={`/business/${business.id}`} className="hover:opacity-80 transition-opacity">
+                  {business.name}
+                </Link>
+              </h3>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="p-6 flex-1 flex flex-col">
+        {/* Rating and Availability Row */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <Star className={`w-4 h-4 ${isPremium ? "text-emerald-500 fill-emerald-500" : "text-gold fill-gold"}`} />
+            <span className={`font-bold ${isPremium ? "text-gray-200" : "text-foreground"}`}>{business.rating.toFixed(1)}</span>
+            <span className="text-xs text-muted-foreground">({business.reviewCount} reviews)</span>
+          </div>
+
+          {showAvailable && (
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${isPremium
+              ? "bg-emerald-500/10 border-emerald-500/40"
+              : "bg-green-500/10 border-green-500/30"
+              }`}>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className={`text-[11px] font-bold tracking-widest ${isPremium ? "text-emerald-400" : "text-green-500"}`}>
+                AVAILABLE NOW
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Details List */}
+        <div className="space-y-4 mb-8">
+          <div className="flex items-center gap-3 text-sm">
+            <MapPin className={`w-4 h-4 ${isPremium ? "text-emerald-500/70" : "text-gold/70"}`} />
+            <span className={isPremium ? "text-gray-300 font-medium" : "text-muted-foreground"}>{business.address || "Serving your area"}</span>
+          </div>
+          <div className="flex items-center gap-3 text-sm">
+            <Clock className={`w-4 h-4 ${isPremium ? "text-emerald-500/70" : "text-gold/70"}`} />
+            <span className={isPremium ? "text-gray-300 font-medium" : "text-muted-foreground"}>{business.hours || "24/7 Emergency Service"}</span>
+          </div>
+
+          {/* Dynamic Premium Details */}
+          {isPremium && (
+            <>
+              {business.services_offered && business.services_offered.length > 0 ? (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {business.services_offered.slice(0, 3).map((service, i) => (
+                    <div key={i} className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
+                      <ShieldCheck className="w-3 h-3" />
+                      {service}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center gap-3 text-sm">
+                  <ShieldCheck className="w-4 h-4 text-emerald-500/70" />
+                  <span className="text-[#D4AF37]/90 font-semibold tracking-wide">Verified Professional</span>
+                </div>
+              )}
+
+              {business.premium_description && (
+                <p className="text-xs text-gray-400 italic line-clamp-2 leading-relaxed mt-2 border-l-2 border-emerald-500/30 pl-3">
+                  "{business.premium_description}"
+                </p>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="mt-auto space-y-3">
+          {/* Call Now Button */}
+          <Button
+            asChild
+            className={`w-full h-12 text-sm font-bold tracking-widest uppercase transition-all duration-300 ${isPremium
+              ? "bg-gradient-to-r from-[#10B981] to-[#059669] hover:brightness-110 text-white border border-[#D4AF37]/50 shadow-lg shadow-emerald-500/20"
+              : "bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-400 hover:to-gold text-black border-0 shadow-md"
+              }`}
+          >
+            <a href={`tel:${business.phone}`} onClick={() => trackEvent("Business", "Call Now", business.name)} className="flex items-center justify-center gap-2">
+              <Phone className="w-4 h-4" />
+              Call Now
+            </a>
+          </Button>
+
+          {/* WhatsApp Button */}
+          <Button
+            asChild
+            className={`w-full h-12 text-sm font-bold tracking-widest uppercase transition-all duration-300 ${isPremium
+              ? "bg-gradient-to-r from-emerald-600/20 to-emerald-500/20 hover:from-emerald-600/30 hover:to-emerald-500/30 text-emerald-400 border border-emerald-500/50"
+              : "bg-green-500 hover:bg-green-600 text-white shadow-sm"
+              }`}
+          >
+            <a
+              href={`https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
+              className="flex items-center justify-center gap-2"
+            >
+              <MessageSquareQuote className="w-4 h-4" />
+              WhatsApp Now
+            </a>
+          </Button>
+
+          {/* Website Button */}
+          {business.website && (
+            <Button
+              asChild
+              variant="outline"
+              className={`w-full h-10 text-xs font-bold uppercase tracking-widest transition-all ${isPremium
+                ? "border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                : "border-blue-500/30 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                }`}
+            >
+              <a
+                href={business.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("Business", "Website Click", business.name)}
+                className="flex items-center justify-center gap-2"
+              >
+                <Globe className="w-4 h-4" />
+                Visit Website
+              </a>
+            </Button>
+          )}
+
+          {/* Compare Button */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (inComparison) removeFromComparison(business.id);
+              else addToComparison(business.id);
+              toast({ title: inComparison ? "Removed from comparison" : "Added to comparison" });
+            }}
+            className={`w-full py-2 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${isPremium
+              ? "text-[#D4AF37] border border-[#D4AF37]/30 rounded-lg hover:bg-[#D4AF37]/10 mt-2"
+              : "text-muted-foreground hover:text-gold border border-border/30 rounded-lg hover:border-gold/30 mt-2"
+              }`}
+          >
+            <TrendingUp className="w-3 h-3" />
+            {inComparison ? 'In Comparison' : 'Compare'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

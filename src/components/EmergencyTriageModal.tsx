@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
     Dialog,
     DialogContent,
@@ -9,93 +10,87 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
     TRADE_OPTIONS,
-    UrgencyLevel,
-    assessTriage,
-    formatCostRange,
 } from "@/lib/triage";
-import { getBusinessListings } from "@/lib/businesses";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useToast } from "@/hooks/use-toast";
+import { useChatbot } from "@/contexts/ChatbotContext";
 import {
     ArrowLeft,
     ArrowRight,
-    Phone,
-    Clock,
-    PoundSterling,
-    AlertTriangle,
-    CheckCircle,
     Zap,
-    Calendar,
     MapPin,
     Loader2,
     Navigation,
+    CheckCircle,
 } from "lucide-react";
 
 interface EmergencyTriageModalProps {
     trigger?: React.ReactNode;
 }
 
-type Step = "trade" | "problem" | "urgency" | "location" | "results";
+type Step = "trade" | "verify" | "location";
 
-const URGENCY_OPTIONS: { id: UrgencyLevel; label: string; description: string; icon: React.ReactNode }[] = [
-    {
-        id: "emergency",
-        label: "Emergency - Right Now",
-        description: "Safety risk, major leak, locked out",
-        icon: <AlertTriangle className="w-5 h-5 text-red-500" />,
+// Quick verification questions for ALL trades
+const VERIFICATION_QUESTIONS: Record<string, { question: string; options: string[] }> = {
+    plumber: {
+        question: "Is water actively leaking or flowing?",
+        options: ["Yes - active leak", "No - but not draining", "No - other issue", "Not sure"],
     },
-    {
-        id: "same-day",
-        label: "Same Day",
-        description: "Needs fixing today",
-        icon: <Zap className="w-5 h-5 text-orange-500" />,
+    electrician: {
+        question: "Is there a complete power outage?",
+        options: ["Yes - total power loss", "Partial - some circuits", "No - but sparking/smell", "Not sure"],
     },
-    {
-        id: "next-day",
-        label: "Next Day or Two",
-        description: "Can wait a bit",
-        icon: <Clock className="w-5 h-5 text-yellow-500" />,
+    locksmith: {
+        question: "Are you currently locked out?",
+        options: ["Yes - locked out now", "Lock broken/jammed", "Lost keys", "Security concern"],
     },
-    {
-        id: "scheduled",
-        label: "Schedule for Later",
-        description: "No rush, plan ahead",
-        icon: <Calendar className="w-5 h-5 text-blue-500" />,
+    "gas-engineer": {
+        question: "Can you smell gas right now?",
+        options: ["Yes - strong smell", "Faint smell", "No smell - boiler issue", "Carbon monoxide alarm"],
     },
-];
+    "drain-specialist": {
+        question: "Is water backing up or overflowing?",
+        options: ["Yes - actively overflowing", "Slow draining", "Completely blocked", "Bad smell only"],
+    },
+    glazier: {
+        question: "Is the glass broken or cracked?",
+        options: ["Completely broken", "Large crack", "Small crack", "Just stuck/jammed"],
+    },
+    breakdown: {
+        question: "Is your vehicle completely immobile?",
+        options: ["Yes - won't start at all", "Starts but unsafe to drive", "Can drive but issue present", "Just need inspection"],
+    },
+};
 
 export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
     const navigate = useNavigate();
+    const { toast } = useToast();
+    const { setDetectedTrade, setDetectedCity } = useChatbot();
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState<Step>("trade");
 
     // Form state
     const [selectedTrade, setSelectedTrade] = useState<string>("");
-    const [selectedProblem, setSelectedProblem] = useState<string>("");
-    const [selectedUrgency, setSelectedUrgency] = useState<UrgencyLevel | "">("");
-    const [postcode, setPostcode] = useState("");
+    const [verificationAnswer, setVerificationAnswer] = useState<string>("");
+    const [citySearch, setCitySearch] = useState("");
 
     // Geolocation hook
-    const { getLocation, loading: geoLoading } = useGeolocation();
+    const { getLocation, loading: geoLoading, place } = useGeolocation();
 
     const currentTrade = TRADE_OPTIONS.find((t) => t.id === selectedTrade);
+    const verificationQ = selectedTrade ? VERIFICATION_QUESTIONS[selectedTrade] : null;
 
-    const steps: Step[] = ["trade", "problem", "urgency", "location", "results"];
+    const steps: Step[] = ["trade", "verify", "location"];
     const currentStepIndex = steps.indexOf(step);
     const progress = ((currentStepIndex + 1) / steps.length) * 100;
 
     const resetForm = () => {
         setStep("trade");
         setSelectedTrade("");
-        setSelectedProblem("");
-        setSelectedUrgency("");
-        setPostcode("");
+        setVerificationAnswer("");
     };
 
     const handleOpenChange = (open: boolean) => {
@@ -119,43 +114,37 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
 
     const handleTradeSelect = (tradeId: string) => {
         setSelectedTrade(tradeId);
-        setSelectedProblem(""); // Reset problem when trade changes
+        setDetectedTrade(tradeId);
+        setVerificationAnswer("");
         goNext();
     };
 
-    const handleProblemSelect = (problemId: string) => {
-        setSelectedProblem(problemId);
+    const handleVerificationSelect = (answer: string) => {
+        setVerificationAnswer(answer);
         goNext();
     };
 
-    const handleUrgencySelect = (urgency: UrgencyLevel) => {
-        setSelectedUrgency(urgency);
-        goNext();
-    };
-
-    const handleLocationSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (postcode.trim()) {
-            goNext();
+    // Auto-detect location when reaching location step
+    useEffect(() => {
+        if (step === "location" && !place?.city && !geoLoading) {
+            getLocation();
         }
-    };
+    }, [step, place, geoLoading, getLocation]);
 
-    const handleViewBusinesses = () => {
-        setIsOpen(false);
-        // Navigate to the trade/city page
-        const citySlug = postcode.split(" ")[0].toLowerCase() || "london";
-        navigate(`/${selectedTrade}/${citySlug}`);
-    };
-
-    // Get triage results
-    const triageResult = selectedTrade && selectedProblem && selectedUrgency
-        ? assessTriage(selectedTrade, selectedProblem, selectedUrgency)
-        : null;
-
-    // Get matching businesses
-    const matchingBusinesses = selectedTrade
-        ? getBusinessListings("london", selectedTrade)?.slice(0, 3) || []
-        : [];
+    // Auto-navigate when location is detected
+    useEffect(() => {
+        if (step === "location" && place?.city && selectedTrade) {
+            setDetectedCity(place.city);
+            toast({
+                title: "Location Found",
+                description: `Redirecting to ${currentTrade?.name}s in ${place.city}...`,
+            });
+            setTimeout(() => {
+                setIsOpen(false);
+                navigate(`/emergency-${selectedTrade}/${place.city.toLowerCase()}`);
+            }, 1200);
+        }
+    }, [place, step, selectedTrade, currentTrade, setDetectedCity, toast, navigate]);
 
     return (
         <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -171,17 +160,13 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-display text-center">
                         {step === "trade" && "What do you need help with?"}
-                        {step === "problem" && `What's the ${currentTrade?.name} issue?`}
-                        {step === "urgency" && "How urgent is this?"}
-                        {step === "location" && "Where are you located?"}
-                        {step === "results" && "Your Assessment"}
+                        {step === "verify" && currentTrade && `${currentTrade.name} Emergency`}
+                        {step === "location" && "Finding Local Help"}
                     </DialogTitle>
                     <DialogDescription className="text-center">
                         {step === "trade" && "Select the type of tradesperson you need"}
-                        {step === "problem" && "Help us understand your situation"}
-                        {step === "urgency" && "This helps us prioritize your request"}
-                        {step === "location" && "Enter your postcode to find local help"}
-                        {step === "results" && "Here's what we recommend"}
+                        {step === "verify" && "Quick question to help us route you correctly"}
+                        {step === "location" && "Detecting your location..."}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -213,155 +198,110 @@ export function EmergencyTriageModal({ trigger }: EmergencyTriageModalProps) {
                         </div>
                     )}
 
-                    {/* Problem Selection */}
-                    {step === "problem" && currentTrade && (
-                        <div className="space-y-2">
-                            {currentTrade.problems.map((problem) => (
-                                <button
-                                    key={problem.id}
-                                    onClick={() => handleProblemSelect(problem.id)}
-                                    className="w-full flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-gold/50 hover:bg-gold/5 transition-all text-left"
-                                >
-                                    <span className="font-medium">{problem.label}</span>
-                                    {problem.urgencyHint === "emergency" && (
-                                        <Badge variant="destructive" className="text-xs">Urgent</Badge>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Urgency Selection */}
-                    {step === "urgency" && (
-                        <div className="space-y-3">
-                            {URGENCY_OPTIONS.map((option) => (
-                                <button
-                                    key={option.id}
-                                    onClick={() => handleUrgencySelect(option.id)}
-                                    className="w-full flex items-center gap-4 p-4 rounded-lg border border-border/50 hover:border-gold/50 hover:bg-gold/5 transition-all text-left"
-                                >
-                                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                                        {option.icon}
-                                    </div>
-                                    <div>
-                                        <p className="font-medium">{option.label}</p>
-                                        <p className="text-sm text-muted-foreground">{option.description}</p>
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Location Input */}
-                    {step === "location" && (
-                        <form onSubmit={handleLocationSubmit} className="space-y-4">
+                    {/* Quick Verification */}
+                    {step === "verify" && verificationQ && (
+                        <div className="space-y-4">
+                            <p className="text-center text-lg font-medium mb-4">{verificationQ.question}</p>
                             <div className="space-y-2">
-                                <Label htmlFor="postcode">Your Postcode</Label>
-                                <div className="relative">
-                                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                                    <Input
-                                        id="postcode"
-                                        placeholder="e.g., SW1A 1AA"
-                                        value={postcode}
-                                        onChange={(e) => setPostcode(e.target.value.toUpperCase())}
-                                        className="pl-9 text-lg"
-                                        required
-                                    />
+                                {verificationQ.options.map((option) => (
                                     <button
-                                        type="button"
-                                        onClick={getLocation}
-                                        disabled={geoLoading}
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gold/10 rounded-full text-gold transition-colors"
-                                        title="Use my location"
+                                        key={option}
+                                        onClick={() => handleVerificationSelect(option)}
+                                        className="w-full flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-gold/50 hover:bg-gold/5 transition-all text-left"
                                     >
-                                        {geoLoading ? (
-                                            <Loader2 className="w-4 h-4 animate-spin" />
-                                        ) : (
-                                            <Navigation className="w-4 h-4" />
-                                        )}
+                                        <span className="font-medium">{option}</span>
+                                        <ArrowRight className="w-4 h-4 text-muted-foreground" />
                                     </button>
-                                </div>
+                                ))}
                             </div>
-                            <Button type="submit" className="w-full bg-gold hover:bg-gold/90 text-gold-foreground">
-                                Find Local Help
-                                <ArrowRight className="w-4 h-4 ml-2" />
-                            </Button>
-                        </form>
+                        </div>
                     )}
 
-                    {/* Results */}
-                    {step === "results" && triageResult && (
-                        <div className="space-y-6">
-                            {/* Priority indicator */}
-                            <div className={`p-4 rounded-lg border ${triageResult.priorityScore >= 8
-                                ? "border-red-500/30 bg-red-500/5"
-                                : triageResult.priorityScore >= 5
-                                    ? "border-orange-500/30 bg-orange-500/5"
-                                    : "border-green-500/30 bg-green-500/5"
-                                }`}>
-                                <div className="flex items-center gap-3 mb-2">
-                                    {triageResult.priorityScore >= 8 ? (
-                                        <AlertTriangle className="w-5 h-5 text-red-500" />
-                                    ) : (
-                                        <CheckCircle className="w-5 h-5 text-green-500" />
-                                    )}
-                                    <span className="font-semibold">{triageResult.recommendedAction}</span>
-                                </div>
-                            </div>
-
-                            {/* Stats grid */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-4 rounded-lg bg-card border border-border/50 text-center">
-                                    <PoundSterling className="w-5 h-5 mx-auto mb-2 text-gold" />
-                                    <p className="text-sm text-muted-foreground">Estimated Cost</p>
-                                    <p className="font-display text-xl font-semibold text-gold">
-                                        {formatCostRange(triageResult.estimatedCost)}
-                                    </p>
-                                </div>
-                                <div className="p-4 rounded-lg bg-card border border-border/50 text-center">
-                                    <Clock className="w-5 h-5 mx-auto mb-2 text-gold" />
-                                    <p className="text-sm text-muted-foreground">Expected Wait</p>
-                                    <p className="font-display text-xl font-semibold">
-                                        {triageResult.estimatedWaitTime}
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Top matches preview */}
-                            {matchingBusinesses.length > 0 && (
-                                <div>
-                                    <p className="text-sm text-muted-foreground mb-2">Top matches near you:</p>
-                                    <div className="space-y-2">
-                                        {matchingBusinesses.map((business) => (
-                                            <div key={business.id} className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 border border-border/50">
-                                                <span className="font-medium truncate">{business.name}</span>
-                                                <Badge variant="outline" className="text-gold border-gold/30">
-                                                    ⭐ {business.rating}
-                                                </Badge>
-                                            </div>
-                                        ))}
+                    {/* Location Detection - NO EMAIL BUTTONS */}
+                    {step === "location" && (
+                        <div className="flex flex-col items-center justify-center space-y-6 py-8">
+                            {geoLoading ? (
+                                <>
+                                    <Loader2 className="w-16 h-16 animate-spin text-gold" />
+                                    <div className="text-center">
+                                        <p className="font-medium text-lg mb-2">Detecting your location...</p>
+                                        <p className="text-sm text-muted-foreground">
+                                            This helps us find the nearest {currentTrade?.name?.toLowerCase()}s
+                                        </p>
                                     </div>
+                                </>
+                            ) : place?.city ? (
+                                <>
+                                    <CheckCircle className="w-16 h-16 text-green-500" />
+                                    <div className="text-center">
+                                        <p className="font-medium text-lg mb-2">Location Found!</p>
+                                        <p className="text-sm text-muted-foreground">
+                                            Finding {currentTrade?.name?.toLowerCase()}s in {place.city}...
+                                        </p>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="w-full max-w-sm flex flex-col items-center space-y-4">
+                                    <MapPin className="w-16 h-16 text-gold mb-2" />
+                                    <div className="text-center mb-4">
+                                        <p className="font-medium text-lg mb-2">Where do you need help?</p>
+                                        <p className="text-sm text-muted-foreground">
+                                            We couldn't detect your location automatically.
+                                        </p>
+                                    </div>
+                                    
+                                    <div className="flex w-full items-center space-x-2">
+                                        <Input 
+                                            placeholder="Enter your city (e.g. Manchester)" 
+                                            value={citySearch}
+                                            onChange={(e) => setCitySearch(e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' && citySearch.trim()) {
+                                                    setDetectedCity(citySearch.trim());
+                                                    navigate(`/emergency-${selectedTrade}/${citySearch.trim().toLowerCase()}`);
+                                                    setIsOpen(false);
+                                                }
+                                            }}
+                                            className="bg-background border-border/50 focus:border-gold/50"
+                                        />
+                                        <Button 
+                                            onClick={() => {
+                                                if (citySearch.trim()) {
+                                                    setDetectedCity(citySearch.trim());
+                                                    navigate(`/emergency-${selectedTrade}/${citySearch.trim().toLowerCase()}`);
+                                                    setIsOpen(false);
+                                                }
+                                            }}
+                                            className="bg-gold hover:bg-gold/90 text-black border-none"
+                                            disabled={!citySearch.trim()}
+                                        >
+                                            Find
+                                        </Button>
+                                    </div>
+                                    
+                                    <div className="pt-4 w-full">
+                                        <div className="relative">
+                                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border/50"></span></div>
+                                            <div className="relative flex justify-center text-xs uppercase"><span className="bg-card px-2 text-muted-foreground">Or</span></div>
+                                        </div>
+                                    </div>
+
+                                    <Button
+                                        onClick={getLocation}
+                                        variant="outline"
+                                        className="w-full border-gold/30 hover:bg-gold/5 text-foreground"
+                                    >
+                                        <Navigation className="w-4 h-4 mr-2" />
+                                        Try Auto-Detect Again
+                                    </Button>
                                 </div>
                             )}
-
-                            {/* Action buttons */}
-                            <div className="flex flex-col gap-3">
-                                <Button variant="hero" size="lg" asChild>
-                                    <a href="mailto:emergencytradesmen@outlook.com">
-                                        <Phone className="w-4 h-4 mr-2" />
-                                        Email Us
-                                    </a>
-                                </Button>
-                                <Button variant="outline" onClick={handleViewBusinesses}>
-                                    View All {currentTrade?.name}s in {postcode}
-                                </Button>
-                            </div>
                         </div>
                     )}
                 </div>
 
                 {/* Navigation */}
-                {step !== "trade" && step !== "results" && (
+                {step !== "trade" && step !== "location" && (
                     <div className="flex justify-between pt-4 border-t">
                         <Button variant="ghost" onClick={goBack}>
                             <ArrowLeft className="w-4 h-4 mr-2" />

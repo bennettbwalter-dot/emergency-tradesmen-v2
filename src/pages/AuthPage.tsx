@@ -33,6 +33,9 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
                         that triggers the modal automatically or presents it nicely.
                     */}
 
+                    <div className="flex justify-center mb-6">
+                        <img src="/et-logo-new.png" alt="Emergency Trades Logo" className="w-16 h-16 rounded-full object-cover border-2 border-gold/50" />
+                    </div>
                     <Card className="border-gold/20 shadow-lg">
                         <CardContent className="pt-6 text-center">
                             <h1 className="text-2xl font-display mb-2">

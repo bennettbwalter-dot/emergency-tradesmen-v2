@@ -1,86 +1,82 @@
 import { supabase } from './supabase';
 import type { Business } from './businesses';
-
-/**
- * Fetch businesses from Supabase database
- */
 import { businessListings } from './businesses';
 
 /**
- * Fetch businesses using Hybrid Strategy:
- * 1. Load Static Data (Free Tier)
- * 2. Fetch Supabase Data (Premium Tier)
- * 3. Merge: Supabase overrides Static if ID matches
+ * Helper to map Supabase business data to the Business interface
+ */
+function mapBusinessData(biz: any): Business {
+    return {
+        id: biz.id,
+        name: biz.name || "Untitled Business",
+        rating: Number(biz.rating) || 5.0,
+        reviewCount: biz.review_count || 0,
+        address: biz.address,
+        hours: biz.hours || '24/7 Emergency Service',
+        isOpen24Hours: biz.is_open_24_hours !== false,
+        phone: biz.phone,
+        website: biz.website,
+        featuredReview: biz.featured_review,
+        isAvailableNow: biz.is_available_now !== false,
+        trade: biz.trade,
+        city: biz.city,
+        // Robust photo mapping
+        photos: biz.photos && Array.isArray(biz.photos) && biz.photos.length > 0
+            ? biz.photos.map((url: string, index: number) => ({
+                id: `photo-${index}`,
+                url: url,
+                isPrimary: index === 0
+            }))
+            : (biz.business_photos?.map((p: any) => ({
+                id: p.id,
+                url: p.url,
+                isPrimary: p.is_primary,
+                altText: p.alt_text
+            })) || []),
+        tier: biz.tier || 'free',
+        priority_score: biz.priority_score || 0,
+        // Premium fields
+        logo_url: biz.logo_url,
+        premium_description: biz.premium_description,
+        services_offered: biz.services_offered || [],
+        coverage_areas: biz.coverage_areas || [],
+        is_premium: biz.is_premium || biz.tier === 'paid' || false,
+        owner_user_id: biz.owner_user_id,
+        whatsapp_number: biz.whatsapp_number,
+        last_available_ping: biz.last_available_ping,
+        contact_name: biz.contact_name,
+        verified: biz.verified || false
+    };
+}
+
+/**
+ * Fetch businesses using Hybrid Strategy
  */
 export async function fetchBusinesses(trade: string, city: string): Promise<Business[]> {
-    // 1. Get Static Data
     const staticBusinesses = businessListings[city.toLowerCase()]?.[trade.toLowerCase()] || [];
 
-    // 2. Get Supabase Data
     const { data: supabaseBusinesses, error } = await supabase
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('trade', trade.toLowerCase())
-        .eq('city', city) // partial match logic could be added later
+        .eq('city', city)
         .eq('verified', true);
 
     if (error) {
         console.error('Error fetching dynamic businesses:', error);
-        // Fallback to static data only
         return staticBusinesses;
     }
 
-    // 3. Merge Strategy
-    // Create a map for fast lookup
     const businessMap = new Map<string, Business>();
-
-    // A. Add Static entries first
     staticBusinesses.forEach(biz => businessMap.set(biz.id, biz));
 
-    // B. Add/Override with Supabase entries
     if (supabaseBusinesses) {
         supabaseBusinesses.forEach((biz: any) => {
-            const dynamicBiz: Business = {
-                id: biz.id,
-                name: biz.name,
-                rating: Number(biz.rating) || 5.0,
-                reviewCount: biz.review_count || 0,
-                address: biz.address,
-                hours: biz.hours || '24/7 Emergency Service',
-                isOpen24Hours: biz.is_open_24_hours !== false,
-                phone: biz.phone,
-                website: biz.website,
-                featuredReview: biz.featured_review,
-                isAvailableNow: biz.is_available_now !== false,
-                trade: biz.trade,
-                city: biz.city,
-                photos: biz.business_photos?.map((p: any) => ({
-                    id: p.id,
-                    url: p.url,
-                    isPrimary: p.is_primary,
-                    altText: p.alt_text
-                })) || [],
-                tier: biz.tier, // 'paid' from DB overrides this
-                priority_score: biz.priority_score,
-                // Premium fields
-                logo_url: biz.logo_url,
-                premium_description: biz.premium_description,
-                services_offered: biz.services_offered || [],
-                coverage_areas: biz.coverage_areas || [],
-                is_premium: biz.is_premium || false,
-                owner_user_id: biz.owner_user_id,
-                whatsapp_number: biz.whatsapp_number
-            };
-
-            // This set() will overwrite if ID exists (Promotion), or add new if not (New Premium)
-            businessMap.set(biz.id, dynamicBiz);
+            businessMap.set(biz.id, mapBusinessData(biz));
         });
     }
 
-    // Convert back to array
     const mergedList = Array.from(businessMap.values());
-
-    // Sort: Premium/Paid top, then priority, then rating
     return mergedList.sort((a, b) => {
         if (a.tier === 'paid' && b.tier !== 'paid') return -1;
         if (a.tier !== 'paid' && b.tier === 'paid') return 1;
@@ -88,49 +84,17 @@ export async function fetchBusinesses(trade: string, city: string): Promise<Busi
     });
 }
 
-/**
- * Fetch a single business by ID
- */
-/**
- * Fetch a single business by ID (Hybrid: Supabase -> Static)
- */
 export async function fetchBusinessById(id: string): Promise<Business | null> {
-    // 1. Try Supabase First (Real-time data)
     const { data, error } = await supabase
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('id', id)
-        .maybeSingle(); // maybeSingle avoids error if not found
+        .maybeSingle();
 
     if (!error && data) {
-        return {
-            id: data.id,
-            name: data.name,
-            rating: Number(data.rating) || 5.0,
-            reviewCount: data.review_count || 0,
-            address: data.address,
-            hours: data.hours || '24/7 Emergency Service',
-            isOpen24Hours: data.is_open_24_hours !== false,
-            phone: data.phone,
-            website: data.website,
-            featuredReview: data.featured_review,
-            isAvailableNow: data.is_available_now !== false,
-            trade: data.trade,
-            city: data.city,
-            photos: data.business_photos?.map((p: any) => ({
-                id: p.id,
-                url: p.url,
-                isPrimary: p.is_primary,
-                altText: p.alt_text
-            })) || [],
-            // Premium fields mapped ...
-            is_premium: data.is_premium,
-            whatsapp_number: data.whatsapp_number
-        };
+        return mapBusinessData(data);
     }
 
-    // 2. Fallback to Static Data
-    // We need to search through the nested object structure
     for (const city in businessListings) {
         for (const trade in businessListings[city]) {
             const found = businessListings[city][trade].find(b => b.id === id);
@@ -141,9 +105,6 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
     return null;
 }
 
-/**
- * Fetch all verified businesses (for homepage, etc.)
- */
 export async function fetchAllBusinesses(limit = 100): Promise<Business[]> {
     const { data, error } = await supabase
         .from('businesses')
@@ -157,36 +118,13 @@ export async function fetchAllBusinesses(limit = 100): Promise<Business[]> {
         return [];
     }
 
-    return (data || []).map(biz => ({
-        id: biz.id,
-        name: biz.name,
-        rating: Number(biz.rating) || 5.0,
-        reviewCount: biz.review_count || 0,
-        address: biz.address,
-        hours: biz.hours || '24/7 Emergency Service',
-        isOpen24Hours: biz.is_open_24_hours !== false,
-        phone: biz.phone,
-        website: biz.website,
-        featuredReview: biz.featured_review,
-        isAvailableNow: biz.is_available_now !== false,
-        trade: biz.trade,
-        city: biz.city,
-        photos: biz.business_photos?.map((p: any) => ({
-            id: p.id,
-            url: p.url,
-            isPrimary: p.is_primary,
-            altText: p.alt_text
-        })) || []
-    }));
+    return (data || []).map(biz => mapBusinessData(biz));
 }
 
-/**
- * Search businesses by name or trade
- */
 export async function searchBusinesses(query: string): Promise<Business[]> {
     const { data, error } = await supabase
         .from('businesses')
-        .select('*')
+        .select('*, business_photos(*)')
         .eq('verified', true)
         .or(`name.ilike.%${query}%,trade.ilike.%${query}%`)
         .order('rating', { ascending: false })
@@ -197,47 +135,20 @@ export async function searchBusinesses(query: string): Promise<Business[]> {
         return [];
     }
 
-    return (data || []).map(biz => ({
-        id: biz.id,
-        name: biz.name,
-        rating: Number(biz.rating) || 5.0,
-        reviewCount: biz.review_count || 0,
-        address: biz.address,
-        hours: biz.hours || '24/7 Emergency Service',
-        isOpen24Hours: biz.is_open_24_hours !== false,
-        phone: biz.phone,
-        website: biz.website,
-        featuredReview: biz.featured_review,
-        isAvailableNow: biz.is_available_now !== false,
-        trade: biz.trade,
-        city: biz.city,
-        photos: [] // Search might not need photos immediately, but adding empty array for type safety
-    }));
+    return (data || []).map(biz => mapBusinessData(biz));
 }
 
-/**
- * Fetch paid/premium businesses for the availability carousel
- * Checks for businesses with active subscriptions (simulated for now)
- */
 export async function fetchPaidBusinesses(trade?: string, city?: string): Promise<Business[]> {
-    // In future: Join with subscriptions table using owner_id
-    // For now: Fetch verified businesses and filter/simulate
-    // This allows us to have "real" data structure even if empty
-
     let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('verified', true)
+        .eq('is_premium', true)
         .order('rating', { ascending: false })
-        .limit(10); // Sanity limit
+        .limit(10);
 
-    if (trade) {
-        query = query.eq('trade', trade);
-    }
-
-    if (city) {
-        query = query.eq('city', city);
-    }
+    if (trade) query = query.eq('trade', trade);
+    if (city) query = query.eq('city', city);
 
     const { data, error } = await query;
 
@@ -246,11 +157,5 @@ export async function fetchPaidBusinesses(trade?: string, city?: string): Promis
         return [];
     }
 
-    // Filter logic: In a real scenario, we'd check against a list of subscribed user IDs
-    // For now, return empty to force placeholders as per previous instruction, 
-    // OR map the data if we want to show it.
-    // The previous instruction was "return []" to force placeholders.
-    // We'll keep returning [] here for consistency with the Availability Carousel requirement.
-
-    return [];
+    return (data || []).map(biz => mapBusinessData(biz));
 }

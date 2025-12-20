@@ -12,7 +12,7 @@ export function Header() {
       <div className="container-wide">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src="/et-logo.jpg" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
+            <img src="/et-logo-new.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
             <div className="hidden sm:block">
               <span className="font-display text-2xl tracking-wide text-foreground">Emergency</span>
               <span className="font-display text-2xl tracking-wide text-gold">Trades</span>
@@ -24,9 +24,12 @@ export function Header() {
             <Link to="/about" className="text-sm font-medium hover:text-gold transition-colors">
               About
             </Link>
-            <Link to="/tradesmen" className="text-sm font-medium hover:text-gold transition-colors">
-              For Tradesmen
-            </Link>
+            <Link to="/faq" className="text-sm font-medium hover:text-gold transition-colors">FAQ</Link>
+            <Button variant="outline" size="sm" asChild className="border-gold text-gold hover:bg-gold/10 px-4 rounded-md">
+              <Link to="/tradesmen">
+                Tradesmen Sign Up
+              </Link>
+            </Button>
             <Link to="/compare" className="text-sm font-medium hover:text-gold transition-colors flex items-center gap-1">
               Compare
               <ComparisonBadge />

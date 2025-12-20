@@ -36,6 +36,9 @@ export default function About() {
                                     We started Emergency Trades with a simple goal: to take the stress out of home emergencies.
                                     When disaster strikes, you shouldn't have to worry about finding a reliable professional.
                                 </p>
+                                <div className="flex justify-center mb-6">
+                                    <img src="/et-logo-new.png" alt="Emergency Trades Logo" className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
+                                </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>
                                         <Link to="/contact" className="flex items-center gap-2">

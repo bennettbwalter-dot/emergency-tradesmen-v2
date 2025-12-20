@@ -22,6 +22,19 @@ export default function PricingPage() {
                             Get priority ranking, enhanced trust signals, and 3x more leads.
                         </p>
                     </div>
+                    <div className="max-w-3xl mx-auto mb-16 text-center bg-card/50 border border-gold/20 p-8 rounded-2xl backdrop-blur-sm">
+                        <p className="text-gold uppercase tracking-widest text-sm font-bold mb-4">for Tradesmen</p>
+                        <h2 className="text-3xl font-display mb-6">Why Join Emergency Tradesmen?</h2>
+                        <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                            <p>
+                                When emergencies happen, customers don’t shop around — they call the first trusted tradesperson they see.
+                            </p>
+                            <p>
+                                Emergency Tradesmen puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.
+                            </p>
+                        </div>
+                    </div>
+
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {/* Free Tier */}
@@ -81,7 +94,7 @@ export default function PricingPage() {
                             <Button
                                 variant="hero"
                                 className="w-full h-12 text-lg"
-                                onClick={() => window.open('https://checkout.revolut.com/pay/23683af0-9b18-41a3-8d5f-3dec9f64c419', '_blank')}
+                                onClick={() => window.open('https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00', '_blank')}
                             >
                                 Get Pro Monthly
                             </Button>
@@ -119,7 +132,7 @@ export default function PricingPage() {
                             </ul>
                             <Button
                                 className="w-full h-12 text-lg bg-emerald-500 hover:bg-emerald-600 text-white"
-                                onClick={() => window.open('https://checkout.revolut.com/pay/17b71aef-f805-4974-a7fe-fb136b083b61', '_blank')}
+                                onClick={() => window.open('https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01', '_blank')}
                             >
                                 Get Pro Yearly
                             </Button>
@@ -127,7 +140,7 @@ export default function PricingPage() {
                     </div>
 
                     <div className="text-center mt-12 text-muted-foreground">
-                        <p>Payment processing via Revolut coming soon. Contact us to set up your subscription.</p>
+                        <p>Secure payment processing via Stripe. Get listed and start receiving leads today.</p>
                     </div>
                 </div>
             </main>

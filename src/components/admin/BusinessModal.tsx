@@ -32,6 +32,7 @@ export function BusinessModal({ isOpen, onClose, business, onSuccess }: Business
         hours: "Open 24 hours",
         is_open_24_hours: true,
         is_available_now: true,
+        verified: false,
     });
 
     useEffect(() => {
@@ -50,6 +51,7 @@ export function BusinessModal({ isOpen, onClose, business, onSuccess }: Business
                 hours: business.hours || "Open 24 hours",
                 is_open_24_hours: business.is_open_24_hours ?? true,
                 is_available_now: business.is_available_now ?? true,
+                verified: business.verified ?? false,
             });
         } else {
             // Reset for new business

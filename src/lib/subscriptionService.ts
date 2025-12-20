@@ -21,13 +21,13 @@ export const PLANS = {
         features: ['Basic Business Profile', 'Listed in 1 Category', 'Standard Support'],
     },
     professional: {
-        name: 'Professional',
+        name: 'Pro Monthly',
         price: 29,
         durationDays: 30,
         features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Verified Badge', 'Analytics'],
     },
     enterprise: {
-        name: 'Enterprise',
+        name: 'Pro Yearly',
         price: 99,
         durationDays: 365,
         features: ['Premium Profile + Video', 'All Categories', 'Top of Results', 'Account Manager', 'Featured'],
@@ -258,10 +258,10 @@ export function getPlanDisplayName(planType: string): string {
     switch (planType) {
         case 'pro':
         case 'enterprise':
-            return 'Pro (£99/year)';
+            return 'Pro Yearly (£99)';
         case 'basic':
         case 'professional':
-            return 'Basic (£29/month)';
+            return 'Pro Monthly (£29)';
         default:
             return 'Basic';
     }

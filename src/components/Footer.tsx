@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <img src="/et-logo.jpg" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
+              <img src="/et-logo-new.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
               <div>
                 <span className="font-display text-xl tracking-wide text-foreground">Emergency</span>
                 <span className="font-display text-xl tracking-wide text-gold">Trades</span>
