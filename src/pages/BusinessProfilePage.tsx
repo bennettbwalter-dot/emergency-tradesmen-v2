@@ -254,6 +254,19 @@ export default function BusinessProfilePage() {
             <Header />
 
             <main>
+                {/* Breadcrumb Navigation - Subtle for dark theme */}
+                <div className="bg-[#0A0A0A] pt-6">
+                    <div className="container-wide">
+                        <Link
+                            to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city}`}
+                            className="inline-flex items-center text-xs uppercase tracking-widest text-white/40 hover:text-gold transition-colors"
+                        >
+                            <ArrowLeft className="w-4 h-4 mr-2" />
+                            Back to {formattedCity} {formattedTrade}s
+                        </Link>
+                    </div>
+                </div>
+
                 {/* Premium Hero Section */}
                 <section className="relative h-[450px] md:h-[550px] overflow-hidden flex flex-col justify-end">
                     {/* Background Image with Overlay */}
