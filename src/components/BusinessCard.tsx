@@ -42,8 +42,12 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   const lastPing = business.last_available_ping ? new Date(business.last_available_ping) : null;
   const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
   const isLive = lastPing && lastPing > oneHourAgo;
-  const isAvailable = true; // Default for emergency trades
-  const showAvailable = isLive || business.isOpen24Hours || isAvailable;
+
+  // A business is "open" if it's 24h OR the hours string says "Open" and not "Closed"
+  const isCurrentlyOpen = business.isOpen24Hours ||
+    (business.hours &&
+      business.hours.toLowerCase().includes("open") &&
+      !business.hours.toLowerCase().includes("closed"));
 
   const isPremium = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
 
@@ -56,6 +60,20 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       .slice(0, 2)
       .toUpperCase();
   };
+
+  // Status Color Logic
+  const statusColorClass = isCurrentlyOpen
+    ? (isPremium ? "text-emerald-400" : "text-green-500")
+    : "text-red-500";
+  const statusBgClass = isCurrentlyOpen
+    ? (isPremium ? "bg-emerald-500/10 border-emerald-500/40" : "bg-green-500/10 border-green-500/30")
+    : "bg-red-500/10 border-red-500/30";
+  const dotColorClass = isCurrentlyOpen
+    ? (isPremium ? "bg-emerald-500" : "bg-green-500")
+    : "bg-red-500";
+  const dotPingClass = isCurrentlyOpen
+    ? (isPremium ? "bg-emerald-400" : "bg-green-400")
+    : "bg-red-400";
 
   return (
     <div
@@ -141,20 +159,15 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             <span className="text-xs text-muted-foreground">({business.reviewCount} reviews)</span>
           </div>
 
-          {showAvailable && (
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${isPremium
-              ? "bg-emerald-500/10 border-emerald-500/40"
-              : "bg-green-500/10 border-green-500/30"
-              }`}>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span className={`text-[11px] font-bold tracking-widest ${isPremium ? "text-emerald-400" : "text-green-500"}`}>
-                AVAILABLE NOW
-              </span>
-            </div>
-          )}
+          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${statusBgClass}`}>
+            <span className="relative flex h-2 w-2">
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotPingClass}`}></span>
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${dotColorClass}`}></span>
+            </span>
+            <span className={`text-[11px] font-bold tracking-widest ${statusColorClass}`}>
+              AVAILABLE NOW
+            </span>
+          </div>
         </div>
 
         {/* Details List */}
