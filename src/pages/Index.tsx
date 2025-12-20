@@ -200,32 +200,27 @@ const Index = () => {
                 {/* Availability badge */}
 
                 <motion.div
-
                   initial={{ opacity: 0, y: 20 }}
-
                   animate={{ opacity: 1, y: 0 }}
-
                   transition={{ duration: 0.5 }}
-
-                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8"
-
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-white/5 backdrop-blur-sm mb-8 shadow-[0_0_15px_rgba(212,175,55,0.1)]"
                 >
-
                   <span className="relative flex h-2 w-2">
                     <motion.span
-                      animate={{ backgroundColor: ["#22C55E", "#EF4444"] }}
+                      animate={{ backgroundColor: ["#D4AF37", "#FFFFFF"] }}
                       transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
                       className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
                     />
                     <motion.span
-                      animate={{ backgroundColor: ["#22C55E", "#EF4444"] }}
+                      animate={{ backgroundColor: ["#D4AF37", "#FFFFFF"] }}
                       transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
                       className="relative inline-flex rounded-full h-2 w-2"
                     />
                   </span>
 
-                  <motion.span animate={{ color: ["#FFFFFF", "#D4AF37"] }} transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }} className="text-sm font-medium uppercase tracking-wider">Tradespeople Available Now</motion.span>
-
+                  <span className="text-sm font-medium uppercase tracking-wider text-white">
+                    Tradespeople <span className="text-gold">Available Now</span>
+                  </span>
                 </motion.div>
 
 

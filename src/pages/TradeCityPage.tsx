@@ -160,12 +160,14 @@ export default function TradeCityPage() {
                 <span className="text-gold">{cityName}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm mb-8 animate-fade-up">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-white/5 backdrop-blur-sm mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
-                <span className="text-sm font-medium uppercase tracking-wider text-gold">{tradeInfo.name}s available now in {cityName}</span>
+                <span className="text-sm font-medium uppercase tracking-wider text-white">
+                  {tradeInfo.name}s <span className="text-gold">available now</span> in {cityName}
+                </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
@@ -183,19 +185,19 @@ export default function TradeCityPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-2">
-                <Button 
-                    variant="hero" 
-                    onClick={() => {
-                      document.getElementById('listings')?.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                      });
-                    }}
-                    className="flex items-center gap-3"
-                  >
-                    <Phone className="w-5 h-5" />
-                    Contact Us
-                  </Button>
+                <Button
+                  variant="hero"
+                  onClick={() => {
+                    document.getElementById('listings')?.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }}
+                  className="flex items-center gap-3"
+                >
+                  <Phone className="w-5 h-5" />
+                  Contact Us
+                </Button>
                 <div className="flex items-center gap-3 text-muted-foreground px-6 py-3 border border-border/50 rounded-sm">
                   <Clock className="w-5 h-5 text-gold" />
                   <span className="uppercase tracking-wider text-sm">Response in {averageResponseTime}</span>
@@ -266,7 +268,7 @@ export default function TradeCityPage() {
             </div>
           ) : (
             <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredBusinesses.map((business, index) => (
+              {filteredBusinesses.map((business, index) => (
                 <BusinessCard key={business.id} business={business} rank={index + 1} />
               ))}
             </div>

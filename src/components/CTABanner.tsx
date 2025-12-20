@@ -93,12 +93,14 @@ export function CTABanner({ trade, city }: CTABannerProps) {
               </div>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-success/20 text-success mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/50 bg-white/5 backdrop-blur-sm mb-4 shadow-[0_0_10px_rgba(212,175,55,0.1)]">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
               </span>
-              <span className="text-sm font-medium">Tradespeople available now</span>
+              <span className="text-sm font-medium uppercase tracking-wider text-white">
+                Tradespeople <span className="text-gold">available now</span>
+              </span>
             </div>
           )}
 
