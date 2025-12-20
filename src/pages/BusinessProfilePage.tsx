@@ -231,16 +231,19 @@ export default function BusinessProfilePage() {
         priceRange: "££"
     };
 
-    // Map of trade-specific background images for hero
-    const heroBgImages = {
-        'electrician': 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop',
-        'plumber': 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop',
-        'locksmith': 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop',
-        'gas-engineer': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop',
-        'default': 'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'
+    // Map of trade-specific representative images (trucks/vans/technicians)
+    const tradeRepresentativeImages = {
+        'electrician': 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=800&auto=format&fit=crop', // Utility van
+        'plumber': 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?q=80&w=800&auto=format&fit=crop', // Service van
+        'locksmith': 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a30?q=80&w=800&auto=format&fit=crop', // Locked door/Van
+        'gas-engineer': 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop', // Boiler service technician
+        'drain-specialist': 'https://images.unsplash.com/photo-1622322528563-f168da4ffbd2?q=80&w=800&auto=format&fit=crop', // Drainage truck
+        'glazier': 'https://images.unsplash.com/photo-1621350612918-0fb68bf71e1b?q=80&w=800&auto=format&fit=crop', // Glass transport
+        'breakdown': 'https://images.unsplash.com/photo-1563229283-1419fba55a90?q=80&w=800&auto=format&fit=crop', // Recovery truck
+        'default': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop'
     };
 
-    const heroImage = heroBgImages[trade as keyof typeof heroBgImages] || heroBgImages.default;
+    const representativeImage = tradeRepresentativeImages[trade as keyof typeof tradeRepresentativeImages] || tradeRepresentativeImages.default;
 
     return (
         <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-gold/30">
@@ -255,7 +258,7 @@ export default function BusinessProfilePage() {
 
             <main>
                 {/* Breadcrumb Navigation - Subtle for dark theme */}
-                <div className="bg-[#0A0A0A] pt-6">
+                <div className="bg-[#0A0A0A] pt-6 sm:pt-10">
                     <div className="container-wide">
                         <Link
                             to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city}`}
@@ -268,91 +271,122 @@ export default function BusinessProfilePage() {
                 </div>
 
                 {/* Premium Hero Section */}
-                <section className="relative h-[450px] md:h-[550px] overflow-hidden flex flex-col justify-end">
-                    {/* Background Image with Overlay */}
+                <section className="relative min-h-[500px] md:h-[650px] overflow-hidden flex flex-col justify-end pt-10">
+                    {/* Background Overlay */}
                     <div className="absolute inset-0 z-0">
+                        <div className="absolute inset-0 bg-[#0A0A0A]"></div>
+                        {/* Moody road background */}
                         <img
-                            src={heroImage}
-                            alt={business.name}
-                            className="w-full h-full object-cover"
+                            src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop"
+                            className="w-full h-full object-cover opacity-20 blur-sm"
+                            alt="Background"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent"></div>
-                        <div className="absolute inset-0 bg-black/20"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent"></div>
                     </div>
 
-                    <div className="container-wide relative z-10 pb-12">
-                        {/* Top Info */}
-                        <div className="flex flex-col md:flex-row items-start md:items-end gap-6 mb-8">
-                            {/* Logo/Initials Box */}
-                            <div className="w-24 h-24 md:w-28 md:h-28 rounded-xl bg-[#121212] border-2 border-gold/30 flex items-center justify-center shrink-0 overflow-hidden shadow-2xl">
-                                {business.logo_url ? (
-                                    <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain p-2" />
-                                ) : (
-                                    <span className="font-display text-4xl font-bold text-gold">
-                                        {business.name.substring(0, 1)}
-                                    </span>
-                                )}
-                            </div>
+                    <div className="container-wide relative z-10 pb-16">
+                        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12">
+                            {/* Left Content: Business Info */}
+                            <div className="w-full lg:max-w-2xl space-y-10 order-2 lg:order-1">
+                                <div className="flex flex-col md:flex-row items-center md:items-end gap-6">
+                                    {/* Logo/Initials Box */}
+                                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-[#121212] border-2 border-gold/30 flex items-center justify-center shrink-0 overflow-hidden shadow-2xl">
+                                        {business.logo_url ? (
+                                            <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain p-2" />
+                                        ) : (
+                                            <span className="font-display text-5xl font-bold text-gold">
+                                                {business.name.substring(0, 1)}
+                                            </span>
+                                        )}
+                                    </div>
 
-                            <div className="space-y-3">
-                                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight">
-                                    {business.name}
-                                </h1>
-                                <div className="flex flex-wrap items-center gap-4 text-sm md:text-base font-medium">
-                                    <div className="flex items-center gap-1.5 text-gold">
-                                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                                        Verified Business
-                                    </div>
-                                    <span className="text-white/40">•</span>
-                                    <div className="flex items-center gap-1.5 text-white/70">
-                                        <MapPin className="w-4 h-4" />
-                                        {business.address || formattedCity}
-                                    </div>
-                                    <span className="text-white/40">•</span>
-                                    <div className="text-white/70 uppercase tracking-widest text-[10px] md:text-xs">
-                                        The {formattedTrade}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Emergency Call Strip */}
-                        <div className="bg-[#121212]/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl animate-fade-in max-w-4xl">
-                            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Shield className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/50 font-medium uppercase tracking-wider">Need Quick Help?</p>
-                                        <p className="text-sm md:text-base text-white font-semibold">Emergency? Call now for fastest response</p>
+                                    <div className="text-center md:text-left space-y-4">
+                                        <h1 className="font-display text-4xl md:text-6xl text-white font-medium tracking-tight leading-tight">
+                                            {business.name}
+                                        </h1>
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm md:text-base font-medium">
+                                            <div className="flex items-center gap-1.5 text-gold">
+                                                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
+                                                Verified Business
+                                            </div>
+                                            <span className="text-white/40">•</span>
+                                            <div className="flex items-center gap-1.5 text-white/70">
+                                                <MapPin className="w-4 h-4" />
+                                                {business.address || formattedCity}
+                                            </div>
+                                            <span className="text-white/40">•</span>
+                                            <div className="text-white/70 uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold font-sans">
+                                                THE {formattedTrade.toUpperCase()}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-3">
-                                    <Button
-                                        asChild
-                                        size="lg"
-                                        className="bg-gold hover:bg-gold-light text-black font-bold h-14 px-8 rounded-xl shadow-lg shadow-gold/20"
-                                        onClick={() => trackEvent("Business", "Call Now Hero", `${business.name} (${business.id})`)}
-                                    >
-                                        <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
-                                            <Phone className="w-5 h-5" />
-                                            {business.phone}
-                                        </a>
-                                    </Button>
-                                    <Button
-                                        asChild
-                                        variant="outline"
-                                        size="lg"
-                                        className="border-white/20 hover:bg-white/5 text-white h-14 px-8 rounded-xl"
-                                        onClick={() => trackEvent("Business", "Outline Call Now Hero", `${business.name} (${business.id})`)}
-                                    >
-                                        <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
-                                            <Phone className="w-5 h-5" />
-                                            CALL NOW
-                                        </a>
-                                    </Button>
+                                {/* Emergency Call Strip */}
+                                <div className="bg-[#121212]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5 md:p-8 shadow-2xl animate-fade-in ring-1 ring-white/5">
+                                    <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold border border-gold/20">
+                                                <Shield className="w-6 h-6" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] text-gold font-bold uppercase tracking-[0.2em] mb-1">Priority Service</p>
+                                                <p className="text-base md:text-lg text-white font-medium">Emergency? Call now for fastest response</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <Button
+                                                asChild
+                                                size="lg"
+                                                className="bg-gold hover:bg-gold-light text-black font-bold h-16 px-10 rounded-xl shadow-xl shadow-gold/20 flex-1 sm:flex-none transition-all hover:scale-105"
+                                                onClick={() => trackEvent("Business", "Call Now Hero", `${business.name} (${business.id})`)}
+                                            >
+                                                <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-3">
+                                                    <Phone className="w-5 h-5" />
+                                                    {business.phone}
+                                                </a>
+                                            </Button>
+                                            <Button
+                                                asChild
+                                                variant="outline"
+                                                size="lg"
+                                                className="border-white/20 hover:bg-white/5 text-white h-16 px-10 rounded-xl flex-1 sm:flex-none"
+                                                onClick={() => trackEvent("Business", "Outline Call Now Hero", `${business.name} (${business.id})`)}
+                                            >
+                                                <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-3">
+                                                    <Phone className="w-5 h-5 text-white/40" />
+                                                    CALL NOW
+                                                </a>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Content: Trade Image (Representative Truck/Van) */}
+                            <div className="w-full lg:w-1/2 lg:max-w-xl order-1 lg:order-2 flex justify-center lg:justify-end">
+                                <div className="relative group">
+                                    {/* Glass reflection effect */}
+                                    <div className="absolute -inset-4 bg-gold/20 rounded-3xl blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700"></div>
+                                    <div className="relative w-[300px] h-[200px] md:w-[500px] md:h-[350px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-700">
+                                        <img
+                                            src={representativeImage}
+                                            alt={`${formattedTrade} service vehicle`}
+                                            className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                                        {/* Overlay text on image */}
+                                        <div className="absolute bottom-6 left-6 text-left">
+                                            <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold mb-1">Local Service</p>
+                                            <p className="text-white text-lg font-display italic">24/7 Response Vehicle</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Flashing Light Effect (Simulating emergency lights) */}
+                                    <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-gold/40 rounded-full blur-[80px] animate-pulse pointer-events-none"></div>
+                                    <div className="absolute bottom-1/4 left-1/4 w-40 h-40 bg-white/20 rounded-full blur-[100px] animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
                                 </div>
                             </div>
                         </div>
