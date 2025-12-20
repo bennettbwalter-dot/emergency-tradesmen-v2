@@ -99,7 +99,7 @@ const Index = () => {
 
         <Helmet>
 
-          <title>Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More</title>
+          <title>Emergency Tradesmen UK – VERIFIED 24/7 Plumbers</title>
 
           <meta
 
