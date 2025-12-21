@@ -12,7 +12,7 @@ export function ReviewStatsDisplay({ stats }: ReviewStatsDisplayProps) {
             <div className="grid md:grid-cols-2 gap-8">
                 {/* Overall Rating */}
                 <div className="text-center md:text-left">
-                    <p className="text-sm text-muted-foreground uppercase tracking-wider mb-2">
+                    <p className="text-sm text-foreground/70 dark:text-muted-foreground uppercase tracking-wider mb-2 font-medium">
                         Overall Rating
                     </p>
                     <div className="flex items-end gap-3 mb-4">
@@ -24,8 +24,8 @@ export function ReviewStatsDisplay({ stats }: ReviewStatsDisplayProps) {
                                 <Star
                                     key={i}
                                     className={`w-5 h-5 ${i < Math.round(stats.averageRating)
-                                            ? "fill-gold text-gold"
-                                            : "text-muted-foreground/30"
+                                        ? "fill-gold text-gold"
+                                        : "text-muted-foreground/30"
                                         }`}
                                 />
                             ))}
@@ -40,27 +40,27 @@ export function ReviewStatsDisplay({ stats }: ReviewStatsDisplayProps) {
                         <div className="text-center">
                             <div className="flex items-center justify-center gap-2 mb-1">
                                 <CheckCircle className="w-4 h-4 text-gold" />
-                                <span className="text-2xl font-display text-foreground">
+                                <span className="text-2xl font-display text-foreground font-semibold">
                                     {Math.round(stats.verifiedPercentage)}%
                                 </span>
                             </div>
-                            <p className="text-xs text-muted-foreground">Verified Reviews</p>
+                            <p className="text-xs text-foreground/60 dark:text-muted-foreground font-medium">Verified Reviews</p>
                         </div>
                         <div className="text-center">
                             <div className="flex items-center justify-center gap-2 mb-1">
                                 <MessageSquare className="w-4 h-4 text-gold" />
-                                <span className="text-2xl font-display text-foreground">
+                                <span className="text-2xl font-display text-foreground font-semibold">
                                     {Math.round(stats.responseRate)}%
                                 </span>
                             </div>
-                            <p className="text-xs text-muted-foreground">Response Rate</p>
+                            <p className="text-xs text-foreground/60 dark:text-muted-foreground font-medium">Response Rate</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Rating Distribution */}
                 <div>
-                    <p className="text-sm text-muted-foreground uppercase tracking-wider mb-4">
+                    <p className="text-sm text-foreground/70 dark:text-muted-foreground uppercase tracking-wider mb-4 font-medium">
                         Rating Distribution
                     </p>
                     <div className="space-y-3">

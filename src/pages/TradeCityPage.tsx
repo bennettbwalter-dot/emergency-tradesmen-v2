@@ -139,7 +139,7 @@ export default function TradeCityPage() {
           name="description"
           content={`Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
         />
-        <link rel="canonical" href={`https://emergencytrades.co.uk/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
+        <link rel="canonical" href={`https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}
         </script>
@@ -157,32 +157,32 @@ export default function TradeCityPage() {
               alt={`Emergency ${tradeInfo.name} ${cityName}`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-primary/80 to-background" />
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
+            <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]" />
           </div>
 
           <div className="relative container-wide py-16 md:py-24 z-10">
             <div className="max-w-3xl">
-              <nav className="flex items-center gap-2 text-white/50 text-sm mb-8">
+              <nav className="flex items-center gap-2 text-muted-foreground/60 text-sm mb-8">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
-                <span className="text-white">Emergency {tradeInfo.name}</span>
+                <span className="text-foreground/80">Emergency {tradeInfo.name}</span>
                 <span className="text-gold/50">/</span>
-                <span className="text-gold">{cityName}</span>
+                <span className="text-gold font-medium">{cityName}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-black/40 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-secondary/50 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
-                <span className="text-sm font-medium uppercase tracking-wider text-white">
+                <span className="text-sm font-medium uppercase tracking-wider text-foreground">
                   {tradeInfo.name}s <span className="text-gold font-bold">available now</span> in {cityName}
                 </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
-                <span className="block font-display text-4xl md:text-6xl tracking-wide text-white mb-2">
+                <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
                   Emergency {tradeInfo.name}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
@@ -190,7 +190,7 @@ export default function TradeCityPage() {
                 </span>
               </h1>
 
-              <p className="text-lg text-white/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed">
+              <p className="text-lg text-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed font-light">
                 Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
@@ -209,7 +209,7 @@ export default function TradeCityPage() {
                   <Phone className="w-5 h-5" />
                   Contact Us
                 </Button>
-                <div className="flex items-center gap-3 text-white/70 px-6 py-3 border border-white/20 rounded-sm bg-white/5 backdrop-blur-sm">
+                <div className="flex items-center gap-3 text-foreground/70 px-6 py-3 border border-border/50 rounded-sm bg-secondary/30 backdrop-blur-sm">
                   <Clock className="w-5 h-5 text-gold" />
                   <span className="uppercase tracking-wider text-sm font-bold">Response in {averageResponseTime}</span>
                 </div>

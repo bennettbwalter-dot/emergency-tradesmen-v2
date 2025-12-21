@@ -286,7 +286,7 @@ export default function BusinessProfilePage() {
     const representativeImage = business.vehicle_image_url || ((tradeRepresentativeImages as any)[trade] || tradeRepresentativeImages.default);
 
     return (
-        <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-gold/30">
+        <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
                 title={`${business.name} - ${formattedTrade} in ${formattedCity} | Emergency Tradesmen`}
                 description={`Read reviews and request a quote from ${business.name}, a top-rated ${formattedTrade} in ${formattedCity}. Available 24/7 for emergency services.`}
@@ -302,7 +302,7 @@ export default function BusinessProfilePage() {
                     <div className="container-wide">
                         <Link
                             to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city}`}
-                            className="inline-flex items-center text-xs uppercase tracking-widest text-white/40 hover:text-gold transition-colors"
+                            className="inline-flex items-center text-xs uppercase tracking-widest text-muted-foreground hover:text-gold transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4 mr-2" />
                             Back to {formattedCity} {formattedTrade}s
@@ -314,14 +314,14 @@ export default function BusinessProfilePage() {
                 <section className="relative min-h-[500px] md:h-[650px] overflow-hidden flex flex-col justify-end pt-10">
                     {/* Background Overlay */}
                     <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-[#0A0A0A]"></div>
+                        <div className="absolute inset-0 bg-background/95 backdrop-blur-sm"></div>
                         {/* Moody road background */}
                         <img
                             src={heroBgImage}
-                            className="w-full h-full object-cover opacity-20 blur-sm"
+                            className="w-full h-full object-cover opacity-30 blur-[2px]"
                             alt="Background"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
                     </div>
 
                     <div className="container-wide relative z-10 pb-16">
@@ -330,7 +330,7 @@ export default function BusinessProfilePage() {
                             <div className="w-full lg:max-w-2xl space-y-10 order-2 lg:order-1">
                                 <div className="flex flex-col md:flex-row items-center md:items-end gap-6">
                                     {/* Logo/Initials Box */}
-                                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-[#121212] border-2 border-gold/30 flex items-center justify-center shrink-0 overflow-hidden shadow-2xl">
+                                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-secondary/50 border-2 border-gold/30 flex items-center justify-center shrink-0 overflow-hidden shadow-2xl backdrop-blur-md">
                                         {business.logo_url ? (
                                             <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain p-2" />
                                         ) : (
@@ -341,7 +341,7 @@ export default function BusinessProfilePage() {
                                     </div>
 
                                     <div className="text-center md:text-left space-y-4">
-                                        <h1 className="font-display text-4xl md:text-6xl text-white font-medium tracking-tight leading-tight">
+                                        <h1 className="font-display text-4xl md:text-6xl text-foreground font-medium tracking-tight leading-tight">
                                             {business.name}
                                         </h1>
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm md:text-base font-medium">
@@ -349,13 +349,13 @@ export default function BusinessProfilePage() {
                                                 <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
                                                 Verified Business
                                             </div>
-                                            <span className="text-white/40">•</span>
-                                            <div className="flex items-center gap-1.5 text-white/70">
+                                            <span className="text-muted-foreground/40">•</span>
+                                            <div className="flex items-center gap-1.5 text-muted-foreground">
                                                 <MapPin className="w-4 h-4" />
                                                 {business.address || formattedCity}
                                             </div>
-                                            <span className="text-white/40">•</span>
-                                            <div className="text-white/70 uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold font-sans">
+                                            <span className="text-muted-foreground/40">•</span>
+                                            <div className="text-muted-foreground uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold font-sans">
                                                 THE {formattedTrade.toUpperCase()}
                                             </div>
                                         </div>
@@ -403,35 +403,35 @@ export default function BusinessProfilePage() {
                                 <div className="space-y-10 pt-8">
                                     <div className="flex items-center gap-4">
                                         <div className="text-5xl">{tradeInfo?.icon || '🔧'}</div>
-                                        <h2 className="font-display text-4xl md:text-5xl text-white font-medium tracking-tight">About {business.name}</h2>
+                                        <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium tracking-tight">About {business.name}</h2>
                                     </div>
                                     <div className="max-w-3xl space-y-8">
-                                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light">
+                                        <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed font-light">
                                             {business.name} is a <span className="text-gold font-medium">trusted 24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions through excellence and reliability.
                                         </p>
 
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border">
                                                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                                                     <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-lg text-white font-medium tracking-tight">Rapid <span className="text-gold">emergency response</span></p>
+                                                <p className="text-lg text-foreground font-medium tracking-tight">Rapid <span className="text-gold">emergency response</span></p>
                                             </div>
-                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border">
                                                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                                                     <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-lg text-white font-medium tracking-tight">Fully <span className="text-white">qualified & insured</span></p>
+                                                <p className="text-lg text-foreground font-medium tracking-tight">Fully <span className="text-foreground">qualified & insured</span></p>
                                             </div>
-                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border">
                                                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                                                     <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-lg text-white font-medium tracking-tight">Local & <span className="text-white">Verified</span></p>
+                                                <p className="text-lg text-foreground font-medium tracking-tight">Local & <span className="text-foreground">Verified</span></p>
                                             </div>
                                         </div>
 
-                                        <div className="prose prose-invert prose-neutral max-w-none text-white/60 leading-relaxed whitespace-pre-line pt-4 italic font-light text-lg">
+                                        <div className="prose prose-neutral dark:prose-invert max-w-none text-muted-foreground leading-relaxed whitespace-pre-line pt-4 italic font-light text-lg">
                                             {description}
                                         </div>
                                     </div>
@@ -440,17 +440,17 @@ export default function BusinessProfilePage() {
 
                             {/* Services Offered */}
                             <section className="space-y-10">
-                                <h2 className="font-display text-4xl text-white font-medium tracking-tight">Services Offered</h2>
+                                <h2 className="font-display text-4xl text-foreground font-medium tracking-tight">Services Offered</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {services.map((service, index) => (
                                         <div
                                             key={index}
-                                            className="group flex items-center gap-4 p-5 bg-[#121212] hover:bg-[#161616] border border-white/5 hover:border-gold/20 rounded-xl transition-all duration-300"
+                                            className="group flex items-center gap-4 p-5 bg-secondary/30 hover:bg-secondary/50 border border-border hover:border-gold/20 rounded-xl transition-all duration-300"
                                         >
-                                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white/40 group-hover:text-gold transition-colors">
+                                            <div className="w-10 h-10 rounded-lg bg-background/50 flex items-center justify-center text-muted-foreground group-hover:text-gold transition-colors">
                                                 {trade === 'electrician' ? <Shield className="w-5 h-5" /> : <Shield className="w-5 h-5" />}
                                             </div>
-                                            <span className="text-lg font-medium text-white/90">{service}</span>
+                                            <span className="text-lg font-medium text-foreground/90">{service}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -458,12 +458,12 @@ export default function BusinessProfilePage() {
 
                             {/* Recent Work Gallery */}
                             <section className="space-y-10">
-                                <h2 className="font-display text-4xl text-white font-medium tracking-tight">Recent Work</h2>
+                                <h2 className="font-display text-4xl text-foreground font-medium tracking-tight">Recent Work</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                     {((business.tier === 'paid' || business.is_premium) && !photosLoading) ? (
                                         displayImages.slice(0, 3).map((photo, i) => (
                                             <div key={photo.id || i} className="group space-y-4">
-                                                <div className="aspect-[4/5] md:aspect-[4/5] rounded-xl overflow-hidden bg-white/5 relative shadow-lg">
+                                                <div className="aspect-[4/5] md:aspect-[4/5] rounded-xl overflow-hidden bg-secondary/50 relative shadow-lg">
                                                     <img
                                                         src={photo.url}
                                                         alt={photo.caption || `${formattedTrade} work example`}
@@ -485,15 +485,15 @@ export default function BusinessProfilePage() {
                             </section>
 
                             {/* Customer Reviews - Integrated into the dark theme */}
-                            <section id="reviews" className="space-y-10 pt-10 border-t border-white/10">
+                            <section id="reviews" className="space-y-10 pt-10 border-t border-border">
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                                    <h2 className="font-display text-4xl text-white font-medium">Customer Reviews</h2>
+                                    <h2 className="font-display text-4xl text-foreground font-medium">Customer Reviews</h2>
                                     <WriteReviewModal
                                         businessName={business.name}
                                         businessId={business.id}
                                     />
                                 </div>
-                                <div className="bg-[#121212] p-6 md:p-10 rounded-3xl border border-white/5">
+                                <div className="bg-secondary/30 p-6 md:p-10 rounded-3xl border border-border">
                                     <ReviewsSection
                                         reviews={realReviews}
                                         stats={reviewStats}
@@ -507,11 +507,11 @@ export default function BusinessProfilePage() {
                         <div className="lg:col-span-1">
                             <div className="sticky top-24 space-y-8">
                                 {/* Contact Card */}
-                                <div className="bg-[#121212] rounded-3xl border border-white/5 p-8 shadow-2xl relative overflow-hidden group">
+                                <div className="bg-card rounded-3xl border border-border p-8 shadow-2xl relative overflow-hidden group">
                                     {/* Subtle Ambient Glow */}
                                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-colors duration-500"></div>
 
-                                    <h3 className="font-display text-2xl font-semibold mb-8 border-b border-white/5 pb-4">Contact Details</h3>
+                                    <h3 className="font-display text-2xl font-semibold mb-8 border-b border-border pb-4">Contact Details</h3>
 
                                     <div className="space-y-8 mb-10">
                                         <div className="flex items-start gap-5">
@@ -519,8 +519,8 @@ export default function BusinessProfilePage() {
                                                 <Phone className="w-5 h-5 text-gold" />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">Phone Number</p>
-                                                <a href={`tel:${business.phone}`} className="text-lg font-medium text-white hover:text-gold transition-colors">
+                                                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1 font-bold">Phone Number</p>
+                                                <a href={`tel:${business.phone}`} className="text-lg font-medium text-foreground hover:text-gold transition-colors">
                                                     {business.phone || "Not available"}
                                                 </a>
                                             </div>
@@ -531,10 +531,10 @@ export default function BusinessProfilePage() {
                                                 <MapPin className="w-5 h-5 text-gold" />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">Service Area</p>
-                                                <p className="text-lg font-medium text-white">{formattedCity} & Surrounding Areas</p>
+                                                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1 font-bold">Service Area</p>
+                                                <p className="text-lg font-medium text-foreground">{formattedCity} & Surrounding Areas</p>
                                                 {business.address && (
-                                                    <p className="text-sm text-white/50 mt-1 leading-relaxed">{business.address}</p>
+                                                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{business.address}</p>
                                                 )}
                                             </div>
                                         </div>
@@ -544,11 +544,11 @@ export default function BusinessProfilePage() {
                                                 <Clock className="w-5 h-5 text-gold" />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1 font-bold">Opening Hours</p>
-                                                <p className="text-lg font-medium text-green-400">
+                                                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1 font-bold">Opening Hours</p>
+                                                <p className="text-lg font-medium text-green-500">
                                                     {business.isOpen24Hours ? "Open 24 hours" : business.hours}
                                                 </p>
-                                                <p className="text-sm text-green-400/80 font-medium">Open 24 hours</p>
+                                                <p className="text-sm text-green-600 font-medium">Open 24 hours</p>
                                             </div>
                                         </div>
                                     </div>
@@ -605,8 +605,8 @@ export default function BusinessProfilePage() {
 
                                 {/* Claim Business Button */}
                                 {(!business.verified && (!claimStatus || (claimStatus.status === 'unclaimed' && !claimStatus.verified))) && (
-                                    <div className="bg-[#121212] rounded-2xl p-6 border border-gold/10 text-center flex flex-col items-center">
-                                        <p className="text-xs text-white/40 mb-4 font-bold uppercase tracking-widest">
+                                    <div className="bg-secondary/30 rounded-2xl p-6 border border-gold/10 text-center flex flex-col items-center">
+                                        <p className="text-xs text-muted-foreground mb-4 font-bold uppercase tracking-widest">
                                             Is this your business?
                                         </p>
                                         <Button asChild variant="outline" className="w-full border-gold/30 hover:bg-gold/10 hover:text-gold rounded-xl py-6">
@@ -621,7 +621,7 @@ export default function BusinessProfilePage() {
                                 )}
 
                                 {/* Map View Container */}
-                                <div className="bg-[#121212] rounded-3xl border border-white/5 p-1 overflow-hidden h-[300px] shadow-2xl">
+                                <div className="bg-secondary/30 rounded-3xl border border-border p-1 overflow-hidden h-[300px] shadow-2xl">
                                     {(business.tier === 'paid' || business.is_premium) ? (
                                         <InteractiveMap
                                             city={formattedCity}

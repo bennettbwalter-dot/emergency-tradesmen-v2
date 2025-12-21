@@ -1,5 +1,5 @@
 # Emergency Tradesmen UK
-# https://emergencytrades.co.uk
+# https://emergencytradesmen.net
 
 User-agent: *
 Allow: /
@@ -19,4 +19,4 @@ Allow: /terms
 Allow: /privacy
 
 # Sitemap location
-Sitemap: https://emergencytrades.co.uk/sitemap.xml
+Sitemap: https://emergencytradesmen.net/sitemap.xml

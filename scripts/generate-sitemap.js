@@ -12,7 +12,8 @@ const trades = [
     "locksmith",
     "gas-engineer",
     "drain-specialist",
-    "glazier"
+    "glazier",
+    "breakdown"
 ];
 
 const cities = [
@@ -30,7 +31,7 @@ const cities = [
     "Warrington", "Wigan", "Middlesbrough", "Blackpool", "Barnsley"
 ];
 
-const BASE_URL = 'https://emergencytradesmen.co.uk';
+const BASE_URL = 'https://emergencytradesmen.net';
 
 function generateSitemap() {
     let xml = `<?xml version="1.0" encoding="UTF-8"?>

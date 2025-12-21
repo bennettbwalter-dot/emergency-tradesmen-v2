@@ -43,9 +43,9 @@ const Index = () => {
 
     name: "Emergency Tradesmen UK",
 
-    url: "https://emergencytrades.co.uk",
+    url: "https://emergencytradesmen.net",
 
-    logo: "https://emergencytrades.co.uk/et-logo-new.png",
+    logo: "https://emergencytradesmen.net/et-logo-new.png",
 
     description: "Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK.",
 
@@ -75,13 +75,13 @@ const Index = () => {
 
     name: "Emergency Tradesmen UK",
 
-    url: "https://emergencytrades.co.uk",
+    url: "https://emergencytradesmen.net",
 
     potentialAction: {
 
       "@type": "SearchAction",
 
-      target: "https://emergencytrades.co.uk/{trade}/{city}",
+      target: "https://emergencytradesmen.net/{trade}/{city}",
 
       "query-input": "required name=trade name=city"
 
@@ -109,7 +109,7 @@ const Index = () => {
 
           />
 
-          <link rel="canonical" href="https://emergencytrades.co.uk" />
+          <link rel="canonical" href="https://emergencytradesmen.net" />
 
 
 
@@ -117,13 +117,13 @@ const Index = () => {
 
           <meta property="og:type" content="website" />
 
-          <meta property="og:url" content="https://emergencytrades.co.uk" />
+          <meta property="og:url" content="https://emergencytradesmen.net" />
 
           <meta property="og:title" content="Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More" />
 
           <meta property="og:description" content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK." />
 
-          <meta property="og:image" content="https://emergencytrades.co.uk/og-image.jpg" />
+          <meta property="og:image" content="https://emergencytradesmen.net/og-image.jpg" />
 
 
 
