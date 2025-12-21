@@ -100,6 +100,7 @@ export interface TradePageData {
   certifications: string[];
   services: string[];
   faqs: { question: string; answer: string }[];
+  localExpertise?: string;
 }
 
 export function generateTradePageData(tradeSlug: string, cityName: string): TradePageData | null {
@@ -115,6 +116,15 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     Sheffield: ["Rotherham", "Doncaster", "Barnsley", "Chesterfield", "Worksop"],
     Liverpool: ["Birkenhead", "Bootle", "Crosby", "St Helens", "Widnes", "Runcorn"],
     Nottingham: ["Beeston", "Arnold", "Carlton", "West Bridgford", "Hucknall"],
+    Sheffield: ["Dore", "Totley", "Hillsborough", "Ecclesall", "Crookes", "Stocksbridge"],
+  };
+
+  const localExpertiseMap: Record<string, string> = {
+    London: "Our London partners are fully ULEZ compliant and experts at navigating Congestion Charge zones and complex borough parking permit requirements (Camden, Islington, Westminster) to ensure the fastest possible arrival, even in heavy traffic.",
+    Manchester: "Specialists in Manchester's unique property mix, from Victorian terrace lead pipe replacements and cast-iron drainage to modern city-centre apartment plumbing. We understand local 'pipe belly' issues common in older Greater Manchester homes.",
+    Birmingham: "Experts at operating within Birmingham's Clean Air Zone (CAZ) and navigating the A4540 Middleway Ring Road. Our tradesmen use compliant vehicles to provide 24/7 service without passing CAZ daily charges onto you.",
+    Sheffield: "While Sheffield's 'Seven Hills' terrain can be challenging, our local network is strategically positioned for rapid response across the city's steep geography, including the Peak District foothills and areas like Blake Street.",
+    Leeds: "Navigating Leeds city centre's parking shortages and pavement restrictions is standard for our local team. We maintain a strong presence across West Leeds and Headingley to beat the typical 5-week city wait times.",
   };
 
   const servicesMap: Record<string, string[]> = {
@@ -195,11 +205,12 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     certifications: certificationsMap[trade.slug] || ["Fully insured", "DBS checked", "Certified"],
     services: servicesMap[trade.slug] || ["Emergency repairs", "Same day service", "24/7 availability"],
     faqs: generateFAQs(trade, city, priceRangeMap[trade.slug] || "£80 – £200"),
+    localExpertise: localExpertiseMap[city],
   };
 }
 
 function generateFAQs(trade: Trade, city: City, priceRange: string): { question: string; answer: string }[] {
-  return [
+  const baseFAQs = [
     {
       question: `How much does an emergency ${trade.name.toLowerCase()} cost in ${city}?`,
       answer: `Emergency ${trade.name.toLowerCase()} call-outs in ${city} typically range from ${priceRange}, depending on the time of day and complexity of the job. Weekend and night-time calls may incur additional charges. All pricing is transparent with no hidden fees.`,
@@ -221,4 +232,30 @@ function generateFAQs(trade: Trade, city: City, priceRange: string): { question:
       answer: `You should call an emergency ${trade.name.toLowerCase()} for any situation that poses an immediate risk to safety, property, or wellbeing. This includes anything that cannot safely wait until normal business hours. When in doubt, call for advice – most consultations are free.`,
     },
   ];
+
+  const localFAQs: Record<string, { question: string; answer: string }> = {
+    London: {
+      question: "Do I have to pay for the tradesman's ULEZ or Congestion Charge?",
+      answer: `No. In London, our partners typically use ULEZ-compliant vehicles. Any necessary congestion charges or borough-specific parking fees are usually managed by the tradesperson, though it's always worth confirming if specialized permits are needed for your specific mews or controlled zone.`,
+    },
+    Manchester: {
+      question: "Can you handle old Victorian lead pipes common in Manchester?",
+      answer: `Yes. Many Manchester properties in areas like Stockport or Salford still have legacy lead piping. Our local ${trade.name.toLowerCase()}s are experts in modern bypass and replacement techniques that meet current UK water safety standards.`,
+    },
+    Birmingham: {
+      question: "Do you service houses inside the Birmingham Clean Air Zone?",
+      answer: `Absolutely. We have a dedicated fleet of CAZ-compliant vehicles that operate 24/7 inside the Middleway Ring Road. You won't face delays or hidden surcharges due to city-centre emission restrictions.`,
+    },
+    Sheffield: {
+      question: "Is your response time affected by Sheffield's hilly terrain?",
+      answer: `We account for the local geography. By positioning our network across different elevations, we can maintain a 30-60 minute arrival window even for steep residential areas and the Peak District boundaries.`,
+    },
+    Leeds: {
+      question: "What if there is no parking available at my Leeds property?",
+      answer: `Our Leeds-based ${trade.name.toLowerCase()}s are accustomed to the city's parking challenges. If you live in a high-density area like Headingley or the city centre, just let us know in advance so the technician can plan their equipment drop-off accordingly.`,
+    },
+  };
+
+  const cityFAQ = localFAQs[city];
+  return cityFAQ ? [cityFAQ, ...baseFAQs] : baseFAQs;
 }

@@ -11,13 +11,14 @@ import { BusinessCardSkeleton } from "@/components/BusinessCardSkeleton";
 import { SearchFilterBar } from "@/components/SearchFilterBar";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { generateTradePageData } from "@/lib/trades";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
-import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield } from "lucide-react";
+import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
@@ -219,6 +220,26 @@ export default function TradeCityPage() {
 
         {/* Trust Section */}
         <section className="container-wide py-12">
+          {pageData.localExpertise && (
+            <div className="mb-12 p-6 bg-gold/5 border border-gold/20 rounded-xl animate-fade-up">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20">
+                  <Navigation className="w-6 h-6 text-gold" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
+                    Local Intelligence: {cityName}
+                    <Badge variant="outline" className="text-[10px] uppercase tracking-tighter border-gold/30 text-gold bg-gold/5">
+                      SEO Optimized
+                    </Badge>
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {pageData.localExpertise}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map((cert, index) => (
               <div key={index} className="flex items-center gap-3 p-5 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-colors">
