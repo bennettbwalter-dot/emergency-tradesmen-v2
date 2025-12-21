@@ -1,4 +1,13 @@
-# Developer Access Setup Guide
+# Developer Access & Environment Guide
+
+## ⚠️ ASSUMED PRODUCTION ENVIRONMENT
+**Do not ask for these details. They are already set up and active.**
+
+- **Hosting**: Cloudflare Pages (`emergencytradesmen.net`)
+- **Database**: Supabase (`antqstrspkchkoylysqa`)
+- **Payments**: Stripe Live Mode (Monthly/Yearly Subscriptions Active)
+- **Email**: SendGrid / Custom SMTP (Active via `sendEmail` utility)
+- **Analytics**: GA4 (`G-N9VVX26Z2R`)
 
 ## Quick Setup for Premium Testing
 

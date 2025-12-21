@@ -43,20 +43,27 @@ const cities = [
 const BASE_URL = 'https://emergencytradesmen.net';
 
 async function generateSitemap() {
-    console.log('🔄 Fetching businesses from Supabase...');
+    console.log('🔄 Fetching data from Supabase...');
 
-    // Fetch all verified businesses efficiently
-    const { data: businesses, error } = await supabase
+    // 1. Fetch verified businesses
+    const { data: businesses, error: bizError } = await supabase
         .from('businesses')
         .select('id, updated_at')
-        .eq('verified', true); // Only index verified businesses
+        .eq('verified', true);
 
-    if (error) {
-        console.error('❌ Error fetching businesses:', error);
+    // 2. Fetch published blog posts
+    const { data: posts, error: postError } = await supabase
+        .from('posts')
+        .select('slug, updated_at')
+        .eq('published', true);
+
+    if (bizError || postError) {
+        console.error('❌ Error fetching data:', bizError || postError);
         return;
     }
 
     console.log(`✅ Found ${businesses.length} verified businesses.`);
+    console.log(`✅ Found ${posts?.length || 0} published blog posts.`);
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
@@ -64,7 +71,7 @@ async function generateSitemap() {
     // 1. Static Pages
     const staticPages = [
         '', '/about', '/pricing', '/terms', '/privacy', '/compare',
-        '/contact', '/user/login', '/business/login'
+        '/contact', '/user/login', '/business/login', '/blog'
     ];
 
     staticPages.forEach(p => {
@@ -101,6 +108,17 @@ async function generateSitemap() {
   </url>`;
     });
 
+    // 4. Dynamic Blog Posts
+    posts?.forEach(post => {
+        xml += `
+  <url>
+    <loc>${BASE_URL}/blog/${post.slug}</loc>
+    <lastmod>${post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    });
+
     xml += `
 </urlset>`;
 
@@ -111,7 +129,8 @@ async function generateSitemap() {
     console.log(`   - Static: ${staticPages.length}`);
     console.log(`   - City Pages: ${trades.length * cities.length}`);
     console.log(`   - Business Profiles: ${businesses.length}`);
-    console.log(`   - Total URLs: ${staticPages.length + (trades.length * cities.length) + businesses.length}`);
+    console.log(`   - Blog Posts: ${posts?.length || 0}`);
+    console.log(`   - Total URLs: ${staticPages.length + (trades.length * cities.length) + businesses.length + (posts?.length || 0)}`);
 }
 
 generateSitemap();
