@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import TrustpilotWidget from "@/components/TrustpilotWidget";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -600,6 +601,16 @@ export default function BusinessProfilePage() {
                                                 </a>
                                             </Button>
                                         )}
+                                    </div>
+
+                                    {/* Trustpilot Sidebar Widget */}
+                                    <div className="mt-8 border-t border-border pt-6">
+                                        <TrustpilotWidget
+                                            templateId="5419b6a8b0d04a076446a9ad"
+                                            businessId="676878b2d4b2944b9e1e2c94"
+                                            username="emergencytradesmen.net"
+                                            styleHeight="24px"
+                                        />
                                     </div>
                                 </div>
 
