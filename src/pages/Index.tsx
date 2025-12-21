@@ -562,15 +562,14 @@ const Index = () => {
                   </ul>
                 </div>
 
-                {/* Empty Placeholder Image Area */}
-                <div className="relative aspect-video rounded-2xl border-2 border-dashed border-gold/20 bg-gold/5 flex items-center justify-center overflow-hidden hover:border-gold/40 transition-colors duration-500 group/placeholder">
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 rounded-full border border-gold/20 flex items-center justify-center mx-auto mb-4 bg-gold/5 group-hover/placeholder:scale-110 transition-transform duration-500">
-                      <Zap className="w-8 h-8 text-gold animate-pulse" />
-                    </div>
-                    <p className="text-gold/60 text-sm font-medium uppercase tracking-widest">Image Placeholder</p>
-                    <p className="text-muted-foreground/60 text-xs mt-2">Space reserved for showcase visual</p>
-                  </div>
+                {/* Showcase Image Area */}
+                <div className="relative aspect-[9/16] rounded-2xl border border-gold/20 bg-gold/5 flex items-center justify-center overflow-hidden hover:border-gold/40 transition-colors duration-500 shadow-2xl">
+                  <img
+                    src="/visibility-showcase.jpg"
+                    alt="Visibility showcase"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
                 </div>
               </div>
             </div>
@@ -659,7 +658,7 @@ const Index = () => {
               variant="outline"
               size="lg"
               onClick={() => setShowFaq(!showFaq)}
-              className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground px-12 font-bold"
+              className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold"
             >
               FAQ
             </Button>

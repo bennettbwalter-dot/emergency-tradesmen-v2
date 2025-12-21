@@ -247,7 +247,7 @@ export function EmergencyChatInterface() {
 
                 <div className="p-4 bg-transparent">
                     <div className="relative group">
-                        
+
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-gold/30 to-gold/10 rounded-full opacity-0 group-hover:opacity-100 transition duration-500 blur-md"></div>
                         <div className="relative flex items-center bg-secondary rounded-full transition-all shadow-lg overflow-hidden">
                             <input
@@ -259,7 +259,7 @@ export function EmergencyChatInterface() {
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
                                 placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                                className="flex-1 bg-transparent border-none outline-none focus:outline-none focus:border-none h-12 px-5 text-base focus:ring-0 focus-visible:ring-0 placeholder:text-white text-white"
+                                className="flex-1 bg-transparent border-none outline-none focus:outline-none focus:border-none h-12 px-5 text-base focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground text-foreground"
                             />
                             <div className="pr-1.5">
                                 <Button
