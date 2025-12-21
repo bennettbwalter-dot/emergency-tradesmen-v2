@@ -31,7 +31,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button variant="default" size="sm" asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+            <Button variant="default" size="sm" asChild className="hidden md:flex bg-gold text-gold-foreground hover:bg-gold/90">
               <Link to="/contact">
                 Contact
               </Link>

@@ -18,6 +18,7 @@ import {
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { IframeMap } from "@/components/IframeMap";
 import type { Business } from "@/lib/businesses";
+import { trades } from "@/lib/trades";
 
 import { db } from "@/lib/db";
 import { trackEvent } from "@/lib/analytics";
@@ -97,7 +98,32 @@ export default function BusinessProfilePage() {
 
     // Extract city and trade from business data
     const city = business.city || "your area";
-    const trade = business.trade || "tradesperson";
+    const rawTrade = (business.trade || "tradesperson").toLowerCase();
+
+    // Find matching trade info, trying both slug and name, and partial matches
+    const tradeInfo = trades.find(t =>
+        t.slug === rawTrade ||
+        t.name.toLowerCase() === rawTrade ||
+        rawTrade.includes(t.slug)
+    );
+
+    // Use the matched slug if found. If not, check if name contains keywords for a fallback
+    // Use the matched slug if found. If not, check if name contains keywords for a fallback
+    let trade = tradeInfo?.slug || rawTrade;
+
+    // Robust fallback: if trade is generic or not found, try to detect from business name
+    if (trade === 'tradesperson' || !trades.some(t => t.slug === trade)) {
+        const nameLc = business.name.toLowerCase();
+
+        // Check for specific trades with potential naming overlaps
+        if (nameLc.includes('drain') || nameLc.includes('unblock')) trade = 'drain-specialist';
+        else if (nameLc.includes('gas') || nameLc.includes('heat') || nameLc.includes('boiler')) trade = 'gas-engineer';
+        else if (nameLc.includes('plumb')) trade = 'plumber';
+        else if (nameLc.includes('electric')) trade = 'electrician';
+        else if (nameLc.includes('lock') && !nameLc.includes('unblock')) trade = 'locksmith';
+        else if (nameLc.includes('glaz') || nameLc.includes('glass') || nameLc.includes('window')) trade = 'glazier';
+        else if (nameLc.includes('breakdown') || nameLc.includes('car') || nameLc.includes('tow') || nameLc.includes('recovery')) trade = 'breakdown';
+    }
 
     // Use the real featured review if available
     const realReviews = business.featuredReview ? [{
@@ -233,15 +259,29 @@ export default function BusinessProfilePage() {
 
     // Map of trade-specific representative images (trucks/vans/technicians)
     const tradeRepresentativeImages = {
-        'electrician': 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=800&auto=format&fit=crop', // Utility van
-        'plumber': 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?q=80&w=800&auto=format&fit=crop', // Service van
-        'locksmith': 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a30?q=80&w=800&auto=format&fit=crop', // Locked door/Van
-        'gas-engineer': 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop', // Boiler service technician
-        'drain-specialist': 'https://images.unsplash.com/photo-1622322528563-f168da4ffbd2?q=80&w=800&auto=format&fit=crop', // Drainage truck
-        'glazier': 'https://images.unsplash.com/photo-1621350612918-0fb68bf71e1b?q=80&w=800&auto=format&fit=crop', // Glass transport
-        'breakdown': 'https://images.unsplash.com/photo-1563229283-1419fba55a90?q=80&w=800&auto=format&fit=crop', // Recovery truck
+        'electrician': '/images/electrician/socket-fix.jpg', // Electrician at socket
+        'plumber': '/images/plumber/sink-fix.png', // Plumber under sink
+        'locksmith': '/images/locksmith/lock-repair.jpg', // Locksmith repairing lock
+        'gas-engineer': '/images/gas-engineer/engineer-working.jpg', // Gas Engineer working on boiler
+        'drain-specialist': '/images/drain-specialist/drain-jetting.jpg', // Drainage truck
+        'glazier': '/images/glazier/window-board-up.jpg', // Glazier boarding window
+        'breakdown': '/images/breakdown-recovery/jump-start.jpg', // Recovery truck
         'default': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop'
     };
+
+    // Map of trade-specific background hero images
+    const tradeHeroBgImages = {
+        'plumber': '/images/plumber/boiler-fix.png',
+        'electrician': '/images/electrician/fusebox-fix.png',
+        'locksmith': '/images/locksmith/door-lock-pick.png',
+        'gas-engineer': '/images/gas-engineer/boiler-close-up.png',
+        'drain-specialist': '/images/drain-specialist/cctv-survey.png',
+        'glazier': '/images/glazier/glass-install.png',
+        'breakdown': '/images/breakdown-recovery/tow-truck-night.jpg',
+        'default': 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop'
+    };
+
+    const heroBgImage = (tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default;
 
     const representativeImage = tradeRepresentativeImages[trade as keyof typeof tradeRepresentativeImages] || tradeRepresentativeImages.default;
 
@@ -277,7 +317,7 @@ export default function BusinessProfilePage() {
                         <div className="absolute inset-0 bg-[#0A0A0A]"></div>
                         {/* Moody road background */}
                         <img
-                            src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop"
+                            src={heroBgImage}
                             className="w-full h-full object-cover opacity-20 blur-sm"
                             alt="Background"
                         />
@@ -321,49 +361,7 @@ export default function BusinessProfilePage() {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Emergency Call Strip */}
-                                <div className="bg-[#121212]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5 md:p-8 shadow-2xl animate-fade-in ring-1 ring-white/5">
-                                    <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold border border-gold/20">
-                                                <Shield className="w-6 h-6" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[10px] text-gold font-bold uppercase tracking-[0.2em] mb-1">Priority Service</p>
-                                                <p className="text-base md:text-lg text-white font-medium">Emergency? Call now for fastest response</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col sm:flex-row gap-4">
-                                            <Button
-                                                asChild
-                                                size="lg"
-                                                className="bg-gold hover:bg-gold-light text-black font-bold h-16 px-10 rounded-xl shadow-xl shadow-gold/20 flex-1 sm:flex-none transition-all hover:scale-105"
-                                                onClick={() => trackEvent("Business", "Call Now Hero", `${business.name} (${business.id})`)}
-                                            >
-                                                <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-3">
-                                                    <Phone className="w-5 h-5" />
-                                                    {business.phone}
-                                                </a>
-                                            </Button>
-                                            <Button
-                                                asChild
-                                                variant="outline"
-                                                size="lg"
-                                                className="border-white/20 hover:bg-white/5 text-white h-16 px-10 rounded-xl flex-1 sm:flex-none"
-                                                onClick={() => trackEvent("Business", "Outline Call Now Hero", `${business.name} (${business.id})`)}
-                                            >
-                                                <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-3">
-                                                    <Phone className="w-5 h-5 text-white/40" />
-                                                    CALL NOW
-                                                </a>
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-
                             {/* Right Content: Trade Image (Representative Truck/Van) */}
                             <div className="w-full lg:w-1/2 lg:max-w-xl order-1 lg:order-2 flex justify-center lg:justify-end">
                                 <div className="relative group">
@@ -401,53 +399,35 @@ export default function BusinessProfilePage() {
 
                             {/* About Section */}
                             <section className="space-y-12">
-                                {/* Trade Action Image */}
-                                <div className="relative rounded-2xl overflow-hidden aspect-[21/9] border border-white/10 shadow-2xl group">
-                                    <img
-                                        src={trade === 'electrician' ? 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop' :
-                                            trade === 'plumber' ? 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop' :
-                                                trade === 'locksmith' ? 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop' :
-                                                    trade === 'gas-engineer' ? 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop' :
-                                                        'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'}
-                                        alt={`${formattedTrade} at work`}
-                                        className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent"></div>
-                                    <div className="absolute bottom-6 left-8">
-                                        <Badge className="bg-gold text-black hover:bg-gold/90 font-bold px-4 py-1.5 rounded-full mb-2">
-                                            Certified {formattedTrade}
-                                        </Badge>
-                                    </div>
-                                </div>
 
-                                <div className="space-y-8">
+                                <div className="space-y-10 pt-8">
                                     <div className="flex items-center gap-4">
-                                        <div className="text-4xl">{tradeInfo?.icon || '🔧'}</div>
-                                        <h2 className="font-display text-4xl text-white font-medium">About {business.name}</h2>
+                                        <div className="text-5xl">{tradeInfo?.icon || '🔧'}</div>
+                                        <h2 className="font-display text-4xl md:text-5xl text-white font-medium tracking-tight">About {business.name}</h2>
                                     </div>
-                                    <div className="max-w-3xl space-y-6">
-                                        <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
-                                            {business.name} is a trusted <span className="text-gold font-medium">24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions.
+                                    <div className="max-w-3xl space-y-8">
+                                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light">
+                                            {business.name} is a <span className="text-gold font-medium">trusted 24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions through excellence and reliability.
                                         </p>
 
-                                        <div className="space-y-4 pt-4">
-                                            <div className="flex items-start gap-4">
-                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                                                    <CheckCircle className="w-4 h-4" />
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                                <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                                                    <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Rapid <span className="text-gold">emergency response</span> time</p>
+                                                <p className="text-lg text-white font-medium tracking-tight">Rapid <span className="text-gold">emergency response</span></p>
                                             </div>
-                                            <div className="flex items-start gap-4">
-                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                                                    <CheckCircle className="w-4 h-4" />
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                                <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                                                    <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Fully <span className="text-white">qualified & insured</span> {trade}s</p>
+                                                <p className="text-lg text-white font-medium tracking-tight">Fully <span className="text-white">qualified & insured</span></p>
                                             </div>
-                                            <div className="flex items-start gap-4">
-                                                <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0 mt-1">
-                                                    <CheckCircle className="w-4 h-4" />
+                                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                                <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                                                    <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-xl text-white font-medium tracking-tight leading-none">Local, <span className="text-white">trusted</span>, and verified</p>
+                                                <p className="text-lg text-white font-medium tracking-tight">Local & <span className="text-white">Verified</span></p>
                                             </div>
                                         </div>
 
@@ -640,11 +620,11 @@ export default function BusinessProfilePage() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </div >
+            </main >
 
             <Footer />
-        </div>
+        </div >
     );
 }
 

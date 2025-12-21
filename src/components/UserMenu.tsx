@@ -32,7 +32,7 @@ export function UserMenu() {
             <div className="flex items-center gap-2">
                 <AuthModal
                     trigger={
-                        <Button variant="ghost" className="text-foreground hover:text-gold">
+                        <Button variant="secondary" className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium shadow-sm border border-input">
                             Log In
                         </Button>
                     }
@@ -50,7 +50,8 @@ export function UserMenu() {
         );
     }
 
-    const initials = user.name
+    const safeName = user.name || "Guest User";
+    const initials = safeName
         .split(" ")
         .map((n) => n[0])
         .join("")

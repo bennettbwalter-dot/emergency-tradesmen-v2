@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 import type { Business } from './businesses';
-import { businessListings } from './businesses';
+import { businessListings, getBusinessById } from './businesses';
 
 /**
  * Helper to map Supabase business data to the Business interface
@@ -95,11 +95,11 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
         return mapBusinessData(data);
     }
 
-    for (const city in businessListings) {
-        for (const trade in businessListings[city]) {
-            const found = businessListings[city][trade].find(b => b.id === id);
-            if (found) return found;
-        }
+    // Fallback to static or generated data using the helper from businesses.ts
+    // This handles both static lists AND procedurally generated listings (e.g. london-breakdown-1)
+    const result = getBusinessById(id);
+    if (result) {
+        return result.business;
     }
 
     return null;
