@@ -42,6 +42,7 @@ import {
     formatTimeSlot,
     getUrgencyColor,
 } from "@/lib/bookings";
+import { sendEmail } from "@/lib/email";
 
 interface BookingModalProps {
     businessName: string;
@@ -191,6 +192,30 @@ export function BookingModal({
 
         const booking = createBooking(formData as BookingFormData, user.id);
         saveBooking(booking);
+
+        // Send email notification
+        sendEmail({
+            to: "emergencytradesmen@outlook.com",
+            subject: `New Booking Request for ${businessName}`,
+            html: `
+                <h2>New Booking Request</h2>
+                <p><strong>Business:</strong> ${businessName} (${businessId})</p>
+                <p><strong>Date:</strong> ${formatBookingDate(booking.date)}</p>
+                <p><strong>Time:</strong> ${formatTimeSlot(booking.timeSlot)}</p>
+                <p><strong>Urgency:</strong> ${booking.urgency}</p>
+                <p><strong>Service:</strong> ${booking.serviceType}</p>
+                <hr />
+                <h3>Customer Details</h3>
+                <p><strong>Name:</strong> ${booking.customerName}</p>
+                <p><strong>Phone:</strong> ${booking.customerPhone}</p>
+                <p><strong>Email:</strong> ${booking.customerEmail}</p>
+                <p><strong>Address:</strong> ${booking.address}, ${booking.postcode}</p>
+                <h3>Description</h3>
+                <p>${booking.description}</p>
+                ${booking.specialRequirements ? `<p><strong>Special Requirements:</strong> ${booking.specialRequirements}</p>` : ''}
+            `,
+            from_name: "Emergency Tradesmen Bookings"
+        }).catch(err => console.error("Failed to send booking email:", err));
 
         toast({
             title: "Booking confirmed!",

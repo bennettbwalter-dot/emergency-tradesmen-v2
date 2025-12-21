@@ -29,6 +29,7 @@ import {
 import { db } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
 import { trackEvent } from "@/lib/analytics";
+import { sendEmail } from "@/lib/email";
 
 interface QuoteRequestModalProps {
     businessName: string;
@@ -125,11 +126,31 @@ export function QuoteRequestModal({
                 }
             });
 
+            // Send notification email to admin
+            await sendEmail({
+                to: "emergencytradesmen@outlook.com",
+                subject: `New Quote Request for ${businessName}`,
+                html: `
+                    <h2>New Quote Request</h2>
+                    <p><strong>Business:</strong> ${businessName} (${businessId})</p>
+                    <p><strong>Urgency:</strong> ${formData.urgency}</p>
+                    <p><strong>Service Type:</strong> ${formData.serviceType || "Not specified"}</p>
+                    <hr />
+                    <h3>Customer Details</h3>
+                    <p><strong>Name:</strong> ${formData.name}</p>
+                    <p><strong>Phone:</strong> ${formData.phone}</p>
+                    <p><strong>Email:</strong> ${formData.email}</p>
+                    <p><strong>Postcode:</strong> ${formData.postcode}</p>
+                    <h3>Description</h3>
+                    <p>${formData.description}</p>
+                `,
+                from_name: "Emergency Tradesmen Quotes"
+            });
+
             toast({
                 title: "Quote request sent!",
                 description: "The business will contact you shortly with a quote.",
             });
-
             trackEvent("Conversion", "Quote Request", `${businessName} (${businessId})`);
 
             // Reset and close
@@ -139,6 +160,9 @@ export function QuoteRequestModal({
             setOpen(false);
         } catch (error) {
             console.error("Failed to submit quote:", error);
+
+            // Even if DB fails, try to alert user or still send email if it was just a DB connection issue? 
+            // For now, fail safe.
             toast({
                 title: "Error submitting request",
                 description: "Please try again later.",

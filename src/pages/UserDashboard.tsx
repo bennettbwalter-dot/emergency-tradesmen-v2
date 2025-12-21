@@ -54,10 +54,11 @@ export default function UserDashboard() {
 
         if (data) {
             setBusinessProfile(data);
+            // Strict logic: explicit flag OR recent ping logic
             const lastPing = data.last_available_ping ? new Date(data.last_available_ping) : null;
-            // Available if pinged in last 60 minutes
             const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-            setIsAvailable(!!(lastPing && lastPing > oneHourAgo));
+            const isLive = !!data.is_available_now || (!!lastPing && lastPing > oneHourAgo);
+            setIsAvailable(isLive);
         }
     }
 
@@ -65,13 +66,21 @@ export default function UserDashboard() {
         if (!businessProfile) return;
 
         const newStatus = !isAvailable;
-        const pingTime = newStatus ? new Date().toISOString() : null;
+        const pingTime = newStatus ? new Date().toISOString() : null; // Only update ping if going online
 
         setIsAvailable(newStatus); // Optimistic update
 
+        const updateData: any = { 
+            is_available_now: newStatus 
+        };
+        
+        if (newStatus) {
+            updateData.last_available_ping = pingTime;
+        }
+
         const { error } = await supabase
             .from('businesses')
-            .update({ last_available_ping: pingTime })
+            .update(updateData)
             .eq('id', businessProfile.id);
 
         if (error) {
@@ -81,7 +90,9 @@ export default function UserDashboard() {
         } else {
             toast({
                 title: newStatus ? "You are LIVE!" : "You are offline",
-                description: newStatus ? "Customers can see you are available now." : "Your availability badge is hidden."
+                description: newStatus ? "Customers can see you are available now." : "Your availability badge is hidden.",
+                // Green for live, Red/Default for offline
+                className: newStatus ? "border-green-500 bg-green-500/10 text-green-900 dark:text-green-100" : ""
             });
         }
     }

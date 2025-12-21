@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, User, MessageSquare, Send, CheckCircle, AlertCircle, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { sendEmail } from "@/lib/email";
 
 export default function ContactPage() {
     const { toast } = useToast();
@@ -98,32 +99,30 @@ export default function ContactPage() {
         setIsSubmitting(true);
 
         try {
-            // Using Formspree for email delivery
-            const response = await fetch("https://formspree.io/f/movgrbrz", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: formData.fullName,
-                    email: formData.email,
-                    phone: formData.phone || "Not provided",
-                    subject: formData.subject,
-                    message: formData.message,
-                    _subject: `[Emergency Tradesmen] ${formData.subject}`
-                })
+            // Using our own SendGrid integration
+            await sendEmail({
+                to: "emergencytradesmen@outlook.com",
+                subject: `Contact Form: ${formData.subject}`,
+                html: `
+                    <h2>New Contact Form Submission</h2>
+                    <p><strong>Name:</strong> ${formData.fullName}</p>
+                    <p><strong>Email:</strong> ${formData.email}</p>
+                    <p><strong>Phone:</strong> ${formData.phone || "Not provided"}</p>
+                    <p><strong>Subject:</strong> ${formData.subject}</p>
+                    <h3>Message:</h3>
+                    <p>${formData.message.replace(/\n/g, '<br>')}</p>
+                `,
+                from_name: "Emergency Tradesmen Website"
             });
 
-            if (response.ok) {
-                setSubmitted(true);
-                toast({
-                    title: "Message sent!",
-                    description: "We'll get back to you as soon as possible.",
-                });
-            } else {
-                throw new Error("Failed to send message");
-            }
+            setSubmitted(true);
+            toast({
+                title: "Message sent!",
+                description: "We'll get back to you as soon as possible.",
+            });
+
         } catch (err) {
+            console.error("Contact form error:", err);
             setError("Failed to send message. Please try again or email us directly.");
             toast({
                 title: "Error sending message",

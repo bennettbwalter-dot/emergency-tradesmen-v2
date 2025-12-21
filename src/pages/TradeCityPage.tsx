@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import type { Business } from "@/lib/businesses";
+import { supabase } from "@/lib/supabase";
 
 export default function TradeCityPage() {
   const { tradePath, city } = useParams<{ tradePath: string; city: string }>();
@@ -87,6 +88,32 @@ export default function TradeCityPage() {
 
     loadBusinesses();
   }, [tradeInfo.slug, cityName]);
+
+  // Real-time updates for Availability
+  useEffect(() => {
+    const channel = supabase
+      .channel('public:businesses')
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'businesses' },
+        (payload) => {
+          console.log("Real-time update received:", payload);
+          setBusinesses(current =>
+            current.map(b =>
+              b.id === payload.new.id
+                // merge new data carefully, ensuring we keep any local specific fields if needed
+                ? { ...b, ...payload.new }
+                : b
+            )
+          );
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   // Apply filters and sorting
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =

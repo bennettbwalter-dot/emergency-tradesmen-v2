@@ -1,42 +1,57 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import confetti from "canvas-confetti";
+import { useAuth } from "@/contexts/AuthContext";
+import { sendEmail } from "@/lib/email";
 
 export default function PaymentSuccessPage() {
+    const { user } = useAuth();
+    const hasSentRef = useRef(false);
+
     useEffect(() => {
         // Fire confetti on load
         const duration = 3 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
         const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
         const interval = window.setInterval(() => {
             const timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
-
+            if (timeLeft <= 0) return clearInterval(interval);
             const particleCount = 50 * (timeLeft / duration);
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 },
-            });
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 },
-            });
+            confetti({ ...defaults, particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } });
+            confetti({ ...defaults, particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } });
         }, 250);
 
+        // Send Email Notification (once per session)
+        const sessionKey = `payment_email_sent_${new Date().toISOString().split('T')[0]}`;
+        if (!hasSentRef.current && !sessionStorage.getItem(sessionKey)) {
+            hasSentRef.current = true;
+            sessionStorage.setItem(sessionKey, 'true');
+
+            // 1. Alert Admin
+            sendEmail({
+                to: "emergencytradesmen@outlook.com",
+                subject: "💰 New PRO Subscription Purchased!",
+                text: `Likely new PRO subscription from ${user?.email || 'Unknown User'}.\n\nPlease check Stripe Dashboard to confirm payment.`
+            });
+
+            // 2. Receipt to User
+            if (user?.email) {
+                sendEmail({
+                    to: user.email,
+                    subject: "Welcome to Premium - Emergency Tradesmen",
+                    text: `Hi ${user.name},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: https://emergencytradesmen.net/user/dashboard`
+                });
+            }
+        }
+
         return () => clearInterval(interval);
-    }, []);
+    }, [user]);
 
     return (
         <div className="min-h-screen flex flex-col bg-slate-50">

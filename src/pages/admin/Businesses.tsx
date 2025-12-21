@@ -11,6 +11,7 @@ export default function BusinessesPage() {
     const [businesses, setBusinesses] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
+    const [activeTab, setActiveTab] = useState<'all' | 'pending'>('all');
     const { toast } = useToast();
 
     // Modal state
@@ -77,6 +78,46 @@ export default function BusinessesPage() {
         }
     }
 
+    // Approve Claim Function
+    async function approveClaim(business: any) {
+        const { error } = await supabase
+            .from('businesses')
+            .update({
+                claim_status: 'verified',
+                verified: true,
+                verified_at: new Date().toISOString()
+            })
+            .eq('id', business.id);
+
+        if (error) {
+            toast({ title: "Error", description: "Failed to approve claim", variant: "destructive" });
+        } else {
+            toast({ title: "Claim Approved", description: `${business.name} is now owned by the claimant.` });
+            loadBusinesses();
+        }
+    }
+
+    // Reject Claim Function
+    async function rejectClaim(business: any) {
+        if (!confirm(`Reject claim for ${business.name}? This will remove the user as owner.`)) return;
+
+        const { error } = await supabase
+            .from('businesses')
+            .update({
+                claim_status: 'unclaimed',
+                owner_id: null,
+                proof_documents: []
+            })
+            .eq('id', business.id);
+
+        if (error) {
+            toast({ title: "Error", description: "Failed to reject claim", variant: "destructive" });
+        } else {
+            toast({ title: "Claim Rejected", description: `Claim for ${business.name} has been removed.` });
+            loadBusinesses();
+        }
+    }
+
     async function deleteBusiness(id: string, name: string) {
         if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
@@ -111,11 +152,18 @@ export default function BusinessesPage() {
         setIsModalOpen(true);
     };
 
-    const filteredBusinesses = businesses.filter(b =>
-        b.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        b.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        b.trade.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredBusinesses = businesses.filter(b => {
+        const matchesSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            b.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            b.trade.toLowerCase().includes(searchQuery.toLowerCase());
+
+        if (activeTab === 'pending') {
+            return matchesSearch && b.claim_status === 'pending';
+        }
+        return matchesSearch;
+    });
+
+    const pendingCount = businesses.filter(b => b.claim_status === 'pending').length;
 
     return (
         <div>
@@ -131,133 +179,131 @@ export default function BusinessesPage() {
                 </Button>
             </div>
 
-            {/* Search */}
-            <div className="mb-6 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                    type="text"
-                    placeholder="Search businesses..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
-                />
+            {/* Tabs & Search */}
+            <div className="flex flex-col md:flex-row gap-4 mb-6 justify-between items-end">
+                <div className="flex p-1 bg-secondary rounded-lg self-start">
+                    <button
+                        onClick={() => setActiveTab('all')}
+                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'all'
+                                ? 'bg-background text-foreground shadow-sm'
+                                : 'text-muted-foreground hover:text-foreground'
+                            }`}
+                    >
+                        All Businesses
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('pending')}
+                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all flex items-center gap-2 ${activeTab === 'pending'
+                                ? 'bg-background text-foreground shadow-sm'
+                                : 'text-muted-foreground hover:text-foreground'
+                            }`}
+                    >
+                        Pending Claims
+                        {pendingCount > 0 && (
+                            <span className="bg-gold text-black text-[10px] px-1.5 rounded-full font-bold h-4 flex items-center justify-center">
+                                {pendingCount}
+                            </span>
+                        )}
+                    </button>
+                </div>
+
+                <div className="relative w-full md:w-72">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                        type="text"
+                        placeholder="Search businesses..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-9"
+                    />
+                </div>
             </div>
 
             {/* Table */}
             {isLoading ? (
-                <div className="bg-card rounded-lg border border-border overflow-hidden">
-                    <table className="w-full">
-                        <thead className="bg-secondary border-b border-border">
-                            <tr>
-                                <th className="text-left p-4 font-semibold">Name</th>
-                                <th className="text-left p-4 font-semibold">Trade</th>
-                                <th className="text-left p-4 font-semibold">City</th>
-                                <th className="text-left p-4 font-semibold">Rating</th>
-                                <th className="text-left p-4 font-semibold">Verified</th>
-                                <th className="text-right p-4 font-semibold">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {[...Array(5)].map((_, i) => (
-                                <tr key={i} className="border-b border-border animate-pulse">
-                                    <td className="p-4">
-                                        <div className="h-4 bg-secondary rounded w-32 mb-2"></div>
-                                        <div className="h-3 bg-secondary rounded w-24"></div>
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="h-4 bg-secondary rounded w-20"></div>
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="h-4 bg-secondary rounded w-24"></div>
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="h-4 bg-secondary rounded w-16"></div>
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="h-6 bg-secondary rounded-full w-20"></div>
-                                    </td>
-                                    <td className="p-4">
-                                        <div className="flex justify-end gap-2">
-                                            <div className="h-8 w-8 bg-secondary rounded"></div>
-                                            <div className="h-8 w-8 bg-secondary rounded"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="bg-card rounded-lg border border-border overflow-hidden p-8 text-center">
+                    <div className="animate-spin w-8 h-8 border-2 border-gold border-t-transparent rounded-full mx-auto mb-4"></div>
+                    <p className="text-muted-foreground">Loading businesses...</p>
                 </div>
             ) : (
                 <div className="bg-card rounded-lg border border-border overflow-hidden">
-                    <table className="w-full">
-                        <thead className="bg-secondary border-b border-border">
+                    <table className="w-full text-sm">
+                        <thead className="bg-secondary/50 border-b border-border">
                             <tr>
-                                <th className="text-left p-4 font-semibold">Name</th>
-                                <th className="text-left p-4 font-semibold">Trade</th>
-                                <th className="text-left p-4 font-semibold">City</th>
-                                <th className="text-left p-4 font-semibold">Rating</th>
-                                <th className="text-left p-4 font-semibold">Verified</th>
-                                <th className="text-right p-4 font-semibold">Actions</th>
+                                <th className="text-left p-4 font-semibold text-muted-foreground">Name</th>
+                                <th className="text-left p-4 font-semibold text-muted-foreground">Trade / City</th>
+                                <th className="text-left p-4 font-semibold text-muted-foreground">Status</th>
+                                <th className="text-left p-4 font-semibold text-muted-foreground">Verification</th>
+                                <th className="text-right p-4 font-semibold text-muted-foreground">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-border">
                             {filteredBusinesses.map((business) => (
-                                <tr key={business.id} className="border-b border-border hover:bg-secondary/50">
+                                <tr key={business.id} className="hover:bg-secondary/20 transition-colors">
                                     <td className="p-4">
-                                        <div className="flex items-start gap-2">
-                                            <div>
-                                                <div className="font-medium flex items-center gap-2">
-                                                    {business.name}
-                                                    {business.is_premium && (
-                                                        <span className="bg-gold/10 text-gold text-[10px] px-1.5 py-0.5 rounded border border-gold/20 font-bold uppercase">
-                                                            PRO
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <div className="text-sm text-muted-foreground">{business.phone}</div>
+                                        <div className="font-medium text-foreground">{business.name}</div>
+                                        <div className="text-xs text-muted-foreground">{business.phone}</div>
+                                        {business.claim_status === 'pending' && (
+                                            <div className="text-xs text-gold mt-1 font-medium bg-gold/5 px-2 py-0.5 rounded w-fit">
+                                                Claim Requested
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td className="p-4 capitalize">{business.trade}</td>
-                                    <td className="p-4">{business.city}</td>
-                                    <td className="p-4">
-                                        <div className="flex items-center gap-1">
-                                            <span className="font-semibold">{Number(business.rating).toFixed(1)}</span>
-                                            <span className="text-sm text-muted-foreground">({business.review_count})</span>
-                                        </div>
+                                        )}
                                     </td>
                                     <td className="p-4">
-                                        <button
-                                            onClick={() => toggleVerified(business.id, business.verified)}
-                                            className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${business.verified
-                                                ? "bg-green-500/10 text-green-500"
-                                                : "bg-gray-500/10 text-gray-500"
-                                                }`}
-                                        >
-                                            {business.verified ? (
-                                                <>
-                                                    <CheckCircle className="w-3 h-3" />
-                                                    Verified
-                                                </>
+                                        <div className="capitalize">{business.trade}</div>
+                                        <div className="text-xs text-muted-foreground">{business.city}</div>
+                                    </td>
+                                    <td className="p-4">
+                                        <div className="flex items-center gap-2">
+                                            {business.is_premium ? (
+                                                <span className="bg-purple-500/10 text-purple-500 text-[10px] px-2 py-0.5 rounded border border-purple-500/20 font-bold uppercase">PRO</span>
                                             ) : (
-                                                <>
-                                                    <XCircle className="w-3 h-3" />
-                                                    Unverified
-                                                </>
+                                                <span className="text-xs text-muted-foreground">Free</span>
                                             )}
-                                        </button>
+                                        </div>
                                     </td>
                                     <td className="p-4">
-                                        <div className="flex items-center justify-end gap-2">
-                                            <Button variant="ghost" size="sm" onClick={() => handleEditBusiness(business)}>
+                                        {business.claim_status === 'pending' ? (
+                                            <div className="flex items-center gap-2">
+                                                <Button
+                                                    size="sm"
+                                                    className="h-7 bg-green-600 hover:bg-green-700 text-white"
+                                                    onClick={() => approveClaim(business)}
+                                                >
+                                                    <CheckCircle className="w-3 h-3 mr-1" /> Approve
+                                                </Button>
+                                                <Button
+                                                    size="sm"
+                                                    variant="destructive"
+                                                    className="h-7"
+                                                    onClick={() => rejectClaim(business)}
+                                                >
+                                                    <XCircle className="w-3 h-3" />
+                                                </Button>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                onClick={() => toggleVerified(business.id, business.verified)}
+                                                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${business.verified
+                                                        ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                                                        : "bg-orange-500/10 text-orange-500 hover:bg-orange-500/20"
+                                                    }`}
+                                            >
+                                                {business.verified ? (
+                                                    <><CheckCircle className="w-3 h-3" /> Verified</>
+                                                ) : (
+                                                    <><XCircle className="w-3 h-3" /> Unverified</>
+                                                )}
+                                            </button>
+                                        )}
+                                    </td>
+                                    <td className="p-4">
+                                        <div className="flex items-center justify-end gap-1">
+                                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleEditBusiness(business)}>
                                                 <Edit className="w-4 h-4" />
                                             </Button>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                onClick={() => deleteBusiness(business.id, business.name)}
-                                            >
-                                                <Trash2 className="w-4 h-4 text-red-500" />
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive" onClick={() => deleteBusiness(business.id, business.name)}>
+                                                <Trash2 className="w-4 h-4" />
                                             </Button>
                                         </div>
                                     </td>
@@ -267,8 +313,16 @@ export default function BusinessesPage() {
                     </table>
 
                     {filteredBusinesses.length === 0 && (
-                        <div className="text-center py-12 text-muted-foreground">
-                            No businesses found
+                        <div className="text-center py-16">
+                            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-muted-foreground">
+                                <Search className="w-8 h-8 opacity-50" />
+                            </div>
+                            <h3 className="text-lg font-medium">No businesses found</h3>
+                            <p className="text-muted-foreground mt-1">
+                                {activeTab === 'pending'
+                                    ? "No pending claims at the moment."
+                                    : "Try adjusting your search terms."}
+                            </p>
                         </div>
                     )}
                 </div>

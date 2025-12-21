@@ -59,6 +59,58 @@ export interface Business {
     vehicle_image_url?: string;
 }
 
+export function isBusinessAvailable(business: Business): boolean {
+    // 1. Explicit "Live" toggle or recent ping (Premium/Claimed feature)
+    if (!!business.is_available_now || (!!business.last_available_ping && new Date(business.last_available_ping) > new Date(Date.now() - 3600000))) {
+        return true;
+    }
+
+    // 2. Fallback: If 24/7
+    if (business.isOpen24Hours) return true;
+    if (business.hours && business.hours.toLowerCase().includes("24 hours")) return true;
+
+    // 3. Time Parsing Logic for static strings (e.g. "Open · Closes 8 PM")
+    if (business.hours) {
+        const now = new Date();
+        const nowHour = now.getHours();
+        const nowMinute = now.getMinutes();
+
+        const lowerHours = business.hours.toLowerCase();
+
+        // If it says "Opens ...", it implies it is currently closed
+        if (lowerHours.includes("opens")) return false;
+
+        // If it says "Closes X PM/AM"
+        if (lowerHours.includes("closes")) {
+            try {
+                // Regex to find time: "closes 5 pm", "closes 5:30 pm", "closes 8pm"
+                const match = lowerHours.match(/closes\s+(\d+)(?::(\d+))?\s*(am|pm)/);
+                if (match) {
+                    let hour = parseInt(match[1]);
+                    const minute = match[2] ? parseInt(match[2]) : 0;
+                    const ampm = match[3];
+
+                    if (ampm === "pm" && hour !== 12) hour += 12;
+                    if (ampm === "am" && hour === 12) hour = 0;
+
+                    // Compare times
+                    if (nowHour < hour) return true;
+                    if (nowHour === hour && nowMinute < minute) return true;
+                    return false; // Past closing time
+                }
+            } catch (e) {
+                // Fallback if parsing fails but text says "Open"
+                return lowerHours.includes("open") && !lowerHours.includes("closed");
+            }
+        }
+
+        // Final fallback for simple "Open" text if no time found
+        if (lowerHours.includes("open") && !lowerHours.includes("closed")) return true;
+    }
+
+    return false;
+}
+
 export interface BusinessListings {
     [city: string]: {
         [trade: string]: Business[];

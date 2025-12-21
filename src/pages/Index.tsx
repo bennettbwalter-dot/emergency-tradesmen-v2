@@ -432,6 +432,10 @@ const Index = () => {
                     src="/breakdown-recovery.png"
                     alt="Emergency Breakdown Recovery at Night"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    width="600"
+                    height="400"
                   />
                 </div>
               </div>              {/* Text Side */}
@@ -568,6 +572,10 @@ const Index = () => {
                     src="/visibility-showcase.jpg"
                     alt="Visibility showcase"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
                 </div>

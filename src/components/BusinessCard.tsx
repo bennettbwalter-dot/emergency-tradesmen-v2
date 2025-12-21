@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Mail, Star, MapPin, Phone, ShieldCheck, Zap, Heart, MessageSquareQuote, Factory, Wrench, TrendingUp, Clock, Key, Globe } from "lucide-react";
+import { Mail, Star, MapPin, Phone, ShieldCheck, Zap, Heart, MessageSquareQuote, Factory, Wrench, TrendingUp, Clock, Key, Globe, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AuthModal } from "./AuthModal";
-import { Business } from "@/lib/businesses";
+import { Business, isBusinessAvailable } from "@/lib/businesses";
 import { useToast } from "@/components/ui/use-toast";
 import { trackEvent } from "@/lib/analytics";
 
@@ -34,17 +34,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
     setLiked(!liked);
   };
 
-  // Availability Logic
-  const lastPing = business.last_available_ping ? new Date(business.last_available_ping) : null;
-  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
-  const isLive = lastPing && lastPing > oneHourAgo;
-
-  // A business is "open" if it's 24h OR the hours string says "Open" and not "Closed"
-  const isCurrentlyOpen = business.isOpen24Hours ||
-    (business.hours &&
-      business.hours.toLowerCase().includes("open") &&
-      !business.hours.toLowerCase().includes("closed"));
-
+  // Availability Logic - Centralized
+  const isLive = isBusinessAvailable(business);
   const isPremium = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
 
   // Logo Placeholder Logic
@@ -57,19 +48,11 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       .toUpperCase();
   };
 
-  // Status Color Logic
-  const statusColorClass = isCurrentlyOpen
-    ? (isPremium ? "text-emerald-400" : "text-green-500")
-    : "text-red-500";
-  const statusBgClass = isCurrentlyOpen
-    ? (isPremium ? "bg-emerald-500/10 border-emerald-500/40" : "bg-green-500/10 border-green-500/30")
-    : "bg-red-500/10 border-red-500/30";
-  const dotColorClass = isCurrentlyOpen
-    ? (isPremium ? "bg-emerald-500" : "bg-green-500")
-    : "bg-red-500";
-  const dotPingClass = isCurrentlyOpen
-    ? (isPremium ? "bg-emerald-400" : "bg-green-400")
-    : "bg-red-400";
+  // Status Color Logic: Green for ON, Red for OFF
+  const statusColorClass = isLive ? "text-green-500" : "text-red-500";
+  const statusBgClass = isLive ? "bg-green-500/10 border-green-500/30" : "bg-red-500/10 border-red-500/30";
+  const dotColorClass = isLive ? "bg-green-500" : "bg-red-500";
+  const dotPingClass = isLive ? "bg-green-400" : "hidden";
 
   return (
     <div
@@ -114,7 +97,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             <div className="flex items-center gap-4 w-full">
               <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border bg-white shadow-[0_0_20px_rgba(16,185,129,0.1)] border-emerald-500/20 p-2">
                 {business.logo_url ? (
-                  <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain" />
+                  <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain" loading="lazy" width="80" height="80" />
                 ) : (
                   <div className="flex flex-col items-center justify-center">
                     <span className="text-xl font-bold text-emerald-600">{getInitials(business.name)}</span>
@@ -166,7 +149,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
               <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${dotColorClass}`}></span>
             </span>
             <span className={`text-[10px] font-bold tracking-widest ${statusColorClass}`}>
-              AVAILABLE
+              {isLive ? "AVAILABLE" : "OFFLINE"}
             </span>
           </div>
         </div>
