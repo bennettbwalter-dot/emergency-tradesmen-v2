@@ -31,6 +31,8 @@ interface BusinessData {
     website: string | null;
     hidden_reviews: string[];
     contact_name: string | null;
+    header_image_url: string | null;
+    vehicle_image_url: string | null;
 }
 
 const SERVICE_OPTIONS = [
@@ -68,6 +70,10 @@ export default function PremiumProfileEditor() {
     const [hiddenReviews, setHiddenReviews] = useState<string[]>([]);
     const [companyName, setCompanyName] = useState("");
     const [contactName, setContactName] = useState("");
+    const [headerImageFile, setHeaderImageFile] = useState<File | null>(null);
+    const [headerImagePreview, setHeaderImagePreview] = useState<string | null>(null);
+    const [vehicleImageFile, setVehicleImageFile] = useState<File | null>(null);
+    const [vehicleImagePreview, setVehicleImagePreview] = useState<string | null>(null);
 
     // Calculate location limit based on plan and developer status
     const locationLimit = getLocationLimit(planType, user?.email);
@@ -87,7 +93,7 @@ export default function PremiumProfileEditor() {
         // Load the user's business from Supabase
         const { data, error } = await supabase
             .from('businesses')
-            .select('id, name, trade, logo_url, photos, premium_description, services_offered, whatsapp_number, selected_locations, plan_type, website, hidden_reviews, contact_name')
+            .select('id, name, trade, logo_url, photos, premium_description, services_offered, whatsapp_number, selected_locations, plan_type, website, hidden_reviews, contact_name, header_image_url, vehicle_image_url')
             .eq('owner_user_id', user.id)
             .order('created_at', { ascending: false })
             .limit(1);
@@ -115,7 +121,9 @@ export default function PremiumProfileEditor() {
                 plan_type: d.plan_type || 'basic',
                 website: d.website || null,
                 hidden_reviews: d.hidden_reviews || [],
-                contact_name: d.contact_name || null
+                contact_name: d.contact_name || null,
+                header_image_url: d.header_image_url || null,
+                vehicle_image_url: d.vehicle_image_url || null
             };
         } else {
             // Auto-create if none exists
@@ -158,7 +166,9 @@ export default function PremiumProfileEditor() {
                 plan_type: 'paid',
                 website: newBusiness.website || null,
                 hidden_reviews: newBusiness.hidden_reviews || [],
-                contact_name: newBusiness.contact_name || null
+                contact_name: newBusiness.contact_name || null,
+                header_image_url: newBusiness.header_image_url || null,
+                vehicle_image_url: newBusiness.vehicle_image_url || null
             };
         }
 
@@ -175,6 +185,8 @@ export default function PremiumProfileEditor() {
         setHiddenReviews(businessData.hidden_reviews);
         setCompanyName(businessData.name || "");
         setContactName(businessData.contact_name || "");
+        setHeaderImagePreview(businessData.header_image_url);
+        setVehicleImagePreview(businessData.vehicle_image_url);
         setLoading(false);
     };
 
@@ -187,6 +199,22 @@ export default function PremiumProfileEditor() {
         if (file) {
             setLogoFile(file);
             setLogoPreview(URL.createObjectURL(file));
+        }
+    }, []);
+
+    const handleHeaderImageUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setHeaderImageFile(file);
+            setHeaderImagePreview(URL.createObjectURL(file));
+        }
+    }, []);
+
+    const handleVehicleImageUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setVehicleImageFile(file);
+            setVehicleImagePreview(URL.createObjectURL(file));
         }
     }, []);
 
@@ -254,6 +282,8 @@ export default function PremiumProfileEditor() {
 
         try {
             let finalLogoUrl = business.logo_url;
+            let finalHeaderImageUrl = business.header_image_url;
+            let finalVehicleImageUrl = business.vehicle_image_url;
             const finalPhotoUrls: string[] = [];
 
             // Upload logo if new one selected
@@ -268,6 +298,36 @@ export default function PremiumProfileEditor() {
                         .from('business-assets')
                         .getPublicUrl(logoPath);
                     finalLogoUrl = urlData.publicUrl;
+                }
+            }
+
+            // Upload header image if new one selected
+            if (headerImageFile) {
+                const headerPath = `${business.id}/header-${Date.now()}.${headerImageFile.name.split('.').pop()}`;
+                const { error: uploadError } = await supabase.storage
+                    .from('business-assets')
+                    .upload(headerPath, headerImageFile, { upsert: true });
+
+                if (!uploadError) {
+                    const { data: urlData } = supabase.storage
+                        .from('business-assets')
+                        .getPublicUrl(headerPath);
+                    finalHeaderImageUrl = urlData.publicUrl;
+                }
+            }
+
+            // Upload vehicle image if new one selected
+            if (vehicleImageFile) {
+                const vehiclePath = `${business.id}/vehicle-${Date.now()}.${vehicleImageFile.name.split('.').pop()}`;
+                const { error: uploadError } = await supabase.storage
+                    .from('business-assets')
+                    .upload(vehiclePath, vehicleImageFile, { upsert: true });
+
+                if (!uploadError) {
+                    const { data: urlData } = supabase.storage
+                        .from('business-assets')
+                        .getPublicUrl(vehiclePath);
+                    finalVehicleImageUrl = urlData.publicUrl;
                 }
             }
 
@@ -301,6 +361,8 @@ export default function PremiumProfileEditor() {
                     city: selectedLocations[0], // Sync city field
                     selected_locations: selectedLocations,
                     logo_url: finalLogoUrl,
+                    header_image_url: finalHeaderImageUrl,
+                    vehicle_image_url: finalVehicleImageUrl,
                     photos: allPhotoUrls,
                     premium_description: description,
                     services_offered: selectedServices,
@@ -492,6 +554,114 @@ export default function PremiumProfileEditor() {
                                         : "Basic plan: 1 location (£29/month). Upgrade for more!"
                                 }
                             </p>
+                        </div>
+
+                        {/* Header Image Upload */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <ImageIcon className="w-5 h-5 text-gold" /> Header Cover Image
+                                <Badge className="bg-gold text-xs">Premium</Badge>
+                            </h2>
+                            <div className="flex flex-col md:flex-row items-center gap-6">
+                                <div className="w-full md:w-2/3 h-48 rounded-xl bg-secondary border-2 border-dashed border-border flex items-center justify-center overflow-hidden relative">
+                                    {headerImagePreview ? (
+                                        <img src={headerImagePreview} alt="Header Cover" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                                            <ImageIcon className="w-8 h-8" />
+                                            <span>No image selected</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleHeaderImageUpload}
+                                        className="hidden"
+                                        id="header-image-upload"
+                                    />
+                                    <label htmlFor="header-image-upload">
+                                        <Button variant="outline" asChild className="cursor-pointer">
+                                            <span>Upload Cover Image</span>
+                                        </Button>
+                                    </label>
+                                    <p className="text-sm text-muted-foreground">
+                                        Appears at the top of your profile.<br />
+                                        Recommended: 1920x600px
+                                    </p>
+                                    {headerImagePreview && (
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+                                            onClick={() => {
+                                                setHeaderImageFile(null);
+                                                setHeaderImagePreview(null);
+                                            }}
+                                        >
+                                            <X className="w-4 h-4 mr-2" />
+                                            Remove Image
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Vehicle Image Upload */}
+                        <div className="bg-card border border-border rounded-xl p-6">
+                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                                <svg className="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                                </svg>
+                                Vehicle / Representative Image
+                                <Badge className="bg-gold text-xs">Premium</Badge>
+                            </h2>
+                            <div className="flex flex-col md:flex-row items-center gap-6">
+                                <div className="w-full md:w-1/2 h-64 rounded-xl bg-secondary border-2 border-dashed border-border flex items-center justify-center overflow-hidden relative rotate-2 shadow-lg">
+                                    {vehicleImagePreview ? (
+                                        <img src={vehicleImagePreview} alt="Vehicle Representation" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="flex flex-col items-center gap-2 text-muted-foreground p-4 text-center">
+                                            <span className="text-xs uppercase tracking-widest">No Image</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleVehicleImageUpload}
+                                        className="hidden"
+                                        id="vehicle-image-upload"
+                                    />
+                                    <label htmlFor="vehicle-image-upload">
+                                        <Button variant="outline" asChild className="cursor-pointer">
+                                            <span>Upload Vehicle Image</span>
+                                        </Button>
+                                    </label>
+                                    <p className="text-sm text-muted-foreground">
+                                        This image appears over your header background.<br />
+                                        Show your branded van, truck, or team.<br />
+                                        Recommended: 800x600px
+                                    </p>
+                                    {vehicleImagePreview && (
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+                                            onClick={() => {
+                                                setVehicleImageFile(null);
+                                                setVehicleImagePreview(null);
+                                            }}
+                                        >
+                                            <X className="w-4 h-4 mr-2" />
+                                            Remove Image
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
                         </div>
 
                         {/* Logo Upload */}

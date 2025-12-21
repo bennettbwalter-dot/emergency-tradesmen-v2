@@ -45,7 +45,9 @@ function mapBusinessData(biz: any): Business {
         whatsapp_number: biz.whatsapp_number,
         last_available_ping: biz.last_available_ping,
         contact_name: biz.contact_name,
-        verified: biz.verified || false
+        verified: biz.verified || false,
+        header_image_url: biz.header_image_url,
+        vehicle_image_url: biz.vehicle_image_url
     };
 }
 

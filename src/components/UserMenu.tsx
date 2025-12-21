@@ -32,7 +32,7 @@ export function UserMenu() {
             <div className="flex items-center gap-2">
                 <AuthModal
                     trigger={
-                        <Button variant="secondary" className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium shadow-sm border border-input">
+                        <Button variant="ghost" className="text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent">
                             Log In
                         </Button>
                     }
@@ -40,7 +40,7 @@ export function UserMenu() {
                 />
                 <AuthModal
                     trigger={
-                        <Button variant="default" className="bg-gold hover:bg-gold/90 text-gold-foreground">
+                        <Button variant="ghost" className="text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent">
                             Sign Up
                         </Button>
                     }

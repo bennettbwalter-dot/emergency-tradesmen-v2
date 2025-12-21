@@ -21,6 +21,7 @@ import { AuthRedirectHandler } from "@/components/AuthRedirectHandler";
 import { initGA } from "@/lib/analytics";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
@@ -105,6 +106,7 @@ const App = () => {
                   <Sonner />
                   <ThemeToggle />
                   <BrowserRouter>
+                    <ScrollToTop />
                     <Suspense fallback={<PageLoader />}>
                       <AnalyticsTracker />
                       <InstallPWA />

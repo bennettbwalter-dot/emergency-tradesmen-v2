@@ -22,20 +22,18 @@ export function Header() {
             <Link to="/about" className="text-sm font-medium hover:text-gold transition-colors">
               About
             </Link>
-            <Link to="/faq" className="text-sm font-medium hover:text-gold transition-colors">FAQ</Link>
+
             <Button variant="outline" size="sm" asChild className="border-gold text-gold hover:bg-gold/10 px-4 rounded-md">
               <Link to="/tradesmen">
                 Tradesmen Sign Up
               </Link>
             </Button>
+            <Link to="/contact" className="text-sm font-medium hover:text-gold transition-colors">
+              Contact
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button variant="default" size="sm" asChild className="hidden md:flex bg-gold text-gold-foreground hover:bg-gold/90">
-              <Link to="/contact">
-                Contact
-              </Link>
-            </Button>
             <UserMenu />
             <ModeToggle />
           </div>

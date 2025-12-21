@@ -281,9 +281,9 @@ export default function BusinessProfilePage() {
         'default': 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop'
     };
 
-    const heroBgImage = (tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default;
+    const heroBgImage = business.header_image_url || ((tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default);
 
-    const representativeImage = tradeRepresentativeImages[trade as keyof typeof tradeRepresentativeImages] || tradeRepresentativeImages.default;
+    const representativeImage = business.vehicle_image_url || ((tradeRepresentativeImages as any)[trade] || tradeRepresentativeImages.default);
 
     return (
         <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-gold/30">
@@ -460,11 +460,7 @@ export default function BusinessProfilePage() {
                             <section className="space-y-10">
                                 <h2 className="font-display text-4xl text-white font-medium tracking-tight">Recent Work</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                                    {photosLoading ? (
-                                        [1, 2, 3].map((i) => (
-                                            <div key={i} className="aspect-[4/3] rounded-xl bg-white/5 animate-pulse" />
-                                        ))
-                                    ) : (
+                                    {((business.tier === 'paid' || business.is_premium) && !photosLoading) ? (
                                         displayImages.slice(0, 3).map((photo, i) => (
                                             <div key={photo.id || i} className="group space-y-4">
                                                 <div className="aspect-[4/5] md:aspect-[4/5] rounded-xl overflow-hidden bg-white/5 relative shadow-lg">
@@ -480,7 +476,11 @@ export default function BusinessProfilePage() {
                                                 </p>
                                             </div>
                                         ))
-                                    )}
+                                    ) : photosLoading ? (
+                                        [1, 2, 3].map((i) => (
+                                            <div key={i} className="aspect-[4/3] rounded-xl bg-white/5 animate-pulse" />
+                                        ))
+                                    ) : null}
                                 </div>
                             </section>
 
@@ -581,6 +581,25 @@ export default function BusinessProfilePage() {
                                                 WhatsApp
                                             </a>
                                         </Button>
+
+                                        {business.website && (
+                                            <Button
+                                                asChild
+                                                size="lg"
+                                                className="w-full bg-[#0A0A0A] hover:bg-[#171717] text-white border border-white/10 hover:border-gold/30 font-bold h-16 rounded-xl transition-all duration-300 shadow-lg"
+                                                onClick={() => trackEvent("Business", "Website Click", `${business.name} (${business.id})`)}
+                                            >
+                                                <a
+                                                    href={business.website}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center justify-center gap-2"
+                                                >
+                                                    <ExternalLink className="w-5 h-5 text-gold" />
+                                                    Visit Website
+                                                </a>
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
 

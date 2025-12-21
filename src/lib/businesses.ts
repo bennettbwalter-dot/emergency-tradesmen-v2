@@ -55,6 +55,8 @@ export interface Business {
     owner_user_id?: string;
     whatsapp_number?: string;
     last_available_ping?: string;
+    header_image_url?: string;
+    vehicle_image_url?: string;
 }
 
 export interface BusinessListings {
