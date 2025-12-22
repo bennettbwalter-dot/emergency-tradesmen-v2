@@ -16,19 +16,23 @@ const AuthCallback = () => {
 
             if (error) {
                 console.error("Auth callback error:", error);
-                navigate("/login?error=auth_callback_failed");
+                navigate("/login?error=auth_callback_failed", { replace: true });
                 return;
             }
 
             if (session) {
                 // Successful login
-                navigate("/user/dashboard");
+                // Explicitly clear hash from history before navigating
+                if (window.location.hash) {
+                    window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+                }
+                navigate("/user/dashboard", { replace: true });
             } else {
                 // No session found yet, maybe check hash manualy? 
                 // Or wait for onAuthStateChange (which AuthContext does).
                 // For now, if no hash and no session, go home.
                 if (!window.location.hash) {
-                    navigate("/");
+                    navigate("/", { replace: true });
                 }
             }
         };
@@ -38,7 +42,10 @@ const AuthCallback = () => {
         // Also listen for event just in case
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN' && session) {
-                navigate("/user/dashboard");
+                if (window.location.hash) {
+                    window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+                }
+                navigate("/user/dashboard", { replace: true });
             }
         });
 

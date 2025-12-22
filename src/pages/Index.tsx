@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 
 import { Footer } from "@/components/Footer";
 
-import { SearchForm } from "@/components/SearchForm";
+
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 
 import { TrustBadges } from "@/components/TrustBadges";
@@ -164,11 +164,13 @@ const Index = () => {
 
           {/* Hero Section */}
 
-          <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+          {/* Hero Section */}
+
+          <section className="relative flex overflow-hidden">
 
             {/* Background layers */}
 
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-primary to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background to-background" />
 
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
 
@@ -194,494 +196,455 @@ const Index = () => {
 
 
 
-            <div className="relative container-wide py-20 md:py-32">
+            <div className="relative container-wide pt-6 pb-24 md:pt-12 md:pb-32">
 
               <div className="max-w-4xl mx-auto text-center">
 
                 {/* Availability badge */}
 
                 <motion.div
-                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                  className="relative inline-flex rounded-full h-2 w-2"
-                />
-              </span>
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1, duration: 0.5 }}
+                  className="mb-6 inline-flex flex-col items-center gap-2"
+                >
+                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border-2 animate-border-gold-white bg-white/5 backdrop-blur-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 animate-pulse-red-green-bg"></span>
+                    </span>
+                    <span className="text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Tradespeople Available Now</span>
+                  </div>
 
-              <motion.span
-                animate={{ color: ["#FFFFFF", "#D4AF37"] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                className="text-sm font-medium uppercase tracking-wider"
-              >
-                Tradespeople Available Now
-              </motion.span>
-            </motion.div>
-
-
-
-            {/* Main headline */}
-
-            <motion.h1
-
-              initial={{ opacity: 0, y: 30 }}
-
-              animate={{ opacity: 1, y: 0 }}
-
-              transition={{ duration: 0.6, delay: 0.1 }}
-
-              className="mb-0"
-
-            >
-
-              <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4">
-
-                EMERGENCY
-
-              </span>
-
-              <span className="block font-display text-5xl md:text-7xl lg:text-8xl tracking-wide text-gold">
-
-                TRADESMEN
-
-              </span>
-
-            </motion.h1>
+                  {/* Trustpilot Hero Widget */}
+                  <TrustpilotWidget
+                    templateId="5419b6a8b0d04a076446a9ad"
+                    businessId="676878b2d4b2944b9e1e2c94"
+                    username="emergencytradesmen.net"
+                    styleHeight="24px"
+                    className="mt-2"
+                  />
+                </motion.div>
 
 
 
-            {/* Tagline */}
+                {/* Main headline */}
 
-            <motion.p
-
-              initial={{ opacity: 0, y: 20 }}
-
-              animate={{ opacity: 1, y: 0 }}
-
-              transition={{ duration: 0.6, delay: 0.2 }}
-
-              className="text-lg md:text-xl text-muted-foreground mb-4 tracking-wide uppercase"
-
-            >
-
-              When You Need Them Most
-
-            </motion.p>
-
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-base md:text-lg text-muted-foreground mb-4 max-w-2xl mx-auto"
-            >
-              Find trusted local emergency tradespeople fast
-            </motion.p>
+                <h1 className="mb-0 font-display text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
+                  EMERGENCY <span className="text-gold">TRADESMEN</span>
+                </h1>
 
 
 
-            <motion.p
+                {/* Tagline */}
 
-              initial={{ opacity: 0, y: 20 }}
+                <motion.p
 
-              animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
 
-              transition={{ duration: 0.6, delay: 0.3 }}
+                  animate={{ opacity: 1, y: 0 }}
 
-              className="text-base text-muted-foreground/80 mb-2 max-w-2xl mx-auto"
+                  transition={{ duration: 0.6, delay: 0.2 }}
 
-            >
+                  className="text-lg md:text-xl text-muted-foreground mb-4 tracking-wide uppercase"
 
-              Describe your emergency or search and call immediately
+                >
 
-            </motion.p>
+                  When You Need Them Most
 
-          </div>
-
-
-
-          <motion.div
-
-            initial={{ opacity: 0, y: 30 }}
-
-            animate={{ opacity: 1, y: 0 }}
-
-            transition={{ duration: 0.7, delay: 0.4 }}
-
-            className="mb-0"
-
-          >
+                </motion.p>
 
 
-            <div className="w-full max-w-2xl mx-auto mb-2 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              <div className="rounded-3xl overflow-hidden">
-                <EmergencyChatInterface />
+
               </div>
+
+
+
+              <motion.div
+
+                initial={{ opacity: 0, y: 30 }}
+
+                animate={{ opacity: 1, y: 0 }}
+
+                transition={{ duration: 0.7, delay: 0.4 }}
+
+                className="mb-0"
+
+              >
+
+
+                <div className="w-full max-w-2xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                  <div className="rounded-3xl overflow-hidden">
+                    <EmergencyChatInterface />
+                  </div>
+                </div>
+
+
+
+              </motion.div>
+
+
+
+
+
             </div>
 
-            <SearchForm />
-
-          </motion.div>
+          </section>
 
 
 
+          {/* Trust Badges */}
 
+          <section className="container-wide pt-0 pb-16">
 
-        </div>
+            <TrustBadges />
 
-      </section>
-
-
-
-      {/* Trust Badges */}
-
-      <section className="container-wide py-16">
-
-        <TrustBadges />
-
-      </section>
+          </section>
 
 
 
-      {/* Emergency Services */}
+          {/* Emergency Services */}
 
-      <section className="container-wide py-16">
-
-        <motion.div
-
-          initial={{ opacity: 0, y: 30 }}
-
-          whileInView={{ opacity: 1, y: 0 }}
-
-          viewport={{ once: true, margin: "-100px" }}
-
-          transition={{ duration: 0.6 }}
-
-          className="text-center mb-12"
-
-        >
-
-          <p className="text-gold uppercase tracking-luxury text-sm mb-4">Our Expertise</p>
-
-          <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-
-            Emergency Trade Services
-
-          </h2>
-
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-
-            From burst pipes to power cuts, our verified professionals handle all urgent repairs.
-
-            Available 24 hours, every day of the year.
-
-          </p>
-
-        </motion.div>
-
-
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-          {trades.map((trade, index) => (
+          <section className="container-wide py-16">
 
             <motion.div
-
-              key={trade.slug}
 
               initial={{ opacity: 0, y: 30 }}
 
               whileInView={{ opacity: 1, y: 0 }}
 
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-100px" }}
 
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6 }}
+
+              className="text-center mb-12"
 
             >
 
-              <TradeCard trade={trade} />
+              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Our Expertise</p>
+
+              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+
+                Emergency Trade Services
+
+              </h2>
+
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+
+                From burst pipes to power cuts, our verified professionals handle all urgent repairs.
+
+                Available 24 hours, every day of the year.
+
+              </p>
 
             </motion.div>
 
-          ))}
-
-        </div>
-
-      </section>
 
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-      {/* Breakdown Recovery Feature */}
-      <section className="container-wide py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image Side */}
-          <div className="order-2 lg:order-1 relative group">
-            <div className="absolute inset-0 bg-gold/20 blur-2xl rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
-            <div className="relative rounded-3xl overflow-hidden border border-gold/20 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
-              <img
-                src="/breakdown-recovery.png"
-                alt="Emergency Breakdown Recovery at Night"
-                className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-                decoding="async"
-                width="600"
-                height="400"
-              />
-            </div>
-          </div>              {/* Text Side */}
-          <div className="order-1 lg:order-2">
-            <p className="text-gold uppercase tracking-luxury text-sm mb-4">Roadside Assistance</p>
-            <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
-              Emergency <span className="text-gold">Breakdown Recovery</span> Available 24/7
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8">
-              Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified recovery partners are just a tap away.
-            </p>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                <span className="text-foreground">Nationwide coverage</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                <span className="text-foreground">Fast response times (30-60 mins)</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                <span className="text-foreground">Cars, vans, and light commercial</span>
-              </li>
-            </ul>
-            <Button size="xl" variant="hero" asChild>
-              <Link to="/breakdown/london">Get Roadside Help</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+              {trades.map((trade, index) => (
 
-      {/* Popular Cities */}
-      <section className="py-16 border-t border-b border-border/30">
+                <motion.div
 
-        <div className="container-wide">
+                  key={trade.slug}
 
-          <div className="text-center mb-10">
+                  initial={{ opacity: 0, y: 30 }}
 
-            <p className="text-gold uppercase tracking-luxury text-sm mb-4">Coverage</p>
+                  whileInView={{ opacity: 1, y: 0 }}
 
-            <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
+                  viewport={{ once: true, margin: "-50px" }}
 
-              Find Emergency Help in Your City
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
 
-            </h2>
+                >
 
-          </div>
+                  <TradeCard trade={trade} />
 
+                </motion.div>
 
-
-          <div className="flex flex-wrap justify-center gap-3">
-
-            {cities.slice(0, 20).map((city) => (
-
-              <Link
-
-                key={city}
-
-                to={`/emergency-plumber/${city.toLowerCase()}`}
-
-                className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
-
-              >
-
-                {city}
-
-              </Link>
-
-            ))}
-
-            <span className="px-5 py-2.5 text-sm text-muted-foreground">
-
-              + {cities.length - 20} more cities
-
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-
-      <div className="container-wide pt-12">
-        {/* Visibility Into Call-Outs Box for Tradesmen */}
-        <div className="max-w-4xl mx-auto mb-16 p-8 rounded-3xl border border-gold/30 bg-gold/5 backdrop-blur-sm shadow-2xl overflow-hidden relative group">
-          {/* Decorative background glow */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-gold/10 rounded-full blur-[80px] group-hover:bg-gold/20 transition-colors duration-700" />
-
-          <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div className="text-left">
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6 leading-tight">
-                Turn <span className="text-gold">Visibility</span> Into <span className="text-gold">Call-Outs</span>
-              </h2>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  </div>
-                  <p className="text-foreground font-medium">Get seen first with priority ranking in your area</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  </div>
-                  <p className="text-foreground font-medium">Build instant trust with a ‘Featured’ badge and reviews</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  </div>
-                  <p className="text-foreground font-medium">Receive direct calls, not messages or time-wasters</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  </div>
-                  <p className="text-foreground font-medium">Reach customers ready to act, not just browsing</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                  </div>
-                  <p className="text-foreground font-medium font-bold">No ads to manage. No chasing leads. Just calls.</p>
-                </li>
-              </ul>
-            </div>
-
-            {/* Showcase Image Area */}
-            <div className="relative aspect-[9/16] rounded-2xl border border-gold/20 bg-gold/5 flex items-center justify-center overflow-hidden hover:border-gold/40 transition-colors duration-500 shadow-2xl">
-              <img
-                src="/visibility-showcase.jpg"
-                alt="Visibility showcase"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-                width="400"
-                height="700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-
-      <section className="container-wide py-20">
-
-        <div className="relative overflow-hidden rounded-lg border border-gold/30 bg-card p-10 md:p-16 text-center">
-
-          {/* Decorative elements */}
-
-          <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
-
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-
-
-
-          <div className="relative z-10">
-
-            <p className="text-gold uppercase tracking-luxury text-sm mb-6">24/7 Availability</p>
-
-            <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-6">
-
-              Need Help Right Now?
-
-            </h2>
-
-
-
-
-
-
-
-            {/* AI Triage CTA */}
-
-
-
-            <div className="mb-8 -mx-6 md:mx-auto max-w-4xl">
-
-              <AvailabilityCarousel />
-
+              ))}
 
             </div>
 
-
-
-            <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-
-              Our team is standing by 24/7 to connect you with a local emergency tradesperson.
-
-              One call is all it takes.
-
-            </p>
+          </section>
 
 
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-
-
-
-              <Button variant="outline" size="xl" className="rounded-full" asChild>
-
-                <Link to="/contact" className="flex items-center gap-3">
-
-                  <Phone className="w-5 h-5" />
-
-                  Contact Us
-
-                </Link>
-
-              </Button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-      <div className="container mx-auto px-4 py-12 flex flex-col items-center">
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={() => setShowFaq(!showFaq)}
-          className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold"
-        >
-          FAQ
-        </Button>
-
-        {showFaq && (
-          <div className="w-full max-w-3xl mt-8 animate-in fade-in slide-in-from-top-4 duration-300">
-            <GeneralFAQSection initiallyOpened={true} />
-          </div>
-        )}
-      </div>
-    </main>
-
-
-
-          {/* Center Trustpilot Carousel Widget */ }
-          <section className="container-wide py-12 border-t border-border/30">
-            <div className="max-w-6xl mx-auto">
-              <TrustpilotWidget 
-                templateId="53aa8912dec7e10d38f59f36" 
-                businessId="676878b2d4b2944b9e1e2c94" 
-                username="emergencytradesmen.net"
-                styleHeight="140px"
-              />
+          {/* Breakdown Recovery Feature */}
+          <section className="container-wide py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Image Side */}
+              <div className="order-2 lg:order-1 relative group">
+                <div className="absolute inset-0 bg-gold/20 blur-2xl rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+                <div className="relative rounded-3xl overflow-hidden border border-gold/20 shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
+                  <img
+                    src="/breakdown-recovery.png"
+                    alt="Emergency Breakdown Recovery at Night"
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                    width="600"
+                    height="400"
+                  />
+                </div>
+              </div>              {/* Text Side */}
+              <div className="order-1 lg:order-2">
+                <p className="text-gold uppercase tracking-luxury text-sm mb-4">Roadside Assistance</p>
+                <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
+                  Emergency <span className="text-gold">Breakdown Recovery</span> Available 24/7
+                </h2>
+                <p className="text-muted-foreground text-lg mb-8">
+                  Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified recovery partners are just a tap away.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                    <span className="text-foreground">Nationwide coverage</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                    <span className="text-foreground">Fast response times (30-60 mins)</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                    <span className="text-foreground">Cars, vans, and light commercial</span>
+                  </li>
+                </ul>
+                <Button size="xl" variant="hero" asChild>
+                  <Link to="/breakdown/london">Get Roadside Help</Link>
+                </Button>
+              </div>
             </div>
           </section>
 
-          <Footer />
+          {/* Popular Cities */}
+          <section className="py-16 border-t border-b border-border/30">
+
+            <div className="container-wide">
+
+              <div className="text-center mb-10">
+
+                <p className="text-gold uppercase tracking-luxury text-sm mb-4">Coverage</p>
+
+                <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
+
+                  Find Emergency Help in Your City
+
+                </h2>
+
+              </div>
+
+
+
+              <div className="flex flex-wrap justify-center gap-3">
+
+                {cities.slice(0, 20).map((city) => (
+
+                  <Link
+
+                    key={city}
+
+                    to={`/emergency-plumber/${city.toLowerCase()}`}
+
+                    className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
+
+                  >
+
+                    {city}
+
+                  </Link>
+
+                ))}
+
+                <span className="px-5 py-2.5 text-sm text-muted-foreground">
+
+                  + {cities.length - 20} more cities
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+
+          <div className="container-wide pt-12">
+            {/* Visibility Into Call-Outs Box for Tradesmen */}
+            <div className="max-w-4xl mx-auto mb-16 p-8 rounded-3xl border border-gold/30 bg-gold/5 backdrop-blur-sm shadow-2xl overflow-hidden relative group">
+              {/* Decorative background glow */}
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-gold/10 rounded-full blur-[80px] group-hover:bg-gold/20 transition-colors duration-700" />
+
+              <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div className="text-left">
+                  <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6 leading-tight">
+                    Turn <span className="text-gold">Visibility</span> Into <span className="text-gold">Call-Outs</span>
+                  </h2>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      </div>
+                      <p className="text-foreground font-medium">Get seen first with priority ranking in your area</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      </div>
+                      <p className="text-foreground font-medium">Build instant trust with a ‘Featured’ badge and reviews</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      </div>
+                      <p className="text-foreground font-medium">Receive direct calls, not messages or time-wasters</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      </div>
+                      <p className="text-foreground font-medium">Reach customers ready to act, not just browsing</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="mt-1.5 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      </div>
+                      <p className="text-foreground font-medium font-bold">No ads to manage. No chasing leads. Just calls.</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Showcase Image Area */}
+                <div className="relative aspect-[9/16] rounded-2xl border border-gold/20 bg-gold/5 flex items-center justify-center overflow-hidden hover:border-gold/40 transition-colors duration-500 shadow-2xl">
+                  <img
+                    src="/visibility-showcase.jpg"
+                    alt="Visibility showcase"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+
+          <section className="container-wide py-20">
+
+            <div className="relative overflow-hidden rounded-lg border border-gold/30 bg-card p-10 md:p-16 text-center">
+
+              {/* Decorative elements */}
+
+              <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />
+
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+
+
+
+              <div className="relative z-10">
+
+                <p className="text-gold uppercase tracking-luxury text-sm mb-6">24/7 Availability</p>
+
+                <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-6">
+
+                  Need Help Right Now?
+
+                </h2>
+
+
+
+
+
+
+
+                {/* AI Triage CTA */}
+
+
+
+                <div className="mb-8 -mx-6 md:mx-auto max-w-4xl">
+
+                  <AvailabilityCarousel />
+
+
+                </div>
+
+
+
+                <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
+
+                  Our team is standing by 24/7 to connect you with a local emergency tradesperson.
+
+                  One call is all it takes.
+
+                </p>
+
+
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+
+
+                  <Button variant="outline" size="xl" className="rounded-full" asChild>
+
+                    <Link to="/contact" className="flex items-center gap-3">
+
+                      <Phone className="w-5 h-5" />
+
+                      Contact Us
+
+                    </Link>
+
+                  </Button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+          <div className="container mx-auto px-4 py-12 flex flex-col items-center">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setShowFaq(!showFaq)}
+              className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold"
+            >
+              FAQ
+            </Button>
+
+            {showFaq && (
+              <div className="w-full max-w-3xl mt-8 animate-in fade-in slide-in-from-top-4 duration-300">
+                <GeneralFAQSection initiallyOpened={true} />
+              </div>
+            )}
+          </div>
+        </main>
+
+
+
+        {/* Center Trustpilot Carousel Widget */}
+        <section className="container-wide py-12 border-t border-border/30">
+          <div className="max-w-6xl mx-auto">
+            <TrustpilotWidget
+              templateId="53aa8912dec7e10d38f59f36"
+              businessId="676878b2d4b2944b9e1e2c94"
+              username="emergencytradesmen.net"
+              styleHeight="140px"
+            />
+          </div>
+        </section>
+
+        <Footer />
 
       </>
 

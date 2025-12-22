@@ -5,7 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { APIProvider } from "@vis.gl/react-google-maps";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
@@ -61,6 +61,26 @@ const PageLoader = () => (
   </div>
 );
 
+const HashCleaner = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Aggressive hash cleanup
+    // Check if the URL ends with a hash symbol (even if location.hash is empty)
+    if (window.location.href.endsWith('#') || window.location.hash === '#') {
+      // Use window.history.replaceState to replace the current entry
+      // Preserve window.history.state to avoid breaking client-side routers
+      window.history.replaceState(
+        window.history.state,
+        '',
+        window.location.pathname + window.location.search
+      );
+    }
+  }, [location]);
+
+  return null;
+};
+
 const App = () => {
   // Debug: Check if Supabase URL is available
   if (!import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
@@ -92,6 +112,11 @@ const App = () => {
 
   useEffect(() => {
     initGA();
+
+    // Global hash cleanup
+    if (window.location.hash === '#') {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   }, []);
 
   return (
@@ -107,6 +132,7 @@ const App = () => {
                   <ThemeToggle />
                   <BrowserRouter>
                     <ScrollToTop />
+                    <HashCleaner />
                     <Suspense fallback={<PageLoader />}>
                       <AnalyticsTracker />
                       <InstallPWA />

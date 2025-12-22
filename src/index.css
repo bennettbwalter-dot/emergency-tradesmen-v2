@@ -72,24 +72,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 20 8% 12%;
 
-    --primary: 38 65% 55%;
+    --primary: 210 5% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 15% 92%;
+    --secondary: 210 10% 96%;
     --secondary-foreground: 20 8% 12%;
 
-    --muted: 40 10% 90%;
+    --muted: 210 10% 90%;
     --muted-foreground: 20 8% 40%;
 
-    --accent: 38 65% 55%;
+    --accent: 210 5% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 85%;
-    --input: 40 15% 85%;
-    --ring: 38 65% 55%;
+    --border: 210 15% 85%;
+    --input: 210 15% 85%;
+    --ring: 210 5% 40%;
 
     --success: 142 50% 40%;
     --success-foreground: 0 0% 100%;
@@ -97,47 +97,47 @@
     --warning-foreground: 0 0% 100%;
     --urgent: 24 80% 50%;
     --urgent-foreground: 0 0% 100%;
-    --trust: 38 65% 55%;
-    --trust-light: 38 30% 95%;
+    --trust: 210 5% 40%;
+    --trust-light: 210 10% 95%;
 
-    --gold: 38 75% 35%;
-    --gold-light: 38 60% 45%;
+    --gold: 38 65% 55%;
+    --gold-light: 38 50% 70%;
     --gold-dark: 38 70% 35%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 20 8% 12%;
-    --sidebar-primary: 38 65% 55%;
+    --sidebar-primary: 210 5% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 15% 92%;
+    --sidebar-accent: 210 10% 92%;
     --sidebar-accent-foreground: 20 8% 12%;
-    --sidebar-border: 40 15% 85%;
-    --sidebar-ring: 38 65% 55%;
+    --sidebar-border: 210 15% 85%;
+    --sidebar-ring: 210 5% 40%;
   }
 
   .dark {
-    --background: 20 8% 4%;
-    --foreground: 40 25% 95%;
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
 
-    --card: 20 10% 8%;
-    --card-foreground: 40 25% 95%;
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 20 10% 8%;
-    --popover-foreground: 40 25% 95%;
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 20 8% 10%;
-    --primary-foreground: 40 25% 95%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 20 10% 12%;
-    --secondary-foreground: 40 25% 95%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 20 8% 16%;
-    --muted-foreground: 40 10% 50%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
 
     --accent: 38 65% 55%;
-    --accent-foreground: 20 8% 4%;
+    --accent-foreground: 222 47% 11%;
 
-    --border: 40 15% 18%;
-    --input: 40 15% 18%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
     --ring: 38 65% 55%;
 
     --success: 142 50% 45%;
@@ -147,7 +147,7 @@
     --urgent: 24 80% 50%;
     --urgent-foreground: 0 0% 100%;
     --trust: 38 65% 55%;
-    --trust-light: 38 30% 12%;
+    --trust-light: 222 47% 15%;
 
     --gold: 38 65% 55%;
     --gold-light: 38 50% 70%;
@@ -328,6 +328,10 @@ select {
   background-size: 1.5em 1.5em;
 }
 
+.light select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23737373' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -347,11 +351,14 @@ select {
 }
 
 @keyframes smooth-gold-white {
-  0%, 100% {
+
+  0%,
+  100% {
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   }
+
   50% {
     color: hsl(var(--gold));
     border-color: hsl(var(--gold));
@@ -364,16 +371,32 @@ select {
 }
 
 @keyframes flash-green-red {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: #10b981;
     box-shadow: 0 0 8px #10b981;
   }
+
   50% {
     background-color: #ef4444;
     box-shadow: 0 0 8px #ef4444;
   }
 }
 
-.animate-status-flash {
-  animation: flash-green-red 3s ease-in-out infinite;
+
+@keyframes border-gold-white {
+
+  0%,
+  100% {
+    border-color: hsl(var(--gold));
+  }
+
+  50% {
+    border-color: #ffffff;
+  }
+}
+
+.animate-border-gold-white {
+  animation: border-gold-white 2s ease-in-out infinite;
 }

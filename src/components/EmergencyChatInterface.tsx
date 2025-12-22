@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield } from "lucide-react";
+import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate } from "react-router-dom";
@@ -7,16 +7,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
+import { trades, cities } from "@/lib/trades";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
-    const { setDetectedTrade, setDetectedCity, setIsRequestingLocation } = useChatbot();
+    const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const [chatState, setChatState] = useState<ChatState>({
         step: 'INITIAL',
         detectedTrade: null,
-        detectedCity: null,
         history: []
     });
 
@@ -95,6 +102,8 @@ export function EmergencyChatInterface() {
     const [isFocused, setIsFocused] = useState(false);
 
     const helperSentences = [
+        "We’re here to help you find trusted local emergency tradespeople.",
+        "Take a moment to describe what’s happening, or search and call for immediate help.",
         "Get help fast",
         "Find the right trade",
         "Connect you locally",
@@ -171,7 +180,7 @@ export function EmergencyChatInterface() {
     };
 
     return (
-        <div className="w-full max-w-2xl mx-auto px-4">
+        <div className="w-full max-w-4xl mx-auto px-4">
             <div className="relative rounded-3xl bg-transparent overflow-hidden">
                 {chatState.history.length > 0 && (
                     <div className="absolute top-4 right-4 z-10">
@@ -246,31 +255,96 @@ export function EmergencyChatInterface() {
                 </div>
 
                 <div className="p-4 bg-transparent">
-                    <div className="relative group">
-
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-gold/30 to-gold/10 rounded-full opacity-0 group-hover:opacity-100 transition duration-500 blur-md"></div>
-                        <div className="relative flex items-center bg-secondary rounded-full transition-all shadow-lg overflow-hidden">
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                onFocus={() => setIsFocused(true)}
-                                onBlur={() => setIsFocused(false)}
-                                placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                                className="flex-1 bg-transparent border-none outline-none focus:outline-none focus:border-none h-12 px-5 text-base focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground text-foreground"
-                            />
-                            <div className="pr-1.5">
-                                <Button
-                                    onClick={() => handleUserMessage(input)}
-                                    disabled={!input.trim() || isTyping}
-                                    size="icon"
-                                    className="h-9 w-9 rounded-full bg-foreground text-background hover:bg-gold hover:text-white transition-all"
+                    <div className="relative flex items-center w-full bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
+                        <textarea
+                            ref={inputRef as any}
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleKeyDown(e);
+                                }
+                            }}
+                            onFocus={() => setIsFocused(true)}
+                            onBlur={() => setIsFocused(false)}
+                            placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none h-40 px-8 py-6 text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-none"
+                        />
+                        <div className="absolute bottom-8 right-8 flex items-center gap-2">
+                            {/* Trade Selector */}
+                            <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
+                                <SelectTrigger
+                                    className={`h-9 px-4 min-w-[140px] rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
                                 >
+                                    <Wrench className="w-4 h-4 shrink-0 text-black dark:text-white" />
+                                    <SelectValue placeholder="Trade">
+                                        <span className="text-sm font-medium truncate">{detectedTrade ? trades.find(t => t.slug === detectedTrade)?.name : "Trade"}</span>
+                                    </SelectValue>
+                                </SelectTrigger>
+                                <SelectContent className="bg-white border-gray-200">
+                                    {trades.map((t) => (
+                                        <SelectItem
+                                            key={t.slug}
+                                            value={t.slug}
+                                            className="cursor-pointer hover:bg-gray-100 text-black"
+                                        >
+                                            {t.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+
+                            {/* City Selector */}
+                            <Select value={detectedCity || ""} onValueChange={setDetectedCity}>
+                                <SelectTrigger
+                                    className={`h-9 px-4 min-w-[140px] rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
+                                >
+                                    <MapPin className="w-4 h-4 shrink-0 text-black dark:text-white" />
+                                    <SelectValue placeholder="City">
+                                        <span className="text-sm font-medium truncate">{detectedCity || "City"}</span>
+                                    </SelectValue>
+                                </SelectTrigger>
+                                <SelectContent className="bg-white border-gray-200">
+                                    {cities.map((c) => (
+                                        <SelectItem
+                                            key={c}
+                                            value={c}
+                                            className="cursor-pointer hover:bg-gray-100 text-black"
+                                        >
+                                            {c}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+
+                            {/* Dynamic Action Button */}
+                            <Button
+                                onClick={() => {
+                                    if (isRequestingLocation) {
+                                        getLocation();
+                                        setIsRequestingLocation(false);
+                                    } else if (detectedTrade && detectedCity && !input.trim()) {
+                                        navigate(`/emergency-${detectedTrade}/${detectedCity.toLowerCase()}`);
+                                    } else {
+                                        handleUserMessage(input);
+                                    }
+                                }}
+                                disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
+                                size="icon"
+                                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${isRequestingLocation || (detectedTrade && detectedCity && !input.trim())
+                                    ? 'bg-gold/20 text-gold hover:bg-gold/30 animate-pulse ring-1 ring-gold shadow-[0_0_10px_rgba(255,183,0,0.5)]'
+                                    : 'bg-gold text-white hover:bg-gold/90'}`}
+                                title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
+                            >
+                                {isRequestingLocation ? (
+                                    geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
+                                ) : (detectedTrade && detectedCity && !input.trim()) ? (
+                                    <Search className="w-4 h-4" />
+                                ) : (
                                     <Send className="w-4 h-4" />
-                                </Button>
-                            </div>
+                                )}
+                            </Button>
                         </div>
                     </div>
                 </div>
