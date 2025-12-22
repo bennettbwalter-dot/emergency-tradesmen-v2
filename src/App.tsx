@@ -36,6 +36,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 const PaymentCancelPage = lazy(() => import("./pages/PaymentCancelPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
+const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const PremiumProfileEditor = lazy(() => import("./pages/PremiumProfileEditor"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
@@ -115,6 +116,7 @@ const App = () => {
                       <Routes>
                         <Route path="/login" element={<AuthPage defaultTab="login" />} />
                         <Route path="/register" element={<AuthPage defaultTab="register" />} />
+                        <Route path="/auth/callback" element={<AuthCallback />} />
                         <Route path="/" element={<Index />} />
                         <Route path="/user/dashboard" element={<UserDashboard />} />
                         <Route path="/business/:businessId" element={<BusinessProfilePage />} />
