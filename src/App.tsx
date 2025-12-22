@@ -17,7 +17,6 @@ import { LiveChat } from "@/components/LiveChat";
 import { CookieConsent } from "@/components/CookieConsent";
 import { FloatingBackButton } from "@/components/FloatingBackButton";
 import { CustomCursor } from "@/components/CustomCursor";
-import { AuthRedirectHandler } from "@/components/AuthRedirectHandler";
 import { initGA } from "@/lib/analytics";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
@@ -112,7 +111,6 @@ const App = () => {
                       <AnalyticsTracker />
                       <InstallPWA />
                       <CookieConsent />
-                      <AuthRedirectHandler />
                       <Routes>
                         <Route path="/login" element={<AuthPage defaultTab="login" />} />
                         <Route path="/register" element={<AuthPage defaultTab="register" />} />
