@@ -1,11 +1,11 @@
 export const trades = [
-  { slug: "plumber", name: "Plumber", icon: "💧" },
-  { slug: "electrician", name: "Electrician", icon: "⚡" },
-  { slug: "locksmith", name: "Locksmith", icon: "🔐" },
-  { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥" },
-  { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿" },
-  { slug: "glazier", name: "Glazier", icon: "🪟" },
-  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗" },
+  { slug: "plumber", name: "Plumber", icon: "💧", image: "/emergency-plumber.png" },
+  { slug: "electrician", name: "Electrician", icon: "⚡", image: "/emergency-electrician.png" },
+  { slug: "locksmith", name: "Locksmith", icon: "🔐", image: "/emergency-locksmith.png" },
+  { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer.png" },
+  { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist.png" },
+  { slug: "glazier", name: "Glazier", icon: "🪟", image: "/emergency-glazier.png" },
+  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗", image: "/emergency-breakdown-card.png" },
 ] as const;
 
 export const cities = [

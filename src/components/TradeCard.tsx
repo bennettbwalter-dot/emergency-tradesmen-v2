@@ -21,10 +21,10 @@ export function TradeCard({ trade, city }: TradeCardProps) {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     // Set the trade in context
     setDetectedTrade(trade.slug);
-    
+
     // If we already have a city, navigate immediately
     if (targetCity) {
       navigate(`/emergency-${trade.slug}/${targetCity.toLowerCase()}`);
@@ -63,15 +63,31 @@ export function TradeCard({ trade, city }: TradeCardProps) {
           <div className="absolute top-0 right-0 w-8 h-[1px] bg-gradient-to-l from-gold/50 to-transparent" />
         </div>
 
+        {/* Display Image if available, otherwise Icon */}
+        {trade.image ? (
+          <div className="relative mb-6 -mx-6 -mt-6 aspect-[4/3] overflow-hidden group-hover:shadow-lg transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 opactiy-90" />
+            <motion.img
+              src={trade.image}
+              alt={`Emergency ${trade.name}`}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+        ) : (
+          <motion.span
+            className="text-4xl mb-4 block filter drop-shadow-lg"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ duration: 0.3 }}
+          >
+            {trade.icon}
+          </motion.span>
+        )}
+
         <div className="relative z-10 flex items-start justify-between">
           <div>
-            <motion.span
-              className="text-4xl mb-4 block filter drop-shadow-lg"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              {trade.icon}
-            </motion.span>
             <h3 className="font-display text-xl text-foreground group-hover:text-gold transition-colors tracking-wide">
               Emergency {trade.name}
             </h3>
