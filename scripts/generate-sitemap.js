@@ -5,7 +5,11 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 
 // Load env vars
-dotenv.config();
+if (fs.existsSync('.env.production')) {
+    dotenv.config({ path: '.env.production' });
+} else {
+    dotenv.config();
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,11 +49,33 @@ const BASE_URL = 'https://emergencytradesmen.net';
 async function generateSitemap() {
     console.log('🔄 Fetching data from Supabase...');
 
-    // 1. Fetch verified businesses
-    const { data: businesses, error: bizError } = await supabase
-        .from('businesses')
-        .select('id, updated_at')
-        .eq('verified', true);
+    // 1. Fetch all verified businesses with pagination
+    let allBusinesses = [];
+    let from = 0;
+    const step = 1000;
+    let hasMore = true;
+
+    while (hasMore) {
+        const { data, error } = await supabase
+            .from('businesses')
+            .select('id, updated_at')
+            .eq('verified', true)
+            .range(from, from + step - 1);
+
+        if (error) {
+            console.error('❌ Error fetching businesses:', error);
+            break;
+        }
+
+        allBusinesses = [...allBusinesses, ...data];
+        if (data.length < step) {
+            hasMore = false;
+        } else {
+            from += step;
+        }
+    }
+
+    const businesses = allBusinesses;
 
     // 2. Fetch published blog posts
     const { data: posts, error: postError } = await supabase
@@ -57,8 +83,8 @@ async function generateSitemap() {
         .select('slug, updated_at')
         .eq('published', true);
 
-    if (bizError || postError) {
-        console.error('❌ Error fetching data:', bizError || postError);
+    if (postError) {
+        console.error('❌ Error fetching posts:', postError);
         return;
     }
 

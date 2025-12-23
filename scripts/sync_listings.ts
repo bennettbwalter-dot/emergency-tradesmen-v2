@@ -77,6 +77,25 @@ function toUUID(str: string): string {
 async function syncListings() {
     console.log("Starting sync of static listings to Supabase...");
 
+    // 0. Detect Schema
+    console.log("Detecting schema...");
+    const { data: schemaTest, error: schemaError } = await supabase
+        .from('businesses')
+        .select('*')
+        .limit(1);
+
+    if (schemaError) {
+        console.error("Error detecting schema:", schemaError);
+        process.exit(1);
+    }
+
+    const availableColumns = new Set(Object.keys(schemaTest[0] || {}));
+    console.log("Available columns:", Array.from(availableColumns).join(', '));
+
+    const hasTier = availableColumns.has('tier');
+    const hasPriority = availableColumns.has('priority_score');
+    const hasIsPremium = availableColumns.has('is_premium');
+
     const businessesToUpsert: any[] = [];
     const photosToUpsert: any[] = [];
 
@@ -93,32 +112,36 @@ async function syncListings() {
                 const slug = `${baseSlug}-${businessUuid.substring(0, 8)}`;
 
                 // Map to DB columns
-                businessesToUpsert.push({
+                const record: any = {
                     id: businessUuid,
-                    slug: slug, // Add ID-based slug
+                    slug: slug,
                     name: biz.name,
                     rating: biz.rating,
                     review_count: biz.reviewCount,
-                    address: biz.address || city, // fallback to city
+                    address: biz.address || city,
                     hours: biz.hours,
                     is_open_24_hours: biz.isOpen24Hours,
                     phone: biz.phone,
                     website: biz.website,
                     featured_review: biz.featuredReview,
                     trade: trade.toLowerCase(),
-                    city: city, // normalize?
-                    tier: biz.tier || 'free',
-                    priority_score: biz.priority_score || 0,
-                    verified: true, // Auto-verify static imports
-                    // Premium fields (optional)
-                    logo_url: biz.logo_url,
-                    premium_description: biz.premium_description,
-                    services_offered: biz.services_offered,
-                    coverage_areas: biz.coverage_areas,
-                    is_premium: biz.is_premium,
-                    owner_user_id: biz.owner_user_id,
-                    whatsapp_number: biz.whatsapp_number
-                });
+                    city: city,
+                    verified: true
+                };
+
+                if (hasTier) record.tier = biz.tier || 'free';
+                if (hasPriority) record.priority_score = biz.priority_score || 0;
+                if (hasIsPremium) record.is_premium = biz.is_premium || biz.tier === 'paid' || false;
+
+                // Additional fields if they exist
+                if (availableColumns.has('logo_url')) record.logo_url = biz.logo_url;
+                if (availableColumns.has('premium_description')) record.premium_description = biz.premium_description;
+                if (availableColumns.has('services_offered')) record.services_offered = biz.services_offered;
+                if (availableColumns.has('coverage_areas')) record.coverage_areas = biz.coverage_areas;
+                if (availableColumns.has('whatsapp_number')) record.whatsapp_number = biz.whatsapp_number;
+                if (availableColumns.has('owner_user_id')) record.owner_user_id = biz.owner_user_id;
+
+                businessesToUpsert.push(record);
 
                 // Photos
                 if (biz.photos && biz.photos.length > 0) {
