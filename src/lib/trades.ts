@@ -1,11 +1,11 @@
 export const trades = [
-  { slug: "plumber", name: "Plumber", icon: "💧", image: "/emergency-plumber.png" },
-  { slug: "electrician", name: "Electrician", icon: "⚡", image: "/emergency-electrician.png" },
-  { slug: "locksmith", name: "Locksmith", icon: "🔐", image: "/emergency-locksmith.png" },
-  { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer.png" },
-  { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist.png" },
-  { slug: "glazier", name: "Glazier", icon: "🪟", image: "/emergency-glazier.png" },
-  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗", image: "/emergency-breakdown-card.png" },
+  { slug: "plumber", name: "Plumber", icon: "💧", image: "/emergency-plumber-v2.jpg", vectorIcon: "/icons/plumber.png" },
+  { slug: "electrician", name: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.png", vectorIcon: "/icons/electrician.png" },
+  { slug: "locksmith", name: "Locksmith", icon: "🔐", image: "/emergency-locksmith-v2.jpg", vectorIcon: "/icons/locksmith.png" },
+  { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer-v2.png", vectorIcon: "/icons/gas-engineer.png" },
+  { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist-v2.jpg", vectorIcon: "/icons/drain-specialist.png" },
+  { slug: "glazier", name: "Glazier", icon: "🪟", image: "/emergency-glazier-v2.jpg", vectorIcon: "/icons/glazier.png" },
+  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗", image: "/emergency-breakdown-v2.jpg", vectorIcon: "/icons/breakdown.png" },
 ] as const;
 
 export const cities = [

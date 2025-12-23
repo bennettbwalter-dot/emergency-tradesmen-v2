@@ -330,41 +330,27 @@ const Index = () => {
               </h2>
 
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-
                 From burst pipes to power cuts, our verified professionals handle all urgent repairs.
-
-                Available 24 hours, every day of the year.
-
+                Available 24 hours a day, every day of the year.
               </p>
 
             </motion.div>
 
-
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
+            <div className="flex flex-wrap justify-center gap-4">
               {trades.map((trade, index) => (
-
                 <motion.div
-
                   key={trade.slug}
-
                   initial={{ opacity: 0, y: 30 }}
-
                   whileInView={{ opacity: 1, y: 0 }}
-
                   viewport={{ once: true, margin: "-50px" }}
-
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-
+                  className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] flex"
                 >
-
-                  <TradeCard trade={trade} />
-
+                  <div className="w-full h-full">
+                    <TradeCard trade={trade} />
+                  </div>
                 </motion.div>
-
               ))}
-
             </div>
 
           </section>
@@ -380,7 +366,7 @@ const Index = () => {
                 <div className="relative rounded-3xl overflow-hidden border border-gold/20 shadow-2xl">
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
                   <img
-                    src="/breakdown-recovery.png"
+                    src="/emergency-breakdown-recovery.png"
                     alt="Emergency Breakdown Recovery at Night"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
@@ -390,7 +376,7 @@ const Index = () => {
                   />
                 </div>
               </div>              {/* Text Side */}
-              <div className="order-1 lg:order-2 -mt-12 lg:-mt-24">
+              <div className="order-1 lg:order-2">
                 <p className="text-gold uppercase tracking-luxury text-sm mb-4">Roadside Assistance</p>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
                   Emergency <span className="text-gold">Breakdown Recovery</span> Available 24/7
