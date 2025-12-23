@@ -33,10 +33,10 @@ export function Newsletter() {
 
     return (
         <div className="w-full">
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-4">
+            <h4 className="font-display text-lg tracking-wide text-white mb-4">
                 Subscribe to our Newsletter
             </h4>
-            <p className="text-muted-foreground text-sm mb-4">
+            <p className="text-white/60 text-sm mb-4">
                 Get the latest updates and tips for your home.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -46,13 +46,13 @@ export function Newsletter() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-background/50"
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
                     disabled={isLoading}
                 />
                 <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gold hover:bg-gold-light text-primary font-semibold"
+                    className="w-full bg-gold hover:bg-gold-light text-black font-semibold"
                 >
                     {isLoading ? "Subscribing..." : "Subscribe"}
                 </Button>
