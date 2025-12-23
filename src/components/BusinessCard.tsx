@@ -141,18 +141,18 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         </div>
 
         {/* Title Section - Handles 2 lines + profile link */}
-        <div className="min-h-[85px] flex flex-col items-start bg-white/60 backdrop-blur-sm p-4 -mx-4 rounded-xl border border-white/50">
+        <div className="min-h-[90px] flex flex-col items-start bg-white/95 p-4 rounded-xl border border-slate-200 shadow-sm">
           <h3 className={`font-display tracking-tight leading-tight line-clamp-2 text-slate-900 ${isPremium ? "text-2xl font-black" : "text-xl font-bold"}`}>
-            <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors">
+            <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors block">
               {business.name}
             </Link>
           </h3>
           <Link
             to={`/business/${business.id}`}
-            className={`text-[10px] font-bold uppercase tracking-widest mt-2 flex items-center gap-1 transition-all group-hover:translate-x-1 ${isPremium ? "text-emerald-700 hover:text-emerald-900" : "text-gold hover:text-yellow-600"}`}
+            className={`text-[10px] font-extrabold uppercase tracking-widest mt-2 flex items-center gap-1 transition-all group-hover:translate-x-1 ${isPremium ? "text-emerald-700 hover:text-emerald-900" : "text-gold hover:text-yellow-600"}`}
           >
             View Full Profile
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
