@@ -175,7 +175,7 @@ export default function About() {
                                 <Link to="/contact" className="min-w-[200px]">Contact Us</Link>
                             </Button>
                             <Button variant="outline" size="xl" className="bg-transparent border-white/20 text-white hover:bg-white/10" asChild>
-                                <a href="/locations">Find a Tradesperson</a>
+                                <Link to="/">Find a Tradesperson</Link>
                             </Button>
                         </div>
                     </div>
