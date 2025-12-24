@@ -55,7 +55,7 @@ export function EmergencyChatInterface() {
 
     useEffect(() => {
         if (!detectedCity && chatState.history.length === 0) {
-            setIsRequestingLocation(true);
+            // Removed automatic pulsing on mount to wait for bot request
         }
     }, []);
 
@@ -91,12 +91,10 @@ export function EmergencyChatInterface() {
             setDetectedCity(newState.detectedCity);
 
             // Only pulse if we are at the very start (asking for everything)
-            // or if we have everything and are ready to go
-            const isAtStart = newState.step === 'INITIAL';
-            const isReady = !!(newState.detectedTrade || detectedTrade) && !!(newState.detectedCity || detectedCity);
+            // AND we haven't detected anything yet
+            const isAtStart = newState.step === 'INITIAL' && !newState.detectedTrade && !newState.detectedCity && !detectedTrade && !detectedCity;
 
             setIsRequestingLocation(isAtStart);
-            // The pulsing in the JSX will handle the isReady state logic
 
             setIsTyping(false);
 
@@ -271,7 +269,7 @@ export function EmergencyChatInterface() {
         setInput("");
         setDetectedTrade(null);
         setDetectedCity(null);
-        setIsRequestingLocation(true);
+        setIsRequestingLocation(false);
     };
 
     return (

@@ -222,9 +222,9 @@ export function processUserMessage(message: string, currentState: ChatState): { 
     } else {
         // Nothing detected - ask for clarification
         if (safetyAdvice) {
-            responseText = `Safety-first guidance:\n${safetyAdvice}\n\nTo find a tradesperson, please tell me your location and the nature of the emergency. You can also press the flashing Locate Me button to detect your location automatically.`;
+            responseText = `Safety-first guidance:\n${safetyAdvice}\n\nTo find a tradesperson, please tell me your location and the nature of the emergency. (You can also press the Locate Me button to detect your location automatically)`;
         } else {
-            responseText = "I'm here to help. I'll guide you to the right local trade while prioritizing your safety. Could you tell me what the emergency is and where you are located? (Tip: Press the flashing Locate Me button to detect your location)";
+            responseText = "I'm here to help. I'll guide you to the right local trade while prioritizing your safety. Could you tell me what the emergency is and where you are located? (Tip: Use the Locate Me button to detect your location)";
         }
         newState.step = 'INITIAL';
     }
