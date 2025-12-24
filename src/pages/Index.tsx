@@ -230,7 +230,7 @@ const Index = () => {
 
                 {/* Main headline */}
 
-                <h1 className="mb-0 font-display text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
+                <h1 className="mb-0 font-display text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
                   EMERGENCY <span className="text-gold">TRADESMEN</span>
                 </h1>
 
@@ -330,8 +330,8 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-10">
-                  <img src="/custom-arrow.png" alt="Next" className="w-20 h-20 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-4">
+                  <img src="/custom-arrow.png" alt="Next" className="w-16 h-16 object-contain rotate-90 drop-shadow-lg" />
                 </div>
               </motion.div>
 
@@ -358,8 +358,8 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-10">
-                  <img src="/custom-arrow.png" alt="Next" className="w-20 h-20 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-4">
+                  <img src="/custom-arrow.png" alt="Next" className="w-16 h-16 object-contain rotate-90 drop-shadow-lg" />
                 </div>
               </motion.div>
 
