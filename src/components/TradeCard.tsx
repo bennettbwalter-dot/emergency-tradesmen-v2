@@ -88,15 +88,15 @@ export function TradeCard({ trade, city }: TradeCardProps) {
         )}
 
         <div className="relative z-10 flex flex-col flex-grow p-4 sm:p-6">
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <h3 className="font-display text-xl text-foreground group-hover:text-gold transition-colors tracking-wide leading-tight min-h-[3.5rem] flex items-start flex-grow">
+          <div className="mb-4 flex flex-col sm:flex-row items-start sm:justify-between gap-3 sm:gap-4">
+            <h3 className="font-display text-lg sm:text-xl text-foreground group-hover:text-gold transition-colors tracking-wide leading-tight min-h-0 sm:min-h-[3.5rem] flex items-start flex-grow">
               Emergency {trade.name}
             </h3>
             {trade.vectorIcon && (
               <img
                 src={trade.vectorIcon}
                 alt=""
-                className="w-8 h-8 md:w-10 md:h-10 object-contain brightness-110 group-hover:scale-110 transition-all duration-300 shrink-0"
+                className="w-8 h-8 md:w-10 md:h-10 object-contain brightness-110 group-hover:scale-110 transition-all duration-300 shrink-0 self-start sm:self-auto"
               />
             )}
           </div>
