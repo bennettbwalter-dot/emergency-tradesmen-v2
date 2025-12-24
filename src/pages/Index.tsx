@@ -17,7 +17,7 @@ import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 
 import { trades, cities } from "@/lib/trades";
 
-import { Phone, Zap, ArrowRight } from "lucide-react";
+import { Phone, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
