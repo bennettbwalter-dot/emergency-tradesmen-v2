@@ -423,7 +423,7 @@ const Index = () => {
 
             </motion.div>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 px-2 md:px-0">
               {trades.map((trade, index) => (
                 <motion.div
                   key={trade.slug}
@@ -431,7 +431,7 @@ const Index = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] flex"
+                  className={`${index % 2 !== 0 ? "mt-6 lg:mt-0" : ""} flex`}
                 >
                   <div className="w-full h-full">
                     <TradeCard trade={trade} />
@@ -685,7 +685,7 @@ const Index = () => {
             </div>
 
           </section>
-          <div className="container mx-auto px-4 py-12 flex flex-col items-center">
+          <div className="container mx-auto px-4 pt-12 pb-2 flex flex-col items-center">
             <Button
               variant="outline"
               size="lg"
@@ -706,7 +706,7 @@ const Index = () => {
 
 
         {/* Center Trustpilot Carousel Widget */}
-        <section className="container-wide py-12 border-t border-border/30">
+        <section className="container-wide pb-12 pt-0 border-t-0 border-border/30">
           <div className="max-w-6xl mx-auto">
             <TrustpilotWidget
               templateId="53aa8912dec7e10d38f59f36"

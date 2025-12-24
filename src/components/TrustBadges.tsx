@@ -29,18 +29,18 @@ export function TrustBadges() {
       {badges.map((badge, index) => (
         <div
           key={badge.title}
-          className="group relative flex flex-col items-center text-center p-6 rounded-lg bg-card border border-border/50 hover:border-gold/30 transition-all duration-300"
+          className="group relative flex flex-col items-center text-center p-4 rounded-lg bg-card border border-border/50 hover:border-gold/30 transition-all duration-300"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
           {/* Glow effect on hover */}
           <div className="absolute inset-0 rounded-lg bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+
           <div className="relative z-10">
-            <div className="w-16 h-16 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center mb-4 group-hover:border-gold/50 transition-colors">
-              <badge.icon className="w-7 h-7 text-gold" />
+            <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center mb-3 group-hover:border-gold/50 transition-colors">
+              <badge.icon className="w-6 h-6 text-gold" />
             </div>
-            <h3 className="font-display text-lg text-foreground mb-1">{badge.title}</h3>
-            <p className="text-sm text-muted-foreground">{badge.description}</p>
+            <h3 className="font-display text-base text-foreground mb-1">{badge.title}</h3>
+            <p className="text-xs text-muted-foreground">{badge.description}</p>
           </div>
         </div>
       ))}

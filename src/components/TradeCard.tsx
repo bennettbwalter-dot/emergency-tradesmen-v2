@@ -50,9 +50,8 @@ export function TradeCard({ trade, city }: TradeCardProps) {
       className="block"
     >
       <motion.div
-        whileHover={{ y: -4, scale: 1.02 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="group relative flex flex-col rounded-lg border border-border/50 bg-card hover:border-gold/40 hover:shadow-xl hover:shadow-gold/5 transition-all duration-300 overflow-hidden h-full"
+        className="group relative flex flex-col rounded-lg border border-border/50 bg-card hover:border-gold hover:border-2 hover:shadow-xl hover:shadow-gold/5 transition-all duration-300 overflow-hidden h-full"
       >
         {/* Background glow effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

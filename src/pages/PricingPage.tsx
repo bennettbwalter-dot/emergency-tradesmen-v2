@@ -16,11 +16,11 @@ export default function PricingPage() {
             <main className="min-h-screen bg-background py-20">
                 <div className="container-wide">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <div className="relative w-full h-64 md:h-80 rounded-3xl overflow-hidden mb-12 border border-gold/20 shadow-2xl">
+                        <div className="relative w-full rounded-3xl overflow-hidden mb-12 border border-gold/20 shadow-2xl">
                             <img
-                                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop"
+                                src="/tradesman-hero-v2.jpg"
                                 alt="Professional tradesman"
-                                className="w-full h-full object-cover"
+                                className="w-full h-auto"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
                             <div className="absolute bottom-6 left-1/2 -translate-x-1/2">

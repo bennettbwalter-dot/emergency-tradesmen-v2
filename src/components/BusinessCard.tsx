@@ -61,8 +61,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   return (
     <div
       className={`group relative rounded-2xl border transition-all duration-500 overflow-hidden h-full flex flex-col ${isPremium
-        ? "bg-emerald-50/50 border-emerald-200 shadow-[0_8px_30px_rgb(16,185,129,0.1)] ring-1 ring-emerald-500/10"
-        : "bg-white border-slate-200 shadow-sm hover:border-gold/50 hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1"
+        ? "bg-emerald-50/50 border-emerald-200 shadow-[0_8px_30px_rgb(16,185,129,0.1)] ring-1 ring-emerald-500/10 hover:border-gold hover:border-2"
+        : "bg-white border-slate-200 shadow-sm hover:border-gold hover:border-2 hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1"
         }`}
     >
       {/* Dynamic Background Image */}
@@ -111,9 +111,9 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         <div className="h-[100px] flex items-center mb-4">
           {isPremium ? (
             <div className="flex items-center gap-4 w-full bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-white/50">
-              <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border bg-white shadow-sm border-emerald-100 p-2">
+              <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border bg-white shadow-sm border-emerald-100">
                 {business.logo_url ? (
-                  <img src={business.logo_url} alt={business.name} className="w-full h-full object-contain" loading="lazy" width="80" height="80" />
+                  <img src={business.logo_url} alt={business.name} className="w-full h-full object-cover" loading="lazy" width="80" height="80" />
                 ) : (
                   <div className="flex flex-col items-center justify-center">
                     <span className="text-xl font-bold text-emerald-600">{getInitials(business.name)}</span>
