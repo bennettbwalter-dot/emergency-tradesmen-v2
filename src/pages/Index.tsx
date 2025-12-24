@@ -431,7 +431,7 @@ const Index = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`${index % 2 !== 0 ? "mt-6 lg:mt-0" : ""} flex`}
+                  className={`${index % 2 !== 0 ? "mt-16 lg:mt-0" : ""} flex`}
                 >
                   <div className="w-full h-full">
                     <TradeCard trade={trade} />

@@ -87,7 +87,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
           </div>
         )}
 
-        <div className="relative z-10 flex flex-col flex-grow p-6">
+        <div className="relative z-10 flex flex-col flex-grow p-4 sm:p-6">
           <div className="mb-4 flex items-start justify-between gap-4">
             <h3 className="font-display text-xl text-foreground group-hover:text-gold transition-colors tracking-wide leading-tight min-h-[3.5rem] flex items-start flex-grow">
               Emergency {trade.name}
@@ -96,17 +96,17 @@ export function TradeCard({ trade, city }: TradeCardProps) {
               <img
                 src={trade.vectorIcon}
                 alt=""
-                className="w-10 h-10 object-contain brightness-110 group-hover:scale-110 transition-all duration-300 shrink-0"
+                className="w-8 h-8 md:w-10 md:h-10 object-contain brightness-110 group-hover:scale-110 transition-all duration-300 shrink-0"
               />
             )}
           </div>
 
-          <div className="mt-auto flex items-center justify-between pt-4 border-t border-border/30">
-            <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
+          <div className="mt-auto flex items-center justify-between pt-3 sm:pt-4 border-t border-border/30">
+            <p className="text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider font-medium">
               Available 24/7
             </p>
-            <div className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center group-hover:border-gold/50 group-hover:bg-gold/5 transition-all duration-300 shrink-0 ml-4">
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-border/50 flex items-center justify-center group-hover:border-gold/50 group-hover:bg-gold/5 transition-all duration-300 shrink-0 ml-2 sm:ml-4">
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
             </div>
           </div>
         </div>
