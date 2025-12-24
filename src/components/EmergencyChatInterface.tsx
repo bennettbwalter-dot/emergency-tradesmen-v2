@@ -54,9 +54,7 @@ export function EmergencyChatInterface() {
     }, [place]);
 
     useEffect(() => {
-        if (!detectedCity && chatState.history.length === 0) {
-            setIsRequestingLocation(true);
-        }
+        // No automatic location request on mount - wait for user interaction or specific bot state
     }, []);
 
     const handleUserMessage = async (msgText: string) => {
@@ -242,8 +240,8 @@ export function EmergencyChatInterface() {
                 disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
                 size="icon"
                 className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${
-                    // Pulse only on INITIAL (asking for everything) or when READY (have everything)
-                    ((chatState.step === 'INITIAL' && !detectedTrade && !detectedCity) || (detectedTrade && detectedCity))
+                    // Pulse ONLY when we have everything and are ready to go (Final Step)
+                    (detectedTrade && detectedCity && !input.trim())
                         ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                         : 'bg-gold text-white hover:bg-gold/90'}`}
                 title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
