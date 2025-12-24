@@ -55,7 +55,7 @@ export function EmergencyChatInterface() {
 
     useEffect(() => {
         if (!detectedCity && chatState.history.length === 0) {
-            // Removed automatic pulsing on mount to wait for bot request
+            setIsRequestingLocation(true);
         }
     }, []);
 
@@ -90,11 +90,9 @@ export function EmergencyChatInterface() {
             setDetectedTrade(newState.detectedTrade);
             setDetectedCity(newState.detectedCity);
 
-            // Only pulse if we are at the very start (asking for everything)
-            // AND we haven't detected anything yet
-            const isAtStart = newState.step === 'INITIAL' && !newState.detectedTrade && !newState.detectedCity && !detectedTrade && !detectedCity;
-
-            setIsRequestingLocation(isAtStart);
+            // 1. Functional state: Should the button act as "Locate Me"?
+            // Yes, if we don't have a city yet.
+            setIsRequestingLocation(!newState.detectedCity && !detectedCity);
 
             setIsTyping(false);
 
@@ -243,9 +241,11 @@ export function EmergencyChatInterface() {
                 }}
                 disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
                 size="icon"
-                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${isRequestingLocation || (detectedTrade && detectedCity)
-                    ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
-                    : 'bg-gold text-white hover:bg-gold/90'}`}
+                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${
+                    // Pulse only on INITIAL (asking for everything) or when READY (have everything)
+                    ((chatState.step === 'INITIAL' && !detectedTrade && !detectedCity) || (detectedTrade && detectedCity))
+                        ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
+                        : 'bg-gold text-white hover:bg-gold/90'}`}
                 title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
             >
                 {isRequestingLocation ? (
