@@ -213,8 +213,8 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         }
 
         responseText = safetyAdvice
-            ? `${gasPrefix}${safetyAdvice}\n\nWhich city or area are you in?`
-            : `${gasPrefix}I can help with that. Which city or area are you in?`;
+            ? `${gasPrefix}${safetyAdvice}\n\nWhich city or area are you in? (Tip: You can press the flashing Locate Me button to detect your location automatically)`
+            : `${gasPrefix}I can help with that. Which city or area are you in? (Tip: You can press the flashing Locate Me button to detect your location automatically)`;
         newState.step = 'LOCATION_CHECK';
     } else if (!newState.detectedTrade && newState.detectedCity) {
         responseText = `Okay, I see you're in ${newState.detectedCity}. Briefly describe your emergency so I can direct you to the right help.`;
@@ -222,9 +222,9 @@ export function processUserMessage(message: string, currentState: ChatState): { 
     } else {
         // Nothing detected - ask for clarification
         if (safetyAdvice) {
-            responseText = `Safety-first guidance:\n${safetyAdvice}\n\nTo find a tradesperson, please tell me your location and the nature of the emergency.`;
+            responseText = `Safety-first guidance:\n${safetyAdvice}\n\nTo find a tradesperson, please tell me your location and the nature of the emergency. You can also press the flashing Locate Me button to detect your location automatically.`;
         } else {
-            responseText = "I'm here to help. I'll guide you to the right local trade while prioritizing your safety. Could you tell me what the emergency is and where you are located?";
+            responseText = "I'm here to help. I'll guide you to the right local trade while prioritizing your safety. Could you tell me what the emergency is and where you are located? (Tip: Press the flashing Locate Me button to detect your location)";
         }
         newState.step = 'INITIAL';
     }

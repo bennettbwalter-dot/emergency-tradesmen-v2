@@ -53,6 +53,12 @@ export function EmergencyChatInterface() {
         }
     }, [place]);
 
+    useEffect(() => {
+        if (!detectedCity && chatState.history.length === 0) {
+            setIsRequestingLocation(true);
+        }
+    }, []);
+
     const handleUserMessage = async (msgText: string) => {
         if (!msgText.trim()) return;
 
@@ -72,6 +78,8 @@ export function EmergencyChatInterface() {
         setTimeout(() => {
             const { newState, response } = processUserMessage(msgText, {
                 ...chatState,
+                detectedTrade: detectedTrade || chatState.detectedTrade,
+                detectedCity: detectedCity || chatState.detectedCity,
             });
 
             setChatState(prev => ({
@@ -81,7 +89,10 @@ export function EmergencyChatInterface() {
 
             setDetectedTrade(newState.detectedTrade);
             setDetectedCity(newState.detectedCity);
-            setIsRequestingLocation(newState.step === 'LOCATION_CHECK');
+
+            // Only pulse if we actually need a city
+            const needsCity = !newState.detectedCity && !detectedCity;
+            setIsRequestingLocation(needsCity && (newState.step === 'LOCATION_CHECK' || newState.step === 'INITIAL' || newState.step === 'TRADE_CHECK'));
 
             setIsTyping(false);
 
@@ -231,7 +242,7 @@ export function EmergencyChatInterface() {
                 disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
                 size="icon"
                 className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${isRequestingLocation || (detectedTrade && detectedCity && !input.trim())
-                    ? 'bg-gold/20 text-gold hover:bg-gold/30 animate-pulse ring-1 ring-gold shadow-[0_0_10px_rgba(255,183,0,0.5)]'
+                    ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                     : 'bg-gold text-white hover:bg-gold/90'}`}
                 title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
             >
@@ -254,7 +265,9 @@ export function EmergencyChatInterface() {
             history: []
         });
         setInput("");
-        setIsRequestingLocation(false);
+        setDetectedTrade(null);
+        setDetectedCity(null);
+        setIsRequestingLocation(true);
     };
 
     return (
