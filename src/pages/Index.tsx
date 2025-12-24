@@ -445,7 +445,7 @@ const Index = () => {
 
 
           {/* Breakdown Recovery Feature */}
-          <section className="container-wide pb-16 pt-0">
+          <section className="container-wide pb-16 pt-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Image Side */}
               <div className="order-2 lg:order-1 relative group">
