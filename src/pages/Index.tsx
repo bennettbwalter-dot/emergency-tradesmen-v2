@@ -273,7 +273,7 @@ const Index = () => {
               >
 
 
-                <div className="w-full max-w-2xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <div className="w-full max-w-4xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                   <div className="rounded-3xl overflow-hidden">
                     <EmergencyChatInterface />
                   </div>
