@@ -50,10 +50,10 @@ export default function TradeCityPage() {
     'plumber': 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop',
     'electrician': 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop',
     'locksmith': 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2070&auto=format&fit=crop',
-    'gas-engineer': '/images/gas-engineer/gas-engineer-hero.jpg',
+    'gas-engineer': '/images/gas-engineer/gas-engineer-hero.webp',
     'drain-specialist': 'https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=2070&auto=format&fit=crop',
-    'glazier': '/images/glazier/glazier-hero.jpg',
-    'breakdown': '/images/breakdown-recovery/breakdown-hero.jpg',
+    'glazier': '/images/glazier/glazier-hero.webp',
+    'breakdown': '/images/breakdown-recovery/breakdown-hero.webp',
     'default': 'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'
   };
 
@@ -250,8 +250,8 @@ export default function TradeCityPage() {
           {pageData.localExpertise && (
             <div className="mb-12 p-6 bg-gold/5 border border-gold/20 rounded-xl animate-fade-up">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20">
-                  <Navigation className="w-6 h-6 text-gold" />
+                <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden shadow-md">
+                  <img src="/et-logo-v2.png" alt="Emergency Tradesmen" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">

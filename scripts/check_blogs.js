@@ -20,12 +20,16 @@ async function checkPosts() {
     console.log('Checking posts table for published posts...');
     const { data, error } = await supabase
         .from('posts')
-        .select('title, published');
+        .select('title, slug, published, content');
 
     if (error) {
         console.error('Error fetching posts:', error);
     } else {
-        console.log('Posts found:', data);
+        data.forEach(post => {
+            console.log(`Title: ${post.title}`);
+            console.log(`Content Start: ${post.content ? post.content.substring(0, 100) : 'NO CONTENT'}`);
+            console.log('---');
+        });
     }
 }
 

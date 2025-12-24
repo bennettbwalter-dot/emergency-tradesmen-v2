@@ -323,7 +323,7 @@ const Index = () => {
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
                   <img
-                    src="/how-it-works-step-1.png"
+                    src="/how-it-works-step-1.webp"
                     alt="Step 1: Describe your problem or choose a trade"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
@@ -351,7 +351,7 @@ const Index = () => {
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
                   <img
-                    src="/how-it-works-step-2.png"
+                    src="/how-it-works-step-2.webp"
                     alt="Step 2: Choose a tradesman from the listings"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
@@ -379,7 +379,7 @@ const Index = () => {
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
                   <img
-                    src="/how-it-works-step-3.png"
+                    src="/how-it-works-step-3.webp"
                     alt="Step 3: Contact via Call or WhatsApp"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
@@ -453,13 +453,14 @@ const Index = () => {
                 <div className="relative rounded-3xl overflow-hidden border border-gold/20 shadow-2xl">
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
                   <img
-                    src="/emergency-breakdown-recovery.png"
+                    src="/emergency-breakdown-recovery.webp"
                     alt="Emergency Breakdown Recovery at Night"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
                     width="600"
                     height="400"
+                    fetchPriority="high"
                   />
                 </div>
               </div>              {/* Text Side */}

@@ -198,6 +198,7 @@ export default function ContactPage() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <img src="/et-logo-v2.png" alt="Logo" className="w-20 h-20 mb-4 rounded-full border-2 border-gold/50 shadow-xl object-cover" />
                                     <h3 className="text-xl font-semibold mb-2">Emergency Tradesmen UK</h3>
                                     <p className="text-white/80 text-sm">
                                         Connecting you with trusted local tradesmen 24/7

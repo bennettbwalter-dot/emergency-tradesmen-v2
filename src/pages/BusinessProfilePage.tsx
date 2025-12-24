@@ -23,6 +23,7 @@ import { trades } from "@/lib/trades";
 
 import { db } from "@/lib/db";
 import { trackEvent } from "@/lib/analytics";
+import { ShareMenu } from "@/components/ShareMenu";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
@@ -260,13 +261,13 @@ export default function BusinessProfilePage() {
 
     // Map of trade-specific representative images (trucks/vans/technicians)
     const tradeRepresentativeImages = {
-        'electrician': '/images/electrician/socket-fix.jpg', // Electrician at socket
-        'plumber': '/images/plumber/sink-fix.png', // Plumber under sink
-        'locksmith': '/images/locksmith/lock-repair.jpg', // Locksmith repairing lock
-        'gas-engineer': '/images/gas-engineer/engineer-working.jpg', // Gas Engineer working on boiler
-        'drain-specialist': '/images/drain-specialist/drain-jetting.jpg', // Drainage truck
-        'glazier': '/images/glazier/window-board-up.jpg', // Glazier boarding window
-        'breakdown': '/images/breakdown-recovery/jump-start.jpg', // Recovery truck
+        'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
+        'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
+        'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
+        'gas-engineer': '/images/gas-engineer/engineer-working.webp', // Gas Engineer working on boiler
+        'drain-specialist': '/images/drain-specialist/drain-jetting.webp', // Drainage truck
+        'glazier': '/images/glazier/window-board-up.webp', // Glazier boarding window
+        'breakdown': '/images/breakdown-recovery/jump-start.webp', // Recovery truck
         'default': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop'
     };
 
@@ -601,6 +602,7 @@ export default function BusinessProfilePage() {
                                                 </a>
                                             </Button>
                                         )}
+                                        <ShareMenu businessName={business.name} city={formattedCity} />
                                     </div>
 
                                     {/* Trustpilot Sidebar Widget */}

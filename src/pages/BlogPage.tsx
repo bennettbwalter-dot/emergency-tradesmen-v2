@@ -31,7 +31,20 @@ export default function BlogPage() {
                 .order('published_at', { ascending: false });
 
             if (!error && data) {
-                setPosts(data);
+                // Add static post if not already present
+                const staticPost: BlogPost = {
+                    id: 'static-uk-emergency-tradesmen',
+                    title: 'UK Emergency Tradesmen: Expert Repairs When You Need Them',
+                    slug: 'uk-emergency-tradesmen-expert-repairs',
+                    excerpt: 'When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.',
+                    cover_image: 'https://images.unsplash.com/photo-1546827209-a218e99fdbe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwzNXx8dG9vbHN8ZW58MHx8fHwxNzY2NjA4NjgyfDA&ixlib=rb-4.1.0&q=80&w=1080',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                // Filter out if it already exists from DB to obtain unique key
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug);
+                setPosts([staticPost, ...uniqueData]);
             }
             setIsLoading(false);
         }
