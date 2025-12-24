@@ -44,7 +44,8 @@ try:
             # Check for differences
             fields_to_check = [
                 'logo_url', 'header_image_url', 'vehicle_image_url', 
-                'premium_description', 'tier', 'priority_score', 'last_available_ping'
+                'premium_description', 'tier', 'priority_score', 'last_available_ping',
+                'photos'
             ]
             diff = {}
             for f in fields_to_check:

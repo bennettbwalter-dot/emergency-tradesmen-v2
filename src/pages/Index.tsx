@@ -17,7 +17,7 @@ import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 
 import { trades, cities } from "@/lib/trades";
 
-import { Phone, Zap } from "lucide-react";
+import { Phone, Zap, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -301,12 +301,99 @@ const Index = () => {
 
           </section>
 
+          {/* How It Works Section */}
+          <section className="container-wide py-16 border-t border-border/30">
+            <div className="text-center mb-12">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
+              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+                How It Works
+              </h2>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 relative max-w-6xl mx-auto">
+
+              {/* Step 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="w-full md:w-1/3 flex flex-col items-center"
+              >
+                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
+                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
+                  <img
+                    src="/how-it-works-step-1.png"
+                    alt="Step 1: Describe your problem or choose a trade"
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Mobile Arrow */}
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce">
+                  <ArrowRight className="w-8 h-8 rotate-90" />
+                </div>
+              </motion.div>
+
+              {/* Desktop Arrow 1 */}
+              <div className="hidden md:flex text-gold/40 shrink-0">
+                <ArrowRight className="w-8 h-8 lg:w-12 lg:h-12" />
+              </div>
+
+              {/* Step 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-full md:w-1/3 flex flex-col items-center"
+              >
+                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
+                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
+                  <img
+                    src="/how-it-works-step-2.png"
+                    alt="Step 2: Choose a tradesman from the listings"
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Mobile Arrow */}
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce">
+                  <ArrowRight className="w-8 h-8 rotate-90" />
+                </div>
+              </motion.div>
+
+              {/* Desktop Arrow 2 */}
+              <div className="hidden md:flex text-gold/40 shrink-0">
+                <ArrowRight className="w-8 h-8 lg:w-12 lg:h-12" />
+              </div>
+
+              {/* Step 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="w-full md:w-1/3 flex flex-col items-center"
+              >
+                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
+                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
+                  <img
+                    src="/how-it-works-step-3.png"
+                    alt="Step 3: Contact via Call or WhatsApp"
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+
+            </div>
+          </section>
 
 
           {/* Emergency Services */}
 
           <section className="container-wide py-16">
-
             <motion.div
 
               initial={{ opacity: 0, y: 30 }}
