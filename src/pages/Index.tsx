@@ -330,14 +330,14 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-6">
-                  <img src="/custom-arrow.png" alt="Next" className="w-12 h-12 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-10">
+                  <img src="/custom-arrow.png" alt="Next" className="w-20 h-20 object-contain rotate-90 drop-shadow-lg" />
                 </div>
               </motion.div>
 
               {/* Desktop Arrow 1 */}
-              <div className="hidden md:flex shrink-0 z-20 -mx-12 relative">
-                <img src="/custom-arrow.png" alt="Next" className="w-24 h-16 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
+              <div className="hidden md:flex shrink-0 z-20 -mx-20 relative">
+                <img src="/custom-arrow.png" alt="Next" className="w-36 h-28 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
               </div>
 
               {/* Step 2 */}
@@ -358,14 +358,14 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-6">
-                  <img src="/custom-arrow.png" alt="Next" className="w-12 h-12 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-10">
+                  <img src="/custom-arrow.png" alt="Next" className="w-20 h-20 object-contain rotate-90 drop-shadow-lg" />
                 </div>
               </motion.div>
 
               {/* Desktop Arrow 2 */}
-              <div className="hidden md:flex shrink-0 z-20 -mx-12 relative">
-                <img src="/custom-arrow.png" alt="Next" className="w-24 h-16 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
+              <div className="hidden md:flex shrink-0 z-20 -mx-20 relative">
+                <img src="/custom-arrow.png" alt="Next" className="w-36 h-28 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
               </div>
 
               {/* Step 3 */}
