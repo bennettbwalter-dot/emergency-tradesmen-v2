@@ -318,7 +318,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="w-full md:w-[44%] flex flex-col items-center"
+                className="w-full md:w-[40%] flex flex-col items-center"
               >
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
@@ -346,7 +346,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-full md:w-[22%] flex flex-col items-center"
+                className="w-full md:w-[20%] flex flex-col items-center"
               >
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
@@ -374,7 +374,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="w-full md:w-[22%] flex flex-col items-center"
+                className="w-full md:w-[30%] flex flex-col items-center"
               >
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
