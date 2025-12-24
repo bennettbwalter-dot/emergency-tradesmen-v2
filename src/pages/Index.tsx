@@ -330,8 +330,8 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-4">
-                  <img src="/custom-arrow.png" alt="Next" className="w-16 h-16 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold my-2 animate-bounce z-30 -mt-8 -mb-12">
+                  <img src="/custom-arrow.png" alt="Next" className="w-24 h-24 object-contain rotate-90 drop-shadow-2xl" />
                 </div>
               </motion.div>
 
@@ -358,8 +358,8 @@ const Index = () => {
                   />
                 </div>
                 {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold/50 my-2 animate-bounce z-20 -my-4">
-                  <img src="/custom-arrow.png" alt="Next" className="w-16 h-16 object-contain rotate-90 drop-shadow-lg" />
+                <div className="flex md:hidden text-gold my-2 animate-bounce z-30 -mt-8 -mb-12">
+                  <img src="/custom-arrow.png" alt="Next" className="w-24 h-24 object-contain rotate-90 drop-shadow-2xl" />
                 </div>
               </motion.div>
 
