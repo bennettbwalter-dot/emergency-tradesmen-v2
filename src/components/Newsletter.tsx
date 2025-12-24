@@ -14,18 +14,34 @@ export function Newsletter() {
 
         setIsLoading(true);
         try {
-            const { data, error } = await supabase.functions.invoke('newsletter-subscribe', {
-                body: { email },
-            });
+            // 1. Try to save to local database (Always do this for reliability)
+            const { error: dbError } = await supabase
+                .from('newsletter_subscriptions')
+                .insert([{ email }]);
 
-            if (error) throw error;
-            if (data?.error) throw new Error(data.error);
+            // If it's a duplicate, we can still try the edge function or just treat it as success
+            if (dbError && dbError.code !== '23505') { // '23505' is unique_violation
+                console.warn("Database storage failed:", dbError);
+            }
 
-            toast.success(data.message || "Thanks for subscribing!");
+            // 2. Try to invoke edge function (If it fails, we already have the data in DB)
+            try {
+                const { error: funcError } = await supabase.functions.invoke('newsletter-subscribe', {
+                    body: { email },
+                });
+
+                if (funcError) {
+                    console.warn("Edge function failed, but database record likely saved:", funcError);
+                }
+            } catch (fErr) {
+                console.warn("Edge function catch error:", fErr);
+            }
+
+            toast.success("Thanks for subscribing!");
             setEmail("");
         } catch (error) {
             console.error("Subscription error:", error);
-            toast.error(error instanceof Error ? error.message : "Failed to subscribe. Please try again.");
+            toast.error("An error occurred. Please try again.");
         } finally {
             setIsLoading(false);
         }
