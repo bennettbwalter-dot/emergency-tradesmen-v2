@@ -90,9 +90,13 @@ export function EmergencyChatInterface() {
             setDetectedTrade(newState.detectedTrade);
             setDetectedCity(newState.detectedCity);
 
-            // Only pulse if we actually need a city
-            const needsCity = !newState.detectedCity && !detectedCity;
-            setIsRequestingLocation(needsCity && (newState.step === 'LOCATION_CHECK' || newState.step === 'INITIAL' || newState.step === 'TRADE_CHECK'));
+            // Only pulse if we are at the very start (asking for everything)
+            // or if we have everything and are ready to go
+            const isAtStart = newState.step === 'INITIAL';
+            const isReady = !!(newState.detectedTrade || detectedTrade) && !!(newState.detectedCity || detectedCity);
+
+            setIsRequestingLocation(isAtStart);
+            // The pulsing in the JSX will handle the isReady state logic
 
             setIsTyping(false);
 
@@ -241,7 +245,7 @@ export function EmergencyChatInterface() {
                 }}
                 disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
                 size="icon"
-                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${isRequestingLocation || (detectedTrade && detectedCity && !input.trim())
+                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${isRequestingLocation || (detectedTrade && detectedCity)
                     ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                     : 'bg-gold text-white hover:bg-gold/90'}`}
                 title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}

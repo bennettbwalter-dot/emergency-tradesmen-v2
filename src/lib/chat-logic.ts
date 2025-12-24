@@ -213,8 +213,8 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         }
 
         responseText = safetyAdvice
-            ? `${gasPrefix}${safetyAdvice}\n\nWhich city or area are you in? (Tip: You can press the flashing Locate Me button to detect your location automatically)`
-            : `${gasPrefix}I can help with that. Which city or area are you in? (Tip: You can press the flashing Locate Me button to detect your location automatically)`;
+            ? `${gasPrefix}${safetyAdvice}\n\nWhich city or area are you in? (You can also press the Locate Me button to detect your location automatically)`
+            : `${gasPrefix}I can help with that. Which city or area are you in? (You can also press the Locate Me button to detect your location automatically)`;
         newState.step = 'LOCATION_CHECK';
     } else if (!newState.detectedTrade && newState.detectedCity) {
         responseText = `Okay, I see you're in ${newState.detectedCity}. Briefly describe your emergency so I can direct you to the right help.`;
