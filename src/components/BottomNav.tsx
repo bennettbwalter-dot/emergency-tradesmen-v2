@@ -35,7 +35,7 @@ export function BottomNav() {
         {
             label: "Search",
             icon: Search,
-            path: "/directory",
+            path: "/",
         },
         {
             label: "Messages",
