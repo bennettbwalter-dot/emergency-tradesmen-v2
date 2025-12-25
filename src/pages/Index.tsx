@@ -30,6 +30,7 @@ import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { GuestGate } from "@/components/GuestGate";
 
 
 
@@ -97,6 +98,7 @@ const Index = () => {
     <ChatbotProvider>
 
       <>
+        <GuestGate />
 
         <Helmet>
 
