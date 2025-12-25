@@ -10,9 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, CalendarDays, Zap } from "lucide-react";
+import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
-import { getUserBookings, cancelBooking, formatBookingDate, formatTimeSlot, getUrgencyColor, getStatusColor } from "@/lib/bookings";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChatSystem } from "@/components/ChatSystem";
@@ -70,10 +69,10 @@ export default function UserDashboard() {
 
         setIsAvailable(newStatus); // Optimistic update
 
-        const updateData: any = { 
-            is_available_now: newStatus 
+        const updateData: any = {
+            is_available_now: newStatus
         };
-        
+
         if (newStatus) {
             updateData.last_available_ping = pingTime;
         }
@@ -206,7 +205,7 @@ export default function UserDashboard() {
                             <Tabs defaultValue={defaultTab} className="w-full">
                                 <TabsList className="grid w-full grid-cols-6 mb-8">
                                     <TabsTrigger value="profile">Profile</TabsTrigger>
-                                    <TabsTrigger value="bookings">Bookings</TabsTrigger>
+
                                     <TabsTrigger value="messages">Messages</TabsTrigger>
                                     <TabsTrigger value="favorites">Favorites</TabsTrigger>
                                     <TabsTrigger value="history">History</TabsTrigger>
@@ -217,9 +216,7 @@ export default function UserDashboard() {
                                     <ProfileTab user={user} onUpdate={updateUser} />
                                 </TabsContent>
 
-                                <TabsContent value="bookings" className="animate-fade-up">
-                                    <BookingsTab userId={user.id} />
-                                </TabsContent>
+
 
                                 <TabsContent value="messages" className="animate-fade-up">
                                     <ChatSystem />
@@ -435,93 +432,7 @@ function HistoryTab() {
     );
 }
 
-function BookingsTab({ userId }: { userId: string }) {
-    const [bookings, setBookings] = useState(getUserBookings(userId));
-    const { toast } = useToast();
 
-    const handleCancel = (id: string, businessName: string) => {
-        cancelBooking(id);
-        setBookings(getUserBookings(userId));
-        toast({
-            title: "Booking cancelled",
-            description: `Your appointment with ${businessName} has been cancelled.`,
-        });
-    };
-
-    if (bookings.length === 0) {
-        return (
-            <div className="p-12 text-center text-muted-foreground bg-card rounded-lg border border-border/50">
-                <CalendarDays className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                <h3 className="text-lg font-medium mb-2">No bookings yet</h3>
-                <p>Schedule your first appointment with a tradesperson.</p>
-            </div>
-        );
-    }
-
-    return (
-        <div className="space-y-4">
-            {bookings.map((booking) => (
-                <Card key={booking.id}>
-                    <div className="p-6">
-                        <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                            <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                                    <Badge className={getStatusColor(booking.status)}>
-                                        {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                                    </Badge>
-                                    <Badge className={getUrgencyColor(booking.urgency)}>
-                                        {booking.urgency.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
-                                    </Badge>
-                                    <span className="text-sm text-muted-foreground">
-                                        {booking.tradeName}
-                                    </span>
-                                </div>
-                                <h3 className="text-xl font-display font-medium mb-2">{booking.businessName}</h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
-                                    <div className="flex items-center gap-2">
-                                        <Calendar className="w-4 h-4" />
-                                        <span>{formatBookingDate(booking.date)}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Clock className="w-4 h-4" />
-                                        <span>{formatTimeSlot(booking.timeSlot)}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <MapPin className="w-4 h-4" />
-                                        <span>{booking.postcode}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Phone className="w-4 h-4" />
-                                        <span>{booking.customerPhone}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                {booking.status === "pending" && (
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handleCancel(booking.id, booking.businessName)}
-                                        className="text-destructive hover:text-destructive"
-                                    >
-                                        Cancel Booking
-                                    </Button>
-                                )}
-                                <Button variant="outline" size="sm">
-                                    View Details
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="p-4 bg-secondary/20 rounded-lg">
-                            <p className="text-sm font-medium mb-1">Service: {booking.serviceType.replace("-", " ")}</p>
-                            <p className="text-sm text-muted-foreground line-clamp-2">"{booking.description}"</p>
-                        </div>
-                    </div>
-                </Card>
-            ))}
-        </div>
-    );
-}
 
 function SettingsTab() {
     const [currentPassword, setCurrentPassword] = useState("");

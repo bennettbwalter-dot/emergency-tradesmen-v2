@@ -91,12 +91,7 @@ export function UserMenu() {
                         <span>Profile</span>
                     </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=bookings">
-                        <CalendarDays className="mr-2 h-4 w-4" />
-                        <span>My Bookings</span>
-                    </a>
-                </DropdownMenuItem>
+
                 <DropdownMenuItem className="cursor-pointer" asChild>
                     <a href="/user/dashboard?tab=messages" className="flex items-center justify-between w-full">
                         <span className="flex items-center">

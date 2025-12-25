@@ -35,14 +35,7 @@ export function BottomNav() {
         {
             label: "Search",
             icon: Search,
-            path: "/directory", // Assuming this is the search/listing page or similar. If not, maybe just search bar context.
-            // Actually, looking at routes, maybe "/" is best for search or generic listing categories.
-            // Let's check App.tsx for routes later. For now, I'll point to /
-        },
-        {
-            label: "Bookings",
-            icon: Calendar,
-            path: isAuthenticated ? "/user/dashboard?tab=bookings" : "/auth?tab=login", // We need a way to handle auth redirection
+            path: "/directory",
         },
         {
             label: "Messages",
