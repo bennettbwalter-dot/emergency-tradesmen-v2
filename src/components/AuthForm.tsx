@@ -9,12 +9,33 @@ import { Loader2, Mail, Lock, User } from "lucide-react";
 interface AuthFormProps {
     defaultTab?: "login" | "register";
     onSuccess?: () => void;
-    className?: string; // Allow styling injection
+    hideHeader?: boolean;
+    className?: string;
+    mode?: "login" | "register";
+    onModeChange?: (mode: "login" | "register") => void;
 }
 
-export function AuthForm({ defaultTab = "login", onSuccess, className }: AuthFormProps) {
-    const [mode, setMode] = useState<"login" | "register">(defaultTab);
+export function AuthForm({
+    defaultTab = "login",
+    onSuccess,
+    className,
+    hideHeader = false,
+    mode: computedModeProp,
+    onModeChange
+}: AuthFormProps) {
+    const [internalMode, setInternalMode] = useState<"login" | "register">(defaultTab);
     const [isLoading, setIsLoading] = useState(false);
+
+    // Use controlled mode if provided, otherwise internal state
+    const mode = computedModeProp || internalMode;
+
+    const handleModeChange = (newMode: "login" | "register") => {
+        if (onModeChange) {
+            onModeChange(newMode);
+        } else {
+            setInternalMode(newMode);
+        }
+    };
 
     // Form state
     const [name, setName] = useState("");
@@ -55,22 +76,25 @@ export function AuthForm({ defaultTab = "login", onSuccess, className }: AuthFor
     };
 
     const toggleMode = () => {
-        setMode(mode === "login" ? "register" : "login");
+        const newMode = mode === "login" ? "register" : "login";
+        handleModeChange(newMode);
         setPassword(""); // Clear password on switch for security
     };
 
     return (
         <div className={className}>
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-display">
-                    {mode === "login" ? "Welcome Back" : "Create Account"}
-                </h2>
-                <p className="text-muted-foreground text-sm">
-                    {mode === "login"
-                        ? "Enter your credentials to access your account"
-                        : "Join us to save favorites and track your quotes"}
-                </p>
-            </div>
+            {!hideHeader && (
+                <div className="text-center mb-6">
+                    <h2 className="text-2xl font-display">
+                        {mode === "login" ? "Welcome Back" : "Create Account"}
+                    </h2>
+                    <p className="text-muted-foreground text-sm">
+                        {mode === "login"
+                            ? "Enter your credentials to access your account"
+                            : "Join us to save favorites and track your quotes"}
+                    </p>
+                </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 {mode === "register" && (
