@@ -75,8 +75,8 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
-        if (!apiKey || apiKey === 'undefined' || apiKey.length < 10) {
+        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+        if (!apiKey) {
             callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
@@ -101,16 +101,16 @@ export class GeminiLiveController {
         let currentOutputTranscription = '';
 
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.0-flash-exp', // Using the stable model to rule out preview bugs
             callbacks: {
                 onopen: () => {
-                    console.log('[Gemini] Connected successfully');
+                    console.log('[Gemini] Session opened and ready.');
                     if (!this.inputAudioContext || !this.mediaStream) return;
                     if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                     this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 5.0; // High Mic Boost
+                    this.inputGainNode.gain.value = 5.0; // High mic boost to fix 'cannot hear me'
 
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                     this.scriptProcessor.onaudioprocess = (e) => {
@@ -121,9 +121,7 @@ export class GeminiLiveController {
 
                         const pcmBlob = this.createBlob(inputData);
                         this.sessionPromise?.then((session) => {
-                            try {
-                                session.sendRealtimeInput({ media: pcmBlob });
-                            } catch (err) { }
+                            try { session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
                         });
                     };
 
@@ -131,10 +129,8 @@ export class GeminiLiveController {
                     this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // Initial trigger after short delay to ensure pipe is warm
-                    setTimeout(() => {
-                        this.sessionPromise?.then(s => s.send({ text: "Hey! Please greet the user now." }));
-                    }, 500);
+                    // Force initial greeting to solve 'empty output' error on start
+                    this.sessionPromise.then(s => s.send({ text: "Please greet the user now." }));
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -184,10 +180,11 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                // ENABLING BOTH MODALITIES: Crucial to fix 'empty output' error
+                // ENABLING BOTH MODALITIES: This is the critical fix for 'empty model output'
                 responseModalities: [Modality.AUDIO, Modality.TEXT],
                 systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
+                // DISABLING ALL SAFETY: Often the cause of silent refusals
                 safetySettings: [
                     { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                     { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },

@@ -27,6 +27,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     useEffect(() => {
         if (isOpen && !isActive) {
+            // Check for API key immediately
+            const key = import.meta.env.VITE_GEMINI_API_KEY;
+            if (!key || key === 'undefined' || key.length < 5) {
+                alert("CRITICAL: VITE_GEMINI_API_KEY IS MISSING IN CLOUDFLARE. The voice assistant will not work until this is added to Environment Variables.");
+                setError("Configuration Error: API Key missing in environment.");
+                return;
+            }
             startSession();
         } else if (!isOpen && isActive) {
             stopSession();
@@ -54,13 +61,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 onInterrupted: () => setIsListening(false),
                 onError: (err: any) => {
                     console.error("[Voice] Assistant error:", err);
-                    setError(err?.message || "Connection failed. Please check your API key.");
+                    setError(err?.message || "Connection Error: The AI service is currently unavailable.");
                     setIsListening(false);
                 }
             });
         } catch (e: any) {
             console.error("[Voice] Failed to start:", e);
-            setError("Initialization failed.");
+            setError("Connection failed.");
             setIsActive(false);
         }
     };
@@ -93,22 +100,22 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     {!error && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-40">
                             <Mic className="w-10 h-10 text-amber-500" />
-                            <p className="text-[10px] text-amber-500 uppercase font-black">Connecting...</p>
+                            <p className="text-[10px] text-amber-500 uppercase font-black">Connecting Dispatch...</p>
                         </div>
                     )}
 
                     {error && (
                         <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-6">
                             <AlertTriangle className="w-10 h-10 text-red-500" />
-                            <p className="text-white text-sm font-bold">{error}</p>
-                            <button onClick={startSession} className="px-8 py-3 bg-amber-500 text-slate-900 rounded-xl font-black uppercase text-[10px] flex items-center gap-2 shadow-lg shadow-amber-500/20">
+                            <p className="text-white text-sm font-bold leading-relaxed">{error}</p>
+                            <button onClick={startSession} className="px-8 py-3 bg-amber-500 text-slate-900 rounded-xl font-black uppercase text-[10px] flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-transform">
                                 <RefreshCw className="w-4 h-4" /> Retry Connection
                             </button>
                         </div>
                     )}
 
                     {messages.map((msg, idx) => (
-                        <div key={idx} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                        <div key={idx} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} animate-in slide-in-from-bottom-2 duration-300`}>
                             <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${msg.role === 'user' ? 'bg-amber-500 text-slate-900 font-bold' : 'bg-slate-800 text-slate-100'}`}>
                                 {msg.text}
                             </div>
@@ -118,14 +125,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 {!error && (
                     <div className="p-8 bg-slate-950 border-t border-white/5 flex flex-col items-center gap-4">
-                        {/* Mic Volume Visualizer */}
-                        <div className="flex gap-1 h-8 items-center">
+                        <div className="flex gap-1.5 h-8 items-center">
                             {[...Array(10)].map((_, i) => (
-                                <div key={i} className={`w-1 rounded-full transition-all duration-100 ${micVolume * 10 > i ? 'bg-amber-500 h-8 shadow-[0_0_8px_rgba(245,158,11,0.5)]' : 'bg-slate-800 h-2'}`} />
+                                <div key={i} className={`w-1 rounded-full transition-all duration-100 ${micVolume * 15 > i ? 'bg-amber-500 h-8 shadow-[0_0_12px_rgba(245,158,11,0.6)]' : 'bg-slate-800 h-2'}`} />
                             ))}
                         </div>
-                        <p className="text-[10px] text-amber-500/50 uppercase font-black tracking-widest">
-                            {micVolume > 0.01 ? "Hearing you..." : "Awaiting Voice..."}
+                        <p className="text-[10px] text-amber-500/60 uppercase font-black tracking-widest">
+                            {micVolume > 0.005 ? "Hearing you..." : "Awaitng Voice..."}
                         </p>
                     </div>
                 )}
