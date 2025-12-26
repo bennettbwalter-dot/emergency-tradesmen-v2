@@ -93,9 +93,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // Standard session connection matching export exactly
+        // EXACT MATCH TO ZIP FILE MODEL AND CONFIG
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -143,7 +143,6 @@ export class GeminiLiveController {
                                 const view = (fc.args as any).view;
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
-                                    // BACK TO OBJECT FORMAT for 1.34 SDK
                                     session.sendToolResponse({
                                         functionResponses: {
                                             id: fc.id,
@@ -191,7 +190,8 @@ export class GeminiLiveController {
                 responseModalities: [Modality.AUDIO],
                 systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // REMOVED EMPTY TRANSCRIPTION CONFIGS TO PREVENT SDK MATCHING ERRORS
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
