@@ -256,9 +256,7 @@ export default function TradeCityPage() {
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
                     Local Intelligence: {cityName}
-                    <Badge variant="outline" className="text-[10px] uppercase tracking-tighter border-gold/30 text-gold bg-gold/5">
-                      SEO Optimized
-                    </Badge>
+
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {pageData.localExpertise}

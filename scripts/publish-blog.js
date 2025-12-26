@@ -45,7 +45,7 @@ Urgent problems, like a **boiler broken emergency** or burst pipe, need quick ac
 Waiting too long to fix plumbing emergencies can cost a lot. For example, ignoring a burst pipe can cause a lot of water damage. This makes the repair cost much higher.
 
 | Issue | Immediate Action Required | Potential Cost of Delay |
-| --- | --- | --- |
+
 | Burst Pipe | Yes | High |
 | Boiler Breakdown | Yes, especially in cold weather | Medium to High |
 | Gas Leak | Yes, immediate evacuation and repair | Extremely High (safety risk) |
@@ -69,7 +69,7 @@ Spotting a burst pipe early can prevent big damage. Look for signs like a sudden
 If you think a pipe has burst, act fast. First, turn off the main water supply to stop more water. Then, open taps to drain the system. Use buckets or containers to catch any leaking water. Move valuable items away from the affected area. It's also smart to switch off the electricity supply to the affected area if it's safe, to avoid electrical dangers.
 
 | Immediate Action | Purpose |
-| --- | --- |
+
 | Turn off main water supply | Stop further water flow |
 | Open taps | Drain the system |
 | Use buckets to catch water | Minimise water damage |
@@ -117,7 +117,7 @@ If you think there's a gas leak, your first step is to stay safe. Open windows a
 Gas emergencies need the help of skilled emergency plumbers. They have the tools and knowledge to fix the problem safely. Trying to fix it yourself can be risky and might make things worse.
 
 | Safety Measure | Description | Importance Level |
-| --- | --- | --- |
+
 | Ventilate the Area | Open windows and doors to let fresh air in. | High |
 | Avoid Electrical Appliances | Refrain from using electrical devices to prevent ignition. | High |
 | Turn Off Gas Supply | Isolate the gas supply if it's safe to do so. | Medium |
@@ -151,7 +151,7 @@ Flooding can cause a lot of damage if not fixed quickly by a professional plumbe
 Not all floods are the same. Some need quick action, while others might not be as urgent. For example, a burst pipe or sewage backup is very serious because of health risks and fast damage. But, a small leak from a tap might not be as urgent but still needs quick fixing to avoid bigger problems.
 
 | Type of Flooding | Urgency Level | Action Required |
-| --- | --- | --- |
+
 | Burst Pipe | High | Immediate |
 | Sewage Backup | High | Immediate |
 | Leaky Tap | Low | Prompt |
