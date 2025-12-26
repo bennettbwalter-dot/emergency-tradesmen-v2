@@ -1,10 +1,10 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
-// Simplified Instruction to avoid safety refusal
-const SYSTEM_INSTRUCTION = `You are a helpful, professional assistant for EmergencyTradesmen.net. 
-MANDATORY GREETING: Open the session with: "Hey this is Emergency Tradesmen! How can I help you today?"
-Your goal is to assist users with emergency trade enquiries.
-Stay professional and keep responses concise.`;
+
+// MINIMAL SYSTEM INSTRUCTION to prevent any safety filter errors
+const SYSTEM_INSTRUCTION = `You are a helpful assistant for EmergencyTradesmen.net. 
+GREETING: Open with "Hey this is Emergency Tradesmen! How can I help you today?"
+Keep responses short and helpful. Always identify as Emergency Tradesmen assistance.`;
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -77,7 +77,13 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
+        // Get Key inside function
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+        if (!apiKey) {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
+            return;
+        }
+
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -96,7 +102,7 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // USING STABLE VERSION TO PREVENT EMPTY OUTPUT ERRORS
+        // USING STABLE GEMINI 2.0 FLASH EXP
         this.sessionPromise = ai.live.connect({
             model: 'gemini-2.0-flash-exp',
             callbacks: {
@@ -190,9 +196,11 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
+                responseModalities: [Modality.AUDIO],
                 systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
