@@ -102,8 +102,7 @@ export class GeminiLiveController {
 
         // Initialize the session connection
         this.sessionPromise = ai.live.connect({
-            // Use a stable model name if 'preview' causes issues, but stick to export for now
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -153,11 +152,11 @@ export class GeminiLiveController {
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
                                     session.sendToolResponse({
-                                        functionResponses: [{
+                                        functionResponses: {
                                             id: fc.id,
                                             name: fc.name,
                                             response: { result: "ok" },
-                                        }]
+                                        }
                                     });
                                 });
                             }
@@ -199,6 +198,8 @@ export class GeminiLiveController {
                 responseModalities: [Modality.AUDIO],
                 systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
@@ -232,7 +233,6 @@ export class GeminiLiveController {
         if (this.sessionPromise) {
             try {
                 const session = await this.sessionPromise;
-                // session.close() might differ in JS SDK, handle gracefully
                 // @ts-ignore
                 if (session.close) session.close();
             } catch (e) {
