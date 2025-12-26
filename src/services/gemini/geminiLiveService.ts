@@ -97,9 +97,6 @@ export class GeminiLiveController {
             return;
         }
 
-        let currentInputTranscription = '';
-        let currentOutputTranscription = '';
-
         // Initialize the session connection
         try {
             this.sessionPromise = ai.live.connect({
@@ -227,54 +224,53 @@ export class GeminiLiveController {
             },
         };
     }
-}
 
     private createBlob(data: Float32Array): Blob {
-    const l = data.length;
-    const int16 = new Int16Array(l);
-    for (let i = 0; i < l; i++) {
-        int16[i] = data[i] * 32768;
+        const l = data.length;
+        const int16 = new Int16Array(l);
+        for (let i = 0; i < l; i++) {
+            int16[i] = data[i] * 32768;
+        }
+        return {
+            data: encode(new Uint8Array(int16.buffer)),
+            mimeType: 'audio/pcm;rate=16000',
+        };
     }
-    return {
-        data: encode(new Uint8Array(int16.buffer)),
-        mimeType: 'audio/pcm;rate=16000',
-    };
-}
 
     private stopAudioOutput() {
-    for (const source of this.sources.values()) {
-        try { source.stop(); } catch (e) { }
+        for (const source of this.sources.values()) {
+            try { source.stop(); } catch (e) { }
+        }
+        this.sources.clear();
+        this.nextStartTime = 0;
     }
-    this.sources.clear();
-    this.nextStartTime = 0;
-}
 
     public async stopSession() {
-    if (this.sessionPromise) {
-        try {
-            const session = await this.sessionPromise;
-            // @ts-ignore
-            if (session.close) session.close();
-        } catch (e) {
-            console.debug('Error closing session:', e);
+        if (this.sessionPromise) {
+            try {
+                const session = await this.sessionPromise;
+                // @ts-ignore
+                if (session.close) session.close();
+            } catch (e) {
+                console.debug('Error closing session:', e);
+            }
+            this.sessionPromise = null;
         }
-        this.sessionPromise = null;
-    }
 
-    this.scriptProcessor?.disconnect();
-    this.mediaStream?.getTracks().forEach(track => track.stop());
-    this.stopAudioOutput();
+        this.scriptProcessor?.disconnect();
+        this.mediaStream?.getTracks().forEach(track => track.stop());
+        this.stopAudioOutput();
 
-    if (this.inputAudioContext?.state !== 'closed') {
-        this.inputAudioContext?.close();
-    }
-    if (this.outputAudioContext?.state !== 'closed') {
-        this.outputAudioContext?.close();
-    }
+        if (this.inputAudioContext?.state !== 'closed') {
+            this.inputAudioContext?.close();
+        }
+        if (this.outputAudioContext?.state !== 'closed') {
+            this.outputAudioContext?.close();
+        }
 
-    this.inputAudioContext = null;
-    this.outputAudioContext = null;
-    this.mediaStream = null;
-    this.scriptProcessor = null;
-}
+        this.inputAudioContext = null;
+        this.outputAudioContext = null;
+        this.mediaStream = null;
+        this.scriptProcessor = null;
+    }
 }
