@@ -74,14 +74,8 @@ export class GeminiLiveController {
         if (this.sessionPromise) return;
 
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-        if (!apiKey) {
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
-            return;
-        }
-
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
-        // Initialize AudioContexts
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
         this.outputNode = this.outputAudioContext.createGain();
@@ -98,9 +92,8 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // Initialize the session connection - using stable gemini-2.0-flash-exp
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -148,17 +141,13 @@ export class GeminiLiveController {
                                 const view = (fc.args as any).view;
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
-                                    try {
-                                        session.sendToolResponse({
-                                            functionResponses: [{
-                                                id: fc.id,
-                                                name: fc.name,
-                                                response: { result: "ok" },
-                                            }]
-                                        });
-                                    } catch (err) {
-                                        console.debug('Error sending tool response:', err);
-                                    }
+                                    session.sendToolResponse({
+                                        functionResponses: [{
+                                            id: fc.id,
+                                            name: fc.name,
+                                            response: { result: "ok" },
+                                        }]
+                                    });
                                 });
                             }
                         }
