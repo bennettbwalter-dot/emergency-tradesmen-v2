@@ -88,9 +88,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 onInterrupted: () => {
                     setStatus('listening');
                 },
-                onError: (err) => {
+                onError: (err: any) => {
                     console.error("Gemini Error:", err);
-                    setError("Connection Failed. Checking API Key...");
+                    const msg = err?.message || "Unknown Connection Error";
+                    setError(`Error: ${msg}`);
                     setStatus('idle');
                 }
             });
@@ -155,8 +156,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${msg.role === 'user'
-                                    ? 'bg-amber-500 text-slate-900 font-medium rounded-tr-none'
-                                    : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
+                                ? 'bg-amber-500 text-slate-900 font-medium rounded-tr-none'
+                                : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
                                 }`}>
                                 {msg.text}
                             </div>
@@ -172,8 +173,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                             <div
                                 key={i}
                                 className={`w-1.5 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-8 animate-bounce' :
-                                        status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
-                                            'bg-slate-700 h-2'
+                                    status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
+                                        'bg-slate-700 h-2'
                                     }`}
                                 style={{
                                     animationDelay: `${i * 0.1}s`
