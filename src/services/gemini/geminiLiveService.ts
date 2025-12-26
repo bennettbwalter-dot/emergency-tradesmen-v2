@@ -61,9 +61,11 @@ export class GeminiLiveController {
     private inputAudioContext: AudioContext | null = null;
     private outputAudioContext: AudioContext | null = null;
     private outputNode: GainNode | null = null;
+    private inputGainNode: GainNode | null = null;
     private sources = new Set<AudioBufferSourceNode>();
     private mediaStream: MediaStream | null = null;
     private scriptProcessor: ScriptProcessorNode | null = null;
+    private lastMicLogTime = 0;
 
     public async startSession(callbacks: {
         onMessage?: (text: string, role: 'user' | 'model') => void,
@@ -73,25 +75,25 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        // DETECT API KEY - LOUD ERROR IF MISSING
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-        if (!apiKey || apiKey === 'undefined' || apiKey === 'null') {
-            const msg = "CRITICAL: VITE_GEMINI_API_KEY IS MISSING! Gemini Live will NOT work on Cloudflare until you add this variable.";
-            console.error(msg);
-            alert(msg);
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
-            return;
-        }
-
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
+        // Initialize AudioContexts
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+
+        // Output chain
         this.outputNode = this.outputAudioContext.createGain();
         this.outputNode.connect(this.outputAudioContext.destination);
 
         try {
-            this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaStream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true
+                }
+            });
         } catch (e) {
             console.error('Microphone access denied:', e);
             callbacks.onError?.(e);
@@ -101,7 +103,6 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // CONNECT TO STABLE MODEL
         this.sessionPromise = ai.live.connect({
             model: 'gemini-2.0-flash-exp',
             callbacks: {
@@ -113,28 +114,43 @@ export class GeminiLiveController {
                         this.inputAudioContext.resume();
                     }
 
-                    // EXPLICIT KICKSTART
-                    this.sessionPromise?.then((session) => {
-                        session.send({ text: "Please greet the user now." });
-                    });
-
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
+
+                    // Add Input Gain to boost mic sensitivity
+                    this.inputGainNode = this.inputAudioContext.createGain();
+                    this.inputGainNode.gain.value = 2.0; // Boost volume by 2x
+
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
 
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
+
+                        // Debug: Log peak volume sporadically to verify mic activity
+                        const peak = Math.max(...inputData.map(Math.abs));
+                        if (peak > 0.05 && Date.now() - this.lastMicLogTime > 2000) {
+                            console.log('[DEBUG] Mic activity detected (Peak:', peak.toFixed(2), ')');
+                            this.lastMicLogTime = Date.now();
+                        }
+
                         const pcmBlob = this.createBlob(inputData);
                         this.sessionPromise?.then((session) => {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
                             } catch (err) {
-                                // Ignore
+                                // Silently handle
                             }
                         });
                     };
 
-                    source.connect(this.scriptProcessor);
+                    // Signal Chain: Source -> Gain -> ScriptProcessor -> Destination
+                    source.connect(this.inputGainNode);
+                    this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
+
+                    // Initial greeting trigger
+                    this.sessionPromise.then(session => {
+                        session.send({ text: "Please greet the user now." });
+                    });
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -200,7 +216,7 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
+                responseModalities: [Modality.AUDIO], // Reverting to AUDIO ONLY for max stability
                 systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
                 inputAudioTranscription: {},
