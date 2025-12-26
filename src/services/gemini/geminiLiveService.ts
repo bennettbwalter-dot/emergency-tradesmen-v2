@@ -56,7 +56,7 @@ const navigateToFunction: FunctionDeclaration = {
 };
 
 export class GeminiLiveController {
-    private sessionPromise: Promise<any> | null = null;
+    private session: any = null;
     private nextStartTime = 0;
     private inputAudioContext: AudioContext | null = null;
     private outputAudioContext: AudioContext | null = null;
@@ -73,7 +73,7 @@ export class GeminiLiveController {
         onError?: (error: any) => void,
         onVolume?: (volume: number) => void
     }) {
-        if (this.sessionPromise) return;
+        if (this.session) return;
 
         const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
         if (!apiKey) {
@@ -82,6 +82,9 @@ export class GeminiLiveController {
         }
 
         const ai = new GoogleGenAI({ apiKey });
+
+        // MODERN SDK PATTERN (v1.34+)
+        const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -97,94 +100,12 @@ export class GeminiLiveController {
             return;
         }
 
-        let currentInputTranscription = '';
-        let currentOutputTranscription = '';
-
-        this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using the stable model to rule out preview bugs
-            callbacks: {
-                onopen: () => {
-                    console.log('[Gemini] Session opened and ready.');
-                    if (!this.inputAudioContext || !this.mediaStream) return;
-                    if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
-
-                    const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                    this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 5.0; // High mic boost to fix 'cannot hear me'
-
-                    this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
-                    this.scriptProcessor.onaudioprocess = (e) => {
-                        const inputData = e.inputBuffer.getChannelData(0);
-                        let sum = 0;
-                        for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
-                        callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
-
-                        const pcmBlob = this.createBlob(inputData);
-                        this.sessionPromise?.then((session) => {
-                            try { session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
-                        });
-                    };
-
-                    source.connect(this.inputGainNode);
-                    this.inputGainNode.connect(this.scriptProcessor);
-                    this.scriptProcessor.connect(this.inputAudioContext.destination);
-
-                    // Force initial greeting to solve 'empty output' error on start
-                    this.sessionPromise.then(s => s.send({ text: "Please greet the user now." }));
-                },
-                onmessage: async (message: LiveServerMessage) => {
-                    if (message.serverContent?.outputTranscription) {
-                        currentOutputTranscription += message.serverContent.outputTranscription.text;
-                    } else if (message.serverContent?.inputTranscription) {
-                        currentInputTranscription += message.serverContent.inputTranscription.text;
-                    }
-
-                    if (message.serverContent?.turnComplete) {
-                        if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
-                        if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
-                        currentInputTranscription = '';
-                        currentOutputTranscription = '';
-                    }
-
-                    if (message.toolCall) {
-                        for (const fc of message.toolCall.functionCalls) {
-                            if (fc.name === 'navigateTo') {
-                                callbacks.onNavigate?.((fc.args as any).view);
-                                this.sessionPromise?.then(session => session.sendToolResponse({
-                                    functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
-                                }));
-                            }
-                        }
-                    }
-
-                    const parts = message.serverContent?.modelTurn?.parts;
-                    const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
-
-                    if (base64Audio && this.outputAudioContext) {
-                        if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
-                        this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
-                        const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
-                        const source = this.outputAudioContext.createBufferSource();
-                        source.buffer = audioBuffer;
-                        source.connect(this.outputNode!);
-                        source.addEventListener('ended', () => this.sources.delete(source));
-                        source.start(this.nextStartTime);
-                        this.nextStartTime += audioBuffer.duration;
-                        this.sources.add(source);
-                    }
-                },
-                onerror: (e) => {
-                    console.error('[Gemini] Error:', e);
-                    callbacks.onError?.(e);
-                    this.stopSession();
-                },
-            },
-            config: {
-                // ENABLING BOTH MODALITIES: This is the critical fix for 'empty model output'
+        try {
+            // CONNECT USING MODERN PATTERN
+            this.session = await model.live.connect({
                 responseModalities: [Modality.AUDIO, Modality.TEXT],
                 systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // DISABLING ALL SAFETY: Often the cause of silent refusals
                 safetySettings: [
                     { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                     { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -194,10 +115,99 @@ export class GeminiLiveController {
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
-            },
-        });
+            });
 
-        return this.sessionPromise;
+            console.log('[Gemini] Modern session established');
+
+            let currentInputTranscription = '';
+            let currentOutputTranscription = '';
+
+            // EVENT HANDLERS
+            this.session.on('open', () => {
+                if (!this.inputAudioContext || !this.mediaStream) return;
+                if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
+
+                const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
+                this.inputGainNode = this.inputAudioContext.createGain();
+                this.inputGainNode.gain.value = 5.0; // Stay loud
+
+                this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
+                this.scriptProcessor.onaudioprocess = (e) => {
+                    const inputData = e.inputBuffer.getChannelData(0);
+                    let sum = 0;
+                    for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
+                    callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
+
+                    const pcmBlob = this.createBlob(inputData);
+                    try { this.session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
+                };
+
+                source.connect(this.inputGainNode);
+                this.inputGainNode.connect(this.scriptProcessor);
+                this.scriptProcessor.connect(this.inputAudioContext.destination);
+
+                // Initial greeting
+                this.session.send({ text: "Hey! Please greet the user now." });
+            });
+
+            this.session.on('message', async (message: LiveServerMessage) => {
+                if (message.serverContent?.outputTranscription) {
+                    currentOutputTranscription += message.serverContent.outputTranscription.text;
+                } else if (message.serverContent?.inputTranscription) {
+                    currentInputTranscription += message.serverContent.inputTranscription.text;
+                }
+
+                if (message.serverContent?.turnComplete) {
+                    if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
+                    if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
+                    currentInputTranscription = '';
+                    currentOutputTranscription = '';
+                }
+
+                if (message.toolCall) {
+                    for (const fc of message.toolCall.functionCalls) {
+                        if (fc.name === 'navigateTo') {
+                            callbacks.onNavigate?.((fc.args as any).view);
+                            this.session.sendToolResponse({
+                                functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
+                            });
+                        }
+                    }
+                }
+
+                const parts = message.serverContent?.modelTurn?.parts;
+                const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
+
+                if (base64Audio && this.outputAudioContext) {
+                    if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
+                    this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
+                    const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
+                    const source = this.outputAudioContext.createBufferSource();
+                    source.buffer = audioBuffer;
+                    source.connect(this.outputNode!);
+                    source.addEventListener('ended', () => this.sources.delete(source));
+                    source.start(this.nextStartTime);
+                    this.nextStartTime += audioBuffer.duration;
+                    this.sources.add(source);
+                }
+            });
+
+            this.session.on('error', (e: any) => {
+                console.error('[Gemini] SDK Error:', e);
+                callbacks.onError?.(e);
+                this.stopSession();
+            });
+
+            this.session.on('close', () => {
+                console.log('[Gemini] Session closed');
+                this.session = null;
+            });
+
+        } catch (e: any) {
+            console.error('[Gemini] Connection failed:', e);
+            callbacks.onError?.(e);
+            this.stopSession();
+        }
     }
 
     private createBlob(data: Float32Array): Blob {
@@ -214,9 +224,9 @@ export class GeminiLiveController {
     }
 
     public async stopSession() {
-        if (this.sessionPromise) {
-            try { const s = await this.sessionPromise; if (s.close) s.close(); } catch (e) { }
-            this.sessionPromise = null;
+        if (this.session) {
+            try { if (this.session.close) this.session.close(); } catch (e) { }
+            this.session = null;
         }
         this.scriptProcessor?.disconnect();
         this.mediaStream?.getTracks().forEach(t => t.stop());
