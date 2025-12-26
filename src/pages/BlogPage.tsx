@@ -58,6 +58,21 @@ export default function BlogPage() {
                 title="Trade Tips & Guides | Emergency Tradesmen UK"
                 description="Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson."
                 canonical="/blog"
+                jsonLd={{
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    "name": "Trade Tips & Guides",
+                    "description": "Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson.",
+                    "url": "https://emergencytradesmen.net/blog",
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Emergency Tradesmen UK",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://emergencytradesmen.net/et-logo-v2.png"
+                        }
+                    }
+                }}
             />
 
             {/* Hero Section */}

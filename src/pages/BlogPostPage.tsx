@@ -312,13 +312,77 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
 
     return (
         <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
-            <SEO
-                title={`${post.title} | Emergency Tradesmen Blog`}
-                description={post.excerpt}
-                canonical={`/blog/${post.slug}`}
-                ogType="article"
-                ogImage={post.cover_image || undefined}
-            />
+            {/* Structured Data Construction */}
+            {(() => {
+                const baseUrl = "https://emergencytradesmen.net";
+                const postUrl = `${baseUrl}/blog/${post.slug}`;
+                const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
+
+                // 1. BreadcrumbList Schema
+                const breadcrumbSchema = {
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": baseUrl
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Blog",
+                            "item": `${baseUrl}/blog`
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": post.title,
+                            "item": postUrl
+                        }
+                    ]
+                };
+
+                // 2. BlogPosting Schema
+                const articleSchema = {
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": postUrl
+                    },
+                    "headline": post.title,
+                    "description": post.excerpt,
+                    "image": imageUrl,
+                    "author": {
+                        "@type": "Organization",
+                        "name": "Emergency Tradesmen UK",
+                        "url": baseUrl
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Emergency Tradesmen UK",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": `${baseUrl}/et-logo-v2.png`
+                        }
+                    },
+                    "datePublished": post.published_at,
+                    "dateModified": post.published_at, // Ideally this would be different if updated
+                };
+
+                return (
+                    <SEO
+                        title={`${post.title} | Emergency Tradesmen Blog`}
+                        description={post.excerpt}
+                        canonical={`/blog/${post.slug}`}
+                        ogType="article"
+                        ogImage={post.cover_image || undefined}
+                        jsonLd={[breadcrumbSchema, articleSchema]}
+                    />
+                );
+            })()}
 
             {/* Navigation Bar */}
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
