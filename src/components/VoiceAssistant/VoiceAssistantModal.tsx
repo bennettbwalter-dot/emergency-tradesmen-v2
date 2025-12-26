@@ -222,6 +222,12 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
         const voiceId = import.meta.env.VITE_ELEVENLABS_VOICE_ID;
 
+        console.log('[Voice Debug] Attempting speak. Keys present?', {
+            hasKey: !!apiKey,
+            hasVoice: !!voiceId,
+            voiceId: voiceId
+        });
+
         // Failsafe timeout setup
         const predictedDuration = Math.min((text.length * 100) + 1000, 10000);
         let hasEnded = false;
