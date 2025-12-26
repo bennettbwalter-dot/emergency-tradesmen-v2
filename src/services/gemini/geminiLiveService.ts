@@ -1,6 +1,8 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-import { SYSTEM_INSTRUCTION } from './constants';
+
+// MINIMAL: Rules out safety refusals and complex logic crashes
+const DIAGNOSTIC_INSTRUCTION = "You are a professional UK emergency tradesman assistant. Respond briefly and stay helpful. Say 'Hey this is Emergency Tradesmen! How can I help you today?' as your first words.";
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -40,21 +42,6 @@ export async function decodeAudioData(
     return buffer;
 }
 
-const navigateToFunction: FunctionDeclaration = {
-    name: 'navigateTo',
-    parameters: {
-        type: Type.OBJECT,
-        description: 'Navigates the user to a different view in the application portal.',
-        properties: {
-            view: {
-                type: Type.STRING,
-                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
-            },
-        },
-        required: ['view'],
-    } as Schema,
-};
-
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
@@ -75,18 +62,18 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        // Support both prefixed and non-prefixed keys for development/production parity
-        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
+        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
 
-        if (!apiKey || apiKey === 'undefined' || apiKey.length < 10) {
-            console.error("[Gemini] API Key missing. Please set VITE_GEMINI_API_KEY.");
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
+        // Safety check: Diagnostic logging of key length
+        console.log(`[Gemini] Initializing with key length: ${apiKey.length}`);
+        if (!apiKey || apiKey.length < 10) {
+            callbacks.onError?.(new Error("CRITICAL: VITE_GEMINI_API_KEY is missing or invalid. Check Cloudflare Environment Variables."));
             return;
         }
 
         const ai = new GoogleGenAI({ apiKey });
 
-        // Official v1.34 Handshake Pattern
+        // Latest stable SDK pattern
         const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -105,8 +92,7 @@ export class GeminiLiveController {
 
         this.sessionPromise = model.live.connect({
             responseModalities: [Modality.AUDIO, Modality.TEXT], // ENABLING BOTH TO FIX "EMPTY OUTPUT"
-            systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-            tools: [{ functionDeclarations: [navigateToFunction] }],
+            systemInstruction: { parts: [{ text: DIAGNOSTIC_INSTRUCTION }] },
             safetySettings: [
                 { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                 { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -117,15 +103,14 @@ export class GeminiLiveController {
                 voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
             },
         } as any).then((session: any) => {
-            // Event Listeners for the stable SDK
             session.on('open', () => {
-                console.log('[Gemini] Pipeline Open');
+                console.log('[Gemini] Connected successfully.');
                 if (!this.inputAudioContext || !this.mediaStream) return;
                 if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                 const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                 this.inputGainNode = this.inputAudioContext.createGain();
-                this.inputGainNode.gain.value = 5.0; // Stay high for hearing issues
+                this.inputGainNode.gain.value = 5.0; // High Mic Boost
 
                 this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                 this.scriptProcessor.onaudioprocess = (e) => {
@@ -153,17 +138,6 @@ export class GeminiLiveController {
                     callbacks.onMessage?.(message.serverContent.inputTranscription.text, 'user');
                 }
 
-                if (message.toolCall) {
-                    for (const fc of message.toolCall.functionCalls) {
-                        if (fc.name === 'navigateTo') {
-                            callbacks.onNavigate?.((fc.args as any).view);
-                            session.sendToolResponse({
-                                functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
-                            });
-                        }
-                    }
-                }
-
                 const parts = message.serverContent?.modelTurn?.parts;
                 const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
 
@@ -181,7 +155,7 @@ export class GeminiLiveController {
             });
 
             session.on('error', (err: any) => {
-                console.error('[Gemini] SDK Error:', err);
+                console.error('[Gemini] Pipeline Error:', err);
                 callbacks.onError?.(err);
                 this.stopSession();
             });
