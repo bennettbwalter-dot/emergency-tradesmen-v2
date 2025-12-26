@@ -10,7 +10,7 @@ interface Props {
     onClose: () => void;
 }
 
-const BUILD_ID = "v1.2-" + Date.now();
+const BUILD_ID = "v1.3-" + Date.now();
 
 const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -50,8 +50,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         console.log(`[Voice] Initializing ${BUILD_ID}...`);
 
         if (!apiKey) {
-            console.error("[Voice] API Key Missing! Check Cloudflare Environment Variables for VITE_GEMINI_API_KEY");
-            setError("VITE_GEMINI_API_KEY is missing. Check Cloudflare Settings.");
+            setError("VITE_GEMINI_API_KEY is missing in Cloudflare/Env. Please add it and rebuild.");
             setIsActive(false);
             return;
         }
@@ -72,7 +71,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         'settings': '/profile', 'profile': '/profile'
                     };
                     const target = routeMap[view.toLowerCase()] || '/';
-                    setMessages(prev => [...prev, { text: `Navigating to ${view}...`, role: 'model', timestamp: new Date() }]);
                     navigate(target);
                 },
                 onInterrupted: () => setStatus('listening'),
@@ -102,57 +100,52 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[600px]">
 
-                {/* Header */}
-                <div className="p-4 bg-slate-800/50 flex items-center justify-between border-b border-slate-700">
+                {/* Header - RED for testing update */}
+                <div className="p-4 bg-red-600 flex items-center justify-between shadow-lg">
                     <div className="flex items-center gap-3">
-                        <div className={`w-3 h-3 rounded-full ${status === 'listening' ? 'bg-green-500 animate-pulse' : status === 'speaking' ? 'bg-amber-500' : 'bg-slate-500'}`}></div>
-                        <span className="font-bold text-white text-sm tracking-wide">
-                            {status === 'listening' ? 'Listening...' : status === 'speaking' ? 'Agent Speaking' : 'Standby'}
+                        <div className={`w-3 h-3 rounded-full bg-white animate-pulse`}></div>
+                        <span className="font-black text-white text-xs uppercase tracking-widest">
+                            Voice Agent {BUILD_ID}
                         </span>
-                        <span className="text-[10px] text-slate-500 font-mono opacity-50">{BUILD_ID}</span>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-full text-slate-400 hover:text-white">
+                    <button onClick={onClose} className="p-1 bg-white/20 hover:bg-white/40 rounded-full text-white">
                         <X className="w-5 h-5" />
                     </button>
                 </div>
 
                 {/* Chat Area */}
-                <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-slate-900 to-slate-950">
+                <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950">
                     {messages.length === 0 && !error && (
-                        <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-50">
-                            <div className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center animate-pulse">
-                                <Mic className="w-10 h-10 text-slate-400" />
+                        <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
+                            <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-slate-700">
+                                <Mic className="w-8 h-8 text-slate-500" />
                             </div>
-                            <p className="text-slate-400 text-sm italic">Connecting to Gemini Live...</p>
+                            <p className="text-slate-400 text-sm font-medium">Connecting to Secure Server...</p>
                         </div>
                     )}
 
                     {error && (
-                        <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-6 animate-in zoom-in duration-300">
-                            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center border border-red-500/20 text-red-500">
-                                <AlertTriangle className="w-10 h-10" />
-                            </div>
-                            <div className="space-y-2">
-                                <h4 className="text-white font-bold">System Connection Error</h4>
-                                <p className="text-red-400 text-sm px-4">{error}</p>
+                        <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-4 animate-in fade-in zoom-in duration-300">
+                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm w-full font-bold">
+                                {error}
                             </div>
                             <button
                                 onClick={startGeminiSession}
-                                className="flex items-center gap-2 px-8 py-3 bg-white text-slate-900 rounded-full font-black uppercase text-xs tracking-widest hover:bg-slate-200 transition-all shadow-xl"
+                                className="w-full py-4 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
                             >
                                 <RefreshCw className="w-4 h-4" />
-                                Force Retry
+                                Force Restart
                             </button>
                         </div>
                     )}
 
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${msg.role === 'user'
-                                    ? 'bg-amber-500 text-slate-900 font-medium rounded-tr-none'
+                            <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${msg.role === 'user'
+                                    ? 'bg-amber-500 text-slate-900 font-bold rounded-tr-none'
                                     : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
                                 }`}>
                                 {msg.text}
@@ -161,15 +154,15 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     ))}
                 </div>
 
-                {/* Footer Visualizer */}
-                <div className="p-6 bg-slate-900 border-t border-slate-800 flex justify-center items-center h-24">
-                    <div className="flex items-center gap-1.5 h-10">
+                {/* Visualizer Footer */}
+                <div className="p-8 bg-slate-900 border-t border-slate-800 flex justify-center items-center h-28">
+                    <div className="flex items-center gap-2 h-12">
                         {[...Array(5)].map((_, i) => (
                             <div
                                 key={i}
-                                className={`w-2 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-10 animate-bounce shadow-[0_0_15px_rgba(245,158,11,0.5)]' :
-                                        status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
-                                            'bg-slate-800 h-2'
+                                className={`w-2.5 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-12 animate-bounce shadow-[0_0_20px_rgba(245,158,11,0.6)]' :
+                                        status === 'listening' ? 'bg-green-500 h-6 animate-pulse' :
+                                            'bg-slate-800 h-2.5'
                                     }`}
                                 style={{ animationDelay: `${i * 0.15}s` }}
                             />
