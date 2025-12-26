@@ -75,8 +75,11 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-        if (!apiKey || apiKey === 'undefined') {
+        // Check for VITE_ prefix (Cloudflare/Production) and non-prefixed (Local fallback)
+        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
+
+        if (!apiKey || apiKey === 'undefined' || apiKey.length < 10) {
+            console.error("[Gemini] API Key missing. Please set VITE_GEMINI_API_KEY in Cloudflare.");
             callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
@@ -101,7 +104,7 @@ export class GeminiLiveController {
         let currentOutputTranscription = '';
 
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using stable model for production restoration
+            model: 'gemini-2.0-flash-exp', // Using the stable 2.0 model
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -109,16 +112,12 @@ export class GeminiLiveController {
                     if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-
-                    // Boost Mic Gain (4x) to help it hear the user
                     this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 4.0;
+                    this.inputGainNode.gain.value = 3.0; // Boost mic
 
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
-
-                        // Volume Meter
                         let sum = 0;
                         for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
                         callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
@@ -135,8 +134,8 @@ export class GeminiLiveController {
                     this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // DO NOT CALL session.send() HERE - It can trigger the 'empty output' error on startup.
-                    // Let the instruction and user voice handle it.
+                    // Force an initial response
+                    this.sessionPromise.then(s => s.send({ text: "Hello, please greet the user." }));
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -186,12 +185,10 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO],
+                // ENABLING BOTH MODALITIES: Fixes 'empty output' error if model tries to send text
+                responseModalities: [Modality.AUDIO, Modality.TEXT],
                 systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // Critical for hearing: Let the model see text transcription of what it heard
-                inputAudioTranscription: {},
-                // Bypassing safety filters to prevent silent refusals
                 safetySettings: [
                     { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                     { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
