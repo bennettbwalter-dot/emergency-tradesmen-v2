@@ -73,11 +73,15 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        // Use Vite Environment Variable
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+        if (!apiKey) {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
+            return;
+        }
+
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
-        // Initialize AudioContexts only when needed
+        // Initialize AudioContexts
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
         this.outputNode = this.outputAudioContext.createGain();
@@ -94,9 +98,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // Initialize the session connection
+        // Initialize the session connection - using stable gemini-2.0-flash-exp
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using more stable live model
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -144,19 +148,23 @@ export class GeminiLiveController {
                                 const view = (fc.args as any).view;
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
-                                    session.sendToolResponse({
-                                        functionResponses: {
-                                            id: fc.id,
-                                            name: fc.name,
-                                            response: { result: "ok" },
-                                        }
-                                    });
+                                    try {
+                                        session.sendToolResponse({
+                                            functionResponses: [{
+                                                id: fc.id,
+                                                name: fc.name,
+                                                response: { result: "ok" },
+                                            }]
+                                        });
+                                    } catch (err) {
+                                        console.debug('Error sending tool response:', err);
+                                    }
                                 });
                             }
                         }
                     }
 
-                    const base64Audio = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
+                    const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
                     if (base64Audio && this.outputAudioContext) {
                         if (this.outputAudioContext.state === 'suspended') {
                             this.outputAudioContext.resume();
