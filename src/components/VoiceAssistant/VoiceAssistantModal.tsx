@@ -219,19 +219,28 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const getBritishVoice = () => {
         const available = voices.length > 0 ? voices : (window.speechSynthesis?.getVoices() || []);
 
-        // 1. Google UK (Best for Android/Chrome)
-        const google = available.find(v => v.name === 'Google UK English Female');
-        if (google) return google;
+        // Priority List for "British Woman"
+        const preferred = [
+            'Google UK English Female', // Android / Chrome
+            'Microsoft Hazel',          // Windows
+            'Martha',                   // iOS
+            'Catherine',                // iOS
+            'Nora'                      // iOS (sometimes available)
+        ];
 
-        // 2. Microsoft Hazel (Good for Windows)
-        const hazel = available.find(v => v.name.includes('Hazel'));
-        if (hazel) return hazel;
+        for (const name of preferred) {
+            const found = available.find(v => v.name.includes(name));
+            if (found) return found;
+        }
 
-        // 3. Daniel (Good for iOS)
-        const daniel = available.find(v => v.name === 'Daniel');
-        if (daniel) return daniel;
+        // Search for any GB voice marked as "Female" (if metadata exists)
+        const genericFemale = available.find(v =>
+            (v.lang === 'en-GB' || v.lang === 'en_GB') &&
+            v.name.toLowerCase().includes('female')
+        );
+        if (genericFemale) return genericFemale;
 
-        // 4. Any GB Voice
+        // Fallback: Any GB voice (might be Arthur/Daniel/System, but better than robot)
         return available.find(v => v.lang.includes('GB') || v.lang.includes('en-GB')) || null;
     }
 
@@ -251,13 +260,21 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         if (voice) {
             utterance.voice = voice;
             utterance.lang = voice.lang;
-            // Slight speed boost for Google voice to sound more natural
-            utterance.rate = voice.name.includes('Google') ? 1.1 : 1.0;
+            // Slight customization
+            if (voice.name.includes('Google')) {
+                utterance.rate = 1.1;
+            } else {
+                utterance.rate = 1.0;
+            }
         } else {
-            utterance.lang = 'en-GB';
+            console.warn("No GB voice found");
         }
 
         utterance.pitch = 1.0;
+
+        // Debug info update
+        const debugInfo = voice ? `${voice.name} (${voice.lang})` : 'Default/Missing';
+        console.log(`[Voice] Speaking with: ${debugInfo}`);
 
         utterance.onend = () => {
             if (onEnd) onEnd();
