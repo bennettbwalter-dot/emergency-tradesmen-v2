@@ -1,8 +1,5 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-
-// MINIMAL & CLEAN: No emojis, no complex formatting to avoid triggering safety filters
-const CLEAN_SYSTEM_INSTRUCTION = "You are a professional emergency assistance voice agent for EmergencyTradesmen.net. Your tone is calm and reassuring. MANDATORY GREETING: You must start the session by saying exactly: 'Hey this is Emergency Tradesmen! How can I help you today?' After the greeting, help the user identify their emergency trade needs. Use the navigateTo tool to move them between pages when appropriate.";
+import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -42,28 +39,12 @@ export async function decodeAudioData(
     return buffer;
 }
 
-const navigateToFunction: FunctionDeclaration = {
-    name: 'navigateTo',
-    parameters: {
-        type: Type.OBJECT,
-        description: 'Navigates the user to a different view in the application portal.',
-        properties: {
-            view: {
-                type: Type.STRING,
-                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
-            },
-        },
-        required: ['view'],
-    } as Schema,
-};
-
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
     private inputAudioContext: AudioContext | null = null;
     private outputAudioContext: AudioContext | null = null;
     private outputNode: GainNode | null = null;
-    private inputGainNode: GainNode | null = null;
     private sources = new Set<AudioBufferSourceNode>();
     private mediaStream: MediaStream | null = null;
     private scriptProcessor: ScriptProcessorNode | null = null;
@@ -72,27 +53,27 @@ export class GeminiLiveController {
         onMessage?: (text: string, role: 'user' | 'model') => void,
         onNavigate?: (view: string) => void,
         onInterrupted?: () => void,
-        onError?: (error: any) => void
+        onError?: (error: any) => void,
+        onVolume?: (volume: number) => void
     }) {
         if (this.sessionPromise) return;
 
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-        if (!apiKey) {
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
+        let apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+        if (!apiKey || apiKey === 'undefined') {
+            callbacks.onError?.(new Error("API Key is missing in Cloudflare environment."));
             return;
         }
 
-        const ai = new GoogleGenAI({ apiKey: apiKey });
+        const ai = new GoogleGenAI({ apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
-
         this.outputNode = this.outputAudioContext.createGain();
         this.outputNode.connect(this.outputAudioContext.destination);
 
         try {
             this.mediaStream = await navigator.mediaDevices.getUserMedia({
-                audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+                audio: { echoCancellation: true, noiseSuppression: true }
             });
         } catch (e) {
             console.error('Microphone access denied:', e);
@@ -103,8 +84,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
+        // ABSOLUTE MINIMAL CONNECTION TO RULE OUT CONFIG ERRORS
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using the most reliable model
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -115,12 +97,16 @@ export class GeminiLiveController {
                     }
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                    this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 2.0; // Keep the mic boost
-
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
+
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
+
+                        // Volume Meter
+                        let sum = 0;
+                        for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
+                        callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
+
                         const pcmBlob = this.createBlob(inputData);
                         this.sessionPromise?.then((session) => {
                             try {
@@ -129,14 +115,11 @@ export class GeminiLiveController {
                         });
                     };
 
-                    source.connect(this.inputGainNode);
-                    this.inputGainNode.connect(this.scriptProcessor);
+                    source.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // FORCING THE INITIAL GREETING - Often kills the empty output error
-                    this.sessionPromise.then(session => {
-                        session.send({ text: "Please greet the user now." });
-                    });
+                    // Just send a plain "Hello" to kickstart
+                    this.sessionPromise.then(s => s.send({ text: "Hello" }));
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -150,24 +133,6 @@ export class GeminiLiveController {
                         if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
                         currentInputTranscription = '';
                         currentOutputTranscription = '';
-                    }
-
-                    if (message.toolCall) {
-                        for (const fc of message.toolCall.functionCalls) {
-                            if (fc.name === 'navigateTo') {
-                                const view = (fc.args as any).view;
-                                callbacks.onNavigate?.(view);
-                                this.sessionPromise?.then((session) => {
-                                    session.sendToolResponse({
-                                        functionResponses: [{
-                                            id: fc.id,
-                                            name: fc.name,
-                                            response: { result: "ok" },
-                                        }]
-                                    });
-                                });
-                            }
-                        }
                     }
 
                     const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
@@ -202,16 +167,7 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                // ENABLING BOTH MODALITIES TO PREVENT 'EMPTY OUTPUT'
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
-                systemInstruction: { parts: [{ text: CLEAN_SYSTEM_INSTRUCTION }] },
-                tools: [{ functionDeclarations: [navigateToFunction] }],
-                safetySettings: [
-                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
-                ],
+                responseModalities: [Modality.AUDIO],
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
@@ -245,25 +201,17 @@ export class GeminiLiveController {
         if (this.sessionPromise) {
             try {
                 const session = await this.sessionPromise;
-                // @ts-ignore
                 if (session.close) session.close();
             } catch (e) {
                 console.debug('Error closing session:', e);
             }
             this.sessionPromise = null;
         }
-
         this.scriptProcessor?.disconnect();
         this.mediaStream?.getTracks().forEach(track => track.stop());
         this.stopAudioOutput();
-
-        if (this.inputAudioContext?.state !== 'closed') {
-            this.inputAudioContext?.close();
-        }
-        if (this.outputAudioContext?.state !== 'closed') {
-            this.outputAudioContext?.close();
-        }
-
+        if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
+        if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
         this.inputAudioContext = null;
         this.outputAudioContext = null;
         this.mediaStream = null;
