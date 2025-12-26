@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Mic, AlertTriangle, Activity } from 'lucide-react';
-import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import intentsData from '../../voice-agent/intents.json';
 import routesData from '../../voice-agent/routes.json';
@@ -84,6 +83,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [isListening, setIsListening] = useState(false);
     const [status, setStatus] = useState<'idle' | 'listening' | 'processing' | 'speaking'>('idle');
     const [feedbackMessage, setFeedbackMessage] = useState('Initializing...');
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
     // Conversation State
     // Steps: initial -> asking_clarification -> asking_location -> navigating
@@ -126,13 +126,25 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         // Initialize Speech Synthesis
         if ('speechSynthesis' in window) {
             synthRef.current = window.speechSynthesis;
+
+            const loadVoices = () => {
+                const available = window.speechSynthesis.getVoices();
+                if (available.length > 0) {
+                    setVoices(available);
+                }
+            };
+
+            loadVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = loadVoices;
+            }
         }
 
         // Initialize Speech Recognition
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
-            recognition.lang = 'en-GB'; // UK English default
+            recognition.lang = 'en-GB';
             recognition.continuous = false;
             recognition.interimResults = true;
 
@@ -157,8 +169,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
             recognitionRef.current = recognition;
 
-            // Start the interaction flow automatically
-            startInteraction();
+            // Start interaction (add slight delay for voices to load)
+            setTimeout(startInteraction, 500);
         } else {
             setFeedbackMessage('Voice recognition not supported in this browser.');
         }
@@ -205,147 +217,61 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     };
 
     const getBritishVoice = () => {
-        if (!synthRef.current) return null;
-        const voices = synthRef.current.getVoices();
+        const available = voices.length > 0 ? voices : (window.speechSynthesis?.getVoices() || []);
 
-        // Priority 1: "Google UK English Female" 
-        const googleUK = voices.find(v => v.name === 'Google UK English Female');
-        if (googleUK) return googleUK;
+        // 1. Google UK (Best for Android/Chrome)
+        const google = available.find(v => v.name === 'Google UK English Female');
+        if (google) return google;
 
-        // Priority 2: Any "en-GB" voice
-        const gbVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
-        if (gbVoice) return gbVoice;
+        // 2. Microsoft Hazel (Good for Windows)
+        const hazel = available.find(v => v.name.includes('Hazel'));
+        if (hazel) return hazel;
 
-        return null;
+        // 3. Daniel (Good for iOS)
+        const daniel = available.find(v => v.name === 'Daniel');
+        if (daniel) return daniel;
+
+        // 4. Any GB Voice
+        return available.find(v => v.lang.includes('GB') || v.lang.includes('en-GB')) || null;
     }
 
-    const speak = async (text: string, onEnd?: () => void) => {
-        const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
-        const voiceId = import.meta.env.VITE_ELEVENLABS_VOICE_ID;
-
-        console.log('[Voice Debug] Attempting speak. Keys present?', {
-            hasKey: !!apiKey,
-            hasVoice: !!voiceId,
-            voiceId: voiceId
-        });
-
-        // Failsafe timeout setup
-        const predictedDuration = Math.min((text.length * 100) + 1000, 10000);
-        let hasEnded = false;
-
-        const safeOnEnd = () => {
-            if (!hasEnded) {
-                hasEnded = true;
-                if (onEnd) onEnd();
-            }
-        };
-
-        const timeoutId = setTimeout(safeOnEnd, predictedDuration + 2000); // Extra buffer for network latency
-
-        if (synthRef.current) {
-            setStatus('speaking');
-            setFeedbackMessage(text);
-        }
-
-        // ELEVENLABS IMPLEMENTATION
-        if (apiKey && voiceId) {
-            try {
-                const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'audio/mpeg',
-                        'xi-api-key': apiKey,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        text: text,
-                        model_id: "eleven_turbo_v2", // Turbo for lower latency
-                        voice_settings: {
-                            stability: 0.5,
-                            similarity_boost: 0.75
-                        }
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('ElevenLabs API failed');
-                }
-
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const audio = new Audio(url);
-
-                audio.onended = () => {
-                    clearTimeout(timeoutId);
-                    safeOnEnd();
-                    URL.revokeObjectURL(url);
-                };
-
-                audio.onerror = (e) => {
-                    console.error("Audio playback error", e);
-                    toast.error("Audio Playback Failed (Mobile Restriction?)");
-                    // Fallback to browser TTS if audio fails
-                    fallbackSpeak(text, safeOnEnd, timeoutId);
-                };
-
-                await audio.play();
-                return;
-
-            } catch (error) {
-                console.error('ElevenLabs Error, falling back to browser TTS:', error);
-                toast.error("Voice API Failed (Check Network/Keys)");
-                // Fallback to browser TTS on API error
-                fallbackSpeak(text, safeOnEnd, timeoutId);
-            }
-        } else {
-            // Fallback if no keys
-            toast.error("Voice Keys Missing in Cloudflare");
-            fallbackSpeak(text, safeOnEnd, timeoutId);
-        }
-    };
-
-    const fallbackSpeak = (text: string, onEnd: () => void, timeoutId: NodeJS.Timeout) => {
+    const speak = (text: string, onEnd?: () => void) => {
         if (!synthRef.current) {
-            onEnd();
+            if (onEnd) onEnd();
             return;
         }
 
         synthRef.current.cancel();
+        setStatus('speaking');
+        setFeedbackMessage(text);
 
         const utterance = new SpeechSynthesisUtterance(text);
         const voice = getBritishVoice();
+
         if (voice) {
             utterance.voice = voice;
+            utterance.lang = voice.lang;
+            // Slight speed boost for Google voice to sound more natural
+            utterance.rate = voice.name.includes('Google') ? 1.1 : 1.0;
         } else {
             utterance.lang = 'en-GB';
         }
 
-        utterance.rate = 1.05;
         utterance.pitch = 1.0;
 
         utterance.onend = () => {
-            clearTimeout(timeoutId);
-            onEnd();
+            if (onEnd) onEnd();
         };
 
         utterance.onerror = (e) => {
             console.error("Speech error", e);
-            clearTimeout(timeoutId);
-            onEnd();
+            if (onEnd) onEnd();
         };
 
-        try {
-            synthRef.current.speak(utterance);
-        } catch (e) {
-            console.error("Speech Exception", e);
-            clearTimeout(timeoutId);
-            onEnd();
-        }
-    }
+        synthRef.current.speak(utterance);
+    };
 
-    // Renamed helper to avoid confusion
-    const doSpeak = fallbackSpeak;
-
+    // Helper for any components passing this down? (None in this file, but keeping clean)
     const stopSpeaking = () => {
         if (synthRef.current) {
             synthRef.current.cancel();
