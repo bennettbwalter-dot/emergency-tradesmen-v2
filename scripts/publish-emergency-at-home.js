@@ -34,7 +34,7 @@ const post = {
 *   Use towels, buckets, or a wet vacuum to control flooding
 *   Keep internal doors open to improve air circulation and reduce moisture buildup
 *   Do not attempt pipe repairs with tape or sealants during active leaks
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find an emergency plumber when water cannot be safely contained
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find an emergency plumber when water cannot be safely contained
 
 > **Helpful homeowner tip**
 > Knowing where your main stopcock is can prevent thousands in damage. Locate it now, not during an emergency.
@@ -52,11 +52,11 @@ Electrical emergencies can be dangerous because faults are often hidden behind w
 *   Use a fire extinguisher only if it is designed for electrical fires
 *   Evacuate the property if fire spreads or smoke increases
 *   If someone is shocked, do not touch them until power is fully switched off
-*   Call emergency services if there is injury or fire risk
+*   Call emergency services if there is injury or fire risk. For medical advice, consult [NHS 111](https://www.nhs.uk/nhs-services/urgent-and-emergency-care-services/when-to-use-111/).
 *   During power cuts, unplug sensitive electronics to prevent surge damage
 *   Avoid candles and use torches to reduce fire risk
 *   Do not reset breakers repeatedly if they keep tripping
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find an emergency electrician when faults persist
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find an emergency electrician when faults persist
 
 > **Helpful homeowner tip**
 > Frequent breaker trips are a warning sign, not an inconvenience. Repeated resets can worsen electrical faults.
@@ -75,7 +75,7 @@ Lock emergencies can leave homeowners feeling exposed and unsafe, especially lat
 *   Keep well lit and visible if locked out at night
 *   If a lock is damaged, secure the area and avoid leaving the property unattended
 *   Change locks immediately if keys are lost or stolen
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find a trusted emergency locksmith who can gain access without damage
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find a trusted emergency locksmith who can gain access without damage
 
 > **Helpful homeowner tip**
 > Keeping a spare key with a trusted neighbour can prevent many lock emergencies.
@@ -95,10 +95,10 @@ Gas emergencies are extremely serious and can be life threatening. Gas leaks and
 *   Call the emergency gas service from outside the property
 *   Do not re-enter until professionals confirm it is safe
 *   Arrange professional repairs immediately after the incident
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find a qualified emergency gas engineer
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find a qualified emergency gas engineer
 
 > **Helpful homeowner tip**
-> Install carbon monoxide alarms on every level of your home and test them regularly.
+> Install carbon monoxide alarms on every level of your home and test them regularly. See [Gas Safe Register](https://www.gassaferegister.co.uk/) for more safety tips.
 
 ## Emergency Drain Specialist Available 24 Hours a Day
 
@@ -114,7 +114,7 @@ Drain emergencies often involve contaminated water and should be treated as a he
 *   Turn off electricity if water is near sockets or appliances
 *   Avoid chemical drain cleaners as they can worsen blockages
 *   Ventilate the area to reduce odours
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find an emergency drain specialist
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find an emergency drain specialist
 
 > **Helpful homeowner tip**
 > Slow draining sinks and gurgling sounds are early warning signs. Acting early can prevent full backups.
@@ -133,7 +133,7 @@ Broken glass creates immediate safety risks and leaves your home exposed to intr
 *   Cover the opening with boards or heavy plastic
 *   Secure the area until repairs are completed
 *   Report vandalism or break ins if applicable
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to contact an emergency glazier
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to contact an emergency glazier
 
 > **Helpful homeowner tip**
 > Avoid sweeping glass with bare hands. Small fragments can cause serious injuries.
@@ -153,10 +153,10 @@ Vehicle breakdowns can be dangerous, particularly on fast roads or in poor weath
 *   Place warning triangles if it is safe to do so
 *   Call breakdown recovery services with your exact location
 *   Contact emergency services if you feel unsafe
-*   Use **[EmergencyTradesmen.net](https://emergencytradesmen.net/)** to find emergency breakdown recovery support
+*   Use [emergencytradesmen](https://emergencytradesmen.net/) to find emergency breakdown recovery support
 
 > **Helpful driver tip**
-> Keep your phone charged and avoid standing behind or near traffic lanes.
+> Keep your phone charged and avoid standing behind or near traffic lanes. See [GOV.UK](https://www.gov.uk/breakdowns) for official breakdown advice.
 
 ## Preparing Your Home for Emergencies
 
@@ -184,7 +184,7 @@ Preparation makes roadside emergencies safer.
 
 When emergencies happen, finding the right professional quickly is critical.
 
-**EmergencyTradesmen.net helps homeowners:**
+**[emergencytradesmen](https://emergencytradesmen.net/) helps homeowners:**
 *   Find verified local tradespeople
 *   Access help twenty four hours a day
 *   Search by trade and location
@@ -193,7 +193,7 @@ When emergencies happen, finding the right professional quickly is critical.
 
 ## Final Thoughts
 
-Emergencies are stressful, but knowledge gives control. Acting quickly, staying safe, and using **EmergencyTradesmen.net** to find qualified emergency tradespeople protects your home and your family when it matters most.
+Emergencies are stressful, but knowledge gives control. Acting quickly, staying safe, and using [emergencytradesmen](https://emergencytradesmen.net/) to find qualified emergency tradespeople protects your home and your family when it matters most.
 
 Preparation today saves time, money, and stress tomorrow.
 `,

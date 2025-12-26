@@ -53,7 +53,7 @@ They arrive quickly with the specific goal of stopping damage and restoring esse
 
 ## Why Choosing a Verified Professional Matters
 
-Choosing a verified professional is crucial during an emergency when you are most vulnerable. Our platform ensures every tradesperson has been vetted for valid insurance and qualifications so you have peace of mind.
+Choosing a verified professional is crucial during an emergency when you are most vulnerable. [emergencytradesmen](https://emergencytradesmen.net/) ensures every tradesperson has been vetted for valid insurance and qualifications so you have peace of mind.
 
 This protects you from "cowboy" traders who might exploit your panic with poor workmanship or inflated prices. A verified pro provides accountability and ensures the job is done safely and to code.
 
@@ -69,23 +69,23 @@ Prices vary depending on location, urgency, and complexity.
 
 ## Frequently Asked Questions
 
-Q: How quickly can an emergency plumber arrive?
+**Q: How quickly can an emergency plumber arrive?**
 A: Most emergency plumbers aim to be with you within an hour, traffic permitting.
 
-Q: Do I need to turn off my water before they arrive?
+**Q: Do I need to turn off my water before they arrive?**
 A: Yes, if possible. Locating and turning off your stopcock can save thousands in damage.
 
-Q: Is emergency plumbing covered by insurance?
-A: Often yes, "trace and access" and the resulting damage are covered, but check your specific policy.
+**Q: Is emergency plumbing covered by insurance?**
+A: Often yes, "trace and access" and the resulting damage are covered, but check your specific policy. Resources like [Citizens Advice](https://www.citizensadvice.org.uk/consumer/insurance/insurance/) can help you understand your rights.
 
-Q: Do emergency plumbers carry spare parts?
+**Q: Do emergency plumbers carry spare parts?**
 A: They carry common parts for standard leaks, but specific boiler parts may usually need ordering.
 
 ## When to Act Immediately
 
 - Water is touching electrical fittings
 - You cannot stop a leak using the stopcock
-- You smell gas (call gas emergency first) or sewage
+- You smell gas (call National Gas Emergency Service first and see [Gas Safe Register advice](https://www.gassaferegister.co.uk/)) or sewage
 - There is a risk of ceiling collapse
 
 ![Clean and dry bathroom after repair](https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop)
@@ -96,7 +96,7 @@ Ignoring these signs can turn a small leak into a major renovation project. If y
 
 Don't wait for "business hours"—protect your home by calling a professional now. Your home is your most valuable asset, and quick action is the best defense against water damage.
 
-Find a verified emergency plumber near you today to secure your home.
+Find a verified emergency plumber near you today at [emergencytradesmen](https://emergencytradesmen.net/) to secure your home.
 `,
     cover_image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80&w=1200&auto=format&fit=crop',
     published: true,

@@ -20,7 +20,7 @@ const post = {
     excerpt: 'Electrical emergencies can happen at any time. Learn how to identify and safely handle tripped breakers, sparking outlets, and more before calling a professional.',
     content: `Electrical emergencies are more common than many homeowners realise and they often happen at the worst possible time. Storms, cold winter nights, power surges, and overloaded circuits can all cause sudden electrical problems. These issues can quickly become dangerous if handled incorrectly.
 
-This guide explains the most common electrical emergencies, what they mean, how to respond safely, and when to seek professional help. If at any point the situation feels unsafe or beyond your control, you can use [Emergency Tradesmen App](https://emergencytradesmen.net/) to quickly find a verified emergency electrician available 24 hours a day.
+This guide explains the most common electrical emergencies, what they mean, how to respond safely, and when to seek professional help. If at any point the situation feels unsafe or beyond your control, you can use [emergencytradesmen](https://emergencytradesmen.net/) to quickly find a verified emergency electrician available 24 hours a day.
 
 ![Electrical emergency cover](/blog/electrical-emergencies/cover.png)
 
@@ -34,7 +34,7 @@ This guide explains the most common electrical emergencies, what they mean, how 
 | Electrical fire | Critical | Evacuate and call emergency services |
 | Power outage | Low to Medium | Check breakers and stay safe |
 
-If you are unsure which category your problem fits into, do not guess. Use [Emergency Tradesmen App](https://emergencytradesmen.net/) to get expert help fast.
+If you are unsure which category your problem fits into, do not guess. Use [emergencytradesmen](https://emergencytradesmen.net/) to get expert help fast.
 
 ## Tripped Circuit Breakers
 
@@ -56,7 +56,7 @@ A tripped circuit breaker is one of the most common electrical issues in homes. 
 *   Power cuts out immediately after resetting
 *   You notice heat, buzzing, or burning smells
 
-At this point, use [Emergency Tradesmen App](https://emergencytradesmen.net/) to find a 24/7 emergency electrician near you.
+At this point, use [emergencytradesmen](https://emergencytradesmen.net/) to find a 24/7 emergency electrician near you.
 
 ## Burning Smell from an Outlet
 
@@ -78,7 +78,7 @@ A burning or fishy smell from an outlet is a serious warning sign. It often indi
 *   Do not plug anything back in
 *   Do not ignore the smell even if it stops
 
-A burning outlet always requires professional inspection. Use [Emergency Tradesmen App](https://emergencytradesmen.net/) to contact an emergency electrician immediately.
+A burning outlet always requires professional inspection. Use [emergencytradesmen](https://emergencytradesmen.net/) to contact an emergency electrician immediately.
 
 ## Sparking Plugs or Sockets
 
@@ -98,7 +98,7 @@ Occasional small sparks can happen, but large or repeated sparks are dangerous. 
 *   Burning smells
 *   Heat coming from the outlet
 
-For safe repairs, use [Emergency Tradesmen App](https://emergencytradesmen.net/) to find a qualified emergency electrician.
+For safe repairs, use [emergencytradesmen](https://emergencytradesmen.net/) to find a qualified emergency electrician.
 
 ## Electrical Fires
 
@@ -116,9 +116,9 @@ Electrical fires are extremely dangerous and can spread rapidly inside walls. Th
 
 *   Never throw water on an electrical fire
 *   Never try to fight a large fire yourself
-*   Never restore power until inspected
+*   Never restore power until inspected. See [GOV.UK fire safety](https://www.gov.uk/workplace-fire-safety-your-responsibilities) for more general advice.
 
-After any electrical fire, professional inspection is essential. Use [Emergency Tradesmen App](https://emergencytradesmen.net/) to arrange emergency electrical repairs.
+After any electrical fire, professional inspection is essential. Use [emergencytradesmen](https://emergencytradesmen.net/) to arrange emergency electrical repairs.
 
 ## Power Outages and Power Cuts
 
@@ -141,7 +141,7 @@ Power outages can be caused by storms, grid faults, or internal electrical issue
 *   Avoid indoor use of outdoor heaters or grills
 *   Stay away from downed power lines
 
-If power will not restore or keeps cutting out, use [Emergency Tradesmen App](https://emergencytradesmen.net/) to find an emergency electrician.
+If power will not restore or keeps cutting out, use [emergencytradesmen](https://emergencytradesmen.net/) to find an emergency electrician.
 
 ## When to Call an Emergency Electrician
 
@@ -155,7 +155,7 @@ Use professional help immediately if you experience any of the following.
 | Electrical fire | Emergency services |
 | Power loss with no clear cause | Electrician needed |
 
-You can find trusted electricians fast at [Emergency Tradesmen App](https://emergencytradesmen.net/).
+You can find trusted electricians fast at [emergencytradesmen](https://emergencytradesmen.net/).
 
 ## Why Use EmergencyTradesmen.net
 
@@ -166,16 +166,16 @@ EmergencyTradesmen.net helps homeowners during urgent situations by making it ea
 *   Verified local emergency electricians
 *   Available 24 hours a day
 *   Fast response times
-*   Easy search by trade and location
+*   Easy search by trade and location. Look for qualifications like [NICEIC](https://www.niceic.com/) registration.
 *   No guessing or unsafe DIY decisions
 
-When safety matters, [Emergency Tradesmen App](https://emergencytradesmen.net/) gives you peace of mind.
+When safety matters, [emergencytradesmen](https://emergencytradesmen.net/) gives you peace of mind.
 
 ## Final Safety Advice
 
 Electrical emergencies should never be taken lightly. Acting quickly, avoiding risky fixes, and knowing when to call a professional can prevent serious damage and injury.
 
-If you are ever unsure, the safest decision is to stop, switch off power if possible, and use [Emergency Tradesmen App](https://emergencytradesmen.net/) to find expert help immediately.
+If you are ever unsure, the safest decision is to stop, switch off power if possible, and use [emergencytradesmen](https://emergencytradesmen.net/) to find expert help immediately.
 
 Being prepared today protects your home and family tomorrow.`,
     cover_image: '/blog/electrical-emergencies/cover.png',

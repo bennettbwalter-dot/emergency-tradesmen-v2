@@ -63,6 +63,13 @@ export default function BlogPage() {
             {/* Hero Section */}
             <div className="bg-secondary/30 border-b border-border">
                 <div className="container mx-auto px-4 py-16 text-center">
+                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg mx-auto mb-6 p-4">
+                        <img
+                            src="/et-logo-new.webp"
+                            alt="Emergency Tradesmen Logo"
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
                     <h1 className="text-4xl md:text-5xl font-display text-foreground mb-4">
                         Trade Tips & Guides
                     </h1>

@@ -143,9 +143,9 @@ When something goes wrong, many people start frantically searching online or cal
 *   Inflated emergency prices
 *   Missed appointments
 
-A faster, safer option is using [Emergency Tradesmen App](https://emergencytradesmen.net/) to find trusted emergency professionals near you.
+A faster, safer option is using [emergencytradesmen](https://emergencytradesmen.net/) to find trusted emergency professionals near you.
 
-With [Emergency Tradesmen App](https://emergencytradesmen.net/), you can:
+With [emergencytradesmen](https://emergencytradesmen.net/), you can:
 
 *   Find emergency electricians, plumbers, gas engineers, and more.
 *   Access help 24/7, including nights and weekends
@@ -168,13 +168,13 @@ This helps the professional fix the issue faster and more effectively.
 
 ## 8. Prepare Now for the Next Emergency
 
-Emergencies are unpredictable — but preparation reduces panic.
+Emergencies are unpredictable — but preparation reduces panic. Resources like [Citizens Advice](https://www.citizensadvice.org.uk/housing/) can offer further help on dealing with home issues.
 
 **Take a few minutes today to:**
 
 *   Locate your fuse box, gas meter, and water stopcock.
 *   Keep a torch easily accessible.
-*   Save [Emergency Tradesmen App](https://emergencytradesmen.net/) so it’s ready when needed.
+*   Save [emergencytradesmen](https://emergencytradesmen.net/) so it’s ready when needed.
 *   Make sure everyone in the household knows basic safety steps.
 
 Preparation turns a stressful situation into a manageable one.
@@ -185,7 +185,7 @@ Home emergencies are stressful, but you don’t have to face them unprepared or 
 
 By staying calm, putting safety first, and knowing exactly where to turn for help, you can protect your home and the people inside it.
 
-When you need fast, reliable emergency assistance, [Emergency Tradesmen App](https://emergencytradesmen.net/) is there to connect you with trusted professionals — exactly when you need them most.
+When you need fast, reliable emergency assistance, [emergencytradesmen](https://emergencytradesmen.net/) is there to connect you with trusted professionals — exactly when you need them most.
 
 ## FAQ
 
@@ -195,7 +195,7 @@ When you need fast, reliable emergency assistance, [Emergency Tradesmen App](htt
 
 ### When should I shut off electricity during an emergency?
 
-**Shut off electricity at the fuse box** if you notice sparks, burning smells, repeated flickering, a power outage affecting only your home, or any water near sockets or appliances. **Do not touch the fuse box** if you are standing on a wet surface or there is standing water nearby.
+**Shut off electricity at the fuse box** if you notice sparks, burning smells, repeated flickering, a power outage affecting only your home, or any water near sockets or appliances. **Do not touch the fuse box** if you are standing on a wet surface or there is standing water nearby. For detailed electrical safety advice, consult [Electrical Safety First](https://www.electricalsafetyfirst.org.uk/).
 
 ### When should I shut off the main water supply?
 
@@ -203,7 +203,7 @@ When you need fast, reliable emergency assistance, [Emergency Tradesmen App](htt
 
 ### What should I do if I smell gas in my home?
 
-**If you smell gas, avoid using switches, phones, or open flames.** Open doors and windows if safe, leave the property immediately, and contact the gas emergency service. Only turn off the gas at the meter if you know how and it is safe to do so.
+**If you smell gas, avoid using switches, phones, or open flames.** Open doors and windows if safe, leave the property immediately, and contact the gas emergency service (National Gas Emergency Service). Only turn off the gas at the meter if you know how and it is safe to do so. See [Gas Safe Register](https://www.gassaferegister.co.uk/) for more.
 
 ### What should I avoid touching during a home emergency?
 
@@ -219,7 +219,7 @@ When you need fast, reliable emergency assistance, [Emergency Tradesmen App](htt
 
 ### How can I get emergency help quickly for plumbing, electrics, or heating?
 
-Use [Emergency Tradesmen App](https://emergencytradesmen.net/) to quickly find the right emergency professional in your area, such as an electrician, plumber, gas engineer, or other urgent repair specialist. This helps reduce panic searching and connects you to help faster when time matters.`,
+Use [emergencytradesmen](https://emergencytradesmen.net/) to quickly find the right emergency professional in your area, such as an electrician, plumber, gas engineer, or other urgent repair specialist. This helps reduce panic searching and connects you to help faster when time matters.`,
   cover_image: '/blog/home-emergency/cover.png',
   published: true,
   published_at: new Date().toISOString()
@@ -234,9 +234,9 @@ async function publishPost() {
     .select();
 
   if (error) {
-    console.error(`Error publishing post "${post.title}": `, error.message);
+    console.error('Error publishing post:', error.message);
   } else {
-    console.log(`Successfully published post: ${post.title} `);
+    console.log('Successfully published post:', post.title);
   }
 }
 
