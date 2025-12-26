@@ -75,11 +75,8 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        // Check for VITE_ prefix (Cloudflare/Production) and non-prefixed (Local fallback)
         const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
-
         if (!apiKey || apiKey === 'undefined' || apiKey.length < 10) {
-            console.error("[Gemini] API Key missing. Please set VITE_GEMINI_API_KEY in Cloudflare.");
             callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
@@ -104,16 +101,16 @@ export class GeminiLiveController {
         let currentOutputTranscription = '';
 
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using the stable 2.0 model
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
-                    console.log('Gemini Live session opened');
+                    console.log('[Gemini] Connected successfully');
                     if (!this.inputAudioContext || !this.mediaStream) return;
                     if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                     this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 3.0; // Boost mic
+                    this.inputGainNode.gain.value = 5.0; // High Mic Boost
 
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                     this.scriptProcessor.onaudioprocess = (e) => {
@@ -134,8 +131,10 @@ export class GeminiLiveController {
                     this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // Force an initial response
-                    this.sessionPromise.then(s => s.send({ text: "Hello, please greet the user." }));
+                    // Initial trigger after short delay to ensure pipe is warm
+                    setTimeout(() => {
+                        this.sessionPromise?.then(s => s.send({ text: "Hey! Please greet the user now." }));
+                    }, 500);
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -179,13 +178,13 @@ export class GeminiLiveController {
                     }
                 },
                 onerror: (e) => {
-                    console.error('Gemini Live error:', e);
+                    console.error('[Gemini] Error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
             },
             config: {
-                // ENABLING BOTH MODALITIES: Fixes 'empty output' error if model tries to send text
+                // ENABLING BOTH MODALITIES: Crucial to fix 'empty output' error
                 responseModalities: [Modality.AUDIO, Modality.TEXT],
                 systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
