@@ -7,7 +7,7 @@ interface SEOProps {
     keywords?: string[];
     ogImage?: string;
     ogType?: 'website' | 'article' | 'profile' | 'business.business';
-    jsonLd?: Record<string, any>;
+    jsonLd?: Record<string, any> | object[];
     noIndex?: boolean;
 }
 
