@@ -1,6 +1,8 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
-import { SYSTEM_INSTRUCTION } from './constants';
+import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
+
+// MINIMAL & CLEAN: No emojis, no complex formatting to avoid triggering safety filters
+const CLEAN_SYSTEM_INSTRUCTION = "You are a professional emergency assistance voice agent for EmergencyTradesmen.net. Your tone is calm and reassuring. MANDATORY GREETING: You must start the session by saying exactly: 'Hey this is Emergency Tradesmen! How can I help you today?' After the greeting, help the user identify their emergency trade needs. Use the navigateTo tool to move them between pages when appropriate.";
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -65,7 +67,6 @@ export class GeminiLiveController {
     private sources = new Set<AudioBufferSourceNode>();
     private mediaStream: MediaStream | null = null;
     private scriptProcessor: ScriptProcessorNode | null = null;
-    private lastMicLogTime = 0;
 
     public async startSession(callbacks: {
         onMessage?: (text: string, role: 'user' | 'model') => void,
@@ -76,23 +77,22 @@ export class GeminiLiveController {
         if (this.sessionPromise) return;
 
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+        if (!apiKey) {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
+            return;
+        }
+
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
-        // Initialize AudioContexts
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
 
-        // Output chain
         this.outputNode = this.outputAudioContext.createGain();
         this.outputNode.connect(this.outputAudioContext.destination);
 
         try {
             this.mediaStream = await navigator.mediaDevices.getUserMedia({
-                audio: {
-                    echoCancellation: true,
-                    noiseSuppression: true,
-                    autoGainControl: true
-                }
+                audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
             });
         } catch (e) {
             console.error('Microphone access denied:', e);
@@ -104,7 +104,7 @@ export class GeminiLiveController {
         let currentOutputTranscription = '';
 
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.0-flash-exp', // Using the most reliable model
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -115,39 +115,25 @@ export class GeminiLiveController {
                     }
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-
-                    // Add Input Gain to boost mic sensitivity
                     this.inputGainNode = this.inputAudioContext.createGain();
-                    this.inputGainNode.gain.value = 2.0; // Boost volume by 2x
+                    this.inputGainNode.gain.value = 2.0; // Keep the mic boost
 
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
-
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
-
-                        // Debug: Log peak volume sporadically to verify mic activity
-                        const peak = Math.max(...inputData.map(Math.abs));
-                        if (peak > 0.05 && Date.now() - this.lastMicLogTime > 2000) {
-                            console.log('[DEBUG] Mic activity detected (Peak:', peak.toFixed(2), ')');
-                            this.lastMicLogTime = Date.now();
-                        }
-
                         const pcmBlob = this.createBlob(inputData);
                         this.sessionPromise?.then((session) => {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
-                            } catch (err) {
-                                // Silently handle
-                            }
+                            } catch (err) { /* ignore */ }
                         });
                     };
 
-                    // Signal Chain: Source -> Gain -> ScriptProcessor -> Destination
                     source.connect(this.inputGainNode);
                     this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // Initial greeting trigger
+                    // FORCING THE INITIAL GREETING - Often kills the empty output error
                     this.sessionPromise.then(session => {
                         session.send({ text: "Please greet the user now." });
                     });
@@ -173,11 +159,11 @@ export class GeminiLiveController {
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
                                     session.sendToolResponse({
-                                        functionResponses: {
+                                        functionResponses: [{
                                             id: fc.id,
                                             name: fc.name,
                                             response: { result: "ok" },
-                                        }
+                                        }]
                                     });
                                 });
                             }
@@ -206,21 +192,26 @@ export class GeminiLiveController {
                     }
                 },
                 onerror: (e) => {
-                    console.error('Gemini Live connection error:', e);
+                    console.error('Gemini Live error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
                 onclose: (e) => {
-                    console.log('Gemini Live session closed:', e);
+                    console.log('Gemini Live closed:', e);
                     this.sessionPromise = null;
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO], // Reverting to AUDIO ONLY for max stability
-                systemInstruction: SYSTEM_INSTRUCTION,
+                // ENABLING BOTH MODALITIES TO PREVENT 'EMPTY OUTPUT'
+                responseModalities: [Modality.AUDIO, Modality.TEXT],
+                systemInstruction: { parts: [{ text: CLEAN_SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                inputAudioTranscription: {},
-                outputAudioTranscription: {},
+                safetySettings: [
+                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
+                ],
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
