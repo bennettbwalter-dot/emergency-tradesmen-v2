@@ -1,6 +1,10 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
-import { SYSTEM_INSTRUCTION } from './constants';
+// Simplified Instruction to avoid safety refusal
+const SYSTEM_INSTRUCTION = `You are a helpful, professional assistant for EmergencyTradesmen.net. 
+MANDATORY GREETING: Open the session with: "Hey this is Emergency Tradesmen! How can I help you today?"
+Your goal is to assist users with emergency trade enquiries.
+Stay professional and keep responses concise.`;
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -73,12 +77,7 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey) {
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
-            return;
-        }
-
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -97,9 +96,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // EXACT RESTORATION: Match the very first successful connection parameters
+        // USING STABLE VERSION TO PREVENT EMPTY OUTPUT ERRORS
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -191,11 +190,9 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO],
+                responseModalities: [Modality.AUDIO, Modality.TEXT],
                 systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                inputAudioTranscription: {},
-                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
