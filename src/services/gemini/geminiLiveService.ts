@@ -1,8 +1,6 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-
-// MINIMAL: Rules out safety refusals and complex logic crashes
-const MINIMAL_INSTRUCTION = "You are a professional UK emergency tradesman assistant. Respond briefly and stay helpful.";
+import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
+import { SYSTEM_INSTRUCTION } from './constants';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -42,6 +40,21 @@ export async function decodeAudioData(
     return buffer;
 }
 
+const navigateToFunction: FunctionDeclaration = {
+    name: 'navigateTo',
+    parameters: {
+        type: Type.OBJECT,
+        description: 'Navigates the user to a different view in the application portal.',
+        properties: {
+            view: {
+                type: Type.STRING,
+                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
+            },
+        },
+        required: ['view'],
+    } as Schema,
+};
+
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
@@ -70,9 +83,6 @@ export class GeminiLiveController {
 
         const ai = new GoogleGenAI({ apiKey });
 
-        // OFFICIAL v1.34 SDK PATTERN
-        const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
-
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
         this.outputNode = this.outputAudioContext.createGain();
@@ -87,80 +97,98 @@ export class GeminiLiveController {
             return;
         }
 
-        // Connect using the GenerativeModel.live.connect pattern
-        this.sessionPromise = model.live.connect({
-            responseModalities: [Modality.AUDIO, Modality.TEXT], // ENABLING BOTH TO FIX "EMPTY OUTPUT"
-            systemInstruction: { parts: [{ text: MINIMAL_INSTRUCTION }] },
-            // DISABLE ALL SAFETY FILTERS TO RULE OUT SILENT REFUSALS
-            safetySettings: [
-                { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-                { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
-            ],
-            speechConfig: {
-                voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
+        let currentInputTranscription = '';
+        let currentOutputTranscription = '';
+
+        // Switching to the STABLE gemini-1.5-flash to rule out preview model metadata errors
+        this.sessionPromise = ai.live.connect({
+            model: 'models/gemini-1.5-flash',
+            callbacks: {
+                onopen: () => {
+                    console.log('[Gemini] Pipeline established.');
+                    if (!this.inputAudioContext || !this.mediaStream) return;
+                    if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
+
+                    const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
+                    this.inputGainNode = this.inputAudioContext.createGain();
+                    this.inputGainNode.gain.value = 5.0; // High Mic Boost
+
+                    this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
+                    this.scriptProcessor.onaudioprocess = (e) => {
+                        const inputData = e.inputBuffer.getChannelData(0);
+                        let sum = 0;
+                        for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
+                        callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
+
+                        const pcmBlob = this.createBlob(inputData);
+                        this.sessionPromise?.then((session) => {
+                            try {
+                                session.sendRealtimeInput({ media: pcmBlob });
+                            } catch (err) { }
+                        });
+                    };
+
+                    source.connect(this.inputGainNode);
+                    this.inputGainNode.connect(this.scriptProcessor);
+                    this.scriptProcessor.connect(this.inputAudioContext.destination);
+
+                    // DO NOT CALL session.send() HERE - Rule out startup race conditions
+                },
+                onmessage: async (message: LiveServerMessage) => {
+                    if (message.serverContent?.outputTranscription) {
+                        currentOutputTranscription += message.serverContent.outputTranscription.text;
+                    } else if (message.serverContent?.inputTranscription) {
+                        currentInputTranscription += message.serverContent.inputTranscription.text;
+                    }
+
+                    if (message.serverContent?.turnComplete) {
+                        if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
+                        if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
+                        currentInputTranscription = '';
+                        currentOutputTranscription = '';
+                    }
+
+                    if (message.toolCall) {
+                        for (const fc of message.toolCall.functionCalls) {
+                            if (fc.name === 'navigateTo') {
+                                callbacks.onNavigate?.((fc.args as any).view);
+                                this.sessionPromise?.then(session => session.sendToolResponse({
+                                    functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
+                                }));
+                            }
+                        }
+                    }
+
+                    // ZIP PROPERTY ACCESS: message.serverContent?.modelTurn?.parts[0]?.inlineData?.data
+                    const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
+
+                    if (base64Audio && this.outputAudioContext) {
+                        if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
+                        this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
+                        const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
+                        const source = this.outputAudioContext.createBufferSource();
+                        source.buffer = audioBuffer;
+                        source.connect(this.outputNode!);
+                        source.addEventListener('ended', () => this.sources.delete(source));
+                        source.start(this.nextStartTime);
+                        this.nextStartTime += audioBuffer.duration;
+                        this.sources.add(source);
+                    }
+                },
+                onerror: (e) => {
+                    console.error('[Gemini] Pipeline error:', e);
+                    callbacks.onError?.(e);
+                    this.stopSession();
+                },
             },
-        } as any).then((session: any) => {
-            // Event Listeners for the modern SDK
-            session.on('open', () => {
-                console.log('[Gemini] Connected and Pipeline Open');
-                if (!this.inputAudioContext || !this.mediaStream) return;
-                if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
-
-                const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                this.inputGainNode = this.inputAudioContext.createGain();
-                this.inputGainNode.gain.value = 4.0;
-
-                this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
-                this.scriptProcessor.onaudioprocess = (e) => {
-                    const inputData = e.inputBuffer.getChannelData(0);
-                    let sum = 0;
-                    for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
-                    callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
-
-                    const pcmBlob = this.createBlob(inputData);
-                    try { session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
-                };
-
-                source.connect(this.inputGainNode);
-                this.inputGainNode.connect(this.scriptProcessor);
-                this.scriptProcessor.connect(this.inputAudioContext.destination);
-
-                // Force greeting to ensure the turn isn't empty
-                session.send({ text: "Please greet the user now." });
-            });
-
-            session.on('message', async (message: LiveServerMessage) => {
-                if (message.serverContent?.outputTranscription) {
-                    callbacks.onMessage?.(message.serverContent.outputTranscription.text, 'model');
-                } else if (message.serverContent?.inputTranscription) {
-                    callbacks.onMessage?.(message.serverContent.inputTranscription.text, 'user');
-                }
-
-                const parts = message.serverContent?.modelTurn?.parts;
-                const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
-
-                if (base64Audio && this.outputAudioContext) {
-                    if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
-                    this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
-                    const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
-                    const source = this.outputAudioContext.createBufferSource();
-                    source.buffer = audioBuffer;
-                    source.connect(this.outputNode!);
-                    source.start(this.nextStartTime);
-                    this.nextStartTime += audioBuffer.duration;
-                    this.sources.add(source);
-                }
-            });
-
-            session.on('error', (err: any) => {
-                console.error('[Gemini] SDK Error:', err);
-                callbacks.onError?.(err);
-                this.stopSession();
-            });
-
-            return session;
+            config: {
+                responseModalities: [Modality.AUDIO],
+                systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+                tools: [{ functionDeclarations: [navigateToFunction] }],
+                speechConfig: {
+                    voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
+                },
+            },
         });
 
         return this.sessionPromise;
@@ -181,10 +209,7 @@ export class GeminiLiveController {
 
     public async stopSession() {
         if (this.sessionPromise) {
-            try {
-                const s = await this.sessionPromise;
-                if (s && s.close) s.close();
-            } catch (e) { }
+            try { const s = await this.sessionPromise; if (s.close) s.close(); } catch (e) { }
             this.sessionPromise = null;
         }
         this.scriptProcessor?.disconnect();
