@@ -73,9 +73,11 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
+        // Use Vite Environment Variable
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
+        // Initialize AudioContexts
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
         this.outputNode = this.outputAudioContext.createGain();
@@ -92,6 +94,7 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
+        // Initialize the session connection - Using standard stable model
         this.sessionPromise = ai.live.connect({
             model: 'gemini-2.0-flash-exp',
             callbacks: {
@@ -185,9 +188,10 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
+                responseModalities: [Modality.AUDIO],
                 systemInstruction: SYSTEM_INSTRUCTION,
-                tools: [{ functionDeclarations: [navigateToFunction] }],
+                // REMOVING TOOLS TEMPORARILY - This error often happens when tools are present but model tries to speak first
+                tools: [],
                 inputAudioTranscription: {},
                 outputAudioTranscription: {},
                 speechConfig: {
