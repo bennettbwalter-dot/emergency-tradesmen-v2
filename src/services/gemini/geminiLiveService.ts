@@ -1,8 +1,6 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-
-// MINIMAL: Rules out safety refusals and complex logic crashes
-const DIAGNOSTIC_INSTRUCTION = "You are a helpful assistant. Say: 'Hey this is Emergency Tradesmen! How can I help you today?'";
+import { SYSTEM_INSTRUCTION } from './constants';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -42,12 +40,28 @@ export async function decodeAudioData(
     return buffer;
 }
 
+const navigateToFunction: FunctionDeclaration = {
+    name: 'navigateTo',
+    parameters: {
+        type: Type.OBJECT,
+        description: 'Navigates the user to a different view in the application portal.',
+        properties: {
+            view: {
+                type: Type.STRING,
+                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
+            },
+        },
+        required: ['view'],
+    } as Schema,
+};
+
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
     private inputAudioContext: AudioContext | null = null;
     private outputAudioContext: AudioContext | null = null;
     private outputNode: GainNode | null = null;
+    private inputGainNode: GainNode | null = null;
     private sources = new Set<AudioBufferSourceNode>();
     private mediaStream: MediaStream | null = null;
     private scriptProcessor: ScriptProcessorNode | null = null;
@@ -62,15 +76,10 @@ export class GeminiLiveController {
         if (this.sessionPromise) return;
 
         const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-
-        // Safety check: Alert if key is missing or placeholder
-        if (!apiKey || apiKey === 'undefined' || apiKey.length < 10) {
-            callbacks.onError?.(new Error("CRITICAL: VITE_GEMINI_API_KEY is missing or invalid in environment."));
+        if (!apiKey || apiKey === 'undefined') {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
-
-        // Diagnostic Log: Verify key presence without exposing full key
-        console.log(`[DEBUG] Initializing Gemini Live with key: ${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`);
 
         const ai = new GoogleGenAI({ apiKey });
 
@@ -84,7 +93,6 @@ export class GeminiLiveController {
                 audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
             });
         } catch (e) {
-            console.error('Microphone access denied:', e);
             callbacks.onError?.(e);
             return;
         }
@@ -93,7 +101,7 @@ export class GeminiLiveController {
         let currentOutputTranscription = '';
 
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Most stable Live model
+            model: 'gemini-2.0-flash-exp', // Using stable model for production restoration
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -101,12 +109,16 @@ export class GeminiLiveController {
                     if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                    this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
 
+                    // Boost Mic Gain (4x) to help it hear the user
+                    this.inputGainNode = this.inputAudioContext.createGain();
+                    this.inputGainNode.gain.value = 4.0;
+
+                    this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
 
-                        // Volume Meter logic
+                        // Volume Meter
                         let sum = 0;
                         for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
                         callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
@@ -115,19 +127,16 @@ export class GeminiLiveController {
                         this.sessionPromise?.then((session) => {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
-                            } catch (err) {
-                                // Silently handle
-                            }
+                            } catch (err) { }
                         });
                     };
 
-                    source.connect(this.scriptProcessor);
+                    source.connect(this.inputGainNode);
+                    this.inputGainNode.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // FORCE KICKSTART: Explicitly tell the model to talk
-                    this.sessionPromise.then(session => {
-                        session.send({ text: "Hello, please introduce yourself and greet the user." });
-                    });
+                    // DO NOT CALL session.send() HERE - It can trigger the 'empty output' error on startup.
+                    // Let the instruction and user voice handle it.
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -143,7 +152,17 @@ export class GeminiLiveController {
                         currentOutputTranscription = '';
                     }
 
-                    // Safe part access
+                    if (message.toolCall) {
+                        for (const fc of message.toolCall.functionCalls) {
+                            if (fc.name === 'navigateTo') {
+                                callbacks.onNavigate?.((fc.args as any).view);
+                                this.sessionPromise?.then(session => session.sendToolResponse({
+                                    functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
+                                }));
+                            }
+                        }
+                    }
+
                     const parts = message.serverContent?.modelTurn?.parts;
                     const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
 
@@ -159,27 +178,20 @@ export class GeminiLiveController {
                         this.nextStartTime += audioBuffer.duration;
                         this.sources.add(source);
                     }
-
-                    if (message.serverContent?.interrupted) {
-                        this.stopAudioOutput();
-                        callbacks.onInterrupted?.();
-                    }
                 },
                 onerror: (e) => {
                     console.error('Gemini Live error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
-                onclose: (e) => {
-                    console.log('Gemini Live closed:', e);
-                    this.sessionPromise = null;
-                },
             },
             config: {
-                // ENABLING BOTH MODALITIES TO PREVENT 'EMPTY OUTPUT'
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
-                systemInstruction: { parts: [{ text: DIAGNOSTIC_INSTRUCTION }] },
-                // DISABLE ALL SAFETY TO RULE OUT SILENT REFUSALS
+                responseModalities: [Modality.AUDIO],
+                systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+                tools: [{ functionDeclarations: [navigateToFunction] }],
+                // Critical for hearing: Let the model see text transcription of what it heard
+                inputAudioTranscription: {},
+                // Bypassing safety filters to prevent silent refusals
                 safetySettings: [
                     { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                     { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -198,41 +210,27 @@ export class GeminiLiveController {
     private createBlob(data: Float32Array): Blob {
         const l = data.length;
         const int16 = new Int16Array(l);
-        for (let i = 0; i < l; i++) {
-            int16[i] = data[i] * 32768;
-        }
-        return {
-            data: encode(new Uint8Array(int16.buffer)),
-            mimeType: 'audio/pcm;rate=16000',
-        };
+        for (let i = 0; i < l; i++) int16[i] = data[i] * 32768;
+        return { data: encode(new Uint8Array(int16.buffer)), mimeType: 'audio/pcm;rate=16000' };
     }
 
     private stopAudioOutput() {
-        for (const source of this.sources.values()) {
-            try { source.stop(); } catch (e) { }
-        }
+        for (const source of this.sources.values()) try { source.stop(); } catch (e) { }
         this.sources.clear();
         this.nextStartTime = 0;
     }
 
     public async stopSession() {
         if (this.sessionPromise) {
-            try {
-                const session = await this.sessionPromise;
-                if (session.close) session.close();
-            } catch (e) {
-                console.debug('Error closing session:', e);
-            }
+            try { const s = await this.sessionPromise; if (s.close) s.close(); } catch (e) { }
             this.sessionPromise = null;
         }
         this.scriptProcessor?.disconnect();
-        this.mediaStream?.getTracks().forEach(track => track.stop());
+        this.mediaStream?.getTracks().forEach(t => t.stop());
         this.stopAudioOutput();
         if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
         if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
-        this.inputAudioContext = null;
-        this.outputAudioContext = null;
-        this.mediaStream = null;
-        this.scriptProcessor = null;
+        this.inputAudioContext = null; this.outputAudioContext = null;
+        this.mediaStream = null; this.scriptProcessor = null;
     }
 }
