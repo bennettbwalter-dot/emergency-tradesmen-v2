@@ -1,17 +1,14 @@
 
-export enum AppView {
-    DASHBOARD = 'dashboard',
-    SERVICES = 'services',
-    BLOG = 'blog',
-    PREMIUM = 'premium',
-    CONTACT = 'contact',
-    ANALYTICS = 'analytics',
-    SETTINGS = 'settings',
-    PROFILE = 'profile',
-}
-
 export interface Message {
     text: string;
     role: 'user' | 'model';
     timestamp: Date;
+}
+
+export interface HybridCallbacks {
+    onMessage?: (text: string, role: 'user' | 'model') => void;
+    onNavigate?: (view: string) => void;
+    onVolume?: (volume: number) => void;
+    onError?: (error: any) => void;
+    onStatusChange?: (status: 'Connecting...' | 'Hearing you...' | 'Awaiting Voice...' | 'Thinking...' | 'Speaking...') => void;
 }

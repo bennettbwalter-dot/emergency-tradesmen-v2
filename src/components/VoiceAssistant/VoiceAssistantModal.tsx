@@ -1,8 +1,9 @@
 
-import { Message } from '../../services/gemini/types';
-import { GeminiLiveController } from '../../services/gemini/geminiLiveService';
+import { Message, HybridCallbacks } from '../../services/gemini/types';
+import { HybridController } from '../../services/gemini/geminiLiveService';
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Mic, AlertTriangle, RefreshCw } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     isOpen: boolean;
@@ -13,11 +14,12 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isActive, setIsActive] = useState(false);
-    const [isListening, setIsListening] = useState(false);
+    const [status, setStatus] = useState<string>("Connecting...");
     const [micVolume, setMicVolume] = useState(0);
 
-    const controllerRef = useRef<GeminiLiveController | null>(null);
+    const controllerRef = useRef<HybridController | null>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -27,13 +29,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     useEffect(() => {
         if (isOpen && !isActive) {
-            // Check for API key immediately
-            const key = import.meta.env.VITE_GEMINI_API_KEY;
-            if (!key || key === 'undefined' || key.length < 5) {
-                alert("CRITICAL: VITE_GEMINI_API_KEY IS MISSING IN CLOUDFLARE. The voice assistant will not work until this is added to Environment Variables.");
-                setError("Configuration Error: API Key missing in environment.");
-                return;
-            }
             startSession();
         } else if (!isOpen && isActive) {
             stopSession();
@@ -43,26 +38,27 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     const startSession = async () => {
         setIsActive(true);
-        setIsListening(true);
         setError(null);
         setMessages([]);
         setMicVolume(0);
+        setStatus("Connecting...");
 
-        controllerRef.current = new GeminiLiveController();
+        controllerRef.current = new HybridController();
 
         try {
             await controllerRef.current.startSession({
                 onMessage: (text, role) => {
                     setMessages(prev => [...prev, { text, role, timestamp: new Date() }]);
-                    if (role === 'model') setIsListening(false);
-                    if (role === 'user') setIsListening(true);
+                },
+                onStatusChange: (s) => setStatus(s),
+                onNavigate: (view) => {
+                    console.log(`[Voice] Navigating to ${view}`);
+                    navigate(`/${view}`);
                 },
                 onVolume: (v) => setMicVolume(v),
-                onInterrupted: () => setIsListening(false),
                 onError: (err: any) => {
                     console.error("[Voice] Assistant error:", err);
-                    setError(err?.message || "Connection Error: The AI service is currently unavailable.");
-                    setIsListening(false);
+                    setError(err?.message || "Connection Error: The service is temporarily unavailable.");
                 }
             });
         } catch (e: any) {
@@ -78,7 +74,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             controllerRef.current = null;
         }
         setIsActive(false);
-        setIsListening(false);
         setMicVolume(0);
     };
 
@@ -96,11 +91,11 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-2xl text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
                 </div>
 
-                <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4">
+                <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4 text-[13px]">
                     {!error && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-40">
                             <Mic className="w-10 h-10 text-amber-500" />
-                            <p className="text-[10px] text-amber-500 uppercase font-black">Connecting Dispatch...</p>
+                            <p className="text-[10px] text-amber-500 uppercase font-black tracking-[0.2em]">{status}</p>
                         </div>
                     )}
 
@@ -131,7 +126,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                             ))}
                         </div>
                         <p className="text-[10px] text-amber-500/60 uppercase font-black tracking-widest">
-                            {micVolume > 0.005 ? "Hearing you..." : "Awaitng Voice..."}
+                            {status}
                         </p>
                     </div>
                 )}

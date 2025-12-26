@@ -1,44 +1,8 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
+import { GoogleGenAI, Type, FunctionDeclaration, Schema } from '@google/genai';
+import { createClient } from '@neuphonic/neuphonic-js';
 import { SYSTEM_INSTRUCTION } from './constants';
-
-export function decode(base64: string) {
-    const binaryString = atob(base64);
-    const len = binaryString.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes;
-}
-
-export function encode(bytes: Uint8Array) {
-    let binary = '';
-    const len = bytes.byteLength;
-    for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-    }
-    return btoa(binary);
-}
-
-export async function decodeAudioData(
-    data: Uint8Array,
-    ctx: AudioContext,
-    sampleRate: number,
-    numChannels: number,
-): Promise<AudioBuffer> {
-    const dataInt16 = new Int16Array(data.buffer);
-    const frameCount = dataInt16.length / numChannels;
-    const buffer = ctx.createBuffer(numChannels, frameCount, sampleRate);
-
-    for (let channel = 0; channel < numChannels; channel++) {
-        const channelData = buffer.getChannelData(channel);
-        for (let i = 0; i < frameCount; i++) {
-            channelData[i] = dataInt16[i * numChannels + channel] / 32768.0;
-        }
-    }
-    return buffer;
-}
+import { HybridCallbacks } from './types';
 
 const navigateToFunction: FunctionDeclaration = {
     name: 'navigateTo',
@@ -55,183 +19,198 @@ const navigateToFunction: FunctionDeclaration = {
     } as Schema,
 };
 
-export class GeminiLiveController {
-    private session: any = null;
-    private nextStartTime = 0;
-    private inputAudioContext: AudioContext | null = null;
-    private outputAudioContext: AudioContext | null = null;
-    private outputNode: GainNode | null = null;
-    private inputGainNode: GainNode | null = null;
-    private sources = new Set<AudioBufferSourceNode>();
-    private mediaStream: MediaStream | null = null;
-    private scriptProcessor: ScriptProcessorNode | null = null;
+export class HybridController {
+    private geminiModel: any;
+    private chat: any;
+    private neuphonicClient: any;
+    private audioContext: AudioContext | null = null;
+    private recognition: any | null = null;
+    private isSpeaking = false;
 
-    public async startSession(callbacks: {
-        onMessage?: (text: string, role: 'user' | 'model') => void,
-        onNavigate?: (view: string) => void,
-        onInterrupted?: () => void,
-        onError?: (error: any) => void,
-        onVolume?: (volume: number) => void
-    }) {
-        if (this.session) return;
+    private micStream: MediaStream | null = null;
+    private analyser: AnalyserNode | null = null;
+    private stopVolumeTimer: any = null;
+    private callbacks: HybridCallbacks = {};
 
-        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-        if (!apiKey) {
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
-            return;
+    constructor() {
+        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+        const genAI = new GoogleGenAI(geminiKey);
+        this.geminiModel = genAI.getGenerativeModel({
+            model: 'gemini-1.5-flash',
+            systemInstruction: SYSTEM_INSTRUCTION,
+            tools: [{ functionDeclarations: [navigateToFunction] }]
+        });
+
+        const neuKey = (import.meta.env.VITE_NEUPHONIC_API_KEY || '').trim();
+        if (neuKey) {
+            this.neuphonicClient = createClient({ apiKey: neuKey });
+        }
+    }
+
+    public async startSession(callbacks: HybridCallbacks) {
+        this.callbacks = callbacks;
+        this.chat = this.geminiModel.startChat();
+
+        // Initialize Local Volume Monitoring (for UI feedback)
+        try {
+            this.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const source = audioCtx.createMediaStreamSource(this.micStream);
+            this.analyser = audioCtx.createAnalyser();
+            this.analyser.fftSize = 256;
+            source.connect(this.analyser);
+
+            const bufferLength = this.analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            const updateVolume = () => {
+                if (!this.analyser) return;
+                this.analyser.getByteFrequencyData(dataArray);
+                let sum = 0;
+                for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
+                const average = sum / bufferLength / 255;
+                this.callbacks.onVolume?.(average);
+                this.stopVolumeTimer = requestAnimationFrame(updateVolume);
+            };
+            updateVolume();
+        } catch (err) {
+            console.warn('[Volume] Could not start mic feedback:', err);
         }
 
-        const ai = new GoogleGenAI({ apiKey });
-        // Use the official "models/" prefix for production stability
-        const model = ai.getGenerativeModel({ model: 'models/gemini-2.0-flash-exp' });
+        // Initialize Speech Recognition
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
+            this.recognition.lang = 'en-GB';
 
-        this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
-        this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
-        this.outputNode = this.outputAudioContext.createGain();
-        this.outputNode.connect(this.outputAudioContext.destination);
+            this.recognition.onresult = (event: any) => {
+                const transcript = Array.from(event.results)
+                    .map((result: any) => result[0])
+                    .map((result: any) => result.transcript)
+                    .join('');
 
-        try {
-            this.mediaStream = await navigator.mediaDevices.getUserMedia({
-                audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
-            });
-        } catch (e) {
-            callbacks.onError?.(e);
-            return;
+                if (event.results[0].isFinal) {
+                    this.handleUserInput(transcript);
+                }
+            };
+
+            this.recognition.onerror = (e: any) => {
+                console.error('[SpeechRec] Error:', e);
+                if (e.error !== 'no-speech') this.callbacks.onError?.(e);
+            };
+
+            this.recognition.start();
+            this.callbacks.onStatusChange?.('Awaiting Voice...');
+        } else {
+            this.callbacks.onError?.(new Error("Speech Recognition not supported in this browser."));
         }
 
+        // Initial Greeting
+        this.handleUserInput("Please greet the user now.");
+    }
+
+    private async handleUserInput(text: string) {
+        if (!text.trim()) return;
+
+        // Don't show the 'kickstart' message to user
+        if (text !== "Please greet the user now.") {
+            this.callbacks.onMessage?.(text, 'user');
+        }
+
+        this.callbacks.onStatusChange?.('Thinking...');
+
         try {
-            this.session = await model.live.connect({
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
-                systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-                tools: [{ functionDeclarations: [navigateToFunction] }],
-                safetySettings: [
-                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
-                ],
-                speechConfig: {
-                    voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
-                },
-            });
+            const result = await this.chat.sendMessageStream(text);
+            let fullResponse = '';
 
-            console.log('[Gemini] v5.4 Session Connected');
+            for await (const chunk of result.stream) {
+                const chunkText = chunk.text();
+                fullResponse += chunkText;
 
-            let currentInputTranscription = '';
-            let currentOutputTranscription = '';
-
-            this.session.on('open', () => {
-                console.log('[Gemini] Handshake Open');
-                if (!this.inputAudioContext || !this.mediaStream) return;
-
-                const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                this.inputGainNode = this.inputAudioContext.createGain();
-                this.inputGainNode.gain.value = 5.0; // 500% Volume boost
-
-                this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
-                this.scriptProcessor.onaudioprocess = (e) => {
-                    const inputData = e.inputBuffer.getChannelData(0);
-                    let sum = 0;
-                    for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
-                    callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
-
-                    const pcmBlob = this.createBlob(inputData);
-                    try { this.session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
-                };
-
-                source.connect(this.inputGainNode);
-                this.inputGainNode.connect(this.scriptProcessor);
-                this.scriptProcessor.connect(this.inputAudioContext.destination);
-
-                // DELAYED KICKSTART: Prevents race condition where model receives audio before it's ready to think
-                setTimeout(() => {
-                    console.log('[Gemini] Sending kickstart prompt...');
-                    this.session.send({ text: "Please introduce yourself as the Emergency Tradesmen assistant." });
-                }, 800);
-            });
-
-            this.session.on('message', async (message: LiveServerMessage) => {
-                // Detailed logging of raw message to catch hidden errors
-                console.log('[Gemini] Received message:', message);
-
-                if (message.serverContent?.outputTranscription) {
-                    currentOutputTranscription += message.serverContent.outputTranscription.text;
-                } else if (message.serverContent?.inputTranscription) {
-                    currentInputTranscription += message.serverContent.inputTranscription.text;
-                }
-
-                if (message.serverContent?.turnComplete) {
-                    if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
-                    if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
-                    currentInputTranscription = '';
-                    currentOutputTranscription = '';
-                }
-
-                if (message.toolCall) {
-                    for (const fc of message.toolCall.functionCalls) {
-                        if (fc.name === 'navigateTo') {
-                            callbacks.onNavigate?.((fc.args as any).view);
-                            this.session.sendToolResponse({
-                                functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
-                            });
+                // Handle tool calls (navigation)
+                const calls = chunk.functionCalls();
+                if (calls) {
+                    for (const call of calls) {
+                        if (call.name === 'navigateTo') {
+                            this.callbacks.onNavigate?.((call.args as any).view);
                         }
                     }
                 }
+            }
 
-                const parts = message.serverContent?.modelTurn?.parts;
-                const base64Audio = parts?.[0]?.inlineData?.data;
+            if (fullResponse) {
+                this.callbacks.onMessage?.(fullResponse, 'model');
+                await this.speak(fullResponse);
+            }
 
-                if (base64Audio && this.outputAudioContext) {
-                    if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
-                    this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
-                    const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
-                    const source = this.outputAudioContext.createBufferSource();
-                    source.buffer = audioBuffer;
-                    source.connect(this.outputNode!);
-                    source.addEventListener('ended', () => this.sources.delete(source));
-                    source.start(this.nextStartTime);
-                    this.nextStartTime += audioBuffer.duration;
-                    this.sources.add(source);
-                }
-            });
-
-            this.session.on('error', (e: any) => {
-                console.error('[Gemini] Session Error:', e);
-                callbacks.onError?.(e);
-                this.stopSession();
-            });
-
-        } catch (e: any) {
-            console.error('[Gemini] Connection failed:', e);
-            callbacks.onError?.(e);
-            this.stopSession();
+            this.callbacks.onStatusChange?.('Awaiting Voice...');
+        } catch (e) {
+            console.error('[Gemini] Chat Error:', e);
+            this.callbacks.onError?.(e);
         }
     }
 
-    private createBlob(data: Float32Array): Blob {
-        const l = data.length;
-        const int16 = new Int16Array(l);
-        for (let i = 0; i < l; i++) int16[i] = data[i] * 32768;
-        return { data: encode(new Uint8Array(int16.buffer)), mimeType: 'audio/pcm;rate=16000' };
+    private async speak(text: string) {
+        if (!this.neuphonicClient) {
+            console.warn("Neuphonic key missing, falling back to silent mode.");
+            return;
+        }
+
+        this.callbacks.onStatusChange?.('Speaking...');
+        this.isSpeaking = true;
+
+        try {
+            const tts = await this.neuphonicClient.tts.subscribe({
+                voice_id: 'ebde0efd-652f-4886-905c-3004464c01f6', // High quality British Female
+                model: 'neu_hq'
+            });
+
+            // Play audio chunks as they arrive
+            tts.on('data', (audio: ArrayBuffer) => {
+                this.playAudioChunk(audio);
+            });
+
+            tts.send({ text });
+
+            // Wait a bit for the audio to finish (approximate)
+            await new Promise(resolve => setTimeout(resolve, text.length * 60));
+        } catch (e) {
+            console.error('[Neuphonic] Error:', e);
+        } finally {
+            this.isSpeaking = false;
+        }
     }
 
-    private stopAudioOutput() {
-        for (const source of this.sources.values()) try { source.stop(); } catch (e) { }
-        this.sources.clear();
-        this.nextStartTime = 0;
+    private async playAudioChunk(data: ArrayBuffer) {
+        if (!this.audioContext) {
+            this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        }
+
+        const buffer = await this.audioContext.decodeAudioData(data);
+        const source = this.audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(this.audioContext.destination);
+        source.start();
     }
 
     public async stopSession() {
-        if (this.session) {
-            try { this.session.close(); } catch (e) { }
-            this.session = null;
+        if (this.micStream) {
+            this.micStream.getTracks().forEach(t => t.stop());
+            this.micStream = null;
         }
-        this.scriptProcessor?.disconnect();
-        this.mediaStream?.getTracks().forEach(t => t.stop());
-        this.stopAudioOutput();
-        if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
-        if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
-        this.inputAudioContext = null; this.outputAudioContext = null;
-        this.mediaStream = null; this.scriptProcessor = null;
+        if (this.stopVolumeTimer) {
+            cancelAnimationFrame(this.stopVolumeTimer);
+        }
+        this.analyser = null;
+        if (this.recognition) {
+            this.recognition.stop();
+            this.recognition = null;
+        }
+        if (this.audioContext) {
+            await this.audioContext.close();
+            this.audioContext = null;
+        }
     }
 }
