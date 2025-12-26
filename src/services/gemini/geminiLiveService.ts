@@ -1,8 +1,6 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-
-// STRIPPED SYSTEM INSTRUCTION: No emojis, no complex symbols. Pure text.
-const CLEAN_SYSTEM_INSTRUCTION = "You are a professional emergency assistance voice agent for emergencytradesmen.net. Your tone is calm and reassuring. MANDATORY GREETING: You must start the session by saying exactly: 'Hey this is Emergency Tradesmen! How can I help you today?' After the greeting, your role is to help the user identify if they need a plumber, electrician, locksmith, or other emergency trade. You can help them navigate the site using the navigateTo tool.";
+import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
+import { SYSTEM_INSTRUCTION } from './constants';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -76,6 +74,11 @@ export class GeminiLiveController {
         if (this.sessionPromise) return;
 
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+        if (!apiKey) {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
+            return;
+        }
+
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -94,9 +97,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // Initialize the session connection with SDK-compatible structures
+        // FULL SYNC WITH ZIP EXPORT LOGIC
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.0-flash-exp', // Stable model to ensure basic connection
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -116,7 +119,7 @@ export class GeminiLiveController {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
                             } catch (err) {
-                                // Silently handle send errors
+                                // Silently handle
                             }
                         });
                     };
@@ -145,11 +148,11 @@ export class GeminiLiveController {
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
                                     session.sendToolResponse({
-                                        functionResponses: [{
+                                        functionResponses: { // OBJECT FORMAT AS PER ZIP
                                             id: fc.id,
                                             name: fc.name,
                                             response: { result: "ok" },
-                                        }]
+                                        }
                                     });
                                 });
                             }
@@ -188,17 +191,11 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                // USING OFFICIAL CONTENT OBJECT FORMAT FOR SYSTEM INSTRUCTION
-                systemInstruction: { parts: [{ text: CLEAN_SYSTEM_INSTRUCTION }] },
+                systemInstruction: SYSTEM_INSTRUCTION, // String format
                 responseModalities: [Modality.AUDIO],
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // EXPLICIT SAFETY BYPASS
-                safetySettings: [
-                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
-                ],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
