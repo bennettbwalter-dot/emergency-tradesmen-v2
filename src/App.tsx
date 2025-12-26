@@ -21,6 +21,8 @@ import { initGA } from "@/lib/analytics";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import FloatingVoiceTrigger from "@/components/VoiceAssistant/FloatingVoiceTrigger";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
@@ -177,6 +179,9 @@ const App = () => {
                       </Routes>
                       <BottomNav />
                       <LiveChat />
+                      <ErrorBoundary>
+                        <FloatingVoiceTrigger />
+                      </ErrorBoundary>
                       <FloatingBackButton />
                       <CustomCursor />
                     </Suspense>

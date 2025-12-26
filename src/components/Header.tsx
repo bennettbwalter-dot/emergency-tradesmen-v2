@@ -5,8 +5,6 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/UserMenu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import VoiceTrigger from "./VoiceAssistant/VoiceTrigger";
-import ErrorBoundary from "./ErrorBoundary";
 
 export function Header() {
   return (
@@ -41,11 +39,6 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <ErrorBoundary>
-                <VoiceTrigger />
-              </ErrorBoundary>
-            </div>
             <UserMenu />
             <ModeToggle />
 
@@ -64,11 +57,6 @@ export function Header() {
                     <span className="text-gold">Trades</span>
                   </SheetTitle>
                   <nav className="flex flex-col gap-6">
-                    <div className="md:hidden w-full flex justify-center pb-2">
-                      <ErrorBoundary>
-                        <VoiceTrigger />
-                      </ErrorBoundary>
-                    </div>
                     <Link to="/about" className="text-lg font-medium hover:text-gold transition-colors block">
                       About
                     </Link>
