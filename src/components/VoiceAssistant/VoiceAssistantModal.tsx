@@ -746,6 +746,11 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <p className="text-sm font-bold">Life Threatening Danger? Call 999 immediately.</p>
                     </div>
                 )}
+                {/* Debug / Version Info */}
+                <div className="absolute bottom-2 text-xs text-slate-500 font-mono flex flex-col gap-1 items-center">
+                    <span>v3.0 Hybrid | {voices.length} Native Voices</span>
+                    <span className="text-yellow-400">{activeVoiceName}</span>
+                </div>
             </div>
         </div>
     );
