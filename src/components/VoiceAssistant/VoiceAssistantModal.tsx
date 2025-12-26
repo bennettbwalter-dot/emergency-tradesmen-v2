@@ -31,8 +31,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     // Handle Modal Open/Close for session management
     useEffect(() => {
-        let mounted = true;
-
         if (isOpen && !isActive) {
             startGeminiSession();
         } else if (!isOpen && isActive) {
@@ -40,8 +38,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         }
 
         return () => {
-            mounted = false;
-            // Cleanup on unmount if taking too long
             if (isActive) stopGeminiSession();
         };
     }, [isOpen]);
@@ -97,9 +93,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             });
             // Initial State after connection
             setStatus('listening');
-        } catch (e) {
+        } catch (e: any) {
             console.error(e);
-            setError("Failed to initialize AI. Please check your network.");
+            const msg = e?.message || "Failed to initialize AI.";
+            setError(`Error: ${msg}. Please check your network or VITE_GEMINI_API_KEY.`);
             setIsActive(false);
         }
     };
@@ -126,6 +123,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <span className="font-bold text-white text-sm tracking-wide">
                             {status === 'listening' ? 'Listening...' : status === 'speaking' ? 'Agent Speaking' : 'Standby'}
                         </span>
+                        <span className="text-[10px] text-slate-500 font-mono">v1.1</span>
                     </div>
                     <button
                         onClick={onClose}
@@ -147,17 +145,25 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     )}
 
                     {error && (
-                        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-sm">
-                            <AlertTriangle className="w-8 h-8 mx-auto mb-2 opacity-80" />
-                            {error}
+                        <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-4">
+                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm w-full">
+                                <AlertTriangle className="w-8 h-8 mx-auto mb-2 opacity-80" />
+                                {error}
+                            </div>
+                            <button
+                                onClick={startGeminiSession}
+                                className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full text-sm font-bold transition-colors"
+                            >
+                                Try Reconnecting
+                            </button>
                         </div>
                     )}
 
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${msg.role === 'user'
-                                ? 'bg-amber-500 text-slate-900 font-medium rounded-tr-none'
-                                : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
+                                    ? 'bg-amber-500 text-slate-900 font-medium rounded-tr-none'
+                                    : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
                                 }`}>
                                 {msg.text}
                             </div>
@@ -167,14 +173,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 {/* Footer Visualizer */}
                 <div className="p-6 bg-slate-900 border-t border-slate-800 flex justify-center items-center h-24">
-                    {/* Dynamic Bars based on status */}
                     <div className="flex items-center gap-1 h-8">
                         {[...Array(5)].map((_, i) => (
                             <div
                                 key={i}
                                 className={`w-1.5 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-8 animate-bounce' :
-                                    status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
-                                        'bg-slate-700 h-2'
+                                        status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
+                                            'bg-slate-700 h-2'
                                     }`}
                                 style={{
                                     animationDelay: `${i * 0.1}s`
