@@ -285,7 +285,7 @@ If a tradesperson is rude or evasive about costs, they don't meet our standards.
 ### Ready to find a verified pro?
 We’ve done the hard work so you don’t have to. By using **Emergency Tradesmen**, you are choosing safety, quality, and peace of mind.
 
-**Are you a trade professional?** If you take pride in your work and can pass these 5 steps, we’d love to have you. [Join our network of trusted experts today](/business/claim).`,
+**Are you a trade professional?** If you take pride in your work and can pass these 5 steps, we’d love to have you. [Join our network of trusted experts today](/tradesmen).`,
         cover_image: '/blog/verification-badge.png',
         published: true,
         published_at: new Date(Date.now() - 86400000).toISOString()
