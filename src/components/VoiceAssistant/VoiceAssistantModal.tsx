@@ -89,6 +89,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     // Steps: initial -> asking_clarification -> asking_location -> navigating
     const [conversationStep, setConversationStep] = useState<'initial' | 'asking_clarification' | 'asking_location' | 'navigating'>('initial');
     const [selectedTrade, setSelectedTrade] = useState<{ id: string; name: string; routeKey: string } | null>(null);
+    const [activeVoiceName, setActiveVoiceName] = useState<string>('Initializing...');
 
     const recognitionRef = useRef<SpeechRecognition | null>(null);
     const synthRef = useRef<SpeechSynthesis | null>(null);
@@ -266,8 +267,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             } else {
                 utterance.rate = 1.0;
             }
+            setActiveVoiceName(voice.name);
         } else {
             console.warn("No GB voice found");
+            setActiveVoiceName('Fallback (System Default)');
         }
 
         utterance.pitch = 1.0;
@@ -679,8 +682,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     </div>
                 )}
                 {/* Debug / Version Info */}
-                <div className="absolute bottom-2 text-xs text-slate-500 font-mono">
-                    v2.0 Native | Voices: {voices.length} | {status}
+                <div className="absolute bottom-2 text-xs text-slate-500 font-mono flex flex-col gap-1 items-center">
+                    <span>v2.1 Voice Debug</span>
+                    <span>Selected: <span className="text-yellow-400">{activeVoiceName}</span></span>
+                    <span>Total Voices: {voices.length}</span>
                 </div>
             </div>
         </div>
