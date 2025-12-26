@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Mic, AlertTriangle } from 'lucide-react';
+import { X, Mic, AlertTriangle, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GeminiLiveController } from '../../services/gemini/geminiLiveService';
 import { Message } from '../../services/gemini/types';
@@ -10,26 +10,24 @@ interface Props {
     onClose: () => void;
 }
 
+const BUILD_ID = "v1.2-" + Date.now();
+
 const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isActive, setIsActive] = useState(false);
-
-    // Status visualizer state
     const [status, setStatus] = useState<'idle' | 'listening' | 'speaking' | 'processing'>('idle');
 
     const controllerRef = useRef<GeminiLiveController | null>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
-    // Auto-scroll to bottom of chat
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
     }, [messages]);
 
-    // Handle Modal Open/Close for session management
     useEffect(() => {
         if (isOpen && !isActive) {
             startGeminiSession();
@@ -48,55 +46,46 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         setError(null);
         setMessages([]);
 
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        console.log(`[Voice] Initializing ${BUILD_ID}...`);
+
+        if (!apiKey) {
+            console.error("[Voice] API Key Missing! Check Cloudflare Environment Variables for VITE_GEMINI_API_KEY");
+            setError("VITE_GEMINI_API_KEY is missing. Check Cloudflare Settings.");
+            setIsActive(false);
+            return;
+        }
+
         controllerRef.current = new GeminiLiveController();
 
         try {
             await controllerRef.current.startSession({
                 onMessage: (text, role) => {
                     setMessages(prev => [...prev, { text, role, timestamp: new Date() }]);
-
-                    if (role === 'model') {
-                        setStatus('speaking');
-                    } else if (role === 'user') {
-                        setStatus('processing');
-                    }
+                    if (role === 'model') setStatus('speaking');
+                    else if (role === 'user') setStatus('processing');
                 },
                 onNavigate: (view) => {
                     const routeMap: Record<string, string> = {
-                        'dashboard': '/',
-                        'services': '/services',
-                        'blog': '/blog',
-                        'premium': '/premium',
-                        'contact': '/contact',
-                        'analytics': '/analytics',
-                        'settings': '/profile',
-                        'profile': '/profile'
+                        'dashboard': '/', 'services': '/services', 'blog': '/blog',
+                        'premium': '/premium', 'contact': '/contact', 'analytics': '/',
+                        'settings': '/profile', 'profile': '/profile'
                     };
-
                     const target = routeMap[view.toLowerCase()] || '/';
-                    setMessages(prev => [...prev, {
-                        text: `Navigating to ${view}...`,
-                        role: 'model',
-                        timestamp: new Date()
-                    }]);
+                    setMessages(prev => [...prev, { text: `Navigating to ${view}...`, role: 'model', timestamp: new Date() }]);
                     navigate(target);
                 },
-                onInterrupted: () => {
-                    setStatus('listening');
-                },
+                onInterrupted: () => setStatus('listening'),
                 onError: (err: any) => {
-                    console.error("Gemini Error:", err);
-                    const msg = err?.message || "Unknown Connection Error";
-                    setError(`Error: ${msg}`);
+                    console.error("[Voice] Session Error:", err);
+                    setError(err?.message || "Connection Failed (Check API Key Access)");
                     setStatus('idle');
                 }
             });
-            // Initial State after connection
             setStatus('listening');
         } catch (e: any) {
-            console.error(e);
-            const msg = e?.message || "Failed to initialize AI.";
-            setError(`Error: ${msg}. Please check your network or VITE_GEMINI_API_KEY.`);
+            console.error("[Voice] Initialization Crash:", e);
+            setError(e?.message || "Internal AI Error");
             setIsActive(false);
         }
     };
@@ -113,7 +102,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[600px]">
 
                 {/* Header */}
@@ -123,12 +112,9 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <span className="font-bold text-white text-sm tracking-wide">
                             {status === 'listening' ? 'Listening...' : status === 'speaking' ? 'Agent Speaking' : 'Standby'}
                         </span>
-                        <span className="text-[10px] text-slate-500 font-mono">v1.1</span>
+                        <span className="text-[10px] text-slate-500 font-mono opacity-50">{BUILD_ID}</span>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 hover:bg-slate-700 rounded-full transition-colors text-slate-400 hover:text-white"
-                    >
+                    <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-full text-slate-400 hover:text-white">
                         <X className="w-5 h-5" />
                     </button>
                 </div>
@@ -137,24 +123,28 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-slate-900 to-slate-950">
                     {messages.length === 0 && !error && (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-50">
-                            <div className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center">
+                            <div className="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center animate-pulse">
                                 <Mic className="w-10 h-10 text-slate-400" />
                             </div>
-                            <p className="text-slate-400 text-sm">Listening for emergency...</p>
+                            <p className="text-slate-400 text-sm italic">Connecting to Gemini Live...</p>
                         </div>
                     )}
 
                     {error && (
-                        <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-4">
-                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm w-full">
-                                <AlertTriangle className="w-8 h-8 mx-auto mb-2 opacity-80" />
-                                {error}
+                        <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-6 animate-in zoom-in duration-300">
+                            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center border border-red-500/20 text-red-500">
+                                <AlertTriangle className="w-10 h-10" />
+                            </div>
+                            <div className="space-y-2">
+                                <h4 className="text-white font-bold">System Connection Error</h4>
+                                <p className="text-red-400 text-sm px-4">{error}</p>
                             </div>
                             <button
                                 onClick={startGeminiSession}
-                                className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-full text-sm font-bold transition-colors"
+                                className="flex items-center gap-2 px-8 py-3 bg-white text-slate-900 rounded-full font-black uppercase text-xs tracking-widest hover:bg-slate-200 transition-all shadow-xl"
                             >
-                                Try Reconnecting
+                                <RefreshCw className="w-4 h-4" />
+                                Force Retry
                             </button>
                         </div>
                     )}
@@ -173,17 +163,15 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 {/* Footer Visualizer */}
                 <div className="p-6 bg-slate-900 border-t border-slate-800 flex justify-center items-center h-24">
-                    <div className="flex items-center gap-1 h-8">
+                    <div className="flex items-center gap-1.5 h-10">
                         {[...Array(5)].map((_, i) => (
                             <div
                                 key={i}
-                                className={`w-1.5 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-8 animate-bounce' :
+                                className={`w-2 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-10 animate-bounce shadow-[0_0_15px_rgba(245,158,11,0.5)]' :
                                         status === 'listening' ? 'bg-green-500 h-4 animate-pulse' :
-                                            'bg-slate-700 h-2'
+                                            'bg-slate-800 h-2'
                                     }`}
-                                style={{
-                                    animationDelay: `${i * 0.1}s`
-                                }}
+                                style={{ animationDelay: `${i * 0.15}s` }}
                             />
                         ))}
                     </div>
