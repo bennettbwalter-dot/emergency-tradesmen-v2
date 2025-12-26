@@ -220,13 +220,14 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const getBritishVoice = () => {
         const available = voices.length > 0 ? voices : (window.speechSynthesis?.getVoices() || []);
 
-        // Priority List for "British Woman"
+        // Priority List based on User feedback
         const preferred = [
+            'English United Kingdom',   // User Identified Preferred (iOS/Safari generic)
+            'English (United Kingdom)', // Variation
             'Google UK English Female', // Android / Chrome
+            'Martha',                   // iOS Premium
+            'Catherine',                // iOS Premium
             'Microsoft Hazel',          // Windows
-            'Martha',                   // iOS
-            'Catherine',                // iOS
-            'Nora'                      // iOS (sometimes available)
         ];
 
         for (const name of preferred) {
@@ -681,31 +682,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <p className="text-sm font-bold">Life Threatening Danger? Call 999 immediately.</p>
                     </div>
                 )}
-                {/* Debug / Version Info */}
-                <div className="absolute bottom-2 text-xs text-slate-500 font-mono flex flex-col gap-1 items-center z-50">
-                    <span>v2.2 Voice Debug | Total: {voices.length}</span>
-                    <span>Selected: <span className="text-yellow-400">{activeVoiceName}</span></span>
-
-                    {/* Debug Voice Switcher */}
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            const currentIdx = voices.findIndex(v => v.name === activeVoiceName);
-                            const nextIdx = (currentIdx + 1) % voices.length;
-                            const nextVoice = voices[nextIdx];
-                            if (nextVoice) {
-                                setActiveVoiceName(nextVoice.name);
-                                // Force speak sample
-                                const u = new SpeechSynthesisUtterance("Testing voice.");
-                                u.voice = nextVoice;
-                                window.speechSynthesis.speak(u);
-                            }
-                        }}
-                        className="mt-1 px-3 py-1 bg-white/10 rounded-full text-white hover:bg-white/20 border border-white/20"
-                    >
-                        Try Next Voice ➡️
-                    </button>
-                </div>
             </div>
         </div>
     );
