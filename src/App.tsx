@@ -173,6 +173,7 @@ const App = () => {
                           <Route path="export" element={<DataExportPage />} />
                         </Route>
 
+                        <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
                         <Route path="/:tradePath/:city" element={<TradeCityPage />} />
                         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                         <Route path="*" element={<NotFound />} />
