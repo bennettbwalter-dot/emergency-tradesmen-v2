@@ -73,8 +73,12 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
+        // DETECT API KEY - LOUD ERROR IF MISSING
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-        if (!apiKey) {
+        if (!apiKey || apiKey === 'undefined' || apiKey === 'null') {
+            const msg = "CRITICAL: VITE_GEMINI_API_KEY IS MISSING! Gemini Live will NOT work on Cloudflare until you add this variable.";
+            console.error(msg);
+            alert(msg);
             callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
@@ -97,9 +101,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // FULL SYNC WITH ZIP EXPORT LOGIC
+        // CONNECT TO STABLE MODEL
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Stable model to ensure basic connection
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -108,6 +112,11 @@ export class GeminiLiveController {
                     if (this.inputAudioContext.state === 'suspended') {
                         this.inputAudioContext.resume();
                     }
+
+                    // EXPLICIT KICKSTART
+                    this.sessionPromise?.then((session) => {
+                        session.send({ text: "Please greet the user now." });
+                    });
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
@@ -119,7 +128,7 @@ export class GeminiLiveController {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
                             } catch (err) {
-                                // Silently handle
+                                // Ignore
                             }
                         });
                     };
@@ -148,7 +157,7 @@ export class GeminiLiveController {
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
                                     session.sendToolResponse({
-                                        functionResponses: { // OBJECT FORMAT AS PER ZIP
+                                        functionResponses: {
                                             id: fc.id,
                                             name: fc.name,
                                             response: { result: "ok" },
@@ -191,8 +200,8 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                systemInstruction: SYSTEM_INSTRUCTION, // String format
-                responseModalities: [Modality.AUDIO],
+                responseModalities: [Modality.AUDIO, Modality.TEXT],
+                systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
                 inputAudioTranscription: {},
                 outputAudioTranscription: {},
