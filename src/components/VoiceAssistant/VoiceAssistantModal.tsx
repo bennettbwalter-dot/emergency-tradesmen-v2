@@ -53,25 +53,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     const recognitionRef = useRef<SpeechRecognition | null>(null);
     const synthRef = useRef<SpeechSynthesis | null>(null);
-    const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
     const navigate = useNavigate();
-
-    // Helper to get British voice
-    const getBritishVoice = (): SpeechSynthesisVoice | null => {
-        if (!window.speechSynthesis) return null;
-        const voices = window.speechSynthesis.getVoices();
-
-        // Priority 1: Google UK English Female (often best quality on Chrome)
-        const googleUK = voices.find(v => v.name === 'Google UK English Female');
-        if (googleUK) return googleUK;
-
-        // Priority 2: Any 'en-GB' voice
-        const gbVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
-        if (gbVoice) return gbVoice;
-
-        // Fallback: Default
-        return null;
-    };
 
     // Initialize Speech APIs
     useEffect(() => {
@@ -86,25 +68,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         // Initialize Speech Synthesis
         if ('speechSynthesis' in window) {
             synthRef.current = window.speechSynthesis;
-
-            // Handle voice loading (async in Chrome)
-            const loadVoices = () => {
-                const voice = getBritishVoice();
-                if (voice) {
-                    selectedVoiceRef.current = voice;
-                    // Only start talking if we haven't already
-                    if (status === 'idle') startInteraction();
-                } else {
-                    // If voices aren't loaded yet, try again on change
-                    if (window.speechSynthesis.getVoices().length > 0) {
-                        // Voices loaded but no UK voice found, proceed with default
-                        startInteraction();
-                    }
-                }
-            };
-
-            loadVoices();
-            window.speechSynthesis.onvoiceschanged = loadVoices;
         }
 
         // Initialize Speech Recognition
@@ -136,21 +99,14 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
             recognitionRef.current = recognition;
 
-            // If voices were already loaded sync, interaction started in loadVoices. 
-            // If not, it starts when voices load.
-            // Safety fallback: if no onvoiceschanged fires in 500ms, start anyway
-            setTimeout(() => {
-                if (status === 'idle') startInteraction();
-            }, 500);
+            // Start interaction immediately
+            startInteraction();
 
         } else {
             setFeedbackMessage('Voice recognition not supported in this browser.');
         }
 
         return () => {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.onvoiceschanged = null;
-            }
             stopListening();
             stopSpeaking();
         };
@@ -195,13 +151,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         if (synthRef.current) {
             setStatus('speaking');
             const utterance = new SpeechSynthesisUtterance(text);
-
-            // Explicitly set the voice object
-            if (selectedVoiceRef.current) {
-                utterance.voice = selectedVoiceRef.current;
-            }
-            utterance.lang = 'en-GB'; // Fallback hint
-
+            utterance.lang = 'en-GB'; // This is the standard "GitHub version" logic
             utterance.onend = () => {
                 if (onEnd) onEnd();
             };
