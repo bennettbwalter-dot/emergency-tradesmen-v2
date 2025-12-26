@@ -661,6 +661,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <p className="text-sm font-bold">Life Threatening Danger? Call 999 immediately.</p>
                     </div>
                 )}
+                {/* Debug / Version Info */}
+                <div className="absolute bottom-2 text-xs text-slate-500 font-mono">
+                    v2.0 Native | Voices: {voices.length} | {status}
+                </div>
             </div>
         </div>
     );
