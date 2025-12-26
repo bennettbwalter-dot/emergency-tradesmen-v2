@@ -1,23 +1,17 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
 
-const SYSTEM_INSTRUCTION = `You are a calm, friendly, UK-based emergency assistance voice agent for emergencytradesmen.net.
-MANDATORY GREETING: You MUST open the conversation with exactly: "Hey this is Emergency Tradesmen! How can I help you today?"
-Your role is to help users find the correct emergency tradesperson.`;
+// STRIPPED SYSTEM INSTRUCTION: No emojis, no complex symbols. Pure text.
+const CLEAN_SYSTEM_INSTRUCTION = "You are a professional emergency assistance voice agent for emergencytradesmen.net. Your tone is calm and reassuring. MANDATORY GREETING: You must start the session by saying exactly: 'Hey this is Emergency Tradesmen! How can I help you today?' After the greeting, your role is to help the user identify if they need a plumber, electrician, locksmith, or other emergency trade. You can help them navigate the site using the navigateTo tool.";
 
 export function decode(base64: string) {
-    try {
-        const binaryString = atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes;
-    } catch (e) {
-        console.error("Base64 decode failed:", e);
-        return new Uint8Array(0);
+    const binaryString = atob(base64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
     }
+    return bytes;
 }
 
 export function encode(bytes: Uint8Array) {
@@ -82,13 +76,6 @@ export class GeminiLiveController {
         if (this.sessionPromise) return;
 
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-        if (!apiKey) {
-            console.error("DEBUG: VITE_GEMINI_API_KEY is missing!");
-            callbacks.onError?.(new Error("MISSING_API_KEY"));
-            return;
-        }
-
-        console.log("DEBUG: Initializing Gemini Live with key:", apiKey.substring(0, 5) + "...");
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -107,20 +94,12 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // SAFETY SETTINGS: Disable all filtering to prevent 'empty output' from safety refusals
-        const safetySettings = [
-            { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-            { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-            { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-            { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-            { category: HarmCategory.HARM_CATEGORY_CIVIC_INTEGRITY, threshold: HarmBlockThreshold.BLOCK_NONE },
-        ];
-
+        // Initialize the session connection with SDK-compatible structures
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using the most stable model for now
+            model: 'gemini-2.0-flash-exp',
             callbacks: {
                 onopen: () => {
-                    console.log('DEBUG: Session Opened Successfully');
+                    console.log('Gemini Live session opened');
                     if (!this.inputAudioContext || !this.mediaStream) return;
 
                     if (this.inputAudioContext.state === 'suspended') {
@@ -137,7 +116,7 @@ export class GeminiLiveController {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
                             } catch (err) {
-                                // Silently ignore audio send errors during transition
+                                // Silently handle send errors
                             }
                         });
                     };
@@ -146,8 +125,6 @@ export class GeminiLiveController {
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
                 },
                 onmessage: async (message: LiveServerMessage) => {
-                    console.log("DEBUG: Received Message:", JSON.stringify(message).substring(0, 100));
-
                     if (message.serverContent?.outputTranscription) {
                         currentOutputTranscription += message.serverContent.outputTranscription.text;
                     } else if (message.serverContent?.inputTranscription) {
@@ -168,11 +145,11 @@ export class GeminiLiveController {
                                 callbacks.onNavigate?.(view);
                                 this.sessionPromise?.then((session) => {
                                     session.sendToolResponse({
-                                        functionResponses: {
+                                        functionResponses: [{
                                             id: fc.id,
                                             name: fc.name,
                                             response: { result: "ok" },
-                                        }
+                                        }]
                                     });
                                 });
                             }
@@ -185,17 +162,14 @@ export class GeminiLiveController {
                             this.outputAudioContext.resume();
                         }
                         this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
-                        const audioData = decode(base64Audio);
-                        if (audioData.length > 0) {
-                            const audioBuffer = await decodeAudioData(audioData, this.outputAudioContext, 24000, 1);
-                            const source = this.outputAudioContext.createBufferSource();
-                            source.buffer = audioBuffer;
-                            source.connect(this.outputNode!);
-                            source.addEventListener('ended', () => this.sources.delete(source));
-                            source.start(this.nextStartTime);
-                            this.nextStartTime += audioBuffer.duration;
-                            this.sources.add(source);
-                        }
+                        const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
+                        const source = this.outputAudioContext.createBufferSource();
+                        source.buffer = audioBuffer;
+                        source.connect(this.outputNode!);
+                        source.addEventListener('ended', () => this.sources.delete(source));
+                        source.start(this.nextStartTime);
+                        this.nextStartTime += audioBuffer.duration;
+                        this.sources.add(source);
                     }
 
                     if (message.serverContent?.interrupted) {
@@ -204,21 +178,27 @@ export class GeminiLiveController {
                     }
                 },
                 onerror: (e) => {
-                    console.error('DEBUG: Gemini Live Socket ERROR:', e);
+                    console.error('Gemini Live connection error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
                 onclose: (e) => {
-                    console.log('DEBUG: Session Closed:', e);
+                    console.log('Gemini Live session closed:', e);
                     this.sessionPromise = null;
                 },
             },
             config: {
+                // USING OFFICIAL CONTENT OBJECT FORMAT FOR SYSTEM INSTRUCTION
+                systemInstruction: { parts: [{ text: CLEAN_SYSTEM_INSTRUCTION }] },
                 responseModalities: [Modality.AUDIO],
-                systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // @ts-ignore - Safety settings might not be in the exact type definition of LiveConfig yet but SDK supports it
-                safetySettings: safetySettings,
+                // EXPLICIT SAFETY BYPASS
+                safetySettings: [
+                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
+                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
+                ],
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
