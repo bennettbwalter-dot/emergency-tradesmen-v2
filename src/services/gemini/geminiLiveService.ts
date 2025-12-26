@@ -1,8 +1,6 @@
 
-import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema, HarmCategory, HarmBlockThreshold } from '@google/genai';
-
-// Clean, simple instructions to rule out safety refusals
-const MINIMAL_INSTRUCTION = "You are a professional UK emergency tradesman assistant. GREETING: Start with 'Hey this is Emergency Tradesmen! How can I help you today?'. Stay calm and helpful. If the user asks for a trade, use the navigateTo tool.";
+import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
+import { SYSTEM_INSTRUCTION } from './constants';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -76,13 +74,14 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
+        // Use Vite Key
         const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-        if (!apiKey) {
+        if (!apiKey || apiKey === 'undefined') {
             callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
 
-        const ai = new GoogleGenAI({ apiKey });
+        const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -90,8 +89,11 @@ export class GeminiLiveController {
         this.outputNode.connect(this.outputAudioContext.destination);
 
         try {
-            this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
+            this.mediaStream = await navigator.mediaDevices.getUserMedia({
+                audio: { echoCancellation: true, noiseSuppression: true }
+            });
         } catch (e) {
+            console.error('Microphone access denied:', e);
             callbacks.onError?.(e);
             return;
         }
@@ -99,33 +101,43 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
+        // EXACT 1:1 CLONE OF STEP 1578
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Using the stable 2.0 model for debugging empty output
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
                     if (!this.inputAudioContext || !this.mediaStream) return;
-                    if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
+
+                    if (this.inputAudioContext.state === 'suspended') {
+                        this.inputAudioContext.resume();
+                    }
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
+
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
+
+                        // Volume Meter
                         let sum = 0;
                         for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
                         callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
 
                         const pcmBlob = this.createBlob(inputData);
                         this.sessionPromise?.then((session) => {
-                            try { session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
+                            try {
+                                session.sendRealtimeInput({ media: pcmBlob });
+                            } catch (err) {
+                                console.debug('Failed to send audio input:', err);
+                            }
                         });
                     };
 
                     source.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
 
-                    // Force an initial response
-                    this.sessionPromise.then(s => s.send({ text: "Hello, please introduce yourself." }));
+                    // ABSOLUTELY NO INITIAL TEXT - MATCHING ZIP EXACTLY
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -145,16 +157,27 @@ export class GeminiLiveController {
                         for (const fc of message.toolCall.functionCalls) {
                             if (fc.name === 'navigateTo') {
                                 callbacks.onNavigate?.((fc.args as any).view);
-                                this.sessionPromise?.then(session => session.sendToolResponse({
-                                    functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
-                                }));
+                                this.sessionPromise?.then((session) => {
+                                    session.sendToolResponse({
+                                        functionResponses: { // OBJECT FORMAT
+                                            id: fc.id,
+                                            name: fc.name,
+                                            response: { result: "ok" },
+                                        }
+                                    });
+                                });
                             }
                         }
                     }
 
-                    const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
+                    // ZIP PROPERTY ACCESS
+                    const parts = message.serverContent?.modelTurn?.parts;
+                    const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
+
                     if (base64Audio && this.outputAudioContext) {
-                        if (this.outputAudioContext.state === 'suspended') this.outputAudioContext.resume();
+                        if (this.outputAudioContext.state === 'suspended') {
+                            this.outputAudioContext.resume();
+                        }
                         this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
                         const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
                         const source = this.outputAudioContext.createBufferSource();
@@ -165,25 +188,28 @@ export class GeminiLiveController {
                         this.nextStartTime += audioBuffer.duration;
                         this.sources.add(source);
                     }
+
+                    if (message.serverContent?.interrupted) {
+                        this.stopAudioOutput();
+                        callbacks.onInterrupted?.();
+                    }
                 },
                 onerror: (e) => {
-                    console.error('Gemini Live error:', e);
+                    console.error('Gemini Live connection error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
+                onclose: (e) => {
+                    console.log('Gemini Live session closed:', e);
+                    this.sessionPromise = null;
+                },
             },
             config: {
-                // ENABLING BOTH MODALITIES: Crucial to fix 'empty output' error
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
-                systemInstruction: { parts: [{ text: MINIMAL_INSTRUCTION }] },
+                responseModalities: [Modality.AUDIO],
+                systemInstruction: SYSTEM_INSTRUCTION, // STRING ONLY
                 tools: [{ functionDeclarations: [navigateToFunction] }],
-                // DISABLING SAFETY FILTERS: Often the cause of silent empty outputs
-                safetySettings: [
-                    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-                    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
-                ],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
@@ -196,27 +222,48 @@ export class GeminiLiveController {
     private createBlob(data: Float32Array): Blob {
         const l = data.length;
         const int16 = new Int16Array(l);
-        for (let i = 0; i < l; i++) int16[i] = data[i] * 32768;
-        return { data: encode(new Uint8Array(int16.buffer)), mimeType: 'audio/pcm;rate=16000' };
+        for (let i = 0; i < l; i++) {
+            int16[i] = data[i] * 32768;
+        }
+        return {
+            data: encode(new Uint8Array(int16.buffer)),
+            mimeType: 'audio/pcm;rate=16000',
+        };
     }
 
     private stopAudioOutput() {
-        for (const source of this.sources.values()) try { source.stop(); } catch (e) { }
+        for (const source of this.sources.values()) {
+            try { source.stop(); } catch (e) { }
+        }
         this.sources.clear();
         this.nextStartTime = 0;
     }
 
     public async stopSession() {
         if (this.sessionPromise) {
-            try { const s = await this.sessionPromise; if (s.close) s.close(); } catch (e) { }
+            try {
+                const session = await this.sessionPromise;
+                if (session.close) session.close();
+            } catch (e) {
+                console.debug('Error closing session:', e);
+            }
             this.sessionPromise = null;
         }
+
         this.scriptProcessor?.disconnect();
-        this.mediaStream?.getTracks().forEach(t => t.stop());
+        this.mediaStream?.getTracks().forEach(track => track.stop());
         this.stopAudioOutput();
-        if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
-        if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
-        this.inputAudioContext = null; this.outputAudioContext = null;
-        this.mediaStream = null; this.scriptProcessor = null;
+
+        if (this.inputAudioContext?.state !== 'closed') {
+            this.inputAudioContext?.close();
+        }
+        if (this.outputAudioContext?.state !== 'closed') {
+            this.outputAudioContext?.close();
+        }
+
+        this.inputAudioContext = null;
+        this.outputAudioContext = null;
+        this.mediaStream = null;
+        this.scriptProcessor = null;
     }
 }
