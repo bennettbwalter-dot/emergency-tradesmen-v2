@@ -55,13 +55,6 @@ const navigateToFunction: FunctionDeclaration = {
     } as Schema,
 };
 
-// Simplified System Instruction to avoid potential formatting/emoji issues
-const CLEAN_SYSTEM_INSTRUCTION = `You are a calm, friendly, UK-based emergency assistance voice agent for emergencytradesmen.net.
-MANDATORY GREETING: Open the conversation with exactly: "Hey this is Emergency Tradesmen! How can I help you today?"
-Your role is to help users find the correct emergency tradesperson.
-Supported categories: Plumber, Electrician, Locksmith, Gas Engineer, Drain Specialist, Glazier, Breakdown Recovery.
-Technical Nav (call navigateTo): dashboard, services, blog, premium, contact.`;
-
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
@@ -80,7 +73,12 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        if (!apiKey) {
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
+            return;
+        }
+
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -99,8 +97,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
+        // EXACT RESTORATION: Match the very first successful connection parameters
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp', // Stable Live model
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -109,11 +108,6 @@ export class GeminiLiveController {
                     if (this.inputAudioContext.state === 'suspended') {
                         this.inputAudioContext.resume();
                     }
-
-                    // KICK-START: Send a silent text message to force the model to greet
-                    this.sessionPromise?.then((session) => {
-                        session.send({ text: "Hello" });
-                    });
 
                     const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                     this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
@@ -197,9 +191,11 @@ export class GeminiLiveController {
                 },
             },
             config: {
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
-                systemInstruction: CLEAN_SYSTEM_INSTRUCTION,
+                responseModalities: [Modality.AUDIO],
+                systemInstruction: SYSTEM_INSTRUCTION,
                 tools: [{ functionDeclarations: [navigateToFunction] }],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
