@@ -233,7 +233,7 @@ const Index = () => {
                 {/* Main headline */}
 
                 <h1 className="mb-0 font-display text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
-                  EMERGENCY <span className="text-gold">TRADESMEN</span> (TEST V1.3)
+                  EMERGENCY <span className="text-gold">TRADESMEN</span>
                 </h1>
 
 

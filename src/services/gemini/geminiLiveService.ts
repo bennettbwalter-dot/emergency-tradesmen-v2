@@ -73,14 +73,8 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        // Use Environment Variable for API Key
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey) {
-            console.error("Missing VITE_GEMINI_API_KEY in environment variables");
-            callbacks.onError?.(new Error("Missing API Key"));
-            return;
-        }
-
+        // Use Vite Environment Variable
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
         const ai = new GoogleGenAI({ apiKey: apiKey });
 
         // Initialize AudioContexts only when needed
@@ -97,132 +91,115 @@ export class GeminiLiveController {
             return;
         }
 
-        // Initialize the session connection
-        try {
-            this.sessionPromise = ai.live.connect({
-                model: 'gemini-2.5-flash-native-audio-preview-09-2025',
-                callbacks: this.getCallbacks(callbacks),
-                config: this.getConfig()
-            });
-            return this.sessionPromise;
-        } catch (e) {
-            console.warn("Primary model failed, trying fallback...", e);
-            this.sessionPromise = ai.live.connect({
-                model: 'gemini-2.0-flash-exp',
-                callbacks: this.getCallbacks(callbacks),
-                config: this.getConfig()
-            });
-            return this.sessionPromise;
-        }
-    }
-
-    private getCallbacks(callbacks: any) {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        return {
-            onopen: () => {
-                console.log('Gemini Live session opened');
-                if (!this.inputAudioContext || !this.mediaStream) return;
+        // Initialize the session connection
+        this.sessionPromise = ai.live.connect({
+            model: 'gemini-2.0-flash-exp', // Using more stable live model
+            callbacks: {
+                onopen: () => {
+                    console.log('Gemini Live session opened');
+                    if (!this.inputAudioContext || !this.mediaStream) return;
 
-                if (this.inputAudioContext.state === 'suspended') {
-                    this.inputAudioContext.resume();
-                }
+                    if (this.inputAudioContext.state === 'suspended') {
+                        this.inputAudioContext.resume();
+                    }
 
-                const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
-                this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
+                    const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
+                    this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
 
-                this.scriptProcessor.onaudioprocess = (e) => {
-                    const inputData = e.inputBuffer.getChannelData(0);
-                    const pcmBlob = this.createBlob(inputData);
-                    this.sessionPromise?.then((session) => {
-                        try {
-                            session.sendRealtimeInput({ media: pcmBlob });
-                        } catch (err) {
-                            console.debug('Failed to send audio input:', err);
-                        }
-                    });
-                };
+                    this.scriptProcessor.onaudioprocess = (e) => {
+                        const inputData = e.inputBuffer.getChannelData(0);
+                        const pcmBlob = this.createBlob(inputData);
+                        this.sessionPromise?.then((session) => {
+                            try {
+                                session.sendRealtimeInput({ media: pcmBlob });
+                            } catch (err) {
+                                console.debug('Failed to send audio input:', err);
+                            }
+                        });
+                    };
 
-                source.connect(this.scriptProcessor);
-                this.scriptProcessor.connect(this.inputAudioContext.destination);
-            },
-            onmessage: async (message: LiveServerMessage) => {
-                if (message.serverContent?.outputTranscription) {
-                    currentOutputTranscription += message.serverContent.outputTranscription.text;
-                } else if (message.serverContent?.inputTranscription) {
-                    currentInputTranscription += message.serverContent.inputTranscription.text;
-                }
+                    source.connect(this.scriptProcessor);
+                    this.scriptProcessor.connect(this.inputAudioContext.destination);
+                },
+                onmessage: async (message: LiveServerMessage) => {
+                    if (message.serverContent?.outputTranscription) {
+                        currentOutputTranscription += message.serverContent.outputTranscription.text;
+                    } else if (message.serverContent?.inputTranscription) {
+                        currentInputTranscription += message.serverContent.inputTranscription.text;
+                    }
 
-                if (message.serverContent?.turnComplete) {
-                    if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
-                    if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
-                    currentInputTranscription = '';
-                    currentOutputTranscription = '';
-                }
+                    if (message.serverContent?.turnComplete) {
+                        if (currentInputTranscription.trim()) callbacks.onMessage?.(currentInputTranscription.trim(), 'user');
+                        if (currentOutputTranscription.trim()) callbacks.onMessage?.(currentOutputTranscription.trim(), 'model');
+                        currentInputTranscription = '';
+                        currentOutputTranscription = '';
+                    }
 
-                if (message.toolCall) {
-                    for (const fc of message.toolCall.functionCalls) {
-                        if (fc.name === 'navigateTo') {
-                            const view = (fc.args as any).view;
-                            callbacks.onNavigate?.(view);
-                            this.sessionPromise?.then((session) => {
-                                session.sendToolResponse({
-                                    functionResponses: {
-                                        id: fc.id,
-                                        name: fc.name,
-                                        response: { result: "ok" },
-                                    }
+                    if (message.toolCall) {
+                        for (const fc of message.toolCall.functionCalls) {
+                            if (fc.name === 'navigateTo') {
+                                const view = (fc.args as any).view;
+                                callbacks.onNavigate?.(view);
+                                this.sessionPromise?.then((session) => {
+                                    session.sendToolResponse({
+                                        functionResponses: {
+                                            id: fc.id,
+                                            name: fc.name,
+                                            response: { result: "ok" },
+                                        }
+                                    });
                                 });
-                            });
+                            }
                         }
                     }
-                }
 
-                const base64Audio = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
-                if (base64Audio && this.outputAudioContext) {
-                    if (this.outputAudioContext.state === 'suspended') {
-                        this.outputAudioContext.resume();
+                    const base64Audio = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
+                    if (base64Audio && this.outputAudioContext) {
+                        if (this.outputAudioContext.state === 'suspended') {
+                            this.outputAudioContext.resume();
+                        }
+                        this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
+                        const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
+                        const source = this.outputAudioContext.createBufferSource();
+                        source.buffer = audioBuffer;
+                        source.connect(this.outputNode!);
+                        source.addEventListener('ended', () => this.sources.delete(source));
+                        source.start(this.nextStartTime);
+                        this.nextStartTime += audioBuffer.duration;
+                        this.sources.add(source);
                     }
-                    this.nextStartTime = Math.max(this.nextStartTime, this.outputAudioContext.currentTime);
-                    const audioBuffer = await decodeAudioData(decode(base64Audio), this.outputAudioContext, 24000, 1);
-                    const source = this.outputAudioContext.createBufferSource();
-                    source.buffer = audioBuffer;
-                    source.connect(this.outputNode!);
-                    source.addEventListener('ended', () => this.sources.delete(source));
-                    source.start(this.nextStartTime);
-                    this.nextStartTime += audioBuffer.duration;
-                    this.sources.add(source);
-                }
 
-                if (message.serverContent?.interrupted) {
-                    this.stopAudioOutput();
-                    callbacks.onInterrupted?.();
-                }
+                    if (message.serverContent?.interrupted) {
+                        this.stopAudioOutput();
+                        callbacks.onInterrupted?.();
+                    }
+                },
+                onerror: (e) => {
+                    console.error('Gemini Live connection error:', e);
+                    callbacks.onError?.(e);
+                    this.stopSession();
+                },
+                onclose: (e) => {
+                    console.log('Gemini Live session closed:', e);
+                    this.sessionPromise = null;
+                },
             },
-            onerror: (e: any) => {
-                console.error('Gemini Live connection error:', e);
-                callbacks.onError?.(e);
-                this.stopSession();
+            config: {
+                responseModalities: [Modality.AUDIO],
+                systemInstruction: SYSTEM_INSTRUCTION,
+                tools: [{ functionDeclarations: [navigateToFunction] }],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
+                speechConfig: {
+                    voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
+                },
             },
-            onclose: (e: any) => {
-                console.log('Gemini Live session closed:', e);
-                this.sessionPromise = null;
-            },
-        };
-    }
+        });
 
-    private getConfig() {
-        return {
-            responseModalities: [Modality.AUDIO],
-            systemInstruction: SYSTEM_INSTRUCTION,
-            tools: [{ functionDeclarations: [navigateToFunction] }],
-            inputAudioTranscription: {},
-            outputAudioTranscription: {},
-            speechConfig: {
-                voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
-            },
-        };
+        return this.sessionPromise;
     }
 
     private createBlob(data: Float32Array): Blob {

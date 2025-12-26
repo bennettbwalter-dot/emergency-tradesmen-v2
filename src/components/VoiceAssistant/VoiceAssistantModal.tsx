@@ -10,7 +10,6 @@ interface Props {
     onClose: () => void;
 }
 
-const BUILD_ID = "v1.3-" + Date.now();
 
 const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -47,7 +46,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         setMessages([]);
 
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        console.log(`[Voice] Initializing ${BUILD_ID}...`);
 
         if (!apiKey) {
             setError("VITE_GEMINI_API_KEY is missing in Cloudflare/Env. Please add it and rebuild.");
@@ -103,12 +101,12 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[600px]">
 
-                {/* Header - RED for testing update */}
-                <div className="p-4 bg-red-600 flex items-center justify-between shadow-lg">
+                {/* Header */}
+                <div className="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className={`w-3 h-3 rounded-full bg-white animate-pulse`}></div>
                         <span className="font-black text-white text-xs uppercase tracking-widest">
-                            Voice Agent {BUILD_ID}
+                            Emergency Assistant
                         </span>
                     </div>
                     <button onClick={onClose} className="p-1 bg-white/20 hover:bg-white/40 rounded-full text-white">
@@ -145,8 +143,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${msg.role === 'user'
-                                    ? 'bg-amber-500 text-slate-900 font-bold rounded-tr-none'
-                                    : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
+                                ? 'bg-amber-500 text-slate-900 font-bold rounded-tr-none'
+                                : 'bg-slate-800 text-slate-100 rounded-tl-none border border-slate-700'
                                 }`}>
                                 {msg.text}
                             </div>
@@ -161,8 +159,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                             <div
                                 key={i}
                                 className={`w-2.5 rounded-full transition-all duration-300 ${status === 'speaking' ? 'bg-amber-500 h-12 animate-bounce shadow-[0_0_20px_rgba(245,158,11,0.6)]' :
-                                        status === 'listening' ? 'bg-green-500 h-6 animate-pulse' :
-                                            'bg-slate-800 h-2.5'
+                                    status === 'listening' ? 'bg-green-500 h-6 animate-pulse' :
+                                        'bg-slate-800 h-2.5'
                                     }`}
                                 style={{ animationDelay: `${i * 0.15}s` }}
                             />
