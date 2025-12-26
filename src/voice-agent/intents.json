@@ -108,9 +108,98 @@
                 "advice",
                 "help me",
                 "what to do",
-                "tips"
+                "tips",
+                "blog"
             ],
             "route_key": "blog"
+        },
+        {
+            "id": "nav_contact",
+            "keywords": [
+                "contact",
+                "phone",
+                "email",
+                "support",
+                "call usage"
+            ],
+            "route_key": "contact"
+        },
+        {
+            "id": "nav_about",
+            "keywords": [
+                "about",
+                "who are",
+                "company",
+                "story"
+            ],
+            "route_key": "about"
+        },
+        {
+            "id": "nav_home",
+            "keywords": [
+                "home",
+                "start",
+                "main",
+                "reset"
+            ],
+            "route_key": "home"
+        },
+        {
+            "id": "nav_join",
+            "keywords": [
+                "join",
+                "signup",
+                "sign up",
+                "register",
+                "trade account",
+                "work for"
+            ],
+            "route_key": "tradesmen"
+        },
+        {
+            "id": "newsletter_signup",
+            "keywords": [
+                "newsletter",
+                "subscribe",
+                "mailing list",
+                "updates",
+                "email list"
+            ],
+            "route_key": "newsletter"
+        },
+        {
+            "id": "explain_premium",
+            "keywords": [
+                "premium",
+                "pro network",
+                "boost business",
+                "trust signals",
+                "priority ranking"
+            ],
+            "action": "explain_premium"
+        },
+        {
+            "id": "explain_pricing",
+            "keywords": [
+                "price",
+                "cost",
+                "how much",
+                "plans",
+                "subscription",
+                "rates",
+                "fee"
+            ],
+            "action": "explain_pricing"
+        },
+        {
+            "id": "signup_guide",
+            "keywords": [
+                "how to join",
+                "how to sign up",
+                "process",
+                "steps to join"
+            ],
+            "action": "signup_guide"
         }
     ]
 }

@@ -39,7 +39,7 @@ export function LiveChat() {
                 )}
             </AnimatePresence>
 
-            <motion.button
+            {/* <motion.button
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.05 }}
@@ -49,7 +49,7 @@ export function LiveChat() {
                     }`}
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Zap className="w-6 h-6" />}
-            </motion.button>
+            </motion.button> */}
         </>
     );
 }

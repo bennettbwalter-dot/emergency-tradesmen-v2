@@ -181,6 +181,7 @@ const App = () => {
                       <BottomNav />
                       <LiveChat />
                       <ErrorBoundary>
+                        {/* Voice Assistant Trigger - Restored per requirements */}
                         <VoiceTrigger />
                       </ErrorBoundary>
                       <FloatingBackButton />

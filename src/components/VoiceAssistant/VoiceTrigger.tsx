@@ -14,7 +14,7 @@ const VoiceTrigger: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-24 right-20 md:right-24 z-[99] w-14 h-14 rounded-full shadow-[0_0_20px_rgba(220,38,38,0.5)] bg-gradient-to-r from-red-600 to-red-700 flex items-center justify-center transition-all duration-300 border-2 border-white/20"
+                className="fixed bottom-24 right-4 md:right-8 z-[99] w-14 h-14 rounded-full shadow-[0_0_20px_rgba(255,215,0,0.4)] bg-gold text-black flex items-center justify-center transition-all duration-300 border-2 border-primary hover:scale-110 active:scale-95"
                 aria-label="Talk to Emergency Assistant"
             >
                 <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-20"></div>
