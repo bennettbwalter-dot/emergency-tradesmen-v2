@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { Mic } from 'lucide-react';
 import VoiceAssistantModal from './VoiceAssistantModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const VoiceTrigger: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
-            <button
+            <motion.button
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 group font-medium text-sm md:text-base"
+                className="fixed bottom-24 right-20 md:right-24 z-[99] w-14 h-14 rounded-full shadow-[0_0_20px_rgba(220,38,38,0.5)] bg-gradient-to-r from-red-600 to-red-700 flex items-center justify-center transition-all duration-300 border-2 border-white/20"
                 aria-label="Talk to Emergency Assistant"
             >
-                <div className="bg-white/20 p-1.5 rounded-full">
-                    <Mic className="w-4 h-4 md:w-5 md:h-5 text-white animate-pulse" />
-                </div>
-                <span className="hidden md:inline">Voice Assistant</span>
-                <span className="md:hidden">Assistant</span>
-            </button>
+                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-20"></div>
+                <Mic className="w-6 h-6 text-white" />
+            </motion.button>
 
             <VoiceAssistantModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </>

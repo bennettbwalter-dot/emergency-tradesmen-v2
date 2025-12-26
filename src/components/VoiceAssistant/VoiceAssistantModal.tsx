@@ -74,7 +74,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
-            recognition.lang = 'en-GB';
+            recognition.lang = 'en-GB'; // UK English default
             recognition.continuous = false;
             recognition.interimResults = true;
 
@@ -95,13 +95,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
             recognition.onend = () => {
                 setIsListening(false);
+                // Don't auto-reset status here strictly, as we might be processing
             };
 
             recognitionRef.current = recognition;
 
-            // Start interaction immediately
+            // Start the interaction flow
             startInteraction();
-
         } else {
             setFeedbackMessage('Voice recognition not supported in this browser.');
         }
@@ -129,13 +129,12 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const startListening = () => {
         if (recognitionRef.current) {
             try {
-                if (isListening) return; // Prevent double start
                 recognitionRef.current.start();
                 setIsListening(true);
                 setStatus('listening');
                 setFeedbackMessage('Listening...');
             } catch (e) {
-                // Ignore "already started" errors
+                console.error('Recognition already started', e);
             }
         }
     };
@@ -151,39 +150,11 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         if (synthRef.current) {
             setStatus('speaking');
             const utterance = new SpeechSynthesisUtterance(text);
-
-            // Standard Voice Selection Logic
-            let voices = synthRef.current.getVoices();
-
-            const setVoiceAndSpeak = () => {
-                // Find a British voice (en-GB)
-                const britishVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
-                if (britishVoice) {
-                    utterance.voice = britishVoice;
-                }
-
-                // Always set lang attribute as fallback
-                utterance.lang = 'en-GB';
-
-                utterance.onend = () => {
-                    if (onEnd) onEnd();
-                };
-
-                synthRef.current?.speak(utterance);
+            utterance.lang = 'en-GB';
+            utterance.onend = () => {
+                if (onEnd) onEnd();
             };
-
-            if (voices.length > 0) {
-                setVoiceAndSpeak();
-            } else {
-                // If voices aren't loaded, wait for the event
-                synthRef.current.onvoiceschanged = () => {
-                    voices = synthRef.current?.getVoices() || [];
-                    setVoiceAndSpeak();
-                    // Cleanup listener to prevent leaks/double calls is tricky here without refs, 
-                    // but for this MVP modal context, overwriting onvoiceschanged is acceptable.
-                    if (synthRef.current) synthRef.current.onvoiceschanged = null;
-                };
-            }
+            synthRef.current.speak(utterance);
         } else {
             // Fallback if no TTS
             if (onEnd) onEnd();
@@ -285,7 +256,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         </div>
                     ) : (
                         <button
-                            onClick={startInteraction}
+                            onClick={startListening}
                             className="w-32 h-32 rounded-full bg-slate-700 hover:bg-slate-600 flex items-center justify-center transition"
                         >
                             <Mic className="w-12 h-12 text-slate-300" />
