@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Mic, AlertTriangle, Activity } from 'lucide-react';
+import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import intentsData from '../../voice-agent/intents.json';
 import routesData from '../../voice-agent/routes.json';
@@ -282,6 +283,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                 audio.onerror = (e) => {
                     console.error("Audio playback error", e);
+                    toast.error("Audio Playback Failed (Mobile Restriction?)");
                     // Fallback to browser TTS if audio fails
                     fallbackSpeak(text, safeOnEnd, timeoutId);
                 };
@@ -291,11 +293,13 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
             } catch (error) {
                 console.error('ElevenLabs Error, falling back to browser TTS:', error);
+                toast.error("Voice API Failed (Check Network/Keys)");
                 // Fallback to browser TTS on API error
                 fallbackSpeak(text, safeOnEnd, timeoutId);
             }
         } else {
             // Fallback if no keys
+            toast.error("Voice Keys Missing in Cloudflare");
             fallbackSpeak(text, safeOnEnd, timeoutId);
         }
     };
