@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Mic, Send, AlertTriangle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import intentsConfig from '../../../voice-agent/intents.json';
-import routesConfig from '../../../voice-agent/routes.json';
+import intentsConfig from '../../voice-agent/intents.json';
+import routesConfig from '../../voice-agent/routes.json';
 
 interface Props {
     isOpen: boolean;
@@ -206,10 +206,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         >
                             <div
                                 className={`max-w-[85%] rounded-2xl p-3.5 text-sm md:text-base shadow-sm ${msg.role === 'user'
-                                        ? 'bg-red-600 text-white rounded-br-none'
-                                        : msg.type === 'warning'
-                                            ? 'bg-red-50 dark:bg-red-900/20 text-slate-800 dark:text-slate-100 border border-red-200 dark:border-red-800 rounded-bl-none'
-                                            : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-none'
+                                    ? 'bg-red-600 text-white rounded-br-none'
+                                    : msg.type === 'warning'
+                                        ? 'bg-red-50 dark:bg-red-900/20 text-slate-800 dark:text-slate-100 border border-red-200 dark:border-red-800 rounded-bl-none'
+                                        : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-none'
                                     }`}
                             >
                                 {msg.content}

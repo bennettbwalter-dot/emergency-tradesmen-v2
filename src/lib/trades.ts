@@ -113,10 +113,9 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     Manchester: ["Salford", "Stockport", "Trafford", "Oldham", "Rochdale", "Bury", "Bolton"],
     Birmingham: ["Solihull", "Sutton Coldfield", "Edgbaston", "Moseley", "Erdington", "Kings Heath"],
     Leeds: ["Headingley", "Roundhay", "Morley", "Pudsey", "Horsforth", "Chapel Allerton"],
-    Sheffield: ["Rotherham", "Doncaster", "Barnsley", "Chesterfield", "Worksop"],
+    Sheffield: ["Rotherham", "Doncaster", "Barnsley", "Chesterfield", "Worksop", "Dore", "Totley", "Hillsborough", "Ecclesall", "Crookes", "Stocksbridge"],
     Liverpool: ["Birkenhead", "Bootle", "Crosby", "St Helens", "Widnes", "Runcorn"],
     Nottingham: ["Beeston", "Arnold", "Carlton", "West Bridgford", "Hucknall"],
-    Sheffield: ["Dore", "Totley", "Hillsborough", "Ecclesall", "Crookes", "Stocksbridge"],
   };
 
   const localExpertiseMap: Record<string, string> = {
