@@ -1,5 +1,6 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality, Type, FunctionDeclaration, Blob, Schema } from '@google/genai';
+import { SYSTEM_INSTRUCTION } from './constants';
 
 export function decode(base64: string) {
     const binaryString = atob(base64);
@@ -39,6 +40,21 @@ export async function decodeAudioData(
     return buffer;
 }
 
+const navigateToFunction: FunctionDeclaration = {
+    name: 'navigateTo',
+    parameters: {
+        type: Type.OBJECT,
+        description: 'Navigates the user to a different view in the application portal.',
+        properties: {
+            view: {
+                type: Type.STRING,
+                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
+            },
+        },
+        required: ['view'],
+    } as Schema,
+};
+
 export class GeminiLiveController {
     private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
@@ -58,13 +74,14 @@ export class GeminiLiveController {
     }) {
         if (this.sessionPromise) return;
 
-        let apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+        // Use Vite environment variable
+        const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
         if (!apiKey || apiKey === 'undefined') {
-            callbacks.onError?.(new Error("API Key is missing in Cloudflare environment."));
+            callbacks.onError?.(new Error("MISSING_API_KEY"));
             return;
         }
 
-        const ai = new GoogleGenAI({ apiKey });
+        const ai = new GoogleGenAI({ apiKey: apiKey });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
         this.outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -84,9 +101,9 @@ export class GeminiLiveController {
         let currentInputTranscription = '';
         let currentOutputTranscription = '';
 
-        // ABSOLUTE MINIMAL CONNECTION TO RULE OUT CONFIG ERRORS
+        // EXACT 1:1 MATCH TO STEP 1578 (ZIP EXPORT)
         this.sessionPromise = ai.live.connect({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-2.5-flash-native-audio-preview-09-2025',
             callbacks: {
                 onopen: () => {
                     console.log('Gemini Live session opened');
@@ -102,7 +119,7 @@ export class GeminiLiveController {
                     this.scriptProcessor.onaudioprocess = (e) => {
                         const inputData = e.inputBuffer.getChannelData(0);
 
-                        // Volume Meter
+                        // Volume feedback
                         let sum = 0;
                         for (let i = 0; i < inputData.length; i++) sum += inputData[i] * inputData[i];
                         callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
@@ -111,15 +128,14 @@ export class GeminiLiveController {
                         this.sessionPromise?.then((session) => {
                             try {
                                 session.sendRealtimeInput({ media: pcmBlob });
-                            } catch (err) { /* ignore */ }
+                            } catch (err) {
+                                console.debug('Failed to send audio input:', err);
+                            }
                         });
                     };
 
                     source.connect(this.scriptProcessor);
                     this.scriptProcessor.connect(this.inputAudioContext.destination);
-
-                    // Just send a plain "Hello" to kickstart
-                    this.sessionPromise.then(s => s.send({ text: "Hello" }));
                 },
                 onmessage: async (message: LiveServerMessage) => {
                     if (message.serverContent?.outputTranscription) {
@@ -135,7 +151,28 @@ export class GeminiLiveController {
                         currentOutputTranscription = '';
                     }
 
-                    const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
+                    if (message.toolCall) {
+                        for (const fc of message.toolCall.functionCalls) {
+                            if (fc.name === 'navigateTo') {
+                                const view = (fc.args as any).view;
+                                callbacks.onNavigate?.(view);
+                                this.sessionPromise?.then((session) => {
+                                    session.sendToolResponse({
+                                        functionResponses: { // OBJECT FORMAT AS PER ZIP
+                                            id: fc.id,
+                                            name: fc.name,
+                                            response: { result: "ok" },
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    }
+
+                    // Part structure match (parts[0])
+                    const parts = message.serverContent?.modelTurn?.parts;
+                    const base64Audio = parts && parts.length > 0 ? parts[0].inlineData?.data : null;
+
                     if (base64Audio && this.outputAudioContext) {
                         if (this.outputAudioContext.state === 'suspended') {
                             this.outputAudioContext.resume();
@@ -157,17 +194,21 @@ export class GeminiLiveController {
                     }
                 },
                 onerror: (e) => {
-                    console.error('Gemini Live error:', e);
+                    console.error('Gemini Live connection error:', e);
                     callbacks.onError?.(e);
                     this.stopSession();
                 },
                 onclose: (e) => {
-                    console.log('Gemini Live closed:', e);
+                    console.log('Gemini Live session closed:', e);
                     this.sessionPromise = null;
                 },
             },
             config: {
                 responseModalities: [Modality.AUDIO],
+                systemInstruction: SYSTEM_INSTRUCTION,
+                tools: [{ functionDeclarations: [navigateToFunction] }],
+                inputAudioTranscription: {},
+                outputAudioTranscription: {},
                 speechConfig: {
                     voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
                 },
@@ -207,11 +248,18 @@ export class GeminiLiveController {
             }
             this.sessionPromise = null;
         }
+
         this.scriptProcessor?.disconnect();
         this.mediaStream?.getTracks().forEach(track => track.stop());
         this.stopAudioOutput();
-        if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
-        if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
+
+        if (this.inputAudioContext?.state !== 'closed') {
+            this.inputAudioContext?.close();
+        }
+        if (this.outputAudioContext?.state !== 'closed') {
+            this.outputAudioContext?.close();
+        }
+
         this.inputAudioContext = null;
         this.outputAudioContext = null;
         this.mediaStream = null;
