@@ -56,7 +56,7 @@ const navigateToFunction: FunctionDeclaration = {
 };
 
 export class GeminiLiveController {
-    private session: any = null;
+    private sessionPromise: Promise<any> | null = null;
     private nextStartTime = 0;
     private inputAudioContext: AudioContext | null = null;
     private outputAudioContext: AudioContext | null = null;
@@ -73,7 +73,7 @@ export class GeminiLiveController {
         onError?: (error: any) => void,
         onVolume?: (volume: number) => void
     }) {
-        if (this.session) return;
+        if (this.sessionPromise) return;
 
         const apiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
         if (!apiKey) {
@@ -82,8 +82,6 @@ export class GeminiLiveController {
         }
 
         const ai = new GoogleGenAI({ apiKey });
-
-        // MODERN SDK PATTERN (v1.34+)
         const model = ai.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
         this.inputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
@@ -100,10 +98,13 @@ export class GeminiLiveController {
             return;
         }
 
-        try {
-            // CONNECT USING MODERN PATTERN
-            this.session = await model.live.connect({
-                responseModalities: [Modality.AUDIO, Modality.TEXT],
+        let currentInputTranscription = '';
+        let currentOutputTranscription = '';
+
+        // Hybrid Handshake: Uses both callback object and session return for maximum compatibility
+        this.sessionPromise = (async () => {
+            const session = await model.live.connect({
+                responseModalities: [Modality.AUDIO],
                 systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
                 tools: [{ functionDeclarations: [navigateToFunction] }],
                 safetySettings: [
@@ -117,19 +118,14 @@ export class GeminiLiveController {
                 },
             });
 
-            console.log('[Gemini] Modern session established');
-
-            let currentInputTranscription = '';
-            let currentOutputTranscription = '';
-
-            // EVENT HANDLERS
-            this.session.on('open', () => {
+            session.on('open', () => {
+                console.log('[Gemini] Pipeline open');
                 if (!this.inputAudioContext || !this.mediaStream) return;
                 if (this.inputAudioContext.state === 'suspended') this.inputAudioContext.resume();
 
                 const source = this.inputAudioContext.createMediaStreamSource(this.mediaStream);
                 this.inputGainNode = this.inputAudioContext.createGain();
-                this.inputGainNode.gain.value = 5.0; // Stay loud
+                this.inputGainNode.gain.value = 5.0; // Stay high for hearing issues
 
                 this.scriptProcessor = this.inputAudioContext.createScriptProcessor(4096, 1, 1);
                 this.scriptProcessor.onaudioprocess = (e) => {
@@ -139,18 +135,15 @@ export class GeminiLiveController {
                     callbacks.onVolume?.(Math.sqrt(sum / inputData.length));
 
                     const pcmBlob = this.createBlob(inputData);
-                    try { this.session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
+                    try { session.sendRealtimeInput({ media: pcmBlob }); } catch (err) { }
                 };
 
                 source.connect(this.inputGainNode);
                 this.inputGainNode.connect(this.scriptProcessor);
                 this.scriptProcessor.connect(this.inputAudioContext.destination);
-
-                // Initial greeting
-                this.session.send({ text: "Hey! Please greet the user now." });
             });
 
-            this.session.on('message', async (message: LiveServerMessage) => {
+            session.on('message', async (message: LiveServerMessage) => {
                 if (message.serverContent?.outputTranscription) {
                     currentOutputTranscription += message.serverContent.outputTranscription.text;
                 } else if (message.serverContent?.inputTranscription) {
@@ -168,7 +161,7 @@ export class GeminiLiveController {
                     for (const fc of message.toolCall.functionCalls) {
                         if (fc.name === 'navigateTo') {
                             callbacks.onNavigate?.((fc.args as any).view);
-                            this.session.sendToolResponse({
+                            session.sendToolResponse({
                                 functionResponses: [{ id: fc.id, name: fc.name, response: { result: "ok" } }]
                             });
                         }
@@ -192,22 +185,16 @@ export class GeminiLiveController {
                 }
             });
 
-            this.session.on('error', (e: any) => {
-                console.error('[Gemini] SDK Error:', e);
-                callbacks.onError?.(e);
+            session.on('error', (err) => {
+                console.error('[Gemini] Pipeline error:', err);
+                callbacks.onError?.(err);
                 this.stopSession();
             });
 
-            this.session.on('close', () => {
-                console.log('[Gemini] Session closed');
-                this.session = null;
-            });
+            return session;
+        })();
 
-        } catch (e: any) {
-            console.error('[Gemini] Connection failed:', e);
-            callbacks.onError?.(e);
-            this.stopSession();
-        }
+        return this.sessionPromise;
     }
 
     private createBlob(data: Float32Array): Blob {
@@ -218,22 +205,38 @@ export class GeminiLiveController {
     }
 
     private stopAudioOutput() {
-        for (const source of this.sources.values()) try { source.stop(); } catch (e) { }
+        for (const source of this.sources.values()) {
+            try { source.stop(); } catch (e) { }
+        }
         this.sources.clear();
         this.nextStartTime = 0;
     }
 
     public async stopSession() {
-        if (this.session) {
-            try { if (this.session.close) this.session.close(); } catch (e) { }
-            this.session = null;
+        if (this.sessionPromise) {
+            try {
+                const session = await this.sessionPromise;
+                if (session && session.close) session.close();
+            } catch (e) {
+                console.debug('Error closing session:', e);
+            }
+            this.sessionPromise = null;
         }
+
         this.scriptProcessor?.disconnect();
-        this.mediaStream?.getTracks().forEach(t => t.stop());
+        this.mediaStream?.getTracks().forEach(track => track.stop());
         this.stopAudioOutput();
-        if (this.inputAudioContext?.state !== 'closed') this.inputAudioContext?.close();
-        if (this.outputAudioContext?.state !== 'closed') this.outputAudioContext?.close();
-        this.inputAudioContext = null; this.outputAudioContext = null;
-        this.mediaStream = null; this.scriptProcessor = null;
+
+        if (this.inputAudioContext?.state !== 'closed') {
+            this.inputAudioContext?.close();
+        }
+        if (this.outputAudioContext?.state !== 'closed') {
+            this.outputAudioContext?.close();
+        }
+
+        this.inputAudioContext = null;
+        this.outputAudioContext = null;
+        this.mediaStream = null;
+        this.scriptProcessor = null;
     }
 }
