@@ -89,7 +89,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     // Steps: initial -> asking_clarification -> asking_location -> navigating
     const [conversationStep, setConversationStep] = useState<'initial' | 'asking_clarification' | 'asking_location' | 'navigating'>('initial');
     const [selectedTrade, setSelectedTrade] = useState<{ id: string; name: string; routeKey: string } | null>(null);
-    const [activeVoiceName, setActiveVoiceName] = useState<string>('Initializing...');
 
     const recognitionRef = useRef<SpeechRecognition | null>(null);
     const synthRef = useRef<SpeechSynthesis | null>(null);
@@ -246,7 +245,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         return available.find(v => v.lang.includes('GB') || v.lang.includes('en-GB')) || null;
     }
 
-    const speakNative = (text: string, onEnd?: () => void) => {
+    const speak = (text: string, onEnd?: () => void) => {
         if (!synthRef.current) {
             if (onEnd) onEnd();
             return;
@@ -267,17 +266,9 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             } else {
                 utterance.rate = 1.0;
             }
-            setActiveVoiceName(voice.name);
-        } else {
-            console.warn("No GB voice found");
-            setActiveVoiceName('Fallback (System Default)');
         }
 
         utterance.pitch = 1.0;
-
-        // Debug info update
-        const debugInfo = voice ? `${voice.name} (${voice.lang})` : 'Default/Missing';
-        console.log(`[Voice] Speaking with: ${debugInfo}`);
 
         utterance.onend = () => {
             if (onEnd) onEnd();
@@ -289,71 +280,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         };
 
         synthRef.current.speak(utterance);
-    };
-
-    const speak = async (text: string, onEnd?: () => void) => {
-        // Stop any current native speech
-        if (synthRef.current) synthRef.current.cancel();
-
-        const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
-        const voiceId = import.meta.env.VITE_ELEVENLABS_VOICE_ID;
-
-        // If keys are missing, go straight to native
-        if (!apiKey || !voiceId) {
-            console.warn("Missing ElevenLabs keys, falling back to native.");
-            speakNative(text, onEnd);
-            return;
-        }
-
-        setStatus('speaking');
-        setFeedbackMessage(text);
-        setActiveVoiceName("ElevenLabs (Premium)");
-
-        try {
-            const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'xi-api-key': apiKey,
-                },
-                body: JSON.stringify({
-                    text,
-                    model_id: "eleven_multilingual_v2",
-                    voice_settings: {
-                        stability: 0.5,
-                        similarity_boost: 0.75,
-                    }
-                }),
-            });
-
-            if (!response.ok) {
-                if (response.status === 401) {
-                    console.error("ElevenLabs 401: Invalid API Key. Check Cloudflare Env Vars.");
-                    setActiveVoiceName("Auth Error (Falling back to Native)");
-                }
-                throw new Error(`ElevenLabs API Error: ${response.status}`);
-            }
-
-            const audioBlob = await response.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = new Audio(audioUrl);
-
-            audio.onended = () => {
-                URL.revokeObjectURL(audioUrl);
-                if (onEnd) onEnd();
-            };
-
-            audio.onerror = (e) => {
-                console.error("Audio playback error", e);
-                if (onEnd) onEnd();
-            };
-
-            await audio.play();
-
-        } catch (error) {
-            console.error("ElevenLabs failed, falling back to native:", error);
-            speakNative(text, onEnd);
-        }
     };
 
     // Helper for any components passing this down? (None in this file, but keeping clean)
@@ -746,11 +672,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <p className="text-sm font-bold">Life Threatening Danger? Call 999 immediately.</p>
                     </div>
                 )}
-                {/* Debug / Version Info */}
-                <div className="absolute bottom-2 text-xs text-slate-500 font-mono flex flex-col gap-1 items-center">
-                    <span>v3.0 Hybrid | {voices.length} Native Voices</span>
-                    <span className="text-yellow-400">{activeVoiceName}</span>
-                </div>
+
             </div>
         </div>
     );
