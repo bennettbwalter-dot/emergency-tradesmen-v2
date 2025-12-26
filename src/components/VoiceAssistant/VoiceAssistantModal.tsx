@@ -151,11 +151,39 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         if (synthRef.current) {
             setStatus('speaking');
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-GB'; // This is the standard "GitHub version" logic
-            utterance.onend = () => {
-                if (onEnd) onEnd();
+
+            // Standard Voice Selection Logic
+            let voices = synthRef.current.getVoices();
+
+            const setVoiceAndSpeak = () => {
+                // Find a British voice (en-GB)
+                const britishVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
+                if (britishVoice) {
+                    utterance.voice = britishVoice;
+                }
+
+                // Always set lang attribute as fallback
+                utterance.lang = 'en-GB';
+
+                utterance.onend = () => {
+                    if (onEnd) onEnd();
+                };
+
+                synthRef.current?.speak(utterance);
             };
-            synthRef.current.speak(utterance);
+
+            if (voices.length > 0) {
+                setVoiceAndSpeak();
+            } else {
+                // If voices aren't loaded, wait for the event
+                synthRef.current.onvoiceschanged = () => {
+                    voices = synthRef.current?.getVoices() || [];
+                    setVoiceAndSpeak();
+                    // Cleanup listener to prevent leaks/double calls is tricky here without refs, 
+                    // but for this MVP modal context, overwriting onvoiceschanged is acceptable.
+                    if (synthRef.current) synthRef.current.onvoiceschanged = null;
+                };
+            }
         } else {
             // Fallback if no TTS
             if (onEnd) onEnd();
