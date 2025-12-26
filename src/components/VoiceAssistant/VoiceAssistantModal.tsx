@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Mic, Send, AlertTriangle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import intentsConfig from '../../voice-agent/intents.json';
-import routesConfig from '../../voice-agent/routes.json';
+import intentsData from '../../voice-agent/intents.json';
+import routesData from '../../voice-agent/routes.json';
+
+const intentsConfig = intentsData || { intents: [] };
+const routesConfig = routesData || { routes: {} };
 
 interface Props {
     isOpen: boolean;
