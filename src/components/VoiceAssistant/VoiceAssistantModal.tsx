@@ -246,7 +246,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         return available.find(v => v.lang.includes('GB') || v.lang.includes('en-GB')) || null;
     }
 
-    const speak = (text: string, onEnd?: () => void) => {
+    const speakNative = (text: string, onEnd?: () => void) => {
         if (!synthRef.current) {
             if (onEnd) onEnd();
             return;
@@ -262,7 +262,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         if (voice) {
             utterance.voice = voice;
             utterance.lang = voice.lang;
-            // Slight customization
             if (voice.name.includes('Google')) {
                 utterance.rate = 1.1;
             } else {
@@ -290,6 +289,71 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         };
 
         synthRef.current.speak(utterance);
+    };
+
+    const speak = async (text: string, onEnd?: () => void) => {
+        // Stop any current native speech
+        if (synthRef.current) synthRef.current.cancel();
+
+        const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
+        const voiceId = import.meta.env.VITE_ELEVENLABS_VOICE_ID;
+
+        // If keys are missing, go straight to native
+        if (!apiKey || !voiceId) {
+            console.warn("Missing ElevenLabs keys, falling back to native.");
+            speakNative(text, onEnd);
+            return;
+        }
+
+        setStatus('speaking');
+        setFeedbackMessage(text);
+        setActiveVoiceName("ElevenLabs (Premium)");
+
+        try {
+            const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'xi-api-key': apiKey,
+                },
+                body: JSON.stringify({
+                    text,
+                    model_id: "eleven_multilingual_v2",
+                    voice_settings: {
+                        stability: 0.5,
+                        similarity_boost: 0.75,
+                    }
+                }),
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    console.error("ElevenLabs 401: Invalid API Key. Check Cloudflare Env Vars.");
+                    setActiveVoiceName("Auth Error (Falling back to Native)");
+                }
+                throw new Error(`ElevenLabs API Error: ${response.status}`);
+            }
+
+            const audioBlob = await response.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+
+            audio.onended = () => {
+                URL.revokeObjectURL(audioUrl);
+                if (onEnd) onEnd();
+            };
+
+            audio.onerror = (e) => {
+                console.error("Audio playback error", e);
+                if (onEnd) onEnd();
+            };
+
+            await audio.play();
+
+        } catch (error) {
+            console.error("ElevenLabs failed, falling back to native:", error);
+            speakNative(text, onEnd);
+        }
     };
 
     // Helper for any components passing this down? (None in this file, but keeping clean)
