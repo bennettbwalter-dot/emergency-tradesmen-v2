@@ -1,0 +1,17 @@
+{
+  "baseUrl": "https://emergencytradesmen.net",
+  "routes": {
+    "home": "/",
+    "contact": "/contact",
+    "about": "/about",
+    "blog": "/blog",
+    "tradesmen": "/tradesmen",
+    "electrician": "/emergency-electrician",
+    "plumber": "/emergency-plumber/",
+    "locksmith": "/emergency-locksmith",
+    "gas_engineer": "/emergency-gas-engineer/",
+    "drain_specialist": "/emergency-drain-specialist/",
+    "glazier": "/emergency-glazier/",
+    "breakdown_recovery": "/emergency-breakdown/"
+  }
+}

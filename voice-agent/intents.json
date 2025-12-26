@@ -1,0 +1,116 @@
+{
+    "intents": [
+        {
+            "id": "electrician",
+            "keywords": [
+                "spark",
+                "wire",
+                "socket",
+                "power",
+                "light",
+                "fuse",
+                "electric",
+                "trip"
+            ],
+            "route_key": "electrician"
+        },
+        {
+            "id": "plumber",
+            "keywords": [
+                "leak",
+                "water",
+                "pipe",
+                "drip",
+                "tap",
+                "flood",
+                "plumb"
+            ],
+            "route_key": "plumber"
+        },
+        {
+            "id": "locksmith",
+            "keywords": [
+                "lock",
+                "key",
+                "door",
+                "shut out",
+                "locked out",
+                "handle"
+            ],
+            "route_key": "locksmith"
+        },
+        {
+            "id": "gas_engineer",
+            "keywords": [
+                "boiler",
+                "radiator",
+                "heat",
+                "gas",
+                "meter",
+                "cold"
+            ],
+            "route_key": "gas_engineer"
+        },
+        {
+            "id": "drain_specialist",
+            "keywords": [
+                "drain",
+                "block",
+                "toilet",
+                "sewage",
+                "sink",
+                "smell"
+            ],
+            "route_key": "drain_specialist"
+        },
+        {
+            "id": "glazier",
+            "keywords": [
+                "glass",
+                "window",
+                "smash",
+                "break",
+                "pane",
+                "glaz"
+            ],
+            "route_key": "glazier"
+        },
+        {
+            "id": "breakdown_recovery",
+            "keywords": [
+                "car",
+                "van",
+                "start",
+                "battery",
+                "tyre",
+                "breakdown",
+                "tow"
+            ],
+            "route_key": "breakdown_recovery"
+        },
+        {
+            "id": "safety_warning",
+            "keywords": [
+                "fire",
+                "smoke",
+                "flame",
+                "explode",
+                "gas smell",
+                "danger",
+                "hurt"
+            ],
+            "action": "show_warning"
+        },
+        {
+            "id": "guide_request",
+            "keywords": [
+                "guide",
+                "advice",
+                "help me",
+                "what to do",
+                "tips"
+            ],
+            "route_key": "blog"
+        }
+    ]
+}
