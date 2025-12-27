@@ -21,6 +21,7 @@ export class HybridController {
     private lastSpokeTime: number = 0;
     private audioContext: AudioContext | null = null;
     private currentUtterance: SpeechSynthesisUtterance | null = null;
+    private pendingTrade: { route: string, name: string } | null = null; // State tracking for Problem -> Location flow
 
     // Diagnostic State
     private debugState = {
@@ -129,11 +130,13 @@ export class HybridController {
                 // Mobile Failsafe: Wait for voices
                 if (window.speechSynthesis.getVoices().length === 0) {
                     window.speechSynthesis.onvoiceschanged = () => {
-                        this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened and where you are?");
+                        if (this.chatHistory.length === 0) {
+                            this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
+                        }
                         window.speechSynthesis.onvoiceschanged = null;
                     };
                 } else {
-                    this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened and where you are?");
+                    this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
                 }
             }
         };
@@ -169,19 +172,36 @@ export class HybridController {
         if (Date.now() - this.lastSpokeTime < 2000) return;
 
         this.callbacks.onMessage?.(text, 'user');
-
-        // --- 1. OFFLINE TRIAGE (Instant local responses) ---
         const lower = text.toLowerCase();
-        const routes: Record<string, { route: string, name: string }> = {
+
+        // --- STEP 2: LOCATION IDENTIFIED ---
+        if (this.pendingTrade) {
+            console.log('[Voice] Location Received:', text);
+            const trade = this.pendingTrade;
+            this.pendingTrade = null; // Reset state
+
+            this.callbacks.onNavigate?.(trade.route);
+            this.callbacks.onMessage?.(`Navigating to ${trade.name} listings in ${text}...`, 'model');
+
+            await this.speak(`I’m showing you listings for emergency ${trade.name} services. When the page loads, please tap Select City to finalize your location.`);
+            this.callbacks.onStatusChange?.('Ready');
+            return;
+        }
+
+        // --- STEP 1: PROBLEM/TRADE IDENTIFIED ---
+        // We match keywords locally to ensure responsiveness even with Quota issues.
+        const tradeMap: Record<string, { route: string, name: string }> = {
             'plumber': { route: '/emergency-plumber', name: 'plumber' },
             'leak': { route: '/emergency-plumber', name: 'plumber' },
             'pipe': { route: '/emergency-plumber', name: 'plumber' },
             'water': { route: '/emergency-plumber', name: 'plumber' },
             'flood': { route: '/emergency-plumber', name: 'plumber' },
+            'burst': { route: '/emergency-plumber', name: 'plumber' },
 
             'electrician': { route: '/emergency-electrician', name: 'electrician' },
             'spark': { route: '/emergency-electrician', name: 'electrician' },
             'power': { route: '/emergency-electrician', name: 'electrician' },
+            'fuse': { route: '/emergency-electrician', name: 'electrician' },
 
             'locksmith': { route: '/emergency-locksmith', name: 'locksmith' },
             'key': { route: '/emergency-locksmith', name: 'locksmith' },
@@ -189,28 +209,31 @@ export class HybridController {
 
             'gas': { route: '/emergency-gas-engineer', name: 'gas engineer' },
             'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer' },
+            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer' },
 
             'drain': { route: '/drain-specialist', name: 'drain specialist' },
             'sewage': { route: '/drain-specialist', name: 'drain specialist' },
+            'blocked': { route: '/drain-specialist', name: 'drain specialist' },
 
-            'glazier': { route: '/emergency-glazier', name: 'glazier' },
-            'glass': { route: '/emergency-glazier', name: 'glazier' }
+            'glass': { route: '/emergency-glazier', name: 'glazier' },
+            'window': { route: '/emergency-glazier', name: 'glazier' },
+            'glazier': { route: '/emergency-glazier', name: 'glazier' }
         };
 
-        for (const [key, data] of Object.entries(routes)) {
+        for (const [key, data] of Object.entries(tradeMap)) {
             if (lower.includes(key)) {
-                console.log('[Voice] Local Match Found:', key);
-                this.callbacks.onNavigate?.(data.route);
-                this.callbacks.onMessage?.(`Navigating to emergency ${data.name}...`, 'model');
+                console.log('[Voice] Trade Match:', key);
+                this.pendingTrade = data;
 
-                // Professional confirmation (Offline)
-                await this.speak(`I’m showing you the nearest available emergency ${data.name} services. Please tap Select City to find who is available in your area.`);
-                this.callbacks.onStatusChange?.('Ready');
-                return; // SKIP API CALL
+                // Confirm trade and ask for location
+                await this.speak(`I understand, I can find a ${data.name} for you. Where are you located?`);
+                this.callbacks.onStatusChange?.('Waiting for location...');
+                return; // Wait for Step 2
             }
         }
 
-        // --- 2. ONLINE BRAIN FALLBACK ---
+        // --- FALLBACK: ONLINE BRAIN ---
+        // Only hits here if no trade keywords were matched.
         await this.generateResponse(text);
     }
 
