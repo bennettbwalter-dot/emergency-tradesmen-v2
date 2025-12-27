@@ -193,11 +193,20 @@ export class HybridController {
             const trade = this.pendingTrade;
             this.pendingTrade = null; // Clear state early
 
-            this.callbacks.onNavigate?.(trade.route);
-            const locationMsg = `I understand, finding emergency ${trade.name} listings in ${text}. Once the page loads, please tap Select City to finalize your selection.`;
-            this.callbacks.onMessage?.(locationMsg, 'model');
+            // Clean and Slugify Location
+            const cleanCity = text.toLowerCase()
+                .replace(/^(in|at|i am in|i'm in|located in|i'm located in)\s+/i, '')
+                .trim();
+            const citySlug = cleanCity.replace(/\s+/g, '-');
+            const targetPath = `${trade.route}/${citySlug}`;
 
-            await this.speak(locationMsg);
+            console.log(`[Voice] Navigating to: ${targetPath}`);
+            this.callbacks.onNavigate?.(targetPath);
+
+            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cleanCity}.`;
+            this.callbacks.onMessage?.(confirmation, 'model');
+            await this.speak(confirmation);
+
             this.callbacks.onStatusChange?.('Ready');
             return;
         }
