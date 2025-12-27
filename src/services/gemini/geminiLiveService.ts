@@ -29,13 +29,7 @@ export class HybridController {
     private currentUtterance: SpeechSynthesisUtterance | null = null;
 
     constructor() {
-        // Vite requires VITE_ prefix for environment variables to be bundled
         const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-
-        if (!geminiKey) {
-            console.error("[Voice] CRITICAL: VITE_GEMINI_API_KEY is missing!");
-        }
-
         const genAI = new GoogleGenAI(geminiKey);
         this.geminiModel = genAI.getGenerativeModel({
             model: 'models/gemini-1.5-flash',
@@ -47,10 +41,9 @@ export class HybridController {
     public async startSession(callbacks: HybridCallbacks) {
         this.callbacks = callbacks;
         this.chat = this.geminiModel.startChat();
+        this.callbacks.onStatusChange?.('Waiting for Mic...');
 
-        this.callbacks.onStatusChange?.('Awaiting Voice...');
-
-        // 1. Initialize Microphone Volume Feedback (Non-blocking)
+        // 1. Initialize Microphone (Non-blocking)
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 this.micStream = stream;
@@ -73,13 +66,19 @@ export class HybridController {
                     this.stopVolumeTimer = requestAnimationFrame(updateVolume);
                 };
                 updateVolume();
+
+                // 2. Start Listening ONLY after mic access is granted
+                this.startSpeechRecognition();
             })
             .catch(err => {
-                console.warn('[Voice] Mic permission denied or not found:', err);
+                console.warn('[Voice] Mic blocked:', err);
                 this.callbacks.onStatusChange?.('Mic Blocked');
+                // Even without mic, let's greet the user so they know the AI is alive
+                this.handleUserInput("Please greet the user now.");
             });
+    }
 
-        // 2. Initialize Browser Speech Recognition (Listening)
+    private startSpeechRecognition() {
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (SpeechRecognition) {
             this.recognition = new SpeechRecognition();
@@ -102,9 +101,7 @@ export class HybridController {
             };
 
             this.recognition.onerror = (e: any) => {
-                if (e.error === 'not-allowed') {
-                    this.callbacks.onStatusChange?.('Mic Blocked');
-                }
+                if (e.error === 'not-allowed') this.callbacks.onStatusChange?.('Mic Blocked');
             };
 
             this.recognition.onend = () => {
@@ -119,16 +116,15 @@ export class HybridController {
                 console.warn('[Voice] Recognition start failed:', e);
             }
         } else {
-            this.callbacks.onError?.(new Error("Browser does not support Speech Recognition."));
+            this.callbacks.onError?.(new Error("Browser Speech Recognition not supported."));
         }
 
-        // 3. Trigger Initial Greeting
+        // Trigger Initial Greeting
         this.handleUserInput("Please greet the user now.");
     }
 
     private async handleUserInput(text: string) {
         if (!text.trim()) return;
-
         if (text !== "Please greet the user now.") {
             this.callbacks.onMessage?.(text, 'user');
         }
@@ -138,11 +134,9 @@ export class HybridController {
         try {
             const result = await this.chat.sendMessageStream(text);
             let fullText = '';
-
             for await (const chunk of result.stream) {
                 const chunkText = chunk.text();
                 fullText += chunkText;
-
                 const calls = chunk.functionCalls();
                 if (calls) {
                     for (const call of calls) {
@@ -170,7 +164,6 @@ export class HybridController {
             this.callbacks.onStatusChange?.('Speaking...');
 
             const utterance = new SpeechSynthesisUtterance(text);
-
             const setBestVoice = () => {
                 const voices = window.speechSynthesis.getVoices();
                 const preferred = ['Google UK English Female', 'Microsoft Hazel', 'Daniel', 'en-GB'];
@@ -186,7 +179,6 @@ export class HybridController {
 
             utterance.rate = 1.0;
             utterance.pitch = 1.0;
-
             utterance.onend = () => resolve(true);
             utterance.onerror = (e) => {
                 console.error('[Voice] Playback error:', e);

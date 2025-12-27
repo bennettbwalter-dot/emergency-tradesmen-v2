@@ -41,7 +41,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         setError(null);
         setMessages([]);
         setMicVolume(0);
-        setStatus("Connecting...");
+        setStatus("Waiting for Mic...");
 
         controllerRef.current = new HybridController();
 
@@ -57,12 +57,12 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 onVolume: (v) => setMicVolume(v),
                 onError: (err: any) => {
                     console.error("[Voice] Assistant error:", err);
-                    setError(err?.message || "Connection Error: The service is temporarily unavailable.");
+                    setError(err?.message || "Service unavailable. Check API Key or Mic Permissions.");
                 }
             });
         } catch (e: any) {
             console.error("[Voice] Failed to start:", e);
-            setError("Connection failed.");
+            setError("Connection failed. Please refresh.");
             setIsActive(false);
         }
     };
