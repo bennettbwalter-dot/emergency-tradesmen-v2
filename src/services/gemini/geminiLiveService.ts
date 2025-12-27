@@ -314,6 +314,8 @@ export class HybridController {
         }
     }
 
+    private currentUtterance: SpeechSynthesisUtterance | null = null; // Prevent GC
+
     private async speak(text: string, autoResume = true) {
         this.isSpeaking = true;
         this.lastSpokeTime = Date.now();
@@ -321,28 +323,37 @@ export class HybridController {
         this.callbacks.onStatusChange?.('Speaking...');
 
         return new Promise<void>((resolve) => {
-            const utter = new SpeechSynthesisUtterance(text);
+            // Cancel any previous speech
+            window.speechSynthesis.cancel();
 
-            // SMART VOICE SELECTION (FREE)
-            // Try to find a male/British voice to sound professional
+            const utter = new SpeechSynthesisUtterance(text);
+            this.currentUtterance = utter; // Store ref to prevent Garbage Collection (Fixes 'Cuts Out')
+
+            // SMART VOICE SELECTION (Detailed)
             const voices = window.speechSynthesis.getVoices();
+            console.log('[Voice] Available voices:', voices.map(v => v.name)); // Debug
+
+            // Priority Logic for "Human-like" voices
             const preferredVoice = voices.find(v =>
-            (v.name.includes('Google UK English Male') ||
-                v.name.includes('Great Britain') ||
-                v.name.includes('UK') ||
-                v.lang === 'en-GB')
-            );
+                v.name.includes("Google UK English Male") ||
+                v.name.includes("Microsoft George") || // Common Windows High-Quality
+                v.name.includes("Daniel") || // Common Mac High-Quality
+                (v.lang === 'en-GB' && v.name.includes("Google")) ||
+                (v.lang === 'en-GB' && !v.name.includes("Microsoft Hazel")) // Avoid Hazel (Robot-like)
+            ) || voices.find(v => v.lang === 'en-GB');
 
             if (preferredVoice) {
+                console.log('[Voice] Selected:', preferredVoice.name);
                 utter.voice = preferredVoice;
             }
 
             utter.lang = 'en-GB';
-            utter.rate = 1.0;
+            utter.rate = 1.0; // Normal speed
             utter.pitch = 1.0;
 
             utter.onend = async () => {
                 this.isSpeaking = false;
+                this.currentUtterance = null;
                 await new Promise(r => setTimeout(r, 1000));
                 this.callbacks.onStatusChange?.('Ready');
                 if (this.recognition && autoResume) {
@@ -354,6 +365,7 @@ export class HybridController {
             utter.onerror = (e) => {
                 console.error('TTS Error', e);
                 this.isSpeaking = false;
+                this.currentUtterance = null;
                 resolve();
             };
 
