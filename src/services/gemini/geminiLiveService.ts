@@ -29,7 +29,9 @@ export class HybridController {
     private currentUtterance: SpeechSynthesisUtterance | null = null;
 
     constructor() {
-        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+        // Priority 1: VITE_ prefix (Vite/Cloudflare) | Priority 2: Standard env (Local)
+        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
+
         const genAI = new GoogleGenAI(geminiKey);
         this.geminiModel = genAI.getGenerativeModel({
             model: 'gemini-1.5-flash',
@@ -42,7 +44,7 @@ export class HybridController {
         this.callbacks = callbacks;
         this.chat = this.geminiModel.startChat();
 
-        // 1. Initialize Local Volume Monitoring (for UI feedback)
+        // 1. Initialize Microphone Volume Feedback (Local)
         try {
             this.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -65,10 +67,10 @@ export class HybridController {
             };
             updateVolume();
         } catch (err) {
-            console.warn('[Volume] Could not start mic feedback:', err);
+            console.warn('[Voice] Feedback suspended:', err);
         }
 
-        // 2. Initialize Speech Recognition (Input)
+        // 2. Initialize Browser Speech Recognition (Listening)
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (SpeechRecognition) {
             this.recognition = new SpeechRecognition();
@@ -77,30 +79,29 @@ export class HybridController {
             this.recognition.lang = 'en-GB';
 
             this.recognition.onresult = (event: any) => {
-                // If we're speaking, ignore results to prevent echoing back
                 if (window.speechSynthesis.speaking) return;
 
-                const results = event.results;
-                for (let i = event.resultIndex; i < results.length; ++i) {
-                    if (results[i].isFinal) {
-                        const transcript = results[i][0].transcript.trim();
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        const transcript = event.results[i][0].transcript.trim();
                         if (transcript) this.handleUserInput(transcript);
                     }
                 }
             };
 
             this.recognition.onend = () => {
-                // Restart if still active
-                if (this.recognition) this.recognition.start();
+                if (this.recognition) {
+                    try { this.recognition.start(); } catch (e) { }
+                }
             };
 
             this.recognition.start();
             this.callbacks.onStatusChange?.('Awaiting Voice...');
         } else {
-            this.callbacks.onError?.(new Error("Speech Recognition not supported in this browser."));
+            this.callbacks.onError?.(new Error("Browser does not support Speech Recognition."));
         }
 
-        // 3. Initial Greeting
+        // 3. Trigger Initial Greeting
         this.handleUserInput("Please greet the user now.");
     }
 
@@ -115,13 +116,12 @@ export class HybridController {
 
         try {
             const result = await this.chat.sendMessageStream(text);
-            let fullResponseString = '';
+            let fullText = '';
 
             for await (const chunk of result.stream) {
                 const chunkText = chunk.text();
-                fullResponseString += chunkText;
+                fullText += chunkText;
 
-                // Handle tool calls (navigation)
                 const calls = chunk.functionCalls();
                 if (calls) {
                     for (const call of calls) {
@@ -132,56 +132,40 @@ export class HybridController {
                 }
             }
 
-            if (fullResponseString) {
-                this.callbacks.onMessage?.(fullResponseString, 'model');
-                await this.speak(fullResponseString);
+            if (fullText) {
+                this.callbacks.onMessage?.(fullText, 'model');
+                await this.speak(fullText);
             }
-
             this.callbacks.onStatusChange?.('Awaiting Voice...');
         } catch (e) {
-            console.error('[Gemini] Chat Error:', e);
+            console.error('[Gemini] Response failed:', e);
             this.callbacks.onError?.(e);
         }
     }
 
     private async speak(text: string) {
         return new Promise((resolve) => {
-            if (this.currentUtterance) {
-                window.speechSynthesis.cancel();
-            }
-
+            window.speechSynthesis.cancel();
             this.callbacks.onStatusChange?.('Speaking...');
 
             const utterance = new SpeechSynthesisUtterance(text);
-
-            // Prioritize high-quality British voices
             const voices = window.speechSynthesis.getVoices();
-            const preferredVoices = [
-                'Google UK English Female',
-                'Microsoft Hazel',
-                'Daniel',
-                'en-GB'
-            ];
 
-            let selectedVoice = voices.find(v => preferredVoices.some(pref => v.name.includes(pref)));
-            if (!selectedVoice) selectedVoice = voices.find(v => v.lang.includes('en-GB'));
+            // Select High-Quality British English
+            const preferred = ['Google UK English Female', 'Microsoft Hazel', 'Daniel', 'en-GB'];
+            let voice = voices.find(v => preferred.some(p => v.name.includes(p)));
+            if (!voice) voice = voices.find(v => v.lang.slice(0, 5) === 'en-GB');
 
-            if (selectedVoice) utterance.voice = selectedVoice;
+            if (voice) utterance.voice = voice;
             utterance.rate = 1.0;
             utterance.pitch = 1.0;
 
-            utterance.onend = () => {
-                this.currentUtterance = null;
-                resolve(true);
-            };
-
+            utterance.onend = () => resolve(true);
             utterance.onerror = (e) => {
-                console.error('[SpeechSynth] Error:', e);
-                this.currentUtterance = null;
+                console.error('[Voice] Playback error:', e);
                 resolve(false);
             };
 
-            this.currentUtterance = utterance;
             window.speechSynthesis.speak(utterance);
         });
     }
@@ -197,9 +181,7 @@ export class HybridController {
             this.micStream.getTracks().forEach(t => t.stop());
             this.micStream = null;
         }
-        if (this.stopVolumeTimer) {
-            cancelAnimationFrame(this.stopVolumeTimer);
-        }
+        if (this.stopVolumeTimer) cancelAnimationFrame(this.stopVolumeTimer);
         this.analyser = null;
     }
 }
