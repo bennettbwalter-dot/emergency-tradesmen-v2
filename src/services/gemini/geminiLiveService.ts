@@ -29,12 +29,16 @@ export class HybridController {
     private currentUtterance: SpeechSynthesisUtterance | null = null;
 
     constructor() {
-        // Priority 1: VITE_ prefix (Vite/Cloudflare) | Priority 2: Standard env (Local)
-        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || (import.meta as any).env?.GEMINI_API_KEY || '').trim();
+        // Vite requires VITE_ prefix for environment variables to be bundled
+        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
+
+        if (!geminiKey) {
+            console.error("[Voice] CRITICAL: VITE_GEMINI_API_KEY is missing!");
+        }
 
         const genAI = new GoogleGenAI(geminiKey);
         this.geminiModel = genAI.getGenerativeModel({
-            model: 'gemini-1.5-flash',
+            model: 'models/gemini-1.5-flash',
             systemInstruction: SYSTEM_INSTRUCTION,
             tools: [{ functionDeclarations: [navigateToFunction] }]
         });
@@ -44,31 +48,36 @@ export class HybridController {
         this.callbacks = callbacks;
         this.chat = this.geminiModel.startChat();
 
-        // 1. Initialize Microphone Volume Feedback (Local)
-        try {
-            this.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-            const source = audioCtx.createMediaStreamSource(this.micStream);
-            this.analyser = audioCtx.createAnalyser();
-            this.analyser.fftSize = 256;
-            source.connect(this.analyser);
+        this.callbacks.onStatusChange?.('Awaiting Voice...');
 
-            const bufferLength = this.analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
+        // 1. Initialize Microphone Volume Feedback (Non-blocking)
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                this.micStream = stream;
+                const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+                const source = audioCtx.createMediaStreamSource(this.micStream);
+                this.analyser = audioCtx.createAnalyser();
+                this.analyser.fftSize = 256;
+                source.connect(this.analyser);
 
-            const updateVolume = () => {
-                if (!this.analyser) return;
-                this.analyser.getByteFrequencyData(dataArray);
-                let sum = 0;
-                for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
-                const average = sum / bufferLength / 255;
-                this.callbacks.onVolume?.(average);
-                this.stopVolumeTimer = requestAnimationFrame(updateVolume);
-            };
-            updateVolume();
-        } catch (err) {
-            console.warn('[Voice] Feedback suspended:', err);
-        }
+                const bufferLength = this.analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+
+                const updateVolume = () => {
+                    if (!this.analyser) return;
+                    this.analyser.getByteFrequencyData(dataArray);
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
+                    const average = sum / bufferLength / 255;
+                    this.callbacks.onVolume?.(average);
+                    this.stopVolumeTimer = requestAnimationFrame(updateVolume);
+                };
+                updateVolume();
+            })
+            .catch(err => {
+                console.warn('[Voice] Mic permission denied or not found:', err);
+                this.callbacks.onStatusChange?.('Mic Blocked');
+            });
 
         // 2. Initialize Browser Speech Recognition (Listening)
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -80,12 +89,21 @@ export class HybridController {
 
             this.recognition.onresult = (event: any) => {
                 if (window.speechSynthesis.speaking) return;
-
                 for (let i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         const transcript = event.results[i][0].transcript.trim();
                         if (transcript) this.handleUserInput(transcript);
                     }
+                }
+            };
+
+            this.recognition.onstart = () => {
+                this.callbacks.onStatusChange?.('Awaiting Voice...');
+            };
+
+            this.recognition.onerror = (e: any) => {
+                if (e.error === 'not-allowed') {
+                    this.callbacks.onStatusChange?.('Mic Blocked');
                 }
             };
 
@@ -95,8 +113,11 @@ export class HybridController {
                 }
             };
 
-            this.recognition.start();
-            this.callbacks.onStatusChange?.('Awaiting Voice...');
+            try {
+                this.recognition.start();
+            } catch (e) {
+                console.warn('[Voice] Recognition start failed:', e);
+            }
         } else {
             this.callbacks.onError?.(new Error("Browser does not support Speech Recognition."));
         }
