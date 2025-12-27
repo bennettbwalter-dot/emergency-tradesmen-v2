@@ -167,12 +167,16 @@ export class HybridController {
                 let transcript = event.results[i][0].transcript.trim();
                 if (!transcript) continue;
 
-                // --- ECHO FILTER (Robust) ---
-                // If the transcript contains a significant portion of what the AI just said, strip/discard it.
-                if (this.lastSpokeText && transcript.toLowerCase().includes(this.lastSpokeText.toLowerCase().substring(0, 15))) {
-                    console.log('[Voice] Echo Detected (AI words found in user input). Muzzling.');
-                    transcript = transcript.replace(this.lastSpokeText, '').trim();
-                    if (transcript.length < 5) return; // Discard if mostly echo
+                // --- AGGRESSIVE ECHO FILTER ---
+                if (this.lastSpokeText) {
+                    const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
+                    const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
+
+                    // If the transcript contains a major chunk of the AI's last words, it's an echo.
+                    if (cleanNew.includes(cleanOld.substring(0, 20)) || cleanOld.includes(cleanNew.substring(0, 20))) {
+                        console.log('[Voice] Aggressive Echo Filter: Dropped overlap.');
+                        return;
+                    }
                 }
 
                 if (transcript) this.handleUserInput(transcript);
@@ -207,7 +211,7 @@ export class HybridController {
             console.log(`[Voice] Navigating to: ${targetPath}`);
             this.callbacks.onNavigate?.(targetPath);
 
-            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}.`;
+            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}. You're in the right place now. Help is just a few steps away.`;
             this.callbacks.onMessage?.(confirmation, 'model');
             await this.speak(confirmation);
 
@@ -217,42 +221,42 @@ export class HybridController {
 
         // --- STEP 1: PROBLEM/TRADE IDENTIFIED ---
         // Keyword Triage (Offline)
-        const trades: Record<string, { route: string, name: string }> = {
-            'plumber': { route: '/emergency-plumber', name: 'plumber' },
-            'leak': { route: '/emergency-plumber', name: 'plumber' },
-            'water': { route: '/emergency-plumber', name: 'plumber' },
-            'pipe': { route: '/emergency-plumber', name: 'plumber' },
-            'flood': { route: '/emergency-plumber', name: 'plumber' },
-            'burst': { route: '/emergency-plumber', name: 'plumber' },
+        const trades: Record<string, { route: string, name: string, tip: string }> = {
+            'plumber': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'leak': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'water': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'pipe': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'flood': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'burst': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
 
-            'electrician': { route: '/emergency-electrician', name: 'electrician' },
-            'power': { route: '/emergency-electrician', name: 'electrician' },
-            'spark': { route: '/emergency-electrician', name: 'electrician' },
-            'fuse': { route: '/emergency-electrician', name: 'electrician' },
-            'light': { route: '/emergency-electrician', name: 'electrician' },
+            'electrician': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
+            'power': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
+            'spark': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
+            'fuse': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
+            'light': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
 
-            'locksmith': { route: '/emergency-locksmith', name: 'locksmith' },
-            'key': { route: '/emergency-locksmith', name: 'locksmith' },
-            'locked': { route: '/emergency-locksmith', name: 'locksmith' },
-            'door': { route: '/emergency-locksmith', name: 'locksmith' },
+            'locksmith': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
+            'key': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
+            'locked': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
+            'door': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
 
-            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer' },
-            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer' },
-            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer' },
+            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
+            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
+            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
 
-            'drain': { route: '/drain-specialist', name: 'drain specialist' },
-            'sewage': { route: '/drain-specialist', name: 'drain specialist' },
-            'blocked': { route: '/drain-specialist', name: 'drain specialist' },
+            'drain': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
+            'sewage': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
+            'blocked': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
 
-            'glazier': { route: '/emergency-glazier', name: 'glazier' },
-            'glass': { route: '/emergency-glazier', name: 'glazier' },
-            'window': { route: '/emergency-glazier', name: 'glazier' }
+            'glazier': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." },
+            'glass': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." },
+            'window': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." }
         };
 
         for (const [key, data] of Object.entries(trades)) {
             if (lower.includes(key)) {
                 this.pendingTrade = data;
-                const response = `I understand, I can help find a ${data.name} for you. Where are you located?`;
+                const response = `I understand, I can help find a ${data.name} for you. ${data.tip} Where are you located?`;
                 this.callbacks.onMessage?.(response, 'model');
                 await this.speak(response);
                 return;
