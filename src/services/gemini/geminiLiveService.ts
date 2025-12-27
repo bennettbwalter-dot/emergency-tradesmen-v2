@@ -1,5 +1,5 @@
-
 import { SYSTEM_INSTRUCTION } from './constants';
+// Force Refresh: 2
 import { HybridCallbacks } from './types';
 
 declare global {
@@ -209,19 +209,19 @@ export class HybridController {
         // If we match a keyword, we execute immediately and SKIP the Brain to avoid Quota/Latency issues.
         const lower = text.toLowerCase();
         const commands: Record<string, { route: string, speech: string }> = {
-            'plumber': { route: '/emergency-plumber', speech: "I am navigating you to a plumber. If you have a severe leak, turn off your main stopcock immediately." },
-            'pipe': { route: '/emergency-plumber', speech: "Navigating to a plumber. Isolate the water supply if possible." },
-            'leak': { route: '/emergency-plumber', speech: "I'm sending you to a plumber. Try to catch any water in a bucket or towel while you wait." },
+            'plumber': { route: '/emergency-plumber', speech: "Opening Plumber listings. Please select your city to see who is nearby." },
+            'pipe': { route: '/emergency-plumber', speech: "Opening Plumber listings. Please select your city to see who is nearby." },
+            'leak': { route: '/emergency-plumber', speech: "Opening Plumber listings. Please select your city to see who is nearby." },
 
-            'electrician': { route: '/emergency-electrician', speech: "Navigating to an electrician. Do not touch any switches or appliances if there is water nearby." },
-            'spark': { route: '/emergency-electrician', speech: "Connecting you to an electrician info page. Stay safe." },
+            'electrician': { route: '/emergency-electrician', speech: "Opening Electrician listings. Please select your city to see who is nearby." },
+            'spark': { route: '/emergency-electrician', speech: "Opening Electrician listings. Please select your city to see who is nearby." },
 
-            'locksmith': { route: '/emergency-locksmith', speech: "Navigating to a locksmith. Stay in a safe place while you contact them." },
+            'locksmith': { route: '/emergency-locksmith', speech: "Opening Locksmith listings. Please select your city to see who is nearby." },
 
-            'boiler': { route: '/emergency-gas-engineer', speech: "Navigating to gas and heating. If you smell gas, open windows and do not use electrical switches." },
-            'gas': { route: '/emergency-gas-engineer', speech: "Navigating to gas engineer. If you smell gas, open windows immediately." },
+            'boiler': { route: '/emergency-gas-engineer', speech: "Opening Gas Engineer listings. Please select your city to see who is nearby." },
+            'gas': { route: '/emergency-gas-engineer', speech: "Opening Gas Engineer listings. Please select your city to see who is nearby." },
 
-            'drain': { route: '/drain-specialist', speech: "Navigating to drain specialists. Avoid using sinks or toilets for now." },
+            'drain': { route: '/drain-specialist', speech: "Opening Drain listings. Please select your city to see who is nearby." },
 
             'help': { route: '/contact', speech: "I am taking you to the support page." },
             'home': { route: '/', speech: "Returning to the main menu." },
