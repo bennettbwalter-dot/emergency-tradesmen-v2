@@ -52,7 +52,6 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 },
                 onStatusChange: (s) => setStatus(s),
                 onNavigate: (view) => {
-                    console.log(`[Voice] Navigating to ${view}`);
                     navigate(`/${view}`);
                 },
                 onVolume: (v) => setMicVolume(v),

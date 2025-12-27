@@ -149,14 +149,20 @@ export class HybridController {
             this.callbacks.onStatusChange?.('Speaking...');
 
             const utterance = new SpeechSynthesisUtterance(text);
-            const voices = window.speechSynthesis.getVoices();
 
-            // Select High-Quality British English
-            const preferred = ['Google UK English Female', 'Microsoft Hazel', 'Daniel', 'en-GB'];
-            let voice = voices.find(v => preferred.some(p => v.name.includes(p)));
-            if (!voice) voice = voices.find(v => v.lang.slice(0, 5) === 'en-GB');
+            const setBestVoice = () => {
+                const voices = window.speechSynthesis.getVoices();
+                const preferred = ['Google UK English Female', 'Microsoft Hazel', 'Daniel', 'en-GB'];
+                let voice = voices.find(v => preferred.some(p => v.name.includes(p)));
+                if (!voice) voice = voices.find(v => v.lang.slice(0, 5) === 'en-GB');
+                if (voice) utterance.voice = voice;
+            };
 
-            if (voice) utterance.voice = voice;
+            setBestVoice();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = setBestVoice;
+            }
+
             utterance.rate = 1.0;
             utterance.pitch = 1.0;
 
