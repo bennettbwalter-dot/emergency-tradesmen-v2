@@ -21,7 +21,9 @@ export class HybridController {
     private lastSpokeTime: number = 0;
     private audioContext: AudioContext | null = null;
     private currentUtterance: SpeechSynthesisUtterance | null = null;
-    private pendingTrade: { route: string, name: string } | null = null; // State tracking for Problem -> Location flow
+    private pendingTrade: { route: string, name: string } | null = null;
+    private lastSpokeText: string = ""; // Echo Filter
+    private activeMuzzle: boolean = false; // Hard Muzzle State
 
     // Diagnostic State
     private debugState = {
@@ -157,21 +159,31 @@ export class HybridController {
     }
 
     private handleRecognitionResult(event: any) {
-        if (this.isSpeaking) return; // Nuclear block
+        if (this.isSpeaking || this.activeMuzzle) return; // Dual Muzzle
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
-                const transcript = event.results[i][0].transcript.trim();
+                let transcript = event.results[i][0].transcript.trim();
+                if (!transcript) continue;
+
+                // --- ECHO FILTER (Robust) ---
+                // If the transcript contains a significant portion of what the AI just said, strip/discard it.
+                if (this.lastSpokeText && transcript.toLowerCase().includes(this.lastSpokeText.toLowerCase().substring(0, 15))) {
+                    console.log('[Voice] Echo Detected (AI words found in user input). Muzzling.');
+                    transcript = transcript.replace(this.lastSpokeText, '').trim();
+                    if (transcript.length < 5) return; // Discard if mostly echo
+                }
+
                 if (transcript) this.handleUserInput(transcript);
             }
         }
     }
 
     private async handleUserInput(text: string) {
-        if (!text.trim() || this.isSpeaking) return;
+        if (!text.trim() || this.isSpeaking || this.activeMuzzle) return;
 
-        // Earmuff Delay (Reduced to 500ms because muzzle is active)
-        if (Date.now() - this.lastSpokeTime < 500) return;
+        // Ears Reset Gate: Don't allow input for 1 second after speech officially ends.
+        if (Date.now() - this.lastSpokeTime < 1000) return;
 
         this.callbacks.onMessage?.(text, 'user');
         const lower = text.toLowerCase();
@@ -298,9 +310,11 @@ export class HybridController {
 
     private async speak(text: string, autoResume = true) {
         this.isSpeaking = true;
+        this.activeMuzzle = true; // Hardware Muzzle ON
         this.lastSpokeTime = Date.now();
+        this.lastSpokeText = text; // Save for echo filtering
 
-        // Muzzle Recognition
+        // Kill Recognition immediately
         if (this.recognition) {
             try { this.recognition.stop(); } catch (e) { }
         }
@@ -334,15 +348,18 @@ export class HybridController {
 
                 // Delay Ears Reconnection
                 setTimeout(() => {
+                    this.activeMuzzle = false; // Muzzle OFF
+                    this.lastSpokeTime = Date.now(); // Reset gate start
                     if (this.recognition && autoResume) {
                         try { this.recognition.start(); } catch (e) { }
                     }
                     resolve();
-                }, 800);
+                }, 1000); // Wait 1 full second for buffers to clear
             };
 
             utter.onerror = () => {
                 this.isSpeaking = false;
+                this.activeMuzzle = false;
                 resolve();
             };
 
