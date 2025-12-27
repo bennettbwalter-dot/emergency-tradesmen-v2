@@ -1,6 +1,7 @@
 
 import { SYSTEM_INSTRUCTION } from './constants';
 import { HybridCallbacks } from './types';
+import { cities } from '../../lib/trades';
 
 declare global {
     interface Window {
@@ -193,17 +194,20 @@ export class HybridController {
             const trade = this.pendingTrade;
             this.pendingTrade = null; // Clear state early
 
-            // Clean and Slugify Location
-            const cleanCity = text.toLowerCase()
+            // Clean and Match Location (Check cities list for correct spacing/spelling)
+            const cleanText = text.toLowerCase()
                 .replace(/^(in|at|i am in|i'm in|located in|i'm located in)\s+/i, '')
                 .trim();
-            const citySlug = cleanCity.replace(/\s+/g, '-');
-            const targetPath = `${trade.route}/${citySlug}`;
+
+            const matchedCity = cities.find(c => c.toLowerCase() === cleanText);
+            const cityParam = matchedCity || cleanText; // use matched city if found, else transcript
+
+            const targetPath = `${trade.route}/${cityParam}`;
 
             console.log(`[Voice] Navigating to: ${targetPath}`);
             this.callbacks.onNavigate?.(targetPath);
 
-            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cleanCity}.`;
+            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}.`;
             this.callbacks.onMessage?.(confirmation, 'model');
             await this.speak(confirmation);
 
