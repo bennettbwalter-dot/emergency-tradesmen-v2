@@ -22,6 +22,7 @@ import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import VoiceTrigger from "@/components/VoiceAssistant/VoiceTrigger";
+
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Lazy Load Pages
@@ -181,6 +182,7 @@ const App = () => {
                       <BottomNav />
                       <LiveChat />
                       <ErrorBoundary>
+                        {/* Voice Assistant Trigger - Restored per requirements */}
                         {/* Voice Assistant Trigger - Restored per requirements */}
                         <VoiceTrigger />
                       </ErrorBoundary>

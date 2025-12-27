@@ -1,192 +1,349 @@
 
-import { GoogleGenerativeAI, FunctionDeclaration, Schema, Type } from '@google/generative-ai';
 import { SYSTEM_INSTRUCTION } from './constants';
 import { HybridCallbacks } from './types';
+import { ElevenLabsService } from '../elevenLabsService';
 
-const navigateToFunction: FunctionDeclaration = {
-    name: 'navigateTo',
-    parameters: {
-        type: Type.OBJECT,
-        description: 'Navigates the user to a different view in the application portal.',
-        properties: {
-            view: {
-                type: Type.STRING,
-                description: 'The target view name. One of: dashboard, services, blog, premium, contact, analytics, settings, profile.',
-            },
-        },
-        required: ['view'],
-    } as Schema,
-};
+declare global {
+    interface Window {
+        SpeechRecognition: any;
+        webkitSpeechRecognition: any;
+    }
+}
 
 export class HybridController {
-    private geminiModel: any;
-    private chat: any;
+    private apiKey: string;
     private recognition: any | null = null;
     private micStream: MediaStream | null = null;
     private analyser: AnalyserNode | null = null;
     private stopVolumeTimer: any = null;
     private callbacks: HybridCallbacks = {};
-    private currentUtterance: SpeechSynthesisUtterance | null = null;
+    private chatHistory: any[] = [];
+    private isSpeaking: boolean = false;
+    private lastSpokeTime: number = 0;
+    private audioContext: AudioContext | null = null;
+    private ttsService: ElevenLabsService;
+
+    // Diagnostic State
+    private debugState = {
+        audioContextState: 'inactive',
+        micLabel: 'initializing...',
+        recognitionStatus: 'inactive',
+        speechApiSupported: false,
+        lastError: ''
+    };
 
     constructor() {
-        const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-        const genAI = new GoogleGenerativeAI(geminiKey);
-        this.geminiModel = genAI.getGenerativeModel({
-            model: 'gemini-1.5-flash',
-            systemInstruction: SYSTEM_INSTRUCTION,
-            tools: [{ functionDeclarations: [navigateToFunction] }]
-        });
+        // Robust API Key Retrieval for Production
+        this.apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env?.API_KEY : '') || '').trim();
+        this.ttsService = new ElevenLabsService();
     }
 
     public async startSession(callbacks: HybridCallbacks) {
         this.callbacks = callbacks;
-        this.chat = this.geminiModel.startChat();
-        this.callbacks.onStatusChange?.('Waiting for Mic...');
+        this.chatHistory = [];
 
-        // 1. Initialize Microphone (Non-blocking)
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                this.micStream = stream;
-                const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-                const source = audioCtx.createMediaStreamSource(this.micStream);
-                this.analyser = audioCtx.createAnalyser();
-                this.analyser.fftSize = 256;
-                source.connect(this.analyser);
+        // --- DEPLOYMENT RESILIENCE: Missing Key Handling ---
+        if (!this.apiKey) {
+            console.error('[Gemini] Missing API Key. Setup required.');
+            this.callbacks.onError?.(new Error("Internal Error: API_KEY missing."));
+            this.callbacks.onStatusChange?.('Config Error ❌');
 
-                const bufferLength = this.analyser.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLength);
+            setTimeout(() => this.speak("System configuration error. Please check the website settings.", false), 500);
+            return;
+        }
 
-                const updateVolume = () => {
-                    if (!this.analyser) return;
-                    this.analyser.getByteFrequencyData(dataArray);
-                    let sum = 0;
-                    for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
-                    const average = sum / bufferLength / 255;
-                    this.callbacks.onVolume?.(average);
-                    this.stopVolumeTimer = requestAnimationFrame(updateVolume);
-                };
-                updateVolume();
+        this.callbacks.onStatusChange?.('Initializing...');
 
-                // 2. Start Listening ONLY after mic access is granted
-                this.startSpeechRecognition();
-            })
-            .catch(err => {
-                console.warn('[Voice] Mic blocked:', err);
-                this.callbacks.onStatusChange?.('Mic Blocked');
-                // Even without mic, let's greet the user so they know the AI is alive
-                this.handleUserInput("Please greet the user now.");
-            });
+        try {
+            // WARM-UP: Create AudioContext immediately on user gesture
+            const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
+            this.audioContext = new AudioContextClass();
+            if (this.audioContext.state === 'suspended') {
+                await this.audioContext.resume();
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.micStream = stream;
+
+            // Get Mic Label
+            const tracks = stream.getAudioTracks();
+            if (tracks.length > 0) {
+                this.debugState.micLabel = tracks[0].label || 'Default Microphone';
+            }
+            this.broadcastDebug();
+
+            this.setupAudioVisualizer(stream);
+            this.startSpeechRecognition();
+        } catch (err: any) {
+            console.warn('[Voice] Mic blocked:', err);
+            this.debugState.lastError = err.message;
+            this.broadcastDebug();
+
+            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                this.callbacks.onStatusChange?.('Mic Blocked ❌');
+                this.callbacks.onError?.(new Error("Microphone access denied. Please allow permissions."));
+            } else {
+                this.callbacks.onStatusChange?.('Mic Error ❌');
+                this.callbacks.onError?.(new Error(`Microphone error: ${err.message}`));
+            }
+        }
+    }
+
+    private broadcastDebug() {
+        this.callbacks.onDebug?.({
+            audioContextState: this.audioContext?.state || 'inactive',
+            micLabel: this.debugState.micLabel,
+            recognitionStatus: this.debugState.recognitionStatus,
+            speechApiSupported: this.debugState.speechApiSupported,
+            lastError: this.debugState.lastError
+        });
+    }
+
+    private setupAudioVisualizer(stream: MediaStream) {
+        if (!this.audioContext) return;
+
+        const source = this.audioContext.createMediaStreamSource(stream);
+        this.analyser = this.audioContext.createAnalyser();
+        this.analyser.fftSize = 256;
+        source.connect(this.analyser);
+
+        const bufferLength = this.analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        const updateVolume = () => {
+            if (!this.analyser) return;
+            this.analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
+            const average = sum / bufferLength / 255;
+            this.callbacks.onVolume?.(average);
+            this.stopVolumeTimer = requestAnimationFrame(updateVolume);
+        };
+        updateVolume();
     }
 
     private startSpeechRecognition() {
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (SpeechRecognition) {
-            this.recognition = new SpeechRecognition();
-            this.recognition.continuous = true;
-            this.recognition.interimResults = true;
-            this.recognition.lang = 'en-GB';
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-            this.recognition.onresult = (event: any) => {
-                if (window.speechSynthesis.speaking) return;
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        const transcript = event.results[i][0].transcript.trim();
-                        if (transcript) this.handleUserInput(transcript);
-                    }
-                }
-            };
+        this.debugState.speechApiSupported = !!SpeechRecognition;
+        this.broadcastDebug();
 
-            this.recognition.onstart = () => {
-                this.callbacks.onStatusChange?.('Awaiting Voice...');
-            };
-
-            this.recognition.onerror = (e: any) => {
-                if (e.error === 'not-allowed') this.callbacks.onStatusChange?.('Mic Blocked');
-            };
-
-            this.recognition.onend = () => {
-                if (this.recognition) {
-                    try { this.recognition.start(); } catch (e) { }
-                }
-            };
-
-            try {
-                this.recognition.start();
-            } catch (e) {
-                console.warn('[Voice] Recognition start failed:', e);
-            }
-        } else {
+        if (!SpeechRecognition) {
             this.callbacks.onError?.(new Error("Browser Speech Recognition not supported."));
+            this.debugState.recognitionStatus = 'not_supported';
+            this.broadcastDebug();
+            return;
         }
 
-        // Trigger Initial Greeting
-        this.handleUserInput("Please greet the user now.");
+        this.recognition = new SpeechRecognition();
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true;
+        this.recognition.lang = 'en-GB';
+
+        this.recognition.onresult = (event: any) => {
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    const transcript = event.results[i][0].transcript.trim();
+                    if (transcript) this.handleUserInput(transcript);
+                }
+            }
+        };
+
+        this.recognition.onstart = () => {
+            this.debugState.recognitionStatus = 'started';
+            this.broadcastDebug();
+            this.callbacks.onStatusChange?.('Listening (Mic Active)');
+            // GREETING (Strict Wording)
+            if (this.chatHistory.length === 0) {
+                this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened and where you are, and I’ll guide you to the right help.");
+            }
+        };
+
+        this.recognition.onspeechstart = () => this.callbacks.onStatusChange?.('Speech Detected 🗣️');
+        this.recognition.onnomatch = () => this.callbacks.onStatusChange?.('No Speech Recognized');
+
+        this.recognition.onerror = (e: any) => {
+            if (e.error === 'no-speech') return;
+            if (e.error === 'aborted') return;
+            if (e.error === 'not-allowed') this.callbacks.onStatusChange?.('Mic Blocked ❌');
+
+            console.warn('[Voice] Error:', e.error);
+            this.callbacks.onMessage?.(`System: Mic Error (${e.error})`, 'model');
+        };
+
+        this.recognition.onend = () => {
+            // Auto-restart if not manually stopped
+            if (this.recognition && !this.isSpeaking) {
+                try {
+                    this.recognition.start();
+                } catch (e) { }
+            }
+        };
+
+        try {
+            this.recognition.start();
+        } catch (e: any) {
+            console.warn('[Voice] Start failed:', e);
+            this.debugState.recognitionStatus = 'start_failed';
+            this.debugState.lastError = `Start Fail: ${e.message || e}`;
+            this.broadcastDebug();
+        }
     }
 
     private async handleUserInput(text: string) {
-        if (!text.trim()) return;
-        if (text !== "Please greet the user now.") {
-            this.callbacks.onMessage?.(text, 'user');
+        if (!text.trim() || this.isSpeaking) return;
+
+        // TIMESTAMP GATE (Echo Prevention)
+        if (Date.now() - this.lastSpokeTime < 3000) {
+            console.log('[Voice] Ignoring input during speech window (Echo Prevention)');
+            return;
         }
 
+        // TEXT FILTER GATE (Backup Echo Prevention)
+        const cleanText = text.toLowerCase().trim();
+        if (cleanText.includes("emergency tradesmen") || cleanText.includes("through to emergency")) {
+            console.log('[Voice] Ignoring self-echo:', text);
+            return;
+        }
+
+        this.callbacks.onMessage?.(text, 'user');
+
+        // --- OFFLINE EMERGENCY MODE ---
+        const lower = text.toLowerCase();
+        const commands: Record<string, string> = {
+            'plumber': '/emergency-plumber',
+            'electrician': '/emergency-electrician',
+            'locksmith': '/emergency-locksmith',
+            'boiler': '/emergency-gas-engineer',
+            'gas': '/emergency-gas-engineer',
+            'drain': '/drain-specialist',
+            'water': '/emergency-plumber',
+            'help': '/contact',
+            'home': '/',
+            'blog': '/blog'
+        };
+
+        for (const [key, route] of Object.entries(commands)) {
+            if (lower.includes(key)) {
+                console.log('[Voice] Fast Command Triggered:', key);
+                this.callbacks.onNavigate?.(route);
+                this.callbacks.onMessage?.(`Navigating to ${key}...`, 'model');
+            }
+        }
+
+        await this.generateResponse(text);
+    }
+
+    private async generateResponse(userText: string) {
         this.callbacks.onStatusChange?.('Thinking...');
 
+        if (this.chatHistory.length === 0) {
+            this.chatHistory.push({
+                role: "user",
+                parts: [{ text: `SYSTEM_INSTRUCTIONS: ${SYSTEM_INSTRUCTION}` }]
+            });
+            this.chatHistory.push({
+                role: "model",
+                parts: [{ text: "Understood. I will act as the Emergency Tradesmen Concierge." }]
+            });
+        }
+
+        this.chatHistory.push({ role: "user", parts: [{ text: userText }] });
+
         try {
-            const result = await this.chat.sendMessageStream(text);
-            let fullText = '';
-            for await (const chunk of result.stream) {
-                const chunkText = chunk.text();
-                fullText += chunkText;
-                const calls = chunk.functionCalls();
-                if (calls) {
-                    for (const call of calls) {
-                        if (call.name === 'navigateTo') {
-                            this.callbacks.onNavigate?.((call.args as any).view);
-                        }
-                    }
-                }
+            const accountId = 'dd742691cc31b1d460788e1084fe3243';
+            const gatewayId = 'emergency-tradesmen';
+            const provider = 'google-ai-studio';
+            const model = 'gemini-2.5-flash';
+
+            const endpoint = `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/${provider}/v1beta/models/${model}:generateContent?key=${this.apiKey}`;
+
+            const payload = { contents: this.chatHistory };
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                if (response.status === 429) throw new Error("QUOTA_EXCEEDED");
+                throw new Error(errData.error?.message || response.statusText);
             }
 
-            if (fullText) {
-                this.callbacks.onMessage?.(fullText, 'model');
-                await this.speak(fullText);
+            const data = await response.json();
+            const candidate = data.candidates?.[0];
+            const content = candidate?.content;
+
+            if (content) {
+                this.chatHistory.push(content);
+                const parts = content.parts || [];
+                let spokenText = "";
+                for (const part of parts) if (part.text) spokenText += part.text;
+
+                if (spokenText) {
+                    let textToSpeak = spokenText;
+
+                    const navMatch = spokenText.match(/\[NAVIGATE:\s*([^\]]+)\]/);
+                    if (navMatch) {
+                        const route = navMatch[1].trim();
+                        textToSpeak = spokenText.replace(navMatch[0], '').trim();
+                        this.callbacks.onNavigate?.(route);
+                    }
+
+                    this.callbacks.onMessage?.(textToSpeak, 'model');
+                    await this.speak(textToSpeak);
+                }
             }
-            this.callbacks.onStatusChange?.('Awaiting Voice...');
-        } catch (e) {
-            console.error('[Gemini] Response failed:', e);
-            this.callbacks.onError?.(e);
+            this.callbacks.onStatusChange?.('Ready');
+
+        } catch (e: any) {
+            console.error('[Gemini] Brain Error:', e);
+            this.callbacks.onMessage?.(`System: ${e.message}`, 'model');
+
+            if (e.message.includes('QUOTA') || e.message.includes('429')) {
+                await this.speak("I am having trouble connecting to my brain, but I have navigated you to the best page I could find.", false);
+            } else {
+                await this.speak("I am having connection issues.", false);
+            }
+
+            this.stopSession();
+            this.callbacks.onStatusChange?.('Error ❌');
         }
     }
 
-    private async speak(text: string) {
-        return new Promise((resolve) => {
-            window.speechSynthesis.cancel();
-            this.callbacks.onStatusChange?.('Speaking...');
+    private async speak(text: string, autoResume = true) {
+        this.isSpeaking = true;
+        this.lastSpokeTime = Date.now();
+        if (this.recognition) this.recognition.stop();
+        this.callbacks.onStatusChange?.('Speaking...');
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            const setBestVoice = () => {
-                const voices = window.speechSynthesis.getVoices();
-                const preferred = ['Google UK English Female', 'Microsoft Hazel', 'Daniel', 'en-GB'];
-                let voice = voices.find(v => preferred.some(p => v.name.includes(p)));
-                if (!voice) voice = voices.find(v => v.lang.slice(0, 5) === 'en-GB');
-                if (voice) utterance.voice = voice;
-            };
+        try {
+            await this.ttsService.speak(text);
+        } catch (e) {
+            console.log('[Voice] ElevenLabs failed, changing to Browser TTS fallback.');
 
-            setBestVoice();
-            if (window.speechSynthesis.onvoiceschanged !== undefined) {
-                window.speechSynthesis.onvoiceschanged = setBestVoice;
-            }
+            // Browser TTS Fallback
+            await new Promise<void>((resolve) => {
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'en-GB';
+                utter.rate = 1.0;
+                utter.pitch = 1.0;
 
-            utterance.rate = 1.0;
-            utterance.pitch = 1.0;
-            utterance.onend = () => resolve(true);
-            utterance.onerror = (e) => {
-                console.error('[Voice] Playback error:', e);
-                resolve(false);
-            };
+                utter.onend = () => resolve();
+                utter.onerror = () => resolve();
 
-            window.speechSynthesis.speak(utterance);
-        });
+                window.speechSynthesis.speak(utter);
+            });
+        }
+
+        this.isSpeaking = false;
+        await new Promise(r => setTimeout(r, 1000));
+        this.callbacks.onStatusChange?.('Ready');
+        if (this.recognition && autoResume) {
+            try { this.recognition.start(); } catch (e) { }
+        }
     }
 
     public async stopSession() {
@@ -202,5 +359,11 @@ export class HybridController {
         }
         if (this.stopVolumeTimer) cancelAnimationFrame(this.stopVolumeTimer);
         this.analyser = null;
+        this.chatHistory = [];
+        this.isSpeaking = false;
+
+        if (this.audioContext && this.audioContext.state !== 'closed') {
+            this.audioContext.close();
+        }
     }
 }

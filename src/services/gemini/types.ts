@@ -7,8 +7,9 @@ export interface Message {
 
 export interface HybridCallbacks {
     onMessage?: (text: string, role: 'user' | 'model') => void;
-    onNavigate?: (view: string) => void;
-    onVolume?: (volume: number) => void;
-    onError?: (error: any) => void;
-    onStatusChange?: (status: 'Connecting...' | 'Hearing you...' | 'Awaiting Voice...' | 'Thinking...' | 'Speaking...') => void;
+    onNavigate?: (route: string) => void;
+    onVolume?: (level: number) => void;
+    onError?: (error: Error) => void;
+    onStatusChange?: (status: string) => void;
+    onDebug?: (info: any) => void;
 }

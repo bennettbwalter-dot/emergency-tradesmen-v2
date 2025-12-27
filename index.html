@@ -35,6 +35,30 @@
 
     gtag('config', 'G-N9VVX26Z2R');
   </script>
+  <script>
+    window.onerror = function (msg, url, line, col, error) {
+      document.body.innerHTML = `
+        <div style="padding: 20px; font-family: monospace; color: red; background: #fff0f0; border: 2px solid red; z-index: 9999; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+            <h1>🔥 GLOBAL LOAD ERROR</h1>
+            <p><strong>Error:</strong> ${msg}</p>
+            <p><strong>URL:</strong> ${url}</p>
+            <p><strong>Line:</strong> ${line}:${col}</p>
+            <pre style="background: #333; color: #fff; padding: 15px; overflow: auto;">${error ? error.stack : 'No stack trace'}</pre>
+        </div>
+      `;
+      return false;
+    };
+    // Also catch unhandled promise rejections (like async import failures)
+    window.addEventListener('unhandledrejection', function (event) {
+      document.body.innerHTML = `
+        <div style="padding: 20px; font-family: monospace; color: red; background: #fff0f0; border: 2px solid red; z-index: 9999; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+            <h1>🔥 UNHANDLED PROMISE REJECTION</h1>
+            <p>The app failed to load a module.</p>
+            <pre style="background: #333; color: #fff; padding: 15px; overflow: auto;">${event.reason}</pre>
+        </div>
+      `;
+    });
+  </script>
 </head>
 
 <body>

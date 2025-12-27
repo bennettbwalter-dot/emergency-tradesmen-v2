@@ -1,27 +1,28 @@
+
 import React, { useState } from 'react';
 import { Mic } from 'lucide-react';
-import VoiceAssistantModal from './VoiceAssistantModal';
-import { motion, AnimatePresence } from 'framer-motion';
+import { VoiceAssistantModal } from './VoiceAssistantModal';
 
-const VoiceTrigger: React.FC = () => {
+const VoiceTrigger = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
-            <motion.button
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-24 right-4 md:right-8 z-[99] w-14 h-14 rounded-full shadow-[0_0_20px_rgba(255,215,0,0.4)] bg-gold text-black flex items-center justify-center transition-all duration-300 border-2 border-primary hover:scale-110 active:scale-95"
-                aria-label="Talk to Emergency Assistant"
+                className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 
+                         bg-primary text-primary-foreground font-semibold rounded-full 
+                         shadow-lg hover:bg-primary/90 transition-all duration-200
+                         animate-in fade-in slide-in-from-bottom-5"
             >
-                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-20"></div>
-                <Mic className="w-6 h-6 text-white" />
-            </motion.button>
+                <Mic className="w-5 h-5" />
+                <span>Concierge AI</span>
+            </button>
 
-            <VoiceAssistantModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <VoiceAssistantModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+            />
         </>
     );
 };
