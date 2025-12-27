@@ -170,22 +170,47 @@ export class HybridController {
 
         this.callbacks.onMessage?.(text, 'user');
 
-        // Fast Link check (Stateless)
+        // --- 1. OFFLINE TRIAGE (Instant local responses) ---
         const lower = text.toLowerCase();
-        const routes: Record<string, string> = {
-            'plumber': '/emergency-plumber',
-            'electrician': '/emergency-electrician',
-            'locksmith': '/emergency-locksmith',
-            'gas': '/emergency-gas-engineer',
-            'boiler': '/emergency-gas-engineer'
+        const routes: Record<string, { route: string, name: string }> = {
+            'plumber': { route: '/emergency-plumber', name: 'plumber' },
+            'leak': { route: '/emergency-plumber', name: 'plumber' },
+            'pipe': { route: '/emergency-plumber', name: 'plumber' },
+            'water': { route: '/emergency-plumber', name: 'plumber' },
+            'flood': { route: '/emergency-plumber', name: 'plumber' },
+
+            'electrician': { route: '/emergency-electrician', name: 'electrician' },
+            'spark': { route: '/emergency-electrician', name: 'electrician' },
+            'power': { route: '/emergency-electrician', name: 'electrician' },
+
+            'locksmith': { route: '/emergency-locksmith', name: 'locksmith' },
+            'key': { route: '/emergency-locksmith', name: 'locksmith' },
+            'locked out': { route: '/emergency-locksmith', name: 'locksmith' },
+
+            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer' },
+            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer' },
+
+            'drain': { route: '/drain-specialist', name: 'drain specialist' },
+            'sewage': { route: '/drain-specialist', name: 'drain specialist' },
+
+            'glazier': { route: '/emergency-glazier', name: 'glazier' },
+            'glass': { route: '/emergency-glazier', name: 'glazier' }
         };
 
-        for (const [key, val] of Object.entries(routes)) {
+        for (const [key, data] of Object.entries(routes)) {
             if (lower.includes(key)) {
-                this.callbacks.onNavigate?.(val);
+                console.log('[Voice] Local Match Found:', key);
+                this.callbacks.onNavigate?.(data.route);
+                this.callbacks.onMessage?.(`Navigating to emergency ${data.name}...`, 'model');
+
+                // Professional confirmation (Offline)
+                await this.speak(`I’m showing you the nearest available emergency ${data.name} services. Please tap Select City to find who is available in your area.`);
+                this.callbacks.onStatusChange?.('Ready');
+                return; // SKIP API CALL
             }
         }
 
+        // --- 2. ONLINE BRAIN FALLBACK ---
         await this.generateResponse(text);
     }
 
@@ -240,7 +265,10 @@ export class HybridController {
             this.callbacks.onStatusChange?.('Ready');
         } catch (e: any) {
             console.error('[Voice] API Error:', e);
-            this.callbacks.onStatusChange?.('Error ❌');
+            this.callbacks.onStatusChange?.('Quota Full ❌');
+            this.callbacks.onNavigate?.('/contact');
+            await this.speak("I am having trouble connecting to the cloud right now, so I have moved you to our support page for manual assistance.");
+            this.callbacks.onStatusChange?.('Ready');
         }
     }
 
