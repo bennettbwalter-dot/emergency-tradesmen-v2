@@ -32,8 +32,10 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     useEffect(() => {
         if (isOpen) {
-            // Validate API Key Visibility
+            console.log('[DEBUG] Raw Env Vars:', import.meta.env);
             const key = import.meta.env.VITE_GEMINI_API_KEY;
+
+            // Validate API Key Visibility
             if (key && key.length > 5) {
                 setKeyStatus("API Key Detected ✅");
             } else {
