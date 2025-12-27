@@ -10,12 +10,15 @@ interface Props {
     onClose: () => void;
 }
 
+
 const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isActive, setIsActive] = useState(false);
-    const [status, setStatus] = useState<string>("Connecting...");
+    const [status, setStatus] = useState<string>("Ready");
     const [micVolume, setMicVolume] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+    const [keyStatus, setKeyStatus] = useState<string>("Checking...");
 
     const controllerRef = useRef<HybridController | null>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -28,15 +31,25 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
     }, [messages]);
 
     useEffect(() => {
-        if (isOpen && !isActive) {
-            startSession();
-        } else if (!isOpen && isActive) {
+        if (isOpen) {
+            // Validate API Key Visibility
+            const key = import.meta.env.VITE_GEMINI_API_KEY;
+            if (key && key.length > 5) {
+                setKeyStatus("API Key Detected ✅");
+            } else {
+                setKeyStatus("API Key Missing ❌");
+                setError("CRITICAL: VITE_GEMINI_API_KEY is missing from Cloudflare.");
+            }
+        }
+
+        if (!isOpen) {
             stopSession();
         }
-        return () => { if (isActive) stopSession(); };
+        return () => { stopSession(); };
     }, [isOpen]);
 
-    const startSession = async () => {
+    const handleStart = async () => {
+        setHasStarted(true);
         setIsActive(true);
         setError(null);
         setMessages([]);
@@ -57,13 +70,14 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 onVolume: (v) => setMicVolume(v),
                 onError: (err: any) => {
                     console.error("[Voice] Assistant error:", err);
-                    setError(err?.message || "Service unavailable. Check API Key or Mic Permissions.");
+                    setError(err?.message || "Service unavailable.");
                 }
             });
         } catch (e: any) {
             console.error("[Voice] Failed to start:", e);
             setError("Connection failed. Please refresh.");
             setIsActive(false);
+            setHasStarted(false);
         }
     };
 
@@ -73,6 +87,7 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             controllerRef.current = null;
         }
         setIsActive(false);
+        setHasStarted(false);
         setMicVolume(0);
     };
 
@@ -90,8 +105,33 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-2xl text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
                 </div>
 
+                {/* API Key Status Bar (Diagnostic) */}
+                <div className="bg-slate-950 px-6 py-2 border-b border-white/5 flex justify-between items-center">
+                    <span className="text-[10px] text-slate-500 font-mono">System Check:</span>
+                    <span className={`text-[10px] font-bold ${keyStatus.includes('✅') ? 'text-green-500' : 'text-red-500'}`}>{keyStatus}</span>
+                </div>
+
                 <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-4 text-[13px]">
-                    {!error && messages.length === 0 && (
+
+                    {!hasStarted && !error && (
+                        <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
+                            <div className="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center animate-pulse">
+                                <Mic className="w-8 h-8 text-amber-500" />
+                            </div>
+                            <div className="space-y-2">
+                                <h3 className="text-white font-bold text-lg">Ready to Assist</h3>
+                                <p className="text-slate-400 text-xs max-w-[200px] mx-auto">Click below to activate the microphone and start talking.</p>
+                            </div>
+                            <button
+                                onClick={handleStart}
+                                className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl font-black uppercase text-xs tracking-wider transition-all transform active:scale-95 shadow-lg shadow-amber-500/20"
+                            >
+                                Start Conversation
+                            </button>
+                        </div>
+                    )}
+
+                    {hasStarted && !error && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-40">
                             <Mic className="w-10 h-10 text-amber-500" />
                             <p className="text-[10px] text-amber-500 uppercase font-black tracking-[0.2em]">{status}</p>
@@ -102,8 +142,8 @@ const VoiceAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-6">
                             <AlertTriangle className="w-10 h-10 text-red-500" />
                             <p className="text-white text-sm font-bold leading-relaxed">{error}</p>
-                            <button onClick={startSession} className="px-8 py-3 bg-amber-500 text-slate-900 rounded-xl font-black uppercase text-[10px] flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-transform">
-                                <RefreshCw className="w-4 h-4" /> Retry Connection
+                            <button onClick={handleStart} className="px-8 py-3 bg-amber-500 text-slate-900 rounded-xl font-black uppercase text-[10px] flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-transform">
+                                <RefreshCw className="w-4 h-4" /> Rewrite
                             </button>
                         </div>
                     )}
