@@ -205,30 +205,42 @@ export class HybridController {
 
         this.callbacks.onMessage?.(text, 'user');
 
-        // --- OFFLINE EMERGENCY MODE ---
+        // --- OFFLINE EMERGENCY MODE (Priority) ---
+        // If we match a keyword, we execute immediately and SKIP the Brain to avoid Quota/Latency issues.
         const lower = text.toLowerCase();
-        const commands: Record<string, string> = {
-            'plumber': '/emergency-plumber',
-            'electrician': '/emergency-electrician',
-            'locksmith': '/emergency-locksmith',
-            'boiler': '/emergency-gas-engineer',
-            'gas': '/emergency-gas-engineer',
-            'drain': '/drain-specialist',
-            'water': '/emergency-plumber',
-            'help': '/contact',
-            'home': '/',
-            'blog': '/blog'
+        const commands: Record<string, { route: string, speech: string }> = {
+            'plumber': { route: '/emergency-plumber', speech: "I am navigating you to a plumber. If you have a severe leak, turn off your main stopcock immediately." },
+            'pipe': { route: '/emergency-plumber', speech: "Navigating to a plumber. Isolate the water supply if possible." },
+            'leak': { route: '/emergency-plumber', speech: "I'm sending you to a plumber. Try to catch any water in a bucket or towel while you wait." },
+
+            'electrician': { route: '/emergency-electrician', speech: "Navigating to an electrician. Do not touch any switches or appliances if there is water nearby." },
+            'spark': { route: '/emergency-electrician', speech: "Connecting you to an electrician info page. Stay safe." },
+
+            'locksmith': { route: '/emergency-locksmith', speech: "Navigating to a locksmith. Stay in a safe place while you contact them." },
+
+            'boiler': { route: '/emergency-gas-engineer', speech: "Navigating to gas and heating. If you smell gas, open windows and do not use electrical switches." },
+            'gas': { route: '/emergency-gas-engineer', speech: "Navigating to gas engineer. If you smell gas, open windows immediately." },
+
+            'drain': { route: '/drain-specialist', speech: "Navigating to drain specialists. Avoid using sinks or toilets for now." },
+
+            'help': { route: '/contact', speech: "I am taking you to the support page." },
+            'home': { route: '/', speech: "Returning to the main menu." },
+            'blog': { route: '/blog', speech: "Opening the advice blog." }
         };
 
-        for (const [key, route] of Object.entries(commands)) {
+        for (const [key, data] of Object.entries(commands)) {
             if (lower.includes(key)) {
                 console.log('[Voice] Fast Command Triggered:', key);
-                this.callbacks.onNavigate?.(route);
+                this.callbacks.onNavigate?.(data.route);
                 this.callbacks.onMessage?.(`Navigating to ${key}...`, 'model');
-                // Short-circuit API if offline command found to save quota/latency
-                // But we still want the AI to speak if possible.
-                // Decision: If we matched a command, we can just speak a confirmation locally if we wanted to be 100% offline.
-                // However, user likes the AI flow. We'll proceed to generateResponse but the navigation happens instantly.
+
+                // Speak safety advice immediately (Offline)
+                await this.speak(data.speech);
+
+                // CRITICAL: Stop here. Do not call the API.
+                // This prevents "QUOTA_EXCEEDED" errors when we have successfully handled the intent locally.
+                this.callbacks.onStatusChange?.('Ready');
+                return;
             }
         }
 
