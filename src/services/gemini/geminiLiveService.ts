@@ -25,6 +25,7 @@ export class HybridController {
     private pendingTrade: { route: string, name: string } | null = null;
     private lastSpokeText: string = ""; // Echo Filter
     private activeMuzzle: boolean = false; // Hard Muzzle State
+    private isActiveFlag: boolean = false; // Session Lifecycle Flag
 
     // Diagnostic State
     private debugState = {
@@ -40,6 +41,7 @@ export class HybridController {
     }
 
     public async startSession(callbacks: HybridCallbacks) {
+        this.isActiveFlag = true;
         this.callbacks = callbacks;
         this.chatHistory = [];
 
@@ -133,15 +135,17 @@ export class HybridController {
                 // Mobile Failsafe: Wait for voices
                 if (window.speechSynthesis.getVoices().length === 0) {
                     window.speechSynthesis.onvoiceschanged = () => {
-                        if (this.chatHistory.length === 0) {
+                        if (this.isActiveFlag && this.chatHistory.length === 0) {
                             this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
                             this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
                         }
                         window.speechSynthesis.onvoiceschanged = null;
                     };
                 } else {
-                    this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
-                    this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
+                    if (this.isActiveFlag && this.chatHistory.length === 0) {
+                        this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
+                        this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
+                    }
                 }
             }
         };
@@ -160,22 +164,27 @@ export class HybridController {
     }
 
     private handleRecognitionResult(event: any) {
-        if (this.isSpeaking || this.activeMuzzle) return; // Dual Muzzle
+        if (!this.isActiveFlag || this.isSpeaking || this.activeMuzzle) return; // Triple Muzzle
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
                 let transcript = event.results[i][0].transcript.trim();
                 if (!transcript) continue;
 
-                // --- AGGRESSIVE ECHO FILTER ---
+                // --- ROBUST FUZZY ECHO FILTER ---
                 if (this.lastSpokeText) {
-                    const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
-                    const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
+                    const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
+                    const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
 
-                    // If the transcript contains a major chunk of the AI's last words, it's an echo.
-                    if (cleanNew.includes(cleanOld.substring(0, 20)) || cleanOld.includes(cleanNew.substring(0, 20))) {
-                        console.log('[Voice] Aggressive Echo Filter: Dropped overlap.');
-                        return;
+                    if (cleanOld.length > 0 && cleanNew.length > 0) {
+                        const overlap = cleanNew.filter(word => cleanOld.includes(word));
+                        const overlapRatio = overlap.length / Math.max(cleanNew.length, 1);
+
+                        // If more than 50% of the words overlap, it's almost certainly an echo.
+                        if (overlapRatio > 0.5 || (cleanNew.length > 5 && overlap.length >= 3)) {
+                            console.log(`[Voice] Fuzzy Echo Filter: Dropped overlap (${Math.round(overlapRatio * 100)}%).`);
+                            return;
+                        }
                     }
                 }
 
@@ -185,77 +194,135 @@ export class HybridController {
     }
 
     private async handleUserInput(text: string) {
-        if (!text.trim() || this.isSpeaking || this.activeMuzzle) return;
+        if (!this.isActiveFlag || !text.trim() || this.isSpeaking || this.activeMuzzle) return;
 
-        // Ears Reset Gate: Don't allow input for 700ms after speech officially ends.
-        if (Date.now() - this.lastSpokeTime < 700) return;
+        // Ears Reset Gate: Don't allow input for 800ms after speech officially ends.
+        if (Date.now() - this.lastSpokeTime < 800) return;
 
         this.callbacks.onMessage?.(text, 'user');
         const lower = text.toLowerCase();
 
-        // --- STEP 2: LOCATION IDENTIFIED ---
+        // --- STEP 2: LOCATION IDENTIFIED (OFFLINE FIRST) ---
         if (this.pendingTrade) {
             const trade = this.pendingTrade;
-            this.pendingTrade = null; // Clear state early
 
-            // Clean and Match Location (Check cities list for correct spacing/spelling)
-            const cleanText = text.toLowerCase()
-                .replace(/^(in|at|i am in|i'm in|located in|i'm located in)\s+/i, '')
-                .trim();
+            // If they are asking for something else entirely, discard the pending trade
+            const bypassKeywords = ['about', 'pricing', 'contact', 'blog', 'help', 'who are you', 'how much'];
+            const isBypass = bypassKeywords.some(k => lower.includes(k));
 
-            const matchedCity = cities.find(c => c.toLowerCase() === cleanText);
-            const cityParam = matchedCity || cleanText; // use matched city if found, else transcript
+            if (!isBypass) {
+                this.pendingTrade = null; // Clear state early
 
-            const targetPath = `${trade.route}/${cityParam}`;
+                // Clean and Match Location
+                const cleanText = text.toLowerCase()
+                    .replace(/^(in|at|i am in|i'm in|located in|i'm located in|live in|city of|area of|i'm near|near)\s/i, '')
+                    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                    .replace(/\s+/g, ' ')
+                    .trim();
 
-            console.log(`[Voice] Navigating to: ${targetPath}`);
-            this.callbacks.onNavigate?.(targetPath);
+                if (cleanText.length > 2) {
+                    const matchedCity = cities.find(c => c.toLowerCase() === cleanText);
+                    const cityParam = matchedCity || cleanText;
 
-            const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}. You're in the right place now. Help is just a few steps away.`;
-            this.callbacks.onMessage?.(confirmation, 'model');
-            await this.speak(confirmation);
+                    const targetPath = `${trade.route}/${cityParam}`;
+                    console.log(`[Voice] Navigating to: ${targetPath}`);
+                    this.callbacks.onNavigate?.(targetPath);
 
-            this.callbacks.onStatusChange?.('Ready');
-            return;
+                    const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}. You're in the right place now. Help is just a few steps away.`;
+                    this.callbacks.onMessage?.(confirmation, 'model');
+                    await this.speak(confirmation);
+                    this.callbacks.onStatusChange?.('Ready');
+                    return;
+                }
+            }
         }
 
-        // --- STEP 1: PROBLEM/TRADE IDENTIFIED ---
-        // Keyword Triage (Offline)
-        const trades: Record<string, { route: string, name: string, tip: string }> = {
-            'plumber': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-            'leak': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-            'water': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-            'pipe': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-            'flood': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-            'burst': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
-
-            'electrician': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
-            'power': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
-            'spark': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
-            'fuse': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
-            'light': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
-
-            'locksmith': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
-            'key': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
-            'locked': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
-            'door': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
-
-            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
-            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
-            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
-
-            'drain': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
-            'sewage': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
-            'blocked': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
-
-            'glazier': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." },
-            'glass': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." },
-            'window': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." }
+        // --- LOCAL BRAIN: OFFLINE APP KNOWLEDGE (100% RELIABILITY) ---
+        const localKnowledge: Record<string, { route?: string, response: string }> = {
+            'home': { route: '/', response: "I'll take you back to the main search hub now." },
+            'about': { route: '/about', response: "We set the standard for emergency repairs, trusted by over 10,000 UK homes with a 60-minute response aim." },
+            'who are you': { route: '/about', response: "I am the Emergency Tradesmen Concierge. I help you find verified tradespeople in your area." },
+            'what is this': { route: '/about', response: "Emergency Tradesmen is a platform that connects you with verified experts for household emergencies 24 hours a day." },
+            'blog': { route: '/blog', response: "I can show you our emergency guides and safety manuals on our blog." },
+            'guide': { route: '/blog', response: "I can show you our emergency guides and safety manuals on our blog." },
+            'manual': { route: '/blog', response: "I can show you our emergency guides and safety manuals on our blog." },
+            'pricing': { route: '/tradesmen', response: "Basic listings are free. Pro Monthly is £29, and Pro Yearly is £99 for priority ranking." },
+            'price': { route: '/tradesmen', response: "Basic listings are free. Pro Monthly is £29, and Pro Yearly is £99 for priority ranking." },
+            'cost': { route: '/tradesmen', response: "Basic listings are free. Pro Monthly is £29, and Pro Yearly is £99 for priority ranking." },
+            'how much': { route: '/tradesmen', response: "Basic listings are free. Pro Monthly is £29, and Pro Yearly is £99 for priority ranking." },
+            'membership': { route: '/tradesmen', response: "We offer free basic listings and Pro memberships for priority ranking and instant leads." },
+            'plans': { route: '/tradesmen', response: "We offer free basic listings and Pro memberships for priority ranking and instant leads." },
+            'sign up': { route: '/tradesmen', response: "I'll take you to the tradesmen sign-up page now. Our Pro plans offer instant lead notifications." },
+            'join': { route: '/tradesmen', response: "I'll take you to the tradesmen sign-up page now. Our Pro plans offer instant lead notifications." },
+            'contact': { route: '/contact', response: "You can reach us at emergencytradesmen@outlook.com or through our support page. I'll move you there now." },
+            'support': { route: '/contact', response: "You can reach us at emergencytradesmen@outlook.com or through our support page. I'll move you there now." },
+            'help': { response: "I am here to help. Tell me what's happened, like a leak, power cut, or if you're locked out." },
+            'hello': { response: "Hello, you're through to Emergency Tradesmen. Tell me what's happened and I'll find the right help for you." },
+            'dashboard': { route: '/user/dashboard', response: "I'll take you to your dashboard where you can manage your profile." },
+            'profile': { route: '/user/dashboard', response: "I'll take you to your dashboard where you can manage your profile." },
+            'vetted': { response: "All tradesmen are vetted for certifications like Gas Safe or NICEIC before receiving priority ranking." },
+            'insurance': { response: "Every professional on our platform is required to hold valid public liability insurance for your peace of mind." },
+            'how it works': { route: '/about', response: "We connect you with emergency experts in minutes. Simply tell me your problem and location, and I'll do the rest." }
         };
 
-        for (const [key, data] of Object.entries(trades)) {
+        for (const [key, data] of Object.entries(localKnowledge)) {
             if (lower.includes(key)) {
-                this.pendingTrade = data;
+                if (data.route) this.callbacks.onNavigate?.(data.route);
+                this.callbacks.onMessage?.(data.response, 'model');
+                await this.speak(data.response);
+                return;
+            }
+        }
+
+        // --- STEP 1: PROBLEM/TRADE IDENTIFIED (OFFLINE TRIAGE) ---
+        const trades: Record<string, { route: string, name: string, tip: string, keywords: string[] }> = {
+            'plumber': {
+                route: '/emergency-plumber',
+                name: 'plumber',
+                tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately.",
+                keywords: ['plumber', 'leak', 'water', 'pipe', 'flood', 'burst', 'toilet', 'tap', 'shower', 'sink', 'radiator']
+            },
+            'electrician': {
+                route: '/emergency-electrician',
+                name: 'electrician',
+                tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area.",
+                keywords: ['electrician', 'power', 'spark', 'fuse', 'light', 'socket', 'tripped', 'electricity', 'blackout']
+            },
+            'locksmith': {
+                route: '/emergency-locksmith',
+                name: 'locksmith',
+                tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage.",
+                keywords: ['locksmith', 'key', 'locked', 'door', 'lock', 'broken key', 'lost keys', 'gain entry']
+            },
+            'gas': {
+                route: '/emergency-gas-engineer',
+                name: 'gas engineer',
+                tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately.",
+                keywords: ['gas', 'boiler', 'heating', 'radiator', 'smell gas', 'carbon monoxide']
+            },
+            'drain': {
+                route: '/emergency-drain-specialist',
+                name: 'drain specialist',
+                tip: "Avoid contact with any waste water. Keep children and pets away from the affected area.",
+                keywords: ['drain', 'sewage', 'blocked', 'gutter', 'pipe', 'manhole', 'overflow']
+            },
+            'glazier': {
+                route: '/emergency-glazier',
+                name: 'glazier',
+                tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself.",
+                keywords: ['glazier', 'glass', 'window', 'mirror', 'broken', 'smash', 'board up']
+            },
+            'breakdown': {
+                route: '/emergency-breakdown',
+                name: 'breakdown recovery',
+                tip: "Stay behind the safety barrier or away from the road. Keep your hazard lights on.",
+                keywords: ['breakdown', 'recovery', 'towing', 'tire', 'puncture', 'accident', 'roadside', 'stranded', 'engine']
+            }
+        };
+
+        for (const [id, data] of Object.entries(trades)) {
+            if (data.keywords.some(k => lower.includes(k))) {
+                this.pendingTrade = { route: data.route, name: data.name };
                 const response = `I understand, I can help find a ${data.name} for you. ${data.tip} Where are you located?`;
                 this.callbacks.onMessage?.(response, 'model');
                 await this.speak(response);
@@ -268,6 +335,7 @@ export class HybridController {
     }
 
     private async generateResponse(userText: string) {
+        if (!this.isActiveFlag) return;
         this.callbacks.onStatusChange?.('Thinking...');
 
         if (this.chatHistory.length === 0) {
@@ -318,14 +386,14 @@ export class HybridController {
             this.callbacks.onStatusChange?.('Ready');
         } catch (e: any) {
             console.error('[Voice] API Error:', e);
-            this.callbacks.onStatusChange?.('Quota Full ❌');
-            this.callbacks.onNavigate?.('/contact');
-            await this.speak("I am having trouble connecting to the cloud right now, so I have moved you to our support page for manual assistance.");
+            this.callbacks.onStatusChange?.('Ready');
+            await this.speak("I'm sorry, I'm having a brief connection issue. However, I can still help you find a tradesman manually if you look at the trade sections on the page.");
             this.callbacks.onStatusChange?.('Ready');
         }
     }
 
     private async speak(text: string, autoResume = true) {
+        if (!this.isActiveFlag) return;
         this.isSpeaking = true;
         this.activeMuzzle = true; // Hardware Muzzle ON
         this.lastSpokeTime = Date.now();
@@ -363,15 +431,16 @@ export class HybridController {
                 this.currentUtterance = null;
                 this.callbacks.onStatusChange?.('Ready');
 
-                // Snappier ears reconnection (reduced from 1000ms)
+                // Safely wait for audio buffers to clear (increased to 800ms)
                 setTimeout(() => {
+                    if (!this.isActiveFlag) return;
                     this.activeMuzzle = false; // Muzzle OFF
                     this.lastSpokeTime = Date.now(); // Reset gate start
                     if (this.recognition && autoResume) {
                         try { this.recognition.start(); } catch (e) { }
                     }
                     resolve();
-                }, 700);
+                }, 800);
             };
 
             utter.onerror = () => {
@@ -385,6 +454,7 @@ export class HybridController {
     }
 
     public async stopSession() {
+        this.isActiveFlag = false;
         if (this.recognition) {
             this.recognition.onend = null;
             this.recognition.stop();
