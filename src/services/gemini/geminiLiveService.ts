@@ -260,12 +260,16 @@ export class HybridController {
             const utter = new SpeechSynthesisUtterance(text);
             this.currentUtterance = utter;
 
-            // BEST BRITISH VOICE LOGIC (From Yesterday's Success)
+            // BEST BRITISH VOICE LOGIC (Optimized for Mobile & Desktop)
             const voices = window.speechSynthesis.getVoices();
-            const preferred = voices.find(v => v.name.includes("Google UK English Male")) ||
+            const preferred =
+                voices.find(v => v.name.includes("Google UK English Male")) ||
+                voices.find(v => v.name.includes("Google UK English Female")) ||
                 voices.find(v => v.name.includes("Microsoft George")) ||
-                voices.find(v => v.name.includes("Daniel")) ||
-                voices.find(v => v.lang === "en-GB");
+                voices.find(v => v.name.includes("Martha")) || // High-quality iOS
+                voices.find(v => v.name.includes("Daniel")) || // High-quality iOS/Mac
+                voices.find(v => v.name.includes("Arthur")) || // High-quality iOS
+                voices.find(v => v.lang === "en-GB" || v.lang === "en_GB");
 
             if (preferred) utter.voice = preferred;
             utter.lang = 'en-GB';
