@@ -20,6 +20,7 @@ export class HybridController {
     private isSpeaking: boolean = false;
     private lastSpokeTime: number = 0;
     private audioContext: AudioContext | null = null;
+    private pendingTrade: { name: string, route: string } | null = null;
 
     // Diagnostic State
     private debugState = {
