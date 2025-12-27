@@ -1,5 +1,5 @@
 
-import { GoogleGenAI, Type, FunctionDeclaration, Schema } from '@google/genai';
+import { GoogleGenerativeAI, FunctionDeclaration, Schema, Type } from '@google/generative-ai';
 import { SYSTEM_INSTRUCTION } from './constants';
 import { HybridCallbacks } from './types';
 
@@ -30,9 +30,9 @@ export class HybridController {
 
     constructor() {
         const geminiKey = (import.meta.env.VITE_GEMINI_API_KEY || '').trim();
-        const genAI = new GoogleGenAI(geminiKey);
+        const genAI = new GoogleGenerativeAI(geminiKey);
         this.geminiModel = genAI.getGenerativeModel({
-            model: 'models/gemini-1.5-flash',
+            model: 'gemini-1.5-flash',
             systemInstruction: SYSTEM_INSTRUCTION,
             tools: [{ functionDeclarations: [navigateToFunction] }]
         });
