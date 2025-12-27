@@ -315,10 +315,14 @@ export class HybridController {
             console.error('[Gemini] Brain Error:', e);
             this.callbacks.onMessage?.(`System: ${e.message}`, 'model');
 
+            // FALLBACK BEHAVIOR (When Brain is Dead/Quota is Full)
             if (e.message.includes('QUOTA') || e.message.includes('429')) {
-                await this.speak("I am having trouble connecting to my brain, but I have navigated you to the best page I could find.", false);
+                // Actually navigate to help
+                this.callbacks.onNavigate?.('/contact');
+                await this.speak("I cannot reach the cloud right now, so I have navigated you to the manual support page.", false);
             } else {
-                await this.speak("I am having connection issues.", false);
+                this.callbacks.onNavigate?.('/');
+                await this.speak("Connection error. Please select a trade from the menu.", false);
             }
 
             this.stopSession();
