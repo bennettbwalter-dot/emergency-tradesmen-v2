@@ -187,8 +187,8 @@ export class HybridController {
     private async handleUserInput(text: string) {
         if (!text.trim() || this.isSpeaking || this.activeMuzzle) return;
 
-        // Ears Reset Gate: Don't allow input for 1 second after speech officially ends.
-        if (Date.now() - this.lastSpokeTime < 1000) return;
+        // Ears Reset Gate: Don't allow input for 700ms after speech officially ends.
+        if (Date.now() - this.lastSpokeTime < 700) return;
 
         this.callbacks.onMessage?.(text, 'user');
         const lower = text.toLowerCase();
@@ -222,35 +222,35 @@ export class HybridController {
         // --- STEP 1: PROBLEM/TRADE IDENTIFIED ---
         // Keyword Triage (Offline)
         const trades: Record<string, { route: string, name: string, tip: string }> = {
-            'plumber': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
-            'leak': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
-            'water': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
-            'pipe': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
-            'flood': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
-            'burst': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid switches and sockets." },
+            'plumber': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
+            'leak': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
+            'water': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
+            'pipe': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
+            'flood': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
+            'burst': { route: '/emergency-plumber', name: 'plumber', tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately." },
 
-            'electrician': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
-            'power': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
-            'spark': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
-            'fuse': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
-            'light': { route: '/emergency-electrician', name: 'electrician', tip: "If there’s water near sockets or a burning smell, keep clear of electrics." },
+            'electrician': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
+            'power': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
+            'spark': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
+            'fuse': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
+            'light': { route: '/emergency-electrician', name: 'electrician', tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area." },
 
-            'locksmith': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
-            'key': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
-            'locked': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
-            'door': { route: '/emergency-locksmith', name: 'locksmith', tip: "Please stay in a well-lit, safe area while you wait." },
+            'locksmith': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
+            'key': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
+            'locked': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
+            'door': { route: '/emergency-locksmith', name: 'locksmith', tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage." },
 
-            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
-            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
-            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "If you smell gas or feel unwell, leave the property and get fresh air immediately." },
+            'gas': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
+            'boiler': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
+            'heating': { route: '/emergency-gas-engineer', name: 'gas engineer', tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately." },
 
-            'drain': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
-            'sewage': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
-            'blocked': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with waste water and keep children and pets away." },
+            'drain': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
+            'sewage': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
+            'blocked': { route: '/drain-specialist', name: 'drain specialist', tip: "Avoid contact with any waste water. Keep children and pets away from the affected area." },
 
-            'glazier': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." },
-            'glass': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." },
-            'window': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of broken glass and don’t touch sharp edges." }
+            'glazier': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." },
+            'glass': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." },
+            'window': { route: '/emergency-glazier', name: 'glazier', tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself." }
         };
 
         for (const [key, data] of Object.entries(trades)) {
@@ -363,7 +363,7 @@ export class HybridController {
                 this.currentUtterance = null;
                 this.callbacks.onStatusChange?.('Ready');
 
-                // Delay Ears Reconnection
+                // Snappier ears reconnection (reduced from 1000ms)
                 setTimeout(() => {
                     this.activeMuzzle = false; // Muzzle OFF
                     this.lastSpokeTime = Date.now(); // Reset gate start
@@ -371,7 +371,7 @@ export class HybridController {
                         try { this.recognition.start(); } catch (e) { }
                     }
                     resolve();
-                }, 1000); // Wait 1 full second for buffers to clear
+                }, 700);
             };
 
             utter.onerror = () => {
