@@ -137,12 +137,14 @@ const VoiceTrigger = () => {
         if (silenceTimer.current) clearTimeout(silenceTimer.current);
 
         if (final || interim.length > 0) {
-            silenceTimer.current = setTimeout(() => {
-                const text = (final + " " + interim).trim();
-                if (text.length > 2) {
-                    processInput(text);
-                }
-            }, 1200);
+            if (final || interim.length > 0) {
+                silenceTimer.current = setTimeout(() => {
+                    const text = (final + " " + interim).trim();
+                    if (text.length > 1) { // Also reduced min length slightly to catch "Yes/No" better
+                        processInput(text);
+                    }
+                }, 1000); // 1.0s silence for snappier turn-taking
+            }
         }
     };
 
