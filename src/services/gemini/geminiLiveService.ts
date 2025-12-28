@@ -177,8 +177,9 @@ export class HybridController {
         console.log('[Voice] Initializing Immortal Engine...');
         this.recognition = new SpeechRecognition();
 
-        // SIMPLIFIED MODE: Continuous listening on ALL devices for "Tap to Talk / Tap to Stop" logic
-        this.recognition.continuous = true;
+        // HYBRID MODE: Continuous for Desktop, Discrete for Mobile (most stable)
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        this.recognition.continuous = !isMobile;
 
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -192,12 +193,10 @@ export class HybridController {
             this.activeMuzzle = false;
             this.broadcastDebug();
 
-            // Only update UI if we are actually starting fresh, to avoid flickering during Silent Restarts
             if (this.callbacks.onStatusChange) {
                 this.callbacks.onStatusChange('Listening');
             }
 
-            // Send initial greeting if fresh session
             if (this.isActiveFlag && this.chatHistory.length === 0) {
                 this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
                 this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
@@ -209,10 +208,11 @@ export class HybridController {
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // IMMORTAL RESTART: Unless explicitly stopped by user, we restart IMMEDIATELY.
-            // SILENT RESTART: Do not change UI status here. Keep it "Listening".
+            // RESTART LOOP:
+            // If active and NOT speaking, we restart immediately.
+            // On mobile (non-continuous), this fires after every sentence -> triggers restart -> "Always Listening" effect.
             if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                console.log('[Voice] Immediate resurrection...');
+                console.log('[Voice] Restarting listener...');
                 try { this.recognition.start(); } catch (e) { }
             }
         };
@@ -506,33 +506,13 @@ export class HybridController {
 
         this.callbacks.onStatusChange?.('Speaking...');
 
-        // AZURE TTS REPLACEMENT
-        await new Promise<void>((resolve) => {
-            // We wrap the synchronous Azure call in a promise shim for compatibility
-            // Ideally Azure SDK returns a promise or has callbacks.
-            // My implementation of playNavigationVoice was void, I should update it or just call it.
-            // The user asked to "Call playNavigationVoice(text)".
-            playNavigationVoice(text);
-
-            // Since we don't have an 'onEnd' easily from that simple function,
-            // we might need to approximate duration or update azureVoice.ts to return a promise.
-            // For now, I'll rely on the text length for a rough "speaking" lock
-            // OR better, I should update azureVoice.ts to expose a completion callback.
-            // But following the strict "Call playNavigationVoice" instruction:
-
-            // Rough approximation: 100ms per character?
-            // No, that's bad. I'll update azureVoice.ts to take a callback.
-            // Wait, I can't easily edit azureVoice.ts in the same step.
-            // I'll assume for this step I just call it.
-
-            // Actually, I'll just release the lock after a safe delay for now
-            // or update `azureVoice.ts` in the NEXT step to support callbacks.
-            // User instruction: "Call playNavigationVoice(instructionText) at that exact moment".
-
-            // Let's use a safe fallback for the "isSpeaking" flag reset.
-            const estimatedDuration = Math.max(2000, text.length * 60);
-            setTimeout(() => resolve(), estimatedDuration);
-        });
+        // AZURE TTS REPLACEMENT (STRICT AWAIT)
+        try {
+            // This promise now resolves ONLY when audio playback finishes
+            await playNavigationVoice(text);
+        } catch (e) {
+            console.error('[Voice] TTS Error:', e);
+        }
 
         // Post-Speech Cleanup (Polite Mode)
         // We run this after the estimated duration

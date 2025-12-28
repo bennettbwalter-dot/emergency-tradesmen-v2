@@ -32,27 +32,33 @@ function initSynthesizer() {
     }
 }
 
-export function playNavigationVoice(text: string) {
-    if (!synthesizer) {
-        // Try to init if missing, but it might fail autoplay if no gesture active
-        initSynthesizer();
-    }
+export function playNavigationVoice(text: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        if (!synthesizer) {
+            initSynthesizer();
+        }
 
-    if (synthesizer) {
-        synthesizer.speakTextAsync(
-            text,
-            (result) => {
-                if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-                    console.log("Speech synthesized to speaker for text [" + text + "]");
-                } else {
-                    console.error("Speech synthesis canceled, " + result.errorDetails);
+        if (synthesizer) {
+            synthesizer.speakTextAsync(
+                text,
+                (result) => {
+                    if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
+                        console.log("Speech synthesized to speaker for text [" + text + "]");
+                        resolve();
+                    } else {
+                        console.error("Speech synthesis canceled, " + result.errorDetails);
+                        reject(result.errorDetails);
+                    }
+                },
+                (err) => {
+                    console.error("err - " + err);
+                    synthesizer!.close();
+                    synthesizer = null;
+                    reject(err);
                 }
-            },
-            (err) => {
-                console.error("err - " + err);
-                synthesizer!.close();
-                synthesizer = null;
-            }
-        );
-    }
+            );
+        } else {
+            resolve(); // Fail safe
+        }
+    });
 }
