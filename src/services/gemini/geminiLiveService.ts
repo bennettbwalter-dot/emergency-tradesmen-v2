@@ -123,8 +123,9 @@ export class HybridController {
 
         this.recognition = new SpeechRecognition();
 
-        // Mobile Tweak: Some mobile browsers are better with continuous = false
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        // Mobile Tweak: Discrete recognition is MUCH more stable on mobile
         this.recognition.continuous = !isMobile;
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -132,7 +133,14 @@ export class HybridController {
         this.recognition.onresult = this.handleRecognitionResult.bind(this);
 
         this.recognition.onstart = () => {
+            console.log('[Voice] Recognition started');
             this.debugState.recognitionStatus = 'started';
+
+            // SAFETY OVERRIDE: If the mic is on, we MUST be listening. 
+            // This prevents the agent from staying "deaf" if a speaking state got stuck.
+            this.isSpeaking = false;
+            this.activeMuzzle = false;
+
             this.broadcastDebug();
             this.callbacks.onStatusChange?.('Ready');
 
@@ -156,15 +164,19 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
+            console.log('[Voice] Recognition ended');
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
-            // Aggressive restart for mobile
-            if (this.isActiveFlag && !this.isSpeaking) {
+
+            // Aggressive restart for all devices if still active
+            // On mobile (continuous: false), this will fire after every sentence.
+            if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
+                const delay = isMobile ? 100 : 200;
                 setTimeout(() => {
-                    if (this.isActiveFlag && !this.isSpeaking) {
+                    if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
                         try { this.recognition.start(); } catch (e) { }
                     }
-                }, 100);
+                }, delay);
             }
         };
 
@@ -175,6 +187,7 @@ export class HybridController {
         };
 
         try {
+            console.log('[Voice] Attempting to start recognition...');
             this.recognition.start();
             this.startHeartbeat();
         } catch (e: any) {
@@ -185,22 +198,28 @@ export class HybridController {
     private startHeartbeat() {
         if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
         this.heartbeatTimer = setInterval(() => {
+            // Heartbeat should be even more aggressive on mobile
             if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                // If it should be running but isn't
                 if (this.debugState.recognitionStatus !== 'started' && this.debugState.recognitionStatus !== 'starting') {
-                    console.log('[Voice] Heartbeat: Restarting recognition...');
-                    try { this.recognition.start(); } catch (e) { }
+                    console.log('[Voice] Heartbeat: Forcing restart...');
+                    try {
+                        this.recognition.stop();
+                        setTimeout(() => this.recognition.start(), 100);
+                    } catch (e) {
+                        try { this.recognition.start(); } catch (err) { }
+                    }
                 }
             }
-        }, 2000);
+        }, 3000); // 3 seconds is plenty for a health check
     }
 
     private handleRecognitionResult(event: any) {
-        if (!this.isActiveFlag || this.isSpeaking || this.activeMuzzle) return; // Triple Muzzle
+        if (!this.isActiveFlag || this.isSpeaking || this.activeMuzzle) return;
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
+            const transcript = event.results[i][0].transcript.trim();
             if (event.results[i].isFinal) {
-                let transcript = event.results[i][0].transcript.trim();
+                console.log(`[Voice] Final Transcript: "${transcript}"`);
                 if (!transcript) continue;
 
                 // --- ROBUST FUZZY ECHO FILTER ---
@@ -250,7 +269,11 @@ export class HybridController {
                     this.pendingTrade = null; // Clear state
                     const targetPath = `${trade.route}/${matchedCity}`;
                     console.log(`[Voice] Navigating to: ${targetPath}`);
-                    this.callbacks.onNavigate?.(targetPath);
+
+                    // NAVIGATION GUARD: Added small delay for mobile context switches
+                    setTimeout(() => {
+                        this.callbacks.onNavigate?.(targetPath);
+                    }, 500);
 
                     const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${matchedCity}. You're in the right place now. Help is just a few steps away.`;
                     this.callbacks.onMessage?.(confirmation, 'model');
@@ -349,7 +372,12 @@ export class HybridController {
                 // ONE-SHOT CHECK: Did they also mention a city?
                 if (matchedCity) {
                     const targetPath = `${data.route}/${matchedCity}`;
-                    this.callbacks.onNavigate?.(targetPath);
+                    console.log(`[Voice] One-Shot Navigation to: ${targetPath}`);
+
+                    setTimeout(() => {
+                        this.callbacks.onNavigate?.(targetPath);
+                    }, 500);
+
                     const response = `I understand, I've found available emergency ${data.name} services in ${matchedCity} for you. ${data.tip} Navigation is starting now.`;
                     this.callbacks.onMessage?.(response, 'model');
                     await this.speak(response);
@@ -441,7 +469,7 @@ export class HybridController {
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text; // Save for echo filtering
 
-        // Kill Recognition immediately
+        // TOTAL ISOLATION: stop recognition before speaking on all devices
         if (this.recognition) {
             try { this.recognition.stop(); } catch (e) { }
         }
