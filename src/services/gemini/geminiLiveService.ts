@@ -201,7 +201,10 @@ export class HybridController {
         this.callbacks.onMessage?.(text, 'user');
         const lower = text.toLowerCase();
 
-        // --- STEP 2: LOCATION IDENTIFIED (OFFLINE FIRST) ---
+        // --- STEP 1: ROBUST CITY DETECTION (FUZZY) ---
+        const matchedCity = cities.find(c => lower.includes(c.toLowerCase()));
+
+        // --- STEP 2: LOCATION IDENTIFIED (IF TRADE WAS PENDING) ---
         if (this.pendingTrade) {
             const trade = this.pendingTrade;
 
@@ -210,24 +213,13 @@ export class HybridController {
             const isBypass = bypassKeywords.some(k => lower.includes(k));
 
             if (!isBypass) {
-                this.pendingTrade = null; // Clear state early
-
-                // Clean and Match Location
-                const cleanText = text.toLowerCase()
-                    .replace(/^(in|at|i am in|i'm in|located in|i'm located in|live in|city of|area of|i'm near|near)\s/i, '')
-                    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
-                    .replace(/\s+/g, ' ')
-                    .trim();
-
-                if (cleanText.length > 2) {
-                    const matchedCity = cities.find(c => c.toLowerCase() === cleanText);
-                    const cityParam = matchedCity || cleanText;
-
-                    const targetPath = `${trade.route}/${cityParam}`;
+                if (matchedCity) {
+                    this.pendingTrade = null; // Clear state
+                    const targetPath = `${trade.route}/${matchedCity}`;
                     console.log(`[Voice] Navigating to: ${targetPath}`);
                     this.callbacks.onNavigate?.(targetPath);
 
-                    const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${cityParam}. You're in the right place now. Help is just a few steps away.`;
+                    const confirmation = `I’m showing you the nearest available emergency ${trade.name} services in ${matchedCity}. You're in the right place now. Help is just a few steps away.`;
                     this.callbacks.onMessage?.(confirmation, 'model');
                     await this.speak(confirmation);
                     this.callbacks.onStatusChange?.('Ready');
@@ -321,6 +313,16 @@ export class HybridController {
 
         for (const [id, data] of Object.entries(trades)) {
             if (data.keywords.some(k => lower.includes(k))) {
+                // ONE-SHOT CHECK: Did they also mention a city?
+                if (matchedCity) {
+                    const targetPath = `${data.route}/${matchedCity}`;
+                    this.callbacks.onNavigate?.(targetPath);
+                    const response = `I understand, I've found available emergency ${data.name} services in ${matchedCity} for you. ${data.tip} Navigation is starting now.`;
+                    this.callbacks.onMessage?.(response, 'model');
+                    await this.speak(response);
+                    return;
+                }
+
                 this.pendingTrade = { route: data.route, name: data.name };
                 const response = `I understand, I can help find a ${data.name} for you. ${data.tip} Where are you located?`;
                 this.callbacks.onMessage?.(response, 'model');
@@ -431,7 +433,8 @@ export class HybridController {
 
             if (preferred) utter.voice = preferred;
             utter.lang = 'en-GB';
-            utter.rate = 1.0;
+            utter.rate = 0.9; // Clearer, slightly slower for mobile
+            utter.volume = 1.0; // Max volume boost for mobile speakers
 
             utter.onend = () => {
                 this.isSpeaking = false;
