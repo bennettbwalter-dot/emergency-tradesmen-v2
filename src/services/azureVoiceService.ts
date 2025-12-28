@@ -41,13 +41,13 @@ export class AzureVoiceService {
             try {
                 // 3. Create FRESH Synthesizer (Prevents network drift)
                 const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
-                speechConfig.speechSynthesisVoiceName = "en-GB-HollieNeural";
+                speechConfig.speechSynthesisVoiceName = "en-US-AvaMultilingualNeural";
 
                 this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, this.audioConfig);
 
                 const ssml = `
-<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-GB">
-    <voice name="en-GB-HollieNeural">
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
+    <voice name="en-US-AvaMultilingualNeural">
         ${text}
     </voice>
 </speak>`.trim();

@@ -64,7 +64,7 @@ const VoiceTrigger = () => {
             recognitionRef.current = new SpeechRecognition();
             recognitionRef.current.continuous = true;
             recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'en-GB';
+            recognitionRef.current.lang = 'en-US';
 
             recognitionRef.current.onstart = () => setStatus('Listening');
 
