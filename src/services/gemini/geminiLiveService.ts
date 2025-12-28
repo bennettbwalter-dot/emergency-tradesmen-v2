@@ -191,13 +191,16 @@ export class HybridController {
             this.isSpeaking = false;
             this.activeMuzzle = false;
             this.broadcastDebug();
-            this.callbacks.onStatusChange?.('Listening'); // Direct 'Listening' status
 
-            if (this.chatHistory.length === 0 && window.speechSynthesis) {
-                if (this.isActiveFlag && this.chatHistory.length === 0) {
-                    this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
-                    this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
-                }
+            // Only update UI if we are actually starting fresh, to avoid flickering during Silent Restarts
+            if (this.callbacks.onStatusChange) {
+                this.callbacks.onStatusChange('Listening');
+            }
+
+            // Send initial greeting if fresh session
+            if (this.isActiveFlag && this.chatHistory.length === 0) {
+                this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
+                this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
             }
         };
 
@@ -207,7 +210,7 @@ export class HybridController {
             this.broadcastDebug();
 
             // IMMORTAL RESTART: Unless explicitly stopped by user, we restart IMMEDIATELY.
-            // This prevents "Switching On/Off" flickering.
+            // SILENT RESTART: Do not change UI status here. Keep it "Listening".
             if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
                 console.log('[Voice] Immediate resurrection...');
                 try { this.recognition.start(); } catch (e) { }
