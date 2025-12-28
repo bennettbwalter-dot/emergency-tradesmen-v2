@@ -38,26 +38,36 @@ export function playNavigationVoice(text: string): Promise<void> {
             initSynthesizer();
         }
 
+        // Safety Timeout: 15s max waiting for speech to finish
+        const safetyTimer = setTimeout(() => {
+            console.warn("Azure Speech Timeout - Forcing Resume");
+            resolve();
+        }, 15000);
+
         if (synthesizer) {
             synthesizer.speakTextAsync(
                 text,
                 (result) => {
+                    clearTimeout(safetyTimer);
                     if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
                         console.log("Speech synthesized to speaker for text [" + text + "]");
                         resolve();
                     } else {
                         console.error("Speech synthesis canceled, " + result.errorDetails);
-                        reject(result.errorDetails);
+                        // On cancellation, we still resolve to let the app continue
+                        resolve();
                     }
                 },
                 (err) => {
+                    clearTimeout(safetyTimer);
                     console.error("err - " + err);
                     synthesizer!.close();
                     synthesizer = null;
-                    reject(err);
+                    resolve(); // Resolve anyway to unblock
                 }
             );
         } else {
+            clearTimeout(safetyTimer);
             resolve(); // Fail safe
         }
     });

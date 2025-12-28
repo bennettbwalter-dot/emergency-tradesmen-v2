@@ -208,10 +208,12 @@ export class HybridController {
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // RESTART LOOP:
-            // If active and NOT speaking, we restart immediately.
-            // On mobile (non-continuous), this fires after every sentence -> triggers restart -> "Always Listening" effect.
-            if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
+            // RESTART LOOP & SAFETY UNMUZZLE:
+            // If engine ends, we assume turn-taking is done or we need a fresh ear.
+            this.activeMuzzle = false; // FORCE UNMUZZLE on restart
+            this.isSpeaking = false;
+
+            if (this.isActiveFlag) {
                 console.log('[Voice] Restarting listener...');
                 try { this.recognition.start(); } catch (e) { }
             }
@@ -257,7 +259,8 @@ export class HybridController {
                 console.log(`[Voice] Final Transcript: "${transcript}"`);
                 if (!transcript) continue;
 
-                // --- ROBUST FUZZY ECHO FILTER ---
+                // --- ROBUST FUZZY ECHO FILTER (DISABLED FOR DEBUGGING) ---
+                /*
                 if (this.lastSpokeText) {
                     const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
                     const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
@@ -273,6 +276,7 @@ export class HybridController {
                         }
                     }
                 }
+                */
 
                 if (transcript) this.handleUserInput(transcript);
             }
