@@ -156,14 +156,23 @@ export class HybridController {
         updateVolume();
     }
 
-    private startSpeechRecognition() {
+    private startSpeechRecognition(forceFresh = false) {
         if (!this.isActiveFlag) return;
 
-        // --- IMMORTAL MIC POLICY: REUSE INSTANCE ---
-        if (this.recognition) {
-            console.log('[Voice] Ensuring engine is active...');
+        // HALF-DUPLEX STRATEGY: 
+        // We aggressively kill and recreate the engine on mobile to ensure Audio Context purity.
+
+        if (this.recognition && !forceFresh) {
             try { this.recognition.start(); } catch (e) { }
             return;
+        }
+
+        if (this.recognition) {
+            try {
+                this.recognition.onend = null;
+                this.recognition.stop();
+            } catch (e) { }
+            this.recognition = null;
         }
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -174,11 +183,12 @@ export class HybridController {
             return;
         }
 
-        console.log('[Voice] Initializing Immortal Engine...');
+        console.log('[Voice] Initializing Fresh Engine (Half-Duplex)...');
         this.recognition = new SpeechRecognition();
 
-        // IMMORTAL MODE: Always Continuous. Prevents iOS permission loss.
-        this.recognition.continuous = true;
+        // STRICT HALF-DUPLEX: No continuous. One sentence at a time.
+        // We rely on the Restart Loop to keep it going.
+        this.recognition.continuous = false;
 
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -207,16 +217,18 @@ export class HybridController {
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // RESTART LOOP & SAFETY UNMUZZLE:
-            // If engine ends, we assume turn-taking is done or we need a fresh ear.
-            this.activeMuzzle = false; // FORCE UNMUZZLE on restart
+            this.activeMuzzle = false; // Safety Unmuzzle
             this.isSpeaking = false;
 
-            if (this.isActiveFlag) {
-                console.log('[Voice] Restarting listener (with backoff)...');
+            // RESTART LOOP:
+            // Since continuous=false, we MUST restart after every pause.
+            // But if we are about to speak (or are speaking), DO NOT restart.
+            if (this.isActiveFlag && !this.isSpeaking) {
+                console.log('[Voice] Restarting listener (Half-Duplex)...');
                 setTimeout(() => {
-                    try { this.recognition.start(); } catch (e) { }
-                }, 150);
+                    // Request a FRESH instance to clear iOS audio buffers
+                    this.startSpeechRecognition(true);
+                }, 200);
             }
         };
 
@@ -225,11 +237,10 @@ export class HybridController {
             this.debugState.lastError = `Recog: ${e.error}`;
             this.broadcastDebug();
 
-            if (e.error === 'not-allowed') {
-                // Suppress UI error for restart loops. Just log it.
-                console.warn('[Voice] Mic blocked (restart loop). Waiting...');
+            if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+                console.warn('[Voice] Mic blocked/busy. Waiting...');
             } else {
-                this.callbacks.onStatusChange?.('Error: ' + e.error);
+                // legitimate error
             }
         };
 
@@ -496,12 +507,16 @@ export class HybridController {
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text;
 
-        // IMMORTAL MODE: DO NOT STOP LISTENING.
-        // We keep the mic open to hold the session active.
-        // We rely on 'isSpeaking' to ignore self-talk (Soft Muzzle).
+        // HALF-DUPLEX OVERRIDE:
+        // KILL the microphone immediately. We do NOT want it fighting with TTS.
+        if (this.recognition) {
+            this.recognition.onend = null; // Prevent restart loop from firing during speech
+            try { this.recognition.stop(); } catch (e) { }
+            this.recognition = null; // Destroy instance
+            console.log('[Voice] Setup Half-Duplex: Mic KILLED for speech.');
+        }
 
         // CRITICAL VOLUME FIX: Stop KeepAlive/AudioContext during speech logic
-        // preventing mobile OS from ducking the TTS volume
         if (this.keepAliveOsc) {
             try { this.keepAliveOsc.stop(); } catch (e) { }
             this.keepAliveOsc = null;
@@ -511,26 +526,26 @@ export class HybridController {
 
         // AZURE TTS REPLACEMENT (STRICT AWAIT)
         try {
-            // This promise now resolves ONLY when audio playback finishes
             await playNavigationVoice(text);
         } catch (e) {
             console.error('[Voice] TTS Error:', e);
         }
 
-        // Post-Speech Cleanup (Polite Mode)
-        // We run this after the estimated duration
+        // Post-Speech Cleanup
         if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
         this.isSpeaking = false;
-        this.callbacks.onStatusChange?.('Listening'); // Return to Listening immediately
+
+        // Return to Listening immediately UI-wise, but technically we need a sec to boot
+        this.callbacks.onStatusChange?.('Listening');
 
         setTimeout(() => {
             if (!this.isActiveFlag) return;
             this.activeMuzzle = false;
             this.lastSpokeTime = Date.now();
             this.startKeepAlive();
-            // No need to startSpeechRecognition if we never stopped it (Immortal Mode)
-            // But we call it just in case onEnd happened in background
-            if (autoResume) this.startSpeechRecognition();
+
+            // CLEAN RESTART: New Instance
+            if (autoResume) this.startSpeechRecognition(true);
         }, 200);
     }
 
