@@ -115,6 +115,20 @@ export async function processUserMessage(message: string, currentState: ChatStat
     if (lowerMsg.includes('sign up') || lowerMsg.includes('join') || lowerMsg.includes('register')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Tradesmen Sign Up.", action: 'navigate', target: '/tradesmen' } };
     if (lowerMsg.includes('home') || lowerMsg.includes('start')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Taking you Home.", action: 'navigate', target: '/' } };
 
+    // GUIDANCE / BLOG MODE (Specific Safety Qs)
+    if (lowerMsg.includes('what should i do') || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe') || lowerMsg.includes('how to')) {
+        return {
+            newState,
+            response: {
+                id: Date.now().toString(),
+                role: 'assistant',
+                content: "Your safety is priority. I can show you step-by-step emergency guides.",
+                action: 'navigate',
+                target: '/blog'
+            }
+        };
+    }
+
     // New Routes
     if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('rates')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Pricing information.", action: 'navigate', target: '/pricing' } };
     if (lowerMsg.includes('privacy')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Privacy Policy.", action: 'navigate', target: '/privacy' } };
@@ -156,6 +170,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
             // Disambiguation helpers (simplify to direct assignments if trade still null)
             if (!newState.detectedTrade) {
                 if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
+                else if (lowerMsg.includes('buzzing')) newState.detectedTrade = 'electrician'; // Added Red Flag
                 else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
                 else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
             }

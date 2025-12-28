@@ -4,13 +4,13 @@ import React from 'react';
 import { trades, cities } from '../../lib/trades';
 
 export const SAFETY_TIPS: Record<string, string> = {
-    electrician: "If there’s water near sockets or a burning smell, keep clear of electrics.",
-    "gas-engineer": "If you smell gas or feel unwell, leave the property and get fresh air immediately.",
-    plumber: "If water is spreading near electrics, avoid switches and sockets.",
-    locksmith: "If you’re locked out, stay in a well-lit safe place.",
-    "drain-specialist": "Avoid contact with waste water and keep children and pets away.",
-    glazier: "Keep clear of broken glass and don’t touch sharp edges.",
-    breakdown: "If you’re roadside, stay visible and away from traffic."
+    plumber: "Turn off the main water stopcock if safe. Avoid electrical sockets near water.",
+    electrician: "Do NOT touch exposed wires. Turn off the power at the fuse box only if safe.",
+    "gas-engineer": "Gas issues are serious. If you smell gas or feel unwell, please leave the property immediately.",
+    locksmith: "Do not force the door. Stay in a safe, well-lit area.",
+    "drain-specialist": "Avoid contact with wastewater. Keep children and pets away.",
+    glazier: "Do not touch broken glass. Keep the area clear.",
+    breakdown: "Move to a safe place if possible. Stay visible and away from traffic."
 };
 
 export const SYSTEM_INSTRUCTION = `🎙️ EMERGENCY TRADESMEN: MASTER OPERATIONAL MANUAL

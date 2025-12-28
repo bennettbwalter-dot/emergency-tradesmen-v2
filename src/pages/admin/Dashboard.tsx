@@ -24,6 +24,7 @@ import {
     type SubscriptionTrend
 } from "@/lib/analyticsService";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { CostOverviewCard } from "@/components/admin/CostOverviewCard";
 
 export default function AdminDashboard() {
     const [metrics, setMetrics] = useState<SubscriptionMetrics>({
@@ -96,7 +97,6 @@ export default function AdminDashboard() {
                 </p>
             </div>
 
-            import {CostOverviewCard} from "@/components/admin/CostOverviewCard";
 
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
