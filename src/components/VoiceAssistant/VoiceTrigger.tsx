@@ -144,7 +144,7 @@ const VoiceTrigger = () => {
                 if (text.length > 1) {
                     processInput(text);
                 }
-            }, 600); // 600ms: Ultra-snappy silence detection
+            }, 800); // 800ms: Safe balance for mobile
         }
     };
 
@@ -165,7 +165,7 @@ const VoiceTrigger = () => {
             stopSession();
         } else {
             if (isActiveRef.current) {
-                // MOBILE FIX: 250ms buffer is the "Goldilocks" zone for Modern Android/iOS
+                // MOBILE FIX: 400ms buffer allows safe context switch
                 setTimeout(() => {
                     if (!isActiveRef.current) return;
                     try {
@@ -175,7 +175,7 @@ const VoiceTrigger = () => {
                         console.warn("Restart failed, trying forced re-init implied by onend?");
                         setStatus('Listening');
                     }
-                }, 250);
+                }, 400);
             }
         }
     };
@@ -191,8 +191,8 @@ const VoiceTrigger = () => {
         await voiceService.speak(ssmlText);
 
         // Calculate simplified duration to keep mic closed while speaking
-        // 50ms per char is a much tighter fit for natural speech (~2.5 words/sec)
-        const approximateDuration = Math.max(1000, cleanText.length * 50);
+        // 70ms per char = ~3.0s for greeting. Safe but not too slow.
+        const approximateDuration = Math.max(1200, cleanText.length * 70);
         await new Promise(resolve => setTimeout(resolve, approximateDuration));
     };
 
