@@ -154,8 +154,10 @@ export class HybridController {
         console.log('[Voice] Initializing Immortal Engine...');
         this.recognition = new SpeechRecognition();
 
-        // Continuous is ESSENTIAL for mobile persistence (prevents constant re-auth checks)
-        this.recognition.continuous = true;
+        // POLITE MODE: Mobile gets discrete segments to avoid OS conflict & buffer stalls
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        this.recognition.continuous = !isMobile;
+
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
 
@@ -188,14 +190,21 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
-            console.log('[Voice] Engine Ended (Recovering...)');
+            console.log('[Voice] Engine Ended. Status:', this.debugState.recognitionStatus);
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // IMMEDIATE RESTART - Do not wait for gestures
-            if (this.isActiveFlag) {
-                console.log('[Voice] Resurrection...');
-                try { this.recognition.start(); } catch (e) { }
+            // POLITE RECOVERY: Only restart if we are NOT speaking and NOT muzzled
+            // On mobile, this restart might sometimes fail without a gesture, but it's cleaner than "Immortal"
+            if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
+                console.log('[Voice] Polite recovery attempt...');
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                // Add delay on mobile to let buffers clear
+                setTimeout(() => {
+                    if (this.isActiveFlag && !this.isSpeaking) {
+                        try { this.recognition.start(); } catch (e) { }
+                    }
+                }, isMobile ? 200 : 100);
             }
         };
 
@@ -498,6 +507,13 @@ export class HybridController {
             } catch (e) { }
         }
 
+        // CRITICAL VOLUME FIX: Stop KeepAlive/AudioContext during speech logic
+        // preventing mobile OS from ducking the TTS volume
+        if (this.keepAliveOsc) {
+            try { this.keepAliveOsc.stop(); } catch (e) { }
+            this.keepAliveOsc = null;
+        }
+
         this.callbacks.onStatusChange?.('Speaking...');
 
         return new Promise<void>((resolve) => {
@@ -545,6 +561,9 @@ export class HybridController {
 
                     this.activeMuzzle = false; // Muzzle OFF
                     this.lastSpokeTime = Date.now(); // Reset gate start
+
+                    // Resume KeepAlive for the listening phase
+                    this.startKeepAlive();
 
                     // We don't need to 'start' here because we never stopped.
                     // But we check status just in case it died.
