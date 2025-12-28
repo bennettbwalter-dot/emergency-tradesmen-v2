@@ -213,8 +213,10 @@ export class HybridController {
             this.isSpeaking = false;
 
             if (this.isActiveFlag) {
-                console.log('[Voice] Restarting listener...');
-                try { this.recognition.start(); } catch (e) { }
+                console.log('[Voice] Restarting listener (with backoff)...');
+                setTimeout(() => {
+                    try { this.recognition.start(); } catch (e) { }
+                }, 150);
             }
         };
 
@@ -224,7 +226,10 @@ export class HybridController {
             this.broadcastDebug();
 
             if (e.error === 'not-allowed') {
-                this.callbacks.onStatusChange?.('Microphone Blocked 🚫');
+                // Suppress UI error for restart loops. Just log it.
+                console.warn('[Voice] Mic blocked (restart loop). Waiting...');
+            } else {
+                this.callbacks.onStatusChange?.('Error: ' + e.error);
             }
         };
 
@@ -516,15 +521,17 @@ export class HybridController {
         // We run this after the estimated duration
         if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
         this.isSpeaking = false;
-        this.callbacks.onStatusChange?.('Ready');
+        this.callbacks.onStatusChange?.('Listening'); // Return to Listening immediately
 
         setTimeout(() => {
             if (!this.isActiveFlag) return;
             this.activeMuzzle = false;
             this.lastSpokeTime = Date.now();
             this.startKeepAlive();
+            // No need to startSpeechRecognition if we never stopped it (Immortal Mode)
+            // But we call it just in case onEnd happened in background
             if (autoResume) this.startSpeechRecognition();
-        }, 500);
+        }, 200);
     }
 
     public async stopSession() {
