@@ -1,7 +1,7 @@
 
 import { SYSTEM_INSTRUCTION } from './constants';
 import { HybridCallbacks } from './types';
-import { cities } from '../../lib/trades';
+import { cities, trades as importedTrades } from '../../lib/trades';
 
 declare global {
     interface Window {
@@ -371,70 +371,51 @@ export class HybridController {
         }
 
         // --- STEP 1: PROBLEM/TRADE IDENTIFIED (OFFLINE TRIAGE) ---
-        const trades: Record<string, { route: string, name: string, tip: string, keywords: string[] }> = {
-            'plumber': {
-                route: '/emergency-plumber',
-                name: 'plumber',
-                tip: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately.",
-                keywords: ['plumber', 'leak', 'water', 'pipe', 'flood', 'burst', 'toilet', 'tap', 'shower', 'sink', 'radiator']
-            },
-            'electrician': {
-                route: '/emergency-electrician',
-                name: 'electrician',
-                tip: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area.",
-                keywords: ['electrician', 'power', 'spark', 'fuse', 'light', 'socket', 'tripped', 'electricity', 'blackout']
-            },
-            'locksmith': {
-                route: '/emergency-locksmith',
-                name: 'locksmith',
-                tip: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage.",
-                keywords: ['locksmith', 'key', 'locked', 'door', 'lock', 'broken key', 'lost keys', 'gain entry']
-            },
-            'gas': {
-                route: '/emergency-gas-engineer',
-                name: 'gas engineer',
-                tip: "Open all windows, do not use any switches or naked flames, and evacuate the property immediately.",
-                keywords: ['gas', 'boiler', 'heating', 'radiator', 'smell gas', 'carbon monoxide']
-            },
-            'drain': {
-                route: '/emergency-drain-specialist',
-                name: 'drain specialist',
-                tip: "Avoid contact with any waste water. Keep children and pets away from the affected area.",
-                keywords: ['drain', 'sewage', 'blocked', 'gutter', 'pipe', 'manhole', 'overflow']
-            },
-            'glazier': {
-                route: '/emergency-glazier',
-                name: 'glazier',
-                tip: "Keep clear of the area. Do not attempt to move large shards of glass yourself.",
-                keywords: ['glazier', 'glass', 'window', 'mirror', 'broken', 'smash', 'board up']
-            },
-            'breakdown': {
-                route: '/emergency-breakdown',
-                name: 'breakdown recovery',
-                tip: "Stay behind the safety barrier or away from the road. Keep your hazard lights on.",
-                keywords: ['breakdown', 'recovery', 'towing', 'tire', 'puncture', 'accident', 'roadside', 'stranded', 'engine']
-            }
+        // Dynamically build local knowledge from the definitive 'trades' list
+        const SAFETY_TIPS: Record<string, string> = {
+            plumber: "If water is spreading near electrics, avoid all switches. Turn off your main water stopcock immediately.",
+            electrician: "Keep clear of exposed wires. If there is a burning smell or smoke, evacuate the area.",
+            "gas-engineer": "Open all windows, do not use any switches or naked flames, and evacuate the property immediately.",
+            locksmith: "Stay in a well-lit, populated area. Do not attempt to force the lock, as this may cause further damage.",
+            "drain-specialist": "Avoid contact with any waste water. Keep children and pets away from the affected area.",
+            glazier: "Keep clear of the area. Do not attempt to move large shards of glass yourself.",
+            breakdown: "Stay behind the safety barrier or away from the road. Keep your hazard lights on."
         };
 
-        for (const [id, data] of Object.entries(trades)) {
-            if (data.keywords.some(k => lower.includes(k))) {
+        const KEYWORD_MAP: Record<string, string[]> = {
+            plumber: ['plumber', 'leak', 'water', 'pipe', 'flood', 'burst', 'toilet', 'tap', 'shower', 'sink', 'radiator'],
+            electrician: ['electrician', 'power', 'spark', 'fuse', 'light', 'socket', 'tripped', 'electricity', 'blackout'],
+            locksmith: ['locksmith', 'key', 'locked', 'door', 'lock', 'broken key', 'lost keys', 'gain entry'],
+            "gas-engineer": ['gas', 'boiler', 'heating', 'radiator', 'smell gas', 'carbon monoxide'],
+            "drain-specialist": ['drain', 'sewage', 'blocked', 'gutter', 'pipe', 'manhole', 'overflow'],
+            glazier: ['glazier', 'glass', 'window', 'mirror', 'broken', 'smash', 'board up'],
+            breakdown: ['breakdown', 'recovery', 'towing', 'tire', 'puncture', 'accident', 'roadside', 'stranded', 'engine']
+        };
+
+        // We use the imported 'trades' array to ensure 100% route accuracy
+        for (const trade of importedTrades) { // Renamed locally or imported as 'tradesList'
+            const keywords = KEYWORD_MAP[trade.slug] || [trade.name.toLowerCase()];
+
+            if (keywords.some(k => lower.includes(k))) {
                 // ONE-SHOT CHECK: Did they also mention a city?
                 if (matchedCity) {
-                    const targetPath = `${data.route}/${matchedCity}`;
+                    const targetPath = `/emergency-${trade.slug}/${matchedCity}`;
                     console.log(`[Voice] One-Shot Navigation to: ${targetPath}`);
 
                     setTimeout(() => {
                         this.callbacks.onNavigate?.(targetPath);
                     }, 500);
 
-                    const response = `I understand, I've found available emergency ${data.name} services in ${matchedCity} for you. ${data.tip} Navigation is starting now.`;
+                    const tip = SAFETY_TIPS[trade.slug] || "Ensure you are in a safe location.";
+                    const response = `I understand, I've found available emergency ${trade.name} services in ${matchedCity} for you. ${tip} Navigation is starting now.`;
                     this.callbacks.onMessage?.(response, 'model');
                     await this.speak(response);
                     return;
                 }
 
-                this.pendingTrade = { route: data.route, name: data.name };
-                const response = `I understand, I can help find a ${data.name} for you. ${data.tip} Where are you located?`;
+                this.pendingTrade = { route: `/emergency-${trade.slug}`, name: trade.name };
+                const tip = SAFETY_TIPS[trade.slug] || "Ensure you are in a safe location.";
+                const response = `I understand, I can help find a ${trade.name} for you. ${tip} Where are you located?`;
                 this.callbacks.onMessage?.(response, 'model');
                 await this.speak(response);
                 return;
