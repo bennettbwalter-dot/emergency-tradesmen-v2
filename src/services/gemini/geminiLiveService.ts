@@ -46,10 +46,9 @@ export class HybridController {
         this.chatHistory = [];
 
         if (!this.apiKey) {
-            this.callbacks.onError?.(new Error("Internal Error: API_KEY missing."));
-            this.callbacks.onStatusChange?.('Config Error ❌');
-            setTimeout(() => this.speak("System configuration error. Please check the website settings.", false), 500);
-            return;
+            console.warn('[Voice] API_KEY missing. Cloud fallback disabled.');
+            this.debugState.lastError = 'API_KEY missing (Cloud disabled)';
+            this.broadcastDebug();
         }
 
         this.callbacks.onStatusChange?.('Initializing...');
@@ -336,6 +335,14 @@ export class HybridController {
 
     private async generateResponse(userText: string) {
         if (!this.isActiveFlag) return;
+
+        if (!this.apiKey) {
+            console.error('[Voice] Cannot use cloud fallback: API_KEY missing.');
+            this.callbacks.onStatusChange?.('Ready');
+            await this.speak("I'm sorry, I encountered a configuration issue with my cloud service. Please try manual navigation or check back later.");
+            return;
+        }
+
         this.callbacks.onStatusChange?.('Thinking...');
 
         if (this.chatHistory.length === 0) {
