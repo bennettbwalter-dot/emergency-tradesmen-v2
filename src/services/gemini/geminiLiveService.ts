@@ -60,9 +60,11 @@ export class HybridController {
 
         try {
             const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
-            this.audioContext = new AudioContextClass();
-            if (this.audioContext.state === 'suspended') {
-                await this.audioContext.resume();
+            if (AudioContextClass) {
+                this.audioContext = new AudioContextClass();
+                if (this.audioContext && this.audioContext.state === 'suspended') {
+                    await this.audioContext.resume();
+                }
             }
 
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -157,14 +159,14 @@ export class HybridController {
             this.broadcastDebug();
             this.callbacks.onStatusChange?.('Ready');
 
-            if (this.chatHistory.length === 0) {
+            if (this.chatHistory.length === 0 && window.speechSynthesis) {
                 if (window.speechSynthesis.getVoices().length === 0) {
                     window.speechSynthesis.onvoiceschanged = () => {
                         if (this.isActiveFlag && this.chatHistory.length === 0) {
                             this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
                             this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
                         }
-                        window.speechSynthesis.onvoiceschanged = null;
+                        try { window.speechSynthesis.onvoiceschanged = null; } catch (e) { }
                     };
                 } else {
                     if (this.isActiveFlag && this.chatHistory.length === 0) {
@@ -533,20 +535,24 @@ export class HybridController {
                 this.callbacks.onStatusChange?.('Ready');
 
                 // Safely wait for audio buffers to clear
-                setTimeout(async () => {
+                setTimeout(() => {
                     if (!this.isActiveFlag) return;
 
-                    // Resume visualizer
-                    if (this.audioContext && this.audioContext.state === 'suspended') {
-                        try { await this.audioContext.resume(); } catch (e) { }
-                    }
+                    const resumeVisualizer = async () => {
+                        // Resume visualizer
+                        if (this.audioContext && this.audioContext.state === 'suspended' && this.audioContext.resume) {
+                            try { await this.audioContext.resume(); } catch (e) { }
+                        }
 
-                    this.activeMuzzle = false; // Muzzle OFF
-                    this.lastSpokeTime = Date.now(); // Reset gate start
-                    if (autoResume) {
-                        this.startSpeechRecognition(); // FRESH START
-                    }
-                    resolve();
+                        this.activeMuzzle = false; // Muzzle OFF
+                        this.lastSpokeTime = Date.now(); // Reset gate start
+                        if (autoResume) {
+                            this.startSpeechRecognition(); // FRESH START
+                        }
+                        resolve();
+                    };
+
+                    resumeVisualizer();
                 }, 800);
             };
 
