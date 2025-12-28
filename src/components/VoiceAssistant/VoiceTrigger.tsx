@@ -24,6 +24,9 @@ const VoiceTrigger = () => {
             setStatus('Off');
             controller.stopSession();
         } else {
+            // MOBILE UNLOCK: Create/Resume AudioContext strictly within the user gesture
+            controller.unlockAudioContext();
+
             if (isStarting.current) return;
             isStarting.current = true;
             setStatus('Connecting...');

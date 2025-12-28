@@ -44,6 +44,18 @@ export class HybridController {
         this.apiKey = (import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env?.API_KEY : '') || '').trim();
     }
 
+    public unlockAudioContext() {
+        const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
+        if (AudioContextClass && !this.audioContext) {
+            this.audioContext = new AudioContextClass();
+        }
+        if (this.audioContext && this.audioContext.state === 'suspended') {
+            this.audioContext.resume().then(() => {
+                console.log('[Voice] AudioContext Unlocked/Resumed');
+            });
+        }
+    }
+
     public async startSession(callbacks: HybridCallbacks) {
         this.isActiveFlag = true;
         this.callbacks = callbacks;
