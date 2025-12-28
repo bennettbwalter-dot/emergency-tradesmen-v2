@@ -161,8 +161,18 @@ const VoiceTrigger = () => {
             stopSession();
         } else {
             if (isActiveRef.current) {
-                try { recognitionRef.current?.start(); } catch (e) { }
-                setStatus('Listening');
+                // MOBILE FIX: Add small delay to allow Audio Context to switch from Output -> Input
+                setTimeout(() => {
+                    if (!isActiveRef.current) return;
+                    try {
+                        recognitionRef.current?.start();
+                        setStatus('Listening');
+                    } catch (e) {
+                        console.warn("Restart failed, trying forced re-init implied by onend?");
+                        // If start fails, maybe set Status to Listening so onend can catch it?
+                        setStatus('Listening');
+                    }
+                }, 300);
             }
         }
     };
