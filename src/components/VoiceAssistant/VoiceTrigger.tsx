@@ -80,12 +80,13 @@ const VoiceTrigger = () => {
 
             setIsActive(true);
 
-            // 3. Greeting First, Then Listen (Prosody Fix: remove heavy pauses)
+            // 3. Greeting First, Then Listen
             await speakResponse("Hello Emergency Tradesmen here how can I help?");
 
-            // 4. Start Listening (Full Duplex - mic stays on)
+            // 4. Start Listening (Sequential)
             if (isActiveRef.current && recognitionRef.current) {
                 try {
+                    // console.log("Starting mic after greeting...");
                     recognitionRef.current.start();
                     setStatus('Listening');
                 } catch (e) {
@@ -121,14 +122,8 @@ const VoiceTrigger = () => {
     };
 
     const handleSpeechResult = (event: any) => {
-        // BARGE-IN LOGIC: If speaking, interrupt immediately
-        if (statusRef.current === 'Speaking') {
-            console.log('[Voice] Barge-In Detected! Stopping audio...');
-            voiceService.stop();
-            setStatus('Processing'); // Switch state immediately
-        }
-
-        if (statusRef.current === 'Processing') return; // Don't process if already processing
+        // STRICT TURN-TAKING: Ignore inputs while speaking/processing
+        if (statusRef.current === 'Speaking' || statusRef.current === 'Processing') return;
 
         let interim = "";
         let final = "";
@@ -149,15 +144,15 @@ const VoiceTrigger = () => {
                 if (text.length > 1) {
                     processInput(text);
                 }
-            }, 800); // 800ms silence for faster barge-in response
+            }, 600); // 600ms: Ultra-snappy silence detection
         }
     };
 
     const processInput = async (text: string) => {
         setStatus('Processing');
 
-        // FULL DUPLEX: Do NOT stop the mic here.
-        // if (recognitionRef.current) recognitionRef.current.stop();
+        // STRICT TURN-TAKING: Stop mic immediately
+        if (recognitionRef.current) recognitionRef.current.stop();
 
         // FIX: Use Ref to get the LATEST state
         const { newState, response } = processUserMessage(text, chatStateRef.current);
@@ -170,7 +165,7 @@ const VoiceTrigger = () => {
             stopSession();
         } else {
             if (isActiveRef.current) {
-                // MOBILE FIX: Add small delay to allow Audio Context to switch from Output -> Input
+                // MOBILE FIX: 250ms buffer is the "Goldilocks" zone for Modern Android/iOS
                 setTimeout(() => {
                     if (!isActiveRef.current) return;
                     try {
@@ -178,10 +173,9 @@ const VoiceTrigger = () => {
                         setStatus('Listening');
                     } catch (e) {
                         console.warn("Restart failed, trying forced re-init implied by onend?");
-                        // If start fails, maybe set Status to Listening so onend can catch it?
                         setStatus('Listening');
                     }
-                }, 300);
+                }, 250);
             }
         }
     };
@@ -190,11 +184,15 @@ const VoiceTrigger = () => {
         setStatus('Speaking');
 
         const cleanText = text.replace(/[*#]/g, '');
-        const ssmlText = cleanText.replace(/(\.|\?|!)\s/g, '$1 <break time="400ms"/> ');
+        // const ssmlText = cleanText.replace(/(\.|\?|!)\s/g, '$1 <break time="400ms"/> ');
+        // Keep it simple for flow
+        const ssmlText = cleanText;
 
         await voiceService.speak(ssmlText);
 
-        const approximateDuration = Math.max(2000, cleanText.length * 60);
+        // Calculate simplified duration to keep mic closed while speaking
+        // 80ms per char is safer conservative estimate for "Hollie"
+        const approximateDuration = Math.max(1500, cleanText.length * 80);
         await new Promise(resolve => setTimeout(resolve, approximateDuration));
     };
 
