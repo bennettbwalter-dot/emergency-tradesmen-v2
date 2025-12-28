@@ -136,16 +136,11 @@ export class HybridController {
     private startSpeechRecognition() {
         if (!this.isActiveFlag) return;
 
-        // --- NEW: FRESH INSTANCE POLICY (Crucial for Mobile) ---
+        // --- IMMORTAL MIC POLICY: REUSE INSTANCE ---
         if (this.recognition) {
-            try {
-                this.recognition.onstart = null;
-                this.recognition.onend = null;
-                this.recognition.onerror = null;
-                this.recognition.onresult = null;
-                this.recognition.stop();
-            } catch (e) { }
-            this.recognition = null;
+            console.log('[Voice] Ensuring engine is active...');
+            try { this.recognition.start(); } catch (e) { }
+            return;
         }
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -156,13 +151,11 @@ export class HybridController {
             return;
         }
 
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        console.log(`[Voice] Initializing engine (Mobile: ${isMobile})`);
+        console.log('[Voice] Initializing Immortal Engine...');
         this.recognition = new SpeechRecognition();
 
-        // Mobile Tweak: continuous=false is MUCH more stable for the restart loop
-        this.recognition.continuous = !isMobile;
+        // Continuous is ESSENTIAL for mobile persistence (prevents constant re-auth checks)
+        this.recognition.continuous = true;
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
 
@@ -195,18 +188,14 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
-            console.log('[Voice] Recognition ended');
+            console.log('[Voice] Engine Ended (Recovering...)');
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // Aggressive restart IF still active and not speaking
-            if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                setTimeout(() => {
-                    if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                        this.startSpeechRecognition();
-                    }
-                }, isMobile ? 100 : 300);
+            // IMMEDIATE RESTART - Do not wait for gestures
+            if (this.isActiveFlag) {
+                console.log('[Voice] Resurrection...');
+                try { this.recognition.start(); } catch (e) { }
             }
         };
 
@@ -500,10 +489,11 @@ export class HybridController {
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text;
 
-        // TOTAL ISOLATION: stop recognition before speaking
+        // POLITE MODE: STOP LISTENING while speaking.
+        // This prevents "hearing itself" and OS audio resource conflicts (Duck/Pause).
         if (this.recognition) {
             try {
-                this.recognition.onend = null; // Prevent onend restart during speak
+                this.recognition.onend = null; // Prevent premature restart
                 this.recognition.stop();
             } catch (e) { }
         }
@@ -556,11 +546,13 @@ export class HybridController {
                     this.activeMuzzle = false; // Muzzle OFF
                     this.lastSpokeTime = Date.now(); // Reset gate start
 
+                    // We don't need to 'start' here because we never stopped.
+                    // But we check status just in case it died.
                     if (autoResume) {
-                        this.startSpeechRecognition(); // Fresh instance start
+                        this.startSpeechRecognition();
                     }
                     resolve();
-                }, 600);
+                }, 500);
             };
 
             utter.onend = onUtterEnd;
