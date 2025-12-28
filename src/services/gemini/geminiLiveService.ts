@@ -274,8 +274,7 @@ export class HybridController {
                 console.log(`[Voice] Final Transcript: "${transcript}"`);
                 if (!transcript) continue;
 
-                // --- ROBUST FUZZY ECHO FILTER (DISABLED FOR DEBUGGING) ---
-                /*
+                // --- ROBUST FUZZY ECHO FILTER ---
                 if (this.lastSpokeText) {
                     const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
                     const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
@@ -291,7 +290,6 @@ export class HybridController {
                         }
                     }
                 }
-                */
 
                 if (transcript) this.handleUserInput(transcript);
             }
@@ -546,7 +544,7 @@ export class HybridController {
 
             // CLEAN RESTART: New Instance
             if (autoResume) this.startSpeechRecognition(true);
-        }, 200);
+        }, 600); // Increased to 600ms to clear acoustic tail
     }
 
     public async stopSession() {
