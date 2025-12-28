@@ -80,10 +80,10 @@ const VoiceTrigger = () => {
 
             setIsActive(true);
 
-            // 3. Greeting First, Then Listen
-            await speakResponse("Hello, Emergency Tradesmen here. How can I help?");
+            // 3. Greeting First, Then Listen (Prosody Fix: remove heavy pauses)
+            await speakResponse("Hello Emergency Tradesmen here how can I help?");
 
-            // 4. Start Listening
+            // 4. Start Listening (Full Duplex - mic stays on)
             if (isActiveRef.current && recognitionRef.current) {
                 try {
                     recognitionRef.current.start();
@@ -121,7 +121,14 @@ const VoiceTrigger = () => {
     };
 
     const handleSpeechResult = (event: any) => {
-        if (statusRef.current === 'Speaking' || statusRef.current === 'Processing') return;
+        // BARGE-IN LOGIC: If speaking, interrupt immediately
+        if (statusRef.current === 'Speaking') {
+            console.log('[Voice] Barge-In Detected! Stopping audio...');
+            voiceService.stop();
+            setStatus('Processing'); // Switch state immediately
+        }
+
+        if (statusRef.current === 'Processing') return; // Don't process if already processing
 
         let interim = "";
         let final = "";
@@ -137,20 +144,20 @@ const VoiceTrigger = () => {
         if (silenceTimer.current) clearTimeout(silenceTimer.current);
 
         if (final || interim.length > 0) {
-            if (final || interim.length > 0) {
-                silenceTimer.current = setTimeout(() => {
-                    const text = (final + " " + interim).trim();
-                    if (text.length > 1) { // Also reduced min length slightly to catch "Yes/No" better
-                        processInput(text);
-                    }
-                }, 1000); // 1.0s silence for snappier turn-taking
-            }
+            silenceTimer.current = setTimeout(() => {
+                const text = (final + " " + interim).trim();
+                if (text.length > 1) {
+                    processInput(text);
+                }
+            }, 800); // 800ms silence for faster barge-in response
         }
     };
 
     const processInput = async (text: string) => {
         setStatus('Processing');
-        if (recognitionRef.current) recognitionRef.current.stop();
+
+        // FULL DUPLEX: Do NOT stop the mic here.
+        // if (recognitionRef.current) recognitionRef.current.stop();
 
         // FIX: Use Ref to get the LATEST state
         const { newState, response } = processUserMessage(text, chatStateRef.current);
