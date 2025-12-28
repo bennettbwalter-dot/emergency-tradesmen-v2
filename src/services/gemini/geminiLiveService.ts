@@ -28,6 +28,8 @@ export class HybridController {
     private isActiveFlag: boolean = false; // Session Lifecycle Flag
     private heartbeatTimer: any = null; // Recognition Heartbeat
     private watchdogTimer: any = null; // Synthesis Watchdog
+    private keepAliveOsc: OscillatorNode | null = null;
+    private isEngineInitialized: boolean = false;
 
     // Diagnostic State
     private debugState = {
@@ -77,11 +79,28 @@ export class HybridController {
             this.broadcastDebug();
 
             this.setupAudioVisualizer(stream);
+
+            // MOBILE KEEPALIVE: Keep AudioContext warm to prevent mic sleep
+            this.startKeepAlive();
         } catch (err: any) {
-            console.warn('[Voice] Init error (Visualizer/AudioContext):', err);
+            console.warn('[Voice] Init error:', err);
             this.debugState.lastError = err.message;
             this.broadcastDebug();
-            // Don't hard fail if only the visualizer fails, recognition might still work
+        }
+    }
+
+    private startKeepAlive() {
+        if (!this.audioContext || this.keepAliveOsc) return;
+        try {
+            this.keepAliveOsc = this.audioContext.createOscillator();
+            const gain = this.audioContext.createGain();
+            gain.gain.value = 0.001; // Nearly silent
+            this.keepAliveOsc.connect(gain);
+            gain.connect(this.audioContext.destination);
+            this.keepAliveOsc.start();
+            console.log('[Voice] Audio Keep-Alive active');
+        } catch (e) {
+            console.warn('[Voice] Keep-Alive failed:', e);
         }
     }
 
@@ -117,45 +136,37 @@ export class HybridController {
     private startSpeechRecognition() {
         if (!this.isActiveFlag) return;
 
-        // --- NEW: TOTAL REFRESH ---
-        if (this.recognition) {
-            try {
-                this.recognition.onstart = null;
-                this.recognition.onend = null;
-                this.recognition.onerror = null;
-                this.recognition.onresult = null;
-                this.recognition.stop();
-            } catch (e) { }
-            this.recognition = null;
+        // --- SINGLE INSTANCE POLICY ---
+        if (this.isEngineInitialized && this.recognition) {
+            console.log('[Voice] Resume engine...');
+            try { this.recognition.start(); } catch (e) { }
+            return;
         }
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        this.debugState.speechApiSupported = !!SpeechRecognition;
-
         if (!SpeechRecognition) {
+            this.debugState.speechApiSupported = false;
+            this.broadcastDebug();
             this.callbacks.onError?.(new Error("Speech Recognition not supported."));
             return;
         }
 
+        console.log('[Voice] Initializing new engine instance...');
         this.recognition = new SpeechRecognition();
+        this.isEngineInitialized = true;
 
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        // Mobile Tweak: Discrete bursts are better for fresh instance policy
-        this.recognition.continuous = !isMobile;
+        // Use continuous = true for all devices to minimize restarts
+        this.recognition.continuous = true;
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
 
         this.recognition.onresult = this.handleRecognitionResult.bind(this);
 
         this.recognition.onstart = () => {
-            console.log('[Voice] Recognition started (New Instance)');
+            console.log('[Voice] Recognition started');
             this.debugState.recognitionStatus = 'started';
-
-            // Critical Safety overriding ANY stuck state
             this.isSpeaking = false;
             this.activeMuzzle = false;
-
             this.broadcastDebug();
             this.callbacks.onStatusChange?.('Ready');
 
@@ -178,41 +189,36 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
-            console.log('[Voice] Recognition ended');
+            console.log('[Voice] Recognition stopped unexpectedly');
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // Force restart if still active and not speaking
+            // Aggressive restart IF still active and not speaking
             if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
                 setTimeout(() => {
                     if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                        this.startSpeechRecognition(); // Fresh cycle
+                        console.log('[Voice] Heartbeat restart...');
+                        try { this.recognition.start(); } catch (e) { }
                     }
-                }, 100);
+                }, 300);
             }
         };
 
         this.recognition.onerror = (e: any) => {
-            console.warn('[Voice] Recog Error:', e.error);
+            console.warn('[Voice] Engine Error:', e.error);
             this.debugState.lastError = `Recog: ${e.error}`;
             this.broadcastDebug();
 
-            // If it's a transient error, restart fresh
-            if (e.error === 'no-speech' || e.error === 'aborted' || e.error === 'audio-capture') {
-                setTimeout(() => {
-                    if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                        this.startSpeechRecognition();
-                    }
-                }, 500);
+            if (e.error === 'not-allowed') {
+                this.callbacks.onStatusChange?.('Microphone Blocked 🚫');
             }
         };
 
         try {
-            console.log('[Voice] Attempting to start recognition...');
             this.recognition.start();
             this.startHeartbeat();
         } catch (e: any) {
-            console.error('[Voice] Start error:', e);
+            console.error('[Voice] Engine start fail:', e);
         }
     }
 
@@ -481,20 +487,18 @@ export class HybridController {
     private async speak(text: string, autoResume = true) {
         if (!this.isActiveFlag) return;
         this.isSpeaking = true;
-        this.activeMuzzle = true;
+        this.activeMuzzle = true; // MUZZLE ON (keeps authorized mic alive)
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text;
 
-        // TOTAL ISOLATION: stop recognition
-        if (this.recognition) {
+        // On non-mobile, we still stop/start for better clarity
+        // BUT on mobile, we MUST stay authorized
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (!isMobile && this.recognition) {
             try { this.recognition.stop(); } catch (e) { }
         }
 
-        // Suspend visualizer to avoid mic resource competition
-        if (this.audioContext && this.audioContext.state === 'running') {
-            try { await this.audioContext.suspend(); } catch (e) { }
-        }
-
+        // Keep visualizer running but quiet
         this.callbacks.onStatusChange?.('Speaking...');
 
         return new Promise<void>((resolve) => {
@@ -540,21 +544,17 @@ export class HybridController {
                 setTimeout(() => {
                     if (!this.isActiveFlag) return;
 
-                    const resumeVisualizer = async () => {
-                        // Resume visualizer
-                        if (this.audioContext && this.audioContext.state === 'suspended' && this.audioContext.resume) {
-                            try { await this.audioContext.resume(); } catch (e) { }
-                        }
+                    this.activeMuzzle = false; // Muzzle OFF
+                    this.lastSpokeTime = Date.now(); // Reset gate start
 
-                        this.activeMuzzle = false; // Muzzle OFF
-                        this.lastSpokeTime = Date.now(); // Reset gate start
-                        if (autoResume) {
-                            this.startSpeechRecognition(); // FRESH START
+                    if (autoResume) {
+                        // On mobile, the mic is usually still running (NOT stopped above)
+                        // This heartbeat check ensures it stays running
+                        if (this.debugState.recognitionStatus !== 'started') {
+                            this.startSpeechRecognition();
                         }
-                        resolve();
-                    };
-
-                    resumeVisualizer();
+                    }
+                    resolve();
                 }, 800);
             };
 
@@ -567,8 +567,13 @@ export class HybridController {
 
     public async stopSession() {
         this.isActiveFlag = false;
+        this.isEngineInitialized = false;
         if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
         if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
+        if (this.keepAliveOsc) {
+            try { this.keepAliveOsc.stop(); } catch (e) { }
+            this.keepAliveOsc = null;
+        }
         if (this.recognition) {
             this.recognition.onend = null;
             this.recognition.stop();
