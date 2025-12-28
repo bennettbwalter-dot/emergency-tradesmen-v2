@@ -195,7 +195,13 @@ export function processUserMessage(message: string, currentState: ChatState): { 
     }
     // CASE C: TRADE UNKNOWN -> CLARIFY
     else {
-        responseText = "Is this plumbing, electrical, gas, locks, drains, glass, or breakdown recovery?";
+        // Specific check: Did user ask for a list?
+        if (lowerMsg.includes('trade') || lowerMsg.includes('service') || lowerMsg.includes('list') || lowerMsg.includes('cover')) {
+            responseText = "We cover plumbing, electrical, gas, locks, drains, glazing, and vehicle breakdown. Which one do you need?";
+        } else {
+            // Default gentle prompt (User request: Do not list trades unless asked)
+            responseText = "I didn't catch that. Could you briefly describe the issue?";
+        }
         newState.step = 'TRADE_CHECK';
     }
 

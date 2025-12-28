@@ -18,7 +18,7 @@ export class AzureVoiceService {
         try {
             console.log('[AzureVoice] Initializing Service...');
             const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
-            speechConfig.speechSynthesisVoiceName = "en-US-AvaMultilingualNeural";
+            speechConfig.speechSynthesisVoiceName = "en-GB-HollieNeural";
 
             this.player = new sdk.SpeakerAudioDestination();
             this.audioConfig = sdk.AudioConfig.fromSpeakerOutput(this.player);
@@ -44,8 +44,8 @@ export class AzureVoiceService {
             // Construct SSML with Pause Support
             // Note: The user provided specific SSML structure requirement.
             const ssml = `
-<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-    <voice name="en-US-AvaMultilingualNeural">
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-GB">
+    <voice name="en-GB-HollieNeural">
         ${text}
     </voice>
 </speak>`.trim();
