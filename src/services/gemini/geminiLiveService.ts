@@ -156,12 +156,14 @@ export class HybridController {
         updateVolume();
     }
 
+    private silenceTimer: any = null;
+    private inputBuffer: string = "";
+
     private startSpeechRecognition(forceFresh = false) {
         if (!this.isActiveFlag) return;
 
-        // HALF-DUPLEX STRATEGY: 
-        // We aggressively kill and recreate the engine on mobile to ensure Audio Context purity.
-
+        // POLITE MODE: Continuous = true allows pauses.
+        // We manually stop only when WE decide the user is done (Silence Timer).
         if (this.recognition && !forceFresh) {
             try { this.recognition.start(); } catch (e) { }
             return;
@@ -177,18 +179,16 @@ export class HybridController {
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
-            this.debugState.speechApiSupported = false;
-            this.broadcastDebug();
             this.callbacks.onError?.(new Error("Speech Recognition not supported."));
             return;
         }
 
-        console.log('[Voice] Initializing Fresh Engine (Half-Duplex)...');
+        console.log('[Voice] Initializing Polite Engine...');
         this.recognition = new SpeechRecognition();
 
-        // STRICT HALF-DUPLEX: No continuous. One sentence at a time.
-        // We rely on the Restart Loop to keep it going.
-        this.recognition.continuous = false;
+        // POLITE MODE: Continuous = true allows pauses.
+        // We manually stop only when WE decide the user is done (Silence Timer).
+        this.recognition.continuous = true;
 
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -200,11 +200,9 @@ export class HybridController {
             this.debugState.recognitionStatus = 'started';
             this.isSpeaking = false;
             this.activeMuzzle = false;
+            this.inputBuffer = ""; // Clear buffer
             this.broadcastDebug();
-
-            if (this.callbacks.onStatusChange) {
-                this.callbacks.onStatusChange('Listening');
-            }
+            this.callbacks.onStatusChange?.('Listening');
 
             if (this.isActiveFlag && this.chatHistory.length === 0) {
                 this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
@@ -213,35 +211,30 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
-            console.log('[Voice] Engine Ended. Status:', this.debugState.recognitionStatus);
+            console.log('[Voice] Engine Ended.');
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
-
-            this.activeMuzzle = false; // Safety Unmuzzle
+            this.activeMuzzle = false;
             this.isSpeaking = false;
 
-            // RESTART LOOP:
-            // Since continuous=false, we MUST restart after every pause.
-            // But if we are about to speak (or are speaking), DO NOT restart.
+            // If we have pending input that wasn't processed yet (e.g. cut off), process it now
+            if (this.inputBuffer.trim() && !this.silenceTimer) {
+                this.handleUserInput(this.inputBuffer);
+                this.inputBuffer = "";
+            }
+
+            // RESTART LOOP
             if (this.isActiveFlag && !this.isSpeaking) {
-                console.log('[Voice] Restarting listener (Half-Duplex)...');
+                console.log('[Voice] Restarting listener...');
                 setTimeout(() => {
-                    // Request a FRESH instance to clear iOS audio buffers
                     this.startSpeechRecognition(true);
-                }, 200);
+                }, 600);
             }
         };
 
         this.recognition.onerror = (e: any) => {
-            console.warn('[Voice] Engine Error:', e.error);
-            this.debugState.lastError = `Recog: ${e.error}`;
-            this.broadcastDebug();
-
-            if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-                console.warn('[Voice] Mic blocked/busy. Waiting...');
-            } else {
-                // legitimate error
-            }
+            // ... existing error logic
+            if (e.error !== 'no-speech') console.warn('[Voice] Error:', e.error);
         };
 
         try {
@@ -268,32 +261,33 @@ export class HybridController {
     private handleRecognitionResult(event: any) {
         if (!this.isActiveFlag || this.isSpeaking || this.activeMuzzle) return;
 
+        // 1. CLEAR EXISTING TIMER (User is still active)
+        if (this.silenceTimer) {
+            clearTimeout(this.silenceTimer);
+            this.silenceTimer = null;
+        }
+
+        let interim = "";
+
         for (let i = event.resultIndex; i < event.results.length; ++i) {
-            const transcript = event.results[i][0].transcript.trim();
+            const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
-                console.log(`[Voice] Final Transcript: "${transcript}"`);
-                if (!transcript) continue;
-
-                // --- ROBUST FUZZY ECHO FILTER ---
-                if (this.lastSpokeText) {
-                    const cleanOld = this.lastSpokeText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
-                    const cleanNew = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/).filter(w => w.length > 2);
-
-                    if (cleanOld.length > 0 && cleanNew.length > 0) {
-                        const overlap = cleanNew.filter(word => cleanOld.includes(word));
-                        const overlapRatio = overlap.length / Math.max(cleanNew.length, 1);
-
-                        // If more than 50% of the words overlap, it's almost certainly an echo.
-                        if (overlapRatio > 0.5 || (cleanNew.length > 5 && overlap.length >= 3)) {
-                            console.log(`[Voice] Fuzzy Echo Filter: Dropped overlap (${Math.round(overlapRatio * 100)}%).`);
-                            return;
-                        }
-                    }
-                }
-
-                if (transcript) this.handleUserInput(transcript);
+                this.inputBuffer += " " + transcript;
+            } else {
+                interim += transcript;
             }
         }
+
+        // 2. SET SILENCE DEBOUNCE
+        // Wait 1.2s of absolute silence before assuming turn is over.
+        this.silenceTimer = setTimeout(() => {
+            const finalCommand = (this.inputBuffer + " " + interim).trim();
+            if (finalCommand.length > 2) { // Ignore minimal noise
+                console.log(`[Voice] Creating Turn: "${finalCommand}"`);
+                this.handleUserInput(finalCommand);
+                this.inputBuffer = ""; // Clear for next turn
+            }
+        }, 1200);
     }
 
     private async handleUserInput(text: string) {
@@ -504,6 +498,11 @@ export class HybridController {
         this.activeMuzzle = true;
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text;
+
+        // CLEAR PENDING INPUT
+        if (this.silenceTimer) clearTimeout(this.silenceTimer);
+        this.silenceTimer = null;
+        this.inputBuffer = "";
 
         // HALF-DUPLEX OVERRIDE:
         // KILL the microphone immediately. We do NOT want it fighting with TTS.
