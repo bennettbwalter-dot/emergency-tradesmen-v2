@@ -503,7 +503,9 @@ export class HybridController {
             this.currentUtterance = utter;
 
             // BEST BRITISH VOICE LOGIC (Optimized for Mobile & Desktop)
-            const voices = window.speechSynthesis.getVoices();
+            const voices = (window.speechSynthesis && typeof window.speechSynthesis.getVoices === 'function')
+                ? window.speechSynthesis.getVoices()
+                : [];
             const preferred =
                 voices.find(v => v.name.includes("Google UK English Male")) ||
                 voices.find(v => v.name.includes("Google UK English Female")) ||
