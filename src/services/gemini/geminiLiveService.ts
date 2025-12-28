@@ -26,6 +26,8 @@ export class HybridController {
     private lastSpokeText: string = ""; // Echo Filter
     private activeMuzzle: boolean = false; // Hard Muzzle State
     private isActiveFlag: boolean = false; // Session Lifecycle Flag
+    private heartbeatTimer: any = null; // Recognition Heartbeat
+    private watchdogTimer: any = null; // Synthesis Watchdog
 
     // Diagnostic State
     private debugState = {
@@ -53,6 +55,9 @@ export class HybridController {
 
         this.callbacks.onStatusChange?.('Initializing...');
 
+        // CRITICAL FOR MOBILE: Fire recognition immediately (if possible) or minimize async gap
+        this.startSpeechRecognition();
+
         try {
             const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
             this.audioContext = new AudioContextClass();
@@ -70,13 +75,11 @@ export class HybridController {
             this.broadcastDebug();
 
             this.setupAudioVisualizer(stream);
-            this.startSpeechRecognition();
         } catch (err: any) {
-            console.warn('[Voice] Init error:', err);
+            console.warn('[Voice] Init error (Visualizer/AudioContext):', err);
             this.debugState.lastError = err.message;
             this.broadcastDebug();
-            this.callbacks.onStatusChange?.('Error ❌');
-            this.callbacks.onError?.(new Error(`Mic Error: ${err.message}`));
+            // Don't hard fail if only the visualizer fails, recognition might still work
         }
     }
 
@@ -119,7 +122,10 @@ export class HybridController {
         }
 
         this.recognition = new SpeechRecognition();
-        this.recognition.continuous = true;
+
+        // Mobile Tweak: Some mobile browsers are better with continuous = false
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        this.recognition.continuous = !isMobile;
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
 
@@ -150,16 +156,43 @@ export class HybridController {
         };
 
         this.recognition.onend = () => {
-            if (this.recognition && !this.isSpeaking) {
-                try { this.recognition.start(); } catch (e) { }
+            this.debugState.recognitionStatus = 'ended';
+            this.broadcastDebug();
+            // Aggressive restart for mobile
+            if (this.isActiveFlag && !this.isSpeaking) {
+                setTimeout(() => {
+                    if (this.isActiveFlag && !this.isSpeaking) {
+                        try { this.recognition.start(); } catch (e) { }
+                    }
+                }, 100);
             }
+        };
+
+        this.recognition.onerror = (e: any) => {
+            console.warn('[Voice] Recog Error:', e.error);
+            this.debugState.lastError = `Recog: ${e.error}`;
+            this.broadcastDebug();
         };
 
         try {
             this.recognition.start();
+            this.startHeartbeat();
         } catch (e: any) {
             console.error('[Voice] Start error:', e);
         }
+    }
+
+    private startHeartbeat() {
+        if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
+        this.heartbeatTimer = setInterval(() => {
+            if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
+                // If it should be running but isn't
+                if (this.debugState.recognitionStatus !== 'started' && this.debugState.recognitionStatus !== 'starting') {
+                    console.log('[Voice] Heartbeat: Restarting recognition...');
+                    try { this.recognition.start(); } catch (e) { }
+                }
+            }
+        }, 2000);
     }
 
     private handleRecognitionResult(event: any) {
@@ -436,7 +469,18 @@ export class HybridController {
             utter.rate = 0.9; // Clearer, slightly slower for mobile
             utter.volume = 1.0; // Max volume boost for mobile speakers
 
-            utter.onend = () => {
+            // WATCHDOG: Force end synthesis if it hangs (common on mobile)
+            if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
+            this.watchdogTimer = setTimeout(() => {
+                if (this.isSpeaking) {
+                    console.warn('[Voice] Watchdog: Synthesis hung, forcing end.');
+                    window.speechSynthesis.cancel();
+                    onUtterEnd();
+                }
+            }, 10000);
+
+            const onUtterEnd = () => {
+                if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
                 this.isSpeaking = false;
                 this.currentUtterance = null;
                 this.callbacks.onStatusChange?.('Ready');
@@ -453,11 +497,8 @@ export class HybridController {
                 }, 800);
             };
 
-            utter.onerror = () => {
-                this.isSpeaking = false;
-                this.activeMuzzle = false;
-                resolve();
-            };
+            utter.onend = onUtterEnd;
+            utter.onerror = onUtterEnd;
 
             window.speechSynthesis.speak(utter);
         });
@@ -465,6 +506,8 @@ export class HybridController {
 
     public async stopSession() {
         this.isActiveFlag = false;
+        if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
+        if (this.watchdogTimer) clearTimeout(this.watchdogTimer);
         if (this.recognition) {
             this.recognition.onend = null;
             this.recognition.stop();
