@@ -177,9 +177,8 @@ export class HybridController {
         console.log('[Voice] Initializing Immortal Engine...');
         this.recognition = new SpeechRecognition();
 
-        // HYBRID MODE: Continuous for Desktop, Discrete for Mobile (most stable)
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        this.recognition.continuous = !isMobile;
+        // IMMORTAL MODE: Always Continuous. Prevents iOS permission loss.
+        this.recognition.continuous = true;
 
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -492,14 +491,9 @@ export class HybridController {
         this.lastSpokeTime = Date.now();
         this.lastSpokeText = text;
 
-        // POLITE MODE: STOP LISTENING while speaking.
-        // This prevents "hearing itself" and OS audio resource conflicts (Duck/Pause).
-        if (this.recognition) {
-            try {
-                this.recognition.onend = null; // Prevent premature restart
-                this.recognition.stop();
-            } catch (e) { }
-        }
+        // IMMORTAL MODE: DO NOT STOP LISTENING.
+        // We keep the mic open to hold the session active.
+        // We rely on 'isSpeaking' to ignore self-talk (Soft Muzzle).
 
         // CRITICAL VOLUME FIX: Stop KeepAlive/AudioContext during speech logic
         // preventing mobile OS from ducking the TTS volume
