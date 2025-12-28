@@ -1,38 +1,198 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Loader2 } from 'lucide-react'; // Changed Mic -> Volume
+import { Mic, MicOff, Loader2, Volume2, Navigation } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { AzureVoiceService } from '@/services/azureVoiceService';
+import { processUserMessage, ChatState } from '@/lib/chat-logic';
 
 const VoiceTrigger = () => {
-    const [isActive, setIsActive] = useState(false);
-    const [status, setStatus] = useState('Silent');
-    // Singleton-ish service ref
+    const navigate = useNavigate();
+
+    // UI State (for rendering)
+    const [status, setStatusState] = useState('Silent');
+    const [isActive, setIsActiveState] = useState(false);
+
+    // Refs (for logic/event handlers to avoid stale closures)
+    const statusRef = useRef('Silent');
+    const isActiveRef = useRef(false);
+
+    // CHAT STATE - Used to be just state, now needs Ref for event access
+    const chatStateRef = useRef<ChatState>({
+        step: 'INITIAL',
+        detectedTrade: null,
+        detectedCity: null,
+        history: []
+    });
+
     const [voiceService] = useState(() => new AzureVoiceService());
+    const recognitionRef = useRef<any>(null);
+    const silenceTimer = useRef<any>(null);
 
-    const toggleVoice = async () => {
-        // Haptic
-        if (typeof navigator.vibrate === 'function') navigator.vibrate(50);
+    // Helper to update both Ref and State
+    const setStatus = (newStatus: string) => {
+        statusRef.current = newStatus;
+        setStatusState(newStatus);
+    };
 
-        if (isActive) {
-            voiceService.stop();
-            setIsActive(false);
-            setStatus('Silent');
-        } else {
-            setStatus('Initializing...');
+    const setIsActive = (active: boolean) => {
+        isActiveRef.current = active;
+        setIsActiveState(active);
+    };
 
-            // MOBILE UNLOCK: Init AudioContext on User Gesture
+    const updateChatState = (newState: ChatState) => {
+        chatStateRef.current = newState;
+        // We don't strictly need to trigger a re-render for chat state logic, 
+        // as it's invisible logic state, but if we visualized it we would need useState.
+        // For now, Ref is enough for the logic to work.
+    };
+
+    useEffect(() => {
+        return () => {
+            stopSession();
+        };
+    }, []);
+
+    const startSession = async () => {
+        try {
             voiceService.unlockAudioContext();
-            setIsActive(true);
-            setStatus('Ready');
 
-            // Quick Test Speak
-            await voiceService.speak("Voice navigation active. <break time='200ms'/> Ready.");
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Voice not supported in this browser.");
+                return;
+            }
+
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.continuous = true;
+            recognitionRef.current.interimResults = true;
+            recognitionRef.current.lang = 'en-GB';
+
+            recognitionRef.current.onstart = () => setStatus('Listening');
+
+            // CRITICAL FIX: Use Refs to access current state inside closure
+            recognitionRef.current.onend = () => {
+                if (isActiveRef.current && statusRef.current === 'Listening') {
+                    console.log('[Voice] onend: Auto-restarting (Status is Listening)');
+                    try { recognitionRef.current?.start(); } catch (e) { }
+                }
+            };
+
+            recognitionRef.current.onresult = handleSpeechResult;
+
+            setIsActive(true);
+
+            // 3. Greeting First, Then Listen
+            await speakResponse("Hello, Emergency Tradesmen here. How can I help?");
+
+            // 4. Start Listening
+            if (isActiveRef.current && recognitionRef.current) {
+                try {
+                    recognitionRef.current.start();
+                    setStatus('Listening');
+                } catch (e) {
+                    console.warn("Recog start failed (already running?)", e);
+                }
+            }
+
+        } catch (e) {
+            console.error("Voice Init Failed:", e);
+            setStatus('Error');
         }
+    };
+
+    const stopSession = () => {
+        setIsActive(false);
+        setStatus('Silent');
+
+        // Reset Logic State on Stop? Or keep it?
+        // Usually better to reset for next session
+        updateChatState({
+            step: 'INITIAL',
+            detectedTrade: null,
+            detectedCity: null,
+            history: []
+        });
+
+        if (recognitionRef.current) {
+            recognitionRef.current.onend = null;
+            recognitionRef.current.stop();
+            recognitionRef.current = null;
+        }
+        voiceService.stop();
+    };
+
+    const handleSpeechResult = (event: any) => {
+        if (statusRef.current === 'Speaking' || statusRef.current === 'Processing') return;
+
+        let interim = "";
+        let final = "";
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                final += event.results[i][0].transcript;
+            } else {
+                interim += event.results[i][0].transcript;
+            }
+        }
+
+        if (silenceTimer.current) clearTimeout(silenceTimer.current);
+
+        if (final || interim.length > 0) {
+            silenceTimer.current = setTimeout(() => {
+                const text = (final + " " + interim).trim();
+                if (text.length > 2) {
+                    processInput(text);
+                }
+            }, 1200);
+        }
+    };
+
+    const processInput = async (text: string) => {
+        setStatus('Processing');
+        if (recognitionRef.current) recognitionRef.current.stop();
+
+        // FIX: Use Ref to get the LATEST state
+        const { newState, response } = processUserMessage(text, chatStateRef.current);
+        updateChatState(newState);
+
+        await speakResponse(response.content);
+
+        if (response.action === 'navigate' && response.target) {
+            navigate(response.target);
+            stopSession();
+        } else {
+            if (isActiveRef.current) {
+                try { recognitionRef.current?.start(); } catch (e) { }
+                setStatus('Listening');
+            }
+        }
+    };
+
+    const speakResponse = async (text: string) => {
+        setStatus('Speaking');
+
+        const cleanText = text.replace(/[*#]/g, '');
+        const ssmlText = cleanText.replace(/(\.|\?|!)\s/g, '$1 <break time="400ms"/> ');
+
+        await voiceService.speak(ssmlText);
+
+        const approximateDuration = Math.max(2000, cleanText.length * 60);
+        await new Promise(resolve => setTimeout(resolve, approximateDuration));
+    };
+
+    const toggleVoice = () => {
+        if (isActiveRef.current) stopSession();
+        else startSession();
     };
 
     return (
         <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center gap-3">
             {isActive && (
-                <div className="bg-black/80 backdrop-blur-md text-gold text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-gold/30 shadow-2xl animate-in fade-in zoom-in duration-300">
+                <div className={`
+                    text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border shadow-2xl animate-in fade-in zoom-in duration-300
+                    ${status === 'Listening' ? 'bg-green-500/80 text-white border-green-400' :
+                        status === 'Speaking' ? 'bg-amber-500/80 text-white border-amber-400' :
+                            'bg-black/80 text-gold border-gold/30'}
+                `}>
                     {status}
                 </div>
             )}
@@ -47,12 +207,14 @@ const VoiceTrigger = () => {
                     }
                 `}
             >
-                {status === 'Initializing...' ? (
+                {status === 'Processing' ? (
                     <Loader2 className="w-7 h-7 animate-spin" />
+                ) : status === 'Speaking' ? (
+                    <Volume2 className="w-7 h-7 animate-pulse" />
                 ) : isActive ? (
-                    <Volume2 className="w-7 h-7" />
+                    <Mic className="w-7 h-7" />
                 ) : (
-                    <VolumeX className="w-7 h-7" />
+                    <Mic className="w-7 h-7" />
                 )}
             </button>
         </div>

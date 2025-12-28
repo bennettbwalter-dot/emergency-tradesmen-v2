@@ -1,5 +1,5 @@
 import { trades, cities } from "@/lib/trades";
-import { searchKnowledgeBase, KNOWLEDGE_BASE_DATA } from "@/lib/knowledge-base";
+import { SAFETY_TIPS } from "@/services/gemini/constants";
 
 export interface ChatState {
     step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'ROUTING';
@@ -93,64 +93,52 @@ export function processUserMessage(message: string, currentState: ChatState): { 
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
 
-    // 1. DANGER CHECK (999 Emergency Override)
+    // 1. DANGER CHECK (Keep existing safeguard but ensure it doesn't break flow if not critical)
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
         return {
             newState,
             response: {
                 id: Date.now().toString(),
                 role: 'assistant',
-                content: "⚠️ IMMEDIATE DANGER DETECTED\n\nIf there is immediate danger to life or property (fire, explosion, crime in progress), please call 999 immediately.\n\nEmergency Tradesmen follows strict UK safety rules. If you are safe and need a tradesperson, please confirm: 'I am safe'."
+                content: "⚠️ IMMEDIATE DANGER DETECTED\n\nIf there is immediate danger to life or property (fire, explosion, crime in progress), please call 999 immediately.\n\nIf you are safe and need a tradesperson, please confirm: 'I am safe'."
             }
         };
     }
 
-    // 2. GAS EMERGENCY CHECK (HIGHEST PRIORITY - overrides all other trades)
-    // Exception: "fishy smell" is electrical, not gas
-    const hasFishySmell = lowerMsg.includes('fishy smell') || lowerMsg.includes('fishy');
-    const hasGasKeyword = !hasFishySmell && GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k));
+    // 2. GENERAL PAGE NAVIGATION (Section 9 Override)
+    if (lowerMsg.includes('blog')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening the Blog.", action: 'navigate', target: '/blog' } };
+    if (lowerMsg.includes('about')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening About Us.", action: 'navigate', target: '/about' } };
+    if (lowerMsg.includes('contact')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Contact page.", action: 'navigate', target: '/contact' } };
+    if (lowerMsg.includes('sign up') || lowerMsg.includes('join')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Tradesmen Sign Up.", action: 'navigate', target: '/tradesmen' } };
+    if (lowerMsg.includes('home')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Taking you Home.", action: 'navigate', target: '/' } };
 
-    if (hasGasKeyword) {
-        newState.detectedTrade = 'gas-engineer';
-    }
+    // STATE MACHINE IMPLEMENTATION
 
-    // 3. DISAMBIGUATION RULES (only if gas not detected)
-    if (!hasGasKeyword && !newState.detectedTrade) {
-        const hasBurningSmell = lowerMsg.includes('burning smell');
-        const hasPowerIssue = lowerMsg.includes('power') || lowerMsg.includes('electric');
-        const hasWaterIssue = lowerMsg.includes('water') || lowerMsg.includes('leak');
-        const hasBrokenWindow = lowerMsg.includes('broken window') || lowerMsg.includes('smashed glass');
-        const hasDoorLock = lowerMsg.includes('lock') || lowerMsg.includes('door');
-
-        // Disambiguation: burning smell + power = Electrician
-        if (hasBurningSmell && hasPowerIssue) {
-            newState.detectedTrade = 'electrician';
-        }
-        // Disambiguation: broken window + can't lock = Glazier first
-        else if (hasBrokenWindow && hasDoorLock) {
-            newState.detectedTrade = 'glazier';
-        }
-        // Disambiguation: water + electrics = Plumber first
-        else if (hasWaterIssue && hasPowerIssue) {
-            newState.detectedTrade = 'plumber';
-        }
-    }
-
-    // 4. STANDARD TRADE DETECTION (if not already set by disambiguation or gas)
+    // 3. DETECT TRADE (if not already known)
     if (!newState.detectedTrade) {
-        // Check trades in priority order: gas-engineer first, then others
-        const tradeOrder = ['gas-engineer', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown'];
-
-        for (const slug of tradeOrder) {
-            const keywords = TRADE_KEYWORDS[slug];
-            if (keywords && keywords.some(k => lowerMsg.includes(k))) {
-                newState.detectedTrade = slug;
-                break;
+        // GAS Override (Highest Priority)
+        if (!lowerMsg.includes('fishy') && GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k))) {
+            newState.detectedTrade = 'gas-engineer';
+        } else {
+            // Check other trades
+            const tradeOrder = ['electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown'];
+            // Simple keyword matching from existing maps
+            for (const slug of tradeOrder) {
+                if (TRADE_KEYWORDS[slug]?.some(k => lowerMsg.includes(k))) {
+                    newState.detectedTrade = slug;
+                    break;
+                }
+            }
+            // Disambiguation helpers (simplify to direct assignments if trade still null)
+            if (!newState.detectedTrade) {
+                if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
+                else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
+                else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
             }
         }
     }
 
-    // 5. DETECT CITY
+    // 4. DETECT CITY (Always check if we don't have it, or if user might be updating it)
     if (!newState.detectedCity) {
         const foundCity = cities.find(c => lowerMsg.includes(c.toLowerCase()));
         if (foundCity) {
@@ -158,75 +146,57 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         }
     }
 
-    // 6. LOGIC FLOW
+    // 5. GENERATE RESPONSE BASED ON STATE
     let responseText = "";
     let action: 'navigate' | undefined;
     let target: string | undefined;
 
-    // Search Knowledge Base for safety advice ONLY if not a gas emergency
-    let safetyAdvice = "";
+    const tip = newState.detectedTrade ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
 
-    if (newState.detectedTrade !== 'gas-engineer') {
-        safetyAdvice = searchKnowledgeBase(lowerMsg);
-
-        // Fallback: If no keyword match but we detected a trade, get generic advice
-        if (!safetyAdvice && newState.detectedTrade) {
-            const tradeToKbMap: Record<string, keyof typeof KNOWLEDGE_BASE_DATA> = {
-                'plumber': 'PLUMBING',
-                'electrician': 'ELECTRICAL',
-                'locksmith': 'LOCKSMITH',
-                'gas-engineer': 'PLUMBING',
-                'drain-specialist': 'DRAINAGE',
-                'glazier': 'GLAZING',
-                'breakdown': 'VEHICLE'
-            };
-            const kbKey = tradeToKbMap[newState.detectedTrade];
-            if (kbKey && KNOWLEDGE_BASE_DATA[kbKey]) {
-                safetyAdvice = KNOWLEDGE_BASE_DATA[kbKey].safety_tips.join('\n');
-            }
-        }
-    }
-
-    // 7. RESPONSE GENERATION
+    // CASE A: TRADE & CITY KNOWN -> NAVIGATE
     if (newState.detectedTrade && newState.detectedCity) {
         const city = newState.detectedCity;
-        const trade = trades.find(t => t.slug === newState.detectedTrade)?.name || newState.detectedTrade;
 
-        let advicePrefix = "";
+        // Logic: Should we say the tip?
+        // If we just asked for location (Step == LOCATION_CHECK), user already heard the tip. Don't repeat.
+        // If this is the first turn (Step == INITIAL/TRADE_CHECK), user hasn't heard it. Say it.
+        const shouldSayTip = currentState.step !== 'LOCATION_CHECK';
+        const advicePart = (shouldSayTip && tip) ? `${tip} ` : "";
 
-        // Special handling for gas emergencies
-        if (newState.detectedTrade === 'gas-engineer') {
-            advicePrefix = "🚨 GAS EMERGENCY DETECTED\n\n⚠️ SAFETY FIRST:\n• Open windows and doors immediately\n• DO NOT use electrical switches or flames\n• Turn off gas at the meter if safe to do so\n• Evacuate if you smell gas\n• Call National Gas Emergency: 0800 111 999\n\n";
-        } else if (safetyAdvice) {
-            advicePrefix = `Safety-first guidance:\n${safetyAdvice}\n\n`;
-        }
+        // Navigation Phrase
+        const transition = "I’m taking you to the right Emergency Tradesmen page now.";
 
-        responseText = `${advicePrefix}I've found verified ${trade} services in ${city}. Connecting you now...`;
+        // NO Post-Nav Instruction per user request
+
+        responseText = `${advicePart}${transition}`;
         action = 'navigate';
         target = `/emergency-${newState.detectedTrade}/${city.toLowerCase()}`;
         newState.step = 'ROUTING';
-    } else if (newState.detectedTrade && !newState.detectedCity) {
-        // Add gas warning if applicable
-        let gasPrefix = "";
-        if (newState.detectedTrade === 'gas-engineer') {
-            gasPrefix = "🚨 GAS EMERGENCY\n\n⚠️ SAFETY FIRST:\n• Open windows and doors\n• DO NOT use switches or flames\n• Evacuate if you smell gas\n• Call National Gas Emergency: 0800 111 999\n\n";
-        }
+    }
+    // CASE B: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
+    else if (newState.detectedTrade && !newState.detectedCity) {
+        // Check if we already gave the tip and are just looping for location?
+        if (currentState.step === 'LOCATION_CHECK') {
+            // We already asked, and they didn't give a valid city.
+            // Fallback logic as per Master Manual: use nearest area.
 
-        responseText = safetyAdvice
-            ? `${gasPrefix}${safetyAdvice}\n\nWhich city or area are you in? (You can also press the Locate Me button to detect your location automatically)`
-            : `${gasPrefix}I can help with that. Which city or area are you in? (You can also press the Locate Me button to detect your location automatically)`;
-        newState.step = 'LOCATION_CHECK';
-    } else if (!newState.detectedTrade && newState.detectedCity) {
-        responseText = `Okay, I see you're in ${newState.detectedCity}. Briefly describe your emergency so I can direct you to the right help.`;
-        newState.step = 'TRADE_CHECK';
-    } else {
-        // Nothing detected - ask for clarification
-        if (safetyAdvice) {
-            responseText = `Safety-first guidance:\n${safetyAdvice}\n\nTo find a tradesperson, please tell me your location and the nature of the emergency. (You can also press the Locate Me button to detect your location automatically)`;
+            const fallbackText = "That’s fine — I’ll use the nearest area so we can get help quickly.";
+            const transition = "I’m taking you to the right Emergency Tradesmen page now.";
+
+            responseText = `${fallbackText} ${transition}`;
+            action = 'navigate';
+            target = `/emergency-${newState.detectedTrade}`;
+            newState.step = 'ROUTING';
         } else {
-            responseText = "I'm here to help. I'll guide you to the right local trade while prioritizing your safety. Could you tell me what the emergency is and where you are located? (Tip: Use the Locate Me button to detect your location)";
+            // First time asking for location: GIVE TIP FIRST
+            responseText = `${tip} What town, area, or postcode are you in?`;
+            newState.step = 'LOCATION_CHECK';
         }
-        newState.step = 'INITIAL';
+    }
+    // CASE C: TRADE UNKNOWN -> CLARIFY
+    else {
+        responseText = "Is this plumbing, electrical, gas, locks, drains, glass, or breakdown recovery?";
+        newState.step = 'TRADE_CHECK';
     }
 
     return {
@@ -240,4 +210,3 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         }
     };
 }
-
