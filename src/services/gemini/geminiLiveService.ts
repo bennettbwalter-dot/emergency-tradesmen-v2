@@ -177,9 +177,8 @@ export class HybridController {
         console.log('[Voice] Initializing Immortal Engine...');
         this.recognition = new SpeechRecognition();
 
-        // POLITE MODE: Mobile gets discrete segments to avoid OS conflict & buffer stalls
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        this.recognition.continuous = !isMobile;
+        // SIMPLIFIED MODE: Continuous listening on ALL devices for "Tap to Talk / Tap to Stop" logic
+        this.recognition.continuous = true;
 
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-GB';
@@ -192,22 +191,12 @@ export class HybridController {
             this.isSpeaking = false;
             this.activeMuzzle = false;
             this.broadcastDebug();
-            this.callbacks.onStatusChange?.('Ready');
+            this.callbacks.onStatusChange?.('Listening'); // Direct 'Listening' status
 
             if (this.chatHistory.length === 0 && window.speechSynthesis) {
-                if (window.speechSynthesis.getVoices().length === 0) {
-                    window.speechSynthesis.onvoiceschanged = () => {
-                        if (this.isActiveFlag && this.chatHistory.length === 0) {
-                            this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
-                            this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
-                        }
-                        try { window.speechSynthesis.onvoiceschanged = null; } catch (e) { }
-                    };
-                } else {
-                    if (this.isActiveFlag && this.chatHistory.length === 0) {
-                        this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
-                        this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
-                    }
+                if (this.isActiveFlag && this.chatHistory.length === 0) {
+                    this.chatHistory.push({ role: 'assistant', parts: [{ text: "GREETING" }] });
+                    this.speak("Hello, you’re through to Emergency Tradesmen. Tell me what’s happened?");
                 }
             }
         };
@@ -217,17 +206,11 @@ export class HybridController {
             this.debugState.recognitionStatus = 'ended';
             this.broadcastDebug();
 
-            // POLITE RECOVERY: Only restart if we are NOT speaking and NOT muzzled
-            // On mobile, this restart might sometimes fail without a gesture, but it's cleaner than "Immortal"
+            // IMMORTAL RESTART: Unless explicitly stopped by user, we restart IMMEDIATELY.
+            // This prevents "Switching On/Off" flickering.
             if (this.isActiveFlag && !this.isSpeaking && !this.activeMuzzle) {
-                console.log('[Voice] Polite recovery attempt...');
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                // Add delay on mobile to let buffers clear
-                setTimeout(() => {
-                    if (this.isActiveFlag && !this.isSpeaking) {
-                        try { this.recognition.start(); } catch (e) { }
-                    }
-                }, isMobile ? 200 : 100);
+                console.log('[Voice] Immediate resurrection...');
+                try { this.recognition.start(); } catch (e) { }
             }
         };
 
