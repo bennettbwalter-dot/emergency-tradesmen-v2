@@ -155,7 +155,7 @@ const VoiceTrigger = () => {
         if (recognitionRef.current) recognitionRef.current.stop();
 
         // FIX: Use Ref to get the LATEST state
-        const { newState, response } = processUserMessage(text, chatStateRef.current);
+        const { newState, response } = await processUserMessage(text, chatStateRef.current);
         updateChatState(newState);
 
         await speakResponse(response.content);

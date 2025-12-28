@@ -41,11 +41,18 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
             setCenter(CITY_COORDINATES[normalizedCity]);
             setZoom(12);
         } else {
-            // Default fallback if city not found in our hardcoded list
-            // Ideally we would use the Geocoding API service here
             console.warn(`City coordinates not found for ${city}`);
         }
     }, [city]);
+
+    // Shadow Counter: Track Map Load
+    useEffect(() => {
+        // We only count when the component MOUNTS (page load), not every render.
+        // Importing dynamically to avoid circular dependencies if any (though usageLogger is independent)
+        import('@/lib/usage-logger').then(({ usageLogger }) => {
+            usageLogger.incrementUsage('google_map_loads', 1);
+        });
+    }, []);
 
 
     return (

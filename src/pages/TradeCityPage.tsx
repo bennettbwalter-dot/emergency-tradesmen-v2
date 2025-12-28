@@ -166,6 +166,10 @@ export default function TradeCityPage() {
           name="description"
           content={`Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
         />
+        <meta
+          name="keywords"
+          content={`emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`}
+        />
         <link rel="canonical" href={`https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}

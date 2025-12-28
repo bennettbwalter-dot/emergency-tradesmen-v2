@@ -96,6 +96,8 @@ export default function AdminDashboard() {
                 </p>
             </div>
 
+            import {CostOverviewCard} from "@/components/admin/CostOverviewCard";
+
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <MetricCard
@@ -131,6 +133,11 @@ export default function AdminDashboard() {
                     iconColor="text-purple-600"
                     trend={revenue.growth >= 0 ? 'up' : 'down'}
                 />
+            </div>
+
+            {/* Cost & Usage Dashboard */}
+            <div className="grid grid-cols-1 gap-6">
+                <CostOverviewCard />
             </div>
 
             {/* Secondary Metrics */}

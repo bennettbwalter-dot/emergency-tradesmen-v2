@@ -23,6 +23,11 @@ export class AzureVoiceService {
     }
 
     public async speak(text: string): Promise<void> {
+        // Shadow Counter: Track TTS Usage
+        import('@/lib/usage-logger').then(({ usageLogger }) => {
+            usageLogger.incrementUsage('azure_tts_chars', text.length);
+        });
+
         return new Promise((resolve) => {
             this.initAudio();
 

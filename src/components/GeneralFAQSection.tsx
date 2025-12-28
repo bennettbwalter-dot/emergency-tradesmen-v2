@@ -101,9 +101,25 @@ export function GeneralFAQSection({
         </div>
     );
 
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqData.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    };
+
     return (
         <div className={`w-full max-w-4xl mx-auto ${className}`}>
-            
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
 
             {!showTitle && !isOpened && (
                 <div className="text-center mb-8">

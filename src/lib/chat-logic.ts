@@ -1,5 +1,6 @@
 import { trades, cities } from "@/lib/trades";
 import { SAFETY_TIPS } from "@/services/gemini/constants";
+import { geocodeLocation, findNearestSupportedCity } from "@/lib/location-utils";
 
 export interface ChatState {
     step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'ROUTING';
@@ -89,7 +90,8 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
     ]
 };
 
-export function processUserMessage(message: string, currentState: ChatState): { newState: ChatState, response: ChatMessage } {
+// ASYNC UPDATE: Returns Promise<{ newState, response }>
+export async function processUserMessage(message: string, currentState: ChatState): Promise<{ newState: ChatState, response: ChatMessage }> {
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
 
@@ -160,11 +162,44 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         }
     }
 
-    // 4. DETECT CITY (Always check if we don't have it, or if user might be updating it)
+    // 4. DETECT CITY (Async Fallback Added)
+    // We track fallback usage to modify response
+    let cityFallbackUsed = false;
+    let originalCity = "";
+
     if (!newState.detectedCity) {
+        // A. Strict Match First (Fast)
         const foundCity = cities.find(c => lowerMsg.includes(c.toLowerCase()));
         if (foundCity) {
             newState.detectedCity = foundCity;
+        }
+        // B. Nominatim Fallback (Slower but covers entire UK)
+        else if (newState.detectedTrade && !newState.detectedCity) {
+            const isLocationStep = currentState.step === 'LOCATION_CHECK';
+
+            // Heuristic: If we are asking for location, or message is short enough to be a location statement
+            if (isLocationStep || lowerMsg.length < 50) {
+                const locationQuery = lowerMsg
+                    .replace("i'm in", "")
+                    .replace("i am in", "")
+                    .replace("live in", "")
+                    .replace("located in", "")
+                    .trim();
+
+                if (locationQuery.length > 2) {
+                    const coords = await geocodeLocation(locationQuery);
+                    if (coords) {
+                        const match = findNearestSupportedCity(coords.lat, coords.lon);
+                        if (match) {
+                            // SUCCESS: We mapped "Brixton" -> "London"
+                            newState.detectedCity = match.city;
+                            cityFallbackUsed = true;
+                            originalCity = coords.displayName.split(',')[0]; // "Brixton"
+                            console.log(`[Location Fallback] Mapped '${originalCity}' -> '${match.city}' (${match.distance.toFixed(1)}km)`);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -185,8 +220,13 @@ export function processUserMessage(message: string, currentState: ChatState): { 
         const shouldSayTip = currentState.step !== 'LOCATION_CHECK';
         const advicePart = (shouldSayTip && tip) ? `${tip} ` : "";
 
-        // Navigation Phrase
-        const transition = "I’m taking you to the right Emergency Tradesmen page now.";
+        let transition = "I’m taking you to the right Emergency Tradesmen page now.";
+
+        // Intelligent Fallback Message
+        if (cityFallbackUsed) {
+            // Explain why we are sending them to X
+            transition = `I can't see a specific page for ${originalCity}, but our ${city} team covers that area. I'm taking you there now.`;
+        }
 
         // NO Post-Nav Instruction per user request
 
