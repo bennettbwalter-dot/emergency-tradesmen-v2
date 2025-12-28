@@ -191,8 +191,8 @@ const VoiceTrigger = () => {
         await voiceService.speak(ssmlText);
 
         // Calculate simplified duration to keep mic closed while speaking
-        // 80ms per char is safer conservative estimate for "Hollie"
-        const approximateDuration = Math.max(1500, cleanText.length * 80);
+        // 50ms per char is a much tighter fit for natural speech (~2.5 words/sec)
+        const approximateDuration = Math.max(1000, cleanText.length * 50);
         await new Promise(resolve => setTimeout(resolve, approximateDuration));
     };
 
