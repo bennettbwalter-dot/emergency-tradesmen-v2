@@ -185,15 +185,11 @@ const VoiceTrigger = () => {
 
         const cleanText = text.replace(/[*#]/g, '');
         // const ssmlText = cleanText.replace(/(\.|\?|!)\s/g, '$1 <break time="400ms"/> ');
-        // Keep it simple for flow
         const ssmlText = cleanText;
 
+        // CRITICAL UPDATE: This now awaits the ACTUAL 'onended' event from AudioContext
+        // We do NOT use manual timeouts anymore. The service resolves ONLY when audio stops.
         await voiceService.speak(ssmlText);
-
-        // Calculate simplified duration to keep mic closed while speaking
-        // 70ms per char = ~3.0s for greeting. Safe but not too slow.
-        const approximateDuration = Math.max(1200, cleanText.length * 70);
-        await new Promise(resolve => setTimeout(resolve, approximateDuration));
     };
 
     const toggleVoice = () => {

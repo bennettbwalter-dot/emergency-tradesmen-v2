@@ -5,45 +5,48 @@ const AZURE_REGION = import.meta.env.VITE_AZURE_SPEECH_REGION || '';
 
 export class AzureVoiceService {
     private synthesizer: sdk.SpeechSynthesizer | null = null;
-    private player: sdk.SpeakerAudioDestination | null = null;
-    private audioConfig: sdk.AudioConfig | null = null;
+    private audioContext: AudioContext | null = null;
+    private currentSource: AudioBufferSourceNode | null = null;
 
     constructor() { }
 
     private initAudio(): void {
-        if (!this.player) {
+        if (!this.audioContext) {
             try {
-                this.player = new sdk.SpeakerAudioDestination();
-                this.audioConfig = sdk.AudioConfig.fromSpeakerOutput(this.player);
+                // Standard AudioContext (works on mobile if unlocked)
+                const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+                this.audioContext = new AudioContext();
             } catch (e) {
-                console.error('[AzureVoice] Audio Init Failed:', e);
+                console.error('[AzureVoice] AudioContext Init Failed:', e);
             }
         }
     }
 
     public async speak(text: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            // 1. Ensure Audio Output Exists (Reuse single context)
+        return new Promise((resolve) => {
             this.initAudio();
 
-            if (!this.player || !this.audioConfig) {
-                console.error('[AzureVoice] No Audio Device');
+            if (!this.audioContext) {
+                console.error('[AzureVoice] No AudioContext');
                 resolve();
                 return;
             }
 
-            // 2. Kill OLD Synthesizer (if any hanging)
-            if (this.synthesizer) {
-                try { this.synthesizer.close(); } catch (e) { }
-                this.synthesizer = null;
+            // 1. Resume Context (Critical for Mobile)
+            if (this.audioContext.state === 'suspended') {
+                this.audioContext.resume();
             }
 
+            // 2. Kill Previous Audio
+            this.stop();
+
             try {
-                // 3. Create FRESH Synthesizer (Prevents network drift)
+                // 3. Configure Synthesizer to output raw stream (no auto-play)
                 const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
                 speechConfig.speechSynthesisVoiceName = "en-US-AvaMultilingualNeural";
 
-                this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, this.audioConfig);
+                // Set output to null to prevent SDK from trying to play it
+                this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, null as any);
 
                 const ssml = `
 <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
@@ -52,21 +55,21 @@ export class AzureVoiceService {
     </voice>
 </speak>`.trim();
 
-                console.log('[AzureVoice] Speaking...');
+                console.log('[AzureVoice] Synthesizing...');
 
                 this.synthesizer.speakSsmlAsync(
                     ssml,
                     (result) => {
                         if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-                            console.log('[AzureVoice] Synthesis Success');
+                            // 4. Decode and Play Manually
+                            const audioData = result.audioData;
+                            this.playBuffer(audioData, resolve);
                         } else {
                             console.warn('[AzureVoice] Issue:', result.errorDetails);
+                            resolve();
                         }
-                        // CLOSE the synthesizer to free network resources
-                        // accessible audio buffer stays in 'this.player'
                         this.synthesizer?.close();
                         this.synthesizer = null;
-                        resolve();
                     },
                     (err) => {
                         console.error('[AzureVoice] Error:', err);
@@ -83,12 +86,40 @@ export class AzureVoiceService {
         });
     }
 
+    private playBuffer(arrayBuffer: ArrayBuffer, onComplete: () => void) {
+        if (!this.audioContext) { onComplete(); return; }
+
+        this.audioContext.decodeAudioData(arrayBuffer, (decodedBuffer) => {
+            try {
+                // Create Source
+                const source = this.audioContext!.createBufferSource();
+                source.buffer = decodedBuffer;
+                source.connect(this.audioContext!.destination);
+
+                // Event Listener: The Silver Bullet for Timing
+                source.onended = () => {
+                    this.currentSource = null;
+                    onComplete(); // Resolve Promise ONLY when audio finishes
+                };
+
+                this.currentSource = source;
+                source.start(0);
+
+            } catch (e) {
+                console.error('[AzureVoice] Playback Failed:', e);
+                onComplete();
+            }
+        }, (err) => {
+            console.error('[AzureVoice] Decode Failed:', err);
+            onComplete();
+        });
+    }
+
     public stop(): void {
-        // Pause audio but keep context alive
-        if (this.player) {
-            this.player.pause();
+        if (this.currentSource) {
+            try { this.currentSource.stop(); } catch (e) { }
+            this.currentSource = null;
         }
-        // Kill synthesizer connection
         if (this.synthesizer) {
             try { this.synthesizer.close(); } catch (e) { }
             this.synthesizer = null;
@@ -97,5 +128,8 @@ export class AzureVoiceService {
 
     public unlockAudioContext(): void {
         this.initAudio();
+        if (this.audioContext && this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
     }
 }
