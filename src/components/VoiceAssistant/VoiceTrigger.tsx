@@ -19,6 +19,11 @@ const VoiceTrigger = () => {
     }, [controller]);
 
     const toggleSession = async () => {
+        // Haptic feedback for mobile (if supported)
+        if (typeof navigator.vibrate === 'function') {
+            navigator.vibrate(50);
+        }
+
         if (isActive) {
             setIsActive(false);
             setStatus('Off');
@@ -34,7 +39,13 @@ const VoiceTrigger = () => {
 
             try {
                 await controller.startSession({
-                    onStatusChange: (s) => setStatus(s),
+                    onStatusChange: (s) => {
+                        setStatus(s);
+                        // Vibrate again when ready/listening to confirm mic is hot
+                        if (s === 'Listening' && typeof navigator.vibrate === 'function') {
+                            navigator.vibrate([30, 30]);
+                        }
+                    },
                     onVolume: (v) => setVolume(v),
                     onNavigate: (route) => {
                         console.log('[Voice] Navigating to:', route);
