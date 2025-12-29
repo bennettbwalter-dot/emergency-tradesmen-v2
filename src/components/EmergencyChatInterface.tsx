@@ -28,7 +28,7 @@ export function EmergencyChatInterface() {
     });
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const { getLocation, loading: geoLoading, place } = useGeolocation();
 
     const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
@@ -73,31 +73,37 @@ export function EmergencyChatInterface() {
         setInput("");
         setIsTyping(true);
 
-        setTimeout(() => {
-            const { newState, response } = processUserMessage(msgText, {
-                ...chatState,
-                detectedTrade: detectedTrade || chatState.detectedTrade,
-                detectedCity: detectedCity || chatState.detectedCity,
-            });
+        // Fixed: Ensure processUserMessage is awaited properly
+        setTimeout(async () => {
+            try {
+                const { newState, response } = await processUserMessage(msgText, {
+                    ...chatState,
+                    detectedTrade: detectedTrade || chatState.detectedTrade,
+                    detectedCity: detectedCity || chatState.detectedCity,
+                });
 
-            setChatState(prev => ({
-                ...newState,
-                history: [...prev.history, userMsg, response]
-            }));
+                setChatState(prev => ({
+                    ...newState,
+                    history: [...prev.history, userMsg, response]
+                }));
 
-            setDetectedTrade(newState.detectedTrade);
-            setDetectedCity(newState.detectedCity);
+                setDetectedTrade(newState.detectedTrade);
+                setDetectedCity(newState.detectedCity);
 
-            // 1. Functional state: Should the button act as "Locate Me"?
-            // Yes, if we don't have a city yet.
-            setIsRequestingLocation(!newState.detectedCity && !detectedCity);
+                // 1. Functional state: Should the button act as "Locate Me"?
+                // Yes, if we don't have a city yet.
+                setIsRequestingLocation(!newState.detectedCity && !detectedCity);
 
-            setIsTyping(false);
+                setIsTyping(false);
 
-            if (response.action === 'navigate' && response.target) {
-                setTimeout(() => {
-                    navigate(response.target!);
-                }, 1500 + (response.content.length * 20));
+                if (response.action === 'navigate' && response.target) {
+                    setTimeout(() => {
+                        navigate(response.target!);
+                    }, 1500 + (response.content.length * 20));
+                }
+            } catch (error) {
+                console.error("Error processing message:", error);
+                setIsTyping(false);
             }
         }, 800);
     };
@@ -350,10 +356,11 @@ export function EmergencyChatInterface() {
                     <div className="h-4" />
                 </div>
 
+                {/* MODIFIED: Flex Column Layout for Input Area */}
                 <div className="p-4 bg-transparent">
-                    <div className="relative flex items-center w-full bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
+                    <div className="relative flex flex-col w-full bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
                         <textarea
-                            ref={inputRef as any}
+                            ref={inputRef}
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => {
@@ -365,9 +372,11 @@ export function EmergencyChatInterface() {
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none h-40 px-8 py-6 text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-none"
+                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-8 py-6 text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
-                        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2">
+
+                        {/* Controls Bar - Moved below textarea within the flex container */}
+                        <div className="flex justify-end items-center gap-2 px-8 pb-4 bg-transparent w-full hidden md:flex">
                             {controlsContent}
                         </div>
                     </div>
