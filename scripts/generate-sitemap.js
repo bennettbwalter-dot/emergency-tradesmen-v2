@@ -176,13 +176,13 @@ async function generateSitemap() {
 
     const outputPath = path.join(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(outputPath, xml);
-    console.log(`✅ Sitemap generated at ${outputPath}`);
-    console.log(`📊 Summary:`);
-    console.log(`   - Static: ${staticPages.length}`);
-    console.log(`   - City Pages: ${trades.length * cities.length}`);
-    console.log(`   - Business Profiles: ${businesses.length}`);
-    console.log(`   - Blog Posts: ${posts?.length || 0}`);
-    console.log(`   - Total URLs: ${staticPages.length + (trades.length * cities.length) + businesses.length + (posts?.length || 0)}`);
+    console.log(` ✅ Sitemap generated at ${outputPath}`);
+    console.log(` 📊 Summary:`);
+    console.log(`    - Static: ${staticPages.length}`);
+    console.log(`    - City Pages: ${(trades.length + commonProblems.length) * cities.length}`);
+    console.log(`    - Business Profiles: ${businesses.length}`);
+    console.log(`    - Blog Posts: ${posts?.length || 0}`);
+    console.log(`    - Total URLs: ${staticPages.length + ((trades.length + commonProblems.length) * cities.length) + businesses.length + (posts?.length || 0)}`);
 }
 
 generateSitemap();
