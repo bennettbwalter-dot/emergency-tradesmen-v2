@@ -24,6 +24,9 @@ import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
+import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
+import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
+import { Zap, ArrowRight, Star } from "lucide-react";
 
 export default function TradeCityPage() {
   const { tradePath, city } = useParams<{ tradePath: string; city: string }>();
@@ -439,9 +442,70 @@ export default function TradeCityPage() {
             city={cityName}
           />
         </section>
+
+        {/* Troubleshooting Section */}
+        <section className="container-wide py-16 bg-secondary/10">
+          <TroubleshootingGuide trade={tradeInfo} city={cityName} />
+        </section>
+
+        {/* Professional Acquisition Section */}
+        <section className="container-wide pb-24">
+          <div className="relative rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/10 p-8 md:p-16">
+            <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-l from-gold/40 to-transparent"></div>
+              <img
+                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop"
+                alt="Professional Tradesperson"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="relative z-10 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 gold text-sm font-bold uppercase tracking-widest text-gold mb-6">
+                Professional Network
+              </div>
+              <h2 className="text-3xl md:text-5xl font-display text-white mb-6 leading-tight">
+                Are you a qualified <span className="text-gold">{tradeInfo.name}</span> in {cityName}?
+              </h2>
+              <p className="text-white/60 text-lg mb-10 leading-relaxed">
+                Join the UK's fastest growing emergency trade network. Receive high-intent leads from customers in your area who need help right now.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button asChild size="xl" className="bg-gold hover:bg-gold-light text-black font-bold px-8">
+                  <Link to="/pricing">Join the Network</Link>
+                </Button>
+                <div className="flex items-center gap-3 px-6 py-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-stone-800 flex items-center justify-center text-[10px] font-bold text-white">
+                        {String.fromCharCode(64 + i)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-xs">
+                    <div className="flex items-center gap-1 text-gold">
+                      <Star className="w-3 h-3 fill-gold" />
+                      <span className="font-bold">4.9/5</span>
+                    </div>
+                    <span className="text-white/40">Partner Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
+
+      {/* Floating CTA for Mobile Conversion */}
+      <FloatingEmergencyCTA
+        business={filteredBusinesses.find(b => b.is_premium) || filteredBusinesses[0]}
+        trade={tradeInfo.name}
+        city={cityName}
+      />
+
       <WriteReviewModal
         businessName={`${tradeInfo.name} in ${cityName}`}
         businessId={`generic-${cityName}-${tradeInfo.slug}`}

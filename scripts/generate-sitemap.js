@@ -47,9 +47,20 @@ const cities = [
     "Crawley", "Basingstoke", "Woking", "Guildford", "High Wycombe", "Hemel Hempstead",
     "Stevenage", "Harlow", "Watford", "Staines", "Maidstone", "Gillingham", "Chatham",
     "Ashford", "Dartford", "Tunbridge Wells", "Hastings", "Eastbourne", "Worthing",
-    "Harrogate", "Darlington", "Hartlepool", "Mansfield", "Chesterfield", "Burton upon Trent",
-    "Stafford", "Kidderminster", "Redditch", "Bromsgrove", "Loughborough", "Grantham",
-    "Scunthorpe", "Grimsby", "Rotherham"
+    "Harrogate", "Halifax", "Batley", "Keighley", "South Shields", "Gateshead",
+    "Darlington", "Hartlepool", "Stockton-on-Tees", "Hemel Hempstead", "Cheltenham",
+    "Eastbourne", "Rayleigh", "Lowestoft", "Woking", "Maidenhead", "Basingstoke", "Fareham",
+    "Gosport", "Ewell", "Crosby", "Paignton", "Torquay", "Bebington", "Halesowen",
+    "Kidderminster", "Rugby", "Leamington Spa", "Kettering", "Wellingborough", "Dunstable",
+    "Aylesbury", "Cheshunt", "Welwyn Garden City", "Margate", "Royal Tunbridge Wells",
+    "Ashford", "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend",
+    "Dartford", "Weymouth", "Falmouth", "Truro", "St Austell", "Scarborough", "Bridlington",
+    "Castleford", "Pontefract", "Oldham", "Sale", "Birkenhead", "Wallasey",
+    "Barrow-in-Furness", "Workington", "Whitehaven", "Chorley", "Accrington", "Burnley",
+    "Lytham St Annes", "Brixton", "Hackney", "Camden", "Islington", "Greenwich", "Chelsea",
+    "Wembley", "Croydon", "Ealing", "Enfield", "Harrow", "Hounslow", "Kingston", "Merton",
+    "Newham", "Redbridge", "Richmond", "Southwark", "Tower Hamlets", "Waltham Forest",
+    "Wandsworth", "Woolwich", "Fulham"
 ];
 
 const commonProblems = [
@@ -109,7 +120,7 @@ async function generateSitemap() {
     // 1. Static Pages
     const staticPages = [
         '', '/about', '/pricing', '/terms', '/privacy', '/compare',
-        '/contact', '/user/login', '/business/login', '/blog'
+        '/contact', '/user/login', '/business/login', '/blog', '/vetting-process'
     ];
 
     staticPages.forEach(p => {

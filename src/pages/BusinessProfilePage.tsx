@@ -14,7 +14,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import {
     Star, MapPin, Phone, Clock, ExternalLink, Shield, CheckCircle,
-    Award, ThumbsUp, Calendar, ArrowLeft
+    Award, ThumbsUp, Calendar, ArrowLeft, ShieldCheck
 } from "lucide-react";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { IframeMap } from "@/components/IframeMap";
@@ -347,9 +347,12 @@ export default function BusinessProfilePage() {
                                             {business.name}
                                         </h1>
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm md:text-base font-medium">
-                                            <div className="flex items-center gap-1.5 text-gold">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
-                                                Verified Business
+                                            <div className="flex items-center gap-2 group cursor-help">
+                                                <div className="relative flex items-center justify-center">
+                                                    <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-sm group-hover:bg-emerald-500/40 transition-colors animate-pulse"></div>
+                                                    <CheckCircle className="w-5 h-5 text-emerald-500 relative z-10" />
+                                                </div>
+                                                <span className="text-emerald-500 font-bold tracking-tight">Verified Professional</span>
                                             </div>
                                             <span className="text-muted-foreground/40">•</span>
                                             <div className="flex items-center gap-1.5 text-muted-foreground">
@@ -357,9 +360,30 @@ export default function BusinessProfilePage() {
                                                 {business.address || formattedCity}
                                             </div>
                                             <span className="text-muted-foreground/40">•</span>
-                                            <div className="text-muted-foreground uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold font-sans">
+                                            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-muted-foreground uppercase tracking-[0.2em] text-[10px] font-bold font-sans">
+                                                <Award className="w-3 h-3 text-gold" />
                                                 THE {formattedTrade.toUpperCase()}
                                             </div>
+                                        </div>
+
+                                        {/* Accreditation Row */}
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
+                                            {trade === 'gas-engineer' && (
+                                                <Badge variant="outline" className="bg-orange-500/5 text-orange-500 border-orange-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
+                                                    Gas Safe Registered
+                                                </Badge>
+                                            )}
+                                            {trade === 'electrician' && (
+                                                <Badge variant="outline" className="bg-emerald-500/5 text-emerald-500 border-emerald-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
+                                                    NICEIC Certified
+                                                </Badge>
+                                            )}
+                                            <Badge variant="outline" className="bg-gold/5 text-gold border-gold/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
+                                                Fully Insured
+                                            </Badge>
+                                            <Badge variant="outline" className="bg-blue-500/5 text-blue-500 border-blue-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
+                                                ID Verified
+                                            </Badge>
                                         </div>
                                     </div>
                                 </div>
@@ -437,6 +461,50 @@ export default function BusinessProfilePage() {
                                             {description}
                                         </div>
                                     </div>
+                                </div>
+                            </section>
+
+                            {/* Confidence Check Section */}
+                            <section className="bg-emerald-500/5 border border-emerald-500/20 rounded-3xl p-8 md:p-10 space-y-8 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 opacity-5">
+                                    <Shield className="w-48 h-48 text-emerald-500" />
+                                </div>
+
+                                <div className="space-y-4 relative z-10">
+                                    <div className="flex items-center gap-3 text-emerald-500">
+                                        <ShieldCheck className="w-8 h-8" />
+                                        <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight">Our Confidence Check</h2>
+                                    </div>
+                                    <p className="text-muted-foreground text-lg max-w-2xl">
+                                        Every professional on Emergency Tradesmen undergoes a rigorous vetting process to ensure your safety and quality of work.
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
+                                    {[
+                                        "Public Liability Insurance Verified",
+                                        "Identity & Right to Work Check",
+                                        "Trade Certification Validated",
+                                        "Address & Contact History Check",
+                                        "Recent Work Quality Audit",
+                                        "Member of Trade Association"
+                                    ].map((check, i) => (
+                                        <div key={i} className="flex items-center gap-3">
+                                            <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                                                <CheckCircle className="w-4 h-4 text-emerald-500" />
+                                            </div>
+                                            <span className="text-foreground/90 font-medium">{check}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+                                    <p className="text-emerald-500/80 text-sm font-medium italic">
+                                        "Trusted by over 10,000 customers across the UK"
+                                    </p>
+                                    <Button variant="outline" className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10">
+                                        Learn More About Vetting
+                                    </Button>
                                 </div>
                             </section>
 

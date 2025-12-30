@@ -122,9 +122,12 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
                 )}
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                  <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                  Verified Business
+                <div className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 uppercase tracking-[0.15em] mb-1">
+                  <div className="relative">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 relative z-10" />
+                    <div className="absolute inset-0 bg-emerald-400/30 rounded-full blur-[2px] animate-pulse"></div>
+                  </div>
+                  Verified Pro
                 </div>
                 <div className="text-emerald-700 text-[10px] uppercase font-bold tracking-widest bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 w-fit">
                   {tradeName}
