@@ -148,14 +148,52 @@ export default function TradeCityPage() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
     name: `Emergency ${tradeInfo.name} ${cityName}`,
     description: `24/7 emergency ${tradeInfo.name.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
+    image: heroImage,
+    telephone: "020 3835 1566", // General contact or dynamic if available
+    url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: cityName,
+      addressCountry: "GB"
+    },
+    geo: {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "addressCountry": "GB",
+        "addressLocality": cityName
+      },
+      "geoRadius": "20000"
+    },
     areaServed: {
       "@type": "City",
       name: cityName,
     },
-    openingHours: "Mo-Su 00:00-23:59",
-    email: "emergencytradesmen@outlook.com",
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    priceRange: "££"
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
   };
 
   return (
@@ -173,6 +211,9 @@ export default function TradeCityPage() {
         <link rel="canonical" href={`https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
         </script>
       </Helmet>
 
