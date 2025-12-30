@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useSimpleTheme } from "@/components/simple-theme";
 
 interface BlogPost {
     id: string;
@@ -21,9 +22,14 @@ interface BlogPost {
 }
 
 export default function BlogPostPage() {
+    const { setTheme } = useSimpleTheme();
     const { slug } = useParams();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTheme('light');
+    }, []);
 
     useEffect(() => {
         async function loadPost() {
@@ -389,7 +395,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
                         to="/blog"
-                        className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors group"
+                        className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
                         Back to Insights
@@ -446,7 +452,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                             <div className="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
                                 {/* Main Content Column */}
                                 <div className="lg:col-span-12">
-                                    <div className="font-body text-primary-text space-y-8">
+                                    <div className="font-body text-foreground space-y-8">
                                         <ReactMarkdown
                                             components={{
                                                 h1: ({ node, ...props }) => (
@@ -459,10 +465,10 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                     <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
                                                 ),
                                                 p: ({ node, ...props }) => (
-                                                    <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-muted-foreground" />
+                                                    <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
                                                 ),
                                                 ul: ({ node, ...props }) => (
-                                                    <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-muted-foreground" />
+                                                    <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
                                                 ),
                                                 li: ({ node, ...props }) => (
                                                     <li {...props} />
@@ -471,7 +477,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                     <a {...props} className="font-semibold text-gold no-underline hover:underline" />
                                                 ),
                                                 blockquote: ({ node, ...props }) => (
-                                                    <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-muted-foreground" />
+                                                    <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
                                                 ),
                                                 // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
                                                 img: ({ node, ...props }) => (
@@ -484,7 +490,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                             />
                                                         </div>
                                                         {props.title && (
-                                                            <p className="text-center text-sm text-muted-foreground mt-3 italic">
+                                                            <p className="text-center text-sm text-foreground/70 mt-3 italic">
                                                                 {props.title}
                                                             </p>
                                                         )}

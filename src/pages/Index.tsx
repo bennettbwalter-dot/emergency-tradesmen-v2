@@ -325,8 +325,8 @@ const Index = () => {
                 <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
                   <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
                   <img
-                    src="/how-it-works-step-1.webp"
-                    alt="Step 1: Describe your problem or choose a trade"
+                    src="/how-it-works-step-1-new.png"
+                    alt="Step 1: Describe your problem, use voice, or choose trade"
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { useSimpleTheme } from "@/components/simple-theme";
 
 interface BlogPost {
     id: string;
@@ -19,8 +20,13 @@ interface BlogPost {
 }
 
 export default function BlogPage() {
+    const { setTheme } = useSimpleTheme();
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTheme('light');
+    }, []);
 
     useEffect(() => {
         async function loadPosts() {
@@ -82,7 +88,7 @@ export default function BlogPage() {
                     <h1 className="text-4xl md:text-5xl font-display text-foreground mb-4">
                         Trade Tips & Guides
                     </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
                         Expert advice for maintaining your home and handling emergencies.
                     </p>
                 </div>
@@ -110,14 +116,14 @@ export default function BlogPage() {
                                             className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                                         />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-secondary text-muted-foreground">
+                                        <div className="w-full h-full flex items-center justify-center bg-secondary text-foreground/60">
                                             <span className="text-4xl">📝</span>
                                         </div>
                                     )}
                                 </div>
 
                                 <CardHeader className="space-y-2">
-                                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                    <div className="flex items-center gap-2 text-xs text-foreground/70">
                                         <CalendarDays className="w-3 h-3" />
                                         <span>
                                             {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
@@ -131,7 +137,7 @@ export default function BlogPage() {
                                 </CardHeader>
 
                                 <CardContent className="flex-grow">
-                                    <p className="text-muted-foreground line-clamp-3 text-sm">
+                                    <p className="text-foreground/80 line-clamp-3 text-sm">
                                         {post.excerpt}
                                     </p>
                                 </CardContent>
