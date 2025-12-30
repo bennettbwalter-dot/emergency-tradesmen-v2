@@ -52,6 +52,10 @@ const cities = [
     "Scunthorpe", "Grimsby", "Rotherham"
 ];
 
+const commonProblems = [
+    "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking"
+];
+
 const BASE_URL = 'https://emergencytradesmen.net';
 
 async function generateSitemap() {
@@ -122,6 +126,20 @@ async function generateSitemap() {
         cities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             const url = `/emergency-${trade}/${citySlug}`;
+            xml += `
+  <url>
+    <loc>${BASE_URL}${url}</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+        });
+    });
+
+    // 2.5 Dynamic Symptom Pages (Problem + City)
+    commonProblems.forEach(problem => {
+        cities.forEach(city => {
+            const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
+            const url = `/${problem}/${citySlug}`;
             xml += `
   <url>
     <loc>${BASE_URL}${url}</loc>

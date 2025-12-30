@@ -57,7 +57,7 @@ export default function TradeCityPage() {
     'default': 'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'
   };
 
-  const heroImage = tradeHeroImages[trade] || tradeHeroImages.default;
+  const heroImage = tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
   // Fetch real businesses from Supabase
   useEffect(() => {
@@ -199,14 +199,14 @@ export default function TradeCityPage() {
   return (
     <>
       <Helmet>
-        <title>Emergency {tradeInfo.name} in {cityName} – Open 24/7 | Fast Response</title>
+        <title>{pageData.problem ? `${pageData.problem.name} in ${cityName}` : `Emergency ${tradeInfo.name} in ${cityName}`} – Open 24/7 | Fast Response</title>
         <meta
           name="description"
-          content={`Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
+          content={pageData.problem ? `${pageData.problem.description} ${cityName}. Available 24/7 with ${averageResponseTime} response time.` : `Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
         />
         <meta
           name="keywords"
-          content={`emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`}
+          content={pageData.problem ? `${pageData.problem.slug}, ${cityName} ${pageData.problem.slug}, emergency ${tradeInfo.name.toLowerCase()}` : `emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`}
         />
         <link rel="canonical" href={`https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
         <script type="application/ld+json">
@@ -226,7 +226,7 @@ export default function TradeCityPage() {
           <div className="absolute inset-0 z-0">
             <img
               src={heroImage}
-              alt={`Emergency ${tradeInfo.name} ${cityName}`}
+              alt={pageData.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeInfo.name} ${cityName}`}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
@@ -249,13 +249,13 @@ export default function TradeCityPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-foreground">
-                  {tradeInfo.name}s <span className="text-gold font-bold">available now</span> in {cityName}
+                  {pageData.problem ? `${pageData.problem.name}s` : `${tradeInfo.name}s`} <span className="text-gold font-bold">available now</span> in {cityName}
                 </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
-                <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2">
-                  Emergency {tradeInfo.name}
+                <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2 text-balance">
+                  {pageData.problem ? pageData.problem.name : `Emergency ${tradeInfo.name}`}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
                   in {cityName}

@@ -141,6 +141,18 @@ export const cities = [
 export type Trade = typeof trades[number];
 export type City = typeof cities[number];
 
+export const commonProblems = [
+  { slug: "burst-pipe", name: "Burst Pipe Repair", trade: "plumber", description: "Immediate repair for burst water pipes and massive leaks." },
+  { slug: "no-hot-water", name: "No Hot Water Service", trade: "plumber", description: "Emergency diagnosis and repair when your hot water stops working." },
+  { slug: "boiler-breakdown", name: "Boiler Breakdown Repair", trade: "gas-engineer", description: "24/7 emergency gas engineer for boiler failures and heating loss." },
+  { slug: "power-cut-fault", name: "Emergency Power Cut Fault", trade: "electrician", description: "Investigating and fixing sudden power outages in your property." },
+  { slug: "lockout", name: "Emergency Lockout Service", trade: "locksmith", description: "Non-destructive entry when you are locked out of your home or business." },
+  { slug: "broken-window", name: "Emergency Window Boarding", trade: "glazier", description: "Rapid boarding and glass replacement for smashed windows and doors." },
+  { slug: "drain-unblocking", name: "Emergency Drain Unblocking", trade: "drain-specialist", description: "Fast clearance of blocked toilets, sinks, and external drains." },
+] as const;
+
+export type CommonProblem = typeof commonProblems[number];
+
 export interface TradePageData {
   trade: Trade;
   city: City;
@@ -151,10 +163,13 @@ export interface TradePageData {
   services: string[];
   faqs: { question: string; answer: string }[];
   localExpertise?: string;
+  problem?: CommonProblem;
 }
 
 export function generateTradePageData(tradeSlug: string, cityName: string): TradePageData | null {
-  const trade = trades.find(t => t.slug === tradeSlug);
+  // Allow tradeSlug to also be a problem slug
+  const problem = commonProblems.find(p => p.slug === tradeSlug);
+  const trade = trades.find(t => t.slug === (problem ? problem.trade : tradeSlug));
   const city = cities.find(c => c.toLowerCase() === cityName.toLowerCase());
 
   if (!trade || !city) return null;
@@ -255,6 +270,7 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     services: servicesMap[trade.slug] || ["Emergency repairs", "Same day service", "24/7 availability"],
     faqs: generateFAQs(trade, city, priceRangeMap[trade.slug] || "£80 – £200"),
     localExpertise: localExpertiseMap[city],
+    problem,
   };
 }
 
