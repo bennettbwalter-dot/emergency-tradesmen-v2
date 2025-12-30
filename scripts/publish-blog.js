@@ -294,11 +294,13 @@ We’ve done the hard work so you don’t have to. By using **Emergency Tradesme
         title: 'Emergency Locksmith: Fast, Trusted Help When You Need It Most',
         slug: 'emergency-locksmith-costs-london-2025',
         excerpt: 'Locked out? Need a lock change? Our comprehensive guide explains everything you need to know about emergency locksmith services, response times, and costs.',
-        content: `Being locked out of your home or dealing with a broken lock is stressful — especially when it happens late at night, early in the morning, or during bad weather. That’s where an emergency locksmith becomes essential.
+        content: `![Family waiting for locksmith](/blog/emergency-locksmith/locksmith-family-waiting.jpg)
+Being locked out of your home or dealing with a broken lock is stressful — especially when it happens late at night, early in the morning, or during bad weather. That’s where an emergency locksmith becomes essential.
 
 At **EmergencyTradesmen.net**, we connect people with verified, local emergency locksmiths who are available 24/7, ensuring fast response times, transparent service, and peace of mind when it matters most.
 
 ## What Is an Emergency Locksmith?
+![Emergency locksmith working on a door](/blog/emergency-locksmith/locksmith-at-work-hero.jpg)
 An emergency locksmith is a trained professional who provides urgent lock and key services outside normal working hours. Unlike standard locksmith services, emergency locksmiths are available day and night, including weekends and bank holidays.
 
 They specialise in situations where immediate access or security is required, such as lockouts, broken locks, or damage caused by attempted break-ins.
@@ -321,6 +323,7 @@ Response time is one of the most important factors when dealing with an emergenc
 Most local emergency locksmiths listed on **EmergencyTradesmen.net** aim to arrive within **30–60 minutes**, depending on your location and traffic conditions. Because we prioritise local tradespeople, you’re more likely to get help quickly without unnecessary delays.
 
 ## Can an Emergency Locksmith Open a Door Without Damage?
+![Close-up of a lock mechanism](/blog/emergency-locksmith/lock-mechanism-details.jpg)
 In most cases, **yes**.
 
 Professional locksmiths always attempt non-destructive entry methods first, meaning they try to open the door without drilling or damaging the lock. Only if the lock is severely damaged or unsafe will replacement be necessary. This approach helps minimise disruption and keeps costs down.
@@ -344,6 +347,7 @@ When dealing with home security, trust is critical. All locksmiths listed on **E
 Using a trusted platform helps protect you from rogue traders and ensures professional standards are met.
 
 ## Locks and Doors Emergency Locksmiths Can Handle
+![Internal lock mechanism components](/blog/emergency-locksmith/lock-mechanism-close-up.jpg)
 Emergency locksmiths are trained to work with a wide range of locks and doors, including:
 *   UPVC doors
 *   Wooden and composite doors
@@ -374,10 +378,12 @@ Whether you’re locked out or need urgent lock repairs, help is only a few clic
 
 ## Emergency Locksmith Services You Can Rely On
 Home emergencies don’t wait — and neither should you. If you need fast, reliable help, **EmergencyTradesmen.net** connects you with trusted emergency locksmiths available 24 hours a day, 7 days a week, wherever you are.`,
-        cover_image: 'https://images.unsplash.com/photo-1558211583-03ed8a0b3d5f?q=80&w=800&auto=format&fit=crop',
+        cover_image: '/blog/emergency-locksmith/cover.png',
         published: true,
         published_at: new Date(Date.now() - 172800000).toISOString()
     }
+
+
 ];
 
 async function publishPosts() {

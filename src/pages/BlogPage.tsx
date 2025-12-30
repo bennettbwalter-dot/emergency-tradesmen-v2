@@ -101,13 +101,13 @@ export default function BlogPage() {
                         {posts.map((post) => (
                             <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow border-border/50 bg-card">
                                 {/* Cover Image Placeholder/Real */}
-                                <div className="aspect-video w-full bg-secondary relative overflow-hidden rounded-t-xl group">
+                                <div className="aspect-video w-full bg-secondary/30 relative overflow-hidden rounded-t-xl group">
                                     {post.cover_image ? (
                                         <img
                                             src={post.cover_image}
                                             alt={post.title}
                                             loading="lazy"
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center bg-secondary text-muted-foreground">

@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 
-type ServiceType = 'google_map_loads' | 'google_route_requests' | 'azure_tts_chars';
+type ServiceType = 'google_map_loads' | 'google_route_requests' | 'azure_tts_chars' | 'sendgrid_emails' | 'email_octopus_emails';
 
 export const usageLogger = {
     /**

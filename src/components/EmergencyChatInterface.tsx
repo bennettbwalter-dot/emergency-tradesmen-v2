@@ -375,7 +375,6 @@ export function EmergencyChatInterface() {
                             className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-8 py-6 text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
-                        {/* Controls Bar - Moved below textarea within the flex container */}
                         <div className="flex justify-end items-center gap-2 px-8 pb-4 bg-transparent w-full hidden md:flex">
                             {controlsContent}
                         </div>

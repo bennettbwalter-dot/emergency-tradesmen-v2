@@ -17,7 +17,9 @@ export function CostOverviewCard() {
     const LIMITS = {
         google_map_loads: { limit: 10000, label: "Google Maps (Loads)" },
         google_route_requests: { limit: 10000, label: "Google Routes" },
-        azure_tts_chars: { limit: 500000, label: "Azure Neural Voice (Characters)" }
+        azure_tts_chars: { limit: 500000, label: "Azure Neural Voice (Characters)" },
+        sendgrid_emails: { limit: 3000, label: "SendGrid Emails" },
+        email_octopus_emails: { limit: 2500, label: "EmailOctopus Emails" }
     };
 
     useEffect(() => {

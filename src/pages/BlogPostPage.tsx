@@ -406,13 +406,13 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 ) : (
                     <>
                         {/* Hero Section - 16:9 Strict */}
-                        <div className="relative w-full aspect-video overflow-hidden">
+                        <div className="relative w-full aspect-video overflow-hidden bg-secondary/30">
                             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
                             {post.cover_image && (
                                 <img
                                     src={post.cover_image}
                                     alt={post.title}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain relative z-0"
                                 />
                             )}
 
@@ -473,13 +473,13 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                 blockquote: ({ node, ...props }) => (
                                                     <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-muted-foreground" />
                                                 ),
-                                                // STRICT Image Rules: 16:9 aspect ratio, full width, no mid-paragraph placement
+                                                // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
                                                 img: ({ node, ...props }) => (
-                                                    <div className="my-12 w-full">
-                                                        <div className="aspect-video w-full overflow-hidden rounded-xl border border-secondary shadow-lg">
+                                                    <div className="my-12 w-full flex justify-center">
+                                                        <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
                                                             <img
                                                                 {...props}
-                                                                className="w-full h-full object-cover"
+                                                                className="w-full h-auto max-h-[800px] object-contain mx-auto"
                                                                 loading="lazy"
                                                             />
                                                         </div>
