@@ -12,7 +12,7 @@ interface SEOProps {
 }
 
 const DEFAULT_DESCRIPTION = "Emergency Tradesmen UK - Connect with trusted local experts 24/7. Plumbers, Electricians, Locksmiths & more. Fast response, verified professionals.";
-const DEFAULT_IMAGE = "https://emergencytradesmen.net/og-image.jpg";
+const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
 const SITE_URL = "https://emergencytradesmen.net";
 const SITE_NAME = "Emergency Tradesmen";
 

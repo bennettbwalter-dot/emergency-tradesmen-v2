@@ -24,23 +24,28 @@ export function Footer() {
           <div>
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Our Services</h4>
             <ul className="space-y-3">
-              {trades.map((trade) => (
-                <li key={trade.slug}>
-                  <Link
-                    to={`/emergency-${trade.slug}/manchester`}
-                    className="text-white/60 hover:text-gold text-sm transition-colors duration-300"
-                  >
-                    Emergency {trade.name}
-                  </Link>
-                </li>
-              ))}
+              {trades.map((trade, idx) => {
+                // Diversify the initial landing pages for crawlers
+                const landingCities = ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff", "belfast"];
+                const city = landingCities[idx % landingCities.length];
+                return (
+                  <li key={trade.slug}>
+                    <Link
+                      to={`/emergency-${trade.slug}/${city}`}
+                      className="text-white/60 hover:text-gold text-sm transition-colors duration-300"
+                    >
+                      Emergency {trade.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           <div>
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Popular Locations</h4>
             <ul className="space-y-3">
-              {cities.slice(0, 6).map((city) => (
+              {["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield"].map((city) => (
                 <li key={city}>
                   <Link
                     to={`/emergency-plumber/${city.toLowerCase()}`}
@@ -54,25 +59,26 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-lg tracking-wide text-white mb-6">Contact Us</h4>
+            <h4 className="font-display text-lg tracking-wide text-white mb-6">Trust & Safety</h4>
             <div className="space-y-4">
-              {/* Phone number removed as per cleanup request */}
+              <p className="text-white/60 text-sm leading-relaxed">
+                All engineers are fully vetted, insured, and registered with relevant bodies:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-[10px] font-bold px-2 py-1 bg-white/10 rounded border border-white/5">GAS SAFE</span>
+                <span className="text-[10px] font-bold px-2 py-1 bg-white/10 rounded border border-white/5">NICEIC</span>
+                <span className="text-[10px] font-bold px-2 py-1 bg-white/10 rounded border border-white/5">CITY & GUILDS</span>
+              </div>
 
               <div className="pt-4 border-t border-border/30">
-                <p className="text-xs uppercase tracking-wider text-white/50 mb-2">Contact Us</p>
+                <p className="text-xs uppercase tracking-wider text-white/50 mb-2">Support</p>
                 <Link
                   to="/contact"
-                  className="text-sm text-gold hover:text-gold-light transition-colors duration-300"
+                  className="text-sm text-gold hover:text-gold-light transition-colors duration-300 flex items-center gap-1"
                 >
-                  Send us a message →
+                  24/7 Priority Support →
                 </Link>
               </div>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-border/30">
-              <p className="text-xs uppercase tracking-widest text-white/50">
-                Trusted by thousands across the UK
-              </p>
             </div>
           </div>
         </div>
