@@ -241,11 +241,11 @@ export default function BusinessProfilePage() {
     const businessSchema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": `https://emergencytradesmen.co.uk/business/${business.id}`,
+        "@id": `https://emergencytradesmen.net/business/${business.id}`,
         name: business.name,
         image: photos.length > 0 ? photos[0].url : undefined,
         telephone: business.phone,
-        url: business.website || `https://emergencytradesmen.co.uk/business/${business.id}`,
+        url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
         address: {
             "@type": "PostalAddress",
             addressLocality: city,

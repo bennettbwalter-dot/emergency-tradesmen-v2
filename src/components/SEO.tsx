@@ -12,8 +12,8 @@ interface SEOProps {
 }
 
 const DEFAULT_DESCRIPTION = "Emergency Tradesmen UK - Connect with trusted local experts 24/7. Plumbers, Electricians, Locksmiths & more. Fast response, verified professionals.";
-const DEFAULT_IMAGE = "https://emergencytradesmen.co.uk/og-image.jpg"; // You might want to create this asset
-const SITE_URL = "https://emergencytradesmen.co.uk";
+const DEFAULT_IMAGE = "https://emergencytradesmen.net/og-image.jpg";
+const SITE_URL = "https://emergencytradesmen.net";
 const SITE_NAME = "Emergency Tradesmen";
 
 export function SEO({
