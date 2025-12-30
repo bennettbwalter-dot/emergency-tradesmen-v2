@@ -38,10 +38,18 @@ const cities = [
     "Worcester", "Hereford", "Shrewsbury", "Telford", "Cannock", "Tamworth", "Nuneaton",
     "Rugby", "Bath", "Brighton & Hove", "Bristol", "Canterbury", "Carlisle", "Chelmsford",
     "Chester", "Chichester", "Colchester", "Durham", "Ely", "Exeter", "Lancaster",
-    "Lichfield", "Lincoln", "London", "London", "Newcastle-upon-Tyne", "Plymouth", "Portsmouth",
+    "Lichfield", "Lincoln", "London", "Newcastle-upon-Tyne", "Plymouth", "Portsmouth",
     "Ripon", "Salford", "Salisbury", "Southampton", "Southend-on-Sea", "St Albans",
     "Sunderland", "Truro", "Wakefield", "Wells", "Winchester", "Westminster",
-    "Warrington", "Wigan", "Middlesbrough", "Blackpool", "Barnsley"
+    "Warrington", "Wigan", "Middlesbrough", "Blackpool", "Barnsley",
+    "Cardiff", "Swansea", "Newport", "Edinburgh", "Glasgow", "Aberdeen", "Dundee", "Belfast",
+    "Slough", "Bournemouth", "Poole", "Stockport", "Dudley", "Walsall", "Solihull", "Basildon",
+    "Crawley", "Basingstoke", "Woking", "Guildford", "High Wycombe", "Hemel Hempstead",
+    "Stevenage", "Harlow", "Watford", "Staines", "Maidstone", "Gillingham", "Chatham",
+    "Ashford", "Dartford", "Tunbridge Wells", "Hastings", "Eastbourne", "Worthing",
+    "Harrogate", "Darlington", "Hartlepool", "Mansfield", "Chesterfield", "Burton upon Trent",
+    "Stafford", "Kidderminster", "Redditch", "Bromsgrove", "Loughborough", "Grantham",
+    "Scunthorpe", "Grimsby", "Rotherham"
 ];
 
 const BASE_URL = 'https://emergencytradesmen.net';
