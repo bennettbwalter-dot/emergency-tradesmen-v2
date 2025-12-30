@@ -364,7 +364,8 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                     "author": {
                         "@type": "Organization",
                         "name": "Emergency Tradesmen UK",
-                        "url": baseUrl
+                        "url": baseUrl,
+                        "logo": `${baseUrl}/et-logo-v2.png`
                     },
                     "publisher": {
                         "@type": "Organization",
@@ -375,7 +376,9 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                         }
                     },
                     "datePublished": post.published_at,
-                    "dateModified": post.published_at, // Ideally this would be different if updated
+                    "dateModified": post.published_at,
+                    "isAccessibleForFree": "true",
+                    "keywords": post.excerpt.split(' ').slice(0, 5).join(', ')
                 };
 
                 return (
@@ -473,9 +476,18 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                 li: ({ node, ...props }) => (
                                                     <li {...props} />
                                                 ),
-                                                a: ({ node, ...props }) => (
-                                                    <a {...props} className="font-semibold text-gold no-underline hover:underline" />
-                                                ),
+                                                a: ({ node, ...props }) => {
+                                                    const isInternal = props.href?.includes('emergencytradesmen.net');
+                                                    return (
+                                                        <a
+                                                            {...props}
+                                                            className={`font-semibold text-gold no-underline hover:underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
+                                                        >
+                                                            {props.children}
+                                                            {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
+                                                        </a>
+                                                    );
+                                                },
                                                 blockquote: ({ node, ...props }) => (
                                                     <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
                                                 ),
