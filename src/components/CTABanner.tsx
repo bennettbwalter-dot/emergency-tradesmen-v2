@@ -109,7 +109,7 @@ export function CTABanner({ trade, city }: CTABannerProps) {
           </h2>
           <p className="text-primary-foreground/80 flex items-center justify-center md:justify-start gap-2">
             <Clock className="w-4 h-4" />
-            Average response time: 30-60 minutes
+            Average response time: 30-90 minutes
           </p>
         </div>
 

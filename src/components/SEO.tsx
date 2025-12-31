@@ -11,7 +11,7 @@ interface SEOProps {
     noIndex?: boolean;
 }
 
-const DEFAULT_DESCRIPTION = "Emergency Tradesmen UK - Connect with trusted local experts 24/7. Plumbers, Electricians, Locksmiths & more. Fast response, verified professionals.";
+const DEFAULT_DESCRIPTION = "Need a tradesman near you? We connect you with verified 24/7 emergency plumbers, electricians, locksmiths & gas engineers. Local experts arriving in 30-90 mins.";
 const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
 const SITE_URL = "https://emergencytradesmen.net";
 const SITE_NAME = "Emergency Tradesmen";

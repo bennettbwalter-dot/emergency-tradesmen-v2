@@ -378,7 +378,13 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                     "datePublished": post.published_at,
                     "dateModified": post.published_at,
                     "isAccessibleForFree": "true",
-                    "keywords": post.excerpt.split(' ').slice(0, 5).join(', ')
+                    "keywords": [
+                        ...post.title.split(' ').filter(w => w.length > 3),
+                        "emergency tradesmen",
+                        "home advice",
+                        "DIY tips",
+                        "UK trades"
+                    ].join(', ')
                 };
 
                 return (
@@ -422,6 +428,8 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                     src={post.cover_image}
                                     alt={post.title}
                                     className="w-full h-full object-contain relative z-0"
+                                    fetchPriority="high"
+                                    loading="eager"
                                 />
                             )}
 

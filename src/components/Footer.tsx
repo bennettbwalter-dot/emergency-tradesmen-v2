@@ -12,7 +12,7 @@ export function Footer() {
               <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
               <div>
                 <span className="font-display text-xl tracking-wide text-white">Emergency</span>
-                <span className="font-display text-xl tracking-wide text-gold">Trades</span>
+                <span className="font-display text-xl tracking-wide text-gold">Tradesmen</span>
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
@@ -55,6 +55,11 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <Link to="/locations" className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
+                View All Locations &rarr;
+              </Link>
+            </div>
           </div>
 
           <div>
@@ -76,7 +81,7 @@ export function Footer() {
 
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-white/40 text-sm">
-            &copy; {new Date().getFullYear()} EmergencyTrades.net. All rights reserved.
+            &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy" className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>

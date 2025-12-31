@@ -48,19 +48,21 @@ const cities = [
     "Stevenage", "Harlow", "Watford", "Staines", "Maidstone", "Gillingham", "Chatham",
     "Ashford", "Dartford", "Tunbridge Wells", "Hastings", "Eastbourne", "Worthing",
     "Harrogate", "Halifax", "Batley", "Keighley", "South Shields", "Gateshead",
-    "Darlington", "Hartlepool", "Stockton-on-Tees", "Hemel Hempstead", "Cheltenham",
-    "Eastbourne", "Rayleigh", "Lowestoft", "Woking", "Maidenhead", "Basingstoke", "Fareham",
+    "Darlington", "Hartlepool", "Stockton-on-Tees", "Rayleigh", "Lowestoft", "Maidenhead", "Fareham",
     "Gosport", "Ewell", "Crosby", "Paignton", "Torquay", "Bebington", "Halesowen",
-    "Kidderminster", "Rugby", "Leamington Spa", "Kettering", "Wellingborough", "Dunstable",
+    "Kidderminster", "Leamington Spa", "Kettering", "Wellingborough", "Dunstable",
     "Aylesbury", "Cheshunt", "Welwyn Garden City", "Margate", "Royal Tunbridge Wells",
-    "Ashford", "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend",
-    "Dartford", "Weymouth", "Falmouth", "Truro", "St Austell", "Scarborough", "Bridlington",
-    "Castleford", "Pontefract", "Oldham", "Sale", "Birkenhead", "Wallasey",
+    "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend",
+    "Weymouth", "Falmouth", "St Austell", "Scarborough", "Bridlington",
+    "Castleford", "Pontefract", "Sale", "Birkenhead", "Wallasey",
     "Barrow-in-Furness", "Workington", "Whitehaven", "Chorley", "Accrington", "Burnley",
     "Lytham St Annes", "Brixton", "Hackney", "Camden", "Islington", "Greenwich", "Chelsea",
     "Wembley", "Croydon", "Ealing", "Enfield", "Harrow", "Hounslow", "Kingston", "Merton",
     "Newham", "Redbridge", "Richmond", "Southwark", "Tower Hamlets", "Waltham Forest",
-    "Wandsworth", "Woolwich", "Fulham"
+    "Wandsworth", "Woolwich", "Fulham", "Sutton Coldfield", "Redditch", "Chesterfield",
+    "Mansfield", "Beeston", "Loughborough", "Burton upon Trent", "Crewe", "Macclesfield",
+    "Scunthorpe", "Grimsby", "Rotherham", "Widnes", "Runcorn", "Ellesmere Port", "Stafford",
+    "Bromsgrove", "Grantham"
 ];
 
 const commonProblems = [

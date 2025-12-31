@@ -34,7 +34,7 @@ export default function VettingProcess() {
         {
             icon: PhoneCall,
             title: "Response Time Monitoring",
-            description: "Emergency pros are tracked on their ability to respond to calls within the 30-60 minute window."
+            description: "Emergency pros are tracked on their ability to respond to calls within the 30-90 minute window."
         }
     ];
 

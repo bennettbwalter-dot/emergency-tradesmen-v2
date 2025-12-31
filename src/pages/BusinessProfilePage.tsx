@@ -290,8 +290,8 @@ export default function BusinessProfilePage() {
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={`${business.name} - ${formattedTrade} in ${formattedCity} | Emergency Tradesmen`}
-                description={`Read reviews and request a quote from ${business.name}, a top-rated ${formattedTrade} in ${formattedCity}. Available 24/7 for emergency services.`}
+                title={`${business.name} - ${formattedTrade} ${formattedCity} | Local & Verified`}
+                description={`Need a ${formattedTrade} in ${formattedCity}? Contact ${business.name}. Verified local expert available 24/7. Read reviews and call now.`}
                 canonical={`/business/${business.id}`}
                 jsonLd={businessSchema}
             />
@@ -502,8 +502,10 @@ export default function BusinessProfilePage() {
                                     <p className="text-emerald-500/80 text-sm font-medium italic">
                                         "Trusted by over 10,000 customers across the UK"
                                     </p>
-                                    <Button variant="outline" className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10">
-                                        Learn More About Vetting
+                                    <Button asChild variant="outline" className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10">
+                                        <Link to="/vetting-process">
+                                            Learn More About Vetting
+                                        </Link>
                                     </Button>
                                 </div>
                             </section>

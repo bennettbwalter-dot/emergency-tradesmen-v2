@@ -46,6 +46,7 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
+const LocationsDirectory = lazy(() => import("./pages/LocationsDirectory"));
 
 // Admin Pages Lazy Load
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
@@ -162,6 +163,7 @@ const App = () => {
                         <Route path="/blog/:slug" element={<BlogPostPage />} />
                         <Route path="/faq" element={<FAQ />} />
                         <Route path="/vetting-process" element={<VettingProcess />} />
+                        <Route path="/locations" element={<LocationsDirectory />} />
 
                         <Route path="/admin" element={<AdminLayout />}>
                           <Route index element={<AdminDashboard />} />

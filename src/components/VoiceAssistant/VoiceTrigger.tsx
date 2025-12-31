@@ -55,7 +55,7 @@ const VoiceTrigger = () => {
         try {
             voiceService.unlockAudioContext();
 
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
             if (!SpeechRecognition) {
                 alert("Voice not supported in this browser.");
                 return;
@@ -203,8 +203,8 @@ const VoiceTrigger = () => {
                 <div className={`
                     text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border shadow-2xl animate-in fade-in zoom-in duration-300
                     ${status === 'Listening' ? 'bg-green-500/80 text-white border-green-400' :
-                        status === 'Speaking' ? 'bg-amber-500/80 text-white border-amber-400' :
-                            'bg-black/80 text-gold border-gold/30'}
+                        status === 'Speaking' ? 'bg-[#00A3FF]/80 text-white border-[#00A3FF]/40' :
+                            'bg-black/80 text-white border-white/20'}
                 `}>
                     {status}
                 </div>
@@ -213,21 +213,33 @@ const VoiceTrigger = () => {
             <button
                 onClick={toggleVoice}
                 className={`
-                    relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300
+                    relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 group
                     ${isActive
-                        ? 'bg-gradient-to-br from-gold via-amber-400 to-gold text-black border-2 border-gold shadow-gold/50'
-                        : 'bg-slate-900/40 backdrop-blur-xl border border-white/10 text-gold hover:border-gold/50 hover:bg-slate-900/60'
+                        ? 'bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#CBD5E1] shadow-[0_0_20px_rgba(255,255,255,0.4),inset_0_2px_4px_rgba(255,255,255,0.8),0_10px_20px_rgba(0,0,0,0.3)]'
+                        : 'bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#CBD5E1] shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_2px_4px_rgba(255,255,255,0.8)] border border-[#94A3B8]/20'
                     }
+                    before:absolute before:inset-1 before:rounded-full before:bg-gradient-to-br before:from-[#CBD5E1] before:via-[#F1F5F9] before:to-[#94A3B8] before:shadow-inner
+                    after:absolute after:inset-[6px] after:rounded-full after:bg-white after:shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]
                 `}
             >
-                {status === 'Processing' ? (
-                    <Loader2 className="w-7 h-7 animate-spin" />
-                ) : status === 'Speaking' ? (
-                    <Volume2 className="w-7 h-7 animate-pulse" />
-                ) : isActive ? (
-                    <Mic className="w-7 h-7" />
-                ) : (
-                    <Mic className="w-7 h-7" />
+                {/* Metallic Accent Grooves */}
+                <div className="absolute inset-0 rounded-full border-[1.5px] border-[#64748B]/10 pointer-events-none" />
+                <div className="absolute top-1/2 -left-1 w-2 h-4 -translate-y-1/2 bg-black/10 rounded-full blur-[1px] pointer-events-none opacity-40" />
+                <div className="absolute top-1/2 -right-1 w-2 h-4 -translate-y-1/2 bg-black/10 rounded-full blur-[1px] pointer-events-none opacity-40" />
+
+                <div className="relative z-10 flex items-center justify-center">
+                    {status === 'Processing' ? (
+                        <Loader2 className="w-8 h-8 animate-spin text-[#00A3FF] drop-shadow-[0_0_8px_rgba(0,163,255,0.4)]" />
+                    ) : status === 'Speaking' ? (
+                        <Volume2 className="w-8 h-8 animate-pulse text-[#00A3FF] drop-shadow-[0_0_8px_rgba(0,163,255,0.4)]" />
+                    ) : (
+                        <Mic className={`w-8 h-8 transition-all duration-300 ${isActive ? 'text-[#00A3FF] drop-shadow-[0_0_8px_rgba(0,163,255,0.4)] scale-110' : 'text-[#00A3FF] opacity-80 group-hover:opacity-100'}`} />
+                    )}
+                </div>
+
+                {/* Status Glow */}
+                {status === 'Listening' && (
+                    <div className="absolute inset-0 rounded-full animate-pulse bg-green-400/10 pointer-events-none" />
                 )}
             </button>
         </div>

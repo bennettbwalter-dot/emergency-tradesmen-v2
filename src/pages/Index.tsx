@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 
 import { Header } from "@/components/Header";
 
@@ -34,129 +35,104 @@ import { GuestGate } from "@/components/GuestGate";
 
 
 
+
 const Index = () => {
   const [showFaq, setShowFaq] = useState(false);
 
-  const organizationSchema = {
-
+  const emergencyServiceSchema = {
     "@context": "https://schema.org",
-
-    "@type": "Organization",
-
-    name: "Emergency Tradesmen UK",
-
-    url: "https://emergencytradesmen.net",
-
-    logo: "https://emergencytradesmen.net/et-logo-new.png",
-
-    description: "Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK.",
-
-    contactPoint: {
-
-      "@type": "ContactPoint",
-
-      email: "emergencytradesmen@outlook.com",
-
-      contactType: "customer service",
-
-      availableLanguage: "English"
-
+    "@type": "EmergencyService",
+    "@id": "https://emergencytradesmen.net/#organization",
+    "name": "Emergency Tradesmen UK",
+    "url": "https://emergencytradesmen.net",
+    "logo": "https://emergencytradesmen.net/et-logo-new.png",
+    "description": "24/7 emergency tradesmen services including plumbing, electrical, locksmithing, and gas engineering.",
+    "telephone": "+443333333333", // Note: Verify if we have a main number to put here, otherwise keep generic or omit if strictly platform
+    "areaServed": "GB",
+    "availableLanguage": "English",
+    "currenciesAccepted": "GBP",
+    "paymentAccepted": "Cash, Credit Card, Debit Card",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
     },
-
-    sameAs: []
-
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Emergency Trade Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Emergency Plumbing"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Emergency Electrician"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Emergency Locksmith"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Emergency Gas Engineer"
+          }
+        }
+      ]
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "emergencytradesmen@outlook.com",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    }
   };
-
-
 
   const websiteSchema = {
-
     "@context": "https://schema.org",
-
     "@type": "WebSite",
-
-    name: "Emergency Tradesmen UK",
-
-    url: "https://emergencytradesmen.net",
-
-    potentialAction: {
-
+    "name": "Emergency Tradesmen UK",
+    "url": "https://emergencytradesmen.net",
+    "potentialAction": {
       "@type": "SearchAction",
-
-      target: "https://emergencytradesmen.net/{trade}/{city}",
-
+      "target": "https://emergencytradesmen.net/{trade}/{city}",
       "query-input": "required name=trade name=city"
-
     }
-
   };
 
-
-
   return (
-
     <ChatbotProvider>
-
       <>
         <GuestGate />
 
-        <Helmet>
-
-          <title>Emergency Tradesmen UK – VERIFIED 24/7 Plumbers</title>
-
-          <meta
-
-            name="description"
-
-            content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK. Fast response, verified professionals."
-
-          />
-
-          <link rel="canonical" href="https://emergencytradesmen.net" />
-
-
-
-          {/* Open Graph / Facebook */}
-
-          <meta property="og:type" content="website" />
-
-          <meta property="og:url" content="https://emergencytradesmen.net" />
-
-          <meta property="og:title" content="Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More" />
-
-          <meta property="og:description" content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers across the UK." />
-
-          <meta property="og:image" content="https://emergencytradesmen.net/og-image.jpg" />
-
-
-
-          {/* Twitter */}
-
-          <meta name="twitter:card" content="summary_large_image" />
-
-          <meta name="twitter:title" content="Emergency Tradesmen UK – 24/7 Plumbers, Electricians & More" />
-
-          <meta name="twitter:description" content="Find trusted emergency tradesmen near you. 24/7 plumbers, electricians, locksmiths & gas engineers." />
-
-
-
-          {/* Structured Data */}
-
-          <script type="application/ld+json">
-
-            {JSON.stringify(organizationSchema)}
-
-          </script>
-
-          <script type="application/ld+json">
-
-            {JSON.stringify(websiteSchema)}
-
-          </script>
-
-        </Helmet>
-
-
+        <SEO
+          title="Emergency Tradesmen Near Me – Local 24/7 Plumbers, Electricians & Locksmiths"
+          description="Looking for emergency tradesmen near you? We connect you with local, verified 24/7 plumbers, electricians & locksmiths. Fast 30-90 min response."
+          keywords={[
+            "tradesmen near me",
+            "local emergency plumber",
+            "24 hour electrician near me",
+            "emergency locksmith near me",
+            "emergency gas engineer",
+            "24/7 tradesmen",
+            "local emergency trades"
+          ]}
+          jsonLd={[emergencyServiceSchema, websiteSchema]}
+        />
 
         <Header />
 
@@ -215,7 +191,7 @@ const Index = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 animate-pulse-red-green-bg"></span>
                     </span>
-                    <span className="text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Tradespeople Available Now</span>
+                    <span className="text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Local Tradesmen Available Now</span>
                   </div>
 
                   {/* Trustpilot Hero Widget */}
@@ -233,7 +209,7 @@ const Index = () => {
                 {/* Main headline */}
 
                 <h1 className="mb-0 font-display text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
-                  EMERGENCY <span className="text-gold">TRADESMEN</span>
+                  LOCAL <span className="text-gold">TRADESMEN NEAR ME</span>
                 </h1>
 
 
@@ -308,7 +284,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
               <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                How It Works
+                How to Find a Tradesman Near You
               </h2>
             </div>
 
@@ -414,13 +390,13 @@ const Index = () => {
 
               <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
 
-                Emergency Trade Services
+                Local Emergency Trade Services Near You
 
               </h2>
 
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                From burst pipes to power cuts, our verified professionals handle all urgent repairs.
-                Available 24 hours a day, every day of the year.
+                From burst pipes to power cuts, our verified local professionals handle all urgent repairs.
+                Available 24 hours a day, near you, every day of the year.
               </p>
 
             </motion.div>
@@ -462,7 +438,7 @@ const Index = () => {
                     decoding="async"
                     width="600"
                     height="400"
-                    fetchPriority="high"
+                    loading="lazy"
                   />
                 </div>
               </div>              {/* Text Side */}
@@ -481,7 +457,7 @@ const Index = () => {
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                    <span className="text-foreground">Fast response times (30-60 mins)</span>
+                    <span className="text-foreground">Fast response times (30-90 mins)</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />

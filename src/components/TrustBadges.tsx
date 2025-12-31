@@ -19,7 +19,7 @@ const badges = [
   {
     icon: Phone,
     title: "Fast Response",
-    description: "30-60 minute arrival",
+    description: "30-90 minute arrival",
   },
 ];
 

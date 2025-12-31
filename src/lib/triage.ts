@@ -167,7 +167,7 @@ export function assessTriage(
 
     // Estimated wait time
     let estimatedWaitTime = "Within 1-2 hours";
-    if (urgency === "emergency") estimatedWaitTime = "Within 30-60 minutes";
+    if (urgency === "emergency") estimatedWaitTime = "Within 30-90 minutes";
     else if (urgency === "same-day") estimatedWaitTime = "Within 2-4 hours";
     else if (urgency === "next-day") estimatedWaitTime = "Tomorrow";
     else estimatedWaitTime = "Within 3-5 days";

@@ -1,5 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -42,7 +42,7 @@ export default function TradeCityPage() {
   const cityName = pageData?.city || 'your area';
 
   const serviceAreas = pageData?.serviceAreas || [];
-  const averageResponseTime = pageData?.averageResponseTime || '30-60 minutes';
+  const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';
   const emergencyPriceRange = pageData?.emergencyPriceRange || '£75 - £150';
   const certifications = pageData?.certifications || [];
   const services = pageData?.services || [];
@@ -199,26 +199,53 @@ export default function TradeCityPage() {
     }))
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://emergencytradesmen.net"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Locations",
+        "item": "https://emergencytradesmen.net/locations"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `${tradeInfo.name} in ${cityName}`,
+        "item": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
+      }
+    ]
+  };
+
+  const seoTitle = pageData.problem
+    ? `${pageData.problem.name} in ${cityName}`
+    : `Emergency ${tradeInfo.name} ${cityName} – 24/7 Near Me | Arriving in ${averageResponseTime}`;
+
+  const seoDescription = pageData.problem
+    ? `${pageData.problem.description} ${cityName}. Available 24/7 with ${averageResponseTime} response time.`
+    : `Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Trusted local experts near you available 24/7. Average response ${averageResponseTime}. Call for help now.`;
+
+  const seoKeywordsString = pageData.problem
+    ? `${pageData.problem.slug}, ${cityName} ${pageData.problem.slug}, emergency ${tradeInfo.name.toLowerCase()}`
+    : `emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`;
+
   return (
     <>
-      <Helmet>
-        <title>{pageData.problem ? `${pageData.problem.name} in ${cityName}` : `Emergency ${tradeInfo.name} in ${cityName}`} – Open 24/7 | Fast Response</title>
-        <meta
-          name="description"
-          content={pageData.problem ? `${pageData.problem.description} ${cityName}. Available 24/7 with ${averageResponseTime} response time.` : `Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Local experts available now. Average response ${averageResponseTime}. Call now.`}
-        />
-        <meta
-          name="keywords"
-          content={pageData.problem ? `${pageData.problem.slug}, ${cityName} ${pageData.problem.slug}, emergency ${tradeInfo.name.toLowerCase()}` : `emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`}
-        />
-        <link rel="canonical" href={`https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(localBusinessSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
-      </Helmet>
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywordsString.split(', ')}
+        canonical={`/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`}
+        ogImage={heroImage}
+        jsonLd={[localBusinessSchema, faqSchema, breadcrumbSchema]}
+      />
 
       <Header />
 
@@ -231,6 +258,9 @@ export default function TradeCityPage() {
               src={heroImage}
               alt={pageData.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeInfo.name} ${cityName}`}
               className="w-full h-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
             <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]" />
@@ -266,7 +296,7 @@ export default function TradeCityPage() {
               </h1>
 
               <p className="text-lg text-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed font-light">
-                Don't panic – help is on the way. Our network of trusted emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
+                Don't panic – help is on the way. Our network of local emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
@@ -328,7 +358,7 @@ export default function TradeCityPage() {
         {/* Services Section */}
         <section id="services" className="container-wide py-16 bg-card/30">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-display text-foreground mb-4">Services We Provide</h2>
+            <h2 className="text-3xl font-display text-foreground mb-4">{cityName} Emergency {tradeInfo.name} Services</h2>
             <p className="text-muted-foreground">Comprehensive emergency {tradeInfo.name.toLowerCase()} solutions for {cityName} and surrounding areas.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -357,7 +387,7 @@ export default function TradeCityPage() {
 
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-foreground">
-              Top Rated {tradeInfo.name}s in {cityName}
+              Top Rated Local {tradeInfo.name}s Near {cityName}
             </h2>
             <p className="text-muted-foreground">
               Found {totalCount} verified professionals nearby
