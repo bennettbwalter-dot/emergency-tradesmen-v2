@@ -412,6 +412,200 @@ textarea {
   }
 }
 
-.animate-border-gold-white {
-  animation: border-gold-white 2s ease-in-out infinite;
+/* ---- 3D Stacked Trade Selector (Add-on) ---- */
+.et-stack-section {
+  background: transparent;
+  padding: 28px 0 100px;
+  overflow: visible;
+  /* Prevent clipping */
+}
+
+.et-stack-wrap {
+  max-width: 1600px;
+  /* Allow wide spread */
+  margin: 0 auto;
+  padding: 0 16px;
+  overflow: visible;
+}
+
+.et-stack-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.et-stack-kicker {
+  letter-spacing: .22em;
+  font-size: 12px;
+  opacity: .75;
+  color: #d7c08a;
+  text-transform: uppercase;
+}
+
+.et-stack-title {
+  margin: 8px 0 0;
+  font-weight: 600;
+  color: #f0f3ff;
+  font-size: 1.5rem;
+}
+
+.et-stack-stage {
+  position: relative;
+  height: 1600px;
+  /* Large height for full visibility */
+  display: grid;
+  place-items: center;
+  user-select: none;
+  touch-action: pan-y;
+  /* allow vertical scroll; we handle horizontal */
+  perspective: 1200px;
+}
+
+/* Cards */
+.et-stack-card {
+  position: absolute;
+  width: min(420px, 88vw);
+  height: 520px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(10, 16, 35, .85);
+  border: 1px solid rgba(215, 192, 138, .22);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(255, 255, 255, .03) inset;
+  transform-style: preserve-3d;
+  will-change: transform, filter, opacity;
+  cursor: grab;
+  /* Ensure centering in grid stage */
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+}
+
+.et-stack-card:active {
+  cursor: grabbing;
+}
+
+.et-stack-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 60% at 50% 35%, rgba(215, 192, 138, .14), transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.et-stack-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.03) contrast(1.02);
+  transform: translateZ(0);
+}
+
+.et-stack-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .10) 0%, rgba(0, 0, 0, .55) 62%, rgba(0, 0, 0, .78) 100%);
+  z-index: 2;
+}
+
+.et-stack-meta {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 4;
+}
+
+.et-stack-name {
+  color: #f0f3ff;
+  font-size: 20px;
+  line-height: 1.15;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, .75);
+  font-family: inherit;
+}
+
+.et-stack-pill {
+  color: #0b1225;
+  background: linear-gradient(180deg, #e2cd97, #caa55b);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 12px 30px rgba(202, 165, 91, .22);
+  white-space: nowrap;
+}
+
+/* Nav arrows */
+.et-stack-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 192, 138, .25);
+  background: rgba(10, 16, 35, .65);
+  color: #f0f3ff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 50;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.et-stack-nav:hover {
+  filter: brightness(1.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.et-stack-nav-left {
+  left: 10px;
+}
+
+.et-stack-nav-right {
+  right: 10px;
+}
+
+.et-stack-hint {
+  margin-top: 20px;
+  text-align: center;
+  color: rgba(240, 243, 255, .7);
+  font-size: 13px;
+}
+
+/* Mobile height adjustments */
+@media (max-width: 520px) {
+  .et-stack-stage {
+    height: 1200px;
+    /* Adjusted for mobile spread */
+  }
+
+  .et-stack-card {
+    height: 480px;
+  }
+}
+
+/* 3D Flip Card Utilities */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (hover: hover) {
+  .card-container:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
 }

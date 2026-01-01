@@ -224,6 +224,22 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     Wolverhampton: ["Tettenhall", "Wednesfield", "Bilston", "Penn", "Whitmore Reans", "Heath Town", "Oxley", "Bushbury", "Fallings Park"],
     Huddersfield: ["Lindley", "Marsh", "Milnsbridge", "Golcar", "Slaithwaite", "Holmfirth", "Almondbury", "Dalton", "Kirkheaton"],
     Slough: ["Langley", "Cippenham", "Chalvey", "Upton", "Wexham", "Manor Park", "Britwell", "Haymill", "Colnbrook"],
+    Luton: ["Leagrave", "Stopsley", "Wigmore", "Bury Park", "Marsh Farm", "Sundon Park", "Limbury", "Challney", "High Town"],
+    "Milton Keynes": ["Bletchley", "Wolverton", "Stony Stratford", "Newport Pagnell", "Shenley Brook End", "Loughton", "Bradwell", "Central Milton Keynes"],
+    Northampton: ["Abington", "Kingsthorpe", "Duston", "Far Cotton", "Delapre", "Hardingstone", "Wootton", "Grange Park", "Moulton"],
+    Norwich: ["Thorpe St Andrew", "Sprowston", "Hellesdon", "Catton", "Eaton", "Bowthorpe", "Lakenham", "Trowse", "Golden Triangle"],
+    Aberdeen: ["Dyce", "Bridge of Don", "Peterculter", "Cove Bay", "Torry", "Kincorth", "Mastrick", "Northfield", "Old Aberdeen"],
+    Bournemouth: ["Boscombe", "Winton", "Charminster", "Kinson", "Southbourne", "Westbourne", "Moordown", "Wallisdown", "Lansdowne"],
+    Swindon: ["Old Town", "Gorse Hill", "Pinehurst", "Penhill", "Moredon", "Stratton St Margaret", "Wroughton", "Highworth", "West Swindon"],
+    Cambridge: ["Cherry Hinton", "Chesterton", "Trumpington", "Grantchester", "Fen Ditton", "Girton", "Histon", "Milton", "Newnham"],
+    Oxford: ["Headington", "Cowley", "Iffley", "Summertown", "Wolvercote", "Botley", "Jericho", "Blackbird Leys", "Littlemore"],
+    Belfast: ["Titanic Quarter", "Falls Road", "Shankill", "Ballyhackamore", "Lisburn Road", "Malone Road", "Castlereagh", "Dundonald", "City Centre"],
+    York: ["Acomb", "Clifton", "Heworth", "Holgate", "Hull Road", "Micklegate", "Rawcliffe", "Tang Hall", "South Bank"],
+    Blackpool: ["North Shore", "South Shore", "Bispham", "Layton", "Marton", "Stanley Park", "Warbreck", "Anchorsholme", "Cleveleys"],
+    Preston: ["Fulwood", "Penwortham", "Bamber Bridge", "Lostock Hall", "Ribbleton", "Ashton-on-Ribble", "Lea", "Ingol", "Deepdale"],
+    Reading: ["Caversham", "Tilehurst", "Whitley", "Earley", "Woodley", "Coley", "Katesgrove", "Southcote", "West Reading"],
+    Wolverhampton: ["Tettenhall", "Wednesfield", "Bilston", "Penn", "Whitmore Reans", "Heath Town", "Oxley", "Bushbury", "Compton"],
+    Huddersfield: ["Lindley", "Marsh", "Milnsbridge", "Golcar", "Slaithwaite", "Holmfirth", "Almondbury", "Dalton", "Birkby"],
   };
 
   const localExpertiseMap: Record<string, string> = {

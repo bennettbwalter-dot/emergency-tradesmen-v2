@@ -162,8 +162,8 @@ export function EmergencyChatInterface() {
         }
 
         const currentSentence = helperSentences[sentenceIndex];
-        const typingSpeed = isDeleting ? 30 : 80;
-        const pauseAtEnd = 2000;
+        const typingSpeed = isDeleting ? 10 : 35; // Much faster typing (35ms) and deletion (10ms)
+        const pauseAtEnd = 1500;
 
         const timer = setTimeout(() => {
             if (!isDeleting && charIndex < currentSentence.length) {
@@ -171,10 +171,12 @@ export function EmergencyChatInterface() {
                 setCharIndex(charIndex + 1);
             } else if (!isDeleting && charIndex === currentSentence.length) {
                 setTimeout(() => setIsDeleting(true), pauseAtEnd);
-            } else if (isDeleting && charIndex > 0) {
-                setPlaceholderText(currentSentence.substring(0, charIndex - 1));
-                setCharIndex(charIndex - 1);
-            } else if (isDeleting && charIndex === 0) {
+            } else if (isDeleting) {
+                // "Disappear" effect: Clear text immediately instead of backspacing character by character?
+                // User said "disappear and start with a new sentence". 
+                // Let's clear immediately.
+                setPlaceholderText("");
+                setCharIndex(0);
                 setIsDeleting(false);
                 setSentenceIndex((sentenceIndex + 1) % helperSentences.length);
             }

@@ -16,6 +16,9 @@ import { TradeCard } from "@/components/TradeCard";
 
 import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 
+import { GoldWave } from "@/components/GoldWave";
+
+
 import { trades, cities } from "@/lib/trades";
 
 import { Phone, Zap } from "lucide-react";
@@ -174,7 +177,7 @@ const Index = () => {
 
 
 
-            <div className="relative container-wide pt-6 pb-24 md:pt-12 md:pb-32">
+            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0">
 
               <div className="max-w-4xl mx-auto text-center">
 
@@ -228,7 +231,7 @@ const Index = () => {
 
                 >
 
-                  When You Need Them Most
+                  Emergency Tradesmen UK | Nationwide 24/7 Help
 
                 </motion.p>
 
@@ -251,7 +254,7 @@ const Index = () => {
               >
 
 
-                <div className="w-full max-w-4xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <div className="w-full max-w-4xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                   <div className="rounded-3xl overflow-hidden">
                     <EmergencyChatInterface />
                   </div>
@@ -271,9 +274,19 @@ const Index = () => {
 
 
 
+
+
+
+
+          {/* Gold Wave Animation */}
+          {/* Gold Wave Animation */}
+          <section className="container-wide py-0 -mt-12 md:-mt-24 relative z-10">
+            <GoldWave />
+          </section>
+
           {/* Trust Badges */}
 
-          <section className="container-wide pt-0 pb-16">
+          <section className="container-wide pt-0 pb-16 -mt-20 relative z-20">
 
             <TrustBadges />
 
@@ -400,6 +413,8 @@ const Index = () => {
               </p>
 
             </motion.div>
+
+
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 px-2 md:px-0">
               {trades.map((trade, index) => (

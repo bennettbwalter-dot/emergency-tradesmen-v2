@@ -13,7 +13,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { generateTradePageData } from "@/lib/trades";
+import { generateTradePageData, cities } from "@/lib/trades";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
@@ -425,11 +425,25 @@ export default function TradeCityPage() {
                 <h2 className="font-display text-xl tracking-wide text-foreground">Areas We Cover Near {cityName}</h2>
               </div>
               <div className="flex flex-wrap gap-2">
-                {serviceAreas.map((area, i) => (
-                  <div key={i} className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground">
-                    {area}
-                  </div>
-                ))}
+                {serviceAreas.map((area, i) => {
+                  const isCity = cities.includes(area as any);
+                  if (isCity) {
+                    return (
+                      <Link
+                        key={i}
+                        to={`/emergency-${tradeInfo.slug}/${area.toLowerCase()}`}
+                        className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground hover:bg-gold/10 hover:border-gold/30 hover:text-gold transition-colors"
+                      >
+                        {area}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <div key={i} className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground">
+                      {area}
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
