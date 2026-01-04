@@ -3,7 +3,9 @@ import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
 import { usageLogger } from '@/lib/usage-logger';
 
 const AZURE_KEY = import.meta.env.VITE_AZURE_SPEECH_KEY || '';
-const AZURE_REGION = import.meta.env.VITE_AZURE_SPEECH_REGION || 'uksouth';
+// We are intentionally ignoring the env var for region because it is incorrectly set to eastus in some environments
+// and we need to force uksouth for the UK-based resource to work with the Ava voice.
+const AZURE_REGION = 'uksouth';
 
 export class AzureVoiceService {
     private synthesizer: sdk.SpeechSynthesizer | null = null;
@@ -58,22 +60,24 @@ export class AzureVoiceService {
 
             try {
                 // Hardcoded Critical Path to ensure Human Voice
-                const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
+                // Force UK South as env var might be incorrect and causing WebSocket errors
+                const region = AZURE_REGION;
+                const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, region);
 
-                // American Woman Voice (Ava) - Requested to be used globally
+                // American Woman Voice (Ava) - ALWAYS used for everything globally as per user request
                 const voiceName = "en-US-AvaMultilingualNeural";
                 speechConfig.speechSynthesisVoiceName = voiceName;
 
                 this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, null as any);
 
                 const ssml = `
-<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${countryCode === 'US' ? 'en-US' : 'en-GB'}">
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
     <voice name="${voiceName}">
         ${text}
     </voice>
 </speak>`.trim();
 
-                console.log(`[AzureVoice] Synthesizing via Azure (${countryCode}) using American Woman voice...`);
+                console.log(`[AzureVoice] Synthesizing via Azure (${region}) using Ava (Always)...`);
 
                 this.synthesizer.speakSsmlAsync(
                     ssml,
