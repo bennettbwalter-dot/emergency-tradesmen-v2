@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import type { Trade } from "@/lib/trades";
+import { type Trade, cities, usCities } from "@/lib/trades";
 import { motion } from "framer-motion";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useChatbot } from "@/contexts/ChatbotContext";
+import { useLocalization } from "@/contexts/LocalizationContext";
 import { useEffect } from "react";
 
 interface TradeCardProps {
@@ -13,11 +14,14 @@ interface TradeCardProps {
 
 export function TradeCard({ trade, city }: TradeCardProps) {
   const navigate = useNavigate();
+  const { settings } = useLocalization();
   const { detectedCity, setDetectedTrade, setDetectedCity } = useChatbot();
   const { getLocation, place } = useGeolocation();
 
   // If city is already detected from chatbot or props, use it
   const targetCity = city || detectedCity;
+  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+  const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -26,12 +30,17 @@ export function TradeCard({ trade, city }: TradeCardProps) {
     setDetectedTrade(trade.slug);
 
     // If we already have a city, navigate immediately
-    if (targetCity) {
-      navigate(`/emergency-${trade.slug}/${targetCity.toLowerCase()}`);
+    // BUT only if the city is valid for the current country!
+    const isUS = settings.countryCode === 'US';
+    const countryCities = isUS ? usCities : cities;
+    const isTargetCityValidForCountry = targetCity && countryCities.map(c => c.toLowerCase()).includes(targetCity.toLowerCase());
+
+    if (targetCity && isTargetCityValidForCountry) {
+      navigate(`${countryPrefix}/emergency-${trade.slug}/${targetCity.toLowerCase().replace(/\s+/g, '-')}`);
     } else {
-      // Otherwise, trigger location detection
+      // If city is not valid for this country (e.g. Luton in US), clear context and get location
+      if (targetCity) setDetectedCity("");
       getLocation();
-      // The navigation will happen via the SearchForm's auto-routing effect
     }
   };
 
@@ -39,13 +48,13 @@ export function TradeCard({ trade, city }: TradeCardProps) {
   useEffect(() => {
     if (place?.city && !targetCity) {
       setDetectedCity(place.city);
-      navigate(`/emergency-${trade.slug}/${place.city.toLowerCase()}`);
+      navigate(`${countryPrefix}/emergency-${trade.slug}/${place.city.toLowerCase()}`);
     }
-  }, [place, targetCity, trade.slug, navigate, setDetectedCity]);
+  }, [place, targetCity, trade.slug, navigate, setDetectedCity, countryPrefix]);
 
   return (
     <Link
-      to={`/emergency-${trade.slug}/${targetCity ? targetCity.toLowerCase() : 'london'}`}
+      to={`${countryPrefix}/emergency-${trade.slug}/${targetCity && (settings.countryCode === 'US' ? usCities : cities).map(c => c.toLowerCase()).includes(targetCity.toLowerCase()) ? targetCity.toLowerCase().replace(/\s+/g, '-') : (settings.countryCode === 'US' ? 'los-angeles' : 'london')}`}
       onClick={handleClick}
       className="block"
     >
@@ -90,7 +99,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
         <div className="relative z-10 flex flex-col flex-grow p-4 sm:p-6">
           <div className="mb-4 flex flex-col sm:flex-row items-start sm:justify-between gap-3 sm:gap-4">
             <h3 className="font-display text-lg sm:text-xl text-foreground group-hover:text-gold transition-colors tracking-wide leading-tight min-h-0 sm:min-h-[3.5rem] flex items-start flex-grow">
-              Emergency {trade.name}
+              Emergency {tradeName}
             </h3>
             {trade.vectorIcon && (
               <img

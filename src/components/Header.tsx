@@ -5,13 +5,18 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/UserMenu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function Header() {
+  const { settings } = useLocalization();
+  const signupText = settings.countryCode === 'US' ? 'Pro Sign Up' : 'Tradesmen Sign Up';
+  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container-wide">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group">
             <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-14 h-14 rounded-full object-cover border border-gold/50" />
             <div className="hidden sm:block">
               <span className="font-display text-2xl tracking-wide text-foreground">Emergency</span>
@@ -21,16 +26,16 @@ export function Header() {
 
           <nav className="hidden md:flex items-center gap-8">
 
-            <Link to="/about" className="text-sm font-medium hover:text-gold transition-colors">
+            <Link to={`${countryPrefix}/about`} className="text-sm font-medium hover:text-gold transition-colors">
               About
             </Link>
-            <Link to="/blog" className="text-sm font-medium hover:text-gold transition-colors">
+            <Link to={`${countryPrefix}/blog`} className="text-sm font-medium hover:text-gold transition-colors">
               Blog
             </Link>
 
             <Button variant="outline" size="sm" asChild className="border-gold text-gold hover:bg-gold/10 px-4 rounded-md">
-              <Link to="/tradesmen">
-                Tradesmen Sign Up
+              <Link to={`${countryPrefix}/pricing`}>
+                {signupText}
               </Link>
             </Button>
             <Link to="/contact" className="text-sm font-medium hover:text-gold transition-colors">
@@ -57,10 +62,10 @@ export function Header() {
                     <span className="text-gold">Trades</span>
                   </SheetTitle>
                   <nav className="flex flex-col gap-6">
-                    <Link to="/about" className="text-lg font-medium hover:text-gold transition-colors block">
+                    <Link to={`${countryPrefix}/about`} className="text-lg font-medium hover:text-lg font-medium hover:text-gold transition-colors block">
                       About
                     </Link>
-                    <Link to="/blog" className="text-lg font-medium hover:text-gold transition-colors block">
+                    <Link to={`${countryPrefix}/blog`} className="text-lg font-medium hover:text-gold transition-colors block">
                       Blog
                     </Link>
                     <Link to="/contact" className="text-lg font-medium hover:text-gold transition-colors block">
@@ -68,8 +73,8 @@ export function Header() {
                     </Link>
                     <div className="h-px bg-border/50 my-2" />
                     <Button variant="outline" asChild className="border-gold text-gold hover:bg-gold/10 w-full justify-start text-lg h-12">
-                      <Link to="/tradesmen">
-                        Tradesmen Sign Up
+                      <Link to={`${countryPrefix}/pricing`}>
+                        {signupText}
                       </Link>
                     </Button>
                   </nav>

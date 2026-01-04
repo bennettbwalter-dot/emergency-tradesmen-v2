@@ -240,9 +240,9 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
                 : "bg-gold hover:bg-yellow-500 text-black border-0"
                 }`}
             >
-              <a href={`tel:${business.phone}`} onClick={() => trackEvent("Business", "Call Now", business.name)} className="flex items-center justify-center gap-2">
+              <a href={business.phone ? `tel:${business.phone}` : '#'} onClick={(e) => { if (!business.phone) e.preventDefault(); trackEvent("Business", "Call Now", business.name) }} className={`flex items-center justify-center gap-2 ${!business.phone ? 'opacity-50 cursor-not-allowed' : ''}`}>
                 <Phone className="w-3.5 h-3.5" />
-                Call
+                {business.phone ? 'Call' : 'No Phone'}
               </a>
             </Button>
 

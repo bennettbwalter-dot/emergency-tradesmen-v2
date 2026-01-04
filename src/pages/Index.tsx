@@ -19,7 +19,7 @@ import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 import { GoldWave } from "@/components/GoldWave";
 
 
-import { trades, cities } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
 
 import { Phone, Zap } from "lucide-react";
 
@@ -32,6 +32,7 @@ import { motion } from "framer-motion";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
+import { useLocalization } from "@/contexts/LocalizationContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { GuestGate } from "@/components/GuestGate";
@@ -40,20 +41,21 @@ import { GuestGate } from "@/components/GuestGate";
 
 
 const Index = () => {
+  const { settings } = useLocalization();
   const [showFaq, setShowFaq] = useState(false);
 
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "@id": "https://emergencytradesmen.net/#organization",
-    "name": "Emergency Tradesmen UK",
+    "name": `Emergency ${settings.tradeTerm} ${settings.countryCode === 'GB' ? 'UK' : 'US'}`,
     "url": "https://emergencytradesmen.net",
     "logo": "https://emergencytradesmen.net/et-logo-new.png",
-    "description": "24/7 emergency tradesmen services including plumbing, electrical, locksmithing, and gas engineering.",
-    "telephone": "+443333333333", // Note: Verify if we have a main number to put here, otherwise keep generic or omit if strictly platform
-    "areaServed": "GB",
+    "description": `24/7 emergency ${settings.tradeTerm.toLowerCase()} services including plumbing, electrical, locksmithing, and gas engineering.`,
+    "telephone": settings.countryCode === 'GB' ? "+443333333333" : "+18005550199",
+    "areaServed": settings.countryCode,
     "availableLanguage": "English",
-    "currenciesAccepted": "GBP",
+    "currenciesAccepted": settings.currencyCode,
     "paymentAccepted": "Cash, Credit Card, Debit Card",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -108,7 +110,7 @@ const Index = () => {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Emergency Tradesmen UK",
+    "name": `Emergency ${settings.tradeTerm} ${settings.countryCode === 'GB' ? 'UK' : 'US'}`,
     "url": "https://emergencytradesmen.net",
     "potentialAction": {
       "@type": "SearchAction",
@@ -123,8 +125,8 @@ const Index = () => {
         <GuestGate />
 
         <SEO
-          title="Emergency Tradesmen Near Me – Local 24/7 Plumbers, Electricians & Locksmiths"
-          description="Looking for emergency tradesmen near you? We connect you with local, verified 24/7 plumbers, electricians & locksmiths. Fast 30-90 min response."
+          title={`Emergency ${settings.tradeTerm} Near Me – Local 24/7 Plumbers, Electricians & Locksmiths`}
+          description={`Looking for emergency ${settings.tradeTerm.toLowerCase()} near you? We connect you with local, verified 24/7 plumbers, electricians & locksmiths. Fast 30-90 min response.`}
           keywords={[
             "tradesmen near me",
             "local emergency plumber",
@@ -189,12 +191,12 @@ const Index = () => {
                   transition={{ delay: 0.1, duration: 0.5 }}
                   className="mb-6 inline-flex flex-col items-center gap-2"
                 >
-                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border-2 animate-border-gold-white bg-white/5 backdrop-blur-sm">
-                    <span className="relative flex h-2 w-2">
+                  <div className="inline-flex items-center gap-2 sm:gap-3 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border-2 animate-border-gold-white bg-white/5 backdrop-blur-sm">
+                    <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 animate-pulse-red-green-bg"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 animate-pulse-red-green-bg"></span>
                     </span>
-                    <span className="text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Local Tradesmen Available Now</span>
+                    <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Local {settings.tradeTerm} Available Now</span>
                   </div>
 
                   {/* Trustpilot Hero Widget */}
@@ -211,8 +213,8 @@ const Index = () => {
 
                 {/* Main headline */}
 
-                <h1 className="mb-0 font-display text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
-                  LOCAL <span className="text-gold">TRADESMEN NEAR ME</span>
+                <h1 className="mb-0 font-display text-xl sm:text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4 whitespace-nowrap">
+                  LOCAL <span className="text-gold">{settings.tradeTerm.toUpperCase()} NEAR ME</span>
                 </h1>
 
 
@@ -227,11 +229,11 @@ const Index = () => {
 
                   transition={{ duration: 0.6, delay: 0.2 }}
 
-                  className="text-lg md:text-xl text-muted-foreground mb-4 tracking-wide uppercase"
+                  className="text-[10px] sm:text-sm md:text-base lg:text-lg text-muted-foreground mb-4 tracking-wide uppercase"
 
                 >
 
-                  Emergency Tradesmen UK | Nationwide 24/7 Help
+                  Emergency {settings.tradeTerm} {settings.countryCode === 'GB' ? 'UK' : 'US'} | Nationwide 24/7 Help
 
                 </motion.p>
 
@@ -297,7 +299,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
               <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                How to Find a Tradesman Near You
+                How to Find a {settings.tradeTerm} Near You
               </h2>
             </div>
 
@@ -386,32 +388,20 @@ const Index = () => {
 
           <section className="container-wide py-16">
             <motion.div
-
               initial={{ opacity: 0, y: 30 }}
-
               whileInView={{ opacity: 1, y: 0 }}
-
               viewport={{ once: true, margin: "-100px" }}
-
               transition={{ duration: 0.6 }}
-
               className="text-center mb-12"
-
             >
-
-              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Our Expertise</p>
-
               <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-
-                Local Emergency Trade Services Near You
-
+                Local Emergency {settings.tradeTerm} Near You
               </h2>
 
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 From burst pipes to power cuts, our verified local professionals handle all urgent repairs.
                 Available 24 hours a day, near you, every day of the year.
               </p>
-
             </motion.div>
 
 
@@ -454,7 +444,7 @@ const Index = () => {
                 </span>
 
                 <h2 className="font-display text-3xl md:text-5xl text-foreground mb-8 leading-tight">
-                  Why Choose Our <span className="text-gold">Tradesmen Near Me?</span>
+                  Why Choose Our <span className="text-gold">{settings.tradeTerm} Near Me?</span>
                 </h2>
 
                 <div className="prose prose-lg prose-invert mx-auto text-muted-foreground/90 leading-relaxed max-w-3xl">
@@ -489,17 +479,16 @@ const Index = () => {
                     decoding="async"
                     width="600"
                     height="400"
-                    loading="lazy"
                   />
                 </div>
               </div>              {/* Text Side */}
               <div className="order-1 lg:order-2">
                 <p className="text-gold uppercase tracking-luxury text-sm mb-4">Roadside Assistance</p>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
-                  Emergency <span className="text-gold">Breakdown Recovery</span> Available 24/7
+                  Emergency <span className="text-gold">{settings.towTerm}</span> Available 24/7
                 </h2>
                 <p className="text-muted-foreground text-xl mb-8">
-                  Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified recovery partners are just a tap away.
+                  Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified {settings.towTerm.toLowerCase()} partners are just a tap away.
                 </p>
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center gap-3">
@@ -516,7 +505,7 @@ const Index = () => {
                   </li>
                 </ul>
                 <Button size="xl" variant="hero" asChild>
-                  <Link to="/breakdown/london">Get Roadside Help</Link>
+                  <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/emergency-breakdown/${settings.countryCode === 'GB' ? 'london' : 'los-angeles'}`}>Get Roadside Help</Link>
                 </Button>
               </div>
             </div>
@@ -532,9 +521,7 @@ const Index = () => {
                 <p className="text-gold uppercase tracking-luxury text-sm mb-4">Coverage</p>
 
                 <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
-
-                  Find Emergency Help in Your City
-
+                  Find Emergency Help in Your {settings.cityTerm}
                 </h2>
 
               </div>
@@ -542,31 +529,21 @@ const Index = () => {
 
 
               <div className="flex flex-wrap justify-center gap-3">
-
-                {cities.slice(0, 20).map((city) => (
-
+                {(settings.countryCode === 'US' ? usCities : cities).slice(0, 20).map((city) => (
                   <Link
-
                     key={city}
-
-                    to={`/emergency-plumber/${city.toLowerCase()}`}
-
+                    to={settings.countryCode === 'US'
+                      ? `/us/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
+                      : `/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
+                    }
                     className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
-
                   >
-
                     {city}
-
                   </Link>
-
                 ))}
-
                 <span className="px-5 py-2.5 text-sm text-muted-foreground">
-
-                  + {cities.length - 20} more cities
-
+                  + {(settings.countryCode === 'US' ? usCities.length : cities.length) - 20} more cities
                 </span>
-
               </div>
 
             </div>

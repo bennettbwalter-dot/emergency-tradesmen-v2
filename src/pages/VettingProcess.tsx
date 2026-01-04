@@ -3,8 +3,10 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { ShieldCheck, CheckCircle, Shield, Award, Users, Search, ClipboardCheck, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export default function VettingProcess() {
+    const { settings } = useLocalization();
     const steps = [
         {
             icon: Search,
@@ -14,7 +16,7 @@ export default function VettingProcess() {
         {
             icon: ShieldCheck,
             title: "Identity Verification",
-            description: "We verify governmet-issued ID and right-to-work documentation for every individual tradesperson."
+            description: `We verify government-issued ID and right-to-work documentation for every individual ${settings.tradeTerm.toLowerCase().replace(/s$/, '')}.`
         },
         {
             icon: Award,
@@ -41,8 +43,8 @@ export default function VettingProcess() {
     return (
         <div className="min-h-screen bg-background">
             <SEO
-                title="Our Vetting Process | How We Verify Tradespeople"
-                description="Learn about our rigorous 10-point vetting process for emergency tradespeople in the UK."
+                title={`Our Vetting Process | How We Verify ${settings.tradeTerm}`}
+                description={`Learn about our rigorous 10-point vetting process for emergency ${settings.tradeTerm.toLowerCase()} in the ${settings.countryCode === 'GB' ? 'UK' : 'US'}.`}
             />
             <Header />
 
@@ -55,7 +57,7 @@ export default function VettingProcess() {
                         </div>
                         <h1 className="text-4xl md:text-6xl font-display text-foreground mb-6">Our Vetting Process</h1>
                         <p className="text-xl text-muted-foreground leading-relaxed">
-                            We take the guesswork out of finding a reliable tradesperson. Every professional on our platform has been rigorously screened against our 10-point trust framework.
+                            We take the guesswork out of finding a reliable {settings.tradeTerm.toLowerCase().replace(/s$/, '')}. Every professional on our platform has been rigorously screened against our 10-point trust framework.
                         </p>
                     </div>
 
@@ -85,7 +87,7 @@ export default function VettingProcess() {
                         <div className="absolute inset-0 bg-gradient-to-b from-gold/5 to-transparent pointer-events-none" />
                         <h2 className="text-3xl md:text-5xl font-display text-white mb-8">The Professional Guarantee</h2>
                         <p className="text-white/60 text-lg max-w-2xl mx-auto mb-12">
-                            Our commitment is to only list the most reliable, fast-responding, and qualified professionals in the UK. If a tradesperson fails to meet our standards, they are removed from the priority network.
+                            Our commitment is to only list the most reliable, fast-responding, and qualified professionals in the {settings.countryCode === 'GB' ? 'UK' : 'US'}. If a {settings.tradeTerm.toLowerCase().replace(/s$/, '')} fails to meet our standards, they are removed from the priority network.
                         </p>
                         <div className="flex flex-wrap justify-center gap-8">
                             <div className="flex flex-col items-center">

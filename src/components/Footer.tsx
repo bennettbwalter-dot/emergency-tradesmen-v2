@@ -1,22 +1,30 @@
 import { Link } from "react-router-dom";
 import { trades, cities } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function Footer() {
+  const { settings } = useLocalization();
+  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+  const usCities = ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco", "San Antonio"];
+  const displayCities = settings.countryCode === 'US' ? usCities : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield"];
+
   return (
     <footer className="bg-primary border-t border-border/50 pt-16 pb-12 mt-16 text-white">
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
-              <div>
-                <span className="font-display text-xl tracking-wide text-white">Emergency</span>
-                <span className="font-display text-xl tracking-wide text-gold">Tradesmen</span>
-              </div>
+              <Link to={`${countryPrefix}/`} className="flex items-center gap-3">
+                <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/50" />
+                <div>
+                  <span className="font-display text-xl tracking-wide text-white">Emergency</span>
+                  <span className="font-display text-xl tracking-wide text-gold">Tradesmen</span>
+                </div>
+              </Link>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Connecting you with trusted local tradespeople for emergency repairs, 24 hours a day, 7 days a week.
+              Connecting you with trusted local {settings.tradeTerm.toLowerCase()} for emergency repairs, 24 hours a day, 7 days a week.
             </p>
             <Newsletter />
           </div>
@@ -25,15 +33,16 @@ export function Footer() {
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Our Services</h4>
             <ul className="space-y-3">
               {trades.slice(0, 6).map((trade, idx) => {
-                const landingCities = ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff"];
+                const landingCities = settings.countryCode === 'US' ? ["los-angeles", "new-york", "dallas", "miami", "phoenix", "seattle", "detroit"] : ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff"];
                 const city = landingCities[idx % landingCities.length];
+                const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
                 return (
                   <li key={trade.slug}>
                     <Link
-                      to={`/emergency-${trade.slug}/${city}`}
+                      to={`${countryPrefix}/emergency-${trade.slug}/${city}`}
                       className="text-white/60 hover:text-gold text-sm transition-colors duration-300"
                     >
-                      Emergency {trade.name}
+                      Emergency {tradeName}
                     </Link>
                   </li>
                 );
@@ -44,10 +53,10 @@ export function Footer() {
           <div>
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Popular Locations</h4>
             <ul className="space-y-3">
-              {["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield"].map((city) => (
+              {displayCities.map((city) => (
                 <li key={city}>
                   <Link
-                    to={`/emergency-plumber/${city.toLowerCase()}`}
+                    to={`${countryPrefix}/emergency-plumber/${city.toLowerCase().replace(/ /g, '-')}`}
                     className="text-white/60 hover:text-gold text-sm transition-colors duration-300"
                   >
                     {city}
@@ -56,11 +65,11 @@ export function Footer() {
               ))}
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
-              <Link to="/" className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
-                Tradesmen Near Me &rarr;
+              <Link to={`${countryPrefix}/`} className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
+                {settings.tradeTerm} Near Me &rarr;
               </Link>
-              <Link to="/locations" className="text-white/40 hover:text-gold text-xs transition-colors flex items-center gap-2">
-                View All Locations
+              <Link to={`${countryPrefix}/locations`} className="text-white/40 hover:text-gold text-xs transition-colors flex items-center gap-2">
+                View All Areas
               </Link>
             </div>
           </div>
@@ -69,14 +78,24 @@ export function Footer() {
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Trust & Support</h4>
             <div className="space-y-4">
               <ul className="space-y-3">
-                <li><Link to="/vetting-process" className="text-white/60 hover:text-gold text-sm transition-colors">Vetting Process</Link></li>
-                <li><Link to="/faq" className="text-white/60 hover:text-gold text-sm transition-colors">Trust & Safety</Link></li>
-                <li><Link to="/contact" className="text-white/60 hover:text-gold text-sm transition-colors">Contact Support</Link></li>
+                <li><Link to={`${countryPrefix}/vetting-process`} className="text-white/60 hover:text-gold text-sm transition-colors">Vetting Process</Link></li>
+                <li><Link to={`${countryPrefix}/faq`} className="text-white/60 hover:text-gold text-sm transition-colors">Trust & Safety</Link></li>
+                <li><Link to={`${countryPrefix}/contact`} className="text-white/60 hover:text-gold text-sm transition-colors">Contact Support</Link></li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-4">
-                <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">Gas Safe</span>
-                <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">NICEIC</span>
-                <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">City & Guilds</span>
+                {settings.countryCode === 'US' ? (
+                  <>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">TSBPE Licensed</span>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">TDLR Certified</span>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">ALOA Member</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">Gas Safe</span>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">NICEIC</span>
+                    <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">City & Guilds</span>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -87,9 +106,9 @@ export function Footer() {
             &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>
-            <Link to="/terms" className="text-white/40 hover:text-gold text-sm transition-colors">Terms</Link>
-            <Link to="/about" className="text-white/40 hover:text-gold text-sm transition-colors">About</Link>
+            <Link to={`${countryPrefix}/privacy`} className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>
+            <Link to={`${countryPrefix}/terms`} className="text-white/40 hover:text-gold text-sm transition-colors">Terms</Link>
+            <Link to={`${countryPrefix}/about`} className="text-white/40 hover:text-gold text-sm transition-colors">About</Link>
           </div>
         </div>
       </div>

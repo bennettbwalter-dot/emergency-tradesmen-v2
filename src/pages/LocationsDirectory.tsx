@@ -1,15 +1,36 @@
 import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { trades, cities } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
+import { useLocalization } from "@/contexts/LocalizationContext";
+
+const cityToState: Record<string, string> = {
+    // California
+    "Los Angeles": "ca", "San Diego": "ca", "San Francisco": "ca", "Sacramento": "ca",
+    // Texas
+    "Dallas": "tx", "Houston": "tx", "Austin": "tx", "San Antonio": "tx", "Arlington": "tx", "Frisco": "tx", "Irving": "tx", "Plano": "tx", "Fort Worth": "tx",
+    // Florida
+    "Miami": "fl", "Orlando": "fl", "Jacksonville": "fl", "Tampa": "fl",
+    // Arizona
+    "Phoenix": "az", "Tucson": "az", "Mesa": "az", "Scottsdale": "az",
+    // Washington
+    "Seattle": "wa", "Spokane": "wa", "Tacoma": "wa",
+    // Others
+    "Buffalo": "ny", "Cleveland": "oh", "Detroit": "mi", "Pittsburgh": "pa", "Portland": "or"
+};
 
 export default function LocationsDirectory() {
-    // Group cities by first letter for better organization
-    const groupedCities: Record<string, typeof cities[number][]> = {};
+    const { settings } = useLocalization();
+    const isUS = settings.countryCode === 'US';
+    const targetCities = isUS ? usCities : cities;
+    const countryPrefix = isUS ? '/us' : '';
 
-    [...cities].sort().forEach(city => {
+    // Group cities by first letter for better organization
+    const groupedCities: Record<string, string[]> = {};
+
+    [...targetCities].sort().forEach(city => {
         const letter = city[0].toUpperCase();
         if (!groupedCities[letter]) groupedCities[letter] = [];
         groupedCities[letter].push(city);
@@ -20,8 +41,8 @@ export default function LocationsDirectory() {
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <SEO
-                title="Service Locations Directory | Emergency Tradesmen UK"
-                description="Browse our full list of service areas across the UK. Find emergency 24/7 plumbers, electricians, locksmiths and more in your local city."
+                title={`Service Locations Directory | Emergency Tradesmen ${isUS ? 'US' : 'UK'}`}
+                description={`Browse our full list of service areas across the ${isUS ? 'USA' : 'UK'}. Find emergency 24/7 plumbers, electricians, locksmiths and more in your local city.`}
             />
 
             <Header />
@@ -32,7 +53,7 @@ export default function LocationsDirectory() {
                         Service <span className="text-gold">Locations</span>
                     </h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        We provide 24/7 emergency coverage across major UK cities and surrounding areas.
+                        We provide 24/7 emergency coverage across major {isUS ? 'US' : 'UK'} cities and surrounding areas.
                         Select your location to find verified tradesmen near you.
                     </p>
                 </div>
@@ -61,33 +82,40 @@ export default function LocationsDirectory() {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {groupedCities[letter].map(city => (
-                                    <div
-                                        key={city}
-                                        className="group bg-card rounded-xl border border-border/50 p-6 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 transition-all duration-300"
-                                    >
-                                        <div className="flex items-start gap-3 mb-4">
-                                            <MapPin className="w-5 h-5 text-gold mt-0.5 shrink-0" />
-                                            <h3 className="font-display text-xl text-foreground group-hover:text-gold transition-colors">
-                                                {city}
-                                            </h3>
-                                        </div>
+                                {groupedCities[letter].map(city => {
+                                    const state = cityToState[city] || 'us';
 
-                                        <ul className="space-y-2">
-                                            {trades.map(trade => (
-                                                <li key={`${city}-${trade.slug}`}>
-                                                    <Link
-                                                        to={`/emergency-${trade.slug}/${city.toLowerCase().replace(/ /g, '-')}`}
-                                                        className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"
-                                                    >
-                                                        <span className="w-1 h-1 rounded-full bg-gold/50" />
-                                                        Emergency {trade.name}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
+                                    return (
+                                        <div
+                                            key={city}
+                                            className="group bg-card rounded-xl border border-border/50 p-6 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 transition-all duration-300"
+                                        >
+                                            <div className="flex items-start gap-3 mb-4">
+                                                <MapPin className="w-5 h-5 text-gold mt-0.5 shrink-0" />
+                                                <h3 className="font-display text-xl text-foreground group-hover:text-gold transition-colors">
+                                                    {city}
+                                                </h3>
+                                            </div>
+
+                                            <ul className="space-y-2">
+                                                {trades.map(trade => (
+                                                    <li key={`${city}-${trade.slug}`}>
+                                                        <Link
+                                                            to={isUS
+                                                                ? `/us/${state}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
+                                                                : `/emergency-${trade.slug}/${city.toLowerCase().replace(/ /g, '-')}`
+                                                            }
+                                                            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"
+                                                        >
+                                                            <span className="w-1 h-1 rounded-full bg-gold/50" />
+                                                            Emergency {isUS ? (trade as any).usName : trade.name}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     ))}

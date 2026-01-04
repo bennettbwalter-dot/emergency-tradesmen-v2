@@ -3,10 +3,13 @@ import { Home, Search, Calendar, MessageSquare, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { getTotalUnreadCount } from "@/lib/chat";
 import { useState, useEffect } from "react";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function BottomNav() {
     const location = useLocation();
     const { user, isAuthenticated } = useAuth();
+    const { settings } = useLocalization();
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
     const [unreadCount, setUnreadCount] = useState(0);
 
     useEffect(() => {
@@ -20,7 +23,8 @@ export function BottomNav() {
 
     const isActive = (path: string) => {
         if (path === "/" && location.pathname === "/") return true;
-        if (path !== "/" && location.pathname.startsWith(path)) return true;
+        if (path === "/us" && (location.pathname === "/us" || location.pathname === "/us/")) return true;
+        if (path !== "/" && path !== "/us" && location.pathname.startsWith(path)) return true;
         // Special handling for dashboard tabs
         if (path.includes("tab=") && location.search.includes(path.split("?")[1])) return true;
         return false;
@@ -30,12 +34,12 @@ export function BottomNav() {
         {
             label: "Home",
             icon: Home,
-            path: "/",
+            path: countryPrefix || "/",
         },
         {
             label: "Search",
             icon: Search,
-            path: "/",
+            path: countryPrefix || "/",
         },
         {
             label: "Messages",

@@ -4,8 +4,10 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export default function PricingPage() {
+    const { settings } = useLocalization();
     const handleContactUs = () => {
         window.location.href = "mailto:emergencytradesmen@outlook.com?subject=Pro%20Subscription%20Inquiry";
     };
@@ -55,7 +57,7 @@ export default function PricingPage() {
                         <div className="bg-card border border-border rounded-xl p-8 flex flex-col">
                             <div className="mb-6">
                                 <h3 className="text-2xl font-bold text-foreground">Basic Listing</h3>
-                                <div className="mt-2 text-3xl font-bold text-foreground">£0 <span className="text-base font-normal text-muted-foreground">/ forever</span></div>
+                                <div className="mt-2 text-3xl font-bold text-foreground">{settings.currencySymbol}0 <span className="text-base font-normal text-muted-foreground">/ forever</span></div>
                             </div>
                             <ul className="space-y-4 mb-8 flex-1">
                                 <li className="flex items-center gap-3">
@@ -85,7 +87,7 @@ export default function PricingPage() {
                                 <h3 className="text-2xl font-bold text-gold flex items-center gap-2">
                                     <Zap className="w-6 h-6 fill-current" /> Pro Monthly
                                 </h3>
-                                <div className="mt-2 text-3xl font-bold text-foreground">£29 <span className="text-base font-normal text-muted-foreground">/ month</span></div>
+                                <div className="mt-2 text-3xl font-bold text-foreground">{settings.currencySymbol}29 <span className="text-base font-normal text-muted-foreground">/ month</span></div>
                             </div>
                             <ul className="space-y-4 mb-8 flex-1">
                                 <li className="flex items-center gap-3">
@@ -123,8 +125,8 @@ export default function PricingPage() {
                                 <h3 className="text-2xl font-bold text-emerald-500 flex items-center gap-2">
                                     <Crown className="w-6 h-6 fill-current" /> Pro Yearly
                                 </h3>
-                                <div className="mt-2 text-3xl font-bold text-foreground">£99 <span className="text-base font-normal text-muted-foreground">/ year</span></div>
-                                <p className="text-sm text-emerald-500 font-medium mt-1">Save £249 (over 70% off!)</p>
+                                <div className="mt-2 text-3xl font-bold text-foreground">{settings.currencySymbol}99 <span className="text-base font-normal text-muted-foreground">/ year</span></div>
+                                <p className="text-sm text-emerald-500 font-medium mt-1">Save {settings.currencySymbol}249 (over 70% off!)</p>
                             </div>
                             <ul className="space-y-4 mb-8 flex-1">
                                 <li className="flex items-center gap-3">

@@ -64,7 +64,8 @@ const VoiceTrigger = () => {
             recognitionRef.current = new SpeechRecognition();
             recognitionRef.current.continuous = true;
             recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'en-US';
+            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+            recognitionRef.current.lang = countryCode === 'US' ? 'en-US' : 'en-GB';
 
             recognitionRef.current.onstart = () => setStatus('Listening');
 
@@ -154,11 +155,13 @@ const VoiceTrigger = () => {
         // STRICT TURN-TAKING: Stop mic immediately
         if (recognitionRef.current) recognitionRef.current.stop();
 
-        // FIX: Use Ref to get the LATEST state
-        const { newState, response } = await processUserMessage(text, chatStateRef.current);
+        // Detect country code from URL path
+        const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+
+        const { newState, response } = await processUserMessage(text, chatStateRef.current, countryCode);
         updateChatState(newState);
 
-        await speakResponse(response.content);
+        await speakResponse(response.content, countryCode);
 
         if (response.action === 'navigate' && response.target) {
             navigate(response.target);
@@ -180,7 +183,7 @@ const VoiceTrigger = () => {
         }
     };
 
-    const speakResponse = async (text: string) => {
+    const speakResponse = async (text: string, countryCode: string = 'GB') => {
         setStatus('Speaking');
 
         const cleanText = text.replace(/[*#]/g, '');
@@ -189,7 +192,7 @@ const VoiceTrigger = () => {
 
         // CRITICAL UPDATE: This now awaits the ACTUAL 'onended' event from AudioContext
         // We do NOT use manual timeouts anymore. The service resolves ONLY when audio stops.
-        await voiceService.speak(ssmlText);
+        await voiceService.speak(ssmlText, countryCode);
     };
 
     const toggleVoice = () => {
@@ -198,7 +201,7 @@ const VoiceTrigger = () => {
     };
 
     return (
-        <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center gap-3">
+        <div className="fixed bottom-24 md:bottom-8 right-8 z-[100] flex flex-col items-center gap-3">
             {isActive && (
                 <div className={`
                     text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border shadow-2xl animate-in fade-in zoom-in duration-300

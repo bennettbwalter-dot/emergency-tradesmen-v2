@@ -1,6 +1,7 @@
 import { supabase } from './supabase';
 import type { Business } from './businesses';
 import { businessListings, getBusinessById } from './businesses';
+import { usCities, cities } from './trades';
 
 /**
  * Helper to map Supabase business data to the Business interface
@@ -47,22 +48,84 @@ function mapBusinessData(biz: any): Business {
         contact_name: biz.contact_name,
         verified: biz.verified || false,
         header_image_url: biz.header_image_url,
-        vehicle_image_url: biz.vehicle_image_url
+        vehicle_image_url: biz.vehicle_image_url,
+        country_code: biz.country_code || 'GB'
     };
 }
 
 /**
  * Fetch businesses using Hybrid Strategy
  */
-export async function fetchBusinesses(trade: string, city: string): Promise<Business[]> {
-    const staticBusinesses = businessListings[city.toLowerCase()]?.[trade.toLowerCase()] || [];
+export async function fetchBusinesses(trade: string, city: string, countryCode: string = 'GB'): Promise<Business[]> {
+    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, countryCode=${countryCode}`);
+    console.log(`[fetchBusinesses] usCities available? ${Array.isArray(usCities)} length=${usCities?.length}`);
+    let staticBusinesses: Business[] = [];
+    // Normalize trade slug to match static data keys (e.g. "emergency-plumber" -> "plumber")
+    const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
 
-    const { data: supabaseBusinesses, error } = await supabase
+    // Variable to hold the actual city name found in static data (or original input)
+    let searchCity = city;
+
+    // If city contains a specific value, try to find a matching key in static data
+    if (city) {
+        // 1. Direct match (fast path)
+        if (businessListings[city.toLowerCase()]?.[normalizedTrade]) {
+            staticBusinesses = businessListings[city.toLowerCase()][normalizedTrade];
+            searchCity = city; // Assume lowercase key matches input
+        } else {
+            // 2. Fuzzy match: Iterate keys to handle "Milton Keynes" vs "milton-keynes"
+            const normalizedInput = city.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            // A. Check matches in Static Data Keys
+            const matchingKey = Object.keys(businessListings).find(key =>
+                key.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
+            );
+
+            if (matchingKey) {
+                // FOUND IT! Capture the correct key for Supabase query
+                searchCity = matchingKey;
+                if (businessListings[matchingKey]?.[normalizedTrade]) {
+                    staticBusinesses = businessListings[matchingKey][normalizedTrade];
+                }
+            } else {
+                // B. Check matches in the MASTER UK CITIES LIST (for Supabase-only cities)
+                // This fixes the "99% of areas empty" issue where data exists in DB but not static JSON
+                const matchingCityList = (cities as readonly string[]).find(c =>
+                    c.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
+                );
+                if (matchingCityList) {
+                    searchCity = matchingCityList;
+                }
+            }
+        }
+    } else if (countryCode.toUpperCase() === 'GB') {
+        // If NO specific city and we are in UK mode, AGGREGATE all static UK listings
+        const usCitiesLower = usCities.map(c => c.toLowerCase());
+
+        Object.keys(businessListings).forEach(cityKey => {
+            // Include if NOT a US city (everything else is UK by default in businessListings)
+            if (!usCitiesLower.includes(cityKey.toLowerCase())) {
+                const cityBiz = businessListings[cityKey][normalizedTrade];
+                if (cityBiz) {
+                    staticBusinesses = [...staticBusinesses, ...cityBiz];
+                }
+            }
+        });
+    }
+
+    let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
-        .eq('trade', trade.toLowerCase())
-        .eq('city', city)
+        .eq('trade', normalizedTrade)
+        .eq('country_code', countryCode.toUpperCase())
         .eq('verified', true);
+
+    if (searchCity && searchCity.trim() !== '') {
+        // Use the resolved searchCity (e.g. "Milton Keynes") not the raw input ("milton-keynes")
+        query = query.eq('city', searchCity);
+    }
+
+    const { data: supabaseBusinesses, error } = await query;
 
     if (error) {
         console.error('Error fetching dynamic businesses:', error);
@@ -107,11 +170,17 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
     return null;
 }
 
-export async function fetchAllBusinesses(limit = 100): Promise<Business[]> {
-    const { data, error } = await supabase
+export async function fetchAllBusinesses(limit = 100, countryCode?: string): Promise<Business[]> {
+    let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
-        .eq('verified', true)
+        .eq('verified', true);
+
+    if (countryCode) {
+        query = query.eq('country_code', countryCode.toUpperCase());
+    }
+
+    const { data, error } = await query
         .order('rating', { ascending: false })
         .limit(limit);
 
@@ -123,11 +192,12 @@ export async function fetchAllBusinesses(limit = 100): Promise<Business[]> {
     return (data || []).map(biz => mapBusinessData(biz));
 }
 
-export async function searchBusinesses(query: string): Promise<Business[]> {
+export async function searchBusinesses(query: string, countryCode: string = 'GB'): Promise<Business[]> {
     const { data, error } = await supabase
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('verified', true)
+        .eq('country_code', countryCode.toUpperCase())
         .or(`name.ilike.%${query}%,trade.ilike.%${query}%`)
         .order('rating', { ascending: false })
         .limit(20);
@@ -140,19 +210,20 @@ export async function searchBusinesses(query: string): Promise<Business[]> {
     return (data || []).map(biz => mapBusinessData(biz));
 }
 
-export async function fetchPaidBusinesses(trade?: string, city?: string): Promise<Business[]> {
+export async function fetchPaidBusinesses(trade?: string, city?: string, countryCode?: string): Promise<Business[]> {
     let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('verified', true)
-        .eq('is_premium', true)
+        .eq('is_premium', true);
+
+    if (trade) query = query.eq('trade', trade.toLowerCase().replace('emergency-', ''));
+    if (city) query = query.eq('city', city);
+    if (countryCode) query = query.eq('country_code', countryCode.toUpperCase());
+
+    const { data, error } = await query
         .order('rating', { ascending: false })
         .limit(10);
-
-    if (trade) query = query.eq('trade', trade);
-    if (city) query = query.eq('city', city);
-
-    const { data, error } = await query;
 
     if (error) {
         console.error('Error fetching paid businesses:', error);

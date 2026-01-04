@@ -1,4 +1,5 @@
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LocalizationProvider } from "@/contexts/LocalizationContext";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -137,65 +138,104 @@ const App = () => {
                   <Sonner />
                   <ThemeToggle />
                   <BrowserRouter>
-                    <ScrollToTop />
-                    <HashCleaner />
-                    <Suspense fallback={<PageLoader />}>
-                      <AnalyticsTracker />
-                      <InstallPWA />
-                      <CookieConsent />
-                      <Routes>
-                        <Route path="/login" element={<AuthPage defaultTab="login" />} />
-                        <Route path="/register" element={<AuthPage defaultTab="register" />} />
-                        <Route path="/auth/callback" element={<AuthCallback />} />
-                        <Route path="/" element={<Index />} />
-                        <Route path="/user/dashboard" element={<UserDashboard />} />
-                        <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-                        <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
-                        <Route path="/premium-profile" element={<ProProfileEditor />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/pricing" element={<PricingPage />} />
-                        <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
-                        <Route path="/terms" element={<TermsOfService />} />
-                        <Route path="/privacy" element={<PrivacyPolicy />} />
-                        <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                        <Route path="/payment/cancel" element={<PaymentCancelPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog/:slug" element={<BlogPostPage />} />
-                        <Route path="/faq" element={<FAQ />} />
-                        <Route path="/vetting-process" element={<VettingProcess />} />
-                        <Route path="/vetting-process" element={<VettingProcess />} />
-                        <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
-                        <Route path="/locations" element={<LocationsDirectory />} />
+                    <LocalizationProvider>
+                      <ScrollToTop />
+                      <HashCleaner />
+                      <Suspense fallback={<PageLoader />}>
+                        <AnalyticsTracker />
+                        <InstallPWA />
+                        <CookieConsent />
+                        <Routes>
+                          <Route path="/login" element={<AuthPage defaultTab="login" />} />
+                          <Route path="/register" element={<AuthPage defaultTab="register" />} />
+                          <Route path="/auth/callback" element={<AuthCallback />} />
 
-                        <Route path="/admin" element={<AdminLayout />}>
-                          <Route index element={<AdminDashboard />} />
-                          <Route path="businesses" element={<BusinessesPage />} />
 
-                          <Route path="profile-editor" element={<AdminProfileEditor />} />
-                          <Route path="availability" element={<AdminAvailability />} />
+                          {/* Explicit Trade Routes (Resolves conflict with /:countryCode) */}
+                          <Route path="/emergency-plumber" element={<TradeCityPage />} />
+                          <Route path="/emergency-plumber/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-electrician" element={<TradeCityPage />} />
+                          <Route path="/emergency-electrician/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-locksmith" element={<TradeCityPage />} />
+                          <Route path="/emergency-locksmith/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-gas-engineer" element={<TradeCityPage />} />
+                          <Route path="/emergency-gas-engineer/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-drain-specialist" element={<TradeCityPage />} />
+                          <Route path="/emergency-drain-specialist/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-glazier" element={<TradeCityPage />} />
+                          <Route path="/emergency-glazier/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-roofer" element={<TradeCityPage />} />
+                          <Route path="/emergency-roofer/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-breakdown" element={<TradeCityPage />} />
+                          <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-builder" element={<TradeCityPage />} />
+                          <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
 
-                          <Route path="photos" element={<PhotosPage />} />
-                          <Route path="reviews" element={<ReviewsPage />} />
-                          <Route path="subscriptions" element={<SubscriptionsPage />} />
-                          <Route path="export" element={<DataExportPage />} />
-                        </Route>
+                          {/* Regional Support */}
+                          <Route path="/:countryCode">
+                            <Route index element={<Index />} />
+                            <Route path="business/:businessId" element={<BusinessProfilePage />} />
+                            <Route path="pricing" element={<PricingPage />} />
+                            <Route path="about" element={<About />} />
+                            <Route path="locations" element={<LocationsDirectory />} />
+                            <Route path="blog" element={<BlogPage />} />
+                            <Route path="blog/:slug" element={<BlogPostPage />} />
+                            <Route path=":tradePath" element={<TradeCityPage />} />
+                            <Route path=":tradePath/:city" element={<TradeCityPage />} />
 
-                        <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
-                        <Route path="/:tradePath/:city" element={<TradeCityPage />} />
-                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                      <BottomNav />
-                      <LiveChat />
-                      <ErrorBoundary>
-                        {/* Voice Assistant Trigger - Restored per requirements */}
-                        {/* Voice Assistant Trigger - Restored per requirements */}
-                        <VoiceTrigger />
-                      </ErrorBoundary>
-                      <FloatingBackButton />
-                      <CustomCursor />
-                    </Suspense>
+                            {/* US Specific Routes (State Level) */}
+                            <Route path=":state/:city" element={<TradeCityPage />} />
+                            <Route path=":state/:city/:tradePath" element={<TradeCityPage />} />
+                          </Route>
+
+                          {/* Default (GB) Routes */}
+                          <Route path="/" element={<Index />} />
+                          <Route path="/user/dashboard" element={<UserDashboard />} />
+                          <Route path="/business/:businessId" element={<BusinessProfilePage />} />
+                          <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
+                          <Route path="/premium-profile" element={<ProProfileEditor />} />
+                          <Route path="/about" element={<About />} />
+                          <Route path="/pricing" element={<PricingPage />} />
+                          <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
+                          <Route path="/terms" element={<TermsOfService />} />
+                          <Route path="/privacy" element={<PrivacyPolicy />} />
+                          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+                          <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+                          <Route path="/contact" element={<ContactPage />} />
+                          <Route path="/blog" element={<BlogPage />} />
+                          <Route path="/blog/:slug" element={<BlogPostPage />} />
+                          <Route path="/faq" element={<FAQ />} />
+                          <Route path="/vetting-process" element={<VettingProcess />} />
+                          <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
+                          <Route path="/locations" element={<LocationsDirectory />} />
+
+                          <Route path="/admin" element={<AdminLayout />}>
+                            <Route index element={<AdminDashboard />} />
+                            <Route path="businesses" element={<BusinessesPage />} />
+                            <Route path="profile-editor" element={<AdminProfileEditor />} />
+                            <Route path="availability" element={<AdminAvailability />} />
+                            <Route path="photos" element={<PhotosPage />} />
+                            <Route path="reviews" element={<ReviewsPage />} />
+                            <Route path="subscriptions" element={<SubscriptionsPage />} />
+                            <Route path="export" element={<DataExportPage />} />
+                          </Route>
+
+                          <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
+                          <Route path="/:tradePath/:city" element={<TradeCityPage />} />
+
+
+                          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                          <Route path="*" element={<NotFound />} />
+                        </Routes>
+                        <BottomNav />
+                        <LiveChat />
+                        <ErrorBoundary>
+                          <VoiceTrigger />
+                        </ErrorBoundary>
+                        <FloatingBackButton />
+                        <CustomCursor />
+                      </Suspense>
+                    </LocalizationProvider>
                   </BrowserRouter>
                 </TooltipProvider>
               </ChatbotProvider>

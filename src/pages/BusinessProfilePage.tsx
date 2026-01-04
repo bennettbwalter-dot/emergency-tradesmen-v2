@@ -25,6 +25,7 @@ import { db } from "@/lib/db";
 import { trackEvent } from "@/lib/analytics";
 import { ShareMenu } from "@/components/ShareMenu";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
+import { getStateForCity } from "@/lib/usCityStates";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
@@ -239,6 +240,10 @@ export default function BusinessProfilePage() {
 
 
 
+    // Determine country code from business data or default to GB
+    const countryCode = business.country_code || 'GB';
+    const isUS = countryCode === 'US';
+
     const businessSchema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -249,9 +254,11 @@ export default function BusinessProfilePage() {
         url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
         address: {
             "@type": "PostalAddress",
+            streetAddress: business.address?.split(',')[0] || "",
             addressLocality: city,
-            addressCountry: "GB",
-            postalCode: business.postalCode || getPostcodeForCity(city)
+            addressRegion: isUS ? getStateForCity(city) : "",
+            postalCode: business.postalCode || (!isUS ? getPostcodeForCity(city) : ""),
+            addressCountry: isUS ? "US" : "GB"
         },
         aggregateRating: business.rating ? {
             "@type": "AggregateRating",
@@ -645,7 +652,7 @@ export default function BusinessProfilePage() {
                                             className="w-full bg-[#22C55E] hover:bg-[#1EA34D] text-white font-bold h-16 rounded-xl"
                                         >
                                             <a
-                                                href={`https://wa.me/${(business.whatsapp_number || business.phone).replace(/\D/g, '')}?text=${encodeURIComponent(`Hi, I need help from ${business.name}.`)}`}
+                                                href={`https://wa.me/${((business.whatsapp_number || business.phone) || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hi, I need help from ${business.name}.`)}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center justify-center gap-2"

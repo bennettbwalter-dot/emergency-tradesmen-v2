@@ -31,7 +31,10 @@ const AuthCallback = () => {
                 // No session found yet, maybe check hash manualy? 
                 // Or wait for onAuthStateChange (which AuthContext does).
                 // For now, if no hash and no session, go home.
-                if (!window.location.hash) {
+                // No session found yet.
+                // If no hash AND no code param (PKCE), then go home.
+                // If code param exists, we wait for onAuthStateChange to handle the exchange.
+                if (!window.location.hash && !window.location.search.includes('code=')) {
                     navigate("/", { replace: true });
                 }
             }

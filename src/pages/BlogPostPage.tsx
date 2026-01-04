@@ -9,6 +9,7 @@ import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight } from "lucide-rea
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSimpleTheme } from "@/components/simple-theme";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 interface BlogPost {
     id: string;
@@ -23,9 +24,31 @@ interface BlogPost {
 
 export default function BlogPostPage() {
     const { setTheme } = useSimpleTheme();
+    const { settings } = useLocalization();
     const { slug } = useParams();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    const regionalizeText = (text: string) => {
+        if (!text || settings.countryCode !== 'US') return text;
+        return text
+            .replace(/Tradesmen/g, 'Contractors')
+            .replace(/tradesmen/g, 'contractors')
+            .replace(/Tradesman/g, 'Contractor')
+            .replace(/tradesman/g, 'contractor')
+            .replace(/Tradesperson/g, 'Contractor')
+            .replace(/tradesperson/g, 'contractor')
+            .replace(/Tradespeople/g, 'Contractors')
+            .replace(/tradespeople/g, 'contractors')
+            .replace(/UK/g, 'US')
+            .replace(/breakdown recovery/gi, 'tow truck')
+            .replace(/postcode/gi, 'zip code')
+            .replace(/boiler/gi, 'HVAC / water heater')
+            .replace(/Gas Safe/g, 'Texas State Board of Plumbing Examiners (TSBPE)')
+            .replace(/NICEIC/g, 'Texas Department of Licensing and Regulation (TDLR)')
+            .replace(/MLA/g, 'ALOA Security Professionals')
+            .replace(/emergency services UK/gi, 'US emergency services');
+    };
 
     useEffect(() => {
         setTheme('light');
@@ -36,13 +59,15 @@ export default function BlogPostPage() {
             if (!slug) return;
 
             if (slug === 'uk-emergency-tradesmen-expert-repairs') {
+                const staticTitle = regionalizeText('UK Emergency Tradesmen: Expert Repairs When You Need Them');
+                const staticExcerpt = regionalizeText('When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.');
                 setPost({
                     id: 'static-uk-emergency-tradesmen',
-                    title: 'UK Emergency Tradesmen: Expert Repairs When You Need Them',
+                    title: staticTitle,
                     slug: 'uk-emergency-tradesmen-expert-repairs',
-                    excerpt: 'When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.',
+                    excerpt: staticExcerpt,
                     cover_image: 'https://images.unsplash.com/photo-1546827209-a218e99fdbe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwzNXx8dG9vbHN8ZW58MHx8fHwxNzY2NjA4NjgyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-                    content: `When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky. That's where **[emergency tradesmen](https://emergencytradesmen.net/)** come in – they offer urgent help to fix your home.
+                    content: regionalizeText(`When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky. That's where **[emergency tradesmen](https://emergencytradesmen.net/)** come in – they offer urgent help to fix your home.
 
 With _24/7_ service, finding a trusted tradesman is easy. Online platforms help you connect with certified and vetted tradespeople. This ensures you get top-notch repairs when you need them most.
 
@@ -260,7 +285,7 @@ Your emergency list should have local tradesmen like plumbers, electricians, and
 
 ### Are there any essential tools or supplies I should keep on hand for temporary fixes?
 
-Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help with temporary fixes until a professional can arrive.`,
+Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help with temporary fixes until a professional can arrive.`),
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 });
@@ -275,7 +300,12 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 .single();
 
             if (!error && data) {
-                setPost(data);
+                setPost({
+                    ...data,
+                    title: regionalizeText(data.title),
+                    excerpt: regionalizeText(data.excerpt),
+                    content: regionalizeText(data.content)
+                });
             }
             setIsLoading(false);
         }
@@ -316,6 +346,8 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
     const wordCount = post.content?.split(/\s+/).length || 0;
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
+
     return (
         <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
             {/* Structured Data Construction */}
@@ -333,13 +365,13 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Home",
-                            "item": baseUrl
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
                         },
                         {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}/blog`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
                         },
                         {
                             "@type": "ListItem",
@@ -363,13 +395,13 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                     "image": imageUrl,
                     "author": {
                         "@type": "Organization",
-                        "name": "Emergency Tradesmen UK",
+                        "name": regionalizeText("Emergency Tradesmen UK"),
                         "url": baseUrl,
                         "logo": `${baseUrl}/et-logo-v2.png`
                     },
                     "publisher": {
                         "@type": "Organization",
-                        "name": "Emergency Tradesmen UK",
+                        "name": regionalizeText("Emergency Tradesmen UK"),
                         "logo": {
                             "@type": "ImageObject",
                             "url": `${baseUrl}/et-logo-v2.png`
@@ -389,9 +421,9 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
 
                 return (
                     <SEO
-                        title={`${post.title} | Emergency Tradesmen Blog`}
+                        title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={post.excerpt}
-                        canonical={`/blog/${post.slug}`}
+                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={[breadcrumbSchema, articleSchema]}
@@ -403,7 +435,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to="/blog"
+                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -555,11 +587,11 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                         Don't Wait For An Emergency
                                     </h3>
                                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                                        Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.
+                                        {regionalizeText("Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.")}
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                         <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
-                                            <Link to="/">Find a Tradesman Now</Link>
+                                            <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
                                             <ChevronRight className="w-4 h-4 ml-2" />
                                         </Button>
                                         <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">

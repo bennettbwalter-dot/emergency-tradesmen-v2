@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { useSimpleTheme } from "@/components/simple-theme";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 interface BlogPost {
     id: string;
@@ -21,8 +22,19 @@ interface BlogPost {
 
 export default function BlogPage() {
     const { setTheme } = useSimpleTheme();
+    const { settings } = useLocalization();
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const regionalizeText = (text: string) => {
+        if (settings.countryCode !== 'US') return text;
+        return text
+            .replace(/Tradesmen/g, 'Contractors')
+            .replace(/tradesmen/g, 'contractors')
+            .replace(/Tradesperson/g, 'Contractor')
+            .replace(/tradesperson/g, 'contractor')
+            .replace(/UK/g, 'US');
+    };
 
     useEffect(() => {
         setTheme('light');
@@ -40,16 +52,20 @@ export default function BlogPage() {
                 // Add static post if not already present
                 const staticPost: BlogPost = {
                     id: 'static-uk-emergency-tradesmen',
-                    title: 'UK Emergency Tradesmen: Expert Repairs When You Need Them',
+                    title: regionalizeText('UK Emergency Tradesmen: Expert Repairs When You Need Them'),
                     slug: 'uk-emergency-tradesmen-expert-repairs',
-                    excerpt: 'When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.',
+                    excerpt: regionalizeText('When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.'),
                     cover_image: 'https://images.unsplash.com/photo-1546827209-a218e99fdbe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwzNXx8dG9vbHN8ZW58MHx8fHwxNzY2NjA4NjgyfDA&ixlib=rb-4.1.0&q=80&w=1080',
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 };
 
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug);
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug).map(p => ({
+                    ...p,
+                    title: regionalizeText(p.title),
+                    excerpt: regionalizeText(p.excerpt)
+                }));
                 setPosts([staticPost, ...uniqueData]);
             }
             setIsLoading(false);
@@ -61,18 +77,18 @@ export default function BlogPage() {
     return (
         <div className="min-h-screen bg-background">
             <SEO
-                title="Trade Tips & Guides | Emergency Tradesmen UK"
-                description="Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson."
+                title={regionalizeText("Trade Tips & Guides | Emergency Tradesmen UK")}
+                description={regionalizeText("Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson.")}
                 canonical="/blog"
                 jsonLd={{
                     "@context": "https://schema.org",
                     "@type": "CollectionPage",
-                    "name": "Trade Tips & Guides",
-                    "description": "Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson.",
-                    "url": "https://emergencytradesmen.net/blog",
+                    "name": regionalizeText("Trade Tips & Guides"),
+                    "description": regionalizeText("Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson."),
+                    "url": `https://emergencytradesmen.net${settings.countryCode === 'GB' ? '' : '/us'}/blog`,
                     "publisher": {
                         "@type": "Organization",
-                        "name": "Emergency Tradesmen UK",
+                        "name": regionalizeText("Emergency Tradesmen UK"),
                         "logo": {
                             "@type": "ImageObject",
                             "url": "https://emergencytradesmen.net/et-logo-v2.png"
@@ -130,7 +146,7 @@ export default function BlogPage() {
                                         </span>
                                     </div>
                                     <h2 className="text-xl font-bold font-display line-clamp-2 group-hover:text-primary transition-colors">
-                                        <Link to={`/blog/${post.slug}`}>
+                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}>
                                             {post.title}
                                         </Link>
                                     </h2>
@@ -144,7 +160,7 @@ export default function BlogPage() {
 
                                 <CardFooter className="pt-0">
                                     <Button asChild variant="ghost" className="w-full justify-between hover:bg-secondary/50">
-                                        <Link to={`/blog/${post.slug}`}>
+                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}>
                                             Read Article
                                             <ArrowRight className="w-4 h-4 ml-2" />
                                         </Link>

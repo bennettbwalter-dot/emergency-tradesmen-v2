@@ -3,6 +3,7 @@ import { cities } from './trades';
 // Coordinates for our supported cities to enable "Nearest Neighbor" search
 // This allows us to map "Brixton" -> "London" purely via math
 export const SUPPORTED_LOCATIONS: Record<string, { lat: number; lon: number }> = {
+    // UK Cities
     "Manchester": { lat: 53.4808, lon: -2.2426 },
     "Birmingham": { lat: 52.4862, lon: -1.8904 },
     "Leeds": { lat: 53.8008, lon: -1.5491 },
@@ -33,15 +34,29 @@ export const SUPPORTED_LOCATIONS: Record<string, { lat: number; lon: number }> =
     "Reading": { lat: 51.4543, lon: -0.9781 },
     "Oxford": { lat: 51.7520, lon: -1.2577 },
     "Cambridge": { lat: 52.2053, lon: 0.1218 },
-    // Defaults for safety - mapped roughly to regions if exact city missing
     "Westminster": { lat: 51.4975, lon: -0.1357 },
+
+    // US Cities
+    "Los Angeles": { lat: 34.0522, lon: -118.2437 },
+    "San Diego": { lat: 32.7157, lon: -117.1611 },
+    "San Francisco": { lat: 37.7749, lon: -122.4194 },
+    "Sacramento": { lat: 38.5816, lon: -121.4944 },
+    "Dallas": { lat: 32.7767, lon: -96.7970 },
+    "Houston": { lat: 29.7604, lon: -95.3698 },
+    "Austin": { lat: 30.2672, lon: -97.7431 },
+    "San Antonio": { lat: 29.4241, lon: -98.4936 },
+    "Miami": { lat: 25.7617, lon: -80.1918 },
+    "Orlando": { lat: 28.5383, lon: -81.3792 },
+    "Phoenix": { lat: 33.4484, lon: -112.0740 },
+    "Seattle": { lat: 47.6062, lon: -122.3321 },
+    "New York": { lat: 40.7128, lon: -74.0060 },
 };
 
-// OpenStreetMap (Nominatim) is free and requires no API key for low-volume methods
-// We respect their usage policy by including a User-Agent
-export async function geocodeLocation(query: string): Promise<{ lat: number; lon: number; displayName: string } | null> {
+// Nominatim Geocoding
+export async function geocodeLocation(query: string, countryCode: string = 'GB'): Promise<{ lat: number; lon: number; displayName: string } | null> {
     try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + ", UK")}&limit=1`, {
+        const countrySuffix = countryCode.toUpperCase() === 'US' ? ', USA' : ', UK';
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + countrySuffix)}&limit=1`, {
             headers: {
                 'User-Agent': 'EmergencyTradesmen/1.0 (emergencytradesmen@outlook.com)'
             }
@@ -63,7 +78,7 @@ export async function geocodeLocation(query: string): Promise<{ lat: number; lon
     return null;
 }
 
-// Haversine Formula to find distance between two points in KM
+// Haversine Formula...
 function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
     const R = 6371; // Radius of the earth in km
     const dLat = deg2rad(lat2 - lat1);
@@ -73,23 +88,24 @@ function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon
         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // Distance in km
-    return d;
+    return R * c;
 }
 
 function deg2rad(deg: number) {
     return deg * (Math.PI / 180);
 }
 
-export function findNearestSupportedCity(lat: number, lon: number): { city: string; distance: number } | null {
+import { usCities } from './trades';
+
+export function findNearestSupportedCity(lat: number, lon: number, countryCode: string = 'GB'): { city: string; distance: number } | null {
     let nearestCity: string | null = null;
     let minDistance = Infinity;
 
-    // Iterate over KNOWN supported cities to find the closest one
-    // Prioritize keys in SUPPORTED_LOCATIONS, fall back to simple array search if needed
-    for (const city of cities) {
+    // Use appropriate list based on country
+    const cityList = countryCode.toUpperCase() === 'US' ? usCities : cities;
+
+    for (const city of cityList) {
         const coords = SUPPORTED_LOCATIONS[city];
-        // If we haven't mapped this city manually yet, skip (or add it above)
         if (!coords) continue;
 
         const dist = getDistanceFromLatLonInKm(lat, lon, coords.lat, coords.lon);
