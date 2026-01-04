@@ -67,11 +67,16 @@ serve(async (req) => {
 
             // Determine days to add based on amount (session.amount_total is in cents)
             const amountTotal = session.amount_total || 0
-            let daysToAdd = 30 // Default Pro Monthly
+            let daysToAdd = 30 // Default Pro Monthly (approx £49.99)
+            let planName = "Monthly"
 
-            if (amountTotal >= 9000) { // £90+ usually means Yearly (£99)
-                daysToAdd = 366
+            // £90+ usually means Yearly (£99)
+            if (amountTotal >= 9000) {
+                daysToAdd = 366 // Leap year safe
+                planName = "Yearly"
             }
+
+            console.log(`Provisioning '${planName}' plan (${daysToAdd} days) for amount: ${amountTotal}`)
 
             // Extend subscription
             const { error: rpcError } = await supabase.rpc('extend_subscription', {

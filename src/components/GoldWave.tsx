@@ -23,7 +23,7 @@ export const GoldWave = () => {
         let height = 0;
 
         // High Performance Configuration
-        const PARTICLE_COUNT = 1500;
+        const PARTICLE_COUNT = 400;
 
         // Data layout per particle:
         // 0: x

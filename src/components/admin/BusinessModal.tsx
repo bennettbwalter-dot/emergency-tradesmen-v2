@@ -114,6 +114,9 @@ export function BusinessModal({ isOpen, onClose, business, onSuccess }: Business
 
                 if (error) throw error;
                 toast({ title: "Success", description: "Business created successfully" });
+
+                // Redirect to the Premium Profile Editor to finish setup
+                window.location.href = `/admin/profile-editor?id=${idToUse}`;
             }
             onSuccess();
             onClose();

@@ -2,10 +2,20 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, Edit, Trash2, CheckCircle, XCircle } from "lucide-react";
+import { Plus, Search, Edit, Trash2, CheckCircle, XCircle, Crown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Business } from "@/lib/businesses";
 import { BusinessModal } from "@/components/admin/BusinessModal";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function BusinessesPage() {
     const [businesses, setBusinesses] = useState<any[]>([]);
@@ -17,6 +27,7 @@ export default function BusinessesPage() {
     // Modal state
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingBusiness, setEditingBusiness] = useState<any>(null);
+    const [deleteConfirmation, setDeleteConfirmation] = useState<{ id: string, name: string } | null>(null);
 
     useEffect(() => {
         loadBusinesses();
@@ -118,19 +129,27 @@ export default function BusinessesPage() {
         }
     }
 
-    async function deleteBusiness(id: string, name: string) {
-        if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+    async function executeDelete() {
+        if (!deleteConfirmation) return;
+        const { id, name } = deleteConfirmation;
 
-        const { error } = await supabase
+        const { error, count } = await supabase
             .from('businesses')
-            .delete()
+            .delete({ count: 'exact' })
             .eq('id', id);
 
         if (error) {
             console.error('Error deleting business:', error);
             toast({
                 title: "Error",
-                description: "Failed to delete business",
+                description: error.message || "Failed to delete business",
+                variant: "destructive",
+            });
+        } else if (count === 0) {
+            console.warn('Delete operation returned 0 rows affected. RLS likely blocking it.');
+            toast({
+                title: "Permission Denied",
+                description: "Database refused to delete. Please run the SQL fix.",
                 variant: "destructive",
             });
         } else {
@@ -140,6 +159,7 @@ export default function BusinessesPage() {
                 description: `${name} has been removed`,
             });
         }
+        setDeleteConfirmation(null);
     }
 
     const handleAddBusiness = () => {
@@ -185,8 +205,8 @@ export default function BusinessesPage() {
                     <button
                         onClick={() => setActiveTab('all')}
                         className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'all'
-                                ? 'bg-background text-foreground shadow-sm'
-                                : 'text-muted-foreground hover:text-foreground'
+                            ? 'bg-background text-foreground shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
                             }`}
                     >
                         All Businesses
@@ -194,8 +214,8 @@ export default function BusinessesPage() {
                     <button
                         onClick={() => setActiveTab('pending')}
                         className={`px-4 py-2 text-sm font-medium rounded-md transition-all flex items-center gap-2 ${activeTab === 'pending'
-                                ? 'bg-background text-foreground shadow-sm'
-                                : 'text-muted-foreground hover:text-foreground'
+                            ? 'bg-background text-foreground shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
                             }`}
                     >
                         Pending Claims
@@ -285,8 +305,8 @@ export default function BusinessesPage() {
                                             <button
                                                 onClick={() => toggleVerified(business.id, business.verified)}
                                                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${business.verified
-                                                        ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
-                                                        : "bg-orange-500/10 text-orange-500 hover:bg-orange-500/20"
+                                                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                                                    : "bg-orange-500/10 text-orange-500 hover:bg-orange-500/20"
                                                     }`}
                                             >
                                                 {business.verified ? (
@@ -299,10 +319,17 @@ export default function BusinessesPage() {
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-end gap-1">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleEditBusiness(business)}>
-                                                <Edit className="w-4 h-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive" onClick={() => deleteBusiness(business.id, business.name)}>
+                                            <a href={`/admin/profile-editor?id=${business.id}`}>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 text-blue-500 hover:text-blue-600 hover:bg-blue-50">
+                                                    <Edit className="w-4 h-4" />
+                                                </Button>
+                                            </a>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                                onClick={() => setDeleteConfirmation({ id: business.id, name: business.name })}
+                                            >
                                                 <Trash2 className="w-4 h-4" />
                                             </Button>
                                         </div>
@@ -335,6 +362,26 @@ export default function BusinessesPage() {
                 business={editingBusiness}
                 onSuccess={loadBusinesses}
             />
+
+            <AlertDialog open={!!deleteConfirmation} onOpenChange={(open) => !open && setDeleteConfirmation(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete the business profile for <strong>{deleteConfirmation?.name}</strong> and remove their data from our servers.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={executeDelete}
+                            className="bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700"
+                        >
+                            Delete Business
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 }

@@ -1,19 +1,27 @@
+
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
+import { usageLogger } from '@/lib/usage-logger';
 
 const AZURE_KEY = import.meta.env.VITE_AZURE_SPEECH_KEY || '';
-const AZURE_REGION = import.meta.env.VITE_AZURE_SPEECH_REGION || '';
+const AZURE_REGION = import.meta.env.VITE_AZURE_SPEECH_REGION || 'uksouth';
 
 export class AzureVoiceService {
     private synthesizer: sdk.SpeechSynthesizer | null = null;
     private audioContext: AudioContext | null = null;
     private currentSource: AudioBufferSourceNode | null = null;
+    private useFallback: boolean = false;
 
-    constructor() { }
+    constructor() {
+        // Initialize fallback synth if needed
+        if (window.speechSynthesis) {
+            // Pre-load voices
+            window.speechSynthesis.getVoices();
+        }
+    }
 
     private initAudio(): void {
         if (!this.audioContext) {
             try {
-                // Standard AudioContext (works on mobile if unlocked)
                 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
                 this.audioContext = new AudioContext();
             } catch (e) {
@@ -22,72 +30,113 @@ export class AzureVoiceService {
         }
     }
 
-    public async speak(text: string): Promise<void> {
-        // Shadow Counter: Track TTS Usage
-        import('@/lib/usage-logger').then(({ usageLogger }) => {
-            usageLogger.incrementUsage('azure_tts_chars', text.length);
+    public async speak(text: string, countryCode: string = 'GB'): Promise<void> {
+        // Shadow Counter - FIRE AND FORGET
+        usageLogger.incrementUsage('azure_tts_chars', text.length).catch(e => {
+            console.warn('[AzureVoice] Usage logging failed:', e.message);
         });
+
+        // If fallback mode is already active, use it directly
+        if (this.useFallback) {
+            return this.speakNative(text, countryCode);
+        }
 
         return new Promise((resolve) => {
             this.initAudio();
 
-            if (!this.audioContext) {
+            if (!this.audioContext && !this.useFallback) {
                 console.error('[AzureVoice] No AudioContext');
                 resolve();
                 return;
             }
 
-            // 1. Resume Context (Critical for Mobile)
-            if (this.audioContext.state === 'suspended') {
+            if (this.audioContext?.state === 'suspended') {
                 this.audioContext.resume();
             }
 
-            // 2. Kill Previous Audio
             this.stop();
 
             try {
-                // 3. Configure Synthesizer to output raw stream (no auto-play)
+                // Hardcoded Critical Path to ensure Human Voice
                 const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
-                speechConfig.speechSynthesisVoiceName = "en-US-AvaMultilingualNeural";
 
-                // Set output to null to prevent SDK from trying to play it
+                // American Woman Voice (Ava) - Requested to be used globally
+                const voiceName = "en-US-AvaMultilingualNeural";
+                speechConfig.speechSynthesisVoiceName = voiceName;
+
                 this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, null as any);
 
                 const ssml = `
-<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-    <voice name="en-US-AvaMultilingualNeural">
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${countryCode === 'US' ? 'en-US' : 'en-GB'}">
+    <voice name="${voiceName}">
         ${text}
     </voice>
 </speak>`.trim();
 
-                console.log('[AzureVoice] Synthesizing...');
+                console.log(`[AzureVoice] Synthesizing via Azure (${countryCode}) using American Woman voice...`);
 
                 this.synthesizer.speakSsmlAsync(
                     ssml,
                     (result) => {
                         if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-                            // 4. Decode and Play Manually
                             const audioData = result.audioData;
                             this.playBuffer(audioData, resolve);
                         } else {
-                            console.warn('[AzureVoice] Issue:', result.errorDetails);
-                            resolve();
+                            console.warn('[AzureVoice] Azure Failed, switching to Fallback:', result.errorDetails);
+                            this.synthesizer?.close();
+                            this.synthesizer = null;
+
+                            // *** TRIGGER FALLBACK ***
+                            this.useFallback = true;
+                            this.speakNative(text, countryCode).then(resolve);
                         }
-                        this.synthesizer?.close();
-                        this.synthesizer = null;
                     },
                     (err) => {
                         console.error('[AzureVoice] Error:', err);
                         this.synthesizer?.close();
                         this.synthesizer = null;
-                        resolve();
+                        this.useFallback = true;
+                        this.speakNative(text, countryCode).then(resolve);
                     }
                 );
 
             } catch (e) {
-                console.error('[AzureVoice] Setup Failed:', e);
-                resolve();
+                console.error('[AzureVoice] Setup Exception, using Fallback:', e);
+                this.useFallback = true;
+                this.speakNative(text, countryCode).then(resolve);
             }
+        });
+    }
+
+    // --- FALLBACK: Web Speech API ---
+    private async speakNative(text: string, countryCode: string = 'GB'): Promise<void> {
+        return new Promise((resolve) => {
+            const synth = window.speechSynthesis;
+            if (!synth) { resolve(); return; }
+
+            synth.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            // Try to find a US Voice
+            const voices = synth.getVoices();
+            const usVoice = voices.find(v => v.lang === 'en-US' || v.name.includes('US') || v.name.includes('United States'));
+            const gbVoice = voices.find(v => v.lang === 'en-GB');
+
+            if (usVoice) {
+                utterance.voice = usVoice;
+                console.log('[AzureVoice] Using Native US Voice:', usVoice.name);
+            } else if (gbVoice) {
+                utterance.voice = gbVoice;
+            }
+
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+
+            utterance.onend = () => { resolve(); };
+            utterance.onerror = () => { resolve(); };
+
+            synth.speak(utterance);
         });
     }
 
@@ -96,20 +145,15 @@ export class AzureVoiceService {
 
         this.audioContext.decodeAudioData(arrayBuffer, (decodedBuffer) => {
             try {
-                // Create Source
                 const source = this.audioContext!.createBufferSource();
                 source.buffer = decodedBuffer;
                 source.connect(this.audioContext!.destination);
-
-                // Event Listener: The Silver Bullet for Timing
                 source.onended = () => {
                     this.currentSource = null;
-                    onComplete(); // Resolve Promise ONLY when audio finishes
+                    onComplete();
                 };
-
                 this.currentSource = source;
                 source.start(0);
-
             } catch (e) {
                 console.error('[AzureVoice] Playback Failed:', e);
                 onComplete();
@@ -129,6 +173,9 @@ export class AzureVoiceService {
             try { this.synthesizer.close(); } catch (e) { }
             this.synthesizer = null;
         }
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
     }
 
     public unlockAudioContext(): void {
@@ -136,5 +183,7 @@ export class AzureVoiceService {
         if (this.audioContext && this.audioContext.state === 'suspended') {
             this.audioContext.resume();
         }
+        // Also unlock native synth just in case
+        if (window.speechSynthesis) window.speechSynthesis.resume();
     }
 }

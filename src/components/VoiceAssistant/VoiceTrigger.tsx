@@ -144,7 +144,7 @@ const VoiceTrigger = () => {
                 if (text.length > 1) {
                     processInput(text);
                 }
-            }, 800); // 800ms: Safe balance for mobile
+            }, 400); // 400ms: Much snappier response (was 800ms)
         }
     };
 

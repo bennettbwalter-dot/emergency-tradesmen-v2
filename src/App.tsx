@@ -39,13 +39,14 @@ const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 const PaymentCancelPage = lazy(() => import("./pages/PaymentCancelPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
 const AuthCallback = lazy(() => import("./pages/AuthCallback"));
-const PremiumProfileEditor = lazy(() => import("./pages/PremiumProfileEditor"));
+const ProProfileEditor = lazy(() => import("./pages/NewProfileEditor"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
+const VerifyDocumentsPage = lazy(() => import("./pages/VerifyDocumentsPage"));
 const LocationsDirectory = lazy(() => import("./pages/LocationsDirectory"));
 
 // Admin Pages Lazy Load
@@ -150,7 +151,7 @@ const App = () => {
                         <Route path="/user/dashboard" element={<UserDashboard />} />
                         <Route path="/business/:businessId" element={<BusinessProfilePage />} />
                         <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
-                        <Route path="/premium-profile" element={<PremiumProfileEditor />} />
+                        <Route path="/premium-profile" element={<ProProfileEditor />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/pricing" element={<PricingPage />} />
                         <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
@@ -163,6 +164,8 @@ const App = () => {
                         <Route path="/blog/:slug" element={<BlogPostPage />} />
                         <Route path="/faq" element={<FAQ />} />
                         <Route path="/vetting-process" element={<VettingProcess />} />
+                        <Route path="/vetting-process" element={<VettingProcess />} />
+                        <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
                         <Route path="/locations" element={<LocationsDirectory />} />
 
                         <Route path="/admin" element={<AdminLayout />}>

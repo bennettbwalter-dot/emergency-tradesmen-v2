@@ -1,148 +1,20 @@
 export const trades = [
-  { slug: "plumber", name: "Plumber", icon: "💧", image: "/emergency-plumber-v2.jpg", vectorIcon: "/icons/plumber.png" },
-  { slug: "electrician", name: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.png", vectorIcon: "/icons/electrician.png" },
-  { slug: "locksmith", name: "Locksmith", icon: "🔐", image: "/emergency-locksmith-v2.jpg", vectorIcon: "/icons/locksmith.png" },
-  { slug: "gas-engineer", name: "Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer-v2.png", vectorIcon: "/icons/gas-engineer.png" },
-  { slug: "drain-specialist", name: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist-v2.jpg", vectorIcon: "/icons/drain-specialist.png" },
-  { slug: "glazier", name: "Glazier", icon: "🪟", image: "/emergency-glazier-v2.jpg", vectorIcon: "/icons/glazier.png" },
-  { slug: "breakdown", name: "Breakdown Recovery", icon: "🚗", image: "/emergency-breakdown-v2.jpg", vectorIcon: "/icons/breakdown.png" },
+  { slug: "plumber", name: "Plumber", usName: "Plumber", icon: "💧", image: "/emergency-plumber-v2.jpg", vectorIcon: "/icons/plumber.png" },
+  { slug: "electrician", name: "Electrician", usName: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.png", vectorIcon: "/icons/electrician.png" },
+  { slug: "locksmith", name: "Locksmith", usName: "Locksmith", icon: "🔐", image: "/emergency-locksmith-v2.jpg", vectorIcon: "/icons/locksmith.png" },
+  { slug: "gas-engineer", name: "Gas Engineer", usName: "HVAC / Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer-v2.png", vectorIcon: "/icons/gas-engineer.png" },
+  { slug: "drain-specialist", name: "Drain Specialist", usName: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist-v2.jpg", vectorIcon: "/icons/drain-specialist.png" },
+  { slug: "glazier", name: "Glazier", usName: "Glazier / Glass Repair", icon: "🪟", image: "/emergency-glazier-v2.jpg", vectorIcon: "/icons/glazier.png" },
+  { slug: "roofer", name: "Roofer", usName: "Roofer / Roof Repair", icon: "🏠", image: "/emergency-roofer-v2.jpg", vectorIcon: "/icons/roofer-icon-v2.png" },
+  { slug: "builder", name: "Builder", usName: "Builder / Construction", icon: "🧱", image: "/emergency-builder-v2.png", vectorIcon: "/icons/builder-icon-v2.png" },
+  { slug: "breakdown", name: "Breakdown Recovery", usName: "Tow Truck", icon: "🚗", image: "/emergency-breakdown-v2.jpg", vectorIcon: "/icons/breakdown.png" },
 ] as const;
 
-export const cities = [
-  "Manchester",
-  "Birmingham",
-  "Leeds",
-  "Sheffield",
-  "Nottingham",
-  "Leicester",
-  "Derby",
-  "Coventry",
-  "Wolverhampton",
-  "Stoke-on-Trent",
-  "Liverpool",
-  "Preston",
-  "Bolton",
-  "Oldham",
-  "Rochdale",
-  "Bradford",
-  "Huddersfield",
-  "York",
-  "Hull",
-  "Doncaster",
-  "Northampton",
-  "Milton Keynes",
-  "Luton",
-  "Bedford",
-  "Peterborough",
-  "Cambridge",
-  "Norwich",
-  "Ipswich",
-  "Reading",
-  "Oxford",
-  "Swindon",
-  "Cheltenham",
-  "Gloucester",
-  "Worcester",
-  "Hereford",
-  "Shrewsbury",
-  "Telford",
-  "Cannock",
-  "Tamworth",
-  "Nuneaton",
-  "Rugby",
-  "Bath",
-  "Brighton & Hove",
-  "Bristol",
-  "Canterbury",
-  "Carlisle",
-  "Chelmsford",
-  "Chester",
-  "Chichester",
-  "Colchester",
-  "Durham",
-  "Ely",
-  "Exeter",
-  "Lancaster",
-  "Lichfield",
-  "Lincoln",
-  "London",
-  "Newcastle-upon-Tyne",
-  "Plymouth",
-  "Portsmouth",
-  "Ripon",
-  "Salford",
-  "Salisbury",
-  "Southampton",
-  "Southend-on-Sea",
-  "St Albans",
-  "Sunderland",
-  "Truro",
-  "Wakefield", "Wells", "Winchester", "Westminster", "Warrington", "Wigan",
-  "Middlesbrough", "Blackpool", "Barnsley", "Cardiff", "Swansea", "Newport",
-  "Edinburgh", "Glasgow", "Aberdeen", "Dundee", "Belfast", "Slough",
-  "Bournemouth", "Poole", "Stockport", "Huddersfield", "Ipswich", "York",
-  "Colchester", "Basildon", "Chelmsford", "Maidstone", "Crawley", "Worthing",
-  "Sutton Coldfield", "Milton Keynes", "Northampton", "Luton", "Swindon",
-  "Warrington", "Dudley", "Walsall", "Bournemouth", "Peterborough", "Watford",
-  "Slough", "High Wycombe", "Harlow", "St Albans", "Stevenage", "Redditch",
-  "Tamworth", "Nuneaton", "Chesterfield", "Mansfield", "Beeston", "Loughborough",
-  "Burton upon Trent", "Crewe", "Macclesfield", "Scunthorpe", "Grimsby",
-  "Harrogate", "Halifax", "Batley", "Keighley", "South Shields", "Gateshead",
-  "Darlington", "Hartlepool", "Stockton-on-Tees", "Hemel Hempstead", "Cheltenham",
-  "Gillingham", "Worcester", "Eastbourne", "Beeston", "Rayleigh", "Lowestoft",
-  "Woking", "Maidenhead", "Basingstoke", "Fareham", "Gosport", "Ewell", "Crosby",
-  "Paignton", "Torquay", "Bebington", "Halesowen", "Kidderminster", "Rugby",
-  "Leamington Spa", "Kettering", "Wellingborough", "Dunstable", "Aylesbury",
-  "Cheshunt", "Welwyn Garden City", "Margate", "Royal Tunbridge Wells", "Ashford",
-  "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend",
-  "Dartford", "Weymouth", "Falmouth", "Truro", "St Austell", "Scarborough",
-  "Bridlington", "Castleford", "Pontefract", "Doncaster", "Rotherham", "Oldham",
-  "Bolton", "Rochdale", "Sale", "Salford", "Widnes", "Runcorn", "Ellesmere Port",
-  "Birkenhead", "Wallasey", "Barrow-in-Furness", "Carlisle", "Workington",
-  "Whitehaven", "Lancaster", "Chorley", "Accrington", "Burnley", "Lytham St Annes",
-  "Brixton", "Hackney", "Camden", "Islington", "Greenwich", "Chelsea",
-  "Wembley", "Croydon", "Ealing", "Enfield", "Harrow", "Hounslow",
-  "Kingston", "Merton", "Newham", "Redbridge", "Richmond", "Southwark",
-  "Tower Hamlets", "Waltham Forest", "Wandsworth", "Woolwich", "Fulham",
-  "Dudley",
-  "Walsall",
-  "Solihull",
-  "Basildon",
-  "Crawley",
-  "Basingstoke",
-  "Woking",
-  "Guildford",
-  "High Wycombe",
-  "Hemel Hempstead",
-  "Stevenage",
-  "Harlow",
-  "Watford",
-  "Staines",
-  "Maidstone",
-  "Gillingham",
-  "Chatham",
-  "Ashford",
-  "Dartford",
-  "Tunbridge Wells",
-  "Hastings",
-  "Eastbourne",
-  "Worthing",
-  "Harrogate",
-  "Darlington",
-  "Hartlepool",
-  "Mansfield",
-  "Chesterfield",
-  "Burton upon Trent",
-  "Stafford",
-  "Kidderminster",
-  "Redditch",
-  "Bromsgrove",
-  "Loughborough",
-  "Grantham",
-  "Scunthorpe",
-  "Grimsby",
-  "Rotherham",
-] as const;
+import ukCityList from './uk_cities.json';
+import usCityList from './us_cities.json';
+
+export const cities = ukCityList as const;
+export const usCities = usCityList as const;
 
 export type Trade = typeof trades[number];
 export type City = typeof cities[number];
@@ -172,11 +44,29 @@ export interface TradePageData {
   problem?: CommonProblem;
 }
 
-export function generateTradePageData(tradeSlug: string, cityName: string): TradePageData | null {
+export function generateTradePageData(tradeSlug: string, cityName: string, countryCode: string = 'GB'): TradePageData | null {
   // Allow tradeSlug to also be a problem slug
   const problem = commonProblems.find(p => p.slug === tradeSlug);
   const trade = trades.find(t => t.slug === (problem ? problem.trade : tradeSlug));
-  const city = cities.find(c => c.toLowerCase() === cityName.toLowerCase());
+
+  // Basic city normalization
+  const normalizedCityName = cityName.replace(/-/g, ' ');
+
+  // Try to find in UK cities first (default)
+  let foundCity = (cities as readonly string[]).find(c => c.toLowerCase() === normalizedCityName.toLowerCase());
+  let actualCountryCode = countryCode;
+
+  // If not found and countryCode is GB (default), try US cities
+  if (!foundCity && countryCode === 'GB') {
+    foundCity = (usCities as readonly string[]).find(c => c.toLowerCase() === normalizedCityName.toLowerCase());
+    if (foundCity) {
+      actualCountryCode = 'US';
+    }
+  } else if (countryCode === 'US') {
+    foundCity = (usCities as readonly string[]).find(c => c.toLowerCase() === normalizedCityName.toLowerCase());
+  }
+
+  const city = foundCity || (actualCountryCode === 'US' ? normalizedCityName : null);
 
   if (!trade || !city) return null;
 
@@ -240,6 +130,11 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     Reading: ["Caversham", "Tilehurst", "Whitley", "Earley", "Woodley", "Coley", "Katesgrove", "Southcote", "West Reading"],
     Wolverhampton: ["Tettenhall", "Wednesfield", "Bilston", "Penn", "Whitmore Reans", "Heath Town", "Oxley", "Bushbury", "Compton"],
     Huddersfield: ["Lindley", "Marsh", "Milnsbridge", "Golcar", "Slaithwaite", "Holmfirth", "Almondbury", "Dalton", "Birkby"],
+    // US Cities - California
+    "Los Angeles": ["Santa Monica", "Beverly Hills", "Pasadena", "Glendale", "Long Beach", "Burbank", "West Hollywood", "Culver City", "Manhattan Beach", "Venice"],
+    "San Diego": ["La Jolla", "Coronado", "Chula Vista", "Carlsbad", "Encinitas", "Del Mar", "Pacific Beach", "Mission Valley", "Point Loma", "Ocean Beach"],
+    "San Francisco": ["Oakland", "Berkeley", "Daly City", "South San Francisco", "San Mateo", "Palo Alto", "Mountain View", "Sunnyvale", "San Jose", "Fremont"],
+    "Sacramento": ["Roseville", "Folsom", "Elk Grove", "Davis", "Citrus Heights", "Rancho Cordova", "West Sacramento", "Rocklin", "Lincoln", "Auburn"],
   };
 
   const localExpertiseMap: Record<string, string> = {
@@ -248,6 +143,11 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     Birmingham: "Experts at operating within Birmingham's Clean Air Zone (CAZ) and navigating the A4540 Middleway Ring Road. Our tradesmen use compliant vehicles to provide 24/7 service without passing CAZ daily charges onto you.",
     Sheffield: "While Sheffield's 'Seven Hills' terrain can be challenging, our local network is strategically positioned for rapid response across the city's steep geography, including the Peak District foothills and areas like Blake Street.",
     Leeds: "Navigating Leeds city centre's parking shortages and pavement restrictions is standard for our local team. We maintain a strong presence across West Leeds and Headingley to beat the typical 5-week city wait times.",
+    // US Cities - California
+    "Los Angeles": "Our LA partners navigate the city's complex geography from Downtown to the Valley, understanding earthquake retrofit requirements, HVAC demands for year-round climate control, and strict California building codes. We're experienced with both historic properties and modern developments across all LA neighborhoods.",
+    "San Diego": "Specialists in coastal property maintenance, from saltwater corrosion prevention to earthquake preparedness. Our San Diego network understands the unique challenges of beach communities and inland valleys, with expertise in energy-efficient HVAC for the Mediterranean climate and water conservation systems.",
+    "San Francisco": "Experts in San Francisco's Victorian and Edwardian architecture, seismic retrofitting, and navigating the city's strict building codes. Our partners understand the challenges of steep terrain, limited parking, and the unique plumbing systems in historic SF homes, plus modern high-rise requirements.",
+    "Sacramento": "Our Sacramento team handles the valley's extreme temperature swings (100°F+ summers, freezing winters), understanding the critical importance of reliable HVAC and the impact of drought conditions on plumbing systems. We're experts in energy-efficient solutions for California's capital region.",
   };
 
   const servicesMap: Record<string, string[]> = {
@@ -299,24 +199,44 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
       "Double glazing emergencies",
       "Security glass fitting",
     ],
+    roofer: [
+      "Emergency roof repairs",
+      "Storm damage repairs",
+      "Leak detection & fixing",
+      "Tile & shingle replacement",
+      "Emergency tarping",
+      "Gutter repairs",
+    ],
+    builder: [
+      "Structural damage repairs",
+      "Wall crack repairs",
+      "Ceiling collapse support",
+      "Emergency shoring up",
+      "Masonry & brickwork repairs",
+      "Subsidence investigation",
+    ],
   };
 
-  const priceRangeMap: Record<string, string> = {
-    plumber: "£80 – £200",
-    electrician: "£90 – £250",
-    locksmith: "£70 – £180",
-    "gas-engineer": "£100 – £280",
-    "drain-specialist": "£120 – £350",
-    glazier: "£100 – £300",
+  const priceRangeMap: Record<string, Record<string, string>> = {
+    plumber: { GB: "£80 – £200", US: "$95 – $250" },
+    electrician: { GB: "£90 – £250", US: "$110 – $300" },
+    locksmith: { GB: "£70 – £180", US: "$85 – $220" },
+    "gas-engineer": { GB: "£100 – £280", US: "$125 – $350" },
+    "drain-specialist": { GB: "£120 – £350", US: "$150 – $450" },
+    glazier: { GB: "£100 – £300", US: "$130 – $400" },
+    roofer: { GB: "£150 – £500", US: "$180 – $650" },
+    builder: { GB: "£120 – £400", US: "$150 – $550" },
   };
 
   const certificationsMap: Record<string, string[]> = {
-    plumber: ["Water Safe registered", "City & Guilds qualified", "Fully insured"],
-    electrician: ["NICEIC approved", "Part P certified", "Fully insured"],
-    locksmith: ["MLA approved", "DBS checked", "Fully insured"],
-    "gas-engineer": ["Gas Safe registered", "OFTEC certified", "Fully insured"],
-    "drain-specialist": ["NADC accredited", "SafeContractor approved", "Fully insured"],
-    glazier: ["FENSA registered", "GGF member", "Fully insured"],
+    plumber: countryCode === 'GB' ? ["Water Safe registered", "City & Guilds qualified", "Fully insured"] : ["Licensed & Bonded", "Master Plumber Certified", "Fully Insured"],
+    electrician: countryCode === 'GB' ? ["NICEIC approved", "Part P certified", "Fully insured"] : ["NEC Compliant", "Licensed Electrician", "Fully Insured"],
+    locksmith: countryCode === 'GB' ? ["MLA approved", "DBS checked", "Fully insured"] : ["ALOA Member", "Background Checked", "Fully Insured"],
+    "gas-engineer": countryCode === 'GB' ? ["Gas Safe registered", "OFTEC certified", "Fully insured"] : ["HVAC Certified", "EPA Universal", "Fully Insured"],
+    "drain-specialist": countryCode === 'GB' ? ["NADC accredited", "SafeContractor approved", "Fully insured"] : ["IICRC Certified", "Licensed Contractor", "Fully Insured"],
+    glazier: countryCode === 'GB' ? ["FENSA registered", "GGF member", "Fully insured"] : ["NGA Certified", "Safety Glass Qualified", "Fully Insured"],
+    roofer: countryCode === 'GB' ? ["NFRC registered", "TrustMark approved", "Fully insured"] : ["Licensed Roofer", "OSHA Certified", "Fully Insured"],
+    builder: countryCode === 'GB' ? ["FMB member", "NHBC registered", "Fully insured"] : ["Licensed General Contractor", "Licensed & Bonded", "Fully Insured"],
   };
 
   return {
@@ -324,16 +244,16 @@ export function generateTradePageData(tradeSlug: string, cityName: string): Trad
     city,
     serviceAreas: serviceAreaMap[city] || ["Surrounding areas", "Nearby suburbs", "Local districts"],
     averageResponseTime: "30–90 minutes",
-    emergencyPriceRange: priceRangeMap[trade.slug] || "£80 – £200",
-    certifications: certificationsMap[trade.slug] || ["Fully insured", "DBS checked", "Certified"],
+    emergencyPriceRange: priceRangeMap[trade.slug]?.[countryCode] || (countryCode === 'GB' ? "£80 – £200" : "$95 – $250"),
+    certifications: certificationsMap[trade.slug] || ["Fully insured", "Certified"],
     services: servicesMap[trade.slug] || ["Emergency repairs", "Same day service", "24/7 availability"],
-    faqs: generateFAQs(trade, city, priceRangeMap[trade.slug] || "£80 – £200"),
+    faqs: generateFAQs(trade, city, priceRangeMap[trade.slug]?.[countryCode] || (countryCode === 'GB' ? "£80 – £200" : "$95 – $250"), countryCode),
     localExpertise: localExpertiseMap[city],
     problem,
   };
 }
 
-function generateFAQs(trade: Trade, city: City, priceRange: string): { question: string; answer: string }[] {
+function generateFAQs(trade: Trade, city: City, priceRange: string, countryCode: string = 'GB'): { question: string; answer: string }[] {
   const baseFAQs = [
     {
       question: `How much does an emergency ${trade.name.toLowerCase()} cost in ${city}?`,
@@ -377,6 +297,23 @@ function generateFAQs(trade: Trade, city: City, priceRange: string): { question:
     Leeds: {
       question: "What if there is no parking available at my Leeds property?",
       answer: `Our Leeds-based ${trade.name.toLowerCase()}s are accustomed to the city's parking challenges. If you live in a high-density area like Headingley or the city centre, just let us know in advance so the technician can plan their equipment drop-off accordingly.`,
+    },
+    // US Cities - California
+    "Los Angeles": {
+      question: "Are your LA contractors experienced with earthquake safety requirements?",
+      answer: `Yes. All our Los Angeles partners are trained in California's seismic safety codes, including gas line earthquake valves, water heater strapping, and foundation bolt inspections. They understand the unique requirements for both pre-1978 buildings and modern construction.`,
+    },
+    "San Diego": {
+      question: "Can you handle saltwater corrosion issues common in coastal San Diego?",
+      answer: `Absolutely. Our San Diego ${trade.name.toLowerCase()}s specialize in coastal property maintenance, understanding how salt air affects plumbing, electrical systems, and HVAC equipment. We use corrosion-resistant materials and techniques specific to beach communities.`,
+    },
+    "San Francisco": {
+      question: "Do you work on San Francisco's historic Victorian homes?",
+      answer: `Yes. Our SF partners are experts in Victorian and Edwardian architecture, understanding the unique plumbing, electrical, and structural requirements of historic homes. We're experienced with seismic retrofitting and navigating SF's strict preservation codes.`,
+    },
+    "Sacramento": {
+      question: "How do you handle Sacramento's extreme temperature swings?",
+      answer: `Our Sacramento team specializes in HVAC systems designed for the valley's extreme climate (100°F+ summers, freezing winters). We understand the critical importance of reliable air conditioning and heating, plus water conservation during California's drought periods.`,
     },
   };
 

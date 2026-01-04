@@ -76,6 +76,45 @@
             "route_key": "glazier"
         },
         {
+            "id": "roofer",
+            "keywords": [
+                "roof",
+                "leak",
+                "tile",
+                "chimney",
+                "rain",
+                "storm",
+                "slate",
+                "felt",
+                "flashing",
+                "gutter"
+            ],
+            "route_key": "roofer"
+        },
+        {
+            "id": "builder",
+            "route_key": "builder",
+            "keywords": [
+                "wall",
+                "structure",
+                "brick",
+                "crack",
+                "collapse",
+                "beam",
+                "foundation",
+                "subsidence",
+                "masonry",
+                "pointing",
+                "carpenter",
+                "woodwork",
+                "cupboard",
+                "door frame",
+                "maintenance",
+                "repair",
+                "handrail"
+            ]
+        },
+        {
             "id": "breakdown_recovery",
             "keywords": [
                 "car",

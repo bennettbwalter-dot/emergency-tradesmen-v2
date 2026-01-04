@@ -57,6 +57,7 @@ export interface Business {
     last_available_ping?: string;
     header_image_url?: string;
     vehicle_image_url?: string;
+    postalCode?: string;
 }
 
 export function isBusinessAvailable(business: Business): boolean {

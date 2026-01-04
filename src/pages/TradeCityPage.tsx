@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
@@ -13,7 +13,8 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { generateTradePageData, cities } from "@/lib/trades";
+import { generateTradePageData, cities, usCities } from "@/lib/trades";
+import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
@@ -27,19 +28,71 @@ import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
 import { Zap, ArrowRight, Star } from "lucide-react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export default function TradeCityPage() {
-  const { tradePath, city } = useParams<{ tradePath: string; city: string }>();
+  const { countryCode, tradePath, city, state } = useParams<{ countryCode: string; tradePath: string; city: string; state?: string }>();
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
 
-  // Extract trade from path like "emergency-plumber" -> "plumber"
-  const trade = tradePath ? tradePath.replace("emergency-", "") : "";
+  console.log("TradeCityPage Debug:", { countryCode, tradePath, city, state });
 
-  const pageData = generateTradePageData(trade, city || "");
+  // Normalize inputs for US routes
+  // If we have 3 params (state exists), then tradePath is the trade.
+  // If we have 2 params (state is undefined, but check if tradePath is actually a state for US),
+  // handle the ambiguity.
 
-  const tradeInfo = pageData?.trade || { slug: '', name: 'Tradesperson', icon: '🔧' };
-  const cityName = pageData?.city || 'your area';
+  const location = useLocation();
+
+  // If tradePath param is missing (explicit route), derive from URL
+  const effectiveTradePath = tradePath || location.pathname.split('/')[1];
+
+  let validTrade = effectiveTradePath ? effectiveTradePath.replace("emergency-", "") : "";
+  // Ensure we decode the city to handle %20 or other encoded chars from chatbot/URL
+  let validCity = city ? decodeURIComponent(city) : "";
+
+  // Handle /us/ca/los-angeles case where "ca" is passed as tradePath
+  const isUS = countryCode === 'us';
+  const knownStates = ['ca', 'tx', 'ny', 'fl']; // Add used states
+
+  if (isUS && !state && effectiveTradePath && knownStates.includes(effectiveTradePath.toLowerCase())) {
+    // We are in /us/state/city mode (City Landing Page)
+    // Shift variables: tradePath was actually state, city is city, trade is generic
+    // validState = effectiveTradePath; (unused in logic but conceptually true)
+    validTrade = "default"; // Use default/generic trade
+  }
+
+  const pageData = generateTradePageData(validTrade, validCity, countryCode?.toUpperCase());
+
+  // Normalize cities for check (handles hyphens from URL)
+  const normalizedCitiesGB = cities.map(c => c.toLowerCase().replace(/\s+/g, '-'));
+  const normalizedCitiesUS = usCities.map(c => c.toLowerCase().replace(/\s+/g, '-'));
+
+  const isCityUS = normalizedCitiesUS.includes(validCity.toLowerCase().replace(/\s+/g, '-'));
+  const isCityGB = normalizedCitiesGB.includes(validCity.toLowerCase().replace(/\s+/g, '-'));
+
+  const actualCountry = isCityUS ? 'US' : (isCityGB ? 'GB' : (countryCode?.toUpperCase() || 'GB'));
+
+  if (countryCode && countryCode.toLowerCase() !== actualCountry.toLowerCase()) {
+    console.log(`[TradeCityPage] REGION MISMATCH: Route is ${countryCode}, City ${validCity} belongs to ${actualCountry}. Redirecting...`);
+    // Ensure we don't redirect to /us/default/city if trade is missing
+    const tradeForUrl = validTrade && validTrade !== 'default' ? `emergency-${validTrade}` : 'emergency-plumber';
+    const newPath = actualCountry === 'US' ? `/us/${tradeForUrl}/${validCity.toLowerCase().replace(/\s+/g, '-')}` : `/${tradeForUrl}/${validCity.toLowerCase().replace(/\s+/g, '-')}`;
+    return <Navigate to={newPath} replace />;
+  }
+
+  const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' };
+  const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'Nationwide' : 'United Kingdom');
 
   const serviceAreas = pageData?.serviceAreas || [];
   const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';
@@ -65,16 +118,22 @@ export default function TradeCityPage() {
   // Fetch real businesses from Supabase
   useEffect(() => {
     // Only fetch if we have valid data
-    if (!tradeInfo.slug || !cityName || !pageData) return;
+    // Only fetch if we have valid data
+    // Fetches using raw validCity to support generic (empty) queries
+    if (!tradeInfo.slug) return;
 
     async function loadBusinesses() {
       setIsLoading(true);
       try {
-        const realBusinesses = await fetchBusinesses(tradeInfo.slug, cityName);
+        console.log('Fetching businesses for:', { trade: tradeInfo.slug, city: validCity, countryCode });
+        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, countryCode);
+        console.log('Real businesses fetched:', realBusinesses.length);
 
         // If no real businesses found, fallback to mock data
         if (realBusinesses.length === 0) {
-          const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
+          console.warn('No real businesses found. Checking mock data...');
+          const mockBusinesses = getBusinessListings(validCity, tradeInfo.slug, countryCode?.toUpperCase());
+          console.log('Mock businesses found:', mockBusinesses?.length);
           setBusinesses(mockBusinesses || []);
         } else {
           setBusinesses(realBusinesses);
@@ -82,7 +141,7 @@ export default function TradeCityPage() {
       } catch (error) {
         console.error('Error loading businesses:', error);
         // Fallback to mock data on error
-        const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug);
+        const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug, countryCode?.toUpperCase());
         setBusinesses(mockBusinesses);
       } finally {
         setIsLoading(false);
@@ -122,8 +181,24 @@ export default function TradeCityPage() {
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
 
+  // Pagination Logic
+  const totalPages = Math.ceil(resultsCount / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentBusinesses = filteredBusinesses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters, city, tradePath]);
+
   // Early returns must happen AFTER hooks
-  if (!tradePath || !city || !pageData) {
+  if (!effectiveTradePath) {
+    console.warn("TradeCityPage: Missing tradePath, redirecting home.", { effectiveTradePath });
     return <Navigate to="/" replace />;
   }
 
@@ -148,42 +223,45 @@ export default function TradeCityPage() {
 
   const reviewStats = calculateReviewStats(realReviews);
 
-  const localBusinessSchema = {
+  const postcode = getPostcodeForCity(cityName);
+
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "Service",
     "@id": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
     name: `Emergency ${tradeInfo.name} ${cityName}`,
     description: `24/7 emergency ${tradeInfo.name.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
-    telephone: "020 3835 1566", // General contact or dynamic if available
+    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "020 3835 1566", // General contact or dynamic if available
     url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: cityName,
-      addressCountry: "GB"
+    "serviceType": `Emergency ${tradeInfo.name}`,
+    "provider": {
+      "@type": "Organization",
+      "name": "Emergency Tradesmen UK",
+      "url": "https://emergencytradesmen.net"
     },
-    geo: {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "addressCountry": "GB",
-        "addressLocality": cityName
-      },
-      "geoRadius": "20000"
-    },
+
     areaServed: {
       "@type": "City",
       name: cityName,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": cityName,
+        "addressCountry": countryCode?.toUpperCase() || "GB",
+        ...(postcode ? { "postalCode": postcode } : {})
+      }
     },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59"
-    },
-    priceRange: "££"
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": `${tradeInfo.name} Services`,
+      "itemListElement": services.map((service) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service
+        }
+      }))
+    }
   };
 
   const faqSchema = {
@@ -224,15 +302,15 @@ export default function TradeCityPage() {
     ]
   };
 
-  const seoTitle = pageData.problem
+  const seoTitle = pageData?.problem
     ? `${pageData.problem.name} in ${cityName}`
     : `Emergency ${tradeInfo.name} ${cityName} – 24/7 Near Me | Arriving in ${averageResponseTime}`;
 
-  const seoDescription = pageData.problem
+  const seoDescription = pageData?.problem
     ? `${pageData.problem.description} ${cityName}. Available 24/7 with ${averageResponseTime} response time.`
     : `Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Trusted local experts near you available 24/7. Average response ${averageResponseTime}. Call for help now.`;
 
-  const seoKeywordsString = pageData.problem
+  const seoKeywordsString = pageData?.problem
     ? `${pageData.problem.slug}, ${cityName} ${pageData.problem.slug}, emergency ${tradeInfo.name.toLowerCase()}`
     : `emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`;
 
@@ -244,7 +322,7 @@ export default function TradeCityPage() {
         keywords={seoKeywordsString.split(', ')}
         canonical={`/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`}
         ogImage={heroImage}
-        jsonLd={[localBusinessSchema, faqSchema, breadcrumbSchema]}
+        jsonLd={[serviceSchema, faqSchema, breadcrumbSchema]}
       />
 
       <Header />
@@ -256,7 +334,7 @@ export default function TradeCityPage() {
           <div className="absolute inset-0 z-0">
             <img
               src={heroImage}
-              alt={pageData.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeInfo.name} ${cityName}`}
+              alt={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeInfo.name} ${cityName}`}
               className="w-full h-full object-cover"
               fetchPriority="high"
               loading="eager"
@@ -282,13 +360,13 @@ export default function TradeCityPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-foreground">
-                  {pageData.problem ? `${pageData.problem.name}s` : `${tradeInfo.name}s`} <span className="text-gold font-bold">available now</span> in {cityName}
+                  {pageData?.problem ? `${pageData.problem.name}s` : `${tradeInfo.name}s`} <span className="text-gold font-bold">available now</span> in {cityName}
                 </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2 text-balance">
-                  {pageData.problem ? pageData.problem.name : `Emergency ${tradeInfo.name}`}
+                  {pageData?.problem ? pageData.problem.name : `Emergency ${tradeInfo.name}`}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
                   in {cityName}
@@ -325,7 +403,7 @@ export default function TradeCityPage() {
 
         {/* Trust Section */}
         <section className="container-wide py-12">
-          {pageData.localExpertise && (
+          {pageData?.localExpertise && (
             <div className="mb-12 p-6 bg-gold/5 border border-gold/20 rounded-xl animate-fade-up">
               <div className="flex items-start gap-4">
                 <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden shadow-md">
@@ -390,7 +468,7 @@ export default function TradeCityPage() {
               Top Rated Local {tradeInfo.name}s Near {cityName}
             </h2>
             <p className="text-muted-foreground">
-              Found {totalCount} verified professionals nearby
+              Found {totalCount} verified professionals nearby {resultsCount > 50 && `(Showing top 50)`}
             </p>
           </div>
 
@@ -401,11 +479,64 @@ export default function TradeCityPage() {
               ))}
             </div>
           ) : (
-            <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredBusinesses.map((business, index) => (
-                <BusinessCard key={business.id} business={business} rank={index + 1} />
-              ))}
-            </div>
+            <>
+              <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                {currentBusinesses.map((business, index) => (
+                  <BusinessCard key={business.id} business={business} rank={startIndex + index + 1} />
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <Pagination className="mb-16">
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                        className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                      />
+                    </PaginationItem>
+
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      // Smart pagination logic to show relevant pages
+                      let pageNum = i + 1;
+                      if (totalPages > 5) {
+                        if (currentPage > 3) {
+                          pageNum = currentPage - 2 + i;
+                        }
+                        if (pageNum > totalPages) {
+                          pageNum = totalPages - (4 - i);
+                        }
+                      }
+
+                      return (
+                        <PaginationItem key={pageNum}>
+                          <PaginationLink
+                            isActive={currentPage === pageNum}
+                            onClick={() => handlePageChange(pageNum)}
+                            className="cursor-pointer"
+                          >
+                            {pageNum}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    })}
+
+                    {totalPages > 5 && currentPage < totalPages - 2 && (
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                    )}
+
+                    <PaginationItem>
+                      <PaginationNext
+                        onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                        className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              )}
+            </>
           )}
         </section>
 

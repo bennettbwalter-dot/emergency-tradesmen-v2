@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
-import { trades, cities } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
+import { useLocalization } from "@/contexts/LocalizationContext";
 import {
     Select,
     SelectContent,
@@ -18,6 +19,7 @@ import {
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
+    const { settings } = useLocalization();
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
@@ -80,11 +82,11 @@ export function EmergencyChatInterface() {
                     ...chatState,
                     detectedTrade: detectedTrade || chatState.detectedTrade,
                     detectedCity: detectedCity || chatState.detectedCity,
-                });
+                }, settings.countryCode);
 
                 setChatState(prev => ({
                     ...newState,
-                    history: [...prev.history, userMsg, response]
+                    history: [...prev.history, response]
                 }));
 
                 setDetectedTrade(newState.detectedTrade);
@@ -194,7 +196,9 @@ export function EmergencyChatInterface() {
                 >
                     <Wrench className="w-4 h-4 shrink-0 text-black dark:text-white" />
                     <SelectValue placeholder="Trade">
-                        <span className="text-sm font-medium truncate">{detectedTrade ? trades.find(t => t.slug === detectedTrade)?.name : "Trade"}</span>
+                        <span className="text-sm font-medium truncate">
+                            {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
+                        </span>
                     </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="bg-white border-gray-200">
@@ -204,7 +208,7 @@ export function EmergencyChatInterface() {
                             value={t.slug}
                             className="cursor-pointer hover:bg-gray-100 text-black"
                         >
-                            {t.name}
+                            {settings.countryCode === 'US' ? (t as any).usName : t.name}
                         </SelectItem>
                     ))}
                 </SelectContent>
@@ -221,7 +225,7 @@ export function EmergencyChatInterface() {
                     </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="bg-white border-gray-200">
-                    {cities.map((c) => (
+                    {(settings.countryCode === 'US' ? usCities : cities).map((c) => (
                         <SelectItem
                             key={c}
                             value={c}
@@ -240,7 +244,8 @@ export function EmergencyChatInterface() {
                         getLocation();
                         setIsRequestingLocation(false);
                     } else if (detectedTrade && detectedCity && !input.trim()) {
-                        navigate(`/emergency-${detectedTrade}/${detectedCity.toLowerCase()}`);
+                        const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
+                        navigate(`${countryPrefix}/emergency-${detectedTrade}/${detectedCity.toLowerCase()}`);
                     } else {
                         handleUserMessage(input);
                     }
@@ -315,16 +320,16 @@ export function EmergencyChatInterface() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
-                                    <div className={`max-w-[85%] md:max-w-[70%] p-4 rounded-2xl text-lg leading-relaxed ${msg.role === 'user'
+                                    <div className={`max-w-[90%] md:max-w-[70%] p-3 rounded-xl text-base md:text-lg leading-relaxed shadow-sm ${msg.role === 'user'
                                         ? 'bg-secondary text-secondary-foreground rounded-tr-sm'
-                                        : 'text-foreground bg-transparent'
+                                        : 'bg-transparent shadow-none p-0'
                                         }`}>
                                         {msg.role === 'assistant' && (
-                                            <div className="flex gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/80 to-gold/20 flex items-center justify-center shrink-0 shadow-lg">
-                                                    <Zap className="w-4 h-4 text-white" />
+                                            <div className="flex gap-3 md:gap-4 items-start">
+                                                <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center shrink-0 shadow-sm mt-1">
+                                                    <Zap className="w-5 h-5 text-black fill-current" />
                                                 </div>
-                                                <div className="pt-1 whitespace-pre-wrap">
+                                                <div className="pt-1 text-foreground">
                                                     {isLastMessage ? (
                                                         <TypewriterMessage
                                                             text={msg.content}
@@ -374,7 +379,7 @@ export function EmergencyChatInterface() {
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-8 py-6 text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
+                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
                         <div className="flex justify-end items-center gap-2 px-8 pb-4 bg-transparent w-full hidden md:flex">

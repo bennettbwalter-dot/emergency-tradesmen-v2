@@ -24,6 +24,7 @@ import { trades } from "@/lib/trades";
 import { db } from "@/lib/db";
 import { trackEvent } from "@/lib/analytics";
 import { ShareMenu } from "@/components/ShareMenu";
+import { getPostcodeForCity } from "@/lib/cityPostcodes";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
@@ -249,7 +250,8 @@ export default function BusinessProfilePage() {
         address: {
             "@type": "PostalAddress",
             addressLocality: city,
-            addressCountry: "UK"
+            addressCountry: "GB",
+            postalCode: business.postalCode || getPostcodeForCity(city)
         },
         aggregateRating: business.rating ? {
             "@type": "AggregateRating",

@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
                         </p>
                         <ul className="list-disc pl-5 text-slate-600 space-y-2 mt-2">
                             <li>Provide and maintain our service.</li>
-                            <li>Manage your account and subscription orders (processed via Revolut).</li>
+                            <li>Manage your account and subscription orders (processed via Stripe).</li>
                             <li>Send you newsletters or marketing communications (via EmailOctopus), only if you have opted in.</li>
                             <li>Improve our website functionality and user experience.</li>
                         </ul>
@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
                         </p>
                         <ul className="list-disc pl-5 text-slate-600 space-y-2 mt-2">
                             <li><strong>Google Maps:</strong> For location and mapping services.</li>
-                            <li><strong>Revolut:</strong> For secure payment processing.</li>
+                            <li><strong>Stripe:</strong> For secure payment processing.</li>
                             <li><strong>Supabase:</strong> For database hosting and authentication.</li>
                             <li><strong>EmailOctopus:</strong> For email marketing campaigns.</li>
                         </ul>

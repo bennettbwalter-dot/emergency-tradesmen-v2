@@ -104,3 +104,44 @@ export function findNearestSupportedCity(lat: number, lon: number): { city: stri
     }
     return null;
 }
+
+// Regex for valid UK Postcodes (Case Insensitive)
+export const POSTCODE_REGEX = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
+
+// Helper to find City from Postcode or Area Name
+import { cityPostcodes } from './cityPostcodes';
+
+export function getCityFromQuery(query: string): string | null {
+    const q = query.trim();
+
+    // 1. Check if it looks like a postcode start (e.g. "SW1", "M1")
+    // Simple heuristic: 1-2 letters + 1-2 numbers at start
+    const postcodeStart = q.match(/^([a-zA-Z]{1,2}[0-9]{1,2})/);
+    if (postcodeStart) {
+        const prefix = postcodeStart[0].toUpperCase();
+
+        // Search cityPostcodes values for this prefix
+        const foundCity = Object.keys(cityPostcodes).find(city => {
+            const code = cityPostcodes[city];
+            return code.startsWith(prefix);
+        });
+        if (foundCity) return foundCity;
+    }
+
+    // 2. Check for Area Names (Reverse Lookup)
+    // "Brixton" -> "London" (if Brixton is in our map and mapped to London's postcode?) 
+    // Actually cityPostcodes maps "Brixton" -> "SW2 1AA".
+    // We need to know which *Primary City* that Area belongs to.
+
+    // For now, if we match an Area aka "Brixton", we return "Brixton".
+    // But the routing needs a VALID CITY from the `cities` list.
+    // We need a mapping of Area -> Primary City.
+    // Existing logic in chat-logic.ts uses geocoding "Brixton" -> lat/lon -> Nearest Supported City (London).
+    // So we don't strictly need a map here IF we rely on geocoding.
+
+    // However, for direct string matching speed:
+    const directMatch = Object.keys(cityPostcodes).find(k => k.toLowerCase() === q.toLowerCase());
+    if (directMatch) return directMatch; // Returns "Brixton"
+
+    return null;
+}

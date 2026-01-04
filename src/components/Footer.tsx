@@ -55,9 +55,12 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <Link to="/locations" className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
-                View All Locations &rarr;
+            <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
+              <Link to="/" className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
+                Tradesmen Near Me &rarr;
+              </Link>
+              <Link to="/locations" className="text-white/40 hover:text-gold text-xs transition-colors flex items-center gap-2">
+                View All Locations
               </Link>
             </div>
           </div>

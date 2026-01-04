@@ -1,6 +1,7 @@
-import { trades, cities } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
 import { SAFETY_TIPS } from "@/services/gemini/constants";
-import { geocodeLocation, findNearestSupportedCity } from "@/lib/location-utils";
+import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
+import { cityPostcodes } from "@/lib/cityPostcodes";
 
 export interface ChatState {
     step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'ROUTING';
@@ -87,13 +88,59 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'car', 'accident', 'start', 'battery', 'tyre', 'flat',
         'tow', 'recovery', 'roadside', 'mechanic', 'clutch',
         'brakes', 'engine'
+    ],
+    roofer: [
+        'roof leak', 'leaking roof', 'water coming through roof', 'rain coming in',
+        'roof damaged', 'hole in roof', 'roof blown off', 'storm damage roof',
+        'roof emergency', 'missing tiles', 'broken tiles', 'cracked tiles',
+        'slipped tiles', 'roof tiles fallen', 'slate roof issue', 'flat roof leak',
+        'felt roof damage', 'chimney leak', 'flashing damaged', 'lead flashing',
+        'chimney stack problem', 'gutter leaking from roof', 'gutter pulled away',
+        'gutter overflow from roof', 'roofer', 'emergency roofer', 'roofing repair',
+        'roof repair', 'roof inspection', 'roof', 'tiles', 'chimney', 'leak from above'
+    ],
+    builder: [
+        // Structural & Wall
+        'cracked wall', 'wall cracking', 'internal wall crack', 'external wall crack',
+        'ceiling crack', 'ceiling collapsed', 'wall collapsed', 'structural damage',
+        'building damage', 'house damage', 'property damage', 'subsidence',
+        'sinking floor', 'uneven floor', 'foundation issue', 'support beam',
+
+        // Carpentry & Woodwork
+        'carpenter', 'carpentry work', 'woodwork', 'timber repair',
+        'wooden frame repair', 'door frame broken', 'door frame loose',
+        'window frame damaged', 'skirting board loose', 'skirting board fallen',
+        'architrave loose', 'bannister loose', 'handrail broken', 'stairs damaged',
+
+        // Doors, Cupboards & Fittings
+        'cupboard fallen', 'cupboard hanging off wall', 'kitchen unit fallen',
+        'wall cabinet fallen', 'shelf fallen', 'shelving repair',
+        'fitted wardrobe broken', 'wardrobe collapsed', 'door not closing properly',
+        'door off hinges', 'internal door repair',
+
+        // General Building & Maintenance
+        'builder', 'general builder', 'building work', 'maintenance work',
+        'property maintenance', 'home maintenance', 'house repair',
+        'general repair', 'emergency repair', 'damage repair',
+
+        // Brickwork & Masonry
+        'brickwork repair', 'bricks loose', 'bricks fallen', 'brick wall repair',
+        'damaged brickwork', 'repointing', 'pointing repair', 'masonry repair',
+
+        // Floors, Ceilings & Plaster
+        'floor damaged', 'floor collapsed', 'floor repair', 'ceiling repair',
+        'plaster cracked', 'plaster fallen', 'hole in wall', 'hole in ceiling',
+        'wall repair'
     ]
 };
 
 // ASYNC UPDATE: Returns Promise<{ newState, response }>
-export async function processUserMessage(message: string, currentState: ChatState): Promise<{ newState: ChatState, response: ChatMessage }> {
+export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
+
+    // Use appropriate city list based on country
+    const activeCities = countryCode === 'US' ? usCities : cities;
 
     // 1. DANGER CHECK (Keep existing safeguard but ensure it doesn't break flow if not critical)
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
@@ -145,7 +192,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
             response: {
                 id: Date.now().toString(),
                 role: 'assistant',
-                content: "I can help you find an emergency tradesperson immediately. I know about plumbing, electrical, gas, locks, drains, glazing, and breakdowns. Just tell me what's wrong."
+                content: "I can help you find an emergency tradesperson immediately. I know about plumbing, electrical, gas, locks, drains, glazing, roofing, building, and breakdowns. Just tell me what's wrong."
             }
         };
     }
@@ -158,21 +205,62 @@ export async function processUserMessage(message: string, currentState: ChatStat
         if (!lowerMsg.includes('fishy') && GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k))) {
             newState.detectedTrade = 'gas-engineer';
         } else {
-            // Check other trades
-            const tradeOrder = ['electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown'];
-            // Simple keyword matching from existing maps
+            // Check for specific trade matches
+            const detectedTrades: string[] = [];
+            const tradeOrder = ['electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown', 'roofer', 'gas-engineer'];
+
             for (const slug of tradeOrder) {
                 if (TRADE_KEYWORDS[slug]?.some(k => lowerMsg.includes(k))) {
-                    newState.detectedTrade = slug;
-                    break;
+                    detectedTrades.push(slug);
                 }
             }
-            // Disambiguation helpers (simplify to direct assignments if trade still null)
+
+            const isBuilder = TRADE_KEYWORDS['builder'].some(k => lowerMsg.includes(k));
+
+            // OVERLAP LOGIC: Builder + Specialized Trade
+            // If we have Builder keywords AND a specialized trade (e.g. Plumber), we clarify.
+            if (isBuilder && detectedTrades.length > 0) {
+                // If the user ALREADY answered the clarification question
+                if (lowerMsg.includes('structure') || lowerMsg.includes('fitting') || lowerMsg.includes('general')) {
+                    newState.detectedTrade = 'builder';
+                } else if (lowerMsg.includes('electric') || lowerMsg.includes('plumb') || lowerMsg.includes('gas')) {
+                    // Let the normal loop pick up the trade below, or stricter assignment here
+                    // We'll rely on the detectedTrades loop unless we want to force it.
+                    // For now, let's just return to the user to clarify if we are strictly in ambiguous state.
+                    // But if they said "plumbing", detectedTrades has 'plumber', so we can just let it flow.
+                    if (lowerMsg.includes('electric')) newState.detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('plumb')) newState.detectedTrade = 'plumber';
+                    else if (lowerMsg.includes('gas')) newState.detectedTrade = 'gas-engineer';
+                } else {
+                    // AMBIGUOUS -> ASK CLARIFICATION
+                    return {
+                        newState,
+                        response: {
+                            id: Date.now().toString(),
+                            role: 'assistant',
+                            content: "Is the issue with electrics, plumbing, gas, or the structure or fittings of the property?"
+                        }
+                    };
+                }
+            }
+
+            // If no trade identified yet
             if (!newState.detectedTrade) {
-                if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
-                else if (lowerMsg.includes('buzzing')) newState.detectedTrade = 'electrician'; // Added Red Flag
-                else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
-                else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
+                // 1. If strict specialized trade found, use it
+                if (detectedTrades.length > 0) {
+                    newState.detectedTrade = detectedTrades[0];
+                }
+                // 2. If no specialized trade, but IS builder -> Use Builder (Catch-all)
+                else if (isBuilder) {
+                    newState.detectedTrade = 'builder';
+                }
+                // 3. Fallbacks
+                else {
+                    if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('buzzing')) newState.detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
+                    else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
+                }
             }
         }
     }
@@ -184,12 +272,51 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     if (!newState.detectedCity) {
         // A. Strict Match First (Fast)
-        const foundCity = cities.find(c => lowerMsg.includes(c.toLowerCase()));
+        const foundCity = activeCities.find(c => lowerMsg.includes(c.toLowerCase()));
         if (foundCity) {
             newState.detectedCity = foundCity;
         }
+        // A.5 Postcode Extraction (High Precision)
+        else {
+            let handled = false;
+
+            // 1. Postcode Match
+            const pMatch = message.match(POSTCODE_REGEX);
+            if (pMatch) {
+                const cleanPostcode = pMatch[0].toUpperCase();
+                console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
+                const coords = await geocodeLocation(cleanPostcode, countryCode);
+                if (coords) {
+                    const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
+                    if (match) {
+                        newState.detectedCity = match.city;
+                        cityFallbackUsed = true;
+                        originalCity = cleanPostcode;
+                        handled = true;
+                    }
+                }
+            }
+
+            // 2. Area Name Match (e.g. "Brixton", "Camden")
+            if (!handled) {
+                const foundArea = Object.keys(cityPostcodes).find(area => lowerMsg.includes(area.toLowerCase()));
+                if (foundArea) {
+                    console.log(`[Voice] Area detected: ${foundArea}`);
+                    const coords = await geocodeLocation(foundArea, countryCode);
+                    if (coords) {
+                        const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
+                        if (match) {
+                            newState.detectedCity = match.city;
+                            cityFallbackUsed = true;
+                            originalCity = foundArea;
+                        }
+                    }
+                }
+            }
+        }
+
         // B. Nominatim Fallback (Slower but covers entire UK)
-        else if (newState.detectedTrade && !newState.detectedCity) {
+        if (!newState.detectedCity && newState.detectedTrade) {
             const isLocationStep = currentState.step === 'LOCATION_CHECK';
 
             // Heuristic: If we are asking for location, or message is short enough to be a location statement
@@ -202,9 +329,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
                     .trim();
 
                 if (locationQuery.length > 2) {
-                    const coords = await geocodeLocation(locationQuery);
+                    const coords = await geocodeLocation(locationQuery, countryCode);
                     if (coords) {
-                        const match = findNearestSupportedCity(coords.lat, coords.lon);
+                        const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
                         if (match) {
                             // SUCCESS: We mapped "Brixton" -> "London"
                             newState.detectedCity = match.city;
@@ -235,7 +362,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         const shouldSayTip = currentState.step !== 'LOCATION_CHECK';
         const advicePart = (shouldSayTip && tip) ? `${tip} ` : "";
 
-        let transition = "I’m taking you to the right Emergency Tradesmen page now.";
+        let transition = "I'm taking you to the right Emergency Tradesmen page now.";
 
         // Intelligent Fallback Message
         if (cityFallbackUsed) {
@@ -247,7 +374,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
         responseText = `${advicePart}${transition}`;
         action = 'navigate';
-        target = `/emergency-${newState.detectedTrade}/${city.toLowerCase()}`;
+        // Include /us prefix for US routes
+        const countryPrefix = countryCode === 'US' ? '/us' : '';
+        target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
         newState.step = 'ROUTING';
     }
     // CASE B: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
@@ -262,7 +391,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
             responseText = `${fallbackText} ${transition}`;
             action = 'navigate';
-            target = `/emergency-${newState.detectedTrade}`;
+            // Include /us prefix for US routes
+            const countryPrefix = countryCode === 'US' ? '/us' : '';
+            target = `${countryPrefix}/emergency-${newState.detectedTrade}`;
             newState.step = 'ROUTING';
         } else {
             // First time asking for location: GIVE TIP FIRST
