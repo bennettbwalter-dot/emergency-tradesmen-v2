@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Altitude Roofing",
+        "phone": "(505) 887-7663",
+        "address": "8612 Paseo Alameda NE Suite F, Albuquerque, NM 87113",
+        "website": "https://altituderoofingnm.com/"
+    },
+    {
+        "name": "Alex's Roofing and General Construction",
+        "phone": "(505) 873-6592",
+        "address": "Albuquerque, NM",
+        "website": "https://alexsroofingabq.com/"
+    },
+    {
+        "name": "Aztec Force Roofing",
+        "phone": "(505) 917-2421",
+        "address": "Albuquerque, NM",
+        "website": "https://aztecforceroofingllc.com/"
+    },
+    {
+        "name": "National Roofing",
+        "phone": "(505) 883-3000",
+        "address": "Albuquerque, NM",
+        "website": "https://nationalroofing.com/"
+    },
+    {
+        "name": "Blue Sky Roofing",
+        "phone": "(505) 966-6327",
+        "address": "Albuquerque, NM",
+        "website": "https://cabezonroofing.com/"
+    }
+]

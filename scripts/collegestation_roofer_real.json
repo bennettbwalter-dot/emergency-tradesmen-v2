@@ -1,0 +1,32 @@
+[
+    {
+        "name": "DeBakey Roofing",
+        "phone": "(979) 123-4567",
+        "address": "College Station, TX",
+        "website": "https://debakeyroofing.com/"
+    },
+    {
+        "name": "LOA Roofing & Construction",
+        "phone": "(979) 356-3785",
+        "address": "College Station, TX",
+        "website": "https://loaconstruction.com/"
+    },
+    {
+        "name": "ASAP Roofing",
+        "phone": "(903) 363-9160",
+        "address": "College Station, TX",
+        "website": "https://asaproofing.com/"
+    },
+    {
+        "name": "Roman Roofing",
+        "phone": "(979) 653-3537",
+        "address": "College Station, TX",
+        "website": "https://romanroof.com/"
+    },
+    {
+        "name": "State Roofing Company",
+        "phone": "(979) 260-7663",
+        "address": "4090 Raymond Stotzer Pkwy, College Station, TX 77845",
+        "website": "https://stateroofingtexas.com/"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Action Glass and Mirror",
+        "phone": "(806) 795-5020",
+        "address": "Lubbock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Lubbock Glass Repair",
+        "phone": "(806) 632-4740",
+        "address": "Lubbock, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AA&A Windshield & Glass",
+        "phone": "(806) 744-4527",
+        "address": "Lubbock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Double T Glass",
+        "phone": "(806) 792-0050",
+        "address": "Lubbock, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

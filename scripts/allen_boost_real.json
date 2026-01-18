@@ -1,0 +1,154 @@
+[
+    {
+        "name": "Roto-Rooter Allen",
+        "phone": "(214) 273-2549",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "On Call Plumbers",
+        "phone": "(972) 954-4646",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Berkeys Allen",
+        "phone": "(972) 464-2460",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Triple Crown Plumbing",
+        "phone": "(972) 544-6544",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Baker Brothers Allen",
+        "phone": "(214) 892-2225",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Plumbing Dynamics",
+        "phone": "(214) 929-3431",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "North Texas Custom Plumbing",
+        "phone": "(972) 382-8324",
+        "address": "Allen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Sawyers Electrical, LLC",
+        "phone": "(214) 205-2885",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Accurate Electric LLC",
+        "phone": "(214) 718-9648",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Cano Electric",
+        "phone": "(817) 242-2826",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Nova Electrical Contractors",
+        "phone": "(972) 573-4745",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Benchmark Electrical Services",
+        "phone": "(469) 202-4624",
+        "address": "Allen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Locksmith in Allen",
+        "phone": "(972) 535-6774",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Locksmith In Allen",
+        "phone": "(972) 527-6164",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AJ Locksmith and Security Allen",
+        "phone": "(214) 935-3614",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Allen Locksmith Store",
+        "phone": "(972) 512-6338",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Allen Locksmith Service",
+        "phone": "(972) 512-6339",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "DML Locksmith Services",
+        "phone": "(214) 622-8852",
+        "address": "Allen, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    }
+]

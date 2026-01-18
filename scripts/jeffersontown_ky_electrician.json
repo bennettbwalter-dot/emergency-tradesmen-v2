@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Royal Electrical Service",
+        "phone": "(502) 690-2307",
+        "address": "Jeffersontown, KY",
+        "website": "https://royalelectricalservice.com"
+    },
+    {
+        "name": "Tom Drexler Electric",
+        "phone": "(502) 456-5982",
+        "address": "Jeffersontown, KY",
+        "website": "https://tomdrexlerplumbing.com"
+    },
+    {
+        "name": "Mister Sparky Jeffersontown",
+        "phone": "(888) 826-0091",
+        "address": "Jeffersontown, KY",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Corrigan Electric",
+        "phone": "(502) 267-4600",
+        "address": "Louisville, KY",
+        "website": "https://corriganelectric.com"
+    }
+]

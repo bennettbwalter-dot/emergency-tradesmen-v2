@@ -1,0 +1,26 @@
+[
+    {
+        "name": "CAR Electric",
+        "phone": "919-914-9104",
+        "address": "Chapel Hill, NC",
+        "website": "https://electricalcontractorchapelhill.com"
+    },
+    {
+        "name": "Mr. Electric of Chapel Hill",
+        "phone": "919-636-6729",
+        "address": "Chapel Hill, NC",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Chapel Hill, NC",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Durham Volt Doctor",
+        "phone": "919-236-7167",
+        "address": "Chapel Hill, NC",
+        "website": "https://durhamelectricalservices.com"
+    }
+]

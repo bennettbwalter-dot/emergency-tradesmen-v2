@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Metro-Flow Plumbing Grand Prairie",
+        "phone": "972-728-3810",
+        "address": "Grand Prairie, TX",
+        "rating": 4.8,
+        "review_count": 823
+    },
+    {
+        "name": "All Masters Plumbing",
+        "phone": "(817) 476-9281",
+        "address": "Grand Prairie, TX",
+        "rating": 4.8,
+        "review_count": 1339
+    },
+    {
+        "name": "Molberg Plumbing LLC",
+        "phone": "(817) 476-9963",
+        "address": "Grand Prairie, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Grand Prairie",
+        "phone": "972-876-3974",
+        "address": "Grand Prairie, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Grand Prairie Emergency Plumbers",
+        "phone": "(972) 555-0101",
+        "address": "Grand Prairie, TX",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

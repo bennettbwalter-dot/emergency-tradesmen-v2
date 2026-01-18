@@ -1,0 +1,114 @@
+[
+    {
+        "name": "Paul Bunyan Plumbing & Drains",
+        "address": "Minneapolis, MN",
+        "phone": "612-340-1444",
+        "trade": "plumber",
+        "city": "Minneapolis"
+    },
+    {
+        "name": "Minneapolis Locksmith",
+        "address": "1367 Willow Street, Minneapolis, MN 55403",
+        "phone": "612-594-7739",
+        "trade": "locksmith",
+        "city": "Minneapolis"
+    },
+    {
+        "name": "EZ Plumbing & Drains",
+        "address": "St. Paul, MN",
+        "phone": "651-227-0098",
+        "trade": "plumber",
+        "city": "St. Paul"
+    },
+    {
+        "name": "St Paul Locksmith",
+        "address": "51 Signal Hills Ctr, Saint Paul, MN 55118",
+        "phone": "651-409-3336",
+        "trade": "locksmith",
+        "city": "St. Paul"
+    },
+    {
+        "name": "Wooten Knockout Plumbing",
+        "address": "Tulsa, OK",
+        "phone": "918-367-8887",
+        "trade": "plumber",
+        "city": "Tulsa"
+    },
+    {
+        "name": "Lock Genius Tulsa",
+        "address": "Tulsa, OK 74133",
+        "phone": "918-410-0222",
+        "trade": "locksmith",
+        "city": "Tulsa"
+    },
+    {
+        "name": "Dusk till Dawn Plumbing",
+        "address": "1216 West 29th Street South, Wichita, KS 67217",
+        "phone": "316-665-1747",
+        "trade": "plumber",
+        "city": "Wichita"
+    },
+    {
+        "name": "ASAP Locksmith 24-7",
+        "address": "Wichita, KS",
+        "phone": "316-241-8799",
+        "trade": "locksmith",
+        "city": "Wichita"
+    },
+    {
+        "name": "Southside Plumbing",
+        "address": "Omaha, NE",
+        "phone": "402-345-8668",
+        "trade": "plumber",
+        "city": "Omaha"
+    },
+    {
+        "name": "Locksmith Pro Kansas City",
+        "address": "Kansas City, KS 66101",
+        "phone": "816-256-3575",
+        "trade": "locksmith",
+        "city": "Kansas City"
+    },
+    {
+        "name": "T.C.R. Rooter & Plumbing",
+        "address": "1076 Classic Road, Apex, NC 27539",
+        "phone": "919-467-2207",
+        "trade": "plumber",
+        "city": "Raleigh"
+    },
+    {
+        "name": "Locksmith Raleigh NC",
+        "address": "6325 Falls of Neuse Rd, Raleigh, NC 27609",
+        "phone": "919-737-2829",
+        "trade": "locksmith",
+        "city": "Raleigh"
+    },
+    {
+        "name": "Drain Masters Plumbing",
+        "address": "Virginia Beach, VA 23464",
+        "phone": "757-481-5894",
+        "trade": "plumber",
+        "city": "Virginia Beach"
+    },
+    {
+        "name": "Virginia Beach Locksmith",
+        "address": "1609 Atlantic Ave, Virginia Beach, VA 23451",
+        "phone": "757-255-6032",
+        "trade": "locksmith",
+        "city": "Virginia Beach"
+    },
+    {
+        "name": "Underground Rooter Sewer & Drains",
+        "address": "Oakland, CA",
+        "phone": "510-443-0997",
+        "trade": "plumber",
+        "city": "Oakland"
+    },
+    {
+        "name": "24 Hour Mobile Locksmith",
+        "address": "1939 Harrison Street, Oakland, CA 94612",
+        "phone": "510-379-9323",
+        "trade": "locksmith",
+        "city": "Oakland"
+    }
+]

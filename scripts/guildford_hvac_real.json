@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Guildford Plumbers",
+        "phone": "01483 355 614",
+        "address": "Guildford, Surrey",
+        "website": "https://guildfordplumbers.co.uk/"
+    },
+    {
+        "name": "Paratus Heating",
+        "phone": "07948 839 094",
+        "address": "Guildford",
+        "website": "https://paratusheating.co.uk/"
+    },
+    {
+        "name": "Surrey Gas",
+        "phone": "0333 050 6802",
+        "address": "Guildford",
+        "website": "https://surrey-gas.com/"
+    },
+    {
+        "name": "C.S. Plumbing and Heating Services Ltd",
+        "phone": "0800 015 61 71",
+        "address": "GU1 - GU4, Guildford",
+        "website": "https://csheating-ltd.com/"
+    },
+    {
+        "name": "Swift Plumber",
+        "phone": "01483 928084",
+        "address": "Guildford",
+        "website": "https://swiftplumber.co.uk/"
+    }
+]

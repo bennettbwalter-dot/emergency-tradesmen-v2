@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Emergency Glass INC.",
+        "phone": "(210) 896-0126",
+        "address": "San Antonio, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Infinity Glass & Mirror",
+        "phone": "210-655-4527",
+        "address": "San Antonio, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Door and Glass Company",
+        "phone": "210-772-8546",
+        "address": "San Antonio, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Proline Glass & Mirror",
+        "phone": "(210) 799-0196",
+        "address": "San Antonio, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mission Glass",
+        "phone": "(210) 523-7327",
+        "address": "San Antonio, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Howard, WI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Patriot Electrical Solutions",
+        "phone": "(920) 228-0877",
+        "address": "Howard, WI",
+        "website": "https://patriotelectricalsolutions.com"
+    },
+    {
+        "name": "Edge Electric",
+        "phone": "(800) 364-3343",
+        "address": "Howard, WI",
+        "website": "https://edgeelectricwi.com"
+    },
+    {
+        "name": "IdealAir Heating & Cooling",
+        "phone": "(920) 335-8868",
+        "address": "Howard, WI",
+        "website": "https://idealair.com"
+    }
+]

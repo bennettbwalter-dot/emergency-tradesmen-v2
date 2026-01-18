@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Irvine",
+        "phone": "(949) 763-2794",
+        "address": "Irvine, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Rooter Hero Irvine",
+        "phone": "(714) 519-2230",
+        "address": "Irvine, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Positive Plumbing Heating",
+        "phone": "949-933-5036",
+        "address": "Irvine, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Barker and Sons Plumbing",
+        "phone": "(714) 630-8266",
+        "address": "Irvine, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Irvine Emergency Plumbers",
+        "phone": "(949) 555-0101",
+        "address": "Irvine, CA",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

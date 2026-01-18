@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Boston Glass & Boarding Service Inc.",
+        "phone": "(617) 298-5755",
+        "address": "Boston, MA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Good Window Works",
+        "phone": "(857) 226-0007",
+        "address": "Boston, MA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Window Repair Boston",
+        "phone": "(617) 888-0474",
+        "address": "Boston, MA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Allstate Auto Glass",
+        "phone": "(781) 331-3344",
+        "address": "Boston, MA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 310
+    }
+]

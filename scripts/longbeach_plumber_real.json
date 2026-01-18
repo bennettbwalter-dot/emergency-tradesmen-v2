@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Long Beach",
+        "phone": "(562) 424-0025",
+        "address": "Long Beach, CA",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Long Beach Plumbing Pros",
+        "phone": "(562) 267-5770",
+        "address": "Long Beach, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "A1 Best Plumbing",
+        "phone": "(562) 268-5480",
+        "address": "Long Beach, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Puddles Plumbing",
+        "phone": "(562) 472-0012",
+        "address": "Long Beach, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Top Local Plumbers Long Beach",
+        "phone": "(833) 381-3130",
+        "address": "Long Beach, CA",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

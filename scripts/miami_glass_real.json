@@ -1,0 +1,42 @@
+[
+    {
+        "name": "A Bob's Glass Repair",
+        "phone": "305-879-8596",
+        "address": "Miami, FL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "A Seel Glass Windows & Doors",
+        "phone": "(305) 986-9829",
+        "address": "Miami, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Express Glass Repairs",
+        "phone": "(954) 350-1808",
+        "address": "Miami, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Glass Doctor of Miami",
+        "phone": "(305) 477-0721",
+        "address": "Miami, FL",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "High Service Glass Florida",
+        "phone": "(305) 231-4897",
+        "address": "Miami, FL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    }
+]

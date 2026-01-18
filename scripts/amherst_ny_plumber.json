@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Amherst Plumbing",
+        "phone": "(716) 271-5761",
+        "address": "Amherst, NY",
+        "website": "https://amherstnyplumbing.com"
+    },
+    {
+        "name": "Frank's Mr. Plumber",
+        "phone": "(716) 876-6000",
+        "address": "Amherst, NY",
+        "website": "https://callmrplumber.com"
+    },
+    {
+        "name": "T-Mark Plumbing, Heating, Cooling & Electric",
+        "phone": "(716) 249-0029",
+        "address": "Amherst, NY",
+        "website": "https://t-markplumbing.com"
+    },
+    {
+        "name": "Ritter & Sentry Plumbing",
+        "phone": "(716) 894-4181",
+        "address": "Amherst, NY",
+        "website": "https://rittersentryplumbing.com"
+    }
+]

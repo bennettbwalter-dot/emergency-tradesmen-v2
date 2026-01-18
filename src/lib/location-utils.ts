@@ -56,11 +56,16 @@ export const SUPPORTED_LOCATIONS: Record<string, { lat: number; lon: number }> =
 export async function geocodeLocation(query: string, countryCode: string = 'GB'): Promise<{ lat: number; lon: number; displayName: string } | null> {
     try {
         const countrySuffix = countryCode.toUpperCase() === 'US' ? ', USA' : ', UK';
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3s Timeout
+
         const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + countrySuffix)}&limit=1`, {
             headers: {
                 'User-Agent': 'EmergencyTradesmen/1.0 (emergencytradesmen@outlook.com)'
-            }
+            },
+            signal: controller.signal
         });
+        clearTimeout(timeoutId);
 
         if (!response.ok) return null;
 

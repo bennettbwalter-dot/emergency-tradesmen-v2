@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Huddersfield Heating Services",
+        "phone": "01484 646 626",
+        "address": "Permanent House, 1 Dundas Street, Huddersfield HD1 2EX",
+        "website": "https://huddersfieldheatingservices.co.uk/"
+    },
+    {
+        "name": "Huddersfield Plumbers",
+        "phone": "01484 627 366",
+        "address": "Huddersfield",
+        "website": "https://huddersfieldplumbing.co.uk/"
+    },
+    {
+        "name": "Plumbcare.com",
+        "phone": "0333 577 0151",
+        "address": "Wakefield (serving Huddersfield)",
+        "website": "https://plumbcare.com/"
+    },
+    {
+        "name": "Group Opus",
+        "phone": "01484 613203",
+        "address": "Huddersfield",
+        "website": "https://group-opus.com/"
+    },
+    {
+        "name": "BoilerFix 247",
+        "phone": "01484 646 626",
+        "address": "Huddersfield",
+        "website": "https://boilerfix247.co.uk/"
+    }
+]

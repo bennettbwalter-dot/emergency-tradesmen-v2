@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Air Specialist",
+        "phone": "(713) 481-1305",
+        "address": "Sugar Land, TX",
+        "rating": 4.9,
+        "review_count": 5200
+    },
+    {
+        "name": "Clear The Air Cooling & Heating",
+        "phone": "(281) 612-1031",
+        "address": "Sugar Land, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Conditioned Air Mechanical",
+        "phone": "(281) 201-0356",
+        "address": "Sugar Land, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "The Chill Brothers",
+        "phone": "(844) 512-4455",
+        "address": "Sugar Land, TX",
+        "rating": 4.7,
+        "review_count": 1900
+    },
+    {
+        "name": "Sun Air Conditioning & Heating",
+        "phone": "(281) 262-1110",
+        "address": "Sugar Land, TX",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

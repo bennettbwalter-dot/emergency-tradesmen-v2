@@ -13,13 +13,14 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { generateTradePageData, cities, usCities } from "@/lib/trades";
+import { generateTradePageData, cities, usCities, cityToState } from "@/lib/trades";
+import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
-import { Phone, Clock, CheckCircle, MapPin, PoundSterling, Shield, Navigation } from "lucide-react";
+import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
@@ -39,60 +40,112 @@ import {
 } from "@/components/ui/pagination";
 
 export default function TradeCityPage() {
-  const { countryCode, tradePath, city, state } = useParams<{ countryCode: string; tradePath: string; city: string; state?: string }>();
+  const { countryCode, tradePath, city, state, area, metro, suburb } = useParams<{
+    countryCode: string;
+    tradePath: string;
+    city: string;
+    state?: string;
+    area?: string;
+    metro?: string;
+    suburb?: string;
+  }>();
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 9;
 
-  console.log("TradeCityPage Debug:", { countryCode, tradePath, city, state });
-
-  // Normalize inputs for US routes
-  // If we have 3 params (state exists), then tradePath is the trade.
-  // If we have 2 params (state is undefined, but check if tradePath is actually a state for US),
-  // handle the ambiguity.
-
   const location = useLocation();
 
-  // If tradePath param is missing (explicit route), derive from URL
-  const effectiveTradePath = tradePath || location.pathname.split('/')[1];
+  // Debug Params
+  console.log("TradeCityPage Debug:", {
+    path: location.pathname,
+    params: { countryCode, tradePath, city, state, area, metro, suburb }
+  });
 
-  let validTrade = effectiveTradePath ? effectiveTradePath.replace("emergency-", "") : "";
-  // Ensure we decode the city to handle %20 or other encoded chars from chatbot/URL
-  let validCity = city ? decodeURIComponent(city) : "";
+  // Resolution Logic for Hierarchy
+  const rawTargetLocation = suburb || area || city || metro || state;
+  // CRITICAL FIX: Default to 'London' (or National) if no city provided to prevent crash
+  let validCity = rawTargetLocation ? decodeURIComponent(rawTargetLocation) : (countryCode === 'US' ? 'New York' : 'London');
 
-  // Handle /us/ca/los-angeles case where "ca" is passed as tradePath
-  const isUS = countryCode === 'us';
-  const knownStates = ['ca', 'tx', 'ny', 'fl']; // Add used states
+  // FIX: US Routing Ambiguity
+  // If tradePath matches a known US state (e.g. /us/texas/dallas matched as :tradePath/:city),
+  // treat it as state, not trade.
+  let effectiveTradePath = tradePath;
+  let effectiveState = state;
 
-  if (isUS && !state && effectiveTradePath && knownStates.includes(effectiveTradePath.toLowerCase())) {
-    // We are in /us/state/city mode (City Landing Page)
-    // Shift variables: tradePath was actually state, city is city, trade is generic
-    // validState = effectiveTradePath; (unused in logic but conceptually true)
-    validTrade = "default"; // Use default/generic trade
+  if (!effectiveState && effectiveTradePath && US_STATES.some(s => s.slug === effectiveTradePath)) {
+    effectiveState = effectiveTradePath;
+    effectiveTradePath = undefined;
   }
 
-  const pageData = generateTradePageData(validTrade, validCity, countryCode?.toUpperCase());
+  // Resolution Logic for Trade
+  let validTrade = effectiveTradePath ? effectiveTradePath.replace("emergency-", "") : "default";
+
+  // Fallback for explicit routes (e.g. /emergency-plumber/:city) where tradePath param is missing from useParams
+  if (validTrade === "default") {
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    // Find the segment that looks like a trade (starts with emergency- or matches a known trade)
+    const tradeSegment = pathSegments.find(s => s.startsWith('emergency-') || ['plumber', 'electrician', 'locksmith'].includes(s));
+
+    if (tradeSegment) {
+      validTrade = tradeSegment.replace("emergency-", "");
+    }
+  }
+
+  // Handle /us/ca/los-angeles legacy ambiguity if needed, but new router prevents most.
+  // We keep it simple: Trust params.
+
+  const country = countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB');
+
+  // Pass state and metro context to generator for strict lookup
+  const pageData = generateTradePageData(
+    validTrade,
+    validCity,
+    country,
+    effectiveState,
+    metro
+  );
 
   // Normalize cities for check (handles hyphens from URL)
   const normalizedCitiesGB = cities.map(c => c.toLowerCase().replace(/\s+/g, '-'));
-  const normalizedCitiesUS = usCities.map(c => c.toLowerCase().replace(/\s+/g, '-'));
+  // We can't just check usCities array anymore because it doesn't contain suburbs
+  // We rely on generateTradePageData to have validated it, or we need a robust check.
+  // Since pageData is already generated above using generateTradePageData(..., validCity, ...),
+  // we can check if pageData was successfully returned and what country it thinks it is.
 
-  const isCityUS = normalizedCitiesUS.includes(validCity.toLowerCase().replace(/\s+/g, '-'));
-  const isCityGB = normalizedCitiesGB.includes(validCity.toLowerCase().replace(/\s+/g, '-'));
+  // However, we need to know if it's supposed to be US or GB for the Redirect logic below.
+  // If pageData exists, we can trust it?
 
-  const actualCountry = isCityUS ? 'US' : (isCityGB ? 'GB' : (countryCode?.toUpperCase() || 'GB'));
+  // Let's make a more robust check using our Knowledge Base (or us_cities.json implicitly available via imports in trades.ts but not here directly efficiently)
+  // Actually, we can use the `pageData` result. generateTradePageData returns null if not found.
+  // But wait, generateTradePageData might return data even if not found if we passed 'US' as countryCode (it falls back to input name).
 
-  if (countryCode && countryCode.toLowerCase() !== actualCountry.toLowerCase()) {
-    console.log(`[TradeCityPage] REGION MISMATCH: Route is ${countryCode}, City ${validCity} belongs to ${actualCountry}. Redirecting...`);
-    // Ensure we don't redirect to /us/default/city if trade is missing
-    const tradeForUrl = validTrade && validTrade !== 'default' ? `emergency-${validTrade}` : 'emergency-plumber';
-    const newPath = actualCountry === 'US' ? `/us/${tradeForUrl}/${validCity.toLowerCase().replace(/\s+/g, '-')}` : `/${tradeForUrl}/${validCity.toLowerCase().replace(/\s+/g, '-')}`;
-    return <Navigate to={newPath} replace />;
-  }
+  // Let's assume if the route is /us/..., we are looking for US.
+  // The redirect logic below deals with "Region Mismatch".
+
+  const isCityUS = countryCode === 'us' || (pageData && pageData.city && usCities.includes(pageData.city)) || false;
+  // This is imperfect. Better:
+
+  // If we are in /us route, we assume US.
+  // If we are in /... (GB) route, we assume GB.
+  // The Mismatch logic tries to catch: user goes to /london (GB) but london is US? No.
+  // It catches: user goes to /us/london (if london is GB only) -> Redirect to /london.
+
+  // Ideally we use `getLocationIndex` but that's overkill to import here if we can avoid it.
+  // Let's rely on simple heuristic + explicit countryCode param.
+
+  // Region Mismatch / Redirects
+  // We trust the URL structure for Country determination.
+  // /us/... -> US
+  // /... -> GB
+  const actualCountry = (location.pathname.startsWith('/us') || countryCode?.toLowerCase() === 'us' || pageData?.countryCode === 'US') ? 'US' : 'GB';
+
+  // Only redirect if there is a glaring mismatch (e.g. city definitely wrong?)
+  // For now, removing strict redirect allows new US locations to work without "white-listing" in trades.ts
+  // Old logic removed.
 
   const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' };
-  const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'Nationwide' : 'United Kingdom');
+  const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
 
   const serviceAreas = pageData?.serviceAreas || [];
   const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';
@@ -113,7 +166,8 @@ export default function TradeCityPage() {
     'default': 'https://images.unsplash.com/photo-1469122312224-c5846569efe1?q=80&w=2070&auto=format&fit=crop'
   };
 
-  const heroImage = tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
+  // Prefer image from trade config (trades.ts) if available, otherwise fallback to local map
+  const heroImage = pageData?.problem?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
   // Fetch real businesses from Supabase
   useEffect(() => {
@@ -125,24 +179,24 @@ export default function TradeCityPage() {
     async function loadBusinesses() {
       setIsLoading(true);
       try {
-        console.log('Fetching businesses for:', { trade: tradeInfo.slug, city: validCity, countryCode });
-        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, countryCode);
+        console.log('Fetching businesses for:', { trade: tradeInfo.slug, city: validCity, countryCode: actualCountry });
+        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry);
         console.log('Real businesses fetched:', realBusinesses.length);
 
-        // If no real businesses found, fallback to mock data
+        // If no real businesses found, fallback to static/mock data (now strictly limited)
         if (realBusinesses.length === 0) {
-          console.warn('No real businesses found. Checking mock data...');
-          const mockBusinesses = getBusinessListings(validCity, tradeInfo.slug, countryCode?.toUpperCase());
-          console.log('Mock businesses found:', mockBusinesses?.length);
-          setBusinesses(mockBusinesses || []);
+          console.warn('No real businesses found. Checking static list...');
+          const staticBusinesses = getBusinessListings(validCity, tradeInfo.slug, actualCountry);
+          console.log('Static businesses found:', staticBusinesses?.length);
+          setBusinesses(staticBusinesses || []);
         } else {
           setBusinesses(realBusinesses);
         }
       } catch (error) {
         console.error('Error loading businesses:', error);
-        // Fallback to mock data on error
-        const mockBusinesses = getBusinessListings(cityName, tradeInfo.slug, countryCode?.toUpperCase());
-        setBusinesses(mockBusinesses);
+        // Fallback to static list on error
+        const staticBusinesses = getBusinessListings(cityName, tradeInfo.slug, actualCountry);
+        setBusinesses(staticBusinesses || []);
       } finally {
         setIsLoading(false);
       }
@@ -197,8 +251,9 @@ export default function TradeCityPage() {
   }, [filters, city, tradePath]);
 
   // Early returns must happen AFTER hooks
-  if (!effectiveTradePath) {
-    console.warn("TradeCityPage: Missing tradePath, redirecting home.", { effectiveTradePath });
+  const validatedTradePath = tradeInfo.slug;
+  if (!validatedTradePath) {
+    console.warn("TradeCityPage: Missing tradePath, redirecting home.", { validatedTradePath });
     return <Navigate to="/" replace />;
   }
 
@@ -213,7 +268,7 @@ export default function TradeCityPage() {
       userName: "Verified Customer",
       userInitials: "VC",
       rating: b.rating,
-      title: "Verified Google Review",
+      title: "Verified Review",
       comment: b.featuredReview!,
       date: new Date().toISOString(),
       verified: true,
@@ -232,12 +287,12 @@ export default function TradeCityPage() {
     name: `Emergency ${tradeInfo.name} ${cityName}`,
     description: `24/7 emergency ${tradeInfo.name.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
-    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "020 3835 1566", // General contact or dynamic if available
+    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456", // General contact or dynamic if available
     url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
     "serviceType": `Emergency ${tradeInfo.name}`,
     "provider": {
       "@type": "Organization",
-      "name": "Emergency Tradesmen UK",
+      "name": `Emergency Tradesmen ${countryCode?.toUpperCase() === 'US' ? 'US' : 'UK'}`,
       "url": "https://emergencytradesmen.net"
     },
 
@@ -320,12 +375,17 @@ export default function TradeCityPage() {
         title={seoTitle}
         description={seoDescription}
         keywords={seoKeywordsString.split(', ')}
-        canonical={`/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`}
+        canonical={actualCountry === 'US'
+          ? `/us/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
+          : `/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
+        }
         ogImage={heroImage}
         jsonLd={[serviceSchema, faqSchema, breadcrumbSchema]}
       />
 
-      <Header />
+
+
+      <Header countryCode={actualCountry} />
 
       <main>
         {/* Hero Section */}
@@ -421,6 +481,21 @@ export default function TradeCityPage() {
               </div>
             </div>
           )}
+
+          {/* Coverage Map Section */}
+          <div className="mb-12 h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group">
+            <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 text-sm font-medium">
+              Real-time local coverage: {cityName}
+            </div>
+            <InteractiveMap
+              city={cityName}
+              countryCode={actualCountry}
+              showBusinesses={true}
+              businesses={businesses}
+              className="w-full h-full"
+            />
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map((cert, index) => (
               <div key={index} className="flex items-center gap-3 p-5 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-colors">
@@ -480,62 +555,77 @@ export default function TradeCityPage() {
             </div>
           ) : (
             <>
-              <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                {currentBusinesses.map((business, index) => (
-                  <BusinessCard key={business.id} business={business} rank={startIndex + index + 1} />
-                ))}
-              </div>
+              <>
+                {businesses.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center">
+                    <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-4">
+                      <Clock className="w-8 h-8 text-gold" />
+                    </div>
+                    <h3 className="text-2xl font-display font-semibold mb-2">Listings coming soon</h3>
+                    <p className="text-muted-foreground max-w-md mx-auto">
+                      We're currently vetting verified {tradeInfo.name.toLowerCase()} professionals in {cityName}.
+                      Check back soon or try a nearby location.
+                    </p>
+                  </div>
+                ) : (
+                  <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                    {currentBusinesses.map((business, index) => (
+                      <BusinessCard key={business.id} business={business} rank={startIndex + index + 1} />
+                    ))}
+                  </div>
+                )}
 
-              {totalPages > 1 && (
-                <Pagination className="mb-16">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious
-                        onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                        className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                      />
-                    </PaginationItem>
-
-                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                      // Smart pagination logic to show relevant pages
-                      let pageNum = i + 1;
-                      if (totalPages > 5) {
-                        if (currentPage > 3) {
-                          pageNum = currentPage - 2 + i;
-                        }
-                        if (pageNum > totalPages) {
-                          pageNum = totalPages - (4 - i);
-                        }
-                      }
-
-                      return (
-                        <PaginationItem key={pageNum}>
-                          <PaginationLink
-                            isActive={currentPage === pageNum}
-                            onClick={() => handlePageChange(pageNum)}
-                            className="cursor-pointer"
-                          >
-                            {pageNum}
-                          </PaginationLink>
-                        </PaginationItem>
-                      );
-                    })}
-
-                    {totalPages > 5 && currentPage < totalPages - 2 && (
+                {totalPages > 1 && (
+                  <Pagination className="mb-16">
+                    <PaginationContent>
                       <PaginationItem>
-                        <PaginationEllipsis />
+                        <PaginationPrevious
+                          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                          className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
                       </PaginationItem>
-                    )}
 
-                    <PaginationItem>
-                      <PaginationNext
-                        onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-                        className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                      />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              )}
+                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                        // Smart pagination logic to show relevant pages
+                        let pageNum = i + 1;
+                        if (totalPages > 5) {
+                          if (currentPage > 3) {
+                            pageNum = currentPage - 2 + i;
+                          }
+                          if (pageNum > totalPages) {
+                            pageNum = totalPages - (4 - i);
+                          }
+                        }
+
+                        return (
+                          <PaginationItem key={pageNum}>
+                            <PaginationLink
+                              isActive={currentPage === pageNum}
+                              onClick={() => handlePageChange(pageNum)}
+                              className="cursor-pointer"
+                            >
+                              {pageNum}
+                            </PaginationLink>
+                          </PaginationItem>
+                        );
+                      })}
+
+                      {totalPages > 5 && currentPage < totalPages - 2 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )}
+
+                      <PaginationItem>
+                        <PaginationNext
+                          onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                          className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                )}
+              </>
             </>
           )}
         </section>
@@ -580,7 +670,11 @@ export default function TradeCityPage() {
             <div className="bg-card rounded-lg border border-border/50 p-8 hover:border-gold/30 transition-colors">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center">
-                  <PoundSterling className="w-6 h-6 text-gold" />
+                  {actualCountry === 'US' ? (
+                    <DollarSign className="w-6 h-6 text-gold" />
+                  ) : (
+                    <PoundSterling className="w-6 h-6 text-gold" />
+                  )}
                 </div>
                 <h2 className="font-display text-xl tracking-wide text-foreground">Emergency Rates</h2>
               </div>
@@ -643,7 +737,7 @@ export default function TradeCityPage() {
                 Are you a qualified <span className="text-gold">{tradeInfo.name}</span> in {cityName}?
               </h2>
               <p className="text-white/60 text-lg mb-10 leading-relaxed">
-                Join the UK's fastest growing emergency trade network. Receive high-intent leads from customers in your area who need help right now.
+                Join the fastest growing emergency trade network. Receive high-intent leads from customers in your area who need help right now.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -672,13 +766,14 @@ export default function TradeCityPage() {
         </section>
       </main>
 
-      <Footer />
+      <Footer countryCode={actualCountry} />
 
       {/* Floating CTA for Mobile Conversion */}
       <FloatingEmergencyCTA
         business={filteredBusinesses.find(b => b.is_premium) || filteredBusinesses[0]}
         trade={tradeInfo.name}
         city={cityName}
+        countryCode={actualCountry}
       />
 
       <WriteReviewModal

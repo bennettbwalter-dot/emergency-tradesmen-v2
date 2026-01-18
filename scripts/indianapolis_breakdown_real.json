@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rescue Towing & Recovery LLC",
+        "phone": "(463) 214-1405",
+        "address": "Indianapolis, IN",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "Ward's Towing LLC",
+        "phone": "(317) 451-4229",
+        "address": "Indianapolis, IN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Guerrero Towing",
+        "phone": "(317) 641-7557",
+        "address": "Indianapolis, IN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Hook'EM Up Towing & Roadside LLC",
+        "phone": "(317) 758-5452",
+        "address": "Indianapolis, IN",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Zore's Inc",
+        "phone": "(317) 247-8484",
+        "address": "Indianapolis, IN",
+        "rating": 4.8,
+        "review_count": 850
+    }
+]

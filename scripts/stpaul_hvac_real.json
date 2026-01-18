@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Hoffman Cooling & Heating",
+        "phone": "(612) 255-5883",
+        "address": "St. Paul, MN",
+        "website": "https://hoffmanheating.net/"
+    },
+    {
+        "name": "Metro Heating & Cooling",
+        "phone": "(651) 294-7798",
+        "address": "St. Paul, MN",
+        "website": "https://metroheating.net/"
+    },
+    {
+        "name": "Genz-Ryan",
+        "phone": "(651) 560-4720",
+        "address": "St. Paul, MN",
+        "website": "https://genzryan.com/"
+    },
+    {
+        "name": "Total Comfort",
+        "phone": "(763) 244-1800",
+        "address": "St. Paul, MN",
+        "website": "https://tcomfort.com/"
+    },
+    {
+        "name": "Krinkie's Heating, Air & Plumbing",
+        "phone": "(651) 488-5555",
+        "address": "St. Paul, MN",
+        "website": "https://krinkies.com/"
+    },
+    {
+        "name": "Expert Heating Air Conditioning",
+        "phone": "(877) 719-5324",
+        "address": "St. Paul, MN",
+        "website": "https://experthvaccare.com/"
+    }
+]

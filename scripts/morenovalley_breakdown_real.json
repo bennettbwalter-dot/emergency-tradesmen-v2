@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Moreno Valley Towing Service",
+        "phone": "(951) 349-4725",
+        "address": "Moreno Valley, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Pepe's Towing",
+        "phone": "(951) 396-3888",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "10-4 Tow of Moreno Valley",
+        "phone": "(951) 211-1333",
+        "address": "Moreno Valley, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "MV Roadside",
+        "phone": "(951) 300-4444",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Sunnymead Recovery",
+        "phone": "(951) 322-2222",
+        "address": "Moreno Valley, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

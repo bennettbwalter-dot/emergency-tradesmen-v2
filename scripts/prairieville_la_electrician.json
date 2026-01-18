@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Big Family Electric",
+        "phone": "(225) 218-6700",
+        "address": "Prairieville, LA",
+        "website": "https://callbigfamily.com"
+    },
+    {
+        "name": "Illuminate Electrical",
+        "phone": "(225) 255-0699",
+        "address": "Prairieville, LA",
+        "website": "https://illuminatebr.com"
+    },
+    {
+        "name": "Fisher Electrical Services",
+        "phone": "(225) 936-3508",
+        "address": "Prairieville, LA",
+        "website": "https://fisherelectricalservicesla.com"
+    },
+    {
+        "name": "Rescom Electric",
+        "phone": "(225) 622-3647",
+        "address": "Prairieville, LA",
+        "website": "https://rescomelectricllc.net"
+    }
+]

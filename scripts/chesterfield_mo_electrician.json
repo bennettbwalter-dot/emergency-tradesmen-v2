@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Potts Electric",
+        "phone": "(636) 323-9049",
+        "address": "Chesterfield, MO",
+        "website": "https://pottselectric.com"
+    },
+    {
+        "name": "Recon Electric",
+        "phone": "(636) 268-9291",
+        "address": "Chesterfield, MO",
+        "website": "https://reconelectricmo.com"
+    },
+    {
+        "name": "Chesterfield Service Electric",
+        "phone": "(636) 837-1949",
+        "address": "Chesterfield, MO",
+        "website": "https://chesterfieldservice.com"
+    },
+    {
+        "name": "Anytime Electric",
+        "phone": "(314) 280-0997",
+        "address": "Chesterfield, MO",
+        "website": "https://anytimeelectricstl.com"
+    }
+]

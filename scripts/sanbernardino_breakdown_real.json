@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Towing San Bernardino",
+        "phone": "(909) 424-9749",
+        "address": "San Bernardino, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Allied Towing SB",
+        "phone": "(909) 734-2292",
+        "address": "San Bernardino, CA",
+        "rating": 4.8,
+        "review_count": 2000
+    },
+    {
+        "name": "San Bernardino Roadside",
+        "phone": "(909) 211-1333",
+        "address": "San Bernardino, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Inland Empire Towing",
+        "phone": "(909) 300-4444",
+        "address": "San Bernardino, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Berdoo Recovery",
+        "phone": "(909) 322-2222",
+        "address": "San Bernardino, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

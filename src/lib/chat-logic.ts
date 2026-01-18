@@ -131,6 +131,46 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'floor damaged', 'floor collapsed', 'floor repair', 'ceiling repair',
         'plaster cracked', 'plaster fallen', 'hole in wall', 'hole in ceiling',
         'wall repair'
+    ],
+    'air-conditioning': [
+        // Primary keywords (short)
+        'air conditioning', 'air con', 'aircon', 'ac', 'ac repair', 'ac installation',
+        'air con repair', 'air con installation',
+        // Long-tail Google-style keywords
+        'air conditioning not working', 'air con not blowing cold air', 'air conditioner broken',
+        'air con leaking water inside', 'air conditioning repair near me', 'emergency air conditioning repair',
+        'same day air con repair', 'air conditioning service company', 'air con servicing near me',
+        'ac not cooling properly', 'air conditioner making noise', 'air con stopped working suddenly',
+        'commercial air conditioning repair', 'domestic air conditioning', 'air conditioning installation',
+        '24 hour air conditioning engineer', 'air con servicing', 'install air conditioning at home',
+        'aircon repair near me', 'same day air conditioning repair', 'air conditioning system for home',
+        'AC recharge service', 'best air conditioning company', 'air con not cooling properly',
+        'emergency air conditioning repair UK', 'AC unit making strange noise',
+        // Spoken / conversational triggers
+        'my air con is not working', 'no cold air coming out', 'air conditioning has stopped',
+        'air con leaking water', 'air conditioner broken', 'the air con won\'t turn on'
+    ],
+    'water-restoration': [
+        // Primary keywords (short)
+        'water restoration', 'water damage', 'flood damage', 'flooded house', 'water cleanup', 'water extraction',
+        // Long-tail Google-style keywords
+        'emergency water restoration near me', 'flooded house emergency help', 'water damage cleanup company',
+        'burst pipe water damage repair', 'ceiling collapsed from water leak', 'storm water damage repair',
+        'sewage flood cleanup service', 'water damage restoration company near me', '24 hour emergency water damage service',
+        'water extraction after flood', 'wet carpets after flooding', 'structural drying after flood',
+        'dehumidifier service after water leak', 'insurance water damage cleanup',
+        'burst pipe cleanup', 'burst pipe water cleanup', 'ceiling water damage', 'storm water damage',
+        'sewage cleanup', 'structural drying', 'dehumidification', 'emergency water cleanup',
+        'flood repair', 'water damage repair', '24 hour water damage', 'emergency flood repair', 'house flooded',
+        'leak damage repair', 'flood damage repair company', 'water damage cleanup service',
+        'house flooded what to do', 'sewage flood cleanup company', 'storm flood damage repair',
+        '24 hour water damage repair', 'structural drying after flood damage', 'damp damage repair after leak',
+        'insurance approved flood restoration', 'water damage repair cost', 'flooded house restoration service',
+        'leak damage repair specialists',
+        // Spoken / conversational triggers
+        'my house is flooded', 'water is everywhere', 'ceiling is leaking badly',
+        'pipe burst and flooded my home', 'toilet overflowed everywhere', 'rain flooded my house',
+        'water coming through the ceiling'
     ]
 };
 
@@ -207,7 +247,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         } else {
             // Check for specific trade matches
             const detectedTrades: string[] = [];
-            const tradeOrder = ['electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown', 'roofer', 'gas-engineer'];
+            const tradeOrder = ['water-restoration', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown', 'roofer', 'gas-engineer', 'air-conditioning'];
 
             for (const slug of tradeOrder) {
                 if (TRADE_KEYWORDS[slug]?.some(k => lowerMsg.includes(k))) {
@@ -246,9 +286,78 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
             // If no trade identified yet
             if (!newState.detectedTrade) {
+                // NEGATIVE KEYWORD GUARD: If user clearly mentions gas/boiler/radiator, don't route to water-restoration or air-conditioning
+                const negativeKeywords = ['boiler', 'gas', 'radiator', 'central heating', 'gas engineer'];
+                const hasNegativeKeyword = negativeKeywords.some(k => lowerMsg.includes(k));
+
                 // 1. If strict specialized trade found, use it
                 if (detectedTrades.length > 0) {
-                    newState.detectedTrade = detectedTrades[0];
+                    const hasWaterRestoration = detectedTrades.includes('water-restoration');
+                    const hasAirConditioning = detectedTrades.includes('air-conditioning');
+                    const hasPlumber = detectedTrades.includes('plumber');
+
+                    // SMART CLARIFICATION: Water Restoration vs Air Conditioning overlap
+                    if (hasWaterRestoration && hasAirConditioning && !hasNegativeKeyword) {
+                        // Check if user already answered a clarification question
+                        if (lowerMsg.includes('damage') || lowerMsg.includes('drying') || lowerMsg.includes('soaked') || lowerMsg.includes('cleanup') || lowerMsg.includes('flooded')) {
+                            newState.detectedTrade = 'water-restoration';
+                        } else if (lowerMsg.includes('cooling') || lowerMsg.includes('system') || lowerMsg.includes('ac broken') || lowerMsg.includes('not working properly')) {
+                            newState.detectedTrade = 'air-conditioning';
+                        } else {
+                            // ASK CLARIFICATION
+                            newState.step = 'TRADE_CHECK';
+                            return {
+                                newState,
+                                response: {
+                                    id: Date.now().toString(),
+                                    role: 'assistant',
+                                    content: "Just to make sure I send you to the right service — is this water damage that needs cleanup, or is it an air conditioning system that isn't working properly?"
+                                }
+                            };
+                        }
+                    }
+                    // SMART CLARIFICATION: Water Restoration vs Plumber overlap
+                    else if (hasWaterRestoration && hasPlumber && !hasNegativeKeyword) {
+                        if (lowerMsg.includes('damage') || lowerMsg.includes('drying') || lowerMsg.includes('soaked') || lowerMsg.includes('cleanup') || lowerMsg.includes('restoration')) {
+                            newState.detectedTrade = 'water-restoration';
+                        } else if (lowerMsg.includes('pipe') || lowerMsg.includes('tap') || lowerMsg.includes('toilet') || lowerMsg.includes('fix') || lowerMsg.includes('repair')) {
+                            newState.detectedTrade = 'plumber';
+                        } else {
+                            // ASK CLARIFICATION
+                            newState.step = 'TRADE_CHECK';
+                            return {
+                                newState,
+                                response: {
+                                    id: Date.now().toString(),
+                                    role: 'assistant',
+                                    content: "Is the main issue water damage that needs drying and restoration, or is it a plumbing problem like a leak that needs fixing?"
+                                }
+                            };
+                        }
+                    }
+                    // SMART CLARIFICATION: AC leaking water (very common)
+                    else if (hasAirConditioning && lowerMsg.includes('leaking') && lowerMsg.includes('water') && !hasNegativeKeyword) {
+                        if (lowerMsg.includes('damage') || lowerMsg.includes('cleanup') || lowerMsg.includes('flooded')) {
+                            newState.detectedTrade = 'water-restoration';
+                        } else if (lowerMsg.includes('not working') || lowerMsg.includes('broken') || lowerMsg.includes('repair')) {
+                            newState.detectedTrade = 'air-conditioning';
+                        } else {
+                            // ASK CLARIFICATION
+                            newState.step = 'TRADE_CHECK';
+                            return {
+                                newState,
+                                response: {
+                                    id: Date.now().toString(),
+                                    role: 'assistant',
+                                    content: "Is the air conditioning leaking and not working properly, or has the water already caused damage that needs cleanup?"
+                                }
+                            };
+                        }
+                    }
+                    // No overlap or already resolved - use first detected trade
+                    else if (!newState.detectedTrade) {
+                        newState.detectedTrade = detectedTrades[0];
+                    }
                 }
                 // 2. If no specialized trade, but IS builder -> Use Builder (Catch-all)
                 else if (isBuilder) {

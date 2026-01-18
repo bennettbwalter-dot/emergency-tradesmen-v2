@@ -1,0 +1,26 @@
+[
+    {
+        "name": "K.T Electric",
+        "phone": "(504) 517-4869",
+        "address": "Marrero, LA",
+        "website": "https://ktelectrician.com"
+    },
+    {
+        "name": "Current Solutions Electric",
+        "phone": "(504) 517-7757",
+        "address": "Marrero, LA",
+        "website": "https://electrician-neworleans.com"
+    },
+    {
+        "name": "Schlumbrecht's Electric",
+        "phone": "(504) 256-7312",
+        "address": "Marrero, LA",
+        "website": "https://schlumbrechtselectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Marrero, LA",
+        "website": "https://lewsaderelectric.com"
+    }
+]

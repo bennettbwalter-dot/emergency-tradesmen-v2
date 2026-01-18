@@ -1,0 +1,26 @@
+[
+    {
+        "name": "McClelland Electric Inc",
+        "phone": "(610) 896-7232",
+        "address": "Ardmore, PA",
+        "website": "https://mcclellandelectricinc.com"
+    },
+    {
+        "name": "J2 Services",
+        "phone": "(610) 222-6090",
+        "address": "Wayne, PA",
+        "website": "https://j2services.us"
+    },
+    {
+        "name": "Main Line Electrical",
+        "phone": "(610) 688-4900",
+        "address": "Wayne, PA",
+        "website": "https://mainlineelectricalcontracting.com"
+    },
+    {
+        "name": "Kelly Electric Company",
+        "phone": "(484) 454-5494",
+        "address": "Wayne, PA",
+        "website": "https://kellyelectriccoinc.com"
+    }
+]

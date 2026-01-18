@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mister Sparky of Little Rock",
+        "phone": "(501) 429-4702",
+        "address": "Little Rock, AR",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Staley Electric",
+        "phone": "(501) 565-3006",
+        "address": "Little Rock, AR",
+        "website": "https://staleyelectric.com"
+    },
+    {
+        "name": "Reed Electric",
+        "phone": "(501) 982-0800",
+        "address": "Little Rock, AR",
+        "website": "https://reedelectricar.com"
+    },
+    {
+        "name": "Money Electric Co",
+        "phone": "(501) 426-5624",
+        "address": "Little Rock, AR",
+        "website": "https://moneyelectricco.com"
+    },
+    {
+        "name": "Globe Electric",
+        "phone": "(501) 351-3357",
+        "address": "Little Rock, AR",
+        "website": "https://globeelectricar.com"
+    }
+]

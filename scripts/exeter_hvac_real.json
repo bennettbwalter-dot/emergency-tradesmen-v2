@@ -1,0 +1,32 @@
+[
+    {
+        "name": "CB Plumbing & Heating Ltd",
+        "phone": "01392 401 241",
+        "address": "Unit 41, Newcourt Barton, Clyst Road, Topsham, Exeter, EX3 0DB",
+        "website": "https://cbplumbingandheating.co.uk/"
+    },
+    {
+        "name": "Absolute Plumbing",
+        "phone": "01392 401 241",
+        "address": "10 Sanson Close, Exeter, EX5 4AQ",
+        "website": "https://plumbersinexeter.co.uk/"
+    },
+    {
+        "name": "Climate Solutions",
+        "phone": "01392 811420",
+        "address": "Exeter",
+        "website": "https://climatesolutionssouthwest.co.uk/"
+    },
+    {
+        "name": "Platinum Heating Services",
+        "phone": "01392 401917",
+        "address": "Exeter",
+        "website": "https://phemergencyplumberexeter.co.uk/"
+    },
+    {
+        "name": "AC Plumbing & Heating Specialists Ltd",
+        "phone": "07465 296794",
+        "address": "Exeter",
+        "website": "https://acplumbingandheatingspecialists.co.uk/"
+    }
+]

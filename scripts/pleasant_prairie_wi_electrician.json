@@ -1,0 +1,26 @@
+[
+    {
+        "name": "American Electric Company",
+        "phone": "(847) 252-1757",
+        "address": "Pleasant Prairie, WI",
+        "website": "https://american-electric-company.com"
+    },
+    {
+        "name": "Capital Heating, Cooling, Electric & Plumbing",
+        "phone": "(262) 536-5019",
+        "address": "Pleasant Prairie, WI",
+        "website": "https://www.angi.com"
+    },
+    {
+        "name": "Miller Electrical Enterprises",
+        "phone": "(262) 654-2176",
+        "address": "Pleasant Prairie, WI",
+        "website": "https://millerelectricent.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Pleasant Prairie, WI",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

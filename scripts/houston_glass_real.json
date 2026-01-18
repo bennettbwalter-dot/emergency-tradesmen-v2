@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Hurricane Glass & Mirror",
+        "phone": "(281) 815-4193",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "AM-PM Glass & Mirror",
+        "phone": "832-279-0006",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Alvin Glass",
+        "phone": "(832) 340-0639",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Absolute Glassworks",
+        "phone": "(713) 666-1930",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Precision Glass and Mirror",
+        "phone": "713-534-7627",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Glass Doctor of Houston",
+        "phone": "(713) 465-7288",
+        "address": "Houston, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    }
+]

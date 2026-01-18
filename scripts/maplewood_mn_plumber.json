@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Matt's Plumbing Solutions",
+        "phone": "(612) 756-8138",
+        "address": "Maplewood, MN",
+        "website": "https://mattsplumbingmn.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Restoration",
+        "phone": "(651) 351-6033",
+        "address": "Maplewood, MN",
+        "website": "https://www.rotorooter.com/maplewoodmn/"
+    },
+    {
+        "name": "Edwards Plumbing",
+        "phone": "(651) 769-1192",
+        "address": "Maplewood, MN",
+        "website": "https://mikeedwardsplumbinginc.com"
+    },
+    {
+        "name": "Burger Plumbing",
+        "phone": "(877) 778-5124",
+        "address": "Maplewood, MN",
+        "website": "https://burgerplumbing.com"
+    }
+]

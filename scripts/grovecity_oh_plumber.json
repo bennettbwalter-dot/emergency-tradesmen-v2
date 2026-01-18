@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Logan Services",
+        "phone": "(614) 224-3200",
+        "address": "Grove City, OH",
+        "website": "https://logan-inc.com"
+    },
+    {
+        "name": "Mighty Plumbing Company",
+        "phone": "(380) 666-3227",
+        "address": "Grove City, OH",
+        "website": "https://mightyplumbingco.com"
+    },
+    {
+        "name": "Grove City Plumbing and Drain",
+        "phone": "(614) 362-3345",
+        "address": "Grove City, OH",
+        "website": "https://grovecityplumbingdrain.com"
+    },
+    {
+        "name": "1 Utility Of Ohio",
+        "phone": "(614) 569-0083",
+        "address": "Grove City, OH",
+        "website": "https://1utilityofohio.com"
+    }
+]

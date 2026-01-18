@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mesa Tow Truck Company",
+        "phone": "(480) 800-8199",
+        "address": "Mesa, AZ",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Tow Mesa / Thompson's",
+        "phone": "(480) 725-5862",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Valley Express Towing",
+        "phone": "(480) 899-4621",
+        "address": "Mesa, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Mesa Recovery",
+        "phone": "(480) 214-1333",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "East Valley Towing",
+        "phone": "(480) 222-2222",
+        "address": "Mesa, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

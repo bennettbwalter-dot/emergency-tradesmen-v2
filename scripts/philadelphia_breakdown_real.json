@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A Bob's Towing",
+        "phone": "(215) 289-5775",
+        "address": "Philadelphia, PA",
+        "rating": 4.9,
+        "review_count": 1000
+    },
+    {
+        "name": "Northeast Philadelphia Towing",
+        "phone": "(215) 585-2187",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "JB Towing Inc.",
+        "phone": "(267) 303-5502",
+        "address": "Philadelphia, PA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Philly Towing",
+        "phone": "(215) 571-0000",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 92
+    },
+    {
+        "name": "Interstate Towing Philadelphia",
+        "phone": "(215) 432-8438",
+        "address": "Philadelphia, PA",
+        "rating": 4.9,
+        "review_count": 450
+    }
+]

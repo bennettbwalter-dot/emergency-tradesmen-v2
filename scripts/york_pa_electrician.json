@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Calvary Electric LLC",
+        "phone": "(443) 340-5751",
+        "address": "York, PA",
+        "website": "https://yorkpaelectrician.com"
+    },
+    {
+        "name": "Gettle Electric",
+        "phone": "(800) 758-0780",
+        "address": "York, PA",
+        "website": "https://gettleelectric.com"
+    },
+    {
+        "name": "Capricorn Electric",
+        "phone": "(1-800-863-6665)",
+        "address": "York, PA",
+        "website": "https://capricornelectric.com"
+    },
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(1-800-380-6800)",
+        "address": "York, PA",
+        "website": "https://thomasedisonelectric.com"
+    }
+]

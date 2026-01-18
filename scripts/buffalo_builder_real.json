@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Lehigh Construction Group, Inc.",
+        "phone": "(716) 662-2151",
+        "address": "Buffalo, NY",
+        "website": "https://lehighconstructiongroup.com/"
+    },
+    {
+        "name": "Rapid Dry Services",
+        "phone": "(716) 379-3938",
+        "address": "Buffalo, NY",
+        "website": "https://rapiddryservices.com/"
+    },
+    {
+        "name": "Emergency Board Up Squad",
+        "phone": "(855) 928-0368",
+        "address": "Buffalo, NY",
+        "website": "https://emergencyboardupsquad.com/"
+    },
+    {
+        "name": "O'Connor Contracting",
+        "phone": "(716) 600-7663",
+        "address": "Buffalo, NY",
+        "website": "https://oconnorroofingbuffalo.com/"
+    },
+    {
+        "name": "Buffalo Environmental & Construction Group",
+        "phone": "(716) 835-0160",
+        "address": "Buffalo, NY",
+        "website": "https://buffaloenv.com/"
+    }
+]

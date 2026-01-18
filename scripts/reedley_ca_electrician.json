@@ -1,0 +1,26 @@
+[
+    {
+        "name": "E-man Electric Inc",
+        "phone": "(559) 743-7006",
+        "address": "Reedley, CA",
+        "website": "https://emanelectricinc.com"
+    },
+    {
+        "name": "SLS Electric",
+        "phone": "(559) 758-2932",
+        "address": "Reedley, CA",
+        "website": "https://slselectricinc.com"
+    },
+    {
+        "name": "Cole Electric Reedley",
+        "phone": "(469) 422-6019",
+        "address": "Reedley, CA",
+        "website": "https://coleelectricllc.com"
+    },
+    {
+        "name": "Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Reedley, CA",
+        "website": "https://electriciansquad.com"
+    }
+]

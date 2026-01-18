@@ -1,0 +1,26 @@
+[
+    {
+        "name": "United Plumbing",
+        "phone": "(833) 609-0936",
+        "address": "Millcreek, PA",
+        "website": "https://unitedplumbingcctx.com"
+    },
+    {
+        "name": "EcoPro Mechanical",
+        "phone": "(888) 561-0555",
+        "address": "Millcreek, PA",
+        "website": "https://ecopromechanical.com"
+    },
+    {
+        "name": "Wm. T. Spaeder",
+        "phone": "(814) 456-7014",
+        "address": "Millcreek, PA",
+        "website": "https://spaeder.com"
+    },
+    {
+        "name": "Haller Enterprises",
+        "phone": "(717) 204-8120",
+        "address": "Millcreek, PA",
+        "website": "https://hallerent.com"
+    }
+]

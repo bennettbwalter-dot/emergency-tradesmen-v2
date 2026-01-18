@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter Riverside",
+        "phone": "951-892-7051",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Rooter Warrior Plumbing & Drain Cleaning",
+        "phone": "951-410-5108",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "24 Hr Emergency Plumbing and Drain Cleaning Service",
+        "phone": "951-427-1707",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Sweetwater Plumbing",
+        "phone": "909-312-4516",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "R & R Plumbing",
+        "phone": "951-234-7223",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 180
+    },
+    {
+        "name": "Emergency Neighborhood Plumbers",
+        "phone": "951-633-7600",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "First Place Plumbing Solutions",
+        "phone": "951-706-5538",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Owen & Sons Plumbers",
+        "phone": "951-800-3373",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Alpha and Omega Plumbing",
+        "phone": "951-295-4363",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "HSQ Plumbing, Inc.",
+        "phone": "951-688-8845",
+        "address": "Riverside, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Riverside Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Riverside, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Faith Electric Group",
+        "phone": "(951) 447-8395",
+        "address": "Riverside, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Safeway Electric Riverside",
+        "phone": "909-766-9030",
+        "address": "Riverside, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "All Lights Electrical Service",
+        "phone": "(951) 545-8822",
+        "address": "Riverside, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "Volt Tech Electric",
+        "phone": "(951) 515-4852",
+        "address": "Riverside, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Safe Locksmith Riverside CA",
+        "phone": "(951) 666-5577",
+        "address": "Riverside, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Riverside Locksmith",
+        "phone": "(951) 977-5313",
+        "address": "Riverside, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Key Shop Riverside",
+        "phone": "(909) 743-5318",
+        "address": "Riverside, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "24/7 Automotive Locksmith in Riverside",
+        "phone": "(951) 900-3652",
+        "address": "Riverside, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Union Locksmith Store Riverside",
+        "phone": "(909) 371-1049",
+        "address": "Riverside, CA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 80
+    }
+]

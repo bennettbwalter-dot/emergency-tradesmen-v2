@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Berlin, MD",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Waterside Electric",
+        "phone": "(443) 669-9055",
+        "address": "Berlin, MD",
+        "website": "https://watersideelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Berlin, MD",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Expert Wire Inc.",
+        "phone": "(302) 875-7953",
+        "address": "Berlin, MD",
+        "website": "https://expertwire247.com"
+    }
+]

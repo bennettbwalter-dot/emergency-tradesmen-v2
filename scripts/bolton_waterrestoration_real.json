@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bolton Plumbing and Heating Ltd",
+        "phone": "01204 427 185",
+        "address": "Bolton, BL7 9DX",
+        "website": "https://boltonplumbingandheatingltd.co.uk/"
+    },
+    {
+        "name": "Bolton Drain Services",
+        "phone": "01204 559994",
+        "address": "Unit 17, Tonge Bridge Way, Bolton, BL2 6BD",
+        "website": "https://boltondrainservices.co.uk/"
+    },
+    {
+        "name": "James Drains Solutions Bolton",
+        "phone": "0800 037 5112",
+        "address": "Bolton",
+        "website": "https://jamesdrainssolutions.co.uk/"
+    },
+    {
+        "name": "Reactiv8 Emergency Services Bolton",
+        "phone": "07562 952244",
+        "address": "Bolton",
+        "website": "https://reactive8emergencyservices.co.uk/"
+    },
+    {
+        "name": "RM Building Maintenance Bolton",
+        "phone": "0161 464 3570",
+        "address": "Bolton",
+        "website": "https://rm-buildingmaintenance.co.uk/"
+    }
+]

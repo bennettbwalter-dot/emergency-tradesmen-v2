@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Roto-Rooter OKC",
+        "phone": "405-896-2866",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Air Comfort Solutions Plumbing",
+        "phone": "(405) 351-4146",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Mr. Rooter Plumbing of OKC",
+        "phone": "(405) 241-4262",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 620
+    },
+    {
+        "name": "24 Hour Emergency Plumber OKC",
+        "phone": "405-267-8060",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Suntech Heat and Air Plumbing",
+        "phone": "(405) 785-0950",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Plumbing Masters OKC",
+        "phone": "405-450-7575",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "Champion Plumbing",
+        "phone": "405-433-6745",
+        "address": "Oklahoma City, OK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 480
+    },
+    {
+        "name": "Mister Sparky of Oklahoma City",
+        "phone": "(405) 767-4880",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Air Comfort Solutions Electric",
+        "phone": "(405) 351-4146",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 620
+    },
+    {
+        "name": "24/7 Electrical Services and Repairs",
+        "phone": "(405) 915-3280",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "AccuTemp Heating & Air Conditioning Electric",
+        "phone": "(405) 956-1763",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Gary's Electric Service",
+        "phone": "(405) 309-6209",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Comfort Wave Home Services Electric",
+        "phone": "(405) 825-9283",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "O'Connor's Electrical OKC",
+        "phone": "844-484-2612",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Urgent Electrician Oklahoma City",
+        "phone": "(405) 704-4773",
+        "address": "Oklahoma City, OK",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Oklahoma City Lock and Key",
+        "phone": "(405) 381-8587",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Oklahoma City Locksmith",
+        "phone": "(405) 329-7723",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Payless Locksmith OKC",
+        "phone": "(405) 571-9512",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "KeyMe Locksmiths OKC",
+        "phone": "(405) 369-8268",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Security Lock Service",
+        "phone": "(405) 943-0111",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Okey Locksmith",
+        "phone": "(405) 703-8943",
+        "address": "Oklahoma City, OK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

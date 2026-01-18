@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Plumbing Service Today / St Paul Plumber Specialists",
+        "phone": "651-412-4704",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Paul Bunyan Plumbing & Drains St. Paul",
+        "phone": "612-340-1444",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1300
+    },
+    {
+        "name": "Roto-Rooter St. Paul",
+        "phone": "651-227-0098",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Matt's Plumbing Solutions",
+        "phone": "612-756-8138",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Benjamin Franklin Plumbing St. Paul",
+        "phone": "651-401-8389",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Start 2 Finish Plumbing",
+        "phone": "612-808-0220",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Edwards Plumbing",
+        "phone": "651-769-1192",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "All Ways Drains St. Paul",
+        "phone": "612-922-9422",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "Genz-Ryan Heating, Cooling, Plumbing & Electrical",
+        "phone": "612-424-8260",
+        "address": "St. Paul, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Donco Electric St. Paul",
+        "phone": "(855) 740-3232",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Mr. Electric of St. Paul",
+        "phone": "651-369-7776",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Early Bird Electric",
+        "phone": "(612) 217-7756",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 750
+    },
+    {
+        "name": "O'Connor's Electrical St. Paul",
+        "phone": "(844) 484-2612",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Northern Mister Sparky St. Paul",
+        "phone": "763-225-1322",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Kellogg Electric",
+        "phone": "651-777-3333",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Randy's Electric and Plumbing St. Paul",
+        "phone": "(612) 470-0914",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 620
+    },
+    {
+        "name": "On Call Electrical St. Paul",
+        "phone": "(651) 504-1011",
+        "address": "St. Paul, MN",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "24/7 St Paul Locksmith",
+        "phone": "(888) 418-5009",
+        "address": "St. Paul, MN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Mighty Lock & Safe",
+        "phone": "(651) 207-4187",
+        "address": "St. Paul, MN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Saint Paul Locksmith",
+        "phone": "(651) 243-4375",
+        "address": "St. Paul, MN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Locksmith St. Paul",
+        "phone": "(612) 584-1555",
+        "address": "St. Paul, MN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "St Paul Emergency Locksmiths",
+        "phone": "(651) 433-6141",
+        "address": "St. Paul, MN",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 60
+    }
+]

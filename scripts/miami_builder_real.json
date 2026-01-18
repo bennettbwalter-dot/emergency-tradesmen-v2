@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Atlas Builders & Development",
+        "phone": "(786) 442-1605",
+        "address": "Miami, FL",
+        "website": "https://atlasbuildersanddevelopment.com/"
+    },
+    {
+        "name": "Bessard Roofing",
+        "phone": "(786) 539-0563",
+        "address": "Miami, FL",
+        "website": "https://bessardroofing.com/"
+    },
+    {
+        "name": "Rapid Recovery Team",
+        "phone": "(844) 400-7274",
+        "address": "Miami, FL",
+        "website": "https://rapidrecoveryteam.com/"
+    },
+    {
+        "name": "Water and Fire Contracting Services",
+        "phone": "(305) 484-3114",
+        "address": "Miami, FL",
+        "website": "https://wfcsvc.com/"
+    },
+    {
+        "name": "First Onsite",
+        "phone": "(305) 233-0500",
+        "address": "Miami, FL",
+        "website": "https://firstonsite.com/"
+    }
+]

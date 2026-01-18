@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Williams Towing Company",
+        "phone": "(919) 596-1600",
+        "address": "Durham, NC",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Fred's Towing & Transport",
+        "phone": "(252) 430-0082",
+        "address": "Durham, NC",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Tri City Towing & Recovery",
+        "phone": "(919) 211-1333",
+        "address": "Durham, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Lemon's Wrecker Durham",
+        "phone": "(919) 300-4444",
+        "address": "Durham, NC",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Victory Towing",
+        "phone": "(919) 640-1299",
+        "address": "Durham, NC",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

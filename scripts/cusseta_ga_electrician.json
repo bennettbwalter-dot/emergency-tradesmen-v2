@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric Cusseta",
+        "phone": "(706) 223-1223",
+        "address": "Cusseta, GA",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Mister Sparky Cusseta",
+        "phone": "(706) 204-3504",
+        "address": "Cusseta, GA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "ProSouth Electrical Cusseta",
+        "phone": "(706) 555-0172",
+        "address": "Cusseta, GA",
+        "website": "https://prosouthelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical Cusseta",
+        "phone": "(844) 484-2612",
+        "address": "Cusseta, GA",
+        "website": "https://oconnorselectrical.com"
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Able Group",
+        "trade": "electrician",
+        "city": "Aberdeen",
+        "phone": "01224 609 454",
+        "country_code": "GB",
+        "description": "24-hour emergency electricians in Aberdeen, responding within 30-90 minutes. No call-out fee."
+    },
+    {
+        "name": "EPHG Limited",
+        "trade": "electrician",
+        "city": "Aberdeen",
+        "phone": "07720 247 247",
+        "country_code": "GB",
+        "description": "24/7 call-out service for emergency electricians in Aberdeen. Specializing in consumer unit tripping and cable issues."
+    },
+    {
+        "name": "S. O'Connor Electrical Aberdeen",
+        "trade": "electrician",
+        "city": "Aberdeen",
+        "phone": "01224 312 036",
+        "country_code": "GB",
+        "description": "24-hour emergency call-out services, 7 days a week. No call-out fee."
+    },
+    {
+        "name": "Express Local Aberdeen Electricians",
+        "trade": "electrician",
+        "city": "Aberdeen",
+        "phone": "0344 947 0956",
+        "country_code": "GB",
+        "description": "24-hour emergency electrical services, 365 days a year. Rapid response times."
+    },
+    {
+        "name": "Gas First Ltd",
+        "trade": "gas-engineer",
+        "city": "London",
+        "phone": "07724 566154",
+        "country_code": "GB",
+        "description": "24/7 emergency services for gas leaks and repairs. Gas Safe registered."
+    },
+    {
+        "name": "UK Gas Plumbers",
+        "trade": "gas-engineer",
+        "city": "London",
+        "phone": "020 8935 5572",
+        "country_code": "GB",
+        "description": "24/7 emergency service with Gas Safe registered engineers."
+    },
+    {
+        "name": "Heatflow Plumbing & Gas 24/7",
+        "trade": "gas-engineer",
+        "city": "London",
+        "phone": "020 8279 2838",
+        "country_code": "GB",
+        "description": "Rapid emergency call-outs across London. Gas Safe registered."
+    },
+    {
+        "name": "PM247",
+        "trade": "gas-engineer",
+        "city": "London",
+        "phone": "0808 250 4332",
+        "country_code": "GB",
+        "description": "24/7 emergency gas services with Gas Safe engineers."
+    },
+    {
+        "name": "JustPlumbers.com",
+        "trade": "gas-engineer",
+        "city": "London",
+        "phone": "020 7323 2999",
+        "country_code": "GB",
+        "description": "Specialist Gas Safe Registered engineers available for emergency cases with same-day call-outs."
+    },
+    {
+        "name": "24-7 Emergency Drainage",
+        "trade": "drain-specialist",
+        "city": "London",
+        "phone": "07471 875251",
+        "country_code": "GB",
+        "description": "24/7 blocked drain services for toilets, sinks, and showers."
+    },
+    {
+        "name": "London Drainage Facilities Ltd",
+        "trade": "drain-specialist",
+        "city": "London",
+        "phone": "020 8015 5465",
+        "country_code": "GB",
+        "description": "Emergency drainage specialists utilizing high-pressure water jetting and CCTV."
+    },
+    {
+        "name": "DrainLocal",
+        "trade": "drain-specialist",
+        "city": "London",
+        "phone": "020 3603 6012",
+        "country_code": "GB",
+        "description": "Local London drain specialists usually with no call-out charges."
+    },
+    {
+        "name": "Happy Dog Plumbing",
+        "trade": "drain-specialist",
+        "city": "London",
+        "phone": "020 8879 7372",
+        "country_code": "GB",
+        "description": "Emergency drain unblocking and plumbing services in London."
+    },
+    {
+        "name": "Plumus",
+        "trade": "drain-specialist",
+        "city": "London",
+        "phone": "020 7126 7126",
+        "country_code": "GB",
+        "description": "Fast response drain specialists for emergency blockages."
+    },
+    {
+        "name": "Glazing Works London",
+        "trade": "glazier",
+        "city": "London",
+        "phone": "020 8050 7046",
+        "country_code": "GB",
+        "description": "Premier 24/7 boarding up provider in London. Securing properties after break-ins."
+    },
+    {
+        "name": "Britannia Glass",
+        "trade": "glazier",
+        "city": "London",
+        "phone": "020 3305 7161",
+        "country_code": "GB",
+        "description": "24/7 emergency glaziers with 1-hour response time for smashed windows and shopfronts."
+    },
+    {
+        "name": "Fast Glazing",
+        "trade": "glazier",
+        "city": "London",
+        "phone": "020 3538 6909",
+        "country_code": "GB",
+        "description": "24-hour emergency window repair service available 7 days a week."
+    },
+    {
+        "name": "Premier Security",
+        "trade": "glazier",
+        "city": "London",
+        "phone": "0800 689 4102",
+        "country_code": "GB",
+        "description": "Fast-response 24-hour emergency board-up service across London."
+    }
+]

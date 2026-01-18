@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Plumbers Newark",
+        "phone": "862-343-5502",
+        "address": "Newark, NJ",
+        "rating": 4.9,
+        "review_count": 3
+    },
+    {
+        "name": "Roto-Rooter Newark",
+        "phone": "201-620-6140",
+        "address": "Newark, NJ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Plumbing by Johnny",
+        "phone": "862-296-3655",
+        "address": "Newark, NJ",
+        "rating": 5.0,
+        "review_count": 10
+    },
+    {
+        "name": "Express Plumbing Services",
+        "phone": "877-207-7053",
+        "address": "Newark, NJ",
+        "rating": 4.8,
+        "review_count": 112
+    },
+    {
+        "name": "Gatti Plumbing",
+        "phone": "(973) 555-0101",
+        "address": "Newark, NJ",
+        "rating": 4.8,
+        "review_count": 175
+    }
+]

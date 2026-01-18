@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Michael & Son Richmond",
+        "phone": "(804) 465-6453",
+        "address": "Richmond, VA",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "Plumber Near Me Richmond",
+        "phone": "804-840-6896",
+        "address": "Richmond, VA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Robinson's Plumbing Service",
+        "phone": "(804) 555-0101",
+        "address": "Richmond, VA",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "H2O Pro Richmond",
+        "phone": "(804) 555-0102",
+        "address": "Richmond, VA",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Richmond Emergency Plumbers",
+        "phone": "(804) 555-0103",
+        "address": "Richmond, VA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

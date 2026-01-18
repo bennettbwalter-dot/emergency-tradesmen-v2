@@ -1,0 +1,30 @@
+[
+    {
+        "name": "PrimeTime Plumbing",
+        "address": "Tyler, TX",
+        "phone": "903-707-1503",
+        "trade": "plumber",
+        "city": "Tyler"
+    },
+    {
+        "name": "Benjamin Franklin Plumbing",
+        "address": "Tyler, TX",
+        "phone": "903-730-6611",
+        "trade": "plumber",
+        "city": "Tyler"
+    },
+    {
+        "name": "Texas Premier Locksmith",
+        "address": "2411 West Erwin St, Tyler, TX 75702",
+        "phone": "903-502-4696",
+        "trade": "locksmith",
+        "city": "Tyler"
+    },
+    {
+        "name": "Tyler Locksmith",
+        "address": "2801 Calloway Rd, Tyler, TX 75707",
+        "phone": "903-461-7284",
+        "trade": "locksmith",
+        "city": "Tyler"
+    }
+]

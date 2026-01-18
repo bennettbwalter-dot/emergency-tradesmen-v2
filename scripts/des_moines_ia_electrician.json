@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Custom Electrical Services",
+        "phone": "(515) 669-3418",
+        "address": "Des Moines, IA",
+        "website": "https://customelectricalia.com"
+    },
+    {
+        "name": "Mr. Electric of Central Iowa",
+        "phone": "(515) 305-3221",
+        "address": "Des Moines, IA",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "ReWired Iowa",
+        "phone": "(515) 218-1298",
+        "address": "Des Moines, IA",
+        "website": "https://rewirediowa.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(515) 276-8575",
+        "address": "Des Moines, IA",
+        "website": "https://kenbobkoelectric.com"
+    }
+]

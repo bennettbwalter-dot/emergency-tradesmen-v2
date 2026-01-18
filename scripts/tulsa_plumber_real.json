@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Wooten Plumbing",
+        "phone": "(918) 241-3900",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Torch Service Company",
+        "phone": "(918) 321-4646",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Duvall Plumbing Co.",
+        "phone": "(918) 258-0000",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Williams Plumbing & Drain",
+        "phone": "(918) 438-1111",
+        "address": "Tulsa, OK",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Acts of Service Plumbing",
+        "phone": "(918) 899-1111",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

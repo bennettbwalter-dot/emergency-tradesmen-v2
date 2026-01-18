@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Tow Gilbert / Thompson's",
+        "phone": "(480) 418-9206",
+        "address": "Gilbert, AZ",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Desert Emerald Towing",
+        "phone": "(480) 211-1333",
+        "address": "Gilbert, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "All City Towing Gilbert",
+        "phone": "(480) 833-7297",
+        "address": "Gilbert, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "On Time Emergency Roadside",
+        "phone": "(602) 621-7333",
+        "address": "Gilbert, AZ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Professional Towing Gilbert",
+        "phone": "(480) 797-9922",
+        "address": "Gilbert, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

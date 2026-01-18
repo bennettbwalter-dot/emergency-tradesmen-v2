@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Install",
+        "phone": "(702) 816-0328",
+        "address": "Henderson, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Davis Glass & Mirror",
+        "phone": "(702) 819-8452",
+        "address": "Henderson, NV",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Delux Windows & Glass",
+        "phone": "(702) 843-3578",
+        "address": "Henderson, NV",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Galaxy Auto Glass",
+        "phone": "(702) 742-1134",
+        "address": "Henderson, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Master Glass Henderson",
+        "phone": "(702) 522-1527",
+        "address": "Henderson, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

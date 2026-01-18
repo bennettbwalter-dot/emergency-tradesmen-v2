@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Clover Electric",
+        "phone": "440-424-4640",
+        "address": "Euclid, OH",
+        "website": "https://cloverelectric.com"
+    },
+    {
+        "name": "Dependable Electric",
+        "phone": "440-845-8661",
+        "address": "Euclid, OH",
+        "website": "https://dependableelectric.com"
+    },
+    {
+        "name": "Wilson Plumbing & Electric",
+        "phone": "330-920-0225",
+        "address": "Euclid, OH",
+        "website": "https://wilsonplumbingandheating.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Euclid, OH",
+        "website": "https://oconnorselectrical.com"
+    }
+]

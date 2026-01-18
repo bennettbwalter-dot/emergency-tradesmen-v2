@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Juan & Only Plumber",
+        "address": "Round Rock, TX",
+        "phone": "512-222-7311",
+        "trade": "plumber",
+        "city": "Round Rock"
+    },
+    {
+        "name": "Radiant Plumbing & Air Conditioning",
+        "address": "Round Rock, TX",
+        "phone": "512-265-6994",
+        "trade": "plumber",
+        "city": "Round Rock"
+    },
+    {
+        "name": "Stan's Plumbing & Electrical",
+        "address": "Round Rock, TX",
+        "phone": "512-929-9393",
+        "trade": "plumber",
+        "city": "Round Rock"
+    },
+    {
+        "name": "Quantum Electric",
+        "address": "17 Indian Meadows Dr, Round Rock, TX 78665",
+        "phone": "512-246-1145",
+        "trade": "electrician",
+        "city": "Round Rock"
+    },
+    {
+        "name": "Cox Electric",
+        "address": "Round Rock, TX",
+        "phone": "512-876-8766",
+        "trade": "electrician",
+        "city": "Round Rock"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Scott Lind Electric",
+        "phone": "(208) 716-1240",
+        "address": "Idaho Falls, ID",
+        "website": "https://scottlindelectric.com"
+    },
+    {
+        "name": "Hale Electric LLC",
+        "phone": "(208) 227-3895",
+        "address": "Idaho Falls, ID",
+        "website": "https://haleelectricllc.com"
+    },
+    {
+        "name": "Arco Electric",
+        "phone": "(208) 522-2185",
+        "address": "Idaho Falls, ID",
+        "website": "https://electriciansidahofalls.com"
+    },
+    {
+        "name": "Wheeler Electric",
+        "phone": "(208) 522-1906",
+        "address": "Idaho Falls, ID",
+        "website": "https://wheelerelectric.com"
+    }
+]

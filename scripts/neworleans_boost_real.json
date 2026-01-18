@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Roto-Rooter New Orleans",
+        "phone": "504-206-8360",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 750
+    },
+    {
+        "name": "Bluefrog Plumbing + Drain of New Orleans",
+        "phone": "504-229-4848",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Mr. Rooter Plumbing of New Orleans",
+        "phone": "(504) 826-8863",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 520
+    },
+    {
+        "name": "Stuart Services",
+        "phone": "504-321-2079",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1400
+    },
+    {
+        "name": "All Hours Plumbing LLC",
+        "phone": "504-909-6749",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Blair Plumbing",
+        "phone": "504-733-9113",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Start 2 Finish Plumbing",
+        "phone": "504-226-8282",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 60
+    },
+    {
+        "name": "24/7 Plumbers New Orleans",
+        "phone": "(504) 475-1414",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 45
+    },
+    {
+        "name": "Rooter Man",
+        "phone": "504-464-0145",
+        "address": "New Orleans, LA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 620
+    },
+    {
+        "name": "Mister Sparky NOLA",
+        "phone": "(504) 224-6713",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Perrin's Electrical Services, LLC",
+        "phone": "(504) 481-6120",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "OHM Electrical Contractors, LLC",
+        "phone": "(504) 494-3053",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Natal's Air Conditioning, Plumbing & Electrical",
+        "phone": "504-821-0005",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Professional Electric",
+        "phone": "(504) 858-0270",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 160
+    },
+    {
+        "name": "AccuTemp Services, LLC",
+        "phone": "(225) 240-8478",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "Champagne Electric",
+        "phone": "(985) 966-9582",
+        "address": "New Orleans, LA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 75
+    },
+    {
+        "name": "ASAP 24 Hour Locksmith",
+        "phone": "504-290-1862",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Pop-A-Lock of New Orleans",
+        "phone": "504-588-2192",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Liberty Locksmith New Orleans",
+        "phone": "504-949-0099",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Affordable Locksmith Solutions",
+        "phone": "504-420-3530",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 85
+    },
+    {
+        "name": "New Orleans Locksmith Pro",
+        "phone": "504-208-5774",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Royal Locksmith",
+        "phone": "504-224-9111",
+        "address": "New Orleans, LA",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 130
+    }
+]

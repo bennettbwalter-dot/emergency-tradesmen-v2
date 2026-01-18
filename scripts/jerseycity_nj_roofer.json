@@ -1,0 +1,32 @@
+[
+    {
+        "name": "H. Recinos Roofing",
+        "phone": "(973) 230-7924",
+        "address": "Jersey City, NJ",
+        "website": "https://recinosroofingnj.com"
+    },
+    {
+        "name": "Elite Roofing Inc",
+        "phone": "(201) 436-1011",
+        "address": "Jersey City, NJ",
+        "website": "https://eliteroofingincnj.com"
+    },
+    {
+        "name": "Lightning Construction",
+        "phone": "(973) 558-0647",
+        "address": "Jersey City, NJ",
+        "website": "https://lightningconstructionnj.com"
+    },
+    {
+        "name": "Roofing Jersey City",
+        "phone": "(201) 554-1347",
+        "address": "Jersey City, NJ",
+        "website": "https://roofingjersey.city"
+    },
+    {
+        "name": "American Roofing & Chimney",
+        "phone": "(973) 932-9822",
+        "address": "Jersey City, NJ",
+        "website": null
+    }
+]

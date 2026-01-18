@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Airport Towing Oxnard",
+        "phone": "(805) 385-3700",
+        "address": "Oxnard, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Oxnard Emergency Towing",
+        "phone": "(805) 366-6795",
+        "address": "Oxnard, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Owl Towing & Storage",
+        "phone": "(805) 485-3811",
+        "address": "Oxnard, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Oxnard Roadside",
+        "phone": "(805) 211-1333",
+        "address": "Oxnard, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Ventura County Recovery",
+        "phone": "(805) 300-4444",
+        "address": "Oxnard, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Wentworth Water Reading",
+        "phone": "01252 235 367",
+        "address": "Reading",
+        "website": "https://wentworthwater.co.uk/"
+    },
+    {
+        "name": "RapidDry Restoration Reading",
+        "phone": "07814 508352",
+        "address": "Reading",
+        "website": "https://rapiddry.co.uk/"
+    },
+    {
+        "name": "Complete Environmental Services Reading",
+        "phone": "0800 389 7819",
+        "address": "Reading",
+        "website": "https://completeenvironmentalservices.co.uk/"
+    },
+    {
+        "name": "Ideal Response Reading",
+        "phone": "01622 926 505",
+        "address": "Reading",
+        "website": "https://idealresponse.co.uk/"
+    },
+    {
+        "name": "Emergency Clean UK Reading",
+        "phone": "0333 772 2130",
+        "address": "Reading",
+        "website": "https://emergencycleanuk.co.uk/"
+    }
+]

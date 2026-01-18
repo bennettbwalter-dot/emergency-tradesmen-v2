@@ -25,7 +25,7 @@ import { Phone, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
@@ -119,6 +119,8 @@ const Index = () => {
     }
   };
 
+  const { countryCode } = useParams<{ countryCode: string }>();
+
   return (
     <ChatbotProvider>
       <>
@@ -139,7 +141,7 @@ const Index = () => {
           jsonLd={[emergencyServiceSchema, websiteSchema]}
         />
 
-        <Header />
+        <Header countryCode={countryCode} />
 
 
 
@@ -199,14 +201,7 @@ const Index = () => {
                     <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Local {settings.tradeTerm} Available Now</span>
                   </div>
 
-                  {/* Trustpilot Hero Widget */}
-                  <TrustpilotWidget
-                    templateId="5419b6a8b0d04a076446a9ad"
-                    businessId="676878b2d4b2944b9e1e2c94"
-                    username="emergencytradesmen.net"
-                    styleHeight="24px"
-                    className="mt-2"
-                  />
+                  {/* Trustpilot Hero Widget removed due to invalid ID */}
                 </motion.div>
 
 
@@ -529,7 +524,10 @@ const Index = () => {
 
 
               <div className="flex flex-wrap justify-center gap-3">
-                {(settings.countryCode === 'US' ? usCities : cities).slice(0, 20).map((city) => (
+                <div className="w-full text-center mb-4">
+                  <h3 className="text-lg font-bold text-foreground/80">{settings.countryCode === 'US' ? 'Main US Cities' : 'Main UK Cities'}</h3>
+                </div>
+                {(settings.countryCode === 'US' ? usCities.slice(0, 24) : cities).map((city) => (
                   <Link
                     key={city}
                     to={settings.countryCode === 'US'
@@ -541,9 +539,6 @@ const Index = () => {
                     {city}
                   </Link>
                 ))}
-                <span className="px-5 py-2.5 text-sm text-muted-foreground">
-                  + {(settings.countryCode === 'US' ? usCities.length : cities.length) - 20} more cities
-                </span>
               </div>
 
             </div>
@@ -712,17 +707,7 @@ const Index = () => {
 
 
 
-        {/* Center Trustpilot Carousel Widget */}
-        <section className="container-wide pb-12 pt-0 border-t-0 border-border/30">
-          <div className="max-w-6xl mx-auto">
-            <TrustpilotWidget
-              templateId="53aa8912dec7e10d38f59f36"
-              businessId="676878b2d4b2944b9e1e2c94"
-              username="emergencytradesmen.net"
-              styleHeight="140px"
-            />
-          </div>
-        </section>
+        {/* Trustpilot Carousel removed due to invalid ID */}
 
         <Footer />
 

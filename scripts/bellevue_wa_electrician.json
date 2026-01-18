@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Surge Electrical",
+        "phone": "(425) 390-9999",
+        "address": "Bellevue, WA",
+        "website": "https://surgelectrical.com"
+    },
+    {
+        "name": "Custom Electrical Services",
+        "phone": "(425) 399-7300",
+        "address": "Bellevue, WA",
+        "website": "https://customelectricalseattle.com"
+    },
+    {
+        "name": "Bel-Red Electric",
+        "phone": "(425) 883-7178",
+        "address": "Bellevue, WA",
+        "website": "https://belredelectric.com"
+    },
+    {
+        "name": "Farmers Electric",
+        "phone": "(360) 668-9540",
+        "address": "Bellevue, WA",
+        "website": "https://farmerselectric.net"
+    }
+]

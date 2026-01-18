@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Conner Electrical Services",
+        "phone": "(804) 748-9875",
+        "address": "Chesterfield, VA",
+        "website": "https://connerelectricalservices.com"
+    },
+    {
+        "name": "The Go To Crew Electric",
+        "phone": "(804) 912-6521",
+        "address": "Chesterfield, VA",
+        "website": "https://callthegotocrew.com"
+    },
+    {
+        "name": "Atkins Electric",
+        "phone": "(804) 921-3193",
+        "address": "Chesterfield, VA",
+        "website": "https://atkinselectricva.com"
+    },
+    {
+        "name": "Trademark Services LLC",
+        "phone": "(804) 276-6192",
+        "address": "Chesterfield, VA",
+        "website": "https://trademarkservicesva.com"
+    }
+]

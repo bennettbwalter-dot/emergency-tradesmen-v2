@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Hurricane Glass Sugar Land",
+        "phone": "(281) 815-4193",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Absolute Glassworks Sugar Land",
+        "phone": "(713) 666-1930",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Texan Glass Sugar Land",
+        "phone": "(281) 296-6200",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "American Windshield Replacement",
+        "phone": "(281) 688-9450",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "TLC Auto Glass Sugar Land",
+        "phone": "(713) 686-1111",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Prime Auto Glass",
+        "phone": "(832) 206-9920",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "S Delta Auto Glass",
+        "phone": "(281) 564-2727",
+        "address": "Sugar Land, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    }
+]

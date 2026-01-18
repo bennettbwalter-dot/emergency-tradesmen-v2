@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Mechanical Services, Inc.",
+        "phone": "(936) 756-3222",
+        "address": "Conroe, TX",
+        "rating": 4.4,
+        "review_count": 50
+    },
+    {
+        "name": "Bradbury Brothers",
+        "phone": "(936) 271-2030",
+        "address": "Conroe, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "24/7 AC Repair Conroe",
+        "phone": "(936) 241-1150",
+        "address": "Conroe, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Reliable Air & Heat",
+        "phone": "(936) 441-2828",
+        "address": "Conroe, TX",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Conroe Air Conditioning & Heating",
+        "phone": "(936) 539-2544",
+        "address": "Conroe, TX",
+        "rating": 4.7,
+        "review_count": 320
+    }
+]

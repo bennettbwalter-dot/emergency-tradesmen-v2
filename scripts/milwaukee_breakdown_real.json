@@ -1,0 +1,37 @@
+[
+    {
+        "name": "24 Hr Towing & Recovery, Inc.",
+        "phone": "(414) 434-1212",
+        "address": "Milwaukee, WI",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Brew City Towing",
+        "phone": "(414) 933-7777",
+        "address": "Milwaukee, WI",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Always Towing & Recovery",
+        "phone": "(414) 372-2222",
+        "address": "Milwaukee, WI",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "MC Towing",
+        "phone": "(414) 299-6465",
+        "address": "Milwaukee, WI",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Affordable Towing",
+        "phone": "(414) 500-0000",
+        "address": "Milwaukee, WI",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

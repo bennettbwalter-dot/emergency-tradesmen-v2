@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Coast Plumbing, Heating & Air, Inc.",
+        "phone": "(714) 241-1414",
+        "address": "Long Beach, CA",
+        "website": "https://coastplumbing.com/"
+    },
+    {
+        "name": "Reliable Home Comfort",
+        "phone": "(562) 568-5345",
+        "address": "Long Beach, CA",
+        "website": "https://rhcair.com/"
+    },
+    {
+        "name": "Mike Diamond Plumbing & HVAC",
+        "phone": "(800) 446-6453",
+        "address": "Long Beach, CA",
+        "website": "https://mikediamondservices.com/"
+    },
+    {
+        "name": "All Temperatures Controlled, Inc.",
+        "phone": "(818) 924-3350",
+        "address": "Long Beach, CA",
+        "website": "https://alltemperaturescontrolled.com/"
+    },
+    {
+        "name": "Power Pro Plumbing",
+        "phone": "(833) 212-2124",
+        "address": "Long Beach, CA",
+        "website": "https://powerproplumbing.com/"
+    },
+    {
+        "name": "Precise Air Systems",
+        "phone": "(818) 240-1737",
+        "address": "Long Beach, CA",
+        "website": "https://preciseairsystems.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "House of Glass Newark",
+        "phone": "(973) 674-4228",
+        "address": "Newark, NJ",
+        "website": "https://glassnewarknj.com"
+    },
+    {
+        "name": "Mr. Glazier NJ",
+        "phone": "(973) 354-9868",
+        "address": "Newark, NJ area",
+        "website": "https://mrglazier.com"
+    },
+    {
+        "name": "Zeus Siding & Windows",
+        "phone": "(908) 316-2728",
+        "address": "35 Rose Terrace, Newark, NJ 07108",
+        "website": "https://zeussiding.com"
+    },
+    {
+        "name": "Glass Doctor Newark",
+        "phone": "(973) 648-0030",
+        "address": "559 McCarter Hwy, Newark NJ 07102",
+        "website": null
+    }
+]

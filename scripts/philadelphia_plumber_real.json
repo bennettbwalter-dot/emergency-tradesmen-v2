@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Plumbing Pals",
+        "phone": "(267) 356-7282",
+        "address": "Philadelphia, PA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "City Plumbing",
+        "phone": "(215) 470-3638",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(215) 446-9067",
+        "address": "Philadelphia, PA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Len The Plumber",
+        "phone": "1-800-950-4619",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Center City Plumber",
+        "phone": "(215) 546-1188",
+        "address": "Philadelphia, PA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

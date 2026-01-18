@@ -1,0 +1,37 @@
+[
+    {
+        "name": "20th Century Air",
+        "phone": "(714) 430-8006",
+        "address": "Anaheim, CA",
+        "rating": 4.9,
+        "review_count": 520
+    },
+    {
+        "name": "Anaheim AC Repair Techs",
+        "phone": "(888) 854-0998",
+        "address": "Anaheim, CA",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Magnolia Heating & Cooling",
+        "phone": "(951) 688-3524",
+        "address": "Anaheim, CA",
+        "rating": 4.9,
+        "review_count": 2500
+    },
+    {
+        "name": "Service Champions Plumbing, Heating & AC",
+        "phone": "(714) 777-7777",
+        "address": "Anaheim, CA",
+        "rating": 4.8,
+        "review_count": 8500
+    },
+    {
+        "name": "Albert Air Conditioning",
+        "phone": "(714) 526-6368",
+        "address": "Anaheim, CA",
+        "rating": 4.7,
+        "review_count": 1200
+    }
+]

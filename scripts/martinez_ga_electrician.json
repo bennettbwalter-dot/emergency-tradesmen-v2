@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Martinez, GA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Granese Electrical",
+        "phone": "855-506-4858",
+        "address": "Martinez, GA",
+        "website": "https://graneseelectric.com"
+    },
+    {
+        "name": "Weatherford Electric",
+        "phone": "706-830-5902",
+        "address": "Martinez, GA",
+        "website": "https://weatherfordelectric.com"
+    },
+    {
+        "name": "Electrical & Plumbing Inc.",
+        "phone": "706-860-0000",
+        "address": "Martinez, GA",
+        "website": "https://electricalandplumbinginc.com"
+    }
+]

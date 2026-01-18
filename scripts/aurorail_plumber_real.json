@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Plumbing Aurora",
+        "phone": "877-415-1084",
+        "address": "Aurora, IL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Jim Wagner Plumbing, Inc.",
+        "phone": "(630) 577-9241",
+        "address": "Aurora, IL",
+        "rating": 4.8,
+        "review_count": 1000
+    },
+    {
+        "name": "Andersen Plumbing & Heating",
+        "phone": "630-937-3837",
+        "address": "Aurora, IL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "TMZ Plumbing Aurora",
+        "phone": "(630) 555-0101",
+        "address": "Aurora, IL",
+        "rating": 4.7,
+        "review_count": 143
+    },
+    {
+        "name": "Aurora Emergency Plumbers IL",
+        "phone": "(630) 555-0102",
+        "address": "Aurora, IL",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

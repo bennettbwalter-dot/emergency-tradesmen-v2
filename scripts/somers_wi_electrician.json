@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Somers, WI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Wellcraft Electrical",
+        "phone": "(262) 632-3153",
+        "address": "Somers, WI",
+        "website": "https://wellcraftelectrical.com"
+    },
+    {
+        "name": "Miller Electrical Enterprises",
+        "phone": "(262) 654-2176",
+        "address": "Somers, WI",
+        "website": "https://millerelectricent.com"
+    },
+    {
+        "name": "American Electric Company",
+        "phone": "(847) 252-1757",
+        "address": "Somers, WI",
+        "website": "https://american-electric-company.com"
+    }
+]

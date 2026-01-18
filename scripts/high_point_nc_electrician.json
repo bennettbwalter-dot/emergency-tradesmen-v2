@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Escarate Electric",
+        "phone": "336-963-2353",
+        "address": "High Point, NC",
+        "website": "https://escarateelectric.com"
+    },
+    {
+        "name": "Electrician Guys High Point",
+        "phone": "336-490-9380",
+        "address": "High Point, NC",
+        "website": "https://highpointelectricianpros.com"
+    },
+    {
+        "name": "Kluch Electrical",
+        "phone": "336-814-6007",
+        "address": "High Point, NC",
+        "website": "https://kluch-electrical.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "High Point, NC",
+        "website": "https://oconnorselectrical.com"
+    }
+]

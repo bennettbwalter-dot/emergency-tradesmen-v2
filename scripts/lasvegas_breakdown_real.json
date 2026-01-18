@@ -1,0 +1,37 @@
+[
+    {
+        "name": "All In Towing",
+        "phone": "(702) 450-1222",
+        "address": "Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Economy Towing",
+        "phone": "(702) 498-1063",
+        "address": "Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Go and Go Towing",
+        "phone": "(702) 251-1843",
+        "address": "Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Las Vegas Towing",
+        "phone": "(702) 580-0083",
+        "address": "Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Quality Towing Las Vegas",
+        "phone": "(702) 649-5711",
+        "address": "Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

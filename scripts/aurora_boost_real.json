@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Roto-Rooter Aurora",
+        "phone": "303-202-3010",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Plumbline Services",
+        "phone": "303-436-2525",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2200
+    },
+    {
+        "name": "On Call Plumbers Aurora",
+        "phone": "(720) 399-6707",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Aurora Emergency Plumbing",
+        "phone": "(303) 900-6465",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 60
+    },
+    {
+        "name": "Aurora Emergency Plumbers",
+        "phone": "303-223-6346",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 45
+    },
+    {
+        "name": "Veteran Heating, Cooling, Plumbing & Electric",
+        "phone": "(720) 722-1229",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 310
+    },
+    {
+        "name": "Your Plumber LLC",
+        "phone": "720-620-6990",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Elkhorn Heating, Air Conditioning, Plumbing & Electrical",
+        "phone": "720-615-0098",
+        "address": "Aurora, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Access Electrical",
+        "phone": "(720) 477-0487",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Flowers Electric",
+        "phone": "(720) 390-2077",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "A & B Electric",
+        "phone": "(303) 525-4583",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Electrician Squad of Aurora",
+        "phone": "(855) 930-6015",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 60
+    },
+    {
+        "name": "The Electricians",
+        "phone": "(720) 303-0150",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "RM Electrical Solutions LLC",
+        "phone": "(720) 292-7930",
+        "address": "Aurora, CO",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 45
+    },
+    {
+        "name": "Gina's 24Hr Locksmith Aurora Colorado",
+        "phone": "(720) 826-8282",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Aurora Locksmith Near Me",
+        "phone": "(720) 912-9069",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "On Call Locksmith Aurora",
+        "phone": "(720) 812-9118",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "Locksmith Aurora",
+        "phone": "(303) 749-0140",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mile High Locksmith®",
+        "phone": "(720) 951-0392",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Aurora Locksmith Services",
+        "phone": "(720) 220-4851",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Aurora City Locksmith",
+        "phone": "(303) 214-7049",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 65
+    },
+    {
+        "name": "Aurora CO Locksmith Store",
+        "phone": "(720) 372-4065",
+        "address": "Aurora, CO",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 40
+    }
+]

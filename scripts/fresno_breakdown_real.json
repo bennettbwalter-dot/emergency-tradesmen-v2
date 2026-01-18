@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Farmers Towing",
+        "phone": "(559) 990-9526",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Llanos Towing",
+        "phone": "(559) 761-9076",
+        "address": "Fresno, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "US Towing",
+        "phone": "(559) 276-5000",
+        "address": "Fresno, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "10-4 Tow of Fresno",
+        "phone": "(559) 500-3848",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Affordable Towing",
+        "phone": "(559) 377-6057",
+        "address": "Fresno, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

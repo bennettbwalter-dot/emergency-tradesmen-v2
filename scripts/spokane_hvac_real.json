@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Cougar Heating and Air Conditioning",
+        "phone": "(509) 484-6420",
+        "address": "Spokane, WA",
+        "website": "https://cougarmechanical.com/"
+    },
+    {
+        "name": "Sturm Heating & Air Conditioning",
+        "phone": "(509) 790-3987",
+        "address": "Spokane, WA",
+        "website": "https://sturmheating.com/"
+    },
+    {
+        "name": "Mainstream Electric, Heating, Cooling, & Plumbing",
+        "phone": "(509) 237-6483",
+        "address": "Spokane, WA",
+        "website": "https://mainstreamhomeservices.com/"
+    },
+    {
+        "name": "Banner Furnace & Fuel",
+        "phone": "(509) 535-1711",
+        "address": "Spokane, WA",
+        "website": "https://bannerfuel.com/"
+    },
+    {
+        "name": "America NW Plumbing, Heating, and Cooling",
+        "phone": "(509) 939-1817",
+        "address": "Spokane, WA",
+        "website": "https://americanwplumbing.com/"
+    },
+    {
+        "name": "Spokane's Best HVAC",
+        "phone": "(509) 545-5405",
+        "address": "Spokane, WA",
+        "website": "https://spokaneheatingcooling.com/"
+    }
+]

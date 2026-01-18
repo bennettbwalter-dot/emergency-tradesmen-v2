@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Edinboro, PA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Casbohm Electric",
+        "phone": "(814) 923-2217",
+        "address": "Edinboro, PA",
+        "website": "https://casbohmelectric.com"
+    },
+    {
+        "name": "EcoPro Mechanical",
+        "phone": "(888) 561-0555",
+        "address": "Edinboro, PA",
+        "website": "https://ecopromechanical.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Edinboro, PA",
+        "website": "https://lewsaderelectric.com"
+    }
+]

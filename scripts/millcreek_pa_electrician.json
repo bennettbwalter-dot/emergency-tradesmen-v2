@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Wm. T. Spaeder",
+        "phone": "(814) 456-7014",
+        "address": "Millcreek, PA",
+        "website": "https://spaeder.com"
+    },
+    {
+        "name": "North Shore Electric",
+        "phone": "(814) 456-1234",
+        "address": "Millcreek, PA",
+        "website": "http://northshoreelect.com"
+    },
+    {
+        "name": "Haller Enterprises",
+        "phone": "(717) 204-8120",
+        "address": "Millcreek, PA",
+        "website": "https://hallerent.com"
+    },
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(1-800-380-6800)",
+        "address": "Millcreek, PA",
+        "website": "https://thomasedisonelectric.com"
+    }
+]

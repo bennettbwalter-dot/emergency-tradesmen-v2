@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Miami",
+        "phone": "(888) 826-0091",
+        "address": "Coral Gables, FL",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Xmart Power Electric",
+        "phone": "(800) 741-5257",
+        "address": "Coral Gables, FL",
+        "website": "https://xmartpower.com"
+    },
+    {
+        "name": "South Power Electric",
+        "phone": "+1 786 379 8182",
+        "address": "Coral Gables, FL",
+        "website": "https://southpowerelectricinc.com"
+    },
+    {
+        "name": "305 Power Corp",
+        "phone": "(305) 988-9866",
+        "address": "Coral Gables, FL",
+        "website": "https://305powerfl.com"
+    }
+]

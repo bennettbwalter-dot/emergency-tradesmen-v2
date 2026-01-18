@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Allbritten",
+        "phone": "(559) 601-0833",
+        "address": "Clovis, CA",
+        "website": "https://allbritten.com"
+    },
+    {
+        "name": "Mid-Valley Electric",
+        "phone": "(559) 270-9149",
+        "address": "Clovis, CA",
+        "website": "https://mid-valleyelectric.com"
+    },
+    {
+        "name": "Herzog Electric",
+        "phone": "(559) 712-1211",
+        "address": "Clovis, CA",
+        "website": "https://herzog-brothers.com"
+    },
+    {
+        "name": "Cole Electric",
+        "phone": "(469) 422-6019",
+        "address": "Clovis, CA",
+        "website": "https://coleelectricllc.com"
+    }
+]

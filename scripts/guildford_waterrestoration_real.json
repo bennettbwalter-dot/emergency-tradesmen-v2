@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Cross Emergency Plumbers Guildford",
+        "phone": "01483 339537",
+        "address": "124A High St, Guildford, GU1 3HQ",
+        "website": "https://plumbersguildford.co.uk/"
+    },
+    {
+        "name": "DrainBoss Guildford",
+        "phone": "07772 535248",
+        "address": "Guildford",
+        "website": "https://drainboss.co.uk/"
+    },
+    {
+        "name": "ICE Cleaning Guildford",
+        "phone": "0208 066 0360",
+        "address": "Guildford",
+        "website": "https://icecleaning.co.uk/"
+    },
+    {
+        "name": "Wentworth Water Guildford",
+        "phone": "01252 235 365",
+        "address": "Guildford",
+        "website": "https://wentworthwater.co.uk/"
+    },
+    {
+        "name": "Dry And Restore Guildford",
+        "phone": "01252 235 365",
+        "address": "Guildford",
+        "website": "https://dryandrestore.co.uk/"
+    }
+]

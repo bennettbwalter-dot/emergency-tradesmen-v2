@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter Louisville",
+        "phone": "(502) 583-1550",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "On Call Plumbers Louisville",
+        "phone": "(502) 309-2524",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Jarboe's Heating, Cooling & Plumbing",
+        "phone": "(502) 324-1257",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "Louisville Plumbing, Drain, and Rooter Pros",
+        "phone": "(502) 515-0099",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Sal's Heating & Cooling, Plumbing & Sewer",
+        "phone": "(502) 955-5551",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 410
+    },
+    {
+        "name": "Paulie's Plumbing Services",
+        "phone": "(502) 416-4153",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "1-Tom-Plumber Louisville",
+        "phone": "1-502-221-3128",
+        "address": "Louisville, KY",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Allen Electrical",
+        "phone": "502.636.4357",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Mister Sparky of Louisville",
+        "phone": "(888) 826-0091",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Excalibur Electrician of Louisville KY",
+        "phone": "502-379-4503",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Emergency Electrician Louisville KY",
+        "phone": "(877) 390-0565",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Ken Bobko Electric Louisville",
+        "phone": "(877) 734-8969",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Newman Electric, LLC",
+        "phone": "502.640.5889",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Tom Drexler Plumbing, Air & Electric",
+        "phone": "(502) 717-1896",
+        "address": "Louisville, KY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Locksmith Louisville",
+        "phone": "502-238-7886",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Louisville KY",
+        "phone": "502-628-6079",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Pop-A-Lock of Louisville",
+        "phone": "502-895-6736",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "General Locksmith Store Louisville",
+        "phone": "502-465-6338",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Louisville Lock Safe Services",
+        "phone": "502-514-4544",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Louisville Locksmith Service",
+        "phone": "502-496-6888",
+        "address": "Louisville, KY",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

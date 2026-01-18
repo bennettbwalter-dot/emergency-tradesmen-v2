@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Binswanger Glass Plano",
+        "phone": "(972) 424-8554",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Glass Doctor of Dallas Metroplex",
+        "phone": "(972) 346-0918",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "24hr Sliding Door Repair",
+        "phone": "(877) 299-9179",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Bill's Auto Glass",
+        "phone": "(214) 856-8250",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Titan Auto Glass",
+        "phone": "(972) 747-9400",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Optic-Kleer Plano",
+        "phone": "(972) 400-0714",
+        "address": "Plano, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 110
+    }
+]

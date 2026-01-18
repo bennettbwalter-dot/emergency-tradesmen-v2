@@ -1,0 +1,37 @@
+[
+    {
+        "name": "T Dog Towing",
+        "phone": "(706) 550-1269",
+        "address": "Augusta, GA",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Chancey's Towing and Wrecker",
+        "phone": "(706) 796-1642",
+        "address": "Augusta, GA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Wayne's Towing",
+        "phone": "(706) 736-4600",
+        "address": "Augusta, GA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Griffin Fast Towing Recovery",
+        "phone": "(762) 224-3139",
+        "address": "Augusta, GA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Chastain's Towing",
+        "phone": "(706) 705-5270",
+        "address": "Augusta, GA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

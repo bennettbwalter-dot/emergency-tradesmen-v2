@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Papa's Plumbing LLC",
+        "phone": "(507) 993-3920",
+        "address": "Stewartville, MN",
+        "website": "https://papasplumbingllc.com"
+    },
+    {
+        "name": "Tri County Plumbing & Heating",
+        "phone": "(507) 533-9418",
+        "address": "Stewartville, MN",
+        "website": "https://tricountyplumbingheating.com"
+    },
+    {
+        "name": "Hawk's Services",
+        "phone": "(507) 226-9950",
+        "address": "Stewartville, MN",
+        "website": "https://callhawk.com"
+    },
+    {
+        "name": "Plumbing Solutions",
+        "phone": "(507) 923-5973",
+        "address": "Stewartville, MN",
+        "website": "https://stewartvillemn.com"
+    }
+]

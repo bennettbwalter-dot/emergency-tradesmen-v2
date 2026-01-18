@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tri-County Electric",
+        "phone": "440-542-0735",
+        "address": "Cleveland Heights, OH",
+        "website": "https://tricountyelectricservice.com"
+    },
+    {
+        "name": "IHG Electric",
+        "phone": "877-327-7704",
+        "address": "Cleveland Heights, OH",
+        "website": "https://ihgelectric.com"
+    },
+    {
+        "name": "Skettle Electric Inc.",
+        "phone": "216-932-2598",
+        "address": "Cleveland Heights, OH",
+        "website": "https://skettleelectric.com"
+    },
+    {
+        "name": "Shaker Heights Electric",
+        "phone": "216-350-1350",
+        "address": "Cleveland Heights, OH",
+        "website": "https://shakerheights-electric.com"
+    }
+]

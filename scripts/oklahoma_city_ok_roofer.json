@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Preferred Roofing",
+        "phone": "(405) 721-3333",
+        "address": "Oklahoma City, OK",
+        "website": "https://preferredroofing.net"
+    },
+    {
+        "name": "Ridgid Construction",
+        "phone": "(405) 412-2592",
+        "address": "Oklahoma City, OK",
+        "website": "https://ridgidroofing.com"
+    },
+    {
+        "name": "Wilson and Sons Roofing",
+        "phone": "(405) 866-2342",
+        "address": "Oklahoma City, OK",
+        "website": "https://wilsonandsonsroofing.co"
+    },
+    {
+        "name": "Rich Roofing",
+        "phone": "(405) 866-2245",
+        "address": "Oklahoma City, OK",
+        "website": "https://richroofingllc.com"
+    }
+]

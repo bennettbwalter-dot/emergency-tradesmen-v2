@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Donco Electric",
+        "phone": "855-740-3232",
+        "address": "Dublin, OH",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Dublin, OH",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Dublin, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Dublin, OH",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

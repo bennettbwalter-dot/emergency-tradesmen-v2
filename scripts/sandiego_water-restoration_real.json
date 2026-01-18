@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of San Diego City SW",
+        "phone": "(619) 269-5004",
+        "address": "San Diego, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Fadox Construction",
+        "phone": "(619) 880-6554",
+        "address": "San Diego, CA",
+        "website": "https://fadoxconstruction.com/"
+    },
+    {
+        "name": "San Diego Emergency Flood Service",
+        "phone": "(888) 349-2564",
+        "address": "San Diego, CA",
+        "website": "https://sandiego-flooded.com/"
+    },
+    {
+        "name": "ThuroDry",
+        "phone": "(619) 231-0800",
+        "address": "San Diego, CA",
+        "website": "https://thurodry.com/"
+    },
+    {
+        "name": "Paul Davis Restoration of North County San Diego",
+        "phone": "(858) 987-4636",
+        "address": "San Diego, CA",
+        "website": "https://pauldavis.com/"
+    }
+]

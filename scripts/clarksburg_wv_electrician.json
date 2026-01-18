@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Clarksburg, WV",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Clarksburg, WV",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Mitchell Electric",
+        "phone": "304-677-9487",
+        "address": "Clarksburg, WV",
+        "website": "https://emergencyelectriciansquad.com"
+    },
+    {
+        "name": "CECO Electric",
+        "phone": "800-954-2326",
+        "address": "Clarksburg, WV",
+        "website": "https://cecoelectric.com"
+    }
+]

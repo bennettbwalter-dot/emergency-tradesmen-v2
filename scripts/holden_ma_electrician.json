@@ -1,0 +1,26 @@
+[
+    {
+        "name": "MJP Electrician",
+        "phone": "(781) 724-6244",
+        "address": "Holden, MA",
+        "website": "https://mjpelectrician.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Holden, MA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Lindgren Electric",
+        "phone": "(508) 829-9808",
+        "address": "Holden, MA",
+        "website": "https://lindgrenelectric.com"
+    },
+    {
+        "name": "Scott Stevens Electrical",
+        "phone": "(877) 252-3888",
+        "address": "Holden, MA",
+        "website": "https://scottstevenselectrical.com"
+    }
+]

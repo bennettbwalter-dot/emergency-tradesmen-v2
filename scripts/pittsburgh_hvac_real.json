@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A-Comfort Service",
+        "phone": "(412) 453-8538",
+        "address": "Pittsburgh, PA",
+        "rating": 4.7,
+        "review_count": 50
+    },
+    {
+        "name": "Wade Heating & Cooling",
+        "phone": "(412) 787-1341",
+        "address": "Pittsburgh, PA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Stahl Plumbing, Heating & Air Conditioning",
+        "phone": "(412) 273-1000",
+        "address": "Pittsburgh, PA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Boehmer Heating & Cooling",
+        "phone": "(412) 381-4100",
+        "address": "Pittsburgh, PA",
+        "rating": 4.7,
+        "review_count": 950
+    },
+    {
+        "name": "Gillece Services",
+        "phone": "(412) 347-3595",
+        "address": "Pittsburgh, PA",
+        "rating": 4.6,
+        "review_count": 5200
+    }
+]

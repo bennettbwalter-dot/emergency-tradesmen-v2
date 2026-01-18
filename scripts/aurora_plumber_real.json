@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Your Plumber LLC",
+        "phone": "(720) 620-6990",
+        "address": "Aurora, CO",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Aurora Emergency Plumbers",
+        "phone": "(303) 223-6346",
+        "address": "Aurora, CO",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Doctor Fix-It Plumbing",
+        "phone": "(303) 993-1550",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Reliable Plumbing Services",
+        "phone": "(720) 404-1160",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Aurora Plumbing Pros",
+        "phone": "(720) 698-4826",
+        "address": "Aurora, CO",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

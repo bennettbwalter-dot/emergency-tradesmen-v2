@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Knoxville",
+        "phone": "865-588-0622",
+        "address": "Knoxville, TN",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Pipe Wrench Plumbing",
+        "phone": "865-583-3957",
+        "address": "Knoxville, TN",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Hero Services Knoxville",
+        "phone": "865-325-0814",
+        "address": "Knoxville, TN",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "My Knoxville Plumber",
+        "phone": "(865) 555-0101",
+        "address": "Knoxville, TN",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Knoxville Emergency Plumbers",
+        "phone": "(865) 555-0102",
+        "address": "Knoxville, TN",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

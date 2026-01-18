@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mister Sparky of Charleston",
+        "phone": "(843) 418-0696",
+        "address": "Charleston, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Bates Electric Charleston",
+        "phone": "(843) 350-3336",
+        "address": "Charleston, SC",
+        "website": "https://bates-electric.com"
+    },
+    {
+        "name": "East Bay Electric",
+        "phone": "(843) 955-8090",
+        "address": "Charleston, SC",
+        "website": "https://eastbayelec.com"
+    },
+    {
+        "name": "Mr. Electric of Charleston",
+        "phone": "(843) 305-5350",
+        "address": "Charleston, SC",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "U.S. Electric Contractors",
+        "phone": "(843) 825-1840",
+        "address": "Charleston, SC",
+        "website": "https://uselectriccontractors.com"
+    }
+]

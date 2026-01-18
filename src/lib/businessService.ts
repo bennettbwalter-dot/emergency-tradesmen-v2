@@ -100,15 +100,12 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         }
     } else if (countryCode.toUpperCase() === 'GB') {
         // If NO specific city and we are in UK mode, AGGREGATE all static UK listings
-        const usCitiesLower = usCities.map(c => c.toLowerCase());
+        // We assume businessListings contains valid UK data (Legacy)
 
         Object.keys(businessListings).forEach(cityKey => {
-            // Include if NOT a US city (everything else is UK by default in businessListings)
-            if (!usCitiesLower.includes(cityKey.toLowerCase())) {
-                const cityBiz = businessListings[cityKey][normalizedTrade];
-                if (cityBiz) {
-                    staticBusinesses = [...staticBusinesses, ...cityBiz];
-                }
+            const cityBiz = businessListings[cityKey][normalizedTrade];
+            if (cityBiz) {
+                staticBusinesses = [...staticBusinesses, ...cityBiz];
             }
         });
     }
@@ -121,8 +118,13 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         .eq('verified', true);
 
     if (searchCity && searchCity.trim() !== '') {
-        // Use the resolved searchCity (e.g. "Milton Keynes") not the raw input ("milton-keynes")
-        query = query.eq('city', searchCity);
+        // Handle both hyphenated (URL-style) and space-separated (DB-style) city names
+        const cityWithSpaces = searchCity.replace(/-/g, ' ');
+        if (searchCity.includes('-')) {
+            query = query.or(`city.ilike."${searchCity}",city.ilike."${cityWithSpaces}"`);
+        } else {
+            query = query.ilike('city', searchCity);
+        }
     }
 
     const { data: supabaseBusinesses, error } = await query;

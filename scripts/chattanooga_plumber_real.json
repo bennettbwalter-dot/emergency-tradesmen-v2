@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Chattanooga",
+        "phone": "(423) 855-1212",
+        "address": "Chattanooga, TN",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Rooter-Man Plumber Chattanooga",
+        "phone": "(423) 308-6931",
+        "address": "Chattanooga, TN",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Provision Plumbing Chattanooga",
+        "phone": "423-278-5544",
+        "address": "Chattanooga, TN",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Best Plumbing Chattanooga",
+        "phone": "(423) 503-7215",
+        "address": "Chattanooga, TN",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Chattanooga Emergency Plumbers",
+        "phone": "(423) 555-0101",
+        "address": "Chattanooga, TN",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

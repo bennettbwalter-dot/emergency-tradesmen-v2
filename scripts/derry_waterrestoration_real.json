@@ -1,0 +1,32 @@
+[
+    {
+        "name": "PCLA Derry",
+        "phone": "028 9581 5318",
+        "address": "Derry/Londonderry, Northern Ireland",
+        "website": "https://pcla.co.uk/"
+    },
+    {
+        "name": "Hydro Dry Derry",
+        "phone": "07902 337953",
+        "address": "Derry/Londonderry",
+        "website": "https://hydrodryrestoration.com/"
+    },
+    {
+        "name": "Causeway Cleaning Derry",
+        "phone": "07902 337953",
+        "address": "Derry/Londonderry",
+        "website": "https://causewaycleaning.com/"
+    },
+    {
+        "name": "Trace Source Derry",
+        "phone": "028 9581 5318",
+        "address": "Derry/Londonderry",
+        "website": "https://tracesourceni.com/"
+    },
+    {
+        "name": "Able Group Derry",
+        "phone": "0800 056 6666",
+        "address": "Derry/Londonderry",
+        "website": "https://able-group.co.uk/"
+    }
+]

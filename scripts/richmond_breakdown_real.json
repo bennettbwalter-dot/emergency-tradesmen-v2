@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Richmond Towing Service",
+        "phone": "(804) 655-0498",
+        "address": "Richmond, VA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Thomas Towing and Recovery",
+        "phone": "(804) 928-7080",
+        "address": "Richmond, VA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "RVA Towing",
+        "phone": "(804) 211-1333",
+        "address": "Richmond, VA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Richmond Roadside",
+        "phone": "(804) 300-4444",
+        "address": "Richmond, VA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Old Dominion Recovery",
+        "phone": "(804) 322-2222",
+        "address": "Richmond, VA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

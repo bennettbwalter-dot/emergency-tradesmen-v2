@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Best San Jose Towing",
+        "phone": "(408) 687-4834",
+        "address": "San Jose, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "10-4 Tow San Jose",
+        "phone": "(408) 652-8510",
+        "address": "San Jose, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "San Jose Towing Service",
+        "phone": "(408) 320-0000",
+        "address": "San Jose, CA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Garden City Towing",
+        "phone": "(408) 294-0414",
+        "address": "San Jose, CA",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Campbell Towing",
+        "phone": "(408) 371-5555",
+        "address": "San Jose, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

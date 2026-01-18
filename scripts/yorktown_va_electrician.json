@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Asbury Electric",
+        "phone": "757-767-4197",
+        "address": "Yorktown, VA",
+        "website": "https://asburyelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Yorktown, VA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "A/C Masters",
+        "phone": "757-898-2894",
+        "address": "Yorktown, VA",
+        "website": "https://acmasters.com"
+    },
+    {
+        "name": "Bud's Heating & Air Conditioning",
+        "phone": "757-890-2600",
+        "address": "Yorktown, VA",
+        "website": "https://budsusa.com"
+    }
+]

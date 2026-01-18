@@ -1,0 +1,32 @@
+[
+    {
+        "name": "EMC Leicester Builders",
+        "phone": "078 6020 0598",
+        "address": "50 Brabazon Road, Oadby, Leicester, LE2 5HD",
+        "website": "https://emc-leicester.co.uk/"
+    },
+    {
+        "name": "SV Richards Leicester",
+        "phone": "01530 222110",
+        "address": "Leicester",
+        "website": "https://svrichards.com/"
+    },
+    {
+        "name": "Fix It Locally Leicester",
+        "phone": "0116 319 4412",
+        "address": "Leicester",
+        "website": "https://fixitlocally.co.uk/"
+    },
+    {
+        "name": "Build Hub Leicester Emergency",
+        "phone": "07397 748225",
+        "address": "Leicester",
+        "website": "https://buildhubleicester.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Leicester",
+        "phone": "01164 890 060",
+        "address": "Leicester",
+        "website": "https://trustatrader.com/"
+    }
+]

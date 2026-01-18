@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Kansas City",
+        "phone": "(913) 285-8495",
+        "address": "Kansas City, MO",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "Janssen Glass",
+        "phone": "(913) 677-5727",
+        "address": "Kansas City, MO",
+        "website": "https://janssenglass.com"
+    },
+    {
+        "name": "Infinity Glass",
+        "phone": "(913) 593-9426",
+        "address": "Kansas City, MO",
+        "website": "https://infinityglasskc.com"
+    },
+    {
+        "name": "Binswanger Glass",
+        "phone": "(816) 333-3111",
+        "address": "Kansas City, MO",
+        "website": "https://binswangerglass.com"
+    }
+]

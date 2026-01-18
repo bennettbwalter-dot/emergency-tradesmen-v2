@@ -1,0 +1,26 @@
+[
+    {
+        "name": "On Time Professionals",
+        "phone": "(515) 303-3573",
+        "address": "West Des Moines, IA",
+        "website": "https://myontimepro.com"
+    },
+    {
+        "name": "A-1 Electric",
+        "phone": "(515) 287-2383",
+        "address": "West Des Moines, IA",
+        "website": "https://desmoinesbestelectrician.net"
+    },
+    {
+        "name": "Rewired Iowa West Des Moines",
+        "phone": "(515) 619-5349",
+        "address": "West Des Moines, IA",
+        "website": "https://rewirediowa.com"
+    },
+    {
+        "name": "Wink Electric",
+        "phone": "(515) 805-7783",
+        "address": "West Des Moines, IA",
+        "website": "https://winkelectric.com"
+    }
+]

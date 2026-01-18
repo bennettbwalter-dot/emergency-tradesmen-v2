@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
                         <h2 className="text-xl font-semibold text-slate-800 mb-3">2. Information We Collect</h2>
                         <ul className="list-disc pl-5 text-slate-600 space-y-2">
                             <li><strong>Personal Data:</strong> Name, email address, and phone number when you register or claim a business.</li>
-                            <li><strong>Location Data:</strong> Your geographical location (via Google Maps API) to show relevant tradespeople near you.</li>
+                            <li><strong>Location Data:</strong> Your approximate geographical location to show relevant tradespeople near you.</li>
                             <li><strong>Usage Data:</strong> Information about how you use our website (e.g., pages visited, time spent).</li>
                         </ul>
                     </section>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
                             We may share data with trusted third-party service providers to help us operate our business, including:
                         </p>
                         <ul className="list-disc pl-5 text-slate-600 space-y-2 mt-2">
-                            <li><strong>Google Maps:</strong> For location and mapping services.</li>
+                            <li><strong>OpenStreetMap:</strong> For location and mapping services.</li>
                             <li><strong>Stripe:</strong> For secure payment processing.</li>
                             <li><strong>Supabase:</strong> For database hosting and authentication.</li>
                             <li><strong>EmailOctopus:</strong> For email marketing campaigns.</li>

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ASAP Towing & Storage",
+        "phone": "(904) 771-7111",
+        "address": "Jacksonville, FL",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Safe Harbor Towing",
+        "phone": "(904) 659-3888",
+        "address": "Jacksonville, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Jacksonville Towing Company",
+        "phone": "(904) 500-0500",
+        "address": "Jacksonville, FL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Duval Towing",
+        "phone": "(904) 300-4740",
+        "address": "Jacksonville, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Coastal Towing",
+        "phone": "(904) 744-8022",
+        "address": "Jacksonville, FL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

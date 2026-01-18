@@ -1,0 +1,32 @@
+[
+    {
+        "name": "The Restoration Company",
+        "phone": "(559) 374-2600",
+        "address": "3327 W. Sussex Way, Fresno, CA 93722",
+        "website": "https://restoration.us/"
+    },
+    {
+        "name": "ServiceMaster at Fresno",
+        "phone": "(559) 648-8313",
+        "address": "Fresno, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "911 Restoration of Fresno",
+        "phone": "(559) 795-1670",
+        "address": "Fresno, CA",
+        "website": "https://911restorationfresno.com/"
+    },
+    {
+        "name": "Star Water Damage Fresno",
+        "phone": "(559) 203-7296",
+        "address": "Fresno, CA",
+        "website": "https://starwaterdamagefresno.com/"
+    },
+    {
+        "name": "SERVPRO of Fresno Southeast",
+        "phone": "(559) 453-3336",
+        "address": "Fresno, CA",
+        "website": "https://servpro.com/"
+    }
+]

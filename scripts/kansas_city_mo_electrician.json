@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Anthony Plumbing, Heating, Cooling & Electric",
+        "phone": "(913) 298-0444",
+        "address": "Kansas City, MO",
+        "website": "https://anthonyphc.com"
+    },
+    {
+        "name": "C.M. Mose & Son",
+        "phone": "(816) 339-5190",
+        "address": "Kansas City, MO",
+        "website": "https://cmmoseandson.com"
+    },
+    {
+        "name": "Edwards Electric LLC",
+        "phone": "(816) 357-9107",
+        "address": "Kansas City, MO",
+        "website": "https://edwardselectric-mo.com"
+    },
+    {
+        "name": "Current Solutions Electric",
+        "phone": "(816) 551-2889",
+        "address": "Kansas City, MO",
+        "website": "https://cse-kc.com"
+    }
+]

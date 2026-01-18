@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical Biloxi",
+        "phone": "(844) 484-2612",
+        "address": "Biloxi, MS",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Ken Bobko Electric Biloxi",
+        "phone": "(877) 734-8969",
+        "address": "Biloxi, MS",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Apex Electric Biloxi",
+        "phone": "(601) 813-8152",
+        "address": "Biloxi, MS",
+        "website": "https://apexelectricms.com"
+    },
+    {
+        "name": "AG Electric Biloxi",
+        "phone": "(228) 343-0547",
+        "address": "Biloxi, MS",
+        "website": "https://agelectricllc.com"
+    }
+]

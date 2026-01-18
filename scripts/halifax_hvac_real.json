@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Halifax Plumbers",
+        "phone": "01422 415 277",
+        "address": "Halifax",
+        "website": "https://halifaxplumbers.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01422 520 030",
+        "address": "Halifax",
+        "website": "https://able-group.co.uk/"
+    },
+    {
+        "name": "Plumbcare.com",
+        "phone": "0333 577 0151",
+        "address": "Halifax",
+        "website": "https://plumbcare.com/"
+    },
+    {
+        "name": "Halifax Gas Engineers",
+        "phone": "01422 520 030",
+        "address": "Halifax, HX1-HX7",
+        "website": "https://halifaxgasengineers.co.uk/"
+    },
+    {
+        "name": "No1 PHD",
+        "phone": "0800 690 6777",
+        "address": "Halifax",
+        "website": "https://no1phd.co.uk/"
+    }
+]

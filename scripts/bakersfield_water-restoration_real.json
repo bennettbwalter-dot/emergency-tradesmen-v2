@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster At Bakersfield",
+        "phone": "(661) 449-2180",
+        "address": "Bakersfield, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "PuroClean of Bakersfield, CA",
+        "phone": "(661) 316-3090",
+        "address": "Bakersfield, CA",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "Scientific Restoration Specialists Inc.",
+        "phone": "(661) 213-8400",
+        "address": "Bakersfield, CA",
+        "website": "https://scientificrestoration.com/"
+    },
+    {
+        "name": "STOP Restoration of Bakersfield, CA",
+        "phone": "(661) 475-6522",
+        "address": "Bakersfield, CA",
+        "website": "https://stoprestoration.com/"
+    },
+    {
+        "name": "Pro Restoration",
+        "phone": "(661) 393-9306",
+        "address": "Bakersfield, CA",
+        "website": "https://prorestorationca.com/"
+    }
+]

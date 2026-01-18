@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABE AC",
+        "phone": "(956) 300-1541",
+        "address": "Mission, TX",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Cytech Heating & Cooling L.C.",
+        "phone": "(956) 553-3265",
+        "address": "Mission, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Atlas Electrical & AC Services",
+        "phone": "(956) 586-5491",
+        "address": "Mission, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "American AC & Heating",
+        "phone": "(956) 300-4366",
+        "address": "Mission, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Colair Cooling & Heating",
+        "phone": "(956) 581-5212",
+        "address": "Mission, TX",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

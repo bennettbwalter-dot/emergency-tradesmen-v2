@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Smith and Son Plumbing",
+        "address": "McKinney, TX",
+        "phone": "214-414-9966",
+        "trade": "drain-specialist",
+        "city": "McKinney"
+    },
+    {
+        "name": "Astar",
+        "address": "McKinney, TX",
+        "phone": "972-485-0819",
+        "trade": "drain-specialist",
+        "city": "McKinney"
+    },
+    {
+        "name": "DNA Plumbing Heating and Air",
+        "address": "McKinney, TX",
+        "phone": "214-790-7798",
+        "trade": "drain-specialist",
+        "city": "McKinney"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Winters Home Services",
+        "phone": "(617) 221-5899",
+        "address": "Somerville, MA",
+        "website": "https://wintershomeservices.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "(781) 396-7700",
+        "address": "Somerville, MA",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Shalin Plumbing",
+        "phone": "(781) 558-4680",
+        "address": "Somerville, MA",
+        "website": "https://shalinplumbing.com"
+    },
+    {
+        "name": "Lund Plumbing & Heating",
+        "phone": "(978) 664-3205",
+        "address": "Somerville, MA",
+        "website": "https://lundplumbingandheating.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Moody Heating & Air Conditioning",
+        "phone": "(316) 444-1019",
+        "address": "Wichita, KS",
+        "website": "https://moodyheatingandairconditioning.com"
+    },
+    {
+        "name": "Tickles Heating & Air",
+        "phone": "(316) 558-8425",
+        "address": "Wichita, KS",
+        "website": "https://ticklesheatingandair.com"
+    },
+    {
+        "name": "Hanna Heating & Air",
+        "phone": "(316) 945-3481",
+        "address": "Wichita, KS",
+        "website": "https://hannainc.com"
+    },
+    {
+        "name": "G.M. Air Conditioning & Heating",
+        "phone": "(316) 558-7479",
+        "address": "Wichita, KS",
+        "website": "https://gmairwichita.com"
+    }
+]

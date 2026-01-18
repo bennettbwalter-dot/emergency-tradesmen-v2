@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Express Air Cooling And Heating",
+        "phone": "(956) 722-2665",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Norway Air Conditioning Inc",
+        "phone": "(956) 726-4419",
+        "address": "Laredo, TX",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Ruby's Air Conditioning",
+        "phone": "(956) 712-4447",
+        "address": "Laredo, TX",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Mo-Tech Air Conditioning & Refrigeration",
+        "phone": "(956) 790-8083",
+        "address": "Laredo, TX",
+        "rating": 4.6,
+        "review_count": 65
+    },
+    {
+        "name": "North Side Air Conditioning",
+        "phone": "(956) 725-7428",
+        "address": "Laredo, TX",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

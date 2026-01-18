@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing of OKC",
+        "phone": "(405) 241-4262",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 238
+    },
+    {
+        "name": "Air Comfort Solutions",
+        "phone": "(405) 351-4146",
+        "address": "Oklahoma City, OK",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hour Emergency Plumber OKC",
+        "phone": "(405) 267-8060",
+        "address": "Oklahoma City, OK",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Roto-Rooter Oklahoma City",
+        "phone": "(405) 896-2866",
+        "address": "Oklahoma City, OK",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Hull Plumbing",
+        "phone": "(405) 246-9763",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

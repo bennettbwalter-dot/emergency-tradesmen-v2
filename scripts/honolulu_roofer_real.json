@@ -1,0 +1,32 @@
+[
+    {
+        "name": "On Top Roofing",
+        "phone": "(808) 744-7144",
+        "address": "Honolulu, HI",
+        "website": "https://ontoproofinghawaii.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "Honolulu, HI",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "Pro Roofing Repairs",
+        "phone": "(888) 899-5773",
+        "address": "Honolulu, HI",
+        "website": "https://proroofingrepairs.com/"
+    },
+    {
+        "name": "Voyager Roofing",
+        "phone": "(808) 555-0111",
+        "address": "Honolulu, HI",
+        "website": "https://voyagerroofinghi.com/"
+    },
+    {
+        "name": "Robert Nelson Roofing",
+        "phone": "(888) 897-9811",
+        "address": "Honolulu, HI",
+        "website": "https://robertnelsonroofing.com/"
+    }
+]

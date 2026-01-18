@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Ace Solves It All",
+        "phone": "(407) 499-8006",
+        "address": "Orlando, FL",
+        "rating": 4.8,
+        "review_count": 5000
+    },
+    {
+        "name": "Downtown Air and Heat",
+        "phone": "(407) 408-7105",
+        "address": "Orlando, FL",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "AmeriTech Heating & Air Conditioning",
+        "phone": "(407) 743-7106",
+        "address": "Orlando, FL",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Certified AC Services",
+        "phone": "(689) 205-9140",
+        "address": "Orlando, FL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Del-Air Heating & Air Conditioning",
+        "phone": "(888) 831-2665",
+        "address": "Orlando, FL",
+        "rating": 4.7,
+        "review_count": 3000
+    }
+]

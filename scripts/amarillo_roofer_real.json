@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Frakes Roofing",
+        "phone": "(877) 550-3398",
+        "address": "Amarillo, TX",
+        "website": "https://frakesroofing.com/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Amarillo, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "CRS Roofing & Construction",
+        "phone": "(806) 702-7648",
+        "address": "3866 Business Park Dr, Amarillo, TX 79110",
+        "website": "https://crsroofer.com/"
+    },
+    {
+        "name": "Tascosa Roofing LLC",
+        "phone": "(806) 454-9277",
+        "address": "Amarillo, TX",
+        "website": "https://tascosaroofing.com/"
+    },
+    {
+        "name": "Priority Roofing",
+        "phone": "(806) 690-1127",
+        "address": "3505 Olsen Blvd, Suite 104, Amarillo, TX 79109",
+        "website": "https://priorityroofs.com/"
+    }
+]

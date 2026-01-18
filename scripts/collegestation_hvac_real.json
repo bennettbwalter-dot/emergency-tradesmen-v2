@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(979) 361-0500",
+        "address": "College Station, TX",
+        "rating": 4.8,
+        "review_count": 5200
+    },
+    {
+        "name": "Dailey Company, Inc.",
+        "phone": "(979) 260-2020",
+        "address": "College Station, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Aire Serv of Aggieland",
+        "phone": "(979) 314-3224",
+        "address": "College Station, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Malek Service Company",
+        "phone": "(979) 446-0296",
+        "address": "College Station, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "One Hour Heating & Air Conditioning",
+        "phone": "(979) 703-1250",
+        "address": "College Station, TX",
+        "rating": 4.9,
+        "review_count": 320
+    }
+]

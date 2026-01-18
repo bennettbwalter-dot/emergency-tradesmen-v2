@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Portland Recovery Services",
+        "phone": "(971) 333-4781",
+        "address": "Portland, OR",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Northwestern Towing",
+        "phone": "(503) 253-3030",
+        "address": "Portland, OR",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Portland Towing",
+        "phone": "(503) 610-0126",
+        "address": "Portland, OR",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Speed's Towing",
+        "phone": "(503) 234-5555",
+        "address": "Portland, OR",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Gerlock Towing",
+        "phone": "(503) 535-9000",
+        "address": "Portland, OR",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

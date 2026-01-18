@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Doctor of Greater St. Louis",
+        "phone": "(314) 593-2335",
+        "address": "St. Louis, MO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Abbey Glass Inc",
+        "phone": "(314) 842-4477",
+        "address": "St. Louis, MO",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "J&M Auto Glass",
+        "phone": "(314) 896-1921",
+        "address": "St. Louis, MO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Auto Glass Repair of STL",
+        "phone": "314-626-8941",
+        "address": "St. Louis, MO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Star Auto Glass St. Louis",
+        "phone": "314-627-9477",
+        "address": "St. Louis, MO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    }
+]

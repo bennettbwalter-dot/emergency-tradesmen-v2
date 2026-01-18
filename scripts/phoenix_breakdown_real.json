@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Freeway Towing & Storage",
+        "phone": "(602) 377-0036",
+        "address": "Phoenix, AZ",
+        "rating": 4.7,
+        "review_count": 1000
+    },
+    {
+        "name": "Priority Towing",
+        "phone": "(602) 232-6006",
+        "address": "Phoenix, AZ",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Central Towing",
+        "phone": "(602) 277-3200",
+        "address": "Phoenix, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    },
+    {
+        "name": "Phoenix Towing Service",
+        "phone": "(602) 428-1440",
+        "address": "Phoenix, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "All City Towing",
+        "phone": "(480) 833-3200",
+        "address": "Phoenix, AZ",
+        "rating": 4.9,
+        "review_count": 1500
+    }
+]

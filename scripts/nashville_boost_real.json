@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Emergency Plumber Nashville",
+        "phone": "877-415-1084",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Roto-Rooter Nashville",
+        "phone": "615-361-6647",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Happy Hiller Nashville",
+        "phone": "(615) 345-0370",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2200
+    },
+    {
+        "name": "Plumbing Solutions Nashville",
+        "phone": "(615) 887-1501",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Nashville",
+        "phone": "(629) 228-0084",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "24/7 Plumbers Nashville",
+        "phone": "(615) 270-4499",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Green Hills Plumbing",
+        "phone": "(615) 383-3339",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Emergency Plumber Nashville TN",
+        "phone": "855-958-5868",
+        "address": "Nashville, TN",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Pro Electric TN, LLC",
+        "phone": "(615) 645-0925",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "O'Connor's Electrical Nashville",
+        "phone": "844-484-2612",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Mr. Electric of Central Nashville",
+        "phone": "(615) 235-0203",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Charles Stone Mechanical",
+        "phone": "(931) 372-8800",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Bates Electric",
+        "phone": "(615) 257-9352",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Coolray Electric",
+        "phone": "(629) 888-8400",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Ken Bobko Electric Nashville",
+        "phone": "(877) 734-8969",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Music City Electrical",
+        "phone": "(615) 351-4082",
+        "address": "Nashville, TN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Pop-A-Lock Locksmith Nashville",
+        "phone": "(615) 255-6736",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Nashville Locksmith",
+        "phone": "(615) 680-0844",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Midtown Locksmith Nashville",
+        "phone": "(615) 208-4005",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Nashville Lock and Key",
+        "phone": "(615) 680-0818",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Nashville Emergency Locksmith",
+        "phone": "(615) 510-3124",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Elite Locksmith Services Nashville",
+        "phone": "(615) 375-3338",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "CallOrange Locksmith of Nashville",
+        "phone": "(615) 800-4668",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "West Nashville TN Locksmith Store",
+        "phone": "(615) 436-0028",
+        "address": "Nashville, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 120
+    }
+]

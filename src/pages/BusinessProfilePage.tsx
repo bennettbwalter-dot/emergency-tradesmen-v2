@@ -17,7 +17,7 @@ import {
     Award, ThumbsUp, Calendar, ArrowLeft, ShieldCheck
 } from "lucide-react";
 import { InteractiveMap } from "@/components/InteractiveMap";
-import { IframeMap } from "@/components/IframeMap";
+import { LeafletMap } from "@/components/LeafletMap";
 import type { Business } from "@/lib/businesses";
 import { trades } from "@/lib/trades";
 
@@ -684,15 +684,7 @@ export default function BusinessProfilePage() {
                                         <ShareMenu businessName={business.name} city={formattedCity} />
                                     </div>
 
-                                    {/* Trustpilot Sidebar Widget */}
-                                    <div className="mt-8 border-t border-border pt-6">
-                                        <TrustpilotWidget
-                                            templateId="5419b6a8b0d04a076446a9ad"
-                                            businessId="676878b2d4b2944b9e1e2c94"
-                                            username="emergencytradesmen.net"
-                                            styleHeight="24px"
-                                        />
-                                    </div>
+                                    {/* Trustpilot Sidebar Widget removed due to invalid ID */}
                                 </div>
 
                                 {/* Claim Business Button */}
@@ -720,7 +712,7 @@ export default function BusinessProfilePage() {
                                             className="w-full h-full rounded-[20px]"
                                         />
                                     ) : (
-                                        <IframeMap
+                                        <LeafletMap
                                             city={formattedCity}
                                             businessName={business.name}
                                             address={business.address}

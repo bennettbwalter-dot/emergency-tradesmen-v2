@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Grizzly Heating and Air",
+        "phone": "(209) 366-4190",
+        "address": "Stockton, CA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Aire Serv of Stockton",
+        "phone": "(209) 800-8881",
+        "address": "Stockton, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Ken's Air Conditioning Service",
+        "phone": "(209) 473-2121",
+        "address": "Stockton, CA",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Lovotti Inc",
+        "phone": "(209) 931-2100",
+        "address": "Stockton, CA",
+        "rating": 4.6,
+        "review_count": 1200
+    },
+    {
+        "name": "Queirolo's Heating & Air Conditioning",
+        "phone": "(209) 464-4521",
+        "address": "Stockton, CA",
+        "rating": 4.7,
+        "review_count": 350
+    }
+]

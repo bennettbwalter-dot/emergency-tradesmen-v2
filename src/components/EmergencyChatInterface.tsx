@@ -15,7 +15,13 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
+    SelectGroup,
+    SelectLabel,
 } from "@/components/ui/select";
+import { UK_CITY_GROUPS } from "@/lib/uk-city-grouping";
+
+import { UKCityCombobox } from "@/components/UKCityCombobox";
+import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -23,6 +29,7 @@ export function EmergencyChatInterface() {
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
+    const [locationRecord, setLocationRecord] = useState<any>(null);
     const [chatState, setChatState] = useState<ChatState>({
         step: 'INITIAL',
         detectedTrade: null,
@@ -192,7 +199,7 @@ export function EmergencyChatInterface() {
             {/* Trade Selector */}
             <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
                 <SelectTrigger
-                    className={`h-9 px-4 min-w-[140px] rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
+                    className={`h-9 px-4 min-w-[140px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
                 >
                     <Wrench className="w-4 h-4 shrink-0 text-black dark:text-white" />
                     <SelectValue placeholder="Trade">
@@ -214,28 +221,31 @@ export function EmergencyChatInterface() {
                 </SelectContent>
             </Select>
 
-            {/* City Selector */}
-            <Select value={detectedCity || ""} onValueChange={setDetectedCity}>
-                <SelectTrigger
-                    className={`h-9 px-4 min-w-[140px] rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
-                >
-                    <MapPin className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                    <SelectValue placeholder="City">
-                        <span className="text-sm font-medium truncate">{detectedCity || "City"}</span>
-                    </SelectValue>
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200">
-                    {(settings.countryCode === 'US' ? usCities : cities).map((c) => (
-                        <SelectItem
-                            key={c}
-                            value={c}
-                            className="cursor-pointer hover:bg-gray-100 text-black"
-                        >
-                            {c}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
+            {/* Location Selector */}
+            {settings.countryCode === 'US' ? (
+                /* US Side: Hierarchical Location Selector */
+                <HierarchicalLocationSelector
+                    className="flex-1"
+                    placeholder="City, State"
+                    onLocationSelect={(record) => {
+                        console.log("Loc Selected", record);
+                        setDetectedCity(record.name);
+                        // Store full record for precise routing?
+                        // For now, we simulate the text-based flow
+                        // But ideally we route immediately if leaf node?
+                        // The button below triggers handleSearch -> which uses detectedCity text.
+                        // We should probably allow the Selector to trigger search.
+                    }}
+                />
+            ) : (
+                /* UK Side: Searchable Combobox */
+                <UKCityCombobox
+                    className="flex-1 h-12"
+                    placeholder="Select City"
+                    value={detectedCity || ""}
+                    onValueChange={setDetectedCity}
+                />
+            )}
 
             {/* Dynamic Action Button */}
             <Button
@@ -243,9 +253,19 @@ export function EmergencyChatInterface() {
                     if (isRequestingLocation) {
                         getLocation();
                         setIsRequestingLocation(false);
-                    } else if (detectedTrade && detectedCity && !input.trim()) {
+                    } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
                         const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
-                        navigate(`${countryPrefix}/emergency-${detectedTrade}/${detectedCity.toLowerCase()}`);
+
+                        if (locationRecord && locationRecord.path_slugs) {
+                            const { state, metro, city, suburb } = locationRecord.path_slugs;
+                            const hasSuburb = suburb && suburb.trim().length > 0;
+                            const newPath = hasSuburb
+                                ? `/us/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
+                                : `/us/${state}/${metro}/${city}/emergency-${detectedTrade}`;
+                            navigate(newPath);
+                        } else {
+                            navigate(`${countryPrefix}/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
+                        }
                     } else {
                         handleUserMessage(input);
                     }
@@ -382,7 +402,7 @@ export function EmergencyChatInterface() {
                             className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
-                        <div className="flex justify-end items-center gap-2 px-8 pb-4 bg-transparent w-full hidden md:flex">
+                        <div className="hidden md:grid grid-cols-[1fr_1fr_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
                             {controlsContent}
                         </div>
                     </div>

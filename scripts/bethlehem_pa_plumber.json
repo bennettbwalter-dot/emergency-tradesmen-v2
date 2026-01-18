@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Alvin's Emergency Plumbing",
+        "phone": "(888) 565-9676",
+        "address": "Bethlehem, PA",
+        "website": "https://alvinsplumbingllc.com"
+    },
+    {
+        "name": "On Call Plumbers",
+        "phone": "(610) 991-7707",
+        "address": "Bethlehem, PA",
+        "website": "https://plumbersineastonpa.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(484) 240-5668",
+        "address": "Bethlehem, PA",
+        "website": "https://www.rotorooter.com/bethlehempa/"
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Bethlehem",
+        "phone": "(610) 895-4762",
+        "address": "Bethlehem, PA",
+        "website": "https://www.benjaminfranklinplumbing.com/bethlehem/"
+    }
+]

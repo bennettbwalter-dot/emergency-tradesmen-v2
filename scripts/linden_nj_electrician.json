@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Linden, NJ",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Linden, NJ",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Fes Electric",
+        "phone": "(973) 878-6111",
+        "address": "Linden, NJ",
+        "website": "https://felectricalservices.com"
+    },
+    {
+        "name": "Go Pro Electric",
+        "phone": "(908) 574-3088",
+        "address": "Linden, NJ",
+        "website": "https://goproelectricnjny.com"
+    }
+]

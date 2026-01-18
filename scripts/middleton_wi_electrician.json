@@ -1,0 +1,26 @@
+[
+    {
+        "name": "All Comfort Services",
+        "phone": "(608) 838-7300",
+        "address": "Middleton, WI",
+        "website": "https://allcomfortservices.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Middleton, WI",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "Badger Electric",
+        "phone": "(608) 661-4701",
+        "address": "Middleton, WI",
+        "website": "https://badgerelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Middleton, WI",
+        "website": "https://oconnorselectrical.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "United Plumbing",
+        "phone": "(888) 887-0920",
+        "address": "Red Bank, TN",
+        "website": "https://unitedplumbing901.com"
+    },
+    {
+        "name": "Roto-Rooter Red Bank",
+        "phone": "(423) 855-1212",
+        "address": "Red Bank, TN",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Emergency Plumbing Squad Red Bank",
+        "phone": "(855) 812-2311",
+        "address": "Red Bank, TN",
+        "website": "https://emergencyplumbingsquad.com"
+    },
+    {
+        "name": "SDC Plumbing",
+        "phone": "(888) 218-8797",
+        "address": "Red Bank, TN",
+        "website": "https://sdcplumbing.com"
+    }
+]

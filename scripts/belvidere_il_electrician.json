@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Can-Duit Electric LLC",
+        "phone": "(815) 234-8889",
+        "address": "Belvidere, IL",
+        "website": "https://can-duitelectric.net"
+    },
+    {
+        "name": "Towner Electric",
+        "phone": "(815) 547-9804",
+        "address": "Belvidere, IL",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Gruner Electric",
+        "phone": "(815) 713-5398",
+        "address": "Belvidere, IL",
+        "website": "https://grunerelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Belvidere, IL",
+        "website": "https://oconnorselectrical.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "AC Plus Heating & Cooling",
+        "phone": "(760) 243-4440",
+        "address": "Ontario, CA",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Steve's 5 Star Service",
+        "phone": "(909) 985-5254",
+        "address": "Ontario, CA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Power Pro Plumbing",
+        "phone": "(833) 587-2940",
+        "address": "Ontario, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Authority Plumbing, Heating & Air",
+        "phone": "(888) 682-8846",
+        "address": "Ontario, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "On Time Home Services",
+        "phone": "(909) 466-4100",
+        "address": "Ontario, CA",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

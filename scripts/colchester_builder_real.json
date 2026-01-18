@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ROSE Builders Colchester",
+        "phone": "07900 220348",
+        "address": "Riverside House, Lawford, Manningtree, CO11 1US",
+        "website": "https://rosebuilders.co.uk/"
+    },
+    {
+        "name": "JC Group Building & Maintenance Colchester",
+        "phone": "01206 392613",
+        "address": "Colchester",
+        "website": "https://jcgroupltd.co.uk/"
+    },
+    {
+        "name": "ELECBUILD Emergency Colchester",
+        "phone": "01206 392613",
+        "address": "Essex",
+        "website": "https://elecbuild.co.uk/"
+    },
+    {
+        "name": "Colchester Borough Emergency Repairs",
+        "phone": "01206 282514",
+        "address": "Colchester",
+        "website": "https://cbhomes.org.uk/"
+    },
+    {
+        "name": "All Service 4U Building Colchester",
+        "phone": "0800 111 999",
+        "address": "Colchester",
+        "website": "https://allservices4u.co.uk/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Done Rite Services",
+        "phone": "(520) 369-3966",
+        "address": "Tucson, AZ",
+        "rating": 4.9,
+        "review_count": 520
+    },
+    {
+        "name": "D&H Air Conditioning",
+        "phone": "(520) 664-3699",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 2100
+    },
+    {
+        "name": "Top Care Air",
+        "phone": "(520) 734-7897",
+        "address": "Tucson, AZ",
+        "rating": 5.0,
+        "review_count": 135
+    },
+    {
+        "name": "Cummings Plumbing Heating & Cooling",
+        "phone": "(520) 333-2121",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 3500
+    },
+    {
+        "name": "Intelligent Design Air Conditioning & Heating",
+        "phone": "(520) 333-2665",
+        "address": "Tucson, AZ",
+        "rating": 4.9,
+        "review_count": 850
+    }
+]

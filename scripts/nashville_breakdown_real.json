@@ -1,0 +1,37 @@
+[
+    {
+        "name": "R1 Towing Nashville",
+        "phone": "(615) 810-6423",
+        "address": "Nashville, TN",
+        "rating": 5.0,
+        "review_count": 450
+    },
+    {
+        "name": "Lightning Towing & Recovery",
+        "phone": "(615) 889-8793",
+        "address": "Nashville, TN",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "West Nashville Wrecker Service",
+        "phone": "(615) 350-5800",
+        "address": "Nashville, TN",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Nashville Towing Service",
+        "phone": "(615) 751-6454",
+        "address": "Nashville, TN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Downtown Nashville Towing",
+        "phone": "(615) 211-1333",
+        "address": "Nashville, TN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

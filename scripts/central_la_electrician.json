@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Central Electric Co LLC",
+        "phone": "(225) 261-0370",
+        "address": "Central, LA",
+        "website": "https://theelectricalservice.com"
+    },
+    {
+        "name": "Mr Electric of Baton Rouge",
+        "phone": "(225) 224-0358",
+        "address": "Central, LA",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "AccuTemp Services LLC",
+        "phone": "(225) 240-8478",
+        "address": "Central, LA",
+        "website": "https://accutemps.com"
+    },
+    {
+        "name": "Mister Sparky of Baton Rouge",
+        "phone": "(225) 452-4412",
+        "address": "Central, LA",
+        "website": "https://mistersparky.com"
+    }
+]

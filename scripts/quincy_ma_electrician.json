@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cardoso Electrical Services",
+        "phone": "(781) 246-7700",
+        "address": "Quincy, MA",
+        "website": "https://cardosoelectrical.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(617) 206-3336",
+        "address": "Quincy, MA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Crowe Electric",
+        "phone": "(781) 635-4148",
+        "address": "Quincy, MA",
+        "website": "https://crowe-electric.com"
+    },
+    {
+        "name": "Kuhlman Electric",
+        "phone": "(781) 512-6132",
+        "address": "Quincy, MA",
+        "website": "https://kuhlmanelectricalservices.com"
+    }
+]

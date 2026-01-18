@@ -1,0 +1,32 @@
+[
+    {
+        "name": "RCS Builders",
+        "phone": "(480) 204-9035",
+        "address": "6900 South Priest Dr #8, Tempe, AZ 85283",
+        "website": "https://rcsbuildersllc.com/"
+    },
+    {
+        "name": "Modern Construction & Restoration",
+        "phone": "(480) 691-8888",
+        "address": "Phoenix, AZ",
+        "website": "https://moderncnr.com/"
+    },
+    {
+        "name": "MC Maintenance LLC",
+        "phone": "(602) 762-2275",
+        "address": "Phoenix, AZ",
+        "website": "https://mcbuildingmaintenance.com/"
+    },
+    {
+        "name": "Kowalski Construction",
+        "phone": "(602) 944-2645",
+        "address": "2219 W Melinda Lane, Bldg A, Phoenix, AZ 85027",
+        "website": "https://kowalski.com/"
+    },
+    {
+        "name": "Titan Restoration",
+        "phone": "(480) 649-5050",
+        "address": "Phoenix, AZ",
+        "website": "https://titan911.com/"
+    }
+]

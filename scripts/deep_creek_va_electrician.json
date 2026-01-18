@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Real Estate Electric",
+        "phone": "757-633-0002",
+        "address": "Chesapeake, VA",
+        "website": "https://realestateelectric.com"
+    },
+    {
+        "name": "Mister Sparky of Virginia Beach",
+        "phone": "757-828-4182",
+        "address": "Chesapeake, VA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Nipper Electric",
+        "phone": "757-842-1710",
+        "address": "Chesapeake, VA",
+        "website": "https://nipperelectric.com"
+    },
+    {
+        "name": "Get Lit Electrical",
+        "phone": "757-997-7053",
+        "address": "Chesapeake, VA",
+        "website": "https://getlitva.com"
+    }
+]

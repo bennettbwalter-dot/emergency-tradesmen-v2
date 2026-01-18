@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pearce Electric",
+        "phone": "(425) 285-7997",
+        "address": "Redmond, WA",
+        "website": "https://pearce-electric.com"
+    },
+    {
+        "name": "Mauro Electric Inc",
+        "phone": "(360) 654-7703",
+        "address": "Redmond, WA",
+        "website": "https://mauroelectricinc.com"
+    },
+    {
+        "name": "ANM Electric Inc",
+        "phone": "(425) 861-7195",
+        "address": "Redmond, WA",
+        "website": "https://anmelectric.com"
+    },
+    {
+        "name": "Rock Electric",
+        "phone": "(425) 217-5532",
+        "address": "Redmond, WA",
+        "website": "https://rockelectricseattle.com"
+    }
+]

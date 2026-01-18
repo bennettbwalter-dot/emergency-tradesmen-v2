@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Multi-Glass of Texas LLC",
+        "phone": "(281) 257-0099",
+        "address": "Atascocita, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Patsco Windshield Repair Atascocita",
+        "phone": "(832) 877-9778",
+        "address": "Atascocita, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "A Discount Glass",
+        "phone": "(281) 777-6881",
+        "address": "Atascocita, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AutoGlassOnly Atascocita",
+        "phone": "1-866-410-5628",
+        "address": "Atascocita, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

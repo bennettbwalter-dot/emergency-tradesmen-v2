@@ -1,29 +1,21 @@
+
 import os
-import requests
-import json
+from supabase import create_client, Client
+from dotenv import load_dotenv
 
-# Project 1 (antqstr...)
-url = "https://antqstrspkchkoylysqa.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFudHFzdHJzcGtjaGtveWx5c3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzNzk0NDQsImV4cCI6MjA4MDk1NTQ0NH0._AYpRtOq9N6UOie0XJi6HoEdRTw9vDG9SCg1L1quzvw"
+env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+load_dotenv(env_path)
 
-headers = {
-    "apikey": key,
-    "Authorization": f"Bearer {key}",
-    "Content-Type": "application/json"
-}
+SUPABASE_URL = os.getenv("VITE_SUPABASE_URL") or os.environ.get("\ufeffVITE_SUPABASE_URL")
+SUPABASE_KEY = os.getenv("VITE_SUPABASE_ANON_KEY") or os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
-# Query PostgREST for table info (or just try a tiny select and look at the keys if we can't get metadata)
-try:
-    # Try to get one result to see the columns
-    resp = requests.get(f"{url}/rest/v1/businesses?select=*&limit=1", headers=headers)
-    if resp.status_code == 200:
-        data = resp.json()
-        if data:
-            print("Columns in 'businesses' table:")
-            print(", ".join(data[0].keys()))
-        else:
-            print("Table is empty, cannot determine columns via select *.")
-    else:
-        print(f"Error: {resp.status_code} {resp.text}")
-except Exception as e:
-    print(f"Request failed: {e}")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# Get schema info? Supabase-py doesn't have direct schema reflection easily without SQL.
+# But we can try to insert a dummy row and see the error validation or just print columns if possible.
+# Easier: Just select one row and print keys.
+res = supabase.table("businesses").select("*").limit(1).execute()
+if res.data:
+    print("Columns:", list(res.data[0].keys()))
+else:
+    print("No data to infer columns.")

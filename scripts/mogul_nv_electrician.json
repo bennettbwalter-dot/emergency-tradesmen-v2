@@ -1,0 +1,26 @@
+[
+    {
+        "name": "GeorgeTech Electric",
+        "phone": "(877) 748-7084",
+        "address": "Mogul, NV",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "Gallagher Electric LLC",
+        "phone": "(775) 414-9807",
+        "address": "Mogul, NV",
+        "website": "https://gallagherelectricnv.com"
+    },
+    {
+        "name": "D C Electrical Inc",
+        "phone": "(775) 342-7278",
+        "address": "Mogul, NV",
+        "website": "https://dcelectricalinc.com"
+    },
+    {
+        "name": "BrightLife Electric NV",
+        "phone": "(775) 356-7300",
+        "address": "Mogul, NV",
+        "website": "https://brightlifeelectricnv.com"
+    }
+]

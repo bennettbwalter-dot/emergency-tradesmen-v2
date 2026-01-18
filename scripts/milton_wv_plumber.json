@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mullen Plumbing",
+        "phone": "304-744-3221",
+        "address": "Milton, WV",
+        "website": "https://mullenplumbing.com"
+    },
+    {
+        "name": "Milton Plumbers",
+        "phone": "888-838-3054",
+        "address": "Milton, WV",
+        "website": "https://byersplumbing.com"
+    },
+    {
+        "name": "Sky High Plumbing",
+        "phone": "877-730-8216",
+        "address": "Milton, WV",
+        "website": "https://skyhighplumbing.com"
+    },
+    {
+        "name": "Flow State Plumbing",
+        "phone": "304-989-9080",
+        "address": "Milton, WV",
+        "website": "https://flowstateplumber.com"
+    }
+]

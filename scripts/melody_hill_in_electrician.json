@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Granese Electrical",
+        "phone": "855-506-4858",
+        "address": "Melody Hill, IN",
+        "website": "https://graneseelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Melody Hill, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "812-524-8777",
+        "address": "Melody Hill, IN",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "GeorgeTech Electric",
+        "phone": "877-748-7084",
+        "address": "Melody Hill, IN",
+        "website": "https://georgetechelectric.com"
+    }
+]

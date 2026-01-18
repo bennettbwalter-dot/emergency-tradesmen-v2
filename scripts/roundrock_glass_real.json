@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Ace Discount Glass",
+        "phone": "(512) 345-3105",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "B&B Plate Glass",
+        "phone": "(512) 825-3738",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "24hr Sliding Door Repair Round Rock",
+        "phone": "(877) 299-9179",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "American Windshield Replacement",
+        "phone": "(512) 647-2728",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "NOVUS Glass of Round Rock",
+        "phone": "(737) 204-1768",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    },
+    {
+        "name": "Safeview Auto Glass",
+        "phone": "(512) 576-0095",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "USA Auto Glass",
+        "phone": "(512) 553-4983",
+        "address": "Round Rock, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 100
+    }
+]

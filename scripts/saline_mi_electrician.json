@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ADAMS ELECTRIC SHOP LLC",
+        "phone": "(734) 245-8170",
+        "address": "Saline, MI",
+        "website": "https://adamselectricshop.com"
+    },
+    {
+        "name": "Current Electrical Systems",
+        "phone": "(734) 210-7667",
+        "address": "Saline, MI",
+        "website": "https://currentelectricalsystems.com"
+    },
+    {
+        "name": "Archer Electrical Services",
+        "phone": "(734) 272-3591",
+        "address": "Saline, MI",
+        "website": "https://archerelectricalservices.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Saline, MI",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

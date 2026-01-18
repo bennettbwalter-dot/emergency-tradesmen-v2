@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Affinity Power Inc",
+        "phone": "(661) 557-7577",
+        "address": "Tehachapi, CA",
+        "website": "https://affinitypwr.com"
+    },
+    {
+        "name": "Lighting In Style Electrical",
+        "phone": "(661) 912-4800",
+        "address": "Tehachapi, CA",
+        "website": "https://lightinginstyle.net"
+    },
+    {
+        "name": "John K McCraw Electrical",
+        "phone": "(661) 410-7129",
+        "address": "Tehachapi, CA",
+        "website": "https://johnmccrawelectrical.com"
+    },
+    {
+        "name": "P and J Electrical",
+        "phone": "(661) 363-3068",
+        "address": "Tehachapi, CA",
+        "website": null
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Frank's Repair Plumbing",
+        "phone": "(806) 374-4357",
+        "address": "Amarillo, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Caprock Services Heating & Air",
+        "phone": "(806) 646-4822",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Sutton Heating and Air",
+        "phone": "(806) 331-2584",
+        "address": "Amarillo, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Hall's Heating & Air",
+        "phone": "(806) 615-2930",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Gary's Heating and Air Conditioning",
+        "phone": "(806) 373-2537",
+        "address": "Amarillo, TX",
+        "rating": 4.7,
+        "review_count": 850
+    }
+]

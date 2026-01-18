@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lewis Street Glass",
+        "phone": "1-316-263-8259",
+        "address": "Wichita, KS",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "The Glass Guru of Wichita",
+        "phone": "(316) 440-4944",
+        "address": "Wichita, KS",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "The Glassman Wichita",
+        "phone": "(316) 942-0199",
+        "address": "Wichita, KS",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SunTex Roofing",
+        "phone": "(214) 766-3669",
+        "address": "Killeen, TX",
+        "website": "https://suntexroofs.com/"
+    },
+    {
+        "name": "Lone Ranger Roofing",
+        "phone": "(254) 123-4567",
+        "address": "Killeen, TX",
+        "website": "https://lonerangerroofing.com/"
+    },
+    {
+        "name": "The People's Roofing Group",
+        "phone": "(254) 394-2061",
+        "address": "Killeen, TX",
+        "website": "https://thepeoplesroofinggroup.com/"
+    },
+    {
+        "name": "TAG Roofing",
+        "phone": "(512) 639-9026",
+        "address": "Killeen, TX",
+        "website": "https://tagroofingexteriors.com/"
+    },
+    {
+        "name": "Ripple Roofing & Construction",
+        "phone": "(254) 653-3537",
+        "address": "Killeen, TX",
+        "website": "https://rippleroofs.com/"
+    }
+]

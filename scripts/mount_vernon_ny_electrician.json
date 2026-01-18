@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Innovative Air",
+        "phone": "(914) 801-8002",
+        "address": "Mount Vernon, NY",
+        "website": "https://innovativeairsolutions.com"
+    },
+    {
+        "name": "Effective Electric",
+        "phone": "(914) 737-2651",
+        "address": "Mount Vernon, NY",
+        "website": "https://effectiveelectric.net"
+    },
+    {
+        "name": "Yost & Campbell Heating, Cooling & Generators",
+        "phone": "(914) 668-6461",
+        "address": "Mount Vernon, NY",
+        "website": "https://yostandcampbell.com"
+    },
+    {
+        "name": "Rella Electric",
+        "phone": "(914) 500-4505",
+        "address": "Mount Vernon, NY",
+        "website": "https://rellaelectric.com"
+    }
+]

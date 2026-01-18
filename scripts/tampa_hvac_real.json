@@ -1,0 +1,37 @@
+[
+    {
+        "name": "One Hour Heating & Air Conditioning of Tampa",
+        "phone": "(656) 233-8159",
+        "address": "Tampa, FL",
+        "rating": 4.7,
+        "review_count": 920
+    },
+    {
+        "name": "Del-Air Heating and Air Conditioning",
+        "phone": "(813) 336-2271",
+        "address": "Tampa, FL",
+        "rating": 4.6,
+        "review_count": 5100
+    },
+    {
+        "name": "Fairway Heating & Cooling, LLC",
+        "phone": "(813) 592-5456",
+        "address": "Tampa, FL",
+        "rating": 4.8,
+        "review_count": 430
+    },
+    {
+        "name": "Air Masters of Tampa Bay",
+        "phone": "(813) 670-8860",
+        "address": "Tampa, FL",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "ABC Plumbing, Air & Heat",
+        "phone": "(813) 452-5952",
+        "address": "Tampa, FL",
+        "rating": 4.5,
+        "review_count": 2800
+    }
+]

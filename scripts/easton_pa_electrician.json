@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(610) 252-1757",
+        "address": "Easton, PA",
+        "website": "https://thomasedisonelectric.com"
+    },
+    {
+        "name": "Albarell Electric",
+        "phone": "(610) 691-8606",
+        "address": "Easton, PA",
+        "website": "https://albarell.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Easton, PA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "A.S.T.S & E, LLC",
+        "phone": "(973) 653-1218",
+        "address": "Easton, PA",
+        "website": "https://astse.net"
+    }
+]

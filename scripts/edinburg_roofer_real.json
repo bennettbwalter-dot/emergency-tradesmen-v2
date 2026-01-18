@@ -1,0 +1,32 @@
+[
+    {
+        "name": "McAllen Valley Roofing Co.",
+        "phone": "(956) 672-7725",
+        "address": "1409 S 9th Ave, Suite 406, Edinburg, TX 78539",
+        "website": "https://edinburg-roofing.com/"
+    },
+    {
+        "name": "Mission Roofing Company",
+        "phone": "(956) 646-3156",
+        "address": "Edinburg, TX",
+        "website": "https://roofingmission.com/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Edinburg, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Texas Damage Consultants",
+        "phone": "(956) 358-4000",
+        "address": "Edinburg, TX",
+        "website": "https://texasdamageconsultants.com/"
+    },
+    {
+        "name": "Next Generation Roofing Contractors",
+        "phone": "(833) 647-7663",
+        "address": "Edinburg, TX",
+        "website": "https://nextgrcroofing.com/"
+    }
+]

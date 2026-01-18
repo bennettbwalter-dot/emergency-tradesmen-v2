@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Doctor of Memphis",
+        "phone": "(901) 495-2308",
+        "address": "Memphis, TN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Binswanger Glass Memphis",
+        "phone": "(901) 452-7775",
+        "address": "Memphis, TN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Glass Brothers",
+        "phone": "901-619-7704",
+        "address": "Memphis, TN",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Pitman Glass Company",
+        "phone": "901-452-1700",
+        "address": "Memphis, TN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Car Glass Repair Memphis",
+        "phone": "(901) 613-5811",
+        "address": "Memphis, TN",
+        "trade": "glazier",
+        "rating": 4.6,
+        "review_count": 150
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mr. Restore",
+        "phone": "(877) 631-7576",
+        "address": "McKinney, TX",
+        "website": "https://mrrestore.com/"
+    },
+    {
+        "name": "ServiceMaster Advanced Restorations",
+        "phone": "(817) 783-9297",
+        "address": "McKinney, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of McKinney",
+        "phone": "(469) 714-4955",
+        "address": "McKinney, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Grayson Recovery Services",
+        "phone": "(903) 501-3516",
+        "address": "McKinney, TX",
+        "website": "https://graysonrecovery.com/"
+    },
+    {
+        "name": "PuroClean of North McKinney",
+        "phone": "(945) 234-4566",
+        "address": "McKinney, TX",
+        "website": "https://puroclean.com/"
+    }
+]

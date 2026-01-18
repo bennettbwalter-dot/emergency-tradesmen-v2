@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric Rogers",
+        "phone": "(479) 689-7848",
+        "address": "Rogers, AR",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Rogers Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Rogers, AR",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Howard Jones Electric Rogers",
+        "phone": "(479) 636-4992",
+        "address": "Rogers, AR",
+        "website": "https://theemergencyelectriciannearme.com"
+    },
+    {
+        "name": "Mister Sparky Rogers",
+        "phone": "(479) 480-3928",
+        "address": "Rogers, AR",
+        "website": "https://mistersparky.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Chases Finest Electricians",
+        "phone": "(402) 389-4936",
+        "address": "Bellevue, NE",
+        "website": "https://chasesfinestelectricians.com"
+    },
+    {
+        "name": "A-1 United",
+        "phone": "(402) 593-7500",
+        "address": "Bellevue, NE",
+        "website": "https://a1united.net"
+    },
+    {
+        "name": "Davids Electric",
+        "phone": "(402) 553-1565",
+        "address": "Bellevue, NE",
+        "website": "https://davidselectricomaha.com"
+    },
+    {
+        "name": "On Call Electrical",
+        "phone": "(402) 500-2828",
+        "address": "Bellevue, NE",
+        "website": "https://oncallelectrical.com"
+    }
+]

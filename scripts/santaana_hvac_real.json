@@ -1,0 +1,37 @@
+[
+    {
+        "name": "1st Choice Heating & Air Conditioning",
+        "phone": "(949) 762-8644",
+        "address": "Santa Ana, CA",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Dial One Sonshine",
+        "phone": "(714) 613-1016",
+        "address": "Santa Ana, CA",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "NEXGEN Air Conditioning Heating & Plumbing",
+        "phone": "(714) 555-0199",
+        "address": "Santa Ana, CA",
+        "rating": 4.9,
+        "review_count": 3500
+    },
+    {
+        "name": "Santa Ana Air & Heating Experts",
+        "phone": "(714) 486-1100",
+        "address": "Santa Ana, CA",
+        "rating": 4.6,
+        "review_count": 210
+    },
+    {
+        "name": "Service Genius",
+        "phone": "(714) 835-2121",
+        "address": "Santa Ana, CA",
+        "rating": 4.8,
+        "review_count": 1500
+    }
+]

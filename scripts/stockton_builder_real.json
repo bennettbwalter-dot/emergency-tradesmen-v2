@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster of Stockton",
+        "phone": "(209) 370-0062",
+        "address": "Stockton, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "911 Restoration of Stockton",
+        "phone": "(209) 689-3222",
+        "address": "Stockton, CA",
+        "website": "https://911restorationstockton.com/"
+    },
+    {
+        "name": "Reactic Restoration of Stockton",
+        "phone": "(209) 779-0098",
+        "address": "1031 N El Dorado St, Unit A, Stockton, CA 95202",
+        "website": "https://reacticrestoration.com/"
+    },
+    {
+        "name": "Vital Restoration",
+        "phone": "(866) 887-6115",
+        "address": "Stockton, CA",
+        "website": "https://vitalrestoration.com/"
+    },
+    {
+        "name": "The Restoration CleanUp Company",
+        "phone": "(800) 500-4310",
+        "address": "2479 Station Drive Ste B, Stockton, CA 95215",
+        "website": "https://thecleanupco.com/"
+    }
+]

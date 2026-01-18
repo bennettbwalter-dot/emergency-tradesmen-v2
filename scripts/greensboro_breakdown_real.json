@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Casey's Towing & Recovery",
+        "phone": "(336) 370-4117",
+        "address": "Greensboro, NC",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Watkins Towing",
+        "phone": "(336) 579-7005",
+        "address": "Greensboro, NC",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "RAM Towing Service",
+        "phone": "(336) 690-8680",
+        "address": "Greensboro, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Four Seasons Towing",
+        "phone": "(336) 988-1058",
+        "address": "Greensboro, NC",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Greensboro Towing",
+        "phone": "(336) 664-8326",
+        "address": "Greensboro, NC",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

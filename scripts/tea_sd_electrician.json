@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Howe Electric Tea",
+        "phone": "(605) 368-5467",
+        "address": "Tea, SD",
+        "website": "https://howeelectric.com"
+    },
+    {
+        "name": "B Electric Tea",
+        "phone": "(605) 368-2633",
+        "address": "Tea, SD",
+        "website": "https://teasd.com"
+    },
+    {
+        "name": "Fink Electric Tea",
+        "phone": "(605) 368-9888",
+        "address": "Tea, SD",
+        "website": "https://teasd.com"
+    },
+    {
+        "name": "Sorlien Electric Tea",
+        "phone": "(605) 368-7371",
+        "address": "Tea, SD",
+        "website": "https://siouxfallschamber.com"
+    }
+]

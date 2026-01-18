@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A-CLASS Heating and Air",
+        "phone": "(916) 342-9108",
+        "address": "Sacramento, CA",
+        "rating": 5.0,
+        "review_count": 1050
+    },
+    {
+        "name": "Big Mountain Heating & Air Conditioning, Inc.",
+        "phone": "(916) 301-4315",
+        "address": "Sacramento, CA",
+        "rating": 4.7,
+        "review_count": 2200
+    },
+    {
+        "name": "California Energy Services",
+        "phone": "(916) 737-1107",
+        "address": "Sacramento, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Airflow Heating & Air",
+        "phone": "(916) 476-2222",
+        "address": "Sacramento, CA",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Bonney Plumbing, Electrical, Heating & Air",
+        "phone": "(916) 444-0551",
+        "address": "Sacramento, CA",
+        "rating": 4.8,
+        "review_count": 5500
+    }
+]

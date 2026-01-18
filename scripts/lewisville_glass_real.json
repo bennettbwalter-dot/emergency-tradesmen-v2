@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Area Wide Auto Glass",
+        "phone": "214-548-6817",
+        "address": "Lewisville, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Budget Auto Glass Lewisville",
+        "phone": "(972) 994-9657",
+        "address": "Lewisville, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Gizmo Glass",
+        "phone": "512-799-6734",
+        "address": "Lewisville, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Lava Auto Glass",
+        "phone": "(214) 436-1325",
+        "address": "Lewisville, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Mister Glass Inc.",
+        "phone": "(972) 669-0951",
+        "address": "Lewisville, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

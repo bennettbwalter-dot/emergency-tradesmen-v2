@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster Services - Tyler",
+        "phone": "(903) 225-8538",
+        "address": "Tyler, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Pro Clean Restoration",
+        "phone": "(903) 939-9802",
+        "address": "Tyler, TX",
+        "website": "https://procleanrestoration.net/"
+    },
+    {
+        "name": "Restoration 1 of East Texas",
+        "phone": "(903) 224-6804",
+        "address": "Tyler, TX",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "Dalworth Restoration Tyler",
+        "phone": "(903) 320-4262",
+        "address": "Tyler, TX",
+        "website": "https://dalworthrestorationtyler.com/"
+    },
+    {
+        "name": "Nortex Restoration",
+        "phone": "(903) 839-3531",
+        "address": "Tyler, TX",
+        "website": "https://nortexrestoration.com/"
+    }
+]

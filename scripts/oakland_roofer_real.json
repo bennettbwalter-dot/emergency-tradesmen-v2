@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Ben's Roofing",
+        "phone": "(510) 690-8570",
+        "address": "40 Hegenberger Place, Oakland, CA 94621",
+        "website": "https://bensroofing.com/"
+    },
+    {
+        "name": "R.K. Roofing",
+        "phone": "(510) 902-7663",
+        "address": "249 Estudillo Ave, San Leandro, CA 94577",
+        "website": "https://rkroofs.com/"
+    },
+    {
+        "name": "Royal Roofing CA",
+        "phone": "(510) 555-0199",
+        "address": "Oakland, CA",
+        "website": "https://royalroofingca.com/"
+    },
+    {
+        "name": "Roof Express",
+        "phone": "(650) 666-5554",
+        "address": "Oakland, CA",
+        "website": "https://roof-ex.com/"
+    },
+    {
+        "name": "New Haus Roofing",
+        "phone": "(669) 287-8895",
+        "address": "670 Coleman Ave, San Jose, CA 95110",
+        "website": "https://newhausroofing.com/"
+    }
+]

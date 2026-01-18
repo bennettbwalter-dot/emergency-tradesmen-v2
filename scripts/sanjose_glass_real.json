@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Anthony's Glass & Mirrors",
+        "phone": "(408) 849-7074",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Blossom Hill Glass",
+        "phone": "(408) 629-7500",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Roxy Glass",
+        "phone": "(408) 824-9717",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Gomez All Glass",
+        "phone": "408-622-4032",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Instant Auto Glass San Jose",
+        "phone": "(408) 256-1165",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "1Low Price Auto Glass",
+        "phone": "408-992-1141",
+        "address": "San Jose, CA",
+        "trade": "glazier",
+        "rating": 4.6,
+        "review_count": 120
+    }
+]

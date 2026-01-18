@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Allen's Parma Towing",
+        "phone": "(216) 661-2200",
+        "address": "Cleveland, OH",
+        "rating": 4.9,
+        "review_count": 1000
+    },
+    {
+        "name": "World Truck Towing",
+        "phone": "(216) 214-5555",
+        "address": "Cleveland, OH",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "The Land Repair",
+        "phone": "(855) 253-2886",
+        "address": "Cleveland, OH",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "CarMeds Emergency Roadside",
+        "phone": "(330) 465-2150",
+        "address": "Cleveland, OH",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Cleveland Towing",
+        "phone": "(216) 500-0505",
+        "address": "Cleveland, OH",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

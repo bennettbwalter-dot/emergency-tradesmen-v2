@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Edison Electric Inc",
+        "phone": "(612) 385-7864",
+        "address": "Bloomington, MN",
+        "website": "https://electrician-minneapolis.com"
+    },
+    {
+        "name": "Randys Electric",
+        "phone": "(612) 470-0914",
+        "address": "Bloomington, MN",
+        "website": "https://randyselectric.com"
+    },
+    {
+        "name": "Phase Electric Inc",
+        "phone": "(952) 881-4100",
+        "address": "Bloomington, MN",
+        "website": "https://phase-electric.com"
+    },
+    {
+        "name": "South Side Electric Inc",
+        "phone": "(952) 888-5500",
+        "address": "Bloomington, MN",
+        "website": "https://southsideelectric.net"
+    }
+]

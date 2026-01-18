@@ -1,0 +1,32 @@
+[
+    {
+        "name": "San Marcos Towing Company",
+        "phone": "(512) 881-6934",
+        "address": "San Marcos, TX",
+        "website": "https://towingsanmarcostx.com/"
+    },
+    {
+        "name": "Commercial Towing Services",
+        "phone": "(512) 995-0468",
+        "address": "San Marcos, TX",
+        "website": "https://commercialtowingservices.com/"
+    },
+    {
+        "name": "All Of Texas Towing & Recovery",
+        "phone": "(512) 756-3453",
+        "address": "San Marcos, TX",
+        "website": "https://alloftexastowingrecovery.com/"
+    },
+    {
+        "name": "Wimberley Towing",
+        "phone": "(512) 375-1215",
+        "address": "San Marcos, TX",
+        "website": "https://wimberleytowing.com/"
+    },
+    {
+        "name": "Emergency Roadside Service San Marcos",
+        "phone": "(512) 379-6477",
+        "address": "San Marcos, TX",
+        "website": "https://emergencyroadsideservicesanmarcos.com/"
+    }
+]

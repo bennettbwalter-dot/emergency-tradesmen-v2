@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Primo Plumbing, Inc.",
+        "phone": "(210) 494-1691",
+        "address": "San Antonio, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Reliant Plumbing",
+        "phone": "(210) 468-8020",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Elmer's Home Services",
+        "phone": "(210) 570-1717",
+        "address": "San Antonio, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Beyer Plumbing",
+        "phone": "(210) 656-9027",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "5 Star Rated Emergency Plumbers",
+        "phone": "(726) 200-9530",
+        "address": "San Antonio, TX",
+        "rating": 5.0,
+        "review_count": 92
+    }
+]

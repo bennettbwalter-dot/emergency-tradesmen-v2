@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "Milford, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "Tri City Heating and Cooling",
+        "phone": "(203) 303-5700",
+        "address": "Milford, CT",
+        "website": "https://tricityappliance.com"
+    },
+    {
+        "name": "Grand Line Electric",
+        "phone": "(203) 668-9842",
+        "address": "Milford, CT",
+        "website": "https://grandlineelectric-ct.com"
+    },
+    {
+        "name": "Buck Electric",
+        "phone": "(203) 874-8848",
+        "address": "Milford, CT",
+        "website": "https://buckelectricct.com"
+    }
+]

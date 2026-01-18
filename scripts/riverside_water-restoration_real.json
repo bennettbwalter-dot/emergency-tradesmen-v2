@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of West Riverside City",
+        "phone": "(951) 351-8033",
+        "address": "Riverside, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Superior Restoration",
+        "phone": "(951) 579-4096",
+        "address": "Riverside, CA",
+        "website": "https://superiorrestore.com/"
+    },
+    {
+        "name": "Rainbow Restoration of Riverside",
+        "phone": "(951) 351-8033",
+        "address": "7111 Arlington Avenue, Suite H, Riverside, CA 92503",
+        "website": "https://rainbowrestores.com/"
+    },
+    {
+        "name": "ServiceMaster Restoration by WFDR",
+        "phone": "(951) 389-7629",
+        "address": "Riverside, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Paul Davis Restoration Inland Empire",
+        "phone": "(877) 732-8471",
+        "address": "Riverside, CA",
+        "website": "https://pdrinlandempire.com/"
+    }
+]

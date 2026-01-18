@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Leth Electric Inc.",
+        "phone": "(507) 635-5516",
+        "address": "Kasson, MN",
+        "website": "https://lethelectric.com"
+    },
+    {
+        "name": "Iconic Electric",
+        "phone": "(507) 923-1173",
+        "address": "Kasson, MN",
+        "website": "https://calliconic.com"
+    },
+    {
+        "name": "Paxton Electric",
+        "phone": "(507) 710-1448",
+        "address": "Kasson, MN",
+        "website": "https://paxtonelectric.net"
+    },
+    {
+        "name": "K&S Heating, Air Conditioning, Plumbing & Electrical",
+        "phone": "(507) 282-4328",
+        "address": "Kasson, MN",
+        "website": "https://ksheating.com"
+    }
+]

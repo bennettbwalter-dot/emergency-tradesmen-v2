@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Paine Manwaring Worthing",
+        "phone": "01903 237522",
+        "address": "Unit D Easting Close, Dominion Way, Worthing, BN14",
+        "website": "https://painemanwaring.com/"
+    },
+    {
+        "name": "Emergency Clean UK Worthing",
+        "phone": "0333 772 2130",
+        "address": "Worthing",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "DrainBoss Worthing",
+        "phone": "01903 331789",
+        "address": "Worthing",
+        "website": "https://drainboss.co.uk/"
+    },
+    {
+        "name": "Phoenix Plumbing & Heating Worthing",
+        "phone": "01903 245634",
+        "address": "97 Boxgrove, Goring-by-Sea, Worthing, BN12 6LX",
+        "website": "https://phoenix-heating.co.uk/"
+    },
+    {
+        "name": "ServiceMaster Restore Worthing",
+        "phone": "0800 021 3115",
+        "address": "Worthing",
+        "website": "https://servicemasterrestore.co.uk/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "One Source Home Service",
+        "phone": "(719) 974-4365",
+        "address": "Colorado Springs, CO",
+        "rating": 5.0,
+        "review_count": 200
+    },
+    {
+        "name": "Awesome Home Services",
+        "phone": "(719) 350-3917",
+        "address": "Colorado Springs, CO",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Smith Plumbing, Heating, Cooling",
+        "phone": "(719) 408-3188",
+        "address": "Colorado Springs, CO",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Affordable Plumbing & Heat Inc.",
+        "phone": "(719) 635-4328",
+        "address": "Colorado Springs, CO",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Olson Plumbing & Heating Co.",
+        "phone": "(719) 635-3563",
+        "address": "Colorado Springs, CO",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

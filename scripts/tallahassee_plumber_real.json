@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Capital Plumbing Contractors",
+        "phone": "(850) 576-8420",
+        "address": "Tallahassee, FL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Tallahassee",
+        "phone": "850-386-5614",
+        "address": "Tallahassee, FL",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Lance Maxwell Plumbing",
+        "phone": "(850) 562-6227",
+        "address": "Tallahassee, FL",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Smith Plumbing Company",
+        "phone": "850-681-7473",
+        "address": "Tallahassee, FL",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Tallahassee Emergency Plumbers",
+        "phone": "(850) 555-0101",
+        "address": "Tallahassee, FL",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

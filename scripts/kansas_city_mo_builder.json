@@ -1,0 +1,26 @@
+[
+    {
+        "name": "BELFOR Kansas City",
+        "phone": "(816) 231-1800",
+        "address": "Kansas City, MO",
+        "website": "https://belfor.com"
+    },
+    {
+        "name": "Swift Construction",
+        "phone": "(816) 793-2700",
+        "address": "Kansas City, MO",
+        "website": "https://swiftcei.com"
+    },
+    {
+        "name": "First Call Restoration",
+        "phone": "(816) 296-3023",
+        "address": "Kansas City, MO",
+        "website": "https://firstcallrestorationkc.com"
+    },
+    {
+        "name": "NexGen Builders",
+        "phone": "(816) 739-1616",
+        "address": "Kansas City, MO",
+        "website": "https://nexgenmo.com"
+    }
+]

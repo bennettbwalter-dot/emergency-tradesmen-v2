@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Freeway Towing & Storage",
+        "phone": "(602) 377-0036",
+        "address": "Glendale, AZ",
+        "rating": 4.7,
+        "review_count": 1011
+    },
+    {
+        "name": "Roadside Ranger Towing",
+        "phone": "(623) 304-5655",
+        "address": "Glendale, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Arizona Towing LLC",
+        "phone": "(602) 616-7112",
+        "address": "Glendale, AZ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "North West Valley Towing",
+        "phone": "(602) 615-1604",
+        "address": "Glendale, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Glendale Towing Service",
+        "phone": "(623) 500-0505",
+        "address": "Glendale, AZ",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

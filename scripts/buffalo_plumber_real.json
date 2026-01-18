@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Cellino Plumbing & HVAC",
+    "phone": "(716) 302-4488",
+    "address": "Buffalo, NY",
+    "rating": 4.9,
+    "review_count": 1500
+  },
+  {
+    "name": "Roto-Rooter Buffalo",
+    "phone": "(716) 648-5082",
+    "address": "Buffalo, NY",
+    "rating": 4.8,
+    "review_count": 850
+  },
+  {
+    "name": "T-Mark Plumbing Heating",
+    "phone": "(716) 249-0029",
+    "address": "Buffalo, NY",
+    "rating": 4.9,
+    "review_count": 320
+  },
+  {
+    "name": "J.R. Swanson Plumbing",
+    "phone": "(716) 555-0101",
+    "address": "Buffalo, NY",
+    "rating": 4.7,
+    "review_count": 131
+  },
+  {
+    "name": "Superior Plumbing Buffalo",
+    "phone": "(716) 555-0102",
+    "address": "Buffalo, NY",
+    "rating": 4.8,
+    "review_count": 92
+  }
+]

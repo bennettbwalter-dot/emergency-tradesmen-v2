@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Beacon Plumbing Nampa",
+        "phone": "(208) 812-4753",
+        "address": "Nampa, ID",
+        "website": "https://beaconplumbing.com"
+    },
+    {
+        "name": "Roto-Rooter Nampa",
+        "phone": "(208) 467-5001",
+        "address": "Nampa, ID",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "1Up Plumbing Services",
+        "phone": "(208) 919-8496",
+        "address": "Nampa, ID",
+        "website": "https://1upplumbingservices.com"
+    },
+    {
+        "name": "Viking Plumbing Nampa",
+        "phone": "(208) 571-4089",
+        "address": "Nampa, ID",
+        "website": "https://vikingplumbingboise.com"
+    }
+]

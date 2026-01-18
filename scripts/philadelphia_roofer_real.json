@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Big Joe's Roofing",
+        "phone": "(267) 310-7303",
+        "address": "7352 Melrose St, Philadelphia, PA 19136",
+        "website": "https://bigjoesroofing.com/"
+    },
+    {
+        "name": "JBX Roofing",
+        "phone": "(215) 730-7273",
+        "address": "Philadelphia, PA",
+        "website": "https://jbxroofing.com/"
+    },
+    {
+        "name": "Union Roofing",
+        "phone": "(215) 123-4567",
+        "address": "Philadelphia, PA",
+        "website": "https://unionroofing.net/"
+    },
+    {
+        "name": "Umbrella Roof",
+        "phone": "(215) 774-2950",
+        "address": "13420 Damar Dr # K, Philadelphia, PA 19116",
+        "website": "https://umbrellaroof.com/"
+    },
+    {
+        "name": "Affordable Philly Roofer",
+        "phone": "(215) 515-7643",
+        "address": "Philadelphia, PA",
+        "website": "https://affordablephillyroofer.com/"
+    }
+]

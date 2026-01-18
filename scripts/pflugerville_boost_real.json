@@ -1,0 +1,154 @@
+[
+    {
+        "name": "Roto-Rooter Pflugerville",
+        "phone": "512-371-3615",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Daniel's Plumbing and AC",
+        "phone": "(512) 456-3570",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "On Call Plumbers Pflugerville",
+        "phone": "(512) 643-5254",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Reliant Plumbing",
+        "phone": "(512) 222-6029",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Beyond Wow Plumbing",
+        "phone": "(512) 355-1549",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Juan & Only Plumber",
+        "phone": "(512) 990-8488",
+        "address": "Pflugerville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Anthony Electrical",
+        "phone": "877-748-8749",
+        "address": "Pflugerville, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Mister Sparky of Austin",
+        "phone": "888-826-0091",
+        "address": "Pflugerville, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Falco Electrical Services",
+        "phone": "(512) 589-9828",
+        "address": "Pflugerville, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Blue Ribbon Cooling & Heating",
+        "phone": "(512) 308-3515",
+        "address": "Pflugerville, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Alpha Team Electric",
+        "phone": "(512) 596-4841",
+        "address": "Pflugerville, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 160
+    },
+    {
+        "name": "Vincent's Locksmith",
+        "phone": "(512) 548-0639",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Pros On Call Pflugerville",
+        "phone": "(512) 643-7268",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "1st Class Locksmith Pflugerville",
+        "phone": "(512) 722-7442",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Pflugerville Locksmiths",
+        "phone": "(512) 782-2447",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Fortress Lock, Safe & Security",
+        "phone": "(512) 800-3030",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Locksmith Service Pflugerville",
+        "phone": "(512) 647-2140",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 90
+    },
+    {
+        "name": "Neighborhood Locksmith Store",
+        "phone": "(512) 601-0026",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Pflugerville Master Locksmith",
+        "phone": "(512) 354-4964",
+        "address": "Pflugerville, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 130
+    }
+]

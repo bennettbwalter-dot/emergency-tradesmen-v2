@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Ace Discount Glass Pflugerville",
+        "phone": "(512) 345-3105",
+        "address": "Pflugerville, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "STAR Windshield Repair Pflugerville",
+        "phone": "(512) 219-8727",
+        "address": "Pflugerville, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "B&B Plate Glass Pflugerville",
+        "phone": "(512) 419-7555",
+        "address": "Pflugerville, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "AutoGlassOnly Pflugerville",
+        "phone": "1-866-410-5628",
+        "address": "Pflugerville, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

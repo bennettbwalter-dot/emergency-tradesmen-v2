@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hometown Heroes Heating and Cooling",
+        "phone": "(816) 306-1302",
+        "address": "Kansas City, MO",
+        "website": "https://hometownheroeskc.com"
+    },
+    {
+        "name": "Summit Heating & Cooling",
+        "phone": "(816) 795-7805",
+        "address": "Kansas City, MO",
+        "website": "https://summithckc.com"
+    },
+    {
+        "name": "A.B. May",
+        "phone": "(913) 383-3100",
+        "address": "Kansas City, MO",
+        "website": "https://abmay.com"
+    },
+    {
+        "name": "Buckner's Heating, Cooling & Plumbing",
+        "phone": "(816) 436-1244",
+        "address": "Kansas City, MO",
+        "website": "https://bucknershc.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SRG Roofing",
+        "phone": "(877) 779-3207",
+        "address": "Brownsville, TX",
+        "website": "https://srgroofing.com/"
+    },
+    {
+        "name": "Robert Nelson Roofing",
+        "phone": "(888) 897-9811",
+        "address": "Brownsville, TX",
+        "website": "https://robertnelsonroofing.com/"
+    },
+    {
+        "name": "McAllen Valley Roofing Co.",
+        "phone": "(956) 431-0251",
+        "address": "Brownsville, TX",
+        "website": "https://brownsville-roofing.com/"
+    },
+    {
+        "name": "Bison Roofing",
+        "phone": "(956) 467-0084",
+        "address": "Brownsville, TX",
+        "website": "https://bisonroofing.net/"
+    },
+    {
+        "name": "Pride Roofing Xperts",
+        "phone": "(956) 291-3440",
+        "address": "700 E Washington St., Brownsville, TX 78520",
+        "website": "https://prideroofingxperts.com/"
+    }
+]

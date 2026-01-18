@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Cincinnati",
+        "phone": "(888) 826-0091",
+        "address": "Mason, OH",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Raiden Electric",
+        "phone": "(513) 443-6643",
+        "address": "Mason, OH",
+        "website": "https://raidenelectric.com"
+    },
+    {
+        "name": "Paff Electric and Solar",
+        "phone": "(513) 273-1233",
+        "address": "Mason, OH",
+        "website": "https://paffelectricandsolar.com"
+    },
+    {
+        "name": "Kidwell Electric Mason",
+        "phone": "(513) 479-5051",
+        "address": "Mason, OH",
+        "website": "https://kidwellelectricohio.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "NS Electric",
+        "phone": "681-270-0607",
+        "address": "Fairmont, WV",
+        "website": "https://nselectricwv.com"
+    },
+    {
+        "name": "Floyd Enterprises",
+        "phone": "304-838-5666",
+        "address": "Fairmont, WV",
+        "website": "https://fairmontelectrician.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Fairmont, WV",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Edison Electric",
+        "phone": "304-363-8723",
+        "address": "Fairmont, WV",
+        "website": "https://edisonelectricllc.com"
+    }
+]

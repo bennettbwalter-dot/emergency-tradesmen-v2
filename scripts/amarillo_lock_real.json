@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Pop-A-Lock Locksmith Amarillo",
+        "address": "Amarillo, TX",
+        "phone": "806-353-2780",
+        "trade": "locksmith",
+        "city": "Amarillo"
+    },
+    {
+        "name": "Howdy Lock & Key",
+        "address": "Amarillo, TX",
+        "phone": "806-231-3181",
+        "trade": "locksmith",
+        "city": "Amarillo"
+    },
+    {
+        "name": "Slim Jim's Lock & Key Service",
+        "address": "Amarillo, TX",
+        "phone": "806-373-5397",
+        "trade": "locksmith",
+        "city": "Amarillo"
+    }
+]

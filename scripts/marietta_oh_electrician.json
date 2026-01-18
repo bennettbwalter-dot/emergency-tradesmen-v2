@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ohio Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Marietta, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "American Way Electric",
+        "phone": "304-481-3655",
+        "address": "Marietta, OH",
+        "website": "https://americanwayelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Marietta, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Speelman Electric",
+        "phone": "330-633-1410",
+        "address": "Marietta, OH",
+        "website": "https://speelmanelectric.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Atlantic Heating & Air Conditioning",
+        "phone": "(617) 566-6990",
+        "address": "Boston, MA",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "Winters Home Services",
+        "phone": "(617) 221-5899",
+        "address": "Boston, MA",
+        "rating": 4.7,
+        "review_count": 1100
+    },
+    {
+        "name": "Greater Boston HVAC",
+        "phone": "(781) 661-6511",
+        "address": "Boston, MA",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "AirWise Heating & Cooling",
+        "phone": "(857) 557-5755",
+        "address": "Boston, MA",
+        "rating": 4.6,
+        "review_count": 150
+    },
+    {
+        "name": "Service Right, LLC",
+        "phone": "(617) 830-3292",
+        "address": "Boston, MA",
+        "rating": 4.5,
+        "review_count": 95
+    }
+]

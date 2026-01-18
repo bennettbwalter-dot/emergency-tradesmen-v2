@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Quality Plumbing Inc",
+        "phone": "(816) 472-4994",
+        "address": "120 NW Business Park Ln, Kansas City, MO 64150",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1700
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Cleanup",
+        "phone": "(816) 412-0870",
+        "address": "1414 Wyoming St, Kansas City, MO 64102",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 4500
+    },
+    {
+        "name": "Midwest Heating Cooling & Plumbing",
+        "phone": "(816) 941-0164",
+        "address": "13228 Holmes Rd, Kansas City, MO 64145",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 3100
+    },
+    {
+        "name": "John the Plumber",
+        "phone": "(816) 244-6338",
+        "address": "14611 E Highway 40, Kansas City, MO 64136",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 5800
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Kansas City",
+        "phone": "(816) 333-6789",
+        "address": "5810 Troost Ave, Kansas City, MO 64110",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 5400
+    },
+    {
+        "name": "Inception Plumbing",
+        "phone": "(816) 551-3213",
+        "address": "8031 Ward Parkway Plaza, Kansas City, MO 64114",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1300
+    },
+    {
+        "name": "Rod-O-Matic Plumbing, LLC",
+        "phone": "(816) 453-6099",
+        "address": "1750 NW 53rd St, Kansas City, MO 64150",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 329
+    },
+    {
+        "name": "Mister Sparky Electrician",
+        "phone": "(816) 875-3218",
+        "address": "1628 N Corrington Ave, Kansas City, MO 64120",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 2000
+    },
+    {
+        "name": "Current Solutions Electric",
+        "phone": "(816) 551-2889",
+        "address": "6500 Troost Ave, Kansas City, MO 64131",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 297
+    },
+    {
+        "name": "Mr Electric of Kansas City",
+        "phone": "(816) 532-4441",
+        "address": "201 S Commercial Ave, Smithville, MO 64089",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 528
+    },
+    {
+        "name": "Schloegel Design Remodel",
+        "phone": "(816) 361-9669",
+        "address": "311 West 80th Street, Kansas City, MO 64114",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 391
+    },
+    {
+        "name": "MVP Electric, Heating & Cooling",
+        "phone": "(816) 312-5136",
+        "address": "10100 Hickman Mills Dr, Kansas City, MO 64137",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Able Electric Inc",
+        "phone": "(816) 436-3910",
+        "address": "5400 NE Antioch Rd, Kansas City, MO 64119",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 1000
+    },
+    {
+        "name": "Bowers Electric Co",
+        "phone": "(816) 356-5511",
+        "address": "10300 E 47th St S, Kansas City, MO 64133",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 25
+    },
+    {
+        "name": "Fast Locksmith",
+        "phone": "(816) 629-6062",
+        "address": "2928 Woodland Ave, Kansas City, MO 64109",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 254
+    },
+    {
+        "name": "Ariel Lock & Key LLC",
+        "phone": "(816) 366-7085",
+        "address": "7810 E 106 Terrace, Kansas City, MO 64134",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 184
+    },
+    {
+        "name": "Rocket Locksmith KC",
+        "phone": "(816) 338-7883",
+        "address": "1000 Brush Creek Blvd, Kansas City, MO 64110",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 287
+    },
+    {
+        "name": "McGuire Lock & Safe",
+        "phone": "(816) 531-1510",
+        "address": "3624 Troost Ave, Kansas City, MO 64109",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 80
+    },
+    {
+        "name": "Keyed Out Locksmith",
+        "phone": "(816) 533-5103",
+        "address": "5429 Olive St, Kansas City, MO 64130",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 48
+    },
+    {
+        "name": "Supreme Locksmith",
+        "phone": "(816) 622-9286",
+        "address": "5506 Troost Ave, Kansas City, MO 64110",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 467
+    }
+]

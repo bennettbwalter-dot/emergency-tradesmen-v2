@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Doctor of Fort Worth Metroplex",
+        "phone": "(817) 374-4327",
+        "address": "Fort Worth, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Ronnie's 24 Hour Glass & Door Repair",
+        "phone": "(682) 516-3175",
+        "address": "Fort Worth, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Apex Windows & Glass",
+        "phone": "(214) 263-3008",
+        "address": "Fort Worth, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Binswanger Glass of Fort Worth",
+        "phone": "(817) 332-6117",
+        "address": "Fort Worth, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "AAA Fast Glass",
+        "phone": "(972) 697-6655",
+        "address": "Fort Worth, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

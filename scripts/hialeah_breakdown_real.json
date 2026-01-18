@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Yaroa Towing Company Inc.",
+        "phone": "(786) 211-1333",
+        "address": "Hialeah, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "J & F Towing Hialeah",
+        "phone": "(305) 300-4444",
+        "address": "Hialeah, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "M&E Towing Services Inc.",
+        "phone": "(305) 322-2222",
+        "address": "Hialeah, FL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "RR & K Towing LLC",
+        "phone": "(305) 500-0505",
+        "address": "Hialeah, FL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Hialeah Recovery",
+        "phone": "(305) 350-0000",
+        "address": "Hialeah, FL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

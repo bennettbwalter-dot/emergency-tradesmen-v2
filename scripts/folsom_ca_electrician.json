@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bear Copper Electric",
+        "phone": "(916) 461-8671",
+        "address": "Folsom, CA",
+        "website": "https://bearcopperelectric.com"
+    },
+    {
+        "name": "Olympus Electrical",
+        "phone": "(916) 752-3074",
+        "address": "Folsom, CA",
+        "website": "https://olympuselectric.net"
+    },
+    {
+        "name": "Aleco Electric Folsom",
+        "phone": "(916) 550-3525",
+        "address": "Folsom, CA",
+        "website": "https://alecoelectric.com"
+    },
+    {
+        "name": "Griffin Electric Folsom",
+        "phone": "(916) 971-0532",
+        "address": "Folsom, CA",
+        "website": "https://griffinelectric.com"
+    }
+]

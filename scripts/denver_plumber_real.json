@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Blue Sky Plumbing, Heating, Cooling",
+        "phone": "(720) 617-0417",
+        "address": "Denver, CO",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Your Plumber LLC",
+        "phone": "(720) 620-6990",
+        "address": "Denver, CO",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Denver Emergency Plumbing",
+        "phone": "(303) 268-2870",
+        "address": "Denver, CO",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Roto-Rooter Denver",
+        "phone": "(303) 666-0045",
+        "address": "Denver, CO",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "AAA Service Plumbing",
+        "phone": "(303) 313-3333",
+        "address": "Denver, CO",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

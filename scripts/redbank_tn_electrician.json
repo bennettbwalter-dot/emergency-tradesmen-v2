@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Red Bank Electric",
+        "phone": "(423) 870-2625",
+        "address": "Red Bank, TN",
+        "website": null
+    },
+    {
+        "name": "C and N Electric Red Bank",
+        "phone": "(423) 401-4058",
+        "address": "Red Bank, TN",
+        "website": "https://cnelectrictn.com"
+    },
+    {
+        "name": "Foster Electric Red Bank",
+        "phone": "(423) 892-6759",
+        "address": "Red Bank, TN",
+        "website": "https://fosterelectrical.net"
+    },
+    {
+        "name": "Beacon Electrical Services Red Bank",
+        "phone": "(423) 355-0191",
+        "address": "Red Bank, TN",
+        "website": "https://beaconelectrical.services"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Toolcity Plumbing",
+        "phone": "(814) 724-9569",
+        "address": "Meadville, PA",
+        "website": "https://toolcityplumbing.net"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(814) 337-5882",
+        "address": "Meadville, PA",
+        "website": "https://www.rotorooter.com/meadvillepa/"
+    },
+    {
+        "name": "Emergency Plumbing Squad",
+        "phone": "(855) 812-2311",
+        "address": "Meadville, PA",
+        "website": "https://emergencyplumbingsquad.com"
+    },
+    {
+        "name": "Armstrong Comfort Solutions",
+        "phone": "(814) 337-5882",
+        "address": "Meadville, PA",
+        "website": "https://armstrongcomfort.com"
+    }
+]

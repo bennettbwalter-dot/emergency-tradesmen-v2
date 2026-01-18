@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Triple Crown Plumbing",
+        "phone": "(972) 544-6544",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Roto-Rooter Richardson",
+        "phone": "(972) 581-7161",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Baker Brothers Richardson",
+        "phone": "(214) 892-2225",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 910
+    },
+    {
+        "name": "Berkeys Richardson",
+        "phone": "(972) 464-2460",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1050
+    },
+    {
+        "name": "The Plumbing Pros",
+        "phone": "(833) 772-9729",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Dean's Plumbing",
+        "phone": "(972) 449-5274",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Metro Flow Plumbing",
+        "phone": "(214) 305-8376",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "1st Class Plumbing",
+        "phone": "(214) 227-9554",
+        "address": "Richardson, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Add-All Electric Richardson",
+        "phone": "(972) 254-1158",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Mr. Electric of Dallas",
+        "phone": "(469) 634-0316",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "ElectricMan Richardson",
+        "phone": "(972) 362-1804",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Sawyers Electrical, LLC",
+        "phone": "(214) 205-2885",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Brotherlylove Electric",
+        "phone": "(214) 303-9055",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "All Pro Electrical Services LLC",
+        "phone": "(972) 564-9316",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Jeff Electric LLC",
+        "phone": "(972) 523-9156",
+        "address": "Richardson, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "On-Call 24/7 Locksmith Richardson",
+        "phone": "(469) 676-0803",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "AJ Locksmith and Security",
+        "phone": "(214) 935-3614",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Green Locks and Keys Richardson",
+        "phone": "(972) 421-8809",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Richardson Locksmith Store",
+        "phone": "(972) 512-6327",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "Hi Five Auto Locksmith",
+        "phone": "(469) 828-3132",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "A-1 Locksmith Richardson",
+        "phone": "(972) 284-7500",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "SOS Locksmith",
+        "phone": "(469) 342-3354",
+        "address": "Richardson, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 160
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Yonkers Towing",
+        "phone": "(914) 211-1333",
+        "address": "Yonkers, NY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Always Ready Towing Yonkers",
+        "phone": "(914) 300-4444",
+        "address": "Yonkers, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Yonkers Roadside",
+        "phone": "(914) 322-2222",
+        "address": "Yonkers, NY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Hilltop Towing",
+        "phone": "(914) 500-0505",
+        "address": "Yonkers, NY",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Westchester Recovery",
+        "phone": "(914) 350-0000",
+        "address": "Yonkers, NY",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

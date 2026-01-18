@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Walnut Hill Wrecker",
+        "phone": "(972) 620-2160",
+        "address": "Dallas, TX",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "10-4 Tow Dallas",
+        "phone": "(469) 518-9450",
+        "address": "Dallas, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Dallas Towing",
+        "phone": "(214) 210-2222",
+        "address": "Dallas, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Maverick Towing",
+        "phone": "(214) 731-7313",
+        "address": "Dallas, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Dallas Roadside",
+        "phone": "(214) 301-3810",
+        "address": "Dallas, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

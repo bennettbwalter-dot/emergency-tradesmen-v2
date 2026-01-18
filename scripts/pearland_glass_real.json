@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Hurricane Glass Pearland",
+        "phone": "(281) 815-4193",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Auto Glass Centers USA",
+        "phone": "(832) 532-4348",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "American Windshield Replacement",
+        "phone": "(281) 502-2682",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mobile Xpress Windshield Replacement",
+        "phone": "(281) 650-1033",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Area Wide Auto Glass",
+        "phone": "(281) 763-2190",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Texan Glass Pearland",
+        "phone": "(281) 296-6200",
+        "address": "Pearland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

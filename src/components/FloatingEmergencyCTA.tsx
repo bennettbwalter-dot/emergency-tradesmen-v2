@@ -6,9 +6,10 @@ interface FloatingEmergencyCTAProps {
     business?: Business | null;
     trade?: string;
     city?: string;
+    countryCode?: string;
 }
 
-export function FloatingEmergencyCTA({ business, trade, city }: FloatingEmergencyCTAProps) {
+export function FloatingEmergencyCTA({ business, trade, city, countryCode }: FloatingEmergencyCTAProps) {
     const phoneNumber = business?.phone || "";
     const proName = business?.name || `Emergency ${trade} in ${city}`;
 

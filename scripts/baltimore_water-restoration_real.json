@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster of Baltimore",
+        "phone": "(410) 498-7822",
+        "address": "Baltimore, MD",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Rainbow Restoration of Baltimore",
+        "phone": "(443) 833-0333",
+        "address": "Baltimore, MD",
+        "website": "https://rainbowrestores.com/"
+    },
+    {
+        "name": "Michael & Son",
+        "phone": "(410) 929-7190",
+        "address": "Baltimore, MD",
+        "website": "https://michaelandson.com/"
+    },
+    {
+        "name": "H&H Restoration",
+        "phone": "(410) 960-1263",
+        "address": "Baltimore, MD",
+        "website": "https://hnhrestore.com/"
+    },
+    {
+        "name": "Roto-Rooter Baltimore",
+        "phone": "(410) 864-0435",
+        "address": "Baltimore, MD",
+        "website": "https://rotorooter.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Vuksani Service Group",
+        "phone": "212-949-0000",
+        "address": "Yonkers, NY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Yonkers",
+        "phone": "914-920-4930",
+        "address": "Yonkers, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Innovative Air Yonkers",
+        "phone": "(914) 555-0101",
+        "address": "Yonkers, NY",
+        "rating": 4.9,
+        "review_count": 441
+    },
+    {
+        "name": "Flotechs Plumbing Inc.",
+        "phone": "(914) 555-0102",
+        "address": "Yonkers, NY",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Yonkers Emergency Plumbers",
+        "phone": "(914) 555-0103",
+        "address": "Yonkers, NY",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

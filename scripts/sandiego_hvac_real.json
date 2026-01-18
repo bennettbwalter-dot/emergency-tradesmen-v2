@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Bill Howe Plumbing, Heating & Air",
+        "phone": "(858) 295-0211",
+        "address": "San Diego, CA",
+        "rating": 4.7,
+        "review_count": 4755
+    },
+    {
+        "name": "Anderson Plumbing, Heating, & Air",
+        "phone": "(760) 276-5817",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 3500
+    },
+    {
+        "name": "ASI The White Glove Guys",
+        "phone": "(619) 478-4361",
+        "address": "San Diego, CA",
+        "rating": 4.9,
+        "review_count": 2800
+    },
+    {
+        "name": "Carini Heating, Air and Plumbing",
+        "phone": "(619) 304-0391",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Comfort Air Zone Heating and Air Conditioning",
+        "phone": "(619) 677-4934",
+        "address": "San Diego, CA",
+        "rating": 5.0,
+        "review_count": 350
+    }
+]

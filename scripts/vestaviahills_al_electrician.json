@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Webster Electric Company",
+        "phone": "(205) 822-9185",
+        "address": "Vestavia Hills, AL",
+        "website": "https://vestaviahills.org"
+    },
+    {
+        "name": "Electrum LLC",
+        "phone": "(205) 539-0600",
+        "address": "Vestavia Hills, AL",
+        "website": "https://electrumelectric.com"
+    },
+    {
+        "name": "Advanced Electrical Company",
+        "phone": "(205) 664-4500",
+        "address": "Vestavia Hills, AL",
+        "website": "https://advancedelectricalcompany.com"
+    },
+    {
+        "name": "Mr Electric of Birmingham",
+        "phone": "(205) 208-7479",
+        "address": "Vestavia Hills, AL",
+        "website": "https://todayshomeowner.com"
+    }
+]

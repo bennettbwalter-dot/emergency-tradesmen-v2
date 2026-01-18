@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Pacific Coast Home Services",
+        "phone": "(408) 212-0230",
+        "address": "San Jose, CA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "All Fresh Temp",
+        "phone": "(408) 892-0658",
+        "address": "San Jose, CA",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "San Jose HVAC Repair Experts",
+        "phone": "(408) 474-7292",
+        "address": "San Jose, CA",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Silicon Valley Air Experts",
+        "phone": "(408) 512-3203",
+        "address": "San Jose, CA",
+        "rating": 4.6,
+        "review_count": 210
+    },
+    {
+        "name": "Quick Fix AC",
+        "phone": "(408) 872-9104",
+        "address": "San Jose, CA",
+        "rating": 4.5,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "GeorgeTech Electric Andover",
+        "phone": "(877) 748-7084",
+        "address": "Andover, KS",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "Graf Electric Andover",
+        "phone": "(316) 686-2090",
+        "address": "Andover, KS",
+        "website": "https://grafelectric.com"
+    },
+    {
+        "name": "Mr Electric of Wichita Andover",
+        "phone": "(316) 202-4148",
+        "address": "Andover, KS",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Turner Electric",
+        "phone": "(316) 722-4663",
+        "address": "Andover, KS",
+        "website": "https://showmelocal.com"
+    }
+]

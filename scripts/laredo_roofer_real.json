@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Laredo, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Metals Roofing Pros",
+        "phone": "(844) 551-3620",
+        "address": "Laredo, TX",
+        "website": "https://metalsroofing.com/"
+    },
+    {
+        "name": "Frontline Roofers",
+        "phone": "(877) 978-3339",
+        "address": "Laredo, TX",
+        "website": "https://frontlineroofers.com/"
+    },
+    {
+        "name": "Laredo Roofing Services",
+        "phone": "(956) 242-0431",
+        "address": "Laredo, TX",
+        "website": "https://roofinglaredo.net/"
+    },
+    {
+        "name": "McAllen Valley Roofing Co.",
+        "phone": "(956) 242-0431",
+        "address": "107 Calle Del Norte Dr #5c Laredo, TX 78041",
+        "website": "https://laredo-roofing.com/"
+    }
+]

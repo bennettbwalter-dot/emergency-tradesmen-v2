@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Grove City Electrician",
+        "phone": "614-808-8110",
+        "address": "Grove City, OH",
+        "website": "https://grovecityelectrician.com"
+    },
+    {
+        "name": "SP Electric",
+        "phone": "614-827-5317",
+        "address": "Grove City, OH",
+        "website": "https://spelectricinc.com"
+    },
+    {
+        "name": "Edds Electric",
+        "phone": "614-972-9993",
+        "address": "Grove City, OH",
+        "website": "https://eddselectric.com"
+    },
+    {
+        "name": "Survivor Electric",
+        "phone": "740-721-3298",
+        "address": "Grove City, OH",
+        "website": "https://survivorelectric.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "GR Budget Towing",
+        "phone": "(616) 202-6265",
+        "address": "Grand Rapids, MI",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Grand Rapids Towing",
+        "phone": "(616) 538-0698",
+        "address": "Grand Rapids, MI",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "ABC Towing Service",
+        "phone": "(616) 784-1956",
+        "address": "Grand Rapids, MI",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Bud's Wrecker Service",
+        "phone": "(616) 452-1476",
+        "address": "Grand Rapids, MI",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Furniture City Recovery",
+        "phone": "(616) 211-1333",
+        "address": "Grand Rapids, MI",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

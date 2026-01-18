@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tim Harrod Electric",
+        "phone": "(502) 436-6633",
+        "address": "Shively, KY",
+        "website": "https://louisvilleelectric.net"
+    },
+    {
+        "name": "Link Electric",
+        "phone": "(502) 778-1155",
+        "address": "Shively, KY",
+        "website": "https://link-electric.com"
+    },
+    {
+        "name": "Excalibur Electrician",
+        "phone": "(502) 379-4503",
+        "address": "Shively, KY",
+        "website": "https://excaliburelectronics.com"
+    },
+    {
+        "name": "Granese Electrical",
+        "phone": "(855) 506-4858",
+        "address": "Shively, KY",
+        "website": "https://graneseelectric.com"
+    }
+]

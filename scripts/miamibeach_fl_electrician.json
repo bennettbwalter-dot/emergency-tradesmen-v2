@@ -1,0 +1,26 @@
+[
+    {
+        "name": "WireMasters Electric",
+        "phone": "(305) 378-4011",
+        "address": "Miami Beach, FL",
+        "website": "https://wiremasterselectric.com"
+    },
+    {
+        "name": "Miami Electric Masters",
+        "phone": "(305) 378-4011",
+        "address": "Miami Beach, FL",
+        "website": "https://miamielectricmasters.com"
+    },
+    {
+        "name": "S.E. Bates Electric",
+        "phone": "(786) 304-2328",
+        "address": "Miami Beach, FL",
+        "website": "https://bates-electric.com"
+    },
+    {
+        "name": "Benchmark Electric",
+        "phone": "(786) 752-5007",
+        "address": "Miami Beach, FL",
+        "website": "https://benchmarkelectricians.com"
+    }
+]

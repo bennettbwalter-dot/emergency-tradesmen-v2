@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Berkeys Plumbing Carrollton",
+        "phone": "972-464-2460",
+        "address": "Carrollton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Roto-Rooter Carrollton",
+        "phone": "972-891-7993",
+        "address": "Carrollton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Lex Air Conditioning and Heating",
+        "phone": "972-217-8955",
+        "address": "Carrollton, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Baker Brothers Plumbing Carrollton",
+        "phone": "214-892-2225",
+        "address": "Carrollton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Plumbing Dynamics",
+        "phone": "214-929-3431",
+        "address": "Carrollton, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mr. Electric of Dallas",
+        "phone": "469-634-0316",
+        "address": "Carrollton, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Carrollton Emergency Electrician",
+        "phone": "(972) 474-7025",
+        "address": "Carrollton, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Carrollton, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Arrow Electric, Inc.",
+        "phone": "(972) 905-6779",
+        "address": "Carrollton, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Carrollton Electrical",
+        "phone": "(972) 445-7143",
+        "address": "Carrollton, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "All Day Locksmith Service",
+        "phone": "972-512-6359",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Carrollton Locksmith",
+        "phone": "972-527-6153",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "AJ Locksmith and Security",
+        "phone": "214-935-3614",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Pop-A-Lock North Texas",
+        "phone": "469-213-1970",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 480
+    },
+    {
+        "name": "Carrollton Mobile Locksmith, LLC",
+        "phone": "972-478-0439",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Key Me",
+        "phone": "469-599-4708",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "A-1 Locksmith Carrollton",
+        "phone": "972-284-7500",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Carrollton Locksmith Store",
+        "phone": "972-512-0296",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Carrollton Lock And Locksmith",
+        "phone": "972-512-0297",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Green Locks and Keys Carrolton",
+        "phone": "972-421-8809",
+        "address": "Carrollton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

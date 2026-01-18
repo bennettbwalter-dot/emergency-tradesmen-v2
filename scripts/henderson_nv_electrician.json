@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Donco Electric",
+        "phone": "(702) 728-3606",
+        "address": "Henderson, NV",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Callidus Electric",
+        "phone": "(702) 403-4562",
+        "address": "Henderson, NV",
+        "website": "https://calliduselectric.com"
+    },
+    {
+        "name": "Penny Electric",
+        "phone": "(702) 426-4900",
+        "address": "Henderson, NV",
+        "website": "https://pennyelectric.com"
+    },
+    {
+        "name": "Ampere Electric",
+        "phone": "(702) 979-1747",
+        "address": "Henderson, NV",
+        "website": "https://ampereelectricnv.com"
+    }
+]

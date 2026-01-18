@@ -1,0 +1,26 @@
+[
+    {
+        "name": "All Comfort Services",
+        "phone": "(608) 838-7300",
+        "address": "Fitchburg, WI",
+        "website": "https://allcomfortservices.com"
+    },
+    {
+        "name": "Cardinal Heating & Air Conditioning",
+        "phone": "(608) 470-6242",
+        "address": "Fitchburg, WI",
+        "website": "https://cardinalhvac.com"
+    },
+    {
+        "name": "Badger Electric",
+        "phone": "(608) 661-4701",
+        "address": "Fitchburg, WI",
+        "website": "https://badgerelectric.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Fitchburg, WI",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

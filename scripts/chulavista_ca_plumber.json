@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bill Howe Plumbing",
+        "phone": "(800) 245-5469",
+        "address": "Chula Vista, CA",
+        "website": "https://billhowe.com"
+    },
+    {
+        "name": "Happy Plumbing Inc",
+        "phone": "(619) 317-0600",
+        "address": "Chula Vista, CA",
+        "website": "https://happyplumbing.com"
+    },
+    {
+        "name": "Above and Beyond Drains and Plumbing Inc",
+        "phone": "(619) 621-5377",
+        "address": "Chula Vista, CA",
+        "website": "https://abdrainsandplumbing.com"
+    },
+    {
+        "name": "Elite Rooter",
+        "phone": "(805) 749-2731",
+        "address": "Chula Vista, CA",
+        "website": "https://eliterooter.com"
+    }
+]

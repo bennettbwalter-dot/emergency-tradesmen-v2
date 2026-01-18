@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of East Arlington",
+        "phone": "(682) 708-1001",
+        "address": "814 East Abram Suite B, Arlington, TX 76010",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Paul Davis Emergency Services of West Arlington",
+        "phone": "(682) 730-6106",
+        "address": "4401 Little Rd Ste 550 #252, Arlington, TX 76016",
+        "website": "https://pauldavis.com/"
+    },
+    {
+        "name": "Specialty Restoration of Texas",
+        "phone": "(817) 613-0039",
+        "address": "2024 Exchange Dr., Arlington, TX 76011",
+        "website": "https://specialtyrestorationoftexas.com/"
+    },
+    {
+        "name": "Arlington Damage Restoration",
+        "phone": "(844) 502-1354",
+        "address": "801 Secretary Dr Ste I, Arlington, TX 76015",
+        "website": "https://arlingtondamagerestoration.com/"
+    },
+    {
+        "name": "ServiceMaster Advanced Restorations",
+        "phone": "(817) 783-9297",
+        "address": "Arlington, TX",
+        "website": "https://servicemaster.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Delmar, MD",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Peninsula Electric Inc.",
+        "phone": "(443) 614-2413",
+        "address": "Delmar, MD",
+        "website": "https://peninsulaelectricinc.com"
+    },
+    {
+        "name": "E-Z Electric",
+        "phone": "(410) 356-7220",
+        "address": "Delmar, MD",
+        "website": "https://ezelectricmd.com"
+    },
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Delmar, MD",
+        "website": "https://needelectric.com"
+    }
+]

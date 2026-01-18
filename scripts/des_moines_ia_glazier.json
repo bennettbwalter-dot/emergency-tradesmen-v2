@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Des Moines",
+        "phone": "(515) 257-6119",
+        "address": "Des Moines, IA",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "Comiskey Glass & Glazing",
+        "phone": "(515) 244-8445",
+        "address": "Des Moines, IA",
+        "website": "https://comiskeyglass.com"
+    },
+    {
+        "name": "Kryger Glass",
+        "phone": "(515) 265-2121",
+        "address": "Des Moines, IA",
+        "website": "https://krygerglass.com"
+    },
+    {
+        "name": "Metro Glass",
+        "phone": "(515) 279-9800",
+        "address": "Des Moines, IA",
+        "website": "https://metroglassdm.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Spartan Electrical Service",
+        "phone": "877-703-4275",
+        "address": "Zionsville, IN",
+        "website": "https://spartanelectricalservice.com"
+    },
+    {
+        "name": "Phase 1 Electric Services",
+        "phone": "463-217-3568",
+        "address": "Zionsville, IN",
+        "website": "https://p1electric.com"
+    },
+    {
+        "name": "Williams Comfort Air",
+        "phone": "317-660-6992",
+        "address": "Zionsville, IN",
+        "website": "https://williamscomfortair.com"
+    },
+    {
+        "name": "Mister Quik Home Services",
+        "phone": "317-468-9170",
+        "address": "Zionsville, IN",
+        "website": "https://mrquikhomeservices.com"
+    }
+]

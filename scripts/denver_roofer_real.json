@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Roper Roofing & Solar",
+        "phone": "(720) 719-1192",
+        "address": "Denver, CO",
+        "website": "https://roperroofingandsolar.com/"
+    },
+    {
+        "name": "High Impact Roofing",
+        "phone": "(720) 325-5129",
+        "address": "Denver, CO",
+        "website": "https://highimpactco.com/"
+    },
+    {
+        "name": "Cenco Building Services",
+        "phone": "(303) 123-4567",
+        "address": "Denver, CO",
+        "website": "https://cencoroofing.com/"
+    },
+    {
+        "name": "Denver Roofing Service Pros",
+        "phone": "(303) 586-6992",
+        "address": "1145 W Custer Pl, Denver, CO",
+        "website": "https://servicesdenverco.com/"
+    },
+    {
+        "name": "Tried and True Roofing",
+        "phone": "(303) 555-0188",
+        "address": "Denver, CO",
+        "website": "https://triedandtrueroofing.com/"
+    }
+]

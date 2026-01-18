@@ -1,0 +1,37 @@
+[
+    {
+        "name": "KB Towing Service",
+        "phone": "(469) 240-2725",
+        "address": "Garland, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Garland Towing",
+        "phone": "(972) 211-1333",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Always Ready Towing Garland",
+        "phone": "(972) 300-4444",
+        "address": "Garland, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Garland Roadside",
+        "phone": "(972) 322-2222",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Rowlett Recovery",
+        "phone": "(972) 500-0505",
+        "address": "Garland, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

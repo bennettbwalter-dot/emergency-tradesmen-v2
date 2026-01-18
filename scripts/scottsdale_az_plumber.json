@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Scottsdale Plumbing",
+        "phone": "(480) 945-9583",
+        "address": "Scottsdale, AZ",
+        "website": "https://scottsdaleplumbing.com"
+    },
+    {
+        "name": "AC by J",
+        "phone": "(602) 842-6742",
+        "address": "Scottsdale, AZ",
+        "website": "https://acbyj.com"
+    },
+    {
+        "name": "Roto-Rooter Scottsdale",
+        "phone": "(480) 459-2977",
+        "address": "Scottsdale, AZ",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Ground Zero Plumbing",
+        "phone": "(480) 448-0603",
+        "address": "Scottsdale, AZ",
+        "website": "https://groundzeroplumbingac.com"
+    }
+]

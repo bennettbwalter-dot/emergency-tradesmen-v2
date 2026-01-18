@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Trident Electric INC",
+        "phone": "(203) 520-2646",
+        "address": "Shelton, CT",
+        "website": "https://trident-electric.com"
+    },
+    {
+        "name": "Ray Brown Electric",
+        "phone": "(203) 261-2115",
+        "address": "Shelton, CT",
+        "website": "https://raybrownelectric.com"
+    },
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "Shelton, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "Buck Electric",
+        "phone": "(203) 874-8848",
+        "address": "Shelton, CT",
+        "website": "https://buckelectricct.com"
+    }
+]

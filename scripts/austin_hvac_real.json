@@ -1,0 +1,37 @@
+[
+    {
+        "name": "The Chill Brothers",
+        "phone": "(844) 512-4455",
+        "address": "Austin, TX",
+        "rating": 4.9,
+        "review_count": 1350
+    },
+    {
+        "name": "Precision Heating & Air",
+        "phone": "(512) 379-6385",
+        "address": "Austin, TX",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "24/7 AC Repair Austin",
+        "phone": "(737) 215-4475",
+        "address": "Austin, TX",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Fox Service Company",
+        "phone": "(512) 442-6782",
+        "address": "Austin, TX",
+        "rating": 4.6,
+        "review_count": 2800
+    },
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(512) 837-9500",
+        "address": "Austin, TX",
+        "rating": 4.8,
+        "review_count": 5100
+    }
+]

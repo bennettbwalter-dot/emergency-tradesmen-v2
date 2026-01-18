@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Ronnie's 24 Hour Glass & Door",
+        "phone": "(682) 279-0502",
+        "address": "North Richland Hills, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Apex Windows & Glass",
+        "phone": "(214) 263-3008",
+        "address": "North Richland Hills, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Texas Windshield Service NRH",
+        "phone": "214-377-4802",
+        "address": "North Richland Hills, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "North Richland Hills Glass",
+        "phone": "817-788-8282",
+        "address": "North Richland Hills, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

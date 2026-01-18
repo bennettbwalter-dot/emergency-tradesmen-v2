@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Roof Express",
+        "phone": "(650) 666-5554",
+        "address": "3790 El Camino Real, Palo Alto, CA 94306",
+        "website": "https://roof-ex.com/"
+    },
+    {
+        "name": "Flawless Roof Repair",
+        "phone": "(650) 900-0052",
+        "address": "721 Colorado Ave, Palo Alto, CA 94303",
+        "website": "https://flawlessroofingpaloalto.com/"
+    },
+    {
+        "name": "Palo Alto Roof Pros",
+        "phone": "(650) 297-7097",
+        "address": "Palo Alto, CA",
+        "website": "https://paloaltoroofpros.com/"
+    },
+    {
+        "name": "Premier Roofing Experts",
+        "phone": "(650) 123-4567",
+        "address": "Palo Alto, CA",
+        "website": "https://premierroofingexpertsca.com/"
+    },
+    {
+        "name": "NR Roofing CA",
+        "phone": "(669) 345-4555",
+        "address": "Palo Alto, CA",
+        "website": "https://nrroofingca.com/"
+    }
+]

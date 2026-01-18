@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Tucson Towing Service",
+        "phone": "(520) 214-5555",
+        "address": "Tucson, AZ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Always Ready Towing Tucson",
+        "phone": "(520) 441-2222",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Barnard's Towing",
+        "phone": "(520) 884-9333",
+        "address": "Tucson, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Cactus Towing",
+        "phone": "(520) 241-1000",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Tucson Roadside",
+        "phone": "(520) 300-5454",
+        "address": "Tucson, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

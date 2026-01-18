@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Wake Forest",
+        "phone": "984-326-3567",
+        "address": "Wake Forest, NC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Cow Dog Electric",
+        "phone": "984-222-4286",
+        "address": "Wake Forest, NC",
+        "website": "https://cowdogelectric.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Wake Forest, NC",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "NC Express Services LLC",
+        "phone": "919-626-8625",
+        "address": "Wake Forest, NC",
+        "website": "https://ncexpress.pro"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Glass Doctor of Lexington",
+        "phone": "(859) 402-1331",
+        "address": "Lexington, KY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Avizion Glass Lexington",
+        "phone": "(859) 231-8167",
+        "address": "Lexington, KY",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Central KY Auto Glass",
+        "phone": "859-470-2886",
+        "address": "Lexington, KY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Triple Crown Auto Glass",
+        "phone": "(859) 241-3186",
+        "address": "Lexington, KY",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    }
+]

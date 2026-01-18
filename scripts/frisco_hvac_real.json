@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Baker Brothers Plumbing and Air Conditioning",
+    "phone": "(214) 892-2225",
+    "address": "Frisco, TX",
+    "rating": 4.9,
+    "review_count": 2500
+  },
+  {
+    "name": "Airview AC & Heating Repair",
+    "phone": "(972) 658-1784",
+    "address": "Frisco, TX",
+    "rating": 4.8,
+    "review_count": 420
+  },
+  {
+    "name": "Air Repair Pros",
+    "phone": "(469) 333-2474",
+    "address": "Frisco, TX",
+    "rating": 4.7,
+    "review_count": 850
+  },
+  {
+    "name": "Berkeys",
+    "phone": "(214) 216-1727",
+    "address": "Frisco, TX",
+    "rating": 4.9,
+    "review_count": 5200
+  },
+  {
+    "name": "Quick Solutions Air Conditioning & Heating",
+    "phone": "(469) 721-6659",
+    "address": "Frisco, TX",
+    "rating": 4.8,
+    "review_count": 150
+  }
+]

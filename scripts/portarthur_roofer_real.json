@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Port Arthur Roofing Company",
+        "phone": "(409) 302-1904",
+        "address": "Port Arthur, TX",
+        "website": "https://roofingportarthur.com/"
+    },
+    {
+        "name": "SETX Roofing Pros",
+        "phone": "(409) 123-4567",
+        "address": "Port Arthur, TX",
+        "website": "https://setxroofingpros.com/"
+    },
+    {
+        "name": "Pro Roofing Repairs",
+        "phone": "(888) 899-5773",
+        "address": "Port Arthur, TX",
+        "website": "https://proroofingrepairs.com/"
+    },
+    {
+        "name": "Metals Roofing Pros",
+        "phone": "(844) 551-3620",
+        "address": "Port Arthur, TX",
+        "website": "https://metalsroofing.com/"
+    },
+    {
+        "name": "JNC Roofing",
+        "phone": "(888) 676-0138",
+        "address": "Port Arthur, TX",
+        "website": "https://jncroofing.com/"
+    }
+]

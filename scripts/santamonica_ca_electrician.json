@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Brentwood Electrical Contractors",
+        "phone": "(310) 935-0674",
+        "address": "Santa Monica, CA",
+        "website": "https://brentwoodelectrical.com"
+    },
+    {
+        "name": "USA Electric",
+        "phone": "(310) 553-5157",
+        "address": "Santa Monica, CA",
+        "website": "https://usaelectric.com"
+    },
+    {
+        "name": "Express Electrical Services",
+        "phone": "(323) 204-4132",
+        "address": "Santa Monica, CA",
+        "website": "https://expresselectricalservices.com"
+    },
+    {
+        "name": "Reliable Electrical Services",
+        "phone": "(844) 335-0814",
+        "address": "Santa Monica, CA",
+        "website": "https://electricianstorrance.com"
+    }
+]

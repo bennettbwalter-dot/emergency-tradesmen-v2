@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Evans, GA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "G Star Electric",
+        "phone": "706-228-8114",
+        "address": "Evans, GA",
+        "website": "https://gstarelectricllc.com"
+    },
+    {
+        "name": "A W Electric",
+        "phone": "706-993-6991",
+        "address": "Evans, GA",
+        "website": "https://awelectricllc.com"
+    },
+    {
+        "name": "Mister Sparky of Augusta",
+        "phone": "706-447-0000",
+        "address": "Evans, GA",
+        "website": "https://mistersparky.com"
+    }
+]

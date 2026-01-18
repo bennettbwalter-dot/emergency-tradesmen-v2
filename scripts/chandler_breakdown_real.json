@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Gizzo's Global Towing",
+        "phone": "(480) 500-1570",
+        "address": "Chandler, AZ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Freeway Towing & Storage",
+        "phone": "(602) 377-0036",
+        "address": "Chandler, AZ",
+        "rating": 4.8,
+        "review_count": 1011
+    },
+    {
+        "name": "De La Cruz Towing",
+        "phone": "(602) 459-4280",
+        "address": "Chandler, AZ",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Valley Express Towing",
+        "phone": "(480) 899-4621",
+        "address": "Chandler, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Chandler Towing and Recovery",
+        "phone": "(480) 428-2960",
+        "address": "Chandler, AZ",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

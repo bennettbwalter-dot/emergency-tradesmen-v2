@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ASAP Spokane Auto Glass",
+        "phone": "(509) 863-1437",
+        "address": "Spokane, WA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Five Mile Glass Inc.",
+        "phone": "(509) 213-0612",
+        "address": "Spokane, WA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Spokane Glass Centers",
+        "phone": "(509) 703-7375",
+        "address": "Spokane, WA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

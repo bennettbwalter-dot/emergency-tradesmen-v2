@@ -1,0 +1,37 @@
+[
+    {
+        "name": "AirCo",
+        "phone": "(817) 591-1225",
+        "address": "Fort Worth, TX",
+        "rating": 4.8,
+        "review_count": 1250
+    },
+    {
+        "name": "Baker Brothers Plumbing, Air & Electric",
+        "phone": "(817) 591-1556",
+        "address": "Fort Worth, TX",
+        "rating": 4.7,
+        "review_count": 3400
+    },
+    {
+        "name": "Comfort Experts",
+        "phone": "(817) 341-5149",
+        "address": "Fort Worth, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "One Hour Air Conditioning & Heating of Fort Worth",
+        "phone": "(817) 754-1972",
+        "address": "Fort Worth, TX",
+        "rating": 4.6,
+        "review_count": 620
+    },
+    {
+        "name": "Emergency AC Corp",
+        "phone": "(682) 268-4077",
+        "address": "Fort Worth, TX",
+        "rating": 4.5,
+        "review_count": 120
+    }
+]

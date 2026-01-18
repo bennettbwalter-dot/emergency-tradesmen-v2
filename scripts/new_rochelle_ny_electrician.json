@@ -1,0 +1,26 @@
+[
+    {
+        "name": "New Rochelle Electricians",
+        "phone": "(914) 603-7859",
+        "address": "New Rochelle, NY",
+        "website": "https://newrochelleelectricians.com"
+    },
+    {
+        "name": "Antonio Ferrao Electric",
+        "phone": "(914) 589-7951",
+        "address": "New Rochelle, NY",
+        "website": "https://antonioferraoelectric.com"
+    },
+    {
+        "name": "Red Star Electric",
+        "phone": "(914) 310-6609",
+        "address": "New Rochelle, NY",
+        "website": "https://redstarelectricny.com"
+    },
+    {
+        "name": "Rella Electric",
+        "phone": "(914) 500-4505",
+        "address": "New Rochelle, NY",
+        "website": "https://rellaelectric.com"
+    }
+]

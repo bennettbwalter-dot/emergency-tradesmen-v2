@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Montgomery",
+        "phone": "334-272-7130",
+        "address": "Montgomery, AL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Clark Heating & Plumbing",
+        "phone": "(334) 310-5164",
+        "address": "Montgomery, AL",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Cole Plumbing, Inc.",
+        "phone": "(334) 458-9413",
+        "address": "Montgomery, AL",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Bradley Plumbing & Heating",
+        "phone": "(334) 555-0101",
+        "address": "Montgomery, AL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Montgomery Emergency Plumbers",
+        "phone": "(334) 555-0102",
+        "address": "Montgomery, AL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Building Repair Specialists Slough",
+        "phone": "0800 046 1421",
+        "address": "268 Bath Road, Regus Building, Slough, SL1 4DX",
+        "website": "https://buildingrepairspecialists.com/"
+    },
+    {
+        "name": "Wentworth Water Slough",
+        "phone": "01252 235 367",
+        "address": "Slough",
+        "website": "https://wentworthwater.co.uk/"
+    },
+    {
+        "name": "Rainbow Restoration Slough",
+        "phone": "0800 021 3115",
+        "address": "Slough",
+        "website": "https://rainbowrestoration.co.uk/"
+    },
+    {
+        "name": "Pro Drainage Slough",
+        "phone": "0800 611 8277",
+        "address": "Slough",
+        "website": "https://prodrainage.co.uk/"
+    },
+    {
+        "name": "BAP Utilities Slough",
+        "phone": "07593 116902",
+        "address": "Slough",
+        "website": "https://baputilities.co.uk/"
+    }
+]

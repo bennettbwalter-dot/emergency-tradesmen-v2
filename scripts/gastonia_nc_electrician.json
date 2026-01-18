@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky Gastonia",
+        "phone": "(704) 332-2100",
+        "address": "Gastonia, NC",
+        "website": "https://mistersparkycharlotte.com"
+    },
+    {
+        "name": "Dallas Electrical Contractors Inc",
+        "phone": "(704) 867-4404",
+        "address": "Gastonia, NC",
+        "website": "https://dallasncelectric.com"
+    },
+    {
+        "name": "LiveWire Electrical",
+        "phone": "(704) 289-7792",
+        "address": "Gastonia, NC",
+        "website": "https://livewireelectricalcharlotte.com"
+    },
+    {
+        "name": "Nimbus Electric LLC",
+        "phone": "(704) 322-8321",
+        "address": "Gastonia, NC",
+        "website": "https://nimbuselectricllc.com"
+    }
+]

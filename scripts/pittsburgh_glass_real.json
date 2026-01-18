@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Expert Glass Company LLC",
+        "phone": "(412) 201-0808",
+        "address": "Pittsburgh, PA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Steel City Glass and Mirror",
+        "phone": "(412) 782-9800",
+        "address": "Pittsburgh, PA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "R and C Glass Pittsburgh",
+        "phone": "(412) 241-1400",
+        "address": "Pittsburgh, PA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    }
+]

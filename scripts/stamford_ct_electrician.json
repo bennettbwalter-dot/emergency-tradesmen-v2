@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mancuso Electric Inc",
+        "phone": "(203) 629-2232",
+        "address": "Stamford, CT",
+        "website": "https://mancusoelectric.com"
+    },
+    {
+        "name": "Safe and Sound Electric",
+        "phone": "(203) 536-0021",
+        "address": "North Stamford, CT",
+        "website": "https://safeandsoundelectric.com"
+    },
+    {
+        "name": "Buckley Electric & Automation LLC",
+        "phone": "(866) 200-0076",
+        "address": "Stamford, CT",
+        "website": "https://callbuckleyelectric.com"
+    },
+    {
+        "name": "Dasan Electric",
+        "phone": "(203) 465-3636",
+        "address": "Stamford, CT",
+        "website": "https://dasanelectric.com"
+    }
+]

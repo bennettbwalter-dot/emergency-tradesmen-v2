@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Glass Doctor of Charlotte",
+        "phone": "(704) 815-5692",
+        "address": "Charlotte, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Emergency Glass Company Charlotte",
+        "phone": "704-740-8457",
+        "address": "Charlotte, NC",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Binswanger Glass Charlotte",
+        "phone": "(704) 333-5497",
+        "address": "Charlotte, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Charlotte Door & Glass Repair",
+        "phone": "(704) 555-0123",
+        "address": "Charlotte, NC",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

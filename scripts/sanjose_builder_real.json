@@ -1,0 +1,32 @@
+[
+    {
+        "name": "911 Restoration of San Jose",
+        "phone": "(408) 449-4904",
+        "address": "San Jose, CA",
+        "website": "https://911restorationsanjose.com/"
+    },
+    {
+        "name": "SERVPRO of SW San Jose",
+        "phone": "(408) 288-9977",
+        "address": "San Jose, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "1-800-BOARDUP of San Jose Metro",
+        "phone": "(800) 262-7387",
+        "address": "2297 Ringwood Ave, San Jose, CA 95131",
+        "website": "https://1-800boardup.com/"
+    },
+    {
+        "name": "Bayco Builders & Restoration",
+        "phone": "(669) 770-5373",
+        "address": "San Jose, CA",
+        "website": "https://baycobuildersandrestoration.com/"
+    },
+    {
+        "name": "Water Damage Recovery (F&WDR)",
+        "phone": "(510) 394-0980",
+        "address": "San Jose, CA",
+        "website": "https://waterdamagerecovery.net/"
+    }
+]

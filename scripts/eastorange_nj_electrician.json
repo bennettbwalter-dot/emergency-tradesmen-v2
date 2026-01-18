@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "East Orange, NJ",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "O Connors Electrical",
+        "phone": "(844) 484-2612",
+        "address": "East Orange, NJ",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "First Class Electric",
+        "phone": "(908) 325-1777",
+        "address": "East Orange, NJ",
+        "website": "https://firstclasselectricnj.com"
+    },
+    {
+        "name": "Allied Electrical Group",
+        "phone": "(888) 828-4283",
+        "address": "East Orange, NJ",
+        "website": "https://alliedelectricalgroupllcnj.com"
+    }
+]

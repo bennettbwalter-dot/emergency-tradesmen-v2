@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Plumber Phoenix",
+        "phone": "(480) 757-7099",
+        "address": "Phoenix, AZ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Phoenix",
+        "phone": "(602) 282-5007",
+        "address": "Phoenix, AZ",
+        "rating": 4.8,
+        "review_count": 1700
+    },
+    {
+        "name": "Goettl Plumbing",
+        "phone": "(602) 386-2728",
+        "address": "Phoenix, AZ",
+        "rating": 4.7,
+        "review_count": 13078
+    },
+    {
+        "name": "Parker & Sons",
+        "phone": "(602) 273-7247",
+        "address": "Phoenix, AZ",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "All Hours Plumbing",
+        "phone": "(602) 455-6111",
+        "address": "Phoenix, AZ",
+        "rating": 4.6,
+        "review_count": 71
+    }
+]

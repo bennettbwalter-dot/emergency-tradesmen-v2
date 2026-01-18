@@ -1,0 +1,66 @@
+[
+    {
+        "name": "Dr. Louie's Auto Glass Inc.",
+        "phone": "(956) 723-4554",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Safelite AutoGlass Laredo",
+        "phone": "800-800-2727",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Cavazos Auto Spa",
+        "phone": "(956) 727-2411",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Patsco Windshield Repair",
+        "phone": "(877) 717-5520",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Bullseye Windshield",
+        "phone": "956-744-8824",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "StopNGo Auto Glass",
+        "phone": "956-441-1298",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Safety Glass Co Inc.",
+        "phone": "(210) 226-1191",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Gateway Glass & Mirror CO.",
+        "phone": "(956) 722-1250",
+        "address": "Laredo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 200
+    }
+]

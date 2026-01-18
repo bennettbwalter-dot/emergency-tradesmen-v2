@@ -1,0 +1,26 @@
+[
+    {
+        "name": "C and N Electric",
+        "phone": "(423) 401-4058",
+        "address": "Hixson, TN",
+        "website": "https://cnelectrictn.com"
+    },
+    {
+        "name": "Eldridge Service Co",
+        "phone": "(423) 475-5661",
+        "address": "Hixson, TN",
+        "website": "https://eldridgeservice.com"
+    },
+    {
+        "name": "Lawson Electric",
+        "phone": "(423) 267-5471",
+        "address": "Hixson, TN",
+        "website": "https://lawsonelectric.com"
+    },
+    {
+        "name": "Re-New Electric",
+        "phone": "(423) 680-2682",
+        "address": "Hixson, TN",
+        "website": "https://re-newelectric.com"
+    }
+]

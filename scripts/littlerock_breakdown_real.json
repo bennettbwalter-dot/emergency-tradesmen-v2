@@ -1,0 +1,37 @@
+[
+    {
+        "name": "East End Towing",
+        "phone": "(501) 888-8849",
+        "address": "Little Rock, AR",
+        "rating": 5.0,
+        "review_count": 500
+    },
+    {
+        "name": "Asher Wrecker & Recovery",
+        "phone": "(501) 294-6142",
+        "address": "Little Rock, AR",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "My City Towing and Recovery",
+        "phone": "(501) 672-1993",
+        "address": "Little Rock, AR",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Phillips Brothers Towing",
+        "phone": "(501) 758-4357",
+        "address": "Little Rock, AR",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "365 Towing & Recovery",
+        "phone": "(501) 211-1333",
+        "address": "Little Rock, AR",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

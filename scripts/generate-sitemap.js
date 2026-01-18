@@ -5,14 +5,14 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 
 // Load env vars
-if (fs.existsSync('.env.production')) {
-    dotenv.config({ path: '.env.production' });
-} else {
-    dotenv.config();
-}
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load env vars
+const envPath = fs.existsSync(path.join(__dirname, '../.env.production'))
+    ? path.join(__dirname, '../.env.production')
+    : path.join(__dirname, '../.env');
+dotenv.config({ path: envPath });
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -25,45 +25,19 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Data from src/lib/trades.ts
-const trades = [
+const ukTrades = [
     "plumber", "electrician", "locksmith", "gas-engineer", "drain-specialist", "glazier", "breakdown"
 ];
 
-const cities = [
-    "Manchester", "Birmingham", "Leeds", "Sheffield", "Nottingham", "Leicester", "Derby",
-    "Coventry", "Wolverhampton", "Stoke-on-Trent", "Liverpool", "Preston", "Bolton",
-    "Oldham", "Rochdale", "Bradford", "Huddersfield", "York", "Hull", "Doncaster",
-    "Northampton", "Milton Keynes", "Luton", "Bedford", "Peterborough", "Cambridge",
-    "Norwich", "Ipswich", "Reading", "Oxford", "Swindon", "Cheltenham", "Gloucester",
-    "Worcester", "Hereford", "Shrewsbury", "Telford", "Cannock", "Tamworth", "Nuneaton",
-    "Rugby", "Bath", "Brighton & Hove", "Bristol", "Canterbury", "Carlisle", "Chelmsford",
-    "Chester", "Chichester", "Colchester", "Durham", "Ely", "Exeter", "Lancaster",
-    "Lichfield", "Lincoln", "London", "Newcastle-upon-Tyne", "Plymouth", "Portsmouth",
-    "Ripon", "Salford", "Salisbury", "Southampton", "Southend-on-Sea", "St Albans",
-    "Sunderland", "Truro", "Wakefield", "Wells", "Winchester", "Westminster",
-    "Warrington", "Wigan", "Middlesbrough", "Blackpool", "Barnsley",
-    "Cardiff", "Swansea", "Newport", "Edinburgh", "Glasgow", "Aberdeen", "Dundee", "Belfast",
-    "Slough", "Bournemouth", "Poole", "Stockport", "Dudley", "Walsall", "Solihull", "Basildon",
-    "Crawley", "Basingstoke", "Woking", "Guildford", "High Wycombe", "Hemel Hempstead",
-    "Stevenage", "Harlow", "Watford", "Staines", "Maidstone", "Gillingham", "Chatham",
-    "Ashford", "Dartford", "Tunbridge Wells", "Hastings", "Eastbourne", "Worthing",
-    "Harrogate", "Halifax", "Batley", "Keighley", "South Shields", "Gateshead",
-    "Darlington", "Hartlepool", "Stockton-on-Tees", "Rayleigh", "Lowestoft", "Maidenhead", "Fareham",
-    "Gosport", "Ewell", "Crosby", "Paignton", "Torquay", "Bebington", "Halesowen",
-    "Kidderminster", "Leamington Spa", "Kettering", "Wellingborough", "Dunstable",
-    "Aylesbury", "Cheshunt", "Welwyn Garden City", "Margate", "Royal Tunbridge Wells",
-    "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend",
-    "Weymouth", "Falmouth", "St Austell", "Scarborough", "Bridlington",
-    "Castleford", "Pontefract", "Sale", "Birkenhead", "Wallasey",
-    "Barrow-in-Furness", "Workington", "Whitehaven", "Chorley", "Accrington", "Burnley",
-    "Lytham St Annes", "Brixton", "Hackney", "Camden", "Islington", "Greenwich", "Chelsea",
-    "Wembley", "Croydon", "Ealing", "Enfield", "Harrow", "Hounslow", "Kingston", "Merton",
-    "Newham", "Redbridge", "Richmond", "Southwark", "Tower Hamlets", "Waltham Forest",
-    "Wandsworth", "Woolwich", "Fulham", "Sutton Coldfield", "Redditch", "Chesterfield",
-    "Mansfield", "Beeston", "Loughborough", "Burton upon Trent", "Crewe", "Macclesfield",
-    "Scunthorpe", "Grimsby", "Rotherham", "Widnes", "Runcorn", "Ellesmere Port", "Stafford",
-    "Bromsgrove", "Grantham"
+const usTrades = [
+    "plumber", "electrician", "locksmith", "drain-specialist", "glazier", "roofer", "water-restoration", "breakdown"
 ];
+
+// Use fs to read the JSON file to ensure compatibility across Node versions
+const ukCitiesPath = path.join(__dirname, '../src/lib/uk_cities.json');
+const usCitiesPath = path.join(__dirname, '../src/lib/us_cities.json');
+const ukCities = JSON.parse(fs.readFileSync(ukCitiesPath, 'utf8'));
+const usCities = JSON.parse(fs.readFileSync(usCitiesPath, 'utf8'));
 
 const commonProblems = [
     "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking"
@@ -130,13 +104,13 @@ async function generateSitemap() {
   <url>
     <loc>${BASE_URL}${p}</loc>
     <changefreq>weekly</changefreq>
-    <priority>${p === '' ? '1.0' : '0.8'}</priority>
+    <priority>${p === '' || p === '/us' ? '1.0' : '0.8'}</priority>
   </url>`;
     });
 
-    // 2. Dynamic City Pages (Trade + City)
-    trades.forEach(trade => {
-        cities.forEach(city => {
+    // 2. Dynamic City Pages (UK)
+    ukTrades.forEach(trade => {
+        ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             const url = `/emergency-${trade}/${citySlug}`;
             xml += `
@@ -148,9 +122,23 @@ async function generateSitemap() {
         });
     });
 
-    // 2.5 Dynamic Symptom Pages (Problem + City)
+    // 3. Dynamic City Pages (US)
+    usTrades.forEach(trade => {
+        usCities.forEach(city => {
+            const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
+            const url = `/us/emergency-${trade}/${citySlug}`;
+            xml += `
+  <url>
+    <loc>${BASE_URL}${url}</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+        });
+    });
+
+    // 4. Dynamic Symptom Pages (UK Only for now)
     commonProblems.forEach(problem => {
-        cities.forEach(city => {
+        ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             const url = `/${problem}/${citySlug}`;
             xml += `
@@ -162,11 +150,12 @@ async function generateSitemap() {
         });
     });
 
-    // 3. Dynamic Business Profiles
+    // 5. Dynamic Business Profiles
     businesses.forEach(biz => {
+        const prefix = biz.country_code === 'US' ? '/us' : '';
         xml += `
   <url>
-    <loc>${BASE_URL}/business/${biz.id}</loc>
+    <loc>${BASE_URL}${prefix}/business/${biz.id}</loc>
     <lastmod>${biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -192,10 +181,13 @@ async function generateSitemap() {
     console.log(` ✅ Sitemap generated at ${outputPath}`);
     console.log(` 📊 Summary:`);
     console.log(`    - Static: ${staticPages.length}`);
-    console.log(`    - City Pages: ${(trades.length + commonProblems.length) * cities.length}`);
+    console.log(`    - UK City Pages: ${ukTrades.length * ukCities.length}`);
+    console.log(`    - US City Pages: ${usTrades.length * usCities.length}`);
+    console.log(`    - Symptom Pages: ${commonProblems.length * ukCities.length}`);
     console.log(`    - Business Profiles: ${businesses.length}`);
     console.log(`    - Blog Posts: ${posts?.length || 0}`);
-    console.log(`    - Total URLs: ${staticPages.length + ((trades.length + commonProblems.length) * cities.length) + businesses.length + (posts?.length || 0)}`);
+    const total = staticPages.length + (ukTrades.length * ukCities.length) + (usTrades.length * usCities.length) + (commonProblems.length * ukCities.length) + businesses.length + (posts?.length || 0);
+    console.log(`    - Total URLs: ${total}`);
 }
 
 generateSitemap();

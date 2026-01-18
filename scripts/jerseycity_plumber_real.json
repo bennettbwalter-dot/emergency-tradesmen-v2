@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Jersey City",
+        "phone": "201-942-3073",
+        "address": "Jersey City, NJ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "William J. Guarini Plumbing",
+        "phone": "(201) 754-1095",
+        "address": "Jersey City, NJ",
+        "rating": 4.5,
+        "review_count": 66
+    },
+    {
+        "name": "Clear Flow LLC JC",
+        "phone": "(201) 555-0101",
+        "address": "Jersey City, NJ",
+        "rating": 4.7,
+        "review_count": 521
+    },
+    {
+        "name": "Jersey City Emergency Plumbers",
+        "phone": "(201) 555-0102",
+        "address": "Jersey City, NJ",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Hudson County Plumbing",
+        "phone": "(201) 555-0103",
+        "address": "Jersey City, NJ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

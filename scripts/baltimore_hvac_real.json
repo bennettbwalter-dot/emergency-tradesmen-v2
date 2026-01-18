@@ -1,0 +1,37 @@
+[
+    {
+        "name": "F.H. Furr Plumbing, Heating, Cooling & Electrical",
+        "phone": "(410) 204-4713",
+        "address": "Baltimore, MD",
+        "rating": 4.9,
+        "review_count": 5500
+    },
+    {
+        "name": "Blue Dot",
+        "phone": "(410) 204-2662",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "One Hour of Baltimore",
+        "phone": "(410) 934-0233",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 212
+    },
+    {
+        "name": "Supreme Service Today",
+        "phone": "(410) 457-3700",
+        "address": "Baltimore, MD",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Len the Plumber (Heating/Air)",
+        "phone": "(410) 247-9970",
+        "address": "Baltimore, MD",
+        "rating": 4.6,
+        "review_count": 3200
+    }
+]

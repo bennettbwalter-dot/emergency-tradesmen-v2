@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Freedom Air Repair",
+        "phone": "(210) 987-8092",
+        "address": "San Antonio, TX",
+        "rating": 5.0,
+        "review_count": 130
+    },
+    {
+        "name": "Cowboy's Air Conditioning & Heating",
+        "phone": "(210) 495-7771",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Beyer Air Conditioning & Heating",
+        "phone": "(210) 503-7161",
+        "address": "San Antonio, TX",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Rosenberg Indoor Comfort",
+        "phone": "(210) 798-8000",
+        "address": "San Antonio, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Hunter Service Group",
+        "phone": "(210) 701-0192",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

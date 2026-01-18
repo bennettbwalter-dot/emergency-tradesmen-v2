@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mechanical Heating and AC Inc",
+        "phone": "(203) 780-8959",
+        "address": "New Haven, CT",
+        "website": "https://mechanicalheatingac.com"
+    },
+    {
+        "name": "Air Specialties AC & Heating",
+        "phone": "(203) 934-7984",
+        "address": "New Haven, CT",
+        "website": "https://airspecialtiesac.com"
+    },
+    {
+        "name": "Nero Air Conditioning & Heating Inc",
+        "phone": "(203) 248-8110",
+        "address": "North Haven, CT",
+        "website": "https://neroac.com"
+    },
+    {
+        "name": "M&R Mechanical Services",
+        "phone": "(203) 874-7914",
+        "address": "New Haven, CT",
+        "website": "https://mandrmechanical.com"
+    },
+    {
+        "name": "Modern Heating & AC LLC",
+        "phone": "(203) 295-7549",
+        "address": "New Haven, CT",
+        "website": "https://modernhvacct.com"
+    }
+]

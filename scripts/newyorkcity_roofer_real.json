@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Roofing Services NYC",
+        "phone": "(347) 566-8500",
+        "address": "New York City, NY",
+        "website": "https://roofingservicesnyc.com/"
+    },
+    {
+        "name": "NYC Roofs",
+        "phone": "(646) 653-3537",
+        "address": "New York City, NY",
+        "website": "https://newyorkcityroofs.com/"
+    },
+    {
+        "name": "Paragon Chimney and Roofing",
+        "phone": "(212) 123-4567",
+        "address": "New York City, NY",
+        "website": "https://paragonchimneyandroofing.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "New York City, NY",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "B&B Roofing",
+        "phone": "(718) 981-7663",
+        "address": "Staten Island, NY",
+        "website": "https://bbroofingpros.com/"
+    }
+]

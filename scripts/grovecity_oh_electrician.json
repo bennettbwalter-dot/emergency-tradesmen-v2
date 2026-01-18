@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Yoder Electric",
+        "phone": "(614) 206-5401",
+        "address": "Grove City, OH",
+        "website": "https://yoderelectric.com"
+    },
+    {
+        "name": "Grove City Electrician",
+        "phone": "(614) 808-8110",
+        "address": "Grove City, OH",
+        "website": "https://grovecityelectrician.com"
+    },
+    {
+        "name": "Survivor Electric",
+        "phone": "(740) 721-3298",
+        "address": "Grove City, OH",
+        "website": "https://survivorelectric.com"
+    },
+    {
+        "name": "All Day Electrician",
+        "phone": "(800) 860-1458",
+        "address": "Grove City, OH",
+        "website": "https://alldayelectrician.com"
+    }
+]

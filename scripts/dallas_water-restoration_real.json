@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Dry Force",
+        "phone": "(972) 399-0001",
+        "address": "Dallas, TX",
+        "website": "https://dryforcecorp.com/"
+    },
+    {
+        "name": "Share Restoration",
+        "phone": "(214) 306-0366",
+        "address": "2510 Southwell Rd, Suite 114, Dallas, TX 75229",
+        "website": "https://sharerestoration.com/"
+    },
+    {
+        "name": "SERVPRO of Dallas Central",
+        "phone": "(214) 664-9522",
+        "address": "Dallas, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "PuroClean of Park Cities",
+        "phone": "(214) 446-5458",
+        "address": "Dallas, TX",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "ServiceMaster CDR - Dallas",
+        "phone": "(972) 737-7693",
+        "address": "Dallas, TX",
+        "website": "https://servicemasterrestore.com/"
+    }
+]

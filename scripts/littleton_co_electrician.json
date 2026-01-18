@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electric Blue",
+        "phone": "(303) 790-8813",
+        "address": "Littleton, CO",
+        "website": "https://electricblueinc.com"
+    },
+    {
+        "name": "MZ Electric",
+        "phone": "(303) 933-9220",
+        "address": "Littleton, CO",
+        "website": "https://mzelectric.com"
+    },
+    {
+        "name": "Redman Electric",
+        "phone": "(866) 870-0478",
+        "address": "Littleton, CO",
+        "website": "https://littletonelectricalcontractor.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Littleton, CO",
+        "website": "https://kenbobkoelectric.com"
+    }
+]

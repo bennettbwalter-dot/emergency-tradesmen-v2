@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Stuck Solution",
+        "phone": "(855) 557-8825",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Neptune Towing",
+        "phone": "(539) 292-3074",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Allied Towing",
+        "phone": "(918) 438-0288",
+        "address": "Tulsa, OK",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Big Mike Towing",
+        "phone": "(918) 779-1373",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Tulsa Towing Service",
+        "phone": "(918) 500-0000",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

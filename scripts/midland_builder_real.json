@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster A-Town/Hi-Tech Cleaning & Restoration",
+        "phone": "(432) 289-6202",
+        "address": "Midland, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "The Bosworth Company",
+        "phone": "(432) 570-5233",
+        "address": "Midland, TX",
+        "website": "https://bosworthco.com/"
+    },
+    {
+        "name": "Red Deer Construction, LLC",
+        "phone": "(432) 695-4420",
+        "address": "Midland, TX",
+        "website": "https://reddeerconstructiontx.com/"
+    },
+    {
+        "name": "Pro Power Services",
+        "phone": "(432) 557-5509",
+        "address": "Midland, TX",
+        "website": "https://powerservices.llc/"
+    },
+    {
+        "name": "D&D Home Services",
+        "phone": "(432) 247-1111",
+        "address": "Midland, TX",
+        "website": "https://danddmidland.com/"
+    }
+]

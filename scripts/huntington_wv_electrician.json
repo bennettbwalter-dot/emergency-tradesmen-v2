@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Huntington Electrical Services",
+        "phone": "(304) 208-2835",
+        "address": "Huntington, WV",
+        "website": "https://huntingtonelectricalservices.com"
+    },
+    {
+        "name": "Aplus Electrical Service",
+        "phone": "(304) 972-1737",
+        "address": "Huntington, WV",
+        "website": null
+    },
+    {
+        "name": "Pritchard Electric Co",
+        "phone": "(304) 529-2566",
+        "address": "Huntington, WV",
+        "website": "https://pritchardelectric.com"
+    },
+    {
+        "name": "Prism Electric WV",
+        "phone": "(304) 544-4762",
+        "address": "Huntington, WV",
+        "website": "https://prismwv.com"
+    }
+]

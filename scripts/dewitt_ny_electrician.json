@@ -1,0 +1,26 @@
+[
+    {
+        "name": "JP's Best Electric",
+        "phone": "(315) 897-5910",
+        "address": "DeWitt, NY",
+        "website": "https://jps-best-electric.com"
+    },
+    {
+        "name": "Kelley Electric",
+        "phone": "(315) 476-3885",
+        "address": "DeWitt, NY",
+        "website": "https://kelleyelectricsyracuse.com"
+    },
+    {
+        "name": "Guardian Electric",
+        "phone": "(315) 560-7284",
+        "address": "DeWitt, NY",
+        "website": "https://guardianelectricny.com"
+    },
+    {
+        "name": "Jim Stagnitta Electric",
+        "phone": "(315) 471-6718",
+        "address": "DeWitt, NY",
+        "website": "https://jimstagnittaelectric.com"
+    }
+]

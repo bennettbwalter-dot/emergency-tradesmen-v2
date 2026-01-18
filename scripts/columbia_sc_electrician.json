@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Columbia Electric Service",
+        "phone": "(803) 750-7797",
+        "address": "Columbia, SC",
+        "website": "https://columbiaelectricservice.com"
+    },
+    {
+        "name": "Cassell Brothers Electric",
+        "phone": "(803) 868-6191",
+        "address": "Columbia, SC",
+        "website": "https://cassellbros.com"
+    },
+    {
+        "name": "Sunrise Electric Co",
+        "phone": "(803) 261-7434",
+        "address": "Columbia, SC",
+        "website": "https://onlysunrise.com"
+    },
+    {
+        "name": "Rytec Electric",
+        "phone": "(803) 721-3734",
+        "address": "Columbia, SC",
+        "website": "https://rytecelectric.com"
+    },
+    {
+        "name": "Means Electric",
+        "phone": "(803) 238-5576",
+        "address": "Columbia, SC",
+        "website": "https://meanselectricsc.com"
+    }
+]

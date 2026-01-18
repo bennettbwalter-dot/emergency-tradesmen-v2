@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Severna Park, MD",
+        "website": "https://needelectric.com"
+    },
+    {
+        "name": "Chesapeake Electric",
+        "phone": "(410) 280-3388",
+        "address": "Severna Park, MD",
+        "website": "https://cheselectric.com"
+    },
+    {
+        "name": "Skipjack Electrical Services",
+        "phone": "(443) 871-2346",
+        "address": "Severna Park, MD",
+        "website": "https://skipjackelectrical.com"
+    },
+    {
+        "name": "Magothy Electric Co.",
+        "phone": "(410) 969-0331",
+        "address": "Severna Park, MD",
+        "website": "https://magothyelectric.com"
+    }
+]

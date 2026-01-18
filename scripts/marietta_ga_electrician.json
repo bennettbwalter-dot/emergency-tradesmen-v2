@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Marietta",
+        "phone": "(770) 373-7501",
+        "address": "Marietta, GA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Lightning Bug Electric",
+        "phone": "(404) 471-3847",
+        "address": "Marietta, GA",
+        "website": "https://lightningbugelectric.com"
+    },
+    {
+        "name": "Shockley Electric",
+        "phone": "(770) 630-6858",
+        "address": "Marietta, GA",
+        "website": "https://shockleyelectric.com"
+    },
+    {
+        "name": "Perry Electrical",
+        "phone": "(678) 247-5488",
+        "address": "Marietta, GA",
+        "website": "https://perryelectrical.com"
+    }
+]

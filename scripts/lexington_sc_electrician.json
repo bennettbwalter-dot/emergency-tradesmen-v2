@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rytec Electric",
+        "phone": "803-721-3734",
+        "address": "Lexington, SC",
+        "website": "https://rytecelectric.com"
+    },
+    {
+        "name": "Carolina Conditions",
+        "phone": "803-233-7172",
+        "address": "Lexington, SC",
+        "website": "https://carolinaconditions.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "855-740-3232",
+        "address": "Lexington, SC",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Jeffcoat Electric",
+        "phone": "877-252-3888",
+        "address": "Lexington, SC",
+        "website": "https://emergencyelectriciansnationwide.com"
+    }
+]

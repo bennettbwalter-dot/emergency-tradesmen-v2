@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Minneapolis Towing & Recovery",
+        "phone": "(612) 662-0212",
+        "address": "Minneapolis, MN",
+        "rating": 5.0,
+        "review_count": 320
+    },
+    {
+        "name": "Bobby & Steve's Auto World",
+        "phone": "(612) 227-4357",
+        "address": "Minneapolis, MN",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Twin Cities Towing Services",
+        "phone": "(763) 278-8400",
+        "address": "Minneapolis, MN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Timber Towing And Recovery",
+        "phone": "(651) 318-0441",
+        "address": "Minneapolis, MN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Schmit Towing",
+        "phone": "(763) 253-1568",
+        "address": "Minneapolis, MN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

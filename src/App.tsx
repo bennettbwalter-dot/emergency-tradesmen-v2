@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { APIProvider } from "@vis.gl/react-google-maps";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
@@ -130,21 +129,21 @@ const App = () => {
     <HelmetProvider>
       <SimpleThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""} libraries={["places"]}>
-            <AuthProvider>
-              <ChatbotProvider>
-                <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
-                  <ThemeToggle />
-                  <BrowserRouter>
-                    <LocalizationProvider>
-                      <ScrollToTop />
-                      <HashCleaner />
-                      <Suspense fallback={<PageLoader />}>
-                        <AnalyticsTracker />
-                        <InstallPWA />
-                        <CookieConsent />
+          <AuthProvider>
+            <ChatbotProvider>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <ThemeToggle />
+                <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                  <LocalizationProvider>
+                    <ScrollToTop />
+                    <HashCleaner />
+                    <Suspense fallback={<PageLoader />}>
+                      <AnalyticsTracker />
+                      <InstallPWA />
+                      <CookieConsent />
+                      <ErrorBoundary>
                         <Routes>
                           <Route path="/login" element={<AuthPage defaultTab="login" />} />
                           <Route path="/register" element={<AuthPage defaultTab="register" />} />
@@ -170,6 +169,10 @@ const App = () => {
                           <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
                           <Route path="/emergency-builder" element={<TradeCityPage />} />
                           <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-water-restoration" element={<TradeCityPage />} />
+                          <Route path="/emergency-water-restoration/:city" element={<TradeCityPage />} />
+                          <Route path="/emergency-hvac" element={<TradeCityPage />} />
+                          <Route path="/emergency-hvac/:city" element={<TradeCityPage />} />
 
                           {/* Regional Support */}
                           <Route path="/:countryCode">
@@ -186,6 +189,21 @@ const App = () => {
                             {/* US Specific Routes (State Level) */}
                             <Route path=":state/:city" element={<TradeCityPage />} />
                             <Route path=":state/:city/:tradePath" element={<TradeCityPage />} />
+                            {/* Legacy US Suburb/Area Route */}
+                            <Route path=":state/:city/:area/:tradePath" element={<TradeCityPage />} />
+
+                            {/* NEW 4-Level Hierarchy Routes */}
+                            {/* /us/:state/:metro/:city/:tradePath (Standard City Page) */}
+                            <Route path=":state/:metro/:city/:tradePath" element={<TradeCityPage />} />
+
+                            {/* /us/:state/:metro/:city/:suburb/:tradePath */}
+                            <Route path=":state/:metro/:city/:suburb/:tradePath" element={<TradeCityPage />} />
+                            {/* /us/:state/:metro/:city/:suburb (Directory/Index for suburb) - reusing TradeCityPage with default trade handled internally */}
+                            <Route path=":state/:metro/:city/:suburb" element={<TradeCityPage />} />
+                            {/* /us/:state/:metro/:city (Directory for city) */}
+                            <Route path=":state/:metro/:city" element={<TradeCityPage />} />
+                            {/* /us/:state/:metro (Directory for Metro) */}
+                            <Route path=":state/:metro" element={<TradeCityPage />} />
                           </Route>
 
                           {/* Default (GB) Routes */}
@@ -227,20 +245,18 @@ const App = () => {
                           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                           <Route path="*" element={<NotFound />} />
                         </Routes>
-                        <BottomNav />
-                        <LiveChat />
-                        <ErrorBoundary>
-                          <VoiceTrigger />
-                        </ErrorBoundary>
-                        <FloatingBackButton />
-                        <CustomCursor />
-                      </Suspense>
-                    </LocalizationProvider>
-                  </BrowserRouter>
-                </TooltipProvider>
-              </ChatbotProvider>
-            </AuthProvider>
-          </APIProvider>
+                      </ErrorBoundary>
+                      <BottomNav />
+                      <LiveChat />
+                      <VoiceTrigger />
+                      <FloatingBackButton />
+                      <CustomCursor />
+                    </Suspense>
+                  </LocalizationProvider>
+                </BrowserRouter>
+              </TooltipProvider>
+            </ChatbotProvider>
+          </AuthProvider>
         </QueryClientProvider>
       </SimpleThemeProvider>
     </HelmetProvider>

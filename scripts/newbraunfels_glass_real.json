@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Auto Glass Stars New Braunfels",
+        "phone": "(830) 369-0369",
+        "address": "New Braunfels, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Area Wide Auto Glass New Braunfels",
+        "phone": "(830) 609-8555",
+        "address": "New Braunfels, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Legacy Glass & Calibrations",
+        "phone": "(737) 260-7061",
+        "address": "New Braunfels, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "24hr Sliding Door Repair New Braunfels",
+        "phone": "(877) 299-9179",
+        "address": "New Braunfels, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

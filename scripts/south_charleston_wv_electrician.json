@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Al Marino, Inc.",
+        "phone": "304-345-9000",
+        "address": "South Charleston, WV",
+        "website": "https://almarinoinc.com"
+    },
+    {
+        "name": "Progressive Electric",
+        "phone": "304-344-9343",
+        "address": "South Charleston, WV",
+        "website": "https://wewireu.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "South Charleston, WV",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Montani Mechanical Group",
+        "phone": "304-720-4100",
+        "address": "South Charleston, WV",
+        "website": "https://angi.com"
+    }
+]

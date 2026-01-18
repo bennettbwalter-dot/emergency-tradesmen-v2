@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Colder of Miami Inc",
+        "phone": "(786) 474-7519",
+        "address": "Miami, FL",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Direct Heating & Cooling, LLC",
+        "phone": "(786) 875-3034",
+        "address": "Miami, FL",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "American Thermal Services",
+        "phone": "(786) 357-4050",
+        "address": "Miami, FL",
+        "rating": 4.6,
+        "review_count": 180
+    },
+    {
+        "name": "One Hour Air Conditioning & Heating of Miami",
+        "phone": "(305) 488-1631",
+        "address": "Miami Beach, FL",
+        "rating": 4.5,
+        "review_count": 520
+    },
+    {
+        "name": "Emergency AC Corp",
+        "phone": "(855) 783-2080",
+        "address": "Miami, FL",
+        "rating": 4.4,
+        "review_count": 95
+    }
+]

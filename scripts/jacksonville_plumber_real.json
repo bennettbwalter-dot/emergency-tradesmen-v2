@@ -1,0 +1,37 @@
+[
+    {
+        "name": "David Gray Plumbing",
+        "phone": "(904) 605-8190",
+        "address": "Jacksonville, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Fenwick Home Services",
+        "phone": "(904) 217-5694",
+        "address": "Jacksonville, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Eagerton Plumbing",
+        "phone": "(904) 388-0761",
+        "address": "Jacksonville, FL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "E.R. Plumbing, Inc.",
+        "phone": "(904) 230-9976",
+        "address": "Jacksonville, FL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Turner Plumbing",
+        "phone": "(904) 241-1153",
+        "address": "Jacksonville, FL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

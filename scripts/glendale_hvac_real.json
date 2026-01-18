@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Glendale Cool Solutions",
+        "phone": "(888) 692-0652",
+        "address": "Glendale, CA",
+        "rating": 4.9,
+        "review_count": 156
+    },
+    {
+        "name": "Affordable Heating and Air",
+        "phone": "(818) 722-1332",
+        "address": "Glendale, CA",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Glendale Heating & Air Conditioning",
+        "phone": "(818) 244-6700",
+        "address": "Glendale, CA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Lions Heating & Air",
+        "phone": "(855) 546-6722",
+        "address": "Glendale, CA",
+        "rating": 4.8,
+        "review_count": 92
+    },
+    {
+        "name": "American Air Conditioning & Heating",
+        "phone": "(818) 248-1000",
+        "address": "Glendale, CA",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Strickly Heating and Cooling",
+        "phone": "(313) 952-2705",
+        "address": "Detroit, MI",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "FLAME Heating, Cooling, Plumbing & Electrical",
+        "phone": "(888) 234-2340",
+        "address": "Detroit, MI",
+        "rating": 4.7,
+        "review_count": 3500
+    },
+    {
+        "name": "Randazzo Heating, Cooling, and Electrical",
+        "phone": "(586) 336-1111",
+        "address": "Detroit, MI",
+        "rating": 4.8,
+        "review_count": 12000
+    },
+    {
+        "name": "Ignite Mechanical",
+        "phone": "(248) 751-1919",
+        "address": "Detroit, MI",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "C & C Heating & Air Conditioning",
+        "phone": "(586) 439-3319",
+        "address": "Detroit, MI",
+        "rating": 4.8,
+        "review_count": 5200
+    }
+]

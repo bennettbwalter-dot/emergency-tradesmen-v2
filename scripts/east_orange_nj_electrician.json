@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "East Orange, NJ",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "D & M Master Electric",
+        "phone": "(973) 604-5628",
+        "address": "East Orange, NJ",
+        "website": "https://dmmasterelectric.com"
+    },
+    {
+        "name": "Globus Electric",
+        "phone": "(973) 923-0400",
+        "address": "East Orange, NJ",
+        "website": "https://globuselectric.com"
+    },
+    {
+        "name": "O'Hara Electric",
+        "phone": "(973) 287-4827",
+        "address": "East Orange, NJ",
+        "website": "https://oharaelectric.com"
+    }
+]

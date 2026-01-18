@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Benjamin Franklin Plumbing of Baltimore",
+        "phone": "(301) 778-5323",
+        "address": "Baltimore, MD",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Warrior Plumbing & Heating",
+        "phone": "(443) 967-3736",
+        "address": "Baltimore, MD",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Baltimore",
+        "phone": "(410) 864-0435",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Len The Plumber Heating & Air",
+        "phone": "1-800-950-4619",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 1000
+    },
+    {
+        "name": "Michael & Son Services",
+        "phone": "1-800-948-6453",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Greer Plumbing Pros",
+        "phone": "864-413-1340",
+        "address": "Greer, SC",
+        "website": "https://greerplumbers.com"
+    },
+    {
+        "name": "Preferred Home Services",
+        "phone": "864-206-5620",
+        "address": "Greer, SC",
+        "website": "https://gopreferred.com"
+    },
+    {
+        "name": "Mastermind Plumbing",
+        "phone": "864-630-3554",
+        "address": "Greer, SC",
+        "website": "https://mastermindplumbingllc.com"
+    },
+    {
+        "name": "Ken's Plumbing",
+        "phone": "864-242-5511",
+        "address": "Greer, SC",
+        "website": "https://kensplumbing.net"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "SWFT Towing",
+        "phone": "(719) 301-0507",
+        "address": "Colorado Springs, CO",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Bugs Towing",
+        "phone": "(719) 640-2416",
+        "address": "Colorado Springs, CO",
+        "rating": 4.8,
+        "review_count": 1000
+    },
+    {
+        "name": "Walt's Towing",
+        "phone": "(719) 634-4366",
+        "address": "Colorado Springs, CO",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Colorado Springs Towing",
+        "phone": "(719) 211-1333",
+        "address": "Colorado Springs, CO",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Springs Recovery",
+        "phone": "(719) 372-2222",
+        "address": "Colorado Springs, CO",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

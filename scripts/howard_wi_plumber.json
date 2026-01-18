@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Howard Plumbing Services",
+        "phone": "(920) 510-5520",
+        "address": "Howard, WI",
+        "website": "https://plumbersgreenbay.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Restoration",
+        "phone": "(920) 497-1983",
+        "address": "Howard, WI",
+        "website": "https://www.rotorooter.com/howardwi/"
+    },
+    {
+        "name": "Hockers Home Services",
+        "phone": "(920) 557-0021",
+        "address": "Howard, WI",
+        "website": "https://hockersplumbing.com"
+    },
+    {
+        "name": "Start 2 Finish",
+        "phone": "(920) 476-1166",
+        "address": "Howard, WI",
+        "website": "https://greenbaywiplumbing.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Best Roofing Now",
+        "phone": "(704) 605-6047",
+        "address": "10130 Mallard Creek Rd Ste 300, Charlotte, NC 28262",
+        "website": "https://bestroofingnow.com/"
+    },
+    {
+        "name": "Storm Guard of Charlotte",
+        "phone": "(980) 372-6181",
+        "address": "Charlotte, NC",
+        "website": "https://stormguardrc.com/"
+    },
+    {
+        "name": "AAA Affordable Roofing",
+        "phone": "(704) 564-5597",
+        "address": "8508 Park Rd #147, Charlotte, NC 28210",
+        "website": "https://myaaaar.com/"
+    },
+    {
+        "name": "Evergreen Roofing Solutions",
+        "phone": "(704) 609-3561",
+        "address": "Charlotte, NC",
+        "website": "https://evergreenroofingcharlotte.com/"
+    },
+    {
+        "name": "DEPS Roofing",
+        "phone": "(704) 123-4567",
+        "address": "Charlotte, NC",
+        "website": "https://depsroofing.com/"
+    }
+]

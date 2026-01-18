@@ -1,0 +1,32 @@
+[
+    {
+        "name": "New Haus Roofing",
+        "phone": "(747) 335-5704",
+        "address": "Stockton, CA",
+        "website": "https://newhausroofing.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "Stockton, CA",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "Frakes Roofing",
+        "phone": "(877) 550-3398",
+        "address": "Stockton, CA",
+        "website": "https://frakesroofing.com/"
+    },
+    {
+        "name": "Emergency Roofing Stockton",
+        "phone": "(877) 412-0416",
+        "address": "Stockton, CA 95201",
+        "website": "https://roofzenpro.com/"
+    },
+    {
+        "name": "Kodiak Roofing",
+        "phone": "(916) 555-0100",
+        "address": "Stockton, CA",
+        "website": "https://kodiakroofing.com/"
+    }
+]

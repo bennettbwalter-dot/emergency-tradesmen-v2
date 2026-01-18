@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Spinner Electric",
+        "phone": "(401) 560-0320",
+        "address": "Pawtucket, RI",
+        "website": "https://spinnerelectric.com"
+    },
+    {
+        "name": "A And I Electric",
+        "phone": "(401) 741-7500",
+        "address": "Pawtucket, RI",
+        "website": "https://aandielectric.net"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Pawtucket, RI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Pawtucket, RI",
+        "website": "https://lewsaderelectric.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Eco Pro Restoration",
+        "phone": "(410) 645-0274",
+        "address": "Baltimore, MD",
+        "website": "https://ecoprorestoration.com/"
+    },
+    {
+        "name": "Rainbow Restoration of Baltimore",
+        "phone": "(443) 833-0333",
+        "address": "Baltimore, MD",
+        "website": "https://rainbowrestores.com/"
+    },
+    {
+        "name": "ServiceMaster by Singer",
+        "phone": "(410) 346-9336",
+        "address": "Baltimore, MD",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Baltimore's Inner Harbor",
+        "phone": "(410) 637-3433",
+        "address": "Baltimore, MD",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Paul Davis Restoration of Greater Baltimore",
+        "phone": "(410) 737-8505",
+        "address": "Baltimore, MD",
+        "website": "https://pauldavis.com/"
+    }
+]

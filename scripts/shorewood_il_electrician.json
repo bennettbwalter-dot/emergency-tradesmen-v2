@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Shorewood, IL",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "Bob's Electric",
+        "phone": "(630) 485-9663",
+        "address": "Shorewood, IL",
+        "website": "https://bobselectricofstcharles.com"
+    },
+    {
+        "name": "Trinity Electrical Services, Inc.",
+        "phone": "(630) 499-1492",
+        "address": "Shorewood, IL",
+        "website": "https://tesyes.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "(630) 340-5659",
+        "address": "Shorewood, IL",
+        "website": "https://todayshomeowner.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Air Extreme Supply, LLC",
+        "phone": "(956) 529-1766",
+        "address": "Pharr, TX",
+        "rating": 4.8,
+        "review_count": 93
+    },
+    {
+        "name": "Atlas Electrical, Air Conditioning & Plumbing",
+        "phone": "(956) 586-5491",
+        "address": "Pharr, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "American AC & Heating",
+        "phone": "(956) 300-4366",
+        "address": "Pharr, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Josh's Heating & Cooling",
+        "phone": "(877) 611-0277",
+        "address": "Pharr, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Cytech Heating & Cooling",
+        "phone": "(956) 553-3265",
+        "address": "Pharr, TX",
+        "rating": 4.9,
+        "review_count": 420
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Carrollton and Far North Dallas",
+        "phone": "(972) 446-0383",
+        "address": "Carrollton, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Clicks Emergency Services",
+        "phone": "(214) 766-6722",
+        "address": "1907 Hilltop Dr. Carrollton, TX 75006",
+        "website": "https://clickses.com/"
+    },
+    {
+        "name": "Reclaim Construction",
+        "phone": "(972) 357-1234",
+        "address": "1461 Lemay Dr. Carrollton, TX 75007",
+        "website": "http://reclaimconstruct.com/"
+    },
+    {
+        "name": "Korrect General Contracting",
+        "phone": "(817) 808-7253",
+        "address": "Carrollton, TX",
+        "website": "https://korrectgc.com/"
+    },
+    {
+        "name": "ServiceMaster of North Texas",
+        "phone": "(972) 284-0757",
+        "address": "Carrollton, TX",
+        "website": "https://servicemasterrestore.com/"
+    }
+]

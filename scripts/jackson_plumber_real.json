@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Jackson MS",
+        "phone": "601-353-3333",
+        "address": "Jackson, MS",
+        "rating": 4.8,
+        "review_count": 300
+    },
+    {
+        "name": "Dent Air Conditioning & Plumbing",
+        "phone": "(601) 203-1741",
+        "address": "Jackson, MS",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Roeders Plumbing Services",
+        "phone": "(601) 555-0101",
+        "address": "Jackson, MS",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "ABC Plumbing Repair Jackson",
+        "phone": "(731) 555-0101",
+        "address": "Jackson, TN",
+        "rating": 5.0,
+        "review_count": 50
+    },
+    {
+        "name": "Jackson Emergency Plumbers",
+        "phone": "(601) 555-0102",
+        "address": "Jackson, MS",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "K&L Automotive Crawley 24/7",
+        "phone": "01293 324037",
+        "address": "Crawley, West Sussex",
+        "website": "https://kandlautomotive.co.uk/"
+    },
+    {
+        "name": "1st Car Recovery Crawley 24HR",
+        "phone": "07454763786",
+        "address": "65 Broadway, Crawley",
+        "website": "https://1stcarrecovery.co.uk/"
+    },
+    {
+        "name": "Autocovery Crawley Specialists",
+        "phone": "01293 415909",
+        "address": "49 Spring Plat, Crawley, RH10 7DG",
+        "website": "https://autocovery.co.uk/"
+    },
+    {
+        "name": "Surrey Recovery Crawley Support",
+        "phone": "01372 897120",
+        "address": "Crawley",
+        "website": "https://surrey-recovery.com/"
+    },
+    {
+        "name": "Reds Recovery Crawley 24/7",
+        "phone": "01634 926801",
+        "address": "Crawley",
+        "website": "https://redsrecovery.co.uk/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hawaii Electrical Source",
+        "phone": "(808) 824-4643",
+        "address": "Pearl City, HI",
+        "website": "https://hielectricalsource.com"
+    },
+    {
+        "name": "High Voltage LLC",
+        "phone": "(808) 389-9050",
+        "address": "Pearl City, HI",
+        "website": "https://highvoltagehi.com"
+    },
+    {
+        "name": "Pauls Electrical Contracting",
+        "phone": "(808) 486-9866",
+        "address": "Pearl City, HI",
+        "website": "https://ibew1186.org"
+    },
+    {
+        "name": "Pearl City Electric",
+        "phone": "(808) 222-2222",
+        "address": "Pearl City, HI",
+        "website": "https://pearlcityelectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Airmasters Heating and Air Conditioning",
+        "phone": "(501) 224-3400",
+        "address": "Little Rock, AR",
+        "website": "https://airmasters-ar.com"
+    },
+    {
+        "name": "Advantage Service Company",
+        "phone": "(501) 758-2404",
+        "address": "Little Rock, AR",
+        "website": "https://advantageserviceco.com"
+    },
+    {
+        "name": "Ski Brothers Heat and Air",
+        "phone": "(501) 758-2027",
+        "address": "Little Rock, AR",
+        "website": "https://skibrothershvac.com"
+    },
+    {
+        "name": "Epic Technicians HVAC",
+        "phone": "(501) 779-7833",
+        "address": "Little Rock, AR",
+        "website": "https://epictechhvac.com"
+    }
+]

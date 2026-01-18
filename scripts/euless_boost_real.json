@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Roto-Rooter Euless",
+        "phone": "817-834-6412",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Mr. Rooter Plumbing Euless",
+        "phone": "817-769-6643",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Berkeys Plumbing Euless",
+        "phone": "972-464-2460",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Molberg Plumbing Euless",
+        "phone": "817-476-9963",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Speedy Local Plumbing LLC",
+        "phone": "817-383-8135",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Wahooo Plumbers",
+        "phone": "817-818-0693",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Mansfield Plumbing & Electric",
+        "phone": "817-823-7239",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Euless Plumbing",
+        "phone": "817-231-0092",
+        "address": "Euless, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Add-All Electric Euless",
+        "phone": "(817) 488-0126",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Edge 24 Hour Electrician",
+        "phone": "(817) 668-0056",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Petree Electrical Services",
+        "phone": "(817) 422-1134",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Cano Electric Euless",
+        "phone": "817-242-2826",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mr. Electric of Fort Worth",
+        "phone": "817-585-2993",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Eclipse Electrical",
+        "phone": "(682) 529-7029",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Mixtape Emergency Electrician",
+        "phone": "(817) 770-0621",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Daniel Electric Euless",
+        "phone": "817-481-8606",
+        "address": "Euless, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Euless Locksmith Store",
+        "phone": "972-810-6770",
+        "address": "Euless, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Bulldog Locksmith",
+        "phone": "682-300-2286",
+        "address": "Euless, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "KeyMe Locksmiths Euless",
+        "phone": "469-772-4693",
+        "address": "Euless, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Master Locksmith Store Euless",
+        "phone": "817-357-4963",
+        "address": "Euless, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Euless Locksmith",
+        "phone": "817-510-8499",
+        "address": "Euless, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    }
+]

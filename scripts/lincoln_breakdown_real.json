@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Affordable Towing Service",
+        "phone": "(402) 211-1333",
+        "address": "Lincoln, NE",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Big Red Towing",
+        "phone": "(402) 475-4869",
+        "address": "Lincoln, NE",
+        "rating": 4.9,
+        "review_count": 192
+    },
+    {
+        "name": "Wiestar Towing",
+        "phone": "(402) 476-9697",
+        "address": "Lincoln, NE",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Midwest Towing & Recovery",
+        "phone": "(402) 489-7979",
+        "address": "Lincoln, NE",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Lincoln Towing Service",
+        "phone": "(402) 500-0505",
+        "address": "Lincoln, NE",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

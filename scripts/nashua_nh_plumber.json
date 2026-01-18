@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Nashua",
+        "phone": "(603) 882-8245",
+        "address": "Nashua, NH",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "A. Fagundes Plumbing Heating Inc",
+        "phone": "(603) 605-1919",
+        "address": "Nashua, NH",
+        "website": "https://afphpro.com"
+    },
+    {
+        "name": "Matley Plumbing and Heating",
+        "phone": "(978) 433-5645",
+        "address": "Nashua, NH",
+        "website": "https://matleyplumbing.com"
+    },
+    {
+        "name": "Hollins Plumbing and Heating",
+        "phone": "(603) 555-0114",
+        "address": "Nashua, NH",
+        "website": "https://hollinsplumbingandheating.com"
+    }
+]

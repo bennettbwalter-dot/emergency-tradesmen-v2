@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Kolb Electric",
+        "phone": "877-287-1179",
+        "address": "Arlington, VA",
+        "website": "https://kolbelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Arlington, VA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "703-539-5044",
+        "address": "Arlington, VA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Hawkins Electric",
+        "phone": "877-927-0900",
+        "address": "Arlington, VA",
+        "website": "https://hawkinselectric.com"
+    }
+]

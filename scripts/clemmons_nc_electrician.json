@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ogburn Electric Company",
+        "phone": "336-924-5166",
+        "address": "Clemmons, NC",
+        "website": "https://ogburnelectric.com"
+    },
+    {
+        "name": "Kluch Electrical",
+        "phone": "336-814-6007",
+        "address": "Clemmons, NC",
+        "website": "https://kluch-electrical.com"
+    },
+    {
+        "name": "Mr. Electric of Clemmons",
+        "phone": "336-518-0882",
+        "address": "Clemmons, NC",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "North Carolina Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Clemmons, NC",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

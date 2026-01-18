@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mammoth Construction Solutions",
+        "phone": "(480) 569-9840",
+        "address": "451 East Juanita Ave, Mesa, Arizona 85204",
+        "website": "https://mammothconstructionsolutions.com/"
+    },
+    {
+        "name": "National First Response",
+        "phone": "(480) 380-2600",
+        "address": "739 W 2nd Ave, Mesa, AZ 85210",
+        "website": "https://nationalfirstresponse.com/"
+    },
+    {
+        "name": "Unified Restoration",
+        "phone": "(480) 485-9060",
+        "address": "9221 East Baseline Road Ste 109-441, Mesa, AZ 85209",
+        "website": "https://unifiedaz.com/"
+    },
+    {
+        "name": "Copper State Home Builders",
+        "phone": "(480) 744-1411",
+        "address": "2903 North Norfolk, Mesa, AZ 85215",
+        "website": "https://copperstatehomebuilders.com/"
+    },
+    {
+        "name": "Wesmor Inc.",
+        "phone": "(480) 644-9669",
+        "address": "145 W Broadway Rd Ste #5, Mesa, AZ 85210",
+        "website": "https://wesmorinc.com/"
+    }
+]

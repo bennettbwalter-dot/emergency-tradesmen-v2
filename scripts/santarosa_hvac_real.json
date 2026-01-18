@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Valley Comfort Heating and Air",
+        "phone": "(707) 539-4533",
+        "address": "Santa Rosa, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Northbay Comfort Inc.",
+        "phone": "(707) 800-2172",
+        "address": "Santa Rosa, CA",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Elevated Comfort",
+        "phone": "(707) 388-8077",
+        "address": "Santa Rosa, CA",
+        "rating": 4.9,
+        "review_count": 1000
+    },
+    {
+        "name": "KC Home Services",
+        "phone": "(707) 597-9545",
+        "address": "Santa Rosa, CA",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Hendel's Air Conditioning",
+        "phone": "(707) 578-8387",
+        "address": "Santa Rosa, CA",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

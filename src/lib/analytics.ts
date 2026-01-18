@@ -1,29 +1,24 @@
-import ReactGA from "react-ga4";
+// Google Analytics Removed
+// This file assumes a no-op implementation or internal logging only.
 
-const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const MEASUREMENT_ID = ""; // Removed
 
 export const initGA = () => {
-    if (MEASUREMENT_ID) {
-        ReactGA.initialize(MEASUREMENT_ID);
-        console.log("GA initialized with ID:", MEASUREMENT_ID);
-    } else {
-        console.warn("GA Measurement ID missing in .env");
-    }
+    // No-op
+    // console.log("Google Analytics is disabled (Privacy/API Removal).");
 };
 
 export const trackPageView = (path: string) => {
-    if (!MEASUREMENT_ID) return;
-    ReactGA.send({ hitType: "pageview", page: path });
+    // No-op or internal logging
+    if (import.meta.env.DEV) {
+        console.log(`[Analytics] Page View: ${path}`);
+    }
 };
 
 export const trackEvent = (category: string, action: string, label?: string) => {
-    if (!MEASUREMENT_ID) {
-        console.log(`[Dev Analytics] ${category} - ${action} ${label ? `(${label})` : ""}`);
-        return;
+    // No-op or internal logging
+    if (import.meta.env.DEV) {
+        console.log(`[Analytics] Event: ${category} - ${action} ${label ? `(${label})` : ""}`);
     }
-    ReactGA.event({
-        category,
-        action,
-        label,
-    });
 };
+

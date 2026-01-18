@@ -1,0 +1,37 @@
+[
+    {
+        "name": "One Hour Heating & Air Conditioning of Charlotte",
+        "phone": "(980) 394-8037",
+        "address": "Charlotte, NC",
+        "rating": 4.7,
+        "review_count": 1350
+    },
+    {
+        "name": "ER Services Heating and Cooling",
+        "phone": "(704) 765-6651",
+        "address": "Charlotte, NC",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "ALKO Heating & Cooling",
+        "phone": "(704) 497-7209",
+        "address": "Charlotte, NC",
+        "rating": 4.6,
+        "review_count": 290
+    },
+    {
+        "name": "AirTight FaciliTech",
+        "phone": "(704) 568-4121",
+        "address": "Charlotte, NC",
+        "rating": 4.5,
+        "review_count": 180
+    },
+    {
+        "name": "Southern Comfort of Charlotte",
+        "phone": "(704) 423-8870",
+        "address": "Charlotte, NC",
+        "rating": 4.9,
+        "review_count": 510
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Allbritten Sanger",
+        "phone": "(559) 601-0833",
+        "address": "Sanger, CA",
+        "website": "https://allbritten.com"
+    },
+    {
+        "name": "CMC Electric",
+        "phone": "(559) 217-8310",
+        "address": "Sanger, CA",
+        "website": "https://cmcelectric.com"
+    },
+    {
+        "name": "Haro Electric",
+        "phone": "(559) 901-6095",
+        "address": "Sanger, CA",
+        "website": "https://haroelectric.com"
+    },
+    {
+        "name": "Cole Electric Sanger",
+        "phone": "(469) 422-6019",
+        "address": "Sanger, CA",
+        "website": "https://coleelectricllc.com"
+    }
+]

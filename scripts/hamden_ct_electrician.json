@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "Hamden, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "Rapid Response Electric",
+        "phone": "(203) 673-9799",
+        "address": "Hamden, CT",
+        "website": "https://rapidresponseelectric-ct.com"
+    },
+    {
+        "name": "Viscuso Electric & Son",
+        "phone": "(203) 287-9877",
+        "address": "Hamden, CT",
+        "website": "https://viscusoelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Hamden, CT",
+        "website": "https://oconnorselectrical.com"
+    }
+]

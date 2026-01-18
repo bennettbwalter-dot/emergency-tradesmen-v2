@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABC Plumbing & Sewer",
+        "phone": "(888) 903-4070",
+        "address": "Chicago, IL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Four Seasons Plumbing",
+        "phone": "(866) 444-2404",
+        "address": "Chicago, IL",
+        "rating": 4.7,
+        "review_count": 46490
+    },
+    {
+        "name": "Apex Plumbing & Sewer Inc.",
+        "phone": "(773) 477-7714",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mike's Chicago Plumbing",
+        "phone": "(773) 875-8833",
+        "address": "Chicago, IL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "J. Blanton Plumbing",
+        "phone": "(773) 724-9272",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

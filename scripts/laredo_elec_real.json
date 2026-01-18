@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Mr. Electric of Laredo",
+        "address": "Laredo, TX",
+        "phone": "956-622-7489",
+        "trade": "electrician",
+        "city": "Laredo"
+    },
+    {
+        "name": "Donco Electric",
+        "address": "Laredo, TX",
+        "phone": "956-724-4050",
+        "trade": "electrician",
+        "city": "Laredo"
+    },
+    {
+        "name": "Alpha Omega Electrical Services LLC",
+        "address": "Laredo, TX",
+        "phone": "956-724-7060",
+        "trade": "electrician",
+        "city": "Laredo"
+    }
+]

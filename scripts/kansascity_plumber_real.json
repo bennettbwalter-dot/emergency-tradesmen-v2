@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A.B. May Heating, A/C, Plumbing",
+        "phone": "(816) 413-1782",
+        "address": "Kansas City, MO",
+        "rating": 4.8,
+        "review_count": 15000
+    },
+    {
+        "name": "Tried & True Plumbing KC",
+        "phone": "(913) 388-3697",
+        "address": "Kansas City, MO",
+        "rating": 4.9,
+        "review_count": 249
+    },
+    {
+        "name": "Inception Plumbing",
+        "phone": "(816) 551-3213",
+        "address": "Kansas City, MO",
+        "rating": 4.9,
+        "review_count": 979
+    },
+    {
+        "name": "Newcomer Plumbing of Kansas City",
+        "phone": "(816) 320-2780",
+        "address": "Kansas City, MO",
+        "rating": 5.0,
+        "review_count": 26
+    },
+    {
+        "name": "Full Nelson Plumbing Heating & Cooling",
+        "phone": "(816) 420-9697",
+        "address": "Kansas City, MO",
+        "rating": 4.7,
+        "review_count": 120
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "The Water And Fire Damage Repair Company",
+        "phone": "0131 677 8482",
+        "address": "Edinburgh",
+        "website": "https://thewaterandfiredamagerepaircompany.com/"
+    },
+    {
+        "name": "Nova Clean Edinburgh",
+        "phone": "0845 52 805 20",
+        "address": "Edinburgh",
+        "website": "https://cleaning-company-edinburgh.com/"
+    },
+    {
+        "name": "Robb Reinstatement Ltd",
+        "phone": "0131 561 4489",
+        "address": "18 North Leith Sands, Edinburgh, EH6 4ER",
+        "website": "https://robbreinstatement.co.uk/"
+    },
+    {
+        "name": "Edinburgh Preservation Limited",
+        "phone": "0131 235 2549",
+        "address": "21 Young Street, Edinburgh, EH2 4HU",
+        "website": "https://edinburghpreservation.co.uk/"
+    },
+    {
+        "name": "Joiners In Edinburgh 24/7",
+        "phone": "0131 476 2122",
+        "address": "Edinburgh",
+        "website": "https://joinersinedinburgh.co.uk/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Irondequoit, NY",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lon Lockwood Electric",
+        "phone": "(585) 766-4702",
+        "address": "Irondequoit, NY",
+        "website": "https://lonlockwoodelectric.com"
+    },
+    {
+        "name": "Douglas Electric",
+        "phone": "(585) 288-3250",
+        "address": "Irondequoit, NY",
+        "website": "https://douglaselectric.us"
+    },
+    {
+        "name": "Nichols Electric and Plumbing",
+        "phone": "(585) 449-9839",
+        "address": "Irondequoit, NY",
+        "website": "https://nicholselectric.com"
+    }
+]

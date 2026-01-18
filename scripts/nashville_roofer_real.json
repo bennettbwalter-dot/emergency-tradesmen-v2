@@ -1,0 +1,32 @@
+[
+    {
+        "name": "MidSouth Construction",
+        "phone": "(615) 712-8893",
+        "address": "652 Old Ezell Road, Nashville, TN 37217",
+        "website": "https://roofingbymidsouth.com/"
+    },
+    {
+        "name": "Nashville Roofers Pro",
+        "phone": "(629) 288-1010",
+        "address": "Nashville, TN",
+        "website": "https://nashvillerooferspro.com/"
+    },
+    {
+        "name": "PQ Roofing",
+        "phone": "(615) 410-9749",
+        "address": "Nashville, TN",
+        "website": "https://pqroofing.com/"
+    },
+    {
+        "name": "Aspen Contracting",
+        "phone": "(615) 549-6702",
+        "address": "Nashville, TN",
+        "website": "https://roofsbyaspen.com/"
+    },
+    {
+        "name": "Quality RRC",
+        "phone": "(615) 604-5165",
+        "address": "8702 Stewarts Ferry Pike #103, Mt Juliet, TN 37122",
+        "website": "https://qualityrrc.com/"
+    }
+]

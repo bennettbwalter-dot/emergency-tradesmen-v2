@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Molberg Plumbing Grapevine",
+        "phone": "(817) 476-9963",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 160
+    },
+    {
+        "name": "Berkeys Grapevine",
+        "phone": "(972) 464-2460",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Mr. Rooter Plumbing Grapevine",
+        "phone": "(817) 769-6643",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Baker Brothers Grapevine",
+        "phone": "(214) 296-2136",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 610
+    },
+    {
+        "name": "AAA AUGER Plumbing Grapevine",
+        "phone": "(877) 999-1979",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Plumbing Dynamics",
+        "phone": "(214) 929-3431",
+        "address": "Grapevine, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Thunderbolt 24 Hour Electrician",
+        "phone": "(817) 476-0273",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Grapevine 24 Hour Electrician",
+        "phone": "(817) 786-5086",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Entry Emergency Electrician",
+        "phone": "(817) 952-9891",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Add-All Electric Grapevine",
+        "phone": "(817) 488-0126",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Virtue Emergency Electrician",
+        "phone": "(817) 406-5335",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Grapevine Electrician",
+        "phone": "(817) 562-6157",
+        "address": "Grapevine, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Emergency Locksmith Grapevine",
+        "phone": "469-609-0215",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Grapevine",
+        "phone": "(817) 886-7931",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "SOS Locksmith Grapevine",
+        "phone": "(817) 886-7969",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hour Locksmith Grapevine",
+        "phone": "682-235-8735",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Grapevine Locksmith Service",
+        "phone": "682-233-6677",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Grapevine TX Locksmith Store",
+        "phone": "214-935-1577",
+        "address": "Grapevine, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 140
+    }
+]

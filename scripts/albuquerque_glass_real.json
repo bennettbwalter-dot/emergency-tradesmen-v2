@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mobile Screen and Glass",
+        "phone": "(505) 294-0542",
+        "address": "Albuquerque, NM",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Albuquerque Glass & Windows",
+        "phone": "(505) 392-5266",
+        "address": "Albuquerque, NM",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Glass Doctor of Northeast Albuquerque",
+        "phone": "(505) 206-5098",
+        "address": "Albuquerque, NM",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

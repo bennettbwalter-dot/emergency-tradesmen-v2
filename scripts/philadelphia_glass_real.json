@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Synergy Glass & Door",
+        "phone": "484-540-3117",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Cypress Door & Glass LLC",
+        "phone": "(800) 208-3681",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "JD Glass Company",
+        "phone": "215-332-3000",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "2HourGlass",
+        "phone": "267-521-1523",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Paul Rabinowitz Glass",
+        "phone": "215-423-7500",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 200
+    },
+    {
+        "name": "A & A Glass",
+        "phone": "856-962-7700",
+        "address": "Philadelphia, PA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

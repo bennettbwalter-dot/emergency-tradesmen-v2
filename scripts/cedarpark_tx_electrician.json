@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cox Electric",
+        "phone": "(512) 876-8766",
+        "address": "Cedar Park, TX",
+        "website": "https://coxelectricalservice.com"
+    },
+    {
+        "name": "Remedy Electrical Services",
+        "phone": "(512) 250-5414",
+        "address": "Cedar Park, TX",
+        "website": "https://remedyelectric.net"
+    },
+    {
+        "name": "SALT Light and Electric",
+        "phone": "(512) 956-7842",
+        "address": "Cedar Park, TX",
+        "website": "https://callsalt.com"
+    },
+    {
+        "name": "Jeff Davis Electric",
+        "phone": "(512) 433-0394",
+        "address": "Cedar Park, TX",
+        "website": "https://jeffdaviselectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "260-205-8253",
+        "address": "Huntertown, IN",
+        "website": "https://mrrooter.com"
+    },
+    {
+        "name": "Veterans Plumbing",
+        "phone": "844-708-3719",
+        "address": "Huntertown, IN",
+        "website": "https://veterans-plumbing.com"
+    },
+    {
+        "name": "Korte Does It All",
+        "phone": "260-493-2596",
+        "address": "Huntertown, IN",
+        "website": "https://kortedoesitall.com"
+    },
+    {
+        "name": "Galaxy Plumbing",
+        "phone": "260-739-0944",
+        "address": "Huntertown, IN",
+        "website": "https://galaxyplumber.com"
+    }
+]

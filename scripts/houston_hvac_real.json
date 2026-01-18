@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Total HVAC Houston",
+        "phone": "(281) 749-1195",
+        "address": "Houston, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "AKKO Air Conditioning & Heating Services",
+        "phone": "(713) 491-4250",
+        "address": "Houston, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Houston AC Repair Pros",
+        "phone": "(713) 538-2333",
+        "address": "Houston, TX",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Abacus Plumbing, Air Conditioning & Electrical",
+        "phone": "(713) 812-7070",
+        "address": "Houston, TX",
+        "rating": 4.7,
+        "review_count": 4500
+    },
+    {
+        "name": "Village Plumbing & Air",
+        "phone": "(713) 526-1491",
+        "address": "Houston, TX",
+        "rating": 4.8,
+        "review_count": 2100
+    }
+]

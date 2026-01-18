@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Reddick and Sons Inc",
+        "phone": "(703) 348-9881",
+        "address": "Alexandria, VA",
+        "website": "https://reddickandsons.com"
+    },
+    {
+        "name": "Beacon Home Services",
+        "phone": "(703) 634-3895",
+        "address": "Alexandria, VA",
+        "website": "https://beaconelectricalservices.com"
+    },
+    {
+        "name": "Walsh Electric",
+        "phone": "(703) 451-6622",
+        "address": "Alexandria, VA",
+        "website": "https://walshelectricalservice.com"
+    },
+    {
+        "name": "Alexandria Electric LLC",
+        "phone": "(703) 291-1440",
+        "address": "Alexandria, VA",
+        "website": "https://alexandriaelectricllc.com"
+    }
+]

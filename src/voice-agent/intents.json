@@ -1,4 +1,5 @@
 {
+    "fallback_message": "Do you need Water Restoration or Air Conditioning?",
     "intents": [
         {
             "id": "electrician",
@@ -239,6 +240,56 @@
                 "steps to join"
             ],
             "action": "signup_guide"
+        },
+        {
+            "id": "water_restoration",
+            "keywords": [
+                "water restoration",
+                "flood damage",
+                "water damage",
+                "flooded house",
+                "water cleanup",
+                "water extraction",
+                "burst pipe cleanup",
+                "burst pipe water cleanup",
+                "ceiling water damage",
+                "storm water damage",
+                "sewage cleanup",
+                "structural drying",
+                "dehumidification",
+                "emergency water cleanup",
+                "flood repair",
+                "water damage repair",
+                "24 hour water damage",
+                "emergency flood repair",
+                "house flooded",
+                "leak damage repair"
+            ],
+            "route_key": "water-restoration"
+        },
+        {
+            "id": "air_conditioning",
+            "keywords": [
+                "air conditioning",
+                "air con",
+                "aircon",
+                "ac repair",
+                "ac installation",
+                "air conditioner broken",
+                "air con not working",
+                "no cold air",
+                "air con leaking",
+                "ac not cooling",
+                "air conditioning service",
+                "air con servicing",
+                "air conditioning engineer",
+                "emergency ac repair",
+                "24 hour air con",
+                "same day ac repair",
+                "install air conditioning",
+                "aircon repair"
+            ],
+            "route_key": "hvac"
         }
     ]
 }

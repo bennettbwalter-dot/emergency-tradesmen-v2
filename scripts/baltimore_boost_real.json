@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Roto-Rooter Baltimore",
+        "phone": "410-864-0435",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Baltimore",
+        "phone": "301-778-5323",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "Len The Plumber Heating & Air",
+        "phone": "800-950-4619",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Supreme Service Today",
+        "phone": "410-781-1002",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Warrior Plumbing & Heating",
+        "phone": "443-967-3736",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mahon Plumbing",
+        "phone": "410-766-8566",
+        "address": "Baltimore, MD",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Stella Electric",
+        "phone": "410-429-0479",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Kolb Electric",
+        "phone": "877-287-1179",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Hawkins Electric",
+        "phone": "877-927-0900",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "United Air Temp Electric",
+        "phone": "410-413-3549",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "J Prime Electric",
+        "phone": "443-515-0559",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "THE ELECTRICIANS",
+        "phone": "410-929-5855",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Baltimore County Electricians Today",
+        "phone": "844-521-2392",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "410-457-3507",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Clinton Electric Company",
+        "phone": "410-449-7292",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 410
+    },
+    {
+        "name": "E-Z Electric",
+        "phone": "410-356-7220",
+        "address": "Baltimore, MD",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Baltimore Emergency Locksmith",
+        "phone": "410-246-6587",
+        "address": "Baltimore, MD",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Baltimore Lock And Key",
+        "phone": "410-454-0145",
+        "address": "Baltimore, MD",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Pop-A-Lock of Baltimore",
+        "phone": "410-838-6968",
+        "address": "Baltimore, MD",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Locksmith Max Baltimore",
+        "phone": "410-317-2288",
+        "address": "Baltimore, MD",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Baltimore Locksmith Service",
+        "phone": "410-454-0100",
+        "address": "Baltimore, MD",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

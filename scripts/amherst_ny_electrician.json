@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Zacher Electric",
+        "phone": "(716) 839-9000",
+        "address": "Amherst, NY",
+        "website": "https://zacherelectric.com"
+    },
+    {
+        "name": "Scherer Electric",
+        "phone": "(716) 646-4357",
+        "address": "Amherst, NY",
+        "website": "https://schererelectric.com"
+    },
+    {
+        "name": "Heim Electric Corp",
+        "phone": "(716) 689-2354",
+        "address": "Amherst, NY",
+        "website": "https://heimelectric.com"
+    },
+    {
+        "name": "Jameson Electric & Air",
+        "phone": "(716) 351-4600",
+        "address": "Amherst, NY",
+        "website": "https://jamesonelectricians.com"
+    }
+]

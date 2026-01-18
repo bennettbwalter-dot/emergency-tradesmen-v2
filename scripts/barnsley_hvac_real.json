@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Swift Heating Installations",
+        "phone": "07775 599339",
+        "address": "Barnsley Town Hall, Barnsley",
+        "website": "https://swiftheatinginstallations.co.uk/"
+    },
+    {
+        "name": "Plumbcare.com",
+        "phone": "0333 577 0151",
+        "address": "Barnsley",
+        "website": "https://plumbcare.com/"
+    },
+    {
+        "name": "Barnsley Plumbers",
+        "phone": "01226 664 456",
+        "address": "Barnsley",
+        "website": "https://barnsleyplumbing.co.uk/"
+    },
+    {
+        "name": "Gary Selwood Plumbing and Heating",
+        "phone": "01226 664 456",
+        "address": "43 Lund Ave, Barnsley S71 5NW",
+        "website": "https://abbeyplumbers.co.uk/"
+    },
+    {
+        "name": "No1 PHD",
+        "phone": "0800 690 6777",
+        "address": "Barnsley",
+        "website": "https://no1phd.co.uk/"
+    }
+]

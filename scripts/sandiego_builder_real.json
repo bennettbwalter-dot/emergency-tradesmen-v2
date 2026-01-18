@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Generation Contracting",
+        "phone": "(800) 377-9914",
+        "address": "13685 Stowe Drive, Suite B, Poway, CA 92064",
+        "website": "https://generationcontracting.com/"
+    },
+    {
+        "name": "Fante Construction",
+        "phone": "(619) 452-6399",
+        "address": "3555 Chamoune Ave, San Diego, CA 92105",
+        "website": "https://fanteconstruction.com/"
+    },
+    {
+        "name": "No Limit Remodeling",
+        "phone": "(619) 393-2722",
+        "address": "San Diego, CA",
+        "website": "https://nolimitremodelingincandrepairs.com/"
+    },
+    {
+        "name": "Proform Interiors",
+        "phone": "(800) 273-2684",
+        "address": "663 33rd Street, Suite C, San Diego, CA 92102",
+        "website": "https://proforminteriors.com/"
+    },
+    {
+        "name": "American Response Team",
+        "phone": "(858) 750-5923",
+        "address": "San Diego, CA",
+        "website": "https://amresponse.com/"
+    }
+]

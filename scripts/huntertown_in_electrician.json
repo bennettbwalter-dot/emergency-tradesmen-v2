@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Huntertown, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Korte Does It All",
+        "phone": "260-493-2596",
+        "address": "Huntertown, IN",
+        "website": "https://kortedoesitall.com"
+    },
+    {
+        "name": "Moore Power Electrical",
+        "phone": "877-847-6084",
+        "address": "Huntertown, IN",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "24 Hour Electrician",
+        "phone": "877-248-0484",
+        "address": "Huntertown, IN",
+        "website": "https://24hourelectrician.net"
+    }
+]

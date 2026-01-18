@@ -1,0 +1,37 @@
+[
+    {
+        "name": "J&J Plumbing Heating",
+        "phone": "(330) 688-1220",
+        "address": "Akron, OH",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Plumbing by Jeff",
+        "phone": "330-940-2600",
+        "address": "Akron, OH",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Akron",
+        "phone": "330-860-9883",
+        "address": "Akron, OH",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Plumbing 911 Akron",
+        "phone": "330-267-2644",
+        "address": "Akron, OH",
+        "rating": 4.9,
+        "review_count": 92
+    },
+    {
+        "name": "Akron Emergency Plumbers",
+        "phone": "(330) 555-0101",
+        "address": "Akron, OH",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

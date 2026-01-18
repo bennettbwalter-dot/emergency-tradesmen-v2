@@ -1,0 +1,138 @@
+[
+    {
+        "name": "Roto-Rooter Tyler",
+        "phone": "(903) 597-7755",
+        "address": "Tyler, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Tyler",
+        "phone": "(903) 730-6611",
+        "address": "Tyler, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Lex Air East Texas",
+        "phone": "(903) 833-9510",
+        "address": "Tyler, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "C. Woods Company",
+        "phone": "(903) 593-0246",
+        "address": "Tyler, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 280
+    },
+    {
+        "name": "American Plumbing",
+        "phone": "(903) 780-1512",
+        "address": "Tyler, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mister Sparky® of Tyler",
+        "phone": "(903) 996-2110",
+        "address": "Tyler, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Evans Air",
+        "phone": "(903) 993-4779",
+        "address": "Tyler, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Tyler Electrician",
+        "phone": "(903) 226-2404",
+        "address": "Tyler, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Waterman Electric",
+        "phone": "(903) 595-3246",
+        "address": "Tyler, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "D & S Electric Services",
+        "phone": "(903) 593-9477",
+        "address": "Tyler, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Pop-A-Lock of Tyler",
+        "phone": "903-581-2501",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 480
+    },
+    {
+        "name": "Tyler Locksmith Co",
+        "phone": "(903) 461-7284",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Texas Premier Locksmith Tyler",
+        "phone": "(903) 502-4696",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Tyler",
+        "phone": "(903) 298-0093",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Locksmith Services of Tyler",
+        "phone": "(903) 595-1109",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Express",
+        "phone": "(903) 312-0006",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Locksmith in Tyler",
+        "phone": "(903) 298-0097",
+        "address": "Tyler, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

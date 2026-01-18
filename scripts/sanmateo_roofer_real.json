@@ -1,0 +1,32 @@
+[
+    {
+        "name": "San Mateo Roofing Pros",
+        "phone": "(650) 220-1661",
+        "address": "San Mateo, CA",
+        "website": "https://sanmateoroofingpros.com/"
+    },
+    {
+        "name": "California Roof Runners",
+        "phone": "(408) 887-5253",
+        "address": "San Mateo, CA",
+        "website": "https://californiaroofrunners.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "San Mateo, CA",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "Bay View Roofing",
+        "phone": "(650) 123-4567",
+        "address": "San Mateo, CA",
+        "website": "https://bayviewroofinginc.com/"
+    },
+    {
+        "name": "Roof Express",
+        "phone": "(650) 222-3333",
+        "address": "San Mateo, CA",
+        "website": "https://roof-ex.com/"
+    }
+]

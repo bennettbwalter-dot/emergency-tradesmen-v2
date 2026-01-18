@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cox and Kanyuck Electric",
+        "phone": "(814) 807-0883",
+        "address": "Meadville, PA",
+        "website": "https://coxkanelectric.net"
+    },
+    {
+        "name": "Electrical and Mechanical Systems, Inc. (EMSI)",
+        "phone": "(814) 453-2518",
+        "address": "Meadville, PA",
+        "website": "http://eandmsi.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Meadville, PA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(1-800-380-6800)",
+        "address": "Meadville, PA",
+        "website": "https://thomasedisonelectric.com"
+    }
+]

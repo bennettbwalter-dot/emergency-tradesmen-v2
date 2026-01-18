@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Past & Present Towing",
+        "phone": "(301) 210-6222",
+        "address": "Baltimore, MD",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Towing & Recovery Baltimore",
+        "phone": "(443) 312-1826",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Baltimore Tow Truck",
+        "phone": "(410) 656-6280",
+        "address": "Baltimore, MD",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "BBT & Recovery Wrecker Service",
+        "phone": "(410) 789-9800",
+        "address": "Baltimore, MD",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Priority Towing & Recovery",
+        "phone": "(240) 780-8691",
+        "address": "Baltimore, MD",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

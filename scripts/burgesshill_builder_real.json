@@ -1,0 +1,32 @@
+[
+    {
+        "name": "GWR Building Burgess Hill 24/7",
+        "phone": "01444 236376",
+        "address": "Burgess Hill",
+        "website": "https://checkatrade.com/"
+    },
+    {
+        "name": "RBPM Direct Building Burgess Hill",
+        "phone": "01444 236376",
+        "address": "Burgess Hill",
+        "website": "https://checkatrade.com/"
+    },
+    {
+        "name": "Benjamin Leigh Construction Burgess Hill",
+        "phone": "07725 523 163",
+        "address": "1 Folders Lane, Burgess Hill, RH15 0DX",
+        "website": "https://benjaminleigh.co.uk/"
+    },
+    {
+        "name": "DLC Building Services Burgess Hill",
+        "phone": "01444 236376",
+        "address": "213 Junction Rd, Burgess Hill, RH15 0NX",
+        "website": "https://buildernet.com/"
+    },
+    {
+        "name": "Burgess Hill Property Emergency Service",
+        "phone": "0333 996 4444",
+        "address": "Burgess Hill",
+        "website": "https://ahr247.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Live Oak Electrical Services",
+        "phone": "912-441-0000",
+        "address": "Garden City, GA",
+        "website": "https://liveoakelectrical.com"
+    },
+    {
+        "name": "Granese Electrical",
+        "phone": "855-506-4858",
+        "address": "Garden City, GA",
+        "website": "https://graneseelectric.com"
+    },
+    {
+        "name": "Mr. Electric of The Coastal Empire",
+        "phone": "912-328-2000",
+        "address": "Garden City, GA",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Garden City, GA",
+        "website": "https://oconnorselectrical.com"
+    }
+]

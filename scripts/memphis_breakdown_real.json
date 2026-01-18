@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Trustworthy Towing Service",
+        "phone": "(901) 401-4025",
+        "address": "Memphis, TN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Memphis Towing",
+        "phone": "(901) 545-5191",
+        "address": "Memphis, TN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "V & B Affordable Towing",
+        "phone": "(901) 300-7316",
+        "address": "Memphis, TN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "STR Towing & Recovery",
+        "phone": "(615) 764-9327",
+        "address": "Memphis, TN",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "R1 Towing",
+        "phone": "(901) 401-4444",
+        "address": "Memphis, TN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

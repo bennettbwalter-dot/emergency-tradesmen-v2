@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Top Home Roofers",
+        "phone": "(408) 443-2520",
+        "address": "5450 Thornwood Dr, Suite E, San Jose, CA 95123",
+        "website": "https://tophomebuildersinc.com/"
+    },
+    {
+        "name": "Q7 Roofing & Waterproofing",
+        "phone": "(408) 123-4567",
+        "address": "San Jose, CA",
+        "website": "https://q7roofing.com/"
+    },
+    {
+        "name": "Silicon Valley Roof Pros",
+        "phone": "(408) 609-3745",
+        "address": "San Jose, CA",
+        "website": "https://sanjoseroofingcontractorservice.com/"
+    },
+    {
+        "name": "Roof Express",
+        "phone": "(650) 666-5554",
+        "address": "San Jose, CA",
+        "website": "https://roof-ex.com/"
+    },
+    {
+        "name": "Lifetime Roofing & Renovation",
+        "phone": "(408) 685-2177",
+        "address": "San Jose, CA",
+        "website": "https://lifetimeroofingrenovation.com/"
+    }
+]

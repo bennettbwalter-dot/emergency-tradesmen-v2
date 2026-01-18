@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Lawrence, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mission Mechanical",
+        "phone": "317-733-8686",
+        "address": "Lawrence, IN",
+        "website": "https://missionmechanical.com"
+    },
+    {
+        "name": "Williams Comfort Air",
+        "phone": "317-660-6992",
+        "address": "Lawrence, IN",
+        "website": "https://williamscomfortair.com"
+    },
+    {
+        "name": "Grounded Solutions",
+        "phone": "317-345-5678",
+        "address": "Lawrence, IN",
+        "website": "https://groundedin.com"
+    }
+]

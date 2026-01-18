@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rich the Electrician",
+        "phone": "(412) 605-2645",
+        "address": "Bethel Park, PA",
+        "website": "https://richtheelectrician.com"
+    },
+    {
+        "name": "Three Rivers Electric Services",
+        "phone": "(412) 650-7772",
+        "address": "Bethel Park, PA",
+        "website": "https://threeriverselectricservices.com"
+    },
+    {
+        "name": "Spec Electric Company LLC",
+        "phone": "(412) 337-5560",
+        "address": "Bethel Park, PA",
+        "website": "https://specelectriccompany.com"
+    },
+    {
+        "name": "Staley Electric Inc",
+        "phone": "(412) 851-0314",
+        "address": "Bethel Park, PA",
+        "website": "https://staleyelectricinc.com"
+    }
+]

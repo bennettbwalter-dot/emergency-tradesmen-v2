@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Reno Towing & Recovery",
+        "phone": "(775) 211-1333",
+        "address": "Reno, NV",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Always Ready Towing Reno",
+        "phone": "(775) 300-4444",
+        "address": "Reno, NV",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Reno Roadside",
+        "phone": "(775) 322-2222",
+        "address": "Reno, NV",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Sierra Towing",
+        "phone": "(775) 500-0505",
+        "address": "Reno, NV",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Silver State Towing",
+        "phone": "(775) 350-0000",
+        "address": "Reno, NV",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Heatwave Heating & Cooling",
+        "phone": "(716) 272-2226",
+        "address": "Buffalo, NY",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Belknap Heating & Cooling",
+        "phone": "(716) 688-1728",
+        "address": "Buffalo, NY",
+        "rating": 4.7,
+        "review_count": 44
+    },
+    {
+        "name": "RGM Comfort Systems",
+        "phone": "(716) 433-0520",
+        "address": "Buffalo, NY",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Reimer Home Services",
+        "phone": "(716) 272-2371",
+        "address": "Buffalo, NY",
+        "rating": 4.8,
+        "review_count": 12741
+    },
+    {
+        "name": "T-Mark Plumbing, Heating & Cooling",
+        "phone": "(716) 864-7277",
+        "address": "Buffalo, NY",
+        "rating": 4.7,
+        "review_count": 2100
+    }
+]

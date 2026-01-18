@@ -1,0 +1,26 @@
+[
+    {
+        "name": "4 Point Electric",
+        "phone": "(541) 632-6545",
+        "address": "Springfield, OR",
+        "website": "https://4pointelectric.com"
+    },
+    {
+        "name": "Knoll Electric",
+        "phone": "(541) 510-7712",
+        "address": "Springfield, OR",
+        "website": "https://knollelectric.com"
+    },
+    {
+        "name": "Lohner Electric Co",
+        "phone": "(541) 947-3000",
+        "address": "Springfield, OR",
+        "website": "https://lohnerelectric.com"
+    },
+    {
+        "name": "Contractors Electric LLC",
+        "phone": "(541) 343-2222",
+        "address": "Springfield, OR",
+        "website": "https://contractorselectric.com"
+    }
+]

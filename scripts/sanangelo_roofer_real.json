@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Chad Dodson Roofing Systems",
+        "phone": "(325) 513-7663",
+        "address": "San Angelo, TX",
+        "website": "https://chaddodsonroofing.com/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "San Angelo, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Sitton Roofing Co.",
+        "phone": "(325) 513-7663",
+        "address": "San Angelo, TX",
+        "website": "https://sittonroof.com/"
+    },
+    {
+        "name": "San Angelo Roofing Pros",
+        "phone": "(325) 335-2589",
+        "address": "San Angelo, TX",
+        "website": "https://sanangeloroofingpros.com/"
+    },
+    {
+        "name": "Founders Roofing & Construction",
+        "phone": "(325) 308-2685",
+        "address": "12 E Twohig Ave, San Angelo, TX 76903",
+        "website": "https://foundersroofing.com/"
+    }
+]

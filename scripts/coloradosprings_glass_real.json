@@ -1,0 +1,34 @@
+[
+    {
+        "name": "City Glass Company",
+        "phone": "719-634-2891",
+        "address": "Colorado Springs, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "All Season Door & Glass",
+        "phone": "719-687-3895",
+        "address": "Colorado Springs, CO",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Lightning Glassworks & Screens",
+        "phone": "719-649-4001",
+        "address": "Colorado Springs, CO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Binswanger Glass Colorado Springs",
+        "phone": "719-888-4745",
+        "address": "Colorado Springs, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

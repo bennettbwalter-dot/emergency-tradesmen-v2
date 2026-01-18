@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Emergency Clean UK Southend",
+        "phone": "0333 772 2130",
+        "address": "Southend-on-Sea",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "Ideal Response Southend",
+        "phone": "01622 926 505",
+        "address": "Southend-on-Sea",
+        "website": "https://idealresponse.co.uk/"
+    },
+    {
+        "name": "Flash Restorations Southend",
+        "phone": "0800 123 4567",
+        "address": "Southend-on-Sea",
+        "website": "https://flashrestorations.com/"
+    },
+    {
+        "name": "Essex Fire and Flood",
+        "phone": "01245 425 255",
+        "address": "Southend-on-Sea",
+        "website": "https://essexfireandflood.co.uk/"
+    },
+    {
+        "name": "Rainbow Restoration Southend",
+        "phone": "0800 021 3115",
+        "address": "Southend-on-Sea",
+        "website": "https://rainbowrestoration.co.uk/"
+    }
+]

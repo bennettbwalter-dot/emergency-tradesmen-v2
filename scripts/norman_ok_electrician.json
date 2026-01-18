@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Waters Electric Inc",
+        "phone": "(405) 321-8246",
+        "address": "Norman, OK",
+        "website": "https://waterselectricinc.com"
+    },
+    {
+        "name": "Wade Electric",
+        "phone": "(405) 329-1940",
+        "address": "Norman, OK",
+        "website": "https://wadelectric.com"
+    },
+    {
+        "name": "Accel Electric Lighting HVAC",
+        "phone": "(405) 230-0487",
+        "address": "Norman, OK",
+        "website": "https://accelelectricok.com"
+    },
+    {
+        "name": "Doyles Electric",
+        "phone": "(405) 321-8611",
+        "address": "Norman, OK",
+        "website": "https://doyleselectric.com"
+    }
+]

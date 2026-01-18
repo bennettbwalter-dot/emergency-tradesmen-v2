@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Clifton, NJ",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Clifton, NJ",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Luminous Electric",
+        "phone": "(973) 777-9202",
+        "address": "Clifton, NJ",
+        "website": "https://luminouselectricnj.com"
+    },
+    {
+        "name": "J S Electrical Services",
+        "phone": "(973) 595-5947",
+        "address": "Clifton, NJ",
+        "website": "https://jselectricalservicesnj.com"
+    }
+]

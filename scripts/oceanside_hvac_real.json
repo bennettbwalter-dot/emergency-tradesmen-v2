@@ -1,0 +1,37 @@
+[
+    {
+        "name": "One Hour Heating & Air Conditioning of Oceanside",
+        "phone": "(760) 724-1111",
+        "address": "Oceanside, CA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Rightemp Home Services Inc.",
+        "phone": "(760) 900-5000",
+        "address": "Oceanside, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Comfort Bros",
+        "phone": "(760) 231-1033",
+        "address": "Oceanside, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Action Air Conditioning, Heating & Solar",
+        "phone": "(760) 726-0611",
+        "address": "Oceanside, CA",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Carlson Air Conditioning & Heating",
+        "phone": "(760) 726-0611",
+        "address": "Oceanside, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

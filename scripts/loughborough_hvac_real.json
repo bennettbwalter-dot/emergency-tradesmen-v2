@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Loughborough Plumbing & Heating Ltd",
+        "phone": "01509 821597",
+        "address": "Canal House, Lisle St, Loughborough, LE11 1AW",
+        "website": "https://loughboroughplumbing.com/"
+    },
+    {
+        "name": "East Goscote Plumbers",
+        "phone": "0116 264 5115",
+        "address": "Loughborough",
+        "website": "https://egpplumbers.co.uk/"
+    },
+    {
+        "name": "Dyno-Rod Plumbing Loughborough",
+        "phone": "01509 352 376",
+        "address": "Loughborough",
+        "website": "https://dyno.com/"
+    },
+    {
+        "name": "Grip Fast Plumbing and Heating",
+        "phone": "01509 211648",
+        "address": "63 Albert Promenade, Loughborough, Leicestershire, LE11 1RB",
+        "website": "https://gassaferegister.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01509 352 376",
+        "address": "Loughborough",
+        "website": "https://able-group.co.uk/"
+    }
+]

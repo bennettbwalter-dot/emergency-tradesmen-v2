@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Advanced Roofing Solutions",
+        "phone": "(832) 952-0907",
+        "address": "Houston, TX",
+        "website": "https://advancedroofinghouston.com/"
+    },
+    {
+        "name": "Amstill Roofing",
+        "phone": "(281) 612-8747",
+        "address": "14125 Memorial Dr, Houston, TX 77079",
+        "website": "https://amstillroofing.com/"
+    },
+    {
+        "name": "Houston 24/7 Roofing",
+        "phone": "(832) 791-9060",
+        "address": "20527 Farm to Market 1093 Suite-206B, Richmond, TX 77407",
+        "website": "https://edrroofing.com/"
+    },
+    {
+        "name": "TruGuard Roofing",
+        "phone": "(281) 759-2070",
+        "address": "Houston, TX",
+        "website": "https://truguardroofing.com/"
+    },
+    {
+        "name": "JC&C Roofing Company",
+        "phone": "(713) 766-3464",
+        "address": "Houston, TX",
+        "website": "https://myroofimprovement.com/"
+    }
+]

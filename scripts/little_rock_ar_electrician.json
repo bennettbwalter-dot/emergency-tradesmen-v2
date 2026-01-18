@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Little Rock",
+        "phone": "(501) 238-6632",
+        "address": "Little Rock, AR",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Mr. Electric of Little Rock",
+        "phone": "(501) 232-1550",
+        "address": "Little Rock, AR",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Staley Electric",
+        "phone": "(501) 565-3006",
+        "address": "Little Rock, AR",
+        "website": "https://staleyelectric.com"
+    },
+    {
+        "name": "Bert Black Service Companies",
+        "phone": "(501) 228-9500",
+        "address": "Little Rock, AR",
+        "website": "https://bertblack.com"
+    }
+]

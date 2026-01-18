@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A#1 Air",
+        "phone": "(972) 242-4800",
+        "address": "Plano, TX",
+        "rating": 4.8,
+        "review_count": 5000
+    },
+    {
+        "name": "GO Heating, Air & Plumbing",
+        "phone": "(972) 842-1914",
+        "address": "Plano, TX",
+        "rating": 4.8,
+        "review_count": 332
+    },
+    {
+        "name": "Milestone Electric, Air Conditioning & Plumbing",
+        "phone": "(214) 267-2405",
+        "address": "Plano, TX",
+        "rating": 4.9,
+        "review_count": 25000
+    },
+    {
+        "name": "CW Service Pros",
+        "phone": "(972) 395-2597",
+        "address": "Plano, TX",
+        "rating": 4.7,
+        "review_count": 400
+    },
+    {
+        "name": "Air Comfort Solutions",
+        "phone": "(972) 424-2473",
+        "address": "Plano, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Area Wide Auto Glass",
+        "phone": "(214) 548-6817",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Frisco Auto Glass Pros",
+        "phone": "(972) 607-5809",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Urgent Glass DFW",
+        "phone": "(972) 799-4475",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Auto Glass of Frisco",
+        "phone": "(972) 232-2358",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "AK Calibration & Auto Glass",
+        "phone": "(972) 779-0011",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "ASAP Mobile Auto Glass",
+        "phone": "(469) 240-9110",
+        "address": "Frisco, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 110
+    }
+]

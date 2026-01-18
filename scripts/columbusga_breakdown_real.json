@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Advance Towing & Recovery",
+        "phone": "(706) 566-6571",
+        "address": "Columbus, GA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Tuffy's Towing",
+        "phone": "(706) 457-0985",
+        "address": "Columbus, GA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Griffin & Griffin Towing",
+        "phone": "(706) 341-3869",
+        "address": "Columbus, GA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Chuck's Roadside Recovery",
+        "phone": "(706) 211-1333",
+        "address": "Columbus, GA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Chattahoochee Recovery",
+        "phone": "(706) 300-4444",
+        "address": "Columbus, GA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

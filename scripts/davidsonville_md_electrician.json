@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Davidsonville, MD",
+        "website": "https://needelectric.com"
+    },
+    {
+        "name": "Kolb Electric",
+        "phone": "(877) 287-1179",
+        "address": "Davidsonville, MD",
+        "website": "https://kolbelectric.com"
+    },
+    {
+        "name": "Skipjack Electrical Services",
+        "phone": "(443) 871-2346",
+        "address": "Davidsonville, MD",
+        "website": "https://skipjackelectrical.com"
+    },
+    {
+        "name": "Deshaies Electrical Services",
+        "phone": "(443) 228-3569",
+        "address": "Davidsonville, MD",
+        "website": "https://deshaieselectricalservices.com"
+    }
+]

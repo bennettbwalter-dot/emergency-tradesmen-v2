@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Newmiller Heating & Air",
+        "phone": "(757) 468-3831",
+        "address": "Virginia Beach, VA",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Michael & Son",
+        "phone": "(757) 541-8100",
+        "address": "Virginia Beach, VA",
+        "rating": 4.7,
+        "review_count": 3000
+    },
+    {
+        "name": "A-1 American Services, Inc.",
+        "phone": "(757) 425-2400",
+        "address": "Virginia Beach, VA",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Weather Makers, Inc.",
+        "phone": "(757) 463-1243",
+        "address": "Virginia Beach, VA",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "On Time Heating & Air Conditioning",
+        "phone": "(757) 485-5052",
+        "address": "Virginia Beach, VA",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

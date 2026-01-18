@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Whirlwind Electric LLC",
+        "phone": "(769) 230-5900",
+        "address": "Brandon, MS",
+        "website": "https://whirlwindelectric.com"
+    },
+    {
+        "name": "Cowden Electrical Contractors",
+        "phone": "(601) 591-0339",
+        "address": "Brandon, MS",
+        "website": "https://cowdenelectric.com"
+    },
+    {
+        "name": "Rods Quality Electric LLC",
+        "phone": "(601) 842-7888",
+        "address": "Brandon, MS",
+        "website": "https://rodsqualityelectric.com"
+    },
+    {
+        "name": "Apex Electric LLC",
+        "phone": "(601) 813-8152",
+        "address": "Brandon, MS",
+        "website": "https://apexelectricms.com"
+    }
+]

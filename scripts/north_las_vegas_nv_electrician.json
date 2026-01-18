@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "North Las Vegas, NV",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "GNJ Electric LLC",
+        "phone": "(725) 246-1703",
+        "address": "North Las Vegas, NV",
+        "website": "https://gnjelectric.com"
+    },
+    {
+        "name": "Pacific Electric",
+        "phone": "(702) 355-6625",
+        "address": "North Las Vegas, NV",
+        "website": "https://pacificelectriclv.com"
+    },
+    {
+        "name": "Callidus Electric",
+        "phone": "(702) 403-4562",
+        "address": "North Las Vegas, NV",
+        "website": "https://calliduselectric.com"
+    }
+]

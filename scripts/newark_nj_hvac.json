@@ -1,0 +1,32 @@
+[
+    {
+        "name": "V.I.P. HVAC Service Corporation",
+        "phone": "(908) 200-8505",
+        "address": "Newark, NJ area",
+        "website": null
+    },
+    {
+        "name": "Lightning Mechanical Services",
+        "phone": "(973) 763-0300",
+        "address": "Newark, NJ",
+        "website": "https://lightningmechanicalservice.com"
+    },
+    {
+        "name": "Service HVAC Units LLC",
+        "phone": "(201) 951-9532",
+        "address": "Newark, NJ area",
+        "website": "https://servicehvacunits.com"
+    },
+    {
+        "name": "Tavares HVAC LLC",
+        "phone": "(732) 668-4100",
+        "address": "Newark, NJ area",
+        "website": "https://tavareshvac.com"
+    },
+    {
+        "name": "Heat & Cooling Factor LLC",
+        "phone": "(973) 558-0442",
+        "address": "Newark, NJ",
+        "website": "https://heatingandcoolingfactorllc.com"
+    }
+]

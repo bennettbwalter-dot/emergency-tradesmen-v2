@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Anaheim Roofing",
+        "phone": "(714) 805-7663",
+        "address": "22431 Antonio Pkwy Ste B160-129, Rancho Santa Margarita, CA 92688",
+        "website": "https://anaheimroofing.co"
+    },
+    {
+        "name": "RescueRoofer",
+        "phone": "(888) 346-7663",
+        "address": "Anaheim, CA",
+        "website": "https://rescueroofer.net/"
+    },
+    {
+        "name": "My Way Roofing",
+        "phone": "(866) 220-0314",
+        "address": "Anaheim, CA",
+        "website": "https://mywayroofing.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "Anaheim, CA",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "OC Stay Dry Roofing",
+        "phone": "(714) 869-7663",
+        "address": "Fullerton, CA",
+        "website": "https://24houremergencyroofingfullerton.com/"
+    }
+]

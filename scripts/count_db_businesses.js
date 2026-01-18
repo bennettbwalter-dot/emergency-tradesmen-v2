@@ -21,7 +21,8 @@ const supabase = createClient(url, key);
 async function countBusinesses() {
     const { count, error } = await supabase
         .from('businesses')
-        .select('*', { count: 'exact', head: true });
+        .select('*', { count: 'exact', head: true })
+        .eq('country_code', 'GB'); // Assuming 'GB' is the code for UK
 
     if (error) {
         console.error("Error:", error);

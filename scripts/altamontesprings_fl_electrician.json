@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Super Fast Electric",
+        "phone": "(321) 370-6898",
+        "address": "Altamonte Springs, FL",
+        "website": "https://superfastelectric.com"
+    },
+    {
+        "name": "Electric Service Group LLC",
+        "phone": "(407) 862-1901",
+        "address": "Altamonte Springs, FL",
+        "website": "https://esgflorida.com"
+    },
+    {
+        "name": "Power Electric and Solar",
+        "phone": "(352) 455-0022",
+        "address": "Altamonte Springs, FL",
+        "website": "https://powereusa.com"
+    },
+    {
+        "name": "UP and DOWN Electrical",
+        "phone": "(407) 900-5020",
+        "address": "Altamonte Springs, FL",
+        "website": "https://upanddownelectricalservicesllc.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Chodaba Electric LLC",
+        "phone": "(201) 344-2557",
+        "address": "Jersey City, NJ",
+        "website": "https://chodabaelectricllc.com"
+    },
+    {
+        "name": "Malfettone Electric",
+        "phone": "(201) 808-3003",
+        "address": "Jersey City, NJ",
+        "website": "https://malfettoneelectric.com"
+    },
+    {
+        "name": "Toth Electric LLC",
+        "phone": "(201) 555-0104",
+        "address": "Jersey City, NJ",
+        "website": "https://tothelectricllc.com"
+    },
+    {
+        "name": "Leemark Electric Inc",
+        "phone": "(201) 324-1300",
+        "address": "Jersey City, NJ",
+        "website": "https://leemarkelectric.net"
+    }
+]

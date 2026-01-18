@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Fix-A-Crack Edinburg",
+        "phone": "(956) 360-0178",
+        "address": "Edinburg, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Cornerstone Tire Complete Auto Care",
+        "phone": "(956) 686-8989",
+        "address": "Edinburg, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Pro Glass Service LLC",
+        "phone": "(956) 815-0800",
+        "address": "Edinburg, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AutoGlassOnly Edinburg",
+        "phone": "1-866-410-5628",
+        "address": "Edinburg, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

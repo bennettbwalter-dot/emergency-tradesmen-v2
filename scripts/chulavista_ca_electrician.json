@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ESD Electric Chula Vista",
+        "phone": "(619) 381-6677",
+        "address": "Chula Vista, CA",
+        "website": "https://esdelectrician.com"
+    },
+    {
+        "name": "KOL Electric",
+        "phone": "(831) 253-1691",
+        "address": "Chula Vista, CA",
+        "website": "https://kolelectricinc.com"
+    },
+    {
+        "name": "AER Electric",
+        "phone": "(858) 331-0129",
+        "address": "Chula Vista, CA",
+        "website": "https://aerelectricsd.com"
+    },
+    {
+        "name": "Premo Electric",
+        "phone": "(619) 908-1286",
+        "address": "Chula Vista, CA",
+        "website": "https://premoelectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "SDC Plumbing Garden City",
+        "phone": "(888) 218-8797",
+        "address": "Garden City, GA",
+        "website": "https://sdcplumbing.com"
+    },
+    {
+        "name": "Thompson and Thompson Plumbing Garden City",
+        "phone": "(912) 236-3333",
+        "address": "Garden City, GA",
+        "website": "https://thompsonandthompsondrains.com"
+    },
+    {
+        "name": "Roto-Rooter Garden City",
+        "phone": "(912) 303-8570",
+        "address": "Garden City, GA",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Sunrise Plumbing Garden City",
+        "phone": "(912) 572-9234",
+        "address": "Garden City, GA",
+        "website": "https://sunriseplumbingpros.com"
+    }
+]

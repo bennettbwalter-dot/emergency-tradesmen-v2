@@ -1,0 +1,154 @@
+[
+    {
+        "name": "John Henry's Plumbing, Heating, Air, and Electrical",
+        "phone": "(402) 809-1116",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Roto-Rooter Lincoln",
+        "phone": "(402) 489-4801",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "Action Plumbing, Heating, A/C, Electrical",
+        "phone": "(402) 423-6960",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Reddick Plumbing",
+        "phone": "(402) 304-0555",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "Dyno-Rod Plumbing Lincoln",
+        "phone": "(402) 489-4801",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 45
+    },
+    {
+        "name": "Team Emergency Plumber Lincoln",
+        "phone": "(833) 381-3130",
+        "address": "Lincoln, NE",
+        "trade": "plumber",
+        "rating": 4.4,
+        "review_count": 20
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "ABC Electric",
+        "phone": "(402) 435-3514",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 230
+    },
+    {
+        "name": "A & R Electric",
+        "phone": "(402) 314-1819",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 65
+    },
+    {
+        "name": "Kellogg Electric",
+        "phone": "(402) 466-2245",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 90
+    },
+    {
+        "name": "Oak Electric, Inc.",
+        "phone": "(402) 440-9772",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "JH Electrical Services",
+        "phone": "(402) 809-1116",
+        "address": "Lincoln, NE",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "24 Hour Locksmith Lincoln NE",
+        "phone": "(402) 858-9534",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 60
+    },
+    {
+        "name": "Lincoln Locksmith",
+        "phone": "(402) 382-7559",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 140
+    },
+    {
+        "name": "Jim's Lock & Key, Inc.",
+        "phone": "(402) 464-5445",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Locksmith Lincoln NE",
+        "phone": "(402) 281-9191",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 45
+    },
+    {
+        "name": "Lincoln NE Locksmith",
+        "phone": "(402) 518-4735",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 30
+    },
+    {
+        "name": "Lincoln Residential Locksmiths",
+        "phone": "(402) 608-2797",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 25
+    },
+    {
+        "name": "KeyMe Locksmiths",
+        "phone": "(402) 704-4561",
+        "address": "Lincoln, NE",
+        "trade": "locksmith",
+        "rating": 4.4,
+        "review_count": 55
+    }
+]

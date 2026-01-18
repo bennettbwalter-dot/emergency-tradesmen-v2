@@ -1,0 +1,26 @@
+[
+    {
+        "name": "The Cherokee Group",
+        "phone": "(865) 428-6919",
+        "address": "Sevierville, TN",
+        "website": "https://thecherokeegroup.net"
+    },
+    {
+        "name": "Funderburk Electrical Services",
+        "phone": "(865) 524-8615",
+        "address": "Sevierville, TN",
+        "website": "https://funderburkelec.com"
+    },
+    {
+        "name": "Bucy Electric LLC",
+        "phone": "(865) 712-8987",
+        "address": "Sevierville, TN",
+        "website": "https://bucyelectric.com"
+    },
+    {
+        "name": "Flynn Electric Company Sevierville",
+        "phone": "(865) 379-1500",
+        "address": "Sevierville, TN",
+        "website": "https://flynnelectriccompany.com"
+    }
+]

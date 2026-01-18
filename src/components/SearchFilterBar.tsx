@@ -2,6 +2,11 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
+import { useLocalization } from "@/contexts/LocalizationContext";
+import { cities } from "@/lib/trades";
+import { MapPin } from "lucide-react";
 import {
     Sheet,
     SheetContent,
@@ -18,7 +23,11 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
+    SelectGroup,
+    SelectLabel,
 } from "@/components/ui/select";
+import { UK_CITY_GROUPS } from "@/lib/uk-city-grouping";
+import { UKCityCombobox } from "@/components/UKCityCombobox";
 import { Badge } from "@/components/ui/badge";
 
 export interface FilterOptions {
@@ -44,6 +53,9 @@ export function SearchFilterBar({
     resultsCount,
     totalCount,
 }: SearchFilterBarProps) {
+    const navigate = useNavigate();
+    const { settings } = useLocalization();
+    console.log("SearchFilterBar MOUNTED");
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const updateFilter = (key: keyof FilterOptions, value: any) => {
@@ -75,22 +87,72 @@ export function SearchFilterBar({
             {/* Search Bar */}
             <div className="flex gap-3">
                 <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                        type="text"
-                        placeholder="Search by business name, area, or service..."
-                        value={filters.searchQuery}
-                        onChange={(e) => updateFilter("searchQuery", e.target.value)}
-                        className="pl-10 pr-10 h-12 bg-card border-border/50 focus:border-gold/50"
-                    />
-                    {filters.searchQuery && (
-                        <button
-                            onClick={() => updateFilter("searchQuery", "")}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                        >
-                            <X className="w-4 h-4" />
-                        </button>
-                    )}
+                    <div className="flex-1 min-w-[300px]">
+                        {settings.countryCode === 'US' ? (
+                            <HierarchicalLocationSelector
+                                placeholder="DEBUG: Enter city, suburb, or ZIP"
+                                className="bg-card border-border/50 focus:border-gold/50"
+                                onLocationSelect={(record) => {
+                                    if (!record) return;
+
+                                    // Determine trade slug from current context or default
+                                    const pathParts = window.location.pathname.split('/');
+                                    let tradeSlug = 'emergency-plumber';
+                                    const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'breakdown', 'emergency-plumber', 'emergency-electrician', '24-hour-locksmith'];
+
+                                    // Try to find trade in existing URL
+                                    for (const part of pathParts) {
+                                        if (knownTrades.includes(part)) {
+                                            tradeSlug = part;
+                                            break;
+                                        }
+                                    }
+
+                                    const tradeSlugLowerCase = tradeSlug.toLowerCase();
+
+                                    // New Hierarchy URL Construction
+                                    if (record.path_slugs) {
+                                        const { state, metro, city, suburb } = record.path_slugs;
+                                        // Handle city-level routing (empty suburb)
+                                        console.log("SearchFilterBar Debug:", { suburb, type: typeof suburb, length: suburb?.length });
+                                        const hasSuburb = typeof suburb === 'string' && suburb.trim().length > 0;
+                                        console.log("SearchFilterBar hasSuburb:", hasSuburb);
+                                        const newPath = hasSuburb
+                                            ? `/us/${state}/${metro}/${city}/${suburb}/${tradeSlugLowerCase}`
+                                            : `/us/${state}/${metro}/${city}/${tradeSlugLowerCase}`; // Direct to City
+                                        navigate(newPath);
+                                    } else {
+                                        // Fallback for legacy records/UK
+                                        navigate(`/us/${record.state.toLowerCase()}/${record.anchor_slug}/${tradeSlugLowerCase}`);
+                                    }
+                                }}
+                            />
+                        ) : (
+                            /* UK Legacy Selector - Upgraded to Combobox */
+                            <UKCityCombobox
+                                className="w-full md:w-[200px] h-10 bg-card border-border/50 text-sm"
+                                placeholder="Select City"
+                                // value={citySlug} // Using citySlug from URL params might need mapping back to Capitalized?
+                                // Actually SearchFilterBar uses useParams -> citySlug is lowercase/slugified usually?
+                                // Use pure navigation
+                                onValueChange={(val) => {
+                                    // Determine trade slug from current context or default
+                                    const pathParts = window.location.pathname.split('/');
+                                    let tradeSlug = 'emergency-plumber';
+                                    const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'breakdown', 'emergency-plumber', 'emergency-electrician', '24-hour-locksmith'];
+
+                                    // Try to find trade in existing URL
+                                    for (const part of pathParts) {
+                                        if (knownTrades.includes(part)) {
+                                            tradeSlug = part;
+                                            break;
+                                        }
+                                    }
+                                    navigate(`/emergency-${tradeSlug}/${val.toLowerCase()}`);
+                                }}
+                            />
+                        )}
+                    </div>
                 </div>
 
                 {/* Filter Button */}
@@ -347,4 +409,3 @@ export function SearchFilterBar({
         </div>
     );
 }
-

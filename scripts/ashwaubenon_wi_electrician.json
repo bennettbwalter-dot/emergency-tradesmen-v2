@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Edge Electric",
+        "phone": "(800) 364-3343",
+        "address": "Ashwaubenon, WI",
+        "website": "https://edgeelectricwi.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Ashwaubenon, WI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Patriot Electrical Solutions",
+        "phone": "(920) 228-0877",
+        "address": "Ashwaubenon, WI",
+        "website": "https://patriotelectricalsolutions.com"
+    },
+    {
+        "name": "IdealAir Heating & Cooling",
+        "phone": "(920) 335-8868",
+        "address": "Ashwaubenon, WI",
+        "website": "https://idealair.com"
+    }
+]

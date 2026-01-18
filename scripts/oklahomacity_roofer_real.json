@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Butler Roofing",
+        "phone": "(405) 878-7663",
+        "address": "Oklahoma City, OK",
+        "website": "https://butlerroof.com/"
+    },
+    {
+        "name": "Preferred Roofing",
+        "phone": "(405) 792-2222",
+        "address": "Oklahoma City, OK",
+        "website": "https://preferredroofing.net/"
+    },
+    {
+        "name": "Icon Roofing",
+        "phone": "(405) 583-3704",
+        "address": "Oklahoma City, OK",
+        "website": "https://iconroofingok.com/"
+    },
+    {
+        "name": "Super Roofs Inc",
+        "phone": "(405) 604-8040",
+        "address": "Oklahoma City, OK 73179",
+        "website": "https://superroofsinc.com/"
+    },
+    {
+        "name": "GoodRidge Roofing",
+        "phone": "(405) 831-8250",
+        "address": "Oklahoma City, OK",
+        "website": "https://goodridgeroofing.com/"
+    }
+]

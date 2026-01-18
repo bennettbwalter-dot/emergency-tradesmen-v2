@@ -1,0 +1,86 @@
+[
+    {
+        "name": "24 Hour Plumber NYC",
+        "address": "New York, NY",
+        "phone": "646-693-6598",
+        "trade": "plumber",
+        "city": "New York City"
+    },
+    {
+        "name": "Emergency Plumber NYC",
+        "address": "New York, NY",
+        "phone": "845-373-5080",
+        "trade": "plumber",
+        "city": "New York City"
+    },
+    {
+        "name": "Mr. Locks",
+        "address": "400 2nd Ave, New York, NY 10010",
+        "phone": "212-780-0144",
+        "trade": "locksmith",
+        "city": "New York City"
+    },
+    {
+        "name": "Locksmith For NYC",
+        "address": "New York, NY",
+        "phone": "917-696-8842",
+        "trade": "locksmith",
+        "city": "New York City"
+    },
+    {
+        "name": "ABC Plumbing & Sewer",
+        "address": "Chicago, IL",
+        "phone": "888-903-4070",
+        "trade": "plumber",
+        "city": "Chicago"
+    },
+    {
+        "name": "Mike's Chicago Plumbing",
+        "address": "Chicago, IL",
+        "phone": "773-875-8833",
+        "trade": "plumber",
+        "city": "Chicago"
+    },
+    {
+        "name": "Chicago Locksmiths",
+        "address": "2048 N Milwaukee Ave, Chicago, IL 60647",
+        "phone": "312-878-2715",
+        "trade": "locksmith",
+        "city": "Chicago"
+    },
+    {
+        "name": "Easy Locksmith Chicago",
+        "address": "Chicago, IL",
+        "phone": "224-536-1187",
+        "trade": "locksmith",
+        "city": "Chicago"
+    },
+    {
+        "name": "Goodman Plumbing",
+        "address": "Philadelphia, PA",
+        "phone": "215-364-7775",
+        "trade": "plumber",
+        "city": "Philadelphia"
+    },
+    {
+        "name": "Ben Locksmith Philadelphia",
+        "address": "443 W Girard Ave, Philadelphia, PA 19123",
+        "phone": "267-585-6033",
+        "trade": "locksmith",
+        "city": "Philadelphia"
+    },
+    {
+        "name": "McMahon Plumbing & Heating",
+        "address": "Boston, MA",
+        "phone": "617-364-2200",
+        "trade": "plumber",
+        "city": "Boston"
+    },
+    {
+        "name": "Platinum 24/7 Locksmith",
+        "address": "Boston, MA",
+        "phone": "617-268-6700",
+        "trade": "locksmith",
+        "city": "Boston"
+    }
+]

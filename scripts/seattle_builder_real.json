@@ -1,0 +1,32 @@
+[
+    {
+        "name": "McLeod Construction",
+        "phone": "(206) 545-7837",
+        "address": "Seattle, WA",
+        "website": "https://mcleodconstruction.com/"
+    },
+    {
+        "name": "NW Builder Group",
+        "phone": "(253) 370-9062",
+        "address": "Seattle, WA",
+        "website": "https://nwbuildergroup.com/"
+    },
+    {
+        "name": "Charter Construction",
+        "phone": "(206) 312-2347",
+        "address": "Seattle, WA",
+        "website": "https://chartercon.com/"
+    },
+    {
+        "name": "TOV Restoration",
+        "phone": "(253) 244-9040",
+        "address": "Seattle, WA",
+        "website": "https://tovrestoration.com/"
+    },
+    {
+        "name": "McBride Construction",
+        "phone": "(206) 283-7121",
+        "address": "15100 8th Ave SW, Burien, WA 98166",
+        "website": "https://mcbrideconstruction.com/"
+    }
+]

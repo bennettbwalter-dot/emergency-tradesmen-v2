@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Action Plumbing, Heating, A/C, Electrical",
+        "phone": "(402) 423-6960",
+        "address": "Lincoln, NE",
+        "rating": 4.8,
+        "review_count": 2000
+    },
+    {
+        "name": "Comfort Advisors Heating and Cooling",
+        "phone": "(402) 261-2679",
+        "address": "Lincoln, NE",
+        "rating": 4.7,
+        "review_count": 170
+    },
+    {
+        "name": "Star City Heating & Cooling",
+        "phone": "(402) 464-7827",
+        "address": "Lincoln, NE",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Bill's Heating & Air Conditioning",
+        "phone": "(402) 477-1371",
+        "address": "Lincoln, NE",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Wellmann Heating & Air Conditioning",
+        "phone": "(402) 420-2100",
+        "address": "Lincoln, NE",
+        "rating": 4.7,
+        "review_count": 500
+    }
+]

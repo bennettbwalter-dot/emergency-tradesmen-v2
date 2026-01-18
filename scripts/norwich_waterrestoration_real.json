@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Norfolk Fire and Flood Norwich",
+        "phone": "01603 866376",
+        "address": "38 Priorswood, Thorpe Marriott, Norwich, NR8 6FW",
+        "website": "https://norfolkfireandflood.uk/"
+    },
+    {
+        "name": "Emergency Clean UK Norwich",
+        "phone": "0333 772 2130",
+        "address": "Norwich",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "Flash Restorations Norwich",
+        "phone": "0800 123 4567",
+        "address": "Norwich",
+        "website": "https://flashrestorations.com/"
+    },
+    {
+        "name": "247 Emergency Plumber Norwich",
+        "phone": "07775 280211",
+        "address": "15 Lime Kiln Mews, Norwich, NR3 2ET",
+        "website": "https://emergencyplumbersnorwich.co.uk/"
+    },
+    {
+        "name": "Templeman Property Services",
+        "phone": "0333 772 2130",
+        "address": "Norwich",
+        "website": "https://templemanpropertyservices.co.uk/"
+    }
+]

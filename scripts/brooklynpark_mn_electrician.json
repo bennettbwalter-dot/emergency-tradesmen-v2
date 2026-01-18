@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Northland Electric",
+        "phone": "(612) 494-0234",
+        "address": "Brooklyn Park, MN",
+        "website": "https://northlandelectricmn.com"
+    },
+    {
+        "name": "Hannay Electric LLC",
+        "phone": "(612) 325-2455",
+        "address": "Brooklyn Park, MN",
+        "website": "https://hannayelectric.com"
+    },
+    {
+        "name": "Stafford Home Service",
+        "phone": "(952) 927-7194",
+        "address": "Brooklyn Park, MN",
+        "website": "https://staffordhomeservice.com"
+    },
+    {
+        "name": "Deans Home Services",
+        "phone": "(763) 515-7881",
+        "address": "Brooklyn Park, MN",
+        "website": "https://calldeans.com"
+    }
+]

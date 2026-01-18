@@ -1,0 +1,32 @@
+[
+    {
+        "name": "P McGuinness & Co Manchester",
+        "phone": "0161 273 5272",
+        "address": "Rondin House, Rondin Road, Ardwick, Manchester, M12 6BF",
+        "website": "https://pmcguinness.com/"
+    },
+    {
+        "name": "Reliable Builders Manchester",
+        "phone": "0161 506 8790",
+        "address": "M32 0EX, Manchester",
+        "website": "https://thereliablebuilders.co.uk/"
+    },
+    {
+        "name": "Alsham Building Manchester",
+        "phone": "07482 969 286",
+        "address": "Manchester",
+        "website": "https://alshambuilding.co.uk/"
+    },
+    {
+        "name": "ATI Maintenance Manchester",
+        "phone": "0808 304 0187",
+        "address": "Manchester",
+        "website": "https://ati-maintenance.co.uk/"
+    },
+    {
+        "name": "S4B Manchester Emergency Repairs",
+        "phone": "0300 555 0128",
+        "address": "15 Brunswick Street, Manchester, M13 9SU",
+        "website": "https://s4bmanchester.co.uk/"
+    }
+]

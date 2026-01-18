@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Laney's Inc Electric Moorhead",
+        "phone": "(701) 237-0543",
+        "address": "Moorhead, MN",
+        "website": "https://laneysinc.com"
+    },
+    {
+        "name": "Agassiz Electric LLC",
+        "phone": "(320) 491-1610",
+        "address": "Moorhead, MN",
+        "website": "https://agassiz-electric.com"
+    },
+    {
+        "name": "Grace Electric Moorhead",
+        "phone": "(701) 371-3931",
+        "address": "Moorhead, MN",
+        "website": "https://gracewires.com"
+    },
+    {
+        "name": "Red River Electric",
+        "phone": "(218) 236-0502",
+        "address": "Moorhead, MN",
+        "website": "https://redriverelectric.com"
+    }
+]

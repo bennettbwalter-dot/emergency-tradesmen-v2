@@ -1,0 +1,50 @@
+[
+    {
+        "name": "AK Calibration & Auto Glass",
+        "phone": "(972) 779-0011",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "ABC Auto Glass",
+        "phone": "(972) 665-7008",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Richardson Auto Glass Company",
+        "phone": "(972) 996-2915",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Budget Auto Glass",
+        "phone": "(972) 994-9657",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "My Safe Auto Glass",
+        "phone": "(469) 789-4106",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Mister Glass",
+        "phone": "(972) 669-0951",
+        "address": "Richardson, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

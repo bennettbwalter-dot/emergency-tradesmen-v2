@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Grasser Electric",
+        "phone": "(314) 863-1789",
+        "address": "St. Louis, MO",
+        "website": "https://grasserelectric.com"
+    },
+    {
+        "name": "KD Electric",
+        "phone": "(314) 939-5047",
+        "address": "St. Louis, MO",
+        "website": "https://kdestl.com"
+    },
+    {
+        "name": "Anytime Electric",
+        "phone": "(314) 280-5712",
+        "address": "St. Louis, MO",
+        "website": "https://anytimeelectricstl.com"
+    },
+    {
+        "name": "Kay-Bee Electric",
+        "phone": "(314) 895-1700",
+        "address": "St. Louis, MO",
+        "website": "https://kaybeeelectric.com"
+    }
+]

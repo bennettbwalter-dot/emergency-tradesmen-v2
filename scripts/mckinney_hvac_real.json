@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Premier Air Service",
+        "phone": "(214) 544-7750",
+        "address": "McKinney, TX",
+        "rating": 4.9,
+        "review_count": 160
+    },
+    {
+        "name": "Airview AC & Heating Repair",
+        "phone": "(972) 658-1784",
+        "address": "McKinney, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Ideal Air of North Texas",
+        "phone": "(469) 301-4608",
+        "address": "McKinney, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Burnside Air Conditioning & Heating",
+        "phone": "(972) 562-7789",
+        "address": "McKinney, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Bill Joplin's Air Conditioning & Heating",
+        "phone": "(888) 414-4655",
+        "address": "McKinney, TX",
+        "rating": 4.8,
+        "review_count": 3500
+    }
+]

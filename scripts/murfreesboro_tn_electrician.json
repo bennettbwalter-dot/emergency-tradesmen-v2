@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr Electric of Murfreesboro",
+        "phone": "(615) 809-1894",
+        "address": "Murfreesboro, TN",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Pro Electric TN",
+        "phone": "(615) 906-2951",
+        "address": "Murfreesboro, TN",
+        "website": "https://proelectrictn.com"
+    },
+    {
+        "name": "P2 Electrical Contracting",
+        "phone": "(615) 796-4846",
+        "address": "Murfreesboro, TN",
+        "website": "https://p2electricalcontracting.com"
+    },
+    {
+        "name": "Ogles Electrical Service",
+        "phone": "(615) 893-0326",
+        "address": "Murfreesboro, TN",
+        "website": "https://ogleselectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Boyes Electric",
+        "phone": "(925) 364-5757",
+        "address": "Oakland, CA",
+        "website": "https://boyeselectricservices.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Oakland, CA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Alameda Oakland Electrical Services",
+        "phone": "(510) 282-9734",
+        "address": "Oakland, CA",
+        "website": "https://aoeservice.com"
+    },
+    {
+        "name": "Alley Electric",
+        "phone": "(510) 573-0427",
+        "address": "Oakland, CA",
+        "website": "https://alleyelectric.com"
+    }
+]

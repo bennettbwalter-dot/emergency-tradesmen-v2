@@ -1,0 +1,26 @@
+[
+    {
+        "name": "McCarthy's One Hour Heating & Air Conditioning",
+        "phone": "(402) 509-3230",
+        "address": "Omaha, NE",
+        "website": "https://onehourheatandair.com"
+    },
+    {
+        "name": "Fred's Heating and Air",
+        "phone": "(402) 779-7065",
+        "address": "Omaha, NE",
+        "website": "https://fredsheatingandair.com"
+    },
+    {
+        "name": "River City Heating & Cooling",
+        "phone": "(402) 331-3500",
+        "address": "Omaha, NE",
+        "website": "https://rivercityac.com"
+    },
+    {
+        "name": "Thermal Services",
+        "phone": "(402) 397-8100",
+        "address": "Omaha, NE",
+        "website": "https://thermalservices.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Bluegrass Rooter Plumbing",
+        "phone": "(859) 509-9279",
+        "address": "Lexington, KY",
+        "rating": 4.1,
+        "review_count": 29
+    },
+    {
+        "name": "GreenBox Home Services",
+        "phone": "(859) 278-0281",
+        "address": "Lexington, KY",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Plumber Lexington",
+        "phone": "(833) 381-3130",
+        "address": "Lexington, KY",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Turbo Plumbing Pros",
+        "phone": "(859) 555-0122",
+        "address": "Lexington, KY",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "H2O Maestro Plumbing",
+        "phone": "(859) 555-0123",
+        "address": "Lexington, KY",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

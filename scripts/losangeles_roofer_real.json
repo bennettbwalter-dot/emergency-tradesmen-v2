@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bumble Roofing of Los Angeles",
+        "phone": "(844) 728-6253",
+        "address": "Los Angeles, CA",
+        "website": "https://bumbleroofing.com/"
+    },
+    {
+        "name": "Royal Roofing Los Angeles",
+        "phone": "(562) 928-1200",
+        "address": "6831 Suva St, Bell Gardens, CA 90201",
+        "website": "https://royalroofing.com/"
+    },
+    {
+        "name": "A Cut Above Roofing",
+        "phone": "(323) 678-5855",
+        "address": "Los Angeles, CA",
+        "website": "https://acutabove-roofing.com/"
+    },
+    {
+        "name": "NewHaus Roofing & Construction",
+        "phone": "(747) 447-7023",
+        "address": "Los Angeles, CA",
+        "website": "https://newhausroofing.com/"
+    },
+    {
+        "name": "NEMA Roofing",
+        "phone": "(213) 539-4619",
+        "address": "Los Angeles, CA",
+        "website": "https://nemaroofing.com/"
+    }
+]

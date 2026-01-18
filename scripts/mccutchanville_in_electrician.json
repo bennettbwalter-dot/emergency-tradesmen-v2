@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky",
+        "phone": "812-524-8777",
+        "address": "McCutchanville, IN",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "J.E. Shekell, Inc.",
+        "phone": "812-425-9131",
+        "address": "McCutchanville, IN",
+        "website": "https://shekell.com"
+    },
+    {
+        "name": "Premier Electric Inc.",
+        "phone": "812-429-1122",
+        "address": "McCutchanville, IN",
+        "website": "https://premierelectricinc.net"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "McCutchanville, IN",
+        "website": "https://oconnorselectrical.com"
+    }
+]

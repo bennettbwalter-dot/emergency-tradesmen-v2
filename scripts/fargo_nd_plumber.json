@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Laney's Inc Plumbing",
+        "phone": "(701) 237-0543",
+        "address": "Fargo, ND",
+        "website": "https://laneysinc.com"
+    },
+    {
+        "name": "Roto-Rooter Fargo",
+        "phone": "(701) 232-3366",
+        "address": "Fargo, ND",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Legacy Plumbing Fargo",
+        "phone": "(701) 306-3375",
+        "address": "Fargo, ND",
+        "website": "https://legacyplumbingfm.com"
+    },
+    {
+        "name": "Skooters Plumbing Drain Cleaning",
+        "phone": "(701) 799-4357",
+        "address": "Fargo, ND",
+        "website": "https://skootersplumbing.com"
+    }
+]

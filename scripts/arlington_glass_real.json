@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Doctor of Arlington, TX",
+        "phone": "(972) 685-6824",
+        "address": "Arlington, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Ronnie's 24 Hour Glass & Door",
+        "phone": "(682) 516-3175",
+        "address": "Arlington, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "A's Auto Glass Repair",
+        "phone": "(817) 345-6046",
+        "address": "Arlington, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "USA Auto Glass Arlington TX",
+        "phone": "(817) 803-6108",
+        "address": "Arlington, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "My Pro Auto Glass Arlington TX",
+        "phone": "(682) 730-5545",
+        "address": "Arlington, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

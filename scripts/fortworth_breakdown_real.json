@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Towing Fort Worth",
+        "phone": "(817) 886-8332",
+        "address": "Fort Worth, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "B&O Towing",
+        "phone": "(940) 315-0585",
+        "address": "Fort Worth, TX",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "360 Towing Solutions Fort Worth",
+        "phone": "(817) 378-0338",
+        "address": "Fort Worth, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Panther City Towing",
+        "phone": "(817) 422-0222",
+        "address": "Fort Worth, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Fort Worth Roadside",
+        "phone": "(817) 900-5454",
+        "address": "Fort Worth, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

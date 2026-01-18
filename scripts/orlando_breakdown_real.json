@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABC Towing Orlando",
+        "phone": "(407) 668-7675",
+        "address": "Orlando, FL",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Stellar Towing & Recovery",
+        "phone": "(407) 801-8685",
+        "address": "Orlando, FL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Johnson's Wrecker Service",
+        "phone": "(407) 293-2540",
+        "address": "Orlando, FL",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Unity Towing",
+        "phone": "(407) 914-4457",
+        "address": "Orlando, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Orlando Towlando",
+        "phone": "(407) 300-4444",
+        "address": "Orlando, FL",
+        "rating": 3.4,
+        "review_count": 55
+    }
+]

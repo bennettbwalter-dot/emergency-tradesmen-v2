@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bryan Electrical Co Inc",
+        "phone": "(609) 393-8325",
+        "address": "1800 E. State Street, Suite 150C, Hamilton, NJ 08609",
+        "website": "https://bryanelectricco.com"
+    },
+    {
+        "name": "Carlin Electric Co Inc",
+        "phone": "(609) 695-0018",
+        "address": "963 Lalor Street, Trenton, NJ 08610",
+        "website": null
+    },
+    {
+        "name": "Brighton Electric",
+        "phone": "(609) 385-0569",
+        "address": "Trenton, NJ",
+        "website": "https://brighton-electric.com"
+    },
+    {
+        "name": "Glenn Dobron Electric",
+        "phone": "(609) 586-3400",
+        "address": "25 Stevenson Ave, Hamilton, NJ 08619",
+        "website": null
+    }
+]

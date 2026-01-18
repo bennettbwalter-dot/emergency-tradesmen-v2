@@ -1,0 +1,32 @@
+[
+    {
+        "name": "McCanan Construction",
+        "phone": "(720) 710-8792",
+        "address": "2851 S Parker Rd Suite #426, Aurora, CO 80014",
+        "website": "https://mccananconstruction.com/"
+    },
+    {
+        "name": "Colorado Rapid Roof Repair",
+        "phone": "(970) 292-6940",
+        "address": "3190 S Vaughn Way STE 9900, Aurora, CO 80014",
+        "website": "http://www.coloradorapidroofrepair.site"
+    },
+    {
+        "name": "ARCM Roofing",
+        "phone": "(303) 306-8334",
+        "address": "Aurora, CO",
+        "website": "https://arcmroofing.com/"
+    },
+    {
+        "name": "TreeLine Roofing",
+        "phone": "(303) 437-3648",
+        "address": "Aurora, CO",
+        "website": "https://treelinerc.com/"
+    },
+    {
+        "name": "Alpaca Roofing",
+        "phone": "(720) 465-7509",
+        "address": "Aurora, CO",
+        "website": "https://alpacaroofing.com/"
+    }
+]

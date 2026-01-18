@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Kore Roofing",
+        "phone": "(480) 690-9949",
+        "address": "Scottsdale, AZ",
+        "website": "https://koreroofing.com/"
+    },
+    {
+        "name": "Metals Roofing Pros",
+        "phone": "(844) 551-3620",
+        "address": "Scottsdale, AZ",
+        "website": "https://metalsroofing.com/"
+    },
+    {
+        "name": "ServiceMaster by ASG",
+        "phone": "(480) 245-5630",
+        "address": "Scottsdale, AZ",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "HailCo Roofing",
+        "phone": "(480) 555-0199",
+        "address": "Scottsdale, AZ",
+        "website": "https://hailcoroofing.com/"
+    },
+    {
+        "name": "Triumph Roofing",
+        "phone": "(480) 444-5555",
+        "address": "Scottsdale, AZ",
+        "website": "https://triumphaz.com/"
+    }
+]

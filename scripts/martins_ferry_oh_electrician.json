@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Martins Ferry, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mr. Electric",
+        "phone": "800-570-8191",
+        "address": "Martins Ferry, OH",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "TS Electric",
+        "phone": "800-570-8191",
+        "address": "Martins Ferry, OH",
+        "website": "https://tselectricohio.com"
+    },
+    {
+        "name": "Speelman Electric",
+        "phone": "330-633-1410",
+        "address": "Martins Ferry, OH",
+        "website": "https://speelmanelectric.com"
+    }
+]

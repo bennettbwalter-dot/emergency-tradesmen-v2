@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Seattle",
+        "phone": "(206) 935-6600",
+        "address": "Seattle, WA",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "2 Sons Plumbing",
+        "phone": "(206) 487-1757",
+        "address": "Seattle, WA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Best Plumbing",
+        "phone": "(206) 633-1700",
+        "address": "Seattle, WA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "1-Tom-Plumber Seattle",
+        "phone": "1-425-291-8660",
+        "address": "Seattle, WA",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Bob Oates Sewer & Rooter",
+        "phone": "(206) 789-4944",
+        "address": "Seattle, WA",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

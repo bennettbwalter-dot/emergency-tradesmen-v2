@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Southside Towing of Winston-Salem",
+        "phone": "(336) 788-7871",
+        "address": "Winston-Salem, NC",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Whiteheart & Sons Towing",
+        "phone": "(336) 744-5162",
+        "address": "Winston-Salem, NC",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "All-Over Towing & Repair",
+        "phone": "(336) 993-3011",
+        "address": "Winston-Salem, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Winston Towing",
+        "phone": "(336) 300-4444",
+        "address": "Winston-Salem, NC",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Piedmont Recovery",
+        "phone": "(336) 322-2222",
+        "address": "Winston-Salem, NC",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

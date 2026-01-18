@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bulldog Rooter",
+        "phone": "(509) 687-7001",
+        "address": "Spokane Valley, WA",
+        "website": "https://bulldogrooter.com"
+    },
+    {
+        "name": "Division One Plumbing",
+        "phone": "(509) 385-5593",
+        "address": "Spokane Valley, WA",
+        "website": "https://divisiononeplumbing.com"
+    },
+    {
+        "name": "Shaw Plumbing Heating and Air Conditioning",
+        "phone": "(509) 642-6166",
+        "address": "Spokane Valley, WA",
+        "website": "https://shawplumbingservices.com"
+    },
+    {
+        "name": "Roto-Rooter Spokane Valley",
+        "phone": "(509) 484-6937",
+        "address": "Spokane Valley, WA",
+        "website": "https://rotorooter.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "West Hartford Electric",
+        "phone": "(860) 690-9472",
+        "address": "West Hartford, CT",
+        "website": "https://westhartfordelectric.com"
+    },
+    {
+        "name": "KSB Electric",
+        "phone": "(860) 854-3772",
+        "address": "West Hartford, CT",
+        "website": "https://ksbelectricllc.com"
+    },
+    {
+        "name": "Buck Electric CT",
+        "phone": "(860) 628-3100",
+        "address": "West Hartford, CT",
+        "website": "https://buckelectricct.com"
+    },
+    {
+        "name": "JS Electrical LLC",
+        "phone": "(860) 707-0027",
+        "address": "West Hartford, CT",
+        "website": "https://jselectrical-llc.com"
+    }
+]

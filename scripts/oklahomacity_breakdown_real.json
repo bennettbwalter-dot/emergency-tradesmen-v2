@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Sergio's Towing Service",
+        "phone": "(405) 947-0070",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Ramirez Towing & Repair",
+        "phone": "(405) 517-9318",
+        "address": "Oklahoma City, OK",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Silver Towing",
+        "phone": "(405) 241-2480",
+        "address": "Oklahoma City, OK",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Tow Mate",
+        "phone": "(405) 774-9495",
+        "address": "Oklahoma City, OK",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Stuck Solution",
+        "phone": "(855) 557-8825",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "DLR Building Services Swindon",
+        "phone": "01793 684619",
+        "address": "Swindon",
+        "website": "https://yell.com/"
+    },
+    {
+        "name": "Emergency Response Group Swindon",
+        "phone": "01793 684619",
+        "address": "Swindon",
+        "website": "https://emergencyresponsegroup.co.uk/"
+    },
+    {
+        "name": "Complete Building Services Swindon",
+        "phone": "01793 239742",
+        "address": "Swindon",
+        "website": "https://completebuilding-services.co.uk/"
+    },
+    {
+        "name": "ESS Group Maintenance Swindon",
+        "phone": "01793 525433",
+        "address": "Unit 2270c, Elgin Industrial Estate, Dunbeath Rd, Swindon SN2 8EA",
+        "website": "https://ess-swindon.co.uk/"
+    },
+    {
+        "name": "Swindon Borough Emergency Repairs",
+        "phone": "01793 445500",
+        "address": "Swindon",
+        "website": "https://swindon.gov.uk/"
+    }
+]

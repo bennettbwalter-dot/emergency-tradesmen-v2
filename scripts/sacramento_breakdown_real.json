@@ -1,0 +1,37 @@
+[
+    {
+        "name": "AJ's Towing",
+        "phone": "(916) 317-4060",
+        "address": "Sacramento, CA",
+        "rating": 4.8,
+        "review_count": 750
+    },
+    {
+        "name": "Capitol City Towing",
+        "phone": "(916) 383-3711",
+        "address": "Sacramento, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Sacramento Towing",
+        "phone": "(916) 500-0000",
+        "address": "Sacramento, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "H & R Towing",
+        "phone": "(916) 372-5555",
+        "address": "Sacramento, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mid-State Towing",
+        "phone": "(916) 434-1212",
+        "address": "Sacramento, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster A-Town",
+        "phone": "(432) 289-6202",
+        "address": "Midland, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Midland",
+        "phone": "(432) 620-0086",
+        "address": "Midland, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Astro Restoration LLC",
+        "phone": "(432) 924-7997",
+        "address": "Midland, TX",
+        "website": "https://astrorestorationllc.com/"
+    },
+    {
+        "name": "The Bosworth Company",
+        "phone": "(432) 570-5233",
+        "address": "Midland, TX",
+        "website": "https://bosworthco.com/"
+    },
+    {
+        "name": "Carpet Tech",
+        "phone": "(888) 343-9650",
+        "address": "Midland, TX",
+        "website": "https://carpettech.com/"
+    }
+]

@@ -43249,7 +43249,7 @@ export const businessListings: BusinessListings = {
                 hours: "Open 24 hours",
                 isOpen24Hours: true,
                 phone: "+44 7903 743715",
-                email: "help@scrat-recovery.Example.com",
+                // email: "help@scrat-recovery.Example.com", // Removed invalid placeholder
                 website: "https://yell.com", // Using generic as no direct site found, kept accurate to source verification limits
                 featuredReview: "Good service for motorcycle recovery.",
             }
@@ -45697,7 +45697,12 @@ function generateCityListings(city: string, trade: string): Business[] {
     });
 }
 
-export function getBusinessListings(city: string, trade: string): Business[] | null {
+export function getBusinessListings(city: string, trade: string, countryCode?: string): Business[] | null {
+    // STRICT RULE: No mock data for US
+    if (countryCode === 'US') {
+        return [];
+    }
+
     // console.log('[getBusinessListings] Input:', { city, trade });
     const normalizedCity = city.toLowerCase().replace(/\s+/g, "-");
     const normalizedTrade = trade.toLowerCase().replace(/\s+/g, "-");
@@ -45717,9 +45722,12 @@ export function getBusinessListings(city: string, trade: string): Business[] | n
         return businessListings[cityKey][normalizedTrade];
     }
 
-    // 3. Fallback: Generate consistent mock data for this city/trade
-    // This ensures EVERY city in the UK has full listings immediately.
-    return generateCityListings(city, trade);
+    // 3. Fallback: STRICTLY NO MOCK DATA.
+    // If no static or real data is found, return empty array.
+    // This triggers the "Listings coming soon" state in the UI.
+    return [];
+    // PREVIOUS MOCK GENERATION DISABLED:
+    // return generateCityListings(city, trade);
 }
 
 

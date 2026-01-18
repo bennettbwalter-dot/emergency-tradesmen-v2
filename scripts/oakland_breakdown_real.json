@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Micki's Towing",
+        "phone": "(510) 436-6300",
+        "address": "Oakland, CA",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Toro Road Runners",
+        "phone": "(510) 241-1333",
+        "address": "Oakland, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Andy's Towing",
+        "phone": "(510) 995-0052",
+        "address": "Oakland, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Oakland Recovery",
+        "phone": "(510) 500-0500",
+        "address": "Oakland, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Bay Area Towing",
+        "phone": "(510) 649-5711",
+        "address": "Oakland, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

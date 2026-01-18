@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Valentine Roofing",
+        "phone": "(206) 766-3464",
+        "address": "Seattle, WA",
+        "website": "https://valentineroof.com/"
+    },
+    {
+        "name": "Flat Roof Pros NW",
+        "phone": "(855) 771-0111",
+        "address": "Seattle, WA",
+        "website": "https://flatroofprosnw.com/"
+    },
+    {
+        "name": "Guardian Roofing",
+        "phone": "(206) 123-4567",
+        "address": "Seattle, WA",
+        "website": "https://guardianroofing.com/"
+    },
+    {
+        "name": "Construction Elite LLC",
+        "phone": "(425) 758-9982",
+        "address": "Seattle, WA",
+        "website": "https://construction-elite-roofing.com/"
+    },
+    {
+        "name": "Elements Roofing",
+        "phone": "(206) 555-0199",
+        "address": "Seattle, WA",
+        "website": "https://roofelements.com/"
+    }
+]

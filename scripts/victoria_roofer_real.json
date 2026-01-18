@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Victoria Commercial Roofing",
+        "phone": "(832) 250-6224",
+        "address": "Victoria, TX",
+        "website": "https://victoriacommercialroofing.com/"
+    },
+    {
+        "name": "Victoria Roof Pros",
+        "phone": "(361) 201-2795",
+        "address": "Victoria, TX",
+        "website": "https://victoriaroofpros.com/"
+    },
+    {
+        "name": "Pilot Roofing",
+        "phone": "(361) 237-6765",
+        "address": "Victoria, TX",
+        "website": "https://pilotroof.com/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Victoria, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Frakes Roofing",
+        "phone": "(877) 550-3398",
+        "address": "Victoria, TX",
+        "website": "https://frakesroofing.com/"
+    }
+]

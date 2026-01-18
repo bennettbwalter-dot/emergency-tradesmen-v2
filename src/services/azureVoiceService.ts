@@ -2,16 +2,23 @@
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
 import { usageLogger } from '@/lib/usage-logger';
 
-const AZURE_KEY = import.meta.env.VITE_AZURE_SPEECH_KEY || '';
-// We are intentionally ignoring the env var for region because it is incorrectly set to eastus in some environments
-// and we need to force uksouth for the UK-based resource to work with the Ava voice.
-const AZURE_REGION = 'uksouth';
+const AZURE_KEY = (import.meta.env.VITE_AZURE_SPEECH_KEY || '').trim();
+const AZURE_REGION = (import.meta.env.VITE_AZURE_SPEECH_REGION || 'uksouth').trim();
+
+console.log(`[AzureVoice] SDK Version: ${sdk.SpeechRecognizer.prototype.constructor.name} init with region ${AZURE_REGION}`);
 
 export class AzureVoiceService {
     private synthesizer: sdk.SpeechSynthesizer | null = null;
     private audioContext: AudioContext | null = null;
     private currentSource: AudioBufferSourceNode | null = null;
     private useFallback: boolean = false;
+
+    private recognizer: sdk.SpeechRecognizer | null = null;
+    private recognizerActive: boolean = false;
+    private sttProcessor: ScriptProcessorNode | null = null;
+    private sttStream: sdk.PushAudioInputStream | null = null;
+    private sttAnalyser: AnalyserNode | null = null;
+    private currentVolume: number = 0;
 
     constructor() {
         // Initialize fallback synth if needed
@@ -21,15 +28,185 @@ export class AzureVoiceService {
         }
     }
 
-    private initAudio(): void {
+    public getAudioContext(): AudioContext {
         if (!this.audioContext) {
-            try {
-                const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-                this.audioContext = new AudioContext();
-            } catch (e) {
-                console.error('[AzureVoice] AudioContext Init Failed:', e);
-            }
+            const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+            this.audioContext = new AudioContext();
         }
+        return this.audioContext;
+    }
+
+    public getVolume(): number {
+        return this.currentVolume;
+    }
+
+    private initAudio(): void {
+        this.getAudioContext();
+    }
+
+    // --- AZURE STT (RECOGNITION) ---
+    public async startRecognition(
+        onResult: (text: string, isFinal: boolean) => void,
+        onError: (error: string) => void,
+        locale: string = 'en-GB',
+        mediaStream?: MediaStream
+    ): Promise<void> {
+        if (this.recognizerActive) return;
+
+        try {
+            console.log(`[AzureVoice] Starting Azure STT (${locale})...`);
+            console.log(`[AzureVoice] Key length: ${AZURE_KEY.length}, Region: ${AZURE_REGION}`);
+
+            if (!AZURE_KEY || AZURE_KEY.length < 10) {
+                throw new Error("Invalid Azure Speech Key. Please check your .env file.");
+            }
+
+            const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
+            speechConfig.speechRecognitionLanguage = locale;
+
+            // CRITICAL: Request microphone permission FIRST and verify stream is active
+            console.log(`[AzureVoice] Requesting microphone permission...`);
+            let testStream: MediaStream;
+            try {
+                testStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const audioTracks = testStream.getAudioTracks();
+                console.log(`[AzureVoice] Got ${audioTracks.length} audio track(s)`);
+                if (audioTracks.length > 0) {
+                    const track = audioTracks[0];
+                    console.log(`[AzureVoice] Audio Track: label="${track.label}", enabled=${track.enabled}, muted=${track.muted}, readyState=${track.readyState}`);
+                    if (track.muted || track.readyState !== 'live') {
+                        throw new Error(`Microphone track is not live: muted=${track.muted}, readyState=${track.readyState}`);
+                    }
+                }
+                // Stop the test stream - SDK will create its own
+                testStream.getTracks().forEach(t => t.stop());
+            } catch (micError) {
+                console.error(`[AzureVoice] Microphone access failed:`, micError);
+                throw new Error(`Microphone access failed: ${micError}`);
+            }
+
+            // Use SDK's default microphone input
+            console.log(`[AzureVoice] Creating AudioConfig with default mic...`);
+            const audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
+
+            console.log(`[AzureVoice] Initializing Recognizer...`);
+            this.recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
+
+            this.recognizer.recognizing = (s, e) => {
+                if (e.result.text) {
+                    console.debug('[AzureVoice] SDK Recognizing (Interim):', e.result.text);
+                    onResult(e.result.text, false);
+                }
+            };
+
+            this.recognizer.recognized = (s, e) => {
+                console.log('[AzureVoice] SDK Recognized Event. Reason:', e.result.reason, 'Text:', e.result.text || '(empty)');
+
+                if (e.result.reason === sdk.ResultReason.RecognizedSpeech) {
+                    // Filter out empty results
+                    if (e.result.text && e.result.text.trim().length > 0) {
+                        console.log('[AzureVoice] SDK Recognized FINAL:', e.result.text);
+                        onResult(e.result.text, true);
+                    } else {
+                        console.warn('[AzureVoice] SDK returned empty recognition result - ignoring');
+                    }
+                } else if (e.result.reason === sdk.ResultReason.NoMatch) {
+                    const noMatch = sdk.NoMatchDetails.fromResult(e.result);
+                    console.warn('[AzureVoice] SDK NoMatch. Reason:', noMatch.reason);
+
+                    // Specific mapping for common issues
+                    let displayMsg = '';
+                    if (noMatch.reason === sdk.NoMatchReason.InitialSilenceTimeout) displayMsg = '(Silence)';
+                    else if (noMatch.reason === sdk.NoMatchReason.BabbleTimeout) displayMsg = '(Too much noise)';
+                    else displayMsg = '(Unrecognized audio)';
+
+                    // Notify UI with a specific hint
+                    onResult(displayMsg, false);
+                }
+            };
+
+            this.recognizer.canceled = (s, e) => {
+                console.warn('[AzureVoice] Recognition Canceled. Reason:', e.reason);
+                if (e.reason === sdk.CancellationReason.Error) {
+                    console.error('[AzureVoice] Cancellation Error Code:', e.errorCode);
+                    console.error('[AzureVoice] Cancellation Error Details:', e.errorDetails);
+                    onError(`Azure Error: ${e.errorDetails} (Code: ${e.errorCode})`);
+                }
+                this.recognizerActive = false;
+            };
+
+            this.recognizer.sessionStopped = (s, e) => {
+                console.log('[AzureVoice] Session Stopped');
+                this.recognizerActive = false;
+            };
+
+            this.recognizer.sessionStarted = (s, e) => {
+                console.log('[AzureVoice] *** SESSION STARTED *** - Recognition is now active');
+            };
+
+            this.recognizer.speechStartDetected = (s, e) => {
+                console.log('[AzureVoice] *** SPEECH START DETECTED ***');
+            };
+
+            this.recognizer.speechEndDetected = (s, e) => {
+                console.log('[AzureVoice] *** SPEECH END DETECTED ***');
+            };
+
+            await new Promise<void>((resolve, reject) => {
+                if (!this.recognizer) {
+                    reject(new Error('Recognizer not initialized'));
+                    return;
+                }
+                this.recognizer.startContinuousRecognitionAsync(
+                    () => {
+                        this.recognizerActive = true;
+                        console.log('[AzureVoice] *** RECOGNITION STARTED SUCCESSFULLY ***');
+                        resolve();
+                    },
+                    (err) => {
+                        console.error('[AzureVoice] Recognition Start Failed:', err);
+                        reject(err);
+                    }
+                );
+            });
+
+        } catch (e) {
+            console.error('[AzureVoice] Recognition Setup Exception:', e);
+            onError(`Setup Exception: ${String(e)}`);
+        }
+    }
+
+    public async stopRecognition(): Promise<void> {
+        if (!this.recognizer || !this.recognizerActive) return;
+
+        if (this.sttProcessor) {
+            this.sttProcessor.disconnect();
+            this.sttProcessor.onaudioprocess = null;
+            this.sttProcessor = null;
+        }
+        if (this.sttAnalyser) {
+            this.sttAnalyser.disconnect();
+            this.sttAnalyser = null;
+        }
+        if (this.sttStream) {
+            this.sttStream.close();
+            this.sttStream = null;
+        }
+        this.currentVolume = 0;
+
+        return new Promise((resolve) => {
+            this.recognizer!.stopContinuousRecognitionAsync(
+                () => {
+                    this.recognizerActive = false;
+                    resolve();
+                },
+                (err) => {
+                    console.warn('[AzureVoice] Stop Recognition Failed:', err);
+                    this.recognizerActive = false;
+                    resolve();
+                }
+            );
+        });
     }
 
     public async speak(text: string, countryCode: string = 'GB'): Promise<void> {
@@ -70,14 +247,22 @@ export class AzureVoiceService {
 
                 this.synthesizer = new sdk.SpeechSynthesizer(speechConfig, null as any);
 
+                // XML Escape text
+                const escapedText = text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&apos;');
+
                 const ssml = `
 <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
     <voice name="${voiceName}">
-        ${text}
+        ${escapedText}
     </voice>
 </speak>`.trim();
 
-                console.log(`[AzureVoice] Synthesizing via Azure (${region}) using Ava (Always)...`);
+                console.log(`[AzureVoice] Synthesizing via Azure (Region: ${region}, Voice: ${voiceName})...`);
 
                 this.synthesizer.speakSsmlAsync(
                     ssml,
@@ -86,7 +271,10 @@ export class AzureVoiceService {
                             const audioData = result.audioData;
                             this.playBuffer(audioData, resolve);
                         } else {
-                            console.warn('[AzureVoice] Azure Failed, switching to Fallback:', result.errorDetails);
+                            const cancellation = sdk.CancellationDetails.fromResult(result);
+                            console.error('[AzureVoice] Azure Synthesis Failed:', cancellation.errorDetails || result.errorDetails || 'Unknown Error');
+                            console.error('[AzureVoice] Result Reason:', result.reason);
+
                             this.synthesizer?.close();
                             this.synthesizer = null;
 
@@ -96,7 +284,7 @@ export class AzureVoiceService {
                         }
                     },
                     (err) => {
-                        console.error('[AzureVoice] Error:', err);
+                        console.error('[AzureVoice] Synthesis Synthesis Exception:', err);
                         this.synthesizer?.close();
                         this.synthesizer = null;
                         this.useFallback = true;

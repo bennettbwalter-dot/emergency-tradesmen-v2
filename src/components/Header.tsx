@@ -7,10 +7,20 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { Menu } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
-export function Header() {
+
+interface HeaderProps {
+  countryCode?: string;
+}
+
+export function Header({ countryCode }: HeaderProps) {
   const { settings } = useLocalization();
-  const signupText = settings.countryCode === 'US' ? 'Pro Sign Up' : 'Tradesmen Sign Up';
-  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+
+  // STRICT OVERRIDE: Prioritize prop, fallback to context
+  const activeCountry = countryCode || settings.countryCode;
+  const isUS = activeCountry === 'US';
+
+  const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
+  const countryPrefix = isUS ? '/us' : '';
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -25,6 +35,7 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
+
 
             <Link to={`${countryPrefix}/about`} className="text-sm font-medium hover:text-gold transition-colors">
               About
@@ -68,6 +79,7 @@ export function Header() {
                     <Link to={`${countryPrefix}/blog`} className="text-lg font-medium hover:text-gold transition-colors block">
                       Blog
                     </Link>
+
                     <Link to="/contact" className="text-lg font-medium hover:text-gold transition-colors block">
                       Contact
                     </Link>

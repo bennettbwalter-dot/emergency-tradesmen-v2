@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Socorro",
+        "phone": "(915) 400-6101",
+        "address": "Socorro, TX",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "El Paso Plumbing",
+        "phone": "(915) 285-0087",
+        "address": "Socorro, TX",
+        "website": "https://elpasoplumbing.net"
+    },
+    {
+        "name": "PlumberElPaso",
+        "phone": "(915) 975-6009",
+        "address": "Socorro, TX",
+        "website": "https://plumberelpaso.com"
+    },
+    {
+        "name": "Plumbing Experts",
+        "phone": "(915) 355-6906",
+        "address": "Socorro, TX",
+        "website": "https://plumbingexpertselpaso.net"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Martinez Glass & Aluminum",
+        "phone": "(956) 862-0295",
+        "address": "Pharr, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Windshields Xpress",
+        "phone": "(956) 283-9080",
+        "address": "Pharr, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "C.B. Auto Glass",
+        "phone": "(956) 783-6761",
+        "address": "Pharr, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AutoGlassOnly Pharr",
+        "phone": "1-866-410-5628",
+        "address": "Pharr, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

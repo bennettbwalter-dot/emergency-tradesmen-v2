@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Rowlett, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Rowlett Roof Pros",
+        "phone": "(857) 201-5457",
+        "address": "6600 Lakeview Pkwy, Rowlett, TX 75088",
+        "website": "https://rowlettroofpros.com/"
+    },
+    {
+        "name": "360 Roofing and Restoration",
+        "phone": "(817) 653-3537",
+        "address": "Rowlett, TX",
+        "website": "https://360roofingandrestoration.com/"
+    },
+    {
+        "name": "Premier Roofing Garland",
+        "phone": "(214) 935-5357",
+        "address": "Rowlett, TX",
+        "website": "https://premierroofinggarland.com/"
+    },
+    {
+        "name": "Veteran Brothers Roofing",
+        "phone": "(817) 875-9834",
+        "address": "Rowlett, TX",
+        "website": "https://veteranbros.com/"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Roofs By Nicholas of Lubbock",
+        "phone": "(806) 605-0880",
+        "address": "301 Paris Ave, Lubbock, TX 79701",
+        "website": "https://roofsbynicholas.com/"
+    },
+    {
+        "name": "Metals Roofing Pros",
+        "phone": "(844) 551-3620",
+        "address": "Lubbock, TX",
+        "website": "https://metalsroofing.com/"
+    },
+    {
+        "name": "West Texas Commercial Roofing",
+        "phone": "(806) 653-3537",
+        "address": "Lubbock, TX",
+        "website": "https://westtexascommercialroofing.com/"
+    },
+    {
+        "name": "Rally Roofing",
+        "phone": "(806) 686-3050",
+        "address": "Lubbock, TX",
+        "website": "https://rallylubbock.com/"
+    },
+    {
+        "name": "Fortenberry Roofing",
+        "phone": "(806) 385-6761",
+        "address": "Lubbock, TX",
+        "website": "https://fortenberryroofing.com/"
+    }
+]

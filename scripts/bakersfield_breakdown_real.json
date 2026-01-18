@@ -1,0 +1,37 @@
+[
+    {
+        "name": "10-4 Tow Bakersfield",
+        "phone": "(661) 336-9480",
+        "address": "Bakersfield, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Nitro Towing Inc",
+        "phone": "(661) 706-4010",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Bakersfield Towing Company",
+        "phone": "(661) 387-3049",
+        "address": "Bakersfield, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Rafie's Towing",
+        "phone": "(661) 320-0000",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Payless Towing",
+        "phone": "(661) 322-2222",
+        "address": "Bakersfield, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Paul Davis Emergency Services of Mansfield",
+        "phone": "(817) 484-0112",
+        "address": "13 Miterton Ct, Mansfield, TX 76063",
+        "website": "https://pauldavis.com/"
+    },
+    {
+        "name": "ServiceMaster Advanced Restorations",
+        "phone": "(817) 783-9297",
+        "address": "Mansfield, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of South Arlington",
+        "phone": "(817) 557-1505",
+        "address": "Mansfield, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "United Water Restoration Group of Arlington",
+        "phone": "(817) 489-9500",
+        "address": "Mansfield, TX",
+        "website": "https://unitedwaterrestoration.com/"
+    },
+    {
+        "name": "Roto-Rooter Mansfield",
+        "phone": "(817) 654-9288",
+        "address": "Mansfield, TX",
+        "website": "https://rotorooter.com/"
+    }
+]

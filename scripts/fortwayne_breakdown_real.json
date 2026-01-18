@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Blackout Towing & Recovery",
+        "phone": "(260) 220-6564",
+        "address": "Fort Wayne, IN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "AJ Towing & Transportation",
+        "phone": "(260) 422-3816",
+        "address": "Fort Wayne, IN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Parker's Towing",
+        "phone": "(260) 485-9014",
+        "address": "Fort Wayne, IN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Stuck Solution",
+        "phone": "(855) 557-8825",
+        "address": "Fort Wayne, IN",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Mr. Quickpick Roadside",
+        "phone": "(260) 230-8225",
+        "address": "Fort Wayne, IN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

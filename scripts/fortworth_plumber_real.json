@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing of Fort Worth",
+        "phone": "(817) 769-6643",
+        "address": "Fort Worth, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "1st Choice Air Solutions",
+        "phone": "(817) 527-8176",
+        "address": "Fort Worth, TX",
+        "rating": 4.9,
+        "review_count": 980
+    },
+    {
+        "name": "Texas Plumbing Repair 24/7",
+        "phone": "(817) 799-7327",
+        "address": "Fort Worth, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Rockwater Plumbing",
+        "phone": "(817) 659-5929",
+        "address": "Fort Worth, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Sanders Plumbing",
+        "phone": "(817) 332-1111",
+        "address": "Fort Worth, TX",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

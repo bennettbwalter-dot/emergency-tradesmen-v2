@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Diamond Heating & AirTemp Alaska",
+        "phone": "(907) 202-7927",
+        "address": "Anchorage, AK",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Discount Mechanical Heating and Plumbing",
+        "phone": "(907) 336-3100",
+        "address": "Anchorage, AK",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Moore Heating",
+        "phone": "(907) 561-1500",
+        "address": "Anchorage, AK",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "Mountain Mechanical",
+        "phone": "(907) 344-0700",
+        "address": "Anchorage, AK",
+        "rating": 4.3,
+        "review_count": 92
+    },
+    {
+        "name": "Extreme Heating and Air",
+        "phone": "(907) 727-4328",
+        "address": "Anchorage, AK",
+        "rating": 4.6,
+        "review_count": 120
+    }
+]

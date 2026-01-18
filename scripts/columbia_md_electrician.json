@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Haas and Sons Electric",
+        "phone": "(443) 396-2555",
+        "address": "Columbia, MD",
+        "website": "https://haasandsons.com"
+    },
+    {
+        "name": "Chesapeake Electric",
+        "phone": "(410) 280-3388",
+        "address": "Columbia, MD",
+        "website": "https://cheselectric.com"
+    },
+    {
+        "name": "Bailey and Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Columbia, MD",
+        "website": "https://needelectric.com"
+    },
+    {
+        "name": "Mr Electric of Columbia",
+        "phone": "(240) 237-6214",
+        "address": "Columbia, MD",
+        "website": "https://mrelectric.com"
+    }
+]

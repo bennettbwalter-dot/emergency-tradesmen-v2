@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rocketman Plumbing",
+        "phone": "(505) 243-1227",
+        "address": "Albuquerque, NM",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Albuquerque Plumbing, Heating & Cooling",
+        "phone": "(505) 349-4404",
+        "address": "Albuquerque, NM",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "505 Plumbing, Heating & Cooling",
+        "phone": "(505) 560-3865",
+        "address": "Albuquerque, NM",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Daniels Plumbing, Heating and Air Conditioning",
+        "phone": "(505) 898-8860",
+        "address": "Albuquerque, NM",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Wagner Mechanical",
+        "phone": "(505) 317-6903",
+        "address": "Albuquerque, NM",
+        "rating": 4.9,
+        "review_count": 6739
+    }
+]

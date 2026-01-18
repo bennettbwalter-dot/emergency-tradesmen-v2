@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Inland Empire Comfort",
+        "phone": "(951) 336-8709",
+        "address": "Riverside, CA",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "First Class Plumbing and Rooter",
+        "phone": "(855) 665-0779",
+        "address": "Riverside, CA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Aire-Rite Heating & Air Conditioning",
+        "phone": "(951) 336-1541",
+        "address": "Riverside, CA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "RighTime Home Services",
+        "phone": "(951) 324-4003",
+        "address": "Riverside, CA",
+        "rating": 4.8,
+        "review_count": 2100
+    },
+    {
+        "name": "Liberty Plumbing, Heating Air Conditioning",
+        "phone": "(951) 289-3340",
+        "address": "Riverside, CA",
+        "rating": 4.7,
+        "review_count": 497
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Plumbing Systems LLC",
+        "phone": "806-206-6633",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Frank's Repair Plumbing Inc.",
+        "phone": "(806) 374-4357",
+        "address": "Amarillo, TX",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "1-800-Plumber Amarillo",
+        "phone": "(806) 622-3862",
+        "address": "Amarillo, TX",
+        "rating": 4.7,
+        "review_count": 37
+    },
+    {
+        "name": "Mr. Rooter Plumbing Amarillo",
+        "phone": "+1806-223-2906",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Amarillo Emergency Plumbers",
+        "phone": "(806) 555-0101",
+        "address": "Amarillo, TX",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

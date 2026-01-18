@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ServiceMaster by Rice",
+        "phone": "(515) 305-3453",
+        "address": "Des Moines, IA",
+        "website": "https://servicemasterrestore.com"
+    },
+    {
+        "name": "911 Restoration of Des Moines",
+        "phone": "(515) 206-8720",
+        "address": "Des Moines, IA",
+        "website": "https://911restorationdesmoines.com"
+    },
+    {
+        "name": "Maxx Restoration",
+        "phone": "(515) 802-7583",
+        "address": "Des Moines, IA",
+        "website": "https://maxxrestoration.com"
+    },
+    {
+        "name": "SERVPRO of Des Moines SW & East",
+        "phone": "(515) 277-7407",
+        "address": "Des Moines, IA",
+        "website": "https://servpro.com"
+    }
+]

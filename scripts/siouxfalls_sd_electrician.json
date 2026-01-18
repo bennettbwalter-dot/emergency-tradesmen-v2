@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Action Electric Sioux Falls",
+        "phone": "(605) 334-8141",
+        "address": "Sioux Falls, SD",
+        "website": "https://actionelec.com"
+    },
+    {
+        "name": "Travis Electric Inc",
+        "phone": "(605) 212-7647",
+        "address": "Sioux Falls, SD",
+        "website": "https://traviselectricinc.com"
+    },
+    {
+        "name": "D D Electric SD",
+        "phone": "(605) 929-2677",
+        "address": "Sioux Falls, SD",
+        "website": null
+    },
+    {
+        "name": "Howe Electric SD",
+        "phone": "(605) 368-5467",
+        "address": "Sioux Falls, SD",
+        "website": "https://howeelectric.com"
+    }
+]

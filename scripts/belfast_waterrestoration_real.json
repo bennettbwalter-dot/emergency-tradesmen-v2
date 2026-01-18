@@ -1,0 +1,32 @@
+[
+    {
+        "name": "AK Services Belfast",
+        "phone": "07739 173 353",
+        "address": "43 Orby Gardens, Belfast BT5 5HS",
+        "website": "https://akservices.org/"
+    },
+    {
+        "name": "Flood Clean-Up Belfast",
+        "phone": "028 9507 1126",
+        "address": "Belfast",
+        "website": "https://nileakdetection.co.uk/"
+    },
+    {
+        "name": "Cleaning Contractors NI",
+        "phone": "028 9073 7252",
+        "address": "The Mount, 2 Woodstock Link, Belfast, BT6 8DD",
+        "website": "https://cleaningcontractorsbelfast.co.uk/"
+    },
+    {
+        "name": "Causeway Cleaning Ltd",
+        "phone": "028 9560 0105",
+        "address": "The Mount, 2 Woodstock Link, Belfast, BT6 8DD",
+        "website": "https://causewaycleaning.com/"
+    },
+    {
+        "name": "MLD Belfast",
+        "phone": "07590 370 600",
+        "address": "Belfast",
+        "website": "https://leakdetectionni.co.uk/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roofs by Nicholas",
+        "phone": "(432) 278-3831",
+        "address": "10204 Farm to Market 307, Midland, TX 79706",
+        "website": "https://roofsbynicholas.com/"
+    },
+    {
+        "name": "Riva Cover Roofing",
+        "phone": "(877) 909-9904",
+        "address": "Midland, TX",
+        "website": "https://rivacover.com/"
+    },
+    {
+        "name": "PB Roofing",
+        "phone": "(432) 123-4567",
+        "address": "Midland, TX",
+        "website": "https://roofingpb.com/"
+    },
+    {
+        "name": "West Texas Commercial Roofing",
+        "phone": "(432) 653-3537",
+        "address": "Midland, TX",
+        "website": "https://westtexascommercialroofing.com/"
+    }
+]

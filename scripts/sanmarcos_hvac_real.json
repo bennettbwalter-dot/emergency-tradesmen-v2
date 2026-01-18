@@ -1,0 +1,38 @@
+[
+    {
+        "name": "SM Air",
+        "phone": "(512) 212-4777",
+        "address": "San Marcos, TX",
+        "website": "https://smairtx.com/"
+    },
+    {
+        "name": "Reliable Air",
+        "phone": "(512) 580-8837",
+        "address": "San Marcos, TX",
+        "website": "https://reliableairtx.com/"
+    },
+    {
+        "name": "AirOne Rescue",
+        "phone": "(512) 607-9386",
+        "address": "San Marcos, TX",
+        "website": "https://myairone.com/"
+    },
+    {
+        "name": "Fresh Breeze HVAC",
+        "phone": "(210) 724-1081",
+        "address": "San Marcos, TX",
+        "website": "https://freshbreeze-ac.com/"
+    },
+    {
+        "name": "Air Rescue A/C & Heating",
+        "phone": "(830) 305-5156",
+        "address": "San Marcos, TX",
+        "website": "https://airrescueac.com/"
+    },
+    {
+        "name": "One Hour Heating & Air Conditioning",
+        "phone": "(512) 201-3253",
+        "address": "San Marcos, TX",
+        "website": "https://onehourheatandair.com/"
+    }
+]

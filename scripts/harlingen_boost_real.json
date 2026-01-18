@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Emergency Plumbing Squad of Harlingen",
+        "phone": "(855) 812-2311",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Charlie's Plumbing Service",
+        "phone": "(956) 383-4346",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "All Valley Plumbing & AC Co.",
+        "phone": "(956) 686-6656",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Guillen Plumbing, Inc.",
+        "phone": "(956) 367-2300",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hour Plumber Harlingen",
+        "phone": "(866) 849-1588",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "Roto-Rooter Harlingen",
+        "phone": "1-800-438-7686",
+        "address": "Harlingen, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 410
+    },
+    {
+        "name": "Electrician Squad Harlingen",
+        "phone": "(855) 930-6015",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Emergency Electrician Service Harlingen",
+        "phone": "(877) 847-6084",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Light House (Donco Electric)",
+        "phone": "(956) 423-6664",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Guardian Power Solutions LLC",
+        "phone": "(956) 644-1414",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "#1 Quality Electric, Inc.",
+        "phone": "(956) 421-2078",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 105
+    },
+    {
+        "name": "Pete's Electric",
+        "phone": "(956) 230-8340",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Gonzalez Electric & Plumbing",
+        "phone": "(956) 970-5125",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Louie's Electric",
+        "phone": "(956) 420-2868",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 90
+    },
+    {
+        "name": "Solutions Electric LLC",
+        "phone": "(956) 496-2003",
+        "address": "Harlingen, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Discount Locksmith of Harlingen",
+        "phone": "(855) 766-8899",
+        "address": "Harlingen, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Master Texas Locksmiths",
+        "phone": "(956) 673-0504",
+        "address": "Harlingen, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Pop-A-Lock Harlingen",
+        "phone": "(956) 412-5880",
+        "address": "Harlingen, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Century Security Group",
+        "phone": "(956) 238-7540",
+        "address": "Harlingen, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 90
+    },
+    {
+        "name": "Minute Key Harlingen",
+        "phone": "1-800-539-7571",
+        "address": "Harlingen, TX",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 220
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster DSI - Wichita",
+        "phone": "(316) 348-4464",
+        "address": "Wichita, KS",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "National Catastrophe Restoration Inc. (NCRI)",
+        "phone": "(316) 636-5700",
+        "address": "8447 E 35th St N, Wichita, KS 67226",
+        "website": "https://ncricat.com/"
+    },
+    {
+        "name": "Butler Plumbing & Restoration",
+        "phone": "(316) 542-2818",
+        "address": "Wichita, KS",
+        "website": "https://butlerrestoration.com/"
+    },
+    {
+        "name": "BELFOR Wichita",
+        "phone": "(316) 260-4227",
+        "address": "100 West 61st Street North Suite 1, Park City, KS 67204",
+        "website": "https://www.belfor.com/"
+    },
+    {
+        "name": "SERVPRO of Northeast Wichita",
+        "phone": "(316) 831-9400",
+        "address": "Wichita, KS",
+        "website": "https://servpro.com/"
+    }
+]

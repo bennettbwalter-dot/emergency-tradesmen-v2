@@ -1,0 +1,32 @@
+[
+    {
+        "name": "BELFOR USA",
+        "phone": "(800) 421-4112",
+        "address": "4955 E Hunter Ave, Anaheim, CA 92807",
+        "website": "https://www.belfor.com/"
+    },
+    {
+        "name": "ATI Restoration",
+        "phone": "(310) 596-5339",
+        "address": "5721 Buckingham Parkway, Culver City, CA 90230",
+        "website": "https://atirestoration.com/"
+    },
+    {
+        "name": "Flood-cide Restoration & Construction, Inc.",
+        "phone": "(818) 469-5505",
+        "address": "12031 Vose St, North Hollywood, CA 91605",
+        "website": "https://floodciderestoration.com/"
+    },
+    {
+        "name": "ServiceMaster Restoration by Disaster Recovery Experts",
+        "phone": "(310) 484-5816",
+        "address": "11901 Santa Monica Blvd #585, Los Angeles, CA 90025",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "My Handyman LA",
+        "phone": "(424) 230-3005",
+        "address": "8564 W Pico Blvd, Los Angeles, CA 90035",
+        "website": "https://myhandymanla.com/"
+    }
+]

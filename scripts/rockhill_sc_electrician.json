@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Southern Electric of the Carolinas",
+        "phone": "(803) 329-4944",
+        "address": "Rock Hill, SC",
+        "website": "https://southernelectricsc.com"
+    },
+    {
+        "name": "Palmetto Electrical Contractors",
+        "phone": "(803) 327-4504",
+        "address": "Rock Hill, SC",
+        "website": "https://pecrh.com"
+    },
+    {
+        "name": "J and E Electric",
+        "phone": "(803) 965-8714",
+        "address": "Rock Hill, SC",
+        "website": "https://jeelectricofsc.com"
+    },
+    {
+        "name": "Starnes Electric LLC",
+        "phone": "(803) 230-1550",
+        "address": "Rock Hill, SC",
+        "website": "https://starneselectricllc.com"
+    }
+]

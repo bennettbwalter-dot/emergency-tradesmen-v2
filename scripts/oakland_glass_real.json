@@ -1,0 +1,42 @@
+[
+    {
+        "name": "ANYHOUR AUTO GLASS",
+        "phone": "510-646-2728",
+        "address": "Oakland, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Roxy Glass",
+        "phone": "510-400-7788",
+        "address": "Oakland, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Auto Glass On The Move",
+        "phone": "510-835-0761",
+        "address": "Oakland, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "In & Out Auto Glass",
+        "phone": "(510) 261-3888",
+        "address": "Oakland, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Reyes Auto Glass Group",
+        "phone": "(877) 218-4385",
+        "address": "Oakland, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

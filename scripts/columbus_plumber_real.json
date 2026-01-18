@@ -1,0 +1,37 @@
+[
+    {
+        "name": "1-Tom-Plumber Columbus",
+        "phone": "(614) 344-1554",
+        "address": "Columbus, OH",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Columbus",
+        "phone": "(614) 351-0455",
+        "address": "Columbus, OH",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "The Waterworks",
+        "phone": "(614) 232-2222",
+        "address": "Columbus, OH",
+        "rating": 4.8,
+        "review_count": 3725
+    },
+    {
+        "name": "QuickCall Emergency Plumber",
+        "phone": "(614) 412-8855",
+        "address": "Columbus, OH",
+        "rating": 4.7,
+        "review_count": 21
+    },
+    {
+        "name": "McDermott Plumbing & Backflow",
+        "phone": "(614) 664-3439",
+        "address": "Columbus, OH",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

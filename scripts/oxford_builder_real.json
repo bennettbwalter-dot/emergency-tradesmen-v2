@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Oxford City Emergency Repairs",
+        "phone": "01865 249811",
+        "address": "Oxford",
+        "website": "https://oxford.gov.uk/"
+    },
+    {
+        "name": "The Oxford Handyman Services",
+        "phone": "01183150544",
+        "address": "Oxford",
+        "website": "https://thehandymanoxford.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Oxford",
+        "phone": "01865 980 346",
+        "address": "Oxford",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "Main Trade Services Oxford",
+        "phone": "01865 980 346",
+        "address": "Oxford",
+        "website": "https://maintradeservices.co.uk/"
+    },
+    {
+        "name": "Apple Building & Property Oxford",
+        "phone": "01865 980 346",
+        "address": "Oxford",
+        "website": "https://checkatrade.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Schneller Knochelmann Plumbing, Heating & Air",
+        "phone": "(513) 407-4424",
+        "address": "Cincinnati, OH",
+        "rating": 4.8,
+        "review_count": 2500
+    },
+    {
+        "name": "One Hour Heating & Air Conditioning",
+        "phone": "(513) 613-2598",
+        "address": "Cincinnati, OH",
+        "rating": 4.9,
+        "review_count": 5808
+    },
+    {
+        "name": "National Heating and Air Conditioning",
+        "phone": "(513) 621-4620",
+        "address": "Cincinnati, OH",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "HELP Plumbing, Heating, Cooling, Electric",
+        "phone": "(513) 960-6755",
+        "address": "Cincinnati, OH",
+        "rating": 4.8,
+        "review_count": 3200
+    },
+    {
+        "name": "Apollo Home Heating, Cooling & Plumbing",
+        "phone": "(513) 268-8400",
+        "address": "Cincinnati, OH",
+        "rating": 4.6,
+        "review_count": 4500
+    }
+]

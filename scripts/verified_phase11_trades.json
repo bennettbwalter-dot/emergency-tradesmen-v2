@@ -1,0 +1,522 @@
+[
+    {
+        "name": "The Air Conditioning Company",
+        "phone": "020 8346 6000",
+        "city": "London",
+        "trade_slug": "hvac",
+        "address": "London, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Cooling Services Ltd",
+        "phone": "020 3811 8222",
+        "city": "London",
+        "trade_slug": "hvac",
+        "address": "London, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Water Damage",
+        "phone": "0800 246 5311",
+        "city": "London",
+        "trade_slug": "water-restoration",
+        "address": "London, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Thames Flood Restoration",
+        "phone": "020 3404 5116",
+        "city": "London",
+        "trade_slug": "water-restoration",
+        "address": "London, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Midland Air Conditioning Quality (MAC)",
+        "phone": "0121 730 4800",
+        "city": "Birmingham",
+        "trade_slug": "hvac",
+        "address": "24 Manor Park Rd, Birmingham B36 0DJ, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Oakland Group",
+        "phone": "0800 542 2580",
+        "city": "Birmingham",
+        "trade_slug": "hvac",
+        "address": "Birmingham, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "First Call Restoration",
+        "phone": "0121 244 4942",
+        "city": "Birmingham",
+        "trade_slug": "water-restoration",
+        "address": "Birmingham, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "RapidDry Restoration",
+        "phone": "07814 508352",
+        "city": "Birmingham",
+        "trade_slug": "water-restoration",
+        "address": "Birmingham, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "SDH Building Services",
+        "phone": "01204 305 053",
+        "city": "Manchester",
+        "trade_slug": "hvac",
+        "address": "Greater Manchester, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Kool It Services",
+        "phone": "0161 877 4030",
+        "city": "Manchester",
+        "trade_slug": "hvac",
+        "address": "Manchester, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Mr. Leak",
+        "phone": "0330 058 6608",
+        "city": "Manchester",
+        "trade_slug": "water-restoration",
+        "address": "Greater Manchester, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "RM Building Maintenance Ltd",
+        "phone": "0161 464 3570",
+        "city": "Manchester",
+        "trade_slug": "water-restoration",
+        "address": "Bury, Greater Manchester, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "G2AC Ltd",
+        "phone": "0141 564 7100",
+        "city": "Glasgow",
+        "trade_slug": "hvac",
+        "address": "Glasgow, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "G2 Refrigeration & Air conditioning Ltd",
+        "phone": "0141 882 9899",
+        "city": "Glasgow",
+        "trade_slug": "hvac",
+        "address": "Hillington Estate, Glasgow, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Clean Team Scotland",
+        "phone": "0141 363 0349",
+        "city": "Glasgow",
+        "trade_slug": "water-restoration",
+        "address": "Glasgow, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Absolutely Clean Glasgow",
+        "phone": "0800 458 4901",
+        "city": "Glasgow",
+        "trade_slug": "water-restoration",
+        "address": "Glasgow, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Edinburgh Heating Ltd",
+        "phone": "0131 272 2730",
+        "city": "Edinburgh",
+        "trade_slug": "hvac",
+        "address": "Edinburgh, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "The Edinburgh Boiler Company Ltd",
+        "phone": "0131 510 8500",
+        "city": "Edinburgh",
+        "trade_slug": "hvac",
+        "address": "Edinburgh, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "The Water And Fire Damage Repair Company",
+        "phone": "0131 677 8482",
+        "city": "Edinburgh",
+        "trade_slug": "water-restoration",
+        "address": "Edinburgh, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Joiners In Edinburgh",
+        "phone": "0131 476 2122",
+        "city": "Edinburgh",
+        "trade_slug": "water-restoration",
+        "address": "Edinburgh, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "BPS Facilities Ltd",
+        "phone": "029 2048 4114",
+        "city": "Cardiff",
+        "trade_slug": "hvac",
+        "address": "Cardiff, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "APT-ICC",
+        "phone": "0800 0723 773",
+        "city": "Cardiff",
+        "trade_slug": "water-restoration",
+        "address": "Cardiff, South Wales, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "IC Assist",
+        "phone": "029 2166 0190",
+        "city": "Cardiff",
+        "trade_slug": "water-restoration",
+        "address": "Cardiff, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Aircon Sales and Service",
+        "phone": "028 9046 6222",
+        "city": "Belfast",
+        "trade_slug": "hvac",
+        "address": "Belfast, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "NI Leak Detection",
+        "phone": "028 9507 1126",
+        "city": "Belfast",
+        "trade_slug": "water-restoration",
+        "address": "Belfast, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "PCLA",
+        "phone": "028 9581 5318",
+        "city": "Belfast",
+        "trade_slug": "water-restoration",
+        "address": "Belfast, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Newcastle Air Conditioning",
+        "phone": "0191 743 1742",
+        "city": "Newcastle",
+        "trade_slug": "hvac",
+        "address": "Newcastle upon Tyne, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Ambient Preservation",
+        "phone": "0191 413 1518",
+        "city": "Newcastle",
+        "trade_slug": "water-restoration",
+        "address": "Newcastle upon Tyne, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Drain Doctor Newcastle",
+        "phone": "0191 448 7288",
+        "city": "Newcastle",
+        "trade_slug": "water-restoration",
+        "address": "Newcastle upon Tyne, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "HVAC Technical Solutions",
+        "phone": "0113 2640 115",
+        "city": "Leeds",
+        "trade_slug": "hvac",
+        "address": "Leeds, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Climaserve",
+        "phone": "0845 6521904",
+        "city": "Leeds",
+        "trade_slug": "hvac",
+        "address": "Leeds, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Dryfix Preservation Ltd",
+        "phone": "01904 791388",
+        "city": "Leeds",
+        "trade_slug": "water-restoration",
+        "address": "Leeds, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Mattair",
+        "phone": "01246 414922",
+        "city": "Sheffield",
+        "trade_slug": "hvac",
+        "address": "Sheffield, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Hanstock Air Conditioning",
+        "phone": "07976 925304",
+        "city": "Sheffield",
+        "trade_slug": "hvac",
+        "address": "Sheffield, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Northern Restorations",
+        "phone": "01484 651744",
+        "city": "Sheffield",
+        "trade_slug": "water-restoration",
+        "address": "Sheffield, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "W Allerton Ltd",
+        "phone": "0114 221 8306",
+        "city": "Sheffield",
+        "trade_slug": "water-restoration",
+        "address": "Sheffield, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Everkool",
+        "phone": "0151 207 4271",
+        "city": "Liverpool",
+        "trade_slug": "hvac",
+        "address": "Liverpool, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Airtech Cooling Services Ltd",
+        "phone": "0151 933 0023",
+        "city": "Liverpool",
+        "trade_slug": "hvac",
+        "address": "Liverpool, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Liverpool Restoration Services",
+        "phone": "0800 123 4567",
+        "city": "Liverpool",
+        "trade_slug": "water-restoration",
+        "address": "Liverpool, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "CoolStream AC",
+        "phone": "0117 963 3360",
+        "city": "Bristol",
+        "trade_slug": "hvac",
+        "address": "Bristol, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Controlled Climate LTD",
+        "phone": "0117 452 8511",
+        "city": "Bristol",
+        "trade_slug": "hvac",
+        "address": "Bristol, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "AquaMaster Bristol",
+        "phone": "0788 933 4443",
+        "city": "Bristol",
+        "trade_slug": "water-restoration",
+        "address": "Bristol, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Space Temperature Solutions Ltd",
+        "phone": "01224 316633",
+        "city": "Aberdeen",
+        "trade_slug": "hvac",
+        "address": "Aberdeen, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "NLB Climate Ltd",
+        "phone": "01224 542150",
+        "city": "Aberdeen",
+        "trade_slug": "hvac",
+        "address": "Aberdeen, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Rotwise",
+        "phone": "01224 968415",
+        "city": "Aberdeen",
+        "trade_slug": "water-restoration",
+        "address": "Aberdeen, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "B & H Services Air Conditioning Ltd",
+        "phone": "01202 532042",
+        "city": "Bournemouth",
+        "trade_slug": "hvac",
+        "address": "Bournemouth, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Cooling Energy Services Ltd",
+        "phone": "01202 937550",
+        "city": "Bournemouth",
+        "trade_slug": "hvac",
+        "address": "Bournemouth, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Bio Response",
+        "phone": "0333 202 6416",
+        "city": "Bournemouth",
+        "trade_slug": "water-restoration",
+        "address": "Bournemouth, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Wessex Leak Detection",
+        "phone": "01202 888 740",
+        "city": "Bournemouth",
+        "trade_slug": "water-restoration",
+        "address": "Bournemouth, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Climate Environmental",
+        "phone": "01252 851 114",
+        "city": "Slough",
+        "trade_slug": "hvac",
+        "address": "Slough, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "ASM Airconditioning Limited",
+        "phone": "01753 437314",
+        "city": "Slough",
+        "trade_slug": "hvac",
+        "address": "Slough, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Building Repair Specialists Ltd",
+        "phone": "0800 046 1421",
+        "city": "Slough",
+        "trade_slug": "water-restoration",
+        "address": "Slough, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Hamblin Watermains",
+        "phone": "0118 989 1500",
+        "city": "Slough",
+        "trade_slug": "water-restoration",
+        "address": "Slough, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "AACS Limited",
+        "phone": "0191 523 6441",
+        "city": "Sunderland",
+        "trade_slug": "hvac",
+        "address": "Sunderland, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Clima-Control",
+        "phone": "07515 413 020",
+        "city": "Sunderland",
+        "trade_slug": "hvac",
+        "address": "Sunderland, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Dryright Ltd",
+        "phone": "0800 334 5965",
+        "city": "Sunderland",
+        "trade_slug": "water-restoration",
+        "address": "Sunderland, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "1st Recycling Ltd",
+        "phone": "07856 875177",
+        "city": "Sunderland",
+        "trade_slug": "water-restoration",
+        "address": "Sunderland, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "2 Cool Ac Services LTD",
+        "phone": "01902 239396",
+        "city": "Wolverhampton",
+        "trade_slug": "hvac",
+        "address": "Wolverhampton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Kavanagh Air Conditioning Services",
+        "phone": "07837 483547",
+        "city": "Wolverhampton",
+        "trade_slug": "hvac",
+        "address": "Wolverhampton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Midlands Restoration",
+        "phone": "01902 701 410",
+        "city": "Wolverhampton",
+        "trade_slug": "water-restoration",
+        "address": "Wolverhampton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Response Bioclean Wolverhampton",
+        "phone": "0800 002 5959",
+        "city": "Wolverhampton",
+        "trade_slug": "water-restoration",
+        "address": "Wolverhampton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Envirocool HVAC",
+        "phone": "01204 896004",
+        "city": "Bolton",
+        "trade_slug": "hvac",
+        "address": "Bolton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Inergy Group",
+        "phone": "01204 929999",
+        "city": "Bolton",
+        "trade_slug": "hvac",
+        "address": "Bolton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Response & Restore Ltd",
+        "phone": "01204 417161",
+        "city": "Bolton",
+        "trade_slug": "water-restoration",
+        "address": "Bolton, UK",
+        "country_code": "GB"
+    },
+    {
+        "name": "Damp Resolve",
+        "phone": "01204 216464",
+        "city": "Bolton",
+        "trade_slug": "water-restoration",
+        "address": "Bolton, UK",
+        "country_code": "GB"
+    }
+]

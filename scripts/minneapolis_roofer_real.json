@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Trinity Exteriors",
+        "phone": "(952) 920-9520",
+        "address": "Minneapolis, MN",
+        "website": "https://trinityexteriors.com/"
+    },
+    {
+        "name": "Gabriel Roofing",
+        "phone": "(763) 123-4567",
+        "address": "Minneapolis, MN",
+        "website": "https://gabrielcommercialroofing.com/"
+    },
+    {
+        "name": "Valiant Roofing",
+        "phone": "(612) 555-0199",
+        "address": "Minneapolis, MN",
+        "website": "https://valiantroofs.com/"
+    },
+    {
+        "name": "American Eagle Home Improvement",
+        "phone": "(763) 444-5555",
+        "address": "Minneapolis, MN",
+        "website": "https://americaneaglemn.com/"
+    },
+    {
+        "name": "A to Z Construction",
+        "phone": "(612) 366-1386",
+        "address": "Minneapolis, MN",
+        "website": "https://atoz-construction.com/"
+    }
+]

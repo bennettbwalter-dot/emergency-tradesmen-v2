@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Zacher Electric",
+        "phone": "(716) 839-9000",
+        "address": "Cheektowaga, NY",
+        "website": "https://zacherelectric.com"
+    },
+    {
+        "name": "Scherer Electric",
+        "phone": "(716) 646-4357",
+        "address": "Cheektowaga, NY",
+        "website": "https://schererelectric.com"
+    },
+    {
+        "name": "M & M Electric Construction Company",
+        "phone": "(716) 236-8492",
+        "address": "Cheektowaga, NY",
+        "website": "https://mmelectricconst.com"
+    },
+    {
+        "name": "Roy's Plumbing, Heating, Cooling & Electrical",
+        "phone": "(716) 873-5000",
+        "address": "Cheektowaga, NY",
+        "website": "https://justcallroys.com"
+    }
+]

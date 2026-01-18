@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Asbury Electric",
+        "phone": "757-767-4197",
+        "address": "Suffolk, VA",
+        "website": "https://asburyelectric.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Suffolk, VA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Get Lit Electrical",
+        "phone": "757-997-7053",
+        "address": "Suffolk, VA",
+        "website": "https://getlitva.com"
+    },
+    {
+        "name": "Electrical Automation Co.",
+        "phone": "757-465-1117",
+        "address": "Suffolk, VA",
+        "website": "https://emergencyelectriciansnationwide.com"
+    }
+]

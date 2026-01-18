@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Richmond",
+        "phone": "804-207-4342",
+        "address": "Glen Allen, VA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Local Electric Company",
+        "phone": "804-564-6519",
+        "address": "Glen Allen, VA",
+        "website": "https://theemergencyelectriciannearme.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Glen Allen, VA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "C&D Electric Inc.",
+        "phone": "614-618-7245",
+        "address": "Glen Allen, VA",
+        "website": "https://cdjelectricinc.com"
+    }
+]

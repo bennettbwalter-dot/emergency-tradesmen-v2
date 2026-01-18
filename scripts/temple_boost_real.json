@@ -1,0 +1,154 @@
+[
+    {
+        "name": "Roto-Rooter Temple",
+        "phone": "254-742-2013",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Temple",
+        "phone": "254-284-8003",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "BSR Plumbing",
+        "phone": "254-452-5490",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Alvin's Plumbing",
+        "phone": "888-565-9676",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Mr. Rooter Plumbing Temple",
+        "phone": "254-655-3496",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "On-Call Plumbing",
+        "phone": "(254) 727-5858",
+        "address": "Temple, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "In Charge Electrical",
+        "phone": "(254) 239-8884",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Emergency Electrician Squad",
+        "phone": "(877) 409-8988",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Cox Electric",
+        "phone": "(512) 863-7036",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Lochridge Priest Home Services",
+        "phone": "(254) 304-8824",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Dr. Watts Electric",
+        "phone": "(254) 602-4153",
+        "address": "Temple, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Locksmith Temple",
+        "phone": "1-877-237-7058",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Pop-A-Lock of Temple",
+        "phone": "254-771-3377",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Donald Bulls Locksmith",
+        "phone": "254-778-3201",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Locksmith Temple TX",
+        "phone": "(888) 570-3496",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Texas Premier Locksmith",
+        "phone": "(254) 876-0086",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Minute Key Temple",
+        "phone": "254-217-4104",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Sure Lock & Key Temple",
+        "phone": "(855) 909-4011",
+        "address": "Temple, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

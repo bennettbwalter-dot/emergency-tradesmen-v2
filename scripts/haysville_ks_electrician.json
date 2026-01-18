@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tracy Electric Inc",
+        "phone": "(316) 522-8408",
+        "address": "Haysville, KS",
+        "website": "https://tracyelectricinc.com"
+    },
+    {
+        "name": "Graf Electric Haysville",
+        "phone": "(316) 686-2090",
+        "address": "Haysville, KS",
+        "website": "https://grafelectric.com"
+    },
+    {
+        "name": "GeorgeTech Electric Haysville",
+        "phone": "(877) 748-7084",
+        "address": "Haysville, KS",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "Double B Electric Haysville",
+        "phone": "(501) 676-6200",
+        "address": "Haysville, KS",
+        "website": "https://electriciansquad.com"
+    }
+]

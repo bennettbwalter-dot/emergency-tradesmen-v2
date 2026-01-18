@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Omaha Emergency Neighborhood Plumbers",
+        "phone": "402-256-6236",
+        "address": "2411 S 156th Cir #46E, Omaha, NE 68130",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 54
+    },
+    {
+        "name": "PlumbRite",
+        "phone": "402-623-6802",
+        "address": "4403 Florence Blvd, Omaha, NE 68110",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Plumbing Today HVAC",
+        "phone": "402-810-8584",
+        "address": "3150 Spaulding St, Omaha, NE 68111",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 336
+    },
+    {
+        "name": "Southside Plumbing",
+        "phone": "402-816-2369",
+        "address": "2230 S 27th St, Omaha, NE 68105",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 294
+    },
+    {
+        "name": "402 Plumbing Services",
+        "phone": "402-915-1071",
+        "address": "6617 Irvington Rd, Omaha, NE 68122",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 120
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Omaha",
+        "phone": "402-333-5000",
+        "address": "14302 C Cir, Omaha, NE 68144",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 467
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Cleanup",
+        "phone": "402-972-4397",
+        "address": "5708 S 118th Cir, Omaha, NE 68137",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 3400
+    },
+    {
+        "name": "Mr. Electric of Omaha",
+        "phone": "402-503-0410",
+        "address": "14301 FNB Pkwy #100, Omaha, NE 68154",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 172
+    },
+    {
+        "name": "JS Russell Electric | Omaha Electrician",
+        "phone": "402-339-3351",
+        "address": "11440 S 153rd St, Omaha, NE 68138",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 142
+    },
+    {
+        "name": "Trans-I-Electric",
+        "phone": "402-612-4521",
+        "address": "13748 Giles Rd, Omaha, NE 68138",
+        "trade": "electrician",
+        "rating": 4.5,
+        "review_count": 39
+    },
+    {
+        "name": "Mister Sparky of Omaha",
+        "phone": "402-780-3734",
+        "address": "14301 FNB Pkwy #100, Omaha, NE 68154",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Sentry Electric, Inc.",
+        "phone": "402-467-5550",
+        "address": "4627 S 90th St, Omaha, NE 68127",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 178
+    },
+    {
+        "name": "Miller Electric",
+        "phone": "402-339-1007",
+        "address": "8801 Lake S St, Omaha, NE 68134",
+        "trade": "electrician",
+        "rating": 4.2,
+        "review_count": 184
+    },
+    {
+        "name": "Brase Electrical Contracting Corp",
+        "phone": "402-331-0400",
+        "address": "8740 F St, Omaha, NE 68127",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 49
+    },
+    {
+        "name": "Superior Locks & Car Keys",
+        "phone": "402-234-8788",
+        "address": "1365 S 22nd St Suite 1, Omaha, NE 68108",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 3700
+    },
+    {
+        "name": "Carl Jarl Locksmiths",
+        "phone": "402-393-7800",
+        "address": "3708 S 132nd St, Omaha, NE 68144",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 977
+    },
+    {
+        "name": "Locksmith near me of omaha",
+        "phone": "402-577-0450",
+        "address": "101 N 69th St, Omaha, NE 68132",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 107
+    },
+    {
+        "name": "Big Red Locksmiths",
+        "phone": "402-554-0499",
+        "address": "7611 Main St, Ralston, NE 68127",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 262
+    },
+    {
+        "name": "402 Lockout, LLC",
+        "phone": "402-562-5688",
+        "address": "7545 Pacific St, Omaha, NE 68114",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 772
+    },
+    {
+        "name": "Keymasters of Greater Omaha",
+        "phone": "402-917-7634",
+        "address": "1205 S 13th St suite 900, Omaha, NE 68108",
+        "trade": "locksmith",
+        "rating": 4.2,
+        "review_count": 149
+    }
+]

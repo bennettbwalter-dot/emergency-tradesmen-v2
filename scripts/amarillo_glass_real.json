@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Glass Doctor of Amarillo",
+        "phone": "(806) 358-7684",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Binswanger Glass Amarillo",
+        "phone": "(806) 372-5511",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Clayton's Glass",
+        "phone": "(806) 376-9273",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Clayton's Auto Glass",
+        "phone": "806-373-2000",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Rayz Glass & Tint",
+        "phone": "806-331-2057",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Dale's Texas Auto Glass",
+        "phone": "(806) 678-4721",
+        "address": "Amarillo, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    }
+]

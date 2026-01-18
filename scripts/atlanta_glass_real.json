@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Reco Atlanta Glass",
+        "phone": "(678) 437-6045",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Quick Glass LLC",
+        "phone": "(770) 455-1515",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "A&E Glass Repair",
+        "phone": "404-839-3674",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "A Modern Glass & Mirror Co.",
+        "phone": "(404) 577-4551",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Lonestar Glass",
+        "phone": "+1 (770) 940-0234",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Empire Auto Glass",
+        "phone": "(770) 727-0997",
+        "address": "Atlanta, GA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

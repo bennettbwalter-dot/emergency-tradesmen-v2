@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Jerry Hilbert LLC",
+        "phone": "(304) 343-9150",
+        "address": "Charleston, WV",
+        "website": "https://jerryhilbertllc.com"
+    },
+    {
+        "name": "Accelerated Electric LLC",
+        "phone": "(304) 356-7944",
+        "address": "Charleston, WV",
+        "website": null
+    },
+    {
+        "name": "LEO Electric LLC",
+        "phone": "(304) 939-5002",
+        "address": "Charleston, WV",
+        "website": null
+    },
+    {
+        "name": "South Charleston Electric Company",
+        "phone": "(304) 744-3407",
+        "address": "Charleston, WV",
+        "website": "https://southcharlestonelectric.com"
+    }
+]

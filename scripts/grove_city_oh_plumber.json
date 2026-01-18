@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Logan Services",
+        "phone": "614-224-3200",
+        "address": "Grove City, OH",
+        "website": "https://logan-inc.com"
+    },
+    {
+        "name": "Grove City Plumbing & Drain",
+        "phone": "614-362-3345",
+        "address": "Grove City, OH",
+        "website": "https://grovecityplumbingdrain.com"
+    },
+    {
+        "name": "1 Utility Of Ohio",
+        "phone": "614-569-0083",
+        "address": "Grove City, OH",
+        "website": "https://1utilityofohio.com"
+    },
+    {
+        "name": "DrainMaster",
+        "phone": "614-276-1510",
+        "address": "Grove City, OH",
+        "website": "https://drainmasterohio.com"
+    }
+]

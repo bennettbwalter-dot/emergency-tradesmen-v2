@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Danny's Electrical Service Salem",
+        "phone": "(540) 391-0225",
+        "address": "Salem, VA",
+        "website": "https://dannyselectrical.com"
+    },
+    {
+        "name": "Tech Connect Electric Salem",
+        "phone": "(540) 200-8678",
+        "address": "Salem, VA",
+        "website": "https://techconnectelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric Salem",
+        "phone": "(888) 851-5284",
+        "address": "Salem, VA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Wisler Electric Salem",
+        "phone": "(540) 685-0366",
+        "address": "Salem, VA",
+        "website": "https://callwisler.com"
+    }
+]

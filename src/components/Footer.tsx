@@ -3,11 +3,24 @@ import { trades, cities } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
-export function Footer() {
-  const { settings } = useLocalization();
-  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+export interface FooterProps {
+  countryCode?: string;
+}
+
+export function Footer({ countryCode }: FooterProps) {
+  const { settings: globalSettings } = useLocalization();
+
+  // STRICT OVERRIDE: If countryCode is passed, we construct a local settings object to force the view
+  const activeCountry = countryCode || globalSettings.countryCode;
+
+  // We can mock the settings object if we don't want to import the strict type, 
+  // or just use countryCode directly for logic.
+  const isUS = activeCountry === 'US';
+
+  const countryPrefix = isUS ? '/us' : '';
   const usCities = ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco", "San Antonio"];
-  const displayCities = settings.countryCode === 'US' ? usCities : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield"];
+  const displayCities = isUS ? usCities : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield"];
+  const tradeTerm = isUS ? "Contractor" : "Tradesperson";
 
   return (
     <footer className="bg-primary border-t border-border/50 pt-16 pb-12 mt-16 text-white">
@@ -24,7 +37,7 @@ export function Footer() {
               </Link>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Connecting you with trusted local {settings.tradeTerm.toLowerCase()} for emergency repairs, 24 hours a day, 7 days a week.
+              Connecting you with trusted local {tradeTerm.toLowerCase()} for emergency repairs, 24 hours a day, 7 days a week.
             </p>
             <Newsletter />
           </div>
@@ -33,9 +46,9 @@ export function Footer() {
             <h4 className="font-display text-lg tracking-wide text-white mb-6">Our Services</h4>
             <ul className="space-y-3">
               {trades.slice(0, 6).map((trade, idx) => {
-                const landingCities = settings.countryCode === 'US' ? ["los-angeles", "new-york", "dallas", "miami", "phoenix", "seattle", "detroit"] : ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff"];
+                const landingCities = isUS ? ["los-angeles", "new-york", "dallas", "miami", "phoenix", "seattle", "detroit"] : ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff"];
                 const city = landingCities[idx % landingCities.length];
-                const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
+                const tradeName = isUS ? (trade as any).usName : trade.name;
                 return (
                   <li key={trade.slug}>
                     <Link
@@ -66,7 +79,7 @@ export function Footer() {
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
               <Link to={`${countryPrefix}/`} className="text-gold hover:text-white text-sm font-medium transition-colors flex items-center gap-2">
-                {settings.tradeTerm} Near Me &rarr;
+                {tradeTerm} Near Me &rarr;
               </Link>
               <Link to={`${countryPrefix}/locations`} className="text-white/40 hover:text-gold text-xs transition-colors flex items-center gap-2">
                 View All Areas
@@ -83,7 +96,7 @@ export function Footer() {
                 <li><Link to={`${countryPrefix}/contact`} className="text-white/60 hover:text-gold text-sm transition-colors">Contact Support</Link></li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-4">
-                {settings.countryCode === 'US' ? (
+                {isUS ? (
                   <>
                     <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">TSBPE Licensed</span>
                     <span className="text-[9px] font-bold px-2 py-1 bg-white/5 rounded border border-white/10 uppercase tracking-tighter">TDLR Certified</span>

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Clarity Glass Service",
+        "phone": "(336) 757-1738",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Binswanger Glass of Greensboro",
+        "phone": "(336) 273-8100",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Taylor Auto Glass",
+        "phone": "(336) 851-1380",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "McCain Auto Glass",
+        "phone": "336-272-4057",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Pfaff's Auto Glass Inc.",
+        "phone": "336-784-5277",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Arrow Auto Glass",
+        "phone": "336-283-3021",
+        "address": "Greensboro, NC",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

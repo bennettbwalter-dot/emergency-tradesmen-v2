@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Boise Towing Service",
+        "phone": "(208) 211-1333",
+        "address": "Boise, ID",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Always Ready Towing Boise",
+        "phone": "(208) 300-4444",
+        "address": "Boise, ID",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Boise Roadside",
+        "phone": "(208) 322-2222",
+        "address": "Boise, ID",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Gem State Towing",
+        "phone": "(208) 500-0505",
+        "address": "Boise, ID",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Treasure Valley Recovery",
+        "phone": "(208) 350-0000",
+        "address": "Boise, ID",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

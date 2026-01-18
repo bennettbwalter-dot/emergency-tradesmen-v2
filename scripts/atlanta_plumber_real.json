@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Plumb Works Inc.",
+        "phone": "(404) 524-1825",
+        "address": "Atlanta, GA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Reliable Heating & Air",
+        "phone": "(770) 594-9969",
+        "address": "Atlanta, GA",
+        "rating": 4.8,
+        "review_count": 20000
+    },
+    {
+        "name": "E Dennis",
+        "phone": "(770) 758-0501",
+        "address": "Atlanta, GA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Emergency Plumbers, LLC",
+        "phone": "(404) 882-2499",
+        "address": "Atlanta, GA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Atlanta",
+        "phone": "(404) 537-1234",
+        "address": "Atlanta, GA",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

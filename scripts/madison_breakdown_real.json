@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Liberty Towing Service",
+        "phone": "(608) 221-3600",
+        "address": "Madison, WI",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Precision Towing",
+        "phone": "(608) 230-5054",
+        "address": "Madison, WI",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Schmidt's Auto Inc",
+        "phone": "(608) 257-0505",
+        "address": "Madison, WI",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Prairie Land Towing",
+        "phone": "(877) 4-TOW-NOW",
+        "address": "Madison, WI",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Madison 24 Hour Towing",
+        "phone": "(844) 372-3385",
+        "address": "Madison, WI",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

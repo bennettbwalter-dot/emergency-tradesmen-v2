@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Dolce Electric Co",
+        "address": "Mesa, AZ",
+        "phone": "480-244-9351",
+        "trade": "electrician",
+        "city": "Mesa"
+    },
+    {
+        "name": "Efficient Roofing",
+        "address": "Mesa, AZ",
+        "phone": "480-442-8812",
+        "trade": "roofer",
+        "city": "Mesa"
+    }
+]

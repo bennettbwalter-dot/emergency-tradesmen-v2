@@ -10,6 +10,7 @@ const VoiceTrigger = () => {
     // UI State (for rendering)
     const [status, setStatusState] = useState('Silent');
     const [isActive, setIsActiveState] = useState(false);
+    const [transcript, setTranscript] = useState(''); // NEW: Live Transcript
 
     // Refs (for logic/event handlers to avoid stale closures)
     const statusRef = useRef('Silent');
@@ -45,68 +46,103 @@ const VoiceTrigger = () => {
         // For now, Ref is enough for the logic to work.
     };
 
+    const [volume, setVolume] = useState(0);
+    const volumeInterval = useRef<any>(null);
+
     useEffect(() => {
+        // CLEANUP
         return () => {
+            if (volumeInterval.current) clearInterval(volumeInterval.current);
             stopSession();
         };
     }, []);
 
+    const monitorVolume = (stream: MediaStream) => {
+        try {
+            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+            const audioContext = new AudioContextClass();
+            const source = audioContext.createMediaStreamSource(stream);
+            const analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            source.connect(analyser);
+
+            volumeInterval.current = setInterval(() => {
+                if (!isActiveRef.current) {
+                    clearInterval(volumeInterval.current);
+                    audioContext.close();
+                    return;
+                }
+                analyser.getByteFrequencyData(dataArray);
+                let sum = 0;
+                for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
+                const average = sum / bufferLength;
+                setVolume(average);
+            }, 100);
+        } catch (e) {
+            console.error("Volume monitoring failed", e);
+        }
+    };
+
     const startSession = async () => {
         try {
+            console.log("[Voice] starting session...");
+
+            // NOTE: We do NOT call getUserMedia here anymore.
+            // The Azure SDK needs exclusive microphone access via fromDefaultMicrophoneInput().
+            // Calling getUserMedia() simultaneously can cause the SDK to receive an empty stream.
+
             voiceService.unlockAudioContext();
-
-            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("Voice not supported in this browser.");
-                return;
-            }
-
-            recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.continuous = true;
-            recognitionRef.current.interimResults = true;
-            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
-            recognitionRef.current.lang = countryCode === 'US' ? 'en-US' : 'en-GB';
-
-            recognitionRef.current.onstart = () => setStatus('Listening');
-
-            // CRITICAL FIX: Use Refs to access current state inside closure
-            recognitionRef.current.onend = () => {
-                if (isActiveRef.current && statusRef.current === 'Listening') {
-                    console.log('[Voice] onend: Auto-restarting (Status is Listening)');
-                    try { recognitionRef.current?.start(); } catch (e) { }
-                }
-            };
-
-            recognitionRef.current.onresult = handleSpeechResult;
-
             setIsActive(true);
 
-            // 3. Greeting First, Then Listen
-            await speakResponse("Hello Emergency Tradesmen here how can I help?");
+            // Reset Logic State for NEW Session
+            updateChatState({
+                step: 'INITIAL',
+                detectedTrade: null,
+                detectedCity: null,
+                history: []
+            });
 
-            // 4. Start Listening (Sequential)
-            if (isActiveRef.current && recognitionRef.current) {
-                try {
-                    // console.log("Starting mic after greeting...");
-                    recognitionRef.current.start();
-                    setStatus('Listening');
-                } catch (e) {
-                    console.warn("Recog start failed (already running?)", e);
-                }
-            }
+            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+            const locale = countryCode === 'US' ? 'en-US' : 'en-GB';
+
+            // 1. Start Azure Recognition (Continuous) - NO stream argument, SDK uses its own mic
+            console.log("[Voice] Initializing Azure STT...");
+            await voiceService.startRecognition(
+                (text, isFinal) => {
+                    if (!isActiveRef.current) return;
+                    setTranscript(text);
+
+                    if (isFinal && text.trim().length > 0) {
+                        processInput(text);
+                    } else if (text.trim().length > 2 && statusRef.current === 'Speaking') {
+                        console.log("[Voice] Barge-in! Stopping TTS.");
+                        voiceService.stop();
+                    }
+                },
+                (err) => {
+                    console.error("[Voice] STT Error:", err);
+                    setStatus(`Error: ${err}`);
+                },
+                locale
+            );
+
+            setStatus('Listening');
+            await speakResponse("Hello Emergency Tradesmen here how can I help?", countryCode);
 
         } catch (e) {
             console.error("Voice Init Failed:", e);
-            setStatus('Error');
+            setStatus(`Setup Error: ${String(e)}`);
         }
     };
 
     const stopSession = () => {
+        console.log("[Voice] Stopping session.");
         setIsActive(false);
         setStatus('Silent');
+        setTranscript('');
 
-        // Reset Logic State on Stop? Or keep it?
-        // Usually better to reset for next session
         updateChatState({
             step: 'INITIAL',
             detectedTrade: null,
@@ -114,85 +150,94 @@ const VoiceTrigger = () => {
             history: []
         });
 
-        if (recognitionRef.current) {
-            recognitionRef.current.onend = null;
-            recognitionRef.current.stop();
-            recognitionRef.current = null;
-        }
+        voiceService.stopRecognition();
         voiceService.stop();
     };
 
-    const handleSpeechResult = (event: any) => {
-        // STRICT TURN-TAKING: Ignore inputs while speaking/processing
-        if (statusRef.current === 'Speaking' || statusRef.current === 'Processing') return;
-
-        let interim = "";
-        let final = "";
-
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                final += event.results[i][0].transcript;
-            } else {
-                interim += event.results[i][0].transcript;
-            }
-        }
-
-        if (silenceTimer.current) clearTimeout(silenceTimer.current);
-
-        if (final || interim.length > 0) {
-            silenceTimer.current = setTimeout(() => {
-                const text = (final + " " + interim).trim();
-                if (text.length > 1) {
-                    processInput(text);
-                }
-            }, 400); // 400ms: Much snappier response (was 800ms)
-        }
-    };
+    const isProcessingRef = useRef(false);
 
     const processInput = async (text: string) => {
-        setStatus('Processing');
+        if (isProcessingRef.current) {
+            console.log("[Voice] Already processing, ignoring input:", text);
+            return;
+        }
 
-        // STRICT TURN-TAKING: Stop mic immediately
-        if (recognitionRef.current) recognitionRef.current.stop();
+        try {
+            isProcessingRef.current = true;
+            setStatus('Processing');
+            const currentTranscript = text; // Keep for logging
+            setTranscript('');
 
-        // Detect country code from URL path
-        const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
 
-        const { newState, response } = await processUserMessage(text, chatStateRef.current, countryCode);
-        updateChatState(newState);
+            console.log(`[Voice] Processing input: "${currentTranscript}"`);
 
-        await speakResponse(response.content, countryCode);
+            // LOGIC SAFETY: Race against 10s timeout (increased for reliability)
+            const logicPromise = processUserMessage(currentTranscript, chatStateRef.current, countryCode);
+            const timeoutPromise = new Promise<{ newState: ChatState, response: any }>((_, reject) =>
+                setTimeout(() => reject(new Error("Logic Timeout")), 10000)
+            );
 
-        if (response.action === 'navigate' && response.target) {
-            navigate(response.target);
-            stopSession();
-        } else {
-            if (isActiveRef.current) {
-                // MOBILE FIX: 400ms buffer allows safe context switch
-                setTimeout(() => {
-                    if (!isActiveRef.current) return;
-                    try {
-                        recognitionRef.current?.start();
-                        setStatus('Listening');
-                    } catch (e) {
-                        console.warn("Restart failed, trying forced re-init implied by onend?");
-                        setStatus('Listening');
-                    }
-                }, 400);
+            const { newState, response } = await Promise.race([logicPromise, timeoutPromise]);
+            updateChatState(newState);
+
+            console.log("[Voice] Response from logic:", response.content);
+
+            // Barge-in check: If user started talking AGAIN during processing, maybe we should skip speaking?
+            // For now, let's just speak the response.
+
+            await speakResponse(response.content, countryCode);
+
+            if (response.action === 'navigate' && response.target) {
+                console.log("[Voice] Navigating to:", response.target);
+                navigate(response.target);
+                stopSession();
+            } else {
+                if (isActiveRef.current) {
+                    setStatus('Listening');
+                }
             }
+        } catch (error) {
+            console.error("[Voice] processInput failure", error);
+            setStatus(`Error: ${String(error)}`);
+
+            await speakResponse("I'm sorry, I encountered a technical issue. Please try again.", window.location.pathname.startsWith('/us') ? 'US' : 'GB');
+
+            setTimeout(() => {
+                if (isActiveRef.current) {
+                    setStatus('Listening');
+                }
+            }, 3000);
+        } finally {
+            isProcessingRef.current = false;
         }
     };
 
     const speakResponse = async (text: string, countryCode: string = 'GB') => {
+        if (!isActiveRef.current) return;
+
+        const originalStatus = statusRef.current;
         setStatus('Speaking');
 
         const cleanText = text.replace(/[*#]/g, '');
-        // const ssmlText = cleanText.replace(/(\.|\?|!)\s/g, '$1 <break time="400ms"/> ');
         const ssmlText = cleanText;
 
-        // CRITICAL UPDATE: This now awaits the ACTUAL 'onended' event from AudioContext
-        // We do NOT use manual timeouts anymore. The service resolves ONLY when audio stops.
-        await voiceService.speak(ssmlText, countryCode);
+        console.log("[Voice] Assistant Speaking:", cleanText);
+
+        // We don't MUTE recognition here anymore, to allow Barge-in.
+        // Instead, we just race against a timeout and a 'stop' signal.
+        const speechPromise = voiceService.speak(ssmlText, countryCode);
+        const timeoutPromise = new Promise<void>(resolve => setTimeout(resolve, 15000));
+
+        try {
+            await Promise.race([speechPromise, timeoutPromise]);
+        } catch (e) {
+            console.error("[Voice] Speech synthesis/playback failed:", e);
+        } finally {
+            if (isActiveRef.current && statusRef.current === 'Speaking') {
+                setStatus('Listening');
+            }
+        }
     };
 
     const toggleVoice = () => {
@@ -207,9 +252,36 @@ const VoiceTrigger = () => {
                     text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border shadow-2xl animate-in fade-in zoom-in duration-300
                     ${status === 'Listening' ? 'bg-green-500/80 text-white border-green-400' :
                         status === 'Speaking' ? 'bg-[#00A3FF]/80 text-white border-[#00A3FF]/40' :
-                            'bg-black/80 text-white border-white/20'}
+                            status.includes('Error') || status.includes('Azure') || status.includes('Denied') ? 'bg-red-500/90 text-white border-red-500 animate-pulse' :
+                                'bg-black/80 text-white border-white/20'}
                 `}>
                     {status}
+                </div>
+            )}
+
+            {/* LIVE TRANSCRIPT FEEDBACK */}
+            {isActive && (status === 'Listening' || status === 'Speaking' || status === 'Processing') && (
+                <div className={`
+                    absolute bottom-24 whitespace-nowrap bg-black/90 text-white text-[13px] px-4 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-500 border border-white/10
+                    ${isActive ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}
+                `}>
+                    <div className="flex items-center gap-2">
+                        {status === 'Processing' ? (
+                            <Loader2 className="w-3 h-3 animate-spin text-blue-400" />
+                        ) : (
+                            <div className={`w-2 h-2 rounded-full ${status === 'Listening' ? 'bg-green-400 animate-pulse' : 'bg-blue-400'}`} />
+                        )}
+                        <span className="font-medium">
+                            {transcript ? (
+                                transcript.startsWith('(') ? (
+                                    <span className="opacity-50 italic">{transcript}</span>
+                                ) : `"${transcript}"`
+                            ) :
+                                status === 'Listening' ? 'I\'m listening... speak now' :
+                                    status === 'Processing' ? 'Thinking...' :
+                                        'Starting up...'}
+                        </span>
+                    </div>
                 </div>
             )}
 
@@ -225,6 +297,17 @@ const VoiceTrigger = () => {
                     after:absolute after:inset-[6px] after:rounded-full after:bg-white after:shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]
                 `}
             >
+                {/* Dynamic Volume Visualizer Ring */}
+                {isActive && (
+                    <div
+                        className="absolute inset-0 rounded-full bg-blue-400/20 transition-transform duration-75"
+                        style={{
+                            transform: `scale(${1 + (volume / 255) * 0.8})`,
+                            opacity: 0.1 + (volume / 255) * 0.4
+                        }}
+                    />
+                )}
+
                 {/* Metallic Accent Grooves */}
                 <div className="absolute inset-0 rounded-full border-[1.5px] border-[#64748B]/10 pointer-events-none" />
                 <div className="absolute top-1/2 -left-1 w-2 h-4 -translate-y-1/2 bg-black/10 rounded-full blur-[1px] pointer-events-none opacity-40" />
@@ -240,12 +323,16 @@ const VoiceTrigger = () => {
                     )}
                 </div>
 
-                {/* Status Glow */}
-                {status === 'Listening' && (
-                    <div className="absolute inset-0 rounded-full animate-pulse bg-green-400/10 pointer-events-none" />
+                {/* Pulsing rings for Listening state */}
+                {isActive && status === 'Listening' && (
+                    <>
+                        <div className="absolute inset-0 rounded-full border-2 border-green-400/40 animate-[ping_2s_infinite]" />
+                        <div className="absolute inset-2 rounded-full border border-green-400/20 animate-[ping_3s_infinite]" />
+                        <div className="absolute inset-0 rounded-full bg-green-400/5 animate-pulse" />
+                    </>
                 )}
             </button>
-        </div>
+        </div >
     );
 };
 

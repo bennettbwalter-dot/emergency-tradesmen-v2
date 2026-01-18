@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Emergency Glass OKC",
+    "phone": "405-666-0088",
+    "address": "Oklahoma City, OK",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 210
+  },
+  {
+    "name": "Glass Doctor of Oklahoma City",
+    "phone": "(405) 445-7051",
+    "address": "Oklahoma City, OK",
+    "trade": "glazier",
+    "rating": 4.9,
+    "review_count": 350
+  },
+  {
+    "name": "Caliber Auto Glass",
+    "phone": "(888) 461-0010",
+    "address": "Oklahoma City, OK",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 180
+  }
+]

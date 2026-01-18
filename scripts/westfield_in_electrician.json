@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky",
+        "phone": "888-826-0091",
+        "address": "Westfield, IN",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Westfield Electrician Squad",
+        "phone": "855-930-6015",
+        "address": "Westfield, IN",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Westfield, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Williams Comfort Air",
+        "phone": "317-660-6992",
+        "address": "Westfield, IN",
+        "website": "https://williamscomfortair.com"
+    }
+]

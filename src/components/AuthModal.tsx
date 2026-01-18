@@ -4,6 +4,8 @@ import {
     Dialog,
     DialogContent,
     DialogTrigger,
+    DialogTitle,
+    DialogDescription,
 } from "@/components/ui/dialog";
 import { AuthForm } from "@/components/AuthForm";
 
@@ -46,16 +48,16 @@ export function AuthModal({ defaultTab = "login", trigger, onSuccess }: AuthModa
 
                     {/* Text Content */}
                     <div className="relative z-10 p-6 flex flex-col justify-center h-full max-w-[65%]">
-                        <h2 className="text-xl font-display font-bold mb-2 text-white leading-tight">
+                        <DialogTitle className="text-xl font-display font-bold mb-2 text-white leading-tight">
                             {mode === "login" ? "Welcome Back" : "Join Emergency Tradesmen"}
-                        </h2>
-                        <p className="text-sm text-gray-300">
+                        </DialogTitle>
+                        <DialogDescription className="text-sm text-gray-300">
                             {mode === "login" ? (
                                 "Enter your credentials to access your account"
                             ) : (
                                 <>Create a <span className="text-gold font-bold">FREE</span> account to continue browsing and connect with trusted professionals.</>
                             )}
-                        </p>
+                        </DialogDescription>
                     </div>
                 </div>
 

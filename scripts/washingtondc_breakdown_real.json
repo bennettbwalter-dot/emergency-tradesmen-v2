@@ -1,0 +1,37 @@
+[
+    {
+        "name": "District Towing",
+        "phone": "(202) 488-3400",
+        "address": "Washington, D.C.",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Scott's Towing",
+        "phone": "(202) 497-6311",
+        "address": "Washington, D.C.",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Recovery 1 Towing",
+        "phone": "(202) 868-8000",
+        "address": "Washington, D.C.",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "D.C. Towing Service",
+        "phone": "(202) 851-3000",
+        "address": "Washington, D.C.",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Metro City Towing",
+        "phone": "(202) 544-4800",
+        "address": "Washington, D.C.",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

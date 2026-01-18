@@ -1,0 +1,26 @@
+[
+    {
+        "name": "A Good Electrician",
+        "phone": "571-239-2992",
+        "address": "Springfield, VA",
+        "website": "https://agoodelectricianllc.com"
+    },
+    {
+        "name": "Kolb Electric",
+        "phone": "877-287-1179",
+        "address": "Springfield, VA",
+        "website": "https://kolbelectric.com"
+    },
+    {
+        "name": "Hawkins Electric",
+        "phone": "877-927-0900",
+        "address": "Springfield, VA",
+        "website": "https://hawkinselectric.com"
+    },
+    {
+        "name": "S & S Electric, LLC",
+        "phone": "888-922-9473",
+        "address": "Springfield, VA",
+        "website": "https://sandselectricllc.com"
+    }
+]

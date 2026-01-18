@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Curtis Glass & Mirror San Marcos",
+        "phone": "(512) 353-0982",
+        "address": "San Marcos, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Patriot Windshield Repair San Marcos",
+        "phone": "(210) 778-6422",
+        "address": "San Marcos, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Castle Auto Glass San Marcos",
+        "phone": "(512) 855-2470",
+        "address": "San Marcos, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "AutoGlassOnly San Marcos",
+        "phone": "1-866-410-5628",
+        "address": "San Marcos, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

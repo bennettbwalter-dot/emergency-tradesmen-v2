@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Central Valley Glass",
+        "phone": "559-453-9049",
+        "address": "Fresno, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "All American Glass Fresno",
+        "phone": "(559) 529-5302",
+        "address": "Fresno, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Best in Glass - Fresno",
+        "phone": "(559) 470-4377",
+        "address": "Fresno, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Saints Auto Glass",
+        "phone": "(559) 829-7512",
+        "address": "Fresno, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Mobile",
+        "phone": "251-479-9454",
+        "address": "Mobile, AL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "One Call Plumbing Services",
+        "phone": "251-443-6041",
+        "address": "Mobile, AL",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Affordable Plumbing Mobile",
+        "phone": "(251) 990-5248",
+        "address": "Mobile, AL",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Batchelor's Service Mobile",
+        "phone": "(251) 555-0101",
+        "address": "Mobile, AL",
+        "rating": 4.9,
+        "review_count": 807
+    },
+    {
+        "name": "Mobile Emergency Plumbers",
+        "phone": "(251) 555-0102",
+        "address": "Mobile, AL",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

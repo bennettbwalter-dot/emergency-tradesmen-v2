@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Plumbers Near Me, LLC.",
+        "phone": "602-641-8882",
+        "address": "Scottsdale, AZ",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Platinum Services Plumbing",
+        "phone": "480-246-9330",
+        "address": "Scottsdale, AZ",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Cactus Plumbing And Air",
+        "phone": "480-418-9912",
+        "address": "Scottsdale, AZ",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Zest Plumbing & Drain Scottsdale",
+        "phone": "480-630-7725",
+        "address": "Scottsdale, AZ",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Rooter Hero Scottsdale",
+        "phone": "623-257-7722",
+        "address": "Scottsdale, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

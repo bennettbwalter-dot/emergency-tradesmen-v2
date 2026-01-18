@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "De Pere, WI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "IdealAir Heating & Cooling",
+        "phone": "(920) 335-8868",
+        "address": "De Pere, WI",
+        "website": "https://idealair.com"
+    },
+    {
+        "name": "Edge Electric",
+        "phone": "(800) 364-3343",
+        "address": "De Pere, WI",
+        "website": "https://edgeelectricwi.com"
+    },
+    {
+        "name": "Patriot Electrical Solutions",
+        "phone": "(920) 228-0877",
+        "address": "De Pere, WI",
+        "website": "https://patriotelectricalsolutions.com"
+    }
+]

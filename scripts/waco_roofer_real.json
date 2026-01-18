@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Priority Roofing",
+        "phone": "(254) 299-5398",
+        "address": "4949 Franklin Ave Suite A, Waco, TX 76710",
+        "website": "https://priorityroofs.com/"
+    },
+    {
+        "name": "Clark Roofing",
+        "phone": "(254) 255-1518",
+        "address": "Waco, TX 76712",
+        "website": "https://clarkroofingtx.com/"
+    },
+    {
+        "name": "Rhino Roofing",
+        "phone": "(844) 387-4466",
+        "address": "Waco, TX",
+        "website": "https://rhinoroofingtx.com/"
+    },
+    {
+        "name": "R & R Roofing",
+        "phone": "(254) 394-2061",
+        "address": "Waco, TX",
+        "website": "https://randrroofingtx.com/"
+    },
+    {
+        "name": "The People's Roofing Group",
+        "phone": "(254) 394-2061",
+        "address": "Waco, TX",
+        "website": "https://thepeoplesroofinggroup.com/"
+    }
+]

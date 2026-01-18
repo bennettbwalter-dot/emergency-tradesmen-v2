@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Air Repair Pros",
+        "phone": "(972) 301-2694",
+        "address": "Denton, TX",
+        "rating": 5.0,
+        "review_count": 1200
+    },
+    {
+        "name": "Cote's Heating and Air Conditioning",
+        "phone": "(940) 458-4980",
+        "address": "Denton, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Berkeys",
+        "phone": "(972) 464-2460",
+        "address": "Denton, TX",
+        "rating": 4.8,
+        "review_count": 3500
+    },
+    {
+        "name": "Aire Serv of Dallas",
+        "phone": "(972) 992-5648",
+        "address": "Denton, TX",
+        "rating": 4.9,
+        "review_count": 451
+    },
+    {
+        "name": "On The Spot Air Conditioning & Heating",
+        "phone": "(972) 332-0632",
+        "address": "Denton, TX",
+        "rating": 4.7,
+        "review_count": 320
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Plumbing Tree",
+        "phone": "(619) 815-8704",
+        "address": "San Diego, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Rooter Hero Plumbing & Air",
+        "phone": "(619) 612-0432",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Bill Howe Plumbing",
+        "phone": "1-800-245-5469",
+        "address": "San Diego, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "EZ Plumbing USA",
+        "phone": "(619) 689-8708",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "San Diego Emergency Plumbing",
+        "phone": "(877) 206-3974",
+        "address": "San Diego, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Pro-Tow 24 Hr Towing",
+        "phone": "(509) 960-5454",
+        "address": "Spokane, WA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Big G's Roadside",
+        "phone": "(509) 866-8736",
+        "address": "Spokane, WA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Spokane Towing",
+        "phone": "(509) 211-1333",
+        "address": "Spokane, WA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Inland Northwest Recovery",
+        "phone": "(509) 300-4444",
+        "address": "Spokane, WA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Lilac City Towing",
+        "phone": "(509) 322-2222",
+        "address": "Spokane, WA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

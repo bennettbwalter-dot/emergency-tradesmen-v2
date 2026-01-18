@@ -1,0 +1,16 @@
+[
+    {
+        "name": "JCP Electric Inc.",
+        "address": "Tucson, AZ",
+        "phone": "520-201-9000",
+        "trade": "electrician",
+        "city": "Tucson"
+    },
+    {
+        "name": "Mighty Dog Roofing of Tucson",
+        "address": "Tucson, AZ",
+        "phone": "520-333-3111",
+        "trade": "roofer",
+        "city": "Tucson"
+    }
+]

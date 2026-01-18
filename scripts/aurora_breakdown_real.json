@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Eagle Wing Towing",
+        "phone": "(720) 295-8005",
+        "address": "Aurora, CO",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Action Towing LLC",
+        "phone": "(720) 737-9118",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Smiley Aurora Towing",
+        "phone": "(720) 784-3965",
+        "address": "Aurora, CO",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Northside Towing",
+        "phone": "(303) 776-5114",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Aurora Tow Truck",
+        "phone": "(720) 575-4128",
+        "address": "Aurora, CO",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

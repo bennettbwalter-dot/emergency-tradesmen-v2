@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Water Heater & Plumbing",
+        "phone": "(209) 313-6304",
+        "address": "Stockton, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Mr. Ed's Plumbing",
+        "phone": "(209) 209-9829",
+        "address": "Stockton, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Discount Plumbing Stockton",
+        "phone": "(209) 549-1661",
+        "address": "Stockton, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "24/7 Plumbers Stockton",
+        "phone": "(209) 252-3292",
+        "address": "Stockton, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Stockton Rooter & Plumbing",
+        "phone": "(209) 555-0111",
+        "address": "Stockton, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

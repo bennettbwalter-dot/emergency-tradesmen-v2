@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Alma Roofing",
+        "phone": "(619) 551-3331",
+        "address": "San Diego, CA",
+        "website": "https://almaroofingsd.com/"
+    },
+    {
+        "name": "RSI Roofing",
+        "phone": "(858) 278-7200",
+        "address": "8285 Buckhorn St, San Diego, CA 92111",
+        "website": "https://thinkrsi.com/"
+    },
+    {
+        "name": "GBC Remodeling",
+        "phone": "(858) 999-8009",
+        "address": "San Diego, CA",
+        "website": "https://gbcremodel.com/"
+    },
+    {
+        "name": "Resilient Roofing",
+        "phone": "(619) 501-2138",
+        "address": "San Diego, CA",
+        "website": "https://resilientroofing.com/"
+    },
+    {
+        "name": "Colin Roofing",
+        "phone": "(619) 818-4154",
+        "address": "6922 Mission Gorge Rd #9030, San Diego, CA 92120",
+        "website": "https://colinroofing.com/"
+    }
+]

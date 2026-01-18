@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Absolute Plumbing and Boiler",
+        "phone": "(843) 594-0999",
+        "address": "North Charleston, SC",
+        "website": "https://absoluteplumbingandboilers.com"
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Charleston",
+        "phone": "(854) 269-5007",
+        "address": "North Charleston, SC",
+        "website": "https://benjaminfranklinplumbing.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing of Greater Charleston",
+        "phone": "(843) 410-6063",
+        "address": "North Charleston, SC",
+        "website": "https://mrrooter.com"
+    },
+    {
+        "name": "Blue Collars North Charleston",
+        "phone": "(843) 256-8509",
+        "address": "North Charleston, SC",
+        "website": "https://bluecollars.com"
+    }
+]

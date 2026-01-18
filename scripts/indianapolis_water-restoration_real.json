@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Midwest Remediation",
+        "phone": "(317) 826-0940",
+        "address": "Indianapolis, IN",
+        "website": "https://mwremediation.com/"
+    },
+    {
+        "name": "1-800 WATER DAMAGE of Greater Indianapolis",
+        "phone": "(317) 399-9141",
+        "address": "5555 Elmwood Dr., Suite E, Indianapolis, IN, 46203",
+        "website": "https://1800waterdamage.com/"
+    },
+    {
+        "name": "Hays + Sons Complete Restoration",
+        "phone": "(317) 788-0911",
+        "address": "Indianapolis, IN",
+        "website": "https://haysandsons.com/"
+    },
+    {
+        "name": "Roto-Rooter Indianapolis",
+        "phone": "(317) 462-6811",
+        "address": "Indianapolis, IN",
+        "website": "https://rotorooter.com/"
+    },
+    {
+        "name": "Fishers Restoration Experts",
+        "phone": "(317) 951-9067",
+        "address": "5841 Thunderbird Rd, Indianapolis, Indiana 46236",
+        "website": "https://fishersrestorationexperts.com/"
+    }
+]

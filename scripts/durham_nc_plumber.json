@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Acme Plumbing Co",
+        "phone": "(919) 688-1348",
+        "address": "Durham, NC",
+        "website": "https://acmeplumbing.com"
+    },
+    {
+        "name": "Progressive Service Company",
+        "phone": "(877) 325-0180",
+        "address": "Durham, NC",
+        "website": "https://callprogressive.com"
+    },
+    {
+        "name": "Durham Plumbing Services Inc",
+        "phone": "(919) 672-1723",
+        "address": "Durham, NC",
+        "website": "https://durhamplumbingservices.com"
+    },
+    {
+        "name": "Element Service Group",
+        "phone": "(919) 926-1475",
+        "address": "Durham, NC",
+        "website": "https://callelement.com"
+    }
+]

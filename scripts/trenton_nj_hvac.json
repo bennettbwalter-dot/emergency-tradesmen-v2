@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Edison Heating & Cooling",
+        "phone": "(732) 372-7161",
+        "address": "Trenton, NJ",
+        "website": "https://edisonhvac.com"
+    },
+    {
+        "name": "Arctic Air Conditioning",
+        "phone": "(732) 518-8215",
+        "address": "Trenton, NJ",
+        "website": "https://arcticac.com"
+    },
+    {
+        "name": "Horizon Services",
+        "phone": "(800) 642-4419",
+        "address": "Trenton, NJ",
+        "website": "https://horizonservices.com"
+    },
+    {
+        "name": "Akshar HVAC",
+        "phone": "(609) 456-5808",
+        "address": "Trenton, NJ",
+        "website": "https://aksharhvac.com"
+    },
+    {
+        "name": "PFO Heating & Air Conditioning",
+        "phone": "(800) 253-9000",
+        "address": "Trenton, NJ",
+        "website": "https://princetonfuel.com"
+    }
+]

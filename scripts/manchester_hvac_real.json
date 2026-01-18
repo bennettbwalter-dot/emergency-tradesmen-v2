@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Kang Heating & Plumbing",
+        "phone": "07424 523591",
+        "address": "Manchester",
+        "website": "https://kangheatingplumbing.com/"
+    },
+    {
+        "name": "Gas Safety Manchester",
+        "phone": "07546 245568",
+        "address": "Manchester",
+        "website": "https://gassafetymanchester.co.uk/"
+    },
+    {
+        "name": "Daley Plumbing & Gas",
+        "phone": "07713 872977",
+        "address": "Manchester",
+        "website": "https://daleyplumbingandgas.co.uk/"
+    },
+    {
+        "name": "Zodiac Plumbing & Heating Solutions",
+        "phone": "0161 388 5506",
+        "address": "Manchester",
+        "website": "https://zodiacplumbing.co.uk/"
+    },
+    {
+        "name": "CentralHeatPlumb Manchester",
+        "phone": "07963 600369",
+        "address": "Manchester",
+        "website": "https://centralheatplumb.com/"
+    }
+]

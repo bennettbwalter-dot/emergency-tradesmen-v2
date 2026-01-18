@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Texcore Construction",
+        "phone": "(940) 229-1940",
+        "address": "4500 Mercantile Plaza Dr suite 350, Fort Worth, TX 76137",
+        "website": "https://texcoreconstruction.com/"
+    },
+    {
+        "name": "Dimensional Contracting",
+        "phone": "(817) 966-9605",
+        "address": "Fort Worth, TX",
+        "website": "https://fixmyroofdfw.com/"
+    },
+    {
+        "name": "American Dream Roofing",
+        "phone": "(214) 518-5705",
+        "address": "Fort Worth, TX",
+        "website": "https://adcroofing.com/"
+    },
+    {
+        "name": "J. Cross Roofing",
+        "phone": "(817) 791-9999",
+        "address": "Fort Worth, TX",
+        "website": "https://jcrossroofing.com/"
+    },
+    {
+        "name": "Tarrant County Roofing",
+        "phone": "(817) 583-3691",
+        "address": "Fort Worth, TX",
+        "website": "https://tarrantcountyroofing.net/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Service Professor",
+        "phone": "(616) 207-4097",
+        "address": "Kentwood, MI",
+        "website": "https://serviceprofessor.com"
+    },
+    {
+        "name": "Mulder Electric",
+        "phone": "(616) 834-3800",
+        "address": "Kentwood, MI",
+        "website": "https://mulderelectric.com"
+    },
+    {
+        "name": "ENS Electric",
+        "phone": "(616) 200-7222",
+        "address": "Kentwood, MI",
+        "website": "https://enselectric.com"
+    },
+    {
+        "name": "Vander Hyde Services Electric",
+        "phone": "(616) 319-2125",
+        "address": "Kentwood, MI",
+        "website": "https://vanderhyde.com"
+    }
+]

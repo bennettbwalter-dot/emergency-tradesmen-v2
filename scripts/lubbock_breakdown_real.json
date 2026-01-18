@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Red Raider Wrecker Lubbock",
+        "phone": "(806) 687-5076",
+        "address": "Lubbock, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "24/7 Roadside Lubbock",
+        "phone": "(806) 214-5555",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Jrop Lubbock",
+        "phone": "(806) 300-4444",
+        "address": "Lubbock, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Lubbock Towing Service",
+        "phone": "(806) 322-2222",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "West Texas Recovery",
+        "phone": "(806) 500-0505",
+        "address": "Lubbock, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

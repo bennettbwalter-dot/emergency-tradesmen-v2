@@ -1,0 +1,218 @@
+[
+    {
+        "name": "Mike Counsil Plumbing",
+        "phone": "(408) 617-9486",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Roto-Rooter San Jose",
+        "phone": "(408) 572-6300",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Cupertino Plumbing",
+        "phone": "(408) 489-6766",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 620
+    },
+    {
+        "name": "Local Rooter and Plumbing",
+        "phone": "(408) 641-9245",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Rescue Rooter San Jose",
+        "phone": "(408) 982-0405",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Super Rooter",
+        "phone": "(408) 396-7510",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Triple A Plumbing Services",
+        "phone": "(408) 855-8099",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Rooter Hero San Jose",
+        "phone": "(408) 703-6715",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 380
+    },
+    {
+        "name": "Shark Plumbing Services",
+        "phone": "(408) 516-0226",
+        "address": "San Jose, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Infinium Solar Roofing and Electric",
+        "phone": "(650) 600-0747",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Dalcon Electric",
+        "phone": "(408) 565-8918",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "ARC Electric Heating and AC",
+        "phone": "(408) 539-5632",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "WCI Electric",
+        "phone": "(408) 242-2069",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "California Power And Light",
+        "phone": "(408) 406-5832",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "CA Electrical Group",
+        "phone": "(669) 272-0102",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Fast Handy Electric",
+        "phone": "(888) 481-3335",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Altap Electrical",
+        "phone": "(408) 309-8290",
+        "address": "San Jose, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "San Jose Lock and Key Pros",
+        "phone": "(408) 599-3130",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "EZ Locksmith San Jose",
+        "phone": "(408) 613-6000",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "San Jose State Locksmith",
+        "phone": "(408) 876-6188",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "San Jose Lock And Safe",
+        "phone": "(408) 461-3436",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "San Jose Emergency Locksmith",
+        "phone": "(669) 298-0183",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Lock Key Store San Jose",
+        "phone": "(408) 876-6164",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Buddy's Locksmith",
+        "phone": "(408) 315-2063",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "San Jose Lock Master",
+        "phone": "(408) 484-3860",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Locksmith Master Shop",
+        "phone": "(408) 933-6048",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "A-A Lock & Alarm Inc.",
+        "phone": "(800) 422-5625",
+        "address": "San Jose, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    }
+]

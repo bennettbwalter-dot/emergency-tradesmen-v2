@@ -1,0 +1,37 @@
+[
+    {
+        "name": "KJ Towing",
+        "phone": "(704) 560-1288",
+        "address": "Charlotte, NC",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Independence Towing Charlotte",
+        "phone": "(980) 722-6720",
+        "address": "Charlotte, NC",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Charlotte Towing Service",
+        "phone": "(704) 323-5500",
+        "address": "Charlotte, NC",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Queen City Towing",
+        "phone": "(704) 500-1111",
+        "address": "Charlotte, NC",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Pro Towing Charlotte",
+        "phone": "(704) 301-4444",
+        "address": "Charlotte, NC",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

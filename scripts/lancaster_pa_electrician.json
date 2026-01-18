@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric of Lancaster",
+        "phone": "(717) 299-5641",
+        "address": "Lancaster, PA",
+        "website": "https://www.mrelectric.com/lancaster"
+    },
+    {
+        "name": "Lapp Electric",
+        "phone": "(717) 392-0804",
+        "address": "Lancaster, PA",
+        "website": "https://lappelectric.com"
+    },
+    {
+        "name": "Mister Sparky of Lancaster",
+        "phone": "(888) 826-0091",
+        "address": "Lancaster, PA",
+        "website": "https://www.mistersparky.com/lancaster/"
+    },
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(1-800-380-6800)",
+        "address": "Lancaster, PA",
+        "website": "https://thomasedisonelectric.com"
+    }
+]

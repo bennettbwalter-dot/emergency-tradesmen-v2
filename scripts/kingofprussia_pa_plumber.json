@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Len The Plumber",
+        "phone": "(800) 950-4619",
+        "address": "King of Prussia, PA",
+        "website": "https://lentheplumber.com"
+    },
+    {
+        "name": "Roto-Rooter King of Prussia",
+        "phone": "(610) 387-6025",
+        "address": "King of Prussia, PA",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Goodman Plumbing",
+        "phone": "(215) 364-7775",
+        "address": "King of Prussia, PA",
+        "website": "https://goodmanplumbers.com"
+    },
+    {
+        "name": "King Of Prussia Plumbers",
+        "phone": "(888) 838-3054",
+        "address": "King of Prussia, PA",
+        "website": "https://byersplumbing.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "The Electricians LLC Fargo",
+        "phone": "(701) 367-6306",
+        "address": "Fargo, ND",
+        "website": "https://theelectriciansllc.com"
+    },
+    {
+        "name": "Grace Electric Fargo",
+        "phone": "(701) 371-3931",
+        "address": "Fargo, ND",
+        "website": "https://gracewires.com"
+    },
+    {
+        "name": "K D Electric LLC",
+        "phone": "(701) 478-2044",
+        "address": "Fargo, ND",
+        "website": "https://kdelectricllc.com"
+    },
+    {
+        "name": "Superior Electric Fargo",
+        "phone": "(701) 850-9064",
+        "address": "Fargo, ND",
+        "website": "https://superiorelectricfargo.com"
+    }
+]

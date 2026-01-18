@@ -1,0 +1,37 @@
+[
+    {
+        "name": "SameDay Heating & Plumbing",
+        "phone": "(801) 726-3329",
+        "address": "Salt Lake City, UT",
+        "rating": 4.9,
+        "review_count": 2000
+    },
+    {
+        "name": "Valley Plumbing SLC",
+        "phone": "801-341-4222",
+        "address": "Salt Lake City, UT",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "All Hours Plumbing SLC",
+        "phone": "801-396-3411",
+        "address": "Salt Lake City, UT",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Superior Water & Air SLC",
+        "phone": "801-438-4793",
+        "address": "Salt Lake City, UT",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Salt Lake City Emergency Plumbers",
+        "phone": "(801) 555-0101",
+        "address": "Salt Lake City, UT",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

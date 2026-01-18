@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "New Britain, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "Charter Oak Plumbing",
+        "phone": "(860) 223-1499",
+        "address": "New Britain, CT",
+        "website": "https://charteroakplumbing.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "New Britain, CT",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "B.Jags Electric",
+        "phone": "(860) 930-1044",
+        "address": "New Britain, CT",
+        "website": "https://bjagselectric.com"
+    }
+]

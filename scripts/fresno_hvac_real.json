@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roo's Heating and Air",
+        "phone": "(559) 290-7955",
+        "address": "Fresno, CA",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "Monarch Home Experts",
+        "phone": "(661) 215-6580",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Fresno Air & Heat",
+        "phone": "(559) 212-4539",
+        "address": "Fresno, CA",
+        "rating": 4.9,
+        "review_count": 399
+    },
+    {
+        "name": "Balanced Comfort Cooling & Heating",
+        "phone": "(559) 234-4061",
+        "address": "Fresno, CA",
+        "rating": 4.7,
+        "review_count": 950
+    },
+    {
+        "name": "Lee's Air, Plumbing, & Heating",
+        "phone": "(559) 227-9569",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 2800
+    }
+]

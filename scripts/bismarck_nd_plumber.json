@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Bismarck",
+        "phone": "(701) 222-2653",
+        "address": "Bismarck, ND",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Advanced Mechanical Inc",
+        "phone": "(701) 222-0352",
+        "address": "Bismarck, ND",
+        "website": "https://advanced-mechanical.com"
+    },
+    {
+        "name": "Rivers Edge Plumbing Heating",
+        "phone": "(701) 214-3782",
+        "address": "Bismarck, ND",
+        "website": "https://riversedgeplumbingandheating.com"
+    },
+    {
+        "name": "City Air Mechanical",
+        "phone": "(701) 223-3775",
+        "address": "Bismarck, ND",
+        "website": "https://cityairmechanical.com"
+    }
+]

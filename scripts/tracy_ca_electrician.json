@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Altamont Electric Inc",
+        "phone": "(209) 855-1847",
+        "address": "Tracy, CA",
+        "website": "https://altamontelectrical.com"
+    },
+    {
+        "name": "The Electric Company Tracy",
+        "phone": "(209) 396-4618",
+        "address": "Tracy, CA",
+        "website": "https://theelectricco.net"
+    },
+    {
+        "name": "Goose Electric",
+        "phone": "(510) 274-3521",
+        "address": "Tracy, CA",
+        "website": "https://gooseelectricinc.com"
+    },
+    {
+        "name": "Aleco Electric Tracy",
+        "phone": "(209) 243-6104",
+        "address": "Tracy, CA",
+        "website": "https://alecoelectric.com"
+    }
+]

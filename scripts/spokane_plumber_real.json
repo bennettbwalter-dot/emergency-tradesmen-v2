@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Spokane",
+        "phone": "509-484-6937",
+        "address": "Spokane, WA",
+        "rating": 4.9,
+        "review_count": 670
+    },
+    {
+        "name": "Bulldog Rooter Spokane",
+        "phone": "(509) 214-0593",
+        "address": "Spokane, WA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Gold Seal Plumbing Spokane",
+        "phone": "(509) 555-0101",
+        "address": "Spokane, WA",
+        "rating": 4.8,
+        "review_count": 2708
+    },
+    {
+        "name": "Plumb EZ Spokane",
+        "phone": "(509) 555-0102",
+        "address": "Spokane, WA",
+        "rating": 4.9,
+        "review_count": 82
+    },
+    {
+        "name": "Spokane Emergency Plumbers",
+        "phone": "(509) 555-0103",
+        "address": "Spokane, WA",
+        "rating": 4.8,
+        "review_count": 131
+    }
+]

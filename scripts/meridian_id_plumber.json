@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cleanline Plumbing",
+        "phone": "(208) 463-4863",
+        "address": "Meridian, ID",
+        "website": "https://cleanlineplumbing.com"
+    },
+    {
+        "name": "Right Now Heating Air Conditioning and Plumbing",
+        "phone": "(208) 252-9533",
+        "address": "Meridian, ID",
+        "website": "https://rightnowheatcool.com"
+    },
+    {
+        "name": "Master Rooter Meridian",
+        "phone": "(208) 955-8533",
+        "address": "Meridian, ID",
+        "website": "https://masterrooter.com"
+    },
+    {
+        "name": "Roto-Rooter Meridian",
+        "phone": "(208) 562-8040",
+        "address": "Meridian, ID",
+        "website": "https://rotorooter.com"
+    }
+]

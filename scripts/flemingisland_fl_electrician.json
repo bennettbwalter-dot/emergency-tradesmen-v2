@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pier Electric",
+        "phone": "(904) 485-7200",
+        "address": "Fleming Island, FL",
+        "website": "https://pierelectric.com"
+    },
+    {
+        "name": "American Electrical Contracting",
+        "phone": "(904) 262-7997",
+        "address": "Fleming Island, FL",
+        "website": "https://american-electrical.com"
+    },
+    {
+        "name": "Lickety-Split Electric",
+        "phone": "(904) 265-6400",
+        "address": "Fleming Island, FL",
+        "website": "https://licketysplitfl.com"
+    },
+    {
+        "name": "David Gray Electrical Fleming Island",
+        "phone": "(904) 605-8190",
+        "address": "Fleming Island, FL",
+        "website": "https://davidgrayonline.com"
+    }
+]

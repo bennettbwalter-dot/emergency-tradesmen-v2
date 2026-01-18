@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Southside Plumbing",
+        "phone": "(402) 345-8668",
+        "address": "Omaha, NE",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "PlumbRite",
+        "phone": "(402) 623-6802",
+        "address": "Omaha, NE",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Burton A/C, Heating, Plumbing",
+        "phone": "(402) 788-4236",
+        "address": "Omaha, NE",
+        "rating": 5.0,
+        "review_count": 6900
+    },
+    {
+        "name": "Roto-Rooter Omaha",
+        "phone": "(402) 592-2700",
+        "address": "Omaha, NE",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "A&A Plumbing & Drain Services",
+        "phone": "(402) 491-1111",
+        "address": "Omaha, NE",
+        "rating": 4.9,
+        "review_count": 37
+    }
+]

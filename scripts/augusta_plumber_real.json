@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Universal Plumbing Augusta",
+        "phone": "706-738-4424",
+        "address": "Augusta, GA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Augusta",
+        "phone": "706-229-7920",
+        "address": "Augusta, GA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Drain Surgeon Augusta",
+        "phone": "(706) 303-0987",
+        "address": "Augusta, GA",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Mr. Flush Augusta",
+        "phone": "706-673-5874",
+        "address": "Augusta, GA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Augusta Emergency Plumbers",
+        "phone": "(706) 555-0101",
+        "address": "Augusta, GA",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

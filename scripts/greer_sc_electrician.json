@@ -1,0 +1,26 @@
+[
+    {
+        "name": "True Electric",
+        "phone": "864-555-0400",
+        "address": "Greer, SC",
+        "website": "https://trueelectricsc.net"
+    },
+    {
+        "name": "Five Star Plumbing Heating Cooling",
+        "phone": "864-306-4898",
+        "address": "Greer, SC",
+        "website": "https://fivestartoday.com"
+    },
+    {
+        "name": "Mister Sparky of Greenville",
+        "phone": "864-268-0000",
+        "address": "Greer, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Mr. Electric of Greer",
+        "phone": "864-322-0000",
+        "address": "Greer, SC",
+        "website": "https://mrelectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "AirSouth Cooling and Heating",
+        "phone": "(601) 427-0118",
+        "address": "Brandon, MS",
+        "website": "https://airsouthnow.com"
+    },
+    {
+        "name": "Typhoon AC Repair",
+        "phone": "(601) 859-0029",
+        "address": "Madison, MS",
+        "website": "https://typhoon.biz"
+    },
+    {
+        "name": "Hux Air Conditioning",
+        "phone": "(601) 869-0002",
+        "address": "Mendenhall, MS",
+        "website": "https://huxairconditioning.com"
+    },
+    {
+        "name": "Dent Air Conditioning",
+        "phone": "(601) 203-1741",
+        "address": "Jackson, MS",
+        "website": "https://dentairconditioning.com"
+    }
+]

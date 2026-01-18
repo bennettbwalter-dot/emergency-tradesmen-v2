@@ -1,0 +1,42 @@
+[
+    {
+        "name": "De Land of Glass",
+        "phone": "(907) 563-3996",
+        "address": "Anchorage, AK",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Speedy Glass Brayton Dr",
+        "phone": "(907) 272-1435",
+        "address": "Anchorage, AK",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Badger Glass",
+        "phone": "(907) 522-3927",
+        "address": "Anchorage, AK",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Speedy Glass Huffman Rd",
+        "phone": "(907) 345-2343",
+        "address": "Anchorage, AK",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "NOVUS Glass of Anchorage",
+        "phone": "(907) 344-3672",
+        "address": "Anchorage, AK",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

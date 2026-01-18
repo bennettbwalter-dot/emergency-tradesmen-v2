@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Discount Electric",
+        "address": "Corpus Christi, TX",
+        "phone": "361-883-4242",
+        "trade": "electrician",
+        "city": "Corpus Christi"
+    },
+    {
+        "name": "Mathews CCAC",
+        "address": "Corpus Christi, TX",
+        "phone": "361-240-0255",
+        "trade": "electrician",
+        "city": "Corpus Christi"
+    },
+    {
+        "name": "Mr. Electric of Corpus Christi",
+        "address": "Corpus Christi, TX",
+        "phone": "361-400-0853",
+        "trade": "electrician",
+        "city": "Corpus Christi"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Maroon Plumbing",
+        "address": "College Station, TX",
+        "phone": "979-985-3500",
+        "trade": "plumber",
+        "city": "College Station"
+    },
+    {
+        "name": "Action Plumbing",
+        "address": "College Station, TX",
+        "phone": "979-335-8515",
+        "trade": "plumber",
+        "city": "College Station"
+    },
+    {
+        "name": "BCA Electric LLC",
+        "address": "5081 Leonard Rd, Bryan, TX 77807",
+        "phone": "979-823-4000",
+        "trade": "electrician",
+        "city": "College Station"
+    },
+    {
+        "name": "Dailey Company",
+        "address": "College Station, TX",
+        "phone": "979-260-2020",
+        "trade": "electrician",
+        "city": "College Station"
+    }
+]

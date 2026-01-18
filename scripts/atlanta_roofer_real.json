@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mr. Roofer",
+        "phone": "(770) 414-1212",
+        "address": "3500 Lenox Rd, Atlanta, GA",
+        "website": "https://mrrooferatlanta.com/"
+    },
+    {
+        "name": "Castle Roofing",
+        "phone": "(877) 766-3910",
+        "address": "Atlanta, GA",
+        "website": "https://castleroofing.us/"
+    },
+    {
+        "name": "Christian Brothers Roofing",
+        "phone": "(770) 734-6700",
+        "address": "5185 Buice Rd, Atlanta, GA",
+        "website": "https://christianbrothersroofingatlanta.com/"
+    },
+    {
+        "name": "Gutters 4 Less",
+        "phone": "(470) 291-4943",
+        "address": "Atlanta, GA",
+        "website": "https://gutters4lessga.com/"
+    },
+    {
+        "name": "Disaster Dr LLC",
+        "phone": "(404) 803-8733",
+        "address": "Atlanta, GA",
+        "website": "https://disasterdr.com/"
+    }
+]

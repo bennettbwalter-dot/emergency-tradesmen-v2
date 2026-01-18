@@ -1,0 +1,114 @@
+[
+    {
+        "name": "Laredo Plumbing Pros",
+        "phone": "956-462-6297",
+        "address": "Laredo, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Chavarrias Plumbing",
+        "phone": "956-726-9999",
+        "address": "Laredo, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Sky High Plumbing",
+        "phone": "877-730-8216",
+        "address": "Laredo, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Arellano's Plumbing",
+        "phone": "956-307-4050",
+        "address": "Laredo, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Plumbing Wizardz",
+        "phone": "855-426-6880",
+        "address": "Laredo, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "855-740-3232",
+        "address": "Laredo, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Mr. Electric of Laredo",
+        "phone": "956-242-7788",
+        "address": "Laredo, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Alonzo's Electric Inc",
+        "phone": "(956) 723-4691",
+        "address": "Laredo, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "RPi Electric",
+        "phone": "(956) 796-1003",
+        "address": "Laredo, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Executive Electric",
+        "phone": "(877) 837-6778",
+        "address": "Laredo, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Brothers Locksmith Laredo",
+        "phone": "(888) 947-5585",
+        "address": "Laredo, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Prime Locksmith Laredo",
+        "phone": "(956) 474-4016",
+        "address": "Laredo, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "KeyMe Locksmiths Laredo",
+        "phone": "(956) 305-1549",
+        "address": "Laredo, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Pop-A-Lock of Laredo",
+        "phone": "(956) 218-9797",
+        "address": "Laredo, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    }
+]

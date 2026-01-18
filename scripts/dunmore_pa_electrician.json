@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Envy Electrical",
+        "phone": "(570) 878-7113",
+        "address": "Dunmore, PA",
+        "website": "https://envyelectricalnepa.com"
+    },
+    {
+        "name": "Bee-lectric",
+        "phone": "(570) 525-5908",
+        "address": "Dunmore, PA",
+        "website": "https://bee-lectric.com"
+    },
+    {
+        "name": "Mister Sparky Electric",
+        "phone": "(570) 230-4294",
+        "address": "Dunmore, PA",
+        "website": "https://mistersparkyscranton.com"
+    },
+    {
+        "name": "TLM Electric",
+        "phone": "(570) 394-4220",
+        "address": "Dunmore, PA",
+        "website": "https://tlmelectric.com"
+    }
+]

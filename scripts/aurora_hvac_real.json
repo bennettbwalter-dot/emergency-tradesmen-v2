@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Fix-it 24/7 Plumbing, Heating & Air",
+        "phone": "(303) 214-0277",
+        "address": "Aurora, CO",
+        "rating": 5.0,
+        "review_count": 3000
+    },
+    {
+        "name": "JolTech Heating & Cooling",
+        "phone": "(720) 277-1286",
+        "address": "Aurora, CO",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Brothers Plumbing, Heating, and Electric",
+        "phone": "(303) 468-2294",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 5500
+    },
+    {
+        "name": "Total Comfort Heating and Cooling",
+        "phone": "(303) 761-9494",
+        "address": "Aurora, CO",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "L & L Heating & Air Conditioning",
+        "phone": "(303) 296-6700",
+        "address": "Aurora, CO",
+        "rating": 4.8,
+        "review_count": 420
+    }
+]

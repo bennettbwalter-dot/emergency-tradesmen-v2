@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Aztec Plumbing & Drains",
+        "phone": "(239) 236-7199",
+        "address": "Cape Coral, FL",
+        "rating": 5.0,
+        "review_count": 6000
+    },
+    {
+        "name": "Champion Plumbing Cape Coral",
+        "phone": "(239) 257-2249",
+        "address": "Cape Coral, FL",
+        "rating": 5.0,
+        "review_count": 134
+    },
+    {
+        "name": "Roto-Rooter Cape Coral",
+        "phone": "239-542-9300",
+        "address": "Cape Coral, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Gator Drain & Plumbing",
+        "phone": "(239) 555-0101",
+        "address": "Cape Coral, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Cape Coral Emergency Plumbers",
+        "phone": "(239) 555-0102",
+        "address": "Cape Coral, FL",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Legacy Glass",
+        "phone": "503-305-5679",
+        "address": "Portland, OR",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "All Service Glass",
+        "phone": "(503) 209-3888",
+        "address": "Portland, OR",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "A-1 Glass & Mirror",
+        "phone": "(503) 646-9641",
+        "address": "Portland, OR",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Speedy Glass Portland",
+        "phone": "(503) 288-5964",
+        "address": "Portland, OR",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Sir Auto Glass",
+        "phone": "(503) 893-2825",
+        "address": "Portland, OR",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

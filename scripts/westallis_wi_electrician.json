@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Sparks Electric",
+        "phone": "(414) 536-8500",
+        "address": "West Allis, WI",
+        "website": "https://sparkselectric.com"
+    },
+    {
+        "name": "DRM Electrical LLC",
+        "phone": "(414) 788-6104",
+        "address": "West Allis, WI",
+        "website": "https://drmelectrical.com"
+    },
+    {
+        "name": "West Allis Heating Cooling Plumbing and Electrical",
+        "phone": "(414) 246-1160",
+        "address": "West Allis, WI",
+        "website": "https://westallisheating.com"
+    },
+    {
+        "name": "Couillard Electric West Allis",
+        "phone": "(262) 667-5969",
+        "address": "West Allis, WI",
+        "website": "https://couillard-electric.com"
+    }
+]

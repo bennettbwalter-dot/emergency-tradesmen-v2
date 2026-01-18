@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Allied Towing Services Inc.",
+        "phone": "(313) 366-5711",
+        "address": "Detroit, MI",
+        "website": "https://alliedtowingservice.com/"
+    },
+    {
+        "name": "Drag N Tow",
+        "phone": "(313) 550-0606",
+        "address": "Detroit, MI",
+        "website": "https://dragntow.com/"
+    },
+    {
+        "name": "D & C Towing Service",
+        "phone": "(586) 413-9313",
+        "address": "Detroit, MI",
+        "website": "https://dctowingservice.com/"
+    },
+    {
+        "name": "Detroit Towing",
+        "phone": "(313) 428-6152",
+        "address": "Detroit, MI",
+        "website": "https://detroittowing.us/"
+    },
+    {
+        "name": "Boulevard & Trumbull Towing",
+        "phone": "1-800-841-7841",
+        "address": "Detroit, MI",
+        "website": "https://boulevardtrumbulltow.com/"
+    },
+    {
+        "name": "Bobby's TCB Towing Service",
+        "phone": "(313) 933-9305",
+        "address": "Detroit, MI",
+        "website": "https://bobbytcbtowing.com/"
+    }
+]

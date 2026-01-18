@@ -1,0 +1,210 @@
+[
+    {
+        "name": "T.C.R. Rooter & Plumbing",
+        "phone": "919-467-2207",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "On Call Plumbers Raleigh",
+        "phone": "(984) 201-0663",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Swift Brothers Plumbing Heating & Air",
+        "phone": "(984) 310-2853",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "William Parrish Plumbing",
+        "phone": "919-343-0783",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Out The Door Plumbing",
+        "phone": "919-777-4383",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "24/7 Plumbers Raleigh",
+        "phone": "(984) 204-6262",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Raleigh",
+        "phone": "(252) 477-3563",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Poole's Plumbing, Inc.",
+        "phone": "919-661-6334",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Progressive Service Company",
+        "phone": "(877) 325-0180",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Local Plumber 24x7 Raleigh",
+        "phone": "(866) 849-1588",
+        "address": "Raleigh, NC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "DANCO Electrical Contractors",
+        "phone": "919-562-3191",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Onsite Electrical",
+        "phone": "(919) 705-0954",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Progressive Service Company Electrical",
+        "phone": "(919) 325-0180",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "TLR Electric",
+        "phone": "(919) 697-3052",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Crisp Electric",
+        "phone": "984-377-7870",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "CMC Electrical",
+        "phone": "984-279-0539",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Right Electrical Services, LLC",
+        "phone": "919-359-1017",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "ARC Electric",
+        "phone": "919-888-3500",
+        "address": "Raleigh, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Quick Locksmith Raleigh",
+        "phone": "(919) 747-4975",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Locksmith Raleigh NC",
+        "phone": "(919) 823-5756",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Raleigh Lock And Key Pro",
+        "phone": "(919) 585-4480",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Raleigh Emergency Locksmith Services",
+        "phone": "(984) 348-7551",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Locksmith Raleigh",
+        "phone": "(919) 348-2617",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Locksmith Key Shop Raleigh",
+        "phone": "(919) 830-4226",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Seven Eleven Locksmith",
+        "phone": "(844) 656-2576",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 80
+    },
+    {
+        "name": "919 Locksmith",
+        "phone": "(919) 739-2820",
+        "address": "Raleigh, NC",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 150
+    }
+]

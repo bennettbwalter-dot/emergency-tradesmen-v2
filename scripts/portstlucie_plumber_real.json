@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rooter One Port St. Lucie",
+        "phone": "(877) 500-0046",
+        "address": "Port St. Lucie, FL",
+        "rating": 4.8,
+        "review_count": 240
+    },
+    {
+        "name": "Drain to Drain Plumbing",
+        "phone": "(561) 589-9610",
+        "address": "Port St. Lucie, FL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Port St. Lucie",
+        "phone": "(772) 335-5121",
+        "address": "Port St. Lucie, FL",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Dom Bella Plumbing PSL",
+        "phone": "(772) 555-0101",
+        "address": "Port St. Lucie, FL",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "PSL Emergency Plumbers",
+        "phone": "(772) 555-0102",
+        "address": "Port St. Lucie, FL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

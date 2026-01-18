@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Jacksonville Glass Repair & Installation",
+        "phone": "(904) 602-8684",
+        "address": "Jacksonville, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Perimeter Glass",
+        "phone": "(904) 305-9509",
+        "address": "Jacksonville, FL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "24/7 Mobile Glass",
+        "phone": "(904) 758-2020",
+        "address": "Jacksonville, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Glass Doctor of Jacksonville",
+        "phone": "(904) 638-7090",
+        "address": "Jacksonville, FL",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "First Coast Mobile Glass",
+        "phone": "(904) 990-8777",
+        "address": "Jacksonville, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

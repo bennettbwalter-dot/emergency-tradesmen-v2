@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bone Dry Roofing",
+        "phone": "(317) 873-6005",
+        "address": "7735 Winton Drive, Indianapolis, IN 46268",
+        "website": "https://www.bonedry.com/"
+    },
+    {
+        "name": "Indy Roof & Restoration",
+        "phone": "(317) 648-7353",
+        "address": "5240 Elmwood Ave, Indianapolis, IN 46203",
+        "website": "https://indyroofandrestoration.com/"
+    },
+    {
+        "name": "Mighty Dog Roofing",
+        "phone": "(317) 548-6201",
+        "address": "Indianapolis, IN 46268",
+        "website": "https://mightydogroofing.com/"
+    },
+    {
+        "name": "Metal Solutions Inc",
+        "phone": "(317) 781-6734",
+        "address": "5756 Churchman Ave, Indianapolis, IN 46203",
+        "website": "https://metalsolutionsusa.com/"
+    },
+    {
+        "name": "SafeHaven Roofing Co.",
+        "phone": "(317) 268-2021",
+        "address": "Indianapolis, IN",
+        "website": "https://safehavenroofingco.com/"
+    }
+]

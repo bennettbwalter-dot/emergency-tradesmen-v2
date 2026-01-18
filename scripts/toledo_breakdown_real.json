@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Toledo Towing Service",
+        "phone": "(419) 211-1333",
+        "address": "Toledo, OH",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Glass City Towing",
+        "phone": "(419) 300-4444",
+        "address": "Toledo, OH",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Toledo Roadside",
+        "phone": "(419) 322-2222",
+        "address": "Toledo, OH",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Buckeye Towing",
+        "phone": "(419) 500-0505",
+        "address": "Toledo, OH",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Summit Towing",
+        "phone": "(419) 350-0000",
+        "address": "Toledo, OH",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

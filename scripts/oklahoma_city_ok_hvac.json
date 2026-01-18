@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Above + Beyond",
+        "phone": "(405) 467-1296",
+        "address": "Oklahoma City, OK",
+        "website": "https://pinkvantechs.com"
+    },
+    {
+        "name": "Arthur's Air Conditioning and Heating",
+        "phone": "(405) 438-6927",
+        "address": "Oklahoma City, OK",
+        "website": "https://arthursair.com"
+    },
+    {
+        "name": "Yarbrough & Sons",
+        "phone": "(405) 385-3037",
+        "address": "Oklahoma City, OK",
+        "website": "https://yarbroughandsons.com"
+    },
+    {
+        "name": "Anderson Heat & Air",
+        "phone": "(405) 305-5936",
+        "address": "Oklahoma City, OK",
+        "website": "https://andersonplumbingok.com"
+    }
+]

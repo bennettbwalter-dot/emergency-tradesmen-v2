@@ -1,0 +1,32 @@
+[
+    {
+        "name": "My Home Heroes",
+        "phone": "0191 622 6923",
+        "address": "South Shields",
+        "website": "https://myhomeheroes.co.uk/"
+    },
+    {
+        "name": "Tyne & Wear Heating",
+        "phone": "0191 743 0086",
+        "address": "134 Highfield Road, South Shields",
+        "website": "https://tyneandwearheating.co.uk/"
+    },
+    {
+        "name": "FB Harris Plumbing and Heating",
+        "phone": "07480 304222",
+        "address": "South Shields, Tyne and Wear, NE334TL",
+        "website": "https://fbharrisplumbingandheating.co.uk/"
+    },
+    {
+        "name": "Prime Gas Heating",
+        "phone": "0191 427 0691",
+        "address": "South Shields",
+        "website": "https://primegasheating.com/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "0191 357 4625",
+        "address": "South Shields",
+        "website": "https://able-group.co.uk/"
+    }
+]

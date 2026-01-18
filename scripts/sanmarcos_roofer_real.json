@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Falcon Roofing & Restoration",
+        "phone": "(512) 200-1539",
+        "address": "San Marcos, TX",
+        "website": "https://falconroofingtexas.com/"
+    },
+    {
+        "name": "Built To Last Roofing",
+        "phone": "(512) 123-4567",
+        "address": "San Marcos, TX",
+        "website": "https://btolroofing.com/"
+    },
+    {
+        "name": "Shorty Roofing",
+        "phone": "(512) 559-5104",
+        "address": "San Marcos, TX",
+        "website": "https://shortyroofing.com/"
+    },
+    {
+        "name": "Holden Roofing",
+        "phone": "(512) 353-7663",
+        "address": "326 Cheatham St, Suite 104, San Marcos, TX 78666",
+        "website": "https://holdenroofing.com/"
+    },
+    {
+        "name": "Austin Roofing and Construction",
+        "phone": "(512) 629-4949",
+        "address": "San Marcos, TX",
+        "website": "https://austinroofingandconstruction.com/"
+    }
+]

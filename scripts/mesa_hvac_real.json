@@ -1,0 +1,37 @@
+[
+    {
+        "name": "24/7 AC LLC",
+        "phone": "(480) 300-4950",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Goettl Air Conditioning",
+        "phone": "(844) 446-3885",
+        "address": "Mesa, AZ",
+        "rating": 4.7,
+        "review_count": 13500
+    },
+    {
+        "name": "America's Home Services",
+        "phone": "(623) 462-3590",
+        "address": "Mesa, AZ",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Sparkle Air",
+        "phone": "(480) 276-3254",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "PlumbSmart Plumbing Heating and Air",
+        "phone": "(480) 654-8865",
+        "address": "Mesa, AZ",
+        "rating": 4.7,
+        "review_count": 1500
+    }
+]

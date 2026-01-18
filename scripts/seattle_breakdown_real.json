@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Guardian Towing",
+        "phone": "(206) 774-9444",
+        "address": "Seattle, WA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Cheap Towing",
+        "phone": "(206) 971-9909",
+        "address": "Seattle, WA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Hubie's Towing",
+        "phone": "(206) 529-7321",
+        "address": "Seattle, WA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Seattle Towing",
+        "phone": "(206) 880-3333",
+        "address": "Seattle, WA",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Lincoln Towing",
+        "phone": "(206) 364-2000",
+        "address": "Seattle, WA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

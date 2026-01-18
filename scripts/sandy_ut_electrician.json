@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric of Sandy",
+        "phone": "(801) 298-0500",
+        "address": "Sandy, UT",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Spartan Electrical Service",
+        "phone": "(801) 638-3233",
+        "address": "Sandy, UT",
+        "website": "https://spartanelectricalservice.com"
+    },
+    {
+        "name": "Connect Home Services",
+        "phone": "(801) 877-3806",
+        "address": "Sandy, UT",
+        "website": "https://connecthomeservice.com"
+    },
+    {
+        "name": "Rocky Peaks Electric LLC",
+        "phone": "(801) 903-8884",
+        "address": "Sandy, UT",
+        "website": "https://rockypeakselectric.com"
+    }
+]

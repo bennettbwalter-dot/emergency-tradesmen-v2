@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Pope Plumbing, Inc.",
+        "phone": "(214) 516-7440",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Rowlett Plumbing, Drain and Rooter Pros",
+        "phone": "(469) 334-2920",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Triple Crown Plumbing",
+        "phone": "(972) 544-6544",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "James Armstrong Plumbing",
+        "phone": "(214) 918-6109",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "PRO Plumbers of Rowlett",
+        "phone": "(469) 297-9879",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Roto-Rooter Rowlett",
+        "phone": "(972) 836-0566",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Baker Brothers Plumbing Rowlett",
+        "phone": "(214) 892-2225",
+        "address": "Rowlett, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 520
+    },
+    {
+        "name": "JME Electric Group",
+        "phone": "(972) 955-9758",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "W3 Electric",
+        "phone": "(972) 793-0733",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "All Pro Electrical Services LLC",
+        "phone": "(972) 564-9316",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Milestone Electric Rowlett",
+        "phone": "(972) 590-6860",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Rockwall Electric",
+        "phone": "(972) 771-5390",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Grizzly Electrical Solutions",
+        "phone": "(972) 439-5095",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 130
+    },
+    {
+        "name": "Accurate Electric LLC",
+        "phone": "(214) 310-0925",
+        "address": "Rowlett, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 160
+    },
+    {
+        "name": "AJ Locksmith and Security",
+        "phone": "(214) 935-3614",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Rowlett Locksmith Co.",
+        "phone": "(972) 338-9709",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Locksmith Rowlett TX",
+        "phone": "469-215-7520",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Michael's Keys Locksmith Rowlett",
+        "phone": "(972) 498-1044",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Rowlett Locksmith Store",
+        "phone": "972-810-6405",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Rowlett Locksmith Service",
+        "phone": "972-512-6352",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Rowlett TX Locksmith Store",
+        "phone": "972-848-3423",
+        "address": "Rowlett, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 105
+    }
+]

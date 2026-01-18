@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rios Electric",
+        "phone": "(361) 438-6827",
+        "address": "Robstown, TX",
+        "website": null
+    },
+    {
+        "name": "Powerhouse Electric",
+        "phone": "(361) 726-3828",
+        "address": "Robstown, TX",
+        "website": null
+    },
+    {
+        "name": "Hinos Lightning and Electrical",
+        "phone": "(361) 290-5936",
+        "address": "Robstown, TX",
+        "website": null
+    },
+    {
+        "name": "Hoelscher Electric",
+        "phone": "(361) 387-2244",
+        "address": "Robstown, TX",
+        "website": "https://texas.gov"
+    }
+]

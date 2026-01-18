@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Stella LLC",
+        "phone": "(702) 472-9353",
+        "address": "Henderson, NV",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Right Now Air",
+        "phone": "(702) 362-6161",
+        "address": "Henderson, NV",
+        "rating": 5.0,
+        "review_count": 372
+    },
+    {
+        "name": "Express Home Services",
+        "phone": "(702) 213-0017",
+        "address": "Henderson, NV",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "702 PlumbAIR Services",
+        "phone": "(702) 463-2500",
+        "address": "Henderson, NV",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Sierra Air Conditioning & Plumbing",
+        "phone": "(702) 710-5452",
+        "address": "Henderson, NV",
+        "rating": 4.7,
+        "review_count": 1500
+    }
+]

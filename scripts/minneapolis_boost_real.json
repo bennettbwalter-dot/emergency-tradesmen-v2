@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Roto-Rooter of Minneapolis",
+        "phone": "612-788-9029",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Paul Bunyan Plumbing & Drains",
+        "phone": "612-340-1444",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "All Ways Drains",
+        "phone": "612-922-9422",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Greater Minneapolis",
+        "phone": "(612) 756-7815",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 620
+    },
+    {
+        "name": "Hero Plumbing, Heating, Cooling & Electrical",
+        "phone": "(612) 439-7285",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1800
+    },
+    {
+        "name": "Dean's Home Services",
+        "phone": "763-515-4852",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Northern Benjamin Franklin Plumbing",
+        "phone": "(320) 559-3407",
+        "address": "Minneapolis, MN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Go Electric, LLC",
+        "phone": "(763) 291-0150",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "JNH Electric LLC",
+        "phone": "(612) 294-7187",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Norske Electric",
+        "phone": "(952) 443-4113",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Randy's Electric",
+        "phone": "(612) 470-0914",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "EarlyBird Electric",
+        "phone": "612-843-2473",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Sutton Electrical Services LLC",
+        "phone": "(320) 425-2016",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 65
+    },
+    {
+        "name": "Harrison Electric",
+        "phone": "(763) 544-3300",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Twin Cities Electric",
+        "phone": "(651) 661-4199",
+        "address": "Minneapolis, MN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Affordable Locksmith Services",
+        "phone": "(612) 568-1084",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "Minneapolis Locksmiths",
+        "phone": "(612) 246-3925",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Emerald Locksmith Minneapolis",
+        "phone": "(612) 509-9919",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Minneapolis Mobile Locksmith",
+        "phone": "(612) 594-7734",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 60
+    },
+    {
+        "name": "Minneapolis Locksmith Co.",
+        "phone": "(612) 520-7614",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Anytime Locksmith",
+        "phone": "(612) 808-6653",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Twin Cities",
+        "phone": "(612) 315-0380",
+        "address": "Minneapolis, MN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

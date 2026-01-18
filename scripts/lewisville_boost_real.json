@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Roto-Rooter Lewisville",
+        "phone": "972-436-1263",
+        "address": "Lewisville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 480
+    },
+    {
+        "name": "Berkeys Plumbing Lewisville",
+        "phone": "972-464-2460",
+        "address": "Lewisville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "AAA AUGER Plumbing Services",
+        "phone": "(877) 999-1979",
+        "address": "Lewisville, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Lewisville Plumbing",
+        "phone": "972-317-5619",
+        "address": "Lewisville, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "CW Service Pros",
+        "phone": "972-395-2597",
+        "address": "Lewisville, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Add-All Electric Lewisville",
+        "phone": "(972) 254-1158",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Lewisville Emergency Electrician",
+        "phone": "(469) 444-0638",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "4G Electrician",
+        "phone": "(972) 440-9952",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Milestone Electric Lewisville",
+        "phone": "(972) 301-8385",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "TopTech Electric and Plumbing",
+        "phone": "(682) 262-5759",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "W3 Electric Lewisville",
+        "phone": "(972) 793-0733",
+        "address": "Lewisville, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "KeyMe Locksmiths Lewisville",
+        "phone": "(469) 966-1897",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "AJ Locksmith and Security",
+        "phone": "(214) 935-3614",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "A-1 Locksmith Lewisville",
+        "phone": "(972) 284-7500",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Agent Locksmith",
+        "phone": "(469) 414-3159",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "On Call 24/7 Locksmith Lewisville",
+        "phone": "(469) 676-0803",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "1st Class Locksmith",
+        "phone": "(214) 880-8250",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Lewisville Locksmith Store",
+        "phone": "(972) 512-6318",
+        "address": "Lewisville, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

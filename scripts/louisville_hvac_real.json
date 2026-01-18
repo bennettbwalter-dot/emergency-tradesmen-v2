@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Breckinridge Heating & Cooling",
+        "phone": "(502) 363-6133",
+        "address": "Louisville, KY",
+        "rating": 5.0,
+        "review_count": 310
+    },
+    {
+        "name": "DFH Company",
+        "phone": "(502) 968-6222",
+        "address": "Louisville, KY",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Aire Serv of Louisville",
+        "phone": "(502) 785-0551",
+        "address": "Louisville, KY",
+        "rating": 4.8,
+        "review_count": 1777
+    },
+    {
+        "name": "Prudential Heating & Air Conditioning",
+        "phone": "(502) 966-5813",
+        "address": "Louisville, KY",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Jarboe's Plumbing, Heating & Cooling",
+        "phone": "(502) 513-5972",
+        "address": "Louisville, KY",
+        "rating": 4.6,
+        "review_count": 4500
+    }
+]

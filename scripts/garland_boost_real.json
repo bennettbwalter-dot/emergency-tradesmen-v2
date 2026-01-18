@@ -1,0 +1,170 @@
+[
+    {
+        "name": "PPM Plumbing",
+        "phone": "(972) 864-3020",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Roto-Rooter Garland",
+        "phone": "(972) 728-3810",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 620
+    },
+    {
+        "name": "Emergency Plumbing on Call",
+        "phone": "(972) 597-5959",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Triple Crown Plumbing",
+        "phone": "(972) 544-6544",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Berkeys Plumbing Garland",
+        "phone": "(972) 464-2460",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Neil & Sons Plumbing",
+        "phone": "(469) 564-1700",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "24/7 Emergency Plumber Garland",
+        "phone": "(469) 444-7704",
+        "address": "Garland, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "ElectricMan",
+        "phone": "(972) 362-1804",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Cano Electric",
+        "phone": "817-242-2826",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Milestone Electric Garland",
+        "phone": "972-746-2685",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Copeland Home Services",
+        "phone": "469-884-6272",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Berkeys Electric Garland",
+        "phone": "972-464-2460",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "All Pro Electrical Services LLC",
+        "phone": "(972) 564-9316",
+        "address": "Garland, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AJ Locksmith and Security",
+        "phone": "(214) 935-3614",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "SOS Locksmith Garland",
+        "phone": "(469) 342-3354",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Star Garland",
+        "phone": "(972) 535-6788",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Garland Emergency Services Locksmiths",
+        "phone": "(972) 587-1996",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Garland Precise Locksmith",
+        "phone": "(972) 395-5421",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "The Locksmith Garland TX",
+        "phone": "(469) 719-3601",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Garland TX Locksmith Store",
+        "phone": "(972) 441-4023",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 280
+    },
+    {
+        "name": "T & C Emergency Locksmith",
+        "phone": "(469) 754-1604",
+        "address": "Garland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

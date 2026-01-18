@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Roto-Rooter NYC",
+        "phone": "212-687-1726",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 2200
+    },
+    {
+        "name": "CBB Plumbing Corp",
+        "phone": "(212) 929-8686",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "24 Hour Emergency Plumbing Service NYC",
+        "phone": "718-659-4800",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 520
+    },
+    {
+        "name": "Above & Beyond Plumbing & Heating",
+        "phone": "(718) 484-4911",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Plumbix",
+        "phone": "(917) 695-1326",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Plumbing NYC",
+        "phone": "(646) 580-7524",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "24 Hour Plumber NYC",
+        "phone": "(646) 693-6598",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Citywide Plumbers",
+        "phone": "1-800-310-2564",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 620
+    },
+    {
+        "name": "NYC Emergency Plumber & Sewer",
+        "phone": "(332) 900-3335",
+        "address": "New York, NY",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Monark Electric",
+        "phone": "(212) 537-9205",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Rella Electric",
+        "phone": "(914) 500-4505",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "24/7 Electrician NYC",
+        "phone": "(232) 724-2356",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Laurelton Electric",
+        "phone": "(646) 970-3991",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Electrician Brooklyn 24",
+        "phone": "+1 347-697-8844",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Lippolis Electric, Inc.",
+        "phone": "(914) 738-3550",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Mangi Electrical Corp",
+        "phone": "(718) 698-4040",
+        "address": "New York, NY",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "The NYC Locksmith",
+        "phone": "(646) 762-9069",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "Locksmith For NYC",
+        "phone": "(917) 696-8842",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Mr. Locks Locksmith NYC",
+        "phone": "(212) 780-0144",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Emergency NYC Locksmith",
+        "phone": "(929) 369-2000",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Top Lock Locksmiths & Security",
+        "phone": "(212) 518-2087",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Emergency Locksmith NYC",
+        "phone": "(212) 918-5463",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Arties Locksmith",
+        "phone": "(212) 328-9316",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Urgent Locksmith, LLC",
+        "phone": "(347) 897-5670",
+        "address": "New York, NY",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

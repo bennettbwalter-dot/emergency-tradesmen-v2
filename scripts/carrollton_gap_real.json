@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Plumbing Dynamics",
+        "address": "Carrollton, TX",
+        "phone": "214-929-3431",
+        "trade": "plumber",
+        "city": "Carrollton"
+    },
+    {
+        "name": "Barbosa Plumbing & Air Conditioning",
+        "address": "Carrollton, TX",
+        "phone": "972-784-8050",
+        "trade": "plumber",
+        "city": "Carrollton"
+    },
+    {
+        "name": "Triple Crown Plumbing",
+        "address": "Carrollton, TX",
+        "phone": "972-544-6544",
+        "trade": "plumber",
+        "city": "Carrollton"
+    },
+    {
+        "name": "Carrollton Mobile Locksmith, LLC",
+        "address": "2050 Keller Springs Rd, Carrollton, TX 75006",
+        "phone": "972-478-0439",
+        "trade": "locksmith",
+        "city": "Carrollton"
+    },
+    {
+        "name": "All County Locksmith Store",
+        "address": "Carrollton, TX",
+        "phone": "972-512-6358",
+        "trade": "locksmith",
+        "city": "Carrollton"
+    },
+    {
+        "name": "Affordable Locksmith Services",
+        "address": "Carrollton, TX 75006",
+        "phone": "972-512-6357",
+        "trade": "locksmith",
+        "city": "Carrollton"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Stanley Schultze & Co.",
+        "phone": "502-585-4256",
+        "address": "Louisville, KY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Glass Doctor of Louisville",
+        "phone": "(502) 804-2019",
+        "address": "Louisville, KY",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Inst-I-Glass of Louisville",
+        "phone": "(502) 773-4776",
+        "address": "Louisville, KY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Lambert Glass Company, Inc.",
+        "phone": "502-937-3300",
+        "address": "Louisville, KY",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Rite-Way Auto Glass",
+        "phone": "(502) 955-1549",
+        "address": "Louisville, KY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

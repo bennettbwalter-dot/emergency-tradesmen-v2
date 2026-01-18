@@ -1,0 +1,26 @@
+[
+    {
+        "name": "CM Electric Bangor",
+        "phone": "(207) 943-1086",
+        "address": "Bangor, ME",
+        "website": "https://cmelectric.me"
+    },
+    {
+        "name": "Integrity Electric Bangor",
+        "phone": "(207) 989-2600",
+        "address": "Bangor, ME",
+        "website": "https://integrityelectricbangor.com"
+    },
+    {
+        "name": "M.W. Electric",
+        "phone": "(207) 478-2623",
+        "address": "Bangor, ME",
+        "website": "https://bangormaineelectrician.com"
+    },
+    {
+        "name": "Starr Electrical Services LLC",
+        "phone": "(207) 551-5196",
+        "address": "Bangor, ME",
+        "website": "https://starrelectricalservices.com"
+    }
+]

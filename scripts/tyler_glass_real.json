@@ -1,0 +1,58 @@
+[
+    {
+        "name": "AutoGlass Express",
+        "phone": "(903) 566-2424",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Lackey Glass",
+        "phone": "(903) 279-4049",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Independent Glass & Mirror Company",
+        "phone": "(903) 597-8975",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Summit Mirror & Glass",
+        "phone": "903-566-7888",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "The Glass Guru of Tyler",
+        "phone": "903-308-5881",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Supreme Windows",
+        "phone": "(903) 288-4356",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    },
+    {
+        "name": "Apache Glass",
+        "phone": "903-509-0031",
+        "address": "Tyler, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Asbury Electric",
+        "phone": "757-767-4197",
+        "address": "Hampton, VA",
+        "website": "https://asburyelectric.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Hampton, VA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Levinsky Electric Inc.",
+        "phone": "757-486-7349",
+        "address": "Hampton, VA",
+        "website": "https://levinskyelectric.com"
+    },
+    {
+        "name": "Miller's Heating & Air",
+        "phone": "757-623-6600",
+        "address": "Hampton, VA",
+        "website": "https://millershomecomfort.com"
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "name": "The Chill Brothers",
+        "phone": "(844) 512-4455",
+        "address": "North Richland Hills, TX",
+        "website": "https://thechillbrothers.com/"
+    },
+    {
+        "name": "AC & Heat Solutions",
+        "phone": "(817) 854-4421",
+        "address": "North Richland Hills, TX",
+        "website": "https://acandheatsolutions.com/"
+    },
+    {
+        "name": "Prime AC and Heat",
+        "phone": "(972) 400-3602",
+        "address": "North Richland Hills, TX",
+        "website": "https://primeacandheat.com/"
+    },
+    {
+        "name": "Texas Discount Air",
+        "phone": "(682) 214-4822",
+        "address": "North Richland Hills, TX",
+        "website": "https://texasdiscountair.com/"
+    },
+    {
+        "name": "Superior AC & Heat",
+        "phone": "(817) 646-8200",
+        "address": "North Richland Hills, TX",
+        "website": "https://superioracnheat.com/"
+    },
+    {
+        "name": "AirCo Air Conditioning",
+        "phone": "(817) 590-0088",
+        "address": "North Richland Hills, TX",
+        "website": "https://airco.com/"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "PNW Restoration Services",
+        "phone": "(971) 247-3661",
+        "address": "Portland, OR",
+        "website": "https://pnwrestorationservices.com/"
+    },
+    {
+        "name": "PacWest Restoration",
+        "phone": "(503) 746-6545",
+        "address": "7409 SW Tech Center Dr, Suite 150, Tigard, OR 97223",
+        "website": "https://pacwestrestoration.com/"
+    },
+    {
+        "name": "J.R. Johnson, LLC",
+        "phone": "(503) 240-3388",
+        "address": "Portland, OR",
+        "website": "https://jrjohnson.com/"
+    },
+    {
+        "name": "ServiceMaster of Portland",
+        "phone": "(503) 483-8786",
+        "address": "Portland, OR",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Charter Construction",
+        "phone": "(503) 601-0291",
+        "address": "Portland, OR",
+        "website": "https://chartercon.com/"
+    }
+]

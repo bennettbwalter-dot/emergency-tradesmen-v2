@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Chicago Towing",
+        "phone": "(773) 681-9670",
+        "address": "Chicago, IL",
+        "rating": 5.0,
+        "review_count": 850
+    },
+    {
+        "name": "Tow Recover Assist",
+        "phone": "(800) 524-0795",
+        "address": "Chicago, IL",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Z & R Towing Chicago",
+        "phone": "(773) 984-6330",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Chicago Roadside Assistance",
+        "phone": "(773) 741-9494",
+        "address": "Chicago, IL",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "24 HR Towing Chicago",
+        "phone": "(773) 503-4560",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

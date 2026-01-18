@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Binswanger Glass Corpus Christi",
+        "phone": "(361) 855-4252",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Scott Glass",
+        "phone": "361-854-8000",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Glass Med-X",
+        "phone": "(361) 336-0948",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "National Auto Glass",
+        "phone": "(361) 249-4351",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Windshield of Texas",
+        "phone": "361-853-3939",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "After Hours Auto Glass",
+        "phone": "(361) 854-4638",
+        "address": "Corpus Christi, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    }
+]

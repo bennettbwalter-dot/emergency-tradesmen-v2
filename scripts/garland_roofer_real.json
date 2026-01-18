@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Frakes Roofing",
+        "phone": "(877) 550-3398",
+        "address": "Garland, TX",
+        "website": "https://frakesroofing.com/"
+    },
+    {
+        "name": "Robert Nelson Roofing",
+        "phone": "(888) 897-9811",
+        "address": "Garland, TX",
+        "website": "https://robertnelsonroofing.com/"
+    },
+    {
+        "name": "Phoenix Storm Restoration (PSR)",
+        "phone": "(945) 308-0425",
+        "address": "Garland, TX",
+        "website": "https://phoenixstormgroup.com/"
+    },
+    {
+        "name": "Texas Direct Roofing & Construction",
+        "phone": "(817) 775-3540",
+        "address": "Garland, TX",
+        "website": "https://txdroofing.com/"
+    },
+    {
+        "name": "SunTex Roofing",
+        "phone": "(214) 766-3669",
+        "address": "Garland, TX",
+        "website": "https://suntexroofs.com/"
+    }
+]

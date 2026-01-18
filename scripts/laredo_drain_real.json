@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Havens Plumbing",
+        "address": "Laredo, TX",
+        "phone": "956-725-5025",
+        "trade": "drain-specialist",
+        "city": "Laredo"
+    },
+    {
+        "name": "DKH",
+        "address": "Laredo, TX",
+        "phone": "956-723-5561",
+        "trade": "drain-specialist",
+        "city": "Laredo"
+    },
+    {
+        "name": "Jerry's Sewer and Drain",
+        "address": "Laredo, TX",
+        "phone": "956-712-4091",
+        "trade": "drain-specialist",
+        "city": "Laredo"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "SDC Plumbing Garden City",
+        "phone": "888-218-8797",
+        "address": "Garden City, GA",
+        "website": "https://sdcplumbing.com"
+    },
+    {
+        "name": "Sky High Plumbing",
+        "phone": "877-730-8216",
+        "address": "Garden City, GA",
+        "website": "https://skyhighplumbing.com"
+    },
+    {
+        "name": "Sunrise Plumbing",
+        "phone": "912-572-9234",
+        "address": "Garden City, GA",
+        "website": "https://sunriseplumbingpros.com"
+    },
+    {
+        "name": "Roto-Rooter Garden City",
+        "phone": "912-303-8570",
+        "address": "Garden City, GA",
+        "website": "https://rotorooter.com"
+    }
+]

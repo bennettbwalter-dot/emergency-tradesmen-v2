@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Balanced Comfort",
+        "phone": "(559) 234-4131",
+        "address": "Fresno, CA",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Kim's Plumbing",
+        "phone": "(559) 449-1985",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "A1 Emergency Plumbers Fresno",
+        "phone": "(559) 239-6667",
+        "address": "Fresno, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Art Douglas Plumbing Inc.",
+        "phone": "(559) 291-7230",
+        "address": "Fresno, CA",
+        "rating": 4.9,
+        "review_count": 92
+    },
+    {
+        "name": "Plumbers 911",
+        "phone": "(559) 258-1904",
+        "address": "Fresno, CA",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

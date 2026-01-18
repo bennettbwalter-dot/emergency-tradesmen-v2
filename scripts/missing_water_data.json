@@ -1,0 +1,42 @@
+[
+  {
+    "name": "RapidDry Restoration",
+    "phone": "07814 508352",
+    "city": "Birmingham",
+    "trade_slug": "water-restoration",
+    "address": "Birmingham, UK",
+    "country_code": "GB"
+  },
+  {
+    "name": "Clean Team Scotland",
+    "phone": "0141 363 0349",
+    "city": "Glasgow",
+    "trade_slug": "water-restoration",
+    "address": "Glasgow, UK",
+    "country_code": "GB"
+  },
+  {
+    "name": "Absolutely Clean Glasgow",
+    "phone": "0800 458 4901",
+    "city": "Glasgow",
+    "trade_slug": "water-restoration",
+    "address": "Glasgow, UK",
+    "country_code": "GB"
+  },
+  {
+    "name": "The Water And Fire Damage Repair Company",
+    "phone": "0131 677 8482",
+    "city": "Edinburgh",
+    "trade_slug": "water-restoration",
+    "address": "Edinburgh, UK",
+    "country_code": "GB"
+  },
+  {
+    "name": "Response Bioclean Wolverhampton",
+    "phone": "0800 002 5959",
+    "city": "Wolverhampton",
+    "trade_slug": "water-restoration",
+    "address": "Wolverhampton, UK",
+    "country_code": "GB"
+  }
+]

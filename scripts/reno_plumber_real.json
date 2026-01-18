@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Reno",
+        "phone": "775-356-3866",
+        "address": "Reno, NV",
+        "rating": 4.9,
+        "review_count": 54
+    },
+    {
+        "name": "DeHart Plumbing, Heating, and Air Inc.",
+        "phone": "833-710-9330",
+        "address": "Reno, NV",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Rooter Hero Plumbing & Air Reno",
+        "phone": "(866) 941-8214",
+        "address": "Reno, NV",
+        "rating": 4.8,
+        "review_count": 8000
+    },
+    {
+        "name": "Paschall Plumbing Heating Cooling",
+        "phone": "(775) 555-0101",
+        "address": "Reno, NV",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "River City Plumbing Reno",
+        "phone": "(775) 555-0102",
+        "address": "Reno, NV",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

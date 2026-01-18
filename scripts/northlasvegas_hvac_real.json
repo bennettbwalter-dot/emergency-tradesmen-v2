@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Johnny On The Spot",
+        "phone": "(702) 645-1212",
+        "address": "North Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "One Hour Air Conditioning & Heating",
+        "phone": "(702) 410-6677",
+        "address": "North Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 577
+    },
+    {
+        "name": "Express Home Services",
+        "phone": "(702) 362-9500",
+        "address": "North Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 985
+    },
+    {
+        "name": "Simply Air Conditioning and Heating, LLC",
+        "phone": "(702) 580-0083",
+        "address": "North Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 524
+    },
+    {
+        "name": "Nevada Residential Services",
+        "phone": "(702) 504-4625",
+        "address": "North Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 336
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Reliant Plumbing",
+        "phone": "512-399-6886",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Urgent Care Plumbing",
+        "phone": "512-888-4812",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Abacus Plumbing Round Rock",
+        "phone": "512-305-1109",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "Colony Home Services",
+        "phone": "512-993-1456",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "1-800-Plumber +Air",
+        "phone": "512-758-6426",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "On Call Plumbers",
+        "phone": "512-643-5254",
+        "address": "Round Rock, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "TruTec Electric",
+        "phone": "(512) 641-5311",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Cox Electric",
+        "phone": "512-876-8766",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Fox Service Company",
+        "phone": "(512) 488-1120",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(512) 837-9500",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 650
+    },
+    {
+        "name": "Quantum Electric",
+        "phone": "512-246-1145",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "A Team Home Services",
+        "phone": "512-253-4456",
+        "address": "Round Rock, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 190
+    },
+    {
+        "name": "Round Rock Locksmith",
+        "phone": "(512) 524-3776",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Pros On Call Round Rock",
+        "phone": "(512) 643-7268",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "1st Class Locksmith Round Rock",
+        "phone": "(512) 722-7442",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "24 Hour Locksmith Round Rock TX",
+        "phone": "(512) 692-9678",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Round Rock Locksmith & Safe",
+        "phone": "(512) 354-1485",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Locksmith Round Rock TX 78683",
+        "phone": "(737) 315-3653",
+        "address": "Round Rock, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

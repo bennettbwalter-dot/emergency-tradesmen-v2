@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "East Lansing, MI",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Energize Electric Pros",
+        "phone": "(517) 993-8287",
+        "address": "East Lansing, MI",
+        "website": "https://energizeelectricpros.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "East Lansing, MI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "East Lansing, MI",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

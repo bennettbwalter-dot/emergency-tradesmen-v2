@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Dixie Electric, Inc.",
+        "phone": "(301) 473-4665",
+        "address": "Middletown, MD",
+        "website": "https://dixiecorp.com"
+    },
+    {
+        "name": "Kolb Electric",
+        "phone": "(877) 287-1179",
+        "address": "Middletown, MD",
+        "website": "https://kolbelectric.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Middletown, MD",
+        "website": "http://moorepowerelectrical.com"
+    },
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Middletown, MD",
+        "website": "https://needelectric.com"
+    }
+]

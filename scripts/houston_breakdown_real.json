@@ -1,0 +1,37 @@
+[
+    {
+        "name": "AA Affordable Towing",
+        "phone": "(281) 859-5678",
+        "address": "Houston, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "10-4 Tow Houston",
+        "phone": "(832) 930-7601",
+        "address": "Houston, TX",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Rocket's Towing Houston",
+        "phone": "(832) 925-4585",
+        "address": "Houston, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Houston Towing Service",
+        "phone": "(713) 489-1311",
+        "address": "Houston, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Best Houston Towing",
+        "phone": "(713) 732-2000",
+        "address": "Houston, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

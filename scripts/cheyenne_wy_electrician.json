@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Braden Electric Cheyenne",
+        "phone": "(307) 214-9955",
+        "address": "Cheyenne, WY",
+        "website": "https://bradenelectricinc.com"
+    },
+    {
+        "name": "NextGen Electric WY",
+        "phone": "(307) 287-0521",
+        "address": "Cheyenne, WY",
+        "website": "https://nextgenelectricwyo.com"
+    },
+    {
+        "name": "Kotch Electric Home Service",
+        "phone": "(307) 287-1632",
+        "address": "Cheyenne, WY",
+        "website": "https://kotchelectric.com"
+    },
+    {
+        "name": "W.G. Dale Electric Co",
+        "phone": "(307) 632-9238",
+        "address": "Cheyenne, WY",
+        "website": "https://daleelectric.com"
+    }
+]

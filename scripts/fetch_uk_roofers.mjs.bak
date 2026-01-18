@@ -1,0 +1,211 @@
+import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createHash } from 'crypto';
+import { createClient } from '@supabase/supabase-js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
+const GOOGLE_API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY;
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!GOOGLE_API_KEY || !SUPABASE_URL || !SUPABASE_KEY) {
+    console.error("❌ Missing required environment variables");
+    process.exit(1);
+}
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Generate deterministic UUID
+function toUUID(str) {
+    const hash = createHash('md5').update(str).digest('hex');
+    const chars = hash.split('');
+    chars[12] = '4';
+    chars[16] = ((parseInt(chars[16], 16) & 0x3) | 0x8).toString(16);
+    return [
+        chars.slice(0, 8).join(''),
+        chars.slice(8, 12).join(''),
+        chars.slice(12, 16).join(''),
+        chars.slice(16, 20).join(''),
+        chars.slice(20).join('')
+    ].join('-');
+}
+
+// Load UK cities
+const ukCitiesPath = path.join(__dirname, '../src/lib/uk_cities.json');
+const UK_CITIES = JSON.parse(fs.readFileSync(ukCitiesPath, 'utf-8'));
+
+// Categorize cities by size (approximate populations)
+const MAJOR_CITIES = ['London', 'Birmingham', 'Manchester', 'Glasgow', 'Leeds', 'Liverpool', 'Sheffield', 'Edinburgh', 'Bristol', 'Cardiff', 'Belfast', 'Newcastle', 'Nottingham', 'Leicester', 'Coventry', 'Bradford', 'Hull', 'Stoke-on-Trent', 'Wolverhampton', 'Derby'];
+
+const MEDIUM_CITIES = ['Southampton', 'Portsmouth', 'Plymouth', 'Reading', 'Bolton', 'Luton', 'Preston', 'Aberdeen', 'Sunderland', 'Norwich', 'Swansea', 'Dundee', 'Milton Keynes', 'Northampton', 'Peterborough', 'Ipswich', 'York', 'Gloucester', 'Exeter', 'Cambridge', 'Oxford', 'Blackpool', 'Bournemouth', 'Swindon', 'Middlesbrough', 'Huddersfield', 'Southend-on-Sea', 'Warrington', 'Basildon', 'Slough'];
+
+// Search queries for roofers and builders
+const SEARCH_QUERIES = [
+    'emergency roofer',
+    'roofing contractor',
+    'roof repair',
+    'emergency builder',
+    'building contractor',
+    'emergency roofing services'
+];
+
+async function searchPlaces(query, cityName) {
+    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query + ' ' + cityName + ' UK')}&key=${GOOGLE_API_KEY}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.status === 'OK' ? data.results || [] : [];
+    } catch (e) {
+        console.error('Search Error:', e.message);
+        return [];
+    }
+}
+
+async function getPlaceDetails(placeId) {
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=place_id,name,formatted_address,formatted_phone_number,international_phone_number,rating,user_ratings_total,website,opening_hours,geometry&key=${GOOGLE_API_KEY}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.status === 'OK' ? data.result : null;
+    } catch (e) {
+        console.error('Details Error:', e.message);
+        return null;
+    }
+}
+
+function isValidUKPhone(phone) {
+    if (!phone) return false;
+    // Check for UK phone patterns: +44, 0, or (0)
+    return /^(\+44|0|\(0\))/.test(phone.replace(/\s/g, ''));
+}
+
+async function collectCityData(cityName, targetCount) {
+    const businesses = [];
+    const seenPlaceIds = new Set();
+
+    process.stdout.write(`  ${cityName} (target: ${targetCount})... `);
+
+    for (const query of SEARCH_QUERIES) {
+        if (businesses.length >= targetCount) break;
+
+        const places = await searchPlaces(query, cityName);
+        await new Promise(r => setTimeout(r, 200)); // Rate limiting
+
+        for (const place of places) {
+            if (businesses.length >= targetCount) break;
+            if (seenPlaceIds.has(place.place_id)) continue;
+            seenPlaceIds.add(place.place_id);
+
+            await new Promise(r => setTimeout(r, 150)); // Rate limiting
+
+            const details = await getPlaceDetails(place.place_id);
+            if (!details) continue;
+
+            const phone = details.formatted_phone_number || details.international_phone_number;
+            if (!isValidUKPhone(phone)) continue;
+
+            // Check if address contains the city name (validation)
+            if (!details.formatted_address?.toLowerCase().includes(cityName.toLowerCase())) {
+                continue;
+            }
+
+            const uuid = toUUID(`google-uk-roofer-${details.place_id}`);
+            const slug = details.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + `-${uuid.substring(0, 8)}`;
+
+            businesses.push({
+                id: uuid,
+                slug,
+                name: details.name,
+                trade: 'roofer',
+                city: cityName,
+                country_code: 'GB',
+                address: details.formatted_address,
+                phone,
+                website: details.website || null,
+                latitude: details.geometry?.location.lat,
+                longitude: details.geometry?.location.lng,
+                rating: details.rating || 0,
+                review_count: details.user_ratings_total || 0,
+                is_open_24_hours: details.opening_hours?.open_now_text?.includes('24') || false,
+                google_place_id: details.place_id
+            });
+        }
+    }
+
+    process.stdout.write(`Found ${businesses.length}\n`);
+    return businesses;
+}
+
+async function main() {
+    console.log("🏴󠁧󠁢󠁥󠁮󠁧󠁿 UK ROOFER/BUILDER DATA COLLECTION");
+    console.log(`Total cities: ${UK_CITIES.length}\n`);
+
+    const allBusinesses = [];
+    let processed = 0;
+
+    // Process major cities (20 listings each)
+    console.log("\n📍 MAJOR CITIES (20 listings each):");
+    for (const city of MAJOR_CITIES) {
+        if (!UK_CITIES.includes(city)) continue;
+        const cityData = await collectCityData(city, 20);
+        allBusinesses.push(...cityData);
+        processed++;
+
+        if (processed % 5 === 0) {
+            console.log(`  Progress: ${processed}/${MAJOR_CITIES.length} major cities`);
+        }
+    }
+
+    // Process medium cities (12 listings each)
+    console.log("\n📍 MEDIUM CITIES (12 listings each):");
+    for (const city of MEDIUM_CITIES) {
+        if (!UK_CITIES.includes(city)) continue;
+        const cityData = await collectCityData(city, 12);
+        allBusinesses.push(...cityData);
+        processed++;
+
+        if (processed % 10 === 0) {
+            console.log(`  Progress: ${processed - MAJOR_CITIES.length}/${MEDIUM_CITIES.length} medium cities`);
+        }
+    }
+
+    // Process smaller cities (7 listings each)
+    console.log("\n📍 SMALLER CITIES (7 listings each):");
+    const smallerCities = UK_CITIES.filter(c => !MAJOR_CITIES.includes(c) && !MEDIUM_CITIES.includes(c));
+    let smallProcessed = 0;
+
+    for (const city of smallerCities) {
+        const cityData = await collectCityData(city, 7);
+        allBusinesses.push(...cityData);
+        smallProcessed++;
+
+        if (smallProcessed % 20 === 0) {
+            console.log(`  Progress: ${smallProcessed}/${smallerCities.length} smaller cities`);
+        }
+    }
+
+    // Save to JSON file
+    const outputPath = path.join(__dirname, 'uk_roofers_complete.json');
+    fs.writeFileSync(outputPath, JSON.stringify(allBusinesses, null, 2));
+
+    console.log(`\n✅ Collection complete!`);
+    console.log(`   Total businesses: ${allBusinesses.length}`);
+    console.log(`   Saved to: uk_roofers_complete.json`);
+    console.log(`\n📊 Breakdown:`);
+    console.log(`   Major cities: ${allBusinesses.filter(b => MAJOR_CITIES.includes(b.city)).length}`);
+    console.log(`   Medium cities: ${allBusinesses.filter(b => MEDIUM_CITIES.includes(b.city)).length}`);
+    console.log(`   Smaller cities: ${allBusinesses.filter(b => !MAJOR_CITIES.includes(b.city) && !MEDIUM_CITIES.includes(b.city)).length}`);
+
+    // Ask user before importing
+    console.log(`\n⚠️  Ready to import to Supabase production database?`);
+    console.log(`   Run: node scripts/import_uk_roofers.mjs`);
+}
+
+main().catch(console.error);

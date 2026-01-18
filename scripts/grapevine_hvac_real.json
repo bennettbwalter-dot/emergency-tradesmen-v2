@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Lex Air Conditioning and Heating",
+        "phone": "(972) 217-8955",
+        "address": "Grapevine, TX",
+        "website": "https://lexairconditioning.com/"
+    },
+    {
+        "name": "Comfort Force HVAC",
+        "phone": "(817) 231-3581",
+        "address": "Grapevine, TX",
+        "website": "https://comfortforcehvac.net/"
+    },
+    {
+        "name": "Integrity Air Conditioning",
+        "phone": "(972) 734-1428",
+        "address": "Grapevine, TX",
+        "website": "https://integrityairconditioning.com/"
+    },
+    {
+        "name": "Washburn Air",
+        "phone": "(972) 226-7485",
+        "address": "Grapevine, TX",
+        "website": "https://washburnair.com/"
+    },
+    {
+        "name": "Tom's Mechanical",
+        "phone": "(817) 277-4493",
+        "address": "Grapevine, TX",
+        "website": "https://tomsmechanical.com/"
+    },
+    {
+        "name": "Willard Cooling, Heating, Plumbing, & Electrical",
+        "phone": "(817) 290-3525",
+        "address": "Grapevine, TX",
+        "website": "https://willardac.com/"
+    }
+]

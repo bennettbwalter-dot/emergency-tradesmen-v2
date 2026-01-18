@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Glass Orlando",
+        "phone": "(407) 298-4994",
+        "address": "Orlando, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "ABob's Glass & Door Repairs",
+        "phone": "954-680-0506",
+        "address": "Orlando, FL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Emergency Glass Service Inc.",
+        "phone": "407-321-9400",
+        "address": "Orlando, FL",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Central Florida Glass",
+        "phone": "407-873-8885",
+        "address": "Orlando, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

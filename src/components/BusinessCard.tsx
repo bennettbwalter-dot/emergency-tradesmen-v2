@@ -185,7 +185,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           <div className="space-y-4 mb-6">
             <div className="flex items-center gap-3 text-sm h-5">
               <MapPin className={`w-4 h-4 flex-shrink-0 ${isPremium ? "text-emerald-600" : "text-gold"}`} />
-              <span className="line-clamp-1 text-slate-700 font-bold">{business.address || "Serving London & Surrounding"}</span>
+              <span className="line-clamp-1 text-slate-700 font-bold">{business.address || (business.city ? `Serving ${business.city} & Surrounding` : "Serving Local Area")}</span>
             </div>
             <div className="flex items-center gap-3 text-sm h-5">
               <Clock className={`w-4 h-4 flex-shrink-0 ${isPremium ? "text-emerald-600" : "text-gold"}`} />

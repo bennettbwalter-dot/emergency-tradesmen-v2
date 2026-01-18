@@ -1,25 +1,10 @@
 import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { trades, cities, usCities } from "@/lib/trades";
+import { trades, cities, usCities, cityToState } from "@/lib/trades";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
-
-const cityToState: Record<string, string> = {
-    // California
-    "Los Angeles": "ca", "San Diego": "ca", "San Francisco": "ca", "Sacramento": "ca",
-    // Texas
-    "Dallas": "tx", "Houston": "tx", "Austin": "tx", "San Antonio": "tx", "Arlington": "tx", "Frisco": "tx", "Irving": "tx", "Plano": "tx", "Fort Worth": "tx",
-    // Florida
-    "Miami": "fl", "Orlando": "fl", "Jacksonville": "fl", "Tampa": "fl",
-    // Arizona
-    "Phoenix": "az", "Tucson": "az", "Mesa": "az", "Scottsdale": "az",
-    // Washington
-    "Seattle": "wa", "Spokane": "wa", "Tacoma": "wa",
-    // Others
-    "Buffalo": "ny", "Cleveland": "oh", "Detroit": "mi", "Pittsburgh": "pa", "Portland": "or"
-};
 
 export default function LocationsDirectory() {
     const { settings } = useLocalization();
@@ -102,7 +87,7 @@ export default function LocationsDirectory() {
                                                     <li key={`${city}-${trade.slug}`}>
                                                         <Link
                                                             to={isUS
-                                                                ? `/us/${state}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
+                                                                ? `/us/${cityToState[city] || 'us'}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
                                                                 : `/emergency-${trade.slug}/${city.toLowerCase().replace(/ /g, '-')}`
                                                             }
                                                             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"

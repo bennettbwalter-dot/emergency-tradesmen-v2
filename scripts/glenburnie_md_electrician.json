@@ -1,0 +1,26 @@
+[
+    {
+        "name": "FH Furr",
+        "phone": "(410) 204-4713",
+        "address": "Glen Burnie, MD",
+        "website": "https://fhfurr.com"
+    },
+    {
+        "name": "Kolb Electric Glen Burnie",
+        "phone": "(877) 287-1179",
+        "address": "Glen Burnie, MD",
+        "website": "https://kolbelectric.com"
+    },
+    {
+        "name": "Hawkins Electric Glen Burnie",
+        "phone": "(877) 927-0900",
+        "address": "Glen Burnie, MD",
+        "website": "https://hawkinselectric.com"
+    },
+    {
+        "name": "Chesapeake Electric Glen Burnie",
+        "phone": "(410) 280-3388",
+        "address": "Glen Burnie, MD",
+        "website": "https://cheselectric.com"
+    }
+]

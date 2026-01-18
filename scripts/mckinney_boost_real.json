@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Berkeys Plumbing McKinney",
+        "phone": "972-464-2460",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Baker Brothers Plumbing McKinney",
+        "phone": "214-892-2225",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 950
+    },
+    {
+        "name": "Roto-Rooter McKinney",
+        "phone": "972-439-9981",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Benjamin Franklin Plumbing McKinney",
+        "phone": "972-476-0480",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 620
+    },
+    {
+        "name": "McKinney Emergency Plumber",
+        "phone": "(877) 409-6169",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Plumbery Emergency Plumber Pros",
+        "phone": "(877) 398-4547",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Top Flow Plumbing Co.",
+        "phone": "469-867-3569",
+        "address": "McKinney, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Electrical Garage",
+        "phone": "(972) 362-1804",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Blue Line Electric",
+        "phone": "972-555-0199",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "W3 Electric",
+        "phone": "972-793-0733",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "CCE Solutions LLC",
+        "phone": "469-952-0456",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Brotherlylove Electric",
+        "phone": "214-303-9055",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Sonic Electrical Contractor, LLC",
+        "phone": "682-360-8777",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 80
+    },
+    {
+        "name": "Nova Electrical Contractors, Inc.",
+        "phone": "972-573-4745",
+        "address": "McKinney, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "AJ Locksmith and Security McKinney",
+        "phone": "(214) 935-3614",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "On Call 24/7 Locksmith",
+        "phone": "(469) 676-0803",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "McKinney TX Locksmith Store",
+        "phone": "(972) 535-5162",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "McKinney Locksmith Service",
+        "phone": "(972) 512-6351",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hour Locksmith Mckinney",
+        "phone": "(972) 674-9405",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "McKinney 24 Hour Locksmith",
+        "phone": "(214) 326-0141",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Emergency Locksmith McKinney",
+        "phone": "(469) 207-1613",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 130
+    },
+    {
+        "name": "A-1 Locksmith McKinney",
+        "phone": "(972) 364-4305",
+        "address": "McKinney, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    }
+]

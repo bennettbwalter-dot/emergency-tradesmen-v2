@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Absolute Glass",
+        "phone": "(859) 356-6789",
+        "address": "Cincinnati, OH",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Seeger Glass Company",
+        "phone": "513-922-3050",
+        "address": "Cincinnati, OH",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Inst-I-Glass of Southwest Ohio",
+        "phone": "(513) 410-6944",
+        "address": "Cincinnati, OH",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "GlassPro Inc",
+        "phone": "(513) 874-6559",
+        "address": "Cincinnati, OH",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Auto Glass Now Cincinnati",
+        "phone": "513-381-1110",
+        "address": "Cincinnati, OH",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

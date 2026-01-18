@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Wagner Mechanical",
+        "phone": "(505) 317-6903",
+        "address": "Rio Rancho, NM",
+        "website": "https://wagnermechanical.com"
+    },
+    {
+        "name": "Five Star Electric",
+        "phone": "(505) 489-5635",
+        "address": "Rio Rancho, NM",
+        "website": "https://fivestarelectricnm.com"
+    },
+    {
+        "name": "Energized Electric LLC",
+        "phone": "(505) 246-6922",
+        "address": "Rio Rancho, NM",
+        "website": "https://energizedelectric505.com"
+    },
+    {
+        "name": "All Power Electric",
+        "phone": "(505) 792-4663",
+        "address": "Rio Rancho, NM",
+        "website": "https://allpowerelectricnm.com"
+    }
+]

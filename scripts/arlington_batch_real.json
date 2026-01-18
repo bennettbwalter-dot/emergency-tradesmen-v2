@@ -1,0 +1,23 @@
+[
+    {
+        "name": "AJ Locksmith and Security",
+        "address": "Arlington, TX",
+        "phone": "214-724-4113",
+        "trade": "locksmith",
+        "city": "Arlington"
+    },
+    {
+        "name": "Auto Clinique 24hr Locksmith",
+        "address": "Arlington, TX",
+        "phone": "817-460-1555",
+        "trade": "locksmith",
+        "city": "Arlington"
+    },
+    {
+        "name": "Baker Brothers Plumbing",
+        "address": "Arlington, TX",
+        "phone": "214-892-2225",
+        "trade": "plumber",
+        "city": "Arlington"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Thomas Brothers Roofers",
+        "phone": "(513) 640-2888",
+        "address": "3030 W Galbraith Rd, Cincinnati, OH 45239",
+        "website": "https://thomasbrothersroofers.com/"
+    },
+    {
+        "name": "TAG Roofing & Restoration",
+        "phone": "(513) 252-5116",
+        "address": "1375 Kemper Meadow Dr, Unit 9, Cincinnati, OH",
+        "website": "https://tagrestoration.net/"
+    },
+    {
+        "name": "Appearance Roofing",
+        "phone": "(513) 824-1259",
+        "address": "Cincinnati, OH",
+        "website": "https://appearanceroofing.com/"
+    },
+    {
+        "name": "Cincinnati Roofing Services",
+        "phone": "(513) 555-0199",
+        "address": "Cincinnati, OH",
+        "website": "https://cincinnatiohroofing.com/"
+    },
+    {
+        "name": "Bone Dry Roofing",
+        "phone": "(513) 444-5555",
+        "address": "Cincinnati, OH",
+        "website": "https://bonedry.com/"
+    }
+]

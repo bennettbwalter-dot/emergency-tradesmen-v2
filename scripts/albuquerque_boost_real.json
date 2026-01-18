@@ -1,0 +1,210 @@
+[
+    {
+        "name": "Affordable Service Plumbing",
+        "phone": "(505) 255-4328",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "TLC Plumbing Heating Cooling",
+        "phone": "(505) 761-9644",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Rocketman Plumbing",
+        "phone": "505-393-3498",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Wagner Mechanical",
+        "phone": "(505) 317-6903",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "On Call Plumbers Albuquerque",
+        "phone": "(575) 219-4776",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Albuquerque Emergency Plumber",
+        "phone": "505-349-4320",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Albuquerque Plumbing, Heating & Cooling",
+        "phone": "(505) 349-4404",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Daniels Plumbing, Heating and Air Conditioning, LLC",
+        "phone": "505-898-8860",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "B. Carlson Heating, Air Conditioning & Plumbing",
+        "phone": "505-349-4409",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Roto-Rooter Albuquerque",
+        "phone": "505-944-7244",
+        "address": "Albuquerque, NM",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "G R Electric",
+        "phone": "(505) 877-3684",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Number One Plumbing, AC, Solar & Electric",
+        "phone": "(505) 999-9567",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Conway Electric",
+        "phone": "(505) 344-6096",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "McDonald Electric",
+        "phone": "(505) 220-5521",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Santoselec",
+        "phone": "(505) 805-2163",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 80
+    },
+    {
+        "name": "Calhoun Electric Inc",
+        "phone": "(505) 892-2429",
+        "address": "Albuquerque, NM",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "505 Locksmith Albuquerque",
+        "phone": "(505) 337-4710",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Albuquerque Elite Locksmith",
+        "phone": "(505) 658-3116",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "City Locksmith Store",
+        "phone": "(505) 634-5455",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Albuquerque Locksmith",
+        "phone": "(505) 859-7207",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Heights Security",
+        "phone": "(505) 265-7807",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Pop-A-Lock Locksmith Albuquerque",
+        "phone": "(505) 242-4550",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "911 Locksmith Of Albuquerque",
+        "phone": "(505) 797-7105",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Albuquerque Lock And Safe",
+        "phone": "(505) 634-5091",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Discount Locksmith of Albuquerque",
+        "phone": "(505) 210-8802",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "The Lock Shop",
+        "phone": "(505) 221-1222",
+        "address": "Albuquerque, NM",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Kline Electrical Services",
+        "phone": "(240) 465-5463",
+        "address": "Ballenger Creek, MD",
+        "website": "https://gokline.com"
+    },
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Ballenger Creek, MD",
+        "website": "https://needelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Ballenger Creek, MD",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Ryan Electric",
+        "phone": "(240) 490-7090",
+        "address": "Ballenger Creek, MD",
+        "website": "https://ryanelec.com"
+    }
+]

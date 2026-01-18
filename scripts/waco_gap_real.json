@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Waco Drain Solutions",
+        "address": "3120 W Loop 340, Waco, TX 76706",
+        "phone": "844-942-1178",
+        "trade": "plumber",
+        "city": "Waco"
+    },
+    {
+        "name": "Ryberg Plumbing LLC",
+        "address": "Waco, TX",
+        "phone": "254-637-0472",
+        "trade": "plumber",
+        "city": "Waco"
+    },
+    {
+        "name": "ABC Home & Commercial Services",
+        "address": "Waco, TX",
+        "phone": "254-910-8150",
+        "trade": "plumber",
+        "city": "Waco"
+    },
+    {
+        "name": "Brewer Lock & Safe Co.",
+        "address": "1624 Austin Avenue, Waco, TX 76701",
+        "phone": "254-753-6663",
+        "trade": "locksmith",
+        "city": "Waco"
+    },
+    {
+        "name": "Therrell Lock & Safe Co.",
+        "address": "719 Lake Air Dr, Waco, TX 76710",
+        "phone": "254-776-6111",
+        "trade": "locksmith",
+        "city": "Waco"
+    },
+    {
+        "name": "Pop-A-Lock of Waco",
+        "address": "Waco, TX",
+        "phone": "254-753-6663",
+        "trade": "locksmith",
+        "city": "Waco"
+    }
+]

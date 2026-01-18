@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky Bessemer",
+        "phone": "(888) 826-0091",
+        "address": "Bessemer, AL",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Worrell Electrical Services Bessemer",
+        "phone": "(205) 618-4279",
+        "address": "Bessemer, AL",
+        "website": "https://worrellelectricalservices.com"
+    },
+    {
+        "name": "O'Connor's Electrical Bessemer",
+        "phone": "(844) 484-2612",
+        "address": "Bessemer, AL",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lew Sader Electric Bessemer",
+        "phone": "(888) 851-5284",
+        "address": "Bessemer, AL",
+        "website": "https://lewsaderelectric.com"
+    }
+]

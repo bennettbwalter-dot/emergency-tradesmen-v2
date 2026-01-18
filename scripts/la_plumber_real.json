@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Red Lilly Plumbing",
+        "phone": "(323) 319-4102",
+        "address": "Los Angeles, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Twin Home Experts",
+        "phone": "(877) 264-5052",
+        "address": "Los Angeles, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Titan Brother's Plumbing",
+        "phone": "(818) 435-3776",
+        "address": "Los Angeles, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Rooter Hero Plumbing",
+        "phone": "(424) 396-2740",
+        "address": "Los Angeles, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Ritz Plumbing",
+        "phone": "1-800-273-6700",
+        "address": "Los Angeles, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

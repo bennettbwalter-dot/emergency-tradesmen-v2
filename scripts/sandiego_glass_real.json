@@ -1,0 +1,50 @@
+[
+    {
+        "name": "San Diego Board Up",
+        "phone": "619-666-2306",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Anytime Board Up",
+        "phone": "619-430-8898",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "University Glass",
+        "phone": "619-430-8898",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "San Diego Emergency Glass Company",
+        "phone": "619-420-2544",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "C&C Glass",
+        "phone": "858-292-6028",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Bob's Glass and Screen Co.",
+        "phone": "858-586-1522",
+        "address": "San Diego, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 130
+    }
+]

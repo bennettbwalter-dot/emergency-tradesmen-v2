@@ -1,0 +1,37 @@
+[
+    {
+        "name": "American Vintage Home",
+        "phone": "(847) 251-5283",
+        "address": "Chicago, IL",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Four Seasons Heating, Air Conditioning & Plumbing",
+        "phone": "(866) 444-2404",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 25000
+    },
+    {
+        "name": "ABC Plumbing, Sewer, Heating, Cooling and Electric",
+        "phone": "(888) 868-6667",
+        "address": "Chicago, IL",
+        "rating": 4.8,
+        "review_count": 4500
+    },
+    {
+        "name": "Deljo Heating & Cooling",
+        "phone": "(773) 248-1144",
+        "address": "Chicago, IL",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "All Temp Heating & Air Conditioning",
+        "phone": "(312) 226-3000",
+        "address": "Chicago, IL",
+        "rating": 4.7,
+        "review_count": 320
+    }
+]

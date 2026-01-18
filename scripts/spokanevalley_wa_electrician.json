@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Spokane Valley Electric",
+        "phone": "(866) 265-7840",
+        "address": "Spokane Valley, WA",
+        "website": "https://spokanevalleyelectric.com"
+    },
+    {
+        "name": "Handyman Electric LLC",
+        "phone": "(509) 993-0303",
+        "address": "Spokane Valley, WA",
+        "website": "https://hmanelectric.com"
+    },
+    {
+        "name": "Infinite Electric Corp",
+        "phone": "(509) 723-0022",
+        "address": "Spokane Valley, WA",
+        "website": "https://infiniteelectrician.com"
+    },
+    {
+        "name": "Lite It Up Electric",
+        "phone": "(509) 869-9090",
+        "address": "Spokane Valley, WA",
+        "website": "https://liteitupelectricllc.com"
+    }
+]

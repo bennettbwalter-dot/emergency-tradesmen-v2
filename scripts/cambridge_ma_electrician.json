@@ -1,0 +1,26 @@
+[
+    {
+        "name": "MA Electrical Services",
+        "phone": "(855) 556-9798",
+        "address": "Cambridge, MA",
+        "website": "https://maelectricalservices.com"
+    },
+    {
+        "name": "Timothy Santos Electric",
+        "phone": "(978) 534-7221",
+        "address": "Cambridge, MA",
+        "website": "https://santoselectric.com"
+    },
+    {
+        "name": "Cardoso Electrical Services",
+        "phone": "(781) 246-7700",
+        "address": "Cambridge, MA",
+        "website": "https://cardosoelectrical.com"
+    },
+    {
+        "name": "J.P. McCurdy Electrical Services, Inc.",
+        "phone": "(781) 595-7074",
+        "address": "Cambridge, MA",
+        "website": "https://mccurdyelectric.com"
+    }
+]

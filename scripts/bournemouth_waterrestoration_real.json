@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Emergency Clean UK Bournemouth",
+        "phone": "0333 772 2130",
+        "address": "Bournemouth",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "Flash Restorations Bournemouth",
+        "phone": "0800 123 4567",
+        "address": "Bournemouth",
+        "website": "https://flashrestorations.com/"
+    },
+    {
+        "name": "Ideal Response Bournemouth",
+        "phone": "01622 926 505",
+        "address": "Bournemouth",
+        "website": "https://idealresponse.co.uk/"
+    },
+    {
+        "name": "247 Emergency Plumber Bournemouth",
+        "phone": "01202 233 469",
+        "address": "Bournemouth",
+        "website": "https://emergencyplumbersbournemouth.uk/"
+    },
+    {
+        "name": "ServiceMaster Restore Bournemouth",
+        "phone": "0800 021 3115",
+        "address": "Bournemouth",
+        "website": "https://servicemasterrestore.co.uk/"
+    }
+]

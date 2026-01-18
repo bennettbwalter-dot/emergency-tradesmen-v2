@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Sussex Plumbing & Heating",
+        "phone": "07486 928437",
+        "address": "7 Rockall Avenue, Eastbourne, East Sussex, BN23 6UD",
+        "website": "https://sussex-plumbing.co.uk/"
+    },
+    {
+        "name": "Direct Eastbourne Plumber",
+        "phone": "01323 403294",
+        "address": "Eastbourne, UK",
+        "website": "https://eastbourneplumber247.co.uk/"
+    },
+    {
+        "name": "Peak Plumbing and Heating",
+        "phone": "01323 401551",
+        "address": "Eastbourne",
+        "website": "https://peakplumbingandheatingsussex.co.uk/"
+    },
+    {
+        "name": "BR Plumbing Services",
+        "phone": "01323 407305",
+        "address": "Eastbourne",
+        "website": "https://brplumbingservices.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01323 403294",
+        "address": "Eastbourne",
+        "website": "https://able-group.co.uk/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Affordable Towing",
+        "phone": "(256) 530-7505",
+        "address": "Huntsville, AL",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Bradford's Truck & Trailer Repair",
+        "phone": "(256) 508-8253",
+        "address": "Huntsville, AL",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Rocket Towing and Recovery",
+        "phone": "(256) 211-1333",
+        "address": "Huntsville, AL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Mike's Wrecker Service",
+        "phone": "(256) 300-4444",
+        "address": "Huntsville, AL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "North Alabama Recovery",
+        "phone": "(256) 322-2222",
+        "address": "Huntsville, AL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

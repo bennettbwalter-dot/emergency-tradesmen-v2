@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Payless Plumbing",
+        "phone": "(661) 464-1557",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Hometown Plumbing Sewer & Drain Inc",
+        "phone": "(661) 837-4569",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 520
+    },
+    {
+        "name": "Gundlach's Plumbing",
+        "phone": "661-327-4286",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "A3 Plumbing",
+        "phone": "(661) 215-6521",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "On Call Plumbers Bakersfield",
+        "phone": "(661) 299-7300",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Roto-Rooter Bakersfield",
+        "phone": "661-235-6933",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 620
+    },
+    {
+        "name": "Ron's Speedy Rooter & Plumbing Repair",
+        "phone": "(661) 732-2508",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Rescue Hero Plumbing",
+        "phone": "661-889-0656",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "24/7 Plumbers Bakersfield",
+        "phone": "(661) 235-0804",
+        "address": "Bakersfield, CA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 60
+    },
+    {
+        "name": "Inter Faith Electric & Solar Installation",
+        "phone": "(866) 245-1440",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Electrical ASAP",
+        "phone": "(661) 293-0213",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Jennings Electric",
+        "phone": "(661) 578-8806",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "Elite Automation & Electrical Services",
+        "phone": "(661) 578-2677",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 65
+    },
+    {
+        "name": "On Call Electrical",
+        "phone": "(661) 402-3131",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "O'Connor's Electrical Bakersfield",
+        "phone": "(844) 484-2612",
+        "address": "Bakersfield, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Master Locksmith Bakersfield",
+        "phone": "(661) 426-3325",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Locksmith Bakersfield CA",
+        "phone": "(661) 237-0750",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "KeyMe Locksmiths Bakersfield",
+        "phone": "(661) 215-6715",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Bakersfield Mobile Locksmith",
+        "phone": "(661) 444-4686",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Bakersfield Lock and Safe",
+        "phone": "(661) 324-4444",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Bakersfield Locksmith",
+        "phone": "(661) 322-3371",
+        "address": "Bakersfield, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "My Way Towing",
+        "phone": "(201) 653-2857",
+        "address": "Jersey City, NJ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Tow Truck Jersey City",
+        "phone": "(201) 299-6109",
+        "address": "Jersey City, NJ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Jersey City Recovery",
+        "phone": "(551) 288-0778",
+        "address": "Jersey City, NJ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Quality 1st Towing JC",
+        "phone": "(732) 540-7500",
+        "address": "Jersey City, NJ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Broadway Sunoco",
+        "phone": "(201) 333-5480",
+        "address": "Jersey City, NJ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

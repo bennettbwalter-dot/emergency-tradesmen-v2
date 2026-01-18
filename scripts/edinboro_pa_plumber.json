@@ -1,0 +1,26 @@
+[
+    {
+        "name": "TJ's Plumbing & Heating",
+        "phone": "(814) 836-0001",
+        "address": "Edinboro, PA",
+        "website": "https://tjsplumbing.com"
+    },
+    {
+        "name": "Armstrong Comfort Solutions",
+        "phone": "(814) 835-1033",
+        "address": "Edinboro, PA",
+        "website": "https://armstrongcomfort.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(814) 825-6000",
+        "address": "Edinboro, PA",
+        "website": "https://www.rotorooter.com/eriepa/"
+    },
+    {
+        "name": "Byers Plumbing & Drain",
+        "phone": "(888) 838-3054",
+        "address": "Edinboro, PA",
+        "website": "https://byersplumbing.com"
+    }
+]

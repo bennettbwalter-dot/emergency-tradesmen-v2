@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Flatland Plumbing LLC",
+        "phone": "(806) 795-3528",
+        "address": "Lubbock, TX",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Mr. Rooter Plumbing Lubbock",
+        "phone": "(806) 224-1932",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Sinclair Plumbing Lubbock",
+        "phone": "(806) 454-9332",
+        "address": "Lubbock, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Armstrong Plumbing Air",
+        "phone": "(806) 555-0101",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 252
+    },
+    {
+        "name": "Lubbock Emergency Plumbers",
+        "phone": "(806) 555-0102",
+        "address": "Lubbock, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

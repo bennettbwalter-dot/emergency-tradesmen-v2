@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Scottsdale Tow Truck Company",
+        "phone": "(480) 739-3500",
+        "address": "Scottsdale, AZ",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Valley Express Towing Scottsdale",
+        "phone": "(480) 899-4621",
+        "address": "Scottsdale, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Towing Scottsdale",
+        "phone": "(480) 916-9120",
+        "address": "Scottsdale, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Scottsdale Recovery",
+        "phone": "(480) 211-1333",
+        "address": "Scottsdale, AZ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Camelback Towing",
+        "phone": "(480) 300-4444",
+        "address": "Scottsdale, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

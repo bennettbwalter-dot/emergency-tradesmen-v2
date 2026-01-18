@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Triple Crown Plumbing",
+        "address": "Richardson, TX",
+        "phone": "972-544-6544",
+        "trade": "plumber",
+        "city": "Richardson"
+    },
+    {
+        "name": "Barbosa Plumbing & Air Conditioning",
+        "address": "Richardson, TX",
+        "phone": "972-784-8050",
+        "trade": "plumber",
+        "city": "Richardson"
+    },
+    {
+        "name": "KOEN Plumbing",
+        "address": "Richardson, TX",
+        "phone": "972-454-9580",
+        "trade": "plumber",
+        "city": "Richardson"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Response Bioclean Walsall",
+        "phone": "03337720638",
+        "address": "Walsall",
+        "website": "https://responsebioclean.com/"
+    },
+    {
+        "name": "HomeDry Walsall",
+        "phone": "0333 772 2130",
+        "address": "Walsall",
+        "website": "https://myhomedry.com/"
+    },
+    {
+        "name": "24/7 Drains Walsall",
+        "phone": "07584 629 544",
+        "address": "Reservoir Place, Alumnwell, Walsall, WS2 9RJ",
+        "website": "https://247drainswalsall.co.uk/"
+    },
+    {
+        "name": "Draincare Technology Walsall",
+        "phone": "07764 411733",
+        "address": "Walsall",
+        "website": "https://draincaretechnology.co.uk/"
+    },
+    {
+        "name": "No1PHD Walsall Wood",
+        "phone": "0800 690 6777",
+        "address": "Walsall",
+        "website": "https://no1phd.co.uk/"
+    }
+]

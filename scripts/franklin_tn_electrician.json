@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Discount Electrical Service",
+        "phone": "(615) 505-1652",
+        "address": "Franklin, TN",
+        "website": "https://discountelectricalservice.com"
+    },
+    {
+        "name": "Music City Electricians",
+        "phone": "(615) 651-5393",
+        "address": "Franklin, TN",
+        "website": "https://musiccityelectricians.com"
+    },
+    {
+        "name": "Luxe Electric LLC",
+        "phone": "(615) 944-0921",
+        "address": "Franklin, TN",
+        "website": "https://luxeelectric.net"
+    },
+    {
+        "name": "Sewell Electric and HVAC",
+        "phone": "(615) 794-6661",
+        "address": "Franklin, TN",
+        "website": "https://sewellelectric.com"
+    }
+]

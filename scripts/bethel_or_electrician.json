@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Reasonably Acceptable Electrical Services",
+        "phone": "(541) 780-8442",
+        "address": "Bethel, OR",
+        "website": "https://fixthepower.com"
+    },
+    {
+        "name": "Excel Electric",
+        "phone": "(541) 234-8864",
+        "address": "Bethel, OR",
+        "website": "https://excel-electric.com"
+    },
+    {
+        "name": "Knoll Electric Bethel",
+        "phone": "(541) 510-7712",
+        "address": "Bethel, OR",
+        "website": "https://knollelectric.com"
+    },
+    {
+        "name": "4 Point Electric Bethel",
+        "phone": "(541) 632-6545",
+        "address": "Bethel, OR",
+        "website": "https://4pointelectric.com"
+    }
+]

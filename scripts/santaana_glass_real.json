@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Santa Ana Mobile Auto Glass",
+        "phone": "(714) 515-4284",
+        "address": "Santa Ana, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Express OC Auto Glass",
+        "phone": "+1 (714) 332-6455",
+        "address": "Santa Ana, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Santa Ana Fast Auto Glass",
+        "phone": "+1 (714) 912-9697",
+        "address": "Santa Ana, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Master Glass Santa Ana",
+        "phone": "(949) 541-0051",
+        "address": "Santa Ana, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Mobile Auto Glass Solutions",
+        "phone": "714-422-0080",
+        "address": "Santa Ana, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

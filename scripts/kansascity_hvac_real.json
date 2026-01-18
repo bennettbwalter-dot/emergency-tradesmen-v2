@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A.B. May HVAC",
+        "phone": "(913) 383-3100",
+        "address": "Kansas City, MO",
+        "rating": 4.8,
+        "review_count": 8500
+    },
+    {
+        "name": "Midwest Heating Cooling & Plumbing",
+        "phone": "(816) 943-8400",
+        "address": "Kansas City, MO",
+        "rating": 4.7,
+        "review_count": 2100
+    },
+    {
+        "name": "Buckner's",
+        "phone": "(816) 436-1244",
+        "address": "Kansas City, MO",
+        "rating": 5.0,
+        "review_count": 1500
+    },
+    {
+        "name": "MVP Air Conditioning, Heating, Plumbing & Electric",
+        "phone": "(913) 395-6558",
+        "address": "Kansas City, MO",
+        "rating": 4.9,
+        "review_count": 3200
+    },
+    {
+        "name": "City Wide Heating & Cooling",
+        "phone": "(913) 384-6006",
+        "address": "Kansas City, MO",
+        "rating": 4.8,
+        "review_count": 420
+    }
+]

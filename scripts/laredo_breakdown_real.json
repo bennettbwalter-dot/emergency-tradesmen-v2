@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roger Cabello Wrecker",
+        "phone": "(956) 211-1333",
+        "address": "Laredo, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Red Raider Wrecker",
+        "phone": "(806) 687-5076",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Towing Laredo Tx",
+        "phone": "(956) 413-6191",
+        "address": "Laredo, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "ProTow Towing Laredo",
+        "phone": "(956) 300-4444",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Laredo Recovery",
+        "phone": "(956) 500-0505",
+        "address": "Laredo, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

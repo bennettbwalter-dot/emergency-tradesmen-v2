@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mighty Dog Roofing",
+        "phone": "(210) 592-4734",
+        "address": "San Antonio, TX",
+        "website": "https://mightydogroofing.com/"
+    },
+    {
+        "name": "Ideal Precision Roofing",
+        "phone": "(210) 794-6578",
+        "address": "San Antonio, TX",
+        "website": "https://idealprecisionroofing.com/"
+    },
+    {
+        "name": "Radiant Roofing and Restoration",
+        "phone": "(210) 990-9947",
+        "address": "San Antonio, TX",
+        "website": "https://radroof.com/"
+    },
+    {
+        "name": "R3 Group TX",
+        "phone": "(210) 760-2828",
+        "address": "25389 Boerne Stage Rd, San Antonio, TX 78255",
+        "website": "https://r3grouptx.com/"
+    },
+    {
+        "name": "Estradas Roofing",
+        "phone": "(210) 629-5513",
+        "address": "San Antonio, TX",
+        "website": "https://estradas-roofing.com/"
+    }
+]

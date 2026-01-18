@@ -1,80 +1,115 @@
-import { useState, useCallback, useEffect } from 'react';
-import { Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+
+import { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { getViewState } from '@/lib/mapUtils';
 import { useAuth } from "@/contexts/AuthContext";
-import mapConfig from "@/config/maps.json";
+
+// Fix Leaflet generic marker icon missing assets
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 interface InteractiveMapProps {
     city: string;
     className?: string;
     showBusinesses?: boolean;
+    businesses?: any[];
+    countryCode?: string;
 }
 
-// Fallback coordinates for cities if geocoding fails or isn't used
-const CITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
-    "London": { lat: 51.5074, lng: -0.1278 },
-    "Manchester": { lat: 53.4808, lng: -2.2426 },
-    "Birmingham": { lat: 52.4862, lng: -1.8904 },
-    "Leeds": { lat: 53.8008, lng: -1.5491 },
-    "Liverpool": { lat: 53.4084, lng: -2.9916 },
-    "Glasgow": { lat: 55.8642, lng: -4.2518 },
-    "Edinburgh": { lat: 55.9533, lng: -3.1883 },
-    "Bristol": { lat: 51.4545, lng: -2.5879 },
-    "Cardiff": { lat: 51.4816, lng: -3.1791 },
-    "Nottingham": { lat: 52.9548, lng: -1.1581 },
-    "Sheffield": { lat: 53.3811, lng: -1.4701 },
-    "Leicester": { lat: 52.6369, lng: -1.1398 }
-};
+export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]", showBusinesses = false, businesses = [], countryCode: propCountryCode }: InteractiveMapProps) {
+    const mapContainerRef = useRef<HTMLDivElement>(null);
+    const mapInstanceRef = useRef<L.Map | null>(null);
+    const markersRef = useRef<L.Marker[]>([]);
 
-export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]", showBusinesses = false }: InteractiveMapProps) {
-    const { user } = useAuth();
-    const [center, setCenter] = useState(CITY_COORDINATES["London"]);
-    const [zoom, setZoom] = useState(11);
+    // Determine Country Code from prop or implicit URL
+    const isUrlUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
+    const effectiveCountryCode = propCountryCode || (isUrlUS ? 'US' : 'GB');
+    const countryCode = effectiveCountryCode;
 
-    // Effect to update map center when city changes
+    // Get View State
+    const { center, zoom } = getViewState(city, countryCode);
+
+    // Initialize Map
     useEffect(() => {
-        // Simple normalization
-        const normalizedCity = Object.keys(CITY_COORDINATES).find(
-            c => c.toLowerCase() === city.toLowerCase()
-        );
+        if (!mapContainerRef.current) return;
 
-        if (normalizedCity) {
-            setCenter(CITY_COORDINATES[normalizedCity]);
-            setZoom(12);
-        } else {
-            console.warn(`City coordinates not found for ${city}`);
+        // If map already initialized, just return (view update handled in separate effect)
+        if (mapInstanceRef.current) return;
+
+        console.log("Initializing Leaflet Map...");
+        const map = L.map(mapContainerRef.current).setView([center.lat, center.lng], zoom);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+
+        mapInstanceRef.current = map;
+
+        // Cleanup
+        return () => {
+            // In strict mode, this might cleanup too early if we aren't careful, 
+            // but usually we want to destroy on unmount.
+            // However, for hot reload, we should check.
+            if (mapInstanceRef.current) {
+                mapInstanceRef.current.remove();
+                mapInstanceRef.current = null;
+            }
+        };
+    }, []); // Run once on mount
+
+    // Update View
+    useEffect(() => {
+        if (!mapInstanceRef.current) return;
+        const map = mapInstanceRef.current;
+
+        map.setView([center.lat, center.lng], zoom);
+    }, [center.lat, center.lng, zoom]); // Update when target changes
+
+    // Update Markers
+    useEffect(() => {
+        if (!mapInstanceRef.current) return;
+        const map = mapInstanceRef.current;
+
+        // Clear existing markers
+        markersRef.current.forEach(m => m.remove());
+        markersRef.current = [];
+
+        if (showBusinesses && businesses) {
+            businesses.forEach(biz => {
+                if (biz.latitude && biz.longitude) {
+                    const marker = L.marker([parseFloat(biz.latitude), parseFloat(biz.longitude)])
+                        .addTo(map)
+                        .bindPopup(`
+                            <div class="font-sans">
+                                <b>${biz.name}</b><br/>
+                                <span class="text-xs">${biz.address || ''}</span>
+                            </div>
+                        `);
+                    markersRef.current.push(marker);
+                }
+            });
         }
-    }, [city]);
+    }, [showBusinesses, businesses]); // Re-run when business list changes
 
-    // Shadow Counter: Track Map Load
     useEffect(() => {
-        // We only count when the component MOUNTS (page load), not every render.
-        // Importing dynamically to avoid circular dependencies if any (though usageLogger is independent)
         import('@/lib/usage-logger').then(({ usageLogger }) => {
-            usageLogger.incrementUsage('google_map_loads', 1);
+            usageLogger.incrementUsage('leaflet_map_loads', 1);
         });
     }, []);
 
-
     return (
         <div className={`overflow-hidden rounded-lg bg-secondary/20 border border-border/50 ${className}`}>
-            <Map
-                mapId="DEMO_MAP_ID" // Required for AdvancedMarker
-                defaultCenter={center}
-                center={center}
-                defaultZoom={11}
-                zoom={zoom}
-                onCameraChanged={(ev) => {
-                    setCenter(ev.detail.center);
-                    setZoom(ev.detail.zoom);
-                }}
-                gestureHandling={'cooperative'}
-                disableDefaultUI={false}
-                className="w-full h-full"
-            >
-                <AdvancedMarker position={center}>
-                    <Pin background={'#D4AF37'} glyphColor={'#000'} borderColor={'#000'} />
-                </AdvancedMarker>
-            </Map>
+            <div ref={mapContainerRef} className="w-full h-full z-0" style={{ minHeight: '100%', minWidth: '100%' }} />
         </div>
     );
 }

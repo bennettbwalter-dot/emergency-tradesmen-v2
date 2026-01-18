@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Los Angeles Towing Services",
+        "phone": "(888) 866-7379",
+        "address": "Los Angeles, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Green Towing Los Angeles",
+        "phone": "(323) 386-6433",
+        "address": "Los Angeles, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Primary Towing Los Angeles",
+        "phone": "(310) 492-5075",
+        "address": "Los Angeles, CA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Pepe's Tow Service Inc.",
+        "phone": "(323) 268-1609",
+        "address": "Los Angeles, CA",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Best Car Towing",
+        "phone": "(323) 246-8000",
+        "address": "Los Angeles, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

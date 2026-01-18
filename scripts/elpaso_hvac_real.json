@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Scott Heating & Cooling",
+    "phone": "(915) 594-0033",
+    "address": "El Paso, TX",
+    "rating": 4.8,
+    "review_count": 1200
+  },
+  {
+    "name": "Ignitify",
+    "phone": "(915) 539-3040",
+    "address": "El Paso, TX",
+    "rating": 4.9,
+    "review_count": 92
+  },
+  {
+    "name": "Kings Aire",
+    "phone": "(915) 584-8141",
+    "address": "El Paso, TX",
+    "rating": 4.7,
+    "review_count": 850
+  },
+  {
+    "name": "Total Air",
+    "phone": "(915) 585-0008",
+    "address": "El Paso, TX",
+    "rating": 4.8,
+    "review_count": 1500
+  },
+  {
+    "name": "Airmax Heating Cooling and Refrigeration",
+    "phone": "(915) 235-0100",
+    "address": "El Paso, TX",
+    "rating": 4.6,
+    "review_count": 320
+  }
+]

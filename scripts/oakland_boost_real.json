@@ -1,0 +1,186 @@
+[
+    {
+        "name": "Roto-Rooter Oakland",
+        "phone": "510-488-9295",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Underground Rooter",
+        "phone": "(510) 866-5157",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "On Call Plumbers Oakland",
+        "phone": "(510) 443-0997",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "The Oakland Plumber",
+        "phone": "(510) 984-9442",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Preferred Plumbing and Drain",
+        "phone": "(510) 465-2233",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "24/7 Plumbers Oakland",
+        "phone": "(510) 296-3736",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Plumbers 24 Hour Oakland",
+        "phone": "855-958-5868",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Big Blue Plumbing",
+        "phone": "(510) 939-7870",
+        "address": "Oakland, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "Alameda Oakland Electrical Services",
+        "phone": "510-282-9734",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Electrician Squad of Oakland",
+        "phone": "(855) 930-6015",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Electrical Land Oakland",
+        "phone": "(661) 349-4879",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Alley Electric",
+        "phone": "+1 510-573-0427",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 65
+    },
+    {
+        "name": "Nexel Electric",
+        "phone": "(530) 265-6000",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Boyes Electric",
+        "phone": "(925) 364-5757",
+        "address": "Oakland, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Bovie Lock & Key",
+        "phone": "510-326-3325",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Glenview Key and Lock",
+        "phone": "510-530-6141",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "All American Lock and Key",
+        "phone": "510-601-5625",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "Sunshine Lock & Safe",
+        "phone": "510-778-5997",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Oakland Lock & Locksmith",
+        "phone": "510-731-0612",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "A-A Lock & Alarm Inc.",
+        "phone": "(800) 422-5625",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Oakland Emergency Lock And Door",
+        "phone": "510-803-3118",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Oakland Locksmith Store",
+        "phone": "510-731-0585",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "Mobile Oakland Locksmith",
+        "phone": "(510) 379-9323",
+        "address": "Oakland, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Focus Plumbing LLC",
+        "phone": "(702) 710-4420",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Emergency Plumber Las Vegas",
+        "phone": "(702) 659-9844",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Pure Plumbing & Air",
+        "phone": "(702) 534-1910",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 620
+    },
+    {
+        "name": "Vegas Valley Plumbing",
+        "phone": "(702) 551-3286",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Larkin Plumbing",
+        "phone": "(702) 382-2410",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 550
+    },
+    {
+        "name": "702 PlumbAIR Services",
+        "phone": "(702) 702-8687",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Sin City Plumbing Las Vegas",
+        "phone": "(702) 431-6502",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Start 2 Finish",
+        "phone": "(702) 986-0440",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Bro Plumbing LLC",
+        "phone": "(702) 800-2410",
+        "address": "Las Vegas, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Eco Electric",
+        "phone": "(702) 323-5624",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Have Lights Will Travel",
+        "phone": "(702) 355-6301",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Kellogg Electric",
+        "phone": "1-888-887-7580",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "Big Red Electric Company",
+        "phone": "(702) 875-1066",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Penny Electric",
+        "phone": "(702) 279-6040",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Vegas Electric",
+        "phone": "702-728-3444",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "O'Connor's Electrical Las Vegas",
+        "phone": "844-484-2612",
+        "address": "Las Vegas, NV",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "MX Locksmith",
+        "phone": "702-369-6736",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "KeyMe Locksmiths Las Vegas",
+        "phone": "(702) 803-3938",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "ABC Locksmith",
+        "phone": "702-500-0963",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "YH Lock & Security",
+        "phone": "(702) 840-1465",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "City Locksmith Las Vegas",
+        "phone": "(702) 930-8030",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Pop-A-Lock Las Vegas",
+        "phone": "702-454-5625",
+        "address": "Las Vegas, NV",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 620
+    }
+]

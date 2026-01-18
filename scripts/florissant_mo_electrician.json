@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Votum Electric LLC",
+        "phone": "(314) 801-7878",
+        "address": "Florissant, MO",
+        "website": "https://votumelectric.com"
+    },
+    {
+        "name": "J Bathe Electric",
+        "phone": "(636) 498-0613",
+        "address": "Florissant, MO",
+        "website": "https://jbathe.com"
+    },
+    {
+        "name": "Reliable Wire Electric",
+        "phone": "(314) 267-0099",
+        "address": "Florissant, MO",
+        "website": "https://reliablewireelectric.com"
+    },
+    {
+        "name": "R and R Electrical Company",
+        "phone": "(314) 839-4444",
+        "address": "Florissant, MO",
+        "website": "https://rrelectricalco.com"
+    }
+]
