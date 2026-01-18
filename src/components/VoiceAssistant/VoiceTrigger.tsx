@@ -89,9 +89,16 @@ const VoiceTrigger = () => {
         try {
             console.log("[Voice] starting session...");
 
-            // NOTE: We do NOT call getUserMedia here anymore.
-            // The Azure SDK needs exclusive microphone access via fromDefaultMicrophoneInput().
-            // Calling getUserMedia() simultaneously can cause the SDK to receive an empty stream.
+            let stream: MediaStream;
+            // Explicit Permission Check & Volume Monitor
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                monitorVolume(stream);
+            } catch (permError) {
+                console.error("[Voice] Microphone access failed:", permError);
+                setStatus("Microphone Denied");
+                return;
+            }
 
             voiceService.unlockAudioContext();
             setIsActive(true);
@@ -107,7 +114,7 @@ const VoiceTrigger = () => {
             const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
             const locale = countryCode === 'US' ? 'en-US' : 'en-GB';
 
-            // 1. Start Azure Recognition (Continuous) - NO stream argument, SDK uses its own mic
+            // 1. Start Azure Recognition (Continuous)
             console.log("[Voice] Initializing Azure STT...");
             await voiceService.startRecognition(
                 (text, isFinal) => {
@@ -125,7 +132,8 @@ const VoiceTrigger = () => {
                     console.error("[Voice] STT Error:", err);
                     setStatus(`Error: ${err}`);
                 },
-                locale
+                locale,
+                stream // Pass the stream here!
             );
 
             setStatus('Listening');

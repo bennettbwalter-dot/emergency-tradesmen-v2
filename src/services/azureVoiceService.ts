@@ -64,30 +64,14 @@ export class AzureVoiceService {
             const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
             speechConfig.speechRecognitionLanguage = locale;
 
-            // CRITICAL: Request microphone permission FIRST and verify stream is active
-            console.log(`[AzureVoice] Requesting microphone permission...`);
-            let testStream: MediaStream;
-            try {
-                testStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                const audioTracks = testStream.getAudioTracks();
-                console.log(`[AzureVoice] Got ${audioTracks.length} audio track(s)`);
-                if (audioTracks.length > 0) {
-                    const track = audioTracks[0];
-                    console.log(`[AzureVoice] Audio Track: label="${track.label}", enabled=${track.enabled}, muted=${track.muted}, readyState=${track.readyState}`);
-                    if (track.muted || track.readyState !== 'live') {
-                        throw new Error(`Microphone track is not live: muted=${track.muted}, readyState=${track.readyState}`);
-                    }
-                }
-                // Stop the test stream - SDK will create its own
-                testStream.getTracks().forEach(t => t.stop());
-            } catch (micError) {
-                console.error(`[AzureVoice] Microphone access failed:`, micError);
-                throw new Error(`Microphone access failed: ${micError}`);
+            let audioConfig: sdk.AudioConfig;
+            if (mediaStream) {
+                console.log(`[AzureVoice] Using provided MediaStream for recognition`);
+                audioConfig = sdk.AudioConfig.fromStreamInput(mediaStream);
+            } else {
+                console.log(`[AzureVoice] Using Default Microphone Input`);
+                audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
             }
-
-            // Use SDK's default microphone input
-            console.log(`[AzureVoice] Creating AudioConfig with default mic...`);
-            const audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
 
             console.log(`[AzureVoice] Initializing Recognizer...`);
             this.recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
