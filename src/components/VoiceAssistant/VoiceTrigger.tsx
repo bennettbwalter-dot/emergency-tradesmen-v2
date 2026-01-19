@@ -139,6 +139,10 @@ const VoiceTrigger = () => {
                 // NOT passing stream - Azure SDK will use its own microphone handling
             );
 
+            // CRITICAL: Wait for SDK to fully initialize before speaking
+            // (This delay replaces the implicit timing from console.log when DevTools is open)
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             setStatus('Listening');
             await speakResponse("Hello Emergency Tradesmen here how can I help?", countryCode);
 
