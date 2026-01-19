@@ -449,13 +449,27 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 if (locationQuery.length > 2) {
                     const coords = await geocodeLocation(locationQuery, countryCode);
                     if (coords) {
-                        const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
-                        if (match) {
-                            // SUCCESS: We mapped "Brixton" -> "London"
-                            newState.detectedCity = match.city;
+                        // 1. DIRECT MATCH CHECK (New: Covers all cities in trades.ts)
+                        // If Nominatim says "York, UK", and "York" is in our list -> Use "York" directly.
+                        const directMatch = activeCities.find(city =>
+                            coords.displayName.toLowerCase().includes(city.toLowerCase())
+                        );
+
+                        if (directMatch) {
+                            newState.detectedCity = directMatch;
                             cityFallbackUsed = true;
-                            originalCity = coords.displayName.split(',')[0]; // "Brixton"
-                            console.log(`[Location Fallback] Mapped '${originalCity}' -> '${match.city}' (${match.distance.toFixed(1)}km)`);
+                            originalCity = coords.displayName.split(',')[0];
+                            console.log(`[Location Direct Match] Found '${directMatch}' in '${coords.displayName}'`);
+                        }
+                        // 2. NEAREST NEIGHBOR FALLBACK (Old: Covers villages near supported hubs)
+                        else {
+                            const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
+                            if (match) {
+                                newState.detectedCity = match.city;
+                                cityFallbackUsed = true;
+                                originalCity = coords.displayName.split(',')[0];
+                                console.log(`[Location Fallback] Mapped '${originalCity}' -> '${match.city}' (${match.distance.toFixed(1)}km)`);
+                            }
                         }
                     }
                 }
