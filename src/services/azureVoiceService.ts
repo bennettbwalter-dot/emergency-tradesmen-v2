@@ -20,6 +20,7 @@ export class AzureVoiceService {
     private sttStream: sdk.PushAudioInputStream | null = null;
     private sttAnalyser: AnalyserNode | null = null;
     private currentVolume: number = 0;
+    private debugBufferCount: number = 0;
 
     constructor() {
         // Initialize fallback synth if needed
@@ -137,8 +138,20 @@ export class AzureVoiceService {
 
                     // Calculate volume for UI feedback
                     let absSum = 0;
-                    for (let i = 0; i < inputData.length; i++) absSum += Math.abs(inputData[i]);
+                    let maxVal = 0;
+                    for (let i = 0; i < inputData.length; i++) {
+                        const abs = Math.abs(inputData[i]);
+                        absSum += abs;
+                        if (abs > maxVal) maxVal = abs;
+                    }
                     this.currentVolume = (absSum / inputData.length) * 100;
+
+                    // DEBUG: Log first 5 buffers to verify audio data
+                    if (!this.debugBufferCount) this.debugBufferCount = 0;
+                    this.debugBufferCount++;
+                    if (this.debugBufferCount <= 5) {
+                        console.log(`[AzureVoice] AUDIO BUFFER #${this.debugBufferCount}: samples=${newLength}, maxAmp=${maxVal.toFixed(4)}, vol=${this.currentVolume.toFixed(2)}`);
+                    }
 
                     // Push to Azure
                     this.sttStream.write(result.buffer);
