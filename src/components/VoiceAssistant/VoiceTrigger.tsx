@@ -112,7 +112,13 @@ const VoiceTrigger = () => {
             const locale = countryCode === 'US' ? 'en-US' : 'en-GB';
 
             // 1. Start Azure Recognition (Continuous)
-            console.log("[Voice] Initializing Azure STT...");
+            // NOTE: NOT passing the stream - letting Azure SDK use its own microphone handling
+            // Our custom PushAudioInputStream bridge was producing silent audio buffers
+            console.log("[Voice] Initializing Azure STT (using SDK's native mic handling)...");
+
+            // Release our stream since Azure will create its own
+            stream.getTracks().forEach(t => t.stop());
+
             await voiceService.startRecognition(
                 (text, isFinal) => {
                     if (!isActiveRef.current) return;
@@ -129,12 +135,9 @@ const VoiceTrigger = () => {
                     console.error("[Voice] STT Error:", err);
                     setStatus(`Error: ${err}`);
                 },
-                locale,
-                stream // Pass the stream here!
+                locale
+                // NOT passing stream - Azure SDK will use its own microphone handling
             );
-
-            // NOW start volume monitoring - AFTER the service has claimed the stream
-            startVolumeMonitor();
 
             setStatus('Listening');
             await speakResponse("Hello Emergency Tradesmen here how can I help?", countryCode);
