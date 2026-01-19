@@ -15,6 +15,7 @@ export class AzureVoiceService {
 
     private recognizer: sdk.SpeechRecognizer | null = null;
     private recognizerActive: boolean = false;
+    private sttSource: MediaStreamAudioSourceNode | null = null;
     private sttProcessor: ScriptProcessorNode | null = null;
     private sttStream: sdk.PushAudioInputStream | null = null;
     private sttAnalyser: AnalyserNode | null = null;
@@ -80,18 +81,17 @@ export class AzureVoiceService {
 
                 // 2. Set up Web Audio pipeline to capture and downsample
                 const context = this.getAudioContext();
-                const source = context.createMediaStreamSource(mediaStream);
+                this.sttSource = context.createMediaStreamSource(mediaStream);
 
                 // Use ScriptProcessor for max compatibility (or AudioWorklet if preferred)
-                // 4096 buffer size is a good balance for latency/stability
                 this.sttProcessor = context.createScriptProcessor(4096, 1, 1);
 
                 // Analyser for UI volume monitoring
                 this.sttAnalyser = context.createAnalyser();
                 this.sttAnalyser.fftSize = 256;
-                source.connect(this.sttAnalyser);
+                this.sttSource.connect(this.sttAnalyser);
 
-                source.connect(this.sttProcessor);
+                this.sttSource.connect(this.sttProcessor);
 
                 // CRITICAL: Connect to a silent gain node instead of destination to avoid feedback loops
                 const silentGain = context.createGain();
@@ -100,7 +100,7 @@ export class AzureVoiceService {
                 silentGain.connect(context.destination);
 
                 const sampleRate = context.sampleRate;
-                console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz`);
+                console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz (Stream ID: ${mediaStream.id})`);
 
                 // Force context resume
                 if (context.state === 'suspended') {
@@ -238,12 +238,14 @@ export class AzureVoiceService {
     }
 
     public async stopRecognition(): Promise<void> {
-        if (!this.recognizer || !this.recognizerActive) return;
-
         if (this.sttProcessor) {
             this.sttProcessor.disconnect();
             this.sttProcessor.onaudioprocess = null;
             this.sttProcessor = null;
+        }
+        if (this.sttSource) {
+            this.sttSource.disconnect();
+            this.sttSource = null;
         }
         if (this.sttAnalyser) {
             this.sttAnalyser.disconnect();
@@ -254,6 +256,8 @@ export class AzureVoiceService {
             this.sttStream = null;
         }
         this.currentVolume = 0;
+
+        if (!this.recognizer || !this.recognizerActive) return;
 
         return new Promise((resolve) => {
             this.recognizer!.stopContinuousRecognitionAsync(
