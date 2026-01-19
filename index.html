@@ -7,7 +7,7 @@
 
   <!-- CSP: Allow unsafe-eval for Azure Speech SDK -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com http://widget.trustpilot.com https://widget.trustpilot.com https://*.supabase.co blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.tts.speech.microsoft.com http://widget.trustpilot.com https://widget.trustpilot.com https://nominatim.openstreetmap.org; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:;" />
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:;" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -35,10 +35,6 @@
   <!-- Global Keywords -->
   <meta name="keywords"
     content="tradesmen near me, emergency tradesmen, local plumber, 24/7 electrician, emergency locksmith, gas engineer near me, breakdown recovery, same day tradesman" />
-
-  <!-- Trustpilot -->
-  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-  <!-- End Trustpilot -->
   <script>
     // Polyfill global for libraries like Azure Speech SDK
     if (typeof global === 'undefined') {
