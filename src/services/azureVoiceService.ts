@@ -64,17 +64,67 @@ export class AzureVoiceService {
             const speechConfig = sdk.SpeechConfig.fromSubscription(AZURE_KEY, AZURE_REGION);
             speechConfig.speechRecognitionLanguage = locale;
 
-            let audioConfig: sdk.AudioConfig;
-            if (mediaStream) {
-                console.log(`[AzureVoice] Using provided MediaStream for recognition`);
-                audioConfig = sdk.AudioConfig.fromStreamInput(mediaStream);
+            // Bridge MediaStream to Azure PushStream
+            if (!mediaStream) {
+                console.log(`[AzureVoice] No MediaStream provided, falling back to default mic`);
+                const audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
+                this.recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
             } else {
-                console.log(`[AzureVoice] Using Default Microphone Input`);
-                audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
+                console.log(`[AzureVoice] Bridging MediaStream to PushAudioInputStream...`);
+
+                // 1. Create the PushStream specifically for 16kHz Mono PCM (Azure's preferred format)
+                const format = sdk.AudioStreamFormat.getWaveFormatPCM(16000, 16, 1);
+                this.sttStream = sdk.AudioInputStream.createPushStream(format);
+                const audioConfig = sdk.AudioConfig.fromStreamInput(this.sttStream);
+                this.recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
+
+                // 2. Set up Web Audio pipeline to capture and downsample
+                const context = this.getAudioContext();
+                const source = context.createMediaStreamSource(mediaStream);
+
+                // Use ScriptProcessor for max compatibility (or AudioWorklet if preferred)
+                // 4096 buffer size is a good balance for latency/stability
+                this.sttProcessor = context.createScriptProcessor(4096, 1, 1);
+
+                // Analyser for UI volume monitoring
+                this.sttAnalyser = context.createAnalyser();
+                this.sttAnalyser.fftSize = 256;
+                source.connect(this.sttAnalyser);
+
+                source.connect(this.sttProcessor);
+                this.sttProcessor.connect(context.destination);
+
+                const sampleRate = context.sampleRate;
+                console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz`);
+
+                this.sttProcessor.onaudioprocess = (event) => {
+                    if (!this.recognizerActive || !this.sttStream) return;
+
+                    const inputData = event.inputBuffer.getChannelData(0);
+
+                    // Simple Downsampling logic to 16kHz
+                    const ratio = sampleRate / 16000;
+                    const newLength = Math.round(inputData.length / ratio);
+                    const result = new Int16Array(newLength);
+
+                    for (let i = 0; i < newLength; i++) {
+                        const index = Math.round(i * ratio);
+                        // Convert float32 [-1, 1] to int16 [-32768, 32767]
+                        const sample = Math.max(-1, Math.min(1, inputData[index]));
+                        result[i] = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                    }
+
+                    // Calculate volume for UI
+                    let sum = 0;
+                    for (let i = 0; i < inputData.length; i++) sum += Math.abs(inputData[i]);
+                    this.currentVolume = (sum / inputData.length) * 100;
+
+                    // Push to Azure
+                    this.sttStream.write(result.buffer);
+                };
             }
 
-            console.log(`[AzureVoice] Initializing Recognizer...`);
-            this.recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
+            console.log(`[AzureVoice] Initializing Recognizer events...`);
 
             this.recognizer.recognizing = (s, e) => {
                 if (e.result.text) {
