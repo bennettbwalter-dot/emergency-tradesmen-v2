@@ -27,6 +27,7 @@ const VoiceTrigger = () => {
     const [voiceService] = useState(() => new AzureVoiceService());
     const recognitionRef = useRef<any>(null);
     const silenceTimer = useRef<any>(null);
+    const isStartingRef = useRef(false);
 
     // Helper to update both Ref and State
     const setStatus = (newStatus: string) => {
@@ -86,6 +87,9 @@ const VoiceTrigger = () => {
     };
 
     const startSession = async () => {
+        if (isStartingRef.current) return;
+        isStartingRef.current = true;
+
         try {
             console.log("[Voice] starting session...");
 
@@ -142,6 +146,9 @@ const VoiceTrigger = () => {
         } catch (e) {
             console.error("Voice Init Failed:", e);
             setStatus(`Setup Error: ${String(e)}`);
+            stopSession();
+        } finally {
+            isStartingRef.current = false;
         }
     };
 
@@ -223,7 +230,10 @@ const VoiceTrigger = () => {
     };
 
     const speakResponse = async (text: string, countryCode: string = 'GB') => {
-        if (!isActiveRef.current) return;
+        if (!isActiveRef.current || isStartingRef.current === false && !statusRef.current.includes('Speaking')) {
+            // Safety: Don't speak if session was closed while we were preparing the message
+            if (!isActiveRef.current) return;
+        }
 
         const originalStatus = statusRef.current;
         setStatus('Speaking');
@@ -250,6 +260,10 @@ const VoiceTrigger = () => {
     };
 
     const toggleVoice = () => {
+        if (isStartingRef.current) {
+            console.log("[Voice] Still starting up, ignoring toggle click.");
+            return;
+        }
         if (isActiveRef.current) stopSession();
         else startSession();
     };
