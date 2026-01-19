@@ -102,22 +102,30 @@ export class AzureVoiceService {
 
                     const inputData = event.inputBuffer.getChannelData(0);
 
-                    // Simple Downsampling logic to 16kHz
+                    // Improved Downsampling: Windowed Average to 16kHz
                     const ratio = sampleRate / 16000;
                     const newLength = Math.round(inputData.length / ratio);
                     const result = new Int16Array(newLength);
 
                     for (let i = 0; i < newLength; i++) {
-                        const index = Math.round(i * ratio);
+                        const start = Math.floor(i * ratio);
+                        const end = Math.floor((i + 1) * ratio);
+                        let sum = 0;
+                        let count = 0;
+                        for (let j = start; j < end && j < inputData.length; j++) {
+                            sum += inputData[j];
+                            count++;
+                        }
+                        const avg = count > 0 ? sum / count : 0;
                         // Convert float32 [-1, 1] to int16 [-32768, 32767]
-                        const sample = Math.max(-1, Math.min(1, inputData[index]));
+                        const sample = Math.max(-1, Math.min(1, avg));
                         result[i] = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
                     }
 
-                    // Calculate volume for UI
-                    let sum = 0;
-                    for (let i = 0; i < inputData.length; i++) sum += Math.abs(inputData[i]);
-                    this.currentVolume = (sum / inputData.length) * 100;
+                    // Calculate volume for UI feedback
+                    let absSum = 0;
+                    for (let i = 0; i < inputData.length; i++) absSum += Math.abs(inputData[i]);
+                    this.currentVolume = (absSum / inputData.length) * 100;
 
                     // Push to Azure
                     this.sttStream.write(result.buffer);
@@ -128,7 +136,7 @@ export class AzureVoiceService {
 
             this.recognizer.recognizing = (s, e) => {
                 if (e.result.text) {
-                    console.debug('[AzureVoice] SDK Recognizing (Interim):', e.result.text);
+                    console.log('[AzureVoice] SDK Recognizing (Interim):', e.result.text);
                     onResult(e.result.text, false);
                 }
             };
