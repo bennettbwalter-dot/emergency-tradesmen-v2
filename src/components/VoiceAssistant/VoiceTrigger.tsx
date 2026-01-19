@@ -79,9 +79,17 @@ const VoiceTrigger = () => {
             console.log("[Voice] starting session...");
 
             let stream: MediaStream;
-            // Explicit Permission Check - DO NOT monitor volume here to avoid claiming the stream!
+            // Explicit Permission Check with echo cancellation DISABLED
+            // (Browser echo cancellation was silencing the mic during TTS playback!)
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                stream = await navigator.mediaDevices.getUserMedia({
+                    audio: {
+                        echoCancellation: false,
+                        noiseSuppression: false,
+                        autoGainControl: true
+                    }
+                });
+                console.log('[Voice] Microphone acquired with echoCancellation DISABLED');
                 // Volume monitoring will start AFTER recognition is set up
             } catch (permError) {
                 console.error("[Voice] Microphone access failed:", permError);
