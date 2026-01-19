@@ -58,32 +58,17 @@ const VoiceTrigger = () => {
         };
     }, []);
 
-    const monitorVolume = (stream: MediaStream) => {
-        try {
-            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-            const audioContext = new AudioContextClass();
-            const source = audioContext.createMediaStreamSource(stream);
-            const analyser = audioContext.createAnalyser();
-            analyser.fftSize = 256;
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            source.connect(analyser);
-
-            volumeInterval.current = setInterval(() => {
-                if (!isActiveRef.current) {
-                    clearInterval(volumeInterval.current);
-                    audioContext.close();
-                    return;
-                }
-                analyser.getByteFrequencyData(dataArray);
-                let sum = 0;
-                for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
-                const average = sum / bufferLength;
-                setVolume(average);
-            }, 100);
-        } catch (e) {
-            console.error("Volume monitoring failed", e);
-        }
+    // Volume monitoring now uses the service's getVolume() to avoid AudioContext conflicts
+    const startVolumeMonitor = () => {
+        volumeInterval.current = setInterval(() => {
+            if (!isActiveRef.current) {
+                clearInterval(volumeInterval.current);
+                return;
+            }
+            // Get volume from the Azure service's audio pipeline (same AudioContext)
+            const vol = voiceService.getVolume();
+            setVolume(vol * 2.55); // Scale to 0-255 range for UI
+        }, 100);
     };
 
     const startSession = async () => {
@@ -94,10 +79,10 @@ const VoiceTrigger = () => {
             console.log("[Voice] starting session...");
 
             let stream: MediaStream;
-            // Explicit Permission Check & Volume Monitor
+            // Explicit Permission Check - DO NOT monitor volume here to avoid claiming the stream!
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                monitorVolume(stream);
+                // Volume monitoring will start AFTER recognition is set up
             } catch (permError) {
                 console.error("[Voice] Microphone access failed:", permError);
                 setStatus("Microphone Denied");
@@ -139,6 +124,9 @@ const VoiceTrigger = () => {
                 locale,
                 stream // Pass the stream here!
             );
+
+            // NOW start volume monitoring - AFTER the service has claimed the stream
+            startVolumeMonitor();
 
             setStatus('Listening');
             await speakResponse("Hello Emergency Tradesmen here how can I help?", countryCode);
