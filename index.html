@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSP: Allow unsafe-eval for Azure Speech SDK -->
+  <meta http-equiv="Content-Security-Policy"
+    content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://widget.trustpilot.com https://*.supabase.co blob:; worker-src 'self' blob:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.tts.speech.microsoft.com https://widget.trustpilot.com;" />
+
   <link rel="icon" type="image/png" href="/favicon.png" />
 
   <title>Emergency Tradesmen Near Me – Local 24/7 Plumbers & Electricians</title>
