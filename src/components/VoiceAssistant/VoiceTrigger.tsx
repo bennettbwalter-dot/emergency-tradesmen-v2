@@ -146,7 +146,8 @@ const VoiceTrigger = () => {
     };
 
     const stopSession = () => {
-        console.log("[Voice] Stopping session.");
+        console.log("[Voice] stopSession() CALLED - Trace below:");
+        console.trace("[Voice] stopSession trace");
         setIsActive(false);
         setStatus('Silent');
         setTranscript('');

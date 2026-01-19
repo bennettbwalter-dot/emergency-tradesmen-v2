@@ -22,7 +22,10 @@ export const usageLogger = {
                 .single();
 
             if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 is "Row not found"
-                console.warn('Error fetching usage logs:', fetchError);
+                // Silence "Table not found" error to avoid polluting console
+                if (fetchError.code !== 'PGRST205' && fetchError.message !== 'Could not find the table') {
+                    console.warn('Error fetching usage logs:', fetchError);
+                }
                 return;
             }
 
