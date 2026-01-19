@@ -74,6 +74,19 @@ export class AzureVoiceService {
             } else {
                 console.log(`[AzureVoice] Bridging MediaStream to PushAudioInputStream...`);
 
+                // DIAGNOSTIC: Check the MediaStream's audio tracks
+                const tracks = mediaStream.getAudioTracks();
+                console.log(`[AzureVoice] MediaStream has ${tracks.length} audio track(s)`);
+                if (tracks.length > 0) {
+                    const track = tracks[0];
+                    console.log(`[AzureVoice] Track: label="${track.label}", enabled=${track.enabled}, muted=${track.muted}, readyState=${track.readyState}`);
+                    if (!track.enabled || track.muted || track.readyState !== 'live') {
+                        console.error('[AzureVoice] ⚠️ WARNING: Audio track is NOT active!');
+                    }
+                } else {
+                    console.error('[AzureVoice] ⚠️ ERROR: No audio tracks in MediaStream!');
+                }
+
                 // 1. Create the PushStream specifically for 16kHz Mono PCM (Azure's preferred format)
                 const format = sdk.AudioStreamFormat.getWaveFormatPCM(16000, 16, 1);
                 this.sttStream = sdk.AudioInputStream.createPushStream(format);
@@ -82,7 +95,17 @@ export class AzureVoiceService {
 
                 // 2. Set up Web Audio pipeline to capture and downsample
                 const context = this.getAudioContext();
+
+                // CRITICAL: Ensure AudioContext is running BEFORE creating source
+                console.log(`[AzureVoice] AudioContext state: ${context.state}`);
+                if (context.state === 'suspended') {
+                    console.log('[AzureVoice] Resuming suspended AudioContext...');
+                    await context.resume();
+                    console.log(`[AzureVoice] AudioContext state after resume: ${context.state}`);
+                }
+
                 this.sttSource = context.createMediaStreamSource(mediaStream);
+                console.log(`[AzureVoice] MediaStreamSource created successfully`);
 
                 // Use ScriptProcessor for max compatibility (or AudioWorklet if preferred)
                 this.sttProcessor = context.createScriptProcessor(4096, 1, 1);
@@ -100,12 +123,6 @@ export class AzureVoiceService {
 
                 const sampleRate = context.sampleRate;
                 console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz (Stream ID: ${mediaStream.id})`);
-
-                // Force context resume
-                if (context.state === 'suspended') {
-                    console.log('[AzureVoice] Resuming suspended AudioContext...');
-                    context.resume();
-                }
 
                 this.sttProcessor.onaudioprocess = (event) => {
                     const inputData = event.inputBuffer.getChannelData(0);
