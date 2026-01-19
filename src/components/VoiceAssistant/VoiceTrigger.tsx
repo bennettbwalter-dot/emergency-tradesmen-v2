@@ -78,23 +78,33 @@ const VoiceTrigger = () => {
         try {
             console.log("[Voice] starting session...");
 
-            let stream: MediaStream;
-            // Explicit Permission Check with echo cancellation DISABLED
-            // (Browser echo cancellation was silencing the mic during TTS playback!)
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({
-                    audio: {
-                        echoCancellation: false,
-                        noiseSuppression: false,
-                        autoGainControl: true
-                    }
-                });
-                console.log('[Voice] Microphone acquired with echoCancellation DISABLED');
-                // Volume monitoring will start AFTER recognition is set up
-            } catch (permError) {
-                console.error("[Voice] Microphone access failed:", permError);
-                setStatus("Microphone Denied");
-                return;
+            // Mobile Check (Simple agent sniff, robust enough for this split)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+            console.log(`[Voice] Device check: isMobile=${isMobile}`);
+
+            let stream: MediaStream | undefined;
+
+            if (!isMobile) {
+                // DESKTOP: Use Custom Bridge (Fixes desktop silence/noise-gate issues)
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({
+                        audio: {
+                            echoCancellation: false,
+                            noiseSuppression: false,
+                            autoGainControl: true
+                        }
+                    });
+                    console.log('[Voice] Desktop: Microphone acquired with echoCancellation DISABLED');
+                } catch (permError) {
+                    console.error("[Voice] Microphone access failed:", permError);
+                    setStatus("Microphone Denied");
+                    return;
+                }
+            } else {
+                // MOBILE: Use Native SDK Handling (Fixes mobile loop/silence issues)
+                // Mobile OS handles echo cancellation better at system level.
+                // We actively want to avoid the ScriptProcessorNode on mobile.
+                console.log('[Voice] Mobile: Letting Azure SDK handle mic input natively');
             }
 
             voiceService.unlockAudioContext();
@@ -112,8 +122,7 @@ const VoiceTrigger = () => {
             const locale = countryCode === 'US' ? 'en-US' : 'en-GB';
 
             // 1. Start Azure Recognition (Continuous)
-            // Using custom PushAudioInputStream bridge with echoCancellation disabled
-            console.log("[Voice] Initializing Azure STT (using custom mic bridge)...");
+            console.log(`[Voice] Initializing Azure STT (${isMobile ? 'Native Mobile' : 'Custom Desktop Bridge'})...`);
 
             await voiceService.startRecognition(
                 (text, isFinal) => {
@@ -132,11 +141,10 @@ const VoiceTrigger = () => {
                     setStatus(`Error: ${err}`);
                 },
                 locale,
-                stream // Pass the stream to use custom bridge
+                stream // Undefined on Mobile -> Triggers SDK default mic. Defined on Desktop -> Triggers custom bridge.
             );
 
             // CRITICAL: Wait for SDK to fully initialize before speaking
-            // (This delay replaces the implicit timing from console.log when DevTools is open)
             await new Promise(resolve => setTimeout(resolve, 500));
 
             setStatus('Listening');
