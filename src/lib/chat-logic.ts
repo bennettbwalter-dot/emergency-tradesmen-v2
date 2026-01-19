@@ -1,7 +1,16 @@
 import { trades, cities, usCities } from "@/lib/trades";
-import { SAFETY_TIPS } from "@/services/gemini/constants";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
+
+// OPTIMIZED FOR MOBILE TTS: Short, punchy tips.
+const SAFETY_TIPS: Record<string, string> = {
+    'gas-engineer': "Gas emergencies are dangerous. If you smell gas, leave immediately and call the National Grid.",
+    'electrician': "If there are sparks or smoke, turn off the main power if safe to do so.",
+    'plumber': "Turn off your main stopcock to prevent further flooding.",
+    'water-restoration': "Avoid the water if there are live electrics nearby.",
+    'locksmith': "If you are locked out, stay in a safe, well-lit area.",
+    'glazier': "Be careful of broken glass and do not try to remove it yourself."
+};
 
 export interface ChatState {
     step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'ROUTING';

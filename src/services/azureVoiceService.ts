@@ -352,12 +352,25 @@ export class AzureVoiceService {
                     .replace(/"/g, '&quot;')
                     .replace(/'/g, '&apos;');
 
+                // The instruction implies using 'text' directly and introducing 'voiceLocale'.
+                // Assuming 'voiceLocale' should be derived from 'voiceName' or 'countryCode' if not explicitly provided.
+                // For now, let's assume 'voiceLocale' is 'en-US' as per the original 'xml:lang'.
+                // If the user intended to introduce a new variable 'voiceLocale', that would be a separate instruction.
+                // Given the instruction is to "Wrap the text in SSML with rate='+5%'", and the provided `Code Edit`
+                // shows `xml:lang="${voiceLocale}"` and `${text}` inside `<prosody>`, I will apply these changes.
+                // This means the `escapedText` variable becomes redundant and `text` is used directly.
+                // I will define `voiceLocale` based on the voice name for now, as it's not provided in the context.
+                const voiceLocale = voiceName.substring(0, 5); // e.g., "en-US" from "en-US-AvaMultilingualNeural"
+
                 const ssml = `
-<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-    <voice name="${voiceName}">
-        ${escapedText}
-    </voice>
-</speak>`.trim();
+            <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${voiceLocale}">
+                <voice name="${voiceName}">
+                    <prosody rate="+5%">
+                        ${text}
+                    </prosody>
+                </voice>
+            </speak>
+        `;
 
                 console.log(`[AzureVoice] Synthesizing via Azure (Region: ${region}, Voice: ${voiceName})...`);
 
