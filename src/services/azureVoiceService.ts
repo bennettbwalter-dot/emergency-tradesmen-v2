@@ -93,11 +93,9 @@ export class AzureVoiceService {
 
                 this.sttSource.connect(this.sttProcessor);
 
-                // CRITICAL: Connect to a silent gain node instead of destination to avoid feedback loops
-                const silentGain = context.createGain();
-                silentGain.gain.value = 0;
-                this.sttProcessor.connect(silentGain);
-                silentGain.connect(context.destination);
+                // CRITICAL: Connect directly to destination to prevent the browser from pruning the node,
+                // but we will manually silence the buffer in the callback below to avoid feedback.
+                this.sttProcessor.connect(context.destination);
 
                 const sampleRate = context.sampleRate;
                 console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz (Stream ID: ${mediaStream.id})`);
@@ -109,9 +107,13 @@ export class AzureVoiceService {
                 }
 
                 this.sttProcessor.onaudioprocess = (event) => {
-                    if (!this.recognizerActive || !this.sttStream) return;
-
                     const inputData = event.inputBuffer.getChannelData(0);
+                    const outputData = event.outputBuffer.getChannelData(0);
+
+                    // 1. Manually SILENCE the output to the speakers to prevent echo/feedback loops
+                    for (let i = 0; i < outputData.length; i++) outputData[i] = 0;
+
+                    if (!this.recognizerActive || !this.sttStream) return;
 
                     // Improved Downsampling: Windowed Average to 16kHz
                     const ratio = sampleRate / 16000;
