@@ -92,10 +92,21 @@ export class AzureVoiceService {
                 source.connect(this.sttAnalyser);
 
                 source.connect(this.sttProcessor);
-                this.sttProcessor.connect(context.destination);
+
+                // CRITICAL: Connect to a silent gain node instead of destination to avoid feedback loops
+                const silentGain = context.createGain();
+                silentGain.gain.value = 0;
+                this.sttProcessor.connect(silentGain);
+                silentGain.connect(context.destination);
 
                 const sampleRate = context.sampleRate;
                 console.log(`[AzureVoice] Input source sample rate: ${sampleRate}Hz`);
+
+                // Force context resume
+                if (context.state === 'suspended') {
+                    console.log('[AzureVoice] Resuming suspended AudioContext...');
+                    context.resume();
+                }
 
                 this.sttProcessor.onaudioprocess = (event) => {
                     if (!this.recognizerActive || !this.sttStream) return;
@@ -172,7 +183,15 @@ export class AzureVoiceService {
                 if (e.reason === sdk.CancellationReason.Error) {
                     console.error('[AzureVoice] Cancellation Error Code:', e.errorCode);
                     console.error('[AzureVoice] Cancellation Error Details:', e.errorDetails);
-                    onError(`Azure Error: ${e.errorDetails} (Code: ${e.errorCode})`);
+
+                    // Specific mapping for common live site errors
+                    if (e.errorDetails.includes('401')) {
+                        onError('Azure Authentication Failed (401). Please check your API Key.');
+                    } else if (e.errorDetails.includes('1006') || e.errorDetails.includes('WebSocket')) {
+                        onError('Connection Lost (1006). Please check your internet or firewall.');
+                    } else {
+                        onError(`Azure Error: ${e.errorDetails}`);
+                    }
                 }
                 this.recognizerActive = false;
             };
