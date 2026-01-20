@@ -22,6 +22,8 @@ import { UK_CITY_GROUPS } from "@/lib/uk-city-grouping";
 
 import { UKCityCombobox } from "@/components/UKCityCombobox";
 import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
+import { Terminal, TypingAnimation, AnimatedSpan } from "@/registry/magicui/terminal";
+import { BorderBeam } from "@/components/magicui/BorderBeam";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -194,100 +196,112 @@ export function EmergencyChatInterface() {
         return () => clearTimeout(timer);
     }, [charIndex, isDeleting, sentenceIndex, input]);
 
-    const controlsContent = (
-        <>
-            {/* Trade Selector */}
-            <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
-                <SelectTrigger
-                    className={`h-9 px-4 min-w-[140px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}
-                >
-                    <Wrench className="w-4 h-4 shrink-0 text-black dark:text-white" />
+    const handleActionClick = () => {
+        if (isRequestingLocation) {
+            getLocation();
+            setIsRequestingLocation(false);
+        } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
+            const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
+
+            if (locationRecord && locationRecord.path_slugs) {
+                const { state, metro, city, suburb } = locationRecord.path_slugs;
+                const hasSuburb = suburb && suburb.trim().length > 0;
+                const newPath = hasSuburb
+                    ? `/us/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
+                    : `/us/${state}/${metro}/${city}/emergency-${detectedTrade}`;
+                navigate(newPath);
+            } else {
+                navigate(`${countryPrefix}/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
+            }
+        } else {
+            handleUserMessage(input);
+        }
+    };
+
+    const isActionDisabled = (!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation);
+
+    const tradeSelector = (
+        <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
+            <SelectTrigger
+                className={`h-11 px-4 min-w-[100px] flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+            >
+                <div className="flex items-center gap-2 truncate">
+                    <Wrench className="w-4 h-4 shrink-0 text-gold" />
                     <SelectValue placeholder="Trade">
-                        <span className="text-sm font-medium truncate">
+                        <span className="text-sm font-medium truncate block">
                             {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
                         </span>
                     </SelectValue>
-                </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200">
-                    {trades.map((t) => (
-                        <SelectItem
-                            key={t.slug}
-                            value={t.slug}
-                            className="cursor-pointer hover:bg-gray-100 text-black"
-                        >
-                            {settings.countryCode === 'US' ? (t as any).usName : t.name}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
+                </div>
+            </SelectTrigger>
+            <SelectContent className="bg-white border-gray-200">
+                {trades.map((t) => (
+                    <SelectItem
+                        key={t.slug}
+                        value={t.slug}
+                        className="cursor-pointer hover:bg-gray-100 text-black"
+                    >
+                        {settings.countryCode === 'US' ? (t as any).usName : t.name}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
 
-            {/* Location Selector */}
-            {settings.countryCode === 'US' ? (
-                /* US Side: Hierarchical Location Selector */
-                <HierarchicalLocationSelector
-                    className="flex-1"
-                    placeholder="City, State"
-                    onLocationSelect={(record) => {
-                        console.log("Loc Selected", record);
-                        setDetectedCity(record.name);
-                        // Store full record for precise routing?
-                        // For now, we simulate the text-based flow
-                        // But ideally we route immediately if leaf node?
-                        // The button below triggers handleSearch -> which uses detectedCity text.
-                        // We should probably allow the Selector to trigger search.
-                    }}
-                />
+    const locationSelector = settings.countryCode === 'US' ? (
+        <HierarchicalLocationSelector
+            className="flex-1"
+            placeholder="City, State"
+            onLocationSelect={(record) => {
+                console.log("Loc Selected", record);
+                setDetectedCity(record.name);
+            }}
+        />
+    ) : (
+        <UKCityCombobox
+            className="flex-1 h-11"
+            placeholder="Select City"
+            value={detectedCity || ""}
+            onValueChange={setDetectedCity}
+        />
+    );
+
+    const actionButton = (
+        <Button
+            onClick={handleActionClick}
+            disabled={isActionDisabled}
+            size="icon"
+            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${(detectedTrade && detectedCity && !input.trim())
+                ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
+                : 'bg-gold text-white hover:bg-gold/90'}`}
+            title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
+        >
+            {isRequestingLocation ? (
+                geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
+            ) : (detectedTrade && detectedCity && !input.trim()) ? (
+                <Search className="w-4 h-4" />
             ) : (
-                /* UK Side: Searchable Combobox */
-                <UKCityCombobox
-                    className="flex-1 h-12"
-                    placeholder="Select City"
-                    value={detectedCity || ""}
-                    onValueChange={setDetectedCity}
-                />
+                <Send className="w-4 h-4" />
             )}
+        </Button>
+    );
 
-            {/* Dynamic Action Button */}
-            <Button
-                onClick={() => {
-                    if (isRequestingLocation) {
-                        getLocation();
-                        setIsRequestingLocation(false);
-                    } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
-                        const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
-
-                        if (locationRecord && locationRecord.path_slugs) {
-                            const { state, metro, city, suburb } = locationRecord.path_slugs;
-                            const hasSuburb = suburb && suburb.trim().length > 0;
-                            const newPath = hasSuburb
-                                ? `/us/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
-                                : `/us/${state}/${metro}/${city}/emergency-${detectedTrade}`;
-                            navigate(newPath);
-                        } else {
-                            navigate(`${countryPrefix}/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
-                        }
-                    } else {
-                        handleUserMessage(input);
-                    }
-                }}
-                disabled={(!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation)}
-                size="icon"
-                className={`h-9 w-9 shrink-0 rounded-full transition-all shadow-lg ${
-                    // Pulse ONLY when we have everything and are ready to go (Final Step)
-                    (detectedTrade && detectedCity && !input.trim())
-                        ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
-                        : 'bg-gold text-white hover:bg-gold/90'}`}
-                title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
-            >
-                {isRequestingLocation ? (
-                    geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
-                ) : (detectedTrade && detectedCity && !input.trim()) ? (
-                    <Search className="w-4 h-4" />
-                ) : (
-                    <Send className="w-4 h-4" />
-                )}
-            </Button>
-        </>
+    const mobileActionButton = (
+        <Button
+            onClick={handleActionClick}
+            disabled={isActionDisabled}
+            className={`h-11 w-full rounded-full transition-all shadow-lg font-bold uppercase tracking-wider ${(detectedTrade && detectedCity && !input.trim())
+                ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
+                : 'bg-gold text-white hover:bg-gold/90'}`}
+        >
+            {isRequestingLocation ? (
+                <><MapPin className="w-4 h-4 mr-2" /> Locate Me</>
+            ) : (detectedTrade && detectedCity && !input.trim()) ? (
+                <><Search className="w-4 h-4 mr-2" /> Find Help Now</>
+            ) : (
+                <><Send className="w-4 h-4 mr-2" /> Send Message</>
+            )}
+        </Button>
     );
 
     const resetChat = () => {
@@ -305,9 +319,15 @@ export function EmergencyChatInterface() {
 
     return (
         <div className="w-full max-w-4xl mx-auto">
-            {/* Mobile Controls - Above chat */}
-            <div className="flex md:hidden flex-wrap justify-center gap-2 mb-4 px-2">
-                {controlsContent}
+            {/* Mobile Controls - Above chat - Optimized Layout */}
+            <div className="flex md:hidden w-full px-2 mb-4 flex-col gap-3">
+                <div className="grid grid-cols-2 gap-2 w-full">
+                    {tradeSelector}
+                    {locationSelector}
+                </div>
+                <div className="w-full">
+                    {mobileActionButton}
+                </div>
             </div>
 
             <div className="relative rounded-3xl bg-transparent overflow-hidden">
@@ -333,36 +353,56 @@ export function EmergencyChatInterface() {
                         {chatState.history.map((msg, idx) => {
                             const isLastMessage = idx === chatState.history.length - 1;
 
+                            if (msg.role === 'assistant') {
+                                return (
+                                    <motion.div
+                                        key={msg.id}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="w-full flex justify-start my-4"
+                                    >
+                                        <Terminal className="w-full max-w-2xl mx-auto shadow-2xl border-gold/20">
+                                            <AnimatedSpan className="text-green-500 mb-2">
+                                                <span>✔ System initialized.</span>
+                                            </AnimatedSpan>
+
+                                            <div className="text-muted-foreground">
+                                                <span className="mr-2 text-gold">➜</span>
+                                                <span className="text-foreground">
+                                                    {isLastMessage ? (
+                                                        <TypingAnimation
+                                                            duration={15}
+                                                            className="text-base md:text-lg font-mono"
+                                                        >
+                                                            {msg.content}
+                                                        </TypingAnimation>
+                                                    ) : (
+                                                        <span className="text-base md:text-lg font-mono">
+                                                            {msg.content}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </div>
+
+                                            {isLastMessage && (
+                                                <AnimatedSpan delay={msg.content.length * 15 + 500} className="text-blue-500 mt-4">
+                                                    <span>ℹ Waiting for user action...</span>
+                                                </AnimatedSpan>
+                                            )}
+                                        </Terminal>
+                                    </motion.div>
+                                );
+                            }
+
                             return (
                                 <motion.div
                                     key={msg.id}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    className="flex justify-end"
                                 >
-                                    <div className={`max-w-[90%] md:max-w-[70%] p-3 rounded-xl text-base md:text-lg leading-relaxed shadow-sm ${msg.role === 'user'
-                                        ? 'bg-secondary text-secondary-foreground rounded-tr-sm'
-                                        : 'bg-transparent shadow-none p-0'
-                                        }`}>
-                                        {msg.role === 'assistant' && (
-                                            <div className="flex gap-3 md:gap-4 items-start">
-                                                <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center shrink-0 shadow-sm mt-1">
-                                                    <Zap className="w-5 h-5 text-black fill-current" />
-                                                </div>
-                                                <div className="pt-1 text-foreground">
-                                                    {isLastMessage ? (
-                                                        <TypewriterMessage
-                                                            text={msg.content}
-                                                            speed={15}
-                                                            onType={() => scrollToBottom('auto')}
-                                                        />
-                                                    ) : (
-                                                        msg.content
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )}
-                                        {msg.role === 'user' && msg.content}
+                                    <div className="max-w-[90%] md:max-w-[70%] p-3 rounded-xl text-base md:text-lg leading-relaxed shadow-sm bg-secondary text-secondary-foreground rounded-tr-sm">
+                                        {msg.content}
                                     </div>
                                 </motion.div>
                             );
@@ -403,8 +443,11 @@ export function EmergencyChatInterface() {
                         />
 
                         <div className="hidden md:grid grid-cols-[1fr_1fr_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
-                            {controlsContent}
+                            {tradeSelector}
+                            {locationSelector}
+                            {actionButton}
                         </div>
+                        <BorderBeam duration={8} size={100} />
                     </div>
                 </div>
             </div>

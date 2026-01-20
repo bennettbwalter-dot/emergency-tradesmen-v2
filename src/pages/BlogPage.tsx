@@ -60,13 +60,23 @@ export default function BlogPage() {
                     created_at: new Date().toISOString()
                 };
 
+                const staticPost2: BlogPost = {
+                    id: 'static-emergency-repairs-guide',
+                    title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
+                    slug: 'emergency-repairs-guide-tenants-landlords',
+                    excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
+                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug).map(p => ({
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug).map(p => ({
                     ...p,
                     title: regionalizeText(p.title),
                     excerpt: regionalizeText(p.excerpt)
                 }));
-                setPosts([staticPost, ...uniqueData]);
+                setPosts([staticPost, staticPost2, ...uniqueData]);
             }
             setIsLoading(false);
         }

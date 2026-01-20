@@ -291,6 +291,110 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 });
                 setIsLoading(false);
                 return;
+            } else if (slug === 'emergency-repairs-guide-tenants-landlords') {
+                setPost({
+                    id: 'static-emergency-repairs-guide',
+                    title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
+                    slug: 'emergency-repairs-guide-tenants-landlords',
+                    excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
+                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
+                    content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
+
+## 🚨 What Counts as an "Emergency"?
+
+Not every broken item is an emergency. In the eyes of the law, an emergency is usually something that presents an immediate danger to your health, safety, or the security of the property.
+
+### Common Emergency Repairs:
+
+*   **Total loss of water:** You have no running water at all.
+*   **Gas leaks:** A smell of gas or a carbon monoxide alarm sounding.
+*   **Dangerous electrics:** Exposed wires, sparking sockets, or total power failure.
+*   **Flooding:** Serious leaks that you can't stop or that are damaging the ceiling/walls.
+*   **Heating failure:** A broken boiler in the middle of winter (especially if there are children or vulnerable people in the home).
+*   **Insecure property:** A broken external door or window that means you can't lock up safely.
+
+![tenants discussing repairs](/images/blog/emergency-repairs-meeting.jpg "Discussing repair responsibilities")
+
+## 🏠 Who is Responsible? (The General Rules)
+
+In most of the UK, the law is very clear. Even if your tenancy agreement says otherwise, the law often overrules it.
+
+### The Landlord MUST Fix:
+
+*   **Structure & Exterior:** The roof, walls, windows, and external doors.
+*   **Sanitation:** Sinks, baths, toilets, pipes, and drains.
+*   **Utilities:** Gas pipes, electrical wiring, and water pipes.
+*   **Heating:** The boiler, radiators, and hot water systems.
+
+### The Tenant MUST:
+
+*   **Report issues:** You must tell your landlord about the problem immediately. They can't fix what they don't know about!
+*   **Prevent damage:** Take reasonable steps to stop things getting worse (e.g., turn off the stopcock if there is a burst pipe).
+*   **Use correctly:** Don't cause blockages by putting the wrong things down the toilet or sink.
+*   **Minor maintenance:** Usually, changing light bulbs and smoke alarm batteries (unless hard-wired) is your job.
+
+## 📍 Rules by Region (With Official Links)
+
+Housing law is different depending on where you live. Here are the specific rules and links for each nation.
+
+### 🏴 England
+
+In England, the main rule is Section 11 of the Landlord and Tenant Act 1985. Recently, Awaab's Law has also introduced stricter timelines for hazards.
+
+*   **Official Rule:** [Landlord and Tenant Act 1985 Section 11](https://www.legislation.gov.uk/ukpga/1985/70/section/11)
+*   **Key Update:** Government Guidance on Awaab's Law — Requires landlords to investigate emergency hazards within 24 hours.
+*   **Safety Check:** [Housing Health and Safety Rating System (HHSRS)](https://www.gov.uk/government/publications/housing-health-and-safety-rating-system-guidance-for-landlords-and-property-related-professionals) — This is the standard councils use to decide if a home is safe.
+
+### 🏴 Wales
+
+Wales has a new system under the Renting Homes (Wales) Act 2016. Your home must be "Fit for Human Habitation" (FFHH).
+
+*   **Official Rule:** [Fitness for human habitation guidance](https://www.gov.wales/fitness-human-habitation-guidance-tenants-contract-holders-html)
+*   **Must-Haves:** Landlords must provide working smoke alarms and carbon monoxide detectors. If they don't, the home is considered "unfit."
+
+### 🏴 Scotland
+
+Scotland uses the Repairing Standard, which is very strict and offers high protection for tenants.
+
+*   **Official Rule:** [Repairing Standard Guidance](https://www.gov.scot/publications/repairing-standard-statutory-guidance-private-landlords/)
+*   **Your Rights:** [Tenant Repairs](https://www.mygov.scot/tenant-repairs) — Covers wind/watertight status and heating systems.
+
+### 🇮🇪 Northern Ireland
+
+Private tenants in Northern Ireland are protected by the Private Tenancies Order, and Environmental Health plays a big role here.
+
+*   **Official Rule:** [Private Tenancies Act (NI) 2022](https://www.legislation.gov.uk/nia/2022/20/contents)
+*   **Help:** [Repairing your home](https://www.nidirect.gov.uk/articles/repairing-your-home-private-tenants) — Explains the fitness standard.
+
+## ⏱️ How Fast Should They Fix It?
+
+*   **Emergency (Gas, Water, Electric, Security):** The landlord should normally respond within **24 hours** to at least make the property safe.
+*   **Urgent (Heating, Minor Leaks):** Usually 3 to 7 days.
+*   **Routine (Dripping taps, cosmetic):** Usually 20 to 28 days.
+
+> **Important Note:** In England, under the new Awaab's Law rules, if a hazard poses a significant risk to health, the landlord must investigate within 14 days and start repairs within 7 days, but for emergencies, it's 24 hours.
+
+## 🆘 What If They Won't Fix It?
+
+If you have reported an emergency and the landlord is ignoring you:
+
+1.  **Keep Records:** Save every text, email, and photo of the damage.
+2.  **Contact Your Council:** Find the Environmental Health Department at your local council. They have the power to force landlords to do repairs.
+3.  **Don't Just Stop Paying Rent:** This is risky and could get you evicted. Always get legal advice before withholding rent.
+
+![taking action on repairs](/images/blog/emergency-repairs-action.jpg "Taking action")
+
+### Useful Contacts:
+
+*   [Shelter England](https://england.shelter.org.uk/)
+*   [Citizens Advice](https://www.citizensadvice.org.uk/)
+*   [Housing Ombudsman](https://www.housing-ombudsman.org.uk/) (For complaints about social landlords)
+`),
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
             }
 
             const { data, error } = await supabase
@@ -353,8 +457,8 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
             {/* Structured Data Construction */}
             {(() => {
                 const baseUrl = "https://emergencytradesmen.net";
-                const postUrl = `${baseUrl}/blog/${post.slug}`;
-                const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
+                const postUrl = `${baseUrl} / blog / ${post.slug}`;
+                const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
 
                 // 1. BreadcrumbList Schema
                 const breadcrumbSchema = {
@@ -371,7 +475,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
                         },
                         {
                             "@type": "ListItem",
@@ -397,14 +501,14 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                         "@type": "Organization",
                         "name": regionalizeText("Emergency Tradesmen UK"),
                         "url": baseUrl,
-                        "logo": `${baseUrl}/et-logo-v2.png`
+                        "logo": `${baseUrl} / et - logo - v2.png`
                     },
                     "publisher": {
                         "@type": "Organization",
                         "name": regionalizeText("Emergency Tradesmen UK"),
                         "logo": {
                             "@type": "ImageObject",
-                            "url": `${baseUrl}/et-logo-v2.png`
+                            "url": `${baseUrl} / et - logo - v2.png`
                         }
                     },
                     "datePublished": post.published_at,
@@ -423,7 +527,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                     <SEO
                         title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={post.excerpt}
-                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
+                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={[breadcrumbSchema, articleSchema]}
@@ -435,7 +539,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
+                        to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -521,7 +625,7 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                                                     return (
                                                         <a
                                                             {...props}
-                                                            className={`font-semibold text-gold no-underline hover:underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
+                                                            className={`font - semibold text - gold no - underline hover: underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
                                                         >
                                                             {props.children}
                                                             {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}

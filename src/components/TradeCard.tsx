@@ -56,7 +56,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
     <Link
       to={`${countryPrefix}/emergency-${trade.slug}/${targetCity && (settings.countryCode === 'US' ? usCities : cities).map(c => c.toLowerCase()).includes(targetCity.toLowerCase()) ? targetCity.toLowerCase().replace(/\s+/g, '-') : (settings.countryCode === 'US' ? 'los-angeles' : 'london')}`}
       onClick={handleClick}
-      className="block"
+      className="block h-full"
     >
       <motion.div
         transition={{ duration: 0.3, ease: "easeOut" }}

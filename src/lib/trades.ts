@@ -7,9 +7,9 @@ export const trades = [
   { slug: "glazier", name: "Glazier", usName: "Glazier / Glass Repair", icon: "🪟", image: "/emergency-glazier-v2.jpg", vectorIcon: "/icons/glazier.png" },
   { slug: "roofer", name: "Roofer", usName: "Roofer / Roof Repair", icon: "🏠", image: "/emergency-roofer-v2.jpg", vectorIcon: "/icons/roofer-icon-v2.png" },
   { slug: "builder", name: "Builder", usName: "Builder / Construction", icon: "🧱", image: "/emergency-builder-v2.png", vectorIcon: "/icons/builder-icon-v2.png" },
-  { slug: "water-restoration", name: "Water Restoration", usName: "Water Damage & Restoration", icon: "🌊", image: "/water-hero-final.jpg", vectorIcon: "/icons/water-restoration.png" },
+  { slug: "water-restoration", name: "Water Restoration", usName: "Water Damage & Restoration", icon: "🌊", image: "/water-hero-final.jpg", vectorIcon: "/water-restoration-icon.png" },
   { slug: "breakdown", name: "Breakdown Recovery", usName: "Tow Truck", icon: "🚗", image: "/emergency-breakdown-v2.jpg", vectorIcon: "/icons/breakdown.png" },
-  { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.jpg", vectorIcon: "/icons/gas-engineer.png" },
+  { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.jpg", vectorIcon: "/hvac-icon.png" },
 ] as const;
 
 import usCityList from './us_cities.json';

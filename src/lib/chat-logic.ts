@@ -390,30 +390,43 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
                 const coords = await geocodeLocation(cleanPostcode, countryCode);
                 if (coords) {
-                    const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
-                    if (match) {
-                        newState.detectedCity = match.city;
+                    // TRUST GEOCODER NAME (e.g. "Dunstable" from "LU6...")
+                    const detectedPlace = coords.displayName.split(',')[0].trim();
+                    if (detectedPlace) {
+                        newState.detectedCity = detectedPlace;
                         cityFallbackUsed = true;
                         originalCity = cleanPostcode;
                         handled = true;
-                    }
-                }
-            }
-
-            // 2. Area Name Match (e.g. "Brixton", "Camden")
-            if (!handled) {
-                const foundArea = Object.keys(cityPostcodes).find(area => lowerMsg.includes(area.toLowerCase()));
-                if (foundArea) {
-                    console.log(`[Voice] Area detected: ${foundArea}`);
-                    const coords = await geocodeLocation(foundArea, countryCode);
-                    if (coords) {
+                    } else {
+                        // Fallback: Snap if no name returned (unlikely)
                         const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
                         if (match) {
                             newState.detectedCity = match.city;
                             cityFallbackUsed = true;
-                            originalCity = foundArea;
+                            originalCity = cleanPostcode;
+                            handled = true;
                         }
                     }
+                }
+            }
+
+            // 2. Area Name Match (e.g. "Brixton", "Dunstable")
+            if (!handled) {
+                // Check if the user mentioned a known area from our database
+                const foundArea = Object.keys(cityPostcodes).find(area => {
+                    // Strict(ish) match: allow " in " (e.g. "plumber in Dunstable")
+                    // The detected area should be a distinct word in the message to avoid partial matches
+                    // simple check: includes() is okay for now as most names are distinctive
+                    return lowerMsg.includes(area.toLowerCase());
+                });
+
+                if (foundArea) {
+                    console.log(`[Voice] Area detected and trusted: ${foundArea}`);
+                    // DIRECT USE: Do not snap to nearest city (e.g. London). Use "Dunstable" directly.
+                    newState.detectedCity = foundArea;
+                    cityFallbackUsed = true;
+                    originalCity = foundArea;
+                    handled = true;
                 }
             }
         }
@@ -434,8 +447,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 if (locationQuery.length > 2) {
                     const coords = await geocodeLocation(locationQuery, countryCode);
                     if (coords) {
-                        // 1. DIRECT MATCH CHECK (New: Covers all cities in trades.ts)
-                        // If Nominatim says "York, UK", and "York" is in our list -> Use "York" directly.
+                        // 1. DIRECT MATCH CHECK (Case-insensitive)
+                        // Does the geocoded name match one of our main cities?
                         const directMatch = activeCities.find(city =>
                             coords.displayName.toLowerCase().includes(city.toLowerCase())
                         );
@@ -446,14 +459,16 @@ export async function processUserMessage(message: string, currentState: ChatStat
                             originalCity = coords.displayName.split(',')[0];
                             console.log(`[Location Direct Match] Found '${directMatch}' in '${coords.displayName}'`);
                         }
-                        // 2. NEAREST NEIGHBOR FALLBACK (Old: Covers villages near supported hubs)
+                        // 2. TRUST THE GEOCODER (Enhanced Coverage)
+                        // If no main city match, use the returned place name directly (e.g. "Dunstable")
+                        // This ensures we cover EVERY town/village, not just our main list.
                         else {
-                            const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
-                            if (match) {
-                                newState.detectedCity = match.city;
-                                cityFallbackUsed = true;
-                                originalCity = coords.displayName.split(',')[0];
-                                console.log(`[Location Fallback] Mapped '${originalCity}' -> '${match.city}' (${match.distance.toFixed(1)}km)`);
+                            const detectedPlace = coords.displayName.split(',')[0].trim();
+                            if (detectedPlace) {
+                                newState.detectedCity = detectedPlace;
+                                cityFallbackUsed = true; // Still flag as fallback to trigger the "I'm taking you to X" message
+                                originalCity = detectedPlace;
+                                console.log(`[Location Extended] Accepted '${detectedPlace}' directly from Geocoder`);
                             }
                         }
                     }

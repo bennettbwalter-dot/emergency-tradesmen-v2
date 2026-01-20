@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
+import { cn } from "@/lib/utils";
+import { InteractiveGridPattern } from "@/components/magicui/InteractiveGridPattern";
 
 import { Header } from "@/components/Header";
 
@@ -16,7 +18,7 @@ import { TradeCard } from "@/components/TradeCard";
 
 import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 
-import { GoldWave } from "@/components/GoldWave";
+
 
 
 import { trades, cities, usCities } from "@/lib/trades";
@@ -24,6 +26,7 @@ import { trades, cities, usCities } from "@/lib/trades";
 import { Phone, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AnimatedBeamDemo } from "@/components/AnimatedBeamDemo";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -43,6 +46,7 @@ import { GuestGate } from "@/components/GuestGate";
 const Index = () => {
   const { settings } = useLocalization();
   const [showFaq, setShowFaq] = useState(false);
+  const [showAllCities, setShowAllCities] = useState(false);
 
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
@@ -159,11 +163,24 @@ const Index = () => {
 
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
 
+            <div className="absolute inset-0 overflow-hidden">
+              <InteractiveGridPattern
+                className={cn(
+                  "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+                  "absolute inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 opacity-50"
+                )}
+                width={40}
+                height={40}
+                squares={[40, 40]}
+                squaresClassName="hover:fill-gold/20"
+              />
+            </div>
+
 
 
             {/* Decorative gold rings */}
 
-            <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float">
+            <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float pointer-events-none">
 
               <div className="absolute inset-0 rounded-full border border-gold/30" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
 
@@ -175,15 +192,15 @@ const Index = () => {
 
             {/* Glow effects */}
 
-            <div className="absolute top-20 right-20 w-96 h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse" />
+            <div className="absolute top-20 right-20 w-96 h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse pointer-events-none" />
 
-            <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px]" />
+            <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px] pointer-events-none" />
 
 
 
-            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0">
+            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none">
 
-              <div className="max-w-4xl mx-auto text-center">
+              <div className="max-w-4xl mx-auto text-center pointer-events-auto">
 
                 {/* Availability badge */}
 
@@ -246,7 +263,7 @@ const Index = () => {
 
                 transition={{ duration: 0.7, delay: 0.4 }}
 
-                className="mb-0"
+                className="mb-0 pointer-events-auto"
 
               >
 
@@ -275,18 +292,12 @@ const Index = () => {
 
 
 
-          {/* Gold Wave Animation */}
-          {/* Gold Wave Animation */}
-          <section className="container-wide py-0 -mt-12 md:-mt-24 relative z-10">
-            <GoldWave />
-          </section>
+
 
           {/* Trust Badges */}
 
-          <section className="container-wide pt-0 pb-16 -mt-20 relative z-20">
-
+          <section className="container-wide pt-0 pb-16 mt-12 relative z-20">
             <TrustBadges />
-
           </section>
 
           {/* How It Works Section */}
@@ -376,6 +387,18 @@ const Index = () => {
               </motion.div>
 
             </div>
+
+            {/* Animated Beam Integration Demo */}
+            <div className="w-full max-w-6xl mx-auto mt-20 mb-8 px-4">
+              <div className="text-center mb-8">
+                <span className="text-gold text-sm font-bold tracking-widest uppercase">Seamless Integration</span>
+                <h3 className="font-display text-2xl md:text-3xl text-foreground mt-2">Connecting You With <span className="text-gold">Verified Pros</span></h3>
+              </div>
+              <div className="bg-card/30 backdrop-blur-sm border border-gold/10 rounded-3xl overflow-hidden shadow-2xl">
+                <AnimatedBeamDemo />
+              </div>
+            </div>
+
           </section>
 
 
@@ -527,20 +550,35 @@ const Index = () => {
                 <div className="w-full text-center mb-4">
                   <h3 className="text-lg font-bold text-foreground/80">{settings.countryCode === 'US' ? 'Main US Cities' : 'Main UK Cities'}</h3>
                 </div>
-                {(settings.countryCode === 'US' ? usCities.slice(0, 24) : cities).map((city) => (
-                  <Link
-                    key={city}
-                    to={settings.countryCode === 'US'
-                      ? `/us/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
-                      : `/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
-                    }
-                    className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
-                  >
-                    {city}
-                  </Link>
-                ))}
+                {(settings.countryCode === 'US' ? usCities : cities)
+                  .slice(0, showAllCities ? undefined : 6)
+                  .map((city) => (
+                    <Link
+                      key={city}
+                      to={settings.countryCode === 'US'
+                        ? `/us/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
+                        : `/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
+                      }
+                      className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
+                    >
+                      {city}
+                    </Link>
+                  ))}
               </div>
 
+              <div className="mt-8 text-center animate-in fade-in slide-in-from-top-4 duration-500">
+                <Button
+                  variant="ghost"
+                  onClick={() => setShowAllCities(!showAllCities)}
+                  className="gap-2 text-muted-foreground hover:text-gold hover:bg-gold/5 rounded-full px-6"
+                >
+                  {showAllCities ? (
+                    <>Show Less <ChevronUp className="w-4 h-4" /></>
+                  ) : (
+                    <>Show More Cities <ChevronDown className="w-4 h-4" /></>
+                  )}
+                </Button>
+              </div>
             </div>
 
           </section>

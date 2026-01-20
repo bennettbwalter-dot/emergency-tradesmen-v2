@@ -131,10 +131,16 @@ export function USLocationSelector({ onLocationSelect, className }: USLocationSe
             <SheetTrigger asChild>
                 <Button
                     variant="outline"
-                    className={cn("rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white gap-2", className)}
+                    className={cn(
+                        "h-11 w-full justify-start rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm text-foreground gap-2",
+                        className
+                    )}
                 >
-                    <MapPin className="h-4 w-4 text-emerald-400" />
-                    {selectedCity ? selectedCity.name : selectedState ? selectedState.name : 'Select Location'}
+                    <MapPin className="h-4 w-4 text-gold shrink-0" />
+                    <span className="truncate flex-1 text-left">
+                        {selectedCity ? selectedCity.name : selectedState ? selectedState.name : 'Select Location'}
+                    </span>
+                    <ChevronRight className="h-4 w-4 opacity-50 shrink-0 ml-auto" />
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[350px] sm:w-[800px] border-r-gold/20 bg-slate-950 text-white p-0">
