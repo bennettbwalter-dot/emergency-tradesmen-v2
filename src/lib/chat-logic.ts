@@ -177,6 +177,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     // Use appropriate city list based on country
     const activeCities = countryCode === 'US' ? usCities : cities;
+    // Sort by length (longest first) to prioritize more specific matches like "Newcastle upon Tyne" over "Newcastle"
+    const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
 
     // 1. DANGER CHECK (Keep existing safeguard but ensure it doesn't break flow if not critical)
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
@@ -374,9 +376,17 @@ export async function processUserMessage(message: string, currentState: ChatStat
     let originalCity = "";
 
     if (!newState.detectedCity) {
-        // A. Strict Match First (Fast)
-        const foundCity = activeCities.find(c => lowerMsg.includes(c.toLowerCase()));
+        // A. Strict Match First (Fast) - Check for city names with word boundaries
+        // Sort by length to prioritize longer matches (e.g., "Newcastle upon Tyne" before "Newcastle")
+        const foundCity = sortedCities.find(c => {
+            const cityLower = c.toLowerCase();
+            // Word boundary check: city name should be preceded by start of string, space, or punctuation
+            // and followed by end of string, space, or punctuation
+            const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+            return regex.test(lowerMsg);
+        });
         if (foundCity) {
+            console.log(`[Voice] City detected (strict match): ${foundCity}`);
             newState.detectedCity = foundCity;
         }
         // A.5 Postcode Extraction (High Precision)
@@ -413,11 +423,13 @@ export async function processUserMessage(message: string, currentState: ChatStat
             // 2. Area Name Match (e.g. "Brixton", "Dunstable")
             if (!handled) {
                 // Check if the user mentioned a known area from our database
-                const foundArea = Object.keys(cityPostcodes).find(area => {
-                    // Strict(ish) match: allow " in " (e.g. "plumber in Dunstable")
-                    // The detected area should be a distinct word in the message to avoid partial matches
-                    // simple check: includes() is okay for now as most names are distinctive
-                    return lowerMsg.includes(area.toLowerCase());
+                // Sort by length (longest first) to prioritize specific matches
+                const sortedAreas = Object.keys(cityPostcodes).sort((a, b) => b.length - a.length);
+                const foundArea = sortedAreas.find(area => {
+                    const areaLower = area.toLowerCase();
+                    // Word boundary check for more accurate matching
+                    const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+                    return regex.test(lowerMsg);
                 });
 
                 if (foundArea) {

@@ -28,6 +28,9 @@ const VoiceTrigger = () => {
     const recognitionRef = useRef<any>(null);
     const silenceTimer = useRef<any>(null);
     const isStartingRef = useRef(false);
+    const lastFallbackTimeRef = useRef<number>(0); // Cooldown for fallback messages
+    const MIN_TRANSCRIPT_LENGTH = 3; // Minimum characters to consider valid input
+    const FALLBACK_COOLDOWN_MS = 5000; // 5 seconds between "I didn't catch that" messages
 
     // Helper to update both Ref and State
     const setStatus = (newStatus: string) => {
@@ -129,8 +132,12 @@ const VoiceTrigger = () => {
                     if (!isActiveRef.current) return;
                     setTranscript(text);
 
-                    if (isFinal && text.trim().length > 0) {
+                    if (isFinal && text.trim().length >= MIN_TRANSCRIPT_LENGTH) {
+                        console.log(`[Voice] Final transcript accepted (length ${text.trim().length}): "${text}"`);
                         processInput(text);
+                    } else if (isFinal && text.trim().length > 0 && text.trim().length < MIN_TRANSCRIPT_LENGTH) {
+                        console.log(`[Voice] Ignored short transcript (length ${text.trim().length}): "${text}"`);
+                        // Don't process very short utterances like "uh", "um"
                     } else if (text.trim().length > 2 && statusRef.current === 'Speaking') {
                         console.log("[Voice] Barge-in! Stopping TTS.");
                         voiceService.stop();
@@ -206,8 +213,19 @@ const VoiceTrigger = () => {
 
             console.log("[Voice] Response from logic:", response.content);
 
-            // Barge-in check: If user started talking AGAIN during processing, maybe we should skip speaking?
-            // For now, let's just speak the response.
+            // FALLBACK LOOP PROTECTION: Detect and throttle fallback responses
+            const isFallbackResponse = response.content.includes("I didn't catch that") || response.content.includes("Could you briefly describe");
+            const now = Date.now();
+            const timeSinceLastFallback = now - lastFallbackTimeRef.current;
+
+            if (isFallbackResponse) {
+                if (timeSinceLastFallback < FALLBACK_COOLDOWN_MS) {
+                    console.log(`[Voice] Suppressing repeated fallback (${timeSinceLastFallback}ms < ${FALLBACK_COOLDOWN_MS}ms cooldown)`);
+                    setStatus('Listening');
+                    return; // Skip speaking, just go back to listening
+                }
+                lastFallbackTimeRef.current = now; // Record this fallback
+            }
 
             await speakResponse(response.content, countryCode);
 

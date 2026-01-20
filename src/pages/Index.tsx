@@ -309,84 +309,7 @@ const Index = () => {
               </h2>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 relative max-w-6xl mx-auto">
 
-              {/* Step 1 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="w-full md:w-[40%] flex flex-col items-center"
-              >
-                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
-                  <img
-                    src="/how-it-works-step-1-new.png"
-                    alt="Step 1: Describe your problem, use voice, or choose trade"
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold my-2 animate-bounce z-30 -mt-8 -mb-12">
-                  <img src="/custom-arrow.png" alt="Next" className="w-24 h-24 object-contain rotate-90 drop-shadow-2xl" />
-                </div>
-              </motion.div>
-
-              {/* Desktop Arrow 1 */}
-              <div className="hidden md:flex shrink-0 z-20 -mx-20 relative">
-                <img src="/custom-arrow.png" alt="Next" className="w-36 h-28 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
-              </div>
-
-              {/* Step 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-full md:w-[20%] flex flex-col items-center"
-              >
-                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
-                  <img
-                    src="/how-it-works-step-2.webp"
-                    alt="Step 2: Choose a tradesman from the listings"
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Mobile Arrow */}
-                <div className="flex md:hidden text-gold my-2 animate-bounce z-30 -mt-8 -mb-12">
-                  <img src="/custom-arrow.png" alt="Next" className="w-24 h-24 object-contain rotate-90 drop-shadow-2xl" />
-                </div>
-              </motion.div>
-
-              {/* Desktop Arrow 2 */}
-              <div className="hidden md:flex shrink-0 z-20 -mx-20 relative">
-                <img src="/custom-arrow.png" alt="Next" className="w-36 h-28 object-contain drop-shadow-md transform -rotate-12 hover:rotate-0 transition-transform duration-300" />
-              </div>
-
-              {/* Step 3 */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="w-full md:w-[30%] flex flex-col items-center"
-              >
-                <div className="relative rounded-2xl overflow-hidden border border-gold/20 shadow-lg shadow-gold/5 mb-6 group hover:border-gold/40 transition-all duration-300">
-                  <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-300 z-10 pointer-events-none" />
-                  <img
-                    src="/how-it-works-step-3.webp"
-                    alt="Step 3: Contact via Call or WhatsApp"
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-              </motion.div>
-
-            </div>
 
             {/* Animated Beam Integration Demo */}
             <div className="w-full max-w-6xl mx-auto mt-20 mb-8 px-4">
@@ -394,7 +317,7 @@ const Index = () => {
                 <span className="text-gold text-sm font-bold tracking-widest uppercase">Seamless Integration</span>
                 <h3 className="font-display text-2xl md:text-3xl text-foreground mt-2">Connecting You With <span className="text-gold">Verified Pros</span></h3>
               </div>
-              <div className="bg-card/30 backdrop-blur-sm border border-gold/10 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="">
                 <AnimatedBeamDemo />
               </div>
             </div>
@@ -529,59 +452,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Popular Cities */}
-          <section className="py-16 border-t border-b border-border/30">
 
-            <div className="container-wide">
-
-              <div className="text-center mb-10">
-
-                <p className="text-gold uppercase tracking-luxury text-sm mb-4">Coverage</p>
-
-                <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground">
-                  Find Emergency Help in Your {settings.cityTerm}
-                </h2>
-
-              </div>
-
-
-
-              <div className="flex flex-wrap justify-center gap-3">
-                <div className="w-full text-center mb-4">
-                  <h3 className="text-lg font-bold text-foreground/80">{settings.countryCode === 'US' ? 'Main US Cities' : 'Main UK Cities'}</h3>
-                </div>
-                {(settings.countryCode === 'US' ? usCities : cities)
-                  .slice(0, showAllCities ? undefined : 6)
-                  .map((city) => (
-                    <Link
-                      key={city}
-                      to={settings.countryCode === 'US'
-                        ? `/us/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
-                        : `/emergency-plumber/${city.toLowerCase().replace(/\s+/g, '-')}`
-                      }
-                      className="px-5 py-2.5 bg-card rounded-full border border-border/50 text-sm font-medium text-foreground hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-300"
-                    >
-                      {city}
-                    </Link>
-                  ))}
-              </div>
-
-              <div className="mt-8 text-center animate-in fade-in slide-in-from-top-4 duration-500">
-                <Button
-                  variant="ghost"
-                  onClick={() => setShowAllCities(!showAllCities)}
-                  className="gap-2 text-muted-foreground hover:text-gold hover:bg-gold/5 rounded-full px-6"
-                >
-                  {showAllCities ? (
-                    <>Show Less <ChevronUp className="w-4 h-4" /></>
-                  ) : (
-                    <>Show More Cities <ChevronDown className="w-4 h-4" /></>
-                  )}
-                </Button>
-              </div>
-            </div>
-
-          </section>
 
 
 

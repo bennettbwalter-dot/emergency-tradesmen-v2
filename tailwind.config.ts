@@ -101,9 +101,13 @@ export default {
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        gradient: {
+          to: {
+            backgroundPosition: "var(--bg-size) 0",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -141,6 +145,7 @@ export default {
         'hover-float': 'hover-float 0.3s ease-in-out',
         'pulse-gold-text': 'pulse-gold-text 2s ease-in-out infinite',
         'pulse-red-green-bg': 'pulse-red-green-bg 2s ease-in-out infinite',
+        gradient: "gradient 8s linear infinite",
       },
     },
   },

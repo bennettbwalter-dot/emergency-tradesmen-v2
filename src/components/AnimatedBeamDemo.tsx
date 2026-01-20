@@ -1,28 +1,61 @@
 "use client"
 
-import React, { forwardRef, useRef } from "react"
+import React, { forwardRef, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
 import { AnimatedBeam } from "@/registry/magicui/animated-beam"
 
-const Circle = forwardRef<
+import { ChevronRight } from "lucide-react"
+import { AnimatedGradientText } from "@/components/magicui/AnimatedGradientText"
+
+const BeamNode = forwardRef<
     HTMLDivElement,
-    { className?: string; children?: React.ReactNode }
->(({ className, children }, ref) => {
+    { className?: string; children?: React.ReactNode; icon?: React.ReactNode; label?: string; iconClassName?: string; onClick?: () => void }
+>(({ className, children, icon, label, iconClassName, onClick }, ref) => {
     return (
         <div
             ref={ref}
+            onClick={onClick}
             className={cn(
-                "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+                "group relative mx-auto flex items-center justify-center rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] bg-white dark:bg-black border border-black/10 dark:border-white/10 z-10",
+                onClick && "cursor-pointer",
                 className
             )}
         >
-            {children}
-        </div>
+            <span
+                className={cn(
+                    "animate-gradient absolute inset-0 block h-full w-full rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]"
+                )}
+                style={{
+                    WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "destination-out",
+                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    maskComposite: "subtract",
+                    WebkitClipPath: "padding-box",
+                }}
+            />
+            <div className="flex items-center gap-2 relative z-10">
+                {icon ? (
+                    <div className={cn("flex items-center justify-center", iconClassName || "w-5 h-5")}>{icon}</div>
+                ) : (
+                    children
+                )}
+                {label && (
+                    <>
+                        <hr className="mx-1 h-4 w-px shrink-0 bg-neutral-200 dark:bg-neutral-800" />
+                        <AnimatedGradientText className="text-xs font-medium">
+                            {label}
+                        </AnimatedGradientText>
+                    </>
+                )}
+                <ChevronRight className="ml-1 size-3 stroke-neutral-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+            </div>
+        </div >
     )
 })
 
-Circle.displayName = "Circle"
+BeamNode.displayName = "BeamNode"
 
 export function AnimatedBeamDemo() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -33,66 +66,281 @@ export function AnimatedBeamDemo() {
     const div5Ref = useRef<HTMLDivElement>(null)
     const div6Ref = useRef<HTMLDivElement>(null)
     const div7Ref = useRef<HTMLDivElement>(null)
+    const [showVideo, setShowVideo] = useState(false)
+    const [showDropdownVideo, setShowDropdownVideo] = useState(false)
+    const [showTypeVideo, setShowTypeVideo] = useState(false)
+    const [showVoiceVideo, setShowVoiceVideo] = useState(false)
 
     return (
         <div
-            className="relative flex h-[300px] w-full items-center justify-center overflow-hidden p-10"
+            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden p-10"
             ref={containerRef}
         >
-            <div className="flex size-full max-h-[200px] max-w-lg flex-col items-stretch justify-between gap-10">
+            <div className="flex size-full max-h-[400px] max-w-4xl flex-col items-stretch justify-between gap-10">
                 <div className="flex flex-row items-center justify-between">
-                    <Circle ref={div1Ref}>
-                        <Icons.googleDrive />
-                    </Circle>
-                    <Circle ref={div5Ref}>
-                        <Icons.googleDocs />
-                    </Circle>
+                    <BeamNode
+                        ref={div1Ref}
+                        iconClassName="w-7 h-7"
+                        icon={
+                            <img
+                                src="/describe-problem-icon.png"
+                                alt="Describe Problem"
+                                className="w-full h-full object-contain"
+                            />
+                        }
+                        label="Describe Problem"
+                        onClick={() => setShowTypeVideo(true)}
+                    />
+                    <BeamNode
+                        ref={div5Ref}
+                        iconClassName="w-7 h-7"
+                        icon={
+                            <img
+                                src="/voice-speaking-icon.png"
+                                alt="Voice Agent"
+                                className="w-full h-full object-contain"
+                            />
+                        }
+                        label="Voice Agent"
+                        onClick={() => setShowVoiceVideo(true)}
+                    />
                 </div>
                 <div className="flex flex-row items-center justify-between">
-                    <Circle ref={div4Ref} className="size-16">
-                        <Icons.openai />
-                    </Circle>
+                    <BeamNode
+                        ref={div4Ref}
+                        iconClassName="w-8 h-8"
+                        icon={
+                            <img
+                                src="/intelligent-ai-icon.png"
+                                alt="Intelligent AI"
+                                className="w-full h-full object-contain"
+                            />
+                        }
+                        label="Intelligent AI"
+                        className="px-6 py-3 scale-110"
+                    />
                 </div>
                 <div className="flex flex-row items-center justify-between">
-                    <Circle ref={div3Ref}>
-                        <Icons.whatsapp />
-                    </Circle>
-                    <Circle ref={div7Ref}>
-                        <Icons.messenger />
-                    </Circle>
+                    <BeamNode
+                        ref={div3Ref}
+                        iconClassName="w-7 h-7"
+                        icon={
+                            <img
+                                src="/select-trade-icon.png"
+                                alt="Select Trade Image"
+                                className="w-full h-full object-contain"
+                            />
+                        }
+                        label="Select Trade Image"
+                        onClick={() => setShowVideo(true)}
+                    />
+                    <BeamNode
+                        ref={div7Ref}
+                        iconClassName="w-7 h-7"
+                        icon={
+                            <img
+                                src="/dropdown-connect-icon.png"
+                                alt="Drop-Down Connect"
+                                className="w-full h-full object-contain"
+                            />
+                        }
+                        label="Drop-Down Connect"
+                        onClick={() => setShowDropdownVideo(true)}
+                    />
                 </div>
             </div>
-
+            {/* Top-Left to Center: Complex snake with chamfer */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div4Ref}
-                curvature={-75}
-                endYOffset={-10}
+                pathGenerator={({ startX, startY, endX, endY }) => {
+                    const k = 15; // chamfer radius
+                    const midX = startX + (endX - startX) * 0.4;
+                    const midY = startY + 40; // dip down first
+                    return `M ${startX},${startY} H ${midX - k} L ${midX},${startY + k} V ${midY} L ${midX + k},${midY + k} H ${endX - k} L ${endX},${endY}`;
+                }}
+                pathColor="#1f2937"
+                pathWidth={3}
+                gradientStartColor="#F59E0B"
+                gradientStopColor="#FCD34D"
+                reverse
             />
+            {/* Bottom-Left to Center: Double step path */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div4Ref}
-                curvature={75}
-                endYOffset={10}
+                pathGenerator={({ startX, startY, endX, endY }) => {
+                    const step1X = startX + 50;
+                    const step2X = startX + (endX - startX) * 0.6;
+                    const k = 12;
+                    return `M ${startX},${startY} H ${step1X - k} L ${step1X},${startY - k} V ${endY + 30 - k} L ${step1X + k},${endY + 30} H ${step2X - k} L ${step2X},${endY + k} V ${endY} H ${endX}`;
+                }}
+                pathColor="#1f2937"
+                pathWidth={3}
+                gradientStartColor="#F59E0B"
+                gradientStopColor="#FCD34D"
+                reverse
             />
+            {/* Top-Right to Center: Long horizontal first, then diagonal-like step */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div5Ref}
                 toRef={div4Ref}
-                curvature={-75}
-                endYOffset={-10}
+                pathGenerator={({ startX, startY, endX, endY }) => {
+                    const k = 10;
+                    const midX = endX + (startX - endX) * 0.35;
+                    const midY = startY - 25;
+                    return `M ${startX},${startY} H ${midX + k} L ${midX},${startY - k} V ${midY} L ${midX - k},${midY - k} H ${endX + k} L ${endX},${endY}`;
+                }}
+                pathColor="#1f2937"
+                pathWidth={3}
+                gradientStartColor="#F59E0B"
+                gradientStopColor="#FCD34D"
                 reverse
             />
+            {/* Bottom-Right to Center: Wide U-bend */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
                 toRef={div4Ref}
-                curvature={75}
-                endYOffset={10}
+                pathGenerator={({ startX, startY, endX, endY }) => {
+                    const k = 15;
+                    const loopY = startY + 50;
+                    const loopX = startX - 40;
+                    return `M ${startX},${startY} V ${loopY - k} L ${startX - k},${loopY} H ${loopX + k} L ${loopX},${loopY - k} V ${endY + k} L ${loopX - k},${endY} H ${endX}`;
+                }}
+                pathColor="#1f2937"
+                pathWidth={3}
+                gradientStartColor="#F59E0B"
+                gradientStopColor="#FCD34D"
                 reverse
             />
+
+            {/* Video Modal */}
+            {showVideo && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={() => setShowVideo(false)}
+                >
+                    <div
+                        className="relative w-full max-w-4xl mx-4 bg-card rounded-2xl overflow-hidden shadow-2xl border border-gold/20"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setShowVideo(false)}
+                            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div className="aspect-video">
+                            <video
+                                src="/picture-connect.mov"
+                                controls
+                                autoPlay
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Dropdown Video Modal */}
+            {showDropdownVideo && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={() => setShowDropdownVideo(false)}
+                >
+                    <div
+                        className="relative w-full max-w-4xl mx-4 bg-card rounded-2xl overflow-hidden shadow-2xl border border-gold/20"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setShowDropdownVideo(false)}
+                            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div className="aspect-video">
+                            <video
+                                src="/drop-down.mov"
+                                controls
+                                autoPlay
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Type/Describe Problem Video Modal */}
+            {showTypeVideo && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={() => setShowTypeVideo(false)}
+                >
+                    <div
+                        className="relative w-full max-w-4xl mx-4 bg-card rounded-2xl overflow-hidden shadow-2xl border border-gold/20"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setShowTypeVideo(false)}
+                            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div className="aspect-video">
+                            <video
+                                src="/type.mov"
+                                controls
+                                autoPlay
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Voice Agent Video Modal */}
+            {showVoiceVideo && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={() => setShowVoiceVideo(false)}
+                >
+                    <div
+                        className="relative w-full max-w-4xl mx-4 bg-card rounded-2xl overflow-hidden shadow-2xl border border-gold/20"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setShowVoiceVideo(false)}
+                            className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div className="aspect-video">
+                            <video
+                                src="/voice.mov"
+                                controls
+                                autoPlay
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

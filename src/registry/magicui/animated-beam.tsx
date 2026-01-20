@@ -23,6 +23,8 @@ export interface AnimatedBeamProps {
     startYOffset?: number;
     endXOffset?: number;
     endYOffset?: number;
+    variant?: "curve" | "circuit";
+    pathGenerator?: (props: { startX: number; startY: number; endX: number; endY: number }) => string;
 }
 
 export const AnimatedBeam = ({
@@ -31,6 +33,8 @@ export const AnimatedBeam = ({
     fromRef,
     toRef,
     curvature = 0,
+    variant = "curve", // Default to bezier curve
+    pathGenerator,
     reverse = false, // Include the reverse prop
     duration = Math.random() * 3 + 4,
     delay = 0,
@@ -87,10 +91,19 @@ export const AnimatedBeam = ({
                 const endY =
                     rectB.top - containerRect.top + rectB.height / 2 + endYOffset;
 
-                const controlY = startY - curvature;
-                const d = `M ${startX},${startY} Q ${(startX + endX) / 2
-                    },${controlY} ${endX},${endY}`;
-                setPathD(d);
+                if (pathGenerator) {
+                    const d = pathGenerator({ startX, startY, endX, endY });
+                    setPathD(d);
+                } else if (variant === "circuit") {
+                    const midX = (startX + endX) / 2;
+                    const d = `M ${startX},${startY} H ${midX} V ${endY} H ${endX}`;
+                    setPathD(d);
+                } else {
+                    const controlY = startY - curvature;
+                    const d = `M ${startX},${startY} Q ${(startX + endX) / 2
+                        },${controlY} ${endX},${endY}`;
+                    setPathD(d);
+                }
             }
         };
 
