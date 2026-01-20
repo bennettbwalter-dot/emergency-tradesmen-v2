@@ -73,14 +73,14 @@ export function AnimatedBeamDemo() {
 
     return (
         <div
-            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden p-10"
+            className="relative flex min-h-[400px] md:h-[500px] w-full items-center justify-center overflow-hidden p-4 md:p-10"
             ref={containerRef}
         >
-            <div className="flex size-full max-h-[400px] max-w-4xl flex-col items-stretch justify-between gap-10">
-                <div className="flex flex-row items-center justify-between">
+            <div className="flex size-full max-h-[350px] md:max-h-[400px] max-w-4xl flex-col items-stretch justify-between gap-6 md:gap-10">
+                <div className="flex flex-row items-center justify-between gap-2">
                     <BeamNode
                         ref={div1Ref}
-                        iconClassName="w-7 h-7"
+                        iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
                                 src="/describe-problem-icon.png"
@@ -90,10 +90,11 @@ export function AnimatedBeamDemo() {
                         }
                         label="Describe Problem"
                         onClick={() => setShowTypeVideo(true)}
+                        className="text-[10px] md:text-xs px-2 md:px-4 py-1 md:py-1.5"
                     />
                     <BeamNode
                         ref={div5Ref}
-                        iconClassName="w-7 h-7"
+                        iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
                                 src="/voice-speaking-icon.png"
@@ -103,12 +104,13 @@ export function AnimatedBeamDemo() {
                         }
                         label="Voice Agent"
                         onClick={() => setShowVoiceVideo(true)}
+                        className="text-[10px] md:text-xs px-2 md:px-4 py-1 md:py-1.5"
                     />
                 </div>
-                <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row items-center justify-center">
                     <BeamNode
                         ref={div4Ref}
-                        iconClassName="w-8 h-8"
+                        iconClassName="w-6 h-6 md:w-8 md:h-8"
                         icon={
                             <img
                                 src="/intelligent-ai-icon.png"
@@ -117,13 +119,13 @@ export function AnimatedBeamDemo() {
                             />
                         }
                         label="Intelligent AI"
-                        className="px-6 py-3 scale-110"
+                        className="px-4 md:px-6 py-2 md:py-3 scale-100 md:scale-110"
                     />
                 </div>
-                <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row items-center justify-between gap-2">
                     <BeamNode
                         ref={div3Ref}
-                        iconClassName="w-7 h-7"
+                        iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
                                 src="/select-trade-icon.png"
@@ -133,10 +135,11 @@ export function AnimatedBeamDemo() {
                         }
                         label="Select Trade Image"
                         onClick={() => setShowVideo(true)}
+                        className="text-[10px] md:text-xs px-2 md:px-4 py-1 md:py-1.5"
                     />
                     <BeamNode
                         ref={div7Ref}
-                        iconClassName="w-7 h-7"
+                        iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
                                 src="/dropdown-connect-icon.png"
@@ -146,75 +149,54 @@ export function AnimatedBeamDemo() {
                         }
                         label="Drop-Down Connect"
                         onClick={() => setShowDropdownVideo(true)}
+                        className="text-[10px] md:text-xs px-2 md:px-4 py-1 md:py-1.5"
                     />
                 </div>
             </div>
-            {/* Top-Left to Center: Complex snake with chamfer */}
+            {/* Top-Left to Center: Smooth arch curve */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div4Ref}
-                pathGenerator={({ startX, startY, endX, endY }) => {
-                    const k = 15; // chamfer radius
-                    const midX = startX + (endX - startX) * 0.4;
-                    const midY = startY + 40; // dip down first
-                    return `M ${startX},${startY} H ${midX - k} L ${midX},${startY + k} V ${midY} L ${midX + k},${midY + k} H ${endX - k} L ${endX},${endY}`;
-                }}
-                pathColor="#1f2937"
-                pathWidth={3}
-                gradientStartColor="#F59E0B"
-                gradientStopColor="#FCD34D"
-                reverse
+                curvature={-75}
+                pathColor="#e5e7eb"
+                pathWidth={2}
+                gradientStartColor="#6366f1"
+                gradientStopColor="#8b5cf6"
             />
-            {/* Bottom-Left to Center: Double step path */}
+            {/* Bottom-Left to Center: Smooth arch curve */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div4Ref}
-                pathGenerator={({ startX, startY, endX, endY }) => {
-                    const step1X = startX + 50;
-                    const step2X = startX + (endX - startX) * 0.6;
-                    const k = 12;
-                    return `M ${startX},${startY} H ${step1X - k} L ${step1X},${startY - k} V ${endY + 30 - k} L ${step1X + k},${endY + 30} H ${step2X - k} L ${step2X},${endY + k} V ${endY} H ${endX}`;
-                }}
-                pathColor="#1f2937"
-                pathWidth={3}
-                gradientStartColor="#F59E0B"
-                gradientStopColor="#FCD34D"
+                curvature={75}
+                pathColor="#e5e7eb"
+                pathWidth={2}
+                gradientStartColor="#6366f1"
+                gradientStopColor="#8b5cf6"
                 reverse
             />
-            {/* Top-Right to Center: Long horizontal first, then diagonal-like step */}
+            {/* Top-Right to Center: Smooth arch curve */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div5Ref}
                 toRef={div4Ref}
-                pathGenerator={({ startX, startY, endX, endY }) => {
-                    const k = 10;
-                    const midX = endX + (startX - endX) * 0.35;
-                    const midY = startY - 25;
-                    return `M ${startX},${startY} H ${midX + k} L ${midX},${startY - k} V ${midY} L ${midX - k},${midY - k} H ${endX + k} L ${endX},${endY}`;
-                }}
-                pathColor="#1f2937"
-                pathWidth={3}
-                gradientStartColor="#F59E0B"
-                gradientStopColor="#FCD34D"
-                reverse
+                curvature={75}
+                pathColor="#e5e7eb"
+                pathWidth={2}
+                gradientStartColor="#6366f1"
+                gradientStopColor="#8b5cf6"
             />
-            {/* Bottom-Right to Center: Wide U-bend */}
+            {/* Bottom-Right to Center: Smooth arch curve */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
                 toRef={div4Ref}
-                pathGenerator={({ startX, startY, endX, endY }) => {
-                    const k = 15;
-                    const loopY = startY + 50;
-                    const loopX = startX - 40;
-                    return `M ${startX},${startY} V ${loopY - k} L ${startX - k},${loopY} H ${loopX + k} L ${loopX},${loopY - k} V ${endY + k} L ${loopX - k},${endY} H ${endX}`;
-                }}
-                pathColor="#1f2937"
-                pathWidth={3}
-                gradientStartColor="#F59E0B"
-                gradientStopColor="#FCD34D"
+                curvature={-75}
+                pathColor="#e5e7eb"
+                pathWidth={2}
+                gradientStartColor="#6366f1"
+                gradientStopColor="#8b5cf6"
                 reverse
             />
 

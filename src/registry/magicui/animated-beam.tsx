@@ -150,6 +150,15 @@ export const AnimatedBeam = ({
             )}
             viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
         >
+            <defs>
+                <filter id={`glow-${id}`} x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
             <path
                 d={pathD}
                 stroke={pathColor}
@@ -163,6 +172,7 @@ export const AnimatedBeam = ({
                 stroke={`url(#${id})`}
                 strokeOpacity="1"
                 strokeLinecap="round"
+                filter={`url(#glow-${id})`}
             />
             <defs>
                 <motion.linearGradient
