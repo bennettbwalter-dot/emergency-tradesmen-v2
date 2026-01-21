@@ -279,7 +279,7 @@ const Index = () => {
 
               </motion.div>
 
-              <div className="mt-8 flex justify-center w-full relative z-20 pointer-events-auto">
+              <div className="mt-16 flex justify-center w-full relative z-20 pointer-events-auto">
                 <LayoutTextFlipDemo />
               </div>
 
