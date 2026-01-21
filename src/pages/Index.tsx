@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
-import { InteractiveGridPattern } from "@/components/magicui/InteractiveGridPattern";
+
 
 import { Header } from "@/components/Header";
 
@@ -164,18 +164,7 @@ const Index = () => {
 
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
 
-            <div className="absolute inset-0 overflow-hidden">
-              <InteractiveGridPattern
-                className={cn(
-                  "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-                  "absolute inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 opacity-50"
-                )}
-                width={40}
-                height={40}
-                squares={[40, 40]}
-                squaresClassName="hover:fill-gold/20"
-              />
-            </div>
+
 
 
 
