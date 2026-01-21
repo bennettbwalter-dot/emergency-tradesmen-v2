@@ -27,6 +27,7 @@ import { Phone, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { AnimatedBeamDemo } from "@/components/AnimatedBeamDemo";
+import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -277,6 +278,10 @@ const Index = () => {
 
 
               </motion.div>
+
+              <div className="mt-8 flex justify-center w-full relative z-20 pointer-events-auto">
+                <LayoutTextFlipDemo />
+              </div>
 
 
 
