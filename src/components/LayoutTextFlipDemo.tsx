@@ -11,10 +11,6 @@ export function LayoutTextFlipDemo() {
                     words={["24/7 Availability Round the clock service", "Verified Pros Vetted & certified experts", "Fast Response 30-120 minute arrival", "Fully Insured Complete peace of mind"]}
                 />
             </motion.div>
-            <p className="mt-4 text-center text-base text-neutral-600 dark:text-neutral-400">
-                Experience the power of modern UI components that bring your ideas to
-                life.
-            </p>
         </div>
     );
 }
