@@ -11,7 +11,6 @@ import { Footer } from "@/components/Footer";
 
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 
-import { TrustBadges } from "@/components/TrustBadges";
 import TrustpilotWidget from "@/components/TrustpilotWidget";
 
 import { TradeCard } from "@/components/TradeCard";
@@ -299,11 +298,7 @@ const Index = () => {
 
 
 
-          {/* Trust Badges */}
 
-          <section className="container-wide pt-0 pb-16 mt-12 relative z-20">
-            <TrustBadges />
-          </section>
 
           {/* How It Works Section */}
           {import.meta.env.DEV && (
