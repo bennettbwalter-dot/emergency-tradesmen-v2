@@ -153,50 +153,38 @@ export function AnimatedBeamDemo() {
                     />
                 </div>
             </div>
-            {/* Top-Left to Center: Smooth arch curve */}
+            {/* Top-Left to Center */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div1Ref}
                 toRef={div4Ref}
                 curvature={-75}
-                pathColor="#e5e7eb"
-                pathWidth={2}
-                gradientStartColor="#6366f1"
-                gradientStopColor="#8b5cf6"
+                endYOffset={-10}
             />
-            {/* Bottom-Left to Center: Smooth arch curve */}
+            {/* Bottom-Left to Center */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div3Ref}
                 toRef={div4Ref}
                 curvature={75}
-                pathColor="#e5e7eb"
-                pathWidth={2}
-                gradientStartColor="#6366f1"
-                gradientStopColor="#8b5cf6"
-                reverse
+                endYOffset={10}
             />
-            {/* Top-Right to Center: Smooth arch curve */}
+            {/* Top-Right to Center */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div5Ref}
                 toRef={div4Ref}
-                curvature={75}
-                pathColor="#e5e7eb"
-                pathWidth={2}
-                gradientStartColor="#6366f1"
-                gradientStopColor="#8b5cf6"
+                curvature={-75}
+                endYOffset={-10}
+                reverse
             />
-            {/* Bottom-Right to Center: Smooth arch curve */}
+            {/* Bottom-Right to Center */}
             <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={div7Ref}
                 toRef={div4Ref}
-                curvature={-75}
-                pathColor="#e5e7eb"
-                pathWidth={2}
-                gradientStartColor="#6366f1"
-                gradientStopColor="#8b5cf6"
+                curvature={75}
+                endYOffset={10}
                 reverse
             />
 
