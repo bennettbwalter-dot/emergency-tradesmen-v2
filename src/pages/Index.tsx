@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 
+import { TrustBadges } from "@/components/TrustBadges";
 import TrustpilotWidget from "@/components/TrustpilotWidget";
 
 import { TradeCard } from "@/components/TradeCard";
@@ -281,6 +282,12 @@ const Index = () => {
               <div className="mt-16 flex justify-center w-full relative z-20 pointer-events-auto">
                 <LayoutTextFlipDemo />
               </div>
+
+              {/* Trust Badges */}
+
+              <section className="container-wide pt-0 pb-16 mt-12 relative z-20">
+                <TrustBadges />
+              </section>
 
 
 

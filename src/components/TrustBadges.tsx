@@ -36,11 +36,9 @@ export function TrustBadges() {
           <div className="absolute inset-0 rounded-lg bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           <div className="relative z-10">
-            <div className="w-8 h-8 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center mb-1.5 group-hover:border-gold/50 transition-colors">
+            <div className="w-8 h-8 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center mb-0 group-hover:border-gold/50 transition-colors">
               <badge.icon className="w-4 h-4 text-gold" />
             </div>
-            <h3 className="font-display text-sm text-foreground mb-0.5">{badge.title}</h3>
-            <p className="text-[10px] md:text-xs text-muted-foreground leading-tight">{badge.description}</p>
           </div>
         </div>
       ))}
