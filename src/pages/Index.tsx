@@ -301,28 +301,28 @@ const Index = () => {
           </section>
 
           {/* How It Works Section */}
-          <section className="container-wide py-16 border-t border-border/30">
-            <div className="text-center mb-12">
-              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
-              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                How to Find a {settings.tradeTerm} Near You
-              </h2>
-            </div>
-
-
-
-            {/* Animated Beam Integration Demo */}
-            <div className="w-full max-w-6xl mx-auto mt-20 mb-8 px-4">
-              <div className="text-center mb-8">
-                <span className="text-gold text-sm font-bold tracking-widest uppercase">Seamless Integration</span>
-                <h3 className="font-display text-2xl md:text-3xl text-foreground mt-2">Connecting You With <span className="text-gold">Verified Pros</span></h3>
+          {import.meta.env.DEV && (
+            <section className="container-wide py-16 border-t border-border/30">
+              <div className="text-center mb-12">
+                <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
+                <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+                  How to Find a {settings.tradeTerm} Near You
+                </h2>
               </div>
-              <div className="">
-                <AnimatedBeamDemo />
-              </div>
-            </div>
 
-          </section>
+              {/* Animated Beam Integration Demo */}
+              <div className="w-full max-w-6xl mx-auto mt-20 mb-8 px-4">
+                <div className="text-center mb-8">
+                  <span className="text-gold text-sm font-bold tracking-widest uppercase">Seamless Integration</span>
+                  <h3 className="font-display text-2xl md:text-3xl text-foreground mt-2">Connecting You With <span className="text-gold">Verified Pros</span></h3>
+                </div>
+                <div className="">
+                  <AnimatedBeamDemo />
+                </div>
+              </div>
+
+            </section>
+          )}
 
 
           {/* Emergency Services */}
