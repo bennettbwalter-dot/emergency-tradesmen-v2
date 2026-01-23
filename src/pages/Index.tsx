@@ -26,6 +26,9 @@ import { trades, cities, usCities } from "@/lib/trades";
 import { Phone, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import Orb from "@/components/ui/Orb";
+import Carousel from "@/components/ui/Carousel";
+import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi';
 import { AnimatedBeamDemo } from "@/components/AnimatedBeamDemo";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 
@@ -40,6 +43,7 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { GuestGate } from "@/components/GuestGate";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 
 
@@ -48,6 +52,8 @@ const Index = () => {
   const { settings } = useLocalization();
   const [showFaq, setShowFaq] = useState(false);
   const [showAllCities, setShowAllCities] = useState(false);
+  const isMobile = useIsMobile();
+
 
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
@@ -158,11 +164,20 @@ const Index = () => {
 
           <section className="relative flex overflow-hidden">
 
+
             {/* Background layers */}
 
-            <div className="absolute inset-0 bg-gradient-to-b from-background to-background" />
+            <div className="absolute left-0 right-0 bottom-0 top-[-200px] h-[calc(100%+200px)] md:inset-0 md:h-full z-0">
+              <Orb
+                hoverIntensity={2}
+                rotateOnHover
+                hue={0}
+                forceHoverState={false}
+                backgroundColor="#000000"
+              />
+            </div>
 
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent pointer-events-none" />
 
 
 
@@ -180,9 +195,9 @@ const Index = () => {
 
 
 
-            {/* Glow effects */}
+            {/* Glow effects  */}
 
-            <div className="absolute top-20 right-20 w-96 h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse pointer-events-none" />
+            <div className="absolute -top-10 -right-10 md:top-20 md:right-20 w-80 h-80 md:w-96 md:h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse pointer-events-none" />
 
             <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px] pointer-events-none" />
 
@@ -266,21 +281,25 @@ const Index = () => {
 
 
 
+
               </motion.div>
 
-              <div className="mt-16 flex justify-center w-full relative z-20 pointer-events-auto">
-                <LayoutTextFlipDemo />
+              {/* Header for Trust Badges */}
+              <div className="mt-16 text-center relative z-20 pointer-events-auto">
+                <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-6">
+                  Our Local Tradesmen Are
+                </h2>
               </div>
 
               {/* Trust Badges */}
-
-              <section className="container-wide pt-0 pb-16 mt-12 relative z-20">
+              <section className="container-wide pt-0 pb-8 mt-12 relative z-20">
                 <TrustBadges />
               </section>
 
-
-
-
+              {/* Flipping Text */}
+              <div className="flex justify-center w-full relative z-20 pointer-events-auto pb-16">
+                <LayoutTextFlipDemo />
+              </div>
 
             </div>
 
@@ -306,16 +325,57 @@ const Index = () => {
                 </h2>
               </div>
 
-              {/* Animated Beam Integration Demo */}
-              <div className="w-full max-w-6xl mx-auto mt-20 mb-8 px-4">
-                <div className="text-center mb-8">
-                  <span className="text-gold text-sm font-bold tracking-widest uppercase">Seamless Integration</span>
-                  <h3 className="font-display text-2xl md:text-3xl text-foreground mt-2">Connecting You With <span className="text-gold">Verified Pros</span></h3>
-                </div>
-                <div className="">
-                  <AnimatedBeamDemo />
+              {/* Carousel Integration */}
+              <div className="flex justify-center w-full mb-16 relative z-20 pointer-events-auto">
+                <div className="relative h-[240px] md:h-[400px]">
+                  <Carousel
+                    items={[
+                      {
+                        title: 'Picture Connect',
+                        description: 'Seamlessly connect with tradesmen via images.',
+                        id: 0,
+                        icon: <FiLayers className="h-4 w-4 text-white" />,
+                        videoSrc: "/picture-connect.mov"
+                      },
+                      {
+                        title: 'Drop-Down Connect',
+                        description: 'Easy selection process for your specific needs.',
+                        id: 0.1,
+                        icon: <FiLayers className="h-4 w-4 text-white" />,
+                        videoSrc: "/drop-down.mov"
+                      },
+                      {
+                        title: 'Describe Problem',
+                        description: 'Type out your issue for quick matching.',
+                        id: 0.2,
+                        icon: <FiFileText className="h-4 w-4 text-white" />,
+                        videoSrc: "/type.mov"
+                      },
+                      {
+                        title: 'Voice Agent',
+                        description: 'Use voice commands to find help.',
+                        id: 0.3,
+                        icon: <FiCircle className="h-4 w-4 text-white" />,
+                        videoSrc: "/voice.mov"
+                      },
+                      {
+                        title: 'Coming Soon',
+                        description: 'More helpful guides are on the way.',
+                        id: 1,
+                        icon: <FiCode className="h-[16px] w-[16px] text-white" />
+                      }
+                    ]}
+                    baseWidth={isMobile ? 340 : 640} /* Responsive width: 340px for mobile, 640px for desktop */
+                    autoplay={false}
+                    autoplayDelay={3000}
+                    pauseOnHover={false}
+                    loop={false}
+                    round={false}
+                  />
                 </div>
               </div>
+
+
 
             </section>
           )}
@@ -323,7 +383,7 @@ const Index = () => {
 
           {/* Emergency Services */}
 
-          <section className="container-wide py-16">
+          <section className="container-wide -mt-12 pb-16 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

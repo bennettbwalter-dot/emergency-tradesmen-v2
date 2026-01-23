@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const LayoutTextFlip = ({
-  text = "Build Amazing",
+  text,
   words = ["Landing Pages", "Component Blocks", "Page Sections", "3D Shaders"],
   duration = 3000,
 }: {
-  text: string;
+  text?: string;
   words: string[];
   duration?: number;
 }) => {
@@ -24,12 +24,14 @@ export const LayoutTextFlip = ({
 
   return (
     <>
-      <motion.span
-        layoutId="subtext"
-        className="text-lg font-bold tracking-tight text-foreground drop-shadow-lg md:text-2xl"
-      >
-        {text}
-      </motion.span>
+      {text && (
+        <motion.span
+          layoutId="subtext"
+          className="text-lg font-bold tracking-tight text-foreground drop-shadow-lg md:text-2xl"
+        >
+          {text}
+        </motion.span>
+      )}
 
       <motion.span
         layout
