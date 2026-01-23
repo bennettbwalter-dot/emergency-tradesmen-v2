@@ -607,3 +607,73 @@ textarea {
 .card-container.flipped .card-inner {
   transform: rotateY(180deg);
 }
+
+/* Mobile-Only UI Refinement (Style Only) */
+@media only screen and (max-width: 768px) {
+
+  /* 1. Center-Align Content */
+  main,
+  .container-wide {
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* 2. Force text-align center */
+  /* Target text containers specifically to avoid messing up inputs/icons if possible, 
+     but user requested "all text elements". */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  span,
+  div {
+    text-align: center !important;
+  }
+
+  /* 3. Eliminate Asymmetry */
+  /* Reset padding/margin that causes left-lean */
+  .container-wide,
+  section,
+  div[class*="container"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 4. Visual Balance for Specific Elements */
+
+  /* Chat Interface / Send Message Button */
+  /* Target the mobile specific controls wrapper */
+  .flex.md\:hidden {
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* Ensure full width elements inside don't overflow */
+  .grid.grid-cols-2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* "Clear, honest guidance" box (LayoutTextFlip) */
+  /* Target the component wrapper */
+  div[class*="LayoutTextFlip"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
