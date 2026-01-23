@@ -335,28 +335,28 @@ const Index = () => {
                         description: 'Seamlessly connect with tradesmen via images.',
                         id: 0,
                         icon: <FiLayers className="h-4 w-4 text-white" />,
-                        videoSrc: "/picture-connect.mov"
+                        videoSrc: "/picture-connect.mp4"
                       },
                       {
                         title: 'Drop-Down Connect',
                         description: 'Easy selection process for your specific needs.',
                         id: 0.1,
                         icon: <FiLayers className="h-4 w-4 text-white" />,
-                        videoSrc: "/drop-down.mov"
+                        videoSrc: "/drop-down.mp4"
                       },
                       {
                         title: 'Describe Problem',
                         description: 'Type out your issue for quick matching.',
                         id: 0.2,
                         icon: <FiFileText className="h-4 w-4 text-white" />,
-                        videoSrc: "/type.mov"
+                        videoSrc: "/type.mp4"
                       },
                       {
                         title: 'Voice Agent',
                         description: 'Use voice commands to find help.',
                         id: 0.3,
                         icon: <FiCircle className="h-4 w-4 text-white" />,
-                        videoSrc: "/voice.mov"
+                        videoSrc: "/voice.mp4"
                       },
                       {
                         title: 'Coming Soon',
