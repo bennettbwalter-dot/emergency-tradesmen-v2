@@ -290,16 +290,16 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
-            className={`h-11 w-full rounded-full transition-all shadow-lg font-bold uppercase tracking-wider ${(detectedTrade && detectedCity && !input.trim())
+            className={`h-11 w-full flex-1 rounded-full transition-all shadow-lg font-bold uppercase tracking-wider text-[10px] px-1 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
         >
             {isRequestingLocation ? (
-                <><MapPin className="w-4 h-4 mr-2" /> Locate Me</>
+                <MapPin className="w-4 h-4" />
             ) : (detectedTrade && detectedCity && !input.trim()) ? (
-                <><Search className="w-4 h-4 mr-2" /> Find Help Now</>
+                <Search className="w-4 h-4" />
             ) : (
-                <><Send className="w-4 h-4 mr-2" /> Send Message</>
+                <Send className="w-4 h-4" />
             )}
         </Button>
     );
@@ -319,17 +319,6 @@ export function EmergencyChatInterface() {
 
     return (
         <div className="w-full max-w-4xl mx-auto">
-            {/* Mobile Controls - Above chat - Optimized Layout */}
-            <div className="flex md:hidden w-full px-2 mb-4 flex-col gap-3">
-                <div className="bolt-command-box">
-                    {tradeSelector}
-                    <div className="bolt-separator" />
-                    {locationSelector}
-                    <div className="bolt-action-wrapper">
-                        {mobileActionButton}
-                    </div>
-                </div>
-            </div>
 
             <div className="relative rounded-3xl bg-transparent overflow-hidden">
                 {chatState.history.length > 0 && (
@@ -440,7 +429,7 @@ export function EmergencyChatInterface() {
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
+                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
                         <div className="hidden md:grid grid-cols-[1fr_1fr_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
@@ -450,6 +439,19 @@ export function EmergencyChatInterface() {
                         </div>
                         <BorderBeam duration={8} size={100} />
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile Controls - Below chat - Optimized Layout */}
+            <div className="flex md:hidden w-full px-2 mt-4 mb-4 flex-row gap-2 items-center justify-between">
+                <div className="flex-1 min-w-0">
+                    {tradeSelector}
+                </div>
+                <div className="flex-1 min-w-0">
+                    {locationSelector}
+                </div>
+                <div className="flex-1 min-w-0">
+                    {mobileActionButton}
                 </div>
             </div>
         </div>

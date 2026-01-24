@@ -230,7 +230,7 @@ const Index = () => {
 
                 {/* Main headline */}
 
-                <h1 className="mb-0 font-display text-xl sm:text-3xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4 whitespace-nowrap">
+                <h1 className="mb-0 font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4 whitespace-nowrap">
                   LOCAL <span className="text-gold">{settings.tradeTerm.toUpperCase()} NEAR ME</span>
                 </h1>
 

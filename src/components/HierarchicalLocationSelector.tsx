@@ -169,7 +169,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         <div className={`flex flex-wrap gap-2 items-center ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger className={`h-9 px-4 min-w-[140px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                     <Map className="w-4 h-4 shrink-0 text-black dark:text-white" />
                     <SelectValue placeholder="State" />
                 </SelectTrigger>
@@ -183,7 +183,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* City Select (Flattened, no Metro) */}
             {selectedState && (
                 <Select value={selectedCity?.slug || ""} onValueChange={handleCityChange}>
-                    <SelectTrigger className={`h-9 px-4 min-w-[140px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                    <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                         <Building2 className="w-4 h-4 shrink-0 text-black dark:text-white" />
                         <SelectValue placeholder="City" />
                     </SelectTrigger>
@@ -198,7 +198,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* Suburb/Area Select */}
             {selectedCity && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-9 px-4 min-w-[140px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                    <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                         <Home className="w-4 h-4 shrink-0 text-black dark:text-white" />
                         <SelectValue placeholder="Area" />
                     </SelectTrigger>
