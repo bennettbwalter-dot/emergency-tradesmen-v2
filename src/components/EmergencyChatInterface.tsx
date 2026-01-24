@@ -444,7 +444,7 @@ export function EmergencyChatInterface() {
 
             {/* Mobile Controls - Below chat - Optimized Layout */}
             <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4">
-                {/* Row 1: Trade and City - Side by Side, Perfectly Centered */}
+                {/* Row 1: Trade and City - Side by Side, Perfectly Centered, Equal Widths */}
                 <div className="flex flex-row w-full px-4 flex-nowrap items-center justify-center gap-3">
                     <div className="flex-1 min-w-0">
                         {tradeSelector}
@@ -454,7 +454,7 @@ export function EmergencyChatInterface() {
                     </div>
                 </div>
 
-                {/* Row 2: Button - Centered below */}
+                {/* Row 2: Button - Centered below, aligned with message box */}
                 <div className="flex w-full px-4 items-center justify-center">
                     <div className="w-full">
                         {mobileActionButton}
@@ -462,5 +462,8 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
         </div>
+    );
+}
+        </div >
     );
 }
