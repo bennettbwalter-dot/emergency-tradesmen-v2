@@ -260,10 +260,6 @@ export default function Orb({
       targetHover = 0;
     };
 
-    const handleMouseLeave = () => {
-      targetHover = 0;
-    };
-
     const handleTap = () => {
       targetHover = 1;
       setTimeout(() => {
