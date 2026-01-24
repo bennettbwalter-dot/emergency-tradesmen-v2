@@ -413,9 +413,9 @@ export function EmergencyChatInterface() {
                     <div className="h-4" />
                 </div>
 
-                {/* MODIFIED: Flex Column Layout for Input Area */}
-                <div className="p-4 bg-transparent">
-                    <div className="relative flex flex-col w-full bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
+                {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
+                <div className="w-full bg-transparent flex justify-center py-4">
+                    <div className="relative flex flex-col w-[90%] bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
                         <textarea
                             ref={inputRef}
                             value={input}
@@ -442,10 +442,10 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - Below chat - Optimized Layout */}
-            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4">
-                {/* Row 1: Trade and City - Side by Side, Perfectly Centered, Equal Widths */}
-                <div className="flex flex-row w-full px-4 flex-nowrap items-center justify-center gap-3">
+            {/* Mobile Controls - Below chat - Optimized Layout - Strict Symmetry */}
+            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center">
+                {/* Row 1: Trade and City - Side by Side, Perfectly Centered, Equal Widths, 10px Gap, 90% Width */}
+                <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[10px]">
                     <div className="flex-1 min-w-0">
                         {tradeSelector}
                     </div>
@@ -454,8 +454,8 @@ export function EmergencyChatInterface() {
                     </div>
                 </div>
 
-                {/* Row 2: Button - Centered below, aligned with message box */}
-                <div className="flex w-full px-4 items-center justify-center">
+                {/* Row 2: Button - Centered below, aligned with message box, 90% Width */}
+                <div className="flex w-[90%] items-center justify-center">
                     <div className="w-full">
                         {mobileActionButton}
                     </div>
@@ -464,6 +464,4 @@ export function EmergencyChatInterface() {
         </div>
     );
 }
-        </div >
-    );
-}
+
