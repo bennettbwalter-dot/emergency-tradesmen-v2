@@ -316,69 +316,69 @@ const Index = () => {
 
 
           {/* How It Works Section */}
-          {import.meta.env.DEV && (
-            <section className="container-wide py-16 border-t border-border/30">
-              <div className="text-center mb-12">
-                <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
-                <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                  How to Find a {settings.tradeTerm} Near You
-                </h2>
+
+          <section className="container-wide py-16 border-t border-border/30">
+            <div className="text-center mb-12">
+              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
+              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+                How to Find a {settings.tradeTerm} Near You
+              </h2>
+            </div>
+
+            {/* Carousel Integration */}
+            <div className="flex justify-center w-full mb-16 relative z-20 pointer-events-auto">
+              <div className="relative h-[240px] md:h-[400px]">
+                <Carousel
+                  items={[
+                    {
+                      title: 'Picture Connect',
+                      description: 'Seamlessly connect with tradesmen via images.',
+                      id: 0,
+                      icon: <FiLayers className="h-4 w-4 text-white" />,
+                      videoSrc: "/picture-connect.mp4"
+                    },
+                    {
+                      title: 'Drop-Down Connect',
+                      description: 'Easy selection process for your specific needs.',
+                      id: 0.1,
+                      icon: <FiLayers className="h-4 w-4 text-white" />,
+                      videoSrc: "/drop-down.mp4"
+                    },
+                    {
+                      title: 'Describe Problem',
+                      description: 'Type out your issue for quick matching.',
+                      id: 0.2,
+                      icon: <FiFileText className="h-4 w-4 text-white" />,
+                      videoSrc: "/type.mp4"
+                    },
+                    {
+                      title: 'Voice Agent',
+                      description: 'Use voice commands to find help.',
+                      id: 0.3,
+                      icon: <FiCircle className="h-4 w-4 text-white" />,
+                      videoSrc: "/voice.mp4"
+                    },
+                    {
+                      title: 'Coming Soon',
+                      description: 'More helpful guides are on the way.',
+                      id: 1,
+                      icon: <FiCode className="h-[16px] w-[16px] text-white" />
+                    }
+                  ]}
+                  baseWidth={isMobile ? 340 : 640} /* Responsive width: 340px for mobile, 640px for desktop */
+                  autoplay={false}
+                  autoplayDelay={3000}
+                  pauseOnHover={false}
+                  loop={false}
+                  round={false}
+                />
               </div>
-
-              {/* Carousel Integration */}
-              <div className="flex justify-center w-full mb-16 relative z-20 pointer-events-auto">
-                <div className="relative h-[240px] md:h-[400px]">
-                  <Carousel
-                    items={[
-                      {
-                        title: 'Picture Connect',
-                        description: 'Seamlessly connect with tradesmen via images.',
-                        id: 0,
-                        icon: <FiLayers className="h-4 w-4 text-white" />,
-                        videoSrc: "/picture-connect.mp4"
-                      },
-                      {
-                        title: 'Drop-Down Connect',
-                        description: 'Easy selection process for your specific needs.',
-                        id: 0.1,
-                        icon: <FiLayers className="h-4 w-4 text-white" />,
-                        videoSrc: "/drop-down.mp4"
-                      },
-                      {
-                        title: 'Describe Problem',
-                        description: 'Type out your issue for quick matching.',
-                        id: 0.2,
-                        icon: <FiFileText className="h-4 w-4 text-white" />,
-                        videoSrc: "/type.mp4"
-                      },
-                      {
-                        title: 'Voice Agent',
-                        description: 'Use voice commands to find help.',
-                        id: 0.3,
-                        icon: <FiCircle className="h-4 w-4 text-white" />,
-                        videoSrc: "/voice.mp4"
-                      },
-                      {
-                        title: 'Coming Soon',
-                        description: 'More helpful guides are on the way.',
-                        id: 1,
-                        icon: <FiCode className="h-[16px] w-[16px] text-white" />
-                      }
-                    ]}
-                    baseWidth={isMobile ? 340 : 640} /* Responsive width: 340px for mobile, 640px for desktop */
-                    autoplay={false}
-                    autoplayDelay={3000}
-                    pauseOnHover={false}
-                    loop={false}
-                    round={false}
-                  />
-                </div>
-              </div>
+            </div>
 
 
 
-            </section>
-          )}
+          </section>
+
 
 
           {/* Emergency Services */}
