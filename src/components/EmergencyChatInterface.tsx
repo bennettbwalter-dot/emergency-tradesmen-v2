@@ -321,12 +321,13 @@ export function EmergencyChatInterface() {
         <div className="w-full max-w-4xl mx-auto">
             {/* Mobile Controls - Above chat - Optimized Layout */}
             <div className="flex md:hidden w-full px-2 mb-4 flex-col gap-3">
-                <div className="grid grid-cols-2 gap-2 w-full">
+                <div className="bolt-command-box">
                     {tradeSelector}
+                    <div className="bolt-separator" />
                     {locationSelector}
-                </div>
-                <div className="w-full">
-                    {mobileActionButton}
+                    <div className="bolt-action-wrapper">
+                        {mobileActionButton}
+                    </div>
                 </div>
             </div>
 
