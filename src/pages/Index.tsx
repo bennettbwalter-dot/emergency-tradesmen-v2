@@ -162,7 +162,7 @@ const Index = () => {
 
           {/* Hero Section */}
 
-          <section className="relative flex overflow-hidden">
+          <section className="relative block overflow-hidden">
 
 
             {/* Background layers */}
@@ -203,7 +203,7 @@ const Index = () => {
 
 
 
-            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none z-10">
+            <div className="relative container-wide w-full pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none z-10">
 
               <div className="max-w-4xl mx-auto text-center pointer-events-auto">
 
@@ -230,7 +230,7 @@ const Index = () => {
 
                 {/* Main headline */}
 
-                <h1 className="mb-0 font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4 whitespace-nowrap">
+                <h1 className="mb-0 font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-wide text-foreground mb-4 md:whitespace-nowrap">
                   LOCAL <span className="text-gold">{settings.tradeTerm.toUpperCase()} NEAR ME</span>
                 </h1>
 
