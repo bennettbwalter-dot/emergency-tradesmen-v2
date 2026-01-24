@@ -38,10 +38,10 @@ export const LayoutTextFlip = ({
         </motion.span>
       )}
 
-      {/* Container with stable width based on longest word */}
-      <div className="relative inline-block overflow-hidden rounded-md border border-gold/20 bg-card px-2 py-1 font-sans text-lg font-bold tracking-tight text-gold shadow-sm ring shadow-gold/10 ring-gold/10 drop-shadow-lg md:text-2xl align-bottom">
+      {/* Container with stable width based on longest word - Mobile Optimized */}
+      <div className="relative inline-block h-auto w-auto max-w-[90vw] md:max-w-none overflow-hidden rounded-md border border-gold/20 bg-card px-2 py-1 font-sans text-lg font-bold tracking-tight text-gold shadow-sm ring shadow-gold/10 ring-gold/10 drop-shadow-lg md:text-2xl align-bottom">
         {/* Invisible spacer to set dimensions */}
-        <span className="opacity-0 pointer-events-none select-none whitespace-nowrap">
+        <span className="opacity-0 pointer-events-none select-none whitespace-normal text-center md:whitespace-nowrap block">
           {longestWord}
         </span>
 
@@ -61,7 +61,7 @@ export const LayoutTextFlip = ({
                 duration: 0.5,
                 ease: "easeInOut"
               }}
-              className={cn("inline-block whitespace-nowrap absolute")}
+              className={cn("inline-block absolute inset-0 flex items-center justify-center whitespace-normal md:whitespace-nowrap text-center")}
             >
               {words[currentIndex]}
             </motion.span>
