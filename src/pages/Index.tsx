@@ -203,7 +203,7 @@ const Index = () => {
 
 
 
-            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none">
+            <div className="relative container-wide pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none z-10">
 
               <div className="max-w-4xl mx-auto text-center pointer-events-auto">
 

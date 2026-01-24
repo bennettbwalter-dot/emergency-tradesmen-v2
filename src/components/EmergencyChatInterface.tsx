@@ -443,15 +443,22 @@ export function EmergencyChatInterface() {
             </div>
 
             {/* Mobile Controls - Below chat - Optimized Layout */}
-            <div className="flex md:hidden w-full px-2 mt-4 mb-4 flex-row gap-2 items-center justify-between">
-                <div className="flex-1 min-w-0">
-                    {tradeSelector}
+            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4">
+                {/* Row 1: Trade and City - Side by Side, Perfectly Centered */}
+                <div className="flex flex-row w-full px-4 flex-nowrap items-center justify-center gap-3">
+                    <div className="flex-1 min-w-0">
+                        {tradeSelector}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        {locationSelector}
+                    </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                    {locationSelector}
-                </div>
-                <div className="flex-1 min-w-0">
-                    {mobileActionButton}
+
+                {/* Row 2: Button - Centered below */}
+                <div className="flex w-full px-4 items-center justify-center">
+                    <div className="w-full">
+                        {mobileActionButton}
+                    </div>
                 </div>
             </div>
         </div>
