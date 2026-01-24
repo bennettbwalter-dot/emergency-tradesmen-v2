@@ -608,7 +608,7 @@ textarea {
   transform: rotateY(180deg);
 }
 
-/* Mobile-Only UI Refinement (Iron-Clad Centering & Bolt-Style Transformation) */
+/* Mobile-Only UI Refinement (Refined Bolt-Box Design) */
 @media only screen and (max-width: 768px) {
 
   /* --- 1. Global Centering & Flex Column --- */
@@ -623,12 +623,13 @@ textarea {
     box-sizing: border-box !important;
   }
 
-  /* --- 2. Typography Refinements (Bolt-Style) --- */
+  /* --- 2. Typography Refinements --- */
   h1 {
     line-height: 1.1 !important;
-    letter-spacing: -0.02em !important;
+    letter-spacing: 0.05em !important;
+    /* Increased spacing per request */
     text-align: center !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
   p,
@@ -643,64 +644,105 @@ textarea {
     text-align: center !important;
   }
 
-  /* --- 3. Command Center (Stacking & Styling) --- */
+  /* --- 3. The "Bolt Box" Container --- */
+  /* Target the wrapper .flex.md:hidden */
+  .flex.md\:hidden {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    margin: 0 auto 20px auto !important;
 
-  /* Stack the Trade/City inputs vertically */
+    /* Bolt Box Styling */
+    background-color: #111111 !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 24px !important;
+    box-shadow: 0 0 25px rgba(120, 80, 255, 0.25) !important;
+    /* Soft purple/blue glow */
+    position: relative !important;
+  }
+
+  /* --- 4. Dropdown Styling (Integrated) --- */
+  /* Stack the inputs */
   .flex.md\:hidden .grid.grid-cols-2 {
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
+    gap: 16px !important;
     width: 100% !important;
-    max-width: 360px !important;
-    /* Optimal read/tap width */
-    margin: 0 auto 8px auto !important;
-    /* Bottom margin to separate from button */
   }
 
-  /* Bolt-Style Input Aesthetics */
-  /* Target the SelectTrigger (Trade) and Combobox Inputs (City) */
+  /* Clean up the inputs to blend in */
   .flex.md\:hidden button[role="combobox"],
   .flex.md\:hidden input {
-    height: 50px !important;
-    background: rgba(30, 30, 30, 0.4) !important;
-    /* Gentle dark glass */
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 215, 0, 0.2) !important;
-    /* Subtle gold border */
-    border-radius: 12px !important;
-    /* Modern smooth corners */
+    height: auto !important;
+    min-height: 40px !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    /* Subtle separator line */
+    border-radius: 0 !important;
+    box-shadow: none !important;
     color: white !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    /* Clean sans */
     font-size: 16px !important;
-    /* Prevent iOS zoom */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding: 8px 0 !important;
     text-align: left !important;
-    transition: all 0.2s ease !important;
+    justify-content: space-between !important;
   }
 
-  /* Active/Focus states for inputs */
-  .flex.md\:hidden button[role="combobox"]:active,
+  /* Remove focus rings to keep it clean */
+  .flex.md\:hidden button[role="combobox"]:focus,
   .flex.md\:hidden input:focus {
-    border-color: rgba(255, 215, 0, 0.6) !important;
-    background: rgba(30, 30, 30, 0.7) !important;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1) !important;
+    ring: 0 !important;
+    outline: none !important;
+    border-color: rgba(255, 215, 0, 0.5) !important;
   }
 
-  /* Send Message Button - The "Primary Action" */
+  /* --- 5. "Send" Action (Bottom Right) --- */
+  /* The button wrapper needs to handle positioning */
+  .flex.md\:hidden .w-full:last-child {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-top: 16px !important;
+  }
+
+  /* The button itself */
   .flex.md\:hidden button:not([role="combobox"]) {
-    height: 50px !important;
-    border-radius: 12px !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    margin: 0 auto !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.02em !important;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25) !important;
-    /* Glowy gold shadow */
+    width: 48px !important;
+    /* Circular icon size */
+    height: 48px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #FFD700 !important;
+    /* Keep Gold brand */
+    color: black !important;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
+    min-width: 0 !important;
+    /* Override w-full restriction if inherited */
   }
 
-  /* --- 4. Component Stacking & Sizing (General) --- */
+  /* Hide the text label "Send Message" if possible, or assume user knows it's an icon button from my prev analysis? 
+     The previous TSX had text "Send Message" inside. I need to handle that text if I want a circle.
+     Actually, CSS cannot easily remove text content without setting font-size: 0. 
+     Let's try to make it a rounded button that FITS the text if I can't hide it, OR use font-size: 0 to hide text and show icon?
+     The button has an icon AND text.
+     Let's style it as a "Pill" that is small and right-aligned, closest to a circle I can get without structural change?
+     OR: 
+  */
+  .flex.md\:hidden button:not([role="combobox"]) {
+    width: auto !important;
+    min-width: 48px !important;
+    padding: 0 20px !important;
+    border-radius: 24px !important;
+    /* Pill shape */
+  }
+
+  /* --- 6. Component Stacking & Sizing (General) --- */
   .grid.grid-cols-2 {
     display: flex !important;
     flex-direction: column !important;
@@ -714,17 +756,15 @@ textarea {
     align-items: center !important;
     width: 100% !important;
     max-width: 340px !important;
-    /* Nice card width */
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* Ensure TradeCard content centers nicely */
   .grid.grid-cols-2>div a {
     width: 100% !important;
   }
 
-  /* --- 5. Interactive Elements Centering --- */
+  /* --- 7. Interactive Elements Centering --- */
   button,
   a[class*="button"],
   video,
@@ -734,8 +774,7 @@ textarea {
     margin-right: auto !important;
   }
 
-  /* --- 6. Symmetry Enforcement (Anti-Lean) --- */
-  /* Reset asymmetrical padding */
+  /* --- 8. Symmetry Enforcement (Anti-Lean) --- */
   .container-wide,
   section,
   div[class*="container"],
@@ -749,14 +788,7 @@ textarea {
     margin-right: auto !important;
   }
 
-  /* --- 7. Specific Component Fixes --- */
-
-  /* Chat Interface / Send Message Area */
-  .flex.md\:hidden {
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-  }
+  /* --- 9. Specific Component Fixes --- */
 
   /* LayoutTextFlip wrapper */
   div[class*="LayoutTextFlip"] {
