@@ -608,21 +608,22 @@ textarea {
   transform: rotateY(180deg);
 }
 
-/* Mobile-Only UI Refinement (Style Only) */
+/* Mobile-Only UI Refinement (Iron-Clad Centering) */
 @media only screen and (max-width: 768px) {
 
-  /* 1. Center-Align Content */
+  /* 1. Global Centering & Flex Column */
   main,
-  .container-wide {
-    display: flex;
-    flex-direction: column;
+  section,
+  .container-wide,
+  div[class*="container"] {
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* 2. Force text-align center */
-  /* Target text containers specifically to avoid messing up inputs/icons if possible, 
-     but user requested "all text elements". */
+  /* 2. Force Center Text Alignment */
   p,
   h1,
   h2,
@@ -631,49 +632,75 @@ textarea {
   h5,
   h6,
   span,
-  div {
+  div,
+  li {
     text-align: center !important;
   }
 
-  /* 3. Eliminate Asymmetry */
-  /* Reset padding/margin that causes left-lean */
+  /* 3. Component Stacking & Sizing */
+  /* Target the grid of service cards */
+  .grid.grid-cols-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .grid.grid-cols-2>div {
+    width: 100% !important;
+    max-width: 340px !important;
+    /* Nice card width */
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 4. Interactive Elements Centering */
+  button,
+  a[class*="button"],
+  video,
+  iframe,
+  .carousel-container {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 5. Symmetry Enforcement (Anti-Lean) */
+  /* Reset asymmetrical padding */
   .container-wide,
   section,
-  div[class*="container"] {
+  div[class*="container"],
+  .pl-4,
+  .pr-4,
+  .pl-8,
+  .pr-8 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* 4. Visual Balance for Specific Elements */
+  /* 6. Specific Component Fixes */
 
-  /* Chat Interface / Send Message Button */
-  /* Target the mobile specific controls wrapper */
+  /* Chat Interface / Send Message Area */
   .flex.md\:hidden {
+    flex-direction: column !important;
     align-items: center !important;
     width: 100% !important;
   }
 
-  /* Ensure full width elements inside don't overflow */
-  .grid.grid-cols-2 {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  button {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* "Clear, honest guidance" box (LayoutTextFlip) */
-  /* Target the component wrapper */
+  /* LayoutTextFlip wrapper */
   div[class*="LayoutTextFlip"] {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  /* Verified Local Network Badge Area */
+  div[className*="max-w-5xl"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
 }
