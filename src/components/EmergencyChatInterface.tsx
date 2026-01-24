@@ -223,7 +223,7 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
-                className={`h-11 px-4 min-w-[100px] flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-11 px-4 min-w-0 flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center gap-2 truncate">
                     <Wrench className="w-4 h-4 shrink-0 text-gold" />
@@ -442,9 +442,9 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - Below chat - Optimized Layout - Strict Symmetry */}
+            {/* Mobile Controls - Below chat - Optimized Layout - Single Row Strict Symmetry */}
             <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center">
-                {/* Row 1: Trade and City - Side by Side, Perfectly Centered, Equal Widths, 10px Gap, 90% Width */}
+                {/* Single Row: Trade, City, Button - Side by Side, Equal Widths, 10px Gap, 90% Width */}
                 <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[10px]">
                     <div className="flex-1 min-w-0">
                         {tradeSelector}
@@ -452,11 +452,7 @@ export function EmergencyChatInterface() {
                     <div className="flex-1 min-w-0">
                         {locationSelector}
                     </div>
-                </div>
-
-                {/* Row 2: Button - Centered below, aligned with message box, 90% Width */}
-                <div className="flex w-[90%] items-center justify-center">
-                    <div className="w-full">
+                    <div className="flex-1 min-w-0">
                         {mobileActionButton}
                     </div>
                 </div>
