@@ -608,10 +608,10 @@ textarea {
   transform: rotateY(180deg);
 }
 
-/* Mobile-Only UI Refinement (Iron-Clad Centering) */
+/* Mobile-Only UI Refinement (Iron-Clad Centering & Bolt-Style Transformation) */
 @media only screen and (max-width: 768px) {
 
-  /* 1. Global Centering & Flex Column */
+  /* --- 1. Global Centering & Flex Column --- */
   main,
   section,
   .container-wide,
@@ -623,9 +623,15 @@ textarea {
     box-sizing: border-box !important;
   }
 
-  /* 2. Force Center Text Alignment */
+  /* --- 2. Typography Refinements (Bolt-Style) --- */
+  h1 {
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+    text-align: center !important;
+    margin-bottom: 1rem !important;
+  }
+
   p,
-  h1,
   h2,
   h3,
   h4,
@@ -637,8 +643,64 @@ textarea {
     text-align: center !important;
   }
 
-  /* 3. Component Stacking & Sizing */
-  /* Target the grid of service cards */
+  /* --- 3. Command Center (Stacking & Styling) --- */
+
+  /* Stack the Trade/City inputs vertically */
+  .flex.md\:hidden .grid.grid-cols-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    /* Optimal read/tap width */
+    margin: 0 auto 8px auto !important;
+    /* Bottom margin to separate from button */
+  }
+
+  /* Bolt-Style Input Aesthetics */
+  /* Target the SelectTrigger (Trade) and Combobox Inputs (City) */
+  .flex.md\:hidden button[role="combobox"],
+  .flex.md\:hidden input {
+    height: 50px !important;
+    background: rgba(30, 30, 30, 0.4) !important;
+    /* Gentle dark glass */
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 215, 0, 0.2) !important;
+    /* Subtle gold border */
+    border-radius: 12px !important;
+    /* Modern smooth corners */
+    color: white !important;
+    font-size: 16px !important;
+    /* Prevent iOS zoom */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: left !important;
+    transition: all 0.2s ease !important;
+  }
+
+  /* Active/Focus states for inputs */
+  .flex.md\:hidden button[role="combobox"]:active,
+  .flex.md\:hidden input:focus {
+    border-color: rgba(255, 215, 0, 0.6) !important;
+    background: rgba(30, 30, 30, 0.7) !important;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1) !important;
+  }
+
+  /* Send Message Button - The "Primary Action" */
+  .flex.md\:hidden button:not([role="combobox"]) {
+    height: 50px !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25) !important;
+    /* Glowy gold shadow */
+  }
+
+  /* --- 4. Component Stacking & Sizing (General) --- */
   .grid.grid-cols-2 {
     display: flex !important;
     flex-direction: column !important;
@@ -647,6 +709,9 @@ textarea {
   }
 
   .grid.grid-cols-2>div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     width: 100% !important;
     max-width: 340px !important;
     /* Nice card width */
@@ -654,7 +719,12 @@ textarea {
     margin-right: auto !important;
   }
 
-  /* 4. Interactive Elements Centering */
+  /* Ensure TradeCard content centers nicely */
+  .grid.grid-cols-2>div a {
+    width: 100% !important;
+  }
+
+  /* --- 5. Interactive Elements Centering --- */
   button,
   a[class*="button"],
   video,
@@ -664,7 +734,7 @@ textarea {
     margin-right: auto !important;
   }
 
-  /* 5. Symmetry Enforcement (Anti-Lean) */
+  /* --- 6. Symmetry Enforcement (Anti-Lean) --- */
   /* Reset asymmetrical padding */
   .container-wide,
   section,
@@ -679,7 +749,7 @@ textarea {
     margin-right: auto !important;
   }
 
-  /* 6. Specific Component Fixes */
+  /* --- 7. Specific Component Fixes --- */
 
   /* Chat Interface / Send Message Area */
   .flex.md\:hidden {
