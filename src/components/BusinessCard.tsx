@@ -107,8 +107,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           </button>
         </div>
 
-        {/* Brand Area (Logo/Verified) - FIXED HEIGHT 100px for Premium, Placeholder for Normal */}
-        <div className="h-[100px] flex items-center mb-4">
+        {/* Brand Area (Logo/Verified) - RESPONSIVE HEIGHT */}
+        <div className="h-auto min-h-[80px] md:min-h-[100px] flex items-center mb-4">
           {isPremium ? (
             <div className="flex items-center gap-4 w-full bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-white/50">
               <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border bg-white shadow-sm border-emerald-100">
@@ -144,8 +144,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         </div>
 
         {/* Title Section - Handles 2 lines + profile link */}
-        <div className="min-h-[90px] flex flex-col items-start bg-white/95 p-4 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className={`font-display tracking-tight leading-tight line-clamp-2 text-slate-900 ${isPremium ? "text-2xl font-black" : "text-xl font-bold"}`}>
+        <div className="min-h-[70px] md:min-h-[90px] flex flex-col items-start bg-white/95 p-3 md:p-4 rounded-xl border border-slate-200 shadow-sm">
+          <h3 className={`font-display tracking-tight leading-tight line-clamp-2 text-slate-900 ${isPremium ? "text-lg md:text-2xl font-black" : "text-base md:text-xl font-bold"}`}>
             <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors block">
               {business.name}
             </Link>
@@ -192,8 +192,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
               <span className="line-clamp-1 text-slate-700 font-bold">{business.hours || "24/7 Emergency Response"}</span>
             </div>
 
-            {/* Premium Details - Shared Fixed Height Container to maintain alignment */}
-            <div className="h-[75px] overflow-hidden">
+            {/* Premium Details - RESPONSIVE HEIGHT Container */}
+            <div className="h-auto min-h-[60px] md:min-h-[75px] overflow-hidden">
               {isPremium ? (
                 <>
                   {business.services_offered && business.services_offered.length > 0 ? (
