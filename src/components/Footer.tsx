@@ -115,15 +115,16 @@ export function Footer({ countryCode }: FooterProps) {
         </div>
 
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved. <span className="opacity-50 text-[10px] ml-2">v2.1.5</span>
-        </p>
-        <div className="flex items-center gap-6">
-          <Link to={`${countryPrefix}/privacy`} className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>
-          <Link to={`${countryPrefix}/terms`} className="text-white/40 hover:text-gold text-sm transition-colors">Terms</Link>
-          <Link to={`${countryPrefix}/about`} className="text-white/40 hover:text-gold text-sm transition-colors">About</Link>
+          <p className="text-white/40 text-sm">
+            &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved. <span className="opacity-50 text-[10px] ml-2">v2.1.5</span>
+          </p>
+          <div className="flex items-center gap-6">
+            <Link to={`${countryPrefix}/privacy`} className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>
+            <Link to={`${countryPrefix}/terms`} className="text-white/40 hover:text-gold text-sm transition-colors">Terms</Link>
+            <Link to={`${countryPrefix}/about`} className="text-white/40 hover:text-gold text-sm transition-colors">About</Link>
+          </div>
         </div>
       </div>
-    </div>
     </footer >
   );
 }
