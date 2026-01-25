@@ -545,6 +545,16 @@ export default function TradeCityPage() {
             <p className="text-muted-foreground">
               Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
             </p>
+            {/* DEBUG PANEL - Visible to help diagnose mobile issue */}
+            <div className="mt-4 p-2 bg-slate-100 rounded text-[10px] font-mono text-slate-600 border border-slate-300">
+              <strong>DEBUG INFO (v2.1.7):</strong><br />
+              Trade: {tradeInfo.slug}<br />
+              City: {validCity} (Search: {cityName})<br />
+              Country: {actualCountry}<br />
+              Results: {totalCount}<br />
+              IsLoading: {isLoading ? 'Yes' : 'No'}<br />
+              Supabase URL: {Boolean(import.meta.env.VITE_SUPABASE_URL) ? 'Configured' : 'Missing'}
+            </div>
           </div>
 
           {isLoading ? (

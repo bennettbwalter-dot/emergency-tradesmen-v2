@@ -116,7 +116,7 @@ export function Footer({ countryCode }: FooterProps) {
 
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-white/40 text-sm">
-            &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved. <span className="opacity-50 text-[10px] ml-2">v2.1.6</span>
+            &copy; {new Date().getFullYear()} EmergencyTradesmen.net. All rights reserved. <span className="opacity-50 text-[10px] ml-2">v2.1.7</span>
           </p>
           <div className="flex items-center gap-6">
             <Link to={`${countryPrefix}/privacy`} className="text-white/40 hover:text-gold text-sm transition-colors">Privacy</Link>
