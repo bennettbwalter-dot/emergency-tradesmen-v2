@@ -543,7 +543,7 @@ export default function TradeCityPage() {
               Top Rated Local {tradeInfo.name}s Near {cityName}
             </h2>
             <p className="text-muted-foreground">
-              Found {totalCount} professionals nearby {resultsCount > 50 && `(Showing top 50)`}
+              Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
             </p>
           </div>
 
