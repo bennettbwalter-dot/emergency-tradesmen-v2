@@ -114,8 +114,7 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         .from('businesses')
         .select('*, business_photos(*)')
         .eq('trade', normalizedTrade)
-        .eq('country_code', countryCode.toUpperCase())
-        .eq('verified', true);
+        .eq('country_code', countryCode.toUpperCase());
 
     if (searchCity && searchCity.trim() !== '') {
         // Handle both hyphenated (URL-style) and space-separated (DB-style) city names
@@ -175,8 +174,7 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
 export async function fetchAllBusinesses(limit = 100, countryCode?: string): Promise<Business[]> {
     let query = supabase
         .from('businesses')
-        .select('*, business_photos(*)')
-        .eq('verified', true);
+        .select('*, business_photos(*)');
 
     if (countryCode) {
         query = query.eq('country_code', countryCode.toUpperCase());
@@ -198,7 +196,6 @@ export async function searchBusinesses(query: string, countryCode: string = 'GB'
     const { data, error } = await supabase
         .from('businesses')
         .select('*, business_photos(*)')
-        .eq('verified', true)
         .eq('country_code', countryCode.toUpperCase())
         .or(`name.ilike.%${query}%,trade.ilike.%${query}%`)
         .order('rating', { ascending: false })
@@ -216,7 +213,6 @@ export async function fetchPaidBusinesses(trade?: string, city?: string, country
     let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
-        .eq('verified', true)
         .eq('is_premium', true);
 
     if (trade) query = query.eq('trade', trade.toLowerCase().replace('emergency-', ''));
