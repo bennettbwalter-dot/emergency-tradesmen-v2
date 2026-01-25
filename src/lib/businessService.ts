@@ -110,10 +110,18 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         });
     }
 
+    // Flexible trade matching: match "plumber" OR "emergency-plumber"
+    const tradeVariations = [normalizedTrade, trade.toLowerCase()];
+    // Add variations with dashes/spaces if needed, but usually these two cover it
+    if (trade.toLowerCase().startsWith('emergency-')) {
+        tradeVariations.push(trade.toLowerCase().replace('emergency-', 'emergency '));
+    }
+    const uniqueTrades = [...new Set(tradeVariations)];
+
     let query = supabase
         .from('businesses')
         .select('*, business_photos(*)')
-        .eq('trade', normalizedTrade)
+        .in('trade', uniqueTrades)
         .eq('country_code', countryCode.toUpperCase());
 
     if (searchCity && searchCity.trim() !== '') {
@@ -141,7 +149,7 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         const fallbackQuery = supabase
             .from('businesses')
             .select('*, business_photos(*)')
-            .eq('trade', normalizedTrade)
+            .in('trade', uniqueTrades)
             .eq('country_code', countryCode.toUpperCase())
             .limit(50);
 

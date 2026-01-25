@@ -543,7 +543,7 @@ export default function TradeCityPage() {
               Top Rated Local {tradeInfo.name}s Near {cityName}
             </h2>
             <p className="text-muted-foreground">
-              Found {totalCount} verified professionals nearby {resultsCount > 50 && `(Showing top 50)`}
+              Found {totalCount} professionals nearby {resultsCount > 50 && `(Showing top 50)`}
             </p>
           </div>
 
@@ -563,7 +563,7 @@ export default function TradeCityPage() {
                     </div>
                     <h3 className="text-2xl font-display font-semibold mb-2">Listings coming soon</h3>
                     <p className="text-muted-foreground max-w-md mx-auto">
-                      We're currently vetting verified {tradeInfo.name.toLowerCase()} professionals in {cityName}.
+                      We're currently expanding our network of {tradeInfo.name.toLowerCase()} professionals in {cityName}.
                       Check back soon or try a nearby location.
                     </p>
                   </div>
