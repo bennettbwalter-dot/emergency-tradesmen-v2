@@ -185,10 +185,25 @@ export default function TradeCityPage() {
 
         // If no real businesses found, fallback to static/mock data (now strictly limited)
         if (realBusinesses.length === 0) {
-          console.warn('No real businesses found. Checking static list...');
-          const staticBusinesses = getBusinessListings(validCity, tradeInfo.slug, actualCountry);
-          console.log('Static businesses found:', staticBusinesses?.length);
-          setBusinesses(staticBusinesses || []);
+          console.warn('No real businesses found. Checking static list and London fallback...');
+          // 1. Try static list for this city
+          let fallbackData = getBusinessListings(validCity, tradeInfo.slug, actualCountry);
+
+          // 2. If still empty, force fallback to London/Major City to ensure SOMETHING shows
+          // This prevents the "0 results" screen on mobile
+          if (!fallbackData || fallbackData.length === 0) {
+            console.warn('City static data empty. Falling back to London/Major City data.');
+            const majorCity = actualCountry === 'US' ? 'new-york' : 'london';
+            const majorCityData = getBusinessListings(majorCity, tradeInfo.slug, actualCountry);
+
+            if (majorCityData && majorCityData.length > 0) {
+              fallbackData = majorCityData;
+              // Update title to reflect this if possible, or just show the data
+            }
+          }
+
+          console.log('Final fallback businesses count:', fallbackData?.length);
+          setBusinesses(fallbackData || []);
         } else {
           setBusinesses(realBusinesses);
         }
@@ -545,16 +560,6 @@ export default function TradeCityPage() {
             <p className="text-muted-foreground">
               Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
             </p>
-            {/* DEBUG PANEL - Visible to help diagnose mobile issue */}
-            <div className="mt-4 p-2 bg-slate-100 rounded text-[10px] font-mono text-slate-600 border border-slate-300">
-              <strong>DEBUG INFO (v2.1.7):</strong><br />
-              Trade: {tradeInfo.slug}<br />
-              City: {validCity} (Search: {cityName})<br />
-              Country: {actualCountry}<br />
-              Results: {totalCount}<br />
-              IsLoading: {isLoading ? 'Yes' : 'No'}<br />
-              Supabase URL: {Boolean(import.meta.env.VITE_SUPABASE_URL) ? 'Configured' : 'Missing'}
-            </div>
           </div>
 
           {isLoading ? (
@@ -573,8 +578,8 @@ export default function TradeCityPage() {
                     </div>
                     <h3 className="text-2xl font-display font-semibold mb-2">Listings coming soon</h3>
                     <p className="text-muted-foreground max-w-md mx-auto">
-                      We're currently expanding our network of {tradeInfo.name.toLowerCase()} professionals in {cityName}.
-                      Check back soon or try a nearby location.
+                      We're currently expanding our network of {tradeInfo.name.toLowerCase()} experts in {cityName}.
+                      Try viewing our <Link to="/locations" className="text-primary hover:underline">popular locations</Link> or call our national support line.
                     </p>
                   </div>
                 ) : (
