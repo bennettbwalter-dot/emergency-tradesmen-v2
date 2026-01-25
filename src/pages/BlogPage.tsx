@@ -70,6 +70,20 @@ export default function BlogPage() {
                     created_at: new Date().toISOString()
                 };
 
+                const staticPostElectrical: BlogPost = {
+                    id: 'static-electrical-fire-warning',
+                    title: settings.countryCode === 'GB'
+                        ? 'Flickering Lights & Fishy Smells: The Critical Warning Signs of Electrical Fire'
+                        : 'Flickering Lights & Warm Outlets: Is Your Home Wiring a Hidden Fire Hazard?',
+                    slug: 'electrical-fire-warning-signs',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'The sensory indicators of electrical failure. These signs are frequently the final warnings before catastrophic failure.'
+                        : 'A flickering light or warm outlet are red flags indicating aging wiring or overloaded circuits in US homes.',
+                    cover_image: '/images/blog/electrical-safety/flickering-lights-cover.png',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
                 const staticPostCO: BlogPost = {
                     id: 'static-co-safety-guide',
                     title: settings.countryCode === 'GB'
@@ -85,12 +99,12 @@ export default function BlogPage() {
                 };
 
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug).map(p => ({
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug).map(p => ({
                     ...p,
                     title: regionalizeText(p.title),
                     excerpt: regionalizeText(p.excerpt)
                 }));
-                setPosts([staticPostCO, staticPost, staticPost2, ...uniqueData]);
+                setPosts([staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
             }
             setIsLoading(false);
         }

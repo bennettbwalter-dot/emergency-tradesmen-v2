@@ -335,7 +335,7 @@ const Index = () => {
                       description: 'Watch our guide on how to find a tradesman.',
                       id: 0,
                       icon: <FiLayers className="h-4 w-4 text-white" />,
-                      imageSrc: "/images/et-tv-screen.jpg"
+                      imageSrc: "/images/et-tv-screen-v2.jpg"
                     },
                     {
                       title: 'Picture Connect',

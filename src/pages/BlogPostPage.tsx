@@ -291,6 +291,197 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 });
                 setIsLoading(false);
                 return;
+            } else if (slug === 'electrical-fire-warning-signs') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-electrical-fire-warning',
+                    title: isUK
+                        ? 'Flickering Lights & Fishy Smells: The Critical Warning Signs of Electrical Fire in UK Homes'
+                        : 'Flickering Lights & Warm Outlets: Is Your Home Wiring a Hidden Fire Hazard?',
+                    slug: 'electrical-fire-warning-signs',
+                    excerpt: isUK
+                        ? 'When a UK homeowner notices a light flickering or detects a pungent, fishy odour near a socket, it is not merely a nuisance; it is a signal that the safety mechanisms are being compromised.'
+                        : "A flickering light bulb, a receptacle that feels warm to the touch - these are not quirks of an old house. They are red flags indicating aged wiring or overloaded circuits.",
+                    cover_image: '/images/blog/electrical-safety/flickering-lights-cover.png',
+                    content: isUK
+                        ? `In the United Kingdom, the domestic electrical system is unique on the global stage. Born from the post-World War II copper shortage, the **Ring Final Circuit** remains the backbone of British residential wiring. This topology, while efficient, introduces specific failure modes that can remain hidden until the moment of crisis.
+
+When a UK homeowner notices a light flickering or detects a pungent, fishy odour near a socket, it is not merely a nuisance; it is a signal that the safety mechanisms built into the home are being compromised.
+
+The statistics are sobering. In the year ending September 2024, Fire and Rescue Services in England attended over 38,000 building fires. Electrical distribution systems (wiring, cabling, plugs) remain a leading cause of ignition, responsible for over 3,000 reported incidents in the 2023/24 period alone.
+
+![UK Ring Circuit Diagram](/images/blog/electrical-safety/ring-circuit-uk.png "The UK Ring Final Circuit")
+
+---
+
+## The Danger: Anatomy of a UK Electrical Emergency
+
+### The Physics of the Ring Final Circuit
+
+Unlike radial circuits used in most of the world, a ring circuit forms a closed loop. The Line (Live), Neutral, and Earth (CPC) conductors start at the consumer unit (fuse box), visit every socket in the designated area, and then return to the same breaker.
+
+**The "Broken Ring" Hazard:** If a wire comes loose at a socket terminal or snaps inside the wall, the ring is broken. The circuit does not trip; the sockets continue to work. However, the system silently converts into two radial circuits. The 2.5mm² cable (rated for ~20A) can carry the full 32A load, causing the cable to overheat inside the wall—all while the TV and kettle continue to operate normally.
+
+### The "Fishy Smell": A Chemical Warning of Imminent Fire
+
+One of the most distinctive and alarming indicators of electrical failure in UK homes is a smell resembling **rotting fish or urine**. This is often misidentified as a drainage issue, but it is a critical electrical emergency.
+
+**The Source:** Urea-Formaldehyde Degradation. Electrical accessories were historically manufactured using urea-formaldehyde plastics. When a loose connection generates heat, these materials decompose and release **trimethylamine**—the compound responsible for the smell of rotting fish.
+
+> **Implication:** If you smell fish near an outlet, the electrical component is not just hot; it is *cooking*. The insulation is structurally failing, and a fire is imminent.
+
+![Warm Outlet Warning Sign](/images/blog/electrical-safety/warm-outlets.jpg "A warm outlet is a critical warning sign of electrical failure")
+
+### Flickering Lights: The Neutral Fault
+
+Flickering lights often indicate a fault at the consumer unit or the external supply. A loose neutral connection can cause voltage fluctuations. Because the neutral returns the current to the source, a poor connection creates a "floating" voltage potential, causing lights to flicker when high-load appliances are used.
+
+---
+
+## Action Steps: What to Do Now
+
+![Flickering Lights Warning](/images/blog/electrical-safety/flickering-lights-cover.png "Flickering lights are a warning sign of electrical problems")
+
+### Step 1: Immediate Isolation
+*   **Go to the Source:** Proceed immediately to your Consumer Unit (fuse box).
+*   **Isolate Power:** Identify the circuit and switch it to the OFF position. If unsure, switch off the **Main Switch**.
+
+### Step 2: The Sensory Inspection (Power Off)
+*   **Touch Test:** Gently touch the wall around the suspect outlet. If warm, heat is radiating from the wiring within the wall.
+*   **Visual Check:** Look for yellow/brown discolouration around pin holes—this "browning" is scorch marking.
+*   **Smell Test:** If the odour is emanating from the consumer unit itself, **evacuate** and call an emergency electrician.
+
+### Step 3: Do Not Attempt DIY Repair
+A DIY enthusiast might replace a burnt socket, but if the heat damaged the copper conductors, the ring continuity might still be broken. Hidden damage inside the wall could short-circuit as soon as the wire is disturbed.
+
+> **Need urgent help?** [Find an emergency electrician near you](https://emergencytradesmen.net/) - available 24/7 for electrical emergencies.
+
+---
+
+## Regulations: Understanding UK Electrical Law
+
+![Arc Flash Hazard](/images/blog/electrical-safety/arc-flash-warning.jpg "Arc Flash Hazard - Professional electricians required")
+
+### Part P of the Building Regulations (England & Wales)
+Certain high-risk electrical works must be notified to the Local Authority Building Control, including new circuits and consumer unit replacements. The most efficient way to comply is to use an electrician registered with a **Competent Person Scheme** (such as NICEIC, NAPIT, or ELECSA).
+
+### The Electrical Installation Condition Report (EICR)
+An EICR is a formal document produced following an in-depth inspection. Under the **Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020**, landlords must have installations inspected at least every 5 years.
+
+**The Coding System:**
+*   **Code C1 (Danger Present):** Immediate risk of injury.
+*   **Code C2 (Potentially Dangerous):** Urgent remedial action required.
+*   **Code C3 (Improvement Recommended):** Non-compliance but not immediately dangerous.
+
+### BS 7671: The 18th Edition
+The 2022 Amendment 2 introduced **AFDDs (Arc Fault Detection Devices)**, now recommended for socket circuits. These devices "listen" for the electronic signature of an arc fault and trip the circuit before a fire starts.
+
+---
+
+## Why Choose Us
+
+We connect UK homeowners solely with electricians who are:
+*   **Fully Accredited:** Registered with government-approved bodies (NICEIC, NAPIT).
+*   **Insured:** Holding minimum Public Liability Insurance (typically £2 million+).
+*   **Vetted for Competence:** Verified to hold necessary City & Guilds qualifications.
+
+Do not gamble with the safety of your home. A "fishy smell" or a "flickering light" is a message you cannot afford to misunderstand.
+
+**[Emergency Tradesmen](https://emergencytradesmen.net/)** - Book a comprehensive electrical safety check with a vetted, Part P-registered electrician in your area today.
+*   [Find an Emergency Electrician Near Me](https://emergencytradesmen.net/)
+*   [Request an EICR Inspection](https://emergencytradesmen.net/)
+*   [24 Hour Electrical Repairs UK](https://emergencytradesmen.net/)
+*   [Certified Electrical Safety Checks](https://emergencytradesmen.net/)`
+                        : `In the United States, the convenience of modern electrical power is delivered through a **split-phase 120/240V system**. While robust, this system operates in a high-stakes environment where aging infrastructure meets skyrocketing demand for power.
+
+The US Fire Administration (USFA) reports that in 2021 alone, there were an estimated **24,200 residential building electrical fires**, resulting in nearly 300 deaths and over $1.2 billion in property loss.
+
+The warning signs of these fires are often subtle. A flickering light bulb, a receptacle that feels warm to the touch, or an outlet that creates a "seesaw" effect—where one light dims while another brightens—are not quirks of an old house. They are **red flags** indicating that the system's integrity is compromised.
+
+![US Split-Phase Diagram](/images/blog/electrical-safety/split-phase-us.jpg "Split-Phase Radial Circuits in the USA")
+
+---
+
+## The Danger: Hazards in the US Electrical Ecosystem
+
+### The "Lost Neutral": A Catastrophic Imbalance
+
+One of the most dangerous conditions in a US home is the "Lost" or "Floating" Neutral.
+
+US homes typically receive power via three wires: two "hot" legs (each 120V relative to ground) and one neutral. If the neutral wire breaks, the 240V supply divides itself based on resistance. Turning on a high-load appliance (like a microwave) can cause voltage on one leg to **drop to 60V** while the other **skyrockets to 180V**—instantly destroying electronics and starting fires.
+
+![Arc Flash Warning](/images/blog/electrical-safety/arc-flash-warning.jpg "Warning: Arc Flash Hazard")
+
+### The Aluminum Wiring Legacy (1965–1973)
+
+Between 1965 and 1973, high copper prices led US builders to use single-strand aluminum wiring. The **Consumer Product Safety Commission (CPSC)** estimates that homes wired with this "old technology" aluminum are **55 times more likely** to have connections reach "Fire Hazard Conditions."
+
+**The Physics of Failure:**
+*   **Thermal Expansion:** Aluminum expands and contracts more than copper, causing wires to "creep" away from terminals.
+*   **Oxidation:** Exposed aluminum creates a resistive oxide layer, generating heat in a self-perpetuating cycle.
+*   **Galvanic Corrosion:** Direct contact with copper-only devices causes corrosive reactions.
+
+![Warm Outlets](/images/blog/electrical-safety/warm-outlets.jpg "Warm Outlets are a Critical Warning Sign")
+
+### Daisy Chaining: The Overload Trap
+
+Plugging a power strip into another power strip is a violation of OSHA regulations. It increases resistance and bypasses the design limits of the wall outlet, causing strips or wall wiring to melt and ignite.
+
+---
+
+## Action Steps: Safety Protocol for US Homeowners
+
+### Step 1: Diagnose the "Dim vs. Bright" Scenario
+*   Turn on a heavy 120V load (vacuum cleaner or microwave). Watch the lights.
+*   **One room dims, another gets BRIGHTER:** EMERGENCY. This is the signature of a Lost Neutral.
+*   **Action:** Turn off your main breaker immediately and call your utility provider.
+
+### Step 2: The "Warm Outlet" Inspection
+*   Place your hand on the wall plate of outlets after running an appliance.
+*   It should be at ambient temperature. If warm, the internal contacts are loose.
+*   **Action:** Stop using the outlet. Tape it over. Call an electrician.
+
+### Step 3: Aluminum Remediation (Do Not DIY)
+*   Look for "AL" or "ALUMINUM" on exposed wiring.
+*   **Do Not** simply replace outlets—standard outlets are not rated for aluminum.
+*   **The Fix:** Hire a professional to install **COPALUM crimps** or **AlumiConn connectors**. [Find a licensed electrician for aluminum wiring repair](https://emergencytradesmen.net/).
+
+---
+
+## Regulations: NEC Standards and Federal Safety
+
+### NEC 2023: Key Updates for Homeowners
+*   **GFCI Expansion:** Protection now required for clothes dryers and microwave ovens.
+*   **Kitchen Island Receptacles:** Must now be installed in the countertop (pop-up), not on the sides.
+*   **Surge Protection:** Type 1 or Type 2 SPDs required for all new dwelling unit services since 2020.
+
+### OSHA and Extension Cords
+*   **Temporary Use Only:** Extension cords are for temporary use (up to 90 days).
+*   **Inspection:** Cords must be visually inspected for fraying. Taping is not a compliant repair.
+
+---
+
+## Why Choose Us
+
+We serve as the primary hub for connecting homeowners with verified US electrical specialists who are:
+*   **State Licensed:** Verified active licensure with State Contractors Boards.
+*   **Code Current:** Vetted for knowledge of the latest NEC updates (2020/2023 cycles).
+*   **Specialized:** Experience in aluminum remediation (AlumiConn certified) and service panel upgrades.
+*   **Insured and Bonded:** Protecting you from liability during high-risk repair work.
+
+When your lights flicker or your outlets warm up, your home is speaking to you. You need a professional who speaks the language of the Code.
+
+**[Emergency Tradesmen](https://emergencytradesmen.net/)** - Connect with a verified, licensed electrical contractor in your area. Schedule your safety inspection today.
+*   [Find an Emergency Electrician Near Me](https://emergencytradesmen.net/)
+*   [Request a Panel Inspection](https://emergencytradesmen.net/)
+*   [24/7 Emergency Electrical Service](https://emergencytradesmen.net/)
+*   [Licensed Electricians in My Area](https://emergencytradesmen.net/)
+*   [Aluminum Wiring Remediation Experts](https://emergencytradesmen.net/)`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
             } else if (slug === 'carbon-monoxide-safety-guide') {
                 const isUK = settings.countryCode === 'GB';
                 setPost({
@@ -348,8 +539,8 @@ Don't wait for a headache to tell you your boiler is broken. Peace of mind is ju
 **[Emergency Tradesmen](https://emergencytradesmen.net/)** is your shortcut to finding fully vetted, Gas Safe registered engineers who can safety-check your home today. We connect you with local experts:
 *   [Emergency Plumbers](https://emergencytradesmen.net/)
 *   [Gas Engineers](https://emergencytradesmen.net/)
-*   [Heating Specialists](https://emergencytradesmen.net/)
-                        : `Forced Air & Cracked Heat Exchangers: Most US homes use forced - air furnaces.If the "heat exchanger"(the metal chamber where fire burns) cracks from age, the blower fan can push CO directly into your ducts, pumping poison into every bedroom in the house simultaneously.The[CDC](https://www.cdc.gov/co/) warns that this can happen without any visible smoke.
+*   [Heating Specialists](https://emergencytradesmen.net/)`
+                        : `Forced Air & Cracked Heat Exchangers: Most US homes use forced-air furnaces. If the "heat exchanger" (the metal chamber where fire burns) cracks from age, the blower fan can push CO directly into your ducts, pumping poison into every bedroom in the house simultaneously. The CDC warns that this can happen without any visible smoke.
 
 ### The Danger: American HVAC Hazards
 
@@ -358,56 +549,56 @@ Don't wait for a headache to tell you your boiler is broken. Peace of mind is ju
                             ** The "Silent" Electrical Killer(Capacitors):** It’s not just gas.US HVAC units use high - voltage capacitors to start motors.These can hold a lethal charge(370V–600V) even after you cut the power to the house.
 *   * DIY Warning:* Touching these without discharging them can cause severe shock or electrocution.Leave the panel closed!
 
-                        ** Back - Drafting:** In modern, airtight homes, running a strong kitchen exhaust fan or fireplace can suck air down your furnace flue instead of letting it go up.This pulls CO back into your living room—a phenomenon highlighted by EPA indoor air quality guidelines.
+**Back-Drafting:** In modern, airtight homes, running a strong kitchen exhaust fan or fireplace can suck air down your furnace flue instead of letting it go up. This pulls CO back into your living room—a phenomenon highlighted by EPA indoor air quality guidelines.
 
-** Portable Generators:** Never, ever run a generator in the garage or basement.Even with the door open, CO can build up to lethal levels in minutes, a major cause of poisoning according to the[CPSC](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center).
+**Portable Generators:** Never, ever run a generator in the garage or basement. Even with the door open, CO can build up to lethal levels in minutes, a major cause of poisoning according to the CPSC.
 
 ### Action Steps: Protocol for US Homeowners
 
-![Ventilate and Evacuate](/images/blog / co - safety / ventilate - evacuate.jpg "Ventilate and Evacuate")
+![Ventilate and Evacuate](/images/blog/co-safety/ventilate-evacuate.jpg "Ventilate and Evacuate")
 
-                    *   ** Get Out & Call 911:** If your alarm sounds, evacuate immediately.Do not open windows to "air it out" before leaving—just get out.Call 911 from a mobile phone or neighbor's house. As noted by FEMA, fire departments carry special meters to find the source.
-                        *   ** Understanding the "Red Tag":** If a technician finds a danger, they will place a Red Tag on your unit.
-    *   ** Type A(Immediate):** The gas is shut off and capped.There is a verified leak or crack.Do not turn it back on—it is a life - safety hazard.
-    *   ** Type B(Correction Needed):** Something is wrong(like a code violation), but it's not leaking yet. You usually have a grace period to fix it before the utility cuts service.
-                    *   ** Do Not DIY the Repair:** Removing a Red Tag yourself is often illegal and voids your home insurance.You need a signed "affidavit of repair" from a licensed pro to restore service.
+*   **Get Out & Call 911:** If your alarm sounds, evacuate immediately. Do not open windows to "air it out" before leaving—just get out. Call 911 from a mobile phone or neighbor's house.
+*   **Understanding the "Red Tag":** If a technician finds a danger, they will place a Red Tag on your unit.
+    *   **Type A (Immediate):** The gas is shut off and capped. There is a verified leak or crack. Do not turn it back on—it is a life-safety hazard.
+    *   **Type B (Correction Needed):** Something is wrong (like a code violation), but it's not leaking yet. You have a grace period to fix it.
+*   **Do Not DIY the Repair:** Removing a Red Tag yourself is often illegal and voids your home insurance. You need a signed "affidavit of repair" from a licensed pro to restore service.
 
 ### Regulations Section: Navigating the Rules
 
 ![Hidden Dangers](/images/blog/co-safety/hidden-flues-alt.jpg "Hidden Dangers")
 
-                    ** State Licensing Matters:** Unlike the UK's national system, the US licenses by state.
-                        *   ** California:** Look for a C - 20 HVAC license on the[CSLB](https://www.cslb.ca.gov/).
-*   ** Texas:** Look for a license from the[TDLR](https://www.tdlr.texas.gov/).
-*   ** Always Check:** Verify the license is active and carries insurance.
+**State Licensing Matters:** Unlike the UK's national system, the US licenses by state.
+*   **California:** Look for a C-20 HVAC license on the CSLB.
+*   **Texas:** Look for a license from the TDLR.
+*   **Always Check:** Verify the license is active and carries insurance.
 
-** Alarm Placement:** The[CPSC](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center) recommends CO alarms on every level of the home and outside each sleeping area. If you have a basement with a bedroom, put one there too.
+**Alarm Placement:** The CPSC recommends CO alarms on every level of the home and outside each sleeping area. If you have a basement with a bedroom, put one there too.
 
-** Workplace vs.Home Limits:** Don't rely on "workplace" safety numbers.
-                        *   ** OSHA(Workplace):** Allows up to 50 ppm(parts per million) for healthy workers over 8 hours.
-*   ** Residential Reality:** Exposure to much lower levels over time can harm children, the elderly, or pets.Your home alarm is designed to protect you while you sleep!
+**Workplace vs. Home Limits:** Don't rely on "workplace" safety numbers.
+*   **OSHA (Workplace):** Allows up to 50 ppm (parts per million) for healthy workers over 8 hours.
+*   **Residential Reality:** Exposure to much lower levels over time can harm children, the elderly, or pets. Your home alarm is designed to protect you while you sleep!
 
 ### A Red Tag is Scary, But Ignoring It Is Worse
 
-A Red Tag on your furnace is scary, but ignoring it is worse.Don't gamble with your family's safety.
+A Red Tag on your furnace is scary, but ignoring it is worse. Don't gamble with your family's safety.
 
-** [Emergency Tradesmen](https://emergencytradesmen.net/)** connects you instantly with verified, licensed US contractors who can fix the problem and get your heat back on safely.
+**[Emergency Tradesmen](https://emergencytradesmen.net/)** connects you instantly with verified, licensed US contractors who can fix the problem and get your heat back on safely.
 * [Emergency HVAC Repair](https://emergencytradesmen.net/)
 * [Local Plumbers](https://emergencytradesmen.net/)
 * [Electrical Safety Experts](https://emergencytradesmen.net/)`,
-                            published_at: new Date().toISOString(),
-                            created_at: new Date().toISOString()
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
                 });
-    setIsLoading(false);
-    return;
-} else if (slug === 'emergency-repairs-guide-tenants-landlords') {
-    setPost({
-        id: 'static-emergency-repairs-guide',
-        title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
-        slug: 'emergency-repairs-guide-tenants-landlords',
-        excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
-        cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
-        content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
+                setIsLoading(false);
+                return;
+            } else if (slug === 'emergency-repairs-guide-tenants-landlords') {
+                setPost({
+                    id: 'static-emergency-repairs-guide',
+                    title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
+                    slug: 'emergency-repairs-guide-tenants-landlords',
+                    excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
+                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
+                    content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
 
 ## 🚨 What Counts as an "Emergency"?
 
@@ -499,325 +690,325 @@ If you have reported an emergency and the landlord is ignoring you:
 *   [Citizens Advice](https://www.citizensadvice.org.uk/)
 *   [Housing Ombudsman](https://www.housing-ombudsman.org.uk/) (For complaints about social landlords)
 `),
-        published_at: new Date().toISOString(),
-        created_at: new Date().toISOString()
-    });
-    setIsLoading(false);
-    return;
-}
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+            }
 
-const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .eq('slug', slug)
+                .single();
 
-if (!error && data) {
-    setPost({
-        ...data,
-        title: regionalizeText(data.title),
-        excerpt: regionalizeText(data.excerpt),
-        content: regionalizeText(data.content)
-    });
-}
-setIsLoading(false);
+            if (!error && data) {
+                setPost({
+                    ...data,
+                    title: regionalizeText(data.title),
+                    excerpt: regionalizeText(data.excerpt),
+                    content: regionalizeText(data.content)
+                });
+            }
+            setIsLoading(false);
         }
 
-loadPost();
+        loadPost();
     }, [slug]);
 
-if (isLoading) {
-    return (
-        <div className="min-h-screen bg-background animate-pulse">
-            <div className="h-[60vh] bg-secondary/30 w-full" />
-            <div className="container mx-auto px-4 py-12 max-w-4xl space-y-8">
-                <div className="h-12 bg-secondary rounded w-3/4 mx-auto" />
-                <div className="h-4 bg-secondary rounded w-1/4 mx-auto" />
-                <div className="space-y-4 mt-12">
-                    <div className="h-4 bg-secondary rounded w-full" />
-                    <div className="h-4 bg-secondary rounded w-full" />
-                    <div className="h-4 bg-secondary rounded w-5/6" />
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-background animate-pulse">
+                <div className="h-[60vh] bg-secondary/30 w-full" />
+                <div className="container mx-auto px-4 py-12 max-w-4xl space-y-8">
+                    <div className="h-12 bg-secondary rounded w-3/4 mx-auto" />
+                    <div className="h-4 bg-secondary rounded w-1/4 mx-auto" />
+                    <div className="space-y-4 mt-12">
+                        <div className="h-4 bg-secondary rounded w-full" />
+                        <div className="h-4 bg-secondary rounded w-full" />
+                        <div className="h-4 bg-secondary rounded w-5/6" />
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-}
+        );
+    }
 
-if (!post) {
-    return (
-        <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
-            <h1 className="text-3xl font-display font-bold mb-4">Article Not Found</h1>
-            <p className="text-muted-foreground mb-8">The article you are looking for does not exist.</p>
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/blog">Back to Blog</Link>
-            </Button>
-        </div>
-    );
-}
-
-// Calculate read time
-const wordCount = post.content?.split(/\s+/).length || 0;
-const readTime = Math.max(1, Math.ceil(wordCount / 200));
-
-const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
-
-return (
-    <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
-        {/* Structured Data Construction */}
-        {(() => {
-            const baseUrl = "https://emergencytradesmen.net";
-            const postUrl = `${baseUrl} / blog / ${post.slug}`;
-            const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
-
-            // 1. BreadcrumbList Schema
-            const breadcrumbSchema = {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Blog",
-                        "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": post.title,
-                        "item": postUrl
-                    }
-                ]
-            };
-
-            // 2. BlogPosting Schema
-            const articleSchema = {
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": postUrl
-                },
-                "headline": post.title,
-                "description": post.excerpt,
-                "image": imageUrl,
-                "author": {
-                    "@type": "Organization",
-                    "name": regionalizeText("Emergency Tradesmen UK"),
-                    "url": baseUrl,
-                    "logo": `${baseUrl} / et - logo - v2.png`
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": regionalizeText("Emergency Tradesmen UK"),
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": `${baseUrl} / et - logo - v2.png`
-                    }
-                },
-                "datePublished": post.published_at,
-                "dateModified": post.published_at,
-                "isAccessibleForFree": "true",
-                "keywords": [
-                    ...post.title.split(' ').filter(w => w.length > 3),
-                    post.slug.includes('carbon-monoxide') ? "Carbon Monoxide Safety, CO Poisoning Symptoms, Gas Safe Register, Emergency Plumber, HVAC Safety, Boiler Repair" : "",
-                    "emergency tradesmen",
-                    "home advice",
-                    "DIY tips",
-                    "UK trades"
-                ].filter(Boolean).join(', ')
-            };
-
-            return (
-                <SEO
-                    title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
-                    description={post.excerpt}
-                    canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
-                    ogType="article"
-                    ogImage={post.cover_image || undefined}
-                    jsonLd={[breadcrumbSchema, articleSchema]}
-                />
-            );
-        })()}
-
-        {/* Navigation Bar */}
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                <Link
-                    to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
-                    className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                    Back to Insights
-                </Link>
-                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-gold transition-colors">
-                    <Share2 className="w-4 h-4" />
+    if (!post) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
+                <h1 className="text-3xl font-display font-bold mb-4">Article Not Found</h1>
+                <p className="text-muted-foreground mb-8">The article you are looking for does not exist.</p>
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Link to="/blog">Back to Blog</Link>
                 </Button>
             </div>
-        </div>
+        );
+    }
 
-        <article>
-            {post.content.trim().startsWith('<') ? (
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            ) : (
-                <>
-                    {/* Hero Section - 16:9 Strict */}
-                    <div className="relative w-full aspect-video overflow-hidden bg-secondary/30">
-                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
-                        {post.cover_image && (
-                            <img
-                                src={post.cover_image}
-                                alt={post.title}
-                                className="w-full h-full object-contain relative z-0"
-                                fetchPriority="high"
-                                loading="eager"
-                            />
-                        )}
+    // Calculate read time
+    const wordCount = post.content?.split(/\s+/).length || 0;
+    const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
-                        <div className="absolute bottom-0 left-0 w-full z-20 pb-8 md:pb-12">
-                            <div className="container mx-auto px-4 max-w-4xl text-center">
-                                <Badge className="mb-4 bg-gold/10 text-gold border-gold/20 hover:bg-gold/20 transition-colors uppercase tracking-widest text-[10px] px-3 py-1">
-                                    Expert Guide
-                                </Badge>
-                                <h1 className="text-[28px] md:text-[44px] font-body font-bold leading-[1.2] text-foreground mb-4 text-balance drop-shadow-sm">
-                                    {post.title}
-                                </h1>
-                                <div className="flex items-center justify-center gap-6 text-sm md:text-base text-muted-foreground">
-                                    <div className="flex items-center gap-2">
-                                        <CalendarDays className="w-4 h-4 text-gold" />
-                                        <time dateTime={post.published_at}>
-                                            {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
-                                        </time>
-                                    </div>
-                                    <div className="w-1 h-1 rounded-full bg-gold/50" />
-                                    <div className="flex items-center gap-2">
-                                        <Clock className="w-4 h-4 text-gold" />
-                                        <span>{readTime} min read</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
 
-                    {/* Content Layout */}
-                    <div className="container mx-auto px-4 py-12 md:py-20">
-                        <div className="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-                            {/* Main Content Column */}
-                            <div className="lg:col-span-12">
-                                <div className="font-body text-foreground space-y-8">
-                                    <ReactMarkdown
-                                        components={{
-                                            h1: ({ node, ...props }) => (
-                                                <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
-                                            ),
-                                            h2: ({ node, ...props }) => (
-                                                <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
-                                            ),
-                                            h3: ({ node, ...props }) => (
-                                                <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
-                                            ),
-                                            p: ({ node, ...props }) => (
-                                                <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
-                                            ),
-                                            ul: ({ node, ...props }) => (
-                                                <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
-                                            ),
-                                            li: ({ node, ...props }) => (
-                                                <li {...props} />
-                                            ),
-                                            a: ({ node, ...props }) => {
-                                                const isInternal = props.href?.includes('emergencytradesmen.net');
-                                                return (
-                                                    <a
-                                                        {...props}
-                                                        className={`font - semibold text - gold no - underline hover: underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
-                                                    >
-                                                        {props.children}
-                                                        {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
-                                                    </a>
-                                                );
-                                            },
-                                            blockquote: ({ node, ...props }) => (
-                                                <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
-                                            ),
-                                            // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
-                                            img: ({ node, ...props }) => (
-                                                <div className="my-12 w-full flex justify-center">
-                                                    <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
-                                                        <img
-                                                            {...props}
-                                                            className="w-full h-auto max-h-[800px] object-contain mx-auto"
-                                                            loading="lazy"
-                                                        />
-                                                    </div>
-                                                    {props.title && (
-                                                        <p className="text-center text-sm text-foreground/70 mt-3 italic">
-                                                            {props.title}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            ),
-                                            table: ({ node, ...props }) => (
-                                                <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
-                                                    <table {...props} className="w-full text-sm text-left font-body" />
-                                                </div>
-                                            ),
-                                            thead: ({ node, ...props }) => (
-                                                <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
-                                            ),
-                                            th: ({ node, ...props }) => (
-                                                <th {...props} className="px-6 py-3 tracking-wider" />
-                                            ),
-                                            td: ({ node, ...props }) => (
-                                                <td {...props} className="px-6 py-4 border-t border-border" />
-                                            ),
-                                        }}
-                                    >
-                                        {post.content || ''}
-                                    </ReactMarkdown>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    return (
+        <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
+            {/* Structured Data Construction */}
+            {(() => {
+                const baseUrl = "https://emergencytradesmen.net";
+                const postUrl = `${baseUrl} / blog / ${post.slug}`;
+                const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
 
-                    {/* Newsletter / CTA Section */}
-                    <div className="container mx-auto px-4 max-w-5xl mb-24">
-                        <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
-                            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
-                            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
+                // 1. BreadcrumbList Schema
+                const breadcrumbSchema = {
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Blog",
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": post.title,
+                            "item": postUrl
+                        }
+                    ]
+                };
 
-                            <div className="relative z-10 px-6 py-16 md:px-16 text-center">
+                // 2. BlogPosting Schema
+                const articleSchema = {
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": postUrl
+                    },
+                    "headline": post.title,
+                    "description": post.excerpt,
+                    "image": imageUrl,
+                    "author": {
+                        "@type": "Organization",
+                        "name": regionalizeText("Emergency Tradesmen UK"),
+                        "url": baseUrl,
+                        "logo": `${baseUrl} / et - logo - v2.png`
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": regionalizeText("Emergency Tradesmen UK"),
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": `${baseUrl} / et - logo - v2.png`
+                        }
+                    },
+                    "datePublished": post.published_at,
+                    "dateModified": post.published_at,
+                    "isAccessibleForFree": "true",
+                    "keywords": [
+                        ...post.title.split(' ').filter(w => w.length > 3),
+                        post.slug.includes('carbon-monoxide') ? "Carbon Monoxide Safety, CO Poisoning Symptoms, Gas Safe Register, Emergency Plumber, HVAC Safety, Boiler Repair" : "",
+                        "emergency tradesmen",
+                        "home advice",
+                        "DIY tips",
+                        "UK trades"
+                    ].filter(Boolean).join(', ')
+                };
+
+                return (
+                    <SEO
+                        title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
+                        description={post.excerpt}
+                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
+                        ogType="article"
+                        ogImage={post.cover_image || undefined}
+                        jsonLd={[breadcrumbSchema, articleSchema]}
+                    />
+                );
+            })()}
+
+            {/* Navigation Bar */}
+            <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
+                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+                    <Link
+                        to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
+                        className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                        Back to Insights
+                    </Link>
+                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-gold transition-colors">
+                        <Share2 className="w-4 h-4" />
+                    </Button>
+                </div>
+            </div>
+
+            <article>
+                {post.content.trim().startsWith('<') ? (
+                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                ) : (
+                    <>
+                        {/* Hero Section - 16:9 Strict */}
+                        <div className="relative w-full aspect-video overflow-hidden bg-secondary/30">
+                            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
+                            {post.cover_image && (
                                 <img
-                                    src="/et-logo-v2.png"
-                                    alt="Emergency Tradesmen Logo"
-                                    className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-gold/30 shadow-2xl shadow-gold/20 object-cover"
+                                    src={post.cover_image}
+                                    alt={post.title}
+                                    className="w-full h-full object-contain relative z-0"
+                                    fetchPriority="high"
+                                    loading="eager"
                                 />
-                                <h3 className="text-[22px] md:text-[32px] font-body font-bold text-foreground mb-4">
-                                    Don't Wait For An Emergency
-                                </h3>
-                                <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                                    {regionalizeText("Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.")}
-                                </p>
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
-                                        <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
-                                        <ChevronRight className="w-4 h-4 ml-2" />
-                                    </Button>
-                                    <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">
-                                        <Link to="/contact">Contact Support</Link>
-                                    </Button>
+                            )}
+
+                            <div className="absolute bottom-0 left-0 w-full z-20 pb-8 md:pb-12">
+                                <div className="container mx-auto px-4 max-w-4xl text-center">
+                                    <Badge className="mb-4 bg-gold/10 text-gold border-gold/20 hover:bg-gold/20 transition-colors uppercase tracking-widest text-[10px] px-3 py-1">
+                                        Expert Guide
+                                    </Badge>
+                                    <h1 className="text-[28px] md:text-[44px] font-body font-bold leading-[1.2] text-foreground mb-4 text-balance drop-shadow-sm">
+                                        {post.title}
+                                    </h1>
+                                    <div className="flex items-center justify-center gap-6 text-sm md:text-base text-muted-foreground">
+                                        <div className="flex items-center gap-2">
+                                            <CalendarDays className="w-4 h-4 text-gold" />
+                                            <time dateTime={post.published_at}>
+                                                {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
+                                            </time>
+                                        </div>
+                                        <div className="w-1 h-1 rounded-full bg-gold/50" />
+                                        <div className="flex items-center gap-2">
+                                            <Clock className="w-4 h-4 text-gold" />
+                                            <span>{readTime} min read</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </Card>
-                    </div>
-                </>
-            )}
-        </article>
-    </div>
-);
+                        </div>
+
+                        {/* Content Layout */}
+                        <div className="container mx-auto px-4 py-12 md:py-20">
+                            <div className="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+                                {/* Main Content Column */}
+                                <div className="lg:col-span-12">
+                                    <div className="font-body text-foreground space-y-8">
+                                        <ReactMarkdown
+                                            components={{
+                                                h1: ({ node, ...props }) => (
+                                                    <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
+                                                ),
+                                                h2: ({ node, ...props }) => (
+                                                    <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
+                                                ),
+                                                h3: ({ node, ...props }) => (
+                                                    <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
+                                                ),
+                                                p: ({ node, ...props }) => (
+                                                    <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
+                                                ),
+                                                ul: ({ node, ...props }) => (
+                                                    <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
+                                                ),
+                                                li: ({ node, ...props }) => (
+                                                    <li {...props} />
+                                                ),
+                                                a: ({ node, ...props }) => {
+                                                    const isInternal = props.href?.includes('emergencytradesmen.net');
+                                                    return (
+                                                        <a
+                                                            {...props}
+                                                            className={`font - semibold text - gold no - underline hover: underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
+                                                        >
+                                                            {props.children}
+                                                            {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
+                                                        </a>
+                                                    );
+                                                },
+                                                blockquote: ({ node, ...props }) => (
+                                                    <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
+                                                ),
+                                                // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
+                                                img: ({ node, ...props }) => (
+                                                    <div className="my-12 w-full flex justify-center">
+                                                        <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
+                                                            <img
+                                                                {...props}
+                                                                className="w-full h-auto max-h-[800px] object-contain mx-auto"
+                                                                loading="lazy"
+                                                            />
+                                                        </div>
+                                                        {props.title && (
+                                                            <p className="text-center text-sm text-foreground/70 mt-3 italic">
+                                                                {props.title}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                ),
+                                                table: ({ node, ...props }) => (
+                                                    <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
+                                                        <table {...props} className="w-full text-sm text-left font-body" />
+                                                    </div>
+                                                ),
+                                                thead: ({ node, ...props }) => (
+                                                    <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
+                                                ),
+                                                th: ({ node, ...props }) => (
+                                                    <th {...props} className="px-6 py-3 tracking-wider" />
+                                                ),
+                                                td: ({ node, ...props }) => (
+                                                    <td {...props} className="px-6 py-4 border-t border-border" />
+                                                ),
+                                            }}
+                                        >
+                                            {post.content || ''}
+                                        </ReactMarkdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Newsletter / CTA Section */}
+                        <div className="container mx-auto px-4 max-w-5xl mb-24">
+                            <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
+                                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
+                                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
+
+                                <div className="relative z-10 px-6 py-16 md:px-16 text-center">
+                                    <img
+                                        src="/et-logo-v2.png"
+                                        alt="Emergency Tradesmen Logo"
+                                        className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-gold/30 shadow-2xl shadow-gold/20 object-cover"
+                                    />
+                                    <h3 className="text-[22px] md:text-[32px] font-body font-bold text-foreground mb-4">
+                                        Don't Wait For An Emergency
+                                    </h3>
+                                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+                                        {regionalizeText("Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.")}
+                                    </p>
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
+                                            <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
+                                            <ChevronRight className="w-4 h-4 ml-2" />
+                                        </Button>
+                                        <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">
+                                            <Link to="/contact">Contact Support</Link>
+                                        </Button>
+                                    </div>
+                                </div>
+                            </Card>
+                        </div>
+                    </>
+                )}
+            </article>
+        </div>
+    );
 }

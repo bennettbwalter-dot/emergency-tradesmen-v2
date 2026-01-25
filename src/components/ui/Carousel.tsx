@@ -51,9 +51,10 @@ interface CarouselItemProps {
   trackItemOffset: number;
   x: any;
   transition: any;
+  onPlay?: () => void;
 }
 
-function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition }: CarouselItemProps) {
+function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition, onPlay }: CarouselItemProps) {
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
   const outputRange = [90, 0, -90];
   const rotateY = useTransform(x, range, outputRange, { clamp: false });
@@ -100,7 +101,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
     return (
       <motion.div
         key={`${item?.id ?? index}-${index}`}
-        className={`carousel-item ${round ? 'round' : ''} video-item`}
+        className={`carousel-item ${round ? 'round' : ''} video-item group cursor-pointer`}
         style={{
           width: itemWidth,
           height: '100%',
@@ -108,13 +109,24 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
           ...(round && { borderRadius: '50%' })
         }}
         transition={transition}
+        onClick={onPlay}
       >
-        <div className="video-wrapper bg-black">
+        <div className="video-wrapper bg-black relative">
           <img
             src={item.imageSrc}
             alt={item.title || "carousel-image"}
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="absolute top-0 left-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
           />
+
+          {/* Play Button Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-gold/90 rounded-full flex items-center justify-center shadow-lg shadow-gold/20 transform group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border-2 border-white/20">
+              <div className="border-y-[10px] border-y-transparent border-l-[18px] border-l-white ml-2" />
+            </div>
+
+            {/* Ripple Effect */}
+            <div className="absolute w-16 h-16 md:w-20 md:h-20 bg-gold/30 rounded-full animate-ping pointer-events-none" />
+          </div>
         </div>
       </motion.div>
     );
@@ -321,6 +333,11 @@ export default function Carousel({
             trackItemOffset={trackItemOffset}
             x={x}
             transition={effectiveTransition}
+            onPlay={() => {
+              if (item.imageSrc) {
+                setPosition(Math.min(position + 1, items.length - 1));
+              }
+            }}
           />
         ))}
       </motion.div>
