@@ -96,6 +96,30 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
     );
   }
 
+  if (item.imageSrc) {
+    return (
+      <motion.div
+        key={`${item?.id ?? index}-${index}`}
+        className={`carousel-item ${round ? 'round' : ''} video-item`}
+        style={{
+          width: itemWidth,
+          height: '100%',
+          rotateY: rotateY,
+          ...(round && { borderRadius: '50%' })
+        }}
+        transition={transition}
+      >
+        <div className="video-wrapper bg-black">
+          <img
+            src={item.imageSrc}
+            alt={item.title || "carousel-image"}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          />
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}

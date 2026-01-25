@@ -331,38 +331,39 @@ const Index = () => {
                 <Carousel
                   items={[
                     {
+                      title: 'How It Works',
+                      description: 'Watch our guide on how to find a tradesman.',
+                      id: 0,
+                      icon: <FiLayers className="h-4 w-4 text-white" />,
+                      imageSrc: "/images/et-tv-screen.jpg"
+                    },
+                    {
                       title: 'Picture Connect',
                       description: 'Seamlessly connect with tradesmen via images.',
-                      id: 0,
+                      id: 0.1,
                       icon: <FiLayers className="h-4 w-4 text-white" />,
                       videoSrc: "/picture-connect.mp4"
                     },
                     {
                       title: 'Drop-Down Connect',
                       description: 'Easy selection process for your specific needs.',
-                      id: 0.1,
+                      id: 0.2,
                       icon: <FiLayers className="h-4 w-4 text-white" />,
                       videoSrc: "/drop-down.mp4"
                     },
                     {
                       title: 'Describe Problem',
                       description: 'Type out your issue for quick matching.',
-                      id: 0.2,
+                      id: 0.3,
                       icon: <FiFileText className="h-4 w-4 text-white" />,
                       videoSrc: "/type.mp4"
                     },
                     {
                       title: 'Voice Agent',
                       description: 'Use voice commands to find help.',
-                      id: 0.3,
+                      id: 0.4,
                       icon: <FiCircle className="h-4 w-4 text-white" />,
                       videoSrc: "/voice.mp4"
-                    },
-                    {
-                      title: 'Coming Soon',
-                      description: 'More helpful guides are on the way.',
-                      id: 1,
-                      icon: <FiCode className="h-[16px] w-[16px] text-white" />
                     }
                   ]}
                   baseWidth={isMobile ? 340 : 640} /* Responsive width: 340px for mobile, 640px for desktop */

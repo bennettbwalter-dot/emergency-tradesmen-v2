@@ -291,14 +291,123 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                 });
                 setIsLoading(false);
                 return;
-            } else if (slug === 'emergency-repairs-guide-tenants-landlords') {
+            } else if (slug === 'carbon-monoxide-safety-guide') {
+                const isUK = settings.countryCode === 'GB';
                 setPost({
-                    id: 'static-emergency-repairs-guide',
-                    title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
-                    slug: 'emergency-repairs-guide-tenants-landlords',
-                    excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
-                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
-                    content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
+                    id: 'static-co-safety-guide',
+                    title: isUK
+                        ? 'The "Silent Killer" in Your Boiler – A Friendly Guide to Staying Safe'
+                        : 'The Invisible Threat in Your HVAC – A Friendly Guide to Staying Safe in the USA',
+                    slug: 'carbon-monoxide-safety-guide',
+                    excerpt: isUK
+                        ? 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.'
+                        : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
+                    cover_image: '/images/blog/co-safety/silent-killer.jpg',
+                    content: isUK
+                        ? `It is truly invisible: Carbon Monoxide (CO) has absolutely no taste, smell, or colour. You cannot detect it with human senses, which is why it’s called the "Silent Killer." It is produced when fuels like gas, oil, coal, or wood don't burn properly due to a lack of oxygen.
+
+### The Danger: What You Need to Know
+
+![Silent Killer](/images/blog/co-safety/silent-killer.jpg "The Silent Killer")
+
+**The "Hangover" Effect:** A major danger in the UK is misdiagnosis. Early symptoms—headaches, nausea, dizziness, and tiredness—feel exactly like the flu, a hangover, or viral fatigue. According to the [NHS](https://www.nhs.uk/conditions/carbon-monoxide-poisoning/), these signs are easily ignored, leading people to sleep it off in the very room that is poisoning them.
+
+**Hidden Flue Failures:** In many modern flats or refurbished homes, boiler flues (exhaust pipes) run through ceiling voids. If these disconnect or degrade, they can leak gas into the space above you without you seeing a thing. The [HSE](https://www.hse.gov.uk/gas/domestic/) warns that inspection hatches are often required to spot these hidden dangers.
+
+![Hidden Flue Failures](/images/blog/co-safety/hidden-flues.jpg "Hidden Flue Failures")
+
+**The "Tight Home" Problem:** We all want energy-efficient, draught-free homes. But if you block up old air bricks or install super-sealed double glazing without adding trickle vents, your older open-flued appliances might starve for oxygen, creating CO instead of safe exhaust gases.
+
+### Action Steps: Your Emergency Game Plan
+
+![Ventilate and Evacuate](/images/blog/co-safety/ventilate-evacuate.jpg "Ventilate and Evacuate")
+
+*   **Ventilate and Evacuate:** If your alarm beeps or you feel those "flu-like" symptoms vanish when you leave the house, open all windows and doors immediately. Get everyone (including pets) out into fresh air.
+*   **Stop the Source:** Turn off all gas appliances. If the meter is accessible and safe to reach (not in a cellar full of fumes), turn the Emergency Control Valve (ECV) to "OFF" (the lever should cross the pipe).
+*   **No Sparks:** Do not smoke, light matches, or even turn light switches on or off. A spark from a light switch could ignite a gas leak if one is present alongside the CO.
+*   **Call the Experts:** Dial the **National Gas Emergency Service at 0800 111 999**. They are open 24/7.
+    *   *Note: Their job is to make the property safe (usually by capping the supply). They do not repair your boiler; you will need a private engineer for that.*
+*   **Get Checked Out:** Go to A&E or your GP and explicitly mention "suspected Carbon Monoxide poisoning" so they can test your blood for carboxyhaemoglobin levels.
+
+### Regulations Section: The Rules That Keep You Safe
+
+**Gas Safe Register:** This is the big one. By law, anyone working on gas in your home must be on the [Gas Safe Register](https://www.gassaferegister.co.uk/).
+*   *Tip:* Always ask to see their ID card. Check the back to ensure they are qualified for your specific appliance (e.g., "Pipework," "Boiler," "Cooker").
+
+**Warning Notices (The "Red Card" System):** If an engineer finds a fault, they will issue a warning notice based on the [Gas Safe Industry Standard](https://www.gassaferegister.co.uk/gas-safety/home-gas-safety/gas-appliance-warning-labels/). Here is what they mean:
+1.  **ID (Immediately Dangerous):** The engineer must disconnect it. It is an immediate threat to life. Using it is illegal and deadly.
+2.  **AR (At Risk):** It has a fault that could become dangerous. The engineer will turn it off and advise you not to use it.
+3.  **NCS (Not to Current Standards):** It doesn't meet modern rules but is technically safe to use. You can upgrade it if you want, but you don't have to.
+
+**The 2022 Alarm Update:** As of October 2022, regulations require a CO alarm in **any room** used as living accommodation that has a fixed combustion appliance (like a boiler or fire). This includes rental properties!
+
+### Don't Wait For A Headache
+
+Don't wait for a headache to tell you your boiler is broken. Peace of mind is just one click away.
+
+**[Emergency Tradesmen](https://emergencytradesmen.net/)** is your shortcut to finding fully vetted, Gas Safe registered engineers who can safety-check your home today. We connect you with local experts:
+*   [Emergency Plumbers](https://emergencytradesmen.net/)
+*   [Gas Engineers](https://emergencytradesmen.net/)
+*   [Heating Specialists](https://emergencytradesmen.net/)
+                        : `Forced Air & Cracked Heat Exchangers: Most US homes use forced - air furnaces.If the "heat exchanger"(the metal chamber where fire burns) cracks from age, the blower fan can push CO directly into your ducts, pumping poison into every bedroom in the house simultaneously.The[CDC](https://www.cdc.gov/co/) warns that this can happen without any visible smoke.
+
+### The Danger: American HVAC Hazards
+
+![Silent Killer](/images/blog/co-safety/silent-killer-alt.jpg "The Silent Killer")
+
+                            ** The "Silent" Electrical Killer(Capacitors):** It’s not just gas.US HVAC units use high - voltage capacitors to start motors.These can hold a lethal charge(370V–600V) even after you cut the power to the house.
+*   * DIY Warning:* Touching these without discharging them can cause severe shock or electrocution.Leave the panel closed!
+
+                        ** Back - Drafting:** In modern, airtight homes, running a strong kitchen exhaust fan or fireplace can suck air down your furnace flue instead of letting it go up.This pulls CO back into your living room—a phenomenon highlighted by EPA indoor air quality guidelines.
+
+** Portable Generators:** Never, ever run a generator in the garage or basement.Even with the door open, CO can build up to lethal levels in minutes, a major cause of poisoning according to the[CPSC](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center).
+
+### Action Steps: Protocol for US Homeowners
+
+![Ventilate and Evacuate](/images/blog / co - safety / ventilate - evacuate.jpg "Ventilate and Evacuate")
+
+                    *   ** Get Out & Call 911:** If your alarm sounds, evacuate immediately.Do not open windows to "air it out" before leaving—just get out.Call 911 from a mobile phone or neighbor's house. As noted by FEMA, fire departments carry special meters to find the source.
+                        *   ** Understanding the "Red Tag":** If a technician finds a danger, they will place a Red Tag on your unit.
+    *   ** Type A(Immediate):** The gas is shut off and capped.There is a verified leak or crack.Do not turn it back on—it is a life - safety hazard.
+    *   ** Type B(Correction Needed):** Something is wrong(like a code violation), but it's not leaking yet. You usually have a grace period to fix it before the utility cuts service.
+                    *   ** Do Not DIY the Repair:** Removing a Red Tag yourself is often illegal and voids your home insurance.You need a signed "affidavit of repair" from a licensed pro to restore service.
+
+### Regulations Section: Navigating the Rules
+
+![Hidden Dangers](/images/blog/co-safety/hidden-flues-alt.jpg "Hidden Dangers")
+
+                    ** State Licensing Matters:** Unlike the UK's national system, the US licenses by state.
+                        *   ** California:** Look for a C - 20 HVAC license on the[CSLB](https://www.cslb.ca.gov/).
+*   ** Texas:** Look for a license from the[TDLR](https://www.tdlr.texas.gov/).
+*   ** Always Check:** Verify the license is active and carries insurance.
+
+** Alarm Placement:** The[CPSC](https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center) recommends CO alarms on every level of the home and outside each sleeping area. If you have a basement with a bedroom, put one there too.
+
+** Workplace vs.Home Limits:** Don't rely on "workplace" safety numbers.
+                        *   ** OSHA(Workplace):** Allows up to 50 ppm(parts per million) for healthy workers over 8 hours.
+*   ** Residential Reality:** Exposure to much lower levels over time can harm children, the elderly, or pets.Your home alarm is designed to protect you while you sleep!
+
+### A Red Tag is Scary, But Ignoring It Is Worse
+
+A Red Tag on your furnace is scary, but ignoring it is worse.Don't gamble with your family's safety.
+
+** [Emergency Tradesmen](https://emergencytradesmen.net/)** connects you instantly with verified, licensed US contractors who can fix the problem and get your heat back on safely.
+* [Emergency HVAC Repair](https://emergencytradesmen.net/)
+* [Local Plumbers](https://emergencytradesmen.net/)
+* [Electrical Safety Experts](https://emergencytradesmen.net/)`,
+                            published_at: new Date().toISOString(),
+                            created_at: new Date().toISOString()
+                });
+    setIsLoading(false);
+    return;
+} else if (slug === 'emergency-repairs-guide-tenants-landlords') {
+    setPost({
+        id: 'static-emergency-repairs-guide',
+        title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
+        slug: 'emergency-repairs-guide-tenants-landlords',
+        excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
+        cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
+        content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
 
 ## 🚨 What Counts as an "Emergency"?
 
@@ -390,324 +499,325 @@ If you have reported an emergency and the landlord is ignoring you:
 *   [Citizens Advice](https://www.citizensadvice.org.uk/)
 *   [Housing Ombudsman](https://www.housing-ombudsman.org.uk/) (For complaints about social landlords)
 `),
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                });
-                setIsLoading(false);
-                return;
-            }
+        published_at: new Date().toISOString(),
+        created_at: new Date().toISOString()
+    });
+    setIsLoading(false);
+    return;
+}
 
-            const { data, error } = await supabase
-                .from('posts')
-                .select('*')
-                .eq('slug', slug)
-                .single();
+const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('slug', slug)
+    .single();
 
-            if (!error && data) {
-                setPost({
-                    ...data,
-                    title: regionalizeText(data.title),
-                    excerpt: regionalizeText(data.excerpt),
-                    content: regionalizeText(data.content)
-                });
-            }
-            setIsLoading(false);
+if (!error && data) {
+    setPost({
+        ...data,
+        title: regionalizeText(data.title),
+        excerpt: regionalizeText(data.excerpt),
+        content: regionalizeText(data.content)
+    });
+}
+setIsLoading(false);
         }
 
-        loadPost();
+loadPost();
     }, [slug]);
 
-    if (isLoading) {
-        return (
-            <div className="min-h-screen bg-background animate-pulse">
-                <div className="h-[60vh] bg-secondary/30 w-full" />
-                <div className="container mx-auto px-4 py-12 max-w-4xl space-y-8">
-                    <div className="h-12 bg-secondary rounded w-3/4 mx-auto" />
-                    <div className="h-4 bg-secondary rounded w-1/4 mx-auto" />
-                    <div className="space-y-4 mt-12">
-                        <div className="h-4 bg-secondary rounded w-full" />
-                        <div className="h-4 bg-secondary rounded w-full" />
-                        <div className="h-4 bg-secondary rounded w-5/6" />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    if (!post) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
-                <h1 className="text-3xl font-display font-bold mb-4">Article Not Found</h1>
-                <p className="text-muted-foreground mb-8">The article you are looking for does not exist.</p>
-                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    <Link to="/blog">Back to Blog</Link>
-                </Button>
-            </div>
-        );
-    }
-
-    // Calculate read time
-    const wordCount = post.content?.split(/\s+/).length || 0;
-    const readTime = Math.max(1, Math.ceil(wordCount / 200));
-
-    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
-
+if (isLoading) {
     return (
-        <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
-            {/* Structured Data Construction */}
-            {(() => {
-                const baseUrl = "https://emergencytradesmen.net";
-                const postUrl = `${baseUrl} / blog / ${post.slug}`;
-                const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
-
-                // 1. BreadcrumbList Schema
-                const breadcrumbSchema = {
-                    "@context": "https://schema.org",
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Home",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 2,
-                            "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 3,
-                            "name": post.title,
-                            "item": postUrl
-                        }
-                    ]
-                };
-
-                // 2. BlogPosting Schema
-                const articleSchema = {
-                    "@context": "https://schema.org",
-                    "@type": "BlogPosting",
-                    "mainEntityOfPage": {
-                        "@type": "WebPage",
-                        "@id": postUrl
-                    },
-                    "headline": post.title,
-                    "description": post.excerpt,
-                    "image": imageUrl,
-                    "author": {
-                        "@type": "Organization",
-                        "name": regionalizeText("Emergency Tradesmen UK"),
-                        "url": baseUrl,
-                        "logo": `${baseUrl} / et - logo - v2.png`
-                    },
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": regionalizeText("Emergency Tradesmen UK"),
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": `${baseUrl} / et - logo - v2.png`
-                        }
-                    },
-                    "datePublished": post.published_at,
-                    "dateModified": post.published_at,
-                    "isAccessibleForFree": "true",
-                    "keywords": [
-                        ...post.title.split(' ').filter(w => w.length > 3),
-                        "emergency tradesmen",
-                        "home advice",
-                        "DIY tips",
-                        "UK trades"
-                    ].join(', ')
-                };
-
-                return (
-                    <SEO
-                        title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
-                        description={post.excerpt}
-                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
-                        ogType="article"
-                        ogImage={post.cover_image || undefined}
-                        jsonLd={[breadcrumbSchema, articleSchema]}
-                    />
-                );
-            })()}
-
-            {/* Navigation Bar */}
-            <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
-                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
-                        className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
-                    >
-                        <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                        Back to Insights
-                    </Link>
-                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-gold transition-colors">
-                        <Share2 className="w-4 h-4" />
-                    </Button>
+        <div className="min-h-screen bg-background animate-pulse">
+            <div className="h-[60vh] bg-secondary/30 w-full" />
+            <div className="container mx-auto px-4 py-12 max-w-4xl space-y-8">
+                <div className="h-12 bg-secondary rounded w-3/4 mx-auto" />
+                <div className="h-4 bg-secondary rounded w-1/4 mx-auto" />
+                <div className="space-y-4 mt-12">
+                    <div className="h-4 bg-secondary rounded w-full" />
+                    <div className="h-4 bg-secondary rounded w-full" />
+                    <div className="h-4 bg-secondary rounded w-5/6" />
                 </div>
             </div>
-
-            <article>
-                {post.content.trim().startsWith('<') ? (
-                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                ) : (
-                    <>
-                        {/* Hero Section - 16:9 Strict */}
-                        <div className="relative w-full aspect-video overflow-hidden bg-secondary/30">
-                            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
-                            {post.cover_image && (
-                                <img
-                                    src={post.cover_image}
-                                    alt={post.title}
-                                    className="w-full h-full object-contain relative z-0"
-                                    fetchPriority="high"
-                                    loading="eager"
-                                />
-                            )}
-
-                            <div className="absolute bottom-0 left-0 w-full z-20 pb-8 md:pb-12">
-                                <div className="container mx-auto px-4 max-w-4xl text-center">
-                                    <Badge className="mb-4 bg-gold/10 text-gold border-gold/20 hover:bg-gold/20 transition-colors uppercase tracking-widest text-[10px] px-3 py-1">
-                                        Expert Guide
-                                    </Badge>
-                                    <h1 className="text-[28px] md:text-[44px] font-body font-bold leading-[1.2] text-foreground mb-4 text-balance drop-shadow-sm">
-                                        {post.title}
-                                    </h1>
-                                    <div className="flex items-center justify-center gap-6 text-sm md:text-base text-muted-foreground">
-                                        <div className="flex items-center gap-2">
-                                            <CalendarDays className="w-4 h-4 text-gold" />
-                                            <time dateTime={post.published_at}>
-                                                {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
-                                            </time>
-                                        </div>
-                                        <div className="w-1 h-1 rounded-full bg-gold/50" />
-                                        <div className="flex items-center gap-2">
-                                            <Clock className="w-4 h-4 text-gold" />
-                                            <span>{readTime} min read</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Content Layout */}
-                        <div className="container mx-auto px-4 py-12 md:py-20">
-                            <div className="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-                                {/* Main Content Column */}
-                                <div className="lg:col-span-12">
-                                    <div className="font-body text-foreground space-y-8">
-                                        <ReactMarkdown
-                                            components={{
-                                                h1: ({ node, ...props }) => (
-                                                    <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
-                                                ),
-                                                h2: ({ node, ...props }) => (
-                                                    <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
-                                                ),
-                                                h3: ({ node, ...props }) => (
-                                                    <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
-                                                ),
-                                                p: ({ node, ...props }) => (
-                                                    <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
-                                                ),
-                                                ul: ({ node, ...props }) => (
-                                                    <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
-                                                ),
-                                                li: ({ node, ...props }) => (
-                                                    <li {...props} />
-                                                ),
-                                                a: ({ node, ...props }) => {
-                                                    const isInternal = props.href?.includes('emergencytradesmen.net');
-                                                    return (
-                                                        <a
-                                                            {...props}
-                                                            className={`font - semibold text - gold no - underline hover: underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
-                                                        >
-                                                            {props.children}
-                                                            {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
-                                                        </a>
-                                                    );
-                                                },
-                                                blockquote: ({ node, ...props }) => (
-                                                    <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
-                                                ),
-                                                // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
-                                                img: ({ node, ...props }) => (
-                                                    <div className="my-12 w-full flex justify-center">
-                                                        <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
-                                                            <img
-                                                                {...props}
-                                                                className="w-full h-auto max-h-[800px] object-contain mx-auto"
-                                                                loading="lazy"
-                                                            />
-                                                        </div>
-                                                        {props.title && (
-                                                            <p className="text-center text-sm text-foreground/70 mt-3 italic">
-                                                                {props.title}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                ),
-                                                table: ({ node, ...props }) => (
-                                                    <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
-                                                        <table {...props} className="w-full text-sm text-left font-body" />
-                                                    </div>
-                                                ),
-                                                thead: ({ node, ...props }) => (
-                                                    <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
-                                                ),
-                                                th: ({ node, ...props }) => (
-                                                    <th {...props} className="px-6 py-3 tracking-wider" />
-                                                ),
-                                                td: ({ node, ...props }) => (
-                                                    <td {...props} className="px-6 py-4 border-t border-border" />
-                                                ),
-                                            }}
-                                        >
-                                            {post.content || ''}
-                                        </ReactMarkdown>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Newsletter / CTA Section */}
-                        <div className="container mx-auto px-4 max-w-5xl mb-24">
-                            <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
-                                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
-                                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
-
-                                <div className="relative z-10 px-6 py-16 md:px-16 text-center">
-                                    <img
-                                        src="/et-logo-v2.png"
-                                        alt="Emergency Tradesmen Logo"
-                                        className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-gold/30 shadow-2xl shadow-gold/20 object-cover"
-                                    />
-                                    <h3 className="text-[22px] md:text-[32px] font-body font-bold text-foreground mb-4">
-                                        Don't Wait For An Emergency
-                                    </h3>
-                                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                                        {regionalizeText("Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.")}
-                                    </p>
-                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                        <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
-                                            <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
-                                            <ChevronRight className="w-4 h-4 ml-2" />
-                                        </Button>
-                                        <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">
-                                            <Link to="/contact">Contact Support</Link>
-                                        </Button>
-                                    </div>
-                                </div>
-                            </Card>
-                        </div>
-                    </>
-                )}
-            </article>
         </div>
     );
+}
+
+if (!post) {
+    return (
+        <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
+            <h1 className="text-3xl font-display font-bold mb-4">Article Not Found</h1>
+            <p className="text-muted-foreground mb-8">The article you are looking for does not exist.</p>
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                <Link to="/blog">Back to Blog</Link>
+            </Button>
+        </div>
+    );
+}
+
+// Calculate read time
+const wordCount = post.content?.split(/\s+/).length || 0;
+const readTime = Math.max(1, Math.ceil(wordCount / 200));
+
+const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
+
+return (
+    <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
+        {/* Structured Data Construction */}
+        {(() => {
+            const baseUrl = "https://emergencytradesmen.net";
+            const postUrl = `${baseUrl} / blog / ${post.slug}`;
+            const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
+
+            // 1. BreadcrumbList Schema
+            const breadcrumbSchema = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Blog",
+                        "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": post.title,
+                        "item": postUrl
+                    }
+                ]
+            };
+
+            // 2. BlogPosting Schema
+            const articleSchema = {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": postUrl
+                },
+                "headline": post.title,
+                "description": post.excerpt,
+                "image": imageUrl,
+                "author": {
+                    "@type": "Organization",
+                    "name": regionalizeText("Emergency Tradesmen UK"),
+                    "url": baseUrl,
+                    "logo": `${baseUrl} / et - logo - v2.png`
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": regionalizeText("Emergency Tradesmen UK"),
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${baseUrl} / et - logo - v2.png`
+                    }
+                },
+                "datePublished": post.published_at,
+                "dateModified": post.published_at,
+                "isAccessibleForFree": "true",
+                "keywords": [
+                    ...post.title.split(' ').filter(w => w.length > 3),
+                    post.slug.includes('carbon-monoxide') ? "Carbon Monoxide Safety, CO Poisoning Symptoms, Gas Safe Register, Emergency Plumber, HVAC Safety, Boiler Repair" : "",
+                    "emergency tradesmen",
+                    "home advice",
+                    "DIY tips",
+                    "UK trades"
+                ].filter(Boolean).join(', ')
+            };
+
+            return (
+                <SEO
+                    title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
+                    description={post.excerpt}
+                    canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
+                    ogType="article"
+                    ogImage={post.cover_image || undefined}
+                    jsonLd={[breadcrumbSchema, articleSchema]}
+                />
+            );
+        })()}
+
+        {/* Navigation Bar */}
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
+            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+                <Link
+                    to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
+                    className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
+                >
+                    <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                    Back to Insights
+                </Link>
+                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-gold transition-colors">
+                    <Share2 className="w-4 h-4" />
+                </Button>
+            </div>
+        </div>
+
+        <article>
+            {post.content.trim().startsWith('<') ? (
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            ) : (
+                <>
+                    {/* Hero Section - 16:9 Strict */}
+                    <div className="relative w-full aspect-video overflow-hidden bg-secondary/30">
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
+                        {post.cover_image && (
+                            <img
+                                src={post.cover_image}
+                                alt={post.title}
+                                className="w-full h-full object-contain relative z-0"
+                                fetchPriority="high"
+                                loading="eager"
+                            />
+                        )}
+
+                        <div className="absolute bottom-0 left-0 w-full z-20 pb-8 md:pb-12">
+                            <div className="container mx-auto px-4 max-w-4xl text-center">
+                                <Badge className="mb-4 bg-gold/10 text-gold border-gold/20 hover:bg-gold/20 transition-colors uppercase tracking-widest text-[10px] px-3 py-1">
+                                    Expert Guide
+                                </Badge>
+                                <h1 className="text-[28px] md:text-[44px] font-body font-bold leading-[1.2] text-foreground mb-4 text-balance drop-shadow-sm">
+                                    {post.title}
+                                </h1>
+                                <div className="flex items-center justify-center gap-6 text-sm md:text-base text-muted-foreground">
+                                    <div className="flex items-center gap-2">
+                                        <CalendarDays className="w-4 h-4 text-gold" />
+                                        <time dateTime={post.published_at}>
+                                            {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
+                                        </time>
+                                    </div>
+                                    <div className="w-1 h-1 rounded-full bg-gold/50" />
+                                    <div className="flex items-center gap-2">
+                                        <Clock className="w-4 h-4 text-gold" />
+                                        <span>{readTime} min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Content Layout */}
+                    <div className="container mx-auto px-4 py-12 md:py-20">
+                        <div className="max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+                            {/* Main Content Column */}
+                            <div className="lg:col-span-12">
+                                <div className="font-body text-foreground space-y-8">
+                                    <ReactMarkdown
+                                        components={{
+                                            h1: ({ node, ...props }) => (
+                                                <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
+                                            ),
+                                            h2: ({ node, ...props }) => (
+                                                <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
+                                            ),
+                                            h3: ({ node, ...props }) => (
+                                                <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
+                                            ),
+                                            p: ({ node, ...props }) => (
+                                                <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
+                                            ),
+                                            ul: ({ node, ...props }) => (
+                                                <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
+                                            ),
+                                            li: ({ node, ...props }) => (
+                                                <li {...props} />
+                                            ),
+                                            a: ({ node, ...props }) => {
+                                                const isInternal = props.href?.includes('emergencytradesmen.net');
+                                                return (
+                                                    <a
+                                                        {...props}
+                                                        className={`font - semibold text - gold no - underline hover: underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
+                                                    >
+                                                        {props.children}
+                                                        {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
+                                                    </a>
+                                                );
+                                            },
+                                            blockquote: ({ node, ...props }) => (
+                                                <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
+                                            ),
+                                            // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
+                                            img: ({ node, ...props }) => (
+                                                <div className="my-12 w-full flex justify-center">
+                                                    <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
+                                                        <img
+                                                            {...props}
+                                                            className="w-full h-auto max-h-[800px] object-contain mx-auto"
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                    {props.title && (
+                                                        <p className="text-center text-sm text-foreground/70 mt-3 italic">
+                                                            {props.title}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ),
+                                            table: ({ node, ...props }) => (
+                                                <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
+                                                    <table {...props} className="w-full text-sm text-left font-body" />
+                                                </div>
+                                            ),
+                                            thead: ({ node, ...props }) => (
+                                                <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
+                                            ),
+                                            th: ({ node, ...props }) => (
+                                                <th {...props} className="px-6 py-3 tracking-wider" />
+                                            ),
+                                            td: ({ node, ...props }) => (
+                                                <td {...props} className="px-6 py-4 border-t border-border" />
+                                            ),
+                                        }}
+                                    >
+                                        {post.content || ''}
+                                    </ReactMarkdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Newsletter / CTA Section */}
+                    <div className="container mx-auto px-4 max-w-5xl mb-24">
+                        <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
+                            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
+                            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-gold/10 rounded-full blur-3xl opacity-50" />
+
+                            <div className="relative z-10 px-6 py-16 md:px-16 text-center">
+                                <img
+                                    src="/et-logo-v2.png"
+                                    alt="Emergency Tradesmen Logo"
+                                    className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-gold/30 shadow-2xl shadow-gold/20 object-cover"
+                                />
+                                <h3 className="text-[22px] md:text-[32px] font-body font-bold text-foreground mb-4">
+                                    Don't Wait For An Emergency
+                                </h3>
+                                <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+                                    {regionalizeText("Connect with verified local experts instantly. Whether it's a burst pipe or a boiler breakdown, we have professionals ready to help 24/7.")}
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
+                                        <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
+                                        <ChevronRight className="w-4 h-4 ml-2" />
+                                    </Button>
+                                    <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">
+                                        <Link to="/contact">Contact Support</Link>
+                                    </Button>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                </>
+            )}
+        </article>
+    </div>
+);
 }

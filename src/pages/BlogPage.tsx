@@ -70,13 +70,27 @@ export default function BlogPage() {
                     created_at: new Date().toISOString()
                 };
 
+                const staticPostCO: BlogPost = {
+                    id: 'static-co-safety-guide',
+                    title: settings.countryCode === 'GB'
+                        ? 'The "Silent Killer" in Your Boiler – A Friendly Guide to Staying Safe'
+                        : 'The Invisible Threat in Your HVAC – A Friendly Guide to Staying Safe in the USA',
+                    slug: 'carbon-monoxide-safety-guide',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.'
+                        : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
+                    cover_image: '/images/blog/co-safety/silent-killer.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug).map(p => ({
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug).map(p => ({
                     ...p,
                     title: regionalizeText(p.title),
                     excerpt: regionalizeText(p.excerpt)
                 }));
-                setPosts([staticPost, staticPost2, ...uniqueData]);
+                setPosts([staticPostCO, staticPost, staticPost2, ...uniqueData]);
             }
             setIsLoading(false);
         }
