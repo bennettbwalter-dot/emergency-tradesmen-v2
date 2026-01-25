@@ -119,10 +119,11 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
     if (searchCity && searchCity.trim() !== '') {
         // Handle both hyphenated (URL-style) and space-separated (DB-style) city names
         const cityWithSpaces = searchCity.replace(/-/g, ' ');
+        // Use flexible matching - match city OR coverage_areas contains this city
         if (searchCity.includes('-')) {
-            query = query.or(`city.ilike."${searchCity}",city.ilike."${cityWithSpaces}"`);
+            query = query.or(`city.ilike.%${searchCity}%,city.ilike.%${cityWithSpaces}%,coverage_areas.cs.{${cityWithSpaces}}`);
         } else {
-            query = query.ilike('city', searchCity);
+            query = query.or(`city.ilike.%${searchCity}%,coverage_areas.cs.{${searchCity}}`);
         }
     }
 
@@ -133,11 +134,29 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         return staticBusinesses;
     }
 
+    // FALLBACK: If no results found with city filter, try without city filter
+    let allBusinesses = supabaseBusinesses || [];
+    if (allBusinesses.length === 0 && searchCity) {
+        console.log('[fetchBusinesses] No results for city, trying broader query without city filter');
+        const fallbackQuery = supabase
+            .from('businesses')
+            .select('*, business_photos(*)')
+            .eq('trade', normalizedTrade)
+            .eq('country_code', countryCode.toUpperCase())
+            .limit(50);
+
+        const { data: fallbackData, error: fallbackError } = await fallbackQuery;
+        if (!fallbackError && fallbackData) {
+            allBusinesses = fallbackData;
+            console.log(`[fetchBusinesses] Fallback found ${allBusinesses.length} businesses`);
+        }
+    }
+
     const businessMap = new Map<string, Business>();
     staticBusinesses.forEach(biz => businessMap.set(biz.id, biz));
 
-    if (supabaseBusinesses) {
-        supabaseBusinesses.forEach((biz: any) => {
+    if (allBusinesses) {
+        allBusinesses.forEach((biz: any) => {
             businessMap.set(biz.id, mapBusinessData(biz));
         });
     }
