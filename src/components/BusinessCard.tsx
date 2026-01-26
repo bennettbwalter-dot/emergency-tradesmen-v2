@@ -9,6 +9,8 @@ import { Business, isBusinessAvailable } from "@/lib/businesses";
 import { useToast } from "@/components/ui/use-toast";
 import { trackEvent } from "@/lib/analytics";
 
+import ElectricBorder from "./ui/ElectricBorder";
+
 interface BusinessCardProps {
   business: Business;
   rank: number;
@@ -58,7 +60,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   const bgIndex = business.id ? Array.from(business.id).reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5 : 0;
   const bgUrl = `/backgrounds/card-bg-${bgIndex}.png`;
 
-  return (
+  const CardContent = (
     <div
       className={`group relative rounded-2xl border transition-all duration-500 overflow-hidden h-full flex flex-col ${isPremium
         ? "bg-emerald-50/50 border-emerald-200 shadow-[0_8px_30px_rgb(16,185,129,0.1)] ring-1 ring-emerald-500/10 hover:border-gold hover:border-2"
@@ -297,4 +299,14 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       </div>
     </div>
   );
+
+  if (isPremium) {
+    return (
+      <ElectricBorder color="#FFD700" className="h-full" borderRadius={16}>
+        {CardContent}
+      </ElectricBorder>
+    );
+  }
+
+  return CardContent;
 }
