@@ -31,6 +31,7 @@ import Carousel from "@/components/ui/Carousel";
 import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi';
 import { AnimatedBeamDemo } from "@/components/AnimatedBeamDemo";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
+import { MacbookScroll } from "@/components/ui/macbook-scroll.tsx";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -317,17 +318,18 @@ const Index = () => {
 
           {/* How It Works Section */}
 
-          <section className="container-wide py-16 border-t border-border/30">
-            <div className="text-center mb-12">
-              <p className="text-gold uppercase tracking-luxury text-sm mb-4">Simple Process</p>
-              <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
-                How to Find a {settings.tradeTerm} Near You
-              </h2>
-            </div>
+          <section className="container-wide pt-0 pb-16 border-t font-display border-border/30">
 
-            {/* Carousel Integration */}
-            <div className="flex justify-center w-full mb-16 relative z-20 pointer-events-auto">
-              <div className="relative h-[240px] md:h-[400px]">
+
+            <div className="w-full overflow-hidden">
+              <MacbookScroll
+                title={
+                  <span className="text-4xl md:text-5xl font-display tracking-wide">
+                    The Modern Way to verify <br /> <span className="text-gold">Trusted Tradesmen</span>
+                  </span>
+                }
+                showGradient={false}
+              >
                 <Carousel
                   items={[
                     {
@@ -366,14 +368,13 @@ const Index = () => {
                       videoSrc: "/voice.mp4"
                     }
                   ]}
-                  baseWidth={isMobile ? 340 : 640} /* Responsive width: 340px for mobile, 640px for desktop */
-                  autoplay={false}
-                  autoplayDelay={3000}
-                  pauseOnHover={false}
-                  loop={false}
+                  baseWidth={480}
+                  autoplay={false} // Disable autoplay to let user control on laptop
+                  pauseOnHover={true}
+                  loop={true}
                   round={false}
                 />
-              </div>
+              </MacbookScroll>
             </div>
 
 

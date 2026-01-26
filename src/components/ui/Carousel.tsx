@@ -89,6 +89,8 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
               src={item.videoSrc}
               title={item.title || "video-player"}
               controls
+              playsInline
+              preload="metadata"
               className="absolute top-0 left-0 w-full h-full object-cover"
             />
           )}
