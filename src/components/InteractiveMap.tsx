@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getViewState } from '@/lib/mapUtils';
@@ -36,44 +36,82 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
     const effectiveCountryCode = propCountryCode || (isUrlUS ? 'US' : 'GB');
     const countryCode = effectiveCountryCode;
 
-    // Get View State
-    const { center, zoom } = getViewState(city, countryCode);
+    // Get initial View State from static list
+    const initialViewState = getViewState(city, countryCode);
+    const [viewState, setViewState] = useState(initialViewState);
 
-    // Initialize Map
+    // Effect to update view state when props change or via Geocoding
+    useEffect(() => {
+        // 1. Try static local lookup first (fastest)
+        const staticView = getViewState(city, countryCode);
+
+        // Check if static lookup returned a generic country center (meaning city wasn't found in local list)
+        // We compare basic lat/lng values to detect default fallbacks
+        const isGenericUK = staticView.center.lat === 54.5 && staticView.center.lng === -4.0;
+        const isGenericUS = staticView.center.lat === 39.8283 && staticView.center.lng === -98.5795;
+
+        // If we found a specific city in our static list, use it immediately
+        if (!isGenericUK && !isGenericUS) {
+            setViewState(staticView);
+            return;
+        }
+
+        // 2. If generic, try detailed Geocoding via Nominatim
+        console.log(`Map: Static lookup failed for ${city}, trying Nominatim...`);
+        const fetchCoordinates = async () => {
+            try {
+                // Throttle/Debounce check could go here, but for now direct call
+                const query = `${city}, ${countryCode === 'US' ? 'USA' : 'UK'}`;
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
+                const data = await response.json();
+
+                if (data && data.length > 0) {
+                    const lat = parseFloat(data[0].lat);
+                    const lon = parseFloat(data[0].lon);
+                    console.log(`Map: Found coords for ${city}:`, { lat, lon });
+                    setViewState({
+                        center: { lat, lng: lon },
+                        zoom: 12 // Good city-level zoom from geocode match
+                    });
+                } else {
+                    console.warn(`Map: No results for ${city}, staying at default.`);
+                    setViewState(staticView); // Fallback to country view
+                }
+            } catch (err) {
+                console.error("Map: Geocoding error", err);
+                setViewState(staticView);
+            }
+        };
+
+        fetchCoordinates();
+    }, [city, countryCode]);
+
+    // Initialize Map Instance and update its view when viewState changes
     useEffect(() => {
         if (!mapContainerRef.current) return;
 
-        // If map already initialized, just return (view update handled in separate effect)
-        if (mapInstanceRef.current) return;
+        if (!mapInstanceRef.current) {
+            // Initialize map only once
+            const map = L.map(mapContainerRef.current).setView([viewState.center.lat, viewState.center.lng], viewState.zoom);
 
-        console.log("Initializing Leaflet Map...");
-        const map = L.map(mapContainerRef.current).setView([center.lat, center.lng], zoom);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            }).addTo(map);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }).addTo(map);
+            mapInstanceRef.current = map;
+        } else {
+            // Update view if map already exists
+            mapInstanceRef.current.setView([viewState.center.lat, viewState.center.lng], viewState.zoom);
+        }
 
-        mapInstanceRef.current = map;
-
-        // Cleanup
+        // Cleanup function for when the component unmounts
         return () => {
-            // In strict mode, this might cleanup too early if we aren't careful, 
-            // but usually we want to destroy on unmount.
-            // However, for hot reload, we should check.
             if (mapInstanceRef.current) {
                 mapInstanceRef.current.remove();
                 mapInstanceRef.current = null;
             }
         };
-    }, []); // Run once on mount
-
-    // Update View
-    useEffect(() => {
-        if (!mapInstanceRef.current) return;
-        const map = mapInstanceRef.current;
-
-        map.setView([center.lat, center.lng], zoom);
-    }, [center.lat, center.lng, zoom]); // Update when target changes
+    }, [viewState]); // Depend on viewState to initialize and update map
 
     // Update Markers
     useEffect(() => {
