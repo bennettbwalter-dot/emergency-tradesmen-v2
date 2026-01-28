@@ -693,22 +693,19 @@ export default function TradeCityPage() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {serviceAreas.map((area, i) => {
-                  const isCity = cities.includes(area as any);
-                  if (isCity) {
-                    return (
-                      <Link
-                        key={i}
-                        to={`/emergency-${tradeInfo.slug}/${area.toLowerCase()}`}
-                        className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground hover:bg-gold/10 hover:border-gold/30 hover:text-gold transition-colors"
-                      >
-                        {area}
-                      </Link>
-                    );
-                  }
+                  const areaSlug = area.toLowerCase().replace(/\s+/g, '-');
+                  const linkPath = actualCountry === 'US'
+                    ? `/us/emergency-${tradeInfo.slug}/${areaSlug}`
+                    : `/emergency-${tradeInfo.slug}/${areaSlug}`;
+
                   return (
-                    <div key={i} className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground">
+                    <Link
+                      key={i}
+                      to={linkPath}
+                      className="px-3 py-1 bg-background rounded-full border border-border text-sm text-muted-foreground hover:bg-gold/10 hover:border-gold/30 hover:text-gold transition-colors"
+                    >
                       {area}
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
