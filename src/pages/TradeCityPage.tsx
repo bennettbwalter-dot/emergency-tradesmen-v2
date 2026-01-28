@@ -295,31 +295,62 @@ export default function TradeCityPage() {
 
   const postcode = getPostcodeForCity(cityName);
 
+  // Schema.org Type Mapping
+  const tradeSchemaTypeMap: Record<string, string> = {
+    'plumber': 'Plumber',
+    'electrician': 'Electrician',
+    'locksmith': 'Locksmith',
+    'gas-engineer': 'Plumber', // Fallback for gas
+    'drain-specialist': 'Plumber', // Fallback
+    'glazier': 'HomeAndConstructionBusiness', // No direct Glazier type
+    'breakdown': 'AutoRepair', // Closest match
+    'default': 'HomeAndConstructionBusiness'
+  };
+
+  const schemaType = tradeSchemaTypeMap[tradeInfo.slug] || tradeSchemaTypeMap['default'];
+
   const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": schemaType,
     "@id": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
     name: `Emergency ${tradeInfo.name} ${cityName}`,
     description: `24/7 emergency ${tradeInfo.name.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
-    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456", // General contact or dynamic if available
+    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456",
     url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
-    "serviceType": `Emergency ${tradeInfo.name}`,
-    "provider": {
-      "@type": "Organization",
-      "name": `Emergency Tradesmen ${countryCode?.toUpperCase() === 'US' ? 'US' : 'UK'}`,
-      "url": "https://emergencytradesmen.net"
+    "priceRange": emergencyPriceRange,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": cityName,
+      "addressCountry": countryCode?.toUpperCase() || "GB",
+      ...(postcode ? { "postalCode": postcode } : {})
     },
-
-    areaServed: {
-      "@type": "City",
-      name: cityName,
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": cityName,
-        "addressCountry": countryCode?.toUpperCase() || "GB",
-        ...(postcode ? { "postalCode": postcode } : {})
+    // Enhanced for Stars in SERP
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": reviewStats.averageRating.toFixed(1),
+      "reviewCount": reviewStats.totalReviews,
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": realReviews.map(review => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": review.userName
+      },
+      "datePublished": review.date,
+      "reviewBody": review.comment,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.rating,
+        "bestRating": "5",
+        "worstRating": "1"
       }
+    })),
+    "areaServed": {
+      "@type": "City",
+      name: cityName
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
