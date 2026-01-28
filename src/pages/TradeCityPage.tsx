@@ -772,6 +772,8 @@ export default function TradeCityPage() {
                 src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop"
                 alt="Professional Tradesperson"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 

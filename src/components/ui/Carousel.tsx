@@ -118,6 +118,8 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
             src={item.imageSrc}
             alt={item.title || "carousel-image"}
             className="absolute top-0 left-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Play Button Overlay */}
