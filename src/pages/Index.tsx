@@ -168,7 +168,7 @@ const Index = () => {
 
             {/* Background layers */}
 
-            <div className="absolute left-0 right-0 bottom-0 top-[-200px] h-[calc(100%+200px)] md:inset-0 md:h-full z-0 pointer-events-auto">
+            <div className="hidden md:block absolute left-0 right-0 bottom-0 top-[-200px] h-[calc(100%+200px)] md:inset-0 md:h-full z-0 pointer-events-auto">
               <Orb
                 hoverIntensity={2}
                 rotateOnHover
