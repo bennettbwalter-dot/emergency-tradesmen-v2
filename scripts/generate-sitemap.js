@@ -33,11 +33,44 @@ const usTrades = [
     "plumber", "electrician", "locksmith", "drain-specialist", "glazier", "roofer", "water-restoration", "breakdown"
 ];
 
-// Use fs to read the JSON file to ensure compatibility across Node versions
-const ukCitiesPath = path.join(__dirname, '../src/lib/uk_cities.json');
+// 1. Load US Data (Complex Structure)
 const usCitiesPath = path.join(__dirname, '../src/lib/us_cities.json');
-const ukCities = JSON.parse(fs.readFileSync(ukCitiesPath, 'utf8'));
-const usCities = JSON.parse(fs.readFileSync(usCitiesPath, 'utf8'));
+const usData = JSON.parse(fs.readFileSync(usCitiesPath, 'utf8'));
+
+// Flatten US Cities
+let usCities = [];
+if (usData && usData.states) {
+    usData.states.forEach(state => {
+        if (state.metros) {
+            state.metros.forEach(metro => {
+                if (metro.cities) {
+                    metro.cities.forEach(city => {
+                        if (city.name) usCities.push(city.name);
+                        if (city.suburbs) {
+                            city.suburbs.forEach(sub => {
+                                if (sub.name) usCities.push(sub.name);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+// Deduplicate
+usCities = [...new Set(usCities)];
+
+// 2. Load UK Data (Source from cityPostcodes.ts mostly, but we can't import TS)
+// Manually defining major UK cities for sitemap to avoid TS compilation issues in this script
+// This list matches the keys in cityPostcodes.ts
+const ukCities = [
+    "London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bradford", "Liverpool", "Edinburgh", "Bristol",
+    "Cardiff", "Coventry", "Nottingham", "Leicester", "Sunderland", "Belfast", "Newcastle upon Tyne", "Brighton", "Hull",
+    "Plymouth", "Stoke-on-Trent", "Wolverhampton", "Derby", "Swansea", "Southampton", "Salford", "Aberdeen", "Portsmouth",
+    "York", "Peterborough", "Dundee", "Oxford", "Cambridge", "Norwich", "Exeter", "Luton", "Milton Keynes", "Northampton",
+    "Bournemouth", "Reading", "Blackpool", "Preston", "Huddersfield", "Slough", "Swindon", "Bolton", "Oldham", "Rochdale",
+    "Doncaster", "Rotherham", "Stockport", "Wigan", "Burnley", "Blackburn", "Preston", "Worcester", "Gloucester", "Cheltenham"
+];
 
 const commonProblems = [
     "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking"
