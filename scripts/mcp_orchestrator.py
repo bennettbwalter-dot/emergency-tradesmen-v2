@@ -159,55 +159,6 @@ class YelpAPI:
             return []
         except: return "ERROR"
 
-class HereAPI:
-    @staticmethod
-    def search(api_key: str, trade: str, city: str, state: str) -> List[Dict]:
-        url = "https://discover.search.hereapi.com/v1/discover"
-        params = {
-            "q": f"{trade} in {city} {state}",
-            "apiKey": api_key,
-            "limit": 10,
-            "at": "37.0902,-95.7129"
-        }
-        try:
-            resp = requests.get(url, params=params, timeout=15)
-            if resp.status_code == 200:
-                found = []
-                for item in resp.json().get("items", []):
-                    phone = ""
-                    for c in item.get("contacts", []):
-                        if c.get("phone"):
-                            phone = re.sub(r'[^\d]', '', c["phone"][0].get("value", ""))
-                            if len(phone) >= 10: break
-                    if len(phone) == 11 and phone.startswith('1'): phone = phone[1:]
-                    
-                    if len(phone) == 10:
-                        website = ""
-                        for c in item.get("contacts", []):
-                            if c.get("www"):
-                                website = c["www"][0].get("value", "")
-                                break
-                        
-                        email = ""
-                        for c in item.get("contacts", []):
-                            if c.get("email"):
-                                email = c["email"][0].get("value", "")
-                                break
-
-                        found.append({
-                            "name": item['title'], 
-                            "phone": phone, 
-                            "source": "here",
-                            "website": website,
-                            "email": email,
-                            "address": item.get('address', {}).get('label')
-                        })
-                return found
-            if resp.status_code == 429: return "RATE_LIMIT"
-            if resp.status_code in [401, 403]: return "AUTH_ERROR"
-            return []
-        except: return "ERROR"
-
 # =============================================================================
 # ORCHESTRATOR
 # =============================================================================
@@ -245,15 +196,14 @@ class MCPOrchestrator:
                     stats["yelp"]["daily_calls"] = 0
                     stats["yelp"]["last_reset"] = today_str
                     
-                for s in ["foursquare", "here"]:
+                for s in ["foursquare"]:
                     if stats.get(s) and stats[s].get("last_reset_month") != month_str:
                         stats[s]["monthly_calls"] = 0
                         stats[s]["last_reset_month"] = month_str
                 return stats
             except: pass
         return {"yelp": {"daily_calls": 0, "last_reset": "2026-02-01"}, 
-                "foursquare": {"monthly_calls": 0, "last_reset_month": "2026-02"},
-                "here": {"monthly_calls": 0, "last_reset_month": "2026-02"}}
+                "foursquare": {"monthly_calls": 0, "last_reset_month": "2026-02"}}
 
     def _save_stats(self):
         with self.lock:
@@ -280,9 +230,8 @@ class MCPOrchestrator:
         for src in available:
             print(f"  [API] Trying {src.name}...")
             if src.name == "yelp": 
-                time.sleep(random.uniform(5.0, 8.0)) # Very strict for Yelp free tier to avoid 429s
+                time.sleep(random.uniform(10.0, 15.0)) # Super conservative for Yelp free tier to avoid 429s
                 res = YelpAPI.search(src.api_key, trade, city, state)
-            elif src.name == "here": res = HereAPI.search(src.api_key, trade, city, state)
             
             with self.lock:
                 if src.name == "yelp": self.stats["yelp"]["daily_calls"] += 1
