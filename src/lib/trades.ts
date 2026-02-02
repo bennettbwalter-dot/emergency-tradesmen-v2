@@ -13,7 +13,6 @@ export const trades = [
 ] as const;
 
 import usCityList from './us_cities.json';
-import { businessListings } from './businesses';
 import { cityPostcodes } from './cityPostcodes';
 
 // Enforce US-only cities

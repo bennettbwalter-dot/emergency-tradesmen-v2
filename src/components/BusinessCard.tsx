@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import { Mail, Star, MapPin, Phone, ShieldCheck, Zap, Heart, MessageSquareQuote, Factory, Wrench, TrendingUp, Clock, Key, Globe, CheckCircle, ArrowRight } from "lucide-react";
+import { Star, MapPin, Phone, ShieldCheck, Zap, Heart, Clock, Globe, CheckCircle, ArrowRight, Siren, Facebook, Instagram, Linkedin, Twitter, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AuthModal } from "./AuthModal";
 import { Business, isBusinessAvailable } from "@/lib/businesses";
 import { useToast } from "@/components/ui/use-toast";
 import { trackEvent } from "@/lib/analytics";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import Squares from "@/components/ui/Squares";
+import { useSimpleTheme } from "@/components/simple-theme";
 
-import ElectricBorder from "./ui/ElectricBorder";
 
 interface BusinessCardProps {
   business: Business;
@@ -20,15 +21,20 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   const { isAuthenticated } = useAuth();
   const [liked, setLiked] = useState(false);
   const { toast } = useToast();
+  const { theme } = useSimpleTheme();
 
-  // Trade Icon Logic
-  let TradeIcon = Wrench;
-  if (business.trade === 'electrician') TradeIcon = Zap;
-  else if (business.trade === 'plumber') TradeIcon = Wrench;
-  else if (business.trade === 'locksmith') TradeIcon = Key;
-  else if (business.trade === 'glazier') TradeIcon = Factory;
+  const tradeName = business.trade ? business.trade.toUpperCase() : "TRADESPERSON";
+  const isLive = isBusinessAvailable(business);
 
-  const tradeName = business.trade ? business.trade.charAt(0).toUpperCase() + business.trade.slice(1) : "Tradesperson";
+  // Trust Score (1-5 Basis)
+  const trustScore = business.trust_score || (() => {
+    let score = 1; // Base point for being a service business
+    if (business.email) score++;
+    if (business.website) score++;
+    if (business.reviewCount > 0) score++;
+    if (business.social_links && Object.entries(business.social_links).some(([_, val]) => !!val)) score++;
+    return score;
+  })();
 
   const handleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -36,277 +42,290 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
     setLiked(!liked);
   };
 
-  // Availability Logic - Centralized
-  const isLive = isBusinessAvailable(business);
-  const isPremium = business.is_premium || business.tier === 'paid' || (business.priority_score && business.priority_score > 0);
+  return (
+    <div className="relative w-full max-w-[22rem] mx-auto font-sans p-2">
+      {/* === Main Card Container === */}
+      {/* Light: White Glass | Dark: Deep Charcoal Glass */}
+      <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden
+          bg-white dark:bg-[#121212] border border-zinc-200 dark:border-white/10 shadow-lg dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]
+      ">
+        <Squares
+          direction="diagonal"
+          speed={0.2}
+          squareSize={40}
+          borderColor={theme === 'light' ? "#e4e4e7" : "rgba(255,255,255,0.5)"}
+          hoverFillColor={theme === 'light' ? "#f4f4f5" : "#222222"}
+          lineThickness={theme === 'light' ? 0.1 : 1}
+          className="opacity-100"
+        />
 
-  // Logo Placeholder Logic
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
-      .slice(0, 2)
-      .toUpperCase();
-  };
+        {/* Dark Mode Overlays (Hidden in Light Mode) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2A2A2A] via-[#151515] to-[#050505] opacity-90 hidden dark:block pointer-events-none" />
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-[50px] pointer-events-none hidden dark:block" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none hidden dark:block" />
+      </div>
 
-  // Status Color Logic: Green for ON, Red for OFF
-  const statusColorClass = isLive ? "text-green-500" : "text-red-500";
-  const statusBgClass = isLive ? "bg-green-500/10 border-green-500/30" : "bg-red-500/10 border-red-500/30";
-  const dotColorClass = isLive ? "bg-green-500" : "bg-red-500";
-  const dotPingClass = isLive ? "bg-green-400" : "hidden";
+      <div className="relative z-10 flex flex-col gap-3 p-4 pt-5">
 
-  // Dynamic Background Logic
-  const bgIndex = business.id ? Array.from(business.id).reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5 : 0;
-  const bgUrl = `/backgrounds/card-bg-${bgIndex}.png`;
+        {/* === 1. Header Row (Rank Badge + Heart) === */}
+        <div className="flex items-center justify-between h-9 mb-1">
+          {/* Brushed Metallic Gold Badge */}
+          <div className="relative h-9 -ml-4 pl-5 pr-5 rounded-r-lg shadow-lg flex items-center gap-2 border-y border-[#FFE5B4]/30 shrink-0 overflow-hidden"
+            style={{
+              background: 'linear-gradient(90deg, #9C7C38 0%, #E5C576 40%, #BFA15F 60%, #856221 100%)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4)'
+            }}
+          >
+            {/* Metallic sheen overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
 
-  const CardContent = (
-    <div
-      className={`group relative rounded-2xl border transition-all duration-500 overflow-hidden h-full flex flex-col ${isPremium
-        ? "bg-emerald-50/50 border-emerald-200 shadow-[0_8px_30px_rgb(16,185,129,0.1)] ring-1 ring-emerald-500/10 hover:border-gold hover:border-2"
-        : "bg-white border-slate-200 shadow-sm hover:border-gold hover:border-2 hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1"
-        }`}
-    >
-      {/* Dynamic Background Image */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-700"
-        style={{
-          backgroundImage: `url(${bgUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: isPremium ? 0.05 : 0.8,
-          mixBlendMode: isPremium ? 'multiply' : 'normal'
-        }}
-      />
-
-      {/* Background Marble/Grain Texture Overlay (Premium Only) */}
-      {isPremium && (
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/marble-similar.png')] mix-blend-overlay z-1" />
-      )}
-
-      {/* Header section with Featured Badge and rank placeholder */}
-      <div className="relative z-10 p-6 pb-0 flex flex-col">
-        {/* Top meta area (Badge/Rank/Favorite) - FIXED HEIGHT 40px */}
-        <div className="flex items-center justify-between mb-4 h-10">
-          <div className="flex items-center gap-3">
-            {isPremium ? (
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100 border border-emerald-200 shadow-sm">
-                <Zap className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
-                <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-700">Premium Partner</span>
-              </div>
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center font-display text-gold text-sm font-bold">
-                {rank}
-              </div>
-            )}
+            <span className="font-serif font-black text-[#1a1200] text-lg leading-none translate-y-[1px] drop-shadow-sm">#{rank}</span>
+            <div className="w-[1px] h-4 bg-[#1a1200]/20" />
+            <span className="text-[10px] font-bold text-[#1a1200] uppercase tracking-wide leading-none translate-y-[1px] drop-shadow-sm">Local Professionals</span>
           </div>
 
-          <button
-            onClick={handleFavorite}
-            className={`transition-colors duration-300 ${liked ? 'text-red-500' : 'text-slate-400 hover:text-gold'}`}
-          >
-            <Heart className={`w-5 h-5 ${liked ? 'fill-current' : ''}`} />
+          {/* Heart */}
+          <button onClick={handleFavorite} className="w-9 h-9 flex items-center justify-center text-zinc-400 dark:text-white/20 hover:text-red-500 transition-colors">
+            <Heart className={`w-6 h-6 ${liked ? 'fill-red-500 text-red-500' : ''}`} strokeWidth={1.5} />
           </button>
         </div>
 
-        {/* Brand Area (Logo/Verified) - RESPONSIVE HEIGHT */}
-        <div className="h-auto min-h-[80px] md:min-h-[100px] flex items-center mb-4">
-          {isPremium ? (
-            <div className="flex items-center gap-4 w-full bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-white/50">
-              <div className="w-20 h-20 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border bg-white shadow-sm border-emerald-100">
-                {business.logo_url ? (
-                  <img src={business.logo_url} alt={business.name} className="w-full h-full object-cover" loading="lazy" width="80" height="80" />
-                ) : (
-                  <div className="flex flex-col items-center justify-center">
-                    <span className="text-xl font-bold text-emerald-600">{getInitials(business.name)}</span>
-                    <TradeIcon className="w-4 h-4 mt-1 text-emerald-500/50" />
-                  </div>
-                )}
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 uppercase tracking-[0.15em] mb-1">
-                  <div className="relative">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 relative z-10" />
-                    <div className="absolute inset-0 bg-emerald-400/30 rounded-full blur-[2px] animate-pulse"></div>
-                  </div>
-                  Verified Pro
-                </div>
-                <div className="text-emerald-700 text-[10px] uppercase font-bold tracking-widest bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 w-fit">
-                  {tradeName}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/50">
-              <div className="text-gold text-[11px] uppercase font-bold tracking-widest bg-gold/5 px-3 py-1 rounded border border-gold/20">
-                {tradeName}
-              </div>
-            </div>
-          )}
+        {/* === 2. Category Tag (Fixed Height) - Translucent Dark Glass === */}
+        <div className="flex justify-between items-center h-6">
+          <span className="inline-flex items-center justify-center px-3 h-6 rounded bg-zinc-100 dark:bg-[#202020]/80 border border-zinc-200 dark:border-white/5 shadow-inner backdrop-blur-sm text-[9px] font-black tracking-[0.15em] text-zinc-600 dark:text-white/60 uppercase">
+            {tradeName}
+          </span>
+
+          <HoverBorderGradient
+            as={Link}
+            to={`/business/${business.id}`}
+            containerClassName="rounded-full h-6"
+            className="h-full flex items-center px-3 bg-zinc-900 text-white gap-1"
+            glowColor={theme === 'light' ? "#FFD700" : undefined}
+          >
+            <span className="text-[9px] font-bold uppercase tracking-wider">View Profile</span>
+            <ArrowRight className="w-3 h-3" />
+          </HoverBorderGradient>
         </div>
 
-        {/* Title Section - Handles 2 lines + profile link */}
-        <div className="min-h-[70px] md:min-h-[90px] flex flex-col items-start bg-white/95 p-3 md:p-4 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className={`font-display tracking-tight leading-tight line-clamp-2 text-slate-900 ${isPremium ? "text-lg md:text-2xl font-black" : "text-base md:text-xl font-bold"}`}>
-            <Link to={`/business/${business.id}`} className="hover:text-gold transition-colors block">
+        {/* === 3. Hero Section (Name + Verify) === */}
+        <div className="group rounded-xl bg-black border border-zinc-800 dark:border-white/5 px-4 py-3 flex flex-col justify-center gap-3 shadow-sm dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] min-h-[5.5rem] transition-colors hover:border-zinc-700">
+          {/* Title - Elegant Serif */}
+          <h3 className="font-serif text-[1.4rem] leading-tight text-white truncate pr-2 tracking-wide text-shadow-sm">
+            <Link to={`/business/${business.id}`} className="hover:text-zinc-300 transition-colors">
               {business.name}
             </Link>
           </h3>
-          <Link
-            to={`/business/${business.id}`}
-            className={`text-[10px] font-extrabold uppercase tracking-widest mt-2 flex items-center gap-1 transition-all group-hover:translate-x-1 ${isPremium ? "text-emerald-700 hover:text-emerald-900" : "text-gold hover:text-yellow-600"}`}
-          >
-            View Full Profile
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-      </div>
 
-      <div className="relative z-10 p-6 pt-2 flex-1 flex flex-col bg-white/40 backdrop-blur-sm mt-2 rounded-t-3xl border-t border-white/60">
-        {/* Statistics Row - FIXED HEIGHT 32px */}
-        <div className="flex items-center justify-between mb-6 h-8">
-          <div className="flex items-center gap-2">
-            <Star className={`w-4 h-4 ${isPremium ? "text-emerald-600 fill-emerald-600" : "text-gold fill-gold"}`} />
-            <span className="font-black text-slate-900">{business.rating.toFixed(1)}</span>
-            <span className="text-xs text-slate-500 font-bold">({business.reviewCount} reviews)</span>
+          {/* Sub-details */}
+          <div className="flex items-center gap-2 text-[10px] font-medium text-zinc-400 h-4">
+            <div className="flex items-center gap-1 shrink-0">
+              <ShieldCheck className={`w-3 h-3 ${trustScore >= 4 ? 'text-emerald-400' : 'text-blue-400'}`} />
+              <span className={`${trustScore >= 4 ? 'text-emerald-400/90' : 'text-blue-400/90'}`}>Level {trustScore} Business</span>
+            </div>
+            <span className="opacity-30">•</span>
+            <div className="flex items-center gap-1 shrink-0">
+              <Siren className="w-3.5 h-3.5 text-red-500/80" />
+              <span className="text-zinc-400">Emergency Specialist</span>
+            </div>
+          </div>
+        </div>
+
+
+        {/* === 4. Status Grid (Strict 50/50) === */}
+        <div className="grid grid-cols-2 gap-2 h-10 w-full">
+          {/* Rating - Solid Gold Pill */}
+          <div className="flex items-center justify-center gap-2 h-full rounded-full border border-[#E5C576] dark:border-[#E5C576]/30 bg-[#FFF9EA] dark:bg-zinc-900 w-full shadow-sm">
+            <Star className="w-3.5 h-3.5 text-[#F59E0B] dark:text-[#E5C576] fill-[#F59E0B] dark:fill-[#E5C576] shrink-0" />
+            <span className="text-[#856221] dark:text-[#E5C576] font-bold text-sm leading-none translate-y-[1px]">{business.rating.toFixed(1)}</span>
+            <span className="text-[#B49248] dark:text-[#BFA15F] text-[10px] leading-none translate-y-[1px]">({business.reviewCount})</span>
           </div>
 
-          <div className={`flex items-center gap-2 px-3 py-1 rounded-full border shadow-sm ${statusBgClass}`}>
-            <span className="relative flex h-1.5 w-1.5">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotPingClass}`}></span>
-              <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${dotColorClass}`}></span>
+          {/* Availability - Glowing Emerald */}
+          <div className={`relative flex items-center justify-center gap-2 h-full rounded-full border overflow-hidden w-full transition-all
+               ${isLive
+              ? 'border-emerald-500/40 bg-emerald-50/50 dark:bg-emerald-900/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
+              : 'border-red-500/30 bg-red-50/50 dark:bg-red-900/10'
+            }`}>
+            <div className={`w-2 h-2 shrink-0 rounded-full ${isLive ? 'bg-emerald-500 dark:bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-red-500'}`} />
+            <span className={`text-[10px] font-bold uppercase tracking-widest leading-none translate-y-[1px] ${isLive ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400'}`}>
+              {isLive ? 'Available Now' : 'Offline'}
             </span>
-            <span className={`text-[10px] font-black tracking-widest ${statusColorClass}`}>
-              {isLive ? "AVAILABLE NOW" : "OFFLINE"}
-            </span>
+            {isLive && <div className="absolute inset-0 bg-emerald-400/5 blur-md" />}
           </div>
         </div>
 
-        {/* Details & Info - FLEX GROW */}
-        <div className="flex-1">
-          <div className="space-y-4 mb-6">
-            <div className="flex items-center gap-3 text-sm h-5">
-              <MapPin className={`w-4 h-4 flex-shrink-0 ${isPremium ? "text-emerald-600" : "text-gold"}`} />
-              <span className="line-clamp-1 text-slate-700 font-bold">{business.address || (business.city ? `Serving ${business.city} & Surrounding` : "Serving Local Area")}</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm h-5">
-              <Clock className={`w-4 h-4 flex-shrink-0 ${isPremium ? "text-emerald-600" : "text-gold"}`} />
-              <span className="line-clamp-1 text-slate-700 font-bold">{business.hours || "24/7 Emergency Response"}</span>
-            </div>
-
-            {/* Premium Details - RESPONSIVE HEIGHT Container */}
-            <div className="h-auto min-h-[60px] md:min-h-[75px] overflow-hidden">
-              {isPremium ? (
-                <>
-                  {business.services_offered && business.services_offered.length > 0 ? (
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {business.services_offered.slice(0, 2).map((service, i) => (
-                        <div key={i} className="flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 border border-emerald-200 text-[9px] font-bold text-emerald-800 uppercase tracking-wider">
-                          <CheckCircle className="w-2.5 h-2.5" />
-                          {service}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-3 text-sm mt-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                      <span className="text-emerald-800 text-xs font-bold uppercase tracking-wider">Verified Professional</span>
-                    </div>
-                  )}
-
-                  {business.premium_description && (
-                    <p className="text-[11px] text-slate-600 font-medium italic line-clamp-2 leading-relaxed mt-2 border-l-2 border-emerald-200 pl-3">
-                      "{business.premium_description}"
-                    </p>
-                  )}
-                </>
-              ) : (
-                <div className="mt-4 opacity-70">
-                  <div className="flex items-center gap-2 mb-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-gold" />
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Local Tradesperson</span>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Action Buttons - FIXED FOOTER */}
-        <div className="mt-auto pt-6 border-t border-border/30 space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              asChild
-              className={`h-11 text-[11px] font-black tracking-widest uppercase transition-all duration-300 shadow-md ${isPremium
-                ? "bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white border-0"
-                : "bg-gold hover:bg-yellow-500 text-black border-0"
-                }`}
-            >
-              <a href={business.phone ? `tel:${business.phone}` : '#'} onClick={(e) => { if (!business.phone) e.preventDefault(); trackEvent("Business", "Call Now", business.name) }} className={`flex items-center justify-center gap-2 ${!business.phone ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                <Phone className="w-3.5 h-3.5" />
-                {business.phone ? 'Call' : 'No Phone'}
-              </a>
-            </Button>
-
-            <Button
-              asChild
-              className={`h-11 text-[11px] font-black tracking-widest uppercase transition-all duration-300 shadow-sm ${isPremium
-                ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200"
-                : "bg-green-50 hover:bg-green-100 text-green-700 border border-green-200"
-                }`}
-            >
-              <a
-                href={`https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
-                className="flex items-center justify-center gap-2"
-              >
-                <div className="w-3.5 h-3.5 border-2 border-current rounded-full flex items-center justify-center font-bold text-[8px]">W</div>
-                WhatsApp
-              </a>
-            </Button>
-          </div>
-
-          <div className="h-10">
-            {business.website ? (
-              <Button
-                asChild
-                variant="outline"
-                className={`w-full h-full text-[10px] font-black uppercase tracking-widest transition-all ${isPremium
-                  ? "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-                  : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                  }`}
-              >
-                <a
-                  href={business.website}
+        {/* === 5. Info Stack (Dark Glass Pills with Gold Icons) === */}
+        <div className="flex flex-col gap-1.5 w-full">
+          {[
+            { icon: MapPin, text: business.address || "Local Service Area" },
+            { icon: Clock, text: business.hours || "24/7 Emergency Service" },
+            { icon: ShieldCheck, text: `${trustScore}/5 Rating - Local Tradesperson` },
+            { icon: Globe, text: business.website ? "Visit Website" : "No Website", href: business.website || undefined },
+            // Add Email if present
+            ...(business.email ? [{ icon: CheckCircle, text: "Verified Email Contact" }] : [])
+          ].slice(0, 4).map((item: any, i) => {
+            if (item.href) {
+              return (
+                <HoverBorderGradient
+                  key={i}
+                  as="a"
+                  href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent("Business", "Website Click", business.name)}
-                  className="flex items-center justify-center gap-2"
+                  containerClassName="rounded-full w-full h-11"
+                  className="w-full h-full flex items-center justify-start px-5 bg-zinc-900 text-white"
+                  glowColor={theme === 'light' ? "#FFD700" : undefined}
                 >
-                  <Globe className="w-3.5 h-3.5" />
-                  Visit Website
-                </a>
-              </Button>
-            ) : (
-              <div className="w-full h-full border border-dashed border-border/30 rounded-md flex items-center justify-center opacity-30">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Verified Listing</span>
+                  <div className="w-5 flex justify-center shrink-0 mr-3">
+                    <item.icon className="w-4 h-4 text-[#FFD700] dark:text-[#BFA15F]" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs text-white font-medium truncate w-full pt-[1px] tracking-wide">{item.text}</span>
+                </HoverBorderGradient>
+              );
+            }
+
+            const isNoWebsite = item.text === "No Website";
+            const hiddenClass = isNoWebsite ? "opacity-0 pointer-events-none" : "";
+
+            return (
+              <div key={i} className={`relative group flex items-center h-11 w-full px-5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-50/50 dark:bg-[#000]/40 backdrop-blur-sm shadow-sm transition-colors ${hiddenClass}`}>
+                <div className="w-5 flex justify-center shrink-0 mr-3">
+                  {/* Thin Elegant Gold Icons */}
+                  <item.icon className="w-4 h-4 text-[#b49248] dark:text-[#BFA15F] opacity-80 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
+                </div>
+                <span className="text-xs text-zinc-700 dark:text-white/80 font-medium truncate w-full pt-[1px] tracking-wide">{item.text}</span>
               </div>
-            )}
+            );
+          })}
+        </div>
+
+        {/* === 5.5 Social Icons (Hover Gradient) === */}
+        <div className="flex justify-center gap-3 py-2 min-h-[40px]">
+          {business.social_links?.facebook && (
+            <HoverBorderGradient
+              as="a"
+              href={business.social_links.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              containerClassName="rounded-full w-8 h-8 p-px"
+              className="w-full h-full flex items-center justify-center bg-zinc-900 text-[#1877F2]"
+              glowColor={theme === 'light' ? "#FFD700" : undefined}
+            >
+              <Facebook className="w-4 h-4" />
+            </HoverBorderGradient>
+          )}
+          {business.social_links?.instagram && (
+            <HoverBorderGradient
+              as="a"
+              href={business.social_links.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              containerClassName="rounded-full w-8 h-8 p-px"
+              className="w-full h-full flex items-center justify-center bg-zinc-900 text-[#E1306C]"
+              glowColor={theme === 'light' ? "#FFD700" : undefined}
+            >
+              <Instagram className="w-4 h-4" />
+            </HoverBorderGradient>
+          )}
+          {(business.social_links?.twitter) && (
+            <HoverBorderGradient
+              as="a"
+              href={business.social_links.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              containerClassName="rounded-full w-8 h-8 p-px"
+              className="w-full h-full flex items-center justify-center bg-zinc-900 text-white"
+              glowColor={theme === 'light' ? "#FFD700" : undefined}
+            >
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </HoverBorderGradient>
+          )}
+          {business.social_links?.linkedin && (
+            <HoverBorderGradient
+              as="a"
+              href={business.social_links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              containerClassName="rounded-full w-8 h-8 p-px"
+              className="w-full h-full flex items-center justify-center bg-zinc-900 text-[#0077B5]"
+              glowColor={theme === 'light' ? "#FFD700" : undefined}
+            >
+              <Linkedin className="w-4 h-4" />
+            </HoverBorderGradient>
+          )}
+          {business.social_links?.tiktok && (
+            <HoverBorderGradient
+              as="a"
+              href={business.social_links.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              containerClassName="rounded-full w-8 h-8 p-px"
+              className="w-full h-full flex items-center justify-center bg-zinc-900 text-white"
+              glowColor={theme === 'light' ? "#FFD700" : undefined}
+            >
+              <Video className="w-4 h-4" />
+            </HoverBorderGradient>
+          )}
+        </div>
+
+        {/* === 6. Buttons (Premium Finishes) === */}
+        <div className="grid grid-cols-2 gap-2 mt-0.5 w-full h-11">
+          {/* Call Button */}
+          <HoverBorderGradient
+            as="a"
+            href={business.phone ? `tel:${business.phone}` : '#'}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => { if (!business.phone) e.preventDefault(); trackEvent("Business", "Call Now", business.name) }}
+            containerClassName="rounded-lg w-full h-full"
+            className="w-full h-full flex items-center justify-center bg-zinc-900 text-white"
+            glowColor={theme === 'light' ? "#FFD700" : undefined}
+          >
+            <Phone className="w-4 h-4 mr-2" strokeWidth={2} />
+            <span className="font-bold text-xs uppercase tracking-[0.15em] translate-y-[1px]">Call</span>
+          </HoverBorderGradient>
+
+          {/* WhatsApp Button */}
+          <HoverBorderGradient
+            as="a"
+            href={`https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
+            containerClassName="rounded-lg w-full h-full"
+            className="w-full h-full flex items-center justify-center bg-emerald-600 text-white"
+            glowColor={theme === 'light' ? "#FFD700" : undefined}
+          >
+            <div className="w-5 h-5 mr-2 border border-white/20 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0 bg-white/10">W</div>
+            <span className="font-bold text-white text-xs uppercase tracking-[0.15em] translate-y-[1px]">WhatsApp</span>
+          </HoverBorderGradient>
+        </div>
+
+        {/* === 7. Footer Pill (Glowing Blue Glass with Trust Score) === */}
+        <div className="flex justify-center mt-2 relative z-20 h-7">
+          <div className={`flex items-center gap-1.5 px-8 h-7 rounded-full bg-white/80 dark:bg-[#1e293b]/60 border shadow-[0_0_20px_rgba(59,130,246,0.1)] dark:shadow-[0_0_20px_rgba(59,130,246,0.25)] relative overflow-hidden shrink-0 backdrop-blur-md transition-colors
+               ${trustScore === 5 ? 'border-amber-400/40 shadow-amber-400/20' : 'border-blue-400/40 shadow-blue-400/20'}`}>
+
+            {/* Blue/Gold sheen */}
+            <div className={`absolute inset-0 bg-gradient-to-r opacity-50 ${trustScore === 5 ? 'from-amber-500/0 via-amber-500/10 to-amber-500/0' : 'from-blue-500/0 via-blue-500/10 to-blue-500/0'}`} />
+
+            <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-lg text-white shrink-0 z-10 box-decoration-clone
+                  ${trustScore === 5 ? 'bg-gradient-to-br from-amber-500 to-amber-700' : 'bg-gradient-to-br from-blue-500 to-blue-700'}`}>
+              <ShieldCheck className="w-2.5 h-2.5" strokeWidth={2.5} />
+            </div>
+            <span className={`text-[9px] font-bold uppercase tracking-[0.2em] translate-y-[1px] text-shadow z-10 ${trustScore === 5 ? 'text-amber-800 dark:text-amber-100' : 'text-blue-800 dark:text-blue-100'}`}>
+              {trustScore === 5 ? 'Top Rated 5/5' : `Verified ${trustScore}/5`}
+            </span>
           </div>
         </div>
+
+
+
       </div>
-    </div>
+    </div >
   );
-
-  if (isPremium) {
-    return (
-      <ElectricBorder color="#FFD700" className="h-full" borderRadius={16}>
-        {CardContent}
-      </ElectricBorder>
-    );
-  }
-
-  return CardContent;
 }
+
+// End of component

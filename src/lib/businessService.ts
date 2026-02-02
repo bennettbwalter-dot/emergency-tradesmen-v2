@@ -1,12 +1,24 @@
 import { supabase } from './supabase';
 import type { Business } from './businesses';
-import { businessListings, getBusinessById } from './businesses';
+import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
+
+import { fallbackEnrichment } from '@/data/fallback_enrichment';
 
 /**
  * Helper to map Supabase business data to the Business interface
  */
 function mapBusinessData(biz: any): Business {
+    const dbSocials = biz.social_links || {};
+    const fallbackSocials = fallbackEnrichment[biz.id] || {};
+
+    let website = biz.website;
+    if (website && !website.startsWith('http://') && !website.startsWith('https://')) {
+        website = `https://${website}`;
+    }
+
+    const mergedSocials = { ...dbSocials, ...fallbackSocials };
+
     return {
         id: biz.id,
         name: biz.name || "Untitled Business",
@@ -16,12 +28,11 @@ function mapBusinessData(biz: any): Business {
         hours: biz.hours || '24/7 Emergency Service',
         isOpen24Hours: biz.is_open_24_hours !== false,
         phone: biz.phone,
-        website: biz.website,
+        website: website,
         featuredReview: biz.featured_review,
         isAvailableNow: biz.is_available_now !== false,
         trade: biz.trade,
         city: biz.city,
-        // Robust photo mapping
         photos: biz.photos && Array.isArray(biz.photos) && biz.photos.length > 0
             ? biz.photos.map((url: string, index: number) => ({
                 id: `photo-${index}`,
@@ -36,7 +47,6 @@ function mapBusinessData(biz: any): Business {
             })) || []),
         tier: biz.tier || 'free',
         priority_score: biz.priority_score || 0,
-        // Premium fields
         logo_url: biz.logo_url,
         premium_description: biz.premium_description,
         services_offered: biz.services_offered || [],
@@ -49,70 +59,39 @@ function mapBusinessData(biz: any): Business {
         verified: biz.verified || false,
         header_image_url: biz.header_image_url,
         vehicle_image_url: biz.vehicle_image_url,
-        country_code: biz.country_code || 'GB'
+        country_code: biz.country_code || 'GB',
+        latitude: biz.latitude,
+        longitude: biz.longitude,
+        social_links: mergedSocials
     };
 }
 
 /**
- * Fetch businesses using Hybrid Strategy
+ * Fetch businesses from Supabase (Real, Verified Data Only)
  */
 export async function fetchBusinesses(trade: string, city: string, countryCode: string = 'GB'): Promise<Business[]> {
     console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, countryCode=${countryCode}`);
-    console.log(`[fetchBusinesses] usCities available? ${Array.isArray(usCities)} length=${usCities?.length}`);
-    let staticBusinesses: Business[] = [];
-    // Normalize trade slug to match static data keys (e.g. "emergency-plumber" -> "plumber")
+
+    // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
     const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
 
-    // Variable to hold the actual city name found in static data (or original input)
+    // Variable to hold the actual city name for Supabase query
     let searchCity = city;
 
-    // If city contains a specific value, try to find a matching key in static data
     if (city) {
-        // 1. Direct match (fast path)
-        if (businessListings[city.toLowerCase()]?.[normalizedTrade]) {
-            staticBusinesses = businessListings[city.toLowerCase()][normalizedTrade];
-            searchCity = city; // Assume lowercase key matches input
-        } else {
-            // 2. Fuzzy match: Iterate keys to handle "Milton Keynes" vs "milton-keynes"
-            const normalizedInput = city.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const normalizedInput = city.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-            // A. Check matches in Static Data Keys
-            const matchingKey = Object.keys(businessListings).find(key =>
-                key.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
-            );
-
-            if (matchingKey) {
-                // FOUND IT! Capture the correct key for Supabase query
-                searchCity = matchingKey;
-                if (businessListings[matchingKey]?.[normalizedTrade]) {
-                    staticBusinesses = businessListings[matchingKey][normalizedTrade];
-                }
-            } else {
-                // B. Check matches in the MASTER UK CITIES LIST (for Supabase-only cities)
-                // This fixes the "99% of areas empty" issue where data exists in DB but not static JSON
-                const matchingCityList = (cities as readonly string[]).find(c =>
-                    c.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
-                );
-                if (matchingCityList) {
-                    searchCity = matchingCityList;
-                }
-            }
+        // Find matching city in MASTER UK CITIES LIST to ensure consistent DB queries
+        const matchingCityList = (cities as readonly string[]).find(c =>
+            c.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
+        );
+        if (matchingCityList) {
+            searchCity = matchingCityList;
         }
-    } else if (countryCode.toUpperCase() === 'GB') {
-        // If NO specific city and we are in UK mode, AGGREGATE all static UK listings
-        // We assume businessListings contains valid UK data (Legacy)
-
-        Object.keys(businessListings).forEach(cityKey => {
-            const cityBiz = businessListings[cityKey][normalizedTrade];
-            if (cityBiz) {
-                staticBusinesses = [...staticBusinesses, ...cityBiz];
-            }
-        });
     }
 
     // Flexible trade matching: match "plumber" OR "emergency-plumber"
     const tradeVariations = [normalizedTrade, trade.toLowerCase()];
-    // Add variations with dashes/spaces if needed, but usually these two cover it
     if (trade.toLowerCase().startsWith('emergency-')) {
         tradeVariations.push(trade.toLowerCase().replace('emergency-', 'emergency '));
     }
@@ -125,9 +104,7 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         .eq('country_code', countryCode.toUpperCase());
 
     if (searchCity && searchCity.trim() !== '') {
-        // Handle both hyphenated (URL-style) and space-separated (DB-style) city names
         const cityWithSpaces = searchCity.replace(/-/g, ' ');
-        // Use flexible matching - match city OR coverage_areas contains this city
         if (searchCity.includes('-')) {
             query = query.or(`city.ilike.%${searchCity}%,city.ilike.%${cityWithSpaces}%,coverage_areas.cs.{${cityWithSpaces}}`);
         } else {
@@ -135,17 +112,17 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         }
     }
 
-    const { data: supabaseBusinesses, error } = await query;
+    const { data, error } = await query;
 
     if (error) {
         console.error('Error fetching dynamic businesses:', error);
-        return staticBusinesses;
+        return [];
     }
 
-    // FALLBACK: If no results found with city filter, try without city filter
-    let allBusinesses = supabaseBusinesses || [];
+    // FALLBACK: If no results found with city filter, try broader query
+    let allBusinesses = data || [];
     if (allBusinesses.length === 0 && searchCity) {
-        console.log('[fetchBusinesses] No results for city, trying broader query without city filter');
+        console.log('[fetchBusinesses] No results for city, trying broader query');
         const fallbackQuery = supabase
             .from('businesses')
             .select('*, business_photos(*)')
@@ -156,25 +133,15 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         const { data: fallbackData, error: fallbackError } = await fallbackQuery;
         if (!fallbackError && fallbackData) {
             allBusinesses = fallbackData;
-            console.log(`[fetchBusinesses] Fallback found ${allBusinesses.length} businesses`);
         }
     }
 
-    const businessMap = new Map<string, Business>();
-    staticBusinesses.forEach(biz => businessMap.set(biz.id, biz));
-
-    if (allBusinesses) {
-        allBusinesses.forEach((biz: any) => {
-            businessMap.set(biz.id, mapBusinessData(biz));
+    return (allBusinesses || []).map((biz: any) => mapBusinessData(biz))
+        .sort((a, b) => {
+            if (a.tier === 'paid' && b.tier !== 'paid') return -1;
+            if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+            return (b.priority_score || 0) - (a.priority_score || 0);
         });
-    }
-
-    const mergedList = Array.from(businessMap.values());
-    return mergedList.sort((a, b) => {
-        if (a.tier === 'paid' && b.tier !== 'paid') return -1;
-        if (a.tier !== 'paid' && b.tier === 'paid') return 1;
-        return (b.priority_score || 0) - (a.priority_score || 0);
-    });
 }
 
 export async function fetchBusinessById(id: string): Promise<Business | null> {
@@ -186,13 +153,6 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
 
     if (!error && data) {
         return mapBusinessData(data);
-    }
-
-    // Fallback to static or generated data using the helper from businesses.ts
-    // This handles both static lists AND procedurally generated listings (e.g. london-breakdown-1)
-    const result = getBusinessById(id);
-    if (result) {
-        return result.business;
     }
 
     return null;

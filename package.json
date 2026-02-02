@@ -63,7 +63,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.462.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.47.0",
-    "motion": "^12.29.0",
+    "motion": "^12.29.2",
     "next-themes": "^0.3.0",
     "ogl": "^1.0.11",
     "react": "^18.3.1",

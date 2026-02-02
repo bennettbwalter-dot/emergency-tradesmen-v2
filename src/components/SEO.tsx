@@ -9,6 +9,16 @@ interface SEOProps {
     ogType?: 'website' | 'article' | 'profile' | 'business.business';
     jsonLd?: Record<string, any> | object[];
     noIndex?: boolean;
+    geo?: {
+        region: string;
+        placename: string;
+        position: string;
+    };
+    locale?: string;
+    alternates?: {
+        lang: string;
+        href: string;
+    }[];
 }
 
 const DEFAULT_DESCRIPTION = "Need a tradesman near you? We connect you with verified 24/7 emergency plumbers, electricians, locksmiths & gas engineers. Local experts arriving in 30-90 mins.";
@@ -24,7 +34,10 @@ export function SEO({
     ogImage = DEFAULT_IMAGE,
     ogType = 'website',
     jsonLd,
-    noIndex = false
+    noIndex = false,
+    geo,
+    locale = 'en_GB',
+    alternates
 }: SEOProps) {
 
     const fullTitle = `${title} | ${SITE_NAME}`;
@@ -46,6 +59,22 @@ export function SEO({
             <meta property="og:description" content={description} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:locale" content={locale} />
+
+            {/* Geo Targeting */}
+            {geo && (
+                <>
+                    <meta name="geo.region" content={geo.region} />
+                    <meta name="geo.placename" content={geo.placename} />
+                    <meta name="geo.position" content={geo.position} />
+                    <meta name="ICBM" content={geo.position.replace(';', ', ')} />
+                </>
+            )}
+
+            {/* Internationalization */}
+            {alternates?.map((alt) => (
+                <link key={alt.lang} rel="alternate" hreflang={alt.lang} href={alt.href} />
+            ))}
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />

@@ -109,18 +109,27 @@ export default function NewProfileEditor() {
                     setLoading(false);
                     return;
                 }
+
+                // Strict check for user ID before creating
+                if (!user || !user.id) {
+                    console.error("No user ID available for business creation");
+                    setCreationError("Please ensure you are logged in correctly.");
+                    setLoading(false);
+                    return;
+                }
+
                 const newId = `pro-${Date.now()}`;
                 const { data: newData, error: createError } = await supabase
                     .from('businesses')
                     .insert({
                         id: newId,
                         slug: `pro-${Date.now()}`,
-                        owner_user_id: user?.id,
+                        owner_user_id: user.id,
                         name: "Your Business Name",
                         trade: "plumber",
                         city: "London",
-                        email: user?.email,
-                        phone: user?.phone || "07700000000",
+                        email: user.email,
+                        phone: user.phone || "07700000000",
                         is_premium: true,
                         tier: "paid",
                         verified: true,
@@ -327,8 +336,8 @@ export default function NewProfileEditor() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as TabType)}
                                 className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-between group ${activeTab === tab.id
-                                        ? "bg-slate-800 text-white border-l-4 border-[#D4AF37]"
-                                        : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                                    ? "bg-slate-800 text-white border-l-4 border-[#D4AF37]"
+                                    : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
                                     }`}
                             >
                                 {tab.label}

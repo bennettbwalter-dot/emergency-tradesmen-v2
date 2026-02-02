@@ -14,8 +14,9 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import {
     Star, MapPin, Phone, Clock, ExternalLink, Shield, CheckCircle,
-    Award, ThumbsUp, Calendar, ArrowLeft, ShieldCheck
+    Award, ThumbsUp, Calendar, ArrowLeft, ShieldCheck, Mail, Facebook, Instagram, Linkedin, Twitter, Video
 } from "lucide-react";
+import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { LeafletMap } from "@/components/LeafletMap";
 import type { Business } from "@/lib/businesses";
@@ -153,6 +154,17 @@ export default function BusinessProfilePage() {
         reviewStats.totalReviews = business.reviewCount;
         reviewStats.averageRating = business.rating;
     }
+
+    // Calculate Trust Score (1-5 Basis)
+    const calculateTrustScore = () => {
+        let score = 1; // Base point for being a service business
+        if (business.email) score++;
+        if (business.website) score++;
+        if (business.reviewCount > 0) score++;
+        if (business.social_links && Object.values(business.social_links).some(l => !!l)) score++;
+        return score;
+    };
+    const trustScore = calculateTrustScore();
 
     const formattedTrade = trade.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
@@ -358,10 +370,12 @@ export default function BusinessProfilePage() {
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm md:text-base font-medium">
                                             <div className="flex items-center gap-2 group cursor-help">
                                                 <div className="relative flex items-center justify-center">
-                                                    <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-sm group-hover:bg-emerald-500/40 transition-colors animate-pulse"></div>
-                                                    <CheckCircle className="w-5 h-5 text-emerald-500 relative z-10" />
+                                                    <div className={`absolute inset-0 rounded-full blur-sm transition-colors animate-pulse ${trustScore === 5 ? 'bg-amber-500/20 group-hover:bg-amber-500/40' : 'bg-emerald-500/20 group-hover:bg-emerald-500/40'}`}></div>
+                                                    <ShieldCheck className={`w-5 h-5 relative z-10 ${trustScore === 5 ? 'text-amber-500' : 'text-emerald-500'}`} />
                                                 </div>
-                                                <span className="text-emerald-500 font-bold tracking-tight">Verified Professional</span>
+                                                <span className={`font-bold tracking-tight ${trustScore === 5 ? 'text-amber-500' : 'text-emerald-500'}`}>
+                                                    {trustScore === 5 ? 'Top Rated 5/5' : `Verified ${trustScore}/5`}
+                                                </span>
                                             </div>
                                             <span className="text-muted-foreground/40">•</span>
                                             <div className="flex items-center gap-1.5 text-muted-foreground">
@@ -607,6 +621,20 @@ export default function BusinessProfilePage() {
                                             </div>
                                         </div>
 
+                                        {business.email && (
+                                            <div className="flex items-start gap-5">
+                                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0 border border-gold/20 shadow-lg shadow-gold/5">
+                                                    <Mail className="w-5 h-5 text-gold" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1 font-bold">Email Address</p>
+                                                    <a href={`mailto:${business.email}`} className="text-lg font-medium text-foreground hover:text-gold transition-colors break-all">
+                                                        {business.email}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        )}
+
                                         <div className="flex items-start gap-5">
                                             <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center shrink-0 border border-gold/20 shadow-lg shadow-gold/5">
                                                 <MapPin className="w-5 h-5 text-gold" />
@@ -685,6 +713,29 @@ export default function BusinessProfilePage() {
                                     </div>
 
                                     {/* Trustpilot Sidebar Widget removed due to invalid ID */}
+                                </div>
+
+                                {/* === SOCIAL MEDIA BAR (Obsidian Gold Style) === */}
+                                <div className="bg-card rounded-3xl border border-border p-6 shadow-2xl relative overflow-hidden group">
+                                    <h3 className="font-display text-lg font-semibold mb-4 border-b border-border pb-2">Connect on Social</h3>
+                                    <div className="flex justify-center gap-4 py-2">
+                                        {/* If no social links, this area will be empty or hidden by parent logic if desired */}
+                                        {business.social_links?.facebook && (
+                                            <GlassSocialIcon platform="facebook" href={business.social_links.facebook} />
+                                        )}
+                                        {business.social_links?.instagram && (
+                                            <GlassSocialIcon platform="instagram" href={business.social_links.instagram} />
+                                        )}
+                                        {business.social_links?.twitter && (
+                                            <GlassSocialIcon platform="twitter" href={business.social_links.twitter} />
+                                        )}
+                                        {business.social_links?.linkedin && (
+                                            <GlassSocialIcon platform="linkedin" href={business.social_links.linkedin} />
+                                        )}
+                                        {business.social_links?.tiktok && (
+                                            <GlassSocialIcon platform="tiktok" href={business.social_links.tiktok} />
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Claim Business Button */}

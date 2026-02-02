@@ -255,6 +255,7 @@ export function EmergencyChatInterface() {
             onLocationSelect={(record) => {
                 console.log("Loc Selected", record);
                 setDetectedCity(record.name);
+                setLocationRecord(record);
             }}
         />
     ) : (

@@ -21,51 +21,22 @@ export function GuestGate() {
         }
     }, [showModal]);
 
-    // Timer Logic
+    // Exit Intent Logic
     useEffect(() => {
         if (isLoading || isAuthenticated || hasTriggered || hasSkipped) return;
 
-        const timer = setTimeout(() => {
-            setShowModal(true);
-            setHasTriggered(true);
-        }, 30000); // 30 seconds
-
-        return () => clearTimeout(timer);
-    }, [isLoading, isAuthenticated, hasTriggered, hasSkipped]);
-
-    // Click Interception
-    useEffect(() => {
-        if (isLoading || isAuthenticated || hasSkipped) return;
-
-        const handleClick = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            // Check if clicking a button or link (or their children)
-            const clickable = target.closest("button, a");
-
-            // Allow clicking inside the AuthModal itself to avoid trapping the user
-            if (target.closest('[role="dialog"]')) return;
-
-            if (clickable) {
-                // We track interaction but don't blocking the first click unless we want strict gating.
-                // User requested "pop-up where you don't need to sign up".
-                // Let's rely on the timer predominantly, OR trigger on the first meaningful interaction but allow close.
-                // Triggering on click can be annoying if it interrupts navigation.
-                // Let's keep the logic: Trigger, blocking the default action ONLY ONCE.
-
-                if (!hasTriggered) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowModal(true);
-                    setHasTriggered(true);
-                }
+        const handleMouseLeave = (e: MouseEvent) => {
+            // Trigger if mouse leaves the top of the window (exit intent)
+            if (e.clientY <= 0) {
+                setShowModal(true);
+                setHasTriggered(true);
             }
         };
 
-        // Capture phase to intercept before others
-        document.addEventListener("click", handleClick, true);
+        document.addEventListener("mouseleave", handleMouseLeave);
 
         return () => {
-            document.removeEventListener("click", handleClick, true);
+            document.removeEventListener("mouseleave", handleMouseLeave);
         };
     }, [isLoading, isAuthenticated, hasTriggered, hasSkipped]);
 

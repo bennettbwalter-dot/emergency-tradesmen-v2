@@ -631,30 +631,31 @@ export default function TradeCityPage() {
                         />
                       </PaginationItem>
 
-                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                        // Smart pagination logic to show relevant pages
-                        let pageNum = i + 1;
-                        if (totalPages > 5) {
-                          if (currentPage > 3) {
-                            pageNum = currentPage - 2 + i;
-                          }
-                          if (pageNum > totalPages) {
-                            pageNum = totalPages - (4 - i);
-                          }
+                      {(() => {
+                        const maxVisible = 5;
+                        let start = Math.max(1, currentPage - 2);
+                        let end = start + maxVisible - 1;
+
+                        if (end > totalPages) {
+                          end = totalPages;
+                          start = Math.max(1, end - maxVisible + 1);
                         }
 
-                        return (
-                          <PaginationItem key={pageNum}>
-                            <PaginationLink
-                              isActive={currentPage === pageNum}
-                              onClick={() => handlePageChange(pageNum)}
-                              className="cursor-pointer"
-                            >
-                              {pageNum}
-                            </PaginationLink>
-                          </PaginationItem>
-                        );
-                      })}
+                        return Array.from({ length: end - start + 1 }, (_, i) => {
+                          const pageNum = start + i;
+                          return (
+                            <PaginationItem key={pageNum}>
+                              <PaginationLink
+                                isActive={currentPage === pageNum}
+                                onClick={() => handlePageChange(pageNum)}
+                                className="cursor-pointer"
+                              >
+                                {pageNum}
+                              </PaginationLink>
+                            </PaginationItem>
+                          );
+                        });
+                      })()}
 
                       {totalPages > 5 && currentPage < totalPages - 2 && (
                         <PaginationItem>

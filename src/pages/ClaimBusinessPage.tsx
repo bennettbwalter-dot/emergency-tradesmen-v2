@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useAuth } from "@/contexts/AuthContext";
 import { getBusinessById } from "@/lib/businesses";
 import { db } from "@/lib/db";
 import { Header } from "@/components/Header";
@@ -9,32 +8,39 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Building, ShieldCheck, CheckCircle2 } from "lucide-react";
-import { AuthModal } from "@/components/AuthModal";
+import { Loader2, Building, ShieldCheck, CheckCircle2, Phone } from "lucide-react";
+
+// Normalize phone number for comparison (strip all non-digits)
+function normalizePhone(phone: string): string {
+    if (!phone) return "";
+    // Remove all non-digit characters
+    let digits = phone.replace(/\D/g, "");
+    // Remove leading country codes (UK: 44, US: 1)
+    if (digits.startsWith("44") && digits.length > 10) {
+        digits = digits.slice(2);
+    } else if (digits.startsWith("1") && digits.length === 11) {
+        digits = digits.slice(1);
+    }
+    // Remove leading 0 for UK numbers
+    if (digits.startsWith("0")) {
+        digits = digits.slice(1);
+    }
+    return digits;
+}
 
 export default function ClaimBusinessPage() {
     const { businessId } = useParams<{ businessId: string }>();
-    const { user, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const { toast } = useToast();
 
     const [loading, setLoading] = useState(true);
-    const [submitting, setSubmitting] = useState(false);
+    const [verifying, setVerifying] = useState(false);
     const [businessData, setBusinessData] = useState<any>(null);
     const [status, setStatus] = useState<'unclaimed' | 'pending' | 'verified' | null>(null);
 
     // Form State
-    const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [agreed, setAgreed] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            setEmail(user.email || "");
-        }
-    }, [user]);
 
     useEffect(() => {
         async function loadData() {
@@ -47,26 +53,17 @@ export default function ClaimBusinessPage() {
                 return;
             }
             setBusinessData(staticData);
-            setPhone(staticData.business.phone || "");
 
             // 2. Get DB Status
             try {
                 const dbData = await db.businesses.getClaimStatus(businessId);
                 if (dbData) {
                     setStatus(dbData.claim_status);
-
-                    // If verified or pending, and not owned by me (which we can't check easily without blocking read, 
-                    // but status check is enough for basic UI), maybe redirect?
-                    // For now, let's just show status.
-                    if (dbData.claim_status === 'verified') {
-                        // Already verified
-                    }
                 } else {
                     setStatus('unclaimed');
                 }
             } catch (err) {
                 console.error(err);
-                // Assume unclaimed if error or not found?
                 setStatus('unclaimed');
             } finally {
                 setLoading(false);
@@ -75,40 +72,63 @@ export default function ClaimBusinessPage() {
         loadData();
     }, [businessId, navigate]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleVerify = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!agreed) {
+
+        if (!phone.trim()) {
             toast({
-                title: "Agreement required",
-                description: "You must agree to the terms to claim this business.",
+                title: "Phone number required",
+                description: "Please enter the phone number listed on this business.",
                 variant: "destructive"
             });
             return;
         }
 
-        if (!businessId) return;
+        setVerifying(true);
 
-        setSubmitting(true);
-        try {
-            await db.businesses.claim(businessId, email, phone);
+        // Get the business phone from the listing
+        const businessPhone = businessData?.business?.phone || "";
 
+        // Normalize both phone numbers for comparison
+        const normalizedInput = normalizePhone(phone);
+        const normalizedBusiness = normalizePhone(businessPhone);
+
+        // Simulate a small delay for UX
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        if (normalizedInput === normalizedBusiness && normalizedBusiness.length >= 9) {
+            // Phone matches! Redirect to sign-up page
             toast({
-                title: "Claim Submitted!",
-                description: "We will review your claim and contact you shortly for verification.",
+                title: "Phone Verified!",
+                description: "Redirecting you to complete your sign-up...",
             });
 
-            // Navigate to dashboard or show success state
-            navigate("/user/dashboard");
-        } catch (error: any) {
-            console.error(error);
+            // Navigate to tradesmen sign-up page
+            navigate("/tradesmen", {
+                state: {
+                    fromClaim: true,
+                    businessId: businessId,
+                    businessName: businessData?.business?.name
+                }
+            });
+        } else {
+            // Phone doesn't match - redirect to contact page
             toast({
-                title: "Claim Failed",
-                description: error.message || "Something went wrong. Please try again.",
+                title: "Phone number doesn't match",
+                description: "Please contact us directly to verify your claim.",
                 variant: "destructive"
             });
-        } finally {
-            setSubmitting(false);
+
+            // Navigate to contact page with pre-filled info
+            navigate("/contact", {
+                state: {
+                    subject: `Business Claim Request: ${businessData?.business?.name}`,
+                    message: `Hi, I would like to claim my business listing:\n\nBusiness: ${businessData?.business?.name}\nBusiness ID: ${businessId}\n\nThe phone number on the listing doesn't match my current business number. Please help me verify my ownership.`
+                }
+            });
         }
+
+        setVerifying(false);
     };
 
     if (loading) {
@@ -119,7 +139,8 @@ export default function ClaimBusinessPage() {
         );
     }
 
-    // Already Verified/Pending State
+    // Already Verified/Pending State - show message
+    // Otherwise (null or 'unclaimed'), show the claim form
     if (status === 'verified' || status === 'pending') {
         return (
             <div className="min-h-screen bg-background flex flex-col">
@@ -145,6 +166,15 @@ export default function ClaimBusinessPage() {
         );
     }
 
+    // If no business data loaded, show loading or error
+    if (!businessData) {
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-gold" />
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <Helmet>
@@ -158,7 +188,7 @@ export default function ClaimBusinessPage() {
                     <div className="text-center space-y-2">
                         <h1 className="text-3xl font-display font-bold">Claim Your Business</h1>
                         <p className="text-muted-foreground">
-                            Take control of your profile on Emergency Tradesmen
+                            Verify your ownership by entering the phone number on your listing
                         </p>
                     </div>
 
@@ -177,88 +207,56 @@ export default function ClaimBusinessPage() {
                         </div>
                     </div>
 
-                    {/* Auth Check */}
-                    {!isAuthenticated ? (
-                        <div className="bg-card border border-gold/20 rounded-xl p-8 text-center space-y-6 shadow-lg">
-                            <h3 className="text-xl font-medium">Log in to continue</h3>
-                            <p className="text-muted-foreground">
-                                You need an account to manage your business profile.
-                            </p>
-                            <AuthModal
-                                defaultTab="register"
-                                trigger={
-                                    <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground">
-                                        Create Account or Log In
-                                    </Button>
-                                }
-                            />
-                        </div>
-                    ) : (
-                        /* Claim Form */
-                        <form onSubmit={handleSubmit} className="bg-card border border-border/50 rounded-xl p-8 shadow-lg space-y-6 animate-fade-up">
-                            <div className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="email">Business Email</Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        value={email}
-                                        onChange={e => setEmail(e.target.value)}
-                                        required
-                                        placeholder="contact@business.com"
-                                    />
-                                    <p className="text-xs text-muted-foreground">We'll send verification details here.</p>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="phone">Business Phone</Label>
-                                    <Input
-                                        id="phone"
-                                        type="tel"
-                                        value={phone}
-                                        onChange={e => setPhone(e.target.value)}
-                                        required
-                                        placeholder="07700 900000"
-                                    />
-                                    <p className="text-xs text-muted-foreground">Must match the phone number on your profile for verification.</p>
-                                </div>
-
-                                <div className="flex items-start space-x-3 pt-4 border-t border-border/50">
-                                    <Checkbox
-                                        id="terms"
-                                        checked={agreed}
-                                        onCheckedChange={(c) => setAgreed(c as boolean)}
-                                    />
-                                    <div className="grid gap-1.5 leading-none">
-                                        <Label
-                                            htmlFor="terms"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                        >
-                                            I verify that I am the owner or authorized representative of this business.
-                                        </Label>
-                                        <p className="text-sm text-muted-foreground">
-                                            By claiming this business, you agree to our <Link to="/terms" className="underline hover:text-gold">Terms of Service</Link>.
-                                        </p>
-                                    </div>
-                                </div>
+                    {/* Phone Verification Form */}
+                    <form onSubmit={handleVerify} className="bg-card border border-border/50 rounded-xl p-8 shadow-lg space-y-6 animate-fade-up">
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="phone" className="flex items-center gap-2">
+                                    <Phone className="w-4 h-4 text-gold" />
+                                    Business Phone Number
+                                </Label>
+                                <Input
+                                    id="phone"
+                                    type="tel"
+                                    value={phone}
+                                    onChange={e => setPhone(e.target.value)}
+                                    required
+                                    placeholder="Enter the phone number on your listing"
+                                    className="h-12 text-lg"
+                                />
+                                <p className="text-xs text-muted-foreground">
+                                    Enter the exact phone number shown on your business listing to verify ownership.
+                                </p>
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full bg-gold hover:bg-gold/90 text-gold-foreground h-12 text-lg"
-                                disabled={submitting || !agreed}
-                            >
-                                {submitting ? (
-                                    <>
-                                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                        Submitting Claim...
-                                    </>
-                                ) : (
-                                    "Submit Claim Request"
-                                )}
-                            </Button>
-                        </form>
-                    )}
+                            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-sm text-blue-400">
+                                <p className="font-medium mb-1">📞 How it works:</p>
+                                <p>If the phone number matches your listing, you'll be directed to complete your sign-up. If it doesn't match, you can contact us to verify your claim.</p>
+                            </div>
+                        </div>
+
+                        <Button
+                            type="submit"
+                            className="w-full bg-gold hover:bg-gold/90 text-gold-foreground h-12 text-lg"
+                            disabled={verifying}
+                        >
+                            {verifying ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                    Verifying...
+                                </>
+                            ) : (
+                                "Verify & Continue"
+                            )}
+                        </Button>
+
+                        <p className="text-xs text-muted-foreground text-center">
+                            Don't have access to this phone number?{" "}
+                            <Link to="/contact" className="text-gold hover:underline">
+                                Contact us directly
+                            </Link>
+                        </p>
+                    </form>
                 </div>
             </main>
 

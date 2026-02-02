@@ -72,6 +72,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 const { data: { session } } = await supabase.auth.getSession();
                 if (session?.user) {
                     setUser(mapSupabaseUser(session.user));
+                } else {
+                    setUser(null);
+                    // Clear potential stale data
+                    localStorage.removeItem('emergency-tradesmen-user');
                 }
             } catch (error) {
                 console.error("Error getting session:", error);

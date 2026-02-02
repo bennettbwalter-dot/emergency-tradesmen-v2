@@ -285,14 +285,12 @@ const Index = () => {
 
               </motion.div>
 
-              {/* Header for Trust Badges */}
               <div className="mt-16 text-center relative z-20 pointer-events-auto">
                 <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-6">
                   Our Local Tradesmen Are
                 </h2>
               </div>
 
-              {/* Trust Badges */}
               <section className="container-wide pt-0 pb-8 mt-12 relative z-20">
                 <TrustBadges />
               </section>
@@ -305,6 +303,10 @@ const Index = () => {
             </div>
 
           </section>
+
+
+
+
 
 
 
@@ -433,6 +435,8 @@ const Index = () => {
 
 
           </section>
+
+
 
 
 

@@ -90,7 +90,7 @@ async function generateSitemap() {
     while (hasMore) {
         const { data, error } = await supabase
             .from('businesses')
-            .select('id, updated_at')
+            .select('id, updated_at, country_code') // Fetch country_code to segment by region if needed, though we treat them all in business sitemaps
             .eq('verified', true)
             .range(from, from + step - 1);
 
@@ -123,104 +123,143 @@ async function generateSitemap() {
     console.log(`✅ Found ${businesses.length} verified businesses.`);
     console.log(`✅ Found ${posts?.length || 0} published blog posts.`);
 
-    let xml = `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemaps = []; // Track created sitemaps for the index
+
+    // Helper to write a sitemap file
+    const writeSitemap = (filename, urls) => {
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+        urls.forEach(u => {
+            xml += `
+  <url>
+    <loc>${u.loc}</loc>
+    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
+    ${u.changefreq ? `<changefreq>${u.changefreq}</changefreq>` : ''}
+    ${u.priority ? `<priority>${u.priority}</priority>` : ''}
+  </url>`;
+        });
+        xml += `
+</urlset>`;
+
+        const outputPath = path.join(__dirname, `../public/${filename}`);
+        fs.writeFileSync(outputPath, xml);
+        console.log(` ✅ Generated ${filename} (${urls.length} URLs)`);
+        sitemaps.push(filename);
+    };
 
     // 1. Static Pages
-    const staticPages = [
+    const staticUrls = [
         '', '/about', '/pricing', '/terms', '/privacy', '/compare',
         '/contact', '/user/login', '/business/login', '/blog', '/vetting-process'
-    ];
-
-    staticPages.forEach(p => {
-        xml += `
-  <url>
-    <loc>${BASE_URL}${p}</loc>
-    <changefreq>weekly</changefreq>
-    <priority>${p === '' || p === '/us' ? '1.0' : '0.8'}</priority>
-  </url>`;
-    });
+    ].map(p => ({
+        loc: `${BASE_URL}${p}`,
+        changefreq: 'weekly',
+        priority: p === '' || p === '/us' ? '1.0' : '0.8'
+    }));
+    writeSitemap('sitemap-static.xml', staticUrls);
 
     // 2. Dynamic City Pages (UK)
+    const ukUrls = [];
     ukTrades.forEach(trade => {
         ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
-            const url = `/emergency-${trade}/${citySlug}`;
-            xml += `
-  <url>
-    <loc>${BASE_URL}${url}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>`;
+            ukUrls.push({
+                loc: `${BASE_URL}/emergency-${trade}/${citySlug}`,
+                changefreq: 'daily',
+                priority: '0.9'
+            });
         });
     });
-
-    // 3. Dynamic City Pages (US)
-    usTrades.forEach(trade => {
-        usCities.forEach(city => {
-            const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
-            const url = `/us/emergency-${trade}/${citySlug}`;
-            xml += `
-  <url>
-    <loc>${BASE_URL}${url}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>`;
-        });
-    });
-
-    // 4. Dynamic Symptom Pages (UK Only for now)
+    // UK Symptoms
     commonProblems.forEach(problem => {
         ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
-            const url = `/${problem}/${citySlug}`;
-            xml += `
-  <url>
-    <loc>${BASE_URL}${url}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>`;
+            ukUrls.push({
+                loc: `${BASE_URL}/${problem}/${citySlug}`,
+                changefreq: 'daily',
+                priority: '0.9'
+            });
         });
     });
+    writeSitemap('sitemap-uk.xml', ukUrls);
 
-    // 5. Dynamic Business Profiles
-    businesses.forEach(biz => {
-        const prefix = biz.country_code === 'US' ? '/us' : '';
-        xml += `
-  <url>
-    <loc>${BASE_URL}${prefix}/business/${biz.id}</loc>
-    <lastmod>${biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>`;
+    // 3. Dynamic City Pages (US)
+    const usUrls = [];
+    usTrades.forEach(trade => {
+        usCities.forEach(city => {
+            const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
+            usUrls.push({
+                loc: `${BASE_URL}/us/emergency-${trade}/${citySlug}`,
+                changefreq: 'daily',
+                priority: '0.9'
+            });
+        });
+    });
+    // Split US sitemaps if too large (approx 40k max per file to be safe)
+    const CHUNK_SIZE = 40000;
+    for (let i = 0; i < usUrls.length; i += CHUNK_SIZE) {
+        const chunk = usUrls.slice(i, i + CHUNK_SIZE);
+        writeSitemap(`sitemap-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, chunk);
+    }
+
+    // 4. Dynamic Business Profiles
+    const ukBusinesses = businesses.filter(b => b.country_code === 'GB');
+    const usBusinesses = businesses.filter(b => b.country_code === 'US');
+
+    // UK Businesses
+    for (let i = 0; i < ukBusinesses.length; i += CHUNK_SIZE) {
+        const chunk = ukBusinesses.slice(i, i + CHUNK_SIZE);
+        const bizUrls = chunk.map(biz => ({
+            loc: `${BASE_URL}/business/${biz.id}`,
+            lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
+            changefreq: 'weekly',
+            priority: '0.7'
+        }));
+        writeSitemap(`sitemap-businesses-uk-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
+    }
+
+    // US Businesses
+    for (let i = 0; i < usBusinesses.length; i += CHUNK_SIZE) {
+        const chunk = usBusinesses.slice(i, i + CHUNK_SIZE);
+        const bizUrls = chunk.map(biz => ({
+            loc: `${BASE_URL}/us/business/${biz.id}`,
+            lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
+            changefreq: 'weekly',
+            priority: '0.7'
+        }));
+        writeSitemap(`sitemap-businesses-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
+    }
+
+    // 5. Blog Posts
+    if (posts && posts.length > 0) {
+        const blogUrls = posts.map(post => ({
+            loc: `${BASE_URL}/blog/${post.slug}`,
+            lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
+            changefreq: 'weekly',
+            priority: '0.8'
+        }));
+        writeSitemap('sitemap-blog.xml', blogUrls);
+    }
+
+    // 6. Generate Sitemap Index
+    let indexXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+    sitemaps.forEach(filename => {
+        indexXml += `
+  <sitemap>
+    <loc>${BASE_URL}/${filename}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+  </sitemap>`;
     });
 
-    // 4. Dynamic Blog Posts
-    posts?.forEach(post => {
-        xml += `
-  <url>
-    <loc>${BASE_URL}/blog/${post.slug}</loc>
-    <lastmod>${post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
-    });
+    indexXml += `
+</sitemapindex>`;
 
-    xml += `
-</urlset>`;
-
-    const outputPath = path.join(__dirname, '../public/sitemap.xml');
-    fs.writeFileSync(outputPath, xml);
-    console.log(` ✅ Sitemap generated at ${outputPath}`);
-    console.log(` 📊 Summary:`);
-    console.log(`    - Static: ${staticPages.length}`);
-    console.log(`    - UK City Pages: ${ukTrades.length * ukCities.length}`);
-    console.log(`    - US City Pages: ${usTrades.length * usCities.length}`);
-    console.log(`    - Symptom Pages: ${commonProblems.length * ukCities.length}`);
-    console.log(`    - Business Profiles: ${businesses.length}`);
-    console.log(`    - Blog Posts: ${posts?.length || 0}`);
-    const total = staticPages.length + (ukTrades.length * ukCities.length) + (usTrades.length * usCities.length) + (commonProblems.length * ukCities.length) + businesses.length + (posts?.length || 0);
-    console.log(`    - Total URLs: ${total}`);
+    const indexPath = path.join(__dirname, '../public/sitemap.xml');
+    fs.writeFileSync(indexPath, indexXml);
+    console.log(` ✅ Generated Sitemap Index at ${indexPath}`);
+    console.log(` 📊 Total Sitemaps: ${sitemaps.length}`);
 }
 
 generateSitemap();

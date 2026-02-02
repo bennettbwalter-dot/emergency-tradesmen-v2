@@ -74,15 +74,27 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         setSelectedCity(city);
         setSelectedSuburb(null);
 
-        // If strict "State -> City -> Area" flow, we might wait for Area selection.
-        // But often "City" is a valid destination too.
-        // However, the SearchFilterBar expects a record eventually.
-        // If we want to support "City Level" selection, we should trigger onLocationSelect here or have a "All City" option in the next dropdown?
-        // The previous code triggered on Suburb select.
-        // Let's support City-only selection via the next dropdown ("All [City]")? 
-        // OR trigger strictly on leaf node.
-
-        // For now, allow proceeding to Suburb select.
+        // If city has no suburbs, trigger selection immediately
+        if (city && (!city.suburbs || city.suburbs.length === 0) && selectedState) {
+            const record = {
+                id: city.slug,
+                type: 'city',
+                country: 'US',
+                name: city.name,
+                state: selectedState.slug.toUpperCase(),
+                anchor_city: city.name,
+                anchor_slug: city.slug,
+                area_slug: city.slug,
+                metro_slug: city.metroSlug,
+                path_slugs: {
+                    state: selectedState.slug,
+                    metro: city.metroSlug,
+                    city: city.slug,
+                    suburb: ''
+                }
+            };
+            onLocationSelect(record);
+        }
     };
 
     // Handle Suburb Change
@@ -195,8 +207,8 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                 </Select>
             )}
 
-            {/* Suburb/Area Select */}
-            {selectedCity && (
+            {/* Suburb/Area Select - Only show if suburbs exist */}
+            {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
                     <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                         <Home className="w-4 h-4 shrink-0 text-black dark:text-white" />
