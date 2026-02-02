@@ -20,38 +20,51 @@ interface LeafletMapProps {
     businessName?: string;
     address?: string;
     className?: string;
+    latitude?: string | number;
+    longitude?: string | number;
 }
 
-export function LeafletMap({ city, businessName, className = "w-full h-full min-h-[300px]" }: LeafletMapProps) {
+export function LeafletMap({ city, businessName, className = "w-full h-full min-h-[300px]", latitude, longitude }: LeafletMapProps) {
     const [coords, setCoords] = useState<[number, number] | null>(null);
 
     useEffect(() => {
-        // Simple internal geocoding based on common UK/US cities or fallback
-        // In a real scenario without Google, we might use a dedicated OSM geocoder or our internal JSON
-        // For now, we'll try to find the city in our internal data or default to London/NY
-
-        // This is a placeholder logic. Real implementation would look up `city` in `us_cities.json` or `uk-city-grouping`
-        // Since we don't have lat/lon in the grouped arrays easily accessible without loading huge files,
-        // we will default to a neutral view or try to fetch from a free OSM nomination service if permitted (but goal is 0 external dependencies if possible).
-        // FOR NOW: Let's default to a safe center and rely on future expansion or specific City coords if passed.
-
-        // If we strictly want NO external calls, we need coordinates. 
-        // Let's default to London as base for UK and Dallas for US if "Dallas" is in name
-
-        if (city.toLowerCase() === 'london') {
-            setCoords([51.505, -0.09]);
-        } else if (city.toLowerCase().includes('dallas')) {
-            setCoords([32.7767, -96.7970]);
-        } else {
-            // Default generic view (Atlantic middle) or maybe London as it's UK centric app initially?
-            // Let's default to London for now as fallback
-            setCoords([51.505, -0.09]);
+        // 1. If explicit coordinates are provided, use them immediately
+        if (latitude && longitude) {
+            setCoords([parseFloat(latitude as string), parseFloat(longitude as string)]);
+            return;
         }
 
-        // Ideally we would load the lat/lon from our `us_cities.json` or similar if we had it indexed.
-        // Since we are just "Removing Google", replacing with a static map or an OSM tile layer at a default location is the step 1.
+        // 2. Otherwise, check static lookup first
+        // We need to determine country code, we'll try to guess from URL or default to GB
+        const isUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
+        const countryCode = isUS ? 'US' : 'GB';
 
-    }, [city]);
+        import('@/lib/mapUtils').then(({ getViewState }) => {
+            const staticView = getViewState(city, countryCode);
+
+            // Check if generic fallback
+            const isGenericUK = staticView.center.lat === 54.5 && staticView.center.lng === -4.0;
+            const isGenericUS = staticView.center.lat === 39.8283 && staticView.center.lng === -98.5795;
+
+            if (!isGenericUK && !isGenericUS) {
+                setCoords([staticView.center.lat, staticView.center.lng]);
+                return;
+            }
+
+            // 3. Try Nominatim for unknown cities
+            const query = `${city}, ${isUS ? 'USA' : 'UK'}`;
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        setCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+                    } else {
+                        setCoords([staticView.center.lat, staticView.center.lng]);
+                    }
+                })
+                .catch(() => setCoords([staticView.center.lat, staticView.center.lng]));
+        });
+    }, [city, latitude, longitude]);
 
     if (!coords) return null;
 

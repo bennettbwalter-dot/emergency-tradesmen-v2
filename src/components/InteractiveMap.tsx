@@ -24,9 +24,11 @@ interface InteractiveMapProps {
     showBusinesses?: boolean;
     businesses?: any[];
     countryCode?: string;
+    latitude?: string | number;
+    longitude?: string | number;
 }
 
-export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]", showBusinesses = false, businesses = [], countryCode: propCountryCode }: InteractiveMapProps) {
+export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]", showBusinesses = false, businesses = [], countryCode: propCountryCode, latitude, longitude }: InteractiveMapProps) {
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const mapInstanceRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.Marker[]>([]);
@@ -42,11 +44,19 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
 
     // Effect to update view state when props change or via Geocoding
     useEffect(() => {
-        // 1. Try static local lookup first (fastest)
+        // 1. If explicit coordinates are provided, use them immediately
+        if (latitude && longitude) {
+            setViewState({
+                center: { lat: parseFloat(latitude as string), lng: parseFloat(longitude as string) },
+                zoom: 15 // High zoom for specific business
+            });
+            return;
+        }
+
+        // 2. Try static local lookup first (fastest)
         const staticView = getViewState(city, countryCode);
 
-        // Check if static lookup returned a generic country center (meaning city wasn't found in local list)
-        // We compare basic lat/lng values to detect default fallbacks
+        // Check if static lookup returned a generic country center
         const isGenericUK = staticView.center.lat === 54.5 && staticView.center.lng === -4.0;
         const isGenericUS = staticView.center.lat === 39.8283 && staticView.center.lng === -98.5795;
 
@@ -56,11 +66,10 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
             return;
         }
 
-        // 2. If generic, try detailed Geocoding via Nominatim
+        // 3. If generic, try detailed Geocoding via Nominatim
         console.log(`Map: Static lookup failed for ${city}, trying Nominatim...`);
         const fetchCoordinates = async () => {
             try {
-                // Throttle/Debounce check could go here, but for now direct call
                 const query = `${city}, ${countryCode === 'US' ? 'USA' : 'UK'}`;
                 const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
                 const data = await response.json();
@@ -71,7 +80,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
                     console.log(`Map: Found coords for ${city}:`, { lat, lon });
                     setViewState({
                         center: { lat, lng: lon },
-                        zoom: 12 // Good city-level zoom from geocode match
+                        zoom: 12
                     });
                 } else {
                     console.warn(`Map: No results for ${city}, staying at default.`);
@@ -84,7 +93,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
         };
 
         fetchCoordinates();
-    }, [city, countryCode]);
+    }, [city, countryCode, latitude, longitude]);
 
     // Initialize Map Instance and update its view when viewState changes
     useEffect(() => {

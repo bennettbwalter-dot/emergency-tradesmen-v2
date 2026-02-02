@@ -257,8 +257,21 @@ class MCPOrchestrator:
         for attempt in range(max_retries):
             try:
                 # Check if phone exists for this trade
-                exists = self.sb.table("businesses").select("id").eq("phone", biz['phone']).eq("trade", trade).execute()
-                if exists.data: return False
+                # Check if business already exists by phone + trade
+                exists = self.sb.table("businesses").select("id, city, coverage_areas").eq("phone", biz['phone']).eq("trade", trade).execute()
+                
+                if exists.data:
+                    existing_biz = exists.data[0]
+                    existing_city = existing_biz.get('city', '')
+                    current_coverage = existing_biz.get('coverage_areas') or []
+                    
+                    # If it's a different city and not already in coverage, update it
+                    if city != existing_city and city not in current_coverage:
+                        print(f"    [UPDATE] Adding coverage: {city} to {biz['name']}")
+                        new_coverage = list(set(current_coverage + [city]))
+                        self.sb.table("businesses").update({"coverage_areas": new_coverage}).eq("id", existing_biz['id']).execute()
+                        return True # Counts as "added" for the gap filler
+                    return False # Already covered
                 
                 # --- RICH DATA ENRICHMENT ---
                 if biz.get('website') and (not biz.get('email') or not biz.get('social_links')):
@@ -313,7 +326,11 @@ class MCPOrchestrator:
         return False
 
     def process_gap(self, loc, trade):
-        res = self.sb.table("businesses").select("id", count="exact").eq("trade", trade).eq("city", loc['city']).eq("country_code", "US").execute()
+        # Count businesses where city matches OR city is in coverage_areas
+        # Using PostgREST or filtering: city.eq.City OR coverage_areas.cs.{City}
+        city_filter = f"city.eq.{loc['city']},coverage_areas.cs.{{{loc['city']}}}"
+        res = self.sb.table("businesses").select("id", count="exact").eq("trade", trade).eq("country_code", "US").or_(city_filter).execute()
+        
         if (res.count or 0) >= 5: return 0
         
         needed = 5 - (res.count or 0)

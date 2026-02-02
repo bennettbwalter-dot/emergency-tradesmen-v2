@@ -760,6 +760,8 @@ export default function BusinessProfilePage() {
                                     {(business.tier === 'paid' || business.is_premium) ? (
                                         <InteractiveMap
                                             city={formattedCity}
+                                            latitude={business.latitude}
+                                            longitude={business.longitude}
                                             className="w-full h-full rounded-[20px]"
                                         />
                                     ) : (
@@ -767,6 +769,8 @@ export default function BusinessProfilePage() {
                                             city={formattedCity}
                                             businessName={business.name}
                                             address={business.address}
+                                            latitude={business.latitude}
+                                            longitude={business.longitude}
                                             className="w-full h-full rounded-[20px]"
                                         />
                                     )}

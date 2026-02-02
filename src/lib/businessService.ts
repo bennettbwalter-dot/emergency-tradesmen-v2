@@ -62,7 +62,8 @@ function mapBusinessData(biz: any): Business {
         country_code: biz.country_code || 'GB',
         latitude: biz.latitude,
         longitude: biz.longitude,
-        social_links: mergedSocials
+        social_links: mergedSocials,
+        trust_score: biz.trust_score
     };
 }
 

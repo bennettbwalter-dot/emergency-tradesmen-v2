@@ -52,6 +52,24 @@ export function useBusinessFilters(businesses: Business[] | null) {
 
         // Sort
         filtered.sort((a, b) => {
+            // Tier 1: Premium/Paid Status
+            const aPremium = a.is_premium || a.tier === 'paid';
+            const bPremium = b.is_premium || b.tier === 'paid';
+            if (aPremium && !bPremium) return -1;
+            if (!aPremium && bPremium) return 1;
+
+            // Tier 2: Trust Score Descending (5 to 0)
+            const aScore = a.trust_score || 0;
+            const bScore = b.trust_score || 0;
+            if (aScore !== bScore) {
+                return bScore - aScore;
+            }
+
+            // Tier 3: Verified Status (Only if scores tied)
+            if (a.verified && !b.verified) return -1;
+            if (!a.verified && b.verified) return 1;
+
+            // Tier 4: User Selection
             switch (filters.sortBy) {
                 case "rating":
                     return b.rating - a.rating;
@@ -60,8 +78,6 @@ export function useBusinessFilters(businesses: Business[] | null) {
                 case "name":
                     return a.name.localeCompare(b.name);
                 case "distance":
-                    // For now, just random since we don't have actual distances
-                    // In production, this would use geolocation
                     return 0;
                 default:
                     return 0;

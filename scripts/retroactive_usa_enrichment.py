@@ -31,7 +31,7 @@ class EnrichmentAgent:
         self.headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
     def scrape_website(self, url: str) -> Dict:
-        if not url or 'yelp.com' in url or 'google.com' in url: return {}
+        if not url or 'yelp.com' in url or 'google.com' in url or 'emergencytradesmen.net' in url: return {}
         if not url.startswith('http'): url = 'https://' + url
         
         try:
@@ -135,7 +135,7 @@ class EnrichmentAgent:
                 print("[DONE] No more businesses to process.")
                 break
                 
-            with ThreadPoolExecutor(max_workers=10) as executor:
+            with ThreadPoolExecutor(max_workers=3) as executor:
                 executor.map(self.process_business, res.data)
             
             time.sleep(1) # Breath
