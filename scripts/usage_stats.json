@@ -1,7 +1,7 @@
 {
     "yelp": {
-        "daily_calls": 465,
-        "last_reset": "2026-02-02"
+        "daily_calls": 5,
+        "last_reset": "2026-02-03"
     },
     "foursquare": {
         "monthly_calls": 2979,
