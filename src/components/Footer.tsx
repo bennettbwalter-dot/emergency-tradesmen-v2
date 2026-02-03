@@ -23,7 +23,7 @@ export function Footer({ countryCode }: FooterProps) {
   const tradeTerm = isUS ? "Contractor" : "Tradesperson";
 
   return (
-    <footer className="bg-primary border-t border-border/50 pt-16 pb-12 mt-16 text-white">
+    <footer className="bg-primary border-t border-border/50 pt-16 pb-28 md:pb-12 mt-16 text-white">
       <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div>

@@ -43,7 +43,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   };
 
   return (
-    <div className="relative w-full max-w-[22rem] mx-auto font-sans p-2">
+    <div className="relative w-full max-w-[20rem] sm:max-w-[22rem] mx-auto font-sans p-1 sm:p-2">
       {/* === Main Card Container === */}
       {/* Light: White Glass | Dark: Deep Charcoal Glass */}
       <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden
@@ -70,7 +70,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         {/* === 1. Header Row (Rank Badge + Heart) === */}
         <div className="flex items-center justify-between h-9 mb-1">
           {/* Brushed Metallic Gold Badge */}
-          <div className="relative h-9 -ml-4 pl-5 pr-5 rounded-r-lg shadow-lg flex items-center gap-2 border-y border-[#FFE5B4]/30 shrink-0 overflow-hidden"
+          <div className="relative h-8 sm:h-9 -ml-3 sm:-ml-4 pl-3 sm:pl-5 pr-3 sm:pr-5 rounded-r-lg shadow-lg flex items-center gap-1 sm:gap-2 border-y border-[#FFE5B4]/30 shrink-0 overflow-hidden"
             style={{
               background: 'linear-gradient(90deg, #9C7C38 0%, #E5C576 40%, #BFA15F 60%, #856221 100%)',
               boxShadow: '0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4)'
@@ -79,9 +79,9 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             {/* Metallic sheen overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
 
-            <span className="font-serif font-black text-[#1a1200] text-lg leading-none translate-y-[1px] drop-shadow-sm">#{rank}</span>
-            <div className="w-[1px] h-4 bg-[#1a1200]/20" />
-            <span className="text-[10px] font-bold text-[#1a1200] uppercase tracking-wide leading-none translate-y-[1px] drop-shadow-sm">Local Professionals</span>
+            <span className="font-serif font-black text-[#1a1200] text-base sm:text-lg leading-none translate-y-[1px] drop-shadow-sm">#{rank}</span>
+            <div className="w-[1px] h-3 sm:h-4 bg-[#1a1200]/20" />
+            <span className="text-[8px] sm:text-[10px] font-bold text-[#1a1200] uppercase tracking-tight sm:tracking-wide leading-none translate-y-[1px] drop-shadow-sm truncate">Local Pro</span>
           </div>
 
           {/* Heart */}
@@ -280,11 +280,11 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             href={business.phone ? `tel:${business.phone}` : '#'}
             onClick={(e: React.MouseEvent<HTMLAnchorElement>) => { if (!business.phone) e.preventDefault(); trackEvent("Business", "Call Now", business.name) }}
             containerClassName="rounded-lg w-full h-full"
-            className="w-full h-full flex items-center justify-center bg-zinc-900 text-white"
+            className="w-full h-full flex items-center justify-center bg-zinc-900 text-white px-1"
             glowColor={theme === 'light' ? "#FFD700" : undefined}
           >
-            <Phone className="w-4 h-4 mr-2" strokeWidth={2} />
-            <span className="font-bold text-xs uppercase tracking-[0.15em] translate-y-[1px]">Call</span>
+            <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2" strokeWidth={2} />
+            <span className="font-bold text-[10px] sm:text-xs uppercase tracking-tight sm:tracking-[0.15em] translate-y-[1px]">Call</span>
           </HoverBorderGradient>
 
           {/* WhatsApp Button */}
@@ -295,11 +295,11 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             rel="noopener noreferrer"
             onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
             containerClassName="rounded-lg w-full h-full"
-            className="w-full h-full flex items-center justify-center bg-emerald-600 text-white"
+            className="w-full h-full flex items-center justify-center bg-emerald-600 text-white px-1"
             glowColor={theme === 'light' ? "#FFD700" : undefined}
           >
-            <div className="w-5 h-5 mr-2 border border-white/20 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0 bg-white/10">W</div>
-            <span className="font-bold text-white text-xs uppercase tracking-[0.15em] translate-y-[1px]">WhatsApp</span>
+            <div className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 border border-white/20 rounded-full flex items-center justify-center text-[8px] sm:text-[10px] font-bold text-white shrink-0 bg-white/10">W</div>
+            <span className="font-bold text-white text-[10px] sm:text-xs uppercase tracking-tight sm:tracking-[0.15em] translate-y-[1px]">WhatsApp</span>
           </HoverBorderGradient>
         </div>
 
@@ -320,12 +320,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
             </span>
           </div>
         </div>
-
-
-
       </div>
     </div >
   );
 }
-
-// End of component

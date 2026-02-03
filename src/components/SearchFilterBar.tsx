@@ -85,9 +85,9 @@ export function SearchFilterBar({
     return (
         <div className="space-y-4">
             {/* Search Bar */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
-                    <div className="flex-1 min-w-[300px]">
+                    <div className="w-full">
                         {settings.countryCode === 'US' ? (
                             <HierarchicalLocationSelector
                                 placeholder="DEBUG: Enter city, suburb, or ZIP"
@@ -130,7 +130,7 @@ export function SearchFilterBar({
                         ) : (
                             /* UK Legacy Selector - Upgraded to Combobox */
                             <UKCityCombobox
-                                className="w-full md:w-[200px] h-10 bg-card border-border/50 text-sm"
+                                className="w-full h-12 bg-card border-border/50 text-sm"
                                 placeholder="Select City"
                                 // value={citySlug} // Using citySlug from URL params might need mapping back to Capitalized?
                                 // Actually SearchFilterBar uses useParams -> citySlug is lowercase/slugified usually?
@@ -161,7 +161,7 @@ export function SearchFilterBar({
                         <Button
                             variant="outline"
                             size="lg"
-                            className="relative border-border/50 hover:border-gold/50 min-w-[120px]"
+                            className="relative border-border/50 hover:border-gold/50 w-full sm:w-auto sm:min-w-[120px] h-12"
                         >
                             <SlidersHorizontal className="w-5 h-5 mr-2" />
                             Filters
