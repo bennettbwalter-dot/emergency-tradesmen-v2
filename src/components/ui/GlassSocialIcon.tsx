@@ -52,9 +52,19 @@ export function GlassSocialIcon({ platform, href, className }: GlassSocialIconPr
     const config = platformConfig[platform];
     const Icon = config.icon;
 
+    const absoluteHref = React.useMemo(() => {
+        if (!href) return '#';
+        if (href.startsWith('http://') || href.startsWith('https://')) return href;
+        if (href.startsWith('//')) return `https:${href}`;
+        if (href.includes('.') && !href.includes(' ')) {
+            return `https://${href}`;
+        }
+        return href;
+    }, [href]);
+
     return (
         <a
-            href={href}
+            href={absoluteHref}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(

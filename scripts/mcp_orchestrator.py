@@ -35,8 +35,7 @@ else:
 # =============================================================================
 SAFETY_LIMITS = {
     "yelp": {"daily": 4950},          # Free tier: 5,000/day
-    "foursquare": {"monthly": 9900},  # Free tier: 10,000/month
-    "here": {"monthly": 225000}       # Free tier: 250,000/month (90% limit, 10% buffer)
+    "foursquare": {"monthly": 99000}  # Free tier: 100,000/month
 }
 
 STATS_FILE = os.path.join(os.path.dirname(__file__), 'usage_stats.json')
@@ -110,14 +109,35 @@ class RichDataScraper:
             
             # Social links
             for link in soup.find_all('a', href=True):
-                href = link['href']
+                href = link['href'].strip().lower()
+                if not href: continue
+                
                 try:
-                    full_url = urljoin(url, href).lower()
+                    # Logic to catch "instagram.com/user" without http
+                    is_social = False
+                    target_platform = None
                     for platform, domain in RichDataScraper.SOCIAL_DOMAINS.items():
                         domains = [domain] if isinstance(domain, str) else domain
-                        if any(d in full_url for d in domains):
-                            if 'share' not in full_url and 'sharer' not in full_url:
-                                found['social_links'][platform] = full_url
+                        if any(d in href for d in domains):
+                            is_social = True
+                            target_platform = platform
+                            break
+                    
+                    if is_social:
+                        # If it's a social link, don't let urljoin make it relative to the business site
+                        # unless it actually IS a relative path (unlikely for social domains but possible)
+                        # Actually, if it contains the domain, it should be absolute.
+                        if not href.startswith('http') and not href.startswith('//'):
+                            full_url = 'https://' + href
+                        else:
+                            full_url = urljoin(url, href)
+                    else:
+                        full_url = urljoin(url, href)
+                    
+                    full_url = full_url.lower()
+                    if target_platform:
+                        if 'share' not in full_url and 'sharer' not in full_url:
+                            found['social_links'][target_platform] = full_url
                 except: continue
                 
             return found
@@ -159,6 +179,49 @@ class YelpAPI:
             return []
         except: return "ERROR"
 
+
+class WebSearchAPI:
+    """Fallback directory scraper for YellowPages.com to ensure continuous building."""
+    @staticmethod
+    def search(trade: str, city: str, state: str) -> List[Dict]:
+        trade_query = trade.replace("-", " ")
+        location_query = f"{city}, {state}"
+        url = f"https://www.yellowpages.com/search?search_terms={trade_query}&geo_location_terms={location_query}"
+        
+        headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+        try:
+            resp = requests.get(url, headers=headers, timeout=15)
+            if resp.status_code != 200: return []
+            
+            soup = BeautifulSoup(resp.text, 'html.parser')
+            found = []
+            
+            # YellowPages result cards
+            for card in soup.select('.result'):
+                name_tag = card.select_one('.business-name')
+                phone_tag = card.select_one('.phones')
+                addr_tag = card.select_one('.adr')
+                
+                if name_tag and phone_tag:
+                    name = name_tag.get_text(strip=True)
+                    phone = re.sub(r'[^\d]', '', phone_tag.get_text(strip=True))
+                    if len(phone) == 11 and phone.startswith('1'): phone = phone[1:]
+                    
+                    if len(phone) == 10:
+                        found.append({
+                            "name": name,
+                            "phone": phone,
+                            "source": "web_fallback",
+                            "address": addr_tag.get_text(strip=True) if addr_tag else f"{city}, {state}",
+                            "website": "https://www.yellowpages.com" + name_tag['href'] if name_tag.has_attr('href') else None
+                        })
+                if len(found) >= 10: break
+            
+            if found:
+                print(f"    [WEB] Found {len(found)} results from YellowPages")
+            return found
+        except: return []
+
 # =============================================================================
 # ORCHESTRATOR
 # =============================================================================
@@ -181,6 +244,8 @@ class MCPOrchestrator:
     def _init_sources(self):
         if os.getenv("YELP_API_KEY"):
             self.sources["yelp"] = APISource("yelp", os.getenv("YELP_API_KEY"))
+        if os.getenv("FOURSQUARE_API_KEY"):
+            self.sources["foursquare"] = APISource("foursquare", os.getenv("FOURSQUARE_API_KEY"))
         print(f"[INIT] Active Sources: {list(self.sources.keys())}")
 
     def _load_stats(self) -> Dict:
@@ -205,6 +270,15 @@ class MCPOrchestrator:
         return {"yelp": {"daily_calls": 0, "last_reset": "2026-02-01"}, 
                 "foursquare": {"monthly_calls": 0, "last_reset_month": "2026-02"}}
 
+    def _load_gaps(self):
+        gap_file = os.path.join(os.path.dirname(__file__), 'us_listing_gaps.json')
+        if os.path.exists(gap_file):
+            with open(gap_file, 'r', encoding='utf-8') as f:
+                gaps = json.load(f)
+            # PRIORITY RULE: Sort by 'needed' descending to fill the largest gaps first
+            return sorted(gaps, key=lambda x: x.get('needed', 0), reverse=True)
+        return []
+
     def _save_stats(self):
         with self.lock:
             with open(STATS_FILE, 'w') as f:
@@ -225,32 +299,34 @@ class MCPOrchestrator:
 
     def search(self, trade, city, state) -> List[Dict]:
         available = [s for s in self.sources.values() if s.is_available(self.stats)]
-        if not available: return "ALL_EXHAUSTED"
-
+        
         for src in available:
             print(f"  [API] Trying {src.name}...")
             if src.name == "yelp": 
-                time.sleep(random.uniform(10.0, 15.0)) # Super conservative for Yelp free tier to avoid 429s
+                time.sleep(random.uniform(2.0, 5.0)) # Reduced sleep for acceleration
                 res = YelpAPI.search(src.api_key, trade, city, state)
+            elif src.name == "foursquare":
+                res = FoursquareAPI.search(src.api_key, trade, city, state)
+            else: res = []
             
             with self.lock:
                 if src.name == "yelp": self.stats["yelp"]["daily_calls"] += 1
                 else: self.stats[src.name]["monthly_calls"] += 1
             self._save_stats()
 
-            if res == "RATE_LIMIT":
-                src.cooldown_until = datetime.now() + timedelta(minutes=2)
-                print(f"      [RATE] {src.name} rate-limited, cooling for 2 mins...")
-                continue
-            if res == "AUTH_ERROR":
-                src.is_dead = True
-                continue
-            if res == "ERROR": continue
-
             if isinstance(res, list) and res:
                 print(f"    [{src.name}] Found {len(res)} results")
                 return res
-        return []
+            
+            if res == "RATE_LIMIT":
+                src.cooldown_until = datetime.now() + timedelta(minutes=2)
+                print(f"      [RATE] {src.name} rate-limited, cooling for 2 mins...")
+            if res == "AUTH_ERROR":
+                src.is_dead = True
+        
+        # FALLBACK: Try Web Search if APIs are exhausted, rate-limited, or return zero results
+        print(f"    [WEB] No API results. Falling back to internet search for {city}, {state}...")
+        return WebSearchAPI.search(trade, city, state)
 
     def insert(self, biz, trade, city, state):
         max_retries = 3
@@ -348,43 +424,54 @@ class MCPOrchestrator:
                 if added >= needed: break
         return added
 
-    def run(self, max_workers=1):
-        trades = ["plumber", "electrician", "locksmith", "hvac", "roofer", "builder"]
-        print(f"\n[MASTER-PROMPT] Starting autonomous USA Enrichment loop...")
-        print(f"Acceleration active: {max_workers} agent (throttled for Yelp).\n")
+    def run(self, max_workers=5):
+        gaps = self._load_gaps()
+        if not gaps:
+            print("[ERR] No gaps found in us_listing_gaps.json. Run scripts/analyze_us_gaps.js first.")
+            return
+
+        print(f"\n[ORCHESTRA] Starting autonomous USA Gap-Fill (11 Trades)...")
+        print(f"Total Gaps: {len(gaps)}")
+        print(f"Acceleration: {max_workers} agents (Safety Throttled).\n")
         
         while True:
-            # Check if ANY source is available before starting
             available = [s for s in self.sources.values() if s.is_available(self.stats)]
-            if not available:
-                print("[PAUSE] All API sources on cooldown. Waiting 2 mins before retry...")
-                time.sleep(120)
-                self.stats = self._load_stats()
-                continue
+            if available:
+                print(f"[ACTIVE] API Sources available: {[s.name for s in available]}")
+            else:
+                print(f"[ACTIVE] API sources exhausted. running in WEB-ONLY mode.")
             
             print(f"[ACTIVE] Sources available: {[s.name for s in available]}")
-            random.shuffle(self.cities)
             
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = []
-                for loc in self.cities:
-                    for trade in trades:
-                        futures.append(executor.submit(self.process_gap, loc, trade))
+            # Process in batches of 500 to avoid overloading memory/threadpool
+            BATCH_SIZE = 500
+            for i in range(0, len(gaps), BATCH_SIZE):
+                batch = gaps[i : i + BATCH_SIZE]
+                print(f"[BATCH] Processing {i} to {i + len(batch)} of {len(gaps)}...")
                 
-                for future in as_completed(futures):
-                    try:
-                        res = future.result()
-                        if res == "STOP":
-                            # Don't wait, just break inner loop and check sources again
-                            executor.shutdown(wait=False, cancel_futures=True)
-                            break
-                    except: continue
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    futures = []
+                    for gap in batch:
+                        loc = {"city": gap['city'], "state": gap['stateSlug'].upper()}
+                        futures.append(executor.submit(self.process_gap, loc, gap['trade']))
+                    
+                    for future in as_completed(futures):
+                        try:
+                            res = future.result()
+                            if res == "STOP":
+                                executor.shutdown(wait=False, cancel_futures=True)
+                                break
+                        except: continue
+                
+                # Check source availability after each batch
+                self.stats = self._load_stats()
             
-            print("\n[LOOP] Cycle complete. Checking API availability...")
-            time.sleep(5)
+            print("\n[LOOP] Full cycle complete. Cooling for 1 hour...")
+            time.sleep(3600)
+            gaps = self._load_gaps() # Refresh gaps
 
 if __name__ == "__main__":
     try:
-        MCPOrchestrator().run()
+        MCPOrchestrator().run(max_workers=5)
     except KeyboardInterrupt:
         print("\n[END] Stopped by user")

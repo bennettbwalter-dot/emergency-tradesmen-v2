@@ -16,8 +16,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // US Trades
 const US_TRADES = [
-    'plumber', 'electrician', 'locksmith', 'drain-specialist',
-    'glazier', 'roofer', 'water-restoration', 'breakdown', 'hvac'
+    'plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist',
+    'glazier', 'roofer', 'builder', 'water-restoration', 'breakdown', 'hvac'
 ];
 
 // Load US cities from JSON

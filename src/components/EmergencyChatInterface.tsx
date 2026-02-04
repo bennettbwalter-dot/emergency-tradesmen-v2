@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench } from "lucide-react";
+import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,8 @@ import { UKCityCombobox } from "@/components/UKCityCombobox";
 import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
 import { Terminal, TypingAnimation, AnimatedSpan } from "@/registry/magicui/terminal";
 import { BorderBeam } from "@/components/magicui/BorderBeam";
+import { useWhisper } from "@/hooks/useWhisper";
+import { toast } from "sonner";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -41,6 +43,29 @@ export function EmergencyChatInterface() {
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const { getLocation, loading: geoLoading, place } = useGeolocation();
+
+    const {
+        isRecording,
+        isProcessing: isTranscriptionProcessing,
+        transcription,
+        error: whisperError,
+        startRecording,
+        stopRecording
+    } = useWhisper();
+
+    // Handle transcription from Whisper
+    useEffect(() => {
+        if (transcription) {
+            handleUserMessage(transcription);
+        }
+    }, [transcription]);
+
+    // Handle Whisper errors
+    useEffect(() => {
+        if (whisperError) {
+            toast.error(whisperError);
+        }
+    }, [whisperError]);
 
     const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
         if (chatContainerRef.current) {
@@ -267,6 +292,28 @@ export function EmergencyChatInterface() {
         />
     );
 
+    const micButton = (
+        <Button
+            onClick={isRecording ? stopRecording : startRecording}
+            disabled={isTranscriptionProcessing}
+            size="icon"
+            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+                ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
+                : isTranscriptionProcessing
+                    ? 'bg-gold/50 cursor-not-allowed'
+                    : 'bg-gold/10 hover:bg-gold/20 text-gold border border-gold/30'}`}
+            title={isRecording ? "Stop Recording" : isTranscriptionProcessing ? "Transcribing..." : "Record Message"}
+        >
+            {isTranscriptionProcessing ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+            ) : isRecording ? (
+                <MicOff className="w-4 h-4" />
+            ) : (
+                <Mic className="w-4 h-4" />
+            )}
+        </Button>
+    );
+
     const actionButton = (
         <Button
             onClick={handleActionClick}
@@ -433,9 +480,10 @@ export function EmergencyChatInterface() {
                             className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
-                        <div className="hidden md:grid grid-cols-[1fr_1fr_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
+                        <div className={`hidden md:grid ${import.meta.env.DEV ? 'grid-cols-[1fr_1fr_auto_auto]' : 'grid-cols-[1fr_1fr_auto]'} items-center gap-2 px-8 pb-4 bg-transparent w-full`}>
                             {tradeSelector}
                             {locationSelector}
+                            {import.meta.env.DEV && micButton}
                             {actionButton}
                         </div>
                         <BorderBeam duration={8} size={100} />
@@ -447,6 +495,11 @@ export function EmergencyChatInterface() {
             <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center">
                 {/* Single Row: Trade, City, Button - Side by Side, Equal Widths, 10px Gap, 90% Width */}
                 <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[10px]">
+                    {import.meta.env.DEV && (
+                        <div className="flex-[0_0_auto]">
+                            {micButton}
+                        </div>
+                    )}
                     <div className="flex-1 min-w-0">
                         {tradeSelector}
                     </div>

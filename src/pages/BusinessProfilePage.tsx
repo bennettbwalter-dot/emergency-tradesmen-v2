@@ -19,7 +19,7 @@ import {
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { LeafletMap } from "@/components/LeafletMap";
-import type { Business } from "@/lib/businesses";
+import { Business, calculateTrustScore } from "@/lib/businesses";
 import { trades } from "@/lib/trades";
 
 import { db } from "@/lib/db";
@@ -155,16 +155,8 @@ export default function BusinessProfilePage() {
         reviewStats.averageRating = business.rating;
     }
 
-    // Calculate Trust Score (1-5 Basis)
-    const calculateTrustScore = () => {
-        let score = 1; // Base point for being a service business
-        if (business.email) score++;
-        if (business.website) score++;
-        if (business.reviewCount > 0) score++;
-        if (business.social_links && Object.values(business.social_links).some(l => !!l)) score++;
-        return score;
-    };
-    const trustScore = calculateTrustScore();
+    // Calculate Trust Score (1-5 Basis) - Summing: Base(1) + Email + Social + Website + Reviews
+    const trustScore = calculateTrustScore(business);
 
     const formattedTrade = trade.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
@@ -368,14 +360,20 @@ export default function BusinessProfilePage() {
                                             {business.name}
                                         </h1>
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm md:text-base font-medium">
-                                            <div className="flex items-center gap-2 group cursor-help">
+                                            <div className="flex items-center gap-3 group cursor-help">
                                                 <div className="relative flex items-center justify-center">
-                                                    <div className={`absolute inset-0 rounded-full blur-sm transition-colors animate-pulse ${trustScore === 5 ? 'bg-amber-500/20 group-hover:bg-amber-500/40' : 'bg-emerald-500/20 group-hover:bg-emerald-500/40'}`}></div>
-                                                    <ShieldCheck className={`w-5 h-5 relative z-10 ${trustScore === 5 ? 'text-amber-500' : 'text-emerald-500'}`} />
+                                                    <div className={`absolute inset-0 rounded-full blur-md transition-colors animate-pulse ${trustScore >= 4 ? 'bg-emerald-500/20 group-hover:bg-emerald-500/40' : 'bg-blue-500/20 group-hover:bg-blue-500/40'}`}></div>
+                                                    <div className="relative flex items-center justify-center w-8 h-8">
+                                                        <Shield className={`w-8 h-8 relative z-10 ${trustScore >= 4 ? 'text-emerald-500 fill-emerald-500/10' : 'text-blue-500 fill-blue-500/10'}`} strokeWidth={2.5} />
+                                                        <span className="absolute inset-0 flex items-center justify-center text-xs font-black text-white">{trustScore}</span>
+                                                    </div>
                                                 </div>
-                                                <span className={`font-bold tracking-tight ${trustScore === 5 ? 'text-amber-500' : 'text-emerald-500'}`}>
-                                                    {trustScore === 5 ? 'Top Rated 5/5' : `Verified ${trustScore}/5`}
-                                                </span>
+                                                <div className="flex flex-col">
+                                                    <span className={`font-bold tracking-tight leading-none ${trustScore >= 4 ? 'text-emerald-500' : 'text-blue-500'}`}>
+                                                        {trustScore === 5 ? 'TOP RATED' : 'VERIFIED PRO'}
+                                                    </span>
+                                                    <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Score {trustScore}/5</span>
+                                                </div>
                                             </div>
                                             <span className="text-muted-foreground/40">•</span>
                                             <div className="flex items-center gap-1.5 text-muted-foreground">

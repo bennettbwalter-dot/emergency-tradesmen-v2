@@ -147,3 +147,16 @@ export function getBusinessById(id: string): { business: Business; city: string;
     // Static lookup disabled. Real data is fetched via businessService.ts from Supabase.
     return null;
 }
+
+/**
+ * Centralized Trust Score calculation logic (1-5 Basis)
+ * Summing: Base(1) + Email(+1) + Social(+1) + Website(+1) + Reviews/Rating(+1)
+ */
+export function calculateTrustScore(business: Business): number {
+    let score = 1; // Base point for being a service business
+    if (business.email) score++;
+    if (business.website) score++;
+    if (business.reviewCount > 0 || (business.rating && business.rating > 0)) score++;
+    if (business.social_links && Object.values(business.social_links).some(v => !!v)) score++;
+    return Math.min(score, 5);
+}

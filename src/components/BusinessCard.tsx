@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Star, MapPin, Phone, ShieldCheck, Zap, Heart, Clock, Globe, CheckCircle, ArrowRight, Siren, Facebook, Instagram, Linkedin, Twitter, Video } from "lucide-react";
+import { Star, MapPin, Phone, ShieldCheck, Zap, Heart, Clock, Globe, CheckCircle, ArrowRight, Siren, Facebook, Instagram, Linkedin, Twitter, Video, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Business, isBusinessAvailable } from "@/lib/businesses";
+import { Business, isBusinessAvailable, calculateTrustScore } from "@/lib/businesses";
 import { useToast } from "@/components/ui/use-toast";
 import { trackEvent } from "@/lib/analytics";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
@@ -23,18 +23,22 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
   const { toast } = useToast();
   const { theme } = useSimpleTheme();
 
+  const ensureAbsoluteUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('//')) return `https:${url}`;
+    // Handle cases like "facebook.com/user"
+    if (url.includes('.') && !url.includes(' ')) {
+      return `https://${url}`;
+    }
+    return url;
+  };
+
   const tradeName = business.trade ? business.trade.toUpperCase() : "TRADESPERSON";
   const isLive = isBusinessAvailable(business);
 
-  // Trust Score (1-5 Basis)
-  const trustScore = business.trust_score || (() => {
-    let score = 1; // Base point for being a service business
-    if (business.email) score++;
-    if (business.website) score++;
-    if (business.reviewCount > 0) score++;
-    if (business.social_links && Object.entries(business.social_links).some(([_, val]) => !!val)) score++;
-    return score;
-  })();
+  // Trust Score (1-5 Basis) - Summing: Base(1) + Email + Social + Website + Reviews
+  const trustScore = calculateTrustScore(business);
 
   const handleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -118,10 +122,13 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           </h3>
 
           {/* Sub-details */}
-          <div className="flex items-center gap-2 text-[10px] font-medium text-zinc-400 h-4">
-            <div className="flex items-center gap-1 shrink-0">
-              <ShieldCheck className={`w-3 h-3 ${trustScore >= 4 ? 'text-emerald-400' : 'text-blue-400'}`} />
-              <span className={`${trustScore >= 4 ? 'text-emerald-400/90' : 'text-blue-400/90'}`}>Level {trustScore} Business</span>
+          <div className="flex items-center gap-2.5 text-[10px] font-medium text-zinc-400 h-5">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <div className="relative flex items-center justify-center w-4 h-4">
+                <Shield className={`w-4 h-4 ${trustScore >= 4 ? 'text-emerald-400 fill-emerald-400/20' : 'text-blue-400 fill-blue-400/20'}`} strokeWidth={2.5} />
+                <span className="absolute inset-0 flex items-center justify-center text-[7px] font-black text-white">{trustScore}</span>
+              </div>
+              <span className={`${trustScore >= 4 ? 'text-emerald-400/90' : 'text-blue-400/90'} font-bold`}>TRUST SCORE {trustScore}/5</span>
             </div>
             <span className="opacity-30">•</span>
             <div className="flex items-center gap-1 shrink-0">
@@ -206,7 +213,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           {business.social_links?.facebook && (
             <HoverBorderGradient
               as="a"
-              href={business.social_links.facebook}
+              href={ensureAbsoluteUrl(business.social_links.facebook)}
               target="_blank"
               rel="noopener noreferrer"
               containerClassName="rounded-full w-8 h-8 p-px"
@@ -219,7 +226,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           {business.social_links?.instagram && (
             <HoverBorderGradient
               as="a"
-              href={business.social_links.instagram}
+              href={ensureAbsoluteUrl(business.social_links.instagram)}
               target="_blank"
               rel="noopener noreferrer"
               containerClassName="rounded-full w-8 h-8 p-px"
@@ -232,7 +239,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           {(business.social_links?.twitter) && (
             <HoverBorderGradient
               as="a"
-              href={business.social_links.twitter}
+              href={ensureAbsoluteUrl(business.social_links.twitter)}
               target="_blank"
               rel="noopener noreferrer"
               containerClassName="rounded-full w-8 h-8 p-px"
@@ -247,7 +254,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           {business.social_links?.linkedin && (
             <HoverBorderGradient
               as="a"
-              href={business.social_links.linkedin}
+              href={ensureAbsoluteUrl(business.social_links.linkedin)}
               target="_blank"
               rel="noopener noreferrer"
               containerClassName="rounded-full w-8 h-8 p-px"
@@ -260,7 +267,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           {business.social_links?.tiktok && (
             <HoverBorderGradient
               as="a"
-              href={business.social_links.tiktok}
+              href={ensureAbsoluteUrl(business.social_links.tiktok)}
               target="_blank"
               rel="noopener noreferrer"
               containerClassName="rounded-full w-8 h-8 p-px"
