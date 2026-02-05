@@ -480,10 +480,10 @@ export function EmergencyChatInterface() {
                             className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
                         />
 
-                        <div className={`hidden md:grid ${import.meta.env.DEV ? 'grid-cols-[1fr_1fr_auto_auto]' : 'grid-cols-[1fr_1fr_auto]'} items-center gap-2 px-8 pb-4 bg-transparent w-full`}>
+                        <div className="hidden md:grid grid-cols-[1fr_1fr_auto_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
                             {tradeSelector}
                             {locationSelector}
-                            {import.meta.env.DEV && micButton}
+                            {micButton}
                             {actionButton}
                         </div>
                         <BorderBeam duration={8} size={100} />
@@ -495,11 +495,9 @@ export function EmergencyChatInterface() {
             <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center">
                 {/* Single Row: Trade, City, Button - Side by Side, Equal Widths, 10px Gap, 90% Width */}
                 <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[10px]">
-                    {import.meta.env.DEV && (
-                        <div className="flex-[0_0_auto]">
-                            {micButton}
-                        </div>
-                    )}
+                    <div className="flex-[0_0_auto]">
+                        {micButton}
+                    </div>
                     <div className="flex-1 min-w-0">
                         {tradeSelector}
                     </div>
