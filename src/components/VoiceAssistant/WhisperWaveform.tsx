@@ -11,7 +11,7 @@ interface WhisperWaveformProps {
 }
 
 // Global threshold for silence detection (matches hook)
-const SILENCE_THRESHOLD = 0.02;
+const SILENCE_THRESHOLD = 0.01;
 
 /**
  * Premium WhisperWaveform - Exact Pixel-Perfect Match to Mockup

@@ -56,6 +56,12 @@ export function useWhisper(): WhisperResult {
             // Re-sample to 16kHz as required by Whisper
             const audioContext = new AudioContext({ sampleRate: 16000 });
             audioContextRef.current = audioContext;
+
+            // CRITICAL: Explicitly resume context for mobile browsers
+            if (audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+
             const source = audioContext.createMediaStreamSource(stream);
 
             // Create analyser for real-time audio levels
@@ -114,25 +120,27 @@ export function useWhisper(): WhisperResult {
         }
     }, [isRecording]);
 
-    // Get current audio level (0-1 range) with enhanced sensitivity
+    // Get current audio level (0-1 range) with enhanced sensitivity for mobile
     const getAudioLevel = useCallback(() => {
         if (!analyserRef.current) return 0;
 
         const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-        analyserRef.current.getByteFrequencyData(dataArray);
+        // Using Time Domain data for more reliable peak detection on mobile
+        analyserRef.current.getByteTimeDomainData(dataArray);
 
-        // Use peak detection for more dramatic response
+        // Calculate peak amplitude from 128 (neutral point for time domain)
         let peak = 0;
         for (let i = 0; i < dataArray.length; i++) {
-            if (dataArray[i] > peak) peak = dataArray[i];
+            const amplitude = Math.abs(dataArray[i] - 128);
+            if (amplitude > peak) peak = amplitude;
         }
 
-        // Noise gate: ignore values below threshold (mic hiss/ambient noise)
-        const raw = peak / 255;
-        if (raw < 0.02) return 0;
+        // Noise gate: ultra-low for mobile (ambient floor is usually 1-2 units)
+        const raw = peak / 128;
+        if (raw < 0.01) return 0;
 
-        // Amplify and normalize (boost sensitivity)
-        const amplified = Math.min(1, raw * 2.5);
+        // Amplify and normalize (boost sensitivity more for mobile)
+        const amplified = Math.min(1, raw * 3.5);
 
         return amplified;
     }, []);
