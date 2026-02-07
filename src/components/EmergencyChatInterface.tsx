@@ -26,6 +26,7 @@ import { Terminal, TypingAnimation, AnimatedSpan } from "@/registry/magicui/term
 import { BorderBeam } from "@/components/magicui/BorderBeam";
 import { useWhisper } from "@/hooks/useWhisper";
 import { toast } from "sonner";
+import WhisperWaveform from "@/components/VoiceAssistant/WhisperWaveform";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -50,8 +51,13 @@ export function EmergencyChatInterface() {
         transcription,
         error: whisperError,
         startRecording,
-        stopRecording
+        stopRecording,
+        getAudioLevel
     } = useWhisper();
+
+    // Audio data for waveform visualization
+    const [audioData, setAudioData] = useState<number[]>(new Array(120).fill(0));
+    const audioIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     // Handle transcription from Whisper
     useEffect(() => {
@@ -66,6 +72,31 @@ export function EmergencyChatInterface() {
             toast.error(whisperError);
         }
     }, [whisperError]);
+
+    // Real-time audio visualization when recording
+    useEffect(() => {
+        if (isRecording) {
+            audioIntervalRef.current = setInterval(() => {
+                const level = getAudioLevel();
+                setAudioData(prev => {
+                    const newData = [...prev.slice(1)];
+                    newData.push(level);
+                    return newData;
+                });
+            }, 50); // 50ms for smoother updates
+        } else {
+            if (audioIntervalRef.current) {
+                clearInterval(audioIntervalRef.current);
+            }
+            // Reset audio data when not recording
+            setAudioData(new Array(50).fill(0));
+        }
+        return () => {
+            if (audioIntervalRef.current) {
+                clearInterval(audioIntervalRef.current);
+            }
+        };
+    }, [isRecording, getAudioLevel]);
 
     const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
         if (chatContainerRef.current) {
@@ -464,21 +495,38 @@ export function EmergencyChatInterface() {
                 {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
                 <div className="w-full bg-transparent flex justify-center py-4">
                     <div className="relative flex flex-col w-[90%] bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
-                        <textarea
-                            ref={inputRef}
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault();
-                                    handleKeyDown(e);
-                                }
-                            }}
-                            onFocus={() => setIsFocused(true)}
-                            onBlur={() => setIsFocused(false)}
-                            placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                            className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
-                        />
+
+                        {/* WAVEFORM INSIDE CONTAINER - Shows when recording */}
+                        {isRecording ? (
+                            <div className="w-full min-h-[180px] md:min-h-[100px] flex items-center justify-center px-4 py-4">
+                                <WhisperWaveform
+                                    audioData={audioData}
+                                    isRecording={isRecording}
+                                    isProcessing={isTranscriptionProcessing}
+                                    onConfirm={stopRecording}
+                                    onCancel={() => {
+                                        stopRecording();
+                                        setAudioData(new Array(120).fill(0));
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            <textarea
+                                ref={inputRef}
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && !e.shiftKey) {
+                                        e.preventDefault();
+                                        handleKeyDown(e);
+                                    }
+                                }}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
+                                placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                                className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
+                            />
+                        )}
 
                         <div className="hidden md:grid grid-cols-[1fr_1fr_auto_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
                             {tradeSelector}

@@ -3,6 +3,7 @@ import { Mic, MicOff, Loader2, Volume2, Navigation } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { AzureVoiceService } from '@/services/azureVoiceService';
 import { processUserMessage, ChatState } from '@/lib/chat-logic';
+import WhisperWaveform from './WhisperWaveform';
 
 const VoiceTrigger = () => {
     const navigate = useNavigate();
@@ -51,6 +52,7 @@ const VoiceTrigger = () => {
     };
 
     const [volume, setVolume] = useState(0);
+    const [audioData, setAudioData] = useState<number[]>(new Array(50).fill(0));
     const volumeInterval = useRef<any>(null);
 
     useEffect(() => {
@@ -71,6 +73,12 @@ const VoiceTrigger = () => {
             // Get volume from the Azure service's audio pipeline (same AudioContext)
             const vol = voiceService.getVolume();
             setVolume(vol * 2.55); // Scale to 0-255 range for UI
+
+            // Update audio data for waveform visualization
+            setAudioData(prev => {
+                const newData = [...prev.slice(1), vol]; // Shift left, add new value
+                return newData;
+            });
         }, 100);
     };
 
@@ -307,29 +315,21 @@ const VoiceTrigger = () => {
                 </div>
             )}
 
-            {/* LIVE TRANSCRIPT FEEDBACK */}
+            {/* WAVEFORM VISUALIZATION */}
             {isActive && (status === 'Listening' || status === 'Speaking' || status === 'Processing') && (
-                <div className={`
-                    absolute bottom-24 whitespace-nowrap bg-black/90 text-white text-[13px] px-4 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-500 border border-white/10
-                    ${isActive ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}
-                `}>
-                    <div className="flex items-center gap-2">
-                        {status === 'Processing' ? (
-                            <Loader2 className="w-3 h-3 animate-spin text-blue-400" />
-                        ) : (
-                            <div className={`w-2 h-2 rounded-full ${status === 'Listening' ? 'bg-green-400 animate-pulse' : 'bg-blue-400'}`} />
-                        )}
-                        <span className="font-medium">
-                            {transcript ? (
-                                transcript.startsWith('(') ? (
-                                    <span className="opacity-50 italic">{transcript}</span>
-                                ) : `"${transcript}"`
-                            ) :
-                                status === 'Listening' ? 'I\'m listening... speak now' :
-                                    status === 'Processing' ? 'Thinking...' :
-                                        'Starting up...'}
-                        </span>
-                    </div>
+                <div className="absolute bottom-24 right-0">
+                    <WhisperWaveform
+                        audioData={audioData}
+                        isRecording={status === 'Listening'}
+                        isProcessing={status === 'Processing'}
+                        transcript={transcript}
+                        onConfirm={() => {
+                            if (transcript && transcript.trim().length >= 3) {
+                                processInput(transcript);
+                            }
+                        }}
+                        onCancel={stopSession}
+                    />
                 </div>
             )}
 

@@ -42,7 +42,17 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                     <div className="flex items-center gap-2 truncate">
                         <MapPin className="h-4 w-4 shrink-0 text-gold" />
                         <span className={cn("truncate", !value && "text-muted-foreground")}>
-                            {value || placeholder}
+                            {value ? (
+                                <>
+                                    <span className="hidden sm:inline">{value}</span>
+                                    <span className="sm:hidden">{value}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="hidden sm:inline">{placeholder}</span>
+                                    <span className="sm:hidden text-xs">City</span>
+                                </>
+                            )}
                         </span>
                     </div>
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

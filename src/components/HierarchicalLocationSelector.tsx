@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Map, Building2, MapPin, Home } from "lucide-react";
+import { Map, Building2, MapPin, Home, Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
     Select,
     SelectContent,
@@ -8,6 +10,19 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import usData from '@/lib/us_cities.json';
 
 interface HierarchicalLocationSelectorProps {
@@ -34,6 +49,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     const [selectedState, setSelectedState] = useState<State | null>(null);
     const [selectedCity, setSelectedCity] = useState<FlattenedCity | null>(null);
     const [selectedSuburb, setSelectedSuburb] = useState<Suburb | null>(null);
+    const [cityOpen, setCityOpen] = useState(false);
 
     // Derived Lists
     const [availableCities, setAvailableCities] = useState<FlattenedCity[]>([]);
@@ -181,9 +197,12 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         <div className={`flex flex-wrap gap-2 items-center ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                <SelectTrigger className={`h-11 px-4 min-w-[50px] sm:min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                     <Map className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                    <SelectValue placeholder="State" />
+                    <span className="hidden sm:inline">
+                        <SelectValue placeholder="State" />
+                    </span>
+                    {!selectedState && <span className="sm:hidden text-xs">State</span>}
                 </SelectTrigger>
                 <SelectContent>
                     {sortedStates.map((s) => (
@@ -192,27 +211,70 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                 </SelectContent>
             </Select>
 
-            {/* City Select (Flattened, no Metro) */}
+            {/* City Select (Flattened, no Metro) - SEARCHABLE */}
             {selectedState && (
-                <Select value={selectedCity?.slug || ""} onValueChange={handleCityChange}>
-                    <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
-                        <Building2 className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                        <SelectValue placeholder="City" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[300px]">
-                        {availableCities.map((c) => (
-                            <SelectItem key={c.slug} value={c.slug}>{c.name}</SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                <Popover open={cityOpen} onOpenChange={setCityOpen}>
+                    <PopoverTrigger asChild>
+                        <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={cityOpen}
+                            className={cn(
+                                "h-11 px-4 min-w-[50px] sm:min-w-[120px] flex-1 rounded-full border border-gold transition-all flex items-center justify-between gap-2 shadow-sm",
+                                selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'
+                            )}
+                        >
+                            <div className="flex items-center gap-2 truncate">
+                                <Building2 className="w-4 h-4 shrink-0 text-gold" />
+                                <span className={cn("truncate", !selectedCity && "text-muted-foreground")}>
+                                    <span className="hidden sm:inline">{selectedCity?.name || "City"}</span>
+                                    {!selectedCity && <span className="sm:hidden text-xs">City</span>}
+                                    {selectedCity && <span className="sm:hidden">{selectedCity.name}</span>}
+                                </span>
+                            </div>
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 hidden sm:block" />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[250px] p-0" align="start">
+                        <Command>
+                            <CommandInput placeholder="Type to search..." />
+                            <CommandList>
+                                <CommandEmpty>No city found.</CommandEmpty>
+                                <CommandGroup heading={`Cities in ${selectedState.name}`}>
+                                    {availableCities.map((c) => (
+                                        <CommandItem
+                                            key={c.slug}
+                                            value={c.name}
+                                            onSelect={() => {
+                                                handleCityChange(c.slug);
+                                                setCityOpen(false);
+                                            }}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    selectedCity?.slug === c.slug ? "opacity-100" : "opacity-0"
+                                                )}
+                                            />
+                                            {c.name}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
             )}
 
             {/* Suburb/Area Select - Only show if suburbs exist */}
             {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-11 px-4 min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                    <SelectTrigger className={`h-11 px-4 min-w-[50px] sm:min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
                         <Home className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                        <SelectValue placeholder="Area" />
+                        <span className="hidden sm:inline">
+                            <SelectValue placeholder="Area" />
+                        </span>
+                        {!selectedSuburb && <span className="sm:hidden text-xs">Area</span>}
                     </SelectTrigger>
                     <SelectContent className="max-h-[300px]">
                         {/* Option to select the city itself */}

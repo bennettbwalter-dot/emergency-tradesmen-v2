@@ -7,6 +7,7 @@ export interface WhisperResult {
     error: string | null;
     startRecording: () => void;
     stopRecording: () => void;
+    getAudioLevel: () => number;
 }
 
 export function useWhisper(): WhisperResult {
@@ -18,6 +19,9 @@ export function useWhisper(): WhisperResult {
     const workerRef = useRef<Worker | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
+    const analyserRef = useRef<AnalyserNode | null>(null);
+    const audioContextRef = useRef<AudioContext | null>(null);
+    const streamRef = useRef<MediaStream | null>(null);
 
     useEffect(() => {
         // Initialize worker
@@ -47,10 +51,20 @@ export function useWhisper(): WhisperResult {
             setError(null);
             setTranscription('');
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            streamRef.current = stream;
 
             // Re-sample to 16kHz as required by Whisper
             const audioContext = new AudioContext({ sampleRate: 16000 });
+            audioContextRef.current = audioContext;
             const source = audioContext.createMediaStreamSource(stream);
+
+            // Create analyser for real-time audio levels
+            const analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            analyser.smoothingTimeConstant = 0.3;
+            source.connect(analyser);
+            analyserRef.current = analyser;
+
             const destination = audioContext.createMediaStreamDestination();
             source.connect(destination);
 
@@ -79,7 +93,10 @@ export function useWhisper(): WhisperResult {
                 });
 
                 stream.getTracks().forEach(track => track.stop());
+                streamRef.current = null;
+                analyserRef.current = null;
                 audioContext.close();
+                audioContextRef.current = null;
             };
 
             mediaRecorder.start();
@@ -97,12 +114,36 @@ export function useWhisper(): WhisperResult {
         }
     }, [isRecording]);
 
+    // Get current audio level (0-1 range) with enhanced sensitivity
+    const getAudioLevel = useCallback(() => {
+        if (!analyserRef.current) return 0;
+
+        const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+        analyserRef.current.getByteFrequencyData(dataArray);
+
+        // Use peak detection for more dramatic response
+        let peak = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            if (dataArray[i] > peak) peak = dataArray[i];
+        }
+
+        // Noise gate: ignore values below threshold (mic hiss/ambient noise)
+        const raw = peak / 255;
+        if (raw < 0.02) return 0;
+
+        // Amplify and normalize (boost sensitivity)
+        const amplified = Math.min(1, raw * 2.5);
+
+        return amplified;
+    }, []);
+
     return {
         transcription,
         isProcessing,
         isRecording,
         error,
         startRecording,
-        stopRecording
+        stopRecording,
+        getAudioLevel
     };
 }
