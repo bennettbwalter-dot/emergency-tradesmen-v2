@@ -119,11 +119,28 @@ export function EmergencyChatInterface() {
         scrollToBottom('smooth');
     }, [chatState.history, isTyping]);
 
+    // Removed silent sync to prevent premature button flashing.
+    // The city will now only be "detected" in the UI if the user selects it or clicks Locate Me.
+
+    const [wasLocating, setWasLocating] = useState(false);
+
+    // Sync isRequestingLocation based on selection state
     useEffect(() => {
-        if (geoCity) {
-            handleUserMessage(`I am in ${geoCity}`);
+        // If we have a trade but no city, offer "Locate Me"
+        if (detectedTrade && !detectedCity) {
+            setIsRequestingLocation(true);
+        } else {
+            setIsRequestingLocation(false);
         }
-    }, [geoCity]);
+    }, [detectedTrade, detectedCity, setIsRequestingLocation]);
+
+    // Sync geo location ONLY when manually requested via the Pin button
+    useEffect(() => {
+        if (wasLocating && !geoLoading && geoCity && !detectedCity) {
+            setDetectedCity(geoCity);
+        }
+        setWasLocating(geoLoading);
+    }, [geoLoading, geoCity, detectedCity, wasLocating, setDetectedCity]);
 
     const handleUserMessage = async (msgText: string) => {
         if (!msgText.trim()) return;
@@ -147,7 +164,7 @@ export function EmergencyChatInterface() {
                 const { newState, response } = await processUserMessage(msgText, {
                     ...chatState,
                     detectedTrade: detectedTrade || chatState.detectedTrade,
-                    detectedCity: detectedCity || chatState.detectedCity,
+                    detectedCity: detectedCity || chatState.detectedCity || geoCity,
                 }, settings.countryCode);
 
                 setChatState(prev => ({
