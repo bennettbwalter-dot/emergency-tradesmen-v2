@@ -8,7 +8,25 @@ import { fallbackEnrichment } from '@/data/fallback_enrichment';
 /**
  * Helper to map Supabase business data to the Business interface
  */
-function mapBusinessData(biz: any): Business {
+/**
+ * Distance calculation using Haversine formula
+ */
+function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+/**
+ * Helper to map Supabase business data to the Business interface
+ */
+function mapBusinessData(biz: any, userCoords?: { latitude: number, longitude: number }): Business {
     const dbSocials = biz.social_links || {};
     const fallbackSocials = fallbackEnrichment[biz.id] || {};
 
@@ -19,7 +37,7 @@ function mapBusinessData(biz: any): Business {
 
     const mergedSocials = { ...dbSocials, ...fallbackSocials };
 
-    return {
+    const business: Business = {
         id: biz.id,
         name: biz.name || "Untitled Business",
         rating: Number(biz.rating) || 5.0,
@@ -60,18 +78,34 @@ function mapBusinessData(biz: any): Business {
         header_image_url: biz.header_image_url,
         vehicle_image_url: biz.vehicle_image_url,
         country_code: biz.country_code || 'GB',
-        latitude: biz.latitude,
-        longitude: biz.longitude,
+        latitude: biz.latitude ? Number(biz.latitude) : undefined,
+        longitude: biz.longitude ? Number(biz.longitude) : undefined,
         social_links: mergedSocials,
         trust_score: biz.trust_score
     };
+
+    if (userCoords && business.latitude && business.longitude) {
+        business.distance = getDistance(
+            userCoords.latitude,
+            userCoords.longitude,
+            business.latitude,
+            business.longitude
+        );
+    }
+
+    return business;
 }
 
 /**
  * Fetch businesses from Supabase (Real, Verified Data Only)
  */
-export async function fetchBusinesses(trade: string, city: string, countryCode: string = 'GB'): Promise<Business[]> {
-    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, countryCode=${countryCode}`);
+export async function fetchBusinesses(
+    trade: string,
+    city: string,
+    countryCode: string = 'GB',
+    userCoords?: { latitude: number, longitude: number }
+): Promise<Business[]> {
+    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
 
     // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
     const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
@@ -137,10 +171,18 @@ export async function fetchBusinesses(trade: string, city: string, countryCode: 
         }
     }
 
-    return (allBusinesses || []).map((biz: any) => mapBusinessData(biz))
+    return (allBusinesses || []).map((biz: any) => mapBusinessData(biz, userCoords))
         .sort((a, b) => {
+            // 1. Paid businesses always first
             if (a.tier === 'paid' && b.tier !== 'paid') return -1;
             if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+
+            // 2. Proximity sort if available
+            if (userCoords && a.distance !== undefined && b.distance !== undefined) {
+                return a.distance - b.distance;
+            }
+
+            // 3. Fallback to priority score
             return (b.priority_score || 0) - (a.priority_score || 0);
         });
 }

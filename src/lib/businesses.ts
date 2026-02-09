@@ -61,6 +61,7 @@ export interface Business {
     social_links?: SocialLinks;
     latitude?: number;
     longitude?: number;
+    distance?: number;
     country_code?: string;
     trust_score?: number;
 }

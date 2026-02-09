@@ -26,7 +26,8 @@ export function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     // Check if user is admin (you can enhance this with a proper role check)
-    const isAdmin = user?.email === 'admin@example.com' || user?.email?.includes('bennett');
+    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
+    const isAdmin = (user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase()) || user?.email?.includes('bennett');
 
     if (!user) {
         return <Navigate to={`/login?redirect=${location.pathname}`} replace />;

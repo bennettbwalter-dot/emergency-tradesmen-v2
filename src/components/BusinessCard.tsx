@@ -192,7 +192,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         {/* === 5. Info Stack (Dark Glass Pills with Gold Icons) === */}
         <div className="flex flex-col gap-1.5 w-full">
           {[
-            { icon: MapPin, text: business.address || "Local Service Area" },
+            { icon: MapPin, text: `${business.address || "Local Service Area"}${business.distance ? ` (${(business.distance * 0.621371).toFixed(1)} miles)` : ''}` },
             { icon: Clock, text: business.hours || "24/7 Emergency Service" },
             { icon: ShieldCheck, text: `${trustScore}/5 Rating - Local Tradesperson` },
             { icon: Globe, text: business.website ? "Visit Website" : "No Website", href: business.website || undefined },

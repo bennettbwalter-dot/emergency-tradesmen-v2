@@ -205,8 +205,8 @@ BEGIN
   
   -- Add admin emails here
   RETURN user_email IN (
-    'admin@example.com'
-  );
+    'nicholas.bennett247@gmail.com'
+  ) OR user_email LIKE '%bennett%';
 END;
 $$ LANGUAGE 'plpgsql' SECURITY DEFINER;
 

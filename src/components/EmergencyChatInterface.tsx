@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGeolocation } from "@/hooks/useGeolocation";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { trades, cities, usCities } from "@/lib/trades";
@@ -43,7 +42,13 @@ export function EmergencyChatInterface() {
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const { getLocation, loading: geoLoading, place } = useGeolocation();
+    const {
+        detectUserLocation,
+        userCoords,
+        detectedCity: geoCity,
+        isLocating: geoLoading,
+        geoError
+    } = useLocalization();
 
     const {
         isRecording,
@@ -115,14 +120,10 @@ export function EmergencyChatInterface() {
     }, [chatState.history, isTyping]);
 
     useEffect(() => {
-        if (place?.city) {
-            handleUserMessage(`I am in ${place.city}`);
+        if (geoCity) {
+            handleUserMessage(`I am in ${geoCity}`);
         }
-    }, [place]);
-
-    useEffect(() => {
-        // No automatic location request on mount - wait for user interaction or specific bot state
-    }, []);
+    }, [geoCity]);
 
     const handleUserMessage = async (msgText: string) => {
         if (!msgText.trim()) return;
@@ -254,7 +255,7 @@ export function EmergencyChatInterface() {
 
     const handleActionClick = () => {
         if (isRequestingLocation) {
-            getLocation();
+            detectUserLocation();
             setIsRequestingLocation(false);
         } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
             const countryPrefix = settings.countryCode === 'US' ? '/us' : '';

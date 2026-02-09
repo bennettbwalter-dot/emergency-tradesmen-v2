@@ -24,6 +24,7 @@ import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, N
 import { Link } from "react-router-dom";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
+import { useLocalization } from "@/contexts/LocalizationContext";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
@@ -169,18 +170,23 @@ export default function TradeCityPage() {
   // Prefer image from trade config (trades.ts) if available, otherwise fallback to local map
   const heroImage = pageData?.problem?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
+  const { settings, userCoords } = useLocalization();
+
   // Fetch real businesses from Supabase
   useEffect(() => {
     // Only fetch if we have valid data
-    // Only fetch if we have valid data
-    // Fetches using raw validCity to support generic (empty) queries
     if (!tradeInfo.slug) return;
 
     async function loadBusinesses() {
       setIsLoading(true);
       try {
-        console.log('Fetching businesses for:', { trade: tradeInfo.slug, city: validCity, countryCode: actualCountry });
-        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry);
+        console.log('Fetching businesses for:', {
+          trade: tradeInfo.slug,
+          city: validCity,
+          countryCode: actualCountry,
+          userCoords
+        });
+        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry, userCoords || undefined);
         console.log('Real businesses fetched:', realBusinesses.length);
 
         // If no real businesses found, fallback to static/mock data (now strictly limited)
@@ -218,7 +224,7 @@ export default function TradeCityPage() {
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName]);
+  }, [tradeInfo.slug, cityName, userCoords]);
 
   // Real-time updates for Availability
   useEffect(() => {
