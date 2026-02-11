@@ -150,16 +150,27 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     useEffect(() => {
         if (!navigator.geolocation) return;
 
+        let lastLat = 0;
+        let lastLng = 0;
+
         const watcher = navigator.geolocation.watchPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
+
+                // Only update if moved more than ~50 meters to prevent jitter/flicker
+                const distanceRatio = Math.sqrt(Math.pow(latitude - lastLat, 2) + Math.pow(longitude - lastLng, 2));
+                if (distanceRatio < 0.0005) return;
+
+                lastLat = latitude;
+                lastLng = longitude;
+
                 setUserCoords({ latitude, longitude });
                 // We don't necessarily want to re-resolve city every few seconds
                 // unless it exceeds a threshold, but for now simple update is fine
                 resolveCoordsToCity(latitude, longitude);
             },
             undefined,
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 300000 }
+            { enableHighAccuracy: false, timeout: 20000, maximumAge: 300000 }
         );
 
         return () => navigator.geolocation.clearWatch(watcher);

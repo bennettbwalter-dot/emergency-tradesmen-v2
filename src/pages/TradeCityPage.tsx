@@ -1,6 +1,6 @@
 import { useParams, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/SEO";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
@@ -173,12 +173,21 @@ export default function TradeCityPage() {
   const { settings, userCoords } = useLocalization();
 
   // Fetch real businesses from Supabase
+  const prevContextRef = useRef<string>("");
+
   useEffect(() => {
     // Only fetch if we have valid data
     if (!tradeInfo.slug) return;
 
+    const currentContext = `${tradeInfo.slug}-${cityName}-${actualCountry}`;
+    const isNewLocationOrTrade = prevContextRef.current !== currentContext;
+
     async function loadBusinesses() {
-      setIsLoading(true);
+      if (isNewLocationOrTrade) {
+        setIsLoading(true);
+        prevContextRef.current = currentContext;
+      }
+
       try {
         console.log('Fetching businesses for:', {
           trade: tradeInfo.slug,
@@ -224,7 +233,7 @@ export default function TradeCityPage() {
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName, userCoords]);
+  }, [tradeInfo.slug, cityName, userCoords, actualCountry]);
 
   // Real-time updates for Availability
   useEffect(() => {

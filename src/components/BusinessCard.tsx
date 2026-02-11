@@ -80,15 +80,17 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden
           bg-white dark:bg-[#121212] border border-zinc-200 dark:border-white/10 shadow-lg dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]
       ">
-        <Squares
-          direction="diagonal"
-          speed={0.2}
-          squareSize={40}
-          borderColor={theme === 'light' ? "#e4e4e7" : "rgba(255,255,255,0.5)"}
-          hoverFillColor={theme === 'light' ? "#f4f4f5" : "#222222"}
-          lineThickness={theme === 'light' ? 0.1 : 1}
-          className="opacity-100"
-        />
+        <div className="hidden sm:block absolute inset-0">
+          <Squares
+            direction="diagonal"
+            speed={0.2}
+            squareSize={40}
+            borderColor={theme === 'light' ? "#e4e4e7" : "rgba(255,255,255,0.5)"}
+            hoverFillColor={theme === 'light' ? "#f4f4f5" : "#222222"}
+            lineThickness={theme === 'light' ? 0.1 : 1}
+            className="opacity-100"
+          />
+        </div>
 
         {/* Dark Mode Overlays (Hidden in Light Mode) */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#2A2A2A] via-[#151515] to-[#050505] opacity-90 hidden dark:block pointer-events-none" />
