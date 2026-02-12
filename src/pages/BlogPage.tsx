@@ -98,13 +98,27 @@ export default function BlogPage() {
                     created_at: new Date().toISOString()
                 };
 
+                const staticPostFrozenCondensate: BlogPost = {
+                    id: 'static-frozen-condensate-pipe',
+                    title: settings.countryCode === 'GB'
+                        ? 'Frozen Condensate Pipe? How to Fix Your Boiler Fast (No Engineer Needed)'
+                        : 'Frozen Condensate Line? How to Fix Your Furnace Fast (No HVAC Tech Needed)',
+                    slug: 'frozen-condensate-pipe-fix',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Boiler showing an error code in freezing weather? A frozen condensate pipe is the most common cause. Learn how to safely thaw it and restore your heating in minutes.'
+                        : 'Furnace locked out with an error code in freezing temps? A frozen condensate drain line is the #1 cause. Learn how to thaw it yourself and get your heat back fast.',
+                    cover_image: '/images/blog/frozen-condensate/boiler-error-phone.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug).map(p => ({
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug && p.slug !== staticPostFrozenCondensate.slug).map(p => ({
                     ...p,
                     title: regionalizeText(p.title),
                     excerpt: regionalizeText(p.excerpt)
                 }));
-                setPosts([staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
+                setPosts([staticPostFrozenCondensate, staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
             }
             setIsLoading(false);
         }

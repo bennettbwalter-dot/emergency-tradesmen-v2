@@ -319,19 +319,16 @@ const Index = () => {
 
 
           {/* How It Works Section */}
+          <section className="container-wide py-24 border-t font-display border-border/30">
+            <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-display tracking-wide mb-4">
+                  The Modern Way to verify <br /> <span className="text-gold">Trusted Tradesmen</span>
+                </h2>
+                <div className="h-1 w-24 bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto rounded-full" />
+              </div>
 
-          <section className="container-wide pt-0 pb-16 border-t font-display border-border/30">
-
-
-            <div className="w-full overflow-hidden hidden md:block">
-              <MacbookScroll
-                title={
-                  <span className="text-4xl md:text-5xl font-display tracking-wide">
-                    The Modern Way to verify <br /> <span className="text-gold">Trusted Tradesmen</span>
-                  </span>
-                }
-                showGradient={false}
-              >
+              <div className="w-full max-w-[800px] relative rounded-3xl border border-white/10 bg-black shadow-2xl mx-auto">
                 <Carousel
                   items={[
                     {
@@ -370,71 +367,16 @@ const Index = () => {
                       videoSrc: "/voice.mp4"
                     }
                   ]}
-                  baseWidth={480}
-                  autoplay={false} // Disable autoplay to let user control on laptop
+                  baseWidth={isMobile ? 360 : 800}
+                  autoplay={false}
                   pauseOnHover={true}
                   loop={true}
                   round={false}
                 />
-              </MacbookScroll>
-            </div>
-
-            {/* Mobile Only View - TV Screen (Carousel) */}
-            <div className="w-full overflow-hidden block md:hidden pb-12 flex flex-col items-center justify-center">
-              <div className="flex justify-center items-center px-4 mb-8 text-center">
-                <span className="text-3xl font-display tracking-wide">
-                  The Modern Way to verify <br /> <span className="text-gold">Trusted Tradesmen</span>
-                </span>
               </div>
-              <Carousel
-                items={[
-                  {
-                    title: 'How It Works',
-                    description: 'Watch our guide on how to find a tradesman.',
-                    id: 0,
-                    icon: <FiLayers className="h-4 w-4 text-white" />,
-                    imageSrc: "/images/et-tv-screen-v2.jpg"
-                  },
-                  {
-                    title: 'Picture Connect',
-                    description: 'Seamlessly connect with tradesmen via images.',
-                    id: 0.1,
-                    icon: <FiLayers className="h-4 w-4 text-white" />,
-                    videoSrc: "/picture-connect.mp4"
-                  },
-                  {
-                    title: 'Drop-Down Connect',
-                    description: 'Easy selection process for your specific needs.',
-                    id: 0.2,
-                    icon: <FiLayers className="h-4 w-4 text-white" />,
-                    videoSrc: "/drop-down.mp4"
-                  },
-                  {
-                    title: 'Describe Problem',
-                    description: 'Type out your issue for quick matching.',
-                    id: 0.3,
-                    icon: <FiFileText className="h-4 w-4 text-white" />,
-                    videoSrc: "/type.mp4"
-                  },
-                  {
-                    title: 'Voice Agent',
-                    description: 'Use voice commands to find help.',
-                    id: 0.4,
-                    icon: <FiCircle className="h-4 w-4 text-white" />,
-                    videoSrc: "/voice.mp4"
-                  }
-                ]}
-                baseWidth={360}
-                autoplay={false}
-                pauseOnHover={true}
-                loop={true}
-                round={false}
-              />
             </div>
-
-
-
           </section>
+
 
 
 

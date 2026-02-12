@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { type Trade, cities, usCities } from "@/lib/trades";
 import { motion } from "framer-motion";
-import { useGeolocation } from "@/hooks/useGeolocation";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { useEffect } from "react";
@@ -14,12 +13,11 @@ interface TradeCardProps {
 
 export function TradeCard({ trade, city }: TradeCardProps) {
   const navigate = useNavigate();
-  const { settings } = useLocalization();
-  const { detectedCity, setDetectedTrade, setDetectedCity } = useChatbot();
-  const { getLocation, place } = useGeolocation();
+  const { settings, detectedCity: localizationCity, detectUserLocation } = useLocalization();
+  const { detectedCity: chatbotCity, setDetectedTrade, setDetectedCity } = useChatbot();
 
-  // If city is already detected from chatbot or props, use it
-  const targetCity = city || detectedCity;
+  // Priority: explicit prop > chatbot detection > localization auto-detect
+  const targetCity = city || chatbotCity || localizationCity;
   const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
   const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
 
@@ -40,17 +38,21 @@ export function TradeCard({ trade, city }: TradeCardProps) {
     } else {
       // If city is not valid for this country (e.g. Luton in US), clear context and get location
       if (targetCity) setDetectedCity("");
-      getLocation();
+      detectUserLocation();
     }
   };
 
-  // Handle location result
+  // Handle location result from localization context
   useEffect(() => {
-    if (place?.city && !targetCity) {
-      setDetectedCity(place.city);
-      navigate(`${countryPrefix}/emergency-${trade.slug}/${place.city.toLowerCase()}`);
+    if (localizationCity && !chatbotCity && !city) {
+      const isUS = settings.countryCode === 'US';
+      const countryCities = isUS ? usCities : cities;
+      const isValidCity = countryCities.map(c => c.toLowerCase()).includes(localizationCity.toLowerCase());
+      if (isValidCity) {
+        setDetectedCity(localizationCity);
+      }
     }
-  }, [place, targetCity, trade.slug, navigate, setDetectedCity, countryPrefix]);
+  }, [localizationCity, chatbotCity, city, settings.countryCode, setDetectedCity]);
 
   return (
     <Link

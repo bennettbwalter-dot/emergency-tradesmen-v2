@@ -695,6 +695,279 @@ If you have reported an emergency and the landlord is ignoring you:
                 });
                 setIsLoading(false);
                 return;
+            } else if (slug === 'frozen-condensate-pipe-fix') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-frozen-condensate-pipe',
+                    title: isUK
+                        ? 'Frozen Condensate Pipe? How to Fix Your Boiler Fast (No Engineer Needed)'
+                        : 'Frozen Condensate Line? How to Fix Your Furnace Fast (No HVAC Tech Needed)',
+                    slug: 'frozen-condensate-pipe-fix',
+                    excerpt: isUK
+                        ? 'Boiler showing an error code in freezing weather? A frozen condensate pipe is the most common cause. Learn how to safely thaw it and restore your heating in minutes.'
+                        : 'Furnace locked out with an error code in freezing temps? A frozen condensate drain line is the #1 cause. Learn how to thaw it yourself and get your heat back fast.',
+                    cover_image: '/images/blog/frozen-condensate/boiler-error-phone.jpg',
+                    content: isUK
+                        ? `**If your boiler has stopped working during cold weather and is displaying a fault code, the most likely cause is a frozen condensate pipe.** This is a small plastic drain pipe that runs from your boiler to an outside drain. When temperatures drop below 0°C, the water inside it can freeze solid, blocking the drain and causing your boiler to lock out as a safety measure. The good news: **you can usually fix this yourself in under 15 minutes without calling an engineer.**
+
+## ✅ Quick Steps: How to Thaw a Frozen Condensate Pipe
+
+*   **Locate the pipe** — a white or grey plastic pipe (22mm) exiting your external wall near the boiler.
+*   **Find the blockage** — check the open end, bends, and any exposed horizontal sections.
+*   **Apply warm water** — pour warm (never boiling) water slowly over the frozen section.
+*   **Use a hot water bottle or heat pack** — wrap it around the pipe if pouring is difficult.
+*   **Reset your boiler** — press the reset button once the ice has cleared. It may take 2–3 attempts.
+
+> ⚠️ **Safety Warning:** Never use a naked flame, blowtorch, or kettle of boiling water on the pipe. This can crack the plastic or cause burns. If you are unsure, contact a [Gas Safe registered engineer](https://www.gassaferegister.co.uk/).
+
+---
+
+## What Is a Condensate Pipe and Why Does It Freeze?
+
+Every modern condensing boiler (installed in UK homes since 2005 under **Building Regulations Part L**) produces a small amount of acidic waste water as a byproduct of its high efficiency. This liquid — called **condensate** — drains out through a narrow plastic pipe, typically routed through an external wall to a drain or soakaway.
+
+The problem is simple: **the pipe is exposed to the elements.** When the Met Office issues warnings for sub-zero temperatures, that slow trickle of water freezes inside the pipe. Ice builds up, creates a plug, and the boiler's pressure sensor detects the blockage. The boiler then goes into **lockout mode** to protect itself from damage.
+
+This is not a fault with your boiler. It is working exactly as designed.
+
+![An external condensate pipe blocked by ice — the most common cause of boiler lockouts in freezing weather.](/images/blog/frozen-condensate/frozen-pipe.jpg "A frozen condensate pipe on the outside of a UK home")
+
+---
+
+## What Happens If You Ignore a Frozen Condensate Pipe?
+
+Leaving your boiler in lockout might feel harmless, but it can quickly lead to secondary damage:
+
+*   **Cracked pipework** — frozen water expands. The pressure can split the plastic pipe or push joints apart, causing leaks when the ice finally thaws.
+*   **Heat exchanger damage** — in some models, backed-up condensate can reach the heat exchanger. Replacing one costs between **£450 and £700**, plus labour.
+*   **Damp and mould** — a cold, unheated home encourages condensation on walls and windows. Within 48 hours, mould spores can begin to establish.
+*   **Higher call-out costs** — emergency boiler engineers charge significantly more for evening and weekend visits. Fixing it yourself now saves you **£100–£250** on a call-out fee.
+
+---
+
+## How to Thaw a Frozen Condensate Pipe (Detailed Guide)
+
+### Step 1: Identify the Condensate Pipe
+
+Go outside and look for a **white or grey plastic pipe** (approximately 22mm diameter) coming out of your wall, usually near where your boiler is located. It is not the same as your flue (which is larger and vents gases). The condensate pipe will typically run downwards to a drain, gully, or soakaway.
+
+### Step 2: Find the Frozen Section
+
+The ice almost always forms at one of three points:
+*   **The open end of the pipe** (where it meets the drain)
+*   **Any bend or elbow** in the pipe
+*   **A horizontal section** exposed to wind
+
+If you can see ice or icicles at the pipe's outlet, you've found it.
+
+### Step 3: Thaw the Pipe Safely
+
+Fill a jug or watering can with **warm water** (comfortable to touch, not boiling). Pour it slowly and steadily over the frozen section. Repeat until you hear water begin to flow through the pipe again.
+
+**Alternative methods:**
+*   Wrap a **hot water bottle** around the pipe and leave it for 10–15 minutes.
+*   Apply a **microwaveable heat pack** to stubborn blockages.
+*   In mild cases, a **warm, damp cloth** held against the pipe can work.
+
+![A homeowner pouring warm water over a frozen condensate pipe to safely defrost it.](/images/blog/frozen-condensate/thawing-pipe.jpg "Thawing a frozen condensate pipe with warm water")
+
+### Step 4: Reset Your Boiler
+
+Once the pipe is clear, go back inside and press the **reset button** on your boiler. Its location varies by model but is usually on the front panel. Some boilers require you to hold it for 3–5 seconds. It may take **2 to 3 reset attempts** before the boiler fires up successfully.
+
+If you're not sure where the reset button is, check your boiler's manual or the manufacturer's website.
+
+---
+
+## When Should You Call a Gas Safe Engineer?
+
+This is a DIY fix, but there are situations where **you must call a professional**:
+
+*   **The pipe is high up or hard to reach** — never climb a ladder on icy ground. Falls are the leading cause of DIY injuries in winter.
+*   **The boiler won't reset after thawing** — this may indicate an internal fault, such as a failed pressure switch or diverter valve issue.
+*   **You smell gas** — turn off the gas supply at the meter, open windows, and call the **Gas Emergency Line on 0800 111 999** immediately.
+*   **The pipe keeps freezing repeatedly** — an engineer can insulate the pipe with lagging, re-route it internally, or fit a larger-diameter pipe to prevent future freezes.
+
+If you need an emergency heating engineer now, **[find a Gas Safe registered tradesperson near you](https://emergencytradesmen.net/)** — Emergency Tradesmen connects you with vetted professionals who can respond the same day.
+
+---
+
+## How to Prevent Your Condensate Pipe From Freezing Again
+
+Once your heating is back on, take these steps to stop it happening next winter:
+
+*   **Lag the pipe** — fit foam pipe insulation (available from any DIY shop for under £5) around the entire external section.
+*   **Shorten the external run** — if possible, ask your engineer to re-route the pipe so less of it is exposed outdoors. Under **Building Regulations Approved Document H**, condensate pipes should ideally be run internally.
+*   **Increase the pipe diameter** — upgrading from 22mm to 32mm reduces the likelihood of a full blockage.
+*   **Keep your heating on a low setting overnight** — even setting your thermostat to 15°C during cold snaps keeps the condensate warm enough to flow.
+
+---
+
+## UK Regulations and Official Guidance
+
+Condensate pipe installations are governed by several UK standards:
+
+*   **Building Regulations Approved Document H** — sets out requirements for drainage, including condensate disposal.
+*   **BS 6798:2014** — the British Standard for installation and maintenance of gas-fired boilers.
+*   **Gas Safe Register** — [official guidance on condensate pipes](https://www.gassaferegister.co.uk/) and finding a registered engineer.
+*   **HHIC (Heating & Hotwater Industry Council)** — [consumer guides and boiler safety advice](https://www.hhic.org.uk/).
+*   **GOV.UK** — [Keep Warm Keep Well winter safety guidance](https://www.gov.uk/government/publications/keep-warm-keep-well-leaflet-gives-advice-on-staying-well-in-cold-weather).
+
+---
+
+## Frequently Asked Questions
+
+### Can a frozen condensate pipe damage my boiler?
+
+**Yes.** If left untreated, backed-up condensate can reach the heat exchanger, causing corrosion and potentially costing **£450–£700** to repair. The sooner you thaw the pipe, the lower the risk.
+
+### How long does it take to thaw a frozen condensate pipe?
+
+**Usually 5–15 minutes.** Pour warm water over the frozen section until you hear water flowing freely through the pipe, then reset your boiler. Stubborn blockages may take a second application.
+
+### Should I pour boiling water on a frozen condensate pipe?
+
+**No.** Boiling water can crack the plastic pipe due to thermal shock. Always use **warm water** — comfortable to touch but not scalding. A hot water bottle or heat pack is a safe alternative.
+
+---
+
+## Get Your Heating Back On Today
+
+Don't spend another night in the cold. If you've tried thawing the pipe and your boiler still won't fire, **[book an emergency heating engineer through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted, Gas Safe registered professionals available for same-day call-outs across the UK.`
+                        : `**If your furnace has shut down during a cold snap and is showing an error code, the most likely culprit is a frozen condensate drain line.** High-efficiency furnaces (90%+ AFUE) produce condensation as a byproduct of combustion. That moisture drains through a small PVC pipe — and when temperatures drop below 32°F, it can freeze solid, blocking the drain and triggering a safety lockout. The good news: **you can usually fix this yourself in about 15 minutes without calling an HVAC contractor.**
+
+## ✅ Quick Fix Checklist: Frozen Condensate Line
+
+*   **Locate the drain line** — a white PVC pipe (usually ¾-inch) exiting the bottom or side of your furnace.
+*   **Find the freeze point** — check where the pipe exits the building, at any bends, and where it connects to a floor drain or sump.
+*   **Apply warm water** — pour warm (never boiling) water over the frozen section until you hear flow resume.
+*   **Use a hair dryer** — set to low heat, move it back and forth along the frozen pipe. Never use a propane torch or open flame.
+*   **Reset the furnace** — press the reset button on the control board (usually red or black). It may take 2–3 tries.
+
+> ⚠️ **Safety Warning:** If you smell gas (a rotten-egg odor) at any point, **leave your home immediately** and call your gas utility's emergency hotline or 911. Do not attempt any repairs.
+
+---
+
+## What Is a Condensate Drain Line and Why Does It Freeze?
+
+If your furnace was installed after 2010, there's a strong chance it's a **high-efficiency condensing furnace.** These units are rated at 90% AFUE or higher, meaning they extract so much heat from combustion gases that the exhaust cools down enough to produce liquid water — the **condensate.**
+
+That condensate collects in a tray inside the unit and flows out through a **PVC drain line**, typically ¾-inch diameter. In many homes, this line runs through an exterior wall, into a floor drain, or outside to a drain point.
+
+Here's the problem: **when the wind chill pushes temps into the single digits or below zero, the small trickle of water inside that pipe freezes solid.** Once blocked, the furnace's pressure switch detects it can't drain and **locks itself out** to prevent water damage. Your furnace is actually doing its job — it's just your drain that's the problem.
+
+![A PVC condensate drain line frozen solid at the exit point — the #1 cause of furnace lockouts in winter.](/images/blog/frozen-condensate/frozen-pipe.jpg "A frozen condensate drain line on a US home")
+
+---
+
+## What Happens If You Ignore a Frozen Condensate Line?
+
+A locked-out furnace isn't just uncomfortable — it can cascade into bigger, more expensive issues fast:
+
+*   **Cracked PVC lines** — frozen water expands with enough force to crack the pipe or blow apart cemented joints. When it thaws, you've got a leak in your basement or utility closet.
+*   **Heat exchanger damage** — on some models, backed-up condensate can reach the secondary heat exchanger. Replacement runs **$500–$1,500** — if the unit is even still under warranty.
+*   **Frozen water supply pipes** — if your home drops below 55°F for an extended period, your plumbing is at risk of freezing and bursting. That's a whole different level of emergency and expense.
+*   **After-hours service premiums** — calling an HVAC tech at 10 PM on a Saturday? Expect to pay **1.5x to 2x** the standard service rate.
+
+---
+
+## How to Fix a Frozen Condensate Line (Step by Step)
+
+### Step 1: Find the Drain Line
+
+Look for a **white PVC pipe** (approximately ¾-inch diameter) coming out of the bottom or side of your furnace. Follow it — it usually routes to a floor drain, condensate pump, laundry tub, or exits through an exterior wall.
+
+### Step 2: Locate the Freeze Point
+
+The ice almost always forms at one of these three locations:
+*   **Where the pipe exits the building** (the most exposed section)
+*   **At a bend or elbow** in the pipe
+*   **At the connection point** to a floor drain or sump pump
+
+If you see frost buildup or icicles where the pipe terminates outside, that's your blockage.
+
+### Step 3: Thaw the Line Safely
+
+Fill a pitcher or large measuring cup with **warm tap water** (comfortable to touch, not boiling). Pour it slowly and steadily over the frozen section. Repeat until you hear water start to flow again.
+
+**Alternative methods:**
+*   A **hair dryer** on low setting — move it back and forth, don't hold it in one spot.
+*   Wrap the pipe with a **warm, damp towel** and replace it every few minutes.
+*   A **wet/dry shop vac** applied to the end of the line can help pull broken ice through.
+
+**Never use:** A propane torch, heat gun on high, or any open flame. This is a code violation under the **International Fuel Gas Code (IFGC)** and a serious fire hazard.
+
+![A homeowner safely thawing a frozen PVC condensate drain line using warm water.](/images/blog/frozen-condensate/thawing-pipe.jpg "Safely thawing a frozen furnace drain line with warm water")
+
+### Step 4: Reset the Furnace
+
+Go back to your furnace and locate the **reset button** — usually a small red or black button on the control board behind the access panel. Press it and wait. It may take **2 to 3 reset cycles** before the furnace successfully fires up. If the error code clears and you hear the inducer motor start, you're back in business.
+
+---
+
+## When Should You Call a Licensed HVAC Contractor?
+
+The DIY approach works great for a simple freeze, but **call a licensed professional** if:
+
+*   **The line runs through an inaccessible area** — if the freeze point is inside a wall, crawl space, or ceiling, don't start cutting into your home.
+*   **The furnace won't reset after clearing the line** — the error code may indicate a failed pressure switch, cracked inducer motor housing, or control board issue.
+*   **You smell gas** — a rotten-egg odor near the furnace means a potential gas leak. **Leave immediately** and call your gas utility or 911.
+*   **This keeps happening every cold snap** — a contractor can re-route the drain to an interior location, install electric **heat tape**, or increase the pipe diameter to solve it permanently.
+
+Need an HVAC pro now? **[Find a licensed emergency HVAC contractor near you](https://emergencytradesmen.net/)** — Emergency Tradesmen connects you with vetted, insured professionals who respond fast.
+
+---
+
+## How to Prevent a Frozen Condensate Line Next Winter
+
+Once your heat is back on, take these steps so you don't deal with this again:
+
+*   **Insulate the exposed pipe** — wrap the exterior section with **foam pipe insulation** (available at any hardware store for around $3–$5). Secure it with zip ties or tape.
+*   **Re-route the line indoors** — per the **International Mechanical Code (IMC)**, condensate lines can be routed to interior floor drains, eliminating exterior exposure entirely.
+*   **Upgrade the pipe diameter** — switching from ¾-inch to 1-inch PVC reduces the chance of a complete freeze-over.
+*   **Install a condensate pump** — if your drain point is above the furnace, a small condensate pump can move the water to an interior drain.
+*   **Keep the thermostat above 60°F** — even when you're away, maintaining indoor temps keeps the condensate warm enough to flow.
+
+---
+
+## Regulations and Official Resources
+
+For official guidance and contractor verification:
+
+*   **ENERGY STAR (U.S. Dept. of Energy)** — [High-Efficiency Heating Equipment Guide](https://www.energystar.gov/products/heating_cooling)
+*   **ACCA (Air Conditioning Contractors of America)** — [Find a Quality HVAC Contractor](https://www.acca.org/consumers)
+*   **EPA Indoor Air Quality** — [Home Heating and Indoor Air Safety](https://www.epa.gov/indoor-air-quality-iaq)
+*   **NFPA (National Fire Protection Association)** — [Home Heating Safety Tips](https://www.nfpa.org/education-and-research/home-safety/heating)
+*   **Your State Licensing Board** — always verify that your HVAC contractor holds a valid, active state license and carries general liability insurance.
+
+---
+
+## Frequently Asked Questions
+
+### Can a frozen condensate line damage my furnace?
+
+**Yes.** If the blockage isn't cleared, condensate can back up into the secondary heat exchanger, causing corrosion. Heat exchanger replacement typically costs **$500–$1,500**, making a quick thaw well worth the effort.
+
+### How long does it take to thaw a frozen condensate line?
+
+**About 10–15 minutes.** Pour warm water slowly over the frozen section until you hear water flowing freely through the pipe, then reset your furnace. Stubborn blockages may need a second round.
+
+### Can I pour boiling water on a frozen condensate pipe?
+
+**No.** Boiling water can cause **thermal shock**, cracking the PVC pipe and creating a much bigger problem. Always use warm water — about the temperature you'd use for washing dishes. A hair dryer on low is another safe option.
+
+---
+
+## Get Your Heat Back On Today
+
+Don't spend another night freezing. If you've tried thawing the line and your furnace still won't fire up, **[find an emergency HVAC contractor through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted, licensed professionals available for same-day service calls nationwide.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+
             }
 
             const { data, error } = await supabase

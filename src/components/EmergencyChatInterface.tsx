@@ -297,7 +297,7 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
-                className={`h-11 px-4 min-w-0 flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-2 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-11 px-3 min-w-[44px] flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-1.5 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center gap-2 truncate">
                     <Wrench className="w-4 h-4 shrink-0 text-gold" />
@@ -512,7 +512,7 @@ export function EmergencyChatInterface() {
 
                 {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
                 <div className="w-full bg-transparent flex justify-center py-4">
-                    <div className="relative flex flex-col w-[90%] bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
+                    <div className="relative flex flex-col w-[90%] bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-visible transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
 
                         {/* WAVEFORM INSIDE CONTAINER - Shows when recording */}
                         {isRecording ? (
@@ -558,9 +558,9 @@ export function EmergencyChatInterface() {
             </div>
 
             {/* Mobile Controls - Below chat - Optimized Layout - Single Row Strict Symmetry */}
-            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center">
+            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center overflow-visible">
                 {/* Single Row: Trade, City, Button - Side by Side, Equal Widths, 10px Gap, 90% Width */}
-                <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[10px]">
+                <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[6px] overflow-visible">
                     <div className="flex-[0_0_auto]">
                         {micButton}
                     </div>
