@@ -313,8 +313,11 @@ export default function TradeCityPage() {
 
   // Early returns must happen AFTER hooks
   const validatedTradePath = tradeInfo.slug;
-  if (!validatedTradePath) {
-    console.warn("TradeCityPage: Missing tradePath, redirecting home.", { validatedTradePath });
+
+  // Guard: Only allow known trade slugs — reject non-trade paths like 'blog', 'about', etc.
+  const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'roofer', 'breakdown', 'builder', 'water-restoration', 'hvac', 'pest-control', 'handyman', 'joiner', 'default'];
+  if (!validatedTradePath || (!knownTrades.includes(validatedTradePath) && !pageData?.trade)) {
+    console.warn("TradeCityPage: Invalid trade slug, redirecting home.", { validatedTradePath });
     return <Navigate to="/" replace />;
   }
 
