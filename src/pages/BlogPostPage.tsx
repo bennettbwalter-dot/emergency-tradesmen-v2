@@ -3160,6 +3160,118 @@ If the safety float switch detects water backing up, it cuts power to the AC.
                             <AdSlot slot="AD_SLOT_BLOG_BOTTOM" format="rectangle" />
                         </div>
 
+                        {/* Internal Links Section — Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
+                        {(() => {
+                            const slugTradeMap: Record<string, { trade: string; tradeSlug: string; ukCities: string[]; usCities: string[] }> = {
+                                'electrical-fire-causes-prevention': {
+                                    trade: 'Electrician', tradeSlug: 'electrician',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'frozen-condensate-pipe-fix': {
+                                    trade: settings.countryCode === 'GB' ? 'Gas Engineer' : 'HVAC Contractor', tradeSlug: 'gas-engineer',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Sheffield', 'Newcastle-upon-Tyne'],
+                                    usCities: ['Chicago', 'Denver', 'Minneapolis', 'Boston', 'Detroit', 'Cleveland']
+                                },
+                                'water-coming-through-ceiling': {
+                                    trade: 'Plumber', tradeSlug: 'plumber',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'no-power-in-house': {
+                                    trade: 'Electrician', tradeSlug: 'electrician',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'locked-out-what-to-do': {
+                                    trade: 'Locksmith', tradeSlug: 'locksmith',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'boiler-losing-pressure': {
+                                    trade: settings.countryCode === 'GB' ? 'Gas Engineer' : 'HVAC Contractor', tradeSlug: 'gas-engineer',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Sheffield', 'Newcastle-upon-Tyne'],
+                                    usCities: ['Chicago', 'Denver', 'Minneapolis', 'Boston', 'Detroit', 'Cleveland']
+                                },
+                                'sewage-smell-in-house': {
+                                    trade: 'Drain Specialist', tradeSlug: 'drain-specialist',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'emergency-boarding-up-guide': {
+                                    trade: 'Glazier', tradeSlug: 'glazier',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'emergency-roof-leak-tarping': {
+                                    trade: 'Roofer', tradeSlug: 'roofer',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'car-wont-start-guide': {
+                                    trade: 'Breakdown Recovery', tradeSlug: 'breakdown',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'cracks-in-walls-guide': {
+                                    trade: 'Builder', tradeSlug: 'builder',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'water-damage-restoration-guide': {
+                                    trade: 'Water Restoration', tradeSlug: 'water-restoration',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'ac-blowing-warm-air': {
+                                    trade: settings.countryCode === 'GB' ? 'Gas Engineer' : 'HVAC Contractor', tradeSlug: settings.countryCode === 'GB' ? 'gas-engineer' : 'hvac',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Phoenix', 'Miami', 'Los Angeles', 'Las Vegas']
+                                },
+                                'uk-emergency-tradesmen-expert-repairs': {
+                                    trade: 'Plumber', tradeSlug: 'plumber',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                }
+                            };
+
+                            const tradeData = post.slug ? slugTradeMap[post.slug] : null;
+                            if (!tradeData) return null;
+
+                            const isUK = settings.countryCode === 'GB';
+                            const cities = isUK ? tradeData.ukCities : tradeData.usCities;
+                            const prefix = isUK ? '' : '/us';
+
+                            return (
+                                <div className="container mx-auto px-4 max-w-4xl py-8">
+                                    <div className="border border-border/50 rounded-xl p-6 bg-secondary/20">
+                                        <h3 className="text-lg font-semibold text-foreground mb-4">
+                                            🔗 Find an Emergency {tradeData.trade} Near You
+                                        </h3>
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                            {cities.map(city => (
+                                                <Link
+                                                    key={city}
+                                                    to={`${prefix}/emergency-${tradeData.tradeSlug}/${city.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    className="text-sm text-primary hover:text-gold hover:underline transition-colors py-1"
+                                                >
+                                                    Emergency {tradeData.trade} {city} →
+                                                </Link>
+                                            ))}
+                                        </div>
+                                        <div className="mt-4 pt-4 border-t border-border/30">
+                                            <Link
+                                                to={isUK ? '/locations' : '/us/locations'}
+                                                className="text-sm font-medium text-gold hover:text-gold-dark transition-colors"
+                                            >
+                                                View all locations →
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })()}
+
                         {/* Newsletter / CTA Section */}
                         <div className="container mx-auto px-4 max-w-5xl mb-24">
                             <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
