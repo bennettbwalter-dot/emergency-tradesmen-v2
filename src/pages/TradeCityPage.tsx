@@ -1,11 +1,12 @@
 import { useParams, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/SEO";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
 import { CTABanner } from "@/components/CTABanner";
 import { TrustBadges } from "@/components/TrustBadges";
+import { isFavorite } from "@/lib/auth";
 import { BusinessCard } from "@/components/BusinessCard";
 import { BusinessCardSkeleton } from "@/components/BusinessCardSkeleton";
 import { SearchFilterBar } from "@/components/SearchFilterBar";
@@ -296,10 +297,18 @@ export default function TradeCityPage() {
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
 
-  // Pagination Logic
+  // Pagination Logic — sort favorites to top first
+  const sortedBusinesses = useMemo(() => {
+    return [...filteredBusinesses].sort((a, b) => {
+      const aFav = isFavorite(a.id) ? 1 : 0;
+      const bFav = isFavorite(b.id) ? 1 : 0;
+      return bFav - aFav; // Favorited businesses come first
+    });
+  }, [filteredBusinesses]);
+
   const totalPages = Math.ceil(resultsCount / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentBusinesses = filteredBusinesses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const currentBusinesses = sortedBusinesses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

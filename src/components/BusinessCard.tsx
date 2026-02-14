@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Star, MapPin, Phone, ShieldCheck, Zap, Heart, Clock, Globe, CheckCircle, ArrowRight, Siren, Facebook, Instagram, Linkedin, Twitter, Video, Shield } from "lucide-react";
+import { addFavorite, removeFavorite, isFavorite } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
@@ -46,7 +47,7 @@ interface BusinessCardProps {
 
 export function BusinessCard({ business, rank }: BusinessCardProps) {
   const { isAuthenticated } = useAuth();
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(() => isAuthenticated && business.id ? isFavorite(business.id) : false);
   const { toast } = useToast();
   const { theme } = useSimpleTheme();
 
@@ -69,8 +70,20 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
 
   const handleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!isAuthenticated) return;
-    setLiked(!liked);
+    e.stopPropagation();
+    if (!isAuthenticated) {
+      toast({ title: "Sign in to save", description: "Create an account to save your favourite tradespeople.", variant: "default" });
+      return;
+    }
+    if (liked) {
+      removeFavorite(business.id);
+      setLiked(false);
+      toast({ title: "Removed from saved", description: `${business.name} removed from your saved list.` });
+    } else {
+      addFavorite({ businessId: business.id, businessName: business.name, tradeName: business.trade || 'Tradesperson', city: business.city || '' });
+      setLiked(true);
+      toast({ title: "❤️ Saved!", description: `${business.name} pinned to the top of your list.` });
+    }
   };
 
   return (
