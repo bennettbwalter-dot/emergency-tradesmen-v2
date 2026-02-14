@@ -2897,8 +2897,8 @@ If the safety float switch detects water backing up, it cuts power to the AC.
             {/* Structured Data Construction */}
             {(() => {
                 const baseUrl = "https://emergencytradesmen.net";
-                const postUrl = `${baseUrl} / blog / ${post.slug}`;
-                const imageUrl = post.cover_image || `${baseUrl} / og - image.jpg`;
+                const postUrl = `${baseUrl}/blog/${post.slug}`;
+                const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
 
                 // 1. BreadcrumbList Schema
                 const breadcrumbSchema = {
@@ -2915,7 +2915,7 @@ If the safety float switch detects water backing up, it cuts power to the AC.
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'} / blog`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
                         },
                         {
                             "@type": "ListItem",
@@ -3014,7 +3014,7 @@ If the safety float switch detects water backing up, it cuts power to the AC.
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/us'} / blog`}
+                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
