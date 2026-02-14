@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { generateTradePageData, cities, usCities, cityToState } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
+import { cityCoordinates } from "@/lib/cityCoordinates";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
@@ -393,10 +394,13 @@ export default function TradeCityPage() {
         "worstRating": "1"
       }
     })),
-    "areaServed": {
-      "@type": "City",
-      name: cityName
-    },
+    "areaServed": [
+      { "@type": "City", "name": cityName },
+      ...serviceAreas.slice(0, 6).map((area: any) => ({
+        "@type": "AdministrativeArea",
+        "name": typeof area === 'string' ? area : area.name || area
+      }))
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": `${tradeInfo.name} Services`,
@@ -448,30 +452,90 @@ export default function TradeCityPage() {
     ]
   };
 
+  // --- Long-tail SEO: derive state code and coordinates ---
+  const isUS = actualCountry === 'US';
+  const tradeName = tradeInfo.name.toLowerCase();
+  const stateSlug = isUS ? cityToState[cityName]?.toUpperCase() : '';
+  const stateCode = stateSlug || '';
+  const cityCoords = cityCoordinates[cityName];
+  const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+  const canonicalPath = isUS
+    ? `/us/emergency-${tradeInfo.slug}/${citySlug}`
+    : `/emergency-${tradeInfo.slug}/${citySlug}`;
+
+  // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
+  const localTerm = isUS ? 'Contractors' : 'Tradesmen';
   const seoTitle = pageData?.problem
-    ? `${pageData.problem.name} in ${cityName}`
-    : `Emergency ${tradeInfo.name} ${cityName} – 24/7 Near Me | Arriving in ${averageResponseTime}`;
+    ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''}`
+    : isUS
+      ? `Emergency ${tradeInfo.name} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
+      : `Emergency ${tradeInfo.name} ${cityName} – Local ${localTerm} Near Me | 24/7`;
 
+  // --- Richer Meta Descriptions (question → answer → CTA) ---
+  const listingCount = businesses.length;
   const seoDescription = pageData?.problem
-    ? `${pageData.problem.description} ${cityName}. Available 24/7 with ${averageResponseTime} response time.`
-    : `Need an emergency ${tradeInfo.name.toLowerCase()} in ${cityName}? Trusted local experts near you available 24/7. Average response ${averageResponseTime}. Call for help now.`;
+    ? `${pageData.problem.description} ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time.`
+    : isUS
+      ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
+      : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local tradesmen ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
 
-  const seoKeywordsString = pageData?.problem
-    ? `${pageData.problem.slug}, ${cityName} ${pageData.problem.slug}, emergency ${tradeInfo.name.toLowerCase()}`
-    : `emergency ${tradeInfo.name.toLowerCase()}, ${tradeInfo.name.toLowerCase()} ${cityName}, 24h ${tradeInfo.name.toLowerCase()} ${cityName}, emergency repairs ${cityName}, local tradesmen ${cityName}`;
+  // --- Expanded Long-Tail Keywords Array ---
+  const seoKeywords = pageData?.problem
+    ? [
+      pageData.problem.slug,
+      `${cityName} ${pageData.problem.slug}`,
+      `emergency ${tradeName}`,
+      `${tradeName} near me`
+    ]
+    : [
+      // Core "near me" variants
+      `${tradeName} near me`,
+      `emergency ${tradeName} near me`,
+      `local ${tradeName} ${cityName}`,
+      // Long-tail intent
+      `24 hour ${tradeName} ${cityName}`,
+      `${tradeName} open now ${cityName}`,
+      `best ${tradeName} near me`,
+      `trusted ${tradeName} ${cityName}`,
+      // Emergency variants
+      `emergency ${tradeName} near me open now`,
+      `${tradeName} emergency call out ${cityName}`,
+      // Market-specific
+      ...(isUS ? [
+        `${tradeName} ${cityName} ${stateCode}`,
+        `local contractors near me`,
+        `emergency contractors ${cityName}`,
+        `${tradeName} ${stateCode} near me`
+      ] : [
+        `local tradesmen near me`,
+        `emergency tradesmen ${cityName}`,
+        `${tradeName} ${cityName} UK`,
+        `cheap ${tradeName} ${cityName}`
+      ])
+    ];
 
   return (
     <>
       <SEO
         title={seoTitle}
         description={seoDescription}
-        keywords={seoKeywordsString.split(', ')}
-        canonical={actualCountry === 'US'
-          ? `/us/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
-          : `/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
-        }
+        keywords={seoKeywords}
+        canonical={canonicalPath}
         ogImage={heroImage}
         jsonLd={[serviceSchema, faqSchema, breadcrumbSchema]}
+        locale={isUS ? 'en_US' : 'en_GB'}
+        {...(cityCoords ? {
+          geo: {
+            region: isUS ? `US-${stateCode}` : 'GB',
+            placename: cityName,
+            position: `${cityCoords.lat};${cityCoords.lng}`
+          }
+        } : {})}
+        alternates={[
+          { lang: 'en-GB', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` },
+          { lang: 'en-US', href: `https://emergencytradesmen.net/us/emergency-${tradeInfo.slug}/${citySlug}` },
+          { lang: 'x-default', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` }
+        ]}
       />
 
 

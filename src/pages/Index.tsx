@@ -143,12 +143,26 @@ const Index = () => {
           description={`Looking for emergency ${settings.tradeTerm.toLowerCase()} near you? We connect you with local, verified 24/7 plumbers, electricians & locksmiths. Fast 30-90 min response.`}
           keywords={[
             "tradesmen near me",
-            "local emergency plumber",
+            "local tradesmen near me",
+            "contractors near me",
+            "local contractors near me",
+            "emergency plumber near me",
             "24 hour electrician near me",
             "emergency locksmith near me",
-            "emergency gas engineer",
-            "24/7 tradesmen",
-            "local emergency trades"
+            "24/7 plumber near me",
+            "emergency gas engineer near me",
+            "local emergency services",
+            "find a tradesman",
+            "find a contractor near me",
+            "emergency repairs near me",
+            "24 hour emergency tradesman",
+            "best local tradesmen",
+          ]}
+          locale={settings.countryCode === 'GB' ? 'en_GB' : 'en_US'}
+          alternates={[
+            { lang: 'en-GB', href: 'https://emergencytradesmen.net/' },
+            { lang: 'en-US', href: 'https://emergencytradesmen.net/us/' },
+            { lang: 'x-default', href: 'https://emergencytradesmen.net/' }
           ]}
           jsonLd={[emergencyServiceSchema, websiteSchema]}
         />

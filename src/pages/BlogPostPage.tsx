@@ -2987,10 +2987,25 @@ If the safety float switch detects water backing up, it cuts power to the AC.
                     <SEO
                         title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={post.excerpt}
-                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
+                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={jsonLdSchemas}
+                        keywords={[
+                            post.slug.replace(/-/g, ' '),
+                            `${post.title.toLowerCase()} near me`,
+                            `${post.title.toLowerCase()} UK`,
+                            `${post.title.toLowerCase()} USA`,
+                            `emergency ${post.slug.split('-')[0]} advice`,
+                            `${post.slug.replace(/-/g, ' ')} what to do`,
+                            `${post.slug.replace(/-/g, ' ')} help`,
+                        ]}
+                        locale={settings.countryCode === 'GB' ? 'en_GB' : 'en_US'}
+                        alternates={[
+                            { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+                            { lang: 'en-US', href: `https://emergencytradesmen.net/us/blog/${post.slug}` },
+                            { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` }
+                        ]}
                     />
                 );
             })()}
