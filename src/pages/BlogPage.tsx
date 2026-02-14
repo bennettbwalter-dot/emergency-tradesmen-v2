@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { AdSlot } from "@/components/AdSlot";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
@@ -65,7 +66,7 @@ export default function BlogPage() {
                     title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
                     slug: 'emergency-repairs-guide-tenants-landlords',
                     excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
-                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
+                    cover_image: '/blog/home-emergency/cover.png',
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 };
@@ -79,7 +80,7 @@ export default function BlogPage() {
                     excerpt: settings.countryCode === 'GB'
                         ? 'The sensory indicators of electrical failure. These signs are frequently the final warnings before catastrophic failure.'
                         : 'A flickering light or warm outlet are red flags indicating aging wiring or overloaded circuits in US homes.',
-                    cover_image: '/images/blog/electrical-safety/flickering-lights-cover.png',
+                    cover_image: '/images/blog/electrical-fire/cover.jpg',
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 };
@@ -93,7 +94,7 @@ export default function BlogPage() {
                     excerpt: settings.countryCode === 'GB'
                         ? 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.'
                         : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
-                    cover_image: '/images/blog/co-safety/silent-killer.jpg',
+                    cover_image: '/blog/emergency-at-home/gas-emergency.jpg',
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 };
@@ -107,18 +108,172 @@ export default function BlogPage() {
                     excerpt: settings.countryCode === 'GB'
                         ? 'Boiler showing an error code in freezing weather? A frozen condensate pipe is the most common cause. Learn how to safely thaw it and restore your heating in minutes.'
                         : 'Furnace locked out with an error code in freezing temps? A frozen condensate drain line is the #1 cause. Learn how to thaw it yourself and get your heat back fast.',
-                    cover_image: '/images/blog/frozen-condensate/boiler-error-phone.jpg',
+                    cover_image: '/blog/boiler-frozen.png',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostWaterCeiling: BlogPost = {
+                    id: 'static-water-leaking-ceiling',
+                    title: settings.countryCode === 'GB'
+                        ? 'Water Leaking Through Your Ceiling? What to Do Before the Plumber Arrives'
+                        : 'Water Coming Through Your Ceiling? Emergency Steps Before the Pro Gets There',
+                    slug: 'water-leaking-through-ceiling',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Water dripping or bulging from the ceiling is a plumbing emergency. Learn the 5 steps to limit damage right now — before an emergency plumber arrives.'
+                        : 'Water staining or dripping from your ceiling? Act fast to protect your home. Here are the emergency steps to take before a licensed plumber arrives.',
+                    cover_image: '/images/blog/water-ceiling/ceiling-leak.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostNoPower: BlogPost = {
+                    id: 'static-no-power-neighbours',
+                    title: settings.countryCode === 'GB'
+                        ? 'Power Cut in Your Home But Neighbours Have Power? Here\'s Why'
+                        : 'Lost Power But Your Neighbors Didn\'t? Here\'s What to Check',
+                    slug: 'no-power-but-neighbours-have-power',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Lights out but the rest of the street is fine? This usually means the problem is inside your property.'
+                        : 'Your power is out but your neighbors are fine? The problem is likely inside your home.',
+                    cover_image: '/images/blog/no-power/cover.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostLockedOut: BlogPost = {
+                    id: 'static-locked-out-night',
+                    title: settings.countryCode === 'GB'
+                        ? 'Locked Out at Night? Here\'s What to Do (and What NOT to Do)'
+                        : 'Locked Out of Your House at Night? What to Do and What to Avoid',
+                    slug: 'locked-out-at-night',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Locked out of your home late at night? Don\'t panic. Here\'s a safe, step-by-step guide.'
+                        : 'Stuck outside your home after dark? Here\'s exactly what to do — and what NOT to do.',
+                    cover_image: '/blog/locksmith/family-locked-out.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostBoilerPressure: BlogPost = {
+                    id: 'static-boiler-pressure-dropping',
+                    title: settings.countryCode === 'GB'
+                        ? 'Boiler Pressure Keeps Dropping? 5 Causes and When to Worry'
+                        : 'Furnace Pressure Keeps Dropping? 5 Causes and When to Call for Help',
+                    slug: 'boiler-pressure-keeps-dropping',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Boiler pressure dropping below 1 bar? Here are the 5 most common causes and how to repressurise safely.'
+                        : 'Boiler losing pressure? Here are 5 common causes and how to add pressure safely.',
+                    cover_image: '/images/blog/boiler-pressure/pressure-gauge.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostSewageSmell: BlogPost = {
+                    id: 'static-sewage-smell-house',
+                    title: settings.countryCode === 'GB'
+                        ? 'Sewage Smell in Your House? The 6 Most Likely Causes'
+                        : 'Sewer Smell in Your House? 6 Common Causes and How to Fix Them',
+                    slug: 'sewage-smell-in-house',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'A sewage smell is more than unpleasant — it can indicate a health hazard. Here are the 6 most common causes.'
+                        : 'A sewer gas smell is a health risk. Here are 6 common causes and what to do about each one.',
+                    cover_image: '/images/blog/sewage-smell/drain-cover.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostBoardingUp: BlogPost = {
+                    id: 'static-boarding-up',
+                    title: settings.countryCode === 'GB'
+                        ? 'Window Smashed? Emergency Boarding Up and Glass Repair Guide'
+                        : 'Broken Window? Emergency Boarding Up and Glass Repair Guide',
+                    slug: 'emergency-boarding-up-guide',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'A broken window compromises your home\'s security. Learn how emergency boarding up works and why you need a glazier fast.'
+                        : 'Smashed window causing a hazard? Learn how emergency board up services work and why you need a glass repair pro fast.',
+                    cover_image: '/blog/emergency-at-home/glazier.png',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostRoofTarping: BlogPost = {
+                    id: 'static-roof-tarping',
+                    title: settings.countryCode === 'GB'
+                        ? 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips'
+                        : 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips',
+                    slug: 'emergency-roof-leak-tarping',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Water pouring in through the roof? Learn how emergency roof tarping stops the leak and protects your home until repairs can be made.'
+                        : 'Water pouring in? Learn how emergency roof tarping stops leaks immediately and protects your home until repairs can be made.',
+                    cover_image: '/blog/water-leak/attic-roof-leak.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostCarWontStart: BlogPost = {
+                    id: 'static-car-wont-start',
+                    title: settings.countryCode === 'GB'
+                        ? 'Car Won\'t Start? 5 Reasons Why and When to Call Recovery'
+                        : 'Car Won\'t Start? 5 Reasons Why and When to Call a Tow Truck',
+                    slug: 'car-wont-start-guide',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Turn the key and nothing happens? From dead batteries to starter motor failure, here are the top 5 reasons your car won\'t start.'
+                        : 'Turn the key and nothing happens? From dead batteries to starter failure, here are the top 5 reasons your car won\'t start.',
+                    cover_image: '/blog/emergency-at-home/breakdown-recovery.png',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostStructural: BlogPost = {
+                    id: 'static-structural-cracks',
+                    title: settings.countryCode === 'GB'
+                        ? 'Cracks in Walls? When to Call a Structural Engineer'
+                        : 'Cracks in Drywall? When to Call a Structural Engineer',
+                    slug: 'structural-cracks-guide',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Worried about cracks in your walls? Learn the difference between harmless plaster cracks and serious subsidence signs.'
+                        : 'Worried about cracks in your walls? Learn the difference between settling cracks and serious foundation issues.',
+                    cover_image: '/blog/home-emergency/assess.png',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostWaterRestoration: BlogPost = {
+                    id: 'static-water-restoration',
+                    title: settings.countryCode === 'GB'
+                        ? 'Flooded House? The 6-Step Water Damage Restoration Process'
+                        : 'Flooded House? The 6-Step Water Damage Restoration Process',
+                    slug: 'water-damage-restoration-process',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitising.'
+                        : 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitizing.',
+                    cover_image: '/emergency-water-restoration-fallback.jpg',
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                };
+
+                const staticPostAC: BlogPost = {
+                    id: 'static-ac-warm-air',
+                    title: settings.countryCode === 'GB'
+                        ? 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner'
+                        : 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner',
+                    slug: 'ac-blowing-warm-air-fix',
+                    excerpt: settings.countryCode === 'GB'
+                        ? 'Air con not cooling? It might be a simple fix. Check these 5 common issues before calling an engineer.'
+                        : 'AC unit running but not cooling? It might be a simple fix. Check these 5 common issues before calling an HVAC tech.',
+                    cover_image: '/images/blog/hvac/ac-repair-cover.jpg',
                     published_at: new Date().toISOString(),
                     created_at: new Date().toISOString()
                 };
 
                 // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug && p.slug !== staticPostFrozenCondensate.slug).map(p => ({
+                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug && p.slug !== staticPostFrozenCondensate.slug && p.slug !== staticPostWaterCeiling.slug && p.slug !== staticPostNoPower.slug && p.slug !== staticPostLockedOut.slug && p.slug !== staticPostBoilerPressure.slug && p.slug !== staticPostSewageSmell.slug && p.slug !== staticPostBoardingUp.slug && p.slug !== staticPostRoofTarping.slug && p.slug !== staticPostCarWontStart.slug && p.slug !== staticPostStructural.slug && p.slug !== staticPostWaterRestoration.slug && p.slug !== staticPostAC.slug).map(p => ({
                     ...p,
                     title: regionalizeText(p.title),
                     excerpt: regionalizeText(p.excerpt)
                 }));
-                setPosts([staticPostFrozenCondensate, staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
+                setPosts([staticPostBoardingUp, staticPostRoofTarping, staticPostCarWontStart, staticPostStructural, staticPostWaterRestoration, staticPostAC, staticPostWaterCeiling, staticPostNoPower, staticPostLockedOut, staticPostBoilerPressure, staticPostSewageSmell, staticPostFrozenCondensate, staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
             }
             setIsLoading(false);
         }
@@ -160,6 +315,11 @@ export default function BlogPage() {
                         Expert advice for maintaining your home and handling emergencies.
                     </p>
                 </div>
+            </div>
+
+            {/* Ad Slot: Between hero and posts grid */}
+            <div className="container mx-auto px-4 pt-8">
+                <AdSlot slot="AD_SLOT_BLOG" format="leaderboard" />
             </div>
 
             {/* Posts Grid */}

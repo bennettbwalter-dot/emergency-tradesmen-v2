@@ -6,6 +6,7 @@ import { UserMenu } from "@/components/UserMenu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 
 
 interface HeaderProps {
@@ -89,6 +90,15 @@ export function Header({ countryCode }: HeaderProps) {
                         {signupText}
                       </Link>
                     </Button>
+                    <div className="mt-6 pt-6 border-t border-border/50">
+                      <p className="text-sm text-muted-foreground mb-4 font-medium">Follow Us</p>
+                      <div className="flex gap-4">
+                        <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-10 h-10" />
+                        <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-10 h-10" />
+                        <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" className="w-10 h-10" />
+                        <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" className="w-10 h-10" />
+                      </div>
+                    </div>
                   </nav>
                 </SheetContent>
               </Sheet>

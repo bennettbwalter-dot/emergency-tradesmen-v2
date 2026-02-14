@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import { SEO } from "@/components/SEO";
+import { AdSlot } from "@/components/AdSlot";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -20,6 +21,11 @@ interface BlogPost {
     cover_image: string | null;
     published_at: string;
     created_at: string;
+    howToSteps?: {
+        name: string;
+        text: string;
+        image?: string;
+    }[];
 }
 
 export default function BlogPostPage() {
@@ -67,7 +73,7 @@ export default function BlogPostPage() {
                     slug: 'uk-emergency-tradesmen-expert-repairs',
                     excerpt: staticExcerpt,
                     cover_image: 'https://images.unsplash.com/photo-1546827209-a218e99fdbe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwzNXx8dG9vbHN8ZW58MHx8fHwxNzY2NjA4NjgyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-                    content: regionalizeText(`When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky. That's where **[emergency tradesmen](https://emergencytradesmen.net/)** come in – they offer urgent help to fix your home.
+                    content: regionalizeText(`**Emergency tradesmen provide 24/7 urgent repairs for home disasters like burst pipes, electrical faults, and lockouts.** When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky. That's where **[emergency tradesmen](https://emergencytradesmen.net/)** come in – they offer urgent help to fix your home.
 
 With _24/7_ service, finding a trusted tradesman is easy. Online platforms help you connect with certified and vetted tradespeople. This ensures you get top-notch repairs when you need them most.
 
@@ -302,9 +308,9 @@ Keep basic tools like a pipe wrench, duct tape, and a first aid kit. They help w
                     excerpt: isUK
                         ? 'When a UK homeowner notices a light flickering or detects a pungent, fishy odour near a socket, it is not merely a nuisance; it is a signal that the safety mechanisms are being compromised.'
                         : "A flickering light bulb, a receptacle that feels warm to the touch - these are not quirks of an old house. They are red flags indicating aged wiring or overloaded circuits.",
-                    cover_image: '/images/blog/electrical-safety/flickering-lights-cover.png',
+                    cover_image: '/images/blog/electrical-fire/cover.jpg',
                     content: isUK
-                        ? `In the United Kingdom, the domestic electrical system is unique on the global stage. Born from the post-World War II copper shortage, the **Ring Final Circuit** remains the backbone of British residential wiring. This topology, while efficient, introduces specific failure modes that can remain hidden until the moment of crisis.
+                        ? `**If your lights are flickering or you smell burning fish near a socket, these are critical warning signs of an electrical fire.** In the United Kingdom, the domestic electrical system is unique on the global stage. Born from the post-World War II copper shortage, the **Ring Final Circuit** remains the backbone of British residential wiring. This topology, while efficient, introduces specific failure modes that can remain hidden until the moment of crisis.
 
 When a UK homeowner notices a light flickering or detects a pungent, fishy odour near a socket, it is not merely a nuisance; it is a signal that the safety mechanisms built into the home are being compromised.
 
@@ -493,9 +499,9 @@ When your lights flicker or your outlets warm up, your home is speaking to you. 
                     excerpt: isUK
                         ? 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.'
                         : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
-                    cover_image: '/images/blog/co-safety/silent-killer.jpg',
+                    cover_image: '/blog/emergency-at-home/gas-emergency.jpg',
                     content: isUK
-                        ? `It is truly invisible: Carbon Monoxide (CO) has absolutely no taste, smell, or colour. You cannot detect it with human senses, which is why it’s called the "Silent Killer." It is produced when fuels like gas, oil, coal, or wood don't burn properly due to a lack of oxygen.
+                        ? `**Carbon Monoxide (CO) is an invisible, odorless gas produced by faulty fuel-burning appliances.** It is truly invisible: Carbon Monoxide (CO) has absolutely no taste, smell, or colour. You cannot detect it with human senses, which is why it’s called the "Silent Killer." It is produced when fuels like gas, oil, coal, or wood don't burn properly due to a lack of oxygen.
 
 ### The Danger: What You Need to Know
 
@@ -597,8 +603,8 @@ A Red Tag on your furnace is scary, but ignoring it is worse. Don't gamble with 
                     title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
                     slug: 'emergency-repairs-guide-tenants-landlords',
                     excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
-                    cover_image: '/images/blog/emergency-repairs-guide-cover.jpg',
-                    content: regionalizeText(`Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
+                    cover_image: '/blog/home-emergency/cover.png',
+                    content: regionalizeText(`**Landlords are legally responsible for repairing structural issues, sanitation, heating, and utilities.** Dealing with emergency repairs can be stressful. This guide breaks down exactly who is responsible for what in a friendly, easy-to-read format. We've also included links to the official government rules so you can check the laws yourself.
 
 ## 🚨 What Counts as an "Emergency"?
 
@@ -706,7 +712,14 @@ If you have reported an emergency and the landlord is ignoring you:
                     excerpt: isUK
                         ? 'Boiler showing an error code in freezing weather? A frozen condensate pipe is the most common cause. Learn how to safely thaw it and restore your heating in minutes.'
                         : 'Furnace locked out with an error code in freezing temps? A frozen condensate drain line is the #1 cause. Learn how to thaw it yourself and get your heat back fast.',
-                    cover_image: '/images/blog/frozen-condensate/boiler-error-phone.jpg',
+                    cover_image: '/blog/boiler-frozen.png',
+                    howToSteps: [
+                        { name: "Locate the pipe", text: "Find the white or grey plastic pipe (22mm) exiting your external wall near the boiler." },
+                        { name: "Find the blockage", text: "Check the open end of the pipe and any bends for ice buildup." },
+                        { name: "Apply warm water", text: "Pour warm (not boiling) water slowly over the frozen section of the pipe." },
+                        { name: "Use a heat pack", text: "Wrap a hot water bottle around the pipe if you cannot pour water on it." },
+                        { name: "Reset your boiler", text: "Press the reset button once the ice has cleared to restart the system." }
+                    ],
                     content: isUK
                         ? `**If your boiler has stopped working during cold weather and is displaying a fault code, the most likely cause is a frozen condensate pipe.** This is a small plastic drain pipe that runs from your boiler to an outside drain. When temperatures drop below 0°C, the water inside it can freeze solid, blocking the drain and causing your boiler to lock out as a safety measure. The good news: **you can usually fix this yourself in under 15 minutes without calling an engineer.**
 
@@ -967,6 +980,1177 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                 setIsLoading(false);
                 return;
 
+            } else if (slug === 'water-leaking-through-ceiling') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-water-leaking-ceiling',
+                    title: isUK
+                        ? 'Water Leaking Through Your Ceiling? What to Do Before the Plumber Arrives'
+                        : 'Water Coming Through Your Ceiling? Emergency Steps Before the Pro Gets There',
+                    slug: 'water-leaking-through-ceiling',
+                    excerpt: isUK
+                        ? 'Water dripping or bulging from the ceiling is a plumbing emergency. Learn the 5 steps to limit damage right now — before an emergency plumber arrives.'
+                        : 'Water staining or dripping from your ceiling? Act fast to protect your home. Here are the emergency steps to take before a licensed plumber arrives.',
+                    cover_image: '/images/blog/water-ceiling/ceiling-leak.jpg',
+                    howToSteps: [
+                        { name: "Turn off water supply", text: "Locate your stopcock (usually under kitchen sink) and turn clockwise to close." },
+                        { name: "Switch off electricity", text: "Turn off the affected circuit at the consumer unit if water is near lights." },
+                        { name: "Catch the water", text: "Place buckets and towels under the leak to protect flooring." },
+                        { name: "Relieve pressure", text: "Carefully pierce the lowest point of any ceiling bulge to release water controlledly." },
+                        { name: "Call a plumber", text: "Contact an emergency plumber immediately to fix the source of the leak." }
+                    ],
+                    content: isUK
+                        ? `**If water is leaking through your ceiling, you need to act immediately to prevent structural damage, electrical hazards, and mould.** The most common causes are a burst pipe, an overflowing tank in the loft, or a leaking radiator on the floor above. **Don't wait for it to stop — turn off your water supply at the stopcock, catch the water, and call an emergency plumber.**
+
+## ✅ Quick Steps: What to Do Right Now
+
+*   **Turn off the water supply** — locate your internal stopcock (usually under the kitchen sink) and turn it clockwise until fully closed.
+*   **Switch off the electricity** — if water is near light fittings or electrics, turn off the affected circuit at the consumer unit. **Do not touch wet electrical fittings.**
+*   **Catch the water** — place buckets, towels, or plastic sheets under the leak. Move furniture and valuables out of the way.
+*   **Relieve the pressure** — if the ceiling is bulging, carefully pierce the lowest point of the bulge with a screwdriver over a bucket. This prevents a sudden collapse.
+*   **Call an emergency plumber** — once the immediate danger is controlled, get professional help fast.
+
+> ⚠️ **Safety Warning:** Water and electricity are a lethal combination. If the leak is near any electrical wiring, switches, or light fittings, **do not enter the room** until the power is switched off at the consumer unit. If unsure, call a qualified electrician first. Refer to [NICEIC guidance on electrical safety](https://www.niceic.com/).
+
+---
+
+## What Causes Water to Leak Through a Ceiling?
+
+There are several common reasons and identifying the right one helps your plumber fix it faster:
+
+### Burst or Leaking Pipe
+
+The most frequent cause in UK homes, especially during cold weather. Copper pipes corrode over time, and plastic push-fit joints can fail. Pipes in unheated loft spaces are particularly vulnerable to **frost damage** during winter — frozen water expands and cracks the pipe, which then leaks when it thaws.
+
+### Overflowing Cold Water Tank
+
+Many UK properties still have a cold water storage tank in the loft. If the ball valve fails, the tank overflows. You'll notice a continuous drip rather than a sudden flood.
+
+### Leaking Radiator or Heated Towel Rail
+
+A radiator valve or bleed nipple on the floor above can leak slowly for weeks before water appears on the ceiling below. Check for damp patches around all radiators upstairs.
+
+### Shower or Bath Seal Failure
+
+Deteriorated silicone seals around baths, shower trays, or tiled enclosures allow water to seep through the floor. This is often a slow, persistent leak that appears as a brown stain on the ceiling.
+
+### Roof Leak
+
+Not a plumbing issue, but easily confused with one. If the stain appears after heavy rain and is near an external wall or chimney, the water may be entering through damaged roof tiles or flashing. You'll need a [roofer rather than a plumber](/emergency-roofer/london).
+
+---
+
+## How to Limit the Damage (Detailed Guide)
+
+### Step 1: Stop the Water Supply
+
+Your **internal stopcock** is usually under the kitchen sink, in a utility cupboard, or near the front door. Turn it clockwise to shut off the mains water supply. If you have a cold water storage tank in the loft, the tank will continue to drain through the leak until empty — you can speed this up by opening all cold taps to drain the tank safely.
+
+If you don't know where your stopcock is, check your home's deeds or ask your landlord. Every household should know its location — **Building Regulations Approved Document G** recommends stopcocks be easily accessible.
+
+### Step 2: Protect the Electrics
+
+Go to your **consumer unit** (fuse box) and switch off the circuit breaker for the affected area. In modern homes, circuits are labelled. If they're not, switch off the main breaker as a precaution.
+
+**Never** touch a wet light switch, pendant, or socket. Water conducts electricity and the risk of electric shock is real.
+
+### Step 3: Contain the Water
+
+Place **buckets or large containers** directly under the drip. Lay towels and plastic sheeting around the area to protect flooring. If you have laminate or engineered wood flooring, act quickly — these materials warp and swell within hours of water exposure.
+
+### Step 4: Drain the Ceiling Bulge
+
+If the ceiling is visibly bowing or bulging, the plasterboard is holding a pocket of water. Left alone, it can collapse suddenly and cause injury. **Carefully pierce the lowest point of the bulge** with a small screwdriver, positioning a large bucket or container underneath.
+
+This controlled release is far safer than waiting for the ceiling to give way on its own.
+
+### Step 5: Document Everything
+
+**Take photos and video** of the damage before you start cleaning up. This is essential for:
+*   Your **home insurance claim** — most buildings policies cover burst pipe damage (known as an "escape of water" claim).
+*   Your plumber — photos of the leak pattern help them diagnose the source faster.
+
+---
+
+## When Should You Call an Emergency Plumber?
+
+**Any ceiling leak requires professional attention.** Even if the dripping stops after you turn off the water, the cause needs to be identified and repaired. Call a plumber immediately if:
+
+*   **The leak is rapid or flooding** — this indicates a burst pipe or major joint failure.
+*   **Water is near electrics** — an electrician should also be called to inspect wiring for water damage.
+*   **You can't find the stopcock** — a plumber can isolate the supply and prevent further damage.
+*   **The ceiling has collapsed or is at risk** — structural damage needs urgent assessment.
+
+**[Find an emergency plumber near you](https://emergencytradesmen.net/)** — Emergency Tradesmen connects you with vetted, insured plumbers who can respond within 30–90 minutes, 24/7 across the UK.
+
+---
+
+## How Much Does an Emergency Plumber Cost for a Ceiling Leak?
+
+Costs vary by time of day, location, and severity:
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency call-out (daytime) | £80–£150 |
+| Emergency call-out (evening/weekend) | £120–£250 |
+| Pipe repair (burst or leaking joint) | £100–£300 |
+| Stopcock replacement | £150–£250 |
+| Ceiling drying and replastering (separate trade) | £200–£500+ |
+
+Most home insurance policies cover the cost of repairing the **damage caused by the leak** (not the plumbing repair itself). Check your policy or call your insurer's claims line.
+
+---
+
+## How to Prevent Ceiling Leaks in the Future
+
+*   **Lag your pipes** — fit foam insulation to all pipes in the loft, garage, and external walls. Costs under £10 and takes 30 minutes.
+*   **Service your boiler annually** — a Gas Safe registered engineer will check for leaks and pressure issues. This is a requirement under **Building Regulations Part L** for landlords.
+*   **Check your cold water tank** — if you have a tank in the loft, ensure the ball valve is working and the overflow pipe drains externally.
+*   **Reseal baths and showers** — replace cracked or missing silicone sealant every 2–3 years.
+*   **Know your stopcock location** — every adult in the home should know how to shut off the water supply.
+
+---
+
+## UK Regulations and Official Guidance
+
+*   **Building Regulations Approved Document G** — covers cold water supply, safety, and hot water storage requirements.
+*   **Building Regulations Approved Document P** — governs electrical work in dwellings, relevant when water affects electrics.
+*   **NICEIC** — [find a registered electrician](https://www.niceic.com/) if water has affected electrical installations.
+*   **Gas Safe Register** — [mandatory for any gas work](https://www.gassaferegister.co.uk/) related to boiler leaks.
+*   **Association of British Insurers (ABI)** — [guidance on escape of water claims](https://www.abi.org.uk/).
+
+---
+
+## Frequently Asked Questions
+
+### Is a ceiling leak an emergency?
+
+**Yes.** Water leaking through a ceiling indicates an active plumbing failure. Left unaddressed, it can cause structural collapse, electrical hazards, and mould growth within **24–48 hours.** Turn off your water supply and call a plumber immediately.
+
+### Can I claim on my home insurance for a ceiling leak?
+
+**Usually, yes.** Most UK buildings insurance policies cover "escape of water" damage — the cost of repairing ceilings, walls, and flooring affected by the leak. However, the plumbing repair itself (fixing the pipe) is typically your responsibility. Contact your insurer's claims line for guidance.
+
+### How long does it take a plumber to fix a ceiling leak?
+
+**Typically 1–3 hours** depending on the source. A straightforward burst pipe repair takes 30–60 minutes. If the plumber needs to trace the leak through walls or between floors, it can take longer. Ceiling repair and repainting is a separate job.
+
+---
+
+## Don't Wait — Get Help Now
+
+Every minute counts when water is pouring through your ceiling. **[Book an emergency plumber through Emergency Tradesmen](https://emergencytradesmen.net/)** — Gas Safe registered, fully insured professionals dispatched to your door, usually within 60 minutes.`
+                        : `**If water is leaking through your ceiling, you need to act fast to prevent structural damage, electrical hazards, and mold.** The most common causes are a burst pipe, a failed supply line connection, or a leaking fixture on the floor above. **Shut off your main water valve immediately, protect the electrics, and call a licensed emergency plumber.**
+
+## ✅ Emergency Checklist: Ceiling Leak
+
+*   **Shut off the water supply** — find your main shut-off valve (usually in the basement, crawl space, or near the water meter) and close it fully.
+*   **Kill the power** — if water is anywhere near light fixtures, outlets, or wiring, switch off the affected breaker at the electrical panel. **Do not touch wet electrical fixtures.**
+*   **Contain the water** — place buckets, tubs, or trash cans under the leak. Lay tarps or plastic sheeting to protect flooring.
+*   **Relieve the pressure** — if the ceiling is bulging with trapped water, carefully puncture the center of the bulge with a screwdriver over a bucket.
+*   **Call an emergency plumber** — once the immediate risk is managed, get a licensed pro on the way.
+
+> ⚠️ **Safety Warning:** Water and electricity don't mix. If the leak is near any wiring, light fixtures, or outlets, **do not enter the room** until the breaker is off. If you're unsure which breaker controls the area, shut off the main breaker. When in doubt, call 911.
+
+---
+
+## What Causes Water to Come Through a Ceiling?
+
+Identifying the source helps your plumber fix it faster and saves you money. Here are the most common causes:
+
+### Burst or Leaking Pipe
+
+The #1 culprit — especially during winter cold snaps. Copper pipes corrode over time, PEX fittings can fail, and frozen pipes in exterior walls or unheated spaces can crack and leak when they thaw.
+
+### Failed Supply Line Connection
+
+Braided steel supply lines to toilets, faucets, and washing machines have a lifespan of **8–12 years.** When they fail, they dump water 24/7 until someone notices. Insurance companies report that **supply line failures** are the single largest source of residential water damage claims in the US.
+
+### Toilet Wax Ring or Flange Failure
+
+A deteriorated wax ring under a second-floor toilet allows water to seep through the subfloor every time the toilet is flushed. This often appears as a slow, brownish stain on the ceiling below.
+
+### Shower or Tub Seal Failure
+
+Cracked caulking or failed shower pan liners let water penetrate the subfloor. This is usually a persistent, slow leak that gets worse over time.
+
+### Roof Leak (Not Plumbing)
+
+If the stain appears after rain and is near an exterior wall, chimney, or vent stack, the source might be your roof — not your plumbing. You'll need a [roofer, not a plumber](/us/emergency-roofer/los-angeles).
+
+---
+
+## How to Limit the Damage (Step by Step)
+
+### Step 1: Shut Off the Water
+
+Your **main shut-off valve** is typically in the basement, utility room, crawl space, or near the water meter outside. Turn it clockwise (gate valve) or perpendicular to the pipe (ball valve) to close it completely.
+
+If you rent, your landlord is required under most state and local housing codes to provide access to the shut-off valve and ensure it's functional.
+
+### Step 2: Protect the Electrical System
+
+Go to your **electrical panel** (breaker box) and switch off the breaker for the affected room. In modern panels, breakers are labeled. If they're not, flip the main breaker as a precaution.
+
+**Never** touch a wet outlet, switch, or light fixture — even if the power appears to be off. Water damage to wiring requires inspection by a licensed electrician per the **National Electrical Code (NEC)**.
+
+### Step 3: Contain the Water
+
+Position **buckets, large containers, or trash cans** directly under the drip. Cover hardwood and laminate floors with **plastic sheeting or tarps** — these materials start to warp within hours of sustained water exposure. Move furniture, electronics, and valuables away from the affected area.
+
+### Step 4: Drain a Bulging Ceiling
+
+If the drywall is bowing or sagging, it's holding a pocket of water. A sudden collapse can cause injury and much worse damage below. **Puncture the lowest point of the bulge** with a small screwdriver or nail, positioned over a large bucket. This controlled release is far safer than letting gravity do it on its own terms.
+
+### Step 5: Document the Damage
+
+**Take photos and video** of everything before cleanup. You'll need this for:
+*   Your **homeowner's insurance claim** — water damage claims are the #1 most common home insurance claim in the US (Insurance Information Institute).
+*   Your plumber — images of the leak pattern help them trace the source faster.
+*   Your landlord (if renting) — this establishes a timeline and liability.
+
+---
+
+## When Should You Call a Licensed Plumber?
+
+**Every ceiling leak requires professional repair.** Even if the dripping stops after you shut off the water, the root cause needs to be found and fixed. Call a plumber immediately if:
+
+*   **The leak is rapid or flooding** — this means a burst pipe, a failed fitting, or a major supply line rupture.
+*   **Water is near electrics** — a licensed electrician should also inspect for water damage to wiring.
+*   **You can't find the shut-off valve** — a plumber can isolate the supply quickly.
+*   **The ceiling is sagging or has collapsed** — structural assessment may be needed.
+
+**[Find a licensed emergency plumber near you](https://emergencytradesmen.net/)** — Emergency Tradesmen connects you with vetted, insured pros who respond within 30–90 minutes, 24/7 across the US.
+
+---
+
+## How Much Does an Emergency Plumber Cost for a Ceiling Leak?
+
+Costs vary by region, time of day, and severity:
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency service call (daytime) | $150–$300 |
+| Emergency service call (after-hours/weekend) | $250–$500 |
+| Pipe repair (burst or failed fitting) | $200–$600 |
+| Main shut-off valve replacement | $250–$400 |
+| Water damage mitigation (separate contractor) | $1,000–$4,000+ |
+
+Most homeowner's insurance policies cover "sudden and accidental" water damage — including ceiling repair, flooring, and personal property. The plumbing repair itself is usually your responsibility. Call your insurance agent's claims line within 24 hours.
+
+---
+
+## How to Prevent Ceiling Leaks in the Future
+
+*   **Replace supply lines every 8–10 years** — braided steel hoses under sinks, toilets, and behind the washing machine have a finite lifespan.
+*   **Insulate exposed pipes** — pipes in exterior walls, crawl spaces, and attics should be wrapped with foam insulation to prevent freezing.
+*   **Inspect caulking and seals** — recaulk tubs, showers, and toilet bases every 2–3 years.
+*   **Service your water heater annually** — a licensed plumber can check the pressure relief valve and anode rod, which prevents corrosion.
+*   **Know your shut-off valve location** — every adult in the household should know where it is and how to operate it.
+
+---
+
+## Regulations and Official Resources
+
+*   **International Plumbing Code (IPC)** — governs residential plumbing installation and repair standards across most US jurisdictions.
+*   **National Electrical Code (NEC)** — requires electrical inspection when water has contacted wiring, outlets, or fixtures.
+*   **Insurance Information Institute (III)** — [guide to water damage claims](https://www.iii.org/article/water-damage).
+*   **EPA WaterSense** — [residential plumbing efficiency and maintenance guidance](https://www.epa.gov/watersense).
+*   **Your State Contractor Licensing Board** — always verify your plumber holds a valid, active license.
+
+---
+
+## Frequently Asked Questions
+
+### Is a ceiling leak a plumbing emergency?
+
+**Yes.** Water coming through a ceiling signals an active plumbing failure that can cause structural collapse, electrical hazards, and mold growth within **24–48 hours.** Shut off your water and call a plumber right away.
+
+### Will my homeowner's insurance cover a ceiling leak?
+
+**In most cases, yes.** Standard homeowner's policies cover "sudden and accidental" water damage — this includes ceiling, wall, and flooring repairs. The plumbing repair itself (fixing the pipe or fitting) is typically not covered. File your claim within 24 hours and document everything with photos.
+
+### How long does it take a plumber to fix a ceiling leak?
+
+**Typically 1–3 hours** for the plumbing repair. A straightforward pipe or fitting repair takes 30–60 minutes. If the plumber needs to trace the leak through walls or between floors, it may take longer. Ceiling repair and repainting requires a separate contractor.
+
+---
+
+## Don't Wait — Get Help Now
+
+Every minute counts when water is pouring through your ceiling. **[Book an emergency plumber through Emergency Tradesmen](https://emergencytradesmen.net/)** — licensed, insured professionals dispatched to your door, usually within 60 minutes.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'no-power-but-neighbours-have-power') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-no-power-neighbours',
+                    title: isUK
+                        ? 'Power Cut in Your Home But Neighbours Have Power? Here\'s Why'
+                        : 'Lost Power But Your Neighbors Didn\'t? Here\'s What to Check',
+                    slug: 'no-power-but-neighbours-have-power',
+                    excerpt: isUK
+                        ? 'Lights out but the rest of the street is fine? This usually means the problem is inside your property.'
+                        : 'Your power is out but your neighbors are fine? The problem is likely inside your home.',
+                    cover_image: '/images/blog/no-power/cover.jpg',
+                    howToSteps: [
+                        { name: "Check consumer unit", text: "Look for any switches (MCBs or RCDs) in the 'off' or middle position." },
+                        { name: "Reset tripped switch", text: "Push the switch firmly to 'on'. If it trips again, leave it off." },
+                        { name: "Unplug appliances", text: "Unplug everything on the faulty circuit to rule out appliance faults." },
+                        { name: "Reset again", text: "Try resetting the breaker one more time with appliances unplugged." },
+                        { name: "Call electrician", text: "If power won't restore, call an emergency electrician immediately." }
+                    ],
+                    content: isUK
+                        ? `**If your home has lost power but your neighbours still have electricity, the fault is almost certainly inside your property — not with the mains supply.** The most common causes are a tripped circuit breaker in your consumer unit, a faulty RCD, or a fault on a specific circuit. **Check your consumer unit first. If you can't identify or fix the issue, call a qualified electrician immediately.**
+
+## ✅ Quick Steps: What to Do Right Now
+
+*   **Check your consumer unit** — open the cover and look for any switches (MCBs or RCDs) that have tripped to the "off" or middle position.
+*   **Reset the tripped switch** — push it firmly to the "on" position. If it trips again immediately, there's an active fault on that circuit.
+*   **Identify the faulty circuit** — consumer units should have labels (e.g., "upstairs sockets," "kitchen").
+*   **Unplug everything on the affected circuit** — a faulty appliance is the most common cause. Reset the breaker, then plug appliances back in one at a time.
+*   **Call an electrician if you can't restore power** — do not remove the consumer unit cover or touch any internal wiring.
+
+> ⚠️ **Safety Warning:** Never remove the cover of your consumer unit or attempt to work on the main switch or supply cables. Only a Part P qualified electrician registered with [NICEIC](https://www.niceic.com/) or [NAPIT](https://www.napit.org.uk/) should work on your consumer unit or fixed wiring.
+
+---
+
+## What Causes a Power Cut in Just Your Home?
+
+### Tripped MCB (Miniature Circuit Breaker)
+The most common cause. MCBs protect individual circuits and trip when they detect an overload or short circuit. Simply resetting the switch usually restores power.
+
+### Tripped RCD (Residual Current Device)
+RCDs protect against earth faults. Common triggers include water ingress into an outdoor socket, a faulty appliance, or degraded wiring insulation.
+
+### Faulty Appliance
+Any appliance with a heating element or motor can develop an internal fault that immediately trips the breaker when plugged in.
+
+### Loose or Damaged Wiring
+In older properties (pre-1990s wiring), connections can degrade. This requires a qualified electrician and potentially an **Electrical Installation Condition Report (EICR)**.
+
+### Main Fuse Failure
+If your main fuse blows, your entire property loses power. **Do not touch this** — contact your Distribution Network Operator (DNO) at [energynetworks.org](https://www.energynetworks.org/customers/find-my-network-operator).
+
+---
+
+## Step-by-Step Diagnosis Guide
+
+### Step 1: Check Your Consumer Unit
+Locate your consumer unit and look for any switches in the "off" or middle position.
+
+### Step 2: Reset the Tripped Breaker
+Push the switch firmly to "on." If it stays on, your power should be restored.
+
+### Step 3: Isolate the Fault
+Turn off all MCBs, then switch them back on one at a time. When one trips, you've found the faulty circuit. Unplug everything on that circuit and reset, then plug devices back in one at a time.
+
+### Step 4: Call an Electrician
+If you can't identify the fault or the main switch won't stay on, **[find an emergency electrician near you](https://emergencytradesmen.net/).**
+
+---
+
+## How Much Does an Emergency Electrician Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency call-out (daytime) | £80–£150 |
+| Emergency call-out (evening/weekend) | £120–£250 |
+| Consumer unit inspection and fault diagnosis | £100–£200 |
+| Consumer unit replacement | £350–£700 |
+| EICR (Electrical Installation Condition Report) | £150–£300 |
+
+---
+
+## UK Regulations and Official Guidance
+
+*   **Building Regulations Part P** — governs all domestic electrical work in England and Wales.
+*   **BS 7671 (IET Wiring Regulations, 18th Edition)** — the technical standard all UK electricians must follow.
+*   **NICEIC** — [find a registered electrician](https://www.niceic.com/).
+*   **Energy Networks Association** — [find your DNO](https://www.energynetworks.org/customers/find-my-network-operator).
+
+---
+
+## Frequently Asked Questions
+
+### Why has my power gone off but the neighbours are fine?
+**The fault is inside your property.** A circuit breaker or RCD has tripped, your main fuse has blown, or there's a wiring fault. Check your consumer unit first.
+
+### Is it safe to reset a tripped circuit breaker?
+**Yes, it's safe to reset it once.** If it trips again immediately, stop resetting and call a qualified electrician.
+
+### When should I call an emergency electrician?
+**Call immediately if:** the main switch won't stay on, you smell burning, you see scorch marks, or your breaker keeps tripping.
+
+---
+
+## Get Your Power Back Now
+Don't spend the night in the dark. **[Book an emergency electrician through Emergency Tradesmen](https://emergencytradesmen.net/)** — NICEIC registered, fully insured, available 24/7.`
+                        : `**If your home has lost power but your neighbors still have electricity, the problem is almost certainly inside your home — not a utility outage.** The most common causes are a tripped circuit breaker, a blown fuse, or a GFCI outlet that has tripped. **Check your electrical panel first. If you can't find or fix the issue, call a licensed electrician.**
+
+## ✅ Emergency Checklist: Power Out at Your House Only
+
+*   **Check your electrical panel** — look for any breakers in the "off" or middle position.
+*   **Reset the tripped breaker** — flip it firmly to "off," then back to "on."
+*   **Check GFCI outlets** — press "reset" on GFCI outlets in kitchen, bathroom, and garage.
+*   **Unplug everything on the affected circuit** — reset the breaker, then plug items back one at a time.
+*   **Call a licensed electrician if you can't restore power.**
+
+> ⚠️ **Safety Warning:** Never remove the inner cover of your electrical panel — bus bars carry 240V. If you see scorch marks or smell burning, **leave the house and call 911**, then call an electrician.
+
+---
+
+## What Causes a Power Outage in Only Your Home?
+
+### Tripped Circuit Breaker
+The most common cause. They trip from overloads or short circuits. Resetting usually works.
+
+### Tripped GFCI Outlet
+A single tripped GFCI can cut power to every outlet downstream on the same circuit.
+
+### Faulty Appliance
+Common culprits: space heaters, window AC units, hairdryers, and old refrigerators.
+
+### Main Breaker Trip
+If your main breaker trips, your entire home loses power. **Do not repeatedly force it back on.**
+
+---
+
+## Step-by-Step Diagnosis Guide
+
+### Step 1: Check Your Electrical Panel
+Look for breakers flipped to "off" or sitting in the middle (tripped) position.
+
+### Step 2: Reset Tripped Breakers
+Firmly flip the breaker to "off," then back to "on."
+
+### Step 3: Isolate the Problem
+Turn off all breakers. Turn them back on one at a time. When one trips, you've found the faulty circuit.
+
+### Step 4: Check GFCI Outlets
+Press the "reset" button on every GFCI outlet in your home.
+
+### Step 5: Call an Electrician
+**[Find an emergency electrician near you](https://emergencytradesmen.net/).**
+
+---
+
+## How Much Does an Emergency Electrician Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency service call (daytime) | $150–$300 |
+| Emergency service call (after-hours) | $250–$500 |
+| Panel inspection and diagnosis | $100–$250 |
+| Breaker replacement | $150–$350 |
+
+---
+
+## Regulations and Official Resources
+
+*   **National Electrical Code (NEC / NFPA 70)** — the safety standard for all electrical work.
+*   **Your State Electrical Licensing Board** — verify your electrician's license.
+*   **OSHA** — [electrical safety standards](https://www.osha.gov/electrical).
+
+---
+
+## Frequently Asked Questions
+
+### Why did my power go out but my neighbors are fine?
+**The problem is inside your home.** A circuit breaker has tripped, a GFCI outlet has popped, or there's a wiring fault.
+
+### Is it safe to reset a tripped circuit breaker?
+**Yes — once.** If it trips again immediately, stop resetting and call a licensed electrician.
+
+### When should I call an emergency electrician?
+**Call right away if:** your main breaker won't hold, you smell burning, a breaker keeps tripping, or your entire home has no power.
+
+---
+
+## Get Your Power Back Now
+**[Book an emergency electrician through Emergency Tradesmen](https://emergencytradesmen.net/)** — licensed, insured, available 24/7.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'locked-out-at-night') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-locked-out-night',
+                    title: isUK
+                        ? 'Locked Out at Night? Here\'s What to Do (and What NOT to Do)'
+                        : 'Locked Out of Your House at Night? What to Do and What to Avoid',
+                    slug: 'locked-out-at-night',
+                    excerpt: isUK
+                        ? 'Locked out of your home late at night? Don\'t panic. Here\'s a safe, step-by-step guide.'
+                        : 'Stuck outside your home after dark? Here\'s exactly what to do — and what NOT to do.',
+                    cover_image: '/blog/locksmith/family-locked-out.jpg',
+                    howToSteps: [
+                        { name: "Check all entries", text: "Verify back doors, windows, and garage doors are actually locked." },
+                        { name: "Call keyholders", text: "Contact anyone who holds a spare key (neighbour, family, landlord)." },
+                        { name: "Do NOT break in", text: "Avoid forcing doors or windows as this causes costly damage." },
+                        { name: "Call a locksmith", text: "Contact a vetted 24/7 locksmith for non-destructive entry." },
+                        { name: "Stay safe", text: "Wait in a safe, well-lit area or your vehicle while help arrives." }
+                    ],
+                    content: isUK
+                        ? `**If you're locked out of your home at night, stay calm — panicking leads to bad decisions like trying to force a window, which can cause injury, damage, and void your insurance.** The fastest safe solution is to call a 24/7 emergency locksmith. **Before calling anyone, check all doors, windows, and any spare keys first.**
+
+## ✅ Quick Steps: Locked Out at Night
+
+*   **Stay calm and check everything** — try the back door, side gates, and any windows you might have left open.
+*   **Call someone with a spare key** — a partner, family member, flatmate, or trusted neighbour.
+*   **Do NOT try to break in** — forcing a window or door risks injury, property damage, and may void your insurance.
+*   **Call a 24/7 locksmith** — a reputable locksmith can open most locks non-destructively within minutes.
+*   **Stay safe** — wait in a well-lit area or your car. Call 101 if you feel unsafe.
+
+> ⚠️ **Warning:** Beware of locksmith scams. Rogue operators advertise low call-out fees then charge £300+ on arrival. Always confirm the total cost **before they start work** and check [MLA membership](https://www.locksmiths.co.uk/).
+
+---
+
+## How a Locksmith Gets You In
+
+*   **Lock picking** — standard method for pin-tumbler locks (Yale, ERA)
+*   **Decoder tools** — for euro cylinder locks (common on uPVC doors)
+*   **Bypass techniques** — for night latches and multi-point locking systems
+
+Most entries take **5–15 minutes** without damage.
+
+---
+
+## How Much Does an Emergency Locksmith Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency lockout (daytime) | £60–£120 |
+| Emergency lockout (night/weekend) | £100–£200 |
+| Lock replacement (standard cylinder) | £60–£100 |
+| Lock replacement (anti-snap BS 3621) | £80–£150 |
+
+---
+
+## How to Avoid Locksmith Scams
+
+*   **Check MLA membership** — the [Master Locksmiths Association](https://www.locksmiths.co.uk/) vets all members.
+*   **Get a fixed price upfront**
+*   **Ask for ID** — legitimate locksmiths carry identification.
+*   **Use Emergency Tradesmen** — [all locksmiths on our platform](https://emergencytradesmen.net/) are vetted and reviewed.
+
+---
+
+## How to Prevent Getting Locked Out
+
+*   Leave a spare key with a trusted neighbour or family member
+*   Install a key safe (wall-mounted, combination-operated)
+*   Consider a smart lock (keypad or Bluetooth)
+*   Always do a "keys, phone, wallet" check before closing any door
+
+---
+
+## Frequently Asked Questions
+
+### How long does it take a locksmith to open a locked door?
+**Usually 5–15 minutes** for non-destructive entry. High-security locks may take longer.
+
+### Should I call the police if I'm locked out?
+**Only if you feel unsafe.** Police will not help you get in — call 101 (non-emergency) if threatened.
+
+### Will my insurance pay for a locksmith?
+**Check your policy.** Some home insurance and home emergency policies cover locksmith call-outs.
+
+---
+
+## Locked Out? Get Help Now
+**[Find a 24/7 emergency locksmith through Emergency Tradesmen](https://emergencytradesmen.net/)** — MLA-qualified, vetted, typically within 30 minutes.`
+                        : `**If you're locked out of your home at night, don't panic — and do NOT try to break in.** Forcing a window or door can cause injury, costly damage, and may void your insurance. **Before calling anyone, check all doors, windows, and hidden key spots first.**
+
+## ✅ Emergency Checklist: Locked Out
+
+*   **Stay calm and check everything** — try the back door, garage, and any unlocked windows. Check your car for a spare.
+*   **Call someone with a spare key** — a spouse, family member, roommate, or trusted neighbor.
+*   **Do NOT try to break in** — forcing entry risks injury and damages your door/frame.
+*   **Call a 24/7 locksmith** — a licensed locksmith can get you in non-destructively within 30–60 minutes.
+*   **Stay safe** — wait in a well-lit area or your car. Call 911 if you feel unsafe.
+
+> ⚠️ **Warning:** Watch out for locksmith scams. Illegitimate operators advertise $35, then charge $400+ at the door. Always confirm the total price BEFORE work begins.
+
+---
+
+## How a Locksmith Gets You In
+
+*   **Lock picking** — standard method for pin-tumbler deadbolts
+*   **Bypass tools** — for latch-style and some keypad locks
+*   **Air wedges** — to safely manipulate the latch from outside
+
+Most entries take **5–15 minutes** without damage.
+
+---
+
+## How Much Does an Emergency Locksmith Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency lockout (daytime) | $75–$150 |
+| Emergency lockout (night/weekend) | $150–$300 |
+| Standard lock replacement | $100–$200 |
+| High-security lock replacement | $200–$400 |
+
+---
+
+## How to Avoid Locksmith Scams
+
+*   **Verify their license** — check with your state's consumer protection office.
+*   **Get a firm price upfront** — before they touch the lock.
+*   **Check Google Reviews** — 4+ stars with many reviews is a good sign.
+*   **Use Emergency Tradesmen** — [all locksmiths are vetted and reviewed](https://emergencytradesmen.net/).
+
+---
+
+## How to Prevent Getting Locked Out
+
+*   Leave a spare key with a trusted neighbor
+*   Install a key lockbox (combination-operated)
+*   Switch to a smart lock (keypad, fingerprint, or app-controlled)
+*   Do a "keys-phone-wallet" check every time you leave
+
+---
+
+## Frequently Asked Questions
+
+### How long does it take a locksmith to open a locked door?
+**Usually 5–15 minutes.** High-security locks may take longer or require drilling.
+
+### Should I call the police if I'm locked out?
+**Only if you feel unsafe.** Police generally won't help you into your home.
+
+### Will my homeowner's insurance cover a locksmith?
+**Some policies do.** Check for "home emergency" or "lockout" coverage.
+
+---
+
+## Locked Out? Get Help Now
+**[Find a 24/7 emergency locksmith through Emergency Tradesmen](https://emergencytradesmen.net/)** — licensed, vetted, often within 30 minutes.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'boiler-pressure-keeps-dropping') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-boiler-pressure-dropping',
+                    title: isUK
+                        ? 'Boiler Pressure Keeps Dropping? 5 Causes and When to Worry'
+                        : 'Furnace Pressure Keeps Dropping? 5 Causes and When to Call for Help',
+                    slug: 'boiler-pressure-keeps-dropping',
+                    excerpt: isUK
+                        ? 'Boiler pressure dropping below 1 bar? Here are the 5 most common causes and how to repressurise safely.'
+                        : 'Boiler losing pressure? Here are 5 common causes and how to add pressure safely.',
+                    cover_image: '/images/blog/boiler-pressure/pressure-gauge.jpg',
+                    howToSteps: [
+                        { name: "Check pressure gauge", text: "Ensure the gauge reads below 1.0 bar (UK) or 12 PSI (US) when cold." },
+                        { name: "Find filling loop", text: "Locate the flexible silver hose or filling valves under the boiler." },
+                        { name: "Open valve slowly", text: "Turn the valve handle to allow water in while watching the gauge." },
+                        { name: "Close at 1.5 bar", text: "Shut the valve firmly when pressure reaches 1.2–1.5 bar." },
+                        { name: "Reset boiler", text: "Press the reset button if the boiler had locked out due to low pressure." }
+                    ],
+                    content: isUK
+                        ? `**If your boiler pressure keeps dropping below 1 bar, it usually means there's a leak somewhere in the system — either in a pipe, radiator valve, or the boiler itself.** Low pressure will cause your boiler to lock out. **You can repressurise yourself using the filling loop, but if the pressure drops again within a few days, call a Gas Safe registered engineer.**
+
+## ✅ Quick Steps: Repressurise Your Boiler
+
+*   **Check the pressure gauge** — should read between **1.0 and 1.5 bar** when cold.
+*   **Find the filling loop** — a braided hose underneath the boiler with one or two valves.
+*   **Open the filling loop slowly** — watch the gauge rise. Close at **1.2–1.5 bar.**
+*   **Reset the boiler** — press the reset button if the boiler had locked out.
+*   **Monitor for 48 hours** — if pressure drops again, you have a leak.
+
+> ⚠️ **Safety Warning:** If you smell gas, see water dripping from the boiler, or the gauge is above 3 bar, **do not touch the boiler.** Call the [Gas Emergency Line on 0800 111 999](tel:08001119999).
+
+---
+
+## 5 Causes of Dropping Boiler Pressure
+
+### 1. Leak in the Heating System
+Even a tiny drip from a radiator valve or pipe joint will gradually reduce pressure. Check around every radiator valve and behind the boiler for damp patches.
+
+### 2. Leaking Pressure Relief Valve (PRV)
+If faulty, the PRV discharges water intermittently through an external overflow pipe. Check outside for a dripping pipe.
+
+### 3. Faulty Expansion Vessel
+If the internal diaphragm has failed, the system can't manage pressure fluctuations — leading to pressure spikes then drops.
+
+### 4. Recently Bled Radiators
+If you've bled radiators to release trapped air, pressure will drop. Simply repressurise and monitor — this is normal.
+
+### 5. Corroded Pipework or Heat Exchanger
+In older systems, internal corrosion can cause pinhole leaks. A Gas Safe engineer can perform a pressure test to locate them.
+
+---
+
+## How to Repressurise Your Boiler
+
+1. **Turn off the boiler** and let it cool
+2. **Locate the filling loop** — braided hose under the boiler
+3. **Open the valve(s) slowly** — watch the gauge
+4. **Close at 1.2–1.5 bar**
+5. **Restart the boiler** and recheck after 20 minutes
+
+---
+
+## How Much Does a Gas Engineer Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Boiler service (annual) | £70–£120 |
+| Pressure leak diagnosis | £80–£150 |
+| Radiator valve replacement | £80–£150 |
+| PRV replacement | £100–£200 |
+| Expansion vessel replacement | £150–£300 |
+
+---
+
+## UK Regulations and Official Guidance
+
+*   **Gas Safe Register** — [verify an engineer or find one near you](https://www.gassaferegister.co.uk/)
+*   **Building Regulations Part L** — annual boiler servicing required for landlords
+*   **BS 7593** — treatment and conditioning of central heating water
+
+---
+
+## Frequently Asked Questions
+
+### What should my boiler pressure be?
+**Between 1.0 and 1.5 bar when cold.** When heating is running, 1.5–2.0 bar is normal.
+
+### Why does my boiler keep losing pressure every day?
+**You almost certainly have a leak.** A Gas Safe engineer can perform a pressure test to find it.
+
+### Can low boiler pressure be dangerous?
+**Low pressure isn't dangerous** — it just stops the boiler working. **High pressure (above 3 bar) is more serious.**
+
+---
+
+## Get Your Heating Back On
+**[Find a Gas Safe registered engineer through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted, insured, available 24/7.`
+                        : `**If your boiler or hydronic heating system keeps losing pressure, it almost always means there's a leak somewhere.** Low pressure will cause your system to shut down. **You can add pressure yourself using the fill valve, but if it drops again within a few days, call a licensed HVAC contractor.**
+
+## ✅ Quick Fix Checklist
+
+*   **Check the pressure gauge** — should read between **12–15 PSI** when cold.
+*   **Find the fill valve** — on the supply line near the boiler, usually with a lever handle.
+*   **Open the fill valve slowly** — watch the gauge. Close at **12–15 PSI.**
+*   **Reset the system** — press the reset button if the boiler had locked out.
+*   **Monitor for 48 hours** — if pressure drops again, call a licensed HVAC contractor.
+
+> ⚠️ **Safety Warning:** If you smell gas or the gauge is above 30 PSI, **shut off the gas supply** and call your gas utility immediately.
+
+---
+
+## 5 Causes of Dropping System Pressure
+
+### 1. Leak in the Piping or Fittings
+The #1 cause. Check around baseboard heaters, radiators, and all visible pipe connections.
+
+### 2. Leaking Pressure Relief Valve (PRV)
+If faulty or stuck open, it continuously weeps water through a discharge pipe.
+
+### 3. Failed Expansion Tank
+If the bladder has ruptured, the system can't manage pressure swings.
+
+### 4. Recently Bled Radiators or Baseboards
+Normal pressure drop after bleeding air. Just add water and monitor.
+
+### 5. Corroded Pipes or Heat Exchanger
+In older systems, internal corrosion can create pinhole leaks that are hard to spot.
+
+---
+
+## How to Add Pressure
+
+1. **Turn off the boiler** and let it cool
+2. **Locate the fill valve** near the boiler
+3. **Open slowly** — watch the gauge
+4. **Close at 12–15 PSI**
+5. **Restart** and recheck after 20 minutes
+
+---
+
+## How Much Does an HVAC Contractor Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Annual boiler service | $150–$300 |
+| Pressure leak diagnosis | $150–$300 |
+| Valve replacement | $150–$350 |
+| Expansion tank replacement | $250–$500 |
+
+---
+
+## Regulations and Official Resources
+
+*   **International Fuel Gas Code (IFGC)** — gas appliance installation standards
+*   **ENERGY STAR** — [high-efficiency heating guidance](https://www.energystar.gov/products/heating_cooling/boilers)
+*   **Your State Contractor Licensing Board** — verify your HVAC tech's license
+
+---
+
+## Frequently Asked Questions
+
+### What should my boiler pressure be?
+**Between 12 and 15 PSI when cold.** When running, 15–20 PSI is normal.
+
+### Why does my boiler keep losing pressure?
+**There's almost certainly a leak.** A licensed HVAC tech can perform a pressure test to find it.
+
+### Can low boiler pressure be dangerous?
+**Low pressure isn't dangerous** — it just stops the heat. **High pressure (above 30 PSI) is more serious.**
+
+---
+
+## Get Your Heat Back On
+**[Find a licensed HVAC contractor through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted, insured, available 24/7.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'sewage-smell-in-house') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-sewage-smell-house',
+                    title: isUK
+                        ? 'Sewage Smell in Your House? The 6 Most Likely Causes'
+                        : 'Sewer Smell in Your House? 6 Common Causes and How to Fix Them',
+                    slug: 'sewage-smell-in-house',
+                    excerpt: isUK
+                        ? 'A sewage smell is more than unpleasant — it can indicate a health hazard. Here are the 6 most common causes.'
+                        : 'A sewer gas smell is a health risk. Here are 6 common causes and what to do about each one.',
+                    cover_image: '/images/blog/sewage-smell/drain-cover.jpg',
+                    howToSteps: [
+                        { name: "Run water in drains", text: "Run taps for 30 seconds in all sinks, baths, and showers to refill traps." },
+                        { name: "Flush unused toilets", text: "Flush any guest toilets that haven't been used recently." },
+                        { name: "Check outside drains", text: "Inspect visible external drains for blockages or debris." },
+                        { name: "Ventilate", text: "Open windows to clear any accumulated sewer gases." },
+                        { name: "Call drain specialist", text: "If the smell persists, professional investigation is needed." }
+                    ],
+                    content: isUK
+                        ? `**A sewage smell inside your home usually means sewer gases are entering through a dry trap, a cracked pipe, or a faulty seal — and they can contain hydrogen sulphide and methane, which are both toxic and flammable.** Most causes are simple to fix. **Run water in all drains you haven't used recently. If the smell persists, call an emergency drain specialist.**
+
+## ✅ Quick Steps: Stop the Smell
+
+*   **Run water in unused drains** — pour water into every sink, bath, shower, and floor drain you haven't used recently. This refills the U-bend (trap).
+*   **Flush unused toilets** — the water in the bowl acts as a seal.
+*   **Check outside drains** — lift accessible drain covers and check for blockages or missing seals.
+*   **Ventilate the property** — open windows. Sewer gas can cause headaches and nausea.
+*   **Call a drain specialist if it persists.**
+
+> ⚠️ **Health Warning:** Sewer gas contains hydrogen sulphide (H₂S) and methane. If the smell is very strong or you feel unwell, **leave the property immediately.**
+
+---
+
+## 6 Causes of Sewage Smell
+
+### 1. Dry U-Bend (Drain Trap)
+**The #1 cause.** If a drain hasn't been used for weeks, the water seal evaporates.
+**Fix:** Run the tap for 30 seconds. Add a tablespoon of vegetable oil to slow evaporation.
+
+### 2. Toilet Pan Seal Failure
+The seal between the toilet and soil pipe can deteriorate. Signs: smell worst near the toilet base, toilet rocks slightly.
+**Fix:** A plumber can replace the pan connector (1–2 hours).
+
+### 3. Blocked Soil Vent Pipe (SVP)
+If blocked (leaves, bird nests) or cracked, gases are forced back into the house.
+**Fix:** A drain specialist can inspect with a camera and clear blockages.
+
+### 4. Cracked or Broken Drain Pipe
+Underground drains can crack from ground movement or tree roots.
+**Fix:** Requires a CCTV drain survey, then targeted repair or pipe relining.
+
+### 5. Missing or Damaged Drain Cover
+If a manhole cover is missing or unsealed, sewer gas escapes directly.
+**Fix:** Replace or reseat the drain cover with a new seal.
+
+### 6. Blocked Drain or Partial Blockage
+Fats, wipes, and hair create partial blockages. Stagnant sewage produces a persistent smell.
+**Fix:** High-pressure water jetting clears most blockages.
+
+---
+
+## When to Call a Drain Specialist
+
+*   Smell persists after running all taps
+*   Slow-draining sinks or gurgling sounds
+*   Smell is outside your property
+*   Sewage is backing up — **this is an emergency**
+
+**[Find an emergency drain specialist near you](https://emergencytradesmen.net/).**
+
+---
+
+## How Much Does a Drain Specialist Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency drain unblocking | £80–£150 |
+| CCTV drain survey | £150–£300 |
+| Drain repair (patch/reline) | £300–£1,000 |
+| Soil vent pipe clearance/repair | £100–£300 |
+
+---
+
+## UK Regulations
+
+*   **Building Regulations Approved Document H** — governs drainage and waste disposal.
+*   **Water Industry Act 1991** — defines public vs private sewer responsibilities.
+*   **Your Water Company** — report blockages on the public sewer to your water company.
+
+---
+
+## Frequently Asked Questions
+
+### Is a sewage smell in the house dangerous?
+**Yes.** Sewer gas contains hydrogen sulphide (toxic) and methane (flammable). Ventilate immediately and find the source.
+
+### Why does my house smell like sewage when it rains?
+**Rain can overload drains**, forcing gas back up. It can also indicate a damaged pipe or failed trap seal. A drain survey can identify the cause.
+
+### Who is responsible for the drains — me or the water company?
+**You're responsible for drains within your property boundary.** The water company handles the public sewer beyond that.
+
+---
+
+## Don't Ignore It
+**[Book an emergency drain specialist through Emergency Tradesmen](https://emergencytradesmen.net/)** — fully equipped, insured, available 24/7.`
+                        : `**A sewer smell inside your home usually means sewer gases are entering through a dried-out drain trap, a cracked pipe, or a failed seal — and these gases contain hydrogen sulfide and methane, which are toxic and flammable.** The fix is often simple. **Run water in every drain you haven't used recently. If the smell persists, call a licensed drain specialist.**
+
+## ✅ Emergency Checklist: Sewer Smell
+
+*   **Run water in every unused drain** — fill sinks, tubs, showers, and floor drains. This refills the P-trap.
+*   **Flush unused toilets** — the bowl water acts as a gas seal.
+*   **Check your cleanouts** — make sure all sewer cleanout caps are sealed.
+*   **Ventilate the home** — open windows. Sewer gas causes headaches and dizziness.
+*   **Call a drain specialist if it persists.**
+
+> ⚠️ **Health Warning:** Sewer gas contains hydrogen sulfide (H₂S) and methane. If the smell is very strong or you feel sick, **leave the home immediately.**
+
+---
+
+## 6 Causes of Sewer Smell
+
+### 1. Dried-Out P-Trap
+**The #1 cause.** If a fixture hasn't been used in weeks, the water seal evaporates.
+**Fix:** Run water for 30 seconds. Pour a tablespoon of mineral oil on top to slow evaporation.
+
+### 2. Failed Toilet Wax Ring
+The wax ring under the toilet creates a gas-tight seal. Signs: smell worst near the toilet, toilet rocks.
+**Fix:** A plumber replaces the wax ring — $150–$250.
+
+### 3. Blocked or Cracked Vent Stack
+If blocked (leaves, ice, animal nests) or cracked, gas is forced back into the home.
+**Fix:** A plumber can clear the vent from the roof or inspect with a camera.
+
+### 4. Cracked Sewer Line
+Underground pipes can crack from tree roots, ground shifting, or age.
+**Fix:** Video camera inspection, then trenchless repair or excavation.
+
+### 5. Missing or Loose Cleanout Cap
+A missing cap allows sewer gas to escape. Often in the basement or near the foundation.
+**Fix:** Replace the cap — under $10 at any hardware store.
+
+### 6. Partial Drain Blockage
+Grease, hair, and debris cause stagnant sewage that produces a persistent smell.
+**Fix:** Drain snake or hydro-jetting clears most blockages.
+
+---
+
+## When to Call a Drain Specialist
+
+*   Smell persists after running all fixtures
+*   Drains are slow or making gurgling sounds
+*   Smell is strongest in the basement
+*   Sewage is backing up — **this is an emergency**
+
+**[Find a licensed drain specialist near you](https://emergencytradesmen.net/).**
+
+---
+
+## How Much Does a Drain Specialist Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency drain clearing | $150–$300 |
+| Video camera inspection | $200–$500 |
+| Trenchless pipe repair (lining) | $1,500–$4,000 |
+| Vent stack clearing/repair | $150–$400 |
+
+---
+
+## Regulations and Official Resources
+
+*   **International Plumbing Code (IPC)** — residential drainage standards.
+*   **EPA** — [sewer and drainage guidance](https://www.epa.gov/npdes/sanitary-sewer-overflows-ssos).
+*   **Your Municipal Sewer Authority** — contact them for public sewer issues.
+
+---
+
+## Frequently Asked Questions
+
+### Is sewer gas in the house dangerous?
+**Yes.** Hydrogen sulfide is toxic and methane is flammable. Ventilate immediately.
+
+### Why does my house smell like sewer when it rains?
+**Rain can overload combined sewer systems**, forcing gas back up through drains. A video inspection can pinpoint the cause.
+
+### Who is responsible for the sewer line — me or the city?
+**You own the sewer lateral** (from home to curb). The **city owns the main sewer line** beyond that.
+
+---
+
+## Don't Ignore It
+**[Book an emergency drain specialist through Emergency Tradesmen](https://emergencytradesmen.net/)** — licensed, fully equipped, available 24/7.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'emergency-boarding-up-guide') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-boarding-up',
+                    title: isUK
+                        ? 'Window Smashed? Emergency Boarding Up and Glass Repair Guide'
+                        : 'Broken Window? Emergency Boarding Up and Glass Repair Guide',
+                    slug: 'emergency-boarding-up-guide',
+                    excerpt: isUK
+                        ? 'A broken window compromises your home\'s security and energy efficiency. Learn how emergency boarding up works and why you need a glazier fast.'
+                        : 'Smashed window exposing your home? Learn how emergency board up services work and why you need a glass repair pro fast.',
+                    cover_image: '/blog/emergency-at-home/glazier.png',
+                    howToSteps: [
+                        { name: "Secure the area", text: "Keep children and pets away from broken glass. Do not attempt to clean up large shards without heavy gloves." },
+                        { name: "Cover the opening", text: "If safe, tape heavy-duty plastic or cardboard over the opening to block wind and rain." },
+                        { name: "Do not remove loose glass", text: "Shards still in the frame can fall unexpectedly. Leave them for the professional." },
+                        { name: "Call a glazier", text: "Contact a 24/7 emergency glazier for immediate boarding up." },
+                        { name: "Check insurance", text: "Many home insurance policies cover accidental glass breakage." }
+                    ],
+                    content: isUK
+                        ? `**Emergency boarding up involves securing a broken window or door with heavy-duty timber to prevent theft and weather damage.** It is a temporary but essential measure until new glass can be manufactured and fitted. Professional glaziers provide this service 24/7. **Do not leave your property unsecured overnight.**
+
+## ✅ Quick Steps: What to Do With a Broken Window
+
+*   **Secure the area** — keep family and pets away. Broken glass travels further than you think.
+*   **Do NOT touch the glass** — unless you have heavy-duty safety gloves.
+*   **Cover the hole** — if weather is getting in, tape cardboard or plastic sheeting over the gap.
+*   **Call a glazier** — they can board up the window in under an hour.
+*   **Take photos** — you may need these for an insurance claim later.
+
+> ⚠️ **Safety Warning:** Broken plate glass acts like a guillotine. Tempered glass shatters into safer cubes, but older windows can have dangerous jagged shards. **Never try to pull large shards out of a frame yourself.**
+
+---
+
+## What is Boarding Up?
+
+Boarding up is the process of fitting a secure plywood sheet over a broken window or door frame. Since most double-glazed units (IGUs) take 5–10 days to manufacture, boarding up is the only way to secure your home immediately.
+
+### Why You Need It:
+1.  **Security:** An open window is an invitation to intruders.
+2.  **Weather Protection:** Rain and wind can ruin your flooring and furniture.
+3.  **Safety:** It covers sharp glass edges.
+4.  **Insurance Requirement:** Most policies require you to secure the property immediately to maintain cover.
+
+---
+
+## How Much Does Emergency Boarding Up Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency boarding up (daytime) | £90–£160 |
+| Emergency boarding up (night/weekend) | £150–£300 |
+| Replacement double glazed unit (approx) | £100–£250 (plus fitting) |
+| Toughened safety glass | £150–£350 |
+
+---
+
+## Frequently Asked Questions
+
+### Can I just tape cardboard over it?
+**Only for a few hours.** Cardboard gets wet and falls apart. It offers zero security against burglars.
+
+### Will the glazier fix the glass immediately?
+**Usually not.** Double glazing is made to measure and takes days to produce. Single-pane glass *might* be cut on-site, but boarding up is standard for most modern windows.
+
+### Does insurance pay for boarding up?
+**Often yes.** Check your "Home Emergency" or "Accidental Damage" cover. We can provide a receipt for your claim.
+
+---
+
+## Secure Your Home Now
+**[Book an emergency glazier through Emergency Tradesmen](https://emergencytradesmen.net/)** — rapid response, fully insured, 24/7.`
+                        : `**Emergency board up services involve securing a broken window or door with plywood to prevent theft and weather damage.** It is a temporary but essential measure until new glass can be manufactured and installed. Professional glass repair companies provide this service 24/7. **Do not leave your property unsecured overnight.**
+
+## ✅ Quick Steps: Broken Window Checklist
+
+*   **Secure the area** — keep family and pets away. Glass shards can fly surprisingly far.
+*   **Do NOT touch the glass** — unless you have heavy-duty leather gloves.
+*   **Cover the hole** — use duct tape and heavy plastic to keep rain out.
+*   **Call a board-up service** — they can secure the opening in under an hour.
+*   **Take photos** — document the damage for your homeowner's insurance.
+
+> ⚠️ **Safety Warning:** Plate glass (common in older homes) breaks into large, deadly shards. Tempered glass crumbles safely. If you aren't sure, **do not touch it.**
+
+---
+
+## What is Emergency Board-Up?
+
+Board-up services install 1/2" or 3/4" plywood over broken openings. Since custom dual-pane windows take 1–3 weeks to order, this is the industry standard for securing a home in the meantime.
+
+### Why You Need It:
+1.  **Security:** An open window invites burglary.
+2.  **Weather:** Protects your interior from rain, snow, and wind.
+3.  **Liability:** Prevents injury to passersby (especially for businesses).
+4.  **Insurance:** Policies often require you to "mitigate further damage" — leaving a window open could void your claim.
+
+---
+
+## How Much Does Emergency Board-Up Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency board-up (daytime) | $150–$300 |
+| Emergency board-up (after-hours) | $250–$500 |
+| Standard window replacement | $200–$600 |
+| Sliding glass door replacement | $600–$1,500 |
+
+---
+
+## Frequently Asked Questions
+
+### Can I board it up myself?
+**Yes, if you have plywood and a saw.** But drilling into the frame can cause more damage. Pros often use tension clips that don't damage the frame.
+
+### Will the glass company fix existing glass same-day?
+**Rarely.** Almost all residential windows are custom-sized double-pane units that must be ordered.
+
+### Does homeowner's insurance cover this?
+**Usually, yes.** If the damage is from a storm, break-in, or accident, it's typically a covered peril.
+
+---
+
+## Secure Your Home Now
+**[Find emergency glass repair through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted pros, available 24/7.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
 
             }
 
@@ -983,6 +2167,689 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                     excerpt: regionalizeText(data.excerpt),
                     content: regionalizeText(data.content)
                 });
+            } else if (slug === 'emergency-roof-leak-tarping') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-roof-tarping',
+                    title: isUK
+                        ? 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips'
+                        : 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips',
+                    slug: 'emergency-roof-leak-tarping',
+                    excerpt: isUK
+                        ? 'Water pouring in through the roof? Learn how emergency roof tarping stops the leak immediately and protects your home until repairs can be made.'
+                        : 'Water pouring in through the roof? Learn how emergency roof tarping stops the leak immediately and protects your home until repairs can be made.',
+                    cover_image: '/blog/water-leak/attic-roof-leak.jpg',
+                    howToSteps: [
+                        { name: "Contain water inside", text: "Place buckets under the leak and use towels to soak up water. Protect your floors." },
+                        { name: "Clear the attic", text: "If safe, move valuables out of the attic or cover them with plastic sheeting." },
+                        { name: "Call a roofer", text: "Contact an emergency roofer immediately. Do not attempt to climb onto a wet roof." },
+                        { name: "Do NOT climb up", text: "Roof work is dangerous, especially in rain or wind. Leave it to professionals with safety gear." },
+                        { name: "Wait for tarping", text: "The roofer will install a waterproof tarp to stop the leak temporarily." }
+                    ],
+                    content: isUK
+                        ? `**Emergency roof tarping is the process of covering a damaged roof section with a waterproof tarpaulin to stop water ingress immediately.** It is a temporary fix used by roofers during storms or heavy rain when permanent repairs are unsafe or materials are unavailable. **Never attempt to climb a ladder in high winds or rain.**
+
+## ✅ Quick Steps: Managing a Roof Leak
+
+*   **Catch the water** — use buckets in the attic or room below.
+*   **Relieve ceiling pressure** — if the ceiling bulges, pierce it carefully to drain the water.
+*   **Protect valuables** — cover furniture and move electronics.
+*   **Call a roofer** — they have the harness and safety equipment to work in bad weather.
+*   **Stay off the roof** — slippery slates and wind gusts are a deadly combination.
+
+> ⚠️ **Safety Warning:** Falls from height are the biggest killer in the construction industry. A wet roof is like an ice rink. **Do not go up there.**
+
+---
+
+## What is Emergency Tarping?
+
+When a storm blows tiles off or a tree branch punctures the roof, a full repair is often impossible until the weather clears. A roofer will secure a heavy-duty tarp over the damaged area, weighed down with sandbags or battened to the rafters.
+
+### Benefits:
+1.  **Immediate Stop:** Stops water entering the property instantly.
+2.  **Prevents Worse Damage:** Stops insulation becoming sodden and ceilings collapsing.
+3.  **Buy Time:** Gives you days or weeks to arrange a permanent repair and insurance claim.
+
+---
+
+## How Much Does Emergency Roofing Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Emergency call-out & tarping | £150–£350 |
+| Replace missing tiles/slates (minor) | £100–£200 |
+| Ridge tile repointing | £150–£300 |
+| Flat roof patch repair | £180–£400 |
+
+---
+
+## Frequently Asked Questions
+
+### Can a roofer fix the leak while it's raining?
+**They can tarp it.** Permanent repairs (like cement work or torch-on felt) usually require dry conditions. Tarping works in the rain.
+
+### How long does a tarp last?
+**Up to 90 days.** It is designed to hold until the weather improves and materials can be ordered.
+
+### Will insurance pay for a new roof?
+**Depends on the cause.** Storm damage is usually covered. "Wear and tear" (old rotting felt) usually isn't. Check your policy.
+
+---
+
+## Stop the Leak Now
+**[Find an emergency roofer through Emergency Tradesmen](https://emergencytradesmen.net/)** — safe, insured, responsive.`
+                        : `**Emergency roof tarping is the process of covering a damaged roof section with a waterproof tarpaulin to stop water ingress immediately.** It is a temporary fix used by roofers during storms or heavy rain when permanent repairs are unsafe or materials are unavailable. **Never attempt to climb a ladder in high winds or rain.**
+
+## ✅ Quick Steps: Managing a Roof Leak
+
+*   **Catch the water** — use buckets in the attic or room below.
+*   **Relieve ceiling pressure** — if the ceiling bulges, pierce it carefully to drain the water.
+*   **Protect valuables** — cover furniture and move electronics.
+*   **Call a roofer** — they have the harness and safety equipment to work in bad weather.
+*   **Stay off the roof** — slippery shingles and wind gusts are a deadly combination.
+
+> ⚠️ **Safety Warning:** Falls from height are a leading cause of injury. A wet roof is incredibly slippery. **Do not go up there.**
+
+---
+
+## What is Emergency Tarping?
+
+When a storm blows shingles off or a tree branch punctures the roof, a full repair is often impossible until the weather clears. A roofer will secure a heavy-duty tarp over the damaged area, nailed down with furring strips to prevent wind lift.
+
+### Benefits:
+1.  **Immediate Stop:** Stops water entering the property instantly.
+2.  **Prevents Worse Damage:** Stops insulation becoming sodden and drywall collapsing.
+3.  **Buy Time:** Gives you days or weeks to arrange a permanent repair and insurance claim.
+
+---
+
+## How Much Does Emergency Roofing Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Emergency call-out & tarping | $250–$600 |
+| Replace missing shingles (minor) | $150–$400 |
+| Flashing repair | $200–$500 |
+| Flat roof patch repair | $300–$700 |
+
+---
+
+## Frequently Asked Questions
+
+### Can a roofer fix the leak while it's raining?
+**They can tarp it.** Permanent repairs (like shingle replacement or sealants) usually require dry conditions. Tarping works in the rain.
+
+### How long does a tarp last?
+**Up to 90 days.** It is designed to hold until the weather improves and materials can be ordered.
+
+### Will insurance pay for a new roof?
+**Depends on the cause.** Storm damage (wind/hail) is usually covered. "Wear and tear" (old age) usually isn't. Check your policy.
+
+---
+
+## Stop the Leak Now
+**[Find an emergency roofer through Emergency Tradesmen](https://emergencytradesmen.net/)** — safe, insured, responsive.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'car-wont-start-guide') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-car-wont-start',
+                    title: isUK
+                        ? 'Car Won\'t Start? 5 Reasons Why and When to Call Recovery'
+                        : 'Car Won\'t Start? 5 Reasons Why and When to Call a Tow Truck',
+                    slug: 'car-wont-start-guide',
+                    excerpt: isUK
+                        ? 'Turn the key and nothing happens? From dead batteries to starter motor failure, here are the top 5 reasons your car won\'t start.'
+                        : 'Turn the key and nothing happens? From dead batteries to starter failure, here are the top 5 reasons your car won\'t start.',
+                    cover_image: '/blog/emergency-at-home/breakdown-recovery.png',
+                    howToSteps: [
+                        { name: "Check lights", text: "Turn on headlights. If they are dim, your battery is likely dead." },
+                        { name: "Listen for click", text: "Turn the key. A rapid clicking sound usually means a starter motor issue." },
+                        { name: "Check fuel", text: "It sounds obvious, but check your fuel gauge. You might be out of gas." },
+                        { name: "Try jump start", text: "If you have jump leads and another car, try a jump start." },
+                        { name: "Call recovery", text: "If it still won't start, call for professional breakdown recovery." }
+                    ],
+                    content: isUK
+                        ? `**If your car won't start, the most common causes are a dead battery, a faulty alternator, or starter motor failure.** If you hear a clicking sound when you turn the key, it's likely the starter. If the dashboard lights are dim or flickering, it's almost certainly the battery. **Don't drain the battery by trying to start it repeatedly.**
+
+## ✅ Quick Checks: Why Won't It Start?
+
+*   **Battery:** dim lights, sluggish turnover.
+*   **Starter Motor:** loud click or grinding noise.
+*   **Alternator:** car starts but dies quickly, or battery warning light was on previously.
+*   **Fuel:** warning light on or gauge reading low/empty.
+*   **Immobiliser:** key fob battery dead or security light flashing.
+
+> ⚠️ **Safety Warning:** If you are broken down on a motorway or busy road, **get out of the vehicle** and wait behind the safety barrier. Do not attempt a jump start in moving traffic.
+
+---
+
+## 5 Most Common Reasons
+
+### 1. Flat Battery
+**The #1 cause.** Cold weather, leaving lights on, or short journeys can drain it.
+**Fix:** Jump leads or a booster pack. If it won't hold charge, you need a new battery (£80–£150).
+
+### 2. Starter Motor Failure
+The starter motor turns the engine over. If it fails, you'll hear a click but the engine won't fire.
+**Fix:** Requires a mechanic to replace (£200–£400).
+
+### 3. Alternator Fault
+The alternator charges the battery while driving. If it fails, your car runs off the battery until it dies.
+**Fix:** Replacement alternator (£250–£500).
+
+### 4. Fuel Issues
+Out of fuel, wrong fuel (misfuelling), or a blocked fuel filter.
+**Fix:** Recovery service can deliver fuel. Misfuelling requires a drain ($200+).
+
+### 5. Immobiliser / Key Fob
+If the car doesn't recognise the key, it cuts the ignition.
+**Fix:** Try the spare key. Replace fob battery.
+
+---
+
+## How Much Does Breakdown Recovery Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Roadside assistance call-out | £60–£120 |
+| Battery replacement (fitted) | £100–£180 |
+| Towing (local) | £80–£150 |
+| Misfuel drain | £180–£250 |
+
+---
+
+## Frequently Asked Questions
+
+### Can I jump start a modern car?
+**Yes, but be careful.** Connect positive (red) first, then negative (black). Connect the black lead to a metal earth point on the dead car, not the battery negative, to avoid sparks.
+
+### How do I know if it's the battery or alternator?
+**If the car starts with a jump lead but dies immediately after removing them, it's the alternator.** If it keeps running, it's likely just a flat battery.
+
+---
+
+## Get Moving Again
+**[Book emergency breakdown recovery through Emergency Tradesmen](https://emergencytradesmen.net/)** — nationwide coverage, 24/7.`
+                        : `**If your car won't start, the most common causes are a dead battery, a faulty alternator, or starter motor failure.** If you hear a clicking sound when you turn the key, it's likely the starter. If the dashboard lights are dim or flickering, it's almost certainly the battery. **Don't drain the battery by trying to start it repeatedly.**
+
+## ✅ Quick Checks: Why Won't It Start?
+
+*   **Battery:** dim lights, sluggish turnover.
+*   **Starter Motor:** loud click or grinding noise.
+*   **Alternator:** car starts but dies quickly, or battery warning light was on previously.
+*   **Fuel:** warning light on or gauge reading low/empty.
+*   **Security System:** key fob battery dead or security light flashing.
+
+> ⚠️ **Safety Warning:** If you are broken down on a highway, **stay in the vehicle with seatbelt on** or get well off the road. Do not attempt a jump start in moving traffic.
+
+---
+
+## 5 Most Common Reasons
+
+### 1. Dead Battery
+**The #1 cause.** Extreme heat/cold, leaving lights on, or old age.
+**Fix:** Jumper cables or a booster pack. New battery: $150–$250.
+
+### 2. Starter Failure
+The starter turns the engine over. If it fails, you'll hear a click but the engine won't fire.
+**Fix:** Tow to a mechanic for replacement ($300–$600).
+
+### 3. Alternator Failure
+The alternator charges the battery. If it dies, the car runs on battery power until it shuts down.
+**Fix:** Replacement alternator ($400–$800).
+
+### 4. Fuel Pump / Filter
+If the engine cranks (turns over) but won't catch, it might not be getting fuel.
+**Fix:** Diagnostic and repair ($500+).
+
+### 5. Spark Plugs / Ignition
+Worn plugs or coils prevent combustion.
+**Fix:** Tune-up ($200–$500).
+
+---
+
+## How Much Does a Tow Truck Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Hook-up fee | $75–$125 |
+| Per mile charge | $3–$6 |
+| Battery jump start | $75–$100 |
+| Tire change | $75–$120 |
+
+---
+
+## Frequently Asked Questions
+
+### How do I know if it's the starter or battery?
+**Turn on the headlights.** If they are bright but the car clicks, it's likely the starter. If they are dim, it's the battery.
+
+### Can I jump start a hybrid?
+**Usually yes, to start the engine.** But check your manual. Never jump start *another* car using a mild hybrid system.
+
+---
+
+## Get Moving Again
+**[Find a tow truck near you through Emergency Tradesmen](https://emergencytradesmen.net/)** — fast ETA, insured drivers.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'structural-cracks-guide') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-structural-cracks',
+                    title: isUK
+                        ? 'Cracks in Walls? When to Call a Structural Engineer'
+                        : 'Cracks in Drywall? When to Call a Structural Engineer',
+                    slug: 'structural-cracks-guide',
+                    excerpt: isUK
+                        ? 'Worried about cracks in your walls? Learn the difference between harmless plaster cracks and serious subsidence signs.'
+                        : 'Worried about cracks in your walls? Learn the difference between settling cracks and serious foundation issues.',
+                    cover_image: '/blog/home-emergency/assess.png',
+                    howToSteps: [
+                        { name: "Measure the width", text: "Cracks wider than 5mm (width of a pound coin/quarter) are a concern." },
+                        { name: "Check the pattern", text: "Diagonal or 'stepped' cracks in brickwork often indicate foundation movement." },
+                        { name: "Check doors and windows", text: "If doors stick or won't close, the frame may have shifted." },
+                        { name: "Look outside", text: "Do cracks penetrate through to the external brickwork?" },
+                        { name: "Monitor changes", text: "Take photos with a date stamp to see if the crack is growing." }
+                    ],
+                    content: isUK
+                        ? `**Structural cracks in your walls can indicate serious foundation issues or subsidence.** While minor hairline cracks in plaster are common (especially in new builds), large diagonal cracks, especially around doors and windows, require immediate professional assessment. **Ignoring subsidence can devalue your home and void your insurance.**
+
+## ✅ Quick Checks: Is It Serious?
+
+*   **Width:** Is it wider than 5mm (approx a pound coin)?
+*   **Shape:** Is it diagonal or stepped (ladder-like) through brickwork?
+*   **Location:** Is it starting from the corner of a door or window?
+*   **Daylight:** Can you see daylight through the crack?
+*   **Sticking Doors:** Are doors or windows suddenly jamming?
+
+> ⚠️ **Warning:** If you hear loud cracking noises or see rapid movement, evacuate the area and call a structural engineer immediately.
+
+---
+
+## Common Causes of Cracks
+
+### 1. Subsidence
+The ground beneath your home is sinking. Caused by clay soil shrinkage, leaking drains washing away soil, or nearby trees.
+**Fix:** Underpinning (injecting concrete) or fixing drains.
+
+### 2. Lintel Failure
+The support beam above a window or door has failed. You'll see diagonal cracks rising from the corners.
+**Fix:** Replace the lintel and repoint brickwork.
+
+### 3. Thermal Expansion
+Common in conservatories or long walls. Materials expand in heat and crack.
+**Fix:** Install expansion joints.
+
+### 4. Settlement
+New homes "settle" into the ground, causing hairline cracks.
+**Fix:** Fill and paint (check your NHBC warranty).
+
+---
+
+## How Much Does Structural Repair Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Structural Engineer Report | £400–£1,000 |
+| Stitching cracks (brickwork) | £600–£1,200 |
+| Lintel replacement | £800–£1,500 |
+| Underpinning (per meter) | £1,500–£3,000 |
+
+---
+
+## Frequently Asked Questions
+
+### Will insurance cover subsidence?
+**Yes, usually.** But you must declare it. Most policies have a high excess (e.g., £1,000) for subsidence claims.
+
+### Can I just fill the crack?
+**Only if it's cosmetic.** If it's structural, filling it covers the symptom, not the cause. The crack will open again.
+
+---
+
+## Get a Professional Opinion
+**[Find a builder or structural expert through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted professionals for peace of mind.`
+                        : `**Structural cracks in your walls can indicate serious foundation issues.** While minor hairline cracks in drywall are common, large diagonal cracks, especially around doors and windows, require immediate professional assessment. **Foundation issues rarely fix themselves — they get more expensive the longer you wait.**
+
+## ✅ Quick Checks: Is It Serious?
+
+*   **Width:** Is it wider than 1/4 inch?
+*   **Shape:** Is it diagonal or stepped (ladder-like) through brick/block?
+*   **Location:** Is it starting from the corner of a door or window?
+*   **Sticking Doors:** Are doors or windows suddenly jamming?
+*   **Uneven Floors:** Does a ball roll across the floor on its own?
+
+> ⚠️ **Warning:** If you see rapid movement or bowing walls, evacuate the area and call a structural engineer immediately.
+
+---
+
+## Common Causes of Cracks
+
+### 1. Foundation Settling
+The soil beneath your home is shifting or compressing. Common in areas with expansive clay soil.
+**Fix:** Piering (installing steel supports) or slab jacking.
+
+### 2. Water Damage
+Poor drainage around the foundation causes soil to swell or wash away (hydrostatic pressure).
+**Fix:** Install french drains, extend downspouts, grade the yard.
+
+### 3. Lintel/Header Failure
+The beam above a window or door is sagging.
+**Fix:** Replace the header and repair drywall/stucco.
+
+### 4. Earthquake Damage
+Horizontal or X-shaped cracks after a tremor.
+**Fix:** Epoxy injection or carbon fiber straps.
+
+---
+
+## How Much Does Foundation Repair Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Structural Engineer Report | $500–$1,500 |
+| Crack repair (epoxy injection) | $400–$900 |
+| Hydraulic piers (per pier) | $1,500–$3,000 |
+| Slab jacking | $1,000–$5,000 |
+
+---
+
+## Frequently Asked Questions
+
+### Will insurance cover foundation cracks?
+**Usually NOT.** Standard policies view earth movement as an excluded peril. You usually need a separate rider for earthquakes or sinkholes.
+
+### Can I just patch the drywall?
+**No.** If the foundation is moving, the patch will crack again within weeks. You must fix the underlying issue first.
+
+---
+
+## Get a Professional Opinion
+**[Find a foundation repair specialist through Emergency Tradesmen](https://emergencytradesmen.net/)** — vetted pros for peace of mind.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'water-damage-restoration-process') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-water-restoration',
+                    title: isUK
+                        ? 'Flooded House? The 6-Step Water Damage Restoration Process'
+                        : 'Flooded House? The 6-Step Water Damage Restoration Process',
+                    slug: 'water-damage-restoration-process',
+                    excerpt: isUK
+                        ? 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitising.'
+                        : 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitizing.',
+                    cover_image: '/emergency-water-restoration-fallback.jpg',
+                    howToSteps: [
+                        { name: "Stop the water source", text: "Turn off the mains water supply if the leak is internal." },
+                        { name: "Extract standing water", text: "Use pumps or wet vacuums to remove bulk water immediately." },
+                        { name: "Remove wet items", text: "Take out carpets, furniture, and belongings to dry elsewhere." },
+                        { name: "Dry the structure", text: "Use industrial dehumidifiers and air movers to dry walls and floors." },
+                        { name: "Sanitise", text: "Disinfect all affected areas to prevent mold and bacteria growth." },
+                        { name: "Rebuild", text: "Repair drywall, flooring, and paint once the structure is verified dry." }
+                    ],
+                    content: isUK
+                        ? `**Water damage restoration is the professional process of extracting water, drying the structure, and sanitising a property after a flood or leak.** Acting within the first 24-48 hours is critical to prevent mold growth and permanent structural damage. **Do not wait for it to "dry naturally" — trapped moisture rots wood and causes mold.**
+
+## The 6-Step Restoration Process
+
+### 1. Inspection & Assessment
+Professionals use moisture meters and thermal cameras to find hidden water behind walls and under floors.
+
+### 2. Water Extraction
+Powerful pumps and truck-mounted vacuums remove thousands of litres of water quickly. The faster this happens, the less damage occurs.
+
+### 3. Removal of Damaged Materials
+Saturated carpets, underlay, and sometimes plasterboard (drywall) must be removed if they cannot be salvaged.
+
+### 4. Drying & Dehumidification
+Industrial air movers (fans) and dehumidifiers are installed to pull moisture out of the building materials. This can take 3–7 days.
+
+### 5. Cleaning & Sanitising
+The area is treated with antimicrobial agents to kill bacteria and mold spores. Silt and mud are removed.
+
+### 6. Restoration (Rebuild)
+Once dry, the property is put back together. This includes re-plastering, painting, and laying new floors.
+
+---
+
+## How Much Does Water Restoration Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Water extraction (per room) | £150–£400 |
+| Dehumidifier rental (per week) | £200–£500 |
+| Mold remediation | £500–£2,000 |
+| Full restoration (major flood) | £2,000–£10,000+ |
+
+---
+
+## Frequently Asked Questions
+
+### Can I dry it out myself with heaters?
+**No.** Heat without dehumidification just creates a sauna, encouraging mold growth. You need to remove the moisture from the air.
+
+### How long does it take to dry a house?
+**Usually 3 to 7 days** for the structural drying phase. Full reconstruction can take weeks.
+
+### Does insurance pay for this?
+**Yes.** "Escape of water" is one of the most common claims. Flood damage (from rivers/rain) is also covered if you have flood insurance.
+
+---
+
+## Start the Drying Process
+**[Find a water restoration specialist through Emergency Tradesmen](https://emergencytradesmen.net/)** — rapid response to stop the damage.`
+                        : `**Water damage restoration is the professional process of extracting water, drying the structure, and sanitizing a property after a flood or leak.** Acting within the first 24-48 hours is critical to prevent mold growth and permanent structural damage. **Do not wait for it to "dry naturally" — trapped moisture causes dry rot and poisonous mold.**
+
+## The 6-Step Restoration Process
+
+### 1. Inspection & Assessment
+Certified technicians use moisture meters and infrared cameras to determine the Class and Category of water damage.
+
+### 2. Water Extraction
+Truck-mounted extractors remove standing water. This prevents secondary damage to hygroscopic materials.
+
+### 3. Demolition
+Unsalvageable drywall, insulation, and carpet pad are removed. "Flood cuts" are made 2 feet up the wall to allow airflow.
+
+### 4. Drying & Dehumidification
+LGR (Low Grain Refrigerant) dehumidifiers and air movers are deployed to evaporate moisture and dehumidify the air.
+
+### 5. Cleaning & Sanitizing
+Antimicrobial treatments are applied. HEPA air scrubbers strip mold spores from the air.
+
+### 6. Reconstruction
+Installing new drywall, painting, flooring, and cabinets to return the home to pre-loss condition.
+
+---
+
+## How Much Does Water Restoration Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Water extraction | $3.75 - $7.00 per sq ft |
+| Drying equipment rental | $500 - $1,200 |
+| Mold remediation | $10 - $25 per sq ft |
+| Full restoration (average claim) | $3,000 - $8,000 |
+
+---
+
+## Frequently Asked Questions
+
+### What is "Category 3" water?
+**Black water.** It contains sewage or harsh chemicals (e.g., floodwater from rivers). It is grossly unsanitary and requires special handling.
+
+### Do I have to use the insurance company's vendor?
+**No.** You have the legal right to hire your own restoration contractor.
+
+### Can I save my carpet?
+**Depends.** If it's clean water (Category 1) and dried within 48 hours, maybe. If it's sewage or has been wet for 3 days, it must be trashed.
+
+---
+
+## Start the Drying Process
+**[Find a water restoration creation specialist through Emergency Tradesmen](https://emergencytradesmen.net/)** — 24/7 emergency service.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
+            } else if (slug === 'ac-blowing-warm-air-fix') {
+                const isUK = settings.countryCode === 'GB';
+                setPost({
+                    id: 'static-ac-warm-air',
+                    title: isUK
+                        ? 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner'
+                        : 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner',
+                    slug: 'ac-blowing-warm-air-fix',
+                    excerpt: isUK
+                        ? 'Air con not cooling? It might be a simple fix. Check these 5 common issues before calling an engineer.'
+                        : 'AC unit running but not cooling? It might be a simple fix. Check these 5 common issues before calling an HVAC tech.',
+                    cover_image: '/images/blog/hvac/ac-repair-cover.jpg',
+                    howToSteps: [
+                        { name: "Check thermostat", text: "Ensure it is set to 'COOL' and the temperature is set lower than the room temp." },
+                        { name: "Check the air filter", text: "A clogged filter restricts airflow and freezes the coil. Replace if dirty." },
+                        { name: "Check outdoor unit", text: "Is the outdoor fan spinning? Clear away any leaves or debris blocking it." },
+                        { name: "Check circuit breaker", text: "See if the AC breaker has tripped in your electrical panel." },
+                        { name: "Call an HVAC pro", text: "If these don't work, you likely have a refrigerant leak or capacitor failure." }
+                    ],
+                    content: isUK
+                        ? `**If your air conditioning is blowing warm air, the most common causes are a dirty air filter, a refrigerant leak, or a frozen evaporator coil.** Before calling a professional, you can check the basics yourself. **Turn the system off if it is not cooling to prevent compressor damage.**
+
+## ✅ Quick Troubleshooting Checklist
+
+*   **Thermostat:** Is it on "Cool" (not "Fan") and set low enough?
+*   **Filter:** Pull it out. If it's grey and clogged, wash or replace it.
+*   **Power:** Check your fuse box/consumer unit.
+*   **Outdoor Unit:** Is the fan spinning? Is it covered in leaves?
+*   **Ice:** Do you see ice on the pipes? This means low airflow or low gas.
+
+> ⚠️ **Warning:** AC refrigerant is a controlled substance. Only F-Gas certified engineers can legally handle it.
+
+---
+
+## Common Causes
+
+### 1. Dirty Filter
+Restricts airflow. The cold coil can't absorb heat, so it freezes up.
+**Fix:** Clean/replace filter (£10–£20).
+
+### 2. Refrigerant Leak
+The gas that cools the air has leaked out.
+**Fix:** Engineer must find the leak, fix it, and recharge (costly).
+
+### 3. Dirty Condenser Coils
+The outdoor unit is choked with dust/pollen. It can't dump the heat.
+**Fix:** Professional chemical clean.
+
+### 4. Capacitor Failure
+A small electrical part that starts the compressor. Common in hot weather.
+**Fix:** Engineer replacement (£100–£200).
+
+---
+
+## How Much Does AC Repair Cost?
+
+| Service | Typical Cost (UK) |
+|---|---|
+| Diagnostic call-out | £80–£150 |
+| Service & clean | £100–£180 |
+| Capacitor replacement | £120–£250 |
+| Leak test & recharge | £200–£400 |
+
+---
+
+## Frequently Asked Questions
+
+### Why is there ice on my AC?
+**Low airflow or low refrigerant.** Turn it off immediately to let it thaw, then check the filter. If filter is clean, call a pro.
+
+### How often should I service my AC?
+**Once a year.** Ideally in spring before the hot weather starts.
+
+---
+
+## Get Cool Again
+**[Find an AC engineer through Emergency Tradesmen](https://emergencytradesmen.net/)** — F-Gas certified pros.`
+                        : `**If your AC is blowing warm air, the most common causes are a dirty air filter, a refrigerant leak, or a frozen evaporator coil.** Before calling a pro, check the basics yourself. **Turn the system off if it is not cooling to prevent compressor burnout.**
+
+## ✅ Quick Troubleshooting Checklist
+
+*   **Thermostat:** Is it set to "Cool" and "Auto"? Make sure it's not on "Fan On".
+*   **Filter:** Pull it out. If you can't see light through it, replace it.
+*   **Breakers:** Check your electrical panel for a tripped AC breaker.
+*   **Outdoor Unit:** Is the condenser fan spinning? Is the unit clear of debris?
+*   **Ice:** Check the copper lines. If they are frozen white, turn the system off.
+
+> ⚠️ **Warning:** Freon/Puron (Refrigerant) is hazardous. Only EPA-certified technicians can handle it.
+
+---
+
+## Common Causes
+
+### 1. Dirty Air Filter
+**The #1 cause.** Restricts airflow, causing the coil to freeze into a block of ice.
+**Fix:** Replace filter ($10–$20).
+
+### 2. Low Refrigerant
+You have a leak. AC systems are sealed; they don't "use up" Freon.
+**Fix:** Tech must repair leak and recharge ($300–$1,000+).
+
+### 3. Bad Capacitor
+The "battery" that starts your compressor. If it bulges or fails, the compressor won't start.
+**Fix:** Tech replacement ($150–$400).
+
+### 4. Clogged Drain Line
+If the safety float switch detects water backing up, it cuts power to the AC.
+**Fix:** Vacuum out the drain line ($100–$200).
+
+---
+
+## How Much Does AC Repair Cost?
+
+| Service | Typical Cost (US) |
+|---|---|
+| Service Call / Diagnostic | $75–$150 |
+| Capacitor Replacement | $150–$450 |
+| Contactor Replacement | $150–$400 |
+| Leak Search & Repair | $500–$1,500 |
+
+---
+
+## Frequently Asked Questions
+
+### Why is my AC freezing up?
+**Lack of airflow.** 90% of the time it's a dirty filter. Change it and let the system thaw for 24 hours.
+
+### How do I know if I need Freon?
+**System runs but air is lukewarm.** You might also hear a hissing noise (the leak) or see oil stains on the outdoor unit.
+
+---
+
+## Get Cool Again
+**[Find an HVAC technician through Emergency Tradesmen](https://emergencytradesmen.net/)** — EPA certified, fast response.`,
+                    published_at: new Date().toISOString(),
+                    created_at: new Date().toISOString()
+                });
+                setIsLoading(false);
+                return;
+
             }
             setIsLoading(false);
         }
@@ -1097,6 +2964,25 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                     ].filter(Boolean).join(', ')
                 };
 
+                // 3. HowTo Schema (Conditional)
+                const howToSchema = post.howToSteps ? {
+                    "@context": "https://schema.org",
+                    "@type": "HowTo",
+                    "name": post.title,
+                    "description": post.excerpt,
+                    "image": imageUrl,
+                    "step": post.howToSteps.map((step, index) => ({
+                        "@type": "HowToStep",
+                        "position": index + 1,
+                        "name": step.name,
+                        "text": step.text,
+                        "image": step.image ? `${baseUrl}${step.image}` : undefined,
+                        "url": `${postUrl}#step-${index + 1}`
+                    }))
+                } : null;
+
+                const jsonLdSchemas = [breadcrumbSchema, articleSchema, howToSchema].filter(Boolean);
+
                 return (
                     <SEO
                         title={`${post.title} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
@@ -1104,7 +2990,7 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                         canonical={`${settings.countryCode === 'GB' ? '' : '/us'} / blog / ${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
-                        jsonLd={[breadcrumbSchema, articleSchema]}
+                        jsonLd={jsonLdSchemas}
                     />
                 );
             })()}
@@ -1166,6 +3052,11 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Ad Slot 1: Between hero and content */}
+                        <div className="container mx-auto px-4 max-w-4xl py-4">
+                            <AdSlot slot="AD_SLOT_BLOG_TOP" format="leaderboard" />
                         </div>
 
                         {/* Content Layout */}
@@ -1249,6 +3140,11 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                             </div>
                         </div>
 
+                        {/* Ad Slot 2: After article, before CTA */}
+                        <div className="container mx-auto px-4 max-w-4xl py-6">
+                            <AdSlot slot="AD_SLOT_BLOG_BOTTOM" format="rectangle" />
+                        </div>
+
                         {/* Newsletter / CTA Section */}
                         <div className="container mx-auto px-4 max-w-5xl mb-24">
                             <Card className="relative overflow-hidden border-gold/20 bg-gradient-to-br from-secondary/50 to-background">
@@ -1282,6 +3178,6 @@ Don't spend another night freezing. If you've tried thawing the line and your fu
                     </>
                 )}
             </article>
-        </div>
+        </div >
     );
 }

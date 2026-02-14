@@ -23,6 +23,7 @@ import { useBusinessFilters } from "@/hooks/useBusinessFilters";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
 import { InteractiveMap } from "@/components/InteractiveMap";
+import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import type { Business } from "@/lib/businesses";
@@ -53,6 +54,7 @@ export default function TradeCityPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const hasLoadedRef = useRef(false);
   const ITEMS_PER_PAGE = 9;
 
   const location = useLocation();
@@ -172,7 +174,8 @@ export default function TradeCityPage() {
 
   const { settings, userCoords } = useLocalization();
 
-  // Fetch real businesses from Supabase
+  // Fetch real businesses from Supabase — does NOT depend on userCoords
+  // userCoords is only used for sorting (handled in a separate effect below)
   const prevContextRef = useRef<string>("");
 
   useEffect(() => {
@@ -192,8 +195,7 @@ export default function TradeCityPage() {
         console.log('Fetching businesses for:', {
           trade: tradeInfo.slug,
           city: validCity,
-          countryCode: actualCountry,
-          userCoords
+          countryCode: actualCountry
         });
         const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry, userCoords || undefined);
         console.log('Real businesses fetched:', realBusinesses.length);
@@ -213,7 +215,6 @@ export default function TradeCityPage() {
 
             if (majorCityData && majorCityData.length > 0) {
               fallbackData = majorCityData;
-              // Update title to reflect this if possible, or just show the data
             }
           }
 
@@ -229,11 +230,40 @@ export default function TradeCityPage() {
         setBusinesses(staticBusinesses || []);
       } finally {
         setIsLoading(false);
+        hasLoadedRef.current = true;
       }
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName, userCoords, actualCountry]);
+  }, [tradeInfo.slug, cityName, actualCountry]);
+
+  // Separate effect: Re-sort existing businesses when userCoords becomes available
+  // This avoids a full refetch and prevents the "empty flash" on mobile
+  useEffect(() => {
+    if (!userCoords || businesses.length === 0) return;
+
+    setBusinesses(prev => [...prev].sort((a, b) => {
+      // 1. Paid businesses always first
+      if (a.tier === 'paid' && b.tier !== 'paid') return -1;
+      if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+
+      // 2. Proximity sort using userCoords
+      if (a.latitude && a.longitude && b.latitude && b.longitude) {
+        const distA = Math.sqrt(
+          Math.pow((a.latitude - userCoords.latitude) * 69, 2) +
+          Math.pow((a.longitude - userCoords.longitude) * 69 * Math.cos(userCoords.latitude * Math.PI / 180), 2)
+        );
+        const distB = Math.sqrt(
+          Math.pow((b.latitude - userCoords.latitude) * 69, 2) +
+          Math.pow((b.longitude - userCoords.longitude) * 69 * Math.cos(userCoords.latitude * Math.PI / 180), 2)
+        );
+        return distA - distB;
+      }
+
+      // 3. Fallback to priority score
+      return (b.priority_score || 0) - (a.priority_score || 0);
+    }));
+  }, [userCoords]);
 
   // Real-time updates for Availability
   useEffect(() => {
@@ -588,6 +618,11 @@ export default function TradeCityPage() {
           </div>
         </section>
 
+        {/* Ad Slot 1: Between Services and Listings */}
+        <div className="container-wide py-4">
+          <AdSlot slot="AD_SLOT_1" format="leaderboard" />
+        </div>
+
         {/* Listings Section */}
         <section className="container-wide py-16">
           <div className="mb-8">
@@ -608,7 +643,7 @@ export default function TradeCityPage() {
             </p>
           </div>
 
-          {isLoading ? (
+          {isLoading || !hasLoadedRef.current ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <BusinessCardSkeleton key={i} />
@@ -762,6 +797,11 @@ export default function TradeCityPage() {
             businessName={`${tradeInfo.name} in ${cityName}`}
           />
         </section>
+
+        {/* Ad Slot 2: Between Reviews and FAQ */}
+        <div className="container-wide py-4">
+          <AdSlot slot="AD_SLOT_2" format="rectangle" />
+        </div>
 
         <section className="container-wide py-16">
           <FAQSection

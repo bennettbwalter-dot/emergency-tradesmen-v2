@@ -417,7 +417,7 @@ export function EmergencyChatInterface() {
     return (
         <div className="w-full max-w-4xl mx-auto">
 
-            <div className="relative rounded-3xl bg-transparent overflow-hidden">
+            <div className="relative rounded-3xl bg-transparent overflow-visible">
                 {chatState.history.length > 0 && (
                     <div className="absolute top-4 right-4 z-10">
                         <Button

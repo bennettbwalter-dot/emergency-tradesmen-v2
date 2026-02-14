@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, User, MessageSquare, Send, CheckCircle, AlertCircle, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { sendEmail } from "@/lib/email";
+import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 
 export default function ContactPage() {
     const { toast } = useToast();
@@ -226,6 +227,16 @@ export default function ContactPage() {
                                         <span>Partnerships and advertising</span>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+                                <h3 className="font-semibold text-foreground">Connect With Us</h3>
+                                <div className="flex gap-4">
+                                    <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-12 h-12" />
+                                    <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-12 h-12" />
+                                    <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" className="w-12 h-12" />
+                                    <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" className="w-12 h-12" />
+                                </div>
                             </div>
                         </div>
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { trades, cities } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
+import { GlassSocialIcon } from "./ui/GlassSocialIcon";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
 export interface FooterProps {
@@ -39,6 +40,14 @@ export function Footer({ countryCode }: FooterProps) {
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Connecting you with trusted local {tradeTerm.toLowerCase()} for emergency repairs, 24 hours a day, 7 days a week.
             </p>
+
+            <div className="flex gap-4 mb-6">
+              <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" />
+              <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" />
+              <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" />
+              <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" />
+            </div>
+
             <Newsletter />
           </div>
 

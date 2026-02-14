@@ -42,7 +42,7 @@ export function AuthForm({
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { login, register } = useAuth();
+    const { login, register, signInWithGoogle } = useAuth();
     const { toast } = useToast();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -177,7 +177,6 @@ export function AuthForm({
                     className="w-full border-white/10 bg-white/5 hover:bg-white/10 text-white"
                     onClick={async () => {
                         try {
-                            const { signInWithGoogle } = useAuth();
                             await signInWithGoogle();
                         } catch (e: any) {
                             toast({ title: "Error", description: e.message, variant: "destructive" });

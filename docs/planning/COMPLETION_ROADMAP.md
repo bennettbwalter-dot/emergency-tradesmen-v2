@@ -1,234 +1,91 @@
 # Emergency Tradesmen Website - Completion Roadmap
 
-## 🎯 Current Status: 100% MVP Ready (LAUNCHED)
+## 🌍 GLOBAL CORE SYSTEM
+Features shared across both UK and US platforms.
+
+### 🔐 Auth & Security
+- ✅ **Authentication**: Protected routes & role-based access (User/Business/Admin) via Supabase Auth
+- ✅ **Security**: RLS Policies, Terms of Service, Privacy Policy
+- ✅ **GDPR/Compliance**: Cookie Consent banner
+
+### 💳 Payments & Monetization
+- ✅ **Stripe Integration**: Connect accounts, payment links, and webhooks
+- ✅ **Subscription Logic**: `subscriptionService.ts` handles tier upgrades/downgrades
+- ✅ **Business Verification**: "Claim Business" flow with document upload
+
+### 🛠️ Core Tech Stack
+- ✅ **Frontend**: React, Tailwind, ShadCN, Lucide Icons
+- ✅ **Backend**: Supabase (Postgres, Edge Functions, Storage)
+- ✅ **Email**: EmailOctopus / SendGrid integration
+- ✅ **Analytics**: Google Analytics 4 (G-N9VVX26Z2R)
 
 ---
 
-## ✅ COMPLETED FEATURES
+## 🇬🇧 UK MARKET (LAUNCHED)
+**Status:** MVP / Live Beta
+**Domain:** emergency-tradesmen.com.au (Note: domain suggests AU but content is UK-focused)
 
-### Core Pages
-- ✅ Home page with hero, search, and trade cards
-- ✅ Listings page (TradeCityPage) with filters
-- ✅ Business profile pages
-- ✅ About page
-- ✅ Pricing/Tradesmen page
-- ✅ Compare page
-- ✅ User dashboard
-- ✅ Admin dashboard with business/quote/photo/review management
-- ✅ Auth Pages (Login/Register)
+### ✅ COMPLETED (UK)
+- **Data Coverage**: 10,000+ populated businesses across major UK cities
+- **Search**: City + Trade filtering
+- **SEO**: Dynamic sitemaps, region-specific landing pages
+- **User Features**: Dashboard, Favorites, Comparison Tool
+- **Admin**: Full admin dashboard for managing UK listings
 
-### Components & Features
-- ✅ Responsive navigation with mobile menu
-- ✅ Business cards with availability status
-- ✅ Search and filtered listing system
-- ✅ Real Google Maps Reviews integration
-- ✅ Quote request system
-- ✅ Booking modal
-- ✅ Authentication system & Route Protection
-- ✅ User favorites
-- ✅ Comparison tool
-- ✅ PWA support
-- ✅ Dark/light theme toggle
-- ✅ SEO optimization
-- ✅ Responsive design
-- ✅ Newsletter Integration (EmailOctopus)
-- ✅ Hybrid Data Model (Static + Supabase)
+### 🚀 UK PRIORITIES (Next Steps)
+1. **Business Onboarding**:
+   - [ ] actively recruit first 50 verified businesses
+   - [ ] Manual verification of claimed profiles
+2. **Review Generation**:
+   - [ ] Campaign to get initial user reviews
+   - [ ] Import more Google Maps reviews for social proof
 
 ---
 
-## 🚀 PRIORITY 1: CRITICAL FOR LAUNCH (1-2 weeks)
+## 🇺🇸 US MARKET (EXPANSION)
+**Status:** **IN PROGRESS (Data Enrichment Phase)**
+**Domain:** emergencytradesmen.com
 
-### 1. Database & Backend Integration
-**Status:** Hybrid Model Implemented
-- [x] Implement proper authentication flow (Routes & Redirects)
-- [x] Migrate mock review data to Real Google Maps data (Static)
-- [x] Create email marketing integration (EmailOctopus)
-- [x] Set up production Supabase database
-- [ ] Create backup and recovery system
-- [ ] Test all CRUD operations
+### 🏗️ WORK IN PROGRESS (US)
+- **Data Enrichment**:
+  - [x] **State-Level Structure**: Created 50 state pages and major city routes
+  - [🔄] **Batch Enrichment Script**: Running `scripts/batch_enrich_us.py` to source plumbers/electricians
+  - [🔄] **Suburb Expansion**: Expanding from major metros to surrounding suburbs (Targeting high-density areas first)
+- **SEO & Content**:
+  - [ ] Generate "Emergency Plumber [City]" pages for all 50 states
+  - [ ] Adjust copy for US terminology (Zip codes vs Postcodes, "HVAC" vs "Boilers")
 
-### 11. Payment System (Stripe)
-- [x] **Subscription Logic**: `subscriptionService.ts` handles logic.
-- [x] **Payment Processing**: Stripe Payment Links configured.
-- [x] **Webhooks**: `stripe-webhook` deployed and secrets set.
-- [x] **Success/Cancel Pages**: UI implemented.
-- [x] **Verification**: Infrastructure verified.
-- [x] Test payment flows thoroughly (Webhooks verified)
-
-### 3. Business Verification System
-**Status:** Implemented
-- [x] Create business registration flow (Claim System)
-- [x] Build document upload system (insurance, certifications)
-- [x] Implement admin verification workflow (Businesses Page)
-- [x] Add verification badges to business cards
-- [ ] Create email notifications for verification status
-- [x] Build business onboarding wizard
-
-### 4. Security & Compliance
-**Status:** Implemented
-- [x] Create Terms of Service page
-- [x] Create Privacy Policy page
-- [x] Add Cookie Consent banner
-- [ ] Implement rate limiting on API
-
-
-### 6. Image Management
-**Status:** Implemented (Supabase Storage)
-- [x] Implement Cloudinary/AWS S3 for image storage (Using Supabase)
-- [x] Build image upload system for businesses (PremiumProfileEditor)
-- [x] Add image optimization and compression (Supabase defaults)
-- [ ] Create image moderation workflow
-- [x] Add image galleries to business profiles
-
-### 16. Analytics & Tracking
-- [x] Set up Google Analytics 4
-- [ ] Implement conversion tracking
-- [ ] Add heatmap tracking (Hotjar/Clarity)
-- [ ] Create custom event tracking
-- [x] Build admin analytics dashboard
-- [ ] Set up error tracking (Sentry)
+### 📝 US BACKLOG (To-Do)
+1. **US Data Validation**:
+   - [ ] Audit phone number formats (clean +1 codes)
+   - [ ] Verify address formats for US standards
+2. **Legal & Compliance**:
+   - [ ] US specific Terms of Service (CCPA compliance)
+   - [ ] Update tax settings in Stripe for US Sales Tax
 
 ---
 
-## 📈 PRIORITY 5: GROWTH & OPTIMIZATION (Ongoing)
+## 🛠️ SHARED TECHNICAL DEBT & OPTIMIZATION
 
-### 17. SEO Enhancement
-- [x] Generate dynamic sitemaps
-- [ ] Optimize meta tags for all pages
-- [ ] Implement structured data (Schema.org)
-- [x] Create blog section for content marketing
-- [x] Build location-specific landing pages
-- [ ] Optimize page speed (target <2s load)
-- [x] Submit to Google Search Console
+### High Priority
+- [ ] **Image Optimization**: Excessive load times on gallery images. Need to implement Next.js Image or better Supabase transforms.
+- [ ] **Mobile Performance**: improve CLS (Content Layout Shift) on mobile menu load.
+- [ ] **Error Handling**: Add Sentry for frontend error tracking.
 
-### 18. Performance Optimization
-- [ ] Implement code splitting
-- [ ] Add service worker caching
-- [ ] Optimize bundle size
-- [ ] Implement CDN for static assets
-- [ ] Add database query optimization
-- [ ] Set up Redis caching
-- [ ] Optimize images (WebP, lazy loading)
-
-### 19. Testing & QA
-- [ ] Write unit tests for critical functions
-- [ ] Add integration tests
-- [ ] Implement E2E tests (Playwright/Cypress)
-- [ ] Conduct cross-browser testing
-- [ ] Perform accessibility audit (WCAG)
-- [ ] Load testing (handle 1000+ concurrent users)
-- [ ] User acceptance testing
-
-### 20. Content & Data
-- [x] Populate database with real businesses (10,000+ imported from Google Maps)
-- [ ] Create city-specific content
-- [ ] Write FAQs for each trade
-- [ ] Add emergency tips and guides
-- [ ] Create video content
-- [ ] Build resource library
+### Future / Nice-to-Have
+- [ ] **AI Triage Chatbot**: Fine-tune for "Emergency vs Routine" classification
+- [ ] **Native Mobile App**: Wrapper for iOS/Android stores (Capacitor/Expo)
 
 ---
 
-## 🎁 PRIORITY 6: NICE-TO-HAVE FEATURES (Future)
+## 📊 ESTIMATED TIMELINE (REVISED)
 
-### 21. Advanced Features
-- [x] AI chatbot for customer support
-- [ ] Price estimation calculator
-- [ ] Job scheduling system
-- [ ] Warranty/guarantee tracking
-- [ ] Multi-language support
-- [ ] Voice search
-- [ ] AR for visualizing work (e.g., plumbing fixes)
+| Phase | Focus | Status |
+|-------|-------|--------|
+| **Phase 1** | UK MVP Launch | ✅ **DONE** |
+| **Phase 2** | Global Tech Foundation | ✅ **DONE** |
+| **Phase 3** | US Data Population | 🔄 **IN PROGRESS** (Est. completion: Feb 15) |
+| **Phase 4** | US Soft Launch | 📅 Targeted March 1 |
 
-### 22. Integrations
-- [ ] Integrate with Trustpilot
-- [ ] Connect to Checkatrade API
-- [ ] Add Google My Business sync
-- [ ] Integrate with accounting software
-- [ ] Connect to CRM systems
-- [ ] Add social media sharing
-
----
-
-## 📊 ESTIMATED TIMELINE
-
-| Phase | Duration | Cost (if outsourced) |
-|-------|----------|---------------------|
-| Priority 1 (Critical) | 1-2 weeks | £4,000-6,000 |
-| Priority 2 (Quality) | 1 week | £2,000-3,000 |
-| Priority 3 (Business) | 1-2 weeks | £3,000-4,000 |
-| Priority 4 (Security) | 3-5 days | £1,500-2,000 |
-| Priority 5 (Growth) | Ongoing | £2,000-3,000 |
-| Priority 6 (Future) | 2-4 weeks | £4,000-6,000 |
-
-**Total to MVP Launch:** 4-6 weeks
-**Total to Full Feature Set:** 8-12 weeks
-
----
-
-## 🎯 RECOMMENDED LAUNCH STRATEGY
-
-### Phase 1: Soft Launch (Week 1-2)
-- Complete Priority 1 items
-- Launch with 50-100 verified businesses
-- Limited to 2-3 major cities
-- Invite-only beta testing
-
-### Phase 2: Public Beta (Week 3-4)
-- Complete Priority 2 items
-- Expand to 200+ businesses
-- Open to 5-10 cities
-- Gather user feedback
-
-### Phase 3: Full Launch (Week 5-6)
-- Complete Priority 3-4 items
-- 500+ businesses
-- National coverage
-- Full marketing push
-
-### Phase 4: Scale & Optimize (Ongoing)
-- Priority 5-6 items
-- Continuous improvement
-- Feature expansion
-- Market expansion
-
----
-
-## 💰 MONETIZATION READY
-
-Current revenue streams to implement:
-1. **Business Subscriptions** (£50-200/month)
-2. **Featured Listings** (£20-50/month)
-3. **Lead Fees** (£5-15 per qualified lead)
-4. **Booking Commissions** (5-10% of job value)
-5. **Premium Placement** (£100-300/month)
-6. **Advertising** (Display ads for related services)
-
----
-
-## 🚨 CRITICAL BLOCKERS TO ADDRESS
-
-1. **[RESOLVED]** Google Analytics 4 - Active (G-N9VVX26Z2R)
-2. **[RESOLVED]** No payment system - Stripe Live
-3. **[RESOLVED]** No email system - Email Logic Active
-4. **[RESOLVED]** Mock availability - Real-time + Time-aware Active
-5. **[RESOLVED]** No business verification - Claim Flow Active
-
----
-
-## 📝 NEXT IMMEDIATE STEPS
-
-1. Set up production Supabase instance (In Progress)
-2. **[COMPLETED]** Payment Integration (Stripe)
-3. **[COMPLETED]** Email System (SendGrid)
-4. **[COMPLETED]** Populate real business data (10k+ entries ready)
-5. Create business onboarding flow (Claim System)
-6. Launch beta with 10 businesses
-
----
-
-**Current Value Delivered:** ~£14,000
-**Remaining to £20,000:** ~£6,000 worth of features
-**Estimated Time to Complete:** 4-6 weeks full-time
-
-The foundation is solid. Focus on Priority 1 items to get to market quickly, then iterate based on user feedback.
+**Current Focus:**
+Running `batch_enrich_us.py` to fill US database gaps while maintaining UK stability.

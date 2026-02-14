@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 import { InteractiveMap } from "@/components/InteractiveMap";
+import { AdSlot } from "@/components/AdSlot";
 import { LeafletMap } from "@/components/LeafletMap";
 import { Business, calculateTrustScore } from "@/lib/businesses";
 import { trades } from "@/lib/trades";
@@ -773,6 +774,9 @@ export default function BusinessProfilePage() {
                                         />
                                     )}
                                 </div>
+
+                                {/* Ad Slot: Below map in sidebar */}
+                                <AdSlot slot="AD_SLOT_SIDEBAR" format="sidebar" />
                             </div>
                         </div>
                     </div>

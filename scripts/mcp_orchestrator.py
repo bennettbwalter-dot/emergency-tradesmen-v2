@@ -466,12 +466,12 @@ class MCPOrchestrator:
                 # Check source availability after each batch
                 self.stats = self._load_stats()
             
-            print("\n[LOOP] Full cycle complete. Cooling for 1 hour...")
-            time.sleep(3600)
+            print("\n[LOOP] Full cycle complete. Refreshing gaps and continuing (web fallback is unlimited)...")
+            time.sleep(30)  # Brief pause to prevent CPU thrashing
             gaps = self._load_gaps() # Refresh gaps
 
 if __name__ == "__main__":
     try:
-        MCPOrchestrator().run(max_workers=5)
+        MCPOrchestrator().run(max_workers=10)
     except KeyboardInterrupt:
         print("\n[END] Stopped by user")

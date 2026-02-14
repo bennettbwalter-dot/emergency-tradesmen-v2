@@ -10,7 +10,7 @@
 
   <!-- CSP: Allow unsafe-eval for Azure Speech SDK -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com;" />
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -39,6 +39,10 @@
       window.global = window;
     }
   </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
