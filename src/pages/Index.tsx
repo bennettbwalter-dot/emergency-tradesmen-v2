@@ -138,25 +138,26 @@ const Index = () => {
       <>
         <GuestGate />
 
+
         <SEO
           title={`Emergency ${settings.tradeTerm} Near Me – Local 24/7 Plumbers, Electricians & Locksmiths`}
           description={`Looking for emergency ${settings.tradeTerm.toLowerCase()} near you? We connect you with local, verified 24/7 plumbers, electricians & locksmiths. Fast 30-90 min response.`}
           keywords={[
-            "tradesmen near me",
-            "local tradesmen near me",
-            "contractors near me",
-            "local contractors near me",
+            `${settings.tradeTerm.toLowerCase()} near me`,
+            `local ${settings.tradeTerm.toLowerCase()} near me`,
+            `emergency ${settings.tradeTerm.toLowerCase()} near me`,
+            `24 hour ${settings.tradeTerm.toLowerCase()} near me`,
             "emergency plumber near me",
             "24 hour electrician near me",
             "emergency locksmith near me",
             "24/7 plumber near me",
             "emergency gas engineer near me",
             "local emergency services",
-            "find a tradesman",
-            "find a contractor near me",
+            `find a ${settings.tradeTerm === 'Tradesmen' ? 'tradesman' : 'contractor'}`,
+            `find a ${settings.tradeTerm === 'Tradesmen' ? 'tradesman' : 'contractor'} near me`,
             "emergency repairs near me",
-            "24 hour emergency tradesman",
-            "best local tradesmen",
+            `24 hour emergency ${settings.tradeTerm === 'Tradesmen' ? 'tradesman' : 'contractor'}`,
+            `best local ${settings.tradeTerm.toLowerCase()}`,
           ]}
           locale={settings.countryCode === 'GB' ? 'en_GB' : 'en_US'}
           alternates={[

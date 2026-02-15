@@ -370,6 +370,8 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
 
 function generateFAQs(trade: Trade, city: City, isUS: boolean, priceRange: string): { question: string; answer: string }[] {
   const currency = isUS ? "$" : "£";
+  const tradeName = isUS ? trade.usName : trade.name;
+
   // We can adjust currency symbol in priceRange if needed, but priceRangeMap has it hardcoded for now. 
   // Ideally split price maps too, but for now assuming '$' in US map and '£' in UK logic if we split it later.
   // Actually, priceRangeMap in the file currently has '$' hardcoded for everything?
@@ -378,24 +380,24 @@ function generateFAQs(trade: Trade, city: City, isUS: boolean, priceRange: strin
 
   const baseFAQs = [
     {
-      question: `How much does an emergency ${trade.usName.toLowerCase()} cost in ${city}?`,
-      answer: `Emergency ${trade.usName.toLowerCase()} call-outs in ${city} typically range from ${priceRange}, depending on the time of day and complexity of the job. Weekend and night-time calls may incur additional charges. All pricing is transparent with no hidden fees.`,
+      question: `How much does an emergency ${tradeName.toLowerCase()} cost in ${city}?`,
+      answer: `Emergency ${tradeName.toLowerCase()} call-outs in ${city} typically range from ${priceRange}, depending on the time of day and complexity of the job. Weekend and night-time calls may incur additional charges. All pricing is transparent with no hidden fees.`,
     },
     {
-      question: `Can I call an emergency ${trade.usName.toLowerCase()} at night or weekends?`,
-      answer: `Yes, our emergency ${trade.usName.toLowerCase()} services in ${city} operate 24 hours a day, 7 days a week, including holidays. We understand emergencies don't follow office hours, so help is always available when you need it.`,
+      question: `Can I call an emergency ${tradeName.toLowerCase()} at night or weekends?`,
+      answer: `Yes, our emergency ${tradeName.toLowerCase()} services in ${city} operate 24 hours a day, 7 days a week, including holidays. We understand emergencies don't follow office hours, so help is always available when you need it.`,
     },
     {
-      question: `How fast can an emergency ${trade.usName.toLowerCase()} arrive in ${city}?`,
-      answer: `Our network of local ${trade.usName.toLowerCase()}s in ${city} can typically arrive within 30–90 minutes for urgent emergencies. Response times may vary based on current demand and your specific location within ${city} and surrounding areas.`,
+      question: `How fast can an emergency ${tradeName.toLowerCase()} arrive in ${city}?`,
+      answer: `Our network of local ${tradeName.toLowerCase()}s in ${city} can typically arrive within 30–90 minutes for urgent emergencies. Response times may vary based on current demand and your specific location within ${city} and surrounding areas.`,
     },
     {
-      question: `Is there a call-out fee for emergency ${trade.usName.toLowerCase()} services?`,
-      answer: `Most emergency ${trade.usName.toLowerCase()}s charge a call-out fee, which is usually included in the quoted price. This covers the cost of dispatching a qualified professional to your ${city} property at short notice. The fee is waived if work is carried out.`,
+      question: `Is there a call-out fee for emergency ${tradeName.toLowerCase()} services?`,
+      answer: `Most emergency ${tradeName.toLowerCase()}s charge a call-out fee, which is usually included in the quoted price. This covers the cost of dispatching a qualified professional to your ${city} property at short notice. The fee is waived if work is carried out.`,
     },
     {
-      question: `What situations require an emergency ${trade.usName.toLowerCase()}?`,
-      answer: `You should call an emergency ${trade.usName.toLowerCase()} for any situation that poses an immediate risk to safety, property, or wellbeing. This includes anything that cannot safely wait until normal business hours. When in doubt, call for advice – most consultations are free.`,
+      question: `What situations require an emergency ${tradeName.toLowerCase()}?`,
+      answer: `You should call an emergency ${tradeName.toLowerCase()} for any situation that poses an immediate risk to safety, property, or wellbeing. This includes anything that cannot safely wait until normal business hours. When in doubt, call for advice – most consultations are free.`,
     },
   ];
 

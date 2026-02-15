@@ -138,13 +138,33 @@ export async function fetchBusinesses(
         .in('trade', uniqueTrades)
         .eq('country_code', countryCode.toUpperCase());
 
+    // OPTIMIZATION: Direct City Match First (Fastest)
     if (searchCity && searchCity.trim() !== '') {
-        const cityWithSpaces = searchCity.replace(/-/g, ' ');
-        if (searchCity.includes('-')) {
-            query = query.or(`city.ilike.%${searchCity}%,city.ilike.%${cityWithSpaces}%,coverage_areas.cs.{${cityWithSpaces}}`);
-        } else {
-            query = query.or(`city.ilike.%${searchCity}%,coverage_areas.cs.{${searchCity}}`);
+        // 1. Try exact match on city column (Indexed) - Limit 50 for speed
+        const directQuery = supabase
+            .from('businesses')
+            .select('*, business_photos(*)')
+            .in('trade', uniqueTrades)
+            .eq('city', searchCity) // Uses Index
+            .eq('country_code', countryCode.toUpperCase())
+            .limit(50);
+
+        const { data: directData, error: directError } = await directQuery;
+
+        if (!directError && directData && directData.length > 0) {
+            console.log(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
+            return directData.map((biz: any) => mapBusinessData(biz, userCoords))
+                .sort((a, b) => {
+                    if (a.tier === 'paid' && b.tier !== 'paid') return -1;
+                    if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+                    if (userCoords && a.distance !== undefined && b.distance !== undefined) return a.distance - b.distance;
+                    return (b.priority_score || 0) - (a.priority_score || 0);
+                });
         }
+
+        // 2. If no direct match, try coverage_areas (Slower but necessary for service areas)
+        const cityWithSpaces = searchCity.replace(/-/g, ' ');
+        query = query.contains('coverage_areas', [cityWithSpaces]);
     }
 
     const { data, error } = await query;

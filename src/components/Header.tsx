@@ -31,7 +31,7 @@ export function Header({ countryCode }: HeaderProps) {
             <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-14 h-14 rounded-full object-cover border border-gold/50" />
             <div className="hidden sm:block">
               <span className="font-display text-2xl tracking-wide text-foreground">Emergency</span>
-              <span className="font-display text-2xl tracking-wide text-gold">Tradesmen</span>
+              <span className="font-display text-2xl tracking-wide text-gold">{isUS ? 'Contractors' : 'Tradesmen'}</span>
             </div>
           </Link>
 

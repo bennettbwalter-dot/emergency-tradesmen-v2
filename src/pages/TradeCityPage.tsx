@@ -1,6 +1,6 @@
 import { useParams, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/SEO";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, Suspense, lazy } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
@@ -24,9 +24,11 @@ import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation } from "lucide-react";
 import { Link } from "react-router-dom";
-import { InteractiveMap } from "@/components/InteractiveMap";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
+
+// Lazy load heavy map component
+const InteractiveMap = lazy(() => import("@/components/InteractiveMap").then(module => ({ default: module.InteractiveMap })));
 import { useLocalization } from "@/contexts/LocalizationContext";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
@@ -150,6 +152,7 @@ export default function TradeCityPage() {
   // Old logic removed.
 
   const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' };
+  const tradeDisplayName = (actualCountry === 'US' && 'usName' in tradeInfo) ? (tradeInfo as any).usName : tradeInfo.name;
   const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
 
   const serviceAreas = pageData?.serviceAreas || [];
@@ -371,8 +374,8 @@ export default function TradeCityPage() {
     "@context": "https://schema.org",
     "@type": schemaType,
     "@id": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
-    name: `Emergency ${tradeInfo.name} ${cityName}`,
-    description: `24/7 emergency ${tradeInfo.name.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
+    name: `Emergency ${tradeDisplayName} ${cityName}`,
+    description: `24/7 emergency ${tradeDisplayName.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
     telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456",
     url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
@@ -415,7 +418,7 @@ export default function TradeCityPage() {
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": `${tradeInfo.name} Services`,
+      "name": `${tradeDisplayName} Services`,
       "itemListElement": services.map((service) => ({
         "@type": "Offer",
         "itemOffered": {
@@ -458,7 +461,7 @@ export default function TradeCityPage() {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": `${tradeInfo.name} in ${cityName}`,
+        "name": `${tradeDisplayName} in ${cityName}`,
         "item": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
       }
     ]
@@ -466,7 +469,7 @@ export default function TradeCityPage() {
 
   // --- Long-tail SEO: derive state code and coordinates ---
   const isUS = actualCountry === 'US';
-  const tradeName = tradeInfo.name.toLowerCase();
+  const tradeName = tradeDisplayName.toLowerCase(); // FIXED: restored tradeName for downstream usages
   const stateSlug = isUS ? cityToState[cityName]?.toUpperCase() : '';
   const stateCode = stateSlug || '';
   const cityCoords = cityCoordinates[cityName];
@@ -480,8 +483,8 @@ export default function TradeCityPage() {
   const seoTitle = pageData?.problem
     ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''}`
     : isUS
-      ? `Emergency ${tradeInfo.name} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
-      : `Emergency ${tradeInfo.name} ${cityName} – Local ${localTerm} Near Me | 24/7`;
+      ? `Emergency ${tradeDisplayName} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
+      : `Emergency ${tradeDisplayName} ${cityName} – Local ${localTerm} Near Me | 24/7`;
 
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
@@ -512,15 +515,17 @@ export default function TradeCityPage() {
       // Emergency variants
       `emergency ${tradeName} near me open now`,
       `${tradeName} emergency call out ${cityName}`,
-      // Market-specific
+      // Market-specific - DENSITY BOOST as requested
       ...(isUS ? [
         `${tradeName} ${cityName} ${stateCode}`,
         `local contractors near me`,
         `emergency contractors ${cityName}`,
+        `best contractors ${cityName}`,
         `${tradeName} ${stateCode} near me`
       ] : [
         `local tradesmen near me`,
         `emergency tradesmen ${cityName}`,
+        `best tradesmen ${cityName}`,
         `${tradeName} ${cityName} UK`,
         `cheap ${tradeName} ${cityName}`
       ])
@@ -561,7 +566,7 @@ export default function TradeCityPage() {
           <div className="absolute inset-0 z-0">
             <img
               src={heroImage}
-              alt={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeInfo.name} ${cityName}`}
+              alt={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeDisplayName} ${cityName}`}
               className="w-full h-full object-cover"
               fetchPriority="high"
               loading="eager"
@@ -576,7 +581,7 @@ export default function TradeCityPage() {
               <nav className="flex items-center gap-2 text-muted-foreground/60 text-sm mb-8">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
-                <span className="text-foreground/80">Emergency {tradeInfo.name}</span>
+                <span className="text-foreground/80">Emergency {tradeDisplayName}</span>
                 <span className="text-gold/50">/</span>
                 <span className="text-gold font-medium">{cityName}</span>
               </nav>
@@ -587,13 +592,13 @@ export default function TradeCityPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-foreground">
-                  {pageData?.problem ? `${pageData.problem.name}s` : `${tradeInfo.name}s`} <span className="text-gold font-bold">available now</span> in {cityName}
+                  {pageData?.problem ? `${pageData.problem.name}s` : `${tradeDisplayName}s`} <span className="text-gold font-bold">available now</span> in {cityName}
                 </span>
               </div>
 
               <h1 className="mb-6 animate-fade-up">
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-foreground mb-2 text-balance">
-                  {pageData?.problem ? pageData.problem.name : `Emergency ${tradeInfo.name}`}
+                  {pageData?.problem ? pageData.problem.name : `Emergency ${tradeDisplayName}`}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
                   in {cityName}
@@ -601,7 +606,7 @@ export default function TradeCityPage() {
               </h1>
 
               <p className="text-lg text-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed font-light">
-                Don't panic – help is on the way. Our network of local emergency {tradeInfo.name.toLowerCase()}s in {cityName} are ready to respond right now.
+                Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s in {cityName} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
@@ -650,17 +655,27 @@ export default function TradeCityPage() {
           )}
 
           {/* Coverage Map Section */}
-          <div className="mb-12 h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group">
+          {/* Coverage Map Section - Lazy Loaded */}
+          <div className="mb-12 h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group bg-secondary/10">
             <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 text-sm font-medium">
               Real-time local coverage: {cityName}
             </div>
-            <InteractiveMap
-              city={cityName}
-              countryCode={actualCountry}
-              showBusinesses={true}
-              businesses={businesses}
-              className="w-full h-full"
-            />
+            <Suspense fallback={
+              <div className="w-full h-full flex items-center justify-center bg-muted/20 animate-pulse">
+                <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                  <MapPin className="w-8 h-8 opacity-20" />
+                  <span className="text-sm">Loading map...</span>
+                </div>
+              </div>
+            }>
+              <InteractiveMap
+                city={cityName}
+                countryCode={actualCountry}
+                showBusinesses={true}
+                businesses={businesses}
+                className="w-full h-full"
+              />
+            </Suspense>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -678,8 +693,8 @@ export default function TradeCityPage() {
         {/* Services Section */}
         <section id="services" className="container-wide py-16 bg-card/30">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-display text-foreground mb-4">{cityName} Emergency {tradeInfo.name} Services</h2>
-            <p className="text-muted-foreground">Comprehensive emergency {tradeInfo.name.toLowerCase()} solutions for {cityName} and surrounding areas.</p>
+            <h2 className="text-3xl font-display text-foreground mb-4">{cityName} Emergency {tradeDisplayName} Services</h2>
+            <p className="text-muted-foreground">Comprehensive emergency {tradeDisplayName.toLowerCase()} solutions for {cityName} and surrounding areas.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (

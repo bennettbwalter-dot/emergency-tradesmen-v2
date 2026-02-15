@@ -48,14 +48,15 @@ export function HoverBorderGradient({
     const highlight =
         "radial-gradient(75% 181.15942028985506% at 50% 50%, #3275F8 0%, rgba(255, 255, 255, 0) 100%)";
 
+    // OPTIMIZATION: Removed expensive setInterval that ran on every single card (400+ timers!)
+    // Now it only animates/reacts to hover state via Framer Motion, which is much more efficient.
+    // The direction rotation was subtle but costly; static direction is fine for idle state.
+
     useEffect(() => {
-        if (!hovered) {
-            const interval = setInterval(() => {
-                setDirection((prevState) => rotateDirection(prevState));
-            }, duration * 1000);
-            return () => clearInterval(interval);
-        }
+        // Reset direction on unhover if needed, or just leave it. 
+        // Removing the interval entirely saves massive CPU.
     }, [hovered]);
+
     return (
         <Tag
             onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {

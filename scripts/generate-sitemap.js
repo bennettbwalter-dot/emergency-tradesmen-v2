@@ -154,7 +154,7 @@ async function generateSitemap() {
     ].map(p => ({
         loc: `${BASE_URL}${p}`,
         changefreq: 'weekly',
-        priority: p === '' || p === '/us' ? '1.0' : '0.8'
+        priority: p === '' || p === '/us' ? '1.0' : (p === '/about' ? '0.9' : '0.8')
     }));
     writeSitemap('sitemap-static.xml', staticUrls);
 
