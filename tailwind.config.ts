@@ -15,24 +15,24 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-        display: ['"Cormorant Garamond"', 'Outfit', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
+        ui: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        'elevation-1': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'elevation-2': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'elevation-3': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        'glow-gold': '0 0 20px rgba(212, 175, 55, 0.3)',
       },
       colors: {
-        'primary-dark': '#15172B', // A deep, rich dark blue/charcoal
-        'primary-bg': '#F9FAFB', // Soft off-white for background (Remix)
-        'secondary-dark': '#1C1F37', // Slightly lighter for card backgrounds
-        'primary-text': '#1F2937', // Deep charcoal for main text
-        'accent-teal': '#00D4D2', // Vibrant teal for highlights
-        'accent-blue-light': '#667EEA', // Lighter blue for subtle gradients
-        'accent-blue-dark': '#5940F7', // Deeper blue for strong accents
-        'accent-green': '#2E8B57', // Sea Green (Remix)
-        'accent-green-dark': '#256D45', // Darker Sea Green (Remix)
-        'text-light': '#E0E7FF', // Light blue-gray for main text
-        'text-muted': '#A7B2C5', // Muted gray for secondary text
-        'subtle-gray': '#6B7280', // For secondary text (Remix)
-        'warning-red': '#F56565', // Soft red for urgency
-        'info-yellow': '#ECC94B', // Muted yellow for tips
+        'primary-dark': '#0F111A', // Deeper, richer charcoal
+        'primary-bg': '#FAFAF9', // Warm off-white (Stone-50)
+        'secondary-dark': '#181824', // Slightly lighter for cards
+        'primary-text': '#1C1917', // Stone-900
+        'accent-teal': '#0D9488', // Teal-600 (more professional)
+        'text-light': '#F5F5F4', // Stone-100
+        'text-muted': '#A8A29E', // Stone-400
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -101,6 +101,7 @@ export default {
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         gradient: {
@@ -117,35 +118,55 @@ export default {
           to: { height: "0" },
         },
         'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'hover-glow': {
           '0%, 100%': { boxShadow: '0 0px 0px rgba(0,0,0,0)' },
-          '50%': { boxShadow: '0 5px 15px rgba(0,212,210,0.3)' }, // Teal glow
+          '50%': { boxShadow: '0 0px 15px rgba(212, 175, 55, 0.3)' }, // Gold glow
         },
         'hover-float': {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
+          '50%': { transform: 'translateY(-3px)' },
         },
         'pulse-gold-text': {
-          '0%, 100%': { color: '#ffffff' },
+          '0%, 100%': { color: 'hsl(var(--foreground))' },
           '50%': { color: 'hsl(var(--gold))' },
         },
-        'pulse-red-green-bg': {
-          '0%, 100%': { backgroundColor: '#10b981' }, // emarald-500
-          '50%': { backgroundColor: '#ef4444' }, // red-500
+        'slow-spin': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        'reverse-spin': {
+          from: { transform: 'rotate(360deg)' },
+          to: { transform: 'rotate(0deg)' },
+        },
+        'shine': {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.8', transform: 'scale(1.1)' },
+        },
+        'border-gold-white': {
+          '0%, 100%': { borderColor: 'rgba(255,255,255,0.1)' },
+          '50%': { borderColor: 'rgba(212, 175, 55, 0.5)' },
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
         'hover-glow': 'hover-glow 0.3s ease-in-out',
         'hover-float': 'hover-float 0.3s ease-in-out',
-        'pulse-gold-text': 'pulse-gold-text 2s ease-in-out infinite',
-        'pulse-red-green-bg': 'pulse-red-green-bg 2s ease-in-out infinite',
+        'pulse-gold-text': 'pulse-gold-text 3s ease-in-out infinite',
         gradient: "gradient 8s linear infinite",
+        'slow-spin': 'slow-spin 20s linear infinite',
+        'reverse-spin': 'reverse-spin 25s linear infinite',
+        'shine': 'shine 1.5s ease-in-out infinite',
+        'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
+        'border-gold-white': 'border-gold-white 3s ease-in-out infinite',
       },
     },
   },

@@ -1,466 +1,260 @@
 [
   {
-    "city": "Dallas",
-    "count": 8929
+    "slug": "what-to-do-in-home-emergency-before-help-arrives",
+    "title": "What to Do in a Home Emergency Before Help Arrives",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Houston",
-    "count": 1628
+    "slug": "emergency-at-home-guide",
+    "title": "Emergency At Home: Your Complete Guide to Crisis Management",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Austin",
-    "count": 282
+    "slug": "emergency-plumber-london-guide",
+    "title": "Emergency Plumber London: 5 Safety Checks Before You Call",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "San Antonio",
-    "count": 377
+    "slug": "sewage-smell-in-house-p-trap-us",
+    "title": "Sewage Smell in House? The US Guide to Dried P-Traps & Sewer Gas",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Miami",
-    "count": 450
+    "slug": "5-signs-you-need-emergency-plumber-gb",
+    "title": "Don’t Wait for the Flood: 5 Critical Signs You Need an Emergency Plumber in the UK",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Tampa",
-    "count": 409
+    "slug": "car-wont-start-flat-battery-alternator-gb",
+    "title": "Car Won't Start on a Frosty Morning? UK Guide to Batteries & Alternators",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Orlando",
-    "count": 492
+    "slug": "domestic-electrical-interruption-protocol-us",
+    "title": "US Home Power Outage Protocol: Diagnostics, Safety, and Grid Resilience (2025 Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Jacksonville",
-    "count": 400
+    "slug": "ac-blowing-warm-air-capacitor-leak-us",
+    "title": "AC Blowing Warm Air? The US Homeowner's Guide to Capacitor Failure & Freon Leaks",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Phoenix",
-    "count": 2192
+    "slug": "boiler-pressure-dropping-filling-loop-gb",
+    "title": "Boiler Pressure Dropping? The UK Guide to Filling Loops & Repressurising",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Scottsdale",
-    "count": 645
+    "slug": "drain-smell-bathroom-soil-stack-gb",
+    "title": "Drain Smell in the Bathroom? The UK Guide to Soil Stacks & Durgo Valves",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Mesa",
-    "count": 541
+    "slug": "water-leaking-through-ceiling-first-steps-us",
+    "title": "Water Leaking From Ceiling? The 5-Minute 'Stop the Collapse' Protocol (US Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Tucson",
-    "count": 381
+    "slug": "structural-cracks-foundation-repair-us",
+    "title": "Wall Cracks: Settlement vs. Foundation Failure (US Homeowner Guide)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Detroit",
-    "count": 720
+    "slug": "car-wont-start-click-vs-crank-us",
+    "title": "Car Won't Start? The US Driver's 2025 Troubleshooting Guide (Click vs. Crank)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Cleveland",
-    "count": 382
+    "slug": "emergency-boarding-up-plywood-us",
+    "title": "Broken Window? The US Homeowner's Guide to Emergency Boarding Up",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Pittsburgh",
-    "count": 534
+    "slug": "emergency-boarding-up-glazing-gb",
+    "title": "Smashed Window? The UK Guide to Emergency Glazing & Boarding",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Buffalo",
-    "count": 365
+    "slug": "home-emergency-stopcock-fusebox-gb",
+    "title": "Home Emergency Guide: Stopcocks, Fuse Boxes & The Isolation Valve (UK)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Seattle",
-    "count": 933
+    "slug": "home-emergency-shut-off-protocol-us",
+    "title": "The Home Emergency Protocol: Shut-Off Valves, Breakers & 911 (US Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Portland",
-    "count": 733
+    "slug": "furnace-blowing-cold-air-limit-switch-us",
+    "title": "Furnace Blowing Cold Air? The US Homeowner's Guide to Low Pressure & Limit Switches",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Tacoma",
-    "count": 368
+    "slug": "5-signs-emergency-plumber-needed-us",
+    "title": "5 Signs You Need an Emergency Plumber NOW (US Guide)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Spokane",
-    "count": 172
+    "slug": "ac-heat-pump-not-cooling-troubleshooting-gb",
+    "title": "Heat Pump / AC Not Cooling? The UK Guide to F-Gas & Inverter Faults",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Los Angeles",
-    "count": 2182
+    "slug": "electrical-fire-warning-signs-us",
+    "title": "Flickering Lights & Warm Outlets: Is Your Home Wiring a Hidden Fire Hazard?",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "San Diego",
-    "count": 629
+    "slug": "can-you-legally-stay-in-home-without-electricity",
+    "title": "Can You Legally and Safely Stay in a Home Without Electricity? We Answer the Panic Questions",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "San Francisco",
-    "count": 496
+    "slug": "structural-cracks-subsidence-survey-gb",
+    "title": "Cracks in the Plaster? The UK Guide to Subsidence & Heave",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Sacramento",
-    "count": 438
+    "slug": "emergency-locksmith-guide-gb",
+    "title": "Locked Out? The UK Guide to Non-Destructive Entry & British Standard Locks",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Fort Worth",
-    "count": 60
+    "slug": "blocked-drains-vs-flooded-sewers-danger-guide-us",
+    "title": "Blocked Drains vs. Major Sewer Backup: How to Spot the Danger (US Guide)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Arlington",
-    "count": 300
+    "slug": "5-signs-emergency-plumber-needed-gb",
+    "title": "5 Signs Your Plumbing is About to Fail (UK Emergency Guide)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Plano",
-    "count": 365
+    "slug": "water-damage-restoration-strip-out-gb",
+    "title": "Burst Pipe Flood? The UK Guide to Drying Out (Strip Out & Reinstatement)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Irving",
-    "count": 348
+    "slug": "smell-gas-what-to-do-safety-protocol-us",
+    "title": "Smell Gas? The US Homeowner's 911 & Shut-Off Protocol",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Garland",
-    "count": 26
+    "slug": "smell-gas-what-to-do-safety-protocol-gb",
+    "title": "Smell Gas? The UK Guide to 0800 111 999 & The Golden Rule",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Frisco",
-    "count": 264
+    "slug": "water-damage-restoration-category-mold-us",
+    "title": "Water Damage 101: The US Guide to Categories, Classes & Mold",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "McKinney",
-    "count": 25
+    "slug": "emergency-roof-leak-tarping-us",
+    "title": "Roof Leaking in a Storm? The US Homeowner's Emergency Tarping Guide",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "El Paso",
-    "count": 60
+    "slug": "blocked-drains-vs-flooded-sewers-danger-guide-gb",
+    "title": "Blocked Drains vs. Flooded Sewers: Critical UK Safety Guide",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Corpus Christi",
-    "count": 75
+    "slug": "domestic-electrical-interruption-protocol-gb",
+    "title": "Domestic Electrical Interruption Protocol: A Comprehensive Analysis of UK Diagnostics, Safety, and Resilience",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Lubbock",
-    "count": 51
+    "slug": "emergency-roof-leak-tarping-gb",
+    "title": "Roof Leaking? The UK Guide to Slipped Tiles and Valley Gutters",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Laredo",
-    "count": 20
+    "slug": "5-signs-you-need-emergency-plumber-us",
+    "title": "5 Red Flags: When to Call an Emergency Plumber Immediately (US Homeowner’s Guide)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Amarillo",
-    "count": 45
+    "slug": "what-to-do-in-home-emergency-before-help-arrives-gb",
+    "title": "What to Do in a Home Emergency: The Complete UK Safety & Action Protocol (2025 Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Midland",
-    "count": 21
+    "slug": "what-to-do-in-home-emergency-before-help-arrives-us",
+    "title": "The Ultimate US Home Emergency Protocol: Managing Damage and Safety (2025 Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Abilene",
-    "count": 19
+    "slug": "electrical-fire-warning-signs-gb",
+    "title": "Flickering Lights & Fishy Smells: The Critical UK Warning Signs of Electrical Fire",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Denton",
-    "count": 27
+    "slug": "emergency-locksmith-guide-us",
+    "title": "Locked Out? The US Homeowner's Guide to Emergency Entry (and Scams)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Waco",
-    "count": 29
+    "slug": "electrical-emergencies-every-homeowner-should-know",
+    "title": "Electrical Emergencies Every Homeowner Should Know and How to Handle Them",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Carrollton",
-    "count": 26
+    "slug": "water-leaking-through-ceiling-first-steps-gb",
+    "title": "Water Leaking Through the Ceiling? The 'Golden Minute' Safety Guide (UK Edition)",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Richardson",
-    "count": 25
+    "slug": "how-we-verify-tradespeople",
+    "title": "How We Verify Every Tradesperson on Our Platform",
+    "imageCount": 2,
+    "hasCover": true
   },
   {
-    "city": "Lewisville",
-    "count": 23
-  },
-  {
-    "city": "Round Rock",
-    "count": 23
-  },
-  {
-    "city": "College Station",
-    "count": 21
-  },
-  {
-    "city": "Tyler",
-    "count": 21
-  },
-  {
-    "city": "Pearland",
-    "count": 21
-  },
-  {
-    "city": "Sugar Land",
-    "count": 24
-  },
-  {
-    "city": "Allen",
-    "count": 22
-  },
-  {
-    "city": "League City",
-    "count": 21
-  },
-  {
-    "city": "Conroe",
-    "count": 26
-  },
-  {
-    "city": "New Braunfels",
-    "count": 18
-  },
-  {
-    "city": "Edinburg",
-    "count": 20
-  },
-  {
-    "city": "Mission",
-    "count": 18
-  },
-  {
-    "city": "Bryan",
-    "count": 19
-  },
-  {
-    "city": "Pharr",
-    "count": 18
-  },
-  {
-    "city": "Baytown",
-    "count": 21
-  },
-  {
-    "city": "Missouri City",
-    "count": 21
-  },
-  {
-    "city": "Temple",
-    "count": 19
-  },
-  {
-    "city": "Flower Mound",
-    "count": 25
-  },
-  {
-    "city": "North Richland Hills",
-    "count": 26
-  },
-  {
-    "city": "Mansfield",
-    "count": 23
-  },
-  {
-    "city": "Victoria",
-    "count": 20
-  },
-  {
-    "city": "Rowlett",
-    "count": 22
-  },
-  {
-    "city": "Harlingen",
-    "count": 21
-  },
-  {
-    "city": "Pflugerville",
-    "count": 21
-  },
-  {
-    "city": "San Marcos",
-    "count": 23
-  },
-  {
-    "city": "Euless",
-    "count": 22
-  },
-  {
-    "city": "Port Arthur",
-    "count": 18
-  },
-  {
-    "city": "Grapevine",
-    "count": 20
-  },
-  {
-    "city": "Indianapolis",
-    "count": 62
-  },
-  {
-    "city": "Columbus",
-    "count": 64
-  },
-  {
-    "city": "Charlotte",
-    "count": 64
-  },
-  {
-    "city": "Las Vegas",
-    "count": 25
-  },
-  {
-    "city": "New York City",
-    "count": 33
-  },
-  {
-    "city": "Chicago",
-    "count": 33
-  },
-  {
-    "city": "Philadelphia",
-    "count": 31
-  },
-  {
-    "city": "San Jose",
-    "count": 30
-  },
-  {
-    "city": "Denver",
-    "count": 27
-  },
-  {
-    "city": "Oklahoma City",
-    "count": 26
-  },
-  {
-    "city": "Nashville",
-    "count": 27
-  },
-  {
-    "city": "Washington, DC",
-    "count": 28
-  },
-  {
-    "city": "Boston",
-    "count": 30
-  },
-  {
-    "city": "Memphis",
-    "count": 26
-  },
-  {
-    "city": "Louisville",
-    "count": 22
-  },
-  {
-    "city": "Baltimore",
-    "count": 23
-  },
-  {
-    "city": "Milwaukee",
-    "count": 25
-  },
-  {
-    "city": "Albuquerque",
-    "count": 28
-  },
-  {
-    "city": "Fresno",
-    "count": 25
-  },
-  {
-    "city": "Kansas City",
-    "count": 21
-  },
-  {
-    "city": "Atlanta",
-    "count": 28
-  },
-  {
-    "city": "Colorado Springs",
-    "count": 26
-  },
-  {
-    "city": "Omaha",
-    "count": 21
-  },
-  {
-    "city": "Raleigh",
-    "count": 28
-  },
-  {
-    "city": "Long Beach",
-    "count": 22
-  },
-  {
-    "city": "Virginia Beach",
-    "count": 25
-  },
-  {
-    "city": "Oakland",
-    "count": 25
-  },
-  {
-    "city": "Minneapolis",
-    "count": 24
-  },
-  {
-    "city": "Tulsa",
-    "count": 24
-  },
-  {
-    "city": "New Orleans",
-    "count": 24
-  },
-  {
-    "city": "Wichita",
-    "count": 22
-  },
-  {
-    "city": "Bakersfield",
-    "count": 23
-  },
-  {
-    "city": "Aurora",
-    "count": 24
-  },
-  {
-    "city": "Honolulu",
-    "count": 27
-  },
-  {
-    "city": "Anaheim",
-    "count": 23
-  },
-  {
-    "city": "Santa Ana",
-    "count": 25
-  },
-  {
-    "city": "Riverside",
-    "count": 23
-  },
-  {
-    "city": "Lexington",
-    "count": 21
-  },
-  {
-    "city": "Stockton",
-    "count": 21
-  },
-  {
-    "city": "Henderson",
-    "count": 22
-  },
-  {
-    "city": "St. Paul",
-    "count": 24
-  },
-  {
-    "city": "St. Louis",
-    "count": 26
-  },
-  {
-    "city": "Cincinnati",
-    "count": 22
-  },
-  {
-    "city": "Anchorage",
-    "count": 22
-  },
-  {
-    "city": "Greensboro",
-    "count": 21
-  },
-  {
-    "city": "Lincoln",
-    "count": 20
+    "slug": "5-signs-you-need-emergency-plumber",
+    "title": "5 Signs You Need an Emergency Plumber Immediately",
+    "imageCount": 2,
+    "hasCover": true
   }
 ]

@@ -190,7 +190,7 @@ Gas emergencies are life-threatening.
 ## Common Electrical Emergencies at a Glance
 
 | Electrical Issue | Risk Level | Immediate Action |
-|---|---|---|
+| :--- | :--- | :--- |
 | Tripped breaker | Low to Medium | Reduce load and reset once |
 | Burning smell | High | Turn power off and call electrician |
 | Sparking sockets | High | Switch off circuit and stop using |
@@ -231,7 +231,7 @@ We verify Public Liability Insurance directly with insurers to ensure cover is a
 
 ## Step 3: Address Confirmation – Truly Local Pros
 
-To speed up response times, we verify that tradespeople are truly local using utility bills and GPS checks.
+We verify that tradespeople are truly local using utility bills and GPS checks to speed up response times.
 
 ## Step 4: Review Audit – Feedback You Can Trust
 
@@ -399,6 +399,60 @@ Mention if you have an older property so they bring the right fittings.
 Ensure it has a physical address, not just a PO Box.
 
 **Need a verified London plumber?** **[Find one now](https://emergencytradesmen.net/emergency-plumber/london)**.`
+    },
+    {
+        slug: 'emergency-roof-leak-tarping',
+        content: `**Emergency roof tarping is the process of covering a damaged roof section with a waterproof tarpaulin to stop water ingress immediately.** It is a temporary fix used by roofers during storms or heavy rain when permanent repairs are unsafe or materials are unavailable. **Never attempt to climb a ladder in high winds or rain.**
+
+## ✅ Quick Steps: Managing a Roof Leak
+
+*   **Catch the water** — use buckets in the attic or room below.
+*   **Relieve ceiling pressure** — if the ceiling bulges, pierce it carefully to drain the water.
+*   **Protect valuables** — cover furniture and move electronics.
+*   **Call a roofer** — they have the harness and safety equipment to work in bad weather.
+*   **Stay off the roof** — slippery slates and wind gusts are a deadly combination.
+
+> ⚡ **Safety Warning:** Falls from height are the biggest killer in the construction industry. A wet roof is like an ice rink. **Do not go up there.**
+
+---
+
+## What is Emergency Tarping?
+
+When a storm blows tiles off or a tree branch punctures the roof, a full repair is often impossible until the weather clears. A roofer will secure a heavy-duty tarp over the damaged area, weighed down with sandbags or battened to the rafters.
+
+### Benefits:
+1.  **Immediate Stop:** Stops water entering the property instantly.
+2.  **Prevents Worse Damage:** Stops insulation becoming sodden and ceilings collapsing.
+3.  **Buy Time:** Gives you days or weeks to arrange a permanent repair and insurance claim.
+
+---
+
+## How Much Does Emergency Roofing Cost?
+
+| Service | Typical Cost (UK) |
+| :--- | :--- |
+| Emergency call-out & tarping | £150–£350 |
+| Replace missing tiles/slates (minor) | £100–£200 |
+| Ridge tile repointing | £150–£300 |
+| Flat roof patch repair | £180–£400 |
+
+---
+
+## Frequently Asked Questions
+
+### Can a roofer fix the leak while it's raining?
+**They can tarp it.** Permanent repairs (like cement work or torch-on felt) usually require dry conditions. Tarping works in the rain.
+
+### How long does a tarp last?
+**Up to 90 days.** It is designed to hold until the weather improves and materials can be ordered.
+
+### Will insurance pay for a new roof?
+**Depends on the cause.** Storm damage is usually covered. "Wear and tear" (old rotting felt) usually isn't. Check your policy.
+
+---
+
+## Stop the Leak Now
+**[Find an emergency roofer through Emergency Tradesmen](https://emergencytradesmen.net/)** — safe, insured, responsive.`
     }
 ];
 
