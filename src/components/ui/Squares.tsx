@@ -7,6 +7,7 @@ interface SquaresProps {
     squareSize?: number;
     hoverFillColor?: string;
     className?: string;
+    lineThickness?: number;
 }
 
 const Squares = ({

@@ -36,19 +36,19 @@ export function FAQSection({ faqs, trade, city }: FAQSectionProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      
-      <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+
+      <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8">
         Frequently Asked Questions
       </h2>
-      
+
       <Accordion type="single" collapsible className="space-y-3">
         {faqs.map((faq, index) => (
           <AccordionItem
             key={index}
             value={`faq-${index}`}
-            className="bg-card border border-border rounded-xl px-6 data-[state=open]:shadow-md transition-shadow"
+            className="bg-card border border-border rounded-xl px-6 data-[state=open]:shadow-md data-[state=open]:border-gold/20 transition-all"
           >
-            <AccordionTrigger className="text-left font-medium py-5 hover:no-underline hover:text-accent">
+            <AccordionTrigger className="text-left font-medium py-5 hover:no-underline hover:text-gold">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="text-muted-foreground pb-5">

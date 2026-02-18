@@ -58,70 +58,64 @@ export function TradeCard({ trade, city }: TradeCardProps) {
     <Link
       to={`${countryPrefix}/emergency-${trade.slug}/${targetCity && (settings.countryCode === 'US' ? usCities : cities).map(c => c.toLowerCase()).includes(targetCity.toLowerCase()) ? targetCity.toLowerCase().replace(/\s+/g, '-') : (settings.countryCode === 'US' ? 'los-angeles' : 'london')}`}
       onClick={handleClick}
-      className="block h-full"
+      className="block h-full group relative"
     >
-      <motion.div
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="group relative flex flex-col rounded-lg border border-border/50 bg-card hover:border-gold hover:border-2 hover:shadow-xl hover:shadow-gold/5 transition-all duration-300 overflow-hidden h-full"
-      >
-        {/* Background glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative h-full overflow-hidden rounded-2xl bg-card border border-white/10 shadow-lg transition-all duration-500 hover:shadow-[0_0_30px_-5px_theme(colors.gold/0.2)] hover:border-gold/30 hover:-translate-y-2">
 
-        {/* Decorative corner accent */}
-        <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[1px] h-8 bg-gradient-to-b from-gold/50 to-transparent" />
-          <div className="absolute top-0 right-0 w-8 h-[1px] bg-gradient-to-l from-gold/50 to-transparent" />
+        {/* Animated Shine Effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shine" />
         </div>
 
-        {/* Display Image if available, otherwise Icon */}
-        {trade.image ? (
-          <div className="relative w-full aspect-[2/3] overflow-hidden group-hover:shadow-lg transition-all duration-500 shrink-0">
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 opactiy-90" />
-            <motion.img
+        {/* Image / Icon Area */}
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-90" />
+
+          {trade.image ? (
+            <img
               src={trade.image}
               alt={`Emergency ${trade.name}`}
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
             />
-          </div>
-        ) : (
-          <div className="w-full aspect-[2/3] flex items-center justify-center bg-card/50 shrink-0">
-            <motion.span
-              className="text-4xl block filter drop-shadow-lg"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              {trade.icon}
-            </motion.span>
-          </div>
-        )}
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-secondary/30">
+              <span className="text-5xl opacity-50 contrast-0 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500">
+                {trade.icon}
+              </span>
+            </div>
+          )}
 
-        <div className="relative z-10 flex flex-col flex-grow p-4 sm:p-6">
-          <div className="mb-4 flex flex-col sm:flex-row items-start sm:justify-between gap-3 sm:gap-4">
-            <h3 className="font-display text-lg sm:text-xl text-foreground group-hover:text-gold transition-colors tracking-wide leading-tight min-h-0 sm:min-h-[3.5rem] flex items-start flex-grow">
-              Emergency {tradeName}
-            </h3>
-            {trade.vectorIcon && (
-              <img
-                src={trade.vectorIcon}
-                alt=""
-                className="w-8 h-8 md:w-10 md:h-10 object-contain brightness-110 group-hover:scale-110 transition-all duration-300 shrink-0 self-start sm:self-auto"
-              />
-            )}
+          {/* Floating Icon - Glassmorphic */}
+          {trade.vectorIcon && (
+            <div className="absolute top-4 right-4 z-20 w-12 h-12 p-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 group-hover:border-gold/50 transition-all duration-300">
+              <img src={trade.vectorIcon} alt="" className="w-full h-full object-contain brightness-0 invert drop-shadow" />
+            </div>
+          )}
+        </div>
+
+        {/* Content */}
+        <div className="relative z-20 p-6 flex flex-col items-start h-[180px]">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 backdrop-blur-md mb-4 group-hover:bg-gold/20 transition-colors">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+            </span>
+            <span className="text-[10px] font-bold text-gold uppercase tracking-widest">Available Now</span>
           </div>
 
-          <div className="mt-auto flex items-center justify-between pt-3 sm:pt-4 border-t border-border/30">
-            <p className="text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider font-medium">
-              Available 24/7
-            </p>
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-border/50 flex items-center justify-center group-hover:border-gold/50 group-hover:bg-gold/5 transition-all duration-300 shrink-0 ml-2 sm:ml-4">
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
+          <h3 className="font-display font-bold text-2xl text-white group-hover:text-gold transition-colors duration-300 leading-none mb-2">
+            Emergency <br /> {tradeName}
+          </h3>
+
+          <div className="mt-auto w-full pt-4 border-t border-white/10 flex items-center justify-between group/link">
+            <span className="text-xs font-medium text-white/60 group-hover:text-white transition-colors uppercase tracking-wider">View Specialists</span>
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold group-hover:text-black transition-all duration-300 group-hover:scale-110">
+              <ArrowRight className="w-4 h-4" />
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }

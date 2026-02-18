@@ -444,27 +444,28 @@ export function EmergencyChatInterface() {
                                 return (
                                     <motion.div
                                         key={msg.id}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
+                                        initial={{ opacity: 0, scale: 0.95, filter: 'blur(5px)' }}
+                                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                        transition={{ duration: 0.5, ease: "easeOut" }}
                                         className="w-full flex justify-start my-4"
                                     >
-                                        <Terminal className="w-full max-w-2xl mx-auto shadow-2xl border-gold/20">
-                                            <AnimatedSpan className="text-green-500 mb-2">
-                                                <span>✔ System initialized.</span>
+                                        <Terminal className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10">
+                                            <AnimatedSpan className="text-emerald-400 mb-2 font-bold tracking-wider text-xs uppercase opacity-80">
+                                                <span>✓ System initialized</span>
                                             </AnimatedSpan>
 
-                                            <div className="text-muted-foreground">
-                                                <span className="mr-2 text-gold">➜</span>
-                                                <span className="text-foreground">
+                                            <div className="text-muted-foreground/80">
+                                                <span className="mr-3 text-gold/80">➜</span>
+                                                <span className="text-foreground tracking-wide">
                                                     {isLastMessage ? (
                                                         <TypingAnimation
-                                                            duration={15}
-                                                            className="text-base md:text-lg font-mono"
+                                                            duration={25}
+                                                            className="text-base md:text-lg font-sans font-medium text-white/90"
                                                         >
                                                             {msg.content}
                                                         </TypingAnimation>
                                                     ) : (
-                                                        <span className="text-base md:text-lg font-mono">
+                                                        <span className="text-base md:text-lg font-sans font-medium text-white/90">
                                                             {msg.content}
                                                         </span>
                                                     )}
@@ -472,8 +473,9 @@ export function EmergencyChatInterface() {
                                             </div>
 
                                             {isLastMessage && (
-                                                <AnimatedSpan delay={msg.content.length * 15 + 500} className="text-blue-500 mt-4">
-                                                    <span>ℹ Waiting for user action...</span>
+                                                <AnimatedSpan delay={msg.content.length * 15 + 800} className="text-blue-400/80 mt-6 text-xs uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+                                                    <span>Waiting for user input...</span>
                                                 </AnimatedSpan>
                                             )}
                                         </Terminal>
@@ -484,11 +486,11 @@ export function EmergencyChatInterface() {
                             return (
                                 <motion.div
                                     key={msg.id}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
                                     className="flex justify-end"
                                 >
-                                    <div className="max-w-[90%] md:max-w-[70%] p-3 rounded-xl text-base md:text-lg leading-relaxed shadow-sm bg-secondary text-secondary-foreground rounded-tr-sm">
+                                    <div className="max-w-[90%] md:max-w-[70%] p-4 rounded-2xl text-base md:text-lg leading-relaxed shadow-lg bg-gradient-to-br from-secondary to-secondary/80 border border-white/5 text-secondary-foreground rounded-tr-sm backdrop-blur-sm">
                                         {msg.content}
                                     </div>
                                 </motion.div>
@@ -497,13 +499,13 @@ export function EmergencyChatInterface() {
                     </AnimatePresence>
                     {isTyping && (
                         <div className="flex gap-3 p-4">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/80 to-gold/20 flex items-center justify-center shrink-0 animate-pulse">
-                                <Zap className="w-4 h-4 text-white" />
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/80 to-gold/20 flex items-center justify-center shrink-0 animate-pulse ring-4 ring-gold/10">
+                                <Zap className="w-4 h-4 text-white drop-shadow-md" />
                             </div>
-                            <div className="flex gap-1 items-center pt-2">
-                                <span className="w-2 h-2 bg-gold/50 rounded-full animate-bounce delay-0"></span>
-                                <span className="w-2 h-2 bg-gold/50 rounded-full animate-bounce delay-150"></span>
-                                <span className="w-2 h-2 bg-gold/50 rounded-full animate-bounce delay-300"></span>
+                            <div className="flex gap-1.5 items-center pt-2">
+                                <span className="w-1.5 h-1.5 bg-gold rounded-full animate-bounce delay-0 shadow-[0_0_10px_orange]"></span>
+                                <span className="w-1.5 h-1.5 bg-gold rounded-full animate-bounce delay-150 shadow-[0_0_10px_orange]"></span>
+                                <span className="w-1.5 h-1.5 bg-gold rounded-full animate-bounce delay-300 shadow-[0_0_10px_orange]"></span>
                             </div>
                         </div>
                     )}
@@ -511,12 +513,15 @@ export function EmergencyChatInterface() {
                 </div>
 
                 {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
-                <div className="w-full bg-transparent flex justify-center py-4">
-                    <div className="relative flex flex-col w-[90%] bg-white dark:bg-gradient-to-r dark:from-gray-900 dark:via-[#1a1a1a] dark:to-gray-900 rounded-xl border border-gold/50 shadow-[0_0_15px_rgba(215,160,66,0.15)] overflow-visible transition-all duration-300 hover:shadow-[0_0_20px_rgba(215,160,66,0.25)] hover:border-gold/70 group">
+                <div className="w-full bg-transparent flex justify-center py-6">
+                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border transition-all duration-500 overflow-visible group
+                        ${isFocused
+                            ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
+                            : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
                         {/* WAVEFORM INSIDE CONTAINER - Shows when recording */}
                         {isRecording ? (
-                            <div className="w-full min-h-[180px] md:min-h-[100px] flex items-center justify-center px-4 py-4">
+                            <div className="w-full min-h-[180px] md:min-h-[100px] flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5">
                                 <WhisperWaveform
                                     audioData={audioData}
                                     isRecording={isRecording}
@@ -542,7 +547,7 @@ export function EmergencyChatInterface() {
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
                                 placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                                className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[180px] md:min-h-[100px] px-4 md:px-8 py-4 md:py-6 text-base md:text-lg focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white/50 resize-y"
+                                className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[160px] md:min-h-[120px] px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/30 resize-y font-light tracking-wide"
                             />
                         )}
 

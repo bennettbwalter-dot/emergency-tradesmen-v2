@@ -5,21 +5,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.97]",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02]",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-gold/40 bg-transparent text-gold hover:bg-gold/10 hover:border-gold",
+        outline: "border border-gold/40 bg-transparent text-gold hover:bg-gold/10 hover:border-gold hover:scale-[1.02]",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "text-foreground hover:bg-accent/10 hover:text-accent",
         link: "text-gold underline-offset-4 hover:underline",
-        urgent: "bg-urgent text-urgent-foreground shadow-lg hover:bg-urgent/90",
+        urgent: "bg-urgent text-urgent-foreground shadow-lg hover:bg-urgent/90 hover:scale-[1.02]",
         success: "bg-success text-success-foreground hover:bg-success/90",
-        cta: "bg-gradient-to-r from-gold-dark via-gold to-gold-light text-background font-semibold shadow-lg hover:shadow-gold/30 hover:scale-[1.02] active:scale-[0.98] tracking-wide",
-        hero: "bg-gradient-to-r from-gold-dark via-gold to-gold-light text-background font-semibold shadow-2xl hover:shadow-gold/40 hover:scale-[1.02] active:scale-[0.98] tracking-wider uppercase",
-        luxury: "border border-gold/50 bg-gold/5 text-gold hover:bg-gold/10 backdrop-blur-sm uppercase tracking-widest font-medium",
+        cta: "bg-gradient-to-r from-gold-dark via-gold to-gold-light text-background font-semibold shadow-lg hover:shadow-gold/30 hover:scale-[1.03] tracking-wide",
+        hero: "bg-gradient-to-r from-gold-dark via-gold to-gold-light text-background font-bold shadow-2xl hover:shadow-gold/40 hover:scale-[1.03] tracking-wider uppercase",
+        luxury: "border border-gold/50 bg-gold/5 text-gold hover:bg-gold/10 backdrop-blur-sm uppercase tracking-widest font-medium hover:scale-[1.02]",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -38,7 +38,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 

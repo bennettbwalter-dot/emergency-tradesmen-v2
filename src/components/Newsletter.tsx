@@ -49,7 +49,7 @@ export function Newsletter() {
 
     return (
         <div className="w-full">
-            <h4 className="font-display text-lg tracking-wide text-white mb-4">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/60 mb-4">
                 Subscribe to our Newsletter
             </h4>
             <p className="text-white/60 text-sm mb-4">
@@ -62,7 +62,7 @@ export function Newsletter() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-gold/50 focus:ring-gold/20"
                     disabled={isLoading}
                 />
                 <Button

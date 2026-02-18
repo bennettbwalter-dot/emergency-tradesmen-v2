@@ -21,7 +21,7 @@
     align-items: flex-start;
     justify-content: space-between;
     border-radius: calc(var(--outer-r) - var(--p-distance));
-    background-color: #0d0716;
+    background-color: transparent;
     overflow: hidden;
     cursor: grab;
 }

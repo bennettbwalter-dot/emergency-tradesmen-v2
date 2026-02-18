@@ -22,7 +22,7 @@ export function HoverBorderGradient({
         duration?: number;
         clockwise?: boolean;
         glowColor?: string;
-    } & React.HTMLAttributes<HTMLElement>
+    } & React.HTMLAttributes<HTMLElement> & { [key: string]: any }
 >) {
     const [hovered, setHovered] = useState<boolean>(false);
     const [direction, setDirection] = useState<Direction>("TOP");

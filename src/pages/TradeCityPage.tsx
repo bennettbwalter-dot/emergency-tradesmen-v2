@@ -14,6 +14,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Squares from "@/components/ui/Squares";
 import { generateTradePageData, cities, usCities, cityToState } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
@@ -26,6 +27,7 @@ import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, N
 import { Link } from "react-router-dom";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
+import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 
 // Lazy load heavy map component
 const InteractiveMap = lazy(() => import("@/components/InteractiveMap").then(module => ({ default: module.InteractiveMap })));
@@ -714,9 +716,26 @@ export default function TradeCityPage() {
           <AdSlot slot="AD_SLOT_1" format="leaderboard" />
         </div>
 
+        {/* Affiliate Ad Section */}
+        <div className="container-wide">
+          <HomeEmergencyAd />
+        </div>
+
         {/* Listings Section */}
-        <section className="container-wide py-16">
-          <div className="mb-8">
+        <section className="container-wide py-16 relative">
+          {/* Background Grid */}
+          <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+            <Squares
+              direction="diagonal"
+              speed={0.3}
+              squareSize={50}
+              borderColor="rgba(212, 175, 55, 0.1)"
+              hoverFillColor="rgba(212, 175, 55, 0.05)"
+              lineThickness={0.5}
+            />
+          </div>
+
+          <div className="mb-8 relative z-10">
             <SearchFilterBar
               filters={filters}
               onFiltersChange={setFilters}
@@ -725,7 +744,7 @@ export default function TradeCityPage() {
             />
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 relative z-10">
             <h2 className="text-2xl font-bold text-foreground">
               Top Rated Local {tradeInfo.name}s Near {cityName}
             </h2>
@@ -821,6 +840,10 @@ export default function TradeCityPage() {
         {/* CTA Banner */}
         <section className="container-wide py-6">
           <CTABanner trade={tradeInfo.name} city={cityName} />
+        </section>
+
+        <section className="container-wide mb-8">
+          <HomeEmergencyAd />
         </section>
 
         {/* Coverage & Pricing */}

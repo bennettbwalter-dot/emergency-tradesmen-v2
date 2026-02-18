@@ -34,7 +34,7 @@ try {
     if (!rootElement) throw new Error("Root element 'root' not found in index.html");
 
     createRoot(rootElement).render(<App />);
-    console.log("✅ React App Mounted");
+    console.log("React App Mounted");
 } catch (error: any) {
     console.error("🔥 FATAL APP CRASH:", error);
     document.body.innerHTML = `

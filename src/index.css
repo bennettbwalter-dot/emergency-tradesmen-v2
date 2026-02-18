@@ -164,7 +164,18 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* font-family handled by Tailwind 'font-sans' (DM Sans) */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-balance;
   }
 }
 
@@ -184,6 +195,10 @@
   .tracking-luxury {
     letter-spacing: 0.25em;
   }
+
+  .section-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border/40 to-transparent;
+  }
 }
 
 @layer components {
@@ -200,8 +215,8 @@
   }
 
   .card-luxury {
-    @apply bg-card border border-border/50 backdrop-blur-sm;
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(20 10% 8%) 100%);
+    @apply bg-card border border-border/40 backdrop-blur-sm;
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
   }
 
   .glow-gold {

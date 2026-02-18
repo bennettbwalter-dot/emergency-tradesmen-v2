@@ -25,20 +25,23 @@ const badges = [
 
 export function TrustBadges() {
   return (
-    <div className="grid grid-cols-4 gap-4 md:gap-6">
-      {badges.map((badge, index) => (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+      {badges.map((badge) => (
         <div
           key={badge.title}
-          className="group relative flex flex-col items-center text-center p-2 rounded-lg bg-card border border-border/50 hover:border-gold/30 transition-all duration-300"
-          style={{ animationDelay: `${index * 0.1}s` }}
+          className="group relative flex flex-row md:flex-col items-center gap-2.5 md:gap-0 md:justify-center px-3 py-3 md:p-5 rounded-xl md:rounded-2xl bg-card/40 border border-white/5 backdrop-blur-sm transition-all duration-300 hover:border-gold/30 hover:bg-card/60"
         >
-          {/* Glow effect on hover */}
-          <div className="absolute inset-0 rounded-lg bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-          <div className="relative z-10">
-            <div className="w-8 h-8 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center mb-0 group-hover:border-gold/50 transition-colors">
-              <badge.icon className="w-4 h-4 text-gold" />
+          {/* Icon — compact on mobile, larger on desktop */}
+          <div className="relative shrink-0">
+            <div className="w-8 h-8 md:w-11 md:h-11 md:mb-3 rounded-full bg-gold/5 border border-gold/20 flex items-center justify-center group-hover:bg-gold/10 transition-all duration-300">
+              <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
             </div>
+          </div>
+
+          {/* Text — left-aligned on mobile, centered on desktop */}
+          <div className="min-w-0 md:text-center">
+            <h3 className="font-semibold text-sm md:text-base text-foreground leading-tight">{badge.title}</h3>
+            <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider font-medium opacity-80 leading-tight mt-0.5">{badge.description}</p>
           </div>
         </div>
       ))}
