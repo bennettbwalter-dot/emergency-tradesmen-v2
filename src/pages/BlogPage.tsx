@@ -10,6 +10,7 @@ import { SEO } from "@/components/SEO";
 import { AdSlot } from "@/components/AdSlot";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 
 interface BlogPost {
     id: string;
@@ -43,6 +44,8 @@ export default function BlogPage() {
 
     useEffect(() => {
         async function loadPosts() {
+            const countrySuffix = settings.countryCode === 'US' ? '-us' : '-gb';
+
             const { data, error } = await supabase
                 .from('posts')
                 .select('id, title, slug, excerpt, cover_image, published_at, created_at')
@@ -50,230 +53,23 @@ export default function BlogPage() {
                 .order('published_at', { ascending: false });
 
             if (!error && data) {
-                // Add static post if not already present
-                const staticPost: BlogPost = {
-                    id: 'static-uk-emergency-tradesmen',
-                    title: regionalizeText('UK Emergency Tradesmen: Expert Repairs When You Need Them'),
-                    slug: 'uk-emergency-tradesmen-expert-repairs',
-                    excerpt: regionalizeText('When disaster hits your home, you need quick help. Issues like burst pipes, electrical faults, or locked doors can be stressful and risky.'),
-                    cover_image: 'https://images.unsplash.com/photo-1546827209-a218e99fdbe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTI4NzZ8MHwxfHNlYXJjaHwzNXx8dG9vbHN8ZW58MHx8fHwxNzY2NjA4NjgyfDA&ixlib=rb-4.1.0&q=80&w=1080',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
+                // Filter DB posts to only show relevant regionalized ones
+                const regionalData = data.filter(p => {
+                    // If it ends with -us or -gb, only show if it matches current region
+                    if (p.slug.endsWith('-us')) return settings.countryCode === 'US';
+                    if (p.slug.endsWith('-gb')) return settings.countryCode === 'GB';
+                    // If it's a general slug, check if a regionalized version exists in the data
+                    const baseSlug = p.slug;
+                    const hasRegionalVersion = data.some(other =>
+                        other.slug === `${baseSlug}${countrySuffix}`
+                    );
+                    return !hasRegionalVersion;
+                });
 
-                const staticPost2: BlogPost = {
-                    id: 'static-emergency-repairs-guide',
-                    title: regionalizeText('Emergency Repairs: A Simple Guide for Tenants and Landlords'),
-                    slug: 'emergency-repairs-guide-tenants-landlords',
-                    excerpt: regionalizeText('Landlord vs Tenant responsibilities for emergency repairs guide. Learn who handles gas leaks, boiler breakdowns, and structural damage under Section 11 and Awaab\'s Law.'),
-                    cover_image: '/blog/home-emergency/cover.png',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostElectrical: BlogPost = {
-                    id: 'static-electrical-fire-warning',
-                    title: settings.countryCode === 'GB'
-                        ? 'Flickering Lights & Fishy Smells: The Critical Warning Signs of Electrical Fire'
-                        : 'Flickering Lights & Warm Outlets: Is Your Home Wiring a Hidden Fire Hazard?',
-                    slug: 'electrical-fire-warning-signs',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'The sensory indicators of electrical failure. These signs are frequently the final warnings before catastrophic failure.'
-                        : 'A flickering light or warm outlet are red flags indicating aging wiring or overloaded circuits in US homes.',
-                    cover_image: '/images/blog/electrical-fire/cover.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostCO: BlogPost = {
-                    id: 'static-co-safety-guide',
-                    title: settings.countryCode === 'GB'
-                        ? 'The "Silent Killer" in Your Boiler – A Friendly Guide to Staying Safe'
-                        : 'The Invisible Threat in Your HVAC – A Friendly Guide to Staying Safe in the USA',
-                    slug: 'carbon-monoxide-safety-guide',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.'
-                        : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
-                    cover_image: '/blog/emergency-at-home/gas-emergency.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostFrozenCondensate: BlogPost = {
-                    id: 'static-frozen-condensate-pipe',
-                    title: settings.countryCode === 'GB'
-                        ? 'Frozen Condensate Pipe? How to Fix Your Boiler Fast (No Engineer Needed)'
-                        : 'Frozen Condensate Line? How to Fix Your Furnace Fast (No HVAC Tech Needed)',
-                    slug: 'frozen-condensate-pipe-fix',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Boiler showing an error code in freezing weather? A frozen condensate pipe is the most common cause. Learn how to safely thaw it and restore your heating in minutes.'
-                        : 'Furnace locked out with an error code in freezing temps? A frozen condensate drain line is the #1 cause. Learn how to thaw it yourself and get your heat back fast.',
-                    cover_image: '/blog/boiler-frozen.png',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostWaterCeiling: BlogPost = {
-                    id: 'static-water-leaking-ceiling',
-                    title: settings.countryCode === 'GB'
-                        ? 'Water Leaking Through Your Ceiling? What to Do Before the Plumber Arrives'
-                        : 'Water Coming Through Your Ceiling? Emergency Steps Before the Pro Gets There',
-                    slug: 'water-leaking-through-ceiling',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Water dripping or bulging from the ceiling is a plumbing emergency. Learn the 5 steps to limit damage right now — before an emergency plumber arrives.'
-                        : 'Water staining or dripping from your ceiling? Act fast to protect your home. Here are the emergency steps to take before a licensed plumber arrives.',
-                    cover_image: '/images/blog/water-ceiling/ceiling-leak.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostNoPower: BlogPost = {
-                    id: 'static-no-power-neighbours',
-                    title: settings.countryCode === 'GB'
-                        ? 'Power Cut in Your Home But Neighbours Have Power? Here\'s Why'
-                        : 'Lost Power But Your Neighbors Didn\'t? Here\'s What to Check',
-                    slug: 'no-power-but-neighbours-have-power',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Lights out but the rest of the street is fine? This usually means the problem is inside your property.'
-                        : 'Your power is out but your neighbors are fine? The problem is likely inside your home.',
-                    cover_image: '/images/blog/no-power/cover.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostLockedOut: BlogPost = {
-                    id: 'static-locked-out-night',
-                    title: settings.countryCode === 'GB'
-                        ? 'Locked Out at Night? Here\'s What to Do (and What NOT to Do)'
-                        : 'Locked Out of Your House at Night? What to Do and What to Avoid',
-                    slug: 'locked-out-at-night',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Locked out of your home late at night? Don\'t panic. Here\'s a safe, step-by-step guide.'
-                        : 'Stuck outside your home after dark? Here\'s exactly what to do — and what NOT to do.',
-                    cover_image: '/blog/locksmith/family-locked-out.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostBoilerPressure: BlogPost = {
-                    id: 'static-boiler-pressure-dropping',
-                    title: settings.countryCode === 'GB'
-                        ? 'Boiler Pressure Keeps Dropping? 5 Causes and When to Worry'
-                        : 'Furnace Pressure Keeps Dropping? 5 Causes and When to Call for Help',
-                    slug: 'boiler-pressure-keeps-dropping',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Boiler pressure dropping below 1 bar? Here are the 5 most common causes and how to repressurise safely.'
-                        : 'Boiler losing pressure? Here are 5 common causes and how to add pressure safely.',
-                    cover_image: '/images/blog/boiler-pressure/pressure-gauge.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostSewageSmell: BlogPost = {
-                    id: 'static-sewage-smell-house',
-                    title: settings.countryCode === 'GB'
-                        ? 'Sewage Smell in Your House? The 6 Most Likely Causes'
-                        : 'Sewer Smell in Your House? 6 Common Causes and How to Fix Them',
-                    slug: 'sewage-smell-in-house',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'A sewage smell is more than unpleasant — it can indicate a health hazard. Here are the 6 most common causes.'
-                        : 'A sewer gas smell is a health risk. Here are 6 common causes and what to do about each one.',
-                    cover_image: '/images/blog/sewage-smell/drain-cover.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostBoardingUp: BlogPost = {
-                    id: 'static-boarding-up',
-                    title: settings.countryCode === 'GB'
-                        ? 'Window Smashed? Emergency Boarding Up and Glass Repair Guide'
-                        : 'Broken Window? Emergency Boarding Up and Glass Repair Guide',
-                    slug: 'emergency-boarding-up-guide',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'A broken window compromises your home\'s security. Learn how emergency boarding up works and why you need a glazier fast.'
-                        : 'Smashed window causing a hazard? Learn how emergency board up services work and why you need a glass repair pro fast.',
-                    cover_image: '/blog/emergency-at-home/glazier.png',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostRoofTarping: BlogPost = {
-                    id: 'static-roof-tarping',
-                    title: settings.countryCode === 'GB'
-                        ? 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips'
-                        : 'Roof Leaking in Heavy Rain? Emergency Tarping and Repair Tips',
-                    slug: 'emergency-roof-leak-tarping',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Water pouring in through the roof? Learn how emergency roof tarping stops the leak and protects your home until repairs can be made.'
-                        : 'Water pouring in? Learn how emergency roof tarping stops leaks immediately and protects your home until repairs can be made.',
-                    cover_image: '/blog/water-leak/attic-roof-leak.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostCarWontStart: BlogPost = {
-                    id: 'static-car-wont-start',
-                    title: settings.countryCode === 'GB'
-                        ? 'Car Won\'t Start? 5 Reasons Why and When to Call Recovery'
-                        : 'Car Won\'t Start? 5 Reasons Why and When to Call a Tow Truck',
-                    slug: 'car-wont-start-guide',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Turn the key and nothing happens? From dead batteries to starter motor failure, here are the top 5 reasons your car won\'t start.'
-                        : 'Turn the key and nothing happens? From dead batteries to starter failure, here are the top 5 reasons your car won\'t start.',
-                    cover_image: '/blog/emergency-at-home/breakdown-recovery.png',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostStructural: BlogPost = {
-                    id: 'static-structural-cracks',
-                    title: settings.countryCode === 'GB'
-                        ? 'Cracks in Walls? When to Call a Structural Engineer'
-                        : 'Cracks in Drywall? When to Call a Structural Engineer',
-                    slug: 'structural-cracks-guide',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Worried about cracks in your walls? Learn the difference between harmless plaster cracks and serious subsidence signs.'
-                        : 'Worried about cracks in your walls? Learn the difference between settling cracks and serious foundation issues.',
-                    cover_image: '/blog/home-emergency/assess.png',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostWaterRestoration: BlogPost = {
-                    id: 'static-water-restoration',
-                    title: settings.countryCode === 'GB'
-                        ? 'Flooded House? The 6-Step Water Damage Restoration Process'
-                        : 'Flooded House? The 6-Step Water Damage Restoration Process',
-                    slug: 'water-damage-restoration-process',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitising.'
-                        : 'Flooding or a major leak? Learn the professional steps for water damage restoration, from extraction to drying and sanitizing.',
-                    cover_image: '/emergency-water-restoration-fallback.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                const staticPostAC: BlogPost = {
-                    id: 'static-ac-warm-air',
-                    title: settings.countryCode === 'GB'
-                        ? 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner'
-                        : 'AC Blowing Warm Air? Troubleshooting Your Air Conditioner',
-                    slug: 'ac-blowing-warm-air-fix',
-                    excerpt: settings.countryCode === 'GB'
-                        ? 'Air con not cooling? It might be a simple fix. Check these 5 common issues before calling an engineer.'
-                        : 'AC unit running but not cooling? It might be a simple fix. Check these 5 common issues before calling an HVAC tech.',
-                    cover_image: '/images/blog/hvac/ac-repair-cover.jpg',
-                    published_at: new Date().toISOString(),
-                    created_at: new Date().toISOString()
-                };
-
-                // Filter out if it already exists from DB to obtain unique key
-                const uniqueData = data.filter(p => p.slug !== staticPost.slug && p.slug !== staticPost2.slug && p.slug !== staticPostCO.slug && p.slug !== staticPostElectrical.slug && p.slug !== staticPostFrozenCondensate.slug && p.slug !== staticPostWaterCeiling.slug && p.slug !== staticPostNoPower.slug && p.slug !== staticPostLockedOut.slug && p.slug !== staticPostBoilerPressure.slug && p.slug !== staticPostSewageSmell.slug && p.slug !== staticPostBoardingUp.slug && p.slug !== staticPostRoofTarping.slug && p.slug !== staticPostCarWontStart.slug && p.slug !== staticPostStructural.slug && p.slug !== staticPostWaterRestoration.slug && p.slug !== staticPostAC.slug).map(p => ({
-                    ...p,
-                    title: regionalizeText(p.title),
-                    excerpt: regionalizeText(p.excerpt)
-                }));
-                setPosts([staticPostBoardingUp, staticPostRoofTarping, staticPostCarWontStart, staticPostStructural, staticPostWaterRestoration, staticPostAC, staticPostWaterCeiling, staticPostNoPower, staticPostLockedOut, staticPostBoilerPressure, staticPostSewageSmell, staticPostFrozenCondensate, staticPostElectrical, staticPostCO, staticPost, staticPost2, ...uniqueData]);
+                // Helper to clean up slugs for the link (remove regional suffix)
+                // Actually, we want to keep the slug as is for the Link, but the BlogPostPageFix will handle it.
+                // Wait, if we link to slug-us, the Router will find it.
+                setPosts(regionalData);
             }
             setIsLoading(false);
         }
@@ -281,116 +77,161 @@ export default function BlogPage() {
         loadPosts();
     }, []);
 
+    // Featured Post Logic (First post is featured)
+    const featuredPost = posts[0];
+    const regularPosts = posts.slice(1);
+
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={regionalizeText("Trade Tips & Guides | Emergency Tradesmen UK")}
-                description={regionalizeText("Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson.")}
+                title={regionalizeText("The Dispatch | Emergency Tradesmen")}
+                description={regionalizeText("Critical briefing: Expert advice, safety guides, and maintenance tips for homeowners.")}
                 canonical="/blog"
-                jsonLd={{
-                    "@context": "https://schema.org",
-                    "@type": "CollectionPage",
-                    "name": regionalizeText("Trade Tips & Guides"),
-                    "description": regionalizeText("Expert advice, guides, and tips for home maintenance, emergency repairs, and finding the right tradesperson."),
-                    "url": `https://emergencytradesmen.net${settings.countryCode === 'GB' ? '' : '/us'}/blog`,
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": regionalizeText("Emergency Tradesmen UK"),
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": "https://emergencytradesmen.net/et-logo-v2.png"
-                        }
-                    }
-                }}
             />
 
-            {/* Hero Section */}
-            <div className="bg-secondary/30 border-b border-border">
-                <div className="container mx-auto px-4 py-16 text-center">
-
-                    <h1 className="text-4xl md:text-5xl font-display text-foreground mb-4">
-                        Trade Tips & Guides
-                    </h1>
-                    <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
-                        Expert advice for maintaining your home and handling emergencies.
-                    </p>
+            {/* "Newspaper" Header Bar */}
+            <div className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
+                <div className="container mx-auto px-4 h-14 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <Link to="/" className="text-xl font-display font-bold tracking-tighter hover:text-gold transition-colors">
+                            The Dispatch.
+                        </Link>
+                        <div className="hidden md:flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground border-l border-border/50 pl-4">
+                            <span>{format(new Date(), 'EEEE, MMMM do')}</span>
+                            <span className="text-gold">•</span>
+                            <span>Valid {settings.countryCode}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Ad Slot: Between hero and posts grid */}
-            <div className="container mx-auto px-4 pt-8">
-                <AdSlot slot="AD_SLOT_BLOG" format="leaderboard" />
-            </div>
-
-            {/* Posts Grid */}
-            <div className="container mx-auto px-4 py-12">
-                {isLoading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((n) => (
-                            <div key={n} className="h-[400px] bg-secondary/50 animate-pulse rounded-xl" />
-                        ))}
-                    </div>
-                ) : posts.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {posts.map((post) => (
-                            <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow border-border/50 bg-card">
-                                {/* Cover Image Placeholder/Real */}
-                                <div className="aspect-video w-full bg-secondary/30 relative overflow-hidden rounded-t-xl group">
-                                    {post.cover_image ? (
-                                        <img
-                                            src={post.cover_image}
-                                            alt={post.title}
-                                            loading="lazy"
-                                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-secondary text-foreground/60">
-                                            <span className="text-4xl">📝</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <CardHeader className="space-y-2">
-                                    <div className="flex items-center gap-2 text-xs text-foreground/70">
-                                        <CalendarDays className="w-3 h-3" />
-                                        <span>
-                                            {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
-                                        </span>
-                                    </div>
-                                    <h2 className="text-xl font-bold font-display line-clamp-2 group-hover:text-primary transition-colors">
-                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}>
-                                            {post.title}
-                                        </Link>
-                                    </h2>
-                                </CardHeader>
-
-                                <CardContent className="flex-grow">
-                                    <p className="text-foreground/80 line-clamp-3 text-sm">
-                                        {post.excerpt}
-                                    </p>
-                                </CardContent>
-
-                                <CardFooter className="pt-0">
-                                    <Button asChild variant="ghost" className="w-full justify-between hover:bg-secondary/50">
-                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}>
-                                            Read Article
-                                            <ArrowRight className="w-4 h-4 ml-2" />
-                                        </Link>
-                                    </Button>
-                                </CardFooter>
-                            </Card>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-12">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary mb-4">
-                            <span className="text-2xl">📭</span>
+            {isLoading ? (
+                <div className="container mx-auto px-4 py-20">
+                    <div className="animate-pulse space-y-8">
+                        <div className="h-[60vh] bg-secondary/30 rounded-xl" />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[1, 2, 3].map(i => <div key={i} className="h-64 bg-secondary/20 rounded-lg" />)}
                         </div>
-                        <h3 className="text-xl font-semibold mb-2">No articles yet</h3>
-                        <p className="text-muted-foreground">Check back soon for updates!</p>
                     </div>
-                )}
-            </div>
+                </div>
+            ) : posts.length > 0 ? (
+                <>
+                    {/* "Netflix" Hero Section - Featured Post */}
+                    {featuredPost && (
+                        <div className="relative w-full h-[85vh] overflow-hidden group">
+                            {/* Background Image */}
+                            <div className="absolute inset-0">
+                                {featuredPost.cover_image && (
+                                    <img
+                                        src={featuredPost.cover_image}
+                                        alt={featuredPost.title}
+                                        className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-110"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-background via-black/50 to-transparent" />
+                            </div>
+
+                            {/* Content Overlay */}
+                            <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 lg:p-24 z-10">
+                                <div className="max-w-4xl space-y-6 animate-fade-up">
+                                    <Badge className="bg-gold text-black hover:bg-gold/90 border-none uppercase tracking-widest px-3 py-1 font-bold">
+                                        Cover Story
+                                    </Badge>
+                                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
+                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
+                                            {featuredPost.title}
+                                        </Link>
+                                    </h1>
+                                    <p className="text-lg md:text-2xl text-white/90 max-w-2xl font-light leading-relaxed drop-shadow-md line-clamp-3">
+                                        {featuredPost.excerpt}
+                                    </p>
+
+                                    <div className="flex items-center gap-4 pt-4">
+                                        <Button asChild size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-gold hover:text-black border-none rounded-none transition-all font-bold tracking-tight">
+                                            <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`}>
+                                                Read Article
+                                            </Link>
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Ad Slot */}
+                    <div className="container mx-auto px-4 -mt-8 relative z-20 mb-16">
+                        <div className="bg-background/50 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-2xl">
+                            <AdSlot slot="AD_SLOT_BLOG_HERO" format="leaderboard" />
+                        </div>
+                    </div>
+
+                    <div className="container mx-auto px-4 mb-16">
+                        <HomeEmergencyAd />
+                    </div>
+
+                    {/* "Newspaper" Grid Section */}
+                    <div className="container mx-auto px-4 pb-24">
+                        <div className="flex items-center justify-between mb-12 border-b-2 border-foreground/10 pb-4">
+                            <h2 className="text-3xl font-display font-bold">Latest Dispatches</h2>
+                            <span className="text-sm font-mono uppercase tracking-widest text-muted-foreground">Edition {new Date().getFullYear()}.{new Date().getMonth() + 1}</span>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
+                            {regularPosts.map((post, index) => {
+                                // Dynamic Layout Logic: First 2 posts are large (6 cols), rest are smaller (4 cols)
+                                const isLarge = index < 2;
+                                const colSpan = isLarge ? "lg:col-span-6" : "lg:col-span-4";
+
+                                return (
+                                    <Link
+                                        key={post.id}
+                                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
+                                        className={`${colSpan} group flex flex-col gap-4 border-b border-border/30 pb-8`}
+                                    >
+                                        <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">
+                                            {post.cover_image && (
+                                                <img
+                                                    src={post.cover_image}
+                                                    alt={post.title}
+                                                    loading="lazy"
+                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                                                />
+                                            )}
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-wider text-muted-foreground">
+                                                <span>{format(new Date(post.published_at || post.created_at), 'MMM d')}</span>
+                                                <span className="w-px h-3 bg-border" />
+                                                <span className="text-gold font-bold group-hover:text-gold-dark transition-colors">Briefing</span>
+                                            </div>
+
+                                            <h3 className={`font-display font-bold leading-tight group-hover:text-primary transition-colors ${isLarge ? 'text-3xl' : 'text-xl'}`}>
+                                                {post.title}
+                                            </h3>
+
+                                            <p className="text-muted-foreground line-clamp-3 leading-relaxed text-sm">
+                                                {post.excerpt}
+                                            </p>
+
+                                            <div className="pt-2 flex items-center text-sm font-bold text-foreground group-hover:translate-x-1 transition-transform">
+                                                Read Analysis <ArrowRight className="w-4 h-4 ml-2 text-gold" />
+                                            </div>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <div className="min-h-[50vh] flex flex-col items-center justify-center">
+                    <h3 className="text-2xl font-display font-bold mb-2">No dispatches found</h3>
+                    <p className="text-muted-foreground">Check back for future updates.</p>
+                </div>
+            )}
         </div>
     );
 }

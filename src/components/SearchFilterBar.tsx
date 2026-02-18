@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { cities } from "@/lib/trades";
+import { cities, trades } from "@/lib/trades";
 import { MapPin } from "lucide-react";
 import {
     Sheet,
@@ -137,17 +137,26 @@ export function SearchFilterBar({
                                 // Use pure navigation
                                 onValueChange={(val) => {
                                     // Determine trade slug from current context or default
+                                    // Determine trade slug from current context or default
                                     const pathParts = window.location.pathname.split('/');
-                                    let tradeSlug = 'emergency-plumber';
-                                    const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'breakdown', 'emergency-plumber', 'emergency-electrician', '24-hour-locksmith'];
+                                    let tradeSlug = 'plumber'; // Default base slug
+
+                                    // Build dynamic list of known trades from the source of truth
+                                    // map trades to 'plumber', 'roofer', etc.
+
+                                    const knownBaseTrades = trades.map(t => t.slug);
 
                                     // Try to find trade in existing URL
                                     for (const part of pathParts) {
-                                        if (knownTrades.includes(part)) {
-                                            tradeSlug = part;
+                                        // internal Clean: remove 'emergency-' prefix to check against base slugs
+                                        const cleanPart = part.replace(/^emergency-/, '');
+                                        if (knownBaseTrades.includes(cleanPart)) {
+                                            tradeSlug = cleanPart;
                                             break;
                                         }
                                     }
+
+                                    // Navigate to the standardized route: /emergency-{slug}/{city}
                                     navigate(`/emergency-${tradeSlug}/${val.toLowerCase()}`);
                                 }}
                             />
