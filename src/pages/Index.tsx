@@ -4,7 +4,6 @@ import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { EmergencyTriageModal } from "@/components/EmergencyTriageModal";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
@@ -64,8 +63,6 @@ const Index = () => {
       <>
         <Header />
         <main className="min-h-screen bg-background">
-          <EmergencyTriageModal />
-
           <HeroSection />
 
           <Suspense fallback={<div className="h-96 w-full" />}>

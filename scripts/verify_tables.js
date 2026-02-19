@@ -17,26 +17,20 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function verifyTables() {
-    console.log('--- Checking "posts" table ---');
-    const { data: postsData, error: postsError } = await supabase
-        .from('posts')
-        .select('count', { count: 'exact', head: true });
+    const tables = ['posts', 'blog_posts', 'businesses', 'newsletter_subscriptions'];
 
-    if (postsError) {
-        console.log('"posts" table error:', postsError.message);
-    } else {
-        console.log('"posts" table exists, count:', postsData?.[0]?.count || 0);
-    }
+    for (const table of tables) {
+        console.log(`--- Checking "${table}" table ---`);
+        const { count, error } = await supabase
+            .from(table)
+            .select('*', { count: 'exact', head: true });
 
-    console.log('\n--- Checking "blog_posts" table ---');
-    const { data: blogPostsData, error: blogPostsError } = await supabase
-        .from('blog_posts')
-        .select('count', { count: 'exact', head: true });
-
-    if (blogPostsError) {
-        console.log('"blog_posts" table error:', blogPostsError.message);
-    } else {
-        console.log('"blog_posts" table exists, count:', blogPostsData?.[0]?.count || 0);
+        if (error) {
+            console.log(`"${table}" table error:`, error.message);
+        } else {
+            console.log(`"${table}" table exists, count:`, count);
+        }
+        console.log('');
     }
 }
 

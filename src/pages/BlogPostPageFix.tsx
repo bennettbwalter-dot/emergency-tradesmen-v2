@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
@@ -36,6 +36,7 @@ export default function BlogPostPage() {
     const { setTheme } = useSimpleTheme();
     const { settings } = useLocalization();
     const { slug } = useParams();
+    const routerNavigate = useNavigate();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [debugInfo, setDebugInfo] = useState<any>({}); // For troubleshooting 404s
@@ -152,6 +153,12 @@ export default function BlogPostPage() {
             if (!slug) return;
             setIsLoading(true);
 
+            // Handle malformed US slugs (redirect to US blog index)
+            if (slug.toLowerCase() === 'us' || slug.toLowerCase() === 'usa') {
+                routerNavigate('/us/blog', { replace: true });
+                return;
+            }
+
             // 1. Try regionalized slug first (e.g. "my-post-us")
             const regionSuffix = settings.countryCode === 'US' ? '-us' : '-gb';
             const regionalSlug = `${slug}${regionSuffix}`;
@@ -170,6 +177,7 @@ export default function BlogPostPage() {
             const { data: posts, error } = await supabase
                 .from('posts')
                 .select('*')
+                .eq('published', true)
                 .or(`slug.eq.${regionalSlug},slug.eq.${slug}`);
 
             debug.attempts.push('Exact/Regional: ' + (posts ? posts.length : 0) + ' matches ' + (error ? 'Error: ' + JSON.stringify(error) : ''));
@@ -191,6 +199,7 @@ export default function BlogPostPage() {
             const { data: fuzzyData, error: fuzzyError } = await supabase
                 .from('posts')
                 .select('*')
+                .eq('published', true)
                 .ilike('slug', `${baseSlug}%`)
                 .limit(5); // Get a few candidates
 
