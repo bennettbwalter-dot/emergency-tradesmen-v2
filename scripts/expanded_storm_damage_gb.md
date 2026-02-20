@@ -1,6 +1,4 @@
 
-# Storm Surge: The Survival Guide for High-Wind Emergency Home Repairs
-
 **Date:** February 20, 2026
 **Primary Keyword:** emergency storm damage repair
 **Secondary Keywords:** wind damage roof, local roofing contractors, emergency tradesmen near me, storm damage assessment, residential storm recovery
