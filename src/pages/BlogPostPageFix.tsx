@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
@@ -15,6 +15,7 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 import { Info, ExternalLink, ShieldCheck, MapPin } from "lucide-react";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 import { GlossaryBox } from "@/components/GlossaryBox";
+import { ChecklistBox } from "@/components/ChecklistBox";
 
 interface BlogPost {
     id: string;
@@ -67,7 +68,7 @@ export default function BlogPostPage() {
     const AIOverviewBox = ({ content }: { content: string }) => (
         <div className="my-8 relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-gold/40 to-amber-500/40 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative bg-secondary/30 border border-gold/20 rounded-xl p-6 md:p-8 backdrop-blur-sm overflow-hidden">
+            <div className="relative bg-secondary/30 border-2 border-gold/30 rounded-xl p-6 md:p-8 backdrop-blur-sm overflow-hidden">
                 <div className="absolute top-0 right-0 p-3 opacity-10">
                     <Info className="w-12 h-12 text-gold" />
                 </div>
@@ -90,7 +91,7 @@ export default function BlogPostPage() {
         const isUK = settings.countryCode === 'GB';
         return (
             <div className="mt-16 pt-16 border-t border-border/50">
-                <div className="bg-secondary/20 rounded-2xl p-8 border border-border/50">
+                <div className="bg-secondary/40 rounded-2xl p-8 border-2 border-gold/20 backdrop-blur-sm shadow-xl shadow-gold/5">
                     <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                         <Info className="w-5 h-5 text-gold" />
                         References & Official Assistance
@@ -484,116 +485,156 @@ export default function BlogPostPage() {
                                 {/* Main Content Column */}
                                 <div className="lg:col-span-12">
                                     <div className="font-body text-foreground space-y-8">
-                                        {/* AI Overview Box (extracted from content) */}
+                                        {/* Structured Content Processing Pipeline */}
                                         {(() => {
-                                            const firstParagraph = post.content.split('\n\n')[0];
-                                            const isSnippet = firstParagraph && firstParagraph.length > 50 && firstParagraph.length < 500 && !firstParagraph.includes('##');
-                                            if (isSnippet) {
-                                                const cleanedContent = firstParagraph.replace(/\*\*/g, '').replace(/_/g, '');
-                                                return <AIOverviewBox content={regionalizeText(cleanedContent)} />;
-                                            }
-                                            return null;
-                                        })()}
+                                            let content = post.content;
+                                            const structuredElements = [];
 
-                                        {/* Glossary Section (New Grid Design) */}
-                                        {(() => {
-                                            const glossaryMatch = post.content.match(/Glossary of.*?\n([\s\S]*?)(?=\n\n##|$)/i);
-                                            if (glossaryMatch) {
-                                                const glossaryContent = glossaryMatch[1];
-                                                const glossaryItems = glossaryContent.split('\n').map(line => {
-                                                    const match = line.match(/^\d+\.\s+\*\*(.*?)\*\*:\s+(.*)$/);
-                                                    if (match) {
-                                                        return { term: regionalizeText(match[1]), definition: regionalizeText(match[2]) };
+                                            // 1. Detect and Extract Glossaries
+                                            const glossaryMatches = Array.from(content.matchAll(/## (?:[\d.]+\s+)?(Glossary of.*?|.*?Glossary)\n+([\s\S]*?)(?=\n+##|$)/gi));
+                                            glossaryMatches.forEach(match => {
+                                                const title = regionalizeText(match[1]);
+                                                const glossaryLines = match[2].trim().split('\n');
+                                                const items = glossaryLines.map(line => {
+                                                    const itemMatch = line.match(/^(?:\d+\.\s+)?(?:\*\*)?(.+?)(?::\*\*|\*\*:\s*|:\s*)\s*(.*)$/);
+                                                    if (itemMatch) {
+                                                        return { term: regionalizeText(itemMatch[1]), definition: regionalizeText(itemMatch[2]) };
                                                     }
                                                     return null;
-                                                }).filter((item): item is { term: string; definition: string } => item !== null);
+                                                }).filter((i): i is { term: string; definition: string } => i !== null);
 
-                                                if (glossaryItems.length > 0) {
-                                                    const titleMatch = post.content.match(/(Glossary of.*?)(\n|$)/i);
-                                                    const title = titleMatch ? regionalizeText(titleMatch[1]) : "Glossary of Terms";
-                                                    return <GlossaryBox title={title} items={glossaryItems} />;
+                                                if (items.length > 0) {
+                                                    structuredElements.push({
+                                                        type: 'glossary',
+                                                        title,
+                                                        items,
+                                                        original: match[0]
+                                                    });
                                                 }
-                                            }
-                                            return null;
-                                        })()}
+                                            });
 
-                                        <ReactMarkdown
-                                            remarkPlugins={[remarkGfm]}
-                                            components={{
-                                                h1: ({ node, ...props }) => (
-                                                    <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
-                                                ),
-                                                h2: ({ node, ...props }) => (
-                                                    <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
-                                                ),
-                                                h3: ({ node, ...props }) => (
-                                                    <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
-                                                ),
-                                                p: ({ node, ...props }) => (
-                                                    <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
-                                                ),
-                                                ul: ({ node, ...props }) => (
-                                                    <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
-                                                ),
-                                                li: ({ node, ...props }) => (
-                                                    <li {...props} />
-                                                ),
-                                                a: ({ node, ...props }) => {
-                                                    const isInternal = props.href?.includes('emergencytradesmen.net');
-                                                    return (
-                                                        <a
-                                                            {...props}
-                                                            className={`font-semibold text-gold no-underline hover:underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
-                                                        >
-                                                            {props.children}
-                                                            {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
-                                                        </a>
-                                                    );
-                                                },
-                                                blockquote: ({ node, ...props }) => (
-                                                    <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
-                                                ),
-                                                // RELAXED Image Rules: Preserve aspect ratio, containment to prevent cropping
-                                                img: ({ node, ...props }) => (
-                                                    <div className="my-12 w-full flex justify-center">
-                                                        <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
-                                                            <img
-                                                                {...props}
-                                                                className="w-full h-auto max-h-[800px] object-contain mx-auto"
-                                                                loading="lazy"
-                                                            />
-                                                        </div>
-                                                        {props.title && (
-                                                            <p className="text-center text-sm text-foreground/70 mt-3 italic">
-                                                                {props.title}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                ),
-                                                table: ({ node, ...props }) => (
-                                                    <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
-                                                        <table {...props} className="w-full text-sm text-left font-body" />
-                                                    </div>
-                                                ),
-                                                thead: ({ node, ...props }) => (
-                                                    <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
-                                                ),
-                                                th: ({ node, ...props }) => (
-                                                    <th {...props} className="px-6 py-3 tracking-wider" />
-                                                ),
-                                                td: ({ node, ...props }) => (
-                                                    <td {...props} className="px-6 py-4 border-t border-border" />
-                                                ),
-                                            }}
-                                        >
-                                            {(() => {
-                                                const lines = post.content.split('\n\n');
-                                                const firstParagraph = lines[0];
-                                                const isSnippet = firstParagraph && firstParagraph.length > 50 && firstParagraph.length < 500 && !firstParagraph.includes('##');
-                                                const finalContent = isSnippet ? lines.slice(1).join('\n\n') : post.content;
-                                                return regionalizeText(finalContent);
-                                            })()}
-                                        </ReactMarkdown>
+                                            // 2. Detect and Extract Checklists / Appendices / References
+                                            const checklistMatches = Array.from(content.matchAll(/## (?:[\d.]+\s+)?(Checklist:.*?|Steps to.*?|Appendix:.*?|Appendix|Reference Block|References|.*?Checklist)\n+([\s\S]*?)(?=\n+##|$)/gi));
+                                            checklistMatches.forEach(match => {
+                                                const title = regionalizeText(match[1]);
+                                                const checklistLines = match[2].trim().split('\n')
+                                                    .map(l => l.trim())
+                                                    .filter(l => l.length > 0 && (/^\d+\./.test(l) || /^-\s/.test(l)));
+
+                                                if (checklistLines.length > 0) {
+                                                    structuredElements.push({
+                                                        type: 'checklist',
+                                                        title,
+                                                        items: checklistLines.map(l => regionalizeText(l.replace(/^- /, '1. '))),
+                                                        original: match[0]
+                                                    });
+                                                }
+                                            });
+
+                                            // Remove extracted elements from main content to avoid duplication
+                                            let processedMarkdown = content;
+                                            structuredElements.forEach(el => {
+                                                processedMarkdown = processedMarkdown.replace(el.original, '');
+                                            });
+
+                                            // Handle AI Overview removal (if it's just the first paragraph)
+                                            const lines = processedMarkdown.split('\n\n');
+                                            const firstParagraph = lines[0];
+                                            const isSnippet = firstParagraph && firstParagraph.length > 50 && firstParagraph.length < 500 && !firstParagraph.includes('##');
+                                            if (isSnippet) {
+                                                const cleanedSnippet = firstParagraph.replace(/\*\*/g, '').replace(/_/g, '');
+                                                processedMarkdown = lines.slice(1).join('\n\n');
+                                                // We'll render the AI Overview separately below
+                                            }
+
+                                            return (
+                                                <>
+                                                    {isSnippet && <AIOverviewBox content={regionalizeText(firstParagraph.replace(/\*\*/g, '').replace(/_/g, ''))} />}
+
+                                                    <ReactMarkdown
+                                                        remarkPlugins={[remarkGfm]}
+                                                        components={{
+                                                            h1: ({ node, ...props }) => (
+                                                                <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
+                                                            ),
+                                                            h2: ({ node, ...props }) => (
+                                                                <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
+                                                            ),
+                                                            h3: ({ node, ...props }) => (
+                                                                <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
+                                                            ),
+                                                            p: ({ node, ...props }) => (
+                                                                <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
+                                                            ),
+                                                            ul: ({ node, ...props }) => (
+                                                                <ul {...props} className="list-disc pl-6 mb-6 space-y-2 font-normal text-[15px] md:text-[18px] leading-[1.6] text-foreground/90" />
+                                                            ),
+                                                            li: ({ node, ...props }) => (
+                                                                <li {...props} />
+                                                            ),
+                                                            a: ({ node, ...props }) => {
+                                                                const isInternal = props.href?.includes('emergencytradesmen.net');
+                                                                return (
+                                                                    <a
+                                                                        {...props}
+                                                                        className={`font-semibold text-gold no-underline hover:underline ${isInternal ? 'decoration-gold/30 underline-offset-4' : ''}`}
+                                                                    >
+                                                                        {props.children}
+                                                                        {isInternal && <ChevronRight className="inline-block w-4 h-4 ml-0.5" />}
+                                                                    </a>
+                                                                );
+                                                            },
+                                                            blockquote: ({ node, ...props }) => (
+                                                                <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
+                                                            ),
+                                                            img: ({ node, ...props }) => (
+                                                                <div className="my-12 w-full flex justify-center">
+                                                                    <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
+                                                                        <img
+                                                                            {...props}
+                                                                            className="w-full h-auto max-h-[800px] object-contain mx-auto"
+                                                                            loading="lazy"
+                                                                        />
+                                                                    </div>
+                                                                    {props.title && (
+                                                                        <p className="text-center text-sm text-foreground/70 mt-3 italic">
+                                                                            {props.title}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                            ),
+                                                            table: ({ node, ...props }) => (
+                                                                <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
+                                                                    <table {...props} className="w-full text-sm text-left font-body" />
+                                                                </div>
+                                                            ),
+                                                            thead: ({ node, ...props }) => (
+                                                                <thead {...props} className="text-xs uppercase bg-secondary/50 text-muted-foreground font-semibold" />
+                                                            ),
+                                                            th: ({ node, ...props }) => (
+                                                                <th {...props} className="px-6 py-3 tracking-wider" />
+                                                            ),
+                                                            td: ({ node, ...props }) => (
+                                                                <td {...props} className="px-6 py-4 border-t border-border" />
+                                                            ),
+                                                        }}
+                                                    >
+                                                        {regionalizeText(processedMarkdown)}
+                                                    </ReactMarkdown>
+
+                                                    {/* Render Structured Elements at the end of content area or where detected? 
+                                                        Actually, the user wants them site-wide where they appear. 
+                                                        Rendering them here (after main text) is a safe default if they were 'extracted'.
+                                                    */}
+                                                    {structuredElements.map((el, i) => (
+                                                        <React.Fragment key={i}>
+                                                            {el.type === 'glossary' && <GlossaryBox title={el.title} items={el.items as any} />}
+                                                            {el.type === 'checklist' && <ChecklistBox title={el.title} items={el.items as any} />}
+                                                        </React.Fragment>
+                                                    ))}
+                                                </>
+                                            );
+                                        })()}
 
                                         <div className="mt-12 pt-12 border-t border-border/30">
                                             <HomeEmergencyAd />
@@ -658,6 +699,21 @@ export default function BlogPostPage() {
                                     ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
                                     usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
                                 },
+                                'structural-cracks-foundation-repair': {
+                                    trade: 'Builder', tradeSlug: 'builder',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'structural-cracks-subsidence-survey': {
+                                    trade: 'Builder', tradeSlug: 'builder',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'emergency-storm-damage-repair': {
+                                    trade: 'Roofer', tradeSlug: 'roofer',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
                                 'car-wont-start-guide': {
                                     trade: 'Breakdown Recovery', tradeSlug: 'breakdown',
                                     ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
@@ -701,7 +757,7 @@ export default function BlogPostPage() {
 
                             return (
                                 <div className="container mx-auto px-4 max-w-4xl py-8">
-                                    <div className="border border-border/50 rounded-xl p-6 bg-secondary/20">
+                                    <div className="border-2 border-gold/20 rounded-xl p-6 bg-secondary/40 backdrop-blur-sm shadow-xl shadow-gold/5">
                                         <h3 className="text-lg font-semibold text-foreground mb-4">
                                             Search for an Emergency {tradeData.trade} Near You
                                         </h3>

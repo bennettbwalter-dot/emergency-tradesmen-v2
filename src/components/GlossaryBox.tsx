@@ -12,7 +12,7 @@ interface GlossaryItem {
 interface GlossaryBoxProps {
     title: string;
     items: GlossaryItem[];
-    className?: string; // Allow external styling
+    className?: string;
 }
 
 export const GlossaryBox: React.FC<GlossaryBoxProps> = ({ title, items, className }) => {
@@ -20,33 +20,30 @@ export const GlossaryBox: React.FC<GlossaryBoxProps> = ({ title, items, classNam
 
     return (
         <div className={cn("my-16 scroll-mt-20", className)} id="glossary">
-            <div className="flex items-center gap-3 mb-8 border-b border-gold/20 pb-4">
-                <div className="p-2 bg-gradient-to-br from-gold/20 to-gold/5 rounded-lg border border-gold/20 shadow-sm shadow-gold/10">
-                    <BookOpen className="w-6 h-6 text-gold" />
+            <Card className="overflow-hidden border-2 border-gold/30 bg-secondary/40 backdrop-blur-md rounded-[2rem] shadow-2xl shadow-gold/10 relative group transition-all duration-500 hover:border-gold/50">
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="p-8 md:p-12 lg:p-16 space-y-8 relative z-10">
+                    <div className="flex items-center gap-4 border-b border-border/50 pb-6">
+                        <div className="p-3 bg-gold/10 rounded-2xl">
+                            <BookOpen className="w-6 h-6 text-gold" />
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground m-0 tracking-tight">
+                            {title}
+                        </h2>
+                    </div>
+
+                    <ul className="space-y-6 m-0 p-0 list-none">
+                        {items.map((item, index) => (
+                            <li key={index} className="flex items-start gap-4 group/item">
+                                <div className="mt-2.5 w-2 h-2 rounded-full bg-gold/30 flex-shrink-0 group-hover/item:bg-gold transition-all duration-300 scale-100 group-hover/item:scale-125" />
+                                <p className="text-[16px] md:text-[19px] leading-relaxed m-0 text-foreground/85">
+                                    <strong className="font-bold text-foreground tracking-tight">{item.term}:</strong> <span className="text-foreground/80">{item.definition}</span>
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground m-0 tracking-tight">
-                    {title}
-                </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {items.map((item, index) => (
-                    <Card
-                        key={index}
-                        className="group relative overflow-hidden bg-secondary/5 border-gold/10 hover:border-gold/30 hover:bg-secondary/10 hover:shadow-lg hover:shadow-gold/5 transition-all duration-300 h-full flex flex-col p-6"
-                    >
-                        {/* Decorative background accent */}
-                        <div className="absolute top-0 right-0 w-16 h-16 bg-gold/5 rounded-bl-full -mr-8 -mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                        <h3 className="text-lg font-bold text-gold mb-3 font-display relative z-10 group-hover:translate-x-1 transition-transform duration-300">
-                            {item.term}
-                        </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed relative z-10 group-hover:text-foreground/80 transition-colors">
-                            {item.definition}
-                        </p>
-                    </Card>
-                ))}
-            </div>
+            </Card>
         </div>
     );
 };
