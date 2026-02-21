@@ -48,6 +48,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
 const VerifyDocumentsPage = lazy(() => import("./pages/VerifyDocumentsPage"));
 const LocationsDirectory = lazy(() => import("./pages/LocationsDirectory"));
+const VoiceReporter = lazy(() => import("./components/VoiceReporter"));
 
 // Admin Pages Lazy Load
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
@@ -149,6 +150,7 @@ const App = () => {
                             <Route path="/login" element={<AuthPage defaultTab="login" />} />
                             <Route path="/register" element={<AuthPage defaultTab="register" />} />
                             <Route path="/auth/callback" element={<AuthCallback />} />
+                            <Route path="/voice-report" element={<VoiceReporter />} />
 
 
                             {/* Explicit Trade Routes (Resolves conflict with /:countryCode) */}

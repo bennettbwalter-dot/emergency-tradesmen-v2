@@ -113,8 +113,23 @@ const upload = multer({
 const TRADES = [
     "gas-engineer", "plumber", "electrician", "glazier",
     "locksmith", "drain-specialist", "breakdown", "roofer",
-    "builder", "water-restoration", "hvac",
+    "builder", "air-conditioning", "water-restoration",
 ];
+
+// Detailed trade descriptions for the triage model
+const TRADE_DESCRIPTIONS = {
+    "gas-engineer": "Gas leaks, gas smell, carbon monoxide, boiler issues, pilot light, gas meter, hissing from pipes",
+    "plumber": "Burst pipes, water leaks, flooding, no hot water, dripping taps, toilet issues, frozen pipes, radiator leaks",
+    "electrician": "Power cuts, no electricity, fuse box tripped, sparks, burning smell from sockets, flickering lights, electric shock",
+    "glazier": "Broken windows, smashed glass, cracked glass, shattered windows, glass doors broken, board up needed",
+    "locksmith": "Locked out, key snapped, lost keys, broken lock, door won't open, burglary repair, lock jammed",
+    "drain-specialist": "Blocked drains, blocked toilets, toilet overflowing, sewage smell, drain backing up, slow draining, manhole overflow",
+    "breakdown": "Car won't start, breakdown, flat battery, engine cut out, stuck on roadside, jump start, tow truck, recovery",
+    "roofer": "Roof leak, missing tiles, storm damage, chimney damage, flashing loose, roof collapse, water through ceiling",
+    "builder": "Cracked walls, structural damage, ceiling collapse, subsidence, door frames broken, carpentry, masonry repair",
+    "air-conditioning": "Air conditioning not working, AC broken, no cold air, air con leaking, heating and cooling issues, HVAC",
+    "water-restoration": "Water damage, flood damage, water extraction, drying service, mould, dehumidifier, flood cleanup",
+};
 
 // ---------------------------------------------------------------------------
 // Routes
@@ -129,6 +144,7 @@ app.get("/api/health", (_req, res) => {
             transcription: "gpt-4o-mini-transcribe",
             triage: "gpt-4o-mini",
         },
+        trades: TRADES,
     });
 });
 
@@ -184,6 +200,11 @@ app.post("/api/upload-audio", upload.single("audio"), async (req, res) => {
         // =================================================================
         console.log("[Backend] STEP 2: Triaging with gpt-4o-mini...");
 
+        // Build the trade reference for the prompt
+        const tradeRef = Object.entries(TRADE_DESCRIPTIONS)
+            .map(([slug, desc]) => `- "${slug}": ${desc}`)
+            .join("\n");
+
         const triageResponse = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
@@ -191,12 +212,18 @@ app.post("/api/upload-audio", upload.single("audio"), async (req, res) => {
                     role: "system",
                     content: `You are an emergency dispatcher for "Emergency Tradesmen", a platform operating in the UK and USA.
 
-Your job: Analyse the customer's spoken message and extract:
-1. "likely_trade_needed" — exactly ONE from this list: ${JSON.stringify(TRADES)}. If unclear, use "unknown".
-2. "location" — the city, town, postcode, or zip code the customer mentioned. If none mentioned, use null.
-3. "high_urgency" — true if the situation is life-threatening or involves severe property damage (gas leak, fire, flooding, collapse, electrocution). Otherwise false.
+Your job: Analyse the customer's spoken emergency and extract three fields.
 
-Return ONLY a valid JSON object with these three keys. No markdown, no explanation.`,
+TRADE LIST (pick exactly ONE slug):
+${tradeRef}
+
+RULES:
+1. "likely_trade_needed" — Pick the single best matching trade slug from the list above. If no match, use "unknown".
+2. "location" — Extract any city, town, county, state, postcode, or zip code mentioned. If none, use null.
+3. "high_urgency" — Set to true ONLY if the situation is life-threatening or involves severe property damage: gas leak, fire, flooding, structural collapse, electrocution, carbon monoxide. Otherwise false.
+
+Return ONLY a valid JSON object: {"likely_trade_needed": "...", "location": "...", "high_urgency": true/false}
+No markdown. No explanation.`,
                 },
                 {
                     role: "user",
@@ -207,6 +234,7 @@ Return ONLY a valid JSON object with these three keys. No markdown, no explanati
             max_tokens: 150,
             response_format: { type: "json_object" },
         });
+
 
         const triageText = triageResponse.choices[0].message.content;
         let triage;

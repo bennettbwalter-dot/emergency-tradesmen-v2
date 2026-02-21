@@ -44,7 +44,7 @@ const TRADE_DISPLAY: Record<string, { name: string; icon: string; slug: string }
     'builder': { name: 'Builder / Construction', icon: '🧱', slug: 'builder' },
     'water-restoration': { name: 'Water Damage & Restoration', icon: '🌊', slug: 'water-restoration' },
     'breakdown': { name: 'Tow Truck / Breakdown', icon: '🚗', slug: 'breakdown' },
-    'hvac': { name: 'Heating & Cooling', icon: '❄️', slug: 'hvac' },
+    'air-conditioning': { name: 'Air Conditioning / HVAC', icon: '❄️', slug: 'air-conditioning' },
 };
 
 // ---------------------------------------------------------------------------
@@ -531,8 +531,8 @@ export default function VoiceReporter() {
                                 onClick={handleFindTradesman}
                                 disabled={!selectedCity}
                                 className={`flex-1 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${selectedCity
-                                        ? 'bg-gradient-to-r from-gold to-amber-500 text-black hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gold/25'
-                                        : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                                    ? 'bg-gradient-to-r from-gold to-amber-500 text-black hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-gold/25'
+                                    : 'bg-gray-700 text-gray-400 cursor-not-allowed'
                                     }`}
                             >
                                 <Send className="w-4 h-4" />
