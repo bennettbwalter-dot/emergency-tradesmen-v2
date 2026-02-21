@@ -2,6 +2,62 @@ import { trades, cities, usCities } from "@/lib/trades";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
 
+// FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
+// Maps common mistranscriptions/phonetic approximations to the correct trade slug
+const FUZZY_TRADE_MATCHES: Record<string, string> = {
+    // Electrician mishearings
+    'election': 'electrician', 'electrition': 'electrician', 'electrishin': 'electrician',
+    'electron': 'electrician', 'electriction': 'electrician', 'electrian': 'electrician',
+    'elektrician': 'electrician', 'electrishian': 'electrician', 'lectric': 'electrician',
+    'lectrician': 'electrician', 'elec': 'electrician',
+    // Plumber mishearings
+    'plumb': 'plumber', 'plumba': 'plumber', 'plummer': 'plumber', 'plumer': 'plumber',
+    'plumbing': 'plumber', 'plomber': 'plumber', 'plam': 'plumber',
+    // Locksmith mishearings
+    'lock smith': 'locksmith', 'loxmith': 'locksmith', 'locksmif': 'locksmith',
+    'locks mith': 'locksmith', 'lock me out': 'locksmith', 'locked me out': 'locksmith',
+    // Glazier mishearings
+    'glazer': 'glazier', 'glacier': 'glazier', 'glasier': 'glazier', 'glaser': 'glazier',
+    'glass man': 'glazier', 'glass repair': 'glazier', 'window man': 'glazier',
+    // Gas engineer mishearings
+    'gas man': 'gas-engineer', 'gasman': 'gas-engineer', 'gas person': 'gas-engineer',
+    'gas fitter': 'gas-engineer', 'gas engineer': 'gas-engineer',
+    // Roofer mishearings
+    'roof': 'roofer', 'roofing': 'roofer', 'roofa': 'roofer', 'rufar': 'roofer',
+    'roofa man': 'roofer', 'roof man': 'roofer', 'roof repair': 'roofer',
+    // Builder mishearings
+    'build': 'builder', 'builded': 'builder', 'building': 'builder', 'bilda': 'builder',
+    // Drain mishearings
+    'drane': 'drain-specialist', 'drains': 'drain-specialist', 'drainage': 'drain-specialist',
+    'drain man': 'drain-specialist', 'blocked drain': 'drain-specialist',
+    // Breakdown mishearings
+    'break down': 'breakdown', 'brake down': 'breakdown', 'car help': 'breakdown',
+    'car trouble': 'breakdown', 'car problem': 'breakdown',
+    // Air conditioning mishearings
+    'air con': 'air-conditioning', 'aircon': 'air-conditioning', 'a c': 'air-conditioning',
+    'air conditioner': 'air-conditioning', 'cooling': 'air-conditioning',
+    // Water restoration mishearings
+    'water damage': 'water-restoration', 'flood damage': 'water-restoration',
+    'water cleanup': 'water-restoration',
+};
+
+/**
+ * Fuzzy trade detection: checks if the message contains any known
+ * mistranscription of a trade name (for voice/STT inputs).
+ */
+function fuzzyTradeDetect(msg: string): string | null {
+    const lower = msg.toLowerCase();
+    // Sort by key length (longest first) to prioritize more specific matches
+    const sortedKeys = Object.keys(FUZZY_TRADE_MATCHES).sort((a, b) => b.length - a.length);
+    for (const fuzzyKey of sortedKeys) {
+        if (lower.includes(fuzzyKey)) {
+            console.log(`[chat-logic] Fuzzy trade match: "${fuzzyKey}" → ${FUZZY_TRADE_MATCHES[fuzzyKey]}`);
+            return FUZZY_TRADE_MATCHES[fuzzyKey];
+        }
+    }
+    return null;
+}
+
 // OPTIMIZED FOR MOBILE TTS: Short, punchy tips.
 const SAFETY_TIPS: Record<string, string> = {
     'gas-engineer': "Gas emergencies are dangerous. If you smell gas, leave immediately and call the National Grid.",
@@ -379,12 +435,20 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 else if (isBuilder) {
                     newState.detectedTrade = 'builder';
                 }
-                // 3. Fallbacks
+                // 3. Fallbacks (includes fuzzy matching for voice inputs)
                 else {
                     if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
                     else if (lowerMsg.includes('buzzing')) newState.detectedTrade = 'electrician';
                     else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
                     else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
+                    else {
+                        // FUZZY TRADE DETECTION: Catches common Whisper STT mistranscriptions
+                        const fuzzyTrade = fuzzyTradeDetect(message);
+                        if (fuzzyTrade) {
+                            newState.detectedTrade = fuzzyTrade;
+                            console.log(`[chat-logic] Trade detected via fuzzy match: ${fuzzyTrade}`);
+                        }
+                    }
                 }
             }
         }
@@ -621,12 +685,14 @@ export async function processUserMessage(message: string, currentState: ChatStat
         responseText = `${identification} ${tip} What town, area, or postcode are you in?`;
         newState.step = 'LOCATION_CHECK';
     }
-    // CASE D: TRADE UNKNOWN -> CLARIFY
+    // CASE D: TRADE UNKNOWN -> CLARIFY (improved for voice users)
     else {
         if (lowerMsg.includes('trade') || lowerMsg.includes('service') || lowerMsg.includes('list') || lowerMsg.includes('cover')) {
-            responseText = "We cover plumbing, electrical, gas, locks, drains, glazing, and vehicle breakdown. Which one do you need?";
+            responseText = "We cover plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which one do you need?";
         } else {
-            responseText = "I didn't catch that. Could you briefly describe the issue?";
+            // More helpful fallback that shows available options
+            console.log(`[chat-logic] CASE D fallback - could not detect trade from: "${message}"`);
+            responseText = "I'm not sure I understood that. Could you try saying one of these: plumber, electrician, locksmith, gas engineer, roofer, glazier, drain specialist, or breakdown?";
         }
         newState.step = 'TRADE_CHECK';
     }
