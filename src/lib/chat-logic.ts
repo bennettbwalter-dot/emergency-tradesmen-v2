@@ -58,19 +58,19 @@ function fuzzyTradeDetect(msg: string): string | null {
     return null;
 }
 
-// OPTIMIZED FOR MOBILE TTS: Short, punchy tips.
+// DETAILED EMERGENCY SCRIPTS: Actionable safety steps for each trade.
 const SAFETY_TIPS: Record<string, string> = {
-    'gas-engineer': "Gas emergencies are dangerous. If you smell gas, leave immediately and call the National Grid.",
-    'electrician': "If there are sparks or smoke, turn off the main power if safe to do so.",
-    'plumber': "Turn off your main stopcock to prevent further flooding.",
-    'water-restoration': "Avoid the water if there are live electrics nearby and stay in a dry area.",
-    'locksmith': "If you are locked out, stay in a safe, well-lit area while you wait.",
-    'glazier': "Be careful of broken glass; do not try to remove it yourself or walk near it.",
-    'drain-specialist': "Avoid using any taps or toilets until the blockage is cleared to prevent overflow.",
-    'roofer': "Stay clear of falling debris and avoid going near any damaged or leaking areas.",
-    'builder': "Stay away from any structural damage or unstable walls for your safety.",
-    'breakdown': "Stay in a safe place away from traffic and keep your hazard lights on.",
-    'air-conditioning': "Turn off the unit and avoid touching any leaking fluids or electrical parts."
+    'gas-engineer': "Extinguish all flames, open all windows, and turn off the gas meter lever. Do not touch any electrical switches and leave the property immediately.",
+    'electrician': "Turn off the main power at your fuse box if safe. If you smell burning plastic, avoid all switches and outlets.",
+    'plumber': "Turn off your main stopcock immediately (usually under the sink) and open all taps to drain the pipes.",
+    'water-restoration': "Identify and isolate the leak source. Move furniture and electronics to a dry area immediately.",
+    'locksmith': "Stay in a safe, well-lit area. Have proof of residence ready for the locksmith's arrival.",
+    'glazier': "Do not attempt to clear broken glass yourself. Avoid the area and keep children and pets away.",
+    'drain-specialist': "Stop using all taps and toilets immediately until the blockage is cleared to prevent sewage overflow.",
+    'roofer': "Stay clear of falling debris. Place buckets under leaks if safe, but do not attempt to go onto the roof.",
+    'builder': "Evacuate any area with structural cracks or bulging walls. Do not attempt to move debris yourself.",
+    'breakdown': "Stay in a safe place away from traffic. Keep your hazard lights on and wear a high-vis vest if available.",
+    'air-conditioning': "Turn off the unit immediately at the breaker to prevent electrical damage or refrigerant leaks."
 };
 
 export interface ChatState {
