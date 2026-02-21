@@ -9,7 +9,7 @@ export function HowItWorksSection() {
 
     useEffect(() => {
         const handleResize = () => {
-            const padding = 32;
+            const padding = 48; // accounts for section padding + safe area on mobile
             setCarouselWidth(Math.min(window.innerWidth - padding, 800));
         };
         handleResize();
@@ -18,7 +18,7 @@ export function HowItWorksSection() {
     }, []);
 
     return (
-        <section className="container-wide py-24 border-t font-display border-border/30">
+        <section className="container-wide py-24 border-t font-display border-border/30 overflow-hidden">
             <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-display tracking-wide mb-4">
@@ -27,7 +27,7 @@ export function HowItWorksSection() {
                     <div className="h-1 w-24 bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto rounded-full" />
                 </div>
 
-                <div className="w-fit max-w-[800px] relative rounded-3xl border border-white/10 bg-black shadow-none md:shadow-xl md:shadow-gold/5 mx-auto overflow-hidden">
+                <div className="w-full max-w-[800px] relative rounded-3xl border border-white/10 bg-black shadow-none md:shadow-xl md:shadow-gold/5 mx-auto overflow-hidden">
                     <Carousel
                         items={[
                             {

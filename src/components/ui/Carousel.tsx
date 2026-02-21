@@ -307,6 +307,7 @@ export default function Carousel({
       className={`carousel-container ${round ? 'round' : ''}`}
       style={{
         width: `${baseWidth}px`,
+        maxWidth: '100%',
         ...(round && { height: `${baseWidth}px`, borderRadius: '50%' })
       }}
     >
