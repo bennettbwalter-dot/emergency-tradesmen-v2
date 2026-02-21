@@ -12,7 +12,180 @@ export interface WhisperResult {
     status: string;
 }
 
-export function useWhisper(): WhisperResult {
+// Detect if running on a mobile device
+const isMobileDevice = (): boolean => {
+    if (typeof navigator === 'undefined') return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || (navigator.maxTouchPoints > 0 && /MacIntel/.test(navigator.platform)); // iPad detection
+};
+
+// Check if Web Speech API is available
+const hasWebSpeechAPI = (): boolean => {
+    return typeof window !== 'undefined' &&
+        ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+};
+
+// ============================================================================
+// MOBILE PATH: Web Speech API (zero download, instant, native)
+// ============================================================================
+function useMobileSpeech(): WhisperResult {
+    const [isRecording, setIsRecording] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [transcription, setTranscription] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [status, setStatus] = useState('Ready (Native)');
+
+    const recognitionRef = useRef<any>(null);
+    const isRecordingRef = useRef(false);
+
+    // Audio level monitoring
+    const analyserRef = useRef<AnalyserNode | null>(null);
+    const audioContextRef = useRef<AudioContext | null>(null);
+    const streamRef = useRef<MediaStream | null>(null);
+
+    const startRecording = useCallback(async () => {
+        try {
+            setError(null);
+            setTranscription('');
+
+            console.log('[useMobileSpeech] Starting native speech recognition...');
+
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                setError('Speech recognition not supported on this browser.');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false; // Single utterance mode (best for short answers)
+            recognition.interimResults = false; // Only final results
+            recognition.lang = 'en-GB'; // Default; could be made configurable
+
+            recognition.onstart = () => {
+                console.log('[useMobileSpeech] Recognition started');
+                setStatus('Listening...');
+            };
+
+            recognition.onresult = (event: any) => {
+                const result = event.results[event.results.length - 1];
+                const text = result[0].transcript;
+                const confidence = result[0].confidence;
+                console.log(`[useMobileSpeech] Result: "${text}" (confidence: ${(confidence * 100).toFixed(1)}%)`);
+                setTranscription(text);
+                setIsProcessing(false);
+                setStatus('Ready (Native)');
+            };
+
+            recognition.onerror = (event: any) => {
+                console.error('[useMobileSpeech] Error:', event.error);
+                if (event.error === 'no-speech') {
+                    setError("No speech detected. Please try again.");
+                } else if (event.error === 'not-allowed') {
+                    setError("Microphone access denied.");
+                } else if (event.error === 'network') {
+                    setError("Network error. Check your connection.");
+                } else {
+                    setError(`Speech error: ${event.error}`);
+                }
+                setIsRecording(false);
+                isRecordingRef.current = false;
+                setIsProcessing(false);
+                setStatus('Ready (Native)');
+                cleanupAudio();
+            };
+
+            recognition.onend = () => {
+                console.log('[useMobileSpeech] Recognition ended');
+                setIsRecording(false);
+                isRecordingRef.current = false;
+                setIsProcessing(false);
+                cleanupAudio();
+            };
+
+            recognitionRef.current = recognition;
+
+            // Also set up audio context for waveform visualization
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                streamRef.current = stream;
+                const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+                const ctx = new AudioCtx();
+                audioContextRef.current = ctx;
+
+                if (ctx.state === 'suspended') await ctx.resume();
+
+                const source = ctx.createMediaStreamSource(stream);
+                const analyser = ctx.createAnalyser();
+                analyser.fftSize = 256;
+                analyser.smoothingTimeConstant = 0.3;
+                source.connect(analyser);
+                analyserRef.current = analyser;
+            } catch (audioErr) {
+                console.warn('[useMobileSpeech] Audio visualization setup failed:', audioErr);
+                // Non-fatal — recognition can proceed without visualization
+            }
+
+            recognition.start();
+            setIsRecording(true);
+            isRecordingRef.current = true;
+            console.log('[useMobileSpeech] Recording started');
+
+        } catch (err) {
+            console.error('[useMobileSpeech] Failed to start:', err);
+            setError('Microphone access denied or failed.');
+        }
+    }, []);
+
+    const cleanupAudio = useCallback(() => {
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(t => t.stop());
+            streamRef.current = null;
+        }
+        if (audioContextRef.current) {
+            try { audioContextRef.current.close(); } catch (e) { }
+            audioContextRef.current = null;
+        }
+        analyserRef.current = null;
+    }, []);
+
+    const stopRecording = useCallback(() => {
+        console.log('[useMobileSpeech] stopRecording called');
+        if (recognitionRef.current && isRecordingRef.current) {
+            setIsProcessing(true);
+            setStatus('Processing...');
+            recognitionRef.current.stop();
+        }
+    }, []);
+
+    const getAudioLevel = useCallback(() => {
+        if (!analyserRef.current) return 0;
+        const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+        analyserRef.current.getByteTimeDomainData(dataArray);
+        let peak = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+            const amplitude = Math.abs(dataArray[i] - 128);
+            if (amplitude > peak) peak = amplitude;
+        }
+        const raw = peak / 128;
+        if (raw < 0.01) return 0;
+        return Math.min(1, raw * 3.5);
+    }, []);
+
+    const resetTranscription = useCallback(() => {
+        setTranscription('');
+        setError(null);
+    }, []);
+
+    return {
+        transcription, isProcessing, isRecording, error,
+        startRecording, stopRecording, getAudioLevel, resetTranscription, status
+    };
+}
+
+// ============================================================================
+// DESKTOP PATH: Whisper WASM worker (high accuracy, ~40MB model download)
+// ============================================================================
+function useDesktopWhisper(): WhisperResult {
     const [isRecording, setIsRecording] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [transcription, setTranscription] = useState('');
@@ -89,7 +262,7 @@ export function useWhisper(): WhisperResult {
             const destination = audioContext.createMediaStreamDestination();
             source.connect(destination);
 
-            // MOBILE COMPATIBILITY: Detect supported MIME types
+            // MIME type detection for broader compatibility
             const getSupportedMimeType = () => {
                 const types = [
                     'audio/webm;codecs=opus',
@@ -118,7 +291,6 @@ export function useWhisper(): WhisperResult {
 
             mediaRecorder.ondataavailable = (event) => {
                 if (event.data.size > 0) {
-                    console.log(`[useWhisper] Data available: ${event.data.size} bytes`);
                     audioChunksRef.current.push(event.data);
                 }
             };
@@ -150,15 +322,12 @@ export function useWhisper(): WhisperResult {
 
                     console.log(`[useWhisper] Audio blob size: ${audioBlob.size} bytes`);
 
-                    // Use a SEPARATE offline context for decoding to avoid state conflicts
-                    // The recording audioContext may be in a weird state after stopping
                     let float32Array: Float32Array;
                     try {
                         const audioData = await audioContext.decodeAudioData(arrayBuffer);
                         float32Array = audioData.getChannelData(0);
                     } catch (decodeError) {
                         console.warn('[useWhisper] Primary decode failed, trying offline context:', decodeError);
-                        // Fallback: create a fresh offline context for decoding
                         const offlineCtx = new OfflineAudioContext(1, 1, 16000);
                         const audioData = await offlineCtx.decodeAudioData(arrayBuffer);
                         float32Array = audioData.getChannelData(0);
@@ -211,24 +380,17 @@ export function useWhisper(): WhisperResult {
         if (!analyserRef.current) return 0;
 
         const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-        // Using Time Domain data for more reliable peak detection on mobile
         analyserRef.current.getByteTimeDomainData(dataArray);
 
-        // Calculate peak amplitude from 128 (neutral point for time domain)
         let peak = 0;
         for (let i = 0; i < dataArray.length; i++) {
             const amplitude = Math.abs(dataArray[i] - 128);
             if (amplitude > peak) peak = amplitude;
         }
 
-        // Noise gate: ultra-low for mobile (ambient floor is usually 1-2 units)
         const raw = peak / 128;
         if (raw < 0.01) return 0;
-
-        // Amplify and normalize (boost sensitivity more for mobile)
-        const amplified = Math.min(1, raw * 3.5);
-
-        return amplified;
+        return Math.min(1, raw * 3.5);
     }, []);
 
     const resetTranscription = useCallback(() => {
@@ -237,14 +399,24 @@ export function useWhisper(): WhisperResult {
     }, []);
 
     return {
-        transcription,
-        isProcessing,
-        isRecording,
-        error,
-        startRecording,
-        stopRecording,
-        getAudioLevel,
-        resetTranscription,
-        status
+        transcription, isProcessing, isRecording, error,
+        startRecording, stopRecording, getAudioLevel, resetTranscription, status
     };
+}
+
+// ============================================================================
+// MAIN HOOK: Auto-selects mobile vs desktop path
+// ============================================================================
+export function useWhisper(): WhisperResult {
+    const useMobile = isMobileDevice() && hasWebSpeechAPI();
+
+    console.log(`[useWhisper] Platform: ${useMobile ? 'MOBILE (Web Speech API)' : 'DESKTOP (Whisper WASM)'}`);
+
+    // We must call both hooks unconditionally (React rules of hooks),
+    // but only return the active one's results.
+    // However, the desktop hook initializes a heavy worker, so we use a guard.
+    if (useMobile) {
+        return useMobileSpeech();
+    }
+    return useDesktopWhisper();
 }
