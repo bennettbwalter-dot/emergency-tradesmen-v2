@@ -50,6 +50,9 @@ export function EmergencyChatInterface() {
     const chatStateRef = useRef<ChatState>(chatState);
     const handleUserMessageRef = useRef<(msg: string, isVoice?: boolean) => void>(() => { });
 
+    // Track whether we're in a voice conversation so follow-ups auto-record
+    const isVoiceSessionRef = useRef(false);
+
     // Refs for values used inside handleUserMessage's setTimeout
     // This ensures voice follow-ups always read fresh state, not stale closures
     const detectedTradeRef = useRef(detectedTrade);
@@ -111,9 +114,26 @@ export function EmergencyChatInterface() {
         }
     };
 
+    // Auto-restart recording for voice follow-ups
+    const restartRecordingForVoice = async () => {
+        if (!isVoiceSessionRef.current) return;
+        try {
+            console.log('[Voice] Auto-restarting mic for follow-up question...');
+            await startRecording();
+            startVolumeMonitor();
+            toast.success("Listening — speak your answer.", { id: 'stt-status', duration: 3000 });
+        } catch (err) {
+            console.error('[Voice] Failed to auto-restart recording:', err);
+            isVoiceSessionRef.current = false;
+        }
+    };
+
     // Cleanup on unmount
     useEffect(() => {
-        return () => stopVolumeMonitor();
+        return () => {
+            stopVolumeMonitor();
+            isVoiceSessionRef.current = false;
+        };
     }, []);
 
     // Handle transcription from Whisper
@@ -125,10 +145,12 @@ export function EmergencyChatInterface() {
             console.log(`[STT] New transcription received: "${transcription}"`);
             console.log(`[STT] Current chatState step: ${chatStateRef.current.step}, trade: ${chatStateRef.current.detectedTrade}, city: ${chatStateRef.current.detectedCity}`);
             console.log(`[STT] Context trade: ${detectedTradeRef.current}, city: ${detectedCityRef.current}`);
+            // Mark this as a voice session so we auto-restart after TTS
+            isVoiceSessionRef.current = true;
             handleUserMessageRef.current(transcription, true);
             resetTranscription();
-            stopVolumeMonitor();
-            setAudioData(new Array(120).fill(0));
+            // Don't stop volume monitor here — it'll be stopped when recording stops
+            // and restarted after TTS finishes
         }
     }, [transcription]);
 
@@ -302,11 +324,19 @@ export function EmergencyChatInterface() {
                 setIsTyping(false);
 
                 if (response.action === 'navigate' && response.target) {
+                    // Navigating away — end voice session
+                    isVoiceSessionRef.current = false;
                     const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
                     console.log(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
                         navigate(response.target!);
                     }, navDelay);
+                } else if (isVoice) {
+                    // Not navigating — auto-restart mic for voice follow-up
+                    // Small delay to let TTS audio finish cleanly
+                    setTimeout(() => {
+                        restartRecordingForVoice();
+                    }, 500);
                 }
             } catch (error) {
                 console.error("Error processing message:", error);
@@ -553,6 +583,7 @@ export function EmergencyChatInterface() {
             history: []
         });
         setInput("");
+        isVoiceSessionRef.current = false;
         setDetectedTrade(null);
         setDetectedCity(null);
         setIsRequestingLocation(false);
