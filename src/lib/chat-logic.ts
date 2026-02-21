@@ -246,7 +246,14 @@ export async function processUserMessage(message: string, currentState: ChatStat
     // Sort by length (longest first) to prioritize more specific matches like "Newcastle upon Tyne" over "Newcastle"
     const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
 
-    // 1. DANGER CHECK (Keep existing safeguard but ensure it doesn't break flow if not critical)
+    // CRITICAL: When we're already mid-conversation (asking for location or confirming),
+    // the user's input is a RESPONSE to our question, NOT a new navigation command.
+    // Skip ALL navigation handlers and go straight to state machine processing.
+    const isAwaitingResponse = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION' || currentState.step === 'TRADE_CHECK';
+
+    console.log(`[chat-logic] Processing "${message}" | step: ${currentState.step} | trade: ${currentState.detectedTrade} | city: ${currentState.detectedCity} | awaitingResponse: ${isAwaitingResponse}`);
+
+    // 1. DANGER CHECK (Always active — safety override)
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
         return {
             newState,
@@ -266,8 +273,10 @@ export async function processUserMessage(message: string, currentState: ChatStat
     const hasTradeKeywords = ALL_TRADE_KEYWORDS.some(k => lowerMsg.includes(k)) ||
         GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k));
 
-    // 2. GENERAL PAGE NAVIGATION — only when NOT describing an emergency
-    if (!hasTradeKeywords) {
+    // 2. GENERAL PAGE NAVIGATION — only when NOT describing an emergency AND NOT mid-conversation
+    // When we're awaiting a location/trade response, the user's message should be treated
+    // as an answer to our question, not a navigation command (e.g., "Bath" is a city, not a nav keyword)
+    if (!hasTradeKeywords && !isAwaitingResponse) {
         if (lowerMsg.includes('blog') || lowerMsg.includes('news')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening the Blog.", action: 'navigate', target: '/blog' } };
         if (lowerMsg.includes('about')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening About Us.", action: 'navigate', target: '/about' } };
         if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Contact page.", action: 'navigate', target: '/contact' } };
