@@ -654,11 +654,13 @@ export async function processUserMessage(message: string, currentState: ChatStat
         const city = newState.detectedCity;
         const tradeName = getReadableTradeName(newState.detectedTrade);
 
-        // KEY FIX: If the user explicitly typed the city in this same message
-        // (i.e. both trade AND city were detected from the user's text),
+        // KEY FIX: If the user explicitly typed/spoke the city in this same message
+        // OR if we're in LOCATION_CHECK step (we asked "what's your location?" and they answered),
         // treat it as confirmed and navigate immediately — don't ask "Is this correct?"
         // The confirmation step is only needed for GPS/IP auto-detected locations.
-        const userExplicitlyStatedCity = sortedCities.some(c => {
+        const wasAskingForLocation = currentState.step === 'LOCATION_CHECK';
+
+        const userExplicitlyStatedCity = wasAskingForLocation || sortedCities.some(c => {
             const cityLower = c.toLowerCase();
             const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
             return regex.test(lowerMsg);
@@ -669,7 +671,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         });
 
         if (userExplicitlyStatedCity) {
-            // User stated the city themselves — skip confirmation, go straight to navigation
+            // User stated the city themselves (or answered our location question) — skip confirmation, navigate
             newState.locationConfirmed = true;
             newState.step = 'ROUTING';
 
@@ -677,6 +679,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
             target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
             responseText = `${tip ? tip + ' ' : ''}Taking you to ${tradeName} in ${city} now.`;
+            console.log(`[chat-logic] CASE B → NAVIGATE: ${target} (wasAskingForLocation: ${wasAskingForLocation})`);
         } else {
             // City was auto-detected (GPS/IP) — ask for confirmation
             const identification = `I've identified that as a ${tradeName} emergency.`;
