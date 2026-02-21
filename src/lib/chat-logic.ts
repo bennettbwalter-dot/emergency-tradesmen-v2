@@ -395,6 +395,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
     let cityFallbackUsed = false;
     let originalCity = "";
 
+    console.log(`[chat-logic] Before city detection - step: ${newState.step}, trade: ${newState.detectedTrade}, city: ${newState.detectedCity}, msg: "${message}"`);
+
     if (!newState.detectedCity) {
         // A. Strict Match First (Fast) - Check for city names with word boundaries
         // Sort by length to prioritize longer matches (e.g., "Newcastle upon Tyne" before "Newcastle")

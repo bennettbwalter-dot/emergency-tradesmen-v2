@@ -101,46 +101,81 @@ export function useWhisper(): WhisperResult {
 
             mediaRecorder.onstop = async () => {
                 console.log('[useWhisper] Recording stopped, processing audio. Chunks:', audioChunksRef.current.length);
-                if (audioChunksRef.current.length === 0) {
-                    console.warn('[useWhisper] No audio chunks captured');
-                    setIsProcessing(false);
-                    return;
-                }
-                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-                const arrayBuffer = await audioBlob.arrayBuffer();
-                const audioData = await audioContext.decodeAudioData(arrayBuffer);
 
-                // Get mono channel data
-                const float32Array = audioData.getChannelData(0);
-
-                setIsProcessing(true);
-                console.log('[useWhisper] Sending transcription request to worker');
-                workerRef.current?.postMessage({
-                    type: 'TRANSCRIPTION_REQUEST',
-                    audio: float32Array
-                });
-
+                // Clean up recording resources FIRST
                 stream.getTracks().forEach(track => track.stop());
                 streamRef.current = null;
                 analyserRef.current = null;
-                audioContext.close();
+
+                if (audioChunksRef.current.length === 0) {
+                    console.warn('[useWhisper] No audio chunks captured');
+                    setIsProcessing(false);
+                    audioContext.close();
+                    audioContextRef.current = null;
+                    return;
+                }
+
+                try {
+                    const audioBlob = new Blob(audioChunksRef.current);
+                    const arrayBuffer = await audioBlob.arrayBuffer();
+
+                    console.log(`[useWhisper] Audio blob size: ${audioBlob.size} bytes`);
+
+                    // Use a SEPARATE offline context for decoding to avoid state conflicts
+                    // The recording audioContext may be in a weird state after stopping
+                    let float32Array: Float32Array;
+                    try {
+                        const audioData = await audioContext.decodeAudioData(arrayBuffer);
+                        float32Array = audioData.getChannelData(0);
+                    } catch (decodeError) {
+                        console.warn('[useWhisper] Primary decode failed, trying offline context:', decodeError);
+                        // Fallback: create a fresh offline context for decoding
+                        const offlineCtx = new OfflineAudioContext(1, 1, 16000);
+                        const audioData = await offlineCtx.decodeAudioData(arrayBuffer);
+                        float32Array = audioData.getChannelData(0);
+                    }
+
+                    console.log(`[useWhisper] Decoded audio: ${float32Array.length} samples (${(float32Array.length / 16000).toFixed(2)}s)`);
+
+                    setIsProcessing(true);
+                    setStatus('Transcribing...');
+                    console.log('[useWhisper] Sending transcription request to worker');
+                    workerRef.current?.postMessage({
+                        type: 'TRANSCRIPTION_REQUEST',
+                        audio: float32Array
+                    });
+                } catch (err) {
+                    console.error('[useWhisper] Error processing audio:', err);
+                    setError('Failed to process audio recording.');
+                    setIsProcessing(false);
+                }
+
+                // Close recording context after we're done with it
+                try { audioContext.close(); } catch (e) { /* already closed */ }
                 audioContextRef.current = null;
             };
 
             mediaRecorder.start();
             setIsRecording(true);
+            isRecordingRef.current = true;
+            console.log('[useWhisper] Recording started');
         } catch (err) {
             console.error('Failed to start recording:', err);
             setError('Microphone access denied or failed.');
         }
     }, []);
 
+    // Use a ref for isRecording to avoid stale closure in stopRecording
+    const isRecordingRef = useRef(false);
+
     const stopRecording = useCallback(() => {
-        if (mediaRecorderRef.current && isRecording) {
+        console.log('[useWhisper] stopRecording called. isRecordingRef:', isRecordingRef.current);
+        if (mediaRecorderRef.current && isRecordingRef.current) {
             mediaRecorderRef.current.stop();
             setIsRecording(false);
+            isRecordingRef.current = false;
         }
-    }, [isRecording]);
+    }, []);
 
     // Get current audio level (0-1 range) with enhanced sensitivity for mobile
     const getAudioLevel = useCallback(() => {
