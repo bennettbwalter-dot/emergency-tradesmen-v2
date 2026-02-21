@@ -56,10 +56,8 @@ export function EmergencyChatInterface() {
     const detectedCityRef = useRef(detectedCity);
     const settingsRef = useRef(settings);
 
-    // Keep ALL refs in sync
-    useEffect(() => {
-        chatStateRef.current = chatState;
-    }, [chatState]);
+    // Keep ALL refs in sync - updated both synchronously in handlers AND via useEffect for safety
+    useEffect(() => { chatStateRef.current = chatState; }, [chatState]);
     useEffect(() => { detectedTradeRef.current = detectedTrade; }, [detectedTrade]);
     useEffect(() => { detectedCityRef.current = detectedCity; }, [detectedCity]);
     useEffect(() => { settingsRef.current = settings; }, [settings]);
@@ -230,28 +228,32 @@ export function EmergencyChatInterface() {
             content: msgText
         };
 
-        setChatState(prev => ({
-            ...prev,
-            history: [...prev.history, userMsg]
-        }));
+        // Update state and ref IMMEDIATELY to avoid race conditions
+        const stagedState: ChatState = {
+            ...chatStateRef.current,
+            history: [...chatStateRef.current.history, userMsg]
+        };
+        setChatState(stagedState);
+        chatStateRef.current = stagedState;
+
         setInput("");
         setIsTyping(true);
 
-        // Use ref for freshest state — critical for voice follow-ups
+        // Voice is snappier, Text has a slight "typing" feel
+        const processingDelay = isVoice ? 50 : 600;
+
         setTimeout(async () => {
             try {
+                // Read absolute freshest values
                 const currentFreshState = chatStateRef.current;
-                // Read ALL values from refs (not closures) to avoid stale data
                 const freshTrade = detectedTradeRef.current;
                 const freshCity = detectedCityRef.current;
                 const freshCountryCode = settingsRef.current.countryCode;
 
-                console.log(`[handleUserMessage setTimeout] Processing "${msgText}" with fresh state:`, {
+                console.log(`[handleUserMessage] Processing "${msgText}" with state:`, {
                     step: currentFreshState.step,
                     stateTrade: currentFreshState.detectedTrade,
-                    stateCity: currentFreshState.detectedCity,
                     contextTrade: freshTrade,
-                    contextCity: freshCity,
                     countryCode: freshCountryCode
                 });
 
@@ -261,25 +263,23 @@ export function EmergencyChatInterface() {
                     detectedCity: freshCity || currentFreshState.detectedCity,
                 }, freshCountryCode);
 
-                console.log(`[handleUserMessage] processUserMessage returned:`, {
-                    step: newState.step,
-                    trade: newState.detectedTrade,
-                    city: newState.detectedCity,
-                    action: response.action,
-                    target: response.target,
-                    content: response.content.substring(0, 80)
-                });
-
                 const finalState = {
                     ...newState,
                     history: [...chatStateRef.current.history, response]
                 };
 
+                // Update ALL states and refs synchronously
                 setChatState(finalState);
                 chatStateRef.current = finalState;
 
-                setDetectedTrade(newState.detectedTrade);
-                setDetectedCity(newState.detectedCity);
+                if (newState.detectedTrade) {
+                    setDetectedTrade(newState.detectedTrade);
+                    detectedTradeRef.current = newState.detectedTrade;
+                }
+                if (newState.detectedCity) {
+                    setDetectedCity(newState.detectedCity);
+                    detectedCityRef.current = newState.detectedCity;
+                }
 
                 // Speak back if it's a voice interaction
                 if (isVoice) {
@@ -287,23 +287,21 @@ export function EmergencyChatInterface() {
                     voiceService.speak(response.content, freshCountryCode);
                 }
 
-                // 1. Functional state: Should the button act as "Locate Me"?
-                // Only if we are truly in LOCATION_CHECK step and have no suggestion
                 setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);
-
                 setIsTyping(false);
 
                 if (response.action === 'navigate' && response.target) {
-                    console.log(`[handleUserMessage] Navigating to: ${response.target}`);
+                    const navDelay = isVoice ? 800 : (1000 + (response.content.length * 10));
+                    console.log(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
                         navigate(response.target!);
-                    }, 1000 + (response.content.length * 10)); // Snappier redirection
+                    }, navDelay);
                 }
             } catch (error) {
                 console.error("Error processing message:", error);
                 setIsTyping(false);
             }
-        }, 600);
+        }, processingDelay);
     };
 
     // Keep the ref in sync so the transcription useEffect always calls the latest version
@@ -469,7 +467,7 @@ export function EmergencyChatInterface() {
                     startVolumeMonitor();
                 }
             }}
-            disabled={isTranscriptionProcessing}
+            disabled={isTranscriptionProcessing || isTyping}
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
