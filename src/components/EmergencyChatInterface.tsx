@@ -304,19 +304,23 @@ export function EmergencyChatInterface() {
                 setChatState(finalState);
                 chatStateRef.current = finalState;
 
-                if (newState.detectedTrade) {
+                if (newState.detectedTrade !== undefined) {
                     setDetectedTrade(newState.detectedTrade);
                     detectedTradeRef.current = newState.detectedTrade;
                 }
-                if (newState.detectedCity) {
+                if (newState.detectedCity !== undefined) {
                     setDetectedCity(newState.detectedCity);
                     detectedCityRef.current = newState.detectedCity;
                 }
 
                 // Speak back if it's a voice interaction
                 if (isVoice) {
-                    voiceService.unlockAudioContext();
-                    await voiceService.speak(response.content, freshCountryCode);
+                    try {
+                        voiceService.unlockAudioContext();
+                        await voiceService.speak(response.content, freshCountryCode);
+                    } catch (speakError) {
+                        console.error("[EmergencyChatInterface] Voice playback failed (likely browser policy), continuing flow.", speakError);
+                    }
                 }
 
                 setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);

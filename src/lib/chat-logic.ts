@@ -472,12 +472,10 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     if (!newState.detectedCity) {
         // A. Strict Match First (Fast) - Check for city names with word boundaries
-        // Sort by length to prioritize longer matches (e.g., "Newcastle upon Tyne" before "Newcastle")
+        // Sort by length to prioritize longer matches
         const foundCity = sortedCities.find(c => {
             const cityLower = c.toLowerCase();
-            // Word boundary check: city name should be preceded by start of string, space, or punctuation
-            // and followed by end of string, space, or punctuation
-            const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+            const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
             return regex.test(lowerMsg);
         });
         if (foundCity) {
@@ -496,7 +494,6 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
                 const coords = await geocodeLocation(cleanPostcode, countryCode);
                 if (coords) {
-                    // TRUST GEOCODER NAME (e.g. "Dunstable" from "LU6...")
                     const detectedPlace = coords.displayName.split(',')[0].trim();
                     if (detectedPlace) {
                         newState.detectedCity = detectedPlace;
@@ -504,7 +501,6 @@ export async function processUserMessage(message: string, currentState: ChatStat
                         originalCity = cleanPostcode;
                         handled = true;
                     } else {
-                        // Fallback: Snap if no name returned (unlikely)
                         const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
                         if (match) {
                             newState.detectedCity = match.city;
@@ -516,21 +512,17 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 }
             }
 
-            // 2. Area Name Match (e.g. "Brixton", "Dunstable")
+            // 2. Area Name Match
             if (!handled) {
-                // Check if the user mentioned a known area from our database
-                // Sort by length (longest first) to prioritize specific matches
                 const sortedAreas = Object.keys(cityPostcodes).sort((a, b) => b.length - a.length);
                 const foundArea = sortedAreas.find(area => {
                     const areaLower = area.toLowerCase();
-                    // Word boundary check for more accurate matching
-                    const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+                    const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
                     return regex.test(lowerMsg);
                 });
 
                 if (foundArea) {
                     console.log(`[Voice] Area detected and trusted: ${foundArea}`);
-                    // DIRECT USE: Do not snap to nearest city (e.g. London). Use "Dunstable" directly.
                     newState.detectedCity = foundArea;
                     cityFallbackUsed = true;
                     originalCity = foundArea;
@@ -541,7 +533,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
         // B. Nominatim Fallback (Slower but covers entire UK)
         if (!newState.detectedCity && newState.detectedTrade) {
-            const isLocationStep = currentState.step === 'LOCATION_CHECK';
+            const isLocationStep = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION';
 
             // Heuristic: If we are asking for location, or message is short enough to be a location statement
             if (isLocationStep || lowerMsg.length < 50) {
@@ -555,8 +547,6 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 if (locationQuery.length > 2) {
                     const coords = await geocodeLocation(locationQuery, countryCode);
                     if (coords) {
-                        // 1. DIRECT MATCH CHECK (Case-insensitive)
-                        // Does the geocoded name match one of our main cities?
                         const directMatch = activeCities.find(city =>
                             coords.displayName.toLowerCase().includes(city.toLowerCase())
                         );
@@ -565,20 +555,22 @@ export async function processUserMessage(message: string, currentState: ChatStat
                             newState.detectedCity = directMatch;
                             cityFallbackUsed = true;
                             originalCity = coords.displayName.split(',')[0];
-                            console.log(`[Location Direct Match] Found '${directMatch}' in '${coords.displayName}'`);
-                        }
-                        // 2. TRUST THE GEOCODER (Enhanced Coverage)
-                        // If no main city match, use the returned place name directly (e.g. "Dunstable")
-                        // This ensures we cover EVERY town/village, not just our main list.
-                        else {
+                        } else {
                             const detectedPlace = coords.displayName.split(',')[0].trim();
                             if (detectedPlace) {
                                 newState.detectedCity = detectedPlace;
-                                cityFallbackUsed = true; // Still flag as fallback to trigger the "I'm taking you to X" message
+                                cityFallbackUsed = true;
                                 originalCity = detectedPlace;
-                                console.log(`[Location Extended] Accepted '${detectedPlace}' directly from Geocoder`);
                             }
                         }
+                    } else if (isLocationStep && locationQuery.length > 2 && locationQuery.length <= 40) {
+                        // 3. ULTIMATE FALLBACK: TRUST MANUAL ENTRY
+                        const formattedCity = locationQuery.split(/[\\s-]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                        newState.detectedCity = formattedCity;
+                        newState.locationConfirmed = true;
+                        cityFallbackUsed = true;
+                        originalCity = formattedCity;
+                        console.log(`[Location Ultimate Fallback] Trusted user manual entry: '${formattedCity}'`);
                     }
                 }
             }
@@ -596,7 +588,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
     };
 
-    const tip = newState.detectedTrade ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
+    const tip = (!currentState.detectedTrade && newState.detectedTrade) ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
 
     // STATE MACHINE TRANSITIONS
 
@@ -683,19 +675,21 @@ export async function processUserMessage(message: string, currentState: ChatStat
             console.log(`[chat-logic] CASE B → NAVIGATE: ${target} (wasAskingForLocation: ${wasAskingForLocation})`);
         } else {
             // City was auto-detected (GPS/IP) — ask for confirmation
-            const identification = `I've identified that as a ${tradeName} emergency.`;
+            const identification = !currentState.detectedTrade ? `I've identified that as a ${tradeName} emergency. ` : "";
             newState.suggestedCity = city;
             newState.detectedCity = null;
             newState.step = 'CONFIRM_LOCATION';
-            responseText = `${identification} ${tip} We detected you may be in ${city}. Is this correct? (Or please tell me your location manually).`;
+            const tipStr = tip ? `${tip} ` : "";
+            responseText = `${identification}${tipStr}We detected you may be in ${city}. Is this correct? (Or please tell me your location manually).`;
         }
     }
     // CASE C: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
     else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName = getReadableTradeName(newState.detectedTrade);
-        const identification = `I've identified that as a ${tradeName} emergency.`;
+        const identification = !currentState.detectedTrade ? `I've identified that as a ${tradeName} emergency. ` : "";
+        const tipStr = tip ? `${tip} ` : "";
 
-        responseText = `${identification} ${tip} What town, area, or postcode are you in?`;
+        responseText = `${identification}${tipStr}What town, area, or postcode are you in?`;
         newState.step = 'LOCATION_CHECK';
     }
     // CASE D: TRADE UNKNOWN -> CLARIFY (improved for voice users)
