@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
@@ -26,9 +26,11 @@ import { BorderBeam } from "@/components/magicui/BorderBeam";
 import { useWhisper } from "@/hooks/useWhisper";
 import { toast } from "sonner";
 import WhisperWaveform from "@/components/VoiceAssistant/WhisperWaveform";
+import { AzureVoiceService } from "@/services/azureVoiceService";
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
+    const { city: urlCity } = useParams();
     const { settings } = useLocalization();
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
@@ -37,11 +39,31 @@ export function EmergencyChatInterface() {
     const [chatState, setChatState] = useState<ChatState>({
         step: 'INITIAL',
         detectedTrade: null,
+        detectedCity: null,
+        suggestedCity: null,
+        locationConfirmed: false,
         history: []
     });
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
+    const chatStateRef = useRef<ChatState>(chatState);
+    const handleUserMessageRef = useRef<(msg: string, isVoice?: boolean) => void>(() => { });
+
+    // Refs for values used inside handleUserMessage's setTimeout
+    // This ensures voice follow-ups always read fresh state, not stale closures
+    const detectedTradeRef = useRef(detectedTrade);
+    const detectedCityRef = useRef(detectedCity);
+    const settingsRef = useRef(settings);
+
+    // Keep ALL refs in sync
+    useEffect(() => {
+        chatStateRef.current = chatState;
+    }, [chatState]);
+    useEffect(() => { detectedTradeRef.current = detectedTrade; }, [detectedTrade]);
+    useEffect(() => { detectedCityRef.current = detectedCity; }, [detectedCity]);
+    useEffect(() => { settingsRef.current = settings; }, [settings]);
+
     const {
         detectUserLocation,
         userCoords,
@@ -57,17 +79,58 @@ export function EmergencyChatInterface() {
         error: whisperError,
         startRecording,
         stopRecording,
-        getAudioLevel
+        getAudioLevel,
+        resetTranscription,
+        status: whisperStatus
     } = useWhisper();
+
+    const [voiceService] = useState(() => new AzureVoiceService());
+
+    // Toast whisper errors
+    useEffect(() => {
+        if (whisperError) {
+            console.error('[EmergencyChatInterface] Whisper Error:', whisperError);
+            toast.error(`Voice error: ${whisperError}`);
+        }
+    }, [whisperError]);
 
     // Audio data for waveform visualization
     const [audioData, setAudioData] = useState<number[]>(new Array(120).fill(0));
     const audioIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
+    const startVolumeMonitor = () => {
+        if (audioIntervalRef.current) clearInterval(audioIntervalRef.current);
+        audioIntervalRef.current = setInterval(() => {
+            const vol = getAudioLevel();
+            setAudioData(prev => [...prev.slice(1), vol]);
+        }, 80);
+    };
+
+    const stopVolumeMonitor = () => {
+        if (audioIntervalRef.current) {
+            clearInterval(audioIntervalRef.current);
+            audioIntervalRef.current = null;
+        }
+    };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => stopVolumeMonitor();
+    }, []);
+
     // Handle transcription from Whisper
+    // CRITICAL: Use ref to avoid stale closure — without this, follow-up voice
+    // responses (e.g. stating location after trade was detected) would use the
+    // old handleUserMessage with stale chatState/detectedTrade/detectedCity.
     useEffect(() => {
         if (transcription) {
-            handleUserMessage(transcription);
+            console.log(`[STT] New transcription received: "${transcription}"`);
+            console.log(`[STT] Current chatState step: ${chatStateRef.current.step}, trade: ${chatStateRef.current.detectedTrade}, city: ${chatStateRef.current.detectedCity}`);
+            console.log(`[STT] Context trade: ${detectedTradeRef.current}, city: ${detectedCityRef.current}`);
+            handleUserMessageRef.current(transcription, true);
+            resetTranscription();
+            stopVolumeMonitor();
+            setAudioData(new Array(120).fill(0));
         }
     }, [transcription]);
 
@@ -124,6 +187,17 @@ export function EmergencyChatInterface() {
 
     const [wasLocating, setWasLocating] = useState(false);
 
+    // Sync with URL City if on TradeCityPage
+    useEffect(() => {
+        if (urlCity) {
+            const formattedCity = urlCity.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            if (formattedCity !== detectedCity) {
+                setDetectedCity(formattedCity);
+                console.log(`[EmergencyChatInterface] Syncing detectedCity from URL: ${formattedCity}`);
+            }
+        }
+    }, [urlCity]);
+
     // Sync isRequestingLocation based on selection state
     useEffect(() => {
         // If we have a trade but no city, offer "Locate Me"
@@ -142,8 +216,13 @@ export function EmergencyChatInterface() {
         setWasLocating(geoLoading);
     }, [geoLoading, geoCity, detectedCity, wasLocating, setDetectedCity]);
 
-    const handleUserMessage = async (msgText: string) => {
-        if (!msgText.trim()) return;
+    const handleUserMessage = async (msgText: string, isVoice: boolean = false) => {
+        if (!msgText.trim()) {
+            console.warn('[EmergencyChatInterface] handleUserMessage called with empty text');
+            return;
+        }
+
+        console.log(`[EmergencyChatInterface] handleUserMessage: "${msgText}" (isVoice: ${isVoice})`);
 
         const userMsg: ChatMessage = {
             id: Date.now().toString(),
@@ -158,40 +237,77 @@ export function EmergencyChatInterface() {
         setInput("");
         setIsTyping(true);
 
-        // Fixed: Ensure processUserMessage is awaited properly
+        // Use ref for freshest state — critical for voice follow-ups
         setTimeout(async () => {
             try {
-                const { newState, response } = await processUserMessage(msgText, {
-                    ...chatState,
-                    detectedTrade: detectedTrade || chatState.detectedTrade,
-                    detectedCity: detectedCity || chatState.detectedCity || geoCity,
-                }, settings.countryCode);
+                const currentFreshState = chatStateRef.current;
+                // Read ALL values from refs (not closures) to avoid stale data
+                const freshTrade = detectedTradeRef.current;
+                const freshCity = detectedCityRef.current;
+                const freshCountryCode = settingsRef.current.countryCode;
 
-                setChatState(prev => ({
+                console.log(`[handleUserMessage setTimeout] Processing "${msgText}" with fresh state:`, {
+                    step: currentFreshState.step,
+                    stateTrade: currentFreshState.detectedTrade,
+                    stateCity: currentFreshState.detectedCity,
+                    contextTrade: freshTrade,
+                    contextCity: freshCity,
+                    countryCode: freshCountryCode
+                });
+
+                const { newState, response } = await processUserMessage(msgText, {
+                    ...currentFreshState,
+                    detectedTrade: freshTrade || currentFreshState.detectedTrade,
+                    detectedCity: freshCity || currentFreshState.detectedCity,
+                }, freshCountryCode);
+
+                console.log(`[handleUserMessage] processUserMessage returned:`, {
+                    step: newState.step,
+                    trade: newState.detectedTrade,
+                    city: newState.detectedCity,
+                    action: response.action,
+                    target: response.target,
+                    content: response.content.substring(0, 80)
+                });
+
+                const finalState = {
                     ...newState,
-                    history: [...prev.history, response]
-                }));
+                    history: [...chatStateRef.current.history, response]
+                };
+
+                setChatState(finalState);
+                chatStateRef.current = finalState;
 
                 setDetectedTrade(newState.detectedTrade);
                 setDetectedCity(newState.detectedCity);
 
+                // Speak back if it's a voice interaction
+                if (isVoice) {
+                    voiceService.unlockAudioContext();
+                    voiceService.speak(response.content, freshCountryCode);
+                }
+
                 // 1. Functional state: Should the button act as "Locate Me"?
-                // Yes, if we don't have a city yet.
-                setIsRequestingLocation(!newState.detectedCity && !detectedCity);
+                // Only if we are truly in LOCATION_CHECK step and have no suggestion
+                setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);
 
                 setIsTyping(false);
 
                 if (response.action === 'navigate' && response.target) {
+                    console.log(`[handleUserMessage] Navigating to: ${response.target}`);
                     setTimeout(() => {
                         navigate(response.target!);
-                    }, 1500 + (response.content.length * 20));
+                    }, 1000 + (response.content.length * 10)); // Snappier redirection
                 }
             } catch (error) {
                 console.error("Error processing message:", error);
                 setIsTyping(false);
             }
-        }, 800);
+        }, 600);
     };
+
+    // Keep the ref in sync so the transcription useEffect always calls the latest version
+    handleUserMessageRef.current = handleUserMessage;
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
@@ -292,7 +408,7 @@ export function EmergencyChatInterface() {
         }
     };
 
-    const isActionDisabled = (!input.trim() && !isRequestingLocation && !(detectedTrade && detectedCity)) || (isTyping && !isRequestingLocation);
+    const isActionDisabled = (!input.trim() && !isRequestingLocation && !(detectedTrade && (detectedCity || locationRecord))) || (isTyping && !isRequestingLocation);
 
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
@@ -343,7 +459,16 @@ export function EmergencyChatInterface() {
 
     const micButton = (
         <Button
-            onClick={isRecording ? stopRecording : startRecording}
+            onClick={async () => {
+                if (isRecording) {
+                    stopRecording();
+                    stopVolumeMonitor();
+                } else {
+                    voiceService.unlockAudioContext();
+                    await startRecording();
+                    startVolumeMonitor();
+                }
+            }}
             disabled={isTranscriptionProcessing}
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
@@ -351,7 +476,7 @@ export function EmergencyChatInterface() {
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
                     : 'bg-gold/10 hover:bg-gold/20 text-gold border border-gold/30'}`}
-            title={isRecording ? "Stop Recording" : isTranscriptionProcessing ? "Transcribing..." : "Record Message"}
+            title={isRecording ? "Stop Recording" : (isTranscriptionProcessing ? `Processing... (${whisperStatus})` : `Record Message (${whisperStatus})`)}
         >
             {isTranscriptionProcessing ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -406,6 +531,8 @@ export function EmergencyChatInterface() {
             step: 'INITIAL',
             detectedTrade: null,
             detectedCity: null,
+            suggestedCity: null,
+            locationConfirmed: false,
             history: []
         });
         setInput("");
@@ -526,9 +653,14 @@ export function EmergencyChatInterface() {
                                     audioData={audioData}
                                     isRecording={isRecording}
                                     isProcessing={isTranscriptionProcessing}
-                                    onConfirm={stopRecording}
+                                    transcript={transcription}
+                                    onConfirm={() => {
+                                        stopRecording();
+                                        stopVolumeMonitor();
+                                    }}
                                     onCancel={() => {
                                         stopRecording();
+                                        stopVolumeMonitor();
                                         setAudioData(new Array(120).fill(0));
                                     }}
                                 />

@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**Furnace blowing cold air? Woke up to a freezing house? Before you pay $150 for a service call, check the "High Limit Switch." This is the US homeowner's guide to forced air diagnostics.**
+const us_content = `**Furnace blowing cold air? Woke up to a freezing house? Before you pay $150 for a service call, check the "High Limit Switch." This is the US homeowner's guide to forced air diagnostics.** For immediate safety steps, see our [Emergency Home Guide](/blog/what-to-do-in-home-emergency-before-help-arrives-us).
 
 ---
 
@@ -25,7 +25,7 @@ Before calling a pro, perform this 5-minute audit:
 1.  **Check the Filter:** Pull it out. If it's grey/black, replace it. (Size is printed on the cardboard edge, e.g., 16x25x1).
 2.  **Check the Thermostat:** Is it set to "Fan: ON" instead of "Fan: AUTO"? If it's ON, the fan runs 24/7, even when the furnace isn't heating. Switch to AUTO.
 3.  **Check the Vents:** Are half your vents closed? You might be choking the system, causing back-pressure that trips the limit switch. Open them up.
-4.  **The Flame Sensor:** Watch the furnace start. Does the flame light for 4 seconds and then click off? Your flame sensor rod is likely coated in carbon. (Pro Tip: Polish it gently with a dollar bill or fine steel wool).
+4.  **The Flame Sensor:** Watch the furnace start. Does the flame light for 4 seconds and then click off? Your flame sensor rod is likely coated in carbon. (Pro Tip: Polish it gently with a dollar bill or fine steel wool). For technical standards, see [NFPA 54](https://www.nfpa.org/54).
 
 #### 3. Boiler Systems (Hydronic Heat)
 If you have radiators instead of vents, you have a boiler.
@@ -78,7 +78,7 @@ When buying a furnace, you see "AFUE" (Annual Fuel Utilization Efficiency).
 *   **The Diagnosis:** A technician found a hairline crack in the 18-year-old heat exchanger.
 *   **The Science:** When the furnace heated up, the metal expanded, opening the crack. The blower fan (which has higher pressure) pushed air *into* the combustion chamber, disturbing the flame. However, during the "cool down" cycle, exhaust gas (CO) leaked back into the supply air.
 *   **The Outcome:** The unit was Red Tagged immediately. The family had to stay in a hotel.
-*   **The Lesson:** Inspect heat exchangers annually after year 15.
+*   **The Lesson:** Inspect heat exchangers annually after year 15. For more on gas safety, see our [Carbon Monoxide US Guide](/blog/carbon-monoxide-us).
 
 #### 10. Cost Breakdown: Repair vs. Replace (2025 Estimates)
 | Component | Part Cost | Labor Cost | Total | Worth Fixing? |
@@ -104,7 +104,7 @@ A: **Every 90 days** for standard 1-inch filters. If you have pets, every 60 day
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Boiler pressure gauge sitting at zero? No hot water? Before you call an engineer out for £120, learn how to use the "Filling Loop." This is the UK homeowner's guide to Combi Boiler pressure.**
+const gb_content = `**Boiler pressure gauge sitting at zero? No hot water? Before you call an engineer out for £120, learn how to use the "Filling Loop." This is the UK homeowner's guide to Combi Boiler pressure.** For regional safety protocols, see our [Carbon Monoxide UK Guide](/blog/carbon-monoxide-gb).
 
 ---
 
@@ -128,13 +128,13 @@ Pressurised systems shouldn't lose water. If you have to top it up every week, y
 *   **The PRV (Pressure Relief Valve):** Go outside. Look for the small 15mm copper pipe coming out of the wall near the boiler. Is it dripping? If so, your **Expansion Vessel** has failed.
 
 #### 4. Historical Context: North Sea Gas & The Combi Revolution
-In the 1960s, the UK relied on "Town Gas" (made from coal). It was dirty and poisonous. The discovery of natural gas in the North Sea prompted a massive national conversion program—every burner in Britain had to be changed. Then, in 2005, the government changed building regulations to mandate **Condensing Boilers** (A-Rated). This killed off the old "Back Boiler" (behind the fireplace) and the "Immersion Heater" tank, leading to the dominance of the Combi Boiler in 80% of UK homes today.
+In the 1960s, the UK relied on "Town Gas" (made from coal). It was dirty and poisonous. The discovery of natural gas in the North Sea prompted a massive national conversion program—every burner in Britain had to be changed. Then, in 2005, the government changed building regulations to mandate **Condensing Boilers** (A-Rated). This killed off the old "Back Boiler" (behind the fireplace) and the "Immersion Heater" tank, leading to the dominance of the Combi Boiler in 80% of UK homes today. For gas work regulations, see the [Gas Safe Register](https://www.gassaferegister.co.uk/).
 
 #### 5. Technical Deep Dive: The Condensate Pipe Freeze
 In strict UK winters, thousands of boilers stop working.
 *   **The Cause:** The white plastic pipe that carries acidic water from the boiler to the drain is exposed to the cold outside. It freezes solid.
 *   **The Sensor:** The boiler detects the blockage and shuts down with an error code (e.g., EA on Worcester).
-*   **The Fix:** Pour warm (not boiling) water over the external pipe to melt the ice plug. Lag (insulate) it for the future.
+*   **The Fix:** Pour warm (not boiling) water over the external pipe to melt the ice plug. Lag (insulate) it for the future. For more on winter risks, see our [Frozen Condensate Guide](/blog/frozen-condensate-pipe-fix-gb).
 
 #### 6. The 12-Month UK Boiler Maintenance Calendar
 *   **Jan:** Check the Condensate Pipe insulation.

@@ -8,6 +8,8 @@ export interface WhisperResult {
     startRecording: () => void;
     stopRecording: () => void;
     getAudioLevel: () => number;
+    resetTranscription: () => void;
+    status: string;
 }
 
 export function useWhisper(): WhisperResult {
@@ -15,6 +17,7 @@ export function useWhisper(): WhisperResult {
     const [isProcessing, setIsProcessing] = useState(false);
     const [transcription, setTranscription] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [status, setStatus] = useState('Ready');
 
     const workerRef = useRef<Worker | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -30,14 +33,25 @@ export function useWhisper(): WhisperResult {
         });
 
         workerRef.current.onmessage = (event) => {
-            const { type, text, error: workerError } = event.data;
+            const { type, text, error: workerError, data } = event.data;
+            if (type !== 'PROGRESS') {
+                console.log(`[useWhisper] Received message from worker: ${type}`, { text, workerError });
+            }
 
             if (type === 'TRANSCRIPTION_RESULT') {
                 setTranscription(text);
                 setIsProcessing(false);
+                setStatus('Ready');
             } else if (type === 'TRANSCRIPTION_ERROR') {
                 setError(workerError);
                 setIsProcessing(false);
+                setStatus('Error');
+            } else if (type === 'PROGRESS') {
+                if (data.status === 'progress') {
+                    setStatus(`Loading model: ${data.progress.toFixed(1)}%`);
+                } else if (data.status === 'ready') {
+                    setStatus('Model Ready');
+                }
             }
         };
 
@@ -51,6 +65,7 @@ export function useWhisper(): WhisperResult {
             setError(null);
             setTranscription('');
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            console.log('[useWhisper] Microphone stream acquired');
             streamRef.current = stream;
 
             // Re-sample to 16kHz as required by Whisper
@@ -85,6 +100,12 @@ export function useWhisper(): WhisperResult {
             };
 
             mediaRecorder.onstop = async () => {
+                console.log('[useWhisper] Recording stopped, processing audio. Chunks:', audioChunksRef.current.length);
+                if (audioChunksRef.current.length === 0) {
+                    console.warn('[useWhisper] No audio chunks captured');
+                    setIsProcessing(false);
+                    return;
+                }
                 const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
                 const arrayBuffer = await audioBlob.arrayBuffer();
                 const audioData = await audioContext.decodeAudioData(arrayBuffer);
@@ -93,6 +114,7 @@ export function useWhisper(): WhisperResult {
                 const float32Array = audioData.getChannelData(0);
 
                 setIsProcessing(true);
+                console.log('[useWhisper] Sending transcription request to worker');
                 workerRef.current?.postMessage({
                     type: 'TRANSCRIPTION_REQUEST',
                     audio: float32Array
@@ -145,6 +167,11 @@ export function useWhisper(): WhisperResult {
         return amplified;
     }, []);
 
+    const resetTranscription = useCallback(() => {
+        setTranscription('');
+        setError(null);
+    }, []);
+
     return {
         transcription,
         isProcessing,
@@ -152,6 +179,8 @@ export function useWhisper(): WhisperResult {
         error,
         startRecording,
         stopRecording,
-        getAudioLevel
+        getAudioLevel,
+        resetTranscription,
+        status
     };
 }

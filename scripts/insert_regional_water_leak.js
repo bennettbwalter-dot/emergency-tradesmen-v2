@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**If your ceiling is bulging with water, do not stand directly under it. The drywall can collapse without warning, dropping 50lbs of wet gypsum and water on top of you.**
+const us_content = `**If your ceiling is bulging with water, do not stand directly under it. The drywall can collapse without warning, dropping 50lbs of wet gypsum and water on top of you.** For immediate shut-off steps, see our [Home Emergency Shut-off Guide](/blog/home-emergency-shut-off-protocol-us).
 
 ---
 
@@ -101,13 +101,13 @@ Homeowners Insurance in the US is very specific. They cover **"Sudden and Accide
 *   **Covered:** A pipe bursts at 2 AM and floods the house.
 *   **Denied:** A toilet has been slowly leaking for 6 months and rotted the floor joists ("Long-term Seepage").
 *   **The Lesson:** You must report the claim *immediately*. Waiting 2 weeks implies negligence.
-*   **Deductible:** Know your deductible ($500 vs $2,500). If the repair is $2,000 and your deductible is $2,500, don't file a claim.
+*   **Deductible:** Know your deductible ($500 vs $2,500). If the repair is $2,000 and your deductible is $2,500, don't file a claim. Refer to [National Flood Insurance Program (NFIP)](https://www.floodsmart.gov/) for coverage details.
 
 #### 8. Section: Who Do You Call? (The US Trade Hierarchy)
 1.  **Emergency Plumber:** To stop the water and fix the pipe.
 2.  **Mitigation Company (ServoPro/Paul Davis):** These are "Water Damage Restoration" experts. They bring in huge dehumidifiers (LGRs) and fans (Air Movers) to dry the structure before mold grows (usually within 48-72 hours).
 3.  **Roofer:** Only if the water is coming from rain/ice.
-4.  **Drywall Contractor:** To patch the hole *after* everything is dry (~5-7 days later).
+4.  **Drywall Contractor:** To patch the hole *after* everything is dry (~5-7 days later). For mitigation standards, see [IICRC S500](https://iicrc.org/s500/).
 
 #### 9. 20-Step US Ceiling Restoration Checklist
 1.  **Stop Water:** Main valve off.
@@ -145,7 +145,7 @@ A: **Yes.** If your home was built before 1979, the texturing material likely co
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Water dripping through your light fitting? Follow our emergency guide to isolating the stopcock, relieving plasterboard pressure, and understanding 'Trace and Access' insurance cover.**
+const gb_content = `**Water dripping through your light fitting? Follow our emergency guide to isolating the stopcock, relieving plasterboard pressure, and understanding 'Trace and Access' insurance cover.** For help with other leaks, see our [Emergency Plumber Guide](/blog/5-signs-you-need-emergency-plumber-gb).
 
 ---
 
@@ -170,7 +170,7 @@ You must stop the flow.
 #### 4. The Electrical Hazard: Pendant Lights
 Water seeks the lowest point. In a ceiling, that is often the hole drilled for your light fitting (Rose/Pendant).
 *   **The Danger:** If water is dripping from the light bulb or the plastic rose, the circuit is LIVE and wet. The water may look clean, but it has passed through dirty joists and insulation—it is conductive.
-*   **Protocol:** Go to your **Consumer Unit** (Fuse Box). Flip the MCB labeled "Lighting" (usually the 6Amp breaker) to the OFF position. Do not touch the light switch.
+*   **Protocol:** Go to your **Consumer Unit** (Fuse Box). Flip the MCB labeled "Lighting" (usually the 6Amp breaker) to the OFF position. Do not touch the light switch. Refer to [NICEIC Safety Guidance](https://www.niceic.com/find-a-contractor/electrics-explained) for more.
 
 #### 5. Section: The Flat Roof Failure (UK Case Study)
 In the UK, "Flat Roofs" on kitchen extensions or garages are notorious for leaking. Felt roofs have a lifespan of 10-15 years. If the leak occurs during a storm, it is likely ingress.
@@ -270,8 +270,7 @@ A: This is an "Historic Leak" or "Ghost Leak". It often means a pipe drips only 
 **Q: Can I claim for a "Slow Leak"?**
 A: **Often No.** Insurers cover "Sudden and Unforeseen" events. A shower tray that has been leaking for 3 years because the silicone sealant failed is considered "Wear and Tear" / "Maintenance Issue" and is usually denied. This is why you must fix leaks the moment they appear.
 
-**Q: What is Awaab's Law (for Tenants)?**
-A: If you rent (Social Housing), **Awaab's Law** compels landlords to investigate damp and mold hazards within **14 days** and begin repairs within **7 days**. A major ceiling leak is a Category 1 hazard. If your landlord ignores you, they are breaking the law.
+**Q: What is Awaab's Law (for Tenants)?** If you rent (Social Housing), **Awaab's Law** compels landlords to investigate damp and mold hazards within **14 days** and begin repairs within **7 days**. A major ceiling leak is a Category 1 hazard. If your landlord ignores you, they are breaking the law. See [UK Gov Awaab's Law Guidance](https://www.gov.uk/government/publications/carbon-monoxide-alarms-in-rented-and-owned-homes-guidance).
 `;
 
 async function insertRegionalBatch() {

@@ -111,15 +111,15 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     // 2. Real-time Location Tracking (Navigator API)
     const resolveCoordsToCity = useCallback((lat: number, lng: number) => {
         try {
-            const nearest = findNearestCity(lat, lng);
+            const nearest = findNearestCity(lat, lng, countryCode);
             if (nearest) {
                 setDetectedCity(nearest.city);
-                console.log(`Resolved coords to city: ${nearest.city}`);
+                console.log(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
             }
         } catch (e) {
             console.warn("Failed to resolve city from coords", e);
         }
-    }, []);
+    }, [countryCode]);
 
     const detectUserLocation = useCallback(() => {
         if (!navigator.geolocation) {

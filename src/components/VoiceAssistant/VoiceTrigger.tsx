@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AzureVoiceService } from '@/services/azureVoiceService';
 import { processUserMessage, ChatState } from '@/lib/chat-logic';
 import WhisperWaveform from './WhisperWaveform';
+import { useWhisper } from '@/hooks/useWhisper';
 
 const VoiceTrigger = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const VoiceTrigger = () => {
     // UI State (for rendering)
     const [status, setStatusState] = useState('Silent');
     const [isActive, setIsActiveState] = useState(false);
-    const [transcript, setTranscript] = useState(''); // NEW: Live Transcript
+    const [transcript, setTranscript] = useState(''); // Live Transcript for display
 
     // Refs (for logic/event handlers to avoid stale closures)
     const statusRef = useRef('Silent');
@@ -25,8 +26,17 @@ const VoiceTrigger = () => {
         history: []
     });
 
+    const {
+        isRecording,
+        isProcessing: isTranscriptionProcessing,
+        transcription,
+        error: whisperError,
+        startRecording,
+        stopRecording,
+        getAudioLevel
+    } = useWhisper();
+
     const [voiceService] = useState(() => new AzureVoiceService());
-    const recognitionRef = useRef<any>(null);
     const silenceTimer = useRef<any>(null);
     const isStartingRef = useRef(false);
     const lastFallbackTimeRef = useRef<number>(0); // Cooldown for fallback messages
@@ -46,14 +56,39 @@ const VoiceTrigger = () => {
 
     const updateChatState = (newState: ChatState) => {
         chatStateRef.current = newState;
-        // We don't strictly need to trigger a re-render for chat state logic, 
-        // as it's invisible logic state, but if we visualized it we would need useState.
-        // For now, Ref is enough for the logic to work.
     };
 
     const [volume, setVolume] = useState(0);
     const [audioData, setAudioData] = useState<number[]>(new Array(50).fill(0));
     const volumeInterval = useRef<any>(null);
+
+    // Sync transcription to processInput
+    useEffect(() => {
+        if (transcription && transcription.trim().length >= MIN_TRANSCRIPT_LENGTH) {
+            console.log(`[Voice] Whisper transcription: "${transcription}"`);
+            setTranscript(transcription);
+            processInput(transcription);
+        }
+    }, [transcription]);
+
+    // Handle Whisper Errors
+    useEffect(() => {
+        if (whisperError) {
+            console.error("[Voice] Whisper Error:", whisperError);
+            setStatus(`Error: ${whisperError}`);
+        }
+    }, [whisperError]);
+
+    // Sync isActive and status with useWhisper state
+    useEffect(() => {
+        if (isRecording) {
+            setStatus('Listening');
+        } else if (isTranscriptionProcessing) {
+            setStatus('Processing');
+        } else if (isActiveRef.current && statusRef.current !== 'Speaking' && statusRef.current !== 'Processing') {
+            setStatus('Listening');
+        }
+    }, [isRecording, isTranscriptionProcessing]);
 
     useEffect(() => {
         // CLEANUP
@@ -63,23 +98,23 @@ const VoiceTrigger = () => {
         };
     }, []);
 
-    // Volume monitoring now uses the service's getVolume() to avoid AudioContext conflicts
+    // Volume monitoring now uses the hook's getAudioLevel()
     const startVolumeMonitor = () => {
+        if (volumeInterval.current) clearInterval(volumeInterval.current);
         volumeInterval.current = setInterval(() => {
             if (!isActiveRef.current) {
                 clearInterval(volumeInterval.current);
                 return;
             }
-            // Get volume from the Azure service's audio pipeline (same AudioContext)
-            const vol = voiceService.getVolume();
-            setVolume(vol * 2.55); // Scale to 0-255 range for UI
+            const vol = getAudioLevel();
+            setVolume(vol * 255); // Scale to 0-255 range for UI
 
             // Update audio data for waveform visualization
             setAudioData(prev => {
                 const newData = [...prev.slice(1), vol]; // Shift left, add new value
                 return newData;
             });
-        }, 100);
+        }, 80);
     };
 
     const startSession = async () => {
@@ -87,36 +122,7 @@ const VoiceTrigger = () => {
         isStartingRef.current = true;
 
         try {
-            console.log("[Voice] starting session...");
-
-            // Mobile Check (Simple agent sniff, robust enough for this split)
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-            console.log(`[Voice] Device check: isMobile=${isMobile}`);
-
-            let stream: MediaStream | undefined;
-
-            if (!isMobile) {
-                // DESKTOP: Use Custom Bridge (Fixes desktop silence/noise-gate issues)
-                try {
-                    stream = await navigator.mediaDevices.getUserMedia({
-                        audio: {
-                            echoCancellation: false,
-                            noiseSuppression: false,
-                            autoGainControl: true
-                        }
-                    });
-                    console.log('[Voice] Desktop: Microphone acquired with echoCancellation DISABLED');
-                } catch (permError) {
-                    console.error("[Voice] Microphone access failed:", permError);
-                    setStatus("Microphone Denied");
-                    return;
-                }
-            } else {
-                // MOBILE: Use Native SDK Handling (Fixes mobile loop/silence issues)
-                // Mobile OS handles echo cancellation better at system level.
-                // We actively want to avoid the ScriptProcessorNode on mobile.
-                console.log('[Voice] Mobile: Letting Azure SDK handle mic input natively');
-            }
+            console.log("[Voice] starting Whisper session...");
 
             voiceService.unlockAudioContext();
             setIsActive(true);
@@ -130,39 +136,11 @@ const VoiceTrigger = () => {
             });
 
             const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
-            const locale = countryCode === 'US' ? 'en-US' : 'en-GB';
 
-            // 1. Start Azure Recognition (Continuous)
-            console.log(`[Voice] Initializing Azure STT (${isMobile ? 'Native Mobile' : 'Custom Desktop Bridge'})...`);
+            await startRecording();
+            startVolumeMonitor();
 
-            await voiceService.startRecognition(
-                (text, isFinal) => {
-                    if (!isActiveRef.current) return;
-                    setTranscript(text);
-
-                    if (isFinal && text.trim().length >= MIN_TRANSCRIPT_LENGTH) {
-                        console.log(`[Voice] Final transcript accepted (length ${text.trim().length}): "${text}"`);
-                        processInput(text);
-                    } else if (isFinal && text.trim().length > 0 && text.trim().length < MIN_TRANSCRIPT_LENGTH) {
-                        console.log(`[Voice] Ignored short transcript (length ${text.trim().length}): "${text}"`);
-                        // Don't process very short utterances like "uh", "um"
-                    } else if (text.trim().length > 2 && statusRef.current === 'Speaking') {
-                        console.log("[Voice] Barge-in! Stopping TTS.");
-                        voiceService.stop();
-                    }
-                },
-                (err) => {
-                    console.error("[Voice] STT Error:", err);
-                    setStatus(`Error: ${err}`);
-                },
-                locale,
-                stream // Undefined on Mobile -> Triggers SDK default mic. Defined on Desktop -> Triggers custom bridge.
-            );
-
-            // CRITICAL: Wait for SDK to fully initialize before speaking
-            await new Promise(resolve => setTimeout(resolve, 500));
-
-            setStatus('Listening');
+            // Speak greeting
             await speakResponse("Hello Emergency Tradesmen here how can I help?", countryCode);
 
         } catch (e) {
@@ -175,21 +153,17 @@ const VoiceTrigger = () => {
     };
 
     const stopSession = () => {
-        console.log("[Voice] stopSession() CALLED - Trace below:");
-        console.trace("[Voice] stopSession trace");
+        console.log("[Voice] stopSession() CALLED");
         setIsActive(false);
         setStatus('Silent');
-        setTranscript('');
 
-        updateChatState({
-            step: 'INITIAL',
-            detectedTrade: null,
-            detectedCity: null,
-            history: []
-        });
-
-        voiceService.stopRecognition();
+        stopRecording();
         voiceService.stop();
+
+        if (volumeInterval.current) {
+            clearInterval(volumeInterval.current);
+            volumeInterval.current = null;
+        }
     };
 
     const isProcessingRef = useRef(false);
@@ -320,11 +294,13 @@ const VoiceTrigger = () => {
                 <div className="absolute bottom-24 right-0">
                     <WhisperWaveform
                         audioData={audioData}
-                        isRecording={status === 'Listening'}
-                        isProcessing={status === 'Processing'}
+                        isRecording={isRecording}
+                        isProcessing={isTranscriptionProcessing}
                         transcript={transcript}
                         onConfirm={() => {
-                            if (transcript && transcript.trim().length >= 3) {
+                            if (isRecording) {
+                                stopRecording();
+                            } else if (transcript && transcript.trim().length >= 3) {
                                 processInput(transcript);
                             }
                         }}

@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT (Hyper-Expanded)
 // ------------------------------------------------------------------
-const us_content = `**Air conditioner running but not cooling? It’s likely a bad Run Capacitor or a dirty condenser coil. Here is the US homeowner's guide to checking your refrigerant lines, understanding SEER2 ratings, and knowing when to call a pro.**
+const us_content = `**Air conditioner running but not cooling? It’s likely a bad Run Capacitor or a dirty condenser coil. Here is the US homeowner's guide to checking your refrigerant lines, understanding SEER2 ratings, and knowing when to call a pro.** For more on seasonal HVAC risks, see our [Spring Thaw Prevention](/blog/spring-thaw-pipe-burst-prevention) guide.
 
 ---
 
@@ -26,7 +26,7 @@ If your outside unit handles the heat but the fan isn't spinning (or is humming)
 Your AC doesn't "add cold air." It removes heat.
 *   **The Mechanism:** The outside unit (Condenser) dumps the heat from your house into the outside air. It works like a car radiator.
 *   **The Problem:** If the aluminum fins are clogged with cottonwood, grass clippings, dog fur, or dirt, the heat cannot escape. The compressor overheats and trips the "Thermal Overload" switch.
-*   **The Fix:** Turn off the power at the disconnect box. Spray the coils gently with a garden hose (not a pressure washer, which bends the fins) from the *inside out* to push the dirt away. Use a specialized "Coil Cleaner" foam if it's greasy.
+*   **The Fix:** Turn off the power at the disconnect box. Spray the coils gently with a garden hose (not a pressure washer, which bends the fins) from the *inside out* to push the dirt away. Use a specialized "Coil Cleaner" foam if it's greasy. For more on general HVAC care, refer to [EPA Indoor Air Quality](https://www.epa.gov/indoor-air-quality-iaq) standards.
 
 #### 3. Low Refrigerant (Freon/Puron)
 *   **The Myth:** "It just needs a top-up."
@@ -70,7 +70,8 @@ Thinking of installing a Nest or Ecobee to save money?
 *   **Jan:** Check Furnace Filter (Replace if grey).
 *   **Feb:** Inspect Thermostat batteries (Alkaline leaks destroy boards).
 *   **Mar:** Clear debris from around the outside Condenser unit (2ft clearance).
-*   **Apr:** Turn on AC to test (before the first heatwave). Listen for "Hard Starting."
+*   **California:** Look for a C-20 HVAC license on the [CSLB](https://www.cslb.ca.gov/).
+first heatwave). Listen for "Hard Starting."
 *   **May:** Wash Condenser Coils (Garden Hose). Check disconnecting box for wasp nests.
 *   **Jun:** Check Condensate Drain line. Pour 1 cup of vinegar to kill algae.
 *   **Jul:** Check Filter again (Pollen season).
@@ -90,7 +91,7 @@ Thinking of installing a Nest or Ecobee to save money?
 7.  **Evaporator Coil:** The indoor A-frame coil that gets cold.
 8.  **Freon:** Old R-22 refrigerant (Banned).
 9.  **Puron:** Modern R-410A refrigerant.
-10. **SEER2:** Seasonal Energy Efficiency Ratio (New 2023 Standard).
+10. **SEER2:** Seasonal Energy Efficiency Ratio (New 2023 Standard, see [DOE Energy Star](https://www.energystar.gov/)).
 11. **Split System:** Indoor + Outdoor unit combo (Standard US Home).
 12. **Ton:** Cooling capacity (1 Ton = 12,000 BTUs/hr).
 
@@ -108,13 +109,13 @@ A: **Auto.** Setting it to "On" keeps the fan running even when the compressor i
 // ------------------------------------------------------------------
 // UK CONTENT (Hyper-Expanded)
 // ------------------------------------------------------------------
-const gb_content = `**Daekin or Mitsubishi unit blowing lukewarm air? Understanding "Defrost Mode," F-Gas regulations, and why you can't just "top up the gas" yourself. A guide to UK Mini-Splits.**
+const gb_content = `**Daekin or Mitsubishi unit blowing lukewarm air? Understanding "Defrost Mode," F-Gas regulations, and why you can't just "top up the gas" yourself. A guide to UK Mini-Splits.** For more on winter heating issues, see our [Frozen Condensate Pipe Fix](/blog/frozen-condensate-pipe-fix-gb).
 
 ---
 
 #### 1. The UK Context: Mini-Splits & F-Gas
 In the UK, domestic AC is usually "Air-to-Air Heat Pumps" (Mini-Splits).
-*   **The Law (F-Gas):** It is a criminal offense to work on AC refrigerant circuits without specific F-Gas qualifications (Refcom/F-Gas Category 1).
+*   **The Law (F-Gas):** It is a criminal offense to work on AC refrigerant circuits without specific F-Gas qualifications (see [HSE Gas Safety](https://www.hse.gov.uk/gas/domestic/)).
 *   **Restriction:** You cannot buy R32 or R410A gas on Amazon. It is a controlled substance due to Global Warming Potential (GWP). R32 is mildly flammable.
 *   **DIY Limit:** You can clean filters and wash coils. You cannot touch the copper pipes or valves.
 

@@ -99,8 +99,8 @@ Whether you need an [emergency electrician near you](https://emergencytradesmen.
 ---
 
 - **Find Help Now:** [Search local roofing contractors](https://emergencytradesmen.net/) for immediate tarping and assessment.
-- **Electrical Safety:** Read our guide on [Carbon Monoxide Safety](https://emergencytradesmen.net/blog/carbon-monoxide) if you're using a portable generator during a storm-related power outage.
-- **Plumbing Risks:** Check for [Spring Thaw pipe risks](https://emergencytradesmen.net/blog/spring-thaw) if your storm brings a mix of snow and rain.
+- **Electrical Safety:** Read our guide on [Carbon Monoxide Safety](/blog/carbon-monoxide-us) if you're using a portable generator during a storm-related power outage.
+- **Plumbing Risks:** Check for [Spring Thaw pipe risks](/blog/spring-thaw-pipe-burst-prevention) if your storm brings a mix of snow and rain. Refer to [FEMA's Individual Assistance](https://www.fema.gov/assistance/individual) for disaster recovery resources.
 
 ---
 

@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**Turn the key and hear a click? Or a slow groan? Don't call a tow truck yet. Here is the US Driver's 2025 Troubleshooting Guide to Dead Batteries, Bad Starters, and Failed Alternators.**
+const us_content = `**Turn the key and hear a click? Or a slow groan? Don't call a tow truck yet. Here is the US Driver's 2025 Troubleshooting Guide to Dead Batteries, Bad Starters, and Failed Alternators.** For more on seasonal maintenance, see our [Spring Thaw Prevention](/blog/spring-thaw-pipe-burst-prevention) guide.
 
 ---
 
@@ -23,7 +23,7 @@ The sound your car makes is the #1 diagnostic tool.
 *   **Slow Crank:** *Rrr... rrr... rrr...* (Groaning sound).
     *   **Diagnosis:** Dying battery or thick oil in extreme cold (<0°F).
 *   **Crank but No Start:** The engine spins fast and healthy, but won't "catch."
-    *   **Diagnosis:** Fuel or Spark issue. (Fuel pump or Spark Plugs).
+    *   **Diagnosis:** Fuel or Spark issue. (Fuel pump or Spark Plugs). For more detailed diagnostics, see [AAA's Battery Guide](https://www.aaa.com/autorepair/articles/how-to-diagnose-a-dead-battery).
 
 #### 2. The Alternator Test (DIY)
 How do you know if it's the battery or the alternator?
@@ -91,14 +91,14 @@ A: **Not necessarily.** That is lead sulphate. Clean it off with a mixture of ba
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Car won't start on a frosty morning? Dreading the call to the boss? Before you call the AA, check the essentials. Here is the UK Guide to Flat Batteries and Alternators.**
+const gb_content = `**Car won't start on a frosty morning? Dreading the call to the boss? Before you call the AA, check the essentials. Here is the UK Guide to Flat Batteries and Alternators.** For help in other home emergencies, see our [Emergency Home Guide](/blog/what-to-do-in-home-emergency-before-help-arrives-gb).
 
 ---
 
 #### 1. The Winter Killer: Why Frost Kills Batteries
 A lead-acid battery relies on a chemical reaction to create electricity.
 *   **The Physics:** At 0°C, a battery loses 35% of its power. At the same time, the engine oil thickens, making the engine 50% harder to turn.
-*   **The Age Factor:** Car batteries last 3-5 years. If yours is 5 years old, it *will* fail on the first proper frost of the year.
+*   **The Age Factor:** Car batteries last 3-5 years. If yours is 5 years old, it *will* fail on the first proper frost of the year. Refer to [The AA's Battery Safety](https://www.theaa.com/breakdown-cover/advice/car-batteries-everything-you-need-to-know) for maintenance tips.
 
 #### 2. Diagnostics: The Headlight Test
 Don't have a multimeter? Use your lights.

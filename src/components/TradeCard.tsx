@@ -42,17 +42,9 @@ export function TradeCard({ trade, city }: TradeCardProps) {
     }
   };
 
-  // Handle location result from localization context
-  useEffect(() => {
-    if (localizationCity && !chatbotCity && !city) {
-      const isUS = settings.countryCode === 'US';
-      const countryCities = isUS ? usCities : cities;
-      const isValidCity = countryCities.map(c => c.toLowerCase()).includes(localizationCity.toLowerCase());
-      if (isValidCity) {
-        setDetectedCity(localizationCity);
-      }
-    }
-  }, [localizationCity, chatbotCity, city, settings.countryCode, setDetectedCity]);
+  // Removed the aggressive useEffect that was poisoning the global chatbot context
+  // based on geolocation. Geolocation results should only be suggested or used
+  // for initial navigation, not forced into the state on every card mount.
 
   return (
     <Link

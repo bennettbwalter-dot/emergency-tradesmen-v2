@@ -17,11 +17,11 @@ const us_content = `**A toilet that won't flush is annoying. A toilet that gurgl
 #### 1. The Anatomy of a Backup: How to Diagnose the Danger
 Your home's plumbing is like a tree. The fixtures (toilets, sinks, showers) are the branches, and they all feed into one "Trunk"—the **Main Sewer Line**.
 *   **Local Clog (Branch Issue):** If only ONE fixture is draining slowly (e.g., the kitchen sink), the clog is in the P-Trap or the immediate branch line. This is a DIY fix with a plunger or small snake.
-*   **Main Line Backup (Trunk Issue):** This is the "Code Red." If you flush the toilet and water comes UP in the bathtub, or if running the washing machine causes the toilet to gurgle, the blockage is in the main line leaving the house. **STOP USING WATER IMMEDIATELY.** If you keep running water, you will flood your own home with sewage.
+*   **Main Line Backup (Trunk Issue):** This is the "Code Red." If you flush the toilet and water comes UP in the bathtub, or if running the washing machine causes the toilet to gurgle, the blockage is in the main line leaving the house. **STOP USING WATER IMMEDIATELY.** If you keep running water, you will flood your own home with sewage. For immediate response steps, see our [Home Emergency Shut-off Guide](/blog/home-emergency-shut-off-protocol-us).
 
 #### 2. Whose Problem Is It? (The Lateral Line)
 In the US, most homeowners are responsible for the **"Upper Lateral"**—the pipe that runs from your house foundation to the property line (sidewalk).
-*   **The Lower Lateral:** The pipe from the property line to the City Sewer Main (in the middle of the street) is *usually* the city's responsibility, but in many municipalities, the homeowner owns the pipe all the way to the connection. You need to check your local code.
+*   **The Lower Lateral:** The pipe from the property line to the City Sewer Main (in the middle of the street) is *usually* the city's responsibility, but in many municipalities, the homeowner owns the pipe all the way to the connection. You need to check your local code or the [EPA's Clean Water Act](https://www.epa.gov/laws-regulations/summary-clean-water-act) guidance.
 *   **The Cleanout:** You should have a "Main Cleanout" (a PVC or cast iron pipe with a screw cap) in your yard. If you open this cap and water flows out, the blockage is downstream (City side). If you look down and it's empty, the blockage is under your house.
 
 #### 3. The Silent Killer: Tree Roots
@@ -30,7 +30,7 @@ The #1 cause of main line backups in the US is **Root Intrusion**. Old clay or c
 
 #### 4. Section: Health Risks (Black Water)
 Sewage backup is classified as **Category 3 Water** ("Black Water"). It is grossly unsanitary and contains bacteria (E. Coli, Salmonella), viruses (Hepatitis, Rotavirus), and parasites (Giardia).
-*   **The Rule:** If sewage touches carpet, pad, or drywall, **IT CANNOT BE CLEANED.** It must be cut out and discarded. You cannot "shampoo" sewage out of a carpet pad. The health risk to children and pets is too high.
+*   **The Rule:** If sewage touches carpet, pad, or drywall, **IT CANNOT BE CLEANED.** It must be cut out and discarded. You cannot "shampoo" sewage out of a carpet pad. The health risk to children and pets is too high. Refer to [CDC Guidelines on Floodwater](https://www.cdc.gov/natural-disasters/safety/floodwater-safety.html) for more.
 
 #### 5. Section: The "Backwater Valve" Solution
 If you live in a low-lying area or possess a basement, you are at risk of the City Sewer backing up INTO your house during heavy rains. To prevent this, you should install a **Backwater Valve**. This is a one-way flap that allows water to leave your house but slams shut if sewage tries to flow back in. Recent code changes in flood-prone areas (like Florida and Houston) mandate these.
@@ -138,7 +138,7 @@ const gb_content = `**Drain blocked? Before you pay a plumber £150, you need to
 #### 1. The Critical Diagnosis: Public vs Private
 Since October 2011, the "Transfer of Private Sewers Regulations" changed the game for UK homeowners.
 *   **Your Responsibility:** You are only responsible for the drains inside your property boundary that serve *only* your home.
-*   **The Water Company's Responsibility:** As soon as your drain meets a neighbor's pipe (becoming a "Shared Outlet") OR leaves your property boundary, it usually becomes a **Public Sewer**. The local Water Company (Thames Water, Anglian, Severn Trent, etc.) must clear blockages here **for free**.
+*   **The Water Company's Responsibility:** As soon as your drain meets a neighbor's pipe (becoming a "Shared Outlet") OR leaves your property boundary, it usually becomes a **Public Sewer**. The local Water Company (Thames Water, Anglian, Severn Trent, etc.) must clear blockages here **for free**. See [Ofwat Guide](https://www.ofwat.gov.uk/households/supply-and-standards/responsibility-for-pipes/) for more on pipe ownership.
 
 #### 2. The "Inspection Chamber" Test
 To find out where the problem lies, lift the lid of the Inspection Chamber (Manhole) in your garden or driveway. This is your "Portal of Truth."
@@ -148,7 +148,7 @@ To find out where the problem lies, lift the lid of the Inspection Chamber (Manh
 #### 3. Health Risks: Weil's Disease (Leptospirosis)
 UK sewers are home to millions of Brown Rats (*Rattus norvegicus*). Their urine carries the bacteria *Leptospira*.
 *   **The Risk:** If you have a sewer flood in your garden or house, you are at risk of contracting **Weil's Disease**. It enters through cuts or eyes/mouth. Symptoms overlap with flu but can cause liver/kidney failure.
-*   **Protocol:** Always wear heavy rubber gloves, goggles, and waterproof boots. Disinfect everything with industrial bleach. Never let children play in a garden that has had sewage overflow until the topsoil is sanitized or replaced.
+*   **Protocol:** Always wear heavy rubber gloves, goggles, and waterproof boots. Disinfect everything with industrial bleach. Never let children play in a garden that has had sewage overflow until the topsoil is sanitized or replaced. For more, see [HSE Water Hazards](https://www.hse.gov.uk/healthservices/water-hazards.htm).
 
 #### 4. Section: "Fatbergs" and the Wet Wipe Epidemic
 UK sewers are plagued by "Fatbergs"—giant congealed masses of cooking fat and wet wipes. The largest found in London weighed 130 tonnes.
@@ -159,7 +159,7 @@ UK sewers are plagued by "Fatbergs"—giant congealed masses of cooking fat and 
 The UK has two types of drainage systems.
 1.  **Foul Water:** Takes toilet/sink waste to the sewage treatment works.
 2.  **Surface Water:** Takes rain from your roof/driveway to a local river.
-*   **Cross-Connection:** It is illegal to plumb a washing machine into a rainwater downpipe. You are polluting the river with detergent. You can be fined by the Environment Agency.
+*   **Cross-Connection:** It is illegal to plumb a washing machine into a rainwater downpipe. You are polluting the river with detergent. You can be fined by the [Environment Agency](https://www.gov.uk/government/organisations/environment-agency). For more on drainage safety, see our [UK Plumber Guide](/blog/5-signs-you-need-emergency-plumber-gb).
 
 #### 6. Appendix A: 50-Item Master UK Drainage Glossary
 1.  **Foul Sewer:** Dirty water pipe.

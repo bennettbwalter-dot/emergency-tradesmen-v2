@@ -7,15 +7,22 @@ const SAFETY_TIPS: Record<string, string> = {
     'gas-engineer': "Gas emergencies are dangerous. If you smell gas, leave immediately and call the National Grid.",
     'electrician': "If there are sparks or smoke, turn off the main power if safe to do so.",
     'plumber': "Turn off your main stopcock to prevent further flooding.",
-    'water-restoration': "Avoid the water if there are live electrics nearby.",
-    'locksmith': "If you are locked out, stay in a safe, well-lit area.",
-    'glazier': "Be careful of broken glass and do not try to remove it yourself."
+    'water-restoration': "Avoid the water if there are live electrics nearby and stay in a dry area.",
+    'locksmith': "If you are locked out, stay in a safe, well-lit area while you wait.",
+    'glazier': "Be careful of broken glass; do not try to remove it yourself or walk near it.",
+    'drain-specialist': "Avoid using any taps or toilets until the blockage is cleared to prevent overflow.",
+    'roofer': "Stay clear of falling debris and avoid going near any damaged or leaking areas.",
+    'builder': "Stay away from any structural damage or unstable walls for your safety.",
+    'breakdown': "Stay in a safe place away from traffic and keep your hazard lights on.",
+    'air-conditioning': "Turn off the unit and avoid touching any leaking fluids or electrical parts."
 };
 
 export interface ChatState {
-    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'ROUTING';
+    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'CONFIRM_LOCATION' | 'ROUTING';
     detectedTrade: string | null;
     detectedCity: string | null;
+    suggestedCity: string | null;
+    locationConfirmed: boolean;
     history: ChatMessage[];
 }
 
@@ -175,6 +182,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
 
+    // Reset navigation signals for new message processing
+    newState.step = currentState.step; // Preserve step by default
+
     // Use appropriate city list based on country
     const activeCities = countryCode === 'US' ? usCities : cities;
     // Sort by length (longest first) to prioritize more specific matches like "Newcastle upon Tyne" over "Newcastle"
@@ -192,46 +202,56 @@ export async function processUserMessage(message: string, currentState: ChatStat
         };
     }
 
-    // 2. GENERAL PAGE NAVIGATION (Expanded Knowledge)
-    if (lowerMsg.includes('blog') || lowerMsg.includes('news')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening the Blog.", action: 'navigate', target: '/blog' } };
-    if (lowerMsg.includes('about')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening About Us.", action: 'navigate', target: '/about' } };
-    if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Contact page.", action: 'navigate', target: '/contact' } };
-    if (lowerMsg.includes('sign up') || lowerMsg.includes('join') || lowerMsg.includes('register')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Tradesmen Sign Up.", action: 'navigate', target: '/tradesmen' } };
-    if (lowerMsg.includes('home') || lowerMsg.includes('start')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Taking you Home.", action: 'navigate', target: '/' } };
+    // TRADE KEYWORD PRESENCE CHECK
+    // If the message contains ANY trade-related keywords, skip navigation/help handlers
+    // and go straight to trade detection. This prevents "I need help, my gas is leaking"
+    // from triggering the help handler instead of detecting gas-engineer.
+    const ALL_TRADE_KEYWORDS = Object.values(TRADE_KEYWORDS).flat();
+    const hasTradeKeywords = ALL_TRADE_KEYWORDS.some(k => lowerMsg.includes(k)) ||
+        GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k));
 
-    // GUIDANCE / BLOG MODE (Specific Safety Qs)
-    if (lowerMsg.includes('what should i do') || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe') || lowerMsg.includes('how to')) {
-        return {
-            newState,
-            response: {
-                id: Date.now().toString(),
-                role: 'assistant',
-                content: "Your safety is priority. I can show you step-by-step emergency guides.",
-                action: 'navigate',
-                target: '/blog'
-            }
-        };
-    }
+    // 2. GENERAL PAGE NAVIGATION — only when NOT describing an emergency
+    if (!hasTradeKeywords) {
+        if (lowerMsg.includes('blog') || lowerMsg.includes('news')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening the Blog.", action: 'navigate', target: '/blog' } };
+        if (lowerMsg.includes('about')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening About Us.", action: 'navigate', target: '/about' } };
+        if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Contact page.", action: 'navigate', target: '/contact' } };
+        if (lowerMsg.includes('sign up') || lowerMsg.includes('join') || lowerMsg.includes('register')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Tradesmen Sign Up.", action: 'navigate', target: '/tradesmen' } };
+        if (lowerMsg.includes('home') || lowerMsg.includes('start')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Taking you Home.", action: 'navigate', target: '/' } };
 
-    // New Routes
-    if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('rates')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Pricing information.", action: 'navigate', target: '/pricing' } };
-    if (lowerMsg.includes('privacy')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Privacy Policy.", action: 'navigate', target: '/privacy' } };
-    if (lowerMsg.includes('term') || lowerMsg.includes('condition')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Terms & Conditions.", action: 'navigate', target: '/terms' } };
-    if (lowerMsg.includes('how') && lowerMsg.includes('work')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Assuming you mean 'How it Works'. Opening that now.", action: 'navigate', target: '/how-it-works' } };
-    if (lowerMsg.includes('login') || lowerMsg.includes('log in') || lowerMsg.includes('sign in')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Login page.", action: 'navigate', target: '/login' } };
-    if (lowerMsg.includes('dashboard') || lowerMsg.includes('account')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening your Dashboard.", action: 'navigate', target: '/user/dashboard' } };
-    if (lowerMsg.includes('service') || lowerMsg.includes('trades')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Showing all our Services.", action: 'navigate', target: '/#services' } };
+        // GUIDANCE / BLOG MODE (Specific Safety Qs)
+        if (lowerMsg.includes('what should i do') || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe') || lowerMsg.includes('how to')) {
+            return {
+                newState,
+                response: {
+                    id: Date.now().toString(),
+                    role: 'assistant',
+                    content: "Your safety is priority. I can show you step-by-step emergency guides.",
+                    action: 'navigate',
+                    target: '/blog'
+                }
+            };
+        }
 
-    // Help / Capabilities Handler
-    if (lowerMsg.includes('help') || lowerMsg.includes('what can you do')) {
-        return {
-            newState,
-            response: {
-                id: Date.now().toString(),
-                role: 'assistant',
-                content: "I can help you find an emergency tradesperson immediately. I know about plumbing, electrical, gas, locks, drains, glazing, roofing, building, and breakdowns. Just tell me what's wrong."
-            }
-        };
+        // New Routes
+        if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('rates')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Pricing information.", action: 'navigate', target: '/pricing' } };
+        if (lowerMsg.includes('privacy')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Privacy Policy.", action: 'navigate', target: '/privacy' } };
+        if (lowerMsg.includes('term') || lowerMsg.includes('condition')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Terms & Conditions.", action: 'navigate', target: '/terms' } };
+        if (lowerMsg.includes('how') && lowerMsg.includes('work')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Assuming you mean 'How it Works'. Opening that now.", action: 'navigate', target: '/how-it-works' } };
+        if (lowerMsg.includes('login') || lowerMsg.includes('log in') || lowerMsg.includes('sign in')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Login page.", action: 'navigate', target: '/login' } };
+        if (lowerMsg.includes('dashboard') || lowerMsg.includes('account')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening your Dashboard.", action: 'navigate', target: '/user/dashboard' } };
+        if (lowerMsg.includes('service') || lowerMsg.includes('trades')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Showing all our Services.", action: 'navigate', target: '/#services' } };
+
+        // Help / Capabilities Handler — only when user is asking for help, not describing an emergency
+        if (lowerMsg.includes('help') || lowerMsg.includes('what can you do')) {
+            return {
+                newState,
+                response: {
+                    id: Date.now().toString(),
+                    role: 'assistant',
+                    content: "I can help you find an emergency tradesperson immediately. I know about plumbing, electrical, gas, locks, drains, glazing, roofing, building, and breakdowns. Just tell me what's wrong."
+                }
+            };
+        }
     }
 
     // STATE MACHINE IMPLEMENTATION
@@ -494,70 +514,116 @@ export async function processUserMessage(message: string, currentState: ChatStat
     let action: 'navigate' | undefined;
     let target: string | undefined;
 
+    const getReadableTradeName = (slug: string) => {
+        const trade = trades.find(t => t.slug === slug);
+        if (!trade) return slug.replace(/-/g, ' ');
+        return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
+    };
+
     const tip = newState.detectedTrade ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
 
-    // CASE A: TRADE & CITY KNOWN -> NAVIGATE
-    if (newState.detectedTrade && newState.detectedCity) {
-        const city = newState.detectedCity;
+    // STATE MACHINE TRANSITIONS
 
-        // Logic: Should we say the tip?
-        // If we just asked for location (Step == LOCATION_CHECK), user already heard the tip. Don't repeat.
-        // If this is the first turn (Step == INITIAL/TRADE_CHECK), user hasn't heard it. Say it.
-        const shouldSayTip = currentState.step !== 'LOCATION_CHECK';
-        const advicePart = (shouldSayTip && tip) ? `${tip} ` : "";
+    // STEP: CONFIRM_LOCATION
+    if (newState.step === 'CONFIRM_LOCATION' && newState.suggestedCity) {
+        const isPositive = lowerMsg === 'yes' || lowerMsg === 'yep' || lowerMsg === 'yeah' || lowerMsg === 'correct' || lowerMsg.includes('that is right') || lowerMsg.includes('yes it is');
 
-        let transition = "I'm taking you to the right Emergency Tradesmen page now.";
+        // Fix: If they repeat the city name (e.g. "london"), it should count as confirmation
+        const repeatedCity = newState.detectedCity && newState.detectedCity.toLowerCase() === newState.suggestedCity.toLowerCase();
 
-        // Custom Voice Line for Water/AC (Empathetic)
-        if (['water-restoration', 'air-conditioning'].includes(newState.detectedTrade)) {
-            const tradeName = newState.detectedTrade === 'water-restoration' ? 'Water Restoration' : 'Air Conditioning';
-            transition = `Thanks — I understand this is a ${tradeName} emergency. I’ll help you get the right service.`;
+        if (isPositive || repeatedCity) {
+            newState.detectedCity = newState.suggestedCity;
+            newState.locationConfirmed = true;
+            newState.step = 'ROUTING';
+            // Clear suggested so it doesn't trigger this block again
+            newState.suggestedCity = null;
+        } else {
+            // Check if they provided a NEW location in this message
+            if (newState.detectedCity && newState.detectedCity !== newState.suggestedCity) {
+                // They gave a different location, accept it as confirmed manual entry
+                newState.locationConfirmed = true;
+                newState.step = 'ROUTING';
+                newState.suggestedCity = null;
+            } else if (lowerMsg.length > 2) {
+                // If it's not a positive confirmation and not a different recognized city, 
+                // Reset and ask for manual entry to be safe.
+                newState.detectedCity = null;
+                newState.suggestedCity = null;
+                newState.step = 'LOCATION_CHECK';
+                responseText = "No problem. Please tell me exactly which town or city you are in.";
+                return { newState, response: { id: Date.now().toString(), role: 'assistant', content: responseText } };
+            }
         }
+    }
 
-        // Intelligent Fallback Message
+    // CASE A: TRADE & CITY KNOWN/CONFIRMED -> NAVIGATE
+    if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
+        const city = newState.detectedCity;
+        const tradeName = getReadableTradeName(newState.detectedTrade);
+
+        // If we just came from CONFIRM_LOCATION or manual entry, provide final transition
+        let transition = "Great. I'm taking you to the right Emergency Tradesmen page now.";
+
         if (cityFallbackUsed) {
-            // Explain why we are sending them to X
             transition = `I can't see a specific page for ${originalCity}, but our ${city} team covers that area. I'm taking you there now.`;
         }
 
-        // NO Post-Nav Instruction per user request
-
-        responseText = `${advicePart}${transition}`;
+        responseText = transition;
         action = 'navigate';
-        // Include /us prefix for US routes
         const countryPrefix = countryCode === 'US' ? '/us' : '';
         target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
         newState.step = 'ROUTING';
     }
-    // CASE B: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
-    else if (newState.detectedTrade && !newState.detectedCity) {
-        // Check if we already gave the tip and are just looping for location?
-        if (currentState.step === 'LOCATION_CHECK') {
-            // We already asked, and they didn't give a valid city.
-            // Fallback logic as per Master Manual: use nearest area.
+    // CASE B: TRADE KNOWN, CITY DETECTED BUT NOT CONFIRMED
+    else if (newState.detectedTrade && newState.detectedCity && !newState.locationConfirmed) {
+        const city = newState.detectedCity;
+        const tradeName = getReadableTradeName(newState.detectedTrade);
 
-            const fallbackText = "That’s fine — I’ll use the nearest area so we can get help quickly.";
-            const transition = "I’m taking you to the right Emergency Tradesmen page now.";
+        // KEY FIX: If the user explicitly typed the city in this same message
+        // (i.e. both trade AND city were detected from the user's text),
+        // treat it as confirmed and navigate immediately — don't ask "Is this correct?"
+        // The confirmation step is only needed for GPS/IP auto-detected locations.
+        const userExplicitlyStatedCity = sortedCities.some(c => {
+            const cityLower = c.toLowerCase();
+            const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+            return regex.test(lowerMsg);
+        }) || Object.keys(cityPostcodes).some(area => {
+            const areaLower = area.toLowerCase();
+            const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
+            return regex.test(lowerMsg);
+        });
 
-            responseText = `${fallbackText} ${transition}`;
-            action = 'navigate';
-            // Include /us prefix for US routes
-            const countryPrefix = countryCode === 'US' ? '/us' : '';
-            target = `${countryPrefix}/emergency-${newState.detectedTrade}`;
+        if (userExplicitlyStatedCity) {
+            // User stated the city themselves — skip confirmation, go straight to navigation
+            newState.locationConfirmed = true;
             newState.step = 'ROUTING';
+
+            const countryPrefix = countryCode === 'US' ? '/us' : '';
+            target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
+            action = 'navigate';
+            responseText = `${tip ? tip + ' ' : ''}Taking you to ${tradeName} in ${city} now.`;
         } else {
-            // First time asking for location: GIVE TIP FIRST
-            responseText = `${tip} What town, area, or postcode are you in?`;
-            newState.step = 'LOCATION_CHECK';
+            // City was auto-detected (GPS/IP) — ask for confirmation
+            const identification = `I've identified that as a ${tradeName} emergency.`;
+            newState.suggestedCity = city;
+            newState.detectedCity = null;
+            newState.step = 'CONFIRM_LOCATION';
+            responseText = `${identification} ${tip} We detected you may be in ${city}. Is this correct? (Or please tell me your location manually).`;
         }
     }
-    // CASE C: TRADE UNKNOWN -> CLARIFY
+    // CASE C: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
+    else if (newState.detectedTrade && !newState.detectedCity) {
+        const tradeName = getReadableTradeName(newState.detectedTrade);
+        const identification = `I've identified that as a ${tradeName} emergency.`;
+
+        responseText = `${identification} ${tip} What town, area, or postcode are you in?`;
+        newState.step = 'LOCATION_CHECK';
+    }
+    // CASE D: TRADE UNKNOWN -> CLARIFY
     else {
-        // Specific check: Did user ask for a list?
         if (lowerMsg.includes('trade') || lowerMsg.includes('service') || lowerMsg.includes('list') || lowerMsg.includes('cover')) {
             responseText = "We cover plumbing, electrical, gas, locks, drains, glazing, and vehicle breakdown. Which one do you need?";
         } else {
-            // Default gentle prompt (User request: Do not list trades unless asked)
             responseText = "I didn't catch that. Could you briefly describe the issue?";
         }
         newState.step = 'TRADE_CHECK';

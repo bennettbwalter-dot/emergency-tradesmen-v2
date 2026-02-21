@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**Noticing stair-step cracks in your brickwork? Diagonal cracks above doors? Before you panic, learn to distinguish between normal drywall settlement and serious foundation heave.**
+const us_content = `**Noticing stair-step cracks in your brickwork? Diagonal cracks above doors? Before you panic, learn to distinguish between normal drywall settlement and serious foundation heave.** For immediate safety steps, see our [Home Emergency Shut-off Guide](/blog/home-emergency-shut-off-protocol-us).
 
 ---
 
@@ -68,7 +68,7 @@ If you have a poured concrete or block basement:
 
 #### 8. FAQ Section
 **Q: Are hairline cracks normal?**
-A: **Yes.** Concrete shrinks as it cures. "Plastic Shrinkage Cracks" (hairline, <1/16th inch) are cosmetic. Monitor them. If they widen to 1/4 inch, call a structural engineer.
+A: **Yes.** Concrete shrinks as it cures. "Plastic Shrinkage Cracks" (hairline, <1/16th inch) are cosmetic. Monitor them. If they widen to 1/4 inch, call a structural engineer. Refer to [ASCE Foundation Guidelines](https://www.asce.org/) for technical data.
 
 **Q: Should I fill the crack before the engineer comes?**
 A: **No.** The engineer needs to see the "clean" crack to diagnose the direction of movement. Filling it hides the evidence. You can put a piece of tape across it and mark a line to see if it moves.
@@ -77,7 +77,7 @@ A: **No.** The engineer needs to see the "clean" crack to diagnose the direction
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Is that crack in the plaster serious? Identifying "Subsidence" caused by clay soil and trees. The RICS guide to monitoring cracks and the "15mm Rule."**
+const gb_content = `**Is that crack in the plaster serious? Identifying "Subsidence" caused by clay soil and trees. The RICS guide to monitoring cracks and the "15mm Rule."** For help with other interior damage, see our [Water Leak Guide](/blog/water-leaking-through-ceiling-first-steps-gb).
 
 ---
 
@@ -88,7 +88,7 @@ In the South East (London), the soil is predominantly **London Clay**. It is hig
 *   **Subsidence:** This is the downward movement of the ground supporting the building.
 
 #### 2. The RICS Crack Categories
-Surveyors use the BRE Digest 251 classification:
+Surveyors use the BRE Digest 251 classification. For more on UK surveyor standards, see the [Royal Institution of Chartered Surveyors (RICS)](https://www.rics.org/):
 *   **Category 0 (Negligible):** Hairline cracks <0.1mm.
 *   **Category 1 (Very Slight):** Fine cracks <1mm. Treating with Polyfilla is fine.
 *   **Category 2 (Slight):** Cracks <5mm. Not structural. Easily filled.
@@ -111,7 +111,7 @@ Do not confuse "Subsidence" with old plaster failure.
 #### 5. Insurance Context: "The Excess"
 *   **Standard Excess:** Usually £100 for a leak.
 *   **Subsidence Excess:** Almost always **£1,000**.
-*   **The Declaration:** Once a house has been underpinned or had a subsidence claim, you must declare it forever. It makes the property harder to insure and sell (often "Cash Buyers Only").
+*   **The Declaration:** Once a house has been underpinned or had a subsidence claim, you must declare it forever. It makes the property harder to insure and sell (often "Cash Buyers Only"). Refer to [UK Gov Subsidence Guidance](https://www.gov.uk/guidance/subsidence-and-stability) for more.
 
 #### 6. UK Repair Costs (2025)
 | Service | Purpose | Cost Estimate |

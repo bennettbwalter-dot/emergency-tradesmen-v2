@@ -10,12 +10,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**Water is pouring into your attic during a storm. You have two options: Watch the ceiling collapse, or deploy the 'Blue Tarp' defense. This is the US homeowner's guide to emergency roof mitigation.**
+const us_content = `**Water is pouring into your attic during a storm. You have two options: Watch the ceiling collapse, or deploy the 'Blue Tarp' defense. This is the US homeowner's guide to emergency roof mitigation.** For more on ceiling safety, see our [Water Leak Guide](/blog/water-leaking-through-ceiling-first-steps-us).
 
 ---
 
 #### 1. Safety First: The OSHA Rules of Engagement
-**Rule #1:** Never, ever climb onto a wet roof. Asphalt shingles are like ice when wet.
+**Rule #1:** Never, ever climb onto a wet roof. Asphalt shingles are like ice when wet. Refer to [OSHA Fall Protection](https://www.osha.gov/fall-protection) for safety standards.
 **Rule #2:** Identify the leak from the *inside* first. Water travels down rafters. The drip on your ceiling may be 20 feet downhill from the actual hole in the roof. Go into the attic (if safe) and look for wet wood or "shiners" (nails with frost on them).
 
 #### 2. Immediate Mitigation: The Tarp Protocol
@@ -36,7 +36,7 @@ In states like MN, NY, and MA, winter leaks are caused by Ice Dams.
 #### 5. Section: Post-Storm Contractor Scams
 After a major hurricane or tornado, "Storm Chasers" flood the area.
 *   **The Scam:** They promise a "Free Roof" paid by insurance. They pretend to see damage that isn't there (or create it by lifting shingles).
-*   **The Protection:** Never sign a "Contingency Agreement" before your adjuster has approved the claim. Always hire a local company with a physical office, not a "knocker" from out of state.
+*   **The Protection:** Never sign a "Contingency Agreement" before your adjuster has approved the claim. Always hire a local company with a physical office, not a "knocker" from out of state. For licensed contractor verification, check the [NRCA](https://www.nrca.net/).
 
 #### 6. Glossary of US Roofing Terms
 1.  **Asphalt Shingle:** The most common US roof cover (3-tab or Architectural).
@@ -88,7 +88,7 @@ A: Expect to pay $300 - $800 depending on the pitch (steepness) and height of th
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Water coming through the bedroom ceiling? In the UK, it's usually a slipped slate or a blocked valley gutter. Here is your emergency guide to stopping the rot.**
+const gb_content = `**Water coming through the bedroom ceiling? In the UK, it's usually a slipped slate or a blocked valley gutter. Here is your emergency guide to stopping the rot.** For help in other home emergencies, see our [Emergency Home Guide](/blog/what-to-do-in-home-emergency-before-help-arrives-gb).
 
 ---
 
@@ -109,7 +109,7 @@ UK roofs are often steep and high (2-3 storeys). Ladder accidents are a leading 
 
 #### 4. Finding a Roofer: The NFRC
 The roofing trade is unregulated in the UK. Anyone can buy a ladder and call themselves a roofer.
-*   **The Standard:** Look for members of the **NFRC (National Federation of Roofing Contractors)**.
+*   **The Standard:** Look for members of the **NFRC (National Federation of Roofing Contractors)** at [nfrc.co.uk](https://www.nfrc.co.uk/).
 *   **The Scam:** "I was just driving past and noticed a loose tile." **NEVER** accept this. This is the classic start of a rogue trader scam where they strip your roof and demand thousands to put it back.
 
 #### 5. Section: Party Wall Issues
@@ -146,7 +146,7 @@ In a semi-detached or terraced house, the leak might be coming from your neighbo
 #### 8. Security Warning: Lead Theft
 With the price of scrap metal rising, thieves strip lead flashing from valley gutters and bay windows.
 *   **The Sign:** You suddenly have water pouring in after a dry night (thieves climbed up).
-*   **The Fix:** Replace lead with **Ubiflex** or a similar non-lead alternative that has no scrap value. Mark any remaining lead with **SmartWater** DNA forensic liquid.
+*   **The Fix:** Replace lead with **Ubiflex** or a similar non-lead alternative that has no scrap value. Mark any remaining lead with **SmartWater** DNA forensic liquid. Refer to [HSE Working at Height](https://www.hse.gov.uk/work-at-height/index.htm) for roofing safety.
 
 #### 9. The 12-Month UK Roof Maintenance Calendar
 *   **Spring (Mar):** Moss removal. Do not pressure wash (it damages the surface). Scrape it off manually.

@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**Smelling rotten eggs in the master bath? It’s not just unpleasant—it’s dangerous. Hydrogen Sulfide is toxic. Here is the US homeowner's guide to Sewer Gas diagnostics.**
+const us_content = `**Smelling rotten eggs in the master bath? It’s not just unpleasant—it’s dangerous. Hydrogen Sulfide is toxic. Here is the US homeowner's guide to Sewer Gas diagnostics.** For immediate shut-off steps, see our [Home Emergency Shut-off Guide](/blog/home-emergency-shut-off-protocol-us).
 
 ---
 
@@ -74,7 +74,7 @@ If you cannot find the source, hire a plumber for a **Smoke Test**.
 *   **The Diagnosis:** Smoke testing revealed a crack in the cast iron stack *behind* the new drywall in the kitchen.
 *   **The Cause:** Thermal shock. The old pipe (1950s) cracked when hot water from the dishwasher hit the cold iron pipe.
 *   **The Fix:** They had to open the wall and replace the stack with PVC.
-*   **The Lesson:** Never bury old cast iron stacks behind expensive tile/cabinets without inspecting them first.
+*   **The Lesson:** Never bury old cast iron stacks behind expensive tile/cabinets without inspecting them first. Refer to [CDC Hydrogen Sulfide Safety](https://www.cdc.gov/natural-disasters/safety/hydrogen-sulfide.html) for more on health risks.
 
 #### 10. US Plumbing Cost Guide (2025)
 | Service | Average Cost | DIY Possible? |
@@ -105,7 +105,7 @@ A: **No.** Drano clears clogs (hair/grease). It does nothing for a broken seal o
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Drain smell in the en-suite? Gurgling plugs? You might have a "Siphoned Trap" or a failed "Durgo Valve." Here is the UK guide to eliminating sewer smells.**
+const gb_content = `**Drain smell in the en-suite? Gurgling plugs? You might have a "Siphoned Trap" or a failed "Durgo Valve." Here is the UK guide to eliminating sewer smells.** For more on sink issues, see our [Blocked Drainage Guide](/blog/blocked-drains-vs-flooded-sewers-danger-guide-gb).
 
 ---
 
@@ -148,7 +148,7 @@ Who is responsible?
 *   **Sep:** Clear leaves from the drain gullies outside.
 *   **Oct:** Lag external waste pipes to prevent freezing.
 *   **Nov:** Check the "Soil Vent Pipe" (SVP) cage on the roof for bird nests.
-*   **Dec:** Do NOT pour Turkey fat down the sink. Bin it.
+*   **Dec:** Do NOT pour Turkey fat down the sink. Bin it. For more on UK drainage law, see the [Environment Agency](https://www.gov.uk/government/organisations/environment-agency) guidance.
 
 #### 7. Glossary of UK Drainage Terms
 1.  **AAV:** Air Admittance Valve (Durgo).

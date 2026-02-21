@@ -250,7 +250,7 @@ const App = () => {
                       </ErrorBoundary>
                       <BottomNav />
                       <LiveChat />
-                      {import.meta.env.DEV && <VoiceTrigger />}
+                      {/* {import.meta.env.DEV && <VoiceTrigger />} */}
                       <FloatingBackButton />
                       <CustomCursor />
                     </Suspense>

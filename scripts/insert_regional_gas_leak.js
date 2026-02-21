@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // ------------------------------------------------------------------
 // US CONTENT
 // ------------------------------------------------------------------
-const us_content = `**You smell rotten eggs. You hear a hissing sound. Do NOT turn on the lights. This is the US homeowner's guide to surviving a natural gas leak.**
+const us_content = `**You smell rotten eggs. You hear a hissing sound. Do NOT turn on the lights. This is the US homeowner's guide to surviving a natural gas leak.** For immediate shut-off steps, see our [Home Emergency Shut-off Guide](/blog/home-emergency-shut-off-protocol-us).
 
 ---
 
@@ -37,7 +37,7 @@ If the smell is faint and you can safely reach the meter outside:
 CO is different from Natural Gas. It is odorless and colorless. It comes from incomplete combustion (a yellow flame instead of blue).
 *   **Symptoms:** Headache, dizziness, nausea, confusion, "The Flu without the Fever."
 *   **The Source:** A cracked heat exchanger in your furnace, or using a generator/grill indoors.
-*   **The Alarm:** You must have CO detectors on every level of your home and outside every sleeping area.
+*   **The Alarm:** You must have CO detectors on every level of your home and outside every sleeping area. Refer to [NFPA 720](https://www.nfpa.org/en/codes-and-standards/720) for installation standards.
 
 #### 5. Glossary of US Gas Terms
 1.  **BTU:** British Thermal Unit (Heat measurement).
@@ -85,13 +85,13 @@ Corrugated Stainless Steel Tubing (CSST) is that yellow flexible gas pipe found 
 A: **No.** If you turned it off due to a leak, a Utility Company or Licensed Plumber must pressure test the line before turning it back on. If you turn it on yourself and there is an open valve inside, you will fill the house with gas.
 
 **Q: Who do I call?**
-A: **911** first, then your Utility Company (e.g., PG&E, ConEd). They will come out for free to make it safe. Then call a private plumber for the repair.
+A: **911** first, then your Utility Company (e.g., PG&E, ConEd). They will come out for free to make it safe. Then call a private plumber for the repair. For more on seasonal safety, see our [Carbon Monoxide US Guide](/blog/carbon-monoxide-us).
 `;
 
 // ------------------------------------------------------------------
 // UK CONTENT
 // ------------------------------------------------------------------
-const gb_content = `**Smell gas? Do not touch the light switch. Follow the "Golden Rule" and call 0800 111 999 immediately. This is the UK guide to gas safety.**
+const gb_content = `**Smell gas? Do not touch the light switch. Follow the "Golden Rule" and call 0800 111 999 immediately. This is the UK guide to gas safety.** For more on winter heating issues, see our [Frozen Condensate Guide](/blog/frozen-condensate-pipe-fix-gb).
 
 ---
 
@@ -101,7 +101,7 @@ If you smell gas (rotten cabbage/eggs) or suspect Carbon Monoxide:
 2.  **Turn Off** the gas at the meter (Emergency Control Valve).
 3.  **Do Not** operate electrical switches (On OR Off).
 4.  **Evacuate** the property.
-5.  **Call 0800 111 999** (The National Gas Emergency Service). This number works for all suppliers (British Gas, E.ON, Octopus, etc.) and is free, 24/7.
+5.  **Call 0800 111 999** (The [National Gas Emergency Service](https://www.nationalgas.com/safety-and-emergencies/smell-gas)). This number works for all suppliers (British Gas, E.ON, Octopus, etc.) and is free, 24/7.
 
 #### 2. The Emergency Control Valve (ECV)
 You must know where this is *before* an emergency.
@@ -145,7 +145,7 @@ In 1968, a gas explosion on the 18th floor of Ronan Point (a tower block in Lond
 #### 7. Landlord & Tenant Law: The CP12
 If you rent your home, your Landlord is legally required (under the *Gas Safety (Installation and Use) Regulations 1998*) to provide you with a valid **CP12 Certificate** every 12 months.
 *   **The Check:** An engineer must physically test every gas appliance (Boiler, Hob, Fire).
-*   **The Paperwork:** You must receive a copy within 28 days of the check. If you don't have one, your landlord is breaking the law. Report them to the HSE (Health and Safety Executive).
+*   **The Paperwork:** You must receive a copy within 28 days of the check. If you don't have one, your landlord is breaking the law. Report them to the [HSE (Health and Safety Executive)](https://www.hse.gov.uk/gas/domestic/). For more on boiler pressure, see our [Combi Boiler Guide](/blog/boiler-pressure-dropping-filling-loop-gb).
 
 #### 8. The 12-Month UK Gas Safety Calendar
 *   **Jan:** Bleed radiators (release trapped air). If you do this often, you have a leak.

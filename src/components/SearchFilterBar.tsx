@@ -2,7 +2,7 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { cities, trades } from "@/lib/trades";
@@ -54,6 +54,7 @@ export function SearchFilterBar({
     totalCount,
 }: SearchFilterBarProps) {
     const navigate = useNavigate();
+    const { city } = useParams();
     const { settings } = useLocalization();
     console.log("SearchFilterBar MOUNTED");
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -132,8 +133,7 @@ export function SearchFilterBar({
                             <UKCityCombobox
                                 className="w-full h-12 bg-card border-border/50 text-sm"
                                 placeholder="Select City"
-                                // value={citySlug} // Using citySlug from URL params might need mapping back to Capitalized?
-                                // Actually SearchFilterBar uses useParams -> citySlug is lowercase/slugified usually?
+                                value={city ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ""}
                                 // Use pure navigation
                                 onValueChange={(val) => {
                                     // Determine trade slug from current context or default
