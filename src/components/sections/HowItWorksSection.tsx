@@ -1,9 +1,21 @@
+import { useState, useEffect } from 'react';
 import { FiCircle, FiFileText, FiLayers } from 'react-icons/fi';
 import Carousel from "@/components/ui/Carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export function HowItWorksSection() {
     const isMobile = useIsMobile();
+    const [carouselWidth, setCarouselWidth] = useState(800);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const padding = 32;
+            setCarouselWidth(Math.min(window.innerWidth - padding, 800));
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <section className="container-wide py-24 border-t font-display border-border/30">
@@ -54,7 +66,7 @@ export function HowItWorksSection() {
                                 videoSrc: "/voice.mp4"
                             }
                         ]}
-                        baseWidth={isMobile ? 360 : 800}
+                        baseWidth={carouselWidth}
                         autoplay={false}
                         pauseOnHover={true}
                         loop={true}

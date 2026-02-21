@@ -41,7 +41,7 @@ const DEFAULT_ITEMS = [
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 16;
-const SPRING_OPTIONS = { type: 'spring', stiffness: 300, damping: 30 };
+const SPRING_OPTIONS = { type: 'spring', stiffness: 300, damping: 30 } as const;
 
 interface CarouselItemProps {
   item: any;
@@ -91,7 +91,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
               controls
               playsInline
               preload="metadata"
-              className="absolute top-0 left-0 w-full h-full object-cover"
+              className="absolute top-0 left-0 w-full h-full object-contain"
             />
           )}
         </div>
@@ -117,7 +117,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
           <img
             src={item.imageSrc}
             alt={item.title || "carousel-image"}
-            className="absolute top-0 left-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute top-0 left-0 w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
             loading="lazy"
             decoding="async"
           />
