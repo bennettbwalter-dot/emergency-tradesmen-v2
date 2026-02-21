@@ -481,11 +481,12 @@ export async function processUserMessage(message: string, currentState: ChatStat
             return regex.test(lowerMsg);
         });
         if (foundCity) {
-            console.log(`[Voice] City detected (strict match): ${foundCity}`);
+            console.log(`[chat-logic] City detected (strict match): "${foundCity}" from msg: "${lowerMsg}"`);
             newState.detectedCity = foundCity;
         }
         // A.5 Postcode Extraction (High Precision)
         else {
+            console.log(`[chat-logic] No strict city match found in: "${lowerMsg}" (activeCities count: ${activeCities.length}). Trying postcodes/geocoder...`);
             let handled = false;
 
             // 1. Postcode Match
@@ -708,6 +709,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
         newState.step = 'TRADE_CHECK';
     }
+
+    console.log(`[chat-logic] Final decision: step=${newState.step}, action=${action}, target=${target}, response="${responseText.substring(0, 40)}..."`);
 
     return {
         newState,
