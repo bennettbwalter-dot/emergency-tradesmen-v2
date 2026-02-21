@@ -52,25 +52,28 @@ export default function BlogPage() {
                 .eq('published', true)
                 .order('published_at', { ascending: false });
 
+            let allData = [];
             if (!error && data) {
-                // Filter DB posts to only show relevant regionalized ones
-                const regionalData = data.filter(p => {
-                    // If it ends with -us or -gb, only show if it matches current region
-                    if (p.slug.endsWith('-us')) return settings.countryCode === 'US';
-                    if (p.slug.endsWith('-gb')) return settings.countryCode === 'GB';
-                    // If it's a general slug, check if a regionalized version exists in the data
-                    const baseSlug = p.slug;
-                    const hasRegionalVersion = data.some(other =>
-                        other.slug === `${baseSlug}${countrySuffix}`
-                    );
-                    return !hasRegionalVersion;
-                });
-
-                // Helper to clean up slugs for the link (remove regional suffix)
-                // Actually, we want to keep the slug as is for the Link, but the BlogPostPageFix will handle it.
-                // Wait, if we link to slug-us, the Router will find it.
-                setPosts(regionalData);
+                allData = data;
             }
+
+            // Filter DB posts to only show relevant regionalized ones
+            const regionalData = allData.filter(p => {
+                // If it ends with -us or -gb, only show if it matches current region
+                if (p.slug.endsWith('-us')) return settings.countryCode === 'US';
+                if (p.slug.endsWith('-gb')) return settings.countryCode === 'GB';
+                // If it's a general slug, check if a regionalized version exists in the data
+                const baseSlug = p.slug;
+                const hasRegionalVersion = allData.some(other =>
+                    other.slug === `${baseSlug}${countrySuffix}`
+                );
+                return !hasRegionalVersion;
+            });
+
+            // Helper to clean up slugs for the link (remove regional suffix)
+            // Actually, we want to keep the slug as is for the Link, but the BlogPostPageFix will handle it.
+            // Wait, if we link to slug-us, the Router will find it.
+            setPosts(regionalData);
             setIsLoading(false);
         }
 

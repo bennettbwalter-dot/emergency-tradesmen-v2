@@ -160,6 +160,7 @@ export default function BlogPostPage() {
                 return;
             }
 
+
             // 1. Try regionalized slug first (e.g. "my-post-us")
             const regionSuffix = settings.countryCode === 'US' ? '-us' : '-gb';
             const regionalSlug = `${slug}${regionSuffix}`;

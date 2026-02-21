@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
+import { localMockPosts } from "@/data/mockBlogs";
 
 interface BlogPost {
     id: string;
@@ -64,6 +65,18 @@ export default function BlogPostPage() {
     useEffect(() => {
         async function loadPost() {
             if (!slug) return;
+
+            const mockPost = localMockPosts.find(p => p.slug === slug);
+            if (mockPost) {
+                setPost({
+                    ...mockPost,
+                    title: regionalizeText(mockPost.title),
+                    content: regionalizeText(mockPost.content),
+                    excerpt: regionalizeText(mockPost.excerpt),
+                });
+                setIsLoading(false);
+                return;
+            }
 
             if (slug === 'uk-emergency-tradesmen-expert-repairs') {
                 const staticTitle = regionalizeText('UK Emergency Tradesmen: Expert Repairs When You Need Them');
@@ -829,7 +842,7 @@ If you hear a drip, hiss, or see a damp patch — act now.
             <SEO
                 title={post.title}
                 description={post.excerpt}
-                image={post.cover_image || undefined}
+                ogImage={post.cover_image || undefined}
                 type="article"
             />
 
