@@ -284,7 +284,7 @@ export function EmergencyChatInterface() {
                 // Speak back if it's a voice interaction
                 if (isVoice) {
                     voiceService.unlockAudioContext();
-                    voiceService.speak(response.content, freshCountryCode);
+                    await voiceService.speak(response.content, freshCountryCode);
                 }
 
                 setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);
