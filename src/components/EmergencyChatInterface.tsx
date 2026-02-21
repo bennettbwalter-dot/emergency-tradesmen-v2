@@ -240,7 +240,17 @@ export function EmergencyChatInterface() {
         setIsTyping(true);
 
         // Voice is snappier, Text has a slight "typing" feel
-        const processingDelay = isVoice ? 50 : 600;
+        const processingDelay = isVoice ? 50 : 800;
+
+        // Diagnostic: Show what was heard via voice
+        if (isVoice) {
+            toast.info(`Voice: "${msgText}"`, { duration: 2500 });
+        }
+
+        // Safety timeout to ensure mic is never stuck disabled
+        const safetyRef = setTimeout(() => {
+            setIsTyping(false);
+        }, 12000);
 
         setTimeout(async () => {
             try {
@@ -288,10 +298,11 @@ export function EmergencyChatInterface() {
                 }
 
                 setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);
+                clearTimeout(safetyRef);
                 setIsTyping(false);
 
                 if (response.action === 'navigate' && response.target) {
-                    const navDelay = isVoice ? 800 : (1000 + (response.content.length * 10));
+                    const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
                     console.log(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
                         navigate(response.target!);
@@ -299,6 +310,7 @@ export function EmergencyChatInterface() {
                 }
             } catch (error) {
                 console.error("Error processing message:", error);
+                clearTimeout(safetyRef);
                 setIsTyping(false);
             }
         }, processingDelay);
@@ -459,12 +471,19 @@ export function EmergencyChatInterface() {
         <Button
             onClick={async () => {
                 if (isRecording) {
+                    toast.info("Processing voice...", { id: 'stt-status', duration: 2000 });
                     stopRecording();
                     stopVolumeMonitor();
                 } else {
                     voiceService.unlockAudioContext();
-                    await startRecording();
-                    startVolumeMonitor();
+                    try {
+                        await startRecording();
+                        startVolumeMonitor();
+                        toast.success("Microphone active. Speak now.", { id: 'stt-status', duration: 3000 });
+                    } catch (err) {
+                        toast.error("Microphone access denied or failed.");
+                        console.error("[Mic] Error:", err);
+                    }
                 }
             }}
             disabled={isTranscriptionProcessing || isTyping}

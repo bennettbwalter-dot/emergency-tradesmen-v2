@@ -89,18 +89,47 @@ export function useWhisper(): WhisperResult {
             const destination = audioContext.createMediaStreamDestination();
             source.connect(destination);
 
-            const mediaRecorder = new MediaRecorder(destination.stream);
+            // MOBILE COMPATIBILITY: Detect supported MIME types
+            const getSupportedMimeType = () => {
+                const types = [
+                    'audio/webm;codecs=opus',
+                    'audio/ogg;codecs=opus',
+                    'audio/wav',
+                    'audio/mp4',
+                    'audio/aac'
+                ];
+                for (const type of types) {
+                    if (MediaRecorder.isTypeSupported(type)) {
+                        console.log(`[useWhisper] Using supported MIME type: ${type}`);
+                        return type;
+                    }
+                }
+                console.warn('[useWhisper] No preferred MIME types supported, using default');
+                return '';
+            };
+
+            const options = { mimeType: getSupportedMimeType() };
+            const mediaRecorder = options.mimeType
+                ? new MediaRecorder(destination.stream, options)
+                : new MediaRecorder(destination.stream);
+
             mediaRecorderRef.current = mediaRecorder;
             audioChunksRef.current = [];
 
             mediaRecorder.ondataavailable = (event) => {
                 if (event.data.size > 0) {
+                    console.log(`[useWhisper] Data available: ${event.data.size} bytes`);
                     audioChunksRef.current.push(event.data);
                 }
             };
 
+            mediaRecorder.onerror = (event: any) => {
+                console.error('[useWhisper] MediaRecorder error:', event.error);
+                setError(`Recording error: ${event.error?.name || 'Unknown'}`);
+            };
+
             mediaRecorder.onstop = async () => {
-                console.log('[useWhisper] Recording stopped, processing audio. Chunks:', audioChunksRef.current.length);
+                console.log('[useWhisper] Recording stopped. Total chunks:', audioChunksRef.current.length);
 
                 // Clean up recording resources FIRST
                 stream.getTracks().forEach(track => track.stop());
@@ -110,7 +139,7 @@ export function useWhisper(): WhisperResult {
                 if (audioChunksRef.current.length === 0) {
                     console.warn('[useWhisper] No audio chunks captured');
                     setIsProcessing(false);
-                    audioContext.close();
+                    try { audioContext.close(); } catch (e) { }
                     audioContextRef.current = null;
                     return;
                 }
