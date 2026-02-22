@@ -458,7 +458,7 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
-                className={`h-12 md:h-11 px-0 md:px-3 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between gap-1 shadow-sm focus:ring-0 shrink-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 w-12 md:h-11 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2">
                     <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
@@ -470,7 +470,9 @@ export function EmergencyChatInterface() {
                         </SelectValue>
                     </div>
                 </div>
-                <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
+                <div className="hidden md:block">
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </div>
             </SelectTrigger>
             <SelectContent className="bg-white border-gray-200">
                 {trades.map((t) => (

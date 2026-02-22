@@ -45,7 +45,9 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                             {value ? value : placeholder}
                         </span>
                     </div>
-                    <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
+                    <div className="hidden md:block">
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </div>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] p-0" align="start">
