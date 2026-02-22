@@ -23,6 +23,8 @@ const VoiceTrigger = () => {
         step: 'INITIAL',
         detectedTrade: null,
         detectedCity: null,
+        suggestedCity: null,
+        locationConfirmed: false,
         history: []
     });
 
@@ -132,6 +134,8 @@ const VoiceTrigger = () => {
                 step: 'INITIAL',
                 detectedTrade: null,
                 detectedCity: null,
+                suggestedCity: null,
+                locationConfirmed: false,
                 history: []
             });
 
@@ -276,7 +280,7 @@ const VoiceTrigger = () => {
     };
 
     return (
-        <div className="fixed bottom-24 md:bottom-8 right-8 z-[100] flex flex-col items-center gap-3">
+        <div className="fixed bottom-28 md:bottom-8 right-6 md:right-8 z-[100] flex flex-col items-center gap-3">
             {isActive && (
                 <div className={`
                     text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border shadow-2xl animate-in fade-in zoom-in duration-300
@@ -291,7 +295,7 @@ const VoiceTrigger = () => {
 
             {/* WAVEFORM VISUALIZATION */}
             {isActive && (status === 'Listening' || status === 'Speaking' || status === 'Processing') && (
-                <div className="absolute bottom-24 right-0">
+                <div className="absolute bottom-[calc(100%+8px)] right-0 md:bottom-24 md:right-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <WhisperWaveform
                         audioData={audioData}
                         isRecording={isRecording}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AzureVoiceService } from '@/services/azureVoiceService';
+import { useLocalization } from '@/contexts/LocalizationContext';
 
 export interface WhisperResult {
     transcription: string;
@@ -198,9 +199,120 @@ function useOpenAIWhisper(): WhisperResult {
     };
 }
 
+// ============================================================================
+// AZURE PATH: Streaming STT (Low Latency)
+// ============================================================================
+function useAzureWhisper(): WhisperResult {
+    const [isRecording, setIsRecording] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [transcription, setTranscription] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [status, setStatus] = useState('Ready');
+    const { settings } = useLocalization();
+
+    const voiceServiceRef = useRef<AzureVoiceService | null>(null);
+    const streamRef = useRef<MediaStream | null>(null);
+
+    // Initialize voice service once
+    if (!voiceServiceRef.current) {
+        voiceServiceRef.current = new AzureVoiceService();
+    }
+
+    const startRecording = useCallback(async () => {
+        try {
+            setError(null);
+            setTranscription('');
+            setStatus('Requesting Mic...');
+            setIsProcessing(false);
+
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true,
+                }
+            });
+            streamRef.current = stream;
+
+            // Ensure AudioContext is unlocked
+            voiceServiceRef.current?.unlockAudioContext();
+
+            setStatus('Listening...');
+            setIsRecording(true);
+
+            // Use US English optimization as requested
+            await voiceServiceRef.current?.startRecognition(
+                (text, isFinal) => {
+                    if (!isFinal) {
+                        setStatus(`Hearing: ${text}`);
+                    } else {
+                        setStatus('Transcribed');
+                        setTranscription(text);
+                        // Auto-stop on final result for snappiness
+                        stopAction();
+                    }
+                },
+                (err) => {
+                    setError(err);
+                    setStatus('Error');
+                    setIsRecording(false);
+                },
+                settings.locale || 'en-US',
+                stream
+            );
+        } catch (err: any) {
+            console.error('[useAzureWhisper] Setup failed:', err);
+            setError(err.message || 'Mic initialization failed.');
+            setStatus('Error');
+            setIsRecording(false);
+        }
+    }, []);
+
+    // Helper to safely stop everything
+    const stopAction = useCallback(async () => {
+        setStatus('Processing...');
+        setIsProcessing(true);
+        setIsRecording(false);
+
+        try {
+            await voiceServiceRef.current?.stopRecognition();
+        } catch (e) {
+            console.error('[useAzureWhisper] Stop failed', e);
+        }
+
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => track.stop());
+            streamRef.current = null;
+        }
+
+        setIsProcessing(false);
+        setStatus('Ready');
+    }, []);
+
+    const stopRecording = useCallback(() => {
+        if (!isRecording) return;
+        stopAction();
+    }, [isRecording, stopAction]);
+
+    const getAudioLevel = useCallback(() => {
+        return voiceServiceRef.current?.getVolume() || 0;
+    }, []);
+
+    const resetTranscription = useCallback(() => {
+        setTranscription('');
+        setError(null);
+        setStatus('Ready');
+    }, []);
+
+    return {
+        transcription, isProcessing, isRecording, error,
+        startRecording, stopRecording, getAudioLevel, resetTranscription, status
+    };
+}
+
 /**
- * Main hook using OpenAI direct STT in the browser.
+ * Main hook using Azure Streaming STT in the browser for minimum latency.
  */
 export function useWhisper(): WhisperResult {
-    return useOpenAIWhisper();
+    return useAzureWhisper();
 }

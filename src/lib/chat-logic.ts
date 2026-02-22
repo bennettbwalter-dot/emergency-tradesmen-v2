@@ -487,48 +487,102 @@ export async function processUserMessage(message: string, currentState: ChatStat
             console.log(`[chat-logic] No strict city match found in: "${lowerMsg}" (activeCities count: ${activeCities.length}). Trying postcodes/geocoder...`);
             let handled = false;
 
-            // 1. Postcode Match
-            const pMatch = message.match(POSTCODE_REGEX);
-            if (pMatch) {
-                const cleanPostcode = pMatch[0].toUpperCase();
-                console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
-                const coords = await geocodeLocation(cleanPostcode, countryCode);
-                if (coords) {
-                    const detectedPlace = coords.displayName.split(',')[0].trim();
-                    if (detectedPlace) {
-                        newState.detectedCity = detectedPlace;
-                        cityFallbackUsed = true;
-                        originalCity = cleanPostcode;
-                        handled = true;
-                    } else {
-                        const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
-                        if (match) {
-                            newState.detectedCity = match.city;
+            // --- SEPARATE UK AND USA LOGIC ---
+            if (countryCode === 'US') {
+                // 1. USA ZIP Code Match (5 digits)
+                const US_ZIP_REGEX = /\b\d{5}\b/;
+                const zipMatch = message.match(US_ZIP_REGEX);
+
+                if (zipMatch) {
+                    const cleanZip = zipMatch[0];
+                    console.log(`[Voice US] ZIP Code detected: ${cleanZip}`);
+                    const coords = await geocodeLocation(cleanZip, 'US');
+                    if (coords) {
+                        const detectedPlace = coords.displayName.split(',')[0].trim();
+                        if (detectedPlace) {
+                            newState.detectedCity = detectedPlace;
                             cityFallbackUsed = true;
-                            originalCity = cleanPostcode;
+                            originalCity = cleanZip;
                             handled = true;
+                        } else {
+                            const match = findNearestSupportedCity(coords.lat, coords.lon, 'US');
+                            if (match) {
+                                newState.detectedCity = match.city;
+                                cityFallbackUsed = true;
+                                originalCity = cleanZip;
+                                handled = true;
+                            }
                         }
                     }
                 }
-            }
 
-            // 2. Area Name Match
-            if (!handled) {
-                const sortedAreas = Object.keys(cityPostcodes).sort((a, b) => b.length - a.length);
-                const foundArea = sortedAreas.find(area => {
-                    const areaLower = area.toLowerCase();
-                    const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
-                    return regex.test(lowerMsg);
-                });
+                // 2. USA Suburb / Area Name Match
+                // For the US, we use the `activeCities` list which includes suburbs if passed from generateTradePageData,
+                // or we can use the imported `usCities` flat list from trades.ts
+                if (!handled) {
+                    // Sort active US cities by length to match longest first (e.g. "Santa Monica" before "Santa")
+                    const sortedUSAreas = [...activeCities].sort((a, b) => b.length - a.length);
+                    const foundArea = sortedUSAreas.find(area => {
+                        const areaLower = area.toLowerCase();
+                        const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
+                        return regex.test(lowerMsg);
+                    });
 
-                if (foundArea) {
-                    console.log(`[Voice] Area detected and trusted: ${foundArea}`);
-                    newState.detectedCity = foundArea;
-                    cityFallbackUsed = true;
-                    originalCity = foundArea;
-                    handled = true;
+                    if (foundArea) {
+                        console.log(`[Voice US] Suburb/Area detected and trusted: ${foundArea}`);
+                        newState.detectedCity = foundArea;
+                        cityFallbackUsed = true;
+                        originalCity = foundArea;
+                        handled = true;
+                    }
                 }
-            }
+            } else {
+                // --- UK LOGIC ---
+                // 1. UK Postcode Match
+
+                // 1. Postcode Match
+                const pMatch = message.match(POSTCODE_REGEX);
+                if (pMatch) {
+                    const cleanPostcode = pMatch[0].toUpperCase();
+                    console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
+                    const coords = await geocodeLocation(cleanPostcode, countryCode);
+                    if (coords) {
+                        const detectedPlace = coords.displayName.split(',')[0].trim();
+                        if (detectedPlace) {
+                            newState.detectedCity = detectedPlace;
+                            cityFallbackUsed = true;
+                            originalCity = cleanPostcode;
+                            handled = true;
+                        } else {
+                            const match = findNearestSupportedCity(coords.lat, coords.lon, countryCode);
+                            if (match) {
+                                newState.detectedCity = match.city;
+                                cityFallbackUsed = true;
+                                originalCity = cleanPostcode;
+                                handled = true;
+                            }
+                        }
+                    }
+                }
+
+                // 2. Area Name Match
+                if (!handled) {
+                    const sortedAreas = Object.keys(cityPostcodes).sort((a, b) => b.length - a.length);
+                    const foundArea = sortedAreas.find(area => {
+                        const areaLower = area.toLowerCase();
+                        const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
+                        return regex.test(lowerMsg);
+                    });
+
+                    if (foundArea) {
+                        console.log(`[Voice UK] Area detected and trusted: ${foundArea}`);
+                        newState.detectedCity = foundArea;
+                        cityFallbackUsed = true;
+                        originalCity = foundArea;
+                        handled = true;
+                    }
+                }
+            } // End of UK Logic block
         }
 
         // B. Nominatim Fallback (Slower but covers entire UK)

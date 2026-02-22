@@ -153,7 +153,7 @@ export default function TradeCityPage() {
   // For now, removing strict redirect allows new US locations to work without "white-listing" in trades.ts
   // Old logic removed.
 
-  const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' };
+  const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' } as any;
   const tradeDisplayName = (actualCountry === 'US' && 'usName' in tradeInfo) ? (tradeInfo as any).usName : tradeInfo.name;
   const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
 
@@ -177,7 +177,7 @@ export default function TradeCityPage() {
   };
 
   // Prefer image from trade config (trades.ts) if available, otherwise fallback to local map
-  const heroImage = pageData?.problem?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
+  const heroImage = (pageData?.problem as any)?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
   const { settings, userCoords } = useLocalization();
 
@@ -206,35 +206,10 @@ export default function TradeCityPage() {
         });
         const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry, userCoords || undefined);
         console.log('Real businesses fetched:', realBusinesses.length);
-
-        // If no real businesses found, fallback to static/mock data (now strictly limited)
-        if (realBusinesses.length === 0) {
-          console.warn('No real businesses found. Checking static list and London fallback...');
-          // 1. Try static list for this city
-          let fallbackData = getBusinessListings(validCity, tradeInfo.slug, actualCountry);
-
-          // 2. If still empty, force fallback to London/Major City to ensure SOMETHING shows
-          // This prevents the "0 results" screen on mobile
-          if (!fallbackData || fallbackData.length === 0) {
-            console.warn('City static data empty. Falling back to London/Major City data.');
-            const majorCity = actualCountry === 'US' ? 'new-york' : 'london';
-            const majorCityData = getBusinessListings(majorCity, tradeInfo.slug, actualCountry);
-
-            if (majorCityData && majorCityData.length > 0) {
-              fallbackData = majorCityData;
-            }
-          }
-
-          console.log('Final fallback businesses count:', fallbackData?.length);
-          setBusinesses(fallbackData || []);
-        } else {
-          setBusinesses(realBusinesses);
-        }
+        setBusinesses(realBusinesses);
       } catch (error) {
         console.error('Error loading businesses:', error);
-        // Fallback to static list on error
-        const staticBusinesses = getBusinessListings(cityName, tradeInfo.slug, actualCountry);
-        setBusinesses(staticBusinesses || []);
+        setBusinesses([]);
       } finally {
         setIsLoading(false);
         hasLoadedRef.current = true;
@@ -585,7 +560,7 @@ export default function TradeCityPage() {
                 <span className="text-gold/50">/</span>
                 <span className="text-foreground/80">Emergency {tradeDisplayName}</span>
                 <span className="text-gold/50">/</span>
-                <span className="text-gold font-medium">{cityName}</span>
+                <span className="text-gold font-medium">{cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</span>
               </nav>
 
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-secondary/50 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
@@ -603,7 +578,7 @@ export default function TradeCityPage() {
                   {pageData?.problem ? pageData.problem.name : `Emergency ${tradeDisplayName}`}
                 </span>
                 <span className="block font-display text-4xl md:text-6xl tracking-wide text-gold">
-                  in {cityName}
+                  in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
                 </span>
               </h1>
 
@@ -645,8 +620,7 @@ export default function TradeCityPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
-                    Local Intelligence: {cityName}
-
+                    Local Intelligence: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {pageData.localExpertise}
@@ -660,7 +634,7 @@ export default function TradeCityPage() {
           {/* Coverage Map Section - Lazy Loaded */}
           <div className="mb-12 h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group bg-secondary/10">
             <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 text-sm font-medium">
-              Real-time local coverage: {cityName}
+              Real-time local coverage: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </div>
             <Suspense fallback={
               <div className="w-full h-full flex items-center justify-center bg-muted/20 animate-pulse">
@@ -746,7 +720,7 @@ export default function TradeCityPage() {
 
           <div className="mb-6 relative z-10">
             <h2 className="text-2xl font-bold text-foreground">
-              Top Rated Local {tradeInfo.name}s Near {cityName}
+              Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </h2>
             <p className="text-muted-foreground">
               Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}

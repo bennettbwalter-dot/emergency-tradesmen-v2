@@ -197,12 +197,12 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         <div className={`flex flex-wrap gap-2 items-center ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger className={`h-11 px-4 min-w-[50px] sm:min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
-                    <Map className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                    <span className="hidden sm:inline">
+                <SelectTrigger className={`h-12 md:h-11 px-0 md:px-4 w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-start gap-2 shadow-sm focus:ring-0 shrink-0 ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                    <Map className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-black dark:text-white" />
+                    <div className="hidden md:block">
                         <SelectValue placeholder="State" />
-                    </span>
-                    {!selectedState && <span className="sm:hidden text-xs">State</span>}
+                    </div>
+                    <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
                 </SelectTrigger>
                 <SelectContent>
                     {sortedStates.map((s) => (
@@ -220,19 +220,17 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             role="combobox"
                             aria-expanded={cityOpen}
                             className={cn(
-                                "h-11 px-4 min-w-[50px] sm:min-w-[120px] flex-1 rounded-full border border-gold transition-all flex items-center justify-between gap-2 shadow-sm",
+                                "h-12 md:h-11 px-0 md:px-4 w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-between gap-2 shadow-sm shrink-0",
                                 selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'
                             )}
                         >
-                            <div className="flex items-center gap-2 truncate">
-                                <Building2 className="w-4 h-4 shrink-0 text-gold" />
-                                <span className={cn("truncate", !selectedCity && "text-muted-foreground")}>
-                                    <span className="hidden sm:inline">{selectedCity?.name || "City"}</span>
-                                    {!selectedCity && <span className="sm:hidden text-xs">City</span>}
-                                    {selectedCity && <span className="sm:hidden">{selectedCity.name}</span>}
+                            <div className="flex items-center justify-center md:justify-start md:gap-2">
+                                <Building2 className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                                <span className={cn("hidden md:inline truncate", !selectedCity && "text-muted-foreground")}>
+                                    {selectedCity?.name || "City"}
                                 </span>
                             </div>
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 hidden sm:block" />
+                            <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-[250px] p-0" align="start">
@@ -269,12 +267,12 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* Suburb/Area Select - Only show if suburbs exist */}
             {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-11 px-4 min-w-[50px] sm:min-w-[80px] flex-1 rounded-full border border-gold transition-all flex items-center justify-start gap-2 shadow-sm focus:ring-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
-                        <Home className="w-4 h-4 shrink-0 text-black dark:text-white" />
-                        <span className="hidden sm:inline">
+                    <SelectTrigger className={`h-12 md:h-11 px-0 md:px-4 w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-start gap-2 shadow-sm focus:ring-0 shrink-0 ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
+                        <Home className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-black dark:text-white" />
+                        <div className="hidden md:block">
                             <SelectValue placeholder="Area" />
-                        </span>
-                        {!selectedSuburb && <span className="sm:hidden text-xs">Area</span>}
+                        </div>
+                        <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
                     </SelectTrigger>
                     <SelectContent className="max-h-[300px]">
                         {/* Option to select the city itself */}

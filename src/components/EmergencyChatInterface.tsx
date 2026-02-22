@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2 } from "lucide-react";
+import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate, useParams } from "react-router-dom";
@@ -266,6 +266,7 @@ export function EmergencyChatInterface() {
 
         // Diagnostic: Show what was heard via voice
         if (isVoice) {
+            isVoiceSessionRef.current = true;
             toast.info(`Voice: "${msgText}"`, { duration: 2500 });
         }
 
@@ -457,16 +458,19 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
-                className={`h-11 px-3 min-w-[44px] flex-1 w-full rounded-full border border-gold/50 transition-all flex items-center justify-between gap-1.5 shadow-sm focus:ring-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 md:h-11 px-0 md:px-3 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between gap-1 shadow-sm focus:ring-0 shrink-0 ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
-                <div className="flex items-center gap-2 truncate">
-                    <Wrench className="w-4 h-4 shrink-0 text-gold" />
-                    <SelectValue placeholder="Trade">
-                        <span className="text-sm font-medium truncate block">
-                            {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
-                        </span>
-                    </SelectValue>
+                <div className="flex items-center justify-center md:justify-start md:gap-2">
+                    <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                    <div className="hidden md:block">
+                        <SelectValue placeholder="Trade">
+                            <span className="text-sm font-medium truncate block">
+                                {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
+                            </span>
+                        </SelectValue>
+                    </div>
                 </div>
+                <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
             </SelectTrigger>
             <SelectContent className="bg-white border-gray-200">
                 {trades.map((t) => (
@@ -483,18 +487,41 @@ export function EmergencyChatInterface() {
     );
 
     const locationSelector = settings.countryCode === 'US' ? (
-        <HierarchicalLocationSelector
-            className="flex-1"
-            placeholder="City, State"
-            onLocationSelect={(record) => {
-                console.log("Loc Selected", record);
-                setDetectedCity(record.name);
-                setLocationRecord(record);
-            }}
-        />
+        (isVoiceSessionRef.current && detectedCity) ? (
+            <div className="flex-1 h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 truncate shadow-sm">
+                <MapPin className="w-4 h-4 shrink-0 text-emerald-500" />
+                <span className="text-sm font-medium text-foreground dark:text-white truncate block">
+                    {detectedCity}
+                </span>
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="ml-auto w-6 h-6 hover:bg-red-500/20 text-red-500 rounded-full"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setDetectedCity(null);
+                        setLocationRecord(null);
+                        isVoiceSessionRef.current = false;
+                    }}
+                >
+                    <span className="sr-only">Clear area</span>
+                    &times;
+                </Button>
+            </div>
+        ) : (
+            <HierarchicalLocationSelector
+                className="w-12 md:flex-1"
+                placeholder="City, State"
+                onLocationSelect={(record) => {
+                    console.log("Loc Selected", record);
+                    setDetectedCity(record.name);
+                    setLocationRecord(record);
+                }}
+            />
+        )
     ) : (
         <UKCityCombobox
-            className="flex-1 h-11"
+            className="w-12 md:flex-1 h-12 md:h-11"
             placeholder="Select City"
             value={detectedCity || ""}
             onValueChange={setDetectedCity}
@@ -522,7 +549,7 @@ export function EmergencyChatInterface() {
             }}
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
-            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+            className={`h-12 w-12 md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
@@ -530,11 +557,11 @@ export function EmergencyChatInterface() {
             title={isRecording ? "Stop Recording" : (isTranscriptionProcessing ? `Processing... (${whisperStatus})` : `Record Message (${whisperStatus})`)}
         >
             {isTranscriptionProcessing ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 md:w-4 md:h-4 animate-spin" />
             ) : isRecording ? (
-                <MicOff className="w-4 h-4" />
+                <MicOff className="w-5 h-5 md:w-4 md:h-4" />
             ) : (
-                <Mic className="w-4 h-4" />
+                <Mic className="w-5 h-5 md:w-4 md:h-4" />
             )}
         </Button>
     );
@@ -563,16 +590,17 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
-            className={`h-11 w-full flex-1 rounded-full transition-all shadow-lg font-bold uppercase tracking-wider text-[10px] px-1 ${(detectedTrade && detectedCity && !input.trim())
+            size="icon"
+            className={`h-12 w-12 rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
         >
             {isRequestingLocation ? (
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-5 h-5" />
             ) : (detectedTrade && detectedCity && !input.trim()) ? (
-                <Search className="w-4 h-4" />
+                <Search className="w-5 h-5" />
             ) : (
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5" />
             )}
         </Button>
     );
@@ -747,21 +775,13 @@ export function EmergencyChatInterface() {
             </div>
 
             {/* Mobile Controls - Below chat - Optimized Layout - Single Row Strict Symmetry */}
-            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-4 items-center overflow-visible">
-                {/* Single Row: Trade, City, Button - Side by Side, Equal Widths, 10px Gap, 90% Width */}
-                <div className="flex flex-row w-[90%] flex-nowrap items-center justify-center gap-[6px] overflow-visible">
-                    <div className="flex-[0_0_auto]">
-                        {micButton}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        {tradeSelector}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        {locationSelector}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        {mobileActionButton}
-                    </div>
+            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-6 items-center overflow-visible">
+                {/* Single Row: Microphone, Wrench, Location Pin, Send - Uniform Circular Icons, 12px Gap */}
+                <div className="flex flex-row w-[90%] items-center justify-center gap-4 overflow-visible">
+                    {micButton}
+                    {tradeSelector}
+                    {locationSelector}
+                    {mobileActionButton}
                 </div>
             </div>
         </div>

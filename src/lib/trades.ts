@@ -275,9 +275,10 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const usServiceAreaMap: Record<string, string[]> = {
-    "Los Angeles": ["Santa Monica", "Beverly Hills", "Pasadena", "Glendale", "Long Beach", "Burbank", "West Hollywood", "Culver City"],
-    "San Diego": ["La Jolla", "Coronado", "Chula Vista", "Carlsbad", "Encinitas", "Del Mar"],
-    "San Francisco": ["Oakland", "Berkeley", "Daly City", "San Mateo", "Palo Alto"],
+    "Los Angeles": ["Santa Monica", "Beverly Hills", "Pasadena", "Glendale", "Long Beach", "Burbank", "West Hollywood", "Culver City", "Sherman Oaks", "Downtown LA", "Venice", "Malibu", "Santa Clarita"],
+    "San Diego": ["La Jolla", "Coronado", "Chula Vista", "Carlsbad", "Encinitas", "Del Mar", "Gaslamp Quarter", "Mission Valley", "Pacific Beach", "Oceanside", "Escondido"],
+    "San Francisco": ["Oakland", "Berkeley", "Daly City", "San Mateo", "Palo Alto", "SOMA", "Mission District", "Richmond District", "San Rafael", "Marin County"],
+    "Sacramento": ["Midtown", "Elk Grove", "Roseville", "Folsom", "Citrus Heights", "Davis", "Rocklin", "West Sacramento", "Carmichael"],
     "New York": ["Brooklyn", "Queens", "Bronx", "Staten Island", "Manhattan"],
     "Chicago": ["Naperville", "Evanston", "Schaumburg", "Oak Park", "Skokie"],
     "Houston": ["The Woodlands", "Sugar Land", "Katy", "Pearland"],
@@ -297,7 +298,10 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const usLocalExpertiseMap: Record<string, string> = {
-    "Los Angeles": "Our LA partners navigate the city's complex geography from Downtown to the Valley, understanding earthquake retrofit requirements, HVAC demands for year-round climate control, and strict California building codes.",
+    "Los Angeles": "Our local LA contractors expertly navigate the city's complex geography from Downtown to the San Fernando Valley. We understand strict California building codes, seismic/earthquake retrofit requirements across LA County, and the heavy demands placed on HVAC systems during year-round heatwaves and Santa Ana winds.",
+    "San Diego": "Serving America's Finest City, our San Diego tradesmen understand the unique effects of coastal salt air on HVAC units and plumbing fixtures. From historic Gaslamp Quarter buildings to modern Pacific Beach homes, we handle everything from emergency water damage to solar-ready electrical panel upgrades.",
+    "San Francisco": "Navigating the steep hills and dense neighborhoods of SF requires experts who know the Bay Area inside out. Our San Francisco contractors specialize in updating Victorian-era plumbing, strengthening structures for earthquake readiness, and addressing the Bay's microclimate moisture issues.",
+    "Sacramento": "In the heart of the Central Valley, Sacramento homes face intense dry summers and sudden winter atmospheric rivers. Our local experts prioritize energy-efficient HVAC cooling setups, rapid flood water extraction, and dependable roofing repairs built to withstand severe weather swings.",
     "New York": "Our NYC team handles everything from brownstone plumbing to high-rise HVAC systems. We understand steam heat systems, strict DOB regulations, and quick response logistics in all five boroughs.",
     "Chicago": "Built for Midwest extremes, our Chicago experts handle frozen pipes, boiler systems, and wind-proofing.",
     "Houston": "In Houston's humid subtropical climate, our partners prioritize mold prevention in water damage restoration and ensure air conditioning reliability.",

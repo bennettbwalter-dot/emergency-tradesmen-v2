@@ -7,9 +7,11 @@ import { Footer } from "@/components/Footer";
 import confetti from "canvas-confetti";
 import { useAuth } from "@/contexts/AuthContext";
 import { sendEmail } from "@/lib/email";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export default function PaymentSuccessPage() {
     const { user } = useAuth();
+    const { settings } = useLocalization();
     const navigate = useNavigate();
     const hasSentRef = useRef(false);
     const [countdown, setCountdown] = useState(4);
@@ -65,6 +67,13 @@ export default function PaymentSuccessPage() {
                     to: user.email,
                     subject: "Welcome to Premium - Emergency Tradesmen",
                     text: `Hi ${user.name},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: https://emergencytradesmen.net/user/dashboard`
+                });
+
+                // 3. Track Conversion in PostHog
+                (window as any).posthog?.capture('Plan Purchased', {
+                    region: settings.countryCode === 'GB' ? 'UK' : 'US',
+                    trade_category: (user as any)?.trade || 'unknown',
+                    plan_tier: 'pro'
                 });
             }
         }

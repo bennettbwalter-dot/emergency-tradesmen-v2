@@ -45,7 +45,10 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
 
     // Process all waveform data in one centralized memo
     const memoData = useMemo(() => {
-        const width = 340;
+        // Use responsive width: Max 340, but scale down for smaller viewports
+        // We account for padding and control icons (~120px)
+        const availableWidth = typeof window !== 'undefined' ? Math.min(340, window.innerWidth - 140) : 340;
+        const width = Math.max(160, availableWidth); // Never too small
         const height = 40;
         const centerY = height / 2;
         const points = 100;
@@ -58,7 +61,7 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
 
         let pt = `M 0 ${centerY}`;
         let pb = `M 0 ${centerY}`;
-        const bars: { h: number; opacity: number }[] = [];
+        const bars: { h: number; opacity: number; x: number }[] = [];
 
         // 2. SVG PATHS (Silhouette)
         for (let i = 0; i <= points; i++) {
@@ -83,8 +86,9 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
         }
 
         // 3. VERTICAL BARS (Mirrored)
-        for (let i = 0; i < 110; i++) {
-            const xNorm = i / 110;
+        const barCount = Math.floor(width / 3); // Dynamic density
+        for (let i = 0; i < barCount; i++) {
+            const xNorm = i / barCount;
             const envelope = Math.sin(xNorm * Math.PI);
             const dataIdx = Math.floor(xNorm * audioData.length);
             const level = audioData[dataIdx] || 0;
@@ -103,13 +107,13 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                 ? Math.max(1.5, (voiceAmplify * 20 + voiceAmplify * oscillation) * envelope)
                 : 1.5;
 
-            bars.push({ h, opacity: gatedLevel > 0 ? 0.9 : 0.4 });
+            bars.push({ h, opacity: gatedLevel > 0 ? 0.9 : 0.4, x: xNorm * width });
         }
 
-        return { pathTop: pt, pathBottom: pb, barData: bars, isVoiceActive };
+        return { pathTop: pt, pathBottom: pb, barData: bars, isVoiceActive, width };
     }, [audioData, time, isRecording]);
 
-    const { pathTop, pathBottom, barData, isVoiceActive } = memoData;
+    const { pathTop, pathBottom, barData, isVoiceActive, width } = memoData;
 
     return (
         <div className="relative isolate">
@@ -118,23 +122,26 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
 
             {/* Panel Background & Border */}
             <div
-                className="flex items-center gap-6 px-6 py-4 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl bg-slate-900/40"
+                className="flex items-center gap-3 md:gap-6 px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl bg-slate-900/60"
                 style={{
                     boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1)'
                 }}
             >
                 {/* Visual Glass Surface Noise */}
                 <div
-                    className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+                    className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay"
                     style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`
                     }}
                 />
 
                 {/* Waveform Visualization Container */}
-                <div className="relative w-[340px] h-[40px] flex items-center">
+                <div
+                    className="relative h-[40px] flex items-center overflow-hidden"
+                    style={{ width: `${width}px` }}
+                >
                     {/* Glowing SVG Paths */}
-                    <svg width="340" height="40" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+                    <svg width={width} height="40" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
                         <defs>
                             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" stopColor="#3b82f6" />
@@ -150,7 +157,7 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="transition-colors duration-300"
+                            className="transition-all duration-300"
                         />
                         <path
                             d={pathBottom}
@@ -159,19 +166,19 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="transition-colors duration-300"
+                            className="transition-all duration-300"
                         />
 
                         {/* Mirrored Vertical Bars */}
                         {barData.map((bar, i) => (
                             <line
                                 key={i}
-                                x1={(i / 110) * 340} y1={20 - bar.h / 2}
-                                x2={(i / 110) * 340} y2={20 + bar.h / 2}
+                                x1={bar.x} y1={20 - bar.h / 2}
+                                x2={bar.x} y2={20 + bar.h / 2}
                                 stroke={isVoiceActive ? "url(#waveGradient)" : "white"}
                                 strokeWidth="1.2"
                                 strokeOpacity={bar.opacity}
-                                className="transition-colors duration-300"
+                                className="transition-all duration-300"
                             />
                         ))}
                     </svg>
@@ -181,7 +188,7 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                 </div>
 
                 {/* Control Icons Group (Right) */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 md:gap-3 ml-auto">
                     {isProcessing ? (
                         <div className="w-10 h-10 flex items-center justify-center">
                             <Loader2 className="w-5 h-5 animate-spin text-blue-400" />

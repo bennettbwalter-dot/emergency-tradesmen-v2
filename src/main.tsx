@@ -4,6 +4,10 @@ import "./index.css";
 import "@fontsource/dm-sans"; // Defaults to weight 400
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
+import { initPostHog } from "./lib/posthog";
+
+// Initialize analytics
+initPostHog();
 
 // Prevent blank screen of death with immediate error reporting
 window.addEventListener('error', (event) => {

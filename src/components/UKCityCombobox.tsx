@@ -35,27 +35,17 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                     role="combobox"
                     aria-expanded={open}
                     className={cn(
-                        "h-11 w-full justify-between rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm",
+                        "h-12 md:h-11 w-12 md:w-full justify-center md:justify-between rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm shrink-0",
                         className
                     )}
                 >
-                    <div className="flex items-center gap-2 truncate">
-                        <MapPin className="h-4 w-4 shrink-0 text-gold" />
-                        <span className={cn("truncate", !value && "text-muted-foreground")}>
-                            {value ? (
-                                <>
-                                    <span className="hidden sm:inline">{value}</span>
-                                    <span className="sm:hidden">{value}</span>
-                                </>
-                            ) : (
-                                <>
-                                    <span className="hidden sm:inline">{placeholder}</span>
-                                    <span className="sm:hidden text-xs">City</span>
-                                </>
-                            )}
+                    <div className="flex items-center justify-center md:justify-start md:gap-2">
+                        <MapPin className="h-5 w-5 md:h-4 md:w-4 shrink-0 text-gold" />
+                        <span className={cn("hidden md:inline truncate", !value && "text-muted-foreground")}>
+                            {value ? value : placeholder}
                         </span>
                     </div>
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    <ChevronsUpDown className="h-3 w-3 shrink-0 opacity-50 md:ml-2 md:h-4 md:w-4" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] p-0" align="start">

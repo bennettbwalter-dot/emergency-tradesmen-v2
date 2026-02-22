@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 
 export default function PricingPage() {
     const { settings } = useLocalization();
+    const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
+    const isUS = settings.countryCode === 'US';
+
     const handleContactUs = () => {
         window.location.href = "mailto:emergencytradesmen@outlook.com?subject=Pro%20Subscription%20Inquiry";
     };

@@ -5,12 +5,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { useFeatureFlagEnabled } from "posthog-js/react";
 
 export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login" | "register" }) {
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const redirect = searchParams.get("redirect") || "/user/dashboard";
+
+    // Check if the user is in the "new-us-signup-flow" test group
+    const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -39,10 +43,10 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
                     <Card className="border-gold/20 shadow-lg">
                         <CardContent className="pt-6 text-center">
                             <h1 className="text-2xl font-display mb-2">
-                                {defaultTab === "login" ? "Welcome Back" : "Join Emergency Tradesmen"}
+                                {isNewSignupFlowEnabled ? "Join Emergency Tradesmen US Preview" : (defaultTab === "login" ? "Welcome Back" : "Join Emergency Tradesmen")}
                             </h1>
                             <p className="text-muted-foreground mb-6">
-                                Please sign in to access this page.
+                                {isNewSignupFlowEnabled ? "You have been selected to preview our new sign-up flow." : "Please sign in to access this page."}
                             </p>
 
                             <div className="flex justify-center">

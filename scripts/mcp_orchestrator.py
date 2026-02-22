@@ -35,7 +35,8 @@ else:
 # =============================================================================
 SAFETY_LIMITS = {
     "yelp": {"daily": 4950},          # Free tier: 5,000/day
-    "foursquare": {"monthly": 99000}  # Free tier: 100,000/month
+    "foursquare": {"monthly": 99000}, # Free tier: 100,000/month
+    "here": {"monthly": 29142}        # Hard cap: User has 19142 used, wants exactly 10k budget total (19142 + 10000 = 29142)
 }
 
 STATS_FILE = os.path.join(os.path.dirname(__file__), 'usage_stats.json')
@@ -180,6 +181,53 @@ class YelpAPI:
         except: return "ERROR"
 
 
+class HereAPI:
+    @staticmethod
+    def search(api_key: str, trade: str, city: str, state: str) -> List[Dict]:
+        url = "https://discover.search.hereapi.com/v1/discover"
+        params = {
+            "q": f"{trade.replace('-', ' ')} in {city} {state}",
+            "apiKey": api_key,
+            "limit": 10
+        }
+        try:
+            resp = requests.get(url, params=params, timeout=15)
+            if resp.status_code == 200:
+                found = []
+                for item in resp.json().get("items", []):
+                    contacts = item.get("contacts", [])
+                    raw_phone = ""
+                    if contacts and "phone" in contacts[0] and contacts[0]["phone"]:
+                        raw_phone = contacts[0]["phone"][0].get("value", "")
+                    
+                    phone = re.sub(r'[^\d]', '', raw_phone)
+                    if len(phone) == 11 and phone.startswith('1'): phone = phone[1:]
+                    
+                    if len(phone) == 10:
+                        address = ""
+                        if item.get("address") and item["address"].get("street"):
+                            address = item["address"]["street"]
+                        else:
+                            address = f"{city}, {state}"
+                            
+                        website = None
+                        if contacts and "www" in contacts[0] and contacts[0]["www"]:
+                            website = contacts[0]["www"][0].get("value")
+                            
+                        found.append({
+                            "name": item.get("title", ""),
+                            "phone": phone,
+                            "source": "here",
+                            "address": address,
+                            "website": website
+                        })
+                return found
+            elif resp.status_code == 429: return "RATE_LIMIT"
+            elif resp.status_code in [401, 403]: return "AUTH_ERROR"
+            return []
+        except: return "ERROR"
+
+
 class WebSearchAPI:
     """Fallback directory scraper for YellowPages.com to ensure continuous building."""
     @staticmethod
@@ -246,6 +294,8 @@ class MCPOrchestrator:
             self.sources["yelp"] = APISource("yelp", os.getenv("YELP_API_KEY"))
         if os.getenv("FOURSQUARE_API_KEY"):
             self.sources["foursquare"] = APISource("foursquare", os.getenv("FOURSQUARE_API_KEY"))
+        if os.getenv("HERE_API_KEY"):
+            self.sources["here"] = APISource("here", os.getenv("HERE_API_KEY"))
         print(f"[INIT] Active Sources: {list(self.sources.keys())}")
 
     def _load_stats(self) -> Dict:
@@ -261,14 +311,15 @@ class MCPOrchestrator:
                     stats["yelp"]["daily_calls"] = 0
                     stats["yelp"]["last_reset"] = today_str
                     
-                for s in ["foursquare"]:
+                for s in ["foursquare", "here"]:
                     if stats.get(s) and stats[s].get("last_reset_month") != month_str:
                         stats[s]["monthly_calls"] = 0
                         stats[s]["last_reset_month"] = month_str
                 return stats
             except: pass
         return {"yelp": {"daily_calls": 0, "last_reset": "2026-02-01"}, 
-                "foursquare": {"monthly_calls": 0, "last_reset_month": "2026-02"}}
+                "foursquare": {"monthly_calls": 0, "last_reset_month": "2026-02"},
+                "here": {"monthly_calls": 0, "last_reset_month": "2026-02"}}
 
     def _load_gaps(self):
         gap_file = os.path.join(os.path.dirname(__file__), 'us_listing_gaps.json')
@@ -307,6 +358,8 @@ class MCPOrchestrator:
                 res = YelpAPI.search(src.api_key, trade, city, state)
             elif src.name == "foursquare":
                 res = FoursquareAPI.search(src.api_key, trade, city, state)
+            elif src.name == "here":
+                res = HereAPI.search(src.api_key, trade, city, state)
             else: res = []
             
             with self.lock:
