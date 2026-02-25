@@ -726,11 +726,11 @@ export function EmergencyChatInterface() {
                     <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border transition-all duration-500 overflow-visible group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
-                            : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
+                            : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'} overflow-x-hidden`}>
 
                         {/* WAVEFORM INSIDE CONTAINER - Shows when recording */}
                         {isRecording ? (
-                            <div className="w-full min-h-[180px] md:min-h-[100px] flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5">
+                            <div className="w-full min-h-[140px] md:min-h-[100px] flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5">
                                 <WhisperWaveform
                                     audioData={audioData}
                                     isRecording={isRecording}

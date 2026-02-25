@@ -24,7 +24,7 @@
 
 ### Phase 1: Semantic & Local Keyword Research
 * **The "Near Me" Matrix:** Map `[Emergency Trade]` + `[City/Town/Zip/Postcode]`.
-* **Search Symptoms:** Target keywords like "banging noise in pipes" or "burning smell from outlet."
+* **Search Symptoms:** 
 * **PAA Scraping:** Find the top 5 "People Also Ask" questions for every trade.
 
 ### Phase 2: Hyper-Local Landing Page Expansion
@@ -64,10 +64,10 @@ For every location page (e.g., `/plumber/london` or `/us/plumber/houston`):
 
 For every task, provide the following:
 
-1.  **Regional Focus:** (UK or USA)
-2.  **Primary Keyword:** (Main Target)
-3.  **Semantic Keywords:** (3-5 supporting terms)
-4.  **Content/Optimization Delivered:** (The actual text/code)
+1.  **
+2.  **
+3.  **Semantic 
+4.  **
 5.  **Interlinking Strategy:** (Links to/from)
 6.  **AI Overview Trigger:** (The short summary for Google AI)
 

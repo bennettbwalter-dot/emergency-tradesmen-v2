@@ -1,4 +1,3 @@
-
 **A broken window or smashed sliding door is more than a mess; it is a critical security vulnerability and a liability risk. In the United States, homeowners have a legal "duty to mitigate" damages, meaning your insurance policy likely requires you to secure the property immediately to prevent further rain or theft damage. This is the definitive 2025 US Guide to Emergency Boarding Up, from choosing the right plywood to avoiding municipal city fines.**
 
 ---
@@ -82,7 +81,3 @@ A: **Usually not.** Most insurers treat "emergency mitigation" as a separate lin
 A: Most "Glass Repair" companies on Google are actually just marketing firms. Look for "24/7 Emergency Mitigation" or "Board Up Services." These companies are specialized in securing properties after fires or break-ins.
 
 ---
-
-**Meta Title:** Emergency Board Up Guide US | Security & Storm Protection 2025
-**Meta Description:** Window broken? Learn how to secure your property. US guide to choosing plywood, avoiding city fines, and getting insurance to pay for boarding.
-**Keywords:** emergency board up, broken window security, hurricane boarding, plywood for windows, insurance board up, city blight ordinance, glass repair US.

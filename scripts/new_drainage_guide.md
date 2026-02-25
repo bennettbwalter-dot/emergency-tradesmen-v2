@@ -1,4 +1,3 @@
-
 ![Emergency Drain Unblocking - Hero](/blog/emergency-drain-unblocking/hero-worker.jpg)
 
 It’s a Thursday morning in mid-February. In London, the humidity is at 89% and a persistent light rain is soaking the pavement. In New York, the temperature is hovering just above freezing, with the threat of a snow-rain mix later tonight. 

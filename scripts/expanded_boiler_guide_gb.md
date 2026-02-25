@@ -1,4 +1,3 @@
-
 **Boiler pressure gauge sitting at zero? No hot water for the morning shower? Before you call an engineer out for a £150 emergency visit, learn how to use the "Filling Loop." In the UK, Combi Boiler pressure issues are the #1 cause of heating call-outs. This is the definitive 2025 Guide to UK Boiler Pressure, the "1.5 Bar" rule, and identifying when a drip is actually a major component failure.**
 
 ---
@@ -87,7 +86,3 @@ A: This is usually caused by "Limescale" in hard water areas (London/SE). Water 
 A: For many, yes. Plans from British Gas or HomeServe (approx £15/month) provide peace of mind. However, they often don't cover "sludge" or "pre-existing faults." If your boiler is over 10 years old, they may refuse to repair it.
 
 ---
-
-**Meta Title:** Boiler Pressure Dropping UK | Filling Loop & 1.5 Bar Guide 2025
-**Meta Description:** Radiators cold? Learn how to repressurise your UK Combi boiler using the filling loop. Guide to 1.5 bar standards, expansion vessels, and repair costs in 2025.
-**Keywords:** boiler pressure dropping UK, how to repressurise boiler, filling loop guide, Worcester Bosch EA code, expansion vessel charge, boiler service cost UK, combi boiler pressure.

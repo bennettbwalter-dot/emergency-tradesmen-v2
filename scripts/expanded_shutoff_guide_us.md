@@ -1,4 +1,3 @@
-
 **A major water leak, a persistent smell of natural gas, or an electrical "crackling" behind the walls are high-stress moments where seconds count. In the United States, homeowners are often the "first responders" to their own disasters. This is the definitive 2025 US Guide to Home Emergency Shut-Offs, master checklists for every utility, and the professional protocols that prevent a minor failure from becoming a $50,000 catastrophic loss.**
 
 ---
@@ -94,7 +93,3 @@ A: **Call an Electrician.** A buzzing panel indicates a loose connection or a br
 A: **Yes.** Most modern gas appliances have a local "Appliance Regulator" and a valve. But if you smell gas in the house, do not waste time behind the stove; go straight to the master meter outside.
 
 ---
-
-**Meta Title:** Home Emergency Shut-Off Guide US | Water, Gas & Electric 2025
-**Meta Description:** Seconds count in a home emergency. Learn how to find and use US master shut-off valves for water, natural gas, and electricity in 2025.
-**Keywords:** home emergency shut off, main water valve US, gas meter shut off, electrical panel main breaker, emergency plumbing guide, sump pump battery backup, gas leak 911 US.

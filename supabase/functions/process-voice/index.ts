@@ -45,7 +45,7 @@ serve(async (req) => {
         // =================================================================
         const whisperFormData = new FormData()
         whisperFormData.append('file', audioFile)
-        whisperFormData.append('model', 'gpt-4o-mini-transcribe')
+        whisperFormData.append('model', 'whisper-1')
         whisperFormData.append('language', 'en')
         whisperFormData.append('response_format', 'text')
 

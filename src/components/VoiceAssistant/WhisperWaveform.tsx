@@ -46,9 +46,9 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
     // Process all waveform data in one centralized memo
     const memoData = useMemo(() => {
         // Use responsive width: Max 340, but scale down for smaller viewports
-        // We account for padding and control icons (~120px)
-        const availableWidth = typeof window !== 'undefined' ? Math.min(340, window.innerWidth - 140) : 340;
-        const width = Math.max(160, availableWidth); // Never too small
+        // We account for padding and control icons (~160px for safety on small screens)
+        const availableWidth = typeof window !== 'undefined' ? Math.min(340, window.innerWidth - 180) : 340;
+        const width = Math.max(100, availableWidth); // Never too small
         const height = 40;
         const centerY = height / 2;
         const points = 100;
@@ -122,7 +122,7 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
 
             {/* Panel Background & Border */}
             <div
-                className="flex items-center gap-3 md:gap-6 px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl bg-slate-900/60"
+                className="flex items-center gap-2 md:gap-6 px-3 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-2xl bg-slate-900/60"
                 style={{
                     boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1)'
                 }}
@@ -198,28 +198,31 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                             {/* 1. CONFIRM: Blue Circle with Checkmark */}
                             <button
                                 onClick={onConfirm}
-                                className="w-10 h-10 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center transition-all hover:scale-110 active:scale-95 text-white"
+                                className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center transition-all hover:scale-110 active:scale-95 text-white"
                                 aria-label="Confirm speech"
                             >
-                                <Check size={20} className="stroke-[2.5px]" />
+                                <Check size={16} className="md:size-20 stroke-[2.5px]" />
                             </button>
 
-                            {/* 2. CANCEL: Subtle Gray X */}
-                            <button
-                                onClick={onCancel}
-                                className="w-9 h-9 flex items-center justify-center rounded-full text-white/40 hover:text-white/80 transition-colors"
-                                aria-label="Cancel recording"
-                            >
-                                <X size={20} />
-                            </button>
+                            {/* Mobile-optimized spacing for cancel/options */}
+                            <div className="flex items-center gap-0.5 md:gap-2">
+                                {/* 2. CANCEL: Subtle Gray X */}
+                                <button
+                                    onClick={onCancel}
+                                    className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-white/40 hover:text-white/80 transition-colors"
+                                    aria-label="Cancel recording"
+                                >
+                                    <X size={18} className="md:size-20" />
+                                </button>
 
-                            {/* 3. OPTIONS: Subtle Gray Dots */}
-                            <button
-                                className="w-9 h-9 flex items-center justify-center rounded-full text-white/40 hover:text-white/80 transition-colors"
-                                aria-label="More options"
-                            >
-                                <MoreHorizontal size={20} />
-                            </button>
+                                {/* 3. OPTIONS: Subtle Gray Dots */}
+                                <button
+                                    className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-white/40 hover:text-white/80 transition-colors"
+                                    aria-label="More options"
+                                >
+                                    <MoreHorizontal size={18} className="md:size-20" />
+                                </button>
+                            </div>
                         </>
                     )}
                 </div>

@@ -1,4 +1,3 @@
-
 **You smell rotten eggs. You hear a sharp hissing sound near the furnace. Do NOT turn on the lights. In the United States, a natural gas leak is one of the most dangerous home emergencies because the explosive range is narrow and easily reached. This is the definitive 2025 US Guide to Gas Safety, identifying leaks, and the life-saving 911 shut-off protocol.**
 
 ---
@@ -96,7 +95,3 @@ A: This often indicates a "Delayed Ignition" or a cracked heat exchanger. Gas is
 A: **No.** Propane is heavier than air and will pool on the floor or in the basement. Natural gas is lighter than air and rises. Propane leaks are significantly more dangerous in basements.
 
 ---
-
-**Meta Title:** Smell Gas? US Emergency Guide | Shut-Off Protocol & 911 Laws
-**Meta Description:** Smelling rotten eggs? Learn the US life-saving "No Spark" rule, how to shut off your gas meter, and the difference between gas leaks and Carbon Monoxide.
-**Keywords:** smell gas US, gas leak 911, how to shut off gas meter, mercaptan smell, carbon monoxide signs, emergency plumber gas, US gas safety laws.

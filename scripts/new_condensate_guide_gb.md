@@ -1,4 +1,3 @@
-
 **Is your boiler showing a "gurgling" sound or an EA/F1 error code during a sub-zero cold snap? In the UK, the most common cause of boiler failure in winter is a frozen condensate pipe. This is the definitive 2025 Guide to the "Hot Water" fix, preventing ice blockages, and the permanent insulation standards that save you a £150 emergency plumber fee.**
 
 ---
@@ -99,7 +98,3 @@ A: **In an extreme emergency, yes.** If you are desperate for heat and can't tha
 A: **Yes.** A frozen pipe doesn't void your warranty, but the manufacturer (Worcester, Vaillant, etc.) will not attend the repair for free. They will charge you a "non-fault" fee (often £100+) because the fault is with the external pipework, not the boiler itself.
 
 ---
-
-**Meta Title:** Frozen Condensate Pipe Fix | Thaw Your Boiler in 5 Minutes 2025
-**Meta Description:** Boiler gurgling and showing EA or F1? Learn the safe "Hot Water" method to thaw a frozen condensate pipe and get your UK heating back on in 5 minutes.
-**Keywords:** frozen condensate pipe fix, boiler ea code fix, thaw condensate pipe, Worcester Bosch ea error, condensate lagging UK, upsize condensate pipe, boiler gurgling sound.

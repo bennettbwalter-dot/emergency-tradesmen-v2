@@ -1,4 +1,3 @@
-
 **Is your heating system making a "gurgling" sound or showing a "Flame Failure" or "Ignition Lockout" error during a sub-zero cold snap? In the US, a common cause of furnace or boiler failure in winter is a frozen condensate pipe. This is the definitive 2025 Guide to the "Hot Water" fix, preventing ice blockages, and the permanent insulation standards that save you a $200 emergency technician fee.**
 
 ---
@@ -97,7 +96,3 @@ A: **In an extreme emergency, yes.** If you are desperate for heat and can't tha
 A: **Yes.** A frozen pipe doesn't void your manufacturer's warranty, but the dealer or technician will not perform the thawing service for free under warranty. This is considered an "installation" or "maintenance" issue.
 
 ---
-
-**Meta Title:** Frozen Condensate Pipe Fix | Thaw Your Furnace/Boiler in 5 Minutes 2025
-**Meta Description:** Furnace gurgling and showing an error code? Learn the safe "Hot Water" method to thaw a frozen condensate pipe and get your US home heating back on in 5 minutes.
-**Keywords:** frozen condensate pipe fix, furnace error code 31, thaw furnace drain, Carrier furnace code 31, condensate insulation US, high efficiency furnace freezing.

@@ -1,4 +1,3 @@
-
 **Smelling rotten eggs? Hearing a faint hiss in the kitchen? In the UK, gas safety is strictly regulated. A leak isn't just a fire hazard; it is a potential explosion risk that requires an immediate, disciplined response. This is the definitive 2025 UK Guide to Gas Emergencies, the 0800 111 999 "Golden Rule," and your legal rights as a tenant or homeowner.**
 
 ---
@@ -86,7 +85,3 @@ A: **Yes.** This is usually a leak on the "Grid" or "Mains." Call the same 0800 
 A: **YES.** Under the *Gas Safety (Installation and Use) Regulations 1998*, it is a criminal offense for anyone to work on a gas appliance unless they are Gas Safe Registered. This includes changing a hob or servicing a boiler.
 
 ---
-
-**Meta Title:** Smell Gas Guide UK | Emergency 0800 111 999 Protocol 2025
-**Meta Description:** Smelling gas in your home? Follow the UK 24/7 emergency procedure. Learn about the 'No Spark' rule, finding your shut-off valve, and your rights as a tenant.
-**Keywords:** smell gas UK, 0800 111 999, National Gas Emergency, Gas Safe register, landlord gas safety, ECV valve, carbon monoxide laws UK.

@@ -1,4 +1,3 @@
-
 **In a true home emergency, every second counts. Whether it's water cascading through the kitchen ceiling, the acrid smell of burning plastic behind the sofa, or a total gas failure in sub-zero temperatures, you need a pre-verified protocol. This is the definitive 2025 Master Guide to Home Emergencies, the "Big 4" crisis management blueprints, and the professional standards for 24/7 restoration.**
 
 ---
@@ -121,7 +120,3 @@ A: **The Landlord.** However, if the emergency was caused by your negligence (e.
 A: **Sometimes.** Check your policy for "Home Emergency Cover." Many standard policies *only* cover the damage caused by the leak, not the plumber’s bill to fix the pipe. Home Emergency riders (approx £50/year) cover the tradesman's labor.
 
 ---
-
-**Meta Title:** Master Home Emergency Guide 2025 | Plumbing, Gas & Electric
-**Meta Description:** Cascading water or smell of gas? Follow the 2025 Home Emergency Protocol to isolate utilities, safely manage electrical faults, and find emergency tradesmen.
-**Keywords:** home emergency guide, emergency plumber, gas leak procedure, fuse box tripping, burst pipe fix, emergency locksmith, boarding up cost.

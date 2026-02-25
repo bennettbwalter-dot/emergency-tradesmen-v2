@@ -1,4 +1,3 @@
-
 **A drain smell in the en-suite or a gurgling sound in the kitchen sink is a sign that your home's hygiene barrier is being compromised. In the UK, with our mix of Victorian cast iron and modern plastic plumbing, sewer gas—containing hydrogen sulphide and methane—can find multiple ways into your living space. This is the definitive 2025 UK Guide to identifying the source of drain smells, the role of the "Durgo Valve," and your legal rights regarding shared sewers.**
 
 ---
@@ -90,7 +89,3 @@ A: They are a hygiene risk as they breed in the sludge within your pipes. If you
 A: **No.** Domestic pressure washers don't have enough volume and can damage the joints of old clay pipes. High Pressure Water Jetting (HPWJ) is a specialist professional service.
 
 ---
-
-**Meta Title:** Drain Smell in Bathroom UK | Soil Stack & Durgo Valve Guide
-**Meta Description:** Nasty smells in your UK bathroom? Learn how to identify failed Durgo valves, siphoned traps, and shared sewer responsibilities in 2025.
-**Keywords:** drain smell bathroom UK, sewer smell in house, Durgo valve failure, gurgling sink UK, shared sewer law UK, bottle trap replacement, mcalpine anti-siphon.

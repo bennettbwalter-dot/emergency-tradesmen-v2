@@ -1,4 +1,3 @@
-
 **Coming home to a sweltering lounge? UK summers are becoming hotter and longer, making AC and Heat Pumps a vital part of domestic comfort. However, UK systems (predominantly "Mini-Splits") have specific maintenance needs. This is the definitive 2025 UK Guide to troubleshooting your AC or Heat Pump, understanding the F-Gas regulations, and identifying when a "Deep Clean" is the only fix.**
 
 ---
@@ -84,7 +83,3 @@ A: A high-quality Japanese brand (Mitsubishi/Daikin) should last 15–20 years i
 A: **A wall-mounted AC unit is an "Air-to-Air" heat pump.** It heats and cools the air directly. An "Air-to-Water" heat pump replaces your gas boiler and heats your radiators. Both use the same underlying technology.
 
 ---
-
-**Meta Title:** AC & Heat Pump Troubleshooting UK | Filters & Deep Cleaning 2025
-**Meta Description:** AC blowing warm air? Learn how to clean your filters, troubleshoot UK mini-split systems, and understand F-Gas laws and repair costs in 2025.
-**Keywords:** AC troubleshoot UK, heat pump not cooling, clean AC filters, F-gas laws UK, AC deep clean cost, mini split repair UK, air conditioning service.

@@ -1,4 +1,3 @@
-
 **Is that crack in the plaster a simple decorative issue, or a sign of structural failure? In the UK, identifying "Subsidence" early can save homeowners tens of thousands of pounds. This is the definitive 2025 Guide to UK Structural Cracks, Subsidence Surveys, and the technical RICS standards used to judge your home's health.**
 
 ---
@@ -93,7 +92,3 @@ A: **Indirectly.** Modern homes are fine, but in older lime-mortared homes, ivy 
 A: If you make a claim, they will send their own adjuster. However, if you want an independent opinion to challenge their findings, you must pay for your own RICS surveyor.
 
 ---
-
-**Meta Title:** Structural Cracks & Subsidence Guide UK | RICS Survey Standards 2025
-**Meta Description:** Worried about cracks in your walls? Learn how to distinguish between settlement and subsidence. Guide to London Clay, BRE Digest 251 categories, and underpinning costs.
-**Keywords:** structural cracks UK, subsidence survey, RICS surveyor, London clay subsidence, underpinning cost, crack stitching, heave vs subsidence.

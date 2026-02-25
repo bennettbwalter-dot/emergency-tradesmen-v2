@@ -66,9 +66,20 @@ function useOpenAIWhisper(): WhisperResult {
 
             // Prepare MediaRecorder
             const getSupportedMimeType = () => {
-                const types = ['audio/webm;codecs=opus', 'audio/ogg;codecs=opus', 'audio/wav', 'audio/mp4', 'audio/aac'];
+                const types = [
+                    'audio/webm;codecs=opus',
+                    'audio/mp4',
+                    'audio/aac',
+                    'audio/mpeg',
+                    'audio/webm',
+                    'audio/ogg;codecs=opus',
+                    'audio/wav'
+                ];
                 for (const type of types) {
-                    if (MediaRecorder.isTypeSupported(type)) return type;
+                    if (MediaRecorder.isTypeSupported(type)) {
+                        console.log(`[useWhisper] Using supported MIME type: ${type}`);
+                        return type;
+                    }
                 }
                 return '';
             };
@@ -127,11 +138,6 @@ function useOpenAIWhisper(): WhisperResult {
                     if (data.transcript) {
                         console.log(`[useWhisper] Transcription result: "${data.transcript}" | Extracted Location: ${data.location} | High Urgency: ${data.high_urgency}`);
                         setTranscription(data.transcript);
-
-                        // Wait for a tiny moment before clearing to allow UI to pick up the transcript
-                        setTimeout(() => {
-                            setTranscription('');
-                        }, 2000);
                     } else if (data.transcript === "") {
                         // Empty transcript means backend heard nothing
                         console.log(`[useWhisper] Empty transcription returned from backend.`);
@@ -310,9 +316,10 @@ function useAzureWhisper(): WhisperResult {
     };
 }
 
-/**
- * Main hook using Azure Streaming STT in the browser for minimum latency.
- */
 export function useWhisper(): WhisperResult {
-    return useAzureWhisper();
+    const isMobile = isMobileDevice();
+    const openAI = useOpenAIWhisper();
+    const azure = useAzureWhisper();
+
+    return isMobile ? openAI : azure;
 }

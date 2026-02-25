@@ -1,4 +1,3 @@
-
 **A sewage smell in your home is more than an unpleasant odor; it is a chemical warning sign. In the United States, sewer gas—primarily a mixture of methane and hydrogen sulfide—can bypass your home’s plumbing traps due to evaporation, mechanical failure, or deep-seated blockages. This is the definitive 2025 US Guide to identifying the source of a sewage smell, understanding the health risks of "Sewer Gas poisoning," and the steps to restoration.**
 
 ---
@@ -88,7 +87,3 @@ A: **Yes.** Methane is highly flammable. While residential explosions are rare, 
 A: A high loop is the practice of securing the dishwasher drain hose to the underside of the counter before it connects to the sink tailpiece. Without it, dirty sink water (and its smells) can flow backward into your dishwasher.
 
 ---
-
-**Meta Title:** Sewage Smell in House US | P-Trap & Sewer Gas Safety Guide
-**Meta Description:** Smelling rotten eggs? Learn how to identify the source of US sewer gas leaks, the health risks involved, and how to fix wobbly toilets and dried P-traps.
-**Keywords:** sewage smell in house, sewer gas symptoms, rotten egg smell US, P-trap fix, wobbly toilet wax ring, plumbing smoke test, vent stack blockage.

@@ -32,7 +32,7 @@ async function main() {
         slug: 'carbon-monoxide-gb',
         title: 'The "Silent Killer" in Your Boiler – A Friendly Guide to Staying Safe (UK)',
         excerpt: 'Is Your Boiler Secretly Making You Sick? The Invisible Threat of Carbon Monoxide and how to stay safe.',
-        cover_image: '/blog/emergency-at-home/gas-emergency.jpg',
+        cover_image: '/images/blog/co-safety/silent-killer-infographic.jpg',
         published: true,
         published_at: new Date().toISOString(),
         author_id: null

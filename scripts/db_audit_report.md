@@ -2,7 +2,7 @@
 
 Total Posts: 43
 
-| Slug | Region (Detected) | Word Count | Headings (H2/H3) | Meta (Exc/Img) | Status |
+| Slug | Region (Detected) | 
 |---|---|---|---|---|---|
 | `what-to-do-in-home-emergency-before-help-arrives` | UK | 501 | 5 / 3 | ✅ / ✅ | ❌ |
 | `emergency-at-home-guide` | Unknown | 270 | 4 / 4 | ✅ / ✅ | ❌ |

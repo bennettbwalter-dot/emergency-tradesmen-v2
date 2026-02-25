@@ -1,4 +1,3 @@
-
 **Can you legally remain in your own home if the lights go out? Whether it's a transient power cut or a long-term utility disconnection due to equipment failure, the legalities of "Habitability" vary significantly between the UK and the US. This is the definitive 2025 Guide to the laws of living without electricity, your rights as a tenant, and the "Sanitary Threshold" that triggers government intervention.**
 
 ---
@@ -84,7 +83,3 @@ A: **Yes, in an emergency.** If they suspect a "Secondary Fault" like a fire ris
 A: **Generally, no.** If the utility was in the tenant's name and the disconnection was for non-payment, the "Warranty of Habitability" usually doesn't apply to the landlord. However, if the tenant is vulnerable, you should alert social services to prevent a fatality on your property.
 
 ---
-
-**Meta Title:** Legally Stay in Home Without Electricity | UK & US Laws 2025
-**Meta Description:** Can you live without power? Learn the US and UK housing laws, habitability standards, and when social services or code enforcement will intervene in 2025.
-**Keywords:** legally stay without electricity, fitness for human habitation UK, housing act 2004, landlord tenant law electricity, no power in winter law, saniflo without power.

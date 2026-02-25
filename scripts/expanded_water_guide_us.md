@@ -1,4 +1,3 @@
-
 **Coming home to a flooded kitchen or a collapsed ceiling isn't just a physical mess; it is a complex intersection of property damage, microbiology, and insurance law. In the United States, water damage is the most common cause of property insurance claims, yet it is also the most misunderstood. This is the definitive 2025 US Guide to Water Damage Restoration, the IICRC S500 standards, and the 48-hour "Mold Clock" that dictates your survival.**
 
 ---
@@ -87,7 +86,3 @@ A: **Both.** Call a plumber to stop the leak. Call the restoration company to st
 A: **No.** In the US, rising water from the ground (rivers, storm surge) is ONLY covered by a separate Flood Policy, usually through the NFIP (FEMA).
 
 ---
-
-**Meta Title:** Water Damage Restoration Guide US | IICRC Standards & Costs 2025
-**Meta Description:** Flooded home? Learn the 48-hour mold clock, the 3 categories of water damage, and how to navigate US insurance claims for restoration in 2025.
-**Keywords:** water damage restoration US, flood damage cleanup, mold remediation cost, IICRC S500 standards, dry out basement, burst pipe insurance claim, category 3 water.

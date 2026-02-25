@@ -7,7 +7,7 @@ This document defines the complete SEO framework for creating and optimizing blo
 - Google AI Overview
 - Featured Snippets (Position 0)
 - Local “Near Me” Searches
-- Short-tail & Long-tail Keywords
+- Short-tail & 
 
 All blogs must follow this system strictly.
 
@@ -18,10 +18,10 @@ All blogs must follow this system strictly.
 Before writing any blog:
 
 ## Identify:
-- 1 Primary Keyword (high intent)
-- 3–5 Secondary Keywords
-- 5–10 Long-Tail Keywords
-- 3 Question-Based Keywords
+- 1 
+- 3–5 
+- 5–10 
+- 3 
 - 3 Local Variations
 
 ### Example:
@@ -34,9 +34,9 @@ Before writing any blog:
 
 ---
 
-# 2️⃣ Search Intent Mapping
+# 2️⃣ 
 
-Identify the search intent:
+Identify the 
 
 - Informational  
 - Commercial  
@@ -60,11 +60,11 @@ Every blog MUST be between **1,200–1,500 words**.
 ## Structure:
 
 ### H1 – Keyword Optimized Title
-Include primary keyword naturally.
+Include 
 
 ### First 100 Words (CRITICAL)
 - Direct answer
-- Primary keyword included
+- 
 - Clear summary
 - No fluff
 
@@ -151,15 +151,15 @@ To increase AI Overview visibility:
 
 # 5️⃣ On-Page SEO Checklist
 
-Primary keyword must appear in:
+
 - Title
 - First 100 words
 - At least one H2
-- Meta description
+- 
 - URL slug
 
 Include:
-- Natural secondary keywords
+- Natural 
 - 2–4 internal service links
 - 2 location page links
 - 1–2 related blog links
@@ -212,7 +212,7 @@ Reference:
 
 ---
 
-# 8️⃣ Internal Linking Strategy
+# 8️⃣ 
 
 Every blog must:
 - Link to homepage
@@ -235,7 +235,7 @@ Ensure:
 - Schema-ready FAQ formatting
 - No keyword stuffing
 - Meta title under 60 characters
-- Meta description under 155 characters
+- 
 - Mobile readability optimized
 
 ---
@@ -267,7 +267,7 @@ Avoid:
 
 System must:
 
-- Track keywords used per blog
+- Track 
 - Avoid keyword cannibalization
 - Suggest supporting cluster content
 - Build topical authority silos:
@@ -287,7 +287,7 @@ Each completed blog must deliver:
 
 - 1,200–1,500 word article
 - SEO meta title
-- SEO meta description
+- SEO 
 - Keyword list used
 - Internal linking suggestions
 - Image alt text suggestions
@@ -301,7 +301,7 @@ UK and US versions must be fully separated.
 
 If followed properly, this system will:
 
-- Rank short-tail keywords
+- Rank short-tail 
 - Capture long-tail emergency searches
 - Increase AI Overview visibility
 - Improve local SEO rankings

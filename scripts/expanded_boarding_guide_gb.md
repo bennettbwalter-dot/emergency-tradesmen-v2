@@ -1,4 +1,3 @@
-
 **A smashed window or a kicked-in door panel is a primary security breach that invalidates most UK home insurance policies if left unattended. In the UK's dense urban environments, an unsecured property is a magnet for squatters and vandals. This is the definitive 2025 UK Guide to Emergency Boarding Up, non-destructive uPVC security, and your legal obligations under the LASPO Act.**
 
 ---
@@ -77,7 +76,3 @@ A: **Yes.** Professional board-up companies will "de-glaze" the frame (remove th
 A: **Technically, forever, but practically, 2-3 months.** Boards eventually warp and rot. More importantly, boards are a "Blight" on the street and can attract complaints to the local council's environmental health or planning departments.
 
 ---
-
-**Meta Title:** Emergency Boarding Up Guide UK | uPVC Security & Law 2025
-**Meta Description:** Smashed window? Learn the "Batten Method" to secure uPVC frames without damage. UK guide to insurance rules, squatter laws, and boarding costs.
-**Keywords:** emergency boarding up UK, broken window security, uPVC window repair, sandwich boarding method, squatter laws UK, window boarding cost, emergency glazier.

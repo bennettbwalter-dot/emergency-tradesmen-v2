@@ -1,4 +1,3 @@
-
 **Water dripping through the bedroom ceiling or running down a chimney breast is one of the most stressful home emergencies in the UK. With our mix of high-pitched Victorian roofs, flat-roof extensions, and frequent Atlantic storms, roof leaks are a common but critical threat. This is the definitive 2025 UK Guide to emergency roof repairs, slipped slates, and how to protect your home without risking your life.**
 
 ---
@@ -84,7 +83,3 @@ A: Under the *Work at Height Regulations 2005*, proper fall protection is requir
 A: This usually indicates "Wind-Driven Rain." Water is being blown *up* under the tiles or past the "Lap" of the underlay. It often signifies that your roof felt is old and has "shrunk."
 
 ---
-
-**Meta Title:** Emergency Roof Leak Guide UK | Maintenance & Law 2025
-**Meta Description:** Smashed tile or leaking valley? Learn how to triage a UK roof leak from your loft, avoid lead theft, and understand Party Wall laws in 2025.
-**Keywords:** emergency roof repair UK, slipped slate fix, roof leak UK, gutter overflow loft, chimney leak UK, lead theft roof, emergency roofer cost UK.

@@ -1,4 +1,3 @@
-
 **Car won't start on a frosty morning? Dreading the call to the boss? Before you call the AA, check the essentials. This is the definitive 2025 UK Guide to Flat Batteries, Alternators, and Emergency Roadside Recovery.**
 
 ---
@@ -107,7 +106,3 @@ A: This is a major warning. It means your **Alternator** has failed, and the car
 A: No, but you must describe it accurately. However, a car without a functioning battery cannot be "road tested," making it significantly harder to sell for a fair price.
 
 ---
-
-**Meta Title:** Car Won't Start? UK Guide to Frosty Mornings, Batteries & Recovery
-**Meta Description:** Stuck on the driveway? Learn how to diagnose a dead battery vs. a failed alternator. UK rules on idling, bump-starting, and 2025 repair costs.
-**Keywords:** car wont start, flat battery UK, jump start guide, emergency breakdown, alternator cost, AA RAC recovery, smart charging battery registration.

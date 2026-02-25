@@ -1,4 +1,3 @@
-
 **A burst pipe in the loft, a "fizzing" fuse box, or a persistent smell of gas in the kitchen are moments where panic is your worst enemy. In the UK, our aged infrastructure—from Victorian lead pipes to modern high-amperage consumer units—requires a disciplined approach to emergency isolation. This is the definitive 2025 UK Guide to Home Emergency Shut-Offs, locating your master stopcock, and mastering your consumer unit.**
 
 ---
@@ -99,7 +98,3 @@ A: **Usually.** Most flats have a "local" stopcock inside the flat. However, in 
 A: **Turn it off and call an electrician.** A buzzing fuse box indicates "arcing"—electricity jumping across a loose connection. This is a massive fire risk and can lead to the plastic casing of the box melting or igniting.
 
 ---
-
-**Meta Title:** Home Emergency Shut-Off Guide UK | Stopcocks & Fuse Boxes 2025
-**Meta Description:** Seconds count in a UK home emergency. Learn how to locate your master stopcock, test your RCD trip switch, and isolate your gas supply in 2025.
-**Keywords:** home emergency shut off UK, master stopcock location, fuse box trip RCD, gas ECV valve UK, emergency plumber UK, trace and access insurance, surestop valve UK.

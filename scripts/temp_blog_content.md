@@ -1,4 +1,3 @@
-
 **A wet patch on the ceiling or a "kettling" boiler isn't just a minor repair; it is a warning that your property's integrity is at stake. In the UK, our aged piping and hard water conditions create specific plumbing challenges that require a disciplined response. This is the definitive 2025 UK Guide to the five red flags that demand an emergency plumber, plus the technical steps to save your home.**
 
 ---
@@ -92,7 +91,3 @@ A: These are low-pressure codes. You can usually fix this yourself by opening th
 A: **Use with caution.** Many UK pipes in older homes are lead or cast iron; caustic soda can cause them to corrode faster. Try a mechanical "plunger" or a "drain snake" first.
 
 ---
-
-**Meta Title:** 5 Signs You Need Emergency Plumber UK | Sludge & Boiler Kettling Guide
-**Meta Description:** Worried about your heating or pipes? Learn the 5 "Red Flag" symptoms of a UK plumbing failure, emergency costs, and how to stop a flood in 2025.
-**Keywords:** emergency plumber UK, burst pipe UK, boiler kettling sound, black sludge radiators, lead pipe replacement, water hammer fix, stopcock seized.
