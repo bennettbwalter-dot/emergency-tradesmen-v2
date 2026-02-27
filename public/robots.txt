@@ -20,3 +20,4 @@ Allow: /privacy
 
 # Sitemap location
 Sitemap: https://emergencytradesmen.net/sitemap.xml
+Sitemap: https://emergencytradesmen.net/rss.xml

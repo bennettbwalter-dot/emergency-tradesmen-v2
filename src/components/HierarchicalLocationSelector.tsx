@@ -194,11 +194,11 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     };
 
     return (
-        <div className={`flex flex-wrap gap-2 items-center ${className}`}>
+        <div className={`flex flex-nowrap gap-2 items-center w-full ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger className={`h-12 w-12 md:h-11 md:w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-start px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedState ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
-                    <Map className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-black dark:text-white" />
+                <SelectTrigger className={`h-11 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedState ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
+                    <Map className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
                     <div className="hidden md:block">
                         <SelectValue placeholder="State" />
                     </div>
@@ -222,8 +222,8 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             role="combobox"
                             aria-expanded={cityOpen}
                             className={cn(
-                                "h-12 md:h-11 px-0 md:px-4 w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-between shadow-sm shrink-0",
-                                selectedCity ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'
+                                "h-11 px-0 md:px-4 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between shadow-sm shrink-0",
+                                selectedCity ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'
                             )}
                         >
                             <div className="flex items-center justify-center md:justify-start md:gap-2">
@@ -271,8 +271,8 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* Suburb/Area Select - Only show if suburbs exist */}
             {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-12 w-12 md:h-11 md:w-full md:flex-1 rounded-full border border-gold transition-all flex items-center justify-center md:justify-start px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20' : 'bg-gray-50 text-black dark:bg-white/5 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'}`}>
-                        <Home className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-black dark:text-white" />
+                    <SelectTrigger className={`h-11 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
+                        <Home className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
                         <div className="hidden md:block">
                             <SelectValue placeholder="Area" />
                         </div>

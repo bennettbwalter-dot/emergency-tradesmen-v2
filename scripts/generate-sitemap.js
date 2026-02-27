@@ -232,12 +232,16 @@ async function generateSitemap() {
 
     // 5. Blog Posts
     if (posts && posts.length > 0) {
-        const blogUrls = posts.map(post => ({
-            loc: `${BASE_URL}/blog/${post.slug}`,
-            lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
-            changefreq: 'weekly',
-            priority: '0.8'
-        }));
+        const blogUrls = posts.map(post => {
+            const isUS = post.slug.endsWith('-us');
+            const prefix = isUS ? '/us' : '';
+            return {
+                loc: `${BASE_URL}${prefix}/blog/${post.slug}`,
+                lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
+                changefreq: 'weekly',
+                priority: '0.8'
+            };
+        });
         writeSitemap('sitemap-blog.xml', blogUrls);
     }
 

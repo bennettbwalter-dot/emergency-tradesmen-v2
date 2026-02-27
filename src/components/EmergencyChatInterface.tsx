@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -646,65 +647,66 @@ export function EmergencyChatInterface() {
                     className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[450px] scrollbar-hide pt-0"
                 >
                     <AnimatePresence mode='popLayout'>
-                        {chatState.history.map((msg, idx) => {
-                            const isLastMessage = idx === chatState.history.length - 1;
+                        {chatState.history.length > 0 && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, filter: 'blur(5px)' }}
+                                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                className="w-full my-4"
+                            >
+                                <Terminal className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10">
+                                    <AnimatedSpan className="text-emerald-400 mb-6 font-bold tracking-wider text-xs uppercase opacity-80">
+                                        <span>✓ System initialized</span>
+                                    </AnimatedSpan>
 
-                            if (msg.role === 'assistant') {
-                                return (
-                                    <motion.div
-                                        key={msg.id}
-                                        initial={{ opacity: 0, scale: 0.95, filter: 'blur(5px)' }}
-                                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                                        transition={{ duration: 0.5, ease: "easeOut" }}
-                                        className="w-full flex justify-start my-4"
-                                    >
-                                        <Terminal className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10">
-                                            <AnimatedSpan className="text-emerald-400 mb-2 font-bold tracking-wider text-xs uppercase opacity-80">
-                                                <span>✓ System initialized</span>
-                                            </AnimatedSpan>
+                                    <div className="space-y-6">
+                                        {chatState.history.map((msg, idx) => {
+                                            const isLastMessage = idx === chatState.history.length - 1;
 
-                                            <div className="text-muted-foreground/80">
-                                                <span className="mr-3 text-gold/80">➜</span>
-                                                <span className="text-foreground tracking-wide">
-                                                    {isLastMessage ? (
-                                                        <TypingAnimation
-                                                            duration={25}
-                                                            className="text-base md:text-lg font-sans font-medium text-white/90"
-                                                        >
-                                                            {msg.content}
-                                                        </TypingAnimation>
-                                                    ) : (
-                                                        <span className="text-base md:text-lg font-sans font-medium text-white/90">
-                                                            {msg.content}
+                                            if (msg.role === 'assistant') {
+                                                return (
+                                                    <div key={msg.id} className="text-muted-foreground/80">
+                                                        <span className="mr-3 text-gold/80">➜</span>
+                                                        <span className="text-foreground tracking-wide">
+                                                            {isLastMessage ? (
+                                                                <TypingAnimation
+                                                                    duration={25}
+                                                                    className="text-base md:text-lg font-sans font-medium text-white/90"
+                                                                >
+                                                                    {msg.content}
+                                                                </TypingAnimation>
+                                                            ) : (
+                                                                <span className="text-base md:text-lg font-sans font-medium text-white/90">
+                                                                    {msg.content}
+                                                                </span>
+                                                            )}
                                                         </span>
-                                                    )}
-                                                </span>
-                                            </div>
+                                                    </div>
+                                                );
+                                            }
 
-                                            {isLastMessage && (
-                                                <AnimatedSpan delay={msg.content.length * 15 + 800} className="text-blue-400/80 mt-6 text-xs uppercase tracking-widest flex items-center gap-2">
-                                                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-                                                    <span>Waiting for user input...</span>
-                                                </AnimatedSpan>
-                                            )}
-                                        </Terminal>
-                                    </motion.div>
-                                );
-                            }
-
-                            return (
-                                <motion.div
-                                    key={msg.id}
-                                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    className="flex justify-end"
-                                >
-                                    <div className="max-w-[90%] md:max-w-[70%] p-4 rounded-2xl text-base md:text-lg leading-relaxed shadow-lg bg-gradient-to-br from-secondary to-secondary/80 border border-white/5 text-secondary-foreground rounded-tr-sm backdrop-blur-sm">
-                                        {msg.content}
+                                            return (
+                                                <div
+                                                    key={msg.id}
+                                                    className="flex justify-end"
+                                                >
+                                                    <div className="max-w-[90%] md:max-w-[80%] p-3 rounded-2xl text-base leading-relaxed bg-white/10 border border-white/5 text-white/90 rounded-tr-sm">
+                                                        {msg.content}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                </motion.div>
-                            );
-                        })}
+
+                                    {chatState.history[chatState.history.length - 1].role === 'assistant' && (
+                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-blue-400/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+                                            <span>Waiting for user input...</span>
+                                        </AnimatedSpan>
+                                    )}
+                                </Terminal>
+                            </motion.div>
+                        )}
                     </AnimatePresence>
                     {isTyping && (
                         <div className="flex gap-3 p-4">
@@ -786,7 +788,7 @@ export function EmergencyChatInterface() {
                     {mobileActionButton}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
