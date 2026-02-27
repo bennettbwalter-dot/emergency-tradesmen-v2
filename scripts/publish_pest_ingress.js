@@ -17,9 +17,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function publishBlog() {
     const commonTitle = "The Silent Incursion: Why a Blocked Drain is a Highway for Emergency Pest Ingress";
-    const commonExcerpt = "Floodwaters drive rodents into our homes through a hidden network of pipes. Learn how a blocked drain becomes a highway for pests and how to secure your property.";
-    const coverImage = '/images/blog/pest-ingress/street-view.jpg';
-    const published_at = new Date().toISOString();
+    const commonExcerpt = "Emergency pest control for blocked drain rats and rodent ingress prevention. Our emergency drainage service addresses electrical fire risks from rats. Hire a local pest controller or emergency tradesmen today.";
+    const coverImage = '/images/blog/pest-ingress/electrical-risk.jpg';
+    const published_at = "2026-02-27T20:30:57.742+00:00"; // Setting exact requested date/time
 
     const regions = [
         {
