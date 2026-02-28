@@ -12,6 +12,7 @@ import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { GuestGate } from "@/components/GuestGate";
 import { AnimatePresence, motion } from "framer-motion";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
+import { FloatingTourHub } from "@/components/FloatingTourHub";
 
 // Eager load Hero for LCP
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -62,6 +63,7 @@ const Index = () => {
 
       <>
         <Header />
+        <FloatingTourHub />
         <main className="min-h-screen bg-background">
           <HeroSection />
 

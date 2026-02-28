@@ -886,10 +886,22 @@ If you hear a drip, hiss, or see a damp patch — act now.
                     <div className="prose prose-lg dark:prose-invert max-w-none">
                         <ReactMarkdown
                             components={{
-                                img: ({ node, ...props }) => (
-                                    <div className="my-8">
-                                        <img {...props} className="rounded-lg border shadow-sm w-full" />
-                                    </div>
+                                img: ({ node, alt, ...props }) => (
+                                    <figure className="not-prose my-12 md:my-16 block">
+                                        <div className="overflow-hidden rounded-xl shadow-md border border-border/50">
+                                            <img
+                                                {...props}
+                                                alt={alt}
+                                                className="w-full h-auto object-cover block"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        {alt && (
+                                            <figcaption className="mt-3 text-center text-sm text-muted-foreground italic">
+                                                {alt}
+                                            </figcaption>
+                                        )}
+                                    </figure>
                                 ),
                             }}
                         >

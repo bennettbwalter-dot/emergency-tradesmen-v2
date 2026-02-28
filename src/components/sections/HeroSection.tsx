@@ -4,6 +4,7 @@ import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import Squares from "@/components/ui/Squares";
 
 export function HeroSection() {
     const { settings } = useLocalization();
@@ -11,11 +12,17 @@ export function HeroSection() {
     return (
         <section className="relative block overflow-hidden">
             {/* Background layers */}
-            {/* Background layers */}
+            <div className="absolute inset-0 z-0 opacity-40">
+                <Squares
+                    direction="diagonal"
+                    speed={0.5}
+                    squareSize={40}
+                    borderColor="rgba(212, 175, 55, 0.15)"
+                    hoverFillColor="rgba(212, 175, 55, 0.05)"
+                />
+            </div>
 
-            {/* Orb removed as per user request */}
-
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent pointer-events-none z-1" />
 
             {/* Decorative gold rings */}
             <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float pointer-events-none">

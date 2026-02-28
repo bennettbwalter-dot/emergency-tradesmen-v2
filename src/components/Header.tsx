@@ -43,13 +43,24 @@ export function Header({ countryCode }: HeaderProps) {
           <nav className="hidden md:flex items-center gap-8">
             {/* Nav Links with animated underline */}
             {['About', 'Blog'].map((item) => (
-              <Link key={item} to={`${countryPrefix}/${item.toLowerCase()}`} className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link">
+              <Link
+                key={item}
+                to={`${countryPrefix}/${item.toLowerCase()}`}
+                className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
+                data-tour={item === 'Blog' ? 'tour-blog-link' : undefined}
+              >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
               </Link>
             ))}
 
-            <Button variant="outline" size="sm" asChild className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300">
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300"
+              data-tour="tour-signup"
+            >
               <Link to={`${countryPrefix}/pricing`}>
                 {signupText}
               </Link>
@@ -69,7 +80,10 @@ export function Header({ countryCode }: HeaderProps) {
             <div className="md:hidden">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-10 w-10 text-muted-foreground hover:text-gold hover:bg-gold/5">
+                  <Button variant="ghost" size="icon" className="relative h-10 w-10 text-muted-foreground hover:text-gold hover:bg-gold/5">
+                    {/* Invisible targets for the mobile tour to highlight the menu button */}
+                    <div data-tour="tour-signup" className="absolute inset-0 pointer-events-none" />
+                    <div data-tour="tour-blog-link" className="absolute inset-0 pointer-events-none" />
                     <Menu className="h-6 w-6" />
                     <span className="sr-only">Toggle menu</span>
                   </Button>

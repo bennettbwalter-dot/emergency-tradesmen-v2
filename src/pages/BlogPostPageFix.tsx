@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import { SEO } from "@/components/SEO";
 import { AdSlot } from "@/components/AdSlot";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight } from "lucide-react";
+import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSimpleTheme } from "@/components/simple-theme";
@@ -40,6 +40,7 @@ export default function BlogPostPage() {
     const routerNavigate = useNavigate();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [showStickyBar, setShowStickyBar] = useState(false);
     const [debugInfo, setDebugInfo] = useState<any>({}); // For troubleshooting 404s
 
     const regionalizeText = (text: string) => {
@@ -147,6 +148,16 @@ export default function BlogPostPage() {
 
     useEffect(() => {
         setTheme('light');
+        const handleScroll = () => {
+            if (window.scrollY > 400) {
+                setShowStickyBar(true);
+            } else {
+                setShowStickyBar(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
@@ -588,21 +599,22 @@ export default function BlogPostPage() {
                                                             blockquote: ({ node, ...props }) => (
                                                                 <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
                                                             ),
-                                                            img: ({ node, ...props }) => (
-                                                                <div className="my-12 w-full flex justify-center">
+                                                            img: ({ node, alt, ...props }) => (
+                                                                <figure className="my-12 md:my-16 w-full">
                                                                     <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
                                                                         <img
                                                                             {...props}
-                                                                            className="w-full h-auto max-h-[800px] object-contain mx-auto"
+                                                                            alt={alt}
+                                                                            className="w-full h-auto max-h-[800px] object-contain mx-auto block"
                                                                             loading="lazy"
                                                                         />
                                                                     </div>
-                                                                    {props.title && (
-                                                                        <p className="text-center text-sm text-foreground/70 mt-3 italic">
-                                                                            {props.title}
-                                                                        </p>
+                                                                    {alt && (
+                                                                        <figcaption className="mt-3 text-center text-sm text-foreground/70 italic">
+                                                                            {alt}
+                                                                        </figcaption>
                                                                     )}
-                                                                </div>
+                                                                </figure>
                                                             ),
                                                             table: ({ node, ...props }) => (
                                                                 <div className="overflow-x-auto my-8 border border-border rounded-lg shadow-sm">
@@ -819,6 +831,35 @@ export default function BlogPostPage() {
                     </>
                 )}
             </article>
+
+            {/* Sticky Emergency Bar */}
+            <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 transition-all duration-500 transform ${showStickyBar ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}>
+                <div className="container mx-auto max-w-4xl">
+                    <div className="bg-black/80 backdrop-blur-xl border border-gold/30 rounded-2xl p-4 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 bg-gold/10 rounded-lg">
+                                <Phone className="w-5 h-5 text-gold animate-pulse" />
+                            </div>
+                            <div>
+                                <p className="text-sm font-bold text-white leading-none">Emergency? Don't Wait.</p>
+                                <p className="text-[11px] text-muted-foreground mt-1 uppercase tracking-wider">Verified {settings.countryCode === 'GB' ? 'Tradesmen' : 'Contractors'} ready 24/7</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3 w-full sm:w-auto">
+                            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-none border-gold/30 text-gold hover:bg-gold/10 h-10 px-6 rounded-xl text-sm font-bold tracking-tight">
+                                <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>
+                                    Find Expert
+                                </Link>
+                            </Button>
+                            <Button asChild size="sm" className="flex-1 sm:flex-none bg-gold hover:bg-gold-dark text-black h-10 px-6 rounded-xl text-sm font-bold shadow-lg shadow-gold/20">
+                                <Link to="/contact">
+                                    Call Now
+                                </Link>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div >
     );
 }

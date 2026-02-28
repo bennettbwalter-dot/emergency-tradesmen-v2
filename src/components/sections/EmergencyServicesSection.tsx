@@ -7,7 +7,7 @@ export function EmergencyServicesSection() {
     const { settings } = useLocalization();
 
     return (
-        <section className="container-wide -mt-12 pb-16 relative z-20">
+        <section data-tour="tour-services" className="container-wide -mt-12 pb-16 relative z-20">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

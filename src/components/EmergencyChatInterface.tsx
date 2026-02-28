@@ -459,7 +459,7 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
-                className={`h-12 w-12 md:h-11 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 w-[72px] md:h-11 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2">
                     <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
@@ -489,46 +489,50 @@ export function EmergencyChatInterface() {
         </Select>
     );
 
-    const locationSelector = settings.countryCode === 'US' ? (
-        (isVoiceSessionRef.current && detectedCity) ? (
-            <div className="flex-1 h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 truncate shadow-sm">
-                <MapPin className="w-4 h-4 shrink-0 text-emerald-500" />
-                <span className="text-sm font-medium text-foreground dark:text-white truncate block">
-                    {detectedCity}
-                </span>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="ml-auto w-6 h-6 hover:bg-red-500/20 text-red-500 rounded-full"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setDetectedCity(null);
-                        setLocationRecord(null);
-                        isVoiceSessionRef.current = false;
-                    }}
-                >
-                    <span className="sr-only">Clear area</span>
-                    &times;
-                </Button>
-            </div>
-        ) : (
-            <HierarchicalLocationSelector
-                className="w-12 md:flex-1"
-                placeholder="City, State"
-                onLocationSelect={(record) => {
-                    console.log("Loc Selected", record);
-                    setDetectedCity(record.name);
-                    setLocationRecord(record);
-                }}
-            />
-        )
-    ) : (
-        <UKCityCombobox
-            className="w-12 md:flex-1 h-12 md:h-11"
-            placeholder="Select City"
-            value={detectedCity || ""}
-            onValueChange={setDetectedCity}
-        />
+    const locationSelector = (
+        <div data-tour="tour-selectors" className="flex-1 flex gap-2">
+            {settings.countryCode === 'US' ? (
+                (isVoiceSessionRef.current && detectedCity) ? (
+                    <div className="flex-1 h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 truncate shadow-sm">
+                        <MapPin className="w-4 h-4 shrink-0 text-emerald-500" />
+                        <span className="text-sm font-medium text-foreground dark:text-white truncate block">
+                            {detectedCity}
+                        </span>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="ml-auto w-6 h-6 hover:bg-red-500/20 text-red-500 rounded-full"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setDetectedCity(null);
+                                setLocationRecord(null);
+                                isVoiceSessionRef.current = false;
+                            }}
+                        >
+                            <span className="sr-only">Clear area</span>
+                            &times;
+                        </Button>
+                    </div>
+                ) : (
+                    <HierarchicalLocationSelector
+                        className="w-[72px] md:flex-1"
+                        placeholder="City, State"
+                        onLocationSelect={(record) => {
+                            console.log("Loc Selected", record);
+                            setDetectedCity(record.name);
+                            setLocationRecord(record);
+                        }}
+                    />
+                )
+            ) : (
+                <UKCityCombobox
+                    className="w-[72px] md:flex-1 h-12 md:h-11"
+                    placeholder="Select City"
+                    value={detectedCity || ""}
+                    onValueChange={setDetectedCity}
+                />
+            )}
+        </div>
     );
 
     const micButton = (
@@ -550,9 +554,10 @@ export function EmergencyChatInterface() {
                     }
                 }
             }}
+            data-tour="tour-mic-button"
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
-            className={`h-12 w-12 md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+            className={`h-12 w-[72px] md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
@@ -573,6 +578,7 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
+            data-tour="tour-send-button"
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
@@ -593,8 +599,9 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
+            data-tour="tour-send-button"
             size="icon"
-            className={`h-12 w-12 rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
+            className={`h-12 w-[72px] rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
         >
@@ -644,7 +651,7 @@ export function EmergencyChatInterface() {
 
                 <div
                     ref={chatContainerRef}
-                    className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[450px] scrollbar-hide pt-0"
+                    className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[100px] max-h-[450px] scrollbar-hide pt-0 flex flex-col justify-end"
                 >
                     <AnimatePresence mode='popLayout'>
                         {chatState.history.length > 0 && (
@@ -725,7 +732,7 @@ export function EmergencyChatInterface() {
 
                 {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
                 <div className="w-full bg-transparent flex justify-center py-6">
-                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border transition-all duration-500 overflow-visible group
+                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-visible group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'} overflow-x-hidden`}>
@@ -763,6 +770,7 @@ export function EmergencyChatInterface() {
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
                                 placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                                data-tour="tour-chat-input"
                                 className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[160px] md:min-h-[120px] px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/30 resize-y font-light tracking-wide"
                             />
                         )}
@@ -780,8 +788,8 @@ export function EmergencyChatInterface() {
 
             {/* Mobile Controls - Below chat - Optimized Layout - Single Row Strict Symmetry */}
             <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-6 items-center overflow-visible">
-                {/* Single Row: Microphone, Wrench, Location Pin, Send - Uniform Circular Icons, 12px Gap */}
-                <div className="flex flex-row w-[90%] items-center justify-center gap-4 overflow-visible">
+                {/* Single Row: Microphone, Wrench, Location Pin, Send - Uniform Circular Icons perfectly spaced inside a 4-col grid */}
+                <div className="grid grid-cols-4 w-full place-items-center px-4 overflow-visible">
                     {micButton}
                     {tradeSelector}
                     {locationSelector}
