@@ -31,7 +31,7 @@ export function Footer({ countryCode }: FooterProps) {
           <div className="lg:col-span-4 space-y-8">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-4 group">
               <div className="relative">
-                <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-14 h-14 rounded-full object-cover border-2 border-white/10 group-hover:border-gold/50 transition-colors" />
+                <img src="/et-logo-v2.png" alt="Emergency Trades Logo" loading="lazy" className="w-14 h-14 rounded-full object-cover border-2 border-white/10 group-hover:border-gold/50 transition-colors" />
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-col">

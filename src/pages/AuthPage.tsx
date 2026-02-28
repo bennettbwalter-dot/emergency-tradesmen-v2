@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFeatureFlagEnabled } from "posthog-js/react";
+import { SEO } from "@/components/SEO";
 
 export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login" | "register" }) {
     const { isAuthenticated } = useAuth();
@@ -24,6 +25,7 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
 
     return (
         <div className="min-h-screen flex flex-col bg-background">
+            <SEO title={defaultTab === "login" ? "Sign In" : "Create Account"} noIndex />
             <Header />
             <main className="flex-1 flex items-center justify-center p-4">
                 <div className="w-full max-w-md">

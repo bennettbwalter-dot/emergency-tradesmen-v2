@@ -65,7 +65,7 @@ export default function About() {
                                     When disaster strikes, you need a local <strong>{termSingular.toLowerCase()}</strong> you can trust.
                                 </p>
                                 <div className="flex justify-center mb-6">
-                                    <img src="/et-logo-new.png" alt={`Emergency ${tradeTerm} Logo`} className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
+                                    <img src="/et-logo-new.png" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
                                 </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>

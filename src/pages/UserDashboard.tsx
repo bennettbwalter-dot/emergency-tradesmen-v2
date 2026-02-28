@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChatSystem } from "@/components/ChatSystem";
 import { supabase } from "@/lib/supabase";
+import { SEO } from "@/components/SEO";
 
 export default function UserDashboard() {
     const { user, isAuthenticated, isLoading, updateUser } = useAuth();
@@ -110,6 +111,7 @@ export default function UserDashboard() {
 
     return (
         <>
+            <SEO title="My Dashboard" noIndex />
             <Header />
             <main className="min-h-screen bg-background py-12">
                 <div className="container max-w-5xl">

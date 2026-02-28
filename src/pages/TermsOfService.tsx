@@ -1,10 +1,16 @@
 import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { SEO } from '@/components/SEO';
 
 export default function TermsOfService() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
+            <SEO
+                title="Terms of Service"
+                description="Read the Terms of Service for Emergency Tradesmen. Understand your rights and obligations when using our platform."
+                canonical="/terms"
+            />
             <Header />
 
             <main className="flex-grow container mx-auto px-4 py-8 max-w-4xl">

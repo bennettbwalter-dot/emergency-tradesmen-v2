@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { useFeatureFlagEnabled } from "posthog-js/react";
+import { SEO } from "@/components/SEO";
 
 export default function PricingPage() {
     const { settings } = useLocalization();
@@ -18,6 +19,11 @@ export default function PricingPage() {
 
     return (
         <>
+            <SEO
+                title="Pro Pricing Plans for Tradesmen"
+                description="Boost your business with Emergency Tradesmen Pro. Get priority ranking, enhanced trust signals, and 3x more leads. Plans from £0/month."
+                canonical="/pricing"
+            />
             <Header />
             <main className="min-h-screen bg-background py-20">
                 <div className="container-wide">

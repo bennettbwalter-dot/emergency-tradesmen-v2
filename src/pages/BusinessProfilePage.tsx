@@ -348,7 +348,7 @@ export default function BusinessProfilePage() {
                                     {/* Logo/Initials Box */}
                                     <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-secondary/50 border-2 border-gold/30 flex items-center justify-center shrink-0 overflow-hidden shadow-2xl backdrop-blur-md">
                                         {business.logo_url ? (
-                                            <img src={business.logo_url} alt={business.name} className="w-full h-full object-cover" />
+                                            <img src={business.logo_url} alt={business.name} loading="lazy" className="w-full h-full object-cover" />
                                         ) : (
                                             <span className="font-display text-5xl font-bold text-gold">
                                                 {business.name.substring(0, 1)}

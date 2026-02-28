@@ -8,6 +8,7 @@ import confetti from "canvas-confetti";
 import { useAuth } from "@/contexts/AuthContext";
 import { sendEmail } from "@/lib/email";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { SEO } from "@/components/SEO";
 
 export default function PaymentSuccessPage() {
     const { user } = useAuth();
@@ -83,6 +84,7 @@ export default function PaymentSuccessPage() {
 
     return (
         <div className="min-h-screen flex flex-col bg-slate-50">
+            <SEO title="Payment Successful" noIndex />
             <Header />
 
             <main className="flex-grow flex items-center justify-center p-4">

@@ -80,7 +80,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
           {/* Floating Icon - Glassmorphic */}
           {trade.vectorIcon && (
             <div className="absolute top-4 right-4 z-20 w-12 h-12 p-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 group-hover:border-gold/50 transition-all duration-300">
-              <img src={trade.vectorIcon} alt="" className="w-full h-full object-contain brightness-0 invert drop-shadow" />
+              <img src={trade.vectorIcon} alt="" loading="lazy" className="w-full h-full object-contain brightness-0 invert drop-shadow" />
             </div>
           )}
         </div>

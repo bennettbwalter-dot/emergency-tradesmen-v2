@@ -1,10 +1,16 @@
 import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { SEO } from '@/components/SEO';
 
 export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
+            <SEO
+                title="Privacy Policy"
+                description="Learn how Emergency Tradesmen collects, uses, and protects your personal information. Read our full privacy policy."
+                canonical="/privacy"
+            />
             <Header />
 
             <main className="flex-grow container mx-auto px-4 py-8 max-w-4xl">

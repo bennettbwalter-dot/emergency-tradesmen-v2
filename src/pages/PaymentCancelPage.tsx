@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { XCircle, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 
 export default function PaymentCancelPage() {
     return (
         <div className="min-h-screen flex flex-col bg-slate-50">
+            <SEO title="Payment Cancelled" noIndex />
             <Header />
 
             <main className="flex-grow flex items-center justify-center p-4">
