@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Phone, Clock } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Phone, Clock, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/UserMenu";
@@ -15,6 +15,7 @@ interface HeaderProps {
 
 export function Header({ countryCode }: HeaderProps) {
   const { settings } = useLocalization();
+  const location = useLocation();
 
   // STRICT OVERRIDE: Prioritize prop, fallback to context
   const activeCountry = countryCode || settings.countryCode;
@@ -76,8 +77,18 @@ export function Header({ countryCode }: HeaderProps) {
             <UserMenu />
             <ModeToggle />
 
-            {/* Mobile Menu */}
-            <div className="md:hidden">
+            {/* Mobile Menu & Help Hub */}
+            <div className="md:hidden flex items-center gap-1">
+              <Button asChild variant="outline" className="h-9 px-3.5 rounded-full border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold bg-black/40 backdrop-blur-md shadow-sm gap-2 transition-all">
+                <Link to={`${location.pathname}?tour=true`}>
+                  <div className="relative flex items-center">
+                    <HelpCircle className="h-4 w-4 shrink-0" />
+                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gold rounded-full animate-ping" />
+                  </div>
+                  <span className="font-display font-bold tracking-wide text-xs">Need Help?</span>
+                </Link>
+              </Button>
+
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="relative h-10 w-10 text-muted-foreground hover:text-gold hover:bg-gold/5">
