@@ -6,6 +6,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import ColorBends from "@/components/ui/ColorBends";
 
 export function HeroSection() {
     const { settings } = useLocalization();
@@ -14,6 +15,22 @@ export function HeroSection() {
     return (
         <section className="relative block overflow-hidden">
             {/* Background layers */}
+            <div className="absolute inset-0 z-0 opacity-40">
+                <ColorBends
+                    colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+                    rotation={0}
+                    speed={0.2}
+                    scale={1}
+                    frequency={1}
+                    warpStrength={1}
+                    mouseInfluence={1}
+                    parallax={0.5}
+                    noise={0.1}
+                    transparent
+                    autoRotate={0}
+                />
+            </div>
+
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent pointer-events-none z-1" />
 
             {/* Decorative gold rings */}
