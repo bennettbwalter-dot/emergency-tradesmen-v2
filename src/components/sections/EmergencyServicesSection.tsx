@@ -27,7 +27,7 @@ export function EmergencyServicesSection() {
     };
 
     return (
-        <section data-tour="tour-services" className="container-wide pt-24 pb-16 relative z-20 min-h-[800px]">
+        <section className="container-wide pt-24 pb-16 relative z-20 min-h-[800px]">
             <AnimatePresence mode="wait">
                 {!activeTrade ? (
                     <motion.div
@@ -39,7 +39,7 @@ export function EmergencyServicesSection() {
                     >
                         <div className="text-center mb-16">
                             <div className="inline-block mb-4">
-                                <span className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
+                                <span data-tour="tour-services" className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
                                     24/7 Rapid Response
                                 </span>
                             </div>
