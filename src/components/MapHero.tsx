@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Phone, Zap } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Phone, Zap, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LiveMap } from "./LiveMap";
 import { AvailabilityCarousel } from "./AvailabilityCarousel";
@@ -11,6 +11,7 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 
 export const MapHero = () => {
     const { settings } = useLocalization();
+    const location = useLocation();
 
     return (
         <section className="relative block overflow-hidden pt-24 md:pt-32 pb-0">
@@ -28,10 +29,10 @@ export const MapHero = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent pointer-events-none" />
 
             {/* Content Container */}
-            <div className="container-wide w-full relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="container-wide w-full relative z-10 grid lg:grid-cols-2 gap-0 lg:gap-12 items-center">
 
                 {/* Left Column: Text & CTA */}
-                <div className="text-center lg:text-left pt-6 pb-12 lg:pb-24 pointer-events-auto">
+                <div className="text-center lg:text-left pt-6 pb-0 lg:pb-24 pointer-events-auto">
                     {/* Availability badge */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -68,6 +69,27 @@ export const MapHero = () => {
                         We connect you with verified experts in <span className="text-white font-bold">30-90 minutes</span>.
                     </motion.p>
 
+                    {/* "Need Help" Button */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="flex justify-center lg:justify-start mb-6 mt-4 md:mt-6 md:mb-8"
+                    >
+                        <Link to={`${location.pathname}?tour=true`}>
+                            <button className="relative group inline-flex items-center gap-2.5 px-6 py-2.5 bg-black/60 hover:bg-gold/10 border border-gold/40 hover:border-gold/80 rounded-full transition-all duration-300 backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.1)] hover:shadow-[0_0_25px_rgba(212,175,55,0.2)]">
+                                <div className="relative flex items-center justify-center">
+                                    <HelpCircle className="w-5 h-5 text-gold group-hover:scale-110 transition-transform duration-300" />
+                                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-gold rounded-full animate-ping" />
+                                </div>
+                                <span className="font-display font-medium tracking-wider text-[11px] text-white/90 group-hover:text-gold transition-colors">NEED HELP?</span>
+
+                                {/* Internal Glow effect */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/0 via-gold/10 to-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            </button>
+                        </Link>
+                    </motion.div>
+
                     {/* Chat Interface (Mobile: Below map, Desktop: Here) */}
                     <div className="hidden lg:block w-full max-w-2xl">
                         <EmergencyChatInterface />
@@ -81,7 +103,7 @@ export const MapHero = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="relative lg:h-[600px] w-full flex items-center justify-center pointer-events-auto"
+                    className="relative lg:h-[600px] w-full flex items-center justify-center pointer-events-auto mt-4 lg:mt-0"
                 >
                     <div className="relative w-full aspect-square lg:aspect-auto lg:h-full rounded-3xl overflow-hidden shadow-2xl border border-gold/20 bg-black/40 backdrop-blur-sm">
                         <LiveMap className="w-full h-full" zoom={13} />
@@ -100,7 +122,7 @@ export const MapHero = () => {
                 </motion.div>
 
                 {/* Mobile Chat Interface (Visible on mobile below map) */}
-                <div className="lg:hidden w-full col-span-1 pointer-events-auto">
+                <div className="lg:hidden w-full col-span-1 mt-0 pointer-events-auto">
                     <EmergencyChatInterface />
                 </div>
             </div>

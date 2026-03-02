@@ -1,0 +1,208 @@
+.menu-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.menu__item {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-top: 1px solid;
+}
+
+.menu__item:first-child {
+    border-top: none;
+}
+
+.menu__item-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 4vh;
+    font-family: var(--font-display, inherit);
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.menu__item.is-active .menu__item-link {
+    color: #D4AF37 !important;
+    /* Gold */
+    font-weight: 800;
+}
+
+.menu__item-link:hover {
+    opacity: 0;
+    transition: opacity 0s;
+}
+
+.menu__item-link:focus:not(:focus-visible) {
+    color: inherit;
+}
+
+.marquee {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    transform: translate3d(0, 101%, 0);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 5;
+    opacity: 0;
+}
+
+.menu__item.is-active .marquee {
+    transform: translate3d(0, 0%, 0) !important;
+    opacity: 1 !important;
+}
+
+.marquee__inner-wrap {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.menu__item.is-active .marquee__inner-wrap {
+    transform: translate3d(0, 0%, 0) !important;
+}
+
+.marquee__inner {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    width: fit-content;
+    will-change: transform;
+}
+
+.marquee__part {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.marquee span.marquee__text {
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 5.5vh;
+    line-height: 0.9;
+    padding: 0 2.5vw;
+    letter-spacing: -0.04em;
+    font-family: var(--font-display, inherit);
+}
+
+.marquee__img-container {
+    padding: 2vh 0;
+    display: flex;
+    align-items: center;
+}
+
+.marquee__img {
+    width: 320px;
+    aspect-ratio: 16 / 10;
+    height: auto;
+    margin: 0 1vw;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.marquee__img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+    z-index: 1;
+}
+
+.marquee__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    background: rgba(212, 175, 55, 0.15);
+    /* gold/15 */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #D4AF37;
+    /* gold */
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.marquee__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #D4AF37;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #D4AF37;
+    animation: pulse-flowing 2s infinite;
+}
+
+.marquee__vector-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.marquee__vector-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+@keyframes pulse-flowing {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

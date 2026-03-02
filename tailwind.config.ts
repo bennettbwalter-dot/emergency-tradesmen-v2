@@ -26,6 +26,11 @@ export default {
         'glow-gold': '0 0 20px rgba(212, 175, 55, 0.3)',
       },
       colors: {
+        'color-1': 'hsl(var(--color-1))',
+        'color-2': 'hsl(var(--color-2))',
+        'color-3': 'hsl(var(--color-3))',
+        'color-4': 'hsl(var(--color-4))',
+        'color-5': 'hsl(var(--color-5))',
         'primary-dark': '#0F111A', // Deeper, richer charcoal
         'primary-bg': '#FAFAF9', // Warm off-white (Stone-50)
         'secondary-dark': '#181824', // Slightly lighter for cards
@@ -152,7 +157,11 @@ export default {
         'border-gold-white': {
           '0%, 100%': { borderColor: 'rgba(255,255,255,0.1)' },
           '50%': { borderColor: 'rgba(212, 175, 55, 0.5)' },
-        }
+        },
+        rainbow: {
+          '0%': { 'background-position': '0%' },
+          '100%': { 'background-position': '200%' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -167,6 +176,7 @@ export default {
         'shine': 'shine 1.5s ease-in-out infinite',
         'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
         'border-gold-white': 'border-gold-white 3s ease-in-out infinite',
+        rainbow: 'rainbow var(--speed, 2s) infinite linear',
       },
     },
   },

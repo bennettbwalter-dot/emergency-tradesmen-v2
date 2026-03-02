@@ -82,7 +82,7 @@ Do not let a minor fault become a major disaster by waiting for a standard {trad
 const configs = [
     {
         region: 'UK',
-        slug: 'fastest-response-emergency-tradesmen-network-uk',
+        slug: 'fastest-response-emergency-tradesmen-network-gb',
         title: 'Fastest Response Emergency Tradesmen Network UK: Stop Property Damage in 30 Minutes',
         excerpt: 'One in five UK homeowners has had to delay or cancel urgent repairs due to the inability to find an available tradesperson in 2026. We provide the gold standard in emergency response.',
         replacements: {
@@ -147,19 +147,33 @@ async function insertRegionalizedPosts() {
 
         if (existingPost) {
             console.log(`Updating ${config.region} post...`);
-            const { error } = await supabase
+            const { error, data } = await supabase
                 .from('posts')
                 .update(postData)
-                .eq('slug', config.slug);
-            if (error) console.error(`Error updating ${config.region}:`, error);
+                .eq('slug', config.slug)
+                .select();
+
+            if (error) {
+                console.error(`Error updating ${config.region}:`, JSON.stringify(error, null, 2));
+            } else {
+                console.log(`Successfully updated ${config.region} post. Rows affected:`, data?.length);
+            }
         } else {
             console.log(`Inserting ${config.region} post...`);
-            const { error } = await supabase
+            const { error, data } = await supabase
                 .from('posts')
-                .insert(postData);
-            if (error) console.error(`Error inserting ${config.region}:`, error);
+                .insert(postData)
+                .select();
+
+            if (error) {
+                console.error(`Error inserting ${config.region}:`, JSON.stringify(error, null, 2));
+            } else {
+                console.log(`Successfully inserted ${config.region} post. ID:`, data?.[0]?.id);
+            }
         }
     }
 }
 
-insertRegionalizedPosts();
+insertRegionalizedPosts().catch(err => {
+    console.error('Fatal error in script:', err);
+});

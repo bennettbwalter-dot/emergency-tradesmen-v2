@@ -1,51 +1,97 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { TradeCard } from "@/components/TradeCard";
 import { trades } from "@/lib/trades";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import FlowingMenu from "../FlowingMenu";
+import { ArrowLeft } from "lucide-react";
+
+// Use the official trades list for consistency and full data (icons, images, names)
+const menuItems = trades.map(t => ({
+    ...t,
+    text: t.name // FlowingMenu expects 'text'
+}));
 
 export function EmergencyServicesSection() {
     const { settings } = useLocalization();
+    const [activeTrade, setActiveTrade] = useState<string | null>(null);
+
+    const selectedTrade = activeTrade ? trades.find(t => t.slug === activeTrade) : null;
+
+    const handleTradeSelect = (slug: string) => {
+        setActiveTrade(slug);
+    };
+
+    const handleBack = () => {
+        setActiveTrade(null);
+    };
 
     return (
-        <section data-tour="tour-services" className="container-wide -mt-12 pb-16 relative z-20">
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16"
-            >
-                <div className="inline-block mb-4">
-                    <span className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
-                        24/7 Rapid Response
-                    </span>
-                </div>
-                <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 mb-6 drop-shadow-sm">
-                    Local Emergency {settings.tradeTerm} Near You
-                </h2>
-
-                <p className="text-muted-foreground/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                    From burst pipes to power cuts, our verified local professionals handle all urgent repairs.
-                    Available 24 hours a day, near you, every day of the year.
-                </p>
-            </motion.div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 px-2 md:px-0">
-                {trades.map((trade, index) => (
+        <section data-tour="tour-services" className="container-wide pt-24 pb-16 relative z-20 min-h-[800px]">
+            <AnimatePresence mode="wait">
+                {!activeTrade ? (
                     <motion.div
-                        key={trade.slug}
+                        key="menu-view"
                         initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className={`${index % 2 !== 0 ? "mt-16 lg:mt-0" : ""} flex`}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        <div className="w-full h-full">
-                            <TradeCard trade={trade} />
+                        <div className="text-center mb-16">
+                            <div className="inline-block mb-4">
+                                <span className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
+                                    24/7 Rapid Response
+                                </span>
+                            </div>
+                            <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 mb-6 pb-2 drop-shadow-sm">
+                                Local Emergency Tradesmen Near You
+                            </h2>
+
+                            <p className="text-muted-foreground/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                                From burst pipes to power cuts, our verified local professionals handle all urgent repairs.
+                                Available 24 hours a day, near you, every day of the year.
+                            </p>
+                        </div>
+
+                        <div style={{ height: '600px', position: 'relative' }} className="mb-24">
+                            <FlowingMenu items={menuItems}
+                                speed={15}
+                                textColor="#ffffff"
+                                bgColor="transparent"
+                                marqueeBgColor="#ffffff"
+                                marqueeTextColor="#060010"
+                                borderColor="#ffffff"
+                                onTradeSelect={handleTradeSelect}
+                            />
                         </div>
                     </motion.div>
-                ))}
-            </div>
+                ) : (
+                    <motion.div
+                        key="solo-view"
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+                        className="flex flex-col items-center justify-center px-4 md:px-0 pt-10 pb-24 relative"
+                    >
+                        <button
+                            onClick={handleBack}
+                            className="group flex items-center gap-2 text-muted-foreground hover:text-white transition-colors mb-12"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-gold/20 group-hover:border-gold/50 transition-all">
+                                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                            </div>
+                            <span className="font-display tracking-widest text-sm uppercase group-hover:text-gold transition-colors">
+                                Back to All Services
+                            </span>
+                        </button>
+
+                        <div className="w-full max-w-lg shadow-[0_0_50px_rgba(212,175,55,0.15)] rounded-2xl">
+                            {selectedTrade && <TradeCard trade={selectedTrade} />}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

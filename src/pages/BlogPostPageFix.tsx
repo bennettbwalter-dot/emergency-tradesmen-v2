@@ -57,13 +57,16 @@ export default function BlogPostPage() {
             .replace(/Tradespeople/g, 'Contractors')
             .replace(/tradespeople/g, 'contractors')
             .replace(/UK/g, 'US')
+            .replace(/bank holiday/gi, 'public holiday')
             .replace(/breakdown recovery/gi, 'tow truck')
             .replace(/postcode/gi, 'zip code')
-            .replace(/boiler/gi, 'HVAC / water heater')
-            .replace(/Gas Safe/g, 'Texas State Board of Plumbing Examiners (TSBPE)')
-            .replace(/NICEIC/g, 'Texas Department of Licensing and Regulation (TDLR)')
-            .replace(/MLA/g, 'ALOA Security Professionals')
-            .replace(/emergency services UK/gi, 'US emergency services');
+            .replace(/boiler/gi, 'HVAC / furnace')
+            .replace(/Gas Safe/g, 'State Licensed')
+            .replace(/NICEIC/g, 'Certified Electrician')
+            .replace(/MLA/g, 'Certified Locksmith')
+            .replace(/emergency services UK/gi, 'US emergency services')
+            .replace(/UK's fastest/gi, 'USA\'s fastest')
+            .replace(/nationwide/gi, 'coast-to-coast');
     };
 
     const AIOverviewBox = ({ content }: { content: string }) => (
@@ -174,8 +177,10 @@ export default function BlogPostPage() {
 
             // 1. Try regionalized slug first (e.g. "my-post-us")
             const regionSuffix = settings.countryCode === 'US' ? '-us' : '-gb';
-            const regionalSlug = `${slug}${regionSuffix}`;
+
+            // Critical fix: strip existing suffixes to avoid double-suffixing (e.g. slug-us-us)
             const baseSlug = slug.replace(/-us$|-gb$/, '');
+            const regionalSlug = `${baseSlug}${regionSuffix}`;
 
             const debug = {
                 originalSlug: slug,

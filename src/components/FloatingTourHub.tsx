@@ -9,13 +9,14 @@ import {
     MessageSquare,
     Wrench,
     Mic,
-    Send,
     Zap,
     Users,
     Newspaper
 } from 'lucide-react';
+import { Map, Building2, MapPin } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation } from 'react-router-dom';
+import { useLocalization } from '@/contexts/LocalizationContext';
 
 interface TourStep {
     id: string;
@@ -25,19 +26,60 @@ interface TourStep {
     desktopOnly?: boolean;
 }
 
-const TOUR_STEPS: TourStep[] = [
+// UK steps: Trade → Location → Locate Me (3 sub-steps for "The Matchmaker")
+const GB_MATCHMAKER_STEPS: TourStep[] = [
+    {
+        id: 'tour-trade-button',
+        title: 'Step 1: Pick Your Trade',
+        description: "Click the Trade button to choose the type of professional you need — plumber, electrician, locksmith, or any of our specialist trades.",
+        icon: <Wrench className="w-6 h-6 text-gold" />,
+    },
+    {
+        id: 'tour-location-button',
+        title: 'Step 2: Choose Your Location',
+        description: "Click the Location button to select your city or town. This narrows the search to verified professionals near you.",
+        icon: <MapPin className="w-6 h-6 text-gold" />,
+    },
+    {
+        id: 'tour-locate-button',
+        title: 'Step 3: Locate Me',
+        description: "Click the Locate Me button for instant GPS matching. We'll detect your position and connect you with the nearest available tradesperson.",
+        icon: <MapPin className="w-6 h-6 text-gold" />,
+    },
+];
+
+// US steps: Trade → State (+ City) → Locate Me (3 sub-steps for "The Matchmaker")
+const US_MATCHMAKER_STEPS: TourStep[] = [
+    {
+        id: 'tour-trade-button',
+        title: 'Step 1: Pick Your Trade',
+        description: "Click the Trade button to choose the type of contractor you need — plumber, electrician, locksmith, HVAC tech, or any of our specialist trades.",
+        icon: <Wrench className="w-6 h-6 text-gold" />,
+    },
+    {
+        id: 'tour-state-button',
+        title: 'Step 2: State & City',
+        description: "Start by selecting your State. Once you do, a City selector will appear right beside it — pick your city or metro area and we'll zero in on licensed contractors in your neighborhood.",
+        icon: <Map className="w-6 h-6 text-gold" />,
+    },
+    {
+        id: 'tour-locate-button',
+        title: 'Step 3: Locate Me',
+        description: "Click the Locate Me button for instant GPS matching. We'll detect your position and connect you with the nearest available contractor.",
+        icon: <MapPin className="w-6 h-6 text-gold" />,
+    },
+];
+
+const COMMON_STEPS_BEFORE: TourStep[] = [
     {
         id: 'tour-chat-input',
         title: 'Describe Your Emergency',
         description: "Start here. Tell us what's happening in plain English — \"My boiler is leaking\" or \"Power cut in my kitchen.\" Our AI dispatcher will take it from there.",
         icon: <MessageSquare className="w-6 h-6 text-gold" />,
     },
-    {
-        id: 'tour-selectors',
-        title: 'The Matchmaker',
-        description: "Know exactly what you need? Use the Trade dropdown to pick your expert, and the City selector to narrow it down to your area — or tap 'Locate Me' for instant GPS matching.",
-        icon: <Wrench className="w-6 h-6 text-gold" />,
-    },
+];
+
+const COMMON_STEPS_AFTER: TourStep[] = [
     {
         id: 'tour-mic-button',
         title: 'Hands-Free Help',
@@ -45,21 +87,15 @@ const TOUR_STEPS: TourStep[] = [
         icon: <Mic className="w-6 h-6 text-gold" />,
     },
     {
-        id: 'tour-send-button',
-        title: 'Launch Your Request',
-        description: "You're all set! Hit Send to dispatch help. Once your trade and location are locked in, this button lights up gold — one tap to connect.",
-        icon: <Send className="w-6 h-6 text-gold" />,
-    },
-    {
         id: 'tour-services',
         title: 'Quick Access Trades',
-        description: "Scroll down and you'll see our trade cards. Just tap any image to instantly find verified tradesmen in that category — it's the fastest way to get connected.",
+        description: "Scroll down and you'll see our trade cards. Just tap any image to instantly find verified professionals in that category — it's the fastest way to get connected.",
         icon: <Zap className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-signup',
         title: 'Join Our Network',
-        description: "Are you a qualified tradesperson? Sign up to join our verified network. Get matched with local emergency jobs, build your reputation, and grow your business.",
+        description: "Are you a qualified professional? Sign up to join our verified network. Get matched with local emergency jobs, build your reputation, and grow your business.",
         icon: <Users className="w-6 h-6 text-gold" />,
     },
     {
@@ -78,12 +114,19 @@ export function FloatingTourHub() {
     const isMobile = useIsMobile();
     const location = useLocation();
     const stepRef = useRef<number>(0);
+    const { settings } = useLocalization();
+
+    // Build the full step list based on region
+    const allSteps = React.useMemo(() => {
+        const matchmakerSteps = settings.countryCode === 'US' ? US_MATCHMAKER_STEPS : GB_MATCHMAKER_STEPS;
+        return [...COMMON_STEPS_BEFORE, ...matchmakerSteps, ...COMMON_STEPS_AFTER];
+    }, [settings.countryCode]);
 
     // Filter steps based on device — desktop-only steps are excluded on mobile
     const activeSteps = React.useMemo(() => {
-        if (isMobile) return TOUR_STEPS.filter(s => !s.desktopOnly);
-        return TOUR_STEPS;
-    }, [isMobile]);
+        if (isMobile) return allSteps.filter(s => !s.desktopOnly);
+        return allSteps;
+    }, [isMobile, allSteps]);
 
     // Initialize tour check
     useEffect(() => {
@@ -153,7 +196,12 @@ export function FloatingTourHub() {
                     }
                     return prev;
                 });
+            } else {
+                setTargetRect(null);
             }
+        } else {
+            // Element not in DOM (e.g. US City button before State selected)
+            setTargetRect(null);
         }
         requestRef.current = requestAnimationFrame(syncRect);
     }, [findVisibleTourElement, activeSteps]);
@@ -245,9 +293,9 @@ export function FloatingTourHub() {
                             )}
                         </motion.div>
 
-                        {/* Pulsing Highlight Border */}
+                        {/* Pulsing Highlight Border — hidden for tour-services */}
                         <AnimatePresence>
-                            {targetRect && (
+                            {targetRect && activeSteps[currentStep].id !== 'tour-services' && (
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{
@@ -292,7 +340,11 @@ export function FloatingTourHub() {
                                     left: isMobile ? '50%' : (targetRect ? Math.min(Math.max(20, targetRect.left - (400 - targetRect.width) / 2), winW - 420) : '50%'),
                                     top: isMobile
                                         ? (targetRect && targetRect.top > winH / 2 ? 32 : 'auto')
-                                        : (targetRect ? (targetRect.bottom + 20 > winH - 300 ? Math.max(20, targetRect.top - 280) : targetRect.bottom + 20) : '50%'),
+                                        : (targetRect
+                                            ? (activeSteps[currentStep].id === 'tour-services'
+                                                ? Math.max(20, targetRect.top - 280)
+                                                : (targetRect.bottom + 20 > winH - 300 ? Math.max(20, targetRect.top - 280) : targetRect.bottom + 20))
+                                            : '50%'),
                                     bottom: isMobile
                                         ? (targetRect && targetRect.top > winH / 2 ? 'auto' : 32)
                                         : 'auto',
@@ -300,6 +352,10 @@ export function FloatingTourHub() {
                                 }}
                                 className="pointer-events-auto absolute w-[calc(100%-32px)] md:w-full max-w-[400px] bg-black/95 backdrop-blur-2xl border border-gold/50 rounded-3xl p-5 md:p-6 shadow-[0_0_50px_rgba(212,175,55,0.25)]"
                             >
+                                {/* Downward arrow for tour-services step */}
+                                {activeSteps[currentStep].id === 'tour-services' && !isMobile && (
+                                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-gold/50" />
+                                )}
                                 <div className="flex items-start justify-between mb-4 md:mb-5">
                                     <div className="flex items-center gap-3 md:gap-4">
                                         <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
@@ -362,29 +418,9 @@ export function FloatingTourHub() {
                         </div>
                     </div>
                 )}
-            </AnimatePresence>
+            </AnimatePresence >
 
-            {/* Floating Re-trigger Button */}
-            <AnimatePresence>
-                {isVisible && !isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                        animate={{ opacity: 1, scale: 1, x: 0 }}
-                        className="hidden md:block fixed bottom-6 right-6 z-[9990] md:bottom-8 md:right-8"
-                    >
-                        <Button
-                            onClick={startTour}
-                            className="group h-12 px-6 rounded-full bg-black/80 backdrop-blur-md border border-gold/30 hover:border-gold text-white shadow-lg hover:shadow-gold/20 transition-all flex items-center gap-3"
-                        >
-                            <div className="relative">
-                                <HelpCircle className="w-5 h-5 text-gold group-hover:scale-110 transition-transform" />
-                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-gold rounded-full animate-ping" />
-                            </div>
-                            <span className="font-display font-bold tracking-wide text-sm">Need Help?</span>
-                        </Button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Floating Re-trigger Button Removed */}
         </>
     );
 }

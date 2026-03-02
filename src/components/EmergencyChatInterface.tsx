@@ -459,6 +459,7 @@ export function EmergencyChatInterface() {
     const tradeSelector = (
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
+                data-tour="tour-trade-button"
                 className={`h-12 w-[72px] md:h-11 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2">
@@ -490,7 +491,7 @@ export function EmergencyChatInterface() {
     );
 
     const locationSelector = (
-        <div data-tour="tour-selectors" className="flex-1 flex gap-2">
+        <div data-tour="tour-location-button" className="flex-1 flex gap-2">
             {settings.countryCode === 'US' ? (
                 (isVoiceSessionRef.current && detectedCity) ? (
                     <div className="flex-1 h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 truncate shadow-sm">
@@ -578,7 +579,7 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
-            data-tour="tour-send-button"
+            data-tour="tour-locate-button"
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
@@ -599,7 +600,7 @@ export function EmergencyChatInterface() {
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
-            data-tour="tour-send-button"
+            data-tour="tour-locate-button"
             size="icon"
             className={`h-12 w-[72px] rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'

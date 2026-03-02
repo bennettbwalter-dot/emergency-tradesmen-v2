@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { HelpCircle } from "lucide-react";
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import Squares from "@/components/ui/Squares";
 
 export function HeroSection() {
     const { settings } = useLocalization();
+    const location = useLocation();
 
     return (
         <section className="relative block overflow-hidden">
@@ -34,7 +37,7 @@ export function HeroSection() {
             <div className="absolute -top-10 -right-10 md:top-20 md:right-20 w-80 h-80 md:w-96 md:h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse pointer-events-none" />
             <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px] pointer-events-none" />
 
-            <div className="relative container-wide w-full pt-6 pb-0 md:pt-12 md:pb-0 pointer-events-none z-10">
+            <div className="relative container-wide w-full pt-16 pb-0 md:pt-28 md:pb-0 pointer-events-none z-10">
                 <div className="w-full max-w-5xl md:max-w-7xl mx-auto text-center pointer-events-auto">
                     {/* Availability badge */}
                     <motion.div
@@ -66,13 +69,30 @@ export function HeroSection() {
                     >
                         Emergency {settings.tradeTerm} {settings.countryCode === 'GB' ? 'UK' : 'US'} | Nationwide 24/7 Help
                     </motion.p>
+
+                    {/* "Need Help" Button */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="flex justify-center mt-12 mb-4 md:mt-16 md:mb-4"
+                    >
+                        <Link to={`${location.pathname}?tour=true`}>
+                            <RainbowButton size="lg" className="gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3">
+                                <div className="relative flex items-center justify-center">
+                                    <HelpCircle className="w-6 h-6" />
+                                </div>
+                                NEED HELP?
+                            </RainbowButton>
+                        </Link>
+                    </motion.div>
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                    className="mb-0 pointer-events-auto"
+                    className="mb-0 mt-2 md:mt-8 pointer-events-auto"
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">

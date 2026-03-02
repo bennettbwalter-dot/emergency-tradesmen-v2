@@ -18,7 +18,7 @@ import { FloatingTourHub } from "@/components/FloatingTourHub";
 import { HeroSection } from "@/components/sections/HeroSection";
 
 // Lazy load other sections
-const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSection").then(module => ({ default: module.HowItWorksSection })));
+// Lazy load other sections
 const EmergencyServicesSection = lazy(() => import("@/components/sections/EmergencyServicesSection").then(module => ({ default: module.EmergencyServicesSection })));
 const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSection").then(module => ({ default: module.SEOContentSection })));
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
@@ -66,10 +66,6 @@ const Index = () => {
         <FloatingTourHub />
         <main className="min-h-screen bg-background">
           <HeroSection />
-
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <HowItWorksSection />
-          </Suspense>
 
           <Suspense fallback={<div className="h-96 w-full" />}>
             <EmergencyServicesSection />
