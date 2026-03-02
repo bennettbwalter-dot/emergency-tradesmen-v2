@@ -46,14 +46,13 @@ export function Header({ countryCode }: HeaderProps) {
 
           {/* CENTER AREA (Mobile Only): Tradesmen Sign Up */}
           <div className="absolute left-1/2 -translate-x-1/2 md:hidden z-50">
-            <Button asChild variant="outline" className="h-9 px-3.5 rounded-full border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold bg-black/40 backdrop-blur-md shadow-sm gap-2 transition-all" data-tour="tour-signup">
-              <Link to={`${countryPrefix}/pricing`}>
-                <div className="relative flex items-center">
-                  <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gold rounded-full animate-ping" />
-                </div>
-                <span className="font-medium tracking-wide text-[11px] truncate">{signupText}</span>
-              </Link>
-            </Button>
+            <Link
+              to={`${countryPrefix}/pricing`}
+              className="text-[11px] font-medium tracking-wider text-gold hover:text-white transition-colors uppercase whitespace-nowrap"
+              data-tour="tour-signup"
+            >
+              {signupText}
+            </Link>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
