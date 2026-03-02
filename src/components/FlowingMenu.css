@@ -47,7 +47,8 @@
     font-weight: 800;
 }
 
-.menu__item-link:hover {
+.menu__item-link:hover,
+.menu__item-link.is-touch {
     opacity: 0;
     transition: opacity 0s;
 }

@@ -85,6 +85,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     const { settings, detectedCity: localizationCity, detectUserLocation } = useLocalization();
     const { detectedCity: chatbotCity, setDetectedTrade, setDetectedCity } = useChatbot();
     const [isActive, setIsActive] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
 
     const targetCity = chatbotCity || localizationCity;
     const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
@@ -184,8 +185,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
         }
     };
 
-    const handleInteractionStart = (clientX: number, clientY: number) => {
+    const handleInteractionStart = (clientX: number, clientY: number, fromTouch: boolean = false) => {
         if (!itemRef.current) return;
+        if (fromTouch) setIsTouch(true);
         const rect = itemRef.current.getBoundingClientRect();
         const x = clientX - rect.left;
         const y = clientY - rect.top;
@@ -194,6 +196,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     };
 
     const handleInteractionEnd = (clientX: number, clientY: number) => {
+        setIsTouch(false);
         if (isActive) return; // Keep visible if active/clicked
         if (!itemRef.current) return;
         const rect = itemRef.current.getBoundingClientRect();
@@ -213,7 +216,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
     const handleTouchStart = (ev: React.TouchEvent<HTMLButtonElement>) => {
         const touch = ev.touches[0];
-        handleInteractionStart(touch.clientX, touch.clientY);
+        handleInteractionStart(touch.clientX, touch.clientY, true);
     };
 
     const handleTouchEnd = (ev: React.TouchEvent<HTMLButtonElement>) => {
@@ -237,7 +240,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     return (
         <div className={`menu__item ${isActive ? 'is-active' : ''}`} ref={itemRef} style={{ borderColor, borderTop: isFirst ? 'none' : undefined }}>
             <button
-                className="menu__item-link"
+                className={`menu__item-link ${isTouch ? 'is-touch' : ''}`}
                 onClick={handleClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
