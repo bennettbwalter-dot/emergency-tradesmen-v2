@@ -31,8 +31,8 @@ export function Header({ countryCode }: HeaderProps) {
       <div className="container-wide">
         <div className="flex items-center justify-between h-16">
           {/* LEFT AREA: Logo */}
-          <div className="flex items-center gap-2">
-            <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative z-50">
+          <div className="flex-shrink-0 z-50">
+            <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
               <div className="relative">
                 <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -44,50 +44,53 @@ export function Header({ countryCode }: HeaderProps) {
             </Link>
           </div>
 
-          {/* CENTER AREA (Mobile Only): Tradesmen Sign Up */}
-          <div className="absolute left-1/2 -translate-x-1/2 md:hidden z-50">
-            <Link
-              to={`${countryPrefix}/pricing`}
-              className="text-[11px] font-medium tracking-wider text-gold hover:text-white transition-colors uppercase whitespace-nowrap"
-              data-tour="tour-signup"
-            >
-              {signupText}
-            </Link>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8">
-            {/* Nav Links with animated underline */}
-            {['About', 'Blog'].map((item) => (
+          {/* CENTER AREA: Desktop Nav / Mobile Tradesmen Sign Up */}
+          <div className="flex-1 flex justify-center items-center px-4 min-w-0">
+            {/* Mobile (Text Only) */}
+            <div className="md:hidden z-50">
               <Link
-                key={item}
-                to={`${countryPrefix}/${item.toLowerCase()}`}
-                className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
-                data-tour={item === 'Blog' ? 'tour-blog-link' : undefined}
+                to={`${countryPrefix}/pricing`}
+                className="text-[11px] font-medium tracking-wider text-gold hover:text-white transition-colors uppercase whitespace-nowrap"
+                data-tour="tour-signup"
               >
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
-              </Link>
-            ))}
-
-            <Button
-              variant="outline"
-              size="sm"
-              asChild
-              className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300"
-              data-tour="tour-signup"
-            >
-              <Link to={`${countryPrefix}/pricing`}>
                 {signupText}
               </Link>
-            </Button>
+            </div>
 
-            <Link to="/contact" className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link">
-              Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
-            </Link>
-          </nav>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-8">
+              {['About', 'Blog'].map((item) => (
+                <Link
+                  key={item}
+                  to={`${countryPrefix}/${item.toLowerCase()}`}
+                  className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
+                  data-tour={item === 'Blog' ? 'tour-blog-link' : undefined}
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
+                </Link>
+              ))}
 
-          <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300"
+                data-tour="tour-signup"
+              >
+                <Link to={`${countryPrefix}/pricing`}>
+                  {signupText}
+                </Link>
+              </Button>
+
+              <Link to="/contact" className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link">
+                Contact
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
+              </Link>
+            </nav>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 z-50">
             <div className="hidden md:block">
               <UserMenu />
             </div>
