@@ -30,7 +30,7 @@ export function Header({ countryCode }: HeaderProps) {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="container-wide">
         <div className="flex items-center justify-between h-16">
-          {/* LEFT AREA: Logo & Mobile Login */}
+          {/* LEFT AREA: Logo */}
           <div className="flex items-center gap-2">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative z-50">
               <div className="relative">
@@ -42,11 +42,6 @@ export function Header({ countryCode }: HeaderProps) {
                 <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{isUS ? 'Contractors' : 'Tradesmen'}</span>
               </div>
             </Link>
-
-            {/* Mobile UserMenu (Log-in) */}
-            <div className="md:hidden">
-              <UserMenu />
-            </div>
           </div>
 
           {/* CENTER AREA (Mobile Only): Tradesmen Sign Up */}
@@ -118,6 +113,11 @@ export function Header({ countryCode }: HeaderProps) {
                     <span className="text-gold ml-2">{isUS ? 'Contractors' : 'Tradesmen'}</span>
                   </SheetTitle>
                   <nav className="flex flex-col gap-8">
+                    {/* Mobile Log-in / User Menu */}
+                    <div className="flex items-center mb-2">
+                      <UserMenu />
+                    </div>
+
                     <Link to={`${countryPrefix}/about`} className="text-2xl font-display font-medium text-white/80 hover:text-gold transition-colors block">
                       About Us
                     </Link>
