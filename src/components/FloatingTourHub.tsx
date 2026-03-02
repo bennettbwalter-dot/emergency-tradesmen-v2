@@ -297,19 +297,19 @@ export function FloatingTourHub() {
                             {targetRect ? (
                                 <>
                                     <motion.div
-                                        className="absolute top-0 left-0 right-0 bg-black/80 pointer-events-auto"
+                                        className="absolute top-0 left-0 right-0 bg-black/30 pointer-events-auto"
                                         animate={{ height: Math.max(0, targetRect.top - 6) }}
                                         transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
-                                        className="absolute bottom-0 left-0 right-0 bg-black/80 pointer-events-auto"
+                                        className="absolute bottom-0 left-0 right-0 bg-black/30 pointer-events-auto"
                                         animate={{ top: targetRect.bottom + 6 }}
                                         transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
-                                        className="absolute bg-black/80 pointer-events-auto"
+                                        className="absolute bg-black/30 pointer-events-auto"
                                         animate={{
                                             top: Math.max(0, targetRect.top - 6),
                                             height: targetRect.height + 12,
@@ -320,7 +320,7 @@ export function FloatingTourHub() {
                                         onClick={handleSkip}
                                     />
                                     <motion.div
-                                        className="absolute bg-black/80 pointer-events-auto"
+                                        className="absolute bg-black/30 pointer-events-auto"
                                         animate={{
                                             top: Math.max(0, targetRect.top - 6),
                                             height: targetRect.height + 12,
@@ -332,7 +332,7 @@ export function FloatingTourHub() {
                                     />
                                 </>
                             ) : (
-                                <div className="absolute inset-0 bg-black/80 pointer-events-auto" onClick={handleSkip} />
+                                <div className="absolute inset-0 bg-black/30 pointer-events-auto" onClick={handleSkip} />
                             )}
                         </motion.div>
 

@@ -39,28 +39,30 @@ export function EmergencyServicesSection() {
                     >
                         <div className="text-center mb-16">
                             <div className="inline-block mb-4">
-                                <span data-tour="tour-services" className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
-                                    24/7 Rapid Response
+                                <span className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
+                                    Your Emergency Trade Network
                                 </span>
                             </div>
                             <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 mb-6 pb-2 drop-shadow-sm">
-                                Local Emergency Tradesmen Near You
+                                Verified Specialists. Any Emergency.
                             </h2>
 
                             <p className="text-muted-foreground/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                                From burst pipes to power cuts, our verified local professionals handle all urgent repairs.
-                                Available 24 hours a day, near you, every day of the year.
+                                From burst pipes to power cuts — tap any trade below to instantly find verified local plumbers, electricians, locksmiths, roofers and more.
+                                Available 24/7, near you, every day of the year.
                             </p>
                         </div>
 
                         <div style={{ height: '600px', position: 'relative' }} className="mb-24">
+                            {/* Tour anchor — targets the top of the trade list */}
+                            <div data-tour="tour-services" className="absolute top-0 left-0 right-0 h-px pointer-events-none" />
                             <FlowingMenu items={menuItems}
                                 speed={15}
-                                textColor="#ffffff"
+                                textColor="hsl(var(--foreground))"
                                 bgColor="transparent"
-                                marqueeBgColor="#ffffff"
-                                marqueeTextColor="#060010"
-                                borderColor="#ffffff"
+                                marqueeBgColor="hsl(var(--foreground))"
+                                marqueeTextColor="hsl(var(--background))"
+                                borderColor="hsl(var(--border))"
                                 onTradeSelect={handleTradeSelect}
                             />
                         </div>
