@@ -190,6 +190,11 @@ const App = () => {
                                 <Route path="locations" element={<LocationsDirectory />} />
                                 <Route path="blog" element={<BlogPage />} />
                                 <Route path="blog/:slug" element={<BlogPostPage />} />
+                                <Route path="privacy" element={<PrivacyPolicy />} />
+                                <Route path="terms" element={<TermsOfService />} />
+                                <Route path="contact" element={<ContactPage />} />
+                                <Route path="faq" element={<FAQ />} />
+                                <Route path="vetting-process" element={<VettingProcess />} />
                                 <Route path=":tradePath" element={<TradeCityPage />} />
                                 <Route path=":tradePath/:city" element={<TradeCityPage />} />
 

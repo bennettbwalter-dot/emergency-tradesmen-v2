@@ -9,12 +9,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { User, LogOut, Heart, History, Settings, CalendarDays, MessageSquare } from "lucide-react";
+import { User, LogOut, Heart, History, Settings, CalendarDays, MessageSquare, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
 import { getTotalUnreadCount } from "@/lib/chat";
 
-export function UserMenu() {
+export function UserMenu({ orientation = "horizontal" }: { orientation?: "horizontal" | "vertical" }) {
     const { user, logout, isAuthenticated } = useAuth();
     const [unreadCount, setUnreadCount] = useState(0);
 
@@ -29,23 +29,29 @@ export function UserMenu() {
 
     if (!isAuthenticated || !user) {
         return (
-            <div className="flex items-center gap-2">
-                <AuthModal
-                    trigger={
-                        <Button variant="ghost" className="text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent">
-                            Log In
-                        </Button>
-                    }
-                    defaultTab="login"
-                />
-                <AuthModal
-                    trigger={
-                        <Button variant="ghost" className="text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent">
-                            Sign Up
-                        </Button>
-                    }
-                    defaultTab="register"
-                />
+            <div className={`flex w-full ${orientation === 'vertical' ? 'flex-col items-center gap-1' : 'items-center gap-2'}`}>
+                <div className={orientation === 'vertical' ? 'w-full' : ''}>
+                    <AuthModal
+                        trigger={
+                            <Button variant="ghost" className={orientation === 'vertical' ? "flex items-center justify-start gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] hover:text-[#e5e7eb] text-[#e5e7eb] w-full bg-transparent h-auto" : "text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent"}>
+                                {orientation === 'vertical' && <LogIn className="w-[18px] h-[18px] text-[#9ca3af]" />}
+                                Log In
+                            </Button>
+                        }
+                        defaultTab="login"
+                    />
+                </div>
+                <div className={orientation === 'vertical' ? 'w-full' : ''}>
+                    <AuthModal
+                        trigger={
+                            <Button variant="ghost" className={orientation === 'vertical' ? "flex items-center justify-start gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] hover:text-[#e5e7eb] text-[#e5e7eb] w-full bg-transparent h-auto" : "text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent"}>
+                                {orientation === 'vertical' && <UserPlus className="w-[18px] h-[18px] text-[#9ca3af]" />}
+                                Sign Up
+                            </Button>
+                        }
+                        defaultTab="register"
+                    />
+                </div>
             </div>
         );
     }

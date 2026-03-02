@@ -460,19 +460,19 @@ export function EmergencyChatInterface() {
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
                 data-tour="tour-trade-button"
-                className={`h-12 w-[72px] md:h-11 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 w-[72px] md:h-11 md:w-full rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink-0 overflow-hidden [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
-                <div className="flex items-center justify-center md:justify-start md:gap-2">
+                <div className="flex items-center justify-center md:justify-start md:gap-2 min-w-0 overflow-hidden">
                     <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
-                    <div className="hidden md:block">
+                    <div className="hidden md:block min-w-0 overflow-hidden">
                         <SelectValue placeholder="Trade">
-                            <span className="text-sm font-medium truncate block">
+                            <span className="text-sm font-medium truncate block max-w-[180px]">
                                 {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
                             </span>
                         </SelectValue>
                     </div>
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden md:block shrink-0">
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </div>
             </SelectTrigger>
@@ -491,18 +491,18 @@ export function EmergencyChatInterface() {
     );
 
     const locationSelector = (
-        <div data-tour="tour-location-button" className="flex-1 flex gap-2">
+        <div data-tour="tour-location-button" className="w-full min-w-0 overflow-hidden">
             {settings.countryCode === 'US' ? (
                 (isVoiceSessionRef.current && detectedCity) ? (
-                    <div className="flex-1 h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 truncate shadow-sm">
+                    <div className="w-full h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 overflow-hidden shadow-sm">
                         <MapPin className="w-4 h-4 shrink-0 text-emerald-500" />
-                        <span className="text-sm font-medium text-foreground dark:text-white truncate block">
+                        <span className="text-sm font-medium text-foreground dark:text-white truncate block min-w-0">
                             {detectedCity}
                         </span>
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="ml-auto w-6 h-6 hover:bg-red-500/20 text-red-500 rounded-full"
+                            className="ml-auto w-6 h-6 shrink-0 hover:bg-red-500/20 text-red-500 rounded-full"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setDetectedCity(null);
@@ -516,7 +516,7 @@ export function EmergencyChatInterface() {
                     </div>
                 ) : (
                     <HierarchicalLocationSelector
-                        className="w-[72px] md:flex-1"
+                        className="w-[72px] md:w-full"
                         placeholder="City, State"
                         onLocationSelect={(record) => {
                             console.log("Loc Selected", record);
@@ -527,7 +527,7 @@ export function EmergencyChatInterface() {
                 )
             ) : (
                 <UKCityCombobox
-                    className="w-[72px] md:flex-1 h-12 md:h-11"
+                    className="w-[72px] md:w-full h-12 md:h-11"
                     placeholder="Select City"
                     value={detectedCity || ""}
                     onValueChange={setDetectedCity}
@@ -731,73 +731,100 @@ export function EmergencyChatInterface() {
                     <div className="h-4" />
                 </div>
 
-                {/* MODIFIED: Flex Column Layout for Input Area - Centered 90% Width */}
-                <div className="w-full bg-transparent flex justify-center py-6">
-                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-visible group
+                {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
+                <div className="w-full bg-transparent flex justify-center pt-2 pb-4">
+                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
-                            : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'} overflow-x-hidden`}>
+                            : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
-                        {/* WAVEFORM INSIDE CONTAINER - Shows when recording */}
-                        {isRecording ? (
-                            <div className="w-full min-h-[140px] md:min-h-[100px] flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5">
-                                <WhisperWaveform
-                                    audioData={audioData}
-                                    isRecording={isRecording}
-                                    isProcessing={isTranscriptionProcessing}
-                                    transcript={transcription}
-                                    onConfirm={() => {
-                                        stopRecording();
-                                        stopVolumeMonitor();
+                        {/* TEXTAREA / WAVEFORM SLOT - Fixed height so controls never move */}
+                        <div className="w-full" style={{ minHeight: '140px' }}>
+                            {isRecording ? (
+                                <div className="w-full h-full flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5" style={{ minHeight: '140px' }}>
+                                    <WhisperWaveform
+                                        audioData={audioData}
+                                        isRecording={isRecording}
+                                        isProcessing={isTranscriptionProcessing}
+                                        transcript={transcription}
+                                        onConfirm={() => {
+                                            stopRecording();
+                                            stopVolumeMonitor();
+                                        }}
+                                        onCancel={() => {
+                                            stopRecording();
+                                            stopVolumeMonitor();
+                                            setAudioData(new Array(120).fill(0));
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <textarea
+                                    ref={inputRef}
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            handleKeyDown(e);
+                                        }
                                     }}
-                                    onCancel={() => {
-                                        stopRecording();
-                                        stopVolumeMonitor();
-                                        setAudioData(new Array(120).fill(0));
-                                    }}
+                                    onFocus={() => setIsFocused(true)}
+                                    onBlur={() => setIsFocused(false)}
+                                    placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                                    data-tour="tour-chat-input"
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/30 resize-none font-light tracking-wide"
+                                    style={{ minHeight: '140px' }}
                                 />
-                            </div>
-                        ) : (
-                            <textarea
-                                ref={inputRef}
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter' && !e.shiftKey) {
-                                        e.preventDefault();
-                                        handleKeyDown(e);
-                                    }
-                                }}
-                                onFocus={() => setIsFocused(true)}
-                                onBlur={() => setIsFocused(false)}
-                                placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                                data-tour="tour-chat-input"
-                                className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none min-h-[160px] md:min-h-[120px] px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/30 resize-y font-light tracking-wide"
-                            />
-                        )}
-
-                        <div className="hidden md:grid grid-cols-[1fr_1fr_auto_auto] items-center gap-2 px-8 pb-4 bg-transparent w-full">
-                            {tradeSelector}
-                            {locationSelector}
-                            {micButton}
-                            {actionButton}
+                            )}
                         </div>
+
+                        {/* CONTROLS ROW - Always pinned at bottom, never moves */}
+                        <div className="w-full flex-shrink-0 bg-transparent">
+                            {/* Desktop Controls - STRICT GRID */}
+                            <div className="hidden md:grid px-4 pb-4 pt-2 bg-transparent w-full items-center" style={{ gridTemplateColumns: '1fr 1fr 44px 44px', gap: '8px' }}>
+                                <div className="min-w-0 overflow-hidden">
+                                    {tradeSelector}
+                                </div>
+                                <div className="min-w-0 overflow-hidden">
+                                    {locationSelector}
+                                </div>
+                                <div className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0">
+                                    {micButton}
+                                </div>
+                                <div className="w-[44px] h-[44px] flex items-center justify-center flex-shrink-0">
+                                    {actionButton}
+                                </div>
+                            </div>
+                        </div>
+
                         <BorderBeam duration={8} size={100} />
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Controls - Below chat - Optimized Layout - Single Row Strict Symmetry */}
-            <div className="flex flex-col md:hidden w-full gap-3 mt-4 mb-6 items-center overflow-visible">
-                {/* Single Row: Microphone, Wrench, Location Pin, Send - Uniform Circular Icons perfectly spaced inside a 4-col grid */}
-                <div className="grid grid-cols-4 w-full place-items-center px-4 overflow-visible">
-                    {micButton}
-                    {tradeSelector}
-                    {locationSelector}
-                    {mobileActionButton}
+            {/* Mobile Controls - STRICT GRID: always below the card, never inside it */}
+            <div className="md:hidden w-full mt-2 mb-6">
+                <div className="grid w-full px-4 items-center" style={{ gridTemplateColumns: '48px 1fr 1fr 48px', gap: '6px', height: '48px' }}>
+                    {/* Col 1: Mic - fixed */}
+                    <div className="w-[48px] h-12 flex items-center justify-center">
+                        {micButton}
+                    </div>
+                    {/* Col 2: Trade */}
+                    <div className="min-w-0 overflow-hidden h-12">
+                        {tradeSelector}
+                    </div>
+                    {/* Col 3: Location */}
+                    <div className="min-w-0 overflow-hidden h-12">
+                        {locationSelector}
+                    </div>
+                    {/* Col 4: Action - fixed */}
+                    <div className="w-[48px] h-12 flex items-center justify-center">
+                        {mobileActionButton}
+                    </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TradeCard } from "@/components/TradeCard";
 import { trades } from "@/lib/trades";
@@ -15,8 +15,20 @@ const menuItems = trades.map(t => ({
 export function EmergencyServicesSection() {
     const { settings } = useLocalization();
     const [activeTrade, setActiveTrade] = useState<string | null>(null);
+    const soloViewRef = useRef<HTMLDivElement>(null);
 
     const selectedTrade = activeTrade ? trades.find(t => t.slug === activeTrade) : null;
+
+    // Auto-scroll the trade card into view when selected
+    useEffect(() => {
+        if (activeTrade) {
+            // Wait for the AnimatePresence exit (500ms) to finish before scrolling
+            const timer = setTimeout(() => {
+                soloViewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 600);
+            return () => clearTimeout(timer);
+        }
+    }, [activeTrade]);
 
     const handleTradeSelect = (slug: string) => {
         setActiveTrade(slug);
@@ -69,12 +81,13 @@ export function EmergencyServicesSection() {
                     </motion.div>
                 ) : (
                     <motion.div
+                        ref={soloViewRef}
                         key="solo-view"
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
                         transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                        className="flex flex-col items-center justify-center px-4 md:px-0 pt-10 pb-24 relative"
+                        className="flex flex-col items-center justify-center px-4 md:px-0 py-12 relative"
                     >
                         <button
                             onClick={handleBack}

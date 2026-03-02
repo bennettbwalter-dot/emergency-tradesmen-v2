@@ -60,14 +60,14 @@ export function TradeCard({ trade, city }: TradeCardProps) {
         </div>
 
         {/* Image / Icon Area */}
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] overflow-hidden bg-black/40 backdrop-blur-sm">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-90" />
 
           {trade.image ? (
             <img
               src={trade.image}
               alt={`Emergency ${trade.name}`}
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-secondary/30">

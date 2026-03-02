@@ -1,10 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Clock, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/UserMenu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import {
+  Menu,
+  Home,
+  Info,
+  MapPin,
+  Phone,
+  FileText,
+  HelpCircle,
+  ShieldCheck,
+  Rocket,
+  ChevronRight
+} from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 
@@ -45,12 +55,12 @@ export function Header({ countryCode }: HeaderProps) {
           </div>
 
           {/* CENTER AREA: Desktop Nav / Mobile Tradesmen Sign Up */}
-          <div className="flex-1 flex justify-center items-center px-4 min-w-0">
-            {/* Mobile (Text Only) */}
-            <div className="md:hidden z-50">
+          <div className="flex-1 flex justify-center items-center px-2 min-w-0 pointer-events-none">
+            {/* Mobile (Text Only) - Perfectly Centered */}
+            <div className="md:hidden z-50 pointer-events-auto">
               <Link
                 to={`${countryPrefix}/pricing`}
-                className="text-[11px] font-medium tracking-wider text-gold hover:text-white transition-colors uppercase whitespace-nowrap"
+                className="text-[11px] font-bold tracking-[0.1em] text-gold hover:text-white transition-colors uppercase whitespace-nowrap px-4 py-2"
                 data-tour="tour-signup"
               >
                 {signupText}
@@ -58,7 +68,7 @@ export function Header({ countryCode }: HeaderProps) {
             </div>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8 pointer-events-auto">
               {['About', 'Blog'].map((item) => (
                 <Link
                   key={item}
@@ -90,14 +100,16 @@ export function Header({ countryCode }: HeaderProps) {
             </nav>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 z-50">
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 z-50 min-w-[40px] justify-end">
             <div className="hidden md:block">
               <UserMenu />
             </div>
-            <ModeToggle />
+            <div className="hidden sm:block">
+              <ModeToggle />
+            </div>
 
-            {/* Mobile Menu */}
-            <div className="md:hidden flex items-center gap-1">
+            {/* Mobile Menu Button - Locked Position */}
+            <div className="md:hidden flex items-center shrink-0">
 
               <Sheet>
                 <SheetTrigger asChild>
@@ -109,46 +121,90 @@ export function Header({ countryCode }: HeaderProps) {
                     <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px] border-l-gold/10 bg-black/95 backdrop-blur-xl">
-                  <SheetTitle className="text-left font-display text-3xl mb-10 mt-4">
-                    <span className="text-white">Emergency</span>
-                    <span className="text-gold ml-2">{isUS ? 'Contractors' : 'Tradesmen'}</span>
-                  </SheetTitle>
-                  <nav className="flex flex-col gap-8">
-                    {/* Mobile Log-in / User Menu */}
-                    <div className="flex items-center mb-2">
-                      <UserMenu />
+                <SheetContent side="left" className="w-[300px] sm:w-[320px] p-4 bg-[#0B0F19] border-r border-white/5 text-slate-300">
+                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+
+                  {/* Top Header Match */}
+                  <div className="flex items-center justify-between mb-8 mt-2 px-2">
+                    <div className="flex items-center gap-3">
+                      <img src="/et-logo-v2.png" alt="Logo" className="w-8 h-8 rounded-full border border-gold/30" />
+                      <span className="font-display tracking-wide text-lg text-white">Emergency<span className="text-gold ml-1">{isUS ? 'Contractors' : 'Tradesmen'}</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 overflow-y-auto pb-8">
+                    {/* NAVIGATE */}
+                    <div className="px-3 mb-2 mt-2">
+                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#6b7280] uppercase">Navigate</span>
                     </div>
 
-                    <Link to={`${countryPrefix}/about`} className="text-2xl font-display font-medium text-white/80 hover:text-gold transition-colors block">
-                      About Us
-                    </Link>
-                    <Link to={`${countryPrefix}/blog`} className="text-2xl font-display font-medium text-white/80 hover:text-gold transition-colors block">
-                      Latest News
+                    <Link to={`${countryPrefix}/`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <Home className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      Home
                     </Link>
 
-                    <Link to="/contact" className="text-2xl font-display font-medium text-white/80 hover:text-gold transition-colors block">
+                    <Link to={`${countryPrefix}/about`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <Info className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      About Us
+                    </Link>
+
+                    <Link to={`${countryPrefix}/locations`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <MapPin className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      Locations
+                    </Link>
+
+                    <Link to="/contact" className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <Phone className="w-[18px] h-[18px] text-[#9ca3af]" />
                       Contact
                     </Link>
 
-                    <div className="h-px bg-white/10 my-2" />
+                    {/* ADVANCED TOOLS */}
+                    <div className="px-3 mb-2 mt-6 flex justify-between items-center group cursor-pointer">
+                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#325e46] uppercase">Advanced Tools</span>
+                      <ChevronRight className="w-3 h-3 text-[#325e46] group-hover:text-[#4ade80] transition-colors" />
+                    </div>
 
-                    <Button variant="outline" asChild className="border-gold text-gold hover:bg-gold/10 w-full justify-start text-lg h-14 rounded-xl">
-                      <Link to={`${countryPrefix}/pricing`}>
-                        {signupText}
-                      </Link>
-                    </Button>
+                    <Link to={`${countryPrefix}/pricing`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <Rocket className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      {signupText}
+                    </Link>
 
-                    <div className="mt-auto pt-8 border-t border-white/10">
-                      <p className="text-xs text-gold/60 uppercase tracking-widest mb-6 font-medium">Follow Our Updates</p>
-                      <div className="flex gap-6">
-                        <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-12 h-12" />
-                        <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-12 h-12" />
-                        <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" className="w-12 h-12" />
-                        <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" className="w-12 h-12" />
+                    <div className="mt-1">
+                      <div className="flex flex-col py-1">
+                        <UserMenu orientation="vertical" />
                       </div>
                     </div>
-                  </nav>
+
+                    {/* LEARN */}
+                    <div className="px-3 mb-2 mt-6 flex justify-between items-center group cursor-pointer">
+                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#325e46] uppercase">Learn</span>
+                    </div>
+
+                    <Link to={`${countryPrefix}/blog`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <FileText className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      Tutorials & News
+                    </Link>
+
+                    <Link to={`${countryPrefix}/vetting-process`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <ShieldCheck className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      Vetting Process
+                    </Link>
+
+                    <Link to={`${countryPrefix}/faq`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <HelpCircle className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      FAQ
+                    </Link>
+
+                    {/* Socials */}
+                    <div className="mt-8 px-3 pt-6 border-t border-white/5">
+                      <div className="flex gap-4">
+                        <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-10 h-10 bg-[#1a1d27] border-0" />
+                        <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-10 h-10 bg-[#1a1d27] border-0" />
+                        <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" className="w-10 h-10 bg-[#1a1d27] border-0" />
+                        <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" className="w-10 h-10 bg-[#1a1d27] border-0" />
+                      </div>
+                    </div>
+                  </div>
                 </SheetContent>
               </Sheet>
             </div>

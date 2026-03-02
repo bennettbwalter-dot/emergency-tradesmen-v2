@@ -218,34 +218,55 @@ export function FloatingTourHub() {
         requestRef.current = requestAnimationFrame(syncRect);
     }, [findVisibleTourElement, activeSteps]);
 
+    // Steps that are in the hero / above-fold — page must NOT scroll during these
+    const ABOVE_FOLD_STEP_IDS = new Set([
+        'tour-chat-input',
+        'tour-trade-button',
+        'tour-location-button',
+        'tour-state-button',
+        'tour-locate-button',
+        'tour-mic-button',
+    ]);
+
     // Update rect on step change and handle initial scroll
     useEffect(() => {
         if (isOpen) {
             stepRef.current = currentStep;
 
-            // Initial scroll for the new step
             const step = activeSteps[currentStep];
+            const isAboveFold = ABOVE_FOLD_STEP_IDS.has(step.id);
+
+            // For above-fold steps: lock body scroll to prevent page from jumping
+            if (isAboveFold) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+
             const element = findVisibleTourElement(step.id);
-            if (element) {
-                // Small delay ensures DOM is ready before scrolling
+            if (element && !isAboveFold) {
+                // Only scroll for below-fold steps, and use 'nearest' to minimize movement
                 setTimeout(() => {
                     element.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'center',
+                        block: 'nearest',
                         inline: 'nearest'
                     });
                 }, 100);
             }
 
-            // Start the continuous tracking loop — syncRect follows the element
-            // live as the page scrolls, so the spotlight visually chases it
             requestRef.current = requestAnimationFrame(syncRect);
 
             return () => {
                 if (requestRef.current) {
                     cancelAnimationFrame(requestRef.current);
                 }
+                // Always restore scroll on cleanup
+                document.body.style.overflow = '';
             };
+        } else {
+            // Tour closed — always restore scroll
+            document.body.style.overflow = '';
         }
     }, [isOpen, currentStep, syncRect, findVisibleTourElement]);
 
