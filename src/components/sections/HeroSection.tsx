@@ -75,16 +75,21 @@ export function HeroSection() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex justify-center mt-12 mb-0 md:mt-16"
+                        className="flex justify-center mt-12 mb-0 md:mt-16 relative z-40"
                     >
-                        <Link to={`${location.pathname}?tour=true`}>
-                            <RainbowButton size="lg" className="gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3">
-                                <div className="relative flex items-center justify-center">
-                                    <HelpCircle className="w-6 h-6" />
-                                </div>
-                                NEED HELP?
-                            </RainbowButton>
-                        </Link>
+                        <RainbowButton
+                            size="lg"
+                            className="gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.dispatchEvent(new Event('start-tour'));
+                            }}
+                        >
+                            <div className="relative flex items-center justify-center">
+                                <HelpCircle className="w-6 h-6" />
+                            </div>
+                            NEED HELP?
+                        </RainbowButton>
                     </motion.div>
                 </div>
 

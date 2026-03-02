@@ -157,6 +157,18 @@ export function FloatingTourHub() {
         }
     }, [location.search]);
 
+    // Listen for custom 'start-tour' event so the button can always restart the tour
+    useEffect(() => {
+        const handleStartTour = () => {
+            localStorage.removeItem('et-tour-completed');
+            setCurrentStep(0);
+            setIsOpen(true);
+            setIsVisible(false);
+        };
+        window.addEventListener('start-tour', handleStartTour);
+        return () => window.removeEventListener('start-tour', handleStartTour);
+    }, []);
+
     const requestRef = useRef<number>();
 
     // Helper: find the VISIBLE element for a tour step
@@ -283,10 +295,40 @@ export function FloatingTourHub() {
                         >
                             {targetRect ? (
                                 <>
-                                    <div className="absolute top-0 left-0 right-0 bg-black/80 pointer-events-auto" style={{ height: Math.max(0, targetRect.top - 6) }} onClick={handleSkip} />
-                                    <div className="absolute bottom-0 left-0 right-0 bg-black/80 pointer-events-auto" style={{ top: targetRect.bottom + 6 }} onClick={handleSkip} />
-                                    <div className="absolute bg-black/80 pointer-events-auto" style={{ top: Math.max(0, targetRect.top - 6), height: targetRect.height + 12, left: 0, width: Math.max(0, targetRect.left - 6) }} onClick={handleSkip} />
-                                    <div className="absolute bg-black/80 pointer-events-auto" style={{ top: Math.max(0, targetRect.top - 6), height: targetRect.height + 12, left: targetRect.right + 6, right: 0 }} onClick={handleSkip} />
+                                    <motion.div
+                                        className="absolute top-0 left-0 right-0 bg-black/80 pointer-events-auto"
+                                        animate={{ height: Math.max(0, targetRect.top - 6) }}
+                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        onClick={handleSkip}
+                                    />
+                                    <motion.div
+                                        className="absolute bottom-0 left-0 right-0 bg-black/80 pointer-events-auto"
+                                        animate={{ top: targetRect.bottom + 6 }}
+                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        onClick={handleSkip}
+                                    />
+                                    <motion.div
+                                        className="absolute bg-black/80 pointer-events-auto"
+                                        animate={{
+                                            top: Math.max(0, targetRect.top - 6),
+                                            height: targetRect.height + 12,
+                                            left: 0,
+                                            width: Math.max(0, targetRect.left - 6)
+                                        }}
+                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        onClick={handleSkip}
+                                    />
+                                    <motion.div
+                                        className="absolute bg-black/80 pointer-events-auto"
+                                        animate={{
+                                            top: Math.max(0, targetRect.top - 6),
+                                            height: targetRect.height + 12,
+                                            left: targetRect.right + 6,
+                                            right: 0
+                                        }}
+                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        onClick={handleSkip}
+                                    />
                                 </>
                             ) : (
                                 <div className="absolute inset-0 bg-black/80 pointer-events-auto" onClick={handleSkip} />
@@ -349,6 +391,12 @@ export function FloatingTourHub() {
                                         ? (targetRect && targetRect.top > winH / 2 ? 'auto' : 32)
                                         : 'auto',
                                     translateX: isMobile ? '-50%' : 0
+                                }}
+                                transition={{
+                                    type: 'spring',
+                                    damping: 30,
+                                    stiffness: 180,
+                                    mass: 0.8
                                 }}
                                 className="pointer-events-auto absolute w-[calc(100%-32px)] md:w-full max-w-[400px] bg-black/95 backdrop-blur-2xl border border-gold/50 rounded-3xl p-5 md:p-6 shadow-[0_0_50px_rgba(212,175,55,0.25)]"
                             >
