@@ -66,7 +66,16 @@ export default function BlogPostPage() {
             .replace(/MLA/g, 'Certified Locksmith')
             .replace(/emergency services UK/gi, 'US emergency services')
             .replace(/UK's fastest/gi, 'USA\'s fastest')
-            .replace(/nationwide/gi, 'coast-to-coast');
+            .replace(/nationwide/gi, 'coast-to-coast')
+            .replace(/\/blog\/plumbing-emergency\/infographic-uk\.jpg/g, '/blog/plumbing-emergency/infographic-us.png')
+            .replace(/\/blog\/plumbing-emergency\/drainage-uk\.jpg/g, '/blog/plumbing-emergency/drainage-us.jpg')
+            .replace(/London/g, 'Dallas')
+            .replace(/Manchester/g, 'Houston')
+            .replace(/Leeds/g, 'Chicago')
+            .replace(/£/g, '$')
+            .replace(/Kensington to Canary Wharf/g, 'Preston Hollow to Downtown')
+            .replace(/Greater Manchester/g, 'Greater Houston')
+            .replace(/West Yorkshire/g, 'Chicagoland');
     };
 
     const AIOverviewBox = ({ content }: { content: string }) => (
@@ -758,6 +767,11 @@ export default function BlogPostPage() {
                                     usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
                                 },
                                 'spring-thaw-pipe-burst-prevention': {
+                                    trade: 'Plumber', tradeSlug: 'plumber',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'emergency-plumbing-heating-repairs-immediate-relief': {
                                     trade: 'Plumber', tradeSlug: 'plumber',
                                     ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
                                     usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
