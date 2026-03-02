@@ -184,23 +184,54 @@ const MenuItem: React.FC<MenuItemProps> = ({
         }
     };
 
-    const handleMouseEnter = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    const handleInteractionStart = (clientX: number, clientY: number) => {
         if (!itemRef.current) return;
         const rect = itemRef.current.getBoundingClientRect();
-        const x = ev.clientX - rect.left;
-        const y = ev.clientY - rect.top;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
         const edge = findClosestEdge(x, y, rect.width, rect.height);
         setMarqueeVisibility(true, edge);
     };
 
-    const handleMouseLeave = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    const handleInteractionEnd = (clientX: number, clientY: number) => {
         if (isActive) return; // Keep visible if active/clicked
         if (!itemRef.current) return;
         const rect = itemRef.current.getBoundingClientRect();
-        const x = ev.clientX - rect.left;
-        const y = ev.clientY - rect.top;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
         const edge = findClosestEdge(x, y, rect.width, rect.height);
         setMarqueeVisibility(false, edge);
+    };
+
+    const handleMouseEnter = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        handleInteractionStart(ev.clientX, ev.clientY);
+    };
+
+    const handleMouseLeave = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        handleInteractionEnd(ev.clientX, ev.clientY);
+    };
+
+    const handleTouchStart = (ev: React.TouchEvent<HTMLButtonElement>) => {
+        const touch = ev.touches[0];
+        handleInteractionStart(touch.clientX, touch.clientY);
+    };
+
+    const handleTouchEnd = (ev: React.TouchEvent<HTMLButtonElement>) => {
+        if (ev.changedTouches && ev.changedTouches.length > 0) {
+            const touch = ev.changedTouches[0];
+            handleInteractionEnd(touch.clientX, touch.clientY);
+        } else {
+            handleInteractionEnd(0, 0);
+        }
+    };
+
+    const handleTouchCancel = (ev: React.TouchEvent<HTMLButtonElement>) => {
+        if (ev.changedTouches && ev.changedTouches.length > 0) {
+            const touch = ev.changedTouches[0];
+            handleInteractionEnd(touch.clientX, touch.clientY);
+        } else {
+            handleInteractionEnd(0, 0);
+        }
     };
 
     return (
@@ -210,6 +241,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
                 onClick={handleClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchCancel}
                 style={{ color: textColor, background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}
             >
                 {text}
