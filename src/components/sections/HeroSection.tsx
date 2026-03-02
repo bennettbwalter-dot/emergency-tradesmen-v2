@@ -75,7 +75,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex justify-center mt-12 mb-4 md:mt-16 md:mb-4"
+                        className="flex justify-center mt-12 mb-0 md:mt-16"
                     >
                         <Link to={`${location.pathname}?tour=true`}>
                             <RainbowButton size="lg" className="gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3">
@@ -92,7 +92,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                    className="mb-0 mt-2 md:mt-8 pointer-events-auto"
+                    className="mb-0 mt-0 pointer-events-auto"
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">
@@ -101,13 +101,13 @@ export function HeroSection() {
                     </div>
                 </motion.div>
 
-                <div className="mt-16 text-center relative z-20 pointer-events-auto">
+                <div className="mt-8 text-center relative z-20 pointer-events-auto">
                     <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-6">
                         Our Local Tradesmen Are
                     </h2>
                 </div>
 
-                <section className="container-wide pt-0 pb-8 mt-12 relative z-20">
+                <section className="container-wide pt-0 pb-8 mt-6 relative z-20">
                     <TrustBadges />
                 </section>
 
