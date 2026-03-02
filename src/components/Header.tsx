@@ -30,16 +30,36 @@ export function Header({ countryCode }: HeaderProps) {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="container-wide">
         <div className="flex items-center justify-between h-16">
-          <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative z-50">
-            <div className="relative">
-              <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
-              <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {/* LEFT AREA: Logo & Mobile Login */}
+          <div className="flex items-center gap-2">
+            <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative z-50">
+              <div className="relative">
+                <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
+                <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              <div className="hidden sm:block">
+                <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">Emergency</span>
+                <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{isUS ? 'Contractors' : 'Tradesmen'}</span>
+              </div>
+            </Link>
+
+            {/* Mobile UserMenu (Log-in) */}
+            <div className="md:hidden">
+              <UserMenu />
             </div>
-            <div className="hidden sm:block">
-              <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">Emergency</span>
-              <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{isUS ? 'Contractors' : 'Tradesmen'}</span>
-            </div>
-          </Link>
+          </div>
+
+          {/* CENTER AREA (Mobile Only): Tradesmen Sign Up */}
+          <div className="absolute left-1/2 -translate-x-1/2 md:hidden z-50">
+            <Button asChild variant="outline" className="h-9 px-3.5 rounded-full border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold bg-black/40 backdrop-blur-md shadow-sm gap-2 transition-all" data-tour="tour-signup">
+              <Link to={`${countryPrefix}/pricing`}>
+                <div className="relative flex items-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gold rounded-full animate-ping" />
+                </div>
+                <span className="font-medium tracking-wide text-[11px] truncate">{signupText}</span>
+              </Link>
+            </Button>
+          </div>
 
           <nav className="hidden md:flex items-center gap-8">
             {/* Nav Links with animated underline */}
@@ -74,19 +94,13 @@ export function Header({ countryCode }: HeaderProps) {
           </nav>
 
           <div className="flex items-center gap-4">
-            <UserMenu />
+            <div className="hidden md:block">
+              <UserMenu />
+            </div>
             <ModeToggle />
 
-            {/* Mobile Menu & Pro Signup */}
+            {/* Mobile Menu */}
             <div className="md:hidden flex items-center gap-1">
-              <Button asChild variant="outline" className="h-9 px-3.5 rounded-full border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold bg-black/40 backdrop-blur-md shadow-sm gap-2 transition-all" data-tour="tour-signup">
-                <Link to={`${countryPrefix}/pricing`}>
-                  <div className="relative flex items-center">
-                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gold rounded-full animate-ping" />
-                  </div>
-                  <span className="font-medium tracking-wide text-[11px] truncate">{signupText}</span>
-                </Link>
-              </Button>
 
               <Sheet>
                 <SheetTrigger asChild>
