@@ -114,7 +114,6 @@ export function FloatingTourHub() {
     const isMobile = useIsMobile();
     const location = useLocation();
     const stepRef = useRef<number>(0);
-    const isScrollingRef = useRef(false);
     const { settings } = useLocalization();
 
     // Build the full step list based on region
@@ -193,11 +192,6 @@ export function FloatingTourHub() {
     }, []);
 
     const syncRect = useCallback(() => {
-        // Skip rect updates while page is scrolling to avoid positional snap
-        if (isScrollingRef.current) {
-            requestRef.current = requestAnimationFrame(syncRect);
-            return;
-        }
         const step = activeSteps[stepRef.current];
         const element = findVisibleTourElement(step.id);
         if (element) {
@@ -229,9 +223,6 @@ export function FloatingTourHub() {
         if (isOpen) {
             stepRef.current = currentStep;
 
-            // Pause rect tracking while scrolling to prevent positional teleport
-            isScrollingRef.current = true;
-
             // Initial scroll for the new step
             const step = activeSteps[currentStep];
             const element = findVisibleTourElement(step.id);
@@ -246,16 +237,11 @@ export function FloatingTourHub() {
                 }, 100);
             }
 
-            // Resume rect tracking after scroll completes
-            const scrollTimer = setTimeout(() => {
-                isScrollingRef.current = false;
-            }, 900);
-
-            // Start the continuous tracking loop
+            // Start the continuous tracking loop — syncRect follows the element
+            // live as the page scrolls, so the spotlight visually chases it
             requestRef.current = requestAnimationFrame(syncRect);
 
             return () => {
-                clearTimeout(scrollTimer);
                 if (requestRef.current) {
                     cancelAnimationFrame(requestRef.current);
                 }
@@ -313,13 +299,13 @@ export function FloatingTourHub() {
                                     <motion.div
                                         className="absolute top-0 left-0 right-0 bg-black/80 pointer-events-auto"
                                         animate={{ height: Math.max(0, targetRect.top - 6) }}
-                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
                                         className="absolute bottom-0 left-0 right-0 bg-black/80 pointer-events-auto"
                                         animate={{ top: targetRect.bottom + 6 }}
-                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
@@ -330,7 +316,7 @@ export function FloatingTourHub() {
                                             left: 0,
                                             width: Math.max(0, targetRect.left - 6)
                                         }}
-                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
@@ -341,7 +327,7 @@ export function FloatingTourHub() {
                                             left: targetRect.right + 6,
                                             right: 0
                                         }}
-                                        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
+                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
                                         onClick={handleSkip}
                                     />
                                 </>
