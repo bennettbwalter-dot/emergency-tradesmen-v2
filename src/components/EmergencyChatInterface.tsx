@@ -558,7 +558,7 @@ export function EmergencyChatInterface() {
             data-tour="tour-mic-button"
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
-            className={`h-12 w-[72px] md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+            className={`h-12 w-full max-w-[72px] md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
@@ -602,7 +602,7 @@ export function EmergencyChatInterface() {
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-12 w-[72px] rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
+            className={`h-12 w-full max-w-[72px] rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
         >
@@ -803,23 +803,23 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - STRICT GRID: always below the card, never inside it */}
-            <div className="md:hidden w-full mt-2 mb-6">
-                <div className="grid w-full px-4 items-center" style={{ gridTemplateColumns: '72px 1fr 1fr 72px', gap: '8px', height: '48px' }}>
-                    {/* Col 1: Mic - fixed */}
-                    <div className="w-[72px] h-12 flex items-center justify-center">
+            {/* Mobile Controls - FLEXBOX: evenly spaced, strict gap, no overlap */}
+            <div className="md:hidden w-full mt-2 mb-6 px-4">
+                <div className="flex flex-row items-center justify-evenly w-full" style={{ gap: '12px' }}>
+                    {/* Mic */}
+                    <div className="flex-1 flex items-center justify-center h-12 max-w-[72px]">
                         {micButton}
                     </div>
-                    {/* Col 2: Trade */}
-                    <div className="min-w-0 overflow-hidden h-12">
+                    {/* Trade */}
+                    <div className="flex-1 min-w-0 overflow-hidden h-12">
                         {tradeSelector}
                     </div>
-                    {/* Col 3: Location */}
-                    <div className="min-w-0 overflow-hidden h-12">
+                    {/* Location */}
+                    <div className="flex-1 min-w-0 overflow-hidden h-12">
                         {locationSelector}
                     </div>
-                    {/* Col 4: Action - fixed */}
-                    <div className="w-[72px] h-12 flex items-center justify-center">
+                    {/* Action */}
+                    <div className="flex-1 flex items-center justify-center h-12 max-w-[72px]">
                         {mobileActionButton}
                     </div>
                 </div>
