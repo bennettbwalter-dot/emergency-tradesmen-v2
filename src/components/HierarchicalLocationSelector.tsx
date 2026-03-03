@@ -197,7 +197,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         <div className={`flex flex-nowrap gap-2 items-center w-full ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger data-tour="tour-state-button" className={`h-11 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedState ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
+                <SelectTrigger data-tour="tour-state-button" className={`h-11 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedState ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
                     <Map className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
                     <div className="hidden md:block">
                         <SelectValue placeholder="State" />
@@ -223,7 +223,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             aria-expanded={cityOpen}
                             data-tour="tour-city-button"
                             className={cn(
-                                "h-11 px-0 md:px-4 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between shadow-sm shrink-0",
+                                "h-11 px-0 md:px-4 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between shadow-sm",
                                 selectedCity ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'
                             )}
                         >
@@ -272,7 +272,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* Suburb/Area Select - Only show if suburbs exist */}
             {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-11 w-12 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 shrink-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
+                    <SelectTrigger className={`h-11 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
                         <Home className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
                         <div className="hidden md:block">
                             <SelectValue placeholder="Area" />

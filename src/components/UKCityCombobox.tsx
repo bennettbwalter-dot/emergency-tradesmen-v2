@@ -35,7 +35,7 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                     role="combobox"
                     aria-expanded={open}
                     className={cn(
-                        "h-12 md:h-11 w-12 md:w-full justify-center md:justify-between rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm shrink-0",
+                        "h-12 md:h-11 w-full justify-center md:justify-between rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm shrink-0",
                         className
                     )}
                 >

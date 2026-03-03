@@ -460,7 +460,7 @@ export function EmergencyChatInterface() {
         <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
             <SelectTrigger
                 data-tour="tour-trade-button"
-                className={`h-12 w-[72px] md:h-11 md:w-full rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink-0 overflow-hidden [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 w-full md:max-w-none md:h-11 md:w-full rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 overflow-hidden [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2 min-w-0 overflow-hidden">
                     <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
@@ -516,7 +516,7 @@ export function EmergencyChatInterface() {
                     </div>
                 ) : (
                     <HierarchicalLocationSelector
-                        className="w-[72px] md:w-full"
+                        className="w-full md:max-w-none md:w-full h-12 md:h-11"
                         placeholder="City, State"
                         onLocationSelect={(record) => {
                             console.log("Loc Selected", record);
@@ -527,7 +527,7 @@ export function EmergencyChatInterface() {
                 )
             ) : (
                 <UKCityCombobox
-                    className="w-[72px] md:w-full h-12 md:h-11"
+                    className="w-full md:max-w-none md:w-full h-12 md:h-11"
                     placeholder="Select City"
                     value={detectedCity || ""}
                     onValueChange={setDetectedCity}
@@ -558,7 +558,7 @@ export function EmergencyChatInterface() {
             data-tour="tour-mic-button"
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
-            className={`h-12 w-full max-w-[72px] md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+            className={`h-12 w-full md:max-w-none md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
@@ -602,7 +602,7 @@ export function EmergencyChatInterface() {
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-12 w-full max-w-[72px] rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
+            className={`h-12 w-full md:max-w-none rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
                 ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
         >
@@ -805,21 +805,21 @@ export function EmergencyChatInterface() {
 
             {/* Mobile Controls - FLEXBOX: evenly spaced, strict gap, no overlap */}
             <div className="md:hidden w-full mt-2 mb-6 px-4">
-                <div className="flex flex-row items-center justify-evenly w-full" style={{ gap: '12px' }}>
+                <div className="flex flex-row items-center w-full" style={{ gap: '12px' }}>
                     {/* Mic */}
-                    <div className="flex-1 flex items-center justify-center h-12 max-w-[72px]">
+                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
                         {micButton}
                     </div>
                     {/* Trade */}
-                    <div className="flex-1 min-w-0 overflow-hidden h-12">
+                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
                         {tradeSelector}
                     </div>
                     {/* Location */}
-                    <div className="flex-1 min-w-0 overflow-hidden h-12">
+                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
                         {locationSelector}
                     </div>
                     {/* Action */}
-                    <div className="flex-1 flex items-center justify-center h-12 max-w-[72px]">
+                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
                         {mobileActionButton}
                     </div>
                 </div>
