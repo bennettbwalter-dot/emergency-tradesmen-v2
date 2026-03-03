@@ -805,9 +805,9 @@ export function EmergencyChatInterface() {
 
             {/* Mobile Controls - STRICT GRID: always below the card, never inside it */}
             <div className="md:hidden w-full mt-2 mb-6">
-                <div className="grid w-full px-4 items-center" style={{ gridTemplateColumns: '48px 1fr 1fr 48px', gap: '6px', height: '48px' }}>
+                <div className="grid w-full px-4 items-center" style={{ gridTemplateColumns: '72px 1fr 1fr 72px', gap: '8px', height: '48px' }}>
                     {/* Col 1: Mic - fixed */}
-                    <div className="w-[48px] h-12 flex items-center justify-center">
+                    <div className="w-[72px] h-12 flex items-center justify-center">
                         {micButton}
                     </div>
                     {/* Col 2: Trade */}
@@ -819,7 +819,7 @@ export function EmergencyChatInterface() {
                         {locationSelector}
                     </div>
                     {/* Col 4: Action - fixed */}
-                    <div className="w-[48px] h-12 flex items-center justify-center">
+                    <div className="w-[72px] h-12 flex items-center justify-center">
                         {mobileActionButton}
                     </div>
                 </div>

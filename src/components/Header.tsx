@@ -104,7 +104,7 @@ export function Header({ countryCode }: HeaderProps) {
             <div className="hidden md:block">
               <UserMenu />
             </div>
-            <div className="hidden sm:block">
+            <div className="block">
               <ModeToggle />
             </div>
 
