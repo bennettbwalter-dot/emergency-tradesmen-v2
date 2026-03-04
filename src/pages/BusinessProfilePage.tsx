@@ -254,7 +254,11 @@ export default function BusinessProfilePage() {
         "@type": "LocalBusiness",
         "@id": `https://emergencytradesmen.net/business/${business.id}`,
         name: business.name,
-        image: photos.length > 0 ? photos[0].url : undefined,
+        image: [
+            ...(photos.length > 0 ? [photos[0].url] : []),
+            `https://emergencytradesmen.net${heroBgImage}`,
+            `https://emergencytradesmen.net${representativeImage}`
+        ],
         telephone: business.phone,
         url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
         address: {
@@ -275,10 +279,10 @@ export default function BusinessProfilePage() {
 
     // Map of trade-specific representative images (trucks/vans/technicians)
     const tradeRepresentativeImages = {
-        'builder': '/images/builder/emergency-builder-female-worker.jpg', // Builder representative image
-        'roofer': '/images/roofer/emergency-roofer-female-worker.jpg', // Roofer representative image
-        'water-restoration': '/images/water-restoration/emergency-water-restoration-final-worker.jpg', // Water Restoration representative image
-        'hvac': '/images/hvac/emergency-hvac-female-worker.jpg', // HVAC representative image
+        'builder': '/images/builder/emergency-builder-female-worker.webp', // Builder representative image
+        'roofer': '/images/roofer/emergency-roofer-female-worker.webp', // Roofer representative image
+        'water-restoration': '/images/water-restoration/emergency-water-restoration-final-worker.webp', // Water Restoration representative image
+        'hvac': '/images/hvac/emergency-hvac-female-worker.webp', // HVAC representative image
         'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
         'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
         'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
@@ -291,10 +295,10 @@ export default function BusinessProfilePage() {
 
     // Map of trade-specific background hero images
     const tradeHeroBgImages = {
-        'builder': '/images/builder/emergency-builder-hero.jpg',
-        'roofer': '/images/roofer/emergency-roofer-hero.png',
-        'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.png',
-        'hvac': '/images/hvac/emergency-hvac-hero.png',
+        'builder': '/images/builder/emergency-builder-hero.webp',
+        'roofer': '/images/roofer/emergency-roofer-hero.webp',
+        'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.webp',
+        'hvac': '/images/hvac/emergency-hvac-hero.webp',
         'plumber': '/images/plumber/boiler-fix.png',
         'electrician': '/images/electrician/fusebox-fix.png',
         'locksmith': '/images/locksmith/door-lock-pick.png',
@@ -343,7 +347,7 @@ export default function BusinessProfilePage() {
                         <img
                             src={heroBgImage}
                             className="w-full h-full object-cover opacity-30 blur-[2px]"
-                            alt="Background"
+                            alt={`${business.name} - ${formattedTrade} services in ${formattedCity} background`}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
                     </div>
@@ -426,7 +430,7 @@ export default function BusinessProfilePage() {
                                     <div className="relative w-[300px] h-[200px] md:w-[500px] md:h-[350px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-700">
                                         <img
                                             src={representativeImage}
-                                            alt={`${formattedTrade} service vehicle`}
+                                            alt={`${formattedTrade} professional vehicle and equipment for ${business.name} in ${formattedCity}`}
                                             className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
