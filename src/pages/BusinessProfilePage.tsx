@@ -276,7 +276,7 @@ export default function BusinessProfilePage() {
     // Map of trade-specific representative images (trucks/vans/technicians)
     const tradeRepresentativeImages = {
         'builder': '/images/builder/emergency-builder-female-worker.jpg', // Builder representative image
-        'roofer': '/images/roofer/emergency-roofer-hero.png', // Roofer representative image
+        'roofer': '/images/roofer/emergency-roofer-female-worker.jpg', // Roofer representative image
         'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
         'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
         'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
