@@ -278,6 +278,7 @@ export default function BusinessProfilePage() {
         'builder': '/images/builder/emergency-builder-female-worker.jpg', // Builder representative image
         'roofer': '/images/roofer/emergency-roofer-female-worker.jpg', // Roofer representative image
         'water-restoration': '/images/water-restoration/emergency-water-restoration-final-worker.jpg', // Water Restoration representative image
+        'hvac': '/images/hvac/emergency-hvac-hero.png', // HVAC representative image
         'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
         'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
         'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
@@ -293,6 +294,7 @@ export default function BusinessProfilePage() {
         'builder': '/images/builder/emergency-builder-hero.jpg',
         'roofer': '/images/roofer/emergency-roofer-hero.png',
         'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.png',
+        'hvac': '/images/hvac/emergency-hvac-hero.png',
         'plumber': '/images/plumber/boiler-fix.png',
         'electrician': '/images/electrician/fusebox-fix.png',
         'locksmith': '/images/locksmith/door-lock-pick.png',
