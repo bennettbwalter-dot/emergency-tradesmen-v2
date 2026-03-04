@@ -16,6 +16,7 @@ import { Info, ExternalLink, ShieldCheck, MapPin } from "lucide-react";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 import { GlossaryBox } from "@/components/GlossaryBox";
 import { ChecklistBox } from "@/components/ChecklistBox";
+import { FairPriceCalculator } from "@/components/FairPriceCalculator";
 
 interface BlogPost {
     id: string;
@@ -664,6 +665,7 @@ export default function BlogPostPage() {
                                         })()}
 
                                         <div className="mt-12 pt-12 border-t border-border/30">
+                                            <FairPriceCalculator countryCode={settings.countryCode} />
                                             <HomeEmergencyAd />
                                         </div>
 
