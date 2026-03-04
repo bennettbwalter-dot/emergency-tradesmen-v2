@@ -424,12 +424,6 @@ export default function BusinessProfilePage() {
                                             className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-                                        {/* Overlay text on image */}
-                                        <div className="absolute bottom-6 left-6 text-left">
-                                            <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold mb-1">Local Service</p>
-                                            <p className="text-white text-lg font-display italic">24/7 Response Vehicle</p>
-                                        </div>
                                     </div>
 
                                     {/* Flashing Light Effect (Simulating emergency lights) */}
