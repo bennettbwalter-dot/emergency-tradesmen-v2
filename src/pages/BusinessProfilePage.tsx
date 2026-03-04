@@ -287,6 +287,7 @@ export default function BusinessProfilePage() {
 
     // Map of trade-specific background hero images
     const tradeHeroBgImages = {
+        'builder': '/images/builder/emergency-builder-hero.jpg',
         'plumber': '/images/plumber/boiler-fix.png',
         'electrician': '/images/electrician/fusebox-fix.png',
         'locksmith': '/images/locksmith/door-lock-pick.png',
