@@ -277,6 +277,7 @@ export default function BusinessProfilePage() {
     const tradeRepresentativeImages = {
         'builder': '/images/builder/emergency-builder-female-worker.jpg', // Builder representative image
         'roofer': '/images/roofer/emergency-roofer-female-worker.jpg', // Roofer representative image
+        'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.png', // Water Restoration representative image
         'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
         'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
         'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
@@ -291,6 +292,7 @@ export default function BusinessProfilePage() {
     const tradeHeroBgImages = {
         'builder': '/images/builder/emergency-builder-hero.jpg',
         'roofer': '/images/roofer/emergency-roofer-hero.png',
+        'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.png',
         'plumber': '/images/plumber/boiler-fix.png',
         'electrician': '/images/electrician/fusebox-fix.png',
         'locksmith': '/images/locksmith/door-lock-pick.png',
