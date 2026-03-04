@@ -277,7 +277,7 @@ export default function BusinessProfilePage() {
     const tradeRepresentativeImages = {
         'builder': '/images/builder/emergency-builder-female-worker.jpg', // Builder representative image
         'roofer': '/images/roofer/emergency-roofer-female-worker.jpg', // Roofer representative image
-        'water-restoration': '/images/water-restoration/emergency-water-restoration-v2-worker.jpg', // Water Restoration representative image
+        'water-restoration': '/images/water-restoration/emergency-water-restoration-final-worker.jpg', // Water Restoration representative image
         'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
         'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
         'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
