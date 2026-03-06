@@ -55,7 +55,8 @@ export function TradesmenScroll() {
             const newWidth = imgWidth * ratio;
             const newHeight = imgHeight * ratio;
 
-            const x = (canvasWidth - newWidth) / 2;
+            // Offset to the left so he's not behind the scrolling text
+            const x = ((canvasWidth - newWidth) / 2) - (canvasWidth * 0.15);
             const y = (canvasHeight - newHeight) / 2;
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
