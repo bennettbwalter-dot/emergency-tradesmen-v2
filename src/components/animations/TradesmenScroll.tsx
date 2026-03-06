@@ -123,19 +123,39 @@ export function TradesmenScroll() {
                     }
                 }
 
-                // Pass 2: Apply the hull mask. 
-                // Everything outside the bounds is erased. Everything inside is preserved 100% opaque.
+                // Pass 2: Apply the hull mask with edge feathering. 
+                // A hard binary mask looks blocky and catches dark video noise, which looks awful on a white background.
+                // Solution: Make the core body 100% opaque to block text, but apply a luma feather at the silhouette edges.
                 for (let py = 0; py < canvasHeight; py++) {
-                    const left = leftMargins[py] - 5; // Expand buffer outward to capture soft hair tips
-                    const right = rightMargins[py] + 5;
+                    const left = leftMargins[py];
+                    const right = rightMargins[py];
                     for (let px = 0; px < canvasWidth; px++) {
                         const i = (py * canvasWidth + px) * 4;
-                        if (px < left || px > right) {
-                            data[i + 3] = 0; // Pure transparent background
-                        } else {
-                            // Inside tradesman! No holes, no gaps, no bleeding text.
-                            // Even if it's pure black gap from an armpit, it stays opaque and blocks text.
+
+                        if (px < left - 2 || px > right + 2) {
+                            // Far outside: guaranteed background
+                            data[i + 3] = 0;
+                        } else if (px > left + 12 && px < right - 12) {
+                            // Deep inside: guaranteed body/clothing (no holes)
                             data[i + 3] = 255;
+                        } else {
+                            // Silhouette Edge Zone (Anti-aliasing)
+                            // We use the pixel's brightness to smoothly fade the jagged edge into the background.
+                            // This eradicates the blocky aura of compression noise without creating holes inside him.
+                            const r = data[i];
+                            const g = data[i + 1];
+                            const b = data[i + 2];
+                            const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+                            // Background noise is usually < 25 luma. Solid edges are usually > 75 luma.
+                            if (luma < 25) {
+                                data[i + 3] = 0;
+                            } else if (luma > 75) {
+                                data[i + 3] = 255;
+                            } else {
+                                // Smooth alpha gradient for the pixels in between
+                                data[i + 3] = Math.floor(((luma - 25) / 50) * 255);
+                            }
                         }
                     }
                 }
