@@ -71,42 +71,25 @@ export function TradesmenScroll() {
                 const data = imageData.data;
                 const len = data.length;
 
-                // Sample the background color from the very top-left corner of the drawn image area
-                // This is the most reliable place to find the studio background.
-                const sampleX = Math.min(Math.max(Math.floor(x) + 10, 0), canvasWidth - 1);
-                const sampleY = Math.min(Math.max(Math.floor(y) + 10, 0), canvasHeight - 1);
+                // The video frames have a consistent dark studio background color.
+                // We don't need to dynamically sample it, which breaks when the image is scaled off-screen on mobile.
 
-                const sampleIndex = (sampleY * canvasWidth + sampleX) * 4;
-                const bgR = data[sampleIndex];
-                const bgG = data[sampleIndex + 1];
-                const bgB = data[sampleIndex + 2];
+                for (let i = 0; i < len; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
 
-                // Only process if we successfully sampled something non-transparent
-                if (data[sampleIndex + 3] > 0) {
-                    for (let i = 0; i < len; i += 4) {
-                        const r = data[i];
-                        const g = data[i + 1];
-                        const b = data[i + 2];
-
-                        // Luma check: The tradesman is lit, the background is near-black.
+                    // Simple check: If the pixel is very dark (close to black), it's the studio background.
+                    // The tradesman is well-lit, so his pixels will not meet all these criteria simultaneously.
+                    if (r < 30 && g < 30 && b < 30) {
+                        // Optional: Calculate luma to preserve dark shadows that aren't quite the background
                         const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-                        // Ultra-strict background matching:
-                        // 1. Must be extremely dark (luma < 20)
-                        // 2. Must be nearly identical to the sampled background color (tolerance 4)
-                        const isBack = luma < 20 &&
-                            Math.abs(r - bgR) <= 4 &&
-                            Math.abs(g - bgG) <= 4 &&
-                            Math.abs(b - bgB) <= 4;
-
-                        if (isBack) {
-                            data[i + 3] = 0; // Completely transparent
-                        } else {
-                            data[i + 3] = 255; // Completely opaque character
+                        if (luma < 25) {
+                            data[i + 3] = 0; // Make background transparent
                         }
                     }
-                    context.putImageData(imageData, 0, 0);
                 }
+                context.putImageData(imageData, 0, 0);
             } catch (err) {
                 // Silently bypass cross-origin errors if loaded from external CDN
             }
