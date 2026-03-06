@@ -79,16 +79,42 @@ export function TradesmenScroll() {
                     const g = data[i + 1];
                     const b = data[i + 2];
 
-                    // In light mode, any remaining dark pixels look like a black box.
-                    // Broaden the check to catch compression artifacts near the tradesman.
-                    if (r < 75 && g < 75 && b < 75) {
-                        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-                        if (luma < 45) {
-                            data[i + 3] = 0; // Completely remove dark background
-                        } else if (luma < 65) {
-                            // Feather the edge (anti-aliasing) to prevent jagged outlines
-                            data[i + 3] = Math.max(0, (luma - 45) * (255 / 20));
-                        }
+                    const px = (i / 4) % canvasWidth;
+                    const py = Math.floor((i / 4) / canvasWidth);
+
+                    // Skip pixels completely outside the drawn image area
+                    if (px < x || px > x + newWidth || py < y || py > y + newHeight) {
+                        continue;
+                    }
+
+                    const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
+                    const relY = (py - y) / newHeight; // 0.0 to 1.0 inside image
+
+                    // Spatial distance from spine/center of face
+                    let dist = 1.0;
+                    if (relY < 0.3) {
+                        // Top hemisphere (head area)
+                        dist = Math.sqrt(Math.pow(relX - 0.5, 2) + Math.pow((relY - 0.3) * 1.5, 2));
+                    } else {
+                        // Cylinder (body area)
+                        dist = Math.abs(relX - 0.5);
+                    }
+
+                    // Map distance to an adaptive threshold
+                    // Core tradesman (dist < 0.18): Threshold = 10 (Ultra-strict, saves his hair R=16)
+                    // Outer background (dist > 0.40): Threshold = 65 (Loose, kills edge noise R=50)
+                    let threshold = 65;
+                    if (dist < 0.18) {
+                        threshold = 10;
+                    } else if (dist < 0.40) {
+                        // Smoothly blend the threshold
+                        const t = (dist - 0.18) / (0.40 - 0.18);
+                        threshold = 10 + t * (65 - 10);
+                    }
+
+                    // If the pixel is darker than the spatial threshold, it's the background.
+                    if (r < threshold && g < threshold && b < threshold) {
+                        data[i + 3] = 0; // Remove background
                     }
                 }
                 context.putImageData(imageData, 0, 0);
