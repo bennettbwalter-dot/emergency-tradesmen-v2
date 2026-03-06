@@ -773,7 +773,7 @@ export function EmergencyChatInterface() {
                                     onBlur={() => setIsFocused(false)}
                                     placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
                                     data-tour="tour-chat-input"
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/30 resize-none font-light tracking-wide"
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
                                     style={{ minHeight: '140px' }}
                                 />
                             )}

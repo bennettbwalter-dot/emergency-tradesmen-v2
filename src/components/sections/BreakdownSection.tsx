@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { TradesmenScroll } from "@/components/animations/TradesmenScroll";
 
 export function BreakdownSection() {
     const { settings } = useLocalization();
@@ -55,6 +56,9 @@ export function BreakdownSection() {
                     </div>
                 </div>
             </div>
+
+            {/* Tradesmen Video Animation Scroll Integration */}
+            <TradesmenScroll />
         </section>
     );
 }

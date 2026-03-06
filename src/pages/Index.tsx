@@ -22,7 +22,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 const EmergencyServicesSection = lazy(() => import("@/components/sections/EmergencyServicesSection").then(module => ({ default: module.EmergencyServicesSection })));
 const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSection").then(module => ({ default: module.SEOContentSection })));
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
-const VisibilitySection = lazy(() => import("@/components/sections/VisibilitySection").then(module => ({ default: module.VisibilitySection })));
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(module => ({ default: module.CTASection })));
 
 const Index = () => {
@@ -77,10 +76,6 @@ const Index = () => {
 
           <Suspense fallback={<div className="h-96 w-full" />}>
             <BreakdownSection />
-          </Suspense>
-
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <VisibilitySection />
           </Suspense>
 
           <Suspense fallback={<div className="h-96 w-full" />}>
