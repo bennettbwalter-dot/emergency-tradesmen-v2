@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import { SEO } from "@/components/SEO";
 import { AdSlot } from "@/components/AdSlot";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight, Phone } from "lucide-react";
+import { ArrowLeft, CalendarDays, Share2, Clock, ChevronRight, Phone, ListOrdered } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useSimpleTheme } from "@/components/simple-theme";
@@ -40,9 +40,14 @@ export default function BlogPostPage() {
     const { slug } = useParams();
     const routerNavigate = useNavigate();
     const [post, setPost] = useState<BlogPost | null>(null);
+    const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [showStickyBar, setShowStickyBar] = useState(false);
     const [debugInfo, setDebugInfo] = useState<any>({}); // For troubleshooting 404s
+
+    const generateId = (text: string) => {
+        return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    };
 
     const regionalizeText = (text: string) => {
         if (!text || settings.countryCode !== 'US') return text;
@@ -259,6 +264,29 @@ export default function BlogPostPage() {
 
         loadPost();
     }, [slug, settings.countryCode]);
+
+    useEffect(() => {
+        async function loadRelated() {
+            if (!post) return;
+            let query = supabase
+                .from('posts')
+                .select('title, slug, cover_image, excerpt, published_at')
+                .eq('published', true)
+                .neq('slug', post.slug)
+                .order('published_at', { ascending: false })
+                .limit(3);
+
+            if (settings.countryCode === 'US') {
+                query = query.ilike('slug', '%-us');
+            } else {
+                query = query.not('slug', 'ilike', '%-us');
+            }
+
+            const { data } = await query;
+            if (data) setRelatedPosts(data as BlogPost[]);
+        }
+        loadRelated();
+    }, [post?.slug, settings.countryCode]);
 
     if (isLoading) {
         return (
@@ -574,9 +602,41 @@ export default function BlogPostPage() {
                                                 // We'll render the AI Overview separately below
                                             }
 
+                                            // Extract Table of Contents
+                                            const headings: { level: number, title: string, id: string }[] = [];
+                                            const headingRegex = /^(##|###)\s+(.+)$/gm;
+                                            let headingMatch;
+                                            while ((headingMatch = headingRegex.exec(processedMarkdown)) !== null) {
+                                                const title = regionalizeText(headingMatch[2].trim());
+                                                headings.push({
+                                                    level: headingMatch[1].length,
+                                                    title: title,
+                                                    id: generateId(title)
+                                                });
+                                            }
+
                                             return (
                                                 <>
                                                     {isSnippet && <AIOverviewBox content={regionalizeText(firstParagraph.replace(/\*\*/g, '').replace(/_/g, ''))} />}
+
+                                                    {headings.length > 0 && (
+                                                        <div className="bg-secondary/10 border border-border/50 rounded-xl p-6 md:p-8 mb-12 shadow-sm">
+                                                            <h3 className="font-display font-semibold text-[18px] mb-4 text-foreground flex items-center gap-2">
+                                                                <ListOrdered className="w-5 h-5 text-gold" />
+                                                                Table of Contents
+                                                            </h3>
+                                                            <ul className="space-y-3">
+                                                                {headings.map((h, i) => (
+                                                                    <li key={i} className={h.level === 3 ? "ml-6 text-sm" : "font-medium text-[15px]"}>
+                                                                        <a href={`#${h.id}`} className="text-muted-foreground hover:text-gold transition-colors hover:underline flex items-center gap-2">
+                                                                            {h.level === 3 && <ChevronRight className="w-3 h-3 text-gold/50" />}
+                                                                            {h.title}
+                                                                        </a>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
 
                                                     <ReactMarkdown
                                                         remarkPlugins={[remarkGfm]}
@@ -584,12 +644,16 @@ export default function BlogPostPage() {
                                                             h1: ({ node, ...props }) => (
                                                                 <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
                                                             ),
-                                                            h2: ({ node, ...props }) => (
-                                                                <h2 {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground" />
-                                                            ),
-                                                            h3: ({ node, ...props }) => (
-                                                                <h3 {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground" />
-                                                            ),
+                                                            h2: ({ node, children, ...props }) => {
+                                                                const text = String(children);
+                                                                const id = generateId(regionalizeText(text));
+                                                                return <h2 id={id} {...props} className="font-semibold text-[22px] md:text-[32px] leading-[1.3] mt-12 mb-6 text-foreground scroll-m-24">{children}</h2>;
+                                                            },
+                                                            h3: ({ node, children, ...props }) => {
+                                                                const text = String(children);
+                                                                const id = generateId(regionalizeText(text));
+                                                                return <h3 id={id} {...props} className="font-medium text-[18px] md:text-[24px] leading-[1.3] mt-8 mb-4 text-foreground scroll-m-24">{children}</h3>;
+                                                            },
                                                             p: ({ node, ...props }) => (
                                                                 <p {...props} className="font-normal text-[15px] md:text-[18px] leading-[1.6] md:leading-[1.8] mb-6 text-foreground/90" />
                                                             ),
@@ -679,6 +743,34 @@ export default function BlogPostPage() {
                         <div className="container mx-auto px-4 max-w-4xl py-6">
                             <AdSlot slot="AD_SLOT_BLOG_BOTTOM" format="rectangle" />
                         </div>
+
+                        {relatedPosts.length > 0 && (
+                            <div className="container mx-auto px-4 max-w-4xl py-12 border-t border-border/50">
+                                <h3 className="text-2xl font-display font-bold text-foreground mb-8">Related Articles</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {relatedPosts.map((related) => (
+                                        <Link key={related.slug} to={`${countryPrefix}/blog/${related.slug}`} className="group block">
+                                            <div className="aspect-[16/9] rounded-xl overflow-hidden bg-secondary/30 mb-4 border border-border/50">
+                                                {related.cover_image && (
+                                                    <img
+                                                        src={related.cover_image}
+                                                        alt={regionalizeText(related.title)}
+                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                        loading="lazy"
+                                                    />
+                                                )}
+                                            </div>
+                                            <h4 className="font-semibold text-lg leading-snug group-hover:text-gold transition-colors line-clamp-2 mb-2">
+                                                {regionalizeText(related.title)}
+                                            </h4>
+                                            <p className="text-sm text-muted-foreground line-clamp-2">
+                                                {regionalizeText(related.excerpt)}
+                                            </p>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Internal Links Section — Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
                         {(() => {
