@@ -71,50 +71,72 @@ export function TradesmenScroll() {
                 const data = imageData.data;
                 const len = data.length;
 
-                // The video frames have a consistent dark studio background color.
-                // We don't need to dynamically sample it, which breaks when the image is scaled off-screen on mobile.
+                const leftMargins = new Int32Array(canvasHeight).fill(canvasWidth);
+                const rightMargins = new Int32Array(canvasHeight).fill(0);
 
-                for (let i = 0; i < len; i += 4) {
-                    const r = data[i];
-                    const g = data[i + 1];
-                    const b = data[i + 2];
+                // Start searching inward from 15% to bypass outer edge compression noise
+                const startX = Math.floor(x + newWidth * 0.15);
+                const endX = Math.floor(x + newWidth * 0.85);
+                const minY = Math.floor(y);
+                const maxY = Math.floor(y + newHeight);
 
-                    const px = (i / 4) % canvasWidth;
-                    const py = Math.floor((i / 4) / canvasWidth);
+                // Pass 1: Row by row margin detection
+                for (let py = Math.max(0, minY); py < Math.min(canvasHeight, maxY); py++) {
+                    let foundLeft = false;
+                    let consecutiveLeft = 0;
 
-                    // Skip pixels completely outside the drawn image area
-                    if (px < x || px > x + newWidth || py < y || py > y + newHeight) {
-                        continue;
+                    // Scan left-to-right to find left solid edge
+                    for (let px = startX; px <= endX; px++) {
+                        const i = (py * canvasWidth + px) * 4;
+                        if (data[i] > 18 || data[i + 1] > 18 || data[i + 2] > 18) {
+                            consecutiveLeft++;
+                            if (consecutiveLeft >= 2) {
+                                leftMargins[py] = px - 1;
+                                foundLeft = true;
+                                break;
+                            }
+                        } else {
+                            consecutiveLeft = 0;
+                        }
                     }
 
-                    const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
-                    const relY = (py - y) / newHeight; // 0.0 to 1.0 inside image
-
-                    // Spatial distance from spine/center of face
-                    let dist = 1.0;
-                    if (relY < 0.3) {
-                        // Top hemisphere (head area)
-                        dist = Math.sqrt(Math.pow(relX - 0.5, 2) + Math.pow((relY - 0.3) * 1.5, 2));
-                    } else {
-                        // Cylinder (body area)
-                        dist = Math.abs(relX - 0.5);
+                    if (foundLeft) {
+                        let consecutiveRight = 0;
+                        // Scan right-to-left to find right solid edge
+                        for (let px = endX; px >= startX; px--) {
+                            const i = (py * canvasWidth + px) * 4;
+                            if (data[i] > 18 || data[i + 1] > 18 || data[i + 2] > 18) {
+                                consecutiveRight++;
+                                if (consecutiveRight >= 2) {
+                                    rightMargins[py] = px + 1;
+                                    break;
+                                }
+                            } else {
+                                consecutiveRight = 0;
+                            }
+                        }
+                    } else if (py > minY + newHeight * 0.4) {
+                        // If we are deep into the body but it's completely black (shadows/fades),
+                        // enforce a solid central pillar so the text doesn't poke through his lower half.
+                        leftMargins[py] = Math.floor(x + newWidth * 0.35);
+                        rightMargins[py] = Math.floor(x + newWidth * 0.65);
                     }
+                }
 
-                    // Map distance to an adaptive threshold
-                    // Core tradesman (dist < 0.18): Threshold = 10 (Ultra-strict, saves his hair R=16)
-                    // Outer background (dist > 0.40): Threshold = 65 (Loose, kills edge noise R=50)
-                    let threshold = 65;
-                    if (dist < 0.18) {
-                        threshold = 10;
-                    } else if (dist < 0.40) {
-                        // Smoothly blend the threshold
-                        const t = (dist - 0.18) / (0.40 - 0.18);
-                        threshold = 10 + t * (65 - 10);
-                    }
-
-                    // If the pixel is darker than the spatial threshold, it's the background.
-                    if (r < threshold && g < threshold && b < threshold) {
-                        data[i + 3] = 0; // Remove background
+                // Pass 2: Apply the hull mask. 
+                // Everything outside the bounds is erased. Everything inside is preserved 100% opaque.
+                for (let py = 0; py < canvasHeight; py++) {
+                    const left = leftMargins[py] - 5; // Expand buffer outward to capture soft hair tips
+                    const right = rightMargins[py] + 5;
+                    for (let px = 0; px < canvasWidth; px++) {
+                        const i = (py * canvasWidth + px) * 4;
+                        if (px < left || px > right) {
+                            data[i + 3] = 0; // Pure transparent background
+                        } else {
+                            // Inside tradesman! No holes, no gaps, no bleeding text.
+                            // Even if it's pure black gap from an armpit, it stays opaque and blocks text.
+                            data[i + 3] = 255;
+                        }
                     }
                 }
                 context.putImageData(imageData, 0, 0);
