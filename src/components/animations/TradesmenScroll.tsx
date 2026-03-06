@@ -71,91 +71,68 @@ export function TradesmenScroll() {
                 const data = imageData.data;
                 const len = data.length;
 
-                const leftMargins = new Int32Array(canvasHeight).fill(canvasWidth);
-                const rightMargins = new Int32Array(canvasHeight).fill(0);
+                // The convex hull algorithm caught noisy video compression artifacts, creating jagged polygon edges.
+                // We are replacing it with a smooth "Elliptical Spatial Mask".
+                // This draws a mathematical ellipse around his body. Inside the ellipse, we keep everything (saving dark hair/shadows).
+                // Outside the ellipse, we aggressively erase the dark compression noise.
 
-                // Start searching inward from 15% to bypass outer edge compression noise
-                const startX = Math.floor(x + newWidth * 0.15);
-                const endX = Math.floor(x + newWidth * 0.85);
-                const minY = Math.floor(y);
-                const maxY = Math.floor(y + newHeight);
+                for (let i = 0; i < len; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
 
-                // Pass 1: Row by row margin detection
-                for (let py = Math.max(0, minY); py < Math.min(canvasHeight, maxY); py++) {
-                    let foundLeft = false;
-                    let consecutiveLeft = 0;
+                    const px = (i / 4) % canvasWidth;
+                    const py = Math.floor((i / 4) / canvasWidth);
 
-                    // Scan left-to-right to find left solid edge
-                    for (let px = startX; px <= endX; px++) {
-                        const i = (py * canvasWidth + px) * 4;
-                        if (data[i] > 18 || data[i + 1] > 18 || data[i + 2] > 18) {
-                            consecutiveLeft++;
-                            if (consecutiveLeft >= 2) {
-                                leftMargins[py] = px - 1;
-                                foundLeft = true;
-                                break;
-                            }
-                        } else {
-                            consecutiveLeft = 0;
-                        }
+                    // Skip pixels completely outside the drawn image area
+                    if (px < x || px > x + newWidth || py < y || py > y + newHeight) {
+                        data[i + 3] = 0; // Force transparent outer space
+                        continue;
                     }
 
-                    if (foundLeft) {
-                        let consecutiveRight = 0;
-                        // Scan right-to-left to find right solid edge
-                        for (let px = endX; px >= startX; px--) {
-                            const i = (py * canvasWidth + px) * 4;
-                            if (data[i] > 18 || data[i + 1] > 18 || data[i + 2] > 18) {
-                                consecutiveRight++;
-                                if (consecutiveRight >= 2) {
-                                    rightMargins[py] = px + 1;
-                                    break;
-                                }
-                            } else {
-                                consecutiveRight = 0;
-                            }
-                        }
-                    } else if (py > minY + newHeight * 0.4) {
-                        // If we are deep into the body but it's completely black (shadows/fades),
-                        // enforce a solid central pillar so the text doesn't poke through his lower half.
-                        leftMargins[py] = Math.floor(x + newWidth * 0.35);
-                        rightMargins[py] = Math.floor(x + newWidth * 0.65);
-                    }
-                }
+                    const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
+                    const relY = (py - y) / newHeight; // 0.0 to 1.0 inside image
 
-                // Pass 2: Apply the hull mask with edge feathering. 
-                // A hard binary mask looks blocky and catches dark video noise, which looks awful on a white background.
-                // Solution: Make the core body 100% opaque to block text, but apply a luma feather at the silhouette edges.
-                for (let py = 0; py < canvasHeight; py++) {
-                    const left = leftMargins[py];
-                    const right = rightMargins[py];
-                    for (let px = 0; px < canvasWidth; px++) {
-                        const i = (py * canvasWidth + px) * 4;
+                    // Spatial distance from spine (X=0.5).
+                    // We widen the ellipse towards the bottom to encompass his broad shoulders and legs.
+                    const expectedWidth = 0.15 + (relY * 0.18);
+                    const distFromCenterline = Math.abs(relX - 0.5);
 
-                        if (px < left - 2 || px > right + 2) {
-                            // Far outside: guaranteed background
+                    // Normalized distance from center spine. 
+                    // 0.0 = Dead center. 1.0 = Edge of his body. >1.0 = Outer background video noise.
+                    const dist = distFromCenterline / expectedWidth;
+
+                    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+                    if (dist < 0.8) {
+                        // Core body. Ultra strict. We only delete absolute pure black (gaps in arms).
+                        // This guarantees his hair and dark jacket shadows remain opaque.
+                        if (luma < 5) {
                             data[i + 3] = 0;
-                        } else if (px > left + 12 && px < right - 12) {
-                            // Deep inside: guaranteed body/clothing (no holes)
+                        } else {
+                            data[i + 3] = 255;
+                        }
+                    } else if (dist > 1.3) {
+                        // Outer background video bounds. Loose. Kill all dark grey compression box noise.
+                        if (luma < 75) {
+                            data[i + 3] = 0;
+                        } else {
+                            // If he reaches his arm out (bright pixel), it will still show.
+                            data[i + 3] = 255;
+                        }
+                    } else {
+                        // Anti-aliased transition edge. 
+                        // Smoothly ramp the threshold from strict (5) to loose (75).
+                        const blend = (dist - 0.8) / (1.3 - 0.8);
+                        const threshold = 5 + (70 * blend);
+
+                        // Feather the direct edge pixels for a polished cutout on white backgrounds
+                        if (luma < threshold - 15) {
+                            data[i + 3] = 0;
+                        } else if (luma > threshold + 15) {
                             data[i + 3] = 255;
                         } else {
-                            // Silhouette Edge Zone (Anti-aliasing)
-                            // We use the pixel's brightness to smoothly fade the jagged edge into the background.
-                            // This eradicates the blocky aura of compression noise without creating holes inside him.
-                            const r = data[i];
-                            const g = data[i + 1];
-                            const b = data[i + 2];
-                            const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-                            // Background noise is usually < 25 luma. Solid edges are usually > 75 luma.
-                            if (luma < 25) {
-                                data[i + 3] = 0;
-                            } else if (luma > 75) {
-                                data[i + 3] = 255;
-                            } else {
-                                // Smooth alpha gradient for the pixels in between
-                                data[i + 3] = Math.floor(((luma - 25) / 50) * 255);
-                            }
+                            data[i + 3] = Math.floor(((luma - (threshold - 15)) / 30) * 255);
                         }
                     }
                 }
