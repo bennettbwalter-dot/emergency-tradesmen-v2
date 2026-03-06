@@ -15,7 +15,8 @@ import {
     Settings,
     Download,
     Edit3,
-    BarChart3
+    BarChart3,
+    Mail
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -55,6 +56,8 @@ export function AdminLayout() {
         { path: "/admin/subscriptions", icon: FileText, label: "Subscriptions" },
         { path: "/admin/reviews", icon: Star, label: "Reviews" },
         { path: "/admin/photos", icon: Image, label: "Photos" },
+        { path: "/admin/analytics", icon: BarChart3, label: "Analytics" },
+        { path: "/admin/email-outreach", icon: Mail, label: "Email Campaigns" },
         { path: "/admin/export", icon: Download, label: "Data Export" },
     ];
 

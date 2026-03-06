@@ -62,6 +62,8 @@ const SubscriptionsPage = lazy(() => import("./pages/admin/Subscriptions"));
 const AdminAvailability = lazy(() => import("./pages/admin/Availability"));
 const AdminProfileEditor = lazy(() => import("./pages/admin/ProfileEditor"));
 const DataExportPage = lazy(() => import("./pages/admin/DataExportPage"));
+const AnalyticsPage = lazy(() => import("./pages/admin/Analytics"));
+const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -247,6 +249,8 @@ const App = () => {
                                 <Route path="reviews" element={<ReviewsPage />} />
                                 <Route path="subscriptions" element={<SubscriptionsPage />} />
                                 <Route path="export" element={<DataExportPage />} />
+                                <Route path="analytics" element={<AnalyticsPage />} />
+                                <Route path="email-outreach" element={<EmailOutreachDashboard />} />
                               </Route>
 
                               <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
