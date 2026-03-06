@@ -21,7 +21,6 @@ export function TradesmenScroll() {
     const containerRef = useRef<HTMLDivElement>(null);
     const horizontalTextRef = useRef<HTMLHeadingElement>(null);
     const verticalTextRef = useRef<HTMLDivElement>(null);
-    const bgRef = useRef<HTMLDivElement>(null);
     const videoSequence = useRef({ frame: 0 });
     const imagesRef = useRef<HTMLImageElement[]>([]);
 
@@ -55,8 +54,8 @@ export function TradesmenScroll() {
             const newWidth = imgWidth * ratio;
             const newHeight = imgHeight * ratio;
 
-            // Offset to the left so he's not behind the scrolling text
-            const x = ((canvasWidth - newWidth) / 2) - (canvasWidth * 0.15);
+            // Offset to the right so he's not behind the scrolling text
+            const x = ((canvasWidth - newWidth) / 2) + (canvasWidth * 0.20);
             const y = (canvasHeight - newHeight) / 2;
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -68,26 +67,26 @@ export function TradesmenScroll() {
                 const data = imageData.data;
                 const len = data.length;
 
-                // Sample the background color from the top-left of the drawn image
-                const sampleX = Math.floor(x) + 10;
-                const sampleY = Math.floor(y) + 10;
+                // Sample the background color from a safe point that's likely inside the drawn image area
+                // but away from the center (where the tradesman is). 
+                // We clamp the sample coordinates to the visible canvas area.
+                const sampleX = Math.min(Math.max(Math.floor(x) + 40, 0), canvasWidth - 1);
+                const sampleY = Math.min(Math.max(Math.floor(y) + 40, 0), canvasHeight - 1);
 
-                // Ensure we don't read out of bounds
-                if (sampleX >= 0 && sampleX < canvasWidth && sampleY >= 0 && sampleY < canvasHeight) {
-                    const sampleIndex = (sampleY * canvasWidth + sampleX) * 4;
-                    const bgR = data[sampleIndex];
-                    const bgG = data[sampleIndex + 1];
-                    const bgB = data[sampleIndex + 2];
+                const sampleIndex = (sampleY * canvasWidth + sampleX) * 4;
+                const bgR = data[sampleIndex];
+                const bgG = data[sampleIndex + 1];
+                const bgB = data[sampleIndex + 2];
 
-                    // Only process if we successfully sampled a color
+                // Only process if we successfully sampled something non-transparent
+                if (data[sampleIndex + 3] > 0) {
                     for (let i = 0; i < len; i += 4) {
                         const r = data[i];
                         const g = data[i + 1];
                         const b = data[i + 2];
 
-                        // Strict tolerance matching exactly the sampled background corner
-                        // This prevents bleeding through the tradesman's dark hair or clothing
-                        if (Math.abs(r - bgR) <= 8 && Math.abs(g - bgG) <= 8 && Math.abs(b - bgB) <= 8) {
+                        // Match the background with a slightly more generous tolerance
+                        if (Math.abs(r - bgR) <= 15 && Math.abs(g - bgG) <= 15 && Math.abs(b - bgB) <= 15) {
                             data[i + 3] = 0; // Set Alpha to 0 (Transparent)
                         }
                     }
@@ -124,7 +123,7 @@ export function TradesmenScroll() {
             scrollTrigger: {
                 trigger: container,
                 start: "top top",
-                end: "+=400%", // Shortened duration so the site reliably continues
+                end: "+=300%", // Give it enough scroll distance to fully play out without cutting off
                 pin: true,
                 scrub: 1,
             }
@@ -143,17 +142,10 @@ export function TradesmenScroll() {
         tl.fromTo(horizontalTextRef.current, {
             x: "0vw",
         }, {
-            x: "-150vw", // Move horizontally far to the left
+            x: "-180vw", // Move further left so "Get Seen" fully reaches the text box
             ease: "none",
             duration: 10,
         }, 0);
-
-        // 3. Darken the background slightly as we near the text
-        tl.to(bgRef.current, {
-            opacity: 0.8,
-            duration: 4,
-            ease: "power2.inOut",
-        }, 4);
 
         // 4. Reveal the vertical text from the bottom
         tl.to(verticalTextRef.current, {
@@ -182,18 +174,15 @@ export function TradesmenScroll() {
                     className="text-white/90 font-display font-bold text-[8rem] md:text-[12rem] whitespace-nowrap tracking-widest pl-[100vw]"
                 >
                     <span className="text-gold font-bold uppercase tracking-[0.2em] text-[5rem] md:text-[8rem] align-middle mr-16">For Tradesmen</span>
-                    Get Seen, Get Hired.
+                    Get Seen.
                 </h2>
             </div>
 
             {/* Canvas layer (z-10, above text) */}
             <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover z-10" />
 
-            {/* Darken overlay for better reading (z-20) */}
-            <div ref={bgRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-20" />
-
-            {/* Vertical scrolling content (placed at bottom) */}
-            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end p-6 md:p-16 pb-[10vh] pointer-events-none z-20">
+            {/* Vertical scrolling content (placed at bottom, aligned left) */}
+            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-6 md:p-16 pb-[10vh] pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
                     className="max-w-2xl bg-[#090909]/80 backdrop-blur-md border border-gold/20 p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/50"
