@@ -85,9 +85,17 @@ export function TradesmenScroll() {
                         const g = data[i + 1];
                         const b = data[i + 2];
 
-                        // Match the background with a slightly more generous tolerance
-                        if (Math.abs(r - bgR) <= 15 && Math.abs(g - bgG) <= 15 && Math.abs(b - bgB) <= 15) {
-                            data[i + 3] = 0; // Set Alpha to 0 (Transparent)
+                        // Luma check: The tradesman is significantly brighter than the dark studio background.
+                        // By checking luma and color distance together, we ensure we only remove the background.
+                        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+                        // Tightened parameters to ensure the tradesman's head/hair remains solid.
+                        // luma < 35: Only target very dark pixels (background).
+                        // tolerance <= 8: Only remove colors very close to our sampled background.
+                        if (luma < 35 && Math.abs(r - bgR) <= 8 && Math.abs(g - bgG) <= 8 && Math.abs(b - bgB) <= 8) {
+                            data[i + 3] = 0; // Transparent
+                        } else {
+                            data[i + 3] = 255; // Force solid opacity for the character
                         }
                     }
                     context.putImageData(imageData, 0, 0);
