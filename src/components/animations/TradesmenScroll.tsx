@@ -79,13 +79,15 @@ export function TradesmenScroll() {
                     const g = data[i + 1];
                     const b = data[i + 2];
 
-                    // Simple check: If the pixel is very dark (close to black), it's the studio background.
-                    // The tradesman is well-lit, so his pixels will not meet all these criteria simultaneously.
-                    if (r < 30 && g < 30 && b < 30) {
-                        // Optional: Calculate luma to preserve dark shadows that aren't quite the background
+                    // In light mode, any remaining dark pixels look like a black box.
+                    // Broaden the check to catch compression artifacts near the tradesman.
+                    if (r < 75 && g < 75 && b < 75) {
                         const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-                        if (luma < 25) {
-                            data[i + 3] = 0; // Make background transparent
+                        if (luma < 45) {
+                            data[i + 3] = 0; // Completely remove dark background
+                        } else if (luma < 65) {
+                            // Feather the edge (anti-aliasing) to prevent jagged outlines
+                            data[i + 3] = Math.max(0, (luma - 45) * (255 / 20));
                         }
                     }
                 }
