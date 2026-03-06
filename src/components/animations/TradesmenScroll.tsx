@@ -195,7 +195,7 @@ export function TradesmenScroll() {
     return (
         <div ref={containerRef} className="relative w-full h-screen bg-black border-y border-gold/20 shadow-2xl overflow-hidden">
             {/* Horizontal scrolling text layer (placed high, background z-0) */}
-            <div className="absolute top-[15%] md:top-[55%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
+            <div className="absolute top-[15%] md:top-[35%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
                     className="text-white/90 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
