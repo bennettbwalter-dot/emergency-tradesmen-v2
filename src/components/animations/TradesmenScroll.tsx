@@ -42,7 +42,8 @@ export function TradesmenScroll() {
             const img = imagesRef.current[Math.floor(videoSequence.current.frame)];
             if (!img || !img.complete) return;
 
-            const IMAGE_SCALE = 0.85;
+            const isMobile = window.innerWidth < 768;
+            const IMAGE_SCALE = isMobile ? 2.5 : 0.85; // Much bigger on mobile
             const canvasWidth = canvas.width;
             const canvasHeight = canvas.height;
 
@@ -54,9 +55,12 @@ export function TradesmenScroll() {
             const newWidth = imgWidth * ratio;
             const newHeight = imgHeight * ratio;
 
-            // Offset to the right so he's not behind the scrolling text
-            const x = ((canvasWidth - newWidth) / 2) + (canvasWidth * 0.20);
-            const y = (canvasHeight - newHeight) / 2;
+            // Offset to the right on desktop, but keep him more centered on mobile
+            const xOffset = isMobile ? (canvasWidth * 0.05) : (canvasWidth * 0.20);
+            const x = ((canvasWidth - newWidth) / 2) + xOffset;
+
+            // Align closer to the top on mobile so his head doesn't get cut off when scaled 2.5x
+            const y = isMobile ? (canvasHeight - newHeight) * 0.1 : (canvasHeight - newHeight) / 2;
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
             context.drawImage(img, x, y, newWidth, newHeight);
@@ -130,11 +134,12 @@ export function TradesmenScroll() {
         }
 
         // --- Master GSAP Timeline ---
+        const isMobileDevice = window.innerWidth < 768;
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container,
                 start: "top top",
-                end: "+=300%", // Give it enough scroll distance to fully play out without cutting off
+                end: isMobileDevice ? "+=200%" : "+=300%", // Shorter pin for mobile to feel snappier
                 pin: true,
                 scrub: 1,
             }
@@ -153,7 +158,7 @@ export function TradesmenScroll() {
         tl.fromTo(horizontalTextRef.current, {
             x: "0vw",
         }, {
-            x: "-180vw", // Move further left so "Get Seen" fully reaches the text box
+            x: isMobileDevice ? "-180vw" : "-180vw", // Use a consistent relative offset
             ease: "none",
             duration: 10,
         }, 0);
@@ -179,12 +184,12 @@ export function TradesmenScroll() {
     return (
         <div ref={containerRef} className="relative w-full h-screen bg-black border-y border-gold/20 shadow-2xl overflow-hidden">
             {/* Horizontal scrolling text layer (placed high, background z-0) */}
-            <div className="absolute top-[20%] md:top-[12%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
+            <div className="absolute top-[15%] md:top-[12%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
-                    className="text-white/90 font-display font-bold text-[8rem] md:text-[12rem] whitespace-nowrap tracking-widest pl-[100vw]"
+                    className="text-white/90 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
                 >
-                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-[5rem] md:text-[8rem] align-middle mr-16">For Tradesmen</span>
+                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-3xl md:text-[8rem] align-middle mr-8 md:mr-16">For Tradesmen</span>
                     Get Seen.
                 </h2>
             </div>
@@ -193,15 +198,15 @@ export function TradesmenScroll() {
             <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover z-10" />
 
             {/* Vertical scrolling content (placed at bottom, aligned left) */}
-            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-6 md:p-16 pb-[10vh] pointer-events-none z-20">
+            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[8vh] md:pb-[10vh] pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
-                    className="max-w-2xl bg-[#090909]/80 backdrop-blur-md border border-gold/20 p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/50"
+                    className="max-w-xl md:max-w-2xl bg-[#090909]/90 md:bg-[#090909]/80 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/50"
                 >
-                    <h3 className="text-2xl md:text-3xl text-white font-display mb-4 leading-tight">
+                    <h3 className="text-xl md:text-3xl text-white font-display mb-3 md:mb-4 leading-tight">
                         Stop chasing leads.
                         <br />
-                        <span className="text-xl md:text-2xl text-gold mt-2 block font-medium">Join our verified network and get direct calls from customers in your area who need help right now.</span>
+                        <span className="text-lg md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Join our verified network and get direct calls from customers.</span>
                     </h3>
 
                     <ul className="space-y-4 mt-8">
