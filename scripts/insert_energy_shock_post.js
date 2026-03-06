@@ -61,8 +61,6 @@ It is a vicious cycle, and it makes localised grid failures significantly more l
 
 ## The First 60 Seconds: What to Do When the Power Drops
 
-![A family huddles on a sofa by candlelight during a power blackout](/images/blog/energy-shock/family-blackout.webp)
-
 Before you even think about firing up a generator, follow this immediate triage:
 
 - **Unplug your expensive electronics.** When the grid comes back online, it often surges. Your OLED TV, gaming console, and laptop should be physically unplugged. Leave a single lamp switched "on" so you know the instant the mains return.
@@ -133,9 +131,7 @@ A qualified [emergency electrician near you](https://emergencytradesmen.net/) ca
 
 On the **[Emergency Tradesmen Platform](https://emergencytradesmen.net/)**, every electrician is audited through our 1-5 Trust Score system. Search for professionals who list "Generator Transfer Switch" or "Interlock Kit Installation" in their services.
 
-![Fair Price Calculator infographic for UK homeowners showing emergency trade benchmarks](/images/blog/energy-shock/calc-uk.webp)
-
-![Fair Price Calculator infographic for US homeowners showing emergency trade benchmarks](/images/blog/energy-shock/calc-us.webp)
+![Fair Price Calculator infographic showing 2026 emergency trade benchmarks](/images/blog/energy-shock/calc-uk.webp)
 
 ---
 
