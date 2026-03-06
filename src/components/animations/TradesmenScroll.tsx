@@ -215,12 +215,12 @@ export function TradesmenScroll() {
     }, []);
 
     return (
-        <div ref={containerRef} className="relative w-full h-screen bg-black border-y border-gold/20 shadow-2xl overflow-hidden">
+        <div ref={containerRef} className="relative w-full h-screen bg-white dark:bg-black border-y border-gold/20 shadow-2xl overflow-hidden">
             {/* Horizontal scrolling text layer (placed high, background z-0) */}
             <div className="absolute top-[15%] md:top-[35%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
-                    className="text-white/90 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
+                    className="text-black/10 dark:text-white/90 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
                 >
                     <span className="text-gold font-bold uppercase tracking-[0.2em] text-3xl md:text-[8rem] align-middle mr-8 md:mr-16">For Tradesmen</span>
                     Get Seen.
@@ -234,9 +234,9 @@ export function TradesmenScroll() {
             <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[8vh] md:pb-[10vh] pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
-                    className="max-w-xl md:max-w-2xl bg-[#090909]/90 md:bg-[#090909]/80 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/50"
+                    className="max-w-xl md:max-w-2xl bg-white/90 dark:bg-[#090909]/90 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/10 dark:shadow-black/50"
                 >
-                    <h3 className="text-xl md:text-3xl text-white font-display mb-3 md:mb-4 leading-tight">
+                    <h3 className="text-xl md:text-3xl text-gray-900 dark:text-white font-display mb-3 md:mb-4 leading-tight">
                         Stop chasing leads.
                         <br />
                         <span className="text-lg md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Join our verified network and get direct calls from customers.</span>
@@ -248,7 +248,7 @@ export function TradesmenScroll() {
                                 <div className="mt-1 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
                                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />
                                 </div>
-                                <p className={i === listItems.length - 1 ? "text-white font-bold text-base md:text-lg" : "text-white/80 text-sm md:text-base font-medium"}>
+                                <p className={i === listItems.length - 1 ? "text-gray-900 dark:text-white font-bold text-base md:text-lg" : "text-gray-700 dark:text-white/80 text-sm md:text-base font-medium"}>
                                     {item}
                                 </p>
                             </li>
