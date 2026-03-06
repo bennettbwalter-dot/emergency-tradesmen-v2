@@ -67,11 +67,10 @@ export function TradesmenScroll() {
                 const data = imageData.data;
                 const len = data.length;
 
-                // Sample the background color from a safe point that's likely inside the drawn image area
-                // but away from the center (where the tradesman is). 
-                // We clamp the sample coordinates to the visible canvas area.
-                const sampleX = Math.min(Math.max(Math.floor(x) + 40, 0), canvasWidth - 1);
-                const sampleY = Math.min(Math.max(Math.floor(y) + 40, 0), canvasHeight - 1);
+                // Sample the background color from the very top-left corner of the drawn image area
+                // This is the most reliable place to find the studio background.
+                const sampleX = Math.min(Math.max(Math.floor(x) + 10, 0), canvasWidth - 1);
+                const sampleY = Math.min(Math.max(Math.floor(y) + 10, 0), canvasHeight - 1);
 
                 const sampleIndex = (sampleY * canvasWidth + sampleX) * 4;
                 const bgR = data[sampleIndex];
@@ -85,17 +84,21 @@ export function TradesmenScroll() {
                         const g = data[i + 1];
                         const b = data[i + 2];
 
-                        // Luma check: The tradesman is significantly brighter than the dark studio background.
-                        // By checking luma and color distance together, we ensure we only remove the background.
+                        // Luma check: The tradesman is lit, the background is near-black.
                         const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-                        // Tightened parameters to ensure the tradesman's head/hair remains solid.
-                        // luma < 35: Only target very dark pixels (background).
-                        // tolerance <= 8: Only remove colors very close to our sampled background.
-                        if (luma < 35 && Math.abs(r - bgR) <= 8 && Math.abs(g - bgG) <= 8 && Math.abs(b - bgB) <= 8) {
-                            data[i + 3] = 0; // Transparent
+                        // Ultra-strict background matching:
+                        // 1. Must be extremely dark (luma < 20)
+                        // 2. Must be nearly identical to the sampled background color (tolerance 4)
+                        const isBack = luma < 20 &&
+                            Math.abs(r - bgR) <= 4 &&
+                            Math.abs(g - bgG) <= 4 &&
+                            Math.abs(b - bgB) <= 4;
+
+                        if (isBack) {
+                            data[i + 3] = 0; // Completely transparent
                         } else {
-                            data[i + 3] = 255; // Force solid opacity for the character
+                            data[i + 3] = 255; // Completely opaque character
                         }
                     }
                     context.putImageData(imageData, 0, 0);
