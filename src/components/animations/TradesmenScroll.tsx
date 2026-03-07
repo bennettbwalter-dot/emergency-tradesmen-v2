@@ -76,64 +76,46 @@ export function TradesmenScroll() {
                 // This draws a mathematical ellipse around his body. Inside the ellipse, we keep everything (saving dark hair/shadows).
                 // Outside the ellipse, we aggressively erase the dark compression noise.
 
+                // Improved Adaptive Luma Key
+                // We avoid hard geometric "Safe Zones" which cause black boxes in Light Mode.
+                // Instead, we use a smooth distance-weighted threshold.
+                // Near the center spine (where his head/body are), the threshold is low to save his dark hair.
+                // Near the edges, the threshold is higher to aggressively remove video compression noise.
+
                 for (let i = 0; i < len; i += 4) {
                     const r = data[i];
                     const g = data[i + 1];
                     const b = data[i + 2];
+                    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
                     const px = (i / 4) % canvasWidth;
                     const py = Math.floor((i / 4) / canvasWidth);
 
-                    // Skip pixels completely outside the drawn image area
+                    // Skip pixels completely outside the drawn image
                     if (px < x || px > x + newWidth || py < y || py > y + newHeight) {
-                        data[i + 3] = 0; // Force transparent outer space
+                        data[i + 3] = 0;
                         continue;
                     }
 
                     const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
                     const relY = (py - y) / newHeight; // 0.0 to 1.0 inside image
 
-                    // Spatial distance from spine (X=0.5).
-                    // We widen the ellipse towards the bottom to encompass his broad shoulders and legs.
-                    const expectedWidth = 0.15 + (relY * 0.18);
-                    const distFromCenterline = Math.abs(relX - 0.5);
+                    // Distance from vertical spine (X=0.5)
+                    const distFromSpine = Math.abs(relX - 0.5);
 
-                    // Normalized distance from center spine. 
-                    // 0.0 = Dead center. 1.0 = Edge of his body. >1.0 = Outer background video noise.
-                    const dist = distFromCenterline / expectedWidth;
+                    // Adaptive Threshold calculation:
+                    // Center (Spine): 20 (Protects hair/shadows)
+                    // Outer Edges: 85 (Erases noisy gray background)
+                    const threshold = 20 + Math.pow(distFromSpine * 2, 2) * 65;
 
-                    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-                    if (dist < 0.8) {
-                        // Core body. Ultra strict. We only delete absolute pure black (gaps in arms).
-                        // This guarantees his hair and dark jacket shadows remain opaque.
-                        if (luma < 5) {
-                            data[i + 3] = 0;
-                        } else {
-                            data[i + 3] = 255;
-                        }
-                    } else if (dist > 1.3) {
-                        // Outer background video bounds. Loose. Kill all dark grey compression box noise.
-                        if (luma < 75) {
-                            data[i + 3] = 0;
-                        } else {
-                            // If he reaches his arm out (bright pixel), it will still show.
-                            data[i + 3] = 255;
-                        }
+                    // Smooth Alpha Falloff (15px feathering)
+                    if (luma < threshold) {
+                        data[i + 3] = 0;
+                    } else if (luma > threshold + 15) {
+                        data[i + 3] = 255;
                     } else {
-                        // Anti-aliased transition edge. 
-                        // Smoothly ramp the threshold from strict (5) to loose (75).
-                        const blend = (dist - 0.8) / (1.3 - 0.8);
-                        const threshold = 5 + (70 * blend);
-
-                        // Feather the direct edge pixels for a polished cutout on white backgrounds
-                        if (luma < threshold - 15) {
-                            data[i + 3] = 0;
-                        } else if (luma > threshold + 15) {
-                            data[i + 3] = 255;
-                        } else {
-                            data[i + 3] = Math.floor(((luma - (threshold - 15)) / 30) * 255);
-                        }
+                        // Interpolate for soft edges
+                        data[i + 3] = Math.floor(((luma - threshold) / 15) * 255);
                     }
                 }
                 context.putImageData(imageData, 0, 0);
