@@ -6,17 +6,20 @@ import Lenis from 'lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 192;
-const FILENAME_PATTERN = (index: number) => `/frames/v2w/frame_${index.toString().padStart(4, '0')}.webp`;
+const FILENAME_PATTERN = (index: number, isLightMode: boolean) => `/frames/${isLightMode ? 'v2w_light' : 'v2w'}/frame_${index.toString().padStart(4, '0')}.webp`;
 
 const listItems = [
-    "Get seen first with priority ranking in your area",
-    "Build instant trust with a ‘Featured’ badge and reviews",
-    "Receive direct calls, not messages or time-wasters",
-    "Reach customers ready to act, not just browsing",
-    "No ads to manage. No chasing leads. Just calls."
+    "Nationwide coverage",
+    "Fast response times (30-90 mins)",
+    "Cars, vans, and light commercial"
 ];
 
+import { useTheme } from "next-themes";
+
 export function TradesmenScroll() {
+    const { theme } = useTheme();
+    const isLightMode = theme === 'light' || (!theme && typeof document !== 'undefined' && !document.documentElement.classList.contains('dark'));
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const horizontalTextRef = useRef<HTMLHeadingElement>(null);
@@ -25,6 +28,7 @@ export function TradesmenScroll() {
     const imagesRef = useRef<HTMLImageElement[]>([]);
 
     useEffect(() => {
+
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
         const container = containerRef.current;
@@ -34,7 +38,7 @@ export function TradesmenScroll() {
         imagesRef.current = [];
         for (let i = 1; i <= FRAME_COUNT; i++) {
             const img = new Image();
-            img.src = FILENAME_PATTERN(i);
+            img.src = FILENAME_PATTERN(i, isLightMode);
             imagesRef.current.push(img);
         }
 
@@ -76,17 +80,10 @@ export function TradesmenScroll() {
                 // This draws a mathematical ellipse around his body. Inside the ellipse, we keep everything (saving dark hair/shadows).
                 // Outside the ellipse, we aggressively erase the dark compression noise.
 
-                // Improved Adaptive Luma Key
-                // We avoid hard geometric "Safe Zones" which cause black boxes in Light Mode.
-                // Instead, we use a smooth distance-weighted threshold.
-                // Near the center spine (where his head/body are), the threshold is low to save his dark hair.
-                // Near the edges, the threshold is higher to aggressively remove video compression noise.
-
                 for (let i = 0; i < len; i += 4) {
                     const r = data[i];
                     const g = data[i + 1];
                     const b = data[i + 2];
-                    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
                     const px = (i / 4) % canvasWidth;
                     const py = Math.floor((i / 4) / canvasWidth);
@@ -97,25 +94,40 @@ export function TradesmenScroll() {
                         continue;
                     }
 
-                    const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
-                    const relY = (py - y) / newHeight; // 0.0 to 1.0 inside image
-
-                    // Distance from vertical spine (X=0.5)
-                    const distFromSpine = Math.abs(relX - 0.5);
-
-                    // Adaptive Threshold calculation:
-                    // Center (Spine): 20 (Protects hair/shadows)
-                    // Outer Edges: 85 (Erases noisy gray background)
-                    const threshold = 20 + Math.pow(distFromSpine * 2, 2) * 65;
-
-                    // Smooth Alpha Falloff (15px feathering)
-                    if (luma < threshold) {
-                        data[i + 3] = 0;
-                    } else if (luma > threshold + 15) {
-                        data[i + 3] = 255;
+                    if (isLightMode) {
+                        // Light Mode uses the 'v2w_light' frames which have a pure RGB white background.
+                        // We knock out bright pixels. His body/clothing is dark, making this very clean.
+                        const brightness = Math.max(r, g, b);
+                        if (r > 240 && g > 240 && b > 240) {
+                            // Pure white background
+                            data[i + 3] = 0;
+                        } else if (r > 210 && g > 210 && b > 210) {
+                            // Smoothly anti-alias the halo transition around him
+                            const blend = (240 - brightness) / 30; // 0 opacity at 240, full opacity near 210
+                            data[i + 3] = Math.floor(Math.max(0, Math.min(1, blend)) * 255);
+                        } else {
+                            // Core body
+                            data[i + 3] = 255;
+                        }
                     } else {
-                        // Interpolate for soft edges
-                        data[i + 3] = Math.floor(((luma - threshold) / 15) * 255);
+                        // Dark Mode uses the 'v2w' frames which have noisy dark video compression artifacts.
+                        // We use an Adaptive Luma Key to remove dark noise specifically at the spatial edges.
+                        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                        const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
+
+                        // Distance from vertical spine (X=0.5)
+                        const distFromSpine = Math.abs(relX - 0.5);
+
+                        // Adaptive Threshold: 20 at center (saves hair), 85 at edges (kills noise)
+                        const threshold = 20 + Math.pow(distFromSpine * 2, 2) * 65;
+
+                        if (luma < threshold) {
+                            data[i + 3] = 0;
+                        } else if (luma > threshold + 15) {
+                            data[i + 3] = 255;
+                        } else {
+                            data[i + 3] = Math.floor(((luma - threshold) / 15) * 255);
+                        }
                     }
                 }
                 context.putImageData(imageData, 0, 0);
@@ -191,18 +203,18 @@ export function TradesmenScroll() {
             tl.kill();
             ScrollTrigger.refresh();
         };
-    }, []);
+    }, [isLightMode]);
 
     return (
-        <div ref={containerRef} className="relative w-full h-screen bg-white dark:bg-black border-y border-gold/20 shadow-2xl overflow-hidden">
+        <div ref={containerRef} className="relative w-full h-screen bg-white dark:bg-black border-y border-gold/20 shadow-2xl overflow-hidden mt-16">
             {/* Horizontal scrolling text layer (placed high, background z-0) */}
             <div className="absolute top-[15%] md:top-[35%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
-                    className="text-black/10 dark:text-white/90 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
+                    className="text-black/5 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
                 >
-                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-3xl md:text-[8rem] align-middle mr-8 md:mr-16">For Tradesmen</span>
-                    Get Seen.
+                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-3xl md:text-[8rem] align-middle mr-8 md:mr-16">24/7 Response</span>
+                    Recovery.
                 </h2>
             </div>
 
@@ -213,12 +225,12 @@ export function TradesmenScroll() {
             <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[8vh] md:pb-[10vh] pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
-                    className="max-w-xl md:max-w-2xl bg-white/90 dark:bg-[#090909]/90 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/10 dark:shadow-black/50"
+                    className="max-w-xl md:max-w-2xl bg-white/90 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/10"
                 >
-                    <h3 className="text-xl md:text-3xl text-gray-900 dark:text-white font-display mb-3 md:mb-4 leading-tight">
-                        Stop chasing leads.
+                    <h3 className="text-xl md:text-3xl text-gray-900 font-display mb-3 md:mb-4 leading-tight">
+                        Emergency Breakdown Recovery Available 24/7
                         <br />
-                        <span className="text-lg md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Join our verified network and get direct calls from customers.</span>
+                        <span className="text-lg md:text-xl text-muted-foreground mt-4 block font-sans font-medium">Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified breakdown recovery partners are just a tap away.</span>
                     </h3>
 
                     <ul className="space-y-4 mt-8">
@@ -227,7 +239,7 @@ export function TradesmenScroll() {
                                 <div className="mt-1 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
                                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />
                                 </div>
-                                <p className={i === listItems.length - 1 ? "text-gray-900 dark:text-white font-bold text-base md:text-lg" : "text-gray-700 dark:text-white/80 text-sm md:text-base font-medium"}>
+                                <p className="text-gray-900 text-sm md:text-base font-semibold">
                                     {item}
                                 </p>
                             </li>
