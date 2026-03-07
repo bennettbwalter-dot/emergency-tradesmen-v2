@@ -55,7 +55,7 @@ export function EmergencyServicesSection() {
                                     Your Emergency Trade Network
                                 </span>
                             </div>
-                            <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/50 mb-6 pb-2 drop-shadow-sm">
+                            <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-foreground mb-6 pb-2">
                                 Verified Specialists. Any Emergency.
                             </h2>
 

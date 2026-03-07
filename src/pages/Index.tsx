@@ -71,11 +71,11 @@ const Index = () => {
           </Suspense>
 
           <Suspense fallback={<div className="h-96 w-full" />}>
-            <SEOContentSection />
+            <BreakdownSection />
           </Suspense>
 
           <Suspense fallback={<div className="h-96 w-full" />}>
-            <BreakdownSection />
+            <SEOContentSection />
           </Suspense>
 
           <Suspense fallback={<div className="h-96 w-full" />}>

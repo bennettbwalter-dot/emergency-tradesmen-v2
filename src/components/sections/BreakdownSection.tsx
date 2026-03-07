@@ -2,9 +2,21 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { TradesmenScroll } from "@/components/animations/TradesmenScroll";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function BreakdownSection() {
     const { settings } = useLocalization();
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
+    const isLight = resolvedTheme === 'light';
 
     return (
         <section className="container-wide pb-16 pt-24">
@@ -57,7 +69,7 @@ export function BreakdownSection() {
                 </div>
             </div>
 
-            {/* Tradesmen Video Animation Scroll Integration */}
+            {/* Premium Video Animation Scroll - Unified for all modes */}
             <TradesmenScroll />
         </section>
     );

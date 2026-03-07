@@ -6,39 +6,37 @@ import Lenis from 'lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 192;
-const FILENAME_PATTERN = (index: number, isLightMode: boolean) => `/frames/${isLightMode ? 'v2w_light' : 'v2w'}/frame_${index.toString().padStart(4, '0')}.webp`;
+const FILENAME_PATTERN = (index: number) => `/frames/v2w_dark/frame_${index.toString().padStart(4, '0')}.webp`;
 
 const listItems = [
-    "Nationwide coverage",
-    "Fast response times (30-90 mins)",
-    "Cars, vans, and light commercial"
+    "Get seen first with priority ranking in your area",
+    "Build instant trust with a 'Featured' badge and reviews",
+    "Receive direct calls, not messages or time-wasters",
+    "Reach customers ready to act, not just browsing",
+    "No ads to manage. No chasing leads. Just calls."
 ];
 
-import { useTheme } from "next-themes";
+// Removed useTheme from here as we use props for stability
 
 export function TradesmenScroll() {
-    const { theme } = useTheme();
-    const isLightMode = theme === 'light' || (!theme && typeof document !== 'undefined' && !document.documentElement.classList.contains('dark'));
-
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const horizontalTextRef = useRef<HTMLHeadingElement>(null);
     const verticalTextRef = useRef<HTMLDivElement>(null);
+    const listRef = useRef<HTMLUListElement>(null);
     const videoSequence = useRef({ frame: 0 });
     const imagesRef = useRef<HTMLImageElement[]>([]);
 
     useEffect(() => {
-
         const canvas = canvasRef.current;
-        const context = canvas?.getContext('2d');
+        const context = canvas?.getContext('2d', { willReadFrequently: true });
         const container = containerRef.current;
         if (!canvas || !context || !container) return;
 
-        // Preload images
         imagesRef.current = [];
         for (let i = 1; i <= FRAME_COUNT; i++) {
             const img = new Image();
-            img.src = FILENAME_PATTERN(i, isLightMode);
+            img.src = FILENAME_PATTERN(i);
             imagesRef.current.push(img);
         }
 
@@ -47,7 +45,7 @@ export function TradesmenScroll() {
             if (!img || !img.complete) return;
 
             const isMobile = window.innerWidth < 768;
-            const IMAGE_SCALE = isMobile ? 2.5 : 0.85; // Much bigger on mobile
+            const IMAGE_SCALE = isMobile ? 2.5 : 0.85;
             const canvasWidth = canvas.width;
             const canvasHeight = canvas.height;
 
@@ -59,80 +57,77 @@ export function TradesmenScroll() {
             const newWidth = imgWidth * ratio;
             const newHeight = imgHeight * ratio;
 
-            // Offset to the right on desktop, but keep him more centered on mobile
-            const xOffset = isMobile ? (canvasWidth * 0.05) : (canvasWidth * 0.20);
+            const xOffset = isMobile ? (canvasWidth * 0.02) : (canvasWidth * 0.12);
             const x = ((canvasWidth - newWidth) / 2) + xOffset;
-
-            // Align closer to the top on mobile so his head doesn't get cut off when scaled 2.5x
             const y = isMobile ? (canvasHeight - newHeight) * 0.1 : (canvasHeight - newHeight) / 2;
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
             context.drawImage(img, x, y, newWidth, newHeight);
 
-            // Precision Chroma Key to remove the baked-in background
             try {
-                const imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
+                const drawX = Math.max(0, Math.floor(x) - 10);
+                const drawY = Math.max(0, Math.floor(y) - 10);
+                const drawW = Math.min(canvasWidth - drawX, Math.ceil(newWidth) + 20);
+                const drawH = Math.min(canvasHeight - drawY, Math.ceil(newHeight) + 20);
+
+                const imageData = context.getImageData(drawX, drawY, drawW, drawH);
                 const data = imageData.data;
-                const len = data.length;
 
-                // The convex hull algorithm caught noisy video compression artifacts, creating jagged polygon edges.
-                // We are replacing it with a smooth "Elliptical Spatial Mask".
-                // This draws a mathematical ellipse around his body. Inside the ellipse, we keep everything (saving dark hair/shadows).
-                // Outside the ellipse, we aggressively erase the dark compression noise.
+                const subRowBounds = new Array(drawH).fill(null).map(() => ({ min: drawW, max: 0 }));
 
-                for (let i = 0; i < len; i += 4) {
-                    const r = data[i];
-                    const g = data[i + 1];
-                    const b = data[i + 2];
-
-                    const px = (i / 4) % canvasWidth;
-                    const py = Math.floor((i / 4) / canvasWidth);
-
-                    // Skip pixels completely outside the drawn image
-                    if (px < x || px > x + newWidth || py < y || py > y + newHeight) {
-                        data[i + 3] = 0;
-                        continue;
-                    }
-
-                    if (isLightMode) {
-                        // Light Mode uses the 'v2w_light' frames which have a pure RGB white background.
-                        // We knock out bright pixels. His body/clothing is dark, making this very clean.
-                        const brightness = Math.max(r, g, b);
-                        if (r > 240 && g > 240 && b > 240) {
-                            // Pure white background
-                            data[i + 3] = 0;
-                        } else if (r > 210 && g > 210 && b > 210) {
-                            // Smoothly anti-alias the halo transition around him
-                            const blend = (240 - brightness) / 30; // 0 opacity at 240, full opacity near 210
-                            data[i + 3] = Math.floor(Math.max(0, Math.min(1, blend)) * 255);
-                        } else {
-                            // Core body
-                            data[i + 3] = 255;
-                        }
-                    } else {
-                        // Dark Mode uses the 'v2w' frames which have noisy dark video compression artifacts.
-                        // We use an Adaptive Luma Key to remove dark noise specifically at the spatial edges.
+                for (let py = 0; py < drawH; py++) {
+                    const rowOffset = py * drawW * 4;
+                    for (let px = 0; px < drawW; px++) {
+                        const i = rowOffset + (px * 4);
+                        const r = data[i];
+                        const g = data[i + 1];
+                        const b = data[i + 2];
                         const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-                        const relX = (px - x) / newWidth; // 0.0 to 1.0 inside image
 
-                        // Distance from vertical spine (X=0.5)
-                        const distFromSpine = Math.abs(relX - 0.5);
+                        // Local dist from spine relative to drawW
+                        const localRelX = px / drawW;
+                        const distFromSpine = Math.abs(localRelX - 0.5);
 
-                        // Adaptive Threshold: 20 at center (saves hair), 85 at edges (kills noise)
-                        const threshold = 20 + Math.pow(distFromSpine * 2, 2) * 65;
+                        // Professional Smoothed Alpha Ramp
+                        // luma < 4: transparent
+                        // luma 4-12: ramp alpha (multiplied by 2 for snappier reveal but soft edge)
+                        // luma > 12: solid
+                        if (luma > 4) {
+                            if (luma < 12) {
+                                data[i + 3] = Math.min(255, (luma - 4) * 32);
+                            } else {
+                                data[i + 3] = 255;
+                            }
 
-                        if (luma < threshold) {
-                            data[i + 3] = 0;
-                        } else if (luma > threshold + 15) {
-                            data[i + 3] = 255;
+                            // Only count pixels for occlusion near the core (center) to avoid hair/edge noise
+                            if (distFromSpine < 0.42 && luma > 10) {
+                                if (px < subRowBounds[py].min) subRowBounds[py].min = px;
+                                if (px > subRowBounds[py].max) subRowBounds[py].max = px;
+                            }
                         } else {
-                            data[i + 3] = Math.floor(((luma - threshold) / 15) * 255);
+                            data[i + 3] = 0;
                         }
                     }
                 }
-                context.putImageData(imageData, 0, 0);
+
+                // Fill Silhouette for perfect occlusion
+                for (let py = 0; py < drawH; py++) {
+                    const { min, max } = subRowBounds[py];
+                    // Ensure it's a valid body segment (wider than noise)
+                    if (max > min && (max - min) > (drawW * 0.05) && (max - min) < (drawW * 0.95)) {
+                        const dMin = Math.max(0, min - 2);
+                        const dMax = Math.min(drawW - 1, max + 2);
+                        const rowOffset = py * drawW * 4;
+                        for (let px = dMin; px <= dMax; px++) {
+                            // Only set alpha for occlusion, preserve RGB
+                            data[rowOffset + px * 4 + 3] = 255;
+                        }
+                    }
+                }
+
+                context.putImageData(imageData, drawX, drawY);
             } catch (err) {
-                // Silently bypass cross-origin errors if loaded from external CDN
+                // Ignore cross-origin
             }
         };
 
@@ -145,7 +140,6 @@ export function TradesmenScroll() {
         window.addEventListener('resize', updateCanvasSize);
         updateCanvasSize();
 
-        // Lenis implementation
         const lenis = new Lenis();
         const raf = (time: number) => {
             lenis.raf(time);
@@ -157,19 +151,18 @@ export function TradesmenScroll() {
             imagesRef.current[0].onload = render;
         }
 
-        // --- Master GSAP Timeline ---
         const isMobileDevice = window.innerWidth < 768;
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container,
                 start: "top top",
-                end: isMobileDevice ? "+=200%" : "+=300%", // Shorter pin for mobile to feel snappier
+                end: isMobileDevice ? "+=200%" : "+=300%",
                 pin: true,
                 scrub: 1,
             }
         });
 
-        // 1. Play the image sequence
         tl.to(videoSequence.current, {
             frame: FRAME_COUNT - 1,
             snap: "frame",
@@ -178,24 +171,35 @@ export function TradesmenScroll() {
             duration: 10,
         }, 0);
 
-        // 2. Horizontal text scrolling left
         tl.fromTo(horizontalTextRef.current, {
             x: "0vw",
         }, {
-            x: isMobileDevice ? "-180vw" : "-180vw", // Use a consistent relative offset
+            x: "-180vw",
             ease: "none",
             duration: 10,
         }, 0);
 
-        // 4. Reveal the vertical text from the bottom
+        // Reveal the vertical text and list items with unified timing (very late reveal)
+        // Reveal further down by increasing delay to 9.2 (near 10-sec end)
         tl.to(verticalTextRef.current, {
             y: 0,
             opacity: 1,
-            duration: 3,
+            duration: 2,
             ease: "power2.out",
-        }, 7);
+        }, 9.2);
 
-        // Removed trailing empty tween so scrolling returns to the main page immediately
+        if (listRef.current) {
+            tl.fromTo(listRef.current.children, {
+                y: 20,
+                opacity: 0
+            }, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                duration: 1.5,
+                ease: "power2.out"
+            }, 9.6);
+        }
 
         return () => {
             window.removeEventListener('resize', updateCanvasSize);
@@ -203,43 +207,53 @@ export function TradesmenScroll() {
             tl.kill();
             ScrollTrigger.refresh();
         };
-    }, [isLightMode]);
+    }, []);
 
     return (
-        <div ref={containerRef} className="relative w-full h-screen bg-white dark:bg-black border-y border-gold/20 shadow-2xl overflow-hidden mt-16">
-            {/* Horizontal scrolling text layer (placed high, background z-0) */}
-            <div className="absolute top-[15%] md:top-[35%] w-[200vw] h-24 flex items-center pointer-events-none z-0">
+        <div ref={containerRef} className="relative w-full h-screen bg-black border border-gold/20 rounded-[3rem] overflow-hidden mt-16 mx-auto max-w-[98%] shadow-2xl">
+            <div className="absolute top-[5%] md:top-[5%] w-[300vw] h-[30rem] hidden md:flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
-                    className="text-black/5 font-display font-bold text-6xl md:text-[12rem] whitespace-nowrap tracking-widest pl-[80vw] md:pl-[100vw]"
+                    style={{ textRendering: 'optimizeLegibility', willChange: 'transform' }}
+                    className="font-display font-bold text-6xl md:text-[18rem] whitespace-nowrap tracking-tighter pl-[80vw] md:pl-[100vw] antialiased"
                 >
-                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-3xl md:text-[8rem] align-middle mr-8 md:mr-16">24/7 Response</span>
-                    Recovery.
+                    <span className="text-gold font-bold uppercase tracking-luxury text-xl md:text-[8rem] align-middle mr-16">
+                        FOR TRADESMEN
+                    </span>
+                    <span className="text-white">GET SEEN</span>
                 </h2>
             </div>
 
-            {/* Canvas layer (z-10, above text) */}
             <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover z-10" />
 
-            {/* Vertical scrolling content (placed at bottom, aligned left) */}
-            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[8vh] md:pb-[10vh] pointer-events-none z-20">
+            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[12vh] md:pb-[15vh] pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
-                    className="max-w-xl md:max-w-2xl bg-white/90 backdrop-blur-md border border-gold/20 p-6 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/10"
+                    className="max-w-lg md:max-w-xl bg-black/40 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2rem] transform translate-y-32 opacity-0 shadow-2xl shadow-black/20"
                 >
-                    <h3 className="text-xl md:text-3xl text-gray-900 font-display mb-3 md:mb-4 leading-tight">
-                        Emergency Breakdown Recovery Available 24/7
-                        <br />
-                        <span className="text-lg md:text-xl text-muted-foreground mt-4 block font-sans font-medium">Vehicle trouble doesn't stick to business hours. Whether you're stuck at home or on the roadside, our verified breakdown recovery partners are just a tap away.</span>
+                    <h3 className="font-display font-medium mb-3 md:mb-4 leading-[1.1]">
+                        {/* Mobile Only Primary Header */}
+                        <div className="md:hidden mb-2">
+                            <span className="text-gold font-bold uppercase tracking-luxury text-2xl mr-2">FOR TRADESMEN</span>
+                            <span className="text-white text-2xl font-bold">GET SEEN</span>
+                        </div>
+
+                        <span className="text-xl md:text-4xl text-white block">
+                            Stop chasing leads.
+                        </span>
+
+                        <span className="text-base md:text-lg text-neutral-300 mt-2 block font-sans font-medium tracking-wide">
+                            Join our verified network and get direct calls from customers.
+                        </span>
                     </h3>
 
-                    <ul className="space-y-4 mt-8">
+                    <ul ref={listRef} className="space-y-3 md:space-y-4 mt-6 md:mt-8">
                         {listItems.map((item, i) => (
                             <li key={i} className="flex items-start gap-3">
-                                <div className="mt-1 w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
+                                <div className="mt-1 w-4 h-4 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
                                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />
                                 </div>
-                                <p className="text-gray-900 text-sm md:text-base font-semibold">
+                                <p className={`text-white text-sm md:text-lg font-display ${i === listItems.length - 1 ? 'font-bold' : 'font-medium'}`}>
                                     {item}
                                 </p>
                             </li>

@@ -68,6 +68,10 @@ async function exportBatch() {
             if (exported >= BATCH_SIZE) break;
             if (!b.email || excludeSet.has(b.email.toLowerCase().trim())) continue;
 
+            // NEW: Skip error-lite or duckduckgo relay addresses
+            const emailLower = b.email.toLowerCase();
+            if (emailLower.includes('error-lite') || emailLower.includes('duckduckgo.com')) continue;
+
             const firstName = b.name ? b.name.split(' ')[0] : 'there';
             const utmCampaign = `batch_${nextBatch}_manual`;
             const pricingLink = `https://emergencytradesmen.net/pricing?utm_source=gmail_mailmerge&utm_campaign=${utmCampaign}&utm_medium=email&trade=${encodeURIComponent(b.trade || '')}&city=${encodeURIComponent(b.city || '')}&ref=${b.id}`;
