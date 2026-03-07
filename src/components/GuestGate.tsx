@@ -59,7 +59,7 @@ export function GuestGate() {
                     {/* Background/Tradesmen Image area */}
                     <div className="absolute right-0 top-0 bottom-0 w-[60%] z-0">
                         <img
-                            src="/tradesman-hero-v2.jpg"
+                            src="/tradesman-hero-v2.webp"
                             alt="Tradesmen"
                             className="w-full h-full object-cover object-top mask-image-linear-to-l"
                         />

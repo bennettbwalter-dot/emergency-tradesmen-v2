@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -165,13 +165,11 @@ export default function ContactPage() {
 
     return (
         <>
-            <Helmet>
-                <title>Contact Us | Emergency Tradesmen UK</title>
-                <meta
-                    name="description"
-                    content="Get in touch with Emergency Tradesmen UK. We're here to help with any questions about our services or business listings."
-                />
-            </Helmet>
+            <SEO
+                title="Contact Us"
+                description="Get in touch with Emergency Tradesmen. We're here to help with any questions about our services or business listings."
+                canonical="/contact"
+            />
 
             <Header />
 
@@ -193,13 +191,13 @@ export default function ContactPage() {
                         <div className="lg:col-span-2 space-y-6">
                             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                                 <img
-                                    src="/images/contact-profile.jpg"
+                                    src="/images/contact-profile.webp"
                                     alt="Professional tradesman at work"
                                     className="w-full aspect-[4/5] object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <img src="/et-logo-v2.png" alt="Logo" loading="lazy" className="w-20 h-20 mb-4 rounded-full border-2 border-gold/50 shadow-xl object-cover" />
+                                    <img src="/et-logo-v2.webp" alt="Logo" loading="lazy" className="w-20 h-20 mb-4 rounded-full border-2 border-gold/50 shadow-xl object-cover" />
                                     <h3 className="text-xl font-semibold mb-2">Emergency Tradesmen UK</h3>
                                     <p className="text-white/80 text-sm">
                                         Connecting you with trusted local tradesmen 24/7

@@ -24,10 +24,10 @@ export function HomeEmergencyAdUS() {
                     >
                         <div className="relative">
                             <img
-                                src="/affiliate/home-emergency-creative-us.jpg" // We might need a generic placeholder image here, falling back to same for now
+                                src="/affiliate/home-emergency-creative-us.webp" // We might need a generic placeholder image here, falling back to same for now
                                 onError={(e) => {
                                     // Fallback if US creative doesn't exist yet
-                                    e.currentTarget.src = "/affiliate/home-emergency-creative.jpg"
+                                    e.currentTarget.src = "/affiliate/home-emergency-creative.webp"
                                 }}
                                 alt="Home Warranty Plan"
                                 className="rounded-lg shadow-lg w-full max-w-[350px] object-cover border-4 border-white dark:border-slate-800"

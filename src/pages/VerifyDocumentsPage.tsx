@@ -139,7 +139,7 @@ export default function VerifyDocumentsPage() {
                                                     type="file"
                                                     id={`upload-${key}`}
                                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                    accept=".pdf,.jpg,.jpeg,.png"
+                                                    accept=".pdf,.jpg,.jpeg,.webp"
                                                     onChange={(e) => handleFileUpload(key, e)}
                                                 />
                                                 <Button variant="outline" className="gap-2 border-gold/50 hover:bg-gold/5 text-foreground">

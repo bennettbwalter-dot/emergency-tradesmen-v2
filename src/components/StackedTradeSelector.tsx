@@ -136,13 +136,13 @@ export function StackedTradeSelector() {
 
                         // Back card images
                         const backCardImages: Record<string, string> = {
-                            'plumber': '/back-cards/plumber-back.png',
-                            'drain-specialist': '/back-cards/drain-specialist-back.png',
-                            'gas-engineer': '/back-cards/gas-engineer-back.png',
-                            'locksmith': '/back-cards/locksmith-back.png',
-                            'electrician': '/back-cards/electrician-back.png',
-                            'glazier': '/back-cards/glazier-back.png',
-                            'breakdown': '/back-cards/breakdown-back.png',
+                            'plumber': '/back-cards/plumber-back.webp',
+                            'drain-specialist': '/back-cards/drain-specialist-back.webp',
+                            'gas-engineer': '/back-cards/gas-engineer-back.webp',
+                            'locksmith': '/back-cards/locksmith-back.webp',
+                            'electrician': '/back-cards/electrician-back.webp',
+                            'glazier': '/back-cards/glazier-back.webp',
+                            'breakdown': '/back-cards/breakdown-back.webp',
                         };
 
                         const hasCustomBack = !!backCardImages[trade.slug];

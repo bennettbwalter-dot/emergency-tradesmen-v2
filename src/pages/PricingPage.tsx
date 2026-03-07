@@ -30,7 +30,7 @@ export default function PricingPage() {
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <div className="relative w-full rounded-3xl overflow-hidden mb-12 border border-gold/20 shadow-2xl">
                             <img
-                                src="/tradesman-hero-v2.jpg"
+                                src="/tradesman-hero-v2.webp"
                                 alt="Professional tradesman"
                                 className="w-full h-auto"
                             />

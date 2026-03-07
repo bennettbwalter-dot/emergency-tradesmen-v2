@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 
 // Fix for default marker icon in Leaflet + React
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.webp';
+import markerIcon from 'leaflet/dist/images/marker-icon.webp';
+import markerShadow from 'leaflet/dist/images/marker-shadow.webp';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -73,7 +73,7 @@ export function LeafletMap({ city, businessName, className = "w-full h-full min-
             <MapContainer center={coords} zoom={13} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp"
                 />
                 <Marker position={coords}>
                     <Popup>

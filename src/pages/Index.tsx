@@ -33,7 +33,7 @@ const Index = () => {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": "Emergency Tradesmen",
-    "image": "https://emergencytradesmen.net/og-image.png",
+    "image": "https://emergencytradesmen.net/og-image.webp",
     "description": "24/7 Emergency Tradesmen Services. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.",
     "telephone": "+1-888-555-0199",
     "areaServed": settings.countryCode,

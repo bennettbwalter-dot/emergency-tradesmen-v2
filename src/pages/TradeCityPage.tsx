@@ -616,7 +616,7 @@ export default function TradeCityPage() {
             <div className="mb-12 p-6 bg-gold/5 border border-gold/20 rounded-xl animate-fade-up">
               <div className="flex items-start gap-4">
                 <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden shadow-md">
-                  <img src="/et-logo-v2.png" alt="Emergency Tradesmen" loading="lazy" className="w-full h-full object-cover" />
+                  <img src="/et-logo-v2.webp" alt="Emergency Tradesmen" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">

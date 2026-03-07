@@ -63,13 +63,28 @@ usCities = [...new Set(usCities)];
 // 2. Load UK Data (Source from cityPostcodes.ts mostly, but we can't import TS)
 // Manually defining major UK cities for sitemap to avoid TS compilation issues in this script
 // This list matches the keys in cityPostcodes.ts
+// 2. Load UK Data
 const ukCities = [
     "London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bradford", "Liverpool", "Edinburgh", "Bristol",
     "Cardiff", "Coventry", "Nottingham", "Leicester", "Sunderland", "Belfast", "Newcastle upon Tyne", "Brighton", "Hull",
     "Plymouth", "Stoke-on-Trent", "Wolverhampton", "Derby", "Swansea", "Southampton", "Salford", "Aberdeen", "Portsmouth",
     "York", "Peterborough", "Dundee", "Oxford", "Cambridge", "Norwich", "Exeter", "Luton", "Milton Keynes", "Northampton",
     "Bournemouth", "Reading", "Blackpool", "Preston", "Huddersfield", "Slough", "Swindon", "Bolton", "Oldham", "Rochdale",
-    "Doncaster", "Rotherham", "Stockport", "Wigan", "Burnley", "Blackburn", "Preston", "Worcester", "Gloucester", "Cheltenham"
+    "Doncaster", "Rotherham", "Stockport", "Wigan", "Burnley", "Blackburn", "Worcester", "Gloucester", "Cheltenham",
+    "Bedford", "Ipswich", "Hereford", "Shrewsbury", "Telford", "Canterbury", "Carlisle", "Chelmsford", "Chester", "Colchester",
+    "Durham", "Lancaster", "Lincoln", "Southend-on-Sea", "St Albans", "Truro", "Wakefield", "Winchester", "Westminster",
+    "Warrington", "Middlesbrough", "Barnsley", "Newport", "Poole", "Basildon", "Maidstone", "Crawley", "Worthing",
+    "Sutton Coldfield", "Dudley", "Walsall", "Watford", "High Wycombe", "Harlow", "Stevenage", "Redditch", "Chesterfield",
+    "Mansfield", "Beeston", "Loughborough", "Burton upon Trent", "Crewe", "Macclesfield", "Scunthorpe", "Grimsby", "Harrogate",
+    "Halifax", "Batley", "Keighley", "South Shields", "Gateshead", "Darlington", "Hartlepool", "Stockton-on-Tees", "Hemel Hempstead",
+    "Gillingham", "Eastbourne", "Rayleigh", "Lowestoft", "Woking", "Maidenhead", "Basingstoke", "Fareham", "Gosport", "Ewell",
+    "Crosby", "Paignton", "Torquay", "Bebington", "Halesowen", "Kidderminster", "Rugby", "Leamington Spa", "Kettering",
+    "Wellingborough", "Dunstable", "Aylesbury", "Cheshunt", "Welwyn Garden City", "Margate", "Royal Tunbridge Wells", "Ashford",
+    "Braintree", "Canvey Island", "Clacton-on-Sea", "Sittingbourne", "Gravesend", "Dartford", "Weymouth", "Falmouth", "St Austell",
+    "Scarborough", "Bridlington", "Castleford", "Pontefract", "Sale", "Widnes", "Runcorn", "Ellesmere Port", "Birkenhead",
+    "Wallasey", "Barrow-in-Furness", "Workington", "Whitehaven", "Chorley", "Accrington", "Lytham St Annes", "Stafford",
+    "Bromsgrove", "Grantham", "Ely", "Lichfield", "Ripon", "Salisbury", "Wells", "Solihull", "Guildford", "Staines", "Chatham",
+    "Hastings", "Nuneaton", "Tamworth", "Cannock", "Bath"
 ];
 
 const commonProblems = [
@@ -127,30 +142,40 @@ async function generateSitemap() {
 
     // Helper to write a sitemap file
     const writeSitemap = (filename, urls) => {
-        let xml = `<?xml version="1.0" encoding="UTF-8"?>
+        try {
+            let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-        urls.forEach(u => {
-            xml += `
+            urls.forEach(u => {
+                xml += `
   <url>
     <loc>${u.loc}</loc>
     ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
     ${u.changefreq ? `<changefreq>${u.changefreq}</changefreq>` : ''}
     ${u.priority ? `<priority>${u.priority}</priority>` : ''}
   </url>`;
-        });
-        xml += `
+            });
+            xml += `
 </urlset>`;
 
-        const outputPath = path.join(__dirname, `../public/${filename}`);
-        fs.writeFileSync(outputPath, xml);
-        console.log(` ✅ Generated ${filename} (${urls.length} URLs)`);
-        sitemaps.push(filename);
+            const outputPath = path.join(__dirname, `../public/${filename}`);
+            const dir = path.dirname(outputPath);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+
+            // Use try-catch for the write itself
+            fs.writeFileSync(outputPath, xml, { flag: 'w' });
+            console.log(` ✅ Generated ${filename} (${urls.length} URLs)`);
+            sitemaps.push(filename);
+        } catch (err) {
+            console.error(` ❌ Failed to generate ${filename}:`, err);
+        }
     };
 
     // 1. Static Pages
     const staticUrls = [
-        '', '/about', '/pricing', '/terms', '/privacy', '/compare',
-        '/contact', '/user/login', '/business/login', '/blog', '/vetting-process'
+        '', '/us', '/about', '/pricing', '/terms', '/privacy', '/compare',
+        '/contact', '/user/login', '/business/login', '/blog', '/us/blog', '/vetting-process', '/locations', '/us/locations'
     ].map(p => ({
         loc: `${BASE_URL}${p}`,
         changefreq: 'weekly',

@@ -7,9 +7,9 @@ import type { Business } from '@/lib/businesses';
 
 // Fix for default Leaflet markers in React
 // @ts-ignore
-import icon from 'leaflet/dist/images/marker-icon.png';
+import icon from 'leaflet/dist/images/marker-icon.webp';
 // @ts-ignore
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.webp';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -71,7 +71,7 @@ export const LiveMap = ({ center = DEFAULT_CENTER, zoom = 13, className, busines
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp"
                 />
 
                 <MapUpdater center={center} zoom={zoom} />

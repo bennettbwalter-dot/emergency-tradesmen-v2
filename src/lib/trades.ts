@@ -1,15 +1,15 @@
 export const trades = [
-  { slug: "plumber", name: "Plumber", usName: "Plumber", icon: "💧", image: "/emergency-plumber-v2.jpg", vectorIcon: "/icons/plumber.png" },
-  { slug: "electrician", name: "Electrician", usName: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.png", vectorIcon: "/icons/electrician.png" },
-  { slug: "locksmith", name: "Locksmith", usName: "Locksmith", icon: "🔐", image: "/emergency-locksmith-v2.jpg", vectorIcon: "/icons/locksmith.png" },
-  { slug: "gas-engineer", name: "Gas Engineer", usName: "HVAC / Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer-v2.png", vectorIcon: "/icons/gas-engineer.png" },
-  { slug: "drain-specialist", name: "Drain Specialist", usName: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist-v2.jpg", vectorIcon: "/icons/drain-specialist.png" },
-  { slug: "glazier", name: "Glazier", usName: "Glazier / Glass Repair", icon: "🪟", image: "/emergency-glazier-v2.jpg", vectorIcon: "/icons/glazier.png" },
-  { slug: "roofer", name: "Roofer", usName: "Roofer / Roof Repair", icon: "🏠", image: "/emergency-roofer-v2.jpg", vectorIcon: "/icons/roofer-icon-v2.png" },
-  { slug: "builder", name: "Builder", usName: "Builder / Construction", icon: "🧱", image: "/emergency-builder-v2.png", vectorIcon: "/icons/builder-icon-v2.png" },
-  { slug: "water-restoration", name: "Water Restoration", usName: "Water Damage & Restoration", icon: "🌊", image: "/water-hero-final.jpg", vectorIcon: "/water-restoration-icon.png" },
-  { slug: "breakdown", name: "Breakdown Recovery", usName: "Tow Truck", icon: "🚗", image: "/emergency-breakdown-v2.jpg", vectorIcon: "/icons/breakdown.png" },
-  { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.jpg", vectorIcon: "/hvac-icon.png" },
+  { slug: "plumber", name: "Plumber", usName: "Plumber", icon: "💧", image: "/emergency-plumber-v2.webp", vectorIcon: "/icons/plumber.webp" },
+  { slug: "electrician", name: "Electrician", usName: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.webp", vectorIcon: "/icons/electrician.webp" },
+  { slug: "locksmith", name: "Locksmith", usName: "Locksmith", icon: "🔐", image: "/emergency-locksmith-v2.webp", vectorIcon: "/icons/locksmith.webp" },
+  { slug: "gas-engineer", name: "Gas Engineer", usName: "HVAC / Gas Engineer", icon: "🔥", image: "/emergency-gas-engineer-v2.webp", vectorIcon: "/icons/gas-engineer.webp" },
+  { slug: "drain-specialist", name: "Drain Specialist", usName: "Drain Specialist", icon: "🚿", image: "/emergency-drain-specialist-v2.webp", vectorIcon: "/icons/drain-specialist.webp" },
+  { slug: "glazier", name: "Glazier", usName: "Glazier / Glass Repair", icon: "🪟", image: "/emergency-glazier-v2.webp", vectorIcon: "/icons/glazier.webp" },
+  { slug: "roofer", name: "Roofer", usName: "Roofer / Roof Repair", icon: "🏠", image: "/emergency-roofer-v2.webp", vectorIcon: "/icons/roofer-icon-v2.webp" },
+  { slug: "builder", name: "Builder", usName: "Builder / Construction", icon: "🧱", image: "/emergency-builder-v2.webp", vectorIcon: "/icons/builder-icon-v2.webp" },
+  { slug: "water-restoration", name: "Water Restoration", usName: "Water Damage & Restoration", icon: "🌊", image: "/water-hero-final.webp", vectorIcon: "/water-restoration-icon.webp" },
+  { slug: "breakdown", name: "Breakdown Recovery", usName: "Tow Truck", icon: "🚗", image: "/emergency-breakdown-v2.webp", vectorIcon: "/icons/breakdown.webp" },
+  { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.webp", vectorIcon: "/hvac-icon.webp" },
 ] as const;
 
 import usCityList from './us_cities.json';

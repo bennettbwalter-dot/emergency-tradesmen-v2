@@ -24,7 +24,7 @@ export function HomeEmergencyAdUK() {
                     >
                         <div className="relative">
                             <img
-                                src="/affiliate/home-emergency-creative.jpg"
+                                src="/affiliate/home-emergency-creative.webp"
                                 alt="Home Emergency Assist Cover"
                                 className="rounded-lg shadow-lg w-full max-w-[350px] object-cover border-4 border-white dark:border-slate-800"
                             />

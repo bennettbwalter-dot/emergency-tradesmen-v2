@@ -1,9 +1,9 @@
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Phone, Shield, Clock, Award, CheckCircle2, MapPin, Star } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
@@ -14,36 +14,34 @@ export default function About() {
     const termSingular = isUS ? "Contractor" : "Tradesman";
     const regionName = isUS ? "United States" : "United Kingdom";
 
+    const orgSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": `Emergency ${tradeTerm}`,
+        "alternateName": isUS ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
+        "url": "https://emergencytradesmen.net",
+        "logo": "https://emergencytradesmen.net/et-logo-v2.webp",
+        "description": `The largest network of vetted emergency ${tradeTerm.toLowerCase()} in the ${regionName}.`,
+        "areaServed": {
+            "@type": "Country",
+            "name": regionName
+        },
+        "sameAs": [
+            "https://www.facebook.com/profile.php?id=61588024972553",
+            "https://www.instagram.com/emergencytradesmen/",
+            "https://x.com/etemergenc26245",
+            "https://www.tiktok.com/@emergencytradesmen"
+        ]
+    };
+
     return (
         <>
-            <Helmet>
-                <title>About Emergency {tradeTerm} | Trusted Local {tradeTerm} 24/7</title>
-                <meta
-                    name="description"
-                    content={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding a local ${termSingular.toLowerCase()} for plumbing, electrical, and HVAC repairs.`}
-                />
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Organization",
-                        "name": `Emergency ${tradeTerm}`,
-                        "alternateName": isUS ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
-                        "url": "https://emergencytradesmen.net",
-                        "logo": "https://emergencytradesmen.net/et-logo-new.png",
-                        "description": `The largest network of vetted emergency ${tradeTerm.toLowerCase()} in the ${regionName}.`,
-                        "areaServed": {
-                            "@type": "Country",
-                            "name": regionName
-                        },
-                        "sameAs": [
-                            "https://www.facebook.com/profile.php?id=61588024972553",
-                            "https://www.instagram.com/emergencytradesmen/",
-                            "https://x.com/etemergenc26245",
-                            "https://www.tiktok.com/@emergencytradesmen"
-                        ]
-                    })}
-                </script>
-            </Helmet>
+            <SEO
+                title={`About Emergency ${tradeTerm} | Trusted Local ${tradeTerm} 24/7`}
+                description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding a local ${termSingular.toLowerCase()} for plumbing, electrical, and HVAC repairs.`}
+                canonical="/about"
+                jsonLd={orgSchema}
+            />
 
             <Header />
 
@@ -65,7 +63,7 @@ export default function About() {
                                     When disaster strikes, you need a local <strong>{termSingular.toLowerCase()}</strong> you can trust.
                                 </p>
                                 <div className="flex justify-center mb-6">
-                                    <img src="/et-logo-new.png" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
+                                    <img src="/et-logo-new.webp" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
                                 </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>
@@ -79,7 +77,7 @@ export default function About() {
                             <div className="relative animate-fade-up-delay-1">
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/50 aspect-[4/3]">
                                     <img
-                                        src="/images/about/team.png"
+                                        src="/images/about/team.webp"
                                         alt={`Our team of professional ${tradeTerm.toLowerCase()}`}
                                         className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
                                     />
@@ -166,7 +164,7 @@ export default function About() {
                             <div className="order-2 md:order-1 relative">
                                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/50 aspect-video">
                                     <img
-                                        src="/images/about/plumber.png"
+                                        src="/images/about/plumber.webp"
                                         alt={`Emergency ${termSingular} fixing a pipe`}
                                         className="object-cover w-full h-full"
                                     />
@@ -209,7 +207,7 @@ export default function About() {
                             <div className="relative">
                                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/50 aspect-video">
                                     <img
-                                        src="/images/about/electrician.png"
+                                        src="/images/about/electrician.webp"
                                         alt={`Certified ${termSingular} working on a panel`}
                                         className="object-cover w-full h-full"
                                     />

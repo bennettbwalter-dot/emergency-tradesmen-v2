@@ -83,7 +83,7 @@ export function AnimatedBeamDemo() {
                         iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
-                                src="/describe-problem-icon.png"
+                                src="/describe-problem-icon.webp"
                                 alt="Describe Problem"
                                 className="w-full h-full object-contain"
                             />
@@ -97,7 +97,7 @@ export function AnimatedBeamDemo() {
                         iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
-                                src="/voice-speaking-icon.png"
+                                src="/voice-speaking-icon.webp"
                                 alt="Voice Agent"
                                 className="w-full h-full object-contain"
                             />
@@ -113,7 +113,7 @@ export function AnimatedBeamDemo() {
                         iconClassName="w-6 h-6 md:w-8 md:h-8"
                         icon={
                             <img
-                                src="/intelligent-ai-icon.png"
+                                src="/intelligent-ai-icon.webp"
                                 alt="Intelligent AI"
                                 className="w-full h-full object-contain"
                             />
@@ -128,7 +128,7 @@ export function AnimatedBeamDemo() {
                         iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
-                                src="/select-trade-icon.png"
+                                src="/select-trade-icon.webp"
                                 alt="Select Trade Image"
                                 className="w-full h-full object-contain"
                             />
@@ -142,7 +142,7 @@ export function AnimatedBeamDemo() {
                         iconClassName="w-5 h-5 md:w-7 md:h-7"
                         icon={
                             <img
-                                src="/dropdown-connect-icon.png"
+                                src="/dropdown-connect-icon.webp"
                                 alt="Drop-Down Connect"
                                 className="w-full h-full object-contain"
                             />

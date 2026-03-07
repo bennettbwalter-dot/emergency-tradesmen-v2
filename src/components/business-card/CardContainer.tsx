@@ -38,7 +38,7 @@ export function CardContainer({ children, className }: CardContainerProps) {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50 pointer-events-none" />
 
                 {/* Noise Texture for 'Premium' feel */}
-                <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none mix-blend-soft-light" />
+                <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.webp')] pointer-events-none mix-blend-soft-light" />
             </div>
 
             <div className="relative z-10 flex flex-col gap-3 p-4 pt-5">

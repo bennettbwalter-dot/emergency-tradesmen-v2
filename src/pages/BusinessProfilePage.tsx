@@ -299,13 +299,13 @@ export default function BusinessProfilePage() {
         'roofer': '/images/roofer/emergency-roofer-hero.webp',
         'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.webp',
         'hvac': '/images/hvac/emergency-hvac-hero.webp',
-        'plumber': '/images/plumber/boiler-fix.png',
-        'electrician': '/images/electrician/fusebox-fix.png',
-        'locksmith': '/images/locksmith/door-lock-pick.png',
-        'gas-engineer': '/images/gas-engineer/boiler-close-up.png',
-        'drain-specialist': '/images/drain-specialist/cctv-survey.png',
-        'glazier': '/images/glazier/glass-install.png',
-        'breakdown': '/images/breakdown-recovery/tow-truck-night.jpg',
+        'plumber': '/images/plumber/boiler-fix.webp',
+        'electrician': '/images/electrician/fusebox-fix.webp',
+        'locksmith': '/images/locksmith/door-lock-pick.webp',
+        'gas-engineer': '/images/gas-engineer/boiler-close-up.webp',
+        'drain-specialist': '/images/drain-specialist/cctv-survey.webp',
+        'glazier': '/images/glazier/glass-install.webp',
+        'breakdown': '/images/breakdown-recovery/tow-truck-night.webp',
         'default': 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop'
     };
 

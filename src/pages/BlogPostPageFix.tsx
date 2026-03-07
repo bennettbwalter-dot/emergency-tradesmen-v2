@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
@@ -73,12 +73,12 @@ export default function BlogPostPage() {
             .replace(/emergency services UK/gi, 'US emergency services')
             .replace(/UK's fastest/gi, 'USA\'s fastest')
             .replace(/nationwide/gi, 'coast-to-coast')
-            .replace(/\/blog\/plumbing-emergency\/infographic-uk\.jpg/g, '/blog/plumbing-emergency/infographic-us.png')
-            .replace(/\/blog\/plumbing-emergency\/drainage-uk\.jpg/g, '/blog/plumbing-emergency/drainage-us.jpg')
+            .replace(/\/blog\/plumbing-emergency\/infographic-uk\.jpg/g, '/blog/plumbing-emergency/infographic-us.webp')
+            .replace(/\/blog\/plumbing-emergency\/drainage-uk\.jpg/g, '/blog/plumbing-emergency/drainage-us.webp')
             .replace(/London/g, 'Dallas')
             .replace(/Manchester/g, 'Houston')
             .replace(/Leeds/g, 'Chicago')
-            .replace(/£/g, '$')
+            .replace(/�/g, '$')
             .replace(/Kensington to Canary Wharf/g, 'Preston Hollow to Downtown')
             .replace(/Greater Manchester/g, 'Greater Houston')
             .replace(/West Yorkshire/g, 'Chicagoland');
@@ -772,7 +772,7 @@ export default function BlogPostPage() {
                             </div>
                         )}
 
-                        {/* Internal Links Section — Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
+                        {/* Internal Links Section � Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
                         {(() => {
                             const slugTradeMap: Record<string, { trade: string; tradeSlug: string; ukCities: string[]; usCities: string[] }> = {
                                 'electrical-fire-causes-prevention': {
@@ -869,6 +869,11 @@ export default function BlogPostPage() {
                                     trade: 'Plumber', tradeSlug: 'plumber',
                                     ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
                                     usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
+                                },
+                                'emergency-repair-contractor-improve-not-move': {
+                                    trade: 'Plumber', tradeSlug: 'plumber',
+                                    ukCities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol'],
+                                    usCities: ['Dallas', 'Houston', 'Chicago', 'Phoenix', 'Miami', 'Los Angeles']
                                 }
                             };
 
@@ -894,7 +899,7 @@ export default function BlogPostPage() {
                                                     to={`${prefix}/emergency-${tradeData.tradeSlug}/${city.toLowerCase().replace(/\s+/g, '-')}`}
                                                     className="text-sm text-primary hover:text-gold hover:underline transition-colors py-1"
                                                 >
-                                                    Emergency {tradeData.trade} {city} →
+                                                    Emergency {tradeData.trade} {city} ?
                                                 </Link>
                                             ))}
                                         </div>
@@ -903,7 +908,7 @@ export default function BlogPostPage() {
                                                 to={isUK ? '/locations' : '/us/locations'}
                                                 className="text-sm font-medium text-gold hover:text-gold-dark transition-colors"
                                             >
-                                                View all locations →
+                                                View all locations ?
                                             </Link>
                                         </div>
                                     </div>
@@ -919,7 +924,7 @@ export default function BlogPostPage() {
 
                                 <div className="relative z-10 px-6 py-16 md:px-16 text-center">
                                     <img
-                                        src="/et-logo-v2.png"
+                                        src="/et-logo-v2.webp"
                                         alt="Emergency Tradesmen Logo"
                                         className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-gold/30 shadow-2xl shadow-gold/20 object-cover"
                                     />

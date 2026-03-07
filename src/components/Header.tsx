@@ -44,7 +44,7 @@ export function Header({ countryCode }: HeaderProps) {
           <div className="flex-shrink-0 z-50">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
               <div className="relative">
-                <img src="/et-logo-v2.png" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
+                <img src="/et-logo-v2.webp" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="hidden sm:block">
@@ -127,7 +127,7 @@ export function Header({ countryCode }: HeaderProps) {
                   {/* Top Header Match */}
                   <div className="flex items-center justify-between mb-8 mt-2 px-2">
                     <div className="flex items-center gap-3">
-                      <img src="/et-logo-v2.png" alt="Logo" className="w-8 h-8 rounded-full border border-gold/30" />
+                      <img src="/et-logo-v2.webp" alt="Logo" className="w-8 h-8 rounded-full border border-gold/30" />
                       <span className="font-display tracking-wide text-lg text-white">Emergency<span className="text-gold ml-1">{isUS ? 'Contractors' : 'Tradesmen'}</span></span>
                     </div>
                   </div>

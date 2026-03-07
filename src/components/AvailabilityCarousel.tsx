@@ -1,29 +1,29 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export function AvailabilityCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const workImages = [
-    "/carousel-images/electrician-1.png",
-    "/carousel-images/boiler-engineer.png",
-    "/carousel-images/carpenter.png",
-    "/carousel-images/plumber.jpg",
-    "/carousel-images/insulation-worker.jpg",
-    "/carousel-images/electrician-fuse-box.png",
-    "/carousel-images/electrician-smoke-alarm.png",
-    "/carousel-images/plumber-sink.png",
-    "/carousel-images/boiler-repair.png",
-    "/carousel-images/electrician-ladder.png",
-    "/carousel-images/electrician-fuse-box-2.png",
-    "/carousel-images/plumber-bathtub.png",
-    "/carousel-images/electrician-socket.png",
-    "/carousel-images/boiler-service.png",
-    "/carousel-images/boiler-repair-2.png",
-    "/carousel-images/plumber-pipes.jpg",
-    "/carousel-images/boiler-engineer-2.png",
-    "/carousel-images/carpenter-skirting.png",
-    "/carousel-images/plumber-radiator-valve.png",
-    "/carousel-images/plumber-radiator-2.jpg"
+    "/carousel-images/electrician-1.webp",
+    "/carousel-images/boiler-engineer.webp",
+    "/carousel-images/carpenter.webp",
+    "/carousel-images/plumber.webp",
+    "/carousel-images/insulation-worker.webp",
+    "/carousel-images/electrician-fuse-box.webp",
+    "/carousel-images/electrician-smoke-alarm.webp",
+    "/carousel-images/plumber-sink.webp",
+    "/carousel-images/boiler-repair.webp",
+    "/carousel-images/electrician-ladder.webp",
+    "/carousel-images/electrician-fuse-box-2.webp",
+    "/carousel-images/plumber-bathtub.webp",
+    "/carousel-images/electrician-socket.webp",
+    "/carousel-images/boiler-service.webp",
+    "/carousel-images/boiler-repair-2.webp",
+    "/carousel-images/plumber-pipes.webp",
+    "/carousel-images/boiler-engineer-2.webp",
+    "/carousel-images/carpenter-skirting.webp",
+    "/carousel-images/plumber-radiator-valve.webp",
+    "/carousel-images/plumber-radiator-2.webp"
   ];
 
   useEffect(() => {

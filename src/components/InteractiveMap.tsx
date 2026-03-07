@@ -6,8 +6,8 @@ import { getViewState } from '@/lib/mapUtils';
 import { useAuth } from "@/contexts/AuthContext";
 
 // Fix Leaflet generic marker icon missing assets
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import icon from 'leaflet/dist/images/marker-icon.webp';
+import iconShadow from 'leaflet/dist/images/marker-shadow.webp';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -103,7 +103,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
             // Initialize map only once
             const map = L.map(mapContainerRef.current).setView([viewState.center.lat, viewState.center.lng], viewState.zoom);
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.webp', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             }).addTo(map);
 
