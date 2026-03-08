@@ -7,6 +7,7 @@ import { CardStatus } from "./business-card/CardStatus";
 import { CardDetails } from "./business-card/CardDetails";
 import { CardActions } from "./business-card/CardActions";
 import { CardSocials } from "./business-card/CardSocials";
+import ElectricBorder from "./ui/ElectricBorder";
 
 // Force HMR update
 
@@ -24,8 +25,9 @@ interface BusinessCardProps {
 export function BusinessCard({ business, rank }: BusinessCardProps) {
   // Trust Score (1-5 Basis) used for the footer pill
   const trustScore = calculateTrustScore(business);
+  const isPaid = business.tier === 'paid' || business.is_premium;
 
-  return (
+  const cardContent = (
     <CardContainer>
       {/* 1. Header (Rank + Facorite + Trade) */}
       <CardHeader business={business} rank={rank} />
@@ -48,20 +50,20 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       {/* 6. Footer Pill (Trust Badge) - Premium Jewel Effect */}
       <div className="flex justify-center mt-3 relative z-20 h-auto font-ui">
         <div className={`flex items-center gap-2.5 px-5 py-1.5 rounded-full border shadow-[0_4px_10px_rgba(0,0,0,0.1)] relative overflow-hidden shrink-0 backdrop-blur-xl transition-all duration-300 group hover:scale-105 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-             ${trustScore === 5 
-               ? 'bg-gradient-to-b from-white/95 to-white/90 dark:from-[#2a2a35]/95 dark:to-[#1a1a24]/90 border-amber-400/40 shadow-glow-gold/40' 
-               : 'bg-white/90 dark:bg-[#1e293b]/80 border-blue-400/30 shadow-lg'}`}>
+             ${trustScore === 5
+            ? 'bg-gradient-to-b from-white/95 to-white/90 dark:from-[#2a2a35]/95 dark:to-[#1a1a24]/90 border-amber-400/40 shadow-glow-gold/40'
+            : 'bg-white/90 dark:bg-[#1e293b]/80 border-blue-400/30 shadow-lg'}`}>
 
           {/* Shimmer - angled and wider for more 'sheen' */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out -skew-x-12" />
 
           {/* Icon Container with 'Inset' feel */}
           <div className={`w-5 h-5 rounded-full flex items-center justify-center shadow-inner text-white shrink-0 z-10 relative overflow-hidden
-                ${trustScore === 5 
-                  ? 'bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 ring-1 ring-amber-400/50' 
-                  : 'bg-gradient-to-br from-blue-300 via-blue-500 to-blue-700 ring-1 ring-blue-400/50'}`}>
-             {/* Simple highlight for volume */}
-             <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent opacity-80" />
+                ${trustScore === 5
+              ? 'bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 ring-1 ring-amber-400/50'
+              : 'bg-gradient-to-br from-blue-300 via-blue-500 to-blue-700 ring-1 ring-blue-400/50'}`}>
+            {/* Simple highlight for volume */}
+            <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent opacity-80" />
             <ShieldCheck className="w-2.5 h-2.5 relative z-10 drop-shadow-sm" strokeWidth={3} />
           </div>
 
@@ -72,4 +74,19 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
       </div>
     </CardContainer>
   );
+
+  if (isPaid) {
+    return (
+      <ElectricBorder
+        color="#c5a059" // Match the gold theme
+        speed={1}
+        chaos={0.12}
+        borderRadius={24}
+      >
+        {cardContent}
+      </ElectricBorder>
+    );
+  }
+
+  return cardContent;
 }

@@ -329,7 +329,7 @@ export default function BusinessProfilePage() {
                 <div className="bg-[#0A0A0A] pt-6 sm:pt-10">
                     <div className="container-wide">
                         <Link
-                            to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city}`}
+                            to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city.toLowerCase().replace(/\s+/g, '-')}`}
                             className="inline-flex items-center text-xs uppercase tracking-widest text-muted-foreground hover:text-gold transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4 mr-2" />

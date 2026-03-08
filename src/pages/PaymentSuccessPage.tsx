@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Crown, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import confetti from "canvas-confetti";
@@ -11,26 +12,29 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
 
 export default function PaymentSuccessPage() {
-    const { user } = useAuth();
+    const { user, refreshUser } = useAuth();
     const { settings } = useLocalization();
     const navigate = useNavigate();
+    const [countdown, setCountdown] = useState(5);
     const hasSentRef = useRef(false);
-    const [countdown, setCountdown] = useState(4);
 
     useEffect(() => {
-        // Countdown timer
-        const timer = setInterval(() => {
-            setCountdown((prev) => prev - 1);
+        // Refresh user session to pick up new subscription status immediately
+        refreshUser();
+
+        // Redirection timer
+        const timer = setTimeout(() => {
+            navigate('/premium-profile');
+        }, 5000);
+
+        // Visual Countdown
+        const interval = setInterval(() => {
+            setCountdown(prev => Math.max(0, prev - 1));
         }, 1000);
 
-        // Redirect after countdown
-        const redirectTimeout = setTimeout(() => {
-            navigate('/premium-profile');
-        }, 4000);
-
         return () => {
-            clearInterval(timer);
-            clearTimeout(redirectTimeout);
+            clearTimeout(timer);
+            clearInterval(interval);
         };
     }, [navigate]);
 
@@ -80,59 +84,72 @@ export default function PaymentSuccessPage() {
         }
 
         return () => clearInterval(interval);
-    }, [user]);
+    }, [user, settings.countryCode]);
 
     return (
-        <div className="min-h-screen flex flex-col bg-slate-50">
+        <div className="min-h-screen flex flex-col bg-slate-950 text-white">
             <SEO title="Payment Successful" noIndex />
             <Header />
 
             <main className="flex-grow flex items-center justify-center p-4">
-                <div className="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-2xl w-full text-center border border-slate-100 relative overflow-hidden">
+                <div className="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-2xl w-full text-center relative overflow-hidden">
                     {/* Top Decor Line */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-[#D4AF37]" />
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#D4AF37] to-yellow-600" />
+
+                    <div className="mb-8">
+                        <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                            Official Premium Member
+                        </Badge>
+                    </div>
 
                     {/* Success Icon */}
-                    <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-white shadow-sm ring-4 ring-green-50/50">
+                    <div className="w-24 h-24 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-yellow-500/20 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
                         <CheckCircle className="w-12 h-12 text-[#D4AF37]" />
                     </div>
 
-                    <h1 className="text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">
-                        Payment Successful!
+                    <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">
+                        Thank you for joining!
                     </h1>
-                    <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">
-                        You're a Verified Pro!
-                    </h2>
+                    <div className="flex items-center justify-center gap-2 mb-6">
+                        <Crown className="w-5 h-5 text-[#D4AF37]" />
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-[#D4AF37] to-yellow-600 bg-clip-text text-transparent">
+                            Welcome to the family
+                        </h2>
+                    </div>
 
-                    <p className="text-slate-600 mb-8 max-w-lg mx-auto">
-                        Thank you for your payment. Your 'Emergency Tradesmen' subscription is confirmed.
-                        <br />
-                        <span className="font-semibold text-foreground block mt-2">
-                            Redirecting to Profile Setup in {countdown}...
-                        </span>
+                    <p className="text-slate-400 mb-8 max-w-sm mx-auto text-lg leading-relaxed">
+                        We're thrilled to have you with us. Your premium features are now active. Redirecting you to complete your profile in <span className="text-white font-bold">{countdown}</span> seconds...
                     </p>
 
-                    {/* Subscription Details Bar */}
-                    <div className="bg-black text-white rounded-lg overflow-hidden mb-10 shadow-md">
-                        <div className="py-2 px-4 bg-slate-900 text-xs font-bold tracking-widest uppercase border-b border-slate-800">
-                            Subscription Details
-                        </div>
-                        <div className="py-3 px-4 text-sm font-medium bg-black">
-                            Plan: <span className="text-[#D4AF37]">Verified Pro Monthly</span> • Status: <span className="text-green-400">Active</span>
+                    <div className="space-y-4">
+                        <Button asChild className="w-full bg-[#D4AF37] hover:bg-yellow-600 text-black font-bold py-7 rounded-2xl text-xl shadow-xl shadow-yellow-900/20 transition-all hover:scale-[1.02]">
+                            <Link to="/premium-profile">
+                                Complete Your Setup Now
+                            </Link>
+                        </Button>
+
+                        <div className="pt-4 border-t border-slate-800">
+                            <Link to="/user/dashboard" className="text-slate-500 hover:text-[#D4AF37] transition-colors text-sm flex items-center justify-center gap-2">
+                                Go to Dashboard instead <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     </div>
 
-                    {/* Primary Dashboard Action */}
-                    <Link to="/premium-profile">
-                        <Button className="w-full py-6 text-lg font-bold bg-[#D4AF37] hover:bg-[#b5932a] text-white shadow-lg shadow-[#D4AF37]/20 transition-all hover:scale-[1.01]">
-                            Setup Your Profile Now
-                        </Button>
-                    </Link>
-
-                    <div className="mt-4">
-                        <Link to="/user/dashboard" className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4">
-                            Go to Dashboard instead
-                        </Link>
+                    {/* Subscription Summary */}
+                    <div className="mt-10 bg-black/40 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                                <ShieldCheck className="w-5 h-5 text-green-500" />
+                            </div>
+                            <div className="text-left">
+                                <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Status</p>
+                                <p className="text-sm font-semibold text-white">Active Premium</p>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Plan</p>
+                            <p className="text-sm font-semibold text-[#D4AF37]">Verified Pro</p>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -141,3 +158,20 @@ export default function PaymentSuccessPage() {
         </div>
     );
 }
+
+const ArrowRight = ({ className }: { className?: string }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+    >
+        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+    </svg>
+);

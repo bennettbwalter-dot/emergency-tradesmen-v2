@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap } from "lucide-react";
+import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -203,7 +203,17 @@ export default function UserDashboard() {
                         </Card>
 
                         {/* Main Content */}
-                        <div className="flex-1 w-full">
+                        <div className="flex-1 w-full space-y-6">
+                            {isPremium && (
+                                <div className="bg-gradient-to-r from-slate-900 to-slate-800 border border-gold/20 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                                        <Crown className="w-16 h-16 text-gold" />
+                                    </div>
+                                    <h2 className="text-xl font-bold text-white mb-1">Thank you for being a Pro member!</h2>
+                                    <p className="text-slate-400 text-sm max-w-md">We're glad to have you in the family. Your professional profile is active and helping customers find you.</p>
+                                </div>
+                            )}
+
                             <Tabs defaultValue={defaultTab} className="w-full">
                                 <TabsList className="grid w-full grid-cols-6 mb-8">
                                     <TabsTrigger value="profile">Profile</TabsTrigger>
@@ -233,7 +243,7 @@ export default function UserDashboard() {
                                 </TabsContent>
 
                                 <TabsContent value="settings" className="animate-fade-up">
-                                    <SettingsTab />
+                                    <SettingsTab isPremium={isPremium} />
                                 </TabsContent>
                             </Tabs>
                         </div>
@@ -436,7 +446,7 @@ function HistoryTab() {
 
 
 
-function SettingsTab() {
+function SettingsTab({ isPremium }: { isPremium: boolean }) {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -501,6 +511,28 @@ function SettingsTab() {
 
     return (
         <div className="space-y-6">
+            {isPremium && (
+                <Card className="border-gold/20 bg-gold/5">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <Zap className="w-5 h-5 text-gold" />
+                            Business Profile
+                        </CardTitle>
+                        <CardDescription>
+                            Your Pro subscription is active. Manage your business listing and SEO settings.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Button
+                            className="bg-gold hover:bg-gold/90 text-gold-foreground"
+                            onClick={() => window.location.href = '/premium-profile'}
+                        >
+                            Open Profile Editor
+                        </Button>
+                    </CardContent>
+                </Card>
+            )}
+
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">

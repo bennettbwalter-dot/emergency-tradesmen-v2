@@ -10,7 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { createClient } from "@supabase/supabase-js";
-import { isDeveloper } from "@/lib/subscriptionService";
+import { isDeveloper, hasAccess } from "@/lib/subscriptionService";
 import { Crown, ShieldCheck, Eye, CheckCircle2, ChevronRight, AlertCircle, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -72,15 +72,29 @@ export default function NewProfileEditor() {
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
     const isAdmin = (user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase()) || user?.email?.toLowerCase().includes('bennett');
 
-    // Init Logic
-    useEffect(() => {
-        if (!authLoading && !isAuthenticated && !isAdminArea) {
-            navigate('/login?redirect=/premium-profile');
-        }
-    }, [authLoading, isAuthenticated, isAdminArea, navigate]);
+    // Access control via initBusiness
 
     const initBusiness = useCallback(async () => {
-        if (authLoading || (!user && !isAdminArea)) return;
+        if (authLoading) return;
+
+        // Access control checks moved from checkAccess useEffect
+        if (!isAuthenticated && !isAdminArea) {
+            navigate('/login?redirect=/premium-profile');
+            return;
+        }
+
+        if (user && !isAdminArea && !isDevUser) {
+            const premium = await hasAccess('professional');
+            if (!premium) {
+                toast({
+                    title: "Premium Feature",
+                    description: "The Profile Editor is only available to Pro members.",
+                    variant: "default"
+                });
+                navigate('/pricing');
+                return;
+            }
+        }
 
         try {
             console.log("Initializing Editor...");
@@ -88,6 +102,11 @@ export default function NewProfileEditor() {
             // 1. Diagnostics
             const { data: { user: sbUser }, error: userErr } = await supabase.auth.getUser();
             const activeId = sbUser?.id || user?.id;
+
+            if (!activeId && !isAdminArea) {
+                navigate('/login?redirect=/premium-profile');
+                return;
+            }
 
             console.log("=== DIAGNOSTICS ===");
             console.log("Active User Email:", sbUser?.email || user?.email);
@@ -100,10 +119,25 @@ export default function NewProfileEditor() {
 
             if (adminOverrideId && (isAdmin || isDevUser || isAdminArea)) {
                 query = query.eq('id', adminOverrideId);
-            } else if (activeId) {
-                query = query.or(`owner_user_id.eq.${activeId},owner_id.eq.${activeId}`);
             } else {
-                return;
+                // Regular User path
+                if (!activeId) return;
+
+                // Premium Access Check
+                if (!isAdminArea && !isDevUser) {
+                    const premium = await hasAccess('professional');
+                    if (!premium) {
+                        toast({
+                            title: "Premium Feature",
+                            description: "The Profile Editor is only available to Pro members.",
+                            variant: "default"
+                        });
+                        navigate('/pricing');
+                        return;
+                    }
+                }
+
+                query = query.or(`owner_user_id.eq.${activeId},owner_id.eq.${activeId}`);
             }
 
             const { data, error } = await query.limit(1).maybeSingle();
@@ -328,6 +362,15 @@ export default function NewProfileEditor() {
             if (error) throw error;
             toast({ title: "Profile Saved", description: "Your changes are now live!", className: "bg-green-600 text-white" });
 
+            // After save, redirect to the listings page
+            const tradePath = (formData.trade || 'tradesmen').toLowerCase().replace(/\s+/g, '-');
+            const city = formData.selected_locations?.[0] || 'london';
+            const cityPath = city.toLowerCase().replace(/\s+/g, '-');
+
+            setTimeout(() => {
+                window.location.href = `/${tradePath}/${cityPath}`;
+            }, 1500);
+
             // Track operational update in PostHog
             (window as any).posthog?.capture('Profile Updated', {
                 business_id: businessId,
@@ -464,8 +507,8 @@ export default function NewProfileEditor() {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-8 relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#D4AF37] to-yellow-600" />
-                            <h2 className="text-2xl font-bold text-white text-center mb-2">Welcome to Pro!</h2>
-                            <p className="text-slate-400 text-center mb-8">Account setup complete. Let's build your profile.</p>
+                            <h2 className="text-2xl font-bold text-white text-center mb-2">Welcome to the family!</h2>
+                            <p className="text-slate-400 text-center mb-8">Thank you for joining Emergency Tradesmen Pro. Your account is ready – let's build your professional profile.</p>
                             <Button onClick={() => setShowWelcome(false)} className="w-full bg-[#D4AF37] hover:bg-yellow-600 text-black font-bold h-12 text-lg">Start Setup</Button>
                         </motion.div>
                     </motion.div>

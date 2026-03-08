@@ -7,11 +7,33 @@ import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react"
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { useFeatureFlagEnabled } from "posthog-js/react";
 import { SEO } from "@/components/SEO";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingPage() {
     const { settings } = useLocalization();
+    const { user } = useAuth();
     const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
     const isUS = settings.countryCode === 'US';
+
+    const handleCheckout = (url: string) => {
+        if (!user) {
+            // Redirect to login first, then we should ideally come back here.
+            // For now, simple redirect to auth.
+            window.location.href = `/auth?redirect=/pricing`;
+            return;
+        }
+
+        // Append user email or ID to Stripe link if possible (Stripe Payment Links support prefilling)
+        // prefilled_email is a common Stripe query param
+        const stripeUrl = new URL(url);
+        if (user.email) {
+            stripeUrl.searchParams.set('prefilled_email', user.email);
+        }
+        // client_reference_id is used by webhooks to identify the user
+        stripeUrl.searchParams.set('client_reference_id', user.id);
+
+        window.open(stripeUrl.toString(), '_blank');
+    };
 
     const handleContactUs = () => {
         window.location.href = "mailto:emergencytradesmen@outlook.com?subject=Pro%20Subscription%20Inquiry";
@@ -120,7 +142,7 @@ export default function PricingPage() {
                             <Button
                                 variant="hero"
                                 className="w-full h-12 text-lg"
-                                onClick={() => window.open('https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00', '_blank')}
+                                onClick={() => handleCheckout('https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00')}
                             >
                                 Get Pro Monthly
                             </Button>
@@ -158,7 +180,7 @@ export default function PricingPage() {
                             </ul>
                             <Button
                                 className="w-full h-12 text-lg bg-emerald-500 hover:bg-emerald-600 text-white"
-                                onClick={() => window.open('https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01', '_blank')}
+                                onClick={() => handleCheckout('https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01')}
                             >
                                 Get Pro Yearly
                             </Button>

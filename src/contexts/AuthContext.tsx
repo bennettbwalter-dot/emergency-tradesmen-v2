@@ -40,6 +40,7 @@ interface AuthContextType {
     signOut: () => Promise<void>;
 
     updateUser: (updates: Partial<User>) => void;
+    refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -182,6 +183,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             });
         }
     };
+    const refreshUser = async () => {
+        try {
+            const { data: { user: supabaseUser }, error } = await supabase.auth.getUser();
+            if (error) throw error;
+            if (supabaseUser) {
+                setUser(mapSupabaseUser(supabaseUser));
+            }
+        } catch (error) {
+            console.error("Error refreshing user:", error);
+        }
+    };
 
     return (
         <AuthContext.Provider
@@ -195,6 +207,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 logout,
                 signOut: logout, // Add signOut as an alias to logout
                 updateUser,
+                refreshUser,
             }}
         >
             {children}
