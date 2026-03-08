@@ -82,12 +82,12 @@ const Index = () => {
             <CTASection />
           </Suspense>
 
-          <div className="container mx-auto px-4 py-8">
+          <div className="container mx-auto px-4 py-16">
             <HomeEmergencyAd />
           </div>
 
           {/* FAQ Section */}
-          <div className="container mx-auto px-4 pt-12 pb-2 flex flex-col items-center">
+          <div className="container mx-auto px-4 py-16 flex flex-col items-center">
             <Button
               variant="outline"
               size="lg"

@@ -39,7 +39,7 @@ export function EmergencyServicesSection() {
     };
 
     return (
-        <section className="container-wide pt-24 pb-16 relative z-20 min-h-[800px]">
+        <section className="container-wide pt-14 pb-14 relative z-20 min-h-[800px]">
             <AnimatePresence mode="wait">
                 {!activeTrade ? (
                     <motion.div
@@ -49,23 +49,18 @@ export function EmergencyServicesSection() {
                         exit={{ opacity: 0, y: -30 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="text-center mb-16">
-                            <div className="inline-block mb-4">
-                                <span className="py-1 px-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-mono font-bold tracking-widest uppercase">
-                                    Your Emergency Trade Network
-                                </span>
+                        <div className="text-center">
+                            <div className="w-full max-w-5xl mx-auto px-4 animate-fade-up flex justify-center py-4">
+                                <img
+                                    src="/emergency-home-repairs-no-text.png"
+                                    alt="Emergency Home Repairs: Tap to Find, Verified Locals, Total Reliability"
+                                    className="w-full h-auto scale-[1.15] md:scale-100 transition-transform duration-500"
+                                    loading="lazy"
+                                />
                             </div>
-                            <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight text-foreground mb-6 pb-2">
-                                Verified Specialists. Any Emergency.
-                            </h2>
-
-                            <p className="text-muted-foreground/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                                From burst pipes to power cuts — tap any trade below to instantly find verified local plumbers, electricians, locksmiths, roofers and more.
-                                Available 24/7, near you, every day of the year.
-                            </p>
                         </div>
 
-                        <div style={{ height: '600px', position: 'relative' }} className="mb-24">
+                        <div style={{ height: '600px', position: 'relative' }} className="mb-0 mt-8 md:-mt-12">
                             {/* Tour anchor — targets the top of the trade list */}
                             <div data-tour="tour-services" className="absolute top-0 left-0 right-0 h-px pointer-events-none" />
                             <FlowingMenu items={menuItems}

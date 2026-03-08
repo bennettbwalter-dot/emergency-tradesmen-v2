@@ -249,34 +249,6 @@ export default function BusinessProfilePage() {
     const countryCode = business.country_code || 'GB';
     const isUS = countryCode === 'US';
 
-    const businessSchema = {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": `https://emergencytradesmen.net/business/${business.id}`,
-        name: business.name,
-        image: [
-            ...(photos.length > 0 ? [photos[0].url] : []),
-            `https://emergencytradesmen.net${heroBgImage}`,
-            `https://emergencytradesmen.net${representativeImage}`
-        ],
-        telephone: business.phone,
-        url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
-        address: {
-            "@type": "PostalAddress",
-            streetAddress: business.address?.split(',')[0] || "",
-            addressLocality: city,
-            addressRegion: isUS ? getStateForCity(city) : "",
-            postalCode: business.postalCode || (!isUS ? getPostcodeForCity(city) : ""),
-            addressCountry: isUS ? "US" : "GB"
-        },
-        aggregateRating: business.rating ? {
-            "@type": "AggregateRating",
-            ratingValue: business.rating,
-            reviewCount: business.reviewCount
-        } : undefined,
-        priceRange: "££"
-    };
-
     // Map of trade-specific representative images (trucks/vans/technicians)
     const tradeRepresentativeImages = {
         'builder': '/images/builder/emergency-builder-female-worker.webp', // Builder representative image
@@ -312,6 +284,34 @@ export default function BusinessProfilePage() {
     const heroBgImage = business.header_image_url || ((tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default);
 
     const representativeImage = business.vehicle_image_url || ((tradeRepresentativeImages as any)[trade] || tradeRepresentativeImages.default);
+
+    const businessSchema = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": `https://emergencytradesmen.net/business/${business.id}`,
+        name: business.name,
+        image: [
+            ...(photos.length > 0 ? [photos[0].url] : []),
+            `https://emergencytradesmen.net${heroBgImage}`,
+            `https://emergencytradesmen.net${representativeImage}`
+        ],
+        telephone: business.phone,
+        url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: business.address?.split(',')[0] || "",
+            addressLocality: city,
+            addressRegion: isUS ? getStateForCity(city) : "",
+            postalCode: business.postalCode || (!isUS ? getPostcodeForCity(city) : ""),
+            addressCountry: isUS ? "US" : "GB"
+        },
+        aggregateRating: business.rating ? {
+            "@type": "AggregateRating",
+            ratingValue: business.rating,
+            reviewCount: business.reviewCount
+        } : undefined,
+        priceRange: "££"
+    };
 
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">

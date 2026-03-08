@@ -24,17 +24,36 @@ export function SEOContentSection() {
                         Why Choose Our <span className="text-gold">{settings.tradeTerm} Near Me?</span>
                     </h2>
 
-                    <div className="prose prose-lg prose-invert mx-auto text-muted-foreground/90 leading-relaxed max-w-3xl">
-                        <p className="mb-6">
-                            When you search for <strong>"tradesmen near me"</strong>, you aren't just looking for a list of names—you need verified local experts who can arrive within minutes, not days. Finding reliable help in an emergency shouldn't be a gamble.
-                        </p>
-                        <p>
-                            Our network connects you instantly with the closest available <strong>local tradesmen</strong> in your area. Whether it's a 24/7 emergency plumber, a certified electrician, or a locksmith nearby, we ensure every professional is vetted, insured, and ready to deploy. Don't settle for "available someday"—get the help you need, <strong>near you</strong>, right now.
-                        </p>
-                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        {/* Card 1: Verified Experts */}
+                        <div className="group/btn relative bg-white/5 border border-white/10 rounded-2xl p-6 text-left hover:bg-gold/5 hover:border-gold/30 transition-all duration-300">
+                            <div className="absolute top-0 right-0 p-3 opacity-20 group-hover/btn:opacity-100 transition-opacity">
+                                <Zap className="w-4 h-4 text-gold" />
+                            </div>
+                            <p className="text-sm text-foreground/90 leading-relaxed">
+                                When you search for <strong>"tradesmen near me"</strong>, you aren't just looking for a list of names—you need verified local experts who can arrive within minutes, not days.
+                            </p>
+                        </div>
 
-                    <div className="mt-10 flex justify-center">
-                        <div className="h-1 w-24 bg-gradient-to-r from-transparent via-gold/50 to-transparent rounded-full" />
+                        {/* Card 2: Instant Connectivity */}
+                        <div className="group/btn relative bg-white/5 border border-white/10 rounded-2xl p-6 text-left hover:bg-gold/5 hover:border-gold/30 transition-all duration-300">
+                            <div className="absolute top-0 right-0 p-3 opacity-20 group-hover/btn:opacity-100 transition-opacity">
+                                <Zap className="w-4 h-4 text-gold" />
+                            </div>
+                            <p className="text-sm text-foreground/90 leading-relaxed">
+                                Our network connects you instantly with the closest available <strong>local tradesmen</strong> in your area. Finding reliable help in an emergency shouldn't be a gamble.
+                            </p>
+                        </div>
+
+                        {/* Card 3: Complete Coverage */}
+                        <div className="group/btn relative bg-white/5 border border-white/10 rounded-2xl p-6 text-left hover:bg-gold/5 hover:border-gold/30 transition-all duration-300 md:col-span-1">
+                            <div className="absolute top-0 right-0 p-3 opacity-20 group-hover/btn:opacity-100 transition-opacity">
+                                <Zap className="w-4 h-4 text-gold" />
+                            </div>
+                            <p className="text-sm text-foreground/90 leading-relaxed">
+                                Whether it's a <strong>24/7 emergency plumber</strong>, a certified electrician, or a locksmith nearby, get the help you need, <strong>near you</strong>, right now.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

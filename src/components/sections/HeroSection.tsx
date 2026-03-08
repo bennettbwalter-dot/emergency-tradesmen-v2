@@ -112,18 +112,8 @@ export function HeroSection() {
                     </div>
                 </motion.div>
 
-                <div className="mt-8 text-center relative z-20 pointer-events-auto">
-                    <h2 className="font-display text-2xl md:text-4xl tracking-wide text-foreground mb-6">
-                        Our Local Tradesmen Are
-                    </h2>
-                </div>
-
-                <section className="container-wide pt-0 pb-8 mt-6 relative z-20">
-                    <TrustBadges />
-                </section>
-
                 {/* Flipping Text */}
-                <div className="flex justify-center w-full relative z-20 pointer-events-auto pb-16">
+                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-14">
                     <LayoutTextFlipDemo />
                 </div>
             </div>
