@@ -6,8 +6,8 @@ import { getViewState } from '@/lib/mapUtils';
 import { useAuth } from "@/contexts/AuthContext";
 
 // Fix Leaflet generic marker icon missing assets
-import icon from 'leaflet/dist/images/marker-icon.webp';
-import iconShadow from 'leaflet/dist/images/marker-shadow.webp';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,

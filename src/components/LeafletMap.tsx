@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 
 // Fix for default marker icon in Leaflet + React
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.webp';
-import markerIcon from 'leaflet/dist/images/marker-icon.webp';
-import markerShadow from 'leaflet/dist/images/marker-shadow.webp';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
