@@ -113,7 +113,7 @@ export function HeroSection() {
                 </motion.div>
 
                 {/* Flipping Text */}
-                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-0">
+                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-16">
                     <LayoutTextFlipDemo />
                 </div>
             </div>

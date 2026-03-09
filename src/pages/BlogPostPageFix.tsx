@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { SEO } from "@/components/SEO";
 import { AdSlot } from "@/components/AdSlot";
 import { Button } from "@/components/ui/button";
@@ -78,7 +79,7 @@ export default function BlogPostPage() {
             .replace(/London/g, 'Dallas')
             .replace(/Manchester/g, 'Houston')
             .replace(/Leeds/g, 'Chicago')
-            .replace(/£/g, '$')
+            .replace(/ï¿½/g, '$')
             .replace(/Kensington to Canary Wharf/g, 'Preston Hollow to Downtown')
             .replace(/Greater Manchester/g, 'Greater Houston')
             .replace(/West Yorkshire/g, 'Chicagoland');
@@ -640,6 +641,7 @@ export default function BlogPostPage() {
 
                                                     <ReactMarkdown
                                                         remarkPlugins={[remarkGfm]}
+                                                        rehypePlugins={[rehypeRaw]}
                                                         components={{
                                                             h1: ({ node, ...props }) => (
                                                                 <h1 {...props} className="font-bold text-[28px] md:text-[44px] leading-[1.2] mb-6 text-foreground" />
@@ -772,7 +774,7 @@ export default function BlogPostPage() {
                             </div>
                         )}
 
-                        {/* Internal Links Section — Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
+                        {/* Internal Links Section ï¿½ Hub & Spoke SEO (Master SEO Prompt Phase 3) */}
                         {(() => {
                             const slugTradeMap: Record<string, { trade: string; tradeSlug: string; ukCities: string[]; usCities: string[] }> = {
                                 'electrical-fire-causes-prevention': {

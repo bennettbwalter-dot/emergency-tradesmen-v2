@@ -403,14 +403,22 @@ export function FloatingTourHub() {
                                     y: 0,
                                     left: isMobile ? '50%' : (targetRect ? Math.min(Math.max(20, targetRect.left - (400 - targetRect.width) / 2), winW - 420) : '50%'),
                                     top: isMobile
-                                        ? (targetRect && targetRect.top > winH / 2 ? 32 : 'auto')
+                                        ? (targetRect
+                                            ? (activeSteps[currentStep].id === 'tour-services'
+                                                ? targetRect.bottom + 20
+                                                : (targetRect.top > winH / 2 ? 32 : 'auto'))
+                                            : '50%')
                                         : (targetRect
                                             ? (activeSteps[currentStep].id === 'tour-services'
                                                 ? Math.max(20, targetRect.top - 280)
                                                 : (targetRect.bottom + 20 > winH - 300 ? Math.max(20, targetRect.top - 280) : targetRect.bottom + 20))
                                             : '50%'),
                                     bottom: isMobile
-                                        ? (targetRect && targetRect.top > winH / 2 ? 'auto' : 32)
+                                        ? (targetRect
+                                            ? (activeSteps[currentStep].id === 'tour-services'
+                                                ? 'auto'
+                                                : (targetRect.top > winH / 2 ? 'auto' : 32))
+                                            : 32)
                                         : 'auto',
                                     translateX: isMobile ? '-50%' : 0
                                 }}
@@ -422,9 +430,13 @@ export function FloatingTourHub() {
                                 }}
                                 className="pointer-events-auto absolute w-[calc(100%-32px)] md:w-full max-w-[400px] bg-black/95 backdrop-blur-2xl border border-gold/50 rounded-3xl p-5 md:p-6 shadow-[0_0_50px_rgba(212,175,55,0.25)]"
                             >
-                                {/* Downward arrow for tour-services step */}
-                                {activeSteps[currentStep].id === 'tour-services' && !isMobile && (
-                                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-gold/50" />
+                                {/* Downward arrow for desktop or Upward arrow for mobile Step 6 */}
+                                {activeSteps[currentStep].id === 'tour-services' && (
+                                    isMobile ? (
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[12px] border-b-gold/50" />
+                                    ) : (
+                                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-gold/50" />
+                                    )
                                 )}
                                 <div className="flex items-start justify-between mb-4 md:mb-5">
                                     <div className="flex items-center gap-3 md:gap-4">

@@ -20,7 +20,7 @@ const newPost = {
     slug: 'spring-thaw-pipe-burst-prevention',
     title: 'The "Spring Thaw" Myth — Why Your Pipes Are Most Likely to Burst When It Warms Up',
     excerpt: "If you've spent the last week anxiously watching the thermometer drop, assuming that once the temperature rises above freezing, you're safe — we have some bad news. The danger hasn't passed. It's just beginning.",
-    cover_image: '/images/blog/spring-thaw/collage.jpg', // Using the provided collage
+    cover_image: '/images/blog/spring-thaw/collage.webp', // Using the provided collage
     published: true,
     published_at: new Date().toISOString(),
     content: `**If you've spent the last week anxiously watching the thermometer drop, assuming that once the temperature rises above freezing, you're safe — we have some bad news.**
@@ -35,7 +35,7 @@ Here is your comprehensive guide to understanding why this happens, how to spot 
 ---
 
 ## The Physics of a "Thaw Burst"
-![Ice crystals forming on a frozen structure](/images/blog/spring-thaw/ice-crystals.jpg)
+![Ice crystals forming on a frozen structure](/images/blog/spring-thaw/ice-crystals.webp)
 
 To understand why pipes burst when it warms up, you need to understand what happened while it was cold.
 
@@ -48,7 +48,7 @@ Water expands by about 9% when it turns to ice. This expansion puts immense stre
 The real damage often isn't at the site of the ice plug itself, but downstream from it. As the ice expands, it pushes liquid water towards closed taps or valves. This trapped water has nowhere to go. Pressure can skyrocket from a normal 40-60 PSI to over **2,000 PSI**. This extreme pressure weakens joints and creates "micro-failures" throughout the system.
 
 ### 3. The Thaw (The Release)
-![Icicles thawing on a fence in the sun](/images/blog/spring-thaw/thawing-icicles.jpg)
+![Icicles thawing on a fence in the sun](/images/blog/spring-thaw/thawing-icicles.webp)
 
 This is today. As the ambient temperature rises, the ice plug begins to melt. It shrinks. The temporary seal it provided for those hairline cracks vanishes.
 

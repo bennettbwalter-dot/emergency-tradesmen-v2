@@ -40,7 +40,7 @@ export function EmergencyServicesSection() {
     };
 
     return (
-        <section className="container-wide pt-0 pb-14 relative z-20 min-h-[800px]">
+        <section className="container-wide py-16 relative z-20 min-h-[800px]">
             <AnimatePresence mode="wait">
                 {!activeTrade ? (
                     <motion.div
@@ -56,9 +56,7 @@ export function EmergencyServicesSection() {
                             </div>
                         </div>
 
-                        <div style={{ height: '600px', position: 'relative' }} className="mb-0 mt-12">
-                            {/* Tour anchor — targets the top of the trade list */}
-                            <div data-tour="tour-services" className="absolute top-0 left-0 right-0 h-px pointer-events-none" />
+                        <div style={{ height: '500px', position: 'relative' }} className="mb-0">
                             <FlowingMenu items={menuItems}
                                 speed={15}
                                 textColor="hsl(var(--foreground))"

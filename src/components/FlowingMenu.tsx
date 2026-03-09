@@ -238,7 +238,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
     };
 
     return (
-        <div className={`menu__item ${isActive ? 'is-active' : ''}`} ref={itemRef} style={{ borderColor, borderTop: isFirst ? 'none' : undefined }}>
+        <div
+            className={`menu__item ${isActive ? 'is-active' : ''}`}
+            ref={itemRef}
+            style={{ borderColor, borderTop: isFirst ? 'none' : undefined }}
+            data-tour={isFirst ? "tour-services" : undefined}
+        >
             <button
                 className={`menu__item-link ${isTouch ? 'is-touch' : ''}`}
                 onClick={handleClick}

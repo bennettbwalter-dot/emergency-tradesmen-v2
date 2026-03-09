@@ -1,25 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Search, Calendar, MessageSquare, User } from "lucide-react";
+import { Home, Search, Rocket, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { getTotalUnreadCount } from "@/lib/chat";
-import { useState, useEffect } from "react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function BottomNav() {
     const location = useLocation();
-    const { user, isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth();
     const { settings } = useLocalization();
     const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
-    const [unreadCount, setUnreadCount] = useState(0);
-
-    useEffect(() => {
-        if (user) {
-            const checkUnread = () => setUnreadCount(getTotalUnreadCount(user.id));
-            checkUnread();
-            window.addEventListener('chat-updated', checkUnread);
-            return () => window.removeEventListener('chat-updated', checkUnread);
-        }
-    }, [user]);
 
     const isActive = (path: string) => {
         if (path === "/" && location.pathname === "/") return true;
@@ -42,10 +30,9 @@ export function BottomNav() {
             path: countryPrefix || "/",
         },
         {
-            label: "Messages",
-            icon: MessageSquare,
-            path: isAuthenticated ? "/user/dashboard?tab=messages" : "/auth?tab=login",
-            badge: unreadCount
+            label: "Sign Up",
+            icon: Rocket,
+            path: `${countryPrefix}/pricing`,
         },
         {
             label: "Profile",
@@ -68,11 +55,6 @@ export function BottomNav() {
                 >
                     <div className="relative">
                         <item.icon className={`w-5 h-5 ${isActive(item.path) ? "stroke-[2.5px]" : "stroke-2"}`} />
-                        {item.badge && item.badge > 0 ? (
-                            <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                                {item.badge}
-                            </span>
-                        ) : null}
                     </div>
                     <span className="text-[10px] font-medium">{item.label}</span>
                 </Link>
