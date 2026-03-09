@@ -128,6 +128,12 @@ UK building regulations now require pipe insulation in unheated areas (lofts, ba
 
 ### 2. Smart Leak Detectors
 Technology has moved on from the "wait and see" approach.
+
+![X-Sense Wi-Fi Water Leak Detector System with 3 sensors and base station](/images/blog/spring-thaw/x-sense-water-detector.webp)
+*X-Sense SWS54 — 3 wireless sensors + base station, 1,700 ft range, instant phone alerts when a leak is detected.*
+
+<a href="https://www.amazon.co.uk/X-Sense-Transmission-Basements-Bathrooms-SWS54/dp/B0BJ6B1LPQ?crid=1XTG08YZ55WJ4&dib=eyJ2IjoiMSJ9.Z5jOBogCQ7lnAcD19vec82_uYMQDNFF-aoTL2U-oH4lE38UYC4L6ym-sZcvb8SIwXyZNuIjoEhR1HKuSuf2-nqXShY7Yv9NW5Fx6i_GWKIP8idaKskZ6XvbJkDVRaJvEqr2m_0OK_dkfl2iVF-mZ2ikVc0NLIE4IZ6jbghLesWpHIxFT17ntPfnB9l2tcp-32LSndWH9P2Jf5dJDPEChU-nCdqkHeejXpG1Capie6w0YAW1cD1IyPeP3BcujcA6xgQnqI0uv10ov2rjEmKpaW5H_hKTNq53qyex9Sbf00ic.Z3eIg6SgJWZyIQmr-6KMRZbyDC2tQFE0bdmG3g73rCo&dib_tag=se&keywords=leak%2Bdetector&qid=1773079683&sprefix=leak%2Bdetector%2Caps%2C381&sr=8-1-spons&aref=u03tN7rr02&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1&linkCode=ll2&tag=et0a8-21&linkId=59e2f49a85a9ef7241ad48de13eb4450&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #f0c14b; border: 1px solid #a88734; border-radius: 8px; color: #111; padding: 12px 24px; font-weight: bold; text-decoration: none; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Buy on Amazon →</a>
+
 - **Smart valves** (like leakBot or Moen Flo) clip onto your main pipe. They monitor flow rates and pressure 24/7. If they detect a micro-leak or unusual usage (like 400 litres in an hour), they send an alert to your phone and can even **automatically shut off your water**.
 
 ### 3. Keep the Heating On

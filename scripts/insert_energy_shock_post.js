@@ -105,6 +105,13 @@ This is the realistic, affordable option for most families right now. A **dual-f
 
 **The catch?** You need a professional to install either a **Transfer Switch** or a more affordable **Interlock Kit** on your consumer unit (breaker panel). Without one, you cannot safely connect a portable generator to your home's wiring.
 
+> [!TIP]
+> **Looking for a cleaner, silent indoor-safe alternative?** The BLUETTI AC180 is a 1,152Wh LiFePO4 portable power station — no fumes, no carbon monoxide risk. It runs essential appliances (fridge, router, lights, medical devices) via 2× 1800W AC outlets and recharges from 0-80% in just 45 minutes. Ideal for rolling blackouts.
+
+![BLUETTI AC180 1152Wh portable power station with 1800W AC outlets](/images/blog/energy-shock/bluetti-ac180.webp)
+
+<a href="https://www.amazon.co.uk/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0BZZ47J4T?aref=uIM4EIqZ7A&content-id=amzn1.sym.0cf85714-a5b0-4d96-9050-d0dce9037023%3Aamzn1.sym.0cf85714-a5b0-4d96-9050-d0dce9037023&crid=33I8EKKA1HPI8&cv_ct_cx=electric%2Bgenerator%2Bportable%2Bsolar&keywords=electric%2Bgenerator%2Bportable%2Bsolar&pd_rd_i=B0BZZ47J4T&pd_rd_r=0e0b0557-3eed-4335-9b29-e6a1477815e4&pd_rd_w=8jmdZ&pd_rd_wg=XzQgM&pf_rd_p=0cf85714-a5b0-4d96-9050-d0dce9037023&pf_rd_r=G6R413H7YTF4ZQ5HY81S&qid=1773084003&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=portable%2Belectric%2Bsolar%2Caps%2C239&sr=1-1-9131241a-a358-4619-a7b8-0f5a65d91d81&th=1&linkCode=ll2&tag=et0a8-21&linkId=de799f2916e37bdff865e5bebfb3579b&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #f0c14b; border: 1px solid #a88734; border-radius: 8px; color: #111; padding: 12px 24px; font-weight: bold; text-decoration: none; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Buy on Amazon →</a>
+
 ---
 
 ## Rules and Regulations: What the Law Requires

@@ -58,6 +58,13 @@ If your DIY project has just gone nuclear, drop the tools. Your primary objectiv
 - **2. Open the Low Taps:** Once the mains are off, open the cold water taps on the lowest floor of your home. This drains the remaining water in the pipes out of the sink, rather than out of the hole you just created in the wall.
 - **3. Kill the Power:** If water is pooling anywhere near electrical sockets or appliances, go to your main consumer unit (breaker box) and shut off the power to that zone.
 
+> [!TIP]
+> **Catch a leak before it becomes a disaster.** A smart Wi-Fi water leak detector can alert your phone the moment moisture is detected — whether you're in the next room or on holiday. The X-Sense SWS54 covers 1,700 ft and includes 3 sensors + a base station.
+
+![X-Sense Wi-Fi Water Leak Detector System with 3 sensors and base station](/images/blog/spring-thaw/x-sense-water-detector.webp)
+
+<a href="https://www.amazon.co.uk/X-Sense-Transmission-Basements-Bathrooms-SWS54/dp/B0BJ6B1LPQ?crid=1XTG08YZ55WJ4&dib=eyJ2IjoiMSJ9.Z5jOBogCQ7lnAcD19vec82_uYMQDNFF-aoTL2U-oH4lE38UYC4L6ym-sZcvb8SIwXyZNuIjoEhR1HKuSuf2-nqXShY7Yv9NW5Fx6i_GWKIP8idaKskZ6XvbJkDVRaJvEqr2m_0OK_dkfl2iVF-mZ2ikVc0NLIE4IZ6jbghLesWpHIxFT17ntPfnB9l2tcp-32LSndWH9P2Jf5dJDPEChU-nCdqkHeejXpG1Capie6w0YAW1cD1IyPeP3BcujcA6xgQnqI0uv10ov2rjEmKpaW5H_hKTNq53qyex9Sbf00ic.Z3eIg6SgJWZyIQmr-6KMRZbyDC2tQFE0bdmG3g73rCo&dib_tag=se&keywords=leak%2Bdetector&qid=1773079683&sprefix=leak%2Bdetector%2Caps%2C381&sr=8-1-spons&aref=u03tN7rr02&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1&linkCode=ll2&tag=et0a8-21&linkId=59e2f49a85a9ef7241ad48de13eb4450&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #f0c14b; border: 1px solid #a88734; border-radius: 8px; color: #111; padding: 12px 24px; font-weight: bold; text-decoration: none; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Buy on Amazon →</a>
+
 ### The Electrical Disaster (Sparks, Shorts, or Tripping Breakers)
 - **1. Step Back:** If you wired a new socket and there was a loud "pop," a flash, or the smell of burning fish (melting plastic), do not touch the socket again.
 - **2. Do Not "Reset and Pray":** If your main breaker (RCD) tripped when you turned the power back on, **leave it off.** It tripped because you created a dead short or a ground fault. Forcing it back on will cause an electrical fire.
@@ -175,6 +182,13 @@ If your DIY project has just gone nuclear, drop the tools. Your primary objectiv
 - **1. Find the Main Shut-off Immediately:** Do not try to catch the water with towels. Run to your main water shut-off valve (often in the basement or outside) and turn it entirely clockwise.
 - **2. Open the Low Taps:** Once the mains are off, open the cold water faucets on the lowest floor of your home. This drains the remaining water in the pipes out of the sink, rather than out of the hole you just created in the wall.
 - **3. Kill the Power:** If water is pooling anywhere near electrical outlets or appliances, go to your main breaker box and shut off the power to that zone.
+
+> [!TIP]
+> **Catch a leak before it becomes a disaster.** A smart Wi-Fi water leak detector can alert your phone the moment moisture is detected — from basements to bathrooms. The X-Sense SWS54 covers 1,700 ft and includes 3 sensors + a base station.
+
+![X-Sense Wi-Fi Water Leak Detector System with 3 sensors and base station](/images/blog/spring-thaw/x-sense-water-detector.webp)
+
+<a href="https://www.amazon.co.uk/X-Sense-Transmission-Basements-Bathrooms-SWS54/dp/B0BJ6B1LPQ?crid=1XTG08YZ55WJ4&dib=eyJ2IjoiMSJ9.Z5jOBogCQ7lnAcD19vec82_uYMQDNFF-aoTL2U-oH4lE38UYC4L6ym-sZcvb8SIwXyZNuIjoEhR1HKuSuf2-nqXShY7Yv9NW5Fx6i_GWKIP8idaKskZ6XvbJkDVRaJvEqr2m_0OK_dkfl2iVF-mZ2ikVc0NLIE4IZ6jbghLesWpHIxFT17ntPfnB9l2tcp-32LSndWH9P2Jf5dJDPEChU-nCdqkHeejXpG1Capie6w0YAW1cD1IyPeP3BcujcA6xgQnqI0uv10ov2rjEmKpaW5H_hKTNq53qyex9Sbf00ic.Z3eIg6SgJWZyIQmr-6KMRZbyDC2tQFE0bdmG3g73rCo&dib_tag=se&keywords=leak%2Bdetector&qid=1773079683&sprefix=leak%2Bdetector%2Caps%2C381&sr=8-1-spons&aref=u03tN7rr02&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1&linkCode=ll2&tag=et0a8-21&linkId=59e2f49a85a9ef7241ad48de13eb4450&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #f0c14b; border: 1px solid #a88734; border-radius: 8px; color: #111; padding: 12px 24px; font-weight: bold; text-decoration: none; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Buy on Amazon →</a>
 
 ### The Electrical Disaster (Sparks, Shorts, or Tripping Breakers)
 - **1. Step Back:** If you wired a new outlet and there was a loud "pop," a flash, or the smell of burning plastic, do not touch the outlet again.
