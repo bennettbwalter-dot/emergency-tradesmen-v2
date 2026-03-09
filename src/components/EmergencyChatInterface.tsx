@@ -707,8 +707,8 @@ export function EmergencyChatInterface() {
                                     </div>
 
                                     {chatState.history[chatState.history.length - 1].role === 'assistant' && (
-                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-blue-400/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-gold/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
                                             <span>Waiting for user input...</span>
                                         </AnimatedSpan>
                                     )}

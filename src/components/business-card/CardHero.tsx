@@ -28,9 +28,9 @@ export function CardHero({ business }: CardHeroProps) {
                 {/* Trust Badge */}
                 <div className="flex items-center gap-1.5 shrink-0 px-2 py-0.5 rounded-full bg-white/5 border border-white/5">
                     <div className="relative flex items-center justify-center w-3.5 h-3.5">
-                        <Shield className={`w-3.5 h-3.5 ${isHighTrust ? 'text-emerald-400 fill-emerald-400/10' : 'text-blue-400 fill-blue-400/10'}`} strokeWidth={2.5} />
+                        <Shield className={`w-3.5 h-3.5 ${isHighTrust ? 'text-emerald-400 fill-emerald-400/10' : 'text-gold fill-gold/10'}`} strokeWidth={2.5} />
                     </div>
-                    <span className={`${isHighTrust ? 'text-emerald-400/90' : 'text-blue-400/90'} font-bold tracking-wide`}>
+                    <span className={`${isHighTrust ? 'text-emerald-400/90' : 'text-gold-dark/90 font-bold'} tracking-wide`}>
                         TRUST SCORE {trustScore}/5
                     </span>
                 </div>

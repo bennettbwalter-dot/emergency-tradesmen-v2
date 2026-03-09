@@ -52,7 +52,7 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         <div className={`flex items-center gap-2.5 px-5 py-1.5 rounded-full border shadow-[0_4px_10px_rgba(0,0,0,0.1)] relative overflow-hidden shrink-0 backdrop-blur-xl transition-all duration-300 group hover:scale-105 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)]
              ${trustScore === 5
             ? 'bg-gradient-to-b from-white/95 to-white/90 dark:from-[#2a2a35]/95 dark:to-[#1a1a24]/90 border-amber-400/40 shadow-glow-gold/40'
-            : 'bg-white/90 dark:bg-[#1e293b]/80 border-blue-400/30 shadow-lg'}`}>
+            : 'bg-white/90 dark:bg-[#1e293b]/80 border-gold/30 shadow-lg'}`}>
 
           {/* Shimmer - angled and wider for more 'sheen' */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out -skew-x-12" />
@@ -61,13 +61,13 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
           <div className={`w-5 h-5 rounded-full flex items-center justify-center shadow-inner text-white shrink-0 z-10 relative overflow-hidden
                 ${trustScore === 5
               ? 'bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 ring-1 ring-amber-400/50'
-              : 'bg-gradient-to-br from-blue-300 via-blue-500 to-blue-700 ring-1 ring-blue-400/50'}`}>
+              : 'bg-gradient-to-br from-gold-light via-gold to-gold-dark ring-1 ring-gold/50'}`}>
             {/* Simple highlight for volume */}
             <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent opacity-80" />
             <ShieldCheck className="w-2.5 h-2.5 relative z-10 drop-shadow-sm" strokeWidth={3} />
           </div>
 
-          <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest translate-y-[0.5px] z-10 ${trustScore === 5 ? 'text-amber-800 dark:text-amber-100 drop-shadow-sm' : 'text-blue-800 dark:text-blue-100'}`}>
+          <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest translate-y-[0.5px] z-10 ${trustScore === 5 ? 'text-amber-800 dark:text-amber-100 drop-shadow-sm' : 'text-gold-dark dark:text-gold-light'}`}>
             {trustScore === 5 ? 'Top Rated 5/5' : `Verified ${trustScore}/5`}
           </span>
         </div>

@@ -105,7 +105,7 @@ async function generateSitemap() {
     while (hasMore) {
         const { data, error } = await supabase
             .from('businesses')
-            .select('id, updated_at, country_code') // Fetch country_code to segment by region if needed, though we treat them all in business sitemaps
+            .select('id, updated_at, country_code, name, logo_url') // Fetch country_code to segment by region if needed, though we treat them all in business sitemaps
             .eq('verified', true)
             .range(from, from + step - 1);
 
@@ -127,7 +127,7 @@ async function generateSitemap() {
     // 2. Fetch published blog posts
     const { data: posts, error: postError } = await supabase
         .from('posts')
-        .select('slug, updated_at')
+        .select('slug, updated_at, title, cover_image')
         .eq('published', true);
 
     if (postError) {
@@ -144,14 +144,19 @@ async function generateSitemap() {
     const writeSitemap = (filename, urls) => {
         try {
             let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
             urls.forEach(u => {
                 xml += `
   <url>
     <loc>${u.loc}</loc>
     ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
     ${u.changefreq ? `<changefreq>${u.changefreq}</changefreq>` : ''}
-    ${u.priority ? `<priority>${u.priority}</priority>` : ''}
+    ${u.priority ? `<priority>${u.priority}</priority>` : ''}${u.images ? u.images.map(img => `
+    <image:image>
+      <image:loc>${img.loc}</image:loc>${img.title ? `
+      <image:title>${img.title}</image:title>` : ''}
+    </image:image>`).join('') : ''}
   </url>`;
             });
             xml += `
@@ -238,7 +243,11 @@ async function generateSitemap() {
             loc: `${BASE_URL}/business/${biz.id}`,
             lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
             changefreq: 'weekly',
-            priority: '0.7'
+            priority: '0.7',
+            images: biz.logo_url ? [{
+                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL}${biz.logo_url}`,
+                title: biz.name
+            }] : []
         }));
         writeSitemap(`sitemap-businesses-uk-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
     }
@@ -250,7 +259,11 @@ async function generateSitemap() {
             loc: `${BASE_URL}/us/business/${biz.id}`,
             lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
             changefreq: 'weekly',
-            priority: '0.7'
+            priority: '0.7',
+            images: biz.logo_url ? [{
+                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL}${biz.logo_url}`,
+                title: biz.business_name
+            }] : []
         }));
         writeSitemap(`sitemap-businesses-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
     }
@@ -264,7 +277,11 @@ async function generateSitemap() {
                 loc: `${BASE_URL}${prefix}/blog/${post.slug}`,
                 lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
                 changefreq: 'weekly',
-                priority: '0.8'
+                priority: '0.8',
+                images: post.cover_image ? [{
+                    loc: post.cover_image.startsWith('http') ? post.cover_image : `${BASE_URL}${post.cover_image}`,
+                    title: post.title
+                }] : []
             };
         });
         writeSitemap('sitemap-blog.xml', blogUrls);

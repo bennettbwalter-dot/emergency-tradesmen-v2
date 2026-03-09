@@ -5,6 +5,7 @@ import { trades } from "@/lib/trades";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import FlowingMenu from "../FlowingMenu";
 import { ArrowLeft } from "lucide-react";
+import { SVGTrustBadges } from "../SVGTrustBadges";
 
 // Use the official trades list for consistency and full data (icons, images, names)
 const menuItems = trades.map(t => ({
@@ -39,7 +40,7 @@ export function EmergencyServicesSection() {
     };
 
     return (
-        <section className="container-wide pt-14 pb-14 relative z-20 min-h-[800px]">
+        <section className="container-wide pt-0 pb-14 relative z-20 min-h-[800px]">
             <AnimatePresence mode="wait">
                 {!activeTrade ? (
                     <motion.div
@@ -49,18 +50,13 @@ export function EmergencyServicesSection() {
                         exit={{ opacity: 0, y: -30 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="text-center">
-                            <div className="w-full max-w-5xl mx-auto px-4 animate-fade-up flex justify-center py-4">
-                                <img
-                                    src="/emergency-home-repairs-no-text.png"
-                                    alt="Emergency Home Repairs: Tap to Find, Verified Locals, Total Reliability"
-                                    className="w-full h-auto scale-[1.15] md:scale-100 transition-transform duration-500"
-                                    loading="lazy"
-                                />
+                        <div className="text-center mb-16">
+                            <div className="w-full max-w-5xl mx-auto px-4 animate-fade-up flex flex-col items-center py-0 overflow-visible group">
+                                <SVGTrustBadges />
                             </div>
                         </div>
 
-                        <div style={{ height: '600px', position: 'relative' }} className="mb-0 mt-8 md:-mt-12">
+                        <div style={{ height: '600px', position: 'relative' }} className="mb-0 mt-12">
                             {/* Tour anchor — targets the top of the trade list */}
                             <div data-tour="tour-services" className="absolute top-0 left-0 right-0 h-px pointer-events-none" />
                             <FlowingMenu items={menuItems}

@@ -56,13 +56,13 @@ export function USPremiumModelerDialog({ children }: { children: React.ReactNode
                     __html: `
                 .modeler-root { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
                 .modeler-root hr { border-color: #e2e8f0; }
-                .modeler-root .text-primary { color: #1e3a8a; } /* Blue for US */
-                .modeler-root .bg-accent { background: #eff6ff; }
-                .modeler-root .btn-primary { background: #1e3a8a; color: white; transition: background 0.2s; }
-                .modeler-root .btn-primary:hover { background: #1e40af; }
+                .modeler-root .text-primary { color: #c5a059; } 
+                .modeler-root .bg-accent { background: #faf3e0; }
+                .modeler-root .btn-primary { background: #c5a059; color: white; transition: background 0.2s; }
+                .modeler-root .btn-primary:hover { background: #b8986e; }
                 .dark .modeler-root { color: #e2e8f0; }
-                .dark .modeler-root .bg-accent { background: #172554; }
-                .dark .modeler-root .text-primary { color: #60a5fa; }
+                .dark .modeler-root .bg-accent { background: #3d3010; }
+                .dark .modeler-root .text-primary { color: #d7c08a; }
                 .dark .modeler-root .bg-white { background-color: #0f172a; }
                 .dark .modeler-root .border-gray-200 { border-color: #334155; }
                 .dark .modeler-root input, .dark .modeler-root select { background-color: #1e293b; color: #f8fafc; border-color: #475569; }
@@ -80,7 +80,7 @@ export function USPremiumModelerDialog({ children }: { children: React.ReactNode
                             <div className="md:col-span-5 space-y-5 bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800">
                                 <div>
                                     <label className="block font-bold mb-2 text-sm text-slate-700 dark:text-slate-300">Estimated Property Value ($)</label>
-                                    <input type="number" value={propertyValue} onChange={e => setPropertyValue(Number(e.target.value))} step="5000" min="100000" className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                                    <input type="number" value={propertyValue} onChange={e => setPropertyValue(Number(e.target.value))} step="5000" min="100000" className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-gold outline-none" />
                                 </div>
                                 <div>
                                     <label className="block font-bold mb-2 text-sm text-slate-700 dark:text-slate-300">Age of HVAC / Furnace (Years)</label>
@@ -101,11 +101,11 @@ export function USPremiumModelerDialog({ children }: { children: React.ReactNode
                                 </div>
                                 <div>
                                     <label className="block font-bold mb-2 text-sm text-slate-700 dark:text-slate-300">Annual Home Insurance Premium ($)</label>
-                                    <input type="number" value={insurancePremium} onChange={e => setInsurancePremium(Number(e.target.value))} className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                                    <input type="number" value={insurancePremium} onChange={e => setInsurancePremium(Number(e.target.value))} className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-gold outline-none" />
                                 </div>
                                 <div>
                                     <label className="block font-bold mb-2 text-sm text-slate-700 dark:text-slate-300">Current Insurance Deductible ($)</label>
-                                    <input type="number" value={deductible} onChange={e => setDeductible(Number(e.target.value))} className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                                    <input type="number" value={deductible} onChange={e => setDeductible(Number(e.target.value))} className="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-gold outline-none" />
                                 </div>
                             </div>
 
@@ -147,24 +147,24 @@ export function USPremiumModelerDialog({ children }: { children: React.ReactNode
                                                 <tr>
                                                     <td className="p-3 py-4">Emergency HVAC Repair</td>
                                                     <td className="p-3 py-4 font-medium">{formatCurrency(hvacOop)}</td>
-                                                    <td className="p-3 py-4 text-blue-600 dark:text-blue-400 font-medium">$75 - $125 Service Fee</td>
+                                                    <td className="p-3 py-4 text-gold dark:text-gold-light font-medium">$75 - $125 Service Fee</td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-3 py-4">Electrical Fault (Out-of-Hours)</td>
                                                     <td className="p-3 py-4 font-medium">{formatCurrency(elecOop)}</td>
-                                                    <td className="p-3 py-4 text-blue-600 dark:text-blue-400 font-medium">Included</td>
+                                                    <td className="p-3 py-4 text-gold dark:text-gold-light font-medium">Included</td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-3 py-4">Emergency Plumbing Call-out</td>
                                                     <td className="p-3 py-4 font-medium">{formatCurrency(plumbOop)}</td>
-                                                    <td className="p-3 py-4 text-blue-600 dark:text-blue-400 font-medium">Included</td>
+                                                    <td className="p-3 py-4 text-gold dark:text-gold-light font-medium">Included</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot className="bg-slate-50 dark:bg-slate-800/50 font-bold">
                                                 <tr>
                                                     <td className="p-3 text-slate-700 dark:text-slate-200">Estimated Annual Total</td>
                                                     <td className="p-3 text-red-600 dark:text-red-400">{formatCurrency(totalOop)}</td>
-                                                    <td className="p-3 text-blue-700 dark:text-blue-400">~$450 - $600/yr</td>
+                                                    <td className="p-3 text-gold-dark dark:text-gold-light">~$450 - $600/yr</td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -190,7 +190,7 @@ export function USPremiumModelerDialog({ children }: { children: React.ReactNode
                             <div className="space-y-4">
                                 {['Verify licensing for HVAC and electrical contractors', 'Review home warranty vs. standard homeowner\'s insurance coverage', 'Schedule pre-season HVAC tune-up and replace filters', 'Confirm current deductible doesn\'t exceed 1% of liquid savings'].map((text, idx) => (
                                     <label key={idx} className="flex items-start gap-4 cursor-pointer group">
-                                        <input type="checkbox" checked={checklist[idx]} onChange={() => toggleChecklist(idx)} className="mt-1 w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500" />
+                                        <input type="checkbox" checked={checklist[idx]} onChange={() => toggleChecklist(idx)} className="mt-1 w-5 h-5 text-gold rounded border-gray-300 focus:ring-gold" />
                                         <span className={`text-slate-700 dark:text-slate-300 transition-colors ${checklist[idx] ? 'line-through opacity-50' : 'group-hover:text-black dark:group-hover:text-white'}`}>{text}</span>
                                     </label>
                                 ))}

@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -34,8 +35,40 @@ export function Header({ countryCode }: HeaderProps) {
   const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
   const countryPrefix = isUS ? '/us' : '';
 
+  const [isVisible, setIsVisible] = useState(true);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Always show on desktop (md and up)
+      if (window.innerWidth >= 768) {
+        setIsVisible(true);
+        return;
+      }
+
+      // Hide immediately on scroll start
+      setIsVisible(false);
+
+      // Clear existing timeout
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      // Show after scroll stops (200ms)
+      scrollTimeout.current = setTimeout(() => {
+        setIsVisible(true);
+      }, 200);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
+    <header className={`sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`}>
       {/* Gradient bottom line instead of flat border */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="container-wide">

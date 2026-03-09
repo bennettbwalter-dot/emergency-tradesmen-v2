@@ -6,8 +6,8 @@
   :root {
     --color-1: 0 100% 63%;
     --color-2: 270 100% 63%;
-    --color-3: 210 100% 63%;
-    --color-4: 195 100% 63%;
+    --color-3: 38 65% 55%;
+    --color-4: 38 70% 35%;
     --color-5: 90 100% 63%;
 
     --background: 20 8% 6%;
@@ -227,6 +227,10 @@
 
   .glow-gold {
     box-shadow: 0 0 60px -15px hsl(var(--gold) / 0.3);
+  }
+
+  .glow-gold-dark {
+    box-shadow: 0 0 40px -10px hsl(var(--gold-dark) / 0.4);
   }
 
   .border-gradient-gold {

@@ -17,7 +17,7 @@ export function HeroSection() {
             {/* Background layers */}
             <div className="absolute inset-0 z-0 opacity-40">
                 <ColorBends
-                    colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+                    colors={["#d7c08a", "#caa55b", "#b8986e"]}
                     rotation={0}
                     speed={0.2}
                     scale={1}
@@ -113,7 +113,7 @@ export function HeroSection() {
                 </motion.div>
 
                 {/* Flipping Text */}
-                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-14">
+                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-0">
                     <LayoutTextFlipDemo />
                 </div>
             </div>
