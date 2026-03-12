@@ -9,6 +9,7 @@ interface SVGButtonProps {
     disabled?: boolean;
     isRecording?: boolean;
     isTranscriptionProcessing?: boolean;
+    dataTour?: string;
 }
 
 export const SVGButton = ({ 
@@ -16,7 +17,8 @@ export const SVGButton = ({
     onClick, 
     disabled, 
     isRecording, 
-    isTranscriptionProcessing 
+    isTranscriptionProcessing,
+    dataTour
 }: SVGButtonProps) => {
     const [isFlashing, setIsFlashing] = useState(false);
 
@@ -43,6 +45,7 @@ export const SVGButton = ({
             className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-24 h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handlePress}
             disabled={disabled}
+            data-tour={dataTour}
             aria-label="Action Button"
         >
             {/* Recording Pulse Effect */}

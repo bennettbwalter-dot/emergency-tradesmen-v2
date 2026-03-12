@@ -832,6 +832,7 @@ export function EmergencyChatInterface() {
                             isRecording={isRecording}
                             isTranscriptionProcessing={isTranscriptionProcessing}
                             disabled={isTranscriptionProcessing || isTyping}
+                            dataTour="tour-mic-button"
                         />
                     </div>
                     <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
@@ -842,6 +843,7 @@ export function EmergencyChatInterface() {
                                 const trigger = document.querySelector('[data-tour="tour-trade-button"]') as HTMLElement;
                                 if (trigger) trigger.click();
                             }}
+                            dataTour="tour-trade-button"
                         />
                     </div>
                     <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
@@ -859,6 +861,7 @@ export function EmergencyChatInterface() {
                                         if (trigger) trigger.click();
                                     }
                                 }}
+                                dataTour={settings.countryCode === 'US' ? 'tour-state-button' : 'tour-location-button'}
                             />
                             {settings.countryCode === 'US' && (hasStateSelected || !!locationRecord) && (
                                 <PurpleSVGButton 
@@ -868,6 +871,7 @@ export function EmergencyChatInterface() {
                                         const trigger = document.querySelector('[data-tour="tour-city-button"]') as HTMLElement;
                                         if (trigger) trigger.click();
                                     } }
+                                    dataTour="tour-city-button"
                                 />
                             )}
                     </div>
@@ -878,6 +882,7 @@ export function EmergencyChatInterface() {
                             onClick={handleActionClick}
                             disabled={isActionDisabled}
                             isPulsing={!!(detectedTrade && (detectedCity || locationRecord) && !input.trim())}
+                            dataTour="tour-locate-button"
                         />
                     </div>
                 </div>

@@ -7,12 +7,14 @@ interface PurpleSVGButtonProps {
     index?: number;
     onClick?: () => void;
     disabled?: boolean;
+    dataTour?: string;
 }
 
 export const PurpleSVGButton = forwardRef<HTMLButtonElement, PurpleSVGButtonProps>(({ 
     index = 0, 
     onClick, 
-    disabled 
+    disabled,
+    dataTour 
 }, ref) => {
     const { theme } = useTheme();
     const [isFlashing, setIsFlashing] = useState(false);
@@ -50,6 +52,7 @@ export const PurpleSVGButton = forwardRef<HTMLButtonElement, PurpleSVGButtonProp
             className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-24 h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handlePress}
             disabled={disabled}
+            data-tour={dataTour}
             aria-label="Second Location Action"
         >
             {/* Click Flash Effect */}
