@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2, ChevronsUpDown } from "lucide-react";
+import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
@@ -28,6 +28,12 @@ import { useWhisper } from "@/hooks/useWhisper";
 import { toast } from "sonner";
 import WhisperWaveform from "@/components/VoiceAssistant/WhisperWaveform";
 import { AzureVoiceService } from "@/services/azureVoiceService";
+import { SVGButton } from "./VoiceAssistant/SVGButton";
+import { RedSVGButton } from "./VoiceAssistant/RedSVGButton";
+import { GreenSVGButton } from "./VoiceAssistant/GreenSVGButton";
+import { YellowSVGButton } from "./VoiceAssistant/YellowSVGButton";
+import { PurpleSVGButton } from "./VoiceAssistant/PurpleSVGButton";
+
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -455,15 +461,33 @@ export function EmergencyChatInterface() {
     };
 
     const isActionDisabled = (!input.trim() && !isRequestingLocation && !(detectedTrade && (detectedCity || locationRecord))) || (isTyping && !isRequestingLocation);
+    const tradeSelectorContent = (
+        <SelectContent className="bg-white border-gray-200">
+            {trades.map((t) => (
+                <SelectItem
+                    key={t.slug}
+                    value={t.slug}
+                    className="cursor-pointer hover:bg-gray-100 text-black"
+                >
+                    {settings.countryCode === 'US' ? (t as any).usName : t.name}
+                </SelectItem>
+            ))}
+        </SelectContent>
+    );
+
+    const [hasStateSelected, setHasStateSelected] = useState(false);
 
     const tradeSelector = (
-        <Select value={detectedTrade || ""} onValueChange={setDetectedTrade}>
+        <Select 
+            value={detectedTrade || ""} 
+            onValueChange={setDetectedTrade}
+        >
             <SelectTrigger
                 data-tour="tour-trade-button"
-                className={`h-12 w-full md:max-w-none md:h-11 md:w-full rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-sm focus:ring-0 overflow-hidden [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-foreground dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}
+                className={`h-12 md:h-11 w-full md:max-w-none md:w-full rounded-full border border-gold/20 md:border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-sm focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white text-[#9B7D4F] hover:bg-gold/5' : 'bg-white text-[#9B7D4F]/70 hover:bg-gold/5'}`}
             >
-                <div className="flex items-center justify-center md:justify-start md:gap-2 min-w-0 overflow-hidden">
-                    <Wrench className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                <div className="flex items-center justify-center md:justify-start md:gap-2 w-full md:w-auto">
+                    <User className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
                     <div className="hidden md:block min-w-0 overflow-hidden">
                         <SelectValue placeholder="Trade">
                             <span className="text-sm font-medium truncate block max-w-[180px]">
@@ -476,27 +500,17 @@ export function EmergencyChatInterface() {
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </div>
             </SelectTrigger>
-            <SelectContent className="bg-white border-gray-200">
-                {trades.map((t) => (
-                    <SelectItem
-                        key={t.slug}
-                        value={t.slug}
-                        className="cursor-pointer hover:bg-gray-100 text-black"
-                    >
-                        {settings.countryCode === 'US' ? (t as any).usName : t.name}
-                    </SelectItem>
-                ))}
-            </SelectContent>
+            {tradeSelectorContent}
         </Select>
     );
 
     const locationSelector = (
-        <div data-tour="tour-location-button" className="w-full min-w-0 overflow-hidden">
+        <div data-tour="tour-location-button" className="w-full min-w-0 overflow-visible">
             {settings.countryCode === 'US' ? (
                 (isVoiceSessionRef.current && detectedCity) ? (
-                    <div className="w-full h-11 px-4 rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 flex items-center gap-2 overflow-hidden shadow-sm">
-                        <MapPin className="w-4 h-4 shrink-0 text-emerald-500" />
-                        <span className="text-sm font-medium text-foreground dark:text-white truncate block min-w-0">
+                    <div className="w-full h-12 md:h-12 flex items-center justify-center rounded-full border border-gold/20 md:border-gold/50 bg-white shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-sm overflow-visible">
+                        <MapPin className="w-5 h-5 md:w-5 md:h-5 shrink-0 text-[#9B7D4F]" />
+                        <span className="hidden md:block text-sm font-medium text-foreground dark:text-white truncate block min-w-0">
                             {detectedCity}
                         </span>
                         <Button
@@ -507,6 +521,7 @@ export function EmergencyChatInterface() {
                                 e.stopPropagation();
                                 setDetectedCity(null);
                                 setLocationRecord(null);
+                                setHasStateSelected(false);
                                 isVoiceSessionRef.current = false;
                             }}
                         >
@@ -516,8 +531,9 @@ export function EmergencyChatInterface() {
                     </div>
                 ) : (
                     <HierarchicalLocationSelector
-                        className="w-full md:max-w-none md:w-full h-12 md:h-11"
+                        className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none bg-white rounded-full"
                         placeholder="City, State"
+                        onStateSelected={(state) => setHasStateSelected(!!state)}
                         onLocationSelect={(record) => {
                             console.log("Loc Selected", record);
                             setDetectedCity(record.name);
@@ -527,7 +543,7 @@ export function EmergencyChatInterface() {
                 )
             ) : (
                 <UKCityCombobox
-                    className="w-full md:max-w-none md:w-full h-12 md:h-11"
+                    className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none bg-white rounded-full"
                     placeholder="Select City"
                     value={detectedCity || ""}
                     onValueChange={setDetectedCity}
@@ -536,33 +552,35 @@ export function EmergencyChatInterface() {
         </div>
     );
 
+    const handleMicToggle = async () => {
+        if (isRecording) {
+            toast.info("Processing voice...", { id: 'stt-status', duration: 2000 });
+            stopRecording();
+            stopVolumeMonitor();
+        } else {
+            voiceService.unlockAudioContext();
+            try {
+                await startRecording();
+                startVolumeMonitor();
+                toast.success("Microphone active. Speak now.", { id: 'stt-status', duration: 3000 });
+            } catch (err) {
+                toast.error("Microphone access denied or failed.");
+                console.error("[Mic] Error:", err);
+            }
+        }
+    };
+
     const micButton = (
         <Button
-            onClick={async () => {
-                if (isRecording) {
-                    toast.info("Processing voice...", { id: 'stt-status', duration: 2000 });
-                    stopRecording();
-                    stopVolumeMonitor();
-                } else {
-                    voiceService.unlockAudioContext();
-                    try {
-                        await startRecording();
-                        startVolumeMonitor();
-                        toast.success("Microphone active. Speak now.", { id: 'stt-status', duration: 3000 });
-                    } catch (err) {
-                        toast.error("Microphone access denied or failed.");
-                        console.error("[Mic] Error:", err);
-                    }
-                }
-            }}
+            onClick={handleMicToggle}
             data-tour="tour-mic-button"
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
-            className={`h-12 w-full md:max-w-none md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-lg ${isRecording
+            className={`h-12 w-12 md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-md md:shadow-lg overflow-visible ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
-                    : 'bg-gold/10 hover:bg-gold/20 text-gold border border-gold/30'}`}
+                    : 'bg-[#FDF5E6] hover:bg-[#F5ECD7] text-[#9B7D4F] border border-gold/10'}`}
             title={isRecording ? "Stop Recording" : (isTranscriptionProcessing ? `Processing... (${whisperStatus})` : `Record Message (${whisperStatus})`)}
         >
             {isTranscriptionProcessing ? (
@@ -582,7 +600,7 @@ export function EmergencyChatInterface() {
             data-tour="tour-locate-button"
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${(detectedTrade && detectedCity && !input.trim())
-                ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
+                ? 'bg-[#C2B280] text-white animate-pulse ring-2 ring-gold/50'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
             title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
         >
@@ -591,7 +609,7 @@ export function EmergencyChatInterface() {
             ) : (detectedTrade && detectedCity && !input.trim()) ? (
                 <Search className="w-4 h-4" />
             ) : (
-                <Send className="w-4 h-4" />
+                <Settings className="w-4 h-4" />
             )}
         </Button>
     );
@@ -602,16 +620,16 @@ export function EmergencyChatInterface() {
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-12 w-full md:max-w-none rounded-full transition-all shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
-                ? 'bg-gold text-white animate-pulse ring-2 ring-gold/50 shadow-[0_0_15px_rgba(255,183,0,0.6)]'
-                : 'bg-gold text-white hover:bg-gold/90'}`}
+            className={`h-12 w-12 rounded-full transition-all shadow-md md:shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
+                ? 'bg-[#C2B280] text-white animate-pulse ring-2 ring-gold/50'
+                : 'bg-[#C2B280] text-white hover:bg-[#B5A574]'}`}
         >
             {isRequestingLocation ? (
                 <MapPin className="w-5 h-5" />
             ) : (detectedTrade && detectedCity && !input.trim()) ? (
                 <Search className="w-5 h-5" />
             ) : (
-                <Send className="w-5 h-5" />
+                <Settings className="w-5 h-5" />
             )}
         </Button>
     );
@@ -803,24 +821,64 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - FLEXBOX: evenly spaced, strict gap, no overlap */}
-            <div className="md:hidden w-full mt-2 mb-6 px-4">
-                <div className="flex flex-row items-center w-full" style={{ gap: '12px' }}>
-                    {/* Mic */}
-                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
-                        {micButton}
+            {/* Mobile Controls - Restored Original Controls + SVG Buttons */}
+            <div className="md:hidden w-full mt-2 mb-14 px-4 overflow-visible">
+                <div className="flex flex-row items-center justify-between w-full overflow-visible gap-4">
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="hidden">{micButton}</div>
+                        <SVGButton 
+                            index={0} 
+                            onClick={handleMicToggle}
+                            isRecording={isRecording}
+                            isTranscriptionProcessing={isTranscriptionProcessing}
+                            disabled={isTranscriptionProcessing || isTyping}
+                        />
                     </div>
-                    {/* Trade */}
-                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
-                        {tradeSelector}
+                    <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
+                        <div className="hidden">{tradeSelector}</div>
+                        <RedSVGButton 
+                            index={1} 
+                            onClick={() => {
+                                const trigger = document.querySelector('[data-tour="tour-trade-button"]') as HTMLElement;
+                                if (trigger) trigger.click();
+                            }}
+                        />
                     </div>
-                    {/* Location */}
-                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
-                        {locationSelector}
+                    <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
+                        <div className="hidden">{locationSelector}</div>
+                            <GreenSVGButton 
+                                index={2} 
+                                onClick={() => {
+                                    if (settings.countryCode === 'US') {
+                                        // USA: Green is the "Location" side of the pill (State Select)
+                                        const trigger = document.querySelector('[data-tour="tour-state-button"]') as HTMLElement;
+                                        if (trigger) trigger.click();
+                                    } else {
+                                        // UK: Green is the manual City selection
+                                        const trigger = document.querySelector('[data-tour="tour-uk-city-button"]') as HTMLElement;
+                                        if (trigger) trigger.click();
+                                    }
+                                }}
+                            />
+                            {settings.countryCode === 'US' && (hasStateSelected || !!locationRecord) && (
+                                <PurpleSVGButton 
+                                    index={4}
+                                    onClick={() => {
+                                        // USA: Purple is the "City" side of the pill (City Select)
+                                        const trigger = document.querySelector('[data-tour="tour-city-button"]') as HTMLElement;
+                                        if (trigger) trigger.click();
+                                    } }
+                                />
+                            )}
                     </div>
-                    {/* Action */}
-                    <div className="flex-1 min-w-0 flex items-center justify-center h-12">
-                        {mobileActionButton}
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="hidden">{mobileActionButton}</div>
+                        <YellowSVGButton 
+                            index={3} 
+                            onClick={handleActionClick}
+                            disabled={isActionDisabled}
+                            isPulsing={!!(detectedTrade && (detectedCity || locationRecord) && !input.trim())}
+                        />
                     </div>
                 </div>
             </div>

@@ -187,11 +187,14 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
         const amplitude = chaos;
         const frequency = 10;
         const baseFlatness = 0;
-        const displacement = 60;
-        const borderOffset = 60;
-
         const updateSize = () => {
             const rect = container.getBoundingClientRect();
+            
+            // Responsive adjustments for mobile: Tighter fit
+            const isMobile = rect.width < 500;
+            const borderOffset = isMobile ? 25 : 45; // Reduced from 60
+            const displacement = isMobile ? 25 : 45; // Reduced from 60
+            
             const width = rect.width + borderOffset * 2;
             const height = rect.height + borderOffset * 2;
 
@@ -202,10 +205,10 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
             canvas.style.height = `${height}px`;
             ctx.scale(dpr, dpr);
 
-            return { width, height };
+            return { width, height, borderOffset, displacement };
         };
 
-        let { width, height } = updateSize();
+        let { width, height, borderOffset, displacement } = updateSize();
 
         const drawElectricBorder = (currentTime: number) => {
             if (!canvas || !ctx) return;
@@ -285,6 +288,9 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
             const newSize = updateSize();
             width = newSize.width;
             height = newSize.height;
+            // Update closure variables for drawElectricBorder
+            (borderOffset as any) = newSize.borderOffset;
+            (displacement as any) = newSize.displacement;
         });
         resizeObserver.observe(container);
 

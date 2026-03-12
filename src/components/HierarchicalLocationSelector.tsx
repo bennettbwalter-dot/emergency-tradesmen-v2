@@ -29,6 +29,7 @@ interface HierarchicalLocationSelectorProps {
     className?: string;
     onLocationSelect: (record: any) => void;
     placeholder?: string;
+    onStateSelected?: (stateCode: string | null) => void;
 }
 
 // Data Types
@@ -44,7 +45,7 @@ interface FlattenedCity extends City {
 
 const US_STATES = (usData as any).states as State[];
 
-export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder }: HierarchicalLocationSelectorProps) {
+export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder, onStateSelected }: HierarchicalLocationSelectorProps) {
     // Selection State
     const [selectedState, setSelectedState] = useState<State | null>(null);
     const [selectedCity, setSelectedCity] = useState<FlattenedCity | null>(null);
@@ -64,6 +65,10 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         setSelectedCity(null);
         setSelectedSuburb(null);
         setAvailableCities([]);
+        
+        if (onStateSelected) {
+            onStateSelected(state?.code || null);
+        }
 
         if (state && state.metros) {
             // Flatten cities from all metros
@@ -136,24 +141,6 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                     }
                 };
 
-                // Adjust routing in SearchFilterBar to handle empty suburb?
-                // SearchFilterBar uses: /us/${state}/${metro}/${city}/${suburb}/${trade}
-                // If suburb is empty, we get //trade?
-                // We should probably pass a special value or handle it in SearchFilterBar.
-                // Let's pass a synthetic suburb slug for "all" or simply rely on the parent to handle.
-                // Actually, if we pass 'all', routing becomes /us/.../city/all/trade ? No, that's not standard.
-                // Best to redirect to /us/.../city (no suburb).
-                // SearchFilterBar logic:
-                // if (record.path_slugs) ... /us/${state}/${metro}/${city}/${suburb}/${tradeSlug}
-                // If suburb is empty string, it becomes .../city//trade... double slash.
-
-                // We will handle this by passing a sanitized record.
-                // However, the `SearchFilterBar` is expecting a suburb.
-                // Let's trigger selection.
-                // We'll trust the consumer handles it, or clean up the slug.
-
-                // Hack: If slug is 'all-city', we want to navigate to the city page.
-                // We pass `suburb: undefined`?
                 const cleanRecord = {
                     ...record,
                     path_slugs: {
@@ -163,7 +150,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                         suburb: '' // Will need handling in consumer
                     }
                 };
-                onLocationSelect(cleanRecord); // This might cause double slash issue if consumer is naive.
+                onLocationSelect(cleanRecord); 
                 return;
             }
         }
@@ -194,11 +181,11 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     };
 
     return (
-        <div className={`flex flex-nowrap gap-2 items-center w-full ${className}`}>
+        <div className={`flex flex-nowrap gap-2 items-center w-full rounded-full ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger data-tour="tour-state-button" className={`h-11 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedState ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
-                    <Map className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                <SelectTrigger data-tour="tour-state-button" className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${(selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex'} ${selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5'}`}>
+                    <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
                     <div className="hidden md:block">
                         <SelectValue placeholder="State" />
                     </div>
@@ -223,12 +210,13 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             aria-expanded={cityOpen}
                             data-tour="tour-city-button"
                             className={cn(
-                                "h-11 px-0 md:px-4 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between shadow-sm",
-                                selectedCity ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'
+                                "h-11 px-0 md:px-4 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between overflow-visible",
+                                selectedSuburb ? 'hidden md:flex' : 'flex',
+                                selectedCity ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5'
                             )}
                         >
-                            <div className="flex items-center justify-center md:justify-start md:gap-2">
-                                <Building2 className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                            <div className="flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2">
+                                <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
                                 <span className={cn("hidden md:inline truncate", !selectedCity && "text-muted-foreground")}>
                                     {selectedCity?.name || "City"}
                                 </span>
@@ -272,8 +260,8 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {/* Suburb/Area Select - Only show if suburbs exist */}
             {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
                 <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-11 w-full flex-1 min-w-0 md:w-full md:flex-1 rounded-full border border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-4 shadow-sm focus:ring-0 [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-white/80 text-black dark:bg-black/40 dark:text-white hover:bg-gold/10 hover:border-gold' : 'bg-white/80 text-black dark:bg-black/40 dark:text-white/70 hover:bg-gold/10 hover:border-gold'}`}>
-                        <Home className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-gold" />
+                    <SelectTrigger className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5'}`}>
+                        <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
                         <div className="hidden md:block">
                             <SelectValue placeholder="Area" />
                         </div>
@@ -296,3 +284,4 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         </div>
     );
 }
+

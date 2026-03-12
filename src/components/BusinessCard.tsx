@@ -81,7 +81,8 @@ export function BusinessCard({ business, rank }: BusinessCardProps) {
         color="#c5a059" // Match the gold theme
         speed={1}
         chaos={0.12}
-        borderRadius={24}
+        borderRadius={32}
+        className="w-full max-w-[22rem] mx-auto"
       >
         {cardContent}
       </ElectricBorder>

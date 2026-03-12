@@ -266,16 +266,15 @@ export default function BlogPostPage() {
         loadPost();
     }, [slug, settings.countryCode]);
 
-    useEffect(() => {
+        useEffect(() => {
         async function loadRelated() {
             if (!post) return;
             let query = supabase
                 .from('posts')
-                .select('title, slug, cover_image, excerpt, published_at')
+                .select('id, title, slug, cover_image, excerpt, published_at')
                 .eq('published', true)
                 .neq('slug', post.slug)
-                .order('published_at', { ascending: false })
-                .limit(3);
+                .order('published_at', { ascending: false });
 
             if (settings.countryCode === 'US') {
                 query = query.ilike('slug', '%-us');
@@ -284,7 +283,20 @@ export default function BlogPostPage() {
             }
 
             const { data } = await query;
-            if (data) setRelatedPosts(data as BlogPost[]);
+            if (data) {
+                // Manually filter unique titles and limit to 3
+                const uniquePosts: any[] = [];
+                const seenTitles = new Set();
+                
+                for (const p of data) {
+                    const normalizedTitle = p.title.toLowerCase().trim();
+                    if (!seenTitles.has(normalizedTitle) && uniquePosts.length < 3) {
+                        seenTitles.add(normalizedTitle);
+                        uniquePosts.push(p);
+                    }
+                }
+                setRelatedPosts(uniquePosts);
+            }
         }
         loadRelated();
     }, [post?.slug, settings.countryCode]);
@@ -665,7 +677,29 @@ export default function BlogPostPage() {
                                                             li: ({ node, ...props }) => (
                                                                 <li {...props} />
                                                             ),
-                                                            a: ({ node, ...props }) => {
+                                                                                                                        a: ({ node, ...props }) => {
+                                                                const href = props.href || '';
+                                                                const childrenText = props.children?.toString() || '';
+                                                                const isAmazon = href.includes('amazon.co.uk') || 
+                                                                               href.includes('amazon.com') || 
+                                                                               childrenText.toLowerCase().includes('order') ||
+                                                                               childrenText.toLowerCase().includes('amazon');
+                                                                               
+                                                                if (isAmazon) {
+                                                                    return (
+                                                                        <div className="my-12 flex justify-center">
+                                                                            <Button 
+                                                                                asChild 
+                                                                                className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-8 px-16 rounded-xl shadow-xl transform transition hover:scale-105 active:scale-95 text-2xl h-auto whitespace-normal text-center min-h-[80px] w-full max-w-2xl"
+                                                                            >
+                                                                                <a {...props} target="_blank" rel="noopener noreferrer">
+                                                                                    {props.children}
+                                                                                </a>
+                                                                            </Button>
+                                                                        </div>
+                                                                    );
+                                                                }
+
                                                                 const isInternal = props.href?.includes('emergencytradesmen.net');
                                                                 return (
                                                                     <a

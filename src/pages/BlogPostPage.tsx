@@ -182,9 +182,9 @@ Calling on weekends or holidays also means higher costs.These times are in high 
 
 | Service Time | Typical Cost Range |
 | : --- | : --- |
-| Daytime(8 AM - 8 PM) | £80 - £150 |
-| Night - time(8 PM - 8 AM) | £120 - £250 |
-| Weekends and Holidays | £150 - £300 |
+| Daytime(8 AM - 8 PM) | ï¿½80 - ï¿½150 |
+| Night - time(8 PM - 8 AM) | ï¿½120 - ï¿½250 |
+| Weekends and Holidays | ï¿½150 - ï¿½300 |
 
 ### Quality Guarantees and Follow - Up Services
 
@@ -305,13 +305,13 @@ The statistics are sobering.In the year ending September 2024, Fire and Rescue S
 
 Unlike radial circuits used in most of the world, a ring circuit forms a closed loop.The Line(Live), Neutral, and Earth(CPC) conductors start at the consumer unit(fuse box), visit every socket in the designated area, and then return to the same breaker.
 
-** The "Broken Ring" Hazard:** If a wire comes loose at a socket terminal or snaps inside the wall, the ring is broken.The circuit does not trip; the sockets continue to work.However, the system silently converts into two radial circuits.The 2.5mm² cable(rated for ~20A) can carry the full 32A load, causing the cable to overheat inside the wall—all while the TV and kettle continue to operate normally.
+** The "Broken Ring" Hazard:** If a wire comes loose at a socket terminal or snaps inside the wall, the ring is broken.The circuit does not trip; the sockets continue to work.However, the system silently converts into two radial circuits.The 2.5mmï¿½ cable(rated for ~20A) can carry the full 32A load, causing the cable to overheat inside the wallï¿½all while the TV and kettle continue to operate normally.
 
 ### The "Fishy Smell": A Chemical Warning of Imminent Fire
 
 One of the most distinctive and alarming indicators of electrical failure in UK homes is a smell resembling ** rotting fish or urine **.This is often misidentified as a drainage issue, but it is a critical electrical emergency.
 
-** The Source:** Urea - Formaldehyde Degradation.Electrical accessories were historically manufactured using urea-formaldehyde plastics.When a loose connection generates heat, these materials decompose and release ** trimethylamine **—the compound responsible for the smell of rotting fish.
+** The Source:** Urea - Formaldehyde Degradation.Electrical accessories were historically manufactured using urea-formaldehyde plastics.When a loose connection generates heat, these materials decompose and release ** trimethylamine **ï¿½the compound responsible for the smell of rotting fish.
 
 > ** Implication:** If you smell fish near an outlet, the electrical component is not just hot; it is * cooking *.The insulation is structurally failing, and a fire is imminent.
 
@@ -381,7 +381,7 @@ Do not gamble with the safety of your home.A "fishy smell" or a "flickering ligh
 
 The US Fire Administration (USFA) reports that in 2021 alone, there were an estimated **24,200 residential building electrical fires**, resulting in nearly 300 deaths and over $1.2 billion in property loss.
 
-The warning signs of these fires are often subtle. A flickering light bulb, a receptacle that feels warm to the touch, or an outlet that creates a "seesaw" effect—where one light dims while another brightens—are not quirks of an old house. They are **red flags** indicating that the system's integrity is compromised.
+The warning signs of these fires are often subtle. A flickering light bulb, a receptacle that feels warm to the touch, or an outlet that creates a "seesaw" effectï¿½where one light dims while another brightensï¿½are not quirks of an old house. They are **red flags** indicating that the system's integrity is compromised.
 
 ![US Split-Phase Diagram](/images/blog/electrical-safety/split-phase-us.jpg "Split-Phase Radial Circuits in the USA")
 
@@ -393,7 +393,7 @@ The warning signs of these fires are often subtle. A flickering light bulb, a re
 
 One of the most dangerous conditions in a US home is the "Lost" or "Floating" Neutral.
 
-US homes typically receive power via three wires: two "hot" legs (each 120V relative to ground) and one neutral. If the neutral wire breaks, the 240V supply divides itself based on resistance. Turning on a high-load appliance (like a microwave) can cause voltage on one leg to **drop to 60V** while the other **skyrockets to 180V**—instantly destroying electronics and starting fires.
+US homes typically receive power via three wires: two "hot" legs (each 120V relative to ground) and one neutral. If the neutral wire breaks, the 240V supply divides itself based on resistance. Turning on a high-load appliance (like a microwave) can cause voltage on one leg to **drop to 60V** while the other **skyrockets to 180V**ï¿½instantly destroying electronics and starting fires.
 
 ![Arc Flash Warning](/images/blog/electrical-safety/arc-flash-warning.jpg "Warning: Arc Flash Hazard")
 
@@ -472,7 +472,7 @@ return;
     setPost({
         id: 'static-co-safety-guide',
         title: isUK
-            ? 'The "Silent Killer" in Your Boiler – A Friendly Guide to Staying Safe'
+            ? 'The "Silent Killer" in Your Boiler ï¿½ A Friendly Guide to Staying Safe'
             : 'The Invisible Threat in Your HVAC â€“ A Friendly Guide to Staying Safe in the USA',
         slug: 'carbon-monoxide-safety-guide',
         excerpt: isUK
@@ -480,7 +480,7 @@ return;
             : 'Is Your Furnace Red Tagged? The Hidden Danger in Your Walls: A Guide to CO Leaks and Electrical Safety.',
         cover_image: '/blog/emergency-at-home/gas-emergency.webp',
         content: isUK
-            ? `**Carbon Monoxide (CO) is an invisible, odorless gas produced by faulty fuel-burning appliances.** It is truly invisible: Carbon Monoxide (CO) has absolutely no taste, smell, or colour. You cannot detect it with human senses, which is why it’s called the "Silent Killer." It is produced when fuels like gas, oil, coal, or wood don't burn properly due to a lack of oxygen.
+            ? `**Carbon Monoxide (CO) is an invisible, odorless gas produced by faulty fuel-burning appliances.** It is truly invisible: Carbon Monoxide (CO) has absolutely no taste, smell, or colour. You cannot detect it with human senses, which is why itï¿½s called the "Silent Killer." It is produced when fuels like gas, oil, coal, or wood don't burn properly due to a lack of oxygen.
 
 ### The Danger: What You Need to Know
 
@@ -531,10 +531,10 @@ Don't wait for a headache to tell you your boiler is broken. Peace of mind is ju
 
 ![Silent Killer](/images/blog/co-safety/silent-killer-alt.jpg "The Silent Killer")
 
-                            ** The "Silent" Electrical Killer(Capacitors):** It’s not just gas.US HVAC units use high - voltage capacitors to start motors.These can hold a lethal charge(370V–600V) even after you cut the power to the house.
+                            ** The "Silent" Electrical Killer(Capacitors):** Itï¿½s not just gas.US HVAC units use high - voltage capacitors to start motors.These can hold a lethal charge(370Vï¿½600V) even after you cut the power to the house.
 *   * DIY Warning:* Touching these without discharging them can cause severe shock or electrocution.Leave the panel closed!
 
-**Back-Drafting:** In modern, airtight homes, running a strong kitchen exhaust fan or fireplace can suck air down your furnace flue instead of letting it go up. This pulls CO back into your living room—a phenomenon highlighted by EPA indoor air quality guidelines.
+**Back-Drafting:** In modern, airtight homes, running a strong kitchen exhaust fan or fireplace can suck air down your furnace flue instead of letting it go up. This pulls CO back into your living roomï¿½a phenomenon highlighted by EPA indoor air quality guidelines.
 
 **Portable Generators:** Never, ever run a generator in the garage or basement. Even with the door open, CO can build up to lethal levels in minutes, a major cause of poisoning according to the CPSC.
 
@@ -580,15 +580,15 @@ A Red Tag on your furnace is scary, but ignoring it is worse. Don't gamble with 
     const isUK = settings.countryCode === 'GB';
     setPost({
         id: 'static-spring-thaw',
-        title: regionalizeText('The "Spring Thaw" Myth — Why Your Pipes Are Most Likely to Burst When It Warms Up'),
+        title: regionalizeText('The "Spring Thaw" Myth ï¿½ Why Your Pipes Are Most Likely to Burst When It Warms Up'),
         slug: 'spring-thaw-pipe-burst-prevention',
-        excerpt: regionalizeText('If you\'ve spent the last week anxiously watching the thermometer drop, assuming that once the temperature rises above freezing, you\'re safe — we have some bad news.'),
+        excerpt: regionalizeText('If you\'ve spent the last week anxiously watching the thermometer drop, assuming that once the temperature rises above freezing, you\'re safe ï¿½ we have some bad news.'),
         cover_image: '/images/blog/spring-thaw/cover.webp',
         published_at: new Date().toISOString(),
         created_at: new Date().toISOString(),
         content: `**The danger hasn't passed. It's just beginning.** In both the UK and the Northeastern US, thousands of homeowners wake up to flooded kitchens and collapsed ceilings not during the deep freeze, but on the first mild day that follows it. It's a phenomenon known in the trade as the **"Spring Thaw Burst"** (even if it happens in February), and it is responsible for some of the most catastrophic residential water damage recorded each year.
 
-Today, New York is seeing temperatures rise to 47°F (8°C) after a freezing night. London is hovering around 7°C. This fluctuation is the exact trigger condition for thaw-related bursts.
+Today, New York is seeing temperatures rise to 47ï¿½F (8ï¿½C) after a freezing night. London is hovering around 7ï¿½C. This fluctuation is the exact trigger condition for thaw-related bursts.
 
 Here is your comprehensive guide to understanding why this happens, how to spot the invisible signs of a leak today, and exactly what to do if you find one.
 
@@ -611,7 +611,7 @@ The real damage often isn't at the site of the ice plug itself, but downstream f
 ### 3. The Thaw (The Release)
 This is today. As the ambient temperature rises, the ice plug begins to melt. It shrinks. The temporary seal it provided for those hairline cracks vanishes.
 
-Suddenly, 2,000 PSI of pressurised water — plus the unlimited flow from the mains — rushes through the system. It finds every split, crack, and loose joint that formed during the freeze.
+Suddenly, 2,000 PSI of pressurised water ï¿½ plus the unlimited flow from the mains ï¿½ rushes through the system. It finds every split, crack, and loose joint that formed during the freeze.
 
 Because the ice is gone, there is nothing to stop the flow. Water sprays out at full mains pressure, often behind walls or under floorboards where you can't see it until it's too late.
 
@@ -654,7 +654,7 @@ If you find any of the signs above, **do not wait**. Water damage compounds expo
 ### Step 1: Shut Off the Water
 Go immediately to your **stopcock** (UK) or **main shut-off valve** (US).
 - **Turn it clockwise** until it stops.
-- If you can't find it, or it's seized, this is an instant emergency callout. Do not force a seized valve with a wrench — you could snap the spindle and leave yourself with no way to stop the flood.
+- If you can't find it, or it's seized, this is an instant emergency callout. Do not force a seized valve with a wrench ï¿½ you could snap the spindle and leave yourself with no way to stop the flood.
 
 ### Step 2: Relieve the Pressure
 Once the mains are off, open the cold water taps in your kitchen and bathroom (and an outside tap if you have one). This drains the system and stops water from spraying out of the leak site.
@@ -698,7 +698,7 @@ Technology has moved on from the "wait and see" approach.
 
 ### 3. Keep the Heating On
 If you are away during winter, never turn the heating completely off.
-- Set the thermostat to a "frost protection" temperature (typically 12-15°C / 55°F). This keeps the internal fabric of the house warm enough to prevent loft pipes from freezing.
+- Set the thermostat to a "frost protection" temperature (typically 12-15ï¿½C / 55ï¿½F). This keeps the internal fabric of the house warm enough to prevent loft pipes from freezing.
 
 ---
 
@@ -731,12 +731,12 @@ It is not recommended unless you have plumbing experience. Burst pipes usually r
 Most policies cover the damage caused by the water (Escape of Water). Coverage for repairing the pipe itself varies. Check if you have "Trace and Access" cover for finding hidden leaks.
 
 ### How warm should I keep my house to prevent pipes freezing?
-Keep the thermostat at least at 12-15°C (55°F) day and night during freezing weather, even if you are away. Open cabinet doors under sinks to let warm air reach pipes on outside walls.
+Keep the thermostat at least at 12-15ï¿½C (55ï¿½F) day and night during freezing weather, even if you are away. Open cabinet doors under sinks to let warm air reach pipes on outside walls.
 
 ---
 
 **Don't let the weather fool you today.**
-If you hear a drip, hiss, or see a damp patch — act now.
+If you hear a drip, hiss, or see a damp patch ï¿½ act now.
 
 **[Find a Verified Plumber Near You ?](https://emergencytradesmen.net/)**
 ??? Local. Verified. Ready to help.`
@@ -849,7 +849,7 @@ return (
                 )}
 
                 <div className="prose prose-lg dark:prose-invert max-w-none">
-                    <ReactMarkdown
+                                        <ReactMarkdown
                         components={{
                             img: ({ node, alt, ...props }) => (
                                 <figure className="not-prose my-12 md:my-16 block">
@@ -868,6 +868,30 @@ return (
                                     )}
                                 </figure>
                             ),
+                            a: ({ node, ...props }) => {
+                                const href = props.href || '';
+                                const childrenText = props.children?.toString() || '';
+                                const isAmazon = href.includes('amazon.co.uk') || 
+                                               href.includes('amazon.com') || 
+                                               childrenText.toLowerCase().includes('order') ||
+                                               childrenText.toLowerCase().includes('amazon');
+                                               
+                                if (isAmazon) {
+                                    return (
+                                        <div className="my-12 flex justify-center">
+                                            <Button 
+                                                asChild 
+                                                className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-8 px-16 rounded-xl shadow-xl transform transition hover:scale-105 active:scale-95 text-2xl h-auto whitespace-normal text-center min-h-[80px] w-full max-w-2xl"
+                                            >
+                                                <a {...props} target="_blank" rel="noopener noreferrer">
+                                                    {props.children}
+                                                </a>
+                                            </Button>
+                                        </div>
+                                    );
+                                }
+                                return <a {...props} className="text-primary hover:underline" />;
+                            },
                         }}
                     >
                         {post.content}

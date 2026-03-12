@@ -34,13 +34,14 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
+                    data-tour="tour-uk-city-button"
                     className={cn(
-                        "h-12 md:h-11 w-full justify-center md:justify-between rounded-full border border-gold/50 bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shadow-sm shrink-0",
+                        "h-12 md:h-11 w-full justify-center md:justify-between rounded-full border border-gold/20 md:border-gold/50 bg-white md:bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shrink-0 overflow-visible text-[#9B7D4F] shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none",
                         className
                     )}
                 >
-                    <div className="flex items-center justify-center md:justify-start md:gap-2">
-                        <MapPin className="h-5 w-5 md:h-4 md:w-4 shrink-0 text-gold" />
+                    <div className="flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2">
+                        <MapPin className="h-5 w-5 md:h-4 md:w-4 shrink-0 text-[#9B7D4F]" />
                         <span className={cn("hidden md:inline truncate", !value && "text-muted-foreground")}>
                             {value ? value : placeholder}
                         </span>
