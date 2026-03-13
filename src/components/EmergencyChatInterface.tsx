@@ -821,10 +821,10 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - Restored Original Controls + SVG Buttons */}
-            <div className="md:hidden w-full mt-2 mb-14 px-4 overflow-visible">
-                <div className="flex flex-row items-center justify-between w-full overflow-visible gap-4">
-                    <div className="flex flex-col items-center gap-2">
+            {/* Mobile Controls - SVG Buttons */}
+            <div className="md:hidden w-full mt-2 mb-14 px-1 overflow-visible">
+                <div className="flex flex-row items-center justify-center w-full overflow-visible gap-1 max-w-[420px] mx-auto">
+                    <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{micButton}</div>
                         <SVGButton 
                             index={0} 
@@ -835,7 +835,7 @@ export function EmergencyChatInterface() {
                             dataTour="tour-mic-button"
                         />
                     </div>
-                    <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{tradeSelector}</div>
                         <RedSVGButton 
                             index={1} 
@@ -846,7 +846,7 @@ export function EmergencyChatInterface() {
                             dataTour="tour-trade-button"
                         />
                     </div>
-                    <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{locationSelector}</div>
                             <GreenSVGButton 
                                 index={2} 
@@ -875,8 +875,8 @@ export function EmergencyChatInterface() {
                                 />
                             )}
                     </div>
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="hidden">{mobileActionButton}</div>
+                    <div className="flex flex-col items-center flex-shrink-0">
+                        <div className="hidden">{mobileActionButton || actionButton}</div>
                         <YellowSVGButton 
                             index={3} 
                             onClick={handleActionClick}

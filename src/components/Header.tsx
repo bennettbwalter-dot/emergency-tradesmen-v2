@@ -88,12 +88,12 @@ export function Header({ countryCode }: HeaderProps) {
           </div>
 
           {/* CENTER AREA: Desktop Nav / Mobile Tradesmen Sign Up */}
-          <div className="flex-1 flex justify-center items-center px-2 min-w-0 pointer-events-none">
-            {/* Mobile (Text Only) - Perfectly Centered */}
-            <div className="md:hidden z-50 pointer-events-auto">
+          <div className="flex-1 flex justify-center items-center px-4 min-w-0 pointer-events-none">
+            {/* Mobile (Text Only) - Center Link */}
+            <div className="md:hidden z-50 pointer-events-auto flex items-center justify-center w-full">
               <Link
                 to={`${countryPrefix}/pricing`}
-                className="text-[11px] font-bold tracking-[0.1em] text-gold hover:text-white transition-colors uppercase whitespace-nowrap px-4 py-2"
+                className="text-[10px] font-black tracking-widest text-gold hover:text-white transition-all uppercase whitespace-nowrap bg-gold/5 border border-gold/20 px-3 py-1.5 rounded-full shadow-[0_0_10px_rgba(212,175,55,0.1)]"
                 data-tour="tour-signup"
               >
                 {signupText}

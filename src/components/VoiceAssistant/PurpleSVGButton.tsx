@@ -49,7 +49,7 @@ export const PurpleSVGButton = forwardRef<HTMLButtonElement, PurpleSVGButtonProp
                 stiffness: 260, 
                 damping: 20 
             }}
-            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-24 h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handlePress}
             disabled={disabled}
             data-tour={dataTour}
@@ -68,7 +68,7 @@ export const PurpleSVGButton = forwardRef<HTMLButtonElement, PurpleSVGButtonProp
                 )}
             </AnimatePresence>
             <div className="relative z-10 w-full h-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="none" viewBox="0 0 256 256" className="w-full h-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 256 256" className="w-full h-full">
                 {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) - Modified for Purple color scheme with Pin Icon */}
                   <path d="m12 126.9 0.11 5.88c0.57 27.35 22.05 50.55 55.66 50.58h120.1c32.01-0.03 57.37-20.66 57.37-49.66v-9.92l-233.2 3.12z" fill="url(#paint0_radial_purple)"/>
                   <path d="m12.38 124c0 26.94 21.88 46.79 56.05 48.01l11.39 0.39h103l9.14-0.66c29.99-2.3 53.17-21.65 53.17-46.99 0-11.54-3.19-20.8-6.41-26.61l-219.8-0.7c-3.98 7.53-6.52 16.22-6.52 26.56z" fill="url(#paint1_linear_131_1439)"/>
