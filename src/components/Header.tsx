@@ -33,7 +33,7 @@ export function Header({ countryCode }: HeaderProps) {
   const isUS = activeCountry === 'US';
 
   const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
-  const countryPrefix = isUS ? '/us' : '';
+  const countryPrefix = isUS ? '/usa' : '';
 
   const [isVisible, setIsVisible] = useState(true);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);

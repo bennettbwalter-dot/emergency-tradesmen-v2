@@ -12,7 +12,7 @@ export function Footer({ countryCode }: FooterProps) {
   const { settings: globalSettings } = useLocalization();
   const activeCountry = countryCode || globalSettings.countryCode;
   const isUS = activeCountry === 'US';
-  const countryPrefix = isUS ? '/us' : '';
+  const countryPrefix = isUS ? '/usa' : '';
   const displayCities = isUS
     ? ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco"]
     : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bristol", "Liverpool"];

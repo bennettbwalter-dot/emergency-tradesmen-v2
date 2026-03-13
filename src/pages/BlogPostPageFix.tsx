@@ -145,7 +145,7 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <MapPin className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to={isUK ? "/" : "/us"} className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to={isUK ? "/" : "/usa"} className="text-muted-foreground hover:text-gold transition-colors">
                                         Emergency Tradesmen Home
                                     </Link>
                                 </li>
@@ -340,7 +340,7 @@ export default function BlogPostPage() {
     const wordCount = post.content?.split(/\s+/).length || 0;
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
-    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/usa';
 
     return (
         <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
@@ -359,13 +359,13 @@ export default function BlogPostPage() {
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Home",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/usa'}`
                         },
                         {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/usa'}/blog`
                         },
                         {
                             "@type": "ListItem",
@@ -459,7 +459,7 @@ export default function BlogPostPage() {
                     <SEO
                         title={`${regionalizeText(post.title)} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={regionalizeText(post.excerpt) || ""}
-                        canonical={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
+                        canonical={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={jsonLdSchemas}
@@ -475,7 +475,7 @@ export default function BlogPostPage() {
                         locale={settings.countryCode === 'GB' ? 'en_GB' : 'en_US'}
                         alternates={[
                             { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-                            { lang: 'en-US', href: `https://emergencytradesmen.net/us/blog/${post.slug}` },
+                            { lang: 'en-US', href: `https://emergencytradesmen.net/usa/blog/${post.slug}` },
                             { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` }
                         ]
                         }
@@ -487,7 +487,7 @@ export default function BlogPostPage() {
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
+                        to={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog`}
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -920,7 +920,7 @@ export default function BlogPostPage() {
 
                             const isUK = settings.countryCode === 'GB';
                             const cities = isUK ? tradeData.ukCities : tradeData.usCities;
-                            const prefix = isUK ? '' : '/us';
+                            const prefix = isUK ? '' : '/usa';
 
                             return (
                                 <div className="container mx-auto px-4 max-w-4xl py-8">
@@ -972,7 +972,7 @@ export default function BlogPostPage() {
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                         <Button size="lg" className="bg-gold hover:bg-gold-dark text-white font-medium px-8 h-12 text-base shadow-lg shadow-gold/20">
-                                            <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
+                                            <Link to={settings.countryCode === 'GB' ? '/' : '/usa'}>Find a {settings.countryCode === 'GB' ? 'Tradesman' : 'Contractor'} Now</Link>
                                             <ChevronRight className="w-4 h-4 ml-2" />
                                         </Button>
                                         <Button size="lg" variant="outline" className="border-border hover:bg-secondary/50 h-12 text-base px-8">
@@ -1001,7 +1001,7 @@ export default function BlogPostPage() {
                         </div>
                         <div className="flex items-center gap-3 w-full sm:w-auto">
                             <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-none border-gold/30 text-gold hover:bg-gold/10 h-10 px-6 rounded-xl text-sm font-bold tracking-tight">
-                                <Link to={settings.countryCode === 'GB' ? '/' : '/us'}>
+                                <Link to={settings.countryCode === 'GB' ? '/' : '/usa'}>
                                     Find Expert
                                 </Link>
                             </Button>

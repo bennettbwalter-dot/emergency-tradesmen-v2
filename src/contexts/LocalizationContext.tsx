@@ -181,7 +181,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
         const path = location.pathname;
         const firstSegment = path.split('/')[1]?.toLowerCase();
 
-        if (firstSegment === 'us') {
+        if (firstSegment === 'us' || firstSegment === 'usa') {
             setCountryCodeState('US');
         } else if (firstSegment === 'gb') {
             setCountryCodeState('GB');
