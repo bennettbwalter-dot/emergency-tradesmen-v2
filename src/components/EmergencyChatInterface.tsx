@@ -594,8 +594,7 @@ export function EmergencyChatInterface() {
     );
 
     const isFlowComplete = !!(detectedTrade && (detectedCity || locationRecord));
-    const isInteracting = !!(input.trim() || isRecording);
-    const shouldFlash = isFlowComplete && isInteracting;
+    const shouldFlash = isFlowComplete;
 
     const actionButton = (
         <Button
@@ -604,16 +603,16 @@ export function EmergencyChatInterface() {
             data-tour="tour-locate-button"
             size="icon"
             className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${shouldFlash
-                ? 'bg-yellow-400 text-black animate-pulse ring-4 ring-yellow-400/50'
+                ? 'animate-glow-bottom ring-4 ring-yellow-400/80'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
-            title={isRequestingLocation ? "Locate Me" : (isFlowComplete && !input.trim() ? "Find Help Now" : "Send Message")}
+            title={isRequestingLocation ? "Locate Me" : (isFlowComplete ? "Find Help Now" : "Send Message")}
         >
             {isRequestingLocation ? (
                 geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
-            ) : (isFlowComplete && !input.trim()) ? (
+            ) : isFlowComplete ? (
                 <Search className="w-4 h-4" />
             ) : (
-                <Settings className="w-4 h-4" />
+                <Search className="w-4 h-4" />
             )}
         </Button>
     );
@@ -625,15 +624,15 @@ export function EmergencyChatInterface() {
             data-tour="tour-locate-button"
             size="icon"
             className={`h-12 w-12 rounded-full transition-all shadow-md md:shadow-lg flex items-center justify-center shrink-0 ${shouldFlash
-                ? 'bg-yellow-400 text-black animate-pulse ring-4 ring-yellow-400/50'
+                ? 'animate-glow-bottom ring-4 ring-yellow-400/80'
                 : 'bg-[#C2B280] text-white hover:bg-[#B5A574]'}`}
         >
             {isRequestingLocation ? (
                 <MapPin className="w-5 h-5" />
-            ) : (detectedTrade && detectedCity && !input.trim()) ? (
+            ) : isFlowComplete ? (
                 <Search className="w-5 h-5" />
             ) : (
-                <Settings className="w-5 h-5" />
+                <Search className="w-5 h-5" />
             )}
         </Button>
     );

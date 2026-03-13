@@ -1,8 +1,8 @@
 /**
  * export-next-batch.mjs
  * 
- * Universal batch exporter — always reads sent_master.txt to prevent duplicates.
- * Automatically detects the next batch number.
+ * Technical Standard: docs/skills/video-to-website.md
+ * This script handles batch exports while ensuring data integrity via sent_master.txt.
  */
 import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';

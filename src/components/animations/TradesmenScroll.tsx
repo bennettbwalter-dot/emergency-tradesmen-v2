@@ -8,6 +8,13 @@ gsap.registerPlugin(ScrollTrigger);
 const FRAME_COUNT = 192;
 const FILENAME_PATTERN = (index: number) => `/frames/v2w_dark/frame_${index.toString().padStart(4, '0')}.webp`;
 
+/**
+ * Aligning with docs/skills/video-to-website.md:
+ * - FRAME_COUNT: 192
+ * - IMAGE_SCALE: ~0.85 (Desktop) / 2.5 (Mobile)
+ * - Canvas frame speed/render loop managed via GSAP & Lenis
+ */
+
 const listItems = [
     "Get seen first with priority ranking in your area",
     "Build instant trust with a 'Featured' badge and reviews",
@@ -33,6 +40,8 @@ export function TradesmenScroll() {
         const container = containerRef.current;
         if (!canvas || !context || !container) return;
 
+        const isMobileDevice = window.innerWidth < 768;
+
         imagesRef.current = [];
         for (let i = 1; i <= FRAME_COUNT; i++) {
             const img = new Image();
@@ -57,9 +66,9 @@ export function TradesmenScroll() {
             const newWidth = imgWidth * ratio;
             const newHeight = imgHeight * ratio;
 
-            const xOffset = isMobile ? (canvasWidth * 0.02) : (canvasWidth * 0.12);
-            const x = ((canvasWidth - newWidth) / 2) + xOffset;
-            const y = isMobile ? (canvasHeight - newHeight) * 0.1 : (canvasHeight - newHeight) / 2;
+            // Offset to the left so he's not behind the scrolling text
+            const x = ((canvasWidth - newWidth) / 2) - (canvasWidth * (isMobile ? 0.05 : 0.15));
+            const y = (canvasHeight - newHeight) / 2;
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
             context.drawImage(img, x, y, newWidth, newHeight);
@@ -140,32 +149,47 @@ export function TradesmenScroll() {
         window.addEventListener('resize', updateCanvasSize);
         updateCanvasSize();
 
-        const lenis = new Lenis();
-        const raf = (time: number) => {
-            lenis.raf(time);
+        if (!(window as any).lenis) {
+            (window as any).lenis = new Lenis({
+                lerp: 0.1,
+                duration: 1.5,
+                smoothWheel: true,
+            });
+            const raf = (time: number) => {
+                (window as any).lenis.raf(time);
+                requestAnimationFrame(raf);
+            };
             requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
+        }
+        const lenis = (window as any).lenis;
+
+        // Ensure ScrollTrigger is aware of layout after mount
+        ScrollTrigger.refresh();
 
         if (imagesRef.current.length > 0) {
-            imagesRef.current[0].onload = render;
+            imagesRef.current[0].onload = () => {
+                render();
+                ScrollTrigger.refresh();
+            };
         }
-
-        const isMobileDevice = window.innerWidth < 768;
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container,
                 start: "top top",
                 end: isMobileDevice ? "+=200%" : "+=300%",
-                pin: true,
+                pin: true, 
+                pinType: "fixed",
                 scrub: 1,
+                anticipatePin: 1.5,
+                preventOverlaps: true,
+                fastScrollEnd: true,
+                refreshPriority: 5, // Calculate after RoadsideScroll
             }
         });
 
         tl.to(videoSequence.current, {
             frame: FRAME_COUNT - 1,
-            snap: "frame",
             ease: "none",
             onUpdate: render,
             duration: 10,
@@ -203,57 +227,46 @@ export function TradesmenScroll() {
 
         return () => {
             window.removeEventListener('resize', updateCanvasSize);
-            lenis.destroy();
             tl.kill();
             ScrollTrigger.refresh();
         };
     }, []);
 
     return (
-        <div ref={containerRef} className="relative w-full h-screen bg-black border border-gold/20 rounded-[3rem] overflow-hidden mt-16 mx-auto max-w-[98%] shadow-2xl">
-            <div className="absolute top-[5%] md:top-[5%] w-[300vw] h-[30rem] hidden md:flex items-center pointer-events-none z-0">
+        <div ref={containerRef} className="relative w-full h-screen bg-black border-y border-gold/20 shadow-2xl overflow-hidden md:mt-16 mx-auto max-w-[98%] rounded-2xl md:rounded-[3rem] will-change-transform flex flex-col items-center justify-center pt-[12vh] md:pt-0 z-0">
+            {/* Horizontal scrolling text layer (placed high, background z-0) - Hidden on mobile */}
+            <div className="absolute top-[20%] md:top-[12%] w-[300vw] h-24 hidden md:flex items-center pointer-events-none z-0">
                 <h2
                     ref={horizontalTextRef}
-                    style={{ textRendering: 'optimizeLegibility', willChange: 'transform' }}
-                    className="font-display font-bold text-6xl md:text-[18rem] whitespace-nowrap tracking-tighter pl-[80vw] md:pl-[100vw] antialiased"
+                    className="text-white/90 font-display font-bold text-[8rem] md:text-[18rem] whitespace-nowrap tracking-widest pl-[100vw]"
                 >
-                    <span className="text-gold font-bold uppercase tracking-luxury text-xl md:text-[8rem] align-middle mr-16">
-                        FOR TRADESMEN
-                    </span>
-                    <span className="text-white">GET SEEN</span>
+                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-[5rem] md:text-[8rem] align-middle mr-16">For Tradesmen</span>
+                    Get Seen, Get Hired.
                 </h2>
             </div>
 
+            {/* Canvas layer (z-10, above text) */}
             <canvas ref={canvasRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover z-10" />
 
-            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end items-start p-4 md:p-16 pb-[12vh] md:pb-[15vh] pointer-events-none z-20">
+            {/* Vertical scrolling content (placed at middle-side on desktop, bottom on mobile) */}
+            <div className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end md:justify-center items-center md:items-end p-6 md:p-16 md:pr-[8%] md:pr-[12%] pb-[12vh] md:pb-0 pointer-events-none z-20">
                 <div
                     ref={verticalTextRef}
-                    className="max-w-lg md:max-w-xl bg-black/40 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2rem] transform translate-y-32 opacity-0 shadow-2xl shadow-black/20"
+                    className="max-w-[92vw] md:max-w-xl bg-black/60 backdrop-blur-md border border-gold/20 p-5 md:p-8 rounded-2xl transform translate-y-32 opacity-0 shadow-2xl shadow-black/50"
                 >
-                    <h3 className="font-display font-medium mb-3 md:mb-4 leading-[1.1]">
-                        {/* Mobile Only Primary Header */}
-                        <div className="md:hidden mb-2">
-                            <span className="text-gold font-bold uppercase tracking-luxury text-2xl mr-2">FOR TRADESMEN</span>
-                            <span className="text-white text-2xl font-bold">GET SEEN</span>
-                        </div>
-
-                        <span className="text-xl md:text-4xl text-white block">
-                            Stop chasing leads.
-                        </span>
-
-                        <span className="text-base md:text-lg text-neutral-300 mt-2 block font-sans font-medium tracking-wide">
-                            Join our verified network and get direct calls from customers.
-                        </span>
+                    <h3 className="text-xl md:text-4xl text-white font-display mb-3 md:mb-4 leading-tight">
+                        Stop chasing leads.
+                        <br />
+                        <span className="text-base md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Join our verified network and get direct calls from customers.</span>
                     </h3>
 
-                    <ul ref={listRef} className="space-y-3 md:space-y-4 mt-6 md:mt-8">
+                    <ul ref={listRef} className="space-y-2 md:space-y-4 mt-4 md:mt-8">
                         {listItems.map((item, i) => (
-                            <li key={i} className="flex items-start gap-3">
-                                <div className="mt-1 w-4 h-4 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                            <li key={i} className="flex items-start gap-2 md:gap-3">
+                                <div className="mt-1 w-4 h-4 md:w-5 md:h-5 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 bg-gold/10">
+                                    <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-gold" />
                                 </div>
-                                <p className={`text-white text-sm md:text-lg font-display ${i === listItems.length - 1 ? 'font-bold' : 'font-medium'}`}>
+                                <p className={i === listItems.length - 1 ? "text-white font-bold text-sm md:text-lg" : "text-white/80 text-xs md:text-base font-medium"}>
                                     {item}
                                 </p>
                             </li>

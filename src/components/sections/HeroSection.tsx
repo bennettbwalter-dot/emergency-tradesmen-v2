@@ -104,7 +104,7 @@ export function HeroSection() {
                             whileTap={{ scale: 0.95, y: 2 }}
                             onPointerDown={() => {
                                 setIsPressed(true);
-                                audioService.playClick();
+                                audioService.playClick(5); // Heavy variant
                             }}
                             onPointerUp={() => setIsPressed(false)}
                             onPointerLeave={() => setIsPressed(false)}

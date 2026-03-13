@@ -1,10 +1,22 @@
 
 /**
  * Audio service for UI sounds.
- * Synthesizes sounds to avoid extra asset management and ensure instant play.
+ * Loads a single audio file containing multiple samples and plays specific segments.
  */
 class AudioService {
     private audioContext: AudioContext | null = null;
+    private clickBuffer: AudioBuffer | null = null;
+    private isLoading: boolean = false;
+
+    // Identified timestamps from /sounds/click.ogg
+    private readonly clickVariants = [
+        5.87, // sharp click
+        6.41, // mechanical clack
+        6.93, // light click
+        7.47, // solid click
+        7.99, // quick click
+        8.53  // heavy click
+    ];
 
     private getContext(): AudioContext | null {
         if (typeof window === 'undefined') return null;
@@ -17,11 +29,29 @@ class AudioService {
         return this.audioContext;
     }
 
+    private async loadClickSound(): Promise<void> {
+        if (this.clickBuffer || this.isLoading) return;
+        
+        const ctx = this.getContext();
+        if (!ctx) return;
+
+        this.isLoading = true;
+        try {
+            const response = await fetch('/sounds/click.ogg');
+            const arrayBuffer = await response.arrayBuffer();
+            this.clickBuffer = await ctx.decodeAudioData(arrayBuffer);
+        } catch (error) {
+            console.error('Failed to load click sound:', error);
+        } finally {
+            this.isLoading = false;
+        }
+    }
+
     /**
-     * Synthesizes a realistic mechanical keyboard click sound.
-     * Layers three components: Snap, Thump, and Resonance with subtle randomness.
+     * Plays a typewriter click sound.
+     * @param index Optional index of the click variant (0-5). If omitted, a random one is chosen.
      */
-    public playClick(): void {
+    public playClick(index?: number): void {
         const ctx = this.getContext();
         if (!ctx) return;
 
@@ -29,86 +59,37 @@ class AudioService {
             ctx.resume();
         }
 
-        const now = ctx.currentTime;
+        if (!this.clickBuffer) {
+            this.loadClickSound();
+            return;
+        }
+
+        const source = ctx.createBufferSource();
+        source.buffer = this.clickBuffer;
+
+        // Choose a variant
+        let variantIndex = index ?? Math.floor(Math.random() * this.clickVariants.length);
+        variantIndex = Math.max(0, Math.min(variantIndex, this.clickVariants.length - 1));
+        const startTime = this.clickVariants[variantIndex];
+
+        // Add extreme subtle pitch variation for a natural feel (±2%)
+        const playbackRate = 0.98 + (Math.random() * 0.04);
+        source.playbackRate.setValueAtTime(playbackRate, ctx.currentTime);
+
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(0.7, ctx.currentTime); 
+
+        source.connect(gainNode);
+        gainNode.connect(ctx.destination);
         
-        // Add subtle randomness to each press (±5%)
-        const variance = () => (Math.random() * 0.1) + 0.95;
-        const pitchVariance = () => (Math.random() * 20) - 10; // ±10Hz
-
-        // 1. MECHANICAL SNAP (High Frequency "Click")
-        // Simulates the switch actuation
-        const snapSource = ctx.createBufferSource();
-        const snapBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.02, ctx.sampleRate);
-        const snapData = snapBuffer.getChannelData(0);
-        for (let i = 0; i < snapBuffer.length; i++) {
-            snapData[i] = (Math.random() * 2 - 1) * (1 - i / snapBuffer.length);
-        }
-        snapSource.buffer = snapBuffer;
-
-        const snapFilter = ctx.createBiquadFilter();
-        snapFilter.type = 'highpass';
-        snapFilter.frequency.setValueAtTime(5000 * variance(), now);
-
-        const snapGain = ctx.createGain();
-        snapGain.gain.setValueAtTime(0.3 * variance(), now);
-        snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.015);
-
-        snapSource.connect(snapFilter);
-        snapFilter.connect(snapGain);
-        snapGain.connect(ctx.destination);
-
-        // 2. BOTTOM-OUT THUMP (Low/Mid Frequency "Thud")
-        // Simulates the physical impact of the key cap hitting the base
-        const thumpSource = ctx.createBufferSource();
-        const thumpBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate);
-        const thumpData = thumpBuffer.getChannelData(0);
-        for (let i = 0; i < thumpBuffer.length; i++) {
-            thumpData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / thumpBuffer.length, 2);
-        }
-        thumpSource.buffer = thumpBuffer;
-
-        const thumpFilter = ctx.createBiquadFilter();
-        thumpFilter.type = 'lowpass';
-        thumpFilter.frequency.setValueAtTime(800 * variance(), now);
-
-        const thumpGain = ctx.createGain();
-        thumpGain.gain.setValueAtTime(0.4 * variance(), now);
-        thumpGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-
-        thumpSource.connect(thumpFilter);
-        thumpFilter.connect(thumpGain);
-        thumpGain.connect(ctx.destination);
-
-        // 3. CASE RESONANCE (Mid-range Plastic Ring)
-        // Simulates the internal echo within the keyboard housing
-        const resonance = ctx.createOscillator();
-        resonance.type = 'triangle';
-        resonance.frequency.setValueAtTime(200 + pitchVariance(), now);
-        resonance.frequency.exponentialRampToValueAtTime(150 + pitchVariance(), now + 0.06);
-
-        const resonanceFilter = ctx.createBiquadFilter();
-        resonanceFilter.type = 'bandpass';
-        resonanceFilter.frequency.setValueAtTime(400 * variance(), now);
-        resonanceFilter.Q.setValueAtTime(5, now);
-
-        const resonanceGain = ctx.createGain();
-        resonanceGain.gain.setValueAtTime(0.15 * variance(), now);
-        resonanceGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-
-        resonance.connect(resonanceFilter);
-        resonanceFilter.connect(resonanceGain);
-        resonanceGain.connect(ctx.destination);
-
-        // Start all layers
-        snapSource.start(now);
-        thumpSource.start(now);
-        resonance.start(now);
-
-        // Clean up
-        snapSource.stop(now + 0.1);
-        thumpSource.stop(now + 0.1);
-        resonance.stop(now + 0.1);
+        // Play the slice (roughly 0.15s - 0.25s for a click)
+        source.start(0, startTime, 0.25);
     }
 }
 
 export const audioService = new AudioService();
+
+// Pre-load on initialization if in browser
+if (typeof window !== 'undefined') {
+    audioService.playClick(); 
+}
