@@ -72,12 +72,12 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
                 {isPulsing && (
                     <motion.div 
                         initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1.2, opacity: 0.3 }}
-                        exit={{ scale: 1.5, opacity: 0 }}
+                        animate={{ scale: 1.3, opacity: 0.6 }}
+                        exit={{ scale: 1.6, opacity: 0 }}
                         transition={{ 
                             repeat: Infinity, 
-                            duration: 1.5, 
-                            ease: "easeOut" 
+                            duration: 0.6, 
+                            ease: "easeInOut" 
                         }}
                         className="absolute inset-0 bg-yellow-400 rounded-full blur-xl z-0"
                     />

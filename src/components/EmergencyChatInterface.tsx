@@ -593,20 +593,24 @@ export function EmergencyChatInterface() {
         </Button>
     );
 
+    const isFlowComplete = !!(detectedTrade && (detectedCity || locationRecord));
+    const isInteracting = !!(input.trim() || isRecording);
+    const shouldFlash = isFlowComplete && isInteracting;
+
     const actionButton = (
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${(detectedTrade && detectedCity && !input.trim())
-                ? 'bg-[#C2B280] text-white animate-pulse ring-2 ring-gold/50'
+            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${shouldFlash
+                ? 'bg-yellow-400 text-black animate-pulse ring-4 ring-yellow-400/50'
                 : 'bg-gold text-white hover:bg-gold/90'}`}
-            title={isRequestingLocation ? "Locate Me" : (detectedTrade && detectedCity && !input.trim() ? "Find Help Now" : "Send Message")}
+            title={isRequestingLocation ? "Locate Me" : (isFlowComplete && !input.trim() ? "Find Help Now" : "Send Message")}
         >
             {isRequestingLocation ? (
                 geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
-            ) : (detectedTrade && detectedCity && !input.trim()) ? (
+            ) : (isFlowComplete && !input.trim()) ? (
                 <Search className="w-4 h-4" />
             ) : (
                 <Settings className="w-4 h-4" />
@@ -620,8 +624,8 @@ export function EmergencyChatInterface() {
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-12 w-12 rounded-full transition-all shadow-md md:shadow-lg flex items-center justify-center shrink-0 ${(detectedTrade && detectedCity && !input.trim())
-                ? 'bg-[#C2B280] text-white animate-pulse ring-2 ring-gold/50'
+            className={`h-12 w-12 rounded-full transition-all shadow-md md:shadow-lg flex items-center justify-center shrink-0 ${shouldFlash
+                ? 'bg-yellow-400 text-black animate-pulse ring-4 ring-yellow-400/50'
                 : 'bg-[#C2B280] text-white hover:bg-[#B5A574]'}`}
         >
             {isRequestingLocation ? (
@@ -881,7 +885,7 @@ export function EmergencyChatInterface() {
                             index={3} 
                             onClick={handleActionClick}
                             disabled={isActionDisabled}
-                            isPulsing={!!(detectedTrade && (detectedCity || locationRecord) && !input.trim())}
+                            isPulsing={shouldFlash}
                             dataTour="tour-locate-button"
                         />
                     </div>
