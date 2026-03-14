@@ -717,10 +717,10 @@ export default function BlogPostPage() {
                                                                                
                                                                 if (isAmazon) {
                                                                     return (
-                                                                        <div className="my-12 flex justify-center">
+                                                                        <div className="my-10 flex justify-center">
                                                                             <Button 
                                                                                 asChild 
-                                                                                className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-8 px-16 rounded-xl shadow-xl transform transition hover:scale-105 active:scale-95 text-2xl h-auto whitespace-normal text-center min-h-[80px] w-full max-w-2xl"
+                                                                                className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-6 px-10 rounded-lg shadow-lg transform transition hover:scale-[1.02] active:scale-95 text-lg h-auto whitespace-normal text-center min-h-[60px] w-full max-w-lg"
                                                                             >
                                                                                 <a {...props} target="_blank" rel="noopener noreferrer">
                                                                                     {props.children}

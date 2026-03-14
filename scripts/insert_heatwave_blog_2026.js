@@ -37,6 +37,9 @@ In this guide, we break down the **7 best ways to prepare your AC** and the crit
 ### 1. The "Musty" Startup: Why Your Ducts Are Warning You
 The first time you flip that switch in 2026, pay close attention to the smell. A musty, damp odour often points to biological growth or standing water in your drain pan. While common, ignoring this can lead to poor indoor air quality. If your [home heating and cooling systems](https://emergencytradesmen.net/) are showing these signs, it's time to act.
 
+![A severely clogged HVAC filter requiring immediate replacement](/blog/ac-heatwave-preparation-signs-repair-uk-2026/dirty-filter.webp)
+*A severely clogged filter is often the source of musty smells and poor efficiency.*
+
 **Expert Tip:** In the UK, look for **REFCOM** accredited engineers. This is a legal requirement for anyone handling F-gases. Ensuring your technician is REFCOM certified is the only way to guarantee they are following safety and environmental regulations.
 
 ### 2. Strange Noises: Don't Ignore the Bangs and Squeals
@@ -53,6 +56,9 @@ Weak airflow is often the precursor to a complete system freeze-up. Check your f
 ### 4. Short-Cycling: The Silent Energy Killer
 Does your AC turn on and off every 5-10 minutes? This is known as short-cycling. It places immense strain on the compressor and sky-rockets your energy bills. This is often caused by an oversized unit, a failing thermostat, or a refrigerant level that is dangerously low.
 
+![Short-cycling infographic: Why the 5-10 minute cycle causes system damage](/blog/ac-heatwave-preparation-signs-repair-uk-2026/short-cycling-infographic.webp)
+*Short-cycling is often a sign of low refrigerant or sensor failure.*
+
 ### 5. High Humidity Levels
 Your AC’s secondary job is dehumidification. If your house feels "sticky" despite the air being cool, your system isn't working at peak efficiency. This often relates to evaporator coil issues.
 
@@ -61,6 +67,9 @@ A leaking AC is an emergency. Water pooling around your air handler can lead to 
 
 ### 7. Warm Air Blowing from Vents
 This is the ultimate red flag. If your system is running but the air is luke-warm, you either have a compressor failure or a major refrigerant leak. This requires an immediate **same day repair**.
+
+![High temperature reading on a home thermostat](/blog/ac-heatwave-preparation-signs-repair-uk-2026/thermostat-85f.webp)
+*When your thermostat reads high despite the AC running, it's a sign of a critical failure.*
 
 ---
 
@@ -72,6 +81,20 @@ Transparency in pricing is key. In 2026, due to increased demand and material co
 - **Compressor Repair/Replacement:** £1,200+
 
 *Note: Prices vary by city and urgency. Always ask for a fixed quote before work begins.*
+
+---
+
+### Recommended Solution: COSTWAY 6-in-1 Portable Air Conditioner
+If you're looking for an immediate, reliable solution to beat the heat, we highly recommend the **COSTWAY 6-in-1 Portable Air Conditioner**. This 12000BTU unit is a versatile powerhouse, acting as a mobile heater, AC unit, dehumidifier, and fan.
+
+**Key Features:**
+- **WiFi Smart App Control:** Manage your comfort from anywhere.
+- **Automatic & Sleep Modes:** Precision cooling tailored to your needs.
+- **3 Fan Speeds & 24H Timer:** Maximum flexibility and efficiency.
+- **Energy Class A:** Powerful cooling without the massive energy bill.
+
+![COSTWAY 6-in-1 Portable Air Conditioner: Mobile Heater, AC Unit, Dehumidifier, Fan with WiFi Smart APP](/blog/ac-heatwave-preparation-signs-repair-uk-2026/costway-6in1.jpg)
+[Get the COSTWAY 6-in-1 Portable AC on Amazon →](https://www.amazon.co.uk/COSTWAY-Portable-Conditioner-Dehumidifier-Automatic/dp/B0D2W516B5?content-id=amzn1.sym.4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131%3Aamzn1.sym.4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131&crid=12HDCUF0VSX4Z&cv_ct_cx=ac%2Bair%2Bconditioner&keywords=ac%2Bair%2Bconditioner&pd_rd_i=B0D2W516B5&pd_rd_r=b7753a41-2e1a-4169-8759-0fcfcfae2407&pd_rd_w=EDYyf&pd_rd_wg=CCL1T&pf_rd_p=4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131&pf_rd_r=XW8R90ZA0013B3BGYPY2&qid=1773526621&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ac%2Bair%2Caps%2C231&sr=1-5-ad3222ed-9545-4dc8-8dd8-6b2cb5278509-spons&aref=EbMPmRhlGF&sp_csd=d2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM&th=1&linkCode=ll2&tag=et0a8-21&linkId=6196e1b84afed702131bb76d77875625&ref_=as_li_ss_tl)
 
 ---
 
@@ -125,6 +148,9 @@ In this guide, we break down the **7 best ways to prepare your AC** and the crit
 ### 1. The "Musty" Startup: Why Your Ducts Are Warning You
 The first time you flip that switch in 2026, pay close attention to the smell. A musty, damp odor often points to biological growth or standing water in your drain pan. While common, ignoring this can lead to poor indoor air quality. If your [home heating and cooling systems](https://emergencytradesmen.net/usa) are showing these signs, it's time to act.
 
+![A severely clogged HVAC filter requiring immediate replacement](/blog/ac-heatwave-preparation-signs-repair-us-2026/dirty-filter.webp)
+*A severely clogged filter is often the source of musty smells and poor efficiency.*
+
 **Expert Tip:** In the US, ensure your technician is **EPA Section 608 certified**. It is a federal requirement for anyone handling refrigerants. Ensuring your technician is certified protects you from shoddy workmanship and legal liabilities.
 
 ### 2. Strange Noises: Don't Ignore the Bangs and Squeals
@@ -141,6 +167,9 @@ Weak airflow is often the precursor to a complete system freeze-up. Check your f
 ### 4. Short-Cycling: The Silent Energy Killer
 Does your AC turn on and off every 5-10 minutes? This is known as short-cycling. It places immense strain on the compressor and sky-rockets your energy bills. This is often caused by an oversized unit, a failing thermostat, or a refrigerant level that is dangerously low.
 
+![Short-cycling infographic: Why the 5-10 minute cycle causes system damage](/blog/ac-heatwave-preparation-signs-repair-us-2026/short-cycling-infographic.webp)
+*Short-cycling is often a sign of low refrigerant or sensor failure.*
+
 ### 5. High Humidity Levels
 Your AC’s secondary job is dehumidification. If your house feels "sticky" despite the air being cool, your system isn't working at peak efficiency. This often relates to evaporator coil issues.
 
@@ -149,6 +178,9 @@ A leaking AC is an emergency. Water pooling around your air handler can lead to 
 
 ### 7. Warm Air Blowing from Vents
 This is the ultimate red flag. If your system is running but the air is luke-warm, you either have a compressor failure or a major refrigerant leak. This requires an immediate **same day repair**.
+
+![High temperature reading on a home thermostat](/blog/ac-heatwave-preparation-signs-repair-us-2026/thermostat-85f.webp)
+*When your thermostat reads high despite the AC running, it's a sign of a critical failure.*
 
 ---
 
@@ -160,6 +192,20 @@ Transparency in pricing is key. In 2026, due to increased demand and material co
 - **Compressor Repair/Replacement:** $1,500+
 
 *Note: Prices vary by city and urgency. Always ask for a fixed quote before work begins.*
+
+---
+
+### Recommended Solution: COSTWAY 6-in-1 Portable Air Conditioner
+If you're looking for an immediate, reliable solution to beat the heat, we highly recommend the **COSTWAY 6-in-1 Portable Air Conditioner**. This 12000BTU unit is a versatile powerhouse, acting as a mobile heater, AC unit, dehumidifier, and fan.
+
+**Key Features:**
+- **WiFi Smart App Control:** Manage your comfort from anywhere.
+- **Automatic & Sleep Modes:** Precision cooling tailored to your needs.
+- **3 Fan Speeds & 24H Timer:** Maximum flexibility and efficiency.
+- **Energy Class A:** Powerful cooling without the massive energy bill.
+
+![COSTWAY 6-in-1 Portable Air Conditioner: Mobile Heater, AC Unit, Dehumidifier, Fan with WiFi Smart APP](/blog/ac-heatwave-preparation-signs-repair-us-2026/costway-6in1.jpg)
+[Get the COSTWAY 6-in-1 Portable AC on Amazon →](https://www.amazon.co.uk/COSTWAY-Portable-Conditioner-Dehumidifier-Automatic/dp/B0D2W516B5?content-id=amzn1.sym.4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131%3Aamzn1.sym.4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131&crid=12HDCUF0VSX4Z&cv_ct_cx=ac%2Bair%2Bconditioner&keywords=ac%2Bair%2Bconditioner&pd_rd_i=B0D2W516B5&pd_rd_r=b7753a41-2e1a-4169-8759-0fcfcfae2407&pd_rd_w=EDYyf&pd_rd_wg=CCL1T&pf_rd_p=4f7ef0b3-4dfc-42e5-946a-fa9ac7d7e131&pf_rd_r=XW8R90ZA0013B3BGYPY2&qid=1773526621&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ac%2Bair%2Caps%2C231&sr=1-5-ad3222ed-9545-4dc8-8dd8-6b2cb5278509-spons&aref=EbMPmRhlGF&sp_csd=d2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM&th=1&linkCode=ll2&tag=et0a8-21&linkId=6196e1b84afed702131bb76d77875625&ref_=as_li_ss_tl)
 
 ---
 
