@@ -63,6 +63,41 @@
     --sidebar-accent-foreground: 40 25% 92%;
     --sidebar-border: 40 15% 20%;
     --sidebar-ring: 38 65% 55%;
+
+    /* Default Microphone Button Colors (Detail Yellow - Dark Mode) */
+    --mic-gradient-start: 60 100% 70%;
+    --mic-gradient-mid-1: 60 100% 60%;
+    --mic-gradient-mid-2: 60 100% 50%;
+    --mic-gradient-end: 60 100% 40%;
+    --mic-gradient-dark: 60 100% 25%;
+    --mic-pulse: 60 100% 60%;
+
+    /* Default Tradesmen Button Colors (Yellow - Dark Mode) */
+    --trade-gradient-1: 55 100% 90%;
+    --trade-gradient-2: 50 100% 70%;
+    --trade-gradient-3: 45 100% 55%;
+    --trade-gradient-4: 45 100% 40%;
+    --trade-gradient-5: 45 100% 30%;
+    --trade-main: 45 100% 50%;
+    --trade-pulse: 45 100% 50%;
+
+    /* Default Location Button Colors (Gold/Yellow) */
+    --location-gradient-1: 50 100% 90%;
+    --location-gradient-2: 48 100% 70%;
+    --location-gradient-3: 45 100% 55%;
+    --location-gradient-4: 40 100% 40%;
+    --location-gradient-5: 35 100% 30%;
+    --location-main: 45 100% 50%;
+    --location-pulse: 45 100% 50%;
+
+    /* Default "Locate Me" Button Colors (Dark Yellow - Dark Mode) */
+    --locate-me-gradient-1: 45 100% 80%;
+    --locate-me-gradient-2: 45 100% 60%;
+    --locate-me-gradient-3: 42 100% 45%;
+    --locate-me-gradient-4: 40 100% 35%;
+    --locate-me-gradient-5: 38 100% 25%;
+    --locate-me-main: 42 100% 45%;
+    --locate-me-pulse: 42 100% 50%;
   }
 
   .light {
@@ -116,6 +151,40 @@
     --sidebar-accent-foreground: 20 8% 12%;
     --sidebar-border: 210 15% 85%;
     --sidebar-ring: 210 5% 40%;
+
+    --mic-gradient-start: 220 100% 70%;
+    --mic-gradient-mid-1: 215 95% 60%;
+    --mic-gradient-mid-2: 210 90% 45%;
+    --mic-gradient-end: 205 85% 30%;
+    --mic-gradient-dark: 210 100% 25%;
+    --mic-pulse: 210 100% 60%;
+
+    /* Tradesmen Button Colors - Mobile Light Mode (Gold/Yellow-Orange) */
+    --trade-gradient-1: 50 100% 90%; /* Light Yellow */
+    --trade-gradient-2: 48 100% 70%;  /* Bright Gold */
+    --trade-gradient-3: 45 100% 55%;  /* Golden Orange */
+    --trade-gradient-4: 40 100% 40%;  /* Deep Orange */
+    --trade-gradient-5: 35 100% 30%;  /* Dark Orange */
+    --trade-main: 45 100% 50%;
+    --trade-pulse: 45 100% 50%;
+
+    /* Location Button Colors - Mobile Light Mode (Green) */
+    --location-gradient-1: 142 70% 90%;
+    --location-gradient-2: 142 70% 70%;
+    --location-gradient-3: 142 70% 50%;
+    --location-gradient-4: 142 70% 35%;
+    --location-gradient-5: 142 70% 25%;
+    --location-main: 142 70% 45%;
+    --location-pulse: 142 70% 45%;
+
+    /* "Locate Me" Button Colors - Mobile Light Mode (Vibrant Orange) */
+    --locate-me-gradient-1: 35 100% 85%;
+    --locate-me-gradient-2: 30 100% 65%;
+    --locate-me-gradient-3: 25 100% 50%;
+    --locate-me-gradient-4: 20 100% 40%;
+    --locate-me-gradient-5: 15 100% 30%;
+    --locate-me-main: 25 100% 50%;
+    --locate-me-pulse: 25 100% 50%;
   }
 
   .dark {
@@ -455,6 +524,21 @@ textarea {
 
 .animate-glow-bottom {
   animation: glow-bottom 0.8s ease-in-out infinite;
+}
+
+@keyframes surface-pulse {
+  0%, 100% { 
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% { 
+    filter: brightness(1.45);
+    transform: scale(1.04);
+  }
+}
+
+.animate-surface-pulse {
+  animation: surface-pulse 1s ease-in-out infinite;
 }
 
 /* ---- 3D Stacked Trade Selector (Add-on) ---- */

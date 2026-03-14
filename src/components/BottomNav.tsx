@@ -7,7 +7,7 @@ export function BottomNav() {
     const location = useLocation();
     const { isAuthenticated } = useAuth();
     const { settings } = useLocalization();
-    const countryPrefix = settings.countryCode === 'GB' ? '' : '/usa';
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
 
     const isActive = (path: string) => {
         if (path === "/" && location.pathname === "/") return true;

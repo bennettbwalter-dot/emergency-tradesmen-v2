@@ -68,10 +68,15 @@ export default function PaymentSuccessPage() {
 
             // 2. Receipt to User
             if (user?.email) {
+                const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+                const isUSDomain = hostname.includes('emergencycontractors.net');
+                const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+                const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+
                 sendEmail({
                     to: user.email,
-                    subject: "Welcome to Premium - Emergency Tradesmen",
-                    text: `Hi ${user.name},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: https://emergencytradesmen.net/user/dashboard`
+                    subject: `Welcome to Premium - ${siteName}`,
+                    text: `Hi ${user.name},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: ${baseDomain}/user/dashboard`
                 });
 
                 // 3. Track Conversion in PostHog

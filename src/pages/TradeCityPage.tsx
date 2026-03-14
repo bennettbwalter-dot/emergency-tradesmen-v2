@@ -347,15 +347,19 @@ export default function TradeCityPage() {
 
   const schemaType = tradeSchemaTypeMap[tradeInfo.slug] || tradeSchemaTypeMap['default'];
 
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net');
+  const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": schemaType,
-    "@id": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
+    "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
     name: `Emergency ${tradeDisplayName} ${cityName}`,
     description: `24/7 emergency ${tradeDisplayName.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
     telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456",
-    url: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
+    url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
     "priceRange": emergencyPriceRange,
     "address": {
       "@type": "PostalAddress",
@@ -427,19 +431,19 @@ export default function TradeCityPage() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://emergencytradesmen.net"
+        "item": baseDomain
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Locations",
-        "item": "https://emergencytradesmen.net/locations"
+        "item": `${baseDomain}/locations`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": `${tradeDisplayName} in ${cityName}`,
-        "item": `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
+        "item": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
       }
     ]
   };
@@ -452,7 +456,7 @@ export default function TradeCityPage() {
   const cityCoords = cityCoordinates[cityName];
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
   const canonicalPath = isUS
-    ? `/us/emergency-${tradeInfo.slug}/${citySlug}`
+    ? (isUSDomain ? `/emergency-${tradeInfo.slug}/${citySlug}` : `/us/emergency-${tradeInfo.slug}/${citySlug}`)
     : `/emergency-${tradeInfo.slug}/${citySlug}`;
 
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
@@ -527,7 +531,7 @@ export default function TradeCityPage() {
         } : {})}
         alternates={[
           { lang: 'en-GB', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` },
-          { lang: 'en-US', href: `https://emergencytradesmen.net/us/emergency-${tradeInfo.slug}/${citySlug}` },
+          { lang: 'en-US', href: `https://emergencycontractors.net/emergency-${tradeInfo.slug}/${citySlug}` },
           { lang: 'x-default', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` }
         ]}
       />

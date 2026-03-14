@@ -63,7 +63,7 @@ export const GreenSVGButton = forwardRef<HTMLButtonElement, GreenSVGButtonProps>
                         animate={{ scale: 1.5, opacity: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className={`absolute inset-0 rounded-full blur-xl z-10 ${isDarkMode ? 'bg-yellow-400' : 'bg-emerald-500'}`}
+                        className="absolute inset-0 rounded-full blur-xl z-10 bg-[hsl(var(--location-pulse))]"
                     />
                 )}
             </AnimatePresence>
@@ -91,7 +91,7 @@ export const GreenSVGButton = forwardRef<HTMLButtonElement, GreenSVGButtonProps>
 
                   <defs>
                     <radialGradient id="paint0_radial_green" cx="0" cy="0" r="1" gradientTransform="translate(128.6 151.2) scale(143.6 53.08)" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#065F46"} offset="0"/>
+                      <stop stop-color="hsl(var(--location-main))" offset="0"/>
                       <stop stop-color="#5D5D5D" offset=".6901"/>
                       <stop stop-color="#343434" offset="1"/>
                     </radialGradient>
@@ -106,24 +106,24 @@ export const GreenSVGButton = forwardRef<HTMLButtonElement, GreenSVGButtonProps>
                       <stop stop-color="#66615E" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint3_linear_green" x1="128.2" x2="128.2" y1="39.19" y2="161.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FEF08A" : "#D1FAE5"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#FDE047" : "#6EE7B7"} offset=".4604"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#059669"} offset=".7859"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#064E3B"} offset="1"/>
+                      <stop stop-color="hsl(var(--location-gradient-1))" offset="0"/>
+                      <stop stop-color="hsl(var(--location-gradient-2))" offset=".4604"/>
+                      <stop stop-color="hsl(var(--location-gradient-3))" offset=".7859"/>
+                      <stop stop-color="hsl(var(--location-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint4_linear_green" x1="129.6" x2="129.6" y1="40.48" y2="130.5" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FACC15" : "#34D399"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#10B981"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#059669"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#047857"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#065F46"} offset="1"/>
+                      <stop stop-color="hsl(var(--location-gradient-2))" offset="0"/>
+                      <stop stop-color="hsl(var(--location-gradient-3))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--location-gradient-3))" offset=".775"/>
+                      <stop stop-color="hsl(var(--location-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--location-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint5_linear_green" x1="128.9" x2="128.9" y1="41.71" y2="127.9" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FACC15" : "#6EE7B7"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#34D399"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#10B981"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#059669"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#047857"} offset="1"/>
+                      <stop stop-color="hsl(var(--location-gradient-2))" offset="0"/>
+                      <stop stop-color="hsl(var(--location-gradient-3))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--location-gradient-3))" offset=".775"/>
+                      <stop stop-color="hsl(var(--location-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--location-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint6_linear_green" x1="128.5" x2="128.5" y1="104.1" y2="169.2" gradientUnits="userSpaceOnUse">
                       <stop stop-color="#928B87" offset="0"/>

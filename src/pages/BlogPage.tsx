@@ -142,7 +142,7 @@ export default function BlogPage() {
                                         Cover Story
                                     </Badge>
                                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
-                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
+                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
                                             {featuredPost.title}
                                         </Link>
                                     </h1>
@@ -152,7 +152,7 @@ export default function BlogPage() {
 
                                     <div className="flex items-center gap-4 pt-4">
                                         <Button asChild size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-gold hover:text-black border-none rounded-none transition-all font-bold tracking-tight">
-                                            <Link to={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog/${featuredPost.slug}`}>
+                                            <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`}>
                                                 Read Article
                                             </Link>
                                         </Button>
@@ -189,7 +189,7 @@ export default function BlogPage() {
                                 return (
                                     <Link
                                         key={post.id}
-                                        to={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog/${post.slug}`}
+                                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
                                         className={`${colSpan} group flex flex-col gap-4 border-b border-border/30 pb-8`}
                                     >
                                         <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">

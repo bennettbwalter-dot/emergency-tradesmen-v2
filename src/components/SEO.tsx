@@ -23,8 +23,10 @@ interface SEOProps {
 
 const DEFAULT_DESCRIPTION = "Need a tradesman near you? We connect you with verified 24/7 emergency plumbers, electricians, locksmiths & gas engineers. Local experts arriving in 30-90 mins.";
 const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
-const SITE_URL = "https://emergencytradesmen.net";
-const SITE_NAME = "Emergency Tradesmen";
+const SITE_URL_GB = "https://emergencytradesmen.net";
+const SITE_URL_US = "https://emergencycontractors.net";
+const SITE_NAME_GB = "Emergency Tradesmen";
+const SITE_NAME_US = "Emergency Contractors";
 
 export function SEO({
     title,
@@ -39,9 +41,21 @@ export function SEO({
     locale = 'en_GB',
     alternates
 }: SEOProps) {
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net');
+    
+    const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
+    const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;
 
     const fullTitle = `${title} | ${SITE_NAME}`;
-    const absoluteUrl = canonical ? (canonical.startsWith('http') ? canonical : `${SITE_URL}${canonical}`) : SITE_URL;
+    
+    // Adjust canonical for US Domain
+    let effectiveCanonical = canonical;
+    if (isUSDomain && effectiveCanonical?.startsWith('/us')) {
+        effectiveCanonical = effectiveCanonical.replace(/^\/(us|usa)/, '') || '/';
+    }
+
+    const absoluteUrl = effectiveCanonical ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`) : SITE_URL;
 
     return (
         <Helmet>
@@ -73,7 +87,7 @@ export function SEO({
 
             {/* Internationalization */}
             {alternates?.map((alt) => (
-                <link key={alt.lang} rel="alternate" hreflang={alt.lang} href={alt.href} />
+                <link key={alt.lang} rel="alternate" hrefLang={alt.lang} href={alt.href} />
             ))}
 
             {/* Twitter */}

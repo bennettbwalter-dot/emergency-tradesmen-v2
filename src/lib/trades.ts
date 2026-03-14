@@ -340,15 +340,15 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const certificationsMap: Record<string, string[]> = {
-    plumber: ["Licensed & Bonded", "Master Plumber Certified", "Fully Insured"],
-    electrician: ["NEC Compliant", "Licensed Electrician", "Fully Insured"],
+    plumber: ["Licensed & Bonded", "Master Plumber Certified", "PHCC Member", "Fully Insured"],
+    electrician: ["NEC Compliant", "Licensed Electrician", "NFPA Member", "Fully Insured"],
     locksmith: ["ALOA Member", "Background Checked", "Fully Insured"],
-    "gas-engineer": ["HVAC Certified", "EPA Universal", "Fully Insured"],
+    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Fully Insured"],
     "drain-specialist": ["IICRC Certified", "Licensed Contractor", "Fully Insured"],
     glazier: ["NGA Certified", "Safety Glass Qualified", "Fully Insured"],
     roofer: ["Licensed Roofer", "OSHA Certified", "Fully Insured"],
-    builder: ["Licensed General Contractor", "Licensed & Bonded", "Fully Insured"],
-    hvac: ["HVAC Certified", "EPA Universal", "Fully Insured"],
+    builder: ["Licensed General Contractor", "ICC/IPC Compliant", "Fully Insured"],
+    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Fully Insured"],
     "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Fully Insured"],
     breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Fully Insured"],
   };
@@ -396,8 +396,8 @@ function generateFAQs(trade: Trade, city: City, isUS: boolean, priceRange: strin
       answer: `Our network of local ${tradeName.toLowerCase()}s in ${city} can typically arrive within 30–90 minutes for urgent emergencies. Response times may vary based on current demand and your specific location within ${city} and surrounding areas.`,
     },
     {
-      question: `Is there a call-out fee for emergency ${tradeName.toLowerCase()} services?`,
-      answer: `Most emergency ${tradeName.toLowerCase()}s charge a call-out fee, which is usually included in the quoted price. This covers the cost of dispatching a qualified professional to your ${city} property at short notice. The fee is waived if work is carried out.`,
+      question: `Is there a ${isUS ? 'service call' : 'call-out'} fee for emergency ${tradeName.toLowerCase()} services?`,
+      answer: `Most emergency ${tradeName.toLowerCase()}s charge a ${isUS ? 'service call' : 'call-out'} fee, which is usually included in the quoted price. This covers the cost of dispatching a qualified professional to your ${city} property at short notice. The fee is often credited toward any work carried out.`,
     },
     {
       question: `What situations require an emergency ${tradeName.toLowerCase()}?`,

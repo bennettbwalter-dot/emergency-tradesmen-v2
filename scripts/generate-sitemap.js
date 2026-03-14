@@ -91,12 +91,13 @@ const commonProblems = [
     "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking"
 ];
 
-const BASE_URL = 'https://emergencytradesmen.net';
+const BASE_URL_GB = 'https://emergencytradesmen.net';
+const BASE_URL_US = 'https://emergencycontractors.net';
 
 async function generateSitemap() {
     console.log('🔄 Fetching data from Supabase...');
 
-    // 1. Fetch all verified businesses with pagination
+    // 1. Fetch all verified businesses
     let allBusinesses = [];
     let from = 0;
     const step = 1000;
@@ -105,7 +106,7 @@ async function generateSitemap() {
     while (hasMore) {
         const { data, error } = await supabase
             .from('businesses')
-            .select('id, updated_at, country_code, name, logo_url') // Fetch country_code to segment by region if needed, though we treat them all in business sitemaps
+            .select('id, updated_at, country_code, name, logo_url')
             .eq('verified', true)
             .range(from, from + step - 1);
 
@@ -138,10 +139,11 @@ async function generateSitemap() {
     console.log(`✅ Found ${businesses.length} verified businesses.`);
     console.log(`✅ Found ${posts?.length || 0} published blog posts.`);
 
-    const sitemaps = []; // Track created sitemaps for the index
+    const ukSitemaps = [];
+    const usSitemaps = [];
 
     // Helper to write a sitemap file
-    const writeSitemap = (filename, urls) => {
+    const writeSitemap = (filename, urls, category = 'uk') => {
         try {
             let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -163,30 +165,35 @@ async function generateSitemap() {
 </urlset>`;
 
             const outputPath = path.join(__dirname, `../public/${filename}`);
-            const dir = path.dirname(outputPath);
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
-            }
-
-            // Use try-catch for the write itself
             fs.writeFileSync(outputPath, xml, { flag: 'w' });
             console.log(` ✅ Generated ${filename} (${urls.length} URLs)`);
-            sitemaps.push(filename);
+            
+            if (category === 'uk') ukSitemaps.push(filename);
+            else usSitemaps.push(filename);
         } catch (err) {
             console.error(` ❌ Failed to generate ${filename}:`, err);
         }
     };
 
     // 1. Static Pages
-    const staticUrls = [
-        '', '/us', '/about', '/pricing', '/terms', '/privacy', '/compare',
-        '/contact', '/user/login', '/business/login', '/blog', '/us/blog', '/vetting-process', '/locations', '/us/locations'
-    ].map(p => ({
-        loc: `${BASE_URL}${p}`,
+    const staticPaths = [
+        '', '/about', '/pricing', '/terms', '/privacy', '/compare',
+        '/contact', '/blog', '/vetting-process', '/locations'
+    ];
+
+    const staticUrlsGB = staticPaths.map(p => ({
+        loc: `${BASE_URL_GB}${p}`,
         changefreq: 'weekly',
-        priority: p === '' || p === '/us' ? '1.0' : (p === '/about' ? '0.9' : '0.8')
+        priority: p === '' ? '1.0' : (p === '/about' ? '0.9' : '0.8')
     }));
-    writeSitemap('sitemap-static.xml', staticUrls);
+    writeSitemap('sitemap-static-uk.xml', staticUrlsGB, 'uk');
+
+    const staticUrlsUS = staticPaths.map(p => ({
+        loc: `${BASE_URL_US}${p}`,
+        changefreq: 'weekly',
+        priority: p === '' ? '1.0' : (p === '/about' ? '0.9' : '0.8')
+    }));
+    writeSitemap('sitemap-static-us.xml', staticUrlsUS, 'us');
 
     // 2. Dynamic City Pages (UK)
     const ukUrls = [];
@@ -194,24 +201,23 @@ async function generateSitemap() {
         ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             ukUrls.push({
-                loc: `${BASE_URL}/emergency-${trade}/${citySlug}`,
+                loc: `${BASE_URL_GB}/emergency-${trade}/${citySlug}`,
                 changefreq: 'daily',
                 priority: '0.9'
             });
         });
     });
-    // UK Symptoms
     commonProblems.forEach(problem => {
         ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             ukUrls.push({
-                loc: `${BASE_URL}/${problem}/${citySlug}`,
+                loc: `${BASE_URL_GB}/${problem}/${citySlug}`,
                 changefreq: 'daily',
                 priority: '0.9'
             });
         });
     });
-    writeSitemap('sitemap-uk.xml', ukUrls);
+    writeSitemap('sitemap-uk.xml', ukUrls, 'uk');
 
     // 3. Dynamic City Pages (US)
     const usUrls = [];
@@ -219,17 +225,16 @@ async function generateSitemap() {
         usCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             usUrls.push({
-                loc: `${BASE_URL}/us/emergency-${trade}/${citySlug}`,
+                loc: `${BASE_URL_US}/emergency-${trade}/${citySlug}`,
                 changefreq: 'daily',
                 priority: '0.9'
             });
         });
     });
-    // Split US sitemaps if too large (approx 40k max per file to be safe)
     const CHUNK_SIZE = 40000;
     for (let i = 0; i < usUrls.length; i += CHUNK_SIZE) {
         const chunk = usUrls.slice(i, i + CHUNK_SIZE);
-        writeSitemap(`sitemap-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, chunk);
+        writeSitemap(`sitemap-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, chunk, 'us');
     }
 
     // 4. Dynamic Business Profiles
@@ -240,72 +245,79 @@ async function generateSitemap() {
     for (let i = 0; i < ukBusinesses.length; i += CHUNK_SIZE) {
         const chunk = ukBusinesses.slice(i, i + CHUNK_SIZE);
         const bizUrls = chunk.map(biz => ({
-            loc: `${BASE_URL}/business/${biz.id}`,
+            loc: `${BASE_URL_GB}/business/${biz.id}`,
             lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
             changefreq: 'weekly',
             priority: '0.7',
             images: biz.logo_url ? [{
-                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL}${biz.logo_url}`,
+                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL_GB}${biz.logo_url}`,
                 title: biz.name
             }] : []
         }));
-        writeSitemap(`sitemap-businesses-uk-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
+        writeSitemap(`sitemap-businesses-uk-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls, 'uk');
     }
 
     // US Businesses
     for (let i = 0; i < usBusinesses.length; i += CHUNK_SIZE) {
         const chunk = usBusinesses.slice(i, i + CHUNK_SIZE);
         const bizUrls = chunk.map(biz => ({
-            loc: `${BASE_URL}/us/business/${biz.id}`,
+            loc: `${BASE_URL_US}/business/${biz.id}`,
             lastmod: biz.updated_at ? biz.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
             changefreq: 'weekly',
             priority: '0.7',
             images: biz.logo_url ? [{
-                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL}${biz.logo_url}`,
-                title: biz.business_name
+                loc: biz.logo_url.startsWith('http') ? biz.logo_url : `${BASE_URL_US}${biz.logo_url}`,
+                title: biz.name
             }] : []
         }));
-        writeSitemap(`sitemap-businesses-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls);
+        writeSitemap(`sitemap-businesses-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls, 'us');
     }
 
     // 5. Blog Posts
     if (posts && posts.length > 0) {
-        const blogUrls = posts.map(post => {
+        const blogUrlsUK = [];
+        const blogUrlsUS = [];
+
+        posts.forEach(post => {
             const isUS = post.slug.endsWith('-us');
-            const prefix = isUS ? '/us' : '';
-            return {
-                loc: `${BASE_URL}${prefix}/blog/${post.slug}`,
+            const baseUrl = isUS ? BASE_URL_US : BASE_URL_GB;
+            const item = {
+                loc: `${baseUrl}/blog/${post.slug}`,
                 lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
                 changefreq: 'weekly',
                 priority: '0.8',
                 images: post.cover_image ? [{
-                    loc: post.cover_image.startsWith('http') ? post.cover_image : `${BASE_URL}${post.cover_image}`,
+                    loc: post.cover_image.startsWith('http') ? post.cover_image : `${baseUrl}${post.cover_image}`,
                     title: post.title
                 }] : []
             };
+            if (isUS) blogUrlsUS.push(item);
+            else blogUrlsUK.push(item);
         });
-        writeSitemap('sitemap-blog.xml', blogUrls);
+
+        if (blogUrlsUK.length > 0) writeSitemap('sitemap-blog-uk.xml', blogUrlsUK, 'uk');
+        if (blogUrlsUS.length > 0) writeSitemap('sitemap-blog-us.xml', blogUrlsUS, 'us');
     }
 
-    // 6. Generate Sitemap Index
-    let indexXml = `<?xml version="1.0" encoding="UTF-8"?>
+    // 6. Generate Index Files
+    const generateIndex = (filename, sitemapList, baseUrl) => {
+        let indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-
-    sitemaps.forEach(filename => {
-        indexXml += `
+        sitemapList.forEach(f => {
+            indexXml += `
   <sitemap>
-    <loc>${BASE_URL}/${filename}</loc>
+    <loc>${baseUrl}/${f}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
   </sitemap>`;
-    });
-
-    indexXml += `
+        });
+        indexXml += `
 </sitemapindex>`;
+        fs.writeFileSync(path.join(__dirname, `../public/${filename}`), indexXml);
+        console.log(` ✅ Generated Sitemap Index at ${filename}`);
+    };
 
-    const indexPath = path.join(__dirname, '../public/sitemap.xml');
-    fs.writeFileSync(indexPath, indexXml);
-    console.log(` ✅ Generated Sitemap Index at ${indexPath}`);
-    console.log(` 📊 Total Sitemaps: ${sitemaps.length}`);
+    generateIndex('sitemap.xml', ukSitemaps, BASE_URL_GB);
+    generateIndex('sitemap-us.xml', usSitemaps, BASE_URL_US);
 }
 
 generateSitemap();

@@ -318,8 +318,8 @@ const VoiceTrigger = () => {
                 className={`
                     relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 group
                     ${isActive
-                        ? 'bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#CBD5E1] shadow-[0_0_20px_rgba(255,255,255,0.4),inset_0_2px_4px_rgba(255,255,255,0.8),0_10px_20px_rgba(0,0,0,0.3)]'
-                        : 'bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#CBD5E1] shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_2px_4px_rgba(255,255,255,0.8)] border border-[#94A3B8]/20'
+                        ? 'bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-[#E2E8F0] dark:via-[#F8FAFC] dark:to-[#CBD5E1] shadow-[0_0_20px_rgba(0,163,255,0.2),inset_0_2px_4px_rgba(255,255,255,0.8),0_10px_20px_rgba(0,0,0,0.1)]'
+                        : 'bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-[#E2E8F0] dark:via-[#F8FAFC] dark:to-[#CBD5E1] shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.8)] border border-blue-200/50 dark:border-[#94A3B8]/20'
                     }
                     before:absolute before:inset-1 before:rounded-full before:bg-gradient-to-br before:from-[#CBD5E1] before:via-[#F1F5F9] before:to-[#94A3B8] before:shadow-inner
                     after:absolute after:inset-[6px] after:rounded-full after:bg-white after:shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]

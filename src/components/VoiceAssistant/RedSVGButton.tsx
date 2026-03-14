@@ -63,7 +63,7 @@ export const RedSVGButton = forwardRef<HTMLButtonElement, RedSVGButtonProps>(({
                         animate={{ scale: 1.5, opacity: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className={`absolute inset-0 rounded-full blur-xl z-10 ${isDarkMode ? 'bg-yellow-200' : 'bg-red-500'}`}
+                        className="absolute inset-0 rounded-full blur-xl z-10 bg-[hsl(var(--trade-pulse))]"
                     />
                 )}
             </AnimatePresence>
@@ -93,7 +93,7 @@ export const RedSVGButton = forwardRef<HTMLButtonElement, RedSVGButtonProps>(({
 
                   <defs>
                     <radialGradient id="paint0_radial_red" cx="0" cy="0" r="1" gradientTransform="translate(128.6 151.2) scale(143.6 53.08)" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#991B1B"} offset="0"/>
+                      <stop stop-color="hsl(var(--trade-main))" offset="0"/>
                       <stop stop-color="#5D5D5D" offset=".6901"/>
                       <stop stop-color="#343434" offset="1"/>
                     </radialGradient>
@@ -108,24 +108,24 @@ export const RedSVGButton = forwardRef<HTMLButtonElement, RedSVGButtonProps>(({
                       <stop stop-color="#66615E" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint3_linear_red" x1="128.2" x2="128.2" y1="39.19" y2="161.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FEF9C3" : "#FECACA"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#FDE047" : "#F87171"} offset=".4604"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#B91C1C"} offset=".7859"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#7F1D1D"} offset="1"/>
+                      <stop stop-color="hsl(var(--trade-gradient-1))" offset="0"/>
+                      <stop stop-color="hsl(var(--trade-gradient-2))" offset=".4604"/>
+                      <stop stop-color="hsl(var(--trade-gradient-3))" offset=".7859"/>
+                      <stop stop-color="hsl(var(--trade-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint4_linear_red" x1="129.6" x2="129.6" y1="40.48" y2="130.5" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FDE047" : "#EF4444"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#FACC15" : "#DC2626"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#B91C1C"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#991B1B"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#7F1D1D"} offset="1"/>
+                      <stop stop-color="hsl(var(--trade-pulse))" offset="0"/>
+                      <stop stop-color="hsl(var(--trade-gradient-3))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--trade-gradient-4))" offset=".775"/>
+                      <stop stop-color="hsl(var(--trade-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--trade-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint5_linear_red" x1="128.9" x2="128.9" y1="41.71" y2="127.9" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FEF08A" : "#FCA5A5"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#FDE047" : "#F87171"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#FACC15" : "#EF4444"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#DC2626"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#B91C1C"} offset="1"/>
+                      <stop stop-color="hsl(var(--trade-gradient-1))" offset="0"/>
+                      <stop stop-color="hsl(var(--trade-gradient-2))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--trade-gradient-3))" offset=".775"/>
+                      <stop stop-color="hsl(var(--trade-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--trade-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint6_linear_red" x1="128.5" x2="128.5" y1="104.1" y2="169.2" gradientUnits="userSpaceOnUse">
                       <stop stop-color="#928B87" offset="0"/>

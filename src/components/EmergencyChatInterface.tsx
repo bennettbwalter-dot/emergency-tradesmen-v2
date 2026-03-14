@@ -484,10 +484,10 @@ export function EmergencyChatInterface() {
         >
             <SelectTrigger
                 data-tour="tour-trade-button"
-                className={`h-12 md:h-11 w-full md:max-w-none md:w-full rounded-full border border-gold/20 md:border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-sm focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-white text-[#9B7D4F] hover:bg-gold/5' : 'bg-white text-[#9B7D4F]/70 hover:bg-gold/5'}`}
+                className={`h-12 md:h-11 w-full md:max-w-none md:w-full rounded-full border border-orange-200 dark:border-gold/20 md:border-orange-300 dark:md:border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-[0_0_30px_rgba(255,165,0,0.1)] md:shadow-sm focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-orange-50 dark:bg-white text-orange-700 dark:text-[#9B7D4F] hover:bg-orange-100 dark:hover:bg-gold/5' : 'bg-white text-[#9B7D4F]/70 hover:bg-gold/5'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2 w-full md:w-auto">
-                    <User className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
+                    <User className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-orange-600 dark:text-[#9B7D4F]" />
                     <div className="hidden md:block min-w-0 overflow-hidden">
                         <SelectValue placeholder="Trade">
                             <span className="text-sm font-medium truncate block max-w-[180px]">
@@ -508,8 +508,8 @@ export function EmergencyChatInterface() {
         <div data-tour="tour-location-button" className="w-full min-w-0 overflow-visible">
             {settings.countryCode === 'US' ? (
                 (isVoiceSessionRef.current && detectedCity) ? (
-                    <div className="w-full h-12 md:h-12 flex items-center justify-center rounded-full border border-gold/20 md:border-gold/50 bg-white shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-sm overflow-visible">
-                        <MapPin className="w-5 h-5 md:w-5 md:h-5 shrink-0 text-[#9B7D4F]" />
+                    <div className="w-full h-12 md:h-12 flex items-center justify-center rounded-full border border-emerald-200 dark:border-gold/20 md:border-emerald-300 dark:md:border-gold/50 bg-white shadow-[0_0_30px_rgba(16,185,129,0.15)] md:shadow-sm overflow-visible">
+                        <MapPin className="w-5 h-5 md:w-5 md:h-5 shrink-0 text-emerald-600 dark:text-[#9B7D4F]" />
                         <span className="hidden md:block text-sm font-medium text-foreground dark:text-white truncate block min-w-0">
                             {detectedCity}
                         </span>
@@ -531,7 +531,7 @@ export function EmergencyChatInterface() {
                     </div>
                 ) : (
                     <HierarchicalLocationSelector
-                        className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none bg-white rounded-full"
+                        className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(16,185,129,0.15)] md:shadow-none bg-white border-emerald-200 md:border-emerald-300 rounded-full"
                         placeholder="City, State"
                         onStateSelected={(state) => setHasStateSelected(!!state)}
                         onLocationSelect={(record) => {
@@ -543,7 +543,7 @@ export function EmergencyChatInterface() {
                 )
             ) : (
                 <UKCityCombobox
-                    className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none bg-white rounded-full"
+                    className="w-full md:max-w-none md:w-full h-12 md:h-11 shadow-[0_0_30px_rgba(16,185,129,0.15)] md:shadow-none bg-white border-emerald-200 md:border-emerald-300 rounded-full"
                     placeholder="Select City"
                     value={detectedCity || ""}
                     onValueChange={setDetectedCity}
@@ -580,7 +580,7 @@ export function EmergencyChatInterface() {
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
                     ? 'bg-gold/50 cursor-not-allowed'
-                    : 'bg-[#FDF5E6] hover:bg-[#F5ECD7] text-[#9B7D4F] border border-gold/10'}`}
+                    : 'bg-[#E0F2FE] dark:bg-[#FDF5E6] hover:bg-[#BAE6FD] dark:hover:bg-[#F5ECD7] text-[#0284C7] dark:text-[#9B7D4F] border border-blue-200 dark:border-gold/10'}`}
             title={isRecording ? "Stop Recording" : (isTranscriptionProcessing ? `Processing... (${whisperStatus})` : `Record Message (${whisperStatus})`)}
         >
             {isTranscriptionProcessing ? (

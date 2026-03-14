@@ -12,7 +12,15 @@ export function Footer({ countryCode }: FooterProps) {
   const { settings: globalSettings } = useLocalization();
   const activeCountry = countryCode || globalSettings.countryCode;
   const isUS = activeCountry === 'US';
-  const countryPrefix = isUS ? '/usa' : '';
+  
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net');
+  
+  const siteNameMain = 'Emergency';
+  const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
+  const siteName = `${siteNameMain} ${siteNameSub}`;
+
+  const countryPrefix = isUS && !isUSDomain ? '/us' : '';
   const displayCities = isUS
     ? ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco"]
     : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bristol", "Liverpool"];
@@ -133,7 +141,7 @@ export function Footer({ countryCode }: FooterProps) {
         {/* Footer Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-6">
           <p className="text-white/30 text-xs">
-            &copy; {new Date().getFullYear()} Emergency Tradesmen.
+            &copy; {new Date().getFullYear()} {siteName}.
             <span className="hidden md:inline mx-2">•</span>
             <br className="md:hidden" />
             Built with precision on <span className="text-white/50">Meridian OS</span>.

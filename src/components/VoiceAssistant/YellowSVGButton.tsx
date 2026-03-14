@@ -51,14 +51,16 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
                 stiffness: 260, 
                 damping: 20 
             }}
-            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${isPulsing ? 'animate-surface-pulse' : ''}`}
             onClick={handlePress}
             data-tour={dataTour}
             aria-label="Confirm Action"
         >
-            {/* Intense Bottom Glow Effect */}
+            {/* Intense Bottom Glow Effect - Wrapped for stable centering */}
             {isPulsing && (
-                <div className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-full h-[40%] bg-yellow-400/80 blur-2xl rounded-full z-0 animate-glow-bottom pointer-events-none" />
+                <div className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-[90%] h-[35%] pointer-events-none z-0">
+                    <div className="w-full h-full bg-yellow-400/90 blur-xl animate-glow-bottom rounded-full" />
+                </div>
             )}
             
             {/* Click Flash Effect */}
@@ -69,7 +71,7 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
                         animate={{ scale: 1.5, opacity: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className={`absolute inset-0 rounded-full blur-xl z-10 ${isDarkMode ? 'bg-yellow-700' : 'bg-yellow-400'}`}
+                        className="absolute inset-0 rounded-full blur-xl z-10 bg-[hsl(var(--locate-me-pulse))]"
                     />
                 )}
             </AnimatePresence>
@@ -98,7 +100,7 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
 
                   <defs>
                     <radialGradient id="paint0_radial_yellow" cx="0" cy="0" r="1" gradientTransform="translate(128.6 151.2) scale(143.6 53.08)" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#713F12" : "#CA8A04"} offset="0"/>
+                      <stop stop-color="hsl(var(--locate-me-main))" offset="0"/>
                       <stop stop-color="#5D5D5D" offset=".6901"/>
                       <stop stop-color="#343434" offset="1"/>
                     </radialGradient>
@@ -113,24 +115,24 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
                       <stop stop-color="#66615E" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint3_linear_yellow" x1="128.2" x2="128.2" y1="39.19" y2="161.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#FEF9C3"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#FACC15"} offset=".4604"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#A16207"} offset=".7859"/>
-                      <stop stop-color={isDarkMode ? "#422006" : "#713F12"} offset="1"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-1))" offset="0"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-2))" offset=".4604"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-3))" offset=".7859"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint4_linear_yellow" x1="129.6" x2="129.6" y1="40.48" y2="130.5" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#A16207" : "#FDE047"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#EAB308"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#713F12" : "#A16207"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#422006" : "#854D0E"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#422006" : "#713F12"} offset="1"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-2))" offset="0"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-3))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-3))" offset=".775"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint5_linear_yellow" x1="128.9" x2="128.9" y1="41.71" y2="127.9" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#A16207" : "#FEF08A"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#FDE047"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#713F12" : "#FACC15"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#422006" : "#EAB308"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#422006" : "#A16207"} offset="1"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-2))" offset="0"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-3))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-3))" offset=".775"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-4))" offset=".991"/>
+                      <stop stop-color="hsl(var(--locate-me-gradient-5))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint6_linear_yellow" x1="128.5" x2="128.5" y1="104.1" y2="169.2" gradientUnits="userSpaceOnUse">
                       <stop stop-color="#928B87" offset="0"/>

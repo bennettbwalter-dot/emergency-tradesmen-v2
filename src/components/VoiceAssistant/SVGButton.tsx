@@ -60,7 +60,7 @@ export const SVGButton = ({
                             duration: 1.5,
                             ease: "easeOut"
                         }}
-                        className="absolute inset-0 bg-teal-400 rounded-full blur-xl z-0"
+                        className="absolute inset-0 bg-[hsl(var(--mic-pulse))] rounded-full blur-xl z-0"
                     />
                 )}
             </AnimatePresence>
@@ -73,7 +73,7 @@ export const SVGButton = ({
                         animate={{ scale: 1.5, opacity: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="absolute inset-0 bg-teal-400 rounded-full blur-xl z-10"
+                        className="absolute inset-0 bg-[hsl(var(--mic-pulse))] rounded-full blur-xl z-10"
                     />
                 )}
             </AnimatePresence>
@@ -108,7 +108,7 @@ export const SVGButton = ({
                   <path d="m125.6 105.3 4.5-0.3v1.5l-4.5 0.3v-1.5z" fill="url(#paint24_linear_mic)"/>
                   <defs>
                     <radialGradient id="paint0_radial_mic" cx="0" cy="0" r="1" gradientTransform="translate(128.6 151.2) scale(143.6 53.08)" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#006B71" offset="0"/>
+                      <stop stop-color="hsl(var(--mic-gradient-dark))" offset="0"/>
                       <stop stop-color="#5D5D5D" offset=".6901"/>
                       <stop stop-color="#343434" offset="1"/>
                     </radialGradient>
@@ -123,24 +123,24 @@ export const SVGButton = ({
                       <stop stop-color="#66615E" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint3_linear_mic" x1="128.2" x2="128.2" y1="39.19" y2="161.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#80BDC3" offset="0"/>
-                      <stop stop-color="#5BA5A8" offset=".4604"/>
-                      <stop stop-color="#29625D" offset=".7859"/>
-                      <stop stop-color="#1A5451" offset="1"/>
+                      <stop stop-color="hsl(var(--mic-gradient-start))" offset="0"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-1))" offset=".4604"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-2))" offset=".7859"/>
+                      <stop stop-color="hsl(var(--mic-gradient-end))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint4_linear_mic" x1="129.6" x2="129.6" y1="40.48" y2="130.5" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#7CB7B9" offset="0"/>
-                      <stop stop-color="#79B6B7" offset=".5104"/>
-                      <stop stop-color="#70B1B0" offset=".775"/>
-                      <stop stop-color="#61A9A4" offset=".991"/>
-                      <stop stop-color="#60A8A3" offset="1"/>
+                      <stop stop-color="hsl(var(--mic-gradient-start))" offset="0"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-1))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-2))" offset=".775"/>
+                      <stop stop-color="hsl(var(--mic-gradient-end))" offset=".991"/>
+                      <stop stop-color="hsl(var(--mic-gradient-end))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint5_linear_mic" x1="128.9" x2="128.9" y1="41.71" y2="127.9" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#74B7B9" offset="0"/>
-                      <stop stop-color="#78B9BB" offset=".5104"/>
-                      <stop stop-color="#82BFC2" offset=".775"/>
-                      <stop stop-color="#94C8CE" offset=".991"/>
-                      <stop stop-color="#95C9CF" offset="1"/>
+                      <stop stop-color="hsl(var(--mic-gradient-start))" offset="0"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-1))" offset=".5104"/>
+                      <stop stop-color="hsl(var(--mic-gradient-mid-2))" offset=".775"/>
+                      <stop stop-color="hsl(var(--mic-gradient-start))" offset=".991"/>
+                      <stop stop-color="hsl(var(--mic-gradient-start))" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint6_linear_mic" x1="128.5" x2="128.5" y1="104.1" y2="169.2" gradientUnits="userSpaceOnUse">
                       <stop stop-color="#928B87" offset="0"/>

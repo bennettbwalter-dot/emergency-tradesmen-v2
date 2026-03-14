@@ -28,12 +28,17 @@ export function Header({ countryCode }: HeaderProps) {
   const { settings } = useLocalization();
   const location = useLocation();
 
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net');
+
   // STRICT OVERRIDE: Prioritize prop, fallback to context
   const activeCountry = countryCode || settings.countryCode;
   const isUS = activeCountry === 'US';
 
+  const siteNameMain = 'Emergency';
+  const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
   const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
-  const countryPrefix = isUS ? '/usa' : '';
+  const countryPrefix = isUS && !isUSDomain ? '/us' : '';
 
   const [isVisible, setIsVisible] = useState(true);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -81,8 +86,8 @@ export function Header({ countryCode }: HeaderProps) {
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="hidden sm:block">
-                <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">Emergency</span>
-                <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{isUS ? 'Contractors' : 'Tradesmen'}</span>
+                <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">{siteNameMain}</span>
+                <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{siteNameSub}</span>
               </div>
             </Link>
           </div>
@@ -161,7 +166,7 @@ export function Header({ countryCode }: HeaderProps) {
                   <div className="flex items-center justify-between mb-8 mt-2 px-2">
                     <div className="flex items-center gap-3">
                       <img src="/et-logo-v2.webp" alt="Logo" className="w-8 h-8 rounded-full border border-gold/30" />
-                      <span className="font-display tracking-wide text-lg text-white">Emergency<span className="text-gold ml-1">{isUS ? 'Contractors' : 'Tradesmen'}</span></span>
+                      <span className="font-display tracking-wide text-lg text-white">{siteNameMain}<span className="text-gold ml-1">{siteNameSub}</span></span>
                     </div>
                   </div>
 

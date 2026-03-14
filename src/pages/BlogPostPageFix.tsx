@@ -68,9 +68,10 @@ export default function BlogPostPage() {
             .replace(/breakdown recovery/gi, 'tow truck')
             .replace(/postcode/gi, 'zip code')
             .replace(/boiler/gi, 'HVAC / furnace')
-            .replace(/Gas Safe/g, 'State Licensed')
-            .replace(/NICEIC/g, 'Certified Electrician')
+            .replace(/Gas Safe/g, 'EPA Section 608 / State Licensed')
+            .replace(/NICEIC/g, 'NEC / Certified Electrician')
             .replace(/MLA/g, 'Certified Locksmith')
+            .replace(/call-out fee/gi, 'service call fee')
             .replace(/emergency services UK/gi, 'US emergency services')
             .replace(/UK's fastest/gi, 'USA\'s fastest')
             .replace(/nationwide/gi, 'coast-to-coast')
@@ -145,7 +146,7 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <MapPin className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to={isUK ? "/" : "/usa"} className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to={isUK ? "/" : "/us"} className="text-muted-foreground hover:text-gold transition-colors">
                                         Emergency Tradesmen Home
                                     </Link>
                                 </li>
@@ -340,14 +341,20 @@ export default function BlogPostPage() {
     const wordCount = post.content?.split(/\s+/).length || 0;
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
-    const countryPrefix = settings.countryCode === 'GB' ? '' : '/usa';
+    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
 
     return (
         <div className="min-h-screen bg-background pb-20 selection:bg-gold/20">
             {/* Structured Data Construction */}
             {(() => {
-                const baseUrl = "https://emergencytradesmen.net";
-                const postUrl = `${baseUrl}/blog/${post.slug}`;
+                const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+                const isUSDomain = hostname.includes('emergencycontractors.net');
+                const baseUrl = isUSDomain ? "https://emergencycontractors.net" : "https://emergencytradesmen.net";
+                
+                const postUrl = isUSDomain && post.slug.endsWith('-us') 
+                    ? `${baseUrl}/blog/${post.slug}` 
+                    : `${baseUrl}/blog/${post.slug}`; // Path remains same on dedicated domain (stripped by middleware)
+                
                 const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
 
                 // 1. BreadcrumbList Schema
@@ -359,13 +366,13 @@ export default function BlogPostPage() {
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Home",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/usa'}`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
                         },
                         {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/usa'}/blog`
+                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
                         },
                         {
                             "@type": "ListItem",
@@ -457,9 +464,9 @@ export default function BlogPostPage() {
 
                 return (
                     <SEO
-                        title={`${regionalizeText(post.title)} | ${regionalizeText("Emergency Tradesmen UK")} Blog`}
+                        title={`${regionalizeText(post.title)} | ${regionalizeText(isUSDomain ? "Emergency Contractors" : "Emergency Tradesmen UK")} Blog`}
                         description={regionalizeText(post.excerpt) || ""}
-                        canonical={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog/${post.slug}`}
+                        canonical={isUSDomain ? `/blog/${post.slug}` : (settings.countryCode === 'GB' ? '' : '/us') + `/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={jsonLdSchemas}
@@ -475,7 +482,7 @@ export default function BlogPostPage() {
                         locale={settings.countryCode === 'GB' ? 'en_GB' : 'en_US'}
                         alternates={[
                             { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-                            { lang: 'en-US', href: `https://emergencytradesmen.net/usa/blog/${post.slug}` },
+                            { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
                             { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` }
                         ]
                         }
@@ -487,7 +494,7 @@ export default function BlogPostPage() {
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/usa'}/blog`}
+                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -700,7 +707,7 @@ export default function BlogPostPage() {
                                                                     );
                                                                 }
 
-                                                                const isInternal = props.href?.includes('emergencytradesmen.net');
+                                                                const isInternal = props.href?.includes('emergencytradesmen.net') || props.href?.includes('emergencycontractors.net');
                                                                 return (
                                                                     <a
                                                                         {...props}

@@ -83,6 +83,15 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
 
         const detectRegion = async () => {
             try {
+                // If we are on the dedicated US domain, skip IP detection for redirection purposes
+                const hostname = window.location.hostname;
+                const isUSDomain = hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net';
+                if (isUSDomain) {
+                    setCountryCodeState('US');
+                    setHasAttemptedIPDetection(true);
+                    return;
+                }
+
                 const response = await fetch('https://freeipapi.com/api/json');
                 const data = await response.json();
 
@@ -90,9 +99,19 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                     const detected = data.countryCode as CountryCode;
                     console.log(`Detected region via IP: ${detected}`);
 
-                    if (location.pathname === '/') {
-                        if (detected === 'US') {
-                            navigate('/us', { replace: true });
+                    const isUsPath = location.pathname.startsWith('/us') || location.pathname.startsWith('/usa');
+
+                    if (detected === 'US') {
+                        if (!isUsPath) {
+                            // Redirect UK path to US equivalent
+                            const subPath = location.pathname === '/' ? '' : location.pathname;
+                            navigate(`/us${subPath}`, { replace: true });
+                        }
+                    } else if (detected === 'GB') {
+                        if (isUsPath) {
+                            // Redirect US path to UK root equivalent
+                            const subPath = location.pathname.replace(/^\/(us|usa)/, '') || '/';
+                            navigate(subPath, { replace: true });
                         }
                     }
                 }
@@ -103,9 +122,8 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             }
         };
 
-        if (location.pathname === '/') {
-            detectRegion();
-        }
+
+        detectRegion();
     }, [location.pathname, navigate, hasAttemptedIPDetection]);
 
     // 2. Real-time Location Tracking (Navigator API)
@@ -180,8 +198,12 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     useEffect(() => {
         const path = location.pathname;
         const firstSegment = path.split('/')[1]?.toLowerCase();
+        const hostname = window.location.hostname;
 
-        if (firstSegment === 'us' || firstSegment === 'usa') {
+        // Domain-based check (Prioritize the dedicated US domain)
+        if (hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net') {
+            setCountryCodeState('US');
+        } else if (firstSegment === 'us' || firstSegment === 'usa') {
             setCountryCodeState('US');
         } else if (firstSegment === 'gb') {
             setCountryCodeState('GB');
