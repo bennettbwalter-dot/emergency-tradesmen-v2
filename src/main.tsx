@@ -11,6 +11,10 @@ initPostHog();
 
 // Prevent blank screen of death with immediate error reporting
 window.addEventListener('error', (event) => {
+    // Ignore benign ResizeObserver errors that don't actually crash the app
+    if (event.message?.includes('ResizeObserver') || event.message?.includes('Script error.')) {
+        return;
+    }
     document.body.innerHTML = `
         <div style="padding: 20px; font-family: sans-serif; color: #721c24; background: #f8d7da; border: 2px solid #f5c6cb; margin: 20px; border-radius: 8px;">
             <h1 style="margin-top: 0;">Application Error</h1>
