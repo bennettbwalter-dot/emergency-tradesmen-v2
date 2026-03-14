@@ -37,6 +37,10 @@ export default function BusinessProfilePage() {
     const [photosLoading, setPhotosLoading] = useState(true);
     const [claimStatus, setClaimStatus] = useState<{ status: string, verified: boolean } | null>(null);
 
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+
     // Fetch business data from database
     useEffect(() => {
         async function loadBusiness() {
@@ -288,7 +292,7 @@ export default function BusinessProfilePage() {
     const businessSchema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": `https://emergencytradesmen.net/business/${business.id}`,
+        "@id": `${isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net'}/business/${business.id}`,
         name: business.name,
         image: [
             ...(photos.length > 0 ? [photos[0].url] : []),
@@ -310,7 +314,7 @@ export default function BusinessProfilePage() {
             ratingValue: business.rating,
             reviewCount: business.reviewCount
         } : undefined,
-        priceRange: "££"
+        priceRange: isUS ? "$$" : "££"
     };
 
     return (
@@ -403,17 +407,17 @@ export default function BusinessProfilePage() {
                                         {/* Accreditation Row */}
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
                                             {trade === 'gas-engineer' && (
-                                                <Badge variant="outline" className="bg-orange-500/5 text-orange-500 border-orange-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                    Gas Safe Registered
+                                                <Badge variant="outline" className={`${isUS ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/30' : 'bg-orange-500/5 text-orange-500 border-orange-500/30'} font-bold uppercase tracking-tighter text-[10px] px-2 py-1`}>
+                                                    {isUS ? 'EPA Section 608' : 'Gas Safe Registered'}
                                                 </Badge>
                                             )}
                                             {trade === 'electrician' && (
                                                 <Badge variant="outline" className="bg-emerald-500/5 text-emerald-500 border-emerald-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                    NICEIC Certified
+                                                    {isUS ? 'Licensed Electrician' : 'NICEIC Certified'}
                                                 </Badge>
                                             )}
                                             <Badge variant="outline" className="bg-gold/5 text-gold border-gold/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                Fully Insured
+                                                {isUS ? 'Fully Insured & Bonded' : 'Fully Insured'}
                                             </Badge>
                                             <Badge variant="outline" className="bg-blue-500/5 text-blue-500 border-blue-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
                                                 ID Verified
@@ -528,7 +532,7 @@ export default function BusinessProfilePage() {
 
                                 <div className="pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
                                     <p className="text-emerald-500/80 text-sm font-medium italic">
-                                        "Trusted by over 10,000 customers across the UK"
+                                        "Trusted by over 10,000 customers across the {isUS ? 'US' : 'UK'}"
                                     </p>
                                     <Button asChild variant="outline" className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10">
                                         <Link to="/vetting-process">

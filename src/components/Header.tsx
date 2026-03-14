@@ -29,15 +29,17 @@ export function Header({ countryCode }: HeaderProps) {
   const location = useLocation();
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net');
+  const port = typeof window !== 'undefined' ? window.location.port : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
 
-  // STRICT OVERRIDE: Prioritize prop, fallback to context
   const activeCountry = countryCode || settings.countryCode;
   const isUS = activeCountry === 'US';
 
   const siteNameMain = 'Emergency';
   const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
   const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
+  
+  // Rule: On US domain, we NEVER use the /us prefix. On UK domain, we use it for US content.
   const countryPrefix = isUS && !isUSDomain ? '/us' : '';
 
   const [isVisible, setIsVisible] = useState(true);
@@ -131,7 +133,10 @@ export function Header({ countryCode }: HeaderProps) {
                 </Link>
               </Button>
 
-              <Link to="/contact" className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link">
+              <Link 
+                to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} 
+                className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
+              >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
               </Link>
@@ -191,7 +196,10 @@ export function Header({ countryCode }: HeaderProps) {
                       Locations
                     </Link>
 
-                    <Link to="/contact" className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                    <Link 
+                      to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} 
+                      className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors"
+                    >
                       <Phone className="w-[18px] h-[18px] text-[#9ca3af]" />
                       Contact
                     </Link>

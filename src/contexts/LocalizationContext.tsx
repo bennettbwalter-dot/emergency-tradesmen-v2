@@ -85,7 +85,10 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             try {
                 // If we are on the dedicated US domain, skip IP detection for redirection purposes
                 const hostname = window.location.hostname;
-                const isUSDomain = hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net';
+                const port = window.location.port;
+                const isUSDomain = hostname === 'emergencycontractors.net' || 
+                                  hostname === 'www.emergencycontractors.net' || 
+                                  (hostname === 'localhost' && port === '3001');
                 if (isUSDomain) {
                     setCountryCodeState('US');
                     setHasAttemptedIPDetection(true);
@@ -201,7 +204,10 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
         const hostname = window.location.hostname;
 
         // Domain-based check (Prioritize the dedicated US domain)
-        if (hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net') {
+        const port = window.location.port;
+        if (hostname === 'emergencycontractors.net' || 
+            hostname === 'www.emergencycontractors.net' || 
+            (hostname === 'localhost' && port === '3001')) {
             setCountryCodeState('US');
         } else if (firstSegment === 'us' || firstSegment === 'usa') {
             setCountryCodeState('US');

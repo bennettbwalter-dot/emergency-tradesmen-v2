@@ -42,7 +42,8 @@ export function SEO({
     alternates
 }: SEOProps) {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net');
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
     
     const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
     const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;
@@ -51,11 +52,16 @@ export function SEO({
     
     // Adjust canonical for US Domain
     let effectiveCanonical = canonical;
-    if (isUSDomain && effectiveCanonical?.startsWith('/us')) {
-        effectiveCanonical = effectiveCanonical.replace(/^\/(us|usa)/, '') || '/';
+    if (isUSDomain) {
+        // If on US domain, strip /us or /usa from the provided canonical or default to current path
+        const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+        const pathToUse = effectiveCanonical || currentPath;
+        effectiveCanonical = pathToUse.replace(/^\/(us|usa)/, '') || '/';
     }
 
-    const absoluteUrl = effectiveCanonical ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`) : SITE_URL;
+    const absoluteUrl = effectiveCanonical 
+        ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`) 
+        : SITE_URL;
 
     return (
         <Helmet>

@@ -348,19 +348,20 @@ export default function TradeCityPage() {
   const schemaType = tradeSchemaTypeMap[tradeInfo.slug] || tradeSchemaTypeMap['default'];
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net');
+  const port = typeof window !== 'undefined' ? window.location.port : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
   const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": schemaType,
-    "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}#localbusiness`,
+    "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}#localbusiness`,
     name: `Emergency ${tradeDisplayName} ${cityName}`,
     description: `24/7 emergency ${tradeDisplayName.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
-    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+1 555-0123-456",
-    url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`,
-    "priceRange": emergencyPriceRange,
+    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+44 20 7946 0000",
+    url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
+    "priceRange": actualCountry === 'US' ? "$75 - $150" : "£75 - £150",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": cityName,

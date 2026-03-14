@@ -7,6 +7,7 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 
 export default function VettingProcess() {
     const { settings } = useLocalization();
+    const isUS = settings.countryCode === 'US';
     const steps = [
         {
             icon: Search,
@@ -20,13 +21,17 @@ export default function VettingProcess() {
         },
         {
             icon: Award,
-            title: "Trade Certifications",
-            description: "Mandatory verification of Gas Safe, NICEIC, or relevant trade-specific certifications."
+            title: isUS ? "Licensed & Certified" : "Trade Certifications",
+            description: isUS 
+                ? "Mandatory verification of state licenses, EPA Section 608 (HVAC), and trade-specific certifications."
+                : "Mandatory verification of Gas Safe, NICEIC, or relevant trade-specific certifications."
         },
         {
             icon: ClipboardCheck,
-            title: "Public Liability Insurance",
-            description: "Continuous monitoring of active insurance coverage (minimum £1M-£5M depending on trade)."
+            title: isUS ? "General Liability Insurance" : "Public Liability Insurance",
+            description: isUS
+                ? "Continuous monitoring of active insurance coverage (minimum $1M-$2M depending on trade)."
+                : "Continuous monitoring of active insurance coverage (minimum £1M-£5M depending on trade)."
         },
         {
             icon: Users,
