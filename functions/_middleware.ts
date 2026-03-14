@@ -12,6 +12,13 @@ export const onRequest: PagesFunction = async (context) => {
     }
 
     // Silent rewrite: map internal /us/* to root /
+    // BUT EXCLUDE static assets (JS, CSS, images, etc.)
+    const isStaticAsset = path.includes('.') || path.startsWith('/assets/') || path.startsWith('/images/');
+    
+    if (isStaticAsset) {
+      return context.next();
+    }
+
     const newUrl = new URL(url.toString());
     newUrl.pathname = `/us${path === '/' ? '' : path}`;
     
