@@ -14,6 +14,10 @@ export default function PricingPage() {
     const { user } = useAuth();
     const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
     const isUS = settings.countryCode === 'US';
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
 
     const handleCheckout = (url: string) => {
         if (!user) {
@@ -42,9 +46,9 @@ export default function PricingPage() {
     return (
         <>
             <SEO
-                title="Pro Pricing Plans for Tradesmen"
-                description="Boost your business with Emergency Tradesmen Pro. Get priority ranking, enhanced trust signals, and 3x more leads. Plans from £0/month."
-                canonical="/pricing"
+                title={`Pro Pricing Plans for ${isUS ? 'Contractors' : 'Tradesmen'}`}
+                description={`Boost your business with Emergency ${isUS ? 'Contractors' : 'Tradesmen'} Pro. Get priority ranking, enhanced trust signals, and 3x more leads. Plans from ${settings.currencySymbol}0/month.`}
+                canonical={`${countryPrefix}/pricing`}
             />
             <Header />
             <main className="min-h-screen bg-background py-20">

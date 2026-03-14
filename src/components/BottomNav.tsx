@@ -7,11 +7,14 @@ export function BottomNav() {
     const location = useLocation();
     const { isAuthenticated } = useAuth();
     const { settings } = useLocalization();
-    const countryPrefix = settings.countryCode === 'GB' ? '' : '/us';
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
 
     const isActive = (path: string) => {
-        if (path === "/" && location.pathname === "/") return true;
-        if (path === "/us" && (location.pathname === "/us" || location.pathname === "/us/")) return true;
+        if (path === "/" && (location.pathname === "/" || (isUSDomain && location.pathname === "/"))) return true;
+        if ((path === "/us" || path === "/us/") && (location.pathname === "/us" || location.pathname === "/us/")) return true;
         if (path !== "/" && path !== "/us" && location.pathname.startsWith(path)) return true;
         // Special handling for dashboard tabs
         if (path.includes("tab=") && location.search.includes(path.split("?")[1])) return true;

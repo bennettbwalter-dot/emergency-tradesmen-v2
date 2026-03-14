@@ -28,14 +28,20 @@ const Index = () => {
   const { settings } = useLocalization();
   const [showFaq, setShowFaq] = useState(false);
 
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const port = typeof window !== 'undefined' ? window.location.port : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+  const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+  const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
   // Schema markup
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
-    "name": "Emergency Tradesmen",
-    "image": "https://emergencytradesmen.net/og-image.webp",
-    "description": "24/7 Emergency Tradesmen Services. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.",
-    "telephone": "+1-888-555-0199",
+    "name": siteName,
+    "image": `${siteUrl}/og-image.webp`,
+    "description": `24/7 ${siteName} Services. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
+    "telephone": settings.countryCode === 'US' ? "+1-888-555-0199" : "+44 20 7946 0000",
     "areaServed": settings.countryCode,
     "availableLanguage": "English",
     "serviceType": ["Plumbing", "Electrical", "Locksmith", "HVAC", "Glazing", "Drainage"],
@@ -49,10 +55,10 @@ const Index = () => {
     <ChatbotProvider>
       <GuestGate />
       <Helmet>
-        <title>Emergency Tradesmen - 24/7 Local Experts Near You</title>
+        <title>{siteName} - 24/7 Local Experts Near You</title>
         <meta
           name="description"
-          content={`Find trusted local ${settings.tradeTerm.toLowerCase()}s for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, an HVAC issues. Fast response times.`}
+          content={`Find trusted local ${settings.tradeTerm.toLowerCase()}s for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC issues. Fast response times.`}
         />
         <script type="application/ld+json">
           {JSON.stringify(emergencyServiceSchema)}

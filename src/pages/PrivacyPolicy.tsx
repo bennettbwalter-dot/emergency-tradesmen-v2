@@ -3,14 +3,24 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '@/components/SEO';
 import { Link } from 'react-router-dom';
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export default function PrivacyPolicy() {
+    const { settings } = useLocalization();
+    const isUS = settings.countryCode === 'US';
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+    const siteUrl = isUSDomain ? 'emergencycontractors.net' : 'emergencytradesmen.net';
+    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
+
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
             <SEO
-                title="Privacy Policy | Emergency Tradesmen"
-                description="Read our Privacy Policy to understand how EmergencyTradesmen.net safely collects and processes your data to connect you with 11 specialized emergency trades across the UK and US."
-                canonical="/privacy"
+                title={`Privacy Policy | ${siteName}`}
+                description={`Read our Privacy Policy to understand how ${siteUrl} safely collects and processes your data to connect you with specialized emergency trades.`}
+                canonical={`${countryPrefix}/privacy`}
             />
             <Header />
 
@@ -24,7 +34,7 @@ export default function PrivacyPolicy() {
 
                     <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-gold hover:prose-a:text-gold/80">
                         <p className="lead text-xl text-slate-600">
-                            At EmergencyTradesmen.net, our core mission is safely and rapidly connecting you with verified professionals during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
+                            At {siteUrl}, our core mission is safely and rapidly connecting you with verified professionals during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
                         </p>
 
                         <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg my-8">
@@ -95,7 +105,7 @@ export default function PrivacyPolicy() {
                             <p>You maintain the right to Request Access to your data, Request Correction of your data, Request Erasure ("Right to be Forgotten"), Object to processing, and Request Data Portability.</p>
 
                             <h4>Data Protection Officer & ICO Complaints</h4>
-                            <p>If you believe we have not handled your data properly, you have the right to lodge a complaint with the Information Commissioner's Office (ICO). Prior to contacting the ICO, we encourage you to contact our Data Protection Officer directly at <strong>legal@emergencytradesmen.net</strong> so we can resolve any issues immediately.</p>
+                            <p>If you believe we have not handled your data properly, you have the right to lodge a complaint with the Information Commissioner's Office (ICO). Prior to contacting the ICO, we encourage you to contact our Data Protection Officer directly at <strong>legal@{siteUrl}</strong> so we can resolve any issues immediately.</p>
                         </div>
 
                         <div className="bg-slate-50 p-8 rounded-xl border border-slate-200 mt-8" id="us-residents">
@@ -116,13 +126,12 @@ export default function PrivacyPolicy() {
 
                         <hr className="my-12 border-slate-200" />
 
-                        <h2>4. Data Security</h2>
-                        <p>We mandate strict HTTPS encryption (SSL/TLS) across all UK and US jurisdictions on EmergencyTradesmen.net. Any data entered into our platform is encrypted in transit and at rest within our secure Supabase infrastructure.</p>
+                        <p>We mandate strict HTTPS encryption (SSL/TLS) across all UK and US jurisdictions on {siteUrl}. Any data entered into our platform is encrypted in transit and at rest within our secure Supabase infrastructure.</p>
 
                         <h2>5. Contact the Privacy Team</h2>
                         <p>
                             To exercise your data rights, request a data deletion, or ask questions about this policy, please email us directly: <br />
-                            <strong>Email:</strong> privacy@emergencytradesmen.net
+                            <strong>Email:</strong> privacy@{siteUrl}
                         </p>
                     </div>
                 </article>

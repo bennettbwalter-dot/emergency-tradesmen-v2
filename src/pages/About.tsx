@@ -10,6 +10,13 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 export default function About() {
     const { settings } = useLocalization();
     const isUS = settings.countryCode === 'US';
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+    const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
+
     const tradeTerm = settings.tradeTerm; // "Tradesmen" or "Contractors"
     const termSingular = isUS ? "Contractor" : "Tradesman";
     const regionName = isUS ? "United States" : "United Kingdom";
@@ -17,10 +24,10 @@ export default function About() {
     const orgSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": `Emergency ${tradeTerm}`,
+        "name": siteName,
         "alternateName": isUS ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
-        "url": "https://emergencytradesmen.net",
-        "logo": "https://emergencytradesmen.net/et-logo-v2.webp",
+        "url": siteUrl,
+        "logo": `${siteUrl}/et-logo-v2.webp`,
         "description": `The largest network of vetted emergency ${tradeTerm.toLowerCase()} in the ${regionName}.`,
         "areaServed": {
             "@type": "Country",
@@ -39,7 +46,7 @@ export default function About() {
             <SEO
                 title={`About Emergency ${tradeTerm} | Trusted Local ${tradeTerm} 24/7`}
                 description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding a local ${termSingular.toLowerCase()} for plumbing, electrical, and HVAC repairs.`}
-                canonical="/about"
+                canonical={`${countryPrefix}/about`}
                 jsonLd={orgSchema}
             />
 
@@ -67,7 +74,7 @@ export default function About() {
                                 </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>
-                                        <Link to="/contact" className="flex items-center gap-2">
+                                        <Link to={`${countryPrefix}/contact`} className="flex items-center gap-2">
                                             <Phone className="w-5 h-5" />
                                             Find a {termSingular}
                                         </Link>
@@ -227,10 +234,10 @@ export default function About() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button variant="luxury" size="xl" asChild>
-                                <Link to="/contact" className="min-w-[200px]">Find a {termSingular}</Link>
+                                <Link to={`${countryPrefix}/contact`} className="min-w-[200px]">Find a {termSingular}</Link>
                             </Button>
                             <Button variant="outline" size="xl" className="bg-transparent border-white/20 text-white hover:bg-white/10" asChild>
-                                <Link to="/tradesmen">{tradeTerm} Sign Up</Link>
+                                <Link to={`${countryPrefix}/pricing`}>{tradeTerm} Sign Up</Link>
                             </Button>
                         </div>
                     </div>

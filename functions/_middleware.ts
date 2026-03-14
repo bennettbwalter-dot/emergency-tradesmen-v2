@@ -17,6 +17,7 @@ export const onRequest: PagesFunction = async (context) => {
     const isStaticAsset = staticExtensions.some(ext => path.toLowerCase().endsWith(ext)) || 
                           path.includes('/assets/') || 
                           path.includes('/images/') ||
+                          path.includes('/blog/') ||
                           path.includes('/cdn-cgi/');
     
     if (isStaticAsset) {
@@ -32,6 +33,13 @@ export const onRequest: PagesFunction = async (context) => {
     // Process the request
     const response = await context.next(rewrittenRequest);
     
+    // If we're on the US domain and a static asset was requested but it returned HTML (fallback),
+    // it means the asset actually doesn't exist. Return a 404 instead of a MIME-crashing HTML response.
+    const contentType = response.headers.get('Content-Type') || '';
+    if (isStaticAsset && contentType.includes('text/html')) {
+      return new Response('Asset not found', { status: 404 });
+    }
+
     // Add security headers to the response to ensure Google Ads move through
     const newHeaders = new Headers(response.headers);
     // Note: We are already setting CSP in index.html, but if it's being blocked we can supplement here

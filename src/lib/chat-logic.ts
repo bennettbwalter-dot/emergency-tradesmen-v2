@@ -235,6 +235,10 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
 
 // ASYNC UPDATE: Returns Promise<{ newState, response }>
 export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
 
@@ -692,7 +696,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
         responseText = transition;
         action = 'navigate';
-        const countryPrefix = countryCode === 'US' ? '/us' : '';
+        const countryPrefix = (countryCode === 'US' && !isUSDomain) ? '/us' : '';
         target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
         newState.step = 'ROUTING';
     }
@@ -722,7 +726,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.locationConfirmed = true;
             newState.step = 'ROUTING';
 
-            const countryPrefix = countryCode === 'US' ? '/us' : '';
+            const countryPrefix = (countryCode === 'US' && !isUSDomain) ? '/us' : '';
             target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
             responseText = `${tip ? tip + ' ' : ''}Taking you to ${tradeName} in ${city} now.`;

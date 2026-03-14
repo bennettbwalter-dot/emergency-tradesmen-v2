@@ -1,5 +1,6 @@
 {
   "baseUrl": "https://emergencytradesmen.net",
+  "baseUrlUS": "https://emergencycontractors.net",
   "routes": {
     "home": "/",
     "contact": "/contact",

@@ -51,8 +51,10 @@ export default function BlogPostPage() {
     };
 
     const regionalizeText = (text: string) => {
-        if (!text || settings.countryCode !== 'US') return text;
-        return text
+        if (!text) return '';
+        const cleanText = text.replace(/^#+\s*/, '');
+        if (settings.countryCode !== 'US') return cleanText;
+        return cleanText
             .replace(/[\u2705]/g, '')
             .replace(/boilers/gi, 'furnaces')
             .replace(/Tradesmen/g, 'Contractors')
@@ -80,10 +82,31 @@ export default function BlogPostPage() {
             .replace(/London/g, 'Dallas')
             .replace(/Manchester/g, 'Houston')
             .replace(/Leeds/g, 'Chicago')
-            .replace(/�/g, '$')
+            .replace(/£/g, '$')
             .replace(/Kensington to Canary Wharf/g, 'Preston Hollow to Downtown')
             .replace(/Greater Manchester/g, 'Greater Houston')
             .replace(/West Yorkshire/g, 'Chicagoland');
+    };
+
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+
+    const regionalizeContent = (content: string) => {
+        let text = regionalizeText(content);
+        if (!text) return text;
+        if (isUSDomain) {
+            // Replace absolute UK links to US with clean US domain
+            text = text.replace(/https:\/\/emergencytradesmen\.net\/(us|usa)\//g, 'https://emergencycontractors.net/');
+            // Strip relative /us/ and /usa/ prefixes
+            text = text.replace(/href="\/(us|usa)\//g, 'href="/');
+            text = text.replace(/\[([^\]]+)\]\(\/(us|usa)\//g, '[$1](/');
+        } else if (settings.countryCode === 'US') {
+             // If on UK domain but US region, ensure /us/ prefix (standardization)
+             text = text.replace(/href="\/usa\//g, 'href="/us/');
+             text = text.replace(/\[([^\]]+)\]\(\/usa\//g, '[$1](/us/');
+        }
+        return text;
     };
 
     const AIOverviewBox = ({ content }: { content: string }) => (
@@ -125,7 +148,7 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to="/vetting-process" className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to={`${countryPrefix}/vetting-process`} className="text-muted-foreground hover:text-gold transition-colors">
                                         Our Vetting Standards (Rules & Regs)
                                     </Link>
                                 </li>
@@ -146,15 +169,15 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <MapPin className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to={isUK ? "/" : "/us"} className="text-muted-foreground hover:text-gold transition-colors">
-                                        Emergency Tradesmen Home
+                                    <Link to={isUK ? "/" : (isUSDomain ? "/" : "/us")} className="text-muted-foreground hover:text-gold transition-colors">
+                                        {isUSDomain ? "Emergency Contractors" : "Emergency Tradesmen Home"}
                                     </Link>
                                 </li>
                                 <li className="flex items-start gap-3 group">
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <ChevronRight className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to="/contact" className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to={`${countryPrefix}/contact`} className="text-muted-foreground hover:text-gold transition-colors">
                                         Contact Support Team
                                     </Link>
                                 </li>
@@ -351,9 +374,9 @@ export default function BlogPostPage() {
                 const isUSDomain = hostname.includes('emergencycontractors.net');
                 const baseUrl = isUSDomain ? "https://emergencycontractors.net" : "https://emergencytradesmen.net";
                 
-                const postUrl = isUSDomain && post.slug.endsWith('-us') 
-                    ? `${baseUrl}/blog/${post.slug}` 
-                    : `${baseUrl}/blog/${post.slug}`; // Path remains same on dedicated domain (stripped by middleware)
+                const postUrl = isUSDomain 
+                    ? `${baseUrl}/blog/${post.slug.replace(/-us$/, '')}` 
+                    : `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`;
                 
                 const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
 
@@ -396,16 +419,16 @@ export default function BlogPostPage() {
                     "image": imageUrl,
                     "author": {
                         "@type": "Organization",
-                        "name": regionalizeText("Emergency Tradesmen UK"),
+                        "name": isUSDomain ? "Emergency Contractors" : regionalizeText("Emergency Tradesmen UK"),
                         "url": baseUrl,
-                        "logo": `${baseUrl}/et-logo-v2.png`
+                        "logo": `${baseUrl}/${isUSDomain ? 'ec-logo-v2.png' : 'et-logo-v2.png'}`
                     },
                     "publisher": {
                         "@type": "Organization",
-                        "name": regionalizeText("Emergency Tradesmen UK"),
+                        "name": isUSDomain ? "Emergency Contractors" : regionalizeText("Emergency Tradesmen UK"),
                         "logo": {
                             "@type": "ImageObject",
-                            "url": `${baseUrl}/et-logo-v2.png`
+                            "url": `${baseUrl}/${isUSDomain ? 'ec-logo-v2.png' : 'et-logo-v2.png'}`
                         }
                     },
                     "datePublished": post.published_at,
@@ -413,11 +436,11 @@ export default function BlogPostPage() {
                     "isAccessibleForFree": "true",
                     "keywords": [
                         ...post.title.split(' ').filter(w => w.length > 3),
-                        post.slug.includes('carbon-monoxide') ? "Carbon Monoxide Safety, CO Poisoning Symptoms, Gas Safe Register, Emergency Plumber, HVAC Safety, Boiler Repair" : "",
-                        "emergency tradesmen",
+                        post.slug.includes('carbon-monoxide') ? (isUSDomain ? "CO Detector, Carbon Monoxide Safety, OSHA, EPA Section 608, HVAC Safety, Furnace Repair" : "Carbon Monoxide Safety, CO Poisoning Symptoms, Gas Safe Register, Emergency Plumber, HVAC Safety, Boiler Repair") : "",
+                        isUSDomain ? "emergency contractors" : "emergency tradesmen",
                         "home advice",
                         "DIY tips",
-                        "UK trades"
+                        isUSDomain ? "US contractors" : "UK trades"
                     ].filter(Boolean).join(', ')
                 };
 
@@ -464,9 +487,9 @@ export default function BlogPostPage() {
 
                 return (
                     <SEO
-                        title={`${regionalizeText(post.title)} | ${regionalizeText(isUSDomain ? "Emergency Contractors" : "Emergency Tradesmen UK")} Blog`}
+                        title={`${regionalizeText(post.title)} | ${isUSDomain ? "Emergency Contractors" : regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={regionalizeText(post.excerpt) || ""}
-                        canonical={isUSDomain ? `/blog/${post.slug}` : (settings.countryCode === 'GB' ? '' : '/us') + `/blog/${post.slug}`}
+                        canonical={isUSDomain ? `/blog/${post.slug.replace(/-us$/, '')}` : (settings.countryCode === 'GB' ? '' : '/us') + `/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={jsonLdSchemas}
@@ -508,7 +531,7 @@ export default function BlogPostPage() {
 
             <article>
                 {post.content.trim().startsWith('<') ? (
-                    <div dangerouslySetInnerHTML={{ __html: regionalizeText(post.content) }} />
+                    <div dangerouslySetInnerHTML={{ __html: regionalizeContent(post.content) }} />
                 ) : (
                     <>
                         {/* Hero Section - 16:9 Strict */}
@@ -529,7 +552,7 @@ export default function BlogPostPage() {
                                     <Badge className="mb-4 bg-gold/10 text-gold border-gold/20 hover:bg-gold/20 transition-colors uppercase tracking-widest text-[10px] px-3 py-1">
                                         Expert Guide
                                     </Badge>
-                                    <h1 className="text-[28px] md:text-[44px] font-body font-bold leading-[1.2] text-foreground mb-4 text-balance drop-shadow-sm">
+                                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-black leading-[1.1] mb-8 text-foreground tracking-tight drop-shadow-sm text-balance">
                                         {regionalizeText(post.title)}
                                     </h1>
                                     <div className="flex items-center justify-center gap-6 text-sm md:text-base text-muted-foreground">
@@ -617,7 +640,7 @@ export default function BlogPostPage() {
                                             const firstParagraph = lines[0];
                                             const isSnippet = firstParagraph && firstParagraph.length > 50 && firstParagraph.length < 500 && !firstParagraph.includes('##');
                                             if (isSnippet) {
-                                                const cleanedSnippet = firstParagraph.replace(/\*\*/g, '').replace(/_/g, '');
+                                                const cleanedSnippet = firstParagraph.replace(/^#+\s*/, '').replace(/\*\*/g, '').replace(/_/g, '');
                                                 processedMarkdown = lines.slice(1).join('\n\n');
                                                 // We'll render the AI Overview separately below
                                             }
@@ -637,7 +660,7 @@ export default function BlogPostPage() {
 
                                             return (
                                                 <>
-                                                    {isSnippet && <AIOverviewBox content={regionalizeText(firstParagraph.replace(/\*\*/g, '').replace(/_/g, ''))} />}
+                                                    {isSnippet && <AIOverviewBox content={regionalizeText(firstParagraph.replace(/^#+\s*/, '').replace(/\*\*/g, '').replace(/_/g, ''))} />}
 
                                                     {headings.length > 0 && (
                                                         <div className="bg-secondary/10 border border-border/50 rounded-xl p-6 md:p-8 mb-12 shadow-sm">
@@ -754,7 +777,7 @@ export default function BlogPostPage() {
                                                             ),
                                                         }}
                                                     >
-                                                        {regionalizeText(processedMarkdown)}
+                                                        {regionalizeContent(processedMarkdown)}
                                                     </ReactMarkdown>
 
                                                     {/* Render Structured Elements at the end of content area or where detected? 

@@ -12,18 +12,32 @@ interface SimpleThemeContextType {
 const SimpleThemeContext = createContext<SimpleThemeContextType | undefined>(undefined);
 
 export function SimpleThemeProvider({ children }: { children: React.ReactNode }) {
-    // Always default to dark mode for this premium app
-    const [theme, setTheme] = useState<Theme>('dark');
+    // Check for saved theme or determine default based on device type
+    const [theme, setThemeState] = useState<Theme>(() => {
+        const saved = typeof window !== 'undefined' ? localStorage.getItem('app-theme') as Theme : null;
+        if (saved) return saved;
+        
+        // Default to light for mobile, dark for desktop
+        if (typeof window !== 'undefined') {
+            return window.innerWidth < 768 ? 'light' : 'dark';
+        }
+        return 'dark';
+    });
 
     useEffect(() => {
-        // Check system preference or local storage if needed, but defaulting to dark for now
         const root = window.document.documentElement;
         root.classList.remove('light', 'dark');
         root.classList.add(theme);
     }, [theme]);
 
+    const setTheme = (newTheme: Theme) => {
+        localStorage.setItem('app-theme', newTheme);
+        setThemeState(newTheme);
+    };
+
     const toggleTheme = () => {
-        setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
     };
 
     return (

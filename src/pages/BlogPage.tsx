@@ -28,9 +28,17 @@ export default function BlogPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
+    const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+
     const regionalizeText = (text: string) => {
-        if (settings.countryCode !== 'US') return text;
-        return text
+        if (!text) return '';
+        const cleanText = text.replace(/^#+\s*/, '');
+        if (settings.countryCode !== 'US') return cleanText;
+        return cleanText
             .replace(/Tradesmen/g, 'Contractors')
             .replace(/tradesmen/g, 'contractors')
             .replace(/Tradesperson/g, 'Contractor')
@@ -57,16 +65,24 @@ export default function BlogPage() {
                 allData = data;
             }
 
-            // Filter DB posts to only show relevant regionalized ones
             const regionalData = allData.filter(p => {
-                // If it ends with -us or -gb, only show if it matches current region
-                if (p.slug.endsWith('-us')) return settings.countryCode === 'US';
-                if (p.slug.endsWith('-gb')) return settings.countryCode === 'GB';
+                const slug = p.slug.toLowerCase();
+                const isUSPost = slug.includes('-us-') || slug.endsWith('-us') || slug.includes('-usa-') || slug.endsWith('-usa');
+                const isUKPost = slug.includes('-gb-') || slug.endsWith('-gb') || slug.includes('-uk-') || slug.endsWith('-uk');
+
+                if (isUSPost) return settings.countryCode === 'US';
+                if (isUKPost) return settings.countryCode === 'GB';
+                
                 // If it's a general slug, check if a regionalized version exists in the data
-                const baseSlug = p.slug;
-                const hasRegionalVersion = allData.some(other =>
-                    other.slug === `${baseSlug}${countrySuffix}`
-                );
+                const baseSlug = slug.replace(/-us$|-usa$|-gb$|-uk$|-us-2026$|-uk-2026$/, '');
+                const hasRegionalVersion = allData.some(other => {
+                    const otherSlug = other.slug.toLowerCase();
+                    if (settings.countryCode === 'US') {
+                        return otherSlug.includes(`${baseSlug}-us`) || otherSlug.includes(`${baseSlug}-usa`);
+                    } else {
+                        return otherSlug.includes(`${baseSlug}-gb`) || otherSlug.includes(`${baseSlug}-uk`);
+                    }
+                });
                 return !hasRegionalVersion;
             });
 
@@ -87,9 +103,9 @@ export default function BlogPage() {
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={regionalizeText("The Dispatch | Emergency Tradesmen")}
+                title={regionalizeText(`The Dispatch | ${siteName}`)}
                 description={regionalizeText("Critical briefing: Expert advice, safety guides, and maintenance tips for homeowners.")}
-                canonical="/blog"
+                canonical={`${countryPrefix}/blog`}
             />
 
             {/* "Newspaper" Header Bar */}
@@ -142,8 +158,8 @@ export default function BlogPage() {
                                         Cover Story
                                     </Badge>
                                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
-                                        <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
-                                            {featuredPost.title}
+                                        <Link to={`${countryPrefix}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
+                                            {regionalizeText(featuredPost.title)}
                                         </Link>
                                     </h1>
                                     <p className="text-lg md:text-2xl text-white/90 max-w-2xl font-light leading-relaxed drop-shadow-md line-clamp-3">
@@ -152,7 +168,7 @@ export default function BlogPage() {
 
                                     <div className="flex items-center gap-4 pt-4">
                                         <Button asChild size="lg" className="h-14 px-8 text-lg bg-white text-black hover:bg-gold hover:text-black border-none rounded-none transition-all font-bold tracking-tight">
-                                            <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${featuredPost.slug}`}>
+                                            <Link to={`${countryPrefix}/blog/${featuredPost.slug}`}>
                                                 Read Article
                                             </Link>
                                         </Button>
@@ -189,14 +205,14 @@ export default function BlogPage() {
                                 return (
                                     <Link
                                         key={post.id}
-                                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`}
+                                        to={`${countryPrefix}/blog/${post.slug}`}
                                         className={`${colSpan} group flex flex-col gap-4 border-b border-border/30 pb-8`}
                                     >
                                         <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">
                                             {post.cover_image && (
                                                 <img
                                                     src={post.cover_image}
-                                                    alt={post.title}
+                                                    alt={regionalizeText(post.title)}
                                                     loading="lazy"
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                                                 />
@@ -212,7 +228,7 @@ export default function BlogPage() {
                                             </div>
 
                                             <h3 className={`font-display font-bold leading-tight group-hover:text-primary transition-colors ${isLarge ? 'text-3xl' : 'text-xl'}`}>
-                                                {post.title}
+                                                {regionalizeText(post.title)}
                                             </h3>
 
                                             <p className="text-muted-foreground line-clamp-3 leading-relaxed text-sm">

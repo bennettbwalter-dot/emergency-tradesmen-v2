@@ -9,8 +9,11 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 export default function LocationsDirectory() {
     const { settings } = useLocalization();
     const isUS = settings.countryCode === 'US';
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
     const targetCities = isUS ? usCities : cities;
-    const countryPrefix = isUS ? '/us' : '';
+    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
 
     // Group cities by first letter for better organization
     const groupedCities: Record<string, string[]> = {};
@@ -87,7 +90,7 @@ export default function LocationsDirectory() {
                                                     <li key={`${city}-${trade.slug}`}>
                                                         <Link
                                                             to={isUS
-                                                                ? `/us/${cityToState[city] || 'us'}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
+                                                                ? `${isUSDomain ? '' : '/us'}/${cityToState[city] || 'us'}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
                                                                 : `/emergency-${trade.slug}/${city.toLowerCase().replace(/ /g, '-')}`
                                                             }
                                                             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"
