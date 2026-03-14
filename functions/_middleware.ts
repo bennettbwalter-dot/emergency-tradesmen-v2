@@ -12,8 +12,12 @@ export const onRequest: PagesFunction = async (context) => {
     }
 
     // Silent rewrite: map internal /us/* to root /
-    // BUT EXCLUDE static assets (JS, CSS, images, etc.)
-    const isStaticAsset = path.includes('.') || path.startsWith('/assets/') || path.startsWith('/images/');
+    // BUT EXCLUDE ALL STATIC ASSETS to prevent MIME type crashes
+    const staticExtensions = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.woff', '.woff2', '.ttf', '.otf', '.json', '.xml', '.txt'];
+    const isStaticAsset = staticExtensions.some(ext => path.toLowerCase().endsWith(ext)) || 
+                          path.includes('/assets/') || 
+                          path.includes('/images/') ||
+                          path.includes('/cdn-cgi/');
     
     if (isStaticAsset) {
       return context.next();
@@ -24,7 +28,18 @@ export const onRequest: PagesFunction = async (context) => {
     
     // Create a new request with the rewritten URL
     const rewrittenRequest = new Request(newUrl.toString(), context.request);
-    return context.next(rewrittenRequest);
+    
+    // Process the request
+    const response = await context.next(rewrittenRequest);
+    
+    // Add security headers to the response to ensure Google Ads move through
+    const newHeaders = new Headers(response.headers);
+    // Note: We are already setting CSP in index.html, but if it's being blocked we can supplement here
+    
+    return new Response(response.body, {
+      ...response,
+      headers: newHeaders
+    });
   }
 
   // 2. UK Domain Protection (emergencytradesmen.net)
