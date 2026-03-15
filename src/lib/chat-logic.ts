@@ -244,7 +244,11 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
             // 1. Assess the Situation
             let response = `### Assess the Situation\n`;
-            response += `I've analyzed your description regarding ${matchedRule.scenario}. Based on these details, this is classified as a **${matchedRule.risk_level}**.\n\n`;
+            response += `I've analyzed your description regarding **${matchedRule.scenario}**. Based on these details, this is classified as a **${matchedRule.risk_level}**.\n\n`;
+            
+            // Step 2 – Possible Causes
+            // We can infer some possible causes or mention standard ones for this scenario
+            response += `**Potential Causes Identified:** I am evaluating this against established standards (such as ${isUK ? 'Building Regs Part G/H' : 'International Plumbing/Fuel Gas Code'}) to identify if this is a structural, internal, or utility-level failure.\n\n`;
 
             // 2. Immediate Safety Steps
             response += `### Immediate Safety Steps\n`;

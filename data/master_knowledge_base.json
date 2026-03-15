@@ -81,21 +81,21 @@
   },
   {
     "trade": "electrician",
-    "scenario": "Exposed live wires found during DIY or damage",
+    "scenario": "Live wires exposed or burning smell from sockets",
     "risk_level": "Critical emergency",
-    "action_plan": "DO: Isolate power at the main consumer unit/breaker panel immediately and keep people away. DO NOT: Touch the wires even if you think the switch is off; do not cover with tape.",
+    "action_plan": "DO: Isolate power at the main consumer unit/breaker panel immediately using safe isolation procedures. DO NOT: Touch the wires even if power appears off; do not attempt DIY repairs on live circuits.",
     "region_data": [
       {
         "region": "UK",
-        "authority_name": "Health and Safety Executive (HSE)",
-        "authority_url": "https://www.hse.gov.uk/",
-        "search_query_to_scrape": "HSE Electricity at Work Regulations 1989 exposed conductors"
+        "authority_name": "HSE / Electricity at Work Regulations 1989",
+        "authority_url": "https://www.hse.gov.uk/pubns/priced/hsr25.pdf",
+        "search_query_to_scrape": "HSE safe isolation procedures and NICEIC competent person scheme"
       },
       {
         "region": "US",
-        "authority_name": "OSHA",
+        "authority_name": "OSHA Electrical Standards",
         "authority_url": "https://www.osha.gov/",
-        "search_query_to_scrape": "OSHA electrical safety exposed wiring standards"
+        "search_query_to_scrape": "OSHA electrical safety exposed wiring and lockout tagout"
       }
     ]
   },
@@ -121,21 +121,21 @@
   },
   {
     "trade": "gas-engineer",
-    "scenario": "Strong smell of gas in the property",
+    "scenario": "Gas leak or strong smell of gas",
     "risk_level": "Critical emergency",
-    "action_plan": "DO: Open all windows and doors; turn off the emergency control valve at the meter; evacuate immediately. DO NOT: Turn light switches on/off, smoke, or use a mobile phone inside.",
+    "action_plan": "DO: Open all windows/doors immediately; turn off the emergency control valve at the meter; vacate the premises. DO NOT: Use electrical switches, smoke, or use mobile phones inside. Safety note: Incomplete combustion (yellow flame) indicates deadly Carbon Monoxide.",
     "region_data": [
       {
         "region": "UK",
-        "authority_name": "Gas Safe Register",
+        "authority_name": "Gas Safe Register / UK Gas Safety Regs",
         "authority_url": "https://www.gassaferegister.co.uk/",
-        "search_query_to_scrape": "Gas Safe Register emergency gas leak procedure"
+        "search_query_to_scrape": "Gas Safe Register emergency gas leak and IGEM standards"
       },
       {
         "region": "US",
-        "authority_name": "National Fuel Gas Code (NFPA 54)",
+        "authority_name": "NFPA 54 (National Fuel Gas Code)",
         "authority_url": "https://www.nfpa.org/",
-        "search_query_to_scrape": "NFPA 54 gas leak evacuation and shutoff procedure"
+        "search_query_to_scrape": "NFPA 54 gas leak evacuation and pressure testing protocol"
       }
     ]
   },
@@ -201,21 +201,21 @@
   },
   {
     "trade": "locksmith",
-    "scenario": "UPVC or composite multipoint door won't lock",
-    "risk_level": "Urgent repair",
-    "action_plan": "DO: Secure the property from the inside if possible and call a locksmith to realign hinges or replace the gearbox. DO NOT: Force the handle up with heavy pressure, as this will shatter the gearbox mechanism.",
+    "scenario": "Broken lock or burglary repair (uPVC/Timber doors)",
+    "risk_level": "Urgent Security Repair",
+    "action_plan": "DO: Secure the property immediately. For timber doors, ensure BS 3621 certified locks are used. For uPVC doors, upgrade to SS 312 Diamond cylinders to prevent lock snapping. DO NOT: Compromise fire escape routes by adding non-compliant locks.",
     "region_data": [
       {
         "region": "UK",
-        "authority_name": "Secured by Design",
-        "authority_url": "https://www.securedbydesign.com/",
-        "search_query_to_scrape": "Secured by Design PAS 24 multipoint lock failure and security"
+        "authority_name": "Master Locksmiths Association (MLA)",
+        "authority_url": "https://www.locksmiths.co.uk/",
+        "search_query_to_scrape": "MLA guidelines BS 3621 timber locks and SS 312 Diamond anti-snap cylinder"
       },
       {
         "region": "US",
-        "authority_name": "BHMA",
-        "authority_url": "https://buildershardware.com/",
-        "search_query_to_scrape": "BHMA multi-point locking hardware alignment and failure"
+        "authority_name": "ALOA Security Professionals",
+        "authority_url": "https://www.aloa.org/",
+        "search_query_to_scrape": "ALOA high security cylinder standards and lock snapping prevention"
       }
     ]
   },

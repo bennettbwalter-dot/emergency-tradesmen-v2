@@ -21,19 +21,11 @@ export const KNOWLEDGE_BASE_DATA: Record<string, TradeKnowledge> = {
         safety_tips: [
             "⚠️ Buzzing Fuse Box? Turn off main switch immediately.",
             "⚠️ Fishy Smell? Indicates overheating. Isolate circuit.",
-            "⚠️ Water & Electricity? Never touch switches with wet hands."
+            "⚠️ Water & Electricity? Never touch switches with wet hands.",
+            "⚠️ HSE Warning: Assume all equipment is live until safe isolation is proven."
         ],
         qa: [
-            { q: "My fuse box is making a buzzing noise, is this dangerous?", a: "Yes. A buzzing consumer unit often indicates a loose connection or arcing. This is a fire hazard. Turn off the main switch immediately and call an emergency electrician." },
-            { q: "There is a fishy smell near my sockets, what is it?", a: "A fishy smell is a classic sign of overheating electrical components (burning plastic/bakelite). Isolate the circuit immediately and call an electrician." },
-            { q: "What should I do if my RCD keeps tripping?", a: "Unplug all appliances. Reset the RCD. If it stays on, plug items back in one by one. If it trips with nothing connected, it's a wiring fault." },
-            { q: "I drilled through a wall and hit a wire, what now?", a: "Do not touch the drill or the wall. Go to your consumer unit and turn off the main switch immediately." },
-            { q: "Why are my lights flickering?", a: "Could be a loose connection or external grid issue. If sparking/smoking, turn off power. If general, call an electrician." },
-            { q: "My plug socket feels hot to the touch.", a: "Stop using it immediately. Indicates loose wiring/high resistance. Fire risk." },
-            { q: "What do I do if I see sparks coming from an outlet?", a: "Turn off power at the main consumer unit immediately. Do not use water." },
-            { q: "What is the emergency number for a power cut?", a: "Dial 105 to contact your local network operator." },
-            { q: "Can I do my own electrical work?", a: "Minor work is allowed, but bathrooms/kitchens are special locations (Part P). Major work needs certification." },
-            { q: "What is an EICR?", a: "Electrical Installation Condition Report. Mandatory for landlords (5 years), recommended for owners (10 years)." }
+            { q: "What are the safe isolation procedures?", a: "Safe isolation involves locking off the circuit and using a voltage tester to verify it is dead. This is mandated by the Electricity at Work Regulations 1989." }
         ]
     },
 
@@ -41,19 +33,22 @@ export const KNOWLEDGE_BASE_DATA: Record<string, TradeKnowledge> = {
         safety_tips: [
             "⚠️ Burst Pipe? Turn off main stopcock (usually under sink).",
             "⚠️ Frozen Pipe? Thaw slowly. NEVER use naked flame.",
-            "⚠️ Gas Smell? Open windows, evacuate, call 0800 111999."
+            "⚠️ Gas Smell? Open windows, evacuate, call 0800 111999.",
+            "⚠️ Building Regs: Follow Approved Document G for hot water safety."
         ],
         qa: [
-            { q: "Where is my stopcock usually located?", a: "Usually under the kitchen sink, downstairs cloakroom, or under the stairs." },
-            { q: "What is the first thing to do if a pipe bursts?", a: "Turn off the main stopcock immediately. Then open all taps to drain the system." },
-            { q: "How do I thaw a frozen pipe?", a: "Turn off water. Apply gentle heat (hairdryer/hot water bottle) starting from the tap end. No naked flames." },
-            { q: "Why is my boiler pressure dropping?", a: "Likely a leak or faulty relief valve. You may need to use the filling loop to repressurize." },
-            { q: "My radiator is cold at the top.", a: "Air is trapped. Bleed the radiator with a key until water trickles out." },
-            { q: "My radiator is cold at the bottom.", a: "Indicates sludge build-up. System likely needs a power flush." },
-            { q: "Hot water smells like rotten eggs.", a: "Bacteria in the tank or corroded anode rod. Needs flushing/servicing." },
-            { q: "How do I fix a dripping tap?", a: "Usually needs a new washer. Isolate water, unscrew headgear, replace washer." },
-            { q: "What counts as a plumbing emergency?", a: "Uncontainable leaks, total water loss, ceiling collapse risk, or sewage backup." },
-            { q: "My shower runs hot then cold.", a: "Blocked head, failing thermostatic cartridge, or pressure drops from other taps." }
+            { q: "Where is my stopcock usually located?", a: "Usually under the kitchen sink, downstairs cloakroom, or under the stairs." }
+        ]
+    },
+
+    "GAS": {
+        safety_tips: [
+            "⚠️ Gas Smell? Turn off supply at meter control, ventilate, and vacate.",
+            "⚠️ NFPA 54 / IGEM: Direct all gas leak and pressure testing to certified engineers.",
+            "⚠️ Yellow Flame? Indicates carbon monoxide risk. Stop using appliance immediately."
+        ],
+        qa: [
+            { q: "What is NFPA 54?", a: "It is the National Fuel Gas Code (US) which provides safety rules for the installation and operation of fuel gas piping and appliances." }
         ]
     },
 
@@ -78,18 +73,12 @@ export const KNOWLEDGE_BASE_DATA: Record<string, TradeKnowledge> = {
         safety_tips: [
             "⚠️ Locked Out? Verify ID of locksmith.",
             "⚠️ Lost Keys? Change locks to ensure security.",
-            "⚠️ Burglary? Board up immediately."
+            "⚠️ Burglary? Board up immediately and upgrade to BS 3621 or SS 312 standards.",
+            "⚠️ Fire Safety: Ensure locks do not compromise your ability to escape quickly."
         ],
         qa: [
-            { q: "Will you break my door to get in?", a: "No. Pros prioritize Non-Destructive Entry (picking/bypassing). Drilling is a last resort." },
-            { q: "My key snapped in the lock.", a: "We use extractor tools to remove it. Don't use glue." },
-            { q: "What is Lock Snapping?", a: "A burglary technique on euro-cylinders. Upgrade to Anti-Snap (3-star) locks." },
-            { q: "How much does it cost?", a: "Ask for a quote upfront. Avoid 'starts from £39' offers (often scams)." },
-            { q: "uPVC handle won't lift.", a: "Multi-point gearbox failure. Can be replaced without a new door." },
-            { q: "Do you ask for ID?", a: "Yes, to verify you live there and prevent assisting burglaries." },
-            { q: "Key turns but door won't open.", a: "Mechanism/cam has sheared. Needs professional opening." },
-            { q: "Change locks when moving house?", a: "Yes. You don't know who has old keys." },
-            { q: "Can you open a safe?", a: "Yes, via picking or manipulation." }
+            { q: "What lock do I need for a timber door?", a: "The Master Locksmiths Association (MLA) recommends BS 3621 certified locks for timber doors to meet insurance and security standards." },
+            { q: "What is an anti-snap cylinder?", a: "For uPVC doors, an SS 312 Diamond rated cylinder is the highest standard to prevent lock snapping attacks." }
         ]
     },
 
