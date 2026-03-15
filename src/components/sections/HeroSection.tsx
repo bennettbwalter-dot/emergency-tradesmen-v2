@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { HelpCircle } from "lucide-react";
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
@@ -11,9 +11,24 @@ import ColorBends from "@/components/ui/ColorBends";
 import { audioService } from "@/lib/audioService";
 
 export function HeroSection() {
-    const { settings } = useLocalization();
+    const { settings, detectedCity, detectedState, detectUserLocation } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
     const location = useLocation();
+
+    // Trigger location detection on mount if not already done
+    useEffect(() => {
+        detectUserLocation();
+    }, [detectUserLocation]);
+
+    // Priority: 
+    // 1. detectedState (USA)
+    // 2. detectedCity (UK)
+    // 3. Fallback to 'ME'
+    const regionName = settings.countryCode === 'US' 
+        ? (detectedState || 'ME')
+        : (detectedCity || 'ME');
+
+    const displayRegion = regionName.toUpperCase();
 
     return (
         <section className="relative block overflow-hidden">
@@ -65,9 +80,12 @@ export function HeroSection() {
                     </motion.div>
 
                     {/* Main headline */}
-                    <h1 className="mb-0 font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-foreground mb-4 md:whitespace-nowrap">
-                        LOCAL <span className="text-gold">{settings.tradeTerm.toUpperCase()} NEAR ME</span>
-                    </h1>
+                    <div className="flex flex-col items-center justify-center mb-6">
+                        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.1]">
+                            LOCAL <span className="text-gold block sm:inline">{settings.tradeTerm.toUpperCase()}</span>
+                            <span className="text-gold block sm:inline"> NEAR {displayRegion}</span>
+                        </h1>
+                    </div>
 
                     {/* Tagline */}
                     <motion.p

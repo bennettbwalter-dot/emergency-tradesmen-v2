@@ -1,3 +1,5 @@
+import { supabase } from './supabase';
+import { pipeline } from '@xenova/transformers';
 
 // Structure for knowledge data
 interface TradeKnowledge {
@@ -197,4 +199,57 @@ export function searchKnowledgeBase(query: string): string | null {
     }
 
     return output.trim();
+}
+
+// Local embedder instance for browser-side RAG
+let embedder: any = null;
+
+/**
+ * Generates an embedding for a query locally in the browser (Free!)
+ */
+async function getQueryEmbedding(text: string): Promise<number[]> {
+    if (!embedder) {
+        console.log('[KnowledgeBase] Loading local embedding model (all-MiniLM-L6-v2)...');
+        embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    }
+    const output = await embedder(text, { pooling: 'mean', normalize: true });
+    return Array.from(output.data);
+}
+
+/**
+ * Searches the Supabase vector database using local embeddings.
+ * @param query The user's question
+ * @param region 'UK' or 'US'
+ */
+export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'US'): Promise<any | null> {
+    try {
+        console.log(`[KnowledgeBase] Searching vector DB for: "${query}" in region: ${region}`);
+        
+        // 1. Generate embedding locally
+        const embedding = await getQueryEmbedding(query);
+
+        // 2. Call the Supabase RPC function
+        const { data, error } = await supabase.rpc('match_trade_rules', {
+            query_embedding: embedding,
+            match_threshold: 0.5, // 50% similarity threshold
+            match_count: 3,       // Return top 3 matches
+            filter_region: region
+        });
+
+        if (error) {
+            console.error('[KnowledgeBase] Vector search error:', error);
+            return null;
+        }
+
+        if (!data || data.length === 0) {
+            console.log('[KnowledgeBase] No relevant vector matches found.');
+            return null;
+        }
+
+        // 3. Return the raw best match
+        return data[0];
+    } catch (err) {
+        console.error('[KnowledgeBase] searchVectorKnowledgeBase failed:', err);
+        return null;
+    }
 }

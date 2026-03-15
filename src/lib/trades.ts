@@ -14,6 +14,7 @@ export const trades = [
 
 import usCityList from './us_cities.json';
 import { cityPostcodes } from './cityPostcodes';
+import { US_STATES } from './us_states';
 
 // Enforce US-only cities
 const getReferencedCities = (data: any): string[] => {
@@ -406,4 +407,22 @@ function generateFAQs(trade: Trade, city: City, isUS: boolean, priceRange: strin
   ];
 
   return baseFAQs;
+}
+
+export const VALID_STATE_SLUGS = US_STATES.map(s => s.slug);
+
+export function getCitiesForState(stateSlug: string): string[] {
+  const state = (usCityList as any).states.find((s: any) => s.slug === stateSlug.toLowerCase());
+  if (!state) return [];
+
+  const cities: string[] = [];
+  state.metros.forEach((metro: any) => {
+    metro.cities.forEach((city: any) => {
+      cities.push(city.name);
+      if (city.suburbs) {
+        city.suburbs.forEach((sub: any) => cities.push(sub.name));
+      }
+    });
+  });
+  return Array.from(new Set(cities)).sort();
 }

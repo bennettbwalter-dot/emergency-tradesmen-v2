@@ -103,9 +103,10 @@ export async function fetchBusinesses(
     trade: string,
     city: string,
     countryCode: string = 'GB',
-    userCoords?: { latitude: number, longitude: number }
+    userCoords?: { latitude: number, longitude: number },
+    state?: string
 ): Promise<Business[]> {
-    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
+    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, state=${state}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
 
     // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
     const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
@@ -137,6 +138,17 @@ export async function fetchBusinesses(
         .select('*, business_photos(*)')
         .in('trade', uniqueTrades)
         .eq('country_code', countryCode.toUpperCase());
+
+    // OPTIMIZATION: State-level query (New)
+    if (state && countryCode.toUpperCase() === 'US') {
+        const { getCitiesForState } = await import('./trades');
+        const stateCities = getCitiesForState(state);
+        if (stateCities.length > 0) {
+            console.log(`[fetchBusinesses] State query for ${state}: searching in ${stateCities.length} cities`);
+            query = query.in('city', stateCities);
+            searchCity = ""; // Suppress further city filtering
+        }
+    }
 
     // OPTIMIZATION: Direct City Match First (Fastest)
     if (searchCity && searchCity.trim() !== '') {

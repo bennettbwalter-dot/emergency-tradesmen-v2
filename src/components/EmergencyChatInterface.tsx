@@ -443,17 +443,16 @@ export function EmergencyChatInterface() {
             detectUserLocation();
             setIsRequestingLocation(false);
         } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
-            const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
-
             if (locationRecord && locationRecord.path_slugs) {
                 const { state, metro, city, suburb } = locationRecord.path_slugs;
                 const hasSuburb = suburb && suburb.trim().length > 0;
+                // US Redirection Fix: Never use /us prefix.
                 const newPath = hasSuburb
-                    ? `/us/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
-                    : `/us/${state}/${metro}/${city}/emergency-${detectedTrade}`;
+                    ? `/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
+                    : `/${state}/${metro}/${city}/emergency-${detectedTrade}`;
                 navigate(newPath);
             } else {
-                navigate(`${countryPrefix}/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
+                navigate(`/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
             }
         } else {
             handleUserMessage(input);

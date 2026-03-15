@@ -58,6 +58,7 @@ export interface Business {
     header_image_url?: string;
     vehicle_image_url?: string;
     postalCode?: string;
+    contact_name?: string;
     social_links?: SocialLinks;
     latitude?: number;
     longitude?: number;

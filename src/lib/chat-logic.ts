@@ -1,64 +1,46 @@
 import { trades, cities, usCities } from "@/lib/trades";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
+import { searchVectorKnowledgeBase } from "@/lib/knowledge-base";
 
 // FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
-// Maps common mistranscriptions/phonetic approximations to the correct trade slug
 const FUZZY_TRADE_MATCHES: Record<string, string> = {
-    // Electrician mishearings
     'election': 'electrician', 'electrition': 'electrician', 'electrishin': 'electrician',
     'electron': 'electrician', 'electriction': 'electrician', 'electrian': 'electrician',
     'elektrician': 'electrician', 'electrishian': 'electrician', 'lectric': 'electrician',
     'lectrician': 'electrician', 'elec': 'electrician',
-    // Plumber mishearings
     'plumb': 'plumber', 'plumba': 'plumber', 'plummer': 'plumber', 'plumer': 'plumber',
     'plumbing': 'plumber', 'plomber': 'plumber', 'plam': 'plumber',
-    // Locksmith mishearings
     'lock smith': 'locksmith', 'loxmith': 'locksmith', 'locksmif': 'locksmith',
     'locks mith': 'locksmith', 'lock me out': 'locksmith', 'locked me out': 'locksmith',
-    // Glazier mishearings
     'glazer': 'glazier', 'glacier': 'glazier', 'glasier': 'glazier', 'glaser': 'glazier',
     'glass man': 'glazier', 'glass repair': 'glazier', 'window man': 'glazier',
-    // Gas engineer mishearings
     'gas man': 'gas-engineer', 'gasman': 'gas-engineer', 'gas person': 'gas-engineer',
     'gas fitter': 'gas-engineer', 'gas engineer': 'gas-engineer',
-    // Roofer mishearings
     'roof': 'roofer', 'roofing': 'roofer', 'roofa': 'roofer', 'rufar': 'roofer',
     'roofa man': 'roofer', 'roof man': 'roofer', 'roof repair': 'roofer',
-    // Builder mishearings
     'build': 'builder', 'builded': 'builder', 'building': 'builder', 'bilda': 'builder',
-    // Drain mishearings
     'drane': 'drain-specialist', 'drains': 'drain-specialist', 'drainage': 'drain-specialist',
     'drain man': 'drain-specialist', 'blocked drain': 'drain-specialist',
-    // Breakdown mishearings
     'break down': 'breakdown', 'brake down': 'breakdown', 'car help': 'breakdown',
     'car trouble': 'breakdown', 'car problem': 'breakdown',
-    // Air conditioning mishearings
     'air con': 'air-conditioning', 'aircon': 'air-conditioning', 'a c': 'air-conditioning',
     'air conditioner': 'air-conditioning', 'cooling': 'air-conditioning',
-    // Water restoration mishearings
     'water damage': 'water-restoration', 'flood damage': 'water-restoration',
     'water cleanup': 'water-restoration',
 };
 
-/**
- * Fuzzy trade detection: checks if the message contains any known
- * mistranscription of a trade name (for voice/STT inputs).
- */
 function fuzzyTradeDetect(msg: string): string | null {
     const lower = msg.toLowerCase();
-    // Sort by key length (longest first) to prioritize more specific matches
     const sortedKeys = Object.keys(FUZZY_TRADE_MATCHES).sort((a, b) => b.length - a.length);
     for (const fuzzyKey of sortedKeys) {
         if (lower.includes(fuzzyKey)) {
-            console.log(`[chat-logic] Fuzzy trade match: "${fuzzyKey}" → ${FUZZY_TRADE_MATCHES[fuzzyKey]}`);
             return FUZZY_TRADE_MATCHES[fuzzyKey];
         }
     }
     return null;
 }
 
-// DETAILED EMERGENCY SCRIPTS: Actionable safety steps for each trade.
 const SAFETY_TIPS: Record<string, string> = {
     'gas-engineer': "Extinguish all flames, open all windows, and turn off the gas meter lever. Do not touch any electrical switches and leave the property immediately.",
     'electrician': "Turn off the main power at your fuse box if safe. If you smell burning plastic, avoid all switches and outlets.",
@@ -90,27 +72,20 @@ export interface ChatMessage {
     target?: string;
 }
 
-// HIGHEST PRIORITY: Gas Emergency Keywords (override everything)
 const GAS_EMERGENCY_KEYWORDS = [
-    'gas', // Standalone - any mention of gas likely needs gas engineer
-    'gas smell', 'smell of gas', 'gas leak', 'hissing sound',
+    'gas', 'gas smell', 'smell of gas', 'gas leak', 'hissing sound',
     'carbon monoxide', 'co alarm', 'boiler gas', 'pilot light out',
     'gas boiler not working', 'gas meter', 'emergency gas', 'gas safety',
     'carbon monoxide alarm', 'fumes', 'dizziness', 'headache'
 ];
 
-// Life-threatening danger keywords (999 override)
 const DANGER_KEYWORDS = [
     'fire', 'flames', 'smoke', 'explosion', 'attack', 'break in',
     'unconscious', 'not breathing', 'severe injury'
 ];
 
-// Comprehensive trade-specific keywords
 const TRADE_KEYWORDS: Record<string, string[]> = {
-    'gas-engineer': [
-        ...GAS_EMERGENCY_KEYWORDS,
-        'gas engineer', 'gas safe', 'gas certificate'
-    ],
+    'gas-engineer': [...GAS_EMERGENCY_KEYWORDS, 'gas engineer', 'gas safe', 'gas certificate'],
     'plumber': [
         'burst pipe', 'leaking pipe', 'water leak', 'flooding',
         'no hot water', 'low water pressure', 'radiator leak',
@@ -172,92 +147,66 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'roof repair', 'roof inspection', 'roof', 'tiles', 'chimney', 'leak from above'
     ],
     builder: [
-        // Structural & Wall
+        'wall', 'timber', 'stud wall', 'partition', 'structural', 'beam', 'joist',
         'cracked wall', 'wall cracking', 'internal wall crack', 'external wall crack',
         'ceiling crack', 'ceiling collapsed', 'wall collapsed', 'structural damage',
         'building damage', 'house damage', 'property damage', 'subsidence',
         'sinking floor', 'uneven floor', 'foundation issue', 'support beam',
-
-        // Carpentry & Woodwork
         'carpenter', 'carpentry work', 'woodwork', 'timber repair',
         'wooden frame repair', 'door frame broken', 'door frame loose',
         'window frame damaged', 'skirting board loose', 'skirting board fallen',
         'architrave loose', 'bannister loose', 'handrail broken', 'stairs damaged',
-
-        // Doors, Cupboards & Fittings
         'cupboard fallen', 'cupboard hanging off wall', 'kitchen unit fallen',
         'wall cabinet fallen', 'shelf fallen', 'shelving repair',
         'fitted wardrobe broken', 'wardrobe collapsed', 'door not closing properly',
         'door off hinges', 'internal door repair',
-
-        // General Building & Maintenance
         'builder', 'general builder', 'building work', 'maintenance work',
         'property maintenance', 'home maintenance', 'house repair',
         'general repair', 'emergency repair', 'damage repair',
-
-        // Brickwork & Masonry
         'brickwork repair', 'bricks loose', 'bricks fallen', 'brick wall repair',
         'damaged brickwork', 'repointing', 'pointing repair', 'masonry repair',
-
-        // Floors, Ceilings & Plaster
         'floor damaged', 'floor collapsed', 'floor repair', 'ceiling repair',
         'plaster cracked', 'plaster fallen', 'hole in wall', 'hole in ceiling',
         'wall repair'
     ],
     'air-conditioning': [
-        // Primary keywords
         'air conditioning', 'air con', 'ac', 'air con repair', 'air con installation',
-        // Long-tail
         'air conditioning not working', 'air con not blowing cold air', 'air conditioner broken',
         'air con leaking water inside', 'air conditioning repair near me', 'emergency air conditioning repair',
         'same day air con repair', 'air conditioning service company', 'air con servicing near me',
         'ac not cooling properly', 'air conditioner making noise', 'air con stopped working suddenly',
         'commercial air conditioning repair',
-        // Conversational
         'my air con is not working', 'no cold air coming out', 'air conditioning has stopped',
         'air con leaking water', 'air conditioner broken', 'the air con won\'t turn on'
     ],
     'water-restoration': [
-        // Primary keywords
         'water restoration', 'water damage', 'flood damage', 'flooded house', 'water cleanup', 'water extraction',
-        // Long-tail
         'emergency water restoration near me', 'flooded house emergency help', 'water damage cleanup company',
         'burst pipe water damage repair', 'ceiling collapsed from water leak', 'storm water damage repair',
         'sewage flood cleanup service', 'water damage restoration company near me', '24 hour emergency water damage service',
         'water extraction after flood', 'wet carpets after flooding', 'structural drying after flood',
         'dehumidifier service after water leak', 'insurance water damage cleanup',
-        // Conversational
         'my house is flooded', 'water is everywhere', 'ceiling is leaking badly',
         'pipe burst and flooded my home', 'toilet overflowed everywhere', 'rain flooded my house',
         'water coming through the ceiling'
     ]
 };
 
-// ASYNC UPDATE: Returns Promise<{ newState, response }>
 export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
 
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
+    newState.step = currentState.step;
 
-    // Reset navigation signals for new message processing
-    newState.step = currentState.step; // Preserve step by default
-
-    // Use appropriate city list based on country
     const activeCities = countryCode === 'US' ? usCities : cities;
-    // Sort by length (longest first) to prioritize more specific matches like "Newcastle upon Tyne" over "Newcastle"
     const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
 
-    // CRITICAL: When we're already mid-conversation (asking for location or confirming),
-    // the user's input is a RESPONSE to our question, NOT a new navigation command.
-    // Skip ALL navigation handlers and go straight to state machine processing.
     const isAwaitingResponse = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION' || currentState.step === 'TRADE_CHECK';
 
-    console.log(`[chat-logic] Processing "${message}" | step: ${currentState.step} | trade: ${currentState.detectedTrade} | city: ${currentState.detectedCity} | awaitingResponse: ${isAwaitingResponse}`);
-
-    // 1. DANGER CHECK (Always active — safety override)
+    // 1. DANGER CHECK
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
         return {
             newState,
@@ -269,17 +218,66 @@ export async function processUserMessage(message: string, currentState: ChatStat
         };
     }
 
-    // TRADE KEYWORD PRESENCE CHECK
-    // If the message contains ANY trade-related keywords, skip navigation/help handlers
-    // and go straight to trade detection. This prevents "I need help, my gas is leaking"
-    // from triggering the help handler instead of detecting gas-engineer.
-    const ALL_TRADE_KEYWORDS = Object.values(TRADE_KEYWORDS).flat();
-    const hasTradeKeywords = ALL_TRADE_KEYWORDS.some(k => lowerMsg.includes(k)) ||
-        GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k));
+    // 2. RAG PRIORITY CHECK
+    const isQuestion = lowerMsg.includes('?') || 
+                     (lowerMsg.includes('can i') || lowerMsg.includes('should i') || lowerMsg.includes('how to') || lowerMsg.includes('tell me about'));
+    const isDescriptive = lowerMsg.split(' ').length > 8;
 
-    // 2. GENERAL PAGE NAVIGATION — only when NOT describing an emergency AND NOT mid-conversation
-    // When we're awaiting a location/trade response, the user's message should be treated
-    // as an answer to our question, not a navigation command (e.g., "Bath" is a city, not a nav keyword)
+    if (!isAwaitingResponse && (isQuestion || isDescriptive || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe'))) {
+        const region = isUSDomain ? 'US' : 'UK';
+        const matchedRule = await searchVectorKnowledgeBase(message, region);
+
+        if (matchedRule) {
+            const isUK = region === 'UK';
+            const termMain = isUK ? 'mains' : 'main breaker';
+            
+            // 1. Direct Answer (Persona Step 1)
+            // If the user asked "right?" or similar, and we have a "DO NOT" that contradicts it, be firm.
+            let directAnswer = "";
+            const lowerPlan = matchedRule.action_plan.toLowerCase();
+            const containsDoNot = matchedRule.action_plan.includes("DO NOT:");
+            const doNotSection = containsDoNot ? matchedRule.action_plan.split("DO NOT:")[1].split(".")[0].trim() : "";
+            
+            if (lowerMsg.includes("right?") || lowerMsg.includes("correct?") || lowerMsg.includes("don't i")) {
+                if (doNotSection && (doNotSection.toLowerCase().includes("assume") || doNotSection.toLowerCase().includes("ignore"))) {
+                    directAnswer = `Actually, that is not correct or safe to assume. `;
+                }
+            }
+            
+            let expertResponse = `I understand you're asking about ${matchedRule.scenario}. ${directAnswer}I can certainly help you with the correct safety procedures.\n\n`;
+            expertResponse += `🚨 **Risk Level:** This is a **${matchedRule.risk_level}**.\n\n`;
+            expertResponse += `🛡️ **Safety Instructions:**\n${matchedRule.action_plan}\n\n`;
+            expertResponse += `🔧 **Professional Fix:** You need a qualified **${matchedRule.trade} ${isUK ? 'Tradesman' : 'Contractor'}** to resolve this safely. Do not attempt to fix this yourself if it involves ${termMain} or structural issues.\n\n`;
+            expertResponse += `📚 **Official Guidance:** This advice is based on standards from the **${matchedRule.authority_name}**. For more details, see their official documentation: [${matchedRule.authority_url}](${matchedRule.authority_url})`;
+
+            newState.detectedTrade = matchedRule.trade;
+            // If we don't have a city, we MUST ask for it now instead of just giving advice and stopping.
+            // FOR US: strictly enforce location check to avoid routing to London default.
+            if (!newState.detectedCity) {
+                newState.step = 'LOCATION_CHECK';
+                const locationPrompt = countryCode === 'US' ? "What city or zip code are you in?" : "Which city or postcode are you in?";
+                expertResponse += `\n\nTo find the nearest emergency **${matchedRule.trade}** for you, ${locationPrompt}`;
+            }
+
+            return {
+                newState,
+                response: {
+                    id: Date.now().toString(),
+                    role: 'assistant',
+                    content: expertResponse
+                }
+            };
+        }
+    }
+
+    // 3. KEYWORD DETECTION (Word Boundaries)
+    const ALL_TRADE_KEYWORDS = Object.values(TRADE_KEYWORDS).flat();
+    const hasTradeKeywords = ALL_TRADE_KEYWORDS.some(k => {
+        const regex = new RegExp(`\\b${k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\b`, 'i');
+        return regex.test(lowerMsg);
+    }) || GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k));
+
+    // 4. NAVIGATION
     if (!hasTradeKeywords && !isAwaitingResponse) {
         if (lowerMsg.includes('blog') || lowerMsg.includes('news')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening the Blog.", action: 'navigate', target: '/blog' } };
         if (lowerMsg.includes('about')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening About Us.", action: 'navigate', target: '/about' } };
@@ -287,30 +285,26 @@ export async function processUserMessage(message: string, currentState: ChatStat
         if (lowerMsg.includes('sign up') || lowerMsg.includes('join') || lowerMsg.includes('register')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Tradesmen Sign Up.", action: 'navigate', target: '/tradesmen' } };
         if (lowerMsg.includes('home') || lowerMsg.includes('start')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Taking you Home.", action: 'navigate', target: '/' } };
 
-        // GUIDANCE / BLOG MODE (Specific Safety Qs)
-        if (lowerMsg.includes('what should i do') || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe') || lowerMsg.includes('how to')) {
+        if (lowerMsg.includes('what should i do') || lowerMsg.includes('stay safe') || lowerMsg.includes('emergency guide')) {
             return {
                 newState,
                 response: {
                     id: Date.now().toString(),
                     role: 'assistant',
-                    content: "Your safety is priority. I can show you step-by-step emergency guides.",
+                    content: "Your safety is priority. I'm searching my knowledge base... If you need immediate help, I can show you our emergency guides.",
                     action: 'navigate',
                     target: '/blog'
                 }
             };
         }
 
-        // New Routes
         if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('rates')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Pricing information.", action: 'navigate', target: '/pricing' } };
         if (lowerMsg.includes('privacy')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Privacy Policy.", action: 'navigate', target: '/privacy' } };
         if (lowerMsg.includes('term') || lowerMsg.includes('condition')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Terms & Conditions.", action: 'navigate', target: '/terms' } };
-        if (lowerMsg.includes('how') && lowerMsg.includes('work')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Assuming you mean 'How it Works'. Opening that now.", action: 'navigate', target: '/how-it-works' } };
         if (lowerMsg.includes('login') || lowerMsg.includes('log in') || lowerMsg.includes('sign in')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening Login page.", action: 'navigate', target: '/login' } };
         if (lowerMsg.includes('dashboard') || lowerMsg.includes('account')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Opening your Dashboard.", action: 'navigate', target: '/user/dashboard' } };
         if (lowerMsg.includes('service') || lowerMsg.includes('trades')) return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Showing all our Services.", action: 'navigate', target: '/#services' } };
 
-        // Help / Capabilities Handler — only when user is asking for help, not describing an emergency
         if (lowerMsg.includes('help') || lowerMsg.includes('what can you do')) {
             return {
                 newState,
@@ -323,183 +317,104 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     }
 
-    // STATE MACHINE IMPLEMENTATION
-
-    // 3. DETECT TRADE (if not already known)
+    // 5. STATE MACHINE (Trade Detection)
     if (!newState.detectedTrade) {
-        // GAS Override (Highest Priority)
         if (!lowerMsg.includes('fishy') && GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k))) {
             newState.detectedTrade = 'gas-engineer';
         } else {
-            // Check for specific trade matches
             const detectedTrades: string[] = [];
             const tradeOrder = ['water-restoration', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown', 'roofer', 'gas-engineer', 'air-conditioning'];
 
             for (const slug of tradeOrder) {
-                if (TRADE_KEYWORDS[slug]?.some(k => lowerMsg.includes(k))) {
+                if (TRADE_KEYWORDS[slug]?.some(k => {
+                    const regex = new RegExp(`\\b${k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\b`, 'i');
+                    return regex.test(lowerMsg);
+                })) {
                     detectedTrades.push(slug);
                 }
             }
 
-            const isBuilder = TRADE_KEYWORDS['builder'].some(k => lowerMsg.includes(k));
+            const isBuilder = TRADE_KEYWORDS['builder'].some(k => {
+                const regex = new RegExp(`\\b${k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\b`, 'i');
+                return regex.test(lowerMsg);
+            });
 
-            // OVERLAP LOGIC: Builder + Specialized Trade
-            // If we have Builder keywords AND a specialized trade (e.g. Plumber), we clarify.
             if (isBuilder && detectedTrades.length > 0) {
-                // If the user ALREADY answered the clarification question
                 if (lowerMsg.includes('structure') || lowerMsg.includes('fitting') || lowerMsg.includes('general')) {
                     newState.detectedTrade = 'builder';
                 } else if (lowerMsg.includes('electric') || lowerMsg.includes('plumb') || lowerMsg.includes('gas')) {
-                    // Let the normal loop pick up the trade below, or stricter assignment here
-                    // We'll rely on the detectedTrades loop unless we want to force it.
-                    // For now, let's just return to the user to clarify if we are strictly in ambiguous state.
-                    // But if they said "plumbing", detectedTrades has 'plumber', so we can just let it flow.
                     if (lowerMsg.includes('electric')) newState.detectedTrade = 'electrician';
                     else if (lowerMsg.includes('plumb')) newState.detectedTrade = 'plumber';
                     else if (lowerMsg.includes('gas')) newState.detectedTrade = 'gas-engineer';
                 } else {
-                    // AMBIGUOUS -> ASK CLARIFICATION
                     return {
                         newState,
-                        response: {
-                            id: Date.now().toString(),
-                            role: 'assistant',
-                            content: "Is the issue with electrics, plumbing, gas, or the structure or fittings of the property?"
-                        }
+                        response: { id: Date.now().toString(), role: 'assistant', content: "Is the issue with electrics, plumbing, gas, or the structure or fittings of the property?" }
                     };
                 }
             }
 
-            // If no trade identified yet
             if (!newState.detectedTrade) {
-                // NEGATIVE KEYWORD GUARD: If user clearly mentions gas/boiler/radiator, don't route to water-restoration or air-conditioning
                 const negativeKeywords = ['boiler', 'gas', 'radiator', 'central heating', 'gas engineer'];
                 const hasNegativeKeyword = negativeKeywords.some(k => lowerMsg.includes(k));
 
-                // 1. If strict specialized trade found, use it
                 if (detectedTrades.length > 0) {
                     const hasWaterRestoration = detectedTrades.includes('water-restoration');
                     const hasAirConditioning = detectedTrades.includes('air-conditioning');
                     const hasPlumber = detectedTrades.includes('plumber');
 
-                    // CONFLICT RULE: Water Restoration vs Air Conditioning
-                    // User Rule: If BOTH match, Water Restoration wins (Higher Urgency)
                     if (hasWaterRestoration && hasAirConditioning) {
-                        // Auto-resolve to Water Restoration
                         newState.detectedTrade = 'water-restoration';
-                    }
-                    // SMART CLARIFICATION: Water Restoration vs Plumber overlap
-                    else if (hasWaterRestoration && hasPlumber && !hasNegativeKeyword) {
+                    } else if (hasWaterRestoration && hasPlumber && !hasNegativeKeyword) {
                         if (lowerMsg.includes('damage') || lowerMsg.includes('drying') || lowerMsg.includes('soaked') || lowerMsg.includes('cleanup') || lowerMsg.includes('restoration')) {
                             newState.detectedTrade = 'water-restoration';
                         } else if (lowerMsg.includes('pipe') || lowerMsg.includes('tap') || lowerMsg.includes('toilet') || lowerMsg.includes('fix') || lowerMsg.includes('repair')) {
                             newState.detectedTrade = 'plumber';
                         } else {
-                            // ASK CLARIFICATION
                             newState.step = 'TRADE_CHECK';
                             return {
                                 newState,
-                                response: {
-                                    id: Date.now().toString(),
-                                    role: 'assistant',
-                                    content: "Is the main issue water damage that needs drying and restoration, or is it a plumbing problem like a leak that needs fixing?"
-                                }
+                                response: { id: Date.now().toString(), role: 'assistant', content: "Is the main issue water damage that needs drying and restoration, or is it a plumbing problem like a leak that needs fixing?" }
                             };
                         }
-                    }
-                    // SMART CLARIFICATION: AC leaking water (very common) [Deprecated by Conflict Rule above, but kept if AC ONLY + leak]
-                    else if (hasAirConditioning && lowerMsg.includes('leaking') && lowerMsg.includes('water') && !hasNegativeKeyword) {
-                        // If we are here, hasWaterRestoration MUST be false (handled by first if)
-                        // This usually means user said "AC leaking water" which didn't trigger water-restoration kw?
-                        // Actually 'water' matches 'water restoration' implies checking keywords.
-                        // 'leaking water' -> hasWaterRestoration might be false if 'water' keyword is weak?
-                        // 'water' is in plumber keywords line 57.
-                        // 'water restoration' primary keywords: 'water restoration', 'water damage'...
-                        // If I added 'water' to water-restoration keywords it would trigger conflict rule.
-                        // User list: 'water' NOT in primary (only phrases).
-                        // So "AC leaking water" -> hasAirConditioning=True. hasWaterRestoration=False.
-                        // So we still need this check?
-                        // User said: "If BOTH ... keywords match".
-                        // So if keywords don't match, normal flow.
-
-                        if (lowerMsg.includes('damage') || lowerMsg.includes('cleanup') || lowerMsg.includes('flooded')) {
-                            newState.detectedTrade = 'water-restoration';
-                        } else if (lowerMsg.includes('not working') || lowerMsg.includes('broken') || lowerMsg.includes('repair')) {
-                            newState.detectedTrade = 'air-conditioning';
-                        } else {
-                            // ASK CLARIFICATION
-                            newState.step = 'TRADE_CHECK';
-                            return {
-                                newState,
-                                response: {
-                                    id: Date.now().toString(),
-                                    role: 'assistant',
-                                    content: "Is the air conditioning leaking and not working properly, or has the water already caused damage that needs cleanup?"
-                                }
-                            };
-                        }
-                    }
-                    // No overlap or already resolved - use first detected trade
-                    else if (!newState.detectedTrade) {
+                    } else if (!newState.detectedTrade) {
                         newState.detectedTrade = detectedTrades[0];
                     }
-                }
-                // 2. If no specialized trade, but IS builder -> Use Builder (Catch-all)
-                else if (isBuilder) {
+                } else if (isBuilder) {
                     newState.detectedTrade = 'builder';
-                }
-                // 3. Fallbacks (includes fuzzy matching for voice inputs)
-                else {
+                } else {
                     if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) newState.detectedTrade = 'electrician';
                     else if (lowerMsg.includes('buzzing')) newState.detectedTrade = 'electrician';
                     else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) newState.detectedTrade = 'plumber';
                     else if (lowerMsg.includes('broken window')) newState.detectedTrade = 'glazier';
                     else {
-                        // FUZZY TRADE DETECTION: Catches common Whisper STT mistranscriptions
                         const fuzzyTrade = fuzzyTradeDetect(message);
-                        if (fuzzyTrade) {
-                            newState.detectedTrade = fuzzyTrade;
-                            console.log(`[chat-logic] Trade detected via fuzzy match: ${fuzzyTrade}`);
-                        }
+                        if (fuzzyTrade) newState.detectedTrade = fuzzyTrade;
                     }
                 }
             }
         }
     }
 
-    // 4. DETECT CITY (Async Fallback Added)
-    // We track fallback usage to modify response
+    // CITY DETECTION
     let cityFallbackUsed = false;
     let originalCity = "";
 
-    console.log(`[chat-logic] Before city detection - step: ${newState.step}, trade: ${newState.detectedTrade}, city: ${newState.detectedCity}, msg: "${message}"`);
-
     if (!newState.detectedCity) {
-        // A. Strict Match First (Fast) - Check for city names with word boundaries
-        // Sort by length to prioritize longer matches
         const foundCity = sortedCities.find(c => {
             const cityLower = c.toLowerCase();
             const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
             return regex.test(lowerMsg);
         });
         if (foundCity) {
-            console.log(`[chat-logic] City detected (strict match): "${foundCity}" from msg: "${lowerMsg}"`);
             newState.detectedCity = foundCity;
-        }
-        // A.5 Postcode Extraction (High Precision)
-        else {
-            console.log(`[chat-logic] No strict city match found in: "${lowerMsg}" (activeCities count: ${activeCities.length}). Trying postcodes/geocoder...`);
+        } else {
             let handled = false;
-
-            // --- SEPARATE UK AND USA LOGIC ---
             if (countryCode === 'US') {
-                // 1. USA ZIP Code Match (5 digits)
                 const US_ZIP_REGEX = /\b\d{5}\b/;
                 const zipMatch = message.match(US_ZIP_REGEX);
-
                 if (zipMatch) {
                     const cleanZip = zipMatch[0];
-                    console.log(`[Voice US] ZIP Code detected: ${cleanZip}`);
                     const coords = await geocodeLocation(cleanZip, 'US');
                     if (coords) {
                         const detectedPlace = coords.displayName.split(',')[0].trim();
@@ -519,21 +434,13 @@ export async function processUserMessage(message: string, currentState: ChatStat
                         }
                     }
                 }
-
-                // 2. USA Suburb / Area Name Match
-                // For the US, we use the `activeCities` list which includes suburbs if passed from generateTradePageData,
-                // or we can use the imported `usCities` flat list from trades.ts
                 if (!handled) {
-                    // Sort active US cities by length to match longest first (e.g. "Santa Monica" before "Santa")
-                    const sortedUSAreas = [...activeCities].sort((a, b) => b.length - a.length);
-                    const foundArea = sortedUSAreas.find(area => {
+                    const foundArea = activeCities.find(area => {
                         const areaLower = area.toLowerCase();
                         const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
                         return regex.test(lowerMsg);
                     });
-
                     if (foundArea) {
-                        console.log(`[Voice US] Suburb/Area detected and trusted: ${foundArea}`);
                         newState.detectedCity = foundArea;
                         cityFallbackUsed = true;
                         originalCity = foundArea;
@@ -541,14 +448,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
                     }
                 }
             } else {
-                // --- UK LOGIC ---
-                // 1. UK Postcode Match
-
-                // 1. Postcode Match
                 const pMatch = message.match(POSTCODE_REGEX);
                 if (pMatch) {
                     const cleanPostcode = pMatch[0].toUpperCase();
-                    console.log(`[Voice] Postcode detected: ${cleanPostcode}`);
                     const coords = await geocodeLocation(cleanPostcode, countryCode);
                     if (coords) {
                         const detectedPlace = coords.displayName.split(',')[0].trim();
@@ -568,8 +470,6 @@ export async function processUserMessage(message: string, currentState: ChatStat
                         }
                     }
                 }
-
-                // 2. Area Name Match
                 if (!handled) {
                     const sortedAreas = Object.keys(cityPostcodes).sort((a, b) => b.length - a.length);
                     const foundArea = sortedAreas.find(area => {
@@ -577,65 +477,46 @@ export async function processUserMessage(message: string, currentState: ChatStat
                         const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(?:$|\\s|,|\\.)`, 'i');
                         return regex.test(lowerMsg);
                     });
-
                     if (foundArea) {
-                        console.log(`[Voice UK] Area detected and trusted: ${foundArea}`);
                         newState.detectedCity = foundArea;
                         cityFallbackUsed = true;
                         originalCity = foundArea;
                         handled = true;
                     }
                 }
-            } // End of UK Logic block
+            }
         }
 
-        // B. Nominatim Fallback (Slower but covers entire UK)
         if (!newState.detectedCity && newState.detectedTrade) {
             const isLocationStep = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION';
-
-            // Heuristic: If we are asking for location, or message is short enough to be a location statement
             if (isLocationStep || lowerMsg.length < 50) {
-                const locationQuery = lowerMsg
-                    .replace("i'm in", "")
-                    .replace("i am in", "")
-                    .replace("live in", "")
-                    .replace("located in", "")
-                    .trim();
-
+                const locationQuery = lowerMsg.replace(/i'm in|i am in|live in|located in/g, "").trim();
                 if (locationQuery.length > 2) {
                     const coords = await geocodeLocation(locationQuery, countryCode);
                     if (coords) {
-                        const directMatch = activeCities.find(city =>
-                            coords.displayName.toLowerCase().includes(city.toLowerCase())
-                        );
-
+                        const directMatch = activeCities.find(city => coords.displayName.toLowerCase().includes(city.toLowerCase()));
                         if (directMatch) {
                             newState.detectedCity = directMatch;
                             cityFallbackUsed = true;
                             originalCity = coords.displayName.split(',')[0];
                         } else {
-                            const detectedPlace = coords.displayName.split(',')[0].trim();
-                            if (detectedPlace) {
-                                newState.detectedCity = detectedPlace;
-                                cityFallbackUsed = true;
-                                originalCity = detectedPlace;
-                            }
+                            newState.detectedCity = coords.displayName.split(',')[0].trim();
+                            cityFallbackUsed = true;
+                            originalCity = newState.detectedCity;
                         }
                     } else if (isLocationStep && locationQuery.length > 2 && locationQuery.length <= 40) {
-                        // 3. ULTIMATE FALLBACK: TRUST MANUAL ENTRY
                         const formattedCity = locationQuery.split(/[\\s-]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
                         newState.detectedCity = formattedCity;
                         newState.locationConfirmed = true;
                         cityFallbackUsed = true;
                         originalCity = formattedCity;
-                        console.log(`[Location Ultimate Fallback] Trusted user manual entry: '${formattedCity}'`);
                     }
                 }
             }
         }
     }
 
-    // 5. GENERATE RESPONSE BASED ON STATE
+    // GENERATE RESPONSE
     let responseText = "";
     let action: 'navigate' | undefined;
     let target: string | undefined;
@@ -648,130 +529,59 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     const tip = (!currentState.detectedTrade && newState.detectedTrade) ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
 
-    // STATE MACHINE TRANSITIONS
-
-    // STEP: CONFIRM_LOCATION
     if (newState.step === 'CONFIRM_LOCATION' && newState.suggestedCity) {
-        const isPositive = lowerMsg === 'yes' || lowerMsg === 'yep' || lowerMsg === 'yeah' || lowerMsg === 'correct' || lowerMsg.includes('that is right') || lowerMsg.includes('yes it is');
-
-        // Fix: If they repeat the city name (e.g. "london"), it should count as confirmation
+        const isPositive = /yes|yep|yeah|correct|that is right|yes it is/i.test(lowerMsg);
         const repeatedCity = newState.detectedCity && newState.detectedCity.toLowerCase() === newState.suggestedCity.toLowerCase();
-
         if (isPositive || repeatedCity) {
             newState.detectedCity = newState.suggestedCity;
             newState.locationConfirmed = true;
             newState.step = 'ROUTING';
-            // Clear suggested so it doesn't trigger this block again
             newState.suggestedCity = null;
-        } else {
-            // Check if they provided a NEW location in this message
-            if (newState.detectedCity && newState.detectedCity !== newState.suggestedCity) {
-                // They gave a different location, accept it as confirmed manual entry
-                newState.locationConfirmed = true;
-                newState.step = 'ROUTING';
-                newState.suggestedCity = null;
-            } else if (lowerMsg.length > 2) {
-                // If it's not a positive confirmation and not a different recognized city, 
-                // Reset and ask for manual entry to be safe.
-                newState.detectedCity = null;
-                newState.suggestedCity = null;
-                newState.step = 'LOCATION_CHECK';
-                responseText = "No problem. Please tell me exactly which town or city you are in.";
-                return { newState, response: { id: Date.now().toString(), role: 'assistant', content: responseText } };
-            }
-        }
-    }
-
-    // CASE A: TRADE & CITY KNOWN/CONFIRMED -> NAVIGATE
-    if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
-        const city = newState.detectedCity;
-        const tradeName = getReadableTradeName(newState.detectedTrade);
-
-        // If we just came from CONFIRM_LOCATION or manual entry, provide final transition
-        let transition = "Great. I'm taking you to the right Emergency Tradesmen page now.";
-
-        if (cityFallbackUsed) {
-            transition = `I can't see a specific page for ${originalCity}, but our ${city} team covers that area. I'm taking you there now.`;
-        }
-
-        responseText = transition;
-        action = 'navigate';
-        const countryPrefix = (countryCode === 'US' && !isUSDomain) ? '/us' : '';
-        target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
-        newState.step = 'ROUTING';
-    }
-    // CASE B: TRADE KNOWN, CITY DETECTED BUT NOT CONFIRMED
-    else if (newState.detectedTrade && newState.detectedCity && !newState.locationConfirmed) {
-        const city = newState.detectedCity;
-        const tradeName = getReadableTradeName(newState.detectedTrade);
-
-        // KEY FIX: If the user explicitly typed/spoke the city in this same message
-        // OR if we're in LOCATION_CHECK step (we asked "what's your location?" and they answered),
-        // treat it as confirmed and navigate immediately — don't ask "Is this correct?"
-        // The confirmation step is only needed for GPS/IP auto-detected locations.
-        const wasAskingForLocation = currentState.step === 'LOCATION_CHECK';
-
-        const userExplicitlyStatedCity = wasAskingForLocation || sortedCities.some(c => {
-            const cityLower = c.toLowerCase();
-            const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
-            return regex.test(lowerMsg);
-        }) || Object.keys(cityPostcodes).some(area => {
-            const areaLower = area.toLowerCase();
-            const regex = new RegExp(`(?:^|\\s|,|\\.)${areaLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:$|\\s|,|\\.)`, 'i');
-            return regex.test(lowerMsg);
-        });
-
-        if (userExplicitlyStatedCity) {
-            // User stated the city themselves (or answered our location question) — skip confirmation, navigate
+        } else if (newState.detectedCity && newState.detectedCity !== newState.suggestedCity) {
             newState.locationConfirmed = true;
             newState.step = 'ROUTING';
+            newState.suggestedCity = null;
+        } else if (lowerMsg.length > 2) {
+            newState.detectedCity = null;
+            newState.suggestedCity = null;
+            newState.step = 'LOCATION_CHECK';
+            return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "No problem. Please tell me exactly which town or city you are in." } };
+        }
+    }
 
-            const countryPrefix = (countryCode === 'US' && !isUSDomain) ? '/us' : '';
-            target = `${countryPrefix}/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
+    if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
+        const city = newState.detectedCity;
+        responseText = cityFallbackUsed ? `I can't see a specific page for ${originalCity}, but our ${city} team covers that area. I'm taking you there now.` : "Great. I'm taking you to the right Emergency Tradesmen page now.";
+        action = 'navigate';
+        // US Redirection Fix: Never use /us prefix on US domain. Root level only.
+        const countryPrefix = (countryCode === 'US' || isUSDomain) ? '' : ''; 
+        // Logic check: if isUSDomain is true, we are on emergencycontractors.net, so prefix is empty.
+        // If countryCode is US but we are not on the US domain (unlikely in production but possible in dev), we still want root level if target is the new domain.
+        // User said "never ever use (/us)".
+        
+        target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
+        newState.step = 'ROUTING';
+    } else if (newState.detectedTrade && newState.detectedCity && !newState.locationConfirmed) {
+        const city = newState.detectedCity;
+        if (currentState.step === 'LOCATION_CHECK') {
+            newState.locationConfirmed = true;
+            newState.step = 'ROUTING';
+            target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
-            responseText = `${tip ? tip + ' ' : ''}Taking you to ${tradeName} in ${city} now.`;
-            console.log(`[chat-logic] CASE B → NAVIGATE: ${target} (wasAskingForLocation: ${wasAskingForLocation})`);
+            responseText = `${tip ? tip + ' ' : ''}Taking you to ${getReadableTradeName(newState.detectedTrade)} in ${city} now.`;
         } else {
-            // City was auto-detected (GPS/IP) — ask for confirmation
-            const identification = !currentState.detectedTrade ? `I've identified that as a ${tradeName} emergency. ` : "";
             newState.suggestedCity = city;
             newState.detectedCity = null;
             newState.step = 'CONFIRM_LOCATION';
-            const tipStr = tip ? `${tip} ` : "";
-            responseText = `${identification}${tipStr}We detected you may be in ${city}. Is this correct? (Or please tell me your location manually).`;
+            responseText = `${!currentState.detectedTrade ? `I've identified that as a ${getReadableTradeName(newState.detectedTrade)} emergency. ` : ""}${tip ? `${tip} ` : ""}We detected you may be in ${city}. Is this correct?`;
         }
-    }
-    // CASE C: TRADE KNOWN, CITY UNKNOWN -> ASK LOCATION
-    else if (newState.detectedTrade && !newState.detectedCity) {
-        const tradeName = getReadableTradeName(newState.detectedTrade);
-        const identification = !currentState.detectedTrade ? `I've identified that as a ${tradeName} emergency. ` : "";
-        const tipStr = tip ? `${tip} ` : "";
-
-        responseText = `${identification}${tipStr}What town, area, or postcode are you in?`;
+    } else if (newState.detectedTrade && !newState.detectedCity) {
+        responseText = `${!currentState.detectedTrade ? `I've identified that as a ${getReadableTradeName(newState.detectedTrade)} emergency. ` : ""}${tip ? `${tip} ` : ""}What town, area, or postcode are you in?`;
         newState.step = 'LOCATION_CHECK';
-    }
-    // CASE D: TRADE UNKNOWN -> CLARIFY (improved for voice users)
-    else {
-        if (lowerMsg.includes('trade') || lowerMsg.includes('service') || lowerMsg.includes('list') || lowerMsg.includes('cover')) {
-            responseText = "We cover plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which one do you need?";
-        } else {
-            // More helpful fallback that shows available options
-            console.log(`[chat-logic] CASE D fallback - could not detect trade from: "${message}"`);
-            responseText = "I'm not sure I understood that. Could you try saying one of these: plumber, electrician, locksmith, gas engineer, roofer, glazier, drain specialist, or breakdown?";
-        }
+    } else {
+        responseText = /trade|service|list|cover/i.test(lowerMsg) ? "We cover plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which one do you need?" : "I'm not sure I understood that. Could you try saying one of these: plumber, electrician, locksmith, gas engineer, roofer, glazier, drain specialist, or breakdown?";
         newState.step = 'TRADE_CHECK';
     }
 
-    console.log(`[chat-logic] Final decision: step=${newState.step}, action=${action}, target=${target}, response="${responseText.substring(0, 40)}..."`);
-
-    return {
-        newState,
-        response: {
-            id: Date.now().toString(),
-            role: 'assistant',
-            content: responseText,
-            action,
-            target
-        }
-    };
+    return { newState, response: { id: Date.now().toString(), role: 'assistant', content: responseText, action, target } };
 }

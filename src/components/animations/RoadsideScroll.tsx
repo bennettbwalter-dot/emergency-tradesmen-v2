@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { Clock, ShieldCheck, MapPin, Navigation } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -209,16 +209,63 @@ export function RoadsideScroll() {
 
             {/* Integrated CTA Button - Fixed under video */}
             <div className="absolute bottom-[18vh] md:bottom-10 left-0 w-full flex justify-center items-center z-[130] px-4 md:px-0">
-                <Button 
-                    size="xl" 
-                    asChild
-                    className="bg-gradient-to-r from-[#caa55b] via-[#e2cd97] to-[#caa55b] text-black font-bold text-xl md:text-2xl px-12 py-8 rounded-full shadow-[0_10px_40px_rgba(202,165,91,0.4)] hover:shadow-[0_15px_60px_rgba(202,165,91,0.6)] hover:scale-105 transition-all duration-300 border-none w-full md:w-auto"
-                >
-                    <Link to={`${settings.countryCode === 'GB' ? '' : '/us'}/emergency-breakdown/${settings.countryCode === 'GB' ? 'london' : '/us/los-angeles'}`}>
-                        GET ROADSIDE HELP
-                    </Link>
-                </Button>
+                <RoadsideHelpButton />
             </div>
         </div>
+    );
+}
+
+function RoadsideHelpButton() {
+    const { settings } = useLocalization();
+    const navigate = useNavigate();
+    const [isLocating, setIsLocating] = useState(false);
+
+    const handleGetHelp = () => {
+        if (!navigator.geolocation) {
+            console.warn("Geolocation not supported");
+            navigate("/listings?category=breakdown");
+            return;
+        }
+
+        setIsLocating(true);
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setIsLocating(false);
+                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
+                navigate(`${pathPrefix}/emergency-breakdown?lat=${latitude}&lng=${longitude}`);
+            },
+            (error) => {
+                console.warn("Geolocation error:", error.message);
+                setIsLocating(false);
+                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
+                navigate(`${pathPrefix}/emergency-breakdown`);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+        );
+    };
+
+    return (
+        <Button 
+            size="xl" 
+            onClick={handleGetHelp}
+            disabled={isLocating}
+            className="bg-gradient-to-r from-[#caa55b] via-[#e2cd97] to-[#caa55b] text-black font-bold text-xl md:text-2xl px-12 py-8 rounded-full shadow-[0_10px_40px_rgba(202,165,91,0.4)] hover:shadow-[0_15px_60px_rgba(202,165,91,0.6)] hover:scale-105 transition-all duration-300 border-none w-full md:w-auto min-w-[320px]"
+        >
+            <div className="flex items-center justify-center gap-3">
+                {isLocating ? (
+                    <>
+                        <div className="w-6 h-6 border-4 border-black/20 border-t-black rounded-full animate-spin" />
+                        <span>LOCATING YOU...</span>
+                    </>
+                ) : (
+                    <>
+                        <Navigation className="w-6 h-6" />
+                        <span>GET ROADSIDE HELP</span>
+                    </>
+                )}
+            </div>
+        </Button>
     );
 }

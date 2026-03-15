@@ -9,13 +9,10 @@ export function BottomNav() {
     const { settings } = useLocalization();
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
-    const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
-
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const isActive = (path: string) => {
-        if (path === "/" && (location.pathname === "/" || (isUSDomain && location.pathname === "/"))) return true;
-        if ((path === "/us" || path === "/us/") && (location.pathname === "/us" || location.pathname === "/us/")) return true;
-        if (path !== "/" && path !== "/us" && location.pathname.startsWith(path)) return true;
+        if (path === "/" && location.pathname === "/") return true;
+        if (path !== "/" && location.pathname.startsWith(path)) return true;
         // Special handling for dashboard tabs
         if (path.includes("tab=") && location.search.includes(path.split("?")[1])) return true;
         return false;
@@ -25,17 +22,17 @@ export function BottomNav() {
         {
             label: "Home",
             icon: Home,
-            path: countryPrefix || "/",
+            path: "/",
         },
         {
             label: "Search",
             icon: Search,
-            path: countryPrefix || "/",
+            path: "/",
         },
         {
             label: "Sign Up",
             icon: Rocket,
-            path: `${countryPrefix}/pricing`,
+            path: "/pricing",
         },
         {
             label: "Profile",

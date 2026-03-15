@@ -11,7 +11,7 @@ export default function LocationsDirectory() {
     const isUS = settings.countryCode === 'US';
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const targetCities = isUS ? usCities : cities;
     const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
 

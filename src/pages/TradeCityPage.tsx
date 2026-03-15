@@ -18,7 +18,7 @@ import Squares from "@/components/ui/Squares";
 import { generateTradePageData, cities, usCities, cityToState } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
-import { cityCoordinates } from "@/lib/cityCoordinates";
+import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
@@ -73,8 +73,25 @@ export default function TradeCityPage() {
 
   // Resolution Logic for Hierarchy
   const rawTargetLocation = suburb || area || city || metro || state;
+  
+  // Parse location from URL if present (Emergency CTA flow)
+  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const urlLat = queryParams.get('lat');
+  const urlLng = queryParams.get('lng');
+
+  const resolvedLocation = useMemo(() => {
+    if (!rawTargetLocation && urlLat && urlLng) {
+      const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB'));
+      if (nearest) {
+        console.log("Resolved nearest city for coordinate-only route:", nearest.city);
+        return nearest.city;
+      }
+    }
+    return rawTargetLocation;
+  }, [rawTargetLocation, urlLat, urlLng, countryCode, location.pathname]);
+
   // CRITICAL FIX: Default to 'London' (or National) if no city provided to prevent crash
-  let validCity = rawTargetLocation ? decodeURIComponent(rawTargetLocation) : (countryCode === 'US' ? 'New York' : 'London');
+  let validCity = resolvedLocation ? decodeURIComponent(resolvedLocation) : (countryCode === 'US' ? 'New York' : 'London');
 
   // FIX: US Routing Ambiguity
   // If tradePath matches a known US state (e.g. /us/texas/dallas matched as :tradePath/:city),
@@ -144,10 +161,42 @@ export default function TradeCityPage() {
   // Let's rely on simple heuristic + explicit countryCode param.
 
   // Region Mismatch / Redirects
-  // We trust the URL structure for Country determination.
-  // /us/... -> US
-  // /... -> GB
-  const actualCountry = (location.pathname.startsWith('/us') || countryCode?.toLowerCase() === 'us' || pageData?.countryCode === 'US') ? 'US' : 'GB';
+  // We trust the URL structure for Country determination, but also handle the US-specific root domain.
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const port = typeof window !== 'undefined' ? window.location.port : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+  
+  const actualCountry = useMemo(() => {
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+    if (hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001')) return 'US';
+    if (hostname.includes('emergencytradesmen.net') || port === '3000' || (hostname === 'localhost' && port === '3000')) return 'GB';
+    
+    // Fallback detection
+    if (
+      location.pathname.startsWith('/us/') || 
+      location.pathname.startsWith('/us') || 
+      countryCode?.toLowerCase() === 'us' || 
+      pageData?.countryCode === 'US' || 
+      (validCity && usCities.includes(validCity))
+    ) return 'US';
+    
+    return 'GB';
+  }, [countryCode, pageData?.countryCode, validCity, usCities, location.pathname]);
+
+  // NEW: State Page Detection
+  const isStatePage = useMemo(() => {
+    return actualCountry === 'US' && !!effectiveState && (!city || city.toLowerCase() === effectiveState.toLowerCase());
+  }, [actualCountry, effectiveState, city]);
+
+  console.log('TradeCityPage Country Detection:', {
+    isUSDomain,
+    pathname: location.pathname,
+    countryCodeParam: countryCode,
+    validCity,
+    isInUsCities: validCity && usCities.includes(validCity),
+    actualCountry
+  });
 
   // Only redirect if there is a glaring mismatch (e.g. city definitely wrong?)
   // For now, removing strict redirect allows new US locations to work without "white-listing" in trades.ts
@@ -181,6 +230,13 @@ export default function TradeCityPage() {
 
   const { settings, userCoords } = useLocalization();
 
+  const effectiveCoords = useMemo(() => {
+    if (urlLat && urlLng) {
+      return { latitude: parseFloat(urlLat), longitude: parseFloat(urlLng) };
+    }
+    return userCoords;
+  }, [urlLat, urlLng, userCoords]);
+
   // Fetch real businesses from Supabase — does NOT depend on userCoords
   // userCoords is only used for sorting (handled in a separate effect below)
   const prevContextRef = useRef<string>("");
@@ -202,9 +258,16 @@ export default function TradeCityPage() {
         console.log('Fetching businesses for:', {
           trade: tradeInfo.slug,
           city: validCity,
-          countryCode: actualCountry
+          countryCode: actualCountry,
+          state: isStatePage ? effectiveState : undefined
         });
-        const realBusinesses = await fetchBusinesses(tradeInfo.slug, validCity, actualCountry, userCoords || undefined);
+        const realBusinesses = await fetchBusinesses(
+          tradeInfo.slug, 
+          validCity, 
+          actualCountry, 
+          effectiveCoords || undefined,
+          isStatePage ? effectiveState : undefined
+        );
         console.log('Real businesses fetched:', realBusinesses.length);
         setBusinesses(realBusinesses);
       } catch (error) {
@@ -222,22 +285,22 @@ export default function TradeCityPage() {
   // Separate effect: Re-sort existing businesses when userCoords becomes available
   // This avoids a full refetch and prevents the "empty flash" on mobile
   useEffect(() => {
-    if (!userCoords || businesses.length === 0) return;
+    if (!effectiveCoords || businesses.length === 0) return;
 
     setBusinesses(prev => [...prev].sort((a, b) => {
       // 1. Paid businesses always first
       if (a.tier === 'paid' && b.tier !== 'paid') return -1;
       if (a.tier !== 'paid' && b.tier === 'paid') return 1;
 
-      // 2. Proximity sort using userCoords
+      // 2. Proximity sort using effectiveCoords
       if (a.latitude && a.longitude && b.latitude && b.longitude) {
         const distA = Math.sqrt(
-          Math.pow((a.latitude - userCoords.latitude) * 69, 2) +
-          Math.pow((a.longitude - userCoords.longitude) * 69 * Math.cos(userCoords.latitude * Math.PI / 180), 2)
+          Math.pow((a.latitude - effectiveCoords.latitude) * 69, 2) +
+          Math.pow((a.longitude - effectiveCoords.longitude) * 69 * Math.cos(effectiveCoords.latitude * Math.PI / 180), 2)
         );
         const distB = Math.sqrt(
-          Math.pow((b.latitude - userCoords.latitude) * 69, 2) +
-          Math.pow((b.longitude - userCoords.longitude) * 69 * Math.cos(userCoords.latitude * Math.PI / 180), 2)
+          Math.pow((b.latitude - effectiveCoords.latitude) * 69, 2) +
+          Math.pow((b.longitude - effectiveCoords.longitude) * 69 * Math.cos(effectiveCoords.latitude * Math.PI / 180), 2)
         );
         return distA - distB;
       }
@@ -245,7 +308,7 @@ export default function TradeCityPage() {
       // 3. Fallback to priority score
       return (b.priority_score || 0) - (a.priority_score || 0);
     }));
-  }, [userCoords]);
+  }, [effectiveCoords]);
 
   // Real-time updates for Availability
   useEffect(() => {
@@ -347,9 +410,6 @@ export default function TradeCityPage() {
 
   const schemaType = tradeSchemaTypeMap[tradeInfo.slug] || tradeSchemaTypeMap['default'];
 
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const port = typeof window !== 'undefined' ? window.location.port : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
   const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
   const serviceSchema = {
@@ -456,25 +516,34 @@ export default function TradeCityPage() {
   const stateCode = stateSlug || '';
   const cityCoords = cityCoordinates[cityName];
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+  
+  // FIXED: Ensure coordinates are resolved correctly for map centering
+  const isCityInUS = usCities.includes(cityName);
+  const countryForCoords = isUS || isCityInUS ? 'US' : 'GB';
+  
   const canonicalPath = isUS
     ? (isUSDomain ? `/emergency-${tradeInfo.slug}/${citySlug}` : `/us/emergency-${tradeInfo.slug}/${citySlug}`)
     : `/emergency-${tradeInfo.slug}/${citySlug}`;
 
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
   const localTerm = isUS ? 'Contractors' : 'Tradesmen';
-  const seoTitle = pageData?.problem
-    ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''}`
-    : isUS
-      ? `Emergency ${tradeDisplayName} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
-      : `Emergency ${tradeDisplayName} ${cityName} – Local ${localTerm} Near Me | 24/7`;
+  const seoTitle = isStatePage
+    ? `Emergency ${tradeDisplayName} in ${cityName} – Best Local ${localTerm} Near Me | 24/7`
+    : pageData?.problem
+      ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''}`
+      : isUS
+        ? `Emergency ${tradeDisplayName} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
+        : `Emergency ${tradeDisplayName} ${cityName} – Local ${localTerm} Near Me | 24/7`;
 
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
-  const seoDescription = pageData?.problem
-    ? `${pageData.problem.description} ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time.`
-    : isUS
-      ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
-      : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local tradesmen ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
+  const seoDescription = isStatePage
+    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now.`
+    : pageData?.problem
+      ? `${pageData.problem.description} ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time.`
+      : isUS
+        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
+        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local tradesmen ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
 
   // --- Expanded Long-Tail Keywords Array ---
   const seoKeywords = pageData?.problem
@@ -574,7 +643,7 @@ export default function TradeCityPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
                 </span>
                 <span className="text-sm font-medium uppercase tracking-wider text-foreground">
-                  {pageData?.problem ? `${pageData.problem.name}s` : `${tradeDisplayName}s`} <span className="text-gold font-bold">available now</span> in {cityName}
+                  {pageData?.problem ? `${pageData.problem.name}s` : `${tradeDisplayName}s`} <span className="text-gold font-bold">available now</span> {isStatePage ? `across ${cityName}` : `in ${cityName}`}
                 </span>
               </div>
 
@@ -588,7 +657,7 @@ export default function TradeCityPage() {
               </h1>
 
               <p className="text-lg text-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed font-light">
-                Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s in {cityName} are ready to respond right now.
+                Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
@@ -625,7 +694,7 @@ export default function TradeCityPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
-                    Local Intelligence: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
+                    {isStatePage ? `${cityName} Regional Presence` : `Local Intelligence: ${cityName}${isUS && stateCode ? `, ${stateCode}` : ''}`}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {pageData.localExpertise}
@@ -654,6 +723,8 @@ export default function TradeCityPage() {
                 countryCode={actualCountry}
                 showBusinesses={true}
                 businesses={businesses}
+                latitude={cityCoords?.lat}
+                longitude={cityCoords?.lng}
                 className="w-full h-full"
               />
             </Suspense>
@@ -958,6 +1029,35 @@ export default function TradeCityPage() {
             </div>
           </div>
         </section>
+
+        {/* Cities Directory for State Page */}
+        {isStatePage && effectiveState && (
+          <section className="container-wide py-16 border-t border-border/30">
+            <div className="mb-8">
+              <h2 className="text-2xl font-display text-foreground mb-2">Cities we cover in {cityName}</h2>
+              <p className="text-muted-foreground text-sm">Select a city to find a local {tradeDisplayName.toLowerCase()} near you.</p>
+            </div>
+            <div className="grid grid-cols-2 shadow-inner sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-3 gap-x-6">
+              {(() => {
+                const { getCitiesForState } = require('@/lib/trades');
+                const stateCities = getCitiesForState(effectiveState);
+                return stateCities.map((cityName: string) => {
+                  const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+                  return (
+                    <Link 
+                      key={cityName}
+                      to={`/emergency-${tradeInfo.slug}/${citySlug}`}
+                      className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
+                    >
+                      <div className="w-1 h-1 rounded-full bg-gold/30"></div>
+                      {cityName}
+                    </Link>
+                  );
+                });
+              })()}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer countryCode={actualCountry} />

@@ -33,14 +33,17 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
     const mapInstanceRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.Marker[]>([]);
 
-    // Determine Country Code from prop or implicit URL
+    // Determine Country Code from prop, hostname, or implicit URL
+    const isUSDomainInternal = window.location.hostname.includes('emergencycontractors.net') || (window.location.hostname === 'localhost' && window.location.port === '3001') || (window.location.hostname === '127.0.0.1' && window.location.port === '3001');
     const isUrlUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
-    const effectiveCountryCode = propCountryCode || (isUrlUS ? 'US' : 'GB');
+    const effectiveCountryCode = propCountryCode || (isUSDomainInternal || isUrlUS ? 'US' : 'GB');
     const countryCode = effectiveCountryCode;
 
     // Get initial View State from static list
     const initialViewState = getViewState(city, countryCode);
     const [viewState, setViewState] = useState(initialViewState);
+    
+    console.log(`Map: Initial view for ${city} (${countryCode}):`, initialViewState.center);
 
     // Effect to update view state when props change or via Geocoding
     useEffect(() => {

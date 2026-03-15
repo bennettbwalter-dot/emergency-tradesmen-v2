@@ -56,9 +56,13 @@ interface LocalizationContextType {
     formatPhone: (phone: string) => string;
     userCoords: Coords | null;
     detectedCity: string | null;
+    detectedState: string | null;
     isLocating: boolean;
     geoError: string | null;
     detectUserLocation: () => void;
+    setOverride: (coords: Coords | null, city: string | null) => void;
+    clearOverride: () => void;
+    isOverridden: boolean;
 }
 
 const LocalizationContext = createContext<LocalizationContextType | undefined>(undefined);
@@ -70,9 +74,21 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     const [countryCode, setCountryCodeState] = useState<CountryCode>(initialCode);
     const [userCoords, setUserCoords] = useState<Coords | null>(null);
     const [detectedCity, setDetectedCity] = useState<string | null>(null);
+    const [detectedState, setDetectedState] = useState<string | null>(null);
     const [isLocating, setIsLocating] = useState(false);
     const [geoError, setGeoError] = useState<string | null>(null);
     const [hasAttemptedIPDetection, setHasAttemptedIPDetection] = useState(false);
+
+    // Overrides for Testing
+    const [overrideCoords, setOverrideCoords] = useState<Coords | null>(() => {
+        if (typeof window === 'undefined') return null;
+        const saved = localStorage.getItem('geo_override_coords');
+        return saved ? JSON.parse(saved) : null;
+    });
+    const [overrideCity, setOverrideCity] = useState<string | null>(() => {
+        if (typeof window === 'undefined') return null;
+        return localStorage.getItem('geo_override_city');
+    });
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -83,40 +99,44 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
 
         const detectRegion = async () => {
             try {
-                // If we are on the dedicated US domain, skip IP detection for redirection purposes
                 const hostname = window.location.hostname;
                 const port = window.location.port;
-                const isUSDomain = hostname === 'emergencycontractors.net' || 
-                                  hostname === 'www.emergencycontractors.net' || 
-                                  (hostname === 'localhost' && port === '3001');
-                if (isUSDomain) {
+                const isUS = hostname.includes('emergencycontractors.net') || 
+                             (hostname === 'localhost' && port === '3001') ||
+                             (hostname === '127.0.0.1' && port === '3001');
+                
+                if (isUS) {
                     setCountryCodeState('US');
+                    setHasAttemptedIPDetection(true);
+                    return;
+                } else if (port === '3000' || hostname.includes('emergencytradesmen.net') || (hostname === 'localhost' && port === '3000')) {
+                    setCountryCodeState('GB');
                     setHasAttemptedIPDetection(true);
                     return;
                 }
 
+                // Fallback for other domains/IPs (simple check, no redirect)
                 const response = await fetch('https://freeipapi.com/api/json');
                 const data = await response.json();
 
-                if (data.countryCode === 'US' || data.countryCode === 'GB') {
-                    const detected = data.countryCode as CountryCode;
-                    console.log(`Detected region via IP: ${detected}`);
-
-                    const isUsPath = location.pathname.startsWith('/us') || location.pathname.startsWith('/usa');
-
-                    if (detected === 'US') {
-                        if (!isUsPath) {
-                            // Redirect UK path to US equivalent
-                            const subPath = location.pathname === '/' ? '' : location.pathname;
-                            navigate(`/us${subPath}`, { replace: true });
-                        }
-                    } else if (detected === 'GB') {
-                        if (isUsPath) {
-                            // Redirect US path to UK root equivalent
-                            const subPath = location.pathname.replace(/^\/(us|usa)/, '') || '/';
-                            navigate(subPath, { replace: true });
-                        }
+                if (data.countryCode === 'US') {
+                    setCountryCodeState('US');
+                    if (data.regionName) {
+                        setDetectedState(data.regionName);
+                        console.log(`IP-based state detection: ${data.regionName}`);
                     }
+                    if (data.cityName) {
+                        setDetectedCity(data.cityName);
+                        console.log(`IP-based city detection (US): ${data.cityName}`);
+                    }
+                } else if (data.countryCode === 'GB') {
+                    setCountryCodeState('GB');
+                    if (data.cityName) {
+                        setDetectedCity(data.cityName);
+                        console.log(`IP-based city detection (UK): ${data.cityName}`);
+                    }
+                } else {
+                    setCountryCodeState('GB'); // Default to GB for other regions if not US
                 }
             } catch (err) {
                 console.warn('IP-based region detection failed:', err);
@@ -135,6 +155,22 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             const nearest = findNearestCity(lat, lng, countryCode);
             if (nearest) {
                 setDetectedCity(nearest.city);
+                
+                // If US, also try to resolve state
+                if (countryCode === 'US') {
+                    // Import cityToState dynamically or use a ref if circular dependency is an issue
+                    // For now we'll assume it's available or we can use a simpler lookup
+                    import('@/lib/trades').then(({ cityToState }) => {
+                        const stateCode = cityToState[nearest.city];
+                        if (stateCode) {
+                            import('@/lib/us_states').then(({ US_STATES }) => {
+                                const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
+                                if (state) setDetectedState(state.name);
+                            });
+                        }
+                    });
+                }
+
                 console.log(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
             }
         } catch (e) {
@@ -200,21 +236,22 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     // 3. URL-Based Context Switching
     useEffect(() => {
         const path = location.pathname;
-        const firstSegment = path.split('/')[1]?.toLowerCase();
         const hostname = window.location.hostname;
-
-        // Domain-based check (Prioritize the dedicated US domain)
         const port = window.location.port;
-        if (hostname === 'emergencycontractors.net' || 
-            hostname === 'www.emergencycontractors.net' || 
-            (hostname === 'localhost' && port === '3001')) {
+
+        // Force country based on port/domain
+        if (hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001')) {
             setCountryCodeState('US');
-        } else if (firstSegment === 'us' || firstSegment === 'usa') {
-            setCountryCodeState('US');
-        } else if (firstSegment === 'gb') {
+        } else if (hostname.includes('emergencytradesmen.net') || port === '3000' || (hostname === 'localhost' && port === '3000')) {
             setCountryCodeState('GB');
-        } else if (path === '/') {
-            setCountryCodeState('GB');
+        } else {
+            // Path-based fallback for multi-tenant dev
+            const firstSegment = path.split('/')[1]?.toLowerCase();
+            if (firstSegment === 'us' || firstSegment === 'usa') {
+                setCountryCodeState('US');
+            } else {
+                setCountryCodeState('GB');
+            }
         }
     }, [location.pathname]);
 
@@ -245,11 +282,40 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             setCountryCode,
             formatPrice,
             formatPhone,
-            userCoords,
-            detectedCity,
+            userCoords: overrideCoords || userCoords,
+            detectedCity: overrideCity || detectedCity,
+            detectedState: overrideCity ? null : detectedState, // Clear state if city is overridden for now
             isLocating,
-            geoError,
-            detectUserLocation
+            geoError: overrideCoords ? null : geoError,
+            detectUserLocation,
+            setOverride: (coords, city) => {
+                setOverrideCoords(coords);
+                setOverrideCity(city);
+                
+                // If overriding city, also try to update state
+                if (city) {
+                    import('@/lib/trades').then(({ cityToState }) => {
+                        const stateCode = cityToState[city];
+                        if (stateCode) {
+                            import('@/lib/us_states').then(({ US_STATES }) => {
+                                const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
+                                if (state) setDetectedState(state.name);
+                            });
+                        }
+                    });
+                }
+                if (coords) localStorage.setItem('geo_override_coords', JSON.stringify(coords));
+                else localStorage.removeItem('geo_override_coords');
+                if (city) localStorage.setItem('geo_override_city', city);
+                else localStorage.removeItem('geo_override_city');
+            },
+            clearOverride: () => {
+                setOverrideCoords(null);
+                setOverrideCity(null);
+                localStorage.removeItem('geo_override_coords');
+                localStorage.removeItem('geo_override_city');
+            },
+            isOverridden: !!overrideCoords || !!overrideCity
         }}>
             {children}
         </LocalizationContext.Provider>

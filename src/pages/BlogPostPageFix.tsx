@@ -90,7 +90,7 @@ export default function BlogPostPage() {
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
 
     const regionalizeContent = (content: string) => {
         let text = regionalizeText(content);
@@ -101,10 +101,6 @@ export default function BlogPostPage() {
             // Strip relative /us/ and /usa/ prefixes
             text = text.replace(/href="\/(us|usa)\//g, 'href="/');
             text = text.replace(/\[([^\]]+)\]\(\/(us|usa)\//g, '[$1](/');
-        } else if (settings.countryCode === 'US') {
-             // If on UK domain but US region, ensure /us/ prefix (standardization)
-             text = text.replace(/href="\/usa\//g, 'href="/us/');
-             text = text.replace(/\[([^\]]+)\]\(\/usa\//g, '[$1](/us/');
         }
         return text;
     };
@@ -169,7 +165,7 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <MapPin className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to={isUK ? "/" : (isUSDomain ? "/" : "/us")} className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to="/" className="text-muted-foreground hover:text-gold transition-colors">
                                         {isUSDomain ? "Emergency Contractors" : "Emergency Tradesmen Home"}
                                     </Link>
                                 </li>
@@ -177,7 +173,7 @@ export default function BlogPostPage() {
                                     <div className="p-1 bg-gold/10 rounded group-hover:bg-gold/20 transition-colors mt-0.5">
                                         <ChevronRight className="w-3.5 h-3.5 text-gold" />
                                     </div>
-                                    <Link to={`${countryPrefix}/contact`} className="text-muted-foreground hover:text-gold transition-colors">
+                                    <Link to="/contact" className="text-muted-foreground hover:text-gold transition-colors">
                                         Contact Support Team
                                     </Link>
                                 </li>
@@ -208,9 +204,9 @@ export default function BlogPostPage() {
             if (!slug) return;
             setIsLoading(true);
 
-            // Handle malformed US slugs (redirect to US blog index)
+            // Handle malformed US slugs (redirect to blog index)
             if (slug.toLowerCase() === 'us' || slug.toLowerCase() === 'usa') {
-                routerNavigate('/us/blog', { replace: true });
+                routerNavigate('/blog', { replace: true });
                 return;
             }
 
@@ -376,7 +372,7 @@ export default function BlogPostPage() {
                 
                 const postUrl = isUSDomain 
                     ? `${baseUrl}/blog/${post.slug.replace(/-us$/, '')}` 
-                    : `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog/${post.slug}`;
+                    : `${baseUrl}/blog/${post.slug}`;
                 
                 const imageUrl = post.cover_image || `${baseUrl}/og-image.jpg`;
 
@@ -389,13 +385,13 @@ export default function BlogPostPage() {
                             "@type": "ListItem",
                             "position": 1,
                             "name": "Home",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}`
+                            "item": baseUrl
                         },
                         {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "Blog",
-                            "item": `${baseUrl}${settings.countryCode === 'GB' ? '' : '/us'}/blog`
+                            "item": `${baseUrl}/blog`
                         },
                         {
                             "@type": "ListItem",
@@ -489,7 +485,7 @@ export default function BlogPostPage() {
                     <SEO
                         title={`${regionalizeText(post.title)} | ${isUSDomain ? "Emergency Contractors" : regionalizeText("Emergency Tradesmen UK")} Blog`}
                         description={regionalizeText(post.excerpt) || ""}
-                        canonical={isUSDomain ? `/blog/${post.slug.replace(/-us$/, '')}` : (settings.countryCode === 'GB' ? '' : '/us') + `/blog/${post.slug}`}
+                        canonical={isUSDomain ? `/blog/${post.slug.replace(/-us$/, '')}` : `/blog/${post.slug}`}
                         ogType="article"
                         ogImage={post.cover_image || undefined}
                         jsonLd={jsonLdSchemas}
@@ -517,7 +513,7 @@ export default function BlogPostPage() {
             <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 supports-[backdrop-filter]:bg-background/60">
                 <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                     <Link
-                        to={`${settings.countryCode === 'GB' ? '' : '/us'}/blog`}
+                        to="/blog"
                         className="flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors group"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
@@ -716,12 +712,11 @@ export default function BlogPostPage() {
                                                                                childrenText.toLowerCase().includes('amazon');
                                                                                
                                                                 if (isAmazon) {
-                                                                    return (
-                                                                        <div className="my-10 flex justify-center">
-                                                                            <Button 
-                                                                                asChild 
-                                                                                className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-6 px-10 rounded-lg shadow-lg transform transition hover:scale-[1.02] active:scale-95 text-lg h-auto whitespace-normal text-center min-h-[60px] w-full max-w-lg"
-                                                                            >
+                                                                    return (                                                                         <div className="mt-2 mb-8 flex justify-center">
+                                                                             <Button 
+                                                                                 asChild 
+                                                                                 className="bg-[#FF9900] hover:bg-[#FF8800] text-black font-bold py-2 px-6 rounded-lg shadow-md transform transition hover:scale-[1.02] active:scale-95 text-sm h-auto whitespace-normal text-center min-h-[44px] w-auto max-w-xs"
+                                                                             >
                                                                                 <a {...props} target="_blank" rel="noopener noreferrer">
                                                                                     {props.children}
                                                                                 </a>
@@ -745,7 +740,7 @@ export default function BlogPostPage() {
                                                                 <blockquote {...props} className="border-l-4 border-gold bg-secondary/30 py-4 px-6 rounded-r-lg italic my-8 text-foreground" />
                                                             ),
                                                             img: ({ node, alt, ...props }) => (
-                                                                <figure className="my-12 md:my-16 w-full">
+                                                                <figure className="my-8 md:my-10 w-full">
                                                                     <div className="w-full max-h-[800px] overflow-hidden rounded-xl border border-secondary shadow-lg bg-secondary/30">
                                                                         <img
                                                                             {...props}

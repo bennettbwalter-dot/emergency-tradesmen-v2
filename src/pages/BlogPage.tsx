@@ -30,7 +30,7 @@ export default function BlogPage() {
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
     const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
 

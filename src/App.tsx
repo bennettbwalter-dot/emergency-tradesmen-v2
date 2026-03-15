@@ -23,6 +23,7 @@ import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import VoiceTrigger from "@/components/VoiceAssistant/VoiceTrigger";
 import { MobilePreviewWrapper } from "@/components/MobilePreviewWrapper";
+import { LocationOverrideTool } from "@/components/dev/LocationOverrideTool";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 
@@ -94,6 +95,91 @@ const HashCleaner = () => {
   return null;
 };
 
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/login" element={<AuthPage defaultTab="login" />} />
+    <Route path="/register" element={<AuthPage defaultTab="register" />} />
+    <Route path="/auth/callback" element={<AuthCallback />} />
+    <Route path="/voice-report" element={<VoiceReporter />} />
+
+    {/* Explicit Trade Routes (Highest Priority) */}
+    <Route path="/emergency-plumber" element={<TradeCityPage />} />
+    <Route path="/emergency-plumber/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-electrician" element={<TradeCityPage />} />
+    <Route path="/emergency-electrician/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-locksmith" element={<TradeCityPage />} />
+    <Route path="/emergency-locksmith/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-gas-engineer" element={<TradeCityPage />} />
+    <Route path="/emergency-gas-engineer/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-drain-specialist" element={<TradeCityPage />} />
+    <Route path="/emergency-drain-specialist/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-glazier" element={<TradeCityPage />} />
+    <Route path="/emergency-glazier/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-roofer" element={<TradeCityPage />} />
+    <Route path="/emergency-roofer/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-breakdown" element={<TradeCityPage />} />
+    <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-builder" element={<TradeCityPage />} />
+    <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-water-restoration" element={<TradeCityPage />} />
+    <Route path="/emergency-water-restoration/:city" element={<TradeCityPage />} />
+    <Route path="/emergency-hvac" element={<TradeCityPage />} />
+    <Route path="/emergency-hvac/:city" element={<TradeCityPage />} />
+
+    {/* Core Pages */}
+    <Route path="/" element={<Index />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/pricing" element={<PricingPage />} />
+    <Route path="/tradesmen" element={<PricingPage />} />
+    <Route path="/contact" element={<ContactPage />} />
+    <Route path="/blog" element={<BlogPage />} />
+    <Route path="/blog/:slug" element={<BlogPostPage />} />
+    <Route path="/faq" element={<FAQ />} />
+    <Route path="/locations" element={<LocationsDirectory />} />
+    <Route path="/privacy" element={<PrivacyPolicy />} />
+    <Route path="/terms" element={<TermsOfService />} />
+    <Route path="/vetting-process" element={<VettingProcess />} />
+    <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
+    <Route path="/user/dashboard" element={<UserDashboard />} />
+    <Route path="/business/:businessId" element={<BusinessProfilePage />} />
+    <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
+    <Route path="/premium-profile" element={<ProProfileEditor />} />
+    <Route path="/payment/success" element={<PaymentSuccessPage />} />
+    <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+
+    {/* Admin Routes */}
+    <Route path="/admin" element={<AdminLayout />}>
+      <Route index element={<AdminDashboard />} />
+      <Route path="businesses" element={<BusinessesPage />} />
+      <Route path="profile-editor" element={<AdminProfileEditor />} />
+      <Route path="availability" element={<AdminAvailability />} />
+      <Route path="photos" element={<PhotosPage />} />
+      <Route path="reviews" element={<ReviewsPage />} />
+      <Route path="subscriptions" element={<SubscriptionsPage />} />
+      <Route path="export" element={<DataExportPage />} />
+      <Route path="analytics" element={<AnalyticsPage />} />
+      <Route path="email-outreach" element={<EmailOutreachDashboard />} />
+    </Route>
+
+    {/* US Specific Hierarchy Routes */}
+    <Route path="/:state/:city" element={<TradeCityPage />} />
+    <Route path="/:state/:city/:tradePath" element={<TradeCityPage />} />
+    <Route path="/:state/:metro/:city/:tradePath" element={<TradeCityPage />} />
+    <Route path="/:state/:metro/:city/:suburb/:tradePath" element={<TradeCityPage />} />
+
+    {/* Catch-all for simple trade/city paths */}
+    <Route path="/:tradePath" element={<TradeCityPage />} />
+    <Route path="/:tradePath/:city" element={<TradeCityPage />} />
+
+    {/* Compatibility for old /us paths */}
+    <Route path="/us/*" element={<NotFound />} />
+    <Route path="/usa/*" element={<NotFound />} />
+    <Route path="/gb/*" element={<NotFound />} />
+
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+);
+
 const App = () => {
   // Debug: Check if Supabase URL is available
   if (!import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
@@ -144,6 +230,7 @@ const App = () => {
                   <Sonner />
                   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                     <LocalizationProvider>
+                      {import.meta.env.DEV && <LocationOverrideTool />}
                       {import.meta.env.DEV && (window.self === window.top) ? (
                         <MobilePreviewWrapper>
                           <ScrollToTop />
@@ -154,115 +241,7 @@ const App = () => {
                             <CookieConsent />
                             <ErrorBoundary>
                               <main className="pb-16 md:pb-0">
-                                <Routes>
-                                  <Route path="/login" element={<AuthPage defaultTab="login" />} />
-                                  <Route path="/register" element={<AuthPage defaultTab="register" />} />
-                                  <Route path="/auth/callback" element={<AuthCallback />} />
-                                  <Route path="/voice-report" element={<VoiceReporter />} />
-
-
-                                  {/* Explicit Trade Routes (Resolves conflict with /:countryCode) */}
-                                  <Route path="/emergency-plumber" element={<TradeCityPage />} />
-                                  <Route path="/emergency-plumber/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-electrician" element={<TradeCityPage />} />
-                                  <Route path="/emergency-electrician/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-locksmith" element={<TradeCityPage />} />
-                                  <Route path="/emergency-locksmith/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-gas-engineer" element={<TradeCityPage />} />
-                                  <Route path="/emergency-gas-engineer/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-drain-specialist" element={<TradeCityPage />} />
-                                  <Route path="/emergency-drain-specialist/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-glazier" element={<TradeCityPage />} />
-                                  <Route path="/emergency-glazier/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-roofer" element={<TradeCityPage />} />
-                                  <Route path="/emergency-roofer/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-breakdown" element={<TradeCityPage />} />
-                                  <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-builder" element={<TradeCityPage />} />
-                                  <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-water-restoration" element={<TradeCityPage />} />
-                                  <Route path="/emergency-water-restoration/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-hvac" element={<TradeCityPage />} />
-                                  <Route path="/emergency-hvac/:city" element={<TradeCityPage />} />
-
-                                  {/* Regional Support */}
-                                  <Route path="/:countryCode">
-                                    <Route index element={<Index />} />
-                                    <Route path="business/:businessId" element={<BusinessProfilePage />} />
-                                    <Route path="pricing" element={<PricingPage />} />
-                                    <Route path="about" element={<About />} />
-                                    <Route path="locations" element={<LocationsDirectory />} />
-                                    <Route path="blog" element={<BlogPage />} />
-                                    <Route path="blog/:slug" element={<BlogPostPage />} />
-                                    <Route path="privacy" element={<PrivacyPolicy />} />
-                                    <Route path="terms" element={<TermsOfService />} />
-                                    <Route path="contact" element={<ContactPage />} />
-                                    <Route path="faq" element={<FAQ />} />
-                                    <Route path="vetting-process" element={<VettingProcess />} />
-                                    <Route path=":tradePath" element={<TradeCityPage />} />
-                                    <Route path=":tradePath/:city" element={<TradeCityPage />} />
-
-                                    {/* US Specific Routes (State Level) */}
-                                    <Route path=":state/:city" element={<TradeCityPage />} />
-                                    <Route path=":state/:city/:tradePath" element={<TradeCityPage />} />
-                                    {/* Legacy US Suburb/Area Route */}
-                                    <Route path=":state/:city/:area/:tradePath" element={<TradeCityPage />} />
-
-                                    {/* NEW 4-Level Hierarchy Routes */}
-                                    {/* /us/:state/:metro/:city/:tradePath (Standard City Page) */}
-                                    <Route path=":state/:metro/:city/:tradePath" element={<TradeCityPage />} />
-
-                                    {/* /us/:state/:metro/:city/:suburb/:tradePath */}
-                                    <Route path=":state/:metro/:city/:suburb/:tradePath" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro/:city/:suburb (Directory/Index for suburb) - reusing TradeCityPage with default trade handled internally */}
-                                    <Route path=":state/:metro/:city/:suburb" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro/:city (Directory for city) */}
-                                    <Route path=":state/:metro/:city" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro (Directory for Metro) */}
-                                    <Route path=":state/:metro" element={<TradeCityPage />} />
-                                  </Route>
-
-                                  {/* Default (GB) Routes */}
-                                  <Route path="/" element={<Index />} />
-                                  <Route path="/user/dashboard" element={<UserDashboard />} />
-                                  <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-                                  <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
-                                  <Route path="/premium-profile" element={<ProProfileEditor />} />
-                                  <Route path="/about" element={<About />} />
-                                  <Route path="/pricing" element={<PricingPage />} />
-                                  <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
-                                  <Route path="/terms" element={<TermsOfService />} />
-                                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                                  <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                                  <Route path="/payment/cancel" element={<PaymentCancelPage />} />
-                                  <Route path="/contact" element={<ContactPage />} />
-                                  <Route path="/blog" element={<BlogPage />} />
-                                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                                  <Route path="/faq" element={<FAQ />} />
-                                  <Route path="/vetting-process" element={<VettingProcess />} />
-                                  <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
-                                  <Route path="/locations" element={<LocationsDirectory />} />
-
-                                  <Route path="/admin" element={<AdminLayout />}>
-                                    <Route index element={<AdminDashboard />} />
-                                    <Route path="businesses" element={<BusinessesPage />} />
-                                    <Route path="profile-editor" element={<AdminProfileEditor />} />
-                                    <Route path="availability" element={<AdminAvailability />} />
-                                    <Route path="photos" element={<PhotosPage />} />
-                                    <Route path="reviews" element={<ReviewsPage />} />
-                                    <Route path="subscriptions" element={<SubscriptionsPage />} />
-                                    <Route path="export" element={<DataExportPage />} />
-                                    <Route path="analytics" element={<AnalyticsPage />} />
-                                    <Route path="email-outreach" element={<EmailOutreachDashboard />} />
-                                  </Route>
-
-                                  <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
-                                  <Route path="/:tradePath/:city" element={<TradeCityPage />} />
-
-
-                                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                                  <Route path="*" element={<NotFound />} />
-                                </Routes>
+                                <AppRoutes />
                               </main>
                             </ErrorBoundary>
                             <BottomNav />
@@ -282,115 +261,7 @@ const App = () => {
                             <CookieConsent />
                             <ErrorBoundary>
                               <main className="pb-16 md:pb-0">
-                                <Routes>
-                                  <Route path="/login" element={<AuthPage defaultTab="login" />} />
-                                  <Route path="/register" element={<AuthPage defaultTab="register" />} />
-                                  <Route path="/auth/callback" element={<AuthCallback />} />
-                                  <Route path="/voice-report" element={<VoiceReporter />} />
-
-
-                                  {/* Explicit Trade Routes (Resolves conflict with /:countryCode) */}
-                                  <Route path="/emergency-plumber" element={<TradeCityPage />} />
-                                  <Route path="/emergency-plumber/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-electrician" element={<TradeCityPage />} />
-                                  <Route path="/emergency-electrician/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-locksmith" element={<TradeCityPage />} />
-                                  <Route path="/emergency-locksmith/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-gas-engineer" element={<TradeCityPage />} />
-                                  <Route path="/emergency-gas-engineer/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-drain-specialist" element={<TradeCityPage />} />
-                                  <Route path="/emergency-drain-specialist/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-glazier" element={<TradeCityPage />} />
-                                  <Route path="/emergency-glazier/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-roofer" element={<TradeCityPage />} />
-                                  <Route path="/emergency-roofer/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-breakdown" element={<TradeCityPage />} />
-                                  <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-builder" element={<TradeCityPage />} />
-                                  <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-water-restoration" element={<TradeCityPage />} />
-                                  <Route path="/emergency-water-restoration/:city" element={<TradeCityPage />} />
-                                  <Route path="/emergency-hvac" element={<TradeCityPage />} />
-                                  <Route path="/emergency-hvac/:city" element={<TradeCityPage />} />
-
-                                  {/* Regional Support */}
-                                  <Route path="/:countryCode">
-                                    <Route index element={<Index />} />
-                                    <Route path="business/:businessId" element={<BusinessProfilePage />} />
-                                    <Route path="pricing" element={<PricingPage />} />
-                                    <Route path="about" element={<About />} />
-                                    <Route path="locations" element={<LocationsDirectory />} />
-                                    <Route path="blog" element={<BlogPage />} />
-                                    <Route path="blog/:slug" element={<BlogPostPage />} />
-                                    <Route path="privacy" element={<PrivacyPolicy />} />
-                                    <Route path="terms" element={<TermsOfService />} />
-                                    <Route path="contact" element={<ContactPage />} />
-                                    <Route path="faq" element={<FAQ />} />
-                                    <Route path="vetting-process" element={<VettingProcess />} />
-                                    <Route path=":tradePath" element={<TradeCityPage />} />
-                                    <Route path=":tradePath/:city" element={<TradeCityPage />} />
-
-                                    {/* US Specific Routes (State Level) */}
-                                    <Route path=":state/:city" element={<TradeCityPage />} />
-                                    <Route path=":state/:city/:tradePath" element={<TradeCityPage />} />
-                                    {/* Legacy US Suburb/Area Route */}
-                                    <Route path=":state/:city/:area/:tradePath" element={<TradeCityPage />} />
-
-                                    {/* NEW 4-Level Hierarchy Routes */}
-                                    {/* /us/:state/:metro/:city/:tradePath (Standard City Page) */}
-                                    <Route path=":state/:metro/:city/:tradePath" element={<TradeCityPage />} />
-
-                                    {/* /us/:state/:metro/:city/:suburb/:tradePath */}
-                                    <Route path=":state/:metro/:city/:suburb/:tradePath" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro/:city/:suburb (Directory/Index for suburb) - reusing TradeCityPage with default trade handled internally */}
-                                    <Route path=":state/:metro/:city/:suburb" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro/:city (Directory for city) */}
-                                    <Route path=":state/:metro/:city" element={<TradeCityPage />} />
-                                    {/* /us/:state/:metro (Directory for Metro) */}
-                                    <Route path=":state/:metro" element={<TradeCityPage />} />
-                                  </Route>
-
-                                  {/* Default (GB) Routes */}
-                                  <Route path="/" element={<Index />} />
-                                  <Route path="/user/dashboard" element={<UserDashboard />} />
-                                  <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-                                  <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
-                                  <Route path="/premium-profile" element={<ProProfileEditor />} />
-                                  <Route path="/about" element={<About />} />
-                                  <Route path="/pricing" element={<PricingPage />} />
-                                  <Route path="/tradesmen" element={<PricingPage />} /> {/* Alias */}
-                                  <Route path="/terms" element={<TermsOfService />} />
-                                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                                  <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                                  <Route path="/payment/cancel" element={<PaymentCancelPage />} />
-                                  <Route path="/contact" element={<ContactPage />} />
-                                  <Route path="/blog" element={<BlogPage />} />
-                                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                                  <Route path="/faq" element={<FAQ />} />
-                                  <Route path="/vetting-process" element={<VettingProcess />} />
-                                  <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
-                                  <Route path="/locations" element={<LocationsDirectory />} />
-
-                                  <Route path="/admin" element={<AdminLayout />}>
-                                    <Route index element={<AdminDashboard />} />
-                                    <Route path="businesses" element={<BusinessesPage />} />
-                                    <Route path="profile-editor" element={<AdminProfileEditor />} />
-                                    <Route path="availability" element={<AdminAvailability />} />
-                                    <Route path="photos" element={<PhotosPage />} />
-                                    <Route path="reviews" element={<ReviewsPage />} />
-                                    <Route path="subscriptions" element={<SubscriptionsPage />} />
-                                    <Route path="export" element={<DataExportPage />} />
-                                    <Route path="analytics" element={<AnalyticsPage />} />
-                                    <Route path="email-outreach" element={<EmailOutreachDashboard />} />
-                                  </Route>
-
-                                  <Route path="/:tradePath" element={<TradeCityPage />} /> {/* Route without city */}
-                                  <Route path="/:tradePath/:city" element={<TradeCityPage />} />
-
-
-                                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                                  <Route path="*" element={<NotFound />} />
-                                </Routes>
+                                <AppRoutes />
                               </main>
                             </ErrorBoundary>
                             <BottomNav />

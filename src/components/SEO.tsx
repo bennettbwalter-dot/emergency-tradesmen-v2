@@ -43,7 +43,7 @@ export function SEO({
 }: SEOProps) {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001');
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     
     const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
     const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;

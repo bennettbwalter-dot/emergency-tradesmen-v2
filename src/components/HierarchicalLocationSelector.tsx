@@ -257,30 +257,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                 </Popover>
             )}
 
-            {/* Suburb/Area Select - Only show if suburbs exist */}
-            {selectedCity && selectedCity.suburbs && selectedCity.suburbs.length > 0 && (
-                <Select value={selectedSuburb?.slug || ""} onValueChange={handleSuburbChange}>
-                    <SelectTrigger className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${selectedSuburb ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5'}`}>
-                        <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
-                        <div className="hidden md:block">
-                            <SelectValue placeholder="Area" />
-                        </div>
-                        <div className="hidden md:block">
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </div>
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[300px]">
-                        {/* Option to select the city itself */}
-                        <SelectItem value="all-city" className="text-emerald-500 font-medium border-b border-border/50">
-                            All {selectedCity.name}
-                        </SelectItem>
-
-                        {selectedCity.suburbs?.map((s) => (
-                            <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-            )}
+            {/* Suburb/Area Select REMOVED for US as requested */}
         </div>
     );
 }
