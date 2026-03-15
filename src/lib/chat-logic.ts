@@ -323,7 +323,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.detectedTrade = 'gas-engineer';
         } else {
             const detectedTrades: string[] = [];
-            const tradeOrder = ['water-restoration', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'breakdown', 'roofer', 'gas-engineer', 'air-conditioning'];
+            // Priority: Breakdown and Dangerous trades first
+            const tradeOrder = ['breakdown', 'gas-engineer', 'water-restoration', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'roofer', 'air-conditioning'];
 
             for (const slug of tradeOrder) {
                 if (TRADE_KEYWORDS[slug]?.some(k => {
@@ -377,6 +378,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
                                 response: { id: Date.now().toString(), role: 'assistant', content: "Is the main issue water damage that needs drying and restoration, or is it a plumbing problem like a leak that needs fixing?" }
                             };
                         }
+                    } else if (detectedTrades.includes('breakdown') && (lowerMsg.includes('car') || lowerMsg.includes('vehicle') || lowerMsg.includes('motorway') || lowerMsg.includes('roadside') || lowerMsg.includes('driving'))) {
+                        // High confidence breakdown (prevents 'power' match collision)
+                        newState.detectedTrade = 'breakdown';
                     } else if (!newState.detectedTrade) {
                         newState.detectedTrade = detectedTrades[0];
                     }

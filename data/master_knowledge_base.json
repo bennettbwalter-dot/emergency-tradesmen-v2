@@ -1,0 +1,502 @@
+[
+  {
+    "trade": "plumber",
+    "scenario": "Burst pipe causing sudden flooding",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Locate and turn off the main stopcock/shut-off valve immediately. Isolate nearby electrics if safe. DO NOT: Attempt to bind the pipe with tape while under pressure or use unapproved temporary fittings.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Water Regulations Advisory Scheme (WRAS)",
+        "authority_url": "https://www.wrasapprovals.co.uk/",
+        "search_query_to_scrape": "WRAS approved fittings and burst pipe isolation regulations"
+      },
+      {
+        "region": "US",
+        "authority_name": "IPC (International Code Council)",
+        "authority_url": "https://www.iccsafe.org/",
+        "search_query_to_scrape": "IPC emergency water shut off valve code"
+      }
+    ]
+  },
+  {
+    "trade": "Plumber",
+    "scenario": "Toilet overflowing continuously",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Turn off the toilet water supply valve located behind or near the base of the toilet. Clean contaminated areas safely. DO NOT: Keep flushing in an attempt to clear it.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "UK Building Regs Part G",
+        "authority_url": "https://www.gov.uk/government/publications/sanitation-hot-water-safety-and-water-efficiency-approved-document-g",
+        "search_query_to_scrape": "Building Regulations Part G sanitation and overflow compliance"
+      },
+      {
+        "region": "US",
+        "authority_name": "UPC (IAPMO)",
+        "authority_url": "https://www.iapmo.org/",
+        "search_query_to_scrape": "UPC uniform plumbing code sanitary drainage overflow"
+      }
+    ]
+  },
+  {
+    "trade": "Plumber",
+    "scenario": "Water heater leaking heavily",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Turn off the cold water supply to the heater and shut off its power source (gas or electric). DO NOT: Touch the hot water tank or attempt to plug the pressure relief valve.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "CIPHE",
+        "authority_url": "https://www.ciphe.org.uk/",
+        "search_query_to_scrape": "CIPHE unvented hot water cylinder safety and leak protocols"
+      },
+      {
+        "region": "US",
+        "authority_name": "ASSE International",
+        "authority_url": "https://www.asse-plumbing.org/",
+        "search_query_to_scrape": "ASSE water heater safety and pressure relief valve standards"
+      }
+    ]
+  },
+  {
+    "trade": "electrician",
+    "scenario": "Burning smell coming from a plug socket",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Turn off the circuit breaker immediately at the main panel. Unplug devices only if safe to do so without touching the socket face. DO NOT: Ignore the smell or use the socket.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Electrical Safety First",
+        "authority_url": "https://www.electricalsafetyfirst.org.uk/",
+        "search_query_to_scrape": "Electrical Safety First burning smell overloaded socket emergency"
+      },
+      {
+        "region": "US",
+        "authority_name": "National Electrical Code (NFPA 70)",
+        "authority_url": "https://www.nfpa.org/",
+        "search_query_to_scrape": "NEC overloaded receptacle thermal damage hazard"
+      }
+    ]
+  },
+  {
+    "trade": "electrician",
+    "scenario": "Exposed live wires found during DIY or damage",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Isolate power at the main consumer unit/breaker panel immediately and keep people away. DO NOT: Touch the wires even if you think the switch is off; do not cover with tape.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Health and Safety Executive (HSE)",
+        "authority_url": "https://www.hse.gov.uk/",
+        "search_query_to_scrape": "HSE Electricity at Work Regulations 1989 exposed conductors"
+      },
+      {
+        "region": "US",
+        "authority_name": "OSHA",
+        "authority_url": "https://www.osha.gov/",
+        "search_query_to_scrape": "OSHA electrical safety exposed wiring standards"
+      }
+    ]
+  },
+  {
+    "trade": "electrician",
+    "scenario": "RCD or GFCI continuously tripping",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Unplug all appliances on the affected circuit and attempt to reset. If it trips again, leave it off and call a professional. DO NOT: Tape the breaker switch up or bypass the safety switch.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "BS 7671 (IET)",
+        "authority_url": "https://www.theiet.org/",
+        "search_query_to_scrape": "BS 7671 wiring regulations RCD fault protection tripping"
+      },
+      {
+        "region": "US",
+        "authority_name": "Underwriters Laboratories (UL)",
+        "authority_url": "https://www.ul.com/",
+        "search_query_to_scrape": "UL GFCI tripping and ground fault safety testing"
+      }
+    ]
+  },
+  {
+    "trade": "gas-engineer",
+    "scenario": "Strong smell of gas in the property",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Open all windows and doors; turn off the emergency control valve at the meter; evacuate immediately. DO NOT: Turn light switches on/off, smoke, or use a mobile phone inside.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Gas Safe Register",
+        "authority_url": "https://www.gassaferegister.co.uk/",
+        "search_query_to_scrape": "Gas Safe Register emergency gas leak procedure"
+      },
+      {
+        "region": "US",
+        "authority_name": "National Fuel Gas Code (NFPA 54)",
+        "authority_url": "https://www.nfpa.org/",
+        "search_query_to_scrape": "NFPA 54 gas leak evacuation and shutoff procedure"
+      }
+    ]
+  },
+  {
+    "trade": "gas-engineer",
+    "scenario": "Carbon monoxide alarm sounding",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Evacuate the property immediately, leave doors open to ventilate, and call emergency services or the gas emergency number. DO NOT: Stay inside to try and find the source.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "HSE Gas Safety",
+        "authority_url": "https://www.hse.gov.uk/gas/",
+        "search_query_to_scrape": "HSE Gas Safety (Installation and Use) Regulations carbon monoxide exposure"
+      },
+      {
+        "region": "US",
+        "authority_name": "American Public Gas Association (APGA)",
+        "authority_url": "https://www.apga.org/",
+        "search_query_to_scrape": "APGA carbon monoxide safety and alarm response"
+      }
+    ]
+  },
+  {
+    "trade": "gas-engineer",
+    "scenario": "Yellow or orange flame on gas boiler or hob",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Stop using the appliance immediately, turn off the gas supply, and ventilate the room. DO NOT: Ignore it; a yellow flame indicates incomplete combustion and deadly carbon monoxide.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Institution of Gas Engineers and Managers (IGEM)",
+        "authority_url": "https://www.igem.org.uk/",
+        "search_query_to_scrape": "IGEM combustion standards yellow flame carbon monoxide risk"
+      },
+      {
+        "region": "US",
+        "authority_name": "American Gas Association (AGA)",
+        "authority_url": "https://www.aga.org/",
+        "search_query_to_scrape": "AGA incomplete combustion yellow flame safety hazards"
+      }
+    ]
+  },
+  {
+    "trade": "locksmith",
+    "scenario": "Key snapped off inside the lock cylinder",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: Leave the broken piece inside and call a professional for extraction. DO NOT: Try to dig it out with pins or screwdrivers as this pushes it further in and destroys the pins.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Master Locksmiths Association (MLA)",
+        "authority_url": "https://www.locksmiths.co.uk/",
+        "search_query_to_scrape": "MLA snapped key extraction cylinder damage"
+      },
+      {
+        "region": "US",
+        "authority_name": "ALOA Security Professionals",
+        "authority_url": "https://www.aloa.org/",
+        "search_query_to_scrape": "ALOA broken key extraction best practices"
+      }
+    ]
+  },
+  {
+    "trade": "locksmith",
+    "scenario": "UPVC or composite multipoint door won't lock",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: Secure the property from the inside if possible and call a locksmith to realign hinges or replace the gearbox. DO NOT: Force the handle up with heavy pressure, as this will shatter the gearbox mechanism.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Secured by Design",
+        "authority_url": "https://www.securedbydesign.com/",
+        "search_query_to_scrape": "Secured by Design PAS 24 multipoint lock failure and security"
+      },
+      {
+        "region": "US",
+        "authority_name": "BHMA",
+        "authority_url": "https://buildershardware.com/",
+        "search_query_to_scrape": "BHMA multi-point locking hardware alignment and failure"
+      }
+    ]
+  },
+  {
+    "trade": "drain-specialist",
+    "scenario": "Sewage backing up into shower or ground floor fixtures",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Stop using all water in the house immediately to prevent further flooding. DO NOT: Pour harsh chemical unblockers down the drain as they will sit in the pipe and endanger the engineer.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "UK Building Regs Part H",
+        "authority_url": "https://www.gov.uk/government/publications/drainage-and-waste-disposal-approved-document-h",
+        "search_query_to_scrape": "Building Regulations Part H foul water drainage blockages and overflow"
+      },
+      {
+        "region": "US",
+        "authority_name": "EPA Wastewater Programs",
+        "authority_url": "https://www.epa.gov/npdes",
+        "search_query_to_scrape": "EPA sanitary sewer overflow response guidelines residential"
+      }
+    ]
+  },
+  {
+    "trade": "drain-specialist",
+    "scenario": "Sinkhole appearing near exterior drain pipe",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Keep people and vehicles completely away from the area; call a drainage specialist for a CCTV survey. DO NOT: Walk near the edge or attempt to fill it with dirt without fixing the collapsed pipe.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "Water UK",
+        "authority_url": "https://www.water.org.uk/",
+        "search_query_to_scrape": "Water UK collapsed sewer pipe sinkhole protocol"
+      },
+      {
+        "region": "US",
+        "authority_name": "NASSCO",
+        "authority_url": "https://www.nassco.org/",
+        "search_query_to_scrape": "NASSCO underground pipe collapse surface subsidence"
+      }
+    ]
+  },
+  {
+    "trade": "glazier",
+    "scenario": "Shattered sliding glass door or low-level window",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: Keep pets and children out of the room; apply heavy-duty tape over cracks if the pane is still intact. DO NOT: Try to remove large, jagged shards without heavy protective gloves and eyewear.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "BS 6262 Glazing Safety",
+        "authority_url": "https://www.bsigroup.com/",
+        "search_query_to_scrape": "BS 6262 safety glazing for critical locations and doors"
+      },
+      {
+        "region": "US",
+        "authority_name": "National Glass Association (NGA)",
+        "authority_url": "https://www.glass.org/",
+        "search_query_to_scrape": "NGA safety glazing code requirements for sliding doors"
+      }
+    ]
+  },
+  {
+    "trade": "glazier",
+    "scenario": "Condensation permanently trapped between double glazed panes",
+    "risk_level": "Standard repair",
+    "action_plan": "DO: Arrange for the sealed glass unit to be measured and replaced by a professional. DO NOT: Attempt to drill holes in the glass to let the moisture out; this destroys the thermal efficiency completely.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "FENSA",
+        "authority_url": "https://www.fensa.org.uk/",
+        "search_query_to_scrape": "FENSA failed double glazing unit condensation replacement"
+      },
+      {
+        "region": "US",
+        "authority_name": "FGIA (Formerly IGMA)",
+        "authority_url": "https://fgiaonline.org/",
+        "search_query_to_scrape": "FGIA insulating glass unit seal failure moisture"
+      }
+    ]
+  },
+  {
+    "trade": "roofer",
+    "scenario": "Water pouring through ceiling during heavy storm",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Place buckets to catch water; safely pierce a small hole in a bulging plaster ceiling to release trapped water. DO NOT: Climb onto a wet, slippery roof during a storm to attempt temporary repairs.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "National Federation of Roofing Contractors (NFRC)",
+        "authority_url": "https://www.nfrc.co.uk/",
+        "search_query_to_scrape": "NFRC safe roof access and temporary leak repair guidance"
+      },
+      {
+        "region": "US",
+        "authority_name": "NRCA",
+        "authority_url": "https://www.nrca.net/",
+        "search_query_to_scrape": "NRCA steep-slope roof safety and emergency tarping protocols"
+      }
+    ]
+  },
+  {
+    "trade": "roofer",
+    "scenario": "Roofline visibly sagging from the outside",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Evacuate the area directly below the sag and request a structural roofing inspection immediately. DO NOT: Attempt to prop it up from the inside without structural calculations.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "British Board of Agrément (BBA)",
+        "authority_url": "https://www.bbacerts.co.uk/",
+        "search_query_to_scrape": "BBA roofing structural integrity timber failure"
+      },
+      {
+        "region": "US",
+        "authority_name": "International Building Code (IBC)",
+        "authority_url": "https://www.iccsafe.org/",
+        "search_query_to_scrape": "IBC roof assembly structural load failure sagging"
+      }
+    ]
+  },
+  {
+    "trade": "builder",
+    "scenario": "Large, stepped cracks appearing in exterior brickwork",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Monitor the crack with a gauge; check for internal symptoms like sticking doors or sloping floors. DO NOT: Simply fill the crack with mortar without having a structural engineer identify the root cause.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "UK Building Regulations Part A",
+        "authority_url": "https://www.gov.uk/government/publications/structure-approved-document-a",
+        "search_query_to_scrape": "Building Regulations Part A structural movement and subsidence"
+      },
+      {
+        "region": "US",
+        "authority_name": "Associated General Contractors (AGC)",
+        "authority_url": "https://www.agc.org/",
+        "search_query_to_scrape": "AGC foundation settlement structural masonry cracking"
+      }
+    ]
+  },
+  {
+    "trade": "builder",
+    "scenario": "Removing an internal timber stud wall or plasterboard partition",
+    "risk_level": "Standard repair",
+    "action_plan": "DO: Hire a structural engineer to survey the wall before any demolition. Timber stud walls often support upper floor joists or roof loads. DO NOT: Assume a timber wall is non-load-bearing just because it is not brick; removing a structural timber wall can cause ceiling collapse or structural sagging.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "CITB (Construction Industry Training Board)",
+        "authority_url": "https://www.citb.co.uk/",
+        "search_query_to_scrape": "CITB load bearing timber stud wall identification"
+      },
+      {
+        "region": "US",
+        "authority_name": "NAHB (National Association of Home Builders)",
+        "authority_url": "https://www.nahb.org/",
+        "search_query_to_scrape": "NAHB structural load bearing wall removal guidelines"
+      }
+    ]
+  },
+  {
+    "trade": "water-restoration",
+    "scenario": "Flooded basement with standing water",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Turn off the electricity to the basement from the main breaker panel located upstairs or outside. DO NOT: Wade into floodwater if the power is still on or if it smells of raw sewage.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "British Damage Management Association (BDMA)",
+        "authority_url": "https://www.bdma.org.uk/",
+        "search_query_to_scrape": "BDMA flood recovery electrical safety and water extraction"
+      },
+      {
+        "region": "US",
+        "authority_name": "IICRC",
+        "authority_url": "https://iicrc.org/",
+        "search_query_to_scrape": "IICRC S500 Standard for Professional Water Damage Restoration Category 3 water"
+      }
+    ]
+  },
+  {
+    "trade": "water-restoration",
+    "scenario": "Extensive black mould covering walls or ceiling",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: Wear an N95 mask if in the room; improve ventilation; identify and fix the underlying moisture leak. DO NOT: Dry-brush the mould or scrape it, as this releases millions of toxic spores into the air.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "RICS",
+        "authority_url": "https://www.rics.org/",
+        "search_query_to_scrape": "RICS damp and mould remediation residential property"
+      },
+      {
+        "region": "US",
+        "authority_name": "Restoration Industry Association (RIA)",
+        "authority_url": "https://www.restorationindustry.org/",
+        "search_query_to_scrape": "RIA mould remediation protocol safe containment"
+      }
+    ]
+  },
+  {
+    "trade": "breakdown",
+    "scenario": "Vehicle loses power entirely on a busy highway",
+    "risk_level": "Critical emergency",
+    "action_plan": "DO: Indicate and pull over to the hard shoulder; turn on hazard lights immediately; exit from the non-traffic side. DO NOT: Stay inside the vehicle if parked in a live lane, and do not stand directly behind the vehicle.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "National Highways",
+        "authority_url": "https://nationalhighways.co.uk/",
+        "search_query_to_scrape": "National Highways breakdown on a motorway safety procedure live lane"
+      },
+      {
+        "region": "US",
+        "authority_name": "NHTSA",
+        "authority_url": "https://www.nhtsa.gov/",
+        "search_query_to_scrape": "NHTSA highway breakdown emergency shoulder safety protocols"
+      }
+    ]
+  },
+  {
+    "trade": "breakdown",
+    "scenario": "Engine temperature gauge hits the red zone/smoking",
+    "risk_level": "Major emergency",
+    "action_plan": "DO: Pull over safely and turn the engine off immediately to prevent catastrophic block warping. DO NOT: Open the radiator cap while the engine is hot, as boiling coolant will spray out under high pressure.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "DVSA",
+        "authority_url": "https://www.gov.uk/government/organisations/driver-and-vehicle-standards-agency",
+        "search_query_to_scrape": "DVSA safe vehicle operation engine overheating response"
+      },
+      {
+        "region": "US",
+        "authority_name": "FMCSA",
+        "authority_url": "https://www.fmcsa.dot.gov/",
+        "search_query_to_scrape": "FMCSA commercial and passenger vehicle cooling system failure safety"
+      }
+    ]
+  },
+  {
+    "trade": "air-conditioning",
+    "scenario": "AC unit blowing warm air and making a hissing sound",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: Turn the system off at the thermostat to prevent burning out the compressor motor. DO NOT: Attempt to top up the refrigerant yourself; venting fluorinated gases into the atmosphere is illegal.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "REFCOM",
+        "authority_url": "https://www.refcom.org.uk/",
+        "search_query_to_scrape": "REFCOM F-Gas regulations refrigerant leak handling and legality"
+      },
+      {
+        "region": "US",
+        "authority_name": "EPA Section 608",
+        "authority_url": "https://www.epa.gov/section608",
+        "search_query_to_scrape": "EPA Section 608 stationary refrigeration leak repair rules"
+      }
+    ]
+  },
+  {
+    "trade": "air-conditioning",
+    "scenario": "Furnace smells strongly like burning dust or electrical burning",
+    "risk_level": "Urgent repair",
+    "action_plan": "DO: If it's the first time turning it on for winter, let it run for 10 minutes to burn off dust. If the smell persists or smells like melting plastic, turn it off immediately. DO NOT: Store flammable materials near the unit.",
+    "region_data": [
+      {
+        "region": "UK",
+        "authority_name": "BESA",
+        "authority_url": "https://www.thebesa.com/",
+        "search_query_to_scrape": "BESA heating system maintenance electrical fault detection"
+      },
+      {
+        "region": "US",
+        "authority_name": "ASHRAE",
+        "authority_url": "https://www.ashrae.org/",
+        "search_query_to_scrape": "ASHRAE furnace operation dust burning vs electrical failure"
+      }
+    ]
+  }
+]
