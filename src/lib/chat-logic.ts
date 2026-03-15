@@ -192,6 +192,12 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
     ]
 };
 
+const getReadableTradeName = (slug: string, countryCode: string) => {
+    const trade = trades.find(t => t.slug === slug);
+    if (!trade) return slug.replace(/-/g, ' ');
+    return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
+};
+
 export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -229,34 +235,50 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
         if (matchedRule) {
             const isUK = region === 'UK';
-            const termMain = isUK ? 'mains' : 'main breaker';
             
-            // 1. Direct Answer (Persona Step 1)
-            // If the user asked "right?" or similar, and we have a "DO NOT" that contradicts it, be firm.
-            let directAnswer = "";
-            const lowerPlan = matchedRule.action_plan.toLowerCase();
-            const containsDoNot = matchedRule.action_plan.includes("DO NOT:");
-            const doNotSection = containsDoNot ? matchedRule.action_plan.split("DO NOT:")[1].split(".")[0].trim() : "";
-            
-            if (lowerMsg.includes("right?") || lowerMsg.includes("correct?") || lowerMsg.includes("don't i")) {
-                if (doNotSection && (doNotSection.toLowerCase().includes("assume") || doNotSection.toLowerCase().includes("ignore"))) {
-                    directAnswer = `Actually, that is not correct or safe to assume. `;
-                }
-            }
-            
-            let expertResponse = `I understand you're asking about ${matchedRule.scenario}. ${directAnswer}I can certainly help you with the correct safety procedures.\n\n`;
-            expertResponse += `🚨 **Risk Level:** This is a **${matchedRule.risk_level}**.\n\n`;
-            expertResponse += `🛡️ **Safety Instructions:**\n${matchedRule.action_plan}\n\n`;
-            expertResponse += `🔧 **Professional Fix:** You need a qualified **${matchedRule.trade} ${isUK ? 'Tradesman' : 'Contractor'}** to resolve this safely. Do not attempt to fix this yourself if it involves ${termMain} or structural issues.\n\n`;
-            expertResponse += `📚 **Official Guidance:** This advice is based on standards from the **${matchedRule.authority_name}**. For more details, see their official documentation: [${matchedRule.authority_url}](${matchedRule.authority_url})`;
+            // Extract "DO" and "DO NOT" sections from the action_plan
+            // The data format is "DO: ... DO NOT: ..."
+            const planParts = matchedRule.action_plan.split('DO NOT:');
+            const doSection = planParts[0].replace('DO:', '').trim();
+            const doNotSection = planParts.length > 1 ? planParts[1].trim() : "No specific dangerous actions mentioned, but follow standard precautions.";
+
+            // 1. Assess the Situation
+            let response = `### Assess the Situation\n`;
+            response += `I've analyzed your description regarding ${matchedRule.scenario}. Based on these details, this is classified as a **${matchedRule.risk_level}**.\n\n`;
+
+            // 2. Immediate Safety Steps
+            response += `### Immediate Safety Steps\n`;
+            // Split by semicolons or full stops to create bullets if possible, otherwise just bullet the whole block
+            const doBullets = doSection.split(/[;.]. /).map(s => s.trim()).filter(Boolean);
+            doBullets.forEach(bullet => {
+                response += `- ${bullet}\n`;
+            });
+            response += `\n`;
+
+            // 3. What NOT to Do
+            response += `### What NOT to Do\n`;
+            const doNotBullets = doNotSection.split(/[;.]. /).map(s => s.trim()).filter(Boolean);
+            doNotBullets.forEach(bullet => {
+                response += `- ${bullet}\n`;
+            });
+            response += `\n`;
+
+            // 4. Official Guidance
+            response += `### Official Guidance\n`;
+            response += `This protocol is based on standards from the **${matchedRule.authority_name}**. You can review their full safety documentation here: [${matchedRule.authority_url}](${matchedRule.authority_url})\n\n`;
+
+            // 5. Trade Required
+            const tradeName = getReadableTradeName(matchedRule.trade, countryCode);
+            response += `### Trade Required\n`;
+            response += `You require a qualified emergency **${tradeName}** to resolve this issue safely.`;
 
             newState.detectedTrade = matchedRule.trade;
-            // If we don't have a city, we MUST ask for it now instead of just giving advice and stopping.
-            // FOR US: strictly enforce location check to avoid routing to London default.
+            
+            // Handle location prompt if not yet detected
             if (!newState.detectedCity) {
                 newState.step = 'LOCATION_CHECK';
                 const locationPrompt = countryCode === 'US' ? "What city or zip code are you in?" : "Which city or postcode are you in?";
-                expertResponse += `\n\nTo find the nearest emergency **${matchedRule.trade}** for you, ${locationPrompt}`;
+                response += `\n\nTo help you further, ${locationPrompt}`;
             }
 
             return {
@@ -264,7 +286,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 response: {
                     id: Date.now().toString(),
                     role: 'assistant',
-                    content: expertResponse
+                    content: response
                 }
             };
         }
@@ -525,12 +547,6 @@ export async function processUserMessage(message: string, currentState: ChatStat
     let action: 'navigate' | undefined;
     let target: string | undefined;
 
-    const getReadableTradeName = (slug: string) => {
-        const trade = trades.find(t => t.slug === slug);
-        if (!trade) return slug.replace(/-/g, ' ');
-        return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
-    };
-
     const tip = (!currentState.detectedTrade && newState.detectedTrade) ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
 
     if (newState.step === 'CONFIRM_LOCATION' && newState.suggestedCity) {
@@ -572,18 +588,18 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.step = 'ROUTING';
             target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
-            responseText = `${tip ? tip + ' ' : ''}Taking you to ${getReadableTradeName(newState.detectedTrade)} in ${city} now.`;
+            responseText = `${tip ? tip + ' ' : ''}Confirmed. I'm directing you to our emergency ${getReadableTradeName(newState.detectedTrade, countryCode)} team in ${city} for immediate assistance.`;
         } else {
             newState.suggestedCity = city;
             newState.detectedCity = null;
             newState.step = 'CONFIRM_LOCATION';
-            responseText = `${!currentState.detectedTrade ? `I've identified that as a ${getReadableTradeName(newState.detectedTrade)} emergency. ` : ""}${tip ? `${tip} ` : ""}We detected you may be in ${city}. Is this correct?`;
+            responseText = `${!currentState.detectedTrade ? `I've assessed this as a ${getReadableTradeName(newState.detectedTrade, countryCode)} emergency. ` : ""}${tip ? `${tip} ` : ""}We detected you may be in ${city}. Is this correct?`;
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
-        responseText = `${!currentState.detectedTrade ? `I've identified that as a ${getReadableTradeName(newState.detectedTrade)} emergency. ` : ""}${tip ? `${tip} ` : ""}What town, area, or postcode are you in?`;
+        responseText = `${!currentState.detectedTrade ? `I've assessed this as a ${getReadableTradeName(newState.detectedTrade, countryCode)} emergency. ` : ""}${tip ? `${tip} ` : ""}Which town, area, or postcode are you in?`;
         newState.step = 'LOCATION_CHECK';
     } else {
-        responseText = /trade|service|list|cover/i.test(lowerMsg) ? "We cover plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which one do you need?" : "I'm not sure I understood that. Could you try saying one of these: plumber, electrician, locksmith, gas engineer, roofer, glazier, drain specialist, or breakdown?";
+        responseText = /trade|service|list|cover/i.test(lowerMsg) ? "Our emergency triage covers plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which of these is affecting your property?" : "I'm sorry, I didn't quite catch that. To give you the right safety advice, could you clarify if your emergency is related to plumbing, electrics, gas, locks, drains, glazing, roofing, building, or a vehicle?";
         newState.step = 'TRADE_CHECK';
     }
 
