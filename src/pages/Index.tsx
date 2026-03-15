@@ -25,7 +25,7 @@ const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSecti
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(module => ({ default: module.CTASection })));
 
 const Index = () => {
-  const { settings } = useLocalization();
+  const { settings, detectedCity } = useLocalization();
   const [showFaq, setShowFaq] = useState(false);
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
@@ -34,15 +34,17 @@ const Index = () => {
   const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
   const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
+  const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? `in ${detectedCity}` : 'Near You');
+
   // Schema markup
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
-    "name": siteName,
+    "name": `${siteName} ${displayCity}`,
     "image": `${siteUrl}/og-image.webp`,
-    "description": `24/7 ${siteName} Services. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
+    "description": `24/7 ${siteName} in ${displayCity}. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
     "telephone": settings.countryCode === 'US' ? "+1-888-555-0199" : "+44 20 7946 0000",
-    "areaServed": settings.countryCode,
+    "areaServed": displayCity,
     "availableLanguage": "English",
     "serviceType": ["Plumbing", "Electrical", "Locksmith", "HVAC", "Glazing", "Drainage"],
     "openingHours": "Mo-Su 00:00-24:00",
@@ -54,12 +56,11 @@ const Index = () => {
   return (
     <ChatbotProvider>
       <GuestGate />
+      <SEO 
+        title={`${siteName} ${displayCity}`}
+        description={`Find trusted local ${settings.tradeTerm.toLowerCase()}s in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC. Fast response.`}
+      />
       <Helmet>
-        <title>{siteName} - 24/7 Local Experts Near You</title>
-        <meta
-          name="description"
-          content={`Find trusted local ${settings.tradeTerm.toLowerCase()}s for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC issues. Fast response times.`}
-        />
         <script type="application/ld+json">
           {JSON.stringify(emergencyServiceSchema)}
         </script>

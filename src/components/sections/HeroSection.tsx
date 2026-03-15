@@ -20,15 +20,11 @@ export function HeroSection() {
         detectUserLocation();
     }, [detectUserLocation]);
 
-    // Priority: 
-    // 1. detectedState (USA)
-    // 2. detectedCity (UK)
-    // 3. Fallback to 'ME'
-    const regionName = settings.countryCode === 'US' 
-        ? (detectedState || 'ME')
-        : (detectedCity || 'ME');
-
-    const displayRegion = regionName.toUpperCase();
+    // Headline Logic
+    // UK: NEAR {City} or NEAR ME
+    // US: NEAR {City} or NEAR ME
+    const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? detectedCity : 'ME').toUpperCase();
+    const displayState = detectedState || (settings.countryCode === 'US' ? 'US' : 'UK');
 
     return (
         <section className="relative block overflow-hidden">
@@ -82,8 +78,8 @@ export function HeroSection() {
                     {/* Main headline */}
                     <div className="flex flex-col items-center justify-center mb-6">
                         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.1]">
-                            LOCAL <span className="text-gold block sm:inline">{settings.tradeTerm.toUpperCase()}</span>
-                            <span className="text-gold block sm:inline"> NEAR {displayRegion}</span>
+                            LOCAL <span className="text-gold block sm:inline">TRADESMEN</span>
+                            <span className="text-gold block sm:inline"> NEAR {displayCity}</span>
                         </h1>
                     </div>
 
@@ -94,7 +90,7 @@ export function HeroSection() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-[10px] sm:text-sm md:text-base lg:text-lg text-muted-foreground mb-4 tracking-wide uppercase"
                     >
-                        Emergency {settings.tradeTerm} {settings.countryCode === 'GB' ? 'UK' : 'US'} | Nationwide 24/7 Help
+                        Emergency {settings.tradeTerm} {displayState} | Nationwide 24/7 Help
                     </motion.p>
 
                     {/* "Need Help" Button */}

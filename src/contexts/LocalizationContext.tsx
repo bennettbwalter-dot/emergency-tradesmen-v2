@@ -101,18 +101,14 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             try {
                 const hostname = window.location.hostname;
                 const port = window.location.port;
-                const isUS = hostname.includes('emergencycontractors.net') || 
+                const isUSDomain = hostname.includes('emergencycontractors.net') || 
                              (hostname === 'localhost' && port === '3001') ||
                              (hostname === '127.0.0.1' && port === '3001');
                 
-                if (isUS) {
+                if (isUSDomain) {
                     setCountryCodeState('US');
-                    setHasAttemptedIPDetection(true);
-                    return;
                 } else if (port === '3000' || hostname.includes('emergencytradesmen.net') || (hostname === 'localhost' && port === '3000')) {
                     setCountryCodeState('GB');
-                    setHasAttemptedIPDetection(true);
-                    return;
                 }
 
                 // Fallback for other domains/IPs (simple check, no redirect)
@@ -120,22 +116,27 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                 const data = await response.json();
 
                 if (data.countryCode === 'US') {
-                    setCountryCodeState('US');
-                    if (data.regionName) {
+                    if (!settings.countryCode) setCountryCodeState('US');
+                    if (data.regionName && !detectedState) {
                         setDetectedState(data.regionName);
-                        console.log(`IP-based state detection: ${data.regionName}`);
                     }
-                    if (data.cityName) {
+                    if (data.cityName && !detectedCity) {
                         setDetectedCity(data.cityName);
-                        console.log(`IP-based city detection (US): ${data.cityName}`);
                     }
-                } else if (data.countryCode === 'GB') {
-                    setCountryCodeState('GB');
-                    if (data.cityName) {
+                } else if (data.countryCode === 'GB' || settings.countryCode === 'GB') {
+                    if (!settings.countryCode) setCountryCodeState('GB');
+                    if (data.regionName && !detectedState) {
+                        setDetectedState(data.regionName);
+                    }
+                    if (data.latitude && data.longitude && !detectedCity) {
+                        const nearest = findNearestCity(data.latitude, data.longitude, 'GB');
+                        if (nearest) {
+                            setDetectedCity(nearest.city);
+                        }
+                    } else if (data.cityName && !detectedCity) {
                         setDetectedCity(data.cityName);
-                        console.log(`IP-based city detection (UK): ${data.cityName}`);
                     }
-                } else {
+                } else if (!settings.countryCode) {
                     setCountryCodeState('GB'); // Default to GB for other regions if not US
                 }
             } catch (err) {
@@ -284,7 +285,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             formatPhone,
             userCoords: overrideCoords || userCoords,
             detectedCity: overrideCity || detectedCity,
-            detectedState: overrideCity ? null : detectedState, // Clear state if city is overridden for now
+            detectedState, 
             isLocating,
             geoError: overrideCoords ? null : geoError,
             detectUserLocation,
@@ -293,13 +294,16 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                 setOverrideCity(city);
                 
                 // If overriding city, also try to update state
-                if (city) {
+                if (city && countryCode === 'US') {
                     import('@/lib/trades').then(({ cityToState }) => {
                         const stateCode = cityToState[city];
                         if (stateCode) {
                             import('@/lib/us_states').then(({ US_STATES }) => {
                                 const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
-                                if (state) setDetectedState(state.name);
+                                if (state) {
+                                    setDetectedState(state.name);
+                                    console.log(`Overriding state to: ${state.name} based on city: ${city}`);
+                                }
                             });
                         }
                     });

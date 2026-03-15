@@ -108,12 +108,15 @@ export function findNearestSupportedCity(lat: number, lon: number, countryCode: 
 
     // Use appropriate list based on country
     const cityList = countryCode.toUpperCase() === 'US' ? usCities : cities;
+    const { cityCoordinates } = require('./cityCoordinates');
+    const { usCityCoordinates } = require('./usCityCoordinates');
+    const coordsMap = countryCode.toUpperCase() === 'US' ? usCityCoordinates : cityCoordinates;
 
     for (const city of cityList) {
-        const coords = SUPPORTED_LOCATIONS[city];
+        const coords = coordsMap[city];
         if (!coords) continue;
 
-        const dist = getDistanceFromLatLonInKm(lat, lon, coords.lat, coords.lon);
+        const dist = getDistanceFromLatLonInKm(lat, lon, coords.lat, coords.lng || coords.lon);
         if (dist < minDistance) {
             minDistance = dist;
             nearestCity = city;

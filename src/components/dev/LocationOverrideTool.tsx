@@ -11,9 +11,14 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { cityCoordinates } from '@/lib/cityCoordinates';
 
-const UK_MAJOR_CITIES = [
-    "London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Liverpool", "Edinburgh", "Bristol", "Cardiff",
-    "Belfast", "Newcastle upon Tyne", "Nottingham", "Leicester", "Southampton", "Portsmouth", "Brighton", "Cambridge", "Oxford"
+const UK_LOCATIONS = Object.keys(cityCoordinates).filter(c => !US_MAJOR_CITIES.includes(c)).sort();
+
+const US_MAJOR_CITIES = [
+    "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", 
+    "Dallas", "Austin", "San Jose", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "Indianapolis", 
+    "San Francisco", "Seattle", "Denver", "Oklahoma City", "Nashville", "Boston", "Las Vegas", "Portland", 
+    "Detroit", "Memphis", "Louisville", "Baltimore", "Milwaukee", "Albuquerque", "Atlanta", "Kansas City", 
+    "Miami", "New Orleans", "Cleveland", "Tampa", "Orlando"
 ].sort();
 
 export function LocationOverrideTool() {
@@ -31,35 +36,50 @@ export function LocationOverrideTool() {
     
     if (!isDev || (!isUSDomain && !isUKDomain)) return null;
 
-    const { setOverride, clearOverride, isOverridden, detectedCity } = useLocalization();
+    const { setOverride, clearOverride, isOverridden, detectedCity, detectedState, settings } = useLocalization();
+    const countryCode = settings.countryCode;
     const [isOpen, setIsOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState<string>("");
+    const [selectedState, setSelectedState] = useState<string>("");
 
     const handleClear = () => {
         clearOverride();
         setSelectedLocation("");
+        setSelectedState("");
         toast.info("Using real GPS", { duration: 2000, position: 'bottom-right' });
     };
 
     const handleApplyOverride = () => {
-        if (!selectedLocation) return;
-        
         if (isUSDomain) {
-            // Find a representative city for this state to get coordinates
-            const cityName = Object.keys(usCityCoordinates).find(city => 
-                cityToState[city]?.toLowerCase() === selectedLocation.toLowerCase()
-            );
+            if (selectedLocation) {
+                // Apply City Override
+                const coords = usCityCoordinates[selectedLocation];
+                if (coords) {
+                    setOverride({ latitude: coords.lat, longitude: coords.lng }, selectedLocation);
+                    toast.success(`Simulating: ${selectedLocation}`, {
+                        duration: 2000,
+                        position: 'bottom-right'
+                    });
+                }
+            } else if (selectedState) {
+                // Apply State-only Override (Find representative city)
+                const cityName = Object.keys(usCityCoordinates).find(city => 
+                    cityToState[city]?.toLowerCase() === selectedState.toLowerCase()
+                );
 
-            if (cityName) {
-                const coords = usCityCoordinates[cityName];
-                setOverride({ latitude: coords.lat, longitude: coords.lng }, cityName);
-                toast.success(`Simulating: ${selectedLocation.toUpperCase()}`, {
-                    duration: 2000,
-                    position: 'bottom-right'
-                });
+                if (cityName) {
+                    const coords = usCityCoordinates[cityName];
+                    // IMPORTANT: We pass null as the city name if we only want to spoof the STATE
+                    // but usually for UI purposes, a city is better.
+                    setOverride({ latitude: coords.lat, longitude: coords.lng }, cityName);
+                    toast.success(`Simulating State: ${selectedState.toUpperCase()}`, {
+                        duration: 2000,
+                        position: 'bottom-right'
+                    });
+                }
             }
-        } else if (isUKDomain) {
+        } else if (isUKDomain && selectedLocation) {
             const coords = cityCoordinates[selectedLocation];
             if (coords) {
                 setOverride({ latitude: coords.lat, longitude: coords.lng }, selectedLocation);
@@ -98,25 +118,44 @@ export function LocationOverrideTool() {
                     <div className="space-y-3">
                         <div className="space-y-1">
                             <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground pl-1">
-                                {isUSDomain ? 'Region' : 'City'}
+                                {isUSDomain ? 'City' : 'Location'}
                             </label>
                             <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                                 <SelectTrigger className="h-9 bg-secondary/30 border-border/50 text-sm">
-                                    <SelectValue placeholder={isUSDomain ? "Select State" : "Select City"} />
+                                    <SelectValue placeholder="Select City" />
                                 </SelectTrigger>
-                                <SelectContent className="z-[10001] max-h-60">
+                                <SelectContent className="z-[10001] max-h-40">
                                     {isUSDomain ? (
-                                        US_STATES.map(state => (
-                                            <SelectItem key={state.code} value={state.code}>{state.name}</SelectItem>
+                                        US_MAJOR_CITIES.map(city => (
+                                            <SelectItem key={city} value={city}>{city}</SelectItem>
                                         ))
                                     ) : (
-                                        UK_MAJOR_CITIES.map(city => (
+                                        UK_LOCATIONS.map(city => (
                                             <SelectItem key={city} value={city}>{city}</SelectItem>
                                         ))
                                     )}
                                 </SelectContent>
                             </Select>
                         </div>
+
+                        {isUSDomain && (
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground pl-1">
+                                    Or State
+                                </label>
+                                <Select value={selectedState} onValueChange={setSelectedState}>
+                                    <SelectTrigger className="h-9 bg-secondary/30 border-border/50 text-sm">
+                                        <SelectValue placeholder="Select State" />
+                                    </SelectTrigger>
+                                    <SelectContent className="z-[10001] max-h-40">
+                                        {US_STATES.map(state => (
+                                            <SelectItem key={state.code} value={state.code}>{state.name}</SelectItem>
+                                        ))
+                                    }
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-2 gap-2 pt-2">
                             <Button 
@@ -130,7 +169,7 @@ export function LocationOverrideTool() {
                             <Button 
                                 size="sm" 
                                 onClick={handleApplyOverride}
-                                disabled={!selectedLocation}
+                                disabled={!selectedLocation && !selectedState}
                                 className="h-9 text-xs bg-gold hover:bg-gold-light text-black font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all active:scale-95"
                             >
                                 Apply Spoof
@@ -147,11 +186,12 @@ export function LocationOverrideTool() {
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
                             <span className="text-[10px] font-bold text-foreground truncate max-w-[140px]">
-                                ACTIVE: {detectedCity}
+                                {detectedCity && `CITY: ${detectedCity}`}
+                                {detectedState && ` | STATE: ${detectedState}`}
                             </span>
                         </div>
                         <span className="text-[9px] font-mono text-muted-foreground bg-black/20 px-1.5 py-0.5 rounded">
-                            {isUSDomain ? selectedLocation.toUpperCase() : 'UK'}
+                            {countryCode}
                         </span>
                     </div>
                 )}
