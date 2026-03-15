@@ -54,7 +54,7 @@ const Index = () => {
   };
 
   return (
-    <ChatbotProvider>
+    <>
       <GuestGate />
       <SEO 
         title={`${siteName} ${displayCity}`}
@@ -67,64 +67,62 @@ const Index = () => {
         {/* Preload critical hero image/assets if needed */}
       </Helmet>
 
-      <>
-        <Header />
-        <FloatingTourHub />
-        <main className="min-h-screen bg-background">
-          <HeroSection />
+      <Header />
+      <FloatingTourHub />
+      <main className="min-h-screen bg-background">
+        <HeroSection />
 
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <EmergencyServicesSection />
-          </Suspense>
+        <Suspense fallback={<div className="h-96 w-full" />}>
+          <EmergencyServicesSection />
+        </Suspense>
 
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <BreakdownSection />
-          </Suspense>
+        <Suspense fallback={<div className="h-96 w-full" />}>
+          <BreakdownSection />
+        </Suspense>
 
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <SEOContentSection />
-          </Suspense>
+        <Suspense fallback={<div className="h-96 w-full" />}>
+          <SEOContentSection />
+        </Suspense>
 
-          <Suspense fallback={<div className="h-96 w-full" />}>
-            <CTASection />
-          </Suspense>
+        <Suspense fallback={<div className="h-96 w-full" />}>
+          <CTASection />
+        </Suspense>
 
-          <div className="container mx-auto px-4 py-16">
-            <HomeEmergencyAd />
-          </div>
+        <div className="container mx-auto px-4 py-16">
+          <HomeEmergencyAd />
+        </div>
 
-          {/* FAQ Section */}
-          <div className="container mx-auto px-4 py-16 flex flex-col items-center">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => setShowFaq(!showFaq)}
-              className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold flex items-center justify-center gap-2"
-            >
-              FAQ
-              {showFaq ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </Button>
+        {/* FAQ Section */}
+        <div className="container mx-auto px-4 py-16 flex flex-col items-center">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => setShowFaq(!showFaq)}
+            className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold flex items-center justify-center gap-2"
+          >
+            FAQ
+            {showFaq ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </Button>
 
-            <AnimatePresence>
-              {showFaq && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full max-w-3xl overflow-hidden"
-                >
-                  <div className="mt-8">
-                    <GeneralFAQSection initiallyOpened={true} />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </main>
-        <Footer />
-      </>
-    </ChatbotProvider>
+          <AnimatePresence>
+            {showFaq && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-full max-w-3xl overflow-hidden"
+              >
+                <div className="mt-8">
+                  <GeneralFAQSection initiallyOpened={true} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 

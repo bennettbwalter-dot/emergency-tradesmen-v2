@@ -11,8 +11,6 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { cityCoordinates } from '@/lib/cityCoordinates';
 
-const UK_LOCATIONS = Object.keys(cityCoordinates).filter(c => !US_MAJOR_CITIES.includes(c)).sort();
-
 const US_MAJOR_CITIES = [
     "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", 
     "Dallas", "Austin", "San Jose", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "Indianapolis", 
@@ -20,6 +18,8 @@ const US_MAJOR_CITIES = [
     "Detroit", "Memphis", "Louisville", "Baltimore", "Milwaukee", "Albuquerque", "Atlanta", "Kansas City", 
     "Miami", "New Orleans", "Cleveland", "Tampa", "Orlando"
 ].sort();
+
+const UK_LOCATIONS = Object.keys(cityCoordinates).filter(c => !US_MAJOR_CITIES.includes(c)).sort();
 
 export function LocationOverrideTool() {
     const isDev = import.meta.env.DEV;

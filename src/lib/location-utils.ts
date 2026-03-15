@@ -1,4 +1,7 @@
-import { cities } from './trades';
+import { cities, usCities } from './trades';
+import { cityCoordinates } from './cityCoordinates';
+import { usCityCoordinates } from './usCityCoordinates';
+import { cityPostcodes } from './cityPostcodes';
 
 // Coordinates for our supported cities to enable "Nearest Neighbor" search
 // This allows us to map "Brixton" -> "London" purely via math
@@ -100,7 +103,6 @@ function deg2rad(deg: number) {
     return deg * (Math.PI / 180);
 }
 
-import { usCities } from './trades';
 
 export function findNearestSupportedCity(lat: number, lon: number, countryCode: string = 'GB'): { city: string; distance: number } | null {
     let nearestCity: string | null = null;
@@ -108,15 +110,13 @@ export function findNearestSupportedCity(lat: number, lon: number, countryCode: 
 
     // Use appropriate list based on country
     const cityList = countryCode.toUpperCase() === 'US' ? usCities : cities;
-    const { cityCoordinates } = require('./cityCoordinates');
-    const { usCityCoordinates } = require('./usCityCoordinates');
     const coordsMap = countryCode.toUpperCase() === 'US' ? usCityCoordinates : cityCoordinates;
 
     for (const city of cityList) {
         const coords = coordsMap[city];
         if (!coords) continue;
 
-        const dist = getDistanceFromLatLonInKm(lat, lon, coords.lat, coords.lng || coords.lon);
+        const dist = getDistanceFromLatLonInKm(lat, lon, coords.lat, coords.lng);
         if (dist < minDistance) {
             minDistance = dist;
             nearestCity = city;
@@ -133,7 +133,6 @@ export function findNearestSupportedCity(lat: number, lon: number, countryCode: 
 export const POSTCODE_REGEX = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
 
 // Helper to find City from Postcode or Area Name
-import { cityPostcodes } from './cityPostcodes';
 
 export function getCityFromQuery(query: string): string | null {
     const q = query.trim();
