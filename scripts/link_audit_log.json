@@ -1,0 +1,2747 @@
+{
+  "timestamp": "2026-03-16T19:07:31.095Z",
+  "scanned": 200,
+  "broken": [
+    {
+      "id": "694e50f7-de55-4365-8d16-a7855bff652f",
+      "name": "Hess Door & Lock",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "3b410eaf-af68-413c-8a01-d711ffb63992",
+      "name": "JLC Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "us-los-dra-5xyly",
+      "name": "A1 Speedy Rooter",
+      "type": "facebook",
+      "url": "https://www.facebook.com/p/a-1-speedy-rooter-and-plumbing-100063753182108/",
+      "reason": "HTTP 400"
+    },
+    {
+      "id": "87d89b24-a229-4130-b322-cef238954319",
+      "name": "Frodos Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "4d6b50a8-599b-4527-a56d-92ec1ae353a0",
+      "name": "Kop Construction and Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "e6f42c21-c9ab-47d0-90a4-cb519f5d9130",
+      "name": "Jared's Plumbing & Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "8055de75-c157-4a43-ad81-55491c28b213",
+      "name": "Cypress Door & Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "452843ea-aef2-4b88-b597-c7381267109d",
+      "name": "Alpine Refrigeration",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d58c8531-bdfc-43fe-9201-e0c3c5a25cb7",
+      "name": "Twigs",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a76656f4-d984-4d81-b184-fa5b3bb5962f",
+      "name": "Revive Carpet Cleaning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5c5b5ac6-65b2-4327-a25a-6abeb8f06bf4",
+      "name": "Configuration Air",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "831223c0-318f-4fca-b003-8324d466de47",
+      "name": "RoofSmith Roofing and Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "fce87663-a413-45c8-8aac-a40659b29c04",
+      "name": "EL Electric Contracting",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "f3753ede-aa19-4b46-991b-506d11562c6a",
+      "name": "Campbell & Company",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6599ebdb-bcb2-4f19-bd3d-0dc2f573f85b",
+      "name": "Crown Locksmith",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "001adede-fdb8-4b0d-af99-036185a730eb",
+      "name": "Loretto Glass Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "f94f6b1b-979d-478a-b207-9a653487ed8a",
+      "name": "Bobwires Electrical Contracting",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bde50f64-8e2f-465b-8811-4c707a5b97a4",
+      "name": "Pottsville Local Locksmith",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ff8a91f2-f5cf-41b7-8e83-afe222a50789",
+      "name": "SOS Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6e101d7c-ea80-439a-be8e-fdd7b1718d12",
+      "name": "Service Plus Heating & Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a63581ee-dd00-4bc3-914a-c2bc60b7e4fe",
+      "name": "Elite Air Conditioning & Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "dcfd6c70-7de4-4fa2-bd99-c8b89e41ab26",
+      "name": "Rafael’s Flooring",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "071fe339-a4fd-497f-a751-f3ecf8601173",
+      "name": "Pipe-It-Right Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "149ea880-55b4-4711-94e0-8641b8367d47",
+      "name": "MAX AIR HVAC",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c94af59d-ee99-4e7d-8197-b6f57ae0a8c2",
+      "name": "TSW Roofing Solutions",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "56338227-9370-4677-bd42-e177469a67c1",
+      "name": "Diamond Lock & Security",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "8a6b0b90-3d94-49c5-b069-cf3c7fb8e19b",
+      "name": "Precision Leak Detection",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b8493254-c480-42b1-90cb-e179134c7478",
+      "name": "PuroClean Certified Restoration",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "68b40ad9-14c9-4404-9182-941115834b64",
+      "name": "Ray's Locksmith",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c449ef8d-ff0e-4896-96ae-91fe35da27b5",
+      "name": "Roof Doctor Blackburn Support",
+      "type": "website",
+      "url": "https://roofdoctor.co.uk/",
+      "reason": "socket hang up"
+    },
+    {
+      "id": "4228c21c-c58a-44a2-8858-f5e0685d131b",
+      "name": "Dempsey Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "22e17441-b5e9-44f1-b03d-85710ef43ff0",
+      "name": "MC Electrical Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bf7fbebe-48bb-4574-886b-8f65b5908f50",
+      "name": "Superior Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "142d6069-a179-4f77-af8d-0fd1abef8e9d",
+      "name": "Perfect Flow Sewer & Drain Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "09980370-5a9f-46d9-a1cb-a70fac9c719a",
+      "name": "Breathe Easy of CNY",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "8538c3a1-e1f0-4b83-b458-abd3a4720675",
+      "name": "Amarillo Industrial Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ad848cb7-f754-4a02-8195-a07ae00225aa",
+      "name": "Silverbow Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6faafd58-7434-4361-8e56-8c949c3f4faf",
+      "name": "Hillman Heating & Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b361642e-e267-4138-be57-098f79d79915",
+      "name": "Travis and Brad's Mini Construction Company",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1c44497b-e251-40d9-be54-79ebc85c1785",
+      "name": "Merritt Aluminum Inc",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "700f9846-7620-42af-b974-94d629a8c0e6",
+      "name": "California Mobile Screens - Window & Door Screen Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "03ac0e87-127f-467c-9177-8550b3d9bd42",
+      "name": "Insight Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "03477152-eae7-4601-b47e-ef90119f0e0b",
+      "name": "Apple Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a38140e3-ae1d-44cf-a329-eeee495e937b",
+      "name": "Imperial Valley Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b6193a3b-81db-4c3c-b549-99edfcf12089",
+      "name": "Integrity Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "e1ccd561-48cc-40fc-9d21-d32b1759054f",
+      "name": "Twin Bridge Roofing & Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ec418c45-64c3-4581-880d-fb34cf2ffbae",
+      "name": "Al's Air Conditioning Service",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bed89bab-7932-4bf3-80cd-88ba21f079e5",
+      "name": "Shores Home & Hardware Center",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "e5b30478-7df4-4e93-9105-9ffeb3528bf0",
+      "name": "CV Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1f731bf8-4db7-4da6-9b8a-902e7082741b",
+      "name": "Gregory's Sewer & Drain Cleaning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1ee28375-257a-4618-a826-d9a6aa7fd4c9",
+      "name": "Fraziermade Lock and Key",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bc7a2dd6-6085-473e-9355-ce83495dd245",
+      "name": "Bradshaw Heating and Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "f086a33a-06a1-4f76-b19c-bb4a119e95ed",
+      "name": "Quality Heating & Air",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6ae2c347-d083-4e24-ad61-e1a8768528bb",
+      "name": "Stellar Home Exteriors",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "9a36c38c-72f0-4747-bf98-9a33277ad4f1",
+      "name": "Falcon Remodeling & Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0cf491c4-ef06-40b7-a52b-1dfbff1cdaa9",
+      "name": "AAAAA Locksmith Service",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6b4c415e-b40e-4b72-bf4a-7dc03f762b2c",
+      "name": "Drainmaster Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "7b3a7a27-6c7f-4003-aaf2-6ee631f27f05",
+      "name": "Prescott Air Conditioning & Heating Repair",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "603305de-04f4-4861-af92-e9c704637dc8",
+      "name": "RJ Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c14c01b6-3cd2-47be-99d8-fc6b67f75be3",
+      "name": "Firestone Builders",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "2b2cb8d5-b0ed-4921-80ef-36158a0ede00",
+      "name": "2 Rivers Heating & Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b7e75ab2-a362-4911-b4df-89559e230f62",
+      "name": "ASAP Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "af04ac70-cae2-409a-b060-cbe40d842285",
+      "name": "Leonidas Roofing & Exteriors",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "cacdda86-2d5f-4c69-9d79-239bfa0f6ed9",
+      "name": "Commercial Service",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "671d8ed6-53b4-4633-9d5d-ebef4e6ed6d1",
+      "name": "Lightning Locksmith",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "55550d8a-6939-4a99-9af9-d9d94c0725f4",
+      "name": "Power Up - The Up Companies",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ae13dd21-a5c4-4e7e-827e-5902fecaeb06",
+      "name": "Savannah Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c6329284-a150-4ae6-a166-2eb1a820ff57",
+      "name": "M&M Plumbing, Heating, Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "79f81d9e-d68e-4cac-a2dc-0e5fe7a4ee45",
+      "name": "DGL Handyman Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a6cdc2de-9c16-4764-b8e4-887b1f352f3b",
+      "name": "Tim Winnett Plumbing & Sons",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d05e0d12-b135-41d8-a189-798cdb80f08a",
+      "name": "Jay Key Service",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "18a0d991-03d6-4616-b362-6a64eb5c7b41",
+      "name": "Pace Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0b979134-6148-464b-9ad8-9861a12233da",
+      "name": "Elite Roof and Solar",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0d025e7d-ea70-4626-8346-3b60e6326558",
+      "name": "General HVAC Electric and Appliance Repair",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "7f8e7f40-8082-4f95-be7e-0412b9ee6e73",
+      "name": "Premier Restoration Partners",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "f70555d3-bd1a-47a6-94a8-26b026e4f2ad",
+      "name": "Tommy’s Locksmith",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "fd6a7611-3411-47a8-af8c-82d377d6e968",
+      "name": "Wrangler Safe & Lock",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5472ae69-c9c4-4cad-89e5-0b16b732bdcd",
+      "name": "$40 Unlocks My Ride",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "82a1c063-d322-4629-bc6f-622d38cd35b6",
+      "name": "Lone Star Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "792088a5-67d3-438c-b92e-c50b0c31cda4",
+      "name": "ProZone Air Conditioning and Heating Repair Las Vegas",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "9659f3dd-7c22-4073-b98a-3e52b68e8044",
+      "name": "JJB Mechanical",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "e53e696d-62c6-4416-9d17-5ae2a954bd0f",
+      "name": "Glasco",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "16ec4e41-9338-4c93-8890-d05742913b05",
+      "name": "Comfort Air Cooling & Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "cb9b5722-904f-443e-a787-2bbfbbe6ea12",
+      "name": "Bostonian Cleaning & Restoration",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6f70ac6d-fb2e-4a56-992e-460e22c3d0b9",
+      "name": "Poseidon Restoration",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "474461a7-aa25-4570-b14a-8f973733f04d",
+      "name": "24/7 Plumbing & Rooter",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "026682c6-d8db-434e-b82e-972e63604aab",
+      "name": "A & A Construction & Remodeling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c374f1a5-a17f-4daa-806e-f8f4c0a2a26e",
+      "name": "Cline Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c2a8504d-822b-478a-a777-b773eb5b2518",
+      "name": "ServiceMaster by Twins",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "38a75626-abe6-4f6a-b63a-53b2cc03c974",
+      "name": "Marshall Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "03f94d7c-8f51-48d8-9082-805da1f399a4",
+      "name": "Phil White Painting And Restoration",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "2ca79340-67e7-4995-a432-886e2175a256",
+      "name": "Close Comfort Plumbing Heating & Air",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "8b90a380-c7a2-4019-98c3-96794405c840",
+      "name": "B.A. Miller Electrical Service",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "54c87e73-db7e-4466-9177-4ec980d22f8c",
+      "name": "Water Heater Medic",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "29f14e11-bde8-4ca5-8a9e-8aca13da2e97",
+      "name": "TBF Roofing Oldham 24/7",
+      "type": "website",
+      "url": "https://tbfroofing.co.uk/",
+      "reason": "getaddrinfo EAI_AGAIN tbfroofing.co.uk"
+    },
+    {
+      "id": "265f3188-76f5-4089-ba7a-372b66a66829",
+      "name": "AZ Lockout",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "126d47e3-700e-4569-b79a-d96ff794afbb",
+      "name": "Pacific Glass & Glazing Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "e2fc8a25-4e7d-400d-aafd-e53ab249e38a",
+      "name": "M&M Handyman services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c1a198a6-2f75-4d3c-b837-8f3633c96144",
+      "name": "Peace of Mind Plumbing & Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5bd2be34-445b-4946-a939-e666f0298e11",
+      "name": "Rothman Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c3762721-b2a3-4431-8cf5-1a4abc57106f",
+      "name": "Shanklin Heating, Air Conditioning and Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c4ced183-d00f-457e-a315-9ef966f5b842",
+      "name": "A-Team Gunite Pool Repair",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "dc7197ea-52f0-4dda-a17b-eb48db0ca138",
+      "name": "Mike's Heating & AC",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "31521f9e-3c9f-48f8-a1c2-fb77917e2238",
+      "name": "East to West Heating and Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6375c46b-309c-4372-84a0-86d7e285e1e4",
+      "name": "Cain's Appliance",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ab5234fb-797c-4eff-ac04-90f18115e827",
+      "name": "FDM Restoration & Construction ",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0d6788bf-8854-4f1a-bd3c-05c3a48f7536",
+      "name": "Bear Heating & Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d521c5f6-c8d8-4347-bb96-d7bf6507a1e9",
+      "name": "Forlife Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "c3e8696b-f68f-4163-a688-beb148a1d4b4",
+      "name": "Craven Electrical Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5c3e82b6-179a-4ebe-8429-a9a1c2f6b9c8",
+      "name": "The Screen Guy",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "997d8d75-ce68-4b46-ae2f-2ddb6e1d6a62",
+      "name": "J-Mac Roofing Oldham Specialists",
+      "type": "website",
+      "url": "https://jmacroofing.co.uk/",
+      "reason": "Hostname/IP does not match certificate's altnames: Host: jmacroofing.co.uk. is not in the cert's altnames: DNS:193.238.205.92.host.secureserver.net"
+    },
+    {
+      "id": "20d3621e-8dcc-43a8-bba5-7206fbd97e01",
+      "name": "SERVPRO of Mount Prospect/North Des Plaines",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "f9767db7-a2f7-4e72-a983-1ad34936453b",
+      "name": "Kots Windows",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "988523b6-9708-4ac1-978c-b08f039ec342",
+      "name": "Michael's Locksmith Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "704ce865-b07b-456a-b10b-a938f72e6945",
+      "name": "Anchor Point Development",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5abc47a3-97a6-4205-9685-01c430a16046",
+      "name": "1-800-BOARDUP of Clark County",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "9fe75c6e-a76f-4ad7-8fcd-d8955f329fbe",
+      "name": "Paul T Suppes HVAC",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d503aed3-2eb4-4853-8503-4899e6e22223",
+      "name": "Thomas Electrical",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5b29f3e6-e1d2-4224-be52-64c78e119f1a",
+      "name": "St Simons Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "3fbdfc21-4543-4d5b-89eb-8c89078c4add",
+      "name": "New Concepts Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "287da2a6-9d79-4ff3-829d-de0d222d8abe",
+      "name": "Turner Exteriors",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "3c8c138f-9f07-4ccf-88d6-698101b2f5f8",
+      "name": "Mirrors and Things",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "89c6d96d-cab7-4c9b-baa1-c3e7aa6dafe7",
+      "name": "John Breuer Home Modernization",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "9af2e22f-0aa1-4b31-ada1-543daf5468ef",
+      "name": "Bradford Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "82c65718-b6bd-4d33-b5dc-a535383f4aba",
+      "name": "Steele Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "74ea18c3-14d1-420e-b522-1ed515790abb",
+      "name": "Browns Heating and Air",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a6a387fa-dd35-4082-b2f6-2544b7ef0a77",
+      "name": "Perfect Pitch Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0bcbed54-7b3f-4e65-8f7d-50c86f3004ab",
+      "name": "R S Heating and Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1da9fce2-acfc-414c-b5c8-547091645f77",
+      "name": "Precision Lock & Safe",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "43c0b88d-b099-4436-adaa-72a1cc40c0d4",
+      "name": "Blue Ridge Carpet & Tile Cleaning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "45fad215-6383-493d-8aa1-07e6d04205a8",
+      "name": "Vitality Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bdaa3170-7a76-460d-a7fc-e46a2de6a0a3",
+      "name": "Pacific Cove Construction & Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a20718c0-1606-45ce-9f6d-c786d104463c",
+      "name": "SERVPRO of Western O'Fallon/Wentzville",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ef491d8f-ca24-4049-98a0-0f227c23b6a6",
+      "name": "Stanley Steemer",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6e8c5f78-e840-4e4e-a324-5387c16c4489",
+      "name": "Magna Dry",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "0f411551-7b13-4e3b-b708-a7daf247e516",
+      "name": "Wright Restoration Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bad892e0-6725-4cf5-866a-ba32bcf7306b",
+      "name": "Greenville Comfort Systems",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5a7a26b4-4554-4736-8d16-cfe6b5b9bb7e",
+      "name": "Patriot Services Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1b7a5027-b696-404f-a3bb-61c4e0b7a969",
+      "name": "Michael & Son Services Richmond",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bc5f99f6-b244-453a-8372-7373945dd1ee",
+      "name": "Swan Plumbing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b7cd0eea-b08e-47df-9bfb-c1a2620730d9",
+      "name": "Yurky & Sons Plumbing & Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "2f8a24f7-b57e-441c-95f2-4da5f31b50ef",
+      "name": "Forever Foundation Repair",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b0e1835c-fd52-4e6e-8cc4-e84fa7f2f2d5",
+      "name": "Toth Construction",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "42443805-82ce-4468-8546-920de3c8239a",
+      "name": "Columbine Roofing & Solar",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "632f4062-b68d-4a1e-8052-ab066a30309c",
+      "name": "Galati Enterprises",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "40c8f82f-9236-4a82-a4e2-f4ffa0798728",
+      "name": "Modern Window",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "1031fe1c-50ff-499c-94a5-0cb80f4a75ae",
+      "name": "Laco",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "19ff0cd7-c53b-440a-8452-58a913b4b331",
+      "name": "High Grade Roofing Oldham experts",
+      "type": "website",
+      "url": "https://highgraderoofing.co.uk/",
+      "reason": "Hostname/IP does not match certificate's altnames: Host: highgraderoofing.co.uk. is not in the cert's altnames: DNS:*.ingress-erytho.ewp.live, DNS:ingress-erytho.ewp.live"
+    },
+    {
+      "id": "fcf521a9-ab97-44d1-97b6-29af6363e509",
+      "name": "Chris Powers Electrician",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "cac558bc-e8d4-4b04-b5e1-b5a4e3af11cf",
+      "name": "Hannon's Electrical",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "94183951-6170-48e1-8cbb-52a0778475e4",
+      "name": "Wesley’s continuous gutter",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "984d759e-13ff-430e-a93e-65d14f1c54db",
+      "name": "Thompson N' Thompson HVAC",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "997b83ff-a280-453c-bec4-2283384fea0e",
+      "name": "Plumb Rite Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "26de5a75-f50d-420f-b53a-35c50f8c773b",
+      "name": "Cactus Comfort Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "b9953ce5-67d8-467d-878d-fa6a9386a4e3",
+      "name": "Polar Air Heating and Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "919cb2d4-78ae-4310-9fe7-6c061e3a1be5",
+      "name": "Rino Carpet Cleaning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6b20fca2-1f0f-4518-a3c7-1e057762dc0d",
+      "name": "A and L Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d7db274f-ded2-4c56-9abd-e83be455e517",
+      "name": "CGarcia Renovation",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "fa3e65e4-1dfd-480f-9c88-6865f5f57ef4",
+      "name": "Next Level Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "a9b5ed19-8d46-4f9c-9766-1b271726e739",
+      "name": "Genesis Cabinet Company",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d092637e-b713-4a6e-af1c-c03eca0ca6b4",
+      "name": "Faler Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "16e2e8f2-3241-4345-bc19-ce0599433a8b",
+      "name": "Ursa General Building",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "bfcd33cf-c95d-4f89-82dc-59ac042cf654",
+      "name": "Moser Electric",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "260079b4-ff46-4c50-8c22-24166347ca3a",
+      "name": "Windsor Valley Roofing",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "22b59101-8ea5-41ae-8ed7-296b6f6a9c74",
+      "name": "Banner Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "6db782cd-2c7f-4fd4-87bf-119a48336b07",
+      "name": "United Plate Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "3c58adb7-de6c-414b-bdb0-bdb73f3b6ee5",
+      "name": "HX Mechanical",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "63d307cb-01b5-419c-bf04-be51f9294e2d",
+      "name": "Jeremy Patch Heating and Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "47bc5883-6573-47bd-8247-79cf7d429eb1",
+      "name": "Smart Solutions General Contractor",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "d2251c5c-fa45-4bc7-b61f-c97b21517993",
+      "name": "Simplify Build Contractors",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "141a11ed-897e-48d1-8730-a0d442d87391",
+      "name": "My Guy Heating and Cooling",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "32a7864d-a4af-4d09-9173-0b2b3fc3deeb",
+      "name": "Fast Help",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "af4cb892-251e-49a9-92e4-059b3c997f98",
+      "name": "Cornerstone Glass Colorado",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "4dd39007-8936-439c-bcd3-6dc8b0ae2432",
+      "name": "Airstream Services",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "9cf390f5-812e-41ff-800e-40910cc68263",
+      "name": "Air Plus Heating & Air Conditioning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "5f5b1f2c-ba05-43b8-a1ac-372f83e45f6a",
+      "name": "Frank’s Plumbing Plus",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "81f22352-9dfe-4020-b14c-c8006ecc4630",
+      "name": "Hydro Clean Carpet Cleaning",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ffe507d9-3a72-41af-92d0-beb7c9e61125",
+      "name": "Burgess Builders",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "445d70a9-bbd5-4f74-9c34-0352c2ab6c9d",
+      "name": "Above All Glass",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    },
+    {
+      "id": "ae310d4f-9c20-40e8-a650-4ef1378e24f9",
+      "name": "Wicked Good Plumbing and Heating",
+      "type": "website",
+      "url": "https://emergencytradesmen.net",
+      "reason": "Points to platform domain"
+    }
+  ],
+  "updated": [
+    {
+      "id": "694e50f7-de55-4365-8d16-a7855bff652f",
+      "name": "Hess Door & Lock",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "3b410eaf-af68-413c-8a01-d711ffb63992",
+      "name": "JLC Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "us-los-dra-5xyly",
+      "name": "A1 Speedy Rooter",
+      "changes": {
+        "social_links": {
+          "twitter": "https://x.com/a1speedyrooter1"
+        }
+      },
+      "dryRun": true
+    },
+    {
+      "id": "87d89b24-a229-4130-b322-cef238954319",
+      "name": "Frodos Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "4d6b50a8-599b-4527-a56d-92ec1ae353a0",
+      "name": "Kop Construction and Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "e6f42c21-c9ab-47d0-90a4-cb519f5d9130",
+      "name": "Jared's Plumbing & Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "8055de75-c157-4a43-ad81-55491c28b213",
+      "name": "Cypress Door & Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "452843ea-aef2-4b88-b597-c7381267109d",
+      "name": "Alpine Refrigeration",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d58c8531-bdfc-43fe-9201-e0c3c5a25cb7",
+      "name": "Twigs",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a76656f4-d984-4d81-b184-fa5b3bb5962f",
+      "name": "Revive Carpet Cleaning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5c5b5ac6-65b2-4327-a25a-6abeb8f06bf4",
+      "name": "Configuration Air",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "831223c0-318f-4fca-b003-8324d466de47",
+      "name": "RoofSmith Roofing and Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "fce87663-a413-45c8-8aac-a40659b29c04",
+      "name": "EL Electric Contracting",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "f3753ede-aa19-4b46-991b-506d11562c6a",
+      "name": "Campbell & Company",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6599ebdb-bcb2-4f19-bd3d-0dc2f573f85b",
+      "name": "Crown Locksmith",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "001adede-fdb8-4b0d-af99-036185a730eb",
+      "name": "Loretto Glass Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "f94f6b1b-979d-478a-b207-9a653487ed8a",
+      "name": "Bobwires Electrical Contracting",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bde50f64-8e2f-465b-8811-4c707a5b97a4",
+      "name": "Pottsville Local Locksmith",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ff8a91f2-f5cf-41b7-8e83-afe222a50789",
+      "name": "SOS Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6e101d7c-ea80-439a-be8e-fdd7b1718d12",
+      "name": "Service Plus Heating & Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a63581ee-dd00-4bc3-914a-c2bc60b7e4fe",
+      "name": "Elite Air Conditioning & Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "dcfd6c70-7de4-4fa2-bd99-c8b89e41ab26",
+      "name": "Rafael’s Flooring",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "071fe339-a4fd-497f-a751-f3ecf8601173",
+      "name": "Pipe-It-Right Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "149ea880-55b4-4711-94e0-8641b8367d47",
+      "name": "MAX AIR HVAC",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c94af59d-ee99-4e7d-8197-b6f57ae0a8c2",
+      "name": "TSW Roofing Solutions",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "56338227-9370-4677-bd42-e177469a67c1",
+      "name": "Diamond Lock & Security",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "8a6b0b90-3d94-49c5-b069-cf3c7fb8e19b",
+      "name": "Precision Leak Detection",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b8493254-c480-42b1-90cb-e179134c7478",
+      "name": "PuroClean Certified Restoration",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "68b40ad9-14c9-4404-9182-941115834b64",
+      "name": "Ray's Locksmith",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c449ef8d-ff0e-4896-96ae-91fe35da27b5",
+      "name": "Roof Doctor Blackburn Support",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "4228c21c-c58a-44a2-8858-f5e0685d131b",
+      "name": "Dempsey Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "22e17441-b5e9-44f1-b03d-85710ef43ff0",
+      "name": "MC Electrical Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bf7fbebe-48bb-4574-886b-8f65b5908f50",
+      "name": "Superior Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "142d6069-a179-4f77-af8d-0fd1abef8e9d",
+      "name": "Perfect Flow Sewer & Drain Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "09980370-5a9f-46d9-a1cb-a70fac9c719a",
+      "name": "Breathe Easy of CNY",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "8538c3a1-e1f0-4b83-b458-abd3a4720675",
+      "name": "Amarillo Industrial Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ad848cb7-f754-4a02-8195-a07ae00225aa",
+      "name": "Silverbow Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6faafd58-7434-4361-8e56-8c949c3f4faf",
+      "name": "Hillman Heating & Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b361642e-e267-4138-be57-098f79d79915",
+      "name": "Travis and Brad's Mini Construction Company",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1c44497b-e251-40d9-be54-79ebc85c1785",
+      "name": "Merritt Aluminum Inc",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "700f9846-7620-42af-b974-94d629a8c0e6",
+      "name": "California Mobile Screens - Window & Door Screen Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "03ac0e87-127f-467c-9177-8550b3d9bd42",
+      "name": "Insight Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "03477152-eae7-4601-b47e-ef90119f0e0b",
+      "name": "Apple Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a38140e3-ae1d-44cf-a329-eeee495e937b",
+      "name": "Imperial Valley Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b6193a3b-81db-4c3c-b549-99edfcf12089",
+      "name": "Integrity Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "e1ccd561-48cc-40fc-9d21-d32b1759054f",
+      "name": "Twin Bridge Roofing & Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ec418c45-64c3-4581-880d-fb34cf2ffbae",
+      "name": "Al's Air Conditioning Service",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bed89bab-7932-4bf3-80cd-88ba21f079e5",
+      "name": "Shores Home & Hardware Center",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "e5b30478-7df4-4e93-9105-9ffeb3528bf0",
+      "name": "CV Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1f731bf8-4db7-4da6-9b8a-902e7082741b",
+      "name": "Gregory's Sewer & Drain Cleaning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1ee28375-257a-4618-a826-d9a6aa7fd4c9",
+      "name": "Fraziermade Lock and Key",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bc7a2dd6-6085-473e-9355-ce83495dd245",
+      "name": "Bradshaw Heating and Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "f086a33a-06a1-4f76-b19c-bb4a119e95ed",
+      "name": "Quality Heating & Air",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6ae2c347-d083-4e24-ad61-e1a8768528bb",
+      "name": "Stellar Home Exteriors",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "9a36c38c-72f0-4747-bf98-9a33277ad4f1",
+      "name": "Falcon Remodeling & Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0cf491c4-ef06-40b7-a52b-1dfbff1cdaa9",
+      "name": "AAAAA Locksmith Service",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6b4c415e-b40e-4b72-bf4a-7dc03f762b2c",
+      "name": "Drainmaster Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "7b3a7a27-6c7f-4003-aaf2-6ee631f27f05",
+      "name": "Prescott Air Conditioning & Heating Repair",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "603305de-04f4-4861-af92-e9c704637dc8",
+      "name": "RJ Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c14c01b6-3cd2-47be-99d8-fc6b67f75be3",
+      "name": "Firestone Builders",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "2b2cb8d5-b0ed-4921-80ef-36158a0ede00",
+      "name": "2 Rivers Heating & Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b7e75ab2-a362-4911-b4df-89559e230f62",
+      "name": "ASAP Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "af04ac70-cae2-409a-b060-cbe40d842285",
+      "name": "Leonidas Roofing & Exteriors",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "cacdda86-2d5f-4c69-9d79-239bfa0f6ed9",
+      "name": "Commercial Service",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "671d8ed6-53b4-4633-9d5d-ebef4e6ed6d1",
+      "name": "Lightning Locksmith",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "55550d8a-6939-4a99-9af9-d9d94c0725f4",
+      "name": "Power Up - The Up Companies",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ae13dd21-a5c4-4e7e-827e-5902fecaeb06",
+      "name": "Savannah Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c6329284-a150-4ae6-a166-2eb1a820ff57",
+      "name": "M&M Plumbing, Heating, Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "79f81d9e-d68e-4cac-a2dc-0e5fe7a4ee45",
+      "name": "DGL Handyman Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a6cdc2de-9c16-4764-b8e4-887b1f352f3b",
+      "name": "Tim Winnett Plumbing & Sons",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d05e0d12-b135-41d8-a189-798cdb80f08a",
+      "name": "Jay Key Service",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "18a0d991-03d6-4616-b362-6a64eb5c7b41",
+      "name": "Pace Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0b979134-6148-464b-9ad8-9861a12233da",
+      "name": "Elite Roof and Solar",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0d025e7d-ea70-4626-8346-3b60e6326558",
+      "name": "General HVAC Electric and Appliance Repair",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "7f8e7f40-8082-4f95-be7e-0412b9ee6e73",
+      "name": "Premier Restoration Partners",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "f70555d3-bd1a-47a6-94a8-26b026e4f2ad",
+      "name": "Tommy’s Locksmith",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "fd6a7611-3411-47a8-af8c-82d377d6e968",
+      "name": "Wrangler Safe & Lock",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5472ae69-c9c4-4cad-89e5-0b16b732bdcd",
+      "name": "$40 Unlocks My Ride",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "82a1c063-d322-4629-bc6f-622d38cd35b6",
+      "name": "Lone Star Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "792088a5-67d3-438c-b92e-c50b0c31cda4",
+      "name": "ProZone Air Conditioning and Heating Repair Las Vegas",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "9659f3dd-7c22-4073-b98a-3e52b68e8044",
+      "name": "JJB Mechanical",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "e53e696d-62c6-4416-9d17-5ae2a954bd0f",
+      "name": "Glasco",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "16ec4e41-9338-4c93-8890-d05742913b05",
+      "name": "Comfort Air Cooling & Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "cb9b5722-904f-443e-a787-2bbfbbe6ea12",
+      "name": "Bostonian Cleaning & Restoration",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6f70ac6d-fb2e-4a56-992e-460e22c3d0b9",
+      "name": "Poseidon Restoration",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "474461a7-aa25-4570-b14a-8f973733f04d",
+      "name": "24/7 Plumbing & Rooter",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "026682c6-d8db-434e-b82e-972e63604aab",
+      "name": "A & A Construction & Remodeling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c374f1a5-a17f-4daa-806e-f8f4c0a2a26e",
+      "name": "Cline Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c2a8504d-822b-478a-a777-b773eb5b2518",
+      "name": "ServiceMaster by Twins",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "38a75626-abe6-4f6a-b63a-53b2cc03c974",
+      "name": "Marshall Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "03f94d7c-8f51-48d8-9082-805da1f399a4",
+      "name": "Phil White Painting And Restoration",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "2ca79340-67e7-4995-a432-886e2175a256",
+      "name": "Close Comfort Plumbing Heating & Air",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "8b90a380-c7a2-4019-98c3-96794405c840",
+      "name": "B.A. Miller Electrical Service",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "54c87e73-db7e-4466-9177-4ec980d22f8c",
+      "name": "Water Heater Medic",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "29f14e11-bde8-4ca5-8a9e-8aca13da2e97",
+      "name": "TBF Roofing Oldham 24/7",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "265f3188-76f5-4089-ba7a-372b66a66829",
+      "name": "AZ Lockout",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "126d47e3-700e-4569-b79a-d96ff794afbb",
+      "name": "Pacific Glass & Glazing Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "e2fc8a25-4e7d-400d-aafd-e53ab249e38a",
+      "name": "M&M Handyman services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c1a198a6-2f75-4d3c-b837-8f3633c96144",
+      "name": "Peace of Mind Plumbing & Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5bd2be34-445b-4946-a939-e666f0298e11",
+      "name": "Rothman Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c3762721-b2a3-4431-8cf5-1a4abc57106f",
+      "name": "Shanklin Heating, Air Conditioning and Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c4ced183-d00f-457e-a315-9ef966f5b842",
+      "name": "A-Team Gunite Pool Repair",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "dc7197ea-52f0-4dda-a17b-eb48db0ca138",
+      "name": "Mike's Heating & AC",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "31521f9e-3c9f-48f8-a1c2-fb77917e2238",
+      "name": "East to West Heating and Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6375c46b-309c-4372-84a0-86d7e285e1e4",
+      "name": "Cain's Appliance",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ab5234fb-797c-4eff-ac04-90f18115e827",
+      "name": "FDM Restoration & Construction ",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0d6788bf-8854-4f1a-bd3c-05c3a48f7536",
+      "name": "Bear Heating & Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d521c5f6-c8d8-4347-bb96-d7bf6507a1e9",
+      "name": "Forlife Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "c3e8696b-f68f-4163-a688-beb148a1d4b4",
+      "name": "Craven Electrical Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5c3e82b6-179a-4ebe-8429-a9a1c2f6b9c8",
+      "name": "The Screen Guy",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "997d8d75-ce68-4b46-ae2f-2ddb6e1d6a62",
+      "name": "J-Mac Roofing Oldham Specialists",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "20d3621e-8dcc-43a8-bba5-7206fbd97e01",
+      "name": "SERVPRO of Mount Prospect/North Des Plaines",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "f9767db7-a2f7-4e72-a983-1ad34936453b",
+      "name": "Kots Windows",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "988523b6-9708-4ac1-978c-b08f039ec342",
+      "name": "Michael's Locksmith Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "704ce865-b07b-456a-b10b-a938f72e6945",
+      "name": "Anchor Point Development",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5abc47a3-97a6-4205-9685-01c430a16046",
+      "name": "1-800-BOARDUP of Clark County",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "9fe75c6e-a76f-4ad7-8fcd-d8955f329fbe",
+      "name": "Paul T Suppes HVAC",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d503aed3-2eb4-4853-8503-4899e6e22223",
+      "name": "Thomas Electrical",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5b29f3e6-e1d2-4224-be52-64c78e119f1a",
+      "name": "St Simons Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "3fbdfc21-4543-4d5b-89eb-8c89078c4add",
+      "name": "New Concepts Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "287da2a6-9d79-4ff3-829d-de0d222d8abe",
+      "name": "Turner Exteriors",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "3c8c138f-9f07-4ccf-88d6-698101b2f5f8",
+      "name": "Mirrors and Things",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "89c6d96d-cab7-4c9b-baa1-c3e7aa6dafe7",
+      "name": "John Breuer Home Modernization",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "9af2e22f-0aa1-4b31-ada1-543daf5468ef",
+      "name": "Bradford Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "82c65718-b6bd-4d33-b5dc-a535383f4aba",
+      "name": "Steele Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "74ea18c3-14d1-420e-b522-1ed515790abb",
+      "name": "Browns Heating and Air",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a6a387fa-dd35-4082-b2f6-2544b7ef0a77",
+      "name": "Perfect Pitch Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0bcbed54-7b3f-4e65-8f7d-50c86f3004ab",
+      "name": "R S Heating and Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1da9fce2-acfc-414c-b5c8-547091645f77",
+      "name": "Precision Lock & Safe",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "43c0b88d-b099-4436-adaa-72a1cc40c0d4",
+      "name": "Blue Ridge Carpet & Tile Cleaning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "45fad215-6383-493d-8aa1-07e6d04205a8",
+      "name": "Vitality Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bdaa3170-7a76-460d-a7fc-e46a2de6a0a3",
+      "name": "Pacific Cove Construction & Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a20718c0-1606-45ce-9f6d-c786d104463c",
+      "name": "SERVPRO of Western O'Fallon/Wentzville",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ef491d8f-ca24-4049-98a0-0f227c23b6a6",
+      "name": "Stanley Steemer",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6e8c5f78-e840-4e4e-a324-5387c16c4489",
+      "name": "Magna Dry",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "0f411551-7b13-4e3b-b708-a7daf247e516",
+      "name": "Wright Restoration Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bad892e0-6725-4cf5-866a-ba32bcf7306b",
+      "name": "Greenville Comfort Systems",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5a7a26b4-4554-4736-8d16-cfe6b5b9bb7e",
+      "name": "Patriot Services Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1b7a5027-b696-404f-a3bb-61c4e0b7a969",
+      "name": "Michael & Son Services Richmond",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bc5f99f6-b244-453a-8372-7373945dd1ee",
+      "name": "Swan Plumbing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b7cd0eea-b08e-47df-9bfb-c1a2620730d9",
+      "name": "Yurky & Sons Plumbing & Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "2f8a24f7-b57e-441c-95f2-4da5f31b50ef",
+      "name": "Forever Foundation Repair",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b0e1835c-fd52-4e6e-8cc4-e84fa7f2f2d5",
+      "name": "Toth Construction",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "42443805-82ce-4468-8546-920de3c8239a",
+      "name": "Columbine Roofing & Solar",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "632f4062-b68d-4a1e-8052-ab066a30309c",
+      "name": "Galati Enterprises",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "40c8f82f-9236-4a82-a4e2-f4ffa0798728",
+      "name": "Modern Window",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "1031fe1c-50ff-499c-94a5-0cb80f4a75ae",
+      "name": "Laco",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "19ff0cd7-c53b-440a-8452-58a913b4b331",
+      "name": "High Grade Roofing Oldham experts",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "fcf521a9-ab97-44d1-97b6-29af6363e509",
+      "name": "Chris Powers Electrician",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "cac558bc-e8d4-4b04-b5e1-b5a4e3af11cf",
+      "name": "Hannon's Electrical",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "94183951-6170-48e1-8cbb-52a0778475e4",
+      "name": "Wesley’s continuous gutter",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "984d759e-13ff-430e-a93e-65d14f1c54db",
+      "name": "Thompson N' Thompson HVAC",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "997b83ff-a280-453c-bec4-2283384fea0e",
+      "name": "Plumb Rite Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "26de5a75-f50d-420f-b53a-35c50f8c773b",
+      "name": "Cactus Comfort Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "b9953ce5-67d8-467d-878d-fa6a9386a4e3",
+      "name": "Polar Air Heating and Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "919cb2d4-78ae-4310-9fe7-6c061e3a1be5",
+      "name": "Rino Carpet Cleaning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6b20fca2-1f0f-4518-a3c7-1e057762dc0d",
+      "name": "A and L Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d7db274f-ded2-4c56-9abd-e83be455e517",
+      "name": "CGarcia Renovation",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "fa3e65e4-1dfd-480f-9c88-6865f5f57ef4",
+      "name": "Next Level Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "a9b5ed19-8d46-4f9c-9766-1b271726e739",
+      "name": "Genesis Cabinet Company",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d092637e-b713-4a6e-af1c-c03eca0ca6b4",
+      "name": "Faler Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "16e2e8f2-3241-4345-bc19-ce0599433a8b",
+      "name": "Ursa General Building",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "bfcd33cf-c95d-4f89-82dc-59ac042cf654",
+      "name": "Moser Electric",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "260079b4-ff46-4c50-8c22-24166347ca3a",
+      "name": "Windsor Valley Roofing",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "22b59101-8ea5-41ae-8ed7-296b6f6a9c74",
+      "name": "Banner Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "6db782cd-2c7f-4fd4-87bf-119a48336b07",
+      "name": "United Plate Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "3c58adb7-de6c-414b-bdb0-bdb73f3b6ee5",
+      "name": "HX Mechanical",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "63d307cb-01b5-419c-bf04-be51f9294e2d",
+      "name": "Jeremy Patch Heating and Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "47bc5883-6573-47bd-8247-79cf7d429eb1",
+      "name": "Smart Solutions General Contractor",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "d2251c5c-fa45-4bc7-b61f-c97b21517993",
+      "name": "Simplify Build Contractors",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "141a11ed-897e-48d1-8730-a0d442d87391",
+      "name": "My Guy Heating and Cooling",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "32a7864d-a4af-4d09-9173-0b2b3fc3deeb",
+      "name": "Fast Help",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "af4cb892-251e-49a9-92e4-059b3c997f98",
+      "name": "Cornerstone Glass Colorado",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "4dd39007-8936-439c-bcd3-6dc8b0ae2432",
+      "name": "Airstream Services",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "9cf390f5-812e-41ff-800e-40910cc68263",
+      "name": "Air Plus Heating & Air Conditioning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "5f5b1f2c-ba05-43b8-a1ac-372f83e45f6a",
+      "name": "Frank’s Plumbing Plus",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "81f22352-9dfe-4020-b14c-c8006ecc4630",
+      "name": "Hydro Clean Carpet Cleaning",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ffe507d9-3a72-41af-92d0-beb7c9e61125",
+      "name": "Burgess Builders",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "445d70a9-bbd5-4f74-9c34-0352c2ab6c9d",
+      "name": "Above All Glass",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    },
+    {
+      "id": "ae310d4f-9c20-40e8-a650-4ef1378e24f9",
+      "name": "Wicked Good Plumbing and Heating",
+      "changes": {
+        "website": null
+      },
+      "dryRun": true
+    }
+  ],
+  "manualReview": [
+    {
+      "id": "us-los-dra-hcft4",
+      "name": "San Pedro Plumbing",
+      "type": "website",
+      "url": "https://www.sanpedroplumbing.com/",
+      "reason": "HTTP 403"
+    },
+    {
+      "id": "7e3ba424-066f-41b0-a5b0-b32f44619fa7",
+      "name": "Blackburn Expert Roofers",
+      "type": "website",
+      "url": "https://checkatrade.com/",
+      "reason": "HTTP 403"
+    },
+    {
+      "id": "65aa1973-aacd-4dc6-a4e2-5e0949182eea",
+      "name": "Colchester Reliable Roofers",
+      "type": "website",
+      "url": "https://checkatrade.com/",
+      "reason": "HTTP 403"
+    },
+    {
+      "id": "ca89c5c7-de3a-4b82-bdd5-ac7cb55edc8d",
+      "name": "Gary Burns Roofing St Helens 24/7",
+      "type": "website",
+      "url": "https://garyburnsroofing.co.uk/",
+      "reason": "HTTP 403"
+    },
+    {
+      "id": "bf15ee1b-20c5-4b5a-b574-3f7e1c78fb85",
+      "name": "PDM Roofing St Helens experts",
+      "type": "website",
+      "url": "https://checkatrade.com/",
+      "reason": "HTTP 403"
+    }
+  ]
+}
