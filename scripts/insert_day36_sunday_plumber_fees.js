@@ -82,14 +82,14 @@ Once the main water is off, open the ground floor taps to drain the pipes.
 
 ## The Home Emergency Multi-Tool (UK Edition)
 
-Being prepared means having the right tools on hand before the water starts gushing. We recommend the **PLUMBSHARK X10 in 1**, a professional-grade multi-tool designed by Heatlab UK specifically for homeowners.
+Being prepared means having the right tools on hand before the water starts gushing. We recommend the **Multipurpose Wrench Tool**, an all-in-one solution for faucet and sink installations.
 
-![PLUMBSHARK X10 in 1 Plumbing Multi-Tool](/blog/sunday-emergency-plumber-fees-uk-2026/plumbshark-multitool.jpg)
+![Multipurpose Wrench Tool for Faucet and Sink](/blog/day36/multipurpose-wrench-tool.webp)
 
-**PLUMBSHARK - X10 in 1 Plumbing Tools**
-Includes: Radiator Bleed Key, Gas Meter Box Key, Plumbers Spanner & More. A Must Have in Your Plumbing Tools and Equipment. Designed & Patented by Heatlab UK.
+**Upgrade All in One Wrench Tool for Faucet and Sink**
+Faucet and Sink Installer with Useful Gadgets, 25 in 1 Multifunctional Wrench Plumbing Tool for Toilet Bowl, Sink, Bathroom, Kitchen Plumbing.
 
-[Buy on Amazon](https://www.amazon.co.uk/PLUMBSHARK-Plumbing-Heating-Keyring-Multitool/dp/B0C9Y6S4V6?crid=289D79909HIJU&keywords=plumb+tech+for+phone&qid=1773607550&s=diy&sprefix=%2Cdiy%2C219&sr=1-1-spons&aref=5YwrSLE7Cp&sp_csd=d2lkZ2V0TmFtZT1zcF9idGY&psc=1&linkCode=ll2&tag=et0a8-21&linkId=0648590de956f1939cac94ea26bb9f94&ref_=as_li_ss_tl)
+[Buy on Amazon](https://www.amazon.com/Installer-25-Multifunctional-Plumbing-Bathroom/dp/B0G34RKGZZ?crid=2TPU7IRLUAFAN&dib=eyJ2IjoiMSJ9.9ujPYoAwBXcZsckJvmTKhhYSDWaX5qoqeCnt82-N5vd_Ortfic2GA4kiezPTH3smsTABYqdE4_PcNYEQIT2YSS7Fw6wqpbWtcz_NUd0k4qVn8jkML86KscFoqaFk-Jh5b5HWdVIK6wJVOs59orZb6zCy-vLLxWwqBw2RyD4UqyqLb7ANcI7pAxp9aCipF6Zm5q_3fuCGjjCjPRLNxrRvX8ssJk1HJ89hYaPkuOhnyThqUo_h_KatMkQRnyIwYbpkW8JD9Aw321AF4GetZR5VdLBSptFtJoY8UXb1EEUjDBg.iaYwx1zetBx69EOhxGSoir8nahF_jVvf-xB2GLuzAZc&dib_tag=se&keywords=1+Plumbing+Tools+all+in+one+adjust+heaters&nsdOptOutParam=true&qid=1773661072&sprefix=1+plumbing+tools+all+in+one+adjust+heaters%2Caps%2C374&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1&linkCode=ll2&tag=emergencytrad-20&linkId=ce7ade890548b542d7831bd7b21a661d&language=en_US&ref_=as_li_ss_tl)
 
 ---
 
@@ -176,14 +176,14 @@ If the leak is in a pipe, shut off the whole house. Knowing where this is can sa
 
 ## Recommended Emergency Multi-Tool
 
-Being prepared means having the right tools on hand. We recommend the **PLUMBSHARK X10 in 1**, a professional-grade multi-tool that includes essential keys for radiators, gas meters, and more.
+Being prepared means having the right tools on hand. We recommend the **Multipurpose Wrench Tool**, an all-in-one solution for faucet and sink installations.
 
-![PLUMBSHARK X10 in 1 Plumbing Multi-Tool](/blog/sunday-emergency-plumber-fees-us-2026/plumbshark-multitool.jpg)
+![Multipurpose Wrench Tool for Faucet and Sink](/blog/day36/multipurpose-wrench-tool.webp)
 
-**PLUMBSHARK - X10 in 1 Plumbing Tools**
-Includes: Radiator Bleed Key, Gas Meter Box Key, Plumbers Spanner & More. A Must Have in Your Plumbing Tools and Equipment. Designed & Patented by Heatlab UK.
+**Upgrade All in One Wrench Tool for Faucet and Sink**
+Faucet and Sink Installer with Useful Gadgets, 25 in 1 Multifunctional Wrench Plumbing Tool for Toilet Bowl, Sink, Bathroom, Kitchen Plumbing.
 
-[Buy on Amazon](https://www.amazon.co.uk/PLUMBSHARK-Plumbing-Heating-Keyring-Multitool/dp/B0C9Y6S4V6?crid=289D79909HIJU&keywords=plumb+tech+for+phone&qid=1773607550&s=diy&sprefix=%2Cdiy%2C219&sr=1-1-spons&aref=5YwrSLE7Cp&sp_csd=d2lkZ2V0TmFtZT1zcF9idGY&psc=1&linkCode=ll2&tag=et0a8-21&linkId=0648590de956f1939cac94ea26bb9f94&ref_=as_li_ss_tl)
+[Buy on Amazon](https://www.amazon.com/Installer-25-Multifunctional-Plumbing-Bathroom/dp/B0G34RKGZZ?crid=2TPU7IRLUAFAN&dib=eyJ2IjoiMSJ9.9ujPYoAwBXcZsckJvmTKhhYSDWaX5qoqeCnt82-N5vd_Ortfic2GA4kiezPTH3smsTABYqdE4_PcNYEQIT2YSS7Fw6wqpbWtcz_NUd0k4qVn8jkML86KscFoqaFk-Jh5b5HWdVIK6wJVOs59orZb6zCy-vLLxWwqBw2RyD4UqyqLb7ANcI7pAxp9aCipF6Zm5q_3fuCGjjCjPRLNxrRvX8ssJk1HJ89hYaPkuOhnyThqUo_h_KatMkQRnyIwYbpkW8JD9Aw321AF4GetZR5VdLBSptFtJoY8UXb1EEUjDBg.iaYwx1zetBx69EOhxGSoir8nahF_jVvf-xB2GLuzAZc&dib_tag=se&keywords=1+Plumbing+Tools+all+in+one+adjust+heaters&nsdOptOutParam=true&qid=1773661072&sprefix=1+plumbing+tools+all+in+one+adjust+heaters%2Caps%2C374&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1&linkCode=ll2&tag=emergencytrad-20&linkId=ce7ade890548b542d7831bd7b21a661d&language=en_US&ref_=as_li_ss_tl)
 
 ---
 
