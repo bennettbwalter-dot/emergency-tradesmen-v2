@@ -510,6 +510,15 @@ textarea {
   animation: strobe 0.2s ease-in-out infinite;
 }
 
+@keyframes emergency-flash {
+  0%, 100% { color: #b91c1c; opacity: 1; filter: drop-shadow(0 0 4px rgba(185, 28, 28, 0.4)); }
+  50% { color: #f87171; opacity: 0.6; filter: drop-shadow(0 0 1px rgba(185, 28, 28, 0.1)); }
+}
+
+.animate-emergency-flash {
+  animation: emergency-flash 0.8s ease-in-out infinite;
+}
+
 @keyframes glow-bottom {
   0%, 100% { 
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

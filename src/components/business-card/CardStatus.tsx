@@ -1,33 +1,38 @@
 import { Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Business, isBusinessAvailable } from "@/lib/businesses";
 
 interface CardStatusProps {
     business: Business;
+    isParchment?: boolean;
 }
 
-export function CardStatus({ business }: CardStatusProps) {
+export function CardStatus({ business, isParchment }: CardStatusProps) {
     const isLive = isBusinessAvailable(business);
 
     return (
         <div className="grid grid-cols-2 gap-3 h-10 w-full mt-1">
-            {/* Rating - Solid Gold Pill */}
-            <div className="flex items-center justify-center gap-2 h-full rounded-full border border-gold/30 bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-black w-full shadow-sm text-gold-dark dark:text-gold-light font-ui">
-                <Star className="w-3.5 h-3.5 fill-current text-gold shrink-0" />
-                <span className="font-bold text-sm leading-none translate-y-[1px]">{business.rating.toFixed(1)}</span>
-                <span className="text-[10px] opacity-80 leading-none translate-y-[1px] font-medium">({business.reviewCount})</span>
+            {/* Rating - Solid Gold Pill or Ink Stamp */}
+            <div className={cn(
+                "flex items-center justify-center gap-2 h-full border w-full transition-all",
+                "bg-[#fcf5e5]/40 border-[#2a1b0a]/10 text-[#2a1b0a] font-mono rounded"
+            )}>
+                <Star className="w-3.5 h-3.5 text-gold fill-current shrink-0" />
+                <span className="leading-none translate-y-[1px] font-bold text-sm">{business.rating.toFixed(1)}</span>
+                <span className="leading-none translate-y-[1px] text-[10px] opacity-70 font-medium">({business.reviewCount}) Reviews</span>
             </div>
-
-            {/* Availability - Glowing Emerald/Red */}
-            <div className={`relative flex items-center justify-center gap-2 h-full rounded-full border overflow-hidden w-full transition-all duration-300 font-ui
-            ${isLive
-                    ? 'border-emerald-500/30 bg-emerald-950/20 shadow-[0_0_15px_-5px_rgba(16,185,129,0.3)]'
-                    : 'border-red-500/20 bg-red-950/10'
-                }`}>
-                <div className={`w-2 h-2 shrink-0 rounded-full ${isLive ? 'bg-emerald-500 shadow-[0_0_8px_#34d399] animate-pulse' : 'bg-red-500/70'}`} />
-                <span className={`text-[10px] font-bold uppercase tracking-widest leading-none translate-y-[1px] ${isLive ? 'text-emerald-500' : 'text-red-400/80'}`}>
+ 
+            {/* Availability - Glowing Emerald/Red or Ink Stamp */}
+            <div className={cn(
+                "relative flex items-center justify-center gap-2 h-full border overflow-hidden w-full transition-all duration-300",
+                "bg-[#fcf5e5]/40 border-[#2a1b0a]/10 text-[#2a1b0a] font-mono rounded"
+            )}>
+                <span className={cn(
+                    "uppercase tracking-widest leading-none translate-y-[1px] text-xs font-bold",
+                    isLive ? "text-emerald-700" : "text-red-700"
+                )}>
                     {isLive ? 'Available' : 'Offline'}
                 </span>
-                {isLive && <div className="absolute inset-0 bg-emerald-500/5 blur-md pointer-events-none" />}
             </div>
         </div>
     );

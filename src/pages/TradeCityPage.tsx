@@ -1,5 +1,6 @@
 import { useParams, Navigate, useLocation } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import { cn } from "@/lib/utils";
 import { useState, useEffect, useRef, useMemo, Suspense, lazy } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -32,6 +33,7 @@ import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 // Lazy load heavy map component
 const InteractiveMap = lazy(() => import("@/components/InteractiveMap").then(module => ({ default: module.InteractiveMap })));
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { useSimpleTheme } from "@/components/simple-theme";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
@@ -229,6 +231,7 @@ export default function TradeCityPage() {
   const heroImage = (pageData?.problem as any)?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
   const { settings, userCoords } = useLocalization();
+  const { theme } = useSimpleTheme();
 
   const effectiveCoords = useMemo(() => {
     if (urlLat && urlLng) {
@@ -743,7 +746,7 @@ export default function TradeCityPage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="container-wide py-16 bg-card/30">
+        <section id="services" className={cn("container-wide py-16", theme === 'dark' && "bg-card/30")}>
           <div className="max-w-2xl mx-auto text-center mb-12">
             <h2 className="text-3xl font-display text-foreground mb-4">{cityName} Emergency {tradeDisplayName} Services</h2>
             <p className="text-muted-foreground">Comprehensive emergency {tradeDisplayName.toLowerCase()} solutions for {cityName} and surrounding areas.</p>
@@ -774,16 +777,18 @@ export default function TradeCityPage() {
         {/* Listings Section */}
         <section className="container-wide py-16 relative">
           {/* Background Grid */}
-          <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-            <Squares
-              direction="diagonal"
-              speed={0.3}
-              squareSize={50}
-              borderColor="rgba(212, 175, 55, 0.1)"
-              hoverFillColor="rgba(212, 175, 55, 0.05)"
-              lineThickness={0.5}
-            />
-          </div>
+          {theme === 'dark' && (
+            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+              <Squares
+                direction="diagonal"
+                speed={0.3}
+                squareSize={50}
+                borderColor="rgba(212, 175, 55, 0.1)"
+                hoverFillColor="rgba(212, 175, 55, 0.05)"
+                lineThickness={0.5}
+              />
+            </div>
+          )}
 
           <div className="mb-8 relative z-10">
             <SearchFilterBar
@@ -825,9 +830,15 @@ export default function TradeCityPage() {
                   </div>
                 ) : (
                   <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                    {currentBusinesses.map((business, index) => (
-                      <BusinessCard key={business.id} business={business} rank={startIndex + index + 1} />
-                    ))}
+                    {currentBusinesses.map((business, index) => {
+                      return (
+                        <BusinessCard 
+                          key={business.id} 
+                          business={business} 
+                          rank={startIndex + index + 1} 
+                        />
+                      );
+                    })}
                   </div>
                 )}
 
@@ -976,7 +987,7 @@ export default function TradeCityPage() {
         </section>
 
         {/* Troubleshooting Section */}
-        <section className="container-wide py-16 bg-secondary/10">
+        <section className={cn("container-wide py-16", theme === 'dark' && "bg-secondary/10")}>
           <TroubleshootingGuide trade={tradeInfo} city={cityName} />
         </section>
 

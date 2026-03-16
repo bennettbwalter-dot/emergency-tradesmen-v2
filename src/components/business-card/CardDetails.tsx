@@ -1,4 +1,5 @@
 import { MapPin, Clock, ShieldCheck, Globe, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { trackEvent } from "@/lib/analytics";
 import { Business, calculateTrustScore } from "@/lib/businesses";
@@ -6,9 +7,10 @@ import { useSimpleTheme } from "@/components/simple-theme";
 
 interface CardDetailsProps {
     business: Business;
+    isParchment?: boolean;
 }
 
-export function CardDetails({ business }: CardDetailsProps) {
+export function CardDetails({ business, isParchment }: CardDetailsProps) {
     const { theme } = useSimpleTheme();
     const trustScore = calculateTrustScore(business);
 
@@ -48,7 +50,7 @@ export function CardDetails({ business }: CardDetailsProps) {
     }
 
     return (
-        <div className="flex flex-col gap-2 w-full mt-2 font-ui">
+        <div className="flex flex-col w-full mt-2 gap-1 font-mono">
             {details.map((item, i) => {
                 // Website Link with special styling
                 if (item.href) {
@@ -60,34 +62,42 @@ export function CardDetails({ business }: CardDetailsProps) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackEvent("Business", "Website Click", business.name)}
-                            containerClassName="rounded-full w-full h-10"
-                            className="w-full h-full flex items-center justify-start px-4 bg-zinc-900/90 text-white group"
-                            glowColor={theme === 'light' ? "#D4AF37" : undefined}
+                            containerClassName="w-full rounded-none h-10 py-1"
+                            className="w-full h-full flex items-center justify-start px-4 group bg-transparent border-b border-dashed border-[#2a1b0a]/20 text-[#2a1b0a]"
+                            glowColor="#D4AF37"
                         >
-                            <div className="w-6 flex justify-center shrink-0 mr-3">
-                                <item.icon className="w-4 h-4 text-gold group-hover:text-white transition-colors" strokeWidth={1.5} />
+                            <div className="flex justify-center shrink-0 w-6 mr-3">
+                                <item.icon className={cn(
+                                    "transition-colors w-4 h-4", 
+                                    item.icon === MapPin && "text-red-600",
+                                    item.icon === Clock && "text-amber-600",
+                                    item.icon === ShieldCheck && "text-emerald-600",
+                                    item.icon === Globe && "text-blue-600",
+                                    item.icon === CheckCircle && "text-emerald-600"
+                                )} strokeWidth={1.5} />
                             </div>
-                            <span className="text-xs font-medium truncate w-full pt-[1px] tracking-wide text-zinc-100 group-hover:text-white transition-colors">
+                            <span className="uppercase leading-[1.2] transition-colors text-[#2a1b0a] font-bold text-xs line-clamp-2">
                                 {item.text}
                             </span>
                         </HoverBorderGradient>
                     );
                 }
 
-                const isNoWebsite = item.text === "No Website";
-
                 return (
-                    <div key={i} className={`relative group flex items-center h-10 w-full px-4 rounded-full border border-white/5 bg-white/5 transition-colors ${isNoWebsite ? 'opacity-40 grayscale pointer-events-none' : 'hover:bg-white/10'}`}>
-                        <div className="w-6 flex justify-center shrink-0 mr-3">
-                            <item.icon className={`w-4 h-4 text-muted-foreground transition-colors ${!isNoWebsite && 'group-hover:text-gold'}`} strokeWidth={1.5} />
+                    <div key={i} className="relative group flex items-center w-full px-4 transition-colors bg-[#fcf5e5]/40 border-b border-dashed border-[#2a1b0a]/10 rounded-none h-10 py-1">
+                        <div className="flex justify-center shrink-0 w-6 mr-3">
+                            <item.icon className={cn(
+                                "transition-colors w-4 h-4",
+                                item.icon === MapPin && "text-red-600",
+                                item.icon === Clock && "text-amber-600",
+                                item.icon === ShieldCheck && "text-emerald-600",
+                                item.icon === Globe && "text-blue-600",
+                                item.icon === CheckCircle && "text-emerald-600"
+                            )} strokeWidth={1.5} />
                         </div>
-                        <span className="text-xs text-muted-foreground group-hover:text-foreground font-medium truncate w-full pt-[1px] tracking-wide transition-colors">
+                        <span className="text-[#2a1b0a] font-bold uppercase text-xs line-clamp-2 leading-tight transition-colors">
                             {item.text}
                         </span>
-
-                        {!isNoWebsite && (
-                            <div className="absolute inset-0 rounded-full ring-1 ring-gold/0 group-hover:ring-gold/20 transition-all duration-500" />
-                        )}
                     </div>
                 );
             })}
