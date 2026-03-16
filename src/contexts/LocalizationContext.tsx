@@ -98,49 +98,52 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
         if (hasAttemptedIPDetection) return;
 
         const detectRegion = async () => {
+            if (hasAttemptedIPDetection) return;
+
             try {
                 const hostname = window.location.hostname;
                 const port = window.location.port;
                 const isUSDomain = hostname.includes('emergencycontractors.net') || 
                              (hostname === 'localhost' && port === '3001') ||
                              (hostname === '127.0.0.1' && port === '3001');
+                const isUKDomain = hostname.includes('emergencytradesmen.net') || 
+                             port === '3000' || 
+                             (hostname === 'localhost' && port === '3000');
                 
                 if (isUSDomain) {
                     setCountryCodeState('US');
-                } else if (port === '3000' || hostname.includes('emergencytradesmen.net') || (hostname === 'localhost' && port === '3000')) {
+                    setHasAttemptedIPDetection(true);
+                    return;
+                } else if (isUKDomain) {
                     setCountryCodeState('GB');
+                    setHasAttemptedIPDetection(true);
+                    return;
                 }
 
-                // Fallback for other domains/IPs (simple check, no redirect)
+                // Fallback for other domains/IPs
                 const response = await fetch('https://freeipapi.com/api/json');
+                if (!response.ok) throw new Error('API unreachable');
                 const data = await response.json();
 
                 if (data.countryCode === 'US') {
-                    if (!settings.countryCode) setCountryCodeState('US');
-                    if (data.regionName && !detectedState) {
-                        setDetectedState(data.regionName);
-                    }
-                    if (data.cityName && !detectedCity) {
-                        setDetectedCity(data.cityName);
-                    }
-                } else if (data.countryCode === 'GB' || settings.countryCode === 'GB') {
-                    if (!settings.countryCode) setCountryCodeState('GB');
-                    if (data.regionName && !detectedState) {
-                        setDetectedState(data.regionName);
-                    }
-                    if (data.latitude && data.longitude && !detectedCity) {
-                        const nearest = findNearestCity(data.latitude, data.longitude, 'GB');
-                        if (nearest) {
-                            setDetectedCity(nearest.city);
+                    setCountryCodeState('US');
+                    if (data.regionName) setDetectedState(data.regionName);
+                    if (data.cityName) setDetectedCity(data.cityName);
+                } else {
+                    setCountryCodeState('GB'); // Default fallback
+                    if (data.countryCode === 'GB') {
+                        if (data.regionName) setDetectedState(data.regionName);
+                        if (data.latitude && data.longitude) {
+                            const nearest = findNearestCity(data.latitude, data.longitude, 'GB');
+                            if (nearest) setDetectedCity(nearest.city);
+                        } else if (data.cityName) {
+                            setDetectedCity(data.cityName);
                         }
-                    } else if (data.cityName && !detectedCity) {
-                        setDetectedCity(data.cityName);
                     }
-                } else if (!settings.countryCode) {
-                    setCountryCodeState('GB'); // Default to GB for other regions if not US
                 }
             } catch (err) {
-                console.warn('IP-based region detection failed:', err);
+                console.warn('Region detection failed, defaulting to GB:', err);
+                setCountryCodeState('GB');
             } finally {
                 setHasAttemptedIPDetection(true);
             }

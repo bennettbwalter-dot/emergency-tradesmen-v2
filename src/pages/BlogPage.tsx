@@ -52,49 +52,46 @@ export default function BlogPage() {
 
     useEffect(() => {
         async function loadPosts() {
-            const countrySuffix = settings.countryCode === 'US' ? '-us' : '-gb';
-
             const { data, error } = await supabase
                 .from('posts')
                 .select('id, title, slug, excerpt, cover_image, published_at, created_at')
                 .eq('published', true)
                 .order('published_at', { ascending: false });
 
-            let allData = [];
-            if (!error && data) {
-                allData = data;
+            if (error || !data) {
+                setIsLoading(false);
+                return;
             }
 
-            const regionalData = allData.filter(p => {
-                const slug = p.slug.toLowerCase();
-                const isUSPost = slug.includes('-us-') || slug.endsWith('-us') || slug.includes('-usa-') || slug.endsWith('-usa');
-                const isUKPost = slug.includes('-gb-') || slug.endsWith('-gb') || slug.includes('-uk-') || slug.endsWith('-uk');
-
-                if (isUSPost) return settings.countryCode === 'US';
-                if (isUKPost) return settings.countryCode === 'GB';
-                
-                // If it's a general slug, check if a regionalized version exists in the data
-                const baseSlug = slug.replace(/-us$|-usa$|-gb$|-uk$|-us-2026$|-uk-2026$/, '');
-                const hasRegionalVersion = allData.some(other => {
-                    const otherSlug = other.slug.toLowerCase();
-                    if (settings.countryCode === 'US') {
-                        return otherSlug.includes(`${baseSlug}-us`) || otherSlug.includes(`${baseSlug}-usa`);
-                    } else {
-                        return otherSlug.includes(`${baseSlug}-gb`) || otherSlug.includes(`${baseSlug}-uk`);
-                    }
-                });
-                return !hasRegionalVersion;
+            // Strict Regional Filtering: Only show posts that match the current country code suffix
+            const regionalData = data.filter(post => {
+                const slug = post.slug.toLowerCase();
+                if (settings.countryCode === 'US') {
+                    // Only US suffixes
+                    return slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                } else {
+                    // Only UK suffixes
+                    return slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+                }
             });
 
-            // Helper to clean up slugs for the link (remove regional suffix)
-            // Actually, we want to keep the slug as is for the Link, but the BlogPostPageFix will handle it.
-            // Wait, if we link to slug-us, the Router will find it.
-            setPosts(regionalData);
+            // Client-side deduplication as a safety measure (dedupe by title)
+            const uniquePosts = [];
+            const seenTitles = new Set();
+            for (const post of regionalData) {
+                const title = post.title.toLowerCase().trim();
+                if (!seenTitles.has(title)) {
+                    seenTitles.add(title);
+                    uniquePosts.push(post);
+                }
+            }
+
+            setPosts(uniquePosts);
             setIsLoading(false);
         }
 
         loadPosts();
-    }, []);
+    }, [settings.countryCode]);
 
     // Featured Post Logic (First post is featured)
     const featuredPost = posts[0];

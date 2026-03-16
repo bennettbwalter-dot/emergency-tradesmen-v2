@@ -78,7 +78,7 @@ export function HeroSection() {
                     {/* Main headline */}
                     <div className="flex flex-col items-center justify-center mb-6">
                         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.1]">
-                            LOCAL <span className="text-gold block sm:inline">TRADESMEN</span>
+                            LOCAL <span className="text-gold block sm:inline">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
                             <span className="text-gold block sm:inline"> NEAR {displayCity}</span>
                         </h1>
                     </div>
