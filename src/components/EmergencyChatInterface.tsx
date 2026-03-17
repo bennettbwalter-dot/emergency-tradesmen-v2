@@ -5,6 +5,10 @@ import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { MarkdownTypewriter } from "./MarkdownTypewriter";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { trades, cities, usCities } from "@/lib/trades";
@@ -55,6 +59,7 @@ export function EmergencyChatInterface() {
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const chatStateRef = useRef<ChatState>(chatState);
+    const [isAtBottom, setIsAtBottom] = useState(true);
     const handleUserMessageRef = useRef<(msg: string, isVoice?: boolean) => void>(() => { });
 
     // Track whether we're in a voice conversation so follow-ups auto-record
@@ -193,21 +198,34 @@ export function EmergencyChatInterface() {
         };
     }, [isRecording, getAudioLevel]);
 
-    const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    const handleScroll = () => {
         if (chatContainerRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+            // threshold of 50px from the bottom for better momentum support
+            const atBottom = scrollHeight - scrollTop - clientHeight < 50;
+            setIsAtBottom(atBottom);
+        }
+    };
+
+    const scrollToBottom = (behavior: ScrollBehavior = 'smooth', force: boolean = false) => {
+        if (chatContainerRef.current && (isAtBottom || force)) {
             const { scrollHeight, clientHeight } = chatContainerRef.current;
-            if (scrollHeight > clientHeight) {
-                chatContainerRef.current.scrollTo({
-                    top: scrollHeight,
-                    behavior
-                });
-            }
+            chatContainerRef.current.scrollTo({
+                top: scrollHeight - clientHeight,
+                behavior
+            });
         }
     };
 
     useEffect(() => {
-        scrollToBottom('smooth');
-    }, [chatState.history, isTyping]);
+        scrollToBottom('smooth', true);
+        // Extra scroll after a small delay to ensure rendering is complete
+        const timer = setTimeout(() => scrollToBottom('smooth', true), 100);
+        return () => clearTimeout(timer);
+    }, [chatState.history]);
+
+    // Removed aggressive setInterval to allow user to scroll up while typing
+    // We rely on MarkdownTypewriter's onTick and history updates now.
 
     // Removed silent sync to prevent premature button flashing.
     // The city will now only be "detected" in the UI if the user selects it or clicks Locate Me.
@@ -670,45 +688,62 @@ export function EmergencyChatInterface() {
                     </div>
                 )}
 
-                <div
-                    ref={chatContainerRef}
-                    className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[100px] max-h-[450px] scrollbar-hide pt-0 flex flex-col justify-end"
-                >
+                <div className="flex-1 w-full flex flex-col justify-start">
                     <AnimatePresence mode='popLayout'>
                         {chatState.history.length > 0 && (
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95, filter: 'blur(5px)' }}
                                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                                 transition={{ duration: 0.5, ease: "easeOut" }}
-                                className="w-full my-4"
+                                className="w-full my-2 md:my-4"
                             >
-                                <Terminal className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10">
+                                <Terminal 
+                                    containerRef={chatContainerRef}
+                                    onScroll={handleScroll}
+                                    className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10 overflow-hidden h-[60vh] md:h-[80vh]"
+                                    contentClassName="overscroll-contain pb-32"
+                                >
                                     <AnimatedSpan className="text-emerald-400 mb-6 font-bold tracking-wider text-xs uppercase opacity-80">
                                         <span>✓ System initialized</span>
                                     </AnimatedSpan>
 
-                                    <div className="space-y-6">
+                                    <div className="space-y-4 md:space-y-6">
                                         {chatState.history.map((msg, idx) => {
                                             const isLastMessage = idx === chatState.history.length - 1;
 
                                             if (msg.role === 'assistant') {
                                                 return (
-                                                    <div key={msg.id} className="text-muted-foreground/80">
-                                                        <span className="mr-3 text-gold/80">➜</span>
-                                                        <span className="text-foreground tracking-wide">
+                                                    <div key={msg.id} className="text-muted-foreground/80 flex gap-3 group">
+                                                        <div className="shrink-0 pt-1">
+                                                            <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center ring-1 ring-gold/30">
+                                                                <Zap className="w-4 h-4 text-gold" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
                                                             {isLastMessage ? (
-                                                                <TypingAnimation
-                                                                    duration={25}
-                                                                    className="text-base md:text-lg font-sans font-medium text-white/90"
-                                                                >
-                                                                    {msg.content}
-                                                                </TypingAnimation>
+                                                                <MarkdownTypewriter
+                                                                    content={msg.content}
+                                                                    speed={4}
+                                                                    interval={12}
+                                                                    onTick={() => {
+                                                                        if (isAtBottom) scrollToBottom('auto');
+                                                                    }}
+                                                                    onComplete={() => {
+                                                                        if (isAtBottom) scrollToBottom('smooth');
+                                                                    }}
+                                                                    className="prose prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-white"
+                                                                />
                                                             ) : (
-                                                                <span className="text-base md:text-lg font-sans font-medium text-white/90">
-                                                                    {msg.content}
-                                                                </span>
+                                                                <div className="prose prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-white">
+                                                                    <ReactMarkdown
+                                                                        remarkPlugins={[remarkGfm]}
+                                                                        rehypePlugins={[rehypeRaw]}
+                                                                    >
+                                                                        {msg.content}
+                                                                    </ReactMarkdown>
+                                                                </div>
                                                             )}
-                                                        </span>
+                                                        </div>
                                                     </div>
                                                 );
                                             }
@@ -718,7 +753,7 @@ export function EmergencyChatInterface() {
                                                     key={msg.id}
                                                     className="flex justify-end"
                                                 >
-                                                    <div className="max-w-[90%] md:max-w-[80%] p-3 rounded-2xl text-base leading-relaxed bg-white/10 border border-white/5 text-white/90 rounded-tr-sm">
+                                                    <div className="max-w-[90%] p-2.5 md:p-3 rounded-2xl text-sm md:text-base leading-relaxed bg-white/10 border border-white/5 text-white/90 rounded-tr-sm">
                                                         {msg.content}
                                                     </div>
                                                 </div>
@@ -736,7 +771,7 @@ export function EmergencyChatInterface() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    {isTyping && (
+                    {isTyping && !chatState.history.length && (
                         <div className="flex gap-3 p-4">
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/80 to-gold/20 flex items-center justify-center shrink-0 animate-pulse ring-4 ring-gold/10">
                                 <Zap className="w-4 h-4 text-white drop-shadow-md" />
@@ -748,7 +783,6 @@ export function EmergencyChatInterface() {
                             </div>
                         </div>
                     )}
-                    <div className="h-4" />
                 </div>
 
                 {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
@@ -759,9 +793,9 @@ export function EmergencyChatInterface() {
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
                         {/* TEXTAREA / WAVEFORM SLOT - Fixed height so controls never move */}
-                        <div className="w-full" style={{ minHeight: '140px' }}>
+                        <div className="w-full" style={{ minHeight: '80px' }}>
                             {isRecording ? (
-                                <div className="w-full h-full flex items-center justify-center px-4 py-4 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5" style={{ minHeight: '140px' }}>
+                                <div className="w-full h-full flex items-center justify-center px-3 py-3 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5" style={{ minHeight: '80px' }}>
                                     <WhisperWaveform
                                         audioData={audioData}
                                         isRecording={isRecording}
@@ -793,8 +827,8 @@ export function EmergencyChatInterface() {
                                     onBlur={() => setIsFocused(false)}
                                     placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
                                     data-tour="tour-chat-input"
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-6 md:px-8 py-6 text-xl md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
-                                    style={{ minHeight: '140px' }}
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-4 md:px-8 py-4 md:py-6 text-base md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
+                                    style={{ minHeight: '80px' }}
                                 />
                             )}
                         </div>

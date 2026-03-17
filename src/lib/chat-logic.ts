@@ -2,6 +2,7 @@ import { trades, cities, usCities } from "@/lib/trades";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
 import { searchVectorKnowledgeBase } from "@/lib/knowledge-base";
+import { getOfflineResponse, classifyEmergency, detectTradeFromBrain } from "@/lib/emergency-brain";
 
 // FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
 const FUZZY_TRADE_MATCHES: Record<string, string> = {
@@ -41,18 +42,51 @@ function fuzzyTradeDetect(msg: string): string | null {
     return null;
 }
 
-const SAFETY_TIPS: Record<string, string> = {
-    'gas-engineer': "Extinguish all flames, open all windows, and turn off the gas meter lever. Do not touch any electrical switches and leave the property immediately.",
-    'electrician': "Turn off the main power at your fuse box if safe. If you smell burning plastic, avoid all switches and outlets.",
-    'plumber': "Turn off your main stopcock immediately (usually under the sink) and open all taps to drain the pipes.",
-    'water-restoration': "Identify and isolate the leak source. Move furniture and electronics to a dry area immediately.",
-    'locksmith': "Stay in a safe, well-lit area. Have proof of residence ready for the locksmith's arrival.",
-    'glazier': "Do not attempt to clear broken glass yourself. Avoid the area and keep children and pets away.",
-    'drain-specialist': "Stop using all taps and toilets immediately until the blockage is cleared to prevent sewage overflow.",
-    'roofer': "Stay clear of falling debris. Place buckets under leaks if safe, but do not attempt to go onto the roof.",
-    'builder': "Evacuate any area with structural cracks or bulging walls. Do not attempt to move debris yourself.",
-    'breakdown': "Stay in a safe place away from traffic. Keep your hazard lights on and wear a high-vis vest if available.",
-    'air-conditioning': "Turn off the unit immediately at the breaker to prevent electrical damage or refrigerant leaks."
+const SAFETY_TIPS: Record<string, { uk: string; us: string }> = {
+    'gas-engineer': {
+        uk: "Extinguish all flames, open all windows, and turn off the gas meter lever (90 degrees). Do not touch any electrical switches and leave the property immediately. Call 0800 111 999.",
+        us: "Extinguish all flames, open all windows, and shut off the main gas valve (quarter turn). Do not touch any electrical switches and leave the property immediately. Call 911."
+    },
+    'electrician': {
+        uk: "Turn off the main power at your consumer unit if safe. If you smell burning plastic (like fish), avoid all switches and outlets.",
+        us: "Shut off the main breaker in your electrical panel if safe. If you smell burning or 'fishy' odors, avoid all switches and outlets."
+    },
+    'plumber': {
+        uk: "Turn off your main stopcock immediately (usually under the kitchen sink) and open all taps to drain the system.",
+        us: "Shut off your main water valve immediately (usually in the basement or garage) and open all faucets to drain the pipes."
+    },
+    'water-restoration': {
+        uk: "Identify and isolate the leak source. Move furniture and electronics to a dry area immediately. Check your escape of water insurance cover.",
+        us: "Identify and isolate the leak source. Move furniture and electronics to a dry area immediately. Document damage for your homeowner insurance claim."
+    },
+    'locksmith': {
+        uk: "Stay in a safe, well-lit area. Have proof of residency ready for the MLA-authorized locksmith's arrival.",
+        us: "Stay in a safe, well-lit area. Have photo ID and proof of residency ready for the ALOA-certified locksmith's arrival."
+    },
+    'glazier': {
+        uk: "Do not attempt to clear broken glass yourself. Avoid the area and keep children and pets away. Board up to BS 5357 if needed.",
+        us: "Do not attempt to clear broken glass yourself. Keep everyone away from the area. Board up securely according to local safety codes."
+    },
+    'drain-specialist': {
+        uk: "Stop using all taps and toilets immediately to prevent sewage overflow. Check if the blockage is in the public sewer run.",
+        us: "Stop using all plumbing fixtures immediately to prevent sewer backup. Locate your sewer cleanout for the technician."
+    },
+    'roofer': {
+        uk: "Stay clear of falling tiles or debris. Place buckets under leaks if safe, but do not attempt to go onto the roof or use ladders.",
+        us: "Stay clear of falling shingles or debris. Place buckets under active leaks if safe, but do not attempt to go onto the roof yourself."
+    },
+    'builder': {
+        uk: "Evacuate any area with structural cracks or bulging walls. Do not attempt to move heavy debris. Call 999 if there is a collapse risk.",
+        us: "Evacuate any area with structural cracks or sagging ceilings. Do not attempt to move heavy debris. Call 911 if structural collapse is imminent."
+    },
+    'breakdown': {
+        uk: "Stay well away from traffic, ideally behind a barrier. Keep hazard lights on. On motorways, exit on the passenger side and call Highways England.",
+        us: "Stay away from moving traffic, ideally behind highway barriers. Keep hazard lights on. On highways, exit on the right side and call 911 or highway patrol."
+    },
+    'air-conditioning': {
+        uk: "Turn off the AC unit immediately at the fuse spur or breaker to prevent electrical damage. Open windows if you smell gas or refrigerant.",
+        us: "Shut down the HVAC system at the breaker to prevent further damage. Open windows for ventilation if you detect a refrigerant leak."
+    }
 };
 
 export interface ChatState {
@@ -201,11 +235,13 @@ const getReadableTradeName = (slug: string, countryCode: string) => {
 export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
-    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
     newState.step = currentState.step;
+
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+    const regionKey: 'uk' | 'us' = isUSDomain ? 'us' : 'uk';
+    const regionParam: 'uk' | 'usa' = isUSDomain ? 'usa' : 'uk';
 
     const activeCities = countryCode === 'US' ? usCities : cities;
     const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
@@ -214,12 +250,13 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     // 1. DANGER CHECK
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
+        const emergencyNumber = isUSDomain ? '911' : '999';
         return {
             newState,
             response: {
                 id: Date.now().toString(),
                 role: 'assistant',
-                content: "⚠️ IMMEDIATE DANGER DETECTED\n\nIf there is immediate danger to life or property (fire, explosion, crime in progress), please call 999 immediately.\n\nIf you are safe and need a tradesperson, please confirm: 'I am safe'."
+                content: `### ⚠️ Danger Detected\n\nIf there is **immediate danger** (fire, explosion, crime), call **${emergencyNumber}** now.\n\nIf you are safe and need a tradesperson, reply: **'I am safe'**.`
             }
         };
     }
@@ -236,53 +273,45 @@ export async function processUserMessage(message: string, currentState: ChatStat
         if (matchedRule) {
             const isUK = region === 'UK';
             
-            // Extract "DO" and "DO NOT" sections from the action_plan
-            // The data format is "DO: ... DO NOT: ..."
             const planParts = matchedRule.action_plan.split('DO NOT:');
             const doSection = planParts[0].replace('DO:', '').trim();
-            const doNotSection = planParts.length > 1 ? planParts[1].trim() : "No specific dangerous actions mentioned, but follow standard precautions.";
+            const doNotSection = planParts.length > 1 ? planParts[1].trim() : "";
 
-            // 1. Assess the Situation
-            let response = `### Assess the Situation\n`;
-            response += `I've analyzed your description regarding **${matchedRule.scenario}**. Based on these details, this is classified as a **${matchedRule.risk_level}**.\n\n`;
-            
-            // Step 2 – Possible Causes
-            // We can infer some possible causes or mention standard ones for this scenario
-            response += `**Potential Causes Identified:** I am evaluating this against established standards (such as ${isUK ? 'Building Regs Part G/H' : 'International Plumbing/Fuel Gas Code'}) to identify if this is a structural, internal, or utility-level failure.\n\n`;
+            let response = `### ⚠️ ${matchedRule.scenario}\nRisk level: **${matchedRule.risk_level}**\n\n`;
 
-            // 2. Immediate Safety Steps
-            response += `### Immediate Safety Steps\n`;
-            // Split by semicolons or full stops to create bullets if possible, otherwise just bullet the whole block
-            const doBullets = doSection.split(/[;.]. /).map(s => s.trim()).filter(Boolean);
-            doBullets.forEach(bullet => {
+            // Safety steps
+            response += `### ✅ Do This Now\n`;
+            const doBullets = doSection.split(/[;.]\s/).map(s => s.trim()).filter(Boolean);
+            doBullets.slice(0, 4).forEach(bullet => {
                 response += `- ${bullet}\n`;
             });
             response += `\n`;
 
-            // 3. What NOT to Do
-            response += `### What NOT to Do\n`;
-            const doNotBullets = doNotSection.split(/[;.]. /).map(s => s.trim()).filter(Boolean);
-            doNotBullets.forEach(bullet => {
-                response += `- ${bullet}\n`;
-            });
-            response += `\n`;
+            // What NOT to do
+            if (doNotSection) {
+                response += `### ❌ Avoid\n`;
+                const doNotBullets = doNotSection.split(/[;.]\s/).map(s => s.trim()).filter(Boolean);
+                doNotBullets.slice(0, 3).forEach(bullet => {
+                    response += `- ${bullet}\n`;
+                });
+                response += `\n`;
+            }
 
-            // 4. Official Guidance
-            response += `### Official Guidance\n`;
-            response += `This protocol is based on standards from the **${matchedRule.authority_name}**. You can review their full safety documentation here: [${matchedRule.authority_url}](${matchedRule.authority_url})\n\n`;
-
-            // 5. Trade Required
+            // Trade required
             const tradeName = getReadableTradeName(matchedRule.trade, countryCode);
-            response += `### Trade Required\n`;
-            response += `You require a qualified emergency **${tradeName}** to resolve this issue safely.`;
+            response += `### 👷 You Need a ${tradeName}\nContact a qualified **${tradeName.toLowerCase()}** to resolve this safely.`;
+
+            // Source
+            if (matchedRule.authority_name) {
+                response += `\n\n*Source: [${matchedRule.authority_name}](${matchedRule.authority_url})*`;
+            }
 
             newState.detectedTrade = matchedRule.trade;
             
-            // Handle location prompt if not yet detected
             if (!newState.detectedCity) {
                 newState.step = 'LOCATION_CHECK';
-                const locationPrompt = countryCode === 'US' ? "What city or zip code are you in?" : "Which city or postcode are you in?";
-                response += `\n\nTo help you further, ${locationPrompt}`;
+                const locationPrompt = isUSDomain ? "What city or zip code are you in?" : "Which city or postcode are you in?";
+                response += `\n\n${locationPrompt}`;
             }
 
             return {
@@ -293,6 +322,47 @@ export async function processUserMessage(message: string, currentState: ChatStat
                     content: response
                 }
             };
+        }
+    }
+
+    // 2b. EMERGENCY BRAIN — offline knowledge base response
+    // Fires when: not in a waiting state AND there are trade-related keywords.
+    // Provides rich expert advice (safety, diagnostics, faults, standards) while
+    // still advancing through the location state machine.
+    if (!isAwaitingResponse) {
+        const brainClassification = classifyEmergency(message);
+        const brainTrade = detectTradeFromBrain(message);
+
+        if (brainTrade || brainClassification.level === 'EMERGENCY') {
+            const brainRegion = isUSDomain ? 'usa' : 'uk';
+            const brainResponse = getOfflineResponse(message, brainRegion);
+
+            if (brainResponse.type !== 'NO_MATCH') {
+                // Set detected trade on the state so location flow continues
+                if (brainResponse.trade && !newState.detectedTrade) {
+                    newState.detectedTrade = brainResponse.trade;
+                }
+
+                let content = brainResponse.message;
+
+                // Ask for location if we don't have it yet
+                if (!newState.detectedCity) {
+                    newState.step = 'LOCATION_CHECK';
+                    const locationPrompt = isUSDomain
+                        ? '\n\nTo find you an emergency professional, what city or zip code are you in?'
+                        : '\n\nTo connect you with an emergency tradesperson, which town, city, or postcode are you in?';
+                    content += locationPrompt;
+                }
+
+                return {
+                    newState,
+                    response: {
+                        id: Date.now().toString(),
+                        role: 'assistant',
+                        content,
+                    }
+                };
+            }
         }
     }
 
@@ -337,7 +407,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 response: {
                     id: Date.now().toString(),
                     role: 'assistant',
-                    content: "I can help you find an emergency tradesperson immediately. I know about plumbing, electrical, gas, locks, drains, glazing, roofing, building, and breakdowns. Just tell me what's wrong."
+                    content: "### 💬 How I Can Help\n\nI can connect you with an **emergency contractor** immediately. I know about:\n\n- 🔧 Plumbing & Heating\n- ⚡ Electrical\n- 🔥 Gas Engineering\n- 🔒 Locksmith\n- 🚿 Drains\n- 🪟 Glazing\n- 🏠 Roofing & Building\n- 🚗 Vehicle Breakdown\n- ❄️ Air Conditioning\n\nJust tell me what's wrong and I'll find the right professional for you."
                 }
             };
         }
@@ -551,7 +621,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
     let action: 'navigate' | undefined;
     let target: string | undefined;
 
-    const tip = (!currentState.detectedTrade && newState.detectedTrade) ? (SAFETY_TIPS[newState.detectedTrade] || "") : "";
+    const tip = (!currentState.detectedTrade && newState.detectedTrade) ? (SAFETY_TIPS[newState.detectedTrade]?.[regionKey] || "") : "";
 
     if (newState.step === 'CONFIRM_LOCATION' && newState.suggestedCity) {
         const isPositive = /yes|yep|yeah|correct|that is right|yes it is/i.test(lowerMsg);
@@ -569,13 +639,16 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.detectedCity = null;
             newState.suggestedCity = null;
             newState.step = 'LOCATION_CHECK';
-            return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "No problem. Please tell me exactly which town or city you are in." } };
+            return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Which town or city are you in? I'll find your local professional." } };
         }
     }
 
     if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
         const city = newState.detectedCity;
-        responseText = cityFallbackUsed ? `I can't see a specific page for ${originalCity}, but our ${city} team covers that area. I'm taking you there now.` : "Great. I'm taking you to the right Emergency Tradesmen page now.";
+        const tradeName = getReadableTradeName(newState.detectedTrade, countryCode);
+        responseText = cityFallbackUsed
+            ? `Our **${tradeName}** team in **${city}** covers your area. Taking you there now.`
+            : `Taking you to your local **Emergency ${tradeName}** in **${city}** now.`;
         action = 'navigate';
         // US Redirection Fix: Never use /us prefix on US domain. Root level only.
         const countryPrefix = (countryCode === 'US' || isUSDomain) ? '' : ''; 
@@ -597,13 +670,17 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.suggestedCity = city;
             newState.detectedCity = null;
             newState.step = 'CONFIRM_LOCATION';
-            responseText = `${!currentState.detectedTrade ? `I've assessed this as a ${getReadableTradeName(newState.detectedTrade, countryCode)} emergency. ` : ""}${tip ? `${tip} ` : ""}We detected you may be in ${city}. Is this correct?`;
+            const tradeName2 = getReadableTradeName(newState.detectedTrade, countryCode);
+            responseText = `${!currentState.detectedTrade ? `**${tradeName2}** issue detected. ` : ""}${tip ? `${tip} ` : ""}We think you're in **${city}** — is that right?`;
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
-        responseText = `${!currentState.detectedTrade ? `I've assessed this as a ${getReadableTradeName(newState.detectedTrade, countryCode)} emergency. ` : ""}${tip ? `${tip} ` : ""}Which town, area, or postcode are you in?`;
+        const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
+        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or postcode are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
         newState.step = 'LOCATION_CHECK';
     } else {
-        responseText = /trade|service|list|cover/i.test(lowerMsg) ? "Our emergency triage covers plumbing, electrical, gas, locks, drains, glazing, roofing, building, air conditioning, and vehicle breakdown. Which of these is affecting your property?" : "I'm sorry, I didn't quite catch that. To give you the right safety advice, could you clarify if your emergency is related to plumbing, electrics, gas, locks, drains, glazing, roofing, building, or a vehicle?";
+        responseText = /trade|service|list|cover/i.test(lowerMsg)
+            ? "### 🛠️ Our Emergency Contractors\n\nWe provide professional help for the following trades:\n\n- Plumbing & Heating\n- Electrical\n- Gas Engineering\n- Locksmith\n- Drains\n- Glazing\n- Roofing\n- Building & Structural\n- Air Conditioning / HVAC\n- Vehicle Breakdown\n\nWhich of these do you need a contractor for?"
+            : "### 🤔 Need More Information\n\nI didn't quite catch that. To give you the right safety advice, could you describe your issue?\n\nFor example:\n- *'My boiler is leaking'*\n- *'I've been locked out'*\n- *'There's water coming through the ceiling'*\n- *'My power has gone out'*";
         newState.step = 'TRADE_CHECK';
     }
 

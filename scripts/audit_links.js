@@ -131,7 +131,9 @@ async function runAudit() {
 
     if (!businesses || businesses.length === 0) break;
 
-    for (const biz of businesses) {
+    // Process batch in parallel with a concurrency limit
+    const CONCURRENCY = 10;
+    const processBusiness = async (biz) => {
       totalProcessed++;
       const updates = {};
       let needsUpdate = false;
@@ -185,7 +187,6 @@ async function runAudit() {
         }
       }
 
-      // Apply updates to database
       if (needsUpdate) {
         if (DRY_RUN) {
           console.log(`[DRY RUN] Would update ${biz.name} with:`, JSON.stringify(updates));
@@ -205,7 +206,12 @@ async function runAudit() {
           }
         }
       }
+    };
 
+    // Parallelize within the batch
+    for (let i = 0; i < businesses.length; i += CONCURRENCY) {
+      const chunk = businesses.slice(i, i + CONCURRENCY);
+      await Promise.all(chunk.map(biz => processBusiness(biz)));
       if (totalProcessed >= MAX_SCAN) break;
     }
 

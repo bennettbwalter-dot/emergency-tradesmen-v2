@@ -7,24 +7,31 @@ import { useEffect, useRef, useState } from "react";
 interface TerminalProps {
     children: React.ReactNode;
     className?: string;
+    onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
+    containerRef?: React.RefObject<HTMLDivElement>;
+    contentClassName?: string;
 }
 
-export const Terminal = ({ children, className }: TerminalProps) => {
+export const Terminal = ({ children, className, onScroll, containerRef, contentClassName }: TerminalProps) => {
     return (
         <div
             className={cn(
-                "z-0 h-full w-full max-h-[600px] min-h-[300px] rounded-xl border border-border bg-card text-card-foreground shadow-sm overflow-hidden",
+                "z-0 w-full rounded-xl border border-border bg-card text-card-foreground shadow-sm flex flex-col overflow-hidden",
                 className
             )}
         >
-            <div className="flex flex-col gap-y-2 border-b border-border p-4">
+            <div className="flex flex-col gap-y-2 border-b border-border p-4 bg-card shrink-0">
                 <div className="flex flex-row gap-x-2">
                     <div className="h-2 w-2 rounded-full bg-red-500"></div>
                     <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
                     <div className="h-2 w-2 rounded-full bg-green-500"></div>
                 </div>
             </div>
-            <div className="space-y-2 p-4 font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
+            <div 
+                ref={containerRef}
+                onScroll={onScroll}
+                className={cn("space-y-2 p-4 font-mono text-sm leading-relaxed overflow-y-auto", contentClassName)}
+            >
                 {children}
             </div>
         </div>
