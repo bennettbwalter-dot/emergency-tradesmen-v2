@@ -107,7 +107,7 @@ export function Header({ countryCode }: HeaderProps) {
               </Link>
             </div>
 
-            {/* Desktop Nav */}
+            {/* Desktop Nav - strictly hidden on mobile */}
             <nav className="hidden md:flex items-center gap-8 pointer-events-auto">
               {['About', 'Blog'].map((item) => (
                 <Link

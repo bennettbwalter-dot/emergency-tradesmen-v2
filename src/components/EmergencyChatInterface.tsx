@@ -388,7 +388,7 @@ export function EmergencyChatInterface() {
     const [isFocused, setIsFocused] = useState(false);
 
     const helperSentences = [
-        "We’re here to help you find trusted local emergency tradespeople.",
+        `We’re here to help you find trusted local emergency ${settings.tradeTerm.toLowerCase()}s.`,
         "Take a moment to describe what’s happening, or search and call for immediate help.",
         "Get help fast",
         "Find the right trade",

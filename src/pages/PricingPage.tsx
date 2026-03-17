@@ -75,14 +75,14 @@ export default function PricingPage() {
                         </p>
                     </div>
                     <div className="max-w-3xl mx-auto mb-16 text-center bg-card/50 border border-gold/20 p-8 rounded-2xl backdrop-blur-sm">
-                        <p className="text-gold uppercase tracking-widest text-sm font-bold mb-4">for Tradesmen</p>
-                        <h2 className="text-3xl font-display mb-6">Why Join Emergency Tradesmen?</h2>
+                        <p className="text-gold uppercase tracking-widest text-sm font-bold mb-4">for {isUS ? 'Contractors' : 'Tradesmen'}</p>
+                        <h2 className="text-3xl font-display mb-6">Why Join Emergency {isUS ? 'Contractors' : 'Tradesmen'}?</h2>
                         <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                             <p>
                                 When emergencies happen, customers don’t shop around — they call the first trusted tradesperson they see.
                             </p>
                             <p>
-                                Emergency Tradesmen puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.
+                                Emergency {isUS ? 'Contractors' : 'Tradesmen'} puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.
                             </p>
                         </div>
                     </div>

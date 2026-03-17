@@ -204,9 +204,16 @@ export default function TradeCityPage() {
   // For now, removing strict redirect allows new US locations to work without "white-listing" in trades.ts
   // Old logic removed.
 
+  const toTitleCase = (str: string) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' } as any;
   const tradeDisplayName = (actualCountry === 'US' && 'usName' in tradeInfo) ? (tradeInfo as any).usName : tradeInfo.name;
-  const cityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
+  
+  // Apply title case to city name and ensure it's not just a slug
+  const rawCityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
+  const cityName = toTitleCase(rawCityName.replace(/-/g, ' '));
 
   const serviceAreas = pageData?.serviceAreas || [];
   const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';

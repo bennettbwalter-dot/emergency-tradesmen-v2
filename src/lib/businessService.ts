@@ -190,14 +190,29 @@ export async function fetchBusinesses(
     let allBusinesses = data || [];
     if (allBusinesses.length === 0 && searchCity) {
         console.log('[fetchBusinesses] No results for city, trying broader query');
-        const fallbackQuery = supabase
+        
+        let fallbackQuery = supabase
             .from('businesses')
             .select('*, business_photos(*)')
             .in('trade', uniqueTrades)
-            .eq('country_code', countryCode.toUpperCase())
-            .limit(50);
+            .eq('country_code', countryCode.toUpperCase());
 
-        const { data: fallbackData, error: fallbackError } = await fallbackQuery;
+        // CRITICAL FIX: Ensure fallback stays within the same state if US
+        if (state && countryCode.toUpperCase() === 'US') {
+            const { getCitiesForState } = await import('./trades');
+            const stateCities = getCitiesForState(state);
+            if (stateCities.length > 0) {
+                fallbackQuery = fallbackQuery.in('city', stateCities);
+            } else {
+                // If state specified but no cities found, DO NOT fallback to broad national query
+                return [];
+            }
+        } else if (searchCity && countryCode.toUpperCase() === 'US') {
+            // If city specified in US but no results, do not fallback to national
+            return [];
+        }
+
+        const { data: fallbackData, error: fallbackError } = await fallbackQuery.limit(50);
         if (!fallbackError && fallbackData) {
             allBusinesses = fallbackData;
         }

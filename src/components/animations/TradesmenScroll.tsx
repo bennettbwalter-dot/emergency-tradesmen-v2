@@ -240,7 +240,7 @@ export function TradesmenScroll() {
                     ref={horizontalTextRef}
                     className="text-white/90 font-display font-bold text-[8rem] md:text-[18rem] whitespace-nowrap tracking-widest pl-[100vw]"
                 >
-                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-[5rem] md:text-[8rem] align-middle mr-16">For Tradesmen</span>
+                    <span className="text-gold font-bold uppercase tracking-[0.2em] text-[5rem] md:text-[8rem] align-middle mr-16">For {window.location.port === '3001' || window.location.hostname.includes('contractors') ? 'Contractors' : 'Tradesmen'}</span>
                     Get Seen, Get Hired.
                 </h2>
             </div>

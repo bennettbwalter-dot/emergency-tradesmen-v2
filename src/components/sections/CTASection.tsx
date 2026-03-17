@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function CTASection() {
+    const { settings } = useLocalization();
+    
     return (
         <section className="container-wide py-16">
             <div className="relative overflow-hidden rounded-2xl border border-gold/30 bg-card backdrop-blur-sm p-10 md:p-16 text-center">
@@ -15,7 +18,7 @@ export function CTASection() {
                 <div className="relative z-10">
                     <p className="text-gold uppercase tracking-luxury text-sm mb-6">24/7 Availability</p>
                     <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-6">
-                        Need Help Right Now?
+                        Need an Emergency {settings.tradeTerm.toLowerCase().replace(/s$/, '')}?
                     </h2>
 
                     {/* AI Triage CTA */}
@@ -24,7 +27,7 @@ export function CTASection() {
                     </div>
 
                     <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-                        Our team is standing by 24/7 to connect you with a local emergency tradesperson.
+                        Our team is standing by 24/7 to connect you with a local emergency {settings.tradeTerm.toLowerCase().replace(/s$/, '')}.
                         One call is all it takes.
                     </p>
 
