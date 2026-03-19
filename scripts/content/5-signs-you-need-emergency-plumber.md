@@ -8,7 +8,7 @@ Some plumbing issues are annoying (a dripping tap). Others are catastrophic (a b
 If you turn on the tap and get nothing, or just a dribble:
 *   **The Cause:** It could be a burst service pipe in the street, a frozen main (in winter), or a failure of the PRV (Pressure Reducing Valve).
 *   **The Risk:** If the break is underground, water is eroding the soil under your driveway or foundation.
-*   **Action:** Call a plumber to trace the leak. If it's the water company's fault, they fix it. If it's on your property, you need a pro.
+*   **Action:** Call a plumber to trace the leak. If it's the water company's fault, they fix it [Ofwat guidance on water supply](https://www.ofwat.gov.uk/households/supply-and-quality/). If it's on your property, you need a pro.
 
 ---
 

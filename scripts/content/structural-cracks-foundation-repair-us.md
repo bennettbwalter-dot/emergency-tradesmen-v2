@@ -45,7 +45,7 @@ If you have a basement, this is where the real danger lies.
 *   **Risk:** Low. If they leak water, inject them with epoxy. They are rarely structural.
 
 ### Horizontal Cracks
-*   **Diagnosis:** **DANGER.** A horizontal crack running through the middle of a block wall means the soil outside is pushing the wall *in* (hydrostatic pressure).
+*   **Diagnosis:** **DANGER.** A horizontal crack running through the middle of a block wall means the soil outside is pushing the wall *in* (hydrostatic pressure). See [International Building Code (IBC)](https://www.iccsafe.org/products-and-services codes/ibc/) for structural standards.
 *   **The Failure:** The wall is bowing (buckling). If left unchecked, it will collapse.
 *   **Immediate Action:** You need to install "Wall Anchors" or carbon fiber straps to hold the wall back.
 
@@ -124,7 +124,7 @@ A: **No.** Put tape over them, but don't fill them without disclosing it. Fillin
 A: **Generally, NO.** Standard policies exclude "Earth Movement," "Settlement," and "Shrinkage." They only pay if the foundation damage was caused by a covered peril, like a plumbing flood (sudden and accidental).
 
 **Q: Can I fix a bowing wall myself?**
-A: **No.** The forces involved are massive (thousands of pounds). If a DIY repair fails, the wall can collapse on you. This is strictly a job for licensed pros.
+A: **No.** The forces involved are massive (thousands of pounds). If a DIY repair fails, the wall can collapse on you. This is strictly a job for licensed pros. Always verify contractor licensing through your state's [Contractor Licensing Board](https://www.nationalcontractors.org/).
 
 **Q: How long does foundation repair take?**
 A: **1-3 Days.** Piering is surprisingly fast. The crew excavates small holes, drives the hydraulic piers, lifts the house, and backfills. You can usually stay in the home during the work.

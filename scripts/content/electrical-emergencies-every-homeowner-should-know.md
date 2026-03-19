@@ -32,10 +32,10 @@ Sockets should be silent.
 ---
 
 ## 4. Tripping RCD (The Safety Switch)
-The Residual Current Device (RCD) is the most important device in your home.
+The Residual Current Device (RCD) is the most important device in your home [Electrical Safety First guidance on RCDs](https://www.electricalsafetyfirst.org.uk/guidance/safety-around-the-home/electrical-safety/rccbs-and-rcds/).
 *   **What it does:** It monitors the electricity going out vs coming back. If even a tiny amount leaks (e.g., through your body), it cuts the power in 0.04 seconds.
 *   **Nuisance Tripping:** If it trips randomly, something is leaking to earth.
-    *   **Common Culprits:** Outdoor lights (water ingress), old kettles, or a nail through a wire.
+*   **Common Culprits:** Outdoor lights (water ingress), old kettles, or a nail through a wire.
 *   **The Test:** Press the "T" or "Test" button on the RCD. It should snap OFF instantly. If it sticks or does nothing, **your protection is gone.** Replace it now.
 
 ---
@@ -50,7 +50,7 @@ If you see or hear sparking from your consumer unit:
 ---
 
 ## 6. DIY Electrical Safety Rules
-Under Part P of the Building Regulations, you are limited in what you can do.
+Under Part P of the Building Regulations, you are limited in what you can do [UK Government guidance on Part P](https://www.gov.uk/government/publications/electrical-safety-in-the-home).
 *   **Allowed:** Replacing a socket front, changing a light fitting (in a non-special location).
 *   **Not Allowed:** Adding a new circuit, working in a bathroom/kitchen, changing a fuse box.
 

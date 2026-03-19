@@ -24,12 +24,12 @@ If you live in Zone 1-3, you know everything costs more. Plumbing is no exceptio
 London's plumbing is a patchwork of 19th-century engineering and modern plastic.
 
 ### Lead Pipes (The Victorian Legacy)
-*   **The Risk:** Many terraces in Hackney, Brixton, and Fulham still have the original lead supply pipes coming from the street. Lead is toxic and brittle.
+*   **The Risk:** Many terraces in Hackney, Brixton, and Fulham still have the original lead supply pipes coming from the street. Lead is toxic and brittle [UK Government guidance on lead in drinking water](https://www.gov.uk/government/publications/lead-in-drinking-water).
 *   **Emergency Fix:** If a lead pipe bursts, you cannot solder it easily. You need a specialized "Lead-Loc" compression fitting. Modern plumbers carry these, but check first.
 
 ### Shared Drains (Terraced Housing)
 *   **The Law:** In a row of terraces, the sewer often runs along the back of all the houses.
-*   **Who Pays?** If the blockage is in the pipe serving *only* your house, you pay. If it is in the pipe serving you *and* your neighbour (the "Lateral Drain"), **Thames Water** is responsible. Call them first (0800 316 9800) before paying a private drain company.
+*   **Who Pays?** If the blockage is in the pipe serving *only* your house, you pay. If it is in the pipe serving you *and* your neighbour (the "Lateral Drain"), **Thames Water** is responsible [Thames Water guidance on shared drains](https://www.thameswater.co.uk/help-and-advice/wastewater-and-drainage/drainage-and-sewers/shared-drains). Call them first (0800 316 9800) before paying a private drain company.
 
 ---
 
@@ -51,12 +51,12 @@ In purpose-built blocks, stopcocks are often:
 ---
 
 ## 4. Hard Water: The Silent Boiler Killer
-London has some of the hardest water in the UK (sourced from chalk aquifers).
+London has some of the hardest water in the UK (sourced from chalk aquifers) [Drinking Water Inspectorate](https://www.gov.uk/government/organisations/drinking-water-inspectorate).
 
 ### Scale Buildup
 *   **The Symptom:** Showers lose pressure, kettles fur up, and boilers make banging noises ("Kettling").
 *   **The Emergency:** Scale breaks down the heat exchanger in Combi Boilers. A replacement heat exchanger costs £500+.
-*   **Prevention:** Every London home should have a **Scale Inhibitor** (£40) fitted on the incoming main. If you are renovating, install a water softener.
+*   **Prevention:** Every London home should have a **Scale Inhibitor** (£40) fitted on the incoming main [Water Supply (Water Quality) Regulations](https://www.legislation.gov.uk/uksi/2016/614/contents/made). If you are renovating, install a water softener.
 
 ---
 
@@ -69,7 +69,7 @@ London is a hotspot for "Rogue Traders" who exploit panic.
 *   **"We are in the area":** Unsolicited knocks on the door saying "We noticed your gutter is leaking" is a classic scam.
 
 ### The Checklist
-1.  **Gas Safe ID:** If they are touching a boiler, ask to see their card. Check the hologram.
+1.  **Gas Safe ID:** If they are touching a boiler, ask to see their card. Check the hologram. Verify their registration at the [Gas Safe Register](https://www.gassaferegister.co.uk/).
 2.  **Reviews:** Look for recent reviews on Trustpilot or Google Maps.
 3.  **Insurance:** Ask "Do you have Public Liability Insurance?" (In case they flood your Persian rug).
 
@@ -79,11 +79,11 @@ London is a hotspot for "Rogue Traders" who exploit panic.
 
 | Service | Company | Number | Note |
 | :--- | :--- | :--- | :--- |
-| **Water Supply** | Thames Water | 0800 316 9800 | For burst water mains in street |
-| **Water Supply (Essex)** | Essex & Suffolk Water | 0345 782 0999 | East London |
-| **Gas Leak** | Cadent / SGN | 0800 111 999 | National Grid |
-| **Electricity** | UK Power Networks | 105 | For power cuts |
-| **Police (Non-Emergency)** | Met Police | 101 | If you suspect a scam |
+| **Water Supply** | Thames Water | 0800 316 9800 | For burst water mains in street [Thames Water](https://www.thameswater.co.uk/) |
+| **Water Supply (Essex)** | Essex & Suffolk Water | 0345 782 0999 | East London [Essex & Suffolk Water](https://www.eswater.co.uk/) |
+| **Gas Leak** | Cadent / SGN | 0800 111 999 | National Grid [Gas Emergency](https://www.gasemergency.co.uk/) |
+| **Electricity** | UK Power Networks | 105 | For power cuts [UK Power Networks](https://www.ukpowernetworks.co.uk/) |
+| **Police (Non-Emergency)** | Met Police | 101 | If you suspect a scam [Metropolitan Police](https://www.met.police.uk/) |
 
 ---
 

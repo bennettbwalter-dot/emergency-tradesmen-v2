@@ -5,7 +5,7 @@ If you have standing water in your basement, do not walk through it until you kn
 ---
 
 ## 1. The 3 Categories of Water Damage (IICRC S500)
-The Institute of Inspection, Cleaning and Restoration Certification (IICRC) defines 3 categories of water.
+The Institute of Inspection, Cleaning and Restoration Certification (IICRC) defines 3 categories of water. See [IICRC S500 Standard](https://www.iicrc.org/) for official guidelines.
 
 ### Category 1: Clean Water
 *   **Source:** Burst supply pipe (copper/PEX), overflowing bathtub (clean), rainwater entering a broken window.
@@ -35,7 +35,7 @@ Mold spores are everywhere. They just need moisture to grow.
 
 ### Stachybotrys Chartarum (Black Mold)
 *   **Appearance:** Slimy, dark black/green patches.
-*   **Toxins:** Produces mycotoxins (trichothecenes) that cause respiratory issues, bleeding in the lungs, and neurological damage.
+*   **Toxins:** Produces mycotoxins (trichothecenes) that cause respiratory issues, bleeding in the lungs, and neurological damage. See [EPA guidance on mold remediation](https://www.epa.gov/mold).
 *   **Removal:** Requires containment (plastic sheeting) and Negative Air Pressure machines to prevent spores spreading to the rest of the house.
 
 ---

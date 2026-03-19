@@ -15,6 +15,7 @@ Before you try to fix anything, assess the danger level.
     2.  **Do NOT** use light switches or mobile phones inside (spark risk).
     3.  **Call 999** (UK) or **911** (US) from a safe distance.
     4.  **Do NOT** go back in for valuables.
+    5.  For UK gas emergencies, call the Gas Emergency Service on 0800 111 999. See [Cadent/SGN](https://www.sgn.co.uk/) for more information.
 
 ### Priority 2: Water & Flooding (Property Damage)
 *   **Sight:** Water pooling, ceiling bulging, spraying pipes.
@@ -84,7 +85,7 @@ If the power goes out:
 *   **The ECV (Emergency Control Valve):** It is a lever on the pipe.
     *   **ON:** Parallel to the pipe.
     *   **OFF:** At a right angle (90 degrees).
-*   **Note:** By law, once you turn the gas supply off, it must be turned back on by a **Gas Safe Registered** engineer (UK) or licensed plumber (US) who will pressure test the system.
+*   **Note:** By law, once you turn the gas supply off, it must be turned back on by a **Gas Safe Registered** engineer (UK) or licensed plumber (US) who will pressure test the system. Verify Gas Safe engineers at [Gas Safe Register](https://www.gassaferegister.co.uk/).
 
 ---
 

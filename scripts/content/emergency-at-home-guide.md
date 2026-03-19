@@ -21,7 +21,7 @@ Water damage is the most common home insurance claim. The difference between a w
     2.  **External Check:** Lift the manhole cover outside. If it's full, the blockage is on the main line.
     3.  **Health Warning:** Sewage is bio-hazardous. Keep children and pets away. Do not attempt to rod it without gloves and eye protection.
 
-**Need help?** **[Find an Emergency Plumber](https://emergencytradesmen.net/)** immediately to prevent black water contamination.
+**Need help?** **[Find an Emergency Plumber](https://emergencytradesmen.net/)** immediately to prevent black water contamination. For guidance on water supply regulations, see [Ofwat](https://www.ofwat.gov.uk/).
 
 ---
 
@@ -42,7 +42,7 @@ Electrical faults don't just stop the TV working; they can burn the house down.
     2.  **Check Fuse Box:** Is the main switch off?
     3.  **Fridge Safety:** Do not open the fridge/freezer. It acts as a cooler box for 4-24 hours.
 
-**Need help?** **[Find an Emergency Electrician](https://emergencytradesmen.net/)** to trace the fault safely.
+**Need help?** **[Find an Emergency Electrician](https://emergencytradesmen.net/)** to trace the fault safely. See [Electrical Safety First](https://www.electricalsafetyfirst.org.uk/) for guidance.
 
 ---
 
@@ -56,7 +56,7 @@ Gas leaks and boiler failures carry the risk of explosion and hypothermia to vul
     2.  **Isolate:** Turn the Emergency Control Valve (ECV) on the meter to OFF (Quarter turn).
     3.  **Evacuate:** Get everyone out.
     4.  **No Sparks:** Do not smoke, use light switches, or doorbells.
-    5.  **Call:** National Gas Emergency Service (UK: 0800 111 999) or 911 (US).
+    5.  **Call:** National Gas Emergency Service (UK: 0800 111 999) or 911 (US). See [Gas Safe Register](https://www.gassaferegister.co.uk/) for more information.
 
 ### Boiler Failure (No Heat/Hot Water)
 *   **Signs:** Pilot out, flashing error code (e.g., E119, F1), cold radiators.
@@ -65,7 +65,7 @@ Gas leaks and boiler failures carry the risk of explosion and hypothermia to vul
     2.  **Check Thermostat:** Is the battery dead? Is it set to "Heat"?
     3.  **Reset:** Press the "Reset" button on the boiler once. If it fails again, do not keep pressing it (it can cause explosive ignition).
 
-**Need help?** **[Find a Gas Safe Engineer](https://emergencytradesmen.net/)** for urgent boiler repair.
+**Need help?** **[Find a Gas Safe Engineer](https://emergencytradesmen.net/)** for urgent boiler repair. Verify engineers at [Gas Safe Register](https://www.gassaferegister.co.uk/).
 
 ---
 

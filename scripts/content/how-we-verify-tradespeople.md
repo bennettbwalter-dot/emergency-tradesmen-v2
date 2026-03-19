@@ -7,15 +7,15 @@ At **Emergency Tradesmen**, we don't just list anyone with a van. We employ a ri
 ## 1. Identity & Company Checks (Level 1)
 Before a tradesperson can join, we verify their legal identity.
 *   **Photo ID:** Passport or Driving Licence upload.
-*   **Company Registration:** We check Companies House (UK) or State Business Registries (US) to ensure the LTD/LLC is active and solvent.
+*   **Company Registration:** We check [Companies House](https://www.gov.uk/government/organisations/companies-house) (UK) or State Business Registries (US) to ensure the LTD/LLC is active and solvent.
 *   **Address Verification:** Utility bill proof of trading address. We do not accept PO Boxes.
 
 ---
 
 ## 2. Qualification Verification (Level 2)
 Skills matter. A handyman cannot fix a boiler.
-*   **Gas Safe Register (UK):** We check their licence number against the Gas Safe database in real-time. If it's expired, they are suspended immediately.
-*   **NICEIC / NAPIT (Electrical):** We verify their "Competent Person Scheme" membership for Part P compliance.
+*   **Gas Safe Register (UK):** We check their licence number against the [Gas Safe database](https://www.gassaferegister.co.uk/) in real-time. If it's expired, they are suspended immediately.
+*   **NICEIC / NAPIT (Electrical):** We verify their "Competent Person Scheme" membership for Part P compliance. See [NICEIC](https://www.niceic.com/) and [NAPIT](https://www.napit.org.uk/).
 *   **City & Guilds / NVQ:** We request certificates for standard plumbing and carpentry trades.
 
 ---

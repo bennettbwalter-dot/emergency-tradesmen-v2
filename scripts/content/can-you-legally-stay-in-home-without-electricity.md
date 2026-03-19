@@ -8,10 +8,10 @@ The answer depends on whether you are a **tenant**, a **homeowner**, or a **land
 
 ### For Tenants (The Law is Strict)
 In both the UK and US, landlords have a legal duty to provide a property that is "Safe and Habitable."
-*   **UK (Homes (Fitness for Human Habitation) Act 2018):** A rental property *must* have adequate lighting and the ability to cook food and heat water. A total loss of electricity renders the home "Unfit."
+*   **UK (Homes (Fitness for Human Habitation) Act 2018):** A rental property *must* have adequate lighting and the ability to cook food and heat water. A total loss of electricity renders the home "Unfit." See [UK Government guidance on the Homes (Fitness for Human Habitation) Act](https://www.gov.uk/government/publications/homes-fitness-for-human-habitation-act-2018).
     *   **The Right:** If the outage is the landlord's fault (e.g., faulty wiring, unpaid bills), they must pay for alternative accommodation (hotel) until it is fixed.
-    *   **Section 11:** The Landlord and Tenant Act 1985 requires them to keep the supply of electricity in repair.
-*   **US (Implied Warranty of Habitability):** Every state (except Arkansas) guarantees a tenant's right to essential services.
+    *   **Section 11:** The [Landlord and Tenant Act 1985](https://www.legislation.gov.uk/ukpga/1985/70/contents) requires them to keep the supply of electricity in repair.
+*   **US (Implied Warranty of Habitability):** Every state (except Arkansas) guarantees a tenant's right to essential services. See [HUD guidance on habitability requirements](https://www.hud.gov/program_offices/housing/mfh/renthealth/sect8health).
     *   **The Right:** If power is out for more than 24 hours due to the landlord's negligence, you may have the right to "Repair and Deduct" (fix it and bill them) or withhold rent.
 
 ### For Homeowners (The Law is Loose)
