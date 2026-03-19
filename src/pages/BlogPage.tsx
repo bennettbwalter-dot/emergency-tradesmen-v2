@@ -66,22 +66,29 @@ export default function BlogPage() {
             // Strict Regional Filtering: Only show posts that match the current country code suffix
             const regionalData = data.filter(post => {
                 const slug = post.slug.toLowerCase();
+                // Determine if it has a suffix
+                const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+                
                 if (settings.countryCode === 'US') {
-                    // Only US suffixes
-                    return slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                    // Show US posts OR posts with NO suffix (Assume shared)
+                    return isUS || !isUK;
                 } else {
-                    // Only UK suffixes
-                    return slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+                    // Show UK posts OR posts with NO suffix
+                    return isUK || !isUS;
                 }
             });
 
-            // Client-side deduplication as a safety measure (dedupe by title)
+            // Client-side deduplication as a safety measure (dedupe by title and image)
             const uniquePosts = [];
             const seenTitles = new Set();
+            const seenImages = new Set();
             for (const post of regionalData) {
                 const title = post.title.toLowerCase().trim();
-                if (!seenTitles.has(title)) {
+                const image = post.cover_image;
+                if (!seenTitles.has(title) && (!image || !seenImages.has(image))) {
                     seenTitles.add(title);
+                    if (image) seenImages.add(image);
                     uniquePosts.push(post);
                 }
             }

@@ -48,7 +48,7 @@ const ProProfileEditor = lazy(() => import("./pages/NewProfileEditor"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
-const BlogPostPage = lazy(() => import("./pages/BlogPostPageFix"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
 const VerifyDocumentsPage = lazy(() => import("./pages/VerifyDocumentsPage"));

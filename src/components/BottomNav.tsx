@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Search, Rocket, User } from "lucide-react";
+import { Home, BookText, LogIn, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
@@ -18,6 +18,8 @@ export function BottomNav() {
         return false;
     };
 
+    const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
+
     const navItems = [
         {
             label: "Home",
@@ -25,14 +27,14 @@ export function BottomNav() {
             path: "/",
         },
         {
-            label: "Search",
-            icon: Search,
-            path: "/",
+            label: "Blog",
+            icon: BookText,
+            path: `${countryPrefix}/blog`,
         },
         {
-            label: "Sign Up",
-            icon: Rocket,
-            path: "/pricing",
+            label: "Sign In",
+            icon: LogIn,
+            path: "/auth?tab=login",
         },
         {
             label: "Profile",
