@@ -18,7 +18,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
 
   // Priority: explicit prop > chatbot detection > localization auto-detect
   const targetCity = city || chatbotCity || localizationCity;
-  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+  const countryPrefix = '';
   const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
 
   const handleClick = (e: React.MouseEvent) => {

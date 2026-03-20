@@ -36,7 +36,7 @@ export function LeafletMap({ city, businessName, className = "w-full h-full min-
 
         // 2. Otherwise, check static lookup first
         // We need to determine country code, we'll try to guess from URL or default to GB
-        const isUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
+        const isUS = window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001';
         const countryCode = isUS ? 'US' : 'GB';
 
         import('@/lib/mapUtils').then(({ getViewState }) => {

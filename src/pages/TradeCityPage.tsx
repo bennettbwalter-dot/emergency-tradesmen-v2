@@ -81,23 +81,26 @@ export default function TradeCityPage() {
   const urlLat = queryParams.get('lat');
   const urlLng = queryParams.get('lng');
 
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const port = typeof window !== 'undefined' ? window.location.port : '';
+  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+
   const resolvedLocation = useMemo(() => {
     if (!rawTargetLocation && urlLat && urlLng) {
-      const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB'));
+      const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), countryCode?.toUpperCase() || (isUSDomain ? 'US' : 'GB'));
       if (nearest) {
         console.log("Resolved nearest city for coordinate-only route:", nearest.city);
         return nearest.city;
       }
     }
     return rawTargetLocation;
-  }, [rawTargetLocation, urlLat, urlLng, countryCode, location.pathname]);
+  }, [rawTargetLocation, urlLat, urlLng, countryCode, isUSDomain]);
 
   // CRITICAL FIX: Default to 'London' (or National) if no city provided to prevent crash
   let validCity = resolvedLocation ? decodeURIComponent(resolvedLocation) : (countryCode === 'US' ? 'New York' : 'London');
 
   // FIX: US Routing Ambiguity
-  // If tradePath matches a known US state (e.g. /us/texas/dallas matched as :tradePath/:city),
-  // treat it as state, not trade.
+  // If tradePath matches a known US state, treat it as state, not trade.
   let effectiveTradePath = tradePath;
   let effectiveState = state;
 
@@ -120,10 +123,7 @@ export default function TradeCityPage() {
     }
   }
 
-  // Handle /us/ca/los-angeles legacy ambiguity if needed, but new router prevents most.
-  // We keep it simple: Trust params.
-
-  const country = countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB');
+  const country = countryCode?.toUpperCase() || (isUSDomain ? 'US' : 'GB');
 
   // Pass state and metro context to generator for strict lookup
   const pageData = generateTradePageData(
@@ -148,26 +148,10 @@ export default function TradeCityPage() {
   // Actually, we can use the `pageData` result. generateTradePageData returns null if not found.
   // But wait, generateTradePageData might return data even if not found if we passed 'US' as countryCode (it falls back to input name).
 
-  // Let's assume if the route is /us/..., we are looking for US.
-  // The redirect logic below deals with "Region Mismatch".
-
   const isCityUS = countryCode === 'us' || (pageData && pageData.city && usCities.includes(pageData.city)) || false;
-  // This is imperfect. Better:
-
-  // If we are in /us route, we assume US.
-  // If we are in /... (GB) route, we assume GB.
-  // The Mismatch logic tries to catch: user goes to /london (GB) but london is US? No.
-  // It catches: user goes to /us/london (if london is GB only) -> Redirect to /london.
-
-  // Ideally we use `getLocationIndex` but that's overkill to import here if we can avoid it.
-  // Let's rely on simple heuristic + explicit countryCode param.
 
   // Region Mismatch / Redirects
-  // We trust the URL structure for Country determination, but also handle the US-specific root domain.
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const port = typeof window !== 'undefined' ? window.location.port : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-  
+  // Domain-based country determination.
   const actualCountry = useMemo(() => {
     const hostname = window.location.hostname;
     const port = window.location.port;
@@ -176,15 +160,13 @@ export default function TradeCityPage() {
     
     // Fallback detection
     if (
-      location.pathname.startsWith('/us/') || 
-      location.pathname.startsWith('/us') || 
       countryCode?.toLowerCase() === 'us' || 
       pageData?.countryCode === 'US' || 
       (validCity && usCities.includes(validCity))
     ) return 'US';
     
     return 'GB';
-  }, [countryCode, pageData?.countryCode, validCity, usCities, location.pathname]);
+  }, [countryCode, pageData?.countryCode, validCity, usCities]);
 
   // NEW: State Page Detection
   const isStatePage = useMemo(() => {
@@ -532,7 +514,7 @@ export default function TradeCityPage() {
   const countryForCoords = isUS || isCityInUS ? 'US' : 'GB';
   
   const canonicalPath = isUS
-    ? (isUSDomain ? `/emergency-${tradeInfo.slug}/${citySlug}` : `/us/emergency-${tradeInfo.slug}/${citySlug}`)
+    ? `/emergency-${tradeInfo.slug}/${citySlug}`
     : `/emergency-${tradeInfo.slug}/${citySlug}`;
 
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
@@ -928,7 +910,7 @@ export default function TradeCityPage() {
                 {serviceAreas.map((area, i) => {
                   const areaSlug = area.toLowerCase().replace(/\s+/g, '-');
                   const linkPath = actualCountry === 'US'
-                    ? `/us/emergency-${tradeInfo.slug}/${areaSlug}`
+                    ? `/emergency-${tradeInfo.slug}/${areaSlug}`
                     : `/emergency-${tradeInfo.slug}/${areaSlug}`;
 
                   return (

@@ -13,7 +13,7 @@ export default function LocationsDirectory() {
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const targetCities = isUS ? usCities : cities;
-    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
+    const countryPrefix = '';
 
     // Group cities by first letter for better organization
     const groupedCities: Record<string, string[]> = {};
@@ -90,7 +90,7 @@ export default function LocationsDirectory() {
                                                     <li key={`${city}-${trade.slug}`}>
                                                         <Link
                                                             to={isUS
-                                                                ? `${isUSDomain ? '' : '/us'}/${cityToState[city] || 'us'}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
+                                                                ? `/${cityToState[city] || 'us'}/${city.toLowerCase().replace(/ /g, '-')}/${trade.slug}`
                                                                 : `/emergency-${trade.slug}/${city.toLowerCase().replace(/ /g, '-')}`
                                                             }
                                                             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"

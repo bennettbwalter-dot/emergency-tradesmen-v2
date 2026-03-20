@@ -108,15 +108,15 @@ export function USLocationSelector({ onLocationSelect, className }: USLocationSe
 
     const handleSuburbSelect = (suburb: { name: string; slug: string }) => {
         if (!selectedState || !selectedCity) return;
-        // URL: /us/:state/:metro/:city/:suburb
-        const path = `/us/${selectedState.slug}/${selectedCity.metroSlug}/${selectedCity.slug}/${suburb.slug}`;
+        // URL: /:state/:metro/:city/:suburb
+        const path = `/${selectedState.slug}/${selectedCity.metroSlug}/${selectedCity.slug}/${suburb.slug}`;
         closeAndNavigate(path);
     };
 
     const navigateToCity = (city: FlattenedCity) => {
         if (!selectedState) return;
-        // URL: /us/:state/:metro/:city
-        const path = `/us/${selectedState.slug}/${city.metroSlug}/${city.slug}`;
+        // URL: /:state/:metro/:city
+        const path = `/${selectedState.slug}/${city.metroSlug}/${city.slug}`;
         closeAndNavigate(path);
     };
 
@@ -276,4 +276,3 @@ export function USLocationSelector({ onLocationSelect, className }: USLocationSe
         </Sheet>
     );
 }
-

@@ -279,7 +279,7 @@ export default function VoiceReporter() {
     const handleFindTradesman = () => {
         if (!result) return;
         const trade = TRADE_DISPLAY[result.likely_trade_needed];
-        const countryPrefix = settings.countryCode === 'US' ? '/us' : '';
+        const countryPrefix = '';
 
         if (trade) {
             // If we have a US hierarchical location record, use its path
@@ -287,8 +287,8 @@ export default function VoiceReporter() {
                 const { state: st, metro, city, suburb } = locationRecord.path_slugs;
                 const hasSuburb = suburb && suburb.trim().length > 0;
                 const path = hasSuburb
-                    ? `/us/${st}/${metro}/${city}/${suburb}/emergency-${trade.slug}`
-                    : `/us/${st}/${metro}/${city}/emergency-${trade.slug}`;
+                    ? `/${st}/${metro}/${city}/${suburb}/emergency-${trade.slug}`
+                    : `/${st}/${metro}/${city}/emergency-${trade.slug}`;
                 navigate(path);
             } else if (selectedCity) {
                 navigate(`${countryPrefix}/emergency-${trade.slug}/${selectedCity.toLowerCase()}`);

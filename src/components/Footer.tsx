@@ -20,7 +20,7 @@ export function Footer({ countryCode }: FooterProps) {
   const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
   const siteName = `${siteNameMain} ${siteNameSub}`;
 
-  const countryPrefix = isUS && !isUSDomain ? '/us' : '';
+  const countryPrefix = '';
   const displayCities = isUS
     ? ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco"]
     : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bristol", "Liverpool"];
@@ -115,7 +115,7 @@ export function Footer({ countryCode }: FooterProps) {
               <ul className="space-y-4 mb-8">
                 <li><Link to={`${countryPrefix}/vetting-process`} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Vetting Process</Link></li>
                 <li><Link to={`${countryPrefix}/faq`} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Help Center</Link></li>
-                <li><Link to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Contact Support</Link></li>
+                <li><Link to="/contact" className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Contact Support</Link></li>
               </ul>
 
               <div className="space-y-3 pt-4 border-t border-white/10">

@@ -15,7 +15,7 @@ export default function About() {
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
     const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
-    const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
+    const countryPrefix = '';
 
     const tradeTerm = settings.tradeTerm; // "Tradesmen" or "Contractors"
     const termSingular = isUS ? "Contractor" : "Tradesman";

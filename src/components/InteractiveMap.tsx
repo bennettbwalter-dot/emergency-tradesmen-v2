@@ -35,7 +35,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
 
     // Determine Country Code from prop, hostname, or implicit URL
     const isUSDomainInternal = window.location.hostname.includes('emergencycontractors.net') || (window.location.hostname === 'localhost' && window.location.port === '3001') || (window.location.hostname === '127.0.0.1' && window.location.port === '3001');
-    const isUrlUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
+    const isUrlUS = window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001';
     const effectiveCountryCode = propCountryCode || (isUSDomainInternal || isUrlUS ? 'US' : 'GB');
     const countryCode = effectiveCountryCode;
 

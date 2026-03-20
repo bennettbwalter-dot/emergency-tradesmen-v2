@@ -88,7 +88,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     const [isTouch, setIsTouch] = useState(false);
 
     const targetCity = chatbotCity || localizationCity;
-    const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
+    const countryPrefix = '';
 
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();

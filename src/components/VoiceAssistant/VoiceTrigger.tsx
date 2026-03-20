@@ -139,7 +139,7 @@ const VoiceTrigger = () => {
                 history: []
             });
 
-            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+            const countryCode = (window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001') ? 'US' : 'GB';
 
             await startRecording();
             startVolumeMonitor();
@@ -184,7 +184,7 @@ const VoiceTrigger = () => {
             const currentTranscript = text; // Keep for logging
             setTranscript('');
 
-            const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
+            const countryCode = (window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001') ? 'US' : 'GB';
 
             console.log(`[Voice] Processing input: "${currentTranscript}"`);
 
@@ -228,7 +228,7 @@ const VoiceTrigger = () => {
             console.error("[Voice] processInput failure", error);
             setStatus(`Error: ${String(error)}`);
 
-            await speakResponse("I'm sorry, I encountered a technical issue. Please try again.", window.location.pathname.startsWith('/us') ? 'US' : 'GB');
+            await speakResponse("I'm sorry, I encountered a technical issue. Please try again.", (window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001') ? 'US' : 'GB');
 
             setTimeout(() => {
                 if (isActiveRef.current) {

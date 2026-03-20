@@ -171,11 +171,6 @@ const AppRoutes = () => (
     <Route path="/:tradePath" element={<TradeCityPage />} />
     <Route path="/:tradePath/:city" element={<TradeCityPage />} />
 
-    {/* Compatibility for old /us paths */}
-    <Route path="/us/*" element={<NotFound />} />
-    <Route path="/usa/*" element={<NotFound />} />
-    <Route path="/gb/*" element={<NotFound />} />
-
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
@@ -285,6 +280,5 @@ const App = () => {
 };
 
 export default App;
-
 
 

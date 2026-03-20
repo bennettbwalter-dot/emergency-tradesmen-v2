@@ -119,12 +119,12 @@ export function SearchFilterBar({
                                         const hasSuburb = typeof suburb === 'string' && suburb.trim().length > 0;
                                         console.log("SearchFilterBar hasSuburb:", hasSuburb);
                                         const newPath = hasSuburb
-                                            ? `/us/${state}/${metro}/${city}/${suburb}/${tradeSlugLowerCase}`
-                                            : `/us/${state}/${metro}/${city}/${tradeSlugLowerCase}`; // Direct to City
+                                            ? `/${state}/${metro}/${city}/${suburb}/${tradeSlugLowerCase}`
+                                            : `/${state}/${metro}/${city}/${tradeSlugLowerCase}`; // Direct to City
                                         navigate(newPath);
                                     } else {
                                         // Fallback for legacy records/UK
-                                        navigate(`/us/${record.state.toLowerCase()}/${record.anchor_slug}/${tradeSlugLowerCase}`);
+                                        navigate(`/${record.state.toLowerCase()}/${record.anchor_slug}/${tradeSlugLowerCase}`);
                                     }
                                 }}
                             />

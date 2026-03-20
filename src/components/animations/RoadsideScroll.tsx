@@ -233,13 +233,13 @@ function RoadsideHelpButton() {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setIsLocating(false);
-                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
+                const pathPrefix = '';
                 navigate(`${pathPrefix}/emergency-breakdown?lat=${latitude}&lng=${longitude}`);
             },
             (error) => {
                 console.warn("Geolocation error:", error.message);
                 setIsLocating(false);
-                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
+                const pathPrefix = '';
                 navigate(`${pathPrefix}/emergency-breakdown`);
             },
             { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }

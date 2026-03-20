@@ -18,7 +18,7 @@ export function BottomNav() {
         return false;
     };
 
-    const countryPrefix = (settings.countryCode === 'US' && !isUSDomain) ? '/us' : '';
+    const countryPrefix = '';
 
     const navItems = [
         {

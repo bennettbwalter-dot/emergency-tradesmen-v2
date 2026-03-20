@@ -39,7 +39,7 @@ export function SmartLocationInput({
 
     // Detect Country context
     // This could also come from props if passed explicitly
-    const isUS = window.location.pathname.startsWith('/us') || window.location.pathname.includes('/us/');
+    const isUS = window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001';
     const countryFilter = isUS ? 'US' : 'GB';
 
     // Debounce search
