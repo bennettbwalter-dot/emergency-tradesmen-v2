@@ -26,7 +26,7 @@ const CTASection = lazy(() => import("@/components/sections/CTASection").then(mo
 
 const Index = () => {
   const { settings, detectedCity } = useLocalization();
-  const [showFaq, setShowFaq] = useState(false);
+  const [showFaq, setShowFaq] = useState(true);
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -34,7 +34,11 @@ const Index = () => {
   const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
   const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
-  const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? `in ${detectedCity}` : 'Near You');
+  const cleanDetectedCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM')
+    ? detectedCity
+    : '';
+  const displayCity = cleanDetectedCity ? `in ${cleanDetectedCity}` : 'Near You';
+  const areaServedLabel = cleanDetectedCity || (settings.countryCode === 'US' ? 'United States' : 'United Kingdom');
 
   // Schema markup
   const emergencyServiceSchema = {
@@ -43,8 +47,7 @@ const Index = () => {
     "name": `${siteName} ${displayCity}`,
     "image": `${siteUrl}/og-image.webp`,
     "description": `24/7 ${siteName} in ${displayCity}. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
-    "telephone": settings.countryCode === 'US' ? "+1-888-555-0199" : "+44 20 7946 0000",
-    "areaServed": displayCity,
+    "areaServed": areaServedLabel,
     "availableLanguage": "English",
     "serviceType": ["Plumbing", "Electrical", "Locksmith", "HVAC", "Glazing", "Drainage"],
     "openingHours": "Mo-Su 00:00-24:00",
@@ -53,16 +56,38 @@ const Index = () => {
     "priceRange": settings.countryCode === 'GB' ? "££" : "$$",
   };
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteName,
+    "url": siteUrl,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${siteUrl}/blog?query={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <>
       <GuestGate />
       <SEO 
         title={`${siteName} ${displayCity}`}
         description={`Find trusted local ${settings.tradeTerm.toLowerCase()}s in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC. Fast response.`}
+        canonical="/"
+        locale={isUSDomain ? "en_US" : "en_GB"}
+        alternates={[
+          { lang: "en-GB", href: "https://emergencytradesmen.net/" },
+          { lang: "en-US", href: "https://emergencycontractors.net/" },
+          { lang: "x-default", href: "https://emergencytradesmen.net/" }
+        ]}
       />
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(emergencyServiceSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(websiteSchema)}
         </script>
         {/* Preload critical hero image/assets if needed */}
       </Helmet>
