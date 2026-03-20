@@ -96,6 +96,8 @@ export interface ChatState {
     suggestedCity: string | null;
     locationConfirmed: boolean;
     history: ChatMessage[];
+    recentRagScenarios?: string[];
+    recentRagTrades?: string[];
 }
 
 export interface ChatMessage {
@@ -229,8 +231,84 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
 const getReadableTradeName = (slug: string, countryCode: string) => {
     const trade = trades.find(t => t.slug === slug);
     if (!trade) return slug.replace(/-/g, ' ');
-    return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
+    return countryCode === 'US' ? trade.usName || trade.name : trade.name;
 };
+
+const LOCATION_PROMPTS = {
+    us: [
+        "To connect you with the right pro, what city or ZIP code are you in?",
+        "What location should I search in (city or ZIP)?",
+        "Share your city or ZIP and I’ll route you to the best local help."
+    ],
+    uk: [
+        "Which town, city, or postcode are you in?",
+        "What location should I use (town/city/postcode)?",
+        "Share your postcode or town and I’ll route you to the nearest qualified pro."
+    ]
+};
+
+const TRADE_GUIDE_LINES = [
+    "I can point you to vetted local listings for this issue.",
+    "I’ll route you to the best-matching local professional next.",
+    "Once I have your location, I’ll send you to relevant nearby listings."
+];
+
+function pickVariant<T>(arr: T[], seedText: string): T {
+    let hash = 0;
+    for (let i = 0; i < seedText.length; i++) hash = ((hash << 5) - hash) + seedText.charCodeAt(i);
+    return arr[Math.abs(hash) % arr.length];
+}
+
+function detectIntentFlavor(lowerMsg: string): 'safety' | 'diagnostic' | 'cost' | 'process' | 'general' {
+    if (/danger|safe|risk|evacuate|emergency|urgent/.test(lowerMsg)) return 'safety';
+    if (/why|cause|diagnose|what happened|fault|issue|problem/.test(lowerMsg)) return 'diagnostic';
+    if (/cost|price|fee|quote|charge/.test(lowerMsg)) return 'cost';
+    if (/how|steps|what should i do|next|process/.test(lowerMsg)) return 'process';
+    return 'general';
+}
+
+function buildRagResponse(params: {
+    matchedRule: RagRule;
+    tradeName: string;
+    countryCode: string;
+    message: string;
+    askLocation: boolean;
+    isUSDomain: boolean;
+}): string {
+    const { matchedRule, tradeName, message, askLocation, isUSDomain } = params;
+    const lowerMsg = message.toLowerCase();
+    const intentFlavor = detectIntentFlavor(lowerMsg);
+    const isUK = !isUSDomain;
+
+    const planParts = String(matchedRule.action_plan || '').split('DO NOT:');
+    const doSection = (planParts[0] || '').replace('DO:', '').trim();
+    const doNotSection = planParts.length > 1 ? planParts[1].trim() : '';
+    const doBullets = doSection.split(/[;.]\s/).map((s: string) => s.trim()).filter(Boolean).slice(0, 4);
+    const doNotBullets = doNotSection.split(/[;.]\s/).map((s: string) => s.trim()).filter(Boolean).slice(0, 3);
+
+    const introByIntent: Record<string, string> = {
+        safety: `### ⚠️ ${matchedRule.scenario}\nThis sounds safety-critical. Act first, then arrange professional repair.`,
+        diagnostic: `### 🔎 ${matchedRule.scenario}\nBased on your symptoms, this is the most likely scenario.`,
+        cost: `### 💷 ${matchedRule.scenario}\nBefore cost, stabilize the situation safely to avoid escalation.`,
+        process: `### 🧭 ${matchedRule.scenario}\nHere is the best immediate sequence for your situation.`,
+        general: `### ⚠️ ${matchedRule.scenario}\nHere’s the most relevant guidance for what you described.`
+    };
+
+    let response = `${introByIntent[intentFlavor]}\nRisk level: **${matchedRule.risk_level}**\n\n`;
+    response += `### ✅ Do This Now\n${doBullets.map((b: string) => `- ${b}`).join('\n')}\n\n`;
+    if (doNotBullets.length) response += `### ❌ Avoid\n${doNotBullets.map((b: string) => `- ${b}`).join('\n')}\n\n`;
+    response += `### 👷 Best-Match Trade: ${tradeName}\n${pickVariant(TRADE_GUIDE_LINES, `${message}:${tradeName}`)}\n`;
+
+    if (matchedRule.authority_name) {
+        response += `\n\n*Reference: [${matchedRule.authority_name}](${matchedRule.authority_url})*`;
+    }
+
+    if (askLocation) {
+        const pool = isUK ? LOCATION_PROMPTS.uk : LOCATION_PROMPTS.us;
+        response += `\n\n${pickVariant(pool, `${message}:${matchedRule.scenario}`)}`;
+    }
+    return response;
+}
 
 export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
@@ -268,50 +346,29 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     if (!isAwaitingResponse && (isQuestion || isDescriptive || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe'))) {
         const region = isUSDomain ? 'US' : 'UK';
-        const matchedRule = await searchVectorKnowledgeBase(message, region);
+            const matchedRule = await searchVectorKnowledgeBase(message, region, {
+                avoidScenarios: currentState.recentRagScenarios || [],
+                avoidTrades: currentState.recentRagTrades || []
+            });
 
         if (matchedRule) {
-            const isUK = region === 'UK';
-            
-            const planParts = matchedRule.action_plan.split('DO NOT:');
-            const doSection = planParts[0].replace('DO:', '').trim();
-            const doNotSection = planParts.length > 1 ? planParts[1].trim() : "";
-
-            let response = `### ⚠️ ${matchedRule.scenario}\nRisk level: **${matchedRule.risk_level}**\n\n`;
-
-            // Safety steps
-            response += `### ✅ Do This Now\n`;
-            const doBullets = doSection.split(/[;.]\s/).map(s => s.trim()).filter(Boolean);
-            doBullets.slice(0, 4).forEach(bullet => {
-                response += `- ${bullet}\n`;
-            });
-            response += `\n`;
-
-            // What NOT to do
-            if (doNotSection) {
-                response += `### ❌ Avoid\n`;
-                const doNotBullets = doNotSection.split(/[;.]\s/).map(s => s.trim()).filter(Boolean);
-                doNotBullets.slice(0, 3).forEach(bullet => {
-                    response += `- ${bullet}\n`;
-                });
-                response += `\n`;
-            }
-
-            // Trade required
             const tradeName = getReadableTradeName(matchedRule.trade, countryCode);
-            response += `### 👷 You Need a ${tradeName}\nContact a qualified **${tradeName.toLowerCase()}** to resolve this safely.`;
-
-            // Source
-            if (matchedRule.authority_name) {
-                response += `\n\n*Source: [${matchedRule.authority_name}](${matchedRule.authority_url})*`;
-            }
+            const askLocation = !newState.detectedCity;
+            const response = buildRagResponse({
+                matchedRule,
+                tradeName,
+                countryCode,
+                message,
+                askLocation,
+                isUSDomain
+            });
 
             newState.detectedTrade = matchedRule.trade;
+            newState.recentRagScenarios = [...(currentState.recentRagScenarios || []), matchedRule.scenario].slice(-5);
+            newState.recentRagTrades = [...(currentState.recentRagTrades || []), matchedRule.trade].slice(-5);
             
-            if (!newState.detectedCity) {
+            if (askLocation) {
                 newState.step = 'LOCATION_CHECK';
-                const locationPrompt = isUSDomain ? "What city or zip code are you in?" : "Which city or postcode are you in?";
-                response += `\n\n${locationPrompt}`;
             }
 
             return {
@@ -685,4 +742,12 @@ export async function processUserMessage(message: string, currentState: ChatStat
     }
 
     return { newState, response: { id: Date.now().toString(), role: 'assistant', content: responseText, action, target } };
+}
+interface RagRule {
+    scenario: string;
+    action_plan: string;
+    risk_level: string;
+    trade: string;
+    authority_name?: string;
+    authority_url?: string;
 }

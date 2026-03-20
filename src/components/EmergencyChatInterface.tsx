@@ -53,7 +53,9 @@ export function EmergencyChatInterface() {
         detectedCity: null,
         suggestedCity: null,
         locationConfirmed: false,
-        history: []
+        history: [],
+        recentRagScenarios: [],
+        recentRagTrades: []
     });
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -661,7 +663,9 @@ export function EmergencyChatInterface() {
             detectedCity: null,
             suggestedCity: null,
             locationConfirmed: false,
-            history: []
+            history: [],
+            recentRagScenarios: [],
+            recentRagTrades: []
         });
         setInput("");
         isVoiceSessionRef.current = false;
@@ -926,4 +930,3 @@ export function EmergencyChatInterface() {
         </div>
     );
 }
-

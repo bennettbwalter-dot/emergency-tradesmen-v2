@@ -125,6 +125,16 @@ export const KNOWLEDGE_KEYWORDS: Record<string, string[]> = {
     "CORE_PROTOCOL": ["help", "safety", "emergency", "999"]
 };
 
+interface TradeRuleMatch {
+    scenario: string;
+    action_plan: string;
+    risk_level: string;
+    trade: string;
+    authority_name?: string;
+    authority_url?: string;
+    similarity?: number;
+}
+
 // Helper: Calculate relevance score based on word overlap
 function getScore(text: string, queryTerms: string[]): number {
     const lowerText = text.toLowerCase();
@@ -191,7 +201,7 @@ export function searchKnowledgeBase(query: string): string | null {
 }
 
 // Local embedder instance for browser-side RAG
-let embedder: any = null;
+let embedder: unknown = null;
 
 /**
  * Generates an embedding for a query locally in the browser (Free!)
@@ -201,7 +211,7 @@ async function getQueryEmbedding(text: string): Promise<number[]> {
         console.log('[KnowledgeBase] Loading local embedding model (all-MiniLM-L6-v2)...');
         embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
     }
-    const output = await embedder(text, { pooling: 'mean', normalize: true });
+    const output = await (embedder as (input: string, opts: { pooling: 'mean'; normalize: boolean }) => Promise<{ data: Float32Array }>)(text, { pooling: 'mean', normalize: true });
     return Array.from(output.data);
 }
 
@@ -210,7 +220,28 @@ async function getQueryEmbedding(text: string): Promise<number[]> {
  * @param query The user's question
  * @param region 'UK' or 'US'
  */
-export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'US'): Promise<any | null> {
+function tokenizeForMatch(text: string): string[] {
+    return (text || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .split(/\s+/)
+        .filter((t) => t.length > 2);
+}
+
+function hashToUnitInterval(input: string): number {
+    let hash = 2166136261;
+    for (let i = 0; i < input.length; i++) {
+        hash ^= input.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+    return ((hash >>> 0) % 1000) / 1000;
+}
+
+export async function searchVectorKnowledgeBase(
+    query: string,
+    region: 'UK' | 'US',
+    options?: { avoidScenarios?: string[]; avoidTrades?: string[] }
+): Promise<TradeRuleMatch | null> {
     try {
         console.log(`[KnowledgeBase] Searching vector DB for: "${query}" in region: ${region}`);
         
@@ -220,8 +251,8 @@ export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'U
         // 2. Call the Supabase RPC function
         const { data, error } = await supabase.rpc('match_trade_rules', {
             query_embedding: embedding,
-            match_threshold: 0.5, // 50% similarity threshold
-            match_count: 3,       // Return top 3 matches
+            match_threshold: 0.4, // slightly wider net, then rerank client-side
+            match_count: 8,       // broader candidate set for diversification
             filter_region: region
         });
 
@@ -235,8 +266,31 @@ export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'U
             return null;
         }
 
-        // 3. Return the raw best match
-        return data[0];
+        const queryTokens = tokenizeForMatch(query);
+        const avoidScenarios = new Set((options?.avoidScenarios || []).map((s) => s.toLowerCase()));
+        const avoidTrades = new Set((options?.avoidTrades || []).map((t) => t.toLowerCase()));
+
+        const reranked = (data as TradeRuleMatch[])
+            .map((row) => {
+                const scenario = String(row.scenario || '');
+                const actionPlan = String(row.action_plan || '');
+                const trade = String(row.trade || '').toLowerCase();
+                const docText = `${scenario} ${actionPlan}`.toLowerCase();
+
+                const lexicalOverlap = queryTokens.reduce((acc, token) => acc + (docText.includes(token) ? 1 : 0), 0);
+                const lexicalScore = queryTokens.length > 0 ? lexicalOverlap / queryTokens.length : 0;
+                const semanticScore = typeof row.similarity === 'number' ? row.similarity : 0.5;
+
+                const scenarioPenalty = avoidScenarios.has(scenario.toLowerCase()) ? 0.2 : 0;
+                const tradePenalty = avoidTrades.has(trade) ? 0.1 : 0;
+                const jitter = hashToUnitInterval(`${query}:${scenario}:${trade}`) * 0.03;
+
+                const score = (semanticScore * 0.65) + (lexicalScore * 0.35) - scenarioPenalty - tradePenalty + jitter;
+                return { row, score };
+            })
+            .sort((a, b) => b.score - a.score);
+
+        return reranked[0]?.row || null;
     } catch (err) {
         console.error('[KnowledgeBase] searchVectorKnowledgeBase failed:', err);
         return null;
