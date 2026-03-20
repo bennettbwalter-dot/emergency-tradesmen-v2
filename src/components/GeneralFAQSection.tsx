@@ -71,19 +71,25 @@ interface GeneralFAQSectionProps {
     showTitle?: boolean;
     useContainer?: boolean;
     initiallyOpened?: boolean;
+    defaultOpenCount?: number;
 }
 
 export function GeneralFAQSection({
     className = "",
     showTitle = true,
     useContainer = false,
-    initiallyOpened = false
+    initiallyOpened = false,
+    defaultOpenCount = 0
 }: GeneralFAQSectionProps) {
-    const [isOpened, setIsOpened] = React.useState(true);
+    const [isOpened, setIsOpened] = React.useState(initiallyOpened);
+    const defaultOpenItems = React.useMemo(
+        () => faqData.slice(0, Math.max(0, defaultOpenCount)).map((_, index) => `item-${index}`),
+        [defaultOpenCount]
+    );
 
     const content = (
         <div className="bg-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8">
-            <Accordion type="single" collapsible className="w-full">
+            <Accordion type="multiple" defaultValue={defaultOpenItems} className="w-full">
                 {faqData.map((faq, index) => (
                     <AccordionItem key={index} value={`item-${index}`} className="border-border/30">
                         <AccordionTrigger className="hover:no-underline py-5 text-left text-foreground font-medium">

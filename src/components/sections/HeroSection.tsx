@@ -25,6 +25,9 @@ export function HeroSection() {
     // US: NEAR {City} or NEAR ME
     const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? detectedCity : 'ME').toUpperCase();
     const displayState = detectedState || (settings.countryCode === 'US' ? 'US' : 'UK');
+    const localizedIntentLine = settings.countryCode === 'US'
+        ? "Emergency plumber, electrician, locksmith & HVAC callout support"
+        : "Emergency plumber, electrician, locksmith & gas engineer callouts";
 
     return (
         <section className="relative block overflow-hidden">
@@ -90,7 +93,7 @@ export function HeroSection() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-[10px] sm:text-sm md:text-base lg:text-lg text-muted-foreground mb-4 tracking-wide uppercase"
                     >
-                        Emergency {settings.tradeTerm} {displayState} | Nationwide 24/7 Help
+                        {localizedIntentLine} | {displayState} | 24/7 Response
                     </motion.p>
 
                     {/* "Need Help" Button */}

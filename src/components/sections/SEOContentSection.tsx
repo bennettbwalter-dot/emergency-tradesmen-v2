@@ -3,6 +3,9 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 
 export function SEOContentSection() {
     const { settings } = useLocalization();
+    const isUS = settings.countryCode === "US";
+    const regionMention = isUS ? "city and state" : "town and postcode area";
+    const regulatedTradeLabel = isUS ? "licensed contractor" : "Gas Safe / NICEIC-ready specialist";
 
     return (
         <section className="container-wide py-16 relative overflow-hidden">
@@ -31,7 +34,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                When you search for <strong>"tradesmen near me"</strong>, you aren't just looking for a list of names—you need verified local experts who can arrive within minutes, not days.
+                                When you search for <strong>"emergency plumber near me"</strong> or <strong>"emergency electrician near me"</strong>, you need verified local experts who can arrive within minutes, not days.
                             </p>
                         </div>
 
@@ -41,7 +44,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Our network connects you instantly with the closest available <strong>local tradesmen</strong> in your area. Finding reliable help in an emergency shouldn't be a gamble.
+                                Our network connects you instantly with the closest available <strong>local {settings.tradeTerm.toLowerCase()}</strong> in your {regionMention}. Finding reliable help in an emergency should not be a gamble.
                             </p>
                         </div>
 
@@ -51,7 +54,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Whether it's a <strong>24/7 emergency plumber</strong>, a certified electrician, or a locksmith nearby, get the help you need, <strong>near you</strong>, right now.
+                                Whether it is a <strong>24/7 emergency plumber</strong>, a certified electrician, a locksmith nearby, or a <strong>{regulatedTradeLabel}</strong>, get immediate help right where you are.
                             </p>
                         </div>
                     </div>

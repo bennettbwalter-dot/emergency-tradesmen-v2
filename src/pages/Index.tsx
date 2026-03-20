@@ -1,12 +1,10 @@
 import { useState, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
-import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { GuestGate } from "@/components/GuestGate";
@@ -33,21 +31,25 @@ const Index = () => {
   const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
   const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
   const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+  const localeLabel = isUSDomain ? 'United States' : 'United Kingdom';
 
   const cleanDetectedCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM')
     ? detectedCity
     : '';
-  const displayCity = cleanDetectedCity ? `in ${cleanDetectedCity}` : 'Near You';
-  const areaServedLabel = cleanDetectedCity || (settings.countryCode === 'US' ? 'United States' : 'United Kingdom');
+  const titleLocation = cleanDetectedCity ? `in ${cleanDetectedCity}` : `across the ${localeLabel}`;
+  const areaServed = cleanDetectedCity
+    ? [{ "@type": "City", name: cleanDetectedCity }, { "@type": "Country", name: localeLabel }]
+    : [{ "@type": "Country", name: localeLabel }];
 
   // Schema markup
   const emergencyServiceSchema = {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
-    "name": `${siteName} ${displayCity}`,
+    "name": `${siteName} ${titleLocation}`,
     "image": `${siteUrl}/og-image.webp`,
-    "description": `24/7 ${siteName} in ${displayCity}. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
-    "areaServed": areaServedLabel,
+    "description": `24/7 ${siteName} support ${cleanDetectedCity ? `in ${cleanDetectedCity}` : `across the ${localeLabel}`}. Connect with verified emergency plumbers, electricians, locksmiths, HVAC specialists, and more within minutes.`,
+    "url": siteUrl,
+    "areaServed": areaServed,
     "availableLanguage": "English",
     "serviceType": ["Plumbing", "Electrical", "Locksmith", "HVAC", "Glazing", "Drainage"],
     "openingHours": "Mo-Su 00:00-24:00",
@@ -72,8 +74,8 @@ const Index = () => {
     <>
       <GuestGate />
       <SEO 
-        title={`${siteName} ${displayCity}`}
-        description={`Find trusted local ${settings.tradeTerm.toLowerCase()}s in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC. Fast response.`}
+        title={`${siteName} ${titleLocation}`}
+        description={`Find trusted emergency plumber, electrician, locksmith, and HVAC callout services ${cleanDetectedCity ? `in ${cleanDetectedCity}` : `across the ${localeLabel}`}. Fast 24/7 response with verified local professionals.`}
         canonical="/"
         locale={isUSDomain ? "en_US" : "en_GB"}
         alternates={[
@@ -139,7 +141,7 @@ const Index = () => {
                 className="w-full max-w-3xl overflow-hidden"
               >
                 <div className="mt-8">
-                  <GeneralFAQSection initiallyOpened={true} />
+                  <GeneralFAQSection initiallyOpened={true} defaultOpenCount={3} />
                 </div>
               </motion.div>
             )}
