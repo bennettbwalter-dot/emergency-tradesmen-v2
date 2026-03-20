@@ -55,7 +55,8 @@ export function EmergencyChatInterface() {
         locationConfirmed: false,
         history: [],
         recentRagScenarios: [],
-        recentRagTrades: []
+        recentRagTrades: [],
+        turnCount: 0
     });
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -665,7 +666,8 @@ export function EmergencyChatInterface() {
             locationConfirmed: false,
             history: [],
             recentRagScenarios: [],
-            recentRagTrades: []
+            recentRagTrades: [],
+            turnCount: 0
         });
         setInput("");
         isVoiceSessionRef.current = false;

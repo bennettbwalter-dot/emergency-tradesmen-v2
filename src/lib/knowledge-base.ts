@@ -270,7 +270,7 @@ export async function searchVectorKnowledgeBase(
         const avoidScenarios = new Set((options?.avoidScenarios || []).map((s) => s.toLowerCase()));
         const avoidTrades = new Set((options?.avoidTrades || []).map((t) => t.toLowerCase()));
 
-        const reranked = (data as TradeRuleMatch[])
+        let reranked = (data as TradeRuleMatch[])
             .map((row) => {
                 const scenario = String(row.scenario || '');
                 const actionPlan = String(row.action_plan || '');
@@ -289,6 +289,12 @@ export async function searchVectorKnowledgeBase(
                 return { row, score };
             })
             .sort((a, b) => b.score - a.score);
+
+        // Hard avoid exact repeat when alternatives exist
+        if (avoidScenarios.size > 0 && reranked.length > 1) {
+            const filtered = reranked.filter((entry) => !avoidScenarios.has(String(entry.row.scenario || '').toLowerCase()));
+            if (filtered.length > 0) reranked = filtered;
+        }
 
         return reranked[0]?.row || null;
     } catch (err) {

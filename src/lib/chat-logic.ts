@@ -98,6 +98,7 @@ export interface ChatState {
     history: ChatMessage[];
     recentRagScenarios?: string[];
     recentRagTrades?: string[];
+    turnCount?: number;
 }
 
 export interface ChatMessage {
@@ -259,6 +260,11 @@ function pickVariant<T>(arr: T[], seedText: string): T {
     return arr[Math.abs(hash) % arr.length];
 }
 
+function getLocationPrompt(isUSDomain: boolean, messageSeed: string): string {
+    const pool = isUSDomain ? LOCATION_PROMPTS.us : LOCATION_PROMPTS.uk;
+    return pickVariant(pool, messageSeed);
+}
+
 function detectIntentFlavor(lowerMsg: string): 'safety' | 'diagnostic' | 'cost' | 'process' | 'general' {
     if (/danger|safe|risk|evacuate|emergency|urgent/.test(lowerMsg)) return 'safety';
     if (/why|cause|diagnose|what happened|fault|issue|problem/.test(lowerMsg)) return 'diagnostic';
@@ -316,6 +322,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
     const lowerMsg = message.toLowerCase();
     const newState = { ...currentState };
     newState.step = currentState.step;
+    newState.turnCount = (currentState.turnCount || 0) + 1;
 
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const regionKey: 'uk' | 'us' = isUSDomain ? 'us' : 'uk';
@@ -405,9 +412,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 // Ask for location if we don't have it yet
                 if (!newState.detectedCity) {
                     newState.step = 'LOCATION_CHECK';
-                    const locationPrompt = isUSDomain
-                        ? '\n\nTo find you an emergency professional, what city or zip code are you in?'
-                        : '\n\nTo connect you with an emergency tradesperson, which town, city, or postcode are you in?';
+                    const locationPrompt = `\n\n${getLocationPrompt(isUSDomain, `${message}:${newState.turnCount || 0}:brain`)}`;
                     content += locationPrompt;
                 }
 
@@ -703,9 +708,18 @@ export async function processUserMessage(message: string, currentState: ChatStat
     if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
         const city = newState.detectedCity;
         const tradeName = getReadableTradeName(newState.detectedTrade, countryCode);
-        responseText = cityFallbackUsed
-            ? `Our **${tradeName}** team in **${city}** covers your area. Taking you there now.`
-            : `Taking you to your local **Emergency ${tradeName}** in **${city}** now.`;
+        const routingVariants = cityFallbackUsed
+            ? [
+                `Our **${tradeName}** team in **${city}** covers your area. Taking you there now.`,
+                `I found coverage for **${tradeName}** in **${city}** — opening the listing now.`,
+                `Great, **${city}** is covered. Sending you to nearby **${tradeName.toLowerCase()}** listings.`
+            ]
+            : [
+                `Taking you to your local **Emergency ${tradeName}** in **${city}** now.`,
+                `Opening **${tradeName}** listings for **${city}** now.`,
+                `Routing you to vetted **${tradeName.toLowerCase()}** options in **${city}**.`
+            ];
+        responseText = pickVariant(routingVariants, `${message}:${city}:${tradeName}`);
         action = 'navigate';
         // US Redirection Fix: Never use /us prefix on US domain. Root level only.
         const countryPrefix = (countryCode === 'US' || isUSDomain) ? '' : ''; 
@@ -732,7 +746,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
-        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or postcode are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
+        const locationPrompt = getLocationPrompt(isUSDomain, `${message}:${tradeName3}:fallback`);
+        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}${locationPrompt}`;
         newState.step = 'LOCATION_CHECK';
     } else {
         responseText = /trade|service|list|cover/i.test(lowerMsg)

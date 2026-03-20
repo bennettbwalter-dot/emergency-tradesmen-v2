@@ -27,7 +27,8 @@ const VoiceTrigger = () => {
         locationConfirmed: false,
         history: [],
         recentRagScenarios: [],
-        recentRagTrades: []
+        recentRagTrades: [],
+        turnCount: 0
     });
 
     const {
@@ -140,7 +141,8 @@ const VoiceTrigger = () => {
                 locationConfirmed: false,
                 history: [],
                 recentRagScenarios: [],
-                recentRagTrades: []
+                recentRagTrades: [],
+                turnCount: 0
             });
 
             const countryCode = (window.location.hostname.includes('emergencycontractors.net') || window.location.port === '3001') ? 'US' : 'GB';
