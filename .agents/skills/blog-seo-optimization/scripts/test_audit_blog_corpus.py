@@ -5,6 +5,7 @@ import tempfile
 from audit_blog_corpus import (
     apply_common_image_fixes,
     audit_post,
+    collect_broken_images_for_post,
     detect_region,
     extract_domain,
 )
@@ -64,6 +65,23 @@ class AuditBlogCorpusTests(unittest.TestCase):
             fixed, changed = apply_common_image_fixes(post["content"])
             self.assertEqual(changed, 1)
             self.assertIn(".webp", fixed)
+
+    def test_collect_broken_images_rows(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = Path(tmp)
+            (public / "blog" / "ok").mkdir(parents=True, exist_ok=True)
+            (public / "blog" / "ok" / "exists.webp").write_text("x", encoding="utf-8")
+            (public / "blog" / "ok" / "fixable.webp").write_text("x", encoding="utf-8")
+
+            content = (
+                "![OK](/blog/ok/exists.webp)\n"
+                "![Typo](/blog/ok/fixable.wehp)\n"
+                "![Missing](/blog/ok/not-here.webp)\n"
+            )
+            rows = collect_broken_images_for_post("slug-1", content, public)
+            self.assertEqual(len(rows), 2)
+            self.assertTrue(any(r["issue"] == "extension_typo_wehp" for r in rows))
+            self.assertTrue(any(r["issue"] == "missing_local_asset" for r in rows))
 
 
 if __name__ == "__main__":

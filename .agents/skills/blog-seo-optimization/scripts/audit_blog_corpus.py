@@ -136,6 +136,33 @@ def find_image_issues(content: str, public_dir: Path) -> tuple[list[str], int]:
     return issues, len(images)
 
 
+def collect_broken_images_for_post(slug: str, content: str, public_dir: Path) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for img in IMAGE_RE.findall(content or ""):
+        p = resolve_public_asset(img, public_dir)
+        if not p:
+            continue
+        if p.exists():
+            continue
+        suggestion = ""
+        issue = "missing_local_asset"
+        if ".wehp" in img.lower():
+            alt_path = str(img).replace(".wehp", ".webp")
+            alt_disk = resolve_public_asset(alt_path, public_dir)
+            if alt_disk and alt_disk.exists():
+                suggestion = alt_path
+                issue = "extension_typo_wehp"
+        rows.append(
+            {
+                "slug": slug,
+                "image_path": img,
+                "issue": issue,
+                "suggested_path": suggestion,
+            }
+        )
+    return rows
+
+
 def apply_common_image_fixes(content: str) -> tuple[str, int]:
     if not content:
         return content, 0
@@ -266,6 +293,7 @@ def main() -> None:
     parser.add_argument("--min-word-count", default=700, type=int, help="Minimum recommended word count")
     parser.add_argument("--public-dir", default="public", help="Public assets directory for local image checks")
     parser.add_argument("--autofix-output", default="", help="Write auto-fixed JSON to this path (fixes .wehp -> .webp)")
+    parser.add_argument("--out-broken-images-csv", default="", help="Optional CSV path listing broken image refs per slug")
     args = parser.parse_args()
 
     posts = json.loads(Path(args.input).read_text(encoding="utf-8"))
@@ -313,6 +341,23 @@ def main() -> None:
 
     Path(args.out_json).write_text(json.dumps(report, indent=2), encoding="utf-8")
     write_csv(Path(args.out_csv), audits)
+
+    if args.out_broken_images_csv:
+        rows: list[dict[str, str]] = []
+        for post in posts:
+            rows.extend(
+                collect_broken_images_for_post(
+                    slug=str(post.get("slug") or ""),
+                    content=str(post.get("content") or ""),
+                    public_dir=public_dir,
+                )
+            )
+        out_path = Path(args.out_broken_images_csv)
+        with out_path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["slug", "image_path", "issue", "suggested_path"])
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"Broken images CSV: {args.out_broken_images_csv} (rows: {len(rows)})")
 
     if args.autofix_output:
         fixed_posts = []

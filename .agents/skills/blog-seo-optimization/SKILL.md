@@ -28,11 +28,13 @@ python .agents/skills/blog-seo-optimization/scripts/audit_blog_corpus.py \
   --public-dir public \
   --out-json tmp/blog-seo-audit-report.json \
   --out-csv tmp/blog-seo-audit-report.csv \
+  --out-broken-images-csv tmp/broken-images-report.csv \
   --autofix-output tmp/all_posts_audit.autofixed.json
 ```
 
 This produces a machine-readable report to drive fixes across all posts.
 The autofix output applies safe extension corrections (`.wehp` → `.webp`) for blog content image links.
+The broken-image CSV gives an actionable slug-to-path fix queue.
 
 ### Script validation command
 
