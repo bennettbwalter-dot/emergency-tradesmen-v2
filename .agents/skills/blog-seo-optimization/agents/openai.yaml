@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blog SEO Optimization"
+  short_description: "Audit and fix all UK/US blog SEO issues."
+  default_prompt: "Run a full-corpus UK/US blog SEO optimization pass: audit all posts, fix domain/localization issues, strengthen keywords and headings, improve internal links, and output a per-post remediation log."
