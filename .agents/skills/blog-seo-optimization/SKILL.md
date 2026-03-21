@@ -42,6 +42,18 @@ The broken-image CSV gives an actionable slug-to-path fix queue.
 python -m unittest discover -s .agents/skills/blog-seo-optimization/scripts -p "test_*.py"
 ```
 
+### Optional publish command (push remediated corpus to Supabase `posts`)
+
+```bash
+node .agents/skills/blog-seo-optimization/scripts/publish_remediated_posts.js \
+  --input all_posts_audit.json \
+  --only-remediated \
+  --limit 50 \
+  --dry-run
+```
+
+Remove `--dry-run` to perform the upsert (requires `VITE_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`).
+
 ## Domain and Localization Guardrails
 
 Enforce hard routing rules:
