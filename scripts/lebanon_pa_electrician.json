@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Lancaster",
+        "phone": "(888) 826-0091",
+        "address": "Lebanon, PA",
+        "website": "https://www.mistersparky.com/lancaster/"
+    },
+    {
+        "name": "USA Electrical Services",
+        "phone": "(844) 484-2612",
+        "address": "Lebanon, PA",
+        "website": "https://usaelectricalpa1.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Lebanon, PA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(1-800-380-6800)",
+        "address": "Lebanon, PA",
+        "website": "https://thomasedisonelectric.com"
+    }
+]

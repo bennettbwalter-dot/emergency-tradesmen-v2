@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Meetze Plumbing",
+        "phone": "803-732-3747",
+        "address": "Lexington, SC",
+        "website": "https://meetzeplumbing.com"
+    },
+    {
+        "name": "Dr. Rooter",
+        "phone": "803-761-9935",
+        "address": "Lexington, SC",
+        "website": "https://drrooterlexington.com"
+    },
+    {
+        "name": "Living Water Drain & Plumbing",
+        "phone": "803-555-0300",
+        "address": "Lexington, SC",
+        "website": "https://lwdplumbing.com"
+    },
+    {
+        "name": "Freedom Plumbing, Inc.",
+        "phone": "803-447-0471",
+        "address": "Lexington, SC",
+        "website": "https://freedom-plumbing.com"
+    }
+]

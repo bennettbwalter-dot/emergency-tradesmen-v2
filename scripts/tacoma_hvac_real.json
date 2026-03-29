@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Hunt's Services",
+        "phone": "(253) 533-7500",
+        "address": "8111 Pacific Hwy E, Tacoma, WA 98422",
+        "website": "https://www.huntsservices.com/"
+    },
+    {
+        "name": "AAA Heating & Air Conditioning",
+        "phone": "(253) 234-1278",
+        "address": "Tacoma, WA",
+        "website": "https://aaaheatingac.com/"
+    },
+    {
+        "name": "2 Sons Plumbing, Sewer, Septic, Electric, Heating & Air",
+        "phone": "(206) 487-1757",
+        "address": "Tacoma, WA",
+        "website": "https://2sonsplumbing.com/"
+    },
+    {
+        "name": "Mercurio's Heating and Air Conditioning",
+        "phone": "(360) 499-2980",
+        "address": "Tacoma, WA",
+        "website": "https://mercurios.com/"
+    },
+    {
+        "name": "Ranger Heating & Cooling",
+        "phone": "(253) 336-3777",
+        "address": "Tacoma, WA",
+        "website": "https://rangerheating.com/"
+    },
+    {
+        "name": "Beacon Plumbing",
+        "phone": "(253) 473-3294",
+        "address": "Tacoma, WA",
+        "website": "https://beaconplumbing.net/"
+    }
+]

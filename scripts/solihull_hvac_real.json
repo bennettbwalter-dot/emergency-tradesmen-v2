@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Summit Plumbing & Heating Ltd",
+        "phone": "0121 294 9504",
+        "address": "Solihull",
+        "website": "https://summitplumbingandheating.co.uk/"
+    },
+    {
+        "name": "Solihull Plumbers",
+        "phone": "07855342042",
+        "address": "Solihull",
+        "website": "https://solihullplumbers.com/"
+    },
+    {
+        "name": "MH Heating Solutions",
+        "phone": "0121 291 8203",
+        "address": "25 Cropthorne Road, Shirley, Solihull, West Midlands, B90 3JW",
+        "website": "https://mhheatingsolutions.co.uk/"
+    },
+    {
+        "name": "Butco Heating Limited",
+        "phone": "0333 366 1121",
+        "address": "Solihull",
+        "website": "https://butco.com/"
+    },
+    {
+        "name": "Afterglow Plumbing & Heating Limited",
+        "phone": "0121 291 8203",
+        "address": "83 Beechmore Road, Sheldon, Birmingham, B26 3AS",
+        "website": "https://afterglowheating.co.uk/"
+    }
+]

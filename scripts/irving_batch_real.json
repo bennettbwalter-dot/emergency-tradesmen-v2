@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Bulldog Locksmith & Access Control",
+        "address": "Irving, TX",
+        "phone": "682-356-9111",
+        "trade": "locksmith",
+        "city": "Irving"
+    },
+    {
+        "name": "Milestone Electric",
+        "address": "Irving, TX",
+        "phone": "214-267-2405",
+        "trade": "plumber",
+        "city": "Irving"
+    }
+]

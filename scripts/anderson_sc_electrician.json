@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Fred's Electric, LLC",
+        "phone": "864-510-8703",
+        "address": "Anderson, SC",
+        "website": "https://freds-electric.com"
+    },
+    {
+        "name": "Legacy Home Electric, LLC",
+        "phone": "864-642-7766",
+        "address": "Anderson, SC",
+        "website": "https://legacyhome.llc"
+    },
+    {
+        "name": "Brothers Plumbing, Air, & Electric",
+        "phone": "864-277-2111",
+        "address": "Anderson, SC",
+        "website": "https://hirebrothers.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Anderson, SC",
+        "website": "https://oconnorselectrical.com"
+    }
+]

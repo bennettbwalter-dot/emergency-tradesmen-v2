@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Brandon Electric",
+        "phone": "(813) 653-1717",
+        "address": "Brandon, FL",
+        "website": "https://brandonelectricinc.com"
+    },
+    {
+        "name": "Exodus Electric",
+        "phone": "(813) 444-4445",
+        "address": "Brandon, FL",
+        "website": "https://exoduselectric.com"
+    },
+    {
+        "name": "Small Jobs Electric Inc",
+        "phone": "(813) 303-0052",
+        "address": "Brandon, FL",
+        "website": "https://smalljobselectric.com"
+    },
+    {
+        "name": "Home Service Heroes",
+        "phone": "(813) 696-3398",
+        "address": "Brandon, FL",
+        "website": "https://homeserviceheroesfl.com"
+    }
+]

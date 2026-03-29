@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Williams Comfort Air",
+        "phone": "317-660-6992",
+        "address": "Fishers, IN",
+        "website": "https://williamscomfortair.com"
+    },
+    {
+        "name": "Frye Electric, Inc.",
+        "phone": "317-659-6899",
+        "address": "Fishers, IN",
+        "website": "https://fryeelectricinc.com"
+    },
+    {
+        "name": "Phase 1 Electric Services",
+        "phone": "463-217-3568",
+        "address": "Fishers, IN",
+        "website": "https://p1electric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Fishers, IN",
+        "website": "https://oconnorselectrical.com"
+    }
+]

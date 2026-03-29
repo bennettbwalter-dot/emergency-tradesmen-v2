@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter Missouri City",
+        "phone": "(281) 969-9092",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Start 2 Finish Plumbing",
+        "phone": "832-648-4040",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "On Call Plumbers Missouri City",
+        "phone": "(346) 200-5055",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Plumbing Wizardz",
+        "phone": "(855) 426-6880",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "JR Plumbing",
+        "phone": "(281) 265-4700",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "24 Hour Plumbing Missouri City",
+        "phone": "(866) 849-1588",
+        "address": "Missouri City, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "24 Hour Electrician Missouri City",
+        "phone": "(877) 248-0484",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Dempsey Electric",
+        "phone": "713-691-6456",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Allsource Electrical Technologies",
+        "phone": "281-451-4245",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Mister Sparky of Houston",
+        "phone": "281-907-8418",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Nextdoor Electric",
+        "phone": "(832) 841-3889",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "The Local Electrician",
+        "phone": "(832) 688-4419",
+        "address": "Missouri City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Locksmith Missouri City",
+        "phone": "(832) 621-0117",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Locksmith Missouri City 24/7",
+        "phone": "(713) 554-3657",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Missouri City Locksmith",
+        "phone": "(281) 968-4169",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Missouri City TX",
+        "phone": "(832) 864-9561",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Pop-A-Lock of Missouri City",
+        "phone": "(281) 575-8444",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Missouri City, TX",
+        "phone": "(281) 819-7061",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Missouri City TX Locksmiths",
+        "phone": "(281) 560-4673",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 130
+    },
+    {
+        "name": "Key Me Missouri City",
+        "phone": "(346) 233-1636",
+        "address": "Missouri City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 100
+    }
+]

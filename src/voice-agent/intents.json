@@ -1,0 +1,295 @@
+{
+    "fallback_message": "Do you need Water Restoration or Air Conditioning?",
+    "intents": [
+        {
+            "id": "electrician",
+            "keywords": [
+                "spark",
+                "wire",
+                "socket",
+                "power",
+                "light",
+                "fuse",
+                "electric",
+                "trip"
+            ],
+            "route_key": "electrician"
+        },
+        {
+            "id": "plumber",
+            "keywords": [
+                "leak",
+                "water",
+                "pipe",
+                "drip",
+                "tap",
+                "flood",
+                "plumb"
+            ],
+            "route_key": "plumber"
+        },
+        {
+            "id": "locksmith",
+            "keywords": [
+                "lock",
+                "key",
+                "door",
+                "shut out",
+                "locked out",
+                "handle"
+            ],
+            "route_key": "locksmith"
+        },
+        {
+            "id": "gas_engineer",
+            "keywords": [
+                "boiler",
+                "radiator",
+                "heat",
+                "gas",
+                "meter",
+                "cold"
+            ],
+            "route_key": "gas_engineer"
+        },
+        {
+            "id": "drain_specialist",
+            "keywords": [
+                "drain",
+                "block",
+                "toilet",
+                "sewage",
+                "sink",
+                "smell"
+            ],
+            "route_key": "drain_specialist"
+        },
+        {
+            "id": "glazier",
+            "keywords": [
+                "glass",
+                "window",
+                "smash",
+                "break",
+                "pane",
+                "glaz"
+            ],
+            "route_key": "glazier"
+        },
+        {
+            "id": "roofer",
+            "keywords": [
+                "roof",
+                "leak",
+                "tile",
+                "chimney",
+                "rain",
+                "storm",
+                "slate",
+                "felt",
+                "flashing",
+                "gutter"
+            ],
+            "route_key": "roofer"
+        },
+        {
+            "id": "builder",
+            "route_key": "builder",
+            "keywords": [
+                "wall",
+                "structure",
+                "brick",
+                "crack",
+                "collapse",
+                "beam",
+                "foundation",
+                "subsidence",
+                "masonry",
+                "pointing",
+                "carpenter",
+                "woodwork",
+                "cupboard",
+                "door frame",
+                "maintenance",
+                "repair",
+                "handrail"
+            ]
+        },
+        {
+            "id": "breakdown_recovery",
+            "keywords": [
+                "car",
+                "van",
+                "start",
+                "battery",
+                "tyre",
+                "breakdown",
+                "tow"
+            ],
+            "route_key": "breakdown_recovery"
+        },
+        {
+            "id": "safety_warning",
+            "keywords": [
+                "fire",
+                "smoke",
+                "flame",
+                "explode",
+                "gas smell",
+                "danger",
+                "hurt"
+            ],
+            "action": "show_warning"
+        },
+        {
+            "id": "guide_request",
+            "keywords": [
+                "guide",
+                "advice",
+                "help me",
+                "what to do",
+                "tips",
+                "blog"
+            ],
+            "route_key": "blog"
+        },
+        {
+            "id": "nav_contact",
+            "keywords": [
+                "contact",
+                "phone",
+                "email",
+                "support",
+                "call usage"
+            ],
+            "route_key": "contact"
+        },
+        {
+            "id": "nav_about",
+            "keywords": [
+                "about",
+                "who are",
+                "company",
+                "story"
+            ],
+            "route_key": "about"
+        },
+        {
+            "id": "nav_home",
+            "keywords": [
+                "home",
+                "start",
+                "main",
+                "reset"
+            ],
+            "route_key": "home"
+        },
+        {
+            "id": "nav_join",
+            "keywords": [
+                "join",
+                "signup",
+                "sign up",
+                "register",
+                "trade account",
+                "work for"
+            ],
+            "route_key": "tradesmen"
+        },
+        {
+            "id": "newsletter_signup",
+            "keywords": [
+                "newsletter",
+                "subscribe",
+                "mailing list",
+                "updates",
+                "email list"
+            ],
+            "route_key": "newsletter"
+        },
+        {
+            "id": "explain_premium",
+            "keywords": [
+                "premium",
+                "pro network",
+                "boost business",
+                "trust signals",
+                "priority ranking"
+            ],
+            "action": "explain_premium"
+        },
+        {
+            "id": "explain_pricing",
+            "keywords": [
+                "price",
+                "cost",
+                "how much",
+                "plans",
+                "subscription",
+                "rates",
+                "fee"
+            ],
+            "action": "explain_pricing"
+        },
+        {
+            "id": "signup_guide",
+            "keywords": [
+                "how to join",
+                "how to sign up",
+                "process",
+                "steps to join"
+            ],
+            "action": "signup_guide"
+        },
+        {
+            "id": "water_restoration",
+            "keywords": [
+                "water restoration",
+                "flood damage",
+                "water damage",
+                "flooded house",
+                "water cleanup",
+                "water extraction",
+                "burst pipe cleanup",
+                "burst pipe water cleanup",
+                "ceiling water damage",
+                "storm water damage",
+                "sewage cleanup",
+                "structural drying",
+                "dehumidification",
+                "emergency water cleanup",
+                "flood repair",
+                "water damage repair",
+                "24 hour water damage",
+                "emergency flood repair",
+                "house flooded",
+                "leak damage repair"
+            ],
+            "route_key": "water-restoration"
+        },
+        {
+            "id": "air_conditioning",
+            "keywords": [
+                "air conditioning",
+                "air con",
+                "aircon",
+                "ac repair",
+                "ac installation",
+                "air conditioner broken",
+                "air con not working",
+                "no cold air",
+                "air con leaking",
+                "ac not cooling",
+                "air conditioning service",
+                "air con servicing",
+                "air conditioning engineer",
+                "emergency ac repair",
+                "24 hour air con",
+                "same day ac repair",
+                "install air conditioning",
+                "aircon repair"
+            ],
+            "route_key": "hvac"
+        }
+    ]
+}

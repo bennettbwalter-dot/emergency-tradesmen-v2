@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Fast Glass",
+        "phone": "562-439-6466",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Glass-Man Glass Corp.",
+        "phone": "562-621-9689",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "LA Glass Co.",
+        "phone": "562-471-7421",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Top Glass Repairs",
+        "phone": "562-436-2616",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Affordable Glass",
+        "phone": "562-494-6114",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Long Beach Auto Glass Repair",
+        "phone": "562-286-1432",
+        "address": "Long Beach, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 110
+    }
+]

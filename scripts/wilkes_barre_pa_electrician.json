@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Thomas Edison Electric",
+        "phone": "(570) 698-6333",
+        "address": "Wilkes-Barre, PA",
+        "website": "https://thomasedisonelectric.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Wilkes-Barre, PA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Wilkes-Barre, PA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Envy Electrical",
+        "phone": "(570) 878-7113",
+        "address": "Wilkes-Barre, PA",
+        "website": "https://envyelectricalnepa.com"
+    }
+]

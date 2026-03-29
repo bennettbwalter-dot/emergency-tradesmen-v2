@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rooter Hero Santa Clarita",
+        "phone": "818-456-1380",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "All Star Plumbing & Rooter SC",
+        "phone": "661-689-5215",
+        "address": "Santa Clarita, CA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Shellback Plumbing & Drain",
+        "phone": "661-430-6768",
+        "address": "Santa Clarita, CA",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Lynch Plumbing Santa Clarita",
+        "phone": "818-773-9514",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Santa Clarita Valley Plumbers",
+        "phone": "(661) 555-0101",
+        "address": "Santa Clarita, CA",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

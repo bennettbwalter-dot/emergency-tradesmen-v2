@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Window Gurus",
+        "phone": "(614) 683-9800",
+        "address": "Columbus, OH",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "New View Window & Door",
+        "phone": "(614) 800-0186",
+        "address": "Columbus, OH",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "United Window Inc.",
+        "phone": "(614) 471-7412",
+        "address": "Columbus, OH",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Auto Glass Discounters",
+        "phone": "(614) 335-4742",
+        "address": "Columbus, OH",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hugo Construction LLC",
+        "phone": "(203) 895-6902",
+        "address": "West Haven, CT",
+        "website": "https://bookhugo.com"
+    },
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "West Haven, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "TPL Electric, LLC",
+        "phone": "(203) 303-4044",
+        "address": "West Haven, CT",
+        "website": "https://tplelectricct.com"
+    },
+    {
+        "name": "Aceto Electric LLC",
+        "phone": "(203) 671-0288",
+        "address": "West Haven, CT",
+        "website": "https://aceto-electric.com"
+    }
+]

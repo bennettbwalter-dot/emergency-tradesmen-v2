@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Lava Auto Glass Rowlett",
+        "phone": "(214) 436-1325",
+        "address": "Rowlett, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Auto Glass by Jerry",
+        "phone": "(214) 681-6255",
+        "address": "Rowlett, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Discount Glass Texas Rowlett",
+        "phone": "(972) 900-8748",
+        "address": "Rowlett, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Auto Glass of Rowlett",
+        "phone": "(214) 856-8250",
+        "address": "Rowlett, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

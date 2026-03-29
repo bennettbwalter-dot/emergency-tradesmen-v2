@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Southeast Memphis",
+        "phone": "(901) 334-9327",
+        "address": "Memphis, TN",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Easley Contractors",
+        "phone": "(901) 452-0681",
+        "address": "3136 Summer Ave, Memphis, TN 38112",
+        "website": "https://easleycontractors.com/"
+    },
+    {
+        "name": "Homeway Construction & Restoration",
+        "phone": "(901) 660-9727",
+        "address": "Memphis, TN",
+        "website": "https://homewayconstruction.com/"
+    },
+    {
+        "name": "Dry Fast of Memphis",
+        "phone": "(901) 668-5919",
+        "address": "Memphis, TN",
+        "website": "https://calldryfast.com/"
+    },
+    {
+        "name": "PuroClean of Memphis",
+        "phone": "(901) 237-2040",
+        "address": "Memphis, TN",
+        "website": "https://puroclean.com/"
+    }
+]

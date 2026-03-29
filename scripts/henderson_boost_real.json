@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Roto-Rooter Plumbing & Water Cleanup",
+        "phone": "(702) 566-3718",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Sunrise Service",
+        "phone": "(702) 213-4565",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Pure Plumbing & Air",
+        "phone": "(702) 534-1910",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Focus Plumbing LLC",
+        "phone": "(702) 710-4420",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Atlas Plumbing",
+        "phone": "(702) 819-7137",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Champion Services",
+        "phone": "(702) 896-0000",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Bro Plumbing LLC",
+        "phone": "(702) 800-2410",
+        "address": "Henderson, NV",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Penny Electric",
+        "phone": "(702) 279-6040",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 300
+    },
+    {
+        "name": "Immediate Response Electric",
+        "phone": "(725) 325-0602",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Electrician Henderson",
+        "phone": "(702) 291-7316",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 45
+    },
+    {
+        "name": "Callidus Electric",
+        "phone": "(702) 403-4562",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 210
+    },
+    {
+        "name": "Ideal Services",
+        "phone": "(702) 396-5225",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.6,
+        "review_count": 180
+    },
+    {
+        "name": "Titus Electrical Services",
+        "phone": "(702) 213-4565",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Power Electric NV",
+        "phone": "(702) 955-7015",
+        "address": "Henderson, NV",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 60
+    },
+    {
+        "name": "702 Locksmith Henderson",
+        "phone": "702-673-6020",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "ABC Locksmith",
+        "phone": "702-500-0963",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Locksmith Henderson NV 89014",
+        "phone": "(725) 237-7998",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 30
+    },
+    {
+        "name": "Henderson NV Locksmith Store",
+        "phone": "702-577-3934",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 45
+    },
+    {
+        "name": "KeyMe Locksmiths",
+        "phone": "(702) 935-5318",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "CP Locksmith Henderson",
+        "phone": "702-602-2261",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 25
+    },
+    {
+        "name": "Power Locksmith Henderson NV",
+        "phone": "(702) 955-7015",
+        "address": "Henderson, NV",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 55
+    }
+]

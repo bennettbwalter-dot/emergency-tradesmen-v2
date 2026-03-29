@@ -1,0 +1,26 @@
+[
+    {
+        "name": "IHG Electric",
+        "phone": "877-327-7704",
+        "address": "Norwood, OH",
+        "website": "https://ihgelectric.com"
+    },
+    {
+        "name": "Jahn Electric",
+        "phone": "937-637-7709",
+        "address": "Norwood, OH",
+        "website": "https://jahnelectricians.com"
+    },
+    {
+        "name": "Herrmann Services",
+        "phone": "513-737-8423",
+        "address": "Norwood, OH",
+        "website": "https://herrmannservices.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "513-657-1641",
+        "address": "Norwood, OH",
+        "website": "https://mistersparky.com"
+    }
+]

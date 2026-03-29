@@ -1,0 +1,186 @@
+[
+    {
+        "name": "A-1 American Services, Inc.",
+        "phone": "757-425-2400",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Roto-Rooter Virginia Beach",
+        "phone": "757-514-3005",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "On Call Plumbers Virginia Beach",
+        "phone": "(757) 298-0302",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Premier Plumbing",
+        "phone": "(757) 436-7901",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "RPG Plumbing Services",
+        "phone": "(757) 522-3393",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Virginia Beach Emergency Plumber",
+        "phone": "757-275-0454",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 60
+    },
+    {
+        "name": "24/7 Plumbers Virginia Beach",
+        "phone": "(757) 774-5335",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Blessings Plumbing, Inc.",
+        "phone": "757-425-7790",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "UTBM Plumbing",
+        "phone": "(757) 227-8768",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Start 2 Finish Plumbing Virginia Beach",
+        "phone": "757-793-2828",
+        "address": "Virginia Beach, VA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 90
+    },
+    {
+        "name": "Cole Electric Inc.",
+        "phone": "757-498-2653",
+        "address": "Virginia Beach, VA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Mike's Electrical Service",
+        "phone": "(757)497-5982",
+        "address": "Virginia Beach, VA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Asbury Electric",
+        "phone": "757-767-4197",
+        "address": "Virginia Beach, VA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Quality Electric VA",
+        "phone": "+1 757-672-7874",
+        "address": "Virginia Beach, VA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "24 Hour Locksmith Virginia Beach",
+        "phone": "(877) 881-5298",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Virginia Beach Locksmith",
+        "phone": "(757) 255-6032",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Discount Locksmith in Virginia Beach",
+        "phone": "(757) 448-3737",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Aqua Locksmith Store",
+        "phone": "(757) 204-3176",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Virginia Beach Pro Lock and Key",
+        "phone": "(757) 414-2645",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Virginia Beach Emergency Locksmith",
+        "phone": "(757) 215-2916",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Anchor Locksmith Store",
+        "phone": "(757) 772-0818",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 65
+    },
+    {
+        "name": "Johnny The Locksmith Virginia Beach",
+        "phone": "(757) 785-5055",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 75
+    },
+    {
+        "name": "Virginia Beach Locksmith Mobile",
+        "phone": "(757) 893-0101",
+        "address": "Virginia Beach, VA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    }
+]

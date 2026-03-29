@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Stuck Solution",
+        "phone": "(855) 557-8825",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "360 Towing Solutions",
+        "phone": "(210) 920-9705",
+        "address": "San Antonio, TX",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "10-4 Tow of San Antonio",
+        "phone": "(210) 951-1160",
+        "address": "San Antonio, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "San Antonio Towing",
+        "phone": "(210) 650-0505",
+        "address": "San Antonio, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Shield Towing San Antonio",
+        "phone": "(210) 263-1175",
+        "address": "San Antonio, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

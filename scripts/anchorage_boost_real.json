@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Discount Mechanical Heating & Plumbing",
+        "phone": "907-336-3100",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Fox Plumbing & Heating",
+        "phone": "(907) 830-3499",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "907 Heating & Plumbing",
+        "phone": "907-301-4444",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mountain Mechanical",
+        "phone": "(907) 344-0700",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Sound Mechanical",
+        "phone": "907-344-6100",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 60
+    },
+    {
+        "name": "SDC Plumbing",
+        "phone": "888-218-8797",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 45
+    },
+    {
+        "name": "Anchorage Plumbing And Heating",
+        "phone": "907-349-6620",
+        "address": "Anchorage, AK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Intel Electric",
+        "phone": "+1 (907) 885-9002",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Supreme Electric",
+        "phone": "+1 (907) 561-7776",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Daylight Electric Llc",
+        "phone": "+1 (907) 519-8135",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 40
+    },
+    {
+        "name": "Glacier Electric AK",
+        "phone": "907-229-8738",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Kellogg Electric Alaska",
+        "phone": "1-888-887-7580",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Raven Electric Inc",
+        "phone": "907-561-1200",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "Executive Electric",
+        "phone": "877-837-6778",
+        "address": "Anchorage, AK",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 65
+    },
+    {
+        "name": "Locksmith Anchorage Alaska (Ammo Lock & Security)",
+        "phone": "(907) 764-2008",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Anchorage Locksmiths!",
+        "phone": "(907) 562-5688",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "AK Locksmith",
+        "phone": "(907) 602-7741",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 80
+    },
+    {
+        "name": "Brothers Locksmith",
+        "phone": "(888) 947-5585",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 45
+    },
+    {
+        "name": "KeyMe Locksmiths Anchorage",
+        "phone": "(206) 672-5746",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 60
+    },
+    {
+        "name": "Serenity Locksmith",
+        "phone": "907-317-4319",
+        "address": "Anchorage, AK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 30
+    }
+]

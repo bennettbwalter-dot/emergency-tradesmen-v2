@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Jupitair HVAC",
+        "phone": "(972) 345-6789",
+        "address": "Allen, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Rescue Air and Plumbing",
+        "phone": "(972) 201-3253",
+        "address": "Allen, TX",
+        "rating": 4.6,
+        "review_count": 350
+    },
+    {
+        "name": "Mr. Air Repair",
+        "phone": "(972) 556-5969",
+        "address": "Allen, TX",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Baker Brothers",
+        "phone": "(214) 892-2225",
+        "address": "Allen, TX",
+        "rating": 4.9,
+        "review_count": 2500
+    },
+    {
+        "name": "Allen Air Conditioning & Heating",
+        "phone": "(940) 455-2313",
+        "address": "Allen, TX",
+        "rating": 4.7,
+        "review_count": 320
+    }
+]

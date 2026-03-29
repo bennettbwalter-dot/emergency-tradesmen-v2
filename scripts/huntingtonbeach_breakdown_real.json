@@ -1,0 +1,37 @@
+[
+    {
+        "name": "West Coast Towing HB",
+        "phone": "(714) 942-5586",
+        "address": "Huntington Beach, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Best Towing & Transportation",
+        "phone": "(714) 847-0730",
+        "address": "Huntington Beach, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mighty Towing",
+        "phone": "(714) 475-0297",
+        "address": "Huntington Beach, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Towing Huntington Beach",
+        "phone": "(657) 467-8143",
+        "address": "Huntington Beach, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Surf City Recovery",
+        "phone": "(714) 211-1333",
+        "address": "Huntington Beach, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

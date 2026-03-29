@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Classic Aire Care",
+        "phone": "(314) 329-1943",
+        "address": "St. Louis, MO",
+        "rating": 4.9,
+        "review_count": 3000
+    },
+    {
+        "name": "Superior Service",
+        "phone": "(314) 717-0639",
+        "address": "St. Louis, MO",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Vogel Heating & Cooling",
+        "phone": "(314) 408-6068",
+        "address": "St. Louis, MO",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Martin-Jetco Heating & Air Conditioning",
+        "phone": "(636) 205-1631",
+        "address": "St. Louis, MO",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Welsch Heating & Cooling",
+        "phone": "(314) 872-8070",
+        "address": "St. Louis, MO",
+        "rating": 4.9,
+        "review_count": 2100
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lilly Electric",
+        "phone": "(301) 235-8901",
+        "address": "Bethesda, MD",
+        "website": "https://lillyelectric.com"
+    },
+    {
+        "name": "Bethesda Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Bethesda, MD",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Precise Building Services",
+        "phone": "(202) 827-2214",
+        "address": "Bethesda, MD",
+        "website": "https://precisebuildingservices.com"
+    },
+    {
+        "name": "Got Electric LLC",
+        "phone": "(301) 515-8676",
+        "address": "Bethesda, MD",
+        "website": "https://gotelectric.net"
+    }
+]

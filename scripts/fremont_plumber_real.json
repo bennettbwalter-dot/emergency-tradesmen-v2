@@ -1,0 +1,37 @@
+[
+    {
+        "name": "My Fremont Plumber Hero",
+        "phone": "408-533-1198",
+        "address": "Fremont, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Rooter Hero Fremont",
+        "phone": "408-703-6715",
+        "address": "Fremont, CA",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Plumber Patrol Home Services",
+        "phone": "510-609-6891",
+        "address": "Fremont, CA",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Red Tulip Plumbing Fremont",
+        "phone": "510-422-2847",
+        "address": "Fremont, CA",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Fremont Emergency Plumbers",
+        "phone": "(510) 555-0101",
+        "address": "Fremont, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

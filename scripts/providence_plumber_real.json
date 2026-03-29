@@ -1,0 +1,37 @@
+[
+    {
+        "name": "GEM Plumbing Providence",
+        "phone": "(833) 222-2953",
+        "address": "Providence, RI",
+        "rating": 4.9,
+        "review_count": 5000
+    },
+    {
+        "name": "The Plumber Company RI",
+        "phone": "401-270-2900",
+        "address": "Providence, RI",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Providence",
+        "phone": "401-228-1063",
+        "address": "Providence, RI",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Priority Plumbing HH",
+        "phone": "(401) 555-0101",
+        "address": "Providence, RI",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Providence Emergency Plumbers",
+        "phone": "(401) 555-0102",
+        "address": "Providence, RI",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

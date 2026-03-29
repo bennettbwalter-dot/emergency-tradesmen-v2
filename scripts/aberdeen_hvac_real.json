@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Heat Connection",
+        "phone": "01224 571117",
+        "address": "5-19 Holland Street, Aberdeen AB25 3UJ",
+        "website": "https://heatconnection.co.uk/"
+    },
+    {
+        "name": "R&D Services",
+        "phone": "01224 211749",
+        "address": "567 Holburn Street, Aberdeen, AB10 7LH",
+        "website": "https://randdservices.co.uk/"
+    },
+    {
+        "name": "Eco HeatWave",
+        "phone": "07300 040096",
+        "address": "Aberdeen",
+        "website": "https://ecoheatwave.uk/"
+    },
+    {
+        "name": "PlumberHeat Limited",
+        "phone": "01224 467757",
+        "address": "57 Wellington Street, Aberdeen AB11 5BX",
+        "website": "https://randdservices.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01224 609 549",
+        "address": "Aberdeen",
+        "website": "https://able-group.co.uk/"
+    }
+]

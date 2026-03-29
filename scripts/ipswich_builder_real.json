@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Clarkes 24/7 Building Ipswich",
+        "phone": "02072473650",
+        "address": "IP7 6PA, Ipswich",
+        "website": "https://fmb.org.uk/"
+    },
+    {
+        "name": "ROSE Builders Ipswich",
+        "phone": "02072473650",
+        "address": "Ipswich",
+        "website": "https://rosebuilders.co.uk/"
+    },
+    {
+        "name": "MOS Building Services Ipswich",
+        "phone": "07960503830",
+        "address": "32 Surbiton Road, Ipswich, IP1 4AX",
+        "website": "https://mospbservices.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Ipswich",
+        "phone": "01473 851 087",
+        "address": "Ipswich",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "Ipswich Emergency Property Repairs",
+        "phone": "07960503830",
+        "address": "Ipswich",
+        "website": "https://checkatrade.com/"
+    }
+]

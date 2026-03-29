@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Millers Superior Electric LLC",
+        "phone": "(918) 933-4006",
+        "address": "Broken Arrow, OK",
+        "website": "https://millerssuperiorelectric.com"
+    },
+    {
+        "name": "LEE Electrical",
+        "phone": "(918) 300-0404",
+        "address": "Broken Arrow, OK",
+        "website": "https://leeworksok.com"
+    },
+    {
+        "name": "Mister Sparky of Tulsa",
+        "phone": "(918) 205-6448",
+        "address": "Broken Arrow, OK",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Tradesmen Electric",
+        "phone": "(918) 279-6215",
+        "address": "Broken Arrow, OK",
+        "website": "https://tradesmenelectricok.com"
+    }
+]

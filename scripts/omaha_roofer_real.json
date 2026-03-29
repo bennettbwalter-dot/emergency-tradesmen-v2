@@ -1,0 +1,32 @@
+[
+    {
+        "name": "TDH Contracting",
+        "phone": "(402) 539-5950",
+        "address": "Waterloo, NE 68069",
+        "website": "https://tdhcontracting.com/"
+    },
+    {
+        "name": "Anchor Roofing",
+        "phone": "(402) 616-7615",
+        "address": "19884 L St, Omaha, NE 68135",
+        "website": "https://omahastrustedroofer.com/"
+    },
+    {
+        "name": "Premier Systems Roofing",
+        "phone": "(402) 397-5540",
+        "address": "Omaha, NE",
+        "website": "https://premiersystemsroofing.com/"
+    },
+    {
+        "name": "Pinnacle Roofing",
+        "phone": "(402) 518-5456",
+        "address": "Omaha, NE",
+        "website": "https://pinnacleroofs.net/"
+    },
+    {
+        "name": "Mighty Dog Roofing",
+        "phone": "(402) 922-7449",
+        "address": "Omaha, NE",
+        "website": "https://mightydogroofing.com/"
+    }
+]

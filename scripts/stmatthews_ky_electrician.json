@@ -1,0 +1,26 @@
+[
+    {
+        "name": "St Matthews Electric",
+        "phone": "(502) 653-2784",
+        "address": "St. Matthews, KY",
+        "website": "https://stmatthewselectric.com"
+    },
+    {
+        "name": "Laswell Electric",
+        "phone": "(502) 231-6326",
+        "address": "St. Matthews, KY",
+        "website": "https://lecoinc.com"
+    },
+    {
+        "name": "Mister Sparky Louisville",
+        "phone": "(888) 826-0091",
+        "address": "St. Matthews, KY",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Mr Electric of Louisville",
+        "phone": "(844) 866-1367",
+        "address": "St. Matthews, KY",
+        "website": "https://mrelectric.com"
+    }
+]

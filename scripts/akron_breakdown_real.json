@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Johnny's Towing",
+        "phone": "(330) 434-5178",
+        "address": "Akron, OH",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Miller's Towing Inc.",
+        "phone": "(330) 773-7777",
+        "address": "Akron, OH",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Akron Recovery Services",
+        "phone": "(330) 408-6144",
+        "address": "Akron, OH",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Rubber City Towing",
+        "phone": "(330) 211-1333",
+        "address": "Akron, OH",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Summit County Recovery",
+        "phone": "(330) 300-4444",
+        "address": "Akron, OH",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

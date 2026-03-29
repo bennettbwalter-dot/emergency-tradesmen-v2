@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Sal's Heating, Cooling, Plumbing and Sewer",
+        "phone": "(440) 582-4748",
+        "address": "Cleveland, OH",
+        "rating": 4.7,
+        "review_count": 5002
+    },
+    {
+        "name": "Heart of Ohio HVAC",
+        "phone": "(330) 764-1011",
+        "address": "Cleveland, OH",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Anderson HVAC + Plumbing + Electrical",
+        "phone": "(216) 238-2321",
+        "address": "Cleveland, OH",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "K & K Heating & Cooling",
+        "phone": "(216) 441-2280",
+        "address": "Cleveland, OH",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "Mitchell's One Hour Heating & AC",
+        "phone": "(216) 662-7900",
+        "address": "Cleveland, OH",
+        "rating": 4.6,
+        "review_count": 950
+    }
+]

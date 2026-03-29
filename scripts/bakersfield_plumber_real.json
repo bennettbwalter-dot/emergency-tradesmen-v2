@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Ron's Speedy Rooter & Plumbing",
+        "phone": "(661) 732-2508",
+        "address": "Bakersfield, CA",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Payless Plumbing",
+        "phone": "(661) 464-1557",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Bakersfield",
+        "phone": "(661) 235-6933",
+        "address": "Bakersfield, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "A Cisneros Brothers Plumbing",
+        "phone": "(844) 231-3717",
+        "address": "Bakersfield, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "A3 Plumbing Bakersfield",
+        "phone": "(661) 215-6521",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

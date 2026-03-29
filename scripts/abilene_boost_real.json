@@ -1,0 +1,130 @@
+[
+    {
+        "name": "247 Plumbing Pros Abilene",
+        "phone": "(877) 959-6069",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Midway Plumbing",
+        "phone": "(325) 692-2775",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Black Plumbing",
+        "phone": "(325) 675-8391",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Mega Star Plumbing",
+        "phone": "(325) 704-4580",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "All Star Plumbing",
+        "phone": "(325) 665-3251",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Abilene Emergency Plumbing",
+        "phone": "(833) 780-0400",
+        "address": "Abilene, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Hooked Up Electric",
+        "phone": "325-442-5594",
+        "address": "Abilene, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Donco Electric Abilene",
+        "phone": "(855) 740-3232",
+        "address": "Abilene, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Abilene Electricians",
+        "phone": "(325) 238-7622",
+        "address": "Abilene, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Lone Star Electric",
+        "phone": "325-677-0186",
+        "address": "Abilene, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Victory Electrical",
+        "phone": "(325) 268-0494",
+        "address": "Abilene, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Locked Out LLC",
+        "phone": "(325) 280-0252",
+        "address": "Abilene, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Garbo's Locksmith Service",
+        "phone": "(325) 676-5680",
+        "address": "Abilene, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 380
+    },
+    {
+        "name": "Pop-A-Lock Abilene",
+        "phone": "(325) 672-2826",
+        "address": "Abilene, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Brothers Locksmith Abilene",
+        "phone": "(888) 947-5585",
+        "address": "Abilene, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Abilene Locksmith",
+        "phone": "(325) 379-8385",
+        "address": "Abilene, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

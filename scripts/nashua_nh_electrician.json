@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Johnson's Electric Supply",
+        "phone": "(603) 882-9757",
+        "address": "Nashua, NH",
+        "website": "https://johnsonselectricnh.com"
+    },
+    {
+        "name": "All Phase Electric LLC",
+        "phone": "(603) 465-2282",
+        "address": "Nashua, NH",
+        "website": "https://allphaseelectricnh.com"
+    },
+    {
+        "name": "Loren Morse Electrical Service",
+        "phone": "(603) 801-5864",
+        "address": "Nashua, NH",
+        "website": "https://lorenmorseelectricalservice.com"
+    }
+]

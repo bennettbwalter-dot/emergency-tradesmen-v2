@@ -1,0 +1,37 @@
+[
+    {
+        "name": "The Bosworth Company",
+        "phone": "(432) 570-5233",
+        "address": "Midland, TX",
+        "rating": 5.0,
+        "review_count": 3200
+    },
+    {
+        "name": "Billy Black HVAC",
+        "phone": "(432) 312-6337",
+        "address": "Midland, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Redhawk Heating & Air Conditioning",
+        "phone": "(432) 237-0168",
+        "address": "Midland, TX",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "C K's Heating & Cooling",
+        "phone": "(432) 758-3012",
+        "address": "Midland, TX",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "First Choice Heating & Air",
+        "phone": "(432) 694-1621",
+        "address": "Midland, TX",
+        "rating": 4.8,
+        "review_count": 450
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rainaldi Home Services",
+        "phone": "(407) 282-2900",
+        "address": "Orlando, FL",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Emerald Plumbing Orlando",
+        "phone": "(407) 898-3538",
+        "address": "Orlando, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Modern Plumbing Industries",
+        "phone": "407-327-6000",
+        "address": "Orlando, FL",
+        "rating": 1.0,
+        "review_count": 320
+    },
+    {
+        "name": "Ace Solves It All Orlando",
+        "phone": "(407) 499-8006",
+        "address": "Orlando, FL",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "Shamrock Plumbing and Drain",
+        "phone": "(407) 490-1230",
+        "address": "Orlando, FL",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

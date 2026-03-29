@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Cuyahoga Falls, OH",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "J&J Plumbing, Heating & Cooling",
+        "phone": "330-678-1400",
+        "address": "Cuyahoga Falls, OH",
+        "website": "https://jandjplumbing.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Cuyahoga Falls, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Clover Electric",
+        "phone": "440-424-4640",
+        "address": "Cuyahoga Falls, OH",
+        "website": "https://cloverelectric.com"
+    }
+]

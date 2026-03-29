@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Jackson Water Heater",
+        "phone": "(601) 488-2072",
+        "address": "Jackson, MS",
+        "website": "https://jacksonwaterheaters.com"
+    },
+    {
+        "name": "Skeen Plumbing & Gas",
+        "phone": "(601) 925-9582",
+        "address": "Jackson, MS",
+        "website": "https://skeenplumbinggas.com"
+    },
+    {
+        "name": "DrainGo Plumbing",
+        "phone": "(601) 899-0000",
+        "address": "Jackson, MS",
+        "website": "https://draingoplumbing.com"
+    },
+    {
+        "name": "Davis Refrigeration & Electrical, Inc.",
+        "phone": "(601) 956-8187",
+        "address": "Jackson, MS",
+        "website": "https://davisrefrigerationandelectrical.com"
+    }
+]

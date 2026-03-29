@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Firefighter Roofing",
+        "phone": "(817) 750-0911",
+        "address": "5332 Davis Blvd. North Richland Hills, TX 76180",
+        "website": "https://firefighterroofing.com/"
+    },
+    {
+        "name": "Acme Roof Systems",
+        "phone": "(817) 281-1150",
+        "address": "6600 N. Tarrant Pkwy #104, North Richland Hills, TX 76182",
+        "website": "https://acmeroofsystems.com/"
+    },
+    {
+        "name": "Johnny Walker Roofing & Construction",
+        "phone": "(940) 412-8994",
+        "address": "North Richland Hills, TX",
+        "website": "https://jwrandc.com/"
+    },
+    {
+        "name": "North Richland Hills Roof Pros",
+        "phone": "(817) 241-8106",
+        "address": "North Richland Hills, TX",
+        "website": "https://northrichlandhillsroofpros.com/"
+    },
+    {
+        "name": "Texas Direct Roofing & Construction",
+        "phone": "(817) 775-3540",
+        "address": "North Richland Hills, TX",
+        "website": "https://txdroofing.com/"
+    }
+]

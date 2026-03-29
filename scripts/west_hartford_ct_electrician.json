@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "West Hartford, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "Buck Electric",
+        "phone": "(860) 664-8484",
+        "address": "West Hartford, CT",
+        "website": "https://buckelectricct.com"
+    },
+    {
+        "name": "West Hartford Electric",
+        "phone": "(860) 231-1555",
+        "address": "West Hartford, CT",
+        "website": "https://westhartfordelectric.com"
+    },
+    {
+        "name": "J.S. Electrical LLC",
+        "phone": "(860) 214-6178",
+        "address": "West Hartford, CT",
+        "website": "https://jselectrical-llc.com"
+    }
+]

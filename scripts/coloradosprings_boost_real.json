@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Big Cat Plumbing, Heating & Cooling",
+        "phone": "(719) 784-7224",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "R Buck Heating, Cooling, Plumbing & Electrical",
+        "phone": "(719) 544-6663",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "B&L Plumbing and Heating",
+        "phone": "719-638-7341",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Smith Plumbing, Heating, Cooling & Electrical",
+        "phone": "(719) 408-3188",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Awesome Home Services",
+        "phone": "(719) 350-3917",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Roto-Rooter Colorado Springs",
+        "phone": "719-481-3898",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 920
+    },
+    {
+        "name": "Team Plumbing",
+        "phone": "(719) 226-0711",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 180
+    },
+    {
+        "name": "Mr. Rooter Plumbing Colorado Springs",
+        "phone": "(719) 602-2280",
+        "address": "Colorado Springs, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "The Electric Way",
+        "phone": "719-231-7249",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Trusted Electric LLC",
+        "phone": "(719) 633-2682",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "One Source Home Service",
+        "phone": "(719) 203-9386",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "Mister Sparky of Colorado Springs",
+        "phone": "(719) 301-3086",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Swartz Electric",
+        "phone": "719-457-2218",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 180
+    },
+    {
+        "name": "Colorado Springs Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "DR Electric",
+        "phone": "(719) 232-3047",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "The Speedy Electricians",
+        "phone": "(719) 306-0500",
+        "address": "Colorado Springs, CO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Henley's Key Service Inc.",
+        "phone": "719-632-6282",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Colorado Springs Secure Locksmith",
+        "phone": "719-476-0099",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Colorado Springs Emergency Locksmith",
+        "phone": "719-581-3020",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Snowkey Locksmith Colorado Springs",
+        "phone": "719-396-1774",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 120
+    },
+    {
+        "name": "Locksmith Colorado Springs",
+        "phone": "719-738-8029",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Mile High Locksmith Colorado Springs",
+        "phone": "719-299-5995",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Lock Key Shop Colorado Springs",
+        "phone": "719-992-3196",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Colorado Springs Lock And Safe",
+        "phone": "719-208-3260",
+        "address": "Colorado Springs, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    }
+]

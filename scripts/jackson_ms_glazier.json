@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Jackson MS",
+        "phone": "(601) 965-0785",
+        "address": "Jackson, MS",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "GCE Glass Company LLC",
+        "phone": "(601) 336-3997",
+        "address": "Jackson, MS",
+        "website": "https://gceglasscompany.com"
+    },
+    {
+        "name": "Quality Glass Inc.",
+        "phone": "(601) 932-3406",
+        "address": "Pearl, MS",
+        "website": "https://qualityglassms.com"
+    },
+    {
+        "name": "Metro Glass LLC",
+        "phone": "(601) 706-9632",
+        "address": "Jackson, MS",
+        "website": "https://metroglass-llc.com"
+    }
+]

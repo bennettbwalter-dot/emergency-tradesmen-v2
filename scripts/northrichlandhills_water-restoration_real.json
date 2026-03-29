@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Texas Water Doctor",
+        "phone": "(469) 215-7860",
+        "address": "North Richland Hills, TX",
+        "website": "https://texaswaterdoctor.com/"
+    },
+    {
+        "name": "ServiceMaster TEAM",
+        "phone": "(817) 790-9101",
+        "address": "North Richland Hills, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Dalworth Restoration",
+        "phone": "(817) 203-2944",
+        "address": "North Richland Hills, TX",
+        "website": "https://dalworthrestoration.com/"
+    },
+    {
+        "name": "United Water Restoration Group",
+        "phone": "(817) 489-9500",
+        "address": "North Richland Hills, TX",
+        "website": "https://unitedwaterrestoration.com/"
+    },
+    {
+        "name": "JDR Restoration & Remodeling",
+        "phone": "(972) 584-7961",
+        "address": "North Richland Hills, TX",
+        "website": "https://jdrrestoration.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Accurate Temp Hvac & Maintenance",
+        "phone": "(901) 239-8172",
+        "address": "Memphis, TN",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Aire Serv of Memphis",
+        "phone": "(901) 255-6677",
+        "address": "Memphis, TN",
+        "rating": 4.9,
+        "review_count": 2188
+    },
+    {
+        "name": "Best Care Home Services",
+        "phone": "(901) 624-1401",
+        "address": "Memphis, TN",
+        "rating": 4.7,
+        "review_count": 1900
+    },
+    {
+        "name": "Choate's Air Conditioning, Heating & Plumbing",
+        "phone": "(901) 755-4797",
+        "address": "Memphis, TN",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Automatic Air Conditioning, Heating & Plumbing",
+        "phone": "(901) 363-4636",
+        "address": "Memphis, TN",
+        "rating": 4.6,
+        "review_count": 850
+    }
+]

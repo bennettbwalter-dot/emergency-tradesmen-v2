@@ -1,0 +1,37 @@
+[
+    {
+        "name": "One Source Home Service",
+        "phone": "(719) 974-4365",
+        "address": "Colorado Springs, CO",
+        "rating": 4.8,
+        "review_count": 3200
+    },
+    {
+        "name": "ICE Heating and Cooling",
+        "phone": "(719) 433-9358",
+        "address": "Colorado Springs, CO",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "B&L Plumbing and Heating",
+        "phone": "(719) 638-7341",
+        "address": "Colorado Springs, CO",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Airstrol Heating and Cooling",
+        "phone": "(719) 748-7761",
+        "address": "Colorado Springs, CO",
+        "rating": 5.0,
+        "review_count": 110
+    },
+    {
+        "name": "Absolute Comfort",
+        "phone": "(719) 752-0903",
+        "address": "Colorado Springs, CO",
+        "rating": 5.0,
+        "review_count": 95
+    }
+]

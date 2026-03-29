@@ -1,0 +1,26 @@
+[
+    {
+        "name": "NJ Roofing",
+        "phone": "(862) 307-7001",
+        "address": "Newark, NJ",
+        "website": null
+    },
+    {
+        "name": "Lightning Construction",
+        "phone": "(973) 558-0647",
+        "address": "Newark, NJ",
+        "website": "https://lightningconstructionnj.com"
+    },
+    {
+        "name": "H. Recinos Roofing",
+        "phone": "(973) 230-7924",
+        "address": "Newark, NJ",
+        "website": "https://recinosroofingnj.com"
+    },
+    {
+        "name": "Robison Roofing Services",
+        "phone": "(610) 754-1202",
+        "address": "Newark, NJ area",
+        "website": "https://rrs-inc.com"
+    }
+]

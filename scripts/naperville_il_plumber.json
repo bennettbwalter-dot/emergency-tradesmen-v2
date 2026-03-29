@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Naperville",
+        "phone": "(630) 759-4272",
+        "address": "Naperville, IL",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Jim Wagner Plumbing Inc",
+        "phone": "(630) 577-9241",
+        "address": "Naperville, IL",
+        "website": "https://jimwagnerplumbing.com"
+    },
+    {
+        "name": "Precision Today",
+        "phone": "(630) 425-8995",
+        "address": "Naperville, IL",
+        "website": "https://precisiontoday.com"
+    },
+    {
+        "name": "Bee Quick Plumbing and Sewer",
+        "phone": "(630) 923-1942",
+        "address": "Naperville, IL",
+        "website": "https://beequickplumbingsewersinc.com"
+    }
+]

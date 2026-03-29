@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Randy's Electric",
+        "phone": "(612) 470-0914",
+        "address": "Oakdale, MN",
+        "website": "https://randyselectric.com"
+    },
+    {
+        "name": "Palm Electric, Inc.",
+        "phone": "(651) 464-7256",
+        "address": "Oakdale, MN",
+        "website": "https://palmelectricmn.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Oakdale, MN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Go Electric",
+        "phone": "(612) 345-6789",
+        "address": "Oakdale, MN",
+        "website": "https://www.angi.com"
+    }
+]

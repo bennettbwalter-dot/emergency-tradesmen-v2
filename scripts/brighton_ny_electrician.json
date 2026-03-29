@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Granese Electric",
+        "phone": "(855) 506-4858",
+        "address": "Brighton, NY",
+        "website": "https://graneseelectric.com"
+    },
+    {
+        "name": "Lon Lockwood Electric",
+        "phone": "(585) 766-4702",
+        "address": "Brighton, NY",
+        "website": "https://lonlockwoodelectric.com"
+    },
+    {
+        "name": "Nichols Electric and Plumbing",
+        "phone": "(585) 449-9839",
+        "address": "Brighton, NY",
+        "website": "https://nicholselectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Brighton, NY",
+        "website": "https://oconnorselectrical.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Service Champions",
+        "phone": "(877) 624-0780",
+        "address": "Oakland, CA",
+        "rating": 4.8,
+        "review_count": 5500
+    },
+    {
+        "name": "Oakland Air Conditioning & Heating Pro",
+        "phone": "(510) 974-3292",
+        "address": "Oakland, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Clean Air HVAC",
+        "phone": "(510) 662-7233",
+        "address": "Oakland, CA",
+        "rating": 4.6,
+        "review_count": 150
+    },
+    {
+        "name": "Hometown Heating & Air Conditioning",
+        "phone": "(925) 303-4636",
+        "address": "Oakland, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Superior Mechanical",
+        "phone": "(925) 456-3200",
+        "address": "Oakland, CA",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

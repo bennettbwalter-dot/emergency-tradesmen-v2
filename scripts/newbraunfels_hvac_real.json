@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Carnes & Sons",
+        "phone": "(210) 600-5091",
+        "address": "New Braunfels, TX",
+        "rating": 4.9,
+        "review_count": 79
+    },
+    {
+        "name": "Ductman Air Conditioning & Heating",
+        "phone": "(830) 261-4178",
+        "address": "New Braunfels, TX",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Roadrunner Plumbing & Air",
+        "phone": "(210) 763-2721",
+        "address": "New Braunfels, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Cowboys AC",
+        "phone": "(210) 495-7771",
+        "address": "New Braunfels, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "New Braunfels Air Conditioning",
+        "phone": "(830) 629-3399",
+        "address": "New Braunfels, TX",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Emergency Glass Repair DC",
+        "phone": "(202) 921-7021",
+        "address": "Washington, DC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "District Capitol Glass LLC",
+        "phone": "(571) 344-4416",
+        "address": "Washington, DC",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "DC Emergency Glass Repair",
+        "phone": "(202) 971-9610",
+        "address": "Washington, DC",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Liberty Glass and Doors",
+        "phone": "(202) 550-1101",
+        "address": "Washington, DC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Washington DC Glass Pro",
+        "phone": "+1 (202) 621-0304",
+        "address": "Washington, DC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

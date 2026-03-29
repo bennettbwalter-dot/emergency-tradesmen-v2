@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Atlantis Restoration Services",
+        "phone": "(562) 357-2440",
+        "address": "Long Beach, CA",
+        "website": "https://atlantisrestorationco.com/"
+    },
+    {
+        "name": "SERVPRO of Southeast Long Beach",
+        "phone": "(562) 491-5339",
+        "address": "Long Beach, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "PuroClean of Long Beach",
+        "phone": "(562) 549-5505",
+        "address": "Long Beach, CA",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "ServiceMaster Fire and Water Restoration",
+        "phone": "(626) 243-2814",
+        "address": "Long Beach, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "BCS Water Restoration",
+        "phone": "(877) 711-7004",
+        "address": "Long Beach, CA",
+        "website": "https://bcswaterrestoration.com/"
+    }
+]

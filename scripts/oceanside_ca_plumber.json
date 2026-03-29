@@ -1,0 +1,26 @@
+[
+    {
+        "name": "American Plumbing Heating and Air Conditioning",
+        "phone": "(760) 332-0284",
+        "address": "Oceanside, CA",
+        "website": "https://americanplumbinghvac.com"
+    },
+    {
+        "name": "Oceanside Plumber",
+        "phone": "(760) 280-9541",
+        "address": "Oceanside, CA",
+        "website": "https://osplumber.com"
+    },
+    {
+        "name": "Oceanside Plumbing",
+        "phone": "(717) 842-9890",
+        "address": "Oceanside, CA",
+        "website": "https://oceansideplumbing.net"
+    },
+    {
+        "name": "Calis Choice",
+        "phone": "(760) 259-2456",
+        "address": "Oceanside, CA",
+        "website": "https://calischoice.com"
+    }
+]

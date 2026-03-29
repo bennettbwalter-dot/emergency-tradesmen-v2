@@ -1,0 +1,387 @@
+[
+    {
+        "business_name": "24 hour Fast Plumbing Services",
+        "trade": "Plumber",
+        "phone": "01524 959336",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "24 Hour Electrician Lancaster",
+        "trade": "Electrician",
+        "phone": "01524 745139",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Keys4U Locksmiths Lancaster",
+        "trade": "Locksmith",
+        "phone": "033 0088 4662",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Gasline Plumbing & Heating Limited",
+        "trade": "Gas Engineer",
+        "phone": "01524 771449",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Drain Unblocking Lancaster",
+        "trade": "Drain Specialist",
+        "phone": "01524 90 70 57",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "SouthLakes Windows Ltd",
+        "trade": "Glazier",
+        "phone": "01524 771399",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Lancashire Roofers",
+        "trade": "Roofer",
+        "phone": "015242 20377",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Robert Ozols Limited",
+        "trade": "Builder",
+        "phone": "01524 853 388",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "M6 Recovery Services",
+        "trade": "Breakdown Recovery",
+        "phone": "01524 487 203",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Pricewise Air Conditioning",
+        "trade": "HVAC",
+        "phone": "01524 843 034",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Emergency Clean UK",
+        "trade": "Water Restoration",
+        "phone": "0333 772 2130",
+        "city": "Lancaster",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Durham Emergency Plumbing",
+        "trade": "Plumber",
+        "phone": "0191 3036 231",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Durham Electrics & Fire Ltd",
+        "trade": "Electrician",
+        "phone": "0191 301 7233",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "LockFit Locksmiths Durham",
+        "trade": "Locksmith",
+        "phone": "0191 603 1499",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Durham Gas Heating and Plumbing",
+        "trade": "Gas Engineer",
+        "phone": "0191 3722414",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Drainage Durham",
+        "trade": "Drain Specialist",
+        "phone": "0191 369 2073",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "J.C Glazing",
+        "trade": "Glazier",
+        "phone": "01207 520224",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Proper Job Roofing",
+        "trade": "Roofer",
+        "phone": "01913 017666",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "ADH Building Services",
+        "trade": "Builder",
+        "phone": "0191 377 3294",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Milburns Auto Repairs Ltd",
+        "trade": "Breakdown Recovery",
+        "phone": "0191 378 1115",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Durham Air Conditioning Ltd",
+        "trade": "HVAC",
+        "phone": "0191 378 4363",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Emergency Clean UK",
+        "trade": "Water Restoration",
+        "phone": "0333 772 2130",
+        "city": "Durham",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "No1 PHD",
+        "trade": "Plumber",
+        "phone": "01722 398284",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Bennett & Dean (Salisbury) Ltd",
+        "trade": "Electrician",
+        "phone": "01722 413303",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "LockFit Locksmiths Salisbury",
+        "trade": "Locksmith",
+        "phone": "01722 632 003",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "S. C. Plumbing & Heating",
+        "trade": "Gas Engineer",
+        "phone": "01722 320963",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Salisbury Drains",
+        "trade": "Drain Specialist",
+        "phone": "0172 223 9568",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Salisbury Glass Centre Ltd",
+        "trade": "Glazier",
+        "phone": "01722 328985",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Chris Snell Roofing Specialist Ltd",
+        "trade": "Roofer",
+        "phone": "01722 324144",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Regency Builders of Salisbury Ltd",
+        "trade": "Builder",
+        "phone": "01722 332691",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Brunel Motors",
+        "trade": "Breakdown Recovery",
+        "phone": "01722 337 822",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "New-Air (Southern) Ltd",
+        "trade": "HVAC",
+        "phone": "01722 414656",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Your Group",
+        "trade": "Water Restoration",
+        "phone": "01722 622251",
+        "city": "Salisbury",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Emergency Plumbing Winchester",
+        "trade": "Plumber",
+        "phone": "01962 798564",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Able Group",
+        "trade": "Electrician",
+        "phone": "01962 438 999",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "LockFit Locksmiths Winchester",
+        "trade": "Locksmith",
+        "phone": "01962 217024",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Gasworks",
+        "trade": "Gas Engineer",
+        "phone": "01962 877 735",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Drain Detectives",
+        "trade": "Drain Specialist",
+        "phone": "01962 924 365",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Glaze-fix Windows & Doors Ltd",
+        "trade": "Glazier",
+        "phone": "01962 707 191",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Winchester Guttering & Roofing Services",
+        "trade": "Roofer",
+        "phone": "01962 706123",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "DJB Construction South Limited",
+        "trade": "Builder",
+        "phone": "01962 843377",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Winchester Recovery",
+        "trade": "Breakdown Recovery",
+        "phone": "01962 453341",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Topaz Refrigeration & Air Conditioning Ltd",
+        "trade": "HVAC",
+        "phone": "01962 410232",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "ADI Pro Leak Ltd",
+        "trade": "Water Restoration",
+        "phone": "01962 706897",
+        "city": "Winchester",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Waterworx Plumbing & Heating Services",
+        "trade": "Plumber",
+        "phone": "01638 597975",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "D E B Electrical Ltd",
+        "trade": "Electrician",
+        "phone": "01353 668811",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Bargate Master Locksmith Ltd",
+        "trade": "Locksmith",
+        "phone": "01353 863534",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Ely Plumbing and Heating",
+        "trade": "Gas Engineer",
+        "phone": "01353 654 145",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Mitchell & Mayle Ltd",
+        "trade": "Drain Specialist",
+        "phone": "01353 687984",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "N & C Glass Limited",
+        "trade": "Glazier",
+        "phone": "01353 667964",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Ely Roofing Company",
+        "trade": "Roofer",
+        "phone": "01353 861590",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "Paul Barrow Builders Ltd",
+        "trade": "Builder",
+        "phone": "01353 699197",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "City of Ely Motors",
+        "trade": "Breakdown Recovery",
+        "phone": "01353 669035",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "David Lowe Plumbing and Heating Ltd",
+        "trade": "HVAC",
+        "phone": "01353 741414",
+        "city": "Ely",
+        "source": "manual_search"
+    },
+    {
+        "business_name": "English Building & Restoration",
+        "trade": "Water Restoration",
+        "phone": "01353 809711",
+        "city": "Ely",
+        "source": "manual_search"
+    }
+]

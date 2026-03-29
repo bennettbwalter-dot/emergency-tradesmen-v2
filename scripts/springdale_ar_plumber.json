@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Springdale Plumbing Services",
+        "phone": "(479) 334-0987",
+        "address": "Springdale, AR",
+        "website": "https://plumbingspringdalear.com"
+    },
+    {
+        "name": "Roto-Rooter Springdale",
+        "phone": "(479) 751-8442",
+        "address": "Springdale, AR",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Reed's Plumbing Springdale",
+        "phone": "(833) 723-4177",
+        "address": "Springdale, AR",
+        "website": "https://emergencyplumbings.com"
+    },
+    {
+        "name": "Ray Lusk Plumbing Springdale",
+        "phone": "(479) 306-7777",
+        "address": "Springdale, AR",
+        "website": "https://rayluskplumbing.com"
+    }
+]

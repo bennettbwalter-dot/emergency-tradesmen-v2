@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Kansas City Towing Company",
+        "phone": "(816) 656-2551",
+        "address": "Kansas City, MO",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Santa Fe Tow Service",
+        "phone": "(913) 894-5201",
+        "address": "Kansas City, MO",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "KC Roadside",
+        "phone": "(816) 300-4444",
+        "address": "Kansas City, MO",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Northland Towing",
+        "phone": "(816) 455-2222",
+        "address": "Kansas City, MO",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "24 HR Towing KC",
+        "phone": "(816) 500-1111",
+        "address": "Kansas City, MO",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "W.F. Smith Heating & Air Conditioning",
+        "phone": "(215) 624-1313",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "GEN3 Electric & HVAC",
+        "phone": "(267) 912-6385",
+        "address": "Philadelphia, PA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Philadelphia Gas & Electric",
+        "phone": "(215) 235-1000",
+        "address": "Philadelphia, PA",
+        "rating": 4.6,
+        "review_count": 3200
+    },
+    {
+        "name": "Unique Indoor Comfort",
+        "phone": "(215) 830-9111",
+        "address": "Philadelphia, PA",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Petersen Heating & Cooling",
+        "phone": "(215) 441-4190",
+        "address": "Philadelphia, PA",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

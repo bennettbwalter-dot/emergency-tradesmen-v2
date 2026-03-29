@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mike's Plumbing, Electrical, & AC",
+        "phone": "(956) 686-6656",
+        "address": "Edinburg, TX",
+        "rating": 4.7,
+        "review_count": 494
+    },
+    {
+        "name": "Cytech Heating & Cooling L.C.",
+        "phone": "(956) 804-5921",
+        "address": "Edinburg, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Atlas Electrical, Air Conditioning, Refrigeration & Plumbing Services, Inc.",
+        "phone": "(956) 586-5491",
+        "address": "Edinburg, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Colair Cooling & Heating",
+        "phone": "(956) 581-5212",
+        "address": "Edinburg, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Millennium A/C",
+        "phone": "(956) 271-4777",
+        "address": "Edinburg, TX",
+        "rating": 5.0,
+        "review_count": 92
+    }
+]

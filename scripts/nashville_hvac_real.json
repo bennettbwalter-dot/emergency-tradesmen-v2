@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Haskins Heating & Cooling",
+        "phone": "(615) 746-6390",
+        "address": "Nashville, TN",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "Frog Heating & Air Conditioning",
+        "phone": "(615) 657-4351",
+        "address": "Nashville, TN",
+        "rating": 4.9,
+        "review_count": 1100
+    },
+    {
+        "name": "Hiller Plumbing, Heating, Cooling & Electrical",
+        "phone": "(615) 292-6110",
+        "address": "Nashville, TN",
+        "rating": 4.7,
+        "review_count": 8200
+    },
+    {
+        "name": "Aire Serv of Nashville",
+        "phone": "(615) 265-6677",
+        "address": "Nashville, TN",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "MJ Frick Co., Inc.",
+        "phone": "(615) 333-0658",
+        "address": "Nashville, TN",
+        "rating": 5.0,
+        "review_count": 16
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Aurora Glass Texas Port Arthur",
+        "phone": "(409) 300-7564",
+        "address": "Port Arthur, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Alamo Glass of Port Arthur Inc",
+        "phone": "(409) 962-0289",
+        "address": "Port Arthur, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Romero's Glass Co Port Arthur",
+        "phone": "(409) 985-5555",
+        "address": "Port Arthur, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Texan Glass Port Arthur",
+        "phone": "(281) 296-6200",
+        "address": "Port Arthur, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Pure Auto Glass Temple",
+        "phone": "(254) 935-3388",
+        "address": "Temple, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Glass Doctor of Bell County",
+        "phone": "(254) 773-4527",
+        "address": "Temple, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Temple Glass & Mirror Inc.",
+        "phone": "(254) 773-3323",
+        "address": "Temple, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Affiliated Auto Glass Temple",
+        "phone": "(254) 742-1556",
+        "address": "Temple, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

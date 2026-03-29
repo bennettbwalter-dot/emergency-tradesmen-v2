@@ -1,0 +1,146 @@
+[
+    {
+        "name": "ABC Home & Commercial Services Bryan",
+        "phone": "(979) 361-0500",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Curry Plumbing, LLC",
+        "phone": "(979) 739-0209",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Action Plumbing Bryan",
+        "phone": "(979) 335-8515",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "PRO Plumbers of Bryan",
+        "phone": "(979) 364-5524",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Rocha Plumbing LLC",
+        "phone": "(979) 279-9548",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Todaro Plumbing Bryan",
+        "phone": "(979) 776-6693",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Craftsman Plumbing",
+        "phone": "1-888-900-9087",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 140
+    },
+    {
+        "name": "Brazos Valley Sewer Drain Service",
+        "phone": "979-774-1291",
+        "address": "Bryan, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Anthony Electrical",
+        "phone": "877-748-8749",
+        "address": "Bryan, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Southern Electrical Services",
+        "phone": "713-660-7344",
+        "address": "Bryan, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Arise Home Electric",
+        "phone": "979-777-1280",
+        "address": "Bryan, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Dailey Company",
+        "phone": "979-243-2568",
+        "address": "Bryan, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Mr. Electric of Bryan",
+        "phone": "(979) 217-2238",
+        "address": "Bryan, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Pop-A-Lock of Bryan-College Station",
+        "phone": "(979) 676-0033",
+        "address": "Bryan, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Minute Key Bryan",
+        "phone": "1-800-539-7571",
+        "address": "Bryan, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "KeyMe Locksmiths Bryan",
+        "phone": "(979) 232-8447",
+        "address": "Bryan, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Texas Premier Locksmith Bryan",
+        "phone": "(979) 314-9258",
+        "address": "Bryan, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Griffin Locksmith",
+        "phone": "(979) 822-2705",
+        "address": "Bryan, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 350
+    }
+]

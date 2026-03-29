@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Country Club Roofing & Construction",
+        "phone": "(214) 901-0988",
+        "address": "705 N Greenville Ave Suite 600-102, Allen, TX 75002",
+        "website": "https://countryclubroofing.com/"
+    },
+    {
+        "name": "Allen Roof Repair Company",
+        "phone": "(469) 213-8460",
+        "address": "Allen, TX",
+        "website": "https://allenroofrepairco.com/"
+    },
+    {
+        "name": "Phoenix Storm Restoration",
+        "phone": "(945) 308-0425",
+        "address": "Allen, TX",
+        "website": "https://www.phoenixstormgroup.com/"
+    },
+    {
+        "name": "Allen Roofing Pros",
+        "phone": "(214) 774-8682",
+        "address": "Allen, TX",
+        "website": "https://allenroofingpros.com/"
+    },
+    {
+        "name": "Pinnacle Roofing & Exteriors",
+        "phone": "(214) 123-4567",
+        "address": "Allen, TX",
+        "website": "https://pinnacle-dfw.com/"
+    }
+]

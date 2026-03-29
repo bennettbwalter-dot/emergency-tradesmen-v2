@@ -1,0 +1,37 @@
+[
+  {
+    "name": "General Heating & Air Conditioning",
+    "phone": "(504) 488-0826",
+    "address": "New Orleans, LA",
+    "rating": 4.8,
+    "review_count": 520
+  },
+  {
+    "name": "HELP Air Conditioning",
+    "phone": "(504) 733-5888",
+    "address": "New Orleans, LA",
+    "rating": 4.7,
+    "review_count": 3200
+  },
+  {
+    "name": "Stuart Services",
+    "phone": "(504) 321-2096",
+    "address": "New Orleans, LA",
+    "rating": 4.8,
+    "review_count": 1500
+  },
+  {
+    "name": "Surgi's Heating & Air Conditioning",
+    "phone": "(504) 899-9600",
+    "address": "New Orleans, LA",
+    "rating": 4.6,
+    "review_count": 850
+  },
+  {
+    "name": "Rashad AC And Heating",
+    "phone": "(504) 345-9257",
+    "address": "New Orleans, LA",
+    "rating": 4.9,
+    "review_count": 120
+  }
+]

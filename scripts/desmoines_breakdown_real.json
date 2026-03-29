@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Gary's Towing Service",
+        "phone": "(515) 808-5069",
+        "address": "Des Moines, IA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roy's Towing Des Moines",
+        "phone": "(515) 225-6088",
+        "address": "Des Moines, IA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Crow Tow",
+        "phone": "(515) 276-9869",
+        "address": "Des Moines, IA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Capitol City Towing & Recovery",
+        "phone": "(515) 266-0110",
+        "address": "Des Moines, IA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Mid-Iowa Towing",
+        "phone": "(515) 211-1333",
+        "address": "Des Moines, IA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

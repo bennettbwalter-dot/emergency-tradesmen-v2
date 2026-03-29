@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Triple-O Heating, Cooling, Electrical & Plumbing",
+        "phone": "(585) 213-2332",
+        "address": "Greece, NY",
+        "website": "https://tripleotoday.com"
+    },
+    {
+        "name": "Douglas Electric",
+        "phone": "(585) 288-3250",
+        "address": "Greece, NY",
+        "website": "https://douglaselectric.us"
+    },
+    {
+        "name": "Nichols Electric and Plumbing",
+        "phone": "(585) 449-9839",
+        "address": "Greece, NY",
+        "website": "https://nicholselectric.com"
+    },
+    {
+        "name": "Hurricane Home Solutions",
+        "phone": "(585) 244-0099",
+        "address": "Greece, NY",
+        "website": "https://hurricanehomesolutions.com"
+    }
+]

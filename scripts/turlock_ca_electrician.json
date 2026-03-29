@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Applied Electrical Services",
+        "phone": "(209) 600-2910",
+        "address": "Turlock, CA",
+        "website": "https://appliedelectricinc.com"
+    },
+    {
+        "name": "Kirkes Electric",
+        "phone": "(209) 634-9301",
+        "address": "Turlock, CA",
+        "website": "https://kirkeselectric.com"
+    },
+    {
+        "name": "Koehn Electric Turlock",
+        "phone": "(209) 564-1038",
+        "address": "Turlock, CA",
+        "website": "https://koehnelectric.com"
+    },
+    {
+        "name": "Frayer Electric Turlock",
+        "phone": "(510) 861-6247",
+        "address": "Turlock, CA",
+        "website": "https://frayerelectricinc.com"
+    }
+]

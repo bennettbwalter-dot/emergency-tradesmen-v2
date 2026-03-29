@@ -1,0 +1,26 @@
+[
+    {
+        "name": "On Call Plumbers",
+        "phone": "(610) 991-7707",
+        "address": "Easton, PA",
+        "website": "https://plumbersineastonpa.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(484) 408-2720",
+        "address": "Easton, PA",
+        "website": "https://www.rotorooter.com/eastonpa/"
+    },
+    {
+        "name": "EcoPro Mechanical",
+        "phone": "(610) 991-7707",
+        "address": "Easton, PA",
+        "website": "https://ecopromechanical.com"
+    },
+    {
+        "name": "Maitz Home Services",
+        "phone": "(610) 264-7159",
+        "address": "Easton, PA",
+        "website": "https://maitzhomeservices.com"
+    }
+]

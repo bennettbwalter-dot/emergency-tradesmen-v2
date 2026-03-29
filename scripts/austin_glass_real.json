@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Ace Discount Glass & Door",
+        "phone": "512-345-3105",
+        "address": "Austin, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "B&B Plate Glass",
+        "phone": "(512) 825-3738",
+        "address": "Austin, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Austin Glass Rehab LLC",
+        "phone": "(512) 293-1076",
+        "address": "Austin, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Alamo Glass",
+        "phone": "(512) 452-5731",
+        "address": "Austin, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Binswanger Glass Austin",
+        "phone": "512-454-7755",
+        "address": "Austin, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

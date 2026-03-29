@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Garcia Towing",
+        "phone": "(979) 822-0663",
+        "address": "Bryan, TX",
+        "website": "https://garciatowingtx.com/"
+    },
+    {
+        "name": "College Station Wrecker Service",
+        "phone": "(979) 314-3496",
+        "address": "Bryan, TX",
+        "website": "https://csbtowingservice.com/"
+    },
+    {
+        "name": "ResQ Rangers Bryan",
+        "phone": "(979) 231-7002",
+        "address": "Bryan, TX",
+        "website": "https://resqrangers.com/"
+    },
+    {
+        "name": "Bumblebee Towing",
+        "phone": "(832) 681-7391",
+        "address": "Bryan, TX",
+        "website": "https://bumblebeetow.com/"
+    }
+]

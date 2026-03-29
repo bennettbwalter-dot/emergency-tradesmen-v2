@@ -1,0 +1,138 @@
+[
+    {
+        "name": "TOP SERVICE REPAIR",
+        "phone": "+1 956-897-6322",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "All Texas Plumbing",
+        "phone": "+1 956-271-0624",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Atlas Electrical & Plumbing",
+        "phone": "(956) 586-5491",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Charlie's Plumbing Service Mission",
+        "phone": "(956) 383-4346",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "All Valley Plumbing & AC Co.",
+        "phone": "(956) 686-6656",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Roto-Rooter Mission",
+        "phone": "956-429-3015",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Colair Inc.",
+        "phone": "956-581-5212",
+        "address": "Mission, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Donco Electric Mission",
+        "phone": "(855) 740-3232",
+        "address": "Mission, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "CHICO Electrical Services",
+        "phone": "(956) 960-9898",
+        "address": "Mission, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Jaime's Electric",
+        "phone": "(956) 739-8521",
+        "address": "Mission, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Daniel's Electric",
+        "phone": "(956) 662-0894",
+        "address": "Mission, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Crawford Electric Supply",
+        "phone": "(956) 519-1422",
+        "address": "Mission, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "KeyMe Locksmiths Mission",
+        "phone": "(956) 253-7749",
+        "address": "Mission, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Premier Locksmith Mission",
+        "phone": "(956) 540-2299",
+        "address": "Mission, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "UAC 24/7 Locksmith",
+        "phone": "(888) 806-2506",
+        "address": "Mission, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Hesd Locksmith",
+        "phone": "(888) 380-0471",
+        "address": "Mission, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Master Texas Locksmiths",
+        "phone": "(855) 470-5625",
+        "address": "Mission, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Atlantic Electric LLC",
+        "phone": "843-460-1200",
+        "address": "North Charleston, SC",
+        "website": "https://atlanticelectric.com"
+    },
+    {
+        "name": "Charleston Electric & Air",
+        "phone": "843-258-8699",
+        "address": "North Charleston, SC",
+        "website": "https://charleston-electric.com"
+    },
+    {
+        "name": "Aptus Home Services",
+        "phone": "843-874-3155",
+        "address": "North Charleston, SC",
+        "website": "https://aptushomeservices.com"
+    },
+    {
+        "name": "Pat Murphy Electric",
+        "phone": "404-577-4191",
+        "address": "North Charleston, SC",
+        "website": "https://patmurphyelectric.com"
+    }
+]

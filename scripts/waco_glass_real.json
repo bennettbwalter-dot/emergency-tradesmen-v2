@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Freddy's Glass",
+        "phone": "(254) 752-1506",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Rocket Glass & Mirror",
+        "phone": "(254) 329-2377",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Waco Glass & Mirror Inc.",
+        "phone": "(254) 754-4651",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Texas Commercial Glazing",
+        "phone": "(512) 312-0826",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Affiliated Auto Glass of Central Texas",
+        "phone": "1-800-962-9886",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Waco Auto Glass",
+        "phone": "(254) 742-4386",
+        "address": "Waco, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 80
+    }
+]

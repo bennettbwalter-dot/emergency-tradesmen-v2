@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Binswanger Glass Raleigh",
+        "phone": "(919) 832-4666",
+        "address": "Raleigh, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Glass Angel's & Mirrors",
+        "phone": "(919) 917-7398",
+        "address": "Raleigh, NC",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Rice's Glass Company",
+        "phone": "(919) 967-9214",
+        "address": "Raleigh, NC",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "Raleigh Auto Glass",
+        "phone": "919-608-7199",
+        "address": "Raleigh, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "NC Auto Glass, LLC",
+        "phone": "919-608-7199",
+        "address": "Raleigh, NC",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

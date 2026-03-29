@@ -1,0 +1,218 @@
+[
+    {
+        "name": "Roto-Rooter Boston",
+        "phone": "617-267-0033",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Boston Standard Company",
+        "phone": "617-362-8890",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Winters Home Services",
+        "phone": "617-221-5899",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "128 Plumbing, Heating, Cooling, & Electric",
+        "phone": "781-670-3261",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 950
+    },
+    {
+        "name": "Cooling Unlimited, Inc.",
+        "phone": "617-926-3023",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Plumbers 911 Boston",
+        "phone": "617-315-6422",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "McMahon Plumbing & Heating",
+        "phone": "617-364-2200",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "I&C Mechanical Inc.",
+        "phone": "617-908-5780",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Affordable Drain Flow",
+        "phone": "617-420-7045",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "A1 Discount Plumber",
+        "phone": "617-768-7975",
+        "address": "Boston, MA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Boston Electrical Services",
+        "phone": "617-286-4335",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "North End Emergency Electrician",
+        "phone": "(617) 410-6004",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "M. Foley Electric",
+        "phone": "857-829-0516",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "O'Connor's Electrical Boston",
+        "phone": "844-484-2612",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "BD Boston Electrical",
+        "phone": "781-264-3290",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Ken Bobko Electric Boston",
+        "phone": "(877) 734-8969",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 140
+    },
+    {
+        "name": "Quick Response Electrical Service LLC",
+        "phone": "508-922-2646",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Green Energy Mechanical Inc.",
+        "phone": "781-236-3421",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 160
+    },
+    {
+        "name": "Integrity Electrical",
+        "phone": "(978) 753-8350",
+        "address": "Boston, MA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Locksmith Boston MA",
+        "phone": "(617) 841-9809",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Boston Emergency Locksmith Services",
+        "phone": "(617) 990-9082",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Boston Locksmith Service",
+        "phone": "(617) 206-2138",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Boston Locksmith Store",
+        "phone": "(617) 206-2136",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Boston Emergency Locksmith",
+        "phone": "(617) 206-2208",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "24 Hour Locksmith Boston",
+        "phone": "(877) 881-5298",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 160
+    },
+    {
+        "name": "New England Locksmith",
+        "phone": "(617) 616-8590",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Locksmith Master Store Boston",
+        "phone": "(617) 294-6211",
+        "address": "Boston, MA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 95
+    }
+]

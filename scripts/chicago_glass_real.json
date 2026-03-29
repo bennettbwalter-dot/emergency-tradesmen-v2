@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Apex Window Werks Chicago",
+        "phone": "(847) 469-9637",
+        "address": "Chicago, IL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Chicago Glass Company of Illinois",
+        "phone": "(708) 800-7120",
+        "address": "Chicago, IL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Express Board Up & Glass Services",
+        "phone": "(312) 967-3353",
+        "address": "Chicago, IL",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

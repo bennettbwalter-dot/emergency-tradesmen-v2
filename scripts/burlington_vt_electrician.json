@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Al's Electric Service",
+        "phone": "(802) 318-1633",
+        "address": "Burlington, VT",
+        "website": "https://alselectricservice.com"
+    },
+    {
+        "name": "Current Electric VT",
+        "phone": "(802) 318-0440",
+        "address": "Burlington, VT",
+        "website": "https://currentelectricvt.com"
+    },
+    {
+        "name": "Cummings Electric",
+        "phone": "(802) 658-1292",
+        "address": "Burlington, VT",
+        "website": "https://cummingselectric.com"
+    },
+    {
+        "name": "New England Electric VT",
+        "phone": "(802) 555-0116",
+        "address": "Burlington, VT",
+        "website": "https://newenglandelectric.com"
+    }
+]

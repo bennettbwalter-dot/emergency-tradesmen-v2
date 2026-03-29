@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Kalkreuth Roofing and Sheet Metal",
+        "phone": "(859) 231-7663",
+        "address": "2131 Capstone Dr, Lexington, KY 40511",
+        "website": "https://krsm.net/"
+    },
+    {
+        "name": "Mighty Dog Roofing",
+        "phone": "(859) 903-7335",
+        "address": "Lexington, KY",
+        "website": "https://mightydogroofing.com/"
+    },
+    {
+        "name": "Aspen Contracting",
+        "phone": "(859) 577-2207",
+        "address": "Lexington, KY",
+        "website": "https://roofsbyaspen.com/"
+    },
+    {
+        "name": "Dynamic Restoration LLC",
+        "phone": "(866) 242-1832",
+        "address": "Lexington, KY",
+        "website": "https://dynamicrestorationky.com/"
+    },
+    {
+        "name": "Isaacs Roofing & Sheet Metal",
+        "phone": "(859) 555-0105",
+        "address": "Lexington, KY",
+        "website": "https://isaacsroofing.com/"
+    }
+]

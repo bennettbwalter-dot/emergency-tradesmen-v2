@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Korte Does It All",
+        "phone": "260-493-2596",
+        "address": "Leo-Cedarville, IN",
+        "website": "https://kortedoesitall.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Leo-Cedarville, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Leo-Cedarville, IN",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Mr. Electric",
+        "phone": "260-489-0000",
+        "address": "Leo-Cedarville, IN",
+        "website": "https://mrelectric.com"
+    }
+]

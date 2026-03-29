@@ -1,0 +1,37 @@
+[
+    {
+        "name": "24 Hr Towing Chula Vista",
+        "phone": "(619) 493-2999",
+        "address": "Chula Vista, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Expedite Towing",
+        "phone": "(619) 673-9626",
+        "address": "Chula Vista, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "A&D Towing",
+        "phone": "(619) 419-6177",
+        "address": "Chula Vista, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Chula Vista Towing",
+        "phone": "(619) 300-4444",
+        "address": "Chula Vista, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "South Bay Recovery",
+        "phone": "(619) 322-2222",
+        "address": "Chula Vista, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

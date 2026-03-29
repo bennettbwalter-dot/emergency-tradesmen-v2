@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Haynes Electric LLC",
+        "phone": "(361) 643-5432",
+        "address": "Portland, TX",
+        "website": "https://hayneselectric.net"
+    },
+    {
+        "name": "McWhorter Electric Inc",
+        "phone": "(361) 777-3180",
+        "address": "Portland, TX",
+        "website": "https://portlandtx.org"
+    },
+    {
+        "name": "Scott Electric Company Portland",
+        "phone": "(361) 884-6326",
+        "address": "Portland, TX",
+        "website": "https://scottelectric.com"
+    },
+    {
+        "name": "Mr Electric of Corpus Christi Portland",
+        "phone": "(361) 360-5581",
+        "address": "Portland, TX",
+        "website": "https://mrelectric.com"
+    }
+]

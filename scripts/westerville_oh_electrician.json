@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Westerville, OH",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Yoder Electric",
+        "phone": "614-206-5401",
+        "address": "Westerville, OH",
+        "website": "https://yoderelectric.com"
+    },
+    {
+        "name": "Wattkins Electric",
+        "phone": "614-800-4252",
+        "address": "Westerville, OH",
+        "website": "https://wattkinselectric.com"
+    },
+    {
+        "name": "Weekley Electric",
+        "phone": "740-366-0095",
+        "address": "Westerville, OH",
+        "website": "https://weekleyelectric.com"
+    }
+]

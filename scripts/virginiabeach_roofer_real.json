@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Domi Roofing",
+        "phone": "(757) 737-9286",
+        "address": "2589 Quality Court Ste 303, Virginia Beach, VA 23454",
+        "website": "https://domiroofing.com/"
+    },
+    {
+        "name": "Square Foot Roofing",
+        "phone": "(757) 472-7637",
+        "address": "413 Virginia Beach Blvd #8, Virginia Beach, VA 23451",
+        "website": "https://squarefootroofing.com/"
+    },
+    {
+        "name": "Reitzel Exteriors",
+        "phone": "(757) 513-7053",
+        "address": "3324 Virginia Beach Blvd #108, Virginia Beach, VA 23452",
+        "website": "https://reitzelexteriors.com/"
+    },
+    {
+        "name": "Aquashield Roofing",
+        "phone": "(757) 553-5191",
+        "address": "4006 Morris Ct, Chesapeake, VA 23323",
+        "website": "https://vbroof.com/"
+    },
+    {
+        "name": "Vesley Roofing",
+        "phone": "(844) 460-8487",
+        "address": "Virginia Beach, VA",
+        "website": "https://veselyroofing.com/"
+    }
+]

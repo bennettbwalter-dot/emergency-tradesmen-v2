@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Nashville",
+        "phone": "(615) 361-6647",
+        "address": "Nashville, TN",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Plumbing Solutions",
+        "phone": "(615) 887-1501",
+        "address": "Nashville, TN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Hiller Plumbing, Heating, Cooling",
+        "phone": "(615) 504-8313",
+        "address": "Nashville, TN",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "615 Plumbing",
+        "phone": "(615) 610-1845",
+        "address": "Nashville, TN",
+        "rating": 4.7,
+        "review_count": 674
+    },
+    {
+        "name": "Doctor Drips",
+        "phone": "(615) 451-2404",
+        "address": "Nashville, TN",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

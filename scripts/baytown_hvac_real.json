@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Ainsworth & Co. Air Conditioning",
+        "phone": "(281) 837-8454",
+        "address": "Baytown, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Cool Comfort Solutions",
+        "phone": "(832) 779-2665",
+        "address": "Baytown, TX",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "ARS / Rescue Rooter",
+        "phone": "(888) 534-2449",
+        "address": "Baytown, TX",
+        "rating": 4.7,
+        "review_count": 5200
+    },
+    {
+        "name": "Baytown Air Conditioning & Heating",
+        "phone": "(281) 422-9538",
+        "address": "Baytown, TX",
+        "rating": 4.6,
+        "review_count": 320
+    },
+    {
+        "name": "Cruz Flow Services LLC",
+        "phone": "(832) 992-1234",
+        "address": "Baytown, TX",
+        "rating": 5.0,
+        "review_count": 92
+    }
+]

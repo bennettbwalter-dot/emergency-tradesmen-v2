@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Leicester Boilers 24/7",
+        "phone": "0116 4422959",
+        "address": "30 Newton Lane, Wigston, Leicester, LE18 3SE",
+        "website": "https://leicesterboilers247.com/"
+    },
+    {
+        "name": "Roy Lee Heating Engineers",
+        "phone": "07842 234403",
+        "address": "49 Biddle Rd, Littlethorpe, Leicester LE19 2HE",
+        "website": "https://royleeplumber.co.uk/"
+    },
+    {
+        "name": "JS Gas & Plumbing Services",
+        "phone": "07866 572201",
+        "address": "Leicester",
+        "website": "https://jsgasandplumbing.co.uk/"
+    },
+    {
+        "name": "HeatAssistUK",
+        "phone": "07877 179918",
+        "address": "3 Lapwing Dr, Leicester LE4 3EW",
+        "website": "https://heatassistuk.com/"
+    },
+    {
+        "name": "East Goscote Plumbers",
+        "phone": "0116 264 5115",
+        "address": "Leicester",
+        "website": "https://egpplumbers.co.uk/"
+    }
+]

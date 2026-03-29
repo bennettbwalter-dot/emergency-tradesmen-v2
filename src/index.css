@@ -1,0 +1,1417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 38 65% 55%;
+    --color-4: 38 70% 35%;
+    --color-5: 90 100% 63%;
+
+    --background: 20 8% 6%;
+    --foreground: 40 25% 92%;
+
+    --card: 20 10% 10%;
+    --card-foreground: 40 25% 92%;
+
+    --popover: 20 10% 10%;
+    --popover-foreground: 40 25% 92%;
+
+    --primary: 20 8% 12%;
+    --primary-foreground: 40 25% 92%;
+
+    --secondary: 20 10% 14%;
+    --secondary-foreground: 40 25% 92%;
+
+    --muted: 20 8% 18%;
+    --muted-foreground: 40 10% 55%;
+
+    --accent: 38 65% 55%;
+    --accent-foreground: 20 8% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 20%;
+    --input: 40 15% 20%;
+    --ring: 38 65% 55%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --success: 142 50% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 65% 55%;
+    --warning-foreground: 20 8% 6%;
+    --urgent: 24 80% 50%;
+    --urgent-foreground: 0 0% 100%;
+    --trust: 38 65% 55%;
+    --trust-light: 38 30% 15%;
+
+    /* Luxury tokens */
+    --gold: 38 65% 55%;
+    --gold-light: 38 50% 70%;
+    --gold-dark: 38 70% 35%;
+
+    --sidebar-background: 20 8% 6%;
+    --sidebar-foreground: 40 25% 92%;
+    --sidebar-primary: 38 65% 55%;
+    --sidebar-primary-foreground: 20 8% 6%;
+    --sidebar-accent: 20 10% 14%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 40 15% 20%;
+    --sidebar-ring: 38 65% 55%;
+
+    /* Default Microphone Button Colors (Detail Yellow - Dark Mode) */
+    --mic-gradient-start: 60 100% 70%;
+    --mic-gradient-mid-1: 60 100% 60%;
+    --mic-gradient-mid-2: 60 100% 50%;
+    --mic-gradient-end: 60 100% 40%;
+    --mic-gradient-dark: 60 100% 25%;
+    --mic-pulse: 60 100% 60%;
+
+    /* Default Tradesmen Button Colors (Yellow - Dark Mode) */
+    --trade-gradient-1: 55 100% 90%;
+    --trade-gradient-2: 50 100% 70%;
+    --trade-gradient-3: 45 100% 55%;
+    --trade-gradient-4: 45 100% 40%;
+    --trade-gradient-5: 45 100% 30%;
+    --trade-main: 45 100% 50%;
+    --trade-pulse: 45 100% 50%;
+
+    /* Default Location Button Colors (Gold/Yellow) */
+    --location-gradient-1: 50 100% 90%;
+    --location-gradient-2: 48 100% 70%;
+    --location-gradient-3: 45 100% 55%;
+    --location-gradient-4: 40 100% 40%;
+    --location-gradient-5: 35 100% 30%;
+    --location-main: 45 100% 50%;
+    --location-pulse: 45 100% 50%;
+
+    /* Default "Locate Me" Button Colors (Dark Yellow - Dark Mode) */
+    --locate-me-gradient-1: 45 100% 80%;
+    --locate-me-gradient-2: 45 100% 60%;
+    --locate-me-gradient-3: 42 100% 45%;
+    --locate-me-gradient-4: 40 100% 35%;
+    --locate-me-gradient-5: 38 100% 25%;
+    --locate-me-main: 42 100% 45%;
+    --locate-me-pulse: 42 100% 50%;
+  }
+
+  .light {
+    /* Light mode - bright and clean */
+    --background: 0 0% 98%;
+    --foreground: 20 8% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 8% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 8% 12%;
+
+    --primary: 210 5% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 96%;
+    --secondary-foreground: 20 8% 12%;
+
+    --muted: 210 10% 90%;
+    --muted-foreground: 20 8% 40%;
+
+    --accent: 210 5% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 85%;
+    --input: 210 15% 85%;
+    --ring: 210 5% 40%;
+
+    --success: 142 50% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 65% 50%;
+    --warning-foreground: 0 0% 100%;
+    --urgent: 24 80% 50%;
+    --urgent-foreground: 0 0% 100%;
+    --trust: 210 5% 40%;
+    --trust-light: 210 10% 95%;
+
+    --gold: 38 65% 55%;
+    --gold-light: 38 50% 70%;
+    --gold-dark: 38 70% 35%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 20 8% 12%;
+    --sidebar-primary: 210 5% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 10% 92%;
+    --sidebar-accent-foreground: 20 8% 12%;
+    --sidebar-border: 210 15% 85%;
+    --sidebar-ring: 210 5% 40%;
+
+    --mic-gradient-start: 220 100% 70%;
+    --mic-gradient-mid-1: 215 95% 60%;
+    --mic-gradient-mid-2: 210 90% 45%;
+    --mic-gradient-end: 205 85% 30%;
+    --mic-gradient-dark: 210 100% 25%;
+    --mic-pulse: 210 100% 60%;
+
+    /* Tradesmen Button Colors - Mobile Light Mode (Gold/Yellow-Orange) */
+    --trade-gradient-1: 50 100% 90%; /* Light Yellow */
+    --trade-gradient-2: 48 100% 70%;  /* Bright Gold */
+    --trade-gradient-3: 45 100% 55%;  /* Golden Orange */
+    --trade-gradient-4: 40 100% 40%;  /* Deep Orange */
+    --trade-gradient-5: 35 100% 30%;  /* Dark Orange */
+    --trade-main: 45 100% 50%;
+    --trade-pulse: 45 100% 50%;
+
+    /* Location Button Colors - Mobile Light Mode (Green) */
+    --location-gradient-1: 142 70% 90%;
+    --location-gradient-2: 142 70% 70%;
+    --location-gradient-3: 142 70% 50%;
+    --location-gradient-4: 142 70% 35%;
+    --location-gradient-5: 142 70% 25%;
+    --location-main: 142 70% 45%;
+    --location-pulse: 142 70% 45%;
+
+    /* "Locate Me" Button Colors - Mobile Light Mode (Vibrant Orange) */
+    --locate-me-gradient-1: 35 100% 85%;
+    --locate-me-gradient-2: 30 100% 65%;
+    --locate-me-gradient-3: 25 100% 50%;
+    --locate-me-gradient-4: 20 100% 40%;
+    --locate-me-gradient-5: 15 100% 30%;
+    --locate-me-main: 25 100% 50%;
+    --locate-me-pulse: 25 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 98%;
+
+    --accent: 38 65% 55%;
+    --accent-foreground: 0 0% 0%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 38 65% 55%;
+
+    --success: 142 50% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 65% 55%;
+    --warning-foreground: 0 0% 5%;
+    --urgent: 24 80% 50%;
+    --urgent-foreground: 0 0% 100%;
+    --trust: 38 65% 55%;
+    --trust-light: 0 0% 10%;
+
+    --gold: 38 65% 55%;
+    --gold-light: 38 50% 70%;
+    --gold-dark: 38 70% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* font-family handled by Tailwind 'font-sans' (DM Sans) */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-balance;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-gold-light via-gold to-gold-dark bg-clip-text text-transparent;
+  }
+
+  .tracking-luxury {
+    letter-spacing: 0.25em;
+  }
+
+  .section-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border/40 to-transparent;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .badge-available {
+    @apply inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium border border-gold/30 bg-gold/10 text-gold;
+  }
+
+  .card-luxury {
+    @apply bg-card border border-border/40 backdrop-blur-sm;
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 60px -15px hsl(var(--gold) / 0.3);
+  }
+
+  .glow-gold-dark {
+    box-shadow: 0 0 40px -10px hsl(var(--gold-dark) / 0.4);
+  }
+
+  .border-gradient-gold {
+    border-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark))) 1;
+  }
+
+  .pulse-dot {
+    @apply relative;
+  }
+
+  .pulse-dot::before {
+    content: '';
+    @apply absolute w-2 h-2 bg-gold rounded-full;
+    animation: pulse-ring 1.5s ease-out infinite;
+  }
+
+  .pulse-dot::after {
+    content: '';
+    @apply absolute w-2 h-2 bg-gold rounded-full;
+  }
+
+  /* Premium UX 2026 */
+  .glass-blog-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl transition-all duration-500;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2 scale-[1.02];
+  }
+
+  .gold-border-glow {
+    @apply border border-gold/30;
+    box-shadow: 0 0 15px rgba(215, 192, 138, 0.2);
+  }
+}
+
+/* ==========================================================================
+   THE MASTER ORCHESTRATOR - FUNKY MAGAZINE LAYOUT (2026)
+   ========================================================================== */
+
+/* --- 1. THE OFFSET HEADER --- */
+.funky-offset-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .funky-offset-header {
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-direction: row;
+  }
+}
+
+.header-text-block {
+  flex: 1 1 60%;
+  min-width: 0;
+}
+
+.header-text-block h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  margin-bottom: 1rem;
+  @apply text-gold-gradient;
+}
+
+.header-portrait-img {
+  flex: 0 0 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(215, 192, 138, 0.3);
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+  transform: rotate(0deg);
+  transition: transform 0.5s ease;
+}
+
+@media (min-width: 768px) {
+  .header-portrait-img {
+    flex: 0 0 35%;
+    aspect-ratio: 3/4;
+    border-radius: 2rem;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+    transform: rotate(2deg);
+  }
+  .header-portrait-img:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+}
+
+/* --- 2. KNOWLEDGE CAPSULES --- */
+.capsule-box {
+  background: rgba(215, 192, 138, 0.1);
+  border: 1px solid rgba(215, 192, 138, 0.3);
+  border-left: 5px solid #d7c08a;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin: 1.5rem 0 2rem 0;
+  box-shadow: inset 0 0 20px rgba(215, 192, 138, 0.05);
+}
+
+@media (min-width: 768px) {
+  .capsule-box {
+    padding: 2.5rem;
+    border-radius: 0 1.5rem 1.5rem 0;
+    margin: 2rem 0 3rem 0;
+    box-shadow: inset 0 0 40px rgba(215, 192, 138, 0.05);
+  }
+}
+
+.capsule-box ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.capsule-box li {
+  position: relative;
+  padding-left: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 1rem !important;
+  color: inherit !important;
+  line-height: 1.4 !important;
+}
+
+@media (min-width: 768px) {
+  .capsule-box li {
+    padding-left: 2rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 1.15rem !important;
+  }
+}
+
+/* --- 3. FUNKY FUN FACT --- */
+.funky-fun-fact {
+  width: 100%;
+  background: #d7c08a;
+  color: #000 !important;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 1rem;
+  transform: rotate(0deg);
+  box-shadow: 10px 10px 0px rgba(0,0,0,1);
+  position: relative;
+  z-index: 10;
+  border: 2px solid #000;
+}
+
+@media (min-width: 768px) {
+  .funky-fun-fact {
+    float: right;
+    width: 320px;
+    padding: 2.5rem;
+    margin: 2rem 0 2rem 2rem;
+    border-radius: 1.5rem;
+    transform: rotate(-2deg);
+    box-shadow: 15px 15px 0px rgba(0,0,0,1);
+    border: 3px solid #000;
+  }
+}
+
+.funky-fun-fact p {
+  color: #000 !important;
+  font-weight: 600;
+  font-size: 1.1rem !important;
+}
+
+/* --- PREMIUM DESIGN SYSTEM 2026 --- */
+:root {
+  --section-gap: 4rem;
+  --block-gap: 2rem;
+  --card-radius: 1.5rem;
+  --img-radius: 2rem;
+  --text-main: #262626;
+  --text-muted: #525252;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-gap: 12rem;
+    --block-gap: 4rem;
+    --card-radius: 2rem;
+    --img-radius: 3rem;
+  }
+}
+
+/* --- 1. ASYMMETRICAL OFFSET HEADER (HERO BOX) --- */
+.funky-offset-header {
+  display: flex !important;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: var(--section-gap);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--card-radius);
+  border: 1px solid rgba(215, 192, 138, 0.1);
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  .funky-offset-header {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8rem;
+    padding: 4rem;
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.05);
+  }
+}
+
+.header-text-block {
+  flex: 1;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .header-text-block {
+    max-width: 65%;
+    padding-right: 2rem;
+  }
+}
+
+.header-text-block h1 {
+  line-height: 1.1 !important;
+  margin-bottom: 2rem !important;
+  letter-spacing: -0.02em !important;
+  font-size: clamp(2.5rem, 6vw, 6.5rem) !important;
+}
+
+@media (min-width: 768px) {
+  .header-text-block h1 {
+    line-height: 1.05 !important;
+    margin-bottom: 3.5rem !important;
+    letter-spacing: -0.04em !important;
+  }
+}
+
+.header-portrait-img-container {
+  flex: 0 0 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--img-radius);
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+  border: 6px solid #fff;
+  transform: rotate(0deg);
+}
+
+@media (min-width: 768px) {
+  .header-portrait-img-container {
+    flex: 0 0 30%;
+    aspect-ratio: 9 / 16;
+    box-shadow: 40px 40px 100px rgba(0,0,0,0.2);
+    border: 12px solid #fff;
+    transform: rotate(2deg);
+  }
+}
+
+.header-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 2. CONTENT SECTIONS & TYPOGRAPHY --- */
+.prose {
+  line-height: 1.6 !important;
+  letter-spacing: -0.01em !important;
+}
+
+@media (min-width: 768px) {
+  .prose {
+    line-height: 1.75 !important;
+  }
+}
+
+.prose p {
+  margin-bottom: 2rem !important;
+  color: var(--text-muted) !important;
+}
+
+@media (min-width: 768px) {
+  .prose p {
+    margin-bottom: 3rem !important;
+  }
+}
+
+.prose img {
+  border-radius: var(--img-radius) !important;
+  margin: 3rem 0 !important;
+  box-shadow: 0 20px 50px -10px rgba(0,0,0,0.1) !important;
+  aspect-ratio: 16 / 9 !important;
+  object-fit: cover !important;
+  width: 100% !important;
+}
+
+@media (min-width: 768px) {
+  .prose img {
+    margin: 6rem 0 !important;
+    box-shadow: 0 50px 120px -30px rgba(0,0,0,0.2) !important;
+  }
+}
+
+/* --- 3. KNOWLEDGE CAPSULES & HIGHLIGHT BOXES --- */
+.capsule-box, .highlight-box {
+  background: rgba(215, 192, 138, 0.04);
+  border: 2px solid rgba(215, 192, 138, 0.15);
+  border-left: 6px solid #d7c08a;
+  padding: 2rem 1.5rem;
+  border-radius: var(--card-radius);
+  margin: 3rem 0;
+  box-shadow: 0 10px 30px -5px rgba(0,0,0,0.02);
+}
+
+@media (min-width: 768px) {
+  .capsule-box, .highlight-box {
+    border-left: 8px solid #d7c08a;
+    padding: 4rem 5rem;
+    margin: 6rem 0;
+    box-shadow: 0 30px 60px -10px rgba(0,0,0,0.03);
+  }
+}
+
+/* --- 4. FUNKY FUN FACT (TIER 1 CARDS) --- */
+.funky-fun-fact {
+  background: #fff;
+  border: 2px solid #000;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 10px 10px 0px #d7c08a;
+  margin: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .funky-fun-fact {
+    padding: 3rem;
+    border-radius: 2rem;
+    box-shadow: 20px 20px 0px #d7c08a;
+    margin: 5rem 0;
+  }
+}
+
+/* --- 5. DO'S & DON'TS AUTHORITY GRID (BEAUTIFUL) --- */
+.split-dos-donts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 4rem 0;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .split-dos-donts {
+    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 6rem 0;
+  }
+}
+
+.dos-column {
+  background-color: #f6faf8;
+  border-top: 8px solid #48bb78;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+}
+
+.donts-column {
+  background-color: #fffaf9;
+  border-top: 8px solid #f56565;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  .dos-column, .donts-column {
+    padding: 3.5rem 3rem;
+  }
+}
+
+.dos-column h3 {
+  color: #38a169 !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-weight: 500 !important;
+  font-size: 2.2rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 2.5rem !important;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+.donts-column h3 {
+  color: #e53e3e !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-weight: 500 !important;
+  font-size: 2.2rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 2.5rem !important;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+.dos-column ul, .donts-column ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+.dos-column li, .donts-column li {
+  position: relative;
+  padding-left: 1.75rem !important;
+  margin-bottom: 1.5rem !important;
+  color: #4a5568 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.15rem !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+}
+
+.dos-column li::before {
+  content: "•";
+  color: #9ae6b4;
+  font-size: 2rem;
+  position: absolute;
+  left: 0;
+  top: -0.4rem;
+  line-height: 1;
+}
+
+.donts-column li::before {
+  content: "•";
+  color: #feb2b2;
+  font-size: 2rem;
+  position: absolute;
+  left: 0;
+  top: -0.4rem;
+  line-height: 1;
+}
+
+/* Dark mode overrides */
+.dark .dos-column {
+  background-color: rgba(46, 204, 113, 0.05);
+  box-shadow: none;
+}
+.dark .donts-column {
+  background-color: rgba(231, 76, 60, 0.05);
+  box-shadow: none;
+}
+.dark .dos-column li, .dark .donts-column li {
+  color: #cbd5e1 !important;
+}
+
+/* --- 6. PHOTOGRAPH RELATED POSTS (4:3 RATIO) --- */
+.funky-related-grid article .aspect-video {
+  aspect-ratio: 4 / 3 !important; /* STANDARD WELL-PROPORTIONED RATIO */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* --- 3. ASYMMETRICAL BODY IMAGES --- */
+.float-left {
+  float: left;
+  margin: 0.5rem 2rem 1rem 0;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+.float-right {
+  float: right;
+  margin: 0.5rem 0 1rem 2rem;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: -4px 4px 0px rgba(0,0,0,0.1);
+}
+
+/* Clearfix for floating elements */
+.emergency-trade-post::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* --- 4. FUN FACT FLOATING CARD --- */
+.funky-fun-fact {
+  background: #ffeaa7; /* Bright sticky note yellow */
+  padding: 1.5rem;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 4px;
+  box-shadow: 4px 6px 15px rgba(0,0,0,0.1);
+  transform: rotate(-1.5deg); /* Gives it that stuck-on magazine look */
+  clear: both;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.funky-fun-fact::before {
+  content: "💡 Fun Fact!";
+  display: block;
+  font-weight: 900;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #d35400;
+}
+
+/* Removed duplicate dos-donts grid block */
+
+/* --- 6. STICKY CTA PILL --- */
+.sticky-cta {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d32f2f; /* Emergency Red */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 10px 25px rgba(211, 47, 47, 0.4);
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.sticky-cta:hover {
+  background: #b71c1c;
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* --- 7. POLAROID RELATED POSTS GRID --- */
+.funky-related-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 3px dashed #ccc;
+  clear: both;
+}
+
+.funky-related-grid article {
+  background: #fff;
+  padding: 12px 12px 20px 12px;
+  width: 260px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  transition: transform 0.3s ease, z-index 0s;
+  cursor: pointer;
+}
+
+.funky-related-grid article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #eee; /* Placeholder color before you add the real image */
+  margin-bottom: 10px;
+}
+
+.funky-related-grid article h4 {
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0;
+  color: #222;
+  font-family: 'Marker Felt', 'Comic Sans MS', sans-serif; /* Playful handwritten vibe */
+}
+
+/* Staggered Polaroid Rotations */
+.funky-related-grid article:nth-child(1) { transform: rotate(-3deg); }
+.funky-related-grid article:nth-child(2) { transform: rotate(2deg) translateY(-10px); z-index: 2; }
+.funky-related-grid article:nth-child(3) { transform: rotate(-2deg); }
+
+/* Hover effect: lifts the card up and brings it to the front */
+.funky-related-grid article:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-10px);
+  z-index: 10;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (Screens under 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .funky-offset-header {
+    flex-direction: column-reverse; /* Puts image above text on mobile */
+    gap: 1.5rem;
+  }
+  
+  .header-portrait-img,
+  .float-left, 
+  .float-right {
+    float: none;
+    max-width: 100%;
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .split-dos-donts {
+    grid-template-columns: 1fr; /* Stacks the Do's and Don'ts on top of each other */
+    gap: 1.5rem;
+  }
+  
+  .funky-related-grid article {
+    width: 100%; /* Full width cards on mobile */
+    transform: none !important; /* Removes rotation on small screens so they fit nicely */
+    margin-bottom: 1rem;
+  }
+}
+
+/* --- 8. PROSE REFINEMENTS FOR MAGAZINE --- */
+.blog-content-body-html {
+  line-height: 1.8;
+  color: #333;
+}
+
+.blog-content-body-html h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  color: #111;
+  border-bottom: 4px solid #f4f4f4;
+  padding-bottom: 1rem;
+}
+
+.blog-content-body-html p {
+  margin-bottom: 1.8rem;
+  font-size: 1.15rem;
+}
+
+.blog-content-body-html blockquote.expert-tip {
+  background: #f0f7ff;
+  border-left: 8px solid #0056b3;
+  padding: 2rem;
+  margin: 3rem 0;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #003366;
+}
+
+.blog-content-body-html blockquote.expert-tip::before {
+  content: "💡 EXPERT TIP";
+  display: block;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  color: #0056b3;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.6s ease-out 0.15s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.6s ease-out 0.45s forwards;
+  opacity: 0;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% auto;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Custom select styling */
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23b8986e' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+.light select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23737373' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Custom Scrollbar for a luxury feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(184, 152, 110, 0.4); /* var(--gold) with higher alpha */
+  border-radius: 10px;
+  border: 2px solid transparent; /* creates a 'floating' look */
+  background-clip: content-box;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 152, 110, 0.7);
+  background-clip: content-box;
+}
+
+/* Force scrollbar visibility in the chat container */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(184, 152, 110, 0.3) transparent;
+}
+
+/* Custom Textarea Resize Handle */
+textarea::-webkit-resizer {
+  background-color: transparent;
+  border-width: 0px;
+  background-image: linear-gradient(135deg, transparent 50%, hsl(var(--gold)) 50%);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: bottom 6px right 6px;
+}
+
+textarea {
+  /* Ensure resize handle is visible */
+  resize: vertical;
+}
+
+@keyframes smooth-gold-white {
+
+  0%,
+  100% {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    color: hsl(var(--gold));
+    border-color: hsl(var(--gold));
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
+  }
+}
+
+.animate-smooth-luxury {
+  animation: smooth-gold-white 4s ease-in-out infinite;
+}
+
+@keyframes flash-green-red {
+
+  0%,
+  100% {
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+  }
+
+  50% {
+    background-color: #ef4444;
+    box-shadow: 0 0 8px #ef4444;
+  }
+}
+
+
+@keyframes border-gold-white {
+
+  0%,
+  100% {
+    border-color: hsl(var(--gold));
+  }
+
+  50% {
+    border-color: #ffffff;
+  }
+}
+
+@keyframes strobe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0; transform: scale(1.05); }
+}
+
+.animate-strobe {
+  animation: strobe 0.2s ease-in-out infinite;
+}
+
+@keyframes emergency-flash {
+  0%, 100% { color: #b91c1c; opacity: 1; filter: drop-shadow(0 0 4px rgba(185, 28, 28, 0.4)); }
+  50% { color: #f87171; opacity: 0.6; filter: drop-shadow(0 0 1px rgba(185, 28, 28, 0.1)); }
+}
+
+.animate-emergency-flash {
+  animation: emergency-flash 0.8s ease-in-out infinite;
+}
+
+@keyframes glow-bottom {
+  0%, 100% { 
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    opacity: 0.8;
+  }
+  50% { 
+    box-shadow: 0 25px 40px -5px rgba(234, 179, 8, 0.9), 0 12px 15px -6px rgba(234, 179, 8, 0.9);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.animate-glow-bottom {
+  animation: glow-bottom 0.8s ease-in-out infinite;
+}
+
+@keyframes surface-pulse {
+  0%, 100% { 
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% { 
+    filter: brightness(1.45);
+    transform: scale(1.04);
+  }
+}
+
+.animate-surface-pulse {
+  animation: surface-pulse 1s ease-in-out infinite;
+}
+
+/* ---- 3D Stacked Trade Selector (Add-on) ---- */
+.et-stack-section {
+  background: transparent;
+  padding: 28px 0 100px;
+  overflow: visible;
+  /* Prevent clipping */
+}
+
+.et-stack-wrap {
+  max-width: 1600px;
+  /* Allow wide spread */
+  margin: 0 auto;
+  padding: 0 16px;
+  overflow: visible;
+}
+
+.et-stack-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.et-stack-kicker {
+  letter-spacing: .22em;
+  font-size: 12px;
+  opacity: .75;
+  color: #d7c08a;
+  text-transform: uppercase;
+}
+
+.et-stack-title {
+  margin: 8px 0 0;
+  font-weight: 600;
+  color: #f0f3ff;
+  font-size: 1.5rem;
+}
+
+.et-stack-stage {
+  position: relative;
+  height: 1600px;
+  /* Large height for full visibility */
+  display: grid;
+  place-items: center;
+  user-select: none;
+  touch-action: pan-y;
+  /* allow vertical scroll; we handle horizontal */
+  perspective: 1200px;
+}
+
+/* Cards */
+.et-stack-card {
+  position: absolute;
+  width: min(420px, 88vw);
+  height: 520px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(10, 16, 35, .85);
+  border: 1px solid rgba(215, 192, 138, .22);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(255, 255, 255, .03) inset;
+  transform-style: preserve-3d;
+  will-change: transform, filter, opacity;
+  cursor: grab;
+  /* Ensure centering in grid stage */
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+}
+
+.et-stack-card:active {
+  cursor: grabbing;
+}
+
+.et-stack-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 60% at 50% 35%, rgba(215, 192, 138, .14), transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.et-stack-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.03) contrast(1.02);
+  transform: translateZ(0);
+}
+
+.et-stack-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .10) 0%, rgba(0, 0, 0, .55) 62%, rgba(0, 0, 0, .78) 100%);
+  z-index: 2;
+}
+
+.et-stack-meta {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 4;
+}
+
+.et-stack-name {
+  color: #f0f3ff;
+  font-size: 20px;
+  line-height: 1.15;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, .75);
+  font-family: inherit;
+}
+
+.et-stack-pill {
+  color: #0b1225;
+  background: linear-gradient(180deg, #e2cd97, #caa55b);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 12px 30px rgba(202, 165, 91, .22);
+  white-space: nowrap;
+}
+
+/* Nav arrows */
+.et-stack-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 192, 138, .25);
+  background: rgba(10, 16, 35, .65);
+  color: #f0f3ff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 50;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.et-stack-nav:hover {
+  filter: brightness(1.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.et-stack-nav-left {
+  left: 10px;
+}
+
+.et-stack-nav-right {
+  right: 10px;
+}
+
+.et-stack-hint {
+  margin-top: 20px;
+  text-align: center;
+  color: rgba(240, 243, 255, .7);
+  font-size: 13px;
+}
+
+/* Mobile height adjustments */
+@media (max-width: 520px) {
+  .et-stack-stage {
+    height: 1200px;
+    /* Adjusted for mobile spread */
+  }
+
+  .et-stack-card {
+    height: 480px;
+  }
+}
+
+/* 3D Flip Card Utilities */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (hover: hover) {
+  .card-container:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
+}

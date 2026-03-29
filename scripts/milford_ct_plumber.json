@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter",
+        "phone": "(203) 701-4724",
+        "address": "Milford, CT",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Rick's Plumbing",
+        "phone": "(203) 874-6629",
+        "address": "Milford, CT",
+        "website": "https://ricksplumbing.com"
+    },
+    {
+        "name": "Tri-City Heating and Cooling",
+        "phone": "(203) 303-5700",
+        "address": "Milford, CT",
+        "website": "https://tricityappliance.com"
+    },
+    {
+        "name": "Raps Plumbing & Heating",
+        "phone": "(203) 876-1212",
+        "address": "Milford, CT",
+        "website": "https://rapsplumbing.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Omaha",
+        "phone": "(402) 218-2082",
+        "address": "Omaha, NE",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "123 Glass Company",
+        "phone": "(402) 339-3990",
+        "address": "Omaha, NE",
+        "website": "https://123glasscompany.com"
+    },
+    {
+        "name": "Omaha Door & Window Company",
+        "phone": "(402) 733-6440",
+        "address": "Omaha, NE",
+        "website": "https://omahadoor.com"
+    },
+    {
+        "name": "Albertson Brothers Glass",
+        "phone": "(402) 331-5000",
+        "address": "Omaha, NE",
+        "website": "https://albertsonglass.com"
+    }
+]

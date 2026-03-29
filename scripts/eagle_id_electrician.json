@@ -1,0 +1,26 @@
+[
+    {
+        "name": "State Street Electric",
+        "phone": "(208) 996-7973",
+        "address": "Eagle, ID",
+        "website": "https://statestreetelectric.com"
+    },
+    {
+        "name": "Right Now Electric Eagle",
+        "phone": "(208) 252-9533",
+        "address": "Eagle, ID",
+        "website": "https://rightnowheatcool.com"
+    },
+    {
+        "name": "Eagle Electric and Lighting",
+        "phone": "(208) 781-0220",
+        "address": "Eagle, ID",
+        "website": "https://eagleelectricandlighting.com"
+    },
+    {
+        "name": "Ramm Electric Eagle",
+        "phone": "(208) 760-6564",
+        "address": "Eagle, ID",
+        "website": "https://rammelectric.com"
+    }
+]

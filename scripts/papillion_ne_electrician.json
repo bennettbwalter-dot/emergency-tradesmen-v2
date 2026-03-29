@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Artisan Electric",
+        "phone": "(402) 714-2427",
+        "address": "Papillion, NE",
+        "website": "https://electricartisan.com"
+    },
+    {
+        "name": "Davids Electric Papillion",
+        "phone": "(402) 553-1565",
+        "address": "Papillion, NE",
+        "website": "https://davidselectricomaha.com"
+    },
+    {
+        "name": "GS Electric Inc",
+        "phone": "(402) 618-9615",
+        "address": "Papillion, NE",
+        "website": "https://gselectricne.com"
+    },
+    {
+        "name": "A-1 United Papillion",
+        "phone": "(402) 593-7500",
+        "address": "Papillion, NE",
+        "website": "https://a1united.net"
+    }
+]

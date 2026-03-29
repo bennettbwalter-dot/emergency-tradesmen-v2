@@ -1,0 +1,186 @@
+[
+    {
+        "name": "Rozga Plumbing Corporation",
+        "phone": "(414) 240-0580",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "IHN Company",
+        "phone": "(262) 691-0402",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Heiden Plumbing, Heating & Cooling",
+        "phone": "(414) 937-8420",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Knight Plumbing, Inc.",
+        "phone": "(414) 420-0625",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Flow-Rite Plumbing",
+        "phone": "(414) 529-7888",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Roto-Rooter Milwaukee",
+        "phone": "(414) 541-4477",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Oak Creek Plumbing & Remodeling",
+        "phone": "(414) 762-4060",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Alpine Plumbing",
+        "phone": "(262) 797-4130",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "MGA Sewer, Water & Gas Plumbing Contractor",
+        "phone": "(414) 488-2953",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Feltner's Sewer & Drain Services",
+        "phone": "(414) 771-7111",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Roman Home Services",
+        "phone": "(414) 671-9935",
+        "address": "Milwaukee, WI",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Lemberg Electric",
+        "phone": "(262) 781-1500",
+        "address": "Milwaukee, WI",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Ideal Electric",
+        "phone": "(262) 628-1948",
+        "address": "Milwaukee, WI",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "NSI Electrical Contractors",
+        "phone": "(414) 761-4660",
+        "address": "Milwaukee, WI",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Current Electric Co.",
+        "phone": "(262) 786-5885",
+        "address": "Milwaukee, WI",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Reliable Auto Locksmith",
+        "phone": "414-348-2144",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Locksmith Master Milwaukee",
+        "phone": "(414) 219-1233",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Emergency Milwaukee Locksmith",
+        "phone": "(262) 910-1916",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "24 Hour Locksmith Milwaukee",
+        "phone": "(877) 881-5298",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "A-1 Security Locksmith",
+        "phone": "414-447-5200",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "Locksmith Milwaukee",
+        "phone": "(414) 667-7639",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Milwaukee Lockstar",
+        "phone": "(414) 939-8811",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 140
+    },
+    {
+        "name": "Locksmith Service Milwaukee",
+        "phone": "(414) 431-6090",
+        "address": "Milwaukee, WI",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 80
+    }
+]

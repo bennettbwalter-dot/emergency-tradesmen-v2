@@ -1,0 +1,37 @@
+[
+    {
+        "name": "On The Double! Heating & Cooling",
+        "phone": "(806) 310-9565",
+        "address": "Lubbock, TX",
+        "rating": 5.0,
+        "review_count": 761
+    },
+    {
+        "name": "Comfort Masters",
+        "phone": "(806) 749-1000",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Hart Heating & AC",
+        "phone": "(806) 795-1207",
+        "address": "Lubbock, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Jay Young Plumbing Heating & Air Conditioning",
+        "phone": "(806) 783-8318",
+        "address": "Lubbock, TX",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Bruce's Air Conditioning",
+        "phone": "(806) 793-1133",
+        "address": "Lubbock, TX",
+        "rating": 4.6,
+        "review_count": 150
+    }
+]

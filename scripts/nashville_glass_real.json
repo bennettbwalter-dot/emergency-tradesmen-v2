@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Doctor of Nashville",
+        "phone": "(615) 678-0569",
+        "address": "Nashville, TN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Planet Glass TN",
+        "phone": "(615) 593-4905",
+        "address": "Nashville, TN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "All Star Glass",
+        "phone": "(615) 227-6255",
+        "address": "Nashville, TN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Same Day Windshields",
+        "phone": "888-794-4527",
+        "address": "Nashville, TN",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Nashville Auto Glass",
+        "phone": "(615) 244-7666",
+        "address": "Nashville, TN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

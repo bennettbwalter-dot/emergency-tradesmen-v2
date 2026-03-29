@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rimrock Electric",
+        "phone": "(406) 690-2917",
+        "address": "Billings, MT",
+        "website": "https://rimrockelectric.com"
+    },
+    {
+        "name": "Reddi Electric MT",
+        "phone": "(406) 245-3141",
+        "address": "Billings, MT",
+        "website": "https://reddielectricmt.com"
+    },
+    {
+        "name": "Action Electric Inc",
+        "phone": "(406) 245-9551",
+        "address": "Billings, MT",
+        "website": "https://actionelectricinc.com"
+    },
+    {
+        "name": "Lightning Electric Billings",
+        "phone": "(406) 850-2936",
+        "address": "Billings, MT",
+        "website": "https://lightningelectricbillings.com"
+    }
+]

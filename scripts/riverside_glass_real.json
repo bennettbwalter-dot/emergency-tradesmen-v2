@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Fred's Glass & Mirror",
+        "phone": "951-509-7709",
+        "address": "Riverside, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "A Super Glass",
+        "phone": "(714) 312-8598",
+        "address": "Riverside, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "OC Glass Service",
+        "phone": "844-714-9111",
+        "address": "Riverside, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Rambo Mobile Auto Glass Repair Riverside",
+        "phone": "951-540-0799",
+        "address": "Riverside, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

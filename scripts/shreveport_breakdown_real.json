@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mericles Towing LLC",
+        "phone": "(318) 752-0056",
+        "address": "Shreveport, LA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Twin City Towing",
+        "phone": "(318) 635-0151",
+        "address": "Shreveport, LA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Ashley's Automotive",
+        "phone": "(318) 841-0255",
+        "address": "Shreveport, LA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Gerald's Towing",
+        "phone": "(318) 211-1333",
+        "address": "Shreveport, LA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Port City Recovery",
+        "phone": "(318) 300-4444",
+        "address": "Shreveport, LA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Raylyn Contractors",
+        "phone": "(414) 788-8989",
+        "address": "Wauwatosa, WI",
+        "website": "https://raylyncontractors.net"
+    },
+    {
+        "name": "Couillard Electric LLC",
+        "phone": "(262) 667-5969",
+        "address": "Wauwatosa, WI",
+        "website": "https://couillard-electric.com"
+    },
+    {
+        "name": "Ideal Electric",
+        "phone": "(262) 628-1948",
+        "address": "Wauwatosa, WI",
+        "website": "https://theidealelectricians.com"
+    },
+    {
+        "name": "Lehmann Electrical",
+        "phone": "(414) 207-0109",
+        "address": "Wauwatosa, WI",
+        "website": "https://lehmannelectrical.com"
+    }
+]

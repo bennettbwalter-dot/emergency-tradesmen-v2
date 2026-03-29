@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Roto-Rooter of St. Louis",
+        "phone": "314-925-2651",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Classic Aire Care",
+        "phone": "314-329-1943",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Mr. Rooter Plumbing of St. Louis",
+        "phone": "(314) 207-2868",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "Bieg Plumbing & Mechanical",
+        "phone": "314-487-4564",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Signature Plumbing",
+        "phone": "(636) 742-2533",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "NuFlow St. Louis",
+        "phone": "314-856-3262",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 140
+    },
+    {
+        "name": "ALLN1 Plumbing",
+        "phone": "314-688-6718",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 85
+    },
+    {
+        "name": "Beis Plumbing",
+        "phone": "314-500-5325",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 190
+    },
+    {
+        "name": "Kokesh Plumbing",
+        "phone": "636-391-1233",
+        "address": "St. Louis, MO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 260
+    },
+    {
+        "name": "Anytime Electric",
+        "phone": "(314) 280-0997",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Power House Electric",
+        "phone": "(314) 531-7106",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Reinhold Electric",
+        "phone": "(636) 265-2620",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 240
+    },
+    {
+        "name": "KD Electric",
+        "phone": "(314) 703-9584",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Kentch Electric",
+        "phone": "(314) 795-2519",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 60
+    },
+    {
+        "name": "Streib Company",
+        "phone": "(314) 487-7474",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 410
+    },
+    {
+        "name": "Guarantee Electrical Company",
+        "phone": "(314) 428-7138",
+        "address": "St. Louis, MO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Master Locksmith",
+        "phone": "(314) 400-7054",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Top St. Louis Locksmith",
+        "phone": "(314) 332-2727",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Master Locksmith County",
+        "phone": "(314) 279-7844",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "10 Minute Locksmith St. Louis",
+        "phone": "(314) 350-5424",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 140
+    },
+    {
+        "name": "Locksmith St Louis",
+        "phone": "(314) 492-6888",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 60
+    },
+    {
+        "name": "Locksmith Saint Louis",
+        "phone": "(314) 451-7662",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "St Louis General Locksmith Store",
+        "phone": "(314) 513-0037",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "Saint Louis Lock Stars",
+        "phone": "(314) 720-2227",
+        "address": "St. Louis, MO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 45
+    }
+]

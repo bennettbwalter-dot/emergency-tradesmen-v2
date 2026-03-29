@@ -1,0 +1,38 @@
+[
+    {
+        "name": "A&A Towing",
+        "phone": "(562) 989-2375",
+        "address": "Long Beach, CA",
+        "website": "https://aatowing.net/"
+    },
+    {
+        "name": "24 Hour Tow Truck Service",
+        "phone": "(562) 353-4350",
+        "address": "Long Beach, CA",
+        "website": "https://24hourtowservice.net/"
+    },
+    {
+        "name": "A1 Towing Long Beach",
+        "phone": "(866) 700-3151",
+        "address": "Long Beach, CA",
+        "website": "https://towinglongbeachca.com/"
+    },
+    {
+        "name": "10-4 Tow Long Beach",
+        "phone": "(562) 247-0810",
+        "address": "Long Beach, CA",
+        "website": "https://ten4tow.com/"
+    },
+    {
+        "name": "Alberto's Towing",
+        "phone": "(714) 616-0290",
+        "address": "Long Beach, CA",
+        "website": "https://albertostowing.com/"
+    },
+    {
+        "name": "Budget Towing Service",
+        "phone": "(562) 435-0103",
+        "address": "Long Beach, CA",
+        "website": "https://thebudgettowing.com/"
+    }
+]

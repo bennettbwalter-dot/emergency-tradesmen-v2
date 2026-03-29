@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Don's Mobile Glass",
+        "phone": "800-244-7162",
+        "address": "Stockton, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Roadrunner Glass",
+        "phone": "(209) 239-4177",
+        "address": "Stockton, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "California Glass",
+        "phone": "(209) 369-9300",
+        "address": "Stockton, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Car Glass Wizards",
+        "phone": "(844) 483-0560",
+        "address": "Stockton, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Auto Glass Now Stockton",
+        "phone": "(209) 444-6891",
+        "address": "Stockton, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

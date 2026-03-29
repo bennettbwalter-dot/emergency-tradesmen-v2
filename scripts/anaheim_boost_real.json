@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Rooter Hero Plumbing of Anaheim",
+        "phone": "(714) 519-2230",
+        "address": "Anaheim, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "ProFix Drains & Hydro Jet Anaheim",
+        "phone": "(949) 533-8832",
+        "address": "Anaheim, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Titan Brother's Plumbing and Rooter Services",
+        "phone": "(818) 435-3776",
+        "address": "Anaheim, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Roto-Rooter Anaheim",
+        "phone": "(657) 231-4190",
+        "address": "Anaheim, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "A-1 Total Service Plumbing",
+        "phone": "(323) 410-2068",
+        "address": "Anaheim, CA",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 220
+    },
+    {
+        "name": "Express Electrical Services Anaheim",
+        "phone": "855-590-8785",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "855-740-3232",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Anaheim Hills 24 Hour Electrician",
+        "phone": "714-909-0699",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "CZ Electric Anaheim",
+        "phone": "714-264-3206",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Anaheim Hills Electricians",
+        "phone": "714-941-0293",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "JEC Electric Anaheim",
+        "phone": "714-993-6875",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "La Palma Electrician",
+        "phone": "714-698-4935",
+        "address": "Anaheim, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 60
+    },
+    {
+        "name": "Emergency Anaheim Locksmith",
+        "phone": "(949) 201-4787",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Anaheim Emergency Locksmith",
+        "phone": "(714) 510-3835",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Anaheim Lock & Key 24/7",
+        "phone": "(714) 660-0403",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "Metro Anaheim Locksmith",
+        "phone": "(714) 660-0020",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 140
+    },
+    {
+        "name": "Lockout Locksmith",
+        "phone": "(657) 254-8824",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Anaheim Locksmith Services",
+        "phone": "(714) 660-0107",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 120
+    },
+    {
+        "name": "Anaheim Emergency Locksmith Services",
+        "phone": "(657) 300-7544",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 80
+    },
+    {
+        "name": "Locksmith In Orange County",
+        "phone": "(949) 537-2193",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Exclusive Locksmith Service",
+        "phone": "(714) 923-1198",
+        "address": "Anaheim, CA",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 45
+    }
+]

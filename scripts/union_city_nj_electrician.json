@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Camilo Electric",
+        "phone": "(347) 341-6111",
+        "address": "Union City, NJ",
+        "website": "https://camiloelectric.com"
+    },
+    {
+        "name": "Gm Electric",
+        "phone": "(877) 252-3888",
+        "address": "Union City, NJ",
+        "website": "https://gmelectric.com"
+    },
+    {
+        "name": "Xpert Electric",
+        "phone": "(201) 393-2420",
+        "address": "Union City, NJ",
+        "website": "https://callxe.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Union City, NJ",
+        "website": "https://oconnorselectrical.com"
+    }
+]

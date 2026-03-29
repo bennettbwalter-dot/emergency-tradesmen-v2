@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SunTex Roofing",
+        "phone": "(214) 766-3669",
+        "address": "McKinney, TX",
+        "website": "https://suntexroofs.com/"
+    },
+    {
+        "name": "Precision Roof Repair",
+        "phone": "(972) 895-8513",
+        "address": "300 Eldorado Pky. McKinney, TX 75070",
+        "website": "https://precisionroofrepair.com/"
+    },
+    {
+        "name": "Choice Roofing Care",
+        "phone": "(469) 966-6422",
+        "address": "McKinney, TX",
+        "website": "https://choiceroofingcare.com/"
+    },
+    {
+        "name": "Phoenix Storm Restoration",
+        "phone": "(945) 308-0425",
+        "address": "McKinney, TX",
+        "website": "https://phoenixstormgroup.com/"
+    },
+    {
+        "name": "Performance Roofing of DFW",
+        "phone": "(972) 360-8042",
+        "address": "McKinney, TX",
+        "website": "https://performanceroofingtx.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Total Home Environmental",
+        "phone": "(310) 554-6477",
+        "address": "Huntington Beach, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "NEXGEN Air Conditioning Heating & Plumbing",
+        "phone": "(888) 377-6136",
+        "address": "Huntington Beach, CA",
+        "rating": 4.9,
+        "review_count": 8500
+    },
+    {
+        "name": "Reliable Home Comfort",
+        "phone": "(562) 568-5345",
+        "address": "Huntington Beach, CA",
+        "rating": 5.0,
+        "review_count": 244
+    },
+    {
+        "name": "1st Choice Heating & Air Conditioning",
+        "phone": "(949) 762-8644",
+        "address": "Huntington Beach, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Stephens Plumbing, Heating & Air Conditioning",
+        "phone": "(714) 960-3300",
+        "address": "Huntington Beach, CA",
+        "rating": 4.9,
+        "review_count": 320
+    }
+]

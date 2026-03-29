@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Spartan Roofing of Texas",
+        "phone": "(254) 778-4243",
+        "address": "100 E. FM 93, Temple, TX 76502",
+        "website": "https://spartanroofingtx.com/"
+    },
+    {
+        "name": "EMC Remodeling",
+        "phone": "(254) 760-9268",
+        "address": "Temple, TX 76502",
+        "website": "https://emcremodelingroofing.com/"
+    },
+    {
+        "name": "R & R Roofing",
+        "phone": "(254) 394-2061",
+        "address": "Temple, TX",
+        "website": "https://randrroofingtx.com/"
+    },
+    {
+        "name": "Frontline Roofers",
+        "phone": "(877) 978-3339",
+        "address": "Temple, TX",
+        "website": "https://frontlineroofers.com/"
+    },
+    {
+        "name": "Ripple Roofing & Construction",
+        "phone": "(512) 763-5277",
+        "address": "Temple, TX",
+        "website": "https://rippleroofs.com/"
+    }
+]

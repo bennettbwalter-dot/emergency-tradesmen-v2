@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Frye Electric, Inc.",
+        "phone": "317-659-6899",
+        "address": "Greenwood, IN",
+        "website": "https://fryeelectricinc.com"
+    },
+    {
+        "name": "Ronald L. Dunaway Electric",
+        "phone": "317-445-6867",
+        "address": "Greenwood, IN",
+        "website": "https://dunawayelectric.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Greenwood, IN",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "888-826-0091",
+        "address": "Greenwood, IN",
+        "website": "https://mistersparky.com"
+    }
+]

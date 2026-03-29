@@ -1,0 +1,37 @@
+[
+    {
+        "name": "B & A Towing Service",
+        "phone": "(415) 552-1327",
+        "address": "San Francisco, CA",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Auto Towing",
+        "phone": "(415) 333-5559",
+        "address": "San Francisco, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "San Francisco Towing Service",
+        "phone": "(415) 287-3020",
+        "address": "San Francisco, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "10-4 Tow of San Francisco",
+        "phone": "(415) 851-3830",
+        "address": "San Francisco, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "San Francisco Recovery Services",
+        "phone": "(628) 266-3412",
+        "address": "San Francisco, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

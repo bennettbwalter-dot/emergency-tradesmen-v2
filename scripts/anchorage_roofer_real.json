@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Alaska Standard Roofing",
+        "phone": "(907) 344-0405",
+        "address": "8641 Erin St, Anchorage, AK 99507",
+        "website": "https://alaskastandard.com/"
+    },
+    {
+        "name": "Alaska Shingle Solution",
+        "phone": "(907) 888-9805",
+        "address": "Anchorage, AK",
+        "website": "https://alaskashinglesolution.com/"
+    },
+    {
+        "name": "Super Exterior",
+        "phone": "(907) 891-8081",
+        "address": "2121 Abbott Rd, Anchorage, AK 99507",
+        "website": "https://roofinganchorageal.com/"
+    },
+    {
+        "name": "Gurr Brothers Roofing",
+        "phone": "(802) 319-9074",
+        "address": "3327 Seppala Dr, Anchorage, AK 99517",
+        "website": "https://gurrbrothersroofing.com/"
+    },
+    {
+        "name": "Robert Nelson Roofing",
+        "phone": "(888) 897-9811",
+        "address": "Anchorage, AK",
+        "website": "https://robertnelsonroofing.com/"
+    }
+]

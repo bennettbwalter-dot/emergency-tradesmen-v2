@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Eck Services",
+        "phone": "(620) 220-1752",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "G.M. Air Conditioning & Heating",
+        "phone": "(316) 558-7479",
+        "address": "Wichita, KS",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Hanna Heating & Air",
+        "phone": "(316) 945-3481",
+        "address": "Wichita, KS",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Larry Cook Heating and Cooling",
+        "phone": "(316) 322-5668",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Mike Watson Heating and Cooling",
+        "phone": "(316) 522-3528",
+        "address": "Wichita, KS",
+        "rating": 5.0,
+        "review_count": 950
+    }
+]

@@ -1,0 +1,210 @@
+[
+    {
+        "name": "Apex Plumbing & Sewer Inc.",
+        "phone": "773-477-7714",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "ABC Plumbing, Sewer, Heating, Cooling and Electric",
+        "phone": "888-903-4070",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Roto-Rooter Chicago",
+        "phone": "312-222-9091",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Mike's Chicago Plumbing",
+        "phone": "773-875-8833",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Four Seasons Plumbing",
+        "phone": "866-444-2404",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 3100
+    },
+    {
+        "name": "On Call Plumbers Chicago",
+        "phone": "312-248-9113",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Rescue Plumbing",
+        "phone": "773-219-3725",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Chicago Sewer Experts",
+        "phone": "312-391-6503",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Chicago Drain Tech",
+        "phone": "773-691-0671",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Fast Action Plumbing",
+        "phone": "773-425-5076",
+        "address": "Chicago, IL",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Four Seasons Electrical",
+        "phone": "866-444-2404",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 2500
+    },
+    {
+        "name": "All Suburban Electric",
+        "phone": "(773) 832-5018",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "ABC Electric",
+        "phone": "(888) 903-4070",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1100
+    },
+    {
+        "name": "Avondale Emergency Electrician",
+        "phone": "(312) 899-6992",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "A to Z Electric Co.",
+        "phone": "(773) 286-4500",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "Ken Bobko Electric Chicago",
+        "phone": "(877) 734-8969",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "STS Electric",
+        "phone": "773-721-1111",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 380
+    },
+    {
+        "name": "Old Town 24 Hour Electrician",
+        "phone": "(312) 883-0220",
+        "address": "Chicago, IL",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Chicago Locksmiths",
+        "phone": "(312) 878-2715",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "24/7 Locksmith Chicago",
+        "phone": "773-770-4972",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Lock Key Store Chicago",
+        "phone": "312-288-7677",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Chicago Lock And Keys",
+        "phone": "312-809-3977",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Chicago Doors And Lock",
+        "phone": "312-763-5142",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Fast Locksmith Chicago",
+        "phone": "(312) 585-6166",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "All Day Locksmith Service",
+        "phone": "312-288-7580",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AA Phil's 24 Hour Lock & Key",
+        "phone": "708-280-5432",
+        "address": "Chicago, IL",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

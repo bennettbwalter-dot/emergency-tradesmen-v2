@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Laney's Inc Electric Horace",
+        "phone": "(701) 237-0543",
+        "address": "Horace, ND",
+        "website": "https://laneysinc.com"
+    },
+    {
+        "name": "GeorgeTech Electric Horace",
+        "phone": "(877) 748-7084",
+        "address": "Horace, ND",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "All Day Electrician Horace",
+        "phone": "(800) 860-1458",
+        "address": "Horace, ND",
+        "website": "https://alldayelectrician.com"
+    },
+    {
+        "name": "France Electric Horace",
+        "phone": "(701) 306-3352",
+        "address": "Horace, ND",
+        "website": "https://franceelectricinc.com"
+    }
+]

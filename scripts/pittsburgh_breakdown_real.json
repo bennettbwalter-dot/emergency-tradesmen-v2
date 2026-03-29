@@ -1,0 +1,38 @@
+[
+    {
+        "name": "McGann & Chester, LLC",
+        "phone": "(412) 381-9400",
+        "address": "Pittsburgh, PA",
+        "website": "https://mcgannandchester.com/"
+    },
+    {
+        "name": "Tag Towing & Collision",
+        "phone": "(412) 915-0957",
+        "address": "Pittsburgh, PA",
+        "website": "https://tagtowingandcollision.com/"
+    },
+    {
+        "name": "Golden Hook Towing",
+        "phone": "(412) 394-8200",
+        "address": "Pittsburgh, PA",
+        "website": "https://goldenhooktowing.com/"
+    },
+    {
+        "name": "Pittsburgh Towing Co.",
+        "phone": "(412) 693-0024",
+        "address": "Pittsburgh, PA",
+        "website": "https://pittsburghtowingco.com/"
+    },
+    {
+        "name": "Redline Roadside 24HR Towing",
+        "phone": "(412) 371-1929",
+        "address": "Pittsburgh, PA",
+        "website": "https://redlineroadside.com/"
+    },
+    {
+        "name": "412 Logistics Towing & Recovery",
+        "phone": "(412) 310-5990",
+        "address": "Pittsburgh, PA",
+        "website": "https://412logistics.com/"
+    }
+]

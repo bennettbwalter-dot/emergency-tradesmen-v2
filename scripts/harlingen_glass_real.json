@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Area Wide Auto Glass Harlingen",
+        "phone": "(830) 609-8555",
+        "address": "Harlingen, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Harlingen Glass Company",
+        "phone": "(956) 428-6066",
+        "address": "Harlingen, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "American Eagle Glass Harlingen",
+        "phone": "(956) 428-0511",
+        "address": "Harlingen, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "AutoGlassOnly Harlingen",
+        "phone": "1-866-410-5628",
+        "address": "Harlingen, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

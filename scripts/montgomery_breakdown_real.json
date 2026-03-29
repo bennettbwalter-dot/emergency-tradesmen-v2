@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Montgomery Towing",
+        "phone": "(334) 409-6050",
+        "address": "Montgomery, AL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Joey's Towing & Recovery",
+        "phone": "(334) 430-8310",
+        "address": "Montgomery, AL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Montgomery Recovery Services",
+        "phone": "(334) 690-9335",
+        "address": "Montgomery, AL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "American Towing",
+        "phone": "(334) 313-7246",
+        "address": "Montgomery, AL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Powell Wrecker Service",
+        "phone": "(334) 211-1333",
+        "address": "Montgomery, AL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

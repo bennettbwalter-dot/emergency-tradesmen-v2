@@ -1,0 +1,36 @@
+# CodeRabbit Configuration File
+# Documentation: https://coderabbit.ai/docs/configure-coderabbit
+
+version: "2"
+
+language: "en-US"
+early_access: true
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  
+  auto_review:
+    enabled: true
+    ignore_title_keywords:
+      - "WIP"
+      - "wip"
+      - "draft"
+      - "release"
+    
+  tools:
+    ast-grep:
+      enabled: true
+    
+  instructions: |
+    Please review the code with the following focus:
+    1. **Null Safety**: Ensure strictly that optional chaining (?.) is used for all potentially undefined objects, especially `pageData` and API responses.
+    2. **React Best Practices**: Check for proper use of hooks, dependency arrays in useEffect, and key props in lists.
+    3. **Tailwind CSS**: Suggest Tailwind utility classes over inline styles where possible.
+    4. **Accessibility**: Ensure images have alt text and interactive elements are keyboard accessible.
+    5. **Performance**: Flag any potential infinite loops or expensive computations in render paths.
+
+chat:
+  auto_reply: true

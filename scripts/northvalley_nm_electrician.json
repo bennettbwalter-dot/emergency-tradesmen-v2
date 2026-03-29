@@ -1,0 +1,26 @@
+[
+    {
+        "name": "North Valley Electrical Services",
+        "phone": "(505) 239-6422",
+        "address": "North Valley, NM",
+        "website": "https://emergencyelectriciansnationwide.com"
+    },
+    {
+        "name": "Wagner Mechanical Electric",
+        "phone": "(505) 317-6903",
+        "address": "Albuquerque, NM",
+        "website": "https://wagnermechanical.com"
+    },
+    {
+        "name": "Add One Electric",
+        "phone": "(505) 980-4985",
+        "address": "Albuquerque, NM",
+        "website": "https://addoneelectric.com"
+    },
+    {
+        "name": "Positive Electric",
+        "phone": "(505) 243-1212",
+        "address": "Albuquerque, NM",
+        "website": "https://thealbuquerqueelectrician.com"
+    }
+]

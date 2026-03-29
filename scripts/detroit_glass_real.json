@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Michaels Glass Detroit",
+        "phone": "313-350-5656",
+        "address": "Detroit, MI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Allstate Glass Inc.",
+        "phone": "313-864-7062",
+        "address": "Detroit, MI",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Awesome Auto Glass",
+        "phone": "(313) 926-6743",
+        "address": "Detroit, MI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Lucky Auto Glass",
+        "phone": "(586) 522-9090",
+        "address": "Detroit, MI",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

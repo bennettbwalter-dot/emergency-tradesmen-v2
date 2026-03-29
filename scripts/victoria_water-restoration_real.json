@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Victoria",
+        "phone": "(361) 573-6000",
+        "address": "Victoria, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Water Damage Repair of Texas",
+        "phone": "(361) 284-5160",
+        "address": "5606 N Navarro Street, Suite 200, Victoria, TX 77904",
+        "website": "https://waterdamagerepairoftexas.com/"
+    },
+    {
+        "name": "Roto-Rooter Victoria",
+        "phone": "(361) 575-4423",
+        "address": "Victoria, TX",
+        "website": "https://rotorooter.com/"
+    },
+    {
+        "name": "Action Restoration",
+        "phone": "(800) 218-9556",
+        "address": "Victoria, TX",
+        "website": "https://action-restoration.com/"
+    },
+    {
+        "name": "RestorationMaster",
+        "phone": "(888) 915-7197",
+        "address": "Victoria, TX",
+        "website": "https://restorationmasterfinder.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Palmer Electric Inc",
+        "phone": "(315) 699-1039",
+        "address": "Cicero, NY",
+        "website": "https://palmerelectricinc.com"
+    },
+    {
+        "name": "JPs Best Electric Cicero",
+        "phone": "(315) 897-5910",
+        "address": "Cicero, NY",
+        "website": "https://jps-best-electric.com"
+    },
+    {
+        "name": "Charles Heating and Electrical Cicero",
+        "phone": "(315) 457-6911",
+        "address": "Cicero, NY",
+        "website": "https://charlesheatingandair.com"
+    },
+    {
+        "name": "Guardian Electric",
+        "phone": "(315) 560-7284",
+        "address": "Cicero, NY",
+        "website": "https://syracuseelectrician.com"
+    }
+]

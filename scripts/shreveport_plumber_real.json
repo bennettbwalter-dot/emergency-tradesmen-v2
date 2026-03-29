@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Shreveport",
+        "phone": "318-220-7039",
+        "address": "Shreveport, LA",
+        "rating": 4.8,
+        "review_count": 100
+    },
+    {
+        "name": "Z Plumberz of Shreveport",
+        "phone": "318-889-3216",
+        "address": "Shreveport, LA",
+        "rating": 5.0,
+        "review_count": 20
+    },
+    {
+        "name": "Bobby L Greene Plumbing",
+        "phone": "(318) 631-0235",
+        "address": "Shreveport, LA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Louisiana Plumbing LLC",
+        "phone": "(318) 742-1086",
+        "address": "Shreveport, LA",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Shreveport Emergency Plumbers",
+        "phone": "(318) 555-0101",
+        "address": "Shreveport, LA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

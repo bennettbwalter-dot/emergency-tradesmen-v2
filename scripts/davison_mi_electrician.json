@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Davison, MI",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Davison, MI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "JCM Electrical",
+        "phone": "(810) 397-5092",
+        "address": "Davison, MI",
+        "website": "https://jcmelectrical810.com"
+    },
+    {
+        "name": "Halligan Electric, Inc.",
+        "phone": "(810) 238-8581",
+        "address": "Davison, MI",
+        "website": "https://halliganelectric.com"
+    }
+]

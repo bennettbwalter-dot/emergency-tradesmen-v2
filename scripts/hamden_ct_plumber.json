@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Z PLUMBERZ of New Haven",
+        "phone": "(203) 538-9635",
+        "address": "Hamden, CT",
+        "website": "https://zplumberz.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "(203) 248-7359",
+        "address": "Hamden, CT",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Jefferson Plumbing",
+        "phone": "(203) 281-3561",
+        "address": "Hamden, CT",
+        "website": "https://jeffersonplumbingservices.com"
+    },
+    {
+        "name": "Raps Plumbing & Heating",
+        "phone": "(203) 876-1212",
+        "address": "Hamden, CT",
+        "website": "https://rapsplumbing.com"
+    }
+]

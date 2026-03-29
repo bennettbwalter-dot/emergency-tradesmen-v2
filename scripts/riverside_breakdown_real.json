@@ -1,0 +1,37 @@
+[
+    {
+        "name": "10-4 Tow of Riverside",
+        "phone": "(951) 320-0000",
+        "address": "Riverside, CA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Towing Riverside",
+        "phone": "(951) 643-0200",
+        "address": "Riverside, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Stuck Solution Riverside",
+        "phone": "(855) 557-8825",
+        "address": "Riverside, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Santoyo Towing LLC",
+        "phone": "(909) 685-9794",
+        "address": "Riverside, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Riverside Recovery",
+        "phone": "(951) 500-0505",
+        "address": "Riverside, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

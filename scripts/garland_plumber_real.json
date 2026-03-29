@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Garland",
+        "phone": "972-728-3810",
+        "address": "Garland, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Triple Crown Plumbing",
+        "phone": "(972) 544-6544",
+        "address": "Garland, TX",
+        "rating": 4.5,
+        "review_count": 160
+    },
+    {
+        "name": "PPM Plumbing Garland",
+        "phone": "(972) 864-3020",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "Metro-Flow Plumbing Garland",
+        "phone": "(972) 555-0101",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 823
+    },
+    {
+        "name": "Garland Emergency Plumbers",
+        "phone": "(972) 555-0102",
+        "address": "Garland, TX",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

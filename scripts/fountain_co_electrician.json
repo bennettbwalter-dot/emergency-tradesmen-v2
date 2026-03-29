@@ -1,0 +1,26 @@
+[
+    {
+        "name": "The Speedy Electricians Fountain",
+        "phone": "(719) 306-0475",
+        "address": "Fountain, CO",
+        "website": "https://thespeedyelectricians.com"
+    },
+    {
+        "name": "Mister Sparky of Pueblo",
+        "phone": "(719) 249-2249",
+        "address": "Fountain, CO",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "DR Electric",
+        "phone": "(719) 232-3047",
+        "address": "Fountain, CO",
+        "website": "https://drelectricllc.com"
+    },
+    {
+        "name": "Swartz Electric",
+        "phone": "(719) 230-0388",
+        "address": "Fountain, CO",
+        "website": "https://swartzelectric.biz"
+    }
+]

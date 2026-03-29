@@ -1,0 +1,26 @@
+[
+    {
+        "name": "W & D Electric Inc",
+        "phone": "910-496-9398",
+        "address": "Spring Lake, NC",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Cape Fear Electrical Services",
+        "phone": "910-483-8790",
+        "address": "Spring Lake, NC",
+        "website": "https://homeadvisor.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Spring Lake, NC",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "TL Electric",
+        "phone": "910-990-4460",
+        "address": "Spring Lake, NC",
+        "website": "https://tlelectric.co"
+    }
+]

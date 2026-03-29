@@ -1,0 +1,32 @@
+[
+    {
+        "name": "MDC Electrical Contractors",
+        "phone": "(973) 483-2828",
+        "address": "54 Delancy Street, Newark, NJ 07105",
+        "website": "https://mdcelectricalcontractors.com"
+    },
+    {
+        "name": "369 Electrical Services LLC",
+        "phone": "(862) 372-9445",
+        "address": "Newark, NJ",
+        "website": "https://369electricalservices.com"
+    },
+    {
+        "name": "DSL Electrical Contractors",
+        "phone": "(908) 307-2203",
+        "address": "290 Chestnut Street, Suite 209, Newark, NJ 07105",
+        "website": "https://dslelectricalcontractors.com"
+    },
+    {
+        "name": "Proline Electrical Contractors",
+        "phone": "(973) 522-0444",
+        "address": "26 Paterson St, Newark NJ 07105",
+        "website": null
+    },
+    {
+        "name": "Concept Electric LLC",
+        "phone": "(973) 821-0617",
+        "address": "Newark, NJ",
+        "website": "https://electriciannewark.com"
+    }
+]

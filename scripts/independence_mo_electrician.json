@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Edwards Electric LLC",
+        "phone": "(816) 357-9107",
+        "address": "Independence, MO",
+        "website": "https://edwardselectric-mo.com"
+    },
+    {
+        "name": "Viking Electric KC",
+        "phone": "(816) 573-0545",
+        "address": "Independence, MO",
+        "website": "https://vikingelectrickc.com"
+    },
+    {
+        "name": "3 Phase Electrical Services",
+        "phone": "(816) 730-4523",
+        "address": "Independence, MO",
+        "website": "https://3phasekc.com"
+    },
+    {
+        "name": "JMC Electric Independence",
+        "phone": "(816) 298-0100",
+        "address": "Independence, MO",
+        "website": "https://jmcelectrickc.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "On Time Experts",
+        "phone": "(972) 241-1312",
+        "address": "Carrollton, TX",
+        "rating": 4.9,
+        "review_count": 1003
+    },
+    {
+        "name": "Air Texas AC & Heating",
+        "phone": "(214) 869-2300",
+        "address": "Carrollton, TX",
+        "rating": 4.9,
+        "review_count": 194
+    },
+    {
+        "name": "BCI Plumbing Heating and Air",
+        "phone": "(940) 565-1010",
+        "address": "Carrollton, TX",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "A#1 Air",
+        "phone": "(972) 242-4800",
+        "address": "Carrollton, TX",
+        "rating": 4.8,
+        "review_count": 8500
+    },
+    {
+        "name": "Carrollton Air Conditioning & Heating",
+        "phone": "(972) 418-0505",
+        "address": "Carrollton, TX",
+        "rating": 4.7,
+        "review_count": 320
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Gotta Guy Plumbing & Home Services",
+        "phone": "(316) 768-0511",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Wichita",
+        "phone": "(316) 712-4250",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 107049
+    },
+    {
+        "name": "American Services",
+        "phone": "(316) 633-5866",
+        "address": "Wichita, KS",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "On Time Plumbing",
+        "phone": "(316) 721-5055",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Frederick Plumbing Heating & AC",
+        "phone": "(316) 262-3713",
+        "address": "Wichita, KS",
+        "rating": 4.9,
+        "review_count": 1200
+    }
+]

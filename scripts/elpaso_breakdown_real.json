@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Extreme Recovery & Towing",
+        "phone": "(915) 383-9196",
+        "address": "El Paso, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Rapid Towing El Paso",
+        "phone": "(915) 544-4444",
+        "address": "El Paso, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Reliable Towing & Recovery",
+        "phone": "(915) 544-3103",
+        "address": "El Paso, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "10-4 Tow El Paso",
+        "phone": "(915) 201-1925",
+        "address": "El Paso, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "El Paso Towing",
+        "phone": "(915) 544-0000",
+        "address": "El Paso, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

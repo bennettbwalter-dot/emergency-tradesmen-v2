@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Lightning Mechanical LLC",
+        "phone": "(973) 763-0300",
+        "address": "Jersey City, NJ",
+        "website": "https://lightningmechanicalservice.com"
+    },
+    {
+        "name": "American Way Plumbing Heating & AC",
+        "phone": "(201) 865-4440",
+        "address": "Jersey City, NJ",
+        "website": "https://plumbingheatingcoolingnj.com"
+    },
+    {
+        "name": "Newman's Heating & AC",
+        "phone": "(862) 520-2790",
+        "address": "Jersey City, NJ",
+        "website": "https://newmanshvac.net"
+    },
+    {
+        "name": "Kook & Son Heating and AC",
+        "phone": "(201) 653-0219",
+        "address": "Jersey City, NJ",
+        "website": "https://kookandson.com"
+    },
+    {
+        "name": "Adriatic Aire",
+        "phone": "(973) 552-2848",
+        "address": "Jersey City, NJ",
+        "website": "https://adriaticaire.com"
+    }
+]

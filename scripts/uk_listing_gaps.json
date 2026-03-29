@@ -1,0 +1,3019 @@
+[
+  {
+    "city": "Manchester",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bournemouth",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wigan",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Shrewsbury",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Telford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Canterbury",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Durham",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "St Albans",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Truro",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Winchester",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Middlesbrough",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Newport",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Newport",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Poole",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "High Wycombe",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "High Wycombe",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Beeston",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Beeston",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Batley",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stockton-on-Tees",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hemel Hempstead",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Rayleigh",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Lowestoft",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Maidenhead",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ewell",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Crosby",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Paignton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Torquay",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Torquay",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bebington",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Halesowen",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Rugby",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wellingborough",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Dunstable",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Aylesbury",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Cheshunt",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Welwyn Garden City",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Royal Tunbridge Wells",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ashford",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ashford",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Braintree",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Canvey Island",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Clacton-on-Sea",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Sittingbourne",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Weymouth",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Falmouth",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "St Austell",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Scarborough",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bridlington",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bridlington",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bridlington",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bridlington",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Castleford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Pontefract",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Sale",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Widnes",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Runcorn",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ellesmere Port",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Birkenhead",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wallasey",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wallasey",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wallasey",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wallasey",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Barrow-in-Furness",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Workington",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Whitehaven",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Whitehaven",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Whitehaven",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Whitehaven",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chorley",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Accrington",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Lytham St Annes",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Stafford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Bromsgrove",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ely",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Lichfield",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Ripon",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Salisbury",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Wells",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Guildford",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Guildford",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Guildford",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Guildford",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Guildford",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chatham",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chatham",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chatham",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Chatham",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hastings",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hastings",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hastings",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Hastings",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Nuneaton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Tamworth",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Cannock",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 0,
+    "needed": 5
+  },
+  {
+    "city": "Manchester",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Sheffield",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Sheffield",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Nottingham",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Brighton",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Brighton",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Dundee",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Dundee",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Norwich",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Carlisle",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Chester",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Truro",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Wakefield",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Beeston",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Beeston",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Beeston",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Macclesfield",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Scunthorpe",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "South Shields",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Hemel Hempstead",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Ellesmere Port",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Workington",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Wells",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Staines",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Chatham",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Hastings",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Cannock",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 1,
+    "needed": 4
+  },
+  {
+    "city": "Edinburgh",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Cardiff",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Cardiff",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Leicester",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Belfast",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Belfast",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Belfast",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Swansea",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Aberdeen",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Luton",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Slough",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Slough",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Slough",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Swindon",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Burnley",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Bedford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Hereford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Carlisle",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Durham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Lancaster",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Westminster",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Poole",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Poole",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Watford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Redditch",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Chesterfield",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Loughborough",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Burton upon Trent",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Crewe",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Grimsby",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Harrogate",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Halifax",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Keighley",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Gateshead",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Darlington",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Hartlepool",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Fareham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Gosport",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Torquay",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Kidderminster",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Leamington Spa",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Kettering",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Clacton-on-Sea",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Sittingbourne",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Bridlington",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Birkenhead",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Birkenhead",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Whitehaven",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Grantham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Ely",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Ripon",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Bath",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 2,
+    "needed": 3
+  },
+  {
+    "city": "Manchester",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Birmingham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Glasgow",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Leicester",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Leicester",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Wolverhampton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Swansea",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Southampton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Aberdeen",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Aberdeen",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "York",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Peterborough",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Dundee",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Northampton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Bournemouth",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Slough",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Slough",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Rotherham",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Rotherham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stockport",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Wigan",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Burnley",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Gloucester",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Ipswich",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Colchester",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Southend-on-Sea",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Westminster",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Warrington",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Barnsley",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Newport",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Basildon",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Crawley",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Worthing",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "High Wycombe",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Harlow",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stevenage",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stockton-on-Tees",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Rayleigh",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Ashford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Braintree",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Braintree",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Workington",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Chorley",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Chorley",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Stafford",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Salisbury",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 3,
+    "needed": 2
+  },
+  {
+    "city": "London",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Birmingham",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Glasgow",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Sheffield",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Liverpool",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Edinburgh",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Cardiff",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Nottingham",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Sunderland",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Brighton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Swansea",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Swansea",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Salford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Portsmouth",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Oxford",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Luton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Milton Keynes",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Bournemouth",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Reading",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Blackpool",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Preston",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Bolton",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Blackburn",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Canterbury",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Chelmsford",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Colchester",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Truro",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Winchester",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Poole",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Basildon",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Maidstone",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Maidstone",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Crawley",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Crawley",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Worthing",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Worthing",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Worthing",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Sutton Coldfield",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Sutton Coldfield",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Dudley",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Dudley",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Mansfield",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Rayleigh",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Maidenhead",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Fareham",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Fareham",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Ewell",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Crosby",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Crosby",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Paignton",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Halesowen",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Wellingborough",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Welwyn Garden City",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Margate",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Canvey Island",
+    "countryCode": "GB",
+    "trade": "locksmith",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Canvey Island",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Sittingbourne",
+    "countryCode": "GB",
+    "trade": "breakdown",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "St Austell",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Widnes",
+    "countryCode": "GB",
+    "trade": "electrician",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Birkenhead",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Barrow-in-Furness",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Barrow-in-Furness",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Workington",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Chorley",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Accrington",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Lytham St Annes",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Stafford",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Grantham",
+    "countryCode": "GB",
+    "trade": "drain-specialist",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Grantham",
+    "countryCode": "GB",
+    "trade": "glazier",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Wells",
+    "countryCode": "GB",
+    "trade": "gas-engineer",
+    "currentCount": 4,
+    "needed": 1
+  },
+  {
+    "city": "Solihull",
+    "countryCode": "GB",
+    "trade": "plumber",
+    "currentCount": 4,
+    "needed": 1
+  }
+]

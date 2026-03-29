@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Gunsch Electric Inc",
+        "phone": "(209) 823-7687",
+        "address": "Manteca, CA",
+        "website": "https://gunschelectric.com"
+    },
+    {
+        "name": "The Electric Company",
+        "phone": "(209) 396-4618",
+        "address": "Manteca, CA",
+        "website": "https://theelectricco.net"
+    },
+    {
+        "name": "Frayer Electric Manteca",
+        "phone": "(510) 861-6247",
+        "address": "Manteca, CA",
+        "website": "https://frayerelectricinc.com"
+    },
+    {
+        "name": "T and L Electric",
+        "phone": "(209) 823-8393",
+        "address": "Manteca, CA",
+        "website": null
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tri Starr Electric",
+        "phone": "(908) 854-3449",
+        "address": "Union, NJ",
+        "website": "https://tristarrelectricnj.com"
+    },
+    {
+        "name": "Globus Electric",
+        "phone": "(973) 923-0400",
+        "address": "Union, NJ",
+        "website": "https://globuselectric.com"
+    },
+    {
+        "name": "First Class Electric",
+        "phone": "(908) 325-1777",
+        "address": "Union, NJ",
+        "website": "https://firstclasselectricnj.com"
+    },
+    {
+        "name": "Toth Electric",
+        "phone": "(973) 996-4696",
+        "address": "Union, NJ",
+        "website": "https://tothelectricllc.com"
+    }
+]

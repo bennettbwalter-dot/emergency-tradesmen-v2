@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Preferred Mechanical Services",
+        "phone": "(317) 924-4042",
+        "address": "Indianapolis, IN",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Northern Comfort Systems",
+        "phone": "(317) 926-4328",
+        "address": "Indianapolis, IN",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Broad Ripple Service Experts",
+        "phone": "(317) 649-8983",
+        "address": "Indianapolis, IN",
+        "rating": 4.6,
+        "review_count": 2500
+    },
+    {
+        "name": "Quality Plumbing & Heating Inc.",
+        "phone": "(833) 235-9260",
+        "address": "Indianapolis, IN",
+        "rating": 4.7,
+        "review_count": 890
+    },
+    {
+        "name": "Bolls Heating & Cooling",
+        "phone": "(317) 830-3010",
+        "address": "Indianapolis, IN",
+        "rating": 4.9,
+        "review_count": 620
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric of Birmingham",
+        "phone": "(205) 538-2782",
+        "address": "Birmingham, AL",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Shepherd Electric Company",
+        "phone": "(205) 533-3333",
+        "address": "Birmingham, AL",
+        "website": "https://shepherd-electric.net"
+    },
+    {
+        "name": "Mister Sparky of Birmingham",
+        "phone": "(205) 236-4241",
+        "address": "Birmingham, AL",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Armstrong Electrical",
+        "phone": "(205) 304-2453",
+        "address": "Birmingham, AL",
+        "website": "https://armstrongelectricalco.com"
+    }
+]

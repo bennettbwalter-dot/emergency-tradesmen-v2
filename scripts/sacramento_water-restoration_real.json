@@ -1,0 +1,32 @@
+[
+    {
+        "name": "1-800 WATER DAMAGE of Sacramento",
+        "phone": "(916) 823-3800",
+        "address": "6332 27th St., Sacramento, CA, 95822",
+        "website": "https://1800waterdamage.com/"
+    },
+    {
+        "name": "Good Life Construction",
+        "phone": "(916) 833-1379",
+        "address": "Sacramento, CA",
+        "website": "https://goodlifeconstruction.com/"
+    },
+    {
+        "name": "SERVPRO of East Sacramento",
+        "phone": "(916) 285-7257",
+        "address": "Sacramento, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "ServiceMaster Restoration Services",
+        "phone": "(916) 299-7664",
+        "address": "Sacramento, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Five Star Restoration",
+        "phone": "(916) 606-5381",
+        "address": "Sacramento, CA",
+        "website": "https://fivestarrestoration.com/"
+    }
+]

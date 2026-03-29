@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Louie Electric & Son",
+        "phone": "(401) 639-9327",
+        "address": "Providence, RI",
+        "website": "https://electricianprovidence.com"
+    },
+    {
+        "name": "Melone Electric",
+        "phone": "(401) 595-0016",
+        "address": "Providence, RI",
+        "website": "https://meloneelectric.com"
+    },
+    {
+        "name": "A And I Electric",
+        "phone": "(401) 741-7500",
+        "address": "Providence, RI",
+        "website": "https://aandielectric.net"
+    },
+    {
+        "name": "J C Electric",
+        "phone": "(401) 941-7600",
+        "address": "Providence, RI",
+        "website": null
+    },
+    {
+        "name": "Kelco Electric",
+        "phone": "(401) 641-4804",
+        "address": "Providence, RI",
+        "website": "https://kelcoelectricri.com"
+    }
+]

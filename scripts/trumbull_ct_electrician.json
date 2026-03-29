@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Trident Electric INC",
+        "phone": "(203) 520-2646",
+        "address": "Trumbull, CT",
+        "website": "https://trident-electric.com"
+    },
+    {
+        "name": "Spartan Electrical Service",
+        "phone": "(203) 493-6058",
+        "address": "Trumbull, CT",
+        "website": "https://spartanelectricalservice.com"
+    },
+    {
+        "name": "Ray Brown Electric",
+        "phone": "(203) 261-2115",
+        "address": "Trumbull, CT",
+        "website": "https://raybrownelectric.com"
+    },
+    {
+        "name": "Santella Electric",
+        "phone": "(203) 304-6330",
+        "address": "Trumbull, CT",
+        "website": "https://santellaelectricinc.com"
+    }
+]

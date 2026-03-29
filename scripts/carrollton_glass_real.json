@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Glass Doctor of Dallas Metroplex",
+        "phone": "(972) 346-0918",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Urgent Glass DFW",
+        "phone": "972-799-4475",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Discount Glass Texas",
+        "phone": "972-900-8748",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "JJ's Window Service",
+        "phone": "972-479-1302",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 80
+    },
+    {
+        "name": "Car Glass Repair",
+        "phone": "214-851-2208",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Simple Glass",
+        "phone": "469-256-6884",
+        "address": "Carrollton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

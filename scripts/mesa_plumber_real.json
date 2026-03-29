@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rooter Hero Plumbing & Air",
+        "phone": "(623) 257-7722",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 8000
+    },
+    {
+        "name": "Semper Fi Heating & Cooling",
+        "phone": "(480) 790-6704",
+        "address": "Mesa, AZ",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Master Plumbing & Air",
+        "phone": "(623) 584-4706",
+        "address": "Mesa, AZ",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Whitton Plumbing",
+        "phone": "(480) 291-1111",
+        "address": "Mesa, AZ",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Cactus Plumbing and Air",
+        "phone": "(623) 280-0805",
+        "address": "Mesa, AZ",
+        "rating": 4.7,
+        "review_count": 85
+    }
+]

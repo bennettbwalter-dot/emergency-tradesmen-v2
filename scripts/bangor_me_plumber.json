@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Bangor",
+        "phone": "(207) 990-1234",
+        "address": "Bangor, ME",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Nichols Plumbing",
+        "phone": "(207) 989-1533",
+        "address": "Bangor, ME",
+        "website": "https://nichols-plumbing.com"
+    },
+    {
+        "name": "Jackson Plumbing & Heating",
+        "phone": "(207) 827-7042",
+        "address": "Bangor, ME",
+        "website": "https://jacksonph.com"
+    },
+    {
+        "name": "JP Roberts Plumbing Heating",
+        "phone": "(207) 356-9587",
+        "address": "Bangor, ME",
+        "website": "https://jprobertsplumbingandheating.com"
+    }
+]

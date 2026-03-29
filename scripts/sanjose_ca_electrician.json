@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrica Inc",
+        "phone": "(408) 583-6354",
+        "address": "San Jose, CA",
+        "website": "https://electrica-inc.com"
+    },
+    {
+        "name": "Main Stream Electric",
+        "phone": "(408) 422-8730",
+        "address": "San Jose, CA",
+        "website": "https://callmainstream.com"
+    },
+    {
+        "name": "Aleco Electric",
+        "phone": "(408) 685-0535",
+        "address": "San Jose, CA",
+        "website": "https://alecoelectric.com"
+    },
+    {
+        "name": "Emelco Electric",
+        "phone": "(510) 529-8108",
+        "address": "San Jose, CA",
+        "website": "https://emelco-electric.com"
+    }
+]

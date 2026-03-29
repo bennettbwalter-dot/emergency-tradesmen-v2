@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Apex Air",
+    "phone": "(360) 342-8109",
+    "address": "Portland, OR",
+    "rating": 4.6,
+    "review_count": 440
+  },
+  {
+    "name": "First Call Heating & Cooling",
+    "phone": "(971) 328-7474",
+    "address": "Portland, OR",
+    "rating": 4.8,
+    "review_count": 1200
+  },
+  {
+    "name": "Standard Heating & Air Conditioning",
+    "phone": "(503) 283-0303",
+    "address": "Portland, OR",
+    "rating": 4.7,
+    "review_count": 850
+  },
+  {
+    "name": "Portland Air Conditioning & Heating",
+    "phone": "(503) 914-1188",
+    "address": "Portland, OR",
+    "rating": 4.9,
+    "review_count": 320
+  },
+  {
+    "name": "Comfort Solutions",
+    "phone": "(503) 698-2665",
+    "address": "Portland, OR",
+    "rating": 4.5,
+    "review_count": 950
+  }
+]

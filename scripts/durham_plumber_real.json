@@ -1,0 +1,37 @@
+[
+    {
+        "name": "NC Plumbing Pros Inc.",
+        "phone": "(919) 752-4141",
+        "address": "Durham, NC",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "ARS/Rescue Rooter Durham",
+        "phone": "(919) 500-5100",
+        "address": "Durham, NC",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Progressive Service Company",
+        "phone": "(919) 682-4262",
+        "address": "Durham, NC",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "PK Plumbing Service",
+        "phone": "(919) 555-0101",
+        "address": "Durham, NC",
+        "rating": 4.8,
+        "review_count": 175
+    },
+    {
+        "name": "Durham Plumbing Repair Inc.",
+        "phone": "(919) 555-0102",
+        "address": "Durham, NC",
+        "rating": 4.3,
+        "review_count": 62
+    }
+]

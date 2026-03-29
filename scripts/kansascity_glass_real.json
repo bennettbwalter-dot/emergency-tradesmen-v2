@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Infinity Glass",
+        "phone": "816-629-1111",
+        "address": "Kansas City, MO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Janssen Glass",
+        "phone": "(816) 472-5330",
+        "address": "Kansas City, MO",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Glass Doctor of Kansas City",
+        "phone": "(816) 527-9863",
+        "address": "Kansas City, MO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Binswanger Glass Kansas City",
+        "phone": "816-436-2840",
+        "address": "Kansas City, MO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

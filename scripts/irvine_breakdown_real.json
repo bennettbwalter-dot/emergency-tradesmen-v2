@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Elite Tow Trucks of Irvine",
+        "phone": "(949) 577-7462",
+        "address": "Irvine, CA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Brady Bros Towing Irvine",
+        "phone": "(714) 475-0280",
+        "address": "Irvine, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "10-4 Tow of Irvine",
+        "phone": "(949) 352-4935",
+        "address": "Irvine, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Irvine Towing",
+        "phone": "(949) 779-8457",
+        "address": "Irvine, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Mystic Towing",
+        "phone": "(949) 211-1333",
+        "address": "Irvine, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

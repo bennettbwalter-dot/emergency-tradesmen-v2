@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Premier Electrical Services",
+        "phone": "(401) 633-2359",
+        "address": "Warwick, RI",
+        "website": "https://premierelectricalservicesllc.com"
+    },
+    {
+        "name": "B&K Electric",
+        "phone": "(401) 739-8666",
+        "address": "Warwick, RI",
+        "website": "https://bandkelectric.net"
+    },
+    {
+        "name": "Astro Electric LLC",
+        "phone": "(401) 480-1436",
+        "address": "Warwick, RI",
+        "website": "https://astroelectricllc.com"
+    },
+    {
+        "name": "NexGen Electric Inc.",
+        "phone": "(401) 244-9382",
+        "address": "Warwick, RI",
+        "website": "https://nexgenelectricinc.com"
+    }
+]

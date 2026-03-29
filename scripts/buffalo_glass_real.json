@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Hamburg Glass",
+        "phone": "716-648-3456",
+        "address": "Buffalo, NY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "A-24 Hour Door National Inc.",
+        "phone": "(716) 894-2000",
+        "address": "Buffalo, NY",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Abbott Glass Buffalo",
+        "phone": "(716) 823-1199",
+        "address": "Buffalo, NY",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "X-treme Auto Glass Buffalo",
+        "phone": "716-542-1100",
+        "address": "Buffalo, NY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Buffalo NY Auto Glass Xpress",
+        "phone": "716-861-2029",
+        "address": "Buffalo, NY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

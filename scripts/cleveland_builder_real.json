@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Skoda Construction Inc.",
+        "phone": "(216) 214-3142",
+        "address": "Cleveland, OH",
+        "website": "https://skodaconstruction.com/"
+    },
+    {
+        "name": "Orion Construction",
+        "phone": "(330) 244-9708",
+        "address": "7801 Cleveland Ave NW, North Canton, OH 44720",
+        "website": "https://orionohio.com/"
+    },
+    {
+        "name": "DANE Contractors",
+        "phone": "(440) 617-5800",
+        "address": "Cleveland, OH",
+        "website": "https://danecontractors.com/"
+    },
+    {
+        "name": "All Dry",
+        "phone": "(855) 230-2634",
+        "address": "Cleveland, OH",
+        "website": "https://alldrycleveland.com/"
+    },
+    {
+        "name": "Precision Environmental Co.",
+        "phone": "(216) 642-6040",
+        "address": "5500 Old Brecksville Road, Independence, OH 44131",
+        "website": "https://precision-env.com/"
+    }
+]

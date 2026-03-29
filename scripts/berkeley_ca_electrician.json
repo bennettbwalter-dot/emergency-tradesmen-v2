@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Berkeley Electric",
+        "phone": "(510) 679-3803",
+        "address": "Berkeley, CA",
+        "website": "https://berkeleyelectric.com"
+    },
+    {
+        "name": "Berkeley Electrician Guys",
+        "phone": "(510) 726-1756",
+        "address": "Berkeley, CA",
+        "website": "https://berkeleyelectricianpros.com"
+    },
+    {
+        "name": "Cirta Electric",
+        "phone": "(415) 967-8167",
+        "address": "Berkeley, CA",
+        "website": "https://cirtaelectric.com"
+    },
+    {
+        "name": "Berkeley Electric Works",
+        "phone": "(510) 548-2828",
+        "address": "Berkeley, CA",
+        "website": null
+    }
+]

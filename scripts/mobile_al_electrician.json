@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Franklin Electric",
+        "phone": "(251) 402-3541",
+        "address": "Mobile, AL",
+        "website": "https://mobileelectricians.net"
+    },
+    {
+        "name": "Presley & Son Electric Service",
+        "phone": "(251) 343-5811",
+        "address": "Mobile, AL",
+        "website": "https://presleyandsonelectric.com"
+    },
+    {
+        "name": "Meadows Electrical Contracting Inc",
+        "phone": "(251) 450-0040",
+        "address": "Mobile, AL",
+        "website": "https://meadows-electrical.com"
+    },
+    {
+        "name": "New Rock Electrical Company LLC",
+        "phone": "(251) 216-7766",
+        "address": "Mobile, AL",
+        "website": "https://newrockelectrical.com"
+    },
+    {
+        "name": "Hansen Super Techs Electric",
+        "phone": "(251) 202-6164",
+        "address": "Mobile, AL",
+        "website": "https://hansensupertechs.com"
+    }
+]

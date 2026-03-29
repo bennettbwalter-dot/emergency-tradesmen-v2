@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Pro Price Heating & Cooling",
+        "phone": "(775) 571-6614",
+        "address": "Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Nevada Residential Services",
+        "phone": "(702) 935-0622",
+        "address": "Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 405
+    },
+    {
+        "name": "Elite Air Conditioning",
+        "phone": "(702) 263-2665",
+        "address": "Las Vegas, NV",
+        "rating": 5.0,
+        "review_count": 850
+    },
+    {
+        "name": "Technicians of Las Vegas",
+        "phone": "(702) 781-3000",
+        "address": "Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Yes! Air Conditioning & Plumbing",
+        "phone": "(702) 381-6450",
+        "address": "Las Vegas, NV",
+        "rating": 4.6,
+        "review_count": 2100
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Red Star Electric",
+        "phone": "(914) 310-6609",
+        "address": "White Plains, NY",
+        "website": "https://redstarelectricny.com"
+    },
+    {
+        "name": "Keating Electric",
+        "phone": "(914) 908-4570",
+        "address": "White Plains, NY",
+        "website": "https://keatingelectricny.com"
+    },
+    {
+        "name": "Danny's Electric",
+        "phone": "(914) 946-7611",
+        "address": "White Plains, NY",
+        "website": "https://dannys-electric.com"
+    },
+    {
+        "name": "Rella Electric",
+        "phone": "(914) 500-4505",
+        "address": "White Plains, NY",
+        "website": "https://rellaelectric.com"
+    }
+]

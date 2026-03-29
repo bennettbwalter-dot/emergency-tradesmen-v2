@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Down Town Tacoma Tow Truck",
+        "phone": "(253) 367-2532",
+        "address": "Tacoma, WA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Towing Tacoma",
+        "phone": "(253) 236-1972",
+        "address": "Tacoma, WA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Cheap Towing",
+        "phone": "(253) 211-1333",
+        "address": "Tacoma, WA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Tacoma Roadside",
+        "phone": "(253) 300-4444",
+        "address": "Tacoma, WA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Puget Sound Recovery",
+        "phone": "(253) 322-2222",
+        "address": "Tacoma, WA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Victoria",
+        "phone": "(361) 573-6000",
+        "address": "Victoria, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "RestorationMaster",
+        "phone": "(888) 915-7197",
+        "address": "Victoria, TX",
+        "website": "https://restorationmasterfinder.com/"
+    },
+    {
+        "name": "R5 Services",
+        "phone": "(361) 485-9300",
+        "address": "Victoria, TX",
+        "website": "https://r5services.com/"
+    },
+    {
+        "name": "ServiceMaster Central of Corpus Christi",
+        "phone": "(361) 203-8356",
+        "address": "Victoria, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Roto-Rooter Victoria",
+        "phone": "(361) 575-4423",
+        "address": "Victoria, TX",
+        "website": "https://rotorooter.com/"
+    }
+]

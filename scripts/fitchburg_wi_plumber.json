@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Avid Plumbing",
+        "phone": "(608) 661-2843",
+        "address": "Fitchburg, WI",
+        "website": "https://avidplumbing.com"
+    },
+    {
+        "name": "All Comfort Services",
+        "phone": "(608) 838-7300",
+        "address": "Fitchburg, WI",
+        "website": "https://allcomfortservices.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Restoration",
+        "phone": "(608) 256-5189",
+        "address": "Fitchburg, WI",
+        "website": "https://www.rotorooter.com/fitchburgwi/"
+    },
+    {
+        "name": "Start 2 Finish",
+        "phone": "(608) 208-6644",
+        "address": "Fitchburg, WI",
+        "website": "https://madisonwiplumbing.com"
+    }
+]

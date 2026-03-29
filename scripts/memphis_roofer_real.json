@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Miller Roofing and Renovations",
+        "phone": "(901) 457-9405",
+        "address": "Memphis, TN",
+        "website": "https://millercompanyroofing.com/"
+    },
+    {
+        "name": "Pinnacle Roofing",
+        "phone": "(901) 438-5084",
+        "address": "Memphis, TN",
+        "website": "https://newroofmemphis.com/"
+    },
+    {
+        "name": "River City Pros",
+        "phone": "(901) 707-0355",
+        "address": "Memphis, TN",
+        "website": "https://rivercitypros.com/"
+    },
+    {
+        "name": "Guardian Roofing Solutions",
+        "phone": "(901) 649-0733",
+        "address": "Memphis, TN",
+        "website": "https://guardianroofingsolutionsllc.com/"
+    },
+    {
+        "name": "A-Team Roofing",
+        "phone": "(901) 605-7663",
+        "address": "Memphis, TN",
+        "website": "https://ateamroofers.com/"
+    }
+]

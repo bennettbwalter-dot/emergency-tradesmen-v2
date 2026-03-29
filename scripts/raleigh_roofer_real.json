@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Statewide Roofing Specialist",
+        "phone": "(336) 480-1824",
+        "address": "Raleigh, NC",
+        "website": "https://statewideroofingspecialist.com/"
+    },
+    {
+        "name": "Rhino Roofing",
+        "phone": "(919) 709-7663",
+        "address": "6470 Rogers Rd, Rolesville, NC 27571",
+        "website": "https://rhino-roof.com/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Raleigh, NC",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "Storm Guard Roofing",
+        "phone": "(919) 123-4567",
+        "address": "Raleigh, NC",
+        "website": "https://stormguardrc.com/"
+    },
+    {
+        "name": "Aceline Roofing",
+        "phone": "(919) 555-0100",
+        "address": "Raleigh, NC",
+        "website": "https://acelineroofing.com/"
+    }
+]

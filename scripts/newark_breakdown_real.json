@@ -1,0 +1,37 @@
+[
+    {
+        "name": "J & F Towing Newark NJ",
+        "phone": "(201) 428-0441",
+        "address": "Newark, NJ",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Velez Towing & Transport",
+        "phone": "(973) 801-4337",
+        "address": "Newark, NJ",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Quality 1st Towing Newark",
+        "phone": "(732) 380-5810",
+        "address": "Newark, NJ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Towing Pros",
+        "phone": "(201) 355-5181",
+        "address": "Newark, NJ",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Moran Automotive & Towing",
+        "phone": "(201) 991-4660",
+        "address": "Newark, NJ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

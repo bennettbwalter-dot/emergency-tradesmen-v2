@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter Long Beach",
+        "phone": "(562) 424-0025",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Long Beach Plumber (Same Day Service)",
+        "phone": "(424) 247-5247",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 250
+    },
+    {
+        "name": "Power Pro Plumbing Long Beach",
+        "phone": "(833) 212-2124",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 620
+    },
+    {
+        "name": "Rooter Hero Long Beach",
+        "phone": "(424) 396-2740",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Ritz Plumbing Long Beach",
+        "phone": "(888) 757-7489",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 410
+    },
+    {
+        "name": "Rooter Patrol",
+        "phone": "1-844-218-6929",
+        "address": "Long Beach, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Ken Bobko Electric Long Beach",
+        "phone": "(877) 734-8969",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Electrician Squad Long Beach",
+        "phone": "(855) 930-6015",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "My Long Beach Electrician Hero",
+        "phone": "(562) 354-4415",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Express Electrical Services Long Beach",
+        "phone": "855-590-8785",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 950
+    },
+    {
+        "name": "Accurate Electric Plumbing Heating & Air",
+        "phone": "(626) 833-6720",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Safe-Way Electric & Solar Co.",
+        "phone": "(800) 496-4311",
+        "address": "Long Beach, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 280
+    },
+    {
+        "name": "Locksmith Long Beach CA",
+        "phone": "(562) 553-3696",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Emergency Locksmith Services in Long Beach",
+        "phone": "(562) 735-8841",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "24/7 Key Rescue Long Beach",
+        "phone": "(562) 329-6870",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Long Beach Locksmith",
+        "phone": "(562) 684-8660",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Locksmiths In LongBeach",
+        "phone": "(562) 567-6816",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "101 Locksmith Long Beach",
+        "phone": "(562) 502-8595",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "All County Locksmith Store",
+        "phone": "(562) 274-0795",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "Village Locksmith Store",
+        "phone": "(562) 274-0791",
+        "address": "Long Beach, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 65
+    }
+]

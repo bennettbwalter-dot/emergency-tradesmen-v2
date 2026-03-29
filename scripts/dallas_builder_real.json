@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Pete's Builders",
+        "phone": "(214) 997-6501",
+        "address": "1220 River Bend Dr, Dallas, TX 75247",
+        "website": "https://petesbuilderstx.com/"
+    },
+    {
+        "name": "Cavalry Construction and Restoration",
+        "phone": "(888) 601-3473",
+        "address": "8105 N Belt Line Rd #170, Irving, TX 75063",
+        "website": "https://www.cavalryconstruction.com/"
+    },
+    {
+        "name": "RAM Contracting",
+        "phone": "(469) 556-6358",
+        "address": "6115 Owens Street – Suite 209, Dallas, TX 75235",
+        "website": "https://ram-contracting.com/"
+    },
+    {
+        "name": "Evergreen Contracting",
+        "phone": "(214) 597-7124",
+        "address": "4849 Greenville Avenue, Ste 126, Dallas, TX 75206",
+        "website": "https://buildingevergreen.com/"
+    },
+    {
+        "name": "Cotton GDS",
+        "phone": "(877) 900-0493",
+        "address": "8400 John W. Carpenter Freeway, Dallas, TX 75247",
+        "website": "https://cottonteam.com/"
+    }
+]

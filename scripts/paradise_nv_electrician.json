@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Callidus Electric",
+        "phone": "(702) 403-4562",
+        "address": "Paradise, NV",
+        "website": "https://calliduselectric.com"
+    },
+    {
+        "name": "Champion Services",
+        "phone": "(702) 896-0000",
+        "address": "Paradise, NV",
+        "website": "https://callchampionservices.com"
+    },
+    {
+        "name": "GeorgeTech Electric",
+        "phone": "(702) 201-1335",
+        "address": "Paradise, NV",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "Ampere Electric",
+        "phone": "(702) 979-1747",
+        "address": "Paradise, NV",
+        "website": "https://ampereelectricnv.com"
+    }
+]

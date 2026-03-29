@@ -1,0 +1,42 @@
+[
+    {
+        "name": "United Windows Pro",
+        "phone": "(720) 400-2929",
+        "address": "Aurora, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "United Glass Service",
+        "phone": "(303) 343-2185",
+        "address": "Aurora, CO",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Red Rocks Glass",
+        "phone": "(720) 505-3815",
+        "address": "Aurora, CO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AtoZ Glass",
+        "phone": "720-218-8079",
+        "address": "Aurora, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "A+ Auto Glass",
+        "phone": "(303) 680-0983",
+        "address": "Aurora, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

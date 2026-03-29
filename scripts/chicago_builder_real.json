@@ -1,0 +1,32 @@
+[
+    {
+        "name": "CWF Restoration",
+        "phone": "(800) 597-6911",
+        "address": "720 North Larch Ave, Elmhurst, IL 60126",
+        "website": "https://chicagowaterandfire.com/"
+    },
+    {
+        "name": "ServiceMaster DSI - Chicago",
+        "phone": "(773) 729-1757",
+        "address": "Chicago, IL",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Real Restoration Group",
+        "phone": "(312) 265-4668",
+        "address": "1322 W Walton St, Chicago, IL 60642",
+        "website": "https://realrestoration.com/"
+    },
+    {
+        "name": "Midway Restoration",
+        "phone": "(312) 879-9000",
+        "address": "1915 W. Hubbard St., Chicago, IL",
+        "website": "https://midwayrestoration.com/"
+    },
+    {
+        "name": "First Onsite Chicago",
+        "phone": "(847) 428-0179",
+        "address": "1900 W Hubbard Avenue, Chicago, IL 60622",
+        "website": "https://firstonsite.com/"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Blake Brothers Electric",
+        "phone": "(256) 460-6174",
+        "address": "Huntsville, AL",
+        "website": "https://blakebrothers.com"
+    },
+    {
+        "name": "Allied Electric Inc",
+        "phone": "(256) 837-7770",
+        "address": "Huntsville, AL",
+        "website": "https://alliedelectrichsv.com"
+    },
+    {
+        "name": "Mr. Electric of Huntsville",
+        "phone": "(256) 258-8753",
+        "address": "Huntsville, AL",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Huntsville Electrical Services",
+        "phone": "(256) 533-5555",
+        "address": "Huntsville, AL",
+        "website": null
+    },
+    {
+        "name": "Mister Sparky of Huntsville",
+        "phone": "(256) 805-8141",
+        "address": "Huntsville, AL",
+        "website": "https://mistersparky.com"
+    }
+]

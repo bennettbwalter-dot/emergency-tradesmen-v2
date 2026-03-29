@@ -1,0 +1,32 @@
+[
+    {
+        "name": "B&D Construction & Painting",
+        "phone": "(857) 417-8883",
+        "address": "Boston, MA",
+        "website": "https://bd-roofing.com/"
+    },
+    {
+        "name": "Toprank Masonry",
+        "phone": "(617) 216-8895",
+        "address": "Boston, MA",
+        "website": "https://toprankmasonryma.com/"
+    },
+    {
+        "name": "Merrimack Valley Roofing",
+        "phone": "(978) 866-1860",
+        "address": "Boston, MA",
+        "website": "https://merrimackvalleyroofing.com/"
+    },
+    {
+        "name": "GF Sprague Exteriors",
+        "phone": "(781) 455-0556",
+        "address": "Boston, MA",
+        "website": "https://gfsprague.com/"
+    },
+    {
+        "name": "Dynamic Roof Tech",
+        "phone": "(508) 661-9916",
+        "address": "Boston, MA",
+        "website": "https://dynamicrooftech.com/"
+    }
+]

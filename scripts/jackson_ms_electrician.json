@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hire Local Electrician",
+        "phone": "(888) 571-0428",
+        "address": "Jackson, MS",
+        "website": "https://hirelocalelectrician.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 505-8884",
+        "address": "Jackson, MS",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Apex Electric, LLC",
+        "phone": "(601) 201-9252",
+        "address": "Jackson, MS",
+        "website": "https://apexelectricms.com"
+    },
+    {
+        "name": "Hester's Electrical Service",
+        "phone": "(601) 203-1563",
+        "address": "Jackson, MS",
+        "website": "https://hesterselectricalservice.com"
+    }
+]

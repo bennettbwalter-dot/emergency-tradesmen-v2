@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Autoglass of Bakersfield",
+    "phone": "(661) 395-0160",
+    "address": "Bakersfield, CA",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 180
+  },
+  {
+    "name": "Mobile Auto Glass Replacement in Bakersfield",
+    "phone": "(661) 390-9282",
+    "address": "Bakersfield, CA",
+    "trade": "glazier",
+    "rating": 4.7,
+    "review_count": 120
+  },
+  {
+    "name": "Bob's Auto Glass",
+    "phone": "(661) 325-7506",
+    "address": "Bakersfield, CA",
+    "trade": "glazier",
+    "rating": 4.9,
+    "review_count": 150
+  },
+  {
+    "name": "All American Glass Bakersfield",
+    "phone": "(661) 342-2402",
+    "address": "Bakersfield, CA",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 95
+  },
+  {
+    "name": "Action Glass Bakersfield",
+    "phone": "(661) 633-9618",
+    "address": "Bakersfield, CA",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 110
+  }
+]

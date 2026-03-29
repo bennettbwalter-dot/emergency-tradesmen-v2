@@ -1,0 +1,26 @@
+[
+    {
+        "name": "WM Jean Electric",
+        "phone": "304-766-7333",
+        "address": "Dunbar, WV",
+        "website": "https://wmjeanelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Dunbar, WV",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Dunbar, WV",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Montani Mechanical Group",
+        "phone": "304-720-4100",
+        "address": "Dunbar, WV",
+        "website": "https://angi.com"
+    }
+]

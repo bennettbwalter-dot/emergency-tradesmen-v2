@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Price Electrical",
+        "phone": "757-342-6412",
+        "address": "Poquoson, VA",
+        "website": "https://priceelectricalva.com"
+    },
+    {
+        "name": "MorLite Electric",
+        "phone": "757-248-1234",
+        "address": "Poquoson, VA",
+        "website": "https://morliteelectricllc.com"
+    },
+    {
+        "name": "Asbury Electric",
+        "phone": "757-767-4197",
+        "address": "Poquoson, VA",
+        "website": "https://asburyelectric.com"
+    },
+    {
+        "name": "Get Lit Electrical",
+        "phone": "757-997-7053",
+        "address": "Poquoson, VA",
+        "website": "https://getlitva.com"
+    }
+]

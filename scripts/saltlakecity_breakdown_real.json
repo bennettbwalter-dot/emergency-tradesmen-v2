@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Intermountain Tow Service",
+        "phone": "(801) 936-7626",
+        "address": "Salt Lake City, UT",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Top Notch Towing",
+        "phone": "(801) 901-8875",
+        "address": "Salt Lake City, UT",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Salt Lake Towing",
+        "phone": "(801) 211-1333",
+        "address": "Salt Lake City, UT",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Tucker Towing & Recovery",
+        "phone": "(801) 300-4444",
+        "address": "Salt Lake City, UT",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "AMR Auto Repair & Towing",
+        "phone": "(801) 322-2222",
+        "address": "Salt Lake City, UT",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

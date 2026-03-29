@@ -1,0 +1,32 @@
+[
+    {
+        "name": "St Paul Towing Service",
+        "phone": "(651) 424-1562",
+        "address": "St. Paul, MN",
+        "website": "https://stpaultowingservice.com/"
+    },
+    {
+        "name": "St Paul Towing Company",
+        "phone": "(651) 401-7874",
+        "address": "St. Paul, MN",
+        "website": "https://stpaultowingcompany.com/"
+    },
+    {
+        "name": "Twin Cities Transport & Recovery",
+        "phone": "(651) 642-1446",
+        "address": "St. Paul, MN",
+        "website": "https://tctr.com/"
+    },
+    {
+        "name": "Certified Towing Authority",
+        "phone": "(763) 888-4869",
+        "address": "St. Paul, MN",
+        "website": "https://certifiedtowingauthority.com/"
+    },
+    {
+        "name": "Budget Towing Inc. St Paul",
+        "phone": "(651) 771-8817",
+        "address": "St. Paul, MN",
+        "website": "https://budgettowingandtires.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Aptus Home Services",
+        "phone": "843-874-3155",
+        "address": "Mount Pleasant, SC",
+        "website": "https://aptushomeservices.com"
+    },
+    {
+        "name": "Charleston Electric & Air",
+        "phone": "843-258-8699",
+        "address": "Mount Pleasant, SC",
+        "website": "https://charleston-electric.com"
+    },
+    {
+        "name": "Mister Sparky of Charleston",
+        "phone": "888-826-0091",
+        "address": "Mount Pleasant, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Static Electric",
+        "phone": "843-216-1321",
+        "address": "Mount Pleasant, SC",
+        "website": "https://kenbobkoelectric.com"
+    }
+]

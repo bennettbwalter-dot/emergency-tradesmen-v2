@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Cleveland",
+        "phone": "(216) 551-9479",
+        "address": "Cleveland, OH",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Euclid Glass & Door",
+        "phone": "(440) 269-1335",
+        "address": "Cleveland, OH",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Affordable Window Service LLC",
+        "phone": "(440) 243-7010",
+        "address": "Cleveland, OH",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Brothers Locksmith",
+        "address": "Abilene, TX",
+        "phone": "325-673-5161",
+        "trade": "locksmith",
+        "city": "Abilene"
+    },
+    {
+        "name": "Pop-A-Lock Locksmith Abilene",
+        "address": "Abilene, TX",
+        "phone": "325-677-5123",
+        "trade": "locksmith",
+        "city": "Abilene"
+    },
+    {
+        "name": "Locked Out LLC",
+        "address": "Abilene, TX",
+        "phone": "325-701-4433",
+        "trade": "locksmith",
+        "city": "Abilene"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Arizona Roof Rescue",
+        "phone": "(602) 242-2706",
+        "address": "8646 W. Glendale Ave, Glendale, AZ 85305",
+        "website": "https://arizonaroofrescue.com/"
+    },
+    {
+        "name": "Canyon State Roofing",
+        "phone": "(602) 400-1635",
+        "address": "Phoenix, AZ",
+        "website": "https://canyonstateroofs.com/"
+    },
+    {
+        "name": "ProWest Roofing",
+        "phone": "(602) 738-7663",
+        "address": "Phoenix, AZ",
+        "website": "https://prowest.com/"
+    },
+    {
+        "name": "Four Peaks Roofing",
+        "phone": "(602) 329-2616",
+        "address": "Phoenix, AZ",
+        "website": "https://fourpeaksroofing.com/"
+    },
+    {
+        "name": "Northern Arizona Roof Services",
+        "phone": "(602) 725-7949",
+        "address": "Phoenix, AZ",
+        "website": "https://northernarizonaroofservices.com/"
+    }
+]

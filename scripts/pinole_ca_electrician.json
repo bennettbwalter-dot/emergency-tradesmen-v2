@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Aleco Electric Pinole",
+        "phone": "(510) 296-8377",
+        "address": "Pinole, CA",
+        "website": "https://alecoelectric.com"
+    },
+    {
+        "name": "Kel Aire, Inc.",
+        "phone": "(510) 245-4140",
+        "address": "Pinole, CA",
+        "website": "https://kelaire.com"
+    },
+    {
+        "name": "Site Electric Services",
+        "phone": "(707) 653-0376",
+        "address": "Pinole, CA",
+        "website": "https://site-electric.com"
+    },
+    {
+        "name": "East Bay Electric",
+        "phone": "(415) 726-9957",
+        "address": "Pinole, CA",
+        "website": "https://eastbayelectric.net"
+    }
+]

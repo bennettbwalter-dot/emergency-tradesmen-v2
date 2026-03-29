@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Emergency Clean UK Leicester",
+        "phone": "0333 772 2130",
+        "address": "Leicester",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "ServiceMaster Clean Leicester West",
+        "phone": "0162 383 5497",
+        "address": "Leicester",
+        "website": "https://servicemasterclean.co.uk/"
+    },
+    {
+        "name": "ICE Cleaning Leicester",
+        "phone": "0208 066 0360",
+        "address": "Leicester",
+        "website": "https://icecleaning.co.uk/"
+    },
+    {
+        "name": "Response Bioclean Leicester",
+        "phone": "03337720638",
+        "address": "Leicester",
+        "website": "https://responsebioclean.com/"
+    },
+    {
+        "name": "Ideal Response Leicester",
+        "phone": "01622 926 505",
+        "address": "Leicester",
+        "website": "https://idealresponse.co.uk/"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Frederic Roofing Company",
+        "phone": "(314) 645-2000",
+        "address": "2827 S Brentwood Blvd, St Louis, MO 63144",
+        "website": "https://fredericroofing.com/"
+    },
+    {
+        "name": "Martin & Sons LLC",
+        "phone": "(314) 839-0700",
+        "address": "St Louis, MO",
+        "website": "https://martinandsons-stl.com/"
+    },
+    {
+        "name": "Majestic Roofing",
+        "phone": "(314) 614-9626",
+        "address": "St Louis, MO",
+        "website": "https://majesticroofingmo.com/"
+    },
+    {
+        "name": "Storm Guard",
+        "phone": "(636) 202-2882",
+        "address": "St Louis Southwest, MO",
+        "website": "https://stormguardrc.com/"
+    },
+    {
+        "name": "Leak Stoppers Roofing",
+        "phone": "(314) 915-2158",
+        "address": "St Louis, MO",
+        "website": "https://lsrstl.net/"
+    }
+]

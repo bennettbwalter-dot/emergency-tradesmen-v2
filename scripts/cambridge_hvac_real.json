@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Waterworx Plumbing & Heating",
+        "phone": "01223 622486",
+        "address": "St Ives, Cambridgeshire",
+        "website": "https://waterworxplumber.co.uk/"
+    },
+    {
+        "name": "Pure Service Cambridge",
+        "phone": "01223 269884",
+        "address": "Top Floor, 3 Greenside, Waterbeach, Cambridge CB25 9HW",
+        "website": "https://pure-service.co.uk/"
+    },
+    {
+        "name": "KA Plumbing & Heating",
+        "phone": "01223 890 554",
+        "address": "29 Barley Way, Cambridge, CB21 4YN",
+        "website": "https://kaplumbing-heating.co.uk/"
+    },
+    {
+        "name": "Cambridge Smart Heating",
+        "phone": "07881 705303",
+        "address": "Cambridge",
+        "website": "https://cambridgesmartheating.com/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Ltd",
+        "phone": "07930 059 570",
+        "address": "Cambridge",
+        "website": "https://trustatrader.com/"
+    }
+]

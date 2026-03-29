@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Emergency Air Plumbing Chandler",
+        "phone": "(623) 584-4706",
+        "address": "Chandler, AZ",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "No Worries Rooter Chandler",
+        "phone": "(480) 405-4497",
+        "address": "Chandler, AZ",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "AZ Emergency Plumbing LLC",
+        "phone": "(480) 547-9517",
+        "address": "Chandler, AZ",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Start 2 Finish Local Plumbers",
+        "phone": "(480) 900-1199",
+        "address": "Chandler, AZ",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "On Call Plumbers Chandler",
+        "phone": "(480) 360-4994",
+        "address": "Chandler, AZ",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

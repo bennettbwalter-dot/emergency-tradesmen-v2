@@ -1,0 +1,32 @@
+[
+    {
+        "name": "A&M Builders Brighton",
+        "phone": "01273 294 409",
+        "address": "Brighton",
+        "website": "https://ambuilders.uk/"
+    },
+    {
+        "name": "Peak Projects UK Brighton",
+        "phone": "07494 647679",
+        "address": "East Sussex",
+        "website": "https://peakprojectsuk.co.uk/"
+    },
+    {
+        "name": "Meering Construction Brighton",
+        "phone": "07494 647679",
+        "address": "Brighton",
+        "website": "https://meeringconstruction.co.uk/"
+    },
+    {
+        "name": "Beaulieu Contracts Brighton",
+        "phone": "01273 294 409",
+        "address": "Brighton",
+        "website": "https://beaulieucontracts.co.uk/"
+    },
+    {
+        "name": "Brighton & Hove Emergency Repairs",
+        "phone": "01273 294 409",
+        "address": "Brighton",
+        "website": "https://brighton-hove.gov.uk/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Impressive Electric",
+        "phone": "513-940-5183",
+        "address": "Blue Ash, OH",
+        "website": "https://impressiveelectric.com"
+    },
+    {
+        "name": "Premiere Electric",
+        "phone": "859-393-5235",
+        "address": "Blue Ash, OH",
+        "website": "https://premiereelectriccompany.com"
+    },
+    {
+        "name": "Turner On Services",
+        "phone": "513-496-3910",
+        "address": "Blue Ash, OH",
+        "website": "https://callturneron.com"
+    },
+    {
+        "name": "Craftsman Electric",
+        "phone": "513-771-7588",
+        "address": "Blue Ash, OH",
+        "website": "https://craftsmanelectric.com"
+    }
+]

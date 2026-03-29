@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Aquarius Home Services",
+        "phone": "(888) 741-9025",
+        "address": "Saint Paul, MN",
+        "rating": 4.8,
+        "review_count": 3200
+    },
+    {
+        "name": "Hoffman Cooling & Heating",
+        "phone": "(612) 255-5883",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Genz-Ryan Plumbing, Heating, Air Conditioning",
+        "phone": "(651) 560-4720",
+        "address": "Saint Paul, MN",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "Metro Heating & Cooling",
+        "phone": "(651) 294-7798",
+        "address": "Saint Paul, MN",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Bonfe Plumbing, Heating & Air Conditioning",
+        "phone": "(651) 371-8400",
+        "address": "Saint Paul, MN",
+        "rating": 4.7,
+        "review_count": 5200
+    }
+]

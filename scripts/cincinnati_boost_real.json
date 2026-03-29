@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Midwestern Plumbing",
+        "phone": "513-753-0050",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Roto-Rooter Cincinnati",
+        "phone": "513-631-2525",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "The Geiler Company",
+        "phone": "513-574-1200",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Thomas & Galbraith Heating, Cooling & Plumbing",
+        "phone": "(513) 327-2578",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Cincinnati",
+        "phone": "(513) 813-4992",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "Halpin Plumbing, Inc.",
+        "phone": "513-631-2001",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Mr. Rooter Plumbing of Greater Cincinnati",
+        "phone": "(513) 234-4545",
+        "address": "Cincinnati, OH",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 600
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "Impressive Electric",
+        "phone": "(513) 940-5183",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mister Sparky® of Cincinnati",
+        "phone": "(513) 657-1641",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Craftsman Electric",
+        "phone": "513-891-4426",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mr. Electric of Cincinnati East",
+        "phone": "(513) 202-4625",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "RDK Electrical Service",
+        "phone": "513-509-0043",
+        "address": "Cincinnati, OH",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 45
+    },
+    {
+        "name": "Pop-A-Lock of Cincinnati",
+        "phone": "513-772-8644",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Eagle's Locksmith Cincinnati",
+        "phone": "513-202-4240",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Locksmith Cincinnati",
+        "phone": "513-450-7371",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "24/7 Locksmith Cincinnati",
+        "phone": "513-806-2013",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 60
+    },
+    {
+        "name": "Cincinnati Central Locksmith",
+        "phone": "513-714-5186",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Cincinnati Lock And Locksmith",
+        "phone": "513-714-5191",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 45
+    },
+    {
+        "name": "Emergency Locksmith in Cincinnati",
+        "phone": "513-715-9064",
+        "address": "Cincinnati, OH",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 30
+    }
+]

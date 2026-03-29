@@ -1,0 +1,37 @@
+[
+    {
+        "name": "DMS Plumbing L.L.C.",
+        "phone": "(702) 613-5246",
+        "address": "Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 358
+    },
+    {
+        "name": "Loyalty Plumbing",
+        "phone": "(702) 800-2871",
+        "address": "Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Vegas Valley Plumbing",
+        "phone": "(702) 551-3286",
+        "address": "Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Plumber Las Vegas",
+        "phone": "(702) 659-9844",
+        "address": "Las Vegas, NV",
+        "rating": 5.0,
+        "review_count": 55
+    },
+    {
+        "name": "Focus Plumbing",
+        "phone": "(702) 710-4420",
+        "address": "Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

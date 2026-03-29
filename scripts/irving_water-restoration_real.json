@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Southwest Irving",
+        "phone": "(469) 276-7481",
+        "address": "Irving, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "TruStar Restoration",
+        "phone": "(972) 573-9241",
+        "address": "Irving, TX",
+        "website": "https://trustarrestoration.com/"
+    },
+    {
+        "name": "DFW Rapid Restoration",
+        "phone": "(214) 549-4380",
+        "address": "Irving, TX",
+        "website": "https://dfwrapidrestoration.com/"
+    },
+    {
+        "name": "Certified Water & Fire Restoration of Texas",
+        "phone": "(214) 714-3679",
+        "address": "8105 North Belt Line Road, Suite 130, Irving, TX 75063",
+        "website": "https://certifiedwaterandfire.com/"
+    },
+    {
+        "name": "Jenkins Restorations",
+        "phone": "(682) 219-0320",
+        "address": "Irving, TX",
+        "website": "https://jenkinsrestorations.com/"
+    }
+]

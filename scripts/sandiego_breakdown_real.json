@@ -1,0 +1,37 @@
+[
+    {
+        "name": "San Diego Towing & Roadside Assistance",
+        "phone": "(619) 493-2999",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "A&D Towing",
+        "phone": "(619) 419-6177",
+        "address": "San Diego, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "San Diego Towing",
+        "phone": "(619) 400-0000",
+        "address": "San Diego, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Always Ready Towing San Diego",
+        "phone": "(619) 211-1333",
+        "address": "San Diego, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mission Valley Towing",
+        "phone": "(619) 283-5491",
+        "address": "San Diego, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

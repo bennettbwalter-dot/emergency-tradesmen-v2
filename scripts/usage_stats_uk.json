@@ -1,0 +1,10 @@
+{
+    "yelp": {
+        "daily_calls": 190,
+        "last_reset": "2026-03-25"
+    },
+    "here": {
+        "monthly_calls": 190,
+        "last_reset_month": "2026-03"
+    }
+}

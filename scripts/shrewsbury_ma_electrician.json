@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Shrewsbury, MA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Landry Mechanical Inc",
+        "phone": "(508) 987-0080",
+        "address": "Shrewsbury, MA",
+        "website": "https://landrymechanical.com"
+    },
+    {
+        "name": "Three Phase Electric",
+        "phone": "(800) 808-0114",
+        "address": "Shrewsbury, MA",
+        "website": "https://wiremass.com"
+    },
+    {
+        "name": "T.K. Lyden Electric",
+        "phone": "(508) 842-8877",
+        "address": "Shrewsbury, MA",
+        "website": "https://tklydenelectric.com"
+    }
+]

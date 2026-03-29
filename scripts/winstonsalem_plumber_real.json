@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Pride Plumbing Winston-Salem",
+        "phone": "336-223-5520",
+        "address": "Winston-Salem, NC",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Winston-Salem",
+        "phone": "336-650-7639",
+        "address": "Winston-Salem, NC",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Bodenheimer Plumbing Services",
+        "phone": "(336) 788-3966",
+        "address": "Winston-Salem, NC",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Winston-Salem Emergency Plumber",
+        "phone": "833-652-4777",
+        "address": "Winston-Salem, NC",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Forsyth County Plumbing",
+        "phone": "(336) 555-0101",
+        "address": "Winston-Salem, NC",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

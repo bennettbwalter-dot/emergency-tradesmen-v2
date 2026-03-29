@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Essential Electric",
+        "phone": "(716) 715-9243",
+        "address": "Tonawanda, NY",
+        "website": "https://essentialelectricwny.com"
+    },
+    {
+        "name": "Penque Electric",
+        "phone": "(716) 693-7234",
+        "address": "Tonawanda, NY",
+        "website": "https://penqueelectric.com"
+    },
+    {
+        "name": "Jameson Electric & Air",
+        "phone": "(855) 297-4331",
+        "address": "Tonawanda, NY",
+        "website": "https://jamesonelectricians.com"
+    },
+    {
+        "name": "Roy's Plumbing, Heating, Cooling & Electrical",
+        "phone": "(716) 873-5000",
+        "address": "Tonawanda, NY",
+        "website": "https://justcallroys.com"
+    }
+]

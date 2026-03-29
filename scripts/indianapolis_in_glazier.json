@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Indianapolis",
+        "phone": "(317) 720-3305",
+        "address": "Indianapolis, IN",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "Whites Innovative Glass",
+        "phone": "(317) 590-1430",
+        "address": "Indianapolis, IN",
+        "website": "https://whitesinnovativeglass.com"
+    },
+    {
+        "name": "Glass Express Inc.",
+        "phone": "(317) 508-8120",
+        "address": "Indianapolis, IN",
+        "website": "https://glassexpressrepair.com"
+    },
+    {
+        "name": "Indy Clear View Sash And Glass",
+        "phone": "(317) 362-0994",
+        "address": "Indianapolis, IN",
+        "website": "https://indy-clear-view-sash-and-glass-indianapolis.com"
+    }
+]

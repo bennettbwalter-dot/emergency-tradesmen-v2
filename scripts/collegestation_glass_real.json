@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Amen Glass",
+        "phone": "979-229-1611",
+        "address": "College Station, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "ACME Glass College Station",
+        "phone": "979-696-1796",
+        "address": "College Station, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "David's Auto Glass",
+        "phone": "979-775-1545",
+        "address": "College Station, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "George's Auto Glass",
+        "phone": "979-977-6150",
+        "address": "College Station, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Low Price Auto Glass",
+        "phone": "979-330-5098",
+        "address": "College Station, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

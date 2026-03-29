@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Real Estate Electric",
+        "phone": "(757) 633-0002",
+        "address": "Norfolk, VA",
+        "website": "https://realestateelectric.com"
+    },
+    {
+        "name": "Norva Electric",
+        "phone": "(757) 613-8724",
+        "address": "Norfolk, VA",
+        "website": "https://norvaelectric.com"
+    },
+    {
+        "name": "Nipper Electric Inc",
+        "phone": "(757) 296-7176",
+        "address": "Norfolk, VA",
+        "website": "https://nipperelectric.com"
+    },
+    {
+        "name": "Michael and Son",
+        "phone": "(757) 541-8100",
+        "address": "Norfolk, VA",
+        "website": "https://michaelandson.com"
+    }
+]

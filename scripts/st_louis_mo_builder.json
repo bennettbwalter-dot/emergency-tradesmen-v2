@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Genuine Contracting",
+        "phone": "(636) 692-4458",
+        "address": "St. Louis, MO",
+        "website": "https://genuinecontracting.com"
+    },
+    {
+        "name": "DeG Contracting",
+        "phone": "(636) 928-7663",
+        "address": "St. Louis, MO",
+        "website": "https://degcontracting.com"
+    },
+    {
+        "name": "NexGen Builders",
+        "phone": "(314) 474-0487",
+        "address": "St. Louis, MO",
+        "website": "https://nexgenmo.com"
+    },
+    {
+        "name": "Ahrens Contracting, Inc.",
+        "phone": "(314) 895-4000",
+        "address": "St. Louis, MO",
+        "website": "https://ahrenscontracting.com"
+    }
+]

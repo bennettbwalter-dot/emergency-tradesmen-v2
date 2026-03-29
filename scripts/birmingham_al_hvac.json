@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hiller Plumbing, Heating, Cooling & Electrical",
+        "phone": "(205) 545-0988",
+        "address": "Birmingham, AL",
+        "website": "https://happyhiller.com"
+    },
+    {
+        "name": "Guin Service",
+        "phone": "(205) 595-4846",
+        "address": "Birmingham, AL",
+        "website": "https://guinservice.com"
+    },
+    {
+        "name": "Aire Serv of Birmingham",
+        "phone": "(205) 791-5612",
+        "address": "Birmingham, AL",
+        "website": "https://aireserv.com"
+    },
+    {
+        "name": "Hemphill Services",
+        "phone": "(205) 229-2348",
+        "address": "Birmingham, AL",
+        "website": "https://hemphillservices.com"
+    }
+]

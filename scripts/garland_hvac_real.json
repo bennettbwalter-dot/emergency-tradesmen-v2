@@ -1,0 +1,37 @@
+[
+    {
+        "name": "A-US Air Conditioning of Texas",
+        "phone": "(877) 221-2109",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Copeland Home Services",
+        "phone": "(469) 720-4440",
+        "address": "Garland, TX",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "24/7 AC Repair Garland",
+        "phone": "(214) 206-4356",
+        "address": "Garland, TX",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Aircons Heat & Better Air",
+        "phone": "(469) 931-2048",
+        "address": "Garland, TX",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Williams Services Air Conditioning & Heating",
+        "phone": "(972) 279-2665",
+        "address": "Garland, TX",
+        "rating": 4.8,
+        "review_count": 1500
+    }
+]

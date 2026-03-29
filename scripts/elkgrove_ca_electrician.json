@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Power Electric",
+        "phone": "(916) 792-0873",
+        "address": "Elk Grove, CA",
+        "website": "https://powerelectric1.com"
+    },
+    {
+        "name": "Griffin Electric",
+        "phone": "(916) 971-0532",
+        "address": "Elk Grove, CA",
+        "website": "https://griffinelectric.com"
+    },
+    {
+        "name": "Illuminate Electric Solutions",
+        "phone": "(916) 826-9598",
+        "address": "Elk Grove, CA",
+        "website": "https://illuminateelectricsolutions.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "(916) 251-4785",
+        "address": "Elk Grove, CA",
+        "website": "https://mistersparky.com"
+    }
+]

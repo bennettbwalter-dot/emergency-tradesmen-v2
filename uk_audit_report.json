@@ -1,0 +1,8604 @@
+{
+  "summary": {
+    "total_listings": 23598,
+    "total_landing_pages": 2970,
+    "complete_pages": 1552,
+    "incomplete_pages": 1418
+  },
+  "gaps": [
+    {
+      "city": "London",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Manchester",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Birmingham",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Leeds",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Leeds",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glasgow",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Glasgow",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sheffield",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Sheffield",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Sheffield",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bradford",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Liverpool",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Edinburgh",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Edinburgh",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Edinburgh",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Edinburgh",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bristol",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cardiff",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cardiff",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Cardiff",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Cardiff",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Cardiff",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Cardiff",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Cardiff",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Coventry",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Nottingham",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Nottingham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Leicester",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sunderland",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Belfast",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Belfast",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Belfast",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Belfast",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Belfast",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newcastle upon Tyne",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Newcastle-upon-Tyne",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newcastle-upon-Tyne",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newcastle-upon-Tyne",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newcastle-upon-Tyne",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brighton",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brighton",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Brighton",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Brighton",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Brighton",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Brighton & Hove",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brighton & Hove",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Brighton & Hove",
+      "trade": "water-restoration",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Brighton & Hove",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brighton & Hove",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hull",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Plymouth",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Plymouth",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stoke-on-Trent",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Stoke-on-Trent",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Derby",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Derby",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Swansea",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Swansea",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Swansea",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Swansea",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Southampton",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Southampton",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salford",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Salford",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Aberdeen",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Aberdeen",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Aberdeen",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Portsmouth",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "York",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "York",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Peterborough",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Peterborough",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Peterborough",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Peterborough",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Peterborough",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Peterborough",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dundee",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dundee",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dundee",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dundee",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dundee",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Dundee",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Oxford",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cambridge",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Cambridge",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Norwich",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Norwich",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Norwich",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Norwich",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Exeter",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Exeter",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Exeter",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Luton",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Milton Keynes",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Northampton",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Northampton",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Northampton",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Northampton",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Northampton",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Northampton",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bournemouth",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bournemouth",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bournemouth",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Reading",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Reading",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Reading",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Blackpool",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Blackpool",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Preston",
+      "trade": "builder",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Huddersfield",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Slough",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Slough",
+      "trade": "builder",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Swindon",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Oldham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rochdale",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rochdale",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Doncaster",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Doncaster",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Doncaster",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Doncaster",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Doncaster",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Doncaster",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Bedford",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bedford",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bedford",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bedford",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bedford",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Ipswich",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ipswich",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ipswich",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ipswich",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Ipswich",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cheltenham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gloucester",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Worcester",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Shrewsbury",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Canterbury",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Canterbury",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Carlisle",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chelmsford",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Chelmsford",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chelmsford",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Chester",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Colchester",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Colchester",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Colchester",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Durham",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Durham",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Lancaster",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Lancaster",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Lancaster",
+      "trade": "builder",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Lincoln",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Lincoln",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southend-on-Sea",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Albans",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Truro",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Truro",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wakefield",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Winchester",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Winchester",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Winchester",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Winchester",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Winchester",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Winchester",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Winchester",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Westminster",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Westminster",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Westminster",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Warrington",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Wigan",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wigan",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Wigan",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wigan",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wigan",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Middlesbrough",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Middlesbrough",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Middlesbrough",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barnsley",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Barnsley",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barnsley",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newport",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Newport",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newport",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newport",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Poole",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Poole",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Poole",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Poole",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockport",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Stockport",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Stockport",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Stockport",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockport",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Basildon",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Basildon",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basildon",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basildon",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Basildon",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basildon",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Maidstone",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Maidstone",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Maidstone",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidstone",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Maidstone",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Maidstone",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crawley",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crawley",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Crawley",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Crawley",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Crawley",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Crawley",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Crawley",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Worthing",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Worthing",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Worthing",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Worthing",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Worthing",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Worthing",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Worthing",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sutton Coldfield",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Dudley",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dudley",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dudley",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Walsall",
+      "trade": "breakdown",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Walsall",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Watford",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Watford",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Watford",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Watford",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Watford",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Watford",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Watford",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Watford",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "High Wycombe",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "High Wycombe",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "High Wycombe",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "High Wycombe",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "High Wycombe",
+      "trade": "builder",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Stevenage",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Redditch",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chesterfield",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Chesterfield",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chesterfield",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Mansfield",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Mansfield",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Mansfield",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Mansfield",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Beeston",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Beeston",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Beeston",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Beeston",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Loughborough",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Loughborough",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Loughborough",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Loughborough",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Burton upon Trent",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Burton upon Trent",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Burton upon Trent",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Burton upon Trent",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crewe",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crewe",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crewe",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crewe",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Macclesfield",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Macclesfield",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Macclesfield",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Macclesfield",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Scunthorpe",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grimsby",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Grimsby",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Grimsby",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Harrogate",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Harrogate",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Harrogate",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Halifax",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Batley",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Batley",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Batley",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Batley",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Keighley",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Keighley",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Keighley",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Keighley",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Keighley",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "South Shields",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "South Shields",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "South Shields",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "South Shields",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "South Shields",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gateshead",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Gateshead",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gateshead",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gateshead",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gateshead",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Darlington",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hartlepool",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stockton-on-Tees",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hemel Hempstead",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Gillingham",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gillingham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Eastbourne",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rayleigh",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Lowestoft",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woking",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Maidenhead",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Basingstoke",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Fareham",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Fareham",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Fareham",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Fareham",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Fareham",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gosport",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gosport",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Gosport",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ewell",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ewell",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ewell",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Ewell",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Crosby",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Crosby",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Crosby",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Crosby",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Paignton",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paignton",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paignton",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paignton",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paignton",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Paignton",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Torquay",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Torquay",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Torquay",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Torquay",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Torquay",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Torquay",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Torquay",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bebington",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bebington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Halesowen",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Halesowen",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Halesowen",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Halesowen",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Halesowen",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Halesowen",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kidderminster",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kidderminster",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kidderminster",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kidderminster",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Rugby",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Rugby",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Leamington Spa",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Leamington Spa",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Leamington Spa",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kettering",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wellingborough",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunstable",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dunstable",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dunstable",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dunstable",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dunstable",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Aylesbury",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Aylesbury",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Aylesbury",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Aylesbury",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cheshunt",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Cheshunt",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Cheshunt",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Cheshunt",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cheshunt",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Welwyn Garden City",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Welwyn Garden City",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Welwyn Garden City",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Margate",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Margate",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Margate",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Royal Tunbridge Wells",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ashford",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ashford",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ashford",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ashford",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ashford",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Braintree",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Braintree",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Canvey Island",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Canvey Island",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clacton-on-Sea",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Clacton-on-Sea",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clacton-on-Sea",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sittingbourne",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sittingbourne",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sittingbourne",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Sittingbourne",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Sittingbourne",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gravesend",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gravesend",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Gravesend",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dartford",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dartford",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dartford",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Weymouth",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Weymouth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falmouth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falmouth",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "St Austell",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "St Austell",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Austell",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Scarborough",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Scarborough",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Scarborough",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Scarborough",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Scarborough",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Scarborough",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridlington",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bridlington",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridlington",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridlington",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridlington",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bridlington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Castleford",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Castleford",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Castleford",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Pontefract",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Pontefract",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Pontefract",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Pontefract",
+      "trade": "roofer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Pontefract",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Pontefract",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Pontefract",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Rotherham",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Rotherham",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Rotherham",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Rotherham",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Sale",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Sale",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Sale",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Sale",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sale",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Sale",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Widnes",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Widnes",
+      "trade": "roofer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Widnes",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Widnes",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Runcorn",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Runcorn",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Runcorn",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Runcorn",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Runcorn",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Ellesmere Port",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Ellesmere Port",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ellesmere Port",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Birkenhead",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Wallasey",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wallasey",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wallasey",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wallasey",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wallasey",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wallasey",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barrow-in-Furness",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barrow-in-Furness",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barrow-in-Furness",
+      "trade": "builder",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barrow-in-Furness",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barrow-in-Furness",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Workington",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Workington",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Workington",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Workington",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Workington",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Workington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "water-restoration",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Whitehaven",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chorley",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Chorley",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Chorley",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chorley",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Accrington",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Accrington",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Accrington",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Accrington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Accrington",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Burnley",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Burnley",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Burnley",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Burnley",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Burnley",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Burnley",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Burnley",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Burnley",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lytham St Annes",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Stafford",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Stafford",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stafford",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bromsgrove",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Grantham",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Grantham",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Grantham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Grantham",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Grantham",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Grantham",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Ely",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ely",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ely",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ely",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ely",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ely",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lichfield",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lichfield",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lichfield",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lichfield",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lichfield",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ripon",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Ripon",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ripon",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ripon",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ripon",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ripon",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salisbury",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Salisbury",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salisbury",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salisbury",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salisbury",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Salisbury",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wells",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Wells",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wells",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wells",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wells",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wells",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Solihull",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Solihull",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Solihull",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Solihull",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Solihull",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Solihull",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Guildford",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Guildford",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Guildford",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Guildford",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Guildford",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Guildford",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Guildford",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Staines",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Staines",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Staines",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Staines",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Chatham",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chatham",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hastings",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hastings",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hastings",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Hastings",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hastings",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hastings",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hastings",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Nuneaton",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Nuneaton",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Tamworth",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Tamworth",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tamworth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cannock",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cannock",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cannock",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cannock",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bath",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bath",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bath",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bath",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Brixton",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Brixton",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Brixton",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Brixton",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hackney",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hackney",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hackney",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Camden",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Camden",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Islington",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Islington",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Greenwich",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Greenwich",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenwich",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Chelsea",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Chelsea",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wembley",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wembley",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wembley",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Croydon",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Croydon",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Croydon",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Croydon",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Croydon",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Ealing",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Ealing",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ealing",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Enfield",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Enfield",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enfield",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Harrow",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Harrow",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Harrow",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Harrow",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Harrow",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hounslow",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hounslow",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hounslow",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hounslow",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hounslow",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hounslow",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Hounslow",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hounslow",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hounslow",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hounslow",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hounslow",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kingston",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kingston",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kingston",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Kingston",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kingston",
+      "trade": "breakdown",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Merton",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merton",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merton",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newham",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Newham",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Newham",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newham",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newham",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newham",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newham",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newham",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Redbridge",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Redbridge",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Redbridge",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Redbridge",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Redbridge",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Redbridge",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Richmond",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Richmond",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Richmond",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Richmond",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Richmond",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Richmond",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southwark",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Southwark",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Southwark",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southwark",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Southwark",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Southwark",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southwark",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southwark",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Tower Hamlets",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Tower Hamlets",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tower Hamlets",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Tower Hamlets",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tower Hamlets",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Waltham Forest",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Waltham Forest",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Waltham Forest",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Waltham Forest",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Waltham Forest",
+      "trade": "hvac",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wandsworth",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Woolwich",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Woolwich",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Woolwich",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Fulham",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Fulham",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Derry",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lisburn",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Lisburn",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bangor",
+      "trade": "water-restoration",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Bangor",
+      "trade": "breakdown",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Inverness",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Inverness",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Inverness",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Perth",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Perth",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Perth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Perth",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Stirling",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Stirling",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Stirling",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Stirling",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Stirling",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Stirling",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Stirling",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Paisley",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paisley",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paisley",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paisley",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paisley",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Paisley",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Paisley",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Paisley",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Paisley",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Paisley",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Paisley",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "East Kilbride",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Livingston",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Livingston",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Livingston",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Livingston",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Livingston",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Livingston",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Livingston",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Livingston",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Livingston",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Livingston",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Livingston",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hamilton",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hamilton",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Hamilton",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Hamilton",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hamilton",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Hamilton",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cumbernauld",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dunfermline",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kirkcaldy",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Ayr",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Ayr",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wrexham",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Wrexham",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Wrexham",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Wrexham",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "roofer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newport (Wales)",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "roofer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bangor (Wales)",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "St Asaph",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Asaph",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "St Davids",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "St Davids",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Davids",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Helens",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "St Helens",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "St Helens",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "St Helens",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bury",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Bury",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bury",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Bury",
+      "trade": "builder",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Southport",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Southport",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Southport",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "West Bromwich",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "West Bromwich",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "West Bromwich",
+      "trade": "builder",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "West Bromwich",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "West Bromwich",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Taunton",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Taunton",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Taunton",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Taunton",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Taunton",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Yeovil",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Yeovil",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Yeovil",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Yeovil",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Yeovil",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Weston-super-Mare",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Weston-super-Mare",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barnstaple",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newquay",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newquay",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Newquay",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newquay",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Newquay",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newquay",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newquay",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dover",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dover",
+      "trade": "locksmith",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Dover",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dover",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Dover",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dover",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dover",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Folkestone",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Folkestone",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Folkestone",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Folkestone",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Folkestone",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Folkestone",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Folkestone",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "gas-engineer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "drain-specialist",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Great Yarmouth",
+      "trade": "hvac",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "King's Lynn",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Corby",
+      "trade": "electrician",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Corby",
+      "trade": "glazier",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Corby",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Corby",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Redcar",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Redcar",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Redcar",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Redcar",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tynemouth",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tynemouth",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tynemouth",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Tynemouth",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Washington",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Washington",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Washington",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Washington",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Washington",
+      "trade": "hvac",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Altrincham",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Altrincham",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Altrincham",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Skelmersdale",
+      "trade": "glazier",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Skelmersdale",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Skelmersdale",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Morecambe",
+      "trade": "drain-specialist",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Morecambe",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Morecambe",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Morecambe",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Morecambe",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kendal",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kendal",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kendal",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kendal",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kendal",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kendal",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Penrith",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Penrith",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Penrith",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Penrith",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dumfries",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dumfries",
+      "trade": "water-restoration",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Dumfries",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Dumfries",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Falkirk",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Falkirk",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Falkirk",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Falkirk",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Kilmarnock",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Motherwell",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Motherwell",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Motherwell",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Motherwell",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coatbridge",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "plumber",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Clydebank",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Clydebank",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Clydebank",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Clydebank",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Greenock",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Greenock",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Greenock",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Greenock",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Greenock",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Glenrothes",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Llandudno",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Rhyl",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Caerphilly",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bridgend",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "electrician",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Bridgend",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Bridgend",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "roofer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Merthyr Tydfil",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "plumber",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "glazier",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "builder",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Cwmbran",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "plumber",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Barry",
+      "trade": "electrician",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "locksmith",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "gas-engineer",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Barry",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "roofer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "builder",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Barry",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Barry",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Llanelli",
+      "trade": "plumber",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Llanelli",
+      "trade": "electrician",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Llanelli",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Llanelli",
+      "trade": "gas-engineer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Llanelli",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Llanelli",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Llanelli",
+      "trade": "roofer",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Llanelli",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Llanelli",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Neath",
+      "trade": "drain-specialist",
+      "current": 3,
+      "needed": 2
+    },
+    {
+      "city": "Neath",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Neath",
+      "trade": "roofer",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Neath",
+      "trade": "water-restoration",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Neath",
+      "trade": "breakdown",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Neath",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "gas-engineer",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Port Talbot",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newry",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Newry",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Armagh",
+      "trade": "locksmith",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Armagh",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Armagh",
+      "trade": "drain-specialist",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Armagh",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Armagh",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Armagh",
+      "trade": "hvac",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Coleraine",
+      "trade": "plumber",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Coleraine",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coleraine",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coleraine",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coleraine",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Coleraine",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Londonderry",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Londonderry",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Londonderry",
+      "trade": "glazier",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Londonderry",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Londonderry",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Londonderry",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "electrician",
+      "current": 4,
+      "needed": 1
+    },
+    {
+      "city": "Omagh",
+      "trade": "locksmith",
+      "current": 2,
+      "needed": 3
+    },
+    {
+      "city": "Omagh",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Omagh",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "locksmith",
+      "current": 1,
+      "needed": 4
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "gas-engineer",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "drain-specialist",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "glazier",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "water-restoration",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "breakdown",
+      "current": 0,
+      "needed": 5
+    },
+    {
+      "city": "Enniskillen",
+      "trade": "hvac",
+      "current": 0,
+      "needed": 5
+    }
+  ],
+  "unknown_locations_in_db": [
+    "Dorchester",
+    "Horsham",
+    "Oakham",
+    "Haywards Heath",
+    "Mussleburgh",
+    "Leigh",
+    "Sevenoaks",
+    "Huyton",
+    "Warwick",
+    "Fleetwood",
+    "Bexhill",
+    "Newcastle",
+    "Warwickshire",
+    "New Brighton",
+    "Kingswinford",
+    "Dorset",
+    "Derbyshire",
+    "Ormskirk",
+    "Sussex",
+    "Leatherhead",
+    "Bracknell",
+    "Galashiels",
+    "Ashton-under-Lyne",
+    "Banbury",
+    "Ilford",
+    "Leyland",
+    "brighton-&-hove",
+    "Huntingdon",
+    "Hampshire",
+    "Wokingham",
+    "Newhaven",
+    "Bangor (NI)",
+    "Eastleigh",
+    "Littlehampton",
+    "Melton Mowbray",
+    "Cornwall",
+    "Castlereagh",
+    "Norfolk",
+    "Stokeontrent",
+    "Ramsgate",
+    "Shropshire",
+    "Newark-on-Trent",
+    "Burgess Hill",
+    "Stourbridge",
+    "chichester",
+    "Yorkshire",
+    "Orpington",
+    "Lancashire",
+    "Newton Aycliffe",
+    "Seaford",
+    "Newton Abbot",
+    "Nelson",
+    "Oldbury",
+    "Tunbridge Wells",
+    "Northwich",
+    "Essex",
+    "Tonbridge",
+    "Kent",
+    "Newbury",
+    "Newton-le-Willows",
+    "Lewes",
+    "Grays",
+    "Berkshire",
+    "Kingston upon Thames",
+    "Farnborough",
+    "Irvine",
+    "Crowborough",
+    "Redhill",
+    "Epsom",
+    "Chichester",
+    "Newcastle-under-Lyme",
+    "Surrey",
+    "Faversham",
+    "Burton-upon-Trent",
+    "Newtownabbey",
+    "City of London",
+    "Reigate",
+    "Uckfield",
+    "milton-keynes",
+    "Musselburgh",
+    "Blackburn",
+    "Devon",
+    "newcastle",
+    "North Shields"
+  ]
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Hoboken, NJ",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Integrated Electrical Solutions",
+        "phone": "(609) 752-6074",
+        "address": "Hoboken, NJ",
+        "website": "https://integratedelectricalsolutionsnj.com"
+    },
+    {
+        "name": "Xpert Electric",
+        "phone": "(201) 393-2420",
+        "address": "Hoboken, NJ",
+        "website": "https://callxe.com"
+    },
+    {
+        "name": "D & M Master Electric",
+        "phone": "(973) 604-5628",
+        "address": "Hoboken, NJ",
+        "website": "https://dmmasterelectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Volt Vikings",
+        "phone": "(520) 844-0705",
+        "address": "Casas Adobes, AZ",
+        "website": "https://voltvikings.com"
+    },
+    {
+        "name": "JCP Electric Inc",
+        "phone": "(520) 808-3108",
+        "address": "Casas Adobes, AZ",
+        "website": "https://jcpelectrictucson.com"
+    },
+    {
+        "name": "Casas Adobes Electrical Services",
+        "phone": "(888) 903-2131",
+        "address": "Casas Adobes, AZ",
+        "website": "https://recessedelectrical.com"
+    },
+    {
+        "name": "Done Rite Services",
+        "phone": "(520) 369-3966",
+        "address": "Casas Adobes, AZ",
+        "website": "https://doneritesvcs.com"
+    }
+]

@@ -1,0 +1,2350 @@
+[
+  {
+    "city": "London",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "London",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "London",
+    "trade": "glazier"
+  },
+  {
+    "city": "London",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "London",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "London",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "London",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "London",
+    "trade": "lockout"
+  },
+  {
+    "city": "London",
+    "trade": "broken-window"
+  },
+  {
+    "city": "London",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "London",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Manchester",
+    "trade": "roofer"
+  },
+  {
+    "city": "Manchester",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Manchester",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Manchester",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Manchester",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Manchester",
+    "trade": "lockout"
+  },
+  {
+    "city": "Manchester",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Manchester",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Manchester",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "plumber"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "glazier"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "roofer"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "lockout"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Birmingham",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Leeds",
+    "trade": "electrician"
+  },
+  {
+    "city": "Leeds",
+    "trade": "roofer"
+  },
+  {
+    "city": "Leeds",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Leeds",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Leeds",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Leeds",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Leeds",
+    "trade": "lockout"
+  },
+  {
+    "city": "Leeds",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Leeds",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Leeds",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "plumber"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "electrician"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "roofer"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "lockout"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Glasgow",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "glazier"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "roofer"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "lockout"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Sheffield",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Bradford",
+    "trade": "electrician"
+  },
+  {
+    "city": "Bradford",
+    "trade": "roofer"
+  },
+  {
+    "city": "Bradford",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Bradford",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Bradford",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Bradford",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Bradford",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Bradford",
+    "trade": "lockout"
+  },
+  {
+    "city": "Bradford",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Bradford",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Bradford",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "glazier"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "roofer"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "lockout"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Liverpool",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "plumber"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "roofer"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "lockout"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Bristol",
+    "trade": "roofer"
+  },
+  {
+    "city": "Bristol",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Bristol",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Bristol",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Bristol",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Bristol",
+    "trade": "lockout"
+  },
+  {
+    "city": "Bristol",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Bristol",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Bristol",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "plumber"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "electrician"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "roofer"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "lockout"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Cardiff",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Coventry",
+    "trade": "roofer"
+  },
+  {
+    "city": "Coventry",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Coventry",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Coventry",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Coventry",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Coventry",
+    "trade": "lockout"
+  },
+  {
+    "city": "Coventry",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Coventry",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Coventry",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "roofer"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "lockout"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Nottingham",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Leicester",
+    "trade": "plumber"
+  },
+  {
+    "city": "Leicester",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Leicester",
+    "trade": "roofer"
+  },
+  {
+    "city": "Leicester",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Leicester",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Leicester",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Leicester",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Leicester",
+    "trade": "lockout"
+  },
+  {
+    "city": "Leicester",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Leicester",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Leicester",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "electrician"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "lockout"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Sunderland",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Belfast",
+    "trade": "plumber"
+  },
+  {
+    "city": "Belfast",
+    "trade": "electrician"
+  },
+  {
+    "city": "Belfast",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Belfast",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Belfast",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Belfast",
+    "trade": "glazier"
+  },
+  {
+    "city": "Belfast",
+    "trade": "hvac"
+  },
+  {
+    "city": "Belfast",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Belfast",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Belfast",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Belfast",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Belfast",
+    "trade": "lockout"
+  },
+  {
+    "city": "Belfast",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Belfast",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Belfast",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "electrician"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "glazier"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "hvac"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "lockout"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Newcastle upon Tyne",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "lockout"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Newcastle-upon-Tyne",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Brighton",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Brighton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Brighton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Brighton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Brighton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Brighton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Brighton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Brighton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Brighton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "hvac"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "lockout"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Brighton & Hove",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Hull",
+    "trade": "roofer"
+  },
+  {
+    "city": "Hull",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Hull",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Hull",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Hull",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Hull",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Hull",
+    "trade": "lockout"
+  },
+  {
+    "city": "Hull",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Hull",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Hull",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "plumber"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "electrician"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "glazier"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "roofer"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "lockout"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Plymouth",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "plumber"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "glazier"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "lockout"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Wolverhampton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Derby",
+    "trade": "roofer"
+  },
+  {
+    "city": "Derby",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Derby",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Derby",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Derby",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Derby",
+    "trade": "lockout"
+  },
+  {
+    "city": "Derby",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Derby",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Derby",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Swansea",
+    "trade": "plumber"
+  },
+  {
+    "city": "Swansea",
+    "trade": "electrician"
+  },
+  {
+    "city": "Swansea",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Swansea",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Swansea",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Swansea",
+    "trade": "glazier"
+  },
+  {
+    "city": "Swansea",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Swansea",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Swansea",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Swansea",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Swansea",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Swansea",
+    "trade": "lockout"
+  },
+  {
+    "city": "Swansea",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Swansea",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Swansea",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Southampton",
+    "trade": "plumber"
+  },
+  {
+    "city": "Southampton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Southampton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Southampton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Southampton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Southampton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Southampton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Southampton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Southampton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Salford",
+    "trade": "electrician"
+  },
+  {
+    "city": "Salford",
+    "trade": "glazier"
+  },
+  {
+    "city": "Salford",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Salford",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Salford",
+    "trade": "hvac"
+  },
+  {
+    "city": "Salford",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Salford",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Salford",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Salford",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Salford",
+    "trade": "lockout"
+  },
+  {
+    "city": "Salford",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Salford",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Salford",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "plumber"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "roofer"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "lockout"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "roofer"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "lockout"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Portsmouth",
+    "trade": "water-damage"
+  },
+  {
+    "city": "York",
+    "trade": "plumber"
+  },
+  {
+    "city": "York",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "York",
+    "trade": "roofer"
+  },
+  {
+    "city": "York",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "York",
+    "trade": "breakdown"
+  },
+  {
+    "city": "York",
+    "trade": "hvac"
+  },
+  {
+    "city": "York",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "York",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "York",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "York",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "York",
+    "trade": "lockout"
+  },
+  {
+    "city": "York",
+    "trade": "broken-window"
+  },
+  {
+    "city": "York",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "York",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "plumber"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "electrician"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "glazier"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "roofer"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "hvac"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "lockout"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Peterborough",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Dundee",
+    "trade": "plumber"
+  },
+  {
+    "city": "Dundee",
+    "trade": "electrician"
+  },
+  {
+    "city": "Dundee",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Dundee",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Dundee",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Dundee",
+    "trade": "glazier"
+  },
+  {
+    "city": "Dundee",
+    "trade": "roofer"
+  },
+  {
+    "city": "Dundee",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Dundee",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Dundee",
+    "trade": "hvac"
+  },
+  {
+    "city": "Dundee",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Dundee",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Dundee",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Dundee",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Dundee",
+    "trade": "lockout"
+  },
+  {
+    "city": "Dundee",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Dundee",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Dundee",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Oxford",
+    "trade": "plumber"
+  },
+  {
+    "city": "Oxford",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Oxford",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Oxford",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Oxford",
+    "trade": "glazier"
+  },
+  {
+    "city": "Oxford",
+    "trade": "roofer"
+  },
+  {
+    "city": "Oxford",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Oxford",
+    "trade": "hvac"
+  },
+  {
+    "city": "Oxford",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Oxford",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Oxford",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Oxford",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Oxford",
+    "trade": "lockout"
+  },
+  {
+    "city": "Oxford",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Oxford",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Oxford",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "roofer"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "hvac"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "lockout"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Cambridge",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Norwich",
+    "trade": "glazier"
+  },
+  {
+    "city": "Norwich",
+    "trade": "breakdown"
+  },
+  {
+    "city": "Norwich",
+    "trade": "hvac"
+  },
+  {
+    "city": "Norwich",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Norwich",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Norwich",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Norwich",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Norwich",
+    "trade": "lockout"
+  },
+  {
+    "city": "Norwich",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Norwich",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Norwich",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Exeter",
+    "trade": "electrician"
+  },
+  {
+    "city": "Exeter",
+    "trade": "hvac"
+  },
+  {
+    "city": "Exeter",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Exeter",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Exeter",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Exeter",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Exeter",
+    "trade": "lockout"
+  },
+  {
+    "city": "Exeter",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Exeter",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Exeter",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Luton",
+    "trade": "roofer"
+  },
+  {
+    "city": "Luton",
+    "trade": "hvac"
+  },
+  {
+    "city": "Luton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Luton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Luton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Luton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Luton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Luton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Luton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Luton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "electrician"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "roofer"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "hvac"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "lockout"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Milton Keynes",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Northampton",
+    "trade": "plumber"
+  },
+  {
+    "city": "Northampton",
+    "trade": "electrician"
+  },
+  {
+    "city": "Northampton",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Northampton",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Northampton",
+    "trade": "glazier"
+  },
+  {
+    "city": "Northampton",
+    "trade": "hvac"
+  },
+  {
+    "city": "Northampton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Northampton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Northampton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Northampton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Northampton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Northampton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Northampton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Northampton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "plumber"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "lockout"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Bournemouth",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Reading",
+    "trade": "electrician"
+  },
+  {
+    "city": "Reading",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Reading",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Reading",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Reading",
+    "trade": "roofer"
+  },
+  {
+    "city": "Reading",
+    "trade": "hvac"
+  },
+  {
+    "city": "Reading",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Reading",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Reading",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Reading",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Reading",
+    "trade": "lockout"
+  },
+  {
+    "city": "Reading",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Reading",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Reading",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "electrician"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "roofer"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "hvac"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "lockout"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Blackpool",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Preston",
+    "trade": "electrician"
+  },
+  {
+    "city": "Preston",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Preston",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Preston",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Preston",
+    "trade": "glazier"
+  },
+  {
+    "city": "Preston",
+    "trade": "roofer"
+  },
+  {
+    "city": "Preston",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Preston",
+    "trade": "hvac"
+  },
+  {
+    "city": "Preston",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Preston",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Preston",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Preston",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Preston",
+    "trade": "lockout"
+  },
+  {
+    "city": "Preston",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Preston",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Preston",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "roofer"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "hvac"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "lockout"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Huddersfield",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Slough",
+    "trade": "plumber"
+  },
+  {
+    "city": "Slough",
+    "trade": "roofer"
+  },
+  {
+    "city": "Slough",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Slough",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Slough",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Slough",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Slough",
+    "trade": "lockout"
+  },
+  {
+    "city": "Slough",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Slough",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Slough",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Swindon",
+    "trade": "electrician"
+  },
+  {
+    "city": "Swindon",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Swindon",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Swindon",
+    "trade": "glazier"
+  },
+  {
+    "city": "Swindon",
+    "trade": "roofer"
+  },
+  {
+    "city": "Swindon",
+    "trade": "hvac"
+  },
+  {
+    "city": "Swindon",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Swindon",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Swindon",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Swindon",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Swindon",
+    "trade": "lockout"
+  },
+  {
+    "city": "Swindon",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Swindon",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Swindon",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Bolton",
+    "trade": "electrician"
+  },
+  {
+    "city": "Bolton",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Bolton",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Bolton",
+    "trade": "glazier"
+  },
+  {
+    "city": "Bolton",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Bolton",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Bolton",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Bolton",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Bolton",
+    "trade": "lockout"
+  },
+  {
+    "city": "Bolton",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Bolton",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Bolton",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Oldham",
+    "trade": "locksmith"
+  },
+  {
+    "city": "Oldham",
+    "trade": "gas-engineer"
+  },
+  {
+    "city": "Oldham",
+    "trade": "drain-specialist"
+  },
+  {
+    "city": "Oldham",
+    "trade": "glazier"
+  },
+  {
+    "city": "Oldham",
+    "trade": "roofer"
+  },
+  {
+    "city": "Oldham",
+    "trade": "water-restoration"
+  },
+  {
+    "city": "Oldham",
+    "trade": "hvac"
+  },
+  {
+    "city": "Oldham",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Oldham",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Oldham",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Oldham",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Oldham",
+    "trade": "lockout"
+  },
+  {
+    "city": "Oldham",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Oldham",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Oldham",
+    "trade": "water-damage"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "glazier"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "roofer"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "hvac"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "burst-pipe"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "no-hot-water"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "boiler-breakdown"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "power-cut-fault"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "lockout"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "broken-window"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "drain-unblocking"
+  },
+  {
+    "city": "Rochdale",
+    "trade": "water-damage"
+  }
+]

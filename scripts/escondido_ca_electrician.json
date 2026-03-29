@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Baker Electric",
+        "phone": "(760) 745-2001",
+        "address": "Escondido, CA",
+        "website": "https://baker-electric.com"
+    },
+    {
+        "name": "Electrical Insight",
+        "phone": "(760) 304-9070",
+        "address": "Escondido, CA",
+        "website": "https://electricalinsight.com"
+    },
+    {
+        "name": "ESD Electric Escondido",
+        "phone": "(619) 381-6677",
+        "address": "Escondido, CA",
+        "website": "https://esdelectrician.com"
+    },
+    {
+        "name": "Escondido Electrician Services",
+        "phone": "(866) 692-4322",
+        "address": "Escondido, CA",
+        "website": "https://caelectriciandirectory.com"
+    }
+]

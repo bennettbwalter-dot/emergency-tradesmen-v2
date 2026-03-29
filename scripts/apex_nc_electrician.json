@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "Apex, NC",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Apex Electrician Squad",
+        "phone": "855-930-6015",
+        "address": "Apex, NC",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "After Hours Electrical",
+        "phone": "910-303-7722",
+        "address": "Apex, NC",
+        "website": "https://afterhourselectrical.org"
+    },
+    {
+        "name": "Crisp Electric",
+        "phone": "984-377-7870",
+        "address": "Apex, NC",
+        "website": "https://crispelectric.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter",
+        "phone": "574-287-3737",
+        "address": "Mishawaka, IN",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Church Plumbing & Heating",
+        "phone": "574-295-6844",
+        "address": "Mishawaka, IN",
+        "website": "https://churchplumbing.com"
+    },
+    {
+        "name": "Alvin's Plumbing",
+        "phone": "888-565-9676",
+        "address": "Mishawaka, IN",
+        "website": "https://alvinsplumbingllc.com"
+    },
+    {
+        "name": "Abe's Complete Plumbing",
+        "phone": "574-233-0000",
+        "address": "Mishawaka, IN",
+        "website": "https://abescompleteplumbing.com"
+    }
+]

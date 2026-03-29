@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Progressive Service Company",
+        "phone": "919-325-0180",
+        "address": "Cary, NC",
+        "website": "https://callprogressive.com"
+    },
+    {
+        "name": "Weather Master Electric",
+        "phone": "919-853-7910",
+        "address": "Cary, NC",
+        "website": "https://weathermasterhvac.com"
+    },
+    {
+        "name": "The Volt Doctors",
+        "phone": "919-236-7167",
+        "address": "Cary, NC",
+        "website": "https://duramelectricalservices.com"
+    },
+    {
+        "name": "NC Express Services LLC",
+        "phone": "919-626-8625",
+        "address": "Cary, NC",
+        "website": "https://ncexpress.pro"
+    }
+]

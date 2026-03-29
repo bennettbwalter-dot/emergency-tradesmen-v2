@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Easley Contractors",
+        "phone": "(901) 452-0681",
+        "address": "3136 Summer Ave, Memphis, TN 38112",
+        "website": "https://easleycontractors.com/"
+    },
+    {
+        "name": "ServiceMaster by Cornerstone",
+        "phone": "(901) 459-3675",
+        "address": "Memphis, TN",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Homeway Construction & Restoration",
+        "phone": "(901) 660-9727",
+        "address": "Memphis, TN",
+        "website": "https://homewayconstruction.com/"
+    },
+    {
+        "name": "SERVPRO of East Memphis",
+        "phone": "(901) 754-9061",
+        "address": "Memphis, TN",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Restoration 1 of Greater Memphis",
+        "phone": "(901) 250-1986",
+        "address": "Memphis, TN",
+        "website": "https://restoration1.com/"
+    }
+]

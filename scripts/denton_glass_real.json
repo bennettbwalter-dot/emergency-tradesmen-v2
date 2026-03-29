@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Denton Glass Company",
+        "phone": "(940) 566-2814",
+        "address": "Denton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Gizmo Glass",
+        "phone": "512-799-6734",
+        "address": "Denton, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "24hr Sliding Door Repair Denton",
+        "phone": "(877) 299-9179",
+        "address": "Denton, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Jasso Glass & Mirror LLC",
+        "phone": "(469) 254-0584",
+        "address": "Denton, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

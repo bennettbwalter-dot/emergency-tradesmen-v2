@@ -1,0 +1,38 @@
+[
+    {
+        "name": "ServiceMaster of North Texas",
+        "phone": "(972) 284-0757",
+        "address": "Irving, TX",
+        "website": "http://www.servicemasterofnorthtexas.com/"
+    },
+    {
+        "name": "PuroClean of Irving, TX",
+        "phone": "(214) 446-5458",
+        "address": "Irving, TX",
+        "website": "https://puroclean.com"
+    },
+    {
+        "name": "TruStar Restoration",
+        "phone": "(469) 214-5333",
+        "address": "Irving, TX",
+        "website": "https://trustarrestoration.com/"
+    },
+    {
+        "name": "Jenkins Restorations",
+        "phone": "(682) 219-0320",
+        "address": "Irving, TX",
+        "website": "https://jenkinsrestorations.com/"
+    },
+    {
+        "name": "Dry Force",
+        "phone": "(866) 665-1809",
+        "address": "Irving, TX",
+        "website": "https://dryforcecorp.com/"
+    },
+    {
+        "name": "Merit Restorations",
+        "phone": "(540) 338-2981",
+        "address": "Irving, TX",
+        "website": "https://meritrestorations.com/"
+    }
+]

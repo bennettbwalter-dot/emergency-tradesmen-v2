@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Essential Heating & Air",
+        "phone": "(253) 576-7251",
+        "address": "Seattle, WA",
+        "rating": 5.0,
+        "review_count": 1050
+    },
+    {
+        "name": "Harts Plumbers, Electricians, & HVAC Technicians",
+        "phone": "(206) 316-9938",
+        "address": "Seattle, WA",
+        "rating": 4.8,
+        "review_count": 8200
+    },
+    {
+        "name": "Home Comfort Alliance",
+        "phone": "(425) 448-3127",
+        "address": "Seattle, WA",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "Northwest Mechanical",
+        "phone": "(206) 900-9231",
+        "address": "Seattle, WA",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "HotWire Repair",
+        "phone": "(206) 337-5514",
+        "address": "Seattle, WA",
+        "rating": 4.6,
+        "review_count": 120
+    }
+]

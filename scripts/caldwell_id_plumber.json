@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Wickstrom Service Co",
+        "phone": "(208) 269-7190",
+        "address": "Caldwell, ID",
+        "website": "https://wickstromphc.com"
+    },
+    {
+        "name": "A-V Emergency Plumbing Repair",
+        "phone": "(208) 782-7333",
+        "address": "Caldwell, ID",
+        "website": "https://a-vplumbing.com"
+    },
+    {
+        "name": "Beacon Plumbing Caldwell",
+        "phone": "(208) 207-5560",
+        "address": "Caldwell, ID",
+        "website": "https://beaconplumbing.net"
+    },
+    {
+        "name": "Roto-Rooter Caldwell",
+        "phone": "(208) 467-5001",
+        "address": "Caldwell, ID",
+        "website": "https://rotorooter.com"
+    }
+]

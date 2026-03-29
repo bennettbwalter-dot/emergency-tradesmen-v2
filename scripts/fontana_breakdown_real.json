@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Fontana Towing",
+        "phone": "(909) 211-1333",
+        "address": "Fontana, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Always Ready Towing Fontana",
+        "phone": "(909) 300-4444",
+        "address": "Fontana, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Fontana Roadside",
+        "phone": "(909) 322-2222",
+        "address": "Fontana, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Inland Empire Towing Fontana",
+        "phone": "(909) 500-0505",
+        "address": "Fontana, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Foothill Recovery",
+        "phone": "(909) 350-0000",
+        "address": "Fontana, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

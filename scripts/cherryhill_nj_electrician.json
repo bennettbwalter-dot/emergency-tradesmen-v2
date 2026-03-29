@@ -1,0 +1,26 @@
+[
+    {
+        "name": "DK Electrical Solutions",
+        "phone": "(609) 796-4177",
+        "address": "Cherry Hill, NJ",
+        "website": "https://dkelectricalsolutions.com"
+    },
+    {
+        "name": "Cobalt Electric",
+        "phone": "(856) 701-0098",
+        "address": "Cherry Hill, NJ",
+        "website": "https://cobaltelectricnj.com"
+    },
+    {
+        "name": "Abel Electrical Contracting",
+        "phone": "(856) 553-4252",
+        "address": "Cherry Hill, NJ",
+        "website": "https://abelelectricalcontracting.com"
+    },
+    {
+        "name": "Raynor Services",
+        "phone": "(609) 845-3460",
+        "address": "Cherry Hill, NJ",
+        "website": "https://raynorservices.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Air Zone Experts",
+        "phone": "(214) 430-9059",
+        "address": "Dallas, TX",
+        "rating": 4.9,
+        "review_count": 240
+    },
+    {
+        "name": "Rescue Air and Plumbing",
+        "phone": "(972) 366-5643",
+        "address": "Richardson, TX",
+        "rating": 4.8,
+        "review_count": 1850
+    },
+    {
+        "name": "A#1 Air",
+        "phone": "(972) 746-2224",
+        "address": "Dallas, TX",
+        "rating": 4.7,
+        "review_count": 15000
+    },
+    {
+        "name": "Willard Air Conditioning, Heating & Electrical",
+        "phone": "(972) 564-9005",
+        "address": "Dallas, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Extreme Comfort Air Conditioning & Heating",
+        "phone": "(972) 234-2336",
+        "address": "Richardson, TX",
+        "rating": 4.8,
+        "review_count": 850
+    }
+]

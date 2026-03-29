@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Birmingham",
+        "phone": "(205) 409-1736",
+        "address": "Birmingham, AL",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "Sunbelt Glass LLC",
+        "phone": "(205) 203-0925",
+        "address": "Birmingham, AL",
+        "website": "https://sunbeltglassllc.com"
+    },
+    {
+        "name": "NelBran Glass",
+        "phone": "(205) 322-2431",
+        "address": "Birmingham, AL",
+        "website": "https://nelbran.com"
+    },
+    {
+        "name": "Safelite AutoGlass",
+        "phone": "(877) 419-3570",
+        "address": "Birmingham, AL",
+        "website": "https://safelite.com"
+    }
+]

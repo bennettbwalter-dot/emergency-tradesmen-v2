@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rescue Rangers",
+        "phone": "(502) 708-1600",
+        "address": "Louisville, KY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Suburban Towing",
+        "phone": "(502) 964-6500",
+        "address": "Louisville, KY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Platinum Towing & Recovery",
+        "phone": "(502) 333-2236",
+        "address": "Louisville, KY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "502 Towing and Recovery",
+        "phone": "(502) 337-7306",
+        "address": "Louisville, KY",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Advantage Towing & Recovery",
+        "phone": "(502) 451-9000",
+        "address": "Louisville, KY",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

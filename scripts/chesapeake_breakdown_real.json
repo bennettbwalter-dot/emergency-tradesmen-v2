@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Chesapeake Towing Company",
+        "phone": "(757) 906-3600",
+        "address": "Chesapeake, VA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "7 Cities Towing & Recycling",
+        "phone": "(757) 639-0888",
+        "address": "Chesapeake, VA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Hickory Towing",
+        "phone": "(757) 389-8683",
+        "address": "Chesapeake, VA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Ready Up Towing Chesapeake",
+        "phone": "(757) 389-8753",
+        "address": "Chesapeake, VA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "757 Towing and Recovery",
+        "phone": "(757) 802-6138",
+        "address": "Chesapeake, VA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

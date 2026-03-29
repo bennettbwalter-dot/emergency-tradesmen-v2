@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Towing Henderson",
+        "phone": "(725) 237-8016",
+        "address": "Henderson, NV",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Express Towing",
+        "phone": "(702) 818-0177",
+        "address": "Henderson, NV",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Henderson Ace Towing",
+        "phone": "(702) 211-1333",
+        "address": "Henderson, NV",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Best Henderson Towing",
+        "phone": "(702) 500-0505",
+        "address": "Henderson, NV",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "ProTow Towing",
+        "phone": "(702) 322-2222",
+        "address": "Henderson, NV",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

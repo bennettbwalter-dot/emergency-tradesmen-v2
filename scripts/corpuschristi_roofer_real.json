@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bayfront Roofing & Construction",
+        "phone": "(361) 800-5991",
+        "address": "4646 Corona Dr, Suite 167 C, Corpus Christi, TX 78411",
+        "website": "https://bayfrontroofing.com/"
+    },
+    {
+        "name": "Frontline Roofing Services",
+        "phone": "(361) 470-7663",
+        "address": "1024 Leopard St, Suite F, Corpus Christi, TX 78303",
+        "website": "https://frontlineroofingservices.com/"
+    },
+    {
+        "name": "Lighthouse Roofing",
+        "phone": "(361) 214-7447",
+        "address": "10514 S Padre Island Dr, Corpus Christi, TX 78418",
+        "website": "https://lighthouseroofing.net/"
+    },
+    {
+        "name": "Astute Roofing",
+        "phone": "(888) 805-2558",
+        "address": "Corpus Christi, TX",
+        "website": "https://astuteroofing.com/"
+    },
+    {
+        "name": "RISE Roofing",
+        "phone": "(361) 204-5325",
+        "address": "13822 Primavera Drive, Corpus Christi, TX 78418",
+        "website": "https://riseroofing.company/"
+    }
+]

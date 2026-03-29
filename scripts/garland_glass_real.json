@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Garland Auto Glass Repair",
+        "phone": "(469) 970-5623",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Garland Auto Glass Company",
+        "phone": "(469) 208-4652",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Lava Auto Glass",
+        "phone": "(214) 436-1325",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Budget Auto Glass",
+        "phone": "(972) 994-9657",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Texas Glass & Mirror",
+        "phone": "(972) 494-5518",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Garland Glass",
+        "phone": "(972) 276-6524",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "BJ Glass",
+        "phone": "(972) 427-3636",
+        "address": "Garland, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    }
+]

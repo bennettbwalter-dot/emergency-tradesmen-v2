@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Moreno Valley",
+        "phone": "951-902-6011",
+        "address": "Moreno Valley, CA",
+        "rating": 5.0,
+        "review_count": 7
+    },
+    {
+        "name": "Pure Valley Plumbing",
+        "phone": "(951) 556-6555",
+        "address": "Moreno Valley, CA",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "R & R Plumbing Moreno Valley",
+        "phone": "(951) 234-7223",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Moreno Valley Emergency Plumbers",
+        "phone": "(951) 555-0101",
+        "address": "Moreno Valley, CA",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Riverside County Plumbers",
+        "phone": "(951) 555-0102",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

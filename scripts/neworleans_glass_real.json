@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Broad Glass",
+        "phone": "(504) 486-4416",
+        "address": "New Orleans, LA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Service Glass Co",
+        "phone": "(504) 241-5031",
+        "address": "New Orleans, LA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Jazz Auto Glass and Tint",
+        "phone": "(504) 230-0799",
+        "address": "New Orleans, LA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "New Orleans Auto Glass",
+        "phone": "(504) 881-1472",
+        "address": "New Orleans, LA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Fleur De Lis Auto Glass Repair",
+        "phone": "(504) 882-9243",
+        "address": "New Orleans, LA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

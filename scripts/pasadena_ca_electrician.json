@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mike's Electric Company",
+        "phone": "(626) 797-4780",
+        "address": "Pasadena, CA",
+        "website": "https://electricalcontractorpasadena.net"
+    },
+    {
+        "name": "The Electric Connection",
+        "phone": "(818) 446-0888",
+        "address": "Pasadena, CA",
+        "website": "https://theelectricconnection.com"
+    },
+    {
+        "name": "PRO Electrician Pasadena",
+        "phone": "(626) 240-1986",
+        "address": "Pasadena, CA",
+        "website": "https://proelectricianpasadena.com"
+    },
+    {
+        "name": "Talbott Electric Inc",
+        "phone": "(626) 798-1105",
+        "address": "Pasadena, CA",
+        "website": "https://talbottelectric.com"
+    }
+]

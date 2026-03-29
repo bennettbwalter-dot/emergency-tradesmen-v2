@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Blitzer Plumbing Services",
+        "phone": "(216) 294-2025",
+        "address": "Cleveland, OH",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "1-Tom-Plumber",
+        "phone": "(440) 230-3734",
+        "address": "Cleveland, OH",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "1-800-Plumber +Air",
+        "phone": "(440) 202-9932",
+        "address": "Cleveland, OH",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Roto-Rooter Cleveland",
+        "phone": "(216) 226-4506",
+        "address": "Cleveland, OH",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Independence Excavating Plumbing",
+        "phone": "(216) 524-1010",
+        "address": "Cleveland, OH",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

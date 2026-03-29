@@ -1,0 +1,37 @@
+[
+    {
+        "name": "New Mexico Towing",
+        "phone": "(505) 877-0800",
+        "address": "Albuquerque, NM",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Dugger's Towing, LLC",
+        "phone": "(877) 823-9696",
+        "address": "Albuquerque, NM",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Albuquerque Towing",
+        "phone": "(505) 234-5555",
+        "address": "Albuquerque, NM",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Westside Towing",
+        "phone": "(505) 836-3914",
+        "address": "Albuquerque, NM",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Acme Towing",
+        "phone": "(505) 918-0955",
+        "address": "Albuquerque, NM",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

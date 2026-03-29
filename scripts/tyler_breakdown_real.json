@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Preston's Towing",
+        "phone": "(903) 952-1869",
+        "address": "Tyler, TX",
+        "website": "https://prestonstowing.com/"
+    },
+    {
+        "name": "Isaacs Wrecker Service, LLC",
+        "phone": "(903) 592-8697",
+        "address": "Tyler, TX",
+        "website": "https://guardianfleetservice.com/"
+    },
+    {
+        "name": "Fuller's Towing & Recovery",
+        "phone": "(903) 567-6911",
+        "address": "Tyler, TX",
+        "website": "https://fullerstowingtx.com/"
+    },
+    {
+        "name": "Tyler Towing",
+        "phone": "(903) 961-1972",
+        "address": "Tyler, TX",
+        "website": "https://tylertowing.top/"
+    },
+    {
+        "name": "Campbell's Towing & Recovery",
+        "phone": "(903) 595-5109",
+        "address": "Tyler, TX",
+        "website": "https://campbellstowing.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Brandon Electric Inc",
+        "phone": "(610) 565-1400",
+        "address": "King of Prussia, PA",
+        "website": "https://angieslist.com"
+    },
+    {
+        "name": "Hughes Electrical",
+        "phone": "(800) 484-7420",
+        "address": "King of Prussia, PA",
+        "website": "https://hugheselectrical.com"
+    },
+    {
+        "name": "Martella Electric Company",
+        "phone": "(484) 341-7113",
+        "address": "King of Prussia, PA",
+        "website": "https://martellaelectric.com"
+    },
+    {
+        "name": "Independent Electrical Services",
+        "phone": "(302) 383-2761",
+        "address": "King of Prussia, PA",
+        "website": "https://i-e-s.com"
+    }
+]

@@ -1,0 +1,178 @@
+[
+    {
+        "name": "First Response Plumbing",
+        "phone": "918-480-8512",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Roto-Rooter Tulsa",
+        "phone": "918-609-9095",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 650
+    },
+    {
+        "name": "Wooten Knockout Plumbing",
+        "phone": "(918) 367-8887",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Torch Plumbing, Heating, & Cooling",
+        "phone": "918-212-0122",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "On Call Plumbers",
+        "phone": "(918) 856-6226",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "Air Comfort Solutions Plumbing",
+        "phone": "(918) 236-9208",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Airco Service Plumbing",
+        "phone": "918-252-5667",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 800
+    },
+    {
+        "name": "Spot On Plumbing",
+        "phone": "918-992-4876",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Duvall Plumbing Co",
+        "phone": "918-850-2212",
+        "address": "Tulsa, OK",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Urgent Electrician Tulsa",
+        "phone": "(918) 887-3413",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Air Comfort Solutions Electric",
+        "phone": "(918) 236-9208",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Mister Sparky of Tulsa",
+        "phone": "(918) 419-0095",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 410
+    },
+    {
+        "name": "Electrico, LLC",
+        "phone": "(918) 605-6100",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "M Electric",
+        "phone": "(918) 992-6282",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 60
+    },
+    {
+        "name": "Durant Electric, LLC",
+        "phone": "(918) 373-7528",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 45
+    },
+    {
+        "name": "Houchin Electric",
+        "phone": "918-663-1818",
+        "address": "Tulsa, OK",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 280
+    },
+    {
+        "name": "Pop-A-Lock of Tulsa",
+        "phone": "(918) 582-5194",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "KeyMe Locksmiths Tulsa",
+        "phone": "(539) 224-3713",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "Locksmith Tulsa",
+        "phone": "(918) 212-5928",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Security Locksmith OKC (Tulsa)",
+        "phone": "405-367-3333",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "24 Hour Tulsa Locksmith Service",
+        "phone": "(918) 388-6037",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 65
+    },
+    {
+        "name": "Tulsa Locksmith",
+        "phone": "(918) 398-9116",
+        "address": "Tulsa, OK",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 140
+    }
+]

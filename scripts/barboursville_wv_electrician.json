@@ -1,0 +1,26 @@
+[
+    {
+        "name": "M & M of WV Electric",
+        "phone": "304-945-8521",
+        "address": "Barboursville, WV",
+        "website": "https://mmelectricwv.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Barboursville, WV",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Al Marino",
+        "phone": "304-345-9000",
+        "address": "Barboursville, WV",
+        "website": "https://almarinoinc.com"
+    },
+    {
+        "name": "Extreme Heating & Air",
+        "phone": "304-746-5937",
+        "address": "Barboursville, WV",
+        "website": "https://extreme-hvac.com"
+    }
+]

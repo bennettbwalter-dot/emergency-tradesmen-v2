@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Jensen Plumbing LLC",
+        "address": "Lewisville, TX",
+        "phone": "214-287-0445",
+        "trade": "plumber",
+        "city": "Lewisville"
+    },
+    {
+        "name": "Milestone Electric & Plumbing",
+        "address": "Lewisville, TX",
+        "phone": "214-267-2405",
+        "trade": "plumber",
+        "city": "Lewisville"
+    },
+    {
+        "name": "Sawyers Electrical, LLC",
+        "address": "Lewisville, TX",
+        "phone": "214-205-2885",
+        "trade": "electrician",
+        "city": "Lewisville"
+    },
+    {
+        "name": "ElectricMan",
+        "address": "Lewisville, TX",
+        "phone": "972-362-1804",
+        "trade": "electrician",
+        "city": "Lewisville"
+    },
+    {
+        "name": "A#1 Air",
+        "address": "Lewisville, TX",
+        "phone": "972-746-2224",
+        "trade": "electrician",
+        "city": "Lewisville"
+    }
+]

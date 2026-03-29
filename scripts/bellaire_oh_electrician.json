@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ohio Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Bellaire, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Bellaire, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "TS Electric",
+        "phone": "800-570-8191",
+        "address": "Bellaire, OH",
+        "website": "https://tselectricohio.com"
+    },
+    {
+        "name": "Joe Dickey Electric",
+        "phone": "330-758-9746",
+        "address": "Bellaire, OH",
+        "website": "https://dickeyelectric.com"
+    }
+]

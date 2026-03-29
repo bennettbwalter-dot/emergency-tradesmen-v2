@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Metro Towing",
+        "phone": "(859) 255-4395",
+        "address": "Lexington, KY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roberts Heavy Duty Towing",
+        "phone": "(859) 294-5566",
+        "address": "Lexington, KY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Slim's Towing",
+        "phone": "(859) 211-1333",
+        "address": "Lexington, KY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Lexington Towing",
+        "phone": "(859) 222-2222",
+        "address": "Lexington, KY",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Bluegrass Towing",
+        "phone": "(859) 233-9111",
+        "address": "Lexington, KY",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrical Service Providers",
+        "phone": "336-228-3300",
+        "address": "Carrboro, NC",
+        "website": "https://4espnc.com"
+    },
+    {
+        "name": "Durham Volt Doctor",
+        "phone": "919-236-7167",
+        "address": "Carrboro, NC",
+        "website": "https://durhamelectricalservices.com"
+    },
+    {
+        "name": "Mr. Electric of Chapel Hill",
+        "phone": "919-636-6729",
+        "address": "Carrboro, NC",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "North Carolina Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Carrboro, NC",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Hereford Heating",
+        "phone": "01432 264477",
+        "address": "Hereford",
+        "website": "https://herefordheating.co.uk/"
+    },
+    {
+        "name": "MJ Pryce Plumbing & Heating",
+        "phone": "07817 691 091",
+        "address": "Hereford",
+        "website": "https://mj-pryceplumbing.co.uk/"
+    },
+    {
+        "name": "JAG Plumbing & Heating Engineers",
+        "phone": "01432 839125",
+        "address": "Hereford",
+        "website": "https://jagplumbingandheating.com/"
+    },
+    {
+        "name": "TomPlumb",
+        "phone": "07817 691 091",
+        "address": "Hereford",
+        "website": "https://tomplumbhereford.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01432 264477",
+        "address": "Hereford",
+        "website": "https://able-group.co.uk/"
+    }
+]

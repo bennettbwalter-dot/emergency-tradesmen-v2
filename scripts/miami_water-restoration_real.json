@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Restoration Doctor of Miami",
+        "phone": "(786) 213-9489",
+        "address": "1200 Brickell Ave Suite 1950 #1007, Miami, FL 33131",
+        "website": "https://restorationdoctorfl.com/"
+    },
+    {
+        "name": "Rainbow Restoration of Miami",
+        "phone": "(305) 894-3444",
+        "address": "Miami, FL",
+        "website": "https://rainbowrestores.com/"
+    },
+    {
+        "name": "SERVPRO of Brickell",
+        "phone": "(305) 643-0710",
+        "address": "Miami, FL",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Water Damage Restoration Pros",
+        "phone": "(877) 419-2177",
+        "address": "Miami, FL",
+        "website": "https://waterdamageprosmiami.com/"
+    },
+    {
+        "name": "Allstate Restoration",
+        "phone": "(800) 753-2101",
+        "address": "Miami, FL",
+        "website": "https://allstateclean.com/"
+    }
+]

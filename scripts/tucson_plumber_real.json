@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Al Coronado Plumbing",
+        "phone": "(520) 834-8400",
+        "address": "Tucson, AZ",
+        "rating": 4.9,
+        "review_count": 3500
+    },
+    {
+        "name": "Cummings Plumbing",
+        "phone": "(520) 333-2121",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Parker & Sons",
+        "phone": "(520) 201-1407",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Plumbing 360",
+        "phone": "(520) 889-2900",
+        "address": "Tucson, AZ",
+        "rating": 4.8,
+        "review_count": 232
+    },
+    {
+        "name": "Silverado Rooter & Plumbing",
+        "phone": "(520) 696-0000",
+        "address": "Tucson, AZ",
+        "rating": 4.7,
+        "review_count": 85
+    }
+]

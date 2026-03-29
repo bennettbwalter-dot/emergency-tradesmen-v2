@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Nextech Glass",
+        "phone": "(414) 409-7263",
+        "address": "Milwaukee, WI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Home Glass Co Inc",
+        "phone": "414-434-0180",
+        "address": "Milwaukee, WI",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Bob Lurie Glass Corp",
+        "phone": "(414) 351-0400",
+        "address": "Milwaukee, WI",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Lisbon Storm, Screen & Door LLC",
+        "phone": "414-445-8899",
+        "address": "Milwaukee, WI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Milwaukee Auto Glass",
+        "phone": "414-430-5400",
+        "address": "Milwaukee, WI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

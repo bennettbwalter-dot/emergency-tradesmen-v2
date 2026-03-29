@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Puget Sound Glass & Shower Door",
+    "phone": "(360) 708-4897",
+    "address": "Tacoma, WA",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 150
+  },
+  {
+    "name": "Speedy Glass Tacoma",
+    "phone": "(253) 474-0784",
+    "address": "Tacoma, WA",
+    "trade": "glazier",
+    "rating": 4.9,
+    "review_count": 180
+  },
+  {
+    "name": "Blue Ribbon Auto Glass",
+    "phone": "253-250-7262",
+    "address": "Tacoma, WA",
+    "trade": "glazier",
+    "rating": 4.7,
+    "review_count": 120
+  },
+  {
+    "name": "A-Z Auto Glass",
+    "phone": "253-312-6549",
+    "address": "Tacoma, WA",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 95
+  }
+]

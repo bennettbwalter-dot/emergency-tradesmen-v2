@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass West",
+        "phone": "916-372-9391",
+        "address": "Sacramento, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Nor Sac Glass & Aluminum",
+        "phone": "(916) 927-5775",
+        "address": "Sacramento, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Bob's Glass",
+        "phone": "916-739-8244",
+        "address": "Sacramento, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Southgate Glass",
+        "phone": "916-978-1041",
+        "address": "Sacramento, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 300
+    },
+    {
+        "name": "777 Auto Glass",
+        "phone": "(916) 277-5257",
+        "address": "Sacramento, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

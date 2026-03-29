@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Miller Electric Derby",
+        "phone": "(316) 788-0471",
+        "address": "Derby, KS",
+        "website": "https://millerelectricwichita.com"
+    },
+    {
+        "name": "Graf Electric Derby",
+        "phone": "(316) 686-2090",
+        "address": "Derby, KS",
+        "website": "https://grafelectric.com"
+    },
+    {
+        "name": "Reflection Energy LLC",
+        "phone": "(316) 347-0852",
+        "address": "Derby, KS",
+        "website": "https://bbb.org"
+    },
+    {
+        "name": "LT Solutions Derby",
+        "phone": "(316) 444-5577",
+        "address": "Derby, KS",
+        "website": "https://getltsolutions.com"
+    }
+]

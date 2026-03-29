@@ -1,0 +1,37 @@
+[
+    {
+        "name": "C. Woods Company",
+        "phone": "(903) 593-0246",
+        "address": "Tyler, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Aire Serv of Smith County",
+        "phone": "(903) 705-4654",
+        "address": "Tyler, TX",
+        "rating": 4.9,
+        "review_count": 610
+    },
+    {
+        "name": "ACE Air Conditioning",
+        "phone": "(903) 360-7223",
+        "address": "Tyler, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Lex Air East Texas",
+        "phone": "(903) 650-9636",
+        "address": "Tyler, TX",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Maddox Air Conditioning & Heating",
+        "phone": "(903) 592-6531",
+        "address": "Tyler, TX",
+        "rating": 4.8,
+        "review_count": 850
+    }
+]

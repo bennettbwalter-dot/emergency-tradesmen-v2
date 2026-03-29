@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Eva's All Seasons Glass LLC",
+        "phone": "(214) 223-9691",
+        "address": "Allen, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Texas Glass and Windows",
+        "phone": "(214) 629-1692",
+        "address": "Allen, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Binswanger Glass Allen",
+        "phone": "(972) 424-8554",
+        "address": "Allen, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Glass Doctor of DFW Allen",
+        "phone": "(972) 346-0918",
+        "address": "Allen, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

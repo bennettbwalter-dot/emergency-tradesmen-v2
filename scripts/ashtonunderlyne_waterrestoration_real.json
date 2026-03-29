@@ -1,0 +1,32 @@
+[
+    {
+        "name": "North West Clean Team Ashton",
+        "phone": "0161 524 7660",
+        "address": "Ashton-under-Lyne, Greater Manchester",
+        "website": "https://northwestcleanteam.uk/"
+    },
+    {
+        "name": "Tameside Plumbers Ashton",
+        "phone": "0161 524 7660",
+        "address": "Ashton-under-Lyne",
+        "website": "https://tamesideplumber.co.uk/"
+    },
+    {
+        "name": "Drain Doctor Ashton-under-Lyne",
+        "phone": "01706 537101",
+        "address": "Ashton-under-Lyne",
+        "website": "https://draindoctor.co.uk/"
+    },
+    {
+        "name": "Dyno-Rod Ashton-under-Lyne",
+        "phone": "0333 242 2178",
+        "address": "Ashton-under-Lyne",
+        "website": "https://dyno.com/"
+    },
+    {
+        "name": "Tempest Restoration Ashton",
+        "phone": "0845 052 4522",
+        "address": "Ashton-under-Lyne",
+        "website": "https://tempestrestoration.co.uk/"
+    }
+]

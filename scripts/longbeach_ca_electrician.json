@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Leone Electric",
+        "phone": "(562) 795-5754",
+        "address": "Long Beach, CA",
+        "website": "https://leoneelectric.com"
+    },
+    {
+        "name": "Ducros Electrical Services",
+        "phone": "(562) 453-8688",
+        "address": "Long Beach, CA",
+        "website": "https://ducroselectricalservices.com"
+    },
+    {
+        "name": "On Call Electrical",
+        "phone": "(562) 203-3223",
+        "address": "Long Beach, CA",
+        "website": "https://decidebay.com"
+    },
+    {
+        "name": "Reliable Electrical Services LB",
+        "phone": "(844) 335-0814",
+        "address": "Long Beach, CA",
+        "website": "https://electricianstorrance.com"
+    }
+]

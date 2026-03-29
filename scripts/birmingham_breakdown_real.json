@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABC Towing Birmingham",
+        "phone": "(205) 836-2209",
+        "address": "Birmingham, AL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Honeycutt Garage & Towing",
+        "phone": "(205) 211-1333",
+        "address": "Birmingham, AL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "King Boyz Towing",
+        "phone": "(205) 300-4444",
+        "address": "Birmingham, AL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Weil Wrecker Service",
+        "phone": "(205) 322-1111",
+        "address": "Birmingham, AL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Magic City Recovery",
+        "phone": "(205) 500-0505",
+        "address": "Birmingham, AL",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "1066 Plumbing and Heating Ltd",
+        "phone": "07974 253232",
+        "address": "Hastings",
+        "website": "https://1066plumbingandheating.co.uk/"
+    },
+    {
+        "name": "Pete's Plumbing",
+        "phone": "07782 253 027",
+        "address": "484 Old London Rd, Hastings, East Sussex, TN35 5BG",
+        "website": "https://petesplumbing.co.uk/"
+    },
+    {
+        "name": "H Longley Plumbing & Heating",
+        "phone": "07747 851 043",
+        "address": "Hastings",
+        "website": "https://hlongleyplumbingandheating.co.uk/"
+    },
+    {
+        "name": "Around The Bend",
+        "phone": "01273 023260",
+        "address": "Hastings",
+        "website": "https://aroundthebendplumbing.co.uk/"
+    },
+    {
+        "name": "Swift Boiler Repair Hastings",
+        "phone": "01622 962 468",
+        "address": "Hastings",
+        "website": "https://swift-boiler-repair-uk.co.uk/"
+    }
+]

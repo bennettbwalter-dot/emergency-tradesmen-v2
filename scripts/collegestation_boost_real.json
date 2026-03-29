@@ -1,0 +1,138 @@
+[
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(979) 361-0500",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Benjamin Franklin Plumbing College Station",
+        "phone": "(979) 704-6185",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Todaro Plumbing",
+        "phone": "(979) 776-6693",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Dailey Company, Inc.",
+        "phone": "(979) 260-2020",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Action Plumbing",
+        "phone": "(979) 335-8515",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "S.D.S. Plumbing LLC",
+        "phone": "(979) 255-3166",
+        "address": "College Station, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Mr. Electric of Bryan & College Station",
+        "phone": "(979) 217-2238",
+        "address": "College Station, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "BCA Electric LLC",
+        "phone": "(979) 823-4000",
+        "address": "College Station, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Arise Home Electric",
+        "phone": "(979) 777-1280",
+        "address": "College Station, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(979) 696-2481",
+        "address": "College Station, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "College Station Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "College Station, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Texas Premier Locksmith College Station",
+        "phone": "(979) 476-9418",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Griffin Locksmith",
+        "phone": "(979) 822-2705",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Guardian Safe & Lock LLC",
+        "phone": "832-534-8687",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Advanced Locksmith",
+        "phone": "+1 979-696-0369",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "254 Locksmith",
+        "phone": "+1 254-220-3654",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Gladney Automotive Solutions LLC",
+        "phone": "+1 979-645-6113",
+        "address": "College Station, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

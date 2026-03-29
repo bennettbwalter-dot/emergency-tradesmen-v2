@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hare Electric Inc.",
+        "phone": "216-609-2955",
+        "address": "Lakewood, OH",
+        "website": "https://hareelectric.com"
+    },
+    {
+        "name": "Blue Star Electric",
+        "phone": "440-554-8790",
+        "address": "Lakewood, OH",
+        "website": "https://bluestarelectric.net"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Lakewood, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "Blind & Sons",
+        "phone": "330-753-7711",
+        "address": "Lakewood, OH",
+        "website": "https://blindandsons.com"
+    }
+]

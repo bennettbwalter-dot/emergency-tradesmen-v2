@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrical Services Group LLC",
+        "phone": "(203) 745-0323",
+        "address": "New Haven, CT",
+        "website": "https://esg-ct.com"
+    },
+    {
+        "name": "Sampson Electric LLC",
+        "phone": "(203) 627-9512",
+        "address": "New Haven, CT",
+        "website": "https://sampsonelectricllc.com"
+    },
+    {
+        "name": "Vital Electrical Systems Inc",
+        "phone": "(203) 257-7569",
+        "address": "New Haven, CT",
+        "website": "https://vitalelectricity.com"
+    },
+    {
+        "name": "PowerPlus Electric & Communications LLC",
+        "phone": "(203) 747-5335",
+        "address": "New Haven, CT",
+        "website": "https://powerplusct.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Wichita",
+        "phone": "(316) 202-5328",
+        "address": "Wichita, KS",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "Car Glass Wizards",
+        "phone": "(316) 799-3111",
+        "address": "Wichita, KS",
+        "website": "https://carglasswizards.com"
+    },
+    {
+        "name": "The Glass Guru of Wichita",
+        "phone": "(316) 462-9595",
+        "address": "Wichita, KS",
+        "website": "https://theglassguru.com"
+    },
+    {
+        "name": "Central Glass & Mirror Wichita",
+        "phone": "(316) 262-1088",
+        "address": "Wichita, KS",
+        "website": "https://centralglassandmirror.com"
+    }
+]

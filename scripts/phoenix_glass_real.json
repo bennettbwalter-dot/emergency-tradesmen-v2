@@ -1,0 +1,50 @@
+[
+    {
+        "name": "True View Windows and Glass",
+        "phone": "602-431-8783",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Arizona Glass & Door Connection",
+        "phone": "602-375-2000",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "ProLite Glass Solutions",
+        "phone": "(480) 605-0084",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Superior Replacement Windows",
+        "phone": "(602) 777-3717",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Glass Pros Arizona",
+        "phone": "480-779-4444",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Valleywide Glass",
+        "phone": "480-717-0581",
+        "address": "Phoenix, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    }
+]

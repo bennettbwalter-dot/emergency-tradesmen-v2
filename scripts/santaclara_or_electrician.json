@@ -1,0 +1,26 @@
+[
+    {
+        "name": "OConnors Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Santa Clara, OR",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Brighten Up Electricians",
+        "phone": "(877) 725-5126",
+        "address": "Santa Clara, OR",
+        "website": "https://brightenupelectricians.com"
+    },
+    {
+        "name": "Knoll Electric Santa Clara",
+        "phone": "(541) 510-7712",
+        "address": "Santa Clara, OR",
+        "website": "https://knollelectric.com"
+    },
+    {
+        "name": "Lohner Electric Santa Clara",
+        "phone": "(541) 947-3000",
+        "address": "Santa Clara, OR",
+        "website": "https://lohnerelectric.com"
+    }
+]

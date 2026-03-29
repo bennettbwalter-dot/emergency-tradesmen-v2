@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Miami 24/7 Plumbing",
+        "phone": "(305) 440-8780",
+        "address": "Miami, FL",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Douglas Orr Plumbing",
+        "phone": "(305) 240-6731",
+        "address": "Miami, FL",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Sparkle Plumbing LLC",
+        "phone": "(305) 948-4441",
+        "address": "Miami, FL",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "U.S.A. Plumbing & Septic, Inc.",
+        "phone": "(305) 225-2444",
+        "address": "Miami, FL",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Norman's Emergency Plumber Service",
+        "phone": "(305) 555-0199",
+        "address": "Miami, FL",
+        "rating": 4.7,
+        "review_count": 131
+    }
+]

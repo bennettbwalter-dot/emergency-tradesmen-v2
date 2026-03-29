@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Womack Door & Window",
+        "phone": "(432) 235-1807",
+        "address": "Midland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "A & B Glass and Mirror",
+        "phone": "(432) 517-4565",
+        "address": "Midland, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Amigos Glass and Mirror",
+        "phone": "(432) 349-0309",
+        "address": "Midland, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Young's Auto Glass, Inc.",
+        "phone": "(432) 682-5161",
+        "address": "Midland, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

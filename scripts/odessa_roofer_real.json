@@ -1,0 +1,32 @@
+[
+    {
+        "name": "PB Roofing",
+        "phone": "(432) 123-4567",
+        "address": "3100 San Saba Dr, Odessa, TX 79603",
+        "website": "https://roofingpb.com/"
+    },
+    {
+        "name": "SunTex Roofing",
+        "phone": "(214) 766-3669",
+        "address": "Odessa, TX",
+        "website": "https://suntexroofs.com/"
+    },
+    {
+        "name": "SRG Roofing",
+        "phone": "(877) 779-3207",
+        "address": "Odessa, TX",
+        "website": "https://srgroofing.com/"
+    },
+    {
+        "name": "Roofs by Nicholas",
+        "phone": "(432) 520-7348",
+        "address": "Odessa, TX",
+        "website": "https://roofsbynicholas.com/"
+    },
+    {
+        "name": "Carter & Sons Roofers LLC",
+        "phone": "(432) 300-5100",
+        "address": "2119 E 42nd St, Odessa, TX 79762",
+        "website": "https://carterroofers.best/"
+    }
+]

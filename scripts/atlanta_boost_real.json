@@ -1,0 +1,186 @@
+[
+    {
+        "name": "Atlanta Emergency Plumber Kings",
+        "phone": "470-287-5755",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "E Dennis",
+        "phone": "(770) 758-0501",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Roto-Rooter Atlanta",
+        "phone": "404-815-9051",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Royal Flush Plumbing, Inc.",
+        "phone": "770-385-5911",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Cool Air Mechanical",
+        "phone": "(770) 341-1243",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 520
+    },
+    {
+        "name": "Allgood Plumbing",
+        "phone": "404-260-0244",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 620
+    },
+    {
+        "name": "Mr. Plumber Atlanta",
+        "phone": "(770) 777-1111",
+        "address": "Atlanta, GA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Mister Sparky of Atlanta",
+        "phone": "(770) 824-9592",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1800
+    },
+    {
+        "name": "Pat Murphy Electric",
+        "phone": "(404) 577-4191",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Aardvark Electric",
+        "phone": "(404) 737-0114",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Kalahari Electrical Services",
+        "phone": "(678) 665-2309",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Performance Electrical",
+        "phone": "(404) 304-4428",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Snappy Services Electrical",
+        "phone": "(770) 321-3433",
+        "address": "Atlanta, GA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "The Atlanta Locksmith",
+        "phone": "470-416-7020",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Atlanta Lockmasters",
+        "phone": "404-865-1245",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Locksmith Atlanta",
+        "phone": "888-884-4951",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "First Choice Locksmith",
+        "phone": "404-902-5150",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Fast Response Locksmith Atlanta",
+        "phone": "470-361-9192",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Atlanta Fast Locksmith",
+        "phone": "678-255-8555",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Top Atlanta Locksmith",
+        "phone": "678-608-1616",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 80
+    },
+    {
+        "name": "Amerigo Locksmiths",
+        "phone": "678-905-0049",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Pop-A-Lock Atlanta",
+        "phone": "770-339-1616",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Nonstop Local Locksmith",
+        "phone": "678-801-6077",
+        "address": "Atlanta, GA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    }
+]

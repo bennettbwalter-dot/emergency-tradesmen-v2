@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Princeton Electrical Makeover",
+        "phone": "(609) 647-4986",
+        "address": "Rahway, NJ",
+        "website": "https://electricalmakeover.com"
+    },
+    {
+        "name": "D & M Master Electric",
+        "phone": "(973) 604-5628",
+        "address": "Rahway, NJ",
+        "website": "https://dmmasterelectric.com"
+    },
+    {
+        "name": "First Class Electric",
+        "phone": "(908) 325-1777",
+        "address": "Rahway, NJ",
+        "website": "https://firstclasselectricnj.com"
+    },
+    {
+        "name": "DC Electrical",
+        "phone": "(973) 423-4160",
+        "address": "Rahway, NJ",
+        "website": "https://dcelectricalonline.com"
+    }
+]

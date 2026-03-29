@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Antonio Construction LLC",
+        "phone": "(336) 458-8379",
+        "address": "Greensboro, NC 27406",
+        "website": "https://antonioconstructionllc.com/"
+    },
+    {
+        "name": "ProCon Roofing",
+        "phone": "(844) 547-7663",
+        "address": "299 Edwardia Dr, Greensboro, NC 27409",
+        "website": "https://proconroofing.com/"
+    },
+    {
+        "name": "Modern Roofing",
+        "phone": "(336) 664-8123",
+        "address": "Greensboro, NC",
+        "website": "https://modernroofingusa.com/"
+    },
+    {
+        "name": "Statewide Roofing Specialist",
+        "phone": "(336) 480-1824",
+        "address": "Greensboro, NC",
+        "website": "https://statewideroofingspecialist.com/"
+    },
+    {
+        "name": "Skywalker Roofing",
+        "phone": "(336) 555-0188",
+        "address": "Greensboro, NC",
+        "website": "https://skywalkerroofingnc.com/"
+    }
+]

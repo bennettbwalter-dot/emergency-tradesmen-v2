@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Jeremy Electrical",
+        "phone": "(913) 375-0070",
+        "address": "Overland Park, KS",
+        "website": "https://jeremykc.com"
+    },
+    {
+        "name": "JMC Electric",
+        "phone": "(913) 362-2100",
+        "address": "Overland Park, KS",
+        "website": "https://jmcelectrickc.com"
+    },
+    {
+        "name": "Bickimer Electric",
+        "phone": "(913) 313-6751",
+        "address": "Overland Park, KS",
+        "website": "https://bickimerelectric.com"
+    },
+    {
+        "name": "Teague Electric",
+        "phone": "(913) 529-4600",
+        "address": "Overland Park, KS",
+        "website": "https://teagueelectric.com"
+    }
+]

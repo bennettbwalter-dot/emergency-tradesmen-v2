@@ -1,0 +1,37 @@
+[
+    {
+        "name": "24Hr Car Unlocking",
+        "phone": "(866) 584-8488",
+        "address": "Austin, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "360 Towing Solutions Austin",
+        "phone": "(512) 339-0442",
+        "address": "Austin, TX",
+        "rating": 5.0,
+        "review_count": 450
+    },
+    {
+        "name": "10-4 Tow Austin",
+        "phone": "(512) 910-8443",
+        "address": "Austin, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Austin Towing Company",
+        "phone": "(512) 953-5427",
+        "address": "Austin, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Roadrunner Towing",
+        "phone": "(512) 263-5431",
+        "address": "Austin, TX",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

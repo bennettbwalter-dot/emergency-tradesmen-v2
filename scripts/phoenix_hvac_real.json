@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Same Day Air Repair LLC",
+        "phone": "(602) 571-1728",
+        "address": "Phoenix, AZ",
+        "rating": 4.1,
+        "review_count": 17
+    },
+    {
+        "name": "Wolfgang's Cooling, Heating & Plumbing",
+        "phone": "(480) 582-1810",
+        "address": "Phoenix, AZ",
+        "rating": 4.9,
+        "review_count": 1792
+    },
+    {
+        "name": "American Home Water & Air",
+        "phone": "(602) 993-0083",
+        "address": "Phoenix, AZ",
+        "rating": 4.9,
+        "review_count": 3845
+    },
+    {
+        "name": "Chas Roberts Cooling & Heating",
+        "phone": "(602) 386-2732",
+        "address": "Phoenix, AZ",
+        "rating": 4.5,
+        "review_count": 2500
+    },
+    {
+        "name": "Emergency Air",
+        "phone": "(480) 418-8444",
+        "address": "Phoenix, AZ",
+        "rating": 4.8,
+        "review_count": 650
+    }
+]

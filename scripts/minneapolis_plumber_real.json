@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Minneapolis",
+        "phone": "(612) 788-9029",
+        "address": "Minneapolis, MN",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Benjamin Franklin Plumbing",
+        "phone": "(612) 756-7815",
+        "address": "Minneapolis, MN",
+        "rating": 4.8,
+        "review_count": 100000
+    },
+    {
+        "name": "Paul Bunyan Plumbing & Drains",
+        "phone": "(612) 340-1444",
+        "address": "Minneapolis, MN",
+        "rating": 5.0,
+        "review_count": 5000
+    },
+    {
+        "name": "Norblom Plumbing",
+        "phone": "(612) 827-4018",
+        "address": "Minneapolis, MN",
+        "rating": 4.3,
+        "review_count": 89
+    },
+    {
+        "name": "Service Star Plumbing",
+        "phone": "(651) 454-9111",
+        "address": "Minneapolis, MN",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

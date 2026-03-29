@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Progressive Service Company",
+        "phone": "(919) 325-0180",
+        "address": "Raleigh, NC",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Cool Change Heating & Air Conditioning",
+        "phone": "(919) 457-2494",
+        "address": "Raleigh, NC",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Michael & Son",
+        "phone": "(919) 278-7841",
+        "address": "Raleigh, NC",
+        "rating": 4.7,
+        "review_count": 3500
+    },
+    {
+        "name": "All American Heating, Air & Plumbing",
+        "phone": "(919) 782-6242",
+        "address": "Raleigh, NC",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Cape Fear Air, Electric & Plumbing",
+        "phone": "(919) 322-2000",
+        "address": "Raleigh, NC",
+        "rating": 4.6,
+        "review_count": 420
+    }
+]

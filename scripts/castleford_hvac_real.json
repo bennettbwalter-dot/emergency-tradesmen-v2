@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Castleford Plumbers",
+        "phone": "01977 800 944",
+        "address": "Castleford, WF10",
+        "website": "https://castlefordplumbers.co.uk/"
+    },
+    {
+        "name": "JJM Heating Ltd",
+        "phone": "0113 460 1868",
+        "address": "34 Gillett Lane, Rothwell, Leeds, LS26 0EG",
+        "website": "https://jjmheating.com/"
+    },
+    {
+        "name": "PK Plumbing",
+        "phone": "07842 222706",
+        "address": "Castleford",
+        "website": "https://pkeeling.co.uk/"
+    },
+    {
+        "name": "Swift Heating Installations",
+        "phone": "07775 599339",
+        "address": "Castleford",
+        "website": "https://swiftheatinginstallations.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01977 249 356",
+        "address": "Castleford",
+        "website": "https://able-group.co.uk/"
+    }
+]

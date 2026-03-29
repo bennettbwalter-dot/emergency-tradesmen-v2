@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Allen",
+        "phone": "(469) 247-4429",
+        "address": "Allen, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Regent Restoration",
+        "phone": "(214) 731-4624",
+        "address": "Allen, TX",
+        "website": "https://regentrestoration.com/"
+    },
+    {
+        "name": "G2 Restoration",
+        "phone": "(972) 569-7013",
+        "address": "Allen, TX",
+        "website": "https://g2restores.com/"
+    },
+    {
+        "name": "ServiceMaster Restore by Restoration Specialists",
+        "phone": "(214) 855-7782",
+        "address": "Allen, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Havok Restoration",
+        "phone": "(469) 699-5709",
+        "address": "Allen, TX",
+        "website": "https://havokrestoration.com/"
+    }
+]

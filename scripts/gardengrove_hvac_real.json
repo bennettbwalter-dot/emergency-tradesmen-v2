@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Garden Grove Emergency HVAC",
+        "phone": "(714) 451-4484",
+        "address": "Garden Grove, CA",
+        "rating": 4.8,
+        "review_count": 92
+    },
+    {
+        "name": "Absolute Airflow",
+        "phone": "(800) 658-0051",
+        "address": "Garden Grove, CA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Stephens Plumbing & HVAC",
+        "phone": "(714) 960-3300",
+        "address": "Garden Grove, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Mike Diamond Plumbing & HVAC",
+        "phone": "(800) 446-6453",
+        "address": "Garden Grove, CA",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Econo Air",
+        "phone": "(714) 464-6240",
+        "address": "Garden Grove, CA",
+        "rating": 4.9,
+        "review_count": 120
+    }
+]

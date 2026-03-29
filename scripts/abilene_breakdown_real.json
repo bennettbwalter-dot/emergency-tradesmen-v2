@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Abilene Wrecker Service",
+        "phone": "(325) 513-9922",
+        "address": "Abilene, TX",
+        "website": "https://abilenewreckerservice.com/"
+    },
+    {
+        "name": "Mike Bounds Towing & Recovery",
+        "phone": "(325) 695-5102",
+        "address": "Abilene, TX",
+        "website": "https://mikeboundstowingandrecovery.com/"
+    },
+    {
+        "name": "Abilene Towing",
+        "phone": "(325) 735-4812",
+        "address": "Abilene, TX",
+        "website": "https://abilenetowing.top/"
+    },
+    {
+        "name": "Texas Auto Transports",
+        "phone": "(325) 307-9453",
+        "address": "Abilene, TX",
+        "website": "https://texasautotandr.com/"
+    },
+    {
+        "name": "O'Bar Wrecker Service",
+        "phone": "(325) 673-5000",
+        "address": "Abilene, TX",
+        "website": "https://obarwreckerservice.com/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Randy's Electric",
+        "phone": "(612) 470-0914",
+        "address": "Maplewood, MN",
+        "website": "https://randyselectric.com"
+    },
+    {
+        "name": "Edison Electric, Inc.",
+        "phone": "(612) 385-7864",
+        "address": "Maplewood, MN",
+        "website": "https://electrician-minneapolis.com"
+    },
+    {
+        "name": "Hannay Electric LLC",
+        "phone": "(612) 325-2455",
+        "address": "Maplewood, MN",
+        "website": "https://todayshomeowner.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Maplewood, MN",
+        "website": "https://oconnorselectrical.com"
+    }
+]

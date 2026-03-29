@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Coronado Glass & Screen",
+        "phone": "(520) 444-1440",
+        "address": "Tucson, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Speedy Glass of Tucson",
+        "phone": "(520) 296-7171",
+        "address": "Tucson, AZ",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "G Tech Glass Tucson",
+        "phone": "(520) 276-6646",
+        "address": "Tucson, AZ",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Matrix Auto Glass and Tint",
+        "phone": "(520) 745-5253",
+        "address": "Tucson, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Express Auto Glass LLC",
+        "phone": "(520) 613-3900",
+        "address": "Tucson, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

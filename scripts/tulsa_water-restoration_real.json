@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Restoration 1 of Tulsa",
+        "phone": "(918) 217-4577",
+        "address": "Tulsa, OK",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "Paul Davis Restoration of Tulsa",
+        "phone": "(918) 663-5848",
+        "address": "Tulsa, OK",
+        "website": "https://pauldavis.com/"
+    },
+    {
+        "name": "Burggraf Disaster Restoration",
+        "phone": "(918) 584-3737",
+        "address": "Tulsa, OK",
+        "website": "https://burggrafrestoration.com/"
+    },
+    {
+        "name": "ServiceMaster Restoration by RSI - Tulsa",
+        "phone": "(918) 416-6833",
+        "address": "Tulsa, OK",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "1-800 WATER DAMAGE of Tulsa",
+        "phone": "(918) 982-6010",
+        "address": "Tulsa, OK",
+        "website": "https://1800waterdamage.com/"
+    }
+]

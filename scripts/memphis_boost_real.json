@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Roto-Rooter Memphis",
+        "phone": "(901) 712-0556",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Mr. Rooter Plumbing of Memphis",
+        "phone": "901-712-0556",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 550
+    },
+    {
+        "name": "Automatic Air Conditioning, Heating, Plumbing & Electric",
+        "phone": "(901) 363-4636",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "On Call Plumbers Memphis",
+        "phone": "(901) 334-1444",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Happy Hiller Memphis",
+        "phone": "(901) 682-1002",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 2100
+    },
+    {
+        "name": "Tennessee Plumbing Pros",
+        "phone": "1-844-653-9595",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 95
+    },
+    {
+        "name": "Conway Services",
+        "phone": "(901) 248-1952",
+        "address": "Memphis, TN",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Mister Greenway",
+        "phone": "(901) 759-7700",
+        "address": "Memphis, TN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "O'Connor's Electrical Memphis",
+        "phone": "844-484-2612",
+        "address": "Memphis, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Ken Bobko Electric Memphis",
+        "phone": "(877) 734-8969",
+        "address": "Memphis, TN",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Arlington Electric LLC",
+        "phone": "(901) 687-3024",
+        "address": "Memphis, TN",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Ace Electric Inc.",
+        "phone": "(901) 870-3298",
+        "address": "Memphis, TN",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Memphis",
+        "phone": "(901) 730-8862",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Fast Locksmith Memphis",
+        "phone": "(901) 881-0855",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "The Lockman",
+        "phone": "(901) 246-2246",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Gold Star Locksmith Memphis",
+        "phone": "901-209-4340",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "AAA Safe & Lock",
+        "phone": "(901) 329-8964",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "KeyMe Locksmiths",
+        "phone": "(901) 586-1930",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "901 Locksmith",
+        "phone": "(901) 751-1140",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 280
+    },
+    {
+        "name": "Elite Top Locksmith Memphis",
+        "phone": "(901) 910-0275",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Locksmith Memphis TN",
+        "phone": "(901) 459-3529",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 90
+    },
+    {
+        "name": "Techno Memphis Locksmith",
+        "phone": "(901) 361-3955",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 130
+    },
+    {
+        "name": "Pop-A-Lock Memphis",
+        "phone": "901-527-6736",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Discount Locksmith of Memphis",
+        "phone": "(901) 250-9441",
+        "address": "Memphis, TN",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 75
+    }
+]

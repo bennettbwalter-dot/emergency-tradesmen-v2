@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hawkins Electric",
+        "phone": "(877) 927-0900",
+        "address": "Crofton, MD",
+        "website": "https://hawkinselectric.com"
+    },
+    {
+        "name": "Chesapeake Electric",
+        "phone": "(410) 280-3388",
+        "address": "Crofton, MD",
+        "website": "https://cheselectric.com"
+    },
+    {
+        "name": "Skipjack Electrical Services",
+        "phone": "(443) 871-2346",
+        "address": "Crofton, MD",
+        "website": "https://skipjackelectrical.com"
+    },
+    {
+        "name": "Professional Electric Inc.",
+        "phone": "(410) 451-8085",
+        "address": "Crofton, MD",
+        "website": "https://professionalelectricinc.net"
+    }
+]

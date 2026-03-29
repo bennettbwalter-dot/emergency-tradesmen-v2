@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Binswanger Glass Abilene",
+        "phone": "(325) 673-8141",
+        "address": "Abilene, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Big Country Collision LLC",
+        "phone": "325-692-4799",
+        "address": "Abilene, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Patriot Glass & Mirror",
+        "phone": "(325) 267-3487",
+        "address": "Abilene, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Torres Auto Glass",
+        "phone": "(325) 201-0813",
+        "address": "Abilene, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

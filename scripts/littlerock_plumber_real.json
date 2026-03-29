@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Airmasters Heating Air",
+        "phone": "(501) 758-6363",
+        "address": "Little Rock, AR",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter Little Rock",
+        "phone": "501-565-9427",
+        "address": "Little Rock, AR",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Ray Lusk Plumbing",
+        "phone": "501-664-0940",
+        "address": "Little Rock, AR",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Little Rock Emergency Plumbers",
+        "phone": "833-381-3130",
+        "address": "Little Rock, AR",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Central Arkansas Plumbers",
+        "phone": "(501) 555-0101",
+        "address": "Little Rock, AR",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Glass Pros Arizona",
+        "phone": "480-779-4444",
+        "address": "Scottsdale, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Valleywide Glass Scottsdale",
+        "phone": "480-717-0581",
+        "address": "Scottsdale, AZ",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "ProLite Glass Solutions",
+        "phone": "480-605-0084",
+        "address": "Scottsdale, AZ",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Five Star Glazing",
+        "phone": "(480) 581-2287",
+        "address": "Scottsdale, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Oztech Electric Bismarck",
+        "phone": "(701) 390-6886",
+        "address": "Bismarck, ND",
+        "website": "https://oztechelectric.com"
+    },
+    {
+        "name": "Sundog Electric",
+        "phone": "(701) 226-1178",
+        "address": "Bismarck, ND",
+        "website": "https://sundogelectric.net"
+    },
+    {
+        "name": "Electrical Concepts Inc",
+        "phone": "(701) 751-2826",
+        "address": "Bismarck, ND",
+        "website": "https://electricalconceptsnd.com"
+    },
+    {
+        "name": "Stumpf Electric Inc",
+        "phone": "(701) 258-4642",
+        "address": "Bismarck, ND",
+        "website": "https://stumpfelectricinc.com"
+    }
+]

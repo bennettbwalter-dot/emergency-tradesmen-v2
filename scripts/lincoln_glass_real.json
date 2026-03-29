@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Glass Doctor of Lincoln",
+        "phone": "(402) 476-9360",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Binswanger Glass of Lincoln",
+        "phone": "(402) 467-2596",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Auto Glass Nation",
+        "phone": "(402) 488-1100",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Waverly Glass Company",
+        "phone": "(402) 786-3386",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Nebraska Auto Glass",
+        "phone": "(402) 474-9000",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Clear View Glass Company",
+        "phone": "(402) 432-8201",
+        "address": "Lincoln, NE",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 110
+    }
+]

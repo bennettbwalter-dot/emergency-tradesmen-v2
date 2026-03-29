@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bob's Electric",
+        "phone": "(630) 485-9663",
+        "address": "Plainfield, IL",
+        "website": "https://bobselectricofstcharles.com"
+    },
+    {
+        "name": "Trinity Electrical Services, Inc.",
+        "phone": "(630) 499-1492",
+        "address": "Plainfield, IL",
+        "website": "https://tesyes.com"
+    },
+    {
+        "name": "AArdvark Electric Service, Inc.",
+        "phone": "(630) 789-1949",
+        "address": "Plainfield, IL",
+        "website": "https://aardvarkelectricservice.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 248-0484",
+        "address": "Plainfield, IL",
+        "website": "https://24hourelectrician.net"
+    }
+]

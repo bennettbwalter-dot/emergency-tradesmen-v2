@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Valleywide Glass Mesa",
+        "phone": "480-717-0581",
+        "address": "Mesa, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Glassbusters",
+        "phone": "(480) 994-5855",
+        "address": "Mesa, AZ",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Arizona Glass & Door Connection",
+        "phone": "602-375-2000",
+        "address": "Mesa, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "PJ's Auto Glass Replacement",
+        "phone": "(480) 331-7882",
+        "address": "Mesa, AZ",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "1st Shot Auto Glass",
+        "phone": "(480) 233-9368",
+        "address": "Mesa, AZ",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Waldo's Glass El Paso",
+        "phone": "(915) 307-3032",
+        "address": "El Paso, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "One Stop Glass El Paso",
+        "phone": "(915) 599-3070",
+        "address": "El Paso, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Alamo Glass Pros",
+        "phone": "915-590-9933",
+        "address": "El Paso, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "El Paso Auto Glass",
+        "phone": "915-265-5691",
+        "address": "El Paso, TX",
+        "trade": "glazier",
+        "rating": 4.6,
+        "review_count": 120
+    },
+    {
+        "name": "Southwest Auto Glass",
+        "phone": "+1 915 595 4444",
+        "address": "El Paso, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

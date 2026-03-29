@@ -1,0 +1,50 @@
+[
+    {
+        "name": "LA City Glass LLC",
+        "phone": "(310) 740-6901",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "S.O.S. Door & Glass Services LLC",
+        "phone": "(310) 933-2600",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Ramos Industries Inc.",
+        "phone": "(213) 247-2597",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Wilson Glass & Screen",
+        "phone": "(562) 324-4061",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "LA Emergency Glass Services",
+        "phone": "(310) 928-9364",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Emergency Glass & Board Up",
+        "phone": "(818) 531-1309",
+        "address": "Los Angeles, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 310
+    }
+]

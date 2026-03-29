@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Western Pacific Electric Inc",
+        "phone": "(775) 324-2700",
+        "address": "Sun Valley, NV",
+        "website": "https://wpeinc.com"
+    },
+    {
+        "name": "United Electrical",
+        "phone": "(775) 782-4303",
+        "address": "Sun Valley, NV",
+        "website": "https://unitedelectricalservices.com"
+    },
+    {
+        "name": "Sater Electric",
+        "phone": "(775) 357-9535",
+        "address": "Sun Valley, NV",
+        "website": "https://saterelectric.com"
+    },
+    {
+        "name": "Burnett Electric",
+        "phone": "(775) 406-9857",
+        "address": "Sun Valley, NV",
+        "website": null
+    }
+]

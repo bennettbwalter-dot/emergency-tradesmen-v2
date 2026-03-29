@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Absolute Plumbing, Electrical, Heating & Air",
+        "phone": "(720) 807-5715",
+        "address": "Denver, CO",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Bell Plumbing, Heating, Cooling & Electrical",
+        "phone": "(303) 731-5469",
+        "address": "Denver, CO",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Golden West Plumbing, Heating, Air Conditioning and Electrical",
+        "phone": "(303) 433-6077",
+        "address": "Denver, CO",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "One Hour Heating & Air Conditioning of Denver",
+        "phone": "(303) 063-2333",
+        "address": "Denver, CO",
+        "rating": 4.7,
+        "review_count": 1577
+    },
+    {
+        "name": "Aim High HVAC",
+        "phone": "(303) 618-5722",
+        "address": "Denver, CO",
+        "rating": 5.0,
+        "review_count": 748
+    }
+]

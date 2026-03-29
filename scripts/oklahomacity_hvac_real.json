@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Automated Tech Solutions",
+        "phone": "(405) 654-9404",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Yarbrough & Sons",
+        "phone": "(405) 212-9472",
+        "address": "Oklahoma City, OK",
+        "rating": 4.8,
+        "review_count": 2100
+    },
+    {
+        "name": "Suntech Heat & Air",
+        "phone": "(405) 785-0950",
+        "address": "Oklahoma City, OK",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Martin Mechanical Services",
+        "phone": "(405) 607-3203",
+        "address": "Oklahoma City, OK",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Alliance Expert Services",
+        "phone": "(405) 674-3292",
+        "address": "Oklahoma City, OK",
+        "rating": 4.6,
+        "review_count": 113
+    }
+]

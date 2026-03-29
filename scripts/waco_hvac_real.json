@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Lochridge-Priest",
+        "phone": "(254) 772-0670",
+        "address": "Waco, TX",
+        "rating": 4.9,
+        "review_count": 5200
+    },
+    {
+        "name": "Evergreen Heating and Cooling",
+        "phone": "(254) 306-0787",
+        "address": "Waco, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Rabroker Air Conditioning and Plumbing",
+        "phone": "(254) 741-1866",
+        "address": "Waco, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Quality Air Care",
+        "phone": "(254) 857-4292",
+        "address": "Waco, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Centroplex Service Company",
+        "phone": "(254) 662-3970",
+        "address": "Waco, TX",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "BELFOR Fresno",
+        "phone": "(559) 244-0811",
+        "address": "4328 N Brawley Avenue, Fresno, CA 93722",
+        "website": "https://www.belfor.com/"
+    },
+    {
+        "name": "The Restoration Company",
+        "phone": "(559) 374-2600",
+        "address": "3327 W. Sussex Way, Fresno, CA 93722",
+        "website": "https://restoration.us/"
+    },
+    {
+        "name": "911 Restoration of Fresno",
+        "phone": "(559) 795-1670",
+        "address": "6070 Bluff Avenue, Fresno, CA 93722",
+        "website": "https://911restorationfresno.com/"
+    },
+    {
+        "name": "ServiceMaster by Benevento",
+        "phone": "(559) 772-1034",
+        "address": "Fresno, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Fresno Southeast",
+        "phone": "(559) 453-3336",
+        "address": "Fresno, CA",
+        "website": "https://servpro.com/"
+    }
+]

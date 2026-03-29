@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Facility Management London Sevenoaks",
+        "phone": "02033 760950",
+        "address": "Sevenoaks",
+        "website": "https://facilitymanagementlondon.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Sevenoaks",
+        "phone": "07930 059 570",
+        "address": "Sevenoaks",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "No1 PHD Building Sevenoaks",
+        "phone": "01732423906",
+        "address": "Sevenoaks",
+        "website": "https://no1phd.co.uk/"
+    },
+    {
+        "name": "Sevenoaks Building & Maintenance",
+        "phone": "07723 494 485",
+        "address": "Sevenoaks",
+        "website": "https://sevenoaksplumbers.co.uk/"
+    },
+    {
+        "name": "Sevenoaks Emergency Brickwork Services",
+        "phone": "07723 494 485",
+        "address": "Sevenoaks",
+        "website": "https://checkatrade.com/"
+    }
+]

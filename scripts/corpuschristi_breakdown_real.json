@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Juan's Wrecker",
+        "phone": "(361) 296-4387",
+        "address": "Corpus Christi, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "KINGZ TOWING",
+        "phone": "(361) 903-5274",
+        "address": "Corpus Christi, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Towing Corpus Christi",
+        "phone": "(361) 675-9318",
+        "address": "Corpus Christi, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Paradise Towing",
+        "phone": "(361) 500-1111",
+        "address": "Corpus Christi, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Statewide Wrecker",
+        "phone": "(361) 322-2222",
+        "address": "Corpus Christi, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

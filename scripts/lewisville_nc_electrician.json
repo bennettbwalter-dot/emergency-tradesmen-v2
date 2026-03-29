@@ -1,0 +1,26 @@
+[
+    {
+        "name": "JD Norman Electric",
+        "phone": "877-252-3888",
+        "address": "Lewisville, NC",
+        "website": "https://emergencyelectriciansnationwide.com"
+    },
+    {
+        "name": "Tru-Electric LLC",
+        "phone": "336-745-6399",
+        "address": "Lewisville, NC",
+        "website": "https://tru-electricllc.com"
+    },
+    {
+        "name": "Kluch Electrical",
+        "phone": "336-814-6007",
+        "address": "Lewisville, NC",
+        "website": "https://kluch-electrical.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Lewisville, NC",
+        "website": "https://oconnorselectrical.com"
+    }
+]

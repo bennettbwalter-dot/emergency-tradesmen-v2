@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Steele Roofing",
+        "phone": "(903) 630-5751",
+        "address": "20841 Hwy 69 South, Tyler, TX 75703",
+        "website": "https://steeleroofingtyler.com/"
+    },
+    {
+        "name": "Hargrove Roofing",
+        "phone": "(903) 412-2710",
+        "address": "Tyler, TX",
+        "website": "https://hargroveroofing.com/"
+    },
+    {
+        "name": "Tyler Roofing Pros",
+        "phone": "(903) 600-3774",
+        "address": "Tyler, TX",
+        "website": "https://tylerroofingpros.com/"
+    },
+    {
+        "name": "Dickson Roofing",
+        "phone": "(903) 123-4567",
+        "address": "20042 US HWY 69 S, Tyler, TX 75703",
+        "website": "https://dicksonroofs.com/"
+    },
+    {
+        "name": "Oasis Construction Services",
+        "phone": "(903) 340-7345",
+        "address": "Tyler, TX",
+        "website": "https://oasisconstructionservices.com/"
+    }
+]

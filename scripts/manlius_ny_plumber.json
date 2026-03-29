@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bair Mechanical",
+        "phone": "(315) 416-0885",
+        "address": "Manlius, NY",
+        "website": "https://bairmechanical.com"
+    },
+    {
+        "name": "Hummingbird Heating Cooling Plumbing and Electric",
+        "phone": "(315) 399-9962",
+        "address": "Manlius, NY",
+        "website": "https://callhummingbird.com"
+    },
+    {
+        "name": "Superior Drain Solutions Manlius",
+        "phone": "(315) 699-7255",
+        "address": "Manlius, NY",
+        "website": "https://superiordrains.com"
+    },
+    {
+        "name": "Roto-Rooter Manlius",
+        "phone": "(315) 216-2972",
+        "address": "Manlius, NY",
+        "website": "https://rotorooter.com"
+    }
+]

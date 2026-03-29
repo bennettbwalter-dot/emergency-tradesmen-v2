@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Champion Air",
+        "phone": "(480) 748-4000",
+        "address": "Scottsdale, AZ",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "American Home Water & Air",
+        "phone": "(602) 497-3674",
+        "address": "Scottsdale, AZ",
+        "rating": 5.0,
+        "review_count": 3845
+    },
+    {
+        "name": "Emergency Air Heating Cooling & Plumbing",
+        "phone": "(602) 529-4407",
+        "address": "Scottsdale, AZ",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "One Hour Air Conditioning & Heating",
+        "phone": "(480) 613-2598",
+        "address": "Scottsdale, AZ",
+        "rating": 4.8,
+        "review_count": 529
+    },
+    {
+        "name": "George Brazil Air Conditioning & Heating",
+        "phone": "(602) 842-0123",
+        "address": "Scottsdale, AZ",
+        "rating": 4.9,
+        "review_count": 12000
+    }
+]

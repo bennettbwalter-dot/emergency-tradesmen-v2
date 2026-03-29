@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Dry Force",
+        "phone": "(877) 589-7504",
+        "address": "Grapevine, TX",
+        "website": "https://dryforcecorp.com/"
+    },
+    {
+        "name": "Jenkins Restorations",
+        "phone": "(682) 219-0320",
+        "address": "Grapevine, TX",
+        "website": "https://jenkinsrestorations.com/"
+    },
+    {
+        "name": "ServiceMaster Advanced Restorations",
+        "phone": "(817) 783-9297",
+        "address": "Grapevine, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Water Damage Pros of Grapevine",
+        "phone": "(817) 489-9777",
+        "address": "Grapevine, TX",
+        "website": "https://grapevinewaterdamage.com/"
+    },
+    {
+        "name": "Restoration 1 Lone Star",
+        "phone": "(817) 646-9219",
+        "address": "Grapevine, TX",
+        "website": "https://restoration1.com/"
+    }
+]

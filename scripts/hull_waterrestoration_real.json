@@ -1,0 +1,32 @@
+[
+    {
+        "name": "PK Cleaning Services Hull",
+        "phone": "01482 506386",
+        "address": "12 Sycamore Close, Hull",
+        "website": "https://pk-cleaning.co.uk/"
+    },
+    {
+        "name": "SA Services Hull",
+        "phone": "01482 877441",
+        "address": "Unit 3, RSV Business Park, Spyvee Street, Hull, HU8 7JJ",
+        "website": "https://sa-services.co.uk/"
+    },
+    {
+        "name": "Response Bioclean Hull",
+        "phone": "0333 772 0638",
+        "address": "Hull",
+        "website": "https://responsebioclean.com/"
+    },
+    {
+        "name": "Rainbow Restoration Hull",
+        "phone": "01623 422488",
+        "address": "Hull",
+        "website": "https://rainbowrestoration.co.uk/"
+    },
+    {
+        "name": "Ideal Response Hull",
+        "phone": "01622 926 505",
+        "address": "Hull",
+        "website": "https://idealresponse.co.uk/"
+    }
+]

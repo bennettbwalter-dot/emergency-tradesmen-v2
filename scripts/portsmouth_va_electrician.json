@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Portsmouth, VA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Mike Wells Services",
+        "phone": "757-510-0657",
+        "address": "Portsmouth, VA",
+        "website": "https://mikewellsservices.com"
+    },
+    {
+        "name": "Cole Electric Inc.",
+        "phone": "757-498-2653",
+        "address": "Portsmouth, VA",
+        "website": "https://coleelectricinc.com"
+    },
+    {
+        "name": "Mister Sparky of Virginia Beach",
+        "phone": "757-828-4182",
+        "address": "Portsmouth, VA",
+        "website": "https://mistersparky.com"
+    }
+]

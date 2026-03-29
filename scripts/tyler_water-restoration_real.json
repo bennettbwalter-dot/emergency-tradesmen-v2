@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Tyler and Palestine",
+        "phone": "(903) 561-0168",
+        "address": "Tyler, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "ServiceMaster Restore Tyler",
+        "phone": "(903) 225-8538",
+        "address": "Tyler, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Restoration 1 of East Texas",
+        "phone": "(903) 224-6804",
+        "address": "Tyler, TX",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "1-800-Water Damage",
+        "phone": "(903) 425-4211",
+        "address": "Tyler, TX 75708",
+        "website": "https://1800waterdamage.com/"
+    },
+    {
+        "name": "Spartan Restoration",
+        "phone": "(903) 881-3098",
+        "address": "110 N College Ave Suite 1402, Tyler, TX",
+        "website": "https://spartanmit.com/"
+    }
+]

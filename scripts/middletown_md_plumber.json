@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Putman Plumbing",
+        "phone": "(301) 371-4395",
+        "address": "Middletown, MD",
+        "website": "https://putmanplumbing.com"
+    },
+    {
+        "name": "Larry & Sons",
+        "phone": "(301) 733-5428",
+        "address": "Middletown, MD",
+        "website": "https://larryandsons.com"
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Services",
+        "phone": "(301) 695-1750",
+        "address": "Middletown, MD",
+        "website": "https://www.rotorooter.com/frederickmd/"
+    },
+    {
+        "name": "Alvin's Plumbing",
+        "phone": "(888) 565-9676",
+        "address": "Middletown, MD",
+        "website": "https://alvinsplumbingllc.com"
+    }
+]

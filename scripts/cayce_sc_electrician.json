@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cayce Company",
+        "phone": "803-808-3724",
+        "address": "Cayce, SC",
+        "website": "https://caycecompany.com"
+    },
+    {
+        "name": "Mister Sparky of Columbia",
+        "phone": "803-529-1128",
+        "address": "Cayce, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Cayce, SC",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "South Carolina Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Cayce, SC",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Capital City Electrical Services",
+        "address": "Atlanta, GA",
+        "phone": "770-821-6099",
+        "trade": "electrician",
+        "city": "Atlanta"
+    },
+    {
+        "name": "Mr. Roofer",
+        "address": "3500 Lenox Rd, Atlanta, GA",
+        "phone": "770-966-7663",
+        "trade": "roofer",
+        "city": "Atlanta"
+    },
+    {
+        "name": "Bates Electric",
+        "address": "Nashville, TN",
+        "phone": "615-257-9352",
+        "trade": "electrician",
+        "city": "Nashville"
+    },
+    {
+        "name": "MidSouth Construction",
+        "address": "652 Old Ezell Road, Nashville, TN 37217",
+        "phone": "615-712-8893",
+        "trade": "roofer",
+        "city": "Nashville"
+    },
+    {
+        "name": "Piper Electric",
+        "address": "Denver, CO",
+        "phone": "303-422-9219",
+        "trade": "electrician",
+        "city": "Denver"
+    },
+    {
+        "name": "Trusted Roofing Company",
+        "address": "12445 E 39th Ave, Denver, CO 80239",
+        "phone": "303-505-5574",
+        "trade": "roofer",
+        "city": "Denver"
+    },
+    {
+        "name": "OHM Electrical Contractors",
+        "address": "New Orleans, LA",
+        "phone": "504-494-3053",
+        "trade": "electrician",
+        "city": "New Orleans"
+    },
+    {
+        "name": "Big Easy Roofing Company",
+        "address": "New Orleans, LA",
+        "phone": "504-229-3955",
+        "trade": "roofer",
+        "city": "New Orleans"
+    }
+]

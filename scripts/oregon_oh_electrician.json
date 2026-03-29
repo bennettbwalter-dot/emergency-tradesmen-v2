@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Oregon, OH",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Oregon, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "Reese Electric",
+        "phone": "419-693-0661",
+        "address": "Oregon, OH",
+        "website": "https://reeseelectric.com"
+    },
+    {
+        "name": "Mr. Electric of Toledo",
+        "phone": "419-318-8094",
+        "address": "Oregon, OH",
+        "website": "https://mrelectric.com"
+    }
+]

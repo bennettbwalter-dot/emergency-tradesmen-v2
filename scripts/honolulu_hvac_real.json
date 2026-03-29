@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Honolulu Appliance Repair Pro",
+        "phone": "(808) 518-2966",
+        "address": "Honolulu, HI",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Steve's Plumbing & AC Service",
+        "phone": "(808) 563-4000",
+        "address": "Honolulu, HI",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Island Comfort Air Conditioning",
+        "phone": "(808) 693-8000",
+        "address": "Honolulu, HI",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Oahu Air Conditioning",
+        "phone": "(808) 843-1111",
+        "address": "Honolulu, HI",
+        "rating": 4.6,
+        "review_count": 420
+    },
+    {
+        "name": "E.K. Kahuna HVAC",
+        "phone": "(808) 488-0001",
+        "address": "Honolulu, HI",
+        "rating": 4.5,
+        "review_count": 150
+    }
+]

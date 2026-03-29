@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Electric of Wichita",
+        "phone": "(316) 265-5120",
+        "address": "Wichita, KS",
+        "website": "https://mrelectric.com"
+    },
+    {
+        "name": "Mister Sparky of Wichita",
+        "phone": "(316) 243-9824",
+        "address": "Wichita, KS",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "On Time Electric",
+        "phone": "(316) 721-5055",
+        "address": "Wichita, KS",
+        "website": "https://ontimesvc.com"
+    },
+    {
+        "name": "Wichita Electrician Squad",
+        "phone": "(855) 545-0906",
+        "address": "Wichita, KS",
+        "website": "https://electriciansquad.com"
+    }
+]

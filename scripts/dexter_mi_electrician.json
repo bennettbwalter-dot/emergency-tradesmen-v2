@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Turner Electric",
+        "phone": "(877) 252-3888",
+        "address": "Dexter, MI",
+        "website": "https://emergencyelectriciansnationwide.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Dexter, MI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Dexter, MI",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Winson Electric",
+        "phone": "(734) 272-3591",
+        "address": "Dexter, MI",
+        "website": "https://winsonelectric.com"
+    }
+]

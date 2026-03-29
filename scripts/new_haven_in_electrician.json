@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "New Haven, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "475-347-0065",
+        "address": "New Haven, IN",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Spartan Electrical Service",
+        "phone": "877-703-4275",
+        "address": "New Haven, IN",
+        "website": "https://spartanelectricalservice.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "888-851-5284",
+        "address": "New Haven, IN",
+        "website": "https://lewsaderelectric.com"
+    }
+]

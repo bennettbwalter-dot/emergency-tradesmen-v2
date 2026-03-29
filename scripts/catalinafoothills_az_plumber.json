@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Woods Plumbing Enterprises",
+        "phone": "(520) 682-2233",
+        "address": "Catalina Foothills, AZ",
+        "website": "https://woodsplumbing.com"
+    },
+    {
+        "name": "RAM Plumbing",
+        "phone": "(520) 747-8089",
+        "address": "Catalina Foothills, AZ",
+        "website": "https://ramplumbingaz.com"
+    },
+    {
+        "name": "Cals Plumbing",
+        "phone": "(520) 263-1250",
+        "address": "Catalina Foothills, AZ",
+        "website": "https://calsplumbing.com"
+    },
+    {
+        "name": "Curtis Plumbing",
+        "phone": "(520) 323-7697",
+        "address": "Catalina Foothills, AZ",
+        "website": "https://curtisplumbing.net"
+    }
+]

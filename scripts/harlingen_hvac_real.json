@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Briggs Heating",
+        "phone": "(877) 748-7966",
+        "address": "Harlingen, TX",
+        "website": "https://briggsheating.com/"
+    },
+    {
+        "name": "Atlas Electrical, Air Conditioning, Refrigeration and Plumbing Services",
+        "phone": "(956) 586-5491",
+        "address": "Harlingen, TX",
+        "website": "https://atlasrgv.com/"
+    },
+    {
+        "name": "Farrell Plumbing & Cooling Inc.",
+        "phone": "(956) 423-1000",
+        "address": "Harlingen, TX",
+        "website": "https://farrellplumbingandcooling.com/"
+    },
+    {
+        "name": "American AC & Heating",
+        "phone": "(956) 300-4366",
+        "address": "Harlingen, TX",
+        "website": "https://myamericanac.com/"
+    },
+    {
+        "name": "General HVAC",
+        "phone": "(956) 343-7712",
+        "address": "Harlingen, TX",
+        "website": "https://genacr.com/"
+    },
+    {
+        "name": "Colair Cooling & Heating",
+        "phone": "(956) 581-5212",
+        "address": "Harlingen, TX",
+        "website": "https://colairinc.com/"
+    }
+]

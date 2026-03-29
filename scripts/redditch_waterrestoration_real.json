@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster Clean Redditch",
+        "phone": "0121 323 4299",
+        "address": "2 Lewis Road, Foleshill, Coventry, CV1 4HZ (serves Redditch)",
+        "website": "https://servicemasterclean.co.uk/"
+    },
+    {
+        "name": "Emergency Clean UK Redditch",
+        "phone": "0333 772 2130",
+        "address": "Redditch, Worcestershire",
+        "website": "https://emergencycleanuk.co.uk/"
+    },
+    {
+        "name": "Rainbow Restoration Redditch",
+        "phone": "01623 422488",
+        "address": "Redditch",
+        "website": "https://rainbowrestoration.co.uk/"
+    },
+    {
+        "name": "Response Bioclean Redditch",
+        "phone": "0333 772 0638",
+        "address": "Redditch",
+        "website": "https://responsebioclean.com/"
+    },
+    {
+        "name": "Flash Restorations Redditch",
+        "phone": "0800 123 4567",
+        "address": "Redditch",
+        "website": "https://flashrestorations.com/"
+    }
+]

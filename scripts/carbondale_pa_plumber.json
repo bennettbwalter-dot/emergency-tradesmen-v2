@@ -1,0 +1,26 @@
+[
+    {
+        "name": "On Point Plumbing & Heating",
+        "phone": "(570) 281-6444",
+        "address": "Carbondale, PA",
+        "website": "https://onpointplumbingandheating.com"
+    },
+    {
+        "name": "GLR Mechanical",
+        "phone": "(570) 569-1873",
+        "address": "Carbondale, PA",
+        "website": "https://glrmechanical.com"
+    },
+    {
+        "name": "Regal Plumbing & Heating",
+        "phone": "(570) 281-6444",
+        "address": "Carbondale, PA",
+        "website": "https://regalplumbingandheating.com"
+    },
+    {
+        "name": "T.E. Spall & Son",
+        "phone": "(570) 282-3000",
+        "address": "Carbondale, PA",
+        "website": "https://thecomfortdoctors.com"
+    }
+]

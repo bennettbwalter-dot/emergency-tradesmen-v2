@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of Flower Mound / Lewisville",
+        "phone": "(972) 420-4771",
+        "address": "650 S. Edmonds Lane, Lewisville, TX 75067",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "DRYmedic Lewisville, TX",
+        "phone": "(214) 838-7388",
+        "address": "760 E Main St, #307 Lewisville, TX 75057",
+        "website": "https://drymedic.com/"
+    },
+    {
+        "name": "Mr. Restore",
+        "phone": "(972) 737-9203",
+        "address": "1590 E State Hwy 121, Lewisville, TX 75056",
+        "website": "https://mrrestore.com/"
+    },
+    {
+        "name": "Korrect General Contracting",
+        "phone": "(817) 808-7253",
+        "address": "Lewisville, TX",
+        "website": "https://korrectgc.com/"
+    },
+    {
+        "name": "Zeus Restoration",
+        "phone": "(214) 399-5282",
+        "address": "Lewisville, TX",
+        "website": "https://zeusrestoration.com/"
+    }
+]

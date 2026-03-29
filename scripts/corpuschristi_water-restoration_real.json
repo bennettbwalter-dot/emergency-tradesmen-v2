@@ -1,0 +1,32 @@
+[
+    {
+        "name": "BELFOR Corpus Christi",
+        "phone": "(361) 504-0845",
+        "address": "433 Sun Belt Dr. Suite D, Corpus Christi, TX 78408",
+        "website": "https://belfor.com/"
+    },
+    {
+        "name": "Restoration 1 of Corpus Christi",
+        "phone": "(361) 490-2237",
+        "address": "Corpus Christi, TX",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "24 Hour Flood Pros",
+        "phone": "(361) 260-2061",
+        "address": "3145 Lenore Ave, Ingleside, TX 78362",
+        "website": "https://24hourfloodpros.com/"
+    },
+    {
+        "name": "ServiceMaster Central of Corpus Christi",
+        "phone": "(361) 203-8356",
+        "address": "Corpus Christi, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Corpus Christi",
+        "phone": "(361) 985-6444",
+        "address": "Corpus Christi, TX",
+        "website": "https://servpro.com/"
+    }
+]

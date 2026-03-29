@@ -1,0 +1,26 @@
+[
+    {
+        "name": "CG Plumbing",
+        "phone": "(916) 545-8850",
+        "address": "Roseville, CA",
+        "website": "https://cgplumbingservice.com"
+    },
+    {
+        "name": "Rooter Hero",
+        "phone": "(916) 888-8905",
+        "address": "Roseville, CA",
+        "website": "https://rooterhero.com"
+    },
+    {
+        "name": "Environmental Heating and Air Solutions",
+        "phone": "(916) 581-2949",
+        "address": "Roseville, CA",
+        "website": "https://ehasolutions.com"
+    },
+    {
+        "name": "Crystal Blue Plumbing Heating and Air",
+        "phone": "(916) 577-5020",
+        "address": "Roseville, CA",
+        "website": "https://crystalblueplumbing.com"
+    }
+]

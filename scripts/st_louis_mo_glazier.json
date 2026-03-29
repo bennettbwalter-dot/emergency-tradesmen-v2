@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Greater St. Louis",
+        "phone": "(636) 203-7055",
+        "address": "St. Louis, MO",
+        "website": "https://glassdoctor.com"
+    },
+    {
+        "name": "SERVICE CENTRAL GLASS & DOOR, INC.",
+        "phone": "(314) 739-4450",
+        "address": "St. Louis, MO",
+        "website": "https://servicecentralglassanddoor.com"
+    },
+    {
+        "name": "All About Glass",
+        "phone": "(314) 669-5636",
+        "address": "St. Louis, MO",
+        "website": "https://allaboutglassstl.com"
+    },
+    {
+        "name": "Hyperion Glass Company",
+        "phone": "(636) 538-4680",
+        "address": "St. Louis, MO",
+        "website": "https://hyperionglassco.com"
+    }
+]

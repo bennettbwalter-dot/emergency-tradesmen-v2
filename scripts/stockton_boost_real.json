@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Knights Plumbing And Drain",
+        "phone": "(209) 396-8575",
+        "address": "4719 Quail Lakes Drive, Stockton, CA 95207",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 350
+    },
+    {
+        "name": "Rooter Hero Plumbing & Air",
+        "phone": "(209) 219-4977",
+        "address": "2320 Stagecoach Rd., unit C, Stockton, CA 95215",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1205
+    },
+    {
+        "name": "Discount Plumbing, Heating & Air",
+        "phone": "(209) 306-4444",
+        "address": "3971 Producers Dr. Suite C, Stockton, CA 95206",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 840
+    },
+    {
+        "name": "Garcia Plumbing",
+        "phone": "(209) 473-1996",
+        "address": "3258 S El Dorado St, Stockton, CA 95206",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 115
+    },
+    {
+        "name": "Golden State Plumbing",
+        "phone": "(209) 464-9464",
+        "address": "1530 E Harding Way, Stockton, CA 95205",
+        "trade": "plumber",
+        "rating": 4.4,
+        "review_count": 92
+    },
+    {
+        "name": "Queirolo's Heating & Air Conditioning",
+        "phone": "(209) 464-9658",
+        "address": "3647 Teepee Dr, Stockton, CA 95205",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 210
+    },
+    {
+        "name": "Tony’s Plumbing",
+        "phone": "(209) 208-8445",
+        "address": "2801 Gilchrist Ave, Stockton, CA 95205",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 156
+    },
+    {
+        "name": "Lovotti Inc",
+        "phone": "(209) 396-8575",
+        "address": "3717 West Lane, Stockton, CA 95204",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 560
+    },
+    {
+        "name": "Elliott Electric Inc",
+        "phone": "(209) 464-9411",
+        "address": "1030 S El Dorado St, Stockton, CA 95206",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 75
+    },
+    {
+        "name": "Con J. Franke Electric Inc.",
+        "phone": "(209) 466-4122",
+        "address": "317 N Grant St, Stockton, CA 95202",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 42
+    },
+    {
+        "name": "Technical Electric",
+        "phone": "(209) 545-2566",
+        "address": "Stockton/Modesto Area",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 5
+    },
+    {
+        "name": "All-Time Electric",
+        "phone": "(209) 835-2300",
+        "address": "Tracy/Stockton Area",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 14
+    },
+    {
+        "name": "Bockmon & Woody Electric Co Inc",
+        "phone": "(209) 464-4878",
+        "address": "1528 El Pinal Dr, Stockton, CA 95205",
+        "trade": "electrician",
+        "rating": 4.4,
+        "review_count": 18
+    },
+    {
+        "name": "Collins Electrical Company Inc",
+        "phone": "(209) 466-3691",
+        "address": "3412 Metro Dr, Stockton, CA 95213",
+        "trade": "electrician",
+        "rating": 4.5,
+        "review_count": 30
+    },
+    {
+        "name": "Pop-A-Lock",
+        "phone": "(209) 952-4747",
+        "address": "Stockton, CA 95207",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 112
+    },
+    {
+        "name": "Accurate Lock & Safe",
+        "phone": "(209) 463-3814",
+        "address": "1015 N Wilson Way, Stockton, CA 95205",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 95
+    },
+    {
+        "name": "Ace Lock & Key",
+        "phone": "(209) 462-8176",
+        "address": "1320 E Harding Way, Stockton, CA 95205",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 65
+    },
+    {
+        "name": "24 Hour Locksmith Stockton",
+        "phone": "(209) 420-1361",
+        "address": "Stockton, CA 95202",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 40
+    },
+    {
+        "name": "Locksmith Stockton",
+        "phone": "(209) 200-8480",
+        "address": "Stockton, CA 95210",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 25
+    },
+    {
+        "name": "Advanced Locksmith",
+        "phone": "(209) 244-8395",
+        "address": "Stockton, CA 95205",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 18
+    }
+]

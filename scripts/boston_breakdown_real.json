@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Boston Recovery Services",
+        "phone": "(617) 837-3723",
+        "address": "Boston, MA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "D&G Towing",
+        "phone": "(857) 294-8672",
+        "address": "Boston, MA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Boston Towing & Recovery Inc",
+        "phone": "(617) 958-8492",
+        "address": "Boston, MA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "A Affordable Towing & Roadside",
+        "phone": "(617) 261-1818",
+        "address": "Boston, MA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Elite Towing Boston",
+        "phone": "(617) 441-0000",
+        "address": "Boston, MA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

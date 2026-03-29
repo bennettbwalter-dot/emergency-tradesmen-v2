@@ -1,0 +1,32 @@
+[
+    {
+        "name": "NEMA Roofing",
+        "phone": "(661) 554-4702",
+        "address": "Bakersfield, CA",
+        "website": "https://nemaroofing.com/"
+    },
+    {
+        "name": "Bear Mountain Roofing Inc",
+        "phone": "(661) 555-0199",
+        "address": "Bakersfield, CA",
+        "website": "https://bearmountainroofing.com/"
+    },
+    {
+        "name": "Roof On Brand",
+        "phone": "(661) 444-5555",
+        "address": "Bakersfield, CA",
+        "website": "https://roofonbrand.com/"
+    },
+    {
+        "name": "A & J Roofing",
+        "phone": "(877) 748-7543",
+        "address": "Bakersfield, CA",
+        "website": "https://aandjroofinginc.com/"
+    },
+    {
+        "name": "Bakersfield Roofing and Gutters",
+        "phone": "(661) 555-0188",
+        "address": "Bakersfield, CA",
+        "website": "https://roofingcontractorsbakersfieldca.com/"
+    }
+]

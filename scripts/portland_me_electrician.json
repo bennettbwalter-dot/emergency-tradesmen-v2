@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Casco Bay Electric",
+        "phone": "(207) 221-3331",
+        "address": "Portland, ME",
+        "website": "https://cascobayelectric.com"
+    },
+    {
+        "name": "Mancini Electric Inc",
+        "phone": "(207) 774-5829",
+        "address": "Portland, ME",
+        "website": "https://mancinielectric.com"
+    },
+    {
+        "name": "On Electric LLC",
+        "phone": "(207) 865-3030",
+        "address": "Portland, ME",
+        "website": "https://onelectricmaine.com"
+    },
+    {
+        "name": "Southern Maine Electric Inc",
+        "phone": "(207) 423-5443",
+        "address": "Portland, ME",
+        "website": "https://southernmaineelectricincme.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Precision Heating & Air",
+        "phone": "(512) 379-6385",
+        "address": "Round Rock, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Allstate Plumbing & Heating",
+        "phone": "(512) 990-8600",
+        "address": "Round Rock, TX",
+        "rating": 4.7,
+        "review_count": 420
+    },
+    {
+        "name": "Emergency AC Round Rock",
+        "phone": "(512) 953-2193",
+        "address": "Round Rock, TX",
+        "rating": 5.0,
+        "review_count": 1500
+    },
+    {
+        "name": "Aire Serv of Round Rock",
+        "phone": "(512) 641-6110",
+        "address": "Round Rock, TX",
+        "rating": 4.9,
+        "review_count": 244
+    },
+    {
+        "name": "Round Rock HVAC",
+        "phone": "(512) 648-4395",
+        "address": "Round Rock, TX",
+        "rating": 4.8,
+        "review_count": 120
+    }
+]

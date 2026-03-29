@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Symplify Roofing",
+        "phone": "(415) 123-4567",
+        "address": "San Francisco, CA",
+        "website": "https://symplifyroofing.com/"
+    },
+    {
+        "name": "Tom Lee Roofing",
+        "phone": "(415) 822-0222",
+        "address": "San Francisco, CA",
+        "website": "https://tomleeroofingsanf.com/"
+    },
+    {
+        "name": "Roof Express",
+        "phone": "(650) 666-5554",
+        "address": "San Francisco, CA",
+        "website": "https://roof-ex.com/"
+    },
+    {
+        "name": "NewHaus Roofing & Construction",
+        "phone": "(747) 447-7023",
+        "address": "San Francisco, CA",
+        "website": "https://newhausroofing.com/"
+    },
+    {
+        "name": "Royal Roofing CA",
+        "phone": "(415) 456-7890",
+        "address": "San Francisco, CA",
+        "website": "https://royalroofingca.com/"
+    }
+]

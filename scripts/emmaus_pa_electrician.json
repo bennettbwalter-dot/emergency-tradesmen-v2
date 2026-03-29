@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Crosswyre Electric",
+        "phone": "(610) 214-2179",
+        "address": "Emmaus, PA",
+        "website": "https://crosswyreelectric.com"
+    },
+    {
+        "name": "Estevez Electric LLC",
+        "phone": "(484) 838-2720",
+        "address": "Emmaus, PA",
+        "website": "https://estevezelectricllc.com"
+    },
+    {
+        "name": "David's Electric Inc",
+        "phone": "(610) 965-4282",
+        "address": "Emmaus, PA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Shafnisky Electric",
+        "phone": "(610) 419-4444",
+        "address": "Emmaus, PA",
+        "website": "https://shafniskyelectric.com"
+    }
+]

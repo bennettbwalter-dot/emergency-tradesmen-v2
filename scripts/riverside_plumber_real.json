@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Scott Cole Plumbing",
+        "phone": "(951) 833-8572",
+        "address": "Riverside, CA",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "Roto-Rooter Riverside",
+        "phone": "(951) 892-7051",
+        "address": "Riverside, CA",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Pride Plumbing Services",
+        "phone": "(951) 555-0111",
+        "address": "Riverside, CA",
+        "rating": 4.9,
+        "review_count": 590
+    },
+    {
+        "name": "RighTime Riverside",
+        "phone": "(951) 324-4003",
+        "address": "Riverside, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Best Plumbing Services Riverside",
+        "phone": "(951) 555-0112",
+        "address": "Riverside, CA",
+        "rating": 4.9,
+        "review_count": 51
+    }
+]

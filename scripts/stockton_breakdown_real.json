@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Towing Stockton",
+        "phone": "(209) 279-5022",
+        "address": "Stockton, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "10-4 Tow Stockton",
+        "phone": "(209) 214-5555",
+        "address": "Stockton, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Professional Towing",
+        "phone": "(209) 300-4444",
+        "address": "Stockton, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Arr Towing",
+        "phone": "(209) 322-2222",
+        "address": "Stockton, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Stockton Recovery",
+        "phone": "(209) 500-0505",
+        "address": "Stockton, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

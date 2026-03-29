@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mathews CCAC",
+        "phone": "(361) 235-3905",
+        "address": "Corpus Christi, TX",
+        "rating": 4.9,
+        "review_count": 3500
+    },
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(361) 884-8214",
+        "address": "Corpus Christi, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Rescue Heating & Air LLC",
+        "phone": "(361) 265-4371",
+        "address": "Corpus Christi, TX",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "Tommy Cool Air",
+        "phone": "(361) 852-4450",
+        "address": "Corpus Christi, TX",
+        "rating": 4.6,
+        "review_count": 420
+    },
+    {
+        "name": "Ken-Air Indoor Comfort",
+        "phone": "(361) 888-6677",
+        "address": "Corpus Christi, TX",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

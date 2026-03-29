@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Kustom US",
+        "phone": "(866) 679-0699",
+        "address": "Tacoma, WA",
+        "website": "https://kustom.us/"
+    },
+    {
+        "name": "24ResTech",
+        "phone": "(253) 238-0838",
+        "address": "Tacoma, WA",
+        "website": "https://24restech.com/"
+    },
+    {
+        "name": "Allpro Construction",
+        "phone": "(888) 838-8698",
+        "address": "Tacoma, WA",
+        "website": "https://allproconstructioninc.com/"
+    },
+    {
+        "name": "Frontline Fire & Flood",
+        "phone": "(253) 235-1077",
+        "address": "Tacoma, WA",
+        "website": "https://frontlinefireflood.com/"
+    },
+    {
+        "name": "ServiceMaster of Tacoma",
+        "phone": "(253) 884-8586",
+        "address": "Tacoma, WA",
+        "website": "https://servicemasterrestore.com/"
+    }
+]

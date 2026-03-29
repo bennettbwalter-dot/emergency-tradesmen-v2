@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Scott The Electrician",
+        "phone": "(913) 403-1800",
+        "address": "Kansas City, KS",
+        "website": "https://scotttheelectrician.com"
+    },
+    {
+        "name": "Tann Electric",
+        "phone": "(913) 236-7337",
+        "address": "Kansas City, KS",
+        "website": "https://tannelectric.com"
+    },
+    {
+        "name": "Xtreme Electric KC",
+        "phone": "(913) 526-6591",
+        "address": "Kansas City, KS",
+        "website": "https://xtreme-electrickc.com"
+    },
+    {
+        "name": "Jeremy Electrical Kansas City",
+        "phone": "(913) 375-0070",
+        "address": "Kansas City, KS",
+        "website": "https://jeremykc.com"
+    }
+]

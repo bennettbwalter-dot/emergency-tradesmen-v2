@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Mission Auto Glass",
+        "phone": "(956) 434-0150",
+        "address": "Mission, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "AutoGlassOnly Mission",
+        "phone": "1-866-410-5628",
+        "address": "Mission, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Prime Windshield Repair",
+        "phone": "(956) 655-4431",
+        "address": "Mission, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Collision Worx",
+        "phone": "(956) 581-2715",
+        "address": "Mission, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

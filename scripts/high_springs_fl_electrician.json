@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky High Springs",
+        "phone": "(239) 309-1380",
+        "address": "High Springs, FL",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Callahan Electric High Springs",
+        "phone": "(888) 512-6801",
+        "address": "High Springs, FL",
+        "website": "https://callahanelectric.us"
+    },
+    {
+        "name": "High Springs Electric & Air",
+        "phone": "(386) 555-0149",
+        "address": "High Springs, FL",
+        "website": "https://hselectricair.com"
+    },
+    {
+        "name": "Florida Lighting Maintenance High Springs",
+        "phone": "(877) 294-7202",
+        "address": "High Springs, FL",
+        "website": "https://flm-gofm.com"
+    }
+]

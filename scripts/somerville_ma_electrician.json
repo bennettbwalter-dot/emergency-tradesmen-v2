@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Powerfact Electric, Inc.",
+        "phone": "(617) 259-8501",
+        "address": "Somerville, MA",
+        "website": "https://powerfactelectric.com"
+    },
+    {
+        "name": "Cardoso Electrical Services",
+        "phone": "(781) 246-7700",
+        "address": "Somerville, MA",
+        "website": "https://cardosoelectrical.com"
+    },
+    {
+        "name": "JMR Electric Group",
+        "phone": "(617) 744-3013",
+        "address": "Somerville, MA",
+        "website": "https://jmrelectricgroup.com"
+    },
+    {
+        "name": "E-lighting Home Service Inc.",
+        "phone": "(781) 346-8777",
+        "address": "Somerville, MA",
+        "website": "https://e-lightinghs.com"
+    }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Denton Emergency Plumbing",
+        "address": "514 Jannie St, Denton, TX 76209",
+        "phone": "940-260-8383",
+        "trade": "plumber",
+        "city": "Denton"
+    },
+    {
+        "name": "Knee Deep Plumbing",
+        "address": "Denton, TX",
+        "phone": "940-209-8686",
+        "trade": "plumber",
+        "city": "Denton"
+    },
+    {
+        "name": "BCI Mechanical",
+        "address": "Denton, TX",
+        "phone": "940-565-1010",
+        "trade": "plumber",
+        "city": "Denton"
+    },
+    {
+        "name": "Mobile Locksmith Denton",
+        "address": "425 Bernard St, Denton, TX 76201",
+        "phone": "972-587-1963",
+        "trade": "locksmith",
+        "city": "Denton"
+    },
+    {
+        "name": "Denton Locksmith",
+        "address": "211 E Oak St, Denton, TX 76201",
+        "phone": "214-461-4858",
+        "trade": "locksmith",
+        "city": "Denton"
+    },
+    {
+        "name": "1st Class Locksmith",
+        "address": "Denton, TX 76205",
+        "phone": "940-340-5068",
+        "trade": "locksmith",
+        "city": "Denton"
+    }
+]

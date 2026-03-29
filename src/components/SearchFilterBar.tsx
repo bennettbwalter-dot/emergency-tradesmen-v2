@@ -1,0 +1,421 @@
+import { Search, SlidersHorizontal, X } from "lucide-react";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useNavigate, useParams } from "react-router-dom";
+import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
+import { useLocalization } from "@/contexts/LocalizationContext";
+import { cities, trades } from "@/lib/trades";
+import { MapPin } from "lucide-react";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+    SelectGroup,
+    SelectLabel,
+} from "@/components/ui/select";
+import { UK_CITY_GROUPS } from "@/lib/uk-city-grouping";
+import { UKCityCombobox } from "@/components/UKCityCombobox";
+import { Badge } from "@/components/ui/badge";
+
+export interface FilterOptions {
+    searchQuery: string;
+    availability: "all" | "now" | "today" | "this-week";
+    minRating: number;
+    maxDistance: number;
+    sortBy: "rating" | "distance" | "reviews" | "name";
+    hasWebsite: boolean;
+    is24Hours: boolean;
+}
+
+interface SearchFilterBarProps {
+    filters: FilterOptions;
+    onFiltersChange: (filters: FilterOptions) => void;
+    resultsCount: number;
+    totalCount: number;
+}
+
+export function SearchFilterBar({
+    filters,
+    onFiltersChange,
+    resultsCount,
+    totalCount,
+}: SearchFilterBarProps) {
+    const navigate = useNavigate();
+    const { city } = useParams();
+    const { settings } = useLocalization();
+    console.log("SearchFilterBar MOUNTED");
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+    const updateFilter = (key: keyof FilterOptions, value: any) => {
+        onFiltersChange({ ...filters, [key]: value });
+    };
+
+    const clearFilters = () => {
+        onFiltersChange({
+            searchQuery: "",
+            availability: "all",
+            minRating: 0,
+            maxDistance: 50,
+            sortBy: "rating",
+            hasWebsite: false,
+            is24Hours: false,
+        });
+    };
+
+    const activeFiltersCount = [
+        filters.availability !== "all",
+        filters.minRating > 0,
+        filters.maxDistance < 50,
+        filters.hasWebsite,
+        filters.is24Hours,
+    ].filter(Boolean).length;
+
+    return (
+        <div className="space-y-4">
+            {/* Search Bar */}
+            <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                    <div className="w-full">
+                        {settings.countryCode === 'US' ? (
+                            <HierarchicalLocationSelector
+                                placeholder="DEBUG: Enter city, suburb, or ZIP"
+                                className="bg-card border-border/50 focus:border-gold/50"
+                                onLocationSelect={(record) => {
+                                    if (!record) return;
+
+                                    // Determine trade slug from current context or default
+                                    const pathParts = window.location.pathname.split('/');
+                                    let tradeSlug = 'emergency-plumber';
+                                    const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'breakdown', 'emergency-plumber', 'emergency-electrician', '24-hour-locksmith'];
+
+                                    // Try to find trade in existing URL
+                                    for (const part of pathParts) {
+                                        if (knownTrades.includes(part)) {
+                                            tradeSlug = part;
+                                            break;
+                                        }
+                                    }
+
+                                    const tradeSlugLowerCase = tradeSlug.toLowerCase();
+
+                                    // New Hierarchy URL Construction
+                                    if (record.path_slugs) {
+                                        const { state, metro, city, suburb } = record.path_slugs;
+                                        // Handle city-level routing (empty suburb)
+                                        console.log("SearchFilterBar Debug:", { suburb, type: typeof suburb, length: suburb?.length });
+                                        const hasSuburb = typeof suburb === 'string' && suburb.trim().length > 0;
+                                        console.log("SearchFilterBar hasSuburb:", hasSuburb);
+                                        const newPath = hasSuburb
+                                            ? `/us/${state}/${metro}/${city}/${suburb}/${tradeSlugLowerCase}`
+                                            : `/us/${state}/${metro}/${city}/${tradeSlugLowerCase}`; // Direct to City
+                                        navigate(newPath);
+                                    } else {
+                                        // Fallback for legacy records/UK
+                                        navigate(`/us/${record.state.toLowerCase()}/${record.anchor_slug}/${tradeSlugLowerCase}`);
+                                    }
+                                }}
+                            />
+                        ) : (
+                            /* UK Legacy Selector - Upgraded to Combobox */
+                            <UKCityCombobox
+                                className="w-full h-12 bg-card border-border/50 text-sm"
+                                placeholder="Select City"
+                                value={city ? city.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ""}
+                                // Use pure navigation
+                                onValueChange={(val) => {
+                                    // Determine trade slug from current context or default
+                                    // Determine trade slug from current context or default
+                                    const pathParts = window.location.pathname.split('/');
+                                    let tradeSlug = 'plumber'; // Default base slug
+
+                                    // Build dynamic list of known trades from the source of truth
+                                    // map trades to 'plumber', 'roofer', etc.
+
+                                    const knownBaseTrades = trades.map(t => t.slug);
+
+                                    // Try to find trade in existing URL
+                                    for (const part of pathParts) {
+                                        // internal Clean: remove 'emergency-' prefix to check against base slugs
+                                        const cleanPart = part.replace(/^emergency-/, '');
+                                        if (knownBaseTrades.includes(cleanPart)) {
+                                            tradeSlug = cleanPart;
+                                            break;
+                                        }
+                                    }
+
+                                    // Navigate to the standardized route: /emergency-{slug}/{city}
+                                    navigate(`/emergency-${tradeSlug}/${val.toLowerCase()}`);
+                                }}
+                            />
+                        )}
+                    </div>
+                </div>
+
+                {/* Filter Button */}
+                <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+                    <SheetTrigger asChild>
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="relative border-border/50 hover:border-gold/50 w-full sm:w-auto sm:min-w-[120px] h-12"
+                        >
+                            <SlidersHorizontal className="w-5 h-5 sm:mr-2" />
+                            <span className="hidden sm:inline">Filters</span>
+                            {!filters && <span className="sm:hidden text-xs">Filters</span>}
+                            {activeFiltersCount > 0 && (
+                                <Badge
+                                    variant="default"
+                                    className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center bg-gold text-gold-foreground"
+                                >
+                                    {activeFiltersCount}
+                                </Badge>
+                            )}
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+                        <SheetHeader>
+                            <SheetTitle className="font-display text-2xl tracking-wide">
+                                Filter Results
+                            </SheetTitle>
+                            <SheetDescription>
+                                Refine your search to find the perfect tradesperson
+                            </SheetDescription>
+                        </SheetHeader>
+
+                        <div className="mt-8 space-y-6">
+                            {/* Availability Filter */}
+                            <div className="space-y-3">
+                                <Label className="text-base font-medium">Availability</Label>
+                                <Select
+                                    value={filters.availability}
+                                    onValueChange={(value: any) =>
+                                        updateFilter("availability", value)
+                                    }
+                                >
+                                    <SelectTrigger className="bg-card border-border/50">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="all">All Availability</SelectItem>
+                                        <SelectItem value="now">
+                                            <span className="flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                                                Available Now
+                                            </span>
+                                        </SelectItem>
+                                        <SelectItem value="today">Available Today</SelectItem>
+                                        <SelectItem value="this-week">This Week</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {/* Rating Filter */}
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <Label className="text-base font-medium">
+                                        Minimum Rating
+                                    </Label>
+                                    <span className="text-sm text-muted-foreground">
+                                        {filters.minRating > 0
+                                            ? `${filters.minRating}+ stars`
+                                            : "Any"}
+                                    </span>
+                                </div>
+                                <Slider
+                                    value={[filters.minRating]}
+                                    onValueChange={(value) => updateFilter("minRating", value[0])}
+                                    max={5}
+                                    step={0.5}
+                                    className="py-4"
+                                />
+                                <div className="flex justify-between text-xs text-muted-foreground">
+                                    <span>Any</span>
+                                    <span>5 stars</span>
+                                </div>
+                            </div>
+
+                            {/* Distance Filter */}
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <Label className="text-base font-medium">Max Distance</Label>
+                                    <span className="text-sm text-muted-foreground">
+                                        {filters.maxDistance === 50
+                                            ? "Any distance"
+                                            : `${filters.maxDistance} miles`}
+                                    </span>
+                                </div>
+                                <Slider
+                                    value={[filters.maxDistance]}
+                                    onValueChange={(value) =>
+                                        updateFilter("maxDistance", value[0])
+                                    }
+                                    max={50}
+                                    step={5}
+                                    className="py-4"
+                                />
+                                <div className="flex justify-between text-xs text-muted-foreground">
+                                    <span>5 miles</span>
+                                    <span>50+ miles</span>
+                                </div>
+                            </div>
+
+                            {/* Sort By */}
+                            <div className="space-y-3">
+                                <Label className="text-base font-medium">Sort By</Label>
+                                <Select
+                                    value={filters.sortBy}
+                                    onValueChange={(value: any) => updateFilter("sortBy", value)}
+                                >
+                                    <SelectTrigger className="bg-card border-border/50">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="rating">Highest Rated</SelectItem>
+                                        <SelectItem value="reviews">Most Reviews</SelectItem>
+                                        <SelectItem value="distance">Nearest First</SelectItem>
+                                        <SelectItem value="name">Name (A-Z)</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {/* Quick Filters */}
+                            <div className="space-y-3">
+                                <Label className="text-base font-medium">Quick Filters</Label>
+                                <div className="space-y-2">
+                                    <label className="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:border-gold/30 cursor-pointer transition-colors">
+                                        <input
+                                            type="checkbox"
+                                            checked={filters.is24Hours}
+                                            onChange={(e) =>
+                                                updateFilter("is24Hours", e.target.checked)
+                                            }
+                                            className="w-4 h-4 rounded border-border text-gold focus:ring-gold"
+                                        />
+                                        <span className="text-sm">24/7 Emergency Service</span>
+                                    </label>
+                                    <label className="flex items-center gap-3 p-3 rounded-lg border border-border/50 hover:border-gold/30 cursor-pointer transition-colors">
+                                        <input
+                                            type="checkbox"
+                                            checked={filters.hasWebsite}
+                                            onChange={(e) =>
+                                                updateFilter("hasWebsite", e.target.checked)
+                                            }
+                                            className="w-4 h-4 rounded border-border text-gold focus:ring-gold"
+                                        />
+                                        <span className="text-sm">Has Website</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Actions */}
+                            <div className="flex gap-3 pt-4 border-t border-border/30">
+                                <Button
+                                    variant="outline"
+                                    onClick={clearFilters}
+                                    className="flex-1"
+                                >
+                                    Clear All
+                                </Button>
+                                <Button
+                                    onClick={() => setIsFilterOpen(false)}
+                                    className="flex-1 bg-gold hover:bg-gold/90 text-gold-foreground"
+                                >
+                                    Apply Filters
+                                </Button>
+                            </div>
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
+
+            {/* Results Count & Active Filters */}
+            <div className="flex items-center justify-between flex-wrap gap-3">
+                <p className="text-sm text-muted-foreground">
+                    Showing <span className="font-medium text-foreground">{resultsCount}</span> of{" "}
+                    <span className="font-medium text-foreground">{totalCount}</span> results
+                </p>
+
+                {activeFiltersCount > 0 && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-sm text-muted-foreground">Active filters:</span>
+                        {filters.availability !== "all" && (
+                            <Badge
+                                variant="secondary"
+                                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                                onClick={() => updateFilter("availability", "all")}
+                            >
+                                {filters.availability === "now"
+                                    ? "Available Now"
+                                    : filters.availability === "today"
+                                        ? "Today"
+                                        : "This Week"}
+                                <X className="w-3 h-3 ml-1" />
+                            </Badge>
+                        )}
+                        {filters.minRating > 0 && (
+                            <Badge
+                                variant="secondary"
+                                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                                onClick={() => updateFilter("minRating", 0)}
+                            >
+                                {filters.minRating}+ stars
+                                <X className="w-3 h-3 ml-1" />
+                            </Badge>
+                        )}
+                        {filters.maxDistance < 50 && (
+                            <Badge
+                                variant="secondary"
+                                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                                onClick={() => updateFilter("maxDistance", 50)}
+                            >
+                                Within {filters.maxDistance} miles
+                                <X className="w-3 h-3 ml-1" />
+                            </Badge>
+                        )}
+                        {filters.is24Hours && (
+                            <Badge
+                                variant="secondary"
+                                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                                onClick={() => updateFilter("is24Hours", false)}
+                            >
+                                24/7 Service
+                                <X className="w-3 h-3 ml-1" />
+                            </Badge>
+                        )}
+                        {filters.hasWebsite && (
+                            <Badge
+                                variant="secondary"
+                                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                                onClick={() => updateFilter("hasWebsite", false)}
+                            >
+                                Has Website
+                                <X className="w-3 h-3 ml-1" />
+                            </Badge>
+                        )}
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={clearFilters}
+                            className="text-xs h-7"
+                        >
+                            Clear all
+                        </Button>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}

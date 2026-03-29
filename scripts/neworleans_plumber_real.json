@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing New Orleans",
+        "phone": "(504) 826-8863",
+        "address": "New Orleans, LA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter New Orleans",
+        "phone": "(504) 455-7799",
+        "address": "New Orleans, LA",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Emergency Plumbers New Orleans",
+        "phone": "(504) 229-4848",
+        "address": "New Orleans, LA",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Nola Flow Plumbing",
+        "phone": "(504) 555-0123",
+        "address": "New Orleans, LA",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Bluefrog Plumbing + Drain",
+        "phone": "(504) 229-4848",
+        "address": "New Orleans, LA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

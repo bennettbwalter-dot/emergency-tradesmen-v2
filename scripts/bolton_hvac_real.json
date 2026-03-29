@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bolton Plumbing and Heating Ltd",
+        "phone": "01204 427 185",
+        "address": "Bolton",
+        "website": "https://boltonplumbingandheatingltd.co.uk/"
+    },
+    {
+        "name": "MAC Plumbing & Heating Solutions LTD",
+        "phone": "01204 358157",
+        "address": "Bolton",
+        "website": "https://macplumbingandheating.co.uk/"
+    },
+    {
+        "name": "Reactiv8 Emergency Services",
+        "phone": "07562 952244",
+        "address": "Bolton",
+        "website": "https://reactive8emergencyservices.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01204 581 645",
+        "address": "Bolton",
+        "website": "https://able-group.co.uk/"
+    },
+    {
+        "name": "Express Bolton Plumbing",
+        "phone": "0344 947 0953",
+        "address": "Bradshawgate, BL2 1BA, Bolton",
+        "website": "https://plumbingbolton247.co.uk/"
+    }
+]

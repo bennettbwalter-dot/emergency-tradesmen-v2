@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Vance Air Conditioning & Heating",
+        "phone": "(713) 702-4721",
+        "address": "Missouri City, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Fix It Easy",
+        "phone": "(281) 969-3279",
+        "address": "Missouri City, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Air Current AC & Heat",
+        "phone": "(713) 257-9226",
+        "address": "Missouri City, TX",
+        "rating": 4.7,
+        "review_count": 92
+    },
+    {
+        "name": "Blue Label Services",
+        "phone": "(832) 429-2209",
+        "address": "Missouri City, TX",
+        "rating": 5.0,
+        "review_count": 420
+    },
+    {
+        "name": "Champion and Nash",
+        "phone": "(713) 997-8495",
+        "address": "Missouri City, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    }
+]

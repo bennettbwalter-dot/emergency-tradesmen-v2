@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Urgent Glass DFW",
+        "phone": "972-799-4475",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Ronnie's 24 Hour Glass & Door",
+        "phone": "682-516-3175",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Texas Pride Mirror & Glass",
+        "phone": "214-281-6638",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Simple Glass",
+        "phone": "469-256-6884",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "JPON Glass Company",
+        "phone": "214-349-1400",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Glass Doctor of Dallas Metroplex",
+        "phone": "972-346-0918",
+        "address": "Dallas, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 450
+    }
+]

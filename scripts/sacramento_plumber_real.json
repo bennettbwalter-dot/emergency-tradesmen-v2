@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Sacramento Plumbing Solutions",
+        "phone": "(916) 275-4716",
+        "address": "Sacramento, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Ace Plumbing, Heating and Air",
+        "phone": "(916) 455-4548",
+        "address": "Sacramento, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Armstrong Plumbing",
+        "phone": "(916) 641-0886",
+        "address": "Sacramento, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "The Trenchless Co.",
+        "phone": "(916) 488-1215",
+        "address": "Sacramento, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Bonney Plumbing, Electrical, Heating & Air",
+        "phone": "(916) 444-0551",
+        "address": "Sacramento, CA",
+        "rating": 4.9,
+        "review_count": 5000
+    }
+]

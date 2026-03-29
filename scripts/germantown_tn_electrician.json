@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rush Electric Germantown",
+        "phone": "(901) 660-5040",
+        "address": "Germantown, TN",
+        "website": "https://rushelectrictn.com"
+    },
+    {
+        "name": "901 Electric",
+        "phone": "(901) 395-1765",
+        "address": "Germantown, TN",
+        "website": "https://901electric.com"
+    },
+    {
+        "name": "All Day Electrician",
+        "phone": "(800) 860-1458",
+        "address": "Germantown, TN",
+        "website": "https://alldayelectrician.com"
+    },
+    {
+        "name": "Mister Greenway",
+        "phone": "(901) 313-8248",
+        "address": "Germantown, TN",
+        "website": "https://callgreenway.com"
+    }
+]

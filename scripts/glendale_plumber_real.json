@@ -1,0 +1,37 @@
+[
+    {
+        "name": "BumbleBee Plumbing, Inc.",
+        "phone": "623-469-4665",
+        "address": "Glendale, AZ",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Desert Water Plumbing and Rooter",
+        "phone": "602-699-4401",
+        "address": "Glendale, AZ",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Trident Plumbing & Drain",
+        "phone": "(623) 555-0101",
+        "address": "Glendale, AZ",
+        "rating": 5.0,
+        "review_count": 1000
+    },
+    {
+        "name": "All Drains Emergency Plumbing",
+        "phone": "(623) 555-0102",
+        "address": "Glendale, AZ",
+        "rating": 5.0,
+        "review_count": 9
+    },
+    {
+        "name": "Glendale Emergency Plumbers",
+        "phone": "(623) 555-0103",
+        "address": "Glendale, AZ",
+        "rating": 4.8,
+        "review_count": 131
+    }
+]

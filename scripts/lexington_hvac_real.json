@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Lexington Electrical & HVAC",
+        "phone": "(859) 900-2444",
+        "address": "Lexington, KY",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "GreenBox Home Services",
+        "phone": "(859) 278-0281",
+        "address": "Lexington, KY",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Watson Heating & Air",
+        "phone": "(859) 625-0081",
+        "address": "Lexington, KY",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Fayette Heating & Air",
+        "phone": "(859) 695-6142",
+        "address": "Lexington, KY",
+        "rating": 4.7,
+        "review_count": 2100
+    },
+    {
+        "name": "Stans Heating and Air",
+        "phone": "(859) 252-8981",
+        "address": "Lexington, KY",
+        "rating": 4.6,
+        "review_count": 120
+    }
+]

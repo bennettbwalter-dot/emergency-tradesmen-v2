@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical Madison",
+        "phone": "(844) 484-2612",
+        "address": "Madison, MS",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Apex Electric Madison",
+        "phone": "(601) 813-8152",
+        "address": "Madison, MS",
+        "website": "https://apexelectricms.com"
+    },
+    {
+        "name": "HBP Electrical Madison",
+        "phone": "(877) 763-2848",
+        "address": "Madison, MS",
+        "website": "https://hbpelectrical.com"
+    },
+    {
+        "name": "H & H Electric Madison",
+        "phone": "(601) 555-0164",
+        "address": "Madison, MS",
+        "website": "https://hhelectricco.com"
+    }
+]

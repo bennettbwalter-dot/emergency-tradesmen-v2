@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Air Comfort Solutions",
+        "phone": "(405) 351-4146",
+        "address": "Oklahoma City, OK",
+        "website": "https://aircomfortsolutions.net"
+    },
+    {
+        "name": "Suntech Heat and Air",
+        "phone": "(405) 785-0950",
+        "address": "Oklahoma City, OK",
+        "website": "https://suntechokc.com"
+    },
+    {
+        "name": "Comfort Wave Home Services",
+        "phone": "(405) 825-9283",
+        "address": "Oklahoma City, OK",
+        "website": "https://comfortwave.com"
+    },
+    {
+        "name": "Hull Plumbing, Inc.",
+        "phone": "(405) 246-9763",
+        "address": "Oklahoma City, OK",
+        "website": "https://hullplumbinginc.com"
+    }
+]

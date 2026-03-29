@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bio Response Southampton",
+        "phone": "0333 202 6416",
+        "address": "Southampton",
+        "website": "https://bioresponse.co.uk/"
+    },
+    {
+        "name": "SDM Property Fire & Flood",
+        "phone": "023 8218 0168",
+        "address": "Southampton",
+        "website": "https://sdmproperty.co.uk/"
+    },
+    {
+        "name": "Cornerstone Ltd Southampton",
+        "phone": "0800 021 3970",
+        "address": "Southampton, Hampshire",
+        "website": "https://cornerstone-ltd.co.uk/"
+    },
+    {
+        "name": "DrainBoss Southampton",
+        "phone": "07772 535248",
+        "address": "Southampton",
+        "website": "https://drainboss.co.uk/"
+    },
+    {
+        "name": "Flash Restorations Southampton",
+        "phone": "0800 123 4567",
+        "address": "Southampton",
+        "website": "https://flashrestorations.com/"
+    }
+]

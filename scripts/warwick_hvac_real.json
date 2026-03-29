@@ -1,0 +1,32 @@
+[
+    {
+        "name": "GasWise Warwick",
+        "phone": "01295 597 961",
+        "address": "Warwick",
+        "website": "https://gaswise-plumbing.co.uk/"
+    },
+    {
+        "name": "Stuart Chalmers Gas & Heating",
+        "phone": "01296 261 005",
+        "address": "Warwickshire",
+        "website": "https://stuartchalmersgasandheating.co.uk/"
+    },
+    {
+        "name": "M.J. Harris Boilers & Gas",
+        "phone": "01296 261 005",
+        "address": "Warwick",
+        "website": "https://mjharrisdomesticrepairs.co.uk/"
+    },
+    {
+        "name": "Nu Age Heating & Interiors Ltd",
+        "phone": "01295 597 961",
+        "address": "Warwick",
+        "website": "https://nuageplumbing.com/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01926 759 853",
+        "address": "Warwick",
+        "website": "https://able-group.co.uk/"
+    }
+]

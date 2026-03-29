@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Brothers Plumbing Heating Electric",
+        "phone": "(303) 468-2294",
+        "address": "Aurora, CO",
+        "website": "https://brothersplumbing.com"
+    },
+    {
+        "name": "Positively Charged Electric",
+        "phone": "(720) 327-4525",
+        "address": "Aurora, CO",
+        "website": "https://positivelychargedelectric.com"
+    },
+    {
+        "name": "Access Electrical",
+        "phone": "(720) 477-0487",
+        "address": "Aurora, CO",
+        "website": "https://accesselectrician.com"
+    },
+    {
+        "name": "Mister Sparky Aurora",
+        "phone": "(888) 826-0091",
+        "address": "Aurora, CO",
+        "website": "https://mistersparky.com"
+    }
+]

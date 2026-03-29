@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Omaha Towing",
+        "phone": "(402) 521-3164",
+        "address": "Omaha, NE",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Auto 1 Towing",
+        "phone": "(402) 344-2301",
+        "address": "Omaha, NE",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Arrow Towing",
+        "phone": "(402) 553-1700",
+        "address": "Omaha, NE",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "L&I Towing and Recovery",
+        "phone": "(402) 733-5606",
+        "address": "Omaha, NE",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Cornhusker Towing",
+        "phone": "(402) 500-0000",
+        "address": "Omaha, NE",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Zuzu Plumbing Heating and Air",
+        "phone": "(209) 477-9722",
+        "address": "Modesto, CA",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Comfort Experts Heating & Air Conditioning",
+        "phone": "(209) 222-2779",
+        "address": "Modesto, CA",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Valley Air Conditioning & Heating",
+        "phone": "(209) 566-1773",
+        "address": "Modesto, CA",
+        "rating": 4.7,
+        "review_count": 311
+    },
+    {
+        "name": "YourK AC",
+        "phone": "(209) 604-0405",
+        "address": "Modesto, CA",
+        "rating": 4.8,
+        "review_count": 92
+    },
+    {
+        "name": "Wally Falke's Air Conditioning & Heating",
+        "phone": "(209) 523-2831",
+        "address": "Modesto, CA",
+        "rating": 4.9,
+        "review_count": 850
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Southern Iowa Electrical",
+        "phone": "(515) 443-3533",
+        "address": "Des Moines, IA",
+        "website": null
+    },
+    {
+        "name": "Bartlett Electric",
+        "phone": "(515) 278-1691",
+        "address": "Des Moines, IA",
+        "website": "https://bartlettelectric.net"
+    },
+    {
+        "name": "Rewired Iowa Electrician",
+        "phone": "(515) 619-5349",
+        "address": "Des Moines, IA",
+        "website": "https://rewirediowa.com"
+    },
+    {
+        "name": "Integra Electrical",
+        "phone": "(515) 555-0109",
+        "address": "Des Moines, IA",
+        "website": "https://integraelectrical.co"
+    }
+]

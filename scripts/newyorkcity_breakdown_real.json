@@ -1,0 +1,37 @@
+[
+    {
+        "name": "UpTown Towing NYC",
+        "phone": "(347) 983-7478",
+        "address": "New York, NY",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "A1 Towing & Collision NYC",
+        "phone": "(646) 542-0049",
+        "address": "New York, NY",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Tow Truck NYC",
+        "phone": "(347) 960-1920",
+        "address": "New York, NY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "First Star Towing",
+        "phone": "(212) 942-2944",
+        "address": "New York, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Midtown Towing NYC",
+        "phone": "(212) 289-2555",
+        "address": "New York, NY",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

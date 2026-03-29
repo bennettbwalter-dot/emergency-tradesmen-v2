@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Waialae Plumbing & Construction",
+        "phone": "(808) 735-8595",
+        "address": "Honolulu, HI",
+        "rating": 4.4,
+        "review_count": 150
+    },
+    {
+        "name": "Pipe Masters",
+        "phone": "(808) 396-7473",
+        "address": "Honolulu, HI",
+        "rating": 5.0,
+        "review_count": 250
+    },
+    {
+        "name": "Roto-Rooter Honolulu",
+        "phone": "(808) 842-5680",
+        "address": "Honolulu, HI",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Allens Plumbing",
+        "phone": "(808) 599-5511",
+        "address": "Honolulu, HI",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "535 Plumbing",
+        "phone": "(808) 300-0535",
+        "address": "Honolulu, HI",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Boe Electric Inc.",
+        "phone": "(507) 533-6992",
+        "address": "Stewartville, MN",
+        "website": "https://boeelectric.com"
+    },
+    {
+        "name": "Iconic Electric",
+        "phone": "(507) 923-1173",
+        "address": "Stewartville, MN",
+        "website": "https://calliconic.com"
+    },
+    {
+        "name": "Paxton Electric",
+        "phone": "(507) 710-1448",
+        "address": "Stewartville, MN",
+        "website": "https://paxtonelectric.net"
+    },
+    {
+        "name": "K&S Heating, Air Conditioning, Plumbing & Electrical",
+        "phone": "(507) 282-4328",
+        "address": "Stewartville, MN",
+        "website": "https://ksheating.com"
+    }
+]

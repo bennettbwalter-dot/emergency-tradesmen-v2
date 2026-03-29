@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Urgent Plumbers Laredo",
+        "phone": "(956) 448-7740",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Laredo Plumbing Pros",
+        "phone": "(956) 462-6297",
+        "address": "Laredo, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Arellano's Plumbing Laredo",
+        "phone": "(956) 307-4050",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Emergency Plumbing Squad Laredo",
+        "phone": "(956) 555-0101",
+        "address": "Laredo, TX",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Gateway City Plumbers",
+        "phone": "(956) 555-0102",
+        "address": "Laredo, TX",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

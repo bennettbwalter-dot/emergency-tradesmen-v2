@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Plano",
+        "phone": "972-890-0695",
+        "address": "Plano, TX",
+        "rating": 4.8,
+        "review_count": 107
+    },
+    {
+        "name": "Milestone Electric, A/C, & Plumbing",
+        "phone": "(972) 913-6165",
+        "address": "Plano, TX",
+        "rating": 4.9,
+        "review_count": 33000
+    },
+    {
+        "name": "Baker Brothers Plumbing",
+        "phone": "214-296-2136",
+        "address": "Plano, TX",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "DNA Plumbing Heating and Air",
+        "phone": "(214) 817-3755",
+        "address": "Plano, TX",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "O'Bryan Plumbing Services",
+        "phone": "(972) 727-6364",
+        "address": "Plano, TX",
+        "rating": 4.8,
+        "review_count": 420
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "ABC Home & Commercial Services",
+        "phone": "(979) 361-0500",
+        "address": "Bryan, TX",
+        "rating": 4.8,
+        "review_count": 5200
+    },
+    {
+        "name": "Superior Air Repair",
+        "phone": "(979) 200-6326",
+        "address": "Bryan, TX",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "BVAC Services",
+        "phone": "(979) 314-8888",
+        "address": "Bryan, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Dailey Company, Inc.",
+        "phone": "(979) 260-2020",
+        "address": "Bryan, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "R.M. Mullinix",
+        "phone": "(979) 822-4079",
+        "address": "Bryan, TX",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

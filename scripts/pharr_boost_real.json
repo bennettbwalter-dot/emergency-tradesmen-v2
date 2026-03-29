@@ -1,0 +1,138 @@
+[
+    {
+        "name": "Roto-Rooter Pharr",
+        "phone": "(956) 429-3015",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Dr. Pipes Plumbing",
+        "phone": "1-877-377-4737",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hour Plumber Pharr",
+        "phone": "(866) 849-1588",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Atlas Plumbing Services Pharr",
+        "phone": "(956) 585-7775",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Trevino Repairs",
+        "phone": "(956) 625-9034",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Texas Residential Plumbing Pros",
+        "phone": "(614) 697-1339",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Mighty Mike's Plumbing",
+        "phone": "(956) 686-1353",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Charlie's Plumbing Service Pharr",
+        "phone": "(956) 393-7567",
+        "address": "Pharr, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Electrician Pros Pharr",
+        "phone": "(877) 847-6084",
+        "address": "Pharr, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Donco Electric Pharr",
+        "phone": "(855) 740-3232",
+        "address": "Pharr, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Alpha Electrical Solutions",
+        "phone": "956-666-9997",
+        "address": "Pharr, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "The Electrician Squad of Pharr",
+        "phone": "(855) 930-6015",
+        "address": "Pharr, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Olivares Locksmith",
+        "phone": "(956) 844-8524",
+        "address": "Pharr, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Discount Locksmith of Pharr",
+        "phone": "(855) 766-8899",
+        "address": "Pharr, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Premier Locksmith Pharr",
+        "phone": "(956) 865-7171",
+        "address": "Pharr, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Minute Key Pharr",
+        "phone": "(956) 221-6140",
+        "address": "Pharr, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Pharr Broken Ignition Key Removal",
+        "phone": "(956) 634-5822",
+        "address": "Pharr, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 80
+    }
+]

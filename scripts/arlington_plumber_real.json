@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Arlington",
+        "phone": "(817) 277-0907",
+        "address": "Arlington, TX",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "J Rowe Plumbing",
+        "phone": "(817) 572-9400",
+        "address": "Arlington, TX",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Berkeys Plumbing Arlington",
+        "phone": "(817) 533-4010",
+        "address": "Arlington, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Baker Brothers Plumbing",
+        "phone": "(817) 296-2136",
+        "address": "Arlington, TX",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "24/7 Plumbers of Arlington",
+        "phone": "(682) 201-2929",
+        "address": "Arlington, TX",
+        "rating": 4.9,
+        "review_count": 85
+    }
+]

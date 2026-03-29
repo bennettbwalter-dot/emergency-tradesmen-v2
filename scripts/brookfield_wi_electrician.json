@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Watts Up Electric",
+        "phone": "(262) 666-1238",
+        "address": "Brookfield, WI",
+        "website": "https://wattsupelectric.com"
+    },
+    {
+        "name": "Ashcroft Electric",
+        "phone": "(414) 377-3624",
+        "address": "Brookfield, WI",
+        "website": "https://brookfieldelectricalcontractor.com"
+    },
+    {
+        "name": "Edge Electric",
+        "phone": "(800) 364-3343",
+        "address": "Brookfield, WI",
+        "website": "https://edgeelectricwi.com"
+    },
+    {
+        "name": "Best Electric Service",
+        "phone": "(414) 409-0251",
+        "address": "Brookfield, WI",
+        "website": "https://bestelect.com"
+    }
+]

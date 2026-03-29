@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Proboardup of Anaheim",
+        "phone": "(714) 202-9517",
+        "address": "Anaheim, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Larry's Glass of Orange County",
+        "phone": "(714) 738-4428",
+        "address": "Anaheim, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Wilson Glass & Screen",
+        "phone": "(562) 324-4061",
+        "address": "Anaheim, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Anaheim Mobile Auto Glass",
+        "phone": "(714) 752-4027",
+        "address": "Anaheim, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "New Creations Auto Glass",
+        "phone": "(714) 499-7231",
+        "address": "Anaheim, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

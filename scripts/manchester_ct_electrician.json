@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Newington Electric Co.",
+        "phone": "(860) 667-4819",
+        "address": "Manchester, CT",
+        "website": "https://newingtonelectric.com"
+    },
+    {
+        "name": "KSB Electric",
+        "phone": "(860) 205-0789",
+        "address": "Manchester, CT",
+        "website": "https://ksbelectricllc.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Manchester, CT",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "B.Jags Electric",
+        "phone": "(860) 930-1044",
+        "address": "Manchester, CT",
+        "website": "https://bjagselectric.com"
+    }
+]

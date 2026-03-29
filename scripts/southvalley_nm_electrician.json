@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Eco Electric",
+        "phone": "(505) 433-3574",
+        "address": "South Valley, NM",
+        "website": "https://todayshomeowner.com"
+    },
+    {
+        "name": "McDonald Electric",
+        "phone": "(505) 220-5521",
+        "address": "South Valley, NM",
+        "website": "https://mcdonaldelectricabq.com"
+    },
+    {
+        "name": "Schmidt Electrical Contracting",
+        "phone": "(505) 331-1968",
+        "address": "South Valley, NM",
+        "website": "https://schmidtelectricalcontracting.com"
+    },
+    {
+        "name": "Watt Electric",
+        "phone": "(505) 710-4444",
+        "address": "Albuquerque, NM",
+        "website": "https://wattelectricllc.com"
+    }
+]

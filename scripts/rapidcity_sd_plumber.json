@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Midwestern Mechanical Rapid City",
+        "phone": "(605) 394-9636",
+        "address": "Rapid City, SD",
+        "website": "https://midwesternmechanical.com"
+    },
+    {
+        "name": "Action Mechanical Inc",
+        "phone": "(605) 348-5212",
+        "address": "Rapid City, SD",
+        "website": "https://actionmec.com"
+    },
+    {
+        "name": "Loyal Plumbing",
+        "phone": "(605) 315-3683",
+        "address": "Rapid City, SD",
+        "website": "https://loyalplumbing.com"
+    },
+    {
+        "name": "Plumb Pro Mechanical",
+        "phone": "(605) 484-5789",
+        "address": "Rapid City, SD",
+        "website": "https://plumbpromechanical.com"
+    }
+]

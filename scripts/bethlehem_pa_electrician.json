@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Crosswyre Electric",
+        "phone": "(610) 214-2179",
+        "address": "Bethlehem, PA",
+        "website": "https://crosswyreelectric.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Bethlehem, PA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Bethlehem, PA",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Albarell Electric",
+        "phone": "(610) 691-8606",
+        "address": "Bethlehem, PA",
+        "website": "https://albarell.com"
+    }
+]

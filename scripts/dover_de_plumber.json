@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Dover DE",
+        "phone": "(302) 674-4575",
+        "address": "Dover, DE",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Dover",
+        "phone": "(302) 437-0956",
+        "address": "Dover, DE",
+        "website": "https://benjaminfranklinplumbing.com"
+    },
+    {
+        "name": "Price Plumbing Inc",
+        "phone": "(302) 222-1100",
+        "address": "Dover, DE",
+        "website": null
+    },
+    {
+        "name": "KB's Plumbing",
+        "phone": "(302) 697-0571",
+        "address": "Dover, DE",
+        "website": null
+    }
+]

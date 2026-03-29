@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rudy Plumbing",
+        "phone": "(315) 638-7839",
+        "address": "DeWitt, NY",
+        "website": "https://rudyplumbing.com"
+    },
+    {
+        "name": "Stewart Plumbing LLC",
+        "phone": "(315) 877-4932",
+        "address": "DeWitt, NY",
+        "website": "https://stewartplumbingllc.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "(315) 216-2972",
+        "address": "DeWitt, NY",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "(315) 887-4057",
+        "address": "DeWitt, NY",
+        "website": "https://mrrooter.com"
+    }
+]

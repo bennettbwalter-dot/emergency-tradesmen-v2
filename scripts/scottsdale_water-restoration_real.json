@@ -1,0 +1,32 @@
+[
+    {
+        "name": "United Response",
+        "phone": "(480) 999-5555",
+        "address": "7729 E Greenway Rd STE 300, Scottsdale, AZ 85260",
+        "website": "https://theunitedresponse.com/"
+    },
+    {
+        "name": "ASAP Restoration",
+        "phone": "(602) 515-7918",
+        "address": "Scottsdale, AZ",
+        "website": "https://asaprestoration247.com/"
+    },
+    {
+        "name": "Aqua Dry Restoration",
+        "phone": "(602) 923-1619",
+        "address": "6721 E Jean Dr, Scottsdale, AZ 85254",
+        "website": "https://aquadryaz.com/"
+    },
+    {
+        "name": "SERVPRO of Scottsdale North",
+        "phone": "(480) 590-2125",
+        "address": "Scottsdale, AZ",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "PuroClean Restoration Specialists",
+        "phone": "(480) 767-5588",
+        "address": "Scottsdale, AZ",
+        "website": "https://puroclean.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Brooklyn HVAC Repair",
+        "phone": "(347) 901-5232",
+        "address": "New York, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "PTAC Repair NYC",
+        "phone": "(212) 542-0123",
+        "address": "New York, NY",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Vigilante Plumbing, Heating & Air Conditioning",
+        "phone": "(718) 533-2555",
+        "address": "New York, NY",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "Stanley Lewis Plumbing & Heating",
+        "phone": "(212) 674-4500",
+        "address": "New York, NY",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Maxwell Heating & Air Conditioning",
+        "phone": "(212) 619-2100",
+        "address": "New York, NY",
+        "rating": 4.6,
+        "review_count": 420
+    }
+]

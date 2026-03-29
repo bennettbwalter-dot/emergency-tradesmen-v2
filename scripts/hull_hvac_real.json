@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Able Group",
+        "phone": "01482 297 341",
+        "address": "Kingston upon Hull",
+        "website": "https://able-group.co.uk/"
+    },
+    {
+        "name": "B1 Plumbing & Heating",
+        "phone": "01482 298 948",
+        "address": "Hull",
+        "website": "https://b1plumbingandheating.co.uk/"
+    },
+    {
+        "name": "Sureflow",
+        "phone": "01482 205235",
+        "address": "Hull",
+        "website": "https://sureflowplumbershull.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Ltd",
+        "phone": "01482 770 050",
+        "address": "Hull",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "24hr Electrical Services",
+        "phone": "01482 744262",
+        "address": "Hull",
+        "website": "https://24hrelectricalservicesltd.co.uk/"
+    }
+]

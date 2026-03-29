@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Rush Rooter",
+        "phone": "336-462-2257",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Greensboro Emergency Plumbing Squad",
+        "phone": "336-502-8646",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Johns Plumbing, Heating & Air Conditioning",
+        "phone": "336-932-8643",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 340
+    },
+    {
+        "name": "24/7 Plumbers",
+        "phone": "336-221-3666",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 60
+    },
+    {
+        "name": "Roto-Rooter Greensboro",
+        "phone": "336-274-5175",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 600
+    },
+    {
+        "name": "All Plumbing Services of the Triad",
+        "phone": "336-671-0996",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "Go Green Plumbing",
+        "phone": "336-252-8045",
+        "address": "Greensboro, NC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Anytime Electric Inc.",
+        "phone": "(336) 587-7944",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Michael & Son Services",
+        "phone": "(336) 278-1258",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "KEMCO Electric",
+        "phone": "(336) 584-1166",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "King Electrical Services",
+        "phone": "(336) 362-9394",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 45
+    },
+    {
+        "name": "Mr. Electric of Greensboro",
+        "phone": "(336) 346-8065",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Dr. Sparky, LLC",
+        "phone": "(336) 653-8869",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 60
+    },
+    {
+        "name": "Berico Tradesmen",
+        "phone": "336-273-8663",
+        "address": "Greensboro, NC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "KeyMe Locksmiths",
+        "phone": "(336) 933-6346",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 4.5,
+        "review_count": 80
+    },
+    {
+        "name": "Mr. Gnome Locksmith",
+        "phone": "(336) 837-5858",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 115
+    },
+    {
+        "name": "Pop-A-Lock of Greensboro",
+        "phone": "(336) 272-9393",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 220
+    },
+    {
+        "name": "Greensboro Lock and Key",
+        "phone": "(336) 589-6185",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Greensboro Emergency Locksmith",
+        "phone": "(336) 525-7446",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 45
+    },
+    {
+        "name": "Triad Lock & Key LLC",
+        "phone": "336-324-5189",
+        "address": "Greensboro, NC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 30
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky Alabaster",
+        "phone": "(888) 826-0091",
+        "address": "Alabaster, AL",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "CRB Electrical Services",
+        "phone": "(205) 624-3774",
+        "address": "Alabaster, AL",
+        "website": "https://crb-electrical.com"
+    },
+    {
+        "name": "Superior Service Electric Alabaster",
+        "phone": "(205) 433-4022",
+        "address": "Alabaster, AL",
+        "website": "https://superiorservice247.com"
+    },
+    {
+        "name": "Xcalibur Services",
+        "phone": "(205) 208-7243",
+        "address": "Alabaster, AL",
+        "website": "https://xcaliburservice.com"
+    }
+]

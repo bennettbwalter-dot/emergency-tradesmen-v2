@@ -1,0 +1,32 @@
+[
+    {
+        "name": "BlueArc Plumbing Craigavon",
+        "phone": "028 90 026 418",
+        "address": "32 Meadow Ln, Portadown, Craigavon BT62 3NH",
+        "website": "https://bluearcplumbingni.co.uk/"
+    },
+    {
+        "name": "Plumbers Lurgan Craigavon",
+        "phone": "07361590844",
+        "address": "64A William St, Lurgan, Craigavon BT66 6JB",
+        "website": "https://plumberslurgan.co.uk/"
+    },
+    {
+        "name": "PCLA Craigavon",
+        "phone": "028 9581 5318",
+        "address": "Craigavon, Northern Ireland",
+        "website": "https://pcla.co.uk/"
+    },
+    {
+        "name": "Fast Track Plumbers Craigavon",
+        "phone": "028 90 026 418",
+        "address": "Craigavon",
+        "website": "https://fasttrackplumbers.co.uk/"
+    },
+    {
+        "name": "Hydro Dry Craigavon",
+        "phone": "07902 337953",
+        "address": "Craigavon",
+        "website": "https://hydrodryrestoration.com/"
+    }
+]

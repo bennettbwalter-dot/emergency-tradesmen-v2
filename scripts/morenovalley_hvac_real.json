@@ -1,0 +1,37 @@
+[
+    {
+        "name": "AQS Heating & Air Conditioning",
+        "phone": "(951) 356-7658",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "On Time Home Services",
+        "phone": "(949) 649-8777",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "NEXGEN Air Conditioning Heating and Plumbing",
+        "phone": "(888) 377-6136",
+        "address": "Moreno Valley, CA",
+        "rating": 4.9,
+        "review_count": 8500
+    },
+    {
+        "name": "It's No Sweat Heat & Air",
+        "phone": "(951) 331-3310",
+        "address": "Moreno Valley, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "City Wide Air Conditioning Plumbing & Heating",
+        "phone": "(951) 369-1234",
+        "address": "Moreno Valley, CA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

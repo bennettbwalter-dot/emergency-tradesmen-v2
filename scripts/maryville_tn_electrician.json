@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Longo Electric LLC",
+        "phone": "(865) 233-3241",
+        "address": "Maryville, TN",
+        "website": "https://longoelectric.com"
+    },
+    {
+        "name": "Atomic Electric Service Inc",
+        "phone": "(865) 982-5500",
+        "address": "Maryville, TN",
+        "website": "https://atomicelectricservice.com"
+    },
+    {
+        "name": "Flynn Electric Company",
+        "phone": "(865) 379-1500",
+        "address": "Maryville, TN",
+        "website": "https://flynnelectriccompany.com"
+    },
+    {
+        "name": "Power'd Up Electric LLC",
+        "phone": "(865) 333-7865",
+        "address": "Maryville, TN",
+        "website": "https://powerdupelectric.com"
+    }
+]

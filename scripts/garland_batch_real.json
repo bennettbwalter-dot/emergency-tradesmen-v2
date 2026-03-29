@@ -1,0 +1,16 @@
+[
+    {
+        "name": "A TO Z Locksmith",
+        "address": "Garland, TX",
+        "phone": "469-565-3103",
+        "trade": "locksmith",
+        "city": "Garland"
+    },
+    {
+        "name": "On Time Experts",
+        "address": "Garland, TX",
+        "phone": "214-414-1002",
+        "trade": "plumber",
+        "city": "Garland"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Towing Santa Clarita",
+        "phone": "(661) 213-8812",
+        "address": "Santa Clarita, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Santa Clarita Towing Pros",
+        "phone": "(661) 211-1333",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "City Santa Clarita Towing",
+        "phone": "(661) 322-2222",
+        "address": "Santa Clarita, CA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Canyon Country Towing",
+        "phone": "(661) 500-0505",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Valencia Recovery",
+        "phone": "(661) 350-0000",
+        "address": "Santa Clarita, CA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

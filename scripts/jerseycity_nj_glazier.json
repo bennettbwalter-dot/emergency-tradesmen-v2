@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Window Gallery",
+        "phone": "(201) 866-1987",
+        "address": "Jersey City, NJ",
+        "website": "https://windowgallerynb.com"
+    },
+    {
+        "name": "Raymond Glass LLC",
+        "phone": "(201) 333-5446",
+        "address": "Jersey City, NJ",
+        "website": "https://raymondglass.com"
+    },
+    {
+        "name": "Mr. Glazier NJ",
+        "phone": "(973) 354-9868",
+        "address": "Jersey City, NJ area",
+        "website": "https://mrglazier.com"
+    },
+    {
+        "name": "Hoboken Window Installation",
+        "phone": "(201) 508-9591",
+        "address": "Jersey City, NJ",
+        "website": "https://hobokenwindowinstallation.com"
+    }
+]

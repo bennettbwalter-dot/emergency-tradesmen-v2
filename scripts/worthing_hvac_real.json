@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Phoenix Plumbing & Heating",
+        "phone": "01903 245634",
+        "address": "97 Boxgrove, Goring-by-Sea, Worthing, West Sussex, BN12 6LX",
+        "website": "https://boilersworthing.co.uk/"
+    },
+    {
+        "name": "NJ Lees",
+        "phone": "01903 530 851",
+        "address": "63 Chesswood Road, Worthing, West Sussex, BN11 2AB",
+        "website": "https://njlees.co.uk/"
+    },
+    {
+        "name": "Worthing Plumbing Services",
+        "phone": "0190 392 8020",
+        "address": "Worthing",
+        "website": "https://worthingemergencyplumbing.co.uk/"
+    },
+    {
+        "name": "No1 PHD",
+        "phone": "01903 380370",
+        "address": "Worthing",
+        "website": "https://no1phd.co.uk/"
+    },
+    {
+        "name": "Steels Plumbing & Heating",
+        "phone": "01903 245634",
+        "address": "Worthing",
+        "website": "https://steelsplumbingheating.com/"
+    }
+]

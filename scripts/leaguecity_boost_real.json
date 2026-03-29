@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter League City",
+        "phone": "(281) 334-0630",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 480
+    },
+    {
+        "name": "Abacus Plumbing League City",
+        "phone": "(713) 766-3833",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "24 Hour Plumber League City",
+        "phone": "(832) 317-6874",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Space City Plumbing",
+        "phone": "(281) 984-7679",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Benjamin Franklin Plumbing League City",
+        "phone": "(281) 843-8883",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Belknap Plumbing Systems",
+        "phone": "(832) 990-9700",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "bluefrog Plumbing + Drain",
+        "phone": "(832) 365-3463",
+        "address": "League City, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "ProLectric, LLC",
+        "phone": "281-337-5060",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Doctor Home Experts Electric",
+        "phone": "(713) 944-3362",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "K.R. Allen Services",
+        "phone": "(281) 339-3006",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "The Local Electrician",
+        "phone": "(832) 688-4419",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Bob's Air Conditioning, Heat & Electrical",
+        "phone": "(281) 941-8882",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "L & E Electrical Services",
+        "phone": "(281) 748-1491",
+        "address": "League City, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "1st Class Locksmith League City",
+        "phone": "(832) 500-7533",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "League City Locksmith",
+        "phone": "(832) 621-0122",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Pro Emergency Locksmith",
+        "phone": "(713) 335-3443",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Dependable 24 Hours Locksmith",
+        "phone": "(281) 973-0537",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Swift and Efficient Locksmith",
+        "phone": "(832) 706-4077",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Home Security Locksmith",
+        "phone": "(281) 819-7059",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Mobile Locksmiths League City",
+        "phone": "(346) 295-3102",
+        "address": "League City, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

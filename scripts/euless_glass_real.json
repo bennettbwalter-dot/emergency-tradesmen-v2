@@ -1,0 +1,34 @@
+[
+    {
+        "name": "National Glass Experts Euless",
+        "phone": "(682) 224-7696",
+        "address": "Euless, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Lava Auto Glass Euless",
+        "phone": "(214) 436-1325",
+        "address": "Euless, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "DFW Quick Glass Euless",
+        "phone": "817-925-6229",
+        "address": "Euless, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "AutoGlassOnly Euless",
+        "phone": "1-866-410-5628",
+        "address": "Euless, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

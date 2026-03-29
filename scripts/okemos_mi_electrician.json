@@ -1,0 +1,26 @@
+[
+    {
+        "name": "The Meridian Company",
+        "phone": "(517) 339-6300",
+        "address": "Okemos, MI",
+        "website": "https://www.themeridianadvantage.net"
+    },
+    {
+        "name": "Energize Electric Pros",
+        "phone": "(517) 993-8287",
+        "address": "Okemos, MI",
+        "website": "https://energizeelectricpros.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Okemos, MI",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Okemos, MI",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

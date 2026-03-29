@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Larger Electric Services",
+        "phone": "(559) 707-8895",
+        "address": "Madera, CA",
+        "website": "https://largerelectric.com"
+    },
+    {
+        "name": "Electrical Power Source",
+        "phone": "(559) 268-2861",
+        "address": "Madera, CA",
+        "website": "https://electricalpowersource.com"
+    },
+    {
+        "name": "Sunergy Electric Services",
+        "phone": "(559) 349-9761",
+        "address": "Madera, CA",
+        "website": "https://sunergyelectric.com"
+    },
+    {
+        "name": "Andrews Electric",
+        "phone": "(559) 683-8760",
+        "address": "Madera, CA",
+        "website": "https://andrewselectric.com"
+    }
+]

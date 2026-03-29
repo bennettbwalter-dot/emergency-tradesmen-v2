@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SameDay Electrical",
+        "phone": "(801) 726-3329",
+        "address": "Salt Lake City, UT",
+        "website": "https://samedayutah.com"
+    },
+    {
+        "name": "Millcreek Electric",
+        "phone": "(801) 263-2300",
+        "address": "Salt Lake City, UT",
+        "website": "https://millcreekelectriccompany.com"
+    },
+    {
+        "name": "On Call Electrical",
+        "phone": "(801) 900-6566",
+        "address": "Salt Lake City, UT",
+        "website": null
+    },
+    {
+        "name": "EZ Electric",
+        "phone": "(385) 220-7815",
+        "address": "Salt Lake City, UT",
+        "website": "https://ezelectric.com"
+    },
+    {
+        "name": "Northern Electric Company",
+        "phone": "(801) 466-1672",
+        "address": "Salt Lake City, UT",
+        "website": "https://northernelectriccompany.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "New Life DKI",
+        "phone": "(859) 263-2625",
+        "address": "212 Blue Sky Pkwy, Lexington, KY 40509",
+        "website": "https://newlifedki.com/"
+    },
+    {
+        "name": "Best Option Restoration of Lexington",
+        "phone": "(859) 346-7020",
+        "address": "Lexington, KY",
+        "website": "https://bestoptionrestoration.com/"
+    },
+    {
+        "name": "ServiceMaster Fire and Water Restoration",
+        "phone": "(859) 495-3802",
+        "address": "Lexington, KY",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Lexington",
+        "phone": "(859) 225-3193",
+        "address": "Lexington, KY",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "COIT Cleaning and Restoration",
+        "phone": "(859) 253-2648",
+        "address": "Lexington, KY",
+        "website": "https://coit.com/"
+    }
+]

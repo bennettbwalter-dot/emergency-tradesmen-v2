@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mastermind Plumbing",
+        "phone": "864-630-3554",
+        "address": "Spartanburg, SC",
+        "website": "https://mastermindplumbingllc.com"
+    },
+    {
+        "name": "One Call Plumbing SC",
+        "phone": "864-663-2255",
+        "address": "Spartanburg, SC",
+        "website": "https://onecallplumbingsc.com"
+    },
+    {
+        "name": "Roto-Rooter Spartanburg",
+        "phone": "864-582-1147",
+        "address": "Spartanburg, SC",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "864-479-4077",
+        "address": "Spartanburg, SC",
+        "website": "https://mrrooter.com"
+    }
+]

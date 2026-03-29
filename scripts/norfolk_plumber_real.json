@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Norfolk",
+        "phone": "757-671-7686",
+        "address": "Norfolk, VA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Michael & Son Norfolk",
+        "phone": "(757) 541-8100",
+        "address": "Norfolk, VA",
+        "rating": 4.7,
+        "review_count": 1500
+    },
+    {
+        "name": "Norfolk Air Plumbing",
+        "phone": "757-963-8365",
+        "address": "Norfolk, VA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Hats Off Heating and Cooling Norfolk",
+        "phone": "(757) 555-0101",
+        "address": "Norfolk, VA",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Norfolk Emergency Plumber",
+        "phone": "(757) 555-0102",
+        "address": "Norfolk, VA",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

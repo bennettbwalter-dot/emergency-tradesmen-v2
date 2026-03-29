@@ -1,0 +1,26 @@
+[
+    {
+        "name": "XPRT Electrical Contractor",
+        "phone": "(915) 820-3715",
+        "address": "San Elizario, TX",
+        "website": "https://bbb.org"
+    },
+    {
+        "name": "Secure Electrical",
+        "phone": "(915) 221-8214",
+        "address": "San Elizario, TX",
+        "website": "https://securecontractorsinc.com"
+    },
+    {
+        "name": "Lizas Tovar Electric",
+        "phone": "(915) 595-2900",
+        "address": "El Paso, TX",
+        "website": "https://tovarelectricelpaso.com"
+    },
+    {
+        "name": "All EP Electric",
+        "phone": "(915) 203-3694",
+        "address": "El Paso, TX",
+        "website": "https://allepelectric.com"
+    }
+]

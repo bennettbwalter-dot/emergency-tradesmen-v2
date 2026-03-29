@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Can-Duit Electric LLC",
+        "phone": "(815) 234-8889",
+        "address": "Machesney Park, IL",
+        "website": "https://can-duitelectric.net"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Machesney Park, IL",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Gruner Electric",
+        "phone": "(815) 713-5398",
+        "address": "Machesney Park, IL",
+        "website": "https://grunerelectric.com"
+    },
+    {
+        "name": "A-1 Affordable Electric & Plumbing",
+        "phone": "(815) 222-4339",
+        "address": "Machesney Park, IL",
+        "website": "https://a-1affordableelectricandplumbing.com"
+    }
+]

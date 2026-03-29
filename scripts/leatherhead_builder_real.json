@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Medlec Epsom Leatherhead Emergency",
+        "phone": "0333 344 5949",
+        "address": "Leatherhead",
+        "website": "https://med-lec.co.uk/"
+    },
+    {
+        "name": "Rooftek Building Solutions Leatherhead",
+        "phone": "01483 679 888",
+        "address": "Leatherhead",
+        "website": "https://roofteksolutions.co.uk/"
+    },
+    {
+        "name": "Handyman Leatherhead 24/7",
+        "phone": "020 8719 0128",
+        "address": "Leatherhead",
+        "website": "https://leatherhead-handyman.co.uk/"
+    },
+    {
+        "name": "A1 Building Leatherhead",
+        "phone": "01372 632056",
+        "address": "Leatherhead",
+        "website": "https://a1-roofing-leatherhead.co.uk/"
+    },
+    {
+        "name": "Elite Building Industries Leatherhead",
+        "phone": "07555 100 700",
+        "address": "Leatherhead",
+        "website": "https://eliteroofingindustries.com/"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Affordable Heating and Air",
+        "phone": "(818) 722-1332",
+        "address": "Santa Clarita, CA",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "HVAC Santa Clarita",
+        "phone": "(661) 888-0248",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Nicholas Aire Systems",
+        "phone": "(661) 297-8058",
+        "address": "Santa Clarita, CA",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Santa Clarita AC Repair Techs",
+        "phone": "(888) 854-0998",
+        "address": "Santa Clarita, CA",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Rowland Air",
+        "phone": "(661) 251-5188",
+        "address": "Santa Clarita, CA",
+        "rating": 4.8,
+        "review_count": 850
+    }
+]

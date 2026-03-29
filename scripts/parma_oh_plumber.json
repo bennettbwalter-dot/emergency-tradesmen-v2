@@ -1,0 +1,26 @@
+[
+    {
+        "name": "WyattWorks",
+        "phone": "(216) 577-6228",
+        "address": "Parma, OH",
+        "website": "https://wyattworks.com"
+    },
+    {
+        "name": "Mayer Plumbing",
+        "phone": "(440) 884-2550",
+        "address": "Parma, OH",
+        "website": "https://mayerplumbingco.com"
+    },
+    {
+        "name": "HLH Plumbing",
+        "phone": "(877) 477-7921",
+        "address": "Parma, OH",
+        "website": "https://hlhplumbing.com"
+    },
+    {
+        "name": "Goodfellas Plumbing and Drain Inc",
+        "phone": "(216) 496-9218",
+        "address": "Parma, OH",
+        "website": "https://goodfellasplumbers.com"
+    }
+]

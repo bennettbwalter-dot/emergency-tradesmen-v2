@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Hall Air Conditioning",
+        "phone": "(325) 672-2541",
+        "address": "Abilene, TX",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Air-Tech Heating and Air Conditioning",
+        "phone": "(325) 692-5850",
+        "address": "Abilene, TX",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Emergency HVAC",
+        "phone": "(325) 261-0276",
+        "address": "Abilene, TX",
+        "rating": 4.9,
+        "review_count": 92
+    },
+    {
+        "name": "Quality Cooling & Heating",
+        "phone": "(325) 673-5665",
+        "address": "Abilene, TX",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Ace Air Conditioning",
+        "phone": "(325) 268-2897",
+        "address": "Abilene, TX",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

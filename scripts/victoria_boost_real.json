@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Roto-Rooter Victoria",
+        "phone": "361-575-4423",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "PRO Plumbers of Victoria",
+        "phone": "(361) 309-9228",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "D & S Plumbing",
+        "phone": "361-571-2540",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Plumbers Cheap",
+        "phone": "(855) 902-0055",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Local Electric & Plumbing",
+        "phone": "+1-833-723-4177",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Drain Pro Plumbing",
+        "phone": "778-265-7757",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Frio A/C & Mechanical",
+        "phone": "(361) 571-6591",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Caraway Plumbing",
+        "phone": "(361) 575-3301",
+        "address": "Victoria, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Electrician Squad Victoria",
+        "phone": "(855) 930-6015",
+        "address": "Victoria, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "R & R Electric Service",
+        "phone": "(361) 573-7178",
+        "address": "Victoria, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Best Electrician Victoria",
+        "phone": "(877) 847-6084",
+        "address": "Victoria, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Haynes Electric, LLC",
+        "phone": "(361) 575-1872",
+        "address": "Victoria, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Karnowski Electric Company",
+        "phone": "(361) 575-1872",
+        "address": "Victoria, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Bosart Lock & Key Inc.",
+        "phone": "361-575-0536",
+        "address": "Victoria, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Pop-A-Lock Victoria",
+        "phone": "(361) 572-8666",
+        "address": "Victoria, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "EMERGENCY Brothers Locksmith",
+        "phone": "(888) 947-5585",
+        "address": "Victoria, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "KeyMe Locksmiths Victoria",
+        "phone": "(361) 256-5851",
+        "address": "Victoria, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Ace Locksmith Service",
+        "phone": "361-578-2022",
+        "address": "Victoria, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

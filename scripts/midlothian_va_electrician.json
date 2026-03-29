@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Midlothian, VA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Midlothian, VA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Mister Sparky of Richmond",
+        "phone": "804-207-4342",
+        "address": "Midlothian, VA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Woodfin - Your Home Team",
+        "phone": "804-552-6295",
+        "address": "Midlothian, VA",
+        "website": "https://askwoodfin.com"
+    }
+]

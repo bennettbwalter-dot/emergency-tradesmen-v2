@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky Scottsdale",
+        "phone": "(480) 568-6867",
+        "address": "Scottsdale, AZ",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Unique Electrical Contractors",
+        "phone": "(480) 840-1050",
+        "address": "Scottsdale, AZ",
+        "website": "https://uniqueelectrical.com"
+    },
+    {
+        "name": "Ignite Electric",
+        "phone": "(480) 725-7664",
+        "address": "Scottsdale, AZ",
+        "website": "https://ignite-electric.com"
+    },
+    {
+        "name": "Parker and Sons",
+        "phone": "(602) 344-9027",
+        "address": "Scottsdale, AZ",
+        "website": "https://parkerandsons.com"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "name": "DNA Plumbing Heating and Air",
+        "address": "Allen, TX",
+        "phone": "214-790-7798",
+        "trade": "plumber",
+        "city": "Allen"
+    },
+    {
+        "name": "Micahs Honest Plumbing",
+        "address": "Allen, TX",
+        "phone": "214-380-4033",
+        "trade": "plumber",
+        "city": "Allen"
+    },
+    {
+        "name": "Locksmith in Allen",
+        "address": "505 Benton Dr, Allen, TX 75013",
+        "phone": "972-535-6774",
+        "trade": "locksmith",
+        "city": "Allen"
+    },
+    {
+        "name": "Allen Locksmith Store",
+        "address": "Allen, TX",
+        "phone": "972-512-6338",
+        "trade": "locksmith",
+        "city": "Allen"
+    }
+]

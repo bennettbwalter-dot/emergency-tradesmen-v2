@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tulsa Emergency Glass",
+        "phone": "918-844-0686",
+        "address": "Tulsa, OK",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Robinson Glass",
+        "phone": "918-664-7904",
+        "address": "Tulsa, OK",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Window Medics",
+        "phone": "918-626-1402",
+        "address": "Tulsa, OK",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    }
+]

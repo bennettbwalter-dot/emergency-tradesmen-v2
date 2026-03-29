@@ -1,0 +1,146 @@
+[
+    {
+        "name": "The Darville Company",
+        "phone": "432-580-9675",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "The Bosworth Company Midland",
+        "phone": "432-570-5233",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Roto-Rooter Midland",
+        "phone": "432-570-6768",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Waters Edge Plumbing Service",
+        "phone": "432-262-1294",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Plumbers Midland TX",
+        "phone": "432-203-4700",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Action Air Plumbing & Septic",
+        "phone": "432-620-8900",
+        "address": "Midland, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "The Bosworth Company Electric",
+        "phone": "432-570-5233",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Corey Sly Electrical Service",
+        "phone": "(432) 570-0229",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Hooked Up Electric",
+        "phone": "325-442-5594",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Mr. Electric of Midland",
+        "phone": "(432) 270-9122",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Pro Power Services",
+        "phone": "(432) 270-9122",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Midland Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 80
+    },
+    {
+        "name": "C&G Energy Services",
+        "phone": "432-207-3158",
+        "address": "Midland, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Pop-A-Lock Midland",
+        "phone": "432-682-8400",
+        "address": "Midland, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Texas Premier Locksmith Midland",
+        "phone": "(432) 363-4017",
+        "address": "Midland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Able Locksmith",
+        "phone": "432-697-6767",
+        "address": "Midland, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Howdy Lock & Key Midland",
+        "phone": "432-219-3538",
+        "address": "Midland, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mr. Key Locksmith",
+        "phone": "432-684-6481",
+        "address": "Midland, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 280
+    }
+]

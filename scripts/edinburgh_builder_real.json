@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Acorn Building Services Edinburgh",
+        "phone": "0131 669 5222",
+        "address": "242 Portobello High St., Edinburgh, EH15 2AT",
+        "website": "https://acornservices.com/"
+    },
+    {
+        "name": "Handy Builders (Emergency Repair)",
+        "phone": "0131 669 5222",
+        "address": "52 Montrose Terrace, Edinburgh, EH7 5DL",
+        "website": "https://handybuilders.co.uk/"
+    },
+    {
+        "name": "David Love Property Edinburgh",
+        "phone": "0131 359 1020",
+        "address": "Edinburgh",
+        "website": "https://davidlove.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Edinburgh",
+        "phone": "01313 591 020",
+        "address": "Edinburgh",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "Emergency Repairs Scotland Edinburgh",
+        "phone": "07922 103681",
+        "address": "Edinburgh",
+        "website": "https://emergencyrepairsscotland.co.uk/"
+    }
+]

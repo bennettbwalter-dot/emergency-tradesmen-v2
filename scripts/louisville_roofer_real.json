@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Two Dads Roofing",
+        "phone": "(502) 791-5944",
+        "address": "Louisville, KY",
+        "website": "https://twodadsroofing.com/"
+    },
+    {
+        "name": "The Roof Doctor",
+        "phone": "(502) 458-2345",
+        "address": "233 East Burnett Ave, Louisville, KY 40208",
+        "website": "https://louisvilleroofdoctor.com/"
+    },
+    {
+        "name": "Falls City Contracting",
+        "phone": "(502) 438-9306",
+        "address": "Louisville, KY",
+        "website": "https://fallscitycontracting.com/"
+    },
+    {
+        "name": "Roof Troops",
+        "phone": "(574) 370-6742",
+        "address": "2200 Bradley Ave, Louisville, KY 40217",
+        "website": "https://rooftroopsroofing.com/"
+    },
+    {
+        "name": "Graduate Contracting",
+        "phone": "(800) 427-6637",
+        "address": "Louisville, KY",
+        "website": "https://graduatecontracting.com/"
+    }
+]

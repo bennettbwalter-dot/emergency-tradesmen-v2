@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Ricky's Towing",
+        "phone": "(806) 371-7588",
+        "address": "Amarillo, TX",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Lockout Legends",
+        "phone": "(806) 808-2450",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "K3 Towing, Recovery",
+        "phone": "(806) 211-1333",
+        "address": "Amarillo, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Cierra Towing & Crushing",
+        "phone": "(806) 300-4444",
+        "address": "Amarillo, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Tic Tac Tow Towing",
+        "phone": "(806) 322-2222",
+        "address": "Amarillo, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

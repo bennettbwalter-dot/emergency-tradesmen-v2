@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Homecure Plumbers",
+        "phone": "0203 504 4000",
+        "address": "London",
+        "website": "https://homecureplumbers.co.uk/"
+    },
+    {
+        "name": "Aspect",
+        "phone": "020 3868 6938",
+        "address": "London",
+        "website": "https://aspect.co.uk/"
+    },
+    {
+        "name": "Masterfix Property Services",
+        "phone": "020 7518 8600",
+        "address": "London",
+        "website": "https://master-fix.com/"
+    },
+    {
+        "name": "Pimlico Plumbers",
+        "phone": "020 8108 0808",
+        "address": "London",
+        "website": "https://pimlicoplumbers.com/"
+    },
+    {
+        "name": "Chingford Plumbing & Heating",
+        "phone": "0800 024 8669",
+        "address": "480 Larkshall Road, London, E4 9HH",
+        "website": "https://chingfordplumbingandheating.co.uk/"
+    }
+]

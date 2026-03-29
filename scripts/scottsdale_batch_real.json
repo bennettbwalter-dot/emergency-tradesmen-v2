@@ -1,0 +1,16 @@
+[
+    {
+        "name": "AC by J",
+        "address": "Scottsdale, AZ",
+        "phone": "602-266-3678",
+        "trade": "electrician",
+        "city": "Scottsdale"
+    },
+    {
+        "name": "HailCo Roofing",
+        "address": "Scottsdale, AZ",
+        "phone": "480-442-8812",
+        "trade": "roofer",
+        "city": "Scottsdale"
+    }
+]

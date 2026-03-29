@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Texan Glass League City",
+        "phone": "(281) 296-6200",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "UniAutoGlass Houston",
+        "phone": "(281) 449-0808",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Mobile Xpress Windshield",
+        "phone": "(281) 650-1033",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "QYP Auto Glass Services",
+        "phone": "(346) 264-6944",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "My Pro Auto Glass League City",
+        "phone": "(281) 201-0817",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Caliber Auto Glass League City",
+        "phone": "(888) 461-0010",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    },
+    {
+        "name": "Hurricane Glass League City",
+        "phone": "(281) 815-4193",
+        "address": "League City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

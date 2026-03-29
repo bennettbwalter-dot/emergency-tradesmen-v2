@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Boss Glass & Door",
+        "phone": "(702) 205-6673",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Davis Glass & Mirror",
+        "phone": "(702) 819-8452",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Luxe Residential and Commercial Glass",
+        "phone": "(702) 825-7463",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Glass Install",
+        "phone": "(702) 816-0328",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Temprd Glass",
+        "phone": "(702) 425-6399",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Galaxy Auto Glass",
+        "phone": "(702) 742-1134",
+        "address": "Las Vegas, NV",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

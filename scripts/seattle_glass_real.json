@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Beacon Hill Glass",
+        "phone": "(206) 372-4186",
+        "address": "Seattle, WA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Local Glass Repairs LLC",
+        "phone": "(206) 778-5763",
+        "address": "Seattle, WA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "SEATTLE Glass and Window",
+        "phone": "(253) 325-5175",
+        "address": "Seattle, WA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "MS Glass Outlet",
+        "phone": "206-444-5555",
+        "address": "Seattle, WA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 210
+    }
+]

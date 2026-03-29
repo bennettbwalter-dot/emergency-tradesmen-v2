@@ -1,0 +1,464 @@
+[
+  {
+    "city": "Birmingham",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Birmingham",
+    "trade": "glazier",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Glasgow",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Glasgow",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Glasgow",
+    "trade": "gas-engineer",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Newcastle",
+    "trade": "plumber",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "roofer",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Newcastle",
+    "trade": "glazier",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "breakdown",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "builder",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Newcastle",
+    "trade": "gas-engineer",
+    "country": "GB",
+    "count": 0
+  },
+  {
+    "city": "Sheffield",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Sheffield",
+    "trade": "glazier",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Liverpool",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Leeds",
+    "trade": "builder",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Cardiff",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Cardiff",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Cardiff",
+    "trade": "gas-engineer",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Belfast",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Belfast",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Belfast",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Belfast",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Belfast",
+    "trade": "glazier",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Belfast",
+    "trade": "gas-engineer",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Swansea",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Swansea",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Swansea",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Reading",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Aberdeen",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 3
+  },
+  {
+    "city": "Derry",
+    "trade": "glazier",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Derry",
+    "trade": "breakdown",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "drain-specialist",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "locksmith",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Edinburgh",
+    "trade": "gas-engineer",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 2
+  },
+  {
+    "city": "Salford",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Salford",
+    "trade": "breakdown",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Southampton",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "York",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Plymouth",
+    "trade": "electrician",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "Plymouth",
+    "trade": "hvac",
+    "country": "GB",
+    "count": 4
+  },
+  {
+    "city": "New York",
+    "trade": "plumber",
+    "country": "US",
+    "count": 1
+  },
+  {
+    "city": "New York",
+    "trade": "hvac",
+    "country": "US",
+    "count": 2
+  },
+  {
+    "city": "New York",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "New York",
+    "trade": "roofer",
+    "country": "US",
+    "count": 3
+  },
+  {
+    "city": "New York",
+    "trade": "water-restoration",
+    "country": "US",
+    "count": 4
+  },
+  {
+    "city": "New York",
+    "trade": "breakdown",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "New York",
+    "trade": "builder",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "New York",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Chicago",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Chicago",
+    "trade": "glazier",
+    "country": "US",
+    "count": 3
+  },
+  {
+    "city": "Chicago",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 1
+  },
+  {
+    "city": "Philadelphia",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "San Jose",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "San Jose",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Denver",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Denver",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 2
+  },
+  {
+    "city": "Washington",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 2
+  },
+  {
+    "city": "Washington",
+    "trade": "water-restoration",
+    "country": "US",
+    "count": 4
+  },
+  {
+    "city": "Boston",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 4
+  },
+  {
+    "city": "Boston",
+    "trade": "glazier",
+    "country": "US",
+    "count": 4
+  },
+  {
+    "city": "Boston",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Nashville",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 1
+  },
+  {
+    "city": "Nashville",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Oklahoma City",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Las Vegas",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 3
+  },
+  {
+    "city": "Las Vegas",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Memphis",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Memphis",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Louisville",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 1
+  },
+  {
+    "city": "Baltimore",
+    "trade": "drain-specialist",
+    "country": "US",
+    "count": 0
+  },
+  {
+    "city": "Baltimore",
+    "trade": "gas-engineer",
+    "country": "US",
+    "count": 0
+  }
+]

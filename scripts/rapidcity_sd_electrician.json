@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Muellenberg Electric",
+        "phone": "(605) 341-7577",
+        "address": "Rapid City, SD",
+        "website": "https://muellenbergelectric.com"
+    },
+    {
+        "name": "Beatty Electric",
+        "phone": "(605) 348-8585",
+        "address": "Rapid City, SD",
+        "website": "https://beattyelectric.com"
+    },
+    {
+        "name": "Mick's Electric Inc",
+        "phone": "(605) 348-2335",
+        "address": "Rapid City, SD",
+        "website": "https://mickselectric.com"
+    },
+    {
+        "name": "Conrad's Big C Electric",
+        "phone": "(605) 348-8744",
+        "address": "Rapid City, SD",
+        "website": "https://conradsbigcelectric.com"
+    },
+    {
+        "name": "Ace Electric Rapid City",
+        "phone": "(605) 719-7393",
+        "address": "Rapid City, SD",
+        "website": "https://aceelectricrapidcity.com"
+    }
+]

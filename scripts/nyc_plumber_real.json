@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Rite Plumbing & Heating",
+        "phone": "(347) 502-6441",
+        "address": "New York, NY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Drain Service",
+        "phone": "(212) 687-1662",
+        "address": "New York, NY",
+        "rating": 4.9,
+        "review_count": 500
+    },
+    {
+        "name": "24 Hour Plumber NYC",
+        "phone": "(646) 693-6598",
+        "address": "New York, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Citywide Plumbers",
+        "phone": "1-800-310-2564",
+        "address": "New York, NY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Kew Forest Plumbing",
+        "phone": "(718) 456-1089",
+        "address": "Queens, NY",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

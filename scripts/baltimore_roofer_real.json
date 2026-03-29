@@ -1,0 +1,32 @@
+[
+    {
+        "name": "RoofPRO",
+        "phone": "(410) 428-6806",
+        "address": "Baltimore, MD",
+        "website": "https://marylandroofers.com/"
+    },
+    {
+        "name": "HCS Roofing & Windows",
+        "phone": "(410) 746-7225",
+        "address": "Baltimore, MD",
+        "website": "https://hcsroof.com/"
+    },
+    {
+        "name": "Crown Remodeling",
+        "phone": "(410) 123-4567",
+        "address": "Baltimore, MD",
+        "website": "https://crownremodelingllc.com/"
+    },
+    {
+        "name": "Harford Roofing & Exteriors",
+        "phone": "(443) 292-6020",
+        "address": "Baltimore, MD",
+        "website": "https://harfordexteriors.com/"
+    },
+    {
+        "name": "Bollinger Bros Roofing",
+        "phone": "(410) 732-0055",
+        "address": "3520 E. Federal Street Baltimore, MD 21213",
+        "website": "https://bollingerbros.com/"
+    }
+]

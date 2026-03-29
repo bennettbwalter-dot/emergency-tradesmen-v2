@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Auto Glass of Irving",
+        "phone": "(214) 856-8250",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "My Pro Auto Glass Irving",
+        "phone": "(214) 960-5511",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "My Safe Auto Glass",
+        "phone": "(469) 789-4106",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "My Safe Glass Irving",
+        "phone": "(972) 734-8288",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Countyline Glass",
+        "phone": "(972) 438-5719",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Urgent Glass DFW Mirror & Glass",
+        "phone": "972-371-9265",
+        "address": "Irving, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

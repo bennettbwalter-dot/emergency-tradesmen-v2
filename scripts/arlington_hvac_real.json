@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Baker Brothers Plumbing, Air & Electric",
+        "phone": "(817) 595-0116",
+        "address": "Arlington, TX",
+        "rating": 4.8,
+        "review_count": 16000
+    },
+    {
+        "name": "Air Clinic",
+        "phone": "(817) 226-2665",
+        "address": "Arlington, TX",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Team Enoch",
+        "phone": "(817) 769-3712",
+        "address": "Arlington, TX",
+        "rating": 4.9,
+        "review_count": 3500
+    },
+    {
+        "name": "Tom's Mechanical, Inc.",
+        "phone": "(817) 277-4493",
+        "address": "Arlington, TX",
+        "rating": 4.8,
+        "review_count": 5200
+    },
+    {
+        "name": "Willard Cooling, Heating, Plumbing, & Electrical",
+        "phone": "(817) 290-3525",
+        "address": "Arlington, TX",
+        "rating": 4.9,
+        "review_count": 2100
+    }
+]

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- CSP: Allow unsafe-eval for Azure Speech SDK and PostHog for analytics -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com;" />
+
+
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <!-- Fonts: Cormorant Garamond (Display), Inter (UI), DM Sans (Body - via package) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Fallback title (overridden by react-helmet-async on each page) -->
+  <title>Emergency Tradesmen</title>
+  <meta name="author" content="EmergencyTrades" />
+  <script>
+    // Polyfill global for libraries like Azure Speech SDK
+    if (typeof global === 'undefined') {
+      window.global = window;
+    }
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777"
+    crossorigin="anonymous"></script>
+
+  <!-- Pinterest Verification -->
+  <meta name="p:domain_verify" content="51555145e4baf5bfdefaa25c01cb5d47" />
+
+  <!-- Self-Healing Logic: Detect white screen (stale cache) and refresh -->
+  <script>
+    (function() {
+      if (window.location.hostname !== 'emergencycontractors.net' && 
+          window.location.hostname !== 'www.emergencycontractors.net' &&
+          window.location.hostname !== 'localhost') return;
+
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var root = document.getElementById('root');
+          var isAppLoaded = root && (root.children.length > 0 || root.innerText.length > 0);
+          var hasRefreshed = sessionStorage.getItem('app_auto_refresh');
+
+          if (!isAppLoaded && !hasRefreshed) {
+            console.warn('App failed to mount. Attempting self-healing refresh...');
+            sessionStorage.setItem('app_auto_refresh', 'true');
+            // Hard reload to bypass cache
+            window.location.reload(true);
+          } else if (isAppLoaded) {
+            sessionStorage.removeItem('app_auto_refresh');
+          }
+        }, 5000); // Wait 5 seconds for slow connections
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bone Dry Roofing",
+        "phone": "(614) 123-4567",
+        "address": "Columbus, OH",
+        "website": "https://www.bonedry.com/"
+    },
+    {
+        "name": "Coldstream Exteriors",
+        "phone": "(614) 812-0811",
+        "address": "Columbus, OH",
+        "website": "https://coldstreamexteriors.com/"
+    },
+    {
+        "name": "Hendo Roofing",
+        "phone": "(614) 705-2972",
+        "address": "Columbus, OH",
+        "website": "https://hendoroofing.com/"
+    },
+    {
+        "name": "Cotterman Roofing",
+        "phone": "(614) 307-2383",
+        "address": "Columbus, OH",
+        "website": "https://cottermanroofing.com/"
+    },
+    {
+        "name": "Division 7 Roofing",
+        "phone": "(614) 560-3473",
+        "address": "72 Holmes Street, Galena, OH 43021",
+        "website": "https://divisionsevenroofing.com/"
+    }
+]

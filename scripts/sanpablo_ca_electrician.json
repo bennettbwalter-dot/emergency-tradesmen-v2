@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hitek Electrical",
+        "phone": "(510) 880-5829",
+        "address": "San Pablo, CA",
+        "website": "https://ihiredhitek.com"
+    },
+    {
+        "name": "Aleco Electric",
+        "phone": "(510) 937-0585",
+        "address": "San Pablo, CA",
+        "website": "https://alecoelectric.com"
+    },
+    {
+        "name": "Citywide Electric",
+        "phone": "(510) 215-0153",
+        "address": "San Pablo, CA",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Pro Electric Experts",
+        "phone": "(855) 532-9376",
+        "address": "San Pablo, CA",
+        "website": "https://proelectricexperts.com"
+    }
+]

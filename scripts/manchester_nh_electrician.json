@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hughes Electric NH",
+        "phone": "(603) 512-9393",
+        "address": "Manchester, NH",
+        "website": "https://hugheselectricnh.com"
+    },
+    {
+        "name": "Kennedy Electric LLC",
+        "phone": "(603) 219-9292",
+        "address": "Manchester, NH",
+        "website": "https://kennedyelectricllc.com"
+    },
+    {
+        "name": "Connolly's Electrical Service Inc",
+        "phone": "(603) 622-4786",
+        "address": "Manchester, NH",
+        "website": "https://connollyselectricserviceinc.com"
+    },
+    {
+        "name": "Easton Electric",
+        "phone": "(603) 866-1000",
+        "address": "Manchester, NH",
+        "website": "https://eastonelectricllc.com"
+    }
+]

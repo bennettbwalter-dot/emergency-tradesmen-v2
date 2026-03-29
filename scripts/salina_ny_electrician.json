@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Salina, NY",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Granese Electrical",
+        "phone": "(855) 506-4858",
+        "address": "Salina, NY",
+        "website": "https://graneseelectric.com"
+    },
+    {
+        "name": "GeorgeTech Electric",
+        "phone": "(877) 748-7084",
+        "address": "Salina, NY",
+        "website": "https://georgetechelectric.com"
+    },
+    {
+        "name": "Brighten Up Electricians",
+        "phone": "(877) 725-5126",
+        "address": "Salina, NY",
+        "website": "https://brightenupelectricians.com"
+    }
+]

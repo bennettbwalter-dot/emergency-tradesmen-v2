@@ -1,0 +1,16 @@
+{
+    "name": "stt-backend",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Audio upload endpoint that bridges frontend to MCP STT server",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^17.3.1",
+        "express": "^4.21.0",
+        "multer": "^1.4.5-lts.1",
+        "openai": "^4.61.0"
+    }
+}

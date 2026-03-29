@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Disaster Relief",
+        "phone": "(716) 560-7525",
+        "address": "Buffalo, NY",
+        "website": "https://wnydisasterrelief.com/"
+    },
+    {
+        "name": "PuroClean of Buffalo",
+        "phone": "(716) 662-0188",
+        "address": "Buffalo, NY",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "Rapid Dry Services",
+        "phone": "(716) 379-3938",
+        "address": "Buffalo, NY",
+        "website": "https://rapiddryservices.com/"
+    },
+    {
+        "name": "Dynamic Cleaning Systems",
+        "phone": "(716) 997-6034",
+        "address": "131 North America Drive, West Seneca, NY 14224",
+        "website": "https://dynamiccleaningsystems.net/"
+    },
+    {
+        "name": "Paul Davis Restoration of Greater Buffalo",
+        "phone": "(716) 403-8003",
+        "address": "Buffalo, NY",
+        "website": "https://pauldavis.com/"
+    }
+]

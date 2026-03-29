@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Roseville and Rocklin",
+        "phone": "(916) 251-4785",
+        "address": "Roseville, CA",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Nick The Electrician",
+        "phone": "(925) 250-0975",
+        "address": "Roseville, CA",
+        "website": "https://nicktheelectrician.com"
+    },
+    {
+        "name": "Aleco Electric",
+        "phone": "(916) 312-2364",
+        "address": "Roseville, CA",
+        "website": "https://alecoelectric.com"
+    },
+    {
+        "name": "JC Electrical Service",
+        "phone": "(530) 227-1374",
+        "address": "Roseville, CA",
+        "website": "https://jcelectricalservice.com"
+    }
+]

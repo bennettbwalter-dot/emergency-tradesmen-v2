@@ -1,0 +1,194 @@
+[
+    {
+        "name": "Emergency Plumber Denver",
+        "phone": "720-282-0924",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Roto-Rooter Denver",
+        "phone": "303-666-0045",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Blue Sky Plumbing Denver",
+        "phone": "720-617-0417",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Benjamin Franklin Plumbing of Denver",
+        "phone": "303-835-9352",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 620
+    },
+    {
+        "name": "Fix-It 24/7 Denver",
+        "phone": "303-536-1616",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 950
+    },
+    {
+        "name": "Absolute Plumbing Denver",
+        "phone": "720-807-5715",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Mr. Rooter Plumbing Denver",
+        "phone": "303-562-1519",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Plumbline Services",
+        "phone": "303-436-2525",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Denver Emergency Plumbing Pros",
+        "phone": "303-268-2870",
+        "address": "Denver, CO",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Absolute Electrical Denver",
+        "phone": "(720) 807-5715",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Piper Electric Co., Inc.",
+        "phone": "(303) 422-9219",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Top Shelf Electric",
+        "phone": "(720) 899-2633",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Mister Sparky of Denver",
+        "phone": "(303) 468-2294",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Done Plumbing & Electric",
+        "phone": "(303) 209-9524",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1100
+    },
+    {
+        "name": "A & B Electric",
+        "phone": "303-525-4583",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Ken Bobko Electric Denver",
+        "phone": "(877) 734-8969",
+        "address": "Denver, CO",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Always Locksmith Denver",
+        "phone": "(720) 412-1400",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Advanced Locksmith Denver",
+        "phone": "720-633-7444",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "First Choice 24Hr Locksmith",
+        "phone": "(720) 305-2886",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 210
+    },
+    {
+        "name": "Mile High Locksmith",
+        "phone": "(720) 248-8087",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 1200
+    },
+    {
+        "name": "247 Denver Local Locksmith",
+        "phone": "(720) 307-1259",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Denver Locksmith Store",
+        "phone": "303-357-7675",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "303 Locksmith",
+        "phone": "(303) 747-5993",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Denver Lock And Safe",
+        "phone": "303-357-8311",
+        "address": "Denver, CO",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    }
+]

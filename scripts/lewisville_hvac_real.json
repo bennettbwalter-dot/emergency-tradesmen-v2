@@ -1,0 +1,37 @@
+[
+    {
+        "name": "CW Service Pros",
+        "phone": "(972) 395-2597",
+        "address": "Lewisville, TX",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Aire Serv of Dallas",
+        "phone": "(972) 992-5648",
+        "address": "Lewisville, TX",
+        "rating": 4.9,
+        "review_count": 451
+    },
+    {
+        "name": "Emergency AC",
+        "phone": "(682) 268-4077",
+        "address": "Lewisville, TX",
+        "rating": 5.0,
+        "review_count": 1500
+    },
+    {
+        "name": "Lewisville Air Conditioning & Heating",
+        "phone": "(972) 221-1224",
+        "address": "Lewisville, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "Southern Comfort Mechanical",
+        "phone": "(469) 240-5250",
+        "address": "Lewisville, TX",
+        "rating": 4.9,
+        "review_count": 850
+    }
+]

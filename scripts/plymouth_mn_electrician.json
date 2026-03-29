@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Harrison Electric",
+        "phone": "(763) 544-3300",
+        "address": "Plymouth, MN",
+        "website": "https://harrison-electric.com"
+    },
+    {
+        "name": "Norske Electric",
+        "phone": "(952) 443-4113",
+        "address": "Plymouth, MN",
+        "website": "https://norskeelectric.com"
+    },
+    {
+        "name": "Bring The Light Electric LLC",
+        "phone": "(952) 210-3904",
+        "address": "Plymouth, MN",
+        "website": "https://bringthelightelectric.com"
+    },
+    {
+        "name": "Edison Electric Inc Plymouth",
+        "phone": "(612) 385-7864",
+        "address": "Plymouth, MN",
+        "website": "https://electrician-minneapolis.com"
+    }
+]

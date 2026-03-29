@@ -1,0 +1,37 @@
+[
+    {
+        "name": "United Air Temp",
+        "phone": "(202) 796-7990",
+        "address": "Washington, D.C.",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "F.H. Furr Plumbing, Heating, Air Conditioning & Electrical",
+        "phone": "(703) 540-4838",
+        "address": "Washington, D.C.",
+        "rating": 4.9,
+        "review_count": 5500
+    },
+    {
+        "name": "HVAC 911",
+        "phone": "(703) 940-0794",
+        "address": "Washington, D.C.",
+        "rating": 4.6,
+        "review_count": 120
+    },
+    {
+        "name": "Spartan Plumbing, Heating & Air Conditioning",
+        "phone": "(301) 363-2252",
+        "address": "Washington, D.C.",
+        "rating": 4.7,
+        "review_count": 420
+    },
+    {
+        "name": "McCrea Heating & Air Conditioning",
+        "phone": "(703) 330-3112",
+        "address": "Washington, D.C.",
+        "rating": 4.5,
+        "review_count": 850
+    }
+]

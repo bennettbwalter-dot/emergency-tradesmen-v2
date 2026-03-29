@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ServiceMaster of Anchorage",
+        "phone": "(907) 802-5450",
+        "address": "Anchorage, AK",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "AK Restoration Pro",
+        "phone": "(907) 793-0060",
+        "address": "Anchorage, AK",
+        "website": "https://akrestorationpro.com/"
+    },
+    {
+        "name": "24 Hour Flood Pros",
+        "phone": "(907) 312-4080",
+        "address": "3327 Seppala Drive, Anchorage, AK 99517",
+        "website": "https://24hourfloodpros.com/"
+    },
+    {
+        "name": "Fire & Flood Services Inc.",
+        "phone": "(907) 344-4412",
+        "address": "Anchorage, AK",
+        "website": "https://firefloodservices.com/"
+    },
+    {
+        "name": "CMC Construction",
+        "phone": "(907) 646-0990",
+        "address": "Anchorage, AK",
+        "website": "https://cmcalaska.com/"
+    }
+]

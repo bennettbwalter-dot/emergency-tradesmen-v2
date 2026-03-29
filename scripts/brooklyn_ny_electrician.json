@@ -1,0 +1,26 @@
+[
+    {
+        "name": "James Lewis Electrical",
+        "phone": "(347) 365-3166",
+        "address": "Brooklyn, NY",
+        "website": "https://jameslewiselectrical.com"
+    },
+    {
+        "name": "Daven Electric Corp",
+        "phone": "(212) 390-1106",
+        "address": "Brooklyn, NY",
+        "website": "https://davenelectric.com"
+    },
+    {
+        "name": "Immaculate Licensed Electrician",
+        "phone": "(929) 224-4674",
+        "address": "Brooklyn, NY",
+        "website": "https://immaculatelicensedelectrician.com"
+    },
+    {
+        "name": "Brooklyn Electrician Squad",
+        "phone": "(855) 930-6015",
+        "address": "Brooklyn, NY",
+        "website": "https://electriciansquad.com"
+    }
+]

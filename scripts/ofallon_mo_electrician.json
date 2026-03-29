@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Baller Electric",
+        "phone": "(636) 262-1430",
+        "address": "O'Fallon, MO",
+        "website": "https://ballerelectric.com"
+    },
+    {
+        "name": "Electric MD",
+        "phone": "(314) 757-4252",
+        "address": "O'Fallon, MO",
+        "website": "https://iecstl.com"
+    },
+    {
+        "name": "Kellogg Electric",
+        "phone": "(636) 439-0145",
+        "address": "O'Fallon, MO",
+        "website": "https://kelloggelectric.com"
+    },
+    {
+        "name": "Innovate Electric",
+        "phone": "(636) 385-2244",
+        "address": "O'Fallon, MO",
+        "website": "https://iv-electric.com"
+    }
+]

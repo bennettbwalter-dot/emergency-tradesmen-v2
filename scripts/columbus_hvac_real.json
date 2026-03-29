@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Quality Air Heating & Air Conditioning",
+        "phone": "(614) 262-1818",
+        "address": "Columbus, OH",
+        "rating": 4.8,
+        "review_count": 840
+    },
+    {
+        "name": "Greater Columbus Furnace & Air Conditioning",
+        "phone": "(614) 245-3025",
+        "address": "Columbus, OH",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Columbus Worthington Air",
+        "phone": "(614) 405-7819",
+        "address": "Columbus, OH",
+        "rating": 4.6,
+        "review_count": 2100
+    },
+    {
+        "name": "Buckeye Heating, Cooling & Plumbing",
+        "phone": "(614) 641-0730",
+        "address": "Columbus, OH",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Emergency Plumbing Heating Air",
+        "phone": "(740) 273-6356",
+        "address": "Columbus, OH",
+        "rating": 4.5,
+        "review_count": 150
+    }
+]

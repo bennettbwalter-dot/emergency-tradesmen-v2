@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Airco Service Tulsa",
+        "phone": "(918) 252-5667",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 3500
+    },
+    {
+        "name": "Air Comfort Solutions",
+        "phone": "(918) 236-9208",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 5200
+    },
+    {
+        "name": "Air Solutions",
+        "phone": "(918) 241-2362",
+        "address": "Tulsa, OK",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Impact Heating & Air LLC",
+        "phone": "(918) 516-2366",
+        "address": "Tulsa, OK",
+        "rating": 4.9,
+        "review_count": 450
+    },
+    {
+        "name": "Quality Heating, Cooling, Plumbing & Electric",
+        "phone": "(918) 248-8990",
+        "address": "Tulsa, OK",
+        "rating": 4.8,
+        "review_count": 2100
+    }
+]

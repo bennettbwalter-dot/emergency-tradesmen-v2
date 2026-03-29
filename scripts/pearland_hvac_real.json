@@ -1,0 +1,37 @@
+[
+    {
+        "name": "1-800-Plumber +Air",
+        "phone": "(281) 412-4284",
+        "address": "Pearland, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "A Pro Air Heating and A/C",
+        "phone": "(832) 662-3551",
+        "address": "Pearland, TX",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Stalwart Air Conditioning & Heating Services",
+        "phone": "(281) 825-5971",
+        "address": "Pearland, TX",
+        "rating": 4.7,
+        "review_count": 320
+    },
+    {
+        "name": "AKKO Air Conditioning & Heating Services",
+        "phone": "(281) 485-6490",
+        "address": "Pearland, TX",
+        "rating": 4.6,
+        "review_count": 210
+    },
+    {
+        "name": "Pearland Air",
+        "phone": "(281) 485-4627",
+        "address": "Pearland, TX",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

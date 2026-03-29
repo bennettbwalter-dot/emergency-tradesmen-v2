@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Burton Electrical & Plumbing Solutions (BEPS)",
+        "phone": "01283 684041",
+        "address": "307 Shobnall St, Burton upon Trent, DE14 2HS",
+        "website": "https://bepsltd.co.uk/"
+    },
+    {
+        "name": "PH Plumbing & Heating",
+        "phone": "01283 684041",
+        "address": "Burton-on-Trent",
+        "website": "https://ph-plumbing-and-heating.co.uk/"
+    },
+    {
+        "name": "Absolute Heating",
+        "phone": "01283 329465",
+        "address": "Unit 12 Royle Farm Business Park, Drakelow, Burton Upon Trent",
+        "website": "https://absolute-heating.co.uk/"
+    },
+    {
+        "name": "Burton upon Trent Plumbing Services",
+        "phone": "01283 378030",
+        "address": "Burton upon Trent",
+        "website": "https://burtonupontrentemergencyplumbing.co.uk/"
+    },
+    {
+        "name": "No1 PHD",
+        "phone": "0800 6906777",
+        "address": "Burton-upon-Trent",
+        "website": "https://no1phd.co.uk/"
+    }
+]

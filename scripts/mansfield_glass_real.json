@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Windshields R Us Mansfield",
+        "phone": "1-800-633-4098",
+        "address": "Mansfield, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Clear Perfection Windshield & Repair",
+        "phone": "817-473-1678",
+        "address": "Mansfield, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Mansfield Auto Glass",
+        "phone": "(817) 865-5407",
+        "address": "Mansfield, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Dr K's Windshield Repair",
+        "phone": "(469) 297-3992",
+        "address": "Mansfield, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

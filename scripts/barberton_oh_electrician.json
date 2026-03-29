@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Barberton, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "Jennings Heating, Cooling & Plumbing",
+        "phone": "330-784-1286",
+        "address": "Barberton, OH",
+        "website": "https://jenningsheating.com"
+    },
+    {
+        "name": "Tri-County Electric Service",
+        "phone": "440-542-0735",
+        "address": "Barberton, OH",
+        "website": "https://tricountyelectricservice.com"
+    },
+    {
+        "name": "Blind & Sons",
+        "phone": "330-753-7711",
+        "address": "Barberton, OH",
+        "website": "https://blindandsons.com"
+    }
+]

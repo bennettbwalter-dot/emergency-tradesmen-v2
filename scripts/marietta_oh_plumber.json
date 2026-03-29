@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "740-410-0025",
+        "address": "Marietta, OH",
+        "website": "https://mrrooter.com"
+    },
+    {
+        "name": "Grogg's Home Services",
+        "phone": "304-863-3553",
+        "address": "Marietta, OH",
+        "website": "https://groggs.com"
+    },
+    {
+        "name": "Extreme Plumbing & Drain",
+        "phone": "681-229-2126",
+        "address": "Marietta, OH",
+        "website": "https://extremeplumbingmov.com"
+    },
+    {
+        "name": "Law Plumbing",
+        "phone": "304-991-0488",
+        "address": "Marietta, OH",
+        "website": "https://lawplumbingservices.com"
+    }
+]

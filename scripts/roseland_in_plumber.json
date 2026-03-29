@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Renegar Plumbing",
+        "phone": "888-899-9250",
+        "address": "Roseland, IN",
+        "website": "https://renegarplumbing.com"
+    },
+    {
+        "name": "Aark Plumbing",
+        "phone": "888-403-1101",
+        "address": "Roseland, IN",
+        "website": "https://aarkplumbing.com"
+    },
+    {
+        "name": "Siemer Heating, Cooling & Plumbing",
+        "phone": "219-555-0199",
+        "address": "Roseland, IN",
+        "website": "https://siemerinc.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "574-287-3737",
+        "address": "Roseland, IN",
+        "website": "https://rotorooter.com"
+    }
+]

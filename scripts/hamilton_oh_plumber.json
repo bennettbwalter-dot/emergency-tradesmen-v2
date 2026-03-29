@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter Hamilton",
+        "phone": "(513) 541-4615",
+        "address": "Hamilton, OH",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Hamilton Plumbers",
+        "phone": "(888) 838-3054",
+        "address": "Hamilton, OH",
+        "website": "https://byersplumbing.com"
+    },
+    {
+        "name": "Down To Earth Plumbing",
+        "phone": "(888) 488-8509",
+        "address": "Hamilton, OH",
+        "website": "https://downtoearthplumbing.com"
+    },
+    {
+        "name": "AA Plumbing",
+        "phone": "(513) 758-6237",
+        "address": "Hamilton, OH",
+        "website": "https://aaplumbing.com"
+    }
+]

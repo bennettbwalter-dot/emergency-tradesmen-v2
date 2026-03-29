@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Certified Towing Authority",
+        "phone": "(763) 888-4869",
+        "address": "Saint Paul, MN",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "St Paul Towing Service",
+        "phone": "(651) 424-1562",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "St Paul Towing Company",
+        "phone": "(651) 401-7874",
+        "address": "Saint Paul, MN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Twin Cities Transport",
+        "phone": "(651) 300-4444",
+        "address": "Saint Paul, MN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Saint Paul Recovery",
+        "phone": "(651) 500-0505",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

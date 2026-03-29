@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Low Price Auto Glass Bryan",
+        "phone": "(979) 330-5098",
+        "address": "Bryan, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "George's Auto Glass Bryan",
+        "phone": "(979) 977-6150",
+        "address": "Bryan, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "ACME Glass Bryan",
+        "phone": "(979) 822-1577",
+        "address": "Bryan, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "AutoGlassOnly Bryan",
+        "phone": "1-866-410-5628",
+        "address": "Bryan, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 80
+    }
+]

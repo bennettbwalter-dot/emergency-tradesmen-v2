@@ -1,0 +1,26 @@
+[
+    {
+        "name": "A-1 Electrical Services",
+        "phone": "(281) 392-7228",
+        "address": "Katy, TX",
+        "website": null
+    },
+    {
+        "name": "Abacus Electrical Repair",
+        "phone": "(713) 766-3833",
+        "address": "Katy, TX",
+        "website": "https://abacusplumbing.net"
+    },
+    {
+        "name": "Brandt Electric",
+        "phone": "(281) 693-3383",
+        "address": "Katy, TX",
+        "website": null
+    },
+    {
+        "name": "Mister Sparky Electrical",
+        "phone": "(281) 599-9473",
+        "address": "Katy, TX",
+        "website": "https://mistersparky.com"
+    }
+]

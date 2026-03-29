@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Chesapeake",
+        "phone": "757-671-2129",
+        "address": "Chesapeake, VA",
+        "rating": 4.9,
+        "review_count": 271
+    },
+    {
+        "name": "Richardson Plumbing Co.",
+        "phone": "+1757-547-8759",
+        "address": "Chesapeake, VA",
+        "rating": 5.0,
+        "review_count": 50
+    },
+    {
+        "name": "Get Lit Electrical, Plumbing",
+        "phone": "+1757-351-4865",
+        "address": "Chesapeake, VA",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "Premier Plumbing Chesapeake",
+        "phone": "(757) 436-7901",
+        "address": "Chesapeake, VA",
+        "rating": 4.8,
+        "review_count": 131
+    },
+    {
+        "name": "911 Home Repair Specialists",
+        "phone": "757-910-0911",
+        "address": "Chesapeake, VA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

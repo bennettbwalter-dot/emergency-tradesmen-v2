@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Baltimore Glass Pro",
+        "phone": "(301) 447-0011",
+        "address": "Baltimore, MD",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Expedited Glass",
+        "phone": "(240) 815-9002",
+        "address": "Baltimore, MD",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "The Glass Consultants Baltimore",
+        "phone": "(410) 807-8700",
+        "address": "Baltimore, MD",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Hodges Window & Glass",
+        "phone": "(410) 686-1389",
+        "address": "Baltimore, MD",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Smith Auto Glass",
+        "phone": "(410) 342-2677",
+        "address": "Baltimore, MD",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

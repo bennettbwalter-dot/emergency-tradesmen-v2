@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Clean Team Scotland",
+        "phone": "0141 363 0349",
+        "address": "Glasgow",
+        "website": "https://cleanteamscotland.uk/"
+    },
+    {
+        "name": "Absolutely Clean Glasgow",
+        "phone": "0800 458 4901",
+        "address": "Glasgow",
+        "website": "https://absolutelycleanglasgow.co.uk/"
+    },
+    {
+        "name": "Response Bioclean Glasgow",
+        "phone": "03337720638",
+        "address": "Glasgow Head Office",
+        "website": "https://responsebioclean.com/"
+    },
+    {
+        "name": "Rainbow Restoration Glasgow East",
+        "phone": "0141 204 1235",
+        "address": "Unit 31, 1 Viking Road, Brownsburn Industrial Estate, Airdrie, ML6 9SE",
+        "website": "https://specialistcleaning-glasgow-east.co.uk/"
+    },
+    {
+        "name": "Glasgow Plumbing Services",
+        "phone": "0141-530-1315",
+        "address": "272 Bath Street, Glasgow, G2 4JR",
+        "website": "https://glasgowplumbingservices.co.uk/"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Benjamin Franklin Plumbing of Wichita",
+        "phone": "(316) 776-4842",
+        "address": "Wichita, KS",
+        "website": "https://benjaminfranklinplumbing.com"
+    },
+    {
+        "name": "American Services",
+        "phone": "(316) 633-5866",
+        "address": "Wichita, KS",
+        "website": "https://americanservicesofks.com"
+    },
+    {
+        "name": "Eck Services",
+        "phone": "(620) 220-1752",
+        "address": "Wichita, KS",
+        "website": "https://eckelectric.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing of Wichita, KS",
+        "phone": "(316) 247-9759",
+        "address": "Wichita, KS",
+        "website": "https://mrrooter.com"
+    }
+]

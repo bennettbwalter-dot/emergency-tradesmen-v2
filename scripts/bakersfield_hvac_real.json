@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Can Do Crew",
+        "phone": "(661) 588-6444",
+        "address": "Bakersfield, CA",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "Elite Air Service",
+        "phone": "(661) 410-8390",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Holders AC & Heating",
+        "phone": "(661) 493-8704",
+        "address": "Bakersfield, CA",
+        "rating": 4.7,
+        "review_count": 850
+    },
+    {
+        "name": "On Call Heating and Air Conditioning",
+        "phone": "(661) 619-6887",
+        "address": "Bakersfield, CA",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Stockdale Air Conditioning & Heating",
+        "phone": "(661) 397-5507",
+        "address": "Bakersfield, CA",
+        "rating": 4.6,
+        "review_count": 420
+    }
+]

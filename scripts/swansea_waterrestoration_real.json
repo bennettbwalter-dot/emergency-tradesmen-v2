@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Propertyserve Swansea",
+        "phone": "01792 709 195",
+        "address": "Unit 2, Llwyn y Graig, Gorseinon, Swansea SA4 9WG",
+        "website": "https://propertyserve-services.co.uk/"
+    },
+    {
+        "name": "Swift Fire & Flood Restore",
+        "phone": "02922 460 014",
+        "address": "Suite 1, 1st Floor, 3 High Street, Pontardawe, Swansea SA8 4HU",
+        "website": "https://swiftleakdetection.co.uk/"
+    },
+    {
+        "name": "RapidDry Restoration Swansea",
+        "phone": "07814 508352",
+        "address": "Swansea",
+        "website": "https://rapiddry.co.uk/"
+    },
+    {
+        "name": "APT ICC Swansea",
+        "phone": "0800 0723 773",
+        "address": "Swansea",
+        "website": "https://apt-icc.co.uk/"
+    },
+    {
+        "name": "Flash Restorations Swansea",
+        "phone": "0800 123 4567",
+        "address": "Swansea",
+        "website": "https://flashrestorations.com/"
+    }
+]

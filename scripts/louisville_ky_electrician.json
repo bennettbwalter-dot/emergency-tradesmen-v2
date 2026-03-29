@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Advantage Enterprises of Southern Indiana",
+        "phone": "(812) 697-9005",
+        "address": "Louisville, KY",
+        "website": "https://advantageenterprisesofsouthernindiana.com"
+    },
+    {
+        "name": "Allen Electrical",
+        "phone": "(502) 636-4357",
+        "address": "Louisville, KY",
+        "website": "https://allenelectrical.com"
+    },
+    {
+        "name": "Delta Services",
+        "phone": "(502) 473-1996",
+        "address": "Louisville, KY",
+        "website": "https://deltaservicesllc.com"
+    },
+    {
+        "name": "Mister Sparky of Louisville",
+        "phone": "(502) 749-7419",
+        "address": "Louisville, KY",
+        "website": "https://mistersparky.com"
+    }
+]

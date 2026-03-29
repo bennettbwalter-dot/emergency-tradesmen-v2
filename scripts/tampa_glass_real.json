@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Glass Doctor of Tampa Bay",
+        "phone": "(813) 452-6463",
+        "address": "Tampa, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Quality Windows and Doors",
+        "phone": "(813) 203-9761",
+        "address": "Tampa, FL",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Door and Glass Services Company",
+        "phone": "(813) 413-7406",
+        "address": "Tampa, FL",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "The Glass Depot",
+        "phone": "(813) 802-6111",
+        "address": "Tampa, FL",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

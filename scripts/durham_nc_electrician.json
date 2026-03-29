@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Volt Doctors",
+        "phone": "(919) 236-7167",
+        "address": "Durham, NC",
+        "website": "https://durhamelectricalservices.com"
+    },
+    {
+        "name": "MSS-Ortiz",
+        "phone": "(919) 382-0832",
+        "address": "Durham, NC",
+        "website": "https://mssortiz.com"
+    },
+    {
+        "name": "Blantons Air Electrical",
+        "phone": "(919) 298-2105",
+        "address": "Durham, NC",
+        "website": "https://blantonsair.com"
+    },
+    {
+        "name": "PowerHouse Electric of NC",
+        "phone": "(919) 362-1608",
+        "address": "Durham, NC",
+        "website": "https://pheofnc.com"
+    }
+]

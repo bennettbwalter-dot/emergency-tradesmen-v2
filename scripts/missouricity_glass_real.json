@@ -1,0 +1,42 @@
+[
+    {
+        "name": "American Windshield Replacement & Auto Glass",
+        "phone": "(281) 800-3069",
+        "address": "Missouri City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Blue Diamond Auto Glass",
+        "phone": "832-773-2220",
+        "address": "Missouri City, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "TLC Auto Glass Missouri City",
+        "phone": "(713) 686-1111",
+        "address": "Missouri City, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Texan Glass Missouri City",
+        "phone": "(281) 296-6200",
+        "address": "Missouri City, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Missouri City Windshield",
+        "phone": "(832) 279-9439",
+        "address": "Missouri City, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 110
+    }
+]

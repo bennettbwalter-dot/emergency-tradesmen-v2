@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Larry & Sons",
+        "phone": "(301) 733-5428",
+        "address": "Smithsburg, MD",
+        "website": "https://larryandsons.com"
+    },
+    {
+        "name": "Power Source Electric, Inc.",
+        "phone": "(301) 685-0029",
+        "address": "Smithsburg, MD",
+        "website": "https://powersourceele.com"
+    },
+    {
+        "name": "Maryland Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Smithsburg, MD",
+        "website": "http://moorepowerelectrical.com"
+    },
+    {
+        "name": "JPS Electrical Services",
+        "phone": "(443) 617-4538",
+        "address": "Smithsburg, MD",
+        "website": "https://jpselectricalservices.com"
+    }
+]

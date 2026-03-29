@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Mr. Plumber by Williams Comfort Air",
+        "phone": "(317) 660-4919",
+        "address": "Indianapolis, IN",
+        "rating": 4.9,
+        "review_count": 5000
+    },
+    {
+        "name": "Home Heroes Plumbing Heating & Air",
+        "phone": "(463) 232-6757",
+        "address": "Indianapolis, IN",
+        "rating": 4.5,
+        "review_count": 120
+    },
+    {
+        "name": "Summers Plumbing Heating & Cooling",
+        "phone": "(317) 207-6573",
+        "address": "Indianapolis, IN",
+        "rating": 4.9,
+        "review_count": 2379
+    },
+    {
+        "name": "Williams Comfort Air",
+        "phone": "(317) 660-6992",
+        "address": "Indianapolis, IN",
+        "rating": 4.8,
+        "review_count": 3500
+    },
+    {
+        "name": "Roto-Rooter Plumbing & Water Cleanup",
+        "phone": "(317) 542-0121",
+        "address": "Indianapolis, IN",
+        "rating": 4.7,
+        "review_count": 800
+    }
+]

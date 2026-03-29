@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Just Electric",
+        "phone": "(412) 377-3506",
+        "address": "Penn Hills, PA",
+        "website": "https://pittsburghelectrician.org"
+    },
+    {
+        "name": "Omni Electric",
+        "phone": "(724) 828-0122",
+        "address": "Penn Hills, PA",
+        "website": "https://omnielectricpa.com"
+    },
+    {
+        "name": "Phillips Electrical Services",
+        "phone": "(412) 882-8038",
+        "address": "Penn Hills, PA",
+        "website": "https://phillipselectricalpgh.com"
+    },
+    {
+        "name": "South Hills Electric Heating and Cooling LLC",
+        "phone": "(412) 341-4328",
+        "address": "Penn Hills, PA",
+        "website": "https://southhillselectric.com"
+    }
+]

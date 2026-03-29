@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Roto-Rooter Baytown",
+        "phone": "281-479-7600",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Emergency Plumbing Squad of Baytown",
+        "phone": "(855) 812-2311",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Rapid Response Plumbing",
+        "phone": "(855) 998-5787",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Craftsman Plumbing Baytown",
+        "phone": "1-888-900-9087",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Abacus Plumbing Baytown",
+        "phone": "713-766-3833",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Texas Quality Plumbing",
+        "phone": "(346) 636-2418",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Mr. Rooter Plumbing in Baytown",
+        "phone": "(281) 761-2113",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Blackmon Plumbing",
+        "phone": "+1-281-427-8325",
+        "address": "Baytown, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Donco Electric Baytown",
+        "phone": "(855) 740-3232",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Doctor Home Experts Electric",
+        "phone": "(713) 944-3362",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "RHK Electrical Baytown",
+        "phone": "(832) 948-6019",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Mister Sparky of Baytown",
+        "phone": "(281) 907-8418",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "John Moore Services",
+        "phone": "(713) 730-2525",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "City Electric Supply",
+        "phone": "(832) 514-2917",
+        "address": "Baytown, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Emergency Locksmith Baytown",
+        "phone": "(713) 554-8192",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Baytown Locksmith",
+        "phone": "(281) 968-4607",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Locksmith Baytown TX",
+        "phone": "(281) 336-8486",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Pop-A-Lock of Baytown",
+        "phone": "(281) 488-1919",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "All Town Locksmith",
+        "phone": "(877) 533-5061",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Key Me Baytown",
+        "phone": "(346) 236-0510",
+        "address": "Baytown, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "No.1 Towing Columbus",
+        "phone": "(614) 705-0584",
+        "address": "Columbus, OH",
+        "rating": 5.0,
+        "review_count": 850
+    },
+    {
+        "name": "Always Ready Towing",
+        "phone": "(614) 365-1038",
+        "address": "Columbus, OH",
+        "rating": 5.0,
+        "review_count": 450
+    },
+    {
+        "name": "Reliable Towing and Services",
+        "phone": "(614) 483-5458",
+        "address": "Columbus, OH",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Columbus Towing & Recovery",
+        "phone": "(614) 276-2580",
+        "address": "Columbus, OH",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Buckeye Towing",
+        "phone": "(614) 443-4111",
+        "address": "Columbus, OH",
+        "rating": 4.8,
+        "review_count": 150
+    }
+]

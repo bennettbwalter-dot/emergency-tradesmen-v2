@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Chicago Roofing Solutions",
+        "phone": "(312) 588-6969",
+        "address": "Chicago, IL",
+        "website": "https://chicagoroofingsolution.com/"
+    },
+    {
+        "name": "Chicago Flat Roof Company",
+        "phone": "(312) 667-4440",
+        "address": "Chicago, IL",
+        "website": "https://chicagoflatroofcompany.com/"
+    },
+    {
+        "name": "Emergency Roofs",
+        "phone": "(773) 770-4730",
+        "address": "332 S. Michigan Ave, Suite #10-p796, Chicago, IL 60604",
+        "website": "https://emergencyroofs.com/"
+    },
+    {
+        "name": "Squarexteriors",
+        "phone": "(312) 714-3499",
+        "address": "Chicago, IL",
+        "website": "https://squarexteriors.com/"
+    },
+    {
+        "name": "Guardian Roofing Systems",
+        "phone": "(708) 123-4567",
+        "address": "Chicago, IL",
+        "website": "https://guardianroofingsystems.com/"
+    }
+]

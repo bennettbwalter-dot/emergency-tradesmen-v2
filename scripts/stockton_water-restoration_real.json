@@ -1,0 +1,32 @@
+[
+    {
+        "name": "RMC",
+        "phone": "(209) 547-2220",
+        "address": "7233 C E Dixon Street, Suite 200, Stockton, CA 95206",
+        "website": "https://rmc.com/"
+    },
+    {
+        "name": "Reactic Restoration of Stockton",
+        "phone": "(209) 779-0098",
+        "address": "1031 N El Dorado St, Unit A, Stockton, CA 95202",
+        "website": "https://reacticrestoration.com/"
+    },
+    {
+        "name": "ServiceMaster of Stockton",
+        "phone": "(209) 370-0062",
+        "address": "Stockton, CA",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "SERVPRO of Stockton",
+        "phone": "(209) 477-3090",
+        "address": "Stockton, CA",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Vital Restoration",
+        "phone": "(866) 887-6115",
+        "address": "Stockton, CA",
+        "website": "https://vitalrestoration.com/"
+    }
+]

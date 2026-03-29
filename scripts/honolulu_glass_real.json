@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Akamai Glass",
+        "phone": "(808) 833-1111",
+        "address": "Honolulu, HI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "The Glass Guru of Honolulu",
+        "phone": "(808) 234-4260",
+        "address": "Honolulu, HI",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "RE: Screen & Glass",
+        "phone": "(808) 330-6058",
+        "address": "Honolulu, HI",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Ace Auto Glass Kalihi",
+        "phone": "(808) 847-3217",
+        "address": "Honolulu, HI",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    }
+]

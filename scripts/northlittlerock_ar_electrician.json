@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Little Rock",
+        "phone": "(501) 238-6632",
+        "address": "North Little Rock, AR",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Globe Electric",
+        "phone": "(501) 351-3357",
+        "address": "North Little Rock, AR",
+        "website": "https://globeelectricar.com"
+    },
+    {
+        "name": "Globe Electric NLR",
+        "phone": "(501) 351-3357",
+        "address": "North Little Rock, AR",
+        "website": "https://globeelectricar.com"
+    },
+    {
+        "name": "Grayer Electric Inc",
+        "phone": "(501) 337-8494",
+        "address": "North Little Rock, AR",
+        "website": "https://angi.com"
+    }
+]

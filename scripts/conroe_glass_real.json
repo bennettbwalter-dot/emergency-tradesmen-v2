@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Area Wide Auto Glass Conroe",
+        "phone": "(832) 409-0760",
+        "address": "Conroe, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Texan Glass Conroe",
+        "phone": "(281) 296-6200",
+        "address": "Conroe, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Able Glass Company",
+        "phone": "(936) 756-4115",
+        "address": "Conroe, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Apple Glass Company Conroe",
+        "phone": "(936) 756-4444",
+        "address": "Conroe, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "AutoGlassOnly Conroe",
+        "phone": "(866) 410-5628",
+        "address": "Conroe, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 95
+    }
+]

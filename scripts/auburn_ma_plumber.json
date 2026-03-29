@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter",
+        "phone": "(508) 860-9343",
+        "address": "Auburn, MA",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Daniel's Plumbing",
+        "phone": "(508) 753-8386",
+        "address": "Auburn, MA",
+        "website": "https://daniels-plumbing.net"
+    },
+    {
+        "name": "Plumbing Wizardz",
+        "phone": "(855) 426-6880",
+        "address": "Auburn, MA",
+        "website": "https://plumbingwizardz.com"
+    },
+    {
+        "name": "Landry Mechanical Inc",
+        "phone": "(508) 987-0080",
+        "address": "Auburn, MA",
+        "website": "https://landrymechanical.com"
+    }
+]

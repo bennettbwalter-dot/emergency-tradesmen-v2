@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Senninger Plumbing Company, Inc.",
+        "phone": "(629) 263-7257",
+        "address": "5800 Kingpost Court, Lexington, KY 40509",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 187
+    },
+    {
+        "name": "Fayette Heating & Air",
+        "phone": "(859) 900-2441",
+        "address": "701 E 7th St, Lexington, KY 40505",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 520
+    },
+    {
+        "name": "Complete Home Solutions",
+        "phone": "(859) 309-8055",
+        "address": "1205 Brockway Dr, Lexington, KY 40505",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Clog Busterz",
+        "phone": "(859) 459-0099",
+        "address": "1318 S Broadway Ste 110, Lexington, KY 40504",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 42
+    },
+    {
+        "name": "Johnny Pipewrench",
+        "phone": "(859) 484-8144",
+        "address": "Lexington, KY 40503",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 115
+    },
+    {
+        "name": "The King’s Helper",
+        "phone": "(859) 533-3140",
+        "address": "200 West Vine St, STE 210, Lexington, KY 40507",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 24
+    },
+    {
+        "name": "Dauenhauer Plumbing | Heating & Air",
+        "phone": "(859) 303-9988",
+        "address": "143 Moore Dr, Lexington, KY 40503",
+        "trade": "plumber",
+        "rating": 4.5,
+        "review_count": 310
+    },
+    {
+        "name": "DBE Electrical Services",
+        "phone": "(859) 242-6101",
+        "address": "3326 Gandy Court, Lexington, KY 40503",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 104
+    },
+    {
+        "name": "Wolfe Electrical Service",
+        "phone": "(859) 904-4537",
+        "address": "Lexington, KY 40511",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 65
+    },
+    {
+        "name": "Blue Sky Electric Company",
+        "phone": "(859) 309-6617",
+        "address": "1025 Winchester Rd Ste 3, Lexington, KY 40505",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 38
+    },
+    {
+        "name": "Dixon Electric Inc",
+        "phone": "(859) 252-7369",
+        "address": "1904 Maratimo Ct, Lexington, KY 40511",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 52
+    },
+    {
+        "name": "Able Service",
+        "phone": "(629) 284-2579",
+        "address": "PO Box 816, Shelbyville, KY 40066",
+        "trade": "electrician",
+        "rating": 4.6,
+        "review_count": 90
+    },
+    {
+        "name": "Electrical Power Systems",
+        "phone": "(859) 271-4122",
+        "address": "2249-B Bluegrass Pkwy, Lexington, KY 40504",
+        "trade": "electrician",
+        "rating": 4.4,
+        "review_count": 15
+    },
+    {
+        "name": "M&M Electric",
+        "phone": "(859) 299-8431",
+        "address": "1016 Eastland Dr, Lexington, KY 40505",
+        "trade": "electrician",
+        "rating": 4.5,
+        "review_count": 21
+    },
+    {
+        "name": "Willis Klein",
+        "phone": "(859) 253-3333",
+        "address": "1018 South Broadway, Lexington, KY 40504",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 156
+    },
+    {
+        "name": "Pop-A-Lock",
+        "phone": "(859) 253-6736",
+        "address": "1509 Nicholasville Rd, Lexington, KY 40503",
+        "trade": "locksmith",
+        "rating": 4.6,
+        "review_count": 210
+    },
+    {
+        "name": "The Flying Locksmiths",
+        "phone": "(859) 309-1786",
+        "address": "444 Lewis Hargett Cir Ste 140, Lexington, KY 40503",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 45
+    },
+    {
+        "name": "Acme Locksmith",
+        "phone": "(859) 255-6262",
+        "address": "1009 South Broadway, Lexington, KY 40504",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 58
+    },
+    {
+        "name": "KeyMe Locksmiths",
+        "phone": "(859) 479-3837",
+        "address": "2312 Nicholasville Rd, Lexington, KY 40503",
+        "trade": "locksmith",
+        "rating": 4.0,
+        "review_count": 12
+    },
+    {
+        "name": "J.I.G. Locksmith",
+        "phone": "(859) 420-5591",
+        "address": "Lexington, KY 40517",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 32
+    }
+]

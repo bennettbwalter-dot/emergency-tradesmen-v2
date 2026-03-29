@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Roto-Rooter",
+        "phone": "317-787-4631",
+        "address": "Fishers, IN",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Alvin's Plumbing",
+        "phone": "888-565-9676",
+        "address": "Fishers, IN",
+        "website": "https://alvinsplumbingllc.com"
+    },
+    {
+        "name": "Mister Quik Home Services",
+        "phone": "317-468-9170",
+        "address": "Fishers, IN",
+        "website": "https://mrquikhomeservices.com"
+    },
+    {
+        "name": "Royal Flush Plumbing",
+        "phone": "765-642-7066",
+        "address": "Fishers, IN",
+        "website": "https://royalflushplumbingofindiana.com"
+    }
+]

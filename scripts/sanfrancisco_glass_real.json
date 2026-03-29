@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Abel Glass Co.",
+        "phone": "(415) 401-9725",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Best Offer Glass",
+        "phone": "(415) 310-6948",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "MAZ Glass",
+        "phone": "510-428-3950",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Roxy Glass SF",
+        "phone": "415-901-6600",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "ALBA's Glass Inc.",
+        "phone": "+1 (510) 644-2522",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "San Francisco Auto Glass Repair",
+        "phone": "(415) 671-8860",
+        "address": "San Francisco, CA",
+        "trade": "glazier",
+        "rating": 4.6,
+        "review_count": 300
+    }
+]

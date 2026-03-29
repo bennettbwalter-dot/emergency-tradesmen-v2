@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bristol Smith Electric",
+        "phone": "(262) 210-7292",
+        "address": "Bristol, WI",
+        "website": "https://www.us.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Bristol, WI",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Miller Electrical Enterprises",
+        "phone": "(262) 654-2176",
+        "address": "Bristol, WI",
+        "website": "https://millerelectricent.com"
+    },
+    {
+        "name": "American Electric Company",
+        "phone": "(847) 252-1757",
+        "address": "Bristol, WI",
+        "website": "https://american-electric-company.com"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Glass Doctor of Omaha",
+        "phone": "(402) 334-8308",
+        "address": "Omaha, NE",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Windshield Go",
+        "phone": "(402) 268-0024",
+        "address": "Omaha, NE",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Car Glass Repair",
+        "phone": "(402) 205-1611",
+        "address": "Omaha, NE",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

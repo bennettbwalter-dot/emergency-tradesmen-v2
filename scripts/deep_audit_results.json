@@ -1,0 +1,466 @@
+[
+  {
+    "city": "Dallas",
+    "count": 8929
+  },
+  {
+    "city": "Houston",
+    "count": 1628
+  },
+  {
+    "city": "Austin",
+    "count": 282
+  },
+  {
+    "city": "San Antonio",
+    "count": 377
+  },
+  {
+    "city": "Miami",
+    "count": 450
+  },
+  {
+    "city": "Tampa",
+    "count": 409
+  },
+  {
+    "city": "Orlando",
+    "count": 492
+  },
+  {
+    "city": "Jacksonville",
+    "count": 400
+  },
+  {
+    "city": "Phoenix",
+    "count": 2192
+  },
+  {
+    "city": "Scottsdale",
+    "count": 645
+  },
+  {
+    "city": "Mesa",
+    "count": 541
+  },
+  {
+    "city": "Tucson",
+    "count": 381
+  },
+  {
+    "city": "Detroit",
+    "count": 720
+  },
+  {
+    "city": "Cleveland",
+    "count": 382
+  },
+  {
+    "city": "Pittsburgh",
+    "count": 534
+  },
+  {
+    "city": "Buffalo",
+    "count": 365
+  },
+  {
+    "city": "Seattle",
+    "count": 933
+  },
+  {
+    "city": "Portland",
+    "count": 733
+  },
+  {
+    "city": "Tacoma",
+    "count": 368
+  },
+  {
+    "city": "Spokane",
+    "count": 172
+  },
+  {
+    "city": "Los Angeles",
+    "count": 2182
+  },
+  {
+    "city": "San Diego",
+    "count": 629
+  },
+  {
+    "city": "San Francisco",
+    "count": 496
+  },
+  {
+    "city": "Sacramento",
+    "count": 438
+  },
+  {
+    "city": "Fort Worth",
+    "count": 60
+  },
+  {
+    "city": "Arlington",
+    "count": 300
+  },
+  {
+    "city": "Plano",
+    "count": 365
+  },
+  {
+    "city": "Irving",
+    "count": 348
+  },
+  {
+    "city": "Garland",
+    "count": 5
+  },
+  {
+    "city": "Frisco",
+    "count": 264
+  },
+  {
+    "city": "McKinney",
+    "count": 3
+  },
+  {
+    "city": "El Paso",
+    "count": 60
+  },
+  {
+    "city": "Corpus Christi",
+    "count": 75
+  },
+  {
+    "city": "Lubbock",
+    "count": 51
+  },
+  {
+    "city": "Laredo",
+    "count": 6
+  },
+  {
+    "city": "Amarillo",
+    "count": 45
+  },
+  {
+    "city": "Midland",
+    "count": 3
+  },
+  {
+    "city": "Abilene",
+    "count": 3
+  },
+  {
+    "city": "Denton",
+    "count": 6
+  },
+  {
+    "city": "Waco",
+    "count": 6
+  },
+  {
+    "city": "Carrollton",
+    "count": 6
+  },
+  {
+    "city": "Richardson",
+    "count": 3
+  },
+  {
+    "city": "Lewisville",
+    "count": 5
+  },
+  {
+    "city": "Round Rock",
+    "count": 5
+  },
+  {
+    "city": "College Station",
+    "count": 4
+  },
+  {
+    "city": "Tyler",
+    "count": 4
+  },
+  {
+    "city": "Pearland",
+    "count": 4
+  },
+  {
+    "city": "Sugar Land",
+    "count": 4
+  },
+  {
+    "city": "Allen",
+    "count": 4
+  },
+  {
+    "city": "League City",
+    "count": 3
+  },
+  {
+    "city": "Conroe",
+    "count": 3
+  },
+  {
+    "city": "New Braunfels",
+    "count": 3
+  },
+  {
+    "city": "Edinburg",
+    "count": 2
+  },
+  {
+    "city": "Mission",
+    "count": 2
+  },
+  {
+    "city": "Bryan",
+    "count": 3
+  },
+  {
+    "city": "Pharr",
+    "count": 2
+  },
+  {
+    "city": "Baytown",
+    "count": 2
+  },
+  {
+    "city": "Missouri City",
+    "count": 2
+  },
+  {
+    "city": "Temple",
+    "count": 2
+  },
+  {
+    "city": "Flower Mound",
+    "count": 3
+  },
+  {
+    "city": "North Richland Hills",
+    "count": 2
+  },
+  {
+    "city": "Mansfield",
+    "count": 2
+  },
+  {
+    "city": "Victoria",
+    "count": 2
+  },
+  {
+    "city": "Rowlett",
+    "count": 2
+  },
+  {
+    "city": "Harlingen",
+    "count": 2
+  },
+  {
+    "city": "Pflugerville",
+    "count": 2
+  },
+  {
+    "city": "San Marcos",
+    "count": 2
+  },
+  {
+    "city": "Euless",
+    "count": 2
+  },
+  {
+    "city": "Port Arthur",
+    "count": 4
+  },
+  {
+    "city": "Grapevine",
+    "count": 2
+  },
+  {
+    "city": "Indianapolis",
+    "count": 62
+  },
+  {
+    "city": "Columbus",
+    "count": 64
+  },
+  {
+    "city": "Charlotte",
+    "count": 64
+  },
+  {
+    "city": "Las Vegas",
+    "count": 3
+  },
+  {
+    "city": "New York City",
+    "count": 9
+  },
+  {
+    "city": "Chicago",
+    "count": 8
+  },
+  {
+    "city": "Philadelphia",
+    "count": 6
+  },
+  {
+    "city": "San Jose",
+    "count": 3
+  },
+  {
+    "city": "Denver",
+    "count": 3
+  },
+  {
+    "city": "Oklahoma City",
+    "count": 5
+  },
+  {
+    "city": "Nashville",
+    "count": 3
+  },
+  {
+    "city": "Washington, D.C.",
+    "count": 2
+  },
+  {
+    "city": "Boston",
+    "count": 4
+  },
+  {
+    "city": "Memphis",
+    "count": 2
+  },
+  {
+    "city": "Louisville",
+    "count": 2
+  },
+  {
+    "city": "Baltimore",
+    "count": 2
+  },
+  {
+    "city": "Milwaukee",
+    "count": 2
+  },
+  {
+    "city": "Albuquerque",
+    "count": 2
+  },
+  {
+    "city": "Fresno",
+    "count": 3
+  },
+  {
+    "city": "Kansas City",
+    "count": 1
+  },
+  {
+    "city": "Atlanta",
+    "count": 6
+  },
+  {
+    "city": "Colorado Springs",
+    "count": 2
+  },
+  {
+    "city": "Omaha",
+    "count": 1
+  },
+  {
+    "city": "Raleigh",
+    "count": 2
+  },
+  {
+    "city": "Long Beach",
+    "count": 2
+  },
+  {
+    "city": "Virginia Beach",
+    "count": 2
+  },
+  {
+    "city": "Oakland",
+    "count": 2
+  },
+  {
+    "city": "Minneapolis",
+    "count": 2
+  },
+  {
+    "city": "Tulsa",
+    "count": 2
+  },
+  {
+    "city": "New Orleans",
+    "count": 2
+  },
+  {
+    "city": "Wichita",
+    "count": 2
+  },
+  {
+    "city": "Bakersfield",
+    "count": 2
+  },
+  {
+    "city": "Aurora",
+    "count": 2
+  },
+  {
+    "city": "Honolulu",
+    "count": 2
+  },
+  {
+    "city": "Anaheim",
+    "count": 2
+  },
+  {
+    "city": "Santa Ana",
+    "count": 4
+  },
+  {
+    "city": "Riverside",
+    "count": 3
+  },
+  {
+    "city": "Lexington",
+    "count": 1
+  },
+  {
+    "city": "Stockton",
+    "count": 1
+  },
+  {
+    "city": "Henderson",
+    "count": 1
+  },
+  {
+    "city": "St. Paul",
+    "count": 2
+  },
+  {
+    "city": "St. Louis",
+    "count": 2
+  },
+  {
+    "city": "Cincinnati",
+    "count": 2
+  },
+  {
+    "city": "Anchorage",
+    "count": 2
+  },
+  {
+    "city": "Greensboro",
+    "count": 1
+  },
+  {
+    "city": "Lincoln",
+    "count": 1
+  }
+]

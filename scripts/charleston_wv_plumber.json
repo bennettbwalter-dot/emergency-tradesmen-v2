@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Al Marino Inc Charleston",
+        "phone": "(304) 345-9000",
+        "address": "Charleston, WV",
+        "website": "https://almarinoinc.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing Charleston WV",
+        "phone": "(304) 223-4004",
+        "address": "Charleston, WV",
+        "website": "https://mrrooter.com"
+    },
+    {
+        "name": "Roto-Rooter Charleston WV",
+        "phone": "(304) 346-6409",
+        "address": "Charleston, WV",
+        "website": "https://rotorooter.com"
+    }
+]

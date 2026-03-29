@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Artisan Electric La Vista",
+        "phone": "(402) 714-2427",
+        "address": "La Vista, NE",
+        "website": "https://electricartisan.com"
+    },
+    {
+        "name": "Victory Electrical Contractors Inc",
+        "phone": "(402) 639-3387",
+        "address": "La Vista, NE",
+        "website": "https://victoryelectrical.com"
+    },
+    {
+        "name": "Vision Electrical Services",
+        "phone": "(402) 203-5554",
+        "address": "La Vista, NE",
+        "website": "https://visionelectrical.services"
+    },
+    {
+        "name": "Allfab Electric",
+        "phone": "(402) 510-2379",
+        "address": "La Vista, NE",
+        "website": "https://allfabelectric.com"
+    }
+]

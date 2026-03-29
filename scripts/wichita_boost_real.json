@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Benjamin Franklin Plumbing of Wichita",
+        "phone": "(316) 712-4250",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1100
+    },
+    {
+        "name": "Eck Services",
+        "phone": "(620) 220-1752",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "Gotta Guy Plumbing & Home Services",
+        "phone": "(316) 768-0511",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "On Time Plumbing, Heating & Air",
+        "phone": "(316) 721-5055",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Simmons Plumbing",
+        "phone": "316-655-5202",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 150
+    },
+    {
+        "name": "Dusk till Dawn Services",
+        "phone": "+1 316-665-1747",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "American Services",
+        "phone": "(316) 633-5866",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Mr. Rooter Plumbing of Wichita",
+        "phone": "316-262-2700",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "Comfort Systems",
+        "phone": "(316) 265-7831",
+        "address": "Wichita, KS",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Mister Sparky of Wichita",
+        "phone": "(316) 500-7611",
+        "address": "Wichita, KS",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "On Time Electric",
+        "phone": "(316) 721-5055",
+        "address": "Wichita, KS",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Decker Electric",
+        "phone": "(316) 265-8182",
+        "address": "Wichita, KS",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Elite Electric Company",
+        "phone": "(316) 258-2166",
+        "address": "Wichita, KS",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "Eck Services Electric",
+        "phone": "(620) 220-1752",
+        "address": "Wichita, KS",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Locksmith Pro Wichita",
+        "phone": "(316) 747-9025",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Dash Locksmith",
+        "phone": "(316) 444-5003",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "City Locks & Keys",
+        "phone": "(316) 854-5281",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Mr. Speedy Locksmith",
+        "phone": "(316) 448-0743",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Wichita Mobile Locksmith",
+        "phone": "(316) 747-9024",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Steel Locksmith",
+        "phone": "(316) 531-5013",
+        "address": "Wichita, KS",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 60
+    }
+]

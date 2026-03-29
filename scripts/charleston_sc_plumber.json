@@ -1,0 +1,32 @@
+[
+    {
+        "name": "C&C Myers Plumbing",
+        "phone": "(843) 806-0131",
+        "address": "Charleston, SC",
+        "website": "https://ccmyersservice.com"
+    },
+    {
+        "name": "Roto-Rooter Charleston",
+        "phone": "(843) 556-4320",
+        "address": "Charleston, SC",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Blue Collars Plumbing",
+        "phone": "(843) 256-8509",
+        "address": "Charleston, SC",
+        "website": "https://bluecollars.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing Charleston",
+        "phone": "(843) 410-6063",
+        "address": "Charleston, SC",
+        "website": "https://mrrooter.com"
+    },
+    {
+        "name": "Purpose Plumbing",
+        "phone": "(843) 793-0461",
+        "address": "Charleston, SC",
+        "website": "https://purposeplumbingsc.com"
+    }
+]

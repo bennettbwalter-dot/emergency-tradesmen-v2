@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Vander Hyde Services",
+        "phone": "(616) 319-2125",
+        "address": "Grand Rapids, MI",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Grand Rapids",
+        "phone": "616-233-9188",
+        "address": "Grand Rapids, MI",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Penning Plumbing Heating",
+        "phone": "616-538-0220",
+        "address": "Grand Rapids, MI",
+        "rating": 4.9,
+        "review_count": 131
+    },
+    {
+        "name": "Emergency Plumbing Squad GR",
+        "phone": "(855) 812-2311",
+        "address": "Grand Rapids, MI",
+        "rating": 4.9,
+        "review_count": 107
+    },
+    {
+        "name": "Grand Rapids Emergency Plumbers",
+        "phone": "(616) 555-0101",
+        "address": "Grand Rapids, MI",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

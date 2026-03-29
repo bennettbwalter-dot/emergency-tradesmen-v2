@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Aspinwall Plumbing & Heating",
+        "phone": "(617) 539-7672",
+        "address": "Quincy, MA",
+        "website": "https://aspinwallplumbing.com"
+    },
+    {
+        "name": "Johnson Bros. Plumbing",
+        "phone": "(617) 479-9911",
+        "address": "Quincy, MA",
+        "website": "https://thejohnsonbros.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "(617) 479-8028",
+        "address": "Quincy, MA",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "In A Flash Heating & Plumbing",
+        "phone": "(781) 572-2575",
+        "address": "Quincy, MA",
+        "website": "https://flash-plumbing.com"
+    }
+]

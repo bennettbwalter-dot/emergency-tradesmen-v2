@@ -1,0 +1,226 @@
+[
+    {
+        "name": "Roto-Rooter DC",
+        "phone": "(202) 291-2113",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "First Class Plumbing",
+        "phone": "866-989-2837",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Fry Plumbing, Heating, and Air Conditioning Corp.",
+        "phone": "(202) 543-4884",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "The Drain Guys",
+        "phone": "(301) 867-7632",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Emerald Plumbing Co.",
+        "phone": "(240) 345-9920",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Len The Plumber DC",
+        "phone": "(800) 950-4619",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Spartan Plumbing",
+        "phone": "1-800-882-0194",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 950
+    },
+    {
+        "name": "Brian B. Quick",
+        "phone": "(855) 859-3097",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "United Air Temp Plumbing",
+        "phone": "(202) 796-7990",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "DJ's Plumbing & Electrical",
+        "phone": "(202) 977-9013",
+        "address": "Washington, DC",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Lucas Electric",
+        "phone": "(240) 624-4553",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Kolb Electric DC",
+        "phone": "(877) 287-1179",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Kellogg Electric",
+        "phone": "1-888-887-7580",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Michael Bonsby Electric",
+        "phone": "(301) 245-2008",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Reyco Electric",
+        "phone": "(301) 843-1848",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Knovats LLC",
+        "phone": "(301) 283-6323",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 95
+    },
+    {
+        "name": "Precise Building Services",
+        "phone": "(202) 827-2214",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 160
+    },
+    {
+        "name": "John Goudie Electric",
+        "phone": "(301) 945-7688",
+        "address": "Washington, DC",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Emergency DC Locksmith",
+        "phone": "(202)-753-3681",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Mr. Locksmith DC",
+        "phone": "(202) 630-4979",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "DC Locksmith Service",
+        "phone": "(202) 753-3643",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "DC Local Locksmith Experts",
+        "phone": "(202) 830-0706",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Speedy Locksmith DC",
+        "phone": "(202) 765-3656",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Washington Locksmiths",
+        "phone": "(202) 759-2155",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "DC Locksmith Squad",
+        "phone": "(202) 899-7726",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "24 Hour Locksmith Service DC",
+        "phone": "(202) 618-4664",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "24 Hour Locksmith Washington DC Company",
+        "phone": "(202) 759-7772",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "DC LockSmith",
+        "phone": "(202) 524-1040",
+        "address": "Washington, DC",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Arrow Wrecker Service",
+        "phone": "(316) 522-8156",
+        "address": "Wichita, KS",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Collision Center of Andover",
+        "phone": "(316) 719-2100",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Kidds Towing",
+        "phone": "(316) 265-6284",
+        "address": "Wichita, KS",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Bud Roat",
+        "phone": "(316) 943-1441",
+        "address": "Wichita, KS",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "United Towing",
+        "phone": "(316) 524-7333",
+        "address": "Wichita, KS",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Excel Heating",
+        "phone": "07976 631347",
+        "address": "54 Kingsley Avenue, Rugby CV21 4JY",
+        "website": "https://excelheating.co.uk/"
+    },
+    {
+        "name": "A1 Gas Force Rugby",
+        "phone": "01788 877 407",
+        "address": "Rugby",
+        "website": "https://a1gfrugby.co.uk/"
+    },
+    {
+        "name": "Heating Care 4U",
+        "phone": "01788 220 943",
+        "address": "Rugby",
+        "website": "https://heatingcare4u.co.uk/"
+    },
+    {
+        "name": "The Boiler Doctors",
+        "phone": "07870606491",
+        "address": "Rugby",
+        "website": "https://theboilerdoctorsrugby.co.uk/"
+    },
+    {
+        "name": "Express Rugby Plumbing",
+        "phone": "0344 947 0953",
+        "address": "James Street, CV21 2SL, Rugby",
+        "website": "https://plumbingrugby247.co.uk/"
+    }
+]

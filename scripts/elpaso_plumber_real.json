@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Union Plumbing",
+        "phone": "(915) 562-4241",
+        "address": "El Paso, TX",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Reliable Plumbing",
+        "phone": "(915) 588-2561",
+        "address": "El Paso, TX",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter El Paso",
+        "phone": "(915) 400-6101",
+        "address": "El Paso, TX",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "On Call Plumbers of El Paso",
+        "phone": "(915) 228-4008",
+        "address": "El Paso, TX",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Surety Plumbing",
+        "phone": "(915) 255-0779",
+        "address": "El Paso, TX",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

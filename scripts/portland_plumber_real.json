@@ -1,0 +1,37 @@
+[
+    {
+        "name": "D&F Plumbing, Heating and Cooling",
+        "phone": "(503) 664-0938",
+        "address": "Portland, OR",
+        "rating": 4.5,
+        "review_count": 1902
+    },
+    {
+        "name": "Pilot Plumbing",
+        "phone": "(503) 462-1102",
+        "address": "Portland, OR",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Prime Emergency Plumbing",
+        "phone": "(971) 599-2238",
+        "address": "Portland, OR",
+        "rating": 4.9,
+        "review_count": 200
+    },
+    {
+        "name": "Roto-Rooter Portland",
+        "phone": "(503) 937-1993",
+        "address": "Portland, OR",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "(503) 610-4183",
+        "address": "Portland, OR",
+        "rating": 4.8,
+        "review_count": 5535
+    }
+]

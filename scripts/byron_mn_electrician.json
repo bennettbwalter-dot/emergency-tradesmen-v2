@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Iconic Electric",
+        "phone": "(507) 923-1173",
+        "address": "Byron, MN",
+        "website": "https://calliconic.com"
+    },
+    {
+        "name": "Paxton Electric",
+        "phone": "(507) 710-1448",
+        "address": "Byron, MN",
+        "website": "https://paxtonelectric.net"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Byron, MN",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Electrician Pros",
+        "phone": "(877) 847-6084",
+        "address": "Byron, MN",
+        "website": "https://moorepowerelectrical.com"
+    }
+]

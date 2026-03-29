@@ -1,0 +1,37 @@
+[
+    {
+        "name": "McCarthy's One Hour Heating & Air Conditioning",
+        "phone": "(402) 316-4584",
+        "address": "Omaha, NE",
+        "rating": 4.7,
+        "review_count": 1577
+    },
+    {
+        "name": "Burton A/C, Heating, Plumbing, Electrical",
+        "phone": "(402) 788-4236",
+        "address": "Omaha, NE",
+        "rating": 4.9,
+        "review_count": 6900
+    },
+    {
+        "name": "Getzschman Heating",
+        "phone": "(402) 235-6727",
+        "address": "Omaha, NE",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Advanced Heating & Air Conditioning",
+        "phone": "(402) 359-2213",
+        "address": "Omaha, NE",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Eyman Plumbing, Heating & Air",
+        "phone": "(402) 731-2727",
+        "address": "Omaha, NE",
+        "rating": 4.6,
+        "review_count": 1200
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "FasGlass Residential Window Glass Repair",
+        "phone": "(757) 633-1613",
+        "address": "Virginia Beach, VA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Ameriglass",
+        "phone": "(757) 437-1246",
+        "address": "Virginia Beach, VA",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "American Auto Glass LLC",
+        "phone": "(757) 695-3236",
+        "address": "Virginia Beach, VA",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Low Price Auto Glass VA",
+        "phone": "(757) 437-2700",
+        "address": "Virginia Beach, VA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "AutoGlassOnly.com",
+        "phone": "1-866-410-5628",
+        "address": "Virginia Beach, VA",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

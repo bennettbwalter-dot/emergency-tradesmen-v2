@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pride Electric",
+        "phone": "(201) 745-1480",
+        "address": "Bayonne, NJ",
+        "website": "https://prideelectricnj.com"
+    },
+    {
+        "name": "D & M Master Electric",
+        "phone": "(973) 604-5628",
+        "address": "Bayonne, NJ",
+        "website": "https://dmmasterelectric.com"
+    },
+    {
+        "name": "Xpert Electric",
+        "phone": "(201) 393-2420",
+        "address": "Bayonne, NJ",
+        "website": "https://callxe.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Bayonne, NJ",
+        "website": "https://oconnorselectrical.com"
+    }
+]

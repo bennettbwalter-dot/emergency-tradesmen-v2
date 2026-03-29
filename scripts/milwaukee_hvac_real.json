@@ -1,0 +1,37 @@
+[
+    {
+        "name": "West Allis Heating & AC",
+        "phone": "(414) 246-1160",
+        "address": "Milwaukee, WI",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Capital Heating, Cooling, and Electric",
+        "phone": "(262) 220-7020",
+        "address": "Milwaukee, WI",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Blau Sudden Service",
+        "phone": "(414) 626-1991",
+        "address": "Milwaukee, WI",
+        "rating": 4.7,
+        "review_count": 950
+    },
+    {
+        "name": "Donsol Heating & Cooling",
+        "phone": "(414) 369-6523",
+        "address": "Milwaukee, WI",
+        "rating": 4.6,
+        "review_count": 120
+    },
+    {
+        "name": "Iron Fireman",
+        "phone": "(414) 246-0610",
+        "address": "Milwaukee, WI",
+        "rating": 4.5,
+        "review_count": 310
+    }
+]

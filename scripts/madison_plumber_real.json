@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Action Plumbing Madison",
+        "phone": "(608) 837-3638",
+        "address": "Madison, WI",
+        "rating": 4.9,
+        "review_count": 1500
+    },
+    {
+        "name": "All Comfort Services Madison",
+        "phone": "(608) 838-7300",
+        "address": "Madison, WI",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "On Call Plumbers Madison",
+        "phone": "(608) 422-4664",
+        "address": "Madison, WI",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "Avid Plumbing Madison",
+        "phone": "(608) 555-0101",
+        "address": "Madison, WI",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "RHD Plumbing Madison",
+        "phone": "(608) 555-0102",
+        "address": "Madison, WI",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

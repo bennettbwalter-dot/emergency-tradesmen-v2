@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pearson Electric Inc",
+        "phone": "(513) 844-6443",
+        "address": "Hamilton, OH",
+        "website": "https://pearsonelectricinc.net"
+    },
+    {
+        "name": "Radin Electric",
+        "phone": "(513) 844-6833",
+        "address": "Hamilton, OH",
+        "website": "https://radinelectric.com"
+    },
+    {
+        "name": "Kidwell Electric",
+        "phone": "(513) 479-5051",
+        "address": "Hamilton, OH",
+        "website": "https://kidwellelectricohio.com"
+    },
+    {
+        "name": "Impressive Electric",
+        "phone": "(513) 940-5183",
+        "address": "Hamilton, OH",
+        "website": "https://impressiveelectric.com"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Atlanta Towing Service",
+        "phone": "(404) 500-0500",
+        "address": "Atlanta, GA",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Always Ready Towing Atlanta",
+        "phone": "(404) 330-2222",
+        "address": "Atlanta, GA",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Marietta Wrecker Service",
+        "phone": "(770) 422-6614",
+        "address": "Atlanta, GA",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Southside Towing",
+        "phone": "(404) 363-2222",
+        "address": "Atlanta, GA",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Peach State Towing",
+        "phone": "(404) 434-1212",
+        "address": "Atlanta, GA",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

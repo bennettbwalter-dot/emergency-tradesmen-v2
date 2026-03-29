@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "(844) 484-2612",
+        "address": "Halfway, MD",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Lew Sader Electric",
+        "phone": "(888) 851-5284",
+        "address": "Halfway, MD",
+        "website": "https://lewsaderelectric.com"
+    },
+    {
+        "name": "Kline Electrical Services",
+        "phone": "(240) 465-5463",
+        "address": "Halfway, MD",
+        "website": "https://gokline.com"
+    },
+    {
+        "name": "Bailey & Shipp Electric",
+        "phone": "(410) 457-3507",
+        "address": "Halfway, MD",
+        "website": "https://needelectric.com"
+    }
+]

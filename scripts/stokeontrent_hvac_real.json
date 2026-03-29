@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Andrew Wareham Heating & Plumbing",
+        "phone": "07989 323 051",
+        "address": "21 Kenilworth Walk, Stoke-on-Trent ST10 1WA",
+        "website": "https://stokeplumbingandgas.co.uk/"
+    },
+    {
+        "name": "Stoke Plumbing & Gas",
+        "phone": "07989 323 051",
+        "address": "Stoke-on-Trent",
+        "website": "https://stokeplumbingandgas.co.uk/"
+    },
+    {
+        "name": "Butco",
+        "phone": "0333 366 1121",
+        "address": "Stoke-on-Trent",
+        "website": "https://butco.com/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Ltd",
+        "phone": "01782 970 247",
+        "address": "Stoke-on-Trent",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "BrightBurn Solutions",
+        "phone": "01782 651 516",
+        "address": "Stoke-on-Trent",
+        "website": "https://brightburnsolutions.co.uk/"
+    }
+]

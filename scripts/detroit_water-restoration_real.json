@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Restoration 1 of Metro Detroit",
+        "phone": "(734) 999-3687",
+        "address": "Detroit, MI",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "Modernistic",
+        "phone": "(800) 609-1000",
+        "address": "Detroit, MI",
+        "website": "https://modernistic.com/"
+    },
+    {
+        "name": "Zeppelin Cleaning Services",
+        "phone": "(313) 731-0025",
+        "address": "Detroit, MI",
+        "website": "https://zepservices.com/"
+    },
+    {
+        "name": "SERVPRO of Downtown Detroit",
+        "phone": "(313) 234-4744",
+        "address": "Detroit, MI",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "Rock City Water Damage Restoration",
+        "phone": "(313) 474-8054",
+        "address": "Detroit, MI",
+        "website": "https://rockcitywaterdamagerestoration.com/"
+    }
+]

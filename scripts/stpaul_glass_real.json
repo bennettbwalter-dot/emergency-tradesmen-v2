@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Hurley's Glass & Mirror",
+        "phone": "612-369-7728",
+        "address": "St. Paul, MN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Noble Glass",
+        "phone": "651-486-7733",
+        "address": "St. Paul, MN",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Onsite Glass",
+        "phone": "763-413-9400",
+        "address": "St. Paul, MN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Heppner's Auto Body",
+        "phone": "651-424-4848",
+        "address": "St. Paul, MN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Auto Glass Today",
+        "phone": "651-633-8300",
+        "address": "St. Paul, MN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

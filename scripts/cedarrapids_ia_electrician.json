@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Munson Electric Inc",
+        "phone": "(319) 364-6654",
+        "address": "Cedar Rapids, IA",
+        "website": "https://munsonelectric.com"
+    },
+    {
+        "name": "Dependable Electric",
+        "phone": "(319) 929-5560",
+        "address": "Cedar Rapids, IA",
+        "website": "https://dependableelectricia.com"
+    },
+    {
+        "name": "A&B Electric Inc",
+        "phone": "(319) 362-2760",
+        "address": "Cedar Rapids, IA",
+        "website": null
+    },
+    {
+        "name": "ESCO Electric",
+        "phone": "(319) 377-6655",
+        "address": "Cedar Rapids, IA",
+        "website": null
+    }
+]

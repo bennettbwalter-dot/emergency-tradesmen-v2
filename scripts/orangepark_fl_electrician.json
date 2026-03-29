@@ -1,0 +1,26 @@
+[
+    {
+        "name": "American Electric",
+        "phone": "(904) 721-4044",
+        "address": "Orange Park, FL",
+        "website": "https://americanelectricofjacksonville.com"
+    },
+    {
+        "name": "David Gray Electrical Services",
+        "phone": "(904) 605-8190",
+        "address": "Orange Park, FL",
+        "website": "https://davidgrayonline.com"
+    },
+    {
+        "name": "Parker Electric LLC",
+        "phone": "(904) 644-8922",
+        "address": "Orange Park, FL",
+        "website": "https://parkerelectric.co"
+    },
+    {
+        "name": "Alderman and Masters Electric LLC",
+        "phone": "(904) 375-8946",
+        "address": "Orange Park, FL",
+        "website": "https://aldermanmasterselectric.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Intensa Dry",
+        "phone": "(469) 214-5858",
+        "address": "Plano, TX",
+        "website": "https://intensadry.com/"
+    },
+    {
+        "name": "ServiceMaster Restore by Restoration Specialists",
+        "phone": "(214) 855-7782",
+        "address": "Plano, TX",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Trident General Contracting",
+        "phone": "(972) 535-6490",
+        "address": "Plano, TX",
+        "website": "https://tridentgcs.com/"
+    },
+    {
+        "name": "ATI Restoration",
+        "phone": "(972) 424-6444",
+        "address": "Plano, TX",
+        "website": "https://atirestoration.com/"
+    },
+    {
+        "name": "SERVPRO of Central and West Plano",
+        "phone": "(945) 348-5804",
+        "address": "Plano, TX",
+        "website": "https://servpro.com/"
+    }
+]

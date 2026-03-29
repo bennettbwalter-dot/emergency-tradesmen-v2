@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Benjamin Franklin Plumbing of Charlotte",
+        "phone": "(980) 870-1006",
+        "address": "Charlotte, NC",
+        "rating": 4.9,
+        "review_count": 100000
+    },
+    {
+        "name": "ER Services",
+        "phone": "(704) 846-5371",
+        "address": "Charlotte, NC",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Providence Plumbing",
+        "phone": "(704) 741-3857",
+        "address": "Charlotte, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "AAA City Plumbing Inc.",
+        "phone": "(704) 527-0205",
+        "address": "Charlotte, NC",
+        "rating": 4.9,
+        "review_count": 1064
+    },
+    {
+        "name": "Parks Heating, Cooling, Plumbing",
+        "phone": "(704) 275-1017",
+        "address": "Charlotte, NC",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

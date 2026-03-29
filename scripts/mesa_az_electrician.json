@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ACT Electric",
+        "phone": "(520) 610-7569",
+        "address": "Mesa, AZ",
+        "website": "https://actelectricians.com"
+    },
+    {
+        "name": "Meade Electrical Services",
+        "phone": "(480) 374-9786",
+        "address": "Mesa, AZ",
+        "website": "https://mesaazelectricians.com"
+    },
+    {
+        "name": "White Brothers Electric",
+        "phone": "(480) 807-4044",
+        "address": "Mesa, AZ",
+        "website": "https://whitebrotherselectric.com"
+    },
+    {
+        "name": "Tucker Hill Services",
+        "phone": "(602) 661-3659",
+        "address": "Mesa, AZ",
+        "website": "https://tuckerhillaz.com"
+    }
+]

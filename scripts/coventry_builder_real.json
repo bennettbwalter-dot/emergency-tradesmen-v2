@@ -1,0 +1,32 @@
+[
+    {
+        "name": "CGT Carpentry & Building Coventry",
+        "phone": "07583 268 939",
+        "address": "Coventry",
+        "website": "https://cgtcarpentry.co.uk/"
+    },
+    {
+        "name": "Emergency Boardups Coventry",
+        "phone": "0247 798 1084",
+        "address": "Coventry",
+        "website": "https://emergencyboardups.co.uk/"
+    },
+    {
+        "name": "Emergency Property Maintenance Coventry",
+        "phone": "07825723324",
+        "address": "87 Vine Street, Coventry, CV1 5NH",
+        "website": "https://emergencyroofrepairs.uk/"
+    },
+    {
+        "name": "Checkatrade Approved Builders Coventry",
+        "phone": "0247 798 1084",
+        "address": "Coventry",
+        "website": "https://checkatrade.com/"
+    },
+    {
+        "name": "MyBuilder Verified Coventry",
+        "phone": "07583 268 939",
+        "address": "Coventry",
+        "website": "https://mybuilder.com/"
+    }
+]

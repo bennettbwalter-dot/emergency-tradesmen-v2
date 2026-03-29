@@ -1,0 +1,42 @@
+[
+    {
+        "name": "MetroGlass Pro",
+        "phone": "(332) 999-3846",
+        "address": "New York, NY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Florian Glass Service",
+        "phone": "(201) 863-4770",
+        "address": "New York, NY",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "BULLETPROOF GLASS NY",
+        "phone": "(212) 222-5449",
+        "address": "New York, NY",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "NYC Glass & Door Company",
+        "phone": "(212) 222-9424",
+        "address": "New York, NY",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "GlassKa NYC",
+        "phone": "(718) 951-3610",
+        "address": "New York, NY",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    }
+]

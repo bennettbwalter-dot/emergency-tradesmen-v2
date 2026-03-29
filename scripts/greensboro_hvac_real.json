@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Michael & Son Services",
+        "phone": "(336) 278-1258",
+        "address": "Greensboro, NC",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Go Green Plumbing, Heating & Air",
+        "phone": "(336) 936-5420",
+        "address": "Greensboro, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Triad Sheet Metal & Mechanical",
+        "phone": "(336) 313-2295",
+        "address": "Greensboro, NC",
+        "rating": 4.9,
+        "review_count": 85
+    },
+    {
+        "name": "Webb Heating & Air Conditioning",
+        "phone": "(336) 993-4003",
+        "address": "Greensboro, NC",
+        "rating": 4.8,
+        "review_count": 200
+    },
+    {
+        "name": "Johns Plumbing, Heating & Air Conditioning",
+        "phone": "(336) 294-2301",
+        "address": "Greensboro, NC",
+        "rating": 4.7,
+        "review_count": 150
+    }
+]

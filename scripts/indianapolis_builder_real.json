@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Midwest Remediation",
+        "phone": "(317) 826-0940",
+        "address": "Indianapolis, IN",
+        "website": "https://mwremediation.com/"
+    },
+    {
+        "name": "First Onsite",
+        "phone": "(317) 791-3862",
+        "address": "3610 Shelby St, Indianapolis, IN 46227",
+        "website": "https://firstonsite.com/"
+    },
+    {
+        "name": "ServiceMaster DSI - Indianapolis",
+        "phone": "(317) 434-1901",
+        "address": "Indianapolis, IN",
+        "website": "https://servicemasterrestore.com/"
+    },
+    {
+        "name": "Hays + Sons Complete Restoration",
+        "phone": "(317) 788-0911",
+        "address": "Indianapolis, IN",
+        "website": "https://haysandsons.com/"
+    },
+    {
+        "name": "Kustom US",
+        "phone": "(877) 458-7866",
+        "address": "Indianapolis, IN",
+        "website": "https://kustom.us/"
+    }
+]

@@ -1,0 +1,194 @@
+[
+    {
+        "name": "On Call Plumbers NRH",
+        "phone": "(682) 478-3131",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Roto-Rooter NRH",
+        "phone": "817-834-6412",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Molberg Plumbing NRH",
+        "phone": "(817) 476-9963",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Exe Plumbing",
+        "phone": "877-775-9948",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "AAA AUGER Plumbing Services",
+        "phone": "(817) 283-7800",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "DNA Plumbing Services",
+        "phone": "(214) 225-8328",
+        "address": "North Richland Hills, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Cano Electric NRH",
+        "phone": "817-242-2826",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Hop2It Electrical",
+        "phone": "(817) 538-6622",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Mr. Electric NRH",
+        "phone": "(817) 585-2993",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Flash Licensed Electrician",
+        "phone": "(817) 677-0914",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Bacon Plumbing Heating Air Electric",
+        "phone": "(972) 284-7600",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Baker Brothers NRH",
+        "phone": "214-296-2136",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "Daniel Electric NRH",
+        "phone": "817-481-8606",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Berkeys NRH",
+        "phone": "972-464-2460",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 550
+    },
+    {
+        "name": "Flourish Emergency Electrician",
+        "phone": "(817) 406-1678",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 90
+    },
+    {
+        "name": "United Emergency Electrician",
+        "phone": "(817) 415-0286",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Smithfield Emergency Electrician",
+        "phone": "+1 817-873-8904",
+        "address": "North Richland Hills, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 80
+    },
+    {
+        "name": "24 Hour Locksmith NRH",
+        "phone": "682-253-4636",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "North Richland Hills Locksmiths",
+        "phone": "817-357-4091",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Key Me Locksmiths NRH",
+        "phone": "(682) 267-3005",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "1st Class Locksmith NRH",
+        "phone": "(214) 880-8250",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "North Richland Hills Locksmith",
+        "phone": "(682) 245-0762",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Texas Locksmith Store NRH",
+        "phone": "817-677-6037",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Capitol Locksmith Service",
+        "phone": "817-458-3308",
+        "address": "North Richland Hills, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    }
+]

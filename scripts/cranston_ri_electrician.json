@@ -1,0 +1,26 @@
+[
+    {
+        "name": "B&K Electric",
+        "phone": "(401) 739-8666",
+        "address": "Cranston, RI",
+        "website": "https://bandkelectric.net"
+    },
+    {
+        "name": "GEM Plumbing, Heating, Cooling & Electrical",
+        "phone": "(833) 222-2953",
+        "address": "Cranston, RI",
+        "website": "https://askgem.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(401) 400-3336",
+        "address": "Cranston, RI",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Kelco Electric",
+        "phone": "(401) 349-4366",
+        "address": "Cranston, RI",
+        "website": "https://kelcoelectricri.com"
+    }
+]

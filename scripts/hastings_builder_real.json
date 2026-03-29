@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Hastings Builders Company",
+        "phone": "01444 410113",
+        "address": "3 Haywood Way, Hastings, TN35 4PL",
+        "website": "https://hastingsbuilderscompany.co.uk/"
+    },
+    {
+        "name": "All in 1 Building Hastings",
+        "phone": "01424 232873",
+        "address": "121 London Rd, Bexhill-on-Sea, TN39 3LB",
+        "website": "https://allin1roofingandbuilding.co.uk/"
+    },
+    {
+        "name": "Ideal Response Building Hastings",
+        "phone": "01424 612339",
+        "address": "Hastings",
+        "website": "https://idealresponse.co.uk/"
+    },
+    {
+        "name": "Around The Bend Building Hastings",
+        "phone": "01273 023260",
+        "address": "Hastings",
+        "website": "https://aroundthebendplumbing.co.uk/"
+    },
+    {
+        "name": "Hastings Property Emergency Repairs",
+        "phone": "01424 612339",
+        "address": "Hastings",
+        "website": "https://checkatrade.com/"
+    }
+]

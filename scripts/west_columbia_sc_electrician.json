@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Mister Sparky of Columbia",
+        "phone": "803-529-1128",
+        "address": "West Columbia, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "Fulmer Heating & Cooling",
+        "phone": "803-276-1553",
+        "address": "West Columbia, SC",
+        "website": "https://fulmerheatcool.com"
+    },
+    {
+        "name": "Rytec Electric",
+        "phone": "803-721-3734",
+        "address": "West Columbia, SC",
+        "website": "https://rytecelectric.com"
+    },
+    {
+        "name": "Carolina Conditions",
+        "phone": "803-233-7172",
+        "address": "West Columbia, SC",
+        "website": "https://carolinaconditions.com"
+    }
+]

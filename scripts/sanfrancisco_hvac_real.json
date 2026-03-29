@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Same Day Air Conditioning & Heating",
+        "phone": "(415) 299-5685",
+        "address": "San Francisco, CA",
+        "rating": 4.8,
+        "review_count": 240
+    },
+    {
+        "name": "Cabrillo Plumbing, Heating and Cooling",
+        "phone": "(415) 360-0560",
+        "address": "San Francisco, CA",
+        "rating": 4.7,
+        "review_count": 1100
+    },
+    {
+        "name": "AC Heating and Cooling Service Inc.",
+        "phone": "(415) 674-3292",
+        "address": "San Francisco, CA",
+        "rating": 4.6,
+        "review_count": 150
+    },
+    {
+        "name": "Magic Plumbing, Heating & Cooling",
+        "phone": "(415) 441-2255",
+        "address": "San Francisco, CA",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Lucky Air Inc.",
+        "phone": "(415) 862-2311",
+        "address": "San Francisco, CA",
+        "rating": 4.5,
+        "review_count": 95
+    }
+]

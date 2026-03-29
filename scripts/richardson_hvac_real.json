@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Willard Cooling, Heating, Plumbing, & Electrical",
+        "phone": "(469) 840-4743",
+        "address": "Richardson, TX",
+        "rating": 4.8,
+        "review_count": 1200
+    },
+    {
+        "name": "Baker Brothers Plumbing & Air Conditioning",
+        "phone": "(214) 892-2225",
+        "address": "Richardson, TX",
+        "rating": 4.9,
+        "review_count": 5200
+    },
+    {
+        "name": "Total Air & Heat",
+        "phone": "(972) 881-0020",
+        "address": "Richardson, TX",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Rescue Air and Plumbing",
+        "phone": "(972) 201-3253",
+        "address": "Richardson, TX",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Richardson AC Repair",
+        "phone": "(469) 214-5390",
+        "address": "Richardson, TX",
+        "rating": 4.7,
+        "review_count": 92
+    }
+]

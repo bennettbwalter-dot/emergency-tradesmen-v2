@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Whipple Service Champions",
+        "phone": "(801) 207-9882",
+        "address": "Salt Lake City, UT",
+        "website": "https://whippleplumbing.com"
+    },
+    {
+        "name": "All Utah Plumbing Heating Air",
+        "phone": "(801) 652-4755",
+        "address": "Salt Lake City, UT",
+        "website": "https://allutahplumbing.com"
+    },
+    {
+        "name": "Integrity Plumbing",
+        "phone": "(801) 628-3138",
+        "address": "Salt Lake City, UT",
+        "website": "https://integrityplumbingutah.com"
+    },
+    {
+        "name": "Beehive Plumbing",
+        "phone": "(801) 849-3842",
+        "address": "Salt Lake City, UT",
+        "website": "https://beehiveplumbing.com"
+    },
+    {
+        "name": "SameDay Heating Air Plumbing",
+        "phone": "(801) 726-3329",
+        "address": "Salt Lake City, UT",
+        "website": "https://samedayutah.com"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Robert Nelson Roofing",
+        "phone": "(888) 897-9811",
+        "address": "Redwood City, CA",
+        "website": "https://robertnelsonroofing.com/"
+    },
+    {
+        "name": "Roofing Redwood City",
+        "phone": "(650) 632-9735",
+        "address": "Redwood City, CA",
+        "website": "https://roofingredwoodcityca.com/"
+    },
+    {
+        "name": "Roof Express",
+        "phone": "(650) 666-5554",
+        "address": "Redwood City, CA",
+        "website": "https://roof-ex.com/"
+    },
+    {
+        "name": "Royal Roofing CA",
+        "phone": "(408) 418-2474",
+        "address": "Redwood City, CA",
+        "website": "https://royalroofingca.com/"
+    },
+    {
+        "name": "Redwood Roofing Pro",
+        "phone": "(650) 822-1222",
+        "address": "51 Broadway, Redwood City, CA",
+        "website": "https://redwoodroofingpro.homes/"
+    }
+]

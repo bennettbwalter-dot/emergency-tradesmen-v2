@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Roto-Rooter New Braunfels",
+        "phone": "830-608-1321",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "A1 Tri-County Plumbing",
+        "phone": "830-629-1757",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Plunger Pros",
+        "phone": "(830) 227-0720",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mr. Rooter Plumbing of New Braunfels",
+        "phone": "(830) 627-7977",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "M.E. Plumbing, LLC",
+        "phone": "(830) 627-7788",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Emergency Plumber LLC",
+        "phone": "(830) 123-4567",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "PlumbSmart",
+        "phone": "(210) 810-0810",
+        "address": "New Braunfels, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Lowry Electrical",
+        "phone": "(830) 237-6219",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Mr. Electric of New Braunfels",
+        "phone": "+1 830-626-8700",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Electrician Squad New Braunfels",
+        "phone": "(855) 930-6015",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "APEX Electrical, A/C & Heating",
+        "phone": "(830) 500-2444",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Royal Elite Electric",
+        "phone": "(830) 214-4444",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Afton Electric",
+        "phone": "(210) 260-2291",
+        "address": "New Braunfels, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 80
+    },
+    {
+        "name": "Locksmith New Braunfels TX",
+        "phone": "(830) 376-2933",
+        "address": "New Braunfels, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Locksmith Of New Braunfels",
+        "phone": "(830) 202-6198",
+        "address": "New Braunfels, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "iLocks of New Braunfels",
+        "phone": "(830) 850-0904",
+        "address": "New Braunfels, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "KeyMe Locksmiths New Braunfels",
+        "phone": "(830) 783-1776",
+        "address": "New Braunfels, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "The Key Depot",
+        "phone": "(830) 629-9226",
+        "address": "New Braunfels, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 350
+    }
+]

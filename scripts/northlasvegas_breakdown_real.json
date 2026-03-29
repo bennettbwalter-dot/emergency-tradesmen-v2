@@ -1,0 +1,37 @@
+[
+    {
+        "name": "NLV Towing",
+        "phone": "(702) 211-1333",
+        "address": "North Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "North Vegas Roadside",
+        "phone": "(702) 300-4444",
+        "address": "North Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Desert Valley Towing",
+        "phone": "(702) 322-2222",
+        "address": "North Las Vegas, NV",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Vegas Recovery",
+        "phone": "(702) 500-0505",
+        "address": "North Las Vegas, NV",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "All In Towing NLV",
+        "phone": "(702) 450-1222",
+        "address": "North Las Vegas, NV",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

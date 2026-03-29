@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Glasgow Boiler Repairs",
+        "phone": "0141 766 1511",
+        "address": "Glasgow",
+        "website": "https://glasgowboilerrepairs.co.uk/"
+    },
+    {
+        "name": "Glasgow Plumbing Services",
+        "phone": "0141 530 1315",
+        "address": "Glasgow",
+        "website": "https://glasgowplumbingservices.co.uk/"
+    },
+    {
+        "name": "Besafe 24-7",
+        "phone": "0141 374 0545",
+        "address": "Glasgow",
+        "website": "https://besafe24-7.co.uk/"
+    },
+    {
+        "name": "SwitchHeat",
+        "phone": "0141 459 0124",
+        "address": "Glasgow",
+        "website": "https://switch-heat.co.uk/"
+    },
+    {
+        "name": "Kwik Call Glasgow Ltd",
+        "phone": "0141 636 4080",
+        "address": "91 Deanston Drive, Glasgow, G41 3AL",
+        "website": "https://kwikcallplumbingandheating.com/"
+    }
+]

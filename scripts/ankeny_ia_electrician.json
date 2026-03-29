@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Gurnsey Electric",
+        "phone": "(515) 964-7004",
+        "address": "Ankeny, IA",
+        "website": "https://ankeny.org"
+    },
+    {
+        "name": "8x8 Electrical Contracting",
+        "phone": "(515) 208-7643",
+        "address": "Ankeny, IA",
+        "website": "https://ankeny.org"
+    },
+    {
+        "name": "Tesdell Electric",
+        "phone": "(515) 289-4000",
+        "address": "Ankeny, IA",
+        "website": "https://ankeny.org"
+    },
+    {
+        "name": "Baker Electric",
+        "phone": "(515) 288-6774",
+        "address": "Ankeny, IA",
+        "website": "https://ankeny.org"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "(877) 734-8969",
+        "address": "Auburn, MA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Cyr Electric Inc.",
+        "phone": "(508) 791-7235",
+        "address": "Auburn, MA",
+        "website": "https://cyrelectric.com"
+    },
+    {
+        "name": "Three Phase Electric",
+        "phone": "(800) 808-0114",
+        "address": "Auburn, MA",
+        "website": "https://wiremass.com"
+    },
+    {
+        "name": "Lindgren Electric",
+        "phone": "(508) 829-9808",
+        "address": "Auburn, MA",
+        "website": "https://lindgrenelectric.com"
+    }
+]

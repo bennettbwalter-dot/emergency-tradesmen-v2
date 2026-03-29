@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Able Group",
+        "phone": "01793 960 768",
+        "address": "Swindon",
+        "website": "https://able-group.co.uk/"
+    },
+    {
+        "name": "BSK Plumbing & Heating",
+        "phone": "01793 272526",
+        "address": "Swindon",
+        "website": "https://bskplumbingandheating.co.uk/"
+    },
+    {
+        "name": "AHS",
+        "phone": "01793 533577",
+        "address": "Swindon",
+        "website": "https://ahsheating.com/"
+    },
+    {
+        "name": "JGS Heating Engineers",
+        "phone": "07817 700 710",
+        "address": "Swindon",
+        "website": "https://jgsswindon.co.uk/"
+    },
+    {
+        "name": "Bubbles Boilers",
+        "phone": "01793 236191",
+        "address": "Swindon",
+        "website": "https://bubblesboilers.com/"
+    }
+]

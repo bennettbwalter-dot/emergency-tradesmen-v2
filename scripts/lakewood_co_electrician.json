@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tesla Electric",
+        "phone": "+1 303-842-4505",
+        "address": "Lakewood, CO",
+        "website": "https://teslaelectriccolorado.com"
+    },
+    {
+        "name": "The Speedy Electricians",
+        "phone": "(720) 617-8310",
+        "address": "Lakewood, CO",
+        "website": "https://thespeedyelectricians.com"
+    },
+    {
+        "name": "Constant Electric Service",
+        "phone": "(303) 214-9104",
+        "address": "Lakewood, CO",
+        "website": "https://constantelectricservice.com"
+    },
+    {
+        "name": "Electric Doctor",
+        "phone": "(303) 973-2551",
+        "address": "Lakewood, CO",
+        "website": "https://electricdoc.com"
+    }
+]

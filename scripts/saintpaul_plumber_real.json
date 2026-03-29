@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Metro Plumbing & Drains St Paul",
+        "phone": "(651) 766-8686",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Paul Bunyan Plumbing St Paul",
+        "phone": "(612) 340-1444",
+        "address": "Saint Paul, MN",
+        "rating": 4.8,
+        "review_count": 1500
+    },
+    {
+        "name": "Roto-Rooter St. Paul",
+        "phone": "(651) 227-0098",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 850
+    },
+    {
+        "name": "Start 2 Finish Plumbing",
+        "phone": "(612) 808-0220",
+        "address": "Saint Paul, MN",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Matt's Plumbing Solutions St Paul",
+        "phone": "(651) 300-1765",
+        "address": "Saint Paul, MN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

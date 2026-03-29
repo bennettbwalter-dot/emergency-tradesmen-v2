@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Granger, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "McCormick Electrical Services, Inc.",
+        "phone": "574-830-8118",
+        "address": "Granger, IN",
+        "website": "https://meservesu.com"
+    },
+    {
+        "name": "Granger Electrician Squad",
+        "phone": "855-930-6015",
+        "address": "Granger, IN",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Great Lakes Heating & Air Conditioning",
+        "phone": "574-498-7556",
+        "address": "Granger, IN",
+        "website": "https://greatlakesheating-ac.com"
+    }
+]

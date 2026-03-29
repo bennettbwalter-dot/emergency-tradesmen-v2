@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ohmega Electric LLC",
+        "phone": "812-686-5909",
+        "address": "Newburgh, IN",
+        "website": "https://ohmega-electric.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Newburgh, IN",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Mister Sparky",
+        "phone": "812-524-8777",
+        "address": "Newburgh, IN",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "J.E. Shekell, Inc.",
+        "phone": "812-425-9131",
+        "address": "Newburgh, IN",
+        "website": "https://shekell.com"
+    }
+]

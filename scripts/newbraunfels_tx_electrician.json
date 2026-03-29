@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Zellner Electric",
+        "phone": "(830) 515-5953",
+        "address": "New Braunfels, TX",
+        "website": "https://zellnerelectric.com"
+    },
+    {
+        "name": "Jeff Davis Electric",
+        "phone": "(210) 331-0553",
+        "address": "New Braunfels, TX",
+        "website": "https://jeffdaviselectric.com"
+    },
+    {
+        "name": "Bolt Electric",
+        "phone": "(210) 545-2658",
+        "address": "New Braunfels, TX",
+        "website": "https://boltelectricsa.com"
+    },
+    {
+        "name": "Fin Electric",
+        "phone": "(830) 305-7961",
+        "address": "New Braunfels, TX",
+        "website": "https://finelectricllc.com"
+    }
+]

@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Benjamin Franklin Plumbing San Marcos",
+        "phone": "(737) 766-5029",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Roto-Rooter San Marcos",
+        "phone": "(512) 504-7438",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Reliable Air & Plumbing",
+        "phone": "(512) 580-8837",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Radiant Plumbing & AC",
+        "phone": "(210) 294-6703",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 550
+    },
+    {
+        "name": "5J Plumbing",
+        "phone": "(830) 556-1466",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "A1 Tri-County Plumbing",
+        "phone": "(512) 353-8656",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "PlumbSmart",
+        "phone": "(210) 810-0810",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Reliant Plumbing San Marcos",
+        "phone": "(512) 399-6886",
+        "address": "San Marcos, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Jon Wayne Service Company",
+        "phone": "(210) 239-2892",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 650
+    },
+    {
+        "name": "O'Connor's Electrical San Marcos",
+        "phone": "(844) 484-2612",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Donco Electric San Marcos",
+        "phone": "(855) 740-3232",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Jireh Electric",
+        "phone": "(210) 771-0028",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "AirOne Rescue",
+        "phone": "(512) 607-9386",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Jeff Davis Electric",
+        "phone": "(512) 433-0394",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Ted Breihan Electric Co.",
+        "phone": "(512) 396-3300",
+        "address": "San Marcos, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "SOS Locksmith - San Marcos",
+        "phone": "(512) 643-2210",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "San Marcos Locksmith",
+        "phone": "(512) 900-6289",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "KeyMe Locksmiths San Marcos",
+        "phone": "(512) 764-5309",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Pros On Call San Marcos",
+        "phone": "(512) 643-7268",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "San Marcos Locksmiths",
+        "phone": "(512) 548-0635",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Tx Locksmith San Marcos",
+        "phone": "(512) 593-8421",
+        "address": "San Marcos, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

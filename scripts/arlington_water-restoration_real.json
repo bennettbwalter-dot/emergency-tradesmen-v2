@@ -1,0 +1,32 @@
+[
+    {
+        "name": "SERVPRO of East Arlington",
+        "phone": "(682) 708-1001",
+        "address": "Arlington, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "PuroClean Arlington",
+        "phone": "(817) 259-0995",
+        "address": "Arlington, TX",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "H2O Solutions",
+        "phone": "(281) 419-9943",
+        "address": "Arlington, TX",
+        "website": "https://h2osolutionstx.com/"
+    },
+    {
+        "name": "Water Emergency Team",
+        "phone": "(682) 400-4868",
+        "address": "Arlington, TX",
+        "website": "https://wateremergencyteam.com/"
+    },
+    {
+        "name": "ServiceMaster Advanced Restorations",
+        "phone": "(817) 783-9297",
+        "address": "Arlington, TX",
+        "website": "https://servicemasterrestore.com/"
+    }
+]

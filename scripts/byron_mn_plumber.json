@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hawk's Services",
+        "phone": "(507) 226-9950",
+        "address": "Byron, MN",
+        "website": "https://callhawk.com"
+    },
+    {
+        "name": "Mr. Rooter Plumbing",
+        "phone": "(507) 216-3026",
+        "address": "Byron, MN",
+        "website": "https://www.mrrooter.com/rochester-mn/"
+    },
+    {
+        "name": "Knutson Plumbing",
+        "phone": "(507) 635-5094",
+        "address": "Byron, MN",
+        "website": "https://knutsonplumbing.com"
+    },
+    {
+        "name": "K&S Heating, Air Conditioning, Plumbing & Electrical",
+        "phone": "(507) 282-4328",
+        "address": "Byron, MN",
+        "website": "https://ksheating.com"
+    }
+]

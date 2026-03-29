@@ -1,0 +1,26 @@
+[
+    {
+        "name": "All-Flo Plumbing",
+        "phone": "(616) 361-7800",
+        "address": "Walker, MI",
+        "website": "https://allfloplumbing.com"
+    },
+    {
+        "name": "Roto-Rooter Walker",
+        "phone": "(616) 531-8409",
+        "address": "Walker, MI",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "Grapids Home Services",
+        "phone": "(616) 612-3695",
+        "address": "Walker, MI",
+        "website": "https://grheat.com"
+    },
+    {
+        "name": "Whitney Services",
+        "phone": "(844) 909-7767",
+        "address": "Walker, MI",
+        "website": "https://callwhitney.com"
+    }
+]

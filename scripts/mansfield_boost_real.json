@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Molberg Plumbing Mansfield",
+        "phone": "(817) 476-9963",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Benjamin Franklin Plumbing Mansfield",
+        "phone": "(817) 670-2428",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Tom's Mechanical, Inc.",
+        "phone": "(817) 277-4493",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 420
+    },
+    {
+        "name": "Roto-Rooter Mansfield",
+        "phone": "(817) 654-9288",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Local Plumber 24x7",
+        "phone": "(866) 849-1588",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Hildebrant's Plumbing Repair",
+        "phone": "(817) 713-7855",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Bow Tie Plumbing",
+        "phone": "(682) 583-8810",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Dial One Johnson Plumbing",
+        "phone": "(972) 291-0740",
+        "address": "Mansfield, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "Mr. Electric of Mansfield",
+        "phone": "817-585-2993",
+        "address": "Mansfield, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 320
+    },
+    {
+        "name": "Ken Bobko Electric Mansfield",
+        "phone": "(877) 734-8969",
+        "address": "Mansfield, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Mansfield, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Milestone Electric Mansfield",
+        "phone": "(817) 267-2405",
+        "address": "Mansfield, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 600
+    },
+    {
+        "name": "Ingram Electric Company",
+        "phone": "(972) 779-6652",
+        "address": "Mansfield, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Emergency Locksmith Mansfield",
+        "phone": "682-214-0421",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "KeyMe Locksmiths Mansfield",
+        "phone": "(469) 410-7878",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Mansfield TX Locksmith Store",
+        "phone": "682-232-0566",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Mansfield Master Locksmith",
+        "phone": "(682) 888-0829",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mansfield Locksmith",
+        "phone": "(817) 260-0170",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Town Center Locksmith Shop",
+        "phone": "682-213-3127",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Sameday Locksmith Services",
+        "phone": "(855) 257-5263",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Mobile Locksmith Mansfield",
+        "phone": "817-405-9614",
+        "address": "Mansfield, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    }
+]

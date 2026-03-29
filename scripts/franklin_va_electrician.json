@@ -1,0 +1,26 @@
+[
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Franklin, VA",
+        "website": "https://oconnorselectrical.com"
+    },
+    {
+        "name": "Gavin & Son Electric",
+        "phone": "757-810-9480",
+        "address": "Franklin, VA",
+        "website": "https://gavinandsonelectric.com"
+    },
+    {
+        "name": "Ken Bobko Electric",
+        "phone": "877-734-8969",
+        "address": "Franklin, VA",
+        "website": "https://kenbobkoelectric.com"
+    },
+    {
+        "name": "Franklin Municipal Power",
+        "phone": "757-562-8575",
+        "address": "Franklin, VA",
+        "website": "https://franklinva.gov"
+    }
+]

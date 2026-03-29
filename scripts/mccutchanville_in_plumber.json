@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hydromax Plumbing Company",
+        "phone": "812-925-3930",
+        "address": "McCutchanville, IN",
+        "website": "https://hydromaxplumbing.com"
+    },
+    {
+        "name": "Altstadt Hoffman Plumbing",
+        "phone": "812-425-9389",
+        "address": "McCutchanville, IN",
+        "website": "https://altstadtplumbing.com"
+    },
+    {
+        "name": "Roto-Rooter",
+        "phone": "812-422-3184",
+        "address": "McCutchanville, IN",
+        "website": "https://rotorooter.com"
+    },
+    {
+        "name": "J.E. Shekell, Inc.",
+        "phone": "812-425-9131",
+        "address": "McCutchanville, IN",
+        "website": "https://shekell.com"
+    }
+]

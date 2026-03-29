@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Bizzy B Plumbing and Home Improvement",
+        "phone": "(865) 233-3900",
+        "address": "Maryville, TN",
+        "website": "https://bizzybplumbing.com"
+    },
+    {
+        "name": "Platinum Plumber",
+        "phone": "(865) 773-9493",
+        "address": "Maryville, TN",
+        "website": "https://theplatinumplumber.com"
+    },
+    {
+        "name": "A and L HVAC and Plumbing",
+        "phone": "(865) 856-8797",
+        "address": "Maryville, TN",
+        "website": "https://therightaccompany.com"
+    },
+    {
+        "name": "Happy Hiller Maryville",
+        "phone": "(865) 855-6352",
+        "address": "Maryville, TN",
+        "website": "https://happyhiller.com"
+    }
+]

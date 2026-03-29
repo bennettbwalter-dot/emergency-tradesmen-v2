@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Len The Plumber Heating & Air",
+        "phone": "(800) 950-4619",
+        "address": "Washington, D.C.",
+        "rating": 4.8,
+        "review_count": 500
+    },
+    {
+        "name": "Emerald Plumbing Co.",
+        "phone": "(240) 345-9920",
+        "address": "Washington, D.C.",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Roto-Rooter Washington D.C.",
+        "phone": "(202) 291-2113",
+        "address": "Washington, D.C.",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "United Air Temp",
+        "phone": "(202) 796-7990",
+        "address": "Washington, D.C.",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Michael & Son Services",
+        "phone": "1-800-948-6453",
+        "address": "Washington, D.C.",
+        "rating": 4.8,
+        "review_count": 85
+    }
+]

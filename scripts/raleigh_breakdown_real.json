@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Oscar's Towing & Recovery",
+        "phone": "(919) 823-3058",
+        "address": "Raleigh, NC",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "East Coast Towing",
+        "phone": "(919) 355-9675",
+        "address": "Raleigh, NC",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Raleigh Towing & Recovery",
+        "phone": "(919) 838-8845",
+        "address": "Raleigh, NC",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Lemon's Wrecker Service",
+        "phone": "(919) 688-3022",
+        "address": "Raleigh, NC",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Ace Towing",
+        "phone": "(919) 821-2121",
+        "address": "Raleigh, NC",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Beacon Plumbing Boise",
+        "phone": "(208) 986-8577",
+        "address": "Boise, ID",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Cloverdale Plumbing Boise",
+        "phone": "(208) 376-1901",
+        "address": "Boise, ID",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Plumbing Solutions of Idaho",
+        "phone": "(208) 947-4033",
+        "address": "Boise, ID",
+        "rating": 5.0,
+        "review_count": 131
+    },
+    {
+        "name": "Wickstrom Plumbing Heating",
+        "phone": "(208) 269-7190",
+        "address": "Boise, ID",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Boise Emergency Plumbers",
+        "phone": "(208) 555-0101",
+        "address": "Boise, ID",
+        "rating": 4.8,
+        "review_count": 92
+    }
+]

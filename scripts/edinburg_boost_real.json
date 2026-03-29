@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Roto-Rooter Edinburg",
+        "phone": "956-429-3015",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 450
+    },
+    {
+        "name": "Kirby Emergency Plumbing",
+        "phone": "+1 956-275-3001",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Charlie's Plumbing Service",
+        "phone": "(956) 383-4346",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Craftsman Plumbing",
+        "phone": "(956) 662-3843",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "247 Plumbing Pros Edinburg",
+        "phone": "(877) 959-6069",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Edinburg Plumbing Services",
+        "phone": "(956) 217-0416",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Atlas Electrical & Plumbing",
+        "phone": "(956) 586-5491",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "PRO Drain Cleaning of Edinburg",
+        "phone": "(956) 923-4429",
+        "address": "Edinburg, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 110
+    },
+    {
+        "name": "Donco Electric Edinburg",
+        "phone": "(855) 740-3232",
+        "address": "Edinburg, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 280
+    },
+    {
+        "name": "DVS Electric",
+        "phone": "(956) 247-0310",
+        "address": "Edinburg, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 150
+    },
+    {
+        "name": "Pro Electric",
+        "phone": "(956) 383-7474",
+        "address": "Edinburg, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Instrumentation-Controls & Electrical Services Ll",
+        "phone": "(928) 432-0531",
+        "address": "Edinburg, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "KeyMe Locksmiths Edinburg",
+        "phone": "(956) 305-1448",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Edinburg Locksmith",
+        "phone": "1-877-237-7058",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Brothers Locksmith",
+        "phone": "(888) 947-5585",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Discount Locksmith of Edinburg",
+        "phone": "(855) 766-8899",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Premier Locksmith",
+        "phone": "(956) 540-2299",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 250
+    },
+    {
+        "name": "Rosember's Locksmith",
+        "phone": "(956) 566-6666",
+        "address": "Edinburg, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 130
+    }
+]

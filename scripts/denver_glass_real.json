@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Red Rocks Glass",
+        "phone": "(720) 505-3815",
+        "address": "Denver, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "United Windows Pro",
+        "phone": "303-349-2162",
+        "address": "Denver, CO",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Glass & Door Guys",
+        "phone": "(303) 842-3717",
+        "address": "Denver, CO",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Fast Glass",
+        "phone": "(720) 849-1810",
+        "address": "Denver, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "A&M Window Service",
+        "phone": "(303) 450-2200",
+        "address": "Denver, CO",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    }
+]

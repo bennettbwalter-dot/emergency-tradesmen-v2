@@ -1,0 +1,26 @@
+[
+    {
+        "name": "All Electric Services",
+        "phone": "(407) 890-7782",
+        "address": "Sanford, FL",
+        "website": "https://allelectric.com"
+    },
+    {
+        "name": "Altech Electric",
+        "phone": "(407) 857-7879",
+        "address": "Sanford, FL",
+        "website": "https://altechelectric.com"
+    },
+    {
+        "name": "A-Lumination Electric Inc",
+        "phone": "(386) 200-5010",
+        "address": "Sanford, FL",
+        "website": "https://a-lumination.com"
+    },
+    {
+        "name": "TLC Electric",
+        "phone": "(407) 323-6958",
+        "address": "Sanford, FL",
+        "website": "https://tlcelectric.us"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Phoenix Storm Restoration",
+        "phone": "(945) 308-0425",
+        "address": "Dallas, TX",
+        "website": "https://phoenixstormgroup.com/"
+    },
+    {
+        "name": "Tucker Roofing Systems",
+        "phone": "(972) 771-6488",
+        "address": "8525 Ferndale Rd #104, Dallas, TX 75238",
+        "website": "https://tuckerroofingsystems.com/"
+    },
+    {
+        "name": "Veteran Brothers Roofing",
+        "phone": "(817) 875-9834",
+        "address": "Dallas, TX",
+        "website": "https://veteranbros.com/"
+    },
+    {
+        "name": "Qualis Roofing & Construction",
+        "phone": "(972) 284-7827",
+        "address": "Dallas, TX",
+        "website": "https://qualisgc.com/"
+    },
+    {
+        "name": "Bert Roofing",
+        "phone": "(214) 321-9341",
+        "address": "Dallas, TX",
+        "website": "https://bertroofing.com/"
+    }
+]

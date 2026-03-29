@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Aire Serv of Killeen",
+        "phone": "(254) 876-5916",
+        "address": "Temple, TX",
+        "website": "https://aireserv.com/"
+    },
+    {
+        "name": "Amos Home Services",
+        "phone": "(254) 778-4271",
+        "address": "Temple, TX",
+        "website": "https://amoshomeservices.com/"
+    },
+    {
+        "name": "Evergreen Heating & Cooling",
+        "phone": "(254) 545-9716",
+        "address": "Temple, TX",
+        "website": "https://evergreenheatingcooling.com/"
+    },
+    {
+        "name": "Ellis Air Conditioning Repair",
+        "phone": "(254) 598-2074",
+        "address": "Temple, TX",
+        "website": "https://ellisac.com/"
+    },
+    {
+        "name": "Lochridge Priest Home Services",
+        "phone": "(254) 304-8824",
+        "address": "Temple, TX",
+        "website": "https://lochridgepriest.com/"
+    },
+    {
+        "name": "Lynx HVAC Repair",
+        "phone": "(254) 500-3188",
+        "address": "Temple, TX",
+        "website": "https://lynxhvac.com/"
+    }
+]

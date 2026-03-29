@@ -1,0 +1,26 @@
+[
+    {
+        "name": "B and L Plumbing and Heating",
+        "phone": "(719) 638-7341",
+        "address": "Security-Widefield, CO",
+        "website": "https://bandlplumbing.com"
+    },
+    {
+        "name": "Awesome Home Services",
+        "phone": "(719) 350-3917",
+        "address": "Security-Widefield, CO",
+        "website": "https://awesomeservice.com"
+    },
+    {
+        "name": "One Source Home Service",
+        "phone": "(719) 974-4365",
+        "address": "Security-Widefield, CO",
+        "website": "https://onesourcehomeservice.com"
+    },
+    {
+        "name": "Hanson Plumbing Solutions",
+        "phone": "(719) 696-4551",
+        "address": "Security-Widefield, CO",
+        "website": "https://hansonplumbingsolutions.com"
+    }
+]

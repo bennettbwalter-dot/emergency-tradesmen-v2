@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Glass Masters",
+        "phone": "(317) 387-4000",
+        "address": "Indianapolis, IN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 250
+    },
+    {
+        "name": "Modern Glass",
+        "phone": "(317) 243-8200",
+        "address": "Indianapolis, IN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Kelly Glass & Mirror",
+        "phone": "(317) 356-0400",
+        "address": "Indianapolis, IN",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Northside Glass & Mirror",
+        "phone": "(317) 251-8244",
+        "address": "Indianapolis, IN",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Service Glass of Indianapolis",
+        "phone": "(317) 322-1700",
+        "address": "Indianapolis, IN",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 90
+    }
+]

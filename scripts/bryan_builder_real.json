@@ -1,0 +1,32 @@
+[
+    {
+        "name": "BELFOR Bryan-College Station",
+        "phone": "(979) 703-1770",
+        "address": "12903 State Highway 30, Suite 100, College Station, TX 77845",
+        "website": "https://www.belfor.com/"
+    },
+    {
+        "name": "SERVPRO of Brazos Valley",
+        "phone": "(979) 779-3333",
+        "address": "Bryan, TX",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "PuroClean of Brazos County",
+        "phone": "(979) 213-4060",
+        "address": "Bryan, TX",
+        "website": "https://puroclean.com/"
+    },
+    {
+        "name": "Blackhill Restoration",
+        "phone": "(800) 931-1962",
+        "address": "147 Marino Road, Suite 100, Bryan, TX 77808",
+        "website": "https://blackhillrestoration.com/"
+    },
+    {
+        "name": "Rainbow Restoration of Bryan-College Station",
+        "phone": "(979) 200-2185",
+        "address": "Bryan, TX",
+        "website": "https://rainbowrestoresbcs.com/"
+    }
+]

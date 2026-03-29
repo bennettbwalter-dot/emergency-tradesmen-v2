@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Able Group",
+        "phone": "0191 357 4625",
+        "address": "Newcastle upon Tyne",
+        "website": "https://able-group.co.uk/"
+    },
+    {
+        "name": "PK Plumbing",
+        "phone": "0191 622 2039",
+        "address": "Newcastle upon Tyne",
+        "website": "https://pkeeling.co.uk/"
+    },
+    {
+        "name": "Gas 24/7 Emergency Plumbers",
+        "phone": "0191 357 4625",
+        "address": "11 Studley Terrace, Newcastle upon Tyne",
+        "website": "https://abbeyplumbers.co.uk/"
+    },
+    {
+        "name": "All Home Repairs 24/7 Ltd",
+        "phone": "01916 401 447",
+        "address": "Newcastle upon Tyne",
+        "website": "https://trustatrader.com/"
+    },
+    {
+        "name": "EcoFlow Plumbing Services",
+        "phone": "0191 357 4625",
+        "address": "Newcastle upon Tyne",
+        "website": "https://ecoflowmaintenance.co.uk/"
+    }
+]

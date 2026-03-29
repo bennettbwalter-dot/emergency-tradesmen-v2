@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ohio Electrician Pros",
+        "phone": "877-847-6084",
+        "address": "Belpre, OH",
+        "website": "https://moorepowerelectrical.com"
+    },
+    {
+        "name": "American Way Electric",
+        "phone": "304-481-3655",
+        "address": "Belpre, OH",
+        "website": "https://americanwayelectric.com"
+    },
+    {
+        "name": "Wired Up Electrical",
+        "phone": "304-916-6418",
+        "address": "Belpre, OH",
+        "website": "https://wiredupgenerators.com"
+    },
+    {
+        "name": "O'Connor's Electrical",
+        "phone": "844-484-2612",
+        "address": "Belpre, OH",
+        "website": "https://oconnorselectrical.com"
+    }
+]

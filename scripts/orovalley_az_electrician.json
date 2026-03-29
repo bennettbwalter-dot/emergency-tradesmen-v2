@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Blake Electric",
+        "phone": "(520) 343-6233",
+        "address": "Oro Valley, AZ",
+        "website": "https://blakeelectricllc.com"
+    },
+    {
+        "name": "Oro Valley Electric",
+        "phone": "(520) 739-8010",
+        "address": "Oro Valley, AZ",
+        "website": "https://ovellc.com"
+    },
+    {
+        "name": "JCP Electric",
+        "phone": "(520) 222-8270",
+        "address": "Oro Valley, AZ",
+        "website": "https://jcpelectrictucson.com"
+    },
+    {
+        "name": "All About Electric Service and Maintenance LLC",
+        "phone": "(520) 591-5446",
+        "address": "Oro Valley, AZ",
+        "website": "https://allaboutelectricservice.com"
+    }
+]

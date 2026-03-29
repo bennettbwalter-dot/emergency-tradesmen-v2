@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Denton Emergency Plumbing",
+        "phone": "(940) 260-8383",
+        "address": "Denton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 210
+    },
+    {
+        "name": "Roto-Rooter Denton",
+        "phone": "940-387-7909",
+        "address": "Denton, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 450
+    },
+    {
+        "name": "Denton Emergency Plumbers",
+        "phone": "(940) 209-8686",
+        "address": "Denton, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Berkeys Plumbing Denton",
+        "phone": "972-464-2460",
+        "address": "Denton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Haltex Plumbing, LLC",
+        "phone": "940-230-0092",
+        "address": "Denton, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Cote's Mechanical",
+        "phone": "(940) 458-4980",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Add-All Electric Denton",
+        "phone": "(817) 488-0126",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Denton Electric, Inc.",
+        "phone": "(940) 387-1312",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 310
+    },
+    {
+        "name": "Urgent Electrician Denton",
+        "phone": "+1 940-286-4898",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "308 Solutions Group",
+        "phone": "(940) 387-4002",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Jerry Owens Electric",
+        "phone": "(940) 383-4208",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Bunger Electric Inc",
+        "phone": "(940) 367-8133",
+        "address": "Denton, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 110
+    },
+    {
+        "name": "Emergency Locksmith Denton",
+        "phone": "(682) 238-0185",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Mobile Locksmith Denton",
+        "phone": "(972) 587-1963",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Denton Emergency Locksmith",
+        "phone": "(817) 301-0427",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Pro Emergency Locksmith Denton",
+        "phone": "(214) 461-4858",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "Ace McCoulskey's Lock Service",
+        "phone": "(940) 565-9581",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 350
+    },
+    {
+        "name": "Locksmith Denton TX 76201",
+        "phone": "(940) 236-7130",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "911 Locksmith Denton",
+        "phone": "(682) 238-0476",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 140
+    },
+    {
+        "name": "Denton Locksmith 24/7",
+        "phone": "(940) 312-6800",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "Locksmith Denton Mobile",
+        "phone": "(469) 750-0855",
+        "address": "Denton, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 110
+    }
+]

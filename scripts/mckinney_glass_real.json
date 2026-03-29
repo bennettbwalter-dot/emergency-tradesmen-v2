@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Texas Windshield Service",
+    "phone": "(214) 377-4802",
+    "address": "McKinney, TX",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 120
+  },
+  {
+    "name": "ASAP Mobile Auto Glass McKinney",
+    "phone": "(469) 225-5880",
+    "address": "McKinney, TX",
+    "trade": "glazier",
+    "rating": 4.7,
+    "review_count": 150
+  },
+  {
+    "name": "Xtreme Autoglass Pros",
+    "phone": "(817) 932-0303",
+    "address": "McKinney, TX",
+    "trade": "glazier",
+    "rating": 4.8,
+    "review_count": 95
+  },
+  {
+    "name": "Car Glass Repair",
+    "phone": "(214) 851-2208",
+    "address": "McKinney, TX",
+    "trade": "glazier",
+    "rating": 4.9,
+    "review_count": 180
+  },
+  {
+    "name": "Glass Doctor of Dallas Metroplex",
+    "phone": "(972) 346-0918",
+    "address": "McKinney, TX",
+    "trade": "glazier",
+    "rating": 4.9,
+    "review_count": 250
+  }
+]

@@ -1,0 +1,170 @@
+[
+    {
+        "name": "Roto-Rooter Santa Ana",
+        "phone": "(714) 913-6066",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 850
+    },
+    {
+        "name": "Olson Superior Plumbing",
+        "phone": "(949) 328-6002",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 520
+    },
+    {
+        "name": "Emergency Plumbing Orange County",
+        "phone": "(714) 467-2115",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 310
+    },
+    {
+        "name": "Caliber One Plumbing and Construction, Inc.",
+        "phone": "(657) 212-2774",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "ProFix Drains & Hydro Jet Santa Ana",
+        "phone": "(714) 442-6924",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 5.0,
+        "review_count": 420
+    },
+    {
+        "name": "Pacific Plumbing of Southern California",
+        "phone": "(714) 699-9936",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 280
+    },
+    {
+        "name": "All City Plumbing, Air & Electrical",
+        "phone": "(909) 552-7550",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 650
+    },
+    {
+        "name": "Dial One Sonshine",
+        "phone": "(714) 613-1016",
+        "address": "Santa Ana, CA",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 350
+    },
+    {
+        "name": "JEC Electric Santa Ana",
+        "phone": "(714) 993-6875",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 120
+    },
+    {
+        "name": "Red Electricians",
+        "phone": "(714) 993-6875",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 95
+    },
+    {
+        "name": "Express Electrical Services Santa Ana",
+        "phone": "(323) 204-4132",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 1800
+    },
+    {
+        "name": "Santa Ana 24 Hour Electrician",
+        "phone": "(714) 798-3098",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 5.0,
+        "review_count": 60
+    },
+    {
+        "name": "CZ Electric Santa Ana",
+        "phone": "(714) 264-3206",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Copperfield Electric",
+        "phone": "(626) 622-9694",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 85
+    },
+    {
+        "name": "Trout Electric Santa Ana",
+        "phone": "(909) 952-0047",
+        "address": "Santa Ana, CA",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 140
+    },
+    {
+        "name": "Green Locksmith Santa Ana",
+        "phone": "(714) 660-7786",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "Santa Ana Lock And Key",
+        "phone": "(714) 548-3013",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 220
+    },
+    {
+        "name": "Santa Ana Emergency Locksmiths",
+        "phone": "(714) 276-1833",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 150
+    },
+    {
+        "name": "Capitol Locksmith Service",
+        "phone": "(714) 923-1165",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 95
+    },
+    {
+        "name": "Locksmith Santa Ana CA",
+        "phone": "714-584-8129",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "In Locksmith 24/7",
+        "phone": "(714) 912-9090",
+        "address": "Santa Ana, CA",
+        "trade": "locksmith",
+        "rating": 5.0,
+        "review_count": 80
+    }
+]

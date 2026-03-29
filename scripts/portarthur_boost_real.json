@@ -1,0 +1,114 @@
+[
+    {
+        "name": "Mr. Rooter Plumbing Port Arthur",
+        "phone": "817-769-6643",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.9,
+        "review_count": 420
+    },
+    {
+        "name": "Roto-Rooter Port Arthur",
+        "phone": "409-963-1413",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 350
+    },
+    {
+        "name": "Emergency Plumbing Squad Port Arthur",
+        "phone": "(855) 812-2311",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 110
+    },
+    {
+        "name": "Rapid Response Plumbing",
+        "phone": "(855) 998-5787",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Plumberrooter247",
+        "phone": "877-446-9451",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.6,
+        "review_count": 80
+    },
+    {
+        "name": "Efficient Systems",
+        "phone": "409-898-1700",
+        "address": "Port Arthur, TX",
+        "trade": "plumber",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Donco Electric Port Arthur",
+        "phone": "(855) 740-3232",
+        "address": "Port Arthur, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 130
+    },
+    {
+        "name": "Kens Electrical Marine Sv",
+        "phone": "(409) 736-0128",
+        "address": "Port Arthur, TX",
+        "trade": "electrician",
+        "rating": 4.9,
+        "review_count": 210
+    },
+    {
+        "name": "Top Dawg Electric",
+        "phone": "(409) 600-2911",
+        "address": "Port Arthur, TX",
+        "trade": "electrician",
+        "rating": 4.8,
+        "review_count": 180
+    },
+    {
+        "name": "Pillars Electrical",
+        "phone": "(762) 225-2425",
+        "address": "Port Arthur, TX",
+        "trade": "electrician",
+        "rating": 4.7,
+        "review_count": 95
+    },
+    {
+        "name": "Brothers Locksmith",
+        "phone": "(409) 234-0260",
+        "address": "Port Arthur, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Just In Time Lock and Key",
+        "phone": "(409) 719-3958",
+        "address": "Port Arthur, TX",
+        "trade": "locksmith",
+        "rating": 4.9,
+        "review_count": 180
+    },
+    {
+        "name": "Bmt Lock",
+        "phone": "(409) 898-1800",
+        "address": "Port Arthur, TX",
+        "trade": "locksmith",
+        "rating": 4.8,
+        "review_count": 220
+    },
+    {
+        "name": "Minute Key Port Arthur",
+        "phone": "409-433-8868",
+        "address": "Port Arthur, TX",
+        "trade": "locksmith",
+        "rating": 4.7,
+        "review_count": 120
+    }
+]

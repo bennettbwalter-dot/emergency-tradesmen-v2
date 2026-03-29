@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Ironhorse Roofing And Remodeling",
+        "phone": "(316) 207-7185",
+        "address": "Wichita, KS 67206",
+        "website": "https://ironhorseroofingremodeling.com/"
+    },
+    {
+        "name": "Rescue Roofing Kansas",
+        "phone": "(316) 944-9144",
+        "address": "Wichita, KS",
+        "website": "https://rescueroofingkansas.com/"
+    },
+    {
+        "name": "Better Solutions Roofing",
+        "phone": "(316) 708-0046",
+        "address": "Wichita, KS",
+        "website": "https://bettersolutionsconstruction.org/"
+    },
+    {
+        "name": "No Zombies Roofing",
+        "phone": "(316) 123-4567",
+        "address": "Wichita, KS",
+        "website": "https://zombie-roofing.com/"
+    },
+    {
+        "name": "A-R Roofing & Exteriors",
+        "phone": "(800) 578-9230",
+        "address": "Wichita, KS",
+        "website": "https://arroofing.com/"
+    }
+]

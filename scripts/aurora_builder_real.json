@@ -1,0 +1,32 @@
+[
+    {
+        "name": "HRS Restoration Services",
+        "phone": "(303) 241-7849",
+        "address": "Aurora, CO",
+        "website": "https://hrsrs.com/"
+    },
+    {
+        "name": "Restoration 1 of Aurora",
+        "phone": "(720) 730-7826",
+        "address": "Aurora, CO",
+        "website": "https://restoration1.com/"
+    },
+    {
+        "name": "SERVPRO of Aurora Central",
+        "phone": "(303) 576-6868",
+        "address": "Aurora, CO",
+        "website": "https://servpro.com/"
+    },
+    {
+        "name": "BoneDry Services",
+        "phone": "(303) 276-4163",
+        "address": "Aurora, CO",
+        "website": "https://bonedryservices.com/"
+    },
+    {
+        "name": "ServiceMaster DSI - Denver",
+        "phone": "(720) 330-3963",
+        "address": "Aurora, CO",
+        "website": "https://servicemasterrestore.com/"
+    }
+]

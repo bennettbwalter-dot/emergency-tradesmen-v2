@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Six Flags Glass",
+        "phone": "(361) 266-2879",
+        "address": "Victoria, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Quality Auto Glass Victoria",
+        "phone": "(361) 746-8669",
+        "address": "Victoria, TX",
+        "trade": "glazier",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Mitchell Glass Company",
+        "phone": "(361) 573-4337",
+        "address": "Victoria, TX",
+        "trade": "glazier",
+        "rating": 4.7,
+        "review_count": 180
+    },
+    {
+        "name": "Texan Glass Victoria",
+        "phone": "(281) 296-6200",
+        "address": "Victoria, TX",
+        "trade": "glazier",
+        "rating": 4.8,
+        "review_count": 95
+    }
+]

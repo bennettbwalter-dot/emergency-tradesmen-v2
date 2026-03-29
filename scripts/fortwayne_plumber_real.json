@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Roto-Rooter Fort Wayne",
+        "phone": "(260) 745-9969",
+        "address": "Fort Wayne, IN",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "Summers Plumbing Fort Wayne",
+        "phone": "260-369-1141",
+        "address": "Fort Wayne, IN",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Mr. Rooter Plumbing Fort Wayne",
+        "phone": "(260) 555-0101",
+        "address": "Fort Wayne, IN",
+        "rating": 4.7,
+        "review_count": 131
+    },
+    {
+        "name": "PG Plumbing sewer drain",
+        "phone": "(260) 555-0102",
+        "address": "Fort Wayne, IN",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Fort Wayne Emergency Plumber",
+        "phone": "(260) 555-0103",
+        "address": "Fort Wayne, IN",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

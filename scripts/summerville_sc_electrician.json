@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Power Pro Electricians",
+        "phone": "843-291-3775",
+        "address": "Summerville, SC",
+        "website": "https://powerproelectricsc.com"
+    },
+    {
+        "name": "Electrician Squad of Summerville",
+        "phone": "855-930-6015",
+        "address": "Summerville, SC",
+        "website": "https://electriciansquad.com"
+    },
+    {
+        "name": "Mister Sparky of Charleston",
+        "phone": "888-826-0091",
+        "address": "Summerville, SC",
+        "website": "https://mistersparky.com"
+    },
+    {
+        "name": "The Generator Guy LLC",
+        "phone": "843-555-0200",
+        "address": "Summerville, SC",
+        "website": "https://waynetealthegeneratorguy.com"
+    }
+]

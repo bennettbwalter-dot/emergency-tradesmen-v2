@@ -1,0 +1,26 @@
+[
+    {
+        "name": "The Speedy Electricians",
+        "phone": "(720) 763-8777",
+        "address": "Security-Widefield, CO",
+        "website": "https://thespeedyelectricians.com"
+    },
+    {
+        "name": "Awesome Home Services Electric",
+        "phone": "(719) 350-3917",
+        "address": "Security-Widefield, CO",
+        "website": "https://awesomeservice.com"
+    },
+    {
+        "name": "Home Alliance Electric",
+        "phone": "(877) 777-0796",
+        "address": "Security-Widefield, CO",
+        "website": "https://homealliance.com"
+    },
+    {
+        "name": "Flow Right Electric",
+        "phone": "(719) 569-7604",
+        "address": "Security-Widefield, CO",
+        "website": "https://flowrightphi.com"
+    }
+]

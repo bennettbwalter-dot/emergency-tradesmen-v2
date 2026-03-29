@@ -1,0 +1,32 @@
+[
+    {
+        "name": "AK Services",
+        "phone": "07739 173 353",
+        "address": "43 Orby Gardens, Belfast BT5 5HS",
+        "website": "https://akservices.org/"
+    },
+    {
+        "name": "Belfast Boiler Services",
+        "phone": "028 9560 1014",
+        "address": "Upper Newtownards Road, Belfast",
+        "website": "https://belfastboilerservices.com/"
+    },
+    {
+        "name": "ODH Heating",
+        "phone": "07730 325176",
+        "address": "Level 3, 37 Queen Street, Belfast BT1 6EA",
+        "website": "https://odhheating.com/"
+    },
+    {
+        "name": "Smart Plumbing & Heating",
+        "phone": "079 2553 0119",
+        "address": "Belfast",
+        "website": "https://smartgasplumbing.com/"
+    },
+    {
+        "name": "Safe Gas NI",
+        "phone": "028 9034 3665",
+        "address": "14 Carnmoney Rd, Newtownabbey, BT36 6HN",
+        "website": "https://safegasni.co.uk/"
+    }
+]

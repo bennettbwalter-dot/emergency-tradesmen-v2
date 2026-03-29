@@ -1,0 +1,37 @@
+[
+    {
+        "name": "J&W Heating and Air",
+        "phone": "(904) 764-0040",
+        "address": "Jacksonville, FL",
+        "rating": 4.9,
+        "review_count": 4500
+    },
+    {
+        "name": "One Hour Heating & Air Conditioning of Jacksonville",
+        "phone": "(904) 833-5219",
+        "address": "Jacksonville, FL",
+        "rating": 4.7,
+        "review_count": 1200
+    },
+    {
+        "name": "Tropic Aire Of North Florida",
+        "phone": "(904) 664-2768",
+        "address": "Jacksonville, FL",
+        "rating": 4.8,
+        "review_count": 310
+    },
+    {
+        "name": "All Weather Mechanical Inc.",
+        "phone": "(904) 431-7292",
+        "address": "Jacksonville, FL",
+        "rating": 4.6,
+        "review_count": 150
+    },
+    {
+        "name": "Snyder Air Conditioning, Plumbing & Electric",
+        "phone": "(904) 342-3714",
+        "address": "Jacksonville, FL",
+        "rating": 4.7,
+        "review_count": 3200
+    }
+]

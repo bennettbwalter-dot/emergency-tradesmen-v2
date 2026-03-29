@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Anytime Electric Inc.",
+        "phone": "(201) 398-6592",
+        "address": "Wayne, NJ",
+        "website": "https://anytimeelectricalservice.com"
+    },
+    {
+        "name": "Xpert Electric",
+        "phone": "(201) 393-2420",
+        "address": "Wayne, NJ",
+        "website": "https://callxe.com"
+    },
+    {
+        "name": "Donco Electric",
+        "phone": "(855) 740-3232",
+        "address": "Wayne, NJ",
+        "website": "https://doncoelectric.com"
+    },
+    {
+        "name": "Shalongo & Son Electric",
+        "phone": "(201) 207-2729",
+        "address": "Wayne, NJ",
+        "website": "https://shalongoandsonelectric.com"
+    }
+]

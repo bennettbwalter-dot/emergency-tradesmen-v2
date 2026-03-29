@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Buffalo Towing Company",
+        "phone": "(716) 710-9607",
+        "address": "Buffalo, NY",
+        "rating": 4.9,
+        "review_count": 320
+    },
+    {
+        "name": "Buffalo Towing Services",
+        "phone": "(716) 210-6633",
+        "address": "Buffalo, NY",
+        "rating": 4.8,
+        "review_count": 150
+    },
+    {
+        "name": "24 Hr Towing Buffalo",
+        "phone": "(716) 218-3307",
+        "address": "Buffalo, NY",
+        "rating": 4.7,
+        "review_count": 120
+    },
+    {
+        "name": "5 Star Towing & Recovery",
+        "phone": "(716) 300-4444",
+        "address": "Buffalo, NY",
+        "rating": 4.8,
+        "review_count": 85
+    },
+    {
+        "name": "Queen City Towing",
+        "phone": "(716) 500-0505",
+        "address": "Buffalo, NY",
+        "rating": 4.9,
+        "review_count": 92
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Cold Air Pros",
+        "phone": "(832) 758-7159",
+        "address": "League City, TX",
+        "rating": 4.9,
+        "review_count": 120
+    },
+    {
+        "name": "Doctor Cool & Professor Heat",
+        "phone": "(281) 338-8564",
+        "address": "League City, TX",
+        "rating": 4.8,
+        "review_count": 1417
+    },
+    {
+        "name": "KD Mechanical LLC",
+        "phone": "(281) 612-4242",
+        "address": "League City, TX",
+        "rating": 5.0,
+        "review_count": 85
+    },
+    {
+        "name": "A-Team's A/C, LLC",
+        "phone": "(409) 392-1550",
+        "address": "League City, TX",
+        "rating": 4.9,
+        "review_count": 93
+    },
+    {
+        "name": "Stalwart Mechanical Services",
+        "phone": "(281) 825-5408",
+        "address": "League City, TX",
+        "rating": 4.8,
+        "review_count": 320
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "JW Gas",
+        "phone": "07800635531",
+        "address": "54 Bells Lane, Wordsley, Stourbridge, DY8 5DQ",
+        "website": "https://jwgas.co.uk/"
+    },
+    {
+        "name": "Firewater Plumbing & Heating Ltd",
+        "phone": "07930527541",
+        "address": "33 Bagley Street, Stourbridge, DY9 7AU",
+        "website": "https://sitelift.site/"
+    },
+    {
+        "name": "Heroes Emergency Plumbers",
+        "phone": "0800 086 2648",
+        "address": "Stourbridge",
+        "website": "https://heroes-emergency-plumbers.co.uk/"
+    },
+    {
+        "name": "No1 PHD",
+        "phone": "01384 847472",
+        "address": "Stourbridge",
+        "website": "https://no1phd.co.uk/"
+    },
+    {
+        "name": "Able Group",
+        "phone": "01384 312 147",
+        "address": "Stourbridge",
+        "website": "https://able-group.co.uk/"
+    }
+]
