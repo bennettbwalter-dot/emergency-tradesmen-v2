@@ -166,11 +166,18 @@ const BLOG_STYLES = `
 
   /* ── IMAGES ─────────────────────────────────────── */
   .blog-body img {
-    border-radius: 14px; max-width: 100%; margin: 2rem auto;
+    border-radius: 14px; max-width: 100%; width: 100%; height: auto; margin: 1rem auto;
     display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   }
-  .blog-body figure { text-align: center; margin: 2rem 0; }
-  .blog-body figcaption { font-size: 0.85rem; color: #6b7280; margin-top: 0.5rem; font-style: italic; }
+  .blog-body figure { text-align: center; margin: 1rem 0; }
+  .blog-body figcaption { font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem; font-style: italic; padding: 0 0.5rem; }
+
+  @media (max-width: 640px) {
+    .blog-body img {
+      margin: 0.75rem 0;
+      border-radius: 10px;
+    }
+  }
 
   /* ── TOC BOX ────────────────────────────────────── */
   .blog-body .toc-box, .blog-body [id="in-this-article"] {
@@ -336,9 +343,17 @@ const BLOG_STYLES = `
   .blog-body .amazon-product-section div[style*="grid"] {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-    gap: 1.5rem !important;
-    margin: 2rem 0 !important;
+    gap: 1rem !important;
+    margin: 1.5rem 0 !important;
     padding: 0 !important;
+  }
+
+  @media (max-width: 640px) {
+    .blog-body .amazon-product-section .feature-grid,
+    .blog-body .amazon-product-section div[style*="grid"] {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
   }
 
   /* ── HIDE RAW URLs ──────────────────────────────────── */
@@ -667,8 +682,15 @@ export default function BlogPostPage() {
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
-                width: 280px !important;
-                height: 280px !important;
+                width: 100% !important;
+                max-width: 280px !important;
+                height: auto !important;
+              }
+
+              @media (max-width: 640px) {
+                .blog-body img.product-image {
+                  max-width: 200px !important;
+                }
               }
 
               ${BLOG_STYLES}
@@ -779,24 +801,24 @@ export default function BlogPostPage() {
 
                 {/* ── AMAZON PRODUCT SECTION ────────────────────────────────── */}
                 {slug && AMAZON_PRODUCTS[slug] && (
-                    <div className={`max-w-lg mx-auto my-12 p-6 rounded-2xl border-2 ${isWhiteMode ? 'bg-orange-50 border-orange-300' : 'bg-neutral-800 border-orange-500/50'}`}>
+                    <div className={`max-w-lg mx-auto my-8 md:my-12 p-4 md:p-6 rounded-2xl border-2 ${isWhiteMode ? 'bg-orange-50 border-orange-300' : 'bg-neutral-800 border-orange-500/50'}`}>
                         <div className="text-center">
                             <img 
                                 src={AMAZON_PRODUCTS[slug].image}
                                 alt={AMAZON_PRODUCTS[slug].title}
-                                className="w-64 h-64 mx-auto object-contain rounded-xl" 
+                                className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto object-contain rounded-xl" 
                             />
-                            <h3 className={`text-xl font-bold mt-4 mb-2 ${isWhiteMode ? 'text-neutral-900' : 'text-white'}`}>
+                            <h3 className={`text-lg sm:text-xl font-bold mt-4 mb-2 ${isWhiteMode ? 'text-neutral-900' : 'text-white'}`}>
                                 {AMAZON_PRODUCTS[slug].title}
                             </h3>
-                            <p className={`text-sm mb-4 ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-400'}`}>
+                            <p className={`text-xs sm:text-sm mb-4 px-2 ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-400'}`}>
                                 {AMAZON_PRODUCTS[slug].description}
                             </p>
                             <a 
                                 href={AMAZON_PRODUCTS[slug].url}
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl transition-colors"
+                                className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-xl transition-colors text-sm sm:text-base w-full sm:w-auto"
                             >
                                 View on Amazon
                             </a>
