@@ -806,10 +806,10 @@ export default function BlogPostPage() {
                             )}
                         </div>
 
-                        {/* Featured image — right-floated on desktop */}
+                        {/* Featured image — responsive, full width on mobile */}
                         {post.cover_image && (
-                            <div className="mt-6 md:mt-0 md:w-[280px] lg:w-[320px] shrink-0">
-                                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[9/16]">
+                            <div className="mt-6 md:mt-0 md:shrink-0 w-full md:w-auto">
+                                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[9/16] w-full max-w-[320px] md:max-w-[320px] mx-auto md:mx-0">
                                     <img
                                         src={getImageUrl(post.cover_image)}
                                         alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
