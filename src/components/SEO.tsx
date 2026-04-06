@@ -48,7 +48,9 @@ export function SEO({
     const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
     const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;
 
-    const fullTitle = `${title} | ${SITE_NAME}`;
+    // Prevent triple-pipe titles: only append brand name if not already present
+    const titleAlreadyHasBrand = title.includes(SITE_NAME) || title.includes(SITE_NAME_GB) || title.includes(SITE_NAME_US);
+    const fullTitle = titleAlreadyHasBrand ? title : `${title} | ${SITE_NAME}`;
     
     // Adjust canonical for US Domain
     let effectiveCanonical = canonical;
@@ -63,12 +65,12 @@ export function SEO({
         ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`) 
         : SITE_URL;
 
-    // Default LocalBusiness Schema (Immediate Action Item)
-    // Helps Google connect any page (including blogs) to the main brand GBP
+    // Default Organization Schema — applied to all pages to reinforce brand identity
     const defaultSchema = {
         "@context": "https://schema.org",
-        "@type": "EmergencyService",
+        "@type": "Organization",
         "name": SITE_NAME,
+        "alternateName": isUSDomain ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
         "url": SITE_URL,
         "logo": `${SITE_URL}/et-logo-v2.webp`,
         "description": description || DEFAULT_DESCRIPTION,
@@ -76,11 +78,23 @@ export function SEO({
             "@type": "PostalAddress",
             "addressCountry": isUSDomain ? "US" : "GB"
         },
+        "areaServed": {
+            "@type": "Country",
+            "name": isUSDomain ? "United States" : "United Kingdom"
+        },
+        "openingHours": "Mo-Su 00:00-24:00",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": isUSDomain ? "+1-888-555-0199" : "+44 20 7946 0000",
-            "contactType": "emergency"
-        }
+            "contactType": "emergency",
+            "availableLanguage": "English"
+        },
+        "sameAs": [
+            "https://www.facebook.com/profile.php?id=61588024972553",
+            "https://www.instagram.com/emergencytradesmen/",
+            "https://x.com/etemergenc26245",
+            "https://www.tiktok.com/@emergencytradesmen"
+        ]
     };
 
     // Combine default schema with provided jsonLd
@@ -100,7 +114,7 @@ export function SEO({
             {/* OpenGraph / Facebook */}
             <meta property="og:type" content={ogType} />
             <meta property="og:url" content={absoluteUrl} />
-            <meta property="og:title" content={title} />
+            <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:site_name" content={SITE_NAME} />
@@ -123,7 +137,7 @@ export function SEO({
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
+            <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={ogImage} />
 

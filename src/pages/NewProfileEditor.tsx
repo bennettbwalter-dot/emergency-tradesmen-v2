@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useCallback } from "react";
+import { devLog, devWarn } from "@/lib/devLog";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -97,7 +98,7 @@ export default function NewProfileEditor() {
         }
 
         try {
-            console.log("Initializing Editor...");
+            devLog("Initializing Editor...");
 
             // 1. Diagnostics
             const { data: { user: sbUser }, error: userErr } = await supabase.auth.getUser();
@@ -108,12 +109,12 @@ export default function NewProfileEditor() {
                 return;
             }
 
-            console.log("=== DIAGNOSTICS ===");
-            console.log("Active User Email:", sbUser?.email || user?.email);
-            console.log("Active User ID (UUID):", activeId);
-            console.log("Auth Context Authenticated:", isAuthenticated);
+            devLog("=== DIAGNOSTICS ===");
+            devLog("Active User Email:", sbUser?.email || user?.email);
+            devLog("Active User ID (UUID):", activeId);
+            devLog("Auth Context Authenticated:", isAuthenticated);
             if (userErr) console.error("Identity Fetch Error:", userErr);
-            console.log("=== END DIAGNOSTICS ===");
+            devLog("=== END DIAGNOSTICS ===");
 
             let query = supabase.from('businesses').select('*');
 
@@ -144,7 +145,7 @@ export default function NewProfileEditor() {
             if (error) throw error;
 
             if (data) {
-                console.log("Found profile:", data.id);
+                devLog("Found profile:", data.id);
                 mapBusinessData(data);
 
                 const isFresh = !data.name || data.name === "Your Business Name";
@@ -165,14 +166,14 @@ export default function NewProfileEditor() {
                     return;
                 }
 
-                console.log("No existing profile, starting creation process...");
+                devLog("No existing profile, starting creation process...");
 
                 // 2. High Resilience Creation Floor
                 let newData = null;
 
                 // Tier 1: RPC (Security Definer)
                 try {
-                    console.log("Attempting RPC creation...");
+                    devLog("Attempting RPC creation...");
                     const { data: rpcData, error: rpcError } = await supabase.rpc('create_initial_business_v2', {
                         owner_id: activeId,
                         phone_number: user?.phone || "07700000000",
@@ -180,9 +181,9 @@ export default function NewProfileEditor() {
                     });
 
                     if (rpcError) {
-                        console.warn("RPC Creation skipped or failed:", rpcError);
+                        devWarn("RPC Creation skipped or failed:", rpcError);
                     } else if (rpcData) {
-                        console.log("RPC creation successful:", rpcData.id);
+                        devLog("RPC creation successful:", rpcData.id);
                         newData = rpcData;
                     }
                 } catch (e) {
@@ -205,7 +206,7 @@ export default function NewProfileEditor() {
                         is_open_24_hours: true
                     };
 
-                    console.log("Trying direct insert with owner metadata...");
+                    devLog("Trying direct insert with owner metadata...");
                     const { data: dData, error: dError } = await supabase
                         .from('businesses')
                         .insert({ ...baseBiz, owner_user_id: activeId, owner_id: activeId })
@@ -217,7 +218,7 @@ export default function NewProfileEditor() {
                         console.error("Dual Insert Failed:", dError);
 
                         // Tier 3: Individual Fallbacks
-                        console.log("Trying individual owner fields...");
+                        devLog("Trying individual owner fields...");
                         const { data: d1 } = await supabase.from('businesses').insert({ ...baseBiz, owner_user_id: activeId }).select().single();
                         if (d1) {
                             newData = d1;
@@ -228,7 +229,7 @@ export default function NewProfileEditor() {
 
                         // Tier 4: Safe Mode (Service Role Override)
                         if (!newData && (dError.message?.includes('violates row-level security') || dError.code === '42501')) {
-                            console.warn("RLS Violation Detected. Deploying Service Role Override...");
+                            devWarn("RLS Violation Detected. Deploying Service Role Override...");
 
                             // Because the env anon key is actually a service_role key, we can create an isolated
                             // client that doesn't send the user's JWT, bypassing RLS entirely.

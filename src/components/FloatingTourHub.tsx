@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { devLog } from "@/lib/devLog";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -135,7 +136,7 @@ export function FloatingTourHub() {
         const hasCompleted = localStorage.getItem('et-tour-completed');
 
         if (forceTour) {
-            console.log("[FloatingTourHub] Force starting tour via URL");
+            devLog("[FloatingTourHub] Force starting tour via URL");
             // Clean up the URL so it doesn't trigger on every route change
             window.history.replaceState({}, document.title, window.location.pathname);
             // Reset Completion status

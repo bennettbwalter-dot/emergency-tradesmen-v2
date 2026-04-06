@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { devLog } from "@/lib/devLog";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -33,7 +34,7 @@ export default function ReviewsPage() {
                 variant: "destructive",
             });
         } else {
-            console.log("Loaded reviews:", data);
+            devLog("Loaded reviews:", data);
             setReviews(data || []);
         }
         setIsLoading(false);

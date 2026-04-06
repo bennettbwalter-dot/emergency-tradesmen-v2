@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { isUSDomain } from '@/lib/siteConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -157,7 +158,7 @@ export function VideoIntroScroll() {
                         THE NEXT <br /> GENERATION
                     </h1>
                     <p className="reveal text-lg md:text-2xl text-neutral-400 font-medium max-w-2xl mx-auto leading-relaxed">
-                        Redefining how tradesmen connect with emergency calls. Efficient, reliable, and premium.
+                        Redefining how {isUSDomain() ? 'contractors' : 'tradesmen'} connect with emergency calls. Efficient, reliable, and premium.
                     </p>
                     <div className="reveal mt-12">
                         <button className="px-10 py-5 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform duration-300">

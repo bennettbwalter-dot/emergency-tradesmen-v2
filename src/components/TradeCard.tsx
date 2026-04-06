@@ -52,7 +52,8 @@ export function TradeCard({ trade, city }: TradeCardProps) {
       onClick={handleClick}
       className="block h-full group relative"
     >
-      <div className="relative h-full overflow-hidden rounded-2xl bg-card border border-white/10 shadow-lg transition-all duration-500 hover:shadow-[0_0_30px_-5px_theme(colors.gold/0.2)] hover:border-gold/30 hover:-translate-y-2">
+      <div className="relative h-full overflow-hidden rounded-2xl bg-card border border-white/10 shadow-lg transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--gold)/0.2)] hover:border-gold/30 hover:-translate-y-2">
+
 
         {/* Animated Shine Effect */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0">
@@ -80,7 +81,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
           {/* Floating Icon - Glassmorphic */}
           {trade.vectorIcon && (
             <div className="absolute top-4 right-4 z-20 w-12 h-12 p-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 group-hover:border-gold/50 transition-all duration-300">
-              <img src={trade.vectorIcon} alt="" loading="lazy" className="w-full h-full object-contain brightness-0 invert drop-shadow" />
+              <img src={trade.vectorIcon} alt={`${trade.name} icon`} loading="lazy" className="w-full h-full object-contain brightness-0 invert drop-shadow" />
             </div>
           )}
         </div>

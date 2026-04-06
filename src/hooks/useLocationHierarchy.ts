@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { devLog } from "@/lib/devLog";
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
@@ -65,7 +66,7 @@ export function useLocationHierarchy() {
 
     // Initial Load: States from JSON
     useEffect(() => {
-        console.log("HOOK: Loading states from JSON...", usData);
+        devLog("HOOK: Loading states from JSON...", usData);
         if (!usData || !(usData as any).states) {
             console.error("HOOK: usData is missing 'states' property!", usData);
             return;
@@ -80,7 +81,7 @@ export function useLocationHierarchy() {
         }));
         // Sort alphabetically
         loadedStates.sort((a, b) => a.name.localeCompare(b.name));
-        console.log(`HOOK: Loaded ${loadedStates.length} states.`);
+        devLog(`HOOK: Loaded ${loadedStates.length} states.`);
         setStates(loadedStates);
     }, []);
 

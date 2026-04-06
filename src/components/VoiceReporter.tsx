@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { devLog } from "@/lib/devLog";
 import { useNavigate } from 'react-router-dom';
 import { Mic, MicOff, Loader2, AlertTriangle, CheckCircle2, X, Send, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
@@ -179,7 +180,7 @@ export default function VoiceReporter() {
         setState('recording');
         startTimer();
 
-        console.log(`[VoiceReporter] Recording started (${mime})`);
+        devLog(`[VoiceReporter] Recording started (${mime})`);
     }, []);
 
     const stopRecording = useCallback(() => {
@@ -214,7 +215,7 @@ export default function VoiceReporter() {
             return;
         }
 
-        console.log(`[VoiceReporter] Uploading ${blob.size} bytes (${blob.type})`);
+        devLog(`[VoiceReporter] Uploading ${blob.size} bytes (${blob.type})`);
 
         const formData = new FormData();
         const ext = blob.type.includes('mp4') ? '.mp4' : '.webm';
@@ -232,7 +233,7 @@ export default function VoiceReporter() {
             }
 
             const data: TranscriptionResult = await res.json();
-            console.log('[VoiceReporter] Result:', data);
+            devLog('[VoiceReporter] Result:', data);
 
             if (data.error) {
                 setErrorMsg(data.error);

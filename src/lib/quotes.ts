@@ -77,17 +77,25 @@ export function validateQuoteForm(data: Partial<QuoteFormData>): {
         errors.email = "Please enter a valid email address";
     }
 
-    // Phone validation (UK format)
-    const phoneRegex = /^(\+44|0)[0-9]{10}$/;
+    // Phone validation (UK and US format)
+    const isUS = typeof window !== 'undefined' && (
+        window.location.hostname.includes('emergencycontractors.net') ||
+        (window.location.hostname === 'localhost' && ['3001', '5173'].includes(window.location.port))
+    );
+    const phoneRegex = isUS
+        ? /^(\+1|1)?[0-9]{10}$/
+        : /^(\+44|0)[0-9]{10}$/;
     const cleanPhone = data.phone?.replace(/\s/g, "");
     if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
-        errors.phone = "Please enter a valid UK phone number";
+        errors.phone = isUS ? "Please enter a valid US phone number" : "Please enter a valid UK phone number";
     }
 
-    // Postcode validation (basic UK postcode format)
-    const postcodeRegex = /^[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}$/i;
+    // Postcode/ZIP validation (UK and US format)
+    const postcodeRegex = isUS
+        ? /^[0-9]{5}(-[0-9]{4})?$/
+        : /^[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}$/i;
     if (!data.postcode || !postcodeRegex.test(data.postcode.trim())) {
-        errors.postcode = "Please enter a valid UK postcode";
+        errors.postcode = isUS ? "Please enter a valid US ZIP code" : "Please enter a valid UK postcode";
     }
 
     // Urgency validation

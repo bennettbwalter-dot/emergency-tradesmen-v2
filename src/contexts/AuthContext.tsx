@@ -10,6 +10,7 @@ interface User {
     phone?: string;
     postcode?: string;
     avatar?: string;
+    tenantId?: string; // Multi-tenancy
     createdAt: string;
     lastLogin: string;
     emailVerified: boolean;
@@ -41,6 +42,7 @@ interface AuthContextType {
 
     updateUser: (updates: Partial<User>) => void;
     refreshUser: () => Promise<void>;
+    isLocked: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -53,6 +55,7 @@ function mapSupabaseUser(supabaseUser: SupabaseUser): User {
         phone: supabaseUser.user_metadata?.phone,
         postcode: supabaseUser.user_metadata?.postcode,
         avatar: supabaseUser.user_metadata?.avatar,
+        tenantId: supabaseUser.app_metadata?.tenant_id,
         createdAt: supabaseUser.created_at,
         lastLogin: supabaseUser.last_sign_in_at || supabaseUser.created_at,
         emailVerified: !!supabaseUser.email_confirmed_at,
@@ -66,6 +69,7 @@ function mapSupabaseUser(supabaseUser: SupabaseUser): User {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isLocked, setIsLocked] = useState(false);
 
     useEffect(() => {
         // Check for existing session on mount
@@ -73,9 +77,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             try {
                 const { data: { session } } = await supabase.auth.getSession();
                 if (session?.user) {
-                    setUser(mapSupabaseUser(session.user));
+                    let currentUser = session.user;
+
+                    // Ensure tenantId exists in token, else refresh
+                    if (!currentUser.app_metadata?.tenant_id) {
+                        const { data: refreshData } = await supabase.auth.refreshSession();
+                        if (refreshData.session?.user?.app_metadata?.tenant_id) {
+                            currentUser = refreshData.session.user;
+                        } else {
+                            // Manual lookup fallback
+                            const { data: tenant } = await supabase.from('tenants').select('tenant_id').eq('owner_user_id', currentUser.id).single();
+                            if (tenant) {
+                                currentUser.app_metadata = { ...currentUser.app_metadata, tenant_id: tenant.tenant_id };
+                            } else {
+                                console.error("FATAL: No tenant found for user. Access denied.");
+                                await supabase.auth.signOut();
+                                setUser(null);
+                                setIsLocked(false);
+                                return;
+                            }
+                        }
+                    }
+
+                    setUser(mapSupabaseUser(currentUser));
+                    
+                    // Check lockout status
+                    const { isLocked: checkLocked } = await import("@/lib/subscriptionService");
+                    const locked = await checkLocked();
+                    setIsLocked(locked);
                 } else {
                     setUser(null);
+                    setIsLocked(false);
                     // Clear potential stale data
                     localStorage.removeItem('emergency-tradesmen-user');
                 }
@@ -92,11 +124,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 try {
-                    console.log("🔐 Auth state change:", event, session?.user?.email);
+                    if (import.meta.env.DEV) console.log("🔐 Auth state change:", event, session?.user?.email);
                     if (session?.user) {
-                        setUser(mapSupabaseUser(session.user));
+                        let currentUser = session.user;
+                        
+                        // Enforce tenant scoping middleware-style inside React
+                        if (!currentUser.app_metadata?.tenant_id) {
+                            const { data: tenant } = await supabase.from('tenants').select('tenant_id').eq('owner_user_id', currentUser.id).single();
+                            if (tenant) {
+                                currentUser.app_metadata = { ...currentUser.app_metadata, tenant_id: tenant.tenant_id };
+                            }
+                        }
+
+                        setUser(mapSupabaseUser(currentUser));
+                        
+                        // Check lockout status on auth change
+                        const { isLocked: checkLocked } = await import("@/lib/subscriptionService");
+                        const locked = await checkLocked();
+                        setIsLocked(locked);
                     } else {
                         setUser(null);
+                        setIsLocked(false);
                         // Clear potential stale data
                         localStorage.removeItem('emergency-tradesmen-user');
                     }
@@ -206,6 +254,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             if (error) throw error;
             if (supabaseUser) {
                 setUser(mapSupabaseUser(supabaseUser));
+                
+                const { isLocked: checkLocked } = await import("@/lib/subscriptionService");
+                const locked = await checkLocked();
+                setIsLocked(locked);
             }
         } catch (error) {
             console.error("Error refreshing user:", error);
@@ -225,6 +277,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 signOut: logout, // Add signOut as an alias to logout
                 updateUser,
                 refreshUser,
+                isLocked,
             }}
         >
             {children}

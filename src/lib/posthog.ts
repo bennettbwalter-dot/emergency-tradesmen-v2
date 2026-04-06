@@ -1,4 +1,5 @@
 import posthog from 'posthog-js';
+import { devLog } from "@/lib/devLog";
 
 export { posthog };
 
@@ -29,7 +30,7 @@ export const initPostHog = () => {
             }
         });
         isInitialized = true;
-        console.log("PostHog Analytics initialized successfully.");
+        devLog("PostHog Analytics initialized successfully.");
     } catch (e) {
         console.error("PostHog Analytics failed to initialize", e);
     }

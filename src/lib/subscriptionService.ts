@@ -1,15 +1,20 @@
 import { supabase } from './supabase';
+import { devLog } from "@/lib/devLog";
 
 export interface Subscription {
     id: string;
     userId: string;
     paymentCustomerId?: string;
     paymentSubscriptionId?: string;
-    plan: 'free' | 'professional' | 'enterprise';
-    status: 'active' | 'canceled' | 'past_due' | 'trialing' | 'inactive';
+    plan: 'free' | 'professional' | 'enterprise' | 'pro' | 'premium';
+    status: 'active' | 'canceled' | 'past_due' | 'trialing' | 'inactive' | 'locked' | 'payment_failed';
     subscriptionExpiresAt?: string;
     currentPeriodStart?: string;
     currentPeriodEnd?: string;
+    failedPaymentAttempts: number;
+    lockedAt?: string;
+    cancelAtPeriodEnd?: boolean;
+    subscriptionEndsAt?: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -20,6 +25,19 @@ export const PLANS = {
         price: 0,
         features: ['Basic Business Profile', 'Listed in 1 Category', 'Standard Support'],
     },
+    pro: {
+        name: 'Pro Monthly',
+        price: 29,
+        durationDays: 30,
+        features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Verified Badge', 'Analytics'],
+    },
+    premium: {
+        name: 'Pro Yearly',
+        price: 99,
+        durationDays: 365,
+        features: ['Premium Profile + Video', 'All Categories', 'Top of Results', 'Account Manager', 'Featured'],
+    },
+    // Aliases for backward compatibility
     professional: {
         name: 'Pro Monthly',
         price: 29,
@@ -42,13 +60,14 @@ export async function getUserSubscription(): Promise<Subscription | null> {
     // Developer Bypass
     const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
     if (user.email && devEmails.includes(user.email.toLowerCase())) {
-        console.log("Bypassing subscription check for developer:", user.email);
+        devLog("Bypassing subscription check for developer:", user.email);
         return {
             id: 'dev-bypass-id',
             userId: user.id,
             plan: 'enterprise',
             status: 'active',
             subscriptionExpiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+            failedPaymentAttempts: 0,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         };
@@ -67,6 +86,7 @@ export async function getUserSubscription(): Promise<Subscription | null> {
             userId: user.id,
             plan: 'free',
             status: 'active',
+            failedPaymentAttempts: 0,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         };
@@ -125,7 +145,7 @@ export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Pr
     // Developer Bypass Check
     const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
     if (user?.email && devEmails.includes(user.email.toLowerCase())) {
-        console.log("Access granted via developer bypass");
+        devLog("Access granted via developer bypass");
         return true;
     }
 
@@ -143,8 +163,29 @@ export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Pr
         }
     }
 
+    // Normalize plan names: 'pro' -> 'professional', 'premium' -> 'enterprise'
+    const normalizePlan = (plan: string): string => {
+        if (plan === 'pro') return 'professional';
+        if (plan === 'premium') return 'enterprise';
+        return plan;
+    };
+
     const planHierarchy = { free: 0, professional: 1, enterprise: 2 };
-    return planHierarchy[subscription.plan] >= planHierarchy[requiredPlan];
+    const normalizedPlan = normalizePlan(subscription.plan);
+    const normalizedRequired = normalizePlan(requiredPlan);
+    return planHierarchy[normalizedPlan] >= planHierarchy[normalizedRequired];
+}
+
+// Check if current user is locked out due to payment failure
+export async function isLocked(): Promise<boolean> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
+
+    // Developer bypass
+    if (isDeveloper(user.email)) return false;
+
+    const subscription = await getUserSubscription();
+    return subscription?.status === 'locked';
 }
 
 // Check if a specific subscription is currently valid (not expired)
@@ -203,6 +244,26 @@ export async function markSubscriptionAsPaid(userId: string, plan: 'professional
     return true;
 }
 
+// Reset lockout (Admin function)
+export async function adminResetLockout(userId: string): Promise<boolean> {
+    const { error } = await supabase
+        .from('subscriptions')
+        .update({
+            status: 'active',
+            failed_payment_attempts: 0,
+            locked_at: null,
+            updated_at: new Date().toISOString()
+        })
+        .eq('user_id', userId);
+
+    if (error) {
+        console.error('Error resetting lockout:', error);
+        return false;
+    }
+
+    return true;
+}
+
 // Cancel subscription
 export async function cancelSubscription(): Promise<boolean> {
     const subscription = await getUserSubscription();
@@ -228,6 +289,10 @@ function mapSubscription(row: any): Subscription {
         subscriptionExpiresAt: row.subscription_expires_at,
         currentPeriodStart: row.current_period_start,
         currentPeriodEnd: row.current_period_end,
+        failedPaymentAttempts: row.failed_payment_attempts || 0,
+        lockedAt: row.locked_at,
+        cancelAtPeriodEnd: row.cancel_at_period_end || false,
+        subscriptionEndsAt: row.subscription_ends_at,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
     };
@@ -249,17 +314,18 @@ export function getLocationLimit(planType: string, email?: string | null): numbe
     if (isDeveloper(email)) return 99;
 
     // Plan-based limits
-    if (planType === 'pro' || planType === 'enterprise') return 3;
+    if (planType === 'premium' || planType === 'enterprise') return 3;
+    if (planType === 'pro' || planType === 'professional') return 1;
     return 1; // basic plan
 }
 
 // Get plan type display name
 export function getPlanDisplayName(planType: string): string {
     switch (planType) {
-        case 'pro':
+        case 'premium':
         case 'enterprise':
             return 'Pro Yearly (£99)';
-        case 'basic':
+        case 'pro':
         case 'professional':
             return 'Pro Monthly (£29)';
         default:

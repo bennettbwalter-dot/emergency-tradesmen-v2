@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '@/components/SEO';
+import { getSupportEmail } from '@/lib/siteConfig';
 
 export default function TermsOfService() {
     return (
@@ -73,7 +74,7 @@ export default function TermsOfService() {
                     <section>
                         <h2 className="text-xl font-semibold text-slate-800 mb-3">7. Contact Us</h2>
                         <p className="text-slate-600">
-                            If you have any questions about these Terms, please contact us at: emergencytradesmen@outlook.com
+                            If you have any questions about these Terms, please contact us at: {getSupportEmail()}
                         </p>
                     </section>
                 </div>

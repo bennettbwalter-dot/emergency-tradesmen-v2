@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { isUSDomain } from "@/lib/siteConfig";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -135,7 +136,7 @@ export default function AdminDashboard() {
                         <TrendingUp className="h-4 w-4 text-purple-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">£{stats.totalRevenue.toLocaleString()}</div>
+                        <div className="text-2xl font-bold">{isUSDomain() ? '$' : '£'}{stats.totalRevenue.toLocaleString()}</div>
                         <p className="text-xs text-muted-foreground mt-1">Based on active subs</p>
                     </CardContent>
                 </Card>
@@ -159,7 +160,7 @@ export default function AdminDashboard() {
                         <Card className="lg:col-span-2 border-border/50 shadow-sm">
                             <CardHeader>
                                 <CardTitle className="text-xl">Recent Listings</CardTitle>
-                                <CardDescription>The latest tradesmen to join the platform.</CardDescription>
+                                <CardDescription>The latest {isUSDomain() ? 'contractors' : 'tradesmen'} to join the platform.</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="overflow-x-auto">

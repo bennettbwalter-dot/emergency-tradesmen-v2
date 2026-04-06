@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
-import { format } from "date-fns";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { format, isValid } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CalendarDays, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { AdSlot } from "@/components/AdSlot";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
+import { LocalErrorBoundary } from "@/components/LocalErrorBoundary";
 
 interface BlogPost {
     id: string;
@@ -52,49 +52,75 @@ export default function BlogPage() {
 
     useEffect(() => {
         async function loadPosts() {
-            const { data, error } = await supabase
-                .from('posts')
-                .select('id, title, slug, excerpt, cover_image, published_at, created_at')
-                .eq('published', true)
-                .order('published_at', { ascending: false });
+            try {
+                const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+                const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-            if (error || !data) {
+                const url = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc`;
+
+                const response = await fetch(url, {
+                    headers: {
+                        'apikey': supabaseKey,
+                        'Authorization': `Bearer ${supabaseKey}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'count=exact'
+                    }
+                });
+
+                if (!response.ok) {
+                    setIsLoading(false);
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (!data || data.length === 0) {
+                    setIsLoading(false);
+                    return;
+                }
+
+                // Strict Regional Filtering: Only show posts that match the current country code suffix
+                const regionalData = data.filter(post => {
+                    if (!post) return false;
+                    try {
+                        const slug = (post.slug || "").toString().toLowerCase();
+                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+                        
+                        if (settings.countryCode === 'US') {
+                            return isUS || !isUK;
+                        } else {
+                            return isUK || !isUS;
+                        }
+                    } catch (err) {
+                        return false;
+                    }
+                });
+
+                // Client-side deduplication as a safety measure (dedupe by title and image)
+                const uniquePosts: BlogPost[] = [];
+                const seenTitles = new Set();
+                const seenImages = new Set();
+                for (const post of regionalData) {
+                    try {
+                        const title = (post.title || "").toString().toLowerCase().trim();
+                        const image = post.cover_image;
+                        if (!seenTitles.has(title) && (!image || !seenImages.has(image))) {
+                            seenTitles.add(title);
+                            if (image) seenImages.add(image);
+                            uniquePosts.push(post);
+                        }
+                    } catch (err) {
+                        // Silently skip problematic posts
+                    }
+                }
+
+                setPosts(uniquePosts);
+            } catch (err) {
+                // Silently handle load errors
+            } finally {
                 setIsLoading(false);
-                return;
             }
-
-            // Strict Regional Filtering: Only show posts that match the current country code suffix
-            const regionalData = data.filter(post => {
-                const slug = post.slug.toLowerCase();
-                // Determine if it has a suffix
-                const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
-                const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
-                
-                if (settings.countryCode === 'US') {
-                    // Show US posts OR posts with NO suffix (Assume shared)
-                    return isUS || !isUK;
-                } else {
-                    // Show UK posts OR posts with NO suffix
-                    return isUK || !isUS;
-                }
-            });
-
-            // Client-side deduplication as a safety measure (dedupe by title and image)
-            const uniquePosts = [];
-            const seenTitles = new Set();
-            const seenImages = new Set();
-            for (const post of regionalData) {
-                const title = post.title.toLowerCase().trim();
-                const image = post.cover_image;
-                if (!seenTitles.has(title) && (!image || !seenImages.has(image))) {
-                    seenTitles.add(title);
-                    if (image) seenImages.add(image);
-                    uniquePosts.push(post);
-                }
-            }
-
-            setPosts(uniquePosts);
-            setIsLoading(false);
         }
 
         loadPosts();
@@ -105,10 +131,11 @@ export default function BlogPage() {
     const regularPosts = posts.slice(1);
 
     return (
-        <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
+        <LocalErrorBoundary>
+            <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={regionalizeText(`The Dispatch | ${siteName}`)}
-                description={regionalizeText("Critical briefing: Expert advice, safety guides, and maintenance tips for homeowners.")}
+                title={`Emergency ${settings.tradeTerm} Blog — Safety Guides & Expert Tips`}
+                description={`Expert home safety guides, emergency repair tips, and maintenance advice for UK homeowners. Learn how to handle plumbing, electrical & HVAC emergencies. Read now.`}
                 canonical={`${countryPrefix}/blog`}
             />
 
@@ -139,6 +166,12 @@ export default function BlogPage() {
                 </div>
             ) : posts.length > 0 ? (
                 <>
+                    <div className="container mx-auto px-4 pt-10 pb-6">
+                        <h1 className="text-3xl md:text-5xl font-display font-black tracking-tight text-foreground">
+                            Emergency {settings.tradeTerm} Blog
+                        </h1>
+                    </div>
+
                     {/* "Netflix" Hero Section - Featured Post */}
                     {featuredPost && (
                         <div className="relative w-full h-[60vh] md:h-[85vh] overflow-hidden group">
@@ -149,6 +182,7 @@ export default function BlogPage() {
                                         src={featuredPost.cover_image}
                                         alt={featuredPost.title}
                                         className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-110"
+                                        loading="eager"
                                     />
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
@@ -161,11 +195,11 @@ export default function BlogPage() {
                                     <Badge className="bg-gold text-black hover:bg-gold/90 border-none uppercase tracking-widest px-3 py-1 font-bold text-[10px] md:text-sm">
                                         Cover Story
                                     </Badge>
-                                    <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
+                                    <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
                                         <Link to={`${countryPrefix}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
                                             {regionalizeText(featuredPost.title)}
                                         </Link>
-                                    </h1>
+                                    </h2>
                                     <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-2xl font-light leading-relaxed drop-shadow-md line-clamp-2 md:line-clamp-3">
                                         {featuredPost.excerpt}
                                     </p>
@@ -226,7 +260,11 @@ export default function BlogPage() {
 
                                         <div className="space-y-3">
                                             <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                                                <span>{format(new Date(post.published_at || post.created_at), 'MMM d')}</span>
+                                                <span>{(() => {
+                                                    const dString = post.published_at || post.created_at;
+                                                    const d = Array.isArray(dString) ? new Date(dString[0]) : new Date(dString);
+                                                    return isValid(d) ? format(d, 'MMM d') : 'March 2026';
+                                                })()}</span>
                                                 <span className="w-px h-3 bg-border" />
                                                 <span className="text-gold font-bold group-hover:text-gold-dark transition-colors">Briefing</span>
                                             </div>
@@ -256,5 +294,6 @@ export default function BlogPage() {
                 </div>
             )}
         </div>
+        </LocalErrorBoundary>
     );
 }

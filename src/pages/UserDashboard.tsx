@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChatSystem } from "@/components/ChatSystem";
 import { supabase } from "@/lib/supabase";
@@ -40,7 +41,6 @@ export default function UserDashboard() {
         // Import dynamically to avoid circular dependencies if any
         const { hasAccess } = await import("@/lib/subscriptionService");
         const premium = await hasAccess('professional');
-        console.log("Checking premium status for user:", user.email, "Is Premium:", premium);
         setIsPremium(premium);
     }
 
@@ -315,12 +315,12 @@ function ProfileTab({ user, onUpdate }: { user: UserType; onUpdate: (data: Parti
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="postcode">Default Postcode</Label>
+                            <Label htmlFor="postcode">Default {getPostcodeLabel()}</Label>
                             <Input
                                 id="postcode"
                                 value={postcode}
                                 onChange={(e) => setPostcode(e.target.value)}
-                                placeholder="SW1A 1AA"
+                                placeholder={getPostcodePlaceholder()}
                             />
                         </div>
                     </div>

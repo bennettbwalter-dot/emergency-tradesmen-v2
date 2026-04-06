@@ -30,7 +30,7 @@ export function BrandingTab({ previews, handleFile }: EditorProps) {
                         <label className="text-sm font-bold block mb-3 uppercase tracking-wider text-[#D4AF37]">Main Logo</label>
                         <div className="border-2 border-dashed border-slate-700 rounded-xl p-4 flex flex-col items-center justify-center text-center bg-slate-950 aspect-square relative group overflow-hidden transition-all hover:border-[#D4AF37]/50">
                             {previews.logo ?
-                                <img src={previews.logo} className="w-full h-full object-contain p-2 z-10" /> :
+                                <img src={previews.logo} alt="Business logo" className="w-full h-full object-contain p-2 z-10" /> :
                                 <Building2 className="w-16 h-16 text-slate-800 mb-2" />
                             }
                             <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
@@ -49,7 +49,7 @@ export function BrandingTab({ previews, handleFile }: EditorProps) {
                             <label className="text-sm font-bold block mb-3 uppercase tracking-wider text-[#D4AF37]">Header Background</label>
                             <div className="h-40 bg-slate-950 rounded-xl w-full overflow-hidden relative group border border-slate-700 hover:border-[#D4AF37]/50 transition-all">
                                 {previews.header ?
-                                    <img src={previews.header} className="w-full h-full object-cover opacity-80" /> :
+                                    <img src={previews.header} alt="Header banner" className="w-full h-full object-cover opacity-80" /> :
                                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-600 gap-2">
                                         <Upload className="w-6 h-6 opacity-50" />
                                         <span className="text-sm">No Banner Image</span>
@@ -68,7 +68,7 @@ export function BrandingTab({ previews, handleFile }: EditorProps) {
                             <div className="flex gap-4 items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
                                 <div className="w-24 h-16 bg-slate-900 rounded overflow-hidden flex-shrink-0 border border-slate-700 relative group">
                                     {previews.vehicle ?
-                                        <img src={previews.vehicle} className="w-full h-full object-cover" /> :
+                                        <img src={previews.vehicle} alt="Featured hero image" className="w-full h-full object-cover" /> :
                                         <div className="w-full h-full flex items-center justify-center text-xs text-slate-600">None</div>
                                     }
                                 </div>

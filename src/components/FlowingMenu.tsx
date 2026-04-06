@@ -270,7 +270,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
                                         </div>
                                         {vectorIcon && (
                                             <div className="marquee__vector-icon">
-                                                <img src={vectorIcon} alt="" />
+                                                <img src={vectorIcon} alt={`${text} icon`} />
                                             </div>
                                         )}
                                     </div>

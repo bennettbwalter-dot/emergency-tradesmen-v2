@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { devLog } from "@/lib/devLog";
 import App from "./App.tsx";
 import "./index.css";
 import "@fontsource/dm-sans"; // Defaults to weight 400
@@ -53,14 +54,14 @@ window.addEventListener('unhandledrejection', (event) => {
     // that works outside of React, but for now, logging is safer than crashing the UI.
 });
 
-console.log("🚀 Application Starting...");
+devLog("🚀 Application Starting...");
 
 try {
     const rootElement = document.getElementById("root");
     if (!rootElement) throw new Error("Root element 'root' not found in index.html");
 
     createRoot(rootElement).render(<App />);
-    console.log("React App Mounted");
+    devLog("React App Mounted");
 } catch (error: any) {
     console.error("🔥 FATAL APP CRASH:", error);
     document.body.innerHTML = `

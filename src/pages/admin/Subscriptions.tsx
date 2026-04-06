@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, CheckCircle, Clock, AlertTriangle, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { markSubscriptionAsPaid, extendSubscription } from "@/lib/subscriptionService";
+import { markSubscriptionAsPaid, extendSubscription, adminResetLockout } from "@/lib/subscriptionService";
 import {
     Table,
     TableBody,
@@ -99,6 +99,23 @@ export default function SubscriptionsPage() {
         }
     };
 
+    const handleResetLockout = async (userId: string) => {
+        const success = await adminResetLockout(userId);
+        if (success) {
+            toast({
+                title: "Lockout reset",
+                description: "User's account has been unlocked and payment attempts reset.",
+            });
+            loadSubscriptions();
+        } else {
+            toast({
+                title: "Error",
+                description: "Failed to reset lockout",
+                variant: "destructive"
+            });
+        }
+    };
+
     const handleExtend = async (userId: string, days: number) => {
         const success = await extendSubscription(userId, days);
 
@@ -131,6 +148,12 @@ export default function SubscriptionsPage() {
                 return <Badge variant="secondary" className="gap-1">Inactive</Badge>;
             case 'canceled':
                 return <Badge variant="outline" className="gap-1">Canceled</Badge>;
+            case 'locked':
+                return <Badge variant="destructive" className="gap-1"><AlertTriangle className="w-3 h-3" /> Locked</Badge>;
+            case 'payment_failed':
+                return <Badge className="bg-amber-500 gap-1"><Clock className="w-3 h-3" /> Payment Failed</Badge>;
+            case 'past_due':
+                return <Badge className="bg-amber-500 gap-1"><Clock className="w-3 h-3" /> Past Due</Badge>;
             default:
                 return <Badge variant="secondary">{status}</Badge>;
         }
@@ -191,6 +214,9 @@ export default function SubscriptionsPage() {
                         <SelectItem value="active">Active</SelectItem>
                         <SelectItem value="inactive">Inactive</SelectItem>
                         <SelectItem value="canceled">Canceled</SelectItem>
+                        <SelectItem value="locked">Locked</SelectItem>
+                        <SelectItem value="payment_failed">Payment Failed</SelectItem>
+                        <SelectItem value="past_due">Past Due</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -248,6 +274,16 @@ export default function SubscriptionsPage() {
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex gap-2 justify-end">
+                                            {sub.status === 'locked' && (
+                                                <Button
+                                                    size="sm"
+                                                    variant="destructive"
+                                                    className="h-7 text-xs"
+                                                    onClick={() => handleResetLockout(sub.user_id)}
+                                                >
+                                                    Unlock
+                                                </Button>
+                                            )}
                                             <Button
                                                 size="sm"
                                                 variant="outline"

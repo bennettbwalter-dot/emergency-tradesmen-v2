@@ -40,7 +40,7 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
                     */}
 
                     <div className="flex justify-center mb-6">
-                        <img src="/et-logo-new.webp" alt="Emergency Trades Logo" className="w-16 h-16 rounded-full object-cover border-2 border-gold/50" />
+                        <img src="/et-logo-new.webp" alt="Emergency Trades Logo" loading="lazy" className="w-16 h-16 rounded-full object-cover border-2 border-gold/50" />
                     </div>
                     <Card className="border-gold/20 shadow-lg">
                         <CardContent className="pt-6 text-center">

@@ -38,9 +38,13 @@ export const db = {
          * Get all favorites for the current user
          */
         async getAll() {
+            const userId = await getCurrentUserId();
+            if (!userId) throw new Error("User not logged in");
+
             const { data, error } = await supabase
                 .from('favorites')
                 .select('*')
+                .eq('user_id', userId)
                 .order('saved_at', { ascending: false });
 
             if (error) throw error;
@@ -144,12 +148,16 @@ export const db = {
         },
 
         /**
-         * Get user's quote history
+         * Get user's quote history (scoped to current user only)
          */
         async getHistory() {
+            const userId = await getCurrentUserId();
+            if (!userId) throw new Error("User not logged in");
+
             const { data, error } = await supabase
                 .from('quotes')
                 .select('*')
+                .eq('user_id', userId)
                 .order('created_at', { ascending: false });
 
             if (error) throw error;
@@ -157,7 +165,7 @@ export const db = {
         },
 
         /**
-         * Get all quotes (admin)
+         * Get all quotes (admin only - no user scoping)
          */
         async getAll() {
             const { data, error } = await supabase
@@ -170,25 +178,33 @@ export const db = {
         },
 
         /**
-         * Update quote status
+         * Update quote status (scoped to current user's own quotes)
          */
         async updateStatus(quoteId: string, status: string) {
+            const userId = await getCurrentUserId();
+            if (!userId) throw new Error("User not logged in");
+
             const { error } = await supabase
                 .from('quotes')
                 .update({ status })
-                .eq('id', quoteId);
+                .eq('id', quoteId)
+                .eq('user_id', userId);
 
             if (error) throw error;
         },
 
         /**
-         * Delete a quote
+         * Delete a quote (scoped to current user's own quotes)
          */
         async delete(quoteId: string) {
+            const userId = await getCurrentUserId();
+            if (!userId) throw new Error("User not logged in");
+
             const { error } = await supabase
                 .from('quotes')
                 .delete()
-                .eq('id', quoteId);
+                .eq('id', quoteId)
+                .eq('user_id', userId);
 
             if (error) throw error;
         }

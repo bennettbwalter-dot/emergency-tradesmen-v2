@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { devLog } from "@/lib/devLog";
 import { findNearestCity } from "@/lib/cityCoordinates";
 
 interface GeolocationState {
@@ -35,7 +36,7 @@ export function useGeolocation() {
                 // Find nearest city using distance calculation (no API key required)
                 const nearestCity = findNearestCity(latitude, longitude);
 
-                console.log(`Nearest city: ${nearestCity.city} (${nearestCity.distance.toFixed(1)}km away)`);
+                devLog(`Nearest city: ${nearestCity.city} (${nearestCity.distance.toFixed(1)}km away)`);
 
                 setState({
                     loading: false,

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
+import { getSocialUrls } from "@/lib/siteConfig";
 
 
 interface HeaderProps {
@@ -84,7 +85,7 @@ export function Header({ countryCode }: HeaderProps) {
           <div className="flex-shrink-0 z-50">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
               <div className="relative">
-                <img src="/et-logo-v2.webp" alt="Emergency Trades Logo" className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
+                <img src="/et-logo-v2.webp" alt="Emergency Trades Logo" loading="eager" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 rounded-full object-cover border border-gold/30 group-hover:border-gold/80 transition-colors" />
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="hidden sm:block">
@@ -170,7 +171,7 @@ export function Header({ countryCode }: HeaderProps) {
                   {/* Top Header Match */}
                   <div className="flex items-center justify-between mb-8 mt-2 px-2">
                     <div className="flex items-center gap-3">
-                      <img src="/et-logo-v2.webp" alt="Logo" className="w-8 h-8 rounded-full border border-gold/30" />
+                      <img src="/et-logo-v2.webp" alt="Logo" loading="lazy" className="w-8 h-8 rounded-full border border-gold/30" />
                       <span className="font-display tracking-wide text-lg text-white">{siteNameMain}<span className="text-gold ml-1">{siteNameSub}</span></span>
                     </div>
                   </div>
@@ -243,12 +244,16 @@ export function Header({ countryCode }: HeaderProps) {
 
                     {/* Socials */}
                     <div className="mt-8 px-3 pt-6 border-t border-white/5">
-                      <div className="flex gap-4">
-                        <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-10 h-10 bg-[#1a1d27] border-0" />
-                        <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-10 h-10 bg-[#1a1d27] border-0" />
-                        <GlassSocialIcon platform="twitter" href="https://x.com/etemergenc26245" className="w-10 h-10 bg-[#1a1d27] border-0" />
-                        <GlassSocialIcon platform="tiktok" href="https://www.tiktok.com/@emergencytradesmen" className="w-10 h-10 bg-[#1a1d27] border-0" />
-                      </div>
+                        <div className="flex gap-4">
+                        {(() => { const socials = getSocialUrls(); return (
+                            <>
+                                <GlassSocialIcon platform="facebook" href={socials.facebook} className="w-10 h-10 bg-[#1a1d27] border-0" />
+                                <GlassSocialIcon platform="instagram" href={socials.instagram} className="w-10 h-10 bg-[#1a1d27] border-0" />
+                                <GlassSocialIcon platform="twitter" href={socials.twitter} className="w-10 h-10 bg-[#1a1d27] border-0" />
+                                <GlassSocialIcon platform="tiktok" href={socials.tiktok || "https://www.tiktok.com/@emergencytradesmen"} className="w-10 h-10 bg-[#1a1d27] border-0" />
+                            </>
+                        ); })()}
+                        </div>
                     </div>
                   </div>
                 </SheetContent>

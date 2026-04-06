@@ -1,5 +1,6 @@
-# Emergency Tradesmen
-# https://emergencytradesmen.net
+# Emergency Tradesmen / Emergency Contractors
+# https://emergencytradesmen.net (UK)
+# https://emergencycontractors.net (US)
 
 # General Crawler Settings
 User-agent: *
@@ -28,6 +29,7 @@ Allow: /images/
 Allow: /public/images/
 Allow: /business/logo/
 
-# Sitemap location
+# Sitemap locations
 Sitemap: https://emergencytradesmen.net/sitemap.xml
+Sitemap: https://emergencycontractors.net/sitemap-us.xml
 Sitemap: https://emergencytradesmen.net/rss.xml

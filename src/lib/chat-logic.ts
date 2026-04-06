@@ -3,6 +3,7 @@ import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib
 import { cityPostcodes } from "@/lib/cityPostcodes";
 import { searchVectorKnowledgeBase } from "@/lib/knowledge-base";
 import { getOfflineResponse, classifyEmergency, detectTradeFromBrain } from "@/lib/emergency-brain";
+import { isUSDomain } from "@/lib/siteConfig";
 
 // FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
 const FUZZY_TRADE_MATCHES: Record<string, string> = {
@@ -675,7 +676,8 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
-        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or postcode are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
+        const locationTerm = isUSDomain() ? 'zip code' : 'postcode';
+        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or ${locationTerm} are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
         newState.step = 'LOCATION_CHECK';
     } else {
         responseText = /trade|service|list|cover/i.test(lowerMsg)

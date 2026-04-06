@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { getSupportEmail } from "@/lib/siteConfig";
 
 interface ContactFormProps {
     businessName?: string;
@@ -24,7 +25,7 @@ export function ChatSystem({ businessName, businessEmail, businessPhone }: Conta
     const [isSending, setIsSending] = useState(false);
 
     // Default to platform support if no business specified
-    const recipientEmail = businessEmail || "emergencytradesmen@outlook.com";
+    const recipientEmail = businessEmail || getSupportEmail();
     const recipientName = businessName || "Emergency Tradesmen Support";
 
     const handleSubmit = (e: React.FormEvent) => {

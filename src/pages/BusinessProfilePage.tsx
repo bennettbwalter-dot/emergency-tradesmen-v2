@@ -68,20 +68,25 @@ export default function BusinessProfilePage() {
         async function loadData() {
             if (businessId) {
                 setPhotosLoading(true);
-                // Parallel fetch
-                const [businessPhotos, statusData] = await Promise.all([
-                    fetchBusinessPhotos(businessId),
-                    db.businesses.getClaimStatus(businessId)
-                ]);
+                try {
+                    // Parallel fetch
+                    const [businessPhotos, statusData] = await Promise.all([
+                        fetchBusinessPhotos(businessId),
+                        db.businesses.getClaimStatus(businessId)
+                    ]);
 
-                setPhotos(businessPhotos);
-                if (statusData) {
-                    setClaimStatus({
-                        status: statusData.claim_status || 'unclaimed',
-                        verified: statusData.verified || false
-                    });
+                    setPhotos(businessPhotos);
+                    if (statusData) {
+                        setClaimStatus({
+                            status: statusData.claim_status || 'unclaimed',
+                            verified: statusData.verified || false
+                        });
+                    }
+                } catch (err) {
+                    console.error("Error loading business photos:", err);
+                } finally {
+                    setPhotosLoading(false);
                 }
-                setPhotosLoading(false);
             }
         }
         loadData();
@@ -289,18 +294,20 @@ export default function BusinessProfilePage() {
 
     const representativeImage = business.vehicle_image_url || ((tradeRepresentativeImages as any)[trade] || tradeRepresentativeImages.default);
 
+    const siteDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
     const businessSchema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": `${isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net'}/business/${business.id}`,
+        "@id": `${siteDomain}/business/${business.id}`,
         name: business.name,
         image: [
             ...(photos.length > 0 ? [photos[0].url] : []),
-            `https://emergencytradesmen.net${heroBgImage}`,
-            `https://emergencytradesmen.net${representativeImage}`
+            `${siteDomain}${heroBgImage}`,
+            `${siteDomain}${representativeImage}`
         ],
         telephone: business.phone,
-        url: business.website || `https://emergencytradesmen.net/business/${business.id}`,
+        url: business.website || `${siteDomain}/business/${business.id}`,
         address: {
             "@type": "PostalAddress",
             streetAddress: business.address?.split(',')[0] || "",
@@ -314,14 +321,21 @@ export default function BusinessProfilePage() {
             ratingValue: business.rating,
             reviewCount: business.reviewCount
         } : undefined,
-        priceRange: isUS ? "$$" : "££"
+        priceRange: isUS ? "$$" : "££",
+        openingHours: business.isOpen24Hours ? "Mo-Su 00:00-24:00" : business.hours,
+        openingHoursSpecification: business.isOpen24Hours ? {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        } : undefined
     };
 
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={`${business.name} - ${formattedTrade} ${formattedCity} | Local & Verified`}
-                description={`Need a ${formattedTrade} in ${formattedCity}? Contact ${business.name}. Verified local expert available 24/7. Read reviews and call now.`}
+                title={`${business.name} — ${formattedTrade} in ${formattedCity} | Verified 24/7`}
+                description={`Need a ${formattedTrade} in ${formattedCity}? Contact ${business.name}. Verified local expert available 24/7. Read reviews, check credentials and call now for emergency help.`}
                 canonical={`/business/${business.id}`}
                 jsonLd={businessSchema}
             />
@@ -666,7 +680,6 @@ export default function BusinessProfilePage() {
                                                 <p className="text-lg font-medium text-green-500">
                                                     {business.isOpen24Hours ? "Open 24 hours" : business.hours}
                                                 </p>
-                                                <p className="text-sm text-green-600 font-medium">Open 24 hours</p>
                                             </div>
                                         </div>
                                     </div>

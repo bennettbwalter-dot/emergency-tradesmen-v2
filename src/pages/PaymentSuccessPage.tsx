@@ -10,15 +10,47 @@ import { useAuth } from "@/contexts/AuthContext";
 import { sendEmail } from "@/lib/email";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
+import { getUserSubscription } from "@/lib/subscriptionService";
+import { getSupportEmail, getSiteDomain, getSiteName } from "@/lib/siteConfig";
 
 export default function PaymentSuccessPage() {
     const { user, refreshUser } = useAuth();
     const { settings } = useLocalization();
     const navigate = useNavigate();
     const [countdown, setCountdown] = useState(5);
+    const [verified, setVerified] = useState(false);
     const hasSentRef = useRef(false);
 
     useEffect(() => {
+        // Verify subscription status in database before showing success
+        const verifyPayment = async () => {
+            const sub = await getUserSubscription();
+            if (sub && sub.status === 'active' && sub.plan !== 'free') {
+                setVerified(true);
+            } else {
+                // Webhook hasn't processed yet — poll for up to 10 seconds
+                let attempts = 0;
+                const poll = setInterval(async () => {
+                    attempts++;
+                    const s = await getUserSubscription();
+                    if (s && s.status === 'active' && s.plan !== 'free') {
+                        clearInterval(poll);
+                        setVerified(true);
+                    } else if (attempts >= 10) {
+                        clearInterval(poll);
+                        // Still not verified after 10s — show page anyway (webhook may be delayed)
+                        setVerified(true);
+                    }
+                }, 1000);
+                return () => clearInterval(poll);
+            }
+        };
+        verifyPayment();
+    }, []);
+
+    useEffect(() => {
+        if (!verified) return;
+
         // Refresh user session to pick up new subscription status immediately
         refreshUser();
 
@@ -36,7 +68,7 @@ export default function PaymentSuccessPage() {
             clearTimeout(timer);
             clearInterval(interval);
         };
-    }, [navigate]);
+    }, [navigate, verified]);
 
     useEffect(() => {
         // Fire confetti on load
@@ -61,22 +93,20 @@ export default function PaymentSuccessPage() {
 
             // 1. Alert Admin
             sendEmail({
-                to: "emergencytradesmen@outlook.com",
+                to: getSupportEmail(),
                 subject: "💰 New PRO Subscription Purchased!",
                 text: `Likely new PRO subscription from ${user?.email || 'Unknown User'}.\n\nPlease check Stripe Dashboard to confirm payment.`
             });
 
             // 2. Receipt to User
             if (user?.email) {
-                const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-                const isUSDomain = hostname.includes('emergencycontractors.net');
-                const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
-                const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+                const baseDomain = getSiteDomain();
+                const siteName = getSiteName();
 
                 sendEmail({
                     to: user.email,
                     subject: `Welcome to Premium - ${siteName}`,
-                    text: `Hi ${user.name},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: ${baseDomain}/user/dashboard`
+                    text: `Hi ${(user as any)?.user_metadata?.name || user?.email?.split('@')[0] || 'there'},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: ${baseDomain}/user/dashboard`
                 });
 
                 // 3. Track Conversion in PostHog
@@ -97,6 +127,12 @@ export default function PaymentSuccessPage() {
             <Header />
 
             <main className="flex-grow flex items-center justify-center p-4">
+                {!verified ? (
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+                        <p className="text-slate-400">Verifying your payment...</p>
+                    </div>
+                ) : (
                 <div className="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-2xl w-full text-center relative overflow-hidden">
                     {/* Top Decor Line */}
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#D4AF37] to-yellow-600" />
@@ -157,6 +193,7 @@ export default function PaymentSuccessPage() {
                         </div>
                     </div>
                 </div>
+                )}
             </main>
 
             <Footer />

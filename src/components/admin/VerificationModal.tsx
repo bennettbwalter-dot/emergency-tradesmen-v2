@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { devLog } from "@/lib/devLog";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -33,7 +34,7 @@ export function VerificationModal({ isOpen, onClose, business, onSuccess }: Veri
                 body: { to, subject, html },
             });
             if (error) throw error;
-            console.log('Email sent:', data);
+            devLog('Email sent:', data);
         } catch (err) {
             console.error('Failed to send email:', err);
             toast({

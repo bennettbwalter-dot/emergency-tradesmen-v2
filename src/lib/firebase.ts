@@ -5,6 +5,7 @@
  */
 
 import { initializeApp, getApps } from 'firebase/app';
+import { devLog } from "@/lib/devLog";
 import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messaging';
 
 // Firebase configuration from environment variables
@@ -40,7 +41,7 @@ export const requestNotificationPermission = async (): Promise<string | null> =>
     try {
         // Check if notifications are supported
         if (!('Notification' in window)) {
-            console.log('This browser does not support notifications');
+            devLog('This browser does not support notifications');
             return null;
         }
 
@@ -48,16 +49,16 @@ export const requestNotificationPermission = async (): Promise<string | null> =>
         const permission = await Notification.requestPermission();
 
         if (permission !== 'granted') {
-            console.log('Notification permission denied');
+            devLog('Notification permission denied');
             return null;
         }
 
-        console.log('Notification permission granted');
+        devLog('Notification permission granted');
 
         // Initialize messaging
         const msg = await initMessaging();
         if (!msg) {
-            console.log('Firebase messaging not supported');
+            devLog('Firebase messaging not supported');
             return null;
         }
 
@@ -68,7 +69,7 @@ export const requestNotificationPermission = async (): Promise<string | null> =>
         }
 
         const token = await getToken(msg, { vapidKey: VAPID_KEY });
-        console.log('FCM Token:', token);
+        devLog('FCM Token:', token);
 
         return token;
     } catch (error) {
@@ -94,7 +95,7 @@ export const onMessageListener = (): Promise<any> => {
         if (!msg) return;
 
         onMessage(msg, (payload) => {
-            console.log('Message received:', payload);
+            devLog('Message received:', payload);
             resolve(payload);
         });
     });
@@ -105,7 +106,7 @@ export const onMessageListener = (): Promise<any> => {
  */
 export const showLocalNotification = (title: string, body: string, icon?: string) => {
     if (!isNotificationsEnabled()) {
-        console.log('Notifications not enabled');
+        devLog('Notifications not enabled');
         return;
     }
 
@@ -122,7 +123,7 @@ export const showLocalNotification = (title: string, body: string, icon?: string
  */
 export const saveFCMToken = async (token: string, userId: string) => {
     // In production, save to Supabase: supabase.from('user_tokens').upsert(...)
-    console.log('Would save FCM token for user:', userId, token);
+    devLog('Would save FCM token for user:', userId, token);
     localStorage.setItem('fcm_token', token);
 };
 

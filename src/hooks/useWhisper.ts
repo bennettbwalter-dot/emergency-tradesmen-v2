@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { devLog, devWarn } from "@/lib/devLog";
 
 export interface WhisperResult {
     transcription: string;
@@ -79,7 +80,7 @@ export function useWhisper(): WhisperResult {
                 ];
                 for (const type of types) {
                     if (MediaRecorder.isTypeSupported(type)) {
-                        console.log(`[useWhisper] Using supported MIME type: ${type}`);
+                        devLog(`[useWhisper] Using supported MIME type: ${type}`);
                         return type;
                     }
                 }
@@ -120,7 +121,7 @@ export function useWhisper(): WhisperResult {
                         throw new Error('Supabase configuration missing from frontend environment variables');
                     }
 
-                    console.log(`[useWhisper] Sending audio to Supabase Edge Function (${fileExtension})...`);
+                    devLog(`[useWhisper] Sending audio to Supabase Edge Function (${fileExtension})...`);
                     const response = await fetch(`${supabaseUrl}/functions/v1/process-voice`, {
                         method: 'POST',
                         headers: {
@@ -140,11 +141,11 @@ export function useWhisper(): WhisperResult {
 
                     const data = await response.json();
                     if (data.transcript) {
-                        console.log(`[useWhisper] Transcription result: "${data.transcript}" | Extracted Location: ${data.location} | High Urgency: ${data.high_urgency}`);
+                        devLog(`[useWhisper] Transcription result: "${data.transcript}" | Extracted Location: ${data.location} | High Urgency: ${data.high_urgency}`);
                         setTranscription(data.transcript);
                     } else if (data.transcript === "") {
                         // Empty transcript means backend heard nothing
-                        console.log(`[useWhisper] Empty transcription returned from backend.`);
+                        devLog(`[useWhisper] Empty transcription returned from backend.`);
                         setTranscription("");
                     } else {
                         throw new Error('Invalid response from backend API');

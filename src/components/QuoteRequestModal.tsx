@@ -30,6 +30,7 @@ import { db } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
 import { trackEvent } from "@/lib/analytics";
 import { sendEmail } from "@/lib/email";
+import { getSupportEmail, getSiteName, getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
 
 interface QuoteRequestModalProps {
     businessName: string;
@@ -128,7 +129,7 @@ export function QuoteRequestModal({
 
             // Send notification email to admin
             await sendEmail({
-                to: "emergencytradesmen@outlook.com",
+                to: getSupportEmail(),
                 subject: `New Quote Request for ${businessName}`,
                 html: `
                     <h2>New Quote Request</h2>
@@ -140,11 +141,11 @@ export function QuoteRequestModal({
                     <p><strong>Name:</strong> ${formData.name}</p>
                     <p><strong>Phone:</strong> ${formData.phone}</p>
                     <p><strong>Email:</strong> ${formData.email}</p>
-                    <p><strong>Postcode:</strong> ${formData.postcode}</p>
+                    <p><strong>${getPostcodeLabel()}:</strong> ${formData.postcode}</p>
                     <h3>Description</h3>
                     <p>${formData.description}</p>
                 `,
-                from_name: "Emergency Tradesmen Quotes"
+                from_name: `${getSiteName()} Quotes`
             });
 
             toast({
@@ -233,8 +234,8 @@ export function QuoteRequestModal({
                                 <h3 className="text-lg font-medium mb-4">Tell us about your job</h3>
 
                                 {/* Urgency */}
-                                <div className="space-y-3 mb-6">
-                                    <Label className="text-base">How urgent is this? *</Label>
+                                <fieldset className="space-y-3 mb-6">
+                                    <legend className="text-base font-medium text-foreground">How urgent is this? *</legend>
                                     <RadioGroup
                                         value={formData.urgency}
                                         onValueChange={(value: any) => updateField("urgency", value)}
@@ -275,7 +276,7 @@ export function QuoteRequestModal({
                                             {errors.urgency}
                                         </p>
                                     )}
-                                </div>
+                                </fieldset>
 
                                 {/* Service Type */}
                                 <div className="space-y-2 mb-6">
@@ -397,12 +398,12 @@ export function QuoteRequestModal({
                                 </div>
 
                                 <div className="col-span-2 sm:col-span-1 space-y-2">
-                                    <Label htmlFor="postcode">Postcode *</Label>
+                                    <Label htmlFor="postcode">{getPostcodeLabel()} *</Label>
                                     <Input
                                         id="postcode"
                                         value={formData.postcode || ""}
                                         onChange={(e) => updateField("postcode", e.target.value.toUpperCase())}
-                                        placeholder="SW1A 1AA"
+                                        placeholder={getPostcodePlaceholder()}
                                         className="bg-card border-border/50"
                                     />
                                     {errors.postcode && (
@@ -491,7 +492,7 @@ export function QuoteRequestModal({
                                         <p className="font-medium">{formData.email}</p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-muted-foreground mb-1">Postcode</p>
+                                        <p className="text-sm text-muted-foreground mb-1">{getPostcodeLabel()}</p>
                                         <p className="font-medium">{formData.postcode}</p>
                                     </div>
                                 </div>

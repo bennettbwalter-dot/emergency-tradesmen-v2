@@ -35,10 +35,10 @@ export function BreakdownSection() {
                 <div ref={roadsideTitleRef} className="w-full bg-black sticky top-0 z-[9999] md:relative md:z-[150]">
                     <section className="w-full flex items-center justify-center pt-12 pb-4 md:py-20 overflow-hidden bg-black">
                         <div className="w-full px-4 md:px-0">
-                            <h1 className="font-sans font-[900] text-[15.5vw] md:text-[18vw] lg:text-[16rem] text-white leading-none md:leading-[0.8] tracking-tighter md:tracking-[-0.04em] uppercase text-left w-full">
+                            <div className="font-sans font-[900] text-[15.5vw] md:text-[18vw] lg:text-[16rem] text-white leading-none md:leading-[0.8] tracking-tighter md:tracking-[-0.04em] uppercase text-left w-full" role="heading" aria-level="2">
                                 <span className="block whitespace-nowrap">RAPID</span>
                                 <span className="block whitespace-nowrap">RESISTANCE</span>
-                            </h1>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -58,10 +58,10 @@ export function BreakdownSection() {
                 <div ref={tradesmenTitleRef} className="w-full md:hidden bg-black sticky top-0 z-[9999]">
                     <section className="w-full flex items-center justify-center pt-12 overflow-hidden bg-black">
                         <div className="w-full px-4">
-                            <h2 className="font-sans font-[900] text-[15.5vw] text-white leading-none tracking-tighter uppercase text-left w-full">
+                            <div className="font-sans font-[900] text-[15.5vw] text-white leading-none tracking-tighter uppercase text-left w-full" role="heading" aria-level="2">
                                 <span className="block whitespace-nowrap">FOR</span>
                                 <span className="block whitespace-nowrap">TRADESMEN</span>
-                            </h2>
+                            </div>
                         </div>
                     </section>
                 </div>

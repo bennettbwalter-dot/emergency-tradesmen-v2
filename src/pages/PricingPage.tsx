@@ -8,6 +8,8 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 import { useFeatureFlagEnabled } from "posthog-js/react";
 import { SEO } from "@/components/SEO";
 import { useAuth } from "@/contexts/AuthContext";
+import { getSupportEmail } from "@/lib/siteConfig";
+import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 
 export default function PricingPage() {
     const { settings } = useLocalization();
@@ -18,6 +20,27 @@ export default function PricingPage() {
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
+    const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+            { "@type": "ListItem", "position": 2, "name": "Pricing", "item": `${siteUrl}/pricing` }
+        ]
+    };
+
+    // Stripe Payment Links — separate links for US vs UK
+    const stripeLinks = isUSDomain
+        ? {
+              monthly: import.meta.env.VITE_STRIPE_US_PRO_MONTHLY_LINK || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
+              yearly: import.meta.env.VITE_STRIPE_US_PRO_YEARLY_LINK || 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
+          }
+        : {
+              monthly: 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
+              yearly: 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
+          };
 
     const handleCheckout = (url: string) => {
         if (!user) {
@@ -40,15 +63,16 @@ export default function PricingPage() {
     };
 
     const handleContactUs = () => {
-        window.location.href = "mailto:emergencytradesmen@outlook.com?subject=Pro%20Subscription%20Inquiry";
+        window.location.href = `mailto:${getSupportEmail()}?subject=Pro%20Subscription%20Inquiry`;
     };
 
     return (
         <>
             <SEO
-                title={`Pro Pricing Plans for ${isUS ? 'Contractors' : 'Tradesmen'}`}
-                description={`Boost your business with Emergency ${isUS ? 'Contractors' : 'Tradesmen'} Pro. Get priority ranking, enhanced trust signals, and 3x more leads. Plans from ${settings.currencySymbol}0/month.`}
+                title={`Pro Pricing Plans for ${isUS ? 'Contractors' : 'Tradesmen'} — Boost Your Business`}
+                description={`Boost your business with Emergency ${isUS ? 'Contractors' : 'Tradesmen'} Pro. Get priority ranking, enhanced trust signals & 3x more leads. Sign up today from ${settings.currencySymbol}0/month.`}
                 canonical={`${countryPrefix}/pricing`}
+                jsonLd={breadcrumbSchema}
             />
             <Header />
             <main className="min-h-screen bg-background py-20">
@@ -146,7 +170,7 @@ export default function PricingPage() {
                             <Button
                                 variant="hero"
                                 className="w-full h-12 text-lg"
-                                onClick={() => handleCheckout('https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00')}
+                                onClick={() => handleCheckout(stripeLinks.monthly)}
                             >
                                 Get Pro Monthly
                             </Button>
@@ -184,7 +208,7 @@ export default function PricingPage() {
                             </ul>
                             <Button
                                 className="w-full h-12 text-lg bg-emerald-500 hover:bg-emerald-600 text-white"
-                                onClick={() => handleCheckout('https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01')}
+                                onClick={() => handleCheckout(stripeLinks.yearly)}
                             >
                                 Get Pro Yearly
                             </Button>
@@ -196,6 +220,17 @@ export default function PricingPage() {
                     </div>
                 </div>
             </main>
+
+            <section className="py-20 bg-background border-t border-border/50">
+                <div className="container-narrow">
+                    <div className="text-center mb-12">
+                        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
+                        <p className="text-muted-foreground text-lg">Common questions about our pricing and membership plans.</p>
+                    </div>
+                    <GeneralFAQSection showTitle={false} useContainer={true} />
+                </div>
+            </section>
+
             <Footer />
         </>
     );

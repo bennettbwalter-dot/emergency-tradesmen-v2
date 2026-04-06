@@ -1,0 +1,522 @@
+=== BULK SEO UPDATE RUN: 2026-04-04T20:49:34.102Z ===
+
+[2026-04-04T20:49:34.103Z] Fetching all posts from Supabase...
+[2026-04-04T20:49:34.871Z] Found 79 published posts. Starting SEO update...
+
+[2026-04-04T20:49:34.872Z] 
+[1/79] Processing: "5 Hidden Warning Signs of Attic Mold After a Rainy Spring" (5-hidden-warning-signs-of-attic-mold-rainy-spring)
+[2026-04-04T20:49:34.875Z]   ℹ️  Focus keyword "hidden warning signs" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:34.875Z]   ✓  Meta desc already set (159 chars) — skipping
+[2026-04-04T20:49:34.877Z]   ✅ TOC inserted with 6 entries
+[2026-04-04T20:49:34.878Z]   ✅ FAQ + Author bio injected at position 7671
+[2026-04-04T20:49:35.047Z]   ✅ SAVED — changes: TOC inserted, FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:35.355Z] 
+[2/79] Processing: "7 Ways to Safe-Proof Your Garden Electrics for Spring 2026" (7-ways-to-safe-proof-your-garden-electrics-spring-2026)
+[2026-04-04T20:49:35.355Z]   ℹ️  Focus keyword "ways safe proof" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:35.356Z]   ✓  Meta desc already set (163 chars) — skipping
+[2026-04-04T20:49:35.356Z]   ✅ TOC inserted with 6 entries
+[2026-04-04T20:49:35.357Z]   ✅ FAQ + Author bio injected at position 8762
+[2026-04-04T20:49:35.450Z]   ✅ SAVED — changes: TOC inserted, FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:35.753Z] 
+[3/79] Processing: "Ultimate Us Emergency Home Resilience 2026" (ultimate-us-emergency-home-resilience-2026)
+[2026-04-04T20:49:35.753Z]   ℹ️  Focus keyword "ultimate emergency home" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:35.755Z]   ✅ Meta desc: Expert US homeowners guide to Ultimate Us Emergency Home Resilience. Get expert ... [90 chars]
+[2026-04-04T20:49:35.755Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:35.756Z]   ✅ FAQ + Author bio injected at position 6614
+[2026-04-04T20:49:35.843Z]   ✅ SAVED — changes: meta description updated (90 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:36.144Z] 
+[4/79] Processing: "The Definitive Uk Home Security Safety Standards 2026" (the-definitive-uk-home-security-safety-standards-2026)
+[2026-04-04T20:49:36.145Z]   ℹ️  Focus keyword "definitive home security" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:36.146Z]   ✅ Meta desc: Expert UK homeowners guide to The Definitive Uk Home Security Safety Standards. ... [101 chars]
+[2026-04-04T20:49:36.146Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:36.147Z]   ✅ FAQ + Author bio injected at position 6457
+[2026-04-04T20:49:36.232Z]   ✅ SAVED — changes: meta description updated (101 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:36.541Z] 
+[5/79] Processing: "AC Blowing Warm Air? Capacitor Failure & 2026 EPA Rules" (ac-blowing-warm-air-capacitor-leak-us)
+[2026-04-04T20:49:36.541Z]   ℹ️  Focus keyword "blowing warm capacitor" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:36.543Z]   ✅ Meta desc: Expert US homeowners guide to AC Blowing Warm Air? Capacitor Failure &  EPA Rule... [104 chars]
+[2026-04-04T20:49:36.543Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:36.544Z]   ✅ FAQ + Author bio injected at position 12329
+[2026-04-04T20:49:36.650Z]   ✅ SAVED — changes: meta description updated (104 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:36.958Z] 
+[6/79] Processing: "EV Charger Broken? Find 24/7 Emergency EV Charger Repair Service Near Me (US Edition)" (emergency-ev-charger-repair-us)
+[2026-04-04T20:49:36.959Z]   ℹ️  Focus keyword "charger broken find" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:36.959Z]   ✅ Meta desc: Expert US homeowners guide to EV Charger Broken? Find 24/7 Emergency EV Charger ... [138 chars]
+[2026-04-04T20:49:36.960Z]   ✅ TOC inserted with 4 entries
+[2026-04-04T20:49:36.960Z]   ✅ FAQ + Author bio injected at position 4254
+[2026-04-04T20:49:37.073Z]   ✅ SAVED — changes: meta description updated (138 chars), TOC inserted, FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:37.386Z] 
+[7/79] Processing: "EV Charger Broken? Find 24/7 Emergency EV Charger Repair Service Near Me for Immediate Support" (emergency-ev-charger-repair-gb)
+[2026-04-04T20:49:37.387Z]   ℹ️  Focus keyword "charger broken find" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:37.387Z]   ✅ Meta desc: Expert UK homeowners guide to EV Charger Broken? Find 24/7 Emergency EV Charger ... [147 chars]
+[2026-04-04T20:49:37.388Z]   ✅ TOC inserted with 4 entries
+[2026-04-04T20:49:37.388Z]   ✅ FAQ + Author bio injected at position 4237
+[2026-04-04T20:49:37.469Z]   ✅ SAVED — changes: meta description updated (147 chars), TOC inserted, FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:37.777Z] 
+[8/79] Processing: "Water Leaking From Ceiling? The 2026 US 'Stop the Collapse' Protocol" (water-leaking-through-ceiling-first-steps-us)
+[2026-04-04T20:49:37.778Z]   ℹ️  Focus keyword "water leaking ceiling" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:37.779Z]   ✅ Meta desc: Expert US homeowners guide to Water Leaking From Ceiling? The  US 'Stop the Coll... [117 chars]
+[2026-04-04T20:49:37.780Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:37.780Z]   ✅ FAQ + Author bio injected at position 13329
+[2026-04-04T20:49:37.872Z]   ✅ SAVED — changes: meta description updated (117 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:38.174Z] 
+[9/79] Processing: "Sewage Smell in House? The 2026 US Guide to Dried P-Traps & Sewer Gas" (sewage-smell-in-house-p-trap-us)
+[2026-04-04T20:49:38.175Z]   ℹ️  Focus keyword "sewage smell house" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:38.176Z]   ✅ Meta desc: Expert US homeowners guide to Sewage Smell in House? The  US Guide to Dried P-Tr... [118 chars]
+[2026-04-04T20:49:38.176Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:38.177Z]   ✅ FAQ + Author bio injected at position 13817
+[2026-04-04T20:49:38.269Z]   ✅ SAVED — changes: meta description updated (118 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:38.586Z] 
+[10/79] Processing: "Improve Not Move: The Emergency Contractor Strategy for US Home Equity (2026)" (emergency-repair-contractor-improve-not-move-us)
+[2026-04-04T20:49:38.587Z]   ℹ️  Focus keyword "improve move emergency" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:38.588Z]   ✅ Meta desc: Expert US homeowners guide to Improve Not Move: The Emergency Contractor Strateg... [126 chars]
+[2026-04-04T20:49:38.589Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:38.589Z]   ✅ FAQ + Author bio injected at position 13602
+[2026-04-04T20:49:38.682Z]   ✅ SAVED — changes: meta description updated (126 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:38.989Z] 
+[11/79] Processing: "Improve Not Move: How UK Emergency Repairs Extend Property Lifespan in 2026" (emergency-repair-contractor-improve-not-move-gb)
+[2026-04-04T20:49:38.990Z]   ℹ️  Focus keyword "improve move emergency" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:38.991Z]   ✅ Meta desc: Expert UK homeowners guide to Improve Not Move: How UK Emergency Repairs Extend ... [123 chars]
+[2026-04-04T20:49:38.992Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:38.993Z]   ✅ FAQ + Author bio injected at position 14065
+[2026-04-04T20:49:39.081Z]   ✅ SAVED — changes: meta description updated (123 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:39.391Z] 
+[12/79] Processing: "The Silent Killer: US Carbon Monoxide Safety & Alarm Standards 2026" (carbon-monoxide-us)
+[2026-04-04T20:49:39.391Z]   ℹ️  Focus keyword "silent killer carbon" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:39.393Z]   ✅ Meta desc: Expert US homeowners guide to The Silent Killer: US Carbon Monoxide Safety & Ala... [115 chars]
+[2026-04-04T20:49:39.393Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:39.394Z]   ✅ FAQ + Author bio injected at position 14474
+[2026-04-04T20:49:39.486Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:39.788Z] 
+[13/79] Processing: "The Silent Killer: UK Carbon Monoxide Safety & Alarm Standards 2026" (carbon-monoxide-gb)
+[2026-04-04T20:49:39.789Z]   ℹ️  Focus keyword "silent killer carbon" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:39.790Z]   ✅ Meta desc: Expert UK homeowners guide to The Silent Killer: UK Carbon Monoxide Safety & Ala... [115 chars]
+[2026-04-04T20:49:39.790Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:39.791Z]   ✅ FAQ + Author bio injected at position 14003
+[2026-04-04T20:49:39.881Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:40.187Z] 
+[14/79] Processing: "The 2026 UK Anti-Snap Lock Lockdown: Stopping 9-Second Break-Ins" (2026-anti-snap-lock-lockdown-gb)
+[2026-04-04T20:49:40.188Z]   ℹ️  Focus keyword "anti snap lock" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:40.189Z]   ✅ Meta desc: Expert UK homeowners guide to The  UK Anti-Snap Lock Lockdown: Stopping 9-Second... [113 chars]
+[2026-04-04T20:49:40.189Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:40.190Z]   ✅ FAQ + Author bio injected at position 13852
+[2026-04-04T20:49:40.279Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:40.587Z] 
+[15/79] Processing: "Sump Pump Resilience 2026: IoT Monitoring & Battery-Backup Guide" (sump-pump-failure-resilience-us)
+[2026-04-04T20:49:40.588Z]   ✅ Meta desc: Expert US homeowners guide to Sump Pump Resilience : IoT Monitoring & Battery-Ba... [113 chars]
+[2026-04-04T20:49:40.589Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:40.589Z]   ✅ FAQ + Author bio injected at position 12953
+[2026-04-04T20:49:40.696Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:41.010Z] 
+[16/79] Processing: "Smart Lock Emergency 2026: US UL 2058 Standards & Digital Guide" (smart-lock-emergency-us)
+[2026-04-04T20:49:41.012Z]   ✅ Meta desc: Expert US homeowners guide to Smart Lock Emergency : US UL 2058 Standards & Digi... [112 chars]
+[2026-04-04T20:49:41.013Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:41.013Z]   ✅ FAQ + Author bio injected at position 12504
+[2026-04-04T20:49:41.075Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:41.380Z] 
+[17/79] Processing: "Smart Lock Emergency 2026: UK Matter 1.5 Standards & Lockout Guide" (smart-lock-emergency-gb)
+[2026-04-04T20:49:41.382Z]   ✅ Meta desc: Expert UK homeowners guide to Smart Lock Emergency : UK Matter 1.5 Standards & L... [115 chars]
+[2026-04-04T20:49:41.382Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:41.383Z]   ✅ FAQ + Author bio injected at position 12749
+[2026-04-04T20:49:41.444Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:41.757Z] 
+[18/79] Processing: "Smart Leak Detection 2026: US IPC Codes & IoT Shut-Off Resilience" (smart-leak-detection-us)
+[2026-04-04T20:49:41.758Z]   ✅ Meta desc: width: 100% !important; height: auto !important; max-width: 100% !important; dis... [160 chars]
+[2026-04-04T20:49:41.758Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:41.759Z]   ✅ FAQ + Author bio injected at position 18166
+[2026-04-04T20:49:41.817Z]   ✅ SAVED — changes: meta description updated (160 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:42.125Z] 
+[19/79] Processing: "Smart Leak Detection 2026: UK Water Regulations & Ultrasonic Meter Guide" (smart-leak-detection-gb)
+[2026-04-04T20:49:42.126Z]   ✅ Meta desc: Expert UK homeowners guide to Smart Leak Detection : UK Water Regulations & Ultr... [121 chars]
+[2026-04-04T20:49:42.126Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:42.127Z]   ✅ FAQ + Author bio injected at position 12741
+[2026-04-04T20:49:42.173Z]   ✅ SAVED — changes: meta description updated (121 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:42.475Z] 
+[20/79] Processing: "Smart Water 2026: Why Your US Home Needs an Automatic Shut-Off Valve" (smart-leak-detection-2026-us)
+[2026-04-04T20:49:42.476Z]   ℹ️  Focus keyword "smart water home" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:42.477Z]   ✅ Meta desc: Expert US homeowners guide to Smart Water : Why Your US Home Needs an Automatic ... [117 chars]
+[2026-04-04T20:49:42.477Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:42.478Z]   ✅ FAQ + Author bio injected at position 13564
+[2026-04-04T20:49:42.527Z]   ✅ SAVED — changes: meta description updated (117 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:42.830Z] 
+[21/79] Processing: "Smart Leak Detection 2026: Why UK Insurers are Mandating Water Sensors" (smart-leak-detection-2026-gb)
+[2026-04-04T20:49:42.831Z]   ✅ Meta desc: Expert UK homeowners guide to Smart Leak Detection : Why UK Insurers are Mandati... [119 chars]
+[2026-04-04T20:49:42.832Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:42.832Z]   ✅ FAQ + Author bio injected at position 14846
+[2026-04-04T20:49:42.877Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:43.185Z] 
+[22/79] Processing: "Emergency Sewer Line Repair 2026: US Trenchless & ASTM F1216 Guide" (sewer-line-repair-us)
+[2026-04-04T20:49:43.186Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Sewer Line Repair : US Trenchless & ASTM... [115 chars]
+[2026-04-04T20:49:43.186Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:43.187Z]   ✅ FAQ + Author bio injected at position 12336
+[2026-04-04T20:49:43.227Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:43.531Z] 
+[23/79] Processing: "Sewer Backup Prevention 2026: US FEMA Codes & Backwater Valve Guide" (sewer-backup-prevention-us)
+[2026-04-04T20:49:43.532Z]   ✅ Meta desc: Expert US homeowners guide to Sewer Backup Prevention : US FEMA Codes & Backwate... [116 chars]
+[2026-04-04T20:49:43.532Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:43.534Z]   ✅ FAQ + Author bio injected at position 12625
+[2026-04-04T20:49:43.589Z]   ✅ SAVED — changes: meta description updated (116 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:43.890Z] 
+[24/79] Processing: "Sewer Backup Prevention 2026: UK Part H & Non-Return Valve Guide" (sewer-backup-prevention-gb)
+[2026-04-04T20:49:43.892Z]   ✅ Meta desc: Expert UK homeowners guide to Sewer Backup Prevention : UK Part H & Non-Return V... [113 chars]
+[2026-04-04T20:49:43.892Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:43.893Z]   ✅ FAQ + Author bio injected at position 12295
+[2026-04-04T20:49:43.935Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:44.246Z] 
+[25/79] Processing: "Sewer Backup Relief: FEMA Standards for Backwater Valves in 2026" (sewer-backup-prevention-backwater-valves-us)
+[2026-04-04T20:49:44.247Z]   ✅ Meta desc: Expert US homeowners guide to Sewer Backup Relief: FEMA Standards for Backwater ... [112 chars]
+[2026-04-04T20:49:44.247Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:44.247Z]   ✅ FAQ + Author bio injected at position 13274
+[2026-04-04T20:49:44.289Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:44.591Z] 
+[26/79] Processing: "Emergency Sewage Cleanup 2026: UK IICRC S500 & Bio-Hazard Guide" (sewage-cleanup-gb)
+[2026-04-04T20:49:44.591Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Sewage Cleanup : UK IICRC S500 & Bio-Haz... [112 chars]
+[2026-04-04T20:49:44.592Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:44.592Z]   ✅ FAQ + Author bio injected at position 12947
+[2026-04-04T20:49:44.644Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:44.945Z] 
+[27/79] Processing: "Septic Tank Emergency 2026: US EPA Standards & Bio-Security Guide" (septic-tank-emergency-us)
+[2026-04-04T20:49:44.946Z]   ✅ Meta desc: Expert US homeowners guide to Septic Tank Emergency : US EPA Standards & Bio-Sec... [114 chars]
+[2026-04-04T20:49:44.947Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:44.947Z]   ✅ FAQ + Author bio injected at position 12520
+[2026-04-04T20:49:45.001Z]   ✅ SAVED — changes: meta description updated (114 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:45.316Z] 
+[28/79] Processing: "Home Security Audit 2026: US AI Threat Mapping & Matter Guide" (security-audit-us)
+[2026-04-04T20:49:45.317Z]   ✅ Meta desc: Expert US homeowners guide to Home Security Audit : US AI Threat Mapping & Matte... [110 chars]
+[2026-04-04T20:49:45.318Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:45.318Z]   ✅ FAQ + Author bio injected at position 12092
+[2026-04-04T20:49:45.368Z]   ✅ SAVED — changes: meta description updated (110 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:45.676Z] 
+[29/79] Processing: "Refrigerant Leak Safety 2026: US AIM Act & A2L Transition Guide" (refrigerant-leak-safety-us)
+[2026-04-04T20:49:45.677Z]   ✅ Meta desc: Expert US homeowners guide to Refrigerant Leak Safety : US AIM Act & A2L Transit... [112 chars]
+[2026-04-04T20:49:45.677Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:45.678Z]   ✅ FAQ + Author bio injected at position 14275
+[2026-04-04T20:49:45.726Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:46.029Z] 
+[30/79] Processing: "Refrigerant Leak Safety 2026: UK A2L & A3 Transition Guide" (refrigerant-leak-safety-gb)
+[2026-04-04T20:49:46.030Z]   ✅ Meta desc: Expert UK homeowners guide to Refrigerant Leak Safety : UK A2L & A3 Transition G... [107 chars]
+[2026-04-04T20:49:46.030Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:46.030Z]   ✅ FAQ + Author bio injected at position 14275
+[2026-04-04T20:49:46.085Z]   ✅ SAVED — changes: meta description updated (107 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:46.395Z] 
+[31/79] Processing: "Radon Emergency 2026: US EPA Standards & Mitigation Guide" (radon-emergency-us)
+[2026-04-04T20:49:46.396Z]   ℹ️  Focus keyword "radon emergency standards" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:46.397Z]   ✅ Meta desc: Expert US homeowners guide to Radon Emergency : US EPA Standards & Mitigation Gu... [106 chars]
+[2026-04-04T20:49:46.397Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:46.398Z]   ✅ FAQ + Author bio injected at position 13819
+[2026-04-04T20:49:46.452Z]   ✅ SAVED — changes: meta description updated (106 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:46.755Z] 
+[32/79] Processing: "Portable Power Stations: The 2026 UK Guide to Off-Grid Home Resilience" (portable-power-stations-backup-gb)
+[2026-04-04T20:49:46.756Z]   ✅ Meta desc: Expert UK homeowners guide to Portable Power Stations: The  UK Guide to Off-Grid... [119 chars]
+[2026-04-04T20:49:46.756Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:46.757Z]   ✅ FAQ + Author bio injected at position 13497
+[2026-04-04T20:49:46.814Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:47.126Z] 
+[33/79] Processing: "Emergency Mould Remediation 2026: US IICRC S520 & HEPA-14 Guide" (mould-remediation-us)
+[2026-04-04T20:49:47.126Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Mould Remediation : US IICRC S520 & HEPA... [112 chars]
+[2026-04-04T20:49:47.127Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:47.128Z]   ✅ FAQ + Author bio injected at position 12088
+[2026-04-04T20:49:47.170Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:47.477Z] 
+[34/79] Processing: "Emergency Mould Remediation 2026: UK Environmental Health & HEPA-14 Guide" (mould-remediation-gb)
+[2026-04-04T20:49:47.478Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Mould Remediation : UK Environmental Hea... [122 chars]
+[2026-04-04T20:49:47.479Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:47.479Z]   ✅ FAQ + Author bio injected at position 12136
+[2026-04-04T20:49:47.528Z]   ✅ SAVED — changes: meta description updated (122 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:47.841Z] 
+[35/79] Processing: "The 2026 Hybrid Strategy: Why Your UK Heat Pump Needs a Boiler Backup" (hybrid-heating-backup-gb)
+[2026-04-04T20:49:47.842Z]   ℹ️  Focus keyword "hybrid strategy heat" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:47.842Z]   ✅ Meta desc: Expert UK homeowners guide to The  Hybrid Strategy: Why Your UK Heat Pump Needs ... [118 chars]
+[2026-04-04T20:49:47.843Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:47.844Z]   ✅ FAQ + Author bio injected at position 13034
+[2026-04-04T20:49:47.902Z]   ✅ SAVED — changes: meta description updated (118 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:48.216Z] 
+[36/79] Processing: "2026 Grid Instability: The US Homeowner's Guide to Generator Resilience" (generator-safety-grid-instability-us)
+[2026-04-04T20:49:48.217Z]   ℹ️  Focus keyword "grid instability homeowner" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:48.217Z]   ✅ Meta desc: Expert US homeowners guide to Grid Instability: The US Homeowner's Guide to Gene... [119 chars]
+[2026-04-04T20:49:48.217Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:48.218Z]   ✅ FAQ + Author bio injected at position 13749
+[2026-04-04T20:49:48.269Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:48.573Z] 
+[37/79] Processing: "The 2026 Energy Crisis: UK Standards for Home Generator & Battery Resilience" (generator-safety-grid-instability-gb)
+[2026-04-04T20:49:48.573Z]   ℹ️  Focus keyword "energy crisis standards" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:48.574Z]   ✅ Meta desc: Expert UK homeowners guide to The  Energy Crisis: UK Standards for Home Generato... [125 chars]
+[2026-04-04T20:49:48.574Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:48.575Z]   ✅ FAQ + Author bio injected at position 13250
+[2026-04-04T20:49:48.628Z]   ✅ SAVED — changes: meta description updated (125 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:48.930Z] 
+[38/79] Processing: "Flat Roof Leak Prevention 2026: US ELD Standards & Liquid Repair Guide" (flat-roof-leak-prevention-us)
+[2026-04-04T20:49:48.931Z]   ✅ Meta desc: Expert US homeowners guide to Flat Roof Leak Prevention : US ELD Standards & Liq... [119 chars]
+[2026-04-04T20:49:48.932Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:48.933Z]   ✅ FAQ + Author bio injected at position 12231
+[2026-04-04T20:49:48.980Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:49.291Z] 
+[39/79] Processing: "Flat Roof Leak Prevention 2026: UK ELD Standards & Liquid Repair Guide" (flat-roof-leak-prevention-gb)
+[2026-04-04T20:49:49.291Z]   ✅ Meta desc: Expert UK homeowners guide to Flat Roof Leak Prevention : UK ELD Standards & Liq... [119 chars]
+[2026-04-04T20:49:49.292Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:49.293Z]   ✅ FAQ + Author bio injected at position 12057
+[2026-04-04T20:49:49.342Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:49.656Z] 
+[40/79] Processing: "Emergency Facility Management 2026: US ADA & Energy Compliance Guide" (facility-management-emergency-us)
+[2026-04-04T20:49:49.657Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Facility Management : US ADA & Energy Co... [117 chars]
+[2026-04-04T20:49:49.658Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:49.659Z]   ✅ FAQ + Author bio injected at position 12482
+[2026-04-04T20:49:49.715Z]   ✅ SAVED — changes: meta description updated (117 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:50.023Z] 
+[41/79] Processing: "Emergency Water Main Repair 2026: US Trenchless Tech & Service Line Responsibility" (emergency-water-main-repair-us)
+[2026-04-04T20:49:50.023Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Water Main Repair : US Trenchless Tech &... [131 chars]
+[2026-04-04T20:49:50.024Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:50.024Z]   ✅ FAQ + Author bio injected at position 12751
+[2026-04-04T20:49:50.077Z]   ✅ SAVED — changes: meta description updated (131 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:50.386Z] 
+[42/79] Processing: "Emergency Water Main Repair 2026: UK Private Pipe Responsibility & Trenchless Guide" (emergency-water-main-repair-gb)
+[2026-04-04T20:49:50.387Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Water Main Repair : UK Private Pipe Resp... [132 chars]
+[2026-04-04T20:49:50.387Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:50.388Z]   ✅ FAQ + Author bio injected at position 12700
+[2026-04-04T20:49:50.438Z]   ✅ SAVED — changes: meta description updated (132 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:50.746Z] 
+[43/79] Processing: "Emergency Tradesmen 2026: UK Building Regs & CertifID Guide" (emergency-tradesmen-uk)
+[2026-04-04T20:49:50.747Z]   ℹ️  Focus keyword "emergency tradesmen building" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:50.747Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Tradesmen : UK Building Regs & CertifID ... [108 chars]
+[2026-04-04T20:49:50.748Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:50.748Z]   ✅ FAQ + Author bio injected at position 12246
+[2026-04-04T20:49:50.791Z]   ✅ SAVED — changes: meta description updated (108 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:51.099Z] 
+[44/79] Processing: "Emergency Trades 2026: US National Code & Global Safety Guide" (emergency-trades-us)
+[2026-04-04T20:49:51.100Z]   ℹ️  Focus keyword "emergency trades national" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:51.101Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Trades : US National Code & Global Safet... [110 chars]
+[2026-04-04T20:49:51.102Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:51.102Z]   ✅ FAQ + Author bio injected at position 12201
+[2026-04-04T20:49:51.154Z]   ✅ SAVED — changes: meta description updated (110 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:51.465Z] 
+[45/79] Processing: "Emergency Services 2026: UK Technical Compliance & Support Guide" (emergency-services-gb)
+[2026-04-04T20:49:51.466Z]   ℹ️  Focus keyword "emergency services technical" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:51.467Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Services : UK Technical Compliance & Sup... [113 chars]
+[2026-04-04T20:49:51.468Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:51.468Z]   ✅ FAQ + Author bio injected at position 12213
+[2026-04-04T20:49:51.524Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:51.825Z] 
+[46/79] Processing: "Emergency Roof Repair 2026: US ASCE 7-22 Wind Standards & Drone Guide" (emergency-roof-repair-us)
+[2026-04-04T20:49:51.826Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Roof Repair : US ASCE 7-22 Wind Standard... [118 chars]
+[2026-04-04T20:49:51.827Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:51.828Z]   ✅ FAQ + Author bio injected at position 12085
+[2026-04-04T20:49:51.882Z]   ✅ SAVED — changes: meta description updated (118 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:52.199Z] 
+[47/79] Processing: "Emergency Roof Repair 2026: UK Building Regs & Drone Inspection Guide" (emergency-roof-repair-gb)
+[2026-04-04T20:49:52.200Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Roof Repair : UK Building Regs & Drone I... [118 chars]
+[2026-04-04T20:49:52.201Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:52.201Z]   ✅ FAQ + Author bio injected at position 12178
+[2026-04-04T20:49:52.252Z]   ✅ SAVED — changes: meta description updated (118 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:52.562Z] 
+[48/79] Processing: "The 2026 Pipe Burst Protocol: US Standards for Frozen & Failed Plumbing" (emergency-pipe-burst-protocol-us)
+[2026-04-04T20:49:52.562Z]   ✅ Meta desc: Expert US homeowners guide to The  Pipe Burst Protocol: US Standards for Frozen ... [120 chars]
+[2026-04-04T20:49:52.563Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:52.563Z]   ✅ FAQ + Author bio injected at position 13711
+[2026-04-04T20:49:52.607Z]   ✅ SAVED — changes: meta description updated (120 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:52.915Z] 
+[49/79] Processing: "The 2026 Burst Pipe Protocol: UK Standards for Frozen & Failed Plumbing" (emergency-pipe-burst-protocol-gb)
+[2026-04-04T20:49:52.916Z]   ✅ Meta desc: Expert UK homeowners guide to The  Burst Pipe Protocol: UK Standards for Frozen ... [120 chars]
+[2026-04-04T20:49:52.916Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:52.916Z]   ✅ FAQ + Author bio injected at position 13350
+[2026-04-04T20:49:52.954Z]   ✅ SAVED — changes: meta description updated (120 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:53.261Z] 
+[50/79] Processing: "Emergency Pest Control 2026: US IoT Monitoring & Eco-Resilience Guide" (emergency-pest-control-us)
+[2026-04-04T20:49:53.262Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Pest Control : US IoT Monitoring & Eco-R... [118 chars]
+[2026-04-04T20:49:53.263Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:53.263Z]   ✅ FAQ + Author bio injected at position 12283
+[2026-04-04T20:49:53.309Z]   ✅ SAVED — changes: meta description updated (118 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:53.623Z] 
+[51/79] Processing: "Emergency Pest Control 2026: UK AI Detection & Thermal Safety Guide" (emergency-pest-control-gb)
+[2026-04-04T20:49:53.624Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Pest Control : UK AI Detection & Thermal... [116 chars]
+[2026-04-04T20:49:53.625Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:53.626Z]   ✅ FAQ + Author bio injected at position 11729
+[2026-04-04T20:49:53.666Z]   ✅ SAVED — changes: meta description updated (116 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:53.980Z] 
+[52/79] Processing: "Emergency Heat Pump Thaw 2026: US Standards for Safe Recovery & Auxiliary Heat" (emergency-heat-pump-thaw-us)
+[2026-04-04T20:49:53.981Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Heat Pump Thaw : US Standards for Safe R... [127 chars]
+[2026-04-04T20:49:53.982Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:53.983Z]   ✅ FAQ + Author bio injected at position 12999
+[2026-04-04T20:49:54.032Z]   ✅ SAVED — changes: meta description updated (127 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:54.338Z] 
+[53/79] Processing: "Emergency Heat Pump Thaw 2026: MCS Standards & Safe Recovery Guide" (emergency-heat-pump-thaw-gb)
+[2026-04-04T20:49:54.339Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Heat Pump Thaw : MCS Standards & Safe Re... [115 chars]
+[2026-04-04T20:49:54.340Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:54.340Z]   ✅ FAQ + Author bio injected at position 13483
+[2026-04-04T20:49:54.386Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:54.695Z] 
+[54/79] Processing: "Emergency Handyman Services 2026: US OSHA & IoT Safety Guide" (emergency-handyman-us)
+[2026-04-04T20:49:54.696Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Handyman Services : US OSHA & IoT Safety... [109 chars]
+[2026-04-04T20:49:54.697Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:54.697Z]   ✅ FAQ + Author bio injected at position 12177
+[2026-04-04T20:49:54.738Z]   ✅ SAVED — changes: meta description updated (109 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:55.043Z] 
+[55/79] Processing: "Emergency Glazing 2026: US Safety Standards & Impact Glass Guide" (emergency-glazing-us)
+[2026-04-04T20:49:55.044Z]   ℹ️  Focus keyword "emergency glazing safety" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:55.045Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Glazing : US Safety Standards & Impact G... [113 chars]
+[2026-04-04T20:49:55.045Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:55.046Z]   ✅ FAQ + Author bio injected at position 12467
+[2026-04-04T20:49:55.095Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:55.403Z] 
+[56/79] Processing: "Emergency Glazing 2026: UK Safety Standards & Vacuum Glass Guide" (emergency-glazing-gb)
+[2026-04-04T20:49:55.404Z]   ℹ️  Focus keyword "emergency glazing safety" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:55.404Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Glazing : UK Safety Standards & Vacuum G... [113 chars]
+[2026-04-04T20:49:55.405Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:55.405Z]   ✅ FAQ + Author bio injected at position 12455
+[2026-04-04T20:49:55.443Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:55.752Z] 
+[57/79] Processing: "Emergency Drain Cleaning 2026: US Hydro-Jetting & Section 401 Safety Guide" (emergency-drain-cleaning-us)
+[2026-04-04T20:49:55.753Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Drain Cleaning : US Hydro-Jetting & Sect... [123 chars]
+[2026-04-04T20:49:55.754Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:55.755Z]   ✅ FAQ + Author bio injected at position 12155
+[2026-04-04T20:49:55.796Z]   ✅ SAVED — changes: meta description updated (123 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:56.105Z] 
+[58/79] Processing: "Emergency Drain Cleaning 2026: UK Section 106 & CCTV Safety Guide" (emergency-drain-cleaning-gb)
+[2026-04-04T20:49:56.106Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Drain Cleaning : UK Section 106 & CCTV S... [114 chars]
+[2026-04-04T20:49:56.106Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:56.107Z]   ✅ FAQ + Author bio injected at position 12182
+[2026-04-04T20:49:56.151Z]   ✅ SAVED — changes: meta description updated (114 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:56.462Z] 
+[59/79] Processing: "Emergency Contractor 2026: US IICRC & Managed Recovery Guide" (emergency-contractor-us)
+[2026-04-04T20:49:56.463Z]   ℹ️  Focus keyword "emergency contractor iicrc" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:56.463Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Contractor : US IICRC & Managed Recovery... [109 chars]
+[2026-04-04T20:49:56.464Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:56.464Z]   ✅ FAQ + Author bio injected at position 12215
+[2026-04-04T20:49:56.522Z]   ✅ SAVED — changes: meta description updated (109 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:56.822Z] 
+[60/79] Processing: "The Ultimate Home Emergency Protocol: 2026 US Master Guide" (emergency-at-home-master-protocol-us)
+[2026-04-04T20:49:56.823Z]   ✅ Meta desc: Expert US homeowners guide to The Ultimate Home Emergency Protocol:  US Master G... [107 chars]
+[2026-04-04T20:49:56.823Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:56.824Z]   ✅ FAQ + Author bio injected at position 13198
+[2026-04-04T20:49:56.865Z]   ✅ SAVED — changes: meta description updated (107 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:57.171Z] 
+[61/79] Processing: "Electrical Emergencies Every UK Homeowner Should Know (2026 Guide)" (electrical-emergencies-homeowner-guide-gb)
+[2026-04-04T20:49:57.172Z]   ✅ Meta desc: Expert UK homeowners guide to Electrical Emergencies Every UK Homeowner Should K... [115 chars]
+[2026-04-04T20:49:57.172Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:57.173Z]   ✅ FAQ + Author bio injected at position 13255
+[2026-04-04T20:49:57.215Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:57.521Z] 
+[62/79] Processing: "Emergency Commercial Refrigeration 2026: US EPA & Leak-Tech Guide" (commercial-refrigeration-repair-us)
+[2026-04-04T20:49:57.521Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Commercial Refrigeration : US EPA & Leak... [114 chars]
+[2026-04-04T20:49:57.522Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:57.523Z]   ✅ FAQ + Author bio injected at position 12418
+[2026-04-04T20:49:57.563Z]   ✅ SAVED — changes: meta description updated (114 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:57.871Z] 
+[63/79] Processing: "Emergency Commercial Gas Safety 2026: UK Hydrogen-Ready & Efficiency Guide" (commercial-gas-safe-uk)
+[2026-04-04T20:49:57.872Z]   ℹ️  Focus keyword "emergency commercial safety" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:57.872Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Commercial Gas Safety : UK Hydrogen-Read... [123 chars]
+[2026-04-04T20:49:57.873Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:57.874Z]   ✅ FAQ + Author bio injected at position 12552
+[2026-04-04T20:49:57.913Z]   ✅ SAVED — changes: meta description updated (123 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:58.226Z] 
+[64/79] Processing: "Emergency Commercial Electrician 2026: US Title 24 & NEC Compliance Guide" (commercial-electrician-us)
+[2026-04-04T20:49:58.226Z]   ✅ Meta desc: Expert US homeowners guide to Emergency Commercial Electrician : US Title 24 & N... [122 chars]
+[2026-04-04T20:49:58.227Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:58.228Z]   ✅ FAQ + Author bio injected at position 12548
+[2026-04-04T20:49:58.270Z]   ✅ SAVED — changes: meta description updated (122 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:58.580Z] 
+[65/79] Processing: "Emergency Commercial Drainage 2026: UK S106 & FOG Compliance Guide" (commercial-drainage-gb)
+[2026-04-04T20:49:58.581Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Commercial Drainage : UK S106 & FOG Comp... [115 chars]
+[2026-04-04T20:49:58.582Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:58.582Z]   ✅ FAQ + Author bio injected at position 12441
+[2026-04-04T20:49:58.622Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:58.925Z] 
+[66/79] Processing: "Can You Legally and Safely Stay in a Home Without Electricity? (2026 UK Guide)" (can-you-legally-stay-in-home-without-electricity-gb)
+[2026-04-04T20:49:58.926Z]   ℹ️  Focus keyword "legally safely stay" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:58.926Z]   ✅ Meta desc: Expert UK homeowners guide to Can You Legally and Safely Stay in a Home Without ... [127 chars]
+[2026-04-04T20:49:58.927Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:58.928Z]   ✅ FAQ + Author bio injected at position 13743
+[2026-04-04T20:49:58.975Z]   ✅ SAVED — changes: meta description updated (127 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:59.281Z] 
+[67/79] Processing: "Building Envelope Audit 2026: US Storm-Proofing & Thermal Guide" (building-envelope-audit-us)
+[2026-04-04T20:49:59.281Z]   ✅ Meta desc: Expert US homeowners guide to Building Envelope Audit : US Storm-Proofing & Ther... [112 chars]
+[2026-04-04T20:49:59.282Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:59.283Z]   ✅ FAQ + Author bio injected at position 12293
+[2026-04-04T20:49:59.345Z]   ✅ SAVED — changes: meta description updated (112 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:49:59.657Z] 
+[68/79] Processing: "5 Warning Signs You Need an Emergency Plumber Immediately (2026 US Guide)" (5-signs-you-need-emergency-plumber-us)
+[2026-04-04T20:49:59.658Z]   ℹ️  Focus keyword "warning signs emergency" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:49:59.659Z]   ✅ Meta desc: Expert US homeowners guide to 5 Warning Signs You Need an Emergency Plumber Imme... [122 chars]
+[2026-04-04T20:49:59.659Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:49:59.660Z]   ✅ FAQ + Author bio injected at position 13426
+[2026-04-04T20:49:59.714Z]   ✅ SAVED — changes: meta description updated (122 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:00.026Z] 
+[69/79] Processing: "Spring Thaw: Why March is the Most Dangerous Month for UK Plumbing 2026" (spring-thaw-burst-pipe-prevention-gb)
+[2026-04-04T20:50:00.027Z]   ℹ️  Focus keyword "spring thaw march" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:00.028Z]   ✅ Meta desc: Expert UK homeowners guide to Spring Thaw: Why March is the Most Dangerous Month... [119 chars]
+[2026-04-04T20:50:00.029Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:00.030Z]   ✅ FAQ + Author bio injected at position 12839
+[2026-04-04T20:50:00.080Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:00.386Z] 
+[70/79] Processing: "Portable Power Stations: The 2026 UK Guide to Off-Grid Home Resilience" (portable-power-stations-home-backup-gb)
+[2026-04-04T20:50:00.387Z]   ✅ Meta desc: Expert UK homeowners guide to Portable Power Stations: The  UK Guide to Off-Grid... [119 chars]
+[2026-04-04T20:50:00.387Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:00.388Z]   ✅ FAQ + Author bio injected at position 15381
+[2026-04-04T20:50:00.435Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:00.750Z] 
+[71/79] Processing: "Portable Power Stations: The 2026 US Homeowner's Guide to Emergency Readiness" (portable-power-stations-emergency-backup-us)
+[2026-04-04T20:50:00.751Z]   ✅ Meta desc: Expert US homeowners guide to Portable Power Stations: The  US Homeowner's Guide... [126 chars]
+[2026-04-04T20:50:00.751Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:00.752Z]   ✅ FAQ + Author bio injected at position 15932
+[2026-04-04T20:50:00.797Z]   ✅ SAVED — changes: meta description updated (126 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:01.112Z] 
+[72/79] Processing: "The Hollow Frame Trap: Why Your UK uPVC Door Frame is the 2026 Security Gap" (hollow-frame-door-security-trap-gb)
+[2026-04-04T20:50:01.113Z]   ✅ Meta desc: Expert UK homeowners guide to The Hollow Frame Trap: Why Your UK uPVC Door Frame... [124 chars]
+[2026-04-04T20:50:01.114Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:01.114Z]   ✅ FAQ + Author bio injected at position 13565
+[2026-04-04T20:50:01.156Z]   ✅ SAVED — changes: meta description updated (124 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:01.466Z] 
+[73/79] Processing: "Frozen Pipe Thaw: Preventing the 2026 Spring Flood in US Homes" (frozen-pipe-thaw-flood-prevention-us)
+[2026-04-04T20:50:01.467Z]   ✅ Meta desc: Expert US homeowners guide to Frozen Pipe Thaw: Preventing the  Spring Flood in ... [111 chars]
+[2026-04-04T20:50:01.467Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:01.467Z]   ✅ FAQ + Author bio injected at position 12742
+[2026-04-04T20:50:01.510Z]   ✅ SAVED — changes: meta description updated (111 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:01.816Z] 
+[74/79] Processing: "Stop the Kick-In: The 2026 US Guide to Professional Door Hardening" (forced-entry-prevention-door-hardening-us)
+[2026-04-04T20:50:01.817Z]   ℹ️  Focus keyword "stop kick professional" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:01.817Z]   ✅ Meta desc: Expert US homeowners guide to Stop the Kick-In: The  US Guide to Professional Do... [115 chars]
+[2026-04-04T20:50:01.818Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:01.819Z]   ✅ FAQ + Author bio injected at position 14141
+[2026-04-04T20:50:01.899Z]   ✅ SAVED — changes: meta description updated (115 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:02.201Z] 
+[75/79] Processing: "Car Battery or Alternator? The 2026 UK Guide to Winter Roadside Resilience" (car-battery-alternator-failure-gb)
+[2026-04-04T20:50:02.202Z]   ℹ️  Focus keyword "battery alternator winter" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:02.203Z]   ✅ Meta desc: Expert UK homeowners guide to Car Battery or Alternator? The  UK Guide to Winter... [123 chars]
+[2026-04-04T20:50:02.203Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:02.204Z]   ✅ FAQ + Author bio injected at position 12596
+[2026-04-04T20:50:02.246Z]   ✅ SAVED — changes: meta description updated (123 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:02.551Z] 
+[76/79] Processing: "2026 Grid Instability: The US Homeowner's Guide to Generator Resilience" (2026-grid-instability-generator-resilience-us)
+[2026-04-04T20:50:02.552Z]   ℹ️  Focus keyword "grid instability homeowner" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:02.552Z]   ✅ Meta desc: Expert US homeowners guide to Grid Instability: The US Homeowner's Guide to Gene... [119 chars]
+[2026-04-04T20:50:02.553Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:02.553Z]   ✅ FAQ + Author bio injected at position 12297
+[2026-04-04T20:50:02.595Z]   ✅ SAVED — changes: meta description updated (119 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:02.901Z] 
+[77/79] Processing: "The 2026 Energy Crisis: Your UK Guide to Safe Home Generator Resilience" (2026-energy-crisis-generator-safety-gb)
+[2026-04-04T20:50:02.902Z]   ℹ️  Focus keyword "energy crisis safe" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:02.903Z]   ✅ Meta desc: Expert UK homeowners guide to The  Energy Crisis: Your UK Guide to Safe Home Gen... [120 chars]
+[2026-04-04T20:50:02.904Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:02.905Z]   ✅ FAQ + Author bio injected at position 12784
+[2026-04-04T20:50:02.969Z]   ✅ SAVED — changes: meta description updated (120 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:03.283Z] 
+[78/79] Processing: "Structural Cracks & Foundation Repair: The 2026 US Homeowner's Guide" (structural-cracks-foundation-repair-us)
+[2026-04-04T20:50:03.284Z]   ℹ️  Focus keyword "structural cracks foundation" not in first 100 words — will be handled by TOC/FAQ injection
+[2026-04-04T20:50:03.285Z]   ✅ Meta desc: Expert US homeowners guide to Structural Cracks & Foundation Repair: The  US Hom... [117 chars]
+[2026-04-04T20:50:03.285Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:03.287Z]   ✅ FAQ + Author bio injected at position 14001
+[2026-04-04T20:50:03.347Z]   ✅ SAVED — changes: meta description updated (117 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:03.651Z] 
+[79/79] Processing: "Emergency Plumber London: The Ultimate 2026 Rapid Response Guide" (emergency-plumber-london-guide)
+[2026-04-04T20:50:03.652Z]   ✅ Meta desc: Expert UK homeowners guide to Emergency Plumber London: The Ultimate  Rapid Resp... [113 chars]
+[2026-04-04T20:50:03.653Z]   ⚠️  TOC skipped — fewer than 2 H2s found
+[2026-04-04T20:50:03.654Z]   ✅ FAQ + Author bio injected at position 13087
+[2026-04-04T20:50:03.699Z]   ✅ SAVED — changes: meta description updated (113 chars), FAQ section added (5 Q&As), Author bio added
+[2026-04-04T20:50:04.010Z] 
+============================================================
+[2026-04-04T20:50:04.011Z] BULK SEO UPDATE COMPLETE
+[2026-04-04T20:50:04.012Z]   ✅ Updated:    79
+[2026-04-04T20:50:04.012Z]   ✓  No change:  0
+[2026-04-04T20:50:04.013Z]   ⚠️  Skipped:   0
+[2026-04-04T20:50:04.014Z]   ❌ Errors:     0
+[2026-04-04T20:50:04.014Z] ============================================================
+[2026-04-04T20:50:04.015Z] Full results saved to tmp/seo_results.json

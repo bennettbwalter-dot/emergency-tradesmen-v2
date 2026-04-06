@@ -18,7 +18,6 @@ import { FloatingTourHub } from "@/components/FloatingTourHub";
 import { HeroSection } from "@/components/sections/HeroSection";
 
 // Lazy load other sections
-// Lazy load other sections
 const EmergencyServicesSection = lazy(() => import("@/components/sections/EmergencyServicesSection").then(module => ({ default: module.EmergencyServicesSection })));
 const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSection").then(module => ({ default: module.SEOContentSection })));
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
@@ -73,8 +72,8 @@ const Index = () => {
     <>
       <GuestGate />
       <SEO 
-        title={`${siteName} ${displayCity}`}
-        description={`Find trusted local ${settings.tradeTerm.toLowerCase()}s in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith, and HVAC. Fast response.`}
+        title={`Emergency ${settings.tradeTerm} Near You${displayCity !== 'Near You' ? ` in ${displayCity}` : ''}`}
+        description={`Find trusted local ${settings.tradeTerm.toLowerCase()} in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith & HVAC. Call now to get connected with verified experts in your area today.`}
         jsonLd={emergencyServiceSchema}
       />
 

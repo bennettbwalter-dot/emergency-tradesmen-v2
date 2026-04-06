@@ -71,8 +71,7 @@ export function USLocationSelector({ onLocationSelect, className }: USLocationSe
                     const results = await searchCitiesInState(selectedState.code, citySearchTerm);
                     setAvailableCities(results);
                 } else {
-                    // Default mode: Load first 50
-                    // TODO: Infinite scroll could go here, but for now 50 keeps it fast
+                    // Default mode: Load first 100 cities
                     const results = await getCitiesInState(selectedState.code, 100);
                     setAvailableCities(results);
                 }

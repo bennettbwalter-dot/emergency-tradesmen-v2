@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { devLog } from "@/lib/devLog";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { findNearestCity } from '@/lib/cityCoordinates';
 
@@ -175,7 +176,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                     });
                 }
 
-                console.log(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
+                devLog(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
             }
         } catch (e) {
             console.warn("Failed to resolve city from coords", e);
@@ -305,7 +306,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                                 const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
                                 if (state) {
                                     setDetectedState(state.name);
-                                    console.log(`Overriding state to: ${state.name} based on city: ${city}`);
+                                    devLog(`Overriding state to: ${state.name} based on city: ${city}`);
                                 }
                             });
                         }

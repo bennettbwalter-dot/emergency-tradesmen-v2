@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import type { Business } from "@/lib/businesses";
+import { getPostcodeLabel } from "@/lib/siteConfig";
 
 interface BusinessModalProps {
     isOpen: boolean;
@@ -172,7 +173,7 @@ export function BusinessModal({ isOpen, onClose, business, onSuccess }: Business
                             <Input id="city" name="city" value={formData.city} onChange={handleChange} required />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="postcode">Postcode</Label>
+                            <Label htmlFor="postcode">{getPostcodeLabel()}</Label>
                             <Input id="postcode" name="postcode" value={formData.postcode} onChange={handleChange} />
                         </div>
                         <div className="space-y-2 md:col-span-2">

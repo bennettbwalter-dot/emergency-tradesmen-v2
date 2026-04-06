@@ -11,12 +11,28 @@ import { Mail, Phone, User, MessageSquare, Send, CheckCircle, AlertCircle, Shiel
 import { Link } from "react-router-dom";
 import { sendEmail } from "@/lib/email";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
+import { getSupportEmail, getSiteName } from "@/lib/siteConfig";
+import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 
 export default function ContactPage() {
     const { toast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const port = typeof window !== 'undefined' ? window.location.port : '';
+    const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+    const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+            { "@type": "ListItem", "position": 2, "name": "Contact", "item": `${siteUrl}/contact` }
+        ]
+    };
 
     // Form state
     const [formData, setFormData] = useState({
@@ -83,7 +99,6 @@ export default function ContactPage() {
 
         // Honeypot check - if filled, it's a bot
         if (formData.honeypot) {
-            console.log("Bot detected");
             setSubmitted(true);
             return;
         }
@@ -102,7 +117,7 @@ export default function ContactPage() {
         try {
             // Using our own SendGrid integration
             await sendEmail({
-                to: "emergencytradesmen@outlook.com",
+                to: getSupportEmail(),
                 subject: `Contact Form: ${formData.subject}`,
                 html: `
                     <h2>New Contact Form Submission</h2>
@@ -127,7 +142,7 @@ export default function ContactPage() {
             setError("Failed to send message. Please try again or email us directly.");
             toast({
                 title: "Error sending message",
-                description: "Please try again or email us directly at emergencytradesmen@outlook.com",
+                description: `Please try again or email us directly at ${getSupportEmail()}`,
                 variant: "destructive"
             });
         } finally {
@@ -166,9 +181,10 @@ export default function ContactPage() {
     return (
         <>
             <SEO
-                title="Contact Us"
-                description="Get in touch with Emergency Tradesmen. We're here to help with any questions about our services or business listings."
+                title="Contact Emergency Tradesmen — Get 24/7 Help Now"
+                description="Need an emergency tradesman? Contact us for fast, verified local plumbers, electricians & locksmiths. Available 24/7 across the UK. Call now for immediate help."
                 canonical="/contact"
+                jsonLd={breadcrumbSchema}
             />
 
             <Header />
@@ -198,15 +214,15 @@ export default function ContactPage() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                                     <img src="/et-logo-v2.webp" alt="Logo" loading="lazy" className="w-20 h-20 mb-4 rounded-full border-2 border-gold/50 shadow-xl object-cover" />
-                                    <h3 className="text-xl font-semibold mb-2">Emergency Tradesmen UK</h3>
+                                    <h2 className="text-xl font-semibold mb-2">{getSiteName()}</h2>
                                     <p className="text-white/80 text-sm">
-                                        Connecting you with trusted local tradesmen 24/7
+                                        Connecting you with trusted local {getSiteName().split(' ')[1].toLowerCase()} 24/7
                                     </p>
                                 </div>
                             </div>
 
                             <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                                <h3 className="font-semibold text-foreground">Why Contact Us?</h3>
+                                <h2 className="font-semibold text-foreground">Why Contact Us?</h2>
                                 <ul className="space-y-3 text-sm text-muted-foreground">
                                     <li className="flex items-start gap-3">
                                         <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
@@ -228,7 +244,7 @@ export default function ContactPage() {
                             </div>
 
                             <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                                <h3 className="font-semibold text-foreground">Connect With Us</h3>
+                                <h2 className="font-semibold text-foreground">Connect With Us</h2>
                                 <div className="flex gap-4">
                                     <GlassSocialIcon platform="facebook" href="https://www.facebook.com/profile.php?id=61588024972553" className="w-12 h-12" />
                                     <GlassSocialIcon platform="instagram" href="https://www.instagram.com/emergencytradesmen/" className="w-12 h-12" />
@@ -436,6 +452,16 @@ export default function ContactPage() {
                     </div>
                 </div>
             </main>
+
+            <section className="py-20 bg-background border-t border-border/50">
+                <div className="container-narrow">
+                    <div className="text-center mb-12">
+                        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
+                        <p className="text-muted-foreground text-lg">Quick answers to common questions about our service.</p>
+                    </div>
+                    <GeneralFAQSection showTitle={false} useContainer={true} />
+                </div>
+            </section>
 
             <Footer />
         </>

@@ -16,7 +16,7 @@ import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Squares from "@/components/ui/Squares";
-import { generateTradePageData, cities, usCities, cityToState } from "@/lib/trades";
+import { generateTradePageData, cities, usCities, cityToState, getCitiesForState } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
@@ -67,12 +67,6 @@ export default function TradeCityPage() {
 
   const location = useLocation();
 
-  // Debug Params
-  console.log("TradeCityPage Debug:", {
-    path: location.pathname,
-    params: { countryCode, tradePath, city, state, area, metro, suburb }
-  });
-
   // Resolution Logic for Hierarchy
   const rawTargetLocation = suburb || area || city || metro || state;
   
@@ -85,7 +79,6 @@ export default function TradeCityPage() {
     if (!rawTargetLocation && urlLat && urlLng) {
       const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB'));
       if (nearest) {
-        console.log("Resolved nearest city for coordinate-only route:", nearest.city);
         return nearest.city;
       }
     }
@@ -191,15 +184,6 @@ export default function TradeCityPage() {
     return actualCountry === 'US' && !!effectiveState && (!city || city.toLowerCase() === effectiveState.toLowerCase());
   }, [actualCountry, effectiveState, city]);
 
-  console.log('TradeCityPage Country Detection:', {
-    isUSDomain,
-    pathname: location.pathname,
-    countryCodeParam: countryCode,
-    validCity,
-    isInUsCities: validCity && usCities.includes(validCity),
-    actualCountry
-  });
-
   // Only redirect if there is a glaring mismatch (e.g. city definitely wrong?)
   // For now, removing strict redirect allows new US locations to work without "white-listing" in trades.ts
   // Old logic removed.
@@ -265,12 +249,6 @@ export default function TradeCityPage() {
       }
 
       try {
-        console.log('Fetching businesses for:', {
-          trade: tradeInfo.slug,
-          city: validCity,
-          countryCode: actualCountry,
-          state: isStatePage ? effectiveState : undefined
-        });
         const realBusinesses = await fetchBusinesses(
           tradeInfo.slug, 
           validCity, 
@@ -278,7 +256,6 @@ export default function TradeCityPage() {
           effectiveCoords || undefined,
           isStatePage ? effectiveState : undefined
         );
-        console.log('Real businesses fetched:', realBusinesses.length);
         setBusinesses(realBusinesses);
       } catch (error) {
         console.error('Error loading businesses:', error);
@@ -322,28 +299,30 @@ export default function TradeCityPage() {
 
   // Real-time updates for Availability
   useEffect(() => {
-    const channel = supabase
-      .channel('public:businesses')
-      .on(
-        'postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'businesses' },
-        (payload) => {
-          console.log("Real-time update received:", payload);
-          setBusinesses(current =>
-            current.map(b =>
-              b.id === payload.new.id
-                // merge new data carefully, ensuring we keep any local specific fields if needed
-                ? { ...b, ...payload.new }
-                : b
-            )
-          );
-        }
-      )
-      .subscribe();
+    try {
+      const channel = supabase
+        .channel('public:businesses')
+        .on(
+          'postgres_changes',
+          { event: 'UPDATE', schema: 'public', table: 'businesses' },
+          (payload) => {
+            setBusinesses(current =>
+              current.map(b =>
+                b.id === payload.new.id
+                  ? { ...b, ...payload.new }
+                  : b
+              )
+            );
+          }
+        )
+        .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    } catch (e) {
+      console.warn('Real-time subscription failed (non-critical):', e);
+    }
   }, []);
 
   // Apply filters and sorting
@@ -376,19 +355,15 @@ export default function TradeCityPage() {
   // REDIRECT GUARD: If no businesses found after loading, redirect to fallback
   useEffect(() => {
     if (!isLoading && hasLoadedRef.current && businesses.length === 0) {
-      console.log("Redirect guard triggered: No businesses found for this landing page.");
-      
       const tradeSlug = tradeInfo.slug;
       
       if (actualCountry === 'US' && effectiveState) {
         // Redirect to state page
         const statePath = `/us/emergency-${tradeSlug}/${effectiveState.toLowerCase()}`;
-        console.log(`Redirecting to state page: ${statePath}`);
         // Using window.location instead of Navigate for a cleaner "hard" redirect on empty pages
         window.location.href = statePath;
       } else {
         // Redirect to locations for UK or no-state US
-        console.log("Redirecting to /locations");
         window.location.href = '/locations';
       }
     }
@@ -400,7 +375,6 @@ export default function TradeCityPage() {
   // Guard: Only allow known trade slugs — reject non-trade paths like 'blog', 'about', etc.
   const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'roofer', 'breakdown', 'builder', 'water-restoration', 'hvac', 'pest-control', 'handyman', 'joiner', 'default'];
   if (!validatedTradePath || (!knownTrades.includes(validatedTradePath) && !pageData?.trade)) {
-    console.warn("TradeCityPage: Invalid trade slug, redirecting home.", { validatedTradePath });
     return <Navigate to="/" replace />;
   }
 
@@ -443,7 +417,7 @@ export default function TradeCityPage() {
 
   const baseDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
-  const serviceSchema = {
+  const serviceSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": schemaType,
     "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}#localbusiness`,
@@ -459,7 +433,6 @@ export default function TradeCityPage() {
       "addressCountry": countryCode?.toUpperCase() || "GB",
       ...(postcode ? { "postalCode": postcode } : {})
     },
-    // Enhanced for Stars in SERP
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": reviewStats.averageRating.toFixed(1),
@@ -511,9 +484,9 @@ export default function TradeCityPage() {
         "name": `Emergency ${tradeDisplayName} Booking`
       }
     }
-  };
+  }), [tradeInfo.slug, cityName, tradeDisplayName, heroImage, countryCode, postcode, actualCountry, reviewStats.averageRating, reviewStats.totalReviews, JSON.stringify(realReviews), JSON.stringify(serviceAreas), JSON.stringify(services)]);
 
-  const faqSchema = {
+  const faqSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map(faq => ({
@@ -524,9 +497,9 @@ export default function TradeCityPage() {
         "text": faq.answer
       }
     }))
-  };
+  }), [JSON.stringify(faqs)]);
 
-  const breadcrumbSchema = {
+  const breadcrumbSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -549,7 +522,7 @@ export default function TradeCityPage() {
         "item": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
       }
     ]
-  };
+  }), [baseDomain, tradeInfo.slug, cityName, tradeDisplayName]);
 
   // --- Long-tail SEO: derive state code and coordinates ---
   const isUS = actualCountry === 'US';
@@ -570,19 +543,19 @@ export default function TradeCityPage() {
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
   const localTerm = isUS ? 'Contractors' : 'Tradesmen';
   const seoTitle = isStatePage
-    ? `Emergency ${tradeDisplayName} in ${cityName} – Best Local ${localTerm} Near Me | 24/7`
+    ? `Emergency ${tradeDisplayName} in ${cityName} – Best Local ${localTerm} Near Me 24/7`
     : pageData?.problem
-      ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''}`
+      ? `${pageData.problem.name} in ${cityName}${stateCode ? ` ${stateCode}` : ''} – Emergency Repair 24/7`
       : isUS
-        ? `Emergency ${tradeDisplayName} ${cityName} ${stateCode} – Local ${localTerm} Near Me | 24/7`
-        : `Emergency ${tradeDisplayName} ${cityName} – Local ${localTerm} Near Me | 24/7`;
+        ? `Emergency ${tradeDisplayName} ${cityName} ${stateCode} – Local ${localTerm} Near Me 24/7`
+        : `Emergency ${tradeDisplayName} ${cityName} – Local ${localTerm} Near Me 24/7`;
 
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
   const seoDescription = isStatePage
-    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now.`
+    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now for fast help.`
     : pageData?.problem
-      ? `${pageData.problem.description} ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time.`
+      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Get connected with a verified expert now.`
       : isUS
         ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
         : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local tradesmen ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
@@ -1089,7 +1062,6 @@ export default function TradeCityPage() {
             </div>
             <div className="grid grid-cols-2 shadow-inner sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-3 gap-x-6">
               {(() => {
-                const { getCitiesForState } = require('@/lib/trades');
                 const stateCities = getCitiesForState(effectiveState);
                 return stateCities.map((cityName: string) => {
                   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');

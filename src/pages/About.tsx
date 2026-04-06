@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, Shield, Clock, Award, CheckCircle2, MapPin, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 
 export default function About() {
     const { settings } = useLocalization();
@@ -41,13 +42,22 @@ export default function About() {
         ]
     };
 
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": `${siteUrl}/about` }
+        ]
+    };
+
     return (
         <>
             <SEO
-                title={`About Emergency ${tradeTerm} | Trusted Local ${tradeTerm} 24/7`}
-                description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding a local ${termSingular.toLowerCase()} for plumbing, electrical, and HVAC repairs.`}
+                title={`About Emergency ${tradeTerm} — Verified 24/7 Local Trade Network`}
+                description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding trusted local experts for plumbing, electrical & HVAC repairs. Get connected now.`}
                 canonical={`${countryPrefix}/about`}
-                jsonLd={orgSchema}
+                jsonLd={[orgSchema, breadcrumbSchema]}
             />
 
             <Header />
@@ -222,6 +232,17 @@ export default function About() {
                             </div>
                         </div>
 
+                    </div>
+                </section>
+
+                {/* FAQ Section */}
+                <section className="py-20 bg-background">
+                    <div className="container-narrow">
+                        <div className="text-center mb-12">
+                            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
+                            <p className="text-muted-foreground text-lg">Common questions about Emergency Tradesmen answered.</p>
+                        </div>
+                        <GeneralFAQSection showTitle={false} useContainer={true} />
                     </div>
                 </section>
 

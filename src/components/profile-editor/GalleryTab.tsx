@@ -63,7 +63,7 @@ export function GalleryTab({ previews, setPreviews, files, setFiles }: EditorPro
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {previews.gallery.map((url: string, i: number) => (
                         <div key={i} className="relative aspect-square rounded-xl overflow-hidden border border-slate-700 group">
-                            <img src={url} className="w-full h-full object-cover" />
+                            <img src={url} alt={`Portfolio photo ${i + 1}`} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <Button variant="destructive" size="icon" className="h-8 w-8 rounded-full" onClick={() => removeGallery(i)}>
                                     <X className="w-4 h-4" />

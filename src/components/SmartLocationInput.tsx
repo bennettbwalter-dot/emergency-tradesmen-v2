@@ -1,4 +1,5 @@
 import * as React from "react";
+import { devLog } from "@/lib/devLog";
 import { Check, MapPin, Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -103,7 +104,7 @@ export function SmartLocationInput({
                                 <CommandItem onSelect={() => {
                                     // "Near Me" Implementation Mock
                                     // ideally call a prop like onUseMyLocation
-                                    console.log("Use my location clicked");
+                                    devLog("Use my location clicked");
                                     // For now we just close, implementing fully would require Geolocation API integration
                                     setOpen(false);
                                 }}>

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, MapPin, Zap, Phone, Car, RotateCcw, Shield, Search, Wrench, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User, Settings } from "lucide-react";
+import { devLog, devWarn } from "@/lib/devLog";
+import { Send, MapPin, Zap, Phone, RotateCcw, Search, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
@@ -46,7 +47,7 @@ export function EmergencyChatInterface() {
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
-    const [locationRecord, setLocationRecord] = useState<any>(null);
+    const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
     const [chatState, setChatState] = useState<ChatState>({
         step: 'INITIAL',
         detectedTrade: null,
@@ -130,7 +131,7 @@ export function EmergencyChatInterface() {
     const restartRecordingForVoice = async () => {
         if (!isVoiceSessionRef.current) return;
         try {
-            console.log('[Voice] Auto-restarting mic for follow-up question...');
+            devLog('[Voice] Auto-restarting mic for follow-up question...');
             await startRecording();
             startVolumeMonitor();
             toast.success("Listening — speak your answer.", { id: 'stt-status', duration: 3000 });
@@ -154,9 +155,9 @@ export function EmergencyChatInterface() {
     // old handleUserMessage with stale chatState/detectedTrade/detectedCity.
     useEffect(() => {
         if (transcription) {
-            console.log(`[STT] New transcription received: "${transcription}"`);
-            console.log(`[STT] Current chatState step: ${chatStateRef.current.step}, trade: ${chatStateRef.current.detectedTrade}, city: ${chatStateRef.current.detectedCity}`);
-            console.log(`[STT] Context trade: ${detectedTradeRef.current}, city: ${detectedCityRef.current}`);
+            devLog(`[STT] New transcription received: "${transcription}"`);
+            devLog(`[STT] Current chatState step: ${chatStateRef.current.step}, trade: ${chatStateRef.current.detectedTrade}, city: ${chatStateRef.current.detectedCity}`);
+            devLog(`[STT] Context trade: ${detectedTradeRef.current}, city: ${detectedCityRef.current}`);
             // Mark this as a voice session so we auto-restart after TTS
             isVoiceSessionRef.current = true;
             handleUserMessageRef.current(transcription, true);
@@ -164,7 +165,7 @@ export function EmergencyChatInterface() {
             // Don't stop volume monitor here — it'll be stopped when recording stops
             // and restarted after TTS finishes
         }
-    }, [transcription]);
+    }, [transcription, resetTranscription]);
 
     // Handle Whisper errors
     useEffect(() => {
@@ -238,7 +239,7 @@ export function EmergencyChatInterface() {
             const formattedCity = urlCity.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             if (formattedCity !== detectedCity) {
                 setDetectedCity(formattedCity);
-                console.log(`[EmergencyChatInterface] Syncing detectedCity from URL: ${formattedCity}`);
+                devLog(`[EmergencyChatInterface] Syncing detectedCity from URL: ${formattedCity}`);
             }
         }
     }, [urlCity]);
@@ -263,11 +264,11 @@ export function EmergencyChatInterface() {
 
     const handleUserMessage = async (msgText: string, isVoice: boolean = false) => {
         if (!msgText.trim()) {
-            console.warn('[EmergencyChatInterface] handleUserMessage called with empty text');
+            devWarn('[EmergencyChatInterface] handleUserMessage called with empty text');
             return;
         }
 
-        console.log(`[EmergencyChatInterface] handleUserMessage: "${msgText}" (isVoice: ${isVoice})`);
+        devLog(`[EmergencyChatInterface] handleUserMessage: "${msgText}" (isVoice: ${isVoice})`);
 
         const userMsg: ChatMessage = {
             id: Date.now().toString(),
@@ -308,7 +309,7 @@ export function EmergencyChatInterface() {
                 const freshCity = detectedCityRef.current;
                 const freshCountryCode = settingsRef.current.countryCode;
 
-                console.log(`[handleUserMessage] Processing "${msgText}" with state:`, {
+                devLog(`[handleUserMessage] Processing "${msgText}" with state:`, {
                     step: currentFreshState.step,
                     stateTrade: currentFreshState.detectedTrade,
                     contextTrade: freshTrade,
@@ -349,7 +350,7 @@ export function EmergencyChatInterface() {
                     // Navigating away — end voice session
                     isVoiceSessionRef.current = false;
                     const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
-                    console.log(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
+                    devLog(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
                         navigate(response.target!);
                     }, navDelay);
@@ -500,7 +501,7 @@ export function EmergencyChatInterface() {
                     <div className="hidden md:block min-w-0 overflow-hidden">
                         <SelectValue placeholder="Trade">
                             <span className="text-sm font-medium truncate block max-w-[180px]">
-                                {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName : trades.find(t => t.slug === detectedTrade)?.name) : "Trade"}
+                                {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName ?? "Trade" : trades.find(t => t.slug === detectedTrade)?.name ?? "Trade") : "Trade"}
                             </span>
                         </SelectValue>
                     </div>
@@ -544,7 +545,7 @@ export function EmergencyChatInterface() {
                         placeholder="City, State"
                         onStateSelected={(state) => setHasStateSelected(!!state)}
                         onLocationSelect={(record) => {
-                            console.log("Loc Selected", record);
+                            devLog("Loc Selected", record);
                             setDetectedCity(record.name);
                             setLocationRecord(record);
                         }}
@@ -581,9 +582,11 @@ export function EmergencyChatInterface() {
     const micButton = (
         <Button
             onClick={handleMicToggle}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleMicToggle(); }}
             data-tour="tour-mic-button"
             disabled={isTranscriptionProcessing || isTyping}
             size="icon"
+            aria-label={isRecording ? 'Stop recording' : (isTranscriptionProcessing ? 'Processing voice input' : 'Record voice message')}
             className={`h-12 w-12 md:h-11 md:w-11 shrink-0 rounded-full transition-all shadow-md md:shadow-lg overflow-visible ${isRecording
                 ? 'bg-red-500 hover:bg-red-600 animate-pulse ring-2 ring-red-400/50'
                 : isTranscriptionProcessing
@@ -753,7 +756,7 @@ export function EmergencyChatInterface() {
                                     </div>
 
                                     {chatState.history[chatState.history.length - 1].role === 'assistant' && (
-                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-gold/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2">
+                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-gold/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2" role="status" aria-live="polite">
                                             <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
                                             <span>Waiting for user input...</span>
                                         </AnimatedSpan>

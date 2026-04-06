@@ -1,4 +1,5 @@
 import { Business, Pricing } from "./businesses";
+import { isUSDomain } from "@/lib/siteConfig";
 
 // Storage key for comparison list
 const COMPARISON_STORAGE_KEY = "emergency_tradesmen_comparison";
@@ -57,7 +58,8 @@ export function calculateJobCost(pricing: Pricing, hours: number, isEmergency: b
 
 // Format currency
 export function formatPrice(amount: number): string {
-    return `£${amount.toFixed(2)}`;
+    const symbol = isUSDomain() ? '$' : '£';
+    return `${symbol}${amount.toFixed(2)}`;
 }
 
 // Get price tier label with color
@@ -88,11 +90,12 @@ export function sortByPrice(businesses: Business[], ascending: boolean = true): 
 // Get price range label
 export function getPriceRangeLabel(pricing: Pricing): string {
     const twoHourCost = calculateJobCost(pricing, 2);
+    const symbol = isUSDomain() ? '$' : '£';
 
-    if (twoHourCost < 100) return '£';
-    if (twoHourCost < 200) return '££';
-    if (twoHourCost < 300) return '£££';
-    return '££££';
+    if (twoHourCost < 100) return symbol;
+    if (twoHourCost < 200) return symbol.repeat(2);
+    if (twoHourCost < 300) return symbol.repeat(3);
+    return symbol.repeat(4);
 }
 
 // Generate mock pricing for businesses without pricing data

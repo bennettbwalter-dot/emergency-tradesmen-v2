@@ -1,11 +1,12 @@
 import { pipeline, env } from '@xenova/transformers';
+import { devLog, devWarn } from "@/lib/devLog";
 
 // Skip local check to download from HuggingFace
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
 const WORKER_VERSION = '1.0.3';
-console.log(`[WhisperWorker] v${WORKER_VERSION} initialized.`);
+devLog(`[WhisperWorker] v${WORKER_VERSION} initialized.`);
 
 class WhisperPipeline {
     static task = 'automatic-speech-recognition';
@@ -14,7 +15,7 @@ class WhisperPipeline {
 
     static async getInstance(progress_callback = null) {
         if (this.instance === null) {
-            console.log(`[Worker] Loading model: ${this.model}...`);
+            devLog(`[Worker] Loading model: ${this.model}...`);
             this.instance = pipeline(this.task, this.model, {
                 progress_callback
             });
@@ -34,7 +35,7 @@ self.onmessage = async (event) => {
                 self.postMessage({ type: 'PROGRESS', data: x });
             });
 
-            console.log('[Worker] Starting transcription...');
+            devLog('[Worker] Starting transcription...');
             const start = performance.now();
 
             const output = await transcriber(audio, {
@@ -46,7 +47,7 @@ self.onmessage = async (event) => {
             });
 
             const end = performance.now();
-            console.log(`[Worker] Transcription finished in ${((end - start) / 1000).toFixed(2)}s`);
+            devLog(`[Worker] Transcription finished in ${((end - start) / 1000).toFixed(2)}s`);
 
             self.postMessage({
                 type: 'TRANSCRIPTION_RESULT',

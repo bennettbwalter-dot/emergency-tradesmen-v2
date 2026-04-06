@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
@@ -21,9 +21,10 @@ import { initGA } from "@/lib/analytics";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import VoiceTrigger from "@/components/VoiceAssistant/VoiceTrigger";
 import { MobilePreviewWrapper } from "@/components/MobilePreviewWrapper";
 import { LocationOverrideTool } from "@/components/dev/LocationOverrideTool";
+import { LockoutOverlay } from "@/components/LockoutOverlay";
+import { useAuth } from "@/contexts/AuthContext";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 
@@ -38,6 +39,7 @@ const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const BusinessProfilePage = lazy(() => import("./pages/BusinessProfilePage"));
 const About = lazy(() => import("./pages/About"));
 const PricingPage = lazy(() => import("./pages/PricingPage"));
+const BillingPage = lazy(() => import("./pages/BillingPage"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
@@ -47,7 +49,7 @@ const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const ProProfileEditor = lazy(() => import("./pages/NewProfileEditor"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPage = lazy(() => import(/* @vite-ignore */ `./pages/BlogPage.tsx?t=${Date.now()}`));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
@@ -79,11 +81,7 @@ const HashCleaner = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Aggressive hash cleanup
-    // Check if the URL ends with a hash symbol (even if location.hash is empty)
     if (window.location.href.endsWith('#') || window.location.hash === '#') {
-      // Use window.history.replaceState to replace the current entry
-      // Preserve window.history.state to avoid breaking client-side routers
       window.history.replaceState(
         window.history.state,
         '',
@@ -141,6 +139,8 @@ const AppRoutes = () => (
     <Route path="/vetting-process" element={<VettingProcess />} />
     <Route path="/verify-documents" element={<VerifyDocumentsPage />} />
     <Route path="/user/dashboard" element={<UserDashboard />} />
+    <Route path="/account/billing" element={<BillingPage />} />
+    <Route path="/billing" element={<Navigate to="/account/billing" replace />} />
     <Route path="/business/:businessId" element={<BusinessProfilePage />} />
     <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
     <Route path="/premium-profile" element={<ProProfileEditor />} />
@@ -180,7 +180,22 @@ const AppRoutes = () => (
   </Routes>
 );
 
-const App = () => {
+const AppContent = () => {
+  const { isLocked, refreshUser } = useAuth();
+  
+  const handleRetry = async () => {
+    await refreshUser();
+  };
+  // Initialize GA and handle hash cleanup at the root level before any returns
+  useEffect(() => {
+    initGA();
+
+    // Global hash cleanup
+    if (window.location.hash === '#') {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, []);
+
   // Debug: Check if Supabase URL is available
   if (!import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
     return (
@@ -209,15 +224,62 @@ const App = () => {
     );
   }
 
-  useEffect(() => {
-    initGA();
 
-    // Global hash cleanup
-    if (window.location.hash === '#') {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-  }, []);
 
+  return (
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      {isLocked && <LockoutOverlay onRetry={handleRetry} />}
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <LocalizationProvider>
+          {import.meta.env.DEV && <LocationOverrideTool />}
+          {import.meta.env.DEV && (window.self === window.top) ? (
+            <MobilePreviewWrapper>
+              <ScrollToTop />
+              <HashCleaner />
+              <Suspense fallback={<PageLoader />}>
+                <AnalyticsTracker />
+                <InstallPWA />
+                <CookieConsent />
+                <ErrorBoundary>
+                  <main className="pb-16 md:pb-0">
+                    <AppRoutes />
+                  </main>
+                </ErrorBoundary>
+                <BottomNav />
+                <LiveChat />
+                <FloatingBackButton />
+                <CustomCursor />
+              </Suspense>
+            </MobilePreviewWrapper>
+          ) : (
+            <>
+              <ScrollToTop />
+              <HashCleaner />
+              <Suspense fallback={<PageLoader />}>
+                <AnalyticsTracker />
+                <InstallPWA />
+                <CookieConsent />
+                <ErrorBoundary>
+                  <main className="pb-16 md:pb-0">
+                    <AppRoutes />
+                  </main>
+                </ErrorBoundary>
+                <BottomNav />
+                <LiveChat />
+                <FloatingBackButton />
+                <CustomCursor />
+              </Suspense>
+            </>
+          )}
+        </LocalizationProvider>
+      </BrowserRouter>
+    </TooltipProvider>
+  );
+};
+
+const App = () => {
   return (
     <PostHogProvider client={posthog}>
       <HelmetProvider>
@@ -225,56 +287,7 @@ const App = () => {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <ChatbotProvider>
-                <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
-                  <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                    <LocalizationProvider>
-                      {import.meta.env.DEV && <LocationOverrideTool />}
-                      {import.meta.env.DEV && (window.self === window.top) ? (
-                        <MobilePreviewWrapper>
-                          <ScrollToTop />
-                          <HashCleaner />
-                          <Suspense fallback={<PageLoader />}>
-                            <AnalyticsTracker />
-                            <InstallPWA />
-                            <CookieConsent />
-                            <ErrorBoundary>
-                              <main className="pb-16 md:pb-0">
-                                <AppRoutes />
-                              </main>
-                            </ErrorBoundary>
-                            <BottomNav />
-                            <LiveChat />
-                            {/* {import.meta.env.DEV && <VoiceTrigger />} */}
-                            <FloatingBackButton />
-                            <CustomCursor />
-                          </Suspense>
-                        </MobilePreviewWrapper>
-                      ) : (
-                        <>
-                          <ScrollToTop />
-                          <HashCleaner />
-                          <Suspense fallback={<PageLoader />}>
-                            <AnalyticsTracker />
-                            <InstallPWA />
-                            <CookieConsent />
-                            <ErrorBoundary>
-                              <main className="pb-16 md:pb-0">
-                                <AppRoutes />
-                              </main>
-                            </ErrorBoundary>
-                            <BottomNav />
-                            <LiveChat />
-                            {/* {import.meta.env.DEV && <VoiceTrigger />} */}
-                            <FloatingBackButton />
-                            <CustomCursor />
-                          </Suspense>
-                        </>
-                      )}
-                    </LocalizationProvider>
-                  </BrowserRouter>
-                </TooltipProvider>
+                <AppContent />
               </ChatbotProvider>
             </AuthProvider>
           </QueryClientProvider>
@@ -285,6 +298,3 @@ const App = () => {
 };
 
 export default App;
-
-
-

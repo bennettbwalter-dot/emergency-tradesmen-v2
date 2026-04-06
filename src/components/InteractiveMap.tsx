@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react';
+import { devLog } from "@/lib/devLog";
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getViewState } from '@/lib/mapUtils';
@@ -43,7 +44,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
     const initialViewState = getViewState(city, countryCode);
     const [viewState, setViewState] = useState(initialViewState);
     
-    console.log(`Map: Initial view for ${city} (${countryCode}):`, initialViewState.center);
+    devLog(`Map: Initial view for ${city} (${countryCode}):`, initialViewState.center);
 
     // Effect to update view state when props change or via Geocoding
     useEffect(() => {
@@ -70,7 +71,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
         }
 
         // 3. If generic, try detailed Geocoding via Nominatim
-        console.log(`Map: Static lookup failed for ${city}, trying Nominatim...`);
+        devLog(`Map: Static lookup failed for ${city}, trying Nominatim...`);
         const fetchCoordinates = async () => {
             try {
                 const query = `${city}, ${countryCode === 'US' ? 'USA' : 'UK'}`;
@@ -80,7 +81,7 @@ export function InteractiveMap({ city, className = "w-full h-full min-h-[300px]"
                 if (data && data.length > 0) {
                     const lat = parseFloat(data[0].lat);
                     const lon = parseFloat(data[0].lon);
-                    console.log(`Map: Found coords for ${city}:`, { lat, lon });
+                    devLog(`Map: Found coords for ${city}:`, { lat, lon });
                     setViewState({
                         center: { lat, lng: lon },
                         zoom: 12

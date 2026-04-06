@@ -1,6 +1,8 @@
 // AI Emergency Triage Logic
 // Provides smart matching based on problem type and urgency
 
+import { isUSDomain } from "@/lib/siteConfig";
+
 export type UrgencyLevel = "emergency" | "same-day" | "next-day" | "scheduled";
 
 export interface TriageResult {
@@ -187,5 +189,6 @@ export function assessTriage(
 }
 
 export function formatCostRange(cost: { min: number; max: number }): string {
-    return `£${cost.min} - £${cost.max}`;
+    const symbol = isUSDomain() ? '$' : '£';
+    return `${symbol}${cost.min} - ${symbol}${cost.max}`;
 }

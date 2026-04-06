@@ -1,8 +1,11 @@
 import { Zap } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { isUSDomain } from "@/lib/siteConfig";
 
 export function SEOContentSection() {
     const { settings } = useLocalization();
+    const us = isUSDomain();
+    const tradeTerm = settings.tradeTerm.toLowerCase();
 
     return (
         <section className="container-wide py-16 relative overflow-hidden">
@@ -31,7 +34,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                When you search for <strong>"tradesmen near me"</strong>, you aren't just looking for a list of names—you need verified local experts who can arrive within minutes, not days.
+                                When you search for <strong>"{tradeTerm} near me"</strong>, you aren't just looking for a list of names—you need verified local experts who can arrive within minutes, not days.
                             </p>
                         </div>
 
@@ -41,7 +44,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Our network connects you instantly with the closest available <strong>local tradesmen</strong> in your area. Finding reliable help in an emergency shouldn't be a gamble.
+                                Our network connects you instantly with the closest available <strong>local {tradeTerm}</strong> in your area. Finding reliable help in an emergency shouldn't be a gamble.
                             </p>
                         </div>
 
@@ -51,7 +54,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Whether it's a <strong>24/7 emergency plumber</strong>, a certified electrician, or a locksmith nearby, get the help you need, <strong>near you</strong>, right now.
+                                Whether it's a <strong>{us ? '24/7 emergency plumber' : '24/7 emergency plumber'}</strong>, a certified electrician, or a locksmith nearby, get the help you need, <strong>near you</strong>, right now.
                             </p>
                         </div>
                     </div>

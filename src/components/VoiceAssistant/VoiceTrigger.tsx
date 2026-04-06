@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Loader2, Volume2, Navigation } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { devLog, devWarn } from "@/lib/devLog";
 
 import { processUserMessage, ChatState } from '@/lib/chat-logic';
 import WhisperWaveform from './WhisperWaveform';
@@ -67,7 +68,7 @@ const VoiceTrigger = () => {
     // Sync transcription to processInput
     useEffect(() => {
         if (transcription && transcription.trim().length >= MIN_TRANSCRIPT_LENGTH) {
-            console.log(`[Voice] Whisper transcription: "${transcription}"`);
+            devLog(`[Voice] Whisper transcription: "${transcription}"`);
             setTranscript(transcription);
             processInput(transcription);
         }
@@ -124,7 +125,7 @@ const VoiceTrigger = () => {
         isStartingRef.current = true;
 
         try {
-            console.log("[Voice] starting Whisper session...");
+            devLog("[Voice] starting Whisper session...");
 
             // Unlock native speech synthesis on iOS
             if (window.speechSynthesis) {
@@ -162,7 +163,7 @@ const VoiceTrigger = () => {
     };
 
     const stopSession = () => {
-        console.log("[Voice] stopSession() CALLED");
+        devLog("[Voice] stopSession() CALLED");
         setIsActive(false);
         setStatus('Silent');
 
@@ -181,7 +182,7 @@ const VoiceTrigger = () => {
 
     const processInput = async (text: string) => {
         if (isProcessingRef.current) {
-            console.log("[Voice] Already processing, ignoring input:", text);
+            devLog("[Voice] Already processing, ignoring input:", text);
             return;
         }
 
@@ -193,7 +194,7 @@ const VoiceTrigger = () => {
 
             const countryCode = window.location.pathname.startsWith('/us') ? 'US' : 'GB';
 
-            console.log(`[Voice] Processing input: "${currentTranscript}"`);
+            devLog(`[Voice] Processing input: "${currentTranscript}"`);
 
             // LOGIC SAFETY: Race against 10s timeout (increased for reliability)
             const logicPromise = processUserMessage(currentTranscript, chatStateRef.current, countryCode);
@@ -204,7 +205,7 @@ const VoiceTrigger = () => {
             const { newState, response } = await Promise.race([logicPromise, timeoutPromise]);
             updateChatState(newState);
 
-            console.log("[Voice] Response from logic:", response.content);
+            devLog("[Voice] Response from logic:", response.content);
 
             // FALLBACK LOOP PROTECTION: Detect and throttle fallback responses
             const isFallbackResponse = response.content.includes("I didn't catch that") || response.content.includes("Could you briefly describe");
@@ -213,7 +214,7 @@ const VoiceTrigger = () => {
 
             if (isFallbackResponse) {
                 if (timeSinceLastFallback < FALLBACK_COOLDOWN_MS) {
-                    console.log(`[Voice] Suppressing repeated fallback (${timeSinceLastFallback}ms < ${FALLBACK_COOLDOWN_MS}ms cooldown)`);
+                    devLog(`[Voice] Suppressing repeated fallback (${timeSinceLastFallback}ms < ${FALLBACK_COOLDOWN_MS}ms cooldown)`);
                     setStatus('Listening');
                     return; // Skip speaking, just go back to listening
                 }
@@ -223,7 +224,7 @@ const VoiceTrigger = () => {
             await speakResponse(response.content, countryCode);
 
             if (response.action === 'navigate' && response.target) {
-                console.log("[Voice] Navigating to:", response.target);
+                devLog("[Voice] Navigating to:", response.target);
                 navigate(response.target);
                 stopSession();
             } else {
@@ -259,7 +260,7 @@ const VoiceTrigger = () => {
         const cleanText = text.replace(/[*#]/g, '');
         const ssmlText = cleanText;
 
-        console.log("[Voice] Assistant Speaking:", cleanText);
+        devLog("[Voice] Assistant Speaking:", cleanText);
 
         const speechPromise = new Promise<void>((resolve, reject) => {
             if (!window.speechSynthesis) {
@@ -300,7 +301,7 @@ const VoiceTrigger = () => {
 
     const toggleVoice = () => {
         if (isStartingRef.current) {
-            console.log("[Voice] Still starting up, ignoring toggle click.");
+            devLog("[Voice] Still starting up, ignoring toggle click.");
             return;
         }
         if (isActiveRef.current) stopSession();

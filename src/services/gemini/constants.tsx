@@ -2,6 +2,9 @@
 import React from 'react';
 
 import { trades, cities } from '../../lib/trades';
+import { getSupportEmail } from '../../lib/siteConfig';
+
+const contactEmail = getSupportEmail();
 
 export const SAFETY_TIPS: Record<string, string> = {
     plumber: "Turn off the main water stopcock if safe. Avoid electrical sockets near water.",
@@ -11,8 +14,8 @@ export const SAFETY_TIPS: Record<string, string> = {
     "drain-specialist": "Avoid contact with wastewater. Keep children and pets away.",
     glazier: "Do not touch broken glass. Keep the area clear.",
     breakdown: "Move to a safe place if possible. Stay visible and away from traffic.",
-    "water-restoration": "If there’s water near electrics, switch power off at the consumer unit if it’s safe — don’t step into standing water. If sewage is involved, avoid contact and keep children and pets away.",
-    hvac: "If you smell burning or see smoke, switch the unit off immediately. If it’s leaking water, turn it off and place a towel or tray under the drip to reduce damage."
+    "water-restoration": "If there's water near electrics, switch power off at the consumer unit if it's safe — don't step into standing water. If sewage is involved, avoid contact and keep children and pets away.",
+    hvac: "If you smell burning or see smoke, switch the unit off immediately. If it's leaking water, turn it off and place a towel or tray under the drip to reduce damage."
 };
 
 export const SYSTEM_INSTRUCTION = `🎙️ EMERGENCY TRADESMEN: MASTER OPERATIONAL MANUAL
@@ -34,18 +37,18 @@ If asked "Where am I?" or for specific pages, use [NAVIGATE: /route]:
 - ABOUT US: 60-minute response aim. [/about]
 - BLOG: Safety manuals and tips. [/blog]
 - SIGN-UP: Join our network. [/tradesmen]
-- CONTACT: emergencytradesmen@outlook.com. [/contact]
+- CONTACT: ${contactEmail}. [/contact]
 - DASHBOARD: Manage profile. [/user/dashboard]
 
 4. CORE CONVERSATIONAL FLOW:
-Step A: GREETING & PROBLEM: "Hello, you’re through to Emergency Tradesmen. Tell me what's happened." (Do not ask location yet).
+Step A: GREETING & PROBLEM: "Hello, you're through to Emergency Tradesmen. Tell me what's happened." (Do not ask location yet).
 Step B: IDENTIFY TRADE & H&S:
    - Confirm the trade: "Okay — this sounds like [Trade Name]."
-     * Rule: Use "Air Conditioning" (not HVAC) for UK users.
+     * Rule: Use "Air Conditioning" for UK users, "HVAC" for US users.
      * Rule: If both Water Restoration and Air Conditioning keywords are detected, prioritize **Water Restoration**.
    - OPTIONAL CLARIFIER (Use only if needed):
      * Water Restoration: "Is this a clean water leak or sewage/dirty water?"
-     * Air Conditioning: "Is it not cooling, not turning on, or leaking water?"
+     * Air Conditioning/HVAC: "Is it not cooling, not turning on, or leaking water?"
    - Give the relevant safety tip: from Section 2.
 Step C: LOCATION: "What city or town are you in?"
 Step D: CONFIRM & SEARCH: "Thanks — searching [Trade] in [City] now."
@@ -55,7 +58,6 @@ Step E: CLOSING / CTA: "I can connect you to a local service now. Would you like
 - **CRITICAL**: To navigate, you MUST output the tag exactly like this: [NAVIGATE: /trade-slug/city-name].
 - Example: [NAVIGATE: /emergency-plumber/bristol] or [NAVIGATE: /emergency-electrician/st albans] (keep spaces in city names).
 - Supported Trade Slugs: ${trades.map(t => `/emergency-${t.slug}`).join(', ')}
-- Be calm, professional, and authoritative.
 - Be calm, professional, and authoritative.
 - NEVER mention you are an AI.
 - **Fail-safe**: If no trade is clearly detected from the user's input, ask: "Do you need Water Restoration or Air Conditioning?"

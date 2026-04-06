@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 import { pipeline } from '@xenova/transformers';
+import { devLog, devWarn } from "@/lib/devLog";
 
 // Structure for knowledge data
 interface TradeKnowledge {
@@ -198,7 +199,7 @@ let embedder: any = null;
  */
 async function getQueryEmbedding(text: string): Promise<number[]> {
     if (!embedder) {
-        console.log('[KnowledgeBase] Loading local embedding model (all-MiniLM-L6-v2)...');
+        devLog('[KnowledgeBase] Loading local embedding model (all-MiniLM-L6-v2)...');
         embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
     }
     const output = await embedder(text, { pooling: 'mean', normalize: true });
@@ -212,7 +213,7 @@ async function getQueryEmbedding(text: string): Promise<number[]> {
  */
 export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'US'): Promise<any | null> {
     try {
-        console.log(`[KnowledgeBase] Searching vector DB for: "${query}" in region: ${region}`);
+        devLog(`[KnowledgeBase] Searching vector DB for: "${query}" in region: ${region}`);
         
         // 1. Generate embedding locally
         const embedding = await getQueryEmbedding(query);
@@ -231,7 +232,7 @@ export async function searchVectorKnowledgeBase(query: string, region: 'UK' | 'U
         }
 
         if (!data || data.length === 0) {
-            console.log('[KnowledgeBase] No relevant vector matches found.');
+            devLog('[KnowledgeBase] No relevant vector matches found.');
             return null;
         }
 

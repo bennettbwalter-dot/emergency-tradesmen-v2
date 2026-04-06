@@ -605,6 +605,14 @@
   width: 100% !important;
 }
 
+/* Don't override product images */
+.prose img.product-image {
+  width: 280px !important;
+  height: 280px !important;
+  aspect-ratio: unset !important;
+  margin: 0 auto !important;
+}
+
 @media (min-width: 768px) {
   .prose img {
     margin: 6rem 0 !important;
@@ -937,6 +945,23 @@
 .blog-content-body-html {
   line-height: 1.8;
   color: #333;
+}
+
+.blog-content-body-html img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Force product images to be visible */
+.blog-body img.product-image,
+div.product-image {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 280px !important;
+  height: 280px !important;
+  max-width: none !important;
 }
 
 .blog-content-body-html h2 {
@@ -1414,4 +1439,72 @@ textarea {
 
 .card-container.flipped .card-inner {
   transform: rotateY(180deg);
+}
+
+/* Amazon Product Section Styles */
+.blog-body .amazon-product-section,
+.amazon-product-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.blog-body .amazon-product-section .product-box,
+.product-box {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.blog-body .amazon-product-section .product-image-wrapper,
+.product-image-wrapper {
+  flex-shrink: 0;
+  width: 180px;
+}
+
+.blog-body .amazon-product-section .product-image,
+.product-image,
+img.product-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.blog-body .amazon-product-section .product-info,
+.product-info {
+  flex: 1;
+}
+
+.blog-body .amazon-product-section .product-info h3,
+.product-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #111;
+}
+
+.blog-body .amazon-product-section .product-info p,
+.product-info p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.blog-body .amazon-product-section .amazon-button,
+.amazon-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #ff9900;
+  color: #111;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.amazon-button:hover {
+  background: #e68a00;
 }

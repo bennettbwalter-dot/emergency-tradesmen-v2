@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MetricCard } from "@/components/admin/MetricCard";
 import { Card } from "@/components/ui/card";
+import { isUSDomain, getCurrencySymbol } from "@/lib/siteConfig";
 import {
     Users,
     TrendingUp,
@@ -89,7 +90,7 @@ export default function AnalyticsPage() {
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <MetricCard
-                    title="£29 Subscribers"
+                    title={`${getCurrencySymbol()}29 Subscribers`}
                     value={metrics.activeBasic}
                     change={churn.joinsThisMonth}
                     changeLabel="this month"
@@ -98,7 +99,7 @@ export default function AnalyticsPage() {
                     trend="up"
                 />
                 <MetricCard
-                    title="£99 Subscribers"
+                    title={`${getCurrencySymbol()}99 Subscribers`}
                     value={metrics.activePro}
                     change={churn.netChange}
                     changeLabel="net change"
@@ -108,7 +109,7 @@ export default function AnalyticsPage() {
                 />
                 <MetricCard
                     title="Total MRR"
-                    value={`£${metrics.totalMRR.toFixed(0)}`}
+                    value={`${getCurrencySymbol()}${metrics.totalMRR.toFixed(0)}`}
                     change={revenue.growth}
                     changeLabel="% growth"
                     icon={DollarSign}
@@ -145,7 +146,7 @@ export default function AnalyticsPage() {
                 />
                 <MetricCard
                     title="Annual Revenue"
-                    value={`£${metrics.totalARR.toFixed(0)}`}
+                    value={`${getCurrencySymbol()}${metrics.totalARR.toFixed(0)}`}
                     icon={BarChart3}
                     iconColor="text-purple-600"
                 />
@@ -163,8 +164,8 @@ export default function AnalyticsPage() {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="basic" stroke="#3b82f6" name="£29 Plan" />
-                            <Line type="monotone" dataKey="pro" stroke="#10b981" name="£99 Plan" />
+                            <Line type="monotone" dataKey="basic" stroke="#3b82f6" name={`${getCurrencySymbol()}29 Plan`} />
+                            <Line type="monotone" dataKey="pro" stroke="#10b981" name={`${getCurrencySymbol()}99 Plan`} />
                             <Line type="monotone" dataKey="total" stroke="#d4af37" name="Total" strokeWidth={2} />
                         </LineChart>
                     </ResponsiveContainer>
@@ -175,13 +176,13 @@ export default function AnalyticsPage() {
                     <h3 className="text-lg font-semibold mb-4">Revenue Breakdown</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={[
-                            { name: '£29 Plan', revenue: metrics.basicMRR },
-                            { name: '£99 Plan', revenue: metrics.proMRR }
+                            { name: `${getCurrencySymbol()}29 Plan`, revenue: metrics.basicMRR },
+                            { name: `${getCurrencySymbol()}99 Plan`, revenue: metrics.proMRR }
                         ]}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
                             <YAxis />
-                            <Tooltip formatter={(value) => `£${Number(value).toFixed(0)}`} />
+                            <Tooltip formatter={(value) => `${getCurrencySymbol()}${Number(value).toFixed(0)}`} />
                             <Bar dataKey="revenue" fill="#d4af37" />
                         </BarChart>
                     </ResponsiveContainer>
@@ -212,12 +213,12 @@ export default function AnalyticsPage() {
                                                             event.event_type}
                                         </p>
                                         <p className="text-xs text-muted-foreground">
-                                            {event.plan === 'basic' ? '£29 Plan' : '£99 Plan'} •
+                                            {event.plan === 'basic' ? `${getCurrencySymbol()}29 Plan` : `${getCurrencySymbol()}99 Plan`} •
                                             {new Date(event.created_at).toLocaleDateString()}
                                         </p>
                                     </div>
                                 </div>
-                                <span className="text-sm font-semibold">£{event.price}</span>
+                                <span className="text-sm font-semibold">{getCurrencySymbol()}{event.price}</span>
                             </div>
                         ))
                     )}

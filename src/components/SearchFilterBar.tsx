@@ -1,4 +1,5 @@
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { devLog } from "@/lib/devLog";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -56,7 +57,7 @@ export function SearchFilterBar({
     const navigate = useNavigate();
     const { city } = useParams();
     const { settings } = useLocalization();
-    console.log("SearchFilterBar MOUNTED");
+    devLog("SearchFilterBar MOUNTED");
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const updateFilter = (key: keyof FilterOptions, value: any) => {
@@ -91,19 +92,19 @@ export function SearchFilterBar({
                     <div className="w-full">
                         {settings.countryCode === 'US' ? (
                             <HierarchicalLocationSelector
-                                placeholder="DEBUG: Enter city, suburb, or ZIP"
+                                placeholder="Enter city, suburb, or ZIP"
                                 className="bg-card border-border/50 focus:border-gold/50"
                                 onLocationSelect={(record) => {
                                     if (!record) return;
 
                                     // Determine trade slug from current context or default
                                     const pathParts = window.location.pathname.split('/');
+                                    const knownTradeSlugs = trades.map(t => t.slug);
                                     let tradeSlug = 'emergency-plumber';
-                                    const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'breakdown', 'emergency-plumber', 'emergency-electrician', '24-hour-locksmith'];
 
                                     // Try to find trade in existing URL
                                     for (const part of pathParts) {
-                                        if (knownTrades.includes(part)) {
+                                        if (knownTradeSlugs.includes(part)) {
                                             tradeSlug = part;
                                             break;
                                         }
@@ -115,9 +116,9 @@ export function SearchFilterBar({
                                     if (record.path_slugs) {
                                         const { state, metro, city, suburb } = record.path_slugs;
                                         // Handle city-level routing (empty suburb)
-                                        console.log("SearchFilterBar Debug:", { suburb, type: typeof suburb, length: suburb?.length });
+                                        devLog("SearchFilterBar Debug:", { suburb, type: typeof suburb, length: suburb?.length });
                                         const hasSuburb = typeof suburb === 'string' && suburb.trim().length > 0;
-                                        console.log("SearchFilterBar hasSuburb:", hasSuburb);
+                                        devLog("SearchFilterBar hasSuburb:", hasSuburb);
                                         const newPath = hasSuburb
                                             ? `/us/${state}/${metro}/${city}/${suburb}/${tradeSlugLowerCase}`
                                             : `/us/${state}/${metro}/${city}/${tradeSlugLowerCase}`; // Direct to City

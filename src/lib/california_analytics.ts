@@ -1,4 +1,5 @@
 import { trackEvent } from './analytics';
+import { devLog } from "@/lib/devLog";
 
 export interface CaliforniaMarketMetrics {
     city: string;
@@ -24,7 +25,7 @@ export function trackCaliforniaPageView(city: CaliforniaCity, trade: string, pat
     }
 
     // Log for analytics dashboard
-    console.log(`[CA Analytics] ${city} - ${trade} page view`);
+    devLog(`[CA Analytics] ${city} - ${trade} page view`);
 }
 
 /**
@@ -34,7 +35,7 @@ export function trackCaliforniaLead(city: CaliforniaCity, trade: string, source:
     trackEvent('California Market', 'Lead Generated', `${city} - ${trade}`);
     trackEvent('Lead Source', source, city);
 
-    console.log(`[CA Analytics] Lead: ${city} - ${trade} from ${source}`);
+    devLog(`[CA Analytics] Lead: ${city} - ${trade} from ${source}`);
 }
 
 /**
@@ -72,7 +73,7 @@ export function trackCaliforniaContractorClick(
     trackEvent('California Engagement', `Contractor ${action}`, `${city} - ${trade}`);
     trackEvent('Contractor Action', action, contractorId);
 
-    console.log(`[CA Analytics] ${action} click: ${city} - ${trade} - ${contractorId}`);
+    devLog(`[CA Analytics] ${action} click: ${city} - ${trade} - ${contractorId}`);
 }
 
 /**

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { devLog } from "@/lib/devLog";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -62,7 +63,7 @@ export default function BusinessesPage() {
                 is_premium: subData?.some(s => s.user_id === biz.owner_user_id)
             }));
             setBusinesses(merged);
-            console.log(`Loaded ${count} total businesses (showing ${merged.length})`);
+            devLog(`Loaded ${count} total businesses (showing ${merged.length})`);
         }
         setIsLoading(false);
     }

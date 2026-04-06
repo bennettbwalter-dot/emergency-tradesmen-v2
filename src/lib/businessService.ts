@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { devLog } from "@/lib/devLog";
 import type { Business } from './businesses';
 import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
@@ -97,6 +98,32 @@ function mapBusinessData(biz: any, userCoords?: { latitude: number, longitude: n
 }
 
 /**
+ * Direct REST API fetch helper (bypasses hanging JS SDK)
+ */
+async function supabaseFetch(url: string, options?: RequestInit) {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    const response = await fetch(`${supabaseUrl}${url}`, {
+        ...options,
+        headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+            ...options?.headers,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Supabase REST error: ${response.status} ${response.statusText}`);
+    }
+
+    const countHeader = response.headers.get('x-total-count');
+    const data = await response.json();
+    return { data, error: null as null, count: countHeader ? parseInt(countHeader) : null };
+}
+
+/**
  * Fetch businesses from Supabase (Real, Verified Data Only)
  */
 export async function fetchBusinesses(
@@ -106,7 +133,7 @@ export async function fetchBusinesses(
     userCoords?: { latitude: number, longitude: number },
     state?: string
 ): Promise<Business[]> {
-    console.log(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, state=${state}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
+    devLog(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, state=${state}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
 
     // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
     const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
@@ -134,38 +161,26 @@ export async function fetchBusinesses(
     }
     const uniqueTrades = [...new Set(tradeVariations)];
 
-    let query = supabase
-        .from('businesses')
-        .select('*, business_photos(*)')
-        .in('trade', uniqueTrades)
-        .eq('country_code', countryCode.toUpperCase());
-
     // OPTIMIZATION: State-level query (New)
+    let stateCities: string[] = [];
     if (state && countryCode.toUpperCase() === 'US') {
         const { getCitiesForState } = await import('./trades');
-        const stateCities = getCitiesForState(state);
+        stateCities = getCitiesForState(state);
         if (stateCities.length > 0) {
-            console.log(`[fetchBusinesses] State query for ${state}: searching in ${stateCities.length} cities`);
-            query = query.in('city', stateCities);
-            searchCity = ""; // Suppress further city filtering
+            devLog(`[fetchBusinesses] State query for ${state}: searching in ${stateCities.length} cities`);
+            searchCity = "";
         }
     }
 
     // OPTIMIZATION: Direct City Match First (Fastest)
     if (searchCity && searchCity.trim() !== '') {
-        // 1. Try exact match on city column (Indexed) - Limit 50 for speed
-        const directQuery = supabase
-            .from('businesses')
-            .select('*, business_photos(*)')
-            .in('trade', uniqueTrades)
-            .eq('city', searchCity) // Uses Index
-            .eq('country_code', countryCode.toUpperCase())
-            .limit(50);
+        const tradeParams = uniqueTrades.map(t => `trade=eq.${encodeURIComponent(t)}`).join('&');
+        const directUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=eq.${encodeURIComponent(searchCity)}&country_code=eq.${countryCode.toUpperCase()}&limit=50`;
 
-        const { data: directData, error: directError } = await directQuery;
+        const { data: directData } = await supabaseFetch(directUrl);
 
-        if (!directError && directData && directData.length > 0) {
-            console.log(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
+        if (directData && directData.length > 0) {
+            devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
             return directData.map((biz: any) => mapBusinessData(biz, userCoords))
                 .sort((a, b) => {
                     if (a.tier === 'paid' && b.tier !== 'paid') return -1;
@@ -175,136 +190,105 @@ export async function fetchBusinesses(
                 });
         }
 
-        // 2. If no direct match, try coverage_areas (Slower but necessary for service areas)
+        // 2. If no direct match, try coverage_areas via broader query
+    }
+
+    // Build main query
+    const tradeParams = uniqueTrades.map(t => `trade=eq.${encodeURIComponent(t)}`).join('&');
+    let queryUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}`;
+
+    if (stateCities.length > 0) {
+        const cityParam = stateCities.map(c => `city=eq.${encodeURIComponent(c)}`).join('&');
+        queryUrl += `&${cityParam}`;
+    } else if (searchCity && searchCity.trim() !== '') {
         const cityWithSpaces = searchCity.replace(/-/g, ' ');
-        query = query.contains('coverage_areas', [cityWithSpaces]);
+        queryUrl += `&coverage_areas=cs.${JSON.stringify([cityWithSpaces])}`;
     }
 
-    const { data, error } = await query;
-
-    if (error) {
-        console.error('Error fetching dynamic businesses:', error);
-        return [];
-    }
+    const { data } = await supabaseFetch(queryUrl);
 
     // FALLBACK: If no results found with city filter, try broader query
     let allBusinesses = data || [];
     if (allBusinesses.length === 0 && searchCity) {
-        console.log('[fetchBusinesses] No results for city, trying broader query');
+        devLog('[fetchBusinesses] No results for city, trying broader query');
         
-        let fallbackQuery = supabase
-            .from('businesses')
-            .select('*, business_photos(*)')
-            .in('trade', uniqueTrades)
-            .eq('country_code', countryCode.toUpperCase());
+        let fallbackUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&limit=50`;
 
-        // CRITICAL FIX: Ensure fallback stays within the same state if US
-        if (state && countryCode.toUpperCase() === 'US') {
-            const { getCitiesForState } = await import('./trades');
-            const stateCities = getCitiesForState(state);
-            if (stateCities.length > 0) {
-                fallbackQuery = fallbackQuery.in('city', stateCities);
-            } else {
-                // If state specified but no cities found, DO NOT fallback to broad national query
-                return [];
-            }
-        } else if (searchCity && countryCode.toUpperCase() === 'US') {
-            // If city specified in US but no results, do not fallback to national
+        if (stateCities.length > 0) {
+            const cityParam = stateCities.map(c => `city=eq.${encodeURIComponent(c)}`).join('&');
+            fallbackUrl += `&${cityParam}`;
+        } else if (countryCode.toUpperCase() === 'US') {
             return [];
         }
 
-        const { data: fallbackData, error: fallbackError } = await fallbackQuery.limit(50);
-        if (!fallbackError && fallbackData) {
+        const { data: fallbackData } = await supabaseFetch(fallbackUrl);
+        if (fallbackData) {
             allBusinesses = fallbackData;
         }
     }
 
     return (allBusinesses || []).map((biz: any) => mapBusinessData(biz, userCoords))
         .sort((a, b) => {
-            // 1. Paid businesses always first
             if (a.tier === 'paid' && b.tier !== 'paid') return -1;
             if (a.tier !== 'paid' && b.tier === 'paid') return 1;
 
-            // 2. Proximity sort if available
             if (userCoords && a.distance !== undefined && b.distance !== undefined) {
                 return a.distance - b.distance;
             }
 
-            // 3. Fallback to priority score
             return (b.priority_score || 0) - (a.priority_score || 0);
         });
 }
 
 export async function fetchBusinessById(id: string): Promise<Business | null> {
-    const { data, error } = await supabase
-        .from('businesses')
-        .select('*, business_photos(*)')
-        .eq('id', id)
-        .maybeSingle();
+    const { data } = await supabaseFetch(`/rest/v1/businesses?select=*,business_photos(*)&id=eq.${encodeURIComponent(id)}`);
 
-    if (!error && data) {
-        return mapBusinessData(data);
+    if (data && data.length > 0) {
+        return mapBusinessData(data[0]);
     }
 
     return null;
 }
 
 export async function fetchAllBusinesses(limit = 100, countryCode?: string): Promise<Business[]> {
-    let query = supabase
-        .from('businesses')
-        .select('*, business_photos(*)');
+    let url = `/rest/v1/businesses?select=*,business_photos(*)&order=rating.desc&limit=${limit}`;
+    if (countryCode) url += `&country_code=eq.${countryCode.toUpperCase()}`;
 
-    if (countryCode) {
-        query = query.eq('country_code', countryCode.toUpperCase());
-    }
+    const { data } = await supabaseFetch(url);
 
-    const { data, error } = await query
-        .order('rating', { ascending: false })
-        .limit(limit);
-
-    if (error) {
-        console.error('Error fetching all businesses:', error);
+    if (!data) {
+        console.error('Error fetching all businesses: no data returned');
         return [];
     }
 
-    return (data || []).map(biz => mapBusinessData(biz));
+    return data.map(biz => mapBusinessData(biz));
 }
 
 export async function searchBusinesses(query: string, countryCode: string = 'GB'): Promise<Business[]> {
-    const { data, error } = await supabase
-        .from('businesses')
-        .select('*, business_photos(*)')
-        .eq('country_code', countryCode.toUpperCase())
-        .or(`name.ilike.%${query}%,trade.ilike.%${query}%`)
-        .order('rating', { ascending: false })
-        .limit(20);
+    const url = `/rest/v1/businesses?select=*,business_photos(*)&country_code=eq.${countryCode.toUpperCase()}&or=name.ilike.%25${encodeURIComponent(query)}%25,trade.ilike.%25${encodeURIComponent(query)}%25&order=rating.desc&limit=20`;
 
-    if (error) {
-        console.error('Error searching businesses:', error);
+    const { data } = await supabaseFetch(url);
+
+    if (!data) {
+        console.error('Error searching businesses: no data returned');
         return [];
     }
 
-    return (data || []).map(biz => mapBusinessData(biz));
+    return data.map(biz => mapBusinessData(biz));
 }
 
 export async function fetchPaidBusinesses(trade?: string, city?: string, countryCode?: string): Promise<Business[]> {
-    let query = supabase
-        .from('businesses')
-        .select('*, business_photos(*)')
-        .eq('is_premium', true);
+    let url = `/rest/v1/businesses?select=*,business_photos(*)&is_premium=eq.true&order=rating.desc&limit=10`;
+    if (trade) url += `&trade=eq.${trade.toLowerCase().replace('emergency-', '')}`;
+    if (city) url += `&city=eq.${encodeURIComponent(city)}`;
+    if (countryCode) url += `&country_code=eq.${countryCode.toUpperCase()}`;
 
-    if (trade) query = query.eq('trade', trade.toLowerCase().replace('emergency-', ''));
-    if (city) query = query.eq('city', city);
-    if (countryCode) query = query.eq('country_code', countryCode.toUpperCase());
+    const { data } = await supabaseFetch(url);
 
-    const { data, error } = await query
-        .order('rating', { ascending: false })
-        .limit(10);
-
-    if (error) {
-        console.error('Error fetching paid businesses:', error);
+    if (!data) {
+        console.error('Error fetching paid businesses: no data returned');
         return [];
     }
 
-    return (data || []).map(biz => mapBusinessData(biz));
+    return data.map(biz => mapBusinessData(biz));
 }
