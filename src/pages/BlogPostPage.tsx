@@ -168,14 +168,22 @@ const BLOG_STYLES = `
   .blog-body img {
     border-radius: 14px; max-width: 100%; width: 100%; height: auto; margin: 1rem auto;
     display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    object-fit: cover;
   }
-  .blog-body figure { text-align: center; margin: 1rem 0; }
+  .blog-body figure { text-align: center; margin: 1rem 0; width: 100% !important; }
   .blog-body figcaption { font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem; font-style: italic; padding: 0 0.5rem; }
 
   @media (max-width: 640px) {
     .blog-body img {
       margin: 0.75rem 0;
       border-radius: 10px;
+      max-width: 100% !important;
+      width: 100% !important;
+      height: auto !important;
+    }
+    .blog-body figure {
+      width: 100% !important;
+      max-width: 100% !important;
     }
   }
 
@@ -250,8 +258,10 @@ const BLOG_STYLES = `
     width: 100% !important;
   }
   .blog-body .product-box .product-image {
-    width: 280px !important; 
-    height: 280px !important; 
+    width: 100% !important; 
+    max-width: 280px !important;
+    height: auto !important;
+    aspect-ratio: 1/1 !important;
     object-fit: contain !important;
     border-radius: 16px !important; 
     background: #fff !important; 
@@ -259,6 +269,13 @@ const BLOG_STYLES = `
   }
   .dark .blog-body .product-box .product-image {
     background: #111827 !important;
+  }
+
+  @media (max-width: 640px) {
+    .blog-body .product-box .product-image {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
   }
   .blog-body .product-box .product-info { 
     text-align: center !important; 
@@ -689,7 +706,25 @@ export default function BlogPostPage() {
 
               @media (max-width: 640px) {
                 .blog-body img.product-image {
-                  max-width: 200px !important;
+                  max-width: 100% !important;
+                }
+                .blog-body img {
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  height: auto !important;
+                  object-fit: cover !important;
+                }
+                .blog-body figure {
+                  width: 100% !important;
+                  max-width: 100% !important;
+                }
+                .blog-body .product-box {
+                  max-width: 100% !important;
+                  padding: 1.5rem 1rem !important;
+                }
+                .blog-body .amazon-product-section {
+                  padding: 1rem !important;
+                  margin: 1.5rem 0 !important;
                 }
               }
 
