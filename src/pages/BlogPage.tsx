@@ -266,18 +266,17 @@ export default function BlogPage() {
                                         to={`${countryPrefix}/blog/${post.slug}`}
                                         className={`${colSpan} group flex flex-col gap-4 glass-blog-card hover-lift p-6 rounded-2xl border-none`}
                                     >
-                                        <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">
+                                        <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-muted/50 relative">
                                             {post.cover_image && !cardImageErrors.has(post.id) ? (
                                                 <img
                                                     src={getImageUrl(post.cover_image)}
                                                     alt={regionalizeText(post.title)}
-                                                    loading="lazy"
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                                                     onError={() => handleCardImageError(post.id)}
                                                 />
                                             ) : (
-                                                <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary/30 to-primary/10 flex items-center justify-center">
-                                                    <span className="text-3xl font-display font-black text-foreground/20">{regionalizeText(post.title).split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()}</span>
+                                                <div className="w-full h-full bg-gradient-to-br from-primary/30 via-secondary/40 to-muted flex items-center justify-center">
+                                                    <span className="text-3xl font-display font-black text-foreground/30">{regionalizeText(post.title).split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()}</span>
                                                 </div>
                                             )}
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
