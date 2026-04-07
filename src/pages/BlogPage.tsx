@@ -27,6 +27,14 @@ export default function BlogPage() {
     const { settings } = useLocalization();
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [heroImageError, setHeroImageError] = useState(false);
+
+    const getImageUrl = (path: string | null): string | undefined => {
+        if (!path) return undefined;
+        if (path.startsWith('http')) return path;
+        if (path.startsWith('/')) return path;
+        return `/${path}`;
+    };
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -174,42 +182,47 @@ export default function BlogPage() {
 
                     {/* "Netflix" Hero Section - Featured Post */}
                     {featuredPost && (
-                        <div className="relative w-full h-[60vh] md:h-[85vh] overflow-hidden group">
-                            {/* Background Image */}
-                            <div className="absolute inset-0">
-                                {featuredPost.cover_image && (
-                                    <img
-                                        src={featuredPost.cover_image}
-                                        alt={featuredPost.title}
-                                        className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-110"
-                                        loading="eager"
-                                    />
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-                                <div className="absolute inset-0 bg-gradient-to-r from-background via-black/50 to-transparent" />
-                            </div>
+                        <div className="relative w-full overflow-hidden group">
+                            {/* Mobile: Stacked layout | Desktop: Side-by-side with 9:16 image */}
+                            <div className="flex flex-col md:flex-row">
+                                {/* Image Section */}
+                                <div className="relative w-full md:w-[40%] aspect-[9/16] md:aspect-auto md:h-[85vh] shrink-0">
+                                    {featuredPost.cover_image && !heroImageError ? (
+                                        <img
+                                            src={getImageUrl(featuredPost.cover_image)}
+                                            alt={featuredPost.title}
+                                            className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-105"
+                                            loading="eager"
+                                            onError={() => setHeroImageError(true)}
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary/30 to-muted" />
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent md:bg-gradient-to-r md:from-transparent md:to-background/60" />
+                                </div>
 
-                            {/* Content Overlay */}
-                            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-10 md:p-16 lg:p-24 z-10">
-                                <div className="max-w-4xl space-y-4 md:space-y-6 animate-fade-up">
-                                    <Badge className="bg-gold text-black hover:bg-gold/90 border-none uppercase tracking-widest px-3 py-1 font-bold text-[10px] md:text-sm">
-                                        Cover Story
-                                    </Badge>
-                                    <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] text-white drop-shadow-lg text-balance">
-                                        <Link to={`${countryPrefix}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
-                                            {regionalizeText(featuredPost.title)}
-                                        </Link>
-                                    </h2>
-                                    <p className="text-base sm:text-lg md:text-2xl text-white/90 max-w-2xl font-light leading-relaxed drop-shadow-md line-clamp-2 md:line-clamp-3">
-                                        {featuredPost.excerpt}
-                                    </p>
-
-                                    <div className="flex items-center gap-4 pt-2 md:pt-4">
-                                        <Button asChild size="lg" className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-white text-black hover:bg-gold hover:text-black border-none rounded-none transition-all font-bold tracking-tight">
-                                            <Link to={`${countryPrefix}/blog/${featuredPost.slug}`}>
-                                                Read Article
+                                {/* Content Section */}
+                                <div className="relative w-full md:w-[60%] md:h-[85vh] flex items-end md:items-center p-6 sm:p-10 md:p-16 lg:p-24">
+                                    <div className="max-w-2xl space-y-4 md:space-y-6 animate-fade-up">
+                                        <Badge className="bg-gold text-black hover:bg-gold/90 border-none uppercase tracking-widest px-3 py-1 font-bold text-[10px] md:text-sm">
+                                            Cover Story
+                                        </Badge>
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black leading-[1.1] text-foreground drop-shadow-lg text-balance">
+                                            <Link to={`${countryPrefix}/blog/${featuredPost.slug}`} className="hover:underline decoration-gold/50 underline-offset-8">
+                                                {regionalizeText(featuredPost.title)}
                                             </Link>
-                                        </Button>
+                                        </h2>
+                                        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl font-light leading-relaxed drop-shadow-md line-clamp-2 md:line-clamp-3">
+                                            {featuredPost.excerpt}
+                                        </p>
+
+                                        <div className="flex items-center gap-4 pt-2 md:pt-4">
+                                            <Button asChild size="lg" className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-white text-black hover:bg-gold hover:text-black border-none rounded-none transition-all font-bold tracking-tight">
+                                                <Link to={`${countryPrefix}/blog/${featuredPost.slug}`}>
+                                                    Read Article
+                                                </Link>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -247,14 +260,14 @@ export default function BlogPage() {
                                         className={`${colSpan} group flex flex-col gap-4 glass-blog-card hover-lift p-6 rounded-2xl border-none`}
                                     >
                                         <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">
-                                            {post.cover_image && (
+                                            {post.cover_image ? (
                                                 <img
-                                                    src={post.cover_image}
+                                                    src={getImageUrl(post.cover_image)}
                                                     alt={regionalizeText(post.title)}
                                                     loading="lazy"
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                                                 />
-                                            )}
+                                            ) : null}
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                                         </div>
 
