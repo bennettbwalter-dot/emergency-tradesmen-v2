@@ -49,7 +49,7 @@ const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const ProProfileEditor = lazy(() => import("./pages/NewProfileEditor"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-const BlogPage = lazy(() => import(/* @vite-ignore */ `./pages/BlogPage.tsx?t=${Date.now()}`));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const VettingProcess = lazy(() => import("./pages/VettingProcess"));
