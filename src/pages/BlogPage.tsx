@@ -28,12 +28,17 @@ export default function BlogPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [heroImageError, setHeroImageError] = useState(false);
+    const [cardImageErrors, setCardImageErrors] = useState<Set<string>>(new Set());
 
     const getImageUrl = (path: string | null): string | undefined => {
         if (!path) return undefined;
         if (path.startsWith('http')) return path;
         if (path.startsWith('/')) return path;
         return `/${path}`;
+    };
+
+    const handleCardImageError = (postId: string) => {
+        setCardImageErrors(prev => new Set(prev).add(postId));
     };
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
@@ -186,7 +191,7 @@ export default function BlogPage() {
                             {/* Mobile: Stacked layout | Desktop: Side-by-side with 9:16 image */}
                             <div className="flex flex-col md:flex-row">
                                 {/* Image Section */}
-                                <div className="relative w-full md:w-[40%] aspect-[9/16] md:aspect-auto md:h-[85vh] shrink-0">
+                                <div className="relative w-full md:w-[40%] h-[50vh] md:aspect-auto md:h-[85vh] shrink-0">
                                     {featuredPost.cover_image && !heroImageError ? (
                                         <img
                                             src={getImageUrl(featuredPost.cover_image)}
@@ -196,9 +201,11 @@ export default function BlogPage() {
                                             onError={() => setHeroImageError(true)}
                                         />
                                     ) : (
-                                        <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary/30 to-muted" />
+                                        <div className="w-full h-full bg-gradient-to-br from-primary/30 via-secondary/40 to-muted flex items-center justify-center">
+                                            <span className="text-6xl font-display font-black text-foreground/20">{regionalizeText(featuredPost.title).split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()}</span>
+                                        </div>
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent md:bg-gradient-to-r md:from-transparent md:to-background/60" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-background/60" />
                                 </div>
 
                                 {/* Content Section */}
@@ -260,14 +267,19 @@ export default function BlogPage() {
                                         className={`${colSpan} group flex flex-col gap-4 glass-blog-card hover-lift p-6 rounded-2xl border-none`}
                                     >
                                         <div className="aspect-[16/10] w-full overflow-hidden rounded-md bg-secondary/20 relative">
-                                            {post.cover_image ? (
+                                            {post.cover_image && !cardImageErrors.has(post.id) ? (
                                                 <img
                                                     src={getImageUrl(post.cover_image)}
                                                     alt={regionalizeText(post.title)}
                                                     loading="lazy"
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                                                    onError={() => handleCardImageError(post.id)}
                                                 />
-                                            ) : null}
+                                            ) : (
+                                                <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary/30 to-primary/10 flex items-center justify-center">
+                                                    <span className="text-3xl font-display font-black text-foreground/20">{regionalizeText(post.title).split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()}</span>
+                                                </div>
+                                            )}
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                                         </div>
 
