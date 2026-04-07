@@ -1,0 +1,7 @@
+name = "emergency-tradesmen-v2"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+output_directory = "dist"
+root = "."
