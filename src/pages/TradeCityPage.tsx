@@ -37,6 +37,7 @@ import { useSimpleTheme } from "@/components/simple-theme";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
+import { FloatingQuoteButton } from "@/components/FloatingQuoteButton";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
 import { Zap, ArrowRight, Star } from "lucide-react";
 import {
@@ -69,7 +70,7 @@ export default function TradeCityPage() {
 
   // Resolution Logic for Hierarchy
   const rawTargetLocation = suburb || area || city || metro || state;
-  
+
   // Parse location from URL if present (Emergency CTA flow)
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const urlLat = queryParams.get('lat');
@@ -160,22 +161,22 @@ export default function TradeCityPage() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const port = typeof window !== 'undefined' ? window.location.port : '';
   const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-  
+
   const actualCountry = useMemo(() => {
     const hostname = window.location.hostname;
     const port = window.location.port;
     if (hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001')) return 'US';
     if (hostname.includes('emergencytradesmen.net') || port === '3000' || (hostname === 'localhost' && port === '3000')) return 'GB';
-    
+
     // Fallback detection
     if (
-      location.pathname.startsWith('/us/') || 
-      location.pathname.startsWith('/us') || 
-      countryCode?.toLowerCase() === 'us' || 
-      pageData?.countryCode === 'US' || 
+      location.pathname.startsWith('/us/') ||
+      location.pathname.startsWith('/us') ||
+      countryCode?.toLowerCase() === 'us' ||
+      pageData?.countryCode === 'US' ||
       (validCity && usCities.includes(validCity))
     ) return 'US';
-    
+
     return 'GB';
   }, [countryCode, pageData?.countryCode, validCity, usCities, location.pathname]);
 
@@ -194,7 +195,7 @@ export default function TradeCityPage() {
 
   const tradeInfo = pageData?.trade || { slug: validTrade, name: validTrade || 'Tradesperson', icon: '🔧' } as any;
   const tradeDisplayName = (actualCountry === 'US' && 'usName' in tradeInfo) ? (tradeInfo as any).usName : tradeInfo.name;
-  
+
   // Apply title case to city name and ensure it's not just a slug
   const rawCityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
   const cityName = toTitleCase(rawCityName.replace(/-/g, ' '));
@@ -250,9 +251,9 @@ export default function TradeCityPage() {
 
       try {
         const realBusinesses = await fetchBusinesses(
-          tradeInfo.slug, 
-          validCity, 
-          actualCountry, 
+          tradeInfo.slug,
+          validCity,
+          actualCountry,
           effectiveCoords || undefined,
           isStatePage ? effectiveState : undefined
         );
@@ -356,7 +357,7 @@ export default function TradeCityPage() {
   useEffect(() => {
     if (!isLoading && hasLoadedRef.current && businesses.length === 0) {
       const tradeSlug = tradeInfo.slug;
-      
+
       if (actualCountry === 'US' && effectiveState) {
         // Redirect to state page
         const statePath = `/us/emergency-${tradeSlug}/${effectiveState.toLowerCase()}`;
@@ -463,12 +464,12 @@ export default function TradeCityPage() {
       }))
     ],
     "itemListElement": services.map((service) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": service
-        }
-      })),
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service
+      }
+    })),
     "potentialAction": {
       "@type": "ReserveAction",
       "target": {
@@ -531,11 +532,11 @@ export default function TradeCityPage() {
   const stateCode = stateSlug || '';
   const cityCoords = cityCoordinates[cityName];
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
-  
+
   // FIXED: Ensure coordinates are resolved correctly for map centering
   const isCityInUS = usCities.includes(cityName);
   const countryForCoords = isUS || isCityInUS ? 'US' : 'GB';
-  
+
   const canonicalPath = isUS
     ? (isUSDomain ? `/emergency-${tradeInfo.slug}/${citySlug}` : `/us/emergency-${tradeInfo.slug}/${citySlug}`)
     : `/emergency-${tradeInfo.slug}/${citySlug}`;
@@ -721,7 +722,7 @@ export default function TradeCityPage() {
 
           {/* Coverage Map Section */}
           {/* Coverage Map Section - Lazy Loaded */}
-          <div className="mb-12 h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group bg-secondary/10">
+          <div className="mb-12 h-[300px] md:h-[450px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl relative group bg-secondary/10">
             <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 text-sm font-medium">
               Real-time local coverage: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </div>
@@ -844,10 +845,10 @@ export default function TradeCityPage() {
                   <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
                     {currentBusinesses.map((business, index) => {
                       return (
-                        <BusinessCard 
-                          key={business.id} 
-                          business={business} 
-                          rank={startIndex + index + 1} 
+                        <BusinessCard
+                          key={business.id}
+                          business={business}
+                          rank={startIndex + index + 1}
                         />
                       );
                     })}
@@ -1066,7 +1067,7 @@ export default function TradeCityPage() {
                 return stateCities.map((cityName: string) => {
                   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
                   return (
-                    <Link 
+                    <Link
                       key={cityName}
                       to={`/emergency-${tradeInfo.slug}/${citySlug}`}
                       className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
@@ -1090,6 +1091,12 @@ export default function TradeCityPage() {
         trade={tradeInfo.name}
         city={cityName}
         countryCode={actualCountry}
+      />
+
+      {/* Floating Quote Button for Non-Emergency Leads */}
+      <FloatingQuoteButton
+        tradeName={tradeInfo.name}
+        city={cityName}
       />
 
       <WriteReviewModal

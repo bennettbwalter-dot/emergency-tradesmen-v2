@@ -14,11 +14,14 @@ serve(async (req) => {
     try {
         const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
         const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-        // ESP API Key (TBD)
-        const espApiKey = Deno.env.get('EMAIL_SERVICE_PROVIDER_API_KEY');
+        const resendApiKey = Deno.env.get('RESEND_API_KEY');
 
         if (!supabaseUrl || !supabaseKey) {
             throw new Error("Missing environment variables");
+        }
+
+        if (!resendApiKey) {
+            console.warn("RESEND_API_KEY not set - running in dry-run mode");
         }
 
         const supabase = createClient(supabaseUrl, supabaseKey);
@@ -69,26 +72,77 @@ serve(async (req) => {
                 continue;
             }
 
-            // 3. Add contacts to New Email Service Provider (TBD)
-            let imported = 0;
-            let skipped = 0;
-            const listId = campaign.esp_list_id;
+            // 3. Send emails via Resend
+            let sent = 0;
+            let failed = 0;
 
             for (const contact of contacts) {
-                // TODO: Implement New ESP API logic here
-                imported++; // Placeholder for simulation
+                try {
+                    const brandName = contact.country_code === 'US' ? 'Emergency Contractors' : 'Emergency Tradesmen';
+                    const siteUrl = contact.country_code === 'US'
+                        ? 'https://emergencycontractors.net'
+                        : 'https://emergencytradesmen.net';
 
-                // Mark as emailed to prevent re-sending
-                await supabase.from('businesses').update({ last_emailed_at: new Date().toISOString() }).eq('id', contact.id);
+                    const emailHtml = `
+                        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+                            <h2 style="color: #1e293b;">Is your business listed on ${brandName}?</h2>
+                            <p>Hi ${contact.name || 'there'},</p>
+                            <p>We've listed <strong>${contact.trade || 'your business'}</strong> in ${contact.city || 'your area'} on ${brandName} — the 24/7 emergency trades directory helping homeowners find vetted professionals fast.</p>
+                            <p><strong>Claim your free listing</strong> and unlock:</p>
+                            <ul>
+                                <li>✅ Direct phone calls from homeowners in emergencies</li>
+                                <li>✅ WhatsApp integration for instant leads</li>
+                                <li>✅ Pro tier features: priority placement, analytics, verified badge</li>
+                            </ul>
+                            <div style="margin: 30px 0; text-align: center;">
+                                <a href="${siteUrl}/business/claim" style="background-color: #FACC15; padding: 14px 28px; text-decoration: none; color: #000; border-radius: 8px; font-weight: bold; font-size: 16px;">Claim Your Free Listing →</a>
+                            </div>
+                            <p style="color: #64748b; font-size: 12px;">If you'd prefer not to receive these emails, reply with "unsubscribe" and we'll remove you.</p>
+                        </div>
+                    `;
 
-                // rate limit self 
-                await new Promise(r => setTimeout(r, 100));
+                    if (resendApiKey) {
+                        const res = await fetch('https://api.resend.com/emails', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${resendApiKey}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                from: `${brandName} <onboarding@resend.dev>`,
+                                to: [contact.email],
+                                subject: `Claim your free ${brandName} listing for ${contact.trade || 'your business'}`,
+                                html: emailHtml
+                            })
+                        });
+
+                        if (!res.ok) {
+                            const err = await res.json();
+                            console.error(`Failed to send to ${contact.email}:`, err);
+                            failed++;
+                            continue;
+                        }
+                    } else {
+                        console.log(`[DRY RUN] Would email ${contact.email}: ${contact.name || contact.trade} in ${contact.city}`);
+                    }
+
+                    sent++;
+
+                    // Mark as emailed
+                    await supabase.from('businesses').update({ last_emailed_at: new Date().toISOString() }).eq('id', contact.id);
+
+                    // Rate limit
+                    await new Promise(r => setTimeout(r, 200));
+                } catch (err) {
+                    console.error(`Error emailing ${contact.email}:`, err);
+                    failed++;
+                }
             }
 
             // Update Campaign metrics
             await supabase.from('email_campaigns')
                 .update({
-                    total_sent: (campaign.total_sent || 0) + imported,
+                    total_sent: (campaign.total_sent || 0) + sent,
                     last_run_at: new Date().toISOString()
                 })
                 .eq('id', campaign.id);
@@ -97,12 +151,12 @@ serve(async (req) => {
             await supabase.from('email_campaign_logs')
                 .insert({
                     campaign_id: campaign.id,
-                    status: 'success',
-                    contacts_imported: imported,
-                    contacts_skipped: skipped
+                    status: sent > 0 ? 'success' : 'failed',
+                    contacts_imported: sent,
+                    contacts_skipped: failed
                 });
 
-            results.push({ campaign: campaign.name, imported, skipped });
+            results.push({ campaign: campaign.name, sent, failed });
         }
 
         return new Response(JSON.stringify({ success: true, processed: results }), {

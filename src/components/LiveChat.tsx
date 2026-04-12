@@ -38,19 +38,6 @@ export function LiveChat() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            <motion.button
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label={isOpen ? 'Close chat' : 'Open emergency chat'}
-                className={`fixed bottom-24 md:bottom-8 right-4 md:right-8 z-[100] w-14 h-14 rounded-full shadow-[0_0_20px_rgba(255,165,0,0.3)] flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-destructive text-destructive-foreground rotate-90' : 'bg-primary text-primary-foreground'
-                    }`}
-            >
-                {isOpen ? <X className="w-6 h-6" /> : <Zap className="w-6 h-6" />}
-            </motion.button>
         </>
     );
 }

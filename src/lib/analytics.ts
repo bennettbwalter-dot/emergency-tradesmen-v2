@@ -1,23 +1,28 @@
-// Google Analytics Removed
-// This file assumes a no-op implementation or internal logging only.
+// Analytics - PostHog (Free, No Payment Required)
 import { devLog } from "@/lib/devLog";
-
-const MEASUREMENT_ID = ""; // Removed
+import { trackPostHogEvent } from "@/lib/posthog";
 
 export const initGA = () => {
-    // No-op
-    // console.log("Google Analytics is disabled (Privacy/API Removal).");
+    // PostHog is initialized in main.tsx / App.tsx via PostHogProvider
+    if (import.meta.env.DEV) {
+        devLog(`[Analytics] Initialized (PostHog)`);
+    }
 };
 
 export const trackPageView = (path: string) => {
-    // No-op or internal logging
     if (import.meta.env.DEV) {
         devLog(`[Analytics] Page View: ${path}`);
     }
 };
 
 export const trackEvent = (category: string, action: string, label?: string) => {
-    // No-op or internal logging
+    // Track via PostHog for free conversion analytics
+    trackPostHogEvent(action, {
+        category,
+        label: label || '',
+        timestamp: new Date().toISOString()
+    });
+
     if (import.meta.env.DEV) {
         devLog(`[Analytics] Event: ${category} - ${action} ${label ? `(${label})` : ""}`);
     }

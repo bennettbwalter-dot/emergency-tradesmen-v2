@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function BusinessCardSkeleton() {
     return (
-        <div className="relative w-full max-w-[20rem] sm:max-w-[22rem] mx-auto p-1 sm:p-2 bg-white dark:bg-[#121212] rounded-[2rem] border border-zinc-200 dark:border-white/10 shadow-lg overflow-hidden">
+        <div className="relative w-full max-w-[85vw] sm:max-w-[20rem] md:max-w-[22rem] mx-auto p-1 sm:p-2 bg-white dark:bg-[#121212] rounded-[2rem] border border-zinc-200 dark:border-white/10 shadow-lg overflow-hidden">
             <div className="relative z-10 flex flex-col gap-3 p-4 pt-5">
                 {/* 1. Header Row */}
                 <div className="flex items-center justify-between h-9 mb-1">

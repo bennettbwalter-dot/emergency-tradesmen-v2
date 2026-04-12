@@ -21,9 +21,10 @@ export function FloatingBackButton() {
             variant="secondary"
             size="icon"
             className={cn(
-                "fixed bottom-6 left-6 z-40 h-12 w-12 rounded-full shadow-lg border border-border/50",
+                "fixed left-6 z-40 h-12 w-12 rounded-full shadow-lg border border-border/50",
                 "bg-background/80 backdrop-blur-md hover:bg-gold/10 hover:border-gold hover:text-gold transition-all duration-300",
-                "animate-in fade-in zoom-in duration-300"
+                "animate-in fade-in zoom-in duration-300",
+                "bottom-6 md:bottom-6 floating-back-button-mobile"
             )}
             onClick={() => navigate(-1)}
             aria-label="Go back"

@@ -16,7 +16,7 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
     if (!phoneNumber) return null;
 
     return (
-        <div className="md:hidden fixed bottom-20 left-4 right-4 z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="md:hidden fixed bottom-[calc(4rem+env(safe-area-inset-bottom,0px)+12px)] left-4 right-4 z-[49] animate-in fade-in slide-in-from-bottom-4 duration-500">
             <Button
                 asChild
                 className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl shadow-[0_10px_30px_rgba(16,185,129,0.3)] border-2 border-emerald-500/50 flex items-center justify-between px-6 backdrop-blur-sm"

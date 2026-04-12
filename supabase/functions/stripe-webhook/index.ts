@@ -78,15 +78,15 @@ serve(async (req) => {
             // Fetch subscription from Stripe to reliably get the price_id
             let planName = "free"
             let daysToAdd = 30 // Default to Monthly duration unless identified
-            
+
             if (subscriptionId) {
                 const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
                 const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
-                
+
                 const stripeSub = await stripe.subscriptions.retrieve(subscriptionId as string)
                 if (stripeSub.items.data.length > 0) {
                     const priceId = stripeSub.items.data[0].price.id
-                    
+
                     if (priceId === PRO_PRICE_ID) {
                         planName = "pro"
                     } else if (priceId === PREMIUM_PRICE_ID) {
@@ -95,7 +95,7 @@ serve(async (req) => {
                         console.warn(`Unknown price_id ${priceId} in checkout session. Assuming 'pro'.`)
                         planName = "pro"
                     }
-                    
+
                     // Simple logic: if period is > 30 days, assume yearly duration for expiration
                     if (stripeSub.items.data[0].plan.interval === 'year') {
                         daysToAdd = 366
@@ -191,7 +191,7 @@ serve(async (req) => {
             // Mapping Plan correctly from updated webhooks
             const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
             const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
-            
+
             let planName = "free"
             let daysToAdd = 0
             if (subscription.items.data.length > 0) {
@@ -308,7 +308,7 @@ serve(async (req) => {
 
                 if (email) {
                     const subject = isLocked ? 'ACTION REQUIRED: Account Locked' : `Payment Failed - ${brandName}`
-                    const message = isLocked 
+                    const message = isLocked
                         ? 'Your account has been locked due to consecutive payment failures. Please update your payment method to restore access.'
                         : 'Our attempt to charge your card failed. We will try again soon, but please check your payment details.'
 
@@ -359,8 +359,8 @@ serve(async (req) => {
                 // Invoice lines contain the price ID
                 const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
                 const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
-                
-                let targetPlan = 'free'; // fallback
+
+                let targetPlan = 'free'
                 let daysToAdd = 30
                 if (invoice.lines?.data?.length > 0) {
                     const priceId = invoice.lines.data[0].price?.id
@@ -369,7 +369,7 @@ serve(async (req) => {
                     } else if (priceId === PREMIUM_PRICE_ID) {
                         targetPlan = 'premium'
                     } else {
-                        targetPlan = sub?.plan || 'pro'; // retain if unknown
+                        targetPlan = sub?.plan || 'pro'
                     }
 
                     // Calculate expiry extension from invoice period
@@ -378,7 +378,6 @@ serve(async (req) => {
                         const expiryDate = new Date(periodEnd * 1000)
                         daysToAdd = Math.ceil((expiryDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
                     } else {
-                        // Fallback: infer from plan
                         daysToAdd = targetPlan === 'premium' ? 366 : 30
                     }
                 }
@@ -400,30 +399,9 @@ serve(async (req) => {
                         })
                         .eq('id', sub.id)
 
-                    console.log(`Restored/Updated subscription ${sub.id} to active with plan ${targetPlan}, extended by ${daysToAdd} days.`)
+                    console.log(`Restored/updated subscription ${sub.id} to active with plan ${targetPlan}, extended by ${daysToAdd} days.`)
                 }
             }
-
-        }
-                }
-
-                if (sub) {
-                    await supabase
-                        .from('subscriptions')
-                        .update({
-                            failed_payment_attempts: 0,
-                            status: 'active',
-                            locked_at: null,
-                            plan: targetPlan, // Always ensure tier is correct upon successful invoice
-                            updated_at: new Date().toISOString(),
-                            tier_updated_at: new Date().toISOString()
-                        })
-                        .eq('id', sub.id)
-
-                    console.log(`Restored/Updated subscription ${sub.id} to active with plan ${targetPlan}.`)
-                }
-            }
-
         }
 
 
