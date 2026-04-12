@@ -1576,14 +1576,8 @@ img.product-image {
    MOBILE OPTIMIZATIONS
    ============================================ */
 
-/* Ensure all images are visible on mobile */
+/* Ensure blog card images are never hidden */
 @media (max-width: 767px) {
-  img:not([style*="height"]) {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Ensure blog card images are never hidden */
   .glass-blog-card img {
     display: block !important;
     visibility: visible !important;
@@ -1592,6 +1586,11 @@ img.product-image {
   /* Ensure hero blog images render properly */
   .group img[alt] {
     display: block !important;
+  }
+
+  /* Prevent images from overflowing their containers */
+  img {
+    max-width: 100%;
   }
 }
 
