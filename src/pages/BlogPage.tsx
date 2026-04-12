@@ -92,23 +92,8 @@ export default function BlogPage() {
                     return;
                 }
 
-                // Strict Regional Filtering: Only show posts that match the current country code suffix
-                const regionalData = data.filter(post => {
-                    if (!post) return false;
-                    try {
-                        const slug = (post.slug || "").toString().toLowerCase();
-                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
-                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
-
-                        if (settings.countryCode === 'US') {
-                            return isUS || !isUK;
-                        } else {
-                            return isUK || !isUS;
-                        }
-                    } catch (err) {
-                        return false;
-                    }
-                });
+                // Show all published posts to all regions (informational content is globally relevant)
+                const regionalData = data;
 
                 // Client-side deduplication: Only dedupe by slug (which should be unique)
                 // Skip duplicate slugs if any exist (data integrity safeguard)

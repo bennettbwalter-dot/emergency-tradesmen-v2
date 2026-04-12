@@ -1578,7 +1578,7 @@ img.product-image {
 
 /* Ensure all images are visible on mobile */
 @media (max-width: 767px) {
-  img {
+  img:not([style*="height"]) {
     max-width: 100%;
     height: auto;
   }
@@ -1587,7 +1587,6 @@ img.product-image {
   .glass-blog-card img {
     display: block !important;
     visibility: visible !important;
-    min-height: 100px;
   }
 
   /* Ensure hero blog images render properly */
