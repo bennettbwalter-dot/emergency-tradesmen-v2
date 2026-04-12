@@ -1576,24 +1576,6 @@ img.product-image {
    MOBILE OPTIMIZATIONS
    ============================================ */
 
-/* Ensure blog card images are never hidden */
-@media (max-width: 767px) {
-  .glass-blog-card img {
-    display: block !important;
-    visibility: visible !important;
-  }
-
-  /* Ensure hero blog images render properly */
-  .group img[alt] {
-    display: block !important;
-  }
-
-  /* Prevent images from overflowing their containers */
-  img {
-    max-width: 100%;
-  }
-}
-
 /* iOS safe area support for bottom navigation */
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);

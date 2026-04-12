@@ -33,8 +33,12 @@ export default function BlogPage() {
     const getImageUrl = (path: string | null): string | undefined => {
         if (!path) return undefined;
         if (path.startsWith('http')) return path;
-        if (path.startsWith('/')) return path;
-        return `/${path}`;
+        let normalized = path.startsWith('/') ? path : `/${path}`;
+        // Prefer WebP over PNG/SVG for much smaller file sizes (critical for mobile)
+        if (/\.(png|svg)$/i.test(normalized)) {
+            normalized = normalized.replace(/\.(png|svg)$/i, '.webp');
+        }
+        return normalized;
     };
 
     const handleCardImageError = (postId: string) => {
@@ -92,8 +96,23 @@ export default function BlogPage() {
                     return;
                 }
 
-                // Show all published posts to all regions (informational content is globally relevant)
-                const regionalData = data;
+                // Strict Regional Filtering: Only show posts that match the current country code suffix
+                const regionalData = data.filter(post => {
+                    if (!post) return false;
+                    try {
+                        const slug = (post.slug || "").toString().toLowerCase();
+                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+
+                        if (settings.countryCode === 'US') {
+                            return isUS || !isUK;
+                        } else {
+                            return isUK || !isUS;
+                        }
+                    } catch (err) {
+                        return false;
+                    }
+                });
 
                 // Client-side deduplication: Only dedupe by slug (which should be unique)
                 // Skip duplicate slugs if any exist (data integrity safeguard)
@@ -181,11 +200,19 @@ export default function BlogPage() {
                                                 alt={featuredPost.title}
                                                 className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-105"
                                                 loading="eager"
-                                                decoding="async"
                                                 fetchPriority="high"
+                                                decoding="async"
+                                                sizes="(max-width: 768px) 100vw, 40vw"
                                                 onError={(e) => {
-                                                    console.warn('Hero image failed to load:', featuredPost.cover_image);
-                                                    setHeroImageError(true);
+                                                    const target = e.currentTarget;
+                                                    const src = target.src;
+                                                    // If WebP failed, fallback to PNG
+                                                    if (src.endsWith('.webp')) {
+                                                        const fallback = src.replace(/\.webp$/i, '.png');
+                                                        target.src = fallback;
+                                                    } else {
+                                                        setHeroImageError(true);
+                                                    }
                                                 }}
                                             />
                                         ) : (
@@ -262,7 +289,17 @@ export default function BlogPage() {
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                                                         loading="lazy"
                                                         decoding="async"
-                                                        onError={() => handleCardImageError(post.id)}
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                        onError={(e) => {
+                                                            const target = e.currentTarget;
+                                                            const src = target.src;
+                                                            // If WebP failed, fallback to PNG
+                                                            if (src.endsWith('.webp')) {
+                                                                target.src = src.replace(/\.webp$/i, '.png');
+                                                            } else {
+                                                                handleCardImageError(post.id);
+                                                            }
+                                                        }}
                                                     />
                                                 ) : (
                                                     <div className="w-full h-full bg-gradient-to-br from-primary/30 via-secondary/40 to-muted flex items-center justify-center">

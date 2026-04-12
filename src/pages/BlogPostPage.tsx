@@ -40,8 +40,12 @@ function safeFormatDate(dateStr: string | null | undefined): string {
 function getImageUrl(path: string | null): string | undefined {
   if (!path) return undefined;
   if (path.startsWith('http')) return path;
-  if (path.startsWith('/')) return path;
-  return `/${path}`;
+  let normalized = path.startsWith('/') ? path : `/${path}`;
+  // Prefer WebP over PNG/SVG for much smaller file sizes (critical for mobile)
+  if (/\.(png|svg)$/i.test(normalized)) {
+    normalized = normalized.replace(/\.(png|svg)$/i, '.webp');
+  }
+  return normalized;
 }
 
 function calcReadingTime(content: string): number {
@@ -815,8 +819,16 @@ export default function BlogPostPage() {
                     alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
                     className="w-full h-full object-cover"
                     loading="eager"
-                    decoding="async"
                     fetchPriority="high"
+                    decoding="async"
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      const src = target.src;
+                      if (src.endsWith('.webp')) {
+                        target.src = src.replace(/\.webp$/i, '.png');
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
@@ -919,6 +931,16 @@ export default function BlogPostPage() {
                           src={getImageUrl(rPost.cover_image)}
                           alt={rPost.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            const src = target.src;
+                            if (src.endsWith('.webp')) {
+                              target.src = src.replace(/\.webp$/i, '.png');
+                            }
+                          }}
                         />
                       </div>
                     )}
