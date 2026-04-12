@@ -196,7 +196,12 @@ export default function BlogPage() {
                                                 alt={featuredPost.title}
                                                 className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-105"
                                                 loading="eager"
-                                                onError={() => setHeroImageError(true)}
+                                                decoding="async"
+                                                fetchPriority="high"
+                                                onError={(e) => {
+                                                    console.warn('Hero image failed to load:', featuredPost.cover_image);
+                                                    setHeroImageError(true);
+                                                }}
                                             />
                                         ) : (
                                             <div className="w-full h-full bg-gradient-to-br from-primary/30 via-secondary/40 to-muted flex items-center justify-center">
@@ -270,6 +275,8 @@ export default function BlogPage() {
                                                         src={getImageUrl(post.cover_image)}
                                                         alt={regionalizeText(post.title)}
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                                                        loading="lazy"
+                                                        decoding="async"
                                                         onError={() => handleCardImageError(post.id)}
                                                     />
                                                 ) : (

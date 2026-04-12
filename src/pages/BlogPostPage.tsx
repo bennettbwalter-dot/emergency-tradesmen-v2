@@ -815,6 +815,8 @@ export default function BlogPostPage() {
                     alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
                     className="w-full h-full object-cover"
                     loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
