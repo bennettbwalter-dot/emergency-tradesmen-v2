@@ -73,14 +73,16 @@ export default function BlogPage() {
                 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
                 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-                const url = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc&limit=200`;
+                const url = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc&limit=1000`;
 
                 const response = await fetch(url, {
                     headers: {
                         'apikey': supabaseKey,
                         'Authorization': `Bearer ${supabaseKey}`,
                         'Content-Type': 'application/json',
-                        'Prefer': 'count=exact'
+                        'Prefer': 'count=exact',
+                        'Range-Unit': 'items',
+                        'Range': '0-999'
                     }
                 });
 
@@ -189,11 +191,11 @@ export default function BlogPage() {
 
                         {/* "Netflix" Hero Section - Featured Post */}
                         {featuredPost && (
-                            <div className="relative w-full overflow-hidden group">
+                            <div className="relative w-full overflow-visible md:overflow-hidden group">
                                 {/* Mobile: Stacked layout | Desktop: Side-by-side with 9:16 image */}
                                 <div className="flex flex-col md:flex-row">
                                     {/* Image Section */}
-                                    <div className="relative w-full md:w-[40%] h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[85vh] shrink-0">
+                                    <div className="relative w-full md:w-[40%] min-h-[40vh] h-[40vh] sm:min-h-[50vh] sm:h-[50vh] md:h-[60vh] lg:h-[85vh] shrink-0">
                                         {featuredPost.cover_image && !heroImageError ? (
                                             <img
                                                 src={getImageUrl(featuredPost.cover_image)}

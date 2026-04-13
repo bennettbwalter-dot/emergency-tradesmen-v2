@@ -812,8 +812,8 @@ export default function BlogPostPage() {
 
             {/* Featured image — responsive, full width on mobile */}
             {post.cover_image && (
-              <div className="mt-6 md:mt-0 md:shrink-0 w-full md:w-auto">
-                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[4/3] md:aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] mx-auto md:mx-0">
+              <div className="mt-6 md:mt-0 md:shrink-0 w-full md:w-auto min-w-0">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[4/3] md:aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] mx-auto md:mx-0 min-h-[200px]">
                   <img
                     src={getImageUrl(post.cover_image)}
                     alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}

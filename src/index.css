@@ -1620,11 +1620,8 @@ img.product-image {
 
 /* Optimize images for mobile bandwidth */
 @media (max-width: 767px) {
-  .blog-body img {
-    loading: lazy;
-  }
 
-  /* Reduce hero image height on very small screens */
+  /* Hero image container — prevent overflow on small screens */
   .hero-image-mobile-opt {
     max-height: 50vh !important;
   }
