@@ -202,7 +202,6 @@ export default function BlogPage() {
                                                 loading="eager"
                                                 fetchPriority="high"
                                                 decoding="async"
-                                                sizes="(max-width: 768px) 100vw, 40vw"
                                                 onError={(e) => {
                                                     const target = e.currentTarget;
                                                     const src = target.src;
@@ -289,7 +288,6 @@ export default function BlogPage() {
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                                                         loading="lazy"
                                                         decoding="async"
-                                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                         onError={(e) => {
                                                             const target = e.currentTarget;
                                                             const src = target.src;
