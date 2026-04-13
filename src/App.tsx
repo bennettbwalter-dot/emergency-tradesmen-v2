@@ -182,7 +182,7 @@ const AppRoutes = () => (
 
 const AppContent = () => {
   const { isLocked, refreshUser } = useAuth();
-  
+
   const handleRetry = async () => {
     await refreshUser();
   };
@@ -207,15 +207,15 @@ const AppContent = () => {
           <div className="bg-gray-100 p-6 rounded-lg text-left border border-gray-300">
             <p className="font-mono text-sm mb-2"><strong>Missing Variable:</strong> VITE_SUPABASE_URL</p>
             <p className="text-sm text-gray-600 mb-4">
-              This usually means the Environment Variables are missing in Netlify.
+              This usually means the Environment Variables are missing in Cloudflare Pages.
             </p>
             <p className="font-semibold text-sm">How to fix:</p>
             <ol className="list-decimal ml-5 text-sm space-y-1 mt-2">
-              <li>Go to Netlify Dashboard</li>
-              <li>Site Configuration &rarr; Environment variables</li>
-              <li>Add key: <code className="bg-gray-200 px-1 rounded">VITE_SUPABASE_URL</code></li>
-              <li>Value: (Copy from your local .env)</li>
-              <li><strong>Re-deploy the site</strong></li>
+              <li>Go to Cloudflare Dashboard &rarr; Pages &rarr; Your Project</li>
+              <li>Settings &rarr; Environment Variables &rarr; Production</li>
+              <li>Ensure <code className="bg-gray-200 px-1 rounded">VITE_SUPABASE_URL</code> and <code className="bg-gray-200 px-1 rounded">VITE_SUPABASE_ANON_KEY</code> are set</li>
+              <li>Value: Copy from your local <code className="bg-gray-200 px-1 rounded">.env</code> file</li>
+              <li><strong>Clear Cache → Retry Deployment</strong></li>
             </ol>
           </div>
           <p className="text-xs text-gray-400">Current Value: {import.meta.env.VITE_SUPABASE_URL || 'undefined'}</p>
