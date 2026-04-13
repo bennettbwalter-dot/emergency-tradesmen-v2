@@ -73,7 +73,13 @@ export default function BlogPage() {
                 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
                 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-                const url = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc&limit=1000`;
+                if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('undefined') || supabaseKey.includes('undefined')) {
+                    console.error('[BlogPage] Supabase env vars are missing. Check .env.production or Cloudflare Pages environment variables.');
+                    setIsLoading(false);
+                    return;
+                }
+
+                const url = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc`;
 
                 const response = await fetch(url, {
                     headers: {
@@ -87,6 +93,7 @@ export default function BlogPage() {
                 });
 
                 if (!response.ok) {
+                    console.error('[BlogPage] Failed to fetch posts:', response.status, response.statusText);
                     setIsLoading(false);
                     return;
                 }

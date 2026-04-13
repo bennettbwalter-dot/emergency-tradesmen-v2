@@ -409,6 +409,12 @@ export default function BlogPostPage() {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
         const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+        if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('undefined') || supabaseKey.includes('undefined')) {
+          console.error('[BlogPostPage] Supabase env vars are missing. Check .env.production or Cloudflare Pages environment variables.');
+          setIsLoading(false);
+          return;
+        }
+
         const postUrl = `${supabaseUrl}/rest/v1/posts?select=*&slug=eq.${encodeURIComponent(slug)}`;
         const postResponse = await fetch(postUrl, {
           headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json' }
@@ -419,9 +425,9 @@ export default function BlogPostPage() {
           const data = postData[0];
           setPost(data);
           const isUS = slug.toLowerCase().includes('usa') || slug.toLowerCase().includes('-us');
-          const relatedUrl = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc&limit=10`;
+          const relatedUrl = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc`;
           const relatedResponse = await fetch(relatedUrl, {
-            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json' }
+            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-9' }
           });
           const relatedData = await relatedResponse.json();
           if (relatedData) {
