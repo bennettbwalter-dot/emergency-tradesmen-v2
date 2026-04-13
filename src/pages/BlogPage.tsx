@@ -278,12 +278,22 @@ export default function BlogPage() {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-6 md:gap-x-8 gap-y-8 md:gap-y-12">
-                                {regularPosts.map((post, index) => {
+                                {regularPosts.flatMap((post, index) => {
                                     // Dynamic Layout Logic: First 2 posts are large (6 cols), rest are smaller (4 cols)
                                     const isLarge = index < 2;
                                     const colSpan = isLarge ? "lg:col-span-6" : "lg:col-span-4";
+                                    const items = [];
 
-                                    return (
+                                    // In-feed ad: inject after every 4th card (starting after 4th)
+                                    if (index > 0 && index % 4 === 0) {
+                                        items.push(
+                                            <div key={`ad-${index}`} className="lg:col-span-12 flex justify-center my-4">
+                                                <AdSlot slot="AD_SLOT_BLOG_INFEED" format="leaderboard" />
+                                            </div>
+                                        );
+                                    }
+
+                                    items.push(
                                         <Link
                                             key={post.id}
                                             to={`${countryPrefix}/blog/${post.slug}`}
@@ -341,6 +351,8 @@ export default function BlogPage() {
                                             </div>
                                         </Link>
                                     );
+
+                                    return items;
                                 })}
                             </div>
                         </div>

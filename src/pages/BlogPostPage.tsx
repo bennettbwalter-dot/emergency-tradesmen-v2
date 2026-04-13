@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { format, isValid } from "date-fns";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { AdSlot } from "@/components/AdSlot";
 import { ArrowLeft, Clock, Calendar, User, ChevronRight, AlertTriangle, Sun, Moon, Phone, BookOpen, Zap } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -846,12 +847,38 @@ export default function BlogPostPage() {
         </header>
 
         {/* ── ARTICLE BODY ──────────────────────────────────────── */}
-        <div className={`blog-body ${isWhiteMode ? '' : 'dark'}`}>
-          {isHtmlContent
-            ? <div dangerouslySetInnerHTML={{ __html: displayContent }} />
-            : <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{displayContent}</ReactMarkdown>
-          }
-        </div>
+        {(() => {
+          // Split content at ~50% for mid-article ad
+          const paragraphs = displayContent.split(/<\/p>/i);
+          const midPoint = Math.max(1, Math.floor(paragraphs.length / 2));
+          const firstHalf = paragraphs.slice(0, midPoint).join('</p>') + (paragraphs.length > midPoint ? '</p>' : '');
+          const secondHalf = paragraphs.length > midPoint ? paragraphs.slice(midPoint).join('</p>') : '';
+
+          return (
+            <>
+              <div className={`blog-body ${isWhiteMode ? '' : 'dark'}`}>
+                {isHtmlContent
+                  ? <div dangerouslySetInnerHTML={{ __html: firstHalf }} />
+                  : <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{firstHalf}</ReactMarkdown>
+                }
+              </div>
+
+              {/* Mid-article AdSense unit */}
+              <div className="my-8 md:my-12">
+                <AdSlot slot="AD_SLOT_BLOG_MID_CONTENT" format="leaderboard" />
+              </div>
+
+              {secondHalf && (
+                <div className={`blog-body ${isWhiteMode ? '' : 'dark'}`}>
+                  {isHtmlContent
+                    ? <div dangerouslySetInnerHTML={{ __html: secondHalf }} />
+                    : <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{secondHalf}</ReactMarkdown>
+                  }
+                </div>
+              )}
+            </>
+          );
+        })()}
 
         {/* ── AMAZON PRODUCT SECTION ────────────────────────────────── */}
         {slug && AMAZON_PRODUCTS[slug] && (
