@@ -12,13 +12,10 @@
   <meta name="apple-mobile-web-app-title" content="Emergency Trades" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
 
-  <!-- CSP: Allow unsafe-eval for Azure Speech SDK and PostHog for analytics -->
+  <!-- CSP: Allow unsafe-inline for scripts, wasm-unsafe-eval for Azure Speech SDK WASM -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com;" />
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com;" />
 
 
 
@@ -58,6 +55,8 @@
     (function () {
       if (window.location.hostname !== 'emergencycontractors.net' &&
         window.location.hostname !== 'www.emergencycontractors.net' &&
+        window.location.hostname !== 'emergencytradesmen.net' &&
+        window.location.hostname !== 'www.emergencytradesmen.net' &&
         window.location.hostname !== 'localhost') return;
 
       window.addEventListener('load', function () {

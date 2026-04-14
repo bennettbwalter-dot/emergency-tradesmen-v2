@@ -44,14 +44,14 @@ export function SEO({
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-    
+
     const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
     const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;
 
     // Prevent triple-pipe titles: only append brand name if not already present
     const titleAlreadyHasBrand = title.includes(SITE_NAME) || title.includes(SITE_NAME_GB) || title.includes(SITE_NAME_US);
     const fullTitle = titleAlreadyHasBrand ? title : `${title} | ${SITE_NAME}`;
-    
+
     // Adjust canonical for US Domain
     let effectiveCanonical = canonical;
     if (isUSDomain) {
@@ -61,8 +61,8 @@ export function SEO({
         effectiveCanonical = pathToUse.replace(/^\/(us|usa)/, '') || '/';
     }
 
-    const absoluteUrl = effectiveCanonical 
-        ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`) 
+    const absoluteUrl = effectiveCanonical
+        ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`)
         : SITE_URL;
 
     // Default Organization Schema — applied to all pages to reinforce brand identity
@@ -85,8 +85,8 @@ export function SEO({
         "openingHours": "Mo-Su 00:00-24:00",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": isUSDomain ? "+1-888-555-0199" : "+44 20 7946 0000",
-            "contactType": "emergency",
+            "email": isUSDomain ? "emergencycontractors@outlook.com" : "emergencytradesmen@outlook.com",
+            "contactType": "customer support",
             "availableLanguage": "English"
         },
         "sameAs": [
@@ -98,7 +98,7 @@ export function SEO({
     };
 
     // Combine default schema with provided jsonLd
-    const combinedJsonLd = jsonLd 
+    const combinedJsonLd = jsonLd
         ? (Array.isArray(jsonLd) ? [defaultSchema, ...jsonLd] : [defaultSchema, jsonLd])
         : defaultSchema;
 

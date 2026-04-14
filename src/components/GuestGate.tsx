@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { AuthForm } from "@/components/AuthForm";
+import { trackPostHogEvent } from "@/lib/posthog";
 
 export function GuestGate() {
     const { isAuthenticated, isLoading } = useAuth();
@@ -30,6 +31,7 @@ export function GuestGate() {
             if (e.clientY <= 0) {
                 setShowModal(true);
                 setHasTriggered(true);
+                trackPostHogEvent('guest_gate_shown', { page: window.location.pathname });
             }
         };
 
@@ -42,12 +44,14 @@ export function GuestGate() {
 
     const handleClose = () => {
         setShowModal(false);
+        trackPostHogEvent('guest_gate_skipped', { page: window.location.pathname });
         // Mark as skipped for this session
         sessionStorage.setItem("guest-gate-skipped", "true");
     };
 
     const handleSuccess = () => {
         setShowModal(false);
+        trackPostHogEvent('guest_gate_converted', { page: window.location.pathname });
     };
 
     if (isAuthenticated || hasSkipped) return null;

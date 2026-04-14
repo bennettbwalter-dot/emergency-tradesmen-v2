@@ -42,7 +42,12 @@ const Index = () => {
     "name": `${siteName} ${displayCity}`,
     "image": `${siteUrl}/og-image.webp`,
     "description": `24/7 ${siteName} in ${displayCity}. Connect with verified local plumbers, electricians, locksmiths, and more within minutes.`,
-    "telephone": settings.countryCode === 'US' ? "+1-888-555-0199" : "+44 20 7946 0000",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": isUSDomain ? "emergencycontractors@outlook.com" : "emergencytradesmen@outlook.com",
+      "contactType": "emergency",
+      "availableLanguage": "English"
+    },
     "url": siteUrl,
     "areaServed": displayCity,
     "availableLanguage": "English",
@@ -71,7 +76,7 @@ const Index = () => {
   return (
     <>
       <GuestGate />
-      <SEO 
+      <SEO
         title={`Emergency ${settings.tradeTerm} Near You${displayCity !== 'Near You' ? ` in ${displayCity}` : ''}`}
         description={`Find trusted local ${settings.tradeTerm.toLowerCase()} in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith & HVAC. Call now to get connected with verified experts in your area today.`}
         jsonLd={emergencyServiceSchema}

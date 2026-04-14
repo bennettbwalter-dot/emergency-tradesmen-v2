@@ -822,10 +822,16 @@ export default function TradeCityPage() {
           </div>
 
           {isLoading || !hasLoadedRef.current ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <BusinessCardSkeleton key={i} />
-              ))}
+            <div>
+              <div className="text-center py-8 mb-6">
+                <Loader2 className="w-8 h-8 animate-spin mx-auto mb-3 text-gold" />
+                <p className="text-muted-foreground">Finding verified {tradeInfo.name}s near {cityName}...</p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <BusinessCardSkeleton key={i} />
+                ))}
+              </div>
             </div>
           ) : (
             <>

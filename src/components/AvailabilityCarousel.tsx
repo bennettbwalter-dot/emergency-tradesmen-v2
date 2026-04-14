@@ -74,9 +74,10 @@ export function AvailabilityCarousel() {
           return (
             <div
               key={idx}
-              className="absolute transition-all duration-1000 ease-[cubic-bezier(0.2,0.8,0.2,1.0)] perspective-1000"
+              className="absolute transition-all duration-1000 perspective-1000"
               style={{
                 transform: `translateX(${translateX}px) rotateY(${rotateY}deg) scale(${scale})`,
+                transitionTimingFunction: 'cubic-bezier(0.2, 0.8, 0.2, 1.0)',
                 opacity: opacity,
                 zIndex: zIndex,
                 transformStyle: 'preserve-3d',

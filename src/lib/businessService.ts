@@ -4,7 +4,19 @@ import type { Business } from './businesses';
 import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
 
-import { fallbackEnrichment } from '@/data/fallback_enrichment';
+// Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
+let _fallbackEnrichment: Record<string, any> | null = null;
+async function getFallbackEnrichment(): Promise<Record<string, any>> {
+    if (_fallbackEnrichment) return _fallbackEnrichment;
+    try {
+        const res = await fetch('/data/fallback-enrichment.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        _fallbackEnrichment = await res.json();
+    } catch {
+        _fallbackEnrichment = {};
+    }
+    return _fallbackEnrichment!;
+}
 
 /**
  * Helper to map Supabase business data to the Business interface
@@ -27,9 +39,10 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): nu
 /**
  * Helper to map Supabase business data to the Business interface
  */
-function mapBusinessData(biz: any, userCoords?: { latitude: number, longitude: number }): Business {
+async function mapBusinessData(biz: any, userCoords?: { latitude: number, longitude: number }): Promise<Business> {
     const dbSocials = biz.social_links || {};
-    const fallbackSocials = fallbackEnrichment[biz.id] || {};
+    const enrichment = await getFallbackEnrichment();
+    const fallbackSocials = enrichment[biz.id] || {};
 
     let website = biz.website;
     if (website && !website.startsWith('http://') && !website.startsWith('https://')) {
@@ -181,7 +194,8 @@ export async function fetchBusinesses(
 
         if (directData && directData.length > 0) {
             devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
-            return directData.map((biz: any) => mapBusinessData(biz, userCoords))
+            const businesses = await Promise.all(directData.map((biz: any) => mapBusinessData(biz, userCoords)));
+            return businesses
                 .sort((a, b) => {
                     if (a.tier === 'paid' && b.tier !== 'paid') return -1;
                     if (a.tier !== 'paid' && b.tier === 'paid') return 1;
@@ -211,7 +225,7 @@ export async function fetchBusinesses(
     let allBusinesses = data || [];
     if (allBusinesses.length === 0 && searchCity) {
         devLog('[fetchBusinesses] No results for city, trying broader query');
-        
+
         let fallbackUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&limit=50`;
 
         if (stateCities.length > 0) {
@@ -227,7 +241,8 @@ export async function fetchBusinesses(
         }
     }
 
-    return (allBusinesses || []).map((biz: any) => mapBusinessData(biz, userCoords))
+    const mappedBusinesses = await Promise.all((allBusinesses || []).map((biz: any) => mapBusinessData(biz, userCoords)));
+    return mappedBusinesses
         .sort((a, b) => {
             if (a.tier === 'paid' && b.tier !== 'paid') return -1;
             if (a.tier !== 'paid' && b.tier === 'paid') return 1;
@@ -244,7 +259,7 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
     const { data } = await supabaseFetch(`/rest/v1/businesses?select=*,business_photos(*)&id=eq.${encodeURIComponent(id)}`);
 
     if (data && data.length > 0) {
-        return mapBusinessData(data[0]);
+        return await mapBusinessData(data[0]);
     }
 
     return null;
@@ -261,7 +276,7 @@ export async function fetchAllBusinesses(limit = 100, countryCode?: string): Pro
         return [];
     }
 
-    return data.map(biz => mapBusinessData(biz));
+    return Promise.all(data.map(biz => mapBusinessData(biz)));
 }
 
 export async function searchBusinesses(query: string, countryCode: string = 'GB'): Promise<Business[]> {
@@ -274,7 +289,7 @@ export async function searchBusinesses(query: string, countryCode: string = 'GB'
         return [];
     }
 
-    return data.map(biz => mapBusinessData(biz));
+    return Promise.all(data.map(biz => mapBusinessData(biz)));
 }
 
 export async function fetchPaidBusinesses(trade?: string, city?: string, countryCode?: string): Promise<Business[]> {
@@ -290,5 +305,5 @@ export async function fetchPaidBusinesses(trade?: string, city?: string, country
         return [];
     }
 
-    return data.map(biz => mapBusinessData(biz));
+    return Promise.all(data.map(biz => mapBusinessData(biz)));
 }

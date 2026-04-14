@@ -207,7 +207,8 @@ export default function BlogPage() {
                                             <img
                                                 src={getImageUrl(featuredPost.cover_image)}
                                                 alt={featuredPost.title}
-                                                className="w-full h-full object-cover transition-transform duration-[20s] ease-linear group-hover:scale-105"
+                                                className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                                                style={{ transitionDuration: '20s', animationTimingFunction: 'linear' }}
                                                 loading="eager"
                                                 fetchPriority="high"
                                                 decoding="async"

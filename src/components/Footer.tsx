@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { trades } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
 import { GlassSocialIcon } from "./ui/GlassSocialIcon";
@@ -14,11 +14,11 @@ export function Footer({ countryCode }: FooterProps) {
   const { settings: globalSettings } = useLocalization();
   const activeCountry = countryCode || globalSettings.countryCode;
   const isUS = activeCountry === 'US';
-  
+
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const port = typeof window !== 'undefined' ? window.location.port : '';
   const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-  
+
   const siteNameMain = 'Emergency';
   const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
   const siteName = `${siteNameMain} ${siteNameSub}`;
@@ -43,7 +43,7 @@ export function Footer({ countryCode }: FooterProps) {
           <div className="lg:col-span-4 space-y-8">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-4 group">
               <div className="relative">
-                <img src="/et-logo-v2.webp" alt="Emergency Trades Logo" loading="lazy" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-14 h-14 rounded-full object-cover border-2 border-white/10 group-hover:border-gold/50 transition-colors" />
+                <img src="/et-logo-v2.webp" alt="Emergency Trades Logo" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-14 h-14 rounded-full object-cover border-2 border-white/10 group-hover:border-gold/50 transition-colors" />
                 <div className="absolute inset-0 rounded-full bg-gold/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-col">
@@ -57,14 +57,16 @@ export function Footer({ countryCode }: FooterProps) {
             </p>
 
             <div className="flex gap-3">
-              {(() => { const socials = getSocialUrls(); return (
-                <>
-                  <GlassSocialIcon platform="facebook" href={socials.facebook} />
-                  <GlassSocialIcon platform="instagram" href={socials.instagram} />
-                  <GlassSocialIcon platform="twitter" href={socials.twitter} />
-                  <GlassSocialIcon platform="tiktok" href={socials.tiktok || "https://www.tiktok.com/@emergencytradesmen"} />
-                </>
-              ); })()}
+              {(() => {
+                const socials = getSocialUrls(); return (
+                  <>
+                    <GlassSocialIcon platform="facebook" href={socials.facebook} />
+                    <GlassSocialIcon platform="instagram" href={socials.instagram} />
+                    <GlassSocialIcon platform="twitter" href={socials.twitter} />
+                    <GlassSocialIcon platform="tiktok" href={socials.tiktok || "https://www.tiktok.com/@emergencytradesmen"} />
+                  </>
+                );
+              })()}
             </div>
 
             <div className="pt-6">
@@ -143,15 +145,15 @@ export function Footer({ countryCode }: FooterProps) {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 space-y-2">
+              <div className="pt-4 border-t border-white/10 space-y-3">
                 <p className="text-[10px] text-white/30 uppercase tracking-widest font-semibold">Contact</p>
-                <a
-                  href={isUSDomain || isUS ? "tel:+18885550199" : "tel:+442079460000"}
+                <Link
+                  to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")}
                   className="flex items-center gap-2 text-white/50 hover:text-gold text-sm transition-colors"
                 >
-                  <Phone className="w-4 h-4 shrink-0" />
-                  {isUSDomain || isUS ? '+1 (888) 555-0199' : '+44 20 7946 0000'}
-                </a>
+                  <MessageSquare className="w-4 h-4 shrink-0" />
+                  Send Us a Message
+                </Link>
                 <p className="text-white/30 text-xs leading-relaxed max-w-[160px]">
                   {isUSDomain || isUS
                     ? 'Service areas across the United States'

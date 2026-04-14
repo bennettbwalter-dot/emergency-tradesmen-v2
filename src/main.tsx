@@ -6,6 +6,24 @@ import "@fontsource/dm-sans"; // Defaults to weight 400
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
 import { initPostHog } from "./lib/posthog";
+import * as Sentry from "@sentry/react";
+
+// Initialize Sentry error tracking
+Sentry.init({
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    environment: import.meta.env.MODE,
+    enabled: import.meta.env.PROD && !!import.meta.env.VITE_SENTRY_DSN,
+    tracesSampleRate: 0.1,
+    integrations: [
+        Sentry.browserTracingIntegration(),
+    ],
+    // Ignore benign errors
+    ignoreErrors: [
+        'ResizeObserver loop limit exceeded',
+        'ResizeObserver loop completed with undelivered notifications',
+        'Script error.',
+    ],
+});
 
 // Initialize analytics
 initPostHog();
@@ -49,7 +67,7 @@ window.addEventListener('unhandledrejection', (event) => {
     // Most rejections are non-fatal or from third-party scripts.
     // Instead, we just log it. If it's a critical error, the normal ErrorBoundary will catch it 
     // or the 'error' event above will handle it if it results in a crash.
-    
+
     // Optional: We could show a non-intrusive toast here if we had a global toast system 
     // that works outside of React, but for now, logging is safer than crashing the UI.
 });
