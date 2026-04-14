@@ -169,12 +169,12 @@ export default function ContactPage() {
                 toast({
                     title: "Error sending message",
                     description: `Please try again or email us directly at ${getSupportEmail()}`,
-                    description: `Please try again or email us directly at ${getSupportEmail()}`,
                     variant: "destructive"
                 });
-            } finally {
-                setIsSubmitting(false);
             }
+        } finally {
+            setIsSubmitting(false);
+        }
         };
 
         if (submitted) {
