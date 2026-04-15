@@ -43,9 +43,19 @@
     }
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777"
-    crossorigin="anonymous"></script>
+  <!-- Google AdSense (Conditional) -->
+  <script>
+    (function() {
+      var hostname = window.location.hostname;
+      if (hostname === 'emergencytradesmen.net' || hostname === 'www.emergencytradesmen.net') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";
+        script.crossOrigin = "anonymous";
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
 
   <!-- Pinterest Verification -->
   <meta name="p:domain_verify" content="51555145e4baf5bfdefaa25c01cb5d47" />
