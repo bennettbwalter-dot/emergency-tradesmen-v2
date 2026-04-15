@@ -116,6 +116,30 @@ const AMAZON_PRODUCTS: Record<string, AmazonProduct> = {
     description: 'WiFi water leak detector with real-time alerts. Prevent costly water damage emergencies.',
     url: 'https://www.amazon.com/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0C1SMJTDT?linkCode=ll2&tag=emergencytrad-20&linkId=35e97d3caf51b17294501b87c3298638&language=en_US&ref_=as_li_ss_tl'
   },
+  'plug-in-solar-gb': {
+    image: '/images/blog/generated/bluetti-power-station.png',
+    title: 'BLUETTI Portable Power Station',
+    description: 'Emergency backup power for home outages. Portable camping battery with multiple outlets.',
+    url: 'https://www.amazon.co.uk/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0BZZ47J4T?linkCode=ll2&tag=et0a8-21&linkId=de799f2916e37bdff865e5bebfb3579b&ref_=as_li_ss_tl'
+  },
+  'plug-in-solar-us': {
+    image: '/images/blog/generated/bluetti-power-station.png',
+    title: 'BLUETTI Portable Power Station',
+    description: 'Emergency backup power for home outages. Portable camping battery with multiple outlets.',
+    url: 'https://www.amazon.com/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0C1SMJTDT?linkCode=ll2&tag=emergencytrad-20&linkId=35e97d3caf51b17294501b87c3298638&language=en_US&ref_=as_li_ss_tl'
+  },
+  'emergency-ev-charger-repair-gb': {
+    image: '/images/blog/generated/bluetti-power-station.png',
+    title: 'BLUETTI Portable Power Station',
+    description: 'Emergency backup power for home outages. Portable camping battery with multiple outlets.',
+    url: 'https://www.amazon.co.uk/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0BZZ47J4T?linkCode=ll2&tag=et0a8-21&linkId=de799f2916e37bdff865e5bebfb3579b&ref_=as_li_ss_tl'
+  },
+  'emergency-ev-charger-repair-us': {
+    image: '/images/blog/generated/bluetti-power-station.png',
+    title: 'BLUETTI Portable Power Station',
+    description: 'Emergency backup power for home outages. Portable camping battery with multiple outlets.',
+    url: 'https://www.amazon.com/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0C1SMJTDT?linkCode=ll2&tag=emergencytrad-20&linkId=35e97d3caf51b17294501b87c3298638&language=en_US&ref_=as_li_ss_tl'
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -123,34 +147,50 @@ const AMAZON_PRODUCTS: Record<string, AmazonProduct> = {
 // ---------------------------------------------------------------------------
 const BLOG_STYLES = `
   /* ── TYPOGRAPHY SYSTEM ─────────────────────────── */
-  .blog-body { font-family: 'Inter', 'DM Sans', system-ui, sans-serif; color: #1f2937; line-height: 1.85; }
+  .blog-body {
+    font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+    color: #1f2937;
+    line-height: 1.8;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-x: hidden;
+  }
   .blog-body.dark { color: #e5e7eb; }
 
   /* ── H1 ─────────────────────────────────────────── */
-  .blog-h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+  .blog-h1 { font-size: clamp(1.75rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
 
   /* ── H2 NUMBERED + ORANGE ACCENT ────────────────── */
   .blog-body h2 {
-    font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700;
-    color: #1f2937; margin: 3rem 0 1.25rem;
-    padding-left: 1rem; border-left: 4px solid #e8923a;
-    line-height: 1.3;
+    font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 800;
+    color: #1f2937; margin: 3.5rem 0 1.5rem;
+    padding-left: 1.1rem; border-left: 5px solid #e8923a;
+    line-height: 1.35;
+    overflow-wrap: break-word;
   }
   .dark .blog-body h2 { color: #f3f4f6; }
 
   /* ── H3 (FAQ + subpoints) ───────────────────────── */
   .blog-body h3 {
     font-size: 1.15rem; font-weight: 700; color: #e8923a;
-    margin: 2rem 0 0.6rem;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.4;
+    overflow-wrap: break-word;
   }
 
   /* ── PARAGRAPHS ─────────────────────────────────── */
-  .blog-body p { margin-bottom: 1.4rem; font-size: 1.0625rem; }
+  .blog-body p { margin-bottom: 1.75rem; font-size: 1.0625rem; line-height: 1.8; overflow-wrap: break-word; }
 
   /* ── LISTS ──────────────────────────────────────── */
-  .blog-body ul { list-style: disc; padding-left: 1.75rem; margin-bottom: 1.5rem; }
-  .blog-body ol { list-style: decimal; padding-left: 1.75rem; margin-bottom: 1.5rem; }
-  .blog-body li { margin-bottom: 0.5rem; }
+  .blog-body ul { list-style: disc; padding-left: 1.75rem; margin-bottom: 1.75rem; }
+  .blog-body ol { list-style: decimal; padding-left: 1.75rem; margin-bottom: 1.75rem; }
+  .blog-body li { margin-bottom: 0.65rem; line-height: 1.75; overflow-wrap: break-word; }
 
   /* ── STRONG ─────────────────────────────────────── */
   .blog-body strong { color: #111827; font-weight: 700; }
@@ -226,10 +266,10 @@ const BLOG_STYLES = `
   /* ── CALLOUT TIP BOX (class="callout" or "tip-box") */
   .blog-body .callout, .blog-body .fun-fact, .blog-body .expert-tip {
     background: #fff8f3; border-left: 4px solid #e8923a;
-    border-radius: 10px; padding: 1rem 1.5rem; margin: 2rem 0;
-    display: flex; gap: 0.75rem; align-items: flex-start;
+    border-radius: 10px; padding: 1.25rem 1.75rem; margin: 2.5rem 0;
+    display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
   }
-  .dark .blog-body .callout, .blog-body .fun-fact { background: rgba(232,146,58,0.1); }
+  .dark .blog-body .callout, .dark .blog-body .fun-fact { background: rgba(232,146,58,0.1); }
 
   /* ── AMAZON PRODUCT SECTION ───────────────────────────── */
   .blog-body .amazon-product-section { 
@@ -554,6 +594,13 @@ export default function BlogPostPage() {
   // Strip dangerous HTML before rendering
   displayContent = sanitizeHtml(displayContent);
 
+  // Hard-fix formatting for specific broken paragraphs acting as merged sections
+  displayContent = displayContent
+    .replace(/(?:<p>)?\s*(3\.\s+Professional Diagnostics[^<.]*\.)\s*(?:<\/p>|<br\/?>)?/gi, '\n\n<h2>$1</h2>\n\n')
+    .replace(/(?:<p>)?\s*(4\.\s+Safety First[^<.]*\.)\s*(?:<\/p>|<br\/?>)?/gi, '\n\n<h2>$1</h2>\n\n')
+    .replace(/([.?!])\s+(3\.\s+Professional)/g, '$1</p><h2>$2')
+    .replace(/([.?!])\s+(4\.\s+Safety First)/g, '$1</p><h2>$2');
+
   const isUS = slug?.toLowerCase().includes('usa') || slug?.toLowerCase().includes('-us');
   const readingTime = calcReadingTime(displayContent);
   const hasExcerpt = post.excerpt && post.excerpt !== '...' && post.excerpt.length > 50;
@@ -601,8 +648,11 @@ export default function BlogPostPage() {
   const isHtmlContent = /<\/h[1-6]>/i.test(displayContent);
 
   return (
-    <div className={`min-h-screen font-sans transition-all duration-500 ${isWhiteMode ? 'bg-[#fafafa] text-neutral-900' : 'bg-[#0a0a0a] text-neutral-100'}`}>
+    <div className={`min-h-screen font-sans transition-all duration-500 overflow-x-hidden ${isWhiteMode ? 'bg-[#fafafa] text-neutral-900' : 'bg-[#0a0a0a] text-neutral-100'}`}>
       <style>{`
+              /* ── GLOBAL OVERFLOW GUARD ────────────────── */
+              *, *::before, *::after { box-sizing: border-box; }
+              body { overflow-x: hidden; }
               /* ── AMAZON PRODUCT SECTION ───────────────────────────── */
               .amazon-product-section { 
                 margin: 3rem 0 !important; 
@@ -739,6 +789,26 @@ export default function BlogPostPage() {
                 }
               }
 
+              /* ── MOBILE RESPONSIVE ────────────────────── */
+              @media (max-width: 640px) {
+                .blog-body {
+                  padding: 0 1rem !important;
+                  font-size: 1rem !important;
+                }
+                .blog-body h2 {
+                  font-size: 1.25rem !important;
+                  margin: 2.5rem 0 1.25rem !important;
+                }
+                .blog-body h3 {
+                  font-size: 1.05rem !important;
+                  margin: 2rem 0 0.85rem !important;
+                }
+                .blog-body p {
+                  font-size: 0.9875rem !important;
+                  margin-bottom: 1.5rem !important;
+                }
+              }
+
               ${BLOG_STYLES}
             `}</style>
       <SEO
@@ -761,7 +831,7 @@ export default function BlogPostPage() {
         </div>
       </nav>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 md:py-16 w-full overflow-x-hidden">
 
         {/* ── HEADER ──────────────────────────────────────────────── */}
         <header className="mb-10 md:mb-14">
@@ -881,22 +951,47 @@ export default function BlogPostPage() {
         })()}
 
         {/* ── AMAZON PRODUCT SECTION ────────────────────────────────── */}
-        {slug && AMAZON_PRODUCTS[slug] && (
+        {(() => {
+          let matchedSlug = slug ? Object.keys(AMAZON_PRODUCTS).find(k => slug.toLowerCase().includes(k) || k.includes(slug.toLowerCase())) : null;
+          
+          // Failsafe for long slugs that detach core identifiers from regional identifiers
+          if (!matchedSlug && slug) {
+            const lowerSlug = slug.toLowerCase();
+            if (lowerSlug.includes('plug-in-solar') || lowerSlug.includes('balcony-power')) {
+              matchedSlug = lowerSlug.includes('-us') || lowerSlug.includes('usa') ? 'plug-in-solar-us' : 'plug-in-solar-gb';
+            }
+          }
+          if (!matchedSlug) matchedSlug = slug;
+          
+          const product = matchedSlug ? AMAZON_PRODUCTS[matchedSlug] : null;
+
+          if (!product) return null;
+
+          // Ensure proper regional link structure for dynamic matches
+          let targetUrl = product.url;
+          if (slug?.toLowerCase().includes('us') || slug?.toLowerCase().includes('usa')) {
+             if (targetUrl.includes('.co.uk')) {
+                // If it's a US post but resolving to UK link, swap it to US Bluetti (safety fallback)
+                if (targetUrl.includes('BLUETTI')) targetUrl = 'https://www.amazon.com/BLUETTI-Portable-AC180-Generator-Off-grid/dp/B0C1SMJTDT?linkCode=ll2&tag=emergencytrad-20&linkId=35e97d3caf51b17294501b87c3298638&language=en_US&ref_=as_li_ss_tl';
+             }
+          }
+
+          return (
           <div className={`max-w-lg mx-auto my-8 md:my-12 p-4 md:p-6 rounded-2xl border-2 ${isWhiteMode ? 'bg-orange-50 border-orange-300' : 'bg-neutral-800 border-orange-500/50'}`}>
             <div className="text-center">
               <img
-                src={AMAZON_PRODUCTS[slug].image}
-                alt={AMAZON_PRODUCTS[slug].title}
+                src={product.image}
+                alt={product.title}
                 className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto object-contain rounded-xl"
               />
               <h3 className={`text-lg sm:text-xl font-bold mt-4 mb-2 ${isWhiteMode ? 'text-neutral-900' : 'text-white'}`}>
-                {AMAZON_PRODUCTS[slug].title}
+                {product.title}
               </h3>
               <p className={`text-xs sm:text-sm mb-4 px-2 ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-400'}`}>
-                {AMAZON_PRODUCTS[slug].description}
+                {product.description}
               </p>
               <a
-                href={AMAZON_PRODUCTS[slug].url}
+                href={targetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-xl transition-colors text-sm sm:text-base w-full sm:w-auto"
@@ -905,7 +1000,9 @@ export default function BlogPostPage() {
               </a>
             </div>
           </div>
-        )}
+          );
+        })()}
+
 
         {/* ── GLOBAL WATCH STAT ──────────────────────────────────── */}
         <div className={`my-12 flex items-start gap-4 p-5 rounded-2xl border ${isWhiteMode ? 'bg-orange-50 border-orange-200' : 'bg-orange-950/20 border-orange-900/40'}`}>

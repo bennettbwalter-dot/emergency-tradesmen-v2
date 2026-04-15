@@ -24,7 +24,7 @@ import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
-import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation } from "lucide-react";
+import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
