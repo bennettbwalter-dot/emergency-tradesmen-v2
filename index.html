@@ -11,17 +11,27 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Emergency Trades" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="telephone=yes" />
 
   <!-- CSP: Allow unsafe-inline for scripts, wasm-unsafe-eval for Azure Speech SDK WASM -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com;" />
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com https://js.stripe.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com https://www.google-analytics.com https://region1.google-analytics.com https://api.stripe.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com https://js.stripe.com https://*.stripe.com;" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9VVX26Z2R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N9VVX26Z2R', { send_page_view: false });
+  </script>
 
 
 
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-  <!-- hreflang + canonical (dynamic per domain) -->
+  <!-- hreflang (dynamic per domain — canonical managed by React Helmet) -->
   <script>
     (function() {
       var h = window.location.hostname;
@@ -30,11 +40,6 @@
       var ukBase = 'https://emergencytradesmen.net';
       var usBase = 'https://emergencycontractors.net';
       var self = isUS ? usBase : ukBase;
-      // Canonical
-      var canon = document.createElement('link');
-      canon.rel = 'canonical';
-      canon.href = self + path;
-      document.head.appendChild(canon);
       // hreflang - GB
       var gb = document.createElement('link');
       gb.rel = 'alternate'; gb.hreflang = 'en-GB'; gb.href = ukBase + path;
@@ -54,11 +59,9 @@
         "@type": "Organization",
         "name": isUS ? "Emergency Contractors" : "Emergency Tradesmen",
         "url": self,
-        "logo": self + "/et-logo-v2.webp",
-        "telephone": isUS ? "+1-888-555-0199" : "+44-20-7946-0000",
+        "logo": self + "/et-logo-v3.png",
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": isUS ? "+1-888-555-0199" : "+44-20-7946-0000",
           "contactType": "customer service",
           "availableLanguage": ["English"]
         }
@@ -102,17 +105,17 @@
     }
   </script>
 
-  <!-- Google AdSense (Conditional) -->
+  <!-- Google AdSense (production only) -->
   <script>
     (function() {
-      var hostname = window.location.hostname;
-      if (hostname === 'emergencytradesmen.net' || hostname === 'www.emergencytradesmen.net' ||
-          hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net') {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";
-        script.crossOrigin = "anonymous";
-        document.head.appendChild(script);
+      var h = window.location.hostname;
+      if (h === 'emergencytradesmen.net' || h === 'www.emergencytradesmen.net' ||
+          h === 'emergencycontractors.net' || h === 'www.emergencycontractors.net') {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";
+        s.crossOrigin = "anonymous";
+        document.head.appendChild(s);
       }
     })();
   </script>

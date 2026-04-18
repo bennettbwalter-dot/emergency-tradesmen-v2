@@ -19,22 +19,33 @@ import {
     Mail
 } from "lucide-react";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function AdminLayout() {
-    const { user, signOut } = useAuth();
+    const { user, signOut, isLoading } = useAuth();
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(true);
+
+    // Wait for Supabase session to restore so queries run authenticated
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-background">
+                <Loader2 className="w-8 h-8 animate-spin text-gold" />
+            </div>
+        );
+    }
 
     // Check if user is admin (you can enhance this with a proper role check)
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
     const isAdmin = (user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase()) || user?.email?.includes('bennett');
 
-    if (!user) {
+    // In local dev, skip auth entirely
+    if (import.meta.env.DEV) {
+        // fall through to render admin UI
+    } else if (!user) {
         return <Navigate to={`/login?redirect=${location.pathname}`} replace />;
-    }
-
-    if (!isAdmin) {
+    } else if (!isAdmin) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background">
                 <div className="text-center">
@@ -76,7 +87,7 @@ export function AdminLayout() {
                 <div className="p-6 border-b border-border flex items-center justify-between">
                     {sidebarOpen && (
                         <div className="flex items-center gap-2">
-                            <img src="/et-logo-new.webp" alt="ET Logo" loading="lazy" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
+                            <img src="/et-logo-v3.png" alt="ET Logo" loading="lazy" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
                             <h1 className="font-display text-xl text-gold">Admin</h1>
                         </div>
                     )}
@@ -115,12 +126,12 @@ export function AdminLayout() {
                     <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
                             <span className="text-gold font-semibold">
-                                {user.email?.[0].toUpperCase()}
+                                {user?.email?.[0].toUpperCase() ?? 'A'}
                             </span>
                         </div>
                         {sidebarOpen && (
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium truncate">{user.email}</p>
+                                <p className="text-sm font-medium truncate">{user?.email ?? 'Local Dev'}</p>
                                 <p className="text-xs text-muted-foreground">Admin</p>
                             </div>
                         )}

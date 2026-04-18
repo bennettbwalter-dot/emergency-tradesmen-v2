@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import confetti from "canvas-confetti";
 import { useAuth } from "@/contexts/AuthContext";
 import { sendEmail } from "@/lib/email";
+import { trackConversion } from "@/lib/analytics";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
 import { getUserSubscription } from "@/lib/subscriptionService";
@@ -109,9 +110,11 @@ export default function PaymentSuccessPage() {
                     text: `Hi ${(user as any)?.user_metadata?.name || user?.email?.split('@')[0] || 'there'},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: ${baseDomain}/user/dashboard`
                 });
 
-                // 3. Track Conversion in PostHog
+                // 3. Track Conversion
+                const isGB = settings.countryCode === 'GB';
+                trackConversion(isGB ? 29 : 29, isGB ? 'GBP' : 'USD');
                 (window as any).posthog?.capture('Plan Purchased', {
-                    region: settings.countryCode === 'GB' ? 'UK' : 'US',
+                    region: isGB ? 'UK' : 'US',
                     trade_category: (user as any)?.trade || 'unknown',
                     plan_tier: 'pro'
                 });

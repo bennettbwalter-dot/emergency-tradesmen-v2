@@ -263,7 +263,7 @@ export default function BlogPage() {
                         {/* Ad Slot */}
                         <div className="container mx-auto px-4 -mt-8 relative z-20 mb-16">
                             <div className="bg-background/50 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-2xl">
-                                <AdSlot slot="AD_SLOT_BLOG_HERO" format="leaderboard" />
+                                <AdSlot slot="7143278448" format="infeed" />
                             </div>
                         </div>
 
@@ -289,7 +289,7 @@ export default function BlogPage() {
                                     if (index > 0 && index % 4 === 0) {
                                         items.push(
                                             <div key={`ad-${index}`} className="lg:col-span-12 flex justify-center my-4">
-                                                <AdSlot slot="AD_SLOT_BLOG_INFEED" format="leaderboard" />
+                                                <AdSlot slot="7143278448" format="infeed" />
                                             </div>
                                         );
                                     }

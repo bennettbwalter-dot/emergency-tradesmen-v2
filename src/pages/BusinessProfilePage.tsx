@@ -799,7 +799,7 @@ export default function BusinessProfilePage() {
                                 </div>
 
                                 {/* Ad Slot: Below map in sidebar */}
-                                <AdSlot slot="AD_SLOT_SIDEBAR" format="sidebar" />
+                                <AdSlot slot="7143278448" format="infeed" />
                             </div>
                         </div>
                     </div>

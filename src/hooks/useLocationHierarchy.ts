@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react';
 import { devLog } from "@/lib/devLog";
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
-// Ideally this should be from a context or a shared lib file, but recreating here or importing if available
-// We'll check if there is a shared supabase client file. usually 'src/lib/supabase.ts' or 'src/utils/supabase.ts'
-// Based on 'apply_migration.js' it seems they use direct instantiation, but let's try to import from lib if possible.
-// For now, I'll instantiate it here with env vars to be safe.
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-export const supabaseClient = createClient(supabaseUrl, supabaseKey);
+import { supabase as supabaseClient } from '@/lib/supabase';
 
 // Import local valid data directly to ensure reliability
 import usData from '@/lib/us_cities.json';

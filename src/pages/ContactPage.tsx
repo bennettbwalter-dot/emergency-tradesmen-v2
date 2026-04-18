@@ -240,7 +240,7 @@ export default function ContactPage() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                        <img src="/et-logo-v2.webp" alt="Logo" loading="lazy" className="w-20 h-20 mb-4 rounded-full border-2 border-gold/50 shadow-xl object-cover" />
+                                        <img src="/et-logo-v3.png" alt="Logo" loading="lazy" className="w-20 h-20 mb-4 object-contain transition-transform hover:scale-110 duration-500" />
                                         <h2 className="text-xl font-semibold mb-2">{getSiteName()}</h2>
                                         <p className="text-white/80 text-sm">
                                             Connecting you with trusted local {getSiteName().split(' ')[1].toLowerCase()} 24/7

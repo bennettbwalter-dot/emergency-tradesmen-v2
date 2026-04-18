@@ -1,19 +1,37 @@
 
+import { useEffect, useCallback, useRef } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { useFeatureFlagEnabled } from "posthog-js/react";
 import { SEO } from "@/components/SEO";
 import { useAuth } from "@/contexts/AuthContext";
 import { getSupportEmail } from "@/lib/siteConfig";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
+import { getUserSubscription } from "@/lib/subscriptionService";
+
+// TypeScript declaration for Stripe's custom web component
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            'stripe-buy-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+                'buy-button-id': string;
+                'publishable-key': string;
+                'client-reference-id'?: string;
+                'customer-email'?: string;
+            }, HTMLElement>;
+        }
+    }
+}
 
 export default function PricingPage() {
     const { settings } = useLocalization();
     const { user } = useAuth();
+    const navigate = useNavigate();
     const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
     const isUS = settings.countryCode === 'US';
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
@@ -21,6 +39,44 @@ export default function PricingPage() {
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const countryPrefix = (isUS && !isUSDomain) ? '/us' : '';
     const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+
+    // When user returns to this tab after completing Stripe payment, check if they now have an active subscription
+    // and automatically redirect them to the profile editor
+    const checkPostPaymentRedirect = useCallback(async () => {
+        if (!user) return;
+        try {
+            const sub = await getUserSubscription();
+            if (sub && sub.status === 'active' && sub.plan !== 'free') {
+                navigate('/premium-profile');
+            }
+        } catch { /* ignore — user hasn't paid yet */ }
+    }, [user, navigate]);
+
+    useEffect(() => {
+        // Check on tab re-focus (user may have completed payment in Stripe tab)
+        const handleVisibility = () => {
+            if (document.visibilityState === 'visible') {
+                checkPostPaymentRedirect();
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibility);
+        return () => document.removeEventListener('visibilitychange', handleVisibility);
+    }, [checkPostPaymentRedirect]);
+
+    // Load Stripe Buy Button script once
+    const stripeScriptLoaded = useRef(false);
+    useEffect(() => {
+        if (stripeScriptLoaded.current) return;
+        if (document.querySelector('script[src*="buy-button.js"]')) {
+            stripeScriptLoaded.current = true;
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://js.stripe.com/v3/buy-button.js';
+        script.async = true;
+        document.head.appendChild(script);
+        stripeScriptLoaded.current = true;
+    }, []);
 
     const breadcrumbSchema = {
         "@context": "https://schema.org",
@@ -36,22 +92,22 @@ export default function PricingPage() {
         ? {
               monthly: import.meta.env.VITE_STRIPE_US_PRO_MONTHLY_LINK || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
               yearly: import.meta.env.VITE_STRIPE_US_PRO_YEARLY_LINK || 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
+              enterprise: import.meta.env.VITE_STRIPE_US_ENTERPRISE_LINK || 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
           }
         : {
               monthly: 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
               yearly: 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
+              enterprise: 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
           };
 
     const handleCheckout = (url: string) => {
         if (!user) {
-            // Redirect to login first, then we should ideally come back here.
-            // For now, simple redirect to auth.
+            sessionStorage.setItem('post_auth_redirect', '/pricing');
             window.location.href = `/auth?redirect=/pricing`;
             return;
         }
 
-        // Append user email or ID to Stripe link if possible (Stripe Payment Links support prefilling)
-        // prefilled_email is a common Stripe query param
+        // Build Stripe checkout URL with user identification
         const stripeUrl = new URL(url);
         if (user.email) {
             stripeUrl.searchParams.set('prefilled_email', user.email);
@@ -59,7 +115,10 @@ export default function PricingPage() {
         // client_reference_id is used by webhooks to identify the user
         stripeUrl.searchParams.set('client_reference_id', user.id);
 
-        window.open(stripeUrl.toString(), '_blank');
+        // Navigate in the same tab so Stripe's after_completion redirect works.
+        // The Stripe Payment Link should be configured with:
+        //   after_completion → redirect → https://yourdomain.com/payment/success
+        window.location.href = stripeUrl.toString();
     };
 
     const handleContactUs = () => {
@@ -133,9 +192,13 @@ export default function PricingPage() {
                                     <span className="text-muted-foreground">Receive reviews</span>
                                 </li>
                             </ul>
-                            <Button variant="outline" className="w-full" disabled>
-                                Current Plan
-                            </Button>
+                            {user ? (
+                                <Button variant="outline" className="w-full" disabled>Current Plan</Button>
+                            ) : (
+                                <Button variant="outline" className="w-full" asChild>
+                                    <Link to="/register">Get Started Free</Link>
+                                </Button>
+                            )}
                         </div>
 
                         {/* Monthly Pro */}
@@ -162,9 +225,12 @@ export default function PricingPage() {
                                     <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><Star className="w-4 h-4 text-gold" /></div>
                                     <span className="text-foreground font-medium">Enhanced Profile</span>
                                 </li>
-                                <li className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center"><Check className="w-4 h-4 text-gold" /></div>
-                                    <span className="text-foreground font-medium">Lead Notifications</span>
+                                <li className="flex items-start gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5"><Check className="w-4 h-4 text-gold" /></div>
+                                    <div>
+                                        <span className="text-foreground font-medium">Lead Notifications</span>
+                                        <p className="text-xs text-muted-foreground mt-0.5">SMS + email the moment someone searches your trade in your area</p>
+                                    </div>
                                 </li>
                             </ul>
                             <Button
@@ -174,6 +240,7 @@ export default function PricingPage() {
                             >
                                 Get Pro Monthly
                             </Button>
+                            <p className="text-xs text-center text-muted-foreground mt-3">Cancel anytime. No lock-in.</p>
                         </div>
 
                         {/* Yearly Pro */}
@@ -201,9 +268,12 @@ export default function PricingPage() {
                                     <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><Star className="w-4 h-4 text-emerald-500" /></div>
                                     <span className="text-foreground font-medium">Enhanced Profile</span>
                                 </li>
-                                <li className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center"><Check className="w-4 h-4 text-emerald-500" /></div>
-                                    <span className="text-foreground font-medium">Lead Notifications</span>
+                                <li className="flex items-start gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5"><Check className="w-4 h-4 text-emerald-500" /></div>
+                                    <div>
+                                        <span className="text-foreground font-medium">Lead Notifications</span>
+                                        <p className="text-xs text-muted-foreground mt-0.5">SMS + email the moment someone searches your trade in your area</p>
+                                    </div>
                                 </li>
                             </ul>
                             <Button
@@ -212,10 +282,49 @@ export default function PricingPage() {
                             >
                                 Get Pro Yearly
                             </Button>
+                            <p className="text-xs text-center text-muted-foreground mt-3">One payment. Full year of leads.</p>
                         </div>
                     </div>
 
-                    <div className="text-center mt-12 text-muted-foreground">
+                    {/* Agency / Multi-location Tier */}
+                    <div className="mt-12 max-w-6xl mx-auto bg-card/60 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group hover:border-purple-500/50 transition-all duration-500 shadow-xl shadow-purple-500/5">
+                        {/* Decorative background glow */}
+                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl group-hover:bg-purple-600/20 transition-all duration-700" />
+                        
+                        <div className="flex items-center gap-6 relative z-10">
+                            <div className="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center shrink-0 border border-purple-500/20">
+                                <TrendingUp className="w-8 h-8 text-purple-500" />
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <h3 className="text-2xl font-bold text-foreground font-display tracking-tight">Agency / Multi-Location</h3>
+                                    <span className="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Enterprise</span>
+                                </div>
+                                <p className="text-muted-foreground text-base max-w-lg leading-relaxed">
+                                    Managing multiple vans, branches, or client listings? Get 5 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
+                                </p>
+                                <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-muted-foreground">
+                                    <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> 5 Pro listings included</li>
+                                    <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> Dedicated account manager</li>
+                                    <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> Custom reporting</li>
+                                    <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> Priority support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="shrink-0 flex flex-col items-center justify-center relative z-10 min-w-[280px]">
+                            {/* Price is now handled by the Stripe Buy Button to avoid duplication */}
+                            <div className="w-full">
+                                <stripe-buy-button
+                                    buy-button-id="buy_btn_1TNg3JHKzUFX5MS55gtYpCCN"
+                                    publishable-key="pk_live_51SffwUHKzUFX5MS5SEAUYpbP3kxnk2RY7HSZPfjCU7UpIf1h3ADqESnPndZDyZb5eUCyxDGDo1khh5SNKMDvE7SZ00EnIeSPB6"
+                                    {...(user?.email ? { 'customer-email': user.email } : {})}
+                                    {...(user?.id ? { 'client-reference-id': user.id } : {})}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="text-center mt-8 text-muted-foreground">
                         <p>Secure payment processing via Stripe. Get listed and start receiving leads today.</p>
                     </div>
 
@@ -236,35 +345,28 @@ export default function PricingPage() {
                             </div>
                         </div>
 
-                        {/* Testimonial Cards */}
-                        <h3 className="font-display text-2xl md:text-3xl text-foreground text-center mb-8">What {isUS ? 'Contractors' : 'Tradesmen'} Say</h3>
-                        <div className="grid sm:grid-cols-3 gap-6">
-                            <div className="bg-card border border-border rounded-xl p-6">
-                                <div className="flex items-center gap-1 mb-3">
-                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                        {/* Early Adopter CTA */}
+                        <div className="bg-card border border-gold/20 rounded-2xl p-8 text-center">
+                            <Crown className="w-10 h-10 text-gold mx-auto mb-4" />
+                            <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3">
+                                Be Among Our First Pro Members
+                            </h3>
+                            <p className="text-muted-foreground max-w-lg mx-auto mb-6 leading-relaxed">
+                                We're building the go-to emergency {isUS ? 'contractor' : 'tradesman'} network for {isUS ? 'the US' : 'the UK'}. Early Pro members get locked-in pricing and front-of-queue placement as the network grows.
+                            </p>
+                            <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto text-center">
+                                <div>
+                                    <div className="text-xl font-bold text-gold">1st</div>
+                                    <div className="text-xs text-muted-foreground mt-1">In your area</div>
                                 </div>
-                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                                    "Since going Pro, I've had a steady stream of emergency call-outs. The priority ranking really makes a difference — customers find me first."
-                                </p>
-                                <div className="text-xs text-foreground font-semibold">— James T., {isUS ? 'Licensed Plumber' : 'Emergency Plumber'}</div>
-                            </div>
-                            <div className="bg-card border border-border rounded-xl p-6">
-                                <div className="flex items-center gap-1 mb-3">
-                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                                <div>
+                                    <div className="text-xl font-bold text-gold">24/7</div>
+                                    <div className="text-xs text-muted-foreground mt-1">Lead exposure</div>
                                 </div>
-                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                                    "Best value for money compared to other lead gen services. I get direct calls from people who actually need help, not tyre-kickers."
-                                </p>
-                                <div className="text-xs text-foreground font-semibold">— Sarah M., {isUS ? 'Electrician' : 'NICEIC Electrician'}</div>
-                            </div>
-                            <div className="bg-card border border-border rounded-xl p-6">
-                                <div className="flex items-center gap-1 mb-3">
-                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                                <div>
+                                    <div className="text-xl font-bold text-gold">Direct</div>
+                                    <div className="text-xs text-muted-foreground mt-1">Customer calls</div>
                                 </div>
-                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                                    "The free listing got me started, but upgrading to Pro tripled my leads. The featured badge builds instant trust with customers."
-                                </p>
-                                <div className="text-xs text-foreground font-semibold">— Mike R., {isUS ? 'HVAC Technician' : 'Gas Safe Engineer'}</div>
                             </div>
                         </div>
                     </div>

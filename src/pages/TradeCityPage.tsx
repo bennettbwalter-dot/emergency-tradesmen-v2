@@ -37,7 +37,6 @@ import { useSimpleTheme } from "@/components/simple-theme";
 import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
-import { FloatingQuoteButton } from "@/components/FloatingQuoteButton";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
 import { Zap, ArrowRight, Star } from "lucide-react";
 import {
@@ -354,22 +353,7 @@ export default function TradeCityPage() {
     setCurrentPage(1);
   }, [filters, city, tradePath]);
 
-  // REDIRECT GUARD: If no businesses found after loading, redirect to fallback
-  useEffect(() => {
-    if (!isLoading && hasLoadedRef.current && businesses.length === 0) {
-      const tradeSlug = tradeInfo.slug;
-
-      if (actualCountry === 'US' && effectiveState) {
-        // Redirect to state page
-        const statePath = `/us/emergency-${tradeSlug}/${effectiveState.toLowerCase()}`;
-        // Using window.location instead of Navigate for a cleaner "hard" redirect on empty pages
-        window.location.href = statePath;
-      } else {
-        // Redirect to locations for UK or no-state US
-        window.location.href = '/locations';
-      }
-    }
-  }, [isLoading, businesses.length, hasLoadedRef.current, actualCountry, effectiveState, tradeInfo.slug]);
+  // No redirect on empty results — render in-place so the URL is preserved for SEO
 
   // Early returns must happen AFTER hooks
   const validatedTradePath = tradeInfo.slug;
@@ -426,7 +410,6 @@ export default function TradeCityPage() {
     name: `Emergency ${tradeDisplayName} ${cityName}`,
     description: `24/7 emergency ${tradeDisplayName.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
     image: heroImage,
-    telephone: countryCode?.toUpperCase() === 'US' ? "+1 323-555-0123" : "+44 20 7946 0000",
     url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
     "priceRange": actualCountry === 'US' ? "$75 - $150" : "£75 - £150",
     "address": {
@@ -719,8 +702,8 @@ export default function TradeCityPage() {
           {pageData?.localExpertise && (
             <div className="mb-12 p-6 bg-gold/5 border border-gold/20 rounded-xl animate-fade-up">
               <div className="flex items-start gap-4">
-                <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden shadow-md">
-                  <img src="/et-logo-v2.webp" alt="Emergency Tradesmen" loading="lazy" className="w-full h-full object-cover" />
+                <div className="w-20 h-20 flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 duration-500">
+                  <img src="/et-logo-v3.png" alt="Emergency Tradesmen" loading="lazy" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
@@ -793,7 +776,7 @@ export default function TradeCityPage() {
 
         {/* Ad Slot 1: Between Services and Listings */}
         <div className="container-wide py-4">
-          <AdSlot slot="AD_SLOT_1" format="leaderboard" />
+          <AdSlot slot="7143278448" format="infeed" />
         </div>
 
         {/* Affiliate Ad Section */}
@@ -851,15 +834,28 @@ export default function TradeCityPage() {
             <>
               <>
                 {businesses.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center">
+                  <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center px-6">
                     <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-4">
                       <Clock className="w-8 h-8 text-gold" />
                     </div>
-                    <h3 className="text-2xl font-display font-semibold mb-2">Listings coming soon</h3>
-                    <p className="text-muted-foreground max-w-md mx-auto">
-                      We're currently expanding our network of {tradeInfo.name.toLowerCase()} experts in {cityName}.
-                      Try viewing our <Link to="/locations" className="text-primary hover:underline">popular locations</Link> or call our national support line.
+                    <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
+                    <p className="text-muted-foreground max-w-md mx-auto mb-6">
+                      We're expanding our network of {tradeInfo.name.toLowerCase()} experts in this area. Be the first verified pro listed here and get all the local calls.
                     </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link
+                        to="/pricing"
+                        className="inline-flex items-center justify-center px-6 py-3 bg-gold hover:bg-gold/90 text-black font-bold rounded-xl text-sm transition-colors"
+                      >
+                        List Your Business Here →
+                      </Link>
+                      <Link
+                        to="/locations"
+                        className="inline-flex items-center justify-center px-6 py-3 border border-border hover:border-primary text-muted-foreground hover:text-primary rounded-xl text-sm transition-colors"
+                      >
+                        Browse Other Locations
+                      </Link>
+                    </div>
                   </div>
                 ) : (
                   <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
@@ -1008,7 +1004,7 @@ export default function TradeCityPage() {
 
         {/* Ad Slot 2: Between Reviews and FAQ */}
         <div className="container-wide py-4">
-          <AdSlot slot="AD_SLOT_2" format="rectangle" />
+          <AdSlot slot="7143278448" format="infeed" />
         </div>
 
         <section className="container-wide py-16">
@@ -1111,12 +1107,6 @@ export default function TradeCityPage() {
         trade={tradeInfo.name}
         city={cityName}
         countryCode={actualCountry}
-      />
-
-      {/* Floating Quote Button for Non-Emergency Leads */}
-      <FloatingQuoteButton
-        tradeName={tradeInfo.name}
-        city={cityName}
       />
 
       <WriteReviewModal

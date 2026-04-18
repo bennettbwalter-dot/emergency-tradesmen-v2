@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown } from "lucide-react";
+import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown, ShieldCheck, Globe, CheckCircle } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
@@ -22,6 +22,7 @@ import { SEO } from "@/components/SEO";
 export default function UserDashboard() {
     const { user, isAuthenticated, isLoading, updateUser } = useAuth();
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const defaultTab = searchParams.get("tab") || "profile";
     const { toast } = useToast();
 
@@ -214,14 +215,13 @@ export default function UserDashboard() {
                                 </div>
                             )}
 
-                            <Tabs defaultValue={defaultTab} className="w-full">
-                                <TabsList className="grid w-full grid-cols-6 mb-8">
-                                    <TabsTrigger value="profile">Profile</TabsTrigger>
-
-                                    <TabsTrigger value="messages">Messages</TabsTrigger>
-                                    <TabsTrigger value="favorites">Favorites</TabsTrigger>
-                                    <TabsTrigger value="history">History</TabsTrigger>
-                                    <TabsTrigger value="settings">Settings</TabsTrigger>
+                            <Tabs value={defaultTab} onValueChange={(tab) => navigate(`?tab=${tab}`, { replace: true })} className="w-full">
+                                <TabsList className="grid w-full grid-cols-5 mb-8">
+                                    <TabsTrigger value="profile"><User className="w-4 h-4 mr-2" />Profile</TabsTrigger>
+                                    <TabsTrigger value="location"><MapPin className="w-4 h-4 mr-2" />Location</TabsTrigger>
+                                    <TabsTrigger value="vetting"><ShieldCheck className="w-4 h-4 mr-2" />Vetting</TabsTrigger>
+                                    <TabsTrigger value="favorites"><Heart className="w-4 h-4 mr-2" />Favorites</TabsTrigger>
+                                    <TabsTrigger value="settings"><Settings className="w-4 h-4 mr-2" />Settings</TabsTrigger>
                                 </TabsList>
 
                                 <TabsContent value="profile" className="space-y-6 animate-fade-up">
@@ -230,16 +230,16 @@ export default function UserDashboard() {
 
 
 
-                                <TabsContent value="messages" className="animate-fade-up">
-                                    <ChatSystem />
+                                <TabsContent value="location" className="animate-fade-up">
+                                    <LocationTab user={user} business={businessProfile} />
+                                </TabsContent>
+                                
+                                <TabsContent value="vetting" className="animate-fade-up">
+                                    <VettingTab />
                                 </TabsContent>
 
                                 <TabsContent value="favorites" className="animate-fade-up">
                                     <FavoritesTab />
-                                </TabsContent>
-
-                                <TabsContent value="history" className="animate-fade-up">
-                                    <HistoryTab />
                                 </TabsContent>
 
                                 <TabsContent value="settings" className="animate-fade-up">
@@ -393,54 +393,89 @@ function FavoritesTab() {
     );
 }
 
-function HistoryTab() {
-    const history = getQuoteHistory();
-
-    if (history.length === 0) {
-        return (
-            <div className="p-12 text-center text-muted-foreground bg-card rounded-lg border border-border/50">
-                <History className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                <h3 className="text-lg font-medium mb-2">No quote history</h3>
-                <p>You haven't requested any quotes yet.</p>
-            </div>
-        );
-    }
-
+function LocationTab({ user, business }: { user: UserType; business: any }) {
     return (
-        <div className="space-y-4">
-            {history.map((item) => (
-                <Card key={item.id}>
-                    <div className="p-6">
-                        <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                            <div>
-                                <div className="flex items-center gap-2 mb-2">
-                                    <Badge className={`
-                    ${item.status === 'pending' ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20' : ''}
-                    ${item.status === 'quoted' ? 'bg-blue-500/10 text-blue-600 border-blue-500/20' : ''}
-                    ${item.status === 'accepted' ? 'bg-green-500/10 text-green-600 border-green-500/20' : ''}
-                    hover:bg-transparent
-                  `}>
-                                        {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
-                                    </Badge>
-                                    <span className="text-sm text-muted-foreground">
-                                        Requested on {new Date(item.createdAt).toLocaleDateString()}
-                                    </span>
-                                </div>
-                                <h3 className="text-lg font-medium">{item.businessName}</h3>
-                                <p className="text-sm text-muted-foreground capitalize">{item.tradeName} • {item.urgency} Urgency</p>
-                            </div>
-                            <Button variant="outline" size="sm">
-                                View Details
-                            </Button>
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-gold" />
+                    Service Location
+                </CardTitle>
+                <CardDescription>Manage where you provide your services</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div className="p-4 bg-secondary/20 rounded-xl border border-border/50">
+                    <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
+                            <Globe className="w-6 h-6 text-gold" />
                         </div>
-                        <div className="p-4 bg-secondary/20 rounded-lg text-sm">
-                            <p className="font-medium mb-1">Your Request:</p>
-                            <p className="text-muted-foreground line-clamp-2">"{item.description}"</p>
+                        <div>
+                            <p className="text-sm text-muted-foreground">Primary Service Area</p>
+                            <p className="text-lg font-bold">{user.postcode || "Not Set"}</p>
                         </div>
                     </div>
-                </Card>
-            ))}
-        </div>
+                    {business ? (
+                        <div className="pt-4 border-t border-border/50">
+                            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2 font-bold">Business Coverage</p>
+                            <p className="text-sm">Your business <strong>{business.name}</strong> is currently listed for emergency services in this region.</p>
+                            <Button variant="link" className="p-0 h-auto text-gold mt-2" onClick={() => window.location.href = '/premium-profile'}>
+                                Edit Service Area in Profile Editor →
+                            </Button>
+                        </div>
+                    ) : (
+                        <p className="text-sm text-muted-foreground mt-2 italic">Register your business to set up a specific coverage radius.</p>
+                    )}
+                </div>
+            </CardContent>
+        </Card>
+    );
+}
+
+function VettingTab() {
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                    Vetting & Verification
+                </CardTitle>
+                <CardDescription>Your current standing and verification status</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-4">
+                    <div className="flex items-start gap-4 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5">
+                        <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 shrink-0" />
+                        <div>
+                            <p className="font-bold text-foreground">Account Verified</p>
+                            <p className="text-sm text-muted-foreground">Your identity has been confirmed and you're eligible to receive leads.</p>
+                        </div>
+                    </div>
+                    
+                    <div className="pt-4">
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">Standard Requirements</h4>
+                        <ul className="space-y-3">
+                            {[
+                                "Identity Verification (Govt. ID)",
+                                "Public Liability Insurance Proof",
+                                "Trade Certification Audit",
+                                "Background Screening Completed"
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-3 text-sm">
+                                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                                        <CheckCircle className="w-3 h-3 text-emerald-500" />
+                                    </div>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    
+                    <Button variant="outline" className="w-full mt-4" onClick={() => window.location.href = '/vetting-process'}>
+                        View Full Vetting Policy
+                    </Button>
+                </div>
+            </CardContent>
+        </Card>
     );
 }
 

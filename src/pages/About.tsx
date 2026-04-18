@@ -28,7 +28,7 @@ export default function About() {
         "name": siteName,
         "alternateName": isUS ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
         "url": siteUrl,
-        "logo": `${siteUrl}/et-logo-v2.webp`,
+        "logo": `${siteUrl}/et-logo-v3.png`,
         "description": `The largest network of vetted emergency ${tradeTerm.toLowerCase()} in the ${regionName}.`,
         "areaServed": {
             "@type": "Country",
@@ -79,8 +79,8 @@ export default function About() {
                                     We rely on local experts. We connect homeowners with verified, fully insured <strong>{tradeTerm.toLowerCase()}</strong> in minutes, not days.
                                     When disaster strikes, you need a local <strong>{termSingular.toLowerCase()}</strong> you can trust.
                                 </p>
-                                <div className="flex justify-center mb-6">
-                                    <img src="/et-logo-new.webp" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 rounded-full object-cover border-2 border-gold/50" />
+                                <div className="flex justify-center mb-6 transition-transform hover:scale-110 duration-500">
+                                    <img src="/et-logo-v3.png" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 object-contain" />
                                 </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>

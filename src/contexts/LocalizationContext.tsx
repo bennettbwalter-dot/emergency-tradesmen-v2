@@ -155,16 +155,14 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     }, [location.pathname, navigate, hasAttemptedIPDetection]);
 
     // 2. Real-time Location Tracking (Navigator API)
-    const resolveCoordsToCity = useCallback((lat: number, lng: number) => {
+    const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
         try {
             const nearest = findNearestCity(lat, lng, countryCode);
             if (nearest) {
                 setDetectedCity(nearest.city);
-                
+
                 // If US, also try to resolve state
                 if (countryCode === 'US') {
-                    // Import cityToState dynamically or use a ref if circular dependency is an issue
-                    // For now we'll assume it's available or we can use a simpler lookup
                     import('@/lib/trades').then(({ cityToState }) => {
                         const stateCode = cityToState[nearest.city];
                         if (stateCode) {
@@ -177,6 +175,32 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                 }
 
                 devLog(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
+            } else {
+                // No city in database — fall back to Nominatim reverse geocoding (free, no key required)
+                try {
+                    const res = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+                        { headers: { 'Accept-Language': 'en' } }
+                    );
+                    if (res.ok) {
+                        const data = await res.json();
+                        const city =
+                            data.address?.city ||
+                            data.address?.town ||
+                            data.address?.village ||
+                            data.address?.county ||
+                            null;
+                        if (city) {
+                            setDetectedCity(city);
+                            devLog(`Nominatim resolved city: ${city}`);
+                        }
+                        if (countryCode === 'US' && data.address?.state) {
+                            setDetectedState(data.address.state);
+                        }
+                    }
+                } catch (nominatimErr) {
+                    console.warn("Nominatim geocode failed:", nominatimErr);
+                }
             }
         } catch (e) {
             console.warn("Failed to resolve city from coords", e);

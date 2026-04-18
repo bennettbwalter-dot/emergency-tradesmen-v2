@@ -1,5 +1,6 @@
 import { Business, calculateTrustScore } from "@/lib/businesses";
 import { ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { CardContainer } from "./business-card/CardContainer";
@@ -82,6 +83,17 @@ export function BusinessCard({ business, rank, backgroundImage = "/images/ui/par
           </span>
         </div>
       </div>
+      {/* Claim listing */}
+      {!isPaid && (
+        <div className="flex justify-center pb-1 relative z-20">
+          <Link
+            to={`/business/claim/${business.id}`}
+            className="text-[9px] text-[#2a1b0a]/40 hover:text-[#2a1b0a]/70 font-mono underline underline-offset-2 transition-colors"
+          >
+            Is this your business? Claim it free →
+          </Link>
+        </div>
+      )}
     </CardContainer>
   );
 

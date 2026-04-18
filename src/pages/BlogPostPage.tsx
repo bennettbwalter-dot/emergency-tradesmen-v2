@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { sanitizeHtml } from "@/lib/sanitize";
 import { useParams, Link } from "react-router-dom";
 import { format, isValid } from "date-fns";
+import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { AdSlot } from "@/components/AdSlot";
@@ -818,6 +819,12 @@ export default function BlogPostPage() {
         canonical={`/blog/${post.slug}`}
         ogType="article" ogImage={absoluteImage} jsonLd={jsonLdSchemas}
       />
+      <Helmet>
+        <meta property="article:published_time" content={post.published_at || post.created_at} />
+        {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
+        <meta property="article:author" content={isUS ? "Emergency Contractors" : "Emergency Tradesmen"} />
+        <meta property="article:section" content="Home Emergency Advice" />
+      </Helmet>
 
       {/* ── NAV ─────────────────────────────────────────────────────── */}
       <nav className={`sticky top-0 z-[100] backdrop-blur-xl border-b h-16 flex items-center shadow-sm transition-all ${isWhiteMode ? 'bg-white/90 border-neutral-200' : 'bg-black/80 border-white/10'}`}>
@@ -937,7 +944,7 @@ export default function BlogPostPage() {
 
               {/* Mid-article AdSense unit */}
               <div className="my-8 md:my-12">
-                <AdSlot slot="AD_SLOT_BLOG_MID_CONTENT" format="leaderboard" />
+                <AdSlot slot="7143278448" format="infeed" />
               </div>
 
               {secondHalf && (
@@ -951,6 +958,24 @@ export default function BlogPostPage() {
             </>
           );
         })()}
+
+        {/* ── FIND A PRO CTA ────────────────────────────────────────── */}
+        <div className={`my-10 rounded-2xl border p-6 flex flex-col sm:flex-row items-center gap-4 ${isWhiteMode ? 'bg-orange-50 border-orange-200' : 'bg-orange-500/10 border-orange-500/30'}`}>
+          <div className="flex-1">
+            <p className={`font-bold text-lg mb-1 ${isWhiteMode ? 'text-neutral-800' : 'text-white'}`}>
+              Need a professional right now?
+            </p>
+            <p className={`text-sm ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}`}>
+              Find a verified, 24/7 emergency {isUS ? 'contractor' : 'tradesman'} near you — fast response guaranteed.
+            </p>
+          </div>
+          <Link
+            to={isUS ? "/emergency-plumber" : "/emergency-plumber"}
+            className="shrink-0 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors whitespace-nowrap"
+          >
+            Find a Pro Near You →
+          </Link>
+        </div>
 
         {/* ── AMAZON PRODUCT SECTION ────────────────────────────────── */}
         {(() => {
@@ -1116,7 +1141,7 @@ export default function BlogPostPage() {
 
         {/* 2. Ad Slot */}
         <div className="w-full flex items-center justify-center rounded-xl overflow-hidden">
-          <AdSlot slot="AD_SLOT_BLOG_SIDEBAR" format="vertical" />
+          <AdSlot slot="7143278448" format="infeed" />
         </div>
 
         {/* 3. Related Posts */}

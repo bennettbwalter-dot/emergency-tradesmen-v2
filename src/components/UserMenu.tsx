@@ -9,7 +9,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { User, LogOut, Heart, History, Settings, CalendarDays, MessageSquare, LogIn, UserPlus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { User, LogOut, Heart, History, Settings, CalendarDays, MessageSquare, LogIn, UserPlus, MapPin, ShieldCheck } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
 import { getTotalUnreadCount } from "@/lib/chat";
@@ -92,42 +93,35 @@ export function UserMenu({ orientation = "horizontal" }: { orientation?: "horizo
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=profile">
+                    <Link to="/user/dashboard?tab=profile">
                         <User className="mr-2 h-4 w-4" />
                         <span>Profile</span>
-                    </a>
+                    </Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=messages" className="flex items-center justify-between w-full">
-                        <span className="flex items-center">
-                            <MessageSquare className="mr-2 h-4 w-4" />
-                            <span>Messages</span>
-                        </span>
-                        {unreadCount > 0 && (
-                            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                                {unreadCount}
-                            </span>
-                        )}
-                    </a>
+                    <Link to="/user/dashboard?tab=location">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        <span>Location</span>
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=favorites">
+                    <Link to="/user/dashboard?tab=favorites">
                         <Heart className="mr-2 h-4 w-4" />
                         <span>Favorites</span>
-                    </a>
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=history">
-                        <History className="mr-2 h-4 w-4" />
-                        <span>Quote History</span>
-                    </a>
+                    <Link to="/user/dashboard?tab=vetting">
+                        <ShieldCheck className="mr-2 h-4 w-4" />
+                        <span>Vetting Process</span>
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer" asChild>
-                    <a href="/user/dashboard?tab=settings">
+                    <Link to="/user/dashboard?tab=settings">
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
-                    </a>
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" onClick={logout}>

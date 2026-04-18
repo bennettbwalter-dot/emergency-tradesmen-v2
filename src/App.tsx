@@ -270,6 +270,11 @@ const AppContent = () => {
               </Suspense>
             </>
           )}
+          {import.meta.env.DEV && (
+            <a href="/admin" className="fixed bottom-20 right-4 z-[9999] bg-[#D4AF37] text-black px-3 py-2 rounded-lg font-bold text-xs shadow-lg no-underline">
+              Admin →
+            </a>
+          )}
         </LocalizationProvider>
       </BrowserRouter>
     </TooltipProvider>

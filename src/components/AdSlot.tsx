@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface AdSlotProps {
-    /** Your AdSense ad slot ID (e.g. "1234567890") */
     slot: string;
-    /** Ad format determines the container dimensions */
-    format: 'leaderboard' | 'rectangle' | 'sidebar' | 'vertical';
-    /** Optional additional className */
+    format: 'leaderboard' | 'rectangle' | 'sidebar' | 'vertical' | 'infeed';
     className?: string;
-    /** Optional: override the default client ID from env */
     client?: string;
 }
+
+const INFEED_LAYOUT_KEY = "-fb+5w+4e-db+86";
 
 // Fixed dimensions per format to prevent CLS
 const FORMAT_CONFIG = {
@@ -94,46 +92,54 @@ export function AdSlot({ slot, format, className = '', client }: AdSlotProps) {
         }
     }, [isVisible, adsEnabled]);
 
+    if (!adsEnabled) return null;
+
+    if (format === 'infeed') {
+        return (
+            <div ref={containerRef} className={`ad-container my-4 w-full ${className}`}>
+                <p className="text-[10px] text-muted-foreground/50 uppercase tracking-[0.2em] font-medium mb-1 select-none text-center">
+                    Advertisement
+                </p>
+                {isVisible && (
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: 'block' }}
+                        data-ad-client={adClient}
+                        data-ad-slot={slot}
+                        data-ad-format="fluid"
+                        data-ad-layout-key={INFEED_LAYOUT_KEY}
+                    />
+                )}
+            </div>
+        );
+    }
+
     const config = FORMAT_CONFIG[format] || FORMAT_CONFIG.rectangle;
     const dims = isMobile ? config.mobile : config.desktop;
-
-    // Don't render anything if ads are disabled
-    if (!adsEnabled) return null;
 
     return (
         <div
             ref={containerRef}
             className={`ad-container flex flex-col items-center justify-center my-6 ${className}`}
-            style={{ minHeight: dims.height + 24, padding: '12px 0' }} // Extra padding for CLS safety
+            style={{ minHeight: dims.height + 24, padding: '12px 0' }}
         >
-            {/* Clear advertisement label — required by AdSense policy */}
             <p className="text-[10px] text-muted-foreground/50 uppercase tracking-[0.2em] font-medium mb-2 select-none">
                 Advertisement
             </p>
-
             <div
                 className="ad-slot bg-secondary/10 border border-border/30 rounded-lg overflow-hidden flex items-center justify-center"
-                style={{
-                    width: '100%',
-                    maxWidth: dims.width,
-                    minHeight: dims.height,
-                }}
+                style={{ width: '100%', maxWidth: dims.width, minHeight: dims.height }}
             >
                 {isVisible ? (
                     <ins
                         className="adsbygoogle"
-                        style={{
-                            display: 'block',
-                            width: dims.width,
-                            height: dims.height,
-                        }}
+                        style={{ display: 'block', width: dims.width, height: dims.height }}
                         data-ad-client={adClient}
                         data-ad-slot={slot}
                         data-ad-format="auto"
                         data-full-width-responsive="true"
                     />
                 ) : (
-                    // Placeholder while not yet visible
                     <div
                         className="flex items-center justify-center text-muted-foreground/20"
                         style={{ width: dims.width, height: dims.height }}

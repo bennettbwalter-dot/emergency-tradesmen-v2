@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { devLog, devWarn } from "@/lib/devLog";
 import { Send, MapPin, Zap, Phone, RotateCcw, Search, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 import { cn } from "@/lib/utils";
@@ -48,6 +49,8 @@ export function EmergencyChatInterface() {
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
+    const [pendingNav, setPendingNav] = useState<string | null>(null);
+    const [callbackPhone, setCallbackPhone] = useState("");
     const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
     const [chatState, setChatState] = useState<ChatState>({
         step: 'INITIAL',
@@ -348,12 +351,11 @@ export function EmergencyChatInterface() {
                 setIsTyping(false);
 
                 if (response.action === 'navigate' && response.target) {
-                    // Navigating away — end voice session
                     isVoiceSessionRef.current = false;
                     const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
                     devLog(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
-                        navigate(response.target!);
+                        setPendingNav(response.target!);
                     }, navDelay);
                 } else if (isVoice) {
                     // Not navigating — auto-restart mic for voice follow-up
@@ -665,6 +667,44 @@ export function EmergencyChatInterface() {
         setIsRequestingLocation(false);
     };
 
+    if (pendingNav) {
+        return (
+            <div className="w-full max-w-4xl mx-auto">
+                <div className="rounded-3xl border border-emerald-500/30 bg-emerald-950/40 backdrop-blur-sm p-8 text-center">
+                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                        <Phone className="w-6 h-6 text-emerald-400" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg mb-1">Want us to confirm a pro for you?</h3>
+                    <p className="text-emerald-300/70 text-sm mb-6">Leave your number and we'll text you when a local expert is confirmed. Optional — skip to browse listings.</p>
+                    <div className="flex gap-2 max-w-sm mx-auto mb-4">
+                        <input
+                            type="tel"
+                            value={callbackPhone}
+                            onChange={e => setCallbackPhone(e.target.value)}
+                            placeholder="Your phone number"
+                            className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-emerald-400"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (callbackPhone.trim()) {
+                                    trackEvent('Chat', 'callback_requested', callbackPhone);
+                                }
+                                navigate(pendingNav);
+                            }}
+                            className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors shrink-0"
+                        >
+                            {callbackPhone.trim() ? 'Submit & Go' : 'Skip →'}
+                        </button>
+                    </div>
+                    <button type="button" onClick={() => navigate(pendingNav)} className="text-xs text-white/30 hover:text-white/60 transition-colors">
+                        No thanks, take me to the listings
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="w-full max-w-4xl mx-auto">
 
@@ -879,17 +919,15 @@ export function EmergencyChatInterface() {
                     </div>
                     <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{locationSelector}</div>
-                            <GreenSVGButton 
-                                index={2} 
+                            <GreenSVGButton
+                                index={2}
                                 onClick={() => {
                                     if (settings.countryCode === 'US') {
-                                        // USA: Green is the "Location" side of the pill (State Select)
                                         const trigger = document.querySelector('[data-tour="tour-state-button"]') as HTMLElement;
-                                        if (trigger) trigger.click();
+                                        if (trigger) { trigger.click(); } else { detectUserLocation(); }
                                     } else {
-                                        // UK: Green is the manual City selection
                                         const trigger = document.querySelector('[data-tour="tour-uk-city-button"]') as HTMLElement;
-                                        if (trigger) trigger.click();
+                                        if (trigger) { trigger.click(); } else { detectUserLocation(); }
                                     }
                                 }}
                                 dataTour={settings.countryCode === 'US' ? 'tour-state-button' : 'tour-location-button'}

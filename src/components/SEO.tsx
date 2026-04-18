@@ -38,7 +38,7 @@ export function SEO({
     jsonLd,
     noIndex = false,
     geo,
-    locale = 'en_GB',
+    locale,
     alternates
 }: SEOProps) {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
@@ -47,6 +47,7 @@ export function SEO({
 
     const SITE_URL = isUSDomain ? SITE_URL_US : SITE_URL_GB;
     const SITE_NAME = isUSDomain ? SITE_NAME_US : SITE_NAME_GB;
+    const effectiveLocale = locale ?? (isUSDomain ? 'en_US' : 'en_GB');
 
     // Prevent triple-pipe titles: only append brand name if not already present
     const titleAlreadyHasBrand = title.includes(SITE_NAME) || title.includes(SITE_NAME_GB) || title.includes(SITE_NAME_US);
@@ -72,7 +73,7 @@ export function SEO({
         "name": SITE_NAME,
         "alternateName": isUSDomain ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
         "url": SITE_URL,
-        "logo": `${SITE_URL}/et-logo-v2.webp`,
+        "logo": `${SITE_URL}/et-logo-v3.png`,
         "description": description || DEFAULT_DESCRIPTION,
         "address": {
             "@type": "PostalAddress",
@@ -118,7 +119,7 @@ export function SEO({
             <meta property="og:description" content={description} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:site_name" content={SITE_NAME} />
-            <meta property="og:locale" content={locale} />
+            <meta property="og:locale" content={effectiveLocale} />
 
             {/* Geo Targeting */}
             {geo && (

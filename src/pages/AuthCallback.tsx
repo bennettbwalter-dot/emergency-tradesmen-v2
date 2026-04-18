@@ -21,12 +21,12 @@ const AuthCallback = () => {
             }
 
             if (session) {
-                // Successful login
-                // Explicitly clear hash from history before navigating
                 if (window.location.hash) {
                     window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
                 }
-                navigate("/user/dashboard", { replace: true });
+                const redirect = sessionStorage.getItem('post_auth_redirect') || '/user/dashboard';
+                sessionStorage.removeItem('post_auth_redirect');
+                navigate(redirect, { replace: true });
             } else {
                 // No session found yet, maybe check hash manualy? 
                 // Or wait for onAuthStateChange (which AuthContext does).
@@ -48,7 +48,9 @@ const AuthCallback = () => {
                 if (window.location.hash) {
                     window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
                 }
-                navigate("/user/dashboard", { replace: true });
+                const redirect = sessionStorage.getItem('post_auth_redirect') || '/user/dashboard';
+                sessionStorage.removeItem('post_auth_redirect');
+                navigate(redirect, { replace: true });
             }
         });
 
