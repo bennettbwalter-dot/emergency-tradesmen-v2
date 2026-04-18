@@ -110,7 +110,7 @@ export default function TradeCityPage() {
     const tradeSegment = pathSegments.find(s => s.startsWith('emergency-') || ['plumber', 'electrician', 'locksmith'].includes(s));
 
     if (tradeSegment) {
-      validTrade = tradeSegment.replace("emergency-", "");
+      validTrade = tradeSegment.replace("emergency-", "").replace("-near-me", "");
     }
   }
 
@@ -199,6 +199,7 @@ export default function TradeCityPage() {
   // Apply title case to city name and ensure it's not just a slug
   const rawCityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
   const cityName = toTitleCase(rawCityName.replace(/-/g, ' '));
+  const cityCoords = cityCoordinates[cityName];
 
   const serviceAreas = pageData?.serviceAreas || [];
   const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';
@@ -432,7 +433,21 @@ export default function TradeCityPage() {
       "@type": "PostalAddress",
       "addressLocality": cityName,
       "addressCountry": countryCode?.toUpperCase() || "GB",
-      ...(postcode ? { "postalCode": postcode } : {})
+      ...(postcode ? { "postalCode": postcode } : {}),
+      ...(effectiveState ? { "addressRegion": effectiveState } : {})
+    },
+    ...(cityCoords ? {
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": cityCoords.lat,
+        "longitude": cityCoords.lng
+      }
+    } : {}),
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -530,7 +545,6 @@ export default function TradeCityPage() {
   const tradeName = tradeDisplayName.toLowerCase(); // FIXED: restored tradeName for downstream usages
   const stateSlug = isUS ? cityToState[cityName]?.toUpperCase() : '';
   const stateCode = stateSlug || '';
-  const cityCoords = cityCoordinates[cityName];
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
 
   // FIXED: Ensure coordinates are resolved correctly for map centering
@@ -689,7 +703,7 @@ export default function TradeCityPage() {
                   className="flex items-center gap-3"
                 >
                   <Phone className="w-5 h-5" />
-                  Contact Us
+                  Find a Pro
                 </Button>
                 <div className="flex items-center gap-3 text-foreground/70 px-6 py-3 border border-border/50 rounded-sm bg-secondary/30 backdrop-blur-sm">
                   <Clock className="w-5 h-5 text-gold" />

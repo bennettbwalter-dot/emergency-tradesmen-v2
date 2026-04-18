@@ -101,28 +101,25 @@ const AppRoutes = () => (
     <Route path="/voice-report" element={<VoiceReporter />} />
 
     {/* Explicit Trade Routes (Highest Priority) */}
-    <Route path="/emergency-plumber" element={<TradeCityPage />} />
-    <Route path="/emergency-plumber/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-electrician" element={<TradeCityPage />} />
-    <Route path="/emergency-electrician/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-locksmith" element={<TradeCityPage />} />
-    <Route path="/emergency-locksmith/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-gas-engineer" element={<TradeCityPage />} />
-    <Route path="/emergency-gas-engineer/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-drain-specialist" element={<TradeCityPage />} />
-    <Route path="/emergency-drain-specialist/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-glazier" element={<TradeCityPage />} />
-    <Route path="/emergency-glazier/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-roofer" element={<TradeCityPage />} />
-    <Route path="/emergency-roofer/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-breakdown" element={<TradeCityPage />} />
-    <Route path="/emergency-breakdown/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-builder" element={<TradeCityPage />} />
-    <Route path="/emergency-builder/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-water-restoration" element={<TradeCityPage />} />
-    <Route path="/emergency-water-restoration/:city" element={<TradeCityPage />} />
-    <Route path="/emergency-hvac" element={<TradeCityPage />} />
-    <Route path="/emergency-hvac/:city" element={<TradeCityPage />} />
+    {[
+      "plumber", "electrician", "locksmith", "gas-engineer", 
+      "drain-specialist", "glazier", "roofer", "breakdown", 
+      "builder", "water-restoration", "hvac"
+    ].map(trade => (
+      <Route key={`trade-${trade}`} path={`/emergency-${trade}`}>
+        <Route index element={<TradeCityPage />} />
+        <Route path=":city" element={<TradeCityPage />} />
+      </Route>
+    ))}
+    
+    {/* Near Me Landing Pages Strategy (P3.7) */}
+    {[
+      "plumber", "electrician", "locksmith", "gas-engineer", 
+      "drain-specialist", "glazier", "roofer", "breakdown", 
+      "builder", "water-restoration", "hvac"
+    ].map(trade => (
+      <Route key={`near-me-${trade}`} path={`/emergency-${trade}-near-me`} element={<TradeCityPage />} />
+    ))}
 
     {/* Core Pages */}
     <Route path="/" element={<Index />} />

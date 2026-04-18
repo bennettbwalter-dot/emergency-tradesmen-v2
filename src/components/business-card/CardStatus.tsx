@@ -33,6 +33,11 @@ export function CardStatus({ business, isParchment }: CardStatusProps) {
                 )}>
                     {isLive ? 'Available' : 'Offline'}
                 </span>
+                {isLive && (
+                    <span className="text-[9px] text-emerald-600/70 font-mono uppercase tracking-wider leading-none translate-y-[1px]">
+                        · &lt;30min
+                    </span>
+                )}
             </div>
         </div>
     );

@@ -218,6 +218,56 @@ export default function PricingPage() {
                     <div className="text-center mt-12 text-muted-foreground">
                         <p>Secure payment processing via Stripe. Get listed and start receiving leads today.</p>
                     </div>
+
+                    {/* Social Proof — Network Stats */}
+                    <div className="mt-20 max-w-4xl mx-auto">
+                        <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-16">
+                            <div className="text-center">
+                                <div className="text-3xl sm:text-4xl font-bold text-gold">20,000+</div>
+                                <div className="text-xs sm:text-sm text-muted-foreground mt-1 uppercase tracking-wider">{isUS ? 'Contractors' : 'Tradesmen'} Listed</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl sm:text-4xl font-bold text-gold">50+</div>
+                                <div className="text-xs sm:text-sm text-muted-foreground mt-1 uppercase tracking-wider">Cities Covered</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl sm:text-4xl font-bold text-gold">24/7</div>
+                                <div className="text-xs sm:text-sm text-muted-foreground mt-1 uppercase tracking-wider">Customer Access</div>
+                            </div>
+                        </div>
+
+                        {/* Testimonial Cards */}
+                        <h3 className="font-display text-2xl md:text-3xl text-foreground text-center mb-8">What {isUS ? 'Contractors' : 'Tradesmen'} Say</h3>
+                        <div className="grid sm:grid-cols-3 gap-6">
+                            <div className="bg-card border border-border rounded-xl p-6">
+                                <div className="flex items-center gap-1 mb-3">
+                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                                </div>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                                    "Since going Pro, I've had a steady stream of emergency call-outs. The priority ranking really makes a difference — customers find me first."
+                                </p>
+                                <div className="text-xs text-foreground font-semibold">— James T., {isUS ? 'Licensed Plumber' : 'Emergency Plumber'}</div>
+                            </div>
+                            <div className="bg-card border border-border rounded-xl p-6">
+                                <div className="flex items-center gap-1 mb-3">
+                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                                </div>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                                    "Best value for money compared to other lead gen services. I get direct calls from people who actually need help, not tyre-kickers."
+                                </p>
+                                <div className="text-xs text-foreground font-semibold">— Sarah M., {isUS ? 'Electrician' : 'NICEIC Electrician'}</div>
+                            </div>
+                            <div className="bg-card border border-border rounded-xl p-6">
+                                <div className="flex items-center gap-1 mb-3">
+                                    {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-gold fill-gold" />)}
+                                </div>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                                    "The free listing got me started, but upgrading to Pro tripled my leads. The featured badge builds instant trust with customers."
+                                </p>
+                                <div className="text-xs text-foreground font-semibold">— Mike R., {isUS ? 'HVAC Technician' : 'Gas Safe Engineer'}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
 

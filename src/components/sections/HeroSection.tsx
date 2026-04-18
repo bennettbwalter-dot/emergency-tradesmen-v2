@@ -9,6 +9,9 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import ColorBends from "@/components/ui/ColorBends";
 import { audioService } from "@/lib/audioService";
+import { cn } from "@/lib/utils";
+
+export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
 export function HeroSection() {
     const { settings, detectedCity, detectedState, detectUserLocation } = useLocalization();
@@ -66,20 +69,25 @@ export function HeroSection() {
                         transition={{ delay: 0.1, duration: 0.5 }}
                         className="mb-6 inline-flex flex-col items-center gap-2"
                     >
-                        <div className="inline-flex items-center gap-2 sm:gap-3 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border-2 animate-border-gold-white bg-white/5 backdrop-blur-sm">
-                            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 animate-pulse-red-green-bg"></span>
+                        <div className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gold/30 bg-white/[0.03] backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)] relative overflow-hidden group transition-all duration-500 hover:border-gold/50">
+                            {/* Subtle scanning light effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
+                            
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
                             </span>
-                            <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider animate-pulse-gold-text">Local {settings.tradeTerm} Available Now</span>
+                            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gold/90 drop-shadow-sm">
+                                Local Professionals Available Now
+                            </span>
                         </div>
                     </motion.div>
 
                     {/* Main headline */}
                     <div className="flex flex-col items-center justify-center mb-6">
-                        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.1]">
-                            LOCAL <span className="text-gold block sm:inline">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
-                            <span className="text-gold block sm:inline"> NEAR {displayCity}</span>
+                        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.05] [text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
+                            L<img src="/et-logo-v3.png" alt="O" className="inline-block h-[0.85em] w-auto align-middle -mt-[0.3em] mx-[0.05em] brightness-125 drop-shadow-lg" />CAL <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
+                            <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70"> NEAR {displayCity}</span>
                         </h1>
                     </div>
 
@@ -93,6 +101,57 @@ export function HeroSection() {
                         Emergency {settings.tradeTerm} {displayState} | Nationwide 24/7 Help
                     </motion.p>
 
+                    {/* Premium Glassmorphism Badges — Social Proof */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                        className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-8 md:mb-12"
+                    >
+                        {/* 20,000+ Verified */}
+                        <motion.div 
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+                            className="group relative"
+                        >
+                            <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-emerald-500/[0.08] backdrop-blur-md border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-500/[0.12]">
+                                <span className="text-emerald-500 font-black text-xs sm:text-sm tracking-tight">20,000+</span>
+                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.1em]">Verified {settings.tradeTerm}</span>
+                                {/* Subtle inner shine */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+                            </div>
+                        </motion.div>
+
+                        {/* 24/7 Response */}
+                        <motion.div 
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            className="group relative"
+                        >
+                            <div className="absolute -inset-1 bg-gold/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gold/[0.08] backdrop-blur-md border border-gold/20 shadow-[0_0_20px_rgba(212,175,55,0.05)] transition-all duration-300 hover:border-gold/40 hover:bg-gold/[0.12]">
+                                <span className="text-gold font-black text-xs sm:text-sm tracking-tight">24/7</span>
+                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">Response</span>
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+                            </div>
+                        </motion.div>
+
+                        {/* Free To Use */}
+                        <motion.div 
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                            className="group relative"
+                        >
+                            <div className="absolute -inset-1 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-blue-500/[0.08] backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 hover:border-blue-500/40 hover:bg-blue-500/[0.12]">
+                                <span className="text-blue-400 font-black text-xs sm:text-sm tracking-tight">Free</span>
+                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">To Use</span>
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
                     {/* "Need Help" Button */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -102,7 +161,7 @@ export function HeroSection() {
                     >
                         <RainbowButton
                             size="lg"
-                            className="hidden md:flex gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3"
+                            className={cn("gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden" : "hidden md:flex")}
                             onClick={(e) => {
                                 e.preventDefault();
                                 window.dispatchEvent(new Event('start-tour'));
@@ -126,9 +185,9 @@ export function HeroSection() {
                                 e.preventDefault();
                                 window.dispatchEvent(new Event('start-tour'));
                             }}
-                            className="md:hidden relative z-40"
+                            className={cn("relative z-40", USE_SVG_BUTTONS_ON_DESKTOP ? "flex" : "md:hidden")}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="256" height="186" fill="none" viewBox="0 0 256 186" className="w-[120px] h-auto cursor-pointer drop-shadow-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="256" height="186" fill="none" viewBox="0 0 256 186" className={cn("h-auto cursor-pointer drop-shadow-2xl transition-all duration-300", USE_SVG_BUTTONS_ON_DESKTOP ? "w-[120px] md:w-[160px]" : "w-[120px]")}>
                               {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
                               <path 
                                 d="m240 95.47v90.53h-223.6v-90.53h223.6z" 

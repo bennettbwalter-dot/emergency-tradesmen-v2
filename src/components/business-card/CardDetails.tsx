@@ -1,8 +1,8 @@
-import { MapPin, Clock, ShieldCheck, Globe, CheckCircle } from "lucide-react";
+import { MapPin, Clock, ShieldCheck, Globe, CheckCircle, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { trackEvent } from "@/lib/analytics";
-import { Business, calculateTrustScore } from "@/lib/businesses";
+import { Business } from "@/lib/businesses";
 import { useSimpleTheme } from "@/components/simple-theme";
 
 interface CardDetailsProps {
@@ -12,8 +12,6 @@ interface CardDetailsProps {
 
 export function CardDetails({ business, isParchment }: CardDetailsProps) {
     const { theme } = useSimpleTheme();
-    const trustScore = calculateTrustScore(business);
-
     // Helper to ensure valid URLs
     const ensureAbsoluteUrl = (url: string) => {
         if (!url) return '';
@@ -23,26 +21,26 @@ export function CardDetails({ business, isParchment }: CardDetailsProps) {
         return url;
     };
 
-    const details = [
+    const details: { icon: any; text: string; href?: string }[] = [
         {
             icon: MapPin,
             text: `${business.address || "Local Service Area"}${business.distance ? ` (${(business.distance * 0.621371).toFixed(1)} miles)` : ''}`
         },
+        ...(business.phone ? [{
+            icon: Phone,
+            text: business.phone,
+            href: `tel:${business.phone}`
+        }] : []),
         {
             icon: Clock,
             text: business.hours || "24/7 Emergency Service"
-        },
-        {
-            icon: ShieldCheck,
-            text: `Verified Local Pro (${trustScore}/5 Trust)`
         },
         {
             icon: Globe,
             text: business.website ? "Visit Website" : "No Website",
             href: business.website ? ensureAbsoluteUrl(business.website) : undefined
         },
-        ...(business.email ? [{ icon: CheckCircle, text: "Verified Email Contact" }] : [])
-    ].slice(0, 4);
+    ].slice(0, 5);
 
     // If we have fewer than 4 items (though unlikely given the defaults), fill up to 4
     while (details.length < 4) {
@@ -59,9 +57,9 @@ export function CardDetails({ business, isParchment }: CardDetailsProps) {
                             key={i}
                             as="a"
                             href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => trackEvent("Business", "Website Click", business.name)}
+                            target={item.icon === Phone ? undefined : "_blank"}
+                            rel={item.icon === Phone ? undefined : "noopener noreferrer"}
+                            onClick={() => trackEvent("Business", item.icon === Phone ? "Phone Click" : "Website Click", business.name)}
                             containerClassName="w-full rounded-none h-10 py-1"
                             className="w-full h-full flex items-center justify-start px-4 group bg-transparent border-b border-dashed border-[#2a1b0a]/20 text-[#2a1b0a]"
                             glowColor="#D4AF37"
@@ -70,6 +68,7 @@ export function CardDetails({ business, isParchment }: CardDetailsProps) {
                                 <item.icon className={cn(
                                     "transition-colors w-4 h-4", 
                                     item.icon === MapPin && "text-red-600",
+                                    item.icon === Phone && "text-emerald-700",
                                     item.icon === Clock && "text-amber-600",
                                     item.icon === ShieldCheck && "text-emerald-600",
                                     item.icon === Globe && "text-blue-600",
@@ -89,6 +88,7 @@ export function CardDetails({ business, isParchment }: CardDetailsProps) {
                             <item.icon className={cn(
                                 "transition-colors w-4 h-4",
                                 item.icon === MapPin && "text-red-600",
+                                item.icon === Phone && "text-emerald-700",
                                 item.icon === Clock && "text-amber-600",
                                 item.icon === ShieldCheck && "text-emerald-600",
                                 item.icon === Globe && "text-blue-600",

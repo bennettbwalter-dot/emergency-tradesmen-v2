@@ -9,7 +9,7 @@ import * as fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, '../.env.us.local') });
 
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
@@ -38,7 +38,7 @@ async function importVerifiedUSData() {
     let totalImported = 0;
 
     for (const item of CITIES_FILES) {
-        const filePath = path.join(__dirname, item.file);
+        const filePath = path.join(__dirname, '../_unused_quarantine/UK_DATA', item.file);
         if (!fs.existsSync(filePath)) {
             console.warn(`⚠️ File not found: ${item.file} (Skipping)`);
             continue;

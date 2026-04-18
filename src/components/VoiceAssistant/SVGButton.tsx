@@ -42,7 +42,7 @@ export const SVGButton = ({
                 damping: 20 
             }}
             whileTap={{ scale: 0.92, transition: { duration: 0.1 } }}
-            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handlePress}
             disabled={disabled}
             data-tour={dataTour}

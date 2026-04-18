@@ -21,6 +21,55 @@
 
   <link rel="icon" type="image/png" href="/favicon.png" />
 
+  <!-- hreflang + canonical (dynamic per domain) -->
+  <script>
+    (function() {
+      var h = window.location.hostname;
+      var path = window.location.pathname;
+      var isUS = h.indexOf('emergencycontractors') !== -1 || (h === 'localhost' && window.location.port === '3001');
+      var ukBase = 'https://emergencytradesmen.net';
+      var usBase = 'https://emergencycontractors.net';
+      var self = isUS ? usBase : ukBase;
+      // Canonical
+      var canon = document.createElement('link');
+      canon.rel = 'canonical';
+      canon.href = self + path;
+      document.head.appendChild(canon);
+      // hreflang - GB
+      var gb = document.createElement('link');
+      gb.rel = 'alternate'; gb.hreflang = 'en-GB'; gb.href = ukBase + path;
+      document.head.appendChild(gb);
+      // hreflang - US
+      var us = document.createElement('link');
+      us.rel = 'alternate'; us.hreflang = 'en-US'; us.href = usBase + path;
+      document.head.appendChild(us);
+      // hreflang - x-default
+      var xd = document.createElement('link');
+      xd.rel = 'alternate'; xd.hreflang = 'x-default'; xd.href = ukBase + path;
+      document.head.appendChild(xd);
+      
+      // Global Organization Schema (NAP Data)
+      var orgSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": isUS ? "Emergency Contractors" : "Emergency Tradesmen",
+        "url": self,
+        "logo": self + "/et-logo-v2.webp",
+        "telephone": isUS ? "+1-888-555-0199" : "+44-20-7946-0000",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": isUS ? "+1-888-555-0199" : "+44-20-7946-0000",
+          "contactType": "customer service",
+          "availableLanguage": ["English"]
+        }
+      };
+      var script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify(orgSchema);
+      document.head.appendChild(script);
+    })();
+  </script>
+
   <!-- Fonts: Cormorant Garamond (Display), Inter (UI), DM Sans (Body - via package) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +84,17 @@
 
   <!-- Fallback title (overridden by react-helmet-async on each page) -->
   <title>Emergency Tradesmen</title>
+  <meta name="description" content="Find trusted local emergency tradesmen and contractors near you. 24/7 verified plumbers, electricians, locksmiths, gas engineers & more. Get connected in minutes." />
   <meta name="author" content="EmergencyTrades" />
+  <script>
+    // Dynamic title based on domain
+    (function() {
+      var h = window.location.hostname;
+      if (h.indexOf('emergencycontractors') !== -1 || (h === 'localhost' && window.location.port === '3001')) {
+        document.title = 'Emergency Contractors';
+      }
+    })();
+  </script>
   <script>
     // Polyfill global for libraries like Azure Speech SDK
     if (typeof global === 'undefined') {
@@ -47,7 +106,8 @@
   <script>
     (function() {
       var hostname = window.location.hostname;
-      if (hostname === 'emergencytradesmen.net' || hostname === 'www.emergencytradesmen.net') {
+      if (hostname === 'emergencytradesmen.net' || hostname === 'www.emergencytradesmen.net' ||
+          hostname === 'emergencycontractors.net' || hostname === 'www.emergencycontractors.net') {
         var script = document.createElement('script');
         script.async = true;
         script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";

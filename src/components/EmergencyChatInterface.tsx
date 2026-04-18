@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { devLog, devWarn } from "@/lib/devLog";
 import { Send, MapPin, Zap, Phone, RotateCcw, Search, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate, useParams } from "react-router-dom";
@@ -694,10 +695,10 @@ export function EmergencyChatInterface() {
                                 <Terminal 
                                     containerRef={chatContainerRef}
                                     onScroll={handleScroll}
-                                    className="w-full max-w-2xl mx-auto shadow-[0_0_30px_rgba(215,160,66,0.15)] border-gold/30 bg-black/80 backdrop-blur-xl ring-1 ring-white/10 overflow-hidden h-[60dvh] md:h-[80dvh]"
+                                    className="w-full max-w-2xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.1)] border-gray-200 bg-white ring-1 ring-black/5 overflow-hidden h-[60dvh] md:h-[80dvh]"
                                     contentClassName="overscroll-contain pb-32"
                                 >
-                                    <AnimatedSpan className="text-emerald-400 mb-6 font-bold tracking-wider text-xs uppercase opacity-80">
+                                    <AnimatedSpan className="text-emerald-600 mb-6 font-bold tracking-wider text-xs uppercase opacity-80">
                                         <span>✓ System initialized</span>
                                     </AnimatedSpan>
 
@@ -707,10 +708,10 @@ export function EmergencyChatInterface() {
 
                                             if (msg.role === 'assistant') {
                                                 return (
-                                                    <div key={msg.id} className="text-muted-foreground/80 flex gap-3 group">
+                                                    <div key={msg.id} className="text-black flex gap-3 group">
                                                         <div className="shrink-0 pt-1">
-                                                            <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center ring-1 ring-gold/30">
-                                                                <Zap className="w-4 h-4 text-gold" />
+                                                            <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center ring-1 ring-amber-200">
+                                                                <Zap className="w-4 h-4 text-amber-600" />
                                                             </div>
                                                         </div>
                                                         <div className="flex-1 min-w-0">
@@ -725,10 +726,10 @@ export function EmergencyChatInterface() {
                                                                     onComplete={() => {
                                                                         if (isAtBottom) scrollToBottom('smooth');
                                                                     }}
-                                                                    className="prose prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-white"
+                                                                    className="prose prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-black prose-strong:font-bold"
                                                                 />
                                                             ) : (
-                                                                <div className="prose prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-white">
+                                                                <div className="prose prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-black prose-strong:font-bold">
                                                                     <ReactMarkdown
                                                                         remarkPlugins={[remarkGfm]}
                                                                         rehypePlugins={[rehypeRaw]}
@@ -747,7 +748,7 @@ export function EmergencyChatInterface() {
                                                     key={msg.id}
                                                     className="flex justify-end"
                                                 >
-                                                    <div className="max-w-[90%] p-2.5 md:p-3 rounded-2xl text-sm md:text-base leading-relaxed bg-white/10 border border-white/5 text-white/90 rounded-tr-sm">
+                                                    <div className="max-w-[90%] p-2.5 md:p-3 rounded-2xl text-sm md:text-base leading-relaxed bg-amber-50 border border-amber-200/50 text-amber-900 rounded-tr-sm font-medium">
                                                         {msg.content}
                                                     </div>
                                                 </div>
@@ -756,8 +757,8 @@ export function EmergencyChatInterface() {
                                     </div>
 
                                     {chatState.history[chatState.history.length - 1].role === 'assistant' && (
-                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-gold/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2" role="status" aria-live="polite">
-                                            <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
+                                        <AnimatedSpan delay={chatState.history[chatState.history.length - 1].content.length * 15 + 800} className="text-amber-800/80 mt-8 text-xs uppercase tracking-widest flex items-center gap-2" role="status" aria-live="polite">
+                                            <span className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-pulse" />
                                             <span>Waiting for user input...</span>
                                         </AnimatedSpan>
                                     )}
@@ -828,7 +829,7 @@ export function EmergencyChatInterface() {
                         </div>
 
                         {/* CONTROLS ROW - Always pinned at bottom, never moves */}
-                        <div className="w-full flex-shrink-0 bg-transparent">
+                        <div className={cn("w-full flex-shrink-0 bg-transparent", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden" : "block")}>
                             {/* Desktop Controls - STRICT GRID */}
                             <div className="hidden md:grid px-4 pb-4 pt-2 bg-transparent w-full items-center" style={{ gridTemplateColumns: '1fr 1fr 44px 44px', gap: '8px' }}>
                                 <div className="min-w-0 overflow-hidden">
@@ -851,9 +852,9 @@ export function EmergencyChatInterface() {
                 </div>
             </div>
 
-            {/* Mobile Controls - SVG Buttons */}
-            <div className="md:hidden w-full mt-2 mb-14 px-1 overflow-visible">
-                <div className="flex flex-row items-center justify-center w-full overflow-visible gap-1 max-w-[420px] mx-auto">
+            {/* Mobile Controls - SVG Buttons / Desktop Optimized Toggle */}
+            <div className={cn("w-full mt-0 md:-mt-4 mb-4 md:mb-8 px-1 overflow-visible", USE_SVG_BUTTONS_ON_DESKTOP ? "block" : "md:hidden")}>
+                <div className={cn("flex flex-row items-center justify-center w-full overflow-visible gap-1 mx-auto", USE_SVG_BUTTONS_ON_DESKTOP ? "md:gap-8 md:max-w-4xl" : "max-w-[420px]")}>
                     <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{micButton}</div>
                         <SVGButton 

@@ -51,7 +51,7 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
                 stiffness: 260, 
                 damping: 20 
             }}
-            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${isPulsing ? 'animate-surface-pulse' : ''}`}
+            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${isPulsing ? 'animate-surface-pulse' : ''}`}
             onClick={handlePress}
             data-tour={dataTour}
             aria-label="Confirm Action"

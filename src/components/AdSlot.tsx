@@ -4,7 +4,7 @@ interface AdSlotProps {
     /** Your AdSense ad slot ID (e.g. "1234567890") */
     slot: string;
     /** Ad format determines the container dimensions */
-    format: 'leaderboard' | 'rectangle' | 'sidebar';
+    format: 'leaderboard' | 'rectangle' | 'sidebar' | 'vertical';
     /** Optional additional className */
     className?: string;
     /** Optional: override the default client ID from env */
@@ -27,6 +27,11 @@ const FORMAT_CONFIG = {
         desktop: { width: 300, height: 250 },
         mobile: { width: 300, height: 250 },
         label: 'Sidebar',
+    },
+    vertical: {
+        desktop: { width: 300, height: 600 },
+        mobile: { width: 300, height: 250 },
+        label: 'Vertical',
     },
 };
 
@@ -89,7 +94,7 @@ export function AdSlot({ slot, format, className = '', client }: AdSlotProps) {
         }
     }, [isVisible, adsEnabled]);
 
-    const config = FORMAT_CONFIG[format];
+    const config = FORMAT_CONFIG[format] || FORMAT_CONFIG.rectangle;
     const dims = isMobile ? config.mobile : config.desktop;
 
     // Don't render anything if ads are disabled

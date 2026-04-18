@@ -49,7 +49,7 @@ export const RedSVGButton = forwardRef<HTMLButtonElement, RedSVGButtonProps>(({
                 stiffness: 260, 
                 damping: 20 
             }}
-            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handlePress}
             disabled={disabled}
             data-tour={dataTour}

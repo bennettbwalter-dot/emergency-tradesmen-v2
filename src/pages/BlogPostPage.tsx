@@ -19,6 +19,7 @@ interface BlogPost {
   cover_image: string | null;
   published_at: string;
   created_at: string;
+  updated_at?: string;
 }
 
 function safeUnescape(str: string): string {
@@ -831,9 +832,10 @@ export default function BlogPostPage() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 md:py-16 w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16 w-full flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16 overflow-x-hidden">
+        <main className="flex-1 min-w-0 max-w-4xl mx-auto lg:mx-0 w-full overflow-x-hidden">
 
-        {/* ── HEADER ──────────────────────────────────────────────── */}
+          {/* ── HEADER ──────────────────────────────────────────────── */}
         <header className="mb-10 md:mb-14">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-neutral-400 mb-5 uppercase tracking-wider font-semibold">
@@ -1043,15 +1045,15 @@ export default function BlogPostPage() {
           </div>
         </div>
 
-        {/* ── RELATED POSTS ─────────────────────────────────────── */}
+        {/* ── RELATED POSTS (MOBILE ONLY) ─────────────────────────────────────── */}
         {relatedPosts.length > 0 && (
-          <section className={`mt-16 pt-10 border-t ${isWhiteMode ? 'border-neutral-200' : 'border-white/10'}`}>
+          <section className={`mt-16 pt-10 border-t block lg:hidden ${isWhiteMode ? 'border-neutral-200' : 'border-white/10'}`}>
             <div className="flex items-center gap-3 mb-8">
               <BookOpen className="w-5 h-5 text-orange-400" />
               <h2 className={`text-lg font-bold uppercase tracking-widest ${isWhiteMode ? 'text-neutral-700' : 'text-neutral-300'}`}>Related Articles</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedPosts.map((rPost) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {relatedPosts.slice(0, 2).map((rPost) => (
                 <Link key={rPost.id} to={`/blog/${rPost.slug}`} className="no-underline block group">
                   <article className={`rounded-xl overflow-hidden shadow-sm border hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col ${isWhiteMode ? 'bg-white border-neutral-200' : 'bg-neutral-900 border-white/10'}`}>
                     {rPost.cover_image && (
@@ -1085,6 +1087,78 @@ export default function BlogPostPage() {
           </section>
         )}
       </main>
+
+      {/* ── SIDEBAR (DESKTOP ONLY) ───────────────────────────────── */}
+      <aside className="hidden lg:flex w-[320px] xl:w-[360px] shrink-0 flex-col gap-10">
+        
+        {/* 1. Request Service Widget */}
+        <div className={`rounded-2xl p-6 text-center border shadow-lg sticky top-[5rem] ${isWhiteMode ? 'bg-white border-orange-200' : 'bg-neutral-900 border-white/10'}`}>
+          <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4">
+            <Phone className="w-8 h-8 text-orange-500 relative z-10" />
+            <div className="absolute w-16 h-16 bg-orange-400 rounded-full animate-ping opacity-20"></div>
+          </div>
+          <h3 className={`text-xl font-bold mb-2 ${isWhiteMode ? 'text-neutral-900' : 'text-white'}`}>
+            Need Help Now?
+          </h3>
+          <p className={`text-sm mb-6 leading-relaxed ${isWhiteMode ? 'text-neutral-500' : 'text-neutral-400'}`}>
+            Our certified {isUS ? 'US contractors' : 'UK tradesmen'} are available 24/7.
+          </p>
+          <a
+            href={`tel:${isUS ? "+18885550199" : "+442079460000"}`}
+            className="block w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all text-sm uppercase tracking-widest"
+          >
+            Call Dispatch
+          </a>
+          <div className={`mt-4 text-xs font-semibold ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+            Average response: &lt; 30 mins
+          </div>
+        </div>
+
+        {/* 2. Ad Slot */}
+        <div className="w-full flex items-center justify-center rounded-xl overflow-hidden">
+          <AdSlot slot="AD_SLOT_BLOG_SIDEBAR" format="vertical" />
+        </div>
+
+        {/* 3. Related Posts */}
+        {relatedPosts.length > 0 && (
+          <div className={`p-6 rounded-2xl border ${isWhiteMode ? 'bg-neutral-50 border-neutral-200' : 'bg-neutral-900 border-white/10'}`}>
+            <div className={`flex items-center gap-3 mb-6 border-b pb-4 ${isWhiteMode ? 'border-neutral-200' : 'border-white/10'}`}>
+              <BookOpen className="w-5 h-5 text-orange-400" />
+              <h3 className={`text-sm font-bold uppercase tracking-widest ${isWhiteMode ? 'text-neutral-700' : 'text-neutral-300'}`}>More Articles</h3>
+            </div>
+            <div className="space-y-6">
+              {relatedPosts.map((rPost) => (
+                <Link key={rPost.id} to={`/blog/${rPost.slug}`} className="group flex gap-4 no-underline items-start">
+                  {rPost.cover_image && (
+                    <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-neutral-100 ring-1 ring-black/5">
+                      <img
+                        src={getImageUrl(rPost.cover_image)}
+                        alt={rPost.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          const src = target.src;
+                          if (src.endsWith('.webp')) {
+                            target.src = src.replace(/\.webp$/i, '.png');
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h4 className={`font-semibold text-sm leading-snug group-hover:text-orange-500 transition-colors line-clamp-3 ${isWhiteMode ? 'text-neutral-800' : 'text-neutral-200'}`}>
+                      {rPost.title}
+                    </h4>
+                    <span className="text-xs text-orange-500 mt-1 inline-block font-medium">Read Article</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+      </div>
     </div>
   );
 }

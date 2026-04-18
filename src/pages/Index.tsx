@@ -1,16 +1,13 @@
-import { useState, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { GuestGate } from "@/components/GuestGate";
-import { AnimatePresence, motion } from "framer-motion";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 import { FloatingTourHub } from "@/components/FloatingTourHub";
 
@@ -19,13 +16,13 @@ import { HeroSection } from "@/components/sections/HeroSection";
 
 // Lazy load other sections
 const EmergencyServicesSection = lazy(() => import("@/components/sections/EmergencyServicesSection").then(module => ({ default: module.EmergencyServicesSection })));
+const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSection").then(module => ({ default: module.HowItWorksSection })));
 const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSection").then(module => ({ default: module.SEOContentSection })));
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(module => ({ default: module.CTASection })));
 
 const Index = () => {
   const { settings, detectedCity } = useLocalization();
-  const [showFaq, setShowFaq] = useState(false);
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -88,6 +85,10 @@ const Index = () => {
         <HeroSection />
 
         <Suspense fallback={<div className="h-96 w-full" />}>
+          <HowItWorksSection />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-96 w-full" />}>
           <EmergencyServicesSection />
         </Suspense>
 
@@ -107,33 +108,12 @@ const Index = () => {
           <HomeEmergencyAd />
         </div>
 
-        {/* FAQ Section */}
+        {/* FAQ Section — visible by default for SEO and trust */}
         <div className="container mx-auto px-4 py-16 flex flex-col items-center">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => setShowFaq(!showFaq)}
-            className="rounded-full border-gold/30 hover:bg-gold/10 text-foreground w-full max-w-md font-bold flex items-center justify-center gap-2"
-          >
-            FAQ
-            {showFaq ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </Button>
-
-          <AnimatePresence>
-            {showFaq && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="w-full max-w-3xl overflow-hidden"
-              >
-                <div className="mt-8">
-                  <GeneralFAQSection initiallyOpened={true} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="w-full max-w-3xl">
+            <GeneralFAQSection initiallyOpened={true} />
+          </div>
         </div>
       </main>
       <Footer />

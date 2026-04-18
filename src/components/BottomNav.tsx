@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, BookText, LogIn, User } from "lucide-react";
+import { Home, BookText, LogIn, User, MessageCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
@@ -32,13 +32,14 @@ export function BottomNav() {
             path: `${countryPrefix}/blog`,
         },
         {
-            label: "Sign In",
-            icon: LogIn,
-            path: "/auth?tab=login",
+            label: "Get Help",
+            icon: MessageCircle,
+            path: "/contact",
+            highlight: true,
         },
         {
-            label: "Profile",
-            icon: User,
+            label: isAuthenticated ? "Profile" : "Sign In",
+            icon: isAuthenticated ? User : LogIn,
             path: isAuthenticated ? "/user/dashboard?tab=profile" : "/auth?tab=login",
         },
     ];
@@ -52,13 +53,16 @@ export function BottomNav() {
                 <Link
                     key={item.label}
                     to={item.path}
-                    className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${isActive(item.path) ? "text-gold" : "text-muted-foreground hover:text-foreground"
-                        }`}
+                    className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${
+                        (item as any).highlight
+                            ? "text-gold"
+                            : isActive(item.path) ? "text-gold" : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
-                    <div className="relative">
-                        <item.icon className={`w-5 h-5 ${isActive(item.path) ? "stroke-[2.5px]" : "stroke-2"}`} />
+                    <div className={`relative ${(item as any).highlight ? "bg-gold/15 rounded-full p-1.5 -mt-1" : ""}`}>
+                        <item.icon className={`w-5 h-5 ${(item as any).highlight ? "stroke-[2.5px]" : isActive(item.path) ? "stroke-[2.5px]" : "stroke-2"}`} />
                     </div>
-                    <span className="text-[10px] font-medium">{item.label}</span>
+                    <span className={`text-[10px] font-medium ${(item as any).highlight ? "font-bold" : ""}`}>{item.label}</span>
                 </Link>
             ))}
         </div>
