@@ -11,7 +11,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { createClient } from "@supabase/supabase-js";
-import { isDeveloper, hasAccess } from "@/lib/subscriptionService";
+import { isDeveloper, hasAccess, getUserSubscription } from "@/lib/subscriptionService";
 import { Crown, ShieldCheck, Eye, CheckCircle2, ChevronRight, AlertCircle, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -100,45 +100,26 @@ export default function NewProfileEditor() {
         try {
             devLog("Initializing Editor...");
 
-            // 1. Diagnostics
-            const { data: { user: sbUser }, error: userErr } = await supabase.auth.getUser();
-            const activeId = sbUser?.id || user?.id;
+            const sub = await getUserSubscription();
+            const locationLimit = sub?.plan === 'agency' ? 8 : 1;
+
+            const activeId = user?.id;
 
             if (!activeId && !isAdminArea) {
                 navigate('/login?redirect=/premium-profile');
                 return;
             }
 
-            devLog("=== DIAGNOSTICS ===");
-            devLog("Active User Email:", sbUser?.email || user?.email);
+            devLog("Active User Email:", user?.email);
             devLog("Active User ID (UUID):", activeId);
-            devLog("Auth Context Authenticated:", isAuthenticated);
-            if (userErr) console.error("Identity Fetch Error:", userErr);
-            devLog("=== END DIAGNOSTICS ===");
 
             let query = supabase.from('businesses').select('*');
 
             if (adminOverrideId && (isAdmin || isDevUser || isAdminArea)) {
                 query = query.eq('id', adminOverrideId);
             } else {
-                // Regular User path
                 if (!activeId) return;
-
-                // Premium Access Check
-                if (!isAdminArea && !isDevUser) {
-                    const premium = await hasAccess('professional');
-                    if (!premium) {
-                        toast({
-                            title: "Premium Feature",
-                            description: "The Profile Editor is only available to Pro members.",
-                            variant: "default"
-                        });
-                        navigate('/pricing');
-                        return;
-                    }
-                }
-
-                query = query.or(`owner_user_id.eq.${activeId},owner_id.eq.${activeId}`);
+                query = query.eq('owner_user_id', activeId);
             }
 
             const { data, error } = await query.limit(1).maybeSingle();
@@ -146,7 +127,11 @@ export default function NewProfileEditor() {
 
             if (data) {
                 devLog("Found profile:", data.id);
-                mapBusinessData(data);
+                if (['Pending Verification Profile', 'Your Business Name'].includes(data.name)) {
+                    await supabase.from('businesses').update({ name: '' }).eq('id', data.id);
+                    data = { ...data, name: '' };
+                }
+                mapBusinessData(data, locationLimit);
 
                 const isFresh = !data.name || data.name === "Your Business Name";
                 if (isFresh && !sessionStorage.getItem('welcome_seen')) {
@@ -209,23 +194,13 @@ export default function NewProfileEditor() {
                     devLog("Trying direct insert with owner metadata...");
                     const { data: dData, error: dError } = await supabase
                         .from('businesses')
-                        .insert({ ...baseBiz, owner_user_id: activeId, owner_id: activeId })
+                        .insert({ ...baseBiz, owner_user_id: activeId })
                         .select().single();
 
                     if (!dError) {
                         newData = dData;
                     } else {
-                        console.error("Dual Insert Failed:", dError);
-
-                        // Tier 3: Individual Fallbacks
-                        devLog("Trying individual owner fields...");
-                        const { data: d1 } = await supabase.from('businesses').insert({ ...baseBiz, owner_user_id: activeId }).select().single();
-                        if (d1) {
-                            newData = d1;
-                        } else {
-                            const { data: d2 } = await supabase.from('businesses').insert({ ...baseBiz, owner_id: activeId }).select().single();
-                            if (d2) newData = d2;
-                        }
+                        console.error("Direct Insert Failed:", dError);
 
                         // Tier 4: Safe Mode (Service Role Override)
                         if (!newData && (dError.message?.includes('violates row-level security') || dError.code === '42501')) {
@@ -237,7 +212,7 @@ export default function NewProfileEditor() {
                                 import.meta.env.VITE_SUPABASE_URL,
                                 import.meta.env.VITE_SUPABASE_ANON_KEY,
                                 {
-                                    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+                                    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'et-admin-bypass' },
                                     global: {
                                         headers: {
                                             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
@@ -248,7 +223,7 @@ export default function NewProfileEditor() {
 
                             const { data: sData, error: sErr } = await adminClient
                                 .from('businesses')
-                                .insert({ ...baseBiz, name: "Pending Verification Profile", owner_user_id: activeId })
+                                .insert({ ...baseBiz, owner_user_id: activeId })
                                 .select().single();
 
                             if (sData) {
@@ -268,7 +243,7 @@ export default function NewProfileEditor() {
                 }
 
                 if (newData) {
-                    mapBusinessData(newData);
+                    mapBusinessData(newData, locationLimit);
                     setShowWelcome(true);
                 }
             }
@@ -294,10 +269,10 @@ export default function NewProfileEditor() {
         setFiles(f => ({ ...f, [key]: file }));
     };
 
-    const mapBusinessData = (data: any) => {
+    const mapBusinessData = (data: any, locationLimit = 1) => {
         setBusinessId(data.id);
         setFormData({
-            name: data.name || "",
+            name: ['Pending Verification Profile', 'Your Business Name'].includes(data.name) ? "" : (data.name || ""),
             contact_name: data.contact_name || "",
             trade: data.trade || "plumber",
             description: data.premium_description || "",
@@ -305,7 +280,8 @@ export default function NewProfileEditor() {
             website: data.website || "",
             plan_type: data.plan_type || "basic",
             services_offered: data.services_offered || [],
-            selected_locations: data.selected_locations || []
+            selected_locations: data.selected_locations || [],
+            location_limit: locationLimit,
         });
         setPreviews({
             logo: data.logo_url,
@@ -351,6 +327,7 @@ export default function NewProfileEditor() {
                 whatsapp_number: formData.whatsapp,
                 website: formData.website,
                 selected_locations: formData.selected_locations,
+                coverage_areas: formData.selected_locations,
                 city: formData.selected_locations[0] || 'London',
                 services_offered: formData.services_offered,
                 logo_url: urls.logo,
@@ -358,9 +335,24 @@ export default function NewProfileEditor() {
                 vehicle_image_url: urls.vehicle,
                 photos: urls.gallery,
                 updated_at: new Date().toISOString()
-            }).eq('id', businessId);
+            }).eq('id', businessId).eq('owner_user_id', user?.id || '');
 
             if (error) throw error;
+
+            // Only ghost basic (free-tier, unowned) duplicate listings — never paid or editor-created profiles.
+            if (formData.trade && formData.selected_locations?.length > 0) {
+                for (const loc of formData.selected_locations) {
+                    await supabase
+                        .from('businesses')
+                        .update({ tier: 'ghosted' })
+                        .eq('trade', formData.trade)
+                        .eq('city', loc)
+                        .eq('tier', 'free')
+                        .is('owner_user_id', null)
+                        .neq('id', businessId || '');
+                }
+            }
+
             toast({ title: "Profile Saved", description: "Your changes are now live!", className: "bg-green-600 text-white" });
 
             // After save, redirect to the listings page
@@ -478,6 +470,7 @@ export default function NewProfileEditor() {
                     <div className="lg:col-span-3 space-y-2">
                         {TABS.map((tab) => (
                             <button
+                                type="button"
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as TabType)}
                                 className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-between group ${activeTab === tab.id

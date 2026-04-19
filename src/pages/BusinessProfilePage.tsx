@@ -23,7 +23,6 @@ import { LeafletMap } from "@/components/LeafletMap";
 import { Business, calculateTrustScore } from "@/lib/businesses";
 import { trades } from "@/lib/trades";
 
-import { db } from "@/lib/db";
 import { trackEvent } from "@/lib/analytics";
 import { ShareMenu } from "@/components/ShareMenu";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
@@ -35,7 +34,6 @@ export default function BusinessProfilePage() {
     const [loading, setLoading] = useState(true);
     const [photos, setPhotos] = useState<any[]>([]);
     const [photosLoading, setPhotosLoading] = useState(true);
-    const [claimStatus, setClaimStatus] = useState<{ status: string, verified: boolean } | null>(null);
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -63,25 +61,14 @@ export default function BusinessProfilePage() {
         loadBusiness();
     }, [businessId]);
 
-    // Fetch real photos and claim status from database
+    // Fetch real photos from database
     useEffect(() => {
         async function loadData() {
             if (businessId) {
                 setPhotosLoading(true);
                 try {
-                    // Parallel fetch
-                    const [businessPhotos, statusData] = await Promise.all([
-                        fetchBusinessPhotos(businessId),
-                        db.businesses.getClaimStatus(businessId)
-                    ]);
-
+                    const businessPhotos = await fetchBusinessPhotos(businessId);
                     setPhotos(businessPhotos);
-                    if (statusData) {
-                        setClaimStatus({
-                            status: statusData.claim_status || 'unclaimed',
-                            verified: statusData.verified || false
-                        });
-                    }
                 } catch (err) {
                     console.error("Error loading business photos:", err);
                 } finally {
@@ -759,23 +746,6 @@ export default function BusinessProfilePage() {
                                         )}
                                     </div>
                                 </div>
-
-                                {/* Claim Business Button */}
-                                {(!business.verified && (!claimStatus || (claimStatus.status === 'unclaimed' && !claimStatus.verified))) && (
-                                    <div className="bg-secondary/30 rounded-2xl p-6 border border-gold/10 text-center flex flex-col items-center">
-                                        <p className="text-xs text-muted-foreground mb-4 font-bold uppercase tracking-widest">
-                                            Is this your business?
-                                        </p>
-                                        <Button asChild variant="outline" className="w-full border-gold/30 hover:bg-gold/10 hover:text-gold rounded-xl py-6">
-                                            <Link
-                                                to={`/business/claim/${business.id}`}
-                                                onClick={() => trackEvent("Business", "Claim Click", `${business.name} (${business.id})`)}
-                                            >
-                                                Claim This Business
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                )}
 
                                 {/* Map View Container */}
                                 <div className="bg-secondary/30 rounded-3xl border border-border p-1 overflow-hidden h-[300px] shadow-2xl">

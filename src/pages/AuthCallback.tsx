@@ -12,6 +12,14 @@ const AuthCallback = () => {
         // and updates the session. We just need to wait and redirect.
 
         const handleAuth = async () => {
+            // Handle error params returned by Supabase (e.g. code exchange failure)
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('error')) {
+                console.error("Auth callback error:", params.get('error_description'));
+                navigate("/login?error=auth_callback_failed", { replace: true });
+                return;
+            }
+
             const { data: { session }, error } = await supabase.auth.getSession();
 
             if (error) {
@@ -28,12 +36,6 @@ const AuthCallback = () => {
                 sessionStorage.removeItem('post_auth_redirect');
                 navigate(redirect, { replace: true });
             } else {
-                // No session found yet, maybe check hash manualy? 
-                // Or wait for onAuthStateChange (which AuthContext does).
-                // For now, if no hash and no session, go home.
-                // No session found yet.
-                // If no hash AND no code param (PKCE), then go home.
-                // If code param exists, we wait for onAuthStateChange to handle the exchange.
                 if (!window.location.hash && !window.location.search.includes('code=')) {
                     navigate("/", { replace: true });
                 }

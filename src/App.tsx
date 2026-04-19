@@ -10,7 +10,6 @@ import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { SimpleThemeProvider } from "@/components/simple-theme";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { BottomNav } from "@/components/BottomNav";
 import { InstallPWA } from "@/components/InstallPWA";
 import { LiveChat } from "@/components/LiveChat";
@@ -47,7 +46,6 @@ const PaymentCancelPage = lazy(() => import("./pages/PaymentCancelPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
 const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const ProProfileEditor = lazy(() => import("./pages/NewProfileEditor"));
-const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
@@ -139,7 +137,7 @@ const AppRoutes = () => (
     <Route path="/account/billing" element={<BillingPage />} />
     <Route path="/billing" element={<Navigate to="/account/billing" replace />} />
     <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-    <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
+    <Route path="/business/claim/:businessId" element={<Navigate to="/pricing" replace />} />
     <Route path="/premium-profile" element={<ProProfileEditor />} />
     <Route path="/payment/success" element={<PaymentSuccessPage />} />
     <Route path="/payment/cancel" element={<PaymentCancelPage />} />

@@ -54,7 +54,8 @@ export const PLANS = {
 
 // Get current user's subscription
 export async function getUserSubscription(): Promise<Subscription | null> {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
     if (!user) return null;
 
     // Developer Bypass
@@ -109,7 +110,8 @@ export async function getSubscriptionByUserId(userId: string): Promise<Subscript
 
 // Create or update subscription
 export async function upsertSubscription(subscription: Partial<Subscription>): Promise<Subscription | null> {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
     if (!user) return null;
 
     const { data, error } = await supabase
@@ -140,7 +142,8 @@ export async function upsertSubscription(subscription: Partial<Subscription>): P
 
 // Check if user has a specific plan or higher (with expiry check)
 export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Promise<boolean> {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
 
     // Developer Bypass Check
     const devEmails = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
@@ -178,7 +181,8 @@ export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Pr
 
 // Check if current user is locked out due to payment failure
 export async function isLocked(): Promise<boolean> {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
     if (!user) return false;
 
     // Developer bypass
@@ -314,9 +318,8 @@ export function getLocationLimit(planType: string, email?: string | null): numbe
     if (isDeveloper(email)) return 99;
 
     // Plan-based limits
-    if (planType === 'premium' || planType === 'enterprise') return 3;
-    if (planType === 'pro' || planType === 'professional') return 1;
-    return 1; // basic plan
+    if (planType === 'agency') return 8;
+    return 1;
 }
 
 // Get plan type display name

@@ -76,27 +76,32 @@ serve(async (req) => {
             }
 
             // Fetch subscription from Stripe to reliably get the price_id
-            let planName = "free"
-            let daysToAdd = 30 // Default to Monthly duration unless identified
+            let planName = "pro"
+            let daysToAdd = 30
 
             if (subscriptionId) {
                 const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
                 const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+                const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
                 const stripeSub = await stripe.subscriptions.retrieve(subscriptionId as string)
                 if (stripeSub.items.data.length > 0) {
                     const priceId = stripeSub.items.data[0].price.id
 
-                    if (priceId === PRO_PRICE_ID) {
-                        planName = "pro"
+                    if (priceId === AGENCY_PRICE_ID) {
+                        planName = "agency"
+                        daysToAdd = 30
                     } else if (priceId === PREMIUM_PRICE_ID) {
                         planName = "premium"
+                        daysToAdd = 366
+                    } else if (priceId === PRO_PRICE_ID) {
+                        planName = "pro"
+                        daysToAdd = 30
                     } else {
-                        console.warn(`Unknown price_id ${priceId} in checkout session. Assuming 'pro'.`)
+                        console.warn(`Unknown price_id ${priceId}. Defaulting to 'pro'.`)
                         planName = "pro"
                     }
 
-                    // Simple logic: if period is > 30 days, assume yearly duration for expiration
                     if (stripeSub.items.data[0].plan.interval === 'year') {
                         daysToAdd = 366
                     }
@@ -105,22 +110,7 @@ serve(async (req) => {
 
             console.log(`Provisioning tier '${planName}' plan (${daysToAdd} days)`)
 
-            // Fetch tenant_id
-            const { data: tenantData, error: tenantError } = await supabase
-                .from('tenants')
-                .select('tenant_id')
-                .eq('owner_user_id', user.id)
-                .single()
-
-            if (tenantError || !tenantData) {
-                console.error(`Failed to find tenant for user ${user.id}`, tenantError)
-                return new Response(JSON.stringify({ message: 'Tenant not found, but payment received' }), {
-                    status: 200,
-                    headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-                })
-            }
-
-            // Update/Upsert subscription with Stripe IDs
+            // Update/Upsert subscription with Stripe IDs (no tenant dependency)
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + daysToAdd);
 
@@ -128,10 +118,9 @@ serve(async (req) => {
                 .from('subscriptions')
                 .upsert({
                     user_id: user.id,
-                    tenant_id: tenantData.tenant_id,
                     payment_customer_id: customerId as string,
                     payment_subscription_id: subscriptionId as string,
-                    plan: planName.toLowerCase() as any,
+                    plan: planName,
                     status: 'active',
                     subscription_expires_at: expiryDate.toISOString(),
                     failed_payment_attempts: 0,
@@ -191,17 +180,21 @@ serve(async (req) => {
             // Mapping Plan correctly from updated webhooks
             const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
             const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+            const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
             let planName = "free"
             let daysToAdd = 0
             if (subscription.items.data.length > 0) {
                 const priceId = subscription.items.data[0].price.id
-                if (priceId === PRO_PRICE_ID) {
-                    planName = "pro"
-                    daysToAdd = subscription.items.data[0].plan.interval === 'year' ? 366 : 30
+                if (priceId === AGENCY_PRICE_ID) {
+                    planName = "agency"
+                    daysToAdd = 30
                 } else if (priceId === PREMIUM_PRICE_ID) {
                     planName = "premium"
                     daysToAdd = 366
+                } else if (priceId === PRO_PRICE_ID) {
+                    planName = "pro"
+                    daysToAdd = subscription.items.data[0].plan.interval === 'year' ? 366 : 30
                 }
             } else if (sub) {
                 // Retain existing plan if items are empty (e.g., trial transition)
@@ -359,15 +352,18 @@ serve(async (req) => {
                 // Invoice lines contain the price ID
                 const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
                 const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+                const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
                 let targetPlan = 'free'
                 let daysToAdd = 30
                 if (invoice.lines?.data?.length > 0) {
                     const priceId = invoice.lines.data[0].price?.id
-                    if (priceId === PRO_PRICE_ID) {
-                        targetPlan = 'pro'
+                    if (priceId === AGENCY_PRICE_ID) {
+                        targetPlan = 'agency'
                     } else if (priceId === PREMIUM_PRICE_ID) {
                         targetPlan = 'premium'
+                    } else if (priceId === PRO_PRICE_ID) {
+                        targetPlan = 'pro'
                     } else {
                         targetPlan = sub?.plan || 'pro'
                     }

@@ -72,91 +72,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isLocked, setIsLocked] = useState(false);
 
     useEffect(() => {
-        // Check for existing session on mount
-        const initializeAuth = async () => {
-            try {
-                const { data: { session } } = await supabase.auth.getSession();
-                if (session?.user) {
-                    let currentUser = session.user;
+        // Safety net: never let isLoading stay true forever
+        const authTimeout = setTimeout(() => setIsLoading(false), 8000);
 
-                    // Ensure tenantId exists in token, else refresh
-                    if (!currentUser.app_metadata?.tenant_id) {
-                        const { data: refreshData } = await supabase.auth.refreshSession();
-                        if (refreshData.session?.user?.app_metadata?.tenant_id) {
-                            currentUser = refreshData.session.user;
-                        } else {
-                            // Manual lookup fallback
-                            const { data: tenant } = await supabase.from('tenants').select('tenant_id').eq('owner_user_id', currentUser.id).single();
-                            if (tenant) {
-                                currentUser.app_metadata = { ...currentUser.app_metadata, tenant_id: tenant.tenant_id };
-                            } else {
-                                console.error("FATAL: No tenant found for user. Access denied.");
-                                await supabase.auth.signOut();
-                                setUser(null);
-                                setIsLocked(false);
-                                return;
-                            }
-                        }
-                    }
-
-                    setUser(mapSupabaseUser(currentUser));
-                    
-                    // Check lockout status
-                    const { isLocked: checkLocked } = await import("@/lib/subscriptionService");
-                    const locked = await checkLocked();
-                    setIsLocked(locked);
-                } else {
-                    setUser(null);
-                    setIsLocked(false);
-                    // Clear potential stale data
-                    localStorage.removeItem('emergency-tradesmen-user');
-                }
-            } catch (error) {
-                console.error("Error getting session:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        initializeAuth();
-
-        // Listen for auth changes
+        // onAuthStateChange fires INITIAL_SESSION on mount — no separate getSession() needed
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 try {
                     if (import.meta.env.DEV) console.log("🔐 Auth state change:", event, session?.user?.email);
                     if (session?.user) {
-                        let currentUser = session.user;
-                        
-                        // Enforce tenant scoping middleware-style inside React
-                        if (!currentUser.app_metadata?.tenant_id) {
-                            const { data: tenant } = await supabase.from('tenants').select('tenant_id').eq('owner_user_id', currentUser.id).single();
-                            if (tenant) {
-                                currentUser.app_metadata = { ...currentUser.app_metadata, tenant_id: tenant.tenant_id };
-                            }
-                        }
-
-                        setUser(mapSupabaseUser(currentUser));
-                        
-                        // Check lockout status on auth change
+                        setUser(mapSupabaseUser(session.user));
                         const { isLocked: checkLocked } = await import("@/lib/subscriptionService");
                         const locked = await checkLocked();
                         setIsLocked(locked);
                     } else {
                         setUser(null);
                         setIsLocked(false);
-                        // Clear potential stale data
                         localStorage.removeItem('emergency-tradesmen-user');
                     }
                 } catch (error) {
                     console.error("❌ Error in onAuthStateChange callback:", error);
                 } finally {
+                    clearTimeout(authTimeout);
                     setIsLoading(false);
                 }
             }
         );
 
-        return () => subscription.unsubscribe();
+        return () => {
+            clearTimeout(authTimeout);
+            subscription.unsubscribe();
+        };
     }, []);
 
     const login = async (email: string, password: string) => {
@@ -181,11 +127,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const signInWithGoogle = async () => {
         setIsLoading(true);
         try {
+            const redirectTo = import.meta.env.VITE_AUTH_CALLBACK_URL || `${window.location.origin}/auth/callback`;
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
-                options: {
-                    redirectTo: window.location.origin,
-                },
+                options: { redirectTo },
             });
             if (error) throw error;
         } catch (error) {

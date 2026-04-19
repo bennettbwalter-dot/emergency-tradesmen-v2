@@ -4,6 +4,9 @@ import type { Business } from './businesses';
 import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
 
+const PLACEHOLDER_NAMES = ['Pending Verification Profile', 'Your Business Name'];
+const isRealBusiness = (biz: any) => biz?.name && !PLACEHOLDER_NAMES.includes(biz.name) && biz.tier !== 'ghosted';
+
 // Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
 let _fallbackEnrichment: Record<string, any> | null = null;
 async function getFallbackEnrichment(): Promise<Record<string, any>> {
@@ -194,7 +197,7 @@ export async function fetchBusinesses(
 
         if (directData && directData.length > 0) {
             devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
-            const businesses = await Promise.all(directData.map((biz: any) => mapBusinessData(biz, userCoords)));
+            const businesses = await Promise.all(directData.filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
             return businesses
                 .sort((a, b) => {
                     if (a.tier === 'paid' && b.tier !== 'paid') return -1;
@@ -241,7 +244,7 @@ export async function fetchBusinesses(
         }
     }
 
-    const mappedBusinesses = await Promise.all((allBusinesses || []).map((biz: any) => mapBusinessData(biz, userCoords)));
+    const mappedBusinesses = await Promise.all((allBusinesses || []).filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
     return mappedBusinesses
         .sort((a, b) => {
             if (a.tier === 'paid' && b.tier !== 'paid') return -1;

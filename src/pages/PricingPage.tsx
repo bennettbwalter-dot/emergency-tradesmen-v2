@@ -4,35 +4,19 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Shield, Star, Zap, TrendingUp, Crown, Mail } from "lucide-react";
+import { Check, Shield, Star, Zap, TrendingUp, Crown } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { useFeatureFlagEnabled } from "posthog-js/react";
 import { SEO } from "@/components/SEO";
 import { useAuth } from "@/contexts/AuthContext";
-import { getSupportEmail } from "@/lib/siteConfig";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { getUserSubscription } from "@/lib/subscriptionService";
 
-// TypeScript declaration for Stripe's custom web component
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'stripe-buy-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                'buy-button-id': string;
-                'publishable-key': string;
-                'client-reference-id'?: string;
-                'customer-email'?: string;
-            }, HTMLElement>;
-        }
-    }
-}
 
 export default function PricingPage() {
     const { settings } = useLocalization();
     const { user } = useAuth();
     const navigate = useNavigate();
-    const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
     const isUS = settings.countryCode === 'US';
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -87,23 +71,25 @@ export default function PricingPage() {
         ]
     };
 
-    // Stripe Payment Links — separate links for US vs UK
+    // Stripe Payment Links — separate links for US vs UK; test links used in dev
+    const isDev = import.meta.env.DEV;
     const stripeLinks = isUSDomain
         ? {
-              monthly: import.meta.env.VITE_STRIPE_US_PRO_MONTHLY_LINK || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
-              yearly: import.meta.env.VITE_STRIPE_US_PRO_YEARLY_LINK || 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
-              enterprise: import.meta.env.VITE_STRIPE_US_ENTERPRISE_LINK || 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
+              monthly: import.meta.env.VITE_STRIPE_US_PRO_MONTHLY_LINK || 'https://buy.stripe.com/7sY6oH9rN3cr4ey219cQU03',
+              yearly: import.meta.env.VITE_STRIPE_US_PRO_YEARLY_LINK || 'https://buy.stripe.com/3cIcI59rN14j9yS5dlcQU04',
+              enterprise: import.meta.env.VITE_STRIPE_US_ENTERPRISE_LINK || 'https://buy.stripe.com/fZu3cv47t6oDfXg6hpcQU05',
           }
         : {
-              monthly: 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
-              yearly: 'https://buy.stripe.com/00w8wP47teV9bH0eNVcQU01',
-              enterprise: 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
+              monthly: (isDev ? import.meta.env.VITE_STRIPE_UK_MONTHLY_TEST : null) || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
+              yearly: (isDev ? import.meta.env.VITE_STRIPE_UK_YEARLY_TEST : null) || 'https://buy.stripe.com/5kQ28rdI3dR54ey219cQU06',
+              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || null,
           };
+
 
     const handleCheckout = (url: string) => {
         if (!user) {
             sessionStorage.setItem('post_auth_redirect', '/pricing');
-            window.location.href = `/auth?redirect=/pricing`;
+            window.location.href = `/login`;
             return;
         }
 
@@ -121,9 +107,6 @@ export default function PricingPage() {
         window.location.href = stripeUrl.toString();
     };
 
-    const handleContactUs = () => {
-        window.location.href = `mailto:${getSupportEmail()}?subject=Pro%20Subscription%20Inquiry`;
-    };
 
     return (
         <>
@@ -252,8 +235,8 @@ export default function PricingPage() {
                                 <h3 className="text-2xl font-bold text-emerald-500 flex items-center gap-2">
                                     <Crown className="w-6 h-6 fill-current" /> Pro Yearly
                                 </h3>
-                                <div className="mt-2 text-3xl font-bold text-foreground">{settings.currencySymbol}99 <span className="text-base font-normal text-muted-foreground">/ year</span></div>
-                                <p className="text-sm text-emerald-500 font-medium mt-1">Save {settings.currencySymbol}249 (over 70% off!)</p>
+                                <div className="mt-2 text-3xl font-bold text-foreground">{settings.currencySymbol}150 <span className="text-base font-normal text-muted-foreground">/ year</span></div>
+                                <p className="text-sm text-emerald-500 font-medium mt-1">Save {settings.currencySymbol}198 (~57% off!)</p>
                             </div>
                             <ul className="space-y-4 mb-8 flex-1">
                                 <li className="flex items-center gap-3">
@@ -301,7 +284,7 @@ export default function PricingPage() {
                                     <span className="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Enterprise</span>
                                 </div>
                                 <p className="text-muted-foreground text-base max-w-lg leading-relaxed">
-                                    Managing multiple vans, branches, or client listings? Get 5 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
+                                    Managing multiple vans, branches, or client listings? Get 8 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
                                 </p>
                                 <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-muted-foreground">
                                     <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> 5 Pro listings included</li>
@@ -311,16 +294,17 @@ export default function PricingPage() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="shrink-0 flex flex-col items-center justify-center relative z-10 min-w-[280px]">
-                            {/* Price is now handled by the Stripe Buy Button to avoid duplication */}
-                            <div className="w-full">
-                                <stripe-buy-button
-                                    buy-button-id="buy_btn_1TNg3JHKzUFX5MS55gtYpCCN"
-                                    publishable-key="pk_live_51SffwUHKzUFX5MS5SEAUYpbP3kxnk2RY7HSZPfjCU7UpIf1h3ADqESnPndZDyZb5eUCyxDGDo1khh5SNKMDvE7SZ00EnIeSPB6"
-                                    {...(user?.email ? { 'customer-email': user.email } : {})}
-                                    {...(user?.id ? { 'client-reference-id': user.id } : {})}
-                                />
+                        <div className="shrink-0 flex flex-col items-center justify-center relative z-10 min-w-[280px] gap-4">
+                            <div className="text-center">
+                                <div className="text-3xl font-bold text-foreground">{settings.currencySymbol}199 <span className="text-base font-normal text-muted-foreground">/ month</span></div>
+                                <p className="text-sm text-purple-400 mt-1">5 locations included</p>
                             </div>
+                            <Button
+                                className="w-full h-12 text-lg bg-purple-600 hover:bg-purple-700 text-white"
+                                onClick={() => handleCheckout(stripeLinks.enterprise!)}
+                            >
+                                Get Agency Plan
+                            </Button>
                         </div>
                     </div>
 

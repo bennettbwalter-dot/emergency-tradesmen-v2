@@ -23,30 +23,35 @@ export default function PaymentSuccessPage() {
     const hasSentRef = useRef(false);
 
     useEffect(() => {
-        // Verify subscription status in database before showing success
-        const verifyPayment = async () => {
-            const sub = await getUserSubscription();
-            if (sub && sub.status === 'active' && sub.plan !== 'free') {
-                setVerified(true);
-            } else {
-                // Webhook hasn't processed yet — poll for up to 10 seconds
-                let attempts = 0;
-                const poll = setInterval(async () => {
-                    attempts++;
-                    const s = await getUserSubscription();
-                    if (s && s.status === 'active' && s.plan !== 'free') {
-                        clearInterval(poll);
-                        setVerified(true);
-                    } else if (attempts >= 10) {
-                        clearInterval(poll);
-                        // Still not verified after 10s — show page anyway (webhook may be delayed)
-                        setVerified(true);
-                    }
-                }, 1000);
-                return () => clearInterval(poll);
+        // In dev/test mode webhooks don't reach localhost, so proceed quickly.
+        // In production give the webhook up to 8s to write the subscription.
+        const maxWait = import.meta.env.DEV ? 2000 : 8000;
+        const pollInterval = 1000;
+
+        // Hard fallback — always show success page after maxWait regardless of DB state
+        const fallback = setTimeout(() => setVerified(true), maxWait);
+
+        let stopped = false;
+        const poll = setInterval(async () => {
+            if (stopped) return;
+            try {
+                const s = await getUserSubscription();
+                if (s && s.status === 'active' && s.plan !== 'free') {
+                    stopped = true;
+                    clearInterval(poll);
+                    clearTimeout(fallback);
+                    setVerified(true);
+                }
+            } catch {
+                // ignore — fallback timer will resolve
             }
+        }, pollInterval);
+
+        return () => {
+            stopped = true;
+            clearInterval(poll);
+            clearTimeout(fallback);
         };
-        verifyPayment();
     }, []);
 
     useEffect(() => {

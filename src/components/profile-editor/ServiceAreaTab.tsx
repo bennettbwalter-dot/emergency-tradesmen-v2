@@ -18,9 +18,7 @@ export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
     const { toast } = useToast();
     const [citySearch, setCitySearch] = useState("");
 
-    // Helpers
-    const isPro = ['pro', 'enterprise'].includes(formData.plan_type);
-    const locationLimit = isPro ? 3 : 1;
+    const locationLimit = formData.location_limit || 1;
     const selectedLocations = formData.selected_locations || [];
     const selectedServices = formData.services_offered || [];
 
@@ -125,6 +123,7 @@ export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
                             {filteredCities.map(city => (
                                 <button
+                                    type="button"
                                     key={city}
                                     onClick={() => toggleLocation(city)}
                                     disabled={!selectedLocations.includes(city) && selectedLocations.length >= locationLimit}
