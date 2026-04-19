@@ -75,9 +75,9 @@ export default function PricingPage() {
     const isDev = import.meta.env.DEV;
     const stripeLinks = isUSDomain
         ? {
-              monthly: import.meta.env.VITE_STRIPE_US_PRO_MONTHLY_LINK || 'https://buy.stripe.com/7sY6oH9rN3cr4ey219cQU03',
-              yearly: import.meta.env.VITE_STRIPE_US_PRO_YEARLY_LINK || 'https://buy.stripe.com/3cIcI59rN14j9yS5dlcQU04',
-              enterprise: import.meta.env.VITE_STRIPE_US_ENTERPRISE_LINK || 'https://buy.stripe.com/fZu3cv47t6oDfXg6hpcQU05',
+              monthly: (isDev ? import.meta.env.VITE_STRIPE_US_MONTHLY_TEST : null) || 'https://buy.stripe.com/7sY6oH9rN3cr4ey219cQU03',
+              yearly: (isDev ? import.meta.env.VITE_STRIPE_US_YEARLY_TEST : null) || 'https://buy.stripe.com/3cIcI59rN14j9yS5dlcQU04',
+              enterprise: (isDev ? import.meta.env.VITE_STRIPE_US_AGENCY_TEST : null) || 'https://buy.stripe.com/fZu3cv47t6oDfXg6hpcQU05',
           }
         : {
               monthly: (isDev ? import.meta.env.VITE_STRIPE_UK_MONTHLY_TEST : null) || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',

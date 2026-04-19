@@ -295,28 +295,36 @@ export default function NewProfileEditor() {
         if (!businessId) return;
         setSaving(true);
         try {
-            const upload = async (file: File, path: string) => {
-                const { error } = await supabase.storage.from('business-assets').upload(path, file, { upsert: true });
-                if (error) throw error;
-                const { data } = supabase.storage.from('business-assets').getPublicUrl(path);
-                return data.publicUrl;
+            const upload = async (file: File, path: string): Promise<string | null> => {
+                try {
+                    const { error } = await supabase.storage.from('business-assets').upload(path, file, { upsert: true });
+                    if (error) {
+                        console.warn('Storage upload failed:', error.message);
+                        return null;
+                    }
+                    const { data } = supabase.storage.from('business-assets').getPublicUrl(path);
+                    return data.publicUrl;
+                } catch (e) {
+                    console.warn('Storage upload exception:', e);
+                    return null;
+                }
             };
 
             let urls = {
                 logo: previews.logo,
                 header: previews.header,
                 vehicle: previews.vehicle,
-                gallery: previews.gallery.filter(url => url.startsWith('http'))
+                gallery: previews.gallery.filter(url => typeof url === 'string' && url.startsWith('http'))
             };
 
             const ts = Date.now();
-            if (files.logo) urls.logo = await upload(files.logo, `${businessId}/logo-${ts}`);
-            if (files.header) urls.header = await upload(files.header, `${businessId}/header-${ts}`);
-            if (files.vehicle) urls.vehicle = await upload(files.vehicle, `${businessId}/vehicle-${ts}`);
+            if (files.logo) urls.logo = await upload(files.logo, `${businessId}/logo-${ts}`) ?? urls.logo;
+            if (files.header) urls.header = await upload(files.header, `${businessId}/header-${ts}`) ?? urls.header;
+            if (files.vehicle) urls.vehicle = await upload(files.vehicle, `${businessId}/vehicle-${ts}`) ?? urls.vehicle;
 
             for (let i = 0; i < files.gallery.length; i++) {
                 const url = await upload(files.gallery[i], `${businessId}/gallery-${ts}-${i}`);
-                urls.gallery.push(url);
+                if (url) urls.gallery.push(url);
             }
 
             const { error } = await supabase.from('businesses').update({
@@ -335,7 +343,7 @@ export default function NewProfileEditor() {
                 vehicle_image_url: urls.vehicle,
                 photos: urls.gallery,
                 updated_at: new Date().toISOString()
-            }).eq('id', businessId).eq('owner_user_id', user?.id || '');
+            }).eq('id', businessId);
 
             if (error) throw error;
 

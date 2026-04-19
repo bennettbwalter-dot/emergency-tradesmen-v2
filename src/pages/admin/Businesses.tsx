@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { devLog } from "@/lib/devLog";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, Edit, Trash2, CheckCircle, XCircle, Crown } from "lucide-react";
+import { Plus, Search, Edit, Trash2, CheckCircle, XCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import type { Business } from "@/lib/businesses";
 import { BusinessModal } from "@/components/admin/BusinessModal";
 import {
     AlertDialog,
@@ -18,32 +17,40 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+const PAGE_SIZE = 100;
+
 export default function BusinessesPage() {
     const [businesses, setBusinesses] = useState<any[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [pendingCount, setPendingCount] = useState(0);
+    const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     const [activeTab, setActiveTab] = useState<'all' | 'pending'>('all');
     const { toast } = useToast();
 
-    // Modal state
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingBusiness, setEditingBusiness] = useState<any>(null);
     const [deleteConfirmation, setDeleteConfirmation] = useState<{ id: string, name: string } | null>(null);
 
-    useEffect(() => {
-        loadBusinesses();
-    }, []);
-
-    async function loadBusinesses() {
+    const loadBusinesses = useCallback(async (currentPage: number, search: string, tab: 'all' | 'pending') => {
         setIsLoading(true);
-        // Fetch businesses (increased limit to handle 10K+ businesses)
-        const { data: bizData, error, count } = await supabase
+
+        let query = supabase
             .from('businesses')
             .select('*', { count: 'exact' })
             .order('created_at', { ascending: false })
-            .range(0, 20000); // Fetch up to 20,000 businesses
+            .range(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE - 1);
 
-        // Fetch active subscriptions
+        if (search) {
+            query = query.or(`name.ilike.%${search}%,city.ilike.%${search}%,trade.ilike.%${search}%`);
+        }
+        if (tab === 'pending') {
+            query = query.eq('claim_status', 'pending');
+        }
+
+        const { data: bizData, error, count } = await query;
+
         const { data: subData } = await supabase
             .from('subscriptions')
             .select('user_id, plan, status')
@@ -51,22 +58,41 @@ export default function BusinessesPage() {
 
         if (error) {
             console.error('Error loading businesses:', error);
-            toast({
-                title: "Error",
-                description: "Failed to load businesses",
-                variant: "destructive",
-            });
+            toast({ title: "Error", description: "Failed to load businesses", variant: "destructive" });
         } else {
-            // Merge premium status
             const merged = (bizData || []).map(biz => ({
                 ...biz,
-                is_premium: subData?.some(s => s.user_id === biz.owner_user_id)
+                is_premium: subData?.some(s => s.user_id === biz.owner_user_id),
             }));
             setBusinesses(merged);
-            devLog(`Loaded ${count} total businesses (showing ${merged.length})`);
+            setTotalCount(count || 0);
+            devLog(`Page ${currentPage + 1}: loaded ${merged.length} of ${count} businesses`);
         }
         setIsLoading(false);
-    }
+    }, [toast]);
+
+    // Fetch pending count separately (always, regardless of tab/search)
+    useEffect(() => {
+        supabase
+            .from('businesses')
+            .select('id', { count: 'exact', head: true })
+            .eq('claim_status', 'pending')
+            .then(({ count }) => setPendingCount(count || 0));
+    }, []);
+
+    // Debounce search: reset to page 0 and reload
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setPage(0);
+            loadBusinesses(0, searchQuery, activeTab);
+        }, 350);
+        return () => clearTimeout(timer);
+    }, [searchQuery, activeTab, loadBusinesses]);
+
+    // Reload when page changes
+    useEffect(() => {
+        loadBusinesses(page, searchQuery, activeTab);
+    }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
 
     async function toggleVerified(id: string, currentStatus: boolean) {
         const { error } = await supabase
@@ -75,58 +101,39 @@ export default function BusinessesPage() {
             .eq('id', id);
 
         if (error) {
-            console.error('Error updating business:', error);
-            toast({
-                title: "Error",
-                description: "Failed to update verification status",
-                variant: "destructive",
-            });
+            toast({ title: "Error", description: "Failed to update verification status", variant: "destructive" });
         } else {
-            loadBusinesses();
-            toast({
-                title: "Success!",
-                description: !currentStatus ? "Business verified successfully" : "Business unverified",
-            });
+            loadBusinesses(page, searchQuery, activeTab);
+            toast({ title: "Success!", description: !currentStatus ? "Business verified successfully" : "Business unverified" });
         }
     }
 
-    // Approve Claim Function
     async function approveClaim(business: any) {
         const { error } = await supabase
             .from('businesses')
-            .update({
-                claim_status: 'verified',
-                verified: true,
-                verified_at: new Date().toISOString()
-            })
+            .update({ claim_status: 'verified', verified: true, verified_at: new Date().toISOString() })
             .eq('id', business.id);
 
         if (error) {
             toast({ title: "Error", description: "Failed to approve claim", variant: "destructive" });
         } else {
             toast({ title: "Claim Approved", description: `${business.name} is now owned by the claimant.` });
-            loadBusinesses();
+            loadBusinesses(page, searchQuery, activeTab);
         }
     }
 
-    // Reject Claim Function
     async function rejectClaim(business: any) {
         if (!confirm(`Reject claim for ${business.name}? This will remove the user as owner.`)) return;
-
         const { error } = await supabase
             .from('businesses')
-            .update({
-                claim_status: 'unclaimed',
-                owner_id: null,
-                proof_documents: []
-            })
+            .update({ claim_status: 'unclaimed', owner_id: null, proof_documents: [] })
             .eq('id', business.id);
 
         if (error) {
             toast({ title: "Error", description: "Failed to reject claim", variant: "destructive" });
         } else {
             toast({ title: "Claim Rejected", description: `Claim for ${business.name} has been removed.` });
-            loadBusinesses();
+            loadBusinesses(page, searchQuery, activeTab);
         }
     }
 
@@ -140,51 +147,19 @@ export default function BusinessesPage() {
             .eq('id', id);
 
         if (error) {
-            console.error('Error deleting business:', error);
-            toast({
-                title: "Error",
-                description: error.message || "Failed to delete business",
-                variant: "destructive",
-            });
+            toast({ title: "Error", description: error.message || "Failed to delete business", variant: "destructive" });
         } else if (count === 0) {
-            console.warn('Delete operation returned 0 rows affected. RLS likely blocking it.');
-            toast({
-                title: "Permission Denied",
-                description: "Database refused to delete. Please run the SQL fix.",
-                variant: "destructive",
-            });
+            toast({ title: "Permission Denied", description: "Database refused to delete. Please run the SQL fix.", variant: "destructive" });
         } else {
-            loadBusinesses();
-            toast({
-                title: "Deleted",
-                description: `${name} has been removed`,
-            });
+            loadBusinesses(page, searchQuery, activeTab);
+            toast({ title: "Deleted", description: `${name} has been removed` });
         }
         setDeleteConfirmation(null);
     }
 
-    const handleAddBusiness = () => {
-        setEditingBusiness(null);
-        setIsModalOpen(true);
-    };
-
-    const handleEditBusiness = (business: any) => {
-        setEditingBusiness(business);
-        setIsModalOpen(true);
-    };
-
-    const filteredBusinesses = businesses.filter(b => {
-        const matchesSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            b.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            b.trade.toLowerCase().includes(searchQuery.toLowerCase());
-
-        if (activeTab === 'pending') {
-            return matchesSearch && b.claim_status === 'pending';
-        }
-        return matchesSearch;
-    });
-
-    const pendingCount = businesses.filter(b => b.claim_status === 'pending').length;
+    const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+    const startItem = totalCount === 0 ? 0 : page * PAGE_SIZE + 1;
+    const endItem = Math.min((page + 1) * PAGE_SIZE, totalCount);
 
     return (
         <div>
@@ -192,9 +167,9 @@ export default function BusinessesPage() {
             <div className="mb-8 flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-display text-foreground mb-2">Business Management</h1>
-                    <p className="text-muted-foreground">{businesses.length} total businesses</p>
+                    <p className="text-muted-foreground">{totalCount.toLocaleString()} total businesses</p>
                 </div>
-                <Button variant="hero" size="lg" onClick={handleAddBusiness}>
+                <Button variant="hero" size="lg" onClick={() => { setEditingBusiness(null); setIsModalOpen(true); }}>
                     <Plus className="w-5 h-5 mr-2" />
                     Add Business
                 </Button>
@@ -204,20 +179,16 @@ export default function BusinessesPage() {
             <div className="flex flex-col md:flex-row gap-4 mb-6 justify-between items-end">
                 <div className="flex p-1 bg-secondary rounded-lg self-start">
                     <button
+                        type="button"
                         onClick={() => setActiveTab('all')}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'all'
-                            ? 'bg-background text-foreground shadow-sm'
-                            : 'text-muted-foreground hover:text-foreground'
-                            }`}
+                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'all' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                     >
                         All Businesses
                     </button>
                     <button
+                        type="button"
                         onClick={() => setActiveTab('pending')}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all flex items-center gap-2 ${activeTab === 'pending'
-                            ? 'bg-background text-foreground shadow-sm'
-                            : 'text-muted-foreground hover:text-foreground'
-                            }`}
+                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all flex items-center gap-2 ${activeTab === 'pending' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                     >
                         Pending Claims
                         {pendingCount > 0 && (
@@ -259,7 +230,7 @@ export default function BusinessesPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-border">
-                            {filteredBusinesses.map((business) => (
+                            {businesses.map((business) => (
                                 <tr key={business.id} className="hover:bg-secondary/20 transition-colors">
                                     <td className="p-4">
                                         <div className="font-medium text-foreground">{business.name}</div>
@@ -275,52 +246,35 @@ export default function BusinessesPage() {
                                         <div className="text-xs text-muted-foreground">{business.city}</div>
                                     </td>
                                     <td className="p-4">
-                                        <div className="flex items-center gap-2">
-                                            {business.is_premium ? (
-                                                <span className="bg-purple-500/10 text-purple-500 text-[10px] px-2 py-0.5 rounded border border-purple-500/20 font-bold uppercase">PRO</span>
-                                            ) : (
-                                                <span className="text-xs text-muted-foreground">Free</span>
-                                            )}
-                                        </div>
+                                        {business.is_premium ? (
+                                            <span className="bg-purple-500/10 text-purple-500 text-[10px] px-2 py-0.5 rounded border border-purple-500/20 font-bold uppercase">PRO</span>
+                                        ) : (
+                                            <span className="text-xs text-muted-foreground">Free</span>
+                                        )}
                                     </td>
                                     <td className="p-4">
                                         {business.claim_status === 'pending' ? (
                                             <div className="flex items-center gap-2">
-                                                <Button
-                                                    size="sm"
-                                                    className="h-7 bg-green-600 hover:bg-green-700 text-white"
-                                                    onClick={() => approveClaim(business)}
-                                                >
+                                                <Button size="sm" className="h-7 bg-green-600 hover:bg-green-700 text-white" onClick={() => approveClaim(business)}>
                                                     <CheckCircle className="w-3 h-3 mr-1" /> Approve
                                                 </Button>
-                                                <Button
-                                                    size="sm"
-                                                    variant="destructive"
-                                                    className="h-7"
-                                                    onClick={() => rejectClaim(business)}
-                                                >
+                                                <Button size="sm" variant="destructive" className="h-7" onClick={() => rejectClaim(business)}>
                                                     <XCircle className="w-3 h-3" />
                                                 </Button>
                                             </div>
                                         ) : (
                                             <button
+                                                type="button"
                                                 onClick={() => toggleVerified(business.id, business.verified)}
-                                                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${business.verified
-                                                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
-                                                    : "bg-orange-500/10 text-orange-500 hover:bg-orange-500/20"
-                                                    }`}
+                                                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${business.verified ? "bg-green-500/10 text-green-500 hover:bg-green-500/20" : "bg-orange-500/10 text-orange-500 hover:bg-orange-500/20"}`}
                                             >
-                                                {business.verified ? (
-                                                    <><CheckCircle className="w-3 h-3" /> Verified</>
-                                                ) : (
-                                                    <><XCircle className="w-3 h-3" /> Unverified</>
-                                                )}
+                                                {business.verified ? <><CheckCircle className="w-3 h-3" /> Verified</> : <><XCircle className="w-3 h-3" /> Unverified</>}
                                             </button>
                                         )}
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-end gap-1">
-                                            <a href={`/admin/profile-editor?id=${business.id}`}>
+                                            <a href={`/admin/profile-editor?id=${business.id}`} title={`Edit ${business.name}`}>
                                                 <Button variant="ghost" size="icon" className="h-8 w-8 text-blue-500 hover:text-blue-600 hover:bg-blue-50">
                                                     <Edit className="w-4 h-4" />
                                                 </Button>
@@ -340,28 +294,57 @@ export default function BusinessesPage() {
                         </tbody>
                     </table>
 
-                    {filteredBusinesses.length === 0 && (
+                    {businesses.length === 0 && (
                         <div className="text-center py-16">
                             <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-muted-foreground">
                                 <Search className="w-8 h-8 opacity-50" />
                             </div>
                             <h3 className="text-lg font-medium">No businesses found</h3>
                             <p className="text-muted-foreground mt-1">
-                                {activeTab === 'pending'
-                                    ? "No pending claims at the moment."
-                                    : "Try adjusting your search terms."}
+                                {activeTab === 'pending' ? "No pending claims at the moment." : "Try adjusting your search terms."}
                             </p>
+                        </div>
+                    )}
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+                            <p className="text-sm text-muted-foreground">
+                                {startItem}–{endItem} of {totalCount.toLocaleString()}
+                            </p>
+                            <div className="flex items-center gap-2">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setPage(p => Math.max(0, p - 1))}
+                                    disabled={page === 0}
+                                >
+                                    <ChevronLeft className="w-4 h-4" />
+                                    Previous
+                                </Button>
+                                <span className="text-sm text-muted-foreground px-2">
+                                    Page {page + 1} of {totalPages}
+                                </span>
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                                    disabled={page >= totalPages - 1}
+                                >
+                                    Next
+                                    <ChevronRight className="w-4 h-4" />
+                                </Button>
+                            </div>
                         </div>
                     )}
                 </div>
             )}
 
-            {/* Business Modal */}
             <BusinessModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 business={editingBusiness}
-                onSuccess={loadBusinesses}
+                onSuccess={() => loadBusinesses(page, searchQuery, activeTab)}
             />
 
             <AlertDialog open={!!deleteConfirmation} onOpenChange={(open) => !open && setDeleteConfirmation(null)}>
@@ -374,10 +357,7 @@ export default function BusinessesPage() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                            onClick={executeDelete}
-                            className="bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700"
-                        >
+                        <AlertDialogAction onClick={executeDelete} className="bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700">
                             Delete Business
                         </AlertDialogAction>
                     </AlertDialogFooter>
