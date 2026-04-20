@@ -2,8 +2,6 @@
 # Broken Window or Door Glass? 
 ## Securing Your Home Until the Glazier Arrives
 
-![Broken Window Securing](/blog/uk-broken-window-securing.png)
-
 There is a sharp, sudden sound that every homeowner dreads: the crash of breaking glass. Whether it’s a stray football from the neighbour’s garden, a branch snapping off in a gale, or an unfortunate accident with a ladder, a broken window leaves your home feeling exposed. In the UK, where security and weatherproofing are top priorities, a shattered pane isn’t just an eyesore—it’s a vulnerability.
 
 I know that sinking feeling when you see shards on the floor. But before you panic about the cost or the cold draft, let’s focus on securing your home safely. Here is how to manage the situation until a professional glazier can arrive for an emergency repair.

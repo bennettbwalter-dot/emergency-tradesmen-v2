@@ -2,8 +2,6 @@
 # Smart Lock Dead or Key Broken? 
 ## How to Get Back In Without Damage
 
-![Smart Lock Failures](/blog/us-lockout-smart-lock.png)
-
 It’s a modern nightmare: you walk up to your front door, tap your phone or key fob, and nothing happens. The battery is dead, the app is glitching, or worse, your physical key snaps off in the lock. In the US, where smart home technology is booming, these digital failures are becoming as common as lost keys. And when you’re locked out in the heat or cold, frustration sets in fast.
 
 Before you kick the door or call a pricey locksmith, there are smart, safe steps you can take. Let’s walk through how to regain access without damaging your property.
