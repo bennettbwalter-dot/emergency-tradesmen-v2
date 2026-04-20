@@ -7,7 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { MapPin, X, Check, Search } from "lucide-react";
 import { EditorProps } from "./types";
 import { motion } from "framer-motion";
-import { trades, cities } from "@/lib/trades";
+import { trades, cities, usCities, usCityToState } from "@/lib/trades";
+import { isUSDomain } from "@/lib/siteConfig";
 
 const SERVICE_OPTIONS = [
     "Emergency Callouts", "24/7 Availability", "Free Quotes", "Domestic Work",
@@ -17,6 +18,8 @@ const SERVICE_OPTIONS = [
 export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
     const { toast } = useToast();
     const [citySearch, setCitySearch] = useState("");
+    const isUS = isUSDomain();
+    const availableCities = isUS ? [...usCities].sort() : [...cities].sort();
 
     const locationLimit = formData.location_limit || 1;
     const selectedLocations = formData.selected_locations || [];
@@ -50,7 +53,7 @@ export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
         setFormData({ ...formData, services_offered: newServs });
     };
 
-    const filteredCities = cities.filter(c => c.toLowerCase().includes(citySearch.toLowerCase()));
+    const filteredCities = availableCities.filter(c => c.toLowerCase().includes(citySearch.toLowerCase()));
 
     return (
         <motion.div
@@ -73,7 +76,7 @@ export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
                                     <SelectValue placeholder="Select Trade" />
                                 </SelectTrigger>
                                 <SelectContent className="bg-slate-900 border-slate-800 text-slate-100">
-                                    {trades.map(t => <SelectItem key={t.slug} value={t.slug}>{t.name}</SelectItem>)}
+                                    {trades.map(t => <SelectItem key={t.slug} value={t.slug}>{isUS ? t.usName : t.name}</SelectItem>)}
                                 </SelectContent>
                             </Select>
                         </div>
@@ -113,43 +116,63 @@ export function ServiceAreaTab({ formData, setFormData }: EditorProps) {
                                 <input
                                     type="text"
                                     className="w-full bg-slate-900 border border-slate-800 rounded-md py-2 pl-9 pr-4 text-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
-                                    placeholder="Search details..."
+                                    placeholder={isUS ? "Search US cities..." : "Search UK cities..."}
                                     value={citySearch}
                                     onChange={e => setCitySearch(e.target.value)}
                                 />
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-                            {filteredCities.map(city => (
-                                <button
-                                    type="button"
-                                    key={city}
-                                    onClick={() => toggleLocation(city)}
-                                    disabled={!selectedLocations.includes(city) && selectedLocations.length >= locationLimit}
-                                    className={`text-left px-3 py-2 rounded-md text-sm transition-all flex justify-between items-center ${selectedLocations.includes(city)
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+                            {filteredCities.map(city => {
+                                const stateAbbr = isUS ? usCityToState[city] : null;
+                                const isSelected = selectedLocations.includes(city);
+                                const isDisabled = !isSelected && selectedLocations.length >= locationLimit;
+                                return (
+                                    <button
+                                        type="button"
+                                        key={city}
+                                        onClick={() => toggleLocation(city)}
+                                        disabled={isDisabled}
+                                        className={`text-left px-3 py-2 rounded-md text-sm transition-all flex items-center justify-between gap-1 ${isSelected
                                             ? 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30'
                                             : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-                                        } ${(!selectedLocations.includes(city) && selectedLocations.length >= locationLimit) ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                >
-                                    {city}
-                                    {selectedLocations.includes(city) && <Check className="w-3 h-3" />}
-                                </button>
-                            ))}
+                                        } ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    >
+                                        <span className="truncate">{city}</span>
+                                        <span className="flex items-center gap-1 shrink-0">
+                                            {stateAbbr && (
+                                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${isSelected ? 'bg-[#D4AF37]/30 text-[#D4AF37]' : 'bg-slate-700 text-slate-300'}`}>
+                                                    {stateAbbr}
+                                                </span>
+                                            )}
+                                            {isSelected && <Check className="w-3 h-3 shrink-0" />}
+                                        </span>
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
 
                     {/* Selected Tags */}
                     {selectedLocations.length > 0 && (
                         <div className="flex flex-wrap gap-2 mt-4">
-                            {selectedLocations.map((loc: string) => (
-                                <Badge key={loc} className="pl-3 pr-1 py-1 text-sm bg-slate-800 text-slate-200 border-slate-700">
-                                    {loc}
-                                    <Button variant="ghost" size="sm" className="h-5 w-5 ml-2 p-0 rounded-full hover:bg-slate-700 text-slate-400 hover:text-white" onClick={() => toggleLocation(loc)}>
-                                        <X className="w-3 h-3" />
-                                    </Button>
-                                </Badge>
-                            ))}
+                            {selectedLocations.map((loc: string) => {
+                                const stateAbbr = isUS ? usCityToState[loc] : null;
+                                return (
+                                    <Badge key={loc} className="pl-3 pr-1 py-1 text-sm bg-slate-800 text-slate-200 border-slate-700 flex items-center gap-1.5">
+                                        {loc}
+                                        {stateAbbr && (
+                                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#D4AF37]/20 text-[#D4AF37]">
+                                                {stateAbbr}
+                                            </span>
+                                        )}
+                                        <Button variant="ghost" size="sm" className="h-5 w-5 ml-1 p-0 rounded-full hover:bg-slate-700 text-slate-400 hover:text-white" onClick={() => toggleLocation(loc)}>
+                                            <X className="w-3 h-3" />
+                                        </Button>
+                                    </Badge>
+                                );
+                            })}
                         </div>
                     )}
                 </div>

@@ -6,7 +6,7 @@ export interface Subscription {
     userId: string;
     paymentCustomerId?: string;
     paymentSubscriptionId?: string;
-    plan: 'free' | 'professional' | 'enterprise' | 'pro' | 'premium';
+    plan: 'free' | 'professional' | 'enterprise' | 'pro' | 'premium' | 'agency';
     status: 'active' | 'canceled' | 'past_due' | 'trialing' | 'inactive' | 'locked' | 'payment_failed';
     subscriptionExpiresAt?: string;
     currentPeriodStart?: string;
@@ -166,17 +166,17 @@ export async function hasAccess(requiredPlan: 'professional' | 'enterprise'): Pr
         }
     }
 
-    // Normalize plan names: 'pro' -> 'professional', 'premium' -> 'enterprise'
     const normalizePlan = (plan: string): string => {
         if (plan === 'pro') return 'professional';
         if (plan === 'premium') return 'enterprise';
+        if (plan === 'agency') return 'enterprise';
         return plan;
     };
 
-    const planHierarchy = { free: 0, professional: 1, enterprise: 2 };
+    const planHierarchy: Record<string, number> = { free: 0, professional: 1, enterprise: 2 };
     const normalizedPlan = normalizePlan(subscription.plan);
     const normalizedRequired = normalizePlan(requiredPlan);
-    return planHierarchy[normalizedPlan] >= planHierarchy[normalizedRequired];
+    return (planHierarchy[normalizedPlan] ?? 0) >= (planHierarchy[normalizedRequired] ?? 0);
 }
 
 // Check if current user is locked out due to payment failure

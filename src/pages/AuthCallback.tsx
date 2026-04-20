@@ -12,8 +12,6 @@ const AuthCallback = () => {
         // and updates the session. We just need to wait and redirect.
 
         const handleAuth = async () => {
-            console.log('🔁 AuthCallback URL:', window.location.href);
-            // Handle error params returned by Supabase (e.g. code exchange failure)
             const params = new URLSearchParams(window.location.search);
             if (params.get('error')) {
                 console.error("Auth callback error:", params.get('error'), params.get('error_description'));
@@ -22,7 +20,6 @@ const AuthCallback = () => {
             }
 
             const { data: { session }, error } = await supabase.auth.getSession();
-            console.log('🔁 AuthCallback session:', !!session, 'error:', error?.message);
 
             if (error) {
                 console.error("Auth callback error:", error);

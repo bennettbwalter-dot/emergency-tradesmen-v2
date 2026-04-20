@@ -16,19 +16,21 @@ import usCityList from './us_cities.json';
 import { cityPostcodes } from './cityPostcodes';
 import { US_STATES } from './us_states';
 
-// Enforce US-only cities
-const getReferencedCities = (data: any): string[] => {
+// Build city list and city→state abbreviation map from us_cities.json
+const buildUSData = (data: any): { cities: string[]; cityToState: Record<string, string> } => {
+  const citiesSet = new Set<string>();
+  const cityToState: Record<string, string> = {};
   if (data && Array.isArray(data.states)) {
-    const citiesSet: Set<string> = new Set();
     data.states.forEach((state: any) => {
+      const abbr = (state.slug as string).toUpperCase();
       if (state.metros) {
         state.metros.forEach((metro: any) => {
           if (metro.cities) {
             metro.cities.forEach((city: any) => {
-              if (city.name) citiesSet.add(city.name);
+              if (city.name) { citiesSet.add(city.name); cityToState[city.name] = abbr; }
               if (city.suburbs) {
                 city.suburbs.forEach((sub: any) => {
-                  if (sub.name) citiesSet.add(sub.name);
+                  if (sub.name) { citiesSet.add(sub.name); cityToState[sub.name] = abbr; }
                 });
               }
             });
@@ -36,16 +38,15 @@ const getReferencedCities = (data: any): string[] => {
         });
       }
     });
-    return Array.from(citiesSet);
   }
-  return [];
+  return { cities: Array.from(citiesSet), cityToState };
 };
 
-// Standardize the cities list to be dynamically derived from the *actual* data source
-// We use cityPostcodes as the master list as it contains the full set of intended UK cities (e.g. Aberdeen)
 export const cities = Object.keys(cityPostcodes).sort() as readonly string[];
 
-export const usCities = getReferencedCities(usCityList) as readonly string[];
+const _usData = buildUSData(usCityList);
+export const usCities = _usData.cities as readonly string[];
+export const usCityToState: Readonly<Record<string, string>> = _usData.cityToState;
 
 export const cityToState: Record<string, string> = {
   // California (CA)

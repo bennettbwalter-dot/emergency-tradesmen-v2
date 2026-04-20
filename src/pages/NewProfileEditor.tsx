@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
 import { createClient } from "@supabase/supabase-js";
 import { isDeveloper, hasAccess, getUserSubscription } from "@/lib/subscriptionService";
+import { isUSDomain } from "@/lib/siteConfig";
 import { Crown, ShieldCheck, Eye, CheckCircle2, ChevronRight, AlertCircle, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -85,13 +86,15 @@ export default function NewProfileEditor() {
         }
 
         if (user && !isAdminArea && !isDevUser) {
-            const premium = await hasAccess('professional');
-            if (!premium) {
-                toast({
-                    title: "Premium Feature",
-                    description: "The Profile Editor is only available to Pro members.",
-                    variant: "default"
-                });
+            const { isLocked: checkLocked } = await import('@/lib/subscriptionService');
+            const [paid, locked] = await Promise.all([hasAccess('professional'), checkLocked()]);
+            if (locked) {
+                toast({ title: "Account Locked", description: "Your account is locked due to a payment issue. Please update your billing details.", variant: "destructive" });
+                navigate('/billing');
+                return;
+            }
+            if (!paid) {
+                toast({ title: "Paid Plan Required", description: "The Profile Editor is only available to Pro subscribers. Upgrade to get access.", variant: "default" });
                 navigate('/pricing');
                 return;
             }
@@ -182,13 +185,14 @@ export default function NewProfileEditor() {
                         slug: `pro-biz-${Date.now()}`,
                         name: "Your Business Name",
                         trade: "plumber",
-                        city: "London",
+                        city: isUSDomain() ? "New York" : "London",
                         email: user?.email,
                         is_premium: true,
                         tier: "paid",
                         verified: true,
                         hours: "24/7",
-                        is_open_24_hours: true
+                        is_open_24_hours: true,
+                        country_code: isUSDomain() ? 'US' : 'GB',
                     };
 
                     devLog("Trying direct insert with owner metadata...");
@@ -342,6 +346,7 @@ export default function NewProfileEditor() {
                 header_image_url: urls.header,
                 vehicle_image_url: urls.vehicle,
                 photos: urls.gallery,
+                country_code: isUSDomain() ? 'US' : 'GB',
                 updated_at: new Date().toISOString()
             }).eq('id', businessId);
 
