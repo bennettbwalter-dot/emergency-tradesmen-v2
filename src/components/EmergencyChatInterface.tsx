@@ -567,14 +567,18 @@ export function EmergencyChatInterface() {
 
     const handleMicToggle = async () => {
         if (isRecording) {
-            toast.info("Processing voice...", { id: 'stt-status', duration: 2000 });
+            toast.info("Transcribing voice message...", { id: 'stt-status', duration: 2000 });
             stopRecording();
             stopVolumeMonitor();
         } else {
             try {
                 await startRecording();
                 startVolumeMonitor();
-                toast.success("Microphone active. Speak now.", { id: 'stt-status', duration: 3000 });
+                toast.success("Listening... Please describe your emergency now.", { 
+                    id: 'stt-status', 
+                    duration: 5000,
+                    description: "Tap the checkmark when you're finished speaking."
+                });
             } catch (err) {
                 toast.error("Microphone access denied or failed.");
                 console.error("[Mic] Error:", err);

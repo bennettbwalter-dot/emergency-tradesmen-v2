@@ -236,7 +236,7 @@ export const SVGButton = ({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="absolute inset-0 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-3xl"
+                            className="absolute inset-0 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-3xl z-30"
                         >
                             <Loader2 className="w-8 h-8 text-teal-600 animate-spin" />
                         </motion.div>

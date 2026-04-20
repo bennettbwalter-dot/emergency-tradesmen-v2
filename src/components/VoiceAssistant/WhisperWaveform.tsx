@@ -195,13 +195,13 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
                         </div>
                     ) : (
                         <>
-                            {/* 1. CONFIRM: Blue Circle with Checkmark */}
+                            {/* 1. CONFIRM: Blue Circle with 'End' text */}
                             <button
                                 onClick={onConfirm}
                                 className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] flex items-center justify-center transition-all hover:scale-110 active:scale-95 text-white"
                                 aria-label="Confirm speech"
                             >
-                                <Check size={16} className="md:size-20 stroke-[2.5px]" />
+                                <span className="text-xs md:text-sm font-bold">End</span>
                             </button>
 
                             {/* Mobile-optimized spacing for cancel/options */}

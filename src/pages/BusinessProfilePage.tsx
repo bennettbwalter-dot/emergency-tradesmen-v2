@@ -14,7 +14,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import {
     Star, MapPin, Phone, Clock, ExternalLink, Shield, CheckCircle,
-    Award, ThumbsUp, Calendar, ArrowLeft, ShieldCheck, Mail, Facebook, Instagram, Linkedin, Twitter, Video
+    Award, ThumbsUp, Calendar, ShieldCheck, Mail, Facebook, Instagram, Linkedin, Twitter, Video
 } from "lucide-react";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 import { InteractiveMap } from "@/components/InteractiveMap";
@@ -382,13 +382,15 @@ export default function BusinessProfilePage() {
                 {/* Breadcrumb Navigation - Subtle for dark theme */}
                 <div className="bg-[#0A0A0A] pt-6 sm:pt-10">
                     <div className="container-wide">
-                        <Link
-                            to={`/${trade === 'gas-engineer' ? 'emergency-gas-engineer' : 'emergency-' + trade}/${city.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="inline-flex items-center text-xs uppercase tracking-widest text-muted-foreground hover:text-gold transition-colors"
-                        >
-                            <ArrowLeft className="w-4 h-4 mr-2" />
-                            Back to {formattedCity} {formattedTrade}s
-                        </Link>
+                        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
+                            <Link to="/" className="hover:text-gold transition-colors">Home</Link>
+                            <span className="text-gold/40">/</span>
+                            <Link to={`/${tradePathSlug}`} className="hover:text-gold transition-colors">Emergency {formattedTrade}</Link>
+                            <span className="text-gold/40">/</span>
+                            <Link to={`/${tradePathSlug}/${citySlug}`} className="hover:text-gold transition-colors">{formattedCity}</Link>
+                            <span className="text-gold/40">/</span>
+                            <span aria-current="page" className="text-gold truncate max-w-[14rem] normal-case tracking-normal">{business.name}</span>
+                        </nav>
                     </div>
                 </div>
 

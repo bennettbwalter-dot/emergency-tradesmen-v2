@@ -498,6 +498,13 @@ export default function TradeCityPage() {
     }))
   }), [JSON.stringify(faqs)]);
 
+  // --- Long-tail SEO: derive state code and coordinates ---
+  const isUS = actualCountry === 'US';
+  const tradeName = tradeDisplayName.toLowerCase(); // FIXED: restored tradeName for downstream usages
+  const stateSlug = isUS ? cityToState[cityName]?.toUpperCase() : '';
+  const stateCode = stateSlug || '';
+  const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+
   const breadcrumbSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -511,24 +518,17 @@ export default function TradeCityPage() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Locations",
-        "item": `${baseDomain}/locations`
+        "name": `Emergency ${tradeDisplayName}`,
+        "item": `${baseDomain}/emergency-${tradeInfo.slug}`
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": `${tradeDisplayName} in ${cityName}`,
-        "item": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase()}`
+        "name": `${cityName}${isUS && stateCode ? `, ${stateCode}` : ''}`,
+        "item": `${baseDomain}/emergency-${tradeInfo.slug}/${citySlug}`
       }
     ]
-  }), [baseDomain, tradeInfo.slug, cityName, tradeDisplayName]);
-
-  // --- Long-tail SEO: derive state code and coordinates ---
-  const isUS = actualCountry === 'US';
-  const tradeName = tradeDisplayName.toLowerCase(); // FIXED: restored tradeName for downstream usages
-  const stateSlug = isUS ? cityToState[cityName]?.toUpperCase() : '';
-  const stateCode = stateSlug || '';
-  const citySlug = cityName.toLowerCase().replace(/\s+/g, '-');
+  }), [baseDomain, tradeInfo.slug, cityName, tradeDisplayName, citySlug, isUS, stateCode]);
 
   // FIXED: Ensure coordinates are resolved correctly for map centering
   const isCityInUS = usCities.includes(cityName);
@@ -642,12 +642,12 @@ export default function TradeCityPage() {
 
           <div className="relative container-wide py-16 md:py-24 z-10">
             <div className="max-w-3xl">
-              <nav className="flex items-center gap-2 text-muted-foreground/60 text-sm mb-8">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-muted-foreground/60 text-sm mb-8">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
-                <span className="text-foreground/80">Emergency {tradeDisplayName}</span>
+                <Link to={`/emergency-${tradeInfo.slug}`} className="text-foreground/80 hover:text-gold transition-colors">Emergency {tradeDisplayName}</Link>
                 <span className="text-gold/50">/</span>
-                <span className="text-gold font-medium">{cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</span>
+                <span className="text-gold font-medium" aria-current="page">{cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</span>
               </nav>
 
               <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-secondary/50 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">

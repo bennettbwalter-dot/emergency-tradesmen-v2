@@ -850,13 +850,13 @@ export default function BlogPostPage() {
           {/* ── HEADER ──────────────────────────────────────────────── */}
         <header className="mb-10 md:mb-14">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-neutral-400 mb-5 uppercase tracking-wider font-semibold">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-neutral-400 mb-5 uppercase tracking-wider font-semibold">
             <Link to="/" className="hover:text-orange-500 transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
             <Link to="/blog" className="hover:text-orange-500 transition-colors">Blog</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className={isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}>Article</span>
-          </div>
+            <span aria-current="page" className={`truncate max-w-[16rem] normal-case tracking-normal ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}`}>{post.title}</span>
+          </nav>
 
           {/* Category badge */}
           <div className="mb-4">
