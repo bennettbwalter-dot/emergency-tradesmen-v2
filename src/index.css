@@ -408,42 +408,22 @@
 }
 
 /* --- 2. KNOWLEDGE CAPSULES --- */
-.capsule-box, .highlight-box {
-  background: rgba(215, 192, 138, 0.12);
-  border: 2px solid rgba(215, 192, 138, 0.4);
-  border-left: 8px solid #d7c08a;
-  padding: 2.5rem 2rem;
-  border-radius: 1.5rem;
-  margin: 4rem 0;
-  box-shadow: 0 15px 35px -5px rgba(215, 192, 138, 0.1);
+.capsule-box {
+  background: rgba(215, 192, 138, 0.1);
+  border: 1px solid rgba(215, 192, 138, 0.3);
+  border-left: 5px solid #d7c08a;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin: 1.5rem 0 2rem 0;
+  box-shadow: inset 0 0 20px rgba(215, 192, 138, 0.05);
 }
 
 @media (min-width: 768px) {
-  .capsule-box, .highlight-box {
-    padding: 3.5rem 4.5rem;
-    margin: 6rem 0;
-  }
-}
-
-/* --- 3. SECTION WRAPPERS --- */
-.section-container {
-  background: white;
-  border-radius: 2rem;
-  padding: 3rem 2rem;
-  margin: 4rem 0;
-  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-.dark .section-container {
-  background: #111;
-  border-color: rgba(255, 255, 255, 0.03);
-}
-
-@media (min-width: 768px) {
-  .section-container {
-    padding: 5rem 6rem;
-    margin: 8rem 0;
+  .capsule-box {
+    padding: 2.5rem;
+    border-radius: 0 1.5rem 1.5rem 0;
+    margin: 2rem 0 3rem 0;
+    box-shadow: inset 0 0 40px rgba(215, 192, 138, 0.05);
   }
 }
 
@@ -646,7 +626,28 @@
   }
 }
 
-/* Consolidated with capsule-box above */
+/* --- 3. KNOWLEDGE CAPSULES & HIGHLIGHT BOXES --- */
+.capsule-box,
+.highlight-box {
+  background: rgba(215, 192, 138, 0.04);
+  border: 2px solid rgba(215, 192, 138, 0.15);
+  border-left: 6px solid #d7c08a;
+  padding: 2rem 1.5rem;
+  border-radius: var(--card-radius);
+  margin: 3rem 0;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.02);
+}
+
+@media (min-width: 768px) {
+
+  .capsule-box,
+  .highlight-box {
+    border-left: 8px solid #d7c08a;
+    padding: 4rem 5rem;
+    margin: 6rem 0;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.03);
+  }
+}
 
 /* --- 4. FUNKY FUN FACT (TIER 1 CARDS) --- */
 .funky-fun-fact {
@@ -777,13 +778,13 @@
 
 /* Dark mode overrides */
 .dark .dos-column {
-  background-color: rgba(46, 204, 113, 0.1);
-  border-top-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.05);
+  box-shadow: none;
 }
 
 .dark .donts-column {
-  background-color: rgba(231, 76, 60, 0.1);
-  border-top-color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.05);
+  box-shadow: none;
 }
 
 .dark .dos-column li,
