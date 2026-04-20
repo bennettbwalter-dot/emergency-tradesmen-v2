@@ -115,6 +115,11 @@ export default function PricingPage() {
                 description={`Boost your business with Emergency ${isUS ? 'Contractors' : 'Tradesmen'} Pro. Get priority ranking, enhanced trust signals & 3x more leads. Sign up today from ${settings.currencySymbol}0/month.`}
                 canonical={`${countryPrefix}/pricing`}
                 jsonLd={breadcrumbSchema}
+                alternates={[
+                    { lang: 'en-GB', href: 'https://emergencytradesmen.net/pricing' },
+                    { lang: 'en-US', href: 'https://emergencycontractors.net/pricing' },
+                    { lang: 'x-default', href: 'https://emergencytradesmen.net/pricing' },
+                ]}
             />
             <Header />
             <main className="min-h-screen bg-background py-20">

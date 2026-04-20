@@ -158,17 +158,26 @@ export type Trade = typeof trades[number];
 export type City = typeof cities[number];
 
 export const commonProblems = [
-  { slug: "burst-pipe", name: "Burst Pipe Repair", trade: "plumber", description: "Immediate repair for burst water pipes and massive leaks." },
-  { slug: "no-hot-water", name: "No Hot Water Service", trade: "plumber", description: "Emergency diagnosis and repair when your hot water stops working." },
-  { slug: "boiler-breakdown", name: "Boiler Breakdown Repair", trade: "gas-engineer", description: "24/7 emergency gas engineer for boiler failures and heating loss." },
-  { slug: "power-cut-fault", name: "Emergency Power Cut Fault", trade: "electrician", description: "Investigating and fixing sudden power outages in your property." },
-  { slug: "lockout", name: "Emergency Lockout Service", trade: "locksmith", description: "Non-destructive entry when you are locked out of your home or business." },
-  { slug: "broken-window", name: "Emergency Window Boarding", trade: "glazier", description: "Rapid boarding and glass replacement for smashed windows and doors." },
-  { slug: "drain-unblocking", name: "Emergency Drain Unblocking", trade: "drain-specialist", description: "Fast clearance of blocked toilets, sinks, and external drains." },
-  { slug: "water-damage", name: "Water Damage Restoration", trade: "water-restoration", description: "Rapid extraction and drying for flooding, burst pipes, and water damage." },
+  { slug: "burst-pipe", name: "Burst Pipe Repair", trade: "plumber", description: "Immediate repair for burst water pipes and massive leaks.", country: "BOTH" },
+  { slug: "no-hot-water", name: "No Hot Water Service", trade: "plumber", description: "Emergency diagnosis and repair when your hot water stops working.", country: "BOTH" },
+  { slug: "boiler-breakdown", name: "Boiler Breakdown Repair", trade: "gas-engineer", description: "24/7 emergency gas engineer for boiler failures and heating loss.", country: "GB" },
+  { slug: "power-cut-fault", name: "Emergency Power Cut Fault", trade: "electrician", description: "Investigating and fixing sudden power outages in your property.", country: "BOTH" },
+  { slug: "lockout", name: "Emergency Lockout Service", trade: "locksmith", description: "Non-destructive entry when you are locked out of your home or business.", country: "BOTH" },
+  { slug: "broken-window", name: "Emergency Window Boarding", trade: "glazier", description: "Rapid boarding and glass replacement for smashed windows and doors.", country: "BOTH" },
+  { slug: "drain-unblocking", name: "Emergency Drain Unblocking", trade: "drain-specialist", description: "Fast clearance of blocked toilets, sinks, and external drains.", country: "BOTH" },
+  { slug: "water-damage", name: "Water Damage Restoration", trade: "water-restoration", description: "Rapid extraction and drying for flooding, burst pipes, and water damage.", country: "US" },
+  { slug: "gas-leak", name: "Emergency Gas Leak Response", trade: "gas-engineer", description: "Urgent 24/7 response for suspected gas leaks, fumes, and unsafe appliances.", country: "GB" },
+  { slug: "toilet-overflow", name: "Toilet Overflow & Blockage", trade: "plumber", description: "Rapid response for overflowing or severely blocked toilets to stop flooding.", country: "BOTH" },
+  { slug: "frozen-pipes", name: "Frozen Pipe Thawing & Repair", trade: "plumber", description: "Emergency thawing and repair for frozen or burst pipes in cold weather.", country: "BOTH" },
+  { slug: "ac-not-cooling", name: "AC Not Cooling Repair", trade: "hvac", description: "Same-day diagnosis and repair when your air conditioning stops cooling.", country: "US" },
+  { slug: "furnace-breakdown", name: "Furnace Breakdown Repair", trade: "hvac", description: "24/7 emergency furnace and heating repair when your system fails.", country: "US" },
+  { slug: "water-heater-failure", name: "Water Heater Emergency Repair", trade: "plumber", description: "Fast diagnosis and repair when your water heater fails or leaks.", country: "US" },
 ] as const;
 
 export type CommonProblem = typeof commonProblems[number];
+
+export const ukProblems = commonProblems.filter(p => p.country === "GB" || p.country === "BOTH");
+export const usProblems = commonProblems.filter(p => p.country === "US" || p.country === "BOTH");
 
 export interface TradePageData {
   trade: Trade;
@@ -192,6 +201,9 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
 
   // Allow tradeSlug to also be a problem slug
   const problem = commonProblems.find(p => p.slug === tradeSlug);
+  if (problem && problem.country !== "BOTH" && problem.country !== countryCode) {
+    return null;
+  }
   const trade = trades.find(t => t.slug === (problem ? problem.trade : tradeSlug));
 
   // Basic city normalization (slug to name approximation)

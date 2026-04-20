@@ -7,11 +7,12 @@ import {
 } from "@/components/ui/accordion";
 import { HelpCircle, Shield, Zap, Search, MessageSquare, HardHat, Clock, CreditCard, UserCheck, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { isUSDomain } from '@/lib/siteConfig';
 
-const faqData = [
+const ukFaqData = [
     {
         question: "What is Emergency Tradesmen?",
-        answer: "Emergency Tradesmen is a platform that helps you quickly find and contact trusted local tradespeople for urgent problems such as plumbing, electrical faults, gas issues, lockouts, broken windows, drainage problems, and emergency breakdowns.",
+        answer: "Emergency Tradesmen is a UK platform that helps you quickly find and contact trusted local tradespeople for urgent problems such as plumbing, electrical faults, gas issues, lockouts, broken windows, drainage problems, and emergency breakdowns.",
         icon: <HelpCircle className="w-5 h-5 text-gold" />
     },
     {
@@ -36,7 +37,7 @@ const faqData = [
     },
     {
         question: "What trades are covered?",
-        answer: "Emergency Tradesmen covers: Emergency plumbers, Emergency electricians, Gas engineers, Locksmiths, Glaziers, Drain specialists, Emergency breakdown and roadside recovery services. All focused on urgent call-outs.",
+        answer: "Emergency Tradesmen covers: emergency plumbers, emergency electricians, gas engineers, locksmiths, glaziers, drain specialists, and emergency breakdown and roadside recovery services. All focused on urgent call-outs.",
         icon: <HardHat className="w-5 h-5 text-gold" />
     },
     {
@@ -61,7 +62,65 @@ const faqData = [
     },
     {
         question: "What should I do if my situation is dangerous?",
-        answer: "If there is immediate danger to life or property (such as fire, gas leaks, or serious injury), always contact emergency services first. The chatbot will also advise this when appropriate.",
+        answer: "If there is immediate danger to life or property (such as fire, gas leaks, or serious injury), always contact 999 first. The chatbot will also advise this when appropriate.",
+        icon: <AlertTriangle className="w-5 h-5 text-gold" />
+    }
+];
+
+const usFaqData = [
+    {
+        question: "What is Emergency Contractors?",
+        answer: "Emergency Contractors is a US platform that helps you quickly find and contact trusted local contractors for urgent problems such as plumbing, electrical faults, HVAC failures, lockouts, broken windows, drain backups, and roadside emergencies.",
+        icon: <HelpCircle className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "How does the service work?",
+        answer: "You can either use the chatbot to describe your emergency, or search manually by trade and location. We'll guide you to the right local contractor so you can call and get help immediately.",
+        icon: <Search className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "What does the AI chatbot do?",
+        answer: "Our AI assistant helps you understand what to do (and what not to do) in an emergency, follow basic safety guidance and US code best practices, identify the correct trade for your situation, and connect you to the right local contractor. You can simply talk to the bot — no searching required.",
+        icon: <MessageSquare className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "Is the chatbot safe to use in emergencies?",
+        answer: "Yes. The chatbot prioritizes safety, follows US code best practices, avoids giving dangerous DIY instructions, and encourages calling a licensed professional when needed. It provides guidance, not repairs.",
+        icon: <Shield className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "Does the chatbot replace calling a contractor?",
+        answer: "No. The chatbot guides and routes you, but the final step is always direct contact with a licensed professional. Once the right contractor is found, you simply tap to call.",
+        icon: <Zap className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "What trades are covered?",
+        answer: "Emergency Contractors covers: emergency plumbers, emergency electricians, HVAC technicians, locksmiths, glaziers, drain and sewer specialists, and emergency roadside recovery services. All focused on urgent call-outs across the United States.",
+        icon: <HardHat className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "Do I need to fill in forms or create an account?",
+        answer: "No. There are no long forms and no required sign-ups. The goal is speed — find help and call straight away.",
+        icon: <UserCheck className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "How fast can someone respond?",
+        answer: "Response times depend on availability and location, but many US contractors offer 30–90 minute emergency response where possible.",
+        icon: <Clock className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "Is Emergency Contractors free to use?",
+        answer: "Yes. Searching and contacting contractors is free for homeowners. Contractors can choose optional premium plans for increased visibility.",
+        icon: <CreditCard className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "Are the contractors verified?",
+        answer: "Listings include verified details, reviews, and trust signals where available. Always confirm licensing, insurance, availability, and pricing directly with the contractor.",
+        icon: <UserCheck className="w-5 h-5 text-gold" />
+    },
+    {
+        question: "What should I do if my situation is dangerous?",
+        answer: "If there is immediate danger to life or property (such as fire, gas leaks, or serious injury), always call 911 first. The chatbot will also advise this when appropriate.",
         icon: <AlertTriangle className="w-5 h-5 text-gold" />
     }
 ];
@@ -80,6 +139,7 @@ export function GeneralFAQSection({
     initiallyOpened = false
 }: GeneralFAQSectionProps) {
     const [isOpened, setIsOpened] = React.useState(true);
+    const faqData = isUSDomain() ? usFaqData : ukFaqData;
 
     const content = (
         <div className="bg-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8">

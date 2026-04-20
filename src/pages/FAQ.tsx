@@ -23,10 +23,19 @@ export default function FAQ() {
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <SEO
-                title="Emergency Tradesmen FAQ — Find Verified Local Tradesmen 24/7"
-                description="Find answers to common questions about finding emergency plumbers, electricians & locksmiths near you. Get verified, insured tradesmen in 30-90 minutes. Learn more now."
+                title={isUSDomain
+                    ? "Emergency Contractors FAQ — Find Verified Local Contractors 24/7"
+                    : "Emergency Tradesmen FAQ — Find Verified Local Tradesmen 24/7"}
+                description={isUSDomain
+                    ? "Find answers to common questions about finding emergency plumbers, electricians & HVAC techs near you. Get verified, insured contractors in 30-90 minutes. Learn more now."
+                    : "Find answers to common questions about finding emergency plumbers, electricians & locksmiths near you. Get verified, insured tradesmen in 30-90 minutes. Learn more now."}
                 canonical="/faq"
                 jsonLd={breadcrumbSchema}
+                alternates={[
+                    { lang: 'en-GB', href: 'https://emergencytradesmen.net/faq' },
+                    { lang: 'en-US', href: 'https://emergencycontractors.net/faq' },
+                    { lang: 'x-default', href: 'https://emergencytradesmen.net/faq' },
+                ]}
             />
 
             <Header />

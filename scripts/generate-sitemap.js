@@ -87,8 +87,14 @@ const ukCities = [
     "Hastings", "Nuneaton", "Tamworth", "Cannock", "Bath"
 ];
 
-const commonProblems = [
-    "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking"
+// Keep in sync with src/lib/trades.ts → commonProblems. Problems are region-scoped.
+const ukProblems = [
+    "burst-pipe", "no-hot-water", "boiler-breakdown", "power-cut-fault", "lockout", "broken-window", "drain-unblocking",
+    "gas-leak", "toilet-overflow", "frozen-pipes"
+];
+const usProblems = [
+    "burst-pipe", "no-hot-water", "power-cut-fault", "lockout", "broken-window", "drain-unblocking", "water-damage",
+    "toilet-overflow", "frozen-pipes", "ac-not-cooling", "furnace-breakdown", "water-heater-failure"
 ];
 
 const BASE_URL_GB = 'https://emergencytradesmen.net';
@@ -219,7 +225,7 @@ async function generateSitemap() {
             }
         });
     });
-    commonProblems.forEach(problem => {
+    ukProblems.forEach(problem => {
         ukCities.forEach(city => {
             const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
             ukUrls.push({
@@ -243,6 +249,16 @@ async function generateSitemap() {
                     priority: '0.9'
                 });
             }
+        });
+    });
+    usProblems.forEach(problem => {
+        usCities.forEach(city => {
+            const citySlug = city.toLowerCase().replace(/ /g, '-').replace('&', 'and');
+            usUrls.push({
+                loc: `${BASE_URL_US}/${problem}/${citySlug}`,
+                changefreq: 'daily',
+                priority: '0.9'
+            });
         });
     });
     const CHUNK_SIZE = 40000;

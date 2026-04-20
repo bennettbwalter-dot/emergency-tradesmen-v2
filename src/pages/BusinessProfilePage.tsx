@@ -318,13 +318,62 @@ export default function BusinessProfilePage() {
         } : undefined
     };
 
+    const availabilityAnswer = business.isOpen24Hours
+        ? `Yes. ${business.name} operates 24 hours a day, 7 days a week for emergency ${formattedTrade.toLowerCase()} call-outs in ${formattedCity}.`
+        : `${business.name} operates during the following hours: ${business.hours || 'please call to confirm availability'}.`;
+    const contactAnswer = business.phone
+        ? `You can contact ${business.name} directly by phone at ${business.phone}. No forms or sign-up required — simply call to speak with a local ${formattedTrade.toLowerCase()}.`
+        : `Visit the profile page to find ${business.name}'s contact details.`;
+    const servicesAnswer = services.length > 0
+        ? `${business.name} offers ${services.slice(0, 6).join(', ')}${services.length > 6 ? ', and more' : ''} in ${formattedCity} and surrounding areas.`
+        : `${business.name} provides emergency ${formattedTrade.toLowerCase()} services in ${formattedCity} and surrounding areas.`;
+    const areaAnswer = `${business.name} primarily serves ${formattedCity}${isUS && getStateForCity(city) ? `, ${getStateForCity(city)}` : ''} and nearby areas as an emergency ${formattedTrade.toLowerCase()}.`;
+    const reviewsAnswer = business.reviewCount && business.reviewCount > 0
+        ? `${business.name} has ${business.reviewCount} customer review${business.reviewCount === 1 ? '' : 's'} with an average rating of ${business.rating}/5.`
+        : `Reviews for ${business.name} are collected on the profile page — be the first to share your experience.`;
+
+    const faqItems = [
+        { question: `Is ${business.name} available 24/7?`, answer: availabilityAnswer },
+        { question: `How do I contact ${business.name}?`, answer: contactAnswer },
+        { question: `What services does ${business.name} offer?`, answer: servicesAnswer },
+        { question: `What areas does ${business.name} cover?`, answer: areaAnswer },
+        { question: `Does ${business.name} have customer reviews?`, answer: reviewsAnswer },
+    ];
+
+    const tradePathSlug = trade === 'gas-engineer' ? 'emergency-gas-engineer' : `emergency-${trade}`;
+    const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: siteDomain },
+            { "@type": "ListItem", position: 2, name: `Emergency ${formattedTrade}`, item: `${siteDomain}/${tradePathSlug}` },
+            { "@type": "ListItem", position: 3, name: formattedCity, item: `${siteDomain}/${tradePathSlug}/${citySlug}` },
+            { "@type": "ListItem", position: 4, name: business.name, item: `${siteDomain}/business/${business.id}` },
+        ]
+    };
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map(item => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer }
+        }))
+    };
+
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
                 title={`${business.name} — ${formattedTrade} in ${formattedCity} | Verified 24/7`}
                 description={`Need a ${formattedTrade} in ${formattedCity}? Contact ${business.name}. Verified local expert available 24/7. Read reviews, check credentials and call now for emergency help.`}
                 canonical={`/business/${business.id}`}
-                jsonLd={businessSchema}
+                jsonLd={[businessSchema, faqSchema, breadcrumbSchema]}
+                alternates={[
+                    { lang: isUSDomain ? 'en-US' : 'en-GB', href: `${siteDomain}/business/${business.id}` },
+                    { lang: 'x-default', href: `${siteDomain}/business/${business.id}` },
+                ]}
             />
 
             <Header />
@@ -774,6 +823,26 @@ export default function BusinessProfilePage() {
                         </div>
                     </div>
                 </div >
+
+                {/* FAQ Section — direct-answer content + FAQPage schema for AI Overviews */}
+                <section className="container-wide py-16" aria-labelledby="business-faq-heading">
+                    <div className="max-w-3xl mx-auto">
+                        <h2 id="business-faq-heading" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+                            Frequently Asked Questions
+                        </h2>
+                        <div className="space-y-3">
+                            {faqItems.map((item, idx) => (
+                                <details key={idx} className="group bg-card/40 border border-border/40 rounded-lg p-5 open:bg-card/60 open:border-gold/30 transition-colors">
+                                    <summary className="cursor-pointer font-semibold text-foreground list-none flex items-start justify-between gap-4">
+                                        <span>{item.question}</span>
+                                        <span className="text-gold text-xl leading-none mt-0.5 group-open:rotate-45 transition-transform">+</span>
+                                    </summary>
+                                    <p className="mt-3 text-muted-foreground leading-relaxed">{item.answer}</p>
+                                </details>
+                            ))}
+                        </div>
+                    </div>
+                </section>
             </main >
 
             <Footer />

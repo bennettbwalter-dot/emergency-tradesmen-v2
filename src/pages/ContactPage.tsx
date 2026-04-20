@@ -208,10 +208,17 @@ export default function ContactPage() {
         return (
             <>
                 <SEO
-                    title="Contact Emergency Tradesmen — Get 24/7 Help Now"
-                    description="Need an emergency tradesman? Contact us for fast, verified local plumbers, electricians & locksmiths. Available 24/7 across the UK. Call now for immediate help."
+                    title={isUSDomain ? "Contact Emergency Contractors — Get 24/7 Help Now" : "Contact Emergency Tradesmen — Get 24/7 Help Now"}
+                    description={isUSDomain
+                        ? "Need an emergency contractor? Contact us for fast, verified local plumbers, electricians & HVAC techs. Available 24/7 across the US. Call now for immediate help."
+                        : "Need an emergency tradesman? Contact us for fast, verified local plumbers, electricians & locksmiths. Available 24/7 across the UK. Call now for immediate help."}
                     canonical="/contact"
                     jsonLd={breadcrumbSchema}
+                    alternates={[
+                        { lang: 'en-GB', href: 'https://emergencytradesmen.net/contact' },
+                        { lang: 'en-US', href: 'https://emergencycontractors.net/contact' },
+                        { lang: 'x-default', href: 'https://emergencytradesmen.net/contact' },
+                    ]}
                 />
 
                 <Header />

@@ -76,7 +76,14 @@ const Index = () => {
       <SEO
         title={`Emergency ${settings.tradeTerm} Near You${displayCity !== 'Near You' ? ` in ${displayCity}` : ''}`}
         description={`Find trusted local ${settings.tradeTerm.toLowerCase()} in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith & HVAC. Call now to get connected with verified experts in your area today.`}
+        canonical="/"
+        ogImage={isUSDomain ? 'https://emergencycontractors.net/og-image.webp' : 'https://emergencytradesmen.net/tradesman-hero-v2.webp'}
         jsonLd={emergencyServiceSchema}
+        alternates={[
+          { lang: 'en-GB', href: 'https://emergencytradesmen.net/' },
+          { lang: 'en-US', href: 'https://emergencycontractors.net/' },
+          { lang: 'x-default', href: 'https://emergencytradesmen.net/' },
+        ]}
       />
 
       <Header />

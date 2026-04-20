@@ -58,6 +58,11 @@ export default function About() {
                 description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding trusted local experts for plumbing, electrical & HVAC repairs. Get connected now.`}
                 canonical={`${countryPrefix}/about`}
                 jsonLd={[orgSchema, breadcrumbSchema]}
+                alternates={[
+                    { lang: 'en-GB', href: 'https://emergencytradesmen.net/about' },
+                    { lang: 'en-US', href: 'https://emergencycontractors.net/about' },
+                    { lang: 'x-default', href: 'https://emergencytradesmen.net/about' },
+                ]}
             />
 
             <Header />

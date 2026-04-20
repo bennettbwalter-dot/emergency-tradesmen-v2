@@ -535,8 +535,8 @@ export default function TradeCityPage() {
   const countryForCoords = isUS || isCityInUS ? 'US' : 'GB';
 
   const canonicalPath = isUS
-    ? (isUSDomain ? `/emergency-${tradeInfo.slug}/${citySlug}` : `/us/emergency-${tradeInfo.slug}/${citySlug}`)
-    : `/emergency-${tradeInfo.slug}/${citySlug}`;
+    ? (isUSDomain ? `/${effectiveTradePath}/${citySlug}` : `/us/${effectiveTradePath}/${citySlug}`)
+    : `/${effectiveTradePath}/${citySlug}`;
 
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
   const localTerm = isUS ? 'Contractors' : 'Tradesmen';
@@ -613,9 +613,9 @@ export default function TradeCityPage() {
           }
         } : {})}
         alternates={[
-          { lang: 'en-GB', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` },
-          { lang: 'en-US', href: `https://emergencycontractors.net/emergency-${tradeInfo.slug}/${citySlug}` },
-          { lang: 'x-default', href: `https://emergencytradesmen.net/emergency-${tradeInfo.slug}/${citySlug}` }
+          { lang: 'en-GB', href: `https://emergencytradesmen.net/${effectiveTradePath}/${citySlug}` },
+          { lang: 'en-US', href: `https://emergencycontractors.net/${effectiveTradePath}/${citySlug}` },
+          { lang: 'x-default', href: `https://emergencytradesmen.net/${effectiveTradePath}/${citySlug}` }
         ]}
       />
 
@@ -694,6 +694,26 @@ export default function TradeCityPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* TL;DR Answer Block — optimized for AI Overviews / featured snippets */}
+        <section className="container-wide pt-10" aria-labelledby="quick-answer-heading">
+          <div className="max-w-3xl mx-auto bg-secondary/40 border border-gold/30 rounded-xl p-6 md:p-7">
+            <h2 id="quick-answer-heading" className="text-sm font-bold uppercase tracking-wider text-gold mb-3">
+              Quick Answer
+            </h2>
+            <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
+              {pageData?.problem ? (
+                <>
+                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} verified local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? ' is' : 's are'} available 24/7` : `Verified local ${tradeDisplayName.toLowerCase()}s are available 24/7`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                </>
+              ) : (
+                <>
+                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} verified local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? '' : 's'}` : `Verified local ${tradeDisplayName.toLowerCase()}s`} {listingCount === 1 ? 'is' : 'are'} available 24/7 with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                </>
+              )}
+            </p>
           </div>
         </section>
 
