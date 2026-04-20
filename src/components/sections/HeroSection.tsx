@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { HelpCircle } from "lucide-react";
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
@@ -7,9 +7,11 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import ColorBends from "@/components/ui/ColorBends";
 import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
+
+// Defer WebGL shader until after initial paint — it's decorative and blocks main thread on mount
+const ColorBends = lazy(() => import("@/components/ui/ColorBends"));
 
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
@@ -31,21 +33,23 @@ export function HeroSection() {
 
     return (
         <section className="relative block overflow-hidden">
-            {/* Background layers */}
+            {/* Background layers — decorative shader loaded lazily to avoid blocking LCP */}
             <div className="absolute inset-0 z-0 opacity-40">
-                <ColorBends
-                    colors={["#d7c08a", "#caa55b", "#b8986e"]}
-                    rotation={0}
-                    speed={0.2}
-                    scale={1}
-                    frequency={1}
-                    warpStrength={1}
-                    mouseInfluence={1}
-                    parallax={0.5}
-                    noise={0.1}
-                    transparent
-                    autoRotate={0}
-                />
+                <Suspense fallback={null}>
+                    <ColorBends
+                        colors={["#d7c08a", "#caa55b", "#b8986e"]}
+                        rotation={0}
+                        speed={0.2}
+                        scale={1}
+                        frequency={1}
+                        warpStrength={1}
+                        mouseInfluence={1}
+                        parallax={0.5}
+                        noise={0.1}
+                        transparent
+                        autoRotate={0}
+                    />
+                </Suspense>
             </div>
 
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent pointer-events-none z-1" />
@@ -86,7 +90,7 @@ export function HeroSection() {
                     {/* Main headline */}
                     <div className="flex flex-col items-center justify-center mb-6">
                         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.05] [text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
-                            L<img src="/et-logo-v3.png" alt="O" className="inline-block h-[0.85em] w-auto align-middle -mt-[0.3em] mx-[0.05em] brightness-125 drop-shadow-lg" />CAL <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
+                            L<img src="/et-logo-v3.png" alt="O" width="64" height="64" className="inline-block h-[0.85em] w-auto align-middle -mt-[0.3em] mx-[0.05em] brightness-125 drop-shadow-lg" />CAL <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
                             <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70"> NEAR {displayCity}</span>
                         </h1>
                     </div>
@@ -109,11 +113,7 @@ export function HeroSection() {
                         className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-8 md:mb-12"
                     >
                         {/* 20,000+ Verified */}
-                        <motion.div 
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
-                            className="group relative"
-                        >
+                        <motion.div className="group relative">
                             <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
                             <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-emerald-500/[0.08] backdrop-blur-md border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-500/[0.12]">
                                 <span className="text-emerald-500 font-black text-xs sm:text-sm tracking-tight">20,000+</span>
@@ -124,11 +124,7 @@ export function HeroSection() {
                         </motion.div>
 
                         {/* 24/7 Response */}
-                        <motion.div 
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="group relative"
-                        >
+                        <motion.div className="group relative">
                             <div className="absolute -inset-1 bg-gold/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
                             <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gold/[0.08] backdrop-blur-md border border-gold/20 shadow-[0_0_20px_rgba(212,175,55,0.05)] transition-all duration-300 hover:border-gold/40 hover:bg-gold/[0.12]">
                                 <span className="text-gold font-black text-xs sm:text-sm tracking-tight">24/7</span>
@@ -138,11 +134,7 @@ export function HeroSection() {
                         </motion.div>
 
                         {/* Free To Use */}
-                        <motion.div 
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                            className="group relative"
-                        >
+                        <motion.div className="group relative">
                             <div className="absolute -inset-1 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
                             <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-blue-500/[0.08] backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 hover:border-blue-500/40 hover:bg-blue-500/[0.12]">
                                 <span className="text-blue-400 font-black text-xs sm:text-sm tracking-tight">Free</span>

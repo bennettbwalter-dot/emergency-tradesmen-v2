@@ -161,6 +161,11 @@ export default function BlogPage() {
                     title={`Emergency ${settings.tradeTerm} Blog — Safety Guides & Expert Tips`}
                     description={`Expert home safety guides, emergency repair tips, and maintenance advice for UK homeowners. Learn how to handle plumbing, electrical & HVAC emergencies. Read now.`}
                     canonical={`${countryPrefix}/blog`}
+                    alternates={[
+                      { lang: 'en-GB', href: 'https://emergencytradesmen.net/blog' },
+                      { lang: 'en-US', href: 'https://emergencycontractors.net/blog' },
+                      { lang: 'x-default', href: 'https://emergencytradesmen.net/blog' },
+                    ]}
                 />
 
                 {/* "Newspaper" Header Bar */}

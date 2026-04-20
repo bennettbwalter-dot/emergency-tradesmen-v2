@@ -20,6 +20,7 @@ const HowItWorksSection = lazy(() => import("@/components/sections/HowItWorksSec
 const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSection").then(module => ({ default: module.SEOContentSection })));
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(module => ({ default: module.CTASection })));
+const LatestBlogSection = lazy(() => import("@/components/sections/LatestBlogSection").then(module => ({ default: module.LatestBlogSection })));
 
 const Index = () => {
   const { settings, detectedCity } = useLocalization();
@@ -91,23 +92,27 @@ const Index = () => {
       <main className="min-h-screen bg-background">
         <HeroSection />
 
-        <Suspense fallback={<div className="h-96 w-full" />}>
+        <Suspense fallback={<div className="w-full min-h-[700px]" />}>
           <HowItWorksSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 w-full" />}>
+        <Suspense fallback={<div className="w-full min-h-[800px]" />}>
           <EmergencyServicesSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 w-full" />}>
+        <Suspense fallback={<div className="w-full min-h-[650px]" />}>
           <BreakdownSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 w-full" />}>
+        <Suspense fallback={<div className="w-full min-h-[1100px]" />}>
           <SEOContentSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 w-full" />}>
+        <Suspense fallback={<div className="w-full min-h-[500px]" />}>
+          <LatestBlogSection />
+        </Suspense>
+
+        <Suspense fallback={<div className="w-full min-h-[500px]" />}>
           <CTASection />
         </Suspense>
 

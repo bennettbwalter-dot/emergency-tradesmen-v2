@@ -818,6 +818,11 @@ export default function BlogPostPage() {
         description={hasExcerpt ? post.excerpt : undefined}
         canonical={`/blog/${post.slug}`}
         ogType="article" ogImage={absoluteImage} jsonLd={jsonLdSchemas}
+        alternates={[
+          { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+          { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
+          { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+        ]}
       />
       <Helmet>
         <meta property="article:published_time" content={post.published_at || post.created_at} />

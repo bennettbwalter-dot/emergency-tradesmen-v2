@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MessageSquare } from "lucide-react";
-import { trades } from "@/lib/trades";
+import { trades, ukProblems, usProblems } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
 import { GlassSocialIcon } from "./ui/GlassSocialIcon";
 import { useLocalization } from "@/contexts/LocalizationContext";
@@ -160,6 +160,25 @@ export function Footer({ countryCode }: FooterProps) {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Common Emergencies Hub — internal links to problem pages */}
+        <div className="pt-10 pb-8 border-t border-white/10">
+          <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-6">Common Emergencies</h4>
+          <div className="flex flex-wrap gap-x-5 gap-y-3">
+            {(isUS ? usProblems : ukProblems).map((problem) => {
+              const landingCity = isUS ? "los-angeles" : "london";
+              return (
+                <Link
+                  key={problem.slug}
+                  to={`${countryPrefix}/${problem.slug}/${landingCity}`}
+                  className="text-white/50 hover:text-gold text-xs transition-colors"
+                >
+                  {problem.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
 

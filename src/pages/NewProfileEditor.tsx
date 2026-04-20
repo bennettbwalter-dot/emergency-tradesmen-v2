@@ -125,7 +125,7 @@ export default function NewProfileEditor() {
                 query = query.eq('owner_user_id', activeId);
             }
 
-            const { data, error } = await query.limit(1).maybeSingle();
+            let { data, error } = await query.limit(1).maybeSingle();
             if (error) throw error;
 
             if (data) {

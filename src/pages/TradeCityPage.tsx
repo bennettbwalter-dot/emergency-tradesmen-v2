@@ -16,7 +16,7 @@ import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Squares from "@/components/ui/Squares";
-import { generateTradePageData, cities, usCities, cityToState, getCitiesForState } from "@/lib/trades";
+import { generateTradePageData, cities, usCities, cityToState, getCitiesForState, trades, commonProblems } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
@@ -1089,6 +1089,85 @@ export default function TradeCityPage() {
             </div>
           </div>
         </section>
+
+        {/* Related Pages — internal link graph for problem/trade/city cross-linking */}
+        {!isStatePage && (
+          <section className="container-wide py-16 border-t border-border/30">
+            <div className="grid md:grid-cols-3 gap-10">
+              {/* Other trades in this city */}
+              <div>
+                <h2 className="text-lg font-display text-foreground mb-4">Other Emergency Services in {cityName}</h2>
+                <ul className="space-y-2">
+                  {trades
+                    .filter((t) => t.slug !== tradeInfo.slug && t.slug !== 'builder' && t.slug !== 'breakdown')
+                    .filter((t) => isUS ? t.slug !== 'gas-engineer' : t.slug !== 'hvac' && t.slug !== 'water-restoration' && t.slug !== 'roofer')
+                    .slice(0, 6)
+                    .map((t) => (
+                      <li key={t.slug}>
+                        <Link
+                          to={`/emergency-${t.slug}/${citySlug}`}
+                          className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
+                        >
+                          <div className="w-1 h-1 rounded-full bg-gold/30"></div>
+                          Emergency {isUS && t.usName ? t.usName : t.name} in {cityName}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+
+              {/* Common problems for this trade in this city */}
+              <div>
+                <h2 className="text-lg font-display text-foreground mb-4">Common {tradeDisplayName} Emergencies</h2>
+                <ul className="space-y-2">
+                  {commonProblems
+                    .filter((p) => p.trade === tradeInfo.slug)
+                    .filter((p) => p.country === 'BOTH' || p.country === actualCountry)
+                    .filter((p) => !pageData?.problem || p.slug !== pageData.problem.slug)
+                    .slice(0, 6)
+                    .map((p) => (
+                      <li key={p.slug}>
+                        <Link
+                          to={`/${p.slug}/${citySlug}`}
+                          className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
+                        >
+                          <div className="w-1 h-1 rounded-full bg-gold/30"></div>
+                          {p.name} in {cityName}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+
+              {/* Same trade in other major cities */}
+              <div>
+                <h2 className="text-lg font-display text-foreground mb-4">Emergency {tradeDisplayName} in Other Cities</h2>
+                <ul className="space-y-2">
+                  {(isUS
+                    ? ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Dallas", "Miami", "Philadelphia"]
+                    : ["London", "Manchester", "Birmingham", "Leeds", "Bristol", "Liverpool", "Glasgow", "Edinburgh"]
+                  )
+                    .filter((c) => c.toLowerCase() !== cityName.toLowerCase())
+                    .slice(0, 6)
+                    .map((c) => {
+                      const otherCitySlug = c.toLowerCase().replace(/\s+/g, '-');
+                      return (
+                        <li key={c}>
+                          <Link
+                            to={`/emergency-${tradeInfo.slug}/${otherCitySlug}`}
+                            className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-2"
+                          >
+                            <div className="w-1 h-1 rounded-full bg-gold/30"></div>
+                            Emergency {tradeDisplayName} in {c}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Cities Directory for State Page */}
         {isStatePage && effectiveState && (

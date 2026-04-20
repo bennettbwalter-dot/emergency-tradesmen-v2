@@ -31,6 +31,18 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
+  <!-- LCP preload hints -->
+  <link rel="preload" as="image" href="/et-logo-v3.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="/tradesman-hero-v2.webp" fetchpriority="high" />
+
+  <!-- DNS prefetch / preconnect for third parties -->
+  <link rel="dns-prefetch" href="https://xwqvhymkwuasotsgmarn.supabase.co" />
+  <link rel="dns-prefetch" href="https://js.stripe.com" />
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="preconnect" href="https://xwqvhymkwuasotsgmarn.supabase.co" crossorigin />
+
   <!-- hreflang (dynamic per domain — canonical managed by React Helmet) -->
   <script>
     (function() {
