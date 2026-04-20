@@ -574,34 +574,67 @@ export default function BlogPostPage() {
     '<div class="product-box">'
   );
 
-  // Clean up product-image inline styles
   displayContent = displayContent.replace(
     /<img\s+([^>]*)\s+class="product-image"/gi,
     '<img class="product-image"'
   );
 
-  // Force product images to display with inline styles
   displayContent = displayContent.replace(
     /<img class="product-image"([^>]*)\/?>/gi,
     '<img class="product-image" style="display:block!important;visibility:visible!important;opacity:1!important;max-width:280px!important;width:min(280px, 90vw)!important;height:280px!important;object-fit:contain!important;"$1/>'
   );
 
-  // Keep exactly one page-level h1: the post title rendered above the article body.
-  // Convert any CMS/article-body h1s to h2s so imported HTML/Markdown cannot create duplicate h1s.
+  // ── FUNKY MAGAZINE LAYOUT PROCESSOR (2026) ──────────────────────────
+  
+  // 1. Handle .funky-offset-header (Hero Layout)
+  // Must run before heading conversion
+  displayContent = displayContent.replace(/<!-- \.funky-offset-header -->\s*(#\s+|h1>)([\s\S]+?)(?=\n|$|<\/h1>)/gi, (match, h, content) => {
+    return `<div class="funky-offset-header"><div class="header-text-block"><h1>${content.trim()}</h1></div></div>`;
+  });
+
+  // 2. Wrap specific containers (Capsule, Highlight, Fun Fact)
+  const containerMarkers = ['capsule-box', 'highlight-box', 'funky-fun-fact', 'cta-container'];
+  containerMarkers.forEach(marker => {
+    const regex = new RegExp(`<!-- \\.${marker}.*? -->\\s*([\\s\\S]+?)(?=\\n+---|\\n+<!--|\\n+##|$)`, 'gi');
+    displayContent = displayContent.replace(regex, (match, content) => {
+      if (content.trim().startsWith('<div')) return match; 
+      return `<div class="${marker}">${content.trim()}</div>`;
+    });
+  });
+
+  // 3. Handle Split Dos & Donts Grid
+  displayContent = displayContent.replace(/<!-- \.split-dos-donts.*? -->\s*([\s\S]+?)(?=\n+---|\\n+<!--|\\n+##|$)/gi, (match, content) => {
+    const columns = [];
+    const greenMatch = content.match(/(?:(?:####|###)\s*[✅✔️]|<h[3-4]>.*?[✅✔️]).*?\n?([\s\S]+?)(?=(?:(?:####|###)\s*[❌✖️]|<h[3-4]>.*?[❌✖️])|$)/i);
+    const redMatch = content.match(/(?:(?:####|###)\s*[❌✖️]|<h[3-4]>.*?[❌✖️]).*?\n?([\s\S]+?)$/i);
+
+    if (greenMatch) columns.push(`<div class="dos-column"><h3>DO</h3>${greenMatch[1].trim()}</div>`);
+    if (redMatch) columns.push(`<div class="donts-column"><h3>DON'T</h3>${redMatch[1].trim()}</div>`);
+
+    return `<div class="split-dos-donts">${columns.length > 0 ? columns.join('') : content}</div>`;
+  });
+
+  // 4. h1 -> h2 conversion for secondary titles
   displayContent = displayContent
     .replace(/<h1(\b[^>]*)>/gi, '<h2$1>')
     .replace(/<\/h1>/gi, '</h2>')
     .replace(/^#\s+/gm, '## ');
 
-  // Strip dangerous HTML before rendering
-  displayContent = sanitizeHtml(displayContent);
+  // 5. Broad Section Wrapping (Magazine Look)
+  if (displayContent.includes('##')) {
+    const sections = displayContent.split(/\n(?=##\s)/);
+    displayContent = sections.map(section => {
+      const trimmed = section.trim();
+      if (trimmed.startsWith('##') && !trimmed.includes('funky-offset-header')) {
+        return `<div class="section-container">${trimmed}</div>`;
+      }
+      return section;
+    }).join('\n\n');
+  }
 
-  // Hard-fix formatting for specific broken paragraphs acting as merged sections
-  displayContent = displayContent
-    .replace(/(?:<p>)?\s*(3\.\s+Professional Diagnostics[^<.]*\.)\s*(?:<\/p>|<br\/?>)?/gi, '\n\n<h2>$1</h2>\n\n')
-    .replace(/(?:<p>)?\s*(4\.\s+Safety First[^<.]*\.)\s*(?:<\/p>|<br\/?>)?/gi, '\n\n<h2>$1</h2>\n\n')
-    .replace(/([.?!])\s+(3\.\s+Professional)/g, '$1</p><h2>$2')
-    .replace(/([.?!])\s+(4\.\s+Safety First)/g, '$1</p><h2>$2');
+  // 6. Clean up separators and sanitize
+  displayContent = displayContent.replace(/\n\s*---\s*\n/g, '\n\n<hr className="my-8 opacity-0" />\n\n');
+  displayContent = sanitizeHtml(displayContent);
 
   const isUS = slug?.toLowerCase().includes('usa') || slug?.toLowerCase().includes('-us');
   const readingTime = calcReadingTime(displayContent);
