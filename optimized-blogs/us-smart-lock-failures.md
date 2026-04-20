@@ -23,7 +23,7 @@ Before you kick the door or call a pricey locksmith, there are smart, safe steps
 Look for a 9V battery terminal on the exterior keypad. Touching a fresh 9V battery to these contacts can often provide enough juice to unlock the door one last time. If your lock uses AA batteries inside, check if there’s an external USB-C or micro-USB port for emergency charging. A portable power bank can save the day here.
 
 ### Step 2: Use the Physical Key Override
-Even smart locks usually have a traditional keyhole hidden under a cover plate. Locate this slot. If you have your physical key, try it gently. If the key is stiff, do not force it. Jiggle it slightly while turning. If the key breaks off, stop immediately. Do not try to dig it out with tweezers or glue—you’ll likely push it deeper or damage the cylinder. This is a job for a pro.
+Even smart locks usually have a traditional keyhole hidden under a cover plate. Locate this slot. If you have your physical key, try it gently. If the key is stiff, do not force it. Jiggle it slightly while turning. If the key breaks off, stop immediately. Do not try to dig it out with tweezers or glue-you’ll likely push it deeper or damage the cylinder. This is a job for a pro.
 
 <!-- .funky-fun-fact (Tilted Card Style) -->
 > **💡 Fun Fact #1:** The first pin-tumbler lock was invented by Linus Yale Jr. in 1861. His design is still the basis for most modern mechanical locks.
@@ -32,7 +32,7 @@ Even smart locks usually have a traditional keyhole hidden under a cover plate. 
 Sometimes the lock is fine, but your phone isn’t connecting. Toggle your Bluetooth and Wi-Fi off and on. Restart your phone. Check if other family members can unlock the door via their apps. If the lock is offline, it may still work with a code or key. If the app shows an error, note it down for the technician.
 
 ### Step 4: Look for Alternative Entry Points
-Is a back door or garage door unlocked? Check windows that might be accessible (safely). If you have a trusted neighbour with a spare key, now is the time to call them. Avoid climbing through windows unless absolutely necessary and safe—falls are a leading cause of home injury.
+Is a back door or garage door unlocked? Check windows that might be accessible (safely). If you have a trusted neighbour with a spare key, now is the time to call them. Avoid climbing through windows unless absolutely necessary and safe-falls are a leading cause of home injury.
 
 ### Step 5: Call a 24/7 Locksmith
 If backups fail, you need a professional. Look for a licensed locksmith who specializes in smart locks. They have tools to extract broken keys, bypass electronic failures, and reprogram systems without drilling the lock. Drilling should be a last resort, as it destroys the hardware and costs more to replace.

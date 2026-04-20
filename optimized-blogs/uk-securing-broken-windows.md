@@ -2,7 +2,7 @@
 # Broken Window or Door Glass? 
 ## Securing Your Home Until the Glazier Arrives
 
-There is a sharp, sudden sound that every homeowner dreads: the crash of breaking glass. Whether it’s a stray football from the neighbour’s garden, a branch snapping off in a gale, or an unfortunate accident with a ladder, a broken window leaves your home feeling exposed. In the UK, where security and weatherproofing are top priorities, a shattered pane isn’t just an eyesore—it’s a vulnerability.
+There is a sharp, sudden sound that every homeowner dreads: the crash of breaking glass. Whether it’s a stray football from the neighbour’s garden, a branch snapping off in a gale, or an unfortunate accident with a ladder, a broken window leaves your home feeling exposed. In the UK, where security and weatherproofing are top priorities, a shattered pane isn’t just an eyesore-it’s a vulnerability.
 
 I know that sinking feeling when you see shards on the floor. But before you panic about the cost or the cold draft, let’s focus on securing your home safely. Here is how to manage the situation until a professional glazier can arrive for an emergency repair.
 
@@ -14,14 +14,14 @@ I know that sinking feeling when you see shards on the floor. But before you pan
 *   **Protection:** Put on thick gloves and sturdy shoes before you approach the breakage.
 *   **Handling:** Do not try to pick up large pieces with bare hands.
 *   **Disposal:** Use a dustpan and brush for small fragments, and carefully place larger shards into a cardboard box or thick newspaper before disposing of them in a bin. 
-*   **Warning:** Never put loose glass directly into a plastic bag—it will cut through.
+*   **Warning:** Never put loose glass directly into a plastic bag-it will cut through.
 
 ---
 
 ## The Recovery Roadmap: Secure Your Home in 5 Steps
 
 ### Step 1: Ensure Safety First
-Clear the area immediately. Put on thick gloves and sturdy shoes before you approach the breakage. Do not try to pick up large pieces with bare hands. Use a dustpan and brush for small fragments, and carefully place larger shards into a cardboard box or thick newspaper before disposing of them in a bin. Never put loose glass directly into a plastic bag—it will cut through.
+Clear the area immediately. Put on thick gloves and sturdy shoes before you approach the breakage. Do not try to pick up large pieces with bare hands. Use a dustpan and brush for small fragments, and carefully place larger shards into a cardboard box or thick newspaper before disposing of them in a bin. Never put loose glass directly into a plastic bag-it will cut through.
 
 ### Step 2: Secure the Opening Temporarily
 If the window is completely gone, you need to block the hole to keep out rain, wind, and intruders. If you have plywood or a sturdy board, tape it over the frame from the inside using strong duct tape or masking tape. If you don’t have wood, heavy-duty cardboard layered several times can work as a short-term fix. For smaller cracks, clear packing tape applied in a crisscross pattern can hold the glass together temporarily, preventing it from shattering further. This is not a permanent solution, but it buys you time.
