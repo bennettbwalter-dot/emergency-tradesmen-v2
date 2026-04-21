@@ -23,19 +23,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const posts = [
     {
         region: 'UK',
-        slug: 'broken-window-door-glass-securing-uk',
-        title: 'Broken Window or Door Glass? Securing Your Home Until the Glazier Arrives',
-        filePath: 'optimized-blogs/uk-securing-broken-windows.md',
-        excerpt: 'A shattered window is a top-tier home emergency. Learn how to manage the situation safely until a professional glazier can arrive.',
-        cover_image: '/blog/uk-broken-window-securing.png'
+        slug: 'prevent-structural-damage-subsidence-uk',
+        title: '7 Best Ways to Prevent Emergency Structural Damage and Subsidence (UK Master Guide)',
+        filePath: 'optimized-blogs/uk-structural-damage-prevention.md',
+        excerpt: 'As the spring rains of 2026 arrive, the risk of subsidence peaks in the UK. Learn the 7 best ways to prevent structural emergencies and protect your home investment.',
+        cover_image: '/blog/uk-structural-subsidence-hero.png'
     },
     {
         region: 'US',
-        slug: 'smart-lock-key-broken-emergency-us',
-        title: 'Smart Lock Dead or Key Broken? How to Get Back In Without Damage',
-        filePath: 'optimized-blogs/us-smart-lock-failures.md',
-        excerpt: 'Locked out due to a smart lock failure or a snapped key? Here is how to regain access safely without damaging your property.',
-        cover_image: '/blog/us-lockout-smart-lock.png'
+        slug: 'electrical-panel-burning-smell-us',
+        title: '5 Things You Should NEVER Do When Your Electrical Panel Smells Like Burning (US Emergency Guide)',
+        filePath: 'optimized-blogs/us-electrical-panel-burning-smell.md',
+        excerpt: 'If you smell burning near your electrical panel, you are minutes away from a fire. Discover the 5 critical things you must NEVER do during an electrical emergency.',
+        cover_image: '/blog/electrical-panel-burning-smell-hero.png'
     }
 ];
 

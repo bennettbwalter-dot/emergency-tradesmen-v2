@@ -1,8 +1,9 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, useRef } from 'react';
 import { Check, X, MoreHorizontal, Loader2 } from 'lucide-react';
 
 interface WhisperWaveformProps {
-    audioData: number[];
+    audioData?: number[]; // legacy prop (unused when analyserRef is provided)
+    analyserRef?: React.MutableRefObject<AnalyserNode | null>;
     isRecording: boolean;
     isProcessing?: boolean;
     onConfirm: () => void;
@@ -23,7 +24,8 @@ const SILENCE_THRESHOLD = 0.01;
  * - Deep navy glassmorphism panel
  */
 const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
-    audioData,
+    audioData: audioDataProp,
+    analyserRef,
     isRecording,
     isProcessing = false,
     onConfirm,
@@ -31,17 +33,47 @@ const WhisperWaveform: React.FC<WhisperWaveformProps> = ({
     transcript
 }) => {
     const [time, setTime] = useState(0);
+    const [liveAudio, setLiveAudio] = useState<number[]>(() => new Array(120).fill(0));
+    const liveBufferRef = useRef<number[]>(new Array(120).fill(0));
+    const lastSampleTsRef = useRef<number>(0);
 
-    // Animation loop for organic movement
+    // Single RAF loop: drives `time` every frame AND samples the analyser
+    // directly every ~50ms. Bypasses parent React state to avoid sync issues.
     useEffect(() => {
         let animationFrame: number;
-        const update = () => {
+        const SAMPLE_INTERVAL_MS = 50;
+
+        const update = (ts: number) => {
             setTime(t => t + 0.05);
+
+            // Sample the analyser directly, if we have one and are recording
+            if (analyserRef?.current && isRecording && ts - lastSampleTsRef.current >= SAMPLE_INTERVAL_MS) {
+                lastSampleTsRef.current = ts;
+                const analyser = analyserRef.current;
+                const dataArray = new Uint8Array(analyser.frequencyBinCount);
+                analyser.getByteTimeDomainData(dataArray);
+                let peak = 0;
+                for (let i = 0; i < dataArray.length; i++) {
+                    const amp = Math.abs(dataArray[i] - 128);
+                    if (amp > peak) peak = amp;
+                }
+                const raw = peak / 128;
+                const level = raw < 0.01 ? 0 : Math.min(1, raw * 3.5);
+
+                const buf = liveBufferRef.current;
+                buf.shift();
+                buf.push(level);
+                setLiveAudio([...buf]);
+            }
+
             animationFrame = requestAnimationFrame(update);
         };
         animationFrame = requestAnimationFrame(update);
         return () => cancelAnimationFrame(animationFrame);
-    }, []);
+    }, [analyserRef, isRecording]);
+
+    // Prefer live-sampled data when we have a direct analyser, else fall back to prop
+    const audioData = analyserRef ? liveAudio : (audioDataProp ?? new Array(120).fill(0));
 
     // Process all waveform data in one centralized memo
     const memoData = useMemo(() => {

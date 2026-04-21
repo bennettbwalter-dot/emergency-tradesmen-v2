@@ -9,6 +9,7 @@ export interface WhisperResult {
     startRecording: () => void;
     stopRecording: () => void;
     getAudioLevel: () => number;
+    analyserRef: React.MutableRefObject<AnalyserNode | null>;
     resetTranscription: () => void;
     status: string;
 }
@@ -206,6 +207,6 @@ export function useWhisper(): WhisperResult {
 
     return {
         transcription, isProcessing, isRecording, error,
-        startRecording, stopRecording, getAudioLevel, resetTranscription, status
+        startRecording, stopRecording, getAudioLevel, analyserRef, resetTranscription, status
     };
 }

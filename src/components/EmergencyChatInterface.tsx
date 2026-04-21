@@ -98,6 +98,7 @@ export function EmergencyChatInterface() {
         startRecording,
         stopRecording,
         getAudioLevel,
+        analyserRef: whisperAnalyserRef,
         resetTranscription,
         status: whisperStatus
     } = useWhisper();
@@ -113,21 +114,15 @@ export function EmergencyChatInterface() {
     }, [whisperError]);
 
     // Audio data for waveform visualization
-    const [audioData, setAudioData] = useState<number[]>(new Array(120).fill(0));
-    const audioIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-    const startVolumeMonitor = () => {
-        if (audioIntervalRef.current) clearInterval(audioIntervalRef.current);
-        audioIntervalRef.current = setInterval(() => {
-            const vol = getAudioLevel();
-            setAudioData(prev => [...prev.slice(1), vol]);
-        }, 80);
-    };
+    const WAVEFORM_SAMPLES = 120;
+    const [audioData, setAudioData] = useState<number[]>(new Array(WAVEFORM_SAMPLES).fill(0));
+    const rafRef = useRef<number | null>(null);
+    const lastSampleTsRef = useRef<number>(0);
 
     const stopVolumeMonitor = () => {
-        if (audioIntervalRef.current) {
-            clearInterval(audioIntervalRef.current);
-            audioIntervalRef.current = null;
+        if (rafRef.current !== null) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = null;
         }
     };
 
@@ -137,7 +132,6 @@ export function EmergencyChatInterface() {
         try {
             devLog('[Voice] Auto-restarting mic for follow-up question...');
             await startRecording();
-            startVolumeMonitor();
             toast.success("Listening — speak your answer.", { id: 'stt-status', duration: 3000 });
         } catch (err) {
             console.error('[Voice] Failed to auto-restart recording:', err);
@@ -178,29 +172,33 @@ export function EmergencyChatInterface() {
         }
     }, [whisperError]);
 
-    // Real-time audio visualization when recording
+    // Real-time audio visualization when recording — single RAF loop
+    // samples every ~50ms, so the waveform scrolls one slot per sample.
     useEffect(() => {
-        if (isRecording) {
-            audioIntervalRef.current = setInterval(() => {
+        if (!isRecording) {
+            stopVolumeMonitor();
+            setAudioData(new Array(WAVEFORM_SAMPLES).fill(0));
+            return;
+        }
+
+        lastSampleTsRef.current = 0;
+        const SAMPLE_INTERVAL_MS = 50;
+
+        const tick = (ts: number) => {
+            if (ts - lastSampleTsRef.current >= SAMPLE_INTERVAL_MS) {
+                lastSampleTsRef.current = ts;
                 const level = getAudioLevel();
                 setAudioData(prev => {
-                    const newData = [...prev.slice(1)];
-                    newData.push(level);
-                    return newData;
+                    const next = prev.length === WAVEFORM_SAMPLES ? prev.slice(1) : prev.slice(Math.max(0, prev.length - WAVEFORM_SAMPLES + 1));
+                    next.push(level);
+                    return next;
                 });
-            }, 50); // 50ms for smoother updates
-        } else {
-            if (audioIntervalRef.current) {
-                clearInterval(audioIntervalRef.current);
             }
-            // Reset audio data when not recording
-            setAudioData(new Array(50).fill(0));
-        }
-        return () => {
-            if (audioIntervalRef.current) {
-                clearInterval(audioIntervalRef.current);
-            }
+            rafRef.current = requestAnimationFrame(tick);
         };
+        rafRef.current = requestAnimationFrame(tick);
+
+        return () => stopVolumeMonitor();
     }, [isRecording, getAudioLevel]);
 
     const handleScroll = () => {
@@ -573,8 +571,7 @@ export function EmergencyChatInterface() {
         } else {
             try {
                 await startRecording();
-                startVolumeMonitor();
-                toast.success("Listening... Please describe your emergency now.", { 
+                toast.success("Listening... Please describe your emergency now.", {
                     id: 'stt-status', 
                     duration: 5000,
                     description: "Tap the checkmark when you're finished speaking."
@@ -837,6 +834,7 @@ export function EmergencyChatInterface() {
                                 <div className="w-full h-full flex items-center justify-center px-3 py-3 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5" style={{ minHeight: '80px' }}>
                                     <WhisperWaveform
                                         audioData={audioData}
+                                        analyserRef={whisperAnalyserRef}
                                         isRecording={isRecording}
                                         isProcessing={isTranscriptionProcessing}
                                         transcript={transcription}
