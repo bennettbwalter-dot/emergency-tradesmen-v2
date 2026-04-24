@@ -611,15 +611,18 @@ export function EmergencyChatInterface() {
     const isFlowComplete = !!(detectedTrade && (detectedCity || locationRecord));
     const shouldFlash = isFlowComplete;
 
+    const hasUserIntent = input.trim().length > 0 || !!detectedTrade;
     const actionButton = (
         <Button
             onClick={handleActionClick}
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
-            className={`h-11 w-11 shrink-0 rounded-full transition-all shadow-lg ${shouldFlash
+            className={`h-11 w-11 shrink-0 rounded-full transition-all duration-300 shadow-lg ${shouldFlash
                 ? 'animate-glow-bottom ring-4 ring-yellow-400/80'
-                : 'bg-gold text-white hover:bg-gold/90'}`}
+                : hasUserIntent
+                    ? 'bg-gold text-white hover:bg-gold/90 shadow-[0_0_16px_rgba(212,175,55,0.45)]'
+                    : 'bg-stone-400/40 text-white/70 hover:bg-stone-400/60'}`}
             title={isRequestingLocation ? "Locate Me" : (isFlowComplete ? "Find Help Now" : "Send Message")}
         >
             {isRequestingLocation ? (
@@ -828,8 +831,32 @@ export function EmergencyChatInterface() {
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
+                        {/* Quick action chips — only shown before first message, disappears after user engages */}
+                        {chatState.history.length === 0 && !isRecording && (
+                            <div className="w-full px-3 md:px-6 pt-3 pb-1 flex flex-nowrap md:flex-wrap items-center justify-center md:justify-start gap-1.5 md:gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                                {[
+                                    { label: 'Burst pipe', message: 'I need a plumber — burst pipe' },
+                                    { label: 'Power outage', message: 'I need an electrician — power outage' },
+                                    { label: 'Locked out', message: 'I need a locksmith — locked out' },
+                                ].map((chip) => (
+                                    <button
+                                        key={chip.label}
+                                        type="button"
+                                        onClick={() => {
+                                            trackEvent('Chat', 'quick_action_chip', chip.label);
+                                            handleUserMessage(chip.message);
+                                        }}
+                                        className="group inline-flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full text-[11px] md:text-sm font-semibold text-gold border border-gold/30 bg-gold/[0.06] hover:bg-gold/[0.14] hover:border-gold/60 transition-all duration-200 backdrop-blur-sm whitespace-nowrap flex-shrink-0"
+                                    >
+                                        <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-gold/80 group-hover:bg-gold transition-colors" />
+                                        {chip.label}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
                         {/* TEXTAREA / WAVEFORM SLOT - Fixed height so controls never move */}
-                        <div className="w-full" style={{ minHeight: '80px' }}>
+                        <div className="w-full relative" style={{ minHeight: '80px' }}>
                             {isRecording ? (
                                 <div className="w-full h-full flex items-center justify-center px-3 py-3 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5" style={{ minHeight: '80px' }}>
                                     <WhisperWaveform
@@ -850,23 +877,45 @@ export function EmergencyChatInterface() {
                                     />
                                 </div>
                             ) : (
-                                <textarea
-                                    ref={inputRef}
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' && !e.shiftKey) {
-                                            e.preventDefault();
-                                            handleKeyDown(e);
-                                        }
-                                    }}
-                                    onFocus={() => setIsFocused(true)}
-                                    onBlur={() => setIsFocused(false)}
-                                    placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
-                                    data-tour="tour-chat-input"
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none px-4 md:px-8 py-4 md:py-6 text-base md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
-                                    style={{ minHeight: '80px' }}
-                                />
+                                <>
+                                    {/* AI avatar badge — nestled inside textarea left padding */}
+                                    <div
+                                        aria-hidden="true"
+                                        className="pointer-events-none absolute left-3 md:left-5 top-3 md:top-4 z-10 w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/40 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-glow-pulse"
+                                    >
+                                        <img
+                                            src="/et-logo-v3.png"
+                                            alt=""
+                                            width="28"
+                                            height="28"
+                                            className="w-4 h-4 md:w-6 md:h-6 brightness-125 drop-shadow-[0_0_4px_rgba(212,175,55,0.6)]"
+                                        />
+                                    </div>
+                                    {/* Blinking cursor hint — signals "you can type here" when idle */}
+                                    {!input && !isFocused && chatState.history.length === 0 && (
+                                        <span
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute left-12 md:left-20 top-4 md:top-6 z-10 w-[2px] h-5 md:h-7 bg-gold rounded-sm animate-pulse"
+                                        />
+                                    )}
+                                    <textarea
+                                        ref={inputRef}
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleKeyDown(e);
+                                            }
+                                        }}
+                                        onFocus={() => setIsFocused(true)}
+                                        onBlur={() => setIsFocused(false)}
+                                        placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                                        data-tour="tour-chat-input"
+                                        className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
+                                        style={{ minHeight: '80px' }}
+                                    />
+                                </>
                             )}
                         </div>
 
@@ -897,64 +946,75 @@ export function EmergencyChatInterface() {
             {/* Mobile Controls - SVG Buttons / Desktop Optimized Toggle */}
             <div className={cn("w-full mt-0 md:-mt-4 mb-4 md:mb-8 px-1 overflow-visible", USE_SVG_BUTTONS_ON_DESKTOP ? "block" : "md:hidden")}>
                 <div className={cn("flex flex-row items-center justify-center w-full overflow-visible gap-1 mx-auto", USE_SVG_BUTTONS_ON_DESKTOP ? "md:gap-8 md:max-w-4xl" : "max-w-[420px]")}>
-                    <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="relative flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{micButton}</div>
-                        <SVGButton 
-                            index={0} 
+                        <SVGButton
+                            index={0}
                             onClick={handleMicToggle}
                             isRecording={isRecording}
                             isTranscriptionProcessing={isTranscriptionProcessing}
                             disabled={isTranscriptionProcessing || isTyping}
                             dataTour="tour-mic-button"
                         />
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Voice</span>
                     </div>
-                    <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="relative flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{tradeSelector}</div>
-                        <RedSVGButton 
-                            index={1} 
+                        <RedSVGButton
+                            index={1}
                             onClick={() => {
                                 const trigger = document.querySelector('[data-tour="tour-trade-button"]') as HTMLElement;
                                 if (trigger) trigger.click();
                             }}
                             dataTour="tour-trade-button"
                         />
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Trades</span>
                     </div>
                     <div className="flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{locationSelector}</div>
-                            <GreenSVGButton
-                                index={2}
-                                onClick={() => {
-                                    if (settings.countryCode === 'US') {
-                                        const trigger = document.querySelector('[data-tour="tour-state-button"]') as HTMLElement;
-                                        if (trigger) { trigger.click(); } else { detectUserLocation(); }
-                                    } else {
-                                        const trigger = document.querySelector('[data-tour="tour-uk-city-button"]') as HTMLElement;
-                                        if (trigger) { trigger.click(); } else { detectUserLocation(); }
-                                    }
-                                }}
-                                dataTour={settings.countryCode === 'US' ? 'tour-state-button' : 'tour-location-button'}
-                            />
-                            {settings.countryCode === 'US' && (hasStateSelected || !!locationRecord) && (
-                                <PurpleSVGButton 
-                                    index={4}
+                            <div className="relative flex flex-col items-center">
+                                <GreenSVGButton
+                                    index={2}
                                     onClick={() => {
-                                        // USA: Purple is the "City" side of the pill (City Select)
-                                        const trigger = document.querySelector('[data-tour="tour-city-button"]') as HTMLElement;
-                                        if (trigger) trigger.click();
-                                    } }
-                                    dataTour="tour-city-button"
+                                        if (settings.countryCode === 'US') {
+                                            const trigger = document.querySelector('[data-tour="tour-state-button"]') as HTMLElement;
+                                            if (trigger) { trigger.click(); } else { detectUserLocation(); }
+                                        } else {
+                                            const trigger = document.querySelector('[data-tour="tour-uk-city-button"]') as HTMLElement;
+                                            if (trigger) { trigger.click(); } else { detectUserLocation(); }
+                                        }
+                                    }}
+                                    dataTour={settings.countryCode === 'US' ? 'tour-state-button' : 'tour-location-button'}
                                 />
+                                <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">
+                                    {settings.countryCode === 'US' ? 'State' : 'Location'}
+                                </span>
+                            </div>
+                            {settings.countryCode === 'US' && (hasStateSelected || !!locationRecord) && (
+                                <div className="relative flex flex-col items-center">
+                                    <PurpleSVGButton
+                                        index={4}
+                                        onClick={() => {
+                                            // USA: Purple is the "City" side of the pill (City Select)
+                                            const trigger = document.querySelector('[data-tour="tour-city-button"]') as HTMLElement;
+                                            if (trigger) trigger.click();
+                                        } }
+                                        dataTour="tour-city-button"
+                                    />
+                                    <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">City</span>
+                                </div>
                             )}
                     </div>
-                    <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="relative flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{mobileActionButton || actionButton}</div>
-                        <YellowSVGButton 
-                            index={3} 
+                        <YellowSVGButton
+                            index={3}
                             onClick={handleActionClick}
                             disabled={isActionDisabled}
                             isPulsing={shouldFlash}
                             dataTour="tour-locate-button"
                         />
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Send</span>
                     </div>
                 </div>
             </div>

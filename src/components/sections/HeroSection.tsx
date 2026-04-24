@@ -87,11 +87,69 @@ export function HeroSection() {
                         </div>
                     </motion.div>
 
-                    {/* Main headline */}
-                    <div className="flex flex-col items-center justify-center mb-6">
-                        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground text-center text-balance max-w-4xl mx-auto leading-[1.05] [text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
-                            L<img src="/et-logo-v3.png" alt="O" width="64" height="64" className="inline-block h-[0.85em] w-auto align-middle -mt-[0.3em] mx-[0.05em] brightness-125 drop-shadow-lg" />CAL <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70">{(settings.tradeTerm || 'Tradesmen').toUpperCase()}</span>
-                            <span className="text-gold block sm:inline bg-clip-text text-transparent bg-gradient-to-b from-gold via-gold/90 to-gold/70"> NEAR {displayCity}</span>
+                    {/* Main headline — matches reference: LOCAL / TRADESMEN|CONTRACTORS (gold, dominant) / near CITY */}
+                    <div className="flex flex-col items-center justify-center mb-6 px-1 sm:px-4 w-full overflow-hidden">
+                        <h1 className="text-center max-w-4xl mx-auto w-full [text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
+                            {/* LOCAL (black) with gold O logo */}
+                            <span
+                                className="block text-foreground text-[clamp(2rem,11vw,3.75rem)]"
+                                style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
+                            >
+                                L<img src="/et-logo-v3.png" alt="O" width="64" height="64" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
+                            </span>
+
+                            {/* TRADESMEN / CONTRACTORS — dominant, rich gold */}
+                            <span
+                                className="block bg-clip-text text-transparent text-[clamp(2rem,9.2vw,5.25rem)] drop-shadow-[0_3px_8px_rgba(0,0,0,0.25)] mt-1"
+                                style={{
+                                    fontFamily: '"Archivo Black", Impact, sans-serif',
+                                    letterSpacing: '-0.03em',
+                                    lineHeight: 0.95,
+                                    backgroundImage: 'linear-gradient(180deg, #f5dc8a 0%, #e3c063 30%, #caa052 55%, #b8893f 80%, #8c6524 100%)',
+                                }}
+                            >
+                                {(settings.tradeTerm || 'Tradesmen').toUpperCase()}
+                            </span>
+
+                            {/* near [CITY] — stays on one line, scales with viewport and shrinks for long names */}
+                            <span className="flex items-end justify-center gap-[0.3em] mt-2 whitespace-nowrap">
+                                <span className="relative inline-block">
+                                    <span
+                                        className="text-foreground text-[clamp(1.25rem,5.5vw,2.5rem)] leading-none"
+                                        style={{ fontFamily: '"Kaushan Script", cursive', fontWeight: 400 }}
+                                    >
+                                        near
+                                    </span>
+                                    {/* Gold underline swoosh */}
+                                    <svg
+                                        aria-hidden="true"
+                                        viewBox="0 0 120 10"
+                                        preserveAspectRatio="none"
+                                        className="absolute left-0 right-0 -bottom-[0.15em] w-full h-[0.35em] pointer-events-none"
+                                    >
+                                        <path
+                                            d="M2 7 C 20 2, 50 2, 75 5 S 110 8, 118 3"
+                                            fill="none"
+                                            stroke="url(#nearUnderline)"
+                                            strokeWidth="2.5"
+                                            strokeLinecap="round"
+                                        />
+                                        <defs>
+                                            <linearGradient id="nearUnderline" x1="0" y1="0" x2="1" y2="0">
+                                                <stop offset="0%" stopColor="#e3c063" stopOpacity="0.4" />
+                                                <stop offset="50%" stopColor="#caa052" />
+                                                <stop offset="100%" stopColor="#b8893f" stopOpacity="0.4" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </span>
+                                <span
+                                    className="text-foreground text-[clamp(1.75rem,8.5vw,3.25rem)] min-w-0 truncate"
+                                    style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
+                                >
+                                    {displayCity}
+                                </span>
+                            </span>
                         </h1>
                     </div>
 
