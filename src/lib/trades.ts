@@ -62,7 +62,7 @@ export const cityToState: Record<string, string> = {
   "College Station": "tx", "Tyler": "tx", "Pearland": "tx", "Sugar Land": "tx", "Allen": "tx",
   "League City": "tx", "Conroe": "tx", "New Braunfels": "tx", "Edinburg": "tx", "Mission": "tx",
   "Bryan": "tx", "Pharr": "tx", "Baytown": "tx", "Missouri City": "tx", "Temple": "tx",
-  "Flower Mound": "tx", "North Richland Hills": "tx", "Mansfield": "tx", "Victoria": "tx",
+  "Flower Mound": "tx", "North Richland Hills": "tx", "Mansfield (Nottinghamshire)": "tx", "Victoria": "tx",
   "Rowlett": "tx", "Harlingen": "tx", "Pflugerville": "tx", "San Marcos": "tx", "Euless": "tx",
   "Port Arthur": "tx", "Grapevine": "tx",
   // Florida (FL)
@@ -87,13 +87,13 @@ export const cityToState: Record<string, string> = {
   // Ohio (OH)
   "Cleveland": "oh", "Columbus": "oh", "Cincinnati": "oh", "Toledo": "oh",
   // Pennsylvania (PA)
-  "Pittsburgh": "pa", "Philadelphia": "pa", "Scranton": "pa", "Allentown": "pa", "Harrisburg": "pa", "Erie": "pa", "Reading": "pa",
+  "Pittsburgh": "pa", "Philadelphia": "pa", "Scranton": "pa", "Allentown": "pa", "Harrisburg": "pa", "Erie": "pa", "Reading (Berkshire)": "pa",
   // New York (NY)
   "Buffalo": "ny", "New York City": "ny", "Syracuse": "ny", "Yonkers": "ny", "Rochester": "ny",
   // Indiana (IN)
   "Indianapolis": "in", "Carmel": "in", "Fishers": "in", "Greenwood": "in", "Fort Wayne": "in", "Evansville": "in", "South Bend": "in",
   // North Carolina (NC)
-  "Charlotte": "nc", "Raleigh": "nc", "Greensboro": "nc", "Durham": "nc", "Winston-Salem": "nc", "Fayetteville": "nc", "Asheville": "nc",
+  "Charlotte": "nc", "Raleigh": "nc", "Greensboro": "nc", "Durham (County Durham)": "nc", "Winston-Salem": "nc", "Fayetteville": "nc", "Asheville": "nc",
   // Illinois (IL)
   "Chicago": "il", "Rockford": "il", "Joliet": "il",
   // Colorado (CO)
@@ -105,11 +105,11 @@ export const cityToState: Record<string, string> = {
   // District of Columbia (DC)
   "Washington, D.C.": "dc",
   // Massachusetts (MA)
-  "Boston": "ma", "Worcester": "ma",
+  "Boston": "ma", "Worcester (Worcestershire)": "ma",
   // Kentucky (KY)
   "Louisville": "ky", "Lexington": "ky",
   // Maryland (MD)
-  "Baltimore": "md", "Annapolis": "md", "Frederick": "md", "Hagerstown": "md", "Salisbury": "md", "Bowie": "md",
+  "Baltimore": "md", "Annapolis": "md", "Frederick": "md", "Hagerstown": "md", "Salisbury (Wiltshire)": "md", "Bowie": "md",
   // Wisconsin (WI)
   "Milwaukee": "wi", "Madison": "wi", "Green Bay": "wi", "Kenosha": "wi",
   // New Mexico (NM)
@@ -119,9 +119,9 @@ export const cityToState: Record<string, string> = {
   // Georgia (GA)
   "Atlanta": "ga", "Augusta": "ga", "Savannah": "ga",
   // Nebraska (NE)
-  "Omaha": "ne", "Lincoln": "ne",
+  "Omaha": "ne", "Lincoln (Lincolnshire)": "ne",
   // Virginia (VA)
-  "Virginia Beach": "va", "Norfolk": "va", "Richmond": "va", "Newport News": "va", "Chesapeake": "va", "Alexandria": "va", "Roanoke": "va",
+  "Virginia Beach": "va", "Norfolk": "va", "Richmond (London)": "va", "Newport News": "va", "Chesapeake": "va", "Alexandria": "va", "Roanoke": "va",
   // Minnesota (MN)
   "Minneapolis": "mn", "St. Paul": "mn",
   // Kansas (KS)
@@ -135,7 +135,7 @@ export const cityToState: Record<string, string> = {
   // Mississippi (MS)
   "Gulfport": "ms", "Hattiesburg": "ms", "Meridian": "ms", "Jackson": "ms",
   // Alabama (AL)
-  "Birmingham": "al", "Huntsville": "al", "Auburn": "al", "Tuscaloosa": "al", "Mobile": "al", "Montgomery": "al",
+  "Birmingham (West Midlands)": "al", "Huntsville": "al", "Auburn": "al", "Tuscaloosa": "al", "Mobile": "al", "Montgomery": "al",
   // South Carolina (SC)
   "Charleston": "sc", "Columbia": "sc", "Greenville": "sc",
   // West Virginia (WV)
@@ -274,18 +274,18 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
 
   // UK Data - STRICTLY SEPARATED
   const ukServiceAreaMap: Record<string, string[]> = {
-    Manchester: ["Salford", "Stockport", "Trafford", "Oldham", "Rochdale", "Bury", "Bolton", "Wigan", "Altrincham", "Sale"],
-    Birmingham: ["Solihull", "Sutton Coldfield", "Edgbaston", "Moseley", "Erdington", "Kings Heath", "Harborne", "Digbeth", "Jewellery Quarter", "Bournville"],
+    Manchester: ["Salford (Manchester)", "Stockport (Manchester)", "Trafford", "Oldham (Manchester)", "Rochdale (Manchester)", "Bury (Manchester)", "Bolton (Manchester)", "Wigan (Manchester)", "Altrincham (Manchester)", "Sale (Manchester)"],
+    Birmingham: ["Solihull (Birmingham)", "Sutton Coldfield (Birmingham)", "Edgbaston", "Moseley", "Erdington", "Kings Heath", "Harborne", "Digbeth", "Jewellery Quarter", "Bournville"],
     Leeds: ["Headingley", "Roundhay", "Morley", "Pudsey", "Horsforth", "Chapel Allerton", "Kirkstall", "Meanwood", "Bramley", "Rothwell"],
-    Sheffield: ["Rotherham", "Doncaster", "Barnsley", "Chesterfield", "Worksop", "Dore", "Totley", "Hillsborough", "Ecclesall", "Crookes", "Stocksbridge"],
-    Liverpool: ["Birkenhead", "Bootle", "Crosby", "St Helens", "Widnes", "Runcorn", "Wallasey", "Huyton", "Speke", "Aigburth"],
-    London: ["Westminster", "Kensington", "Chelsea", "Islington", "Camden", "Hackney", "Greenwich", "Brixton", "Battersea", "Wandsworth", "Fulham", "Hammersmith", "Ealing", "Richmond", "Wimbledon"],
+    Sheffield: ["Rotherham (Sheffield)", "Doncaster (Sheffield)", "Barnsley (Sheffield)", "Chesterfield (Sheffield)", "Worksop", "Dore", "Totley", "Hillsborough", "Ecclesall", "Crookes", "Stocksbridge"],
+    Liverpool: ["Birkenhead (Liverpool)", "Bootle", "Crosby (Liverpool)", "St Helens (Liverpool)", "Widnes (Cheshire)", "Runcorn (Cheshire)", "Wallasey (Liverpool)", "Huyton", "Speke", "Aigburth"],
+    London: ["Westminster (London)", "Kensington", "Chelsea (London)", "Islington (London)", "Camden (London)", "Hackney (London)", "Greenwich (London)", "Brixton", "Battersea", "Wandsworth (London)", "Fulham (London)", "Hammersmith", "Ealing (London)", "Richmond (London)", "Wimbledon"],
     Bristol: ["Clifton", "Redland", "Cotham", "Bedminster", "Southville", "Totterdown", "Horfield", "Bishopston", "Brislington", "St George"],
-    Glasgow: ["West End", "City Centre", "Southside", "East End", "North Glasgow", "Paisley", "Renfrew", "Clydebank", "Bearsden", "Milngavie"],
+    Glasgow: ["West End", "City Centre", "Southside", "East End", "North Glasgow", "Paisley (Glasgow)", "Renfrew", "Clydebank (Glasgow)", "Bearsden", "Milngavie"],
     Edinburgh: ["Leith", "City Centre", "Stockbridge", "Morningside", "Bruntsfield", "Newington", "Corstorphine", "Gorgie", "Dalry", "Portobello"],
     Cardiff: ["Cardiff Bay", "Canton", "Roath", "Cathays", "Llandaff", "Pontcanna", "Splott", "Grangetown", "Rumney", "St Mellons"],
     Newcastle: ["Jesmond", "Gosforth", "Heaton", "Byker", "Fenham", "Benwell", "Elswick", "Walker", "Denton", "Westerhope"],
-    Belfast: ["City Centre", "South Belfast", "East Belfast", "North Belfast", "West Belfast", "Lisburn", "Newtownabbey", "Bangor", "Holywood", "Dundonald"],
+    Belfast: ["City Centre", "South Belfast", "East Belfast", "North Belfast", "West Belfast", "Lisburn (County Antrim)", "Newtownabbey", "Bangor (County Down)", "Holywood", "Dundonald"],
   };
 
   const usServiceAreaMap: Record<string, string[]> = {
@@ -302,13 +302,13 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     "Dallas": ["Plano", "Frisco", "Irving", "Arlington", "Fort Worth"],
     "London": ["London KY Suburbs", "London OH Suburbs"], // Example of US London handling if needed, or generic
     "Manchester": ["Manchester NH Suburbs", "Manchester CT Suburbs"],
-    "Birmingham": ["Birmingham AL Suburbs"],
+    "Birmingham (West Midlands)": ["Birmingham AL Suburbs"],
   };
 
   const ukLocalExpertiseMap: Record<string, string> = {
     "London": "Our London team understands the unique challenges of the capital's plumbing, from Victorian terraces in Kensington to modern apartments in Canary Wharf. We navigate the Congestion Zone daily to ensure rapid response.",
     "Manchester": "Serving Greater Manchester with local knowledge of the area's industrial heritage and modern housing. Our engineers are familiar with the common issues in both red-brick terraces and new city centre developments.",
-    "Birmingham": "Our Birmingham specialists cover the entire West Midlands network. We understand the local housing stock, ensuring efficient repairs for brum's diverse properties.",
+    "Birmingham (West Midlands)": "Our Birmingham specialists cover the entire West Midlands network. We understand the local housing stock, ensuring efficient repairs for brum's diverse properties.",
   };
 
   const usLocalExpertiseMap: Record<string, string> = {
@@ -320,7 +320,7 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     "Chicago": "Built for Midwest extremes, our Chicago experts handle frozen pipes, boiler systems, and wind-proofing.",
     "Houston": "In Houston's humid subtropical climate, our partners prioritize mold prevention in water damage restoration and ensure air conditioning reliability.",
     "Miami": "Our Miami network is built for hurricane resilience. From impact glass repairs to high-velocity flood extraction, they understand the saltwater environment.",
-    "Birmingham": "Our Birmingham, AL experts understand the Deep South humidity and soil conditions affecting foundations and plumbing.",
+    "Birmingham (West Midlands)": "Our Birmingham, AL experts understand the Deep South humidity and soil conditions affecting foundations and plumbing.",
     "London": "Our US-based London specialists serve local communities with standard American plumbing and electrical codes.",
     "Manchester": "Serving Manchester in the US with local American trade standards.",
   };

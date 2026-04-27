@@ -27,7 +27,7 @@ export function Footer({ countryCode }: FooterProps) {
   const FOOTER_TRADE_COUNT = 7;
   const displayCities = isUS
     ? ["Los Angeles", "New York", "Dallas", "Houston", "Miami", "Phoenix", "Seattle", "San Francisco"]
-    : ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bristol", "Liverpool"];
+    : ["Leighton Buzzard (Bedfordshire)", "Luton (Bedfordshire)", "Milton Keynes (Buckinghamshire)", "Northampton (Northamptonshire)", "Reading (Berkshire)", "Bedford (Bedfordshire)", "Ashford (Kent)", "Ipswich (Suffolk)"];
   const tradeTerm = isUS ? "Contractor" : "Tradesperson";
 
   return (
@@ -81,7 +81,7 @@ export function Footer({ countryCode }: FooterProps) {
               <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-8">Expert Services</h4>
               <ul className="space-y-4">
                 {trades.slice(0, FOOTER_TRADE_COUNT).map((trade, idx) => {
-                  const landingCities = isUS ? ["los-angeles", "new-york", "dallas", "miami", "phoenix", "seattle", "detroit"] : ["london", "manchester", "birmingham", "leeds", "glasgow", "cardiff"];
+                  const landingCities = isUS ? ["los-angeles", "new-york", "dallas", "miami", "phoenix", "seattle", "detroit"] : ["leighton-buzzard", "luton", "milton-keynes", "northampton", "reading", "bedford"];
                   const city = landingCities[idx % landingCities.length];
                   const tradeName = isUS ? (trade as any).usName : trade.name;
                   return (
@@ -168,7 +168,7 @@ export function Footer({ countryCode }: FooterProps) {
           <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-6">Common Emergencies</h4>
           <div className="flex flex-wrap gap-x-5 gap-y-3">
             {(isUS ? usProblems : ukProblems).map((problem) => {
-              const landingCity = isUS ? "los-angeles" : "london";
+              const landingCity = isUS ? "los-angeles" : "leighton-buzzard";
               return (
                 <Link
                   key={problem.slug}

@@ -38,6 +38,7 @@ import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
+import { PhoneCaptureModal } from "@/components/PhoneCaptureModal";
 import { Zap, ArrowRight, Star } from "lucide-react";
 import {
   Pagination,
@@ -63,6 +64,7 @@ export default function TradeCityPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const hasLoadedRef = useRef(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
   const ITEMS_PER_PAGE = 9;
 
   const location = useLocation();
@@ -324,6 +326,17 @@ export default function TradeCityPage() {
     } catch (e) {
       console.warn('Real-time subscription failed (non-critical):', e);
     }
+  }, []);
+
+  // Show phone capture modal once per session after a short delay
+  useEffect(() => {
+    const key = 'phone_modal_seen';
+    if (sessionStorage.getItem(key)) return;
+    const timer = setTimeout(() => {
+      setShowPhoneModal(true);
+      sessionStorage.setItem(key, '1');
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   // Apply filters and sorting
@@ -1145,7 +1158,7 @@ export default function TradeCityPage() {
                 <ul className="space-y-2">
                   {(isUS
                     ? ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Dallas", "Miami", "Philadelphia"]
-                    : ["London", "Manchester", "Birmingham", "Leeds", "Bristol", "Liverpool", "Glasgow", "Edinburgh"]
+                    : ["Leighton Buzzard (Bedfordshire)", "Luton (Bedfordshire)", "Milton Keynes (Buckinghamshire)", "Northampton (Northamptonshire)", "Reading (Berkshire)", "Bedford (Bedfordshire)", "Ashford (Kent)", "Ipswich (Suffolk)"]
                   )
                     .filter((c) => c.toLowerCase() !== cityName.toLowerCase())
                     .slice(0, 6)
@@ -1212,6 +1225,15 @@ export default function TradeCityPage() {
         businessName={`${tradeInfo.name} in ${cityName}`}
         businessId={`generic-${cityName}-${tradeInfo.slug}`}
       />
+
+      {showPhoneModal && (
+        <PhoneCaptureModal
+          trade={tradeInfo.slug}
+          city={cityName}
+          country={actualCountry}
+          onDismiss={() => setShowPhoneModal(false)}
+        />
+      )}
     </>
   );
 }
