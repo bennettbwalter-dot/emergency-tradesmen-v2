@@ -1225,6 +1225,19 @@
   }
 
   @media (max-width: 767px) {
+    .earth-cockpit-hero .hero-get-help-reveal {
+      margin-top: clamp(24px, 6svh, 58px);
+    }
+
+    .earth-cockpit-hero .hero-chat-stage {
+      margin-top: clamp(8px, 3.5svh, 34px) !important;
+    }
+
+    .earth-cockpit-hero .hero-spin-text-stage {
+      margin-top: clamp(4.25rem, 11svh, 6.75rem) !important;
+      padding-bottom: clamp(1.75rem, 5svh, 3.75rem) !important;
+    }
+
     .earth-cockpit-hero::before {
       opacity: 0.45;
       background:
