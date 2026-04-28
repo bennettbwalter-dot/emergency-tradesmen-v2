@@ -116,6 +116,67 @@
     animation: star-twinkle 7.4s ease-in-out infinite alternate-reverse;
   }
 
+  /* Light-mode galaxy: stronger reds, blues, greens (and a violet accent) so
+     the nebula pops. Dark mode keeps its original palette above. */
+  :where(.light) .earth-hero-deep-space {
+    opacity: 1;
+    background:
+      radial-gradient(ellipse at 18% 22%, rgba(40, 110, 255, 0.55), transparent 34%),
+      radial-gradient(ellipse at 82% 14%, rgba(255, 60, 92, 0.45), transparent 30%),
+      radial-gradient(ellipse at 12% 82%, rgba(40, 220, 140, 0.40), transparent 32%),
+      radial-gradient(ellipse at 88% 78%, rgba(180, 70, 255, 0.38), transparent 30%),
+      radial-gradient(ellipse at 66% 38%, rgba(0, 200, 255, 0.32), transparent 28%),
+      radial-gradient(ellipse at 52% 52%, transparent 0 24%, rgba(0, 0, 0, 0.48) 62%, rgba(0, 0, 0, 0.88) 100%);
+  }
+  :where(.light) .earth-hero-milky-way {
+    background:
+      radial-gradient(ellipse at 46% 50%, rgba(255, 239, 194, 0.45), transparent 0.9%),
+      radial-gradient(ellipse at 47% 49%, rgba(80, 170, 255, 0.55), transparent 1.4%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 90, 110, 0.35) 0 4%, transparent 13%),
+      radial-gradient(ellipse at 50% 50%, rgba(60, 220, 150, 0.28) 0 12%, transparent 29%),
+      linear-gradient(90deg,
+        transparent 0 9%,
+        rgba(255, 60, 90, 0.22) 16%,
+        rgba(40, 120, 255, 0.55) 30%,
+        rgba(60, 220, 150, 0.45) 46%,
+        rgba(80, 170, 255, 0.55) 60%,
+        rgba(180, 70, 255, 0.30) 74%,
+        transparent 90%),
+      repeating-radial-gradient(circle at 48% 52%, rgba(255, 255, 255, 0.46) 0 0.8px, transparent 1px 5px);
+  }
+  :where(.light) .earth-hero-galaxies {
+    opacity: 1;
+    background:
+      radial-gradient(ellipse at 9% 23%, rgba(255, 245, 220, 0.95) 0 0.8px, rgba(40, 130, 255, 0.55) 1px 18px, transparent 40px),
+      radial-gradient(ellipse at 84% 31%, rgba(255, 80, 110, 0.70) 0 1.2px, rgba(255, 40, 90, 0.30) 2px 26px, transparent 58px),
+      radial-gradient(ellipse at 73% 82%, rgba(80, 220, 255, 0.75) 0 1.2px, rgba(40, 130, 255, 0.40) 2px 22px, transparent 50px),
+      radial-gradient(ellipse at 27% 76%, rgba(60, 230, 150, 0.65) 0 1.2px, rgba(40, 200, 130, 0.32) 2px 22px, transparent 48px),
+      radial-gradient(ellipse at 52% 12%, rgba(180, 90, 255, 0.55) 0 1px, rgba(140, 60, 220, 0.28) 2px 20px, transparent 44px);
+  }
+
+  /* Light-mode hero readability: the cockpit hero keeps a dark space background
+     in both themes, so force hero text to stay light in light mode. Scoped to
+     .earth-cockpit-hero so nothing outside the hero is affected. */
+  :where(.light) .earth-cockpit-hero h1 span,
+  :where(.light) .earth-cockpit-hero h1 .md\:text-foreground {
+    color: #ffffff !important;
+  }
+  :where(.light) .earth-cockpit-hero p,
+  :where(.light) .earth-cockpit-hero .text-muted-foreground {
+    color: rgba(255, 255, 255, 0.88) !important;
+  }
+  :where(.light) .earth-cockpit-hero textarea,
+  :where(.light) .earth-cockpit-hero input[type="text"] {
+    color: #ffffff !important;
+  }
+  :where(.light) .earth-cockpit-hero textarea::placeholder,
+  :where(.light) .earth-cockpit-hero input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+  :where(.light) .hero-chat-card button {
+    color: #ffffff !important;
+  }
+
   .earth-hero-collision {
     position: absolute;
     z-index: 4;

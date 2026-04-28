@@ -11,10 +11,10 @@
             "id": "280f0718aad2cd7a",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -178,6 +178,10 @@
   },
   "active": "280f0718aad2cd7a",
   "lastOpenFiles": [
+    "scripts/update_lockout_blog_hero.js",
+    "public/images/blog/generated/us-lockout-hero.png",
+    "scripts/update_gas_blog_hero.js",
+    "public/images/blog/generated/uk-smell-gas-hero.png",
     "2026-04-17.md",
     "Untitled 2.md",
     "Untitled",

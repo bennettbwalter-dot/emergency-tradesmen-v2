@@ -16,11 +16,6 @@ export function SimpleThemeProvider({ children }: { children: React.ReactNode })
     const [theme, setThemeState] = useState<Theme>(() => {
         const saved = typeof window !== 'undefined' ? localStorage.getItem('app-theme') as Theme : null;
         if (saved) return saved;
-        
-        // Default to light for mobile, dark for desktop
-        if (typeof window !== 'undefined') {
-            return window.innerWidth < 768 ? 'light' : 'dark';
-        }
         return 'dark';
     });
 
