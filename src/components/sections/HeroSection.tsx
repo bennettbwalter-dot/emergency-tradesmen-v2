@@ -365,7 +365,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                    className="mb-0 mt-0 pointer-events-auto"
+                    className="hero-chat-stage mb-0 mt-0 pointer-events-auto"
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 -mt-6 md:mt-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">
@@ -375,7 +375,7 @@ export function HeroSection() {
                 </motion.div>
 
                 {/* Flipping Text */}
-                <div className="flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-16">
+                <div className="hero-spin-text-stage flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-16">
                     <LayoutTextFlipDemo />
                 </div>
             </div>

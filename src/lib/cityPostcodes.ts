@@ -565,10 +565,7 @@ export const cityPostcodes: Record<string, string> = {
     "Barry (Cardiff)": "CF62 8AA",
     "Dinas Powys (Cardiff)": "CF64 4AA",
     "Llantwit Major (Cardiff)": "CF61 1AA",
-    "Caerphilly (Cardiff)": "CF83 1AA",
     "Pontypridd (Cardiff)": "CF37 1AA",
-    "Newport (Cardiff)": "NP20 1AA",
-    "Cwmbran (Cardiff)": "NP44 1AA",
 };
 
 export function getPostcodeForCity(city: string): string {
