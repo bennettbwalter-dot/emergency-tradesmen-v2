@@ -41,6 +41,41 @@ import { GreenSVGButton } from "./VoiceAssistant/GreenSVGButton";
 import { YellowSVGButton } from "./VoiceAssistant/YellowSVGButton";
 import { PurpleSVGButton } from "./VoiceAssistant/PurpleSVGButton";
 
+type EarthCompleteDetail = {
+    location?: string;
+    lat?: number;
+    lng?: number;
+    zoom?: number;
+    pitch?: number;
+    bearing?: number;
+};
+
+function targetWithEarthCamera(target: string, detail?: EarthCompleteDetail) {
+    if (!detail?.lat || !detail?.lng) return target;
+
+    const url = new URL(target, window.location.origin);
+    url.searchParams.set("lat", detail.lat.toFixed(6));
+    url.searchParams.set("lng", detail.lng.toFixed(6));
+    if (Number.isFinite(detail.zoom)) url.searchParams.set("earthZoom", String(detail.zoom));
+    if (Number.isFinite(detail.pitch)) url.searchParams.set("earthPitch", String(detail.pitch));
+    if (Number.isFinite(detail.bearing)) url.searchParams.set("earthBearing", String(detail.bearing));
+    if (detail.location) url.searchParams.set("earthLocation", detail.location);
+    return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function findTypedTrade(message: string) {
+    const text = message.toLowerCase();
+    return trades.find((trade) => {
+        const names = [trade.slug, trade.name, (trade as any).usName].filter(Boolean).map((value) => String(value).toLowerCase());
+        return names.some((name) => text.includes(name) || text.includes(`${name}s`));
+    })?.slug || null;
+}
+
+function findTypedCity(message: string) {
+    const text = message.toLowerCase();
+    const allCities = [...cities, ...usCities].sort((a, b) => b.length - a.length);
+    return allCities.find((city) => text.includes(city.toLowerCase())) || null;
+}
 
 export function EmergencyChatInterface() {
     const navigate = useNavigate();
@@ -50,6 +85,7 @@ export function EmergencyChatInterface() {
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const [pendingNav, setPendingNav] = useState<string | null>(null);
+    const [isEarthLaunching, setIsEarthLaunching] = useState(false);
     const [callbackPhone, setCallbackPhone] = useState("");
     const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
     const [chatState, setChatState] = useState<ChatState>({
@@ -81,6 +117,14 @@ export function EmergencyChatInterface() {
     useEffect(() => { detectedTradeRef.current = detectedTrade; }, [detectedTrade]);
     useEffect(() => { detectedCityRef.current = detectedCity; }, [detectedCity]);
     useEffect(() => { settingsRef.current = settings; }, [settings]);
+
+    useEffect(() => {
+        const location = detectedCity || locationRecord?.name;
+        if (!location) return;
+        window.dispatchEvent(new CustomEvent('emergency-earth:sync-location', {
+            detail: { location }
+        }));
+    }, [detectedCity, locationRecord?.name]);
 
     const {
         detectUserLocation,
@@ -348,12 +392,32 @@ export function EmergencyChatInterface() {
                 clearTimeout(safetyRef);
                 setIsTyping(false);
 
+                const inferredTrade = newState.detectedTrade || freshTrade || findTypedTrade(msgText);
+                const inferredCity = newState.detectedCity || freshCity || findTypedCity(msgText);
+
+                if (inferredTrade && !newState.detectedTrade) {
+                    setDetectedTrade(inferredTrade);
+                    detectedTradeRef.current = inferredTrade;
+                }
+                if (inferredCity && !newState.detectedCity) {
+                    setDetectedCity(inferredCity);
+                    detectedCityRef.current = inferredCity;
+                }
+
                 if (response.action === 'navigate' && response.target) {
                     isVoiceSessionRef.current = false;
                     const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
                     devLog(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
                     setTimeout(() => {
-                        setPendingNav(response.target!);
+                        startEarthLaunch(response.target!, inferredCity || msgText);
+                    }, navDelay);
+                } else if (inferredTrade && inferredCity) {
+                    isVoiceSessionRef.current = false;
+                    const target = buildEmergencyTarget(inferredTrade, inferredCity);
+                    const navDelay = isVoice ? 900 : 1200;
+                    devLog(`[handleUserMessage] Complete request detected. Launching Earth sequence to: ${target}`);
+                    setTimeout(() => {
+                        startEarthLaunch(target, inferredCity);
                     }, navDelay);
                 } else if (isVoice) {
                     // Not navigating — auto-restart mic for voice follow-up
@@ -450,28 +514,58 @@ export function EmergencyChatInterface() {
         return () => clearTimeout(timer);
     }, [charIndex, isDeleting, sentenceIndex, input]);
 
+    const buildEmergencyTarget = (trade: string, city: string) => {
+        const citySlug = city.toLowerCase().trim().replace(/\s+/g, '-');
+        return `/emergency-${trade}/${citySlug}`;
+    };
+
+    const startEarthLaunch = (target: string, locationLabel?: string | null) => {
+        const location = locationLabel || detectedCity || locationRecord?.name || input;
+        setIsEarthLaunching(true);
+        let completed = false;
+
+        const completeHandler = (event: Event) => {
+            completed = true;
+            const detail = (event as CustomEvent<EarthCompleteDetail>).detail;
+            setIsEarthLaunching(false);
+            navigate(targetWithEarthCamera(target, detail));
+        };
+
+        window.addEventListener('emergency-earth:complete', completeHandler, { once: true });
+        window.dispatchEvent(new CustomEvent('emergency-earth:launch', {
+            detail: { location, target }
+        }));
+        window.setTimeout(() => {
+            if (completed) return;
+            window.removeEventListener('emergency-earth:complete', completeHandler);
+            setIsEarthLaunching(false);
+            navigate(target);
+        }, 14000);
+    };
+
     const handleActionClick = () => {
         if (isRequestingLocation) {
             detectUserLocation();
             setIsRequestingLocation(false);
         } else if (detectedTrade && (detectedCity || locationRecord) && !input.trim()) {
+            let newPath: string;
             if (locationRecord && locationRecord.path_slugs) {
                 const { state, metro, city, suburb } = locationRecord.path_slugs;
                 const hasSuburb = suburb && suburb.trim().length > 0;
                 // US Redirection Fix: Never use /us prefix.
-                const newPath = hasSuburb
+                newPath = hasSuburb
                     ? `/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
                     : `/${state}/${metro}/${city}/emergency-${detectedTrade}`;
-                navigate(newPath);
             } else {
-                navigate(`/emergency-${detectedTrade}/${(detectedCity || '').toLowerCase()}`);
+                newPath = buildEmergencyTarget(detectedTrade, detectedCity || '');
             }
+            startEarthLaunch(newPath, detectedCity || locationRecord?.name);
         } else {
             handleUserMessage(input);
         }
     };
 
-    const isActionDisabled = (!input.trim() && !isRequestingLocation && !(detectedTrade && (detectedCity || locationRecord))) || (isTyping && !isRequestingLocation);
+    const isActionDisabled = isEarthLaunching || (!input.trim() && !isRequestingLocation && !(detectedTrade && (detectedCity || locationRecord))) || (isTyping && !isRequestingLocation);
     const tradeSelectorContent = (
         <SelectContent className="bg-white border-gray-200">
             {trades.map((t) => (
@@ -623,9 +717,11 @@ export function EmergencyChatInterface() {
                 : hasUserIntent
                     ? 'bg-gold text-white hover:bg-gold/90 shadow-[0_0_16px_rgba(212,175,55,0.45)]'
                     : 'bg-stone-400/40 text-white/70 hover:bg-stone-400/60'}`}
-            title={isRequestingLocation ? "Locate Me" : (isFlowComplete ? "Find Help Now" : "Send Message")}
+            title={isEarthLaunching ? "Launching location view" : isRequestingLocation ? "Locate Me" : (isFlowComplete ? "Find Help Now" : "Send Message")}
         >
-            {isRequestingLocation ? (
+            {isEarthLaunching ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+            ) : isRequestingLocation ? (
                 geoLoading ? <Zap className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />
             ) : isFlowComplete ? (
                 <Search className="w-4 h-4" />
@@ -645,7 +741,9 @@ export function EmergencyChatInterface() {
                 ? 'animate-glow-bottom ring-4 ring-yellow-400/80'
                 : 'bg-[#C2B280] text-white hover:bg-[#B5A574]'}`}
         >
-            {isRequestingLocation ? (
+            {isEarthLaunching ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+            ) : isRequestingLocation ? (
                 <MapPin className="w-5 h-5" />
             ) : isFlowComplete ? (
                 <Search className="w-5 h-5" />
@@ -825,15 +923,15 @@ export function EmergencyChatInterface() {
                 </div>
 
                 {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
-                <div className="w-full bg-transparent flex justify-center pt-2 pb-4">
-                    <div className={`relative flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
+                <div className="hero-chat-shell w-full bg-transparent flex justify-center pt-2 pb-4 relative z-30">
+                    <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
                         {/* Quick action chips — only shown before first message, disappears after user engages */}
                         {chatState.history.length === 0 && !isRecording && (
-                            <div className="w-full px-3 md:px-6 pt-3 pb-1 flex flex-nowrap md:flex-wrap items-center justify-center md:justify-start gap-1.5 md:gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            <div className="w-full px-3 md:px-6 pt-2 pb-0 flex flex-nowrap md:flex-wrap items-center justify-center md:justify-start gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                                 {[
                                     { label: 'Burst pipe', message: 'I need a plumber — burst pipe' },
                                     { label: 'Power outage', message: 'I need an electrician — power outage' },
@@ -846,9 +944,9 @@ export function EmergencyChatInterface() {
                                             trackEvent('Chat', 'quick_action_chip', chip.label);
                                             handleUserMessage(chip.message);
                                         }}
-                                        className="group inline-flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full text-[11px] md:text-sm font-semibold text-gold border border-gold/30 bg-gold/[0.06] hover:bg-gold/[0.14] hover:border-gold/60 transition-all duration-200 backdrop-blur-sm whitespace-nowrap flex-shrink-0"
+                                        className="group inline-flex h-5 min-h-0 md:h-6 flex-shrink-0 items-center gap-1 rounded-md border border-gold/18 bg-black/[0.03] px-2 text-[9px] md:text-[10px] font-bold uppercase leading-none tracking-[0.12em] text-gold/72 backdrop-blur-sm transition-all duration-200 hover:border-gold/35 hover:bg-gold/[0.07] hover:text-gold whitespace-nowrap"
                                     >
-                                        <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-gold/80 group-hover:bg-gold transition-colors" />
+                                        <span className="h-1 w-1 rounded-full bg-gold/45 transition-colors group-hover:bg-gold/80" />
                                         {chip.label}
                                     </button>
                                 ))}
@@ -944,7 +1042,7 @@ export function EmergencyChatInterface() {
             </div>
 
             {/* Mobile Controls - SVG Buttons / Desktop Optimized Toggle */}
-            <div className={cn("w-full mt-0 md:-mt-4 mb-4 md:mb-8 px-1 overflow-visible", USE_SVG_BUTTONS_ON_DESKTOP ? "block" : "md:hidden")}>
+            <div className={cn("hero-action-controls-reveal w-full mt-0 md:-mt-4 mb-4 md:mb-8 px-1 overflow-visible relative", USE_SVG_BUTTONS_ON_DESKTOP ? "block" : "md:hidden")}>
                 <div className={cn("flex flex-row items-center justify-center w-full overflow-visible gap-1 mx-auto", USE_SVG_BUTTONS_ON_DESKTOP ? "md:gap-8 md:max-w-4xl" : "max-w-[420px]")}>
                     <div className="relative flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{micButton}</div>
