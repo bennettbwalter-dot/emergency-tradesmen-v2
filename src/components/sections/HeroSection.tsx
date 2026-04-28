@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { HelpCircle } from "lucide-react";
 import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
@@ -9,21 +9,49 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
+import { EarthHeroBackground } from "@/components/earth/EarthHeroBackground";
 
-// Defer WebGL shader until after initial paint — it's decorative and blocks main thread on mount
-const ColorBends = lazy(() => import("@/components/ui/ColorBends"));
+// Defer WebGL shader until after initial paint - it's decorative and blocks main thread on mount
 
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
 export function HeroSection() {
     const { settings, detectedCity, detectedState, detectUserLocation } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
+    const [controlsVisible, setControlsVisible] = useState(false);
+    const controlsRevealTimerRef = useRef<number | null>(null);
     const location = useLocation();
 
     // Trigger location detection on mount if not already done
     useEffect(() => {
         detectUserLocation();
     }, [detectUserLocation]);
+
+    const revealControls = useCallback((hold = false) => {
+        setControlsVisible(true);
+        if (controlsRevealTimerRef.current) {
+            window.clearTimeout(controlsRevealTimerRef.current);
+        }
+        if (!hold) {
+            controlsRevealTimerRef.current = window.setTimeout(() => {
+                setControlsVisible(false);
+            }, 4200);
+        }
+    }, []);
+
+    useEffect(() => {
+        const handleActivity = () => revealControls();
+        window.addEventListener('mousemove', handleActivity, { passive: true });
+        window.addEventListener('touchstart', handleActivity, { passive: true });
+
+        return () => {
+            window.removeEventListener('mousemove', handleActivity);
+            window.removeEventListener('touchstart', handleActivity);
+            if (controlsRevealTimerRef.current) {
+                window.clearTimeout(controlsRevealTimerRef.current);
+            }
+        };
+    }, [revealControls]);
 
     // Headline Logic
     // UK: NEAR {City} or NEAR ME
@@ -32,46 +60,30 @@ export function HeroSection() {
     const displayState = detectedState || (settings.countryCode === 'US' ? 'US' : 'UK');
 
     return (
-        <section className="relative block overflow-hidden">
-            {/* Background layers — decorative shader loaded lazily to avoid blocking LCP */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                <Suspense fallback={null}>
-                    <ColorBends
-                        colors={["#d7c08a", "#caa55b", "#b8986e"]}
-                        rotation={0}
-                        speed={0.2}
-                        scale={1}
-                        frequency={1}
-                        warpStrength={1}
-                        mouseInfluence={1}
-                        parallax={0.5}
-                        noise={0.1}
-                        transparent
-                        autoRotate={0}
-                    />
-                </Suspense>
-            </div>
+        <section
+            className={cn(
+                "earth-cockpit-hero hero-control-stage relative block min-h-[100svh] overflow-hidden bg-black",
+                controlsVisible && "hero-controls-visible"
+            )}
+            onPointerMove={() => revealControls()}
+            onMouseMove={() => revealControls()}
+            onTouchStart={() => revealControls()}
+            onFocusCapture={() => revealControls(true)}
+            onBlurCapture={() => revealControls()}
+        >
+            <EarthHeroBackground countryCode={settings.countryCode} />
+            <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(0,0,0,0.05)_30%,rgba(0,0,0,0.72)_100%)] pointer-events-none" />
+            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/10 to-background pointer-events-none" />
+            {/* Background layers - decorative shader loaded lazily to avoid blocking LCP */}
 
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent pointer-events-none z-1" />
-
-            {/* Decorative gold rings */}
-            <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] -translate-y-1/2 opacity-20 animate-float pointer-events-none">
-                <div className="absolute inset-0 rounded-full border border-gold/30" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
-                <div className="absolute inset-8 rounded-full border border-gold/20" style={{ transform: 'rotateX(60deg) rotateZ(-30deg)' }} />
-            </div>
-
-            {/* Glow effects */}
-            <div className="absolute -top-10 -right-10 md:top-20 md:right-20 w-80 h-80 md:w-96 md:h-96 bg-gold/5 rounded-full blur-[100px] animate-glow-pulse pointer-events-none" />
-            <div className="absolute bottom-20 left-20 w-64 h-64 bg-gold/3 rounded-full blur-[80px] pointer-events-none" />
-
-            <div className="relative container-wide w-full pt-16 pb-0 md:pt-28 md:pb-0 pointer-events-none z-10">
+            <div className="relative container-wide w-full pt-2 pb-0 sm:pt-8 md:pt-28 md:pb-0 pointer-events-none z-10">
                 <div className="w-full max-w-5xl md:max-w-7xl mx-auto text-center pointer-events-auto">
                     {/* Availability badge */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.1, duration: 0.5 }}
-                        className="mb-6 inline-flex flex-col items-center gap-2"
+                        className="mb-3 inline-flex flex-col items-center gap-2 md:mb-6"
                     >
                         <div className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gold/30 bg-white/[0.03] backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)] relative overflow-hidden group transition-all duration-500 hover:border-gold/50">
                             {/* Subtle scanning light effect */}
@@ -88,11 +100,11 @@ export function HeroSection() {
                     </motion.div>
 
                     {/* Main headline — matches reference: LOCAL / TRADESMEN|CONTRACTORS (gold, dominant) / near CITY */}
-                    <div className="flex flex-col items-center justify-center mb-6 px-1 sm:px-4 w-full overflow-hidden">
-                        <h1 className="text-center max-w-4xl mx-auto w-full [text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
+                    <div className="hero-title-arch relative flex flex-col items-center justify-center mb-3 px-1 sm:px-4 w-full overflow-visible md:mb-6">
+                        <h1 className="text-center max-w-4xl mx-auto w-full [text-shadow:0_4px_24px_rgba(0,0,0,0.78)] md:[text-shadow:0_4px_24px_rgba(0,0,0,0.15)]">
                             {/* LOCAL (black) with gold O logo */}
                             <span
-                                className="block text-foreground text-[clamp(2rem,11vw,3.75rem)]"
+                                className="block text-white md:text-foreground text-[clamp(2rem,11vw,3.75rem)] drop-shadow-[0_4px_18px_rgba(0,0,0,0.78)]"
                                 style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
                             >
                                 L<img src="/et-logo-v3.png" alt="O" width="64" height="64" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
@@ -115,7 +127,7 @@ export function HeroSection() {
                             <span className="flex items-end justify-center gap-[0.3em] mt-2 whitespace-nowrap">
                                 <span className="relative inline-block">
                                     <span
-                                        className="text-foreground text-[clamp(1.25rem,5.5vw,2.5rem)] leading-none"
+                                        className="text-white md:text-foreground text-[clamp(1.25rem,5.5vw,2.5rem)] leading-none drop-shadow-[0_3px_12px_rgba(0,0,0,0.78)]"
                                         style={{ fontFamily: '"Kaushan Script", cursive', fontWeight: 400 }}
                                     >
                                         near
@@ -144,7 +156,7 @@ export function HeroSection() {
                                     </svg>
                                 </span>
                                 <span
-                                    className="text-foreground text-[clamp(1.75rem,8.5vw,3.25rem)] min-w-0 truncate"
+                                    className="text-white md:text-foreground text-[clamp(1.75rem,8.5vw,3.25rem)] min-w-0 truncate drop-shadow-[0_4px_16px_rgba(0,0,0,0.78)]"
                                     style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
                                 >
                                     {displayCity}
@@ -158,85 +170,47 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-[10px] sm:text-sm md:text-base lg:text-lg text-muted-foreground mb-4 tracking-wide uppercase"
+                        className="text-[10px] sm:text-sm md:text-base lg:text-lg text-white/85 md:text-muted-foreground mb-4 tracking-wide uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.72)] md:drop-shadow-none"
                     >
                         Emergency {settings.tradeTerm} {displayState} | Nationwide 24/7 Help
                     </motion.p>
 
-                    {/* Premium Glassmorphism Badges — Social Proof */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                        className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-8 md:mb-12"
-                    >
-                        {/* 20,000+ Verified */}
-                        <motion.div className="group relative">
-                            <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-emerald-500/[0.08] backdrop-blur-md border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-500/[0.12]">
-                                <span className="text-emerald-500 font-black text-xs sm:text-sm tracking-tight">20,000+</span>
-                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.1em]">Verified {settings.tradeTerm}</span>
-                                {/* Subtle inner shine */}
-                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
-                            </div>
-                        </motion.div>
-
-                        {/* 24/7 Response */}
-                        <motion.div className="group relative">
-                            <div className="absolute -inset-1 bg-gold/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gold/[0.08] backdrop-blur-md border border-gold/20 shadow-[0_0_20px_rgba(212,175,55,0.05)] transition-all duration-300 hover:border-gold/40 hover:bg-gold/[0.12]">
-                                <span className="text-gold font-black text-xs sm:text-sm tracking-tight">24/7</span>
-                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">Response</span>
-                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
-                            </div>
-                        </motion.div>
-
-                        {/* Free To Use */}
-                        <motion.div className="group relative">
-                            <div className="absolute -inset-1 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                            <div className="relative inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-blue-500/[0.08] backdrop-blur-md border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.05)] transition-all duration-300 hover:border-blue-500/40 hover:bg-blue-500/[0.12]">
-                                <span className="text-blue-400 font-black text-xs sm:text-sm tracking-tight">Free</span>
-                                <span className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em]">To Use</span>
-                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
-                            </div>
-                        </motion.div>
-                    </motion.div>
-
                     {/* "Need Help" Button */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex flex-col items-center justify-center mt-8 mb-0 md:mt-16 relative z-40 gap-4"
-                    >
-                        <RainbowButton
-                            size="lg"
-                            className={cn("gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden" : "hidden md:flex")}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.dispatchEvent(new Event('start-tour'));
-                            }}
+                    <div className="hero-get-help-reveal relative">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="flex flex-col items-center justify-center mt-8 mb-0 md:mt-16 gap-4"
                         >
-                            <div className="relative flex items-center justify-center">
-                                <HelpCircle className="w-6 h-6" />
-                            </div>
-                            NEED HELP?
-                        </RainbowButton>
+                            <RainbowButton
+                                size="lg"
+                                className={cn("gap-3 rounded-full font-display tracking-wider text-sm md:text-base px-8 py-3", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden" : "hidden md:flex")}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.dispatchEvent(new Event('start-tour'));
+                                }}
+                            >
+                                <div className="relative flex items-center justify-center">
+                                    <HelpCircle className="w-6 h-6" />
+                                </div>
+                                NEED HELP?
+                            </RainbowButton>
 
-                        <motion.button
-                            whileTap={{ scale: 0.95, y: 2 }}
-                            onPointerDown={() => {
-                                setIsPressed(true);
-                                audioService.playClick(5); // Heavy variant
-                            }}
-                            onPointerUp={() => setIsPressed(false)}
-                            onPointerLeave={() => setIsPressed(false)}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.dispatchEvent(new Event('start-tour'));
-                            }}
-                            className={cn("relative z-40", USE_SVG_BUTTONS_ON_DESKTOP ? "flex" : "md:hidden")}
-                        >
+                            <motion.button
+                                whileTap={{ scale: 0.95, y: 2 }}
+                                onPointerDown={() => {
+                                    setIsPressed(true);
+                                    audioService.playClick(5); // Heavy variant
+                                }}
+                                onPointerUp={() => setIsPressed(false)}
+                                onPointerLeave={() => setIsPressed(false)}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.dispatchEvent(new Event('start-tour'));
+                                }}
+                                className={cn("relative", USE_SVG_BUTTONS_ON_DESKTOP ? "flex" : "md:hidden")}
+                            >
                             <svg xmlns="http://www.w3.org/2000/svg" width="256" height="186" fill="none" viewBox="0 0 256 186" className={cn("h-auto cursor-pointer drop-shadow-2xl transition-all duration-300", USE_SVG_BUTTONS_ON_DESKTOP ? "w-[120px] md:w-[160px]" : "w-[120px]")}>
                               {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
                               <path 
@@ -382,8 +356,9 @@ export function HeroSection() {
                                 </linearGradient>
                               </defs>
                             </svg>
-                        </motion.button>
-                    </motion.div>
+                            </motion.button>
+                        </motion.div>
+                    </div>
                 </div>
 
                 <motion.div

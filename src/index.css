@@ -2,6 +2,1336 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .earth-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(80, 178, 215, 0.14), transparent 28%),
+      radial-gradient(circle at 80% 18%, rgba(212, 175, 55, 0.1), transparent 24%),
+      radial-gradient(circle at 16% 6%, rgba(82, 133, 255, 0.15), transparent 29%),
+      #010204;
+  }
+
+  .earth-hero-deep-space,
+  .earth-hero-milky-way,
+  .earth-hero-galaxies,
+  .earth-hero-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .earth-hero-deep-space {
+    z-index: 0;
+    opacity: 0.9;
+    background:
+      radial-gradient(ellipse at 18% 22%, rgba(46, 87, 180, 0.22), transparent 31%),
+      radial-gradient(ellipse at 79% 16%, rgba(255, 186, 88, 0.12), transparent 24%),
+      radial-gradient(ellipse at 66% 76%, rgba(70, 204, 255, 0.12), transparent 28%),
+      radial-gradient(ellipse at 52% 52%, transparent 0 24%, rgba(0, 0, 0, 0.48) 62%, rgba(0, 0, 0, 0.88) 100%);
+  }
+
+  .earth-hero-milky-way {
+    z-index: 1;
+    left: -22%;
+    right: -22%;
+    top: -17%;
+    bottom: -13%;
+    opacity: 0.82;
+    mix-blend-mode: screen;
+    transform: rotate(-18deg);
+    filter: blur(0.2px) saturate(1.18);
+    background:
+      radial-gradient(ellipse at 46% 50%, rgba(255, 239, 194, 0.35), transparent 0.9%),
+      radial-gradient(ellipse at 47% 49%, rgba(123, 198, 255, 0.25), transparent 1.2%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 231, 184, 0.2) 0 4%, transparent 13%),
+      radial-gradient(ellipse at 50% 50%, rgba(154, 204, 255, 0.14) 0 12%, transparent 29%),
+      linear-gradient(90deg,
+        transparent 0 11%,
+        rgba(44, 96, 166, 0.08) 18%,
+        rgba(135, 195, 255, 0.28) 32%,
+        rgba(255, 232, 185, 0.38) 47%,
+        rgba(166, 219, 255, 0.32) 59%,
+        rgba(47, 93, 156, 0.13) 76%,
+        transparent 90%),
+      repeating-radial-gradient(circle at 48% 52%, rgba(255, 255, 255, 0.46) 0 0.8px, transparent 1px 5px);
+    mask-image:
+      radial-gradient(ellipse at center, #000 0 21%, rgba(0, 0, 0, 0.72) 34%, transparent 67%);
+    animation: milky-way-breathe 16s ease-in-out infinite alternate;
+  }
+
+  .earth-hero-galaxies {
+    z-index: 2;
+    opacity: 0.9;
+    background:
+      radial-gradient(ellipse at 9% 23%, rgba(255, 245, 220, 0.8) 0 0.8px, rgba(108, 181, 255, 0.2) 1px 16px, transparent 36px),
+      radial-gradient(ellipse at 84% 31%, rgba(255, 202, 129, 0.42) 0 1px, rgba(118, 170, 255, 0.18) 2px 22px, transparent 54px),
+      radial-gradient(ellipse at 73% 82%, rgba(198, 227, 255, 0.46) 0 1px, rgba(80, 120, 210, 0.16) 2px 19px, transparent 45px),
+      radial-gradient(ellipse at 27% 76%, rgba(255, 218, 161, 0.32) 0 1px, rgba(85, 170, 255, 0.12) 2px 18px, transparent 42px);
+    animation: galaxy-drift 34s ease-in-out infinite alternate;
+  }
+
+  .earth-hero-stars {
+    z-index: 3;
+    opacity: 0.8;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.92) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 31% 62%, rgba(142, 232, 255, 0.76) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 78% 22%, rgba(255, 226, 167, 0.88) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 88% 74%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.4px),
+      radial-gradient(circle at 44% 31%, rgba(255, 255, 255, 0.5) 0 1px, transparent 1.4px),
+      radial-gradient(circle at 64% 84%, rgba(113, 217, 255, 0.58) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 22% 82%, rgba(255, 255, 255, 0.76) 0 0.7px, transparent 1.2px),
+      radial-gradient(circle at 58% 12%, rgba(255, 245, 210, 0.62) 0 0.8px, transparent 1.4px);
+    background-size: 180px 180px, 260px 260px, 330px 330px, 220px 220px, 410px 410px, 300px 300px, 150px 150px, 520px 520px;
+    animation: earth-star-drift 46s linear infinite;
+  }
+
+  .earth-hero-stars::before,
+  .earth-hero-stars::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.96) 0 1.1px, transparent 1.8px),
+      radial-gradient(circle at 74% 13%, rgba(255, 226, 166, 0.94) 0 1px, transparent 1.7px),
+      radial-gradient(circle at 91% 67%, rgba(146, 223, 255, 0.82) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 38% 88%, rgba(255, 255, 255, 0.72) 0 0.9px, transparent 1.5px);
+    background-size: 460px 460px, 620px 620px, 540px 540px, 380px 380px;
+  }
+
+  .earth-hero-stars::before {
+    opacity: 0.74;
+    animation: star-twinkle 4.8s ease-in-out infinite alternate;
+  }
+
+  .earth-hero-stars::after {
+    opacity: 0.42;
+    filter: blur(0.6px);
+    transform: scale(1.08);
+    animation: star-twinkle 7.4s ease-in-out infinite alternate-reverse;
+  }
+
+  .earth-hero-collision {
+    position: absolute;
+    z-index: 4;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(255, 221, 156, 0.94);
+    box-shadow:
+      0 0 16px rgba(255, 192, 96, 0.9),
+      0 0 38px rgba(255, 116, 69, 0.48);
+  }
+
+  .earth-hero-collision::before,
+  .earth-hero-collision::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 120px;
+    height: 1px;
+    transform-origin: right center;
+    background: linear-gradient(90deg, transparent, rgba(255, 206, 137, 0.78), rgba(255, 255, 255, 0.92));
+  }
+
+  .earth-hero-collision::after {
+    width: 58px;
+    transform: rotate(31deg);
+    opacity: 0.58;
+  }
+
+  .earth-hero-collision-a {
+    left: 17%;
+    top: 28%;
+    animation: asteroid-collision-a 13s ease-in-out infinite;
+  }
+
+  .earth-hero-collision-b {
+    right: 18%;
+    top: 18%;
+    transform: scale(0.8) rotate(164deg);
+    animation: asteroid-collision-b 17s ease-in-out 4s infinite;
+  }
+
+  .earth-hero-tiny-ship {
+    position: absolute;
+    z-index: 6;
+    left: 10%;
+    top: 64%;
+    width: 42px;
+    height: 22px;
+    opacity: 0;
+    transform: translate3d(-46px, 22px, 0) rotate(-8deg) scale(0.78);
+    filter: drop-shadow(0 0 10px rgba(113, 217, 255, 0.36));
+    animation: tiny-ship-peek 18s ease-in-out 2.5s infinite;
+  }
+
+  .earth-hero-ship-body {
+    position: absolute;
+    inset: 5px 7px 4px 5px;
+    border-radius: 60% 42% 48% 60%;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(128, 185, 225, 0.9) 52%, rgba(30, 54, 82, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.38);
+  }
+
+  .earth-hero-ship-body::before {
+    content: "";
+    position: absolute;
+    right: -9px;
+    top: 4px;
+    border-left: 12px solid rgba(143, 189, 218, 0.9);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .earth-hero-ship-window {
+    position: absolute;
+    left: 16px;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(57, 224, 255, 0.95);
+    box-shadow: 0 0 8px rgba(57, 224, 255, 0.7);
+  }
+
+  .earth-hero-ship-flame {
+    position: absolute;
+    left: -5px;
+    top: 9px;
+    width: 13px;
+    height: 5px;
+    border-radius: 999px 0 0 999px;
+    background: linear-gradient(90deg, transparent, rgba(255, 155, 63, 0.8), rgba(255, 238, 173, 0.98));
+    filter: blur(0.4px);
+    animation: ship-flame-pulse 420ms ease-in-out infinite alternate;
+  }
+
+  .earth-hero-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    width: 100%;
+    height: 100%;
+    filter: saturate(1.14) contrast(1.06) drop-shadow(0 0 44px rgba(113, 217, 255, 0.2));
+    transform: scale(1);
+    transition:
+      transform 7.2s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 7.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .earth-map-container,
+  .local-area-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .earth-map-container {
+    z-index: 8;
+    opacity: 0;
+    transform: scale(1.04);
+    filter: saturate(1.16) contrast(1.1);
+    transition:
+      opacity 1200ms ease 900ms,
+      transform 8200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .local-area-map {
+    filter: saturate(1.12) contrast(1.08);
+  }
+
+  .earth-map-active .earth-map-container {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .earth-hero-scan {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    opacity: 0;
+    background:
+      linear-gradient(180deg, transparent, rgba(113, 217, 255, 0.12), transparent),
+      radial-gradient(circle at 50% 42%, transparent 0 22%, rgba(0, 0, 0, 0.1) 46%, rgba(0, 0, 0, 0.72) 100%);
+    transform: translateY(-100%);
+    transition: opacity 500ms ease;
+  }
+
+  .earth-launching .earth-hero-canvas {
+    opacity: 0;
+    transform: scale(3.25) translate3d(0, 4%, 0);
+    filter: saturate(1.3) contrast(1.16) blur(0.8px) drop-shadow(0 0 90px rgba(113, 217, 255, 0.36));
+  }
+
+  .earth-launching .earth-hero-scan {
+    opacity: 1;
+    animation: earth-scan 1.8s linear infinite;
+  }
+
+  .earth-hero-bg .maplibregl-control-container {
+    display: none;
+  }
+
+  .local-area-map .maplibregl-control-container {
+    display: block;
+  }
+
+  .local-area-map .maplibregl-ctrl-bottom-right {
+    bottom: 24px;
+    right: 18px;
+  }
+
+  .local-area-map .maplibregl-ctrl-group {
+    overflow: hidden;
+    border: 1px solid rgba(227, 192, 99, 0.38);
+    border-radius: 12px;
+    background: rgba(9, 12, 15, 0.78);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34), 0 0 22px rgba(212, 175, 55, 0.13);
+    backdrop-filter: blur(12px);
+  }
+
+  .local-area-map .maplibregl-ctrl button {
+    color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+@keyframes earth-star-drift {
+  to {
+    background-position: 180px 180px, -260px 260px, 330px -330px, -220px -220px, 410px 410px, -300px 300px, 150px -150px, -520px 520px;
+  }
+}
+
+@keyframes milky-way-breathe {
+  from {
+    opacity: 0.68;
+    transform: rotate(-18deg) scale(1);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: rotate(-18deg) scale(1.035);
+  }
+}
+
+@keyframes galaxy-drift {
+  from {
+    transform: translate3d(-0.6%, -0.3%, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate3d(0.8%, 0.7%, 0) rotate(0.6deg);
+  }
+}
+
+@keyframes star-twinkle {
+  from {
+    opacity: 0.34;
+  }
+
+  50% {
+    opacity: 0.88;
+  }
+
+  to {
+    opacity: 0.52;
+  }
+}
+
+@keyframes asteroid-collision-a {
+  0%, 54%, 100% {
+    opacity: 0;
+    transform: translate3d(-36px, -18px, 0) scale(0.38) rotate(-12deg);
+  }
+
+  58% {
+    opacity: 0.82;
+    transform: translate3d(0, 0, 0) scale(1) rotate(-12deg);
+  }
+
+  63% {
+    opacity: 0.16;
+    transform: translate3d(13px, 6px, 0) scale(2.7) rotate(-12deg);
+  }
+}
+
+@keyframes asteroid-collision-b {
+  0%, 60%, 100% {
+    opacity: 0;
+    transform: translate3d(38px, -14px, 0) scale(0.34) rotate(164deg);
+  }
+
+  64% {
+    opacity: 0.65;
+    transform: translate3d(0, 0, 0) scale(0.8) rotate(164deg);
+  }
+
+  69% {
+    opacity: 0.12;
+    transform: translate3d(-14px, 8px, 0) scale(2.2) rotate(164deg);
+  }
+}
+
+@keyframes tiny-ship-peek {
+  0%, 56%, 100% {
+    opacity: 0;
+    transform: translate3d(-46px, 22px, 0) rotate(-8deg) scale(0.78);
+  }
+
+  61%, 73% {
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
+  }
+
+  80% {
+    opacity: 0;
+    transform: translate3d(84px, -22px, 0) rotate(8deg) scale(0.7);
+  }
+}
+
+@keyframes ship-flame-pulse {
+  from {
+    opacity: 0.55;
+    transform: scaleX(0.72);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1.12);
+  }
+}
+
+@keyframes earth-scan {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@layer components {
+  .hero-title-arch::before,
+  .hero-title-arch::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+  }
+
+  .hero-title-arch::before {
+    width: min(92vw, 930px);
+    height: clamp(260px, 31vw, 430px);
+    border: 1px solid rgba(227, 192, 99, 0.34);
+    border-top-color: transparent;
+    border-left-color: rgba(227, 192, 99, 0.42);
+    border-right-color: rgba(227, 192, 99, 0.42);
+    border-bottom-color: rgba(245, 220, 138, 0.5);
+    box-shadow:
+      0 18px 54px rgba(212, 175, 55, 0.16),
+      inset 0 -22px 38px rgba(212, 175, 55, 0.1);
+    opacity: 0.95;
+  }
+
+  .hero-title-arch::after {
+    width: min(80vw, 780px);
+    height: clamp(210px, 25vw, 350px);
+    border-bottom: 2px solid rgba(245, 220, 138, 0.58);
+    border-left: 1px solid rgba(245, 220, 138, 0.18);
+    border-right: 1px solid rgba(245, 220, 138, 0.18);
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(245, 220, 138, 0.22), transparent 58%),
+      linear-gradient(90deg, transparent, rgba(245, 220, 138, 0.16), transparent);
+    mask-image: linear-gradient(180deg, transparent 0 18%, #000 46% 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0 18%, #000 46% 100%);
+    filter: blur(0.2px);
+  }
+
+  .hero-title-arch h1 {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 640px) {
+    .hero-title-arch::before {
+      width: 112vw;
+      height: 210px;
+      top: 61%;
+      opacity: 0.7;
+    }
+
+    .hero-title-arch::after {
+      width: 96vw;
+      height: 168px;
+      top: 61%;
+      opacity: 0.78;
+    }
+  }
+}
+
+@layer components {
+  .cockpit-dispatch {
+    --cockpit-gold: 212 175 55;
+    --cockpit-blue: 58 155 255;
+    --cockpit-green: 31 214 129;
+    --cockpit-orange: 255 125 30;
+    --cockpit-graphite: 15 17 18;
+    perspective: 1100px;
+  }
+
+  .cockpit-input-panel {
+    isolation: isolate;
+    border-color: rgba(var(--cockpit-gold), 0.32) !important;
+    border-radius: 28px 28px 18px 18px !important;
+    background:
+      linear-gradient(120deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 225, 0.36) 38%, rgba(16, 21, 22, 0.56)),
+      radial-gradient(circle at 50% -26%, rgba(var(--cockpit-gold), 0.36), transparent 42%),
+      rgba(8, 10, 11, 0.52) !important;
+    box-shadow:
+      0 28px 85px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -14px 40px rgba(0, 0, 0, 0.22),
+      0 0 0 1px rgba(255, 255, 255, 0.18);
+    transform: rotateX(2.5deg);
+    transform-origin: center bottom;
+  }
+
+  .cockpit-input-panel::before,
+  .cockpit-input-panel::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .cockpit-input-panel::before {
+    inset: -1px;
+    border-radius: inherit;
+    background:
+      linear-gradient(90deg, transparent 0 5%, rgba(var(--cockpit-blue), 0.34) 14%, transparent 23% 77%, rgba(var(--cockpit-orange), 0.42) 86%, transparent 95%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 42%, rgba(0, 0, 0, 0.42));
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    padding: 1px;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .cockpit-input-panel::after {
+    left: 7%;
+    right: 7%;
+    bottom: -14px;
+    height: 30px;
+    border-radius: 999px;
+    background:
+      radial-gradient(ellipse at center, rgba(var(--cockpit-gold), 0.55), transparent 62%),
+      linear-gradient(90deg, transparent, rgba(var(--cockpit-blue), 0.25), rgba(var(--cockpit-green), 0.25), rgba(var(--cockpit-orange), 0.38), transparent);
+    filter: blur(12px);
+  }
+
+  .cockpit-panel-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.38;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      radial-gradient(circle at 18% 50%, rgba(var(--cockpit-blue), 0.16), transparent 18%),
+      radial-gradient(circle at 82% 52%, rgba(var(--cockpit-orange), 0.16), transparent 18%);
+    background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%;
+  }
+
+  .cockpit-panel-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.7;
+    background:
+      linear-gradient(90deg, transparent 12%, rgba(var(--cockpit-blue), 0.18) 24%, transparent 34% 66%, rgba(var(--cockpit-orange), 0.22) 76%, transparent 88%),
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.42), transparent 38%);
+  }
+
+  .cockpit-quick-row {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cockpit-chip {
+    color: rgba(72, 53, 13, 0.92) !important;
+    border-color: rgba(var(--cockpit-gold), 0.34) !important;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 245, 212, 0.26)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 7px 20px rgba(38, 27, 6, 0.08);
+  }
+
+  .cockpit-screen {
+    margin: 8px 10px 10px;
+    width: calc(100% - 20px) !important;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(var(--cockpit-gold), 0.22);
+    background:
+      radial-gradient(circle at 8% 45%, rgba(var(--cockpit-gold), 0.22), transparent 13%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 252, 241, 0.5), rgba(20, 28, 30, 0.28)),
+      rgba(255, 255, 255, 0.48);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -16px 34px rgba(0, 0, 0, 0.12),
+      0 16px 45px rgba(0, 0, 0, 0.16);
+  }
+
+  .cockpit-screen::before,
+  .cockpit-screen::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cockpit-screen::before {
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent, rgba(var(--cockpit-gold), 0.16), transparent),
+      repeating-linear-gradient(0deg, rgba(12, 17, 18, 0.05) 0 1px, transparent 1px 9px);
+    opacity: 0.55;
+  }
+
+  .cockpit-screen::after {
+    left: 64px;
+    right: 18px;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(var(--cockpit-gold), 0.5), transparent);
+    opacity: 0.45;
+  }
+
+  .cockpit-textarea {
+    position: relative;
+    z-index: 2;
+    color: #090807 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .cockpit-textarea::placeholder {
+    color: rgba(8, 8, 8, 0.82) !important;
+  }
+
+  .cockpit-controls-shell {
+    position: relative;
+    z-index: 5;
+  }
+
+  .cockpit-controls {
+    position: relative;
+    min-height: 132px;
+    padding: 8px 10px 32px;
+    border-radius: 34px 34px 52px 52px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(15, 17, 18, 0.52) 42%, rgba(4, 5, 6, 0.78)),
+      radial-gradient(ellipse at 50% 15%, rgba(var(--cockpit-gold), 0.28), transparent 58%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.52),
+      inset 0 -20px 32px rgba(0, 0, 0, 0.44),
+      0 24px 64px rgba(0, 0, 0, 0.26);
+    transform: rotateX(5deg);
+    transform-origin: center bottom;
+  }
+
+  .cockpit-controls::before,
+  .cockpit-controls::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .cockpit-controls::before {
+    left: 8%;
+    right: 8%;
+    top: 51%;
+    height: 5px;
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg,
+        rgba(var(--cockpit-blue), 0.05),
+        rgba(var(--cockpit-blue), 0.92) 15%,
+        rgba(var(--cockpit-gold), 0.78) 39%,
+        rgba(var(--cockpit-green), 0.86) 62%,
+        rgba(var(--cockpit-orange), 0.96) 86%,
+        rgba(var(--cockpit-orange), 0.05));
+    box-shadow:
+      0 0 16px rgba(var(--cockpit-gold), 0.42),
+      0 0 30px rgba(var(--cockpit-blue), 0.18);
+  }
+
+  .cockpit-controls::after {
+    left: 12%;
+    right: 12%;
+    bottom: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
+    opacity: 0.75;
+  }
+
+  .cockpit-control {
+    position: relative;
+    z-index: 2;
+    width: clamp(78px, 20vw, 112px);
+    min-height: 104px;
+  }
+
+  .cockpit-control::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 72%;
+    height: 58%;
+    border-radius: 999px;
+    transform: translate(-50%, -48%);
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 52%),
+      rgba(8, 10, 11, 0.28);
+    filter: blur(3px);
+    opacity: 0.82;
+  }
+
+  .cockpit-control::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    width: 5px;
+    height: 24px;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    background: rgba(var(--cockpit-gold), 0.55);
+    box-shadow: 0 0 16px rgba(var(--cockpit-gold), 0.5);
+  }
+
+  .cockpit-control--voice {
+    --control-glow: var(--cockpit-blue);
+  }
+
+  .cockpit-control--trades {
+    --control-glow: var(--cockpit-gold);
+  }
+
+  .cockpit-control--location,
+  .cockpit-control--city {
+    --control-glow: var(--cockpit-green);
+  }
+
+  .cockpit-control--send {
+    --control-glow: var(--cockpit-orange);
+  }
+
+  .cockpit-control > button {
+    filter: drop-shadow(0 13px 16px rgba(0, 0, 0, 0.36)) drop-shadow(0 0 18px rgba(var(--control-glow), 0.25));
+    transition: transform 220ms ease, filter 220ms ease;
+  }
+
+  .cockpit-control:hover > button,
+  .cockpit-control:focus-within > button {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.42)) drop-shadow(0 0 26px rgba(var(--control-glow), 0.46));
+  }
+
+  .cockpit-control-label {
+    color: rgba(255, 238, 194, 0.88) !important;
+    text-shadow: 0 0 12px rgba(var(--control-glow), 0.56), 0 1px 3px rgba(0, 0, 0, 0.55);
+  }
+
+  .cockpit-control-group {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .cockpit-launching .cockpit-input-panel,
+  .cockpit-launching .cockpit-controls {
+    animation: cockpit-launch-panel 950ms ease-in-out infinite alternate;
+  }
+
+  .cockpit-launching .cockpit-controls::before {
+    animation: cockpit-rail-fire 820ms linear infinite;
+    box-shadow:
+      0 0 26px rgba(var(--cockpit-orange), 0.8),
+      0 0 54px rgba(var(--cockpit-green), 0.34);
+  }
+
+  .cockpit-launching .cockpit-control--send > button {
+    animation: cockpit-send-ignite 650ms ease-in-out infinite alternate;
+  }
+
+  @media (max-width: 640px) {
+    .cockpit-input-panel {
+      border-radius: 22px 22px 16px 16px !important;
+      transform: none;
+    }
+
+    .cockpit-controls {
+      min-height: 118px;
+      padding-inline: 2px;
+      border-radius: 24px 24px 38px 38px;
+      transform: none;
+      gap: 0 !important;
+    }
+
+    .cockpit-control {
+      width: 25%;
+      min-height: 98px;
+    }
+
+    .cockpit-control-group {
+      width: 25%;
+      justify-content: center;
+    }
+
+    .cockpit-control-group .cockpit-control {
+      width: 100%;
+    }
+
+    .cockpit-control > button {
+      width: 82px !important;
+      height: 82px !important;
+    }
+
+    .cockpit-controls::before {
+      left: 9%;
+      right: 9%;
+    }
+  }
+}
+
+@keyframes cockpit-launch-panel {
+  from {
+    box-shadow:
+      0 28px 85px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -14px 40px rgba(0, 0, 0, 0.22),
+      0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+  to {
+    box-shadow:
+      0 30px 95px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      inset 0 -14px 40px rgba(0, 0, 0, 0.24),
+      0 0 38px rgba(255, 133, 31, 0.5);
+  }
+}
+
+@keyframes cockpit-rail-fire {
+  from {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  to {
+    filter: hue-rotate(-18deg) brightness(1.35);
+  }
+}
+
+@keyframes cockpit-send-ignite {
+  from {
+    transform: translateY(-2px) scale(1);
+  }
+  to {
+    transform: translateY(-8px) scale(1.06);
+  }
+}
+
+@layer components {
+  .hero-control-stage .hero-get-help-reveal,
+  .hero-control-stage .hero-action-controls-reveal {
+    will-change: transform, filter;
+    transition:
+      transform 2200ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1600ms ease;
+  }
+
+  .hero-chat-shell::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    bottom: 1rem;
+    left: 50%;
+    width: 95%;
+    transform: translateX(-50%);
+    border-radius: 1rem;
+    background:
+      linear-gradient(135deg, rgba(8, 14, 20, 0.98), rgba(4, 9, 14, 0.96)),
+      radial-gradient(circle at 18% 12%, rgba(215, 160, 66, 0.16), transparent 38%);
+    box-shadow:
+      inset 0 0 0 1px rgba(215, 160, 66, 0.16),
+      0 0 28px rgba(0, 0, 0, 0.34);
+    pointer-events: none;
+    z-index: 35;
+  }
+
+  .hero-chat-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-control-stage .hero-get-help-reveal {
+    transform: translate3d(0, 118px, 0) scale(0.98);
+    filter: saturate(0.86) brightness(0.72);
+    pointer-events: none;
+    z-index: 8;
+  }
+
+  .hero-control-stage .hero-action-controls-reveal {
+    transform: translate3d(0, -146px, 0) scale(0.98);
+    filter: saturate(0.86) brightness(0.72);
+    pointer-events: none;
+    z-index: 8;
+  }
+
+  .hero-control-stage.hero-controls-visible .hero-get-help-reveal,
+  .hero-control-stage:focus-within .hero-get-help-reveal,
+  .hero-control-stage.hero-controls-visible .hero-action-controls-reveal,
+  .hero-control-stage:focus-within .hero-action-controls-reveal {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: saturate(1) brightness(1);
+    pointer-events: auto;
+    z-index: 20;
+  }
+
+  .hero-control-stage.hero-controls-visible .hero-get-help-reveal,
+  .hero-control-stage:focus-within .hero-get-help-reveal {
+    transition-delay: 120ms;
+  }
+
+  .hero-control-stage.hero-controls-visible .hero-action-controls-reveal,
+  .hero-control-stage:focus-within .hero-action-controls-reveal {
+    transition-delay: 260ms;
+  }
+
+  @media (max-width: 767px) {
+    .hero-control-stage .hero-get-help-reveal {
+      transform: translate3d(0, 98px, 0) scale(0.98);
+    }
+
+    .hero-control-stage .hero-action-controls-reveal {
+      transform: translate3d(0, -126px, 0) scale(0.98);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-chat-shell::before {
+      width: 90%;
+      border-radius: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-control-stage .hero-get-help-reveal,
+    .hero-control-stage .hero-action-controls-reveal {
+      transition-duration: 1400ms;
+    }
+  }
+}
+
+@layer components {
+  .earth-cockpit-hero::before,
+  .earth-cockpit-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .earth-cockpit-hero::before {
+    background:
+      linear-gradient(112deg, rgba(255, 211, 127, 0.64), rgba(255, 211, 127, 0.08) 7%, transparent 13%) left top / 28% 100% no-repeat,
+      linear-gradient(248deg, rgba(255, 211, 127, 0.62), rgba(255, 211, 127, 0.08) 7%, transparent 13%) right top / 28% 100% no-repeat,
+      radial-gradient(ellipse at 50% -18%, transparent 0 38%, rgba(232, 174, 73, 0.62) 39%, rgba(232, 174, 73, 0.2) 40%, transparent 44%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.86), transparent 7% 93%, rgba(0, 0, 0, 0.86));
+    opacity: 0.76;
+    mix-blend-mode: screen;
+  }
+
+  .earth-cockpit-hero::after {
+    background:
+      radial-gradient(circle at 87% 13%, rgba(255, 195, 83, 0.58), transparent 19%),
+      linear-gradient(90deg, rgba(7, 10, 12, 0.9), transparent 10% 90%, rgba(7, 10, 12, 0.9)),
+      linear-gradient(180deg, transparent 0 72%, rgba(4, 5, 6, 0.72) 100%);
+    opacity: 0.7;
+  }
+
+  .earth-cockpit-hero .container-wide {
+    position: relative;
+    z-index: 10;
+  }
+
+  .cockpit-dispatch {
+    position: relative;
+    max-width: min(1040px, 100%);
+    filter: drop-shadow(0 34px 42px rgba(0, 0, 0, 0.5));
+  }
+
+  .cockpit-dispatch::before,
+  .cockpit-dispatch::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cockpit-dispatch::before {
+    left: -8%;
+    right: -8%;
+    bottom: -38px;
+    height: 196px;
+    border-radius: 50% 50% 0 0 / 36% 36% 0 0;
+    background:
+      linear-gradient(90deg, rgba(255, 190, 79, 0.38), transparent 12% 88%, rgba(255, 190, 79, 0.38)),
+      linear-gradient(180deg, rgba(33, 38, 39, 0.96), rgba(5, 6, 7, 0.98));
+    border-top: 1px solid rgba(255, 214, 131, 0.44);
+    box-shadow:
+      inset 0 16px 26px rgba(255, 210, 119, 0.1),
+      inset 0 -18px 42px rgba(0, 0, 0, 0.74),
+      0 -18px 48px rgba(255, 164, 38, 0.08);
+  }
+
+  .cockpit-dispatch::after {
+    left: 2%;
+    right: 2%;
+    bottom: 84px;
+    height: 9px;
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg, transparent, rgba(47, 158, 255, 0.72) 18%, rgba(255, 199, 93, 0.9) 42%, rgba(31, 214, 129, 0.8) 66%, rgba(255, 125, 30, 0.95) 84%, transparent),
+      #101315;
+    box-shadow:
+      0 0 20px rgba(255, 198, 82, 0.36),
+      0 0 34px rgba(50, 162, 255, 0.2);
+  }
+
+  .cockpit-input-panel {
+    z-index: 3;
+    border-radius: 34px 34px 20px 20px !important;
+    clip-path: polygon(4% 0, 96% 0, 100% 17%, 96% 100%, 4% 100%, 0 17%);
+    background:
+      linear-gradient(180deg, rgba(46, 51, 50, 0.96), rgba(10, 13, 14, 0.94) 44%, rgba(2, 3, 4, 0.98)),
+      radial-gradient(ellipse at 50% -18%, rgba(255, 206, 111, 0.28), transparent 46%) !important;
+    border-color: rgba(244, 198, 103, 0.52) !important;
+    box-shadow:
+      0 22px 54px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 231, 178, 0.56),
+      inset 0 0 0 1px rgba(255, 211, 126, 0.16),
+      inset 0 -26px 38px rgba(0, 0, 0, 0.62) !important;
+    transform: rotateX(4deg);
+  }
+
+  .cockpit-input-panel::before {
+    inset: 10px;
+    border: 1px solid rgba(255, 215, 132, 0.38);
+    border-radius: 25px 25px 14px 14px;
+    clip-path: polygon(4% 0, 96% 0, 100% 19%, 96% 100%, 4% 100%, 0 19%);
+    background:
+      linear-gradient(90deg, rgba(62, 164, 255, 0.26), transparent 18% 82%, rgba(255, 126, 32, 0.28)),
+      repeating-linear-gradient(90deg, transparent 0 23px, rgba(255, 255, 255, 0.05) 24px, transparent 25px);
+    mask: none;
+    -webkit-mask: none;
+    padding: 0;
+    opacity: 0.72;
+  }
+
+  .cockpit-input-panel::after {
+    left: 12%;
+    right: 12%;
+    bottom: -8px;
+    height: 10px;
+    filter: blur(5px);
+    background: linear-gradient(90deg, transparent, rgba(255, 188, 72, 0.9), rgba(255, 255, 255, 0.42), rgba(255, 188, 72, 0.9), transparent);
+  }
+
+  .cockpit-panel-grid {
+    opacity: 0.42;
+    background-image:
+      linear-gradient(rgba(255, 217, 139, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 217, 139, 0.08) 1px, transparent 1px),
+      radial-gradient(circle at 14% 50%, rgba(255, 199, 85, 0.18), transparent 18%),
+      radial-gradient(circle at 88% 52%, rgba(255, 125, 30, 0.2), transparent 18%);
+    background-size: 28px 28px, 28px 28px, 100% 100%, 100% 100%;
+  }
+
+  .cockpit-panel-glow {
+    opacity: 0.62;
+    background:
+      linear-gradient(90deg, rgba(47, 158, 255, 0.16), transparent 24% 76%, rgba(255, 125, 30, 0.2)),
+      radial-gradient(ellipse at 50% 0%, rgba(255, 210, 119, 0.2), transparent 44%);
+  }
+
+  .cockpit-quick-row {
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .cockpit-chip {
+    height: 26px !important;
+    min-height: 0 !important;
+    max-height: 26px !important;
+    padding: 0 13px !important;
+    gap: 6px !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+    color: #ffe39c !important;
+    border-color: rgba(255, 205, 105, 0.66) !important;
+    background:
+      linear-gradient(180deg, rgba(42, 39, 30, 0.92), rgba(12, 14, 15, 0.82)) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 232, 169, 0.28),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.72),
+      0 0 12px rgba(255, 190, 77, 0.16) !important;
+  }
+
+  .cockpit-chip span {
+    width: 4px !important;
+    height: 4px !important;
+    background: #ffd76d !important;
+    box-shadow: 0 0 7px rgba(255, 214, 109, 0.8);
+  }
+
+  .cockpit-screen {
+    margin: 10px 18px 16px;
+    width: calc(100% - 36px) !important;
+    min-height: 92px !important;
+    border-radius: 19px;
+    clip-path: polygon(4% 0, 96% 0, 100% 20%, 96% 100%, 4% 100%, 0 20%);
+    border: 1px solid rgba(255, 216, 138, 0.46);
+    background:
+      radial-gradient(circle at 7% 47%, rgba(255, 211, 120, 0.22), transparent 12%),
+      linear-gradient(90deg, rgba(14, 21, 24, 0.94), rgba(22, 28, 28, 0.74) 54%, rgba(8, 12, 13, 0.96)),
+      rgba(5, 7, 8, 0.96) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 231, 178, 0.34),
+      inset 0 -18px 28px rgba(0, 0, 0, 0.5),
+      0 14px 32px rgba(0, 0, 0, 0.42) !important;
+  }
+
+  .cockpit-screen::before {
+    opacity: 0.56;
+    background:
+      repeating-linear-gradient(0deg, rgba(126, 225, 255, 0.05) 0 1px, transparent 1px 8px),
+      linear-gradient(90deg, transparent, rgba(255, 205, 103, 0.18), transparent);
+  }
+
+  .cockpit-screen::after {
+    left: 78px;
+    right: 24px;
+    background: linear-gradient(90deg, rgba(255, 215, 132, 0.62), transparent);
+  }
+
+  .cockpit-textarea {
+    min-height: 92px !important;
+    color: #f6f8fb !important;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.2), 0 2px 5px rgba(0, 0, 0, 0.72) !important;
+    font-weight: 300 !important;
+  }
+
+  .cockpit-textarea::placeholder {
+    color: rgba(245, 248, 255, 0.92) !important;
+    opacity: 1 !important;
+  }
+
+  .cockpit-controls-shell {
+    z-index: 6;
+    margin-top: -32px !important;
+  }
+
+  .cockpit-controls {
+    max-width: min(1000px, 100%) !important;
+    min-height: 154px;
+    padding: 18px 22px 38px;
+    border-radius: 32px 32px 64px 64px;
+    clip-path: polygon(2% 0, 98% 0, 100% 18%, 96% 100%, 4% 100%, 0 18%);
+    background:
+      linear-gradient(180deg, rgba(48, 53, 52, 0.98), rgba(12, 14, 15, 0.98) 46%, rgba(3, 4, 5, 1)),
+      radial-gradient(ellipse at 50% 0%, rgba(255, 207, 109, 0.24), transparent 52%) !important;
+    border: 1px solid rgba(255, 210, 122, 0.36);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 232, 172, 0.45),
+      inset 0 -30px 42px rgba(0, 0, 0, 0.7),
+      0 22px 54px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .cockpit-controls::before {
+    left: 7%;
+    right: 7%;
+    top: 48%;
+    height: 12px;
+    border: 1px solid rgba(255, 219, 139, 0.2);
+    background:
+      linear-gradient(90deg,
+        rgba(58, 155, 255, 0.12),
+        rgba(58, 155, 255, 0.9) 16%,
+        rgba(255, 202, 93, 0.95) 40%,
+        rgba(31, 214, 129, 0.9) 63%,
+        rgba(255, 125, 30, 0.96) 86%,
+        rgba(255, 125, 30, 0.12)),
+      #080a0b;
+  }
+
+  .cockpit-control {
+    width: clamp(92px, 18vw, 140px);
+    min-height: 122px;
+  }
+
+  .cockpit-control::before {
+    width: 108%;
+    height: 76%;
+    border-radius: 26px;
+    transform: translate(-50%, -45%);
+    background:
+      linear-gradient(180deg, rgba(255, 229, 173, 0.22), rgba(7, 8, 9, 0.8) 44%, rgba(0, 0, 0, 0.94)),
+      radial-gradient(circle at 50% 35%, rgba(var(--control-glow), 0.22), transparent 52%);
+    border: 1px solid rgba(255, 214, 132, 0.2);
+    filter: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 232, 176, 0.28),
+      inset 0 -12px 18px rgba(0, 0, 0, 0.76),
+      0 10px 20px rgba(0, 0, 0, 0.42);
+  }
+
+  .cockpit-control > button {
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  .cockpit-control:hover > button,
+  .cockpit-control:focus-within > button {
+    transform: translateY(-8px) scale(1.07);
+  }
+
+  .cockpit-control-label {
+    bottom: -4px !important;
+    color: rgba(255, 238, 197, 0.96) !important;
+    font-size: 13px !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  @media (max-width: 767px) {
+    .earth-cockpit-hero::before {
+      opacity: 0.45;
+      background:
+        linear-gradient(112deg, rgba(255, 211, 127, 0.5), transparent 16%) left top / 34% 100% no-repeat,
+        linear-gradient(248deg, rgba(255, 211, 127, 0.5), transparent 16%) right top / 34% 100% no-repeat,
+        linear-gradient(90deg, rgba(0, 0, 0, 0.78), transparent 10% 90%, rgba(0, 0, 0, 0.78));
+    }
+
+    .cockpit-dispatch::before {
+      left: -18%;
+      right: -18%;
+      bottom: -34px;
+      height: 170px;
+    }
+
+    .cockpit-dispatch::after {
+      bottom: 74px;
+      left: 7%;
+      right: 7%;
+    }
+
+    .cockpit-input-panel {
+      width: 98% !important;
+      border-radius: 24px 24px 18px 18px !important;
+      clip-path: polygon(5% 0, 95% 0, 100% 13%, 96% 100%, 4% 100%, 0 13%);
+      transform: none;
+    }
+
+    .cockpit-quick-row {
+      justify-content: flex-start !important;
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+      gap: 6px !important;
+    }
+
+    .cockpit-chip {
+      height: 23px !important;
+      min-height: 0 !important;
+      max-height: 23px !important;
+      padding: 0 10px !important;
+      font-size: 8.5px !important;
+      letter-spacing: 0.06em !important;
+    }
+
+    .cockpit-screen {
+      margin: 9px 12px 13px;
+      width: calc(100% - 24px) !important;
+      min-height: 84px !important;
+    }
+
+    .cockpit-textarea {
+      min-height: 84px !important;
+      font-size: 18px !important;
+      line-height: 1.35 !important;
+      padding-top: 18px !important;
+    }
+
+    .cockpit-controls-shell {
+      margin-top: -26px !important;
+      padding-inline: 0 !important;
+    }
+
+    .cockpit-controls {
+      min-height: 126px;
+      padding: 12px 4px 30px;
+      gap: 0 !important;
+      border-radius: 24px 24px 44px 44px;
+      transform: none;
+      clip-path: polygon(3% 0, 97% 0, 100% 14%, 96% 100%, 4% 100%, 0 14%);
+    }
+
+    .cockpit-controls::before {
+      left: 8%;
+      right: 8%;
+      top: 49%;
+      height: 8px;
+    }
+
+    .cockpit-control {
+      width: 25%;
+      min-height: 100px;
+    }
+
+    .cockpit-control::before {
+      width: 96%;
+      height: 68%;
+      border-radius: 19px;
+    }
+
+    .cockpit-control > button {
+      width: 82px !important;
+      height: 82px !important;
+      transform: translateY(-2px) scale(0.96);
+    }
+
+    .cockpit-control:hover > button,
+    .cockpit-control:focus-within > button {
+      transform: translateY(-5px) scale(0.98);
+    }
+
+    .cockpit-control-label {
+      font-size: 10px !important;
+      bottom: -3px !important;
+    }
+  }
+}
+
 @layer base {
   :root {
     --color-1: 0 100% 63%;

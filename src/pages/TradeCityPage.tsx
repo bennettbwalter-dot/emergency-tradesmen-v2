@@ -20,6 +20,7 @@ import { generateTradePageData, cities, usCities, cityToState, getCitiesForState
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
+import { usCityCoordinates } from "@/lib/usCityCoordinates";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
@@ -39,6 +40,7 @@ import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
 import { PhoneCaptureModal } from "@/components/PhoneCaptureModal";
+import { LocalAreaBackdrop } from "@/components/earth/LocalAreaBackdrop";
 import { Zap, ArrowRight, Star } from "lucide-react";
 import {
   Pagination,
@@ -76,6 +78,12 @@ export default function TradeCityPage() {
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const urlLat = queryParams.get('lat');
   const urlLng = queryParams.get('lng');
+  const earthZoomParam = queryParams.get('earthZoom');
+  const earthPitchParam = queryParams.get('earthPitch');
+  const earthBearingParam = queryParams.get('earthBearing');
+  const earthZoom = earthZoomParam ? Number(earthZoomParam) : undefined;
+  const earthPitch = earthPitchParam ? Number(earthPitchParam) : undefined;
+  const earthBearing = earthBearingParam ? Number(earthBearingParam) : undefined;
 
   const resolvedLocation = useMemo(() => {
     if (!rawTargetLocation && urlLat && urlLng) {
@@ -200,7 +208,9 @@ export default function TradeCityPage() {
   // Apply title case to city name and ensure it's not just a slug
   const rawCityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
   const cityName = toTitleCase(rawCityName.replace(/-/g, ' '));
-  const cityCoords = cityCoordinates[cityName];
+  const cityCoords = cityCoordinates[cityName] || usCityCoordinates[cityName];
+  const earthBackdropLat = urlLat ? Number(urlLat) : cityCoords?.lat;
+  const earthBackdropLng = urlLng ? Number(urlLng) : cityCoords?.lng;
 
   const serviceAreas = pageData?.serviceAreas || [];
   const averageResponseTime = pageData?.averageResponseTime || '30-90 minutes';
@@ -637,25 +647,31 @@ export default function TradeCityPage() {
       <Header countryCode={actualCountry} />
 
       <main>
-        {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src={heroImage}
-              alt={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeDisplayName} ${cityName}`}
-              className="w-full h-full object-cover"
-              fetchPriority="high"
-              loading="eager"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
-            <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]" />
+        {/* Interactive local-area header */}
+        <section className="relative h-[62svh] min-h-[440px] max-h-[760px] overflow-hidden bg-black">
+          <LocalAreaBackdrop
+            lat={Number.isFinite(earthBackdropLat) ? earthBackdropLat : cityCoords?.lat}
+            lng={Number.isFinite(earthBackdropLng) ? earthBackdropLng : cityCoords?.lng}
+            zoom={Number.isFinite(earthZoom) ? earthZoom : undefined}
+            pitch={Number.isFinite(earthPitch) ? earthPitch : undefined}
+            bearing={Number.isFinite(earthBearing) ? earthBearing : undefined}
+            fallbackImage={heroImage}
+            label={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeDisplayName} ${cityName}`}
+            location={queryParams.get('earthLocation') || cityName}
+            interactive
+          />
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-background/90 via-background/30 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-background via-background/45 to-transparent" />
+          <div className="pointer-events-none absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-gold/45 bg-background/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold shadow-[0_14px_40px_rgba(0,0,0,0.45)] backdrop-blur-md">
+            <Navigation className="h-4 w-4" />
+            Interactive street view: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
           </div>
+        </section>
 
-          <div className="relative container-wide py-16 md:py-24 z-10">
-            <div className="max-w-3xl">
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-muted-foreground/60 text-sm mb-8">
+        {/* Page introduction */}
+        <section className="container-wide pt-10 pb-12 md:pt-14 md:pb-16">
+          <div className="mx-auto max-w-4xl text-center">
+              <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground/60">
                 <Link to="/" className="hover:text-gold transition-colors">Home</Link>
                 <span className="text-gold/50">/</span>
                 <Link to={`/emergency-${tradeInfo.slug}`} className="text-foreground/80 hover:text-gold transition-colors">Emergency {tradeDisplayName}</Link>
@@ -663,7 +679,7 @@ export default function TradeCityPage() {
                 <span className="text-gold font-medium" aria-current="page">{cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</span>
               </nav>
 
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold/50 bg-secondary/50 backdrop-blur-md mb-8 animate-fade-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+              <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-gold/50 bg-secondary/50 px-5 py-2.5 shadow-[0_0_15px_rgba(212,175,55,0.2)] backdrop-blur-md animate-fade-up">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
@@ -682,12 +698,12 @@ export default function TradeCityPage() {
                 </span>
               </h1>
 
-              <p className="text-lg text-foreground/80 mb-8 animate-fade-up-delay-1 max-w-2xl leading-relaxed font-light">
+              <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-foreground/80 font-light animate-fade-up-delay-1">
                 Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} are ready to respond right now.
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-2">
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up-delay-2">
                 <Button
                   variant="hero"
                   onClick={() => {
@@ -706,7 +722,6 @@ export default function TradeCityPage() {
                   <span className="uppercase tracking-wider text-sm font-bold">Response in {averageResponseTime}</span>
                 </div>
               </div>
-            </div>
           </div>
         </section>
 
