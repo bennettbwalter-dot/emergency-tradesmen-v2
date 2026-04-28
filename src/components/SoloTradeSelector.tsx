@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUp, Loader2, LocateFixed, MapPin, MousePointer2, Pause, Play, Square } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2, LocateFixed, MapPin, Pause, Play, Square } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { findNearestCity } from "@/lib/cityCoordinates";
-import { cn } from "@/lib/utils";
 import "./SoloTradeSelector.css";
 
 type SelectorTrade = {
@@ -161,23 +160,44 @@ export function SoloTradeSelector() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const wheelLockRef = useRef(false);
   const touchStartYRef = useRef<number | null>(null);
+  const resumeTimerRef = useRef<number | null>(null);
 
   const activeTrade = selectorTrades[activeIndex];
   const activeAccent = activeTrade.accent;
 
-  const pauseAutoRotation = useCallback(() => {
-    setIsAutoRotating(false);
-  }, []);
-
-  const stopAutoRotation = useCallback(() => {
-    setIsAutoRotating(false);
-    setHasStoppedRotation(true);
+  const clearResumeTimer = useCallback(() => {
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = null;
+    }
   }, []);
 
   const resumeAutoRotation = useCallback(() => {
+    clearResumeTimer();
     setHasStoppedRotation(false);
     setIsAutoRotating(true);
-  }, []);
+  }, [clearResumeTimer]);
+
+  const scheduleAutoResume = useCallback(() => {
+    clearResumeTimer();
+    resumeTimerRef.current = window.setTimeout(() => {
+      setHasStoppedRotation(false);
+      setIsAutoRotating(true);
+      resumeTimerRef.current = null;
+    }, 3200);
+  }, [clearResumeTimer]);
+
+  const pauseAutoRotation = useCallback((shouldResume = true) => {
+    setIsAutoRotating(false);
+    setHasStoppedRotation(false);
+    if (shouldResume) scheduleAutoResume();
+  }, [scheduleAutoResume]);
+
+  const stopAutoRotation = useCallback(() => {
+    clearResumeTimer();
+    setIsAutoRotating(false);
+    setHasStoppedRotation(true);
+  }, [clearResumeTimer]);
 
   const selectIndex = useCallback(
     (nextIndex: number) => {
@@ -201,10 +221,12 @@ export function SoloTradeSelector() {
     return () => window.clearInterval(timer);
   }, [activeIndex, isAutoRotating, locatingSlug, selectIndex]);
 
+  useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
+
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
     if (Math.abs(event.deltaY) < 24 || wheelLockRef.current) return;
     event.preventDefault();
-    pauseAutoRotation();
+    pauseAutoRotation(true);
     wheelLockRef.current = true;
     selectIndex(activeIndex + (event.deltaY > 0 ? 1 : -1));
     window.setTimeout(() => {
@@ -213,7 +235,7 @@ export function SoloTradeSelector() {
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    pauseAutoRotation();
+    pauseAutoRotation(false);
     touchStartYRef.current = event.touches[0]?.clientY ?? null;
   };
 
@@ -225,6 +247,7 @@ export function SoloTradeSelector() {
     if (Math.abs(delta) > 34) {
       selectIndex(activeIndex + (delta > 0 ? 1 : -1));
     }
+    scheduleAutoResume();
   };
 
   const handleFindLocal = async (trade: SelectorTrade) => {
@@ -275,6 +298,55 @@ export function SoloTradeSelector() {
       aria-label="Choose an emergency trade"
     >
       <div className="solo-trade-stage">
+        <div className="solo-trade-stage-controls" aria-label="Trade selector controls">
+          <button
+            type="button"
+            className="solo-trade-stage-control"
+            onClick={() => {
+              pauseAutoRotation(true);
+              selectIndex(activeIndex - 1);
+            }}
+            aria-label="Previous trade"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            className="solo-trade-stage-control solo-trade-stage-control--wide"
+            onClick={isAutoRotating ? () => pauseAutoRotation(false) : resumeAutoRotation}
+            aria-label={isAutoRotating ? "Pause trade rotation" : "Resume trade rotation"}
+            aria-pressed={!isAutoRotating}
+          >
+            {isAutoRotating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            <span>{isAutoRotating ? "Pause" : "Resume"}</span>
+          </button>
+          <button
+            type="button"
+            className="solo-trade-stage-control"
+            onClick={stopAutoRotation}
+            aria-label="Stop trade rotation"
+            aria-pressed={hasStoppedRotation}
+          >
+            <Square className="h-3.5 w-3.5" />
+          </button>
+          <button
+            type="button"
+            className="solo-trade-stage-control"
+            onClick={() => {
+              pauseAutoRotation(true);
+              selectIndex(activeIndex + 1);
+            }}
+            aria-label="Next trade"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="solo-trade-stage-status" aria-live="polite">
+          <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+          {isAutoRotating ? "Auto-rotating" : hasStoppedRotation ? "Stopped on selection" : "Paused"}
+        </div>
+
         <AnimatePresence mode="popLayout" custom={direction}>
           <motion.div
             key={`text-${activeTrade.slug}`}
@@ -319,53 +391,6 @@ export function SoloTradeSelector() {
             {locatingSlug === activeTrade.slug ? "Finding location" : activeTrade.actionLabel}
           </button>
           {locationError && <small>{locationError}</small>}
-        </div>
-      </div>
-
-      <div className="solo-trade-controls" aria-label="Trade selector controls">
-        <div className="solo-trade-control-header">
-          <div className="solo-trade-scroll-hint">
-            <MousePointer2 className="h-4 w-4" />
-            {isAutoRotating ? "Auto-rotating" : hasStoppedRotation ? "Rotation stopped" : "Paused for manual selection"}
-            <ArrowUp className="h-4 w-4 rotate-180" />
-          </div>
-          <div className="solo-trade-rotation-controls">
-            <button
-              type="button"
-              onClick={isAutoRotating ? pauseAutoRotation : resumeAutoRotation}
-              aria-pressed={!isAutoRotating}
-              className="solo-trade-rotation-button"
-            >
-              {isAutoRotating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-              {isAutoRotating ? "Pause" : "Resume"}
-            </button>
-            <button
-              type="button"
-              onClick={stopAutoRotation}
-              className="solo-trade-rotation-button solo-trade-rotation-button--stop"
-            >
-              <Square className="h-3.5 w-3.5" />
-              Stop
-            </button>
-          </div>
-        </div>
-        <div className="solo-trade-rail">
-          {selectorTrades.map((trade, index) => (
-            <button
-              key={trade.slug}
-              type="button"
-              className={cn("solo-trade-box", index === activeIndex && "is-active")}
-              onClick={() => {
-                pauseAutoRotation();
-                selectIndex(index);
-              }}
-              style={{ ["--trade-accent" as string]: trade.accent }}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{trade.label}</strong>
-              <small>/emergency-{trade.slug}</small>
-            </button>
-          ))}
         </div>
       </div>
     </div>
