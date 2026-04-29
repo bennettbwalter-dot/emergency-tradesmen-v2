@@ -38,10 +38,11 @@ class AudioService {
         this.isLoading = true;
         try {
             const response = await fetch('/sounds/click.ogg');
+            if (!response.ok) return;
             const arrayBuffer = await response.arrayBuffer();
             this.clickBuffer = await ctx.decodeAudioData(arrayBuffer);
         } catch (error) {
-            console.error('Failed to load click sound:', error);
+            if (import.meta.env.DEV) console.warn('Failed to load click sound:', error);
         } finally {
             this.isLoading = false;
         }
@@ -88,8 +89,3 @@ class AudioService {
 }
 
 export const audioService = new AudioService();
-
-// Pre-load on initialization if in browser
-if (typeof window !== 'undefined') {
-    audioService.playClick(); 
-}

@@ -5,7 +5,7 @@ export const SVGTrustBadges = () => {
         <div className="flex flex-row items-center justify-center gap-2 md:gap-4 mt-8 w-full px-4">
             {/* Badge 1: Arrow/QuiverAI */}
             <div className="flex-1 max-w-[250px] transition-transform duration-300 hover:scale-105 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="130" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">
                     {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
                     <path d="m231.1 7.69h-212.1c-6.95 0-11.33 7.14-11.33 12.31v90.99c0 6.18 5.47 11.32 11.33 11.32h212.1c6.25 0 10.55-6.2 10.55-11.07v-91.24c0-6.18-5.69-12.31-10.55-12.31z" fill="#fff" stroke="url(#paint0_linear_518_1146)" strokeMiterlimit="10" strokeWidth="5.261" />
                     <path d="m100.7 42.86c0 1.36-2.36 2-2.98 0.36-0.44-1.19 0.6-2.41 1.7-2.15 0.76 0.2 1.28 0.91 1.28 1.79z" fill="#001E3B" />
@@ -63,7 +63,7 @@ export const SVGTrustBadges = () => {
 
             {/* Badge 2: Location/Verify */}
             <div className="flex-1 max-w-[250px] transition-transform duration-300 hover:scale-105 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="130" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">
                     {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
                     <path d="m231.1 7.61h-212.2c-6.98 0-11.21 7.12-11.21 12.39v90.81c0 6.31 5.17 11.58 11.21 11.58h212.2c6.51 0 11.21-6.2 10.21-11.58v-90.81c0-6.53-5.17-12.39-10.21-12.39z" fill="#fff" stroke="url(#paint0_linear_114_2)" strokeMiterlimit="10" strokeWidth="5.401" />
                     <path d="m52.89 99.61c11.85 0 21.44-2.64 21.44-5.13 0-2.48-8.61-5.86-20.46-5.86s-22.42 2.64-22.42 5.86c0 2.63 9.59 5.13 21.44 5.13z" fill="#4D4D4F" opacity=".2" />
@@ -120,7 +120,7 @@ export const SVGTrustBadges = () => {
 
             {/* Badge 3: Home/Emergency */}
             <div className="flex-1 max-w-[250px] transition-transform duration-300 hover:scale-105 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" fill="none" viewBox="0 0 250 132" className="drop-shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="132" fill="none" viewBox="0 0 250 132" className="drop-shadow-lg">
                     {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
                     <path d="m231 8h-212.2c-7.01 0-11.71 7.05-11.71 12.31v93.1c0 6.6 5.61 11.34 10.91 11.34h212.6c6.74 0 11.53-6.44 11.53-11.14v-93.99c0-6.39-5.29-11.62-11.04-11.62z" fill="url(#paint0_linear_383_2614)" stroke="#8A6E4B" strokeWidth="5" />
                     <path d="m231.1 10.98h-212.2c-4.92 0-7.9 4.88-7.9 8.94v92.8c0 5.5 4.67 8.19 8.1 8.19h211.6c4.96 0 7.94-4.58 7.94-7.99v-93.6c0-4.58-3.78-8.34-7.54-8.34z" fill="#FEFFFE" stroke="#FEFFFE" strokeWidth="2" />

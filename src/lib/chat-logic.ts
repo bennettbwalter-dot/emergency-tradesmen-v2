@@ -1,8 +1,6 @@
 import { trades, cities, usCities } from "@/lib/trades";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
-import { searchVectorKnowledgeBase } from "@/lib/knowledge-base";
-import { getOfflineResponse, classifyEmergency, detectTradeFromBrain } from "@/lib/emergency-brain";
 import { isUSDomain } from "@/lib/siteConfig";
 
 // FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
@@ -269,6 +267,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     if (!isAwaitingResponse && (isQuestion || isDescriptive || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe'))) {
         const region = isUSDomain ? 'US' : 'UK';
+        const { searchVectorKnowledgeBase } = await import("@/lib/knowledge-base");
         const matchedRule = await searchVectorKnowledgeBase(message, region);
 
         if (matchedRule) {
@@ -331,6 +330,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
     // Provides rich expert advice (safety, diagnostics, faults, standards) while
     // still advancing through the location state machine.
     if (!isAwaitingResponse) {
+        const { getOfflineResponse, classifyEmergency, detectTradeFromBrain } = await import("@/lib/emergency-brain");
         const brainClassification = classifyEmergency(message);
         const brainTrade = detectTradeFromBrain(message);
 

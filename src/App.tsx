@@ -7,13 +7,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { SimpleThemeProvider } from "@/components/simple-theme";
 import { initGA } from "@/lib/analytics";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { MobilePreviewWrapper } from "@/components/MobilePreviewWrapper";
-import { LocationOverrideTool } from "@/components/dev/LocationOverrideTool";
 import { LockoutOverlay } from "@/components/LockoutOverlay";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -28,6 +27,7 @@ const CookieConsent = lazy(() => import("@/components/CookieConsent").then(m => 
 const FloatingBackButton = lazy(() => import("@/components/FloatingBackButton").then(m => ({ default: m.FloatingBackButton })));
 const CustomCursor = lazy(() => import("@/components/CustomCursor").then(m => ({ default: m.CustomCursor })));
 const AnalyticsTracker = lazy(() => import("@/components/AnalyticsTracker").then(m => ({ default: m.AnalyticsTracker })));
+const LocationOverrideTool = lazy(() => import("@/components/dev/LocationOverrideTool").then(m => ({ default: m.LocationOverrideTool })));
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
@@ -73,6 +73,25 @@ const PageLoader = () => (
     <Loader2 className="w-8 h-8 animate-spin text-primary" />
   </div>
 );
+
+const DeferredLiveChat = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const enable = () => setEnabled(true);
+    const timer = window.setTimeout(enable, 8000);
+    window.addEventListener("pointerdown", enable, { once: true, passive: true });
+    window.addEventListener("keydown", enable, { once: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("pointerdown", enable);
+      window.removeEventListener("keydown", enable);
+    };
+  }, []);
+
+  return enabled ? <LiveChat /> : null;
+};
 
 const HashCleaner = () => {
   const location = useLocation();
@@ -227,7 +246,11 @@ const AppContent = () => {
       {isLocked && <LockoutOverlay onRetry={handleRetry} />}
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <LocalizationProvider>
-          {import.meta.env.DEV && <LocationOverrideTool />}
+          {import.meta.env.DEV && (
+            <Suspense fallback={null}>
+              <LocationOverrideTool />
+            </Suspense>
+          )}
           {import.meta.env.DEV && (window.self === window.top) ? (
             <MobilePreviewWrapper>
               <ScrollToTop />
@@ -246,7 +269,7 @@ const AppContent = () => {
                 <InstallPWA />
                 <CookieConsent />
                 <BottomNav />
-                <LiveChat />
+                <DeferredLiveChat />
                 <FloatingBackButton />
                 <CustomCursor />
               </Suspense>
@@ -269,7 +292,7 @@ const AppContent = () => {
                 <InstallPWA />
                 <CookieConsent />
                 <BottomNav />
-                <LiveChat />
+                <DeferredLiveChat />
                 <FloatingBackButton />
                 <CustomCursor />
               </Suspense>

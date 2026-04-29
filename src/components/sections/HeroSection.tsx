@@ -1,16 +1,13 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
-import { Link, useLocation } from "react-router-dom";
 import { HelpCircle } from "lucide-react";
-import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
 
-// Defer WebGL shader (~580KB three.js) and chat (160KB) until after initial paint.
-// Both are below LCP-critical content (hero text), so users see the page sooner.
+// Load the detailed WebGL Earth as part of the hero so the globe keeps its texture detail.
 const EarthHeroBackground = lazy(() =>
     import("@/components/earth/EarthHeroBackground").then(m => ({ default: m.EarthHeroBackground }))
 );
@@ -21,16 +18,10 @@ const EmergencyChatInterface = lazy(() =>
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
 export function HeroSection() {
-    const { settings, detectedCity, detectedState, detectUserLocation } = useLocalization();
+    const { settings, detectedCity, detectedState } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
     const [controlsVisible, setControlsVisible] = useState(false);
     const controlsRevealTimerRef = useRef<number | null>(null);
-    const location = useLocation();
-
-    // Trigger location detection on mount if not already done
-    useEffect(() => {
-        detectUserLocation();
-    }, [detectUserLocation]);
 
     const revealControls = useCallback((hold = false) => {
         setControlsVisible(true);

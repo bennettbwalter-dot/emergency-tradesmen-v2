@@ -1,14 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { GuestGate } from "@/components/GuestGate";
-import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
 import { FloatingTourHub } from "@/components/FloatingTourHub";
 
 // Eager load Hero for LCP
@@ -21,6 +18,47 @@ const SEOContentSection = lazy(() => import("@/components/sections/SEOContentSec
 const BreakdownSection = lazy(() => import("@/components/sections/BreakdownSection").then(module => ({ default: module.BreakdownSection })));
 const CTASection = lazy(() => import("@/components/sections/CTASection").then(module => ({ default: module.CTASection })));
 const LatestBlogSection = lazy(() => import("@/components/sections/LatestBlogSection").then(module => ({ default: module.LatestBlogSection })));
+const HomeEmergencyAd = lazy(() => import("@/components/HomeEmergencyAd").then(module => ({ default: module.HomeEmergencyAd })));
+const GeneralFAQSection = lazy(() => import("@/components/GeneralFAQSection").then(module => ({ default: module.GeneralFAQSection })));
+const Footer = lazy(() => import("@/components/Footer").then(module => ({ default: module.Footer })));
+
+function DeferredSection({
+  minHeight,
+  children,
+}: {
+  minHeight: number;
+  children: ReactNode;
+}) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isVisible) return;
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px 120px 0px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  return (
+    <div ref={ref} style={{ minHeight }}>
+      {isVisible ? (
+        <Suspense fallback={<div className="w-full" style={{ minHeight }} />}>
+          {children}
+        </Suspense>
+      ) : null}
+    </div>
+  );
+}
 
 const Index = () => {
   const { settings, detectedCity } = useLocalization();
@@ -92,43 +130,49 @@ const Index = () => {
       <main className="min-h-screen bg-background">
         <HeroSection />
 
-        <Suspense fallback={<div className="w-full min-h-[700px]" />}>
+        <DeferredSection minHeight={700}>
           <HowItWorksSection />
-        </Suspense>
+        </DeferredSection>
 
-        <Suspense fallback={<div className="w-full min-h-[800px]" />}>
+        <DeferredSection minHeight={800}>
           <EmergencyServicesSection />
-        </Suspense>
+        </DeferredSection>
 
-        <Suspense fallback={<div className="w-full min-h-[650px]" />}>
+        <DeferredSection minHeight={650}>
           <BreakdownSection />
-        </Suspense>
+        </DeferredSection>
 
-        <Suspense fallback={<div className="w-full min-h-[1100px]" />}>
+        <DeferredSection minHeight={1100}>
           <SEOContentSection />
-        </Suspense>
+        </DeferredSection>
 
-        <Suspense fallback={<div className="w-full min-h-[500px]" />}>
+        <DeferredSection minHeight={500}>
           <LatestBlogSection />
-        </Suspense>
+        </DeferredSection>
 
-        <Suspense fallback={<div className="w-full min-h-[500px]" />}>
+        <DeferredSection minHeight={500}>
           <CTASection />
-        </Suspense>
+        </DeferredSection>
 
         <div className="container mx-auto px-4 py-16">
-          <HomeEmergencyAd />
+          <DeferredSection minHeight={420}>
+            <HomeEmergencyAd />
+          </DeferredSection>
         </div>
 
         {/* FAQ Section — visible by default for SEO and trust */}
         <div className="container mx-auto px-4 py-16 flex flex-col items-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">Frequently Asked Questions</h2>
           <div className="w-full max-w-3xl">
-            <GeneralFAQSection initiallyOpened={true} />
+            <DeferredSection minHeight={320}>
+              <GeneralFAQSection initiallyOpened={true} />
+            </DeferredSection>
           </div>
         </div>
       </main>
-      <Footer />
+      <DeferredSection minHeight={520}>
+        <Footer />
+      </DeferredSection>
     </>
   );
 };

@@ -12,8 +12,8 @@ export const trades = [
   { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.webp", vectorIcon: "/hvac-icon.webp" },
 ] as const;
 
-import usCityList from './us_cities.json';
-import { cityPostcodes } from './cityPostcodes';
+import { cityCoordinates } from './cityCoordinates';
+import { usCityCoordinates } from './usCityCoordinates';
 import { US_STATES } from './us_states';
 
 // Build city list and city→state abbreviation map from us_cities.json
@@ -42,11 +42,9 @@ const buildUSData = (data: any): { cities: string[]; cityToState: Record<string,
   return { cities: Array.from(citiesSet), cityToState };
 };
 
-export const cities = Object.keys(cityPostcodes).sort() as readonly string[];
+export const cities = Object.keys(cityCoordinates).sort() as readonly string[];
 
-const _usData = buildUSData(usCityList);
-export const usCities = _usData.cities as readonly string[];
-export const usCityToState: Readonly<Record<string, string>> = _usData.cityToState;
+export const usCities = Object.keys(usCityCoordinates).sort() as readonly string[];
 
 export const cityToState: Record<string, string> = {
   // California (CA)
@@ -153,6 +151,10 @@ export const cityToState: Record<string, string> = {
   // North Dakota (ND)
   "Fargo": "nd",
 };
+
+export const usCityToState: Readonly<Record<string, string>> = Object.fromEntries(
+  Object.entries(cityToState).map(([city, state]) => [city, state.toUpperCase()])
+);
 
 export type Trade = typeof trades[number];
 export type City = typeof cities[number];
@@ -502,17 +504,9 @@ function generateFAQs(trade: Trade, city: City, isUS: boolean, priceRange: strin
 export const VALID_STATE_SLUGS = US_STATES.map(s => s.slug);
 
 export function getCitiesForState(stateSlug: string): string[] {
-  const state = (usCityList as any).states.find((s: any) => s.slug === stateSlug.toLowerCase());
-  if (!state) return [];
-
-  const cities: string[] = [];
-  state.metros.forEach((metro: any) => {
-    metro.cities.forEach((city: any) => {
-      cities.push(city.name);
-      if (city.suburbs) {
-        city.suburbs.forEach((sub: any) => cities.push(sub.name));
-      }
-    });
-  });
-  return Array.from(new Set(cities)).sort();
+  const targetState = stateSlug.toLowerCase();
+  return Object.entries(cityToState)
+    .filter(([, state]) => state.toLowerCase() === targetState)
+    .map(([city]) => city)
+    .sort();
 }

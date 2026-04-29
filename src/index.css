@@ -16,6 +16,27 @@
       #010204;
   }
 
+  .earth-hero-bg--fallback::after {
+    content: "";
+    position: absolute;
+    z-index: 7;
+    left: 50%;
+    top: 48%;
+    width: min(86vw, 620px);
+    aspect-ratio: 1;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    opacity: 0.86;
+    background:
+      radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.18), transparent 0 16%),
+      radial-gradient(circle at 60% 52%, rgba(2, 8, 18, 0), rgba(2, 8, 18, 0.34) 42%, rgba(2, 8, 18, 0.92) 72%),
+      radial-gradient(circle at 50% 50%, rgba(43, 156, 210, 0.9), rgba(16, 78, 123, 0.72) 42%, rgba(5, 18, 40, 0.3) 62%, transparent 70%);
+    box-shadow:
+      inset -42px -20px 96px rgba(0, 0, 0, 0.7),
+      0 0 80px rgba(113, 217, 255, 0.18);
+    filter: saturate(1.14) contrast(1.08);
+  }
+
   .earth-hero-deep-space,
   .earth-hero-milky-way,
   .earth-hero-galaxies,
