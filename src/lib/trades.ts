@@ -12,9 +12,11 @@ export const trades = [
   { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.webp", vectorIcon: "/hvac-icon.webp" },
 ] as const;
 
+import { cityPostcodes } from './cityPostcodes';
 import { cityCoordinates } from './cityCoordinates';
 import { usCityCoordinates } from './usCityCoordinates';
 import { US_STATES } from './us_states';
+import usCityList from './us_cities.json';
 
 // Build city list and city→state abbreviation map from us_cities.json
 const buildUSData = (data: any): { cities: string[]; cityToState: Record<string, string> } => {
