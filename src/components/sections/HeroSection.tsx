@@ -24,34 +24,29 @@ function HeroBackgroundFallback() {
     return (
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#030507]" aria-hidden>
             <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.24)_0_1px,transparent_1px),radial-gradient(circle_at_72%_16%,rgba(255,255,255,0.18)_0_1px,transparent_1px),radial-gradient(circle_at_86%_48%,rgba(255,255,255,0.16)_0_1px,transparent_1px)] [background-size:120px_120px,180px_180px,220px_220px]" />
-            <div className="absolute left-1/2 top-[34%] h-[72vw] max-h-[410px] min-h-[260px] w-[72vw] min-w-[260px] max-w-[410px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_40%_28%,rgba(42,127,166,0.88),rgba(8,35,55,0.9)_46%,rgba(2,8,15,0.98)_72%,transparent_73%)] shadow-[0_0_80px_rgba(25,116,170,0.42)]" />
+            <div className="absolute left-1/2 top-[33%] h-[76vw] max-h-[440px] min-h-[280px] w-[76vw] min-w-[280px] max-w-[440px] -translate-x-1/2 overflow-hidden rounded-full bg-[#06131d] shadow-[0_0_92px_rgba(42,156,210,0.42)]">
+                <div
+                    className="absolute inset-0 scale-110 opacity-95"
+                    style={{
+                        backgroundImage: "url('/assets/earth_atmos_2048.webp')",
+                        backgroundSize: "210% 105%",
+                        backgroundPosition: "53% 50%",
+                    }}
+                />
+                <div
+                    className="absolute inset-0 scale-110 opacity-40 mix-blend-screen"
+                    style={{
+                        backgroundImage: "url('/assets/earth_clouds_1024.webp')",
+                        backgroundSize: "205% 105%",
+                        backgroundPosition: "48% 50%",
+                    }}
+                />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_34%_28%,rgba(255,238,186,0.32),transparent_24%),radial-gradient(circle_at_62%_54%,transparent_0_42%,rgba(0,0,0,0.48)_70%,rgba(0,0,0,0.88)_100%)]" />
+                <div className="absolute inset-0 rounded-full ring-1 ring-cyan-200/25 shadow-[inset_-34px_-36px_60px_rgba(0,0,0,0.72),inset_18px_14px_32px_rgba(150,225,255,0.16)]" />
+            </div>
+            <div className="absolute left-1/2 top-[33%] h-[76vw] max-h-[440px] min-h-[280px] w-[76vw] min-w-[280px] max-w-[440px] -translate-x-1/2 rounded-full border border-cyan-100/10 shadow-[0_0_32px_rgba(128,220,255,0.28)]" />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent via-black/45 to-black" />
         </div>
-    );
-}
-
-function HeroChatPlaceholder({ onActivate }: { onActivate: () => void }) {
-    return (
-        <button
-            type="button"
-            data-tour="tour-chat-input"
-            aria-label="Open emergency chat"
-            onClick={onActivate}
-            onFocus={onActivate}
-            className="group w-full rounded-3xl border border-gold/25 bg-black/70 p-4 text-left shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:border-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 md:p-6"
-        >
-            <div className="flex min-h-[78px] items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 md:min-h-[96px] md:px-6">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold md:h-12 md:w-12">
-                    <HelpCircle className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 flex-1 text-sm text-white/82 md:text-xl">
-                    Hi, how can we help?
-                </span>
-                <span className="shrink-0 rounded-full bg-gold px-4 py-2 text-xs font-bold uppercase tracking-wide text-black transition group-hover:bg-gold/90">
-                    Start
-                </span>
-            </div>
-        </button>
     );
 }
 
@@ -59,22 +54,11 @@ export function HeroSection() {
     const { settings, detectedCity, detectedState } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
     const [controlsVisible, setControlsVisible] = useState(false);
-    const [chatRequested, setChatRequested] = useState(false);
     const controlsRevealTimerRef = useRef<number | null>(null);
-    const shouldMountEarth = useDeferredMount({
-        delay: 1200,
-        mediaQuery: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-        events: HERO_INTERACTION_EVENTS,
-    });
-    const shouldMountChat = useDeferredMount({
-        delay: 15000,
-        events: HERO_INTERACTION_EVENTS,
-    });
     const shouldMountFlipText = useDeferredMount({
         delay: 16000,
         events: HERO_INTERACTION_EVENTS,
     });
-    const chatActive = chatRequested || shouldMountChat;
 
     const revealControls = useCallback((hold = false) => {
         setControlsVisible(true);
@@ -121,11 +105,9 @@ export function HeroSection() {
             onBlurCapture={() => revealControls()}
         >
             <HeroBackgroundFallback />
-            {shouldMountEarth && (
-                <Suspense fallback={null}>
-                    <EarthHeroBackground countryCode={settings.countryCode} />
-                </Suspense>
-            )}
+            <Suspense fallback={null}>
+                <EarthHeroBackground countryCode={settings.countryCode} />
+            </Suspense>
             <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(0,0,0,0.05)_30%,rgba(0,0,0,0.72)_100%)] pointer-events-none" />
             <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/10 to-background pointer-events-none" />
             {/* Background layers - decorative shader loaded lazily to avoid blocking LCP */}
@@ -410,13 +392,9 @@ export function HeroSection() {
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 -mt-6 md:mt-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">
-                            {chatActive ? (
-                                <Suspense fallback={<div className="h-32 rounded-3xl bg-black/20 animate-pulse" aria-hidden />}>
-                                    <EmergencyChatInterface />
-                                </Suspense>
-                            ) : (
-                                <HeroChatPlaceholder onActivate={() => setChatRequested(true)} />
-                            )}
+                            <Suspense fallback={<div className="h-32 rounded-3xl bg-black/20 animate-pulse" aria-hidden />}>
+                                <EmergencyChatInterface />
+                            </Suspense>
                         </div>
                     </div>
                 </div>

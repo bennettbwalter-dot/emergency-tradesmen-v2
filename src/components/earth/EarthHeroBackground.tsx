@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import maplibregl, { Map as MapLibreMap } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
 import { cityCoordinates } from "@/lib/cityCoordinates";
 import { usCityCoordinates } from "@/lib/usCityCoordinates";
 import { buildEarthMapStyle, EARTH_FINAL_PITCH, EARTH_FINAL_ZOOM } from "./mapStyle";
+import type { Map as MapLibreMap, FlyToOptions } from "maplibre-gl";
 
 type EarthLaunchDetail = {
   location?: string;
@@ -25,6 +24,8 @@ type EarthHeroBackgroundProps = {
 
 const FALLBACK_COORDS = { lat: 51.5074, lng: -0.1278 };
 const FALLBACK_DURATION = 9800;
+const EARTH_SEGMENTS = 64;
+const MAX_PIXEL_RATIO = 1.5;
 const SITE_FOCUS_COORDS = {
   GB: { lat: 54.4, lng: -2.6 },
   US: { lat: 39.8, lng: -98.6 }
@@ -98,6 +99,8 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
   const mapRef = useRef<HTMLDivElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<MapLibreMap | null>(null);
+  const mapModuleRef = useRef<typeof import("maplibre-gl") | null>(null);
+  const mapReadyPromiseRef = useRef<Promise<MapLibreMap | null> | null>(null);
   const launchIdRef = useRef(0);
   const stateRef = useRef({
     targetRotation: rotationForSite(countryCode),
@@ -110,29 +113,6 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
   }, [countryCode]);
 
   useEffect(() => {
-    if (!mapRef.current || mapInstanceRef.current) return;
-
-    const map = new maplibregl.Map({
-      container: mapRef.current,
-      style: buildEarthMapStyle(),
-      center: countryCode === "US" ? [-98.6, 39.8] : [-2.6, 54.4],
-      zoom: 0.35,
-      pitch: 0,
-      bearing: countryCode === "US" ? 8 : -12,
-      attributionControl: false,
-      interactive: false,
-      fadeDuration: 0,
-      maxPitch: 85
-    });
-    mapInstanceRef.current = map;
-
-    return () => {
-      map.remove();
-      mapInstanceRef.current = null;
-    };
-  }, [countryCode]);
-
-  useEffect(() => {
     if (!canvasRef.current) return;
 
     const renderer = new THREE.WebGLRenderer({
@@ -142,7 +122,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
       powerPreference: "high-performance"
     });
     renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
@@ -162,7 +142,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     scene.add(globe);
 
     const earth = new THREE.Mesh(
-      new THREE.SphereGeometry(2.16, 96, 96),
+      new THREE.SphereGeometry(2.16, EARTH_SEGMENTS, EARTH_SEGMENTS),
       new THREE.MeshStandardMaterial({
         map: earthTexture,
         roughness: 0.7,
@@ -172,7 +152,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     globe.add(earth);
 
     const clouds = new THREE.Mesh(
-      new THREE.SphereGeometry(2.19, 96, 96),
+      new THREE.SphereGeometry(2.19, EARTH_SEGMENTS, EARTH_SEGMENTS),
       new THREE.MeshLambertMaterial({
         map: cloudTexture,
         transparent: true,
@@ -183,7 +163,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     globe.add(clouds);
 
     const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(2.29, 96, 96),
+      new THREE.SphereGeometry(2.29, EARTH_SEGMENTS, EARTH_SEGMENTS),
       new THREE.ShaderMaterial({
         transparent: true,
         blending: THREE.AdditiveBlending,
@@ -228,8 +208,16 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     };
 
     let animationId = 0;
-    const animate = () => {
+    let lastRenderTime = 0;
+    const animate = (time = 0) => {
       const state = stateRef.current;
+      const targetFrameMs = state.isLaunching ? 16 : 33;
+      if (time - lastRenderTime < targetFrameMs) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+      lastRenderTime = time;
+
       globe.rotation.x = THREE.MathUtils.lerp(globe.rotation.x, state.targetRotation.x, 0.025);
       globe.rotation.y = THREE.MathUtils.lerp(globe.rotation.y, state.targetRotation.y, state.isLaunching ? 0.04 : 0.018);
       globe.rotation.z = THREE.MathUtils.lerp(globe.rotation.z, state.targetRotation.z, 0.025);
@@ -244,6 +232,46 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     const syncLocation = (event: Event) => {
       const detail = (event as CustomEvent<EarthLaunchDetail>).detail;
       stateRef.current.targetRotation = rotationForLocation(detail?.location, countryCode);
+    };
+
+    const ensureMap = async () => {
+      if (mapInstanceRef.current) return mapInstanceRef.current;
+      if (mapReadyPromiseRef.current) return mapReadyPromiseRef.current;
+      if (!mapRef.current) return null;
+
+      mapReadyPromiseRef.current = (async () => {
+        await import("maplibre-gl/dist/maplibre-gl.css");
+        const maplibregl = await import("maplibre-gl");
+        mapModuleRef.current = maplibregl;
+
+        if (!mapRef.current) return null;
+
+        const map = new maplibregl.Map({
+          container: mapRef.current,
+          style: buildEarthMapStyle(),
+          center: countryCode === "US" ? [-98.6, 39.8] : [-2.6, 54.4],
+          zoom: 0.35,
+          pitch: 0,
+          bearing: countryCode === "US" ? 8 : -12,
+          attributionControl: false,
+          interactive: false,
+          fadeDuration: 0,
+          maxPitch: 85
+        });
+
+        mapInstanceRef.current = map;
+        await new Promise<void>((resolve) => {
+          if (map.loaded()) {
+            resolve();
+            return;
+          }
+          map.once("load", () => resolve());
+          window.setTimeout(resolve, 1400);
+        });
+        return map;
+      })();
+
+      return mapReadyPromiseRef.current;
     };
 
     const launch = async (event: Event) => {
@@ -264,7 +292,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
       const coords = await resolveCoords(detail?.location);
       if (launchIdRef.current !== currentLaunchId) return;
 
-      const map = mapInstanceRef.current;
+      const map = await ensureMap();
       const finalBearing = ((coords.lng * 0.8) % 80) - 22;
       const completeDetail: EarthCompleteDetail = {
         ...detail,
@@ -290,7 +318,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
         return;
       }
 
-      const fly = (options: maplibregl.FlyToOptions) =>
+      const fly = (options: FlyToOptions) =>
         new Promise<void>((resolve) => {
           const done = () => resolve();
           map.once("moveend", done);
@@ -359,6 +387,10 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
       earth.geometry.dispose();
       clouds.geometry.dispose();
       atmosphere.geometry.dispose();
+      mapInstanceRef.current?.remove();
+      mapInstanceRef.current = null;
+      mapReadyPromiseRef.current = null;
+      mapModuleRef.current = null;
     };
   }, [countryCode]);
 
@@ -366,18 +398,9 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     <div ref={wrapperRef} className="earth-hero-bg" aria-hidden="true">
       <div className="earth-hero-deep-space" />
       <div className="earth-hero-milky-way" />
-      <div className="earth-hero-galaxies" />
       <div className="earth-hero-stars" />
-      <div className="earth-hero-collision earth-hero-collision-a" />
-      <div className="earth-hero-collision earth-hero-collision-b" />
-      <div className="earth-hero-tiny-ship">
-        <span className="earth-hero-ship-body" />
-        <span className="earth-hero-ship-window" />
-        <span className="earth-hero-ship-flame" />
-      </div>
       <div ref={mapRef} className="earth-map-container" />
       <canvas ref={canvasRef} className="earth-hero-canvas" />
-      <div className="earth-hero-scan" />
     </div>
   );
 }

@@ -39,7 +39,6 @@
 
   .earth-hero-deep-space,
   .earth-hero-milky-way,
-  .earth-hero-galaxies,
   .earth-hero-stars {
     position: absolute;
     inset: 0;
@@ -85,17 +84,6 @@
     animation: milky-way-breathe 16s ease-in-out infinite alternate;
   }
 
-  .earth-hero-galaxies {
-    z-index: 2;
-    opacity: 0.9;
-    background:
-      radial-gradient(ellipse at 9% 23%, rgba(255, 245, 220, 0.8) 0 0.8px, rgba(108, 181, 255, 0.2) 1px 16px, transparent 36px),
-      radial-gradient(ellipse at 84% 31%, rgba(255, 202, 129, 0.42) 0 1px, rgba(118, 170, 255, 0.18) 2px 22px, transparent 54px),
-      radial-gradient(ellipse at 73% 82%, rgba(198, 227, 255, 0.46) 0 1px, rgba(80, 120, 210, 0.16) 2px 19px, transparent 45px),
-      radial-gradient(ellipse at 27% 76%, rgba(255, 218, 161, 0.32) 0 1px, rgba(85, 170, 255, 0.12) 2px 18px, transparent 42px);
-    animation: galaxy-drift 34s ease-in-out infinite alternate;
-  }
-
   .earth-hero-stars {
     z-index: 3;
     opacity: 0.8;
@@ -135,106 +123,6 @@
     filter: blur(0.6px);
     transform: scale(1.08);
     animation: star-twinkle 7.4s ease-in-out infinite alternate-reverse;
-  }
-
-  .earth-hero-collision {
-    position: absolute;
-    z-index: 4;
-    width: 5px;
-    height: 5px;
-    border-radius: 999px;
-    opacity: 0;
-    pointer-events: none;
-    background: rgba(255, 221, 156, 0.94);
-    box-shadow:
-      0 0 16px rgba(255, 192, 96, 0.9),
-      0 0 38px rgba(255, 116, 69, 0.48);
-  }
-
-  .earth-hero-collision::before,
-  .earth-hero-collision::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 120px;
-    height: 1px;
-    transform-origin: right center;
-    background: linear-gradient(90deg, transparent, rgba(255, 206, 137, 0.78), rgba(255, 255, 255, 0.92));
-  }
-
-  .earth-hero-collision::after {
-    width: 58px;
-    transform: rotate(31deg);
-    opacity: 0.58;
-  }
-
-  .earth-hero-collision-a {
-    left: 17%;
-    top: 28%;
-    animation: asteroid-collision-a 13s ease-in-out infinite;
-  }
-
-  .earth-hero-collision-b {
-    right: 18%;
-    top: 18%;
-    transform: scale(0.8) rotate(164deg);
-    animation: asteroid-collision-b 17s ease-in-out 4s infinite;
-  }
-
-  .earth-hero-tiny-ship {
-    position: absolute;
-    z-index: 6;
-    left: 10%;
-    top: 64%;
-    width: 42px;
-    height: 22px;
-    opacity: 0;
-    transform: translate3d(-46px, 22px, 0) rotate(-8deg) scale(0.78);
-    filter: drop-shadow(0 0 10px rgba(113, 217, 255, 0.36));
-    animation: tiny-ship-peek 18s ease-in-out 2.5s infinite;
-  }
-
-  .earth-hero-ship-body {
-    position: absolute;
-    inset: 5px 7px 4px 5px;
-    border-radius: 60% 42% 48% 60%;
-    background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(128, 185, 225, 0.9) 52%, rgba(30, 54, 82, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.38);
-  }
-
-  .earth-hero-ship-body::before {
-    content: "";
-    position: absolute;
-    right: -9px;
-    top: 4px;
-    border-left: 12px solid rgba(143, 189, 218, 0.9);
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .earth-hero-ship-window {
-    position: absolute;
-    left: 16px;
-    top: 8px;
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: rgba(57, 224, 255, 0.95);
-    box-shadow: 0 0 8px rgba(57, 224, 255, 0.7);
-  }
-
-  .earth-hero-ship-flame {
-    position: absolute;
-    left: -5px;
-    top: 9px;
-    width: 13px;
-    height: 5px;
-    border-radius: 999px 0 0 999px;
-    background: linear-gradient(90deg, transparent, rgba(255, 155, 63, 0.8), rgba(255, 238, 173, 0.98));
-    filter: blur(0.4px);
-    animation: ship-flame-pulse 420ms ease-in-out infinite alternate;
   }
 
   .earth-hero-canvas {
@@ -277,27 +165,10 @@
     transform: scale(1);
   }
 
-  .earth-hero-scan {
-    position: absolute;
-    inset: 0;
-    z-index: 9;
-    opacity: 0;
-    background:
-      linear-gradient(180deg, transparent, rgba(113, 217, 255, 0.12), transparent),
-      radial-gradient(circle at 50% 42%, transparent 0 22%, rgba(0, 0, 0, 0.1) 46%, rgba(0, 0, 0, 0.72) 100%);
-    transform: translateY(-100%);
-    transition: opacity 500ms ease;
-  }
-
   .earth-launching .earth-hero-canvas {
     opacity: 0;
     transform: scale(3.25) translate3d(0, 4%, 0);
     filter: saturate(1.3) contrast(1.16) blur(0.8px) drop-shadow(0 0 90px rgba(113, 217, 255, 0.36));
-  }
-
-  .earth-launching .earth-hero-scan {
-    opacity: 1;
-    animation: earth-scan 1.8s linear infinite;
   }
 
   .earth-hero-bg .maplibregl-control-container {
@@ -345,16 +216,6 @@
   }
 }
 
-@keyframes galaxy-drift {
-  from {
-    transform: translate3d(-0.6%, -0.3%, 0) rotate(0deg);
-  }
-
-  to {
-    transform: translate3d(0.8%, 0.7%, 0) rotate(0.6deg);
-  }
-}
-
 @keyframes star-twinkle {
   from {
     opacity: 0.34;
@@ -366,75 +227,6 @@
 
   to {
     opacity: 0.52;
-  }
-}
-
-@keyframes asteroid-collision-a {
-  0%, 54%, 100% {
-    opacity: 0;
-    transform: translate3d(-36px, -18px, 0) scale(0.38) rotate(-12deg);
-  }
-
-  58% {
-    opacity: 0.82;
-    transform: translate3d(0, 0, 0) scale(1) rotate(-12deg);
-  }
-
-  63% {
-    opacity: 0.16;
-    transform: translate3d(13px, 6px, 0) scale(2.7) rotate(-12deg);
-  }
-}
-
-@keyframes asteroid-collision-b {
-  0%, 60%, 100% {
-    opacity: 0;
-    transform: translate3d(38px, -14px, 0) scale(0.34) rotate(164deg);
-  }
-
-  64% {
-    opacity: 0.65;
-    transform: translate3d(0, 0, 0) scale(0.8) rotate(164deg);
-  }
-
-  69% {
-    opacity: 0.12;
-    transform: translate3d(-14px, 8px, 0) scale(2.2) rotate(164deg);
-  }
-}
-
-@keyframes tiny-ship-peek {
-  0%, 56%, 100% {
-    opacity: 0;
-    transform: translate3d(-46px, 22px, 0) rotate(-8deg) scale(0.78);
-  }
-
-  61%, 73% {
-    opacity: 0.9;
-    transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.92);
-  }
-
-  80% {
-    opacity: 0;
-    transform: translate3d(84px, -22px, 0) rotate(8deg) scale(0.7);
-  }
-}
-
-@keyframes ship-flame-pulse {
-  from {
-    opacity: 0.55;
-    transform: scaleX(0.72);
-  }
-
-  to {
-    opacity: 1;
-    transform: scaleX(1.12);
-  }
-}
-
-@keyframes earth-scan {
-  to {
-    transform: translateY(100%);
   }
 }
 
@@ -1443,17 +1235,6 @@
         rgba(255, 52, 104, 0.28) 78%,
         transparent 92%),
       repeating-radial-gradient(circle at 48% 52%, rgba(255, 255, 255, 0.7) 0 0.8px, transparent 1px 5px) !important;
-  }
-
-  :where(.light) .earth-hero-galaxies {
-    opacity: 1;
-    filter: saturate(1.5) contrast(1.16);
-    background:
-      radial-gradient(ellipse at 9% 23%, rgba(255, 252, 230, 0.96) 0 0.8px, rgba(37, 139, 255, 0.75) 1px 22px, transparent 54px),
-      radial-gradient(ellipse at 84% 31%, rgba(255, 67, 108, 0.9) 0 1.2px, rgba(255, 41, 89, 0.48) 2px 34px, transparent 76px),
-      radial-gradient(ellipse at 73% 82%, rgba(68, 217, 255, 0.9) 0 1.2px, rgba(37, 122, 255, 0.46) 2px 30px, transparent 64px),
-      radial-gradient(ellipse at 27% 76%, rgba(61, 255, 158, 0.85) 0 1.2px, rgba(41, 220, 132, 0.42) 2px 30px, transparent 62px),
-      radial-gradient(ellipse at 52% 12%, rgba(190, 90, 255, 0.72) 0 1px, rgba(119, 66, 255, 0.36) 2px 28px, transparent 58px) !important;
   }
 
   :where(.light) .earth-hero-stars {

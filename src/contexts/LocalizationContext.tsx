@@ -111,37 +111,49 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                              port === '3000' || 
                              (hostname === 'localhost' && port !== '3001') ||
                              (hostname === '127.0.0.1' && port !== '3001');
+
+                const applyIPLocation = async (forcedCountryCode?: CountryCode) => {
+                    const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+                    if (!response.ok) throw new Error('API unreachable');
+                    const data = await response.json();
+
+                    const ipCountryCode = data.country_code || data.countryCode;
+                    const regionName = data.region || data.regionName;
+                    const cityName = data.city || data.cityName;
+                    const latitude = Number(data.latitude);
+                    const longitude = Number(data.longitude);
+                    const resolvedCountryCode: CountryCode = forcedCountryCode || (ipCountryCode === 'US' ? 'US' : 'GB');
+
+                    if (resolvedCountryCode === 'US') {
+                        setCountryCodeState('US');
+                        if (ipCountryCode === 'US') {
+                            if (regionName) setDetectedState(regionName);
+                            if (cityName) setDetectedCity(cityName);
+                        }
+                        return;
+                    }
+
+                    setCountryCodeState('GB');
+                    if (ipCountryCode === 'GB') {
+                        if (regionName) setDetectedState(regionName);
+                        if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+                            const nearest = findNearestCity(latitude, longitude, 'GB');
+                            if (nearest) setDetectedCity(nearest.city);
+                        } else if (cityName) {
+                            setDetectedCity(cityName);
+                        }
+                    }
+                };
                 
                 if (isUSDomain) {
                     setCountryCodeState('US');
-                    setHasAttemptedIPDetection(true);
-                    return;
+                    await applyIPLocation('US');
                 } else if (isUKDomain) {
                     setCountryCodeState('GB');
-                    setHasAttemptedIPDetection(true);
-                    return;
-                }
-
-                // Fallback for other domains/IPs
-                const response = await fetch('https://freeipapi.com/api/json');
-                if (!response.ok) throw new Error('API unreachable');
-                const data = await response.json();
-
-                if (data.countryCode === 'US') {
-                    setCountryCodeState('US');
-                    if (data.regionName) setDetectedState(data.regionName);
-                    if (data.cityName) setDetectedCity(data.cityName);
+                    await applyIPLocation('GB');
                 } else {
-                    setCountryCodeState('GB'); // Default fallback
-                    if (data.countryCode === 'GB') {
-                        if (data.regionName) setDetectedState(data.regionName);
-                        if (data.latitude && data.longitude) {
-                            const nearest = findNearestCity(data.latitude, data.longitude, 'GB');
-                            if (nearest) setDetectedCity(nearest.city);
-                        } else if (data.cityName) {
-                            setDetectedCity(data.cityName);
-                        }
-                    }
+                    // Fallback for other domains/IPs
+                    await applyIPLocation();
                 }
             } catch (err) {
                 console.warn('Region detection failed, defaulting to GB:', err);
