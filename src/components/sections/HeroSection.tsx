@@ -1,27 +1,80 @@
-import { motion } from "framer-motion";
 import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { HelpCircle } from "lucide-react";
-import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { useDeferredMount } from "@/hooks/useDeferredMount";
 import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
 
-// Load the detailed WebGL Earth as part of the hero so the globe keeps its texture detail.
 const EarthHeroBackground = lazy(() =>
     import("@/components/earth/EarthHeroBackground").then(m => ({ default: m.EarthHeroBackground }))
 );
 const EmergencyChatInterface = lazy(() =>
     import("@/components/EmergencyChatInterface").then(m => ({ default: m.EmergencyChatInterface }))
 );
+const LayoutTextFlipDemo = lazy(() =>
+    import("@/components/LayoutTextFlipDemo").then(m => ({ default: m.LayoutTextFlipDemo }))
+);
 
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
+
+const HERO_INTERACTION_EVENTS: Array<keyof WindowEventMap> = ["pointerdown", "keydown"];
+
+function HeroBackgroundFallback() {
+    return (
+        <div className="absolute inset-0 z-0 overflow-hidden bg-[#030507]" aria-hidden>
+            <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.24)_0_1px,transparent_1px),radial-gradient(circle_at_72%_16%,rgba(255,255,255,0.18)_0_1px,transparent_1px),radial-gradient(circle_at_86%_48%,rgba(255,255,255,0.16)_0_1px,transparent_1px)] [background-size:120px_120px,180px_180px,220px_220px]" />
+            <div className="absolute left-1/2 top-[34%] h-[72vw] max-h-[410px] min-h-[260px] w-[72vw] min-w-[260px] max-w-[410px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_40%_28%,rgba(42,127,166,0.88),rgba(8,35,55,0.9)_46%,rgba(2,8,15,0.98)_72%,transparent_73%)] shadow-[0_0_80px_rgba(25,116,170,0.42)]" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent via-black/45 to-black" />
+        </div>
+    );
+}
+
+function HeroChatPlaceholder({ onActivate }: { onActivate: () => void }) {
+    return (
+        <button
+            type="button"
+            data-tour="tour-chat-input"
+            aria-label="Open emergency chat"
+            onClick={onActivate}
+            onFocus={onActivate}
+            className="group w-full rounded-3xl border border-gold/25 bg-black/70 p-4 text-left shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:border-gold/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 md:p-6"
+        >
+            <div className="flex min-h-[78px] items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 md:min-h-[96px] md:px-6">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold md:h-12 md:w-12">
+                    <HelpCircle className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1 text-sm text-white/82 md:text-xl">
+                    Hi, how can we help?
+                </span>
+                <span className="shrink-0 rounded-full bg-gold px-4 py-2 text-xs font-bold uppercase tracking-wide text-black transition group-hover:bg-gold/90">
+                    Start
+                </span>
+            </div>
+        </button>
+    );
+}
 
 export function HeroSection() {
     const { settings, detectedCity, detectedState } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
     const [controlsVisible, setControlsVisible] = useState(false);
+    const [chatRequested, setChatRequested] = useState(false);
     const controlsRevealTimerRef = useRef<number | null>(null);
+    const shouldMountEarth = useDeferredMount({
+        delay: 1200,
+        mediaQuery: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        events: HERO_INTERACTION_EVENTS,
+    });
+    const shouldMountChat = useDeferredMount({
+        delay: 15000,
+        events: HERO_INTERACTION_EVENTS,
+    });
+    const shouldMountFlipText = useDeferredMount({
+        delay: 16000,
+        events: HERO_INTERACTION_EVENTS,
+    });
+    const chatActive = chatRequested || shouldMountChat;
 
     const revealControls = useCallback((hold = false) => {
         setControlsVisible(true);
@@ -67,9 +120,12 @@ export function HeroSection() {
             onFocusCapture={() => revealControls(true)}
             onBlurCapture={() => revealControls()}
         >
-            <Suspense fallback={null}>
-                <EarthHeroBackground countryCode={settings.countryCode} />
-            </Suspense>
+            <HeroBackgroundFallback />
+            {shouldMountEarth && (
+                <Suspense fallback={null}>
+                    <EarthHeroBackground countryCode={settings.countryCode} />
+                </Suspense>
+            )}
             <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(0,0,0,0.05)_30%,rgba(0,0,0,0.72)_100%)] pointer-events-none" />
             <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/10 to-background pointer-events-none" />
             {/* Background layers - decorative shader loaded lazily to avoid blocking LCP */}
@@ -77,10 +133,7 @@ export function HeroSection() {
             <div className="relative container-wide w-full pt-2 pb-0 sm:pt-8 md:pt-28 md:pb-0 pointer-events-none z-10">
                 <div className="w-full max-w-5xl md:max-w-7xl mx-auto text-center pointer-events-auto">
                     {/* Availability badge */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.1, duration: 0.5 }}
+                    <div
                         className="mb-3 inline-flex flex-col items-center gap-2 md:mb-6"
                     >
                         <div className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gold/30 bg-white/[0.03] backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)] relative overflow-hidden group transition-all duration-500 hover:border-gold/50">
@@ -95,7 +148,7 @@ export function HeroSection() {
                                 Local Professionals Available Now
                             </span>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Main headline — matches reference: LOCAL / TRADESMEN|CONTRACTORS (gold, dominant) / near CITY */}
                     <div className="hero-title-arch relative flex flex-col items-center justify-center mb-3 px-1 sm:px-4 w-full overflow-visible md:mb-6">
@@ -164,21 +217,15 @@ export function HeroSection() {
                     </div>
 
                     {/* Tagline */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                    <p
                         className="text-[10px] sm:text-sm md:text-base lg:text-lg text-white/85 md:text-muted-foreground mb-4 tracking-wide uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.72)] md:drop-shadow-none"
                     >
                         Emergency {settings.tradeTerm} {displayState} | Nationwide 24/7 Help
-                    </motion.p>
+                    </p>
 
                     {/* "Need Help" Button */}
                     <div className="hero-get-help-reveal relative">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
+                        <div
                             className="flex flex-col items-center justify-center mt-8 mb-0 md:mt-16 gap-4"
                         >
                             <RainbowButton
@@ -195,8 +242,7 @@ export function HeroSection() {
                                 NEED HELP?
                             </RainbowButton>
 
-                            <motion.button
-                                whileTap={{ scale: 0.95, y: 2 }}
+                            <button
                                 onPointerDown={() => {
                                     setIsPressed(true);
                                     audioService.playClick(5); // Heavy variant
@@ -207,7 +253,7 @@ export function HeroSection() {
                                     e.preventDefault();
                                     window.dispatchEvent(new Event('start-tour'));
                                 }}
-                                className={cn("relative", USE_SVG_BUTTONS_ON_DESKTOP ? "flex" : "md:hidden")}
+                                className={cn("relative transition-transform active:translate-y-0.5 active:scale-95", USE_SVG_BUTTONS_ON_DESKTOP ? "flex" : "md:hidden")}
                             >
                             <svg xmlns="http://www.w3.org/2000/svg" width="256" height="186" fill="none" viewBox="0 0 256 186" className={cn("h-auto cursor-pointer drop-shadow-2xl transition-all duration-300", USE_SVG_BUTTONS_ON_DESKTOP ? "w-[120px] md:w-[160px]" : "w-[120px]")}>
                               {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}
@@ -354,29 +400,34 @@ export function HeroSection() {
                                 </linearGradient>
                               </defs>
                             </svg>
-                            </motion.button>
-                        </motion.div>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.4 }}
+                <div
                     className="hero-chat-stage mb-0 mt-0 pointer-events-auto"
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 -mt-6 md:mt-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">
-                            <Suspense fallback={<div className="h-32 rounded-3xl bg-black/20 animate-pulse" aria-hidden />}>
-                                <EmergencyChatInterface />
-                            </Suspense>
+                            {chatActive ? (
+                                <Suspense fallback={<div className="h-32 rounded-3xl bg-black/20 animate-pulse" aria-hidden />}>
+                                    <EmergencyChatInterface />
+                                </Suspense>
+                            ) : (
+                                <HeroChatPlaceholder onActivate={() => setChatRequested(true)} />
+                            )}
                         </div>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Flipping Text */}
                 <div className="hero-spin-text-stage flex justify-center w-full relative z-20 pointer-events-auto mt-16 pb-16">
-                    <LayoutTextFlipDemo />
+                    {shouldMountFlipText ? (
+                        <Suspense fallback={null}>
+                            <LayoutTextFlipDemo />
+                        </Suspense>
+                    ) : null}
                 </div>
             </div>
         </section>

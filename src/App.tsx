@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { SimpleThemeProvider } from "@/components/simple-theme";
+import { useDeferredMount } from "@/hooks/useDeferredMount";
 import { initGA } from "@/lib/analytics";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -67,6 +68,7 @@ const AnalyticsPage = lazy(() => import("./pages/admin/Analytics"));
 const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDashboard"));
 
 const queryClient = new QueryClient();
+const APP_CHROME_EVENTS: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "scroll"];
 
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -91,6 +93,41 @@ const DeferredLiveChat = () => {
   }, []);
 
   return enabled ? <LiveChat /> : null;
+};
+
+const DeferredAnalyticsTracker = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const enabled = useDeferredMount({
+    delay: isHome ? 16000 : 800,
+    events: APP_CHROME_EVENTS,
+  });
+
+  return enabled ? (
+    <Suspense fallback={null}>
+      <AnalyticsTracker />
+    </Suspense>
+  ) : null;
+};
+
+const DeferredAppChrome = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const enabled = useDeferredMount({
+    delay: isHome ? 16000 : 800,
+    events: APP_CHROME_EVENTS,
+  });
+
+  return enabled ? (
+    <Suspense fallback={null}>
+      <InstallPWA />
+      <CookieConsent />
+      <BottomNav />
+      <DeferredLiveChat />
+      <FloatingBackButton />
+      <CustomCursor />
+    </Suspense>
+  ) : null;
 };
 
 const HashCleaner = () => {
@@ -255,9 +292,7 @@ const AppContent = () => {
             <MobilePreviewWrapper>
               <ScrollToTop />
               <HashCleaner />
-              <Suspense fallback={null}>
-                <AnalyticsTracker />
-              </Suspense>
+              <DeferredAnalyticsTracker />
               <ErrorBoundary>
                 <main className="pb-16 md:pb-0">
                   <Suspense fallback={<PageLoader />}>
@@ -265,22 +300,13 @@ const AppContent = () => {
                   </Suspense>
                 </main>
               </ErrorBoundary>
-              <Suspense fallback={null}>
-                <InstallPWA />
-                <CookieConsent />
-                <BottomNav />
-                <DeferredLiveChat />
-                <FloatingBackButton />
-                <CustomCursor />
-              </Suspense>
+              <DeferredAppChrome />
             </MobilePreviewWrapper>
           ) : (
             <>
               <ScrollToTop />
               <HashCleaner />
-              <Suspense fallback={null}>
-                <AnalyticsTracker />
-              </Suspense>
+              <DeferredAnalyticsTracker />
               <ErrorBoundary>
                 <main className="pb-16 md:pb-0">
                   <Suspense fallback={<PageLoader />}>
@@ -288,14 +314,7 @@ const AppContent = () => {
                   </Suspense>
                 </main>
               </ErrorBoundary>
-              <Suspense fallback={null}>
-                <InstallPWA />
-                <CookieConsent />
-                <BottomNav />
-                <DeferredLiveChat />
-                <FloatingBackButton />
-                <CustomCursor />
-              </Suspense>
+              <DeferredAppChrome />
             </>
           )}
           {import.meta.env.DEV && (

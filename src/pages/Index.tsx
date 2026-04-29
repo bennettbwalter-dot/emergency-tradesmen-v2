@@ -1,12 +1,9 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
-import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
-import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GuestGate } from "@/components/GuestGate";
-import { FloatingTourHub } from "@/components/FloatingTourHub";
 
 // Eager load Hero for LCP
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -21,6 +18,7 @@ const LatestBlogSection = lazy(() => import("@/components/sections/LatestBlogSec
 const HomeEmergencyAd = lazy(() => import("@/components/HomeEmergencyAd").then(module => ({ default: module.HomeEmergencyAd })));
 const GeneralFAQSection = lazy(() => import("@/components/GeneralFAQSection").then(module => ({ default: module.GeneralFAQSection })));
 const Footer = lazy(() => import("@/components/Footer").then(module => ({ default: module.Footer })));
+const FloatingTourHub = lazy(() => import("@/components/FloatingTourHub").then(module => ({ default: module.FloatingTourHub })));
 
 function DeferredSection({
   minHeight,
@@ -57,6 +55,27 @@ function DeferredSection({
         </Suspense>
       ) : null}
     </div>
+  );
+}
+
+function DeferredTourHub() {
+  const [isEnabled, setIsEnabled] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).get("tour") === "true";
+  });
+
+  useEffect(() => {
+    const enable = () => setIsEnabled(true);
+    window.addEventListener("start-tour", enable);
+    return () => window.removeEventListener("start-tour", enable);
+  }, []);
+
+  if (!isEnabled) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <FloatingTourHub />
+    </Suspense>
   );
 }
 
@@ -126,7 +145,7 @@ const Index = () => {
       />
 
       <Header />
-      <FloatingTourHub />
+      <DeferredTourHub />
       <main className="min-h-screen bg-background">
         <HeroSection />
 
