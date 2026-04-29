@@ -17,13 +17,26 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://*.microsoft.com https://*.msauth.net https://*.azure.com https://*.supabase.co https://pagead2.googlesyndication.com https://*.googleadservices.com https://adservice.google.com https://www.googletagmanager.com https://*.posthog.com https://js.stripe.com blob: data:; worker-src 'self' blob: data:; connect-src 'self' https://*.microsoft.com https://*.azure.com https://*.supabase.co wss://*.supabase.co https://*.speechservices.microsoft.com wss://*.stt.speech.microsoft.com wss://*.stt.speech.microsoft.com https://ep1.adtrafficquality.google wss://*.tts.speech.microsoft.com https://nominatim.openstreetmap.org https://tiles.openfreemap.org https://services.arcgisonline.com https://pagead2.googlesyndication.com https://*.google.com https://*.posthog.com https://www.google-analytics.com https://region1.google-analytics.com https://api.stripe.com; img-src 'self' data: blob: https: https://*.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://tiles.openfreemap.org; media-src 'self' blob:; frame-src 'self' https://player.vimeo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.posthog.com https://js.stripe.com https://*.stripe.com;" />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9VVX26Z2R"></script>
+  <!-- Google Analytics 4 (deferred until after LCP to free the main thread) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-N9VVX26Z2R', { send_page_view: false });
+    (function(){
+      var load = function(){
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-N9VVX26Z2R';
+        document.head.appendChild(s);
+        gtag('config', 'G-N9VVX26Z2R', { send_page_view: false });
+      };
+      var schedule = function(){
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 4000 });
+        else setTimeout(load, 2500);
+      };
+      if (document.readyState === 'complete') schedule();
+      else window.addEventListener('load', schedule, { once: true });
+    })();
   </script>
 
 
@@ -32,8 +45,8 @@
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <!-- LCP preload hints -->
-  <link rel="preload" as="image" href="/et-logo-v3.png" fetchpriority="high" />
-  <link rel="preload" as="image" href="/tradesman-hero-v2.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/et-logo-v3.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/tradesman-hero-v2.webp" type="image/webp" fetchpriority="high" />
 
   <!-- DNS prefetch / preconnect for third parties -->
   <link rel="dns-prefetch" href="https://xwqvhymkwuasotsgmarn.supabase.co" />
@@ -89,11 +102,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Kaushan+Script&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&family=Kaushan+Script&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'">
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Kaushan+Script&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&family=Kaushan+Script&display=swap"
       rel="stylesheet">
   </noscript>
 
@@ -117,18 +130,25 @@
     }
   </script>
 
-  <!-- Google AdSense (production only) -->
+  <!-- Google AdSense (production only, deferred until after LCP) -->
   <script>
     (function() {
       var h = window.location.hostname;
-      if (h === 'emergencytradesmen.net' || h === 'www.emergencytradesmen.net' ||
-          h === 'emergencycontractors.net' || h === 'www.emergencycontractors.net') {
+      if (h !== 'emergencytradesmen.net' && h !== 'www.emergencytradesmen.net' &&
+          h !== 'emergencycontractors.net' && h !== 'www.emergencycontractors.net') return;
+      var load = function(){
         var s = document.createElement('script');
         s.async = true;
         s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";
         s.crossOrigin = "anonymous";
         document.head.appendChild(s);
-      }
+      };
+      var schedule = function(){
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 6000 });
+        else setTimeout(load, 4000);
+      };
+      if (document.readyState === 'complete') schedule();
+      else window.addEventListener('load', schedule, { once: true });
     })();
   </script>
 

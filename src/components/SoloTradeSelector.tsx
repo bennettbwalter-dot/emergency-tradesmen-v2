@@ -23,7 +23,7 @@ const selectorTrades: SelectorTrade[] = [
     label: "Plumber",
     actionLabel: "Find plumber",
     backgroundLines: ["PLUMBER"],
-    image: "/assets/trade-selector/plumber.png",
+    image: "/assets/trade-selector/plumber.webp",
     accent: "#56b6ff",
   },
   {
@@ -31,7 +31,7 @@ const selectorTrades: SelectorTrade[] = [
     label: "Electrician",
     actionLabel: "Find electrician",
     backgroundLines: ["ELECTRICIAN"],
-    image: "/assets/trade-selector/electrician.png",
+    image: "/assets/trade-selector/electrician.webp",
     accent: "#f1c84b",
   },
   {
@@ -39,7 +39,7 @@ const selectorTrades: SelectorTrade[] = [
     label: "Locksmith",
     actionLabel: "Find locksmith",
     backgroundLines: ["LOCKSMITH"],
-    image: "/assets/trade-selector/locksmith.png",
+    image: "/assets/trade-selector/locksmith.webp",
     accent: "#74d49b",
   },
   {
@@ -48,7 +48,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find gas engineer",
     backgroundLines: ["GAS", "ENGINEER"],
     italicLine: "HVAC",
-    image: "/assets/trade-selector/gas-engineer.png",
+    image: "/assets/trade-selector/gas-engineer.webp",
     accent: "#ff8a3d",
   },
   {
@@ -57,7 +57,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find drain specialist",
     backgroundLines: ["DRAIN"],
     italicLine: "Specialist",
-    image: "/assets/trade-selector/drain-specialist.png",
+    image: "/assets/trade-selector/drain-specialist.webp",
     accent: "#3ad0d8",
   },
   {
@@ -66,7 +66,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find glazier",
     backgroundLines: ["GLAZIER"],
     italicLine: "Glass Repair",
-    image: "/assets/trade-selector/glazier.png",
+    image: "/assets/trade-selector/glazier.webp",
     accent: "#9bdcff",
   },
   {
@@ -74,7 +74,7 @@ const selectorTrades: SelectorTrade[] = [
     label: "Roofer",
     actionLabel: "Find roofer",
     backgroundLines: ["ROOFER"],
-    image: "/assets/trade-selector/roofer.png",
+    image: "/assets/trade-selector/roofer.webp",
     accent: "#d4a755",
   },
   {
@@ -83,7 +83,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find builder",
     backgroundLines: ["BUILDER"],
     italicLine: "Construction",
-    image: "/assets/trade-selector/builder.png",
+    image: "/assets/trade-selector/builder.webp",
     accent: "#c9895a",
   },
   {
@@ -92,7 +92,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find restoration",
     backgroundLines: ["WATER"],
     italicLine: "Restoration",
-    image: "/assets/trade-selector/water-restoration.png",
+    image: "/assets/trade-selector/water-restoration.webp",
     accent: "#4fb8ff",
   },
   {
@@ -101,7 +101,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find recovery",
     backgroundLines: ["BREAKDOWN"],
     italicLine: "Recovery",
-    image: "/assets/trade-selector/breakdown.png",
+    image: "/assets/trade-selector/breakdown.webp",
     accent: "#ff7a2e",
   },
   {
@@ -110,7 +110,7 @@ const selectorTrades: SelectorTrade[] = [
     actionLabel: "Find HVAC",
     backgroundLines: ["AIR", "CONDITIONING"],
     italicLine: "HVAC",
-    image: "/assets/trade-selector/hvac.png",
+    image: "/assets/trade-selector/hvac.webp",
     accent: "#74d8ff",
   },
 ];

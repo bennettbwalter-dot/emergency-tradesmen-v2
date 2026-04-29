@@ -85,7 +85,7 @@ export function Header({ countryCode }: HeaderProps) {
           <div className="flex-shrink-0 z-50">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
               <div className="relative">
-                <img src="/et-logo-v3.png" alt="Emergency Trades Logo" loading="eager" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
+                <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="eager" decoding="async" fetchPriority="high" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
               </div>
               <div className="hidden sm:block">
                 <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">{siteNameMain}</span>
@@ -170,7 +170,7 @@ export function Header({ countryCode }: HeaderProps) {
                   {/* Top Header Match */}
                   <div className="flex items-center justify-between mb-8 mt-2 px-2">
                     <div className="flex items-center gap-3">
-                      <img src="/et-logo-v3.png" alt="Logo" loading="lazy" className="w-8 h-8 object-contain" />
+                      <img src="/et-logo-v3.webp" alt="Logo" loading="lazy" className="w-8 h-8 object-contain" />
                       <span className="font-display tracking-wide text-lg text-white">{siteNameMain}<span className="text-gold ml-1">{siteNameSub}</span></span>
                     </div>
                   </div>

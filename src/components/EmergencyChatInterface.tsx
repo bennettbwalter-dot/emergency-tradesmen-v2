@@ -982,10 +982,12 @@ export function EmergencyChatInterface() {
                                         className="pointer-events-none absolute left-3 md:left-5 top-3 md:top-4 z-10 w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/40 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-glow-pulse"
                                     >
                                         <img
-                                            src="/et-logo-v3.png"
+                                            src="/et-logo-v3.webp"
                                             alt=""
                                             width="28"
                                             height="28"
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-4 h-4 md:w-6 md:h-6 brightness-125 drop-shadow-[0_0_4px_rgba(212,175,55,0.6)]"
                                         />
                                     </div>

@@ -5,28 +5,34 @@ import "./index.css";
 import "@fontsource/dm-sans"; // Defaults to weight 400
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
-import { initPostHog } from "./lib/posthog";
-import * as Sentry from "@sentry/react";
 
-// Initialize Sentry error tracking
-Sentry.init({
-    dsn: import.meta.env.VITE_SENTRY_DSN,
-    environment: import.meta.env.MODE,
-    enabled: import.meta.env.PROD && !!import.meta.env.VITE_SENTRY_DSN,
-    tracesSampleRate: 0.1,
-    integrations: [
-        Sentry.browserTracingIntegration(),
-    ],
-    // Ignore benign errors
-    ignoreErrors: [
-        'ResizeObserver loop limit exceeded',
-        'ResizeObserver loop completed with undelivered notifications',
-        'Script error.',
-    ],
+// Defer non-critical observability libs until after first paint to keep them
+// out of the LCP critical path. Both are idempotent and SPA-friendly.
+const onIdle: (cb: () => void) => void = (cb) => {
+    if (typeof window === 'undefined') return;
+    const ric = (window as any).requestIdleCallback;
+    if (typeof ric === 'function') ric(cb, { timeout: 4000 });
+    else setTimeout(cb, 2500);
+};
+
+onIdle(() => {
+    if (import.meta.env.PROD && import.meta.env.VITE_SENTRY_DSN) {
+        import('@sentry/react').then((Sentry) => {
+            Sentry.init({
+                dsn: import.meta.env.VITE_SENTRY_DSN,
+                environment: import.meta.env.MODE,
+                tracesSampleRate: 0.1,
+                integrations: [Sentry.browserTracingIntegration()],
+                ignoreErrors: [
+                    'ResizeObserver loop limit exceeded',
+                    'ResizeObserver loop completed with undelivered notifications',
+                    'Script error.',
+                ],
+            });
+        }).catch(() => { /* non-fatal */ });
+    }
+    import('./lib/posthog').then(({ initPostHog }) => initPostHog()).catch(() => {});
 });
-
-// Initialize analytics
-initPostHog();
 
 // Prevent blank screen of death with immediate error reporting
 window.addEventListener('error', (event) => {

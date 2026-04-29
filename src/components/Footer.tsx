@@ -43,7 +43,7 @@ export function Footer({ countryCode }: FooterProps) {
           <div className="lg:col-span-4 space-y-8">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-4 group">
               <div className="relative">
-                <img src="/et-logo-v3.png" alt="Emergency Trades Logo" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-14 h-14 object-contain transition-transform group-hover:scale-110 duration-300" />
+                <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-14 h-14 object-contain transition-transform group-hover:scale-110 duration-300" />
               </div>
               <div className="flex flex-col">
                 <span className="font-display font-bold text-2xl tracking-tight text-white leading-none">Emergency</span>

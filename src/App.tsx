@@ -8,16 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
-import { AdminLayout } from "@/components/admin/AdminLayout";
 import { SimpleThemeProvider } from "@/components/simple-theme";
-import { BottomNav } from "@/components/BottomNav";
-import { InstallPWA } from "@/components/InstallPWA";
-import { LiveChat } from "@/components/LiveChat";
-import { CookieConsent } from "@/components/CookieConsent";
-import { FloatingBackButton } from "@/components/FloatingBackButton";
-import { CustomCursor } from "@/components/CustomCursor";
 import { initGA } from "@/lib/analytics";
-import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { MobilePreviewWrapper } from "@/components/MobilePreviewWrapper";
@@ -27,8 +19,15 @@ import { useAuth } from "@/contexts/AuthContext";
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 
-import { PostHogProvider } from 'posthog-js/react';
-import { posthog } from '@/lib/posthog';
+// Below-the-fold UI: lazy-load to keep them out of the LCP critical path.
+const AdminLayout = lazy(() => import("@/components/admin/AdminLayout").then(m => ({ default: m.AdminLayout })));
+const BottomNav = lazy(() => import("@/components/BottomNav").then(m => ({ default: m.BottomNav })));
+const InstallPWA = lazy(() => import("@/components/InstallPWA").then(m => ({ default: m.InstallPWA })));
+const LiveChat = lazy(() => import("@/components/LiveChat").then(m => ({ default: m.LiveChat })));
+const CookieConsent = lazy(() => import("@/components/CookieConsent").then(m => ({ default: m.CookieConsent })));
+const FloatingBackButton = lazy(() => import("@/components/FloatingBackButton").then(m => ({ default: m.FloatingBackButton })));
+const CustomCursor = lazy(() => import("@/components/CustomCursor").then(m => ({ default: m.CustomCursor })));
+const AnalyticsTracker = lazy(() => import("@/components/AnalyticsTracker").then(m => ({ default: m.AnalyticsTracker })));
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
@@ -233,15 +232,19 @@ const AppContent = () => {
             <MobilePreviewWrapper>
               <ScrollToTop />
               <HashCleaner />
-              <Suspense fallback={<PageLoader />}>
+              <Suspense fallback={null}>
                 <AnalyticsTracker />
+              </Suspense>
+              <ErrorBoundary>
+                <main className="pb-16 md:pb-0">
+                  <Suspense fallback={<PageLoader />}>
+                    <AppRoutes />
+                  </Suspense>
+                </main>
+              </ErrorBoundary>
+              <Suspense fallback={null}>
                 <InstallPWA />
                 <CookieConsent />
-                <ErrorBoundary>
-                  <main className="pb-16 md:pb-0">
-                    <AppRoutes />
-                  </main>
-                </ErrorBoundary>
                 <BottomNav />
                 <LiveChat />
                 <FloatingBackButton />
@@ -252,15 +255,19 @@ const AppContent = () => {
             <>
               <ScrollToTop />
               <HashCleaner />
-              <Suspense fallback={<PageLoader />}>
+              <Suspense fallback={null}>
                 <AnalyticsTracker />
+              </Suspense>
+              <ErrorBoundary>
+                <main className="pb-16 md:pb-0">
+                  <Suspense fallback={<PageLoader />}>
+                    <AppRoutes />
+                  </Suspense>
+                </main>
+              </ErrorBoundary>
+              <Suspense fallback={null}>
                 <InstallPWA />
                 <CookieConsent />
-                <ErrorBoundary>
-                  <main className="pb-16 md:pb-0">
-                    <AppRoutes />
-                  </main>
-                </ErrorBoundary>
                 <BottomNav />
                 <LiveChat />
                 <FloatingBackButton />
@@ -281,19 +288,17 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <PostHogProvider client={posthog}>
-      <HelmetProvider>
-        <SimpleThemeProvider>
-          <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-              <ChatbotProvider>
-                <AppContent />
-              </ChatbotProvider>
-            </AuthProvider>
-          </QueryClientProvider>
-        </SimpleThemeProvider>
-      </HelmetProvider>
-    </PostHogProvider>
+    <HelmetProvider>
+      <SimpleThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <ChatbotProvider>
+              <AppContent />
+            </ChatbotProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </SimpleThemeProvider>
+    </HelmetProvider>
   );
 };
 

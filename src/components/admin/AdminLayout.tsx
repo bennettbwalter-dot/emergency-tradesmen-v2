@@ -87,7 +87,7 @@ export function AdminLayout() {
                 <div className="p-6 border-b border-border flex items-center justify-between">
                     {sidebarOpen && (
                         <div className="flex items-center gap-2">
-                            <img src="/et-logo-v3.png" alt="ET Logo" loading="lazy" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
+                            <img src="/et-logo-v3.webp" alt="ET Logo" loading="lazy" decoding="async" className="w-8 h-8 rounded-full border border-gold/50 object-cover" />
                             <h1 className="font-display text-xl text-gold">Admin</h1>
                         </div>
                     )}

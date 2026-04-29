@@ -149,8 +149,8 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     camera.position.set(0, 0, 7.3);
 
     const loader = new THREE.TextureLoader();
-    const earthTexture = loader.load("/assets/earth_atmos_2048.jpg");
-    const cloudTexture = loader.load("/assets/earth_clouds_1024.png");
+    const earthTexture = loader.load("/assets/earth_atmos_2048.webp");
+    const cloudTexture = loader.load("/assets/earth_clouds_1024.webp");
     earthTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
 

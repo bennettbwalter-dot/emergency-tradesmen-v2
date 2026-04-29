@@ -85,7 +85,7 @@ export default function About() {
                                     When disaster strikes, you need a local <strong>{termSingular.toLowerCase()}</strong> you can trust.
                                 </p>
                                 <div className="flex justify-center mb-6 transition-transform hover:scale-110 duration-500">
-                                    <img src="/et-logo-v3.png" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" className="w-20 h-20 object-contain" />
+                                    <img src="/et-logo-v3.webp" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" decoding="async" className="w-20 h-20 object-contain" />
                                 </div>
                                 <div className="flex gap-4">
                                     <Button variant="hero" size="lg" asChild>

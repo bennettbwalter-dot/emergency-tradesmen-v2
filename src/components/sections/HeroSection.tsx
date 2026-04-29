@@ -1,17 +1,22 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { HelpCircle } from "lucide-react";
-import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 import { TrustBadges } from "@/components/TrustBadges";
 import { LayoutTextFlipDemo } from "@/components/LayoutTextFlipDemo";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
-import { EarthHeroBackground } from "@/components/earth/EarthHeroBackground";
 
-// Defer WebGL shader until after initial paint - it's decorative and blocks main thread on mount
+// Defer WebGL shader (~580KB three.js) and chat (160KB) until after initial paint.
+// Both are below LCP-critical content (hero text), so users see the page sooner.
+const EarthHeroBackground = lazy(() =>
+    import("@/components/earth/EarthHeroBackground").then(m => ({ default: m.EarthHeroBackground }))
+);
+const EmergencyChatInterface = lazy(() =>
+    import("@/components/EmergencyChatInterface").then(m => ({ default: m.EmergencyChatInterface }))
+);
 
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
@@ -71,7 +76,9 @@ export function HeroSection() {
             onFocusCapture={() => revealControls(true)}
             onBlurCapture={() => revealControls()}
         >
-            <EarthHeroBackground countryCode={settings.countryCode} />
+            <Suspense fallback={null}>
+                <EarthHeroBackground countryCode={settings.countryCode} />
+            </Suspense>
             <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(0,0,0,0.05)_30%,rgba(0,0,0,0.72)_100%)] pointer-events-none" />
             <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/10 to-background pointer-events-none" />
             {/* Background layers - decorative shader loaded lazily to avoid blocking LCP */}
@@ -107,7 +114,7 @@ export function HeroSection() {
                                 className="block text-white md:text-foreground text-[clamp(2rem,11vw,3.75rem)] drop-shadow-[0_4px_18px_rgba(0,0,0,0.78)]"
                                 style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
                             >
-                                L<img src="/et-logo-v3.png" alt="O" width="64" height="64" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
+                                L<img src="/et-logo-v3.webp" alt="O" width="64" height="64" decoding="async" fetchPriority="high" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
                             </span>
 
                             {/* TRADESMEN / CONTRACTORS — dominant, rich gold */}
@@ -369,7 +376,9 @@ export function HeroSection() {
                 >
                     <div className="w-full max-w-4xl mx-auto mb-0 -mt-6 md:mt-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 relative z-30">
                         <div className="rounded-3xl overflow-visible">
-                            <EmergencyChatInterface />
+                            <Suspense fallback={<div className="h-32 rounded-3xl bg-black/20 animate-pulse" aria-hidden />}>
+                                <EmergencyChatInterface />
+                            </Suspense>
                         </div>
                     </div>
                 </motion.div>
