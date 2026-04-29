@@ -264,7 +264,7 @@ export default function TradeCityPage() {
       try {
         const realBusinesses = await fetchBusinesses(
           tradeInfo.slug,
-          validCity,
+          cityName,
           actualCountry,
           effectiveCoords || undefined,
           isStatePage ? effectiveState : undefined

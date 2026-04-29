@@ -7,6 +7,11 @@ import { usCities, cities } from './trades';
 const PLACEHOLDER_NAMES = ['Pending Verification Profile', 'Your Business Name'];
 const isRealBusiness = (biz: any) => biz?.name && !PLACEHOLDER_NAMES.includes(biz.name) && biz.tier !== 'ghosted';
 
+function toPostgresArrayLiteral(values: string[]): string {
+    const escapedValues = values.map(value => `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`);
+    return `{${escapedValues.join(',')}}`;
+}
+
 // Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
 let _fallbackEnrichment: Record<string, any> | null = null;
 async function getFallbackEnrichment(): Promise<Record<string, any>> {
@@ -219,7 +224,7 @@ export async function fetchBusinesses(
         queryUrl += `&${cityParam}`;
     } else if (searchCity && searchCity.trim() !== '') {
         const cityWithSpaces = searchCity.replace(/-/g, ' ');
-        queryUrl += `&coverage_areas=cs.${JSON.stringify([cityWithSpaces])}`;
+        queryUrl += `&coverage_areas=cs.${encodeURIComponent(toPostgresArrayLiteral([cityWithSpaces]))}`;
     }
 
     const { data } = await supabaseFetch(queryUrl);
