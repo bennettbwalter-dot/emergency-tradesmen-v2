@@ -32,6 +32,8 @@ const initializePostHogNow = async () => {
     posthog.init(POSTHOG_KEY, {
         api_host: POSTHOG_HOST,
         capture_pageview: false,
+        autocapture: false,
+        disable_session_recording: true,
         loaded: (ph: any) => {
             if (import.meta.env.DEV) ph.debug(false);
         }

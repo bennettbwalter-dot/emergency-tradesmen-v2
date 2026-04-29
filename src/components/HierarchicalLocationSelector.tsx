@@ -23,7 +23,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import usData from '@/lib/us_cities.json';
 
 interface HierarchicalLocationSelectorProps {
     className?: string;
@@ -43,10 +42,9 @@ interface FlattenedCity extends City {
     metroSlug: string;
 }
 
-const US_STATES = (usData as any).states as State[];
-
 export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder, onStateSelected }: HierarchicalLocationSelectorProps) {
     // Selection State
+    const [usStates, setUsStates] = useState<State[]>([]);
     const [selectedState, setSelectedState] = useState<State | null>(null);
     const [selectedCity, setSelectedCity] = useState<FlattenedCity | null>(null);
     const [selectedSuburb, setSelectedSuburb] = useState<Suburb | null>(null);
@@ -55,12 +53,26 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     // Derived Lists
     const [availableCities, setAvailableCities] = useState<FlattenedCity[]>([]);
 
+    useEffect(() => {
+        let isMounted = true;
+
+        import('@/lib/us_cities.json').then((module) => {
+            if (!isMounted) return;
+            const data = module.default as { states?: State[] };
+            setUsStates(Array.isArray(data.states) ? data.states : []);
+        });
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
     // Sort states on mount (though JSON is likely sorted, good practice)
-    const sortedStates = [...US_STATES].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedStates = [...usStates].sort((a, b) => a.name.localeCompare(b.name));
 
     // Handle State Change
     const handleStateChange = (slug: string) => {
-        const state = US_STATES.find(s => s.slug === slug) || null;
+        const state = usStates.find(s => s.slug === slug) || null;
         setSelectedState(state);
         setSelectedCity(null);
         setSelectedSuburb(null);
@@ -184,10 +196,10 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         <div className={`flex flex-nowrap gap-2 items-center w-full rounded-full ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger data-tour="tour-state-button" className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${(selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex'} ${selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5'}`}>
+                <SelectTrigger disabled={!sortedStates.length} data-tour="tour-state-button" className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${(selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex'} ${selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5'}`}>
                     <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
                     <div className="hidden md:block">
-                        <SelectValue placeholder="State" />
+                        <SelectValue placeholder={sortedStates.length ? "State" : "Loading"} />
                     </div>
                     <div className="hidden md:block">
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

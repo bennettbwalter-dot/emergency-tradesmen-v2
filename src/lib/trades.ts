@@ -16,33 +16,6 @@ import { cityPostcodes } from './cityPostcodes';
 import { cityCoordinates } from './cityCoordinates';
 import { usCityCoordinates } from './usCityCoordinates';
 import { US_STATES } from './us_states';
-import usCityList from './us_cities.json';
-
-// Build city list and city→state abbreviation map from us_cities.json
-const buildUSData = (data: any): { cities: string[]; cityToState: Record<string, string> } => {
-  const citiesSet = new Set<string>();
-  const cityToState: Record<string, string> = {};
-  if (data && Array.isArray(data.states)) {
-    data.states.forEach((state: any) => {
-      const abbr = (state.slug as string).toUpperCase();
-      if (state.metros) {
-        state.metros.forEach((metro: any) => {
-          if (metro.cities) {
-            metro.cities.forEach((city: any) => {
-              if (city.name) { citiesSet.add(city.name); cityToState[city.name] = abbr; }
-              if (city.suburbs) {
-                city.suburbs.forEach((sub: any) => {
-                  if (sub.name) { citiesSet.add(sub.name); cityToState[sub.name] = abbr; }
-                });
-              }
-            });
-          }
-        });
-      }
-    });
-  }
-  return { cities: Array.from(citiesSet), cityToState };
-};
 
 export const cities = Object.keys(cityCoordinates).sort() as readonly string[];
 
@@ -226,37 +199,17 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     actualCountryCode = 'GB';
   }
 
-  interface JsonSuburb { name: string; slug: string; }
-  interface JsonCity { name: string; slug: string; suburbs: JsonSuburb[]; }
-  interface JsonMetro { name: string; slug: string; cities: JsonCity[]; }
-  interface JsonState { name: string; slug: string; metros: JsonMetro[]; }
+  if (!foundCity && countryCode !== 'GB') {
+    const knownUSCity = Object.keys(usCityCoordinates).find(
+      c => c.toLowerCase() === normalizedCityName.toLowerCase()
+    );
 
-  const usData = usCityList as unknown as { states: JsonState[] };
-
-  if (!foundCity && usData && usData.states && countryCode !== 'GB') {
-    // Optimization: If stateSlug is provided, ONLY search that state.
-    const targetStates = stateSlug
-      ? usData.states.filter(s => s.slug === stateSlug.toLowerCase())
-      : usData.states;
-
-    for (const state of targetStates) {
-      if (state.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = state.name; actualCountryCode = 'US'; break; }
-
-      // If metroSlug is provided, we could narrow further, but usually searching the whole state is fast enough and safer for edge cases.
-      for (const metro of state.metros) {
-        if (metro.name.toLowerCase() === normalizedCityName.toLowerCase() || metro.slug === normalizedCityName.toLowerCase()) { foundCity = metro.name; actualCountryCode = 'US'; break; }
-
-        for (const city of metro.cities) {
-          if (city.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = city.name; actualCountryCode = 'US'; break; }
-
-          for (const suburb of city.suburbs) {
-            if (suburb.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = suburb.name; actualCountryCode = 'US'; break; }
-          }
-          if (foundCity) break;
-        }
-        if (foundCity) break;
-      }
-      if (foundCity) break;
+    if (knownUSCity) {
+      foundCity = knownUSCity;
+      actualCountryCode = 'US';
+    } else if (stateSlug || metroSlug) {
+      foundCity = normalizedCityName;
+      actualCountryCode = 'US';
     }
   }
 
