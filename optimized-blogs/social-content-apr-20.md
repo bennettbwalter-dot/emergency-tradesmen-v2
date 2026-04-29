@@ -28,7 +28,7 @@ And your heat is escaping.
 
 ⚠️⚠️⚠️
 Fix it before the mould takes over.
-Check the link in our bio for a local glazier. 🔗
+Check the link in our bio for a local glazier. �-
 
 ### X (Twitter Thread)
 1/4 🧵 UK Homeowners: Did your windows survive the winter? The freeze-thaw cycles of early 2026 have caused a massive spike in window seal failures. Here is how to know if yours are "blown" and why it matters.
@@ -90,7 +90,7 @@ You're going to be waiting a long time. 🥵
 
 🔧 🔧 🔧
 Check our 2026 Summer Prep guide.
-Link in bio to find a licensed pro today! 🔗
+Link in bio to find a licensed pro today! �-
 
 ### X (Twitter Thread)
 1/4 🧵 US Homeowners: The 2026 Summer is predicted to be record-breaking. Is your HVAC ready? If you ignore these 7 red flags in April, you’ll be paying double for an emergency repair in July.

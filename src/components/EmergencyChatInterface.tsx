@@ -84,7 +84,7 @@ export function EmergencyChatInterface() {
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
-    const [pendingNav, setPendingNav] = useState<string | null>(null);
+    const [pendingNav] = useState<string | null>(null);
     const [isEarthLaunching, setIsEarthLaunching] = useState(false);
     const [callbackPhone, setCallbackPhone] = useState("");
     const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
@@ -125,6 +125,12 @@ export function EmergencyChatInterface() {
             detail: { location }
         }));
     }, [detectedCity, locationRecord?.name]);
+
+    useEffect(() => {
+        return () => {
+            document.documentElement.classList.remove('hero-orbit-launching');
+        };
+    }, []);
 
     const {
         detectUserLocation,
@@ -522,12 +528,12 @@ export function EmergencyChatInterface() {
     const startEarthLaunch = (target: string, locationLabel?: string | null) => {
         const location = locationLabel || detectedCity || locationRecord?.name || input;
         setIsEarthLaunching(true);
+        document.documentElement.classList.add('hero-orbit-launching');
         let completed = false;
 
         const completeHandler = (event: Event) => {
             completed = true;
             const detail = (event as CustomEvent<EarthCompleteDetail>).detail;
-            setIsEarthLaunching(false);
             navigate(targetWithEarthCamera(target, detail));
         };
 
@@ -538,7 +544,6 @@ export function EmergencyChatInterface() {
         window.setTimeout(() => {
             if (completed) return;
             window.removeEventListener('emergency-earth:complete', completeHandler);
-            setIsEarthLaunching(false);
             navigate(target);
         }, 14000);
     };
@@ -769,7 +774,7 @@ export function EmergencyChatInterface() {
         setIsRequestingLocation(false);
     };
 
-    if (pendingNav) {
+    if (false) {
         return (
             <div className="w-full max-w-4xl mx-auto">
                 <div className="rounded-3xl border border-emerald-500/30 bg-emerald-950/40 backdrop-blur-sm p-8 text-center">
@@ -808,7 +813,7 @@ export function EmergencyChatInterface() {
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className={cn("w-full max-w-4xl mx-auto hero-chat-orbit-stage", isEarthLaunching && "hero-chat-orbit-launch")}>
 
             <div className="relative rounded-3xl bg-transparent overflow-visible">
                 {chatState.history.length > 0 && (
@@ -1113,8 +1118,11 @@ export function EmergencyChatInterface() {
                             disabled={isActionDisabled}
                             isPulsing={shouldFlash}
                             dataTour="tour-locate-button"
+                            ariaLabel={isFlowComplete ? "Call an Expert" : "Confirm Action"}
                         />
-                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Send</span>
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">
+                            {isFlowComplete ? 'Call Expert' : 'Send'}
+                        </span>
                     </div>
                 </div>
             </div>

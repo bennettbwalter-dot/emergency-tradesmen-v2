@@ -230,7 +230,189 @@
   }
 }
 
+@keyframes orbit-controls-tuck {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  48% {
+    opacity: 0.9;
+    transform: translate3d(0, -28px, 0) scale(0.82);
+    filter: blur(0.5px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -96px, -140px) scale(0.36);
+    filter: blur(5px);
+  }
+}
+
+@keyframes orbit-help-tuck {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  45% {
+    opacity: 0.86;
+    transform: translate3d(0, 82px, -70px) scale(0.74);
+    filter: blur(0.5px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 132px, -180px) scale(0.28);
+    filter: blur(5px);
+  }
+}
+
+@keyframes orbit-shell-stow {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes orbit-card-surface-fade {
+  0% {
+    background-color: rgba(10, 10, 10, 0.42);
+    border-color: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.12);
+  }
+
+  100% {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+@keyframes orbit-backing-plate-away {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translate3d(0, -34px, -120px) scale(0.72);
+    filter: blur(6px);
+  }
+}
+
+@keyframes orbit-chat-flip-away {
+  0% {
+    opacity: 1;
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg) scale(1);
+    filter: blur(0) saturate(1);
+  }
+
+  38% {
+    opacity: 1;
+    transform: perspective(1100px) translate3d(0, -10px, 0) rotateY(-16deg) rotateZ(1deg) scale(0.98);
+    filter: blur(0) saturate(1.12);
+  }
+
+  72% {
+    opacity: 0.72;
+    transform: perspective(1100px) translate3d(34vw, -18vh, -120px) rotateY(-78deg) rotateZ(18deg) scale(0.58);
+    filter: blur(2px) saturate(1.35);
+  }
+
+  100% {
+    opacity: 0;
+    transform: perspective(1100px) translate3d(54vw, -36vh, -260px) rotateY(-104deg) rotateZ(34deg) scale(0.18);
+    filter: blur(10px) saturate(1.5);
+  }
+}
+
+@keyframes orbit-gold-trail {
+  0% {
+    opacity: 0;
+    transform: translate3d(-26%, 18%, 0) rotate(-8deg) scaleX(0.24);
+  }
+
+  28% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(42%, -34%, 0) rotate(-28deg) scaleX(1);
+  }
+}
+
 @layer components {
+  .hero-chat-orbit-stage {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
+
+  .hero-chat-orbit-stage .hero-chat-card,
+  .hero-chat-orbit-stage .hero-action-controls-reveal,
+  .hero-get-help-reveal {
+    transform-origin: 50% 42%;
+    will-change: transform, opacity, filter;
+  }
+
+  .hero-chat-orbit-stage .hero-chat-shell::after {
+    content: "";
+    position: absolute;
+    inset: -24px 7% auto;
+    height: 90px;
+    pointer-events: none;
+    border-radius: 999px;
+    opacity: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(255, 234, 174, 0.65), transparent 42%),
+      linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.58), rgba(116, 217, 255, 0.18), transparent);
+    filter: blur(10px);
+    transform-origin: center;
+    z-index: 42;
+  }
+
+  .hero-chat-orbit-launch {
+    pointer-events: none;
+  }
+
+  .hero-chat-orbit-launch .hero-chat-shell {
+    animation: orbit-shell-stow 1ms linear 1180ms forwards;
+  }
+
+  .hero-chat-orbit-launch .hero-action-controls-reveal {
+    animation: orbit-controls-tuck 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-chat-orbit-launch .hero-chat-card {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    animation:
+      orbit-chat-flip-away 1400ms cubic-bezier(0.16, 1, 0.3, 1) 340ms forwards,
+      orbit-card-surface-fade 520ms ease forwards;
+  }
+
+  .hero-chat-orbit-launch .hero-chat-shell::after {
+    animation: orbit-gold-trail 1400ms cubic-bezier(0.16, 1, 0.3, 1) 220ms forwards;
+  }
+
+  .hero-chat-orbit-launch .hero-chat-shell::before {
+    animation: orbit-backing-plate-away 420ms ease forwards;
+  }
+
+  .hero-orbit-launching .hero-get-help-reveal {
+    pointer-events: none !important;
+    z-index: 18;
+    animation: orbit-help-tuck 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
   .hero-title-arch::before,
   .hero-title-arch::after {
     content: "";
@@ -687,6 +869,12 @@
       0 0 28px rgba(0, 0, 0, 0.34);
     pointer-events: none;
     z-index: 35;
+  }
+
+  .hero-chat-orbit-launch .hero-chat-shell::before {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
   }
 
   .hero-chat-card > * {

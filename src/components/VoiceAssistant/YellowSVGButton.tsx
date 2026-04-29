@@ -9,6 +9,7 @@ interface YellowSVGButtonProps {
     disabled?: boolean;
     isPulsing?: boolean;
     dataTour?: string;
+    ariaLabel?: string;
 }
 
 export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProps>(({ 
@@ -16,7 +17,8 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
     onClick, 
     disabled,
     isPulsing = false,
-    dataTour
+    dataTour,
+    ariaLabel = "Confirm Action"
 }, ref) => {
     const { theme } = useTheme();
     const [isFlashing, setIsFlashing] = useState(false);
@@ -53,8 +55,9 @@ export const YellowSVGButton = forwardRef<HTMLButtonElement, YellowSVGButtonProp
             }}
             className={`flex items-center justify-center p-0 border-none bg-transparent cursor-pointer w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 relative ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${isPulsing ? 'animate-surface-pulse' : ''}`}
             onClick={handlePress}
+            disabled={disabled}
             data-tour={dataTour}
-            aria-label="Confirm Action"
+            aria-label={ariaLabel}
         >
             {/* Intense Bottom Glow Effect - Wrapped for stable centering */}
             {isPulsing && (

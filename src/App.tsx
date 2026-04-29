@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { SimpleThemeProvider } from "@/components/simple-theme";
@@ -69,6 +69,8 @@ const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDas
 
 const queryClient = new QueryClient();
 const APP_CHROME_EVENTS: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "scroll"];
+const ADMIN_EMAILS = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
+const isAdminEmail = (email?: string | null) => !!email && ADMIN_EMAILS.includes(email.toLowerCase());
 
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -146,6 +148,17 @@ const HashCleaner = () => {
   return null;
 };
 
+const ProtectedAdminRoute = () => {
+  const { user, isAuthenticated, isLoading } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) return <PageLoader />;
+  if (!isAuthenticated) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  if (!isAdminEmail(user?.email)) return <Navigate to="/" replace />;
+
+  return <Outlet />;
+};
+
 const AppRoutes = () => (
   <Routes>
     <Route path="/login" element={<AuthPage defaultTab="login" />} />
@@ -198,17 +211,19 @@ const AppRoutes = () => (
     <Route path="/payment/cancel" element={<PaymentCancelPage />} />
 
     {/* Admin Routes */}
-    <Route path="/admin" element={<AdminLayout />}>
-      <Route index element={<AdminDashboard />} />
-      <Route path="businesses" element={<BusinessesPage />} />
-      <Route path="profile-editor" element={<AdminProfileEditor />} />
-      <Route path="availability" element={<AdminAvailability />} />
-      <Route path="photos" element={<PhotosPage />} />
-      <Route path="reviews" element={<ReviewsPage />} />
-      <Route path="subscriptions" element={<SubscriptionsPage />} />
-      <Route path="export" element={<DataExportPage />} />
-      <Route path="analytics" element={<AnalyticsPage />} />
-      <Route path="email-outreach" element={<EmailOutreachDashboard />} />
+    <Route element={<ProtectedAdminRoute />}>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="businesses" element={<BusinessesPage />} />
+        <Route path="profile-editor" element={<AdminProfileEditor />} />
+        <Route path="availability" element={<AdminAvailability />} />
+        <Route path="photos" element={<PhotosPage />} />
+        <Route path="reviews" element={<ReviewsPage />} />
+        <Route path="subscriptions" element={<SubscriptionsPage />} />
+        <Route path="export" element={<DataExportPage />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="email-outreach" element={<EmailOutreachDashboard />} />
+      </Route>
     </Route>
 
     {/* US Specific Hierarchy Routes */}
@@ -316,11 +331,6 @@ const AppContent = () => {
               </ErrorBoundary>
               <DeferredAppChrome />
             </>
-          )}
-          {import.meta.env.DEV && (
-            <a href="/admin" className="fixed bottom-20 right-4 z-[9999] bg-[#D4AF37] text-black px-3 py-2 rounded-lg font-bold text-xs shadow-lg no-underline">
-              Admin →
-            </a>
           )}
         </LocalizationProvider>
       </BrowserRouter>

@@ -39,7 +39,6 @@ import type { Business } from "@/lib/businesses";
 import { supabase } from "@/lib/supabase";
 import { FloatingEmergencyCTA } from "@/components/FloatingEmergencyCTA";
 import { TroubleshootingGuide } from "@/components/TroubleshootingGuide";
-import { PhoneCaptureModal } from "@/components/PhoneCaptureModal";
 import { LocalAreaBackdrop } from "@/components/earth/LocalAreaBackdrop";
 import { Zap, ArrowRight, Star } from "lucide-react";
 import {
@@ -66,7 +65,6 @@ export default function TradeCityPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const hasLoadedRef = useRef(false);
-  const [showPhoneModal, setShowPhoneModal] = useState(false);
   const ITEMS_PER_PAGE = 9;
 
   const location = useLocation();
@@ -336,17 +334,6 @@ export default function TradeCityPage() {
     } catch (e) {
       console.warn('Real-time subscription failed (non-critical):', e);
     }
-  }, []);
-
-  // Show phone capture modal once per session after a short delay
-  useEffect(() => {
-    const key = 'phone_modal_seen';
-    if (sessionStorage.getItem(key)) return;
-    const timer = setTimeout(() => {
-      setShowPhoneModal(true);
-      sessionStorage.setItem(key, '1');
-    }, 1500);
-    return () => clearTimeout(timer);
   }, []);
 
   // Apply filters and sorting
@@ -1230,7 +1217,7 @@ export default function TradeCityPage() {
 
       {/* Floating CTA for Mobile Conversion */}
       <FloatingEmergencyCTA
-        business={filteredBusinesses.find(b => b.is_premium) || filteredBusinesses[0]}
+        business={sortedBusinesses[0]}
         trade={tradeInfo.name}
         city={cityName}
         countryCode={actualCountry}
@@ -1241,14 +1228,6 @@ export default function TradeCityPage() {
         businessId={`generic-${cityName}-${tradeInfo.slug}`}
       />
 
-      {showPhoneModal && (
-        <PhoneCaptureModal
-          trade={tradeInfo.slug}
-          city={cityName}
-          country={actualCountry}
-          onDismiss={() => setShowPhoneModal(false)}
-        />
-      )}
     </>
   );
 }

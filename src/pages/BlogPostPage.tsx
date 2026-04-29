@@ -1200,7 +1200,7 @@ export default function BlogPostPage() {
               Need a professional right now?
             </p>
             <p className={`text-sm ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}`}>
-              Find a verified, 24/7 emergency {isUS ? 'contractor' : 'tradesman'} near you — fast response guaranteed.
+              Find a verified, 24/7 emergency {isUS ? 'contractor' : 'tradesman'} near you - fast response guaranteed.
             </p>
           </div>
           <Link

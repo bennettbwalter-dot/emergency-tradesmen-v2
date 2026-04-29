@@ -47,7 +47,7 @@ Leaking drains are the second most common cause of movement. Water leaking from 
 In the 2026 spring season, heavy downpours can overwhelm poorly maintained gutters. Overflowing water pools at the base of your walls, saturating the foundations. Ensure downpipes lead away from the wall.
 
 <!-- .highlight-box -->
-### 🏗️ Proactive Maintenance Tip
+### �-️ Proactive Maintenance Tip
 Check your air bricks for blockages. Blocked air bricks lead to dry rot, which is a biological structural emergency that can eat through a floor joist in weeks.
 
 ### 4. Monitor Ground Heave After Tree Removal
@@ -65,7 +65,7 @@ For homes with suspended timber floors, clear plants and debris away from your a
 ---
 
 <!-- .highlight-box -->
-### ⚖️ Rules & Regulations: UK Building Compliance
+### �-️ Rules & Regulations: UK Building Compliance
 Structural work in the UK is strictly governed by **The Building Regulations 2010**.
 *   **Approved Document A (Structure):** Dictates requirements for foundations and load-bearing walls.
 *   **FMB (Federation of Master Builders):** Always ensure your builder is a member for vetted quality.

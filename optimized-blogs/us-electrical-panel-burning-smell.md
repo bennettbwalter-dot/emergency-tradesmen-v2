@@ -58,7 +58,7 @@ Portable AC units should never be plugged into extension cords. They draw signif
 ---
 
 <!-- .highlight-box -->
-### ⚖️ Rules & Regulations: NEC and NFPA Compliance
+### �-️ Rules & Regulations: NEC and NFPA Compliance
 The US electrical system is governed by the **National Electrical Code (NEC)**.
 *   **NFPA 70:** The primary standard for electrical safety in the workplace and home.
 *   **UL Listed Parts:** All replacement breakers and panels must be Underwriters Laboratories (UL) listed.

@@ -50,7 +50,7 @@ Once the area is safe and secured, call for an emergency glazier. Look for a tra
 ---
 
 <!-- .split-dos-donts -->
-### ⚖️ Professional Action Guide
+### �-️ Professional Action Guide
 
 #### ✅ When to Call a Pro Immediately
 *   The break is in a structural element like a bay window or large patio door.

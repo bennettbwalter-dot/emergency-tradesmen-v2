@@ -12,7 +12,7 @@ Don't ignore the "invisible threat." Check out our master guide on the 7 best wa
 ### 📸 Instagram
 **Caption:** 🧱 Cracks in the masonry? Sticking windows? 🛑 These are the red flags of subsidence you can't afford to ignore. 
 UK ground conditions are shifting this spring. Swipe left to see the 5 warning signs every homeowner needs to know! 👈
-protect your biggest investment. Full prevention guide in bio! 🔗
+protect your biggest investment. Full prevention guide in bio! �-
 **Tags:** #UKHome #Subsidence #PropertyCare #LondonHomes #BuilderLife #HomeSafety
 
 ### 🐦 X (Twitter)

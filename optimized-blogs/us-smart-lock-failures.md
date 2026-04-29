@@ -49,7 +49,7 @@ If backups fail, you need a professional. Look for a licensed locksmith who spec
 ---
 
 <!-- .split-dos-donts -->
-### ⚖️ Expert Locksmith Guide
+### �-️ Expert Locksmith Guide
 
 #### ✅ When to Call a Pro Immediately
 *   Your key is broken off inside the lock.

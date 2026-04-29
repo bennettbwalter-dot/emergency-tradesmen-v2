@@ -50,7 +50,7 @@ After the emergency service has made the area safe, you will need a qualified Ga
 ---
 
 <!-- .split-dos-donts -->
-### ⚖️ When to Call a Professional Immediately
+### �-️ When to Call a Professional Immediately
 You’ve taken the initial safety steps, but some situations require urgent professional intervention. Book an emergency callout if:
 
 #### ✅ Indicators for Urgent Action

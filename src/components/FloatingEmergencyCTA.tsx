@@ -11,9 +11,11 @@ interface FloatingEmergencyCTAProps {
 
 export function FloatingEmergencyCTA({ business, trade, city, countryCode }: FloatingEmergencyCTAProps) {
     const phoneNumber = business?.phone || "";
+    const cleanPhone = phoneNumber.replace(/\D/g, "");
+    const contactHref = cleanPhone ? `tel:${cleanPhone}` : business?.website || "";
     const proName = business?.name || `Emergency ${trade} in ${city}`;
 
-    if (!phoneNumber) return null;
+    if (!contactHref) return null;
 
     return (
         <>
@@ -23,13 +25,13 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                     asChild
                     className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl shadow-[0_10px_30px_rgba(16,185,129,0.3)] border-2 border-emerald-500/50 flex items-center justify-between px-6 backdrop-blur-sm"
                 >
-                    <a href={`tel:${phoneNumber.replace(/\s/g, '')}`}>
+                    <a href={contactHref} target={cleanPhone ? undefined : "_blank"} rel={cleanPhone ? undefined : "noreferrer"}>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                                 <Phone className="w-5 h-5 fill-white" />
                             </div>
                             <div className="text-left">
-                                <p className="text-[10px] uppercase font-black tracking-widest opacity-80 leading-none mb-1">Call Local Expert</p>
+                                <p className="text-[10px] uppercase font-black tracking-widest opacity-80 leading-none mb-1">{cleanPhone ? "Call Local Expert" : "Open Local Expert"}</p>
                                 <p className="text-sm font-bold truncate max-w-[150px]">{proName}</p>
                             </div>
                         </div>
@@ -48,11 +50,13 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                     <span className="text-white text-sm font-semibold">{proName} is available now</span>
                 </div>
                 <a
-                    href={`tel:${phoneNumber.replace(/\s/g, '')}`}
+                    href={contactHref}
+                    target={cleanPhone ? undefined : "_blank"}
+                    rel={cleanPhone ? undefined : "noreferrer"}
                     className="flex items-center gap-2 bg-white text-emerald-800 font-black text-sm px-4 py-1.5 rounded-full hover:bg-emerald-50 transition-colors"
                 >
                     <Phone className="w-3.5 h-3.5" />
-                    {phoneNumber}
+                    {cleanPhone ? phoneNumber : "Open profile"}
                 </a>
                 <Zap className="w-4 h-4 text-emerald-300" />
                 <span className="text-emerald-200 text-xs">Fast response guaranteed</span>
