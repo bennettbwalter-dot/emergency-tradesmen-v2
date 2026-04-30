@@ -10,7 +10,6 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { isFavorite } from "@/lib/auth";
 import { BusinessCard } from "@/components/BusinessCard";
 import { BusinessCardSkeleton } from "@/components/BusinessCardSkeleton";
-import { SearchFilterBar } from "@/components/SearchFilterBar";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +24,7 @@ import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
-import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2 } from "lucide-react";
+import { Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
@@ -337,7 +336,7 @@ export default function TradeCityPage() {
   }, []);
 
   // Apply filters and sorting
-  const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
+  const { filters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
 
   // Pagination Logic — sort favorites to top first
@@ -690,26 +689,147 @@ export default function TradeCityPage() {
                 With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
               </p>
 
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up-delay-2">
-                <Button
-                  variant="hero"
-                  onClick={() => {
-                    document.getElementById('listings')?.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
-                  }}
-                  className="flex items-center gap-3"
-                >
-                  <Phone className="w-5 h-5" />
-                  Find a Pro
-                </Button>
+              <div className="flex items-center justify-center animate-fade-up-delay-2">
                 <div className="flex items-center gap-3 text-foreground/70 px-6 py-3 border border-border/50 rounded-sm bg-secondary/30 backdrop-blur-sm">
                   <Clock className="w-5 h-5 text-gold" />
                   <span className="uppercase tracking-wider text-sm font-bold">Response in {averageResponseTime}</span>
                 </div>
               </div>
           </div>
+        </section>
+
+        {/* Listings Section */}
+        <section id="listings" className="container-wide pb-16 relative">
+          {/* Background Grid */}
+          {theme === 'dark' && (
+            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+              <Squares
+                direction="diagonal"
+                speed={0.3}
+                squareSize={50}
+                borderColor="rgba(212, 175, 55, 0.1)"
+                hoverFillColor="rgba(212, 175, 55, 0.05)"
+                lineThickness={0.5}
+              />
+            </div>
+          )}
+
+          <div className="mb-6 relative z-10">
+            <h2 className="text-2xl font-bold text-foreground">
+              Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
+            </h2>
+            <p className="text-muted-foreground">
+              Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
+            </p>
+          </div>
+
+          {isLoading || !hasLoadedRef.current ? (
+            <div>
+              <div className="text-center py-8 mb-6">
+                <Loader2 className="w-8 h-8 animate-spin mx-auto mb-3 text-gold" />
+                <p className="text-muted-foreground">Finding verified {tradeInfo.name}s near {cityName}...</p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <BusinessCardSkeleton key={i} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              <>
+                {businesses.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center px-6">
+                    <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-4">
+                      <Clock className="w-8 h-8 text-gold" />
+                    </div>
+                    <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
+                    <p className="text-muted-foreground max-w-md mx-auto mb-6">
+                      We're expanding our network of {tradeInfo.name.toLowerCase()} experts in this area. Be the first verified pro listed here and get all the local calls.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link
+                        to="/pricing"
+                        className="inline-flex items-center justify-center px-6 py-3 bg-gold hover:bg-gold/90 text-black font-bold rounded-xl text-sm transition-colors"
+                      >
+                        List Your Business Here →
+                      </Link>
+                      <Link
+                        to="/locations"
+                        className="inline-flex items-center justify-center px-6 py-3 border border-border hover:border-primary text-muted-foreground hover:text-primary rounded-xl text-sm transition-colors"
+                      >
+                        Browse Other Locations
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                    {currentBusinesses.map((business, index) => {
+                      return (
+                        <BusinessCard
+                          key={business.id}
+                          business={business}
+                          rank={startIndex + index + 1}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+
+                {totalPages > 1 && (
+                  <Pagination className="mb-16">
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                          className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+
+                      {(() => {
+                        const maxVisible = 5;
+                        let start = Math.max(1, currentPage - 2);
+                        let end = start + maxVisible - 1;
+
+                        if (end > totalPages) {
+                          end = totalPages;
+                          start = Math.max(1, end - maxVisible + 1);
+                        }
+
+                        return Array.from({ length: end - start + 1 }, (_, i) => {
+                          const pageNum = start + i;
+                          return (
+                            <PaginationItem key={pageNum}>
+                              <PaginationLink
+                                isActive={currentPage === pageNum}
+                                onClick={() => handlePageChange(pageNum)}
+                                className="cursor-pointer"
+                              >
+                                {pageNum}
+                              </PaginationLink>
+                            </PaginationItem>
+                          );
+                        });
+                      })()}
+
+                      {totalPages > 5 && currentPage < totalPages - 2 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )}
+
+                      <PaginationItem>
+                        <PaginationNext
+                          onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                          className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                )}
+              </>
+            </>
+          )}
         </section>
 
         {/* TL;DR Answer Block — optimized for AI Overviews / featured snippets */}
@@ -809,158 +929,10 @@ export default function TradeCityPage() {
           </div>
         </section>
 
-        {/* Ad Slot 1: Between Services and Listings */}
+        {/* Ad Slot 1: Below Services */}
         <div className="container-wide py-4">
           <AdSlot slot="7143278448" format="infeed" />
         </div>
-
-        {/* Affiliate Ad Section */}
-        <div className="container-wide">
-          <HomeEmergencyAd />
-        </div>
-
-        {/* Listings Section */}
-        <section className="container-wide py-16 relative">
-          {/* Background Grid */}
-          {theme === 'dark' && (
-            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-              <Squares
-                direction="diagonal"
-                speed={0.3}
-                squareSize={50}
-                borderColor="rgba(212, 175, 55, 0.1)"
-                hoverFillColor="rgba(212, 175, 55, 0.05)"
-                lineThickness={0.5}
-              />
-            </div>
-          )}
-
-          <div className="mb-8 relative z-10">
-            <SearchFilterBar
-              filters={filters}
-              onFiltersChange={setFilters}
-              totalCount={totalCount}
-              resultsCount={resultsCount}
-            />
-          </div>
-
-          <div className="mb-6 relative z-10">
-            <h2 className="text-2xl font-bold text-foreground">
-              Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
-            </h2>
-            <p className="text-muted-foreground">
-              Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
-            </p>
-          </div>
-
-          {isLoading || !hasLoadedRef.current ? (
-            <div>
-              <div className="text-center py-8 mb-6">
-                <Loader2 className="w-8 h-8 animate-spin mx-auto mb-3 text-gold" />
-                <p className="text-muted-foreground">Finding verified {tradeInfo.name}s near {cityName}...</p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <BusinessCardSkeleton key={i} />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <>
-              <>
-                {businesses.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center px-6">
-                    <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-4">
-                      <Clock className="w-8 h-8 text-gold" />
-                    </div>
-                    <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
-                    <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                      We're expanding our network of {tradeInfo.name.toLowerCase()} experts in this area. Be the first verified pro listed here and get all the local calls.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link
-                        to="/pricing"
-                        className="inline-flex items-center justify-center px-6 py-3 bg-gold hover:bg-gold/90 text-black font-bold rounded-xl text-sm transition-colors"
-                      >
-                        List Your Business Here →
-                      </Link>
-                      <Link
-                        to="/locations"
-                        className="inline-flex items-center justify-center px-6 py-3 border border-border hover:border-primary text-muted-foreground hover:text-primary rounded-xl text-sm transition-colors"
-                      >
-                        Browse Other Locations
-                      </Link>
-                    </div>
-                  </div>
-                ) : (
-                  <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                    {currentBusinesses.map((business, index) => {
-                      return (
-                        <BusinessCard
-                          key={business.id}
-                          business={business}
-                          rank={startIndex + index + 1}
-                        />
-                      );
-                    })}
-                  </div>
-                )}
-
-                {totalPages > 1 && (
-                  <Pagination className="mb-16">
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious
-                          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                          className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                        />
-                      </PaginationItem>
-
-                      {(() => {
-                        const maxVisible = 5;
-                        let start = Math.max(1, currentPage - 2);
-                        let end = start + maxVisible - 1;
-
-                        if (end > totalPages) {
-                          end = totalPages;
-                          start = Math.max(1, end - maxVisible + 1);
-                        }
-
-                        return Array.from({ length: end - start + 1 }, (_, i) => {
-                          const pageNum = start + i;
-                          return (
-                            <PaginationItem key={pageNum}>
-                              <PaginationLink
-                                isActive={currentPage === pageNum}
-                                onClick={() => handlePageChange(pageNum)}
-                                className="cursor-pointer"
-                              >
-                                {pageNum}
-                              </PaginationLink>
-                            </PaginationItem>
-                          );
-                        });
-                      })()}
-
-                      {totalPages > 5 && currentPage < totalPages - 2 && (
-                        <PaginationItem>
-                          <PaginationEllipsis />
-                        </PaginationItem>
-                      )}
-
-                      <PaginationItem>
-                        <PaginationNext
-                          onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-                          className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-                        />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                )}
-              </>
-            </>
-          )}
-        </section>
 
         {/* CTA Banner */}
         <section className="container-wide py-6">
@@ -1211,6 +1183,17 @@ export default function TradeCityPage() {
             </div>
           </section>
         )}
+
+        <section className="container-wide py-12 border-t border-border/30">
+          <div className="flex justify-center">
+            <Button asChild variant="hero" className="flex items-center gap-3">
+              <a href="#listings">
+                Find a Pro
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </Button>
+          </div>
+        </section>
       </main>
 
       <Footer countryCode={actualCountry} />
