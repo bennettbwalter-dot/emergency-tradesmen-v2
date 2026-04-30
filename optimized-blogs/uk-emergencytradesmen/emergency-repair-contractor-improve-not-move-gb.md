@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the 2026 UK property market, the "Improve Not Move" trend has evolved from a financial necessity into a structural priority. With the average cost of moving home in Britain now exceeding £15,000 in fees and taxes, over 7 million homeowners have chosen to stay put and invest in their current assets. However, "improving" isn't just about new kitchens; it’s about professional emergency repairs and system upgrades that protect your equity from the "Surveyor’s Markdown." As 2026 Building Regulations and EPC mandates become stricter, maintaining your home’s core health—from its wiring to its thermal envelope—is the only way to ensure 2026-level habitability and value. This guide explores how to strategically manage your UK property for the next decade.</p>
+    <p>In the 2026 UK property market, the "Improve Not Move" trend has evolved from a financial necessity into a structural priority. With the average cost of moving home in Britain now exceeding £15,000 in fees and taxes, over 7 million homeowners have chosen to stay put and invest in their current assets. However, "improving" isn't just about new kitchens; it’s about professional emergency repairs and system upgrades that protect your equity from the "Surveyor’s Markdown." As 2026 Building Regulations and EPC mandates become stricter, maintaining your home’s core health-from its wiring to its thermal envelope-is the only way to ensure 2026-level habitability and value. This guide explores how to strategically manage your UK property for the next decade.</p>
 
     <h2>1. UK Asset Protection: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -68,7 +68,7 @@
     <p>Permitted Development (PD) rights are a homeowner's secret weapon in 2026. They allow for "Rapid Upscaling." If you need an extra bedroom or a dedicated home office, you can often start work in weeks rather than months. However, 2026 updates mean that even PD work must be strictly "Building Control Compliant." You may not need a planning officer, but you absolutely need a building inspector to sign off on your foundations, drainage, and structural beams.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> Saltford Manor House in Somerset is Britain's oldest continuously inhabited private house. It was built around 1148—that's nearly 900 years of "Improve Not Move" renovations!</p>
+        <p><strong>Fun Fact!</strong> Saltford Manor House in Somerset is Britain's oldest continuously inhabited private house. It was built around 1148-that's nearly 900 years of "Improve Not Move" renovations!</p>
     </div>
 
     <h2>5. The "Larger Home Extension" Scheme: 6m-8m Rapid Approvals</h2>
@@ -79,7 +79,7 @@
             <li><strong>2026 Speed:</strong> In the current UK economy, this is the fastest way to add a "Living-Kitchen" space, often completing the approval stage in under 42 days.</li>
         </ul>
     </div>
-    <p>For those needing major space, the "Prior Approval" system is the 2026 standard. It bridges the gap between a tiny extension and a full house build. At Emergency Tradesmen, we coordinate with verified structural engineers to ensure your "Prior Approval" designs meet the 2026 load-bearing requirements for large steel spans. This is the "Open Plan" dream realized—light-filled, energy-efficient, and legally sound.</p>
+    <p>For those needing major space, the "Prior Approval" system is the 2026 standard. It bridges the gap between a tiny extension and a full house build. At Emergency Tradesmen, we coordinate with verified structural engineers to ensure your "Prior Approval" designs meet the 2026 load-bearing requirements for large steel spans. This is the "Open Plan" dream realized-light-filled, energy-efficient, and legally sound.</p>
 
     <h2>6. EPC Rating C or Better: The 2030 Mandate for 2026 Homeowners</h2>
     <div class="capsule-box">
@@ -121,17 +121,17 @@
             <li><strong>Part G (Sanitation):</strong> Regulates hot water safety and water efficiency. In 2026, the "110-litres per person" rule is the gold standard for new work.</li>
         </ul>
     </div>
-    <p>Building Regulations are not "Suggestions"—they are the law. In 2026, unauthorized electrical or gas work can lead to the total invalidation of your home insurance. When you use an Emergency Tradesman, we ensure that every repair and improvement is "Logged and Certified." This creates a digital paper trail of quality. When you eventually present your "Management Info" pack to a buyer, this certification is proof that your "Improve Not Move" strategy was executed to professional standards.</p>
+    <p>Building Regulations are not "Suggestions"-they are the law. In 2026, unauthorized electrical or gas work can lead to the total invalidation of your home insurance. When you use an Emergency Tradesman, we ensure that every repair and improvement is "Logged and Certified." This creates a digital paper trail of quality. When you eventually present your "Management Info" pack to a buyer, this certification is proof that your "Improve Not Move" strategy was executed to professional standards.</p>
 
     <h2>9. Open-Plan Zoning: Maximizing Light and Space in Period Homes</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Broken Plan:</strong> The 2026 trend is "Broken Plan"—using internal glazing and partial walls to keep the feeling of space while providing acoustic privacy.</li>
+            <li><strong>Broken Plan:</strong> The 2026 trend is "Broken Plan"-using internal glazing and partial walls to keep the feeling of space while providing acoustic privacy.</li>
             <li><strong>Natural Light:</strong> Roof lanterns and floor-to-ceiling windows are the #1 way to increase the "Perceived Value" of a UK property.</li>
             <li><strong>Flexibility:</strong> Integrated home offices that can be "hidden" behind cabinetry allow for a better work-life balance in the modern UK economy.</li>
         </ul>
     </div>
-    <p>Traditional UK "Cellular" rooms (many small boxes) can feel claustrophobic. The "Improve Not Move" movement specializes in "Structural Apertures"—cutting holes in walls to let the house breathe. In 2026, we utilize ultra-strong, low-profile steel beams that allow for "Flush Ceilings," making an extension feel like a seamless part of the original house. This architectural continuity is what separates a cheap "bolt-on" extension from a high-value property upgrade.</p>
+    <p>Traditional UK "Cellular" rooms (many small boxes) can feel claustrophobic. The "Improve Not Move" movement specializes in "Structural Apertures"-cutting holes in walls to let the house breathe. In 2026, we utilize ultra-strong, low-profile steel beams that allow for "Flush Ceilings," making an extension feel like a seamless part of the original house. This architectural continuity is what separates a cheap "bolt-on" extension from a high-value property upgrade.</p>
 
     <h2>10. Case Study: Saltford Manor (The Enduring Strength of UK Stonework)</h2>
     <div class="capsule-box">
@@ -151,7 +151,7 @@
             <li><strong>Certification:</strong> We handle all Building Control notifications and provide the digital certificates you need for your RICS surveys.</li>
         </ul>
     </div>
-    <p>The "Improve Not Move" strategy only works if you have a reliable team of experts behind you. In 2026, "DIY" is too risky for your primary asset. From emergency leak suppression to the final structural sign-off on your new extension, our verified network of 24/7 tradesmen provides the professional shield your home needs. Don't just stay put—stay safe, stay compliant, and stay valuable. Book your 2026 Property Health Audit today and start your journey to a more resilient British home.</p>
+    <p>The "Improve Not Move" strategy only works if you have a reliable team of experts behind you. In 2026, "DIY" is too risky for your primary asset. From emergency leak suppression to the final structural sign-off on your new extension, our verified network of 24/7 tradesmen provides the professional shield your home needs. Don't just stay put-stay safe, stay compliant, and stay valuable. Book your 2026 Property Health Audit today and start your journey to a more resilient British home.</p>
 
 </main>
 

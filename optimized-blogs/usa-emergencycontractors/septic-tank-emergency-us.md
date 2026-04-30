@@ -116,7 +116,7 @@
         <ul>
             <li><strong>Percolation-Rate Diagnostics:</strong> We use 2026 **Electronic Perc-Testers** to find the exact 2026 "Drainage Speed" of your US soil.</li>
             <li><strong>Nitrate-Leaching Sensors:</strong> We install 2026 sensors that use **2026 AI** to warn you if your 2026 system is leaking nitrogen into the US groundwater.</li>
-            <li><strong>Soil-Density Probing:</strong> We provide **2026 Acoustic Probing** of your US leach field—the primary 2026 attractor for the "Invisible Soil-Gas Effect."</li>
+            <li><strong>Soil-Density Probing:</strong> We provide **2026 Acoustic Probing** of your US leach field-the primary 2026 attractor for the "Invisible Soil-Gas Effect."</li>
         </ul>
     </div>
     <p>In 2026, we solve the *biology* of the threat. A tank pump is useless if the 2026 soil is dead. We provide the **2026 Microbial Integrity Audit**, ensuring your land is 2026-vibrant and your system 2026-resilient. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Septic Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"EPA Digital ID"** in 2026—if your technician isn't **2026 Septic-Certified**, don't let them pump your 2026 system.</li>
-            <li><strong>CANNOT:</strong> Flush "Antibacterial Hand Soap" or "Bleach" in 2026—in 2026, these are known to be the #1 cause of 2026 US septic bacterial 2026 collapse.</li>
+            <li><strong>CAN:</strong> Check your **"EPA Digital ID"** in 2026-if your technician isn't **2026 Septic-Certified**, don't let them pump your 2026 system.</li>
+            <li><strong>CANNOT:</strong> Flush "Antibacterial Hand Soap" or "Bleach" in 2026-in 2026, these are known to be the #1 cause of 2026 US septic bacterial 2026 collapse.</li>
             <li><strong>CAN:</strong> Request an **"Effluent Stability Report"** after any 2026 bio-shocking service.</li>
-            <li><strong>CANNOT:</strong> Drive your 2026 car over your **2026 Septic Field**—the 2026 soil-compaction will kill your system's 2026 drainage capacity.</li>
+            <li><strong>CANNOT:</strong> Drive your 2026 car over your **2026 Septic Field**-the 2026 soil-compaction will kill your system's 2026 drainage capacity.</li>
         </ul>
     </div>
 

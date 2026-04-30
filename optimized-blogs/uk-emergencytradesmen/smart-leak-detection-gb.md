@@ -49,7 +49,7 @@
             <li><strong>Battery Life:</strong> 2026 meters are built with a **15-year battery life** and use low-power NB-IoT (Narrowband IoT) signals to transmit data through thick pavement covers.</li>
         </ul>
     </div>
-    <p>The 2026 ultrasonic revolution has made leak detection a digital science. If your water company contacts you about a "Continuous Flow Pattern," it's because their AI has analyzed your 2026 meter data and seen a profile that isn't a shower or a washing machine—it's a burst. In 2026, the meter knows more about your plumbing than you do. </p>
+    <p>The 2026 ultrasonic revolution has made leak detection a digital science. If your water company contacts you about a "Continuous Flow Pattern," it's because their AI has analyzed your 2026 meter data and seen a profile that isn't a shower or a washing machine-it's a burst. In 2026, the meter knows more about your plumbing than you do. </p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If your property was built before 1970, your supply pipe is likely **Lead** or **Galvanised Steel**. In 2026, smart meters are highly sensitive to the scaling within these old pipes. If your flow rate is dropping, the meter might be fine, but your pipes are "Choking" from the inside. Ask about our 2026 **Pipe-Line Grant** for lead replacement.</p>
@@ -66,7 +66,7 @@
     <p>In 2026, we don't just "Watch and Wait." We **Intercept**. A smart shut-off valve is the \#1 way to prevent a £20,000 flood claim. In 2026, we've seen insurers make these mandatory for "High-Value" properties or those with history of plumbing failures. We are **IoT-Plumbing certified** for all 2026 valve installations.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first water meters were patented in the 1850s. They used a "bucket-wheel" design that was notoriously inaccurate. In 2026, your ultrasonic meter is accurate to within 0.5%—that's the difference between a dripping tap and a dry wallet!</p>
+        <p><strong>Fun Fact!</strong> The first water meters were patented in the 1850s. They used a "bucket-wheel" design that was notoriously inaccurate. In 2026, your ultrasonic meter is accurate to within 0.5%-that's the difference between a dripping tap and a dry wallet!</p>
     </div>
 
     <h2>5. Acoustic Leak Detection: The 2026 Professional Response</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Smart Water Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your 2026 water app at least once a week—look for the "Zero-Flow" periods at night.</li>
-            <li><strong>CANNOT:</strong> Cover your boundary box with soil or decking—it blocks the NB-IoT signal and prevents emergency access.</li>
+            <li><strong>CAN:</strong> Check your 2026 water app at least once a week-look for the "Zero-Flow" periods at night.</li>
+            <li><strong>CANNOT:</strong> Cover your boundary box with soil or decking-it blocks the NB-IoT signal and prevents emergency access.</li>
             <li><strong>CAN:</strong> Set your smart valve to "Away Mode" for even a 24-hour absence in 2026.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Waste of Water" notice—the legal consequences in 2026 are severe.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Waste of Water" notice-the legal consequences in 2026 are severe.</li>
         </ul>
     </div>
 

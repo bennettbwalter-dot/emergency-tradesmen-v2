@@ -66,7 +66,7 @@
     <p>In 2026, we solve the *source*, not just the symptom. A backup is just a warning. We Provide **2026 Structural Drainage Diagnostics**, ensuring the environment is fixed so the backup never returns. We are US leaders in **2026 Non-Destructive Sewer Audits**. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> In 2026, some US cities are using **"Pipelining Drones"**—miniature robots that can crawl 500 feet into a sewer to perform 2026 spot-welds without digging! </p>
+        <p><strong>Fun Fact!</strong> In 2026, some US cities are using **"Pipelining Drones"**-miniature robots that can crawl 500 feet into a sewer to perform 2026 spot-welds without digging! </p>
     </div>
 
     <h2>5. Identifying "Sub-Slab Ingress": The 2026 Leak Audit</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Drainage Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Cleanout Port"** in 2026—if it's buried under 2 feet of dirt, we can't perform 2026 emergency service.</li>
-            <li><strong>CANNOT:</strong> Flush "Flushable Wipes"—in 2026, these are known to be the #1 cause of 2026 municipal US sewer "Fatbergs."</li>
+            <li><strong>CAN:</strong> Check your **"Cleanout Port"** in 2026-if it's buried under 2 feet of dirt, we can't perform 2026 emergency service.</li>
+            <li><strong>CANNOT:</strong> Flush "Flushable Wipes"-in 2026, these are known to be the #1 cause of 2026 municipal US sewer "Fatbergs."</li>
             <li><strong>CAN:</strong> Request a **"4K Flow-Verification Scan"** after any 2026 hydro-jetting service.</li>
-            <li><strong>CANNOT:</strong> Use "Drano" for a main-line backup—in 2026, these chemicals are known to damage **2026 Sewer Seals** and won't clears roots.</li>
+            <li><strong>CANNOT:</strong> Use "Drano" for a main-line backup-in 2026, these chemicals are known to damage **2026 Sewer Seals** and won't clears roots.</li>
         </ul>
     </div>
 

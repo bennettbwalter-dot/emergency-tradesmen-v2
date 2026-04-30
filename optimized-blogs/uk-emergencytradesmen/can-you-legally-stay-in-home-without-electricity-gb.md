@@ -25,7 +25,7 @@
         <ul>
             <li><strong>Legal Status:</strong> Under the Homes (Fitness for Human Habitation) Act 2018, a property without power (and hivyo heating/cooking) is often legally "Unfit."</li>
             <li><strong>Awaab’s Law (2026):</strong> Mandatory response times for hazards like "Excess Cold" and "Electrical Hazard" are now strictly enforced by the Regulator of Social Housing.</li>
-            <li><strong>HHSRS Categories:</strong> A total power failure is typically a "Category 1 Hazard"—a serious and immediate risk to health that requires council intervention.</li>
+            <li><strong>HHSRS Categories:</strong> A total power failure is typically a "Category 1 Hazard"-a serious and immediate risk to health that requires council intervention.</li>
             <li><strong>The 24-Hour Duty:</strong> Landlords must provide alternative accommodation (e.g., a hotel) if the power loss makes a rental property uninhabitable.</li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
             <li><strong>Repair & Deduct:</strong> While legally complex, the 2025/2026 legal trends support tenants who pay for emergency electricians themselves when the landlord is uncontactable.</li>
         </ul>
     </div>
-    <p>In 2026, the "24-Hour Duty" is the gold standard for emergency repairs. If a consumer unit fails or a circuit is dangerous, the landlord must act with "Imminent Speed." If they fail to do so, Environmental Health officers can issue an "Emergency Remedial Action" notice, performing the repair themselves and sending the bill—along with a hefty fine—to the landlord. This ensures that UK tenants are never left in the dark due to a landlord's financial delay.</p>
+    <p>In 2026, the "24-Hour Duty" is the gold standard for emergency repairs. If a consumer unit fails or a circuit is dangerous, the landlord must act with "Imminent Speed." If they fail to do so, Environmental Health officers can issue an "Emergency Remedial Action" notice, performing the repair themselves and sending the bill-along with a hefty fine-to the landlord. This ensures that UK tenants are never left in the dark due to a landlord's financial delay.</p>
 
     <h2>4. HHSRS "Excess Cold" Hazard: When the Council Steps In</h2>
     <div class="capsule-box">
@@ -66,7 +66,7 @@
     <p>The Housing Health and Safety Rating System (HHSRS) is the council's primary tool for enforcement. "Excess Cold" is a Category 1 hazard. If your electricity failure means your boiler cannot ignite or your electric heaters won't turn on during a British winter, the house is legally a threat to life. In these cases, the council's Environmental Health team becomes your strongest ally, capable of forcing a landlord's hand or declaring the home unfit for habitation.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The 1848 Public Health Act was the first time the UK government legislated to improve sanitation. It defined "nuisances" so broadly that they included everything from "bad paving" to "refuse and smells"—the 19th-century version of a habitability check!</p>
+        <p><strong>Fun Fact!</strong> The 1848 Public Health Act was the first time the UK government legislated to improve sanitation. It defined "nuisances" so broadly that they included everything from "bad paving" to "refuse and smells"-the 19th-century version of a habitability check!</p>
     </div>
 
     <h2>5. Awaab's Law (Phase 2): New Mandatory Response Times in 2026</h2>
@@ -94,7 +94,7 @@
     <h2>7. Homeowners and the "Golden Rule": When is it Neglect vs. Victimhood?</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>The Autonomy:</strong> As a homeowner, you have the right to stay in your own home without power—up to a point.</li>
+            <li><strong>The Autonomy:</strong> As a homeowner, you have the right to stay in your own home without power-up to a point.</li>
             <li><strong>Social Services:</strong> If children or dependent adults are present, and the house is cold/dark/unsanitary, Social Services can intervene under the Children Act 1989.</li>
             <li><strong>Public Health:</strong> If your lack of power leads to a biohazard (e.g., sewage backup you're not fixing), you can be cited under the Public Health Act 1984.</li>
         </ul>
@@ -149,7 +149,7 @@
             <li><strong>Safety:</strong> We perform a full "Earth Leakage" test to ensure that when the lights come back on, the house doesn't catch fire.</li>
         </ul>
     </div>
-    <p>If your power is out, you need a decision: "Fix it or Leave?" Our verified network of UK tradesmen provides the technical expertise to make that call. We don't just fix a wire; we evaluate the "Total Habitability" of your home in line with 2026 laws. Whether you need a 2 AM fuse box replacement or a formal report for the council, we are your first line of defense. Don't sit in the dark—call a specialist and reclaim your right to a safe, powered home.</p>
+    <p>If your power is out, you need a decision: "Fix it or Leave?" Our verified network of UK tradesmen provides the technical expertise to make that call. We don't just fix a wire; we evaluate the "Total Habitability" of your home in line with 2026 laws. Whether you need a 2 AM fuse box replacement or a formal report for the council, we are your first line of defense. Don't sit in the dark-call a specialist and reclaim your right to a safe, powered home.</p>
 
 </main>
 

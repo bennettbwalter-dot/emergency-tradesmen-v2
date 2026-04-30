@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Contractor Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"2026 OSHA Compliance Status"**—if your facility doesn't have a 2026-spec digital safety plan, you face 2026 US federal fines.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Thermal Warning" in 2026—in 2026, **2026 Predictive Energy Alerts** are the standard for facility safety.</li>
+            <li><strong>CAN:</strong> Check your **"2026 OSHA Compliance Status"**-if your facility doesn't have a 2026-spec digital safety plan, you face 2026 US federal fines.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Thermal Warning" in 2026-in 2026, **2026 Predictive Energy Alerts** are the standard for facility safety.</li>
             <li><strong>CAN:</strong> Request a **"2026 Digital Evidence Pack"** after any 2026 managed recovery service.</li>
-            <li><strong>CANNOT:</strong> Use "Standard Software" for 2026 US facility controls—you must use **2026 Matter-Certified Platforms** to meet 2026 standards.</li>
+            <li><strong>CANNOT:</strong> Use "Standard Software" for 2026 US facility controls-you must use **2026 Matter-Certified Platforms** to meet 2026 standards.</li>
         </ul>
     </div>
 

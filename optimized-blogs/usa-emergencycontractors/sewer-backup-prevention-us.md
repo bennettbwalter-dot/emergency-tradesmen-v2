@@ -35,7 +35,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Backwater Valve Location:</strong> 2026 codes emphasize accessibility; valves must be installed with a "Clean-Out" extension for regular inspection.</li>
-            <li><strong>Material Safety:</strong> Components must be resistant to "Sewer Gas Corrosion"—ABS and PVC-DWV are the 2026 material standards.</li>
+            <li><strong>Material Safety:</strong> Components must be resistant to "Sewer Gas Corrosion"-ABS and PVC-DWV are the 2026 material standards.</li>
             <li><strong>The "Full-Port" Standard:</strong> 2026 valves must not restrict normal waste flow, preventing "Internal Clogs" that were common in 2010-era designs.</li>
         </ul>
     </div>
@@ -59,7 +59,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The "Basement Gurgle":</strong> If your floor drain "Talks" to you when nobody is running water, the street sewer is reaching its limit.</li>
-            <li><strong>The "Reverse Waterfall":</strong> Raw sewage entering through your lowest fixture—this is a 2026 Category 3 biological emergency.</li>
+            <li><strong>The "Reverse Waterfall":</strong> Raw sewage entering through your lowest fixture-this is a 2026 Category 3 biological emergency.</li>
             <li><strong>External Clues:</strong> Street manholes with water "Popping" out of the vent-holes are a 100% indicator that your lateral is about to surcharge.</li>
         </ul>
     </div>
@@ -105,7 +105,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The Ecosystem:</strong> Your 2026 backwater valve can "Talk" to your sump pump. If the sewer is backing up, the sump pump can go into "High-Performance" mode to keep groundwater away.</li>
-            <li><strong>Remote Valve Status:</strong> Check your 2026 app to ensure the backflow flap is seated properly—no need to go into the crawl space.</li>
+            <li><strong>Remote Valve Status:</strong> Check your 2026 app to ensure the backflow flap is seated properly-no need to go into the crawl space.</li>
             <li><strong>Battery Backup:</strong> Modern 2026 high-end "Power-Valves" use a small servo to physically *force* the valve shut if a backup is detected, powered by a 72-hour battery.</li>
         </ul>
     </div>
@@ -129,15 +129,15 @@
             <li><strong>Solenoid Service:</strong> For "Power-Valves," we perform a **Digital Torque Test** to ensure the motor has the 2026-spec force to crush through debris.</li>
         </ul>
     </div>
-    <p>In 2026, we are "Waste Dynamics Specialists." A sewer backup prevention system is a machine that must work perfectly once every 5 years—so it must be maintained every 1 year. We provide the **2026 Component-Audit**, ensuring your "Invisible Defense" is ready for its 15 minutes of fame during a storm. </p>
+    <p>In 2026, we are "Waste Dynamics Specialists." A sewer backup prevention system is a machine that must work perfectly once every 5 years-so it must be maintained every 1 year. We provide the **2026 Component-Audit**, ensuring your "Invisible Defense" is ready for its 15 minutes of fame during a storm. </p>
 
     <div class="dos-donts">
         <h3>US Sewer Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Inspect your backwater valve every spring—if there is "Sludge" on the seat, wipe it off for a 2026 seal.</li>
-            <li><strong>CANNOT:</strong> Flush "Wipes" or "Dental Floss"—they are the \#1 way to prop a backflow valve OPEN during a backup in 2026.</li>
+            <li><strong>CAN:</strong> Inspect your backwater valve every spring-if there is "Sludge" on the seat, wipe it off for a 2026 seal.</li>
+            <li><strong>CANNOT:</strong> Flush "Wipes" or "Dental Floss"-they are the \#1 way to prop a backflow valve OPEN during a backup in 2026.</li>
             <li><strong>CAN:</strong> Install a "Secondary" backwater valve on just the basement branch-line for extra 2026 redundancy.</li>
-            <li><strong>CANNOT:</strong> Bury your backwater valve box under a deck or tile—you MUST have access for 2026 regulatory checks.</li>
+            <li><strong>CANNOT:</strong> Bury your backwater valve box under a deck or tile-you MUST have access for 2026 regulatory checks.</li>
         </ul>
     </div>
 

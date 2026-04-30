@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, a commercial gas failure is a "Operational Shutdown" that requires more than just a repair—it requires **Strict Regulatory Alignment**. With the 2026 updates to the **Gas Safe Register Legislative, Normative & Informative Document List**, standards for commercial boiler efficiency and safety have reached a new 2026 benchmark. Specifically, the push for **Hydrogen-Ready** appliances and the 2026 mandate for **ErP 92% Efficiency** have transformed the technical landscape of UK commercial heating. The 2026 standard for UK commercial gas response involves **OpenTherm Digital Calibration**, **Class VI Control Diagnostics**, and **Mandatory Electronic Certification**. Whether you've suffered a gas leak in your 2026 hotel, a major boiler lockout in your 2026 care home, or a terminal flue-component failure, the 2026 standard involves **Precision Combustion Analysis** and **Low Flow Temperature Validation**. We don't just "Fix the Flame"; we ensure your facility's 2026 net-zero compliance. This guide provides the technical 2026 standard for UK commercial gas emergencies and property-wide infrastructure resilience.</p>
+    <p>In the UK of 2026, a commercial gas failure is a "Operational Shutdown" that requires more than just a repair-it requires **Strict Regulatory Alignment**. With the 2026 updates to the **Gas Safe Register Legislative, Normative & Informative Document List**, standards for commercial boiler efficiency and safety have reached a new 2026 benchmark. Specifically, the push for **Hydrogen-Ready** appliances and the 2026 mandate for **ErP 92% Efficiency** have transformed the technical landscape of UK commercial heating. The 2026 standard for UK commercial gas response involves **OpenTherm Digital Calibration**, **Class VI Control Diagnostics**, and **Mandatory Electronic Certification**. Whether you've suffered a gas leak in your 2026 hotel, a major boiler lockout in your 2026 care home, or a terminal flue-component failure, the 2026 standard involves **Precision Combustion Analysis** and **Low Flow Temperature Validation**. We don't just "Fix the Flame"; we ensure your facility's 2026 net-zero compliance. This guide provides the technical 2026 standard for UK commercial gas emergencies and property-wide infrastructure resilience.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Commercial Gas 2026</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Commercial Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"2026 Hydrogen Ready Badge"**—if your boiler isn't 2026-spec, you face 2026 conversion costs later.</li>
-            <li><strong>CANNOT:</strong> Allow "Standard Air Bricks" to be blocked in 2026—in 2026, **2026 Controlled Ventilation** is the standard for commercial gas CO-safety.</li>
+            <li><strong>CAN:</strong> Check your **"2026 Hydrogen Ready Badge"**-if your boiler isn't 2026-spec, you face 2026 conversion costs later.</li>
+            <li><strong>CANNOT:</strong> Allow "Standard Air Bricks" to be blocked in 2026-in 2026, **2026 Controlled Ventilation** is the standard for commercial gas CO-safety.</li>
             <li><strong>CAN:</strong> Request a **"2026 Flue Gas Report"** after any 2026 commercial gas emergency service.</li>
-            <li><strong>CANNOT:</strong> Use "Standard Solder" for 2026 commercial gas lines—you must use **2026 High-Temp Gas-Resistant Fittings** to meet 2026 Gas Safe standards.</li>
+            <li><strong>CANNOT:</strong> Use "Standard Solder" for 2026 commercial gas lines-you must use **2026 High-Temp Gas-Resistant Fittings** to meet 2026 Gas Safe standards.</li>
         </ul>
     </div>
 

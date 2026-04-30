@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the home EV charger has transitioned from a high-tech accessory to a critical link in the nation's energy infrastructure. With the mass adoption of bidirectional charging (Vehicle-to-Home or V2H), your car is no longer just a vehicle—it is your home's backup battery during 2026 grid instability events. However, the continuous high-load nature of EV charging (typically 7kW for 8+ hours) puts unprecedented stress on domestic wiring. When your charger fails at 10 PM, it's not just a transport issue; it's a potential safety hazard and a disruption to your 2026 "Smart Energy Plan." Navigating the complexities of **BS 7671 A3:2024** and the **Smart Charge Point Regulations** requires more than a standard electrician; it requires a resilience specialist. This guide outlines the definitive UK protocol for emergency EV charger repair in 2026.</p>
+    <p>In the UK of 2026, the home EV charger has transitioned from a high-tech accessory to a critical link in the nation's energy infrastructure. With the mass adoption of bidirectional charging (Vehicle-to-Home or V2H), your car is no longer just a vehicle-it is your home's backup battery during 2026 grid instability events. However, the continuous high-load nature of EV charging (typically 7kW for 8+ hours) puts unprecedented stress on domestic wiring. When your charger fails at 10 PM, it's not just a transport issue; it's a potential safety hazard and a disruption to your 2026 "Smart Energy Plan." Navigating the complexities of **BS 7671 A3:2024** and the **Smart Charge Point Regulations** requires more than a standard electrician; it requires a resilience specialist. This guide outlines the definitive UK protocol for emergency EV charger repair in 2026.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK EV Charging 2026</h2>
     <div class="capsule-box">
@@ -44,7 +44,7 @@
     <h2>3. PEN Conductor Faults: Why Your Charger "Locked Out" for Safety</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Regulation 722.411.4.1:</strong> The IET requires that EV chargers on PME (Protective Multiple Earthing) supplies—common in the UK—have a way to detect a broken neutral (PEN) conductor.</li>
+            <li><strong>Regulation 722.411.4.1:</strong> The IET requires that EV chargers on PME (Protective Multiple Earthing) supplies-common in the UK-have a way to detect a broken neutral (PEN) conductor.</li>
             <li><strong>The Symptom:</strong> The charger stops power and displays a specific error code. This is a life-safety "Island" event meant to prevent the vehicle's chassis from becoming live.</li>
             <li><strong>The Fix:</strong> This is a grid-side or internal earthing issue. It requires a specialist with a "PEN Fault Simulator" to diagnose and rectify safely.</li>
         </ul>
@@ -66,7 +66,7 @@
     <p>Thermal fatigue is the \#1 hardware killer in 2026. Cheap or legacy installations from the early 2020s are now failing as their components reach their "Cycle Limit." We specialize in "Component-Level Repair," replacing worn-out contactors and scorched internal terminal blocks to extend the life of your expensive wallbox without needing a full £1,000 replacement.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first electric taxi, the Bersey, was introduced to London streets in 1897. It was nicknamed the "Hummingbird" due to its quiet motor. 130 years later, we are still perfecting the "Hum"—but now the Hummingbird can power your house during a blackout!</p>
+        <p><strong>Fun Fact!</strong> The first electric taxi, the Bersey, was introduced to London streets in 1897. It was nicknamed the "Hummingbird" due to its quiet motor. 130 years later, we are still perfecting the "Hum"-but now the Hummingbird can power your house during a blackout!</p>
     </div>
 
     <h2>5. The "Smart" Failure: Troubleshooting Connectivity & Security Lockdowns</h2>
@@ -74,7 +74,7 @@
         <ul>
             <li><strong>Cyber Security:</strong> The Smart Charge Point Regulations 2021 mandate that chargers have a "Security Certificate." If this expires or the wallbox detects a tampering attempt, it will enter "Panic Mode."</li>
             <li><strong>Offline Lockout:</strong> Many 2026 chargers will not charge at full speed (dropping to 1.4kW) if they lose connection to the national "Demand Side Response" grid.</li>
-            <li><strong>The 2026 Reset:</strong> A professional reset involves re-authorizing the device's MAC address with the manufacturer's secure server—a task that requires authorized trade credentials.</li>
+            <li><strong>The 2026 Reset:</strong> A professional reset involves re-authorizing the device's MAC address with the manufacturer's secure server-a task that requires authorized trade credentials.</li>
         </ul>
     </div>
     <p>In 2026, a "Broken Charger" is often just a "Confused Computer." Because of the high security required to prevent grid-level cyber attacks, home chargers are now highly sensitive to network interference. We provide "Digital Triage," often restoring your charger's functionality via a secure remote link or a firmware re-flash on-site.</p>
@@ -109,7 +109,7 @@
             <li><strong>Compliance Labels:</strong> All 2026 repairs must preserve the tamper-evident seals mandated by OZEV (Office for Zero Emission Vehicles).</li>
         </ul>
     </div>
-    <p>Compliance is non-negotiable in 2026. The UK government can issue fines if smart chargers are found to have their grid-protection features disabled. When we repair your unit, we perform a "Compliance Reset," ensuring that all mandated security features—including the randomised start-time—are active and documented for OZEV records.</p>
+    <p>Compliance is non-negotiable in 2026. The UK government can issue fines if smart chargers are found to have their grid-protection features disabled. When we repair your unit, we perform a "Compliance Reset," ensuring that all mandated security features-including the randomised start-time-are active and documented for OZEV records.</p>
 
     <h2>9. RCD Selection: Why Your 2026 Repair Requires a Type B or EV-spec RCD</h2>
     <div class="capsule-box">
@@ -119,7 +119,7 @@
             <li><strong>Safety Priority:</strong> A 2026 emergency repair isn't finished until we verify that a DC fault at the car won't disable the rest of your home's safety switches.</li>
         </ul>
     </div>
-    <p>Using the wrong RCD is the \#1 professional error in EVSE repair. In 2026, we see many "Budget" installers using Type A RCDs without DC protection, which is a lethal code violation. We use precision testers to inject 6mA of DC into the circuit to verify that your protection is actually operational. Don't settle for a "Visual Check"—demand a 2026 Digital RCD Test.</p>
+    <p>Using the wrong RCD is the \#1 professional error in EVSE repair. In 2026, we see many "Budget" installers using Type A RCDs without DC protection, which is a lethal code violation. We use precision testers to inject 6mA of DC into the circuit to verify that your protection is actually operational. Don't settle for a "Visual Check"-demand a 2026 Digital RCD Test.</p>
 
     <h2>10. Case Study: The "Cold Morning" Fail and 30-Minute Recovery</h2>
     <div class="capsule-box">
@@ -139,7 +139,7 @@
             <li><strong>Future-Proofing:</strong> Every repair includes a "2026 Hub Audit," assessing your current wiring for future V2H or heat-pump integration.</li>
         </ul>
     </div>
-    <p>Your EV charger is the heartbeat of your 2026 commute. Don't trust it to a general handyman—rely on the specialists who understand the **2026 UK Resilience Infrastructure.** We fix the hardware, secure the software, and ensure your home is compliant with the latest **BS 7671 Amendments.** Our 24/7 network is ready to respond. Call us now for an immediate professional intervention and get back on the road tonight.</p>
+    <p>Your EV charger is the heartbeat of your 2026 commute. Don't trust it to a general handyman-rely on the specialists who understand the **2026 UK Resilience Infrastructure.** We fix the hardware, secure the software, and ensure your home is compliant with the latest **BS 7671 Amendments.** Our 24/7 network is ready to respond. Call us now for an immediate professional intervention and get back on the road tonight.</p>
 
 </main>
 

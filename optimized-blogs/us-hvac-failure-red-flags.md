@@ -5,7 +5,7 @@ As the first major heatwave of 2026 approaches, millions of American homeowners 
 > **WARNING:** If you detect a burning smell or see smoke coming from your outdoor condenser or indoor air handler, shut off the system's power at the circuit breaker immediately. This often indicates a failed capacitor or an electrical short that can lead to a house fire. Do not attempt to repair high-voltage components yourself; contact a [licensed HVAC specialist](/tx/houston/emergency-hvac) immediately.
 
 ## 1. The 'Clicking' or 'Grinding' Sound on Startup
-A healthy AC system should start with a smooth hum. If you hear a series of rapid clicks or a metal-on-metal grinding sound, your contactors are failing or your motor bearings have seized. In the US, the extreme humidity of the South and the dust of the West can accelerate this wear. Ignoring these sounds will eventually cause the compressor to burn out—a repair that often costs as much as a new unit.
+A healthy AC system should start with a smooth hum. If you hear a series of rapid clicks or a metal-on-metal grinding sound, your contactors are failing or your motor bearings have seized. In the US, the extreme humidity of the South and the dust of the West can accelerate this wear. Ignoring these sounds will eventually cause the compressor to burn out-a repair that often costs as much as a new unit.
 
 ## 2. Short Cycling (Turning On and Off Frequently)
 Short cycling is when your AC runs for only a few minutes before shutting down, only to restart moments later. This is often caused by a clogged air filter or a failing thermostat, but it can also signal a refrigerant leak. Short cycling puts immense strain on the compressor and can increase your electricity bill by 40%. Check your filter first, but if the cycle continues, you need an [emergency AC diagnostic](/us/emergency-hvac).
@@ -23,7 +23,7 @@ If the air coming out of your vents feels lukewarm even when the thermostat is s
 Your AC's secondary job is dehumidification. If your home feels "sticky" or "heavy" despite the temperature being controlled, the system is failing to pull moisture from the air. This often points to a "blown" blower motor or an oversized system that is not running long enough to complete a dehumidification cycle.
 
 ## 7. Water Leaking Around the Indoor Unit
-Water pooling near your furnace or air handler is usually a sign of a clogged condensate drain line. While it sounds minor, a backed-up drain line can cause thousands of dollars in water damage to your flooring and subfloor. Most modern units have a float switch to kill the power if water backs up—if yours doesn't, you're at risk of a major flood.
+Water pooling near your furnace or air handler is usually a sign of a clogged condensate drain line. While it sounds minor, a backed-up drain line can cause thousands of dollars in water damage to your flooring and subfloor. Most modern units have a float switch to kill the power if water backs up-if yours doesn't, you're at risk of a major flood.
 
 ---
 

@@ -24,7 +24,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Thermal Shutdown:</strong> 45% of 2026 US charger failures are caused by heat-related resistance in NEMA 14-50 receptacles or NACS adapters.</li>
-            <li><strong>The "Qualified Person" Rule:</strong> NEC 2026 mandates that permanently installed EV supply equipment (EVSE) must be installed and repaired by "qualified persons"—meaning licensed electricians.</li>
+            <li><strong>The "Qualified Person" Rule:</strong> NEC 2026 mandates that permanently installed EV supply equipment (EVSE) must be installed and repaired by "qualified persons"-meaning licensed electricians.</li>
             <li><strong>NACS Transition:</strong> 2026 is the "Legacy Year" where millions of J1772-to-NACS adapters are reaching their wear-limit, leading to communication faults and charging lockouts.</li>
             <li><strong>GFCI Thresholds:</strong> NEC 2026 clarifies GFCI requirements for 240V outlets, often causing "Nuisance Tripping" in older 2022-2024 installations that lack modern harmonic filtering.</li>
         </ul>
@@ -66,7 +66,7 @@
     <p>Thermal failure is the \#1 cause of 2026 US electrical fires related to EVs. If your charger is plugged into a wall outlet rather than being hardwired, you need a "Torque Audit." We replace "Residential-Grade" outlets with "Industrial-Grade" Hubbell or Bryant sockets that are specifically designed for the massive thermal loads of 2026 charging. Hardwiring is always the safest 2026 recommendation.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first US electric car was built by William Morrison in Des Moines, Iowa, around 1890. It had a top speed of 14 mph and used 24 battery cells. In 2026, we charge at 11,500 Watts—enough to power Morrison's car for a whole year in just one afternoon!</p>
+        <p><strong>Fun Fact!</strong> The first US electric car was built by William Morrison in Des Moines, Iowa, around 1890. It had a top speed of 14 mph and used 24 battery cells. In 2026, we charge at 11,500 Watts-enough to power Morrison's car for a whole year in just one afternoon!</p>
     </div>
 
     <h2>5. Smart Logic Board Failures: Troubleshooting Cloud-Lockouts and Surge Damage</h2>
@@ -87,7 +87,7 @@
             <li><strong>The Fix:</strong> We install "EV-Grade" GFCI breakers that use advanced harmonic filtering to distinguish between a life-safety ground fault and normal EV battery behavior.</li>
         </ul>
     </div>
-    <p>Nuisance tripping is the \#1 frustration for 2026 US EV owners. You wake up to a 20% battery because a 2 AM grid-shift tripped your GFCI. We specialize in "Harmonic Audits," ensuring your 2026 safety switches are the right "Class" for your specific vehicle and charger combination. Don't fight your breaker—let us optimize it. </p>
+    <p>Nuisance tripping is the \#1 frustration for 2026 US EV owners. You wake up to a 20% battery because a 2 AM grid-shift tripped your GFCI. We specialize in "Harmonic Audits," ensuring your 2026 safety switches are the right "Class" for your specific vehicle and charger combination. Don't fight your breaker-let us optimize it. </p>
 
     <h2>7. Level 2 vs. Level 3 Home Charging: Emergency Repair Differences</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Home EV Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your NEMA 14-50 plug monthly for discoloration—heat is the \#1 sign of an impending 2026 failure.</li>
-            <li><strong>CANNOT:</strong> Use a standard orange extension cord for your EV—even for "Level 1" charging, this is a severe 2026 fire risk.</li>
+            <li><strong>CAN:</strong> Check your NEMA 14-50 plug monthly for discoloration-heat is the \#1 sign of an impending 2026 failure.</li>
+            <li><strong>CANNOT:</strong> Use a standard orange extension cord for your EV-even for "Level 1" charging, this is a severe 2026 fire risk.</li>
             <li><strong>CAN:</strong> Upgrade to a **Hardwired NACS** station for 2026 to eliminate the most common points of thermal failure.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Ground Fault" light—it means current is leaking into your garage floor or car chassis.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Ground Fault" light-it means current is leaking into your garage floor or car chassis.</li>
         </ul>
     </div>
 

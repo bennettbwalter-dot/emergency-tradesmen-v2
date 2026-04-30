@@ -39,7 +39,7 @@
             <li><strong>Hemoglobin Affinity:</strong> CO binds to your red blood cells 210 times more readily than oxygen, essentially "starving" your vital organs while you breathe.</li>
         </ul>
     </div>
-    <p>Historically, humanity has used "proxy" indicators like the famous miners' canaries to detect this invisible threat. In 2026, your "canary" is a calibrated electrochemical sensor. Understanding the historical danger of CO—from ancient charcoal braziers to modern blocked chimneys—underlines why 2026 UK building regulations treat gas safety with such extreme gravity. You cannot smell a leak; you can only engineer against it.</p>
+    <p>Historically, humanity has used "proxy" indicators like the famous miners' canaries to detect this invisible threat. In 2026, your "canary" is a calibrated electrochemical sensor. Understanding the historical danger of CO-from ancient charcoal braziers to modern blocked chimneys-underlines why 2026 UK building regulations treat gas safety with such extreme gravity. You cannot smell a leak; you can only engineer against it.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If you have a log burner or open fire, your risk profile is higher. In 2026, we recommend interlinking your CO alarm with your smoke alarm system, ensuring that if a flue blockage causes CO backup in the lounge, the alarm sounds in the bedrooms upstairs.</p>
@@ -53,7 +53,7 @@
             <li><strong>Tenant Rights:</strong> Under the 2026 updates to the Smoke and Carbon Monoxide Alarm Regulations, landlords MUST repair or replace faulty alarms within 24 hours of notification.</li>
         </ul>
     </div>
-    <p>In 2026, a "generic" alarm from a discount store is no longer sufficient. To be compliant for insurance and legal purposes, your detector must carry the British Standard Kitemark and the CE/UKCA mark. These units are tested to activate within 3 minutes of detecting 300ppm (parts per million)—the threshold where CO becomes rapidly lethal. If your alarm lacks these marks, it is a liability, not a safety device.</p>
+    <p>In 2026, a "generic" alarm from a discount store is no longer sufficient. To be compliant for insurance and legal purposes, your detector must carry the British Standard Kitemark and the CE/UKCA mark. These units are tested to activate within 3 minutes of detecting 300ppm (parts per million)-the threshold where CO becomes rapidly lethal. If your alarm lacks these marks, it is a liability, not a safety device.</p>
 
     <h2>4. Landlords vs. Homeowners: The £5,000 Compliance Crisis</h2>
     <div class="capsule-box">
@@ -66,7 +66,7 @@
     <p>The UK rental sector in 2026 is governed by "Zero Tolerance" for gas safety lapses. If you are a landlord, a missing CO alarm during an annual Gas Safety Check (CP12) will result in a "Danger to Life" notice for the property. For homeowners, while the law is less prescriptive, the physical risk is identical. We help both groups achieve 100% compliance through professional installation and certification of 10-year sealed-battery units.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> Miners used canaries to detect CO until as late as 1986 in the UK! The birds were replaced by "electronic canaries"—the early ancestors of the digital sensors you use in your home today.</p>
+        <p><strong>Fun Fact!</strong> Miners used canaries to detect CO until as late as 1986 in the UK! The birds were replaced by "electronic canaries"-the early ancestors of the digital sensors you use in your home today.</p>
     </div>
 
     <h2>5. Recognizing the "Lazy Flame": Visual Warning Signs</h2>
@@ -85,11 +85,11 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The "Headache" Trap:</strong> CO poisoning causes a dull, throbbing frontal headache that often improves when you leave the house.</li>
-            <li><strong>The Group Effect:</strong> If everyone in the house (and the pets) feels ill at the same time, it is unlikely to be a cold or flu—it is likely the air.</li>
+            <li><strong>The Group Effect:</strong> If everyone in the house (and the pets) feels ill at the same time, it is unlikely to be a cold or flu-it is likely the air.</li>
             <li><strong>The "Cherry Red" Myth:</strong> Contrary to urban legends, victims of CO poisoning rarely turn "cherry red" until after death; stay alert for pale or blue-tinged skin (cyanosis).</li>
         </ul>
     </div>
-    <p>CO poisoning is often called "The Great Mimic" because it feels like a heavy cold, food poisoning, or the flu. In 2026, we urge UK residents to look for the "Pattern of Relief." If you feel better at work but your headache returns 30 minutes after getting home, your boiler is the prime suspect. Do not sleep on it—CO is most lethal while you are unconscious and unable to monitor your own symptoms.</p>
+    <p>CO poisoning is often called "The Great Mimic" because it feels like a heavy cold, food poisoning, or the flu. In 2026, we urge UK residents to look for the "Pattern of Relief." If you feel better at work but your headache returns 30 minutes after getting home, your boiler is the prime suspect. Do not sleep on it-CO is most lethal while you are unconscious and unable to monitor your own symptoms.</p>
 
     <h2>7. The ECV (Emergency Control Valve): Your First Line of Defense</h2>
     <div class="capsule-box">
@@ -115,7 +115,7 @@
         <h3>UK Carbon Monoxide: Safety CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Install a CO alarm in every room that has a fixed combustion appliance (Boiler, Fire, range).</li>
-            <li><strong>CANNOT:</strong> Run a petrol generator or BBQ inside a garage or "lean-to" conservatory—even with the door open.</li>
+            <li><strong>CANNOT:</strong> Run a petrol generator or BBQ inside a garage or "lean-to" conservatory-even with the door open.</li>
             <li><strong>CAN:</strong> Verify your Gas Safe engineer's ID card for the "CO/Combustion Analysis" competency on the back.</li>
             <li><strong>CANNOT:</strong> Use a gas oven or hob to "heat the room" during a power cut. This is a primary cause of CO buildup.</li>
         </ul>
@@ -149,7 +149,7 @@
             <li><strong>Stabilisation:</strong> Our first priority is to make your property safe, followed by a full technical report for your records or landlord.</li>
         </ul>
     </div>
-    <p>If your alarm is sounding, or you suspect a leak, do not wait for "office hours." Carbon Monoxide does not follow a schedule. Our 24/7 emergency response team is designed for this exact scenario. We handle the isolation, the technical audit, and the final safety certification to give you total peace of mind. Don't take a gamble with a "Silent Killer"—trust the verified experts to secure your home. Call us now for an immediate professional response.</p>
+    <p>If your alarm is sounding, or you suspect a leak, do not wait for "office hours." Carbon Monoxide does not follow a schedule. Our 24/7 emergency response team is designed for this exact scenario. We handle the isolation, the technical audit, and the final safety certification to give you total peace of mind. Don't take a gamble with a "Silent Killer"-trust the verified experts to secure your home. Call us now for an immediate professional response.</p>
 
 </main>
 

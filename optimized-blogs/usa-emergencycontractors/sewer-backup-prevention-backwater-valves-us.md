@@ -49,7 +49,7 @@
             <li><strong>The 2026 Winner:</strong> The mainline "Open-Flapper" valve is the 2026 gold standard for residential sewer hardening.</li>
         </ul>
     </div>
-    <p>In 2026, we avoid "Closed-Flapper" valves for mainline use because they can block the essential venting of your home's DWV (Drain Waste Vent) system. The mainline "normally open" valve uses the force of the surging sewage backflow to snap the flap shut—providing total security without compromising your home's air quality. We only install IPC-compliant, accessible valves with clear inspection lids.</p>
+    <p>In 2026, we avoid "Closed-Flapper" valves for mainline use because they can block the essential venting of your home's DWV (Drain Waste Vent) system. The mainline "normally open" valve uses the force of the surging sewage backflow to snap the flap shut-providing total security without compromising your home's air quality. We only install IPC-compliant, accessible valves with clear inspection lids.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: When a backwater valve is "closed" during a flood, you CANNOT use your internal plumbing. Flushing a toilet while the valve is blocked by street sewage will cause your own waste to backup into your basement. In 2026, we install "Smart Valve Sensors" that alert your phone the moment the valve engages, telling you to STOP using water.</p>
@@ -59,7 +59,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The Problem:</strong> Older US cities use the same pipes for both rainwater and sewage. Heavy rain instantly overwhelms the capacity.</li>
-            <li><strong>The Backup:</strong> When the pipe hits 100% capacity, the pressure (hydrostatic head) is relieved through the lowest possible exit—often your basement floor drain.</li>
+            <li><strong>The Backup:</strong> When the pipe hits 100% capacity, the pressure (hydrostatic head) is relieved through the lowest possible exit-often your basement floor drain.</li>
             <li><strong>2026 Mitigation:</strong> Over 700 US cities are under EPA mandates to reduce CSO events, but infrastructure takes decades. The backwater valve is your personal "Shield" during this transition.</li>
         </ul>
     </div>
@@ -97,7 +97,7 @@
             <li><strong>Lubrication:</strong> Use a specialized silicone spray on the hinge (never oil-based) to ensure 2026 performance.</li>
         </ul>
     </div>
-    <p>A backwater valve is a mechanical device, and in 2026, we treat it with the same respect as a furnace or AC unit. If the seal is compromised by a single baby-wipe, the valve is useless. We offer a 2026 "Annual Sewer Health Check" where we use fiber-optic cameras to inspect your valve and lateral line—ensuring your defense is ready for the spring rains.</p>
+    <p>A backwater valve is a mechanical device, and in 2026, we treat it with the same respect as a furnace or AC unit. If the seal is compromised by a single baby-wipe, the valve is useless. We offer a 2026 "Annual Sewer Health Check" where we use fiber-optic cameras to inspect your valve and lateral line-ensuring your defense is ready for the spring rains.</p>
 
     <img src="/us/blog/plumbing/sewer-valve-install.webp" alt="Matte flat-vector illustration of a US plumber installing a 4-inch backwater valve in a basement floor, with IPC-compliant cleanout access" width="800" height="450">
 
@@ -115,7 +115,7 @@
         <h3>US Sewer Security: Homeowner CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Check for local rebates. Cities like Toronto and Chicago have historically offered $1,250 - $2,000 for these valves.</li>
-            <li><strong>CANNOT:</strong> Bury the valve under a finished floor—you MUST have a removable access panel for 2026 code compliance.</li>
+            <li><strong>CANNOT:</strong> Bury the valve under a finished floor-you MUST have a removable access panel for 2026 code compliance.</li>
             <li><strong>CAN:</strong> Install a **Mainline** valve if your house has a basement; branch valves are only for slab-on-grade additions.</li>
             <li><strong>CANNOT:</strong> Flush "flushable" wipes. They are the \#1 cause of backwater valve failure in 2026.</li>
         </ul>

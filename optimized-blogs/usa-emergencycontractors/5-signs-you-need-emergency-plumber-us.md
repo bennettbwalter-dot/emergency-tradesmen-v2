@@ -36,7 +36,7 @@
         <ul>
             <li><strong>Symptoms:</strong> Turning on your kitchen faucet results in a dry cough or a weak, pathetic dribble across the entire house.</li>
             <li><strong>Primary Cause:</strong> A break in the main supply line between your meter box (curbside) and your house's foundation.</li>
-            <li><strong>Code Check:</strong> 2026 IPC Article 604 requires specific "Flow Rates"—if you drop below these, your system is technically non-compliant.</li>
+            <li><strong>Code Check:</strong> 2026 IPC Article 604 requires specific "Flow Rates"-if you drop below these, your system is technically non-compliant.</li>
         </ul>
     </div>
     <p>If you lose pressure house-wide, check with your neighbors first via a neighborhood app. If they have water and you don't, you have a private emergency. In many US states, a burst underground line can wash away the "Soil Compaction" around your foundation, leading to structural cracking. A 24/7 emergency plumber will use acoustic leak detection to pin-point the break before the soil erosion becomes a foundation crisis.</p>
@@ -62,7 +62,7 @@
     <h2>4. The Ceiling Blister: Preventing Structural Drywall Collapse</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>The Bulge:</strong> A "hydraulic blister"—a yellow, sagging bubble in your ceiling drywall—indicates at least 1-3 gallons of standing water.</li>
+            <li><strong>The Bulge:</strong> A "hydraulic blister"-a yellow, sagging bubble in your ceiling drywall-indicates at least 1-3 gallons of standing water.</li>
             <li><strong>Immediate Action:</strong> Use a screwdriver to "Poke a Hole" in the center. Directing the flood into a bucket prevents the whole ceiling from falling.</li>
             <li><strong>Electrical Hazard:</strong> If the leak is near a ceiling fan or recessed light, go to your breaker panel (Load Center) and kill the power immediately.</li>
         </ul>
@@ -124,7 +124,7 @@
     <h2>9. Backflow Prevention: Protecting the Public US Water Supply</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>The Danger:</strong> "Siphoning"—where a drop in city pressure sucks water *out* of your home (and your hose/pool) and back into the public main.</li>
+            <li><strong>The Danger:</strong> "Siphoning"-where a drop in city pressure sucks water *out* of your home (and your hose/pool) and back into the public main.</li>
             <li><strong>Mandates:</strong> 2026 codes in many US districts require annual testing of "Backflow Preventers" on irrigation and whole-house lines.</li>
             <li><strong>Protection:</strong> Installing a "Vacuum Breaker" on every outdoor faucet is the \#1 cheapest way to protect your community's water.</li>
         </ul>
@@ -141,7 +141,7 @@
             <li><strong>Efficiency:</strong> High-efficiency heat pump water heaters are now the 2026 DOE standard for most US residential replacements.</li>
         </ul>
     </div>
-    <p>Water heaters are the silent workhorses of the US home. In 2026, they are also highly regulated. If your water heater is leaking from the bottom, it's a sign of internal tank corrosion—it cannot be "patched." When we perform an emergency replacement, we bring your system up to 2026 standards, including an **Expansion Tank** (to protect your pipes from pressure spikes) and a **Mixing Valve** (to protect your children from scalding).</p>
+    <p>Water heaters are the silent workhorses of the US home. In 2026, they are also highly regulated. If your water heater is leaking from the bottom, it's a sign of internal tank corrosion-it cannot be "patched." When we perform an emergency replacement, we bring your system up to 2026 standards, including an **Expansion Tank** (to protect your pipes from pressure spikes) and a **Mixing Valve** (to protect your children from scalding).</p>
 
     <h2>11. 24/7 Verified Plumbers: Response Times and Licensing</h2>
     <div class="capsule-box">
@@ -151,7 +151,7 @@
             <li><strong>Audit:</strong> We use thermal imaging and moisture meters to provide documented proof of your "Maintenance Stewardship" for insurance companies.</li>
         </ul>
     </div>
-    <p>A plumbing emergency is a race against the clock. The longer the water runs, the less of your home you can save. Don't risk your American home's structural integrity on a "handyman" with a wrench. Trust our network of 24/7 verified master plumbers to stabilize the crisis, certify the repair, and provide the documentation you need for your 2026 insurance file. We stop the drip before it becomes a disaster—call us now for an immediate response.</p>
+    <p>A plumbing emergency is a race against the clock. The longer the water runs, the less of your home you can save. Don't risk your American home's structural integrity on a "handyman" with a wrench. Trust our network of 24/7 verified master plumbers to stabilize the crisis, certify the repair, and provide the documentation you need for your 2026 insurance file. We stop the drip before it becomes a disaster-call us now for an immediate response.</p>
 
 </main>
 

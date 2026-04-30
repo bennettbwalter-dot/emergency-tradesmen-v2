@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the high-stakes environment of 2026, home ownership is as much about risk management as it is about equity. With severe weather events becoming more frequent and the US power grid undergoing a massive technological shift, the "Master Emergency Protocol" has evolved. Gone are the days of simply having a flashlight and a wrench. In 2026, FEMA and the NFPA emphasize "Active Resilience"—the ability to isolate, stabilize, and report a crisis within 60 seconds. Whether it’s a burst 2026-spec service line or a lithium-battery thermal runaway, your reaction time determines the survival of your property. This guide outlines the definitive US response protocol for every major home emergency.</p>
+    <p>In the high-stakes environment of 2026, home ownership is as much about risk management as it is about equity. With severe weather events becoming more frequent and the US power grid undergoing a massive technological shift, the "Master Emergency Protocol" has evolved. Gone are the days of simply having a flashlight and a wrench. In 2026, FEMA and the NFPA emphasize "Active Resilience"-the ability to isolate, stabilize, and report a crisis within 60 seconds. Whether it’s a burst 2026-spec service line or a lithium-battery thermal runaway, your reaction time determines the survival of your property. This guide outlines the definitive US response protocol for every major home emergency.</p>
 
     <h2>1. The "60-Second" Isolation: Knowledge Capsule Summary</h2>
     <div class="capsule-box">
@@ -73,11 +73,11 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Detection:</strong> 2026 NFPA 72 codes mandate Carbon Monoxide (CO) alarms on every level of the home and within 15 feet of every bedroom.</li>
-            <li><strong>The "Rotten Egg" Smell:</strong> Mercaptan is added to US natural gas. If you smell it, do not use a phone or flashlight—the spark can ignite the gas. <strong>Leave the house first.</strong></li>
+            <li><strong>The "Rotten Egg" Smell:</strong> Mercaptan is added to US natural gas. If you smell it, do not use a phone or flashlight-the spark can ignite the gas. <strong>Leave the house first.</strong></li>
             <li><strong>Isolation:</strong> If safe, turn the exterior gas valve with a wrench so it is "perpendicular" to the pipe.</li>
         </ul>
     </div>
-    <p>Gas is the most dangerous utility for secondary disasters. In 2026, high-efficiency furnaces and boilers are the norm, but their exhaust vents can become blocked by snow or bird nests, leading to CO buildup. CO is "The Silent Killer"—you cannot see it, smell it, or taste it. If your 2026-compliant alarm goes off, evacuate immediately. Do not "open windows" to clear it; let the fire department determine the source of the leak.</p>
+    <p>Gas is the most dangerous utility for secondary disasters. In 2026, high-efficiency furnaces and boilers are the norm, but their exhaust vents can become blocked by snow or bird nests, leading to CO buildup. CO is "The Silent Killer"-you cannot see it, smell it, or taste it. If your 2026-compliant alarm goes off, evacuate immediately. Do not "open windows" to clear it; let the fire department determine the source of the leak.</p>
 
     <img src="/us/blog/emergency/locksmith-body-1-us.webp" alt="Matte flat-vector illustration of a locksmith using a 'non-destructive' L-tool on a US residential lock, showing internal pins and a secure icon" width="800" height="450">
 
@@ -117,7 +117,7 @@
             <li><strong>CAN:</strong> Verify a contractor's **General Liability Insurance** for at least $1,000,000 before they step on your property.</li>
             <li><strong>CANNOT:</strong> Hire any "emergency" plumber who doesn't offer a written, signed estimate before starting the work.</li>
             <li><strong>CAN:</strong> Ask for a **2026 Regulatory Compliance Certificate** after a major gas or electrical repair.</li>
-            <li><strong>CANNOT:</strong> Allow a technician to "patch" a cracked heat exchanger in your furnace—this is a lethal code violation. It must be replaced.</li>
+            <li><strong>CANNOT:</strong> Allow a technician to "patch" a cracked heat exchanger in your furnace-this is a lethal code violation. It must be replaced.</li>
         </ul>
     </div>
 
@@ -139,7 +139,7 @@
             <li><strong>Connection:</strong> Modern 2026 homes use fire-rated drywall and intumescent seals that are the high-tech descendants of the Palmer House’s terracotta experiments.</li>
         </ul>
     </div>
-    <p>We honor the Palmer House because it represents the American commitment to "Building Back Better." Every major disaster in US history has resulted in a leap forward in building safety. By following the 2026 Master Protocol, you are benefiting from 150 years of engineering lessons learned from events like the Chicago Fire. Your home is a fortress of safety—if you know how to operate its defenses.</p>
+    <p>We honor the Palmer House because it represents the American commitment to "Building Back Better." Every major disaster in US history has resulted in a leap forward in building safety. By following the 2026 Master Protocol, you are benefiting from 150 years of engineering lessons learned from events like the Chicago Fire. Your home is a fortress of safety-if you know how to operate its defenses.</p>
 
     <img src="/us/blog/emergency/generator-body-2-us.webp" alt="Matte flat-vector illustration of a portable power station (500Wh) with solar panels, powering a laptop and a medical device, technical blocks" width="800" height="450">
 
@@ -151,7 +151,7 @@
             <li><strong>Quality:</strong> All contractors in our 2026 network are "Bonded and Insured," ensuring your property is in professional hands.</li>
         </ul>
     </div>
-    <p>When the protocol fails, the experts take over. You’ve isolated the water, you’ve cut the power, and you’ve evacuated the family. Now, you need a specialist to restore your life. Don't waste time on a "Google Search" gamble. Trust our network of 24/7 verified US contractors to handle the repair with speed, precision, and full regulatory compliance. We stabilize the crisis and rebuild your peace of mind—call us now for an immediate response.</p>
+    <p>When the protocol fails, the experts take over. You’ve isolated the water, you’ve cut the power, and you’ve evacuated the family. Now, you need a specialist to restore your life. Don't waste time on a "Google Search" gamble. Trust our network of 24/7 verified US contractors to handle the repair with speed, precision, and full regulatory compliance. We stabilize the crisis and rebuild your peace of mind-call us now for an immediate response.</p>
 
 </main>
 

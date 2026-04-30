@@ -49,7 +49,7 @@
             <li><strong>Seamless Strength:</strong> HDPE pipe is heat-fused at the joints, creating a single, continuous line that is virtually immune to tree root ingress or soil shifting.</li>
         </ul>
     </div>
-    <p>Pipe bursting is the "Gold Standard" for 2026 US main line replacement. We only require two small 3'x3' access pits—one at the house and one at the curb stop. Your driveway, trees, and custom landscaping remain untouched. This is the 2026 definition of **Landscape Resilience**. </p>
+    <p>Pipe bursting is the "Gold Standard" for 2026 US main line replacement. We only require two small 3'x3' access pits-one at the house and one at the curb stop. Your driveway, trees, and custom landscaping remain untouched. This is the 2026 definition of **Landscape Resilience**. </p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: Check your **Utility Bill** for a "Service Line Protection" fee in 2026. Many US homeowners pay $5-$10 a month for coverage they forget they have. If you have this 2026 rider, your emergency water main repair could be 100% covered, including our trenchless tech!</p>
@@ -66,7 +66,7 @@
     <p>In 2026, we "Renovate" your pipes from the inside out. CIPP is ideal for 2026 properties with large trees or utility-dense yards where digging is impossible. We use **2026 UV-Cured Liners** that are ready for pressurized water in just 60 minutes, rather than the 24-hour wait required by older "Steam-Cured" methods.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first buried water pipes in the US were made of hollowed-out **Logs**! You can still find them in New York and Philadelphia. In 2026, our HDPE pipes have a lifespan of 100+ years—that's a lot longer than a log!</p>
+        <p><strong>Fun Fact!</strong> The first buried water pipes in the US were made of hollowed-out **Logs**! You can still find them in New York and Philadelphia. In 2026, our HDPE pipes have a lifespan of 100+ years-that's a lot longer than a log!</p>
     </div>
 
     <h2>5. Disinfection & Pressure Testing: 2026 AWWA Standards</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Water Main Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Know where your curb stop box is—keep it clear of mulch, grass, and pavers for 2026 emergency access.</li>
+            <li><strong>CAN:</strong> Know where your curb stop box is-keep it clear of mulch, grass, and pavers for 2026 emergency access.</li>
             <li><strong>CANNOT:</strong> Plant a "Fast-Growing" tree (like a Willow or Silver Maple) within 15 feet of your water main in 2026.</li>
-            <li><strong>CAN:</strong> Check your 2026 "Water App" for pressure anomalies—it's the first sign of a service line failing.</li>
-            <li><strong>CANNOT:</strong> Hire a "General Handyman" to repair a water main—only licensed Master Plumbers can legally certify 2026 AWWA repairs.</li>
+            <li><strong>CAN:</strong> Check your 2026 "Water App" for pressure anomalies-it's the first sign of a service line failing.</li>
+            <li><strong>CANNOT:</strong> Hire a "General Handyman" to repair a water main-only licensed Master Plumbers can legally certify 2026 AWWA repairs.</li>
         </ul>
     </div>
 

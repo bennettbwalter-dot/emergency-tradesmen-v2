@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the United States of 2026, a "Building Envelope Audit" has evolved from an optional energy-saving exercise into a critical requirement for property insurance and climate resilience. The building envelope—the integrated system of your roof, walls, windows, and foundation—is your home's primary defense against the increasingly severe weather events of the 2026 decade. Driven by the **2024/2026 IECC (International Energy Conservation Code)** updates and the **ASCE 7-22** wind standards, a professional audit is the only way to verify that your home is truly "Storm-Proof." Whether you are facing a Category 4 hurricane on the coast or a record-breaking winter "Polar Vortex" inland, the 2026 standard involves **AI-Infrared Thermography** and **Advanced Blower Door Testing**. This guide provides the technical 2026 standard for US building envelope resilience and emergency preparedness.</p>
+    <p>In the United States of 2026, a "Building Envelope Audit" has evolved from an optional energy-saving exercise into a critical requirement for property insurance and climate resilience. The building envelope-the integrated system of your roof, walls, windows, and foundation-is your home's primary defense against the increasingly severe weather events of the 2026 decade. Driven by the **2024/2026 IECC (International Energy Conservation Code)** updates and the **ASCE 7-22** wind standards, a professional audit is the only way to verify that your home is truly "Storm-Proof." Whether you are facing a Category 4 hurricane on the coast or a record-breaking winter "Polar Vortex" inland, the 2026 standard involves **AI-Infrared Thermography** and **Advanced Blower Door Testing**. This guide provides the technical 2026 standard for US building envelope resilience and emergency preparedness.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Envelope Audit 2026</h2>
     <div class="capsule-box">
@@ -135,10 +135,10 @@
     <div class="dos-donts">
         <h3>US Envelope Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Feel for "Drafts" around your electrical outlets in 2026—a simple foam gasket can save $50/year in 2026 energy costs.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Musty Smell" in the 2026 summer—it usually means your envelope's vapor barrier is installed backward and trapping moisture.</li>
-            <li><strong>CAN:</strong> Request a **"Blower Door Test"** before you buy any US home in 2026—it's the only way to find a "Leaky" building.</li>
-            <li><strong>CANNOT:</strong> Spray-foam your attic without a **2026 Ventilation Audit**—you can accidentally rot your roof rafters by trapping moisture in the 2026 attic air.</li>
+            <li><strong>CAN:</strong> Feel for "Drafts" around your electrical outlets in 2026-a simple foam gasket can save $50/year in 2026 energy costs.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Musty Smell" in the 2026 summer-it usually means your envelope's vapor barrier is installed backward and trapping moisture.</li>
+            <li><strong>CAN:</strong> Request a **"Blower Door Test"** before you buy any US home in 2026-it's the only way to find a "Leaky" building.</li>
+            <li><strong>CANNOT:</strong> Spray-foam your attic without a **2026 Ventilation Audit**-you can accidentally rot your roof rafters by trapping moisture in the 2026 attic air.</li>
         </ul>
     </div>
 

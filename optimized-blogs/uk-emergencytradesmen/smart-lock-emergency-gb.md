@@ -105,7 +105,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Euro-Cylinder Motors:</strong> We retrofit high-torque 2026 motors to your existing **Multipoint Locking System**, turning a standard PVC door into a 2026 Smart-Gate.</li>
-            <li><strong>Automatic Throw:</strong> 2026 smart-motors "Throw" the middle and top bolts automatically when the door shuts—no more "Lifting the Handle" to lock up.</li>
+            <li><strong>Automatic Throw:</strong> 2026 smart-motors "Throw" the middle and top bolts automatically when the door shuts-no more "Lifting the Handle" to lock up.</li>
             <li><strong>Sensor Calibration:</strong> We use **2026 Digital Micrometers** to ensure your door frame is aligned to within 0.1mm for a 100% "Friction-Free" 2026 lock.</li>
         </ul>
     </div>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Smart Lock Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Set up a **"Guest Code"** for your 2026 cleaner—you can see exactly when they enter and leave in your 2026 mobile log.</li>
-            <li><strong>CANNOT:</strong> Use "Standard Alkaline Batteries"—in 2026, smart locks require **Lithium Low-Self-Discharge** cells for 12-month reliability.</li>
+            <li><strong>CAN:</strong> Set up a **"Guest Code"** for your 2026 cleaner-you can see exactly when they enter and leave in your 2026 mobile log.</li>
+            <li><strong>CANNOT:</strong> Use "Standard Alkaline Batteries"-in 2026, smart locks require **Lithium Low-Self-Discharge** cells for 12-month reliability.</li>
             <li><strong>CAN:</strong> Request a **"Digital Security Audit"** every year to ensure your 2026 encryption keys are rotated and secure.</li>
-            <li><strong>CANNOT:</strong> "Force" a motorized handle—in 2026, the nylon gears will strip, requiring a full **2026 Motor replacement**.</li>
+            <li><strong>CANNOT:</strong> "Force" a motorized handle-in 2026, the nylon gears will strip, requiring a full **2026 Motor replacement**.</li>
         </ul>
     </div>
 

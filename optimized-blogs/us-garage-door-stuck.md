@@ -1,5 +1,5 @@
 
-You press the button to open your garage, expecting the smooth hum of the motor and the door rising effortlessly. Instead, you hear a loud bang, a grinding noise, or worse—nothing at all. The door is stuck halfway, tilted to one side, or completely unresponsive. In the US, where the garage is often the main entry point to the home, this isn’t just an inconvenience; it’s a security risk and a potential safety hazard.
+You press the button to open your garage, expecting the smooth hum of the motor and the door rising effortlessly. Instead, you hear a loud bang, a grinding noise, or worse-nothing at all. The door is stuck halfway, tilted to one side, or completely unresponsive. In the US, where the garage is often the main entry point to the home, this isn’t just an inconvenience; it’s a security risk and a potential safety hazard.
 
 I know how frustrating it is to be trapped in your garage or locked out of your house. But before you try to force the door open or call a 24/7 technician, there are critical safety steps you must take. Garage doors are under extreme tension, and incorrect handling can lead to serious injury or further damage. Let’s walk through what to do calmly and safely.
 
@@ -9,7 +9,7 @@ I know how frustrating it is to be trapped in your garage or locked out of your 
     <h2>Stop Using the Opener Immediately</h2>
   </div>
   <div class="blog-step-body">
-    <p>If the door is making strange noises, moving unevenly, or has stopped mid-cycle, do not keep pressing the remote or wall button. Continuing to operate a malfunctioning door can strip gears, burn out the motor, or cause the door to fall. Disconnect the opener by pulling the red emergency release cord (usually hanging from the trolley on the rail). This disengages the motor, allowing you to move the door manually—if it’s safe to do so.</p>
+    <p>If the door is making strange noises, moving unevenly, or has stopped mid-cycle, do not keep pressing the remote or wall button. Continuing to operate a malfunctioning door can strip gears, burn out the motor, or cause the door to fall. Disconnect the opener by pulling the red emergency release cord (usually hanging from the trolley on the rail). This disengages the motor, allowing you to move the door manually-if it’s safe to do so.</p>
   </div>
 </div>
 

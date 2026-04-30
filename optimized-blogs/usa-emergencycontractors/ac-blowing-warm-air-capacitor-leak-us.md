@@ -38,7 +38,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>What it is:</strong> A heavy-duty battery that helps the motor start and keep spinning.</li>
-            <li><strong>The Danger:</strong> It holds 440 volts of electricity—enough to be lethal even if the power is off.</li>
+            <li><strong>The Danger:</strong> It holds 440 volts of electricity-enough to be lethal even if the power is off.</li>
             <li><strong>The Fix:</strong> A simple swap that takes 20 minutes for a certified HVAC tech.</li>
         </ul>
     </div>
@@ -134,7 +134,7 @@
             <li><strong>Priority:</strong> Emergency contracts ensure you get a tech in hours, not days.</li>
         </ul>
     </div>
-    <p>When the AC dies at 9 PM on a Friday, it's not just an annoyance. It is a safety issue. In many US states, landlords are required by law to provide cooling if the temp goes above a certain level. If you own your home, you need a 24/7 pro. They carry the most common capacitors and fan motors in their truck. They can get you back to 72 degrees before the house even has time to get hot. Don't wait until Monday—save your system and your sanity by calling a pro immediately.</p>
+    <p>When the AC dies at 9 PM on a Friday, it's not just an annoyance. It is a safety issue. In many US states, landlords are required by law to provide cooling if the temp goes above a certain level. If you own your home, you need a 24/7 pro. They carry the most common capacitors and fan motors in their truck. They can get you back to 72 degrees before the house even has time to get hot. Don't wait until Monday-save your system and your sanity by calling a pro immediately.</p>
 
     <h2>9. DIY vs. Pro: The Warranty Trap</h2>
     <div class="capsule-box">

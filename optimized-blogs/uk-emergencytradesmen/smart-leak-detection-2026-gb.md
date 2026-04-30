@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK residential landscape of 2026, "Escape of Water" remains the primary cause of domestic insurance claims, with insurers paying out approximately £1.8 million every single day. However, the 2026 landscape has shifted from reactive repair to proactive prevention. Driven by the **Part G Building Regulations** (targeting 105 litres per person per day) and the widespread adoption of "Smart Insurance" policies from providers like Aviva and AXA, smart leak detection is no longer a luxury—it is a mandatory layer of home defense. By using high-definition flow monitoring and automatic shut-off valves, homeowners can now stop a burst pipe in under 60 seconds, potentially saving thousands in structural damage and mould remediation. This guide outlines the technology, regulations, and ROI of smart water management in 2026.</p>
+    <p>In the UK residential landscape of 2026, "Escape of Water" remains the primary cause of domestic insurance claims, with insurers paying out approximately £1.8 million every single day. However, the 2026 landscape has shifted from reactive repair to proactive prevention. Driven by the **Part G Building Regulations** (targeting 105 litres per person per day) and the widespread adoption of "Smart Insurance" policies from providers like Aviva and AXA, smart leak detection is no longer a luxury-it is a mandatory layer of home defense. By using high-definition flow monitoring and automatic shut-off valves, homeowners can now stop a burst pipe in under 60 seconds, potentially saving thousands in structural damage and mould remediation. This guide outlines the technology, regulations, and ROI of smart water management in 2026.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Water Tech 2026</h2>
     <div class="capsule-box">
@@ -39,7 +39,7 @@
             <li><strong>Detection Role:</strong> You cannot stay under these limits if you have a "silent leak" in a toilet cistern or a dripping external tap. Sensors are the only way to verify compliance.</li>
         </ul>
     </div>
-    <p>Part G of the Building Regulations in 2026 isn't just about low-flow showerheads; it's about structural accountability. A single leaking toilet can waste up to 400 litres a day—obliterating your household water budget and triggering "High Usage" alerts from your water provider. Smart sensors provide the granular data (litres per hour) needed to satisfy the 2026 Water Efficiency Calculation required for all new UK builds.</p>
+    <p>Part G of the Building Regulations in 2026 isn't just about low-flow showerheads; it's about structural accountability. A single leaking toilet can waste up to 400 litres a day-obliterating your household water budget and triggering "High Usage" alerts from your water provider. Smart sensors provide the granular data (litres per hour) needed to satisfy the 2026 Water Efficiency Calculation required for all new UK builds.</p>
 
     <h2>3. LeakSafe vs. Waterguard: 2026 UK Hardware Comparison</h2>
     <div class="capsule-box">
@@ -63,7 +63,7 @@
             <li><strong>Specialist Partners:</strong> LeakSafe is a direct partner for multiple UK high-net-worth insurers, facilitating faster claim settlements.</li>
         </ul>
     </div>
-    <p>"Trace and Access" used to involve sledgehammers and guesswork. In 2026, it involves acoustic fingerprinting and thermal apps. By having a smart sensor active, you provide your insurer with a "Time and Date" stamp for when the leak started. This digital evidence proves you have taken "Reasonable Steps" to protect the property—a critical factor in 2026 claim approvals.</p>
+    <p>"Trace and Access" used to involve sledgehammers and guesswork. In 2026, it involves acoustic fingerprinting and thermal apps. By having a smart sensor active, you provide your insurer with a "Time and Date" stamp for when the leak started. This digital evidence proves you have taken "Reasonable Steps" to protect the property-a critical factor in 2026 claim approvals.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> The concept of "Trace and Access" is often called "Keyhole Surgery for Pipes." Modern 2026 sensors are so sensitive they can "hear" a single drip through two feet of concrete, allowing plumbers to fix leaks without moving a single piece of furniture!</p>
@@ -77,7 +77,7 @@
             <li><strong>The result:</strong> A potential £15,000 restoration job is reduced to a £150 local pipe repair.</li>
         </ul>
     </div>
-    <p>In 2026, the goal is "Zero-Flood" homes. The 60-second window is the difference between a mopping job and a full structural dry-out. Our 2026 UK response team integrates with these smart hubs—when your valve shuts off, our local emergency plumber is already being dispatched with the exact data needed to fix the fault.</p>
+    <p>In 2026, the goal is "Zero-Flood" homes. The 60-second window is the difference between a mopping job and a full structural dry-out. Our 2026 UK response team integrates with these smart hubs-when your valve shuts off, our local emergency plumber is already being dispatched with the exact data needed to fix the fault.</p>
 
     <h2>6. Matter & Thread: Seamless Smart Home Integration in 2026</h2>
     <div class="capsule-box">
@@ -116,9 +116,9 @@
         <h3>UK Smart Leak Detection: Homeowner CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Install a manual bypass switch for your smart valve in case the electronics fail during a shower.</li>
-            <li><strong>CANNOT:</strong> Rely on "Wi-Fi Only" sensors in lofts—UK slate roofs can block signals; use a Z-Wave or Thread range extender.</li>
+            <li><strong>CANNOT:</strong> Rely on "Wi-Fi Only" sensors in lofts-UK slate roofs can block signals; use a Z-Wave or Thread range extender.</li>
             <li><strong>CAN:</strong> Verify that your system is **WRAS Approved** to ensure it complies with UK Water Supply Regulations (1999).</li>
-            <li><strong>CANNOT:</strong> Install a smart valve yourself if you aren't comfortable cutting into the MDPE or Copper mains pipe—hire a 2026-certified plumber.</li>
+            <li><strong>CANNOT:</strong> Install a smart valve yourself if you aren't comfortable cutting into the MDPE or Copper mains pipe-hire a 2026-certified plumber.</li>
         </ul>
     </div>
 
@@ -130,7 +130,7 @@
             <li><strong>2026 Preparedness:</strong> Modern hubs now includes "Freeze Warning" alerts that can automatically drip your taps to prevent ice-plugs from forming.</li>
         </ul>
     </div>
-    <p>We learned the hard way that "It won't happen to me" isn't a strategy. The 2018 freeze proved that even well-insulated homes are vulnerable at the entry points. In 2026, we apply these lessons by focusing on "Vulnerability Mapping"—identifying the exact points where your pipes are most likely to fail and placing smart sensors directly on those "Friction Points."</p>
+    <p>We learned the hard way that "It won't happen to me" isn't a strategy. The 2018 freeze proved that even well-insulated homes are vulnerable at the entry points. In 2026, we apply these lessons by focusing on "Vulnerability Mapping"-identifying the exact points where your pipes are most likely to fail and placing smart sensors directly on those "Friction Points."</p>
 
     <h2>10. Awaab's Law & Water Safety: Preventing the Damp & Mold Cycle</h2>
     <div class="capsule-box">

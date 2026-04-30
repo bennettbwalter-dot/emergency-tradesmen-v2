@@ -35,7 +35,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The Leverage Point:</strong> Burglars insert a crowbar or a heavy-duty inflatable wedge between the door and the frame near a locking point.</li>
-            <li><strong>The Flex:</strong> Unreinforced uPVC can flex up to 30mm—enough for the locking bolts to disengage from the metal strike plate.</li>
+            <li><strong>The Flex:</strong> Unreinforced uPVC can flex up to 30mm-enough for the locking bolts to disengage from the metal strike plate.</li>
             <li><strong>The Entry:</strong> The door swings open without a single lock being broken, often leaving very little visual evidence of the crime.</li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
             <li><strong>Installation accountability:</strong> 2026 standards demand that the frame's performance as tested is maintained by the qualified installer on-site.</li>
         </ul>
     </div>
-    <p>PAS 24 is no longer just a "Minimum Requirement"—in 2026, it is the primary defense against evolving criminal tools. The shift toward PAS 24:2022+A1:2024 (enforced in 2026) recognizes that burglars are no longer just using hammers; they are using chemistry and hydraulics. When we install a 2026-spec door, we are installing a system that has been "Lab-Tortured" to resist these exact scenarios. If your door lacks a PAS 24 certificate, you are relying on luck, not engineering.</p>
+    <p>PAS 24 is no longer just a "Minimum Requirement"-in 2026, it is the primary defense against evolving criminal tools. The shift toward PAS 24:2022+A1:2024 (enforced in 2026) recognizes that burglars are no longer just using hammers; they are using chemistry and hydraulics. When we install a 2026-spec door, we are installing a system that has been "Lab-Tortured" to resist these exact scenarios. If your door lacks a PAS 24 certificate, you are relying on luck, not engineering.</p>
 
     <h2>4. uPVC vs. Timber vs. Composite: Structural Integrity Compared</h2>
     <div class="capsule-box">
@@ -109,13 +109,13 @@
             <li><strong>The "Anti-Bypass" Lip:</strong> Modern strike plates have an angled lip that prevents a credit card or "Shove Knife" from reaching the latch.</li>
         </ul>
     </div>
-    <p>The strike plate is the "Anchor" of your security. If it is shaky, your door is shaky. In 2026, we specialize in "Strike Plate Hardening"—replacing weak, legacy keeps with heavy-duty steel variants that are designed to absorb the kinetic energy of a forced entry attempt. This minor technical upgrade can increase a frame's resistance to "Direct Force" attacks by up to 200%.</p>
+    <p>The strike plate is the "Anchor" of your security. If it is shaky, your door is shaky. In 2026, we specialize in "Strike Plate Hardening"-replacing weak, legacy keeps with heavy-duty steel variants that are designed to absorb the kinetic energy of a forced entry attempt. This minor technical upgrade can increase a frame's resistance to "Direct Force" attacks by up to 200%.</p>
 
     <div class="dos-donts">
         <h3>UK Door Security: Frame Safety CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Retrofit "Dog Bolts" to any uPVC or timber door to secure the hinge side instantly.</li>
-            <li><strong>CANNOT:</strong> Paint over the "Glazing Beads"—if they are external, painting makes them easier to grip and pry.</li>
+            <li><strong>CANNOT:</strong> Paint over the "Glazing Beads"-if they are external, painting makes them easier to grip and pry.</li>
             <li><strong>CAN:</strong> Verify that your door matches the **PAS 24:2026** specification for all new builds or commercial conversions.</li>
             <li><strong>CANNOT:</strong> Tighten strike plate screws too hard on hollow frames; you risk crushing the plastic and making the gap wider.</li>
         </ul>
@@ -149,7 +149,7 @@
             <li><strong>Certified Upgrades:</strong> All our frame-hardening work is backed by a technical guarantee and meets active PAS 24 recommendations.</li>
         </ul>
     </div>
-    <p>If your door frame has been spread, or if you suspect it is vulnerable, don't wait for a "Quiet Professional" to find your soft spot. 60 minutes is all we need to audit your frame and provide a hardening plan. Our 24/7 emergency network is designed for one thing: **Structural Integrity.** We move beyond the lock to ensure your entire doorway is an impenetrable shield for your family. Don't be trapped by a legacy frame—trust the verified UK experts. Call us now for an immediate professional response.</p>
+    <p>If your door frame has been spread, or if you suspect it is vulnerable, don't wait for a "Quiet Professional" to find your soft spot. 60 minutes is all we need to audit your frame and provide a hardening plan. Our 24/7 emergency network is designed for one thing: **Structural Integrity.** We move beyond the lock to ensure your entire doorway is an impenetrable shield for your family. Don't be trapped by a legacy frame-trust the verified UK experts. Call us now for an immediate professional response.</p>
 
 </main>
 

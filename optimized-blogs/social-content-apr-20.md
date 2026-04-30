@@ -28,7 +28,7 @@ And your heat is escaping.
 
 ⚠️⚠️⚠️
 Fix it before the mould takes over.
-Check the link in our bio for a local glazier. �-
+Check the link in our bio for a local glazier. �-
 
 ### X (Twitter Thread)
 1/4 🧵 UK Homeowners: Did your windows survive the winter? The freeze-thaw cycles of early 2026 have caused a massive spike in window seal failures. Here is how to know if yours are "blown" and why it matters.
@@ -55,7 +55,7 @@ Check the link in our bio for a local glazier. �-
 Professional Insight: The 2026 'Thermal Gap'.
 Following the extreme temperature fluctuations of the past winter, we are seeing a significant increase in Building Regulations Part L non-compliance due to widespread window seal failure across UK residential portfolios.
 
-For property managers and homeowners alike, a "misted" unit is more than a cosmetic defect—it is a failure of the building's thermal envelope. Proactive replacement of failed glazing units is critical to maintaining energy efficiency targets and preventing long-term interstitial condensation.
+For property managers and homeowners alike, a "misted" unit is more than a cosmetic defect-it is a failure of the building's thermal envelope. Proactive replacement of failed glazing units is critical to maintaining energy efficiency targets and preventing long-term interstitial condensation.
 
 Read our technical analysis on window seal integrity: [Link to Blog]
 #PropertyManagement #EnergyEfficiency #BuildingRegulations #UKRealEstate
@@ -90,7 +90,7 @@ You're going to be waiting a long time. 🥵
 
 🔧 🔧 🔧
 Check our 2026 Summer Prep guide.
-Link in bio to find a licensed pro today! �-
+Link in bio to find a licensed pro today! �-
 
 ### X (Twitter Thread)
 1/4 🧵 US Homeowners: The 2026 Summer is predicted to be record-breaking. Is your HVAC ready? If you ignore these 7 red flags in April, you’ll be paying double for an emergency repair in July.
@@ -117,7 +117,7 @@ Link in bio to find a licensed pro today! �-
 Technical Update: HVAC Resilience in 2026.
 With the ongoing transition to new refrigerant standards and a persistent shortage of skilled technicians, the U.S. HVAC market is facing significant pressure heading into the 2026 cooling season. 
 
-Early-season diagnostics (A-coil inspections, contactor testing, and charge verification) are no longer "optional" maintenance—they are essential risk mitigation strategies for homeowners and facility managers. 
+Early-season diagnostics (A-coil inspections, contactor testing, and charge verification) are no longer "optional" maintenance-they are essential risk mitigation strategies for homeowners and facility managers. 
 
 Read our full report on identifying high-risk HVAC failure points: [Link to Blog]
 #HVAC #FacilityManagement #RiskMitigation #EnergyEfficiency #EPA608

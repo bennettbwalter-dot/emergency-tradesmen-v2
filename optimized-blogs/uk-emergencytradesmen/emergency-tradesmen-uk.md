@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Tradesmen Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"2026 CertifID Badge"**—if your tradesperson isn't 2026-spec verified, you face 2026 insurance risks later.</li>
-            <li><strong>CANNOT:</strong> Allow "Standard Air Bricks" to be blocked in 2026—in 2026, **2026 Controlled Ventilation** is the standard for home safety.</li>
+            <li><strong>CAN:</strong> Check your **"2026 CertifID Badge"**-if your tradesperson isn't 2026-spec verified, you face 2026 insurance risks later.</li>
+            <li><strong>CANNOT:</strong> Allow "Standard Air Bricks" to be blocked in 2026-in 2026, **2026 Controlled Ventilation** is the standard for home safety.</li>
             <li><strong>CAN:</strong> Request a **"2026 Part L Efficiency Report"** after any 2026 home emergency service.</li>
-            <li><strong>CANNOT:</strong> Use "Standard Solder" for 2026 UK plumbing—you must use **2026 Lead-Free 2026 Standards** to meet 2026 WRAS compliance.</li>
+            <li><strong>CANNOT:</strong> Use "Standard Solder" for 2026 UK plumbing-you must use **2026 Lead-Free 2026 Standards** to meet 2026 WRAS compliance.</li>
         </ul>
     </div>
 

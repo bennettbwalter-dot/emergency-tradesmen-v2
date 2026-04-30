@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the United States, water damage is second only to fire as the leading cause of residential property loss. According to the EPA, household leaks waste more than 1 trillion gallons of water annually across the country—enough to supply 11 million homes. But in 2026, the technology has caught up to the problem. Driven by the **EPA WaterSense** 2026 efficiency standards and aggressive insurance incentives from leaders like **State Farm** and **Liberty Mutual**, the "Smart Main Water Shut-Off" has become the gold standard for home hardening. By utilizing high-definition pressure wave analysis and AI-driven flow monitoring, modern systems can detect a single drip or a catastrophic burst pipe, shutting off the mains in seconds. This guide explores the 2026 US landscape of smart water management and how you can save up to 20% on your premiums while protecting your family's greatest asset.</p>
+    <p>In the United States, water damage is second only to fire as the leading cause of residential property loss. According to the EPA, household leaks waste more than 1 trillion gallons of water annually across the country-enough to supply 11 million homes. But in 2026, the technology has caught up to the problem. Driven by the **EPA WaterSense** 2026 efficiency standards and aggressive insurance incentives from leaders like **State Farm** and **Liberty Mutual**, the "Smart Main Water Shut-Off" has become the gold standard for home hardening. By utilizing high-definition pressure wave analysis and AI-driven flow monitoring, modern systems can detect a single drip or a catastrophic burst pipe, shutting off the mains in seconds. This guide explores the 2026 US landscape of smart water management and how you can save up to 20% on your premiums while protecting your family's greatest asset.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Smart Water 2026</h2>
     <div class="capsule-box">
@@ -63,7 +63,7 @@
             <li><strong>Deductible Waivers:</strong> Some 2026 policies will waive the "Water Damage" deductible entirely if an active shut-off valve is verified as functional at the time of the event.</li>
         </ul>
     </div>
-    <p>Insurance companies aren't just being nice; they are using data. One insurance-industry study found that the average US water claim is over $11,000—but with a smart shut-off, it drops to under $500. By 2026, these discounts pay for the hardware in less than 36 months. We provide the "Installation Verification" paperwork your agent needs to trigger these savings.</p>
+    <p>Insurance companies aren't just being nice; they are using data. One insurance-industry study found that the average US water claim is over $11,000-but with a smart shut-off, it drops to under $500. By 2026, these discounts pay for the hardware in less than 36 months. We provide the "Installation Verification" paperwork your agent needs to trigger these savings.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> The modern US "Stopcock" is a descendant of bronze valves invented by the Romans 2,000 years ago. However, until the late 1800s, turning off water to a single US house meant shutting down the *entire* municipal street main! The localized main valve was a radical 19th-century luxury.</p>
@@ -115,9 +115,9 @@
         <h3>US Smart Water: Homeowner CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Install the smart valve *after* your pressure-reducing valve (PRV) but *before* any irrigation branches if you want to monitor outdoor leaks.</li>
-            <li><strong>CANNOT:</strong> Install a "Battery-Only" shut-off valve on your main line—they often lack the torque to close a 1-inch pipe if it's slightly corroded.</li>
+            <li><strong>CANNOT:</strong> Install a "Battery-Only" shut-off valve on your main line-they often lack the torque to close a 1-inch pipe if it's slightly corroded.</li>
             <li><strong>CAN:</strong> Check your **Z-Wave** or **Matter** compatibility to ensure the valve talks to your smart home siren and security panel.</li>
-            <li><strong>CANNOT:</strong> Forget to "Exercise" the valve once a month—use the app to shut and open it to prevent mineral buildup (2026 systems do this automatically).</li>
+            <li><strong>CANNOT:</strong> Forget to "Exercise" the valve once a month-use the app to shut and open it to prevent mineral buildup (2026 systems do this automatically).</li>
         </ul>
     </div>
 
@@ -129,7 +129,7 @@
             <li><strong>The Damage:</strong> Limited to the garage floor. Cost of repair: $0.</li>
         </ul>
     </div>
-    <p>Water damage isn't always a "Burst." It's often a "Failure of Containment." In 2026, we specialize in "Boundary Defense"—placing smart sensors at the transition points between non-living spaces (garages, attics) and your living area. This ensures that a failed utility doesn't become a structural catastrophe.</p>
+    <p>Water damage isn't always a "Burst." It's often a "Failure of Containment." In 2026, we specialize in "Boundary Defense"-placing smart sensors at the transition points between non-living spaces (garages, attics) and your living area. This ensures that a failed utility doesn't become a structural catastrophe.</p>
 
     <h2>10. Smart Home Hubs: Z-Wave, Matter, and 24/7 Monitoring</h2>
     <div class="capsule-box">

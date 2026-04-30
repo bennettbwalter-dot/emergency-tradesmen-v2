@@ -44,7 +44,7 @@
     <h2>3. The 6-Point Emergency Protocol: Steps to Take Before the Contractor Arrives</h2>
     <div class="capsule-box">
         <ol>
-            <li><strong>Isolate the Main:</strong> Locate the service valve and turn it clockwise until it stops. If it's a gate valve (round handle), don't force it—call us if it's seized.</li>
+            <li><strong>Isolate the Main:</strong> Locate the service valve and turn it clockwise until it stops. If it's a gate valve (round handle), don't force it-call us if it's seized.</li>
             <li><strong>Relieve Pressure:</strong> Open the lowest faucet in the house (basement or first floor) and the highest faucet to drain the vertical lines.</li>
             <li><strong>Shut the Heater:</strong> Turn off the water heater (electric breaker or gas valve) to prevent the tank from burning out if it drains.</li>
             <li><strong>Mop and Contain:</strong> Use wet-vacs and fans to remove standing water immediately. Mold begins to colonize in as little as 24 hours.</li>
@@ -52,7 +52,7 @@
             <li><strong>Documentation:</strong> Take high-resolution video of the water path. In 2026, AI-adjusted claims rely on visual data for rapid payout.</li>
         </ol>
     </div>
-    <p>The first 15 minutes of a burst are purely about "Damage Mitigation." In 2026, we specialize in "Remote Triage"—when you call our emergency line, we can guide you through these steps via a video link while our nearest licensed contractor is in transit. Speed is the only defense against structural rot.</p>
+    <p>The first 15 minutes of a burst are purely about "Damage Mitigation." In 2026, we specialize in "Remote Triage"-when you call our emergency line, we can guide you through these steps via a video link while our nearest licensed contractor is in transit. Speed is the only defense against structural rot.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: In 2026, we recommend replacing old Gate Valves with a **1/4 Turn Ball Valve**. Ball valves are far more reliable in an emergency because they don't have internal stems that can break off, leaving your water running even when the handle is turned.</p>
@@ -66,7 +66,7 @@
             <li><strong>The 2026 Choice:</strong> For any unconditioned or attic run, PEX-a is the only material our 2026 teams recommend for maximum freeze-recovery.</li>
         </ul>
     </div>
-    <p>Copper is beautiful but brittle. In a 2026 "Resilient Home," copper is reserved for exposed, heated areas, while PEX-a handles the high-risk "Vulnerability Zones." If your home is currently plumbed with CPVC (beige plastic), be aware that this material becomes extremely brittle with age—making a 2026 winter-shatter highly likely.</p>
+    <p>Copper is beautiful but brittle. In a 2026 "Resilient Home," copper is reserved for exposed, heated areas, while PEX-a handles the high-risk "Vulnerability Zones." If your home is currently plumbed with CPVC (beige plastic), be aware that this material becomes extremely brittle with age-making a 2026 winter-shatter highly likely.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> PEX (Cross-linked Polyethylene) was actually invented in the 1960s, but it took until the 2000s to gain mass adoption in the US. Today, in 2026, it is the #1 piping material used in American residential construction, valued for its ability to survive "Freeze-Thaw" cycles that would shatter Victorian-era lead or 1950s copper.</p>
@@ -90,7 +90,7 @@
             <li><strong>2026 Accessibility:</strong> All service valves must be "Readily Accessible" under IPC 2026, meaning they cannot be behind finished drywall without an access panel.</li>
         </ul>
     </div>
-    <p>Searching for your shut-off in the dark while water is spraying is a nightmare scenario. In 2026, we provide "Safety Mapping" for all our clients—tagging your main valves with high-visibility, reflective markers and adding their location to your digital "Home Manual." If you don't know where your valve is, call us today for a 2026 Home Safety Audit.</p>
+    <p>Searching for your shut-off in the dark while water is spraying is a nightmare scenario. In 2026, we provide "Safety Mapping" for all our clients-tagging your main valves with high-visibility, reflective markers and adding their location to your digital "Home Manual." If you don't know where your valve is, call us today for a 2026 Home Safety Audit.</p>
 
     <h2>7. Vacuum Testing for DWV: The 2024 IPC Update for Cold Weather</h2>
     <div class="capsule-box">
@@ -118,9 +118,9 @@
         <h3>US Pipe Burst: Safe Intervention CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Keep a "Curb Key" in your garage if your main shut-off is located in an outdoor meter box.</li>
-            <li><strong>CANNOT:</strong> Use a blowtorch to thaw a pipe in a crawl space—the draft can carry a spark into the insulation, causing a fire.</li>
+            <li><strong>CANNOT:</strong> Use a blowtorch to thaw a pipe in a crawl space-the draft can carry a spark into the insulation, causing a fire.</li>
             <li><strong>CAN:</strong> Specify **PEX-a** if you are re-piping a vulnerable area, as it is the only 2026-approved "Expanding" plastic.</li>
-            <li><strong>CANNOT:</strong> Wait more than 24 hours to start drying out a wet carpet—mold spores in US homes are highly sensitive to moisture spikes.</li>
+            <li><strong>CANNOT:</strong> Wait more than 24 hours to start drying out a wet carpet-mold spores in US homes are highly sensitive to moisture spikes.</li>
         </ul>
     </div>
 
@@ -132,7 +132,7 @@
             <li><strong>Retro-Fitting:</strong> In 2026, we specialize in "Climate-Harden" retro-fits for Southern homes, moving attic lines below the insulation layer.</li>
         </ul>
     </div>
-    <p>We've learned that "It doesn't freeze here" is a dangerous assumption. The 2021 freeze proved that even the warmest US states need "Cold-Ready" infrastructure. In 2026, we use "Vulnerability Mapping"—analyzing your specific local weather trends and plumbing layout to identify the exact points where a freeze will strike first. We build the defense *before* the storm arrives.</p>
+    <p>We've learned that "It doesn't freeze here" is a dangerous assumption. The 2021 freeze proved that even the warmest US states need "Cold-Ready" infrastructure. In 2026, we use "Vulnerability Mapping"-analyzing your specific local weather trends and plumbing layout to identify the exact points where a freeze will strike first. We build the defense *before* the storm arrives.</p>
 
     <h2>10. Insurance Claims: Digital Documentation and Deductible Waivers</h2>
     <div class="capsule-box">
@@ -152,7 +152,7 @@
             <li><strong>Integrity Guarantee:</strong> Every 2026 burst repair includes a 12-month "No-Leak" guarantee and a full system pressure test.</li>
         </ul>
     </div>
-    <p>A burst pipe is a race against time. Don't bet your home on a generic handyman—rely on the licensed US professionals who understand the **2026 IPC Mandates.** We stop the water, protect your structure, and restore your home to 100% code-compliance. Our 24/7 network is ready to respond. Call us now for an immediate emergency intervention.</p>
+    <p>A burst pipe is a race against time. Don't bet your home on a generic handyman-rely on the licensed US professionals who understand the **2026 IPC Mandates.** We stop the water, protect your structure, and restore your home to 100% code-compliance. Our 24/7 network is ready to respond. Call us now for an immediate emergency intervention.</p>
 
 </main>
 

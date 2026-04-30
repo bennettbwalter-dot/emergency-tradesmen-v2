@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>Waking up to a flooded kitchen in London is a nightmare. But finding a reliable emergency plumber in the capital—who won't exploit the situation—can be even harder. London’s plumbing is a complex web of Victorian legacies and modern high-rise logistics. From the heavy limescale of the Thames Valley to the brittle lead pipes of Hackney and Brixton, the challenges are unique. In 2026, with major infrastructure upgrades underway, knowing your rights and the local "rules of the road" is essential. This guide is your survival manual for navigating a plumbing crisis within the M25.</p>
+    <p>Waking up to a flooded kitchen in London is a nightmare. But finding a reliable emergency plumber in the capital-who won't exploit the situation-can be even harder. London’s plumbing is a complex web of Victorian legacies and modern high-rise logistics. From the heavy limescale of the Thames Valley to the brittle lead pipes of Hackney and Brixton, the challenges are unique. In 2026, with major infrastructure upgrades underway, knowing your rights and the local "rules of the road" is essential. This guide is your survival manual for navigating a plumbing crisis within the M25.</p>
 
     <h2>1. The "London Premium": Why Costs and Timings Differ</h2>
     <div class="capsule-box">
@@ -38,7 +38,7 @@
             <li><strong>Modern Solutions:</strong> In 2026, many Londoners are opting for "Lead Pipe Replacement" grants to upgrade to modern blue MDPE plastic.</li>
         </ul>
     </div>
-    <p>London's beauty is in its history, but its plumbing is often its weakness. Victorian lead pipes are "thin-walled" and can't handle modern high-pressure water systems. When they burst, they don't just leak—they split open. Furthermore, if your drain is blocked, it might not even be your fault. In a terrace, three houses might share the same pipe. If your neighbour down the street flushes wet wipes, the backup will happen at the lowest point—which might be your kitchen sink.</p>
+    <p>London's beauty is in its history, but its plumbing is often its weakness. Victorian lead pipes are "thin-walled" and can't handle modern high-pressure water systems. When they burst, they don't just leak-they split open. Furthermore, if your drain is blocked, it might not even be your fault. In a terrace, three houses might share the same pipe. If your neighbour down the street flushes wet wipes, the backup will happen at the lowest point-which might be your kitchen sink.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If you live in a pre-war London terrace, find your internal stopcock (usually under the kitchen sink) and turn it once a month. Limescale can "seize" these valves, making them impossible to turn during a real flood.</p>
@@ -54,7 +54,7 @@
             <li><strong>Repairs:</strong> They are replacing miles of Victorian iron mains with modern plastic to prevent the frequent "street floods" London is known for.</li>
         </ul>
     </div>
-    <p>In 2026, Thames Water is under pressure to fix the capital's leaky pipes. This "AMP8" investment period means you'll see more roadworks but hopefully fewer bursts. However, when they work on the main street pipes, they often introduce air into the system. This can lead to "Water Hammer"—a loud banging noise when you turn your taps off. If you hear this after Thames Water has been in your street, call a verified specialist to install a "Shock Arrestor" before the vibration breaks your internal joints.</p>
+    <p>In 2026, Thames Water is under pressure to fix the capital's leaky pipes. This "AMP8" investment period means you'll see more roadworks but hopefully fewer bursts. However, when they work on the main street pipes, they often introduce air into the system. This can lead to "Water Hammer"-a loud banging noise when you turn your taps off. If you hear this after Thames Water has been in your street, call a verified specialist to install a "Shock Arrestor" before the vibration breaks your internal joints.</p>
 
     <h2>4. Hard Water Crisis: Limescale and the "Silent Boiler Killer"</h2>
     <div class="capsule-box">
@@ -64,7 +64,7 @@
             <li><strong>Symptoms:</strong> Low hot water pressure, "kettling" noises from the boiler, and white crust on your shower head.</li>
         </ul>
     </div>
-    <p>Hard water is a tax on Londoners. Every year, millions of pounds are wasted on broken boilers and kettles. Limescale acts like an insulator; it coats your heating elements, meaning your boiler has to work twice as hard to get the water hot. This not only increases your energy bills in the 2026 crisis but eventually causes the boiler to overheat and shut down. A professional plumber should fit a "Scale Inhibitor" to your incoming main—it's a small $50 part that can save you a $3,000 boiler replacement.</p>
+    <p>Hard water is a tax on Londoners. Every year, millions of pounds are wasted on broken boilers and kettles. Limescale acts like an insulator; it coats your heating elements, meaning your boiler has to work twice as hard to get the water hot. This not only increases your energy bills in the 2026 crisis but eventually causes the boiler to overheat and shut down. A professional plumber should fit a "Scale Inhibitor" to your incoming main-it's a small $50 part that can save you a $3,000 boiler replacement.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> London's modern sewer system was built by Joseph Bazalgette after the "Great Stink" of 1858. He built 1,100 miles of street sewers, most of which are still in use today!</p>
@@ -78,7 +78,7 @@
             <li><strong>Liability:</strong> If the leak is from a communal "Riser," the building management is responsible, not the individual tenant.</li>
         </a>
     </div>
-    <p>Living in a London skyscraper changes the rules. If you see water dripping from your ceiling, your first move isn't to call a plumber—it's to run to the floor above. They might have a leaking washing machine or an overflowing bathtub and have no idea! If they aren't home, you must call the 24/7 building concierge or manager. They have the "Master Key" to access the flat and shut off the water. If the leak is coming from a pipe inside a shared wall, that is a building insurance matter, which can save you thousands in repair costs.</p>
+    <p>Living in a London skyscraper changes the rules. If you see water dripping from your ceiling, your first move isn't to call a plumber-it's to run to the floor above. They might have a leaking washing machine or an overflowing bathtub and have no idea! If they aren't home, you must call the 24/7 building concierge or manager. They have the "Master Key" to access the flat and shut off the water. If the leak is coming from a pipe inside a shared wall, that is a building insurance matter, which can save you thousands in repair costs.</p>
 
     <h2>6. Stopcock Locations: Finding the Master Valve in London Homes</h2>
     <div class="capsule-box">
@@ -157,7 +157,7 @@
             <li><strong>Equipment:</strong> They carry thermal cameras to find hidden leaks behind London's thick brick walls.</li>
         </ul>
     </div>
-    <p>A leak in London doesn't care if it's 3 AM on a bank holiday. Our network of 24/7 verified plumbers is geared for the unique rhythm of the capital. They understand the "Water Industry Act 2026" updates, they have the adapters for Victorian pipes, and they can navigate the ULEZ zones without delay. From Islington to Chelsea, we connect you with pros who provide clear, upfront pricing and guaranteed work. Your London home is your biggest asset—don't let a small leak destroy it. Call a verified specialist and get it fixed right the first time.</p>
+    <p>A leak in London doesn't care if it's 3 AM on a bank holiday. Our network of 24/7 verified plumbers is geared for the unique rhythm of the capital. They understand the "Water Industry Act 2026" updates, they have the adapters for Victorian pipes, and they can navigate the ULEZ zones without delay. From Islington to Chelsea, we connect you with pros who provide clear, upfront pricing and guaranteed work. Your London home is your biggest asset-don't let a small leak destroy it. Call a verified specialist and get it fixed right the first time.</p>
 
 </main>
 

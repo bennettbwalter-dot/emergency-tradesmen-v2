@@ -65,7 +65,7 @@
             <li><strong>Frosting:</strong> If you see actual white frost on the outside of a pipe in your loft, it is frozen solid.</li>
         </ul>
     </div>
-    <p>How do you know if you're at risk? Walk through your home during a cold snap and check every tap—don't forget the downstairs toilet or the utility room. If a tap isn't working, the freeze has already happened. You need to act before the thaw starts. Look for "bulging" in copper pipes; if the pipe looks fat or rounded in one spot, it has already been stretched by ice and is about to fail. Call a 24/7 verified specialist to inspect these areas before they turn into a waterfall.</p>
+    <p>How do you know if you're at risk? Walk through your home during a cold snap and check every tap-don't forget the downstairs toilet or the utility room. If a tap isn't working, the freeze has already happened. You need to act before the thaw starts. Look for "bulging" in copper pipes; if the pipe looks fat or rounded in one spot, it has already been stretched by ice and is about to fail. Call a 24/7 verified specialist to inspect these areas before they turn into a waterfall.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> During the "Big Freeze" of 1963 in the UK, the temperature stayed below freezing for nearly 3 months. The army actually had to use explosives to break up the ice in some rivers to prevent bridge damage!</p>
@@ -75,7 +75,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Location:</strong> Usually under the kitchen sink, in the hallway, or under the floorboards near the front door.</li>
-            <li><strong>Operation:</strong> Turn it clockwise to close. If it's stiff, do NOT force it with a wrench—call a pro.</li>
+            <li><strong>Operation:</strong> Turn it clockwise to close. If it's stiff, do NOT force it with a wrench-call a pro.</li>
             <li><strong>Accessibility:</strong> In 2026, ensure your stopcock isn't buried under years of cleaning supplies or "boxed in" by a new kitchen.</li>
         </ul>
     </div>
@@ -89,7 +89,7 @@
             <li><strong>DON'T:</strong> Never use a blowtorch or a naked flame. You risk melting plastic joints or starting a house fire.</li>
         </ul>
     </div>
-    <p>If you find a frozen pipe, don't panic. Open the tap fully so the water has somewhere to go as it melts. Apply gentle heat. If you use a hairdryer, keep it moving—never hold it in one spot for too long. If the pipe is behind a wall, you may need to turn up the house heating and wait. If you hear a "crack" or see water start to bead on the pipe, turn off the main stopcock immediately. You have found a burst, and the ice is currently the only thing stopping the flood.</p>
+    <p>If you find a frozen pipe, don't panic. Open the tap fully so the water has somewhere to go as it melts. Apply gentle heat. If you use a hairdryer, keep it moving-never hold it in one spot for too long. If the pipe is behind a wall, you may need to turn up the house heating and wait. If you hear a "crack" or see water start to bead on the pipe, turn off the main stopcock immediately. You have found a burst, and the ice is currently the only thing stopping the flood.</p>
 
     <div class="split-dos-donts">
     <div class="dos-column">
@@ -118,7 +118,7 @@
             <li><strong>2026 Failures:</strong> We are seeing a 30% increase in "Popped" plastic joints in new-build UK homes during rapid thaws.</li>
         </ul>
     </div>
-    <p>Modern plumbing is fast and cheap to install, but it has a secret weakness. In many UK new-builds, "Push-Fit" plastic is the standard. While the pipe itself can stretch, the plastic teeth in the fittings can't. During a freeze, the pipe gets thinner as it is squeezed by ice, allowing it to slide right out of the joint. When the thaw hits, you don't have a leak—you have a fully disconnected pipe. If your home has plastic plumbing, ensure a pro has checked that all "Inserts" are present in every visible joint.</p>
+    <p>Modern plumbing is fast and cheap to install, but it has a secret weakness. In many UK new-builds, "Push-Fit" plastic is the standard. While the pipe itself can stretch, the plastic teeth in the fittings can't. During a freeze, the pipe gets thinner as it is squeezed by ice, allowing it to slide right out of the joint. When the thaw hits, you don't have a leak-you have a fully disconnected pipe. If your home has plastic plumbing, ensure a pro has checked that all "Inserts" are present in every visible joint.</p>
 
     <h2>8. Loft Safety: Cold-Roof Designs and Insulation Errors</h2>
     <div class="capsule-box">
@@ -148,7 +148,7 @@
             <li><strong>Samples:</strong> Keep the failed section of pipe or fitting. The insurer may want to inspect it for "Wear and Tear" vs "Accidental Damage."</li>
         </ul>
     </div>
-    <p>If the worst happens, you need to be prepared for the insurance adjuster. In 2026, UK insurers are becoming stricter about "Maintenance" clauses. If they see your pipes were unlagged in a cold loft, they may reject your claim. Document your prevention measures—take a photo of your insulated pipes today! If a burst happens, move your furniture out of the way and take video evidence before the plumber arrives. This "Proof of Mitigation" is vital for a full and fast payout.</p>
+    <p>If the worst happens, you need to be prepared for the insurance adjuster. In 2026, UK insurers are becoming stricter about "Maintenance" clauses. If they see your pipes were unlagged in a cold loft, they may reject your claim. Document your prevention measures-take a photo of your insulated pipes today! If a burst happens, move your furniture out of the way and take video evidence before the plumber arrives. This "Proof of Mitigation" is vital for a full and fast payout.</p>
 
     <h2>11. 24/7 Verified Plumbers: Your First Call for the "Great Thaw"</h2>
     <div class="capsule-box">
@@ -158,7 +158,7 @@
             <li><strong>Verified:</strong> Only WaterSafe and CIPHE-verified engineers are dispatched for flood emergencies.</li>
         </ul>
     </div>
-    <p>A burst pipe in March is a race against time. The longer the water flows, the more it destroys your ceilings, flooring, and electrical systems. Our network of 24/7 verified plumbers is specifically trained for "Thaw Events." They carry high-powered dehumidifiers to start the drying process immediately, preventing mold growth in your UK home. Don't wait for the "Flood of 2026"—save our number today and ensure your family is protected by the best tradesmen in the business.</p>
+    <p>A burst pipe in March is a race against time. The longer the water flows, the more it destroys your ceilings, flooring, and electrical systems. Our network of 24/7 verified plumbers is specifically trained for "Thaw Events." They carry high-powered dehumidifiers to start the drying process immediately, preventing mold growth in your UK home. Don't wait for the "Flood of 2026"-save our number today and ensure your family is protected by the best tradesmen in the business.</p>
 
 </main>
 

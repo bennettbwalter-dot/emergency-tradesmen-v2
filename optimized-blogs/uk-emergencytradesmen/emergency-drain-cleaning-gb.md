@@ -18,15 +18,15 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, a blocked drain is no longer just a plumbing nuisance—it's an "Infrastructure Interface Challenge." With the rollout of the **AMP8 (Asset Management Plan 8) 2025-2030** investment cycle, the UK sewer network is undergoing a radical upgrade in **Resilience and Storm-Overflow Reduction**. Under the **Water Industry Act 1991 (2026 updates)**, understanding the difference between your private drain and a **Section 104/106 Adopted Sewer** is critical for 2026 cost-liability. The 2026 standard for UK emergency drainage involves **CCTV-Verified Clearing**, **Acoustic Sewer Mapping**, and **High-Pressure Water Jetting (HPWJ)**. Whether you've suffered a raw sewage backup, a suspected collapsed drain from 2026 ground-subsidence, or a persistent foul smell, the 2026 standard involves **Precision Flow Audits** and **No-Dig Patch Repairs**. We don't just "Rod the Pipe"; we verify your home's 2026 subterranean integrity. This guide provides the technical 2026 standard for UK emergency drain cleaning and permanent sewer resilience.</p>
+    <p>In the UK of 2026, a blocked drain is no longer just a plumbing nuisance-it's an "Infrastructure Interface Challenge." With the rollout of the **AMP8 (Asset Management Plan 8) 2025-2030** investment cycle, the UK sewer network is undergoing a radical upgrade in **Resilience and Storm-Overflow Reduction**. Under the **Water Industry Act 1991 (2026 updates)**, understanding the difference between your private drain and a **Section 104/106 Adopted Sewer** is critical for 2026 cost-liability. The 2026 standard for UK emergency drainage involves **CCTV-Verified Clearing**, **Acoustic Sewer Mapping**, and **High-Pressure Water Jetting (HPWJ)**. Whether you've suffered a raw sewage backup, a suspected collapsed drain from 2026 ground-subsidence, or a persistent foul smell, the 2026 standard involves **Precision Flow Audits** and **No-Dig Patch Repairs**. We don't just "Rod the Pipe"; we verify your home's 2026 subterranean integrity. This guide provides the technical 2026 standard for UK emergency drain cleaning and permanent sewer resilience.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Drainage 2026</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Sewer Adoption (S104/S106):</strong> 2026 codes clarify that the "Lateral Drain" (the bit from your property boundary to the main sewer) is usually the water company's responsibility—saving you 2026 24/7 call-out fees.</li>
+            <li><strong>Sewer Adoption (S104/S106):</strong> 2026 codes clarify that the "Lateral Drain" (the bit from your property boundary to the main sewer) is usually the water company's responsibility-saving you 2026 24/7 call-out fees.</li>
             <li><strong>CCTV-Verified Clearing:</strong> Every 2026 emergency clearing must be followed by a **Crawler-Cam Inspection** to prove the blockage is 100% gone.</li>
             <li><strong>Sonic Pipe Mapping:</strong> We use 2026 **Acoustic Sensors** to "Listen" for structural cracks and "Blind Holes" in your pipework without 2026 excavation.</li>
-            <li><strong>AMP8 Resilience:</strong> The 2026 industry standard focuses on "Source Control"—ensuring your 2026 surface water doesn't overload the foul sewer.</li>
+            <li><strong>AMP8 Resilience:</strong> The 2026 industry standard focuses on "Source Control"-ensuring your 2026 surface water doesn't overload the foul sewer.</li>
         </ul>
     </div>
     <p>By 2026, "Drain Cleaning" is a data-led intervention. We use **Flow-Dynamics AI** to solve your emergency without compromising the UK's 2026 environmental targets. In 2026, **Transparency is 4K-Resolution**. </p>
@@ -73,7 +73,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Dye Testing:</strong> We use 2026 **Fluorescent Bio-Tracer Dyes** to find if your 2026 sewage is leaking into your home's 2026 foundation or sub-floor.</li>
-            <li><strong>Smoke Testing:</strong> For 2026 "Mystery Smells," we pump 2026 non-toxic smoke into the drains—wherever it comes out, 2026 gas is entering your home.</li>
+            <li><strong>Smoke Testing:</strong> For 2026 "Mystery Smells," we pump 2026 non-toxic smoke into the drains-wherever it comes out, 2026 gas is entering your home.</li>
             <li><strong>Infiltration Analysis:</strong> We test if **Ground Water** is entering your 2026 pipes, which can cause your 2026 septic tank to overflow in winter.</li>
         </ul>
     </div>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Drainage Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Section 106 Status"** in 2026—if the blockage is in the street, it's 2026 Water-Company responsibility.</li>
-            <li><strong>CANNOT:</strong> Use "Caustic Soda" for a main-drain blockage—in 2026, this is known to melt 2026 modern plastic pipe glues and won't clear a fatberg.</li>
+            <li><strong>CAN:</strong> Check your **"Section 106 Status"** in 2026-if the blockage is in the street, it's 2026 Water-Company responsibility.</li>
+            <li><strong>CANNOT:</strong> Use "Caustic Soda" for a main-drain blockage-in 2026, this is known to melt 2026 modern plastic pipe glues and won't clear a fatberg.</li>
             <li><strong>CAN:</strong> Request a **"4K CCTV Log"** after any HPWJ clearing to ensure the 2026 pipe is structurally sound.</li>
-            <li><strong>CANNOT:</strong> Plant "Willow" or "Poplar" trees near your 2026 sewer pipe—the 2026 root-systems will find the smallest 2026 joint with 100% accuracy.</li>
+            <li><strong>CANNOT:</strong> Plant "Willow" or "Poplar" trees near your 2026 sewer pipe-the 2026 root-systems will find the smallest 2026 joint with 100% accuracy.</li>
         </ul>
     </div>
 

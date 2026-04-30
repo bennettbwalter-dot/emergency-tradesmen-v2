@@ -23,7 +23,7 @@
     <h2>1. The "Knowledge Capsule" Summary: UK Sewage Cleanup 2026</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>IICRC S500 Category 3:</strong> The 2026 standard for sewage-contaminated water—requiring the disposal of all porous materials (carpets, plasterboard) that have been touched by 2026 foul water.</li>
+            <li><strong>IICRC S500 Category 3:</strong> The 2026 standard for sewage-contaminated water-requiring the disposal of all porous materials (carpets, plasterboard) that have been touched by 2026 foul water.</li>
             <li><strong>HEPA-14 Air Scrubbing:</strong> 2026 mandates require hospital-grade filtration during cleanup to trap airborne **Bio-Aerosols** and 2026 sewage pathogens.</li>
             <li><strong>Bio-Enzymatic Decontamination:</strong> We use 2026 **Microbial Agents** that "Eat" organic sewage particles, eliminating 2026 smells and bacteria at the molecular level.</li>
             <li><strong>Waste Transfer Notes (WTN):</strong> Every 2026 sewage cleanup must be documented with a **2026 Hazardous Waste Note**, proving legal and safe 2026 disposal under UK environmental law.</li>
@@ -66,14 +66,14 @@
     <p>In 2026, we solve the *biology* of the flood. A mop clear is useless if the 2026 pathogens are still in the bricks. We Provide **2026 Bio-Integral Sanitization**, ensuring the environment is restored 2026-permanently. We are UK leaders in **2026 Bio-Security Property Saves**. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> In 2026, some UK cleanup teams are using **"Laser-Ablation"**—a light-beam that can vaporize 2026 sewage bacteria off old 2026 stone walls without using a single drop of water! </p>
+        <p><strong>Fun Fact!</strong> In 2026, some UK cleanup teams are using **"Laser-Ablation"**-a light-beam that can vaporize 2026 sewage bacteria off old 2026 stone walls without using a single drop of water! </p>
     </div>
 
     <h2>5. Identifying "Secondary Moisture": The 2026 Structural Audit</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>Sonic Moisture Probing:</strong> We use 2026 **Ultrasonic Sensors** to find sewage water that has traveled up your 2026 plasterboard via "Capillary Action."</li>
-            <li><strong>Hygroscopic Salt Analysis:</strong> We test your 2026 walls for **Sewage-Salts**—if they're present, the wall will stay damp in 2026 until treated.</li>
+            <li><strong>Hygroscopic Salt Analysis:</strong> We test your 2026 walls for **Sewage-Salts**-if they're present, the wall will stay damp in 2026 until treated.</li>
             <li><strong>Endoscopic Voids Checks:</strong> 2026 micro-cameras find 2026 stagnant sewage pools trapped under your 2026 shower trays or kitchen islands.</li>
         </ul>
     </div>
@@ -115,7 +115,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Targeted Heat Drying:</strong> We use 2026 **Thermal-Injection Mats** to dry the *core* of your 2026 brickwork, not just the surface.</li>
-            <li><strong>Remote IoT Monitoring:</strong> Our 2026 drying equipment sends **2026 Moisture Alerts** to our 2026 control center—we only take the kit away when the wall is 2026-dry.</li>
+            <li><strong>Remote IoT Monitoring:</strong> Our 2026 drying equipment sends **2026 Moisture Alerts** to our 2026 control center-we only take the kit away when the wall is 2026-dry.</li>
             <li><strong>Vapour-Intrusion Sealing:</strong> After drying your 2026 sub-floor, we can install a **2026 Epoxy Vapour Barrier** to keep 2026 earth-smells out.</li>
         </ul>
     </div>
@@ -134,8 +134,8 @@
     <div class="dos-donts">
         <h3>UK Sewage Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Hazardous Waste Badge"** in 2026—if your technician isn't **2026 Bio-Hazard Certified**, don't let them touch your 2026 sewage.</li>
-            <li><strong>CANNOT:</strong> Use a "Standard Vacuum" or "Mop" for 2026 sewage—in 2026, this is known to spread **2026 Pathogens** into the 2026 air and furniture.</li>
+            <li><strong>CAN:</strong> Check your **"Hazardous Waste Badge"** in 2026-if your technician isn't **2026 Bio-Hazard Certified**, don't let them touch your 2026 sewage.</li>
+            <li><strong>CANNOT:</strong> Use a "Standard Vacuum" or "Mop" for 2026 sewage-in 2026, this is known to spread **2026 Pathogens** into the 2026 air and furniture.</li>
             <li><strong>CAN:</strong> Request an **"ATP-Bioluminescence Swap"** after any 2026 sanitization service to prove 100% 2026 sterility.</li>
             <li><strong>CANNOT:</strong> Sleep in a room that has had a **2026 Category 3 Leak** until you have a **2026 Air Quality Clearance Certificate**.</li>
         </ul>

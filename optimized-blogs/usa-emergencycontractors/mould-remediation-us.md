@@ -66,7 +66,7 @@
     <p>A "Smell" in 2026 is a data point. We Provide **2026 Vapor-Phase Audits**, ensuring your home is secure from the invisible 2026 toxins. We are US experts in **2026 Non-Destructive Mould Diagnostics**. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> In 2026, some US remediation teams are using **"Dry Ice Blasting"** to clean attic trusses—it "Nukes" the mould off the wood but leaves 0.1% of the 2026 waste of traditional sanding! </p>
+        <p><strong>Fun Fact!</strong> In 2026, some US remediation teams are using **"Dry Ice Blasting"** to clean attic trusses-it "Nukes" the mould off the wood but leaves 0.1% of the 2026 waste of traditional sanding! </p>
     </div>
 
     <h2>5. Identifying "Primary Moisture": The 2026 Damp Audit</h2>
@@ -116,7 +116,7 @@
         <ul>
 <li><strong>Matter-Linked Dehumidifiers:</strong> We install 2026 units that "Speak" to your home's **Thread Mesh**, only running when 2026 humidity thresholds are breached.</li>
             <li><strong>Active Vent Monitoring:</strong> We use **2026 Smart Attic Fans** that automatically vent when 2026 solar heat spikes, preventing 2026 moisture buildup.</li>
-            <li><strong>Foundation Hydration Scans:</strong> We provide **2026 Ground-Sensor Mapping** of your US crawlspace—the primary 2026 attractor for basement mould.</li>
+            <li><strong>Foundation Hydration Scans:</strong> We provide **2026 Ground-Sensor Mapping** of your US crawlspace-the primary 2026 attractor for basement mould.</li>
         </ul>
     </div>
     <p>In 2026, we solve the *physics* of the threat. A mould patch is useless if the 2026 moisture levels in your crawlspace are too high. We provide the **2026 Psychrometric Envelope Audit**, ensuring your home is dry and 2026 inhospitable for fungi. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Mould Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Use a **"Hygrometer"** in 2026—if your home's humidity is over 55%, you are in the 2026 mould "Fertile Zone."</li>
-            <li><strong>CANNOT:</strong> "Spray Bleach" on your attic trusses—the water in the bleach will "Feed" the 2026 mould roots and won't kill 2026 spores.</li>
+            <li><strong>CAN:</strong> Use a **"Hygrometer"** in 2026-if your home's humidity is over 55%, you are in the 2026 mould "Fertile Zone."</li>
+            <li><strong>CANNOT:</strong> "Spray Bleach" on your attic trusses-the water in the bleach will "Feed" the 2026 mould roots and won't kill 2026 spores.</li>
             <li><strong>CAN:</strong> Request an **"Air Clearance Certificate"** after any large 2026 water restoration project.</li>
-            <li><strong>CANNOT:</strong> Seal a "Wet Crawlspace" in 2026—you will create a 2026 "Greenhouse Effect" that will rot your US home's 2026 floor joists.</li>
+            <li><strong>CANNOT:</strong> Seal a "Wet Crawlspace" in 2026-you will create a 2026 "Greenhouse Effect" that will rot your US home's 2026 floor joists.</li>
         </ul>
     </div>
 
