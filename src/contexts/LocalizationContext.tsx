@@ -1,7 +1,13 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { devLog } from "@/lib/devLog";
 import { useLocation } from 'react-router-dom';
-import { findNearestCity } from '@/lib/cityCoordinates';
+import { findNearestCity, cityCoordinates } from '@/lib/cityCoordinates';
+import { usCityCoordinates } from '@/lib/usCityCoordinates';
+
+// Pre-built lowercase lookup tables of cities/areas the site has listings for.
+// Used to prefer an exact supported town/city over a broader Nominatim region.
+const SUPPORTED_UK = new Map(Object.keys(cityCoordinates).map(s => [s.toLowerCase(), s]));
+const SUPPORTED_US = new Map(Object.keys(usCityCoordinates).map(s => [s.toLowerCase(), s]));
 
 export type CountryCode = 'GB' | 'US';
 
@@ -95,54 +101,90 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     const location = useLocation();
 
     // 1. Real-time Location Tracking (Navigator API)
-    // Reverse-geocode via Nominatim (free, no key) for accuracy at exact GPS coords;
-    // fall back to nearest-city snap from the static list if Nominatim is unreachable.
+    // Strategy: Nominatim (free, no key) gives the user's real address breakdown.
+    // We walk the breakdown from most-specific to broadest, preferring any candidate
+    // that matches a town/city we already have listings for. Only when no supported
+    // match exists do we fall back to a real broader area from Nominatim itself
+    // (e.g. "Central Bedfordshire") — never a hardcoded value.
     const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
+        const isUS = countryCode === 'US';
+        const supported = isUS ? SUPPORTED_US : SUPPORTED_UK;
+
+        let matchedCity: string | null = null;        // exact match in our listings
+        let nominatimFallback: string | null = null;  // real broader area
+        let stateName: string | null = null;
+
         try {
             const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=12&addressdetails=1`,
+                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=14&addressdetails=1`,
                 { headers: { 'Accept-Language': 'en' } }
             );
             if (res.ok) {
                 const data = await res.json();
-                const city =
-                    data.address?.city ||
-                    data.address?.town ||
-                    data.address?.village ||
-                    data.address?.suburb ||
-                    data.address?.municipality ||
-                    data.address?.county ||
-                    null;
-                if (city) {
-                    setDetectedCity(city);
-                    if (countryCode === 'US' && data.address?.state) {
-                        setDetectedState(data.address.state);
-                    }
-                    devLog(`Nominatim resolved city: ${city}`);
-                    return;
+                const addr = data.address || {};
+                stateName = addr.state || null;
+
+                // Most-specific first
+                const candidates = [
+                    addr.suburb,
+                    addr.neighbourhood,
+                    addr.city_district,
+                    addr.town,
+                    addr.village,
+                    addr.city,
+                    addr.municipality,
+                    addr.county,
+                    addr.state_district,
+                ].filter((s): s is string => Boolean(s));
+
+                for (const c of candidates) {
+                    const canonical = supported.get(c.toLowerCase());
+                    if (canonical) { matchedCity = canonical; break; }
+                }
+
+                if (!matchedCity) {
+                    // Prefer the smallest real area Nominatim reported, in this order
+                    nominatimFallback =
+                        addr.town || addr.village || addr.city ||
+                        addr.suburb || addr.municipality ||
+                        addr.county || addr.state_district || null;
                 }
             }
         } catch (nominatimErr) {
             console.warn('Nominatim reverse geocode failed:', nominatimErr);
         }
 
-        try {
+        let resolved = matchedCity || nominatimFallback;
+
+        // Last-resort fallback: nearest supported city by haversine distance.
+        // Only fires if Nominatim was completely unreachable.
+        if (!resolved) {
             const nearest = findNearestCity(lat, lng, countryCode);
-            if (nearest && nearest.city) {
-                setDetectedCity(nearest.city);
-                if (countryCode === 'US') {
+            if (nearest?.city) resolved = nearest.city;
+        }
+
+        if (resolved) {
+            setDetectedCity(resolved);
+            devLog(`Resolved location: ${resolved}${matchedCity ? ' (supported)' : ' (broader fallback)'}`);
+        }
+
+        if (isUS) {
+            if (stateName) {
+                setDetectedState(stateName);
+            } else if (resolved) {
+                // Nominatim didn't return state — derive from cityToState if we know the city
+                try {
                     const { cityToState } = await import('@/lib/trades');
-                    const stateCode = cityToState[nearest.city];
+                    const stateCode = cityToState[resolved];
                     if (stateCode) {
                         const { US_STATES } = await import('@/lib/us_states');
                         const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
                         if (state) setDetectedState(state.name);
                     }
-                }
-                devLog(`Resolved coords via static list: ${nearest.city}`);
+                } catch { /* non-fatal */ }
             }
-        } catch (e) {
-            console.warn('Failed to resolve city from coords', e);
+        } else if (stateName) {
+            setDetectedState(stateName);
         }
     }, [countryCode]);
 

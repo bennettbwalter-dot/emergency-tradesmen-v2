@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { HelpCircle } from "lucide-react";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
 import { audioService } from "@/lib/audioService";
+import { US_STATES } from "@/lib/us_states";
 import { cn } from "@/lib/utils";
 
 const EarthHeroBackground = lazy(() =>
@@ -88,8 +89,16 @@ export function HeroSection() {
 
     // Headline Logic
     // UK: NEAR {City} or NEAR ME
-    // US: NEAR {City} or NEAR ME
+    // US: NEAR {City, ST} or NEAR ME (US format keeps the state appended to the city)
     const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? detectedCity : 'ME').toUpperCase();
+    const stateAbbrev = useMemo(() => {
+        if (settings.countryCode !== 'US' || !detectedState) return '';
+        const match = US_STATES.find(s => s.name.toLowerCase() === detectedState.toLowerCase() || s.code.toLowerCase() === detectedState.toLowerCase());
+        return match?.code ?? '';
+    }, [settings.countryCode, detectedState]);
+    const titleLocation = settings.countryCode === 'US' && detectedCity && stateAbbrev
+        ? `${displayCity}, ${stateAbbrev}`
+        : displayCity;
     const displayState = detectedState || (settings.countryCode === 'US' ? 'US' : 'UK');
 
     return (
@@ -192,7 +201,7 @@ export function HeroSection() {
                                     className="text-white md:text-foreground text-[clamp(1.75rem,8.5vw,3.25rem)] min-w-0 truncate drop-shadow-[0_4px_16px_rgba(0,0,0,0.78)]"
                                     style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
                                 >
-                                    {displayCity}
+                                    {titleLocation}
                                 </span>
                             </span>
                         </h1>
