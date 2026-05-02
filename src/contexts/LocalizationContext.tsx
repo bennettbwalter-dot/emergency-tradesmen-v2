@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { devLog } from "@/lib/devLog";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { findNearestCity } from '@/lib/cityCoordinates';
 
 export type CountryCode = 'GB' | 'US';
@@ -78,147 +78,111 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     const [detectedState, setDetectedState] = useState<string | null>(null);
     const [isLocating, setIsLocating] = useState(false);
     const [geoError, setGeoError] = useState<string | null>(null);
-    const [hasAttemptedIPDetection, setHasAttemptedIPDetection] = useState(false);
 
-    // Overrides for Testing
+    // Dev-only overrides. In production we never read a persisted override,
+    // so a stale value from past testing can never stick the hero on the wrong city.
+    const overridesEnabled = typeof window !== 'undefined' && import.meta.env.DEV;
     const [overrideCoords, setOverrideCoords] = useState<Coords | null>(() => {
-        if (typeof window === 'undefined') return null;
+        if (!overridesEnabled) return null;
         const saved = localStorage.getItem('geo_override_coords');
         return saved ? JSON.parse(saved) : null;
     });
     const [overrideCity, setOverrideCity] = useState<string | null>(() => {
-        if (typeof window === 'undefined') return null;
+        if (!overridesEnabled) return null;
         return localStorage.getItem('geo_override_city');
     });
 
     const location = useLocation();
-    const navigate = useNavigate();
 
-    // 1. IP-Based Regional Detection (Runs once on mount at root)
-    useEffect(() => {
-        if (hasAttemptedIPDetection) return;
-
-        const detectRegion = async () => {
-            if (hasAttemptedIPDetection) return;
-
-            try {
-                const hostname = window.location.hostname;
-                const port = window.location.port;
-                const isUSDomain = hostname.includes('emergencycontractors.net') || 
-                             (hostname === 'localhost' && port === '3001') ||
-                             (hostname === '127.0.0.1' && port === '3001');
-                const isUKDomain = hostname.includes('emergencytradesmen.net') || 
-                             port === '3000' || 
-                             (hostname === 'localhost' && port !== '3001') ||
-                             (hostname === '127.0.0.1' && port !== '3001');
-
-                const applyIPLocation = async (forcedCountryCode?: CountryCode) => {
-                    const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
-                    if (!response.ok) throw new Error('API unreachable');
-                    const data = await response.json();
-
-                    const ipCountryCode = data.country_code || data.countryCode;
-                    const regionName = data.region || data.regionName;
-                    const cityName = data.city || data.cityName;
-                    const latitude = Number(data.latitude);
-                    const longitude = Number(data.longitude);
-                    const resolvedCountryCode: CountryCode = forcedCountryCode || (ipCountryCode === 'US' ? 'US' : 'GB');
-
-                    if (resolvedCountryCode === 'US') {
-                        setCountryCodeState('US');
-                        if (ipCountryCode === 'US') {
-                            if (regionName) setDetectedState(regionName);
-                            if (cityName) setDetectedCity(cityName);
-                        }
-                        return;
-                    }
-
-                    setCountryCodeState('GB');
-                    if (ipCountryCode === 'GB') {
-                        if (regionName) setDetectedState(regionName);
-                        if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
-                            const nearest = findNearestCity(latitude, longitude, 'GB');
-                            if (nearest) setDetectedCity(nearest.city);
-                        } else if (cityName) {
-                            setDetectedCity(cityName);
-                        }
-                    }
-                };
-                
-                if (isUSDomain) {
-                    setCountryCodeState('US');
-                    await applyIPLocation('US');
-                } else if (isUKDomain) {
-                    setCountryCodeState('GB');
-                    await applyIPLocation('GB');
-                } else {
-                    // Fallback for other domains/IPs
-                    await applyIPLocation();
-                }
-            } catch (err) {
-                console.warn('Region detection failed, defaulting to GB:', err);
-                setCountryCodeState('GB');
-            } finally {
-                setHasAttemptedIPDetection(true);
-            }
-        };
-
-
-        detectRegion();
-    }, [location.pathname, navigate, hasAttemptedIPDetection]);
-
-    // 2. Real-time Location Tracking (Navigator API)
+    // 1. Real-time Location Tracking (Navigator API)
+    // Reverse-geocode via Nominatim (free, no key) for accuracy at exact GPS coords;
+    // fall back to nearest-city snap from the static list if Nominatim is unreachable.
     const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
         try {
-            const nearest = findNearestCity(lat, lng, countryCode);
-            if (nearest) {
-                setDetectedCity(nearest.city);
-
-                // If US, also try to resolve state
-                if (countryCode === 'US') {
-                    import('@/lib/trades').then(({ cityToState }) => {
-                        const stateCode = cityToState[nearest.city];
-                        if (stateCode) {
-                            import('@/lib/us_states').then(({ US_STATES }) => {
-                                const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
-                                if (state) setDetectedState(state.name);
-                            });
-                        }
-                    });
-                }
-
-                devLog(`Resolved coords to city: ${nearest.city} (using ${countryCode} coordinates)`);
-            } else {
-                // No city in database — fall back to Nominatim reverse geocoding (free, no key required)
-                try {
-                    const res = await fetch(
-                        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
-                        { headers: { 'Accept-Language': 'en' } }
-                    );
-                    if (res.ok) {
-                        const data = await res.json();
-                        const city =
-                            data.address?.city ||
-                            data.address?.town ||
-                            data.address?.village ||
-                            data.address?.county ||
-                            null;
-                        if (city) {
-                            setDetectedCity(city);
-                            devLog(`Nominatim resolved city: ${city}`);
-                        }
-                        if (countryCode === 'US' && data.address?.state) {
-                            setDetectedState(data.address.state);
-                        }
+            const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=12&addressdetails=1`,
+                { headers: { 'Accept-Language': 'en' } }
+            );
+            if (res.ok) {
+                const data = await res.json();
+                const city =
+                    data.address?.city ||
+                    data.address?.town ||
+                    data.address?.village ||
+                    data.address?.suburb ||
+                    data.address?.municipality ||
+                    data.address?.county ||
+                    null;
+                if (city) {
+                    setDetectedCity(city);
+                    if (countryCode === 'US' && data.address?.state) {
+                        setDetectedState(data.address.state);
                     }
-                } catch (nominatimErr) {
-                    console.warn("Nominatim geocode failed:", nominatimErr);
+                    devLog(`Nominatim resolved city: ${city}`);
+                    return;
                 }
             }
+        } catch (nominatimErr) {
+            console.warn('Nominatim reverse geocode failed:', nominatimErr);
+        }
+
+        try {
+            const nearest = findNearestCity(lat, lng, countryCode);
+            if (nearest && nearest.city) {
+                setDetectedCity(nearest.city);
+                if (countryCode === 'US') {
+                    const { cityToState } = await import('@/lib/trades');
+                    const stateCode = cityToState[nearest.city];
+                    if (stateCode) {
+                        const { US_STATES } = await import('@/lib/us_states');
+                        const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
+                        if (state) setDetectedState(state.name);
+                    }
+                }
+                devLog(`Resolved coords via static list: ${nearest.city}`);
+            }
         } catch (e) {
-            console.warn("Failed to resolve city from coords", e);
+            console.warn('Failed to resolve city from coords', e);
         }
     }, [countryCode]);
+
+    // 2. Auto-trigger GPS once on mount IF the user has previously granted
+    // location permission. First-time visitors see the "ME" fallback until they
+    // tap a button (chat / trade card) that explicitly requests permission.
+    const hasAutoLocatedRef = useRef(false);
+    useEffect(() => {
+        if (hasAutoLocatedRef.current) return;
+        if (typeof window === 'undefined' || !navigator.geolocation) return;
+        if (overrideCoords || overrideCity) return; // dev override active
+
+        let cancelled = false;
+        const tryAutoLocate = async () => {
+            try {
+                const perms = (navigator as Navigator & { permissions?: Permissions }).permissions;
+                if (!perms?.query) return; // can't tell — don't surprise-prompt
+                const status = await perms.query({ name: 'geolocation' as PermissionName });
+                if (status.state !== 'granted') return;
+            } catch {
+                return;
+            }
+            if (cancelled) return;
+            hasAutoLocatedRef.current = true;
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    if (cancelled) return;
+                    const { latitude, longitude } = position.coords;
+                    setUserCoords({ latitude, longitude });
+                    resolveCoordsToCity(latitude, longitude);
+                },
+                (err) => {
+                    if (!cancelled) console.warn('Auto-geolocation failed:', err.message);
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+            );
+        };
+        tryAutoLocate();
+        return () => { cancelled = true; };
+    }, [resolveCoordsToCity, overrideCoords, overrideCity]);
 
     const detectUserLocation = useCallback(() => {
         if (!navigator.geolocation) {
