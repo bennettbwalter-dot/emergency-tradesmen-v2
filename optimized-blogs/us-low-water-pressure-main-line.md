@@ -1,5 +1,9 @@
 There is a very specific kind of betrayal that happens when you turn on the shower expecting a strong, steady stream and get hit with what can only be described as a polite drizzle. You twist the handle. Nothing. You check the sink. Same sad trickle. Meanwhile, your lawn looks suspiciously swampy, and your water meter is spinning like a casino roulette wheel. Congratulations, your house has decided to audition for a plumbing mystery thriller. I’ve stood in that exact bathroom, shampoo in my hair, wondering if I should start rationing water with a measuring cup. But before you start digging up your yard or frantically searching “24/7 emergency plumber near me,” take a slow breath. Sudden pressure drops and hidden main line leaks usually leave clues, and a few safe, logical checks can help you pinpoint the problem without turning your property into a construction zone. Let’s walk through exactly what to do, step by step, so you can protect your home, stop the waste, and get professional help fast.
 
+<div class="my-16 flex justify-center">
+  <img src="/images/blog/us-low-water-pressure-infographic.png" alt="Sudden Low Water Pressure Infographic" class="w-full h-auto block m-0 p-0 max-w-none rounded-[2rem] border-[6px] border-[#D4C4A1]/20 shadow-2xl" style="width: 100% !important; display: block !important;" loading="lazy">
+</div>
+
 <div class="blog-step-card">
   <div class="blog-step-header">
     <span class="blog-step-number">Step 1</span>

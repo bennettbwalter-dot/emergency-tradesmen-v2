@@ -221,6 +221,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       'gas leak', 'smell gas', 'gas smell', 'carbon monoxide', 'co alarm', 'boiler not working',
       'no heating', 'pilot light out', 'gas meter', 'yellow flame', 'hissing gas', 'fumes',
       'gas safety', 'gas certificate', 'boiler breakdown', 'heating failure', 'gas engineer',
+      'boiler', 'radiator', 'central heating',
     ],
     diagnostics: {
       uk: [
@@ -289,7 +290,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     emergencyKeywords: [
       'locked out', 'lost keys', 'key snapped', 'broken lock', "door won't lock", 'burglary',
       'break in', 'lock jammed', "can't get in", 'key stuck', "door won't open",
-      'security', 'lock change', 'lock replacement', 'locksmith',
+      'security', 'lock change', 'lock replacement', 'locksmith', 'keys', 'lost my keys',
     ],
     diagnostics: {
       uk: [
@@ -481,7 +482,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       'roof leak', 'leaking roof', 'roof blown off', 'storm damage roof', 'missing tiles',
       'broken tiles', 'slipped tiles', 'water from roof', 'rain coming in', 'flat roof leak',
       'chimney leak', 'gutter overflow', 'roof damage', 'flashing damaged',
-      'roof', 'tile', 'tiles', 'gutter', 'chimney', 'slate', 'shingle', 'roofer', 'roofing', 'leaking',
+      'roof', 'tile', 'tiles', 'gutter', 'chimney', 'slate', 'shingle', 'roofer', 'roofing',
     ],
     diagnostics: {
       uk: [
@@ -547,7 +548,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       'wall cracking', 'ceiling collapsed', 'wall collapsed', 'structural damage', 'subsidence',
       'foundation issue', 'floor collapsed', 'beam damaged', 'door frame broken', 'stairs damaged',
       'plaster falling', 'hole in wall', 'brickwork crumbling',
-      'wall', 'crack', 'ceiling', 'floor', 'structure', 'foundation', 'builder', 'building',
+      'wall', 'crack', 'floor', 'structure', 'foundation', 'builder', 'building',
       'collapsed', 'cracking',
     ],
     diagnostics: {
@@ -614,7 +615,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       'flooding', 'water damage', 'flood damage', 'water everywhere', 'flooded house',
       'water extraction', 'soaked carpet', 'wet walls', 'ceiling leak', 'burst pipe damage',
       'storm flooding', 'mold', 'mould', 'structural drying', 'dehumidifier', 'sewage flood',
-      'flood', 'damp', 'wet',
+      'flood', 'damp',
     ],
     diagnostics: {
       uk: [

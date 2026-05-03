@@ -1,3 +1,9 @@
+// Maps internal/detected trade slugs (used by chat-logic, voice triage, KB) to the
+// public route slug (`/emergency-{slug}/...`). The chat layer detects `air-conditioning`
+// but the route is mounted at `/emergency-hvac`.
+export const toRouteSlug = (detectedTrade: string): string =>
+  detectedTrade === 'air-conditioning' ? 'hvac' : detectedTrade;
+
 export const trades = [
   { slug: "plumber", name: "Plumber", usName: "Plumber", icon: "💧", image: "/emergency-plumber-v2.webp", vectorIcon: "/icons/plumber.webp" },
   { slug: "electrician", name: "Electrician", usName: "Electrician", icon: "⚡", image: "/emergency-electrician-v2.webp", vectorIcon: "/icons/electrician.webp" },

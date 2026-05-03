@@ -14,7 +14,7 @@ import remarkGfm from "remark-gfm";
 import { MarkdownTypewriter } from "./MarkdownTypewriter";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
-import { trades, cities, usCities } from "@/lib/trades";
+import { trades, cities, usCities, toRouteSlug } from "@/lib/trades";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import {
     Select,
@@ -522,7 +522,7 @@ export function EmergencyChatInterface() {
 
     const buildEmergencyTarget = (trade: string, city: string) => {
         const citySlug = city.toLowerCase().trim().replace(/\s+/g, '-');
-        return `/emergency-${trade}/${citySlug}`;
+        return `/emergency-${toRouteSlug(trade)}/${citySlug}`;
     };
 
     const startEarthLaunch = (target: string, locationLabel?: string | null) => {
@@ -559,8 +559,8 @@ export function EmergencyChatInterface() {
                 const hasSuburb = suburb && suburb.trim().length > 0;
                 // US Redirection Fix: Never use /us prefix.
                 newPath = hasSuburb
-                    ? `/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
-                    : `/${state}/${metro}/${city}/emergency-${detectedTrade}`;
+                    ? `/${state}/${metro}/${city}/${suburb}/emergency-${toRouteSlug(detectedTrade)}`
+                    : `/${state}/${metro}/${city}/emergency-${toRouteSlug(detectedTrade)}`;
             } else {
                 newPath = buildEmergencyTarget(detectedTrade, detectedCity || '');
             }
