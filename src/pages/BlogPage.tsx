@@ -112,9 +112,14 @@ export default function BlogPage() {
                     if (!post) return false;
                     try {
                         const slug = (post.slug || "").toString().toLowerCase();
-                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
-                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
+                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') ||
+                                     slug.includes('-us-') || slug.includes('-usa-') ||
+                                     slug.startsWith('us-') || slug.startsWith('usa-');
+                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') ||
+                                     slug.includes('-gb-') || slug.includes('-uk-') ||
+                                     slug.startsWith('uk-') || slug.startsWith('gb-');
 
+                        if (isUS && isUK) return false;
                         return settings.countryCode === 'US' ? isUS : isUK;
                     } catch (err) {
                         return false;

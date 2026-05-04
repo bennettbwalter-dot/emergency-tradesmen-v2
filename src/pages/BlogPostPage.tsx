@@ -678,8 +678,12 @@ export default function BlogPostPage() {
   useEffect(() => {
     if (!slug || typeof window === 'undefined') return;
     const s = slug.toLowerCase();
-    const slugIsUK = s.endsWith('-gb') || s.endsWith('-uk') || s.includes('-gb-') || s.includes('-uk-');
-    const slugIsUS = s.endsWith('-us') || s.endsWith('-usa') || s.includes('-us-') || s.includes('-usa-');
+    const slugIsUK = s.endsWith('-gb') || s.endsWith('-uk') ||
+                     s.includes('-gb-') || s.includes('-uk-') ||
+                     s.startsWith('uk-') || s.startsWith('gb-');
+    const slugIsUS = s.endsWith('-us') || s.endsWith('-usa') ||
+                     s.includes('-us-') || s.includes('-usa-') ||
+                     s.startsWith('us-') || s.startsWith('usa-');
     const host = window.location.hostname;
     const onUSDomain = host.includes('emergencycontractors.net');
     const onUKDomain = host.includes('emergencytradesmen.net');
@@ -712,20 +716,30 @@ export default function BlogPostPage() {
         if (postData && postData.length > 0) {
           const data = postData[0];
           setPost(data);
-          const isUS = slug.toLowerCase().includes('usa') || slug.toLowerCase().includes('-us');
+          const sLow = slug.toLowerCase();
+          const isUS = sLow.endsWith('-us') || sLow.endsWith('-usa') ||
+                       sLow.includes('-us-') || sLow.includes('-usa-') ||
+                       sLow.startsWith('us-') || sLow.startsWith('usa-');
           const relatedUrl = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc`;
           const relatedResponse = await fetch(relatedUrl, {
-            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-9' }
+            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-99' }
           });
           const relatedData = await relatedResponse.json();
           if (relatedData) {
-            let filtered = relatedData.filter((p: any) => {
+            // Only show same-region related posts. Cross-region posts are excluded
+            // entirely so a UK reader is never recommended a US article.
+            const filtered = relatedData.filter((p: { slug?: string }) => {
               const s = p.slug?.toLowerCase() || "";
-              const pIsUS = s.includes('usa') || s.includes('-us');
-              const pIsUK = s.includes('-gb') || s.includes('-uk');
-              return isUS ? (pIsUS || (!pIsUK)) : (pIsUK || (!pIsUS));
+              if (s === sLow) return false;
+              const pIsUS = s.endsWith('-us') || s.endsWith('-usa') ||
+                            s.includes('-us-') || s.includes('-usa-') ||
+                            s.startsWith('us-') || s.startsWith('usa-');
+              const pIsUK = s.endsWith('-gb') || s.endsWith('-uk') ||
+                            s.includes('-gb-') || s.includes('-uk-') ||
+                            s.startsWith('uk-') || s.startsWith('gb-');
+              if (pIsUS && pIsUK) return false;
+              return isUS ? pIsUS : pIsUK;
             });
-            if (filtered.length === 0) filtered = relatedData;
             setRelatedPosts(filtered.slice(0, 3) as BlogPost[]);
           }
         }
@@ -848,8 +862,12 @@ export default function BlogPostPage() {
     .replace(/([.?!])\s+(3\.\s+Professional)/g, '$1</p><h2>$2')
     .replace(/([.?!])\s+(4\.\s+Safety First)/g, '$1</p><h2>$2');
 
-  const isUS = slugLower.endsWith('-us') || slugLower.endsWith('-usa') || slugLower.includes('-us-') || slugLower.includes('-usa-');
-  const isUK = slugLower.endsWith('-gb') || slugLower.endsWith('-uk') || slugLower.includes('-gb-') || slugLower.includes('-uk-');
+  const isUS = slugLower.endsWith('-us') || slugLower.endsWith('-usa') ||
+               slugLower.includes('-us-') || slugLower.includes('-usa-') ||
+               slugLower.startsWith('us-') || slugLower.startsWith('usa-');
+  const isUK = slugLower.endsWith('-gb') || slugLower.endsWith('-uk') ||
+               slugLower.includes('-gb-') || slugLower.includes('-uk-') ||
+               slugLower.startsWith('uk-') || slugLower.startsWith('gb-');
   const readingTime = calcReadingTime(displayContent);
   const hasExcerpt = post.excerpt && post.excerpt !== '...' && post.excerpt.length > 50;
 

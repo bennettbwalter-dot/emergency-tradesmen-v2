@@ -1,0 +1,27 @@
+# Emergency Contractors (US) — https://emergencycontractors.net
+# Served by Pages middleware in place of /robots.txt for the US origin.
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /user/dashboard
+Disallow: /premium-profile
+Disallow: /payment/
+Disallow: /auth/
+Disallow: /verify-documents
+
+User-agent: Googlebot
+Allow: /
+Allow: /blog/
+Allow: /emergency-*
+Disallow: /admin
+Disallow: /user/dashboard
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /public/images/
+Allow: /business/logo/
+
+# US-only sitemap (same-origin per Google spec)
+Sitemap: https://emergencycontractors.net/sitemap.xml

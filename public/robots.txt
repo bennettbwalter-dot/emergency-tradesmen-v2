@@ -1,8 +1,8 @@
-# Emergency Tradesmen / Emergency Contractors
-# https://emergencytradesmen.net (UK)
-# https://emergencycontractors.net (US)
+# Emergency Tradesmen (UK) — https://emergencytradesmen.net
+# Default robots.txt served on the UK origin. The US origin
+# (emergencycontractors.net) is rewritten to /robots-us.txt by
+# the Pages middleware so each domain only declares its own sitemap.
 
-# General Crawler Settings
 User-agent: *
 Allow: /
 Disallow: /admin
@@ -13,23 +13,18 @@ Disallow: /payment/
 Disallow: /auth/
 Disallow: /verify-documents
 
-# Googlebot Optimized
 User-agent: Googlebot
 Allow: /
 Allow: /blog/
-Allow: /us/blog/
 Allow: /emergency-*
-Allow: /us/emergency-*
 Disallow: /admin
 Disallow: /user/dashboard
 
-# Googlebot-Image Optimized
 User-agent: Googlebot-Image
 Allow: /images/
 Allow: /public/images/
 Allow: /business/logo/
 
-# Sitemap locations
+# UK-only sitemap (same-origin per Google spec)
 Sitemap: https://emergencytradesmen.net/sitemap.xml
-Sitemap: https://emergencycontractors.net/sitemap-us.xml
 Sitemap: https://emergencytradesmen.net/rss.xml

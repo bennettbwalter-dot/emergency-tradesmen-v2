@@ -13,5 +13,9 @@ https://www.emergencycontractors.net/* https://emergencycontractors.net/:splat 3
 https://emergencycontractors.net/sitemap.xml /sitemap-us.xml 200
 https://www.emergencycontractors.net/sitemap.xml /sitemap-us.xml 200
 
+# Region-correct robots.txt. Same-origin sitemap declarations only.
+https://emergencycontractors.net/robots.txt /robots-us.txt 200
+https://www.emergencycontractors.net/robots.txt /robots-us.txt 200
+
 # SPA fallback — all routes serve index.html
 /* /index.html 200

@@ -1,0 +1,1008 @@
+[
+  {
+    "slug": "carbon-monoxide-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/home-emergency/safety-us.webp",
+      "/us/blog/home-emergency/generator-safety-us.webp",
+      "/us/blog/hvac/related-post-hvac-us.webp",
+      "/us/blog/emergency/related-post-generator-us.webp",
+      "/us/blog/safety/related-post-iot-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-repair-contractor-improve-not-move-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/investment/improve-not-move-us.webp",
+      "/us/blog/investment/resilience-body-1-us.webp",
+      "/us/blog/investment/related-post-heloc-us.webp",
+      "/us/blog/energy/related-post-energy-us.webp",
+      "/us/blog/safety/related-post-foundation-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-ev-charger-repair-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/electrical/ev-repair-uk.webp",
+      "/blog/electrical/v2h-diagram-uk.webp",
+      "/blog/electrical/related-post-gen-uk.webp",
+      "/blog/electrical/related-post-v2h-uk.webp",
+      "/blog/electrical/related-post-rcbo-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "water-leaking-through-ceiling-first-steps-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/water-damage/ceiling-leak-emergency-us.webp",
+      "/us/blog/water-damage/poking-ceiling-body-1-us.webp",
+      "/us/blog/water-damage/drying-equipment-body-2-us.webp",
+      "/us/blog/plumbing/related-post-shutoff-us.webp",
+      "/us/blog/restoration/related-post-mold-us.webp",
+      "/us/blog/plumbing/related-post-smartleak-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "hollow-frame-door-security-trap-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/security/frame-uk.webp",
+      "/blog/security/glazing-bead-uk.webp",
+      "/blog/security/related-post-lock-uk.webp",
+      "/blog/security/related-post-composite-uk.webp",
+      "/blog/security/related-post-repair-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-ev-charger-repair-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/electrical/ev-repair-us.webp",
+      "/us/blog/electrical/nacs-repair-us.webp",
+      "/us/blog/electrical/related-post-gen-us.webp",
+      "/us/blog/electrical/related-post-v2h-us.webp",
+      "/us/blog/electrical/related-post-panel-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewage-smell-in-house-p-trap-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/p-trap-featured-us.webp",
+      "/us/blog/plumbing/p-trap-body-1-us.webp",
+      "/us/blog/plumbing/vent-stack-body-2-us.webp",
+      "/us/blog/plumbing/related-post-septic-us.webp",
+      "/us/blog/plumbing/related-post-sump-us.webp",
+      "/us/blog/plumbing/related-post-jetting-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "carbon-monoxide-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/home-emergency/safety-uk.webp",
+      "/blog/home-emergency/gas-isolation-uk.webp",
+      "/blog/gas/related-post-boiler-uk.webp",
+      "/blog/safety/related-post-legal-uk.webp",
+      "/blog/emergency/related-post-exit-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "ac-blowing-warm-air-capacitor-leak-us",
+    "removed": 4,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/hvac/hvac-leak-body-2-us.webp",
+      "/us/blog/hvac/related-post-bills-us.webp",
+      "/us/blog/hvac/related-post-gas-us.webp",
+      "/us/blog/hvac/related-post-tools-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "mould-remediation-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/mould/emergency-mould-us.webp",
+      "/us/blog/mould/mvoc-sensor-us.webp",
+      "/us/blog/mould/related-post-s520-us.webp",
+      "/us/blog/mould/related-post-hepa-us.webp",
+      "/us/blog/mould/related-post-mvoc-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "hybrid-heating-backup-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/heating/hybrid-heating-uk.webp",
+      "/blog/heating/hybrid-service-uk.webp",
+      "/blog/heating/related-post-thaw-uk.webp",
+      "/blog/heating/related-post-hydrogen-uk.webp",
+      "/blog/heating/related-post-smart-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-repair-contractor-improve-not-move-gb",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/renovation/improve-not-move-featured-gb.webp",
+      "/blog/renovation/structural-body-1-gb.webp",
+      "/blog/renovation/heat-pump-body-2-gb.webp",
+      "/blog/renovation/related-post-pdr-gb.webp",
+      "/blog/energy/related-post-epc-gb.webp",
+      "/blog/renovation/related-post-damp-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-water-main-repair-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/plumbing/water-main-uk.webp",
+      "/blog/plumbing/main-service-uk.webp",
+      "/blog/plumbing/related-post-leak-uk.webp",
+      "/blog/plumbing/related-post-lead-uk.webp",
+      "/blog/plumbing/related-post-shared-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "mould-remediation-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/mould/emergency-mould-uk.webp",
+      "/blog/mould/hepa-filtration-uk.webp",
+      "/blog/mould/related-post-hepa-uk.webp",
+      "/blog/mould/related-post-piv-uk.webp",
+      "/blog/mould/related-post-bio-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "structural-cracks-foundation-repair-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/structural/foundation-repair-featured-us.webp",
+      "/us/blog/structural/door-gap-body-1-us.webp",
+      "/us/blog/structural/piering-body-2-us.webp",
+      "/us/blog/structural/related-post-carbon-us.webp",
+      "/us/blog/structural/related-post-soaker-us.webp",
+      "/us/blog/structural/related-post-drain-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "2026-anti-snap-lock-lockdown-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/locksmith/anti-snap-uk.webp",
+      "/blog/locksmith/snap-lever-uk.webp",
+      "/blog/security/related-post-frame-uk.webp",
+      "/blog/security/related-post-smartlock-uk.webp",
+      "/blog/security/related-post-keys-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "gfci-outlet-tripping-us",
+    "removed": 1,
+    "rewritten": 0,
+    "removedPaths": [
+      "/images/blog/generated/bubble_cover_infographic_1777828611995.png"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-services-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/services/emergency-services-gb.webp",
+      "/blog/services/certifid-scan-uk.webp",
+      "/blog/services/related-post-netzero-uk.webp",
+      "/blog/services/related-post-certifid-uk.webp",
+      "/blog/services/related-post-matter-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-glazing-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/security/emergency-glazing-us.webp",
+      "/us/blog/security/impact-glass-us.webp",
+      "/us/blog/security/related-post-impact-us.webp",
+      "/us/blog/security/related-post-film-us.webp",
+      "/us/blog/security/related-post-thermal-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "7-ways-to-safe-proof-your-garden-electrics-spring-2026-gb",
+    "removed": 1,
+    "rewritten": 0,
+    "removedPaths": [
+      "/images/blog/garden-electrics/header-portrait.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "frozen-pipe-thaw-flood-prevention-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/frozen-pipe-featured-us.webp",
+      "/us/blog/plumbing/leak-detector-body-1-us.webp",
+      "/us/blog/plumbing/thaw-prep-body-2-us.webp",
+      "/us/blog/plumbing/related-post-valve-us.webp",
+      "/us/blog/plumbing/related-post-sharkbite-us.webp",
+      "/us/blog/plumbing/related-post-septic-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "radon-emergency-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/pests/radon-emergency-us.webp",
+      "/us/blog/pests/radon-monitor-us.webp",
+      "/us/blog/pests/related-post-epa-us.webp",
+      "/us/blog/pests/related-post-asd-us.webp",
+      "/us/blog/pests/related-post-iot-radon-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "5-reasons-your-rcd-keeps-tripping-during-heavy-spring-rain-uk",
+    "removed": 1,
+    "rewritten": 0,
+    "removedPaths": [
+      "/images/blog/generated/rcd-tripping-inline-gb.jpg"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "2026-energy-crisis-generator-safety-gb",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/energy-crisis/generator-featured-gb.webp",
+      "/blog/energy-crisis/gen-safety-body-1-gb.webp",
+      "/blog/energy-crisis/transfer-switch-body-2-gb.webp",
+      "/blog/energy-crisis/related-post-grid-gb.webp",
+      "/blog/energy-crisis/related-post-gen-gb.webp",
+      "/blog/energy-crisis/related-post-battery-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "car-battery-alternator-failure-gb",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/auto/car-battery-featured-gb.webp",
+      "/blog/auto/roadside-safety-body-1-gb.webp",
+      "/blog/auto/alternator-repair-body-2-gb.webp",
+      "/blog/auto/related-post-winter-gb.webp",
+      "/blog/auto/related-post-safety-gb.webp",
+      "/blog/auto/related-post-tools-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "portable-power-stations-backup-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/electrical/portable-power-uk.webp",
+      "/blog/electrical/power-station-office-uk.webp",
+      "/blog/electrical/related-post-gen-uk.webp",
+      "/blog/electrical/related-post-solar-uk.webp",
+      "/blog/electrical/related-post-boiler-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "2026-grid-instability-generator-resilience-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/home-emergency/generator-featured-us.webp",
+      "/us/blog/home-emergency/electrician-working-body-1-us.webp",
+      "/us/blog/home-emergency/house-generator-body-2-us.webp",
+      "/us/blog/home-emergency/related-post-wiring-us.webp",
+      "/us/blog/home-emergency/related-post-storm-us.webp",
+      "/us/blog/home-emergency/related-post-electrician-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "forced-entry-prevention-door-hardening-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/security/kick-in-prevention-us.webp",
+      "/us/blog/security/hinge-security-us.webp",
+      "/us/blog/security/related-post-lock-us.webp",
+      "/us/blog/security/related-post-smart-us.webp",
+      "/us/blog/security/related-post-recovery-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-heat-pump-thaw-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/hvac/heat-pump-thaw-us.webp",
+      "/us/blog/hvac/hvac-service-us.webp",
+      "/us/blog/hvac/related-post-refrigerant-us.webp",
+      "/us/blog/hvac/related-post-tax-us.webp",
+      "/us/blog/hvac/related-post-nest-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "smart-leak-detection-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/plumbing/smart-leak-uk.webp",
+      "/blog/plumbing/leak-service-uk.webp",
+      "/blog/plumbing/related-post-main-uk.webp",
+      "/blog/plumbing/related-post-lead-uk.webp",
+      "/blog/plumbing/related-post-money-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "smart-leak-detection-2026-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/plumbing/smart-leak-uk.webp",
+      "/blog/plumbing/damp-prevention-uk.webp",
+      "/blog/plumbing/related-post-burst-uk.webp",
+      "/blog/plumbing/related-post-efficiency-uk.webp",
+      "/blog/plumbing/related-post-mold-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewage-cleanup-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/drainage/sewage-cleanup-uk.webp",
+      "/blog/drainage/sewage-decontamination-uk.webp",
+      "/blog/drainage/related-post-cat3-uk.webp",
+      "/blog/drainage/related-post-hepa-uk.webp",
+      "/blog/drainage/related-post-wtn-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "spring-thaw-burst-pipe-prevention-gb",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/plumbing/spring-thaw-featured-gb.webp",
+      "/blog/plumbing/pipe-thaw-body-1-gb.webp",
+      "/blog/plumbing/stopcock-body-2-gb.webp",
+      "/blog/plumbing/related-post-stopcock-gb.webp",
+      "/blog/plumbing/related-post-lead-gb.webp",
+      "/blog/plumbing/related-post-boiler-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "refrigerant-leak-safety-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/heating/refrigerant-leak-uk.webp",
+      "/blog/heating/fgas-service-uk.webp",
+      "/blog/heating/related-post-thaw-uk.webp",
+      "/blog/heating/related-post-mcs-uk.webp",
+      "/blog/heating/related-post-propane-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewer-backup-prevention-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/drainage/sewer-backup-us.webp",
+      "/us/blog/drainage/scan-service-us.webp",
+      "/us/blog/drainage/related-post-jet-us.webp",
+      "/us/blog/drainage/related-post-septic-us.webp",
+      "/us/blog/drainage/related-post-fema-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "portable-power-stations-emergency-backup-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/portable-power/bluetti-readiness-featured-us.webp",
+      "/us/blog/portable-power/lifepo4-body-1-us.webp",
+      "/us/blog/portable-power/interlock-body-2-us.webp",
+      "/us/blog/energy/related-post-solar-us.webp",
+      "/us/blog/energy/related-post-surge-us.webp",
+      "/us/blog/energy/related-post-checklist-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "refrigerant-leak-safety-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/hvac/refrigerant-leak-us.webp",
+      "/us/blog/hvac/hvac-manifold-us.webp",
+      "/us/blog/hvac/related-post-thaw-us.webp",
+      "/us/blog/hvac/related-post-money-us.webp",
+      "/us/blog/hvac/related-post-home-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "smart-lock-emergency-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/security/smart-lock-us.webp",
+      "/us/blog/security/matter-standard-us.webp",
+      "/us/blog/security/related-post-matter-us.webp",
+      "/us/blog/security/related-post-ul-us.webp",
+      "/us/blog/security/related-post-token-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sump-pump-failure-resilience-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/sump-pump-us.webp",
+      "/us/blog/plumbing/sump-service-us.webp",
+      "/us/blog/plumbing/related-post-leak-us.webp",
+      "/us/blog/plumbing/related-post-main-us.webp",
+      "/us/blog/plumbing/related-post-mold-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "smart-leak-detection-2026-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/smart-leak-us.webp",
+      "/us/blog/plumbing/freeze-protection-us.webp",
+      "/us/blog/plumbing/related-post-burst-us.webp",
+      "/us/blog/plumbing/related-post-insurance-us.webp",
+      "/us/blog/plumbing/related-post-sewer-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewer-line-repair-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/drainage/sewer-repair-us.webp",
+      "/us/blog/drainage/trenchless-repair-us.webp",
+      "/us/blog/drainage/related-post-liner-us.webp",
+      "/us/blog/drainage/related-post-bursting-us.webp",
+      "/us/blog/drainage/related-post-radar-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "septic-tank-emergency-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/drainage/septic-emergency-us.webp",
+      "/us/blog/drainage/septic-repair-us.webp",
+      "/us/blog/drainage/related-post-atu-us.webp",
+      "/us/blog/drainage/related-post-leach-us.webp",
+      "/us/blog/drainage/related-post-iot-septic-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "security-audit-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/security/security-audit-us.webp",
+      "/us/blog/security/ai-threat-mapping-us.webp",
+      "/us/blog/security/related-post-ai-us.webp",
+      "/us/blog/security/related-post-astm-us.webp",
+      "/us/blog/security/related-post-matter-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewer-backup-prevention-backwater-valves-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/sewer-backup-us.webp",
+      "/us/blog/plumbing/sewer-valve-install.webp",
+      "/us/blog/plumbing/related-post-smart-us.webp",
+      "/us/blog/plumbing/related-post-valve-us.webp",
+      "/us/blog/plumbing/related-post-burst-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "smart-lock-emergency-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/security/smart-lock-uk.webp",
+      "/blog/security/matter-standard-uk.webp",
+      "/blog/security/related-post-matter-uk.webp",
+      "/blog/security/related-post-anti-snap-uk.webp",
+      "/blog/security/related-post-biometric-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "sewer-backup-prevention-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/drainage/sewer-backup-uk.webp",
+      "/blog/drainage/scan-service-uk.webp",
+      "/blog/drainage/related-post-jet-uk.webp",
+      "/blog/drainage/related-post-septic-uk.webp",
+      "/blog/drainage/related-post-flood-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "portable-power-stations-home-backup-gb",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/portable-power/bluetti-home-featured-gb.webp",
+      "/blog/portable-power/battery-body-1-gb.webp",
+      "/blog/portable-power/transfer-switch-body-2-gb.webp",
+      "/blog/energy/related-post-solar-gb.webp",
+      "/blog/energy/related-post-ev-gb.webp",
+      "/blog/energy/related-post-checklist-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "can-you-legally-stay-in-home-without-electricity-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/legal/habitability-electricity-gb.webp",
+      "/blog/legal/awaabs-law-body-1-gb.webp",
+      "/blog/legal/related-post-awaab-gb.webp",
+      "/blog/legal/related-post-rent-gb.webp",
+      "/blog/safety/related-post-kit-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "7-warning-signs-your-failed-window-seals-are-costing-you-money-us",
+    "removed": 1,
+    "rewritten": 0,
+    "removedPaths": [
+      "/images/blog/generated/failed-window-seals-inline-us.png"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "commercial-drainage-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/commercial/commercial-drainage-uk.webp",
+      "/blog/commercial/cctv-drain-uk.webp",
+      "/blog/commercial/related-post-s106-uk.webp",
+      "/blog/commercial/related-post-fog-uk.webp",
+      "/blog/commercial/related-post-amp8-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-glazing-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/security/emergency-glazing-uk.webp",
+      "/blog/security/vacuum-glass-uk.webp",
+      "/blog/security/related-post-vig-uk.webp",
+      "/blog/security/related-post-sbd-uk.webp",
+      "/blog/security/related-post-thermal-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "5-signs-you-need-emergency-plumber-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/emergency-signs-us.webp",
+      "/us/blog/plumbing/ceiling-blister-body-1-us.webp",
+      "/us/blog/plumbing/mixing-valve-body-2-us.webp",
+      "/us/blog/plumbing/related-post-shutoff-us.webp",
+      "/us/blog/plumbing/related-post-sewer-us.webp",
+      "/us/blog/plumbing/related-post-smartleak-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "building-envelope-audit-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/roofing/envelope-audit-us.webp",
+      "/us/blog/roofing/thermal-imaging-us.webp",
+      "/us/blog/roofing/related-post-thermal-us.webp",
+      "/us/blog/roofing/related-post-blower-us.webp",
+      "/us/blog/roofing/related-post-cert-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "commercial-electrician-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/commercial/emergency-electrician-us.webp",
+      "/us/blog/commercial/thermography-scan-us.webp",
+      "/us/blog/commercial/related-post-title24-us.webp",
+      "/us/blog/commercial/related-post-nec701-us.webp",
+      "/us/blog/commercial/related-post-phase-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-contractor-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/contractor/emergency-contractor-us.webp",
+      "/us/blog/contractor/managed-site-us.webp",
+      "/us/blog/contractor/related-post-iicrc-us.webp",
+      "/us/blog/contractor/related-post-osha-drone-us.webp",
+      "/us/blog/contractor/related-post-benchmarking-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-at-home-master-protocol-us",
+    "removed": 6,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/emergency/master-protocol-us.webp",
+      "/us/blog/emergency/locksmith-body-1-us.webp",
+      "/us/blog/emergency/generator-body-2-us.webp",
+      "/us/blog/emergency/related-post-gokit-us.webp",
+      "/us/blog/plumbing/related-post-leak-us.webp",
+      "/us/blog/security/related-post-lock-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "commercial-gas-safe-uk",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/commercial/commercial-gas-safe-uk.webp",
+      "/blog/commercial/boiler-diagnostics-uk.webp",
+      "/blog/commercial/related-post-hydrogen-uk.webp",
+      "/blog/commercial/related-post-gassafe-uk.webp",
+      "/blog/commercial/related-post-efficiency-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "electrical-emergencies-homeowner-guide-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/electrical/emergency-homeowner-guide-gb.webp",
+      "/blog/electrical/afdd-body-1-gb.webp",
+      "/blog/electrical/related-post-rcd-gb.webp",
+      "/blog/electrical/related-post-fusebox-gb.webp",
+      "/blog/energy/related-post-battery-gb.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "commercial-refrigeration-repair-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/commercial/refrigeration-repair-us.webp",
+      "/us/blog/commercial/supermarket-repair-us.webp",
+      "/us/blog/commercial/related-post-co2-us.webp",
+      "/us/blog/commercial/related-post-epa608-us.webp",
+      "/us/blog/commercial/related-post-walkin-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "patio-door-lock-jammed-uk",
+    "removed": 1,
+    "rewritten": 0,
+    "removedPaths": [
+      "/images/blog/generated/silicone_spray_infographic_1777828596629.png"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "facility-management-emergency-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/commercial/facility-management-us.webp",
+      "/us/blog/commercial/facility-dashboard-us.webp",
+      "/us/blog/commercial/related-post-ada-us.webp",
+      "/us/blog/commercial/related-post-title24-operations-us.webp",
+      "/us/blog/commercial/related-post-hud-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "generator-safety-grid-instability-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/electrical/generator-safety-uk.webp",
+      "/blog/electrical/battery-install-uk.webp",
+      "/blog/electrical/related-post-ev-uk.webp",
+      "/blog/electrical/related-post-meter-uk.webp",
+      "/blog/electrical/related-post-fuse-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-pest-control-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/pests/emergency-pest-control-uk.webp",
+      "/blog/pests/thermal-detection-uk.webp",
+      "/blog/pests/related-post-ht-uk.webp",
+      "/blog/pests/related-post-iot-uk.webp",
+      "/blog/pests/related-post-drain-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-pipe-burst-protocol-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/plumbing/burst-pipe-uk.webp",
+      "/blog/plumbing/mdpe-repair-uk.webp",
+      "/blog/plumbing/related-post-smart-uk.webp",
+      "/blog/plumbing/related-post-valve-uk.webp",
+      "/blog/plumbing/related-post-dryer-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "flat-roof-leak-prevention-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/roofing/flat-roof-us.webp",
+      "/us/blog/roofing/liquid-roof-us.webp",
+      "/us/blog/roofing/related-post-scan-us.webp",
+      "/us/blog/roofing/related-post-pv-us.webp",
+      "/us/blog/roofing/related-post-cool-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-roof-repair-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/roofing/roof-repair-uk.webp",
+      "/blog/roofing/drone-scan-uk.webp",
+      "/blog/roofing/related-post-drone-uk.webp",
+      "/blog/roofing/related-post-liquid-uk.webp",
+      "/blog/roofing/related-post-insulation-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-tradesmen-uk",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/tradesmen/emergency-tradesmen-uk.webp",
+      "/blog/tradesmen/thermal-scan-uk.webp",
+      "/blog/tradesmen/related-post-partl-uk.webp",
+      "/blog/tradesmen/related-post-bs7671-uk.webp",
+      "/blog/tradesmen/related-post-certifid-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "generator-safety-grid-instability-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/electrical/generator-safety-us.webp",
+      "/us/blog/electrical/battery-hybrid-us.webp",
+      "/us/blog/electrical/related-post-ev-us.webp",
+      "/us/blog/electrical/related-post-meter-us.webp",
+      "/us/blog/electrical/related-post-battery-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-pest-control-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/pests/emergency-pest-control-us.webp",
+      "/us/blog/pests/iot-trap-us.webp",
+      "/us/blog/pests/related-post-termite-us.webp",
+      "/us/blog/pests/related-post-pheromone-us.webp",
+      "/us/blog/pests/related-post-iot-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-heat-pump-thaw-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/heating/heat-pump-thaw-uk.webp",
+      "/blog/heating/heat-pump-service-uk.webp",
+      "/blog/heating/related-post-hybrid-uk.webp",
+      "/blog/heating/related-post-fgas-uk.webp",
+      "/blog/heating/related-post-partl-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-roof-repair-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/roofing/roof-repair-us.webp",
+      "/us/blog/roofing/drone-scan-us.webp",
+      "/us/blog/roofing/related-post-drone-us.webp",
+      "/us/blog/roofing/related-post-liquid-us.webp",
+      "/us/blog/roofing/related-post-strap-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "flat-roof-leak-prevention-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/roofing/flat-roof-uk.webp",
+      "/blog/roofing/liquid-roof-uk.webp",
+      "/blog/roofing/related-post-scan-uk.webp",
+      "/blog/roofing/related-post-green-uk.webp",
+      "/blog/roofing/related-post-pv-uk.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-pipe-burst-protocol-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/burst-pipe-us.webp",
+      "/us/blog/plumbing/mold-prevention-us.webp",
+      "/us/blog/plumbing/related-post-smart-us.webp",
+      "/us/blog/plumbing/related-post-valve-us.webp",
+      "/us/blog/plumbing/related-post-mold-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-handyman-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/handyman/emergency-handyman-us.webp",
+      "/us/blog/handyman/iot-lock-repair-us.webp",
+      "/us/blog/handyman/related-post-matter-us.webp",
+      "/us/blog/handyman/related-post-osha-us.webp",
+      "/us/blog/handyman/related-post-laser-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-water-main-repair-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/plumbing/water-main-us.webp",
+      "/us/blog/plumbing/main-service-us.webp",
+      "/us/blog/plumbing/related-post-leak-us.webp",
+      "/us/blog/plumbing/related-post-lead-us.webp",
+      "/us/blog/plumbing/related-post-seismic-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-drain-cleaning-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/drainage/emergency-drain-us.webp",
+      "/us/blog/drainage/hydro-jetting-us.webp",
+      "/us/blog/drainage/related-post-jet-us.webp",
+      "/us/blog/drainage/related-post-insurance-us.webp",
+      "/us/blog/drainage/related-post-trenchless-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-trades-us",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/us/blog/trades/emergency-trades-us.webp",
+      "/us/blog/trades/safety-gear-us.webp",
+      "/us/blog/trades/related-post-ipc-us.webp",
+      "/us/blog/trades/related-post-nec-us.webp",
+      "/us/blog/trades/related-post-matter-us.webp"
+    ],
+    "rewrittenPaths": []
+  },
+  {
+    "slug": "emergency-drain-cleaning-gb",
+    "removed": 5,
+    "rewritten": 0,
+    "removedPaths": [
+      "/blog/drainage/emergency-drain-uk.webp",
+      "/blog/drainage/cctv-inspection-uk.webp",
+      "/blog/drainage/related-post-cipp-uk.webp",
+      "/blog/drainage/related-post-fatberg-uk.webp",
+      "/blog/drainage/related-post-s106-uk.webp"
+    ],
+    "rewrittenPaths": []
+  }
+]
