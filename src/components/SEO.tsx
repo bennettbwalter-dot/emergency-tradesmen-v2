@@ -141,15 +141,9 @@ export function SEO({
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={ogImage} />
-            
+
             {/* Harbor SEO script - US only */}
-            {isUSDomain && (
-                <script 
-                    data-harbor-site="nd76yacf6chb2hwqj1gqwr74d1857gqj" 
-                    src="https://outgoing-oyster-428.convex.site/api/harbor-seo.js?siteId=nd76yacf6chb2hwqj1gqwr74d1857gqj" 
-                    async 
-                />
-            )}
+
 
 
             {/* Structured Data (JSON-LD) */}
