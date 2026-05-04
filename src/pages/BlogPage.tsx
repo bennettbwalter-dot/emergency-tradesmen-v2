@@ -105,7 +105,9 @@ export default function BlogPage() {
                     return;
                 }
 
-                // Strict Regional Filtering: Only show posts that match the current country code suffix
+                // Strict Regional Filtering: only posts whose slug matches the current
+                // region show up. Posts with no region marker are excluded from both
+                // sites — a UK-only domain must never serve US content and vice versa.
                 const regionalData = data.filter(post => {
                     if (!post) return false;
                     try {
@@ -113,11 +115,7 @@ export default function BlogPage() {
                         const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
                         const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
 
-                        if (settings.countryCode === 'US') {
-                            return isUS || !isUK;
-                        } else {
-                            return isUK || !isUS;
-                        }
+                        return settings.countryCode === 'US' ? isUS : isUK;
                     } catch (err) {
                         return false;
                     }

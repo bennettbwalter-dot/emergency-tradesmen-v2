@@ -671,6 +671,25 @@ export default function BlogPostPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isWhiteMode, setIsWhiteMode] = useState(true);
 
+  // Hard region gate: a -gb/-uk slug must only render on emergencytradesmen.net,
+  // and a -us/-usa slug must only render on emergencycontractors.net. If a user
+  // lands on the wrong domain we 301-style redirect to the correct one before
+  // any content fetch, so UK content never paints on the US site (and vice versa).
+  useEffect(() => {
+    if (!slug || typeof window === 'undefined') return;
+    const s = slug.toLowerCase();
+    const slugIsUK = s.endsWith('-gb') || s.endsWith('-uk') || s.includes('-gb-') || s.includes('-uk-');
+    const slugIsUS = s.endsWith('-us') || s.endsWith('-usa') || s.includes('-us-') || s.includes('-usa-');
+    const host = window.location.hostname;
+    const onUSDomain = host.includes('emergencycontractors.net');
+    const onUKDomain = host.includes('emergencytradesmen.net');
+    if (slugIsUK && onUSDomain) {
+      window.location.replace(`https://emergencytradesmen.net/blog/${slug}`);
+    } else if (slugIsUS && onUKDomain) {
+      window.location.replace(`https://emergencycontractors.net/blog/${slug}`);
+    }
+  }, [slug]);
+
   useEffect(() => {
     async function loadPost() {
       if (!slug) { setIsLoading(false); return; }
@@ -829,7 +848,8 @@ export default function BlogPostPage() {
     .replace(/([.?!])\s+(3\.\s+Professional)/g, '$1</p><h2>$2')
     .replace(/([.?!])\s+(4\.\s+Safety First)/g, '$1</p><h2>$2');
 
-  const isUS = slug?.toLowerCase().includes('usa') || slug?.toLowerCase().includes('-us');
+  const isUS = slugLower.endsWith('-us') || slugLower.endsWith('-usa') || slugLower.includes('-us-') || slugLower.includes('-usa-');
+  const isUK = slugLower.endsWith('-gb') || slugLower.endsWith('-uk') || slugLower.includes('-gb-') || slugLower.includes('-uk-');
   const readingTime = calcReadingTime(displayContent);
   const hasExcerpt = post.excerpt && post.excerpt !== '...' && post.excerpt.length > 50;
 
@@ -1042,13 +1062,29 @@ export default function BlogPostPage() {
       <SEO
         title={post.title}
         description={hasExcerpt ? post.excerpt : undefined}
-        canonical={`/blog/${post.slug}`}
+        canonical={
+          isUK ? `https://emergencytradesmen.net/blog/${post.slug}`
+          : isUS ? `https://emergencycontractors.net/blog/${post.slug}`
+          : `/blog/${post.slug}`
+        }
         ogType="article" ogImage={absoluteImage} jsonLd={jsonLdSchemas}
-        alternates={[
-          { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-          { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
-          { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-        ]}
+        alternates={
+          isUK
+            ? [
+                { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+                { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+              ]
+            : isUS
+            ? [
+                { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
+                { lang: 'x-default', href: `https://emergencycontractors.net/blog/${post.slug}` },
+              ]
+            : [
+                { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+                { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
+                { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+              ]
+        }
       />
       <Helmet>
         <meta property="article:published_time" content={post.published_at || post.created_at} />
