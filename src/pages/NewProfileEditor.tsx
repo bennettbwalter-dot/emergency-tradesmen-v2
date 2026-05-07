@@ -189,7 +189,8 @@ export default function NewProfileEditor() {
                         email: user?.email,
                         is_premium: true,
                         tier: "paid",
-                        verified: true,
+                        verified: false,
+                        claim_status: 'claimed',
                         hours: "24/7",
                         is_open_24_hours: true,
                         country_code: isUSDomain() ? 'US' : 'GB',
@@ -460,7 +461,7 @@ export default function NewProfileEditor() {
                                 <Crown className="w-3 h-3 mr-1" /> PRO
                             </Badge>
                             <Badge variant="outline" className="text-green-400 border-green-900 bg-green-900/10">
-                                <ShieldCheck className="w-3 h-3 mr-1" /> Verified Business
+                                <ShieldCheck className="w-3 h-3 mr-1" /> Claimed Listing
                             </Badge>
                         </div>
                         <div>

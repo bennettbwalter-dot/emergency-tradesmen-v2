@@ -81,7 +81,7 @@ export function GuestGate() {
                             {mode === "login" ? (
                                 "Enter your credentials to access your account"
                             ) : (
-                                <>Create a <span className="text-gold font-bold">FREE</span> account to continue browsing and connect with trusted professionals.</>
+                                <>Create a <span className="text-gold font-bold">FREE</span> account to continue browsing local emergency contacts.</>
                             )}
                         </DialogDescription>
                     </div>

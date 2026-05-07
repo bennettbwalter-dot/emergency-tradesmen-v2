@@ -210,8 +210,8 @@ export default function ContactPage() {
                 <SEO
                     title={isUSDomain ? "Contact Emergency Contractors — Get 24/7 Help Now" : "Contact Emergency Tradesmen — Get 24/7 Help Now"}
                     description={isUSDomain
-                        ? "Need an emergency contractor? Contact us for fast, verified local plumbers, electricians & HVAC techs. Available 24/7 across the US. Call now for immediate help."
-                        : "Need an emergency tradesman? Contact us for fast, verified local plumbers, electricians & locksmiths. Available 24/7 across the UK. Call now for immediate help."}
+                        ? "Need an emergency contractor? Contact us for local plumbers, electricians and HVAC contacts. Available 24/7 across the US. Check business details directly before booking."
+                        : "Need an emergency tradesman? Contact us for local plumbers, electricians and locksmith contacts. Available 24/7 across the UK. Check business details directly before booking."}
                     canonical="/contact"
                     jsonLd={breadcrumbSchema}
                     alternates={[
@@ -250,7 +250,7 @@ export default function ContactPage() {
                                         <img src="/et-logo-v3.webp" alt="Logo" loading="lazy" decoding="async" className="w-20 h-20 mb-4 object-contain transition-transform hover:scale-110 duration-500" />
                                         <h2 className="text-xl font-semibold mb-2">{getSiteName()}</h2>
                                         <p className="text-white/80 text-sm">
-                                            Connecting you with trusted local {getSiteName().split(' ')[1].toLowerCase()} 24/7
+                                            Connecting you with public local {getSiteName().split(' ')[1].toLowerCase()} listings 24/7
                                         </p>
                                     </div>
                                 </div>

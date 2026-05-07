@@ -1251,7 +1251,7 @@ export default function BlogPostPage() {
               Need a professional right now?
             </p>
             <p className={`text-sm ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}`}>
-              Find a verified, 24/7 emergency {isUS ? 'contractor' : 'tradesman'} near you - fast response guaranteed.
+              Find a public emergency {isUS ? 'contractor' : 'tradesman'} listing near you and confirm details directly before booking.
             </p>
           </div>
           <Link
@@ -1350,8 +1350,8 @@ export default function BlogPostPage() {
           </button>
           <div className={`flex justify-center gap-6 mt-5 text-xs ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
             <span>✓ No call-out fee</span>
-            <span>✓ DBS checked</span>
-            <span>✓ Fully insured</span>
+            <span>✓ Public listings</span>
+            <span>✓ Confirm details directly</span>
           </div>
         </div>
 

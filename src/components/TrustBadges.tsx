@@ -8,13 +8,13 @@ const badges = [
   },
   {
     icon: Shield,
-    title: "Fully Insured",
-    description: "Complete peace of mind",
+    title: "Check Details",
+    description: "Confirm before booking",
   },
   {
     icon: BadgeCheck,
-    title: "Verified Pros",
-    description: "Vetted & certified experts",
+    title: "Public Listings",
+    description: "Business details may change",
   },
   {
     icon: Phone,

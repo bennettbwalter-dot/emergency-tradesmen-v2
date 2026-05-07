@@ -20,7 +20,8 @@ import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { AdSlot } from "@/components/AdSlot";
 import { LeafletMap } from "@/components/LeafletMap";
-import { Business, calculateTrustScore } from "@/lib/businesses";
+import { Business, calculateTrustScore, getListingDisplayStatus } from "@/lib/businesses";
+import { ListingStatusBadge } from "@/components/ListingStatusBadge";
 import { trades } from "@/lib/trades";
 
 import { trackEvent } from "@/lib/analytics";
@@ -131,14 +132,14 @@ export default function BusinessProfilePage() {
     const realReviews = business.featuredReview ? [{
         id: `review-${business.id}`,
         businessId: business.id,
-        userId: 'verified-user',
-        userName: "Verified Google User",
+        userId: 'public-reviewer',
+        userName: "Public Reviewer",
         userInitials: "G",
         rating: business.rating,
-        title: "Verified Review",
+        title: "Customer Review",
         comment: business.featuredReview,
         date: new Date().toISOString(),
-        verified: true,
+        verified: false,
         helpful: 1,
         notHelpful: 0,
     }] : [];
@@ -154,17 +155,17 @@ export default function BusinessProfilePage() {
 
     // Calculate Trust Score (1-5 Basis) - Summing: Base(1) + Email + Social + Website + Reviews
     const trustScore = calculateTrustScore(business);
+    const listingStatus = getListingDisplayStatus(business);
+    const isVerifiedListing = listingStatus === 'verified';
 
     const formattedTrade = trade.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
 
     // Use premium description if available, otherwise use generic description
     const description = business.premium_description || `
-    ${business.name} is a premier ${formattedTrade} service provider in ${formattedCity}, dedicated to delivering top-tier solutions for both residential and commercial clients. 
-    With years of experience in the industry, our team of certified professionals ensures that every job is completed to the highest standards of safety and quality.
+    ${business.name} appears as a public ${formattedTrade} listing in ${formattedCity}. These details are provided to help people find local emergency contacts quickly.
     
-    We pride ourselves on our rapid response times, transparent pricing, and exceptional customer service. Whether you're facing an emergency situation or planning a major installation, 
-    we have the expertise and equipment to handle it efficiently. We are fully insured and our work is guaranteed, giving you peace of mind with every project.
+    Business details may need confirmation. If this is your business, you can claim this listing, request an update, or ask for removal.
   `;
 
     // Use premium services if available, otherwise use trade-based defaults
@@ -366,8 +367,8 @@ export default function BusinessProfilePage() {
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={`${business.name} — ${formattedTrade} in ${formattedCity} | Verified 24/7`}
-                description={`Need a ${formattedTrade} in ${formattedCity}? Contact ${business.name}. Verified local expert available 24/7. Read reviews, check credentials and call now for emergency help.`}
+                title={`${business.name} — ${formattedTrade} in ${formattedCity} | Public Listing`}
+                description={`Need a ${formattedTrade} in ${formattedCity}? ${business.name} appears as a public business listing. Check details directly, request an update, or call for emergency help.`}
                 canonical={`/business/${business.id}`}
                 jsonLd={[businessSchema, faqSchema, breadcrumbSchema]}
                 alternates={[
@@ -439,7 +440,7 @@ export default function BusinessProfilePage() {
                                                 </div>
                                                 <div className="flex flex-col">
                                                     <span className={`font-bold tracking-tight leading-none ${trustScore >= 4 ? 'text-emerald-500' : 'text-blue-500'}`}>
-                                                        {trustScore === 5 ? 'TOP RATED' : 'VERIFIED PRO'}
+                                                        PROFILE SCORE
                                                     </span>
                                                     <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Score {trustScore}/5</span>
                                                 </div>
@@ -456,23 +457,14 @@ export default function BusinessProfilePage() {
                                             </div>
                                         </div>
 
-                                        {/* Accreditation Row */}
+                                        {/* Listing status row */}
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
-                                            {trade === 'gas-engineer' && (
-                                                <Badge variant="outline" className={`${isUS ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/30' : 'bg-orange-500/5 text-orange-500 border-orange-500/30'} font-bold uppercase tracking-tighter text-[10px] px-2 py-1`}>
-                                                    {isUS ? 'EPA Section 608' : 'Gas Safe Registered'}
-                                                </Badge>
-                                            )}
-                                            {trade === 'electrician' && (
-                                                <Badge variant="outline" className="bg-emerald-500/5 text-emerald-500 border-emerald-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                    {isUS ? 'Licensed Electrician' : 'NICEIC Certified'}
-                                                </Badge>
-                                            )}
+                                            <ListingStatusBadge business={business} />
                                             <Badge variant="outline" className="bg-gold/5 text-gold border-gold/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                {isUS ? 'Fully Insured & Bonded' : 'Fully Insured'}
+                                                Details need confirmation
                                             </Badge>
                                             <Badge variant="outline" className="bg-blue-500/5 text-blue-500 border-blue-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                ID Verified
+                                                Claim this listing
                                             </Badge>
                                         </div>
                                     </div>
@@ -517,7 +509,7 @@ export default function BusinessProfilePage() {
                                     </div>
                                     <div className="max-w-3xl space-y-8">
                                         <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed font-light">
-                                            {business.name} is a <span className="text-gold font-medium">trusted 24/7 {formattedTrade} service</span> provider in {formattedCity}, dedicated to delivering top-tier residential and commercial solutions through excellence and reliability.
+                                            {business.name} is listed as a <span className="text-gold font-medium">public {formattedTrade} contact</span> in {formattedCity}. Please confirm availability, qualifications, pricing, and call-out terms directly with the business.
                                         </p>
 
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
@@ -531,13 +523,13 @@ export default function BusinessProfilePage() {
                                                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                                                     <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-lg text-foreground font-medium tracking-tight">Fully <span className="text-foreground">qualified & insured</span></p>
+                                                <p className="text-lg text-foreground font-medium tracking-tight">Details <span className="text-foreground">need confirmation</span></p>
                                             </div>
                                             <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border">
                                                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold shrink-0">
                                                     <CheckCircle className="w-6 h-6" />
                                                 </div>
-                                                <p className="text-lg text-foreground font-medium tracking-tight">Local & <span className="text-foreground">Verified</span></p>
+                                                <p className="text-lg text-foreground font-medium tracking-tight">Public <span className="text-foreground">business listing</span></p>
                                             </div>
                                         </div>
 
@@ -560,18 +552,18 @@ export default function BusinessProfilePage() {
                                         <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight">Our Confidence Check</h2>
                                     </div>
                                     <p className="text-muted-foreground text-lg max-w-2xl">
-                                        Every professional on Emergency Tradesmen undergoes a rigorous vetting process to ensure your safety and quality of work.
+                                        This profile is shown with an honest listing status. Public listings should be checked directly before booking, and business owners can request updates, claim the listing, or ask for removal.
                                     </p>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
                                     {[
-                                        "Public Liability Insurance Verified",
-                                        "Identity & Right to Work Check",
-                                        "Trade Certification Validated",
-                                        "Address & Contact History Check",
-                                        "Recent Work Quality Audit",
-                                        "Member of Trade Association"
+                                        isVerifiedListing ? "Verification status recorded" : "Public listing: details need confirmation",
+                                        "Call the business to confirm availability",
+                                        "Ask directly about insurance and qualifications",
+                                        "Request a correction if details are outdated",
+                                        "Claim this listing to manage business details",
+                                        "Request removal if this listing should not appear"
                                     ].map((check, i) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
@@ -584,11 +576,11 @@ export default function BusinessProfilePage() {
 
                                 <div className="pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
                                     <p className="text-emerald-500/80 text-sm font-medium italic">
-                                        "Trusted by over 10,000 customers across the {isUS ? 'US' : 'UK'}"
+                                        "Public listings should be checked, corrected, claimed, or removed on request."
                                     </p>
                                     <Button asChild variant="outline" className="border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10">
                                         <Link to="/vetting-process">
-                                            Learn More About Vetting
+                                            Learn About Claim Checks
                                         </Link>
                                     </Button>
                                 </div>

@@ -21,7 +21,7 @@ interface SEOProps {
     }[];
 }
 
-const DEFAULT_DESCRIPTION = "Need a tradesman near you? We connect you with verified 24/7 emergency plumbers, electricians, locksmiths & gas engineers. Local experts arriving in 30-90 mins.";
+const DEFAULT_DESCRIPTION = "Need a tradesman near you? Find local emergency trade contacts from public business listings for plumbers, electricians, locksmiths and gas engineers. Check details directly before booking.";
 const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
 const SITE_URL_GB = "https://emergencytradesmen.net";
 const SITE_URL_US = "https://emergencycontractors.net";

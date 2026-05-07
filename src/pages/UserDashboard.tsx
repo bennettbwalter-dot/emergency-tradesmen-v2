@@ -439,15 +439,15 @@ function VettingTab() {
                     <ShieldCheck className="w-5 h-5 text-emerald-500" />
                     Vetting & Verification
                 </CardTitle>
-                <CardDescription>Your current standing and verification status</CardDescription>
+            <CardDescription>Your current account standing and listing status</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="space-y-4">
                     <div className="flex items-start gap-4 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5">
                         <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 shrink-0" />
                         <div>
-                            <p className="font-bold text-foreground">Account Verified</p>
-                            <p className="text-sm text-muted-foreground">Your identity has been confirmed and you're eligible to receive leads.</p>
+                            <p className="font-bold text-foreground">Account Active</p>
+                            <p className="text-sm text-muted-foreground">Your account is active and eligible to manage claimed listing details.</p>
                         </div>
                     </div>
                     

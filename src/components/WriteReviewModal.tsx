@@ -198,11 +198,11 @@ export function WriteReviewModal({ businessName, businessId }: WriteReviewModalP
                         </div>
                     </div>
 
-                    {/* Verification Notice */}
+                    {/* Review Notice */}
                     <div className="bg-secondary/30 border border-border/50 rounded-lg p-4">
                         <p className="text-sm text-muted-foreground">
-                            <strong className="text-foreground">Verification:</strong> We'll send you an email to verify your review.
-                            Your review will be published once verified. We take review authenticity seriously.
+                            <strong className="text-foreground">Review check:</strong> We'll send you an email to confirm your review submission.
+                            Your review will be published once reviewed. We take review authenticity seriously.
                         </p>
                     </div>
 

@@ -9,7 +9,7 @@ export const HowItWorksSection = () => {
     {
       icon: Search,
       title: "1. Find Your Local Expert",
-      description: `Select your service and city to instantly view a list of verified, fully insured ${settings.tradeTerm.toLowerCase()} operating in your area right now.`
+      description: `Select your service and city to view local emergency ${settings.tradeTerm.toLowerCase()} contacts. Public listing details should be confirmed directly before booking.`
     },
     {
       icon: PhoneCall,

@@ -17,7 +17,7 @@ const FILENAME_PATTERN = (index: number) => `/frames/v2w_dark/frame_${index.toSt
 
 const listItems = [
     "Get seen first with priority ranking in your area",
-    "Build instant trust with a 'Featured' badge and reviews",
+    "Build a clearer claimed profile with direct contact details",
     "Receive direct calls, not messages or time-wasters",
     "Reach customers ready to act, not just browsing",
     "No ads to manage. No chasing leads. Just calls."
@@ -257,7 +257,7 @@ export function TradesmenScroll() {
                     <h3 className="text-xl md:text-4xl text-white font-display mb-3 md:mb-4 leading-tight">
                         Stop chasing leads.
                         <br />
-                        <span className="text-base md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Join our verified network and get direct calls from customers.</span>
+                        <span className="text-base md:text-2xl text-gold mt-1 md:mt-2 block font-medium">Claim your listing and get direct calls from customers.</span>
                     </h3>
 
                     <ul ref={listRef} className="space-y-2 md:space-y-4 mt-4 md:mt-8">

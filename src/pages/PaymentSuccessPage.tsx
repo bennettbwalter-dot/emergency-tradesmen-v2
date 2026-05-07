@@ -197,7 +197,7 @@ export default function PaymentSuccessPage() {
                         </div>
                         <div className="text-right">
                             <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Plan</p>
-                            <p className="text-sm font-semibold text-[#D4AF37]">Verified Pro</p>
+                            <p className="text-sm font-semibold text-[#D4AF37]">Claimed Profile</p>
                         </div>
                     </div>
                 </div>

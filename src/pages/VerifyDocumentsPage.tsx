@@ -41,7 +41,7 @@ export default function VerifyDocumentsPage() {
             }));
             toast({
                 title: "Document Uploaded",
-                description: `${documents[key].name} has been successfully verified.`,
+                description: `${documents[key].name} has been uploaded for review.`,
             });
         }, 1500);
     };
@@ -73,7 +73,7 @@ export default function VerifyDocumentsPage() {
                             Verify Your <span className="text-gold">Professional Status</span>
                         </h1>
                         <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                            To activate your generic "Verified Pro" badge and receive priority call-outs, please upload your documentation below.
+                            To support your claimed listing and receive priority call-outs, please upload your documentation below.
                         </p>
                     </div>
 

@@ -8,7 +8,7 @@ export function CTASection() {
     const { settings } = useLocalization();
     
     return (
-        <section className="container-wide py-16">
+        <section className="container-wide pt-8 pb-16 md:py-16">
             <div className="relative overflow-hidden rounded-2xl border border-gold/30 bg-card backdrop-blur-sm p-10 md:p-16 text-center">
                 {/* Decorative elements */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-gold/5" />

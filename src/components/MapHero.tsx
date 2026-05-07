@@ -66,7 +66,7 @@ export const MapHero = () => {
                     >
                         Emergency {settings.tradeTerm} {settings.countryCode === 'GB' ? 'UK' : 'US'} | Nationwide 24/7 Help.
                         <br className="hidden md:block" />
-                        We connect you with verified experts in <span className="text-white font-bold">30-90 minutes</span>.
+                        Find public local listings and check details directly before booking.
                     </motion.p>
 
                     {/* "Need Help" Button */}

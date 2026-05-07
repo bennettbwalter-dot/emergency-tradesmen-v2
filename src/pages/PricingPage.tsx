@@ -150,7 +150,7 @@ export default function PricingPage() {
                         <h2 className="text-3xl font-display mb-6">Why Join Emergency {isUS ? 'Contractors' : 'Tradesmen'}?</h2>
                         <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                             <p>
-                                When emergencies happen, customers don’t shop around — they call the first trusted tradesperson they see.
+                                When emergencies happen, customers need clear public business details they can check quickly before calling.
                             </p>
                             <p>
                                 Emergency {isUS ? 'Contractors' : 'Tradesmen'} puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.

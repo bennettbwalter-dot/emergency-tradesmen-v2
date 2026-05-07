@@ -42,7 +42,7 @@ export default function LocationsDirectory() {
                     </h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                         We provide 24/7 emergency coverage across major {isUS ? 'US' : 'UK'} cities and surrounding areas.
-                        Select your location to find verified {isUS ? 'contractors' : 'tradesmen'} near you.
+                        Select your location to find public {isUS ? 'contractor' : 'tradesmen'} listings near you.
                     </p>
                 </div>
 

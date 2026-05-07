@@ -105,7 +105,8 @@ serve(async (req) => {
                 trade: trade,
                 country_code: 'us',
                 state: state.toLowerCase(),
-                verified: true, // Auto-verified based on Yelp presence
+                verified: false,
+                claim_status: 'unclaimed',
                 isAvailableNow: true
               });
               existingPhones.add(validPhone);
@@ -153,7 +154,8 @@ serve(async (req) => {
                 trade: trade,
                 country_code: 'us',
                 state: state.toLowerCase(),
-                verified: true,
+                verified: false,
+                claim_status: 'unclaimed',
                 isAvailableNow: true
               });
               existingPhones.add(validPhone);

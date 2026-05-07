@@ -34,7 +34,7 @@ export default function PrivacyPolicy() {
 
                     <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-gold hover:prose-a:text-gold/80">
                         <p className="lead text-xl text-slate-600">
-                            At {siteUrl}, our core mission is safely and rapidly connecting you with verified professionals during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
+                            At {siteUrl}, our core mission is safely and rapidly connecting you with local emergency business contacts during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
                         </p>
 
                         <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg my-8">
@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
                         <ul>
                             <li><strong>Google Analytics & PostHog:</strong> We use these to understand overall website traffic (e.g., how many users visit the "US Plumbers" page vs. the "UK Electricians" page). This data is aggregated and anonymized.</li>
                             <li><strong>Google Maps API & OpenStreetMap:</strong> Used strictly to geolocate your address coordinates to match you with the nearest physical tradesperson. We fully comply with the Google Maps Controller-to-Controller data protection terms.</li>
-                            <li><strong>Stripe:</strong> Used exclusively for processing subscription payments for verified business owners (tradespeople) joining our directory. Consumer emergency requests are always free to submit and do not require payment details on our site.</li>
+                            <li><strong>Stripe:</strong> Used exclusively for processing subscription payments for business owners joining or claiming profiles in our directory. Consumer emergency requests are always free to submit and do not require payment details on our site.</li>
                         </ul>
 
                         <hr className="my-12 border-slate-200" />

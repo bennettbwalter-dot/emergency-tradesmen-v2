@@ -6,8 +6,8 @@ import { motion } from "motion/react";
 export function LayoutTextFlipDemo() {
     const { settings } = useLocalization();
     const primaryTrustText = settings.countryCode === "US"
-        ? "VERIFIED CONTRACTORS"
-        : "20,000+ VERIFIED TRADESMEN";
+        ? "PUBLIC CONTRACTOR LISTINGS"
+        : "PUBLIC TRADESMEN LISTINGS";
 
     return (
         <div>

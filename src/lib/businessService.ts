@@ -97,6 +97,8 @@ async function mapBusinessData(biz: any, userCoords?: { latitude: number, longit
         last_available_ping: biz.last_available_ping,
         contact_name: biz.contact_name,
         verified: biz.verified || false,
+        verified_at: biz.verified_at || null,
+        claim_status: biz.claim_status || 'unclaimed',
         header_image_url: biz.header_image_url,
         vehicle_image_url: biz.vehicle_image_url,
         country_code: biz.country_code || 'GB',
@@ -145,7 +147,7 @@ async function supabaseFetch(url: string, options?: RequestInit) {
 }
 
 /**
- * Fetch businesses from Supabase (Real, Verified Data Only)
+ * Fetch businesses from Supabase (real listing data only)
  */
 export async function fetchBusinesses(
     trade: string,

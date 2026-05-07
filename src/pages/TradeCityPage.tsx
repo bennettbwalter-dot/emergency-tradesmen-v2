@@ -373,7 +373,7 @@ export default function TradeCityPage() {
     return <Navigate to="/" replace />;
   }
 
-  // Extract real verified reviews from the listings
+  // Extract public review text from the listings
   const realReviews = businesses
     .filter(b => b.featuredReview && b.rating >= 4.0)
     .slice(0, 8)
@@ -381,13 +381,13 @@ export default function TradeCityPage() {
       id: `real-review-${b.id}`,
       businessId: b.id,
       userId: `user-${b.id}`,
-      userName: "Verified Customer",
-      userInitials: "VC",
+      userName: "Public Reviewer",
+      userInitials: "PR",
       rating: b.rating,
-      title: "Verified Review",
+      title: "Customer Review",
       comment: b.featuredReview!,
       date: new Date().toISOString(),
-      verified: true,
+      verified: false,
       helpful: Math.floor(Math.random() * 5),
       notHelpful: 0,
     }));
@@ -417,7 +417,7 @@ export default function TradeCityPage() {
     "@type": schemaType,
     "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}#localbusiness`,
     name: `Emergency ${tradeDisplayName} ${cityName}`,
-    description: `24/7 emergency ${tradeDisplayName.toLowerCase()} services in ${cityName}. Fast response, fully insured professionals.`,
+    description: `24/7 emergency ${tradeDisplayName.toLowerCase()} listings in ${cityName}. Check business details directly before booking.`,
     image: heroImage,
     url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
     "priceRange": actualCountry === 'US' ? "$75 - $150" : "£75 - £150",
@@ -560,12 +560,12 @@ export default function TradeCityPage() {
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
   const seoDescription = isStatePage
-    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now for fast help.`
+    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local contractor listings across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now for fast help.`
     : pageData?.problem
-      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Get connected with a verified expert now.`
+      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Get connected with a public local listing now.`
       : isUS
-        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local contractors ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
-        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Verified'} local tradesmen ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
+        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local contractor listings ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
+        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local tradesmen listings ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
 
   // --- Expanded Long-Tail Keywords Array ---
   const seoKeywords = pageData?.problem
@@ -584,8 +584,7 @@ export default function TradeCityPage() {
       `24 hour ${tradeName} ${cityName}`,
       `${tradeName} open now ${cityName}`,
       `best ${tradeName} near me`,
-      `trusted ${tradeName} ${cityName}`,
-      // Emergency variants
+            // Emergency variants
       `emergency ${tradeName} near me open now`,
       `${tradeName} emergency call out ${cityName}`,
       // Market-specific - DENSITY BOOST as requested
@@ -686,7 +685,7 @@ export default function TradeCityPage() {
 
               <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-foreground/80 font-light animate-fade-up-delay-1">
                 Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} are ready to respond right now.
-                With an average arrival time of {averageResponseTime}, you won't be waiting long. We only work with verified, fully insured professionals who deliver quality work at fair prices.
+                Public listing details may need confirmation. Check availability, pricing, insurance, and qualifications directly before booking.
               </p>
 
               <div className="flex items-center justify-center animate-fade-up-delay-2">
@@ -727,7 +726,7 @@ export default function TradeCityPage() {
             <div>
               <div className="text-center py-8 mb-6">
                 <Loader2 className="w-8 h-8 animate-spin mx-auto mb-3 text-gold" />
-                <p className="text-muted-foreground">Finding verified {tradeInfo.name}s near {cityName}...</p>
+                <p className="text-muted-foreground">Finding public {tradeInfo.name} listings near {cityName}...</p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -745,7 +744,7 @@ export default function TradeCityPage() {
                     </div>
                     <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
                     <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                      We're expanding our network of {tradeInfo.name.toLowerCase()} experts in this area. Be the first verified pro listed here and get all the local calls.
+                      We're expanding public listings for {tradeInfo.name.toLowerCase()} contacts in this area. Claim or add your business details to get local calls.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link
@@ -841,11 +840,11 @@ export default function TradeCityPage() {
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
               {pageData?.problem ? (
                 <>
-                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} verified local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? ' is' : 's are'} available 24/7` : `Verified local ${tradeDisplayName.toLowerCase()}s are available 24/7`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? ' is' : 's are'} available 24/7` : `public local ${tradeDisplayName.toLowerCase()}s are available 24/7`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
                 </>
               ) : (
                 <>
-                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} verified local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? '' : 's'}` : `Verified local ${tradeDisplayName.toLowerCase()}s`} {listingCount === 1 ? 'is' : 'are'} available 24/7 with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? '' : 's'}` : `public local ${tradeDisplayName.toLowerCase()}s`} {listingCount === 1 ? 'is' : 'are'} available 24/7 with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
                 </>
               )}
             </p>

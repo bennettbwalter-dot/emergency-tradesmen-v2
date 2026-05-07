@@ -111,7 +111,7 @@ export function generateMockReviews(businessId: string, count: number = 5): Revi
             title: template.title,
             comment: template.comment,
             date: date.toISOString(),
-            verified: Math.random() > 0.2, // 80% verified
+            verified: false,
             helpful: Math.floor(Math.random() * 15),
             notHelpful: Math.floor(Math.random() * 3),
             jobType: template.jobType,

@@ -45,6 +45,8 @@ export interface Business {
     photos?: BusinessPhoto[];
     tier?: 'free' | 'paid';
     verified?: boolean;
+    verified_at?: string | null;
+    claim_status?: 'unclaimed' | 'pending' | 'claimed' | 'public_claimed' | 'verified' | string | null;
     priority_score?: number;
     // Premium subscriber fields
     logo_url?: string;
@@ -136,7 +138,7 @@ export interface BusinessListings {
 /**
  * STRICT DATA INTEGRITY:
  * Removed 45,000+ lines of mock listings and procedural generation logic.
- * Only real, verified data from Supabase is allowed in the application.
+ * Only real listing data from Supabase is allowed in the application.
  */
 export const businessListings: BusinessListings = {};
 
@@ -161,4 +163,32 @@ export function calculateTrustScore(business: Business): number {
     if (business.reviewCount > 0 || (business.rating && business.rating > 0)) score++;
     if (business.social_links && Object.values(business.social_links).some(v => !!v)) score++;
     return Math.min(score, 5);
+}
+
+export type ListingDisplayStatus = 'verified' | 'claimed' | 'public_unclaimed';
+
+export function getListingDisplayStatus(
+    business?: Pick<Business, 'verified' | 'verified_at' | 'claim_status' | 'owner_user_id'> | null
+): ListingDisplayStatus {
+    const claimStatus = business?.claim_status?.toLowerCase();
+
+    if (claimStatus === 'verified') {
+        return 'verified';
+    }
+
+    if (business?.verified === true && !!business.verified_at) {
+        return 'verified';
+    }
+
+    if (claimStatus === 'claimed' || claimStatus === 'public_claimed' || !!business?.owner_user_id) {
+        return 'claimed';
+    }
+
+    return 'public_unclaimed';
+}
+
+export function getListingStatusLabel(status: ListingDisplayStatus): string {
+    if (status === 'verified') return 'Verified';
+    if (status === 'claimed') return 'Claimed listing';
+    return 'Public listing';
 }

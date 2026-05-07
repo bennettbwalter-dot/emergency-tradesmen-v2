@@ -452,7 +452,7 @@ export function EmergencyChatInterface() {
     const [isFocused, setIsFocused] = useState(false);
 
     const helperSentences = [
-        `We’re here to help you find trusted local emergency ${settings.tradeTerm.toLowerCase()}s.`,
+        `We’re here to help you find local emergency ${settings.tradeTerm.toLowerCase()} contacts.`,
         "Take a moment to describe what’s happening, or search and call for immediate help.",
         "Get help fast",
         "Find the right trade",
@@ -466,8 +466,8 @@ export function EmergencyChatInterface() {
         "Chat instead of searching",
         "Works on mobile",
         "24/7 availability",
-        "Verified local trades",
-        "Trusted professionals",
+        "Public business listings",
+        "Details need confirmation",
         "Faster response times",
         "No booking delays",
         "Direct contact only",

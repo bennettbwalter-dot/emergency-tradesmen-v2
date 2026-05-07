@@ -24,8 +24,8 @@ const FEATURE_ITEMS = [
         Icon: Clock
     },
     {
-        title: "Verified Specialists",
-        description: "Connect instantly with vetted, insured, and professional breakdown recovery partners.",
+        title: "Roadside Contacts",
+        description: "Connect quickly with public breakdown recovery listings and confirm details directly.",
         Icon: ShieldCheck
     },
     {

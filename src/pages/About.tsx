@@ -29,7 +29,7 @@ export default function About() {
         "alternateName": isUS ? "Emergency Contractors Network" : "Emergency Tradesmen UK",
         "url": siteUrl,
         "logo": `${siteUrl}/et-logo-v3.png`,
-        "description": `The largest network of vetted emergency ${tradeTerm.toLowerCase()} in the ${regionName}.`,
+        "description": `A directory of public emergency ${tradeTerm.toLowerCase()} listings in the ${regionName}.`,
         "areaServed": {
             "@type": "Country",
             "name": regionName
@@ -54,8 +54,8 @@ export default function About() {
     return (
         <>
             <SEO
-                title={`About Emergency ${tradeTerm} — Verified 24/7 Local Trade Network`}
-                description={`We connect you with verified, insured emergency ${tradeTerm.toLowerCase()} in your area. The #1 network for finding trusted local experts for plumbing, electrical & HVAC repairs. Get connected now.`}
+                title={`About Emergency ${tradeTerm} — Public Local Trade Directory`}
+                description={`Find public emergency ${tradeTerm.toLowerCase()} listings in your area. Check details directly before booking plumbing, electrical and HVAC repairs.`}
                 canonical={`${countryPrefix}/about`}
                 jsonLd={[orgSchema, breadcrumbSchema]}
                 alternates={[
@@ -78,11 +78,11 @@ export default function About() {
                                     About Us
                                 </Badge>
                                 <h1 className="font-display text-4xl md:text-6xl tracking-wide text-foreground mb-6">
-                                    The {regionName}'s Most Trusted <span className="text-gold">Emergency {tradeTerm}</span> Network
+                                    The {regionName}'s Emergency <span className="text-gold">{tradeTerm}</span> Directory
                                 </h1>
                                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                                    We rely on local experts. We connect homeowners with verified, fully insured <strong>{tradeTerm.toLowerCase()}</strong> in minutes, not days.
-                                    When disaster strikes, you need a local <strong>{termSingular.toLowerCase()}</strong> you can trust.
+                                    We help homeowners find public local <strong>{tradeTerm.toLowerCase()}</strong> listings quickly.
+                                    When disaster strikes, check details directly with a local <strong>{termSingular.toLowerCase()}</strong> before booking.
                                 </p>
                                 <div className="flex justify-center mb-6 transition-transform hover:scale-110 duration-500">
                                     <img src="/et-logo-v3.webp" alt={`Emergency ${tradeTerm} Logo`} loading="lazy" decoding="async" className="w-20 h-20 object-contain" />
@@ -131,7 +131,7 @@ export default function About() {
                                 <strong>An Emergency {termSingular}</strong> is a licensed professional available 24 hours a day, 7 days a week, to handle urgent property repairs that cannot wait. Unlike standard {tradeTerm.toLowerCase()}, emergency specialists prioritize rapid response times (typically 30-90 minutes) to prevent safety hazards like gas leaks, flooding, or electrical fires.
                             </p>
                             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                                At <strong>Emergency {tradeTerm}</strong>, we strictly vet every {termSingular.toLowerCase()} for insurance, certifications (such as {isUS ? 'state licenses' : 'Gas Safe registration'}), and reliability.
+                                At <strong>Emergency {tradeTerm}</strong>, public listings are shown to help you find contacts quickly. Confirm insurance, certifications (such as {isUS ? 'state licenses' : 'Gas Safe registration'}), and availability directly with the business.
                             </p>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ export default function About() {
                         <div className="text-center max-w-2xl mx-auto mb-16">
                             <h2 className="font-display text-3xl md:text-4xl mb-4">Why Choose Our {tradeTerm}?</h2>
                             <p className="text-muted-foreground">
-                                We believe in transparency, speed, and quality. Here is what you can expect when you hire through our network.
+                                We believe in transparency and fast access to local contacts. Here is what you can expect when using our directory.
                             </p>
                         </div>
 
@@ -156,13 +156,13 @@ export default function About() {
                                 },
                                 {
                                     icon: Shield,
-                                    title: "Vetted " + tradeTerm,
-                                    desc: `Every ${termSingular.toLowerCase()} is fully insured, certified, and background-checked for your peace of mind.`
+                                    title: "Public Listings",
+                                    desc: `Business details may need confirmation. Contact the ${termSingular.toLowerCase()} directly before booking.`
                                 },
                                 {
                                     icon: Award,
-                                    title: "Quality Guaranteed",
-                                    desc: "We stand by our work. All repairs come with a satisfaction guarantee."
+                                    title: "Details Need Checking",
+                                    desc: "Check terms, pricing, and any guarantees directly with the business before work starts."
                                 }
                             ].map((item, i) => (
                                 <div key={i} className="bg-card p-8 rounded-xl border border-border/50 hover:border-gold/30 transition-all hover:-translate-y-1 duration-300">
@@ -199,7 +199,7 @@ export default function About() {
                                 </p>
                                 <ul className="space-y-3">
                                     {[
-                                        isUS ? "Licensed & Bonded Contractors" : "Verified Tradesmen",
+                                        "Public Business Listings",
                                         "5+ Years Experience Average",
                                         "Latest Tools & Diagnostic Equipment"
                                     ].map((item) => (
@@ -218,8 +218,8 @@ export default function About() {
                                 <h3 className="font-display text-3xl mb-4">Safety First, Always</h3>
                                 <p className="text-muted-foreground mb-6 leading-relaxed">
                                     {isUS
-                                        ? "Electrical and HVAC work is dangerous and requires certified professionals. We assume zero risk. Our contractors are licensed and follow all state safety codes."
-                                        : "Electrical work is dangerous and requires certified professionals. We assume zero risk. Our electricians are NAPIT or NICEIC registered, ensuring every job meets the highest safety standards."
+                                        ? "Electrical and HVAC work is dangerous and may require licensed professionals. Confirm licensing, insurance, and code compliance directly before booking."
+                                        : "Electrical work is dangerous and may require certified professionals. Confirm registration, insurance, and safety standards directly before booking."
                                     }
                                 </p>
                                 <Button variant="outline" className="border-gold/30 hover:bg-gold/5 text-gold">

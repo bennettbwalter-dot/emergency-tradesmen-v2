@@ -38,7 +38,7 @@ const GB_MATCHMAKER_STEPS: TourStep[] = [
     {
         id: 'tour-location-button',
         title: 'Step 2: Choose Your Location',
-        description: "Click the Location button to select your city or town. This narrows the search to verified professionals near you.",
+        description: "Click the Location button to select your city or town. This narrows the search to public business listings near you.",
         icon: <MapPin className="w-6 h-6 text-gold" />,
     },
     {
@@ -90,13 +90,13 @@ const COMMON_STEPS_AFTER: TourStep[] = [
     {
         id: 'tour-services',
         title: 'Quick Access Trades',
-        description: "Scroll down and you'll see our trade cards. Just tap any image to instantly find verified professionals in that category — it's the fastest way to get connected.",
+        description: "Scroll down and you'll see our trade cards. Just tap any image to instantly find local emergency contacts in that category — it's the fastest way to get connected.",
         icon: <Zap className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-signup',
         title: 'Join Our Network',
-        description: "Are you a qualified professional? Sign up to join our verified network. Get matched with local emergency jobs, build your reputation, and grow your business.",
+        description: "Are these your business details? Claim your listing, keep details updated, and help customers contact you directly.",
         icon: <Users className="w-6 h-6 text-gold" />,
     },
     {

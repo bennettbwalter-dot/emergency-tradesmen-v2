@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Phone, Clock, Star, ShieldCheck } from "lucide-react";
+import { Phone, Clock, Star, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fetchBusinesses } from "@/lib/businessService";
 import type { Business } from "@/lib/businesses";
@@ -23,7 +23,7 @@ export function CTABanner({ trade, city }: CTABannerProps) {
 
       try {
         const businesses = await fetchBusinesses(normalizedTrade, normalizedCity);
-        // Pick the top verified business (already sorted by rating)
+        // Pick the top public listing (already sorted by rating and priority)
         if (businesses.length > 0) {
           setSpotlightBusiness(businesses[0]);
         }
@@ -81,7 +81,7 @@ export function CTABanner({ trade, city }: CTABannerProps) {
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-white mb-1 flex items-center justify-center md:justify-start gap-2">
                 {spotlightBusiness.name}
-                <ShieldCheck className="w-5 h-5 text-gold" />
+                <FileText className="w-5 h-5 text-gold" />
               </h3>
               <div className="flex items-center justify-center md:justify-start gap-2 text-gold text-sm mb-4">
                 <div className="flex">

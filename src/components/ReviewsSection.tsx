@@ -57,7 +57,7 @@ export function ReviewsSection({ reviews, stats, businessName }: ReviewsSectionP
                         What Customers Say About {businessName}
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Real reviews from verified customers who have used this service
+                        Customer reviews shown where available. Review details may need confirmation.
                     </p>
                 </div>
 

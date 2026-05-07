@@ -24,7 +24,7 @@ type EarthHeroBackgroundProps = {
 
 const FALLBACK_COORDS = { lat: 51.5074, lng: -0.1278 };
 const FALLBACK_DURATION = 9800;
-const EARTH_SEGMENTS = 64;
+const EARTH_SEGMENTS = 96;
 const MAX_PIXEL_RATIO = 1.5;
 const SITE_FOCUS_COORDS = {
   GB: { lat: 54.4, lng: -2.6 },
@@ -94,6 +94,86 @@ function rotationForLocation(location?: string | null, countryCode?: string | nu
   return rotationForCoords(coords);
 }
 
+function readThemeMode(): "light" | "dark" {
+  if (typeof document === "undefined") return "dark";
+  return document.documentElement.classList.contains("light") ? "light" : "dark";
+}
+
+type SceneRefs = {
+  earthMaterial: THREE.MeshPhongMaterial;
+  cloudsMaterial: THREE.MeshLambertMaterial;
+  atmosphereMaterial: THREE.ShaderMaterial;
+  sunLight: THREE.DirectionalLight;
+  rimLight: THREE.DirectionalLight;
+  hemiLight: THREE.HemisphereLight;
+  sunGroup: THREE.Group;
+  sunHaloMaterial: THREE.ShaderMaterial;
+  dayTexture: THREE.Texture;
+  nightTexture: THREE.Texture;
+  specularTexture: THREE.Texture;
+};
+
+function applyThemeToScene(refs: SceneRefs, mode: "light" | "dark") {
+  const {
+    earthMaterial,
+    cloudsMaterial,
+    atmosphereMaterial,
+    sunLight,
+    rimLight,
+    hemiLight,
+    sunGroup,
+    sunHaloMaterial,
+    dayTexture,
+    nightTexture,
+    specularTexture
+  } = refs;
+  const glowColor = (atmosphereMaterial.uniforms as { glowColor: { value: THREE.Color } }).glowColor.value;
+  const haloColor = (sunHaloMaterial.uniforms as { glowColor: { value: THREE.Color } }).glowColor.value;
+  if (mode === "light") {
+    earthMaterial.map = dayTexture;
+    earthMaterial.emissiveMap = null;
+    earthMaterial.emissive.setHex(0x000000);
+    earthMaterial.emissiveIntensity = 0;
+    earthMaterial.specularMap = specularTexture;
+    earthMaterial.specular.setHex(0x4a6886);
+    earthMaterial.shininess = 22;
+    earthMaterial.needsUpdate = true;
+    cloudsMaterial.opacity = 0.58;
+    cloudsMaterial.needsUpdate = true;
+    glowColor.setHex(0x9ad6ff);
+    hemiLight.color.setHex(0xeaf6ff);
+    hemiLight.groundColor.setHex(0x3a5870);
+    hemiLight.intensity = 1.4;
+    sunLight.color.setHex(0xfff4d6);
+    sunLight.intensity = 3.6;
+    rimLight.color.setHex(0x8fd5ff);
+    rimLight.intensity = 1.0;
+    sunGroup.visible = true;
+    haloColor.setHex(0xffe6a8);
+  } else {
+    earthMaterial.map = nightTexture;
+    earthMaterial.emissiveMap = nightTexture;
+    earthMaterial.emissive.setHex(0xffd29a);
+    earthMaterial.emissiveIntensity = 1.55;
+    earthMaterial.specularMap = null;
+    earthMaterial.specular.setHex(0x080808);
+    earthMaterial.shininess = 4;
+    earthMaterial.needsUpdate = true;
+    cloudsMaterial.opacity = 0.14;
+    cloudsMaterial.needsUpdate = true;
+    glowColor.setHex(0x6ad8ff);
+    hemiLight.color.setHex(0x12243a);
+    hemiLight.groundColor.setHex(0x010205);
+    hemiLight.intensity = 0.5;
+    sunLight.color.setHex(0xffc880);
+    sunLight.intensity = 0.9;
+    rimLight.color.setHex(0x71d9ff);
+    rimLight.intensity = 1.5;
+    sunGroup.visible = false;
+    haloColor.setHex(0xffd29a);
+  }
+}
+
 export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mapRef = useRef<HTMLDivElement | null>(null);
@@ -106,6 +186,19 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     targetRotation: rotationForSite(countryCode),
     isLaunching: false
   });
+  const sceneRefsRef = useRef<SceneRefs | null>(null);
+  const themeModeRef = useRef<"light" | "dark">(readThemeMode());
+
+  useEffect(() => {
+    const apply = () => {
+      const mode = readThemeMode();
+      themeModeRef.current = mode;
+      if (sceneRefsRef.current) applyThemeToScene(sceneRefsRef.current, mode);
+    };
+    const observer = new MutationObserver(apply);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (stateRef.current.isLaunching) return;
@@ -123,87 +216,163 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     });
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-    camera.position.set(0, 0, 7.3);
+    camera.position.set(0, 0, 5.4);
 
     const loader = new THREE.TextureLoader();
-    const earthTexture = loader.load("/assets/earth_atmos_2048.webp");
+    const dayTexture = loader.load("/assets/earth_atmos_2048.webp");
+    const nightTexture = loader.load("/assets/earth_lights_4k.jpg");
     const cloudTexture = loader.load("/assets/earth_clouds_1024.webp");
-    earthTexture.colorSpace = THREE.SRGBColorSpace;
+    const normalTexture = loader.load("/assets/earth_normal_2048.jpg");
+    const specularTexture = loader.load("/assets/earth_specular_2048.jpg");
+    dayTexture.colorSpace = THREE.SRGBColorSpace;
+    nightTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
+    [dayTexture, nightTexture, cloudTexture, normalTexture, specularTexture].forEach((t) => {
+      t.anisotropy = maxAnisotropy;
+    });
 
     const initialRotation = rotationForSite(countryCode);
     stateRef.current.targetRotation = initialRotation;
 
     const globe = new THREE.Group();
     globe.rotation.set(initialRotation.x, initialRotation.y, initialRotation.z);
+    // UK is high latitude: pull globe up a touch so country isn't crowded by chat input below
+    globe.position.y = countryCode === "US" ? -0.42 : -0.18;
     scene.add(globe);
 
+    const earthMaterial = new THREE.MeshPhongMaterial({
+      map: dayTexture,
+      normalMap: normalTexture,
+      normalScale: new THREE.Vector2(0.85, 0.85),
+      specularMap: specularTexture,
+      specular: new THREE.Color(0x4a6886),
+      shininess: 22
+    });
     const earth = new THREE.Mesh(
       new THREE.SphereGeometry(2.16, EARTH_SEGMENTS, EARTH_SEGMENTS),
-      new THREE.MeshStandardMaterial({
-        map: earthTexture,
-        roughness: 0.7,
-        metalness: 0.03
-      })
+      earthMaterial
     );
     globe.add(earth);
 
+    const cloudsMaterial = new THREE.MeshLambertMaterial({
+      map: cloudTexture,
+      transparent: true,
+      opacity: 0.34,
+      depthWrite: false
+    });
     const clouds = new THREE.Mesh(
       new THREE.SphereGeometry(2.19, EARTH_SEGMENTS, EARTH_SEGMENTS),
-      new THREE.MeshLambertMaterial({
-        map: cloudTexture,
-        transparent: true,
-        opacity: 0.34,
-        depthWrite: false
-      })
+      cloudsMaterial
     );
     globe.add(clouds);
 
+    const atmosphereMaterial = new THREE.ShaderMaterial({
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+      uniforms: {
+        glowColor: { value: new THREE.Color(0x7ee4ff) }
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 glowColor;
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.78 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.3);
+          gl_FragColor = vec4(glowColor, intensity * 0.68);
+        }
+      `
+    });
     const atmosphere = new THREE.Mesh(
       new THREE.SphereGeometry(2.29, EARTH_SEGMENTS, EARTH_SEGMENTS),
-      new THREE.ShaderMaterial({
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
-        uniforms: {
-          glowColor: { value: new THREE.Color(0x7ee4ff) }
-        },
-        vertexShader: `
-          varying vec3 vNormal;
-          void main() {
-            vNormal = normalize(normalMatrix * normal);
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform vec3 glowColor;
-          varying vec3 vNormal;
-          void main() {
-            float intensity = pow(0.78 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.3);
-            gl_FragColor = vec4(glowColor, intensity * 0.68);
-          }
-        `
-      })
+      atmosphereMaterial
     );
     globe.add(atmosphere);
 
-    scene.add(new THREE.HemisphereLight(0xcaf2ff, 0x020305, 1.25));
-    const sun = new THREE.DirectionalLight(0xffedc2, 3.2);
-    sun.position.set(-4, 2.2, 6);
-    scene.add(sun);
-    const rim = new THREE.DirectionalLight(0x71d9ff, 1.5);
-    rim.position.set(5, -2, -2.5);
-    scene.add(rim);
+    const hemiLight = new THREE.HemisphereLight(0xcaf2ff, 0x020305, 1.25);
+    scene.add(hemiLight);
+    const sunLight = new THREE.DirectionalLight(0xffedc2, 3.2);
+    sunLight.position.set(-4, 2.2, 6);
+    scene.add(sunLight);
+    const rimLight = new THREE.DirectionalLight(0x71d9ff, 1.5);
+    rimLight.position.set(5, -2, -2.5);
+    scene.add(rimLight);
+
+    const sunGroup = new THREE.Group();
+    const sunCore = new THREE.Mesh(
+      new THREE.SphereGeometry(0.55, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0xfff4d0 })
+    );
+    sunGroup.add(sunCore);
+    const sunHaloMaterial = new THREE.ShaderMaterial({
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+      depthWrite: false,
+      uniforms: { glowColor: { value: new THREE.Color(0xffe6a8) } },
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 glowColor;
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.86 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 1.6);
+          gl_FragColor = vec4(glowColor, intensity * 0.9);
+        }
+      `
+    });
+    const sunHalo = new THREE.Mesh(
+      new THREE.SphereGeometry(1.6, 48, 48),
+      sunHaloMaterial
+    );
+    sunGroup.add(sunHalo);
+    sunGroup.position.set(-9, 5.2, 0.5);
+    scene.add(sunGroup);
+
+    sceneRefsRef.current = {
+      earthMaterial,
+      cloudsMaterial,
+      atmosphereMaterial,
+      sunLight,
+      rimLight,
+      hemiLight,
+      sunGroup,
+      sunHaloMaterial,
+      dayTexture,
+      nightTexture,
+      specularTexture
+    };
+    applyThemeToScene(sceneRefsRef.current, themeModeRef.current);
 
     const resize = () => {
       const width = window.innerWidth;
       const height = Math.max(window.innerHeight, wrapperRef.current?.clientHeight || 720);
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
-      camera.position.z = width < 480 ? 13.8 : width < 700 ? 12.3 : 7.25;
+      // UK is geographically smaller than US: bring camera closer so the country reads at a glance
+      const isUK = countryCode !== "US";
+      if (isUK) {
+        camera.position.z = width < 480 ? 8.8 : width < 700 ? 7.1 : 4.6;
+      } else {
+        camera.position.z = width < 480 ? 10.2 : width < 700 ? 8.4 : 5.4;
+      }
       camera.updateProjectionMatrix();
     };
 
@@ -387,6 +556,19 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
       earth.geometry.dispose();
       clouds.geometry.dispose();
       atmosphere.geometry.dispose();
+      sunCore.geometry.dispose();
+      sunHalo.geometry.dispose();
+      earthMaterial.dispose();
+      cloudsMaterial.dispose();
+      atmosphereMaterial.dispose();
+      sunHaloMaterial.dispose();
+      (sunCore.material as THREE.Material).dispose();
+      dayTexture.dispose();
+      nightTexture.dispose();
+      cloudTexture.dispose();
+      normalTexture.dispose();
+      specularTexture.dispose();
+      sceneRefsRef.current = null;
       mapInstanceRef.current?.remove();
       mapInstanceRef.current = null;
       mapReadyPromiseRef.current = null;

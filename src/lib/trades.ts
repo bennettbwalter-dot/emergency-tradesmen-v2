@@ -317,17 +317,17 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const certificationsMap: Record<string, string[]> = {
-    plumber: ["Licensed & Bonded", "Master Plumber Certified", "PHCC Member", "Fully Insured"],
-    electrician: ["NEC Compliant", "Licensed Electrician", "NFPA Member", "Fully Insured"],
-    locksmith: ["ALOA Member", "Background Checked", "Fully Insured"],
-    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Fully Insured"],
-    "drain-specialist": ["IICRC Certified", "Licensed Contractor", "Fully Insured"],
-    glazier: ["NGA Certified", "Safety Glass Qualified", "Fully Insured"],
-    roofer: ["Licensed Roofer", "OSHA Certified", "Fully Insured"],
-    builder: ["Licensed General Contractor", "ICC/IPC Compliant", "Fully Insured"],
-    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Fully Insured"],
-    "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Fully Insured"],
-    breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Fully Insured"],
+    plumber: ["Confirm Licence", "Confirm Certification", "PHCC Member", "Confirm Insurance"],
+    electrician: ["NEC Compliant", "Confirm Licence", "NFPA Member", "Confirm Insurance"],
+    locksmith: ["ALOA Member", "Claim Details", "Confirm Insurance"],
+    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Confirm Insurance"],
+    "drain-specialist": ["IICRC Certified", "Confirm Licence", "Confirm Insurance"],
+    glazier: ["NGA Certified", "Safety Glass Qualified", "Confirm Insurance"],
+    roofer: ["Confirm Licence", "OSHA Certified", "Confirm Insurance"],
+    builder: ["Confirm Licence", "ICC/IPC Compliant", "Confirm Insurance"],
+    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Confirm Insurance"],
+    "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Confirm Insurance"],
+    breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Confirm Insurance"],
   };
 
   return {

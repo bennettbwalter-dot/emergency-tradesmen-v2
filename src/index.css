@@ -196,6 +196,11 @@
   .local-area-map .maplibregl-ctrl button {
     color: rgba(255, 255, 255, 0.92);
   }
+
+  .hero-trade-title {
+    background-image: linear-gradient(180deg, #f5dc8a 0%, #e3c063 30%, #caa052 55%, #b8893f 80%, #8c6524 100%);
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+  }
 }
 
 @keyframes earth-star-drift {
@@ -1458,9 +1463,12 @@
 
   :where(.light) .earth-cockpit-hero .hero-title-arch h1 > span:nth-child(2) {
     color: transparent !important;
-    background-image: linear-gradient(180deg, #fff4b9 0%, #ffd25c 25%, #f0527d 49%, #36d897 72%, #44a4ff 100%) !important;
+    background-image: linear-gradient(180deg, #d29a30 0%, #a8741e 32%, #7e5316 62%, #4a2c0a 100%) !important;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 8px 16px rgba(255, 46, 93, 0.38)) drop-shadow(0 0 22px rgba(68, 164, 255, 0.28));
+    filter:
+      drop-shadow(0 1px 0 rgba(255, 248, 220, 0.55))
+      drop-shadow(0 2px 4px rgba(60, 38, 8, 0.22))
+      drop-shadow(0 6px 18px rgba(40, 24, 4, 0.18));
   }
 
   :where(.light) .earth-cockpit-hero .hero-title-arch h1 > span:nth-child(3) span {
