@@ -44,7 +44,7 @@ export function ReviewStatsDisplay({ stats }: ReviewStatsDisplayProps) {
                                     {Math.round(stats.verifiedPercentage)}%
                                 </span>
                             </div>
-                            <p className="text-xs text-foreground/60 dark:text-muted-foreground font-medium">Checked Reviews</p>
+                            <p className="text-xs text-foreground/60 dark:text-muted-foreground font-medium">Review Signals</p>
                         </div>
                         <div className="text-center">
                             <div className="flex items-center justify-center gap-2 mb-1">

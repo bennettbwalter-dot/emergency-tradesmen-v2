@@ -24,7 +24,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The 2.7 pCi/L Benchmark:</strong> 2026 EPA suggestions move the target closer to the WHO (World Health Organization) standard, providing a higher 2026 "Safety Ceiling" for all US homes.</li>
-            <li><strong>Active Soil Depressurization (ASD):</strong> The 2026 gold standard-using a dedicated vent and fan to pull radon from beneath the slab before it enters your home.</li>
+            <li><strong>Active Soil Depressurization (ASD):</strong> The 2026 gold standard—using a dedicated vent and fan to pull radon from beneath the slab before it enters your home.</li>
             <li><strong>Real-Time IoT Logging:</strong> 2026 US sensors provide **Rolling Averages** and peak-level alerts to your smartphone, replacing 1990s-era "charcoal canisters."</li>
             <li><strong>HUD 2026 Policy:</strong> For 2026, tribal and federal environmental reviews mandate radon testing and 2026-spec mitigation for all housing transactions.</li>
         </ul>
@@ -34,7 +34,7 @@
     <h2>2. EPA 2026 Guidelines: The New US Radon Action Levels</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Tiered Action Plans:</strong> 2026 codes suggest "Fix the Home" at 4 pCi/L and "Consider Mitigation" at 2.7 pCi/L-we recommend **2026 Hardening** at the 2.7 mark for peace of mind.</li>
+            <li><strong>Tiered Action Plans:</strong> 2026 codes suggest "Fix the Home" at 4 pCi/L and "Consider Mitigation" at 2.7 pCi/L—we recommend **2026 Hardening** at the 2.7 mark for peace of mind.</li>
             <li><strong>Mandatory Testing:</strong> Many 2026 US states now require a **2026 Certified Radon Report** for all real estate closings and major 2026 renovations.</li>
             <li><strong>Digital Clearance Mark:</strong> Every 2026 mitigation system we install carries a digital ID that proves it meets **2026 EPA Performance Standards**.</li>
         </ul>
@@ -116,7 +116,7 @@
         <ul>
 <li><strong>Stack Effect Diagnostics:</strong> We use 2026 **Blower-Door Testing** to see how your home's 2026 insulation is "Sucking" radon from the ground.</li>
             <li><strong>Soil-Moisture Sensors:</strong> We install 2026 sensors that use **2026 AI** to predict radon spikes based on local US rainfall data.</li>
-            <li><strong>Foundation-Bite Analysis:</strong> We provide **2026 Sub-Slab Mapping** of your US crawlspace-the primary 2026 attractor for soil gas.</li>
+            <li><strong>Foundation-Bite Analysis:</strong> We provide **2026 Sub-Slab Mapping** of your US crawlspace—the primary 2026 attractor for soil gas.</li>
         </ul>
     </div>
     <p>In 2026, we solve the *geology* of the threat. A radon fan is useless if the 2026 foundation seals are failing. We provide the **2026 Psychrometric Soil Audit**, ensuring your foundation is 2026 airtight and resilient. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Radon Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"EPA Digital Badge"** in 2026-if your technician isn't **2026 Radon-Certified**, don't let them drill your 2026 slab.</li>
-            <li><strong>CANNOT:</strong> Rely on a "Short-Term Test" for 2026 home buying-in 2026, you must see at least **30 Days of Rolling Averages**.</li>
+            <li><strong>CAN:</strong> Check your **"EPA Digital Badge"** in 2026—if your technician isn't **2026 Radon-Certified**, don't let them drill your 2026 slab.</li>
+            <li><strong>CANNOT:</strong> Rely on a "Short-Term Test" for 2026 home buying—in 2026, you must see at least **30 Days of Rolling Averages**.</li>
             <li><strong>CAN:</strong> Request an **"ASD System Health Check"** once a year to ensure your 2026 fan is moving the correct 2026 CFM volume.</li>
-            <li><strong>CANNOT:</strong> Seal your 2026 basement floor with "Standard Paint"-you must use **2026 Radon-Rated Barrier Coatings** to stop 2026 gas diffusion.</li>
+            <li><strong>CANNOT:</strong> Seal your 2026 basement floor with "Standard Paint"—you must use **2026 Radon-Rated Barrier Coatings** to stop 2026 gas diffusion.</li>
         </ul>
     </div>
 

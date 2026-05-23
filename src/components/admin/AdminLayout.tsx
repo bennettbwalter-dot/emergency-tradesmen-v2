@@ -16,7 +16,9 @@ import {
     Download,
     Edit3,
     BarChart3,
-    Mail
+    Mail,
+    ShieldCheck,
+    Globe
 } from "lucide-react";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -36,12 +38,12 @@ export function AdminLayout() {
         );
     }
 
-    // Check if user is admin (you can enhance this with a proper role check)
+    // UI gating only. Sensitive admin mutations must still be enforced by RLS/RPCs.
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
-    const isAdmin = (user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase()) || user?.email?.includes('bennett');
+    const isAdmin = Boolean(user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase());
+    const isLocalDevAdmin = import.meta.env.DEV && !user;
 
-    // In local dev, skip auth entirely
-    if (import.meta.env.DEV) {
+    if (isLocalDevAdmin) {
         // fall through to render admin UI
     } else if (!user) {
         return <Navigate to={`/login?redirect=${location.pathname}`} replace />;
@@ -69,7 +71,9 @@ export function AdminLayout() {
         { path: "/admin/photos", icon: Image, label: "Photos" },
         { path: "/admin/analytics", icon: BarChart3, label: "Analytics" },
         { path: "/admin/email-outreach", icon: Mail, label: "Email Campaigns" },
+        { path: "/admin/evidence", icon: ShieldCheck, label: "Evidence" },
         { path: "/admin/export", icon: Download, label: "Data Export" },
+        { path: "/landing", icon: Globe, label: "Landing Page" },
     ];
 
     const handleSignOut = async () => {

@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the United States of 2026, the way we cool our homes has undergone a seismic shift. Under the **American Innovation and Manufacturing (AIM) Act**, the EPA has accelerated the phase-down of Hydrofluorocarbons (HFCs), specifically the long-standing industry standard, R-410A. In its place, 2026 residential HVAC systems now utilize "Next-Generation" refrigerants like **R-454B** and **R-32**. These gases are classified as **A2L**-meaning they are "Mildly Flammable." While they are thousands of times better for the environment, they require a transformation in how homeowners and technicians handle potential leaks. A refrigerant leak in 2026 isn't just a loss of cooling; it's a technical event that requires an EPA-certified response under the latest safety codes. This guide provides the definitive 2026 standard for refrigerant safety in the American home.</p>
+    <p>In the United States of 2026, the way we cool our homes has undergone a seismic shift. Under the **American Innovation and Manufacturing (AIM) Act**, the EPA has accelerated the phase-down of Hydrofluorocarbons (HFCs), specifically the long-standing industry standard, R-410A. In its place, 2026 residential HVAC systems now utilize "Next-Generation" refrigerants like **R-454B** and **R-32**. These gases are classified as **A2L**—meaning they are "Mildly Flammable." While they are thousands of times better for the environment, they require a transformation in how homeowners and technicians handle potential leaks. A refrigerant leak in 2026 isn't just a loss of cooling; it's a technical event that requires an EPA-certified response under the latest safety codes. This guide provides the definitive 2026 standard for refrigerant safety in the American home.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Refrigerant Safety 2026</h2>
     <div class="capsule-box">
@@ -130,15 +130,15 @@
             <li><strong>Filter-Drier Swap:</strong> Every leak repair in 2026 MUST include a new "Liquid Line Filter Drier" to trap any moisture.</li>
         </ul>
     </div>
-    <p>In 2026, we don't believe in "Quick Fixes." We believe in "Technical Permanence." If your 2026 HVAC is leaking, we find the metallurgical cause-whether it's vibration, corrosion, or a bad fitting-and we fix it forever. Our 2026 US mobile labs are stocked for immediate, permanent R-454B and R-32 repairs.</p>
+    <p>In 2026, we don't believe in "Quick Fixes." We believe in "Technical Permanence." If your 2026 HVAC is leaking, we find the metallurgical cause—whether it's vibration, corrosion, or a bad fitting—and we fix it forever. Our 2026 US mobile labs are stocked for immediate, permanent R-454B and R-32 repairs.</p>
 
     <div class="dos-donts">
         <h3>US Refrigerant Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your 2026 "LDS Status" on your smart thermostat-it should say "READY" or "GREEN."</li>
-            <li><strong>CANNOT:</strong> Use "Leak Seal" cans from the hardware store-they will gum up the 2026 electronic expansion valves.</li>
-            <li><strong>CAN:</strong> Keep your outdoor line-set insulation intact-exposed copper is more likely to vibrate and leak in 2026.</li>
-            <li><strong>CANNOT:</strong> Hire a "General Handyman" for AC work-only EPA Section 608 pros are legal for 2026 A2L service.</li>
+            <li><strong>CAN:</strong> Check your 2026 "LDS Status" on your smart thermostat—it should say "READY" or "GREEN."</li>
+            <li><strong>CANNOT:</strong> Use "Leak Seal" cans from the hardware store—they will gum up the 2026 electronic expansion valves.</li>
+            <li><strong>CAN:</strong> Keep your outdoor line-set insulation intact—exposed copper is more likely to vibrate and leak in 2026.</li>
+            <li><strong>CANNOT:</strong> Hire a "General Handyman" for AC work—only EPA Section 608 pros are legal for 2026 A2L service.</li>
         </ul>
     </div>
 

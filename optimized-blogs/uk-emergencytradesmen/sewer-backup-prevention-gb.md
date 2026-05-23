@@ -29,7 +29,7 @@
             <li><strong>Responsibility:</strong> You are responsible for the "Lateral Drain" under your land until it joins the "Public Sewer" (which is the Water Company's problem).</li>
         </ul>
     </div>
-    <p>By 2026, "Watching the Drain" is not enough. A sewer backup is a biological emergency that can make a property uninhabitable for months. The 2026 standard is **Mechanical Isolation**. If you live in a low-lying area or a "Basement Flat" in a UK city, an NRV isn't an option-it’s a necessity for 2026 insurance compliance.</p>
+    <p>By 2026, "Watching the Drain" is not enough. A sewer backup is a biological emergency that can make a property uninhabitable for months. The 2026 standard is **Mechanical Isolation**. If you live in a low-lying area or a "Basement Flat" in a UK city, an NRV isn't an option—it’s a necessity for 2026 insurance compliance.</p>
 
     <h2>2. Building Regs Part H: The 2026 Drainage Standard</h2>
     <div class="capsule-box">
@@ -66,7 +66,7 @@
     <p>In 2026, sewer resilience is a community effort. By installing SuDS, you are lowering the water table and reducing the risk of a surcharge hitting your own home. We provide the **2026 SuDS Certificate** that can often lead to a reduction in the "Surface Water Drainage" charge on your water bill. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first modern sewer system in London was built after the "Great Stink" of 1858. In 2026, we are still using those same tunnels-but now we've added AI sensors and stainless steel flappers to keep them in check!</p>
+        <p><strong>Fun Fact!</strong> The first modern sewer system in London was built after the "Great Stink" of 1858. In 2026, we are still using those same tunnels—but now we've added AI sensors and stainless steel flappers to keep them in check!</p>
     </div>
 
     <h2>5. Identifying the Backup: The 24/7 Early Warning Signs</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Sewer Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Keep your "Inter-Chamber" covers clear of dirt and mulch-easy access is critical in a 2026 emergency.</li>
-            <li><strong>CANNOT:</strong> Flush "Flushable" wipes-they are the \#1 cause of the "UK Fatberg Crisis" in 2026.</li>
-            <li><strong>CAN:</strong> Set your 2026 NRV to "Locked" if your street starts to flood-it buys you hours of dry foundation.</li>
-            <li><strong>CANNOT:</strong> Ignore "Gurgling" sounds in your kitchen sink-it's the sewer at the end of the garden "Exhaling" before it backs up.</li>
+            <li><strong>CAN:</strong> Keep your "Inter-Chamber" covers clear of dirt and mulch—easy access is critical in a 2026 emergency.</li>
+            <li><strong>CANNOT:</strong> Flush "Flushable" wipes—they are the \#1 cause of the "UK Fatberg Crisis" in 2026.</li>
+            <li><strong>CAN:</strong> Set your 2026 NRV to "Locked" if your street starts to flood—it buys you hours of dry foundation.</li>
+            <li><strong>CANNOT:</strong> Ignore "Gurgling" sounds in your kitchen sink—it's the sewer at the end of the garden "Exhaling" before it backs up.</li>
         </ul>
     </div>
 

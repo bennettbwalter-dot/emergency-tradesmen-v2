@@ -3,7 +3,7 @@ import { Business, getListingDisplayStatus, getListingStatusLabel } from "@/lib/
 import { cn } from "@/lib/utils";
 
 interface ListingStatusBadgeProps {
-  business?: Pick<Business, 'verified' | 'verified_at' | 'claim_status' | 'owner_user_id'> | null;
+  business?: Business | null;
   className?: string;
 }
 
@@ -22,7 +22,7 @@ export function ListingStatusBadge({ business, className }: ListingStatusBadgePr
         className
       )}
     >
-      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+      <Icon className="h-3.5 w-3.5" />
       {label}
     </span>
   );

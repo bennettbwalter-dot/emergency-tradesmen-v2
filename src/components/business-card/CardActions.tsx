@@ -43,28 +43,38 @@ export function CardActions({ business, isParchment }: CardActionsProps) {
             </HoverBorderGradient>
  
             {/* WhatsApp Button - Secondary Action */}
-            <HoverBorderGradient
-                as="a"
-                href={`https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
-                containerClassName={cn("w-full h-full", isParchment ? "rounded-none" : "rounded-lg")}
-                className={cn(
-                    "w-full h-full flex items-center justify-center px-2 group",
-                    isParchment ? "bg-emerald-800 text-white border-2 border-emerald-900" : "bg-emerald-600 dark:bg-emerald-700/80 text-white"
-                )}
-                glowColor={theme === 'light' ? "#D4AF37" : undefined}
-            >
-                <div className={cn(
-                    "w-5 h-5 mr-1.5 border border-white/20 rounded-full flex items-center justify-center text-[10px] font-black text-white shrink-0 bg-white/10 group-hover:bg-white/20 transition-colors",
-                    isParchment && "rounded-none"
-                )}>W</div>
-                <span className={cn(
-                    "font-bold text-white text-[10px] sm:text-xs uppercase tracking-widest translate-y-[1px]",
-                    isParchment && "font-mono"
-                )}>WhatsApp</span>
-            </HoverBorderGradient>
+            {(() => {
+                const domainName = typeof window !== "undefined" ? window.location.hostname : "emergencytradesmen.net";
+                const tradeLabel = business.trade || "contractor";
+                const cityLabel = business.city || "my area";
+                const waText = `Hi, I found your listing on ${domainName} and need an emergency ${tradeLabel.toLowerCase()} in ${cityLabel}. Are you available?`;
+                const waHref = `https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}?text=${encodeURIComponent(waText)}`;
+
+                return (
+                    <HoverBorderGradient
+                        as="a"
+                        href={waHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackEvent("Business", "WhatsApp Click", business.name)}
+                        containerClassName={cn("w-full h-full", isParchment ? "rounded-none" : "rounded-lg")}
+                        className={cn(
+                            "w-full h-full flex items-center justify-center px-2 group",
+                            isParchment ? "bg-emerald-800 text-white border-2 border-emerald-900" : "bg-emerald-600 dark:bg-emerald-700/80 text-white"
+                        )}
+                        glowColor={theme === 'light' ? "#D4AF37" : undefined}
+                    >
+                        <div className={cn(
+                            "w-5 h-5 mr-1.5 border border-white/20 rounded-full flex items-center justify-center text-[10px] font-black text-white shrink-0 bg-white/10 group-hover:bg-white/20 transition-colors",
+                            isParchment && "rounded-none"
+                        )}>W</div>
+                        <span className={cn(
+                            "font-bold text-white text-[10px] sm:text-xs uppercase tracking-widest translate-y-[1px]",
+                            isParchment && "font-mono"
+                        )}>WhatsApp</span>
+                    </HoverBorderGradient>
+                );
+            })()}
         </div>
     );
 }

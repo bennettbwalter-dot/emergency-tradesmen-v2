@@ -1,21 +1,11 @@
 # Cloudflare Pages Redirects
 # Format: from to status
 
+# SPA fallback — all routes serve index.html
+/* /index.html 200
+
 # www to non-www (UK domain)
 https://www.emergencytradesmen.net/* https://emergencytradesmen.net/:splat 301!
 
 # www to non-www (US domain)
 https://www.emergencycontractors.net/* https://emergencycontractors.net/:splat 301!
-
-# Region-correct sitemap on the US domain. The default /sitemap.xml file is the
-# UK sitemap index; on emergencycontractors.net we rewrite to the US index so
-# crawlers never see UK URLs from a US origin.
-https://emergencycontractors.net/sitemap.xml /sitemap-us.xml 200
-https://www.emergencycontractors.net/sitemap.xml /sitemap-us.xml 200
-
-# Region-correct robots.txt. Same-origin sitemap declarations only.
-https://emergencycontractors.net/robots.txt /robots-us.txt 200
-https://www.emergencycontractors.net/robots.txt /robots-us.txt 200
-
-# SPA fallback — all routes serve index.html
-/* /index.html 200

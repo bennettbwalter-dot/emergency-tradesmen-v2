@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, mould is no longer treated as a simple cleaning issue-it's a "Building Envelope Emergency." With the implementation of the **IICRC S520-2024** global standards, the UK has shifted toward a **Source Removal First** philosophy. The 2026 standard for emergency mould remediation involves **Negative Air Containment**, **HEPA-14 Filtration**, and **Bio-Enzymatic Mycotoxin Neutralizers**. Whether you've suffered a sudden pipe burst, a flash flood, or a rapid "Black Mould" bloom in a poorly ventilated 2026 rental, the 2026 standard involves **IoT Humidity Mapping** and **ATP Surface Testing**. We don't just "Bleach the Wall"; we restore your home's 2026 air quality to clinical levels. This guide provides the technical 2026 standard for UK emergency mould remediation and long-term environmental resilience.</p>
+    <p>In the UK of 2026, mould is no longer treated as a simple cleaning issue—it's a "Building Envelope Emergency." With the implementation of the **IICRC S520-2024** global standards, the UK has shifted toward a **Source Removal First** philosophy. The 2026 standard for emergency mould remediation involves **Negative Air Containment**, **HEPA-14 Filtration**, and **Bio-Enzymatic Mycotoxin Neutralizers**. Whether you've suffered a sudden pipe burst, a flash flood, or a rapid "Black Mould" bloom in a poorly ventilated 2026 rental, the 2026 standard involves **IoT Humidity Mapping** and **ATP Surface Testing**. We don't just "Bleach the Wall"; we restore your home's 2026 air quality to clinical levels. This guide provides the technical 2026 standard for UK emergency mould remediation and long-term environmental resilience.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Mould 2026</h2>
     <div class="capsule-box">
@@ -73,7 +73,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Stachybotrys (Black Mould):</strong> The 2026 "High-Risk" species. In 2026, this is a **Immediate Evacuation** trigger for homes with 2026 infants or the elderly.</li>
-            <li><strong>ATP Bioluminescence:</strong> We use **2026 Handheld ATP Meters** to detect "Biological Load" on surfaces in seconds-if it glows, it's not 2026 clean.</li>
+            <li><strong>ATP Bioluminescence:</strong> We use **2026 Handheld ATP Meters** to detect "Biological Load" on surfaces in seconds—if it glows, it's not 2026 clean.</li>
             <li><strong>Hidden Cavity Growth:</strong> Often caused by 2026 "Micro-Leaks" in internal pipework. We use **2026 Borescope Cams** to find mould behind your 24/7 2026 kitchen units.</li>
         </ul>
     </div>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Mould Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Use a **"Hygrometer"** in 2026-if your home's humidity is over 60%, you have a 2026 mould emergency waiting to happen.</li>
-            <li><strong>CANNOT:</strong> Use "Bleach" on porous surfaces-the water in the bleach will "Feed" the 2026 mould roots deeper into the wall.</li>
+            <li><strong>CAN:</strong> Use a **"Hygrometer"** in 2026—if your home's humidity is over 60%, you have a 2026 mould emergency waiting to happen.</li>
+            <li><strong>CANNOT:</strong> Use "Bleach" on porous surfaces—the water in the bleach will "Feed" the 2026 mould roots deeper into the wall.</li>
             <li><strong>CAN:</strong> Request a **"HEPA-14 Air Clearance Test"** after any large 2026 plumbing repair.</li>
-            <li><strong>CANNOT:</strong> Dry clothes on a 2026 radiator without opening a window-this causes a 2026 "Moisture Spike" that triggers mould.</li>
+            <li><strong>CANNOT:</strong> Dry clothes on a 2026 radiator without opening a window—this causes a 2026 "Moisture Spike" that triggers mould.</li>
         </ul>
     </div>
 

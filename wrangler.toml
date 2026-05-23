@@ -4,7 +4,7 @@ pages_build_output_dir = "dist"
 
 [vars]
 VITE_SUPABASE_URL = "https://xwqvhymkwuasotsgmarn.supabase.co"
-VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3cXZoeW1rd3Vhc290c2dtYXJuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTk5MDM0MywiZXhwIjoyMDgxNTY2MzQzfQ.ZJQXY5OzkfO4Ey2G5enTdPHx_shgDMGAUaTJAHKDKus"
+VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3cXZoeW1rd3Vhc290c2dtYXJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5OTAzNDMsImV4cCI6MjA4MTU2NjM0M30.nHErFkf6SIMzj-b_bwWBlHL4NmQ288rQUZLCIg6jH5Y"
 VITE_POSTHOG_KEY = "phc_Bt8UPTsRxSYzD2Sa4sGBGUz7vTSVSiQj4fT7y2S2Rh3d"
 VITE_POSTHOG_HOST = "https://app.posthog.com"
 VITE_ADMIN_EMAIL = "nicholas.bennett247@gmail.com"

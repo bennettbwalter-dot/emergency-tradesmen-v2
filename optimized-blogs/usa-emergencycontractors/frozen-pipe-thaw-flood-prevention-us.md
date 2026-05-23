@@ -39,7 +39,7 @@
             <li><strong>Flash Thaw:</strong> A rapid 20-degree jump in 4 hours is the highest risk period for US plumbing systems.</li>
         </ul>
     </div>
-    <p>Most American homeowners are shocked when water starts spraying during a warm afternoon. They think "But the temperature is 40 degrees!" That warming is exactly the problem. As the ice plug melts, the water behind it-which has been under thousands of pounds of pressure-finally finds its way out of the crack created during the deep freeze. This is why you must treat every frozen pipe as a "potential burst" until it has been fully thawed and inspected by a licensed pro.</p>
+    <p>Most American homeowners are shocked when water starts spraying during a warm afternoon. They think "But the temperature is 40 degrees!" That warming is exactly the problem. As the ice plug melts, the water behind it—which has been under thousands of pounds of pressure—finally finds its way out of the crack created during the deep freeze. This is why you must treat every frozen pipe as a "potential burst" until it has been fully thawed and inspected by a licensed pro.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If your water isn't running on a cold morning, turn off your main water valve BEFORE you start thawing. This limits the flood volume if the pipe has already split.</p>
@@ -55,7 +55,7 @@
             <li><strong>Curbside:</strong> If you can't find an internal valve, find the meter pit in your front yard near the sidewalk. You may need a "Meter Key" to turn it.</li>
         </ul>
     </div>
-    <p>In a US plumbing emergency, time is your enemy. A 3/4-inch pipe can dump 250 gallons in a single day-enough to fill your basement to your knees. In 2026, ensure your valve is clearly labeled with a red tag. If you have an outdoor meter pit, check it today for bird nests or debris that might slow you down. If your house has a "Gate Valve" (the round handle), consider having it replaced with a "Ball Valve" (the lever handle), which is much less likely to jam after years of non-use.</p>
+    <p>In a US plumbing emergency, time is your enemy. A 3/4-inch pipe can dump 250 gallons in a single day—enough to fill your basement to your knees. In 2026, ensure your valve is clearly labeled with a red tag. If you have an outdoor meter pit, check it today for bird nests or debris that might slow you down. If your house has a "Gate Valve" (the round handle), consider having it replaced with a "Ball Valve" (the lever handle), which is much less likely to jam after years of non-use.</p>
 
     <h2>4. Smart Leak Detection: 2026 Home Tech (Moen, Phyn)</h2>
     <div class="capsule-box">
@@ -121,13 +121,13 @@
             <li><strong>Draft Sealing:</strong> Use spray foam to seal the "Rim Joist" where the house meets the foundation.</li>
         </ul>
     </div>
-    <p>Crawlspaces are the "Danger Zone" for American homes. They are dark, cold, and often forgotten until a pipe bursts. In 2026, we recommend the <strong>"Encapsulation"</strong> method-sealing the crawlspace vents in winter to keep the geothermal heat under the house. Ensure your pipes are lagged with professional-grade foam tubes, not just fiberglass wrap. If you see "beads of water" on your crawlspace pipes during a thaw, get a pro under there immediately to check for hairline fractures.</p>
+    <p>Crawlspaces are the "Danger Zone" for American homes. They are dark, cold, and often forgotten until a pipe bursts. In 2026, we recommend the <strong>"Encapsulation"</strong> method—sealing the crawlspace vents in winter to keep the geothermal heat under the house. Ensure your pipes are lagged with professional-grade foam tubes, not just fiberglass wrap. If you see "beads of water" on your crawlspace pipes during a thaw, get a pro under there immediately to check for hairline fractures.</p>
 
     <h2>9. SharkBite Repair: The DIY Emergency Kit for 2026</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>Tool-Free:</strong> SharkBite fittings push onto the pipe and lock without soldering or special tools.</li>
-            <li><strong>Versatile:</strong> They work on copper, PEX, and CPVC-the three most common US pipe materials.</li>
+            <li><strong>Versatile:</strong> They work on copper, PEX, and CPVC—the three most common US pipe materials.</li>
             <li><strong>Compliance:</strong> They are rated for permanent burial and "behind-the-wall" use in most 2026 US codes.</li>
         </ul>
     </div>
@@ -141,7 +141,7 @@
             <li><strong>Mitigation:</strong> Document that you turned off the water immediately. Insurers love "Action Taken" reports.</li>
         </ul>
     </div>
-    <p>Dealing with a US insurance claim after a burst can be a second disaster. In 2026, companies are using AI to scan your photos for "Pre-existing Wear and Tear." Ensure your photos are high-resolution and show the fresh "Freeze-Fracture" texture of the metal. If your area is declared a disaster zone, you may also be eligible for <strong>FEMA assistance</strong> for home repairs. Keep all your receipts for emergency parts and plumber call-out fees-these are usually 100% reimbursable.</p>
+    <p>Dealing with a US insurance claim after a burst can be a second disaster. In 2026, companies are using AI to scan your photos for "Pre-existing Wear and Tear." Ensure your photos are high-resolution and show the fresh "Freeze-Fracture" texture of the metal. If your area is declared a disaster zone, you may also be eligible for <strong>FEMA assistance</strong> for home repairs. Keep all your receipts for emergency parts and plumber call-out fees—these are usually 100% reimbursable.</p>
 
     <h2>11. 24/7 Licensed Master Plumbers: Your First Call for the Melt</h2>
     <div class="capsule-box">
@@ -151,7 +151,7 @@
             <li><strong>Licensed:</strong> Only state-licensed Master Plumbers are dispatched to ensure 2026 code compliance.</li>
         </ul>
     </div>
-    <p>A "Flash Thaw" in the US is a race against time. The longer your walls stay wet, the higher the risk of toxic black mold. Our 24/7 verified specialists don't just fix the pipe; they perform a "Structural Dry-out." They use thermal imaging to find water hidden behind your drywall that a DIY check will miss. Don't risk your home's foundation and your family's health-call the 24/7 US Master Plumber network the moment the drip starts. We fix it right, fix it fast, and keep your 2026 spring disaster-free.</p>
+    <p>A "Flash Thaw" in the US is a race against time. The longer your walls stay wet, the higher the risk of toxic black mold. Our 24/7 verified specialists don't just fix the pipe; they perform a "Structural Dry-out." They use thermal imaging to find water hidden behind your drywall that a DIY check will miss. Don't risk your home's foundation and your family's health—call the 24/7 US Master Plumber network the moment the drip starts. We fix it right, fix it fast, and keep your 2026 spring disaster-free.</p>
 
 </main>
 

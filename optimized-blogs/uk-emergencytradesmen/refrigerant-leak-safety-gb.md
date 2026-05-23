@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the "Refrigerant Revolution" is in full swing. Following the latest **F-Gas Regulation** updates and the **Net Zero 2050** roadmap, the older, high-GWP (Global Warming Potential) refrigerants like R-410A have been largely phased out of new installations. Replacing them are "Low-GWP" alternatives: **R-32** (classified as A2L-mildly flammable) and **R-290/Propane** (classified as A3-flammable). While these gases are essential for hitting the UK's 2026 climate targets, they introduce a new set of safety protocols for homeowners. A refrigerant leak in 2026 isn't just a performance issue; it's a safety event that requires an immediate, certified response. This guide provides the 2026 standard for identifying and managing refrigerant emergencies in modern UK homes.</p>
+    <p>In the UK of 2026, the "Refrigerant Revolution" is in full swing. Following the latest **F-Gas Regulation** updates and the **Net Zero 2050** roadmap, the older, high-GWP (Global Warming Potential) refrigerants like R-410A have been largely phased out of new installations. Replacing them are "Low-GWP" alternatives: **R-32** (classified as A2L—mildly flammable) and **R-290/Propane** (classified as A3—flammable). While these gases are essential for hitting the UK's 2026 climate targets, they introduce a new set of safety protocols for homeowners. A refrigerant leak in 2026 isn't just a performance issue; it's a safety event that requires an immediate, certified response. This guide provides the 2026 standard for identifying and managing refrigerant emergencies in modern UK homes.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Refrigerant Safety 2026</h2>
     <div class="capsule-box">
@@ -29,7 +29,7 @@
             <li><strong>Response:</strong> If you suspect a leak, ventilate the area immediately and isolate any potential ignition sources (no smoking, no flicking light switches).</li>
         </ul>
     </div>
-    <p>The 2026 UK heating market is safer than ever, but it is also more technical. The "Hissing" sound of a leak is a call to action. In 2026, we don't "Top Up" systems-we find the leak, recover the gas, and perform a structural repair of the copper circuit. This is the 2026 F-Gas mandate for a greener, safer Britain.</p>
+    <p>The 2026 UK heating market is safer than ever, but it is also more technical. The "Hissing" sound of a leak is a call to action. In 2026, we don't "Top Up" systems—we find the leak, recover the gas, and perform a structural repair of the copper circuit. This is the 2026 F-Gas mandate for a greener, safer Britain.</p>
 
     <h2>2. Understanding UK F-Gas 2026 Regulations</h2>
     <div class="capsule-box">
@@ -136,10 +136,10 @@
     <div class="dos-donts">
         <h3>UK Refrigerant Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Keep your outdoor unit's service valves accessible-don't bury them in landscaping or decking in 2026.</li>
-            <li><strong>CANNOT:</strong> Try to "Tighten" a leaking joint yourself-you could cause a sudden "Blow-Out" of high-pressure liquid.</li>
-            <li><strong>CAN:</strong> Check your 2026 "REFCOM" service sticker-if it's more than 12 months old, you're due for a leak check.</li>
-            <li><strong>CANNOT:</strong> Ignore the oil-if there's a greasy spot on your heat pump, it's a 24/7 F-Gas emergency.</li>
+            <li><strong>CAN:</strong> Keep your outdoor unit's service valves accessible—don't bury them in landscaping or decking in 2026.</li>
+            <li><strong>CANNOT:</strong> Try to "Tighten" a leaking joint yourself—you could cause a sudden "Blow-Out" of high-pressure liquid.</li>
+            <li><strong>CAN:</strong> Check your 2026 "REFCOM" service sticker—if it's more than 12 months old, you're due for a leak check.</li>
+            <li><strong>CANNOT:</strong> Ignore the oil—if there's a greasy spot on your heat pump, it's a 24/7 F-Gas emergency.</li>
         </ul>
     </div>
 

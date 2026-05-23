@@ -22,6 +22,8 @@ import { AdSlot } from "@/components/AdSlot";
 import { LeafletMap } from "@/components/LeafletMap";
 import { Business, calculateTrustScore, getListingDisplayStatus } from "@/lib/businesses";
 import { ListingStatusBadge } from "@/components/ListingStatusBadge";
+import { ClaimListingModal } from "@/components/claims/ClaimListingModal";
+import { TrustBadgeStack } from "@/components/trust/TrustBadgeStack";
 import { trades } from "@/lib/trades";
 
 import { trackEvent } from "@/lib/analytics";
@@ -163,9 +165,9 @@ export default function BusinessProfilePage() {
 
     // Use premium description if available, otherwise use generic description
     const description = business.premium_description || `
-    ${business.name} appears as a public ${formattedTrade} listing in ${formattedCity}. These details are provided to help people find local emergency contacts quickly.
+    ${business.name} appears as a public ${formattedTrade} listing in ${formattedCity}. Business details may need updating, so please confirm service availability, pricing, credentials, and insurance directly before booking.
     
-    Business details may need confirmation. If this is your business, you can claim this listing, request an update, or ask for removal.
+    Are these your business details? Claim this listing to update contact information, service areas, opening hours, and profile details.
   `;
 
     // Use premium services if available, otherwise use trade-based defaults
@@ -368,7 +370,7 @@ export default function BusinessProfilePage() {
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
                 title={`${business.name} — ${formattedTrade} in ${formattedCity} | Public Listing`}
-                description={`Need a ${formattedTrade} in ${formattedCity}? ${business.name} appears as a public business listing. Check details directly, request an update, or call for emergency help.`}
+                description={`Need a ${formattedTrade} in ${formattedCity}? ${business.name} appears as a public business listing. Check contact details, confirm availability, or claim this listing to request updates.`}
                 canonical={`/business/${business.id}`}
                 jsonLd={[businessSchema, faqSchema, breadcrumbSchema]}
                 alternates={[
@@ -440,7 +442,7 @@ export default function BusinessProfilePage() {
                                                 </div>
                                                 <div className="flex flex-col">
                                                     <span className={`font-bold tracking-tight leading-none ${trustScore >= 4 ? 'text-emerald-500' : 'text-blue-500'}`}>
-                                                        PROFILE SCORE
+                                                        {trustScore === 5 ? 'TOP RATED' : 'PROFILE SCORE'}
                                                     </span>
                                                     <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Score {trustScore}/5</span>
                                                 </div>
@@ -457,15 +459,52 @@ export default function BusinessProfilePage() {
                                             </div>
                                         </div>
 
-                                        {/* Listing status row */}
+                                        {/* Accreditation Row */}
                                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
                                             <ListingStatusBadge business={business} />
+                                            <TrustBadgeStack business={business} />
                                             <Badge variant="outline" className="bg-gold/5 text-gold border-gold/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
                                                 Details need confirmation
                                             </Badge>
-                                            <Badge variant="outline" className="bg-blue-500/5 text-blue-500 border-blue-500/30 font-bold uppercase tracking-tighter text-[10px] px-2 py-1">
-                                                Claim this listing
-                                            </Badge>
+                                        </div>
+
+                                        <div className="mt-6 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+                                            {business.phone ? (
+                                                <Button
+                                                    asChild
+                                                    size="lg"
+                                                    className="h-14 rounded-lg bg-gold text-black font-black hover:bg-gold-light"
+                                                    onClick={() => trackEvent("Business", "Call Now Hero", `${business.name} (${business.id})`)}
+                                                >
+                                                    <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
+                                                        <Phone className="w-5 h-5" />
+                                                        Call Now
+                                                    </a>
+                                                </Button>
+                                            ) : (
+                                                <Button size="lg" disabled className="h-14 rounded-lg font-black">
+                                                    Phone Not Available
+                                                </Button>
+                                            )}
+                                            <ClaimListingModal
+                                                business={business}
+                                                triggerClassName="h-14 rounded-lg border-white/15 bg-white/5 px-5 text-white hover:bg-white/10"
+                                            />
+                                        </div>
+
+                                        <div className="mt-4 grid gap-2 rounded-lg border border-white/10 bg-black/25 p-3 text-left text-xs text-white/76 sm:grid-cols-3">
+                                            <span className="inline-flex items-center gap-2">
+                                                <ShieldCheck className="h-4 w-4 shrink-0 text-gold" />
+                                                Confirm call-out fee
+                                            </span>
+                                            <span className="inline-flex items-center gap-2">
+                                                <ShieldCheck className="h-4 w-4 shrink-0 text-gold" />
+                                                Ask about credentials
+                                            </span>
+                                            <span className="inline-flex items-center gap-2">
+                                                <ShieldCheck className="h-4 w-4 shrink-0 text-gold" />
+                                                Confirm insurance
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -509,7 +548,7 @@ export default function BusinessProfilePage() {
                                     </div>
                                     <div className="max-w-3xl space-y-8">
                                         <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed font-light">
-                                            {business.name} is listed as a <span className="text-gold font-medium">public {formattedTrade} contact</span> in {formattedCity}. Please confirm availability, qualifications, pricing, and call-out terms directly with the business.
+                                            {business.name} appears as a <span className="text-gold font-medium">public {formattedTrade} listing</span> in {formattedCity}. Please confirm details directly before booking emergency help.
                                         </p>
 
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
@@ -552,18 +591,18 @@ export default function BusinessProfilePage() {
                                         <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight">Our Confidence Check</h2>
                                     </div>
                                     <p className="text-muted-foreground text-lg max-w-2xl">
-                                        This profile is shown with an honest listing status. Public listings should be checked directly before booking, and business owners can request updates, claim the listing, or ask for removal.
+                                                    Listings can be claimed and reviewed through our admin process. Until a listing status clearly says otherwise, confirm details, credentials, insurance, and pricing directly with the business.
                                     </p>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
                                     {[
-                                        isVerifiedListing ? "Verification status recorded" : "Public listing: details need confirmation",
-                                        "Call the business to confirm availability",
-                                        "Ask directly about insurance and qualifications",
-                                        "Request a correction if details are outdated",
-                                        "Claim this listing to manage business details",
-                                        "Request removal if this listing should not appear"
+                                        isVerifiedListing ? "Verification status confirmed" : "Public listing status",
+                                        "Business details may need updating",
+                                        "Claim this listing to request changes",
+                                        "Confirm credentials directly",
+                                        "Confirm insurance directly",
+                                        "Request correction or removal"
                                     ].map((check, i) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
@@ -651,6 +690,7 @@ export default function BusinessProfilePage() {
                             </section>
                         </div>
 
+
                         {/* Right Column - Premium Sticky Sidebar */}
                         <div className="lg:col-span-1">
                             <div className="sticky top-24 space-y-8">
@@ -726,28 +766,35 @@ export default function BusinessProfilePage() {
                                                 Call Now
                                             </a>
                                         </Button>
-                                        <Button
-                                            asChild
-                                            size="lg"
-                                            className="w-full bg-[#22C55E] hover:bg-[#1EA34D] text-white font-bold h-16 rounded-xl"
-                                        >
-                                            <a
-                                                href={`https://wa.me/${((business.whatsapp_number || business.phone) || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Hi, I need help from ${business.name}.`)}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex items-center justify-center gap-2"
-                                            >
-                                                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.049c0 2.123.554 4.197 1.607 6.037L0 24l6.105-1.602a11.834 11.834 0 005.94 1.586h.004c6.637 0 12.048-5.412 12.052-12.049a11.815 11.815 0 00-3.588-8.412z" /></svg>
-                                                WhatsApp
-                                            </a>
-                                        </Button>
+
+                                        {(() => {
+                                            const domainName = typeof window !== "undefined" ? window.location.hostname : "emergencytradesmen.net";
+                                            const tradeLabel = business.trade || "contractor";
+                                            const cityLabel = formattedCity || business.city || "my area";
+                                            const waText = `Hi ${business.name}, I found your profile on ${domainName} and need an emergency ${tradeLabel.toLowerCase()} in ${cityLabel}. Are you available?`;
+                                            const waHref = `https://wa.me/${(business.whatsapp_number || business.phone || "").replace(/\D/g, '')}?text=${encodeURIComponent(waText)}`;
+
+                                            return (
+                                                <Button
+                                                    asChild
+                                                    size="lg"
+                                                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-16 rounded-xl shadow-lg shadow-emerald-600/10"
+                                                    onClick={() => trackEvent("Business", "WhatsApp Click Sidebar", `${business.name} (${business.id})`)}
+                                                >
+                                                    <a href={waHref} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                                                        <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-black shrink-0">W</div>
+                                                        Chat on WhatsApp
+                                                    </a>
+                                                </Button>
+                                            );
+                                        })()}
 
                                         {business.website && (
                                             <Button
                                                 asChild
+                                                variant="outline"
                                                 size="lg"
-                                                className="w-full bg-[#0A0A0A] hover:bg-[#171717] text-white border border-white/10 hover:border-gold/30 font-bold h-16 rounded-xl transition-all duration-300 shadow-lg"
+                                                className="w-full h-16 rounded-xl border-border bg-transparent text-foreground hover:bg-secondary"
                                                 onClick={() => trackEvent("Business", "Website Click", `${business.name} (${business.id})`)}
                                             >
                                                 <a
@@ -756,39 +803,40 @@ export default function BusinessProfilePage() {
                                                     rel="noopener noreferrer"
                                                     className="flex items-center justify-center gap-2"
                                                 >
-                                                    <ExternalLink className="w-5 h-5 text-gold" />
+                                                    <ExternalLink className="w-5 h-5 text-gold" strokeWidth={2} />
                                                     Visit Website
                                                 </a>
                                             </Button>
                                         )}
                                         <ShareMenu businessName={business.name} city={formattedCity} />
-                                    </div>
-
-                                    {/* Trustpilot Sidebar Widget removed due to invalid ID */}
-                                </div>
-
-                                {/* === SOCIAL MEDIA BAR (Obsidian Gold Style) === */}
-                                <div className="bg-card rounded-3xl border border-border p-6 shadow-2xl relative overflow-hidden group">
-                                    <h3 className="font-display text-lg font-semibold mb-4 border-b border-border pb-2">Connect on Social</h3>
-                                    <div className="flex justify-center gap-4 py-2">
-                                        {/* If no social links, this area will be empty or hidden by parent logic if desired */}
-                                        {business.social_links?.facebook && (
-                                            <GlassSocialIcon platform="facebook" href={business.social_links.facebook} />
-                                        )}
-                                        {business.social_links?.instagram && (
-                                            <GlassSocialIcon platform="instagram" href={business.social_links.instagram} />
-                                        )}
-                                        {business.social_links?.twitter && (
-                                            <GlassSocialIcon platform="twitter" href={business.social_links.twitter} />
-                                        )}
-                                        {business.social_links?.linkedin && (
-                                            <GlassSocialIcon platform="linkedin" href={business.social_links.linkedin} />
-                                        )}
-                                        {business.social_links?.tiktok && (
-                                            <GlassSocialIcon platform="tiktok" href={business.social_links.tiktok} />
-                                        )}
+                                        <ClaimListingModal
+                                            business={business}
+                                            triggerClassName="w-full h-12 rounded-xl border-border/70 bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground"
+                                        />
                                     </div>
                                 </div>
+
+                                    {/* === SOCIAL MEDIA BAR (Obsidian Gold Style) === */}
+                                    <div className="bg-card rounded-3xl border border-border p-6 shadow-2xl relative overflow-hidden group">
+                                        <h3 className="font-display text-lg font-semibold mb-4 border-b border-border pb-2">Connect on Social</h3>
+                                        <div className="flex justify-center gap-4 py-2">
+                                            {business.social_links?.facebook && (
+                                                <GlassSocialIcon platform="facebook" href={business.social_links.facebook} />
+                                            )}
+                                            {business.social_links?.instagram && (
+                                                <GlassSocialIcon platform="instagram" href={business.social_links.instagram} />
+                                            )}
+                                            {business.social_links?.twitter && (
+                                                <GlassSocialIcon platform="twitter" href={business.social_links.twitter} />
+                                            )}
+                                            {business.social_links?.linkedin && (
+                                                <GlassSocialIcon platform="linkedin" href={business.social_links.linkedin} />
+                                            )}
+                                            {business.social_links?.tiktok && (
+                                                <GlassSocialIcon platform="tiktok" href={business.social_links.tiktok} />
+                                            )}
+                                        </div>
+                                    </div>
 
                                 {/* Map View Container */}
                                 <div className="bg-secondary/30 rounded-3xl border border-border p-1 overflow-hidden h-[300px] shadow-2xl">

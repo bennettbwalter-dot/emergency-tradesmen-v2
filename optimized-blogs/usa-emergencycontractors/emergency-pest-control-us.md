@@ -66,7 +66,7 @@
     <p>A "Bug-Free" home in 2026 doesn't have to be a "Chemical" home. Our 2026 **Bio-Resilience Protocols** ensure your family's safety is the 2026 priority. We are US leaders in **2026 Non-Toxic Domestic Pest Control**. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> In 2026, some US municipalities are testing **"Smart Bats"**-robotic-assisted structures that encourage local bats (natural pest controllers) to stay and eat 2,000 2026 mosquitoes every night! </p>
+        <p><strong>Fun Fact!</strong> In 2026, some US municipalities are testing **"Smart Bats"**—robotic-assisted structures that encourage local bats (natural pest controllers) to stay and eat 2,000 2026 mosquitoes every night! </p>
     </div>
 
     <h2>5. Identifying "Structural Ingress": The 2026 Integrity Audit</h2>
@@ -116,7 +116,7 @@
         <ul>
             <li><strong>Sentricon Digital:</strong> We install **2026 IoT-Bait Stations** that tell us the SECOND a termite colony begins to feed on the bait.</li>
             <li><strong>Liquid Barrier Monitoring:</strong> We use **2026 Ground-Sensor Cables** to monitor the 2026 chemical concentration of your termite barrier.</li>
-            <li><strong>Structural Integrity Scans:</strong> We provide **2026 3D Mapping** of your home's wood-moisture levels-the primary 2026 attractor for US termites.</li>
+            <li><strong>Structural Integrity Scans:</strong> We provide **2026 3D Mapping** of your home's wood-moisture levels—the primary 2026 attractor for US termites.</li>
         </ul>
     </div>
     <p>In 2026, we solve the *biology* of the threat. A termite spray is useless if the 2026 moisture levels in your crawlspace are too high. We provide the **2026 Psychrometric Termite Audit**, ensuring your home is dry and undesirable for 2026 pests. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Pest Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Digital ID Card"** in 2026-if your technician isn't **NPMA-Smart-Certified (2026)**, they can't manage your 2026 IoT network.</li>
-            <li><strong>CANNOT:</strong> Use "Grocery Store Foggers"-in 2026, these are known to activate **Pest Resistance** and fail to kill 2026 eggs.</li>
+            <li><strong>CAN:</strong> Check your **"Digital ID Card"** in 2026—if your technician isn't **NPMA-Smart-Certified (2026)**, they can't manage your 2026 IoT network.</li>
+            <li><strong>CANNOT:</strong> Use "Grocery Store Foggers"—in 2026, these are known to activate **Pest Resistance** and fail to kill 2026 eggs.</li>
             <li><strong>CAN:</strong> Request a **"Thermal Baseline Scan"** once a year to find 2026 nests before they become emergencies.</li>
-            <li><strong>CANNOT:</strong> Leave 2026 "Pet Food" in open 2026 bowls overnight-this is the #1 2026 attractor for US urban rodents.</li>
+            <li><strong>CANNOT:</strong> Leave 2026 "Pet Food" in open 2026 bowls overnight—this is the #1 2026 attractor for US urban rodents.</li>
         </ul>
     </div>
 

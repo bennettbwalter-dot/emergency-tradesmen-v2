@@ -1,4 +1,4 @@
-import { Shield, Clock, BadgeCheck, Phone } from "lucide-react";
+import { Shield, Clock, ListChecks, Phone } from "lucide-react";
 
 const badges = [
   {
@@ -8,13 +8,13 @@ const badges = [
   },
   {
     icon: Shield,
-    title: "Check Details",
-    description: "Confirm before booking",
+    title: "Fully Insured",
+    description: "Complete peace of mind",
   },
   {
-    icon: BadgeCheck,
+    icon: ListChecks,
     title: "Public Listings",
-    description: "Business details may change",
+    description: "Details can be claimed",
   },
   {
     icon: Phone,

@@ -21,7 +21,7 @@ interface SEOProps {
     }[];
 }
 
-const DEFAULT_DESCRIPTION = "Need a tradesman near you? Find local emergency trade contacts from public business listings for plumbers, electricians, locksmiths and gas engineers. Check details directly before booking.";
+const DEFAULT_DESCRIPTION = "Need a tradesman near you? Find public emergency business listings for plumbers, electricians, locksmiths and gas engineers. Confirm details directly before booking.";
 const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
 const SITE_URL_GB = "https://emergencytradesmen.net";
 const SITE_URL_US = "https://emergencycontractors.net";
@@ -141,9 +141,15 @@ export function SEO({
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={ogImage} />
-
+            
             {/* Harbor SEO script - US only */}
-
+            {isUSDomain && (
+                <script 
+                    data-harbor-site="nd76yacf6chb2hwqj1gqwr74d1857gqj" 
+                    src="https://outgoing-oyster-428.convex.site/api/harbor-seo.js?siteId=nd76yacf6chb2hwqj1gqwr74d1857gqj" 
+                    async 
+                />
+            )}
 
 
             {/* Structured Data (JSON-LD) */}

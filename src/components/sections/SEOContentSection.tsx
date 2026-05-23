@@ -8,7 +8,7 @@ export function SEOContentSection() {
     const tradeTerm = settings.tradeTerm.toLowerCase();
 
     return (
-        <section className="container-wide pt-16 pb-8 md:py-16 relative overflow-hidden">
+        <section className="container-wide py-16 relative overflow-hidden">
             {/* Ambient Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/5 blur-[120px] pointer-events-none rounded-full" />
 
@@ -20,7 +20,7 @@ export function SEOContentSection() {
                 <div className="relative z-10 text-center">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-bold uppercase tracking-widest mb-8">
                         <Zap className="w-3 h-3 fill-gold" />
-                        Public Business Listings
+                        Public Local Listings
                     </span>
 
                     <h2 className="font-display text-3xl md:text-5xl text-foreground mb-8 leading-tight">
@@ -28,13 +28,13 @@ export function SEOContentSection() {
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                        {/* Card 1: Local Emergency Contacts */}
+                        {/* Card 1: Public Listings */}
                         <div className="group/btn relative bg-white/5 border border-white/10 rounded-2xl p-6 text-left hover:bg-gold/5 hover:border-gold/30 transition-all duration-300">
                             <div className="absolute top-0 right-0 p-3 opacity-20 group-hover/btn:opacity-100 transition-opacity">
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                When you search for <strong>"{tradeTerm} near me"</strong>, you aren't just looking for a list of names—you need local emergency contacts you can check quickly before booking.
+                                When you search for <strong>"{tradeTerm} near me"</strong>, you need local emergency contacts you can check quickly, not a maze of unrelated results.
                             </p>
                         </div>
 

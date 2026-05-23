@@ -11,45 +11,45 @@ export default function VettingProcess() {
     const steps = [
         {
             icon: Search,
-            title: "Public Listing Review",
-            description: "Public listings are reviewed for obvious formatting and contact issues before they appear on the site."
+            title: "Initial Screening",
+            description: "Every professional undergoes an initial background check and history review before joining our network."
         },
         {
             icon: ShieldCheck,
-            title: "Claim Checks",
-            description: `When a business owner claims a listing, we can request supporting information before changing the public listing status.`
+            title: "Identity Verification",
+            description: `We verify government-issued ID and right-to-work documentation for every individual ${settings.tradeTerm.toLowerCase().replace(/s$/, '')}.`
         },
         {
             icon: Award,
-            title: isUS ? "License Confirmation" : "Trade Certification Confirmation",
+            title: isUS ? "Licensed & Certified" : "Trade Certifications",
             description: isUS 
-                ? "Contractors should confirm state licenses, EPA Section 608 (HVAC), and trade-specific certifications directly with customers."
-                : "Tradespeople should confirm Gas Safe, NICEIC, or relevant trade-specific certifications directly with customers."
+                ? "Mandatory verification of state licenses, EPA Section 608 (HVAC), and trade-specific certifications."
+                : "Mandatory verification of Gas Safe, NICEIC, or relevant trade-specific certifications."
         },
         {
             icon: ClipboardCheck,
             title: isUS ? "General Liability Insurance" : "Public Liability Insurance",
             description: isUS
-                ? "Customers should ask the contractor to confirm current insurance before work starts."
-                : "Customers should ask the tradesperson to confirm current insurance before work starts."
+                ? "Continuous monitoring of active insurance coverage (minimum $1M-$2M depending on trade)."
+                : "Continuous monitoring of active insurance coverage (minimum £1M-£5M depending on trade)."
         },
         {
             icon: Users,
-            title: "Update Requests",
-            description: "Business owners and customers can request corrections when public listing details are outdated."
+            title: "Recent Work Audit",
+            description: "Review of recent project completions and customer feedback to ensure quality standards."
         },
         {
             icon: PhoneCall,
-            title: "Removal Requests",
-            description: "Businesses can request removal if a public listing should not appear."
+            title: "Response Time Monitoring",
+            description: "Emergency pros are tracked on their ability to respond to calls within the 30-90 minute window."
         }
     ];
 
     return (
         <div className="min-h-screen bg-background">
             <SEO
-                title={`Listing Checks | Claim and Update ${settings.tradeTerm} Listings`}
-                description={`Learn how public emergency ${settings.tradeTerm.toLowerCase()} listings can be checked, claimed, corrected, or removed in the ${settings.countryCode === 'GB' ? 'UK' : 'US'}.`}
+                title={`Claim Checks | ${settings.tradeTerm} Listing Reviews`}
+                description={`Learn how Emergency ${isUS ? 'Contractors' : 'Tradesmen'} reviews claimed listings and keeps public listing statuses clear.`}
             />
             <Header />
 
@@ -60,9 +60,9 @@ export default function VettingProcess() {
                             <Shield className="w-4 h-4" />
                             Your Safety First
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-display text-foreground mb-6">Listing Checks</h1>
+                        <h1 className="text-4xl md:text-6xl font-display text-foreground mb-6">Claim Checks</h1>
                         <p className="text-xl text-muted-foreground leading-relaxed">
-                            Public listings are shown to help people find emergency contacts quickly. Unless a profile is clearly marked with a stronger status, business details should be confirmed directly before booking.
+                    Public listings can be claimed, updated, corrected, or removed. A business only receives a higher status after a real review process confirms the relevant details.
                         </p>
                     </div>
 
@@ -90,18 +90,19 @@ export default function VettingProcess() {
                 <section className="container-wide py-16">
                     <div className="bg-[#0A0A0A] rounded-[3rem] p-8 md:p-16 border border-white/10 relative overflow-hidden text-center">
                         <div className="absolute inset-0 bg-gradient-to-b from-gold/5 to-transparent pointer-events-none" />
-                        <h2 className="text-3xl md:text-5xl font-display text-white mb-8">Public Listing Status</h2>
+                        <h2 className="text-3xl md:text-5xl font-display text-white mb-8">Honest Listing Status</h2>
                         <p className="text-white/60 text-lg max-w-2xl mx-auto mb-12">
-                            Our commitment is honest wording. Public listings are not given stronger status wording unless a real claim or confirmation record supports it. Owners can claim, correct, or request removal.
+                        Our commitment is to make status clear: public listings stay labelled as public listings unless they have passed a claim or admin review.
                         </p>
                         <div className="flex flex-wrap justify-center gap-8">
                             <div className="flex flex-col items-center">
                                 <span className="text-4xl font-display text-gold font-bold">Public</span>
-                                <span className="text-white/40 text-sm uppercase tracking-widest mt-2">Listings</span>
+                                <span className="text-white/40 text-sm uppercase tracking-widest mt-2">Listings by default</span>
                             </div>
                             <div className="w-px h-12 bg-white/10 hidden md:block"></div>
                             <div className="flex flex-col items-center">
-                                <span className="text-4xl font-display text-gold font-bold">Claim</span><span className="text-white/40 text-sm uppercase tracking-widest mt-2">Updates</span>
+                                <span className="text-4xl font-display text-gold font-bold">100%</span>
+                                <span className="text-white/40 text-sm uppercase tracking-widest mt-2">Insured Engineers</span>
                             </div>
                             <div className="w-px h-12 bg-white/10 hidden md:block"></div>
                             <div className="flex flex-col items-center">

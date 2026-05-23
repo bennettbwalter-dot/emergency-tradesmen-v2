@@ -33,7 +33,7 @@ In the UK, replacement windows must comply with **Building Regulations Part L** 
 
 ## What NOT to Do
 - **Do NOT** try to "re-seal" a blown unit with silicone from a hardware store; once the internal gas is gone, the unit is dead.
-- **Do NOT** drill holes in the frame to "vent" the moisture-this compromises the structural integrity of the uPVC or timber.
+- **Do NOT** drill holes in the frame to "vent" the moisture—this compromises the structural integrity of the uPVC or timber.
 - **Do NOT** ignore small damp spots on the wallpaper; they are the "tip of the iceberg" for wall cavity saturation.
 
 ## Get Expert Help Today

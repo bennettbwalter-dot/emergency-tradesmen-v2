@@ -1,7 +1,9 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
+import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
+import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GuestGate } from "@/components/GuestGate";
 
@@ -18,7 +20,6 @@ const LatestBlogSection = lazy(() => import("@/components/sections/LatestBlogSec
 const HomeEmergencyAd = lazy(() => import("@/components/HomeEmergencyAd").then(module => ({ default: module.HomeEmergencyAd })));
 const GeneralFAQSection = lazy(() => import("@/components/GeneralFAQSection").then(module => ({ default: module.GeneralFAQSection })));
 const Footer = lazy(() => import("@/components/Footer").then(module => ({ default: module.Footer })));
-const FloatingTourHub = lazy(() => import("@/components/FloatingTourHub").then(module => ({ default: module.FloatingTourHub })));
 
 function DeferredSection({
   minHeight,
@@ -48,7 +49,7 @@ function DeferredSection({
   }, [isVisible]);
 
   return (
-    <div ref={ref} style={{ minHeight: isVisible ? undefined : minHeight }}>
+    <div ref={ref} style={{ minHeight }}>
       {isVisible ? (
         <Suspense fallback={<div className="w-full" style={{ minHeight }} />}>
           {children}
@@ -58,37 +59,17 @@ function DeferredSection({
   );
 }
 
-function DeferredTourHub() {
-  const [isEnabled, setIsEnabled] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return new URLSearchParams(window.location.search).get("tour") === "true";
-  });
-
-  useEffect(() => {
-    const enable = () => setIsEnabled(true);
-    window.addEventListener("start-tour", enable);
-    return () => window.removeEventListener("start-tour", enable);
-  }, []);
-
-  if (!isEnabled) return null;
-
-  return (
-    <Suspense fallback={null}>
-      <FloatingTourHub />
-    </Suspense>
-  );
-}
-
 const Index = () => {
   const { settings, detectedCity } = useLocalization();
 
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const port = typeof window !== 'undefined' ? window.location.port : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+  const isUSDomain = import.meta.env.MODE === 'us' || hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
   const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
   const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+  const siteTradeTerm = isUSDomain ? 'Contractors' : 'Tradesmen';
 
-  const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? `in ${detectedCity}` : 'Near You');
+  const displayCity = (detectedCity && detectedCity.length > 2 && detectedCity.toUpperCase() !== 'UK' && detectedCity.toUpperCase() !== 'UNITED KINGDOM' ? detectedCity : 'Near You');
 
   // Schema markup
   const emergencyServiceSchema = {
@@ -96,7 +77,7 @@ const Index = () => {
     "@type": "EmergencyService",
     "name": `${siteName} ${displayCity}`,
     "image": `${siteUrl}/og-image.webp`,
-    "description": `24/7 ${siteName} in ${displayCity}. Find public listings for local plumbers, electricians, locksmiths, and more.`,
+    "description": `24/7 ${siteName} in ${displayCity}. Find public listings for local plumbers, electricians, locksmiths, and more within minutes.`,
     "contactPoint": {
       "@type": "ContactPoint",
       "email": isUSDomain ? "emergencycontractors@outlook.com" : "emergencytradesmen@outlook.com",
@@ -132,9 +113,9 @@ const Index = () => {
     <>
       <GuestGate />
       <SEO
-        title={`Emergency ${settings.tradeTerm} Near You${displayCity !== 'Near You' ? ` in ${displayCity}` : ''}`}
-        description={`Find local ${settings.tradeTerm.toLowerCase()} contacts in ${displayCity} for emergency repairs. Available 24/7 for plumbing, electrical, locksmith and HVAC. Check business details directly before booking.`}
-        canonical="/"
+        title={`Emergency ${siteTradeTerm} Near You${displayCity !== 'Near You' ? ` in ${displayCity}` : ''}`}
+        description={`Fast local emergency help for plumbing, electrical, locksmith, HVAC and urgent property repairs. Start from a clean search workspace and connect with public listings near you.`}
+        canonical="/landing"
         ogImage={isUSDomain ? 'https://emergencycontractors.net/og-image.webp' : 'https://emergencytradesmen.net/tradesman-hero-v2.webp'}
         jsonLd={emergencyServiceSchema}
         alternates={[
@@ -145,9 +126,8 @@ const Index = () => {
       />
 
       <Header />
-      <DeferredTourHub />
       <main className="min-h-screen bg-background">
-        <HeroSection />
+        <HeroSection showSearchControls={false} ctaHref="/" ctaLabel="Find Emergency Help" />
 
         <DeferredSection minHeight={700}>
           <HowItWorksSection />

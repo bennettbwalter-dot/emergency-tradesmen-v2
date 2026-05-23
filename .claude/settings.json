@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/.git/**)",
+      "Bash(mkdir -p \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/plumber-uk\" \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/breakdown-recovery-uk\")",
+      "Bash(cp -r /tmp/calm-water-systems/dist-standalone/. \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/plumber-uk/\")",
+      "Bash(mv \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/plumber-uk/standalone.html\" \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/plumber-uk/index.html\")",
+      "Bash(cp -r /tmp/redline-recovery/dist-standalone/. \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/breakdown-recovery-uk/\")",
+      "Bash(mv \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/breakdown-recovery-uk/standalone.html\" \"c:/Users/Nick/Downloads/hitmaker-2026/emergency-tradesmen/public/showroom-templates/breakdown-recovery-uk/index.html\")",
+      "Read(//c/Users/Nick/**)"
+    ]
+  }
+}

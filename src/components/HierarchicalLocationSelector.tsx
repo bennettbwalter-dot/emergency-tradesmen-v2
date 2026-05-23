@@ -23,12 +23,19 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import usData from '@/lib/us_cities.json';
 
 interface HierarchicalLocationSelectorProps {
     className?: string;
     onLocationSelect: (record: any) => void;
     placeholder?: string;
+    cityPlaceholder?: string;
+    staticStateLabel?: string;
+    staticCityLabel?: string;
+    buttonClassName?: string;
     onStateSelected?: (stateCode: string | null) => void;
+    showLabelOnMobile?: boolean;
+    showCityPlaceholder?: boolean;
 }
 
 // Data Types
@@ -42,9 +49,10 @@ interface FlattenedCity extends City {
     metroSlug: string;
 }
 
-export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder, onStateSelected }: HierarchicalLocationSelectorProps) {
+const US_STATES = (usData as any).states as State[];
+
+export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder, cityPlaceholder = "City / Area", staticStateLabel, staticCityLabel, buttonClassName, onStateSelected, showLabelOnMobile = false, showCityPlaceholder = false }: HierarchicalLocationSelectorProps) {
     // Selection State
-    const [usStates, setUsStates] = useState<State[]>([]);
     const [selectedState, setSelectedState] = useState<State | null>(null);
     const [selectedCity, setSelectedCity] = useState<FlattenedCity | null>(null);
     const [selectedSuburb, setSelectedSuburb] = useState<Suburb | null>(null);
@@ -53,26 +61,12 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     // Derived Lists
     const [availableCities, setAvailableCities] = useState<FlattenedCity[]>([]);
 
-    useEffect(() => {
-        let isMounted = true;
-
-        import('@/lib/us_cities.json').then((module) => {
-            if (!isMounted) return;
-            const data = module.default as { states?: State[] };
-            setUsStates(Array.isArray(data.states) ? data.states : []);
-        });
-
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
     // Sort states on mount (though JSON is likely sorted, good practice)
-    const sortedStates = [...usStates].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedStates = [...US_STATES].sort((a, b) => a.name.localeCompare(b.name));
 
     // Handle State Change
     const handleStateChange = (slug: string) => {
-        const state = usStates.find(s => s.slug === slug) || null;
+        const state = US_STATES.find(s => s.slug === slug) || null;
         setSelectedState(state);
         setSelectedCity(null);
         setSelectedSuburb(null);
@@ -193,13 +187,21 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     };
 
     return (
-        <div className={`flex flex-nowrap gap-2 items-center w-full rounded-full ${className}`}>
+        <div className={`flex flex-nowrap gap-2 items-center w-full ${className}`}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
-                <SelectTrigger disabled={!sortedStates.length} data-tour="tour-state-button" className={`h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${(selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex'} ${selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5'}`}>
+                <SelectTrigger
+                    data-tour="tour-state-button"
+                    className={cn(
+                        "h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex",
+                        (selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex',
+                        selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5',
+                        buttonClassName
+                    )}
+                >
                     <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
-                    <div className="hidden md:block">
-                        <SelectValue placeholder={sortedStates.length ? "State" : "Loading"} />
+                    <div className={showLabelOnMobile ? "block min-w-0 truncate" : "hidden md:block"}>
+                        {staticStateLabel ? <span>{staticStateLabel}</span> : <SelectValue placeholder={placeholder || "State"} />}
                     </div>
                     <div className="hidden md:block">
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -213,7 +215,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             </Select>
 
             {/* City Select (Flattened, no Metro) - SEARCHABLE */}
-            {selectedState && (
+            {selectedState ? (
                 <Popover open={cityOpen} onOpenChange={setCityOpen}>
                     <PopoverTrigger asChild>
                         <Button
@@ -224,13 +226,14 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             className={cn(
                                 "h-11 px-0 md:px-4 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between overflow-visible",
                                 selectedSuburb ? 'hidden md:flex' : 'flex',
-                                selectedCity ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5'
+                                selectedCity ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5',
+                                buttonClassName
                             )}
                         >
-                            <div className="flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2">
+                            <div className={cn("flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2", showLabelOnMobile && "gap-2")}>
                                 <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
-                                <span className={cn("hidden md:inline truncate", !selectedCity && "text-muted-foreground")}>
-                                    {selectedCity?.name || "City"}
+                                <span className={cn(showLabelOnMobile ? "inline" : "hidden md:inline", "truncate", !selectedCity && "text-muted-foreground")}>
+                                    {staticCityLabel || selectedCity?.name || cityPlaceholder}
                                 </span>
                             </div>
                             <div className="hidden md:block">
@@ -267,7 +270,21 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                         </Command>
                     </PopoverContent>
                 </Popover>
-            )}
+            ) : showCityPlaceholder ? (
+                <Button
+                    type="button"
+                    variant="outline"
+                    disabled
+                    className={cn("h-11 w-full flex-1 rounded-full border-none bg-transparent px-0 text-[#9B7D4F]/45 opacity-70 md:px-4", buttonClassName)}
+                >
+                    <div className={cn("flex w-full items-center justify-center md:w-auto md:justify-start md:gap-2", showLabelOnMobile && "gap-2")}>
+                        <MapPin className="h-5 w-5 shrink-0 text-[#9B7D4F]/55 md:h-4 md:w-4" />
+                        <span className={cn(showLabelOnMobile ? "inline" : "hidden md:inline", "truncate")}>
+                            {staticCityLabel || cityPlaceholder}
+                        </span>
+                    </div>
+                </Button>
+            ) : null}
 
             {/* Suburb/Area Select REMOVED for US as requested */}
         </div>

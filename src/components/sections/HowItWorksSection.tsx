@@ -4,17 +4,19 @@ import { cn } from "@/lib/utils";
 
 export const HowItWorksSection = () => {
   const { settings } = useLocalization();
+  const listingTerm = settings.countryCode === 'US' ? 'contractor' : 'tradesmen';
+  const contactTerm = settings.countryCode === 'US' ? 'contractor' : 'tradesman';
 
   const steps = [
     {
       icon: Search,
       title: "1. Find Your Local Expert",
-      description: `Select your service and city to view local emergency ${settings.tradeTerm.toLowerCase()} contacts. Public listing details should be confirmed directly before booking.`
+      description: `Select your service and city to view public ${listingTerm} listings operating in your area right now.`
     },
     {
       icon: PhoneCall,
       title: "2. Contact Directly",
-      description: "No middlemen, no hidden fees. Call, WhatsApp, or email the tradesman directly to explain your emergency and get an immediate ETA."
+      description: `No middlemen, no hidden fees. Call, WhatsApp, or email the ${contactTerm} directly to explain your emergency and get an immediate ETA.`
     },
     {
       icon: HeartHandshake,

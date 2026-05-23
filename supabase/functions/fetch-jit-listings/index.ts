@@ -50,7 +50,13 @@ serve(async (req) => {
 
     // 2. Initialize Supabase Admin Client to bypass RLS for insertions
     const supbaseUrl = Deno.env.get('SUPABASE_URL') || Deno.env.get('VITE_SUPABASE_URL') || '';
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || Deno.env.get('VITE_SUPABASE_ANON_KEY') || ''; // Note: needs true service key in prod for inserts
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+    if (!supbaseUrl || !supabaseServiceKey) {
+      return new Response(JSON.stringify({ error: 'Server is missing Supabase service credentials' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500,
+      });
+    }
 
     const supabase = createClient(supbaseUrl, supabaseServiceKey);
 

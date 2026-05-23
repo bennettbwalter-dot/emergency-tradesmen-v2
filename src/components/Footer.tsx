@@ -52,7 +52,7 @@ export function Footer({ countryCode }: FooterProps) {
             </Link>
 
             <p className="text-white/60 text-base leading-relaxed max-w-sm font-light">
-              Emergency property response directory. Connecting homeowners with public local {tradeTerm.toLowerCase()} listings, 24/7/365.
+              Emergency property response listings for homeowners in crisis. Public business details can be claimed, corrected, or removed on request.
             </p>
 
             <div className="flex gap-3">
@@ -120,15 +120,15 @@ export function Footer({ countryCode }: FooterProps) {
 
             {/* Support & Trust */}
             <div>
-              <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-8">Help & Safety</h4>
+              <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-8">Trust & Safety</h4>
               <ul className="space-y-4 mb-8">
-                <li><Link to={`${countryPrefix}/vetting-process`} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Listing Checks</Link></li>
+                <li><Link to={`${countryPrefix}/vetting-process`} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Vetting Process</Link></li>
                 <li><Link to={`${countryPrefix}/faq`} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Help Center</Link></li>
                 <li><Link to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} className="text-white/50 hover:text-white text-sm transition-all hover:translate-x-1 inline-block">Contact Support</Link></li>
               </ul>
 
               <div className="space-y-3 pt-4 border-t border-white/10">
-                <p className="text-[10px] text-white/30 uppercase tracking-widest font-semibold">Industry References</p>
+                <p className="text-[10px] text-white/30 uppercase tracking-widest font-semibold">Accredited By</p>
                 <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   {isUS ? (
                     <>
@@ -160,6 +160,33 @@ export function Footer({ countryCode }: FooterProps) {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* For Pros — claim, showroom, and websites for tradespeople */}
+        <div className="pt-10 pb-8 border-t border-white/10">
+          <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-6">
+            For {isUS || isUSDomain ? "Contractors" : "Tradespeople"}
+          </h4>
+          <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+            <Link
+              to="/claim-your-business"
+              className="text-white/60 hover:text-white transition-colors hover:translate-x-1 inline-block"
+            >
+              Claim Your Business
+            </Link>
+            <Link
+              to={isUSDomain || isUS ? "/for-contractors/website-showroom" : "/for-tradesmen/website-showroom"}
+              className="text-white/60 hover:text-white transition-colors hover:translate-x-1 inline-block"
+            >
+              Website Showroom
+            </Link>
+            <Link
+              to={isUSDomain || isUS ? "/for-contractors" : "/for-tradesmen"}
+              className="text-white/60 hover:text-white transition-colors hover:translate-x-1 inline-block"
+            >
+              Websites for {isUS || isUSDomain ? "Contractors" : "Tradespeople"}
+            </Link>
           </div>
         </div>
 

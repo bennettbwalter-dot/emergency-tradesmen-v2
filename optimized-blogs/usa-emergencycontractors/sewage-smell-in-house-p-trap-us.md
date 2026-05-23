@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>Smelling "rotten eggs" in the master bath or basement? It’s not just an unpleasant odor-it’s a warning sign. Methane and Hydrogen Sulfide (H2S), the primary components of sewer gas, are both toxic and highly explosive. In 2026, shifting soil patterns and drier US winters are causing a record number of dried-out traps and cracked sewer lines in older American homes. This guide explains how to identify the source of the smell, why your P-traps are failing, and how to stay compliant with the latest 2026 plumbing safety codes.</p>
+    <p>Smelling "rotten eggs" in the master bath or basement? It’s not just an unpleasant odor—it’s a warning sign. Methane and Hydrogen Sulfide (H2S), the primary components of sewer gas, are both toxic and highly explosive. In 2026, shifting soil patterns and drier US winters are causing a record number of dried-out traps and cracked sewer lines in older American homes. This guide explains how to identify the source of the smell, why your P-traps are failing, and how to stay compliant with the latest 2026 plumbing safety codes.</p>
 
     <h2>1. Sewer Gas: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -39,7 +39,7 @@
             <li><strong>The Siphonage:</strong> If your plumbing isn't vented correctly, a "vacuum" can suck this water out, leaving your home open to the sewer main.</li>
         </ul>
     </div>
-    <p>Every sink, shower, and floor drain in the US is required by code to have a trap. Without it, you are effectively living in one large, connected pipe with the local city sewer system. The P-trap is a simple but brilliant piece of engineering. When it works, you never notice it. When it fails-usually due to evaporation or "siphoning"-the results are immediate and nauseating. In 2026, check your basement floor drains monthly; they are the \#1 culprit for whole-house odors.</p>
+    <p>Every sink, shower, and floor drain in the US is required by code to have a trap. Without it, you are effectively living in one large, connected pipe with the local city sewer system. The P-trap is a simple but brilliant piece of engineering. When it works, you never notice it. When it fails—usually due to evaporation or "siphoning"—the results are immediate and nauseating. In 2026, check your basement floor drains monthly; they are the \#1 culprit for whole-house odors.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If your sink gurgles when you flush a nearby toilet, your roof vent is likely blocked. This "gurgle" is the sound of air being pulled through your P-trap, which often breaks the water seal.</p>
@@ -101,13 +101,13 @@
             <li><strong>The Result:</strong> Without a vent, flushing a large toilet creates a "piston" of water that sucks the water out of every other trap in the bathroom.</li>
         </ul>
     </div>
-    <p>Your plumbing system needs to "breathe" just like you do. If the roof vent is plugged, the air has to come from somewhere-and it usually pulls that air through your sink traps. This "burps" sewer gas into your face while you're brushing your teeth. In 2026, we recommend a "Perforated Vent Cap" that keeps animals out without restricting the critical airflow needed for a fast, smell-free drainage system.</p>
+    <p>Your plumbing system needs to "breathe" just like you do. If the roof vent is plugged, the air has to come from somewhere—and it usually pulls that air through your sink traps. This "burps" sewer gas into your face while you're brushing your teeth. In 2026, we recommend a "Perforated Vent Cap" that keeps animals out without restricting the critical airflow needed for a fast, smell-free drainage system.</p>
 
     <h2>7. Advanced Diagnostics: Smoke Testing for "Ghost Leaks"</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>The Method:</strong> A plumber plugs the main cleanout and pumps non-toxic white smoke into the system at low pressure.</li>
-            <li><strong>The Reveal:</strong> Wherever smoke appears-inside a wall, under a cabinet, or even in the attic-is exactly where the gas leak is located.</li>
+            <li><strong>The Reveal:</strong> Wherever smoke appears—inside a wall, under a cabinet, or even in the attic—is exactly where the gas leak is located.</li>
             <li><strong>Efficiency:</strong> This eliminates the "guesswork" of tearing down drywall to find a tiny crack in a 50-year-old pipe.</li>
         </ul>
     </div>
@@ -151,7 +151,7 @@
             <li><strong>Master Plumbers:</strong> We only dispatch licensed pros who understand 2026 US drainage and venting codes.</li>
         </ul>
     </div>
-    <p>Don't live with the smell. Our network of 24/7 verified plumbers specializes in "Odor Remediation." We don't just "mask" the scent; we find the metallurgical or mechanical failure and fix it for good. From replacing a seized AAV to performing a full camera inspection of your main line, we ensure your American home is a sanctuary of fresh air. Stay safe in 2026-when you smell the egg, give us a call. We'll have your home smelling like new in under an hour.</p>
+    <p>Don't live with the smell. Our network of 24/7 verified plumbers specializes in "Odor Remediation." We don't just "mask" the scent; we find the metallurgical or mechanical failure and fix it for good. From replacing a seized AAV to performing a full camera inspection of your main line, we ensure your American home is a sanctuary of fresh air. Stay safe in 2026—when you smell the egg, give us a call. We'll have your home smelling like new in under an hour.</p>
 
 </main>
 

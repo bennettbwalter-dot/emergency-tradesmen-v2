@@ -29,7 +29,7 @@
             <li><strong>Material Standard:</strong> In 2026, all new supply pipes must be high-durability **Blue MDPE (Medium Density Polyethylene)** or 2026-spec flexible stainless steel.</li>
         </ul>
     </div>
-    <p>By 2026, a burst main is a race against both the rising bill and the regulator. A leak on your side of the meter can waste 1,000 litres of water a day, adding £100s to your monthly costs. Our 2026 emergency teams don't just "Find and Fix"-we provide the technical documentation required to prove the repair to the water company.</p>
+    <p>By 2026, a burst main is a race against both the rising bill and the regulator. A leak on your side of the meter can waste 1,000 litres of water a day, adding £100s to your monthly costs. Our 2026 emergency teams don't just "Find and Fix"—we provide the technical documentation required to prove the repair to the water company.</p>
 
     <h2>2. Identifying the Burst: The 2026 Sensory Audit</h2>
     <div class="capsule-box">
@@ -44,15 +44,15 @@
     <h2>3. Private Pipe Responsibility: The Legal Boundary 2026</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>The Communication Pipe:</strong> From the water main in the street to the boundary box-Water Company responsibility.</li>
-            <li><strong>The Supply Pipe:</strong> From the boundary box to your house-HOMEOWNER responsibility. </li>
+            <li><strong>The Communication Pipe:</strong> From the water main in the street to the boundary box—Water Company responsibility.</li>
+            <li><strong>The Supply Pipe:</strong> From the boundary box to your house—HOMEOWNER responsibility. </li>
             <li><strong>External Stop-Taps:</strong> In 2026, we advise mapping your stop-tap location. If it's buried under 20 years of landscaping, you'll lose hours of critical response time.</li>
         </ul>
     </div>
     <p>The boundary is often the garden wall or the back edge of the pavement. In 2026, we see many disputes over "Under-Pavement Leaks." Our 2026 equipment includes **Boundary Calibrators** that can determine if a leak is 5cm on your side or the company's side. Precision is the key to 2026 legal protection. </p>
 
     <blockquote class="expert-tip">
-        <p>Expert Tip: If your home was built before 1970 and hasn't been upgraded, you likely have a **Lead Supply Pipe**. In 2026, we don't just patch lead; we perform a full **Trenchless Replacement**. Many UK councils offer 2026-spec grants for this work-ask us for the "Lead Registry Audit" during our visit.</p>
+        <p>Expert Tip: If your home was built before 1970 and hasn't been upgraded, you likely have a **Lead Supply Pipe**. In 2026, we don't just patch lead; we perform a full **Trenchless Replacement**. Many UK councils offer 2026-spec grants for this work—ask us for the "Lead Registry Audit" during our visit.</p>
     </blockquote>
 
     <h2>4. Trenchless Technology: The 2026 "No-Dig" Solution</h2>
@@ -135,10 +135,10 @@
     <div class="dos-donts">
         <h3>UK Water Main Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Know where your boundary stop-tap is-check it once a year to ensure it's not "Seized" in 2026.</li>
-            <li><strong>CANNOT:</strong> Build a wall or garage over your supply pipe-it makes 2026 trenchless repair impossible and leads to massive "Open-Cut" costs.</li>
-            <li><strong>CAN:</strong> Check your 2026 water bill for sudden spikes-it's the #1 indicator of a "Silent Main Burst."</li>
-            <li><strong>CANNOT:</strong> Use a "Pipe-Seal" liquid for a main leak-it's an environmental hazard and a regulatory violation in 2026.</li>
+            <li><strong>CAN:</strong> Know where your boundary stop-tap is—check it once a year to ensure it's not "Seized" in 2026.</li>
+            <li><strong>CANNOT:</strong> Build a wall or garage over your supply pipe—it makes 2026 trenchless repair impossible and leads to massive "Open-Cut" costs.</li>
+            <li><strong>CAN:</strong> Check your 2026 water bill for sudden spikes—it's the #1 indicator of a "Silent Main Burst."</li>
+            <li><strong>CANNOT:</strong> Use a "Pipe-Seal" liquid for a main leak—it's an environmental hazard and a regulatory violation in 2026.</li>
         </ul>
     </div>
 

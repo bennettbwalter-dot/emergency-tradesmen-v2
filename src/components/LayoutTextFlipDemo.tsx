@@ -7,7 +7,7 @@ export function LayoutTextFlipDemo() {
     const { settings } = useLocalization();
     const primaryTrustText = settings.countryCode === "US"
         ? "PUBLIC CONTRACTOR LISTINGS"
-        : "PUBLIC TRADESMEN LISTINGS";
+        : "20,000+ PUBLIC LISTINGS";
 
     return (
         <div>

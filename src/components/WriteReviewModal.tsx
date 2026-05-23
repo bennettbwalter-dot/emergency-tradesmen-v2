@@ -52,7 +52,7 @@ export function WriteReviewModal({ businessName, businessId }: WriteReviewModalP
         // In a real app, this would submit to an API
         toast({
             title: "Review submitted!",
-            description: "Thank you for your feedback. Your review will be published after verification.",
+            description: "Thank you for your feedback. Your review will be published after review.",
         });
 
         // Reset form
@@ -198,10 +198,10 @@ export function WriteReviewModal({ businessName, businessId }: WriteReviewModalP
                         </div>
                     </div>
 
-                    {/* Review Notice */}
+                    {/* Verification Notice */}
                     <div className="bg-secondary/30 border border-border/50 rounded-lg p-4">
                         <p className="text-sm text-muted-foreground">
-                            <strong className="text-foreground">Review check:</strong> We'll send you an email to confirm your review submission.
+                            <strong className="text-foreground">Review check:</strong> We'll send you an email to confirm your review.
                             Your review will be published once reviewed. We take review authenticity seriously.
                         </p>
                     </div>

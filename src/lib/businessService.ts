@@ -3,14 +3,14 @@ import { devLog } from "@/lib/devLog";
 import type { Business } from './businesses';
 import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
+import type { TrustEvidenceRow, TrustRegion } from "@/lib/trust/trustBadges";
+import { regionFromCountryCode } from "@/lib/trust/trustBadges";
 
 const PLACEHOLDER_NAMES = ['Pending Verification Profile', 'Your Business Name'];
 const isRealBusiness = (biz: any) => biz?.name && !PLACEHOLDER_NAMES.includes(biz.name) && biz.tier !== 'ghosted';
-
-function toPostgresArrayLiteral(values: string[]): string {
-    const escapedValues = values.map(value => `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`);
-    return `{${escapedValues.join(',')}}`;
-}
+const BUSINESS_QUERY_LIMIT = 300;
+const BUSINESS_ORDER = 'is_premium.desc.nullslast,priority_score.desc.nullslast,rating.desc.nullslast';
+const ENABLE_FIELD_EVIDENCE = import.meta.env.VITE_ENABLE_FIELD_EVIDENCE === 'true';
 
 // Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
 let _fallbackEnrichment: Record<string, any> | null = null;
@@ -102,6 +102,7 @@ async function mapBusinessData(biz: any, userCoords?: { latitude: number, longit
         header_image_url: biz.header_image_url,
         vehicle_image_url: biz.vehicle_image_url,
         country_code: biz.country_code || 'GB',
+        trust_badges: biz.trust_badges || [],
         latitude: biz.latitude ? Number(biz.latitude) : undefined,
         longitude: biz.longitude ? Number(biz.longitude) : undefined,
         social_links: mergedSocials,
@@ -123,6 +124,16 @@ async function mapBusinessData(biz: any, userCoords?: { latitude: number, longit
 /**
  * Direct REST API fetch helper (bypasses hanging JS SDK)
  */
+class SupabaseRestError extends Error {
+    status: number;
+
+    constructor(status: number, statusText: string) {
+        super(`Supabase REST error: ${status} ${statusText}`);
+        this.name = 'SupabaseRestError';
+        this.status = status;
+    }
+}
+
 async function supabaseFetch(url: string, options?: RequestInit) {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -138,12 +149,58 @@ async function supabaseFetch(url: string, options?: RequestInit) {
     });
 
     if (!response.ok) {
-        throw new Error(`Supabase REST error: ${response.status} ${response.statusText}`);
+        throw new SupabaseRestError(response.status, response.statusText);
     }
 
     const countHeader = response.headers.get('x-total-count');
     const data = await response.json();
     return { data, error: null as null, count: countHeader ? parseInt(countHeader) : null };
+}
+
+let evidenceTableUnavailable = false;
+
+async function fetchSafeEvidenceForBusinessIds(
+    businessIds: string[],
+    region: TrustRegion
+): Promise<Record<string, TrustEvidenceRow[]>> {
+    if (!ENABLE_FIELD_EVIDENCE) return {};
+
+    const uniqueIds = [...new Set(businessIds.filter(Boolean))];
+    if (uniqueIds.length === 0 || evidenceTableUnavailable) return {};
+
+    const idList = uniqueIds.map(id => encodeURIComponent(id)).join(',');
+    const url = `/rest/v1/public_business_field_evidence?select=*&region=eq.${region}&business_id=in.(${idList})&order=verified_at.desc`;
+    let data: TrustEvidenceRow[] | null = null;
+
+    try {
+        const response = await supabaseFetch(url);
+        data = response.data;
+    } catch (error) {
+        if (error instanceof SupabaseRestError) {
+            evidenceTableUnavailable = true;
+            return {};
+        }
+        console.warn('Trust evidence lookup failed; continuing without evidence badges.', error);
+        return {};
+    }
+
+    return (data || []).reduce((acc: Record<string, TrustEvidenceRow[]>, row: TrustEvidenceRow) => {
+        if (!acc[row.business_id]) acc[row.business_id] = [];
+        acc[row.business_id].push(row);
+        return acc;
+    }, {});
+}
+
+async function attachEvidence(businesses: Business[], region: TrustRegion): Promise<Business[]> {
+    const evidenceByBusinessId = await fetchSafeEvidenceForBusinessIds(
+        businesses.map((business) => business.id),
+        region
+    );
+
+    return businesses.map((business) => ({
+        ...business,
+        field_evidence: evidenceByBusinessId[business.id] || [],
+    }));
 }
 
 /**
@@ -159,7 +216,7 @@ export async function fetchBusinesses(
     devLog(`[fetchBusinesses] CALL: trade=${trade}, city=${city}, state=${state}, countryCode=${countryCode}, coords=${JSON.stringify(userCoords)}`);
 
     // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
-    const normalizedTrade = trade.toLowerCase().replace('emergency-', '');
+    const normalizedTrade = normalizeTradeSlug(trade);
 
     // Variable to hold the actual city name for Supabase query
     let searchCity = city;
@@ -188,7 +245,7 @@ export async function fetchBusinesses(
     let stateCities: string[] = [];
     if (state && countryCode.toUpperCase() === 'US') {
         const { getCitiesForState } = await import('./trades');
-        stateCities = getCitiesForState(state);
+        stateCities = getCitiesForState(normalizeUSStateLookup(state));
         if (stateCities.length > 0) {
             devLog(`[fetchBusinesses] State query for ${state}: searching in ${stateCities.length} cities`);
             searchCity = "";
@@ -197,15 +254,16 @@ export async function fetchBusinesses(
 
     // OPTIMIZATION: Direct City Match First (Fastest)
     if (searchCity && searchCity.trim() !== '') {
-        const tradeParams = uniqueTrades.map(t => `trade=eq.${encodeURIComponent(t)}`).join('&');
-        const directUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=eq.${encodeURIComponent(searchCity)}&country_code=eq.${countryCode.toUpperCase()}&limit=50`;
+        const tradeParams = `trade=in.(${uniqueTrades.map(encodeURIComponent).join(',')})`;
+        const directUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=eq.${encodeURIComponent(searchCity)}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
         const { data: directData } = await supabaseFetch(directUrl);
 
         if (directData && directData.length > 0) {
             devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
             const businesses = await Promise.all(directData.filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
-            return businesses
+            const businessesWithEvidence = await attachEvidence(businesses, regionFromCountryCode(countryCode));
+            return businessesWithEvidence
                 .sort((a, b) => {
                     if (a.tier === 'paid' && b.tier !== 'paid') return -1;
                     if (a.tier !== 'paid' && b.tier === 'paid') return 1;
@@ -218,15 +276,14 @@ export async function fetchBusinesses(
     }
 
     // Build main query
-    const tradeParams = uniqueTrades.map(t => `trade=eq.${encodeURIComponent(t)}`).join('&');
-    let queryUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}`;
+    const tradeParams = `trade=in.(${uniqueTrades.map(encodeURIComponent).join(',')})`;
+    let queryUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
     if (stateCities.length > 0) {
-        const cityParam = stateCities.map(c => `city=eq.${encodeURIComponent(c)}`).join('&');
-        queryUrl += `&${cityParam}`;
+        queryUrl += `&city=in.(${stateCities.map(encodeURIComponent).join(',')})`;
     } else if (searchCity && searchCity.trim() !== '') {
         const cityWithSpaces = searchCity.replace(/-/g, ' ');
-        queryUrl += `&coverage_areas=cs.${encodeURIComponent(toPostgresArrayLiteral([cityWithSpaces]))}`;
+        queryUrl += `&coverage_areas=cs.${encodeURIComponent(`{"${cityWithSpaces.replace(/"/g, '\\"')}"}`)}`;
     }
 
     const { data } = await supabaseFetch(queryUrl);
@@ -236,13 +293,10 @@ export async function fetchBusinesses(
     if (allBusinesses.length === 0 && searchCity) {
         devLog('[fetchBusinesses] No results for city, trying broader query');
 
-        let fallbackUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&limit=50`;
+        let fallbackUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
         if (stateCities.length > 0) {
-            const cityParam = stateCities.map(c => `city=eq.${encodeURIComponent(c)}`).join('&');
-            fallbackUrl += `&${cityParam}`;
-        } else if (countryCode.toUpperCase() === 'US') {
-            return [];
+            fallbackUrl += `&city=in.(${stateCities.map(encodeURIComponent).join(',')})`;
         }
 
         const { data: fallbackData } = await supabaseFetch(fallbackUrl);
@@ -252,7 +306,8 @@ export async function fetchBusinesses(
     }
 
     const mappedBusinesses = await Promise.all((allBusinesses || []).filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
-    return mappedBusinesses
+    const mappedBusinessesWithEvidence = await attachEvidence(mappedBusinesses, regionFromCountryCode(countryCode));
+    return mappedBusinessesWithEvidence
         .sort((a, b) => {
             if (a.tier === 'paid' && b.tier !== 'paid') return -1;
             if (a.tier !== 'paid' && b.tier === 'paid') return 1;
@@ -269,7 +324,9 @@ export async function fetchBusinessById(id: string): Promise<Business | null> {
     const { data } = await supabaseFetch(`/rest/v1/businesses?select=*,business_photos(*)&id=eq.${encodeURIComponent(id)}`);
 
     if (data && data.length > 0) {
-        return await mapBusinessData(data[0]);
+        const business = await mapBusinessData(data[0]);
+        const [businessWithEvidence] = await attachEvidence([business], regionFromCountryCode(business.country_code));
+        return businessWithEvidence;
     }
 
     return null;
@@ -316,4 +373,72 @@ export async function fetchPaidBusinesses(trade?: string, city?: string, country
     }
 
     return Promise.all(data.map(biz => mapBusinessData(biz)));
+}
+
+function normalizeTradeSlug(trade: string): string {
+    return trade
+        .toLowerCase()
+        .trim()
+        .replace(/^emergency-/, '')
+        .replace(/\s+/g, '-')
+        .replace(/s$/, '');
+}
+
+function normalizeUSStateLookup(state: string): string {
+    const normalized = state.toLowerCase().trim();
+    const slugToCode: Record<string, string> = {
+        'alabama': 'al',
+        'alaska': 'ak',
+        'arizona': 'az',
+        'arkansas': 'ar',
+        'california': 'ca',
+        'colorado': 'co',
+        'connecticut': 'ct',
+        'delaware': 'de',
+        'florida': 'fl',
+        'georgia': 'ga',
+        'hawaii': 'hi',
+        'idaho': 'id',
+        'illinois': 'il',
+        'indiana': 'in',
+        'iowa': 'ia',
+        'kansas': 'ks',
+        'kentucky': 'ky',
+        'louisiana': 'la',
+        'maine': 'me',
+        'maryland': 'md',
+        'massachusetts': 'ma',
+        'michigan': 'mi',
+        'minnesota': 'mn',
+        'mississippi': 'ms',
+        'missouri': 'mo',
+        'montana': 'mt',
+        'nebraska': 'ne',
+        'nevada': 'nv',
+        'new-hampshire': 'nh',
+        'new-jersey': 'nj',
+        'new-mexico': 'nm',
+        'new-york': 'ny',
+        'north-carolina': 'nc',
+        'north-dakota': 'nd',
+        'ohio': 'oh',
+        'oklahoma': 'ok',
+        'oregon': 'or',
+        'pennsylvania': 'pa',
+        'rhode-island': 'ri',
+        'south-carolina': 'sc',
+        'south-dakota': 'sd',
+        'tennessee': 'tn',
+        'texas': 'tx',
+        'utah': 'ut',
+        'vermont': 'vt',
+        'virginia': 'va',
+        'washington': 'wa',
+        'west-virginia': 'wv',
+        'wisconsin': 'wi',
+        'wyoming': 'wy',
+        'district-of-columbia': 'dc',
+    };
+
+    return slugToCode[normalized] || normalized;
 }

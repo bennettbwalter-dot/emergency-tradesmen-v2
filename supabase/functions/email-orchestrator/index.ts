@@ -87,12 +87,12 @@ serve(async (req) => {
                         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
                             <h2 style="color: #1e293b;">Is your business listed on ${brandName}?</h2>
                             <p>Hi ${contact.name || 'there'},</p>
-                            <p>Your business appears as a public listing for <strong>${contact.trade || 'your business'}</strong> in ${contact.city || 'your area'} on ${brandName} � the 24/7 emergency trades directory helping homeowners find local emergency contacts fast.</p>
-                            <p><strong>Please check, correct, claim, or request removal of your free listing</strong>. Claiming can unlock:</p>
+                            <p>Your business appears as a public listing for <strong>${contact.trade || 'your business'}</strong> in ${contact.city || 'your area'} on ${brandName}.</p>
+                            <p><strong>Claim your free listing</strong> to check, correct, update, or request removal of your business details.</p>
                             <ul>
                                 <li>✅ Direct phone calls from homeowners in emergencies</li>
                                 <li>✅ WhatsApp integration for instant leads</li>
-                                <li>✅ Pro tier features: priority placement, analytics, claimed listing status</li>
+                                <li>✅ Pro tier features: priority placement, analytics, and enhanced profile controls</li>
                             </ul>
                             <div style="margin: 30px 0; text-align: center;">
                                 <a href="${siteUrl}/business/claim" style="background-color: #FACC15; padding: 14px 28px; text-decoration: none; color: #000; border-radius: 8px; font-weight: bold; font-size: 16px;">Claim Your Free Listing →</a>

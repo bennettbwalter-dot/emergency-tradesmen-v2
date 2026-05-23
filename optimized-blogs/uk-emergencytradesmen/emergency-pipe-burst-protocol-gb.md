@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK winter of 2026, a burst pipe is no longer just a "Maintenance Issue"-it is a critical structural event that can compromise the integrity of your home within minutes. With the implementation of the **BS 5422:2023** thermal insulation standards and the 2026 push for "Future Homes" efficiency, the way we protect and repair UK plumbing has fundamentally evolved. Whether it's the expansion of water in a frozen loft pipe or the failure of a legacy lead main, the "Golden Hour" of a plumbing emergency determines the extent of your structural damage. In 2026, a 15-second response to your stopcock is the difference between a £150 repair and a £15,000 structural dry-out. This guide outlines the definitive UK protocol for managing, thawing, and preventing burst pipes in the 2026 era.</p>
+    <p>In the UK winter of 2026, a burst pipe is no longer just a "Maintenance Issue"—it is a critical structural event that can compromise the integrity of your home within minutes. With the implementation of the **BS 5422:2023** thermal insulation standards and the 2026 push for "Future Homes" efficiency, the way we protect and repair UK plumbing has fundamentally evolved. Whether it's the expansion of water in a frozen loft pipe or the failure of a legacy lead main, the "Golden Hour" of a plumbing emergency determines the extent of your structural damage. In 2026, a 15-second response to your stopcock is the difference between a £150 repair and a £15,000 structural dry-out. This guide outlines the definitive UK protocol for managing, thawing, and preventing burst pipes in the 2026 era.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Pipe Burst 2026</h2>
     <div class="capsule-box">
@@ -66,7 +66,7 @@
             <li><strong>The Heat Gun Danger:</strong> 2026 safety guidelines warn that heat guns (1,100°F) pose a fire risk and can melt modern plastic (PEX/MDPE) pipes instantly.</li>
         </ul>
     </div>
-    <p>If your taps aren't working in winter, you likely have an ice-plug. This is a "Pre-Emergency" phase. If you thaw it correctly, you save the pipe. If you use a blowtorch or a high-wattage heat gun, you will likely cause the pipe to split. In 2026, we recommend the use of "Electric Trace Heating" (Heat Tape) for vulnerable loft pipes-a permanent, safe solution that prevents freezing automatically.</p>
+    <p>If your taps aren't working in winter, you likely have an ice-plug. This is a "Pre-Emergency" phase. If you thaw it correctly, you save the pipe. If you use a blowtorch or a high-wattage heat gun, you will likely cause the pipe to split. In 2026, we recommend the use of "Electric Trace Heating" (Heat Tape) for vulnerable loft pipes—a permanent, safe solution that prevents freezing automatically.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> The term "Stopcock" has been used in Britain since the 1580s. While "Main Water Shut-off" is technically more accurate in 2026, the traditional name reminds us that for 400 years, the "Golden Rule" has been the same: Turn it off before it drowns you.</p>
@@ -112,15 +112,15 @@
             <li><strong>Tracer Gas:</strong> Inserting a safe gas mixture into drained pipes and sensing where it escapes with a digital "Sniffer."</li>
         </ul>
     </div>
-    <p>In 2026, we no longer "Dig and Hope." If your leak is hidden under a solid floor or behind a tiled wall, we use non-destructive tech to find it. This falls under your building insurance’s "Trace and Access" clause. By using 2026-spec diagnostics, we reduce the "Cleanup Cost" by 80%-fixing the leak through a single 15cm hole rather than replacing the whole floor.</p>
+    <p>In 2026, we no longer "Dig and Hope." If your leak is hidden under a solid floor or behind a tiled wall, we use non-destructive tech to find it. This falls under your building insurance’s "Trace and Access" clause. By using 2026-spec diagnostics, we reduce the "Cleanup Cost" by 80%—fixing the leak through a single 15cm hole rather than replacing the whole floor.</p>
 
     <div class="dos-donts">
         <h3>UK Pipe Burst: Safe Intervention CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Keep a "Stopcock Key" in your hallway cupboard for quick access to the pavement-level isolation valve.</li>
-            <li><strong>CANNOT:</strong> Use a naked flame (blowtorch) to thaw a pipe-this is the \#1 cause of plumbing-related house fires in the UK.</li>
+            <li><strong>CANNOT:</strong> Use a naked flame (blowtorch) to thaw a pipe—this is the \#1 cause of plumbing-related house fires in the UK.</li>
             <li><strong>CAN:</strong> Check your **BS 5422:2023** insulation status before winter starts to prevent the freeze-burst cycle.</li>
-            <li><strong>CANNOT:</strong> Ignore a "hissing" sound in the loft-even if you don't see water, a pressurized air leak is often the precursor to a major burst.</li>
+            <li><strong>CANNOT:</strong> Ignore a "hissing" sound in the loft—even if you don't see water, a pressurized air leak is often the precursor to a major burst.</li>
         </ul>
     </div>
 
@@ -142,7 +142,7 @@
             <li><strong>Tenant Safety:</strong> If a burst makes a property "Unfit for Human Habitation" (e.g., no water/no electrics), the tenant has rights to temporary accommodation.</li>
         </ul>
     </div>
-    <p>In 2026, the law is on the side of structural safety. A burst pipe is not "just a leak"-it is a health and safety hazard. We work with UK landlords to provide "Compliance Certification" after a burst, proving the property has been dried, repaired, and re-certified to meet the 2026 social housing standards.</p>
+    <p>In 2026, the law is on the side of structural safety. A burst pipe is not "just a leak"—it is a health and safety hazard. We work with UK landlords to provide "Compliance Certification" after a burst, proving the property has been dried, repaired, and re-certified to meet the 2026 social housing standards.</p>
 
     <h2>11. 24/7 Response: Connecting with WaterSafe Approved Specialists</h2>
     <div class="capsule-box">
@@ -152,7 +152,7 @@
             <li><strong>Digital Audit:</strong> Every repair includes a 2026 "Integrity Report" for your insurance provider to expedite your claim.</li>
         </ul>
     </div>
-    <p>If you have a burst pipe, every second counts. Don't waste those seconds on a search engine-rely on the verified UK experts who understand the **2026 BS 5422 Standards.** We stop the flood, stabilize the structure, and restore your home to 100% compliance. Our 24/7 network is ready to respond. Call us now for an immediate professional intervention.</p>
+    <p>If you have a burst pipe, every second counts. Don't waste those seconds on a search engine—rely on the verified UK experts who understand the **2026 BS 5422 Standards.** We stop the flood, stabilize the structure, and restore your home to 100% compliance. Our 24/7 network is ready to respond. Call us now for an immediate professional intervention.</p>
 
 </main>
 

@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In 2026, the United States electrical grid is under unprecedented pressure. Driven by a 25% surge in load from AI data centers, advanced manufacturing, and the rapid electrification of transport, regional grids are experiencing "Frequency Variations" that were once rare. For the 2026 homeowner, a power outage is no longer just a storm-related inconvenience-it is a frequent structural risk. As we move into the second half of the decade, the integration of backup power has been codified under the **NEC (National Electrical Code) 2026 Article 702**. Whether you are using a portable unit or a whole-home standby system, the rules for "Islanding" your home from a volatile grid have never been more critical. This guide outlines the definitive US protocol for safe, legal home resilience in 2026.</p>
+    <p>In 2026, the United States electrical grid is under unprecedented pressure. Driven by a 25% surge in load from AI data centers, advanced manufacturing, and the rapid electrification of transport, regional grids are experiencing "Frequency Variations" that were once rare. For the 2026 homeowner, a power outage is no longer just a storm-related inconvenience—it is a frequent structural risk. As we move into the second half of the decade, the integration of backup power has been codified under the **NEC (National Electrical Code) 2026 Article 702**. Whether you are using a portable unit or a whole-home standby system, the rules for "Islanding" your home from a volatile grid have never been more critical. This guide outlines the definitive US protocol for safe, legal home resilience in 2026.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Energy Security 2026</h2>
     <div class="capsule-box">
@@ -63,7 +63,7 @@
             <li><strong>The "Suicide Lead" Danger:</strong> Never use a double-male plug to backfeed a dryer outlet. This is a lethal arc-flash risk and is strictly prohibited by 2026 safety codes.</li>
         </ul>
     </div>
-    <p>Islanding is the process of disconnecting from the grid to create a "Local Power Moon." In 2026, if you fail to island correctly, your generator will try to power your entire neighborhood-instantly blowing its internal fuse or exploding the alternator. We install precision-machined interlock kits and UL-listed transfer switches that make "Human Error" impossible. Safe power is structured power.</p>
+    <p>Islanding is the process of disconnecting from the grid to create a "Local Power Moon." In 2026, if you fail to island correctly, your generator will try to power your entire neighborhood—instantly blowing its internal fuse or exploding the alternator. We install precision-machined interlock kits and UL-listed transfer switches that make "Human Error" impossible. Safe power is structured power.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> Thomas Edison opened the first central US power plant (Pearl Street Station) in 1882. For the first few years, "Outages" were the norm. We've spent 140 years trying to perfect the grid, and in 2026, we've come full circle: the most reliable power is once again becoming the power you generate at home.</p>
@@ -77,7 +77,7 @@
             <li><strong>Electronic Failure:</strong> 2026 smart appliances (OLED TVs, inverter-driven HVAC, Wi-Fi 7 routers) will fail or shorten their lifespan significantly if run on dirty power.</li>
         </ul>
     </div>
-    <p>In 2026, "Inverter Only" is our policy for residential backup. The days of the "Loud & Dirty" construction generator are over for home use. By using an inverter-based system, you ensure that your 2026 digital infrastructure-including your home server and automation hub-survives the transition to backup power without a reboot or a fried circuit board.</p>
+    <p>In 2026, "Inverter Only" is our policy for residential backup. The days of the "Loud & Dirty" construction generator are over for home use. By using an inverter-based system, you ensure that your 2026 digital infrastructure—including your home server and automation hub—survives the transition to backup power without a reboot or a fried circuit board.</p>
 
     <h2>6. Carbon Monoxide (CO) Safety: The UL 2201 "Thermal-Shutoff" Standard</h2>
     <div class="capsule-box">
@@ -115,7 +115,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The LFP Advantage:</strong> Lithium Iron Phosphate (LFP) chemistry, used in the Tesla Powerwall 3, is the 2026 standard for its thermal stability and 10,000-cycle life.</li>
-            <li><strong>Continuous Power:</strong> Powerwall 3 provides 11.5kW of continuous power-enough to start a standard central AC unit without a "Soft Start" kit.</li>
+            <li><strong>Continuous Power:</strong> Powerwall 3 provides 11.5kW of continuous power—enough to start a standard central AC unit without a "Soft Start" kit.</li>
             <li><strong>The Hybrid System:</strong> The 2026 "Hyper-Resilient" home uses batteries for the first 12 hours of an outage and a generator for everything beyond that.</li>
         </ul>
     </div>
@@ -134,8 +134,8 @@
     <div class="dos-donts">
         <h3>US Home Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Install a manual interlock kit today-it is the best "Resilience-per-Dollar" upgrade for any US home.</li>
-            <li><strong>CANNOT:</strong> Run a gas generator in a crawl space, basement, or garage-CO poisoning is a silent 2026 killer.</li>
+            <li><strong>CAN:</strong> Install a manual interlock kit today—it is the best "Resilience-per-Dollar" upgrade for any US home.</li>
+            <li><strong>CANNOT:</strong> Run a gas generator in a crawl space, basement, or garage—CO poisoning is a silent 2026 killer.</li>
             <li><strong>CAN:</strong> Switch to **LFP Battery** storage for your 2026 solar/backup system for superior fire safety.</li>
             <li><strong>CANNOT:</strong> Wait for the storm to test your system; run your generator under load for 20 minutes every month.</li>
         </ul>

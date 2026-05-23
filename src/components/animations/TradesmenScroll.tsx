@@ -17,7 +17,7 @@ const FILENAME_PATTERN = (index: number) => `/frames/v2w_dark/frame_${index.toSt
 
 const listItems = [
     "Get seen first with priority ranking in your area",
-    "Build a clearer claimed profile with direct contact details",
+    "Build a clearer profile with a 'Featured' badge and reviews",
     "Receive direct calls, not messages or time-wasters",
     "Reach customers ready to act, not just browsing",
     "No ads to manage. No chasing leads. Just calls."

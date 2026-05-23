@@ -29,7 +29,7 @@ export const PLANS = {
         name: 'Pro Monthly',
         price: 29,
         durationDays: 30,
-        features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Claimed Listing Status', 'Analytics'],
+        features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Featured Profile Badge', 'Analytics'],
     },
     premium: {
         name: 'Pro Yearly',
@@ -42,7 +42,7 @@ export const PLANS = {
         name: 'Pro Monthly',
         price: 29,
         durationDays: 30,
-        features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Claimed Listing Status', 'Analytics'],
+        features: ['Enhanced Profile', '3 Categories', 'Priority Placement', 'Featured Profile Badge', 'Analytics'],
     },
     enterprise: {
         name: 'Pro Yearly',

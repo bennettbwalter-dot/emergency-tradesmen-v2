@@ -5,11 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { SimpleThemeProvider } from "@/components/simple-theme";
-import { useDeferredMount } from "@/hooks/useDeferredMount";
 import { initGA } from "@/lib/analytics";
 import { Loader2 } from "lucide-react";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -28,16 +27,22 @@ const CookieConsent = lazy(() => import("@/components/CookieConsent").then(m => 
 const FloatingBackButton = lazy(() => import("@/components/FloatingBackButton").then(m => ({ default: m.FloatingBackButton })));
 const CustomCursor = lazy(() => import("@/components/CustomCursor").then(m => ({ default: m.CustomCursor })));
 const AnalyticsTracker = lazy(() => import("@/components/AnalyticsTracker").then(m => ({ default: m.AnalyticsTracker })));
-const LocationOverrideTool = lazy(() => import("@/components/dev/LocationOverrideTool").then(m => ({ default: m.LocationOverrideTool })));
 
 // Lazy Load Pages
-const Index = lazy(() => import("./pages/Index"));
+const LandingPage = lazy(() => import("./pages/Index"));
+const HomeSearch = lazy(() => import("./pages/HomeSearch"));
 const TradeCityPage = lazy(() => import("./pages/TradeCityPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const BusinessProfilePage = lazy(() => import("./pages/BusinessProfilePage"));
 const About = lazy(() => import("./pages/About"));
 const PricingPage = lazy(() => import("./pages/PricingPage"));
+const ForTradesmen = lazy(() => import("./pages/ForTradesmen"));
+const ForContractors = lazy(() => import("./pages/ForContractors"));
+const ClaimYourBusiness = lazy(() => import("./pages/ClaimYourBusiness"));
+const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
+const WebsiteShowroomTradesmen = lazy(() => import("./pages/WebsiteShowroomTradesmen"));
+const WebsiteShowroomContractors = lazy(() => import("./pages/WebsiteShowroomContractors"));
 const BillingPage = lazy(() => import("./pages/BillingPage"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -66,11 +71,9 @@ const AdminProfileEditor = lazy(() => import("./pages/admin/ProfileEditor"));
 const DataExportPage = lazy(() => import("./pages/admin/DataExportPage"));
 const AnalyticsPage = lazy(() => import("./pages/admin/Analytics"));
 const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDashboard"));
+const EvidencePage = lazy(() => import("./pages/admin/Evidence"));
 
 const queryClient = new QueryClient();
-const APP_CHROME_EVENTS: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "scroll"];
-const ADMIN_EMAILS = ['nicholas.bennett247@gmail.com', 'bennett.b.walter@gmail.com'];
-const isAdminEmail = (email?: string | null) => !!email && ADMIN_EMAILS.includes(email.toLowerCase());
 
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -97,41 +100,6 @@ const DeferredLiveChat = () => {
   return enabled ? <LiveChat /> : null;
 };
 
-const DeferredAnalyticsTracker = () => {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-  const enabled = useDeferredMount({
-    delay: isHome ? 16000 : 800,
-    events: APP_CHROME_EVENTS,
-  });
-
-  return enabled ? (
-    <Suspense fallback={null}>
-      <AnalyticsTracker />
-    </Suspense>
-  ) : null;
-};
-
-const DeferredAppChrome = () => {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-  const enabled = useDeferredMount({
-    delay: isHome ? 16000 : 800,
-    events: APP_CHROME_EVENTS,
-  });
-
-  return enabled ? (
-    <Suspense fallback={null}>
-      <InstallPWA />
-      <CookieConsent />
-      <BottomNav />
-      <DeferredLiveChat />
-      <FloatingBackButton />
-      <CustomCursor />
-    </Suspense>
-  ) : null;
-};
-
 const HashCleaner = () => {
   const location = useLocation();
 
@@ -148,15 +116,22 @@ const HashCleaner = () => {
   return null;
 };
 
-const ProtectedAdminRoute = () => {
-  const { user, isAuthenticated, isLoading } = useAuth();
+const DeferredChrome = () => {
   const location = useLocation();
+  const isMarketingLanding = location.pathname === "/landing" || location.pathname === "/welcome";
+  const isSearchWorkspace = location.pathname === "/" || location.pathname === "/home";
+  const hideMobileChrome = isMarketingLanding || isSearchWorkspace;
 
-  if (isLoading) return <PageLoader />;
-  if (!isAuthenticated) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
-  if (!isAdminEmail(user?.email)) return <Navigate to="/" replace />;
-
-  return <Outlet />;
+  return (
+    <Suspense fallback={null}>
+      <InstallPWA />
+      <CookieConsent />
+      {!hideMobileChrome && <BottomNav />}
+      {!hideMobileChrome && <DeferredLiveChat />}
+      {!hideMobileChrome && <FloatingBackButton />}
+      <CustomCursor />
+    </Suspense>
+  );
 };
 
 const AppRoutes = () => (
@@ -188,10 +163,18 @@ const AppRoutes = () => (
     ))}
 
     {/* Core Pages */}
-    <Route path="/" element={<Index />} />
+    <Route path="/" element={<HomeSearch />} />
+    <Route path="/home" element={<HomeSearch />} />
+    <Route path="/landing" element={<LandingPage />} />
+    <Route path="/welcome" element={<LandingPage />} />
     <Route path="/about" element={<About />} />
     <Route path="/pricing" element={<PricingPage />} />
     <Route path="/tradesmen" element={<PricingPage />} />
+    <Route path="/claim-your-business" element={<ClaimYourBusiness />} />
+    <Route path="/for-tradesmen" element={<ForTradesmen />} />
+    <Route path="/for-contractors" element={<ForContractors />} />
+    <Route path="/for-tradesmen/website-showroom" element={<WebsiteShowroomTradesmen />} />
+    <Route path="/for-contractors/website-showroom" element={<WebsiteShowroomContractors />} />
     <Route path="/contact" element={<ContactPage />} />
     <Route path="/blog" element={<BlogPage />} />
     <Route path="/blog/:slug" element={<BlogPostPage />} />
@@ -205,25 +188,24 @@ const AppRoutes = () => (
     <Route path="/account/billing" element={<BillingPage />} />
     <Route path="/billing" element={<Navigate to="/account/billing" replace />} />
     <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-    <Route path="/business/claim/:businessId" element={<Navigate to="/pricing" replace />} />
+    <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
     <Route path="/premium-profile" element={<ProProfileEditor />} />
     <Route path="/payment/success" element={<PaymentSuccessPage />} />
     <Route path="/payment/cancel" element={<PaymentCancelPage />} />
 
     {/* Admin Routes */}
-    <Route element={<ProtectedAdminRoute />}>
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="businesses" element={<BusinessesPage />} />
-        <Route path="profile-editor" element={<AdminProfileEditor />} />
-        <Route path="availability" element={<AdminAvailability />} />
-        <Route path="photos" element={<PhotosPage />} />
-        <Route path="reviews" element={<ReviewsPage />} />
-        <Route path="subscriptions" element={<SubscriptionsPage />} />
-        <Route path="export" element={<DataExportPage />} />
-        <Route path="analytics" element={<AnalyticsPage />} />
-        <Route path="email-outreach" element={<EmailOutreachDashboard />} />
-      </Route>
+    <Route path="/admin" element={<AdminLayout />}>
+      <Route index element={<AdminDashboard />} />
+      <Route path="businesses" element={<BusinessesPage />} />
+      <Route path="profile-editor" element={<AdminProfileEditor />} />
+      <Route path="availability" element={<AdminAvailability />} />
+      <Route path="photos" element={<PhotosPage />} />
+      <Route path="reviews" element={<ReviewsPage />} />
+      <Route path="subscriptions" element={<SubscriptionsPage />} />
+      <Route path="export" element={<DataExportPage />} />
+      <Route path="analytics" element={<AnalyticsPage />} />
+      <Route path="email-outreach" element={<EmailOutreachDashboard />} />
+      <Route path="evidence" element={<EvidencePage />} />
     </Route>
 
     {/* US Specific Hierarchy Routes */}
@@ -247,6 +229,14 @@ const AppRoutes = () => (
 
 const AppContent = () => {
   const { isLocked, refreshUser } = useAuth();
+  const showDevTools = import.meta.env.DEV
+    && typeof window !== 'undefined'
+    && window.self === window.top
+    && (
+      new URLSearchParams(window.location.search).get('devtools') === 'true'
+      || new URLSearchParams(window.location.search).get('mobile') === 'true'
+      || window.localStorage.getItem('show-dev-tools') === 'true'
+    );
 
   const handleRetry = async () => {
     await refreshUser();
@@ -298,16 +288,13 @@ const AppContent = () => {
       {isLocked && <LockoutOverlay onRetry={handleRetry} />}
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <LocalizationProvider>
-          {import.meta.env.DEV && (
-            <Suspense fallback={null}>
-              <LocationOverrideTool />
-            </Suspense>
-          )}
-          {import.meta.env.DEV && (window.self === window.top) ? (
+          {showDevTools ? (
             <MobilePreviewWrapper>
               <ScrollToTop />
               <HashCleaner />
-              <DeferredAnalyticsTracker />
+              <Suspense fallback={null}>
+                <AnalyticsTracker />
+              </Suspense>
               <ErrorBoundary>
                 <main className="pb-16 md:pb-0">
                   <Suspense fallback={<PageLoader />}>
@@ -315,13 +302,15 @@ const AppContent = () => {
                   </Suspense>
                 </main>
               </ErrorBoundary>
-              <DeferredAppChrome />
+              <DeferredChrome />
             </MobilePreviewWrapper>
           ) : (
             <>
               <ScrollToTop />
               <HashCleaner />
-              <DeferredAnalyticsTracker />
+              <Suspense fallback={null}>
+                <AnalyticsTracker />
+              </Suspense>
               <ErrorBoundary>
                 <main className="pb-16 md:pb-0">
                   <Suspense fallback={<PageLoader />}>
@@ -329,8 +318,13 @@ const AppContent = () => {
                   </Suspense>
                 </main>
               </ErrorBoundary>
-              <DeferredAppChrome />
+              <DeferredChrome />
             </>
+          )}
+          {showDevTools && (
+            <a href="/admin" className="fixed bottom-20 right-4 z-[9999] bg-[#D4AF37] text-black px-3 py-2 rounded-lg font-bold text-xs shadow-lg no-underline">
+              Admin →
+            </a>
           )}
         </LocalizationProvider>
       </BrowserRouter>

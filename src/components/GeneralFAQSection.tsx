@@ -12,7 +12,7 @@ import { isUSDomain } from '@/lib/siteConfig';
 const ukFaqData = [
     {
         question: "What is Emergency Tradesmen?",
-        answer: "Emergency Tradesmen is a UK platform that helps you quickly find and contact local tradespeople from public business listings for urgent problems such as plumbing, electrical faults, gas issues, lockouts, broken windows, drainage problems, and emergency breakdowns.",
+        answer: "Emergency Tradesmen is a UK platform that helps you quickly find and contact local tradespeople for urgent problems such as plumbing, electrical faults, gas issues, lockouts, broken windows, drainage problems, and emergency breakdowns.",
         icon: <HelpCircle className="w-5 h-5 text-gold" />
     },
     {
@@ -56,8 +56,8 @@ const ukFaqData = [
         icon: <CreditCard className="w-5 h-5 text-gold" />
     },
     {
-        question: "Are the tradespeople checked?",
-        answer: "Most listings are public business listings unless clearly marked with a stronger status. Always speak directly with the tradesperson to confirm availability, qualifications, insurance, and pricing.",
+        question: "How are listing statuses shown?",
+        answer: "Most entries are public business listings unless the listing status badge says otherwise. Always speak directly with the tradesperson to confirm availability, credentials, insurance, and pricing.",
         icon: <UserCheck className="w-5 h-5 text-gold" />
     },
     {
@@ -70,7 +70,7 @@ const ukFaqData = [
 const usFaqData = [
     {
         question: "What is Emergency Contractors?",
-        answer: "Emergency Contractors is a US platform that helps you quickly find and contact local contractors from public business listings for urgent problems such as plumbing, electrical faults, HVAC failures, lockouts, broken windows, drain backups, and roadside emergencies.",
+        answer: "Emergency Contractors is a US platform that helps you quickly find and contact local contractors for urgent problems such as plumbing, electrical faults, HVAC failures, lockouts, broken windows, drain backups, and roadside emergencies.",
         icon: <HelpCircle className="w-5 h-5 text-gold" />
     },
     {
@@ -114,8 +114,8 @@ const usFaqData = [
         icon: <CreditCard className="w-5 h-5 text-gold" />
     },
     {
-        question: "Are the contractors checked?",
-        answer: "Most listings are public business listings unless clearly marked with a stronger status. Always confirm licensing, insurance, availability, and pricing directly with the contractor.",
+        question: "How are listing statuses shown?",
+        answer: "Most entries are public business listings unless the listing status badge says otherwise. Always confirm licensing, insurance, availability, and pricing directly with the contractor.",
         icon: <UserCheck className="w-5 h-5 text-gold" />
     },
     {

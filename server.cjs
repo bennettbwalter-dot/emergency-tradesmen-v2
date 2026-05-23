@@ -3,7 +3,14 @@ const bodyParser = require('body-parser');
 const createPasswordPolicy = require('./passwordPolicy.cjs');
 
 const app = express();
-app.use(bodyParser.json());
+app.disable('x-powered-by');
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+app.use(bodyParser.json({ limit: '16kb' }));
 
 // Create middleware with specific options
 const passwordPolicy = createPasswordPolicy({ 
@@ -13,22 +20,18 @@ const passwordPolicy = createPasswordPolicy({
 });
 
 // Example signup route
-app.post('/signup', passwordPolicy, async (req, res) => {
-  const { email } = req.body;
+app.post('/signup', passwordPolicy, async (_req, res) => {
   return res.json({ 
     status: 'ok', 
-    message: 'Signup accepted (password policy passed).', 
-    email: email || null 
+    message: 'Signup accepted (password policy passed).'
   });
 });
 
 // Example change-password route
-app.post('/change-password', passwordPolicy, async (req, res) => {
-  const { userId } = req.body;
+app.post('/change-password', passwordPolicy, async (_req, res) => {
   return res.json({ 
     status: 'ok', 
-    message: 'Password changed (policy passed).', 
-    userId: userId || null 
+    message: 'Password changed (password policy passed).'
   });
 });
 
@@ -36,4 +39,5 @@ app.post('/change-password', passwordPolicy, async (req, res) => {
 app.get('/health', (req, res) => res.send('ok'));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const host = process.env.HOST || '127.0.0.1';
+app.listen(port, host, () => console.log(`Server running on http://${host}:${port}`));

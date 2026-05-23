@@ -40,6 +40,7 @@ export const usCityStates: Record<string, string> = {
     // Colorado
     "Denver": "CO",
     "Colorado Springs": "CO",
+    "Aurora": "CO",
     "Fort Collins": "CO",
     "Boulder": "CO",
 
@@ -68,6 +69,7 @@ export const usCityStates: Record<string, string> = {
     // Georgia
     "Atlanta": "GA",
     "Augusta": "GA",
+    "Columbus": "GA",
     "Savannah": "GA",
     "Athens": "GA",
 
@@ -101,6 +103,7 @@ export const usCityStates: Record<string, string> = {
     // Kansas
     "Wichita": "KS",
     "Overland Park": "KS",
+    "Kansas City": "KS",
     "Topeka": "KS",
 
     // Kentucky
@@ -115,6 +118,7 @@ export const usCityStates: Record<string, string> = {
     "Lafayette": "LA",
 
     // Maine
+    "Portland": "ME",
     "Lewiston": "ME",
     "Bangor": "ME",
 
@@ -127,6 +131,7 @@ export const usCityStates: Record<string, string> = {
     // Massachusetts
     "Boston": "MA",
     "Worcester": "MA",
+    "Springfield": "MA",
     "Cambridge": "MA",
     "Lowell": "MA",
 
@@ -140,6 +145,7 @@ export const usCityStates: Record<string, string> = {
     // Minnesota
     "Minneapolis": "MN",
     "St. Paul": "MN",
+    "Rochester": "MN",
     "Duluth": "MN",
 
     // Mississippi
@@ -151,6 +157,7 @@ export const usCityStates: Record<string, string> = {
     "Kansas City": "MO",
     "St. Louis": "MO",
     "Springfield": "MO",
+    "Columbia": "MO",
 
     // Montana
     "Billings": "MT",
@@ -160,6 +167,7 @@ export const usCityStates: Record<string, string> = {
     // Nebraska
     "Omaha": "NE",
     "Lincoln": "NE",
+    "Bellevue": "NE",
 
     // Nevada
     "Las Vegas": "NV",
@@ -237,6 +245,7 @@ export const usCityStates: Record<string, string> = {
 
     // South Carolina
     "Columbia": "SC",
+    "Charleston": "SC",
     "North Charleston": "SC",
     "Greenville": "SC",
 
@@ -257,6 +266,7 @@ export const usCityStates: Record<string, string> = {
     "Austin": "TX",
     "San Antonio": "TX",
     "Fort Worth": "TX",
+    "Arlington": "TX",
     "Plano": "TX",
     "Irving": "TX",
     "Garland": "TX",

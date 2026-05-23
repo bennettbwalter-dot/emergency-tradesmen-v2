@@ -41,19 +41,10 @@ function buildSitemapEntry(loc, lastmod, changefreq = 'weekly', priority = '0.8'
     return xml;
 }
 
-// Split posts into UK and US — strict region separation. A post must carry an
-// explicit region marker in its slug to be sitemap-eligible. Neutral slugs are
-// dropped from both blog sitemaps so we never advertise UK content from the
-// US domain (or vice versa).
-const isUKSlug = (slug) => /-(?:gb|uk)(?:-|$)/.test(slug);
-const isUSSlug = (slug) => /-(?:us|usa)(?:-|$)/.test(slug);
-const ukPosts = posts.filter(p => p.published && isUKSlug(p.slug));
-const usPosts = posts.filter(p => p.published && isUSSlug(p.slug));
-const orphaned = posts.filter(p => p.published && !isUKSlug(p.slug) && !isUSSlug(p.slug));
-if (orphaned.length) {
-    console.warn(`⚠ ${orphaned.length} published post(s) have no -gb/-uk/-us/-usa marker and were excluded from sitemaps:`);
-    orphaned.forEach(p => console.warn(`  - ${p.slug}`));
-}
+// Split posts into UK and US
+const ukPosts = posts.filter(p => p.published && (p.slug.includes('-gb') || p.slug.includes('-uk') || 
+    (!p.slug.includes('-us') && !p.slug.includes('usa'))));
+const usPosts = posts.filter(p => p.published && (p.slug.includes('-us') || p.slug.includes('usa')));
 
 console.log(`UK posts: ${ukPosts.length}`);
 console.log(`US posts: ${usPosts.length}`);

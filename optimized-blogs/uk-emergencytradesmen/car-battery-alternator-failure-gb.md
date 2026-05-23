@@ -65,7 +65,7 @@
             <li><strong>Warning Triangles:</strong> Never use a warning triangle on a motorway. It is too dangerous to set up.</li>
         </ul>
     </div>
-    <p>Safety rules on UK roads have become stricter in 2026. If you break down on a dual carriageway or motorway, you must put safety first. Get everyone out of the car through the left-hand doors (the "nearside"). Stand well back from the road, ideally behind a crash barrier. Do not try to "fix" the car yourself on the hard shoulder. Even a simple battery change is too dangerous with 70mph traffic passing inches away. Call for professional recovery-they have the lights and barriers to keep the lane safe.</p>
+    <p>Safety rules on UK roads have become stricter in 2026. If you break down on a dual carriageway or motorway, you must put safety first. Get everyone out of the car through the left-hand doors (the "nearside"). Stand well back from the road, ideally behind a crash barrier. Do not try to "fix" the car yourself on the hard shoulder. Even a simple battery change is too dangerous with 70mph traffic passing inches away. Call for professional recovery—they have the lights and barriers to keep the lane safe.</p>
 
     <h2>5. Winter Kill: Why 0°C is the Battery's Worst Enemy</h2>
     <div class="capsule-box">

@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { pipeline } from '@xenova/transformers';
+import { pipeline } from '@huggingface/transformers';
 import { devLog, devWarn } from "@/lib/devLog";
 
 // Structure for knowledge data

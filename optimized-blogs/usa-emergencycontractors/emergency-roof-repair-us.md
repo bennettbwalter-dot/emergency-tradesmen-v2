@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the United States of 2026, the roof is the most critical component of your home's "Coastal and Inland Resilience." With the updated **ASCE 7-22 (Minimum Design Loads)** wind maps showing significantly higher peak gusts for both coastal and Great Plains regions, a roof is no longer just a covering-it's a structural shield. The 2026 standard for residential reroofing has moved toward high-density fastening, synthetic underlayments, and mandatory **AI-Assisted Drone Audits**. In 2026, an "Emergency Repair" isn't just about stopping a leak; it's about re-certifying your home's structural integrity against the 2026 climate load. This guide provides the definitive 2026 technical overview for US emergency roofing and storm-damage recovery.</p>
+    <p>In the United States of 2026, the roof is the most critical component of your home's "Coastal and Inland Resilience." With the updated **ASCE 7-22 (Minimum Design Loads)** wind maps showing significantly higher peak gusts for both coastal and Great Plains regions, a roof is no longer just a covering—it's a structural shield. The 2026 standard for residential reroofing has moved toward high-density fastening, synthetic underlayments, and mandatory **AI-Assisted Drone Audits**. In 2026, an "Emergency Repair" isn't just about stopping a leak; it's about re-certifying your home's structural integrity against the 2026 climate load. This guide provides the definitive 2026 technical overview for US emergency roofing and storm-damage recovery.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Roof Repair 2026</h2>
     <div class="capsule-box">
@@ -89,7 +89,7 @@
             <li><strong>Cold-Applied PMMA:</strong> For 2026 emergency flat-roof patches, we use liquid-applied resins that bond instantly and have a 25-year life.</li>
         </ul>
     </div>
-    <p>In 2026, we don't "Flood Test" flat roofs anymore-it's too slow and adds too much weight. **Electronic Leak Detection (ELD)** is the 2026 standard for non-destructive diagnostics. We find the leak, we patch the leak, and we prove it's sealed-all in one 2026 visit. </p>
+    <p>In 2026, we don't "Flood Test" flat roofs anymore—it's too slow and adds too much weight. **Electronic Leak Detection (ELD)** is the 2026 standard for non-destructive diagnostics. We find the leak, we patch the leak, and we prove it's sealed—all in one 2026 visit. </p>
 
     <h2>7. The "Storm-Proof" Building Envelope: 2026 Audits</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Roof Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Inspect your attic after a 2026 storm-look for "Wet Plywood" before the water hits your ceiling.</li>
-            <li><strong>CANNOT:</strong> Walk on a shingle roof in the 2026 summer heat-you will "Scuff" the granules and ruin the 2026 UV protection.</li>
-            <li><strong>CAN:</strong> Check your **Gutter-Downspouts** in 2026-if they are full of "Silt," your shingles are "Grained Out" and need 2026 replacement.</li>
-            <li><strong>CANNOT:</strong> Use "Shingle Glue" for a large repair-in 2026, this is a "Temporary Patch" that will fail in the next high-wind event.</li>
+            <li><strong>CAN:</strong> Inspect your attic after a 2026 storm—look for "Wet Plywood" before the water hits your ceiling.</li>
+            <li><strong>CANNOT:</strong> Walk on a shingle roof in the 2026 summer heat—you will "Scuff" the granules and ruin the 2026 UV protection.</li>
+            <li><strong>CAN:</strong> Check your **Gutter-Downspouts** in 2026—if they are full of "Silt," your shingles are "Grained Out" and need 2026 replacement.</li>
+            <li><strong>CANNOT:</strong> Use "Shingle Glue" for a large repair—in 2026, this is a "Temporary Patch" that will fail in the next high-wind event.</li>
         </ul>
     </div>
 

@@ -115,6 +115,11 @@ const selectorTrades: SelectorTrade[] = [
   },
 ];
 
+const MAX_ACCEPTED_ACCURACY_METERS = 2500;
+const REVERSE_GEOCODE_TIMEOUT_MS = 2500;
+const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
+const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
+
 function slugifyLocation(value: string) {
   return value
     .toLowerCase()
@@ -134,23 +139,42 @@ function getBrowserPosition(): Promise<GeolocationPosition> {
     navigator.geolocation.getCurrentPosition(resolve, reject, {
       enableHighAccuracy: true,
       timeout: 10000,
-      maximumAge: 60000,
+      maximumAge: 0,
     });
   });
 }
 
 async function reverseGeocodeCity(lat: number, lng: number) {
-  const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
-    headers: { "Accept-Language": "en" },
-  });
-  if (!response.ok) return null;
-  const data = await response.json();
-  return data.address?.city || data.address?.town || data.address?.village || data.address?.county || null;
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), REVERSE_GEOCODE_TIMEOUT_MS);
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
+      headers: { "Accept-Language": "en" },
+      signal: controller.signal,
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.address?.city || data.address?.town || data.address?.village || data.address?.county || null;
+  } catch {
+    return null;
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+}
+
+function isUsablePosition(position: GeolocationPosition) {
+  const accuracy = position.coords.accuracy;
+  return !Number.isFinite(accuracy) || accuracy <= MAX_ACCEPTED_ACCURACY_METERS;
+}
+
+function coordsWithinCountry(lat: number, lng: number, countryCode: "GB" | "US") {
+  const bounds = countryCode === "US" ? US_BOUNDS : UK_BOUNDS;
+  return lat >= bounds.minLat && lat <= bounds.maxLat && lng >= bounds.minLng && lng <= bounds.maxLng;
 }
 
 export function SoloTradeSelector() {
   const navigate = useNavigate();
-  const { settings, detectedCity, setOverride } = useLocalization();
+  const { settings, detectedCity } = useLocalization();
   const { setDetectedTrade, setDetectedCity } = useChatbot();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -260,20 +284,36 @@ export function SoloTradeSelector() {
 
     try {
       const position = await getBrowserPosition();
-      const { latitude, longitude } = position.coords;
+      const { latitude, longitude, accuracy } = position.coords;
+
+      if (!isUsablePosition(position) || !coordsWithinCountry(latitude, longitude, settings.countryCode)) {
+        setLocationError(Number.isFinite(accuracy) && accuracy > MAX_ACCEPTED_ACCURACY_METERS
+          ? "Your phone only provided an approximate network location. Turn on precise location/GPS or choose your area manually."
+          : "Your phone location is unavailable. Choose your area manually.");
+        setLocatingSlug(null);
+        return;
+      }
+
+      const reverseCity = await reverseGeocodeCity(latitude, longitude);
       const nearest = findNearestCity(latitude, longitude, settings.countryCode);
-      resolvedCity = nearest?.city || (await reverseGeocodeCity(latitude, longitude)) || resolvedCity;
+      resolvedCity = reverseCity || nearest?.city || resolvedCity;
 
       if (resolvedCity) {
-        setOverride({ latitude, longitude }, resolvedCity);
         setDetectedCity(resolvedCity);
       }
     } catch (error) {
-      resolvedCity = resolvedCity || (settings.countryCode === "US" ? "Los Angeles" : "London");
-      setLocationError("Using a fallback city because browser location was not available.");
+      setLocationError("Location permission was denied or unavailable. Choose your area manually.");
+      setLocatingSlug(null);
+      return;
     }
 
-    const citySlug = slugifyLocation(resolvedCity || (settings.countryCode === "US" ? "Los Angeles" : "London"));
+    if (!resolvedCity) {
+      setLocationError("Unable to identify your current area. Choose your area manually.");
+      setLocatingSlug(null);
+      return;
+    }
+
+    const citySlug = slugifyLocation(resolvedCity);
     navigate(`/emergency-${trade.slug}/${citySlug}`);
   };
 

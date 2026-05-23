@@ -29,7 +29,7 @@ export default function LocationsDirectory() {
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <SEO
-                title={`Service Locations Directory | Emergency Tradesmen ${isUS ? 'US' : 'UK'}`}
+                title={`Service Locations Directory | Emergency ${isUS ? 'Contractors US' : 'Tradesmen UK'}`}
                 description={`Browse our full list of service areas across the ${isUS ? 'USA' : 'UK'}. Find emergency 24/7 plumbers, electricians, locksmiths and more in your local city.`}
             />
 
@@ -42,7 +42,7 @@ export default function LocationsDirectory() {
                     </h1>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                         We provide 24/7 emergency coverage across major {isUS ? 'US' : 'UK'} cities and surrounding areas.
-                        Select your location to find public {isUS ? 'contractor' : 'tradesmen'} listings near you.
+                        Select your location to find local emergency {isUS ? 'contractors' : 'tradesmen'} near you.
                     </p>
                 </div>
 
@@ -96,7 +96,7 @@ export default function LocationsDirectory() {
                                                             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors py-1"
                                                         >
                                                             <span className="w-1 h-1 rounded-full bg-gold/50" />
-                                                            Emergency {isUS ? (trade as any).usName : trade.name}
+                                                            Emergency {isUS ? trade.usName : trade.name}
                                                         </Link>
                                                     </li>
                                                 ))}

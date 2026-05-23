@@ -61,7 +61,7 @@ export const SVGTrustBadges = () => {
                 </svg>
             </div>
 
-            {/* Badge 2: Location/Verify */}
+            {/* Badge 2: Location */}
             <div className="flex-1 max-w-[250px] transition-transform duration-300 hover:scale-105 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="130" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">
                     {/* SVG created with Arrow, by QuiverAI (https://quiver.ai) */}

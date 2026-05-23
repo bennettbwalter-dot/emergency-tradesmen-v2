@@ -55,7 +55,7 @@ export function AuthModal({ defaultTab = "login", trigger, onSuccess }: AuthModa
                             {mode === "login" ? (
                                 "Enter your credentials to access your account"
                             ) : (
-                                <>Create a <span className="text-gold font-bold">FREE</span> account to continue browsing local emergency contacts.</>
+                    <>Create a <span className="text-gold font-bold">FREE</span> account to continue browsing local emergency listings.</>
                             )}
                         </DialogDescription>
                     </div>

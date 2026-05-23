@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the United States of 2026, the flat roof (or low-slope roof) has transitioned from a specialized industrial necessity to a mainstream residential feature, driven by modern architectural trends and the push for rooftop solar. However, the 2026 US climate-characterized by higher-intensity convective storms and extreme UV exposure-has made traditional leak detection methods like "Flood Testing" both inefficient and hazardous. The 2026 standard for US flat roof resilience is **Electronic Leak Detection (ELD)**, a non-destructive methodology governed by **ASTM D8231** and **ASTM D7877**. Whether you have a TPO (Thermoplastic Polyolefin) deck, a PVC membrane, or a heritage modified-bitumen system, the 2026 standard involves **Precision Spark Testing** and **High-Performance PMMA Liquid Repairs**. This guide provides the technical 2026 standard for US flat roof protection and emergency recovery.</p>
+    <p>In the United States of 2026, the flat roof (or low-slope roof) has transitioned from a specialized industrial necessity to a mainstream residential feature, driven by modern architectural trends and the push for rooftop solar. However, the 2026 US climate—characterized by higher-intensity convective storms and extreme UV exposure—has made traditional leak detection methods like "Flood Testing" both inefficient and hazardous. The 2026 standard for US flat roof resilience is **Electronic Leak Detection (ELD)**, a non-destructive methodology governed by **ASTM D8231** and **ASTM D7877**. Whether you have a TPO (Thermoplastic Polyolefin) deck, a PVC membrane, or a heritage modified-bitumen system, the 2026 standard involves **Precision Spark Testing** and **High-Performance PMMA Liquid Repairs**. This guide provides the technical 2026 standard for US flat roof protection and emergency recovery.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: US Flat Roof 2026</h2>
     <div class="capsule-box">
@@ -39,14 +39,14 @@
             <li><strong>ASTM Compliance:</strong> All our tests are performed to **ASTM D8231-26** standards, providing a legally defensible report for your 2026 insurance adjuster.</li>
         </ul>
     </div>
-    <p>In 2026, we don't "Look" for leaks-we **Detect** them. Our ELD reports are the definitive evidence needed for 2026 manufacturer warranty claims. If your flat roof is "Leaking somewhere," our 2026 scans provide the **Digital Fingerprint** of the fail. We are US leaders in **Acoustic and Electronic Flat-Roof Diagnostics**. </p>
+    <p>In 2026, we don't "Look" for leaks—we **Detect** them. Our ELD reports are the definitive evidence needed for 2026 manufacturer warranty claims. If your flat roof is "Leaking somewhere," our 2026 scans provide the **Digital Fingerprint** of the fail. We are US leaders in **Acoustic and Electronic Flat-Roof Diagnostics**. </p>
 
     <h2>3. PMMA Liquid Membranes: 2026 Emergency "Rescue"</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>Instant Vulcanization:</strong> 2026 PMMA resins catalyze in 15-20 minutes, becoming part of the original roof structure.</li>
             <li><strong>Substrate Versatility:</strong> These 2026 liquids bond to TPO, EPDM, PVC, and Steel, making them the universal 2026 "Storm Response" kit.</li>
-            <li><strong>Horizontal & Vertical:</strong> PMMA is "Thixotropic," meaning it stays where you paint it-perfect for fixing 2026 leaking parapet walls and "Curbs."</li>
+            <li><strong>Horizontal & Vertical:</strong> PMMA is "Thixotropic," meaning it stays where you paint it—perfect for fixing 2026 leaking parapet walls and "Curbs."</li>
         </ul>
     </div>
     <p>In 2026, the "Roof Patch" has become a structural repair. Our 2026 liquid-applied systems are **Self-Leveling** and UV-stable. We provide a **2026 "Zero-Drip" Performance Guarantee** on all professional liquid repairs. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Flat Roof Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your "Scuppers" and "Outlets" after an **Summer Thunderstorm**-debris-clogs are the #1 cause of 2026 "Surcharge" leaks.</li>
-            <li><strong>CANNOT:</strong> Use "Roof Cement" (Tar) on a TPO or PVC roof-the solvents will permanently "Melt" and ruin the 12026 membrane!</li>
+            <li><strong>CAN:</strong> Check your "Scuppers" and "Outlets" after an **Summer Thunderstorm**—debris-clogs are the #1 cause of 2026 "Surcharge" leaks.</li>
+            <li><strong>CANNOT:</strong> Use "Roof Cement" (Tar) on a TPO or PVC roof—the solvents will permanently "Melt" and ruin the 12026 membrane!</li>
             <li><strong>CAN:</strong> Request an **Electronic Leak Test** every 5 years as part of your 2026 home maintenance schedule.</li>
-            <li><strong>CANNOT:</strong> Store "Heavy Items" (AC units, toolboxes) directly on the membrane-in 2026, this causes "Substrate Crushing" and internal leaks.</li>
+            <li><strong>CANNOT:</strong> Store "Heavy Items" (AC units, toolboxes) directly on the membrane—in 2026, this causes "Substrate Crushing" and internal leaks.</li>
         </ul>
     </div>
 

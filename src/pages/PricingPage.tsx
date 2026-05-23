@@ -150,7 +150,7 @@ export default function PricingPage() {
                         <h2 className="text-3xl font-display mb-6">Why Join Emergency {isUS ? 'Contractors' : 'Tradesmen'}?</h2>
                         <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                             <p>
-                                When emergencies happen, customers need clear public business details they can check quickly before calling.
+                                When emergencies happen, customers don’t shop around — they call the first relevant local contact they see.
                             </p>
                             <p>
                                 Emergency {isUS ? 'Contractors' : 'Tradesmen'} puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.
@@ -361,6 +361,62 @@ export default function PricingPage() {
                     </div>
                 </div>
             </main>
+
+            <section className="py-20 bg-background border-t border-border/50">
+                <div className="container-wide">
+                    <div className="text-center mb-12">
+                        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+                            Three ways to grow with us
+                        </h2>
+                        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                            Claim your existing listing, browse our website styles, or have us build, host, and set up a complete site for your business.
+                        </p>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        <Link
+                            to="/claim-your-business"
+                            className="group bg-card border border-border hover:border-gold/50 rounded-xl p-8 transition-colors flex flex-col"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mb-5 group-hover:bg-gold/20 transition-colors">
+                                <Shield className="w-5 h-5 text-gold" />
+                            </div>
+                            <h3 className="font-display text-xl font-bold mb-2">Claim Your Business</h3>
+                            <p className="text-sm text-muted-foreground mb-4 flex-1">
+                                Already listed? Send a manual claim request so we can verify ownership before any listing changes are made.
+                            </p>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Start claim →</span>
+                        </Link>
+                        <Link
+                            to={isUSDomain || isUS ? "/for-contractors/website-showroom" : "/for-tradesmen/website-showroom"}
+                            className="group bg-card border border-border hover:border-gold/50 rounded-xl p-8 transition-colors flex flex-col"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mb-5 group-hover:bg-gold/20 transition-colors">
+                                <Star className="w-5 h-5 text-gold" />
+                            </div>
+                            <h3 className="font-display text-xl font-bold mb-2">Website Showroom</h3>
+                            <p className="text-sm text-muted-foreground mb-4 flex-1">
+                                Browse 11 emergency-ready website styles and enquire about the one that fits your trade.
+                            </p>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">View showroom →</span>
+                        </Link>
+                        <Link
+                            to={isUSDomain || isUS ? "/for-contractors" : "/for-tradesmen"}
+                            className="group bg-card border border-border hover:border-gold/50 rounded-xl p-8 transition-colors flex flex-col"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mb-5 group-hover:bg-gold/20 transition-colors">
+                                <Crown className="w-5 h-5 text-gold" />
+                            </div>
+                            <h3 className="font-display text-xl font-bold mb-2">
+                                Websites for {isUS ? "Contractors" : "Tradespeople"}
+                            </h3>
+                            <p className="text-sm text-muted-foreground mb-4 flex-1">
+                                Full-service website design, hosting, and setup — we build it, you go live with a working enquiry form.
+                            </p>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Learn more →</span>
+                        </Link>
+                    </div>
+                </div>
+            </section>
 
             <section className="py-20 bg-background border-t border-border/50">
                 <div className="container-narrow">

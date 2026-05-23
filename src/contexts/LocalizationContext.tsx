@@ -1,13 +1,8 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { devLog } from "@/lib/devLog";
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { devLog } from '@/lib/devLog';
 import { useLocation } from 'react-router-dom';
-import { findNearestCity, cityCoordinates } from '@/lib/cityCoordinates';
-import { usCityCoordinates } from '@/lib/usCityCoordinates';
-
-// Pre-built lowercase lookup tables of cities/areas the site has listings for.
-// Used to prefer an exact supported town/city over a broader Nominatim region.
-const SUPPORTED_UK = new Map(Object.keys(cityCoordinates).map(s => [s.toLowerCase(), s]));
-const SUPPORTED_US = new Map(Object.keys(usCityCoordinates).map(s => [s.toLowerCase(), s]));
+import { findNearestCity } from '@/lib/cityCoordinates';
+import { getSiteCountryCode } from '@/lib/siteConfig';
 
 export type CountryCode = 'GB' | 'US';
 
@@ -21,11 +16,11 @@ interface LocalizationSettings {
     currencySymbol: string;
     currencyCode: string;
     phonePrefix: string;
-    tradeTerm: string; // e.g., "Tradesperson" vs "Contractor"
-    cityTerm: string; // e.g., "City" vs "Area"
-    towTerm: string; // "Breakdown Recovery" vs "Tow Truck"
-    postcodeTerm: string; // "Postcode" vs "Zip Code"
-    boilerTerm: string; // "Boiler" vs "HVAC / Water Heater"
+    tradeTerm: string;
+    cityTerm: string;
+    towTerm: string;
+    postcodeTerm: string;
+    boilerTerm: string;
     locale: string;
 }
 
@@ -56,6 +51,16 @@ const REGIONAL_CONFIG: Record<CountryCode, LocalizationSettings> = {
     }
 };
 
+const LIVE_LOCATION_MIN_DISTANCE_METERS = 650;
+const LIVE_LOCATION_MAX_STALE_MS = 90_000;
+const LIVE_LOCATION_REFRESH_THROTTLE_MS = 8_000;
+const MAX_ACCEPTED_ACCURACY_METERS = 2500;
+const MAX_POSITION_AGE_MS = 60_000;
+const REVERSE_GEOCODE_TIMEOUT_MS = 2500;
+
+const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
+const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
+
 interface LocalizationContextType {
     settings: LocalizationSettings;
     setCountryCode: (code: CountryCode) => void;
@@ -67,9 +72,6 @@ interface LocalizationContextType {
     isLocating: boolean;
     geoError: string | null;
     detectUserLocation: () => void;
-    setOverride: (coords: Coords | null, city: string | null) => void;
-    clearOverride: () => void;
-    isOverridden: boolean;
 }
 
 const LocalizationContext = createContext<LocalizationContextType | undefined>(undefined);
@@ -78,157 +80,63 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     children,
     initialCode = 'GB'
 }) => {
-    const [countryCode, setCountryCodeState] = useState<CountryCode>(initialCode);
+    const [countryCode, setCountryCodeState] = useState<CountryCode>(() => getLockedSiteCountry(initialCode));
     const [userCoords, setUserCoords] = useState<Coords | null>(null);
     const [detectedCity, setDetectedCity] = useState<string | null>(null);
     const [detectedState, setDetectedState] = useState<string | null>(null);
     const [isLocating, setIsLocating] = useState(false);
     const [geoError, setGeoError] = useState<string | null>(null);
-
-    // Dev-only overrides. In production we never read a persisted override,
-    // so a stale value from past testing can never stick the hero on the wrong city.
-    const overridesEnabled = typeof window !== 'undefined' && import.meta.env.DEV;
-    const [overrideCoords, setOverrideCoords] = useState<Coords | null>(() => {
-        if (!overridesEnabled) return null;
-        const saved = localStorage.getItem('geo_override_coords');
-        return saved ? JSON.parse(saved) : null;
-    });
-    const [overrideCity, setOverrideCity] = useState<string | null>(() => {
-        if (!overridesEnabled) return null;
-        return localStorage.getItem('geo_override_city');
-    });
-
+    const lastLiveFixRef = useRef<{ coords: Coords; timestamp: number } | null>(null);
+    const lastReverseLookupAtRef = useRef(0);
+    const watchIdRef = useRef<number | null>(null);
     const location = useLocation();
 
-    // 1. Real-time Location Tracking (Navigator API)
-    // Strategy: Nominatim (free, no key) gives the user's real address breakdown.
-    // We walk the breakdown from most-specific to broadest, preferring any candidate
-    // that matches a town/city we already have listings for. Only when no supported
-    // match exists do we fall back to a real broader area from Nominatim itself
-    // (e.g. "Central Bedfordshire") — never a hardcoded value.
-    const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
-        const isUS = countryCode === 'US';
-        const supported = isUS ? SUPPORTED_US : SUPPORTED_UK;
+    useEffect(() => {
+        setCountryCodeState(getLockedSiteCountry(initialCode));
+    }, [location.pathname, initialCode]);
 
-        let matchedCity: string | null = null;        // exact match in our listings
-        let nominatimFallback: string | null = null;  // real broader area
-        let stateName: string | null = null;
+    const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
+        const siteCountry = getLockedSiteCountry(initialCode);
+        setCountryCodeState(siteCountry);
+
+        if (!coordsWithinCountry(lat, lng, siteCountry)) {
+            setDetectedCity(null);
+            if (siteCountry === 'GB') setDetectedState(null);
+            setGeoError(siteCountry === 'GB'
+                ? 'This site only covers UK locations. Choose a UK area manually if needed.'
+                : 'This site only covers USA locations. Choose a US area manually if needed.');
+            return;
+        }
 
         try {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=14&addressdetails=1`,
-                { headers: { 'Accept-Language': 'en' } }
-            );
-            if (res.ok) {
-                const data = await res.json();
-                const addr = data.address || {};
-                stateName = addr.state || null;
+            const reverseCity = await reverseGeocodeArea(lat, lng, siteCountry);
+            const nearest = findNearestCity(lat, lng, siteCountry);
+            const resolvedCity = reverseCity || nearest?.city || null;
 
-                // Most-specific first
-                const candidates = [
-                    addr.suburb,
-                    addr.neighbourhood,
-                    addr.city_district,
-                    addr.town,
-                    addr.village,
-                    addr.city,
-                    addr.municipality,
-                    addr.county,
-                    addr.state_district,
-                ].filter((s): s is string => Boolean(s));
-
-                for (const c of candidates) {
-                    const canonical = supported.get(c.toLowerCase());
-                    if (canonical) { matchedCity = canonical; break; }
-                }
-
-                if (!matchedCity) {
-                    // Prefer the smallest real area Nominatim reported, in this order
-                    nominatimFallback =
-                        addr.town || addr.village || addr.city ||
-                        addr.suburb || addr.municipality ||
-                        addr.county || addr.state_district || null;
-                }
-            }
-        } catch (nominatimErr) {
-            console.warn('Nominatim reverse geocode failed:', nominatimErr);
-        }
-
-        let resolved = matchedCity || nominatimFallback;
-
-        // Last-resort fallback: nearest supported city by haversine distance.
-        // Only fires if Nominatim was completely unreachable.
-        if (!resolved) {
-            const nearest = findNearestCity(lat, lng, countryCode);
-            if (nearest?.city) resolved = nearest.city;
-        }
-
-        if (resolved) {
-            setDetectedCity(resolved);
-            devLog(`Resolved location: ${resolved}${matchedCity ? ' (supported)' : ' (broader fallback)'}`);
-        }
-
-        if (isUS) {
-            if (stateName) {
-                setDetectedState(stateName);
-            } else if (resolved) {
-                // Nominatim didn't return state — derive from cityToState if we know the city
-                try {
-                    const { cityToState } = await import('@/lib/trades');
-                    const stateCode = cityToState[resolved];
-                    if (stateCode) {
-                        const { US_STATES } = await import('@/lib/us_states');
-                        const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
-                        if (state) setDetectedState(state.name);
-                    }
-                } catch { /* non-fatal */ }
-            }
-        } else if (stateName) {
-            setDetectedState(stateName);
-        }
-    }, [countryCode]);
-
-    // 2. Auto-trigger GPS once on mount IF the user has previously granted
-    // location permission. First-time visitors see the "ME" fallback until they
-    // tap a button (chat / trade card) that explicitly requests permission.
-    const hasAutoLocatedRef = useRef(false);
-    useEffect(() => {
-        if (hasAutoLocatedRef.current) return;
-        if (typeof window === 'undefined' || !navigator.geolocation) return;
-        if (overrideCoords || overrideCity) return; // dev override active
-
-        let cancelled = false;
-        const tryAutoLocate = async () => {
-            try {
-                const perms = (navigator as Navigator & { permissions?: Permissions }).permissions;
-                if (!perms?.query) return; // can't tell — don't surprise-prompt
-                const status = await perms.query({ name: 'geolocation' as PermissionName });
-                if (status.state !== 'granted') return;
-            } catch {
+            if (!resolvedCity) {
+                setGeoError('Unable to identify your nearest area. Choose your area manually if needed.');
                 return;
             }
-            if (cancelled) return;
-            hasAutoLocatedRef.current = true;
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    if (cancelled) return;
-                    const { latitude, longitude } = position.coords;
-                    setUserCoords({ latitude, longitude });
-                    resolveCoordsToCity(latitude, longitude);
-                },
-                (err) => {
-                    if (!cancelled) console.warn('Auto-geolocation failed:', err.message);
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
-            );
-        };
-        tryAutoLocate();
-        return () => { cancelled = true; };
-    }, [resolveCoordsToCity, overrideCoords, overrideCity]);
+
+            setDetectedCity(resolvedCity);
+            setGeoError(null);
+
+            if (siteCountry === 'US') {
+                resolveUSState(resolvedCity, nearest?.city || null, setDetectedState);
+            } else {
+                setDetectedState(null);
+            }
+
+            devLog(`Resolved coords to area: ${resolvedCity} (locked to ${siteCountry} site)`);
+        } catch (error) {
+            console.warn('Failed to resolve area from coords', error);
+            setGeoError('Unable to identify your nearest area. Choose your area manually if needed.');
+        }
+    }, [initialCode]);
 
     const detectUserLocation = useCallback(() => {
         if (!navigator.geolocation) {
-            setGeoError('Geolocation is not supported by your browser');
+            setGeoError('Geolocation is not supported by your browser. Choose your area manually.');
             return;
         }
 
@@ -236,107 +144,131 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
         setGeoError(null);
 
         navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                setUserCoords({ latitude, longitude });
-                resolveCoordsToCity(latitude, longitude);
-                setIsLocating(false);
+            async (position) => {
+                const { latitude, longitude, accuracy } = position.coords;
+                if (!isUsablePhonePosition(position)) {
+                    setDetectedCity(null);
+                    setIsLocating(false);
+                    setGeoError(getAccuracyMessage(accuracy));
+                    return;
+                }
+
+                const coords = { latitude, longitude };
+                lastLiveFixRef.current = { coords, timestamp: Date.now() };
+                lastReverseLookupAtRef.current = Date.now();
+                setUserCoords(coords);
+                try {
+                    await resolveCoordsToCity(latitude, longitude);
+                } finally {
+                    setIsLocating(false);
+                }
             },
             (error) => {
                 setIsLocating(false);
-                setGeoError(error.message);
-                console.warn('Geolocation error:', error.message);
+                setGeoError(error.code === error.PERMISSION_DENIED
+                    ? 'Location access is blocked. Choose your area manually to see local results.'
+                    : 'Unable to refresh your location right now. Choose your area manually if needed.');
+                if (error.code !== error.PERMISSION_DENIED) {
+                    console.warn('Geolocation error:', error.message);
+                }
             },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
         );
     }, [resolveCoordsToCity]);
 
-    // 3. URL-Based Context Switching
     useEffect(() => {
-        const path = location.pathname;
-        const hostname = window.location.hostname;
-        const port = window.location.port;
-
-        // Force country based on port/domain
-        if (hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001')) {
-            setCountryCodeState('US');
-        } else if (hostname.includes('emergencytradesmen.net') || port === '3000' || (hostname === 'localhost' && port === '3000')) {
-            setCountryCodeState('GB');
-        } else {
-            // Path-based fallback for multi-tenant dev
-            const firstSegment = path.split('/')[1]?.toLowerCase();
-            if (firstSegment === 'us' || firstSegment === 'usa') {
-                setCountryCodeState('US');
-            } else {
-                setCountryCodeState('GB');
-            }
+        if (typeof window === 'undefined' || !navigator.geolocation) {
+            setGeoError('Geolocation is not supported by your browser. Choose your area manually.');
+            return;
         }
-    }, [location.pathname]);
+        if (!window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+            setGeoError('Location needs HTTPS. Choose your area manually.');
+            return;
+        }
+
+        detectUserLocation();
+
+        watchIdRef.current = navigator.geolocation.watchPosition(
+            (position) => {
+                const { latitude, longitude, accuracy } = position.coords;
+                if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return;
+                if (!isUsablePhonePosition(position)) {
+                    setUserCoords(null);
+                    setDetectedCity(null);
+                    setGeoError(getAccuracyMessage(accuracy));
+                    return;
+                }
+
+                const coords = { latitude, longitude };
+                const previous = lastLiveFixRef.current;
+                const movedMeters = previous ? distanceMeters(previous.coords, coords) : Infinity;
+                const staleMs = previous ? Date.now() - previous.timestamp : Infinity;
+                const minMove = Math.max(LIVE_LOCATION_MIN_DISTANCE_METERS, Number.isFinite(accuracy) ? accuracy * 1.25 : 0);
+
+                setUserCoords(coords);
+
+                if (previous && movedMeters < minMove && staleMs < LIVE_LOCATION_MAX_STALE_MS) {
+                    return;
+                }
+
+                const now = Date.now();
+                if (previous && now - lastReverseLookupAtRef.current < LIVE_LOCATION_REFRESH_THROTTLE_MS) {
+                    return;
+                }
+
+                lastLiveFixRef.current = { coords, timestamp: now };
+                lastReverseLookupAtRef.current = now;
+                resolveCoordsToCity(latitude, longitude);
+            },
+            (error) => {
+                setGeoError(error.code === error.PERMISSION_DENIED
+                    ? 'Location access is blocked. Choose your area manually to see local results.'
+                    : 'Unable to refresh your location right now. Choose your area manually if needed.');
+                setIsLocating(false);
+                if (error.code !== error.PERMISSION_DENIED) {
+                    console.warn('Geolocation error:', error.message);
+                }
+            },
+            { enableHighAccuracy: true, timeout: 18000, maximumAge: 12000 }
+        );
+
+        const refreshOnVisible = () => {
+            if (document.visibilityState === 'visible') detectUserLocation();
+        };
+        document.addEventListener('visibilitychange', refreshOnVisible);
+
+        return () => {
+            document.removeEventListener('visibilitychange', refreshOnVisible);
+            if (watchIdRef.current !== null) {
+                navigator.geolocation.clearWatch(watchIdRef.current);
+                watchIdRef.current = null;
+            }
+        };
+    }, [detectUserLocation, resolveCoordsToCity]);
 
     const setCountryCode = (code: CountryCode) => {
-        if (REGIONAL_CONFIG[code]) {
-            setCountryCodeState(code);
-        }
+        const lockedCountry = getLockedSiteCountry(initialCode);
+        if (code === lockedCountry) setCountryCodeState(code);
     };
 
     const settings = REGIONAL_CONFIG[countryCode];
-
-    const formatPrice = (amount: number) => {
-        return new Intl.NumberFormat(settings.locale, {
-            style: 'currency',
-            currency: settings.currencyCode,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-        }).format(amount);
-    };
-
-    const formatPhone = (phone: string) => {
-        return phone;
-    };
-
     return (
         <LocalizationContext.Provider value={{
             settings,
             setCountryCode,
-            formatPrice,
-            formatPhone,
-            userCoords: overrideCoords || userCoords,
-            detectedCity: overrideCity || detectedCity,
-            detectedState, 
+            formatPrice: (amount) => new Intl.NumberFormat(settings.locale, {
+                style: 'currency',
+                currency: settings.currencyCode,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount),
+            formatPhone: (phone) => phone,
+            userCoords,
+            detectedCity,
+            detectedState,
             isLocating,
-            geoError: overrideCoords ? null : geoError,
-            detectUserLocation,
-            setOverride: (coords, city) => {
-                setOverrideCoords(coords);
-                setOverrideCity(city);
-                
-                // If overriding city, also try to update state
-                if (city && countryCode === 'US') {
-                    import('@/lib/trades').then(({ cityToState }) => {
-                        const stateCode = cityToState[city];
-                        if (stateCode) {
-                            import('@/lib/us_states').then(({ US_STATES }) => {
-                                const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
-                                if (state) {
-                                    setDetectedState(state.name);
-                                    devLog(`Overriding state to: ${state.name} based on city: ${city}`);
-                                }
-                            });
-                        }
-                    });
-                }
-                if (coords) localStorage.setItem('geo_override_coords', JSON.stringify(coords));
-                else localStorage.removeItem('geo_override_coords');
-                if (city) localStorage.setItem('geo_override_city', city);
-                else localStorage.removeItem('geo_override_city');
-            },
-            clearOverride: () => {
-                setOverrideCoords(null);
-                setOverrideCity(null);
-                localStorage.removeItem('geo_override_coords');
-                localStorage.removeItem('geo_override_city');
-            },
-            isOverridden: !!overrideCoords || !!overrideCity
+            geoError,
+            detectUserLocation
         }}>
             {children}
         </LocalizationContext.Provider>
@@ -350,3 +282,94 @@ export const useLocalization = () => {
     }
     return context;
 };
+
+function getLockedSiteCountry(fallback: CountryCode): CountryCode {
+    if (typeof window === 'undefined') return fallback;
+    if (import.meta.env.MODE === 'us') return 'US';
+    if (import.meta.env.MODE === 'uk') return 'GB';
+    return getSiteCountryCode();
+}
+
+function coordsWithinCountry(lat: number, lng: number, countryCode: CountryCode): boolean {
+    const bounds = countryCode === 'US' ? US_BOUNDS : UK_BOUNDS;
+    return lat >= bounds.minLat && lat <= bounds.maxLat && lng >= bounds.minLng && lng <= bounds.maxLng;
+}
+
+function isUsablePhonePosition(position: GeolocationPosition): boolean {
+    const accuracy = position.coords.accuracy;
+    const age = Date.now() - position.timestamp;
+    const accurateEnough = !Number.isFinite(accuracy) || accuracy <= MAX_ACCEPTED_ACCURACY_METERS;
+    const freshEnough = !Number.isFinite(age) || age <= MAX_POSITION_AGE_MS;
+    return accurateEnough && freshEnough;
+}
+
+function getAccuracyMessage(accuracy: number | null | undefined): string {
+    if (Number.isFinite(accuracy) && Number(accuracy) > MAX_ACCEPTED_ACCURACY_METERS) {
+        return 'Your phone only provided an approximate network location. Turn on precise location/GPS or choose your area manually.';
+    }
+
+    return 'Your phone location is stale or unavailable. Refresh location or choose your area manually.';
+}
+
+async function reverseGeocodeArea(lat: number, lng: number, countryCode: CountryCode): Promise<string | null> {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REVERSE_GEOCODE_TIMEOUT_MS);
+    try {
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&zoom=14`,
+            { headers: { 'Accept-Language': 'en' }, signal: controller.signal }
+        );
+        if (!res.ok) return null;
+        const data = await res.json();
+        const reverseCountry = String(data.address?.country_code || '').toUpperCase();
+        if (reverseCountry && reverseCountry !== countryCode) return null;
+
+        return normalizeAreaName(
+            data.address?.city ||
+            data.address?.town ||
+            data.address?.village ||
+            data.address?.borough ||
+            data.address?.municipality ||
+            data.address?.suburb ||
+            data.address?.city_district ||
+            data.address?.neighbourhood ||
+            data.address?.county ||
+            null
+        );
+    } catch (error) {
+        console.warn('Nominatim geocode failed:', error);
+        return null;
+    } finally {
+        window.clearTimeout(timeoutId);
+    }
+}
+
+function normalizeAreaName(value: unknown): string | null {
+    if (typeof value !== 'string') return null;
+    const trimmed = value.trim();
+    return trimmed.length > 1 ? trimmed : null;
+}
+
+function resolveUSState(city: string, fallbackCity: string | null, setDetectedState: (state: string | null) => void) {
+    import('@/lib/trades').then(({ cityToState }) => {
+        const stateCode = cityToState[city] || (fallbackCity ? cityToState[fallbackCity] : null);
+        if (!stateCode) return;
+        import('@/lib/us_states').then(({ US_STATES }) => {
+            const state = US_STATES.find(s => s.code.toLowerCase() === stateCode.toLowerCase());
+            if (state) setDetectedState(state.name);
+        });
+    });
+}
+
+function distanceMeters(a: Coords, b: Coords): number {
+    const radiusMeters = 6371008.8;
+    const toRad = (value: number) => (value * Math.PI) / 180;
+    const lat1 = toRad(a.latitude);
+    const lat2 = toRad(b.latitude);
+    const deltaLat = toRad(b.latitude - a.latitude);
+    const deltaLng = toRad(b.longitude - a.longitude);
+    const h =
+        Math.sin(deltaLat / 2) ** 2 +
+        Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLng / 2) ** 2;
+    return 2 * radiusMeters * Math.asin(Math.sqrt(h));
+}

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { devLog, devWarn } from "@/lib/devLog";
-import { Send, MapPin, Zap, Phone, RotateCcw, Search, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User } from "lucide-react";
+import { Send, MapPin, Zap, Phone, RotateCcw, Search, Mic, MicOff, Loader2, ChevronsUpDown, Navigation, User, Droplets, PlugZap, KeyRound, Flame, Home as HomeIcon, LocateFixed, BriefcaseBusiness } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
@@ -14,7 +14,7 @@ import remarkGfm from "remark-gfm";
 import { MarkdownTypewriter } from "./MarkdownTypewriter";
 import { TypewriterMessage } from "./TypewriterMessage";
 import { useChatbot } from "@/contexts/ChatbotContext";
-import { trades, cities, usCities, toRouteSlug } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import {
     Select,
@@ -66,25 +66,30 @@ function targetWithEarthCamera(target: string, detail?: EarthCompleteDetail) {
 function findTypedTrade(message: string) {
     const text = message.toLowerCase();
     return trades.find((trade) => {
-        const names = [trade.slug, trade.name, (trade as any).usName].filter(Boolean).map((value) => String(value).toLowerCase());
+        const names = [trade.slug, trade.name, trade.usName].filter(Boolean).map((value) => String(value).toLowerCase());
         return names.some((name) => text.includes(name) || text.includes(`${name}s`));
     })?.slug || null;
 }
 
-function findTypedCity(message: string) {
+function findTypedCity(message: string, countryCode: string = 'GB') {
     const text = message.toLowerCase();
-    const allCities = [...cities, ...usCities].sort((a, b) => b.length - a.length);
+    const allCities = (countryCode === 'US' ? usCities : cities).sort((a, b) => b.length - a.length);
     return allCities.find((city) => text.includes(city.toLowerCase())) || null;
 }
 
-export function EmergencyChatInterface() {
+interface EmergencyChatInterfaceProps {
+    launchMode?: 'earth' | 'direct';
+    surface?: 'hero' | 'search';
+}
+
+export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' }: EmergencyChatInterfaceProps) {
     const navigate = useNavigate();
     const { city: urlCity } = useParams();
     const { settings } = useLocalization();
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
-    const [pendingNav] = useState<string | null>(null);
+    const [pendingNav, setPendingNav] = useState<string | null>(null);
     const [isEarthLaunching, setIsEarthLaunching] = useState(false);
     const [callbackPhone, setCallbackPhone] = useState("");
     const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
@@ -111,6 +116,7 @@ export function EmergencyChatInterface() {
     const detectedTradeRef = useRef(detectedTrade);
     const detectedCityRef = useRef(detectedCity);
     const settingsRef = useRef(settings);
+    const lastSyncedGeoCityRef = useRef<string | null>(null);
 
     // Keep ALL refs in sync - updated both synchronously in handlers AND via useEffect for safety
     useEffect(() => { chatStateRef.current = chatState; }, [chatState]);
@@ -125,12 +131,6 @@ export function EmergencyChatInterface() {
             detail: { location }
         }));
     }, [detectedCity, locationRecord?.name]);
-
-    useEffect(() => {
-        return () => {
-            document.documentElement.classList.remove('hero-orbit-launching');
-        };
-    }, []);
 
     const {
         detectUserLocation,
@@ -306,7 +306,22 @@ export function EmergencyChatInterface() {
         }
     }, [detectedTrade, detectedCity, setIsRequestingLocation]);
 
-    // Sync geo location ONLY when manually requested via the Pin button
+    // Keep chat/listing intent aligned with the shared live GPS area.
+    useEffect(() => {
+        if (!geoCity || urlCity) return;
+
+        const previousGeoCity = lastSyncedGeoCityRef.current;
+        const shouldUseLiveCity = !detectedCity || detectedCity === previousGeoCity;
+        if (!shouldUseLiveCity) return;
+
+        lastSyncedGeoCityRef.current = geoCity;
+        if (detectedCity !== geoCity) {
+            setDetectedCity(geoCity);
+            setLocationRecord(null);
+        }
+    }, [geoCity, detectedCity, urlCity, setDetectedCity]);
+
+    // Manual location requests still resolve through the same shared GPS provider.
     useEffect(() => {
         if (wasLocating && !geoLoading && geoCity && !detectedCity) {
             setDetectedCity(geoCity);
@@ -399,7 +414,7 @@ export function EmergencyChatInterface() {
                 setIsTyping(false);
 
                 const inferredTrade = newState.detectedTrade || freshTrade || findTypedTrade(msgText);
-                const inferredCity = newState.detectedCity || freshCity || findTypedCity(msgText);
+            const inferredCity = newState.detectedCity || freshCity || findTypedCity(msgText, freshCountryCode);
 
                 if (inferredTrade && !newState.detectedTrade) {
                     setDetectedTrade(inferredTrade);
@@ -452,8 +467,10 @@ export function EmergencyChatInterface() {
     const [isFocused, setIsFocused] = useState(false);
 
     const helperSentences = [
-        `We’re here to help you find local emergency ${settings.tradeTerm.toLowerCase()} contacts.`,
-        "Take a moment to describe what’s happening, or search and call for immediate help.",
+        "Tell us what happened.",
+        "Choose a trade and area.",
+        "Use voice if typing is awkward.",
+        "Search and call.",
         "Get help fast",
         "Find the right trade",
         "Connect you locally",
@@ -467,7 +484,7 @@ export function EmergencyChatInterface() {
         "Works on mobile",
         "24/7 availability",
         "Public business listings",
-        "Details need confirmation",
+        "Local contacts",
         "Faster response times",
         "No booking delays",
         "Direct contact only",
@@ -522,18 +539,23 @@ export function EmergencyChatInterface() {
 
     const buildEmergencyTarget = (trade: string, city: string) => {
         const citySlug = city.toLowerCase().trim().replace(/\s+/g, '-');
-        return `/emergency-${toRouteSlug(trade)}/${citySlug}`;
+        return `/emergency-${trade}/${citySlug}`;
     };
 
     const startEarthLaunch = (target: string, locationLabel?: string | null) => {
         const location = locationLabel || detectedCity || locationRecord?.name || input;
+        if (launchMode === 'direct') {
+            navigate(target);
+            return;
+        }
+
         setIsEarthLaunching(true);
-        document.documentElement.classList.add('hero-orbit-launching');
         let completed = false;
 
         const completeHandler = (event: Event) => {
             completed = true;
             const detail = (event as CustomEvent<EarthCompleteDetail>).detail;
+            setIsEarthLaunching(false);
             navigate(targetWithEarthCamera(target, detail));
         };
 
@@ -544,6 +566,7 @@ export function EmergencyChatInterface() {
         window.setTimeout(() => {
             if (completed) return;
             window.removeEventListener('emergency-earth:complete', completeHandler);
+            setIsEarthLaunching(false);
             navigate(target);
         }, 14000);
     };
@@ -559,8 +582,8 @@ export function EmergencyChatInterface() {
                 const hasSuburb = suburb && suburb.trim().length > 0;
                 // US Redirection Fix: Never use /us prefix.
                 newPath = hasSuburb
-                    ? `/${state}/${metro}/${city}/${suburb}/emergency-${toRouteSlug(detectedTrade)}`
-                    : `/${state}/${metro}/${city}/emergency-${toRouteSlug(detectedTrade)}`;
+                    ? `/${state}/${metro}/${city}/${suburb}/emergency-${detectedTrade}`
+                    : `/${state}/${metro}/${city}/emergency-${detectedTrade}`;
             } else {
                 newPath = buildEmergencyTarget(detectedTrade, detectedCity || '');
             }
@@ -579,7 +602,7 @@ export function EmergencyChatInterface() {
                     value={t.slug}
                     className="cursor-pointer hover:bg-gray-100 text-black"
                 >
-                    {settings.countryCode === 'US' ? (t as any).usName : t.name}
+                    {settings.countryCode === 'US' ? t.usName : t.name}
                 </SelectItem>
             ))}
         </SelectContent>
@@ -594,6 +617,7 @@ export function EmergencyChatInterface() {
         >
             <SelectTrigger
                 data-tour="tour-trade-button"
+                aria-label="Choose trade"
                 className={`h-12 md:h-11 w-full md:max-w-none md:w-full rounded-full border border-orange-200 dark:border-gold/20 md:border-orange-300 dark:md:border-gold/50 transition-all flex items-center justify-center md:justify-between px-0 md:px-3 shadow-[0_0_30px_rgba(255,165,0,0.1)] md:shadow-sm focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex ${detectedTrade ? 'bg-orange-50 dark:bg-white text-orange-700 dark:text-[#9B7D4F] hover:bg-orange-100 dark:hover:bg-gold/5' : 'bg-white text-[#9B7D4F]/70 hover:bg-gold/5'}`}
             >
                 <div className="flex items-center justify-center md:justify-start md:gap-2 w-full md:w-auto">
@@ -601,7 +625,7 @@ export function EmergencyChatInterface() {
                     <div className="hidden md:block min-w-0 overflow-hidden">
                         <SelectValue placeholder="Trade">
                             <span className="text-sm font-medium truncate block max-w-[180px]">
-                                {detectedTrade ? (settings.countryCode === 'US' ? (trades.find(t => t.slug === detectedTrade) as any)?.usName ?? "Trade" : trades.find(t => t.slug === detectedTrade)?.name ?? "Trade") : "Trade"}
+                                {detectedTrade ? (settings.countryCode === 'US' ? trades.find(t => t.slug === detectedTrade)?.usName ?? "Trade" : trades.find(t => t.slug === detectedTrade)?.name ?? "Trade") : "Trade"}
                             </span>
                         </SelectValue>
                     </div>
@@ -717,6 +741,7 @@ export function EmergencyChatInterface() {
             disabled={isActionDisabled}
             data-tour="tour-locate-button"
             size="icon"
+            aria-label={isEarthLaunching ? "Launching location view" : isRequestingLocation ? "Use my location" : (isFlowComplete ? "Find help now" : "Send message")}
             className={`h-11 w-11 shrink-0 rounded-full transition-all duration-300 shadow-lg ${shouldFlash
                 ? 'animate-glow-bottom ring-4 ring-yellow-400/80'
                 : hasUserIntent
@@ -774,7 +799,61 @@ export function EmergencyChatInterface() {
         setIsRequestingLocation(false);
     };
 
-    if (false) {
+    const compactTextButtonClass = "home-search-control-text !h-10 w-full justify-center rounded-xl border-0 px-3 text-[0.72rem] font-semibold leading-none transition sm:text-xs";
+    const compactIconButtonClass = "home-search-control-icon h-9 w-9 rounded-xl border-0 p-0 transition";
+
+    const compactTradeSelector = (
+        <Select
+            value={detectedTrade || ""}
+            onValueChange={setDetectedTrade}
+        >
+            <SelectTrigger
+                data-tour="tour-trade-button"
+                aria-label="Choose trade"
+                className={compactTextButtonClass}
+            >
+                <div className="flex min-w-0 items-center gap-2">
+                    <BriefcaseBusiness className="h-4 w-4 shrink-0 text-gold" />
+                    <span className="block truncate">Trade</span>
+                </div>
+            </SelectTrigger>
+            {tradeSelectorContent}
+        </Select>
+    );
+
+    const compactLocationSelector = (
+        <div data-tour="tour-location-button" className="min-w-0">
+            {settings.countryCode === 'US' ? (
+                <HierarchicalLocationSelector
+                    className="w-full"
+                    buttonClassName={compactTextButtonClass}
+                    placeholder="State"
+                    cityPlaceholder="City / Area"
+                    staticStateLabel="State"
+                    staticCityLabel="City / Area"
+                    showLabelOnMobile
+                    showCityPlaceholder
+                    onStateSelected={(state) => setHasStateSelected(!!state)}
+                    onLocationSelect={(record) => {
+                        devLog("Loc Selected", record);
+                        setDetectedCity(record.name);
+                        setLocationRecord(record);
+                    }}
+                />
+            ) : (
+                <UKCityCombobox
+                    className={compactTextButtonClass}
+                    placeholder="Area"
+                    staticLabel="Area"
+                    value={detectedCity || ""}
+                    onValueChange={setDetectedCity}
+                    showLabelOnMobile
+                />
+            )}
+        </div>
+    );
+
+    if (pendingNav) {
         return (
             <div className="w-full max-w-4xl mx-auto">
                 <div className="rounded-3xl border border-emerald-500/30 bg-emerald-950/40 backdrop-blur-sm p-8 text-center">
@@ -812,8 +891,195 @@ export function EmergencyChatInterface() {
         );
     }
 
+    if (surface === 'search') {
+        return (
+            <div className="w-full">
+                <div className="relative mx-auto w-full max-w-[60rem]">
+                    <AnimatePresence mode="popLayout">
+                        {chatState.history.length > 0 && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                                className="mb-4 max-h-[34svh] overflow-y-auto rounded-2xl bg-black/20 px-4 py-3 text-sm text-slate-100 ring-1 ring-white/8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                                ref={chatContainerRef}
+                                onScroll={handleScroll}
+                            >
+                                <div className="space-y-3">
+                                    {chatState.history.map((msg, idx) => {
+                                        const isLastMessage = idx === chatState.history.length - 1;
+                                        if (msg.role === 'assistant') {
+                                            return (
+                                                <div key={msg.id} className="flex gap-3">
+                                                    <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/12 ring-1 ring-gold/25">
+                                                        <img src="/et-logo-v3.webp" alt="" className="h-4 w-4 object-contain" loading="lazy" />
+                                                    </div>
+                                                    <div className="min-w-0 flex-1 text-slate-100">
+                                                        {isLastMessage ? (
+                                                            <MarkdownTypewriter
+                                                                content={msg.content}
+                                                                speed={4}
+                                                                interval={12}
+                                                                onTick={() => {
+                                                                    if (isAtBottom) scrollToBottom('auto');
+                                                                }}
+                                                                onComplete={() => {
+                                                                    if (isAtBottom) scrollToBottom('smooth');
+                                                                }}
+                                                                className="prose prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold"
+                                                            />
+                                                        ) : (
+                                                            <div className="prose prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold">
+                                                                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                                                                    {msg.content}
+                                                                </ReactMarkdown>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+
+                                        return (
+                                            <div key={msg.id} className="flex justify-end">
+                                                <div className="max-w-[88%] rounded-2xl bg-gold/12 px-3 py-2 text-sm font-medium text-amber-50 ring-1 ring-gold/20">
+                                                    {msg.content}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    <div className="home-search-chatbox group/searchbox relative overflow-hidden rounded-[1.45rem] backdrop-blur-2xl transition duration-300">
+                        <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-slate-950/10 to-transparent dark:via-white/18" />
+                        <div className="pointer-events-none absolute -right-16 -top-24 h-44 w-44 rounded-full bg-gold/10 blur-3xl dark:bg-gold/8" />
+                        <div className="pointer-events-none absolute -left-20 bottom-0 h-36 w-44 rounded-full bg-sky-500/8 blur-3xl dark:bg-sky-500/5" />
+
+                        {chatState.history.length > 0 && (
+                            <button
+                                type="button"
+                                onClick={resetChat}
+                                className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.055] text-slate-400 ring-1 ring-white/10 transition hover:bg-white/[0.09] hover:text-white"
+                                title="Reset chat"
+                            >
+                                <RotateCcw className="h-3.5 w-3.5" />
+                            </button>
+                        )}
+
+                        <div className="relative flex min-h-[9.5rem] flex-col px-4 pb-3 pt-4 sm:min-h-[10rem] sm:px-5 sm:pb-4">
+                            <div className="min-h-[5.25rem] flex-1">
+                                {isRecording ? (
+                                    <div className="rounded-2xl bg-red-500/5 px-2 py-3">
+                                        <WhisperWaveform
+                                            audioData={audioData}
+                                            analyserRef={whisperAnalyserRef}
+                                            isRecording={isRecording}
+                                            isProcessing={isTranscriptionProcessing}
+                                            transcript={transcription}
+                                            onConfirm={() => {
+                                                stopRecording();
+                                                stopVolumeMonitor();
+                                            }}
+                                            onCancel={() => {
+                                                stopRecording();
+                                                stopVolumeMonitor();
+                                                setAudioData(new Array(120).fill(0));
+                                            }}
+                                        />
+                                    </div>
+                                ) : (
+                                    <textarea
+                                        ref={inputRef}
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleKeyDown(e);
+                                            }
+                                        }}
+                                        onFocus={() => setIsFocused(true)}
+                                        onBlur={() => setIsFocused(false)}
+                                        placeholder={chatState.history.length === 0 ? (placeholderText || "What emergency do you need help with?") : "Type your reply..."}
+                                        data-tour="tour-chat-input"
+                                        className="h-full min-h-[5rem] w-full resize-none bg-transparent text-[15px] font-light leading-relaxed text-slate-950 outline-none placeholder:text-slate-500 focus:ring-0 sm:text-base dark:text-slate-50 dark:placeholder:text-slate-400/88"
+                                    />
+                                )}
+                            </div>
+
+                            <div className="mt-2 border-t border-slate-950/[0.08] pt-3 dark:!border-white/[0.08]">
+                                <div className="relative flex items-center justify-center">
+                                    <Button
+                                        type="button"
+                                        onClick={handleMicToggle}
+                                        disabled={isTranscriptionProcessing || isTyping}
+                                        data-tour="tour-mic-button"
+                                        className={cn(
+                                            compactIconButtonClass,
+                                            "absolute left-0 top-1/2 -translate-y-1/2",
+                                            isRecording ? "bg-red-500/18 text-red-700 ring-red-400/40 dark:text-red-100" : ""
+                                        )}
+                                        title={isRecording ? "Stop Recording" : "Voice Search"}
+                                        aria-label={isRecording ? "Stop recording" : "Voice search"}
+                                    >
+                                        {isTranscriptionProcessing ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4 text-gold" />}
+                                    </Button>
+
+                                    <div className="grid w-[calc(100%-5.5rem)] max-w-[32rem] grid-cols-3 gap-2">
+                                        <div className="min-w-0">
+                                            {compactTradeSelector}
+                                        </div>
+                                        <div className="min-w-0">
+                                            {compactLocationSelector}
+                                        </div>
+                                        <Button
+                                            type="button"
+                                            onClick={() => {
+                                                detectUserLocation();
+                                                setIsRequestingLocation(false);
+                                            }}
+                                            disabled={geoLoading}
+                                            data-tour="tour-locate-button"
+                                            className={compactTextButtonClass}
+                                            title="Locate Me"
+                                        >
+                                            {geoLoading ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : <LocateFixed className="h-4 w-4 text-gold" />}
+                                            <span className="ml-2 truncate">Locate</span>
+                                        </Button>
+                                    </div>
+
+                                    <Button
+                                        type="button"
+                                        onClick={handleActionClick}
+                                        disabled={isActionDisabled}
+                                        className="home-search-send absolute right-0 top-1/2 h-9 w-9 -translate-y-1/2 rounded-xl border-0 bg-gold p-0 text-black shadow-[0_0_24px_rgba(212,175,55,0.2)] transition hover:bg-gold-light disabled:shadow-none"
+                                        title={isFlowComplete ? "Find Help Now" : "Send Message"}
+                                        aria-label={isFlowComplete ? "Find help now" : "Send message"}
+                                    >
+                                        {isEarthLaunching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {isTyping && !chatState.history.length && (
+                        <div className="mt-3 flex justify-center gap-1.5" role="status" aria-live="polite">
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gold" />
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gold delay-150" />
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gold delay-300" />
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className={cn("w-full max-w-4xl mx-auto hero-chat-orbit-stage", isEarthLaunching && "hero-chat-orbit-launch")}>
+        <div className="w-full max-w-4xl mx-auto">
 
             <div className="relative rounded-3xl bg-transparent overflow-visible">
                 {chatState.history.length > 0 && (
@@ -929,7 +1195,7 @@ export function EmergencyChatInterface() {
 
                 {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
                 <div className="hero-chat-shell w-full bg-transparent flex justify-center pt-2 pb-4 relative z-30">
-                    <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
+                    <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-[#08121d]/88 md:bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
@@ -1017,7 +1283,7 @@ export function EmergencyChatInterface() {
                                         onBlur={() => setIsFocused(false)}
                                         placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
                                         data-tour="tour-chat-input"
-                                        className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-black dark:text-white placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
+                                        className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-white md:text-black dark:text-white placeholder:text-white/80 md:placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
                                         style={{ minHeight: '80px' }}
                                     />
                                 </>
@@ -1025,9 +1291,8 @@ export function EmergencyChatInterface() {
                         </div>
 
                         {/* CONTROLS ROW - Always pinned at bottom, never moves */}
-                        <div className={cn("w-full flex-shrink-0 bg-transparent", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden" : "block")}>
-                            {/* Desktop Controls - STRICT GRID */}
-                            <div className="hidden md:grid px-4 pb-4 pt-2 bg-transparent w-full items-center" style={{ gridTemplateColumns: '1fr 1fr 44px 44px', gap: '8px' }}>
+                        <div className={cn("w-full flex-shrink-0 bg-transparent", USE_SVG_BUTTONS_ON_DESKTOP ? "block md:hidden" : "block")}>
+                            <div className="grid px-3 md:px-4 pb-4 pt-2 bg-transparent w-full items-center" style={{ gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr) 44px 44px', gap: '8px' }}>
                                 <div className="min-w-0 overflow-hidden">
                                     {tradeSelector}
                                 </div>
@@ -1049,7 +1314,7 @@ export function EmergencyChatInterface() {
             </div>
 
             {/* Mobile Controls - SVG Buttons / Desktop Optimized Toggle */}
-            <div className={cn("hero-action-controls-reveal w-full mt-0 md:-mt-4 mb-4 md:mb-8 px-1 overflow-visible relative", USE_SVG_BUTTONS_ON_DESKTOP ? "block" : "md:hidden")}>
+            <div className={cn("hero-action-controls-reveal w-full mt-2 md:mt-3 mb-2 md:mb-4 px-1 overflow-visible relative", USE_SVG_BUTTONS_ON_DESKTOP ? "hidden md:block" : "hidden")}>
                 <div className={cn("flex flex-row items-center justify-center w-full overflow-visible gap-1 mx-auto", USE_SVG_BUTTONS_ON_DESKTOP ? "md:gap-8 md:max-w-4xl" : "max-w-[420px]")}>
                     <div className="relative flex flex-col items-center flex-shrink-0">
                         <div className="hidden">{micButton}</div>
@@ -1064,7 +1329,9 @@ export function EmergencyChatInterface() {
                         <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Voice</span>
                     </div>
                     <div className="relative flex flex-col items-center flex-shrink-0">
-                        <div className="hidden">{tradeSelector}</div>
+                        <div className="absolute inset-0 z-20 opacity-0">
+                            {tradeSelector}
+                        </div>
                         <RedSVGButton
                             index={1}
                             onClick={() => {
@@ -1075,8 +1342,10 @@ export function EmergencyChatInterface() {
                         />
                         <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Trades</span>
                     </div>
-                    <div className="flex flex-col items-center flex-shrink-0">
-                        <div className="hidden">{locationSelector}</div>
+                    <div className="relative flex flex-col items-center flex-shrink-0">
+                        <div className="absolute inset-0 z-20 opacity-0">
+                            {locationSelector}
+                        </div>
                             <div className="relative flex flex-col items-center">
                                 <GreenSVGButton
                                     index={2}
@@ -1090,6 +1359,7 @@ export function EmergencyChatInterface() {
                                         }
                                     }}
                                     dataTour={settings.countryCode === 'US' ? 'tour-state-button' : 'tour-location-button'}
+                                    ariaLabel={settings.countryCode === 'US' ? 'Choose state' : 'Choose location'}
                                 />
                                 <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">
                                     {settings.countryCode === 'US' ? 'State' : 'Location'}
@@ -1118,11 +1388,9 @@ export function EmergencyChatInterface() {
                             disabled={isActionDisabled}
                             isPulsing={shouldFlash}
                             dataTour="tour-locate-button"
-                            ariaLabel={isFlowComplete ? "Call an Expert" : "Confirm Action"}
+                            ariaLabel={isEarthLaunching ? "Launching location view" : isRequestingLocation ? "Use my location" : (isFlowComplete ? "Find help now" : "Send message")}
                         />
-                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">
-                            {isFlowComplete ? 'Call Expert' : 'Send'}
-                        </span>
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full text-[10px] md:text-[11px] font-semibold uppercase tracking-wider text-gold/70 select-none whitespace-nowrap">Send</span>
                     </div>
                 </div>
             </div>

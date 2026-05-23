@@ -10,12 +10,13 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { isFavorite } from "@/lib/auth";
 import { BusinessCard } from "@/components/BusinessCard";
 import { BusinessCardSkeleton } from "@/components/BusinessCardSkeleton";
+import { SearchFilterBar } from "@/components/SearchFilterBar";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Squares from "@/components/ui/Squares";
-import { generateTradePageData, cities, usCities, cityToState, getCitiesForState, trades, commonProblems } from "@/lib/trades";
+import { generateTradePageData, cityToState, getCitiesForState, trades, commonProblems } from "@/lib/trades";
 import { US_STATES } from "@/lib/us_states";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
@@ -24,7 +25,7 @@ import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
 import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
-import { Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2 } from "lucide-react";
+import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2, ShieldCheck, UserCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
@@ -51,7 +52,7 @@ import {
 } from "@/components/ui/pagination";
 
 export default function TradeCityPage() {
-  const { countryCode, tradePath, city, state, area, metro, suburb } = useParams<{
+  const { tradePath, city, state, area, metro, suburb } = useParams<{
     countryCode: string;
     tradePath: string;
     city: string;
@@ -67,6 +68,8 @@ export default function TradeCityPage() {
   const ITEMS_PER_PAGE = 9;
 
   const location = useLocation();
+  const { settings, userCoords, detectedCity: liveDetectedCity } = useLocalization();
+  const siteCountry = settings.countryCode;
 
   // Resolution Logic for Hierarchy
   const rawTargetLocation = suburb || area || city || metro || state;
@@ -83,17 +86,19 @@ export default function TradeCityPage() {
   const earthBearing = earthBearingParam ? Number(earthBearingParam) : undefined;
 
   const resolvedLocation = useMemo(() => {
+    if (!rawTargetLocation && liveDetectedCity) {
+      return liveDetectedCity;
+    }
     if (!rawTargetLocation && urlLat && urlLng) {
-      const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB'));
+      const nearest = findNearestCity(parseFloat(urlLat), parseFloat(urlLng), siteCountry);
       if (nearest) {
         return nearest.city;
       }
     }
     return rawTargetLocation;
-  }, [rawTargetLocation, urlLat, urlLng, countryCode, location.pathname]);
+  }, [rawTargetLocation, liveDetectedCity, urlLat, urlLng, siteCountry]);
 
-  // CRITICAL FIX: Default to 'London' (or National) if no city provided to prevent crash
-  let validCity = resolvedLocation ? decodeURIComponent(resolvedLocation) : (countryCode === 'US' ? 'New York' : 'London');
+  let validCity = resolvedLocation ? decodeURIComponent(resolvedLocation) : (siteCountry === 'US' ? 'United States' : 'United Kingdom');
 
   // FIX: US Routing Ambiguity
   // If tradePath matches a known US state (e.g. /us/texas/dallas matched as :tradePath/:city),
@@ -123,7 +128,7 @@ export default function TradeCityPage() {
   // Handle /us/ca/los-angeles legacy ambiguity if needed, but new router prevents most.
   // We keep it simple: Trust params.
 
-  const country = countryCode?.toUpperCase() || (location.pathname.startsWith('/us') ? 'US' : 'GB');
+  const country = siteCountry;
 
   // Pass state and metro context to generator for strict lookup
   const pageData = generateTradePageData(
@@ -134,57 +139,12 @@ export default function TradeCityPage() {
     metro
   );
 
-  // Normalize cities for check (handles hyphens from URL)
-  const normalizedCitiesGB = cities.map(c => c.toLowerCase().replace(/\s+/g, '-'));
-  // We can't just check usCities array anymore because it doesn't contain suburbs
-  // We rely on generateTradePageData to have validated it, or we need a robust check.
-  // Since pageData is already generated above using generateTradePageData(..., validCity, ...),
-  // we can check if pageData was successfully returned and what country it thinks it is.
-
-  // However, we need to know if it's supposed to be US or GB for the Redirect logic below.
-  // If pageData exists, we can trust it?
-
-  // Let's make a more robust check using our Knowledge Base (or us_cities.json implicitly available via imports in trades.ts but not here directly efficiently)
-  // Actually, we can use the `pageData` result. generateTradePageData returns null if not found.
-  // But wait, generateTradePageData might return data even if not found if we passed 'US' as countryCode (it falls back to input name).
-
-  // Let's assume if the route is /us/..., we are looking for US.
-  // The redirect logic below deals with "Region Mismatch".
-
-  const isCityUS = countryCode === 'us' || (pageData && pageData.city && usCities.includes(pageData.city)) || false;
-  // This is imperfect. Better:
-
-  // If we are in /us route, we assume US.
-  // If we are in /... (GB) route, we assume GB.
-  // The Mismatch logic tries to catch: user goes to /london (GB) but london is US? No.
-  // It catches: user goes to /us/london (if london is GB only) -> Redirect to /london.
-
-  // Ideally we use `getLocationIndex` but that's overkill to import here if we can avoid it.
-  // Let's rely on simple heuristic + explicit countryCode param.
-
-  // Region Mismatch / Redirects
-  // We trust the URL structure for Country determination, but also handle the US-specific root domain.
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const port = typeof window !== 'undefined' ? window.location.port : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
+  // Region is locked by the active site build/domain; URL shape and GPS never switch sites.
+  const isUSDomain = siteCountry === 'US';
 
   const actualCountry = useMemo(() => {
-    const hostname = window.location.hostname;
-    const port = window.location.port;
-    if (hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001')) return 'US';
-    if (hostname.includes('emergencytradesmen.net') || port === '3000' || (hostname === 'localhost' && port === '3000')) return 'GB';
-
-    // Fallback detection
-    if (
-      location.pathname.startsWith('/us/') ||
-      location.pathname.startsWith('/us') ||
-      countryCode?.toLowerCase() === 'us' ||
-      pageData?.countryCode === 'US' ||
-      (validCity && usCities.includes(validCity))
-    ) return 'US';
-
-    return 'GB';
-  }, [countryCode, pageData?.countryCode, validCity, usCities, location.pathname]);
+    return siteCountry;
+  }, [siteCountry]);
 
   // NEW: State Page Detection
   const isStatePage = useMemo(() => {
@@ -203,7 +163,7 @@ export default function TradeCityPage() {
   const tradeDisplayName = (actualCountry === 'US' && 'usName' in tradeInfo) ? (tradeInfo as any).usName : tradeInfo.name;
 
   // Apply title case to city name and ensure it's not just a slug
-  const rawCityName = pageData?.city || validCity || (countryCode?.toUpperCase() === 'US' ? 'United States' : 'United Kingdom');
+  const rawCityName = pageData?.city || validCity || (siteCountry === 'US' ? 'United States' : 'United Kingdom');
   const cityName = toTitleCase(rawCityName.replace(/-/g, ' '));
   const cityCoords = cityCoordinates[cityName] || usCityCoordinates[cityName];
   const earthBackdropLat = urlLat ? Number(urlLat) : cityCoords?.lat;
@@ -231,7 +191,6 @@ export default function TradeCityPage() {
   // Prefer image from trade config (trades.ts) if available, otherwise fallback to local map
   const heroImage = (pageData?.problem as any)?.image || (tradeInfo as any).image || tradeHeroImages[tradeInfo.slug] || tradeHeroImages.default;
 
-  const { settings, userCoords } = useLocalization();
   const { theme } = useSimpleTheme();
 
   const effectiveCoords = useMemo(() => {
@@ -261,7 +220,7 @@ export default function TradeCityPage() {
       try {
         const realBusinesses = await fetchBusinesses(
           tradeInfo.slug,
-          cityName,
+          validCity,
           actualCountry,
           effectiveCoords || undefined,
           isStatePage ? effectiveState : undefined
@@ -277,7 +236,7 @@ export default function TradeCityPage() {
     }
 
     loadBusinesses();
-  }, [tradeInfo.slug, cityName, actualCountry]);
+  }, [tradeInfo.slug, validCity, cityName, actualCountry, effectiveCoords, isStatePage, effectiveState]);
 
   // Separate effect: Re-sort existing businesses when userCoords becomes available
   // This avoids a full refetch and prevents the "empty flash" on mobile
@@ -336,7 +295,7 @@ export default function TradeCityPage() {
   }, []);
 
   // Apply filters and sorting
-  const { filters, filteredBusinesses, totalCount, resultsCount } =
+  const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
 
   // Pagination Logic — sort favorites to top first
@@ -373,7 +332,7 @@ export default function TradeCityPage() {
     return <Navigate to="/" replace />;
   }
 
-  // Extract public review text from the listings
+  // Extract public review snippets from the listings
   const realReviews = businesses
     .filter(b => b.featuredReview && b.rating >= 4.0)
     .slice(0, 8)
@@ -394,7 +353,12 @@ export default function TradeCityPage() {
 
   const reviewStats = calculateReviewStats(realReviews);
 
-  const postcode = getPostcodeForCity(cityName);
+  let postcode = "";
+  try {
+    postcode = getPostcodeForCity(cityName);
+  } catch (error) {
+    console.warn("Postcode lookup failed; continuing without schema postcode.", error);
+  }
 
   // Schema.org Type Mapping
   const tradeSchemaTypeMap: Record<string, string> = {
@@ -417,14 +381,14 @@ export default function TradeCityPage() {
     "@type": schemaType,
     "@id": `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}#localbusiness`,
     name: `Emergency ${tradeDisplayName} ${cityName}`,
-    description: `24/7 emergency ${tradeDisplayName.toLowerCase()} listings in ${cityName}. Check business details directly before booking.`,
+    description: `24/7 emergency ${tradeDisplayName.toLowerCase()} public listings in ${cityName}. Confirm availability, credentials, insurance, and pricing directly.`,
     image: heroImage,
     url: `${baseDomain}/emergency-${tradeInfo.slug}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
     "priceRange": actualCountry === 'US' ? "$75 - $150" : "£75 - £150",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": cityName,
-      "addressCountry": countryCode?.toUpperCase() || "GB",
+      "addressCountry": actualCountry,
       ...(postcode ? { "postalCode": postcode } : {}),
       ...(effectiveState ? { "addressRegion": effectiveState } : {})
     },
@@ -492,7 +456,7 @@ export default function TradeCityPage() {
         "name": `Emergency ${tradeDisplayName} Booking`
       }
     }
-  }), [tradeInfo.slug, cityName, tradeDisplayName, heroImage, countryCode, postcode, actualCountry, reviewStats.averageRating, reviewStats.totalReviews, JSON.stringify(realReviews), JSON.stringify(serviceAreas), JSON.stringify(services)]);
+  }), [tradeInfo.slug, cityName, tradeDisplayName, heroImage, postcode, actualCountry, reviewStats.averageRating, reviewStats.totalReviews, JSON.stringify(realReviews), JSON.stringify(serviceAreas), JSON.stringify(services)]);
 
   const faqSchema = useMemo(() => ({
     "@context": "https://schema.org",
@@ -540,9 +504,6 @@ export default function TradeCityPage() {
   }), [baseDomain, tradeInfo.slug, cityName, tradeDisplayName, citySlug, isUS, stateCode]);
 
   // FIXED: Ensure coordinates are resolved correctly for map centering
-  const isCityInUS = usCities.includes(cityName);
-  const countryForCoords = isUS || isCityInUS ? 'US' : 'GB';
-
   const canonicalPath = isUS
     ? (isUSDomain ? `/${effectiveTradePath}/${citySlug}` : `/us/${effectiveTradePath}/${citySlug}`)
     : `/${effectiveTradePath}/${citySlug}`;
@@ -560,12 +521,12 @@ export default function TradeCityPage() {
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
   const seoDescription = isStatePage
-    ? `Need an emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local contractor listings across the state ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Call now for fast help.`
+    ? `Need an emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local listings` : 'Public local listings'} across the state. ${averageResponseTime} avg response. Open 24 hours. Call now for fast help.`
     : pageData?.problem
-      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Get connected with a public local listing now.`
+      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Find local emergency contacts now.`
       : isUS
-        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local contractor listings ✓ ${averageResponseTime} avg response ✓ Open 24 hours. Get connected now.`
-        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ✓ ${listingCount > 0 ? listingCount : 'Public'} local tradesmen listings ✓ ${averageResponseTime} response ✓ 24/7 availability. Call now for fast help.`;
+        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ${listingCount > 0 ? `${listingCount} public local contractors` : 'Public local contractor listings'}. ${averageResponseTime} avg response. Open 24 hours. Get connected now.`
+        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local tradesmen listings` : 'Public local tradesmen listings'}. ${averageResponseTime} response. 24/7 availability. Call now for fast help.`;
 
   // --- Expanded Long-Tail Keywords Array ---
   const seoKeywords = pageData?.problem
@@ -584,7 +545,8 @@ export default function TradeCityPage() {
       `24 hour ${tradeName} ${cityName}`,
       `${tradeName} open now ${cityName}`,
       `best ${tradeName} near me`,
-            // Emergency variants
+      `local ${tradeName} contacts ${cityName}`,
+      // Emergency variants
       `emergency ${tradeName} near me open now`,
       `${tradeName} emergency call out ${cityName}`,
       // Market-specific - DENSITY BOOST as requested
@@ -685,20 +647,33 @@ export default function TradeCityPage() {
 
               <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-foreground/80 font-light animate-fade-up-delay-1">
                 Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} are ready to respond right now.
-                Public listing details may need confirmation. Check availability, pricing, insurance, and qualifications directly before booking.
+                With an average arrival time of {averageResponseTime}, you won't be waiting long. These are public local listings, so confirm availability, credentials, insurance, and pricing directly before booking.
               </p>
 
-              <div className="flex items-center justify-center animate-fade-up-delay-2">
-                <div className="flex items-center gap-3 text-foreground/70 px-6 py-3 border border-border/50 rounded-sm bg-secondary/30 backdrop-blur-sm">
-                  <Clock className="w-5 h-5 text-gold" />
-                  <span className="uppercase tracking-wider text-sm font-bold">Response in {averageResponseTime}</span>
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up-delay-2">
+                <Button
+                  variant="hero"
+                  onClick={() => {
+                    document.getElementById('listings')?.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }}
+                  className="flex items-center gap-3"
+                >
+                  <Phone className="w-5 h-5" />
+                  Find a Pro
+                </Button>
+                <div className="flex items-center gap-3 text-gold border border-gold/30 rounded-full bg-gold/5 px-6 py-3 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                  <Clock className="w-5 h-5 text-gold animate-pulse" />
+                  <span className="uppercase tracking-wider text-sm font-bold font-mono">Response in {averageResponseTime}</span>
                 </div>
               </div>
           </div>
         </section>
 
         {/* Listings Section */}
-        <section id="listings" className="container-wide pb-16 relative">
+        <section className="container-wide py-16 relative">
           {/* Background Grid */}
           {theme === 'dark' && (
             <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
@@ -713,12 +688,21 @@ export default function TradeCityPage() {
             </div>
           )}
 
+          <div className="mb-8 relative z-10">
+            <SearchFilterBar
+              filters={filters}
+              onFiltersChange={setFilters}
+              totalCount={totalCount}
+              resultsCount={resultsCount}
+            />
+          </div>
+
           <div className="mb-6 relative z-10">
             <h2 className="text-2xl font-bold text-foreground">
               Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </h2>
             <p className="text-muted-foreground">
-              Found {totalCount} available experts nearby {resultsCount > 50 && `(Showing top 50)`}
+              Found {totalCount} available experts nearby {resultsCount > ITEMS_PER_PAGE && `(Showing ${ITEMS_PER_PAGE} per page)`}
             </p>
           </div>
 
@@ -744,7 +728,7 @@ export default function TradeCityPage() {
                     </div>
                     <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
                     <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                      We're expanding public listings for {tradeInfo.name.toLowerCase()} contacts in this area. Claim or add your business details to get local calls.
+                      We're expanding our public {tradeInfo.name.toLowerCase()} listings in this area. Claim or add your business here to get local calls.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link
@@ -762,7 +746,7 @@ export default function TradeCityPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                  <div id="listings" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
                     {currentBusinesses.map((business, index) => {
                       return (
                         <BusinessCard
@@ -833,18 +817,65 @@ export default function TradeCityPage() {
 
         {/* TL;DR Answer Block — optimized for AI Overviews / featured snippets */}
         <section className="container-wide pt-10" aria-labelledby="quick-answer-heading">
-          <div className="max-w-3xl mx-auto bg-secondary/40 border border-gold/30 rounded-xl p-6 md:p-7">
-            <h2 id="quick-answer-heading" className="text-sm font-bold uppercase tracking-wider text-gold mb-3">
+          <div className="max-w-3xl mx-auto bg-secondary/40 backdrop-blur-md border border-gold/30 rounded-2xl p-6 md:p-8 shadow-[0_0_30px_rgba(212,175,55,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] hover:border-gold/50">
+            <h2 id="quick-answer-heading" className="text-sm font-bold uppercase tracking-wider text-gold mb-4">
               Quick Answer
             </h2>
+            
+            {/* Visual 4-Column Key Metrics Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 border-b border-border/40 pb-6 text-left">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 shrink-0 shadow-lg shadow-gold/5">
+                  <Clock className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Arrival Speed</p>
+                  <p className="text-sm font-semibold text-foreground">{averageResponseTime}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shrink-0 shadow-lg shadow-emerald-500/5">
+                  <UserCheck className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Active Listings</p>
+                  <p className="text-sm font-semibold text-foreground">{listingCount} Verified Pro{listingCount === 1 ? '' : 's'}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 shrink-0 shadow-lg shadow-gold/5">
+                  <ShieldCheck className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Vetted Status</p>
+                  <p className="text-sm font-semibold text-foreground">100% Approved</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 shrink-0 shadow-lg shadow-red-500/5">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  </span>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Live Coverage</p>
+                  <p className="text-sm font-semibold text-foreground">24/7 Dispatch</p>
+                </div>
+              </div>
+            </div>
+
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
               {pageData?.problem ? (
                 <>
-                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? ' is' : 's are'} available 24/7` : `public local ${tradeDisplayName.toLowerCase()}s are available 24/7`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? ' is' : 's are'} available` : `Public local ${tradeDisplayName.toLowerCase()} listings are available`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               ) : (
                 <>
-                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()}${listingCount === 1 ? '' : 's'}` : `public local ${tradeDisplayName.toLowerCase()}s`} {listingCount === 1 ? 'is' : 'are'} available 24/7 with an average response time of <strong>{averageResponseTime}</strong>. Call directly — no forms, no waiting.
+                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? '' : 's'}` : `Public local ${tradeDisplayName.toLowerCase()} listings`} {listingCount === 1 ? 'is' : 'are'} available with an average response time of <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               )}
             </p>
@@ -928,10 +959,12 @@ export default function TradeCityPage() {
           </div>
         </section>
 
-        {/* Ad Slot 1: Below Services */}
+        {/* Ad Slot 1: Between Services and Listings */}
         <div className="container-wide py-4">
           <AdSlot slot="7143278448" format="infeed" />
         </div>
+
+
 
         {/* CTA Banner */}
         <section className="container-wide py-6">
@@ -1182,24 +1215,13 @@ export default function TradeCityPage() {
             </div>
           </section>
         )}
-
-        <section className="container-wide py-12 border-t border-border/30">
-          <div className="flex justify-center">
-            <Button asChild variant="hero" className="flex items-center gap-3">
-              <a href="#listings">
-                Find a Pro
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </Button>
-          </div>
-        </section>
       </main>
 
       <Footer countryCode={actualCountry} />
 
       {/* Floating CTA for Mobile Conversion */}
       <FloatingEmergencyCTA
-        business={sortedBusinesses[0]}
+        business={filteredBusinesses.find(b => b.is_premium) || filteredBusinesses[0]}
         trade={tradeInfo.name}
         city={cityName}
         countryCode={actualCountry}
@@ -1209,7 +1231,6 @@ export default function TradeCityPage() {
         businessName={`${tradeInfo.name} in ${cityName}`}
         businessId={`generic-${cityName}-${tradeInfo.slug}`}
       />
-
     </>
   );
 }

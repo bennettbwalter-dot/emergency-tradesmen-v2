@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Phone, Clock, Star, FileText } from "lucide-react";
+import { Phone, Clock, Star, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fetchBusinesses } from "@/lib/businessService";
 import type { Business } from "@/lib/businesses";
 import { Link } from "react-router-dom";
+import { useLocalization } from "@/contexts/LocalizationContext";
 
 interface CTABannerProps {
   trade: string;
@@ -12,18 +13,20 @@ interface CTABannerProps {
 
 export function CTABanner({ trade, city }: CTABannerProps) {
   const [spotlightBusiness, setSpotlightBusiness] = useState<Business | null>(null);
+  const { settings } = useLocalization();
 
   // Normalize inputs to match database format (lowercase)
   const normalizedTrade = trade?.toLowerCase().trim() || "";
   const normalizedCity = city?.trim() || "";
+  const lookupCity = normalizedCity.replace(/,\s*[A-Z]{2}$/i, "");
 
   useEffect(() => {
     async function getSpotlight() {
       if (!normalizedTrade || !normalizedCity) return;
 
       try {
-        const businesses = await fetchBusinesses(normalizedTrade, normalizedCity);
-        // Pick the top public listing (already sorted by rating and priority)
+        const businesses = await fetchBusinesses(normalizedTrade, lookupCity, settings.countryCode);
+        // Pick the top listed business (already sorted by rating)
         if (businesses.length > 0) {
           setSpotlightBusiness(businesses[0]);
         }
@@ -32,7 +35,7 @@ export function CTABanner({ trade, city }: CTABannerProps) {
       }
     }
     getSpotlight();
-  }, [normalizedTrade, normalizedCity]);
+  }, [normalizedTrade, normalizedCity, lookupCity, settings.countryCode]);
 
   // Trade-specific fallback images (high quality Unsplash)
   const tradeImages: Record<string, string> = {
@@ -81,7 +84,7 @@ export function CTABanner({ trade, city }: CTABannerProps) {
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-white mb-1 flex items-center justify-center md:justify-start gap-2">
                 {spotlightBusiness.name}
-                <FileText className="w-5 h-5 text-gold" />
+                <ShieldCheck className="w-5 h-5 text-gold" />
               </h3>
               <div className="flex items-center justify-center md:justify-start gap-2 text-gold text-sm mb-4">
                 <div className="flex">

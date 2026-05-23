@@ -151,7 +151,7 @@ const BLOG_STYLES = `
   /* ── TYPOGRAPHY SYSTEM ─────────────────────────── */
   .blog-body {
     font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
-    color: #000;
+    color: #1f2937;
     line-height: 1.8;
     max-width: 760px;
     width: 100%;
@@ -171,7 +171,7 @@ const BLOG_STYLES = `
   /* ── H2 NUMBERED + ORANGE ACCENT ────────────────── */
   .blog-body h2 {
     font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 800;
-    color: #000; margin: 3.5rem 0 1.5rem;
+    color: #1f2937; margin: 3.5rem 0 1.5rem;
     padding-left: 1.1rem; border-left: 5px solid #e8923a;
     line-height: 1.35;
     overflow-wrap: break-word;
@@ -195,7 +195,7 @@ const BLOG_STYLES = `
   .blog-body li { margin-bottom: 0.65rem; line-height: 1.75; overflow-wrap: break-word; }
 
   /* ── STRONG ─────────────────────────────────────── */
-  .blog-body strong { color: #000; font-weight: 700; }
+  .blog-body strong { color: #111827; font-weight: 700; }
   .dark .blog-body strong { color: #f9fafb; }
 
   /* ── LINKS ──────────────────────────────────────── */
@@ -442,11 +442,14 @@ const BLOG_STYLES = `
   .dark .blog-magazine-wrap { color: #e5e7eb; }
 
   .blog-step-card {
-    padding: 1.5rem 0;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
     margin: 2rem 0;
     background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
-  .dark .blog-step-card { background: transparent; }
+  .dark .blog-step-card { background: #111827; border-color: #374151; box-shadow: none; }
 
   .blog-step-header {
     display: flex;
@@ -467,18 +470,18 @@ const BLOG_STYLES = `
     white-space: nowrap;
   }
   .blog-step-header h2 {
-    font-size: 1.25rem !important;
+    font-size: 1.2rem !important;
     font-weight: 800 !important;
-    color: #000 !important;
+    color: #111827 !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
   }
-  .dark .blog-step-header h2 { color: #fff !important; }
+  .dark .blog-step-header h2 { color: #f9fafb !important; }
 
-  .blog-step-body p { margin-bottom: 0.85rem; color: #000; }
-  .blog-step-body ul, .blog-step-body ol { padding-left: 1.5rem; margin-bottom: 0.85rem; color: #000; }
-  .blog-step-body li { margin-bottom: 0.4rem; color: #000; }
+  .blog-step-body p { margin-bottom: 0.85rem; }
+  .blog-step-body ul, .blog-step-body ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+  .blog-step-body li { margin-bottom: 0.4rem; }
 
   .blog-tips-block {
     border-left: 5px solid #e8923a;
@@ -605,7 +608,7 @@ const BLOG_STYLES = `
     color: #fff !important;
   }
 
-  .blog-intro { font-size: 1.1rem; line-height: 1.85; color: #000; margin-bottom: 2rem; }
+  .blog-intro { font-size: 1.1rem; line-height: 1.85; color: #374151; margin-bottom: 2rem; }
   .dark .blog-intro { color: #9ca3af; }
   .blog-divider { border: none; border-top: 1.5px solid #e5e7eb; margin: 2.5rem 0; }
   .dark .blog-divider { border-color: #374151; }
@@ -671,29 +674,6 @@ export default function BlogPostPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isWhiteMode, setIsWhiteMode] = useState(true);
 
-  // Hard region gate: a -gb/-uk slug must only render on emergencytradesmen.net,
-  // and a -us/-usa slug must only render on emergencycontractors.net. If a user
-  // lands on the wrong domain we 301-style redirect to the correct one before
-  // any content fetch, so UK content never paints on the US site (and vice versa).
-  useEffect(() => {
-    if (!slug || typeof window === 'undefined') return;
-    const s = slug.toLowerCase();
-    const slugIsUK = s.endsWith('-gb') || s.endsWith('-uk') ||
-                     s.includes('-gb-') || s.includes('-uk-') ||
-                     s.startsWith('uk-') || s.startsWith('gb-');
-    const slugIsUS = s.endsWith('-us') || s.endsWith('-usa') ||
-                     s.includes('-us-') || s.includes('-usa-') ||
-                     s.startsWith('us-') || s.startsWith('usa-');
-    const host = window.location.hostname;
-    const onUSDomain = host.includes('emergencycontractors.net');
-    const onUKDomain = host.includes('emergencytradesmen.net');
-    if (slugIsUK && onUSDomain) {
-      window.location.replace(`https://emergencytradesmen.net/blog/${slug}`);
-    } else if (slugIsUS && onUKDomain) {
-      window.location.replace(`https://emergencycontractors.net/blog/${slug}`);
-    }
-  }, [slug]);
-
   useEffect(() => {
     async function loadPost() {
       if (!slug) { setIsLoading(false); return; }
@@ -716,30 +696,20 @@ export default function BlogPostPage() {
         if (postData && postData.length > 0) {
           const data = postData[0];
           setPost(data);
-          const sLow = slug.toLowerCase();
-          const isUS = sLow.endsWith('-us') || sLow.endsWith('-usa') ||
-                       sLow.includes('-us-') || sLow.includes('-usa-') ||
-                       sLow.startsWith('us-') || sLow.startsWith('usa-');
+          const isUS = slug.toLowerCase().includes('usa') || slug.toLowerCase().includes('-us');
           const relatedUrl = `${supabaseUrl}/rest/v1/posts?select=id,title,slug,excerpt,cover_image,published_at,created_at&published=eq.true&order=published_at.desc`;
           const relatedResponse = await fetch(relatedUrl, {
-            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-99' }
+            headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-9' }
           });
           const relatedData = await relatedResponse.json();
           if (relatedData) {
-            // Only show same-region related posts. Cross-region posts are excluded
-            // entirely so a UK reader is never recommended a US article.
-            const filtered = relatedData.filter((p: { slug?: string }) => {
+            let filtered = relatedData.filter((p: any) => {
               const s = p.slug?.toLowerCase() || "";
-              if (s === sLow) return false;
-              const pIsUS = s.endsWith('-us') || s.endsWith('-usa') ||
-                            s.includes('-us-') || s.includes('-usa-') ||
-                            s.startsWith('us-') || s.startsWith('usa-');
-              const pIsUK = s.endsWith('-gb') || s.endsWith('-uk') ||
-                            s.includes('-gb-') || s.includes('-uk-') ||
-                            s.startsWith('uk-') || s.startsWith('gb-');
-              if (pIsUS && pIsUK) return false;
-              return isUS ? pIsUS : pIsUK;
+              const pIsUS = s.includes('usa') || s.includes('-us');
+              const pIsUK = s.includes('-gb') || s.includes('-uk');
+              return isUS ? (pIsUS || (!pIsUK)) : (pIsUK || (!pIsUS));
             });
+            if (filtered.length === 0) filtered = relatedData;
             setRelatedPosts(filtered.slice(0, 3) as BlogPost[]);
           }
         }
@@ -862,12 +832,7 @@ export default function BlogPostPage() {
     .replace(/([.?!])\s+(3\.\s+Professional)/g, '$1</p><h2>$2')
     .replace(/([.?!])\s+(4\.\s+Safety First)/g, '$1</p><h2>$2');
 
-  const isUS = slugLower.endsWith('-us') || slugLower.endsWith('-usa') ||
-               slugLower.includes('-us-') || slugLower.includes('-usa-') ||
-               slugLower.startsWith('us-') || slugLower.startsWith('usa-');
-  const isUK = slugLower.endsWith('-gb') || slugLower.endsWith('-uk') ||
-               slugLower.includes('-gb-') || slugLower.includes('-uk-') ||
-               slugLower.startsWith('uk-') || slugLower.startsWith('gb-');
+  const isUS = slug?.toLowerCase().includes('usa') || slug?.toLowerCase().includes('-us');
   const readingTime = calcReadingTime(displayContent);
   const hasExcerpt = post.excerpt && post.excerpt !== '...' && post.excerpt.length > 50;
 
@@ -1080,29 +1045,13 @@ export default function BlogPostPage() {
       <SEO
         title={post.title}
         description={hasExcerpt ? post.excerpt : undefined}
-        canonical={
-          isUK ? `https://emergencytradesmen.net/blog/${post.slug}`
-          : isUS ? `https://emergencycontractors.net/blog/${post.slug}`
-          : `/blog/${post.slug}`
-        }
+        canonical={`/blog/${post.slug}`}
         ogType="article" ogImage={absoluteImage} jsonLd={jsonLdSchemas}
-        alternates={
-          isUK
-            ? [
-                { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-                { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-              ]
-            : isUS
-            ? [
-                { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
-                { lang: 'x-default', href: `https://emergencycontractors.net/blog/${post.slug}` },
-              ]
-            : [
-                { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-                { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
-                { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
-              ]
-        }
+        alternates={[
+          { lang: 'en-GB', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+          { lang: 'en-US', href: `https://emergencycontractors.net/blog/${post.slug}` },
+          { lang: 'x-default', href: `https://emergencytradesmen.net/blog/${post.slug}` },
+        ]}
       />
       <Helmet>
         <meta property="article:published_time" content={post.published_at || post.created_at} />
@@ -1190,7 +1139,7 @@ export default function BlogPostPage() {
                     alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
                     className="w-full h-full object-cover"
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     decoding="async"
                     onError={(e) => {
                       const target = e.currentTarget;
@@ -1251,7 +1200,7 @@ export default function BlogPostPage() {
               Need a professional right now?
             </p>
             <p className={`text-sm ${isWhiteMode ? 'text-neutral-600' : 'text-neutral-300'}`}>
-              Find a public emergency {isUS ? 'contractor' : 'tradesman'} listing near you and confirm details directly before booking.
+              Find local emergency {isUS ? 'contractor' : 'tradesman'} contacts near you and confirm details before booking.
             </p>
           </div>
           <Link
@@ -1350,8 +1299,8 @@ export default function BlogPostPage() {
           </button>
           <div className={`flex justify-center gap-6 mt-5 text-xs ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
             <span>✓ No call-out fee</span>
-            <span>✓ Public listings</span>
-            <span>✓ Confirm details directly</span>
+            <span>✓ DBS checked</span>
+            <span>✓ Fully insured</span>
           </div>
         </div>
 

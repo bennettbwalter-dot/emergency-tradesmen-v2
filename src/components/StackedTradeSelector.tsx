@@ -3,6 +3,8 @@ import { trades } from '@/lib/trades';
 import { useChatbot } from '@/contexts/ChatbotContext';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useLocalization } from '@/contexts/LocalizationContext';
+import { cities, usCities } from '@/lib/trades';
 
 export function StackedTradeSelector() {
     const [index, setIndex] = useState(0);
@@ -11,6 +13,7 @@ export function StackedTradeSelector() {
     const stageRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const { setDetectedTrade, detectedCity } = useChatbot();
+    const { settings, detectedCity: localizationCity } = useLocalization();
 
     // Drag state refs
     const dragStartX = useRef(0);
@@ -32,8 +35,12 @@ export function StackedTradeSelector() {
         if (visualSlot === 0) {
             // Main card: open trade
             const trade = trades[i];
+            const countryCities = settings.countryCode === 'US' ? usCities : cities;
+            const targetCity = detectedCity || localizationCity;
+            const validCity = targetCity && countryCities.some(city => city.toLowerCase() === targetCity.toLowerCase());
+            const cityPath = validCity ? `/${targetCity.toLowerCase().replace(/\s+/g, '-')}` : '';
             setDetectedTrade(trade.slug);
-            navigate(`/emergency-${trade.slug}/${detectedCity ? detectedCity.toLowerCase() : 'london'}`);
+            navigate(`/emergency-${trade.slug}${cityPath}`);
         } else {
             // Background card: move to front
             setIndex(i);

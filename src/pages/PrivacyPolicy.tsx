@@ -34,13 +34,20 @@ export default function PrivacyPolicy() {
 
                     <div className="prose prose-slate prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-gold hover:prose-a:text-gold/80">
                         <p className="lead text-xl text-slate-600">
-                            At {siteUrl}, our core mission is safely and rapidly connecting you with local emergency business contacts during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
+                            At {siteUrl}, our core mission is safely and rapidly connecting you with local emergency business listings during property emergencies. This Privacy Policy is written in plain English to clearly explain exactly how your data is handled when you use our platform in the United Kingdom or the United States.
                         </p>
 
                         <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg my-8">
                             <h3 className="text-blue-900 mt-0 mb-2">Our Data Promise</h3>
                             <p className="text-blue-800 mb-0">
                                 We act strictly as a dispatch connection service. We only collect the information absolutely necessary to get help to your door, and we <strong>only share it with the specific tradesperson responding to your emergency.</strong> We do not sell your personal data to mass marketing lists.
+                            </p>
+                        </div>
+
+                        <div className="bg-amber-50 border-l-4 border-gold p-6 rounded-r-lg my-8">
+                            <h3 className="text-amber-950 mt-0 mb-2">Public Emergency Listings</h3>
+                            <p className="text-amber-900 mb-0">
+                                Emergency listings are public business details. Always confirm availability, fees, credentials, and insurance before booking.
                             </p>
                         </div>
 
@@ -81,7 +88,7 @@ export default function PrivacyPolicy() {
                         <ul>
                             <li><strong>Google Analytics & PostHog:</strong> We use these to understand overall website traffic (e.g., how many users visit the "US Plumbers" page vs. the "UK Electricians" page). This data is aggregated and anonymized.</li>
                             <li><strong>Google Maps API & OpenStreetMap:</strong> Used strictly to geolocate your address coordinates to match you with the nearest physical tradesperson. We fully comply with the Google Maps Controller-to-Controller data protection terms.</li>
-                            <li><strong>Stripe:</strong> Used exclusively for processing subscription payments for business owners joining or claiming profiles in our directory. Consumer emergency requests are always free to submit and do not require payment details on our site.</li>
+                            <li><strong>Stripe:</strong> Used exclusively for processing subscription payments for business owners joining our directory. Consumer emergency requests are always free to submit and do not require payment details on our site.</li>
                         </ul>
 
                         <hr className="my-12 border-slate-200" />

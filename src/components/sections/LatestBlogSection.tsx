@@ -25,21 +25,54 @@ export function LatestBlogSection() {
     (hostname === "127.0.0.1" && port === "3001");
   const countryPrefix = settings.countryCode === "US" && !isUSDomain ? "/us" : "";
 
+  const regionalizeText = (text: string) => {
+    if (!text) return "";
+    const cleanText = text.replace(/^#+\s*/, "");
+    if (settings.countryCode !== "US") return cleanText;
+    return cleanText
+      .replace(/Tradesmen/g, "Contractors")
+      .replace(/tradesmen/g, "contractors")
+      .replace(/Tradesperson/g, "Contractor")
+      .replace(/tradesperson/g, "contractor")
+      .replace(/UK/g, "US");
+  };
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      // Fetch more posts to allow for regional filtering
       const { data } = await supabase
-        .from("blog_posts")
+        .from("posts")
         .select("id, title, slug, excerpt, cover_image, published_at")
         .eq("published", true)
         .order("published_at", { ascending: false })
-        .limit(3);
-      if (!cancelled && data) setPosts(data as BlogPost[]);
+        .limit(15);
+
+      if (!cancelled && data) {
+        const regionalData = data.filter((post) => {
+          if (!post) return false;
+          try {
+            const slug = (post.slug || "").toString().toLowerCase();
+            const isUS = slug.endsWith("-us") || slug.endsWith("-usa") || slug.includes("-us-") || slug.includes("-usa-");
+            const isUK = slug.endsWith("-gb") || slug.endsWith("-uk") || slug.includes("-gb-") || slug.includes("-uk-");
+
+            if (settings.countryCode === "US") {
+              return isUS || !isUK;
+            } else {
+              return isUK || !isUS;
+            }
+          } catch (err) {
+            return false;
+          }
+        });
+
+        setPosts(regionalData.slice(0, 3) as BlogPost[]);
+      }
     })();
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [settings.countryCode]);
 
   if (posts.length === 0) return null;
 
@@ -83,7 +116,7 @@ export function LatestBlogSection() {
                 <div className="aspect-[16/9] overflow-hidden bg-muted">
                   <img
                     src={img}
-                    alt={post.title}
+                    alt={regionalizeText(post.title)}
                     loading="lazy"
                     width="640"
                     height="360"
@@ -96,7 +129,7 @@ export function LatestBlogSection() {
               )}
               <div className="p-6">
                 <h3 className="font-display text-lg text-foreground group-hover:text-gold transition-colors mb-2 line-clamp-2">
-                  {post.title}
+                  {regionalizeText(post.title)}
                 </h3>
                 {post.excerpt && (
                   <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>

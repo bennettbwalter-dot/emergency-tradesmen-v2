@@ -46,7 +46,7 @@
         <ul>
             <li><strong>Space-Age Insulation:</strong> By removing the air between panes (creating a vacuum), 2026 VIG units stop heat transfer 10x better than standard double-pane glass.</li>
             <li><strong>Frame Compatibility:</strong> Because it's so thin, we can use VIG to turn a legacy 1950s window into a **2026 Net-Zero** thermal performer.</li>
-            <li><strong>Acoustic Isolation:</strong> VIG is the 2026 standard for noise reduction, blocking up to 45dB of street noise-perfect for homes near 2026 busy transport hubs.</li>
+            <li><strong>Acoustic Isolation:</strong> VIG is the 2026 standard for noise reduction, blocking up to 45dB of street noise—perfect for homes near 2026 busy transport hubs.</li>
         </ul>
     </div>
     <p>By 2026, VIG is the preferred "Emergency Upgrade" for luxury and high-efficiency homes. We Provide **2026 VIG Thermal Mapping**, proving your replacement is a solid investment in 2026 energy independence. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Glazing Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Etched Markings"** in 2026-if you don't see "ANSI Z97.1," it's not safe 2026 safety glass.</li>
-            <li><strong>CANNOT:</strong> Use "Duct Tape" for a holiday repair-in 2026, the tape's adhesive will permanently "Etch" the frames of your 2026 window.</li>
+            <li><strong>CAN:</strong> Check your **"Etched Markings"** in 2026—if you don't see "ANSI Z97.1," it's not safe 2026 safety glass.</li>
+            <li><strong>CANNOT:</strong> Use "Duct Tape" for a holiday repair—in 2026, the tape's adhesive will permanently "Etch" the frames of your 2026 window.</li>
             <li><strong>CAN:</strong> Request an **"Impact-Test Certificate"** before buying any US property in a 2026 hurricane-prone state.</li>
-            <li><strong>CANNOT:</strong> Treat 2026 "Self-Cleaning" glass with standard glass cleaners-the ammonia will destroy the 2026 hydrophilic coating.</li>
+            <li><strong>CANNOT:</strong> Treat 2026 "Self-Cleaning" glass with standard glass cleaners—the ammonia will destroy the 2026 hydrophilic coating.</li>
         </ul>
     </div>
 

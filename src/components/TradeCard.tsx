@@ -4,7 +4,6 @@ import { type Trade, cities, usCities } from "@/lib/trades";
 import { motion } from "framer-motion";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { useEffect } from "react";
 
 interface TradeCardProps {
   trade: Trade;
@@ -18,8 +17,10 @@ export function TradeCard({ trade, city }: TradeCardProps) {
 
   // Priority: explicit prop > chatbot detection > localization auto-detect
   const targetCity = city || chatbotCity || localizationCity;
-  const countryPrefix = settings.countryCode === 'GB' ? '' : `/${settings.countryCode.toLowerCase()}`;
   const tradeName = settings.countryCode === 'US' ? (trade as any).usName : trade.name;
+  const countryCities = settings.countryCode === 'US' ? usCities : cities;
+  const isTargetCityValidForCountry = targetCity && countryCities.some(c => c.toLowerCase() === targetCity.toLowerCase());
+  const targetPath = `/emergency-${trade.slug}${isTargetCityValidForCountry ? `/${targetCity.toLowerCase().replace(/\s+/g, '-')}` : ''}`;
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -29,12 +30,8 @@ export function TradeCard({ trade, city }: TradeCardProps) {
 
     // If we already have a city, navigate immediately
     // BUT only if the city is valid for the current country!
-    const isUS = settings.countryCode === 'US';
-    const countryCities = isUS ? usCities : cities;
-    const isTargetCityValidForCountry = targetCity && countryCities.map(c => c.toLowerCase()).includes(targetCity.toLowerCase());
-
     if (targetCity && isTargetCityValidForCountry) {
-      navigate(`${countryPrefix}/emergency-${trade.slug}/${targetCity.toLowerCase().replace(/\s+/g, '-')}`);
+      navigate(targetPath);
     } else {
       // If city is not valid for this country (e.g. Luton in US), clear context and get location
       if (targetCity) setDetectedCity("");
@@ -48,7 +45,7 @@ export function TradeCard({ trade, city }: TradeCardProps) {
 
   return (
     <Link
-      to={`${countryPrefix}/emergency-${trade.slug}/${targetCity && (settings.countryCode === 'US' ? usCities : cities).map(c => c.toLowerCase()).includes(targetCity.toLowerCase()) ? targetCity.toLowerCase().replace(/\s+/g, '-') : (settings.countryCode === 'US' ? 'los-angeles' : 'london')}`}
+      to={targetPath}
       onClick={handleClick}
       className="block h-full group relative"
     >

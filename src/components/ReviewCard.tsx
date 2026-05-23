@@ -71,7 +71,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
                             {review.verified && (
                                 <Badge variant="secondary" className="text-xs gap-1">
                                     <CheckCircle className="w-3 h-3" />
-                                    Checked
+                                    Confirmed
                                 </Badge>
                             )}
                         </div>

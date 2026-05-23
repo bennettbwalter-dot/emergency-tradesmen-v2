@@ -24,11 +24,11 @@ export default function FAQ() {
         <div className="min-h-screen bg-background flex flex-col">
             <SEO
                 title={isUSDomain
-                    ? "Emergency Contractors FAQ — Find Local Contractor Listings 24/7"
-                    : "Emergency Tradesmen FAQ — Find Local Tradesmen Listings 24/7"}
+                    ? "Emergency Contractors FAQ — Find Local Emergency Contractors 24/7"
+                    : "Emergency Tradesmen FAQ — Find Local Emergency Tradesmen 24/7"}
                 description={isUSDomain
-                    ? "Find answers to common questions about finding emergency plumbers, electricians and HVAC techs near you. Public contractor listings should be checked directly before booking."
-                    : "Find answers to common questions about finding emergency plumbers, electricians and locksmiths near you. Public tradesmen listings should be checked directly before booking."}
+                    ? "Find answers to common questions about emergency plumbers, electricians & HVAC techs near you. Check local contractor listings and confirm details directly."
+                    : "Find answers to common questions about emergency plumbers, electricians & locksmiths near you. Check local tradesmen listings and confirm details directly."}
                 canonical="/faq"
                 jsonLd={breadcrumbSchema}
                 alternates={[

@@ -3,15 +3,36 @@
  * support emails, social handles, and URLs for UK/US deployments.
  */
 
+export const SITE_URLS = {
+    production: {
+        GB: 'https://emergencytradesmen.net',
+        US: 'https://emergencycontractors.net',
+    },
+    local: {
+        GB: 'http://localhost:3000',
+        US: 'http://localhost:3001',
+    },
+} as const;
+
 export function isUSDomain(): boolean {
     if (typeof window === 'undefined') return false;
     const hostname = window.location.hostname;
     const port = window.location.port;
     return (
+        import.meta.env.MODE === 'us' ||
         hostname.includes('emergencycontractors.net') ||
-        (hostname === 'localhost' && ['3001', '5173'].includes(port)) ||
-        (hostname === '127.0.0.1' && ['3001', '5173'].includes(port))
+        (hostname === 'localhost' && port === '3001') ||
+        (hostname === '127.0.0.1' && port === '3001')
     );
+}
+
+export function getSiteCountryCode(): 'GB' | 'US' {
+    return isUSDomain() ? 'US' : 'GB';
+}
+
+function isLocalHost(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 }
 
 export function getSupportEmail(): string {
@@ -25,9 +46,8 @@ export function getSiteName(): string {
 }
 
 export function getSiteDomain(): string {
-    return isUSDomain()
-        ? 'https://emergencycontractors.net'
-        : 'https://emergencytradesmen.net';
+    const countryCode = getSiteCountryCode();
+    return isLocalHost() ? SITE_URLS.local[countryCode] : SITE_URLS.production[countryCode];
 }
 
 export function getSocialHandle(): string {

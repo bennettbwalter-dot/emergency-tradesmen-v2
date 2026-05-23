@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
-import { createClient } from "@supabase/supabase-js";
 import { isDeveloper, hasAccess, getUserSubscription } from "@/lib/subscriptionService";
 import { isUSDomain } from "@/lib/siteConfig";
 import { Crown, ShieldCheck, Eye, CheckCircle2, ChevronRight, AlertCircle, LogOut } from "lucide-react";
@@ -72,7 +71,8 @@ export default function NewProfileEditor() {
     const isDevUser = isDeveloper(user?.email);
     const isAdminArea = window.location.pathname.startsWith('/admin');
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
-    const isAdmin = (user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase()) || user?.email?.toLowerCase().includes('bennett');
+    const isAdmin = Boolean(user?.email && adminEmail && user.email.toLowerCase() === adminEmail.toLowerCase());
+    const canUseAdminOverride = isAdmin || isDevUser || (import.meta.env.DEV && isAdminArea);
 
     // Access control via initBusiness
 
@@ -80,8 +80,13 @@ export default function NewProfileEditor() {
         if (authLoading) return;
 
         // Access control checks moved from checkAccess useEffect
-        if (!isAuthenticated && !isAdminArea) {
+        if (!isAuthenticated && !(import.meta.env.DEV && isAdminArea)) {
             navigate('/login?redirect=/premium-profile');
+            return;
+        }
+
+        if (isAdminArea && !canUseAdminOverride) {
+            navigate('/');
             return;
         }
 
@@ -118,7 +123,7 @@ export default function NewProfileEditor() {
 
             let query = supabase.from('businesses').select('*');
 
-            if (adminOverrideId && (isAdmin || isDevUser || isAdminArea)) {
+            if (adminOverrideId && canUseAdminOverride) {
                 query = query.eq('id', adminOverrideId);
             } else {
                 if (!activeId) return;
@@ -190,7 +195,7 @@ export default function NewProfileEditor() {
                         is_premium: true,
                         tier: "paid",
                         verified: false,
-                        claim_status: 'claimed',
+                        claim_status: "unclaimed",
                         hours: "24/7",
                         is_open_24_hours: true,
                         country_code: isUSDomain() ? 'US' : 'GB',
@@ -207,40 +212,10 @@ export default function NewProfileEditor() {
                     } else {
                         console.error("Direct Insert Failed:", dError);
 
-                        // Tier 4: Safe Mode (Service Role Override)
+                        // Tier 4: stop safely. Service-role keys must never be exposed to browser code.
                         if (!newData && (dError.message?.includes('violates row-level security') || dError.code === '42501')) {
-                            devWarn("RLS Violation Detected. Deploying Service Role Override...");
-
-                            // Because the env anon key is actually a service_role key, we can create an isolated
-                            // client that doesn't send the user's JWT, bypassing RLS entirely.
-                            const adminClient = createClient(
-                                import.meta.env.VITE_SUPABASE_URL,
-                                import.meta.env.VITE_SUPABASE_ANON_KEY,
-                                {
-                                    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'et-admin-bypass' },
-                                    global: {
-                                        headers: {
-                                            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
-                                        }
-                                    }
-                                }
-                            );
-
-                            const { data: sData, error: sErr } = await adminClient
-                                .from('businesses')
-                                .insert({ ...baseBiz, owner_user_id: activeId })
-                                .select().single();
-
-                            if (sData) {
-                                newData = sData;
-                                setCreationError({
-                                    message: "Initialization succeeded via Service Override. Your profile is live.",
-                                    details: dError
-                                });
-                            } else {
-                                console.error("Service Override also failed:", sErr);
-                                throw sErr || dError;
-                            }
+                            devWarn("RLS violation detected. Refusing browser-side service-role fallback.");
+                            throw new Error("Profile creation was blocked by database policy. Use the create_initial_business_v2 RPC or fix RLS; service-role keys must stay server-side.");
                         } else if (!newData) {
                             throw dError;
                         }
@@ -261,7 +236,7 @@ export default function NewProfileEditor() {
         } finally {
             setLoading(false);
         }
-    }, [user, authLoading, adminOverrideId, isAdmin, isDevUser, isAdminArea]);
+    }, [user, authLoading, adminOverrideId, isAdmin, isDevUser, isAdminArea, canUseAdminOverride]);
 
     useEffect(() => { initBusiness(); }, [initBusiness]);
 
@@ -461,7 +436,7 @@ export default function NewProfileEditor() {
                                 <Crown className="w-3 h-3 mr-1" /> PRO
                             </Badge>
                             <Badge variant="outline" className="text-green-400 border-green-900 bg-green-900/10">
-                                <ShieldCheck className="w-3 h-3 mr-1" /> Claimed Listing
+                                <ShieldCheck className="w-3 h-3 mr-1" /> Claimed Profile
                             </Badge>
                         </div>
                         <div>

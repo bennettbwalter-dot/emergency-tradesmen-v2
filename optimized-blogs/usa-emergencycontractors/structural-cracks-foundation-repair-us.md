@@ -29,7 +29,7 @@
             <li><strong>Sticky Doors:</strong> When interior doors rub against the top jamb or won't latch, it indicates the entire floor frame has tilted off-level.</li>
         </ul>
     </div>
-    <p>In the United States, soil conditions vary wildly-from the expansive clays of Texas to the sandy loams of Florida. In 2026, building codes like the International Residential Code (IRC) have tightened requirements for "Soil Compaction" in new builds, but millions of older American homes are currently shifting due to extreme weather cycles. Understanding your "Red Flags" is the first step in avoiding a total structural disaster. Let's look at the legal and engineering benchmarks for 2026.</p>
+    <p>In the United States, soil conditions vary wildly—from the expansive clays of Texas to the sandy loams of Florida. In 2026, building codes like the International Residential Code (IRC) have tightened requirements for "Soil Compaction" in new builds, but millions of older American homes are currently shifting due to extreme weather cycles. Understanding your "Red Flags" is the first step in avoiding a total structural disaster. Let's look at the legal and engineering benchmarks for 2026.</p>
 
     <h2>2. 2026 Structural Standards: When a Crack Becomes a Code Violation</h2>
     <div class="capsule-box">
@@ -39,7 +39,7 @@
             <li><strong>Leakage Mandate:</strong> Under 2026 NAHB standards, any crack that allows water intrusion into a living space must be professionally remediated.</li>
         </ul>
     </div>
-    <p>Cracks are nature's way of releasing stress. In 2026, modern US structural engineers categorize cracks as "Active" or "Dormant." A dormant crack might have happened 20 years ago and hasn't moved since. An active crack is "growing"-often indicated by fresh, clean concrete showing inside the gap. If you can fit a nickel into a crack, or if the crack is actively leaking water during a US storm, it has officially transitioned from "Cosmetic" to "Structural Violation."</p>
+    <p>Cracks are nature's way of releasing stress. In 2026, modern US structural engineers categorize cracks as "Active" or "Dormant." A dormant crack might have happened 20 years ago and hasn't moved since. An active crack is "growing"—often indicated by fresh, clean concrete showing inside the gap. If you can fit a nickel into a crack, or if the crack is actively leaking water during a US storm, it has officially transitioned from "Cosmetic" to "Structural Violation."</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: Use a "Crack Monitor" (a small plastic grid) screwed across the gap. Check it every 3 months. If the red lines move even 1mm, your foundation is actively shifting, and you need to intervene before the repair costs double.</p>
@@ -61,7 +61,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Definition:</strong> When one part of the foundation sinks faster than the rest, creating "Torque" that snaps concrete and brick.</li>
-            <li><strong>Causes:</strong> Often linked to "Transpiration"-where large trees suck the water out of the soil under one corner of the house.</li>
+            <li><strong>Causes:</strong> Often linked to "Transpiration"—where large trees suck the water out of the soil under one corner of the house.</li>
             <li><strong>Impact:</strong> Differential settlement is the primary cause of the dreaded "Stair-Step" crack in exterior US masonry.</li>
         </ul>
     </div>
@@ -89,7 +89,7 @@
             <li><strong>Aesthetic:</strong> Once installed, the straps can be painted over and are nearly invisible, unlike bulky 2010-era steel I-beams.</li>
         </ul>
     </div>
-    <p>Carbon fiber is the "Space Age" solution for the 2026 American home. If your wall has bowed less than 3 inches, carbon fiber is almost always the preferred choice. It's minimally invasive-usually installed in a single day-and it doesn't require destroying your landscaping or patio. By bonding the wall's structure to the house's floor joists and the footer, carbon fiber turns the entire wall into a rigid, non-moving unit. It is the gold standard for "Preventing Further Movement."</p>
+    <p>Carbon fiber is the "Space Age" solution for the 2026 American home. If your wall has bowed less than 3 inches, carbon fiber is almost always the preferred choice. It's minimally invasive—usually installed in a single day—and it doesn't require destroying your landscaping or patio. By bonding the wall's structure to the house's floor joists and the footer, carbon fiber turns the entire wall into a rigid, non-moving unit. It is the gold standard for "Preventing Further Movement."</p>
 
     <div class="dos-donts">
         <h3>Foundation Crisis: Things You CAN and CANNOT Do</h3>
@@ -151,7 +151,7 @@
             <li><strong>No-Pressure Response:</strong> 24/7 availability for emergency inspections after severe US flooding or seismic events.</li>
         </ul>
     </div>
-    <p>A crack in your foundation shouldn't keep you awake at night-but it should prompt an investigation. In 2026, the technology to diagnose and fix structural issues is faster and less invasive than ever before. Whether you need a simple epoxy injection to stop a leak or a full piering system to lift your home, our 24/7 verified specialists are here to provide the engineering answers you need. Don't let a small crack become a major collapse. Call us today for a definitive 2026 Structural Audit and protect your American home's future.</p>
+    <p>A crack in your foundation shouldn't keep you awake at night—but it should prompt an investigation. In 2026, the technology to diagnose and fix structural issues is faster and less invasive than ever before. Whether you need a simple epoxy injection to stop a leak or a full piering system to lift your home, our 24/7 verified specialists are here to provide the engineering answers you need. Don't let a small crack become a major collapse. Call us today for a definitive 2026 Structural Audit and protect your American home's future.</p>
 
 </main>
 

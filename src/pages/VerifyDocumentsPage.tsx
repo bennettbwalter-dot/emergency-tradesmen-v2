@@ -73,7 +73,7 @@ export default function VerifyDocumentsPage() {
                             Verify Your <span className="text-gold">Professional Status</span>
                         </h1>
                         <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                            To support your claimed listing and receive priority call-outs, please upload your documentation below.
+                            To request a claimed profile review and receive priority call-outs, please upload your documentation below.
                         </p>
                     </div>
 
@@ -121,7 +121,7 @@ export default function VerifyDocumentsPage() {
                                     <div className="flex-1">
                                         <h3 className="font-semibold text-foreground text-lg">{doc.name}</h3>
                                         <p className="text-sm text-muted-foreground">
-                                            {doc.status === 'completed' ? 'Verification complete' : 'PDF, JPG or PNG (Max 5MB)'}
+                                            {doc.status === 'completed' ? 'Uploaded for review' : 'PDF, JPG or PNG (Max 5MB)'}
                                         </p>
                                     </div>
 

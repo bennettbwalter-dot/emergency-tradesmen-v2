@@ -1,8 +1,4 @@
-// Maps internal/detected trade slugs (used by chat-logic, voice triage, KB) to the
-// public route slug (`/emergency-{slug}/...`). The chat layer detects `air-conditioning`
-// but the route is mounted at `/emergency-hvac`.
-export const toRouteSlug = (detectedTrade: string): string =>
-  detectedTrade === 'air-conditioning' ? 'hvac' : detectedTrade;
+import { cityPostcodes } from "./cityPostcodes";
 
 export const trades = [
   { slug: "plumber", name: "Plumber", usName: "Plumber", icon: "💧", image: "/emergency-plumber-v2.webp", vectorIcon: "/icons/plumber.webp" },
@@ -18,10 +14,36 @@ export const trades = [
   { slug: "hvac", name: "Air Conditioning (HVAC)", usName: "Heating & Cooling", icon: "❄️", image: "/emergency-hvac-v2.webp", vectorIcon: "/hvac-icon.webp" },
 ] as const;
 
-import { cityPostcodes } from './cityPostcodes';
 import { cityCoordinates } from './cityCoordinates';
 import { usCityCoordinates } from './usCityCoordinates';
 import { US_STATES } from './us_states';
+import usCityList from './us_cities.json';
+
+// Build city list and city→state abbreviation map from us_cities.json
+const buildUSData = (data: any): { cities: string[]; cityToState: Record<string, string> } => {
+  const citiesSet = new Set<string>();
+  const cityToState: Record<string, string> = {};
+  if (data && Array.isArray(data.states)) {
+    data.states.forEach((state: any) => {
+      const abbr = (state.slug as string).toUpperCase();
+      if (state.metros) {
+        state.metros.forEach((metro: any) => {
+          if (metro.cities) {
+            metro.cities.forEach((city: any) => {
+              if (city.name) { citiesSet.add(city.name); cityToState[city.name] = abbr; }
+              if (city.suburbs) {
+                city.suburbs.forEach((sub: any) => {
+                  if (sub.name) { citiesSet.add(sub.name); cityToState[sub.name] = abbr; }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+  return { cities: Array.from(citiesSet), cityToState };
+};
 
 export const cities = Object.keys(cityCoordinates).sort() as readonly string[];
 
@@ -205,17 +227,37 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     actualCountryCode = 'GB';
   }
 
-  if (!foundCity && countryCode !== 'GB') {
-    const knownUSCity = Object.keys(usCityCoordinates).find(
-      c => c.toLowerCase() === normalizedCityName.toLowerCase()
-    );
+  interface JsonSuburb { name: string; slug: string; }
+  interface JsonCity { name: string; slug: string; suburbs: JsonSuburb[]; }
+  interface JsonMetro { name: string; slug: string; cities: JsonCity[]; }
+  interface JsonState { name: string; slug: string; metros: JsonMetro[]; }
 
-    if (knownUSCity) {
-      foundCity = knownUSCity;
-      actualCountryCode = 'US';
-    } else if (stateSlug || metroSlug) {
-      foundCity = normalizedCityName;
-      actualCountryCode = 'US';
+  const usData = usCityList as unknown as { states: JsonState[] };
+
+  if (!foundCity && usData && usData.states && countryCode !== 'GB') {
+    // Optimization: If stateSlug is provided, ONLY search that state.
+    const targetStates = stateSlug
+      ? usData.states.filter(s => s.slug === stateSlug.toLowerCase())
+      : usData.states;
+
+    for (const state of targetStates) {
+      if (state.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = state.name; actualCountryCode = 'US'; break; }
+
+      // If metroSlug is provided, we could narrow further, but usually searching the whole state is fast enough and safer for edge cases.
+      for (const metro of state.metros) {
+        if (metro.name.toLowerCase() === normalizedCityName.toLowerCase() || metro.slug === normalizedCityName.toLowerCase()) { foundCity = metro.name; actualCountryCode = 'US'; break; }
+
+        for (const city of metro.cities) {
+          if (city.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = city.name; actualCountryCode = 'US'; break; }
+
+          for (const suburb of city.suburbs) {
+            if (suburb.name.toLowerCase() === normalizedCityName.toLowerCase()) { foundCity = suburb.name; actualCountryCode = 'US'; break; }
+          }
+          if (foundCity) break;
+        }
+        if (foundCity) break;
+      }
+      if (foundCity) break;
     }
   }
 
@@ -317,17 +359,17 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const certificationsMap: Record<string, string[]> = {
-    plumber: ["Confirm Licence", "Confirm Certification", "PHCC Member", "Confirm Insurance"],
-    electrician: ["NEC Compliant", "Confirm Licence", "NFPA Member", "Confirm Insurance"],
-    locksmith: ["ALOA Member", "Claim Details", "Confirm Insurance"],
-    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Confirm Insurance"],
-    "drain-specialist": ["IICRC Certified", "Confirm Licence", "Confirm Insurance"],
-    glazier: ["NGA Certified", "Safety Glass Qualified", "Confirm Insurance"],
-    roofer: ["Confirm Licence", "OSHA Certified", "Confirm Insurance"],
-    builder: ["Confirm Licence", "ICC/IPC Compliant", "Confirm Insurance"],
-    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Confirm Insurance"],
-    "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Confirm Insurance"],
-    breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Confirm Insurance"],
+    plumber: ["Licensed & Bonded", "Master Plumber Certified", "PHCC Member", "Fully Insured"],
+    electrician: ["NEC Compliant", "Licensed Electrician", "NFPA Member", "Fully Insured"],
+    locksmith: ["ALOA Member", "Background Checked", "Fully Insured"],
+    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Fully Insured"],
+    "drain-specialist": ["IICRC Certified", "Licensed Contractor", "Fully Insured"],
+    glazier: ["NGA Certified", "Safety Glass Qualified", "Fully Insured"],
+    roofer: ["Licensed Roofer", "OSHA Certified", "Fully Insured"],
+    builder: ["Licensed General Contractor", "ICC/IPC Compliant", "Fully Insured"],
+    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Fully Insured"],
+    "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Fully Insured"],
+    breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Fully Insured"],
   };
 
   return {

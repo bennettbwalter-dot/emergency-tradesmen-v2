@@ -55,7 +55,7 @@
             <li><strong>Cost over Time:</strong> While slightly heavier and more expensive upfront, the "cost per cycle" for LiFePO4 in 2026 is actually 60% lower than older tech.</li>
         </ul>
     </div>
-    <p>Why does battery chemistry matter for a UK homeowner? Because in 2026, many households are using these units for "Peak Topping"-charging them during cheap overnight "Agile" rates and using the power during expensive peak hours (4pm-7pm). This daily cycling would kill an older NMC battery in less than two years. A 2026-standard LiFePO4 unit can handle this abuse for over a decade, effectively paying for itself through energy bill savings while providing emergency backup as a "free" secondary benefit.</p>
+    <p>Why does battery chemistry matter for a UK homeowner? Because in 2026, many households are using these units for "Peak Topping"—charging them during cheap overnight "Agile" rates and using the power during expensive peak hours (4pm-7pm). This daily cycling would kill an older NMC battery in less than two years. A 2026-standard LiFePO4 unit can handle this abuse for over a decade, effectively paying for itself through energy bill savings while providing emergency backup as a "free" secondary benefit.</p>
 
     <h2>4. The "Critical Load" Audit: Keeping BT Routers and Boilers Running</h2>
     <div class="capsule-box">
@@ -65,7 +65,7 @@
             <li><strong>The Combi Boiler (150W):</strong> Most UK gas boilers need electricity to run the pump and the logic board. A 2000W station can keep your heating going during a freeze.</li>
         </ul>
     </div>
-    <p>Not every appliance needs to be powered during an outage. In 2026, we teach UK homeowners to identify their "Critical Load." You don't need to power the electric oven or the tumble dryer-those pull 3,000W and will drain most batteries in minutes. Focus on connectivity and warmth. A high-capacity portable power station with an AC outlet can run a modern UK combi-boiler for several hours, provided it is safely connected via a professional transfer switch. This can be the difference between a frozen pipe disaster and a comfortable evening.</p>
+    <p>Not every appliance needs to be powered during an outage. In 2026, we teach UK homeowners to identify their "Critical Load." You don't need to power the electric oven or the tumble dryer—those pull 3,000W and will drain most batteries in minutes. Focus on connectivity and warmth. A high-capacity portable power station with an AC outlet can run a modern UK combi-boiler for several hours, provided it is safely connected via a professional transfer switch. This can be the difference between a frozen pipe disaster and a comfortable evening.</p>
 
     <div class="fun-fact">
         <p><strong>Fun Fact!</strong> London was home to the world's first large-scale AC power station! Deptford Power Station, built in 1889, was designed by a 23-year-old genius named Ferranti and proved that high-voltage AC could power an entire city from miles away.</p>
@@ -151,7 +151,7 @@
             <li><strong>Coverage:</strong> 24/7 emergency electrical response across the UK for any system failures or grid-switch issues.</li>
         </ul>
     </div>
-    <p>A portable power station is only truly useful when it's integrated correctly into your life. Whether you need a simple "Emergency Kit" for your London flat or a full "Manual Transfer Switch" for your semi-detached home in Manchester, our 24/7 verified electricians are here to help. We ensure that your home resilience doesn't break your home's compliance. Stay connected, stay warm, and stay safe in 2026-upgrade your energy storage with the experts who know the UK grid best.</p>
+    <p>A portable power station is only truly useful when it's integrated correctly into your life. Whether you need a simple "Emergency Kit" for your London flat or a full "Manual Transfer Switch" for your semi-detached home in Manchester, our 24/7 verified electricians are here to help. We ensure that your home resilience doesn't break your home's compliance. Stay connected, stay warm, and stay safe in 2026—upgrade your energy storage with the experts who know the UK grid best.</p>
 
 </main>
 

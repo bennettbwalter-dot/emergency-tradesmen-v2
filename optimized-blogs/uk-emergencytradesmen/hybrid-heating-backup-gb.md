@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the push for Net Zero has transformed our homes, but it has also revealed a pragmatic truth: the "Hybrid" model is the ultimate mark of heating resilience. While pure electric heat pumps are the 2026 standard for new builds, millions of existing UK homes have adopted a **Dual-Fuel** approach. By pairing a high-efficiency Air Source Heat Pump (ASHP) with a compact, **Hydrogen-Ready** gas boiler, homeowners enjoy the best of both worlds-ultra-low carbon emissions for 90% of the year, and a guaranteed "Emergency Backup" when the mercury drops below -5°C. In 2026, a hybrid system isn't a compromise; it's a strategically engineered fortress against the "Deep Freeze." This guide explains the 2026 technical standard for hybrid integration and emergency backup management.</p>
+    <p>In the UK of 2026, the push for Net Zero has transformed our homes, but it has also revealed a pragmatic truth: the "Hybrid" model is the ultimate mark of heating resilience. While pure electric heat pumps are the 2026 standard for new builds, millions of existing UK homes have adopted a **Dual-Fuel** approach. By pairing a high-efficiency Air Source Heat Pump (ASHP) with a compact, **Hydrogen-Ready** gas boiler, homeowners enjoy the best of both worlds—ultra-low carbon emissions for 90% of the year, and a guaranteed "Emergency Backup" when the mercury drops below -5°C. In 2026, a hybrid system isn't a compromise; it's a strategically engineered fortress against the "Deep Freeze." This guide explains the 2026 technical standard for hybrid integration and emergency backup management.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Hybrid Heating 2026</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Hybrid Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Run your boiler once a month in the summer for 10 minutes-it keeps the 2026 internal pump from seizing.</li>
-            <li><strong>CANNOT:</strong> Block the "Low Loss Header"-it's the thermal lungs of your 2026 hybrid system.</li>
-            <li><strong>CAN:</strong> Check your 2026 "Gas Safe" ID card-it must have the 'Boiler' and 'Hydrogen' competencies.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Hybrid Comm Error" on your screen-it means your system might not pivot to backup during the next freeze.</li>
+            <li><strong>CAN:</strong> Run your boiler once a month in the summer for 10 minutes—it keeps the 2026 internal pump from seizing.</li>
+            <li><strong>CANNOT:</strong> Block the "Low Loss Header"—it's the thermal lungs of your 2026 hybrid system.</li>
+            <li><strong>CAN:</strong> Check your 2026 "Gas Safe" ID card—it must have the 'Boiler' and 'Hydrogen' competencies.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Hybrid Comm Error" on your screen—it means your system might not pivot to backup during the next freeze.</li>
         </ul>
     </div>
 

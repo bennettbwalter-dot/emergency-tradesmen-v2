@@ -1,18 +1,26 @@
--- Emergency "Open Door" Policy
--- This removes ALL checks and allows any logged-in user to delete.
--- Use this to unblock the functionality.
+-- Safe replacement for the previous emergency delete policy.
+-- Never allow every authenticated user to delete every business.
 
--- 1. Remove strict policies
+DROP POLICY IF EXISTS "Emergency Force Delete" ON businesses;
 DROP POLICY IF EXISTS "Admin force delete" ON businesses;
 DROP POLICY IF EXISTS "Admin force delete by UID" ON businesses;
 DROP POLICY IF EXISTS "Owners can delete own business" ON businesses;
 
--- 2. Open the door wide (Authenticated users only)
-CREATE POLICY "Emergency Force Delete" 
-ON businesses 
-FOR DELETE 
-TO authenticated 
-USING (true);
+CREATE POLICY "Owners can delete own business"
+ON businesses
+FOR DELETE
+TO authenticated
+USING (
+  auth.uid() = owner_user_id
+  OR auth.uid() = owner_id
+);
 
--- 3. Force schema refresh
+CREATE POLICY "Admin can delete any business"
+ON businesses
+FOR DELETE
+TO authenticated
+USING (
+  auth.jwt() ->> 'email' = current_setting('app.admin_email', true)
+);
+
 NOTIFY pgrst, 'reload config';

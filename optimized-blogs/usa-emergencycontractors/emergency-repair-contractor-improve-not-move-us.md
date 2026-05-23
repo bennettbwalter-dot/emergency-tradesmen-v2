@@ -25,17 +25,17 @@
         <ul>
             <li><strong>The Logic:</strong> If your current mortgage is at 3% and the market is at 6%, moving can cost you an extra $1,500/month for the same square footage.</li>
             <li><strong>Resilience Strategy:</strong> Using that $1,500/month saving to fund high-ROI "Emergency Infrastructure" upgrades (Plumbing, Electrical, HVAC).</li>
-            <li><strong>Market Reality:</strong> 2026 is the year of the "Retrofit"-where we transform 20th-century housing into 21st-century resilient assets.</li>
+            <li><strong>Market Reality:</strong> 2026 is the year of the "Retrofit"—where we transform 20th-century housing into 21st-century resilient assets.</li>
             <li><strong>Compliance ROI:</strong> Homes that meet 2026 Energy Star and IRC resilience codes command a 7-12% premium in "Reset" market appraisals.</li>
         </ul>
     </div>
-    <p>The 2026 US housing market is defined by a 1.2% national growth in value but a massive uptick in remodeling demand. Homeowners are no longer looking at "cosmetic" flips. They are looking at "Survival Stewardship." If your basement leaks or your electrical panel is maxed out, your equity is at risk. Our "Improve Not Move" protocol focuses on stabilizing the "Biological Systems" of your home-the pipes, wires, and structural seals that keep the asset alive.</p>
+    <p>The 2026 US housing market is defined by a 1.2% national growth in value but a massive uptick in remodeling demand. Homeowners are no longer looking at "cosmetic" flips. They are looking at "Survival Stewardship." If your basement leaks or your electrical panel is maxed out, your equity is at risk. Our "Improve Not Move" protocol focuses on stabilizing the "Biological Systems" of your home—the pipes, wires, and structural seals that keep the asset alive.</p>
 
     <h2>2. Investing in Resilience: Why 2026 is the Year of the Retrofit</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>Trend:</strong> Remodeling is outperforming new construction in 2026 due to inventory shortages and high labor costs for new builds.</li>
-            <li><strong>Focus:</strong> "Whole-Home Stabilization"-upgrading foundational systems before the next climate event (freeze, flood, or heatwave).</li>
+            <li><strong>Focus:</strong> "Whole-Home Stabilization"—upgrading foundational systems before the next climate event (freeze, flood, or heatwave).</li>
             <li><strong>Value:</strong> A "Pre-emptive Emergency Repair" is 4x cheaper than a "Crisis Remediation" after a flood or fire.</li>
         </ul>
     </div>
@@ -53,12 +53,12 @@
             <li><strong>Stabilization:</strong> We provide immediate structural shoring and "Drying Logs" that document the remediation for future buyers.</li>
         </ul>
     </div>
-    <p>In the US, most structural disasters start as minor plumbing or roofing issues. In the "Improve Not Move" mindset, there is no such thing as a "small" leak. By the time you notice a watermark, the disaster is already 70% complete. Our 24/7 emergency network specializes in "Fast-Intervention"-stopping the moisture before it reaches the load-bearing timber. This is how you protect your 15+ years of equity from being washed away by a single failed pipe.</p>
+    <p>In the US, most structural disasters start as minor plumbing or roofing issues. In the "Improve Not Move" mindset, there is no such thing as a "small" leak. By the time you notice a watermark, the disaster is already 70% complete. Our 24/7 emergency network specializes in "Fast-Intervention"—stopping the moisture before it reaches the load-bearing timber. This is how you protect your 15+ years of equity from being washed away by a single failed pipe.</p>
 
     <h2>4. 2026 IRC Energy Updates: "Raised Heel" Trusses and Insulation</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Standards:</strong> The 2026 IRC mandates full-depth insulation to the exterior wall plate-often requiring "Raised Heel" truss retrofits.</li>
+            <li><strong>Standards:</strong> The 2026 IRC mandates full-depth insulation to the exterior wall plate—often requiring "Raised Heel" truss retrofits.</li>
             <li><strong>Benefit:</strong> Eliminates "Ice Dams" in cold-weather states (IL, NY, MI) and reduces AC load in warm-weather states (AZ, TX, NV).</li>
             <li><strong>Incentive:</strong> 2026 Energy Star-certified remodels are often the only properties qualifying for specialized "Green Mortgages" with 0.5% lower rates.</li>
         </ul>
@@ -89,7 +89,7 @@
             <li><strong>Risk Management:</strong> In 2026, having a "Healthy Envelope" (Roof, Foundation, Electrics) is the prerequisite for all other investments.</li>
         </ul>
     </div>
-    <p>Don't be "House Rich and Resilience Poor." In 2026, we see many owners spending $50,000 on cabinets while their 30-year-old electrical panel is a fire hazard. Our "Equity Strategy" prioritizes the invisible. We perform the critical "Emergency Audits" that prove your home’s systems are 2026-compliant. This documentation is your most valuable asset when you finally decide to sell-proving to the buyer that they are inheriting a stabilized, high-performing home.</p>
+    <p>Don't be "House Rich and Resilience Poor." In 2026, we see many owners spending $50,000 on cabinets while their 30-year-old electrical panel is a fire hazard. Our "Equity Strategy" prioritizes the invisible. We perform the critical "Emergency Audits" that prove your home’s systems are 2026-compliant. This documentation is your most valuable asset when you finally decide to sell—proving to the buyer that they are inheriting a stabilized, high-performing home.</p>
 
     <h2>7. The Emergency Contractor Role: Stabilizing and Upgrading</h2>
     <div class="capsule-box">
@@ -115,16 +115,16 @@
         <h3>Improve Not Move: American Homeowner CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Use your Home Equity to fund "Foundational Resilience" repairs that meet 2026 IRC codes.</li>
-            <li><strong>CANNOT:</strong> Perform unpermitted major electrical or plumbing work yourself-this can void your 2026 home insurance policy.</li>
+            <li><strong>CANNOT:</strong> Perform unpermitted major electrical or plumbing work yourself—this can void your 2026 home insurance policy.</li>
             <li><strong>CAN:</strong> Request a **Resilience Audit** from your emergency contractor to identify the "Weakest Link" in your home’s envelope.</li>
-            <li><strong>CANNOT:</strong> Wait for a catastrophe to upgrade an 18-year-old HVAC or water heater-proactive replacement is 40% cheaper than emergency remediation.</li>
+            <li><strong>CANNOT:</strong> Wait for a catastrophe to upgrade an 18-year-old HVAC or water heater—proactive replacement is 40% cheaper than emergency remediation.</li>
         </ul>
     </div>
 
     <h2>9. 2026 Real Estate Trends: "Reset" Market and Buyer Expectations</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Market Reset:</strong> Buyers in 2026 are "Risk-Averse"-they want a home with 24/7 verified maintenance records.</li>
+            <li><strong>Market Reset:</strong> Buyers in 2026 are "Risk-Averse"—they want a home with 24/7 verified maintenance records.</li>
             <li><strong>The Standard:</strong> A "Move-In Ready" home in 2026 means the plumbing, electrics, and roof are all certified 2026-resilient.</li>
             <li><strong>Negotiation:</strong> Properties with documented "Improve Not Move" histories are seeing 50% fewer price reductions during the appraisal gap.</li>
         </ul>
@@ -149,7 +149,7 @@
             <li><strong>Stewardship:</strong> We act as your "Chief Resilience Officer," helping you navigate the 2026 IRC to build a better American home.</li>
         </ul>
     </div>
-    <p>The decision to "Improve Not Move" is the smartest financial move of 2026. But it only works if you have the right team. Don't trust your equity to a "gig-worker." Trust our network of 24/7 verified emergency contractors to build the resilience your home needs to thrive in the 2026 economy. We stabilize the present and secure your future-call us today to start your home’s resilience transformation.</p>
+    <p>The decision to "Improve Not Move" is the smartest financial move of 2026. But it only works if you have the right team. Don't trust your equity to a "gig-worker." Trust our network of 24/7 verified emergency contractors to build the resilience your home needs to thrive in the 2026 economy. We stabilize the present and secure your future—call us today to start your home’s resilience transformation.</p>
 
 </main>
 

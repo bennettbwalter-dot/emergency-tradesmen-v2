@@ -45,7 +45,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>Diameter Upsizing:</strong> If your 2026 home has grown, we can use 2026 **Bursting Logic** to replace a 4-inch 2026 line with a 6-inch HPDE pipe in the same 2026 subterranean path.</li>
-            <li><strong>High-Density Polyethylene (HDPE):</strong> The 2026 US standard for bursting-a 2026 flexible, indestructible pipe that resists 2026 ground movement.</li>
+            <li><strong>High-Density Polyethylene (HDPE):</strong> The 2026 US standard for bursting—a 2026 flexible, indestructible pipe that resists 2026 ground movement.</li>
             <li><strong>Quiet Operation:</strong> 2026 Bursting units use **Hydraulic Tensile Pulling**, which is 70% quieter than old-world 2010 mechanical digging.</li>
         </ul>
     </div>
@@ -72,7 +72,7 @@
     <h2>5. Identifying "Primary Collapse": The 2026 Structural Audit</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Laser-Profiling Scans:</strong> We use 2026 **Laser Crawlers** to measure the circularity of your 2026 pipe-a 5% deviation in 2026 is an "Emergency Collapse Warning."</li>
+            <li><strong>Laser-Profiling Scans:</strong> We use 2026 **Laser Crawlers** to measure the circularity of your 2026 pipe—a 5% deviation in 2026 is an "Emergency Collapse Warning."</li>
             <li><strong>Digital PFE Mapping:</strong> We test the **Pressure Field Extension** under your 2026 slab to find where 2026 sewage is washing away your US foundation soil.</li>
             <li><strong>Integrity-Sensing Cams:</strong> 2026 high-def cameras can catch the 2026 "Rustle" of dirt entering through a 2026 pipe crack.</li>
         </ul>
@@ -86,7 +86,7 @@
         <ul>
             <li><strong>Mechanical Scouring:</strong> We use 2026 **Expanding Blade Cutters** that adjust to your 2026 pipe's internal diameter, shaving roots flush to the 2026 wall.</li>
             <li><strong>Copper-Sleeve Barrier:</strong> We can install a **2026 Copper-Infused Shield** over a 2026 joint to naturally repel 2026 US tree roots without using toxins.</li>
-            <li><strong>Lining Reinforcement:</strong> 2026 CIPP liners are **100% Root-Proof**-tree roots cannot penetrate the 2026 seamless resin tube.</li>
+            <li><strong>Lining Reinforcement:</strong> 2026 CIPP liners are **100% Root-Proof**—tree roots cannot penetrate the 2026 seamless resin tube.</li>
         </ul>
     </div>
     <p>By 2026, roots are the leading cause of US sewer failure. We Provide **2026 Root-Zone Sanitization**, ensuring your pipes are root-proof and 2026-resilient. </p>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>US Sewer Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"ASTM F1216 Badge"** in 2026-if your technician isn't **2026 CIPP-Certified**, they can't install your 2026 structural liner.</li>
+            <li><strong>CAN:</strong> Check your **"ASTM F1216 Badge"** in 2026—if your technician isn't **2026 CIPP-Certified**, they can't install your 2026 structural liner.</li>
             <li><strong>CANNOT:</strong> Allow a contractor to "Dig a Trench" without first providing a **2026 Trenchless Feasibility Study**.</li>
             <li><strong>CAN:</strong> Request a **"Laser Calibration Report"** after any 2026 sewer lining service to ensure 100% 2026 structural thickness.</li>
-            <li><strong>CANNOT:</strong> Use "Cast Iron" for 2026 replacements-in 2026, **2026 Schedule 40 PVC** or **2026 SDR-17 HDPE** is the standard for US soil-gas resilience.</li>
+            <li><strong>CANNOT:</strong> Use "Cast Iron" for 2026 replacements—in 2026, **2026 Schedule 40 PVC** or **2026 SDR-17 HDPE** is the standard for US soil-gas resilience.</li>
         </ul>
     </div>
 

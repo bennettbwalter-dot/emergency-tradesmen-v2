@@ -91,80 +91,80 @@ export const PurpleSVGButton = forwardRef<HTMLButtonElement, PurpleSVGButtonProp
 
                   <defs>
                     <radialGradient id="paint0_radial_purple" cx="0" cy="0" r="1" gradientTransform="translate(128.6 151.2) scale(143.6 53.08)" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#A16207" : "#6B21A8"} offset="0"/>
-                      <stop stop-color="#5D5D5D" offset=".6901"/>
-                      <stop stop-color="#343434" offset="1"/>
+                      <stop stopColor={isDarkMode ? "#A16207" : "#6B21A8"} offset="0"/>
+                      <stop stopColor="#5D5D5D" offset=".6901"/>
+                      <stop stopColor="#343434" offset="1"/>
                     </radialGradient>
                     <linearGradient id="paint1_linear_purple" x1="128.8" x2="128.8" y1="97.41" y2="172.4" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#9B9591" offset="0"/>
-                      <stop stop-color="#B5B3B7" offset=".5763"/>
-                      <stop stop-color="#625D5C" offset="1"/>
+                      <stop stopColor="#9B9591" offset="0"/>
+                      <stop stopColor="#B5B3B7" offset=".5763"/>
+                      <stop stopColor="#625D5C" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint2_linear_purple" x1="129" x2="129" y1="97.41" y2="167.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#87827F" offset="0"/>
-                      <stop stop-color="#B0ACA8" offset=".5763"/>
-                      <stop stop-color="#66615E" offset="1"/>
+                      <stop stopColor="#87827F" offset="0"/>
+                      <stop stopColor="#B0ACA8" offset=".5763"/>
+                      <stop stopColor="#66615E" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint3_linear_purple" x1="128.2" x2="128.2" y1="39.19" y2="161.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#FEF08A" : "#F3E8FF"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#C084FC"} offset=".4604"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#9333EA"} offset=".7859"/>
-                      <stop stop-color={isDarkMode ? "#713F12" : "#581C87"} offset="1"/>
+                      <stop stopColor={isDarkMode ? "#FEF08A" : "#F3E8FF"} offset="0"/>
+                      <stop stopColor={isDarkMode ? "#EAB308" : "#C084FC"} offset=".4604"/>
+                      <stop stopColor={isDarkMode ? "#A16207" : "#9333EA"} offset=".7859"/>
+                      <stop stopColor={isDarkMode ? "#713F12" : "#581C87"} offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint4_linear_purple" x1="129.6" x2="129.6" y1="40.48" y2="130.5" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#A855F7"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#8B5CF6"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#7C3AED"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#6D28D9"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#713F12" : "#581C87"} offset="1"/>
+                      <stop stopColor={isDarkMode ? "#EAB308" : "#A855F7"} offset="0"/>
+                      <stop stopColor={isDarkMode ? "#CA8A04" : "#8B5CF6"} offset=".5104"/>
+                      <stop stopColor={isDarkMode ? "#A16207" : "#7C3AED"} offset=".775"/>
+                      <stop stopColor={isDarkMode ? "#854D0E" : "#6D28D9"} offset=".991"/>
+                      <stop stopColor={isDarkMode ? "#713F12" : "#581C87"} offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint5_linear_purple" x1="128.9" x2="128.9" y1="41.71" y2="127.9" gradientUnits="userSpaceOnUse">
-                      <stop stop-color={isDarkMode ? "#EAB308" : "#C084FC"} offset="0"/>
-                      <stop stop-color={isDarkMode ? "#CA8A04" : "#A855F7"} offset=".5104"/>
-                      <stop stop-color={isDarkMode ? "#A16207" : "#8B5CF6"} offset=".775"/>
-                      <stop stop-color={isDarkMode ? "#854D0E" : "#7C3AED"} offset=".991"/>
-                      <stop stop-color={isDarkMode ? "#713F12" : "#6D28D9"} offset="1"/>
+                      <stop stopColor={isDarkMode ? "#EAB308" : "#C084FC"} offset="0"/>
+                      <stop stopColor={isDarkMode ? "#CA8A04" : "#A855F7"} offset=".5104"/>
+                      <stop stopColor={isDarkMode ? "#A16207" : "#8B5CF6"} offset=".775"/>
+                      <stop stopColor={isDarkMode ? "#854D0E" : "#7C3AED"} offset=".991"/>
+                      <stop stopColor={isDarkMode ? "#713F12" : "#6D28D9"} offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint6_linear_purple" x1="128.5" x2="128.5" y1="104.1" y2="169.2" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#928B87" offset="0"/>
-                      <stop stop-color="#B8B5B8" offset=".5763"/>
-                      <stop stop-color="#847E7C" offset="1"/>
+                      <stop stopColor="#928B87" offset="0"/>
+                      <stop stopColor="#B8B5B8" offset=".5763"/>
+                      <stop stopColor="#847E7C" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint7_linear_purple" x1="86.91" x2="86.91" y1="161.7" y2="174.8" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#504A4A" offset="0"/>
-                      <stop stop-color="#B5B3B7" offset=".5763"/>
-                      <stop stop-color="#625D5C" offset="1"/>
+                      <stop stopColor="#504A4A" offset="0"/>
+                      <stop stopColor="#B5B3B7" offset=".5763"/>
+                      <stop stopColor="#625D5C" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint8_linear_purple" x1="171" x2="171" y1="161.7" y2="174.8" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#504A4A" offset="0"/>
-                      <stop stop-color="#B5B3B7" offset=".5763"/>
-                      <stop stop-color="#625D5C" offset="1"/>
+                      <stop stopColor="#504A4A" offset="0"/>
+                      <stop stopColor="#B5B3B7" offset=".5763"/>
+                      <stop stopColor="#625D5C" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint9_linear_purple" x1="129.2" x2="129.2" y1="162.1" y2="167.3" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#989492" offset="0"/>
-                      <stop stop-color="#DEDEE1" offset=".5763"/>
-                      <stop stop-color="#94918F" offset="1"/>
+                      <stop stopColor="#989492" offset="0"/>
+                      <stop stopColor="#DEDEE1" offset=".5763"/>
+                      <stop stopColor="#94918F" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint10_linear_purple" x1="129.2" x2="129.2" y1="169.1" y2="174.4" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#989492" offset="0"/>
-                      <stop stop-color="#FEFFFF" offset=".5763"/>
-                      <stop stop-color="#CCCDCE" offset="1"/>
+                      <stop stopColor="#989492" offset="0"/>
+                      <stop stopColor="#FEFFFF" offset=".5763"/>
+                      <stop stopColor="#CCCDCE" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint11_linear_purple" x1="86.71" x2="86.71" y1="167.6" y2="172.7" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#989492" offset="0"/>
-                      <stop stop-color="#FEFFFF" offset=".5763"/>
-                      <stop stop-color="#CCCDCE" offset="1"/>
+                      <stop stopColor="#989492" offset="0"/>
+                      <stop stopColor="#FEFFFF" offset=".5763"/>
+                      <stop stopColor="#CCCDCE" offset="1"/>
                     </linearGradient>
                     <linearGradient id="paint12_linear_purple" x1="170.9" x2="170.9" y1="167.6" y2="173.2" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#989492" offset="0"/>
-                      <stop stop-color="#FEFFFF" offset=".5763"/>
-                      <stop stop-color="#CCCDCE" offset="1"/>
+                      <stop stopColor="#989492" offset="0"/>
+                      <stop stopColor="#FEFFFF" offset=".5763"/>
+                      <stop stopColor="#CCCDCE" offset="1"/>
                     </linearGradient>
 
                     <linearGradient id="paint10_linear_pin_purple" x1="101" x2="153.3" y1="99.38" y2="99.38" gradientUnits="userSpaceOnUse">
-                         <stop stop-color="#575252" offset="0"/>
-                         <stop stop-color="#E0DDDF" offset=".51"/>
-                         <stop stop-color="#565151" offset="1"/>
+                         <stop stopColor="#575252" offset="0"/>
+                         <stop stopColor="#E0DDDF" offset=".51"/>
+                         <stop stopColor="#565151" offset="1"/>
                     </linearGradient>
                   </defs>
                 </svg>

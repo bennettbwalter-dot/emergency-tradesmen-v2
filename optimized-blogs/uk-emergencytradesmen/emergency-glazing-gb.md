@@ -18,14 +18,14 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, a broken window is no longer just a security breach-it's a "Building Performance Emergency." With the introduction of the **Jan 2026 Construction Product Regulations**, every piece of replacement glass fitted in a UK home must carry a digital **Declaration of Performance (DoP)**. The 2026 standard for residential safety has shifted from simple toughened glass to **Multi-Laminate Vacuum Glazing (VIG)**, which offers the thermal insulation of a solid wall with the security of a bank vault. Whether you've suffered a break-in, a storm-strike, or a critical seal failure, the 2026 standard for emergency glazing involves **Impact-Rated Laminates** and **Secured by Design (SBD)** hardware. This guide provides the technical 2026 standard for UK emergency glazing and rapid security restoration.</p>
+    <p>In the UK of 2026, a broken window is no longer just a security breach—it's a "Building Performance Emergency." With the introduction of the **Jan 2026 Construction Product Regulations**, every piece of replacement glass fitted in a UK home must carry a digital **Declaration of Performance (DoP)**. The 2026 standard for residential safety has shifted from simple toughened glass to **Multi-Laminate Vacuum Glazing (VIG)**, which offers the thermal insulation of a solid wall with the security of a bank vault. Whether you've suffered a break-in, a storm-strike, or a critical seal failure, the 2026 standard for emergency glazing involves **Impact-Rated Laminates** and **Secured by Design (SBD)** hardware. This guide provides the technical 2026 standard for UK emergency glazing and rapid security restoration.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Glazing 2026</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>The Jan 2026 Regulations:</strong> All emergency glazing must now be documented in the national **Product Safety Database**, ensuring 100% traceability of safety standards.</li>
             <li><strong>Vacuum Glazing (VIG):</strong> 2026 replacements often use VIG, which is only 6mm thick but provides better insulation than triple glazing.</li>
-            <li><strong>BS EN 12600 Class 1:</strong> For domestic doors and low-level glass, 2026 codes mandate "Class 1" impact resistance-glass that won't break into dangerous shards even under extreme force.</li>
+            <li><strong>BS EN 12600 Class 1:</strong> For domestic doors and low-level glass, 2026 codes mandate "Class 1" impact resistance—glass that won't break into dangerous shards even under extreme force.</li>
             <li><strong>Smart-Glass Integration:</strong> Many 2026 emergency replacements include "Electrochromic" layers that can tint for privacy or heat-rejection at the touch of a button.</li>
         </ul>
     </div>
@@ -39,7 +39,7 @@
             <li><strong>Post-Fitting Audit:</strong> In 2026, local authorities require proof that "Safety Locations" (like bathrooms and doors) have been glazed with the correct 2026-spec laminates.</li>
         </ul>
     </div>
-    <p>In 2026, "Cowboy Glazing" is effectively impossible. The 2026 regulatory framework ensures that your emergency repair isn't just fast-it's **Legally Compliant** and future-proof. We are the UK specialists in **2026 Regulatory Glazing Accuracy**. </p>
+    <p>In 2026, "Cowboy Glazing" is effectively impossible. The 2026 regulatory framework ensures that your emergency repair isn't just fast—it's **Legally Compliant** and future-proof. We are the UK specialists in **2026 Regulatory Glazing Accuracy**. </p>
 
     <h2>3. Vacuum Insulated Glass (VIG): The 2026 Small-Frame Revolution</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Glazing Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Kite-Mark"** in 2026-if your glass doesn't have it, it's not 2026-compliant safety glass.</li>
-            <li><strong>CANNOT:</strong> Use "Clear Tape" for a large crack-in 2026, the thermal expansion will cause the glass to "Explode" out of the frame.</li>
+            <li><strong>CAN:</strong> Check your **"Kite-Mark"** in 2026—if your glass doesn't have it, it's not 2026-compliant safety glass.</li>
+            <li><strong>CANNOT:</strong> Use "Clear Tape" for a large crack—in 2026, the thermal expansion will cause the glass to "Explode" out of the frame.</li>
             <li><strong>CAN:</strong> Request a **"Thermal U-Value Test"** before buying any UK property with a large glass conservatory in 2026.</li>
-            <li><strong>CANNOT:</strong> Clean your 2026 "Self-Cleaning" glass with abrasive chemicals-you will permanently "Fog" the 2026 UV coating.</li>
+            <li><strong>CANNOT:</strong> Clean your 2026 "Self-Cleaning" glass with abrasive chemicals—you will permanently "Fog" the 2026 UV coating.</li>
         </ul>
     </div>
 

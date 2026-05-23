@@ -39,7 +39,7 @@
             <li><strong>Frequency Alerts:</strong> Smart meters now alert homeowners when "Capacity Cautions" are in effect, suggesting you switch to backup.</li>
         </ul>
     </div>
-    <p>The UK grid is like a giant balanced scale. On one side is the power being made, and on the other is the power being used. If the "use" side gets too heavy, the rotation of the big generators in our power stations slows down. This is called a frequency drop. If it falls below a safe level, automatic switches pull the plug on whole postcodes. This is why having a generator is no longer just for campers-it's a critical tool for UK home resilience in 2026.</p>
+    <p>The UK grid is like a giant balanced scale. On one side is the power being made, and on the other is the power being used. If the "use" side gets too heavy, the rotation of the big generators in our power stations slows down. This is called a frequency drop. If it falls below a safe level, automatic switches pull the plug on whole postcodes. This is why having a generator is no longer just for campers—it's a critical tool for UK home resilience in 2026.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If your neighborhood loses power, turn off your main breaker before starting your generator. This prevents a massive surge when the grid finally comes back on, which can explode your electronics.</p>
@@ -158,7 +158,7 @@
             <li><strong>Curfews:</strong> In urban UK areas, try to turn off the generator between 11 PM and 7 AM unless it is for medical equipment.</li>
         </ul>
     </div>
-    <p>Be a good neighbour. A loud open-frame generator sounds like a lawnmower in your living room. During a quiet winter night, that sound travels for miles. The <strong>Noise Act 1996</strong> still applies during blackouts. To avoid a visit from the council, choose a "Super-Quiet" inverter model. These operate at around 52 decibels-about the same as a normal conversation. If you must use a louder model, build a temporary wall of hay bales or heavy blankets around it (ensuring it can still breathe!) to keep the peace while you stay warm.</p>
+    <p>Be a good neighbour. A loud open-frame generator sounds like a lawnmower in your living room. During a quiet winter night, that sound travels for miles. The <strong>Noise Act 1996</strong> still applies during blackouts. To avoid a visit from the council, choose a "Super-Quiet" inverter model. These operate at around 52 decibels—about the same as a normal conversation. If you must use a louder model, build a temporary wall of hay bales or heavy blankets around it (ensuring it can still breathe!) to keep the peace while you stay warm.</p>
 
 </main>
 

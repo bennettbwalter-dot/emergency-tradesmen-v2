@@ -66,7 +66,7 @@ export const MapHero = () => {
                     >
                         Emergency {settings.tradeTerm} {settings.countryCode === 'GB' ? 'UK' : 'US'} | Nationwide 24/7 Help.
                         <br className="hidden md:block" />
-                        Find public local listings and check details directly before booking.
+                        Find local emergency contacts fast. Confirm details directly before booking.
                     </motion.p>
 
                     {/* "Need Help" Button */}

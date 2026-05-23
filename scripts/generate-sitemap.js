@@ -303,34 +303,14 @@ async function generateSitemap() {
         writeSitemap(`sitemap-businesses-us-${Math.floor(i / CHUNK_SIZE) + 1}.xml`, bizUrls, 'us');
     }
 
-    // 5. Blog Posts — strict region classification.
-    // A slug must clearly belong to ONE region. Ambiguous or unmarked slugs
-    // are dropped from both sitemaps so they never get indexed cross-region.
+    // 5. Blog Posts
     if (posts && posts.length > 0) {
         const blogUrlsUK = [];
         const blogUrlsUS = [];
-        const skippedSlugs = [];
-
-        const classify = (slug) => {
-            const s = (slug || '').toLowerCase();
-            const isUK = s.endsWith('-gb') || s.endsWith('-uk') ||
-                         s.includes('-gb-') || s.includes('-uk-') ||
-                         s.startsWith('uk-') || s.startsWith('gb-');
-            const isUS = s.endsWith('-us') || s.endsWith('-usa') ||
-                         s.includes('-us-') || s.includes('-usa-') ||
-                         s.startsWith('us-') || s.startsWith('usa-');
-            if (isUK && !isUS) return 'uk';
-            if (isUS && !isUK) return 'us';
-            return null;
-        };
 
         posts.forEach(post => {
-            const region = classify(post.slug);
-            if (!region) {
-                skippedSlugs.push(post.slug);
-                return;
-            }
-            const baseUrl = region === 'us' ? BASE_URL_US : BASE_URL_GB;
+            const isUS = post.slug.endsWith('-us');
+            const baseUrl = isUS ? BASE_URL_US : BASE_URL_GB;
             const item = {
                 loc: `${baseUrl}/blog/${post.slug}`,
                 lastmod: post.updated_at ? post.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
@@ -341,13 +321,10 @@ async function generateSitemap() {
                     title: post.title
                 }] : []
             };
-            if (region === 'us') blogUrlsUS.push(item);
+            if (isUS) blogUrlsUS.push(item);
             else blogUrlsUK.push(item);
         });
 
-        if (skippedSlugs.length > 0) {
-            console.warn(`⚠️  Skipped ${skippedSlugs.length} blog slugs with no clear region marker:`, skippedSlugs);
-        }
         if (blogUrlsUK.length > 0) writeSitemap('sitemap-blog-uk.xml', blogUrlsUK, 'uk');
         if (blogUrlsUS.length > 0) writeSitemap('sitemap-blog-us.xml', blogUrlsUS, 'us');
     }

@@ -1,20 +1,3 @@
-// Edge-level region detection. Mirrors the slug regex used in BlogPage / BlogPostPage,
-// plus the legacy `us-`/`uk-` prefix slugs (e.g. `us-sewage-backup-immediate-safety`).
-// Crawlers must see a 301 to the correct domain before HTML is delivered — the JS
-// redirect inside BlogPostPage runs after first paint, so it's too late for SEO.
-function classifyBlogSlug(slug: string): 'uk' | 'us' | null {
-  const s = slug.toLowerCase();
-  const isUK = s.endsWith('-gb') || s.endsWith('-uk') ||
-               s.includes('-gb-') || s.includes('-uk-') ||
-               s.startsWith('uk-') || s.startsWith('gb-');
-  const isUS = s.endsWith('-us') || s.endsWith('-usa') ||
-               s.includes('-us-') || s.includes('-usa-') ||
-               s.startsWith('us-') || s.startsWith('usa-');
-  if (isUK && !isUS) return 'uk';
-  if (isUS && !isUK) return 'us';
-  return null;
-}
-
 export const onRequest: PagesFunction = async (context) => {
   const url = new URL(context.request.url);
   const hostname = url.hostname;
@@ -22,15 +5,6 @@ export const onRequest: PagesFunction = async (context) => {
 
   // 1. US Domain Routing (emergencycontractors.net)
   if (hostname.includes('emergencycontractors.net')) {
-    // Region-mismatch 301: a UK-region blog slug accessed on the US domain
-    // is redirected to the UK domain so crawlers never index UK content here.
-    if (path.startsWith('/blog/')) {
-      const slug = path.replace(/^\/blog\//, '').replace(/\/$/, '');
-      if (slug && classifyBlogSlug(slug) === 'uk') {
-        return Response.redirect(`https://emergencytradesmen.net${path}${url.search}`, 301);
-      }
-    }
-
     // Prevent infinite loop if somehow /us or /usa is accessed on this domain
     if (path.startsWith('/us') || path.startsWith('/usa')) {
       const newPath = path.replace(/^\/(us|usa)/, '') || '/';
@@ -78,15 +52,6 @@ export const onRequest: PagesFunction = async (context) => {
 
   // 2. UK Domain Protection (emergencytradesmen.net)
   if (hostname.includes('emergencytradesmen.net')) {
-    // Region-mismatch 301: a US-region blog slug accessed on the UK domain
-    // is redirected to the US domain.
-    if (path.startsWith('/blog/')) {
-      const slug = path.replace(/^\/blog\//, '').replace(/\/$/, '');
-      if (slug && classifyBlogSlug(slug) === 'us') {
-        return Response.redirect(`https://emergencycontractors.net${path}${url.search}`, 301);
-      }
-    }
-
     if (path.startsWith('/us') || path.startsWith('/usa')) {
       // Redirect to the US domain equivalent
       const newPath = path.replace(/^\/(us|usa)/, '') || '/';

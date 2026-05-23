@@ -24,6 +24,10 @@ export default function ContactPage() {
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
     const siteUrl = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
+    const siteName = isUSDomain ? 'Emergency Contractors' : 'Emergency Tradesmen';
+    const tradeListingLower = isUSDomain ? 'contractor' : 'tradesmen';
+    const tradeSingularLower = isUSDomain ? 'contractor' : 'tradesman';
+    const regionLabel = isUSDomain ? 'US' : 'UK';
 
     const breadcrumbSchema = {
         "@context": "https://schema.org",
@@ -128,7 +132,7 @@ export default function ContactPage() {
                     <h3>Message:</h3>
                     <p>${formData.message.replace(/\n/g, '<br>')}</p>
                 `,
-                from_name: "Emergency Tradesmen Website"
+                from_name: `${siteName} Website`
             });
 
             setSubmitted(true);
@@ -210,8 +214,8 @@ export default function ContactPage() {
                 <SEO
                     title={isUSDomain ? "Contact Emergency Contractors — Get 24/7 Help Now" : "Contact Emergency Tradesmen — Get 24/7 Help Now"}
                     description={isUSDomain
-                        ? "Need an emergency contractor? Contact us for local plumbers, electricians and HVAC contacts. Available 24/7 across the US. Check business details directly before booking."
-                        : "Need an emergency tradesman? Contact us for local plumbers, electricians and locksmith contacts. Available 24/7 across the UK. Check business details directly before booking."}
+                        ? "Need an emergency contractor? Contact us about local plumbers, electricians & HVAC techs listed across the US. Available 24/7."
+                        : "Need an emergency tradesman? Contact us about local plumbers, electricians & locksmiths listed across the UK. Available 24/7."}
                     canonical="/contact"
                     jsonLd={breadcrumbSchema}
                     alternates={[
@@ -242,7 +246,7 @@ export default function ContactPage() {
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                                     <img
                                         src="/images/contact-profile.webp"
-                                        alt="Professional tradesman at work"
+                                        alt={`Professional ${tradeSingularLower} at work`}
                                         className="w-full aspect-[4/5] object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -250,7 +254,7 @@ export default function ContactPage() {
                                         <img src="/et-logo-v3.webp" alt="Logo" loading="lazy" decoding="async" className="w-20 h-20 mb-4 object-contain transition-transform hover:scale-110 duration-500" />
                                         <h2 className="text-xl font-semibold mb-2">{getSiteName()}</h2>
                                         <p className="text-white/80 text-sm">
-                                            Connecting you with public local {getSiteName().split(' ')[1].toLowerCase()} listings 24/7
+                                            Local emergency {tradeListingLower} listings 24/7
                                         </p>
                                     </div>
                                 </div>
@@ -260,7 +264,7 @@ export default function ContactPage() {
                                     <ul className="space-y-3 text-sm text-muted-foreground">
                                         <li className="flex items-start gap-3">
                                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
-                                            <span>Questions about our tradesman directory</span>
+                                            <span>Questions about our {tradeSingularLower} directory</span>
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
@@ -432,7 +436,7 @@ export default function ContactPage() {
                                                     <Link to="/privacy" className="text-gold hover:underline">
                                                         Privacy Policy
                                                     </Link>{" "}
-                                                    and consent to Emergency Tradesmen UK contacting me regarding my enquiry.
+                                                    and consent to {siteName} {regionLabel} contacting me regarding my enquiry.
                                                     <span className="text-red-500"> *</span>
                                                 </label>
                                                 {errors.consent && (

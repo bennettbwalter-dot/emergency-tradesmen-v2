@@ -6,15 +6,13 @@ import {
     ChevronLeft,
     ChevronRight,
     X,
-    HelpCircle,
     MessageSquare,
     Wrench,
     Mic,
-    Zap,
     Users,
     Newspaper
 } from 'lucide-react';
-import { Map, Building2, MapPin } from 'lucide-react';
+import { Map, MapPin } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation } from 'react-router-dom';
 import { useLocalization } from '@/contexts/LocalizationContext';
@@ -38,7 +36,7 @@ const GB_MATCHMAKER_STEPS: TourStep[] = [
     {
         id: 'tour-location-button',
         title: 'Step 2: Choose Your Location',
-        description: "Click the Location button to select your city or town. This narrows the search to public business listings near you.",
+        description: "Click the Location button to select your city or town. This narrows the search to public local listings near you.",
         icon: <MapPin className="w-6 h-6 text-gold" />,
     },
     {
@@ -88,15 +86,9 @@ const COMMON_STEPS_AFTER: TourStep[] = [
         icon: <Mic className="w-6 h-6 text-gold" />,
     },
     {
-        id: 'tour-services',
-        title: 'Quick Access Trades',
-        description: "Scroll down and you'll see our trade cards. Just tap any image to instantly find local emergency contacts in that category — it's the fastest way to get connected.",
-        icon: <Zap className="w-6 h-6 text-gold" />,
-    },
-    {
         id: 'tour-signup',
         title: 'Join Our Network',
-        description: "Are these your business details? Claim your listing, keep details updated, and help customers contact you directly.",
+        description: "Are you a qualified professional? Claim or upgrade your public listing, keep details updated, and grow your business.",
         icon: <Users className="w-6 h-6 text-gold" />,
     },
     {
@@ -106,6 +98,24 @@ const COMMON_STEPS_AFTER: TourStep[] = [
         icon: <Newspaper className="w-6 h-6 text-gold" />,
     },
 ];
+
+// Steps that are in the hero / above-fold — page must NOT scroll during these
+const ABOVE_FOLD_STEP_IDS = new Set([
+    'tour-chat-input',
+    'tour-trade-button',
+    'tour-location-button',
+    'tour-state-button',
+    'tour-locate-button',
+    'tour-mic-button',
+]);
+
+const SPOTLIGHT_PADDING = 6;
+
+const tourSpringTransition = {
+    type: 'spring' as const,
+    damping: 25,
+    stiffness: 200,
+};
 
 export function FloatingTourHub() {
     const [isOpen, setIsOpen] = useState(false);
@@ -148,14 +158,11 @@ export function FloatingTourHub() {
         }
 
         if (!hasCompleted) {
-            // Delay start for better UX
-            const timer = setTimeout(() => {
-                setIsOpen(true);
-            }, 2000);
-            return () => clearTimeout(timer);
-        } else {
-            setIsVisible(true); // Show help button if tour was already completed
+            setIsVisible(true);
+            return;
         }
+
+        setIsVisible(true); // Tour can still be started from explicit help controls.
     }, [location.search]);
 
     // Listen for custom 'start-tour' event so the button can always restart the tour
@@ -192,8 +199,11 @@ export function FloatingTourHub() {
         return elements[0];
     }, []);
 
+    const lastScrolledStepRef = useRef<string | null>(null);
+
     const syncRect = useCallback(() => {
         const step = activeSteps[stepRef.current];
+        if (!step) return;
         const element = findVisibleTourElement(step.id);
         if (element) {
             const rect = element.getBoundingClientRect();
@@ -209,6 +219,21 @@ export function FloatingTourHub() {
                     }
                     return prev;
                 });
+
+                // Auto-scroll to the element when it becomes visible
+                if (lastScrolledStepRef.current !== step.id) {
+                    lastScrolledStepRef.current = step.id;
+                    const isAboveFold = ABOVE_FOLD_STEP_IDS.has(step.id);
+                    if (!isAboveFold) {
+                        setTimeout(() => {
+                            element.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'nearest'
+                            });
+                        }, 50);
+                    }
+                }
             } else {
                 setTargetRect(null);
             }
@@ -219,41 +244,28 @@ export function FloatingTourHub() {
         requestRef.current = requestAnimationFrame(syncRect);
     }, [findVisibleTourElement, activeSteps]);
 
-    // Steps that are in the hero / above-fold — page must NOT scroll during these
-    const ABOVE_FOLD_STEP_IDS = new Set([
-        'tour-chat-input',
-        'tour-trade-button',
-        'tour-location-button',
-        'tour-state-button',
-        'tour-locate-button',
-        'tour-mic-button',
-    ]);
-
     // Update rect on step change and handle initial scroll
     useEffect(() => {
         if (isOpen) {
             stepRef.current = currentStep;
+            lastScrolledStepRef.current = null; // Reset scroll tracker on step change
 
             const step = activeSteps[currentStep];
+            if (!step) return;
             const isAboveFold = ABOVE_FOLD_STEP_IDS.has(step.id);
+
+            // Handle sidebar/drawer auto-opening for sidebar-nested steps
+            if (step.id === 'tour-signup' || step.id === 'tour-blog-link') {
+                window.dispatchEvent(new Event('et-open-sidebar'));
+            } else {
+                window.dispatchEvent(new Event('et-close-sidebar'));
+            }
 
             // For above-fold steps: lock body scroll to prevent page from jumping
             if (isAboveFold) {
                 document.body.style.overflow = 'hidden';
             } else {
                 document.body.style.overflow = '';
-            }
-
-            const element = findVisibleTourElement(step.id);
-            if (element && !isAboveFold) {
-                // Only scroll for below-fold steps, and use 'nearest' to minimize movement
-                setTimeout(() => {
-                    element.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'nearest'
-                    });
-                }, 100);
             }
 
             requestRef.current = requestAnimationFrame(syncRect);
@@ -266,10 +278,11 @@ export function FloatingTourHub() {
                 document.body.style.overflow = '';
             };
         } else {
-            // Tour closed — always restore scroll
+            // Tour closed — always restore scroll and close sidebar drawer
             document.body.style.overflow = '';
+            window.dispatchEvent(new Event('et-close-sidebar'));
         }
-    }, [isOpen, currentStep, syncRect, findVisibleTourElement]);
+    }, [isOpen, currentStep, syncRect, activeSteps]);
 
     const handleNext = () => {
         if (currentStep < activeSteps.length - 1) {
@@ -295,19 +308,13 @@ export function FloatingTourHub() {
         handleComplete();
     };
 
-    const startTour = () => {
-        setCurrentStep(0);
-        setIsOpen(true);
-        setIsVisible(false);
-    };
-
     const winH = typeof window !== 'undefined' ? window.innerHeight : 800;
     const winW = typeof window !== 'undefined' ? window.innerWidth : 1200;
 
     return (
         <>
             <AnimatePresence>
-                {isOpen && (
+                {isOpen && activeSteps[currentStep] && (
                     <div className="fixed inset-0 z-[9998] pointer-events-none">
                         {/* Spotlight Overlay (4-div mask for 100% reliable mobile browser support) */}
                         <motion.div
@@ -320,36 +327,36 @@ export function FloatingTourHub() {
                                 <>
                                     <motion.div
                                         className="absolute top-0 left-0 right-0 bg-black/30 pointer-events-auto"
-                                        animate={{ height: Math.max(0, targetRect.top - 6) }}
-                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
+                                        animate={{ height: Math.max(0, targetRect.top - SPOTLIGHT_PADDING) }}
+                                        transition={tourSpringTransition}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
                                         className="absolute bottom-0 left-0 right-0 bg-black/30 pointer-events-auto"
-                                        animate={{ top: targetRect.bottom + 6 }}
-                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
+                                        animate={{ top: targetRect.bottom + SPOTLIGHT_PADDING }}
+                                        transition={tourSpringTransition}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
                                         className="absolute bg-black/30 pointer-events-auto"
                                         animate={{
-                                            top: Math.max(0, targetRect.top - 6),
-                                            height: targetRect.height + 12,
+                                            top: Math.max(0, targetRect.top - SPOTLIGHT_PADDING),
+                                            height: targetRect.height + (SPOTLIGHT_PADDING * 2),
                                             left: 0,
-                                            width: Math.max(0, targetRect.left - 6)
+                                            width: Math.max(0, targetRect.left - SPOTLIGHT_PADDING)
                                         }}
-                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
+                                        transition={tourSpringTransition}
                                         onClick={handleSkip}
                                     />
                                     <motion.div
                                         className="absolute bg-black/30 pointer-events-auto"
                                         animate={{
-                                            top: Math.max(0, targetRect.top - 6),
-                                            height: targetRect.height + 12,
-                                            left: targetRect.right + 6,
+                                            top: Math.max(0, targetRect.top - SPOTLIGHT_PADDING),
+                                            height: targetRect.height + (SPOTLIGHT_PADDING * 2),
+                                            left: targetRect.right + SPOTLIGHT_PADDING,
                                             right: 0
                                         }}
-                                        transition={{ type: 'tween', duration: 0.05, ease: 'linear' }}
+                                        transition={tourSpringTransition}
                                         onClick={handleSkip}
                                     />
                                 </>
@@ -358,24 +365,20 @@ export function FloatingTourHub() {
                             )}
                         </motion.div>
 
-                        {/* Pulsing Highlight Border — hidden for tour-services */}
+                        {/* Pulsing Highlight Border */}
                         <AnimatePresence>
-                            {targetRect && activeSteps[currentStep].id !== 'tour-services' && (
+                            {targetRect && (
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{
                                         opacity: 1,
                                         scale: 1,
-                                        left: targetRect.left - 4,
-                                        top: targetRect.top - 4,
-                                        width: targetRect.width + 8,
-                                        height: targetRect.height + 8,
+                                        left: targetRect.left - SPOTLIGHT_PADDING,
+                                        top: targetRect.top - SPOTLIGHT_PADDING,
+                                        width: targetRect.width + (SPOTLIGHT_PADDING * 2),
+                                        height: targetRect.height + (SPOTLIGHT_PADDING * 2),
                                     }}
-                                    transition={{
-                                        type: 'spring',
-                                        damping: 25,
-                                        stiffness: 200,
-                                    }}
+                                    transition={tourSpringTransition}
                                     className="absolute z-[9999] pointer-events-none rounded-2xl border-2 border-gold shadow-[0_0_20px_rgba(212,175,55,0.8),inset_0_0_10px_rgba(212,175,55,0.4)]"
                                 >
                                     <motion.div
@@ -405,20 +408,14 @@ export function FloatingTourHub() {
                                     left: isMobile ? '50%' : (targetRect ? Math.min(Math.max(20, targetRect.left - (400 - targetRect.width) / 2), winW - 420) : '50%'),
                                     top: isMobile
                                         ? (targetRect
-                                            ? (activeSteps[currentStep].id === 'tour-services'
-                                                ? targetRect.bottom + 20
-                                                : (targetRect.top > winH / 2 ? 32 : 'auto'))
+                                            ? (targetRect.top > winH / 2 ? 32 : 'auto')
                                             : '50%')
                                         : (targetRect
-                                            ? (activeSteps[currentStep].id === 'tour-services'
-                                                ? Math.max(20, targetRect.top - 280)
-                                                : (targetRect.bottom + 20 > winH - 300 ? Math.max(20, targetRect.top - 280) : targetRect.bottom + 20))
+                                            ? (targetRect.bottom + 20 > winH - 300 ? Math.max(20, targetRect.top - 280) : targetRect.bottom + 20)
                                             : '50%'),
                                     bottom: isMobile
                                         ? (targetRect
-                                            ? (activeSteps[currentStep].id === 'tour-services'
-                                                ? 'auto'
-                                                : (targetRect.top > winH / 2 ? 'auto' : 32))
+                                            ? (targetRect.top > winH / 2 ? 'auto' : 32)
                                             : 32)
                                         : 'auto',
                                     translateX: isMobile ? '-50%' : 0
@@ -431,14 +428,6 @@ export function FloatingTourHub() {
                                 }}
                                 className="pointer-events-auto absolute w-[calc(100%-32px)] md:w-full max-w-[400px] bg-black/95 backdrop-blur-2xl border border-gold/50 rounded-3xl p-5 md:p-6 shadow-[0_0_50px_rgba(212,175,55,0.25)]"
                             >
-                                {/* Downward arrow for desktop or Upward arrow for mobile Step 6 */}
-                                {activeSteps[currentStep].id === 'tour-services' && (
-                                    isMobile ? (
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[12px] border-b-gold/50" />
-                                    ) : (
-                                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-gold/50" />
-                                    )
-                                )}
                                 <div className="flex items-start justify-between mb-4 md:mb-5">
                                     <div className="flex items-center gap-3 md:gap-4">
                                         <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center shrink-0">
@@ -502,8 +491,6 @@ export function FloatingTourHub() {
                     </div>
                 )}
             </AnimatePresence >
-
-            {/* Floating Re-trigger Button Removed */}
         </>
     );
 }

@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the building envelope-the "Skin" of your home-is under more pressure than ever before. With the full implementation of the **Future Homes Standard (2025/2026)** and the increasing frequency of "Atlantic Super-Cells" hitting the British Isles, a roof is no longer just a collection of tiles; it is a high-performance moisture-management system. The 2026 updates to **Building Regulations Part L and Part C** have turned roof resilience into a science of thermal integrity and breathable protection. In 2026, an "Emergency Repair" isn't just about stopping the drip; it's about preserving the airtightness and insulation value of your property. This guide provides the definitive 2026 technical overview for UK emergency roofing and storm-damage recovery.</p>
+    <p>In the UK of 2026, the building envelope—the "Skin" of your home—is under more pressure than ever before. With the full implementation of the **Future Homes Standard (2025/2026)** and the increasing frequency of "Atlantic Super-Cells" hitting the British Isles, a roof is no longer just a collection of tiles; it is a high-performance moisture-management system. The 2026 updates to **Building Regulations Part L and Part C** have turned roof resilience into a science of thermal integrity and breathable protection. In 2026, an "Emergency Repair" isn't just about stopping the drip; it's about preserving the airtightness and insulation value of your property. This guide provides the definitive 2026 technical overview for UK emergency roofing and storm-damage recovery.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Roof Repair 2026</h2>
     <div class="capsule-box">
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Roof Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Use a pair of binoculars to check your ridge tiles from the ground after a 2026 storm-no need to climb!</li>
-            <li><strong>CANNOT:</strong> Power-wash your 2026 roof-the high pressure strips the protective granules from the tiles and forces water under the laps.</li>
+            <li><strong>CAN:</strong> Use a pair of binoculars to check your ridge tiles from the ground after a 2026 storm—no need to climb!</li>
+            <li><strong>CANNOT:</strong> Power-wash your 2026 roof—the high pressure strips the protective granules from the tiles and forces water under the laps.</li>
             <li><strong>CAN:</strong> Check your **Gutter-Line** in 2026. If it's full of "Sand," your tiles are disintegrating and need a 2026 coating or replacement.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Damp Patch" in the corner-in 2026, this is usually a thermal bridge issue that leads to toxic black mould in 72 hours.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Damp Patch" in the corner—in 2026, this is usually a thermal bridge issue that leads to toxic black mould in 72 hours.</li>
         </ul>
     </div>
 

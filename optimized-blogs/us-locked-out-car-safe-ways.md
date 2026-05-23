@@ -9,7 +9,7 @@ Before you break a window or damage your door seal, there are safer, smarter way
 ---
 
 <!-- .capsule-box (Blue Accent) -->
-### �- Immediate Checklist
+### 🚗 Immediate Checklist
 *   **Door Check:** Verify every single door and the trunk.
 *   **App Check:** Use your manufacturer's smartphone app if available.
 *   **Roadside:** Check for AAA or insurance lockout coverage.
@@ -49,7 +49,7 @@ If you don’t have roadside assistance or an app, call a local automotive locks
 ---
 
 <!-- .split-dos-donts -->
-### �-️ When to Call a Professional Locksmith
+### ⚖️ When to Call a Professional Locksmith
 You’ve tried the basics, but some situations need expert help. Call a technician if:
 
 #### ✅ Indicators for Expert Help

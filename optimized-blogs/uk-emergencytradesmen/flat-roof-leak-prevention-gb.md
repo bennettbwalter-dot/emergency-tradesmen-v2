@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the flat roof has evolved from a "problem area" into a multi-functional platform for solar energy and biodiversity. However, with this increased utility comes increased complexity in leak detection. The traditional method of "Flood Testing"-leaving water on a roof for 24 hours to see if it drips-is now considered a dangerous and outdated practice in 2026. Instead, the UK has embraced **Electronic Leak Detection (ELD)** as the definitive non-destructive diagnostic standard. Whether you have a modern GRP (Glass Reinforced Polyester) balcony or a heritage bitumen extension, the 2026 standard for flat roof resilience involves **Low-Voltage Electric Field Vector Mapping** and **Cold-Applied Liquid Membranes**. This guide provides the technical 2026 standard for UK flat roof protection and emergency recovery.</p>
+    <p>In the UK of 2026, the flat roof has evolved from a "problem area" into a multi-functional platform for solar energy and biodiversity. However, with this increased utility comes increased complexity in leak detection. The traditional method of "Flood Testing"—leaving water on a roof for 24 hours to see if it drips—is now considered a dangerous and outdated practice in 2026. Instead, the UK has embraced **Electronic Leak Detection (ELD)** as the definitive non-destructive diagnostic standard. Whether you have a modern GRP (Glass Reinforced Polyester) balcony or a heritage bitumen extension, the 2026 standard for flat roof resilience involves **Low-Voltage Electric Field Vector Mapping** and **Cold-Applied Liquid Membranes**. This guide provides the technical 2026 standard for UK flat roof protection and emergency recovery.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Flat Roof 2026</h2>
     <div class="capsule-box">
@@ -39,7 +39,7 @@
             <li><strong>Digital Evidence:</strong> You receive a **2026 Structural Integrity Certificate** that proves your roof is 100% watertight, essential for 2026 building insurance.</li>
         </ul>
     </div>
-    <p>In 2026, we don't guess-we **Detect**. Our ELD services are the UK standard for **Non-Destructive Integrity Testing**. If your flat roof is "Leaking somewhere," our 2026 scans will find the exact GPS coordinate of the breach. We are the UK leaders in **ELD Precision Technology**. </p>
+    <p>In 2026, we don't guess—we **Detect**. Our ELD services are the UK standard for **Non-Destructive Integrity Testing**. If your flat roof is "Leaking somewhere," our 2026 scans will find the exact GPS coordinate of the breach. We are the UK leaders in **ELD Precision Technology**. </p>
 
     <h2>3. PMMA Liquid Membranes: The 24/7 Emergency Seal</h2>
     <div class="capsule-box">
@@ -72,7 +72,7 @@
     <h2>5. Identifying Flat Roof Failure: 2026 Warning Signs</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>"Alligatoring":</strong> Cracking of the surface that looks like reptile skin-a sign that the UV protection has failed in 2026 intensities.</li>
+            <li><strong>"Alligatoring":</strong> Cracking of the surface that looks like reptile skin—a sign that the UV protection has failed in 2026 intensities.</li>
             <li><strong>Soft Spots:</strong> If the roof feels "Spongy," the insulation beneath the membrane is saturated and must be replaced to meet 2026 Part L regs.</li>
             <li><strong>Blistering:</strong> Trapped moisture under the membrane expanding in the sun. If these "Pop," you have an immediate 2026 emergency.</li>
         </ul>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Flat Roof Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Inspect your flat roof after an **Autumn Storm**-leaf-blockage is the #1 cause of 2026 failure.</li>
-            <li><strong>CANNOT:</strong> Use "Roofing Mastic" for a permanent repair-in 2026, these are "One-Season" patches that will crack in the winter.</li>
+            <li><strong>CAN:</strong> Inspect your flat roof after an **Autumn Storm**—leaf-blockage is the #1 cause of 2026 failure.</li>
+            <li><strong>CANNOT:</strong> Use "Roofing Mastic" for a permanent repair—in 2026, these are "One-Season" patches that will crack in the winter.</li>
             <li><strong>CAN:</strong> Request an **Electronic Leak Test** before buying any UK property with a flat roof annex in 2026.</li>
-            <li><strong>CANNOT:</strong> Walk on your flat roof with "Hard-Soled" shoes-the pressure can cause a "Puncture-Leak" that won't show for 6 months.</li>
+            <li><strong>CANNOT:</strong> Walk on your flat roof with "Hard-Soled" shoes—the pressure can cause a "Puncture-Leak" that won't show for 6 months.</li>
         </ul>
     </div>
 

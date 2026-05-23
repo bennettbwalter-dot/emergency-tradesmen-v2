@@ -24,6 +24,7 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import crypto from "crypto";
 import { fileURLToPath } from "url";
 import OpenAI from "openai";
 import dotenv from "dotenv";
@@ -41,6 +42,51 @@ if (fs.existsSync(rootEnvPath)) {
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const HOST = process.env.HOST || "127.0.0.1";
+const STT_API_TOKEN = process.env.STT_API_TOKEN;
+
+app.disable("x-powered-by");
+app.use((_req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Referrer-Policy", "no-referrer");
+    res.setHeader("Cache-Control", "no-store");
+    next();
+});
+
+const rateBuckets = new Map();
+function rateLimit(maxRequests, windowMs) {
+    return (req, res, next) => {
+        const key = req.ip || req.socket.remoteAddress || "unknown";
+        const now = Date.now();
+        const bucket = rateBuckets.get(key) || { count: 0, resetAt: now + windowMs };
+        if (now > bucket.resetAt) {
+            bucket.count = 0;
+            bucket.resetAt = now + windowMs;
+        }
+        bucket.count += 1;
+        rateBuckets.set(key, bucket);
+        if (bucket.count > maxRequests) {
+            return res.status(429).json({ error: "Too many requests" });
+        }
+        return next();
+    };
+}
+
+function requireUploadAuth(req, res, next) {
+    if (!STT_API_TOKEN) {
+        if (process.env.NODE_ENV === "production") {
+            return res.status(503).json({ error: "STT endpoint is not configured" });
+        }
+        return next();
+    }
+
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+    if (!token || token !== STT_API_TOKEN) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+    return next();
+}
 
 // ---------------------------------------------------------------------------
 // OpenAI client
@@ -87,7 +133,7 @@ const storage = multer.diskStorage({
             "audio/ogg": ".ogg",
         };
         const ext = extMap[file.mimetype] || ".webm";
-        cb(null, `emergency_${Date.now()}${ext}`);
+        cb(null, `emergency_${Date.now()}_${crypto.randomUUID()}${ext}`);
     },
 });
 
@@ -149,7 +195,7 @@ app.get("/api/health", (_req, res) => {
 });
 
 // Main endpoint: Upload audio → Transcribe → Triage
-app.post("/api/upload-audio", upload.single("audio"), async (req, res) => {
+app.post("/api/upload-audio", rateLimit(12, 60 * 1000), requireUploadAuth, upload.single("audio"), async (req, res) => {
     const startTime = Date.now();
     let filePath = "";
 
@@ -180,7 +226,7 @@ app.post("/api/upload-audio", upload.single("audio"), async (req, res) => {
             ? transcription.trim()
             : (transcription.text || "").trim();
 
-        console.log(`[Backend] STEP 1 complete. Transcript: "${transcript}"`);
+        console.log(`[Backend] STEP 1 complete. Transcript length: ${transcript.length}`);
 
         if (!transcript) {
             return res.json({
@@ -264,7 +310,9 @@ No markdown. No explanation.`,
         console.error("[Backend] Error:", err.message);
 
         // Surface useful OpenAI errors
-        const details = err.response?.data?.error?.message || err.message;
+        const details = process.env.NODE_ENV === "production"
+            ? undefined
+            : (err.response?.data?.error?.message || err.message);
         return res.status(500).json({
             error: "Transcription failed",
             details,
@@ -282,8 +330,8 @@ No markdown. No explanation.`,
 // ---------------------------------------------------------------------------
 // Start
 // ---------------------------------------------------------------------------
-app.listen(PORT, () => {
-    console.log(`\n[Backend] ✅ STT Backend listening on http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`\n[Backend] STT Backend listening on http://${HOST}:${PORT}`);
     console.log(`[Backend]    STEP 1 model: gpt-4o-mini-transcribe (transcription)`);
     console.log(`[Backend]    STEP 2 model: gpt-4o-mini (chat triage)`);
     console.log(`[Backend]    POST /api/upload-audio to process emergency audio\n`);

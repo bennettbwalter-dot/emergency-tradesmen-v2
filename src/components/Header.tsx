@@ -14,7 +14,8 @@ import {
   HelpCircle,
   ShieldCheck,
   Rocket,
-  ChevronRight
+  ChevronRight,
+  Globe
 } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
@@ -44,10 +45,15 @@ export function Header({ countryCode }: HeaderProps) {
   const countryPrefix = isUS && !isUSDomain ? '/us' : '';
 
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    setIsScrolled(window.scrollY > 20);
+    
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
       // Always show on desktop (md and up)
       if (window.innerWidth >= 768) {
         setIsVisible(true);
@@ -75,20 +81,29 @@ export function Header({ countryCode }: HeaderProps) {
     };
   }, []);
 
+  const isMarketingLanding = location.pathname === '/landing' || location.pathname === '/welcome';
+  const isTransparentHeader = isMarketingLanding && !isScrolled;
+
+  const headerClass = isMarketingLanding
+    ? `fixed top-0 left-0 z-50 w-full ${isTransparentHeader ? 'bg-transparent border-none text-white' : 'bg-background/80 backdrop-blur-xl border-b border-white/10 text-foreground'} transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`
+    : `sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`;
+
   return (
-    <header className={`sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`}>
+    <header className={headerClass}>
       {/* Gradient bottom line instead of flat border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {!isTransparentHeader && (
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      )}
       <div className="container-wide">
         <div className="flex items-center justify-between h-16">
           {/* LEFT AREA: Logo */}
           <div className="flex-shrink-0 z-50">
             <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
               <div className="relative">
-                <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="eager" decoding="async" fetchPriority="high" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
+                <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="eager" decoding="async" fetchpriority="high" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
               </div>
               <div className="hidden sm:block">
-                <span className="font-display text-2xl tracking-wide text-foreground group-hover:text-white transition-colors">{siteNameMain}</span>
+                <span className={`font-display text-2xl tracking-wide transition-colors ${isTransparentHeader ? 'text-white group-hover:text-white/80' : 'text-foreground group-hover:text-white'}`}>{siteNameMain}</span>
                 <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{siteNameSub}</span>
               </div>
             </Link>
@@ -113,7 +128,7 @@ export function Header({ countryCode }: HeaderProps) {
                 <Link
                   key={item}
                   to={`${countryPrefix}/${item.toLowerCase()}`}
-                  className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
+                  className={`relative text-sm font-medium tracking-wide transition-colors group/link ${isTransparentHeader ? 'text-slate-200 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
                   data-tour={item === 'Blog' ? 'tour-blog-link' : undefined}
                 >
                   {item}
@@ -125,7 +140,7 @@ export function Header({ countryCode }: HeaderProps) {
                 variant="outline"
                 size="sm"
                 asChild
-                className="border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300"
+                className={`border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300 ${isTransparentHeader ? 'bg-transparent text-white border-white/20 hover:bg-white/10 hover:border-white' : ''}`}
                 data-tour="tour-signup"
               >
                 <Link to={`${countryPrefix}/pricing`}>
@@ -135,7 +150,7 @@ export function Header({ countryCode }: HeaderProps) {
 
               <Link 
                 to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} 
-                className="relative text-sm font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors group/link"
+                className={`relative text-sm font-medium tracking-wide transition-colors group/link ${isTransparentHeader ? 'text-slate-200 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
@@ -156,7 +171,7 @@ export function Header({ countryCode }: HeaderProps) {
 
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="relative h-10 w-10 text-muted-foreground hover:text-gold hover:bg-gold/5">
+                  <Button variant="ghost" size="icon" className={`relative h-10 w-10 transition-colors ${isTransparentHeader ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-muted-foreground hover:text-gold hover:bg-gold/5'}`}>
                     {/* Invisible targets for the mobile tour to highlight the menu button */}
                     <div data-tour="tour-signup" className="absolute inset-0 pointer-events-none" />
                     <div data-tour="tour-blog-link" className="absolute inset-0 pointer-events-none" />
@@ -184,6 +199,11 @@ export function Header({ countryCode }: HeaderProps) {
                     <Link to={`${countryPrefix}/`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
                       <Home className="w-[18px] h-[18px] text-[#9ca3af]" />
                       Home
+                    </Link>
+
+                    <Link to="/landing" className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
+                      <Globe className="w-[18px] h-[18px] text-[#9ca3af]" />
+                      Landing Page
                     </Link>
 
                     <Link to={`${countryPrefix}/about`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">

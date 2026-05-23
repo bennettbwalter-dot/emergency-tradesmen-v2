@@ -105,22 +105,19 @@ export default function BlogPage() {
                     return;
                 }
 
-                // Strict Regional Filtering: only posts whose slug matches the current
-                // region show up. Posts with no region marker are excluded from both
-                // sites — a UK-only domain must never serve US content and vice versa.
+                // Strict Regional Filtering: Only show posts that match the current country code suffix
                 const regionalData = data.filter(post => {
                     if (!post) return false;
                     try {
                         const slug = (post.slug || "").toString().toLowerCase();
-                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') ||
-                                     slug.includes('-us-') || slug.includes('-usa-') ||
-                                     slug.startsWith('us-') || slug.startsWith('usa-');
-                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') ||
-                                     slug.includes('-gb-') || slug.includes('-uk-') ||
-                                     slug.startsWith('uk-') || slug.startsWith('gb-');
+                        const isUS = slug.endsWith('-us') || slug.endsWith('-usa') || slug.includes('-us-') || slug.includes('-usa-');
+                        const isUK = slug.endsWith('-gb') || slug.endsWith('-uk') || slug.includes('-gb-') || slug.includes('-uk-');
 
-                        if (isUS && isUK) return false;
-                        return settings.countryCode === 'US' ? isUS : isUK;
+                        if (settings.countryCode === 'US') {
+                            return isUS || !isUK;
+                        } else {
+                            return isUK || !isUS;
+                        }
                     } catch (err) {
                         return false;
                     }
@@ -218,7 +215,7 @@ export default function BlogPage() {
                                                 className="w-full h-full object-cover transition-transform group-hover:scale-105"
                                                 style={{ transitionDuration: '20s', animationTimingFunction: 'linear' }}
                                                 loading="eager"
-                                                fetchPriority="high"
+                                                fetchpriority="high"
                                                 decoding="async"
                                                 onError={(e) => {
                                                     const target = e.currentTarget;

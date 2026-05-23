@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the concept of "The Grid" has fundamentally changed. With non-commodity charges now making up nearly 60% of business bills and residential energy security facing "Frequency Cautions" from the DESNZ, the British home is no longer just a consumer-it is a micro-utility. As we navigate the 2026 energy landscape, the adoption of home generators and Lithium Iron Phosphate (LFP) battery systems has reached record levels. However, the integration of these power sources into your existing domestic wiring requires strict adherence to the **BS 7671:2018+A3:2024** amendments. In 2026, a "DIY" generator connection isn't just a safety risk; it’s a criminal liability that can compromise the entire local grid. This guide outlines the definitive UK protocol for safe, legal home resilience in 2026.</p>
+    <p>In the UK of 2026, the concept of "The Grid" has fundamentally changed. With non-commodity charges now making up nearly 60% of business bills and residential energy security facing "Frequency Cautions" from the DESNZ, the British home is no longer just a consumer—it is a micro-utility. As we navigate the 2026 energy landscape, the adoption of home generators and Lithium Iron Phosphate (LFP) battery systems has reached record levels. However, the integration of these power sources into your existing domestic wiring requires strict adherence to the **BS 7671:2018+A3:2024** amendments. In 2026, a "DIY" generator connection isn't just a safety risk; it’s a criminal liability that can compromise the entire local grid. This guide outlines the definitive UK protocol for safe, legal home resilience in 2026.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Energy Security 2026</h2>
     <div class="capsule-box">
@@ -49,7 +49,7 @@
             <li><strong>Regional Microgrids:</strong> Many UK developments are now moving toward "Island Capability," allowing a whole street to run on shared battery assets during a major fault.</li>
         </ul>
     </div>
-    <p>Blackouts in 2026 aren't just caused by storms; they are often "Managed Events" used to save the national grid. Having a generator isn't about "getting through a storm"-it’s about managing your home’s uptime in a volatile energy market. Our 2026 resilience specialists can integrate your generator with "Agile Tariffs" to automate your backup based on real-time grid status.</p>
+    <p>Blackouts in 2026 aren't just caused by storms; they are often "Managed Events" used to save the national grid. Having a generator isn't about "getting through a storm"—it’s about managing your home’s uptime in a volatile energy market. Our 2026 resilience specialists can integrate your generator with "Agile Tariffs" to automate your backup based on real-time grid status.</p>
 
     <blockquote class="expert-tip">
         <p>Expert Tip: If you are buying a generator in 2026, look for **"G99 Certification."** This ensures the unit's inverter can safely "Sync" with the UK grid for Demand Side Response without causing local harmonic distortion.</p>
@@ -77,7 +77,7 @@
             <li><strong>Boiler Protection:</strong> 2026 UK Combi Boilers (Vaillant, Worcester Bosch) use sensitive microprocessors that will "Lock Out" or suffer logic-failure if fed dirty power.</li>
         </ul>
     </div>
-    <p>In 2026, "Dirty Power" is the \#1 cause of post-blackout repair calls. Homeowners use a cheap generator to keep the heat on, only to fry the £400 PCB in their boiler. We only recommend and install Pure Sine Wave inverters to ensure your 2026 smart home remains functional-not just powered.</p>
+    <p>In 2026, "Dirty Power" is the \#1 cause of post-blackout repair calls. Homeowners use a cheap generator to keep the heat on, only to fry the £400 PCB in their boiler. We only recommend and install Pure Sine Wave inverters to ensure your 2026 smart home remains functional—not just powered.</p>
 
     <h2>6. Carbon Monoxide (CO) Safety: The "Outdoor Only" Mandate</h2>
     <div class="capsule-box">
@@ -119,7 +119,7 @@
             <li><strong>LFP Chemistry:</strong> Both use Lithium Iron Phosphate, which offers 10,000+ cycles and is significantly more fire-safe than older Lithium-Ion tech.</li>
         </ul>
     </div>
-    <p>In 2026, "Battery vs Generator" is no longer the question-the answer is usually "Both." A battery provides the instant "No-Flicker" backup, while a generator provides the infinite runtime during a multi-day grid failure. We are certified installers for both Tesla and EcoFlow in the UK, ensuring your 2026 "Home Energy Hub" is built with the world's best technology.</p>
+    <p>In 2026, "Battery vs Generator" is no longer the question—the answer is usually "Both." A battery provides the instant "No-Flicker" backup, while a generator provides the infinite runtime during a multi-day grid failure. We are certified installers for both Tesla and EcoFlow in the UK, ensuring your 2026 "Home Energy Hub" is built with the world's best technology.</p>
 
     <h2>10. Legal Liabilities: Noise Acts, "Suicide Leads," and Insurance Voiding</h2>
     <div class="capsule-box">
@@ -135,7 +135,7 @@
         <h3>UK Home Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Install a manual transfer switch today; it is the most cost-effective foundation for 2026 energy security.</li>
-            <li><strong>CANNOT:</strong> Run a generator in a shed or lean-to-carbon monoxide traps are deadly and invisible.</li>
+            <li><strong>CANNOT:</strong> Run a generator in a shed or lean-to—carbon monoxide traps are deadly and invisible.</li>
             <li><strong>CAN:</strong> Check your RCDs for **BS 7671 A3:2024** compliance if you have a V2H or battery system.</li>
             <li><strong>CANNOT:</strong> Use a standard extension lead to power your whole house through a single socket.</li>
         </ul>

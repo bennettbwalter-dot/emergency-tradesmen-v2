@@ -202,7 +202,7 @@ export function LocalAreaBackdrop({
             src={fallbackImage}
             alt={label || "Local area"}
             className="h-full w-full object-cover"
-            fetchPriority="high"
+            fetchpriority="high"
             loading="eager"
             decoding="async"
           />

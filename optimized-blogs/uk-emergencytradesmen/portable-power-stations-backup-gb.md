@@ -18,7 +18,7 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, the concept of "Emergency Power" has moved from the garden shed into the living room. As the national grid navigates the most volatile phase of the 2026 Energy Crisis-marked by weekly "Frequency Variation" warnings and escalating peak-time costs-the portable power station (PPS) has become an essential appliance for the British homeowner. Unlike industrial petrol generators, these sleek, silent, and emission-free units are safe for use in flats, terraced houses, and modern apartments. However, as 2026 technical standards evolve, specifically around **BS 7671 (The IET Wiring Regulations)** and battery chemistry safety, choosing the right "Resilience Cube" requires careful technical audit. This guide outlines the definitive UK protocol for portable power resilience in 2026.</p>
+    <p>In the UK of 2026, the concept of "Emergency Power" has moved from the garden shed into the living room. As the national grid navigates the most volatile phase of the 2026 Energy Crisis—marked by weekly "Frequency Variation" warnings and escalating peak-time costs—the portable power station (PPS) has become an essential appliance for the British homeowner. Unlike industrial petrol generators, these sleek, silent, and emission-free units are safe for use in flats, terraced houses, and modern apartments. However, as 2026 technical standards evolve, specifically around **BS 7671 (The IET Wiring Regulations)** and battery chemistry safety, choosing the right "Resilience Cube" requires careful technical audit. This guide outlines the definitive UK protocol for portable power resilience in 2026.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Portable Power 2026</h2>
     <div class="capsule-box">
@@ -36,7 +36,7 @@
         <ul>
             <li><strong>Energy Density vs. Safety:</strong> Older NMC (Nickel Manganese Cobalt) batteries were lighter but prone to "Thermal Runaway" if damaged.</li>
             <li><strong>2026 LFP Mandate:</strong> Most UK insurers now explicitly prefer or require LFP-based indoor storage for residential properties.</li>
-            <li><strong>Cycle Life:</strong> An LFP unit like the **EcoFlow Delta Pro 3** provides 3,500-6,000 cycles before hitting 80% capacity-roughly 10-15 years of daily "Peak Shaving" use.</li>
+            <li><strong>Cycle Life:</strong> An LFP unit like the **EcoFlow Delta Pro 3** provides 3,500-6,000 cycles before hitting 80% capacity—roughly 10-15 years of daily "Peak Shaving" use.</li>
         </ul>
     </div>
     <p>In 2026, we only recommend **LFP-based units** for permanent home residence. The chemistry is inherently safer because it doesn't release oxygen when it fails, preventing the "un-extinguishable fires" associated with older electric vehicle batteries. We provide 2026 "Chemistry Audits" to help you phase out legacy Lithium-Ion units that may no longer be compliant with your home's fire-safety plan.</p>
@@ -119,7 +119,7 @@
             <li><strong>No Fuel Storage:</strong> Avoids the UK legal limit of 30 litres of petrol storage in domestic garages.</li>
         </ul>
     </div>
-    <p>In 2026, urban living demands silent resilience. If you live in a semi-detached or terraced home, a petrol generator is practically unusable due to noise and exhaust. A portable power station is the "Civic Choice" for 2026-protecting your home without disturbing your neighbours. We provide "Noise Audits" for high-density London and Manchester properties.</p>
+    <p>In 2026, urban living demands silent resilience. If you live in a semi-detached or terraced home, a petrol generator is practically unusable due to noise and exhaust. A portable power station is the "Civic Choice" for 2026—protecting your home without disturbing your neighbours. We provide "Noise Audits" for high-density London and Manchester properties.</p>
 
     <h2>10. Winter Resilience: Managing Lithium Performance in Cold UK Sheds</h2>
     <div class="capsule-box">
@@ -136,7 +136,7 @@
         <h3>UK Portable Power: 2026 CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Buy an **LFP (LiFePO4)** unit for 10+ years of 2026 resilience and superior indoor safety.</li>
-            <li><strong>CANNOT:</strong> Use a "Suicide Lead" (plug-to-plug) to backfeed your home-it is illegal, lethal, and will void your insurance.</li>
+            <li><strong>CANNOT:</strong> Use a "Suicide Lead" (plug-to-plug) to backfeed your home—it is illegal, lethal, and will void your insurance.</li>
             <li><strong>CAN:</strong> Test your UPS mode today; ensure your router stays online when you pull the main plug.</li>
             <li><strong>CANNOT:</strong> Drain your battery to 0% and leave it in a cold shed for the winter; keep it at 50-80% for long-term health.</li>
         </ul>

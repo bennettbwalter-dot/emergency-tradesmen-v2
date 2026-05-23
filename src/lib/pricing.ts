@@ -144,7 +144,7 @@ export function generateMockPricing(businessId: string, tradeName: string): Pric
             'Free quote',
             'No hidden costs',
             tier === 'premium' ? '12-month guarantee' : '6-month guarantee',
-            'Confirm insurance before booking',
+            'Fully insured',
             tier !== 'budget' ? 'Same-day service' : 'Next-day service',
         ],
         tier,

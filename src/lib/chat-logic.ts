@@ -1,4 +1,4 @@
-import { trades, cities, usCities, toRouteSlug } from "@/lib/trades";
+import { trades, cities, usCities } from "@/lib/trades";
 import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib/location-utils";
 import { cityPostcodes } from "@/lib/cityPostcodes";
 import { isUSDomain } from "@/lib/siteConfig";
@@ -149,7 +149,7 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'broken lock', 'door won\'t lock', 'door won\'t open',
         'lock jammed', 'burglary repair', 'lock replacement',
         'emergency locksmith', 'can\'t get in', 'locked inside',
-        'lock damage', 'key', 'keys', 'lock', 'door', 'burglar', 'locksmith'
+        'lock damage', 'key', 'lock', 'door', 'burglar', 'locksmith'
     ],
     'drain-specialist': [
         'blocked drain', 'blocked toilet', 'toilet overflowing',
@@ -657,14 +657,14 @@ export async function processUserMessage(message: string, currentState: ChatStat
         // If countryCode is US but we are not on the US domain (unlikely in production but possible in dev), we still want root level if target is the new domain.
         // User said "never ever use (/us)".
         
-        target = `/emergency-${toRouteSlug(newState.detectedTrade)}/${encodeURIComponent(city.toLowerCase())}`;
+        target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
         newState.step = 'ROUTING';
     } else if (newState.detectedTrade && newState.detectedCity && !newState.locationConfirmed) {
         const city = newState.detectedCity;
         if (currentState.step === 'LOCATION_CHECK') {
             newState.locationConfirmed = true;
             newState.step = 'ROUTING';
-            target = `/emergency-${toRouteSlug(newState.detectedTrade)}/${encodeURIComponent(city.toLowerCase())}`;
+            target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
             responseText = `${tip ? tip + ' ' : ''}Confirmed. I'm directing you to our emergency ${getReadableTradeName(newState.detectedTrade, countryCode)} team in ${city} for immediate assistance.`;
         } else {
@@ -676,7 +676,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
-        const locationTerm = isUSDomain ? 'zip code' : 'postcode';
+        const locationTerm = isUSDomain() ? 'zip code' : 'postcode';
         responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or ${locationTerm} are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
         newState.step = 'LOCATION_CHECK';
     } else {

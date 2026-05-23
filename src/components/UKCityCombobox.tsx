@@ -22,9 +22,11 @@ interface UKCityComboboxProps {
     onValueChange: (value: string) => void
     placeholder?: string
     className?: string
+    showLabelOnMobile?: boolean
+    staticLabel?: string
 }
 
-export function UKCityCombobox({ value, onValueChange, placeholder = "Select City...", className }: UKCityComboboxProps) {
+export function UKCityCombobox({ value, onValueChange, placeholder = "Select City...", className, showLabelOnMobile = false, staticLabel }: UKCityComboboxProps) {
     const [open, setOpen] = React.useState(false)
 
     return (
@@ -40,10 +42,10 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                         className
                     )}
                 >
-                    <div className="flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2">
+                    <div className={cn("flex items-center justify-center w-full md:w-auto md:justify-start md:gap-2", showLabelOnMobile && "gap-2")}>
                         <MapPin className="h-5 w-5 md:h-4 md:w-4 shrink-0 text-[#9B7D4F]" />
-                        <span className={cn("hidden md:inline truncate", !value && "text-muted-foreground")}>
-                            {value ? value : placeholder}
+                        <span className={cn(showLabelOnMobile ? "inline" : "hidden md:inline", "truncate", !value && "text-muted-foreground")}>
+                            {staticLabel || value || placeholder}
                         </span>
                     </div>
                     <div className="hidden md:block">

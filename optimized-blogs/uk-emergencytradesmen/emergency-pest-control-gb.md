@@ -18,14 +18,14 @@
 </header>
 
 <main>
-    <p>In the UK of 2026, a "Pest Emergency" is no longer just a nuisance-it's a "Bio-Security Event." With the introduction of the **2026 CRRU (Campaign for Responsible Rodenticide Use) Certification**, the indiscriminate use of toxins is prohibited. The 2026 standard for UK pest management has shifted to **AI-Driven Thermal Detection** and **IoT-Monitored Predictor Stations**. Whether you've discovered a primary rodent breach, a hazardous wasp nest, or a rapid bed bug outbreak, the 2026 standard involves **Vergo 'Pest Alert Sight'** technology and **Passive Barrier Hardening**. We don't just "Spray and Pray"; we use 2026 computer vision to identify the *source* of the infestation in real-time. This guide provides the technical 2026 standard for UK emergency pest control and permanent property resilience.</p>
+    <p>In the UK of 2026, a "Pest Emergency" is no longer just a nuisance—it's a "Bio-Security Event." With the introduction of the **2026 CRRU (Campaign for Responsible Rodenticide Use) Certification**, the indiscriminate use of toxins is prohibited. The 2026 standard for UK pest management has shifted to **AI-Driven Thermal Detection** and **IoT-Monitored Predictor Stations**. Whether you've discovered a primary rodent breach, a hazardous wasp nest, or a rapid bed bug outbreak, the 2026 standard involves **Vergo 'Pest Alert Sight'** technology and **Passive Barrier Hardening**. We don't just "Spray and Pray"; we use 2026 computer vision to identify the *source* of the infestation in real-time. This guide provides the technical 2026 standard for UK emergency pest control and permanent property resilience.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Pest Control 2026</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>AI Thermal Detection:</strong> 2026 technology like **Vergo Pest Alert Sight** allows us to see rodents through walls and floors without destructive access.</li>
             <li><strong>CRRU 2026 Mandates:</strong> Professional rodenticides now require a "Digital Competency Token," ensuring they are used only when non-toxic 2026 methods fail.</li>
-            <li><strong>Heat Treatment (HT):</strong> The 2026 gold standard for bed bugs-raising room temperatures to 52°C to eliminate all life stages in one 2026 visit.</li>
+            <li><strong>Heat Treatment (HT):</strong> The 2026 gold standard for bed bugs—raising room temperatures to 52°C to eliminate all life stages in one 2026 visit.</li>
             <li><strong>IoT Predictor Stations:</strong> 2026 traps send "Motion and Catch" alerts directly to your smartphone, providing 100% 2026 audit transparency.</li>
         </ul>
     </div>
@@ -66,7 +66,7 @@
     <p>Bed bugs have become resistant to 90% of old-world chemicals by 2026. HT is the only **2026 Resilience Guarantee**. We are UK leaders in **2026 High-Volume Thermal Remediation**. </p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> In 2026, some UK cities are using **"Pheromone Shields"** in the sewers-micro-doses of hormones that stop pests from breeding, reducing 2026 rat populations naturally! </p>
+        <p><strong>Fun Fact!</strong> In 2026, some UK cities are using **"Pheromone Shields"** in the sewers—micro-doses of hormones that stop pests from breeding, reducing 2026 rat populations naturally! </p>
     </div>
 
     <h2>5. Identifying "Primary Ingress": The 2026 Multi-Vector Audit</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Pest Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"Professional ID"** in 2026-if they don't have a 2026 CRRU token, they shouldn't use bait.</li>
-            <li><strong>CANNOT:</strong> Use "Peppermint Oil" for a serious rat problem-in 2026, the local populations are "Scent-Desensitized" and will ignore it.</li>
+            <li><strong>CAN:</strong> Check your **"Professional ID"** in 2026—if they don't have a 2026 CRRU token, they shouldn't use bait.</li>
+            <li><strong>CANNOT:</strong> Use "Peppermint Oil" for a serious rat problem—in 2026, the local populations are "Scent-Desensitized" and will ignore it.</li>
             <li><strong>CAN:</strong> Request a **"Digital Drainage CCTV Scan"** if you hear noises under your kitchen floor in 2026.</li>
-            <li><strong>CANNOT:</strong> Block an air-brick with "Expanding Foam"-rats in 2026 will chew through it in 15 seconds.</li>
+            <li><strong>CANNOT:</strong> Block an air-brick with "Expanding Foam"—rats in 2026 will chew through it in 15 seconds.</li>
         </ul>
     </div>
 

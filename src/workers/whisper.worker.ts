@@ -1,4 +1,4 @@
-import { pipeline, env } from '@xenova/transformers';
+import { pipeline, env } from '@huggingface/transformers';
 import { devLog, devWarn } from "@/lib/devLog";
 
 // Skip local check to download from HuggingFace

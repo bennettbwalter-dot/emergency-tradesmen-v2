@@ -66,7 +66,7 @@
     <p>Thawing a 2026 unit is an exercise in patience. If you try to chip the ice away with a screwdriver or hammer, you will likely puncture a refrigerant line, leading to a $1,500 repair bill and an environmental incident. In 2026, we advocate for the "Gentle Flow" approach. If the ice doesn't melt with lukewarm water, it means you have a deeper internal refrigerant issue that requires an F-Gas pro.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The first heat pump was built by Peter von Rittinger in 1855. It was used to dry salt in Austrian salt marshes. In 2026, your heat pump is basically a "Salt Dryer" for your home, extracting heat from the air even when it's -15°C outside-provided the coils aren't iced over!</p>
+        <p><strong>Fun Fact!</strong> The first heat pump was built by Peter von Rittinger in 1855. It was used to dry salt in Austrian salt marshes. In 2026, your heat pump is basically a "Salt Dryer" for your home, extracting heat from the air even when it's -15°C outside—provided the coils aren't iced over!</p>
     </div>
 
     <h2>5. The 2026 Refrigerant Transition: Heat Pumps & A2L Safety</h2>
@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Heat Pump Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your external unit for leaves and debris-airflow is the \#1 enemy of a 2026 defrost cycle.</li>
-            <li><strong>CANNOT:</strong> Use a hair dryer or heat gun to thaw your unit-the localized heat can melt internal sensor housings.</li>
+            <li><strong>CAN:</strong> Check your external unit for leaves and debris—airflow is the \#1 enemy of a 2026 defrost cycle.</li>
+            <li><strong>CANNOT:</strong> Use a hair dryer or heat gun to thaw your unit—the localized heat can melt internal sensor housings.</li>
             <li><strong>CAN:</strong> Set your 2026 thermostat to a consistent temperature to maintain "Thermal Inertia" in your home's fabric.</li>
-            <li><strong>CANNOT:</strong> Ignore an "Error E01" or "F24" light-it means your system is losing the battle against the ice.</li>
+            <li><strong>CANNOT:</strong> Ignore an "Error E01" or "F24" light—it means your system is losing the battle against the ice.</li>
         </ul>
     </div>
 

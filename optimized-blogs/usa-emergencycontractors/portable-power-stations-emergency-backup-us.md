@@ -50,7 +50,7 @@
     <h2>3. LiFePO4 Chemistry: Why US Home Defense Demands LFP</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Longevity:</strong> LiFePO4 (LFP) cells offer 3,500+ full charge cycles-roughly 7x more than the Lithium-ion cells found in older US "camping" units.</li>
+            <li><strong>Longevity:</strong> LiFePO4 (LFP) cells offer 3,500+ full charge cycles—roughly 7x more than the Lithium-ion cells found in older US "camping" units.</li>
             <li><strong>Thermal Threshold:</strong> LFP has a higher thermal runaway temperature, making it significantly safer in hot US states where indoor temperatures can spike.</li>
             <li><strong>Warranty Protection:</strong> Most 2026-standard LFP units carry a 5-year to 10-year warranty, reflecting the chemistry's massive jump in durability.</li>
         </ul>
@@ -65,10 +65,10 @@
             <li><strong>Food Safety (150W-250W):</strong> A full-size US fridge doesn't run 24/7; it cycles. A 2kWh unit can often keep food safe for 12-18 hours if the door stays closed.</li>
         </ul>
     </div>
-    <p>US households average a much higher energy draw than the rest of the world. In 2026, the average US "Emergency Load" has increased due to the number of connected smart devices we rely on. We recommend the "1:1 Rule"-for every 1,000W of devices you want to run, you need 1,000Wh of battery capacity. This provides approximately one hour of continuous run time. For a 24-hour blackout, most US families find that 2,000Wh (2kWh) is the "Sweet Spot" for maintaining a normal life while waiting for the utility crews.</p>
+    <p>US households average a much higher energy draw than the rest of the world. In 2026, the average US "Emergency Load" has increased due to the number of connected smart devices we rely on. We recommend the "1:1 Rule"—for every 1,000W of devices you want to run, you need 1,000Wh of battery capacity. This provides approximately one hour of continuous run time. For a 24-hour blackout, most US families find that 2,000Wh (2kWh) is the "Sweet Spot" for maintaining a normal life while waiting for the utility crews.</p>
 
     <div class="fun-fact">
-        <p><strong>Fun Fact!</strong> The world's first commercial power grid was Thomas Edison's Pearl Street Station in NYC (1882). It used six massive "Jumbo" dynamos-named after Barnum's famous elephant-to power just 400 lamps for 85 customers!</p>
+        <p><strong>Fun Fact!</strong> The world's first commercial power grid was Thomas Edison's Pearl Street Station in NYC (1882). It used six massive "Jumbo" dynamos—named after Barnum's famous elephant—to power just 400 lamps for 85 customers!</p>
     </div>
 
     <h2>5. Pure Sine Wave: Protecting Sensitive US Medical Electronics</h2>
@@ -106,7 +106,7 @@
     <h2>7. NEC 2026 Article 702: Code-Compliant Home Integration</h2>
     <div class="capsule-box">
         <ul>
-            <li><strong>Scope:</strong> Article 702 covers "Optional Standby Systems"-including portable stations permanently connected to your house's wiring.</li>
+            <li><strong>Scope:</strong> Article 702 covers "Optional Standby Systems"—including portable stations permanently connected to your house's wiring.</li>
             <li><strong>Rating Mandate:</strong> Your power source must be rated to handle the "Largest Single Load" it is connected to (e.g., your fridge's surge current).</li>
             <li><strong>Non-Automatic Reset:</strong> 2026 codes require that if an inverter trips due to overload, it must be reset manually by a human for safety.</li>
         </ul>
@@ -141,7 +141,7 @@
             <li><strong>Verification:</strong> Never buy a power station from an unverified US reseller that lacks the "UL Listed" or "ETL Listed" hologram.</li>
         </ul>
     </div>
-    <p>Underwriters Laboratories (UL) is the "Gold Standard" for North American safety. A unit that passes UL 2743 has been literally "abused" in a lab-dropped, frozen, and high-voltage tested-to ensure it doesn't catch fire in your hallway. In 2026, with the rise of "budget" imports, looking for that UL mark is the simplest way to protect your family. If the manufacturer didn't care enough to pay for UL testing, they didn't care enough to build a safe internal Battery Management System (BMS).</p>
+    <p>Underwriters Laboratories (UL) is the "Gold Standard" for North American safety. A unit that passes UL 2743 has been literally "abused" in a lab—dropped, frozen, and high-voltage tested—to ensure it doesn't catch fire in your hallway. In 2026, with the rise of "budget" imports, looking for that UL mark is the simplest way to protect your family. If the manufacturer didn't care enough to pay for UL testing, they didn't care enough to build a safe internal Battery Management System (BMS).</p>
 
     <h2>11. 24/7 Licensed Electricians: Professional Standby Power Setup</h2>
     <div class="capsule-box">
@@ -151,7 +151,7 @@
             <li><strong>Audit:</strong> We use thermal imaging and load-meters to calculate exactly what size battery your family needs for a 72-hour survival scenario.</li>
         </ul>
     </div>
-    <p>Having a portable power station is step one. Integrating it into your American life is step two. Whether you need a simple "Inlet" for your Florida hurricane shelter or a high-capacity "Panel Backup" for your snowbound Michigan home, our 24/7 licensed master electricians are here to help. We ensure your system is 100% NEC-compliant, meaning your power stays on and your warranty stays valid. Don't wait for the next "PSPS" alert-prepare your home today for the grid of 2026.</p>
+    <p>Having a portable power station is step one. Integrating it into your American life is step two. Whether you need a simple "Inlet" for your Florida hurricane shelter or a high-capacity "Panel Backup" for your snowbound Michigan home, our 24/7 licensed master electricians are here to help. We ensure your system is 100% NEC-compliant, meaning your power stays on and your warranty stays valid. Don't wait for the next "PSPS" alert—prepare your home today for the grid of 2026.</p>
 
 </main>
 

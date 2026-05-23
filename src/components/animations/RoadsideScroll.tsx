@@ -24,8 +24,8 @@ const FEATURE_ITEMS = [
         Icon: Clock
     },
     {
-        title: "Roadside Contacts",
-        description: "Connect quickly with public breakdown recovery listings and confirm details directly.",
+        title: "Local Contacts",
+        description: "Find public breakdown recovery listings and confirm details directly before booking.",
         Icon: ShieldCheck
     },
     {

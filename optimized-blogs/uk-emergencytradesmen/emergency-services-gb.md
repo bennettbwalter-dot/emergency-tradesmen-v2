@@ -134,10 +134,10 @@
     <div class="dos-donts">
         <h3>UK Emergency Services Resilience: 2026 CANs and CANNOTs</h3>
         <ul>
-            <li><strong>CAN:</strong> Check your **"2026 CertifID Hub Status"**-if your service provider isn't 2026-spec verified, you face 2026 insurance risks.</li>
-            <li><strong>CANNOT:</strong> Ignore a "Thermal Warning" in 2026-in 2026, **2026 Predictive Energy Alerts** are the standard for property safety.</li>
+            <li><strong>CAN:</strong> Check your **"2026 CertifID Hub Status"**—if your service provider isn't 2026-spec verified, you face 2026 insurance risks.</li>
+            <li><strong>CANNOT:</strong> Ignore a "Thermal Warning" in 2026—in 2026, **2026 Predictive Energy Alerts** are the standard for property safety.</li>
             <li><strong>CAN:</strong> Request a **"2026 Carbon Impact Report"** after any 2026 technical home emergency service.</li>
-            <li><strong>CANNOT:</strong> Use "Non-Matter" Hardware for 2026 UK smart properties-you must use **2026 Matter-Certified Platforms** to meet 2026 standards.</li>
+            <li><strong>CANNOT:</strong> Use "Non-Matter" Hardware for 2026 UK smart properties—you must use **2026 Matter-Certified Platforms** to meet 2026 standards.</li>
         </ul>
     </div>
 

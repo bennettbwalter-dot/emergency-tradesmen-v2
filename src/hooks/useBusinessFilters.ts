@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Business, calculateTrustScore } from "@/lib/businesses";
+import { Business, calculateTrustScore, getListingDisplayStatus } from "@/lib/businesses";
 import { FilterOptions } from "@/components/SearchFilterBar";
 
 export function useBusinessFilters(businesses: Business[] | null) {
@@ -65,9 +65,11 @@ export function useBusinessFilters(businesses: Business[] | null) {
                 return bScore - aScore;
             }
 
-            // Tier 3: Verified Status (Tie-breaker for scores)
-            if (a.verified && !b.verified) return -1;
-            if (!a.verified && b.verified) return 1;
+            // Tier 3: Honest listing status (tie-breaker for scores)
+            const aVerified = getListingDisplayStatus(a) === 'verified';
+            const bVerified = getListingDisplayStatus(b) === 'verified';
+            if (aVerified && !bVerified) return -1;
+            if (!aVerified && bVerified) return 1;
 
             // Tier 4: User Selection (Rating, Reviews, etc.)
             switch (filters.sortBy) {

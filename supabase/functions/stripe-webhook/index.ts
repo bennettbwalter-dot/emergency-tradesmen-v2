@@ -80,21 +80,21 @@ serve(async (req) => {
             let daysToAdd = 30
 
             if (subscriptionId) {
-                const PRO_PRICE_IDS = (Deno.env.get('STRIPE_PRO_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-                const PREMIUM_PRICE_IDS = (Deno.env.get('STRIPE_PREMIUM_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-                const AGENCY_PRICE_IDS = (Deno.env.get('STRIPE_AGENCY_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
+                const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
+                const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+                const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
                 const stripeSub = await stripe.subscriptions.retrieve(subscriptionId as string)
                 if (stripeSub.items.data.length > 0) {
                     const priceId = stripeSub.items.data[0].price.id
 
-                    if (AGENCY_PRICE_IDS.includes(priceId)) {
+                    if (priceId === AGENCY_PRICE_ID) {
                         planName = "agency"
                         daysToAdd = 30
-                    } else if (PREMIUM_PRICE_IDS.includes(priceId)) {
+                    } else if (priceId === PREMIUM_PRICE_ID) {
                         planName = "premium"
                         daysToAdd = 366
-                    } else if (PRO_PRICE_IDS.includes(priceId)) {
+                    } else if (priceId === PRO_PRICE_ID) {
                         planName = "pro"
                         daysToAdd = 30
                     } else {
@@ -134,11 +134,9 @@ serve(async (req) => {
 
             // Send Welcome Email
             try {
-                const isUS = session.currency === 'usd'
-                const brandName = isUS ? 'Emergency Contractors' : 'Emergency Tradesmen'
-                const dashboardUrl = isUS
-                    ? 'https://emergencycontractors.net/user/dashboard'
-                    : 'https://emergencytradesmen.net/user/dashboard'
+                const isUS = email.includes('.us') || false // Fallback; domain detection isn't available server-side
+                const brandName = 'Emergency Tradesmen'
+                const dashboardUrl = 'https://emergencytradesmen.net/user/dashboard'
 
                 const functionsUrl = `${SUPABASE_URL}/functions/v1/send-email`
                 await fetch(functionsUrl, {
@@ -180,21 +178,21 @@ serve(async (req) => {
                 .single()
 
             // Mapping Plan correctly from updated webhooks
-            const PRO_PRICE_IDS = (Deno.env.get('STRIPE_PRO_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-            const PREMIUM_PRICE_IDS = (Deno.env.get('STRIPE_PREMIUM_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-            const AGENCY_PRICE_IDS = (Deno.env.get('STRIPE_AGENCY_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
+            const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
+            const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+            const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
             let planName = "free"
             let daysToAdd = 0
             if (subscription.items.data.length > 0) {
                 const priceId = subscription.items.data[0].price.id
-                if (AGENCY_PRICE_IDS.includes(priceId)) {
+                if (priceId === AGENCY_PRICE_ID) {
                     planName = "agency"
                     daysToAdd = 30
-                } else if (PREMIUM_PRICE_IDS.includes(priceId)) {
+                } else if (priceId === PREMIUM_PRICE_ID) {
                     planName = "premium"
                     daysToAdd = 366
-                } else if (PRO_PRICE_IDS.includes(priceId)) {
+                } else if (priceId === PRO_PRICE_ID) {
                     planName = "pro"
                     daysToAdd = subscription.items.data[0].plan.interval === 'year' ? 366 : 30
                 }
@@ -298,11 +296,8 @@ serve(async (req) => {
                 // Notify User
                 const { data: userData } = await supabase.auth.admin.getUserById(sub.user_id)
                 const email = userData.user?.email
-                const isUS = invoice.currency === 'usd'
-                const brandName = isUS ? 'Emergency Contractors' : 'Emergency Tradesmen'
-                const dashboardUrl = isUS
-                    ? 'https://emergencycontractors.net/user/dashboard'
-                    : 'https://emergencytradesmen.net/user/dashboard'
+                const brandName = 'Emergency Tradesmen'
+                const dashboardUrl = 'https://emergencytradesmen.net/user/dashboard'
 
                 if (email) {
                     const subject = isLocked ? 'ACTION REQUIRED: Account Locked' : `Payment Failed - ${brandName}`
@@ -355,19 +350,19 @@ serve(async (req) => {
                     .single()
 
                 // Invoice lines contain the price ID
-                const PRO_PRICE_IDS = (Deno.env.get('STRIPE_PRO_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-                const PREMIUM_PRICE_IDS = (Deno.env.get('STRIPE_PREMIUM_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
-                const AGENCY_PRICE_IDS = (Deno.env.get('STRIPE_AGENCY_PRICE_ID') || '').split(',').map((s: string) => s.trim()).filter(Boolean)
+                const PRO_PRICE_ID = Deno.env.get('STRIPE_PRO_PRICE_ID')
+                const PREMIUM_PRICE_ID = Deno.env.get('STRIPE_PREMIUM_PRICE_ID')
+                const AGENCY_PRICE_ID = Deno.env.get('STRIPE_AGENCY_PRICE_ID')
 
                 let targetPlan = 'free'
                 let daysToAdd = 30
                 if (invoice.lines?.data?.length > 0) {
                     const priceId = invoice.lines.data[0].price?.id
-                    if (priceId && AGENCY_PRICE_IDS.includes(priceId)) {
+                    if (priceId === AGENCY_PRICE_ID) {
                         targetPlan = 'agency'
-                    } else if (priceId && PREMIUM_PRICE_IDS.includes(priceId)) {
+                    } else if (priceId === PREMIUM_PRICE_ID) {
                         targetPlan = 'premium'
-                    } else if (priceId && PRO_PRICE_IDS.includes(priceId)) {
+                    } else if (priceId === PRO_PRICE_ID) {
                         targetPlan = 'pro'
                     } else {
                         targetPlan = sub?.plan || 'pro'
