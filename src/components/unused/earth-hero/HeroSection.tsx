@@ -9,30 +9,36 @@ import { audioService } from "@/lib/audioService";
 import { cn } from "@/lib/utils";
 import { getSiteName } from "@/lib/siteConfig";
 
-// Load the detailed WebGL Earth as part of the hero so the globe keeps its texture detail.
-const EarthHeroBackground = lazy(() =>
-    import("@/components/earth/EarthHeroBackground").then(m => ({ default: m.EarthHeroBackground }))
-);
 const EmergencyChatInterface = lazy(() =>
     import("@/components/EmergencyChatInterface").then(m => ({ default: m.EmergencyChatInterface }))
 );
 
 export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 
+const HERO_VIDEO_SRC = "/assets/archive/earth-hero/hero-video/earth-approach-clean.mp4";
+const HERO_VIDEO_POSTER = "/assets/archive/earth-hero/hero-video/earth-approach-clean-poster.webp";
+
 interface HeroSectionProps {
     showSearchControls?: boolean;
     ctaHref?: string;
     ctaLabel?: string;
+    mirrorCtas?: boolean;
+    secondaryCtaHref?: string;
+    secondaryCtaLabel?: string;
 }
 
 export function HeroSection({
     showSearchControls = true,
     ctaHref = "/",
     ctaLabel = "Find Emergency Help",
+    mirrorCtas = false,
+    secondaryCtaHref = "/landing#services",
+    secondaryCtaLabel = "Browse Services",
 }: HeroSectionProps) {
     const { settings, detectedCity, detectedState, geoError, detectUserLocation, isLocating } = useLocalization();
     const [isPressed, setIsPressed] = useState(false);
     const [controlsVisible, setControlsVisible] = useState(false);
+    const [heroVideoReady, setHeroVideoReady] = useState(false);
     const controlsRevealTimerRef = useRef<number | null>(null);
 
     const revealControls = useCallback((hold = false) => {
@@ -80,12 +86,30 @@ export function HeroSection({
             onFocusCapture={() => revealControls(true)}
             onBlurCapture={() => revealControls()}
         >
-            <Suspense fallback={null}>
-                <EarthHeroBackground countryCode={settings.countryCode} />
-            </Suspense>
-            <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_38%,transparent_0%,rgba(0,0,0,0.05)_30%,rgba(0,0,0,0.72)_100%)] pointer-events-none" />
-            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/10 to-background pointer-events-none" />
-            {/* Background layers - decorative shader loaded lazily to avoid blocking LCP */}
+            <div className="absolute inset-0 z-0 overflow-hidden bg-black" aria-hidden="true">
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${HERO_VIDEO_POSTER})` }}
+                />
+                <video
+                    className={cn(
+                        "hero-space-flight-video absolute inset-0 h-full w-full object-cover object-center opacity-0",
+                        heroVideoReady && "opacity-100"
+                    )}
+                    src={HERO_VIDEO_SRC}
+                    poster={HERO_VIDEO_POSTER}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    onLoadedData={() => setHeroVideoReady(true)}
+                    onCanPlay={() => setHeroVideoReady(true)}
+                />
+            </div>
+            <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.1)_0%,rgba(0,0,0,0.02)_24%,rgba(0,0,0,0.22)_66%,rgba(0,0,0,0.56)_100%)] pointer-events-none" />
+            <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.12)_28%,rgba(0,0,0,0.08)_70%,rgba(0,0,0,0.52)_100%)] pointer-events-none" />
+            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/24 via-black/0 to-background/82 pointer-events-none" />
 
             <div className="relative container-wide w-full pt-16 sm:pt-20 md:pt-14 md:pb-0 pointer-events-none z-10">
                 <div className="w-full max-w-5xl md:max-w-7xl mx-auto text-center pointer-events-auto">
@@ -96,7 +120,7 @@ export function HeroSection({
                         transition={{ delay: 0.1, duration: 0.5 }}
                         className="mb-3 inline-flex flex-col items-center gap-2 md:mb-6"
                     >
-                        <div className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gold/30 bg-white/[0.03] backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)] relative overflow-hidden group transition-all duration-500 hover:border-gold/50">
+                        <div className="inline-flex items-center gap-2.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-gold/35 bg-black/45 backdrop-blur-md shadow-[0_0_24px_rgba(0,0,0,0.28)] relative overflow-hidden group transition-all duration-500 hover:border-gold/55">
                             {/* Subtle scanning light effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
                             
@@ -121,7 +145,7 @@ export function HeroSection({
                                 className="block text-white md:text-foreground text-[clamp(2rem,11vw,3.75rem)] drop-shadow-[0_4px_18px_rgba(0,0,0,0.78)]"
                                 style={{ fontFamily: '"Archivo Black", Impact, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
                             >
-                                L<img src="/et-logo-v3.webp" alt="" aria-hidden="true" width="64" height="64" decoding="async" fetchpriority="high" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
+                                L<img src="/et-logo-v3.webp" alt="" aria-hidden="true" width="64" height="64" decoding="async" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
                             </span>
 
                             {/* TRADESMEN / CONTRACTORS — dominant, rich gold */}
@@ -380,7 +404,10 @@ export function HeroSection({
                             initial={{ opacity: 0, scale: 0.96, y: 8 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="mt-6 flex justify-center md:mt-8"
+                            className={cn(
+                                "mt-6 flex justify-center md:mt-8",
+                                mirrorCtas && "landing-hero-cta-mirror"
+                            )}
                         >
                             <Link
                                 to={ctaHref}
@@ -388,6 +415,14 @@ export function HeroSection({
                             >
                                 {ctaLabel}
                             </Link>
+                            {mirrorCtas && (
+                                <Link
+                                    to={secondaryCtaHref}
+                                    className="group relative inline-flex min-h-12 items-center justify-center rounded-full border border-gold/35 bg-black/45 px-8 py-3 text-sm font-bold uppercase tracking-[0.18em] text-gold shadow-[0_0_30px_rgba(0,0,0,0.28)] backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:border-gold/65 hover:bg-gold/10 hover:text-gold-light md:px-10 md:py-4 md:text-base"
+                                >
+                                    {secondaryCtaLabel}
+                                </Link>
+                            )}
                         </motion.div>
                     )}
 

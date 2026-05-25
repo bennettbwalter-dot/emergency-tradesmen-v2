@@ -18,6 +18,8 @@ import { getTotalUnreadCount } from "@/lib/chat";
 export function UserMenu({ orientation = "horizontal" }: { orientation?: "horizontal" | "vertical" }) {
     const { user, logout, isAuthenticated } = useAuth();
     const [unreadCount, setUnreadCount] = useState(0);
+    const verticalButtonClass = "home-search-nav-item justify-start bg-transparent h-auto rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-slate-950/5 hover:text-slate-950 dark:hover:bg-white/10 dark:hover:text-white";
+    const verticalIconClass = "w-[18px] h-[18px] text-slate-500 dark:text-slate-400";
 
     useEffect(() => {
         if (user) {
@@ -30,13 +32,20 @@ export function UserMenu({ orientation = "horizontal" }: { orientation?: "horizo
 
     if (!isAuthenticated || !user) {
         return (
-            <div className={`flex w-full ${orientation === 'vertical' ? 'flex-col items-center gap-1' : 'items-center gap-2'}`}>
+            <div className={`flex w-full ${orientation === 'vertical' ? 'flex-col items-center gap-1.5' : 'items-center gap-2.5'}`}>
                 <div className={orientation === 'vertical' ? 'w-full' : ''}>
                     <AuthModal
                         trigger={
-                            <Button variant="ghost" className={orientation === 'vertical' ? "flex items-center justify-start gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] hover:text-[#e5e7eb] text-[#e5e7eb] w-full bg-transparent h-auto" : "text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent"}>
-                                {orientation === 'vertical' && <LogIn className="w-[18px] h-[18px] text-[#9ca3af]" />}
-                                Log In
+                            <Button 
+                                variant={orientation === 'vertical' ? 'ghost' : 'outline'} 
+                                className={
+                                    orientation === 'vertical' 
+                                        ? verticalButtonClass 
+                                        : "h-9 px-4 rounded-full border border-slate-950/10 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-gold hover:border-gold/60 hover:bg-gold/5 dark:hover:bg-gold/10 transition-all duration-200 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5"
+                                }
+                            >
+                                <LogIn className={orientation === 'vertical' ? verticalIconClass : "w-3.5 h-3.5 text-gold"} />
+                                <span>Log In</span>
                             </Button>
                         }
                         defaultTab="login"
@@ -45,9 +54,16 @@ export function UserMenu({ orientation = "horizontal" }: { orientation?: "horizo
                 <div className={orientation === 'vertical' ? 'w-full' : ''}>
                     <AuthModal
                         trigger={
-                            <Button variant="ghost" className={orientation === 'vertical' ? "flex items-center justify-start gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] hover:text-[#e5e7eb] text-[#e5e7eb] w-full bg-transparent h-auto" : "text-sm font-medium hover:text-gold transition-colors h-auto p-0 bg-transparent"}>
-                                {orientation === 'vertical' && <UserPlus className="w-[18px] h-[18px] text-[#9ca3af]" />}
-                                Sign Up
+                            <Button 
+                                variant={orientation === 'vertical' ? 'ghost' : 'default'} 
+                                className={
+                                    orientation === 'vertical' 
+                                        ? verticalButtonClass 
+                                        : "h-9 px-4 rounded-full bg-gold hover:bg-gold-light text-black transition-all duration-300 text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_16px_rgba(212,175,55,0.12)] hover:shadow-[0_0_24px_rgba(212,175,55,0.3)]"
+                                }
+                            >
+                                <UserPlus className={orientation === 'vertical' ? verticalIconClass : "w-3.5 h-3.5"} />
+                                <span>Sign Up</span>
                             </Button>
                         }
                         defaultTab="register"

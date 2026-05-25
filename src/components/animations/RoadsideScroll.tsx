@@ -1,271 +1,196 @@
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
-import { Clock, ShieldCheck, MapPin, Navigation } from 'lucide-react';
+import React, { useState } from 'react';
+import { Navigation, Clock, ShieldCheck, MapPin, Compass } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { findNearestCity } from "@/lib/cityCoordinates";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const FRAME_COUNT = 192;
-const FILENAME_PATTERN = (index: number) => `/frames/roadside/frame_${index.toString().padStart(4, '0')}.webp`;
-
-const FEATURE_ITEMS = [
-    {
-        title: "Roadside Assistance",
-        description: "Emergency Breakdown Recovery Available 24/7",
-        Icon: Navigation
-    },
-    {
-        title: "Always Online",
-        description: "24/7 support because vehicle trouble doesn't stick to business hours.",
-        Icon: Clock
-    },
-    {
-        title: "Local Contacts",
-        description: "Find public breakdown recovery listings and confirm details directly before booking.",
-        Icon: ShieldCheck
-    },
-    {
-        title: "Rapid Response",
-        description: "Just a tap away, whether you're stuck at home or on the roadside.",
-        Icon: MapPin
-    }
-];
-
-export function RoadsideScroll() {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textZonesRef = useRef<HTMLDivElement[]>([]);
-    const videoSequence = useRef({ frame: 0 });
-    const imagesRef = useRef<HTMLImageElement[]>([]);
-    const { settings } = useLocalization();
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const context = canvas?.getContext('2d', { willReadFrequently: true });
-        const container = containerRef.current;
-        if (!canvas || !context || !container) return;
-
-        // Preload images
-        imagesRef.current = [];
-        for (let i = 1; i <= FRAME_COUNT; i++) {
-            const img = new Image();
-            img.src = FILENAME_PATTERN(i);
-            imagesRef.current.push(img);
-        }
-
-        const isMobile = window.innerWidth < 768;
-
-        const render = () => {
-            const img = imagesRef.current[Math.floor(videoSequence.current.frame)];
-            if (!img || !img.complete || img.naturalWidth === 0) return;
-
-            const canvasWidth = canvas.width;
-            const canvasHeight = canvas.height;
-
-            const imgWidth = img.width;
-            const imgHeight = img.height;
-
-            // On mobile, "contain" with a more prominent zoom (1.3) to make it feel bigger
-            const ratio = isMobile 
-                ? (canvasWidth / imgWidth) * 1.3 // Even bigger than before
-                : Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
-            
-            const newWidth = imgWidth * ratio;
-            const newHeight = imgHeight * ratio;
-
-            const x = (canvasWidth - newWidth) / 2;
-            const y = isMobile ? (canvasHeight - newHeight) * 0.4 : (canvasHeight - newHeight) / 2;
-
-            context.clearRect(0, 0, canvasWidth, canvasHeight);
-            context.drawImage(img, x, y, newWidth, newHeight);
-        };
-
-        const updateCanvasSize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            render();
-        };
-
-        window.addEventListener('resize', updateCanvasSize);
-        updateCanvasSize();
-
-        // Initialize global Lenis once to prevent multiple instances from fighting
-        if (!(window as any).lenis) {
-            (window as any).lenis = new Lenis({
-                lerp: 0.1,
-                duration: 1.5,
-                smoothWheel: true,
-            });
-            const raf = (time: number) => {
-                (window as any).lenis.raf(time);
-                requestAnimationFrame(raf);
-            };
-            requestAnimationFrame(raf);
-        }
-
-        // Global ScrollTrigger config for smooth pinning
-        ScrollTrigger.config({ limitCallbacks: true });
-        ScrollTrigger.normalizeScroll(true);
-
-        if (imagesRef.current.length > 0) {
-            imagesRef.current[0].onload = () => {
-                render();
-                ScrollTrigger.refresh();
-            };
-        }
-
-        // GSAP Main Timeline
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: "top top",
-                end: "+=600%", 
-                pin: true,
-                pinType: "fixed",
-                scrub: 1,
-                anticipatePin: 1.5,
-                preventOverlaps: true,
-                fastScrollEnd: true,
-                refreshPriority: 10,
-            }
-        });
-
-        // Ensure ScrollTrigger is aware of layout after mount
-        ScrollTrigger.refresh();
-
-        // 1. Sequential Feature Items - Adjusted for 4 items - Tighter spacing
-        FEATURE_ITEMS.forEach((item, i) => {
-            const zone = textZonesRef.current[i];
-            if (!zone) return;
-            // Tighter spacing (1.8) for 4 items to reduce empty scroll gaps
-            const startTime = 0.5 + (i * 1.8);
-            
-            tl.fromTo(zone, {
-                autoAlpha: 0,
-                x: -30,
-            }, {
-                autoAlpha: 1,
-                x: 0,
-                duration: 1,
-                ease: "power2.out"
-            }, startTime)
-            .to(zone, {
-                autoAlpha: 0,
-                x: 20,
-                duration: 1,
-                ease: "power2.in"
-            }, startTime + 1.2); // Tighter visibility window
-        });
-
-        // 2. Core Video Sequence - Sync with text (total 10 units)
-        tl.to(videoSequence.current, {
-            frame: FRAME_COUNT - 1,
-            ease: "none",
-            onUpdate: render,
-            duration: 10,
-        }, 0);
-
-        return () => {
-            window.removeEventListener('resize', updateCanvasSize);
-            tl.kill();
-            ScrollTrigger.refresh();
-        };
-    }, []);
-
-    return (
-        <div ref={containerRef} className="relative w-full h-screen bg-black overflow-hidden select-none will-change-transform flex flex-col items-center justify-start pt-[12vh] md:pt-0 z-0">
-            {/* Main Canvas */}
-            <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-screen z-0" />
-
-            {/* Sequential Feature Overlays - Left Side */}
-            <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-[110] flex flex-col justify-center pt-[12vh] md:pt-0">
-                {FEATURE_ITEMS.map((item, i) => (
-                    <div
-                        key={i}
-                        ref={el => textZonesRef.current[i] = el!}
-                        className="absolute left-[8%] md:left-[12%] top-[45%] md:top-1/2 -translate-y-1/2 max-w-[85vw] md:max-w-2xl opacity-0 invisible"
-                    >
-                        <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
-                            <div className="flex-shrink-0 w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-black/80 border border-[#d7c08a]/30 flex items-center justify-center shadow-2xl backdrop-blur-xl">
-                                <item.Icon className="w-6 h-6 md:w-10 md:h-10 text-[#d7c08a]" />
-                            </div>
-                            
-                            <div className="pt-1 md:pt-2">
-                                <h2 className="font-display font-bold text-2xl md:text-5xl text-white mb-2 md:mb-3">
-                                    {item.title}
-                                </h2>
-                                <p className="font-sans text-base md:text-2xl text-white/80 leading-relaxed max-w-lg">
-                                    {item.description}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {/* Integrated CTA Button - Fixed under video */}
-            <div className="absolute bottom-[18vh] md:bottom-10 left-0 w-full flex justify-center items-center z-[130] px-4 md:px-0">
-                <RoadsideHelpButton />
-            </div>
-        </div>
-    );
+interface RoadsideScrollProps {
+    compact?: boolean;
 }
 
-function RoadsideHelpButton() {
+export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
     const { settings } = useLocalization();
     const navigate = useNavigate();
     const [isLocating, setIsLocating] = useState(false);
 
     const handleGetHelp = () => {
         if (!navigator.geolocation) {
-            console.warn("Geolocation not supported");
-            navigate("/listings?category=breakdown");
+            navigate("/emergency-breakdown");
             return;
         }
 
         setIsLocating(true);
 
         navigator.geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
                 const { latitude, longitude } = position.coords;
+                
+                let resolvedCity = "";
+                
+                // 1. Try reverse geocoding via OpenStreetMap Nominatim
+                try {
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+                        { headers: { "Accept-Language": "en" } }
+                    );
+                    if (response.ok) {
+                        const data = await response.json();
+                        resolvedCity = data.address?.city || data.address?.town || data.address?.village || data.address?.county || "";
+                    }
+                } catch (err) {
+                    console.warn("Reverse geocode failed", err);
+                }
+
+                // 2. Fallback to nearest city by coordinates in our local database
+                if (!resolvedCity) {
+                    try {
+                        const nearest = findNearestCity(latitude, longitude, settings.countryCode);
+                        resolvedCity = nearest?.city || "";
+                    } catch (err) {
+                        console.warn("Nearest city fallback failed", err);
+                    }
+                }
+
                 setIsLocating(false);
-                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
-                navigate(`${pathPrefix}/emergency-breakdown?lat=${latitude}&lng=${longitude}`);
+
+                // Slugify the city name (e.g. "New York" -> "new-york")
+                const citySlug = resolvedCity
+                    ? resolvedCity.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+                    : "";
+
+                if (citySlug) {
+                    navigate(`/emergency-breakdown/${citySlug}`);
+                } else {
+                    navigate(`/emergency-breakdown`);
+                }
             },
             (error) => {
-                console.warn("Geolocation error:", error.message);
                 setIsLocating(false);
-                const pathPrefix = settings.countryCode === 'US' ? '/us' : '';
-                navigate(`${pathPrefix}/emergency-breakdown`);
+                navigate(`/emergency-breakdown`);
             },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+            { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
         );
     };
 
+    const features = [
+        {
+            title: "Roadside Assistance",
+            description: "Emergency Breakdown Recovery Available 24/7",
+            Icon: Navigation
+        },
+        {
+            title: "Always Online",
+            description: "24/7 support because vehicle trouble doesn't stick to business hours.",
+            Icon: Clock
+        },
+        {
+            title: "Local Contacts",
+            description: "Find public breakdown recovery listings and confirm details directly before booking.",
+            Icon: ShieldCheck
+        },
+        {
+            title: "Rapid Response",
+            description: "Just a tap away, whether you're stuck at home or on the roadside.",
+            Icon: MapPin
+        }
+    ];
+
     return (
-        <Button 
-            size="xl" 
-            onClick={handleGetHelp}
-            disabled={isLocating}
-            className="bg-gradient-to-r from-[#caa55b] via-[#e2cd97] to-[#caa55b] text-black font-bold text-xl md:text-2xl px-12 py-8 rounded-full shadow-[0_10px_40px_rgba(202,165,91,0.4)] hover:shadow-[0_15px_60px_rgba(202,165,91,0.6)] hover:scale-105 transition-all duration-300 border-none w-full md:w-auto min-w-[320px]"
-        >
-            <div className="flex items-center justify-center gap-3">
-                {isLocating ? (
-                    <>
-                        <div className="w-6 h-6 border-4 border-black/20 border-t-black rounded-full animate-spin" />
-                        <span>LOCATING YOU...</span>
-                    </>
-                ) : (
-                    <>
-                        <Navigation className="w-6 h-6" />
-                        <span>GET ROADSIDE HELP</span>
-                    </>
-                )}
+        <div className="w-full max-w-5xl mx-auto rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#121316] to-[#070708] p-6 md:p-10 shadow-2xl relative overflow-hidden group hover:border-[#caa55b]/30 transition-all duration-500">
+            {/* Background Glow */}
+            <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-[#caa55b]/10 to-transparent blur-[60px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-[#50b2d7]/5 to-transparent blur-[60px] rounded-full pointer-events-none" />
+            
+            <div className="relative z-10 grid md:grid-cols-12 gap-8 items-center">
+                {/* Left Side: Copy and Actions */}
+                <div className="md:col-span-6 flex flex-col items-start text-left">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#caa55b]/10 border border-[#caa55b]/20 text-[#caa55b] text-xs font-bold uppercase tracking-widest mb-4">
+                        <Compass className="w-3.5 h-3.5 animate-[spin_10s_linear_infinite]" />
+                        24/7 EMERGENCY HELP
+                    </span>
+                    
+                    <h3 className="font-display text-3xl md:text-4xl font-extrabold text-white leading-tight mb-3">
+                        GET ROADSIDE HELP
+                    </h3>
+                    <p className="text-white/80 text-lg mb-6 leading-relaxed">
+                        Stranded on the highway or in your driveway? We connect you instantly to nearby recovery services.
+                    </p>
+                    
+                    <Button 
+                        size="xl" 
+                        onClick={handleGetHelp}
+                        disabled={isLocating}
+                        className="bg-gradient-to-r from-[#caa55b] via-[#e2cd97] to-[#caa55b] text-black font-extrabold text-lg px-8 py-6 rounded-full shadow-[0_10px_30px_rgba(202,165,91,0.25)] hover:shadow-[0_15px_40px_rgba(202,165,91,0.45)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-none w-full sm:w-auto justify-center"
+                    >
+                        {isLocating ? (
+                            <div className="flex items-center gap-2">
+                                <div className="w-5 h-5 border-3 border-black/20 border-t-black rounded-full animate-spin" />
+                                <span>LOCATING YOU...</span>
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-2">
+                                <Navigation className="w-5 h-5" />
+                                <span>GET ROADSIDE HELP</span>
+                            </div>
+                        )}
+                    </Button>
+                </div>
+                
+                {/* Right Side: Feature Cards & Interactive Compass Radar Mockup */}
+                <div className="md:col-span-6 flex flex-col gap-5">
+                    {/* Visual Radar Mockup Card */}
+                    <div className="bg-[#18191e]/80 border border-white/5 rounded-2xl p-5 shadow-lg relative overflow-hidden backdrop-blur-md flex items-center justify-between">
+                        {/* Radar sweep illustration */}
+                        <div className="relative w-28 h-28 rounded-full border border-white/10 flex items-center justify-center bg-black/40 overflow-hidden flex-shrink-0">
+                            {/* Sweeping line */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#caa55b]/20 to-transparent w-full h-full rotate-45 animate-[spin_6s_linear_infinite] origin-center" />
+                            {/* Concentric rings */}
+                            <div className="w-20 h-20 rounded-full border border-white/5 absolute" />
+                            <div className="w-12 h-12 rounded-full border border-white/5 absolute" />
+                            {/* Blips */}
+                            <div className="w-2 h-2 rounded-full bg-[#caa55b] absolute top-6 right-6 animate-pulse" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#caa55b] absolute bottom-8 left-6 animate-ping" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#50b2d7] absolute top-12 left-12 animate-pulse" />
+                            {/* Central Pin */}
+                            <MapPin className="w-6 h-6 text-[#caa55b] z-10 fill-[#caa55b]/20 drop-shadow-[0_0_8px_rgba(202,165,91,0.6)] animate-bounce" />
+                        </div>
+                        
+                        <div className="flex-1 pl-5 text-left">
+                            <h4 className="font-bold text-white text-base mb-1">Active Responders</h4>
+                            <div className="space-y-1.5 mt-2">
+                                <div className="flex justify-between items-center text-xs">
+                                    <span className="text-white/60">Nearest Tow Truck</span>
+                                    <span className="text-[#caa55b] font-bold">1.2 miles away</span>
+                                </div>
+                                <div className="flex justify-between items-center text-xs">
+                                    <span className="text-white/60">Estimated ETA</span>
+                                    <span className="text-emerald-400 font-bold">12–15 mins</span>
+                                </div>
+                                <div className="flex justify-between items-center text-xs">
+                                    <span className="text-white/60">Status</span>
+                                    <span className="text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded text-[10px]">READY TO DEPLOY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* List Items */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {features.map((feature, i) => (
+                            <div key={i} className="flex gap-3 items-start bg-white/[0.02] border border-white/5 rounded-xl p-3.5 hover:bg-white/[0.04] transition-colors text-left">
+                                <div className="p-2 rounded-lg bg-[#caa55b]/10 border border-[#caa55b]/10 text-[#caa55b] flex-shrink-0">
+                                    <feature.Icon className="w-4 h-4" />
+                                </div>
+                                <div>
+                                    <h5 className="font-bold text-white text-sm mb-0.5">{feature.title}</h5>
+                                    <p className="text-white/60 text-xs leading-relaxed">{feature.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-        </Button>
+        </div>
     );
 }

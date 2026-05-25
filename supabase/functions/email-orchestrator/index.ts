@@ -45,11 +45,12 @@ serve(async (req) => {
             // Calculate how many contacts to fetch
             const limit = campaign.batch_size || 50;
 
-            // 2. Fetch contacts matching criteria that haven't been emailed
+            // 2. Fetch contacts matching criteria that haven't been emailed and are verified active
             let query = supabase
                 .from('businesses')
-                .select('id, name, email, city, trade, phone')
+                .select('id, name, email, city, trade, phone, country_code')
                 .eq('country_code', campaign.target_country)
+                .eq('verified', true) // Double check: only email businesses verified as active/operational!
                 .not('email', 'is', null)
                 .not('email', 'eq', '')
                 .is('last_emailed_at', null)

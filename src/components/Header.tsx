@@ -1,286 +1,189 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { UserMenu } from "@/components/UserMenu";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import {
-  Menu,
-  Home,
-  Info,
-  MapPin,
-  Phone,
-  FileText,
-  HelpCircle,
-  ShieldCheck,
-  Rocket,
-  ChevronRight,
-  Globe
-} from "lucide-react";
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
-import { getSocialUrls } from "@/lib/siteConfig";
-
+import { SiteSidePanel } from "@/components/SiteSidePanel";
+import { isUSDomain as getIsUSDomain } from "@/lib/siteConfig";
+import { UserMenu } from "@/components/UserMenu";
 
 interface HeaderProps {
   countryCode?: string;
+  showDesktopSidebar?: boolean;
 }
 
-export function Header({ countryCode }: HeaderProps) {
+export function Header({ countryCode, showDesktopSidebar = true }: HeaderProps) {
   const { settings } = useLocalization();
   const location = useLocation();
-
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const port = typeof window !== 'undefined' ? window.location.port : '';
-  const isUSDomain = hostname.includes('emergencycontractors.net') || (hostname === 'localhost' && port === '3001') || (hostname === '127.0.0.1' && port === '3001');
-
-  const activeCountry = countryCode || settings.countryCode;
-  const isUS = activeCountry === 'US';
-
-  const siteNameMain = 'Emergency';
-  const siteNameSub = isUSDomain ? 'Contractors' : (isUS ? 'Contractors' : 'Tradesmen');
-  const signupText = isUS ? 'Pro Sign Up' : 'Tradesmen Sign Up';
-  
-  // Rule: On US domain, we NEVER use the /us prefix. On UK domain, we use it for US content.
-  const countryPrefix = isUS && !isUSDomain ? '/us' : '';
-
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(showDesktopSidebar);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const isUSDomain = getIsUSDomain();
+  const activeCountry = countryCode || settings.countryCode;
+  const isUS = activeCountry === "US";
+  const siteNameMain = "Emergency";
+  const siteNameSub = isUSDomain ? "Contractors" : isUS ? "Contractors" : "Tradesmen";
+  const countryPrefix = isUS && !isUSDomain ? "/us" : "";
+  const findLabel = isUS ? "Find contractor" : "Find trade";
+  const findRoute = `${countryPrefix}/#manual-search`;
+  const pricingRoute = `${countryPrefix}/pricing`;
+  const isMarketingLanding = location.pathname === "/landing" || location.pathname === "/welcome";
+  const isTransparentHeader = isMarketingLanding && !isScrolled;
 
   useEffect(() => {
     setIsScrolled(window.scrollY > 20);
-    
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Always show on desktop (md and up)
       if (window.innerWidth >= 768) {
         setIsVisible(true);
         return;
       }
 
-      // Hide immediately on scroll start
       setIsVisible(false);
 
-      // Clear existing timeout
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
 
-      // Show after scroll stops (200ms)
       scrollTimeout.current = setTimeout(() => {
         setIsVisible(true);
       }, 200);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
   }, []);
 
-  const isMarketingLanding = location.pathname === '/landing' || location.pathname === '/welcome';
-  const isTransparentHeader = isMarketingLanding && !isScrolled;
+  useEffect(() => {
+    document.body.classList.toggle("et-site-sidebar-open", showDesktopSidebar && desktopSidebarOpen);
+    return () => {
+      document.body.classList.remove("et-site-sidebar-open");
+    };
+  }, [desktopSidebarOpen, showDesktopSidebar]);
 
   const headerClass = isMarketingLanding
-    ? `fixed top-0 left-0 z-50 w-full ${isTransparentHeader ? 'bg-transparent border-none text-white' : 'bg-background/80 backdrop-blur-xl border-b border-white/10 text-foreground'} transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`
-    : `sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${!isVisible ? 'md:translate-y-0 -translate-y-full md:opacity-100 opacity-0' : 'translate-y-0 opacity-100'}`;
+    ? `fixed top-0 z-40 w-full ${isTransparentHeader ? "bg-transparent text-white" : "border-b border-white/10 bg-background/80 text-foreground backdrop-blur-xl"} transition-all duration-300 ${!isVisible ? "opacity-0 -translate-y-full md:translate-y-0 md:opacity-100" : "translate-y-0 opacity-100"}`
+    : `sticky top-0 z-40 w-full bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${!isVisible ? "opacity-0 -translate-y-full md:translate-y-0 md:opacity-100" : "translate-y-0 opacity-100"}`;
 
   return (
-    <header className={headerClass}>
-      {/* Gradient bottom line instead of flat border */}
-      {!isTransparentHeader && (
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    <>
+      {showDesktopSidebar && desktopSidebarOpen && (
+        <aside className="fixed left-0 top-0 z-50 hidden h-screen w-80 overflow-hidden overscroll-contain border-r border-slate-950/10 bg-white/88 p-5 shadow-[18px_0_80px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-[#080c14]/95 dark:shadow-[18px_0_80px_rgba(0,0,0,0.28)] lg:block">
+          <SiteSidePanel
+            mode="site"
+            onNavigate={() => setMobileSidebarOpen(false)}
+            onClose={() => setDesktopSidebarOpen(false)}
+          />
+        </aside>
       )}
-      <div className="container-wide">
-        <div className="flex items-center justify-between h-16">
-          {/* LEFT AREA: Logo */}
-          <div className="flex-shrink-0 z-50">
-            <Link to={`${countryPrefix}/`} className="flex items-center gap-3 group relative">
-              <div className="relative">
-                <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="eager" decoding="async" fetchpriority="high" onError={(e) => { e.currentTarget.style.display='none'; }} className="w-12 h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
-              </div>
-              <div className="hidden sm:block">
-                <span className={`font-display text-2xl tracking-wide transition-colors ${isTransparentHeader ? 'text-white group-hover:text-white/80' : 'text-foreground group-hover:text-white'}`}>{siteNameMain}</span>
-                <span className="font-display text-2xl tracking-wide text-gold ml-1.5">{siteNameSub}</span>
+
+      <header className={headerClass}>
+        {!isTransparentHeader && (
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        )}
+        <div className="container-wide">
+          <div className="flex h-16 items-center justify-between gap-4">
+            <Link to={`${countryPrefix}/`} className="group relative z-10 flex min-w-0 items-center gap-3">
+              <img
+                src="/et-logo-v3.webp"
+                alt="Emergency Trades Logo"
+                loading="eager"
+                decoding="async"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
+                className="h-11 w-11 object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="hidden min-w-0 sm:block">
+                <span className={`font-display text-2xl tracking-wide transition-colors ${isTransparentHeader ? "text-white group-hover:text-white/80" : "text-black dark:text-white group-hover:text-gold"}`}>
+                  {siteNameMain}
+                </span>
+                <span className="ml-1.5 font-display text-2xl tracking-wide text-gold">{siteNameSub}</span>
               </div>
             </Link>
-          </div>
 
-          {/* CENTER AREA: Desktop Nav / Mobile Tradesmen Sign Up */}
-          <div className="flex-1 flex justify-center items-center px-4 min-w-0 pointer-events-none">
-            {/* Mobile (Text Only) - Center Link */}
-            <div className="md:hidden z-50 pointer-events-auto flex items-center justify-center w-full">
+            <div className="hidden md:flex items-center justify-center flex-1">
               <Link
-                to={`${countryPrefix}/pricing`}
-                className="text-[10px] font-black tracking-widest text-gold hover:text-white transition-all uppercase whitespace-nowrap bg-gold/5 border border-gold/20 px-3 py-1.5 rounded-full shadow-[0_0_10px_rgba(212,175,55,0.1)]"
-                data-tour="tour-signup"
+                to={pricingRoute}
+                className={`flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300 font-display text-xs font-black uppercase tracking-[0.14em] shadow-[0_0_24px_rgba(212,175,55,0.06)] hover:shadow-[0_0_24px_rgba(212,175,55,0.22)] ${
+                  isTransparentHeader
+                    ? "border-gold/30 bg-gold/15 text-gold hover:bg-gold hover:text-black"
+                    : "border-gold/35 bg-gold/5 text-gold hover:bg-gold hover:text-black dark:border-gold/30 dark:bg-gold/10"
+                }`}
               >
-                {signupText}
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                </span>
+                <span>Pro Sign-Up</span>
               </Link>
             </div>
 
-            {/* Desktop Nav - strictly hidden on mobile */}
-            <nav className="hidden md:flex items-center gap-8 pointer-events-auto">
-              {['About', 'Blog'].map((item) => (
-                <Link
-                  key={item}
-                  to={`${countryPrefix}/${item.toLowerCase()}`}
-                  className={`relative text-sm font-medium tracking-wide transition-colors group/link ${isTransparentHeader ? 'text-slate-200 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
-                  data-tour={item === 'Blog' ? 'tour-blog-link' : undefined}
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
-                </Link>
-              ))}
-
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <Button
-                variant="outline"
-                size="sm"
                 asChild
-                className={`border-gold/30 text-gold hover:bg-gold/10 hover:border-gold px-5 rounded-full transition-all duration-300 ${isTransparentHeader ? 'bg-transparent text-white border-white/20 hover:bg-white/10 hover:border-white' : ''}`}
-                data-tour="tour-signup"
+                size="sm"
+                className={`hidden rounded-full bg-gold px-4 text-xs font-black uppercase tracking-[0.12em] text-black hover:bg-gold-light sm:inline-flex ${isTransparentHeader ? "shadow-[0_0_24px_rgba(212,175,55,0.22)]" : ""}`}
               >
-                <Link to={`${countryPrefix}/pricing`}>
-                  {signupText}
+                <Link to={findRoute}>
+                  <Search className="mr-2 h-4 w-4" />
+                  {findLabel}
                 </Link>
               </Button>
 
-              <Link 
-                to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} 
-                className={`relative text-sm font-medium tracking-wide transition-colors group/link ${isTransparentHeader ? 'text-slate-200 hover:text-white' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover/link:w-full" />
-              </Link>
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 z-50 min-w-[40px] justify-end">
-            <div className="hidden md:block">
               <UserMenu />
-            </div>
-            <div className="block">
               <ModeToggle />
-            </div>
 
-            {/* Mobile Menu Button - Locked Position */}
-            <div className="md:hidden flex items-center shrink-0">
+              {showDesktopSidebar && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setDesktopSidebarOpen((open) => !open)}
+                  className={`hidden rounded-full w-10 h-10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-gold/50 hover:bg-gold/5 dark:hover:bg-gold/10 hover:text-gold transition-all duration-200 lg:inline-flex ${isTransparentHeader ? "border-white/20 bg-white/10 text-white hover:bg-white/15" : ""}`}
+                  title={desktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">{desktopSidebarOpen ? "Hide sidebar" : "Show sidebar"}</span>
+                </Button>
+              )}
 
-              <Sheet>
+              <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className={`relative h-10 w-10 transition-colors ${isTransparentHeader ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-muted-foreground hover:text-gold hover:bg-gold/5'}`}>
-                    {/* Invisible targets for the mobile tour to highlight the menu button */}
-                    <div data-tour="tour-signup" className="absolute inset-0 pointer-events-none" />
-                    <div data-tour="tour-blog-link" className="absolute inset-0 pointer-events-none" />
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Toggle menu</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={`rounded-full w-10 h-10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-gold/50 hover:bg-gold/5 dark:hover:bg-gold/10 hover:text-gold transition-all duration-200 lg:hidden ${isTransparentHeader ? "border-white/20 bg-white/10 text-white hover:bg-white/15" : ""}`}
+                  >
+                    <Menu className="h-5 w-5" />
+                    <span className="sr-only">Open navigation</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-[300px] sm:w-[320px] p-4 bg-[#0B0F19] border-r border-white/5 text-slate-300">
-                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-
-                  {/* Top Header Match */}
-                  <div className="flex items-center justify-between mb-8 mt-2 px-2">
-                    <div className="flex items-center gap-3">
-                      <img src="/et-logo-v3.webp" alt="Logo" loading="lazy" className="w-8 h-8 object-contain" />
-                      <span className="font-display tracking-wide text-lg text-white">{siteNameMain}<span className="text-gold ml-1">{siteNameSub}</span></span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1 overflow-y-auto pb-8">
-                    {/* NAVIGATE */}
-                    <div className="px-3 mb-2 mt-2">
-                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#6b7280] uppercase">Navigate</span>
-                    </div>
-
-                    <Link to={`${countryPrefix}/`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <Home className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Home
-                    </Link>
-
-                    <Link to="/landing" className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <Globe className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Landing Page
-                    </Link>
-
-                    <Link to={`${countryPrefix}/about`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <Info className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      About Us
-                    </Link>
-
-                    <Link to={`${countryPrefix}/locations`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <MapPin className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Locations
-                    </Link>
-
-                    <Link 
-                      to={isUSDomain ? "/contact" : (isUS ? "/us/contact" : "/contact")} 
-                      className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors"
-                    >
-                      <Phone className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Contact
-                    </Link>
-
-                    {/* ADVANCED TOOLS */}
-                    <div className="px-3 mb-2 mt-6 flex justify-between items-center group cursor-pointer">
-                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#325e46] uppercase">Advanced Tools</span>
-                      <ChevronRight className="w-3 h-3 text-[#325e46] group-hover:text-[#4ade80] transition-colors" />
-                    </div>
-
-                    <Link to={`${countryPrefix}/pricing`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <Rocket className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      {signupText}
-                    </Link>
-
-                    <div className="mt-1">
-                      <div className="flex flex-col py-1">
-                        <UserMenu orientation="vertical" />
-                      </div>
-                    </div>
-
-                    {/* LEARN */}
-                    <div className="px-3 mb-2 mt-6 flex justify-between items-center group cursor-pointer">
-                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#325e46] uppercase">Learn</span>
-                    </div>
-
-                    <Link to={`${countryPrefix}/blog`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <FileText className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Tutorials & News
-                    </Link>
-
-                    <Link to={`${countryPrefix}/vetting-process`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <ShieldCheck className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      Vetting Process
-                    </Link>
-
-                    <Link to={`${countryPrefix}/faq`} className="flex items-center gap-4 px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1a1d27] text-[#e5e7eb] transition-colors">
-                      <HelpCircle className="w-[18px] h-[18px] text-[#9ca3af]" />
-                      FAQ
-                    </Link>
-
-                    {/* Socials */}
-                    <div className="mt-8 px-3 pt-6 border-t border-white/5">
-                        <div className="flex gap-4">
-                        {(() => { const socials = getSocialUrls(); return (
-                            <>
-                                <GlassSocialIcon platform="facebook" href={socials.facebook} className="w-10 h-10 bg-[#1a1d27] border-0" />
-                                <GlassSocialIcon platform="instagram" href={socials.instagram} className="w-10 h-10 bg-[#1a1d27] border-0" />
-                                <GlassSocialIcon platform="twitter" href={socials.twitter} className="w-10 h-10 bg-[#1a1d27] border-0" />
-                                <GlassSocialIcon platform="tiktok" href={socials.tiktok || "https://www.tiktok.com/@emergencytradesmen"} className="w-10 h-10 bg-[#1a1d27] border-0" />
-                            </>
-                        ); })()}
-                        </div>
-                    </div>
-                  </div>
+                <SheetContent side="left" className="w-[310px] border-r border-slate-950/10 bg-[#f8f7f2] p-5 text-slate-950 dark:border-white/10 dark:bg-[#090d15] dark:text-white">
+                  <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                  <SheetDescription className="sr-only">Main website navigation, account links, business tools, and emergency search.</SheetDescription>
+                  <SiteSidePanel
+                    mode="site"
+                    onNavigate={() => setMobileSidebarOpen(false)}
+                    onClose={() => setMobileSidebarOpen(false)}
+                    showCloseButton={false}
+                  />
                 </SheetContent>
               </Sheet>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }

@@ -125,8 +125,10 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'radiator not working', 'boiler leak', 'dripping tap',
         'toilet leaking', 'toilet not flushing', 'water shut off',
         'stopcock', 'pipe frozen', 'heating not working',
-        'water', 'leak', 'pipe', 'burst', 'flood', 'drip',
-        'tap', 'toilet', 'sink', 'shower', 'plumber', 'plumbing'
+        'water', 'leak', 'leaks', 'pipe', 'pipes', 'burst', 'bursts', 'flood', 'floods',
+        'drip', 'drips', 'tap', 'taps', 'toilet', 'toilets', 'sink', 'sinks',
+        'shower', 'showers', 'radiator', 'radiators', 'boiler', 'boilers',
+        'plumber', 'plumbing'
     ],
     'electrician': [
         'power cut', 'lights out', 'no electricity', 'fuse box',
@@ -134,8 +136,10 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'burning smell', 'socket not working', 'electric shock',
         'buzzing socket', 'flickering lights', 'blown fuse',
         'wiring issue', 'electrical fault', 'power', 'electricity',
-        'spark', 'fuse', 'light', 'socket', 'wire', 'wiring',
-        'blackout', 'electrician', 'electrical'
+        'spark', 'sparks', 'fuse', 'fuses', 'light', 'lights', 'socket', 'sockets',
+        'plug', 'plugs', 'wire', 'wiring', 'switch', 'switches', 'breaker', 'breakers',
+        'blackout', 'electrician', 'electrical', "lights won't turn on",
+        "lights won't come on", "lights will not come on", "lights not working"
     ],
     'glazier': [
         'broken window', 'smashed glass', 'cracked glass',
@@ -157,7 +161,7 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'waste pipe blocked', 'sink blocked', 'gurgling drain',
         'water backing up', 'manhole overflow', 'foul smell drains',
         'drainage emergency', 'flooded drain', 'blocked', 'drain',
-        'sewage', 'overflow', 'gutter'
+        'sewage', 'overflow', 'gutter', 'toilet', 'toilets', 'backing up'
     ],
     'breakdown': [
         'car won\'t start', 'breakdown', 'broken down',
@@ -202,7 +206,7 @@ const TRADE_KEYWORDS: Record<string, string[]> = {
         'plaster cracked', 'plaster fallen', 'hole in wall', 'hole in ceiling',
         'wall repair'
     ],
-    'air-conditioning': [
+    'hvac': [
         'air conditioning', 'air con', 'ac', 'air con repair', 'air con installation',
         'air conditioning not working', 'air con not blowing cold air', 'air conditioner broken',
         'air con leaking water inside', 'air conditioning repair near me', 'emergency air conditioning repair',
@@ -247,6 +251,83 @@ export async function processUserMessage(message: string, currentState: ChatStat
 
     const isAwaitingResponse = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION' || currentState.step === 'TRADE_CHECK';
 
+    // Upfront Keyword-based Trade Detection to restrict RAG Vector search context
+    let detectedTrade = currentState.detectedTrade;
+
+    if (!detectedTrade && !isAwaitingResponse) {
+        if (!lowerMsg.includes('fishy') && GAS_EMERGENCY_KEYWORDS.some(k => lowerMsg.includes(k))) {
+            detectedTrade = 'gas-engineer';
+        } else {
+            const scores: Record<string, number> = {};
+            const tradeOrder = ['breakdown', 'gas-engineer', 'water-restoration', 'electrician', 'plumber', 'drain-specialist', 'glazier', 'locksmith', 'roofer', 'air-conditioning', 'builder'];
+
+            for (const slug of tradeOrder) {
+                let score = 0;
+                if (TRADE_KEYWORDS[slug]) {
+                    for (const k of TRADE_KEYWORDS[slug]) {
+                        const regex = new RegExp(`\\b${k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\b`, 'i');
+                        if (regex.test(lowerMsg)) {
+                            score += k.split(' ').length;
+                        }
+                    }
+                }
+                if (score > 0) {
+                    scores[slug] = score;
+                }
+            }
+
+            const detectedTrades = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+            const isBuilder = (scores['builder'] || 0) > 0;
+
+            if (isBuilder && detectedTrades.length > 1) {
+                if (lowerMsg.includes('structure') || lowerMsg.includes('fitting') || lowerMsg.includes('general')) {
+                    detectedTrade = 'builder';
+                } else if (lowerMsg.includes('electric') || lowerMsg.includes('plumb') || lowerMsg.includes('gas')) {
+                    if (lowerMsg.includes('electric')) detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('plumb')) detectedTrade = 'plumber';
+                    else if (lowerMsg.includes('gas')) detectedTrade = 'gas-engineer';
+                }
+            }
+
+            if (!detectedTrade) {
+                const negativeKeywords = ['boiler', 'gas', 'radiator', 'central heating', 'gas engineer'];
+                const hasNegativeKeyword = negativeKeywords.some(k => lowerMsg.includes(k));
+
+                if (detectedTrades.length > 0) {
+                    const hasWaterRestoration = detectedTrades.includes('water-restoration');
+                    const hasAirConditioning = detectedTrades.includes('air-conditioning');
+                    const hasPlumber = detectedTrades.includes('plumber');
+
+                    if (hasWaterRestoration && hasAirConditioning) {
+                        detectedTrade = 'water-restoration';
+                    } else if (hasWaterRestoration && hasPlumber && !hasNegativeKeyword) {
+                        if (lowerMsg.includes('damage') || lowerMsg.includes('drying') || lowerMsg.includes('soaked') || lowerMsg.includes('cleanup') || lowerMsg.includes('restoration')) {
+                            detectedTrade = 'water-restoration';
+                        } else if (lowerMsg.includes('pipe') || lowerMsg.includes('tap') || lowerMsg.includes('toilet') || lowerMsg.includes('fix') || lowerMsg.includes('repair')) {
+                            detectedTrade = 'plumber';
+                        }
+                    } else if (detectedTrades.includes('breakdown') && (lowerMsg.includes('car') || lowerMsg.includes('vehicle') || lowerMsg.includes('motorway') || lowerMsg.includes('roadside') || lowerMsg.includes('driving'))) {
+                        detectedTrade = 'breakdown';
+                    } else {
+                        detectedTrade = detectedTrades[0];
+                    }
+                } else {
+                    if (lowerMsg.includes('burning') && (lowerMsg.includes('power') || lowerMsg.includes('smell'))) detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('buzzing')) detectedTrade = 'electrician';
+                    else if (lowerMsg.includes('water') && lowerMsg.includes('electric')) detectedTrade = 'plumber';
+                    else if (lowerMsg.includes('broken window')) detectedTrade = 'glazier';
+                    else {
+                        const fuzzyTrade = fuzzyTradeDetect(message);
+                        if (fuzzyTrade) detectedTrade = fuzzyTrade;
+                    }
+                }
+            }
+        }
+        if (detectedTrade) {
+            newState.detectedTrade = detectedTrade;
+        }
+    }
+
     // 1. DANGER CHECK
     if (DANGER_KEYWORDS.some(k => lowerMsg.includes(k))) {
         const emergencyNumber = isUSDomain ? '911' : '999';
@@ -268,7 +349,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
     if (!isAwaitingResponse && (isQuestion || isDescriptive || lowerMsg.includes('is this dangerous') || lowerMsg.includes('stay safe'))) {
         const region = isUSDomain ? 'US' : 'UK';
         const { searchVectorKnowledgeBase } = await import("@/lib/knowledge-base");
-        const matchedRule = await searchVectorKnowledgeBase(message, region);
+        const matchedRule = await searchVectorKnowledgeBase(message, region, detectedTrade || undefined);
 
         if (matchedRule) {
             const isUK = region === 'UK';

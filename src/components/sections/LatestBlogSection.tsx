@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Wrench } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useLocalization } from "@/contexts/LocalizationContext";
 
@@ -12,6 +12,61 @@ interface BlogPost {
   cover_image: string | null;
   published_at: string;
 }
+
+const fallbackGuidesByRegion: Record<"US" | "GB", BlogPost[]> = {
+  US: [
+    {
+      id: "fallback-us-water-heater",
+      title: "Water Heater Leaking? What to Shut Off First",
+      slug: "",
+      excerpt: "A fast homeowner checklist for stopping water damage, isolating power or gas, and knowing when to call an emergency contractor.",
+      cover_image: "/images/blog/us-water-heater-hero.png",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+    {
+      id: "fallback-us-storm-board-up",
+      title: "Storm Damage Board-Up: What to Do Before Help Arrives",
+      slug: "",
+      excerpt: "How to protect the property, document damage safely, and keep broken openings secure after severe weather.",
+      cover_image: "/images/blog/us-storm-board-up-hero.webp",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+    {
+      id: "fallback-us-ac-freezing",
+      title: "AC Lines Freezing? Warning Signs Before It Fails",
+      slug: "",
+      excerpt: "What frozen refrigerant lines can mean, what to switch off, and when an emergency HVAC contractor should inspect it.",
+      cover_image: "/images/blog/us-ac-freezing-ice-lines-hero.webp",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+  ],
+  GB: [
+    {
+      id: "fallback-uk-fuse-box",
+      title: "Fuse Box Tripping? The Safe Checks to Make First",
+      slug: "",
+      excerpt: "A quick guide to isolating the fault, avoiding repeat trips, and deciding when an emergency electrician is needed.",
+      cover_image: "/images/blog/uk-fuse-box-tripping-hero.png",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+    {
+      id: "fallback-uk-radiator-cold",
+      title: "Radiator Cold at the Bottom? What It Means",
+      slug: "",
+      excerpt: "Simple signs that point to trapped air, sludge, or a heating fault before you book urgent help.",
+      cover_image: "/images/blog/uk-radiator-cold-hero.png",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+    {
+      id: "fallback-uk-outside-tap",
+      title: "Outside Tap Leaking? Stop the Water Safely",
+      slug: "",
+      excerpt: "How to isolate an outdoor leak, reduce water damage, and decide whether a plumber needs to attend urgently.",
+      cover_image: "/images/blog/uk-outside-tap-leaking-hero.png",
+      published_at: "2026-05-24T00:00:00.000Z",
+    },
+  ],
+};
 
 export function LatestBlogSection() {
   const { settings } = useLocalization();
@@ -74,8 +129,6 @@ export function LatestBlogSection() {
     };
   }, [settings.countryCode]);
 
-  if (posts.length === 0) return null;
-
   const resolveImage = (path: string | null): string | undefined => {
     if (!path) return undefined;
     if (path.startsWith("http")) return path;
@@ -86,9 +139,22 @@ export function LatestBlogSection() {
     return normalized;
   };
 
+  const displayPosts = [...posts];
+  const fallbackGuides =
+    settings.countryCode === "US" ? fallbackGuidesByRegion.US : fallbackGuidesByRegion.GB;
+
+  for (const fallbackGuide of fallbackGuides) {
+    if (displayPosts.length >= 3) break;
+    if (!displayPosts.some((post) => post.id === fallbackGuide.id || post.title === fallbackGuide.title)) {
+      displayPosts.push(fallbackGuide);
+    }
+  }
+
+  if (displayPosts.length === 0) return null;
+
   return (
-    <section className="container-wide py-16">
-      <div className="flex items-end justify-between mb-10">
+    <section className="landing-dispatch-section container-wide pt-4 pb-4 md:pt-6 md:pb-6">
+      <div className="landing-dispatch-heading flex items-end justify-between mb-10">
         <div>
           <p className="text-gold uppercase tracking-luxury text-sm mb-2">The Dispatch</p>
           <h2 className="font-display text-3xl md:text-4xl tracking-wide text-foreground">
@@ -103,17 +169,24 @@ export function LatestBlogSection() {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {posts.map((post) => {
+      <div className="landing-dispatch-grid grid md:grid-cols-3 gap-8">
+        {displayPosts.map((post) => {
           const img = resolveImage(post.cover_image);
+          const postHref = post.slug ? `${countryPrefix}/blog/${post.slug}` : `${countryPrefix}/blog`;
           return (
             <Link
               key={post.id}
-              to={`${countryPrefix}/blog/${post.slug}`}
-              className="group block rounded-xl border border-border/40 bg-card/40 hover:border-gold/40 transition-colors overflow-hidden"
+              to={postHref}
+              className="landing-dispatch-card group block rounded-xl border border-border/40 bg-card/40 hover:border-gold/40 transition-colors"
             >
-              {img && (
-                <div className="aspect-[16/9] overflow-hidden bg-muted">
+              <div className="landing-dispatch-media aspect-[16/9] overflow-hidden bg-muted">
+                <div className="landing-dispatch-fallback" aria-hidden="true">
+                  <Wrench className="landing-dispatch-fallback-icon" />
+                  <span>Emergency Guide</span>
+                  <strong>{regionalizeText(post.title).split("?")[0]}</strong>
+                  <BookOpen className="landing-dispatch-fallback-mark" />
+                </div>
+                {img && (
                   <img
                     src={img}
                     alt={regionalizeText(post.title)}
@@ -125,8 +198,8 @@ export function LatestBlogSection() {
                       e.currentTarget.style.display = "none";
                     }}
                   />
-                </div>
-              )}
+                )}
+              </div>
               <div className="p-6">
                 <h3 className="font-display text-lg text-foreground group-hover:text-gold transition-colors mb-2 line-clamp-2">
                   {regionalizeText(post.title)}

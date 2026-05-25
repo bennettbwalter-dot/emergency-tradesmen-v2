@@ -814,7 +814,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
             >
                 <div className="flex min-w-0 items-center gap-2">
                     <BriefcaseBusiness className="h-4 w-4 shrink-0 text-gold" />
-                    <span className="block truncate">Trade</span>
+                    <span className="hidden truncate sm:block">Trade</span>
                 </div>
             </SelectTrigger>
             {tradeSelectorContent}
@@ -825,7 +825,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         <div data-tour="tour-location-button" className="min-w-0">
             {settings.countryCode === 'US' ? (
                 <HierarchicalLocationSelector
-                    className="w-full"
+                    className="home-search-location-selector w-full"
                     buttonClassName={compactTextButtonClass}
                     placeholder="State"
                     cityPlaceholder="City / Area"
@@ -901,7 +901,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                 initial={{ opacity: 0, y: 12, scale: 0.98 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                                className="mb-4 max-h-[34svh] overflow-y-auto rounded-2xl bg-black/20 px-4 py-3 text-sm text-slate-100 ring-1 ring-white/8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                                className="mb-4 max-h-[34svh] overflow-y-auto rounded-2xl bg-slate-100/50 dark:bg-black/20 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 ring-1 ring-slate-950/10 dark:ring-white/8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                                 ref={chatContainerRef}
                                 onScroll={handleScroll}
                             >
@@ -914,7 +914,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                     <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/12 ring-1 ring-gold/25">
                                                         <img src="/et-logo-v3.webp" alt="" className="h-4 w-4 object-contain" loading="lazy" />
                                                     </div>
-                                                    <div className="min-w-0 flex-1 text-slate-100">
+                                                    <div className="min-w-0 flex-1 text-slate-900 dark:text-slate-100">
                                                         {isLastMessage ? (
                                                             <MarkdownTypewriter
                                                                 content={msg.content}
@@ -926,10 +926,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                                 onComplete={() => {
                                                                     if (isAtBottom) scrollToBottom('smooth');
                                                                 }}
-                                                                className="prose prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold"
+                                                                className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold"
                                                             />
                                                         ) : (
-                                                            <div className="prose prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold">
+                                                            <div className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold">
                                                                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                                                     {msg.content}
                                                                 </ReactMarkdown>
@@ -942,7 +942,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
 
                                         return (
                                             <div key={msg.id} className="flex justify-end">
-                                                <div className="max-w-[88%] rounded-2xl bg-gold/12 px-3 py-2 text-sm font-medium text-amber-50 ring-1 ring-gold/20">
+                                                <div className="max-w-[88%] rounded-2xl bg-gold/12 px-3 py-2 text-sm font-medium text-amber-900 dark:text-amber-50 ring-1 ring-gold/20">
                                                     {msg.content}
                                                 </div>
                                             </div>
@@ -953,10 +953,8 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                         )}
                     </AnimatePresence>
 
-                    <div className="home-search-chatbox group/searchbox relative overflow-hidden rounded-[1.45rem] backdrop-blur-2xl transition duration-300">
+                    <div className="home-search-chatbox group/searchbox relative overflow-hidden rounded-[1.45rem] bg-white shadow-[0_18px_44px_rgba(15,23,42,0.12)] ring-1 ring-slate-950/10 transition duration-300 dark:bg-[#080c14] dark:shadow-[0_18px_44px_rgba(0,0,0,0.38)] dark:ring-white/10">
                         <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-slate-950/10 to-transparent dark:via-white/18" />
-                        <div className="pointer-events-none absolute -right-16 -top-24 h-44 w-44 rounded-full bg-gold/10 blur-3xl dark:bg-gold/8" />
-                        <div className="pointer-events-none absolute -left-20 bottom-0 h-36 w-44 rounded-full bg-sky-500/8 blur-3xl dark:bg-sky-500/5" />
 
                         {chatState.history.length > 0 && (
                             <button
@@ -1005,7 +1003,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         onBlur={() => setIsFocused(false)}
                                         placeholder={chatState.history.length === 0 ? (placeholderText || "What emergency do you need help with?") : "Type your reply..."}
                                         data-tour="tour-chat-input"
-                                        className="h-full min-h-[5rem] w-full resize-none bg-transparent text-[15px] font-light leading-relaxed text-slate-950 outline-none placeholder:text-slate-500 focus:ring-0 sm:text-base dark:text-slate-50 dark:placeholder:text-slate-400/88"
+                                        className="h-full min-h-[5rem] w-full resize-none bg-transparent text-[15px] font-light leading-relaxed text-slate-950 outline-none placeholder:text-slate-950/70 focus:ring-0 sm:text-base dark:text-slate-50 dark:placeholder:text-white/80"
                                     />
                                 )}
                             </div>
@@ -1028,7 +1026,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         {isTranscriptionProcessing ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4 text-gold" />}
                                     </Button>
 
-                                    <div className="grid w-[calc(100%-5.5rem)] max-w-[32rem] grid-cols-3 gap-2">
+                                    <div className="home-search-control-grid grid w-[calc(100%-5.5rem)] max-w-[38rem] grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2.15fr)_minmax(0,1fr)]">
                                         <div className="min-w-0">
                                             {compactTradeSelector}
                                         </div>
@@ -1047,7 +1045,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                             title="Locate Me"
                                         >
                                             {geoLoading ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : <LocateFixed className="h-4 w-4 text-gold" />}
-                                            <span className="ml-2 truncate">Locate</span>
+                                            <span className="ml-2 hidden truncate sm:inline">Locate</span>
                                         </Button>
                                     </div>
 
@@ -1195,7 +1193,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
 
                 {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
                 <div className="hero-chat-shell w-full bg-transparent flex justify-center pt-2 pb-4 relative z-30">
-                    <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-[#08121d]/88 md:bg-white/5 dark:bg-[#0a0a0a]/90 backdrop-blur-2xl rounded-2xl border overflow-hidden group
+                    <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-white dark:bg-[#0a0a0a] rounded-2xl border overflow-hidden group
                         ${isFocused
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
@@ -1283,7 +1281,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         onBlur={() => setIsFocused(false)}
                                         placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
                                         data-tour="tour-chat-input"
-                                        className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-white md:text-black dark:text-white placeholder:text-white/80 md:placeholder:text-black dark:placeholder:text-white resize-none font-light tracking-wide"
+                                        className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-slate-950 dark:text-white placeholder:text-slate-950/70 dark:placeholder:text-white/80 resize-none font-light tracking-wide"
                                         style={{ minHeight: '80px' }}
                                     />
                                 </>

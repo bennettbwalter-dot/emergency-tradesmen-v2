@@ -5,7 +5,7 @@ import maplibregl, { Map as MapLibreMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { cityCoordinates } from "@/lib/cityCoordinates";
 import { usCityCoordinates } from "@/lib/usCityCoordinates";
-import { buildEarthMapStyle, EARTH_FINAL_PITCH, EARTH_FINAL_ZOOM } from "./mapStyle";
+import { buildEarthMapStyle, EARTH_FINAL_PITCH, EARTH_FINAL_ZOOM } from "@/components/earth/mapStyle";
 
 type EarthLaunchDetail = {
   location?: string;
@@ -34,22 +34,22 @@ const SITE_FOCUS_COORDS = {
 const EARTH_HERO_IMAGES = {
   GB: {
     day: {
-      src: "/assets/earth-hero/earth-hero-day-gb-full.webp",
-      srcSet: "/assets/earth-hero/earth-hero-day-gb-1280.webp 1280w, /assets/earth-hero/earth-hero-day-gb-full.webp 1672w"
+      src: "/assets/archive/earth-hero/earth-hero/earth-hero-day-gb-full.webp",
+      srcSet: "/assets/archive/earth-hero/earth-hero/earth-hero-day-gb-1280.webp 1280w, /assets/archive/earth-hero/earth-hero/earth-hero-day-gb-full.webp 1672w"
     },
     night: {
-      src: "/assets/earth-hero/earth-hero-night-gb-full.webp",
-      srcSet: "/assets/earth-hero/earth-hero-night-gb-1280.webp 1280w, /assets/earth-hero/earth-hero-night-gb-full.webp 1672w"
+      src: "/assets/archive/earth-hero/earth-hero/earth-hero-night-gb-full.webp",
+      srcSet: "/assets/archive/earth-hero/earth-hero/earth-hero-night-gb-1280.webp 1280w, /assets/archive/earth-hero/earth-hero/earth-hero-night-gb-full.webp 1672w"
     }
   },
   US: {
     day: {
-      src: "/assets/earth-hero/earth-hero-day-us-full.webp",
-      srcSet: "/assets/earth-hero/earth-hero-day-us-1280.webp 1280w, /assets/earth-hero/earth-hero-day-us-full.webp 1672w"
+      src: "/assets/archive/earth-hero/earth-hero/earth-hero-day-us-full.webp",
+      srcSet: "/assets/archive/earth-hero/earth-hero/earth-hero-day-us-1280.webp 1280w, /assets/archive/earth-hero/earth-hero/earth-hero-day-us-full.webp 1672w"
     },
     night: {
-      src: "/assets/earth-hero/earth-hero-night-us-full.webp",
-      srcSet: "/assets/earth-hero/earth-hero-night-us-1280.webp 1280w, /assets/earth-hero/earth-hero-night-us-full.webp 1672w"
+      src: "/assets/archive/earth-hero/earth-hero/earth-hero-night-us-full.webp",
+      srcSet: "/assets/archive/earth-hero/earth-hero/earth-hero-night-us-1280.webp 1280w, /assets/archive/earth-hero/earth-hero/earth-hero-night-us-full.webp 1672w"
     }
   }
 } as const;
@@ -250,8 +250,8 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
     camera.position.set(0, 0, 7.3);
 
     const loader = new THREE.TextureLoader();
-    const earthTexture = loader.load("/assets/earth_atmos_2048.webp");
-    const cloudTexture = loader.load("/assets/earth_clouds_1024.webp");
+    const earthTexture = loader.load("/assets/archive/earth-hero/textures/earth_atmos_2048.webp");
+    const cloudTexture = loader.load("/assets/archive/earth-hero/textures/earth_clouds_1024.webp");
     earthTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -526,7 +526,6 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
               sizes="100vw"
               alt=""
               decoding="async"
-              fetchpriority="high"
               className={`earth-hero-visual-image earth-hero-visual-image--${siteKey.toLowerCase()}`}
             />
           </div>
@@ -537,7 +536,6 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
               sizes="100vw"
               alt=""
               decoding="async"
-              fetchpriority="high"
               className={`earth-hero-visual-image earth-hero-visual-image--${siteKey.toLowerCase()}`}
             />
           </div>

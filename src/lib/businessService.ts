@@ -257,19 +257,23 @@ export async function fetchBusinesses(
         const tradeParams = `trade=in.(${uniqueTrades.map(encodeURIComponent).join(',')})`;
         const directUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=eq.${encodeURIComponent(searchCity)}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
-        const { data: directData } = await supabaseFetch(directUrl);
+        try {
+            const { data: directData } = await supabaseFetch(directUrl);
 
-        if (directData && directData.length > 0) {
-            devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
-            const businesses = await Promise.all(directData.filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
-            const businessesWithEvidence = await attachEvidence(businesses, regionFromCountryCode(countryCode));
-            return businessesWithEvidence
-                .sort((a, b) => {
-                    if (a.tier === 'paid' && b.tier !== 'paid') return -1;
-                    if (a.tier !== 'paid' && b.tier === 'paid') return 1;
-                    if (userCoords && a.distance !== undefined && b.distance !== undefined) return a.distance - b.distance;
-                    return (b.priority_score || 0) - (a.priority_score || 0);
-                });
+            if (directData && directData.length > 0) {
+                devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
+                const businesses = await Promise.all(directData.filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
+                const businessesWithEvidence = await attachEvidence(businesses, regionFromCountryCode(countryCode));
+                return businessesWithEvidence
+                    .sort((a, b) => {
+                        if (a.tier === 'paid' && b.tier !== 'paid') return -1;
+                        if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+                        if (userCoords && a.distance !== undefined && b.distance !== undefined) return a.distance - b.distance;
+                        return (b.priority_score || 0) - (a.priority_score || 0);
+                    });
+            }
+        } catch (err) {
+            devLog('[fetchBusinesses] Direct city match query failed:', err);
         }
 
         // 2. If no direct match, try coverage_areas via broader query
@@ -279,6 +283,8 @@ export async function fetchBusinesses(
     const tradeParams = `trade=in.(${uniqueTrades.map(encodeURIComponent).join(',')})`;
     let queryUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
+    const isCoverageQuery = !(stateCities.length > 0) && !!(searchCity && searchCity.trim() !== '');
+
     if (stateCities.length > 0) {
         queryUrl += `&city=in.(${stateCities.map(encodeURIComponent).join(',')})`;
     } else if (searchCity && searchCity.trim() !== '') {
@@ -286,7 +292,30 @@ export async function fetchBusinesses(
         queryUrl += `&coverage_areas=cs.${encodeURIComponent(`{"${cityWithSpaces.replace(/"/g, '\\"')}"}`)}`;
     }
 
-    const { data } = await supabaseFetch(queryUrl);
+    let data: any[] | null = null;
+
+    if (isCoverageQuery) {
+        // Run containment query with a tight timeout to prevent statement timeouts
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1200); // 1.2 seconds timeout
+        try {
+            const response = await supabaseFetch(queryUrl, { signal: controller.signal });
+            data = response.data;
+        } catch (err) {
+            devLog('[fetchBusinesses] coverage_areas containment query failed or timed out, trying broader query...', err);
+            data = null;
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    } else {
+        try {
+            const response = await supabaseFetch(queryUrl);
+            data = response.data;
+        } catch (err) {
+            devLog('[fetchBusinesses] Main query failed, continuing...', err);
+            data = null;
+        }
+    }
 
     // FALLBACK: If no results found with city filter, try broader query
     let allBusinesses = data || [];
@@ -299,9 +328,13 @@ export async function fetchBusinesses(
             fallbackUrl += `&city=in.(${stateCities.map(encodeURIComponent).join(',')})`;
         }
 
-        const { data: fallbackData } = await supabaseFetch(fallbackUrl);
-        if (fallbackData) {
-            allBusinesses = fallbackData;
+        try {
+            const { data: fallbackData } = await supabaseFetch(fallbackUrl);
+            if (fallbackData) {
+                allBusinesses = fallbackData;
+            }
+        } catch (err) {
+            devLog('[fetchBusinesses] Fallback broader query failed:', err);
         }
     }
 

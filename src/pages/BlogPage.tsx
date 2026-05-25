@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { Header } from "@/components/Header";
 import { AdSlot } from "@/components/AdSlot";
 import { useSimpleTheme } from "@/components/simple-theme";
 import { useLocalization } from "@/contexts/LocalizationContext";
@@ -65,7 +66,7 @@ export default function BlogPage() {
 
     useEffect(() => {
         setTheme('light');
-    }, []);
+    }, [setTheme]);
 
     useEffect(() => {
         async function loadPosts() {
@@ -157,6 +158,7 @@ export default function BlogPage() {
     return (
         <LocalErrorBoundary>
             <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
+                <Header />
                 <SEO
                     title={`Emergency ${settings.tradeTerm} Blog — Safety Guides & Expert Tips`}
                     description={`Expert home safety guides, emergency repair tips, and maintenance advice for UK homeowners. Learn how to handle plumbing, electrical & HVAC emergencies. Read now.`}
@@ -215,7 +217,6 @@ export default function BlogPage() {
                                                 className="w-full h-full object-cover transition-transform group-hover:scale-105"
                                                 style={{ transitionDuration: '20s', animationTimingFunction: 'linear' }}
                                                 loading="eager"
-                                                fetchpriority="high"
                                                 decoding="async"
                                                 onError={(e) => {
                                                     const target = e.currentTarget;

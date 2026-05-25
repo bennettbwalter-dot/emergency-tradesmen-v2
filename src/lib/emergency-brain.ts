@@ -148,6 +148,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       'fuse box', 'tripped fuse', 'circuit breaker', 'exposed wire', 'buzzing',
       'flickering lights', 'blackout', 'socket not working', 'smoke from socket',
       'live wire', 'electrical fire', 'consumer unit', 'rcd tripping', 'electrician', 'electrical',
+      'light', 'lights',
     ],
     diagnostics: {
       uk: [
@@ -828,7 +829,7 @@ const SLUG_MAP: Record<string, string> = {
   'builder': 'builder',
   'water-restoration': 'water-restoration',
   'breakdown': 'breakdown',
-  'air-conditioning': 'air-conditioning',
+  'air-conditioning': 'hvac',
 };
 
 // ─── TRADE DETECTOR (SCORED) ──────────────────────────────────
@@ -905,6 +906,28 @@ export function findMatchingDiagnostics(userMessage: string, tradeSlug: string, 
   });
 }
 
+const TRADE_DONT_WARNINGS: Record<string, string> = {
+  plumber: "Do not open ceilings, cut pipes, remove sealed parts, or keep using water if the leak is spreading.",
+  electrician: "Do not touch wet electrics, burnt sockets, exposed wiring, consumer units, or anything that is sparking or hot.",
+  locksmith: "Do not try to force the door, drill the lock, bypass security, or ask for advice that could be used to enter someone else's property.",
+  "gas-engineer": "Do not use flames, switches, appliances, phones near the leak, or try to repair gas pipework, boilers, or flues yourself.",
+  "drain-specialist": "Do not mix drain chemicals, remove covers over sewage, use pressure equipment indoors, or keep flushing into a blockage.",
+  glazier: "Do not handle broken glass with bare hands, leave sharp edges exposed, or try to secure overhead glass without help.",
+  roofer: "Do not climb onto the roof, use ladders in bad weather, lift tiles, or make temporary fixes near overhead cables.",
+  builder: "Do not prop, drill, knock through, remove debris, or stay in an area with bulging walls, sagging ceilings, or widening cracks.",
+  "water-restoration": "Do not walk through floodwater where electrics may be live, use household vacuums, or disturb contaminated water without protection.",
+  breakdown: "Do not stand in the road, stay in a vehicle exposed to fast traffic, attempt roadside repairs in live lanes, or tow without proper equipment.",
+  hvac: "Do not handle refrigerant, bypass electrical controls, open sealed gas or combustion parts, or keep running a unit that smells burnt or is leaking.",
+};
+
+const cleanGuidance = (text: string) =>
+  text.replace(/^[^\w(]+/, '').replace(/\s+/g, ' ').trim();
+
+const firstItems = (items: string[], count = 3) =>
+  items.slice(0, count).map(item => `- ${cleanGuidance(item)}`).join('\n');
+
+const articleFor = (name: string) => /^[aeiou]/i.test(name.trim()) ? `an ${name}` : `a ${name}`;
+
 // ─── OFFLINE RESPONSE GENERATOR ──────────────────────────────
 
 /**
@@ -951,16 +974,18 @@ export function getOfflineResponse(userMessage: string, region: 'uk' | 'usa' = '
   const safetyGeneral = trade.safetyGuidance.general[regKey];
   const typicalFaults = trade.typicalFaults[regKey] || [];
   const repairPractices = trade.repairPractices[regKey] || [];
+  const dontWarning = TRADE_DONT_WARNINGS[chatSlug] || "Do not attempt risky temporary repairs or continue using anything that looks unsafe.";
+  const regulationNote = tradeRegs[0] ? `\n\nRelevant safety rule/guidance: **${tradeRegs[0]}**.` : "";
 
   // ── EMERGENCY ────────────────────────────────────────────────
   if (classification.level === 'EMERGENCY') {
-    let msg = `### 🚨 Safety First\n${safetyEmergency}`;
+    let msg = `That sounds like it could be dangerous, so let's keep this simple and safe.\n\n**Do this now**\n${cleanGuidance(safetyEmergency)}\n\n**Please don't**\n${dontWarning}`;
     
     if (diagnostics.length > 0) {
-      msg += `\n\n**Likely cause:** ${diagnostics[0].symptom} — ${diagnostics[0].likely}`;
+      msg += `\n\nA likely issue is **${diagnostics[0].symptom.toLowerCase()}** - ${diagnostics[0].likely}.`;
     }
     
-    msg += `\n\n### 👷 You Need an Emergency ${tradeName}\n- Contact a qualified **${tradeName.toLowerCase()}** immediately\n- If there is danger to life, call **${emergencyNumber}** first`;
+    msg += `${regulationNote}\n\nOnce you are safe, a qualified **${tradeName.toLowerCase()}** should handle the repair. If anyone is in immediate danger, call **${emergencyNumber}** first.`;
 
     return {
       type: 'EMERGENCY', trade: chatSlug, tradeName, urgency: 'EMERGENCY', message: msg,
@@ -973,25 +998,25 @@ export function getOfflineResponse(userMessage: string, region: 'uk' | 'usa' = '
 
   // ── URGENT ───────────────────────────────────────────────────
   if (classification.level === 'URGENT') {
-    let msg = `### ⚠️ Safety Advice\n${safetyEmergency}\n\n`;
+    let msg = `This sounds like ${articleFor(tradeName.toLowerCase())} issue that should be handled carefully.\n\n**Safe next step**\n${cleanGuidance(safetyEmergency)}\n\n**Please don't**\n${dontWarning}\n\n`;
     
     if (diagnostics.length > 0) {
-      msg += `### 🔍 Possible Causes\n`;
+      msg += `**What it might be (safe-level)**\n`;
       diagnostics.slice(0, 2).forEach(d => {
-        msg += `- **${d.symptom}** — ${d.likely}\n`;
+        msg += `- **${d.symptom}** - ${d.likely}\n`;
       });
       msg += `\n`;
     }
     
     if (typicalFaults.length > 0) {
-      msg += `### 🛠️ Common Faults\n`;
+      msg += `**Common faults a professional will check**\n`;
       typicalFaults.slice(0, 3).forEach(fault => {
         msg += `- ${fault}\n`;
       });
       msg += `\n`;
     }
     
-    msg += `### 👷 You Need a ${tradeName}\nWe recommend contacting a qualified **${tradeName.toLowerCase()}** to assess and resolve this safely.`;
+    msg += `The safest next step is to have a qualified **${tradeName.toLowerCase()}** assess it before it gets worse.${regulationNote}`;
 
     return {
       type: 'URGENT', trade: chatSlug, tradeName, urgency: 'URGENT', message: msg,
@@ -1005,25 +1030,29 @@ export function getOfflineResponse(userMessage: string, region: 'uk' | 'usa' = '
   }
 
   // ── GENERAL ──────────────────────────────────────────────────
-  let msg = `### 💡 Guidance\n${safetyGeneral}\n\n`;
+  let msg = `This sounds like ${articleFor(tradeName.toLowerCase())} question. Here's the safe version.\n\n**Good first step**\n${cleanGuidance(safetyGeneral)}\n\n**Please don't**\n${dontWarning}\n\n`;
   
   if (diagnostics.length > 0) {
-    msg += `### 🔍 Diagnostics\n`;
+    msg += `**What it might be**\n`;
     diagnostics.slice(0, 2).forEach(d => {
-      msg += `- **${d.symptom}** — ${d.likely}\n`;
+      msg += `- **${d.symptom}** - ${d.likely}\n`;
     });
     msg += `\n`;
   }
   
   if (typicalFaults.length > 0) {
-    msg += `### 🛠️ Common Faults\n`;
+    msg += `**Common causes**\n`;
     typicalFaults.slice(0, 3).forEach(fault => {
       msg += `- ${fault}\n`;
     });
     msg += `\n`;
   }
   
-  msg += `### 👷 You Need a ${tradeName}\nTo resolve this safely, book a qualified **${tradeName.toLowerCase()}** who can carry out a proper repair.`;
+  if (repairPractices.length > 0) {
+    msg += `**Prevention tips**\n${firstItems(repairPractices, 2)}\n\n`;
+  }
+
+  msg += `If it keeps happening, gets worse, or involves anything unsafe, a qualified **${tradeName.toLowerCase()}** should inspect it properly.${regulationNote}`;
   
   return {
     type: 'GENERAL', trade: chatSlug, tradeName, urgency: 'GENERAL', message: msg,

@@ -15,7 +15,7 @@ const TRADE_DESCRIPTIONS = {
     "breakdown": "Car won't start, breakdown, flat battery, engine cut out, stuck on roadside, jump start, tow truck, recovery",
     "roofer": "Roof leak, missing tiles, storm damage, chimney damage, flashing loose, roof collapse, water through ceiling",
     "builder": "Cracked walls, structural damage, ceiling collapse, subsidence, door frames broken, carpentry, masonry repair",
-    "air-conditioning": "Air conditioning not working, AC broken, no cold air, air con leaking, heating and cooling issues, HVAC",
+    "hvac": "Air conditioning not working, AC broken, no cold air, air con leaking, heating and cooling issues, HVAC",
     "water-restoration": "Water damage, flood damage, water extraction, drying service, mould, dehumidifier, flood cleanup",
 };
 

@@ -2,10 +2,15 @@ import { Search, PhoneCall, HeartHandshake } from "lucide-react";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { cn } from "@/lib/utils";
 
-export const HowItWorksSection = () => {
+interface HowItWorksSectionProps {
+  variant?: "default" | "spine";
+}
+
+export const HowItWorksSection = ({ variant = "default" }: HowItWorksSectionProps) => {
   const { settings } = useLocalization();
   const listingTerm = settings.countryCode === 'US' ? 'contractor' : 'tradesmen';
   const contactTerm = settings.countryCode === 'US' ? 'contractor' : 'tradesman';
+  const isSpine = variant === "spine";
 
   const steps = [
     {
@@ -26,7 +31,7 @@ export const HowItWorksSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-secondary/20 relative overflow-hidden">
+    <section className={cn("py-16 md:py-24 bg-secondary/20 relative overflow-hidden", isSpine && "landing-how-spine")}>
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gold/5 to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-gold/5 to-transparent pointer-events-none" />
@@ -42,14 +47,17 @@ export const HowItWorksSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
+        <div className={cn("relative", isSpine ? "landing-how-spine-grid" : "grid md:grid-cols-3 gap-8 lg:gap-12")}>
           {/* Connecting line for desktop */}
-          <div className="hidden md:block absolute top-[4.5rem] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -z-10" />
+          {!isSpine && (
+            <div className="hidden md:block absolute top-[4.5rem] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -z-10" />
+          )}
 
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={index} className="flex flex-col items-center text-center relative group">
+              <div key={index} className={cn("flex flex-col items-center text-center relative group", isSpine && "landing-how-spine-step")}>
+                {isSpine && <span className="landing-how-spine-node" aria-hidden="true" />}
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-card border-2 border-border flex items-center justify-center mb-6 shadow-sm group-hover:border-gold/50 group-hover:shadow-gold/10 group-hover:-translate-y-1 transition-all duration-300">
                   <Icon className="w-10 h-10 sm:w-12 sm:h-12 text-gold opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
                 </div>

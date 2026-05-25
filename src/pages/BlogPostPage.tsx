@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { format, isValid } from "date-fns";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "@/components/SEO";
+import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { AdSlot } from "@/components/AdSlot";
 import { ArrowLeft, Clock, Calendar, User, ChevronRight, AlertTriangle, Sun, Moon, Phone, BookOpen, Zap } from "lucide-react";
@@ -701,9 +702,9 @@ export default function BlogPostPage() {
           const relatedResponse = await fetch(relatedUrl, {
             headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`, 'Content-Type': 'application/json', 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-9' }
           });
-          const relatedData = await relatedResponse.json();
+          const relatedData = (await relatedResponse.json()) as BlogPost[];
           if (relatedData) {
-            let filtered = relatedData.filter((p: any) => {
+            let filtered = relatedData.filter((p: BlogPost) => {
               const s = p.slug?.toLowerCase() || "";
               const pIsUS = s.includes('usa') || s.includes('-us');
               const pIsUK = s.includes('-gb') || s.includes('-uk');
@@ -880,6 +881,7 @@ export default function BlogPostPage() {
 
   return (
     <div className={`min-h-screen font-sans transition-all duration-500 overflow-x-hidden ${isWhiteMode ? 'bg-[#fafafa] text-neutral-900' : 'bg-[#0a0a0a] text-neutral-100'}`}>
+      <Header />
       <style>{`
               /* ── GLOBAL OVERFLOW GUARD ────────────────── */
               *, *::before, *::after { box-sizing: border-box; }
@@ -1139,7 +1141,6 @@ export default function BlogPostPage() {
                     alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
                     className="w-full h-full object-cover"
                     loading="eager"
-                    fetchpriority="high"
                     decoding="async"
                     onError={(e) => {
                       const target = e.currentTarget;

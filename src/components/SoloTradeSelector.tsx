@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Loader2, LocateFixed, MapPin, Pause, Play, Square } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { findNearestCity } from "@/lib/cityCoordinates";
@@ -174,6 +174,8 @@ function coordsWithinCountry(lat: number, lng: number, countryCode: "GB" | "US")
 
 export function SoloTradeSelector() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/landing" || location.pathname === "/welcome";
   const { settings, detectedCity } = useLocalization();
   const { setDetectedTrade, setDetectedCity } = useChatbot();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -275,6 +277,10 @@ export function SoloTradeSelector() {
   };
 
   const handleFindLocal = async (trade: SelectorTrade) => {
+    if (isLandingPage) {
+      navigate("/");
+      return;
+    }
     stopAutoRotation();
     setLocatingSlug(trade.slug);
     setLocationError(null);

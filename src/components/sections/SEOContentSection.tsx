@@ -8,22 +8,22 @@ export function SEOContentSection() {
     const tradeTerm = settings.tradeTerm.toLowerCase();
 
     return (
-        <section className="container-wide py-16 relative overflow-hidden">
+        <section className="container-wide pt-8 pb-4 md:pt-10 md:pb-6 relative overflow-hidden">
             {/* Ambient Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/5 blur-[120px] pointer-events-none rounded-full" />
 
-            <div className="relative max-w-5xl mx-auto bg-card/30 backdrop-blur-xl border border-white/8 rounded-3xl p-8 md:p-16 overflow-hidden shadow-lg group hover:border-gold/20 transition-colors duration-700">
+            <div className="relative max-w-5xl mx-auto bg-card/30 backdrop-blur-xl border border-white/8 rounded-3xl p-6 md:py-10 md:px-12 overflow-hidden shadow-lg group hover:border-gold/20 transition-colors duration-700">
                 {/* Internal Shine Effects */}
                 <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 bg-gold/10 blur-[80px] rounded-full opacity-50 group-hover:opacity-70 transition-opacity duration-700" />
                 <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-80 h-80 bg-gold/5 blur-[80px] rounded-full opacity-30" />
 
                 <div className="relative z-10 text-center">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-bold uppercase tracking-widest mb-8">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-bold uppercase tracking-widest mb-3">
                         <Zap className="w-3 h-3 fill-gold" />
                         Public Local Listings
                     </span>
 
-                    <h2 className="font-display text-3xl md:text-5xl text-foreground mb-8 leading-tight">
+                    <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
                         Why Choose Our <span className="text-gold">{settings.tradeTerm} Near Me?</span>
                     </h2>
 
