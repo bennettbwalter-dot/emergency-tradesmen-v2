@@ -30,9 +30,9 @@ export function Header({ countryCode, showDesktopSidebar = true }: HeaderProps) 
   const siteNameSub = isUSDomain ? "Contractors" : isUS ? "Contractors" : "Tradesmen";
   const countryPrefix = isUS && !isUSDomain ? "/us" : "";
   const findLabel = isUS ? "Find contractor" : "Find trade";
-  const findRoute = `${countryPrefix}/#manual-search`;
+  const findRoute = `${countryPrefix}/home#manual-search`;
   const pricingRoute = `${countryPrefix}/pricing`;
-  const isMarketingLanding = location.pathname === "/landing" || location.pathname === "/welcome";
+  const isMarketingLanding = location.pathname === "/" || location.pathname === "/landing" || location.pathname === "/welcome";
   const isTransparentHeader = isMarketingLanding && !isScrolled;
 
   useEffect(() => {

@@ -157,7 +157,7 @@ const Index = () => {
       <SEO
         title={`Emergency ${siteTradeTerm} Near You${displayCity !== "Near You" ? ` in ${displayCity}` : ""}`}
         description="Fast local emergency help for plumbing, electrical, locksmith, HVAC, roadside and urgent property repairs. Search by trade and area, then call a local expert directly."
-        canonical="/landing"
+        canonical="/"
         ogImage={`${siteUrl}/assets/landing-hero/hero-01.webp`}
         jsonLd={emergencyServiceSchema}
         alternates={[
@@ -221,7 +221,7 @@ const Index = () => {
               </p>
 
               <div className="landing-2026-hero__actions" aria-label="Primary landing page actions">
-                <Link to="/" className="landing-2026-button landing-2026-button--primary">
+                <Link to="/home#manual-search" className="landing-2026-button landing-2026-button--primary">
                   Find emergency help
                   <ArrowRight className="h-4 w-4" />
                 </Link>

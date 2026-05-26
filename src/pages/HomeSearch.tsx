@@ -73,7 +73,7 @@ export default function HomeSearch() {
       <SEO
         title={`Search Emergency ${siteTradeTerm} Near You`}
         description={`Search local emergency ${siteTradeTerm.toLowerCase()}, use voice or manual search, and open public listings for plumbers, electricians, locksmiths, roofers, HVAC and more.`}
-        canonical="/"
+        canonical="/home"
       />
 
       <main className="min-h-screen bg-[#f7f5ef] text-slate-950 dark:bg-[#05070b] dark:text-white">

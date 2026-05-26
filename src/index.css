@@ -146,7 +146,32 @@
 
   @media (max-width: 640px) {
     .home-search-trust-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    .home-search-trust-pill {
+      min-height: 4.3rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.35rem;
+      border-radius: 0.85rem;
+      padding: 0.55rem 0.35rem;
+      text-align: center;
+    }
+
+    .home-search-trust-pill strong {
+      width: 1.55rem;
+      height: 1.55rem;
+      font-size: 0.7rem;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.14);
+    }
+
+    .home-search-trust-pill span {
+      display: block;
+      font-size: clamp(0.56rem, 2.6vw, 0.68rem);
+      font-weight: 900;
+      line-height: 1.08;
     }
 
     .home-search-control-grid {

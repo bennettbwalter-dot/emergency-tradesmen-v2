@@ -181,8 +181,21 @@ export default function SoftAurora({
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+
+    let renderer: Renderer;
+    try {
+      renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+    } catch (error) {
+      console.warn('SoftAurora disabled because WebGL could not be initialized.', error);
+      return;
+    }
+
     const gl = renderer.gl;
+    if (!gl) {
+      console.warn('SoftAurora disabled because no WebGL context is available.');
+      return;
+    }
+
     gl.clearColor(0, 0, 0, 0);
 
     let program: Program;
@@ -270,7 +283,9 @@ export default function SoftAurora({
         gl.canvas.removeEventListener('mousemove', handleMouseMove);
         gl.canvas.removeEventListener('mouseleave', handleMouseLeave);
       }
-      container.removeChild(gl.canvas);
+      if (gl.canvas.parentElement === container) {
+        container.removeChild(gl.canvas);
+      }
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [speed, scale, brightness, color1, color2, noiseFrequency, noiseAmplitude, bandHeight, bandSpread, octaveDecay, layerOffset, colorSpeed, enableMouseInteraction, mouseInfluence]);

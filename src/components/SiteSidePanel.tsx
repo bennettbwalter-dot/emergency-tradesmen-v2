@@ -81,7 +81,7 @@ export function SiteSidePanel({
       navigate(`/emergency-${detectedTrade}/${slugifyCity(resolvedCity)}`);
       return;
     }
-    navigate(`${countryPrefix}/#manual-search`);
+    navigate(`${countryPrefix}/home#manual-search`);
   };
 
   const startTour = () => {
@@ -154,7 +154,7 @@ export function SiteSidePanel({
           <Home className={cn(sideIconClass, "text-gold")} />
           Home
         </Link>
-        <Link to={`${countryPrefix}/#manual-search`} className="home-search-nav-item" onClick={closeForNavigation}>
+        <Link to={`${countryPrefix}/home#manual-search`} className="home-search-nav-item" onClick={closeForNavigation}>
           <Search className={cn(sideIconClass, "text-cyan-500 dark:text-cyan-300")} />
           {findLabel}
         </Link>

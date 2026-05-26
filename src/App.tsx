@@ -118,8 +118,8 @@ const HashCleaner = () => {
 
 const DeferredChrome = () => {
   const location = useLocation();
-  const isMarketingLanding = location.pathname === "/landing" || location.pathname === "/welcome";
-  const isSearchWorkspace = location.pathname === "/" || location.pathname === "/home";
+  const isMarketingLanding = location.pathname === "/" || location.pathname === "/landing" || location.pathname === "/welcome";
+  const isSearchWorkspace = location.pathname === "/home";
   const hideMobileChrome = isMarketingLanding || isSearchWorkspace;
 
   return (
@@ -163,7 +163,7 @@ const AppRoutes = () => (
     ))}
 
     {/* Core Pages */}
-    <Route path="/" element={<HomeSearch />} />
+    <Route path="/" element={<LandingPage />} />
     <Route path="/home" element={<HomeSearch />} />
     <Route path="/landing" element={<LandingPage />} />
     <Route path="/welcome" element={<LandingPage />} />
