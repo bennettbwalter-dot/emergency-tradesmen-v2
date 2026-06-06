@@ -893,7 +893,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
 
     if (surface === 'search') {
         return (
-            <div className="w-full">
+            <div className="w-full emergency-chat-interface-root">
                 <div className="relative mx-auto w-full max-w-[60rem]">
                     <AnimatePresence mode="popLayout">
                         {chatState.history.length > 0 && (
@@ -1026,27 +1026,13 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         {isTranscriptionProcessing ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4 text-gold" />}
                                     </Button>
 
-                                    <div className="home-search-control-grid grid w-[calc(100%-5.5rem)] max-w-[38rem] grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2.15fr)_minmax(0,1fr)]">
+                                    <div className="home-search-control-grid grid w-[calc(100%-5.5rem)] max-w-[38rem] grid-cols-[2.5rem_minmax(0,1fr)] gap-2 sm:grid-cols-[1fr_2.15fr]">
                                         <div className="min-w-0">
                                             {compactTradeSelector}
                                         </div>
                                         <div className="min-w-0">
                                             {compactLocationSelector}
                                         </div>
-                                        <Button
-                                            type="button"
-                                            onClick={() => {
-                                                detectUserLocation();
-                                                setIsRequestingLocation(false);
-                                            }}
-                                            disabled={geoLoading}
-                                            data-tour="tour-locate-button"
-                                            className={compactTextButtonClass}
-                                            title="Locate Me"
-                                        >
-                                            {geoLoading ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : <LocateFixed className="h-4 w-4 text-gold" />}
-                                            <span className="ml-2 hidden truncate sm:inline">Locate</span>
-                                        </Button>
                                     </div>
 
                                     <Button
@@ -1082,7 +1068,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
     }
 
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full max-w-4xl mx-auto emergency-chat-interface-root">
 
             <div className="relative rounded-3xl bg-transparent overflow-visible">
                 {chatState.history.length > 0 && (

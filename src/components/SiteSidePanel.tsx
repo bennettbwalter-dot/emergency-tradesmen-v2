@@ -19,6 +19,8 @@ import {
   UserCircle,
   Wrench,
   X,
+  LocateFixed,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
@@ -51,7 +53,7 @@ export function SiteSidePanel({
   const navigate = useNavigate();
   const location = useLocation();
   const { detectedTrade, detectedCity } = useChatbot();
-  const { settings, detectedCity: geoCity } = useLocalization();
+  const { settings, detectedCity: geoCity, isLocating, geoError, detectUserLocation } = useLocalization();
 
   const isUS = settings.countryCode === "US";
   const isUSDomain = getIsUSDomain();
@@ -222,6 +224,25 @@ export function SiteSidePanel({
               {resolvedCity || "Not selected"}
             </span>
           </div>
+          <Button
+            type="button"
+            onClick={detectUserLocation}
+            disabled={isLocating}
+            data-tour="tour-locate-button"
+            className="w-full mt-3 h-9 text-xs flex items-center justify-center gap-2 border border-slate-200 dark:border-white/10 hover:border-gold/30 text-slate-800 dark:text-slate-200 rounded-xl bg-slate-50 dark:bg-white/5 hover:bg-gold/5 transition-all shadow-sm font-semibold"
+          >
+            {isLocating ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin text-gold" />
+            ) : (
+              <LocateFixed className="h-3.5 w-3.5 text-gold" />
+            )}
+            Locate Me
+          </Button>
+          {geoError && (
+            <p className="mt-1.5 text-center text-[10px] font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
+              {geoError}
+            </p>
+          )}
         </div>
       </div>
 
