@@ -914,7 +914,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                     <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/12 ring-1 ring-gold/25">
                                                         <img src="/et-logo-v3.webp" alt="" className="h-4 w-4 object-contain" loading="lazy" />
                                                     </div>
-                                                    <div className="min-w-0 flex-1 text-slate-900 dark:text-slate-100">
+                                                    <div className="min-w-0 flex-1 text-black dark:text-white">
                                                         {isLastMessage ? (
                                                             <MarkdownTypewriter
                                                                 content={msg.content}
@@ -926,10 +926,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                                 onComplete={() => {
                                                                     if (isAtBottom) scrollToBottom('smooth');
                                                                 }}
-                                                                className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold"
+                                                                className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white"
                                                             />
                                                         ) : (
-                                                            <div className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold">
+                                                            <div className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white">
                                                                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                                                     {msg.content}
                                                                 </ReactMarkdown>
@@ -1111,7 +1111,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                 <Terminal 
                                     containerRef={chatContainerRef}
                                     onScroll={handleScroll}
-                                    className="w-full max-w-2xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.1)] border-gray-200 bg-white ring-1 ring-black/5 overflow-hidden h-[60dvh] md:h-[80dvh]"
+                                    className="w-full max-w-2xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.1)] border-gray-200 dark:border-zinc-800/80 bg-white dark:bg-[#0b0c10] ring-1 ring-black/5 dark:ring-white/5 overflow-hidden h-[60dvh] md:h-[80dvh]"
                                     contentClassName="overscroll-contain pb-32"
                                 >
                                     <AnimatedSpan className="text-emerald-600 mb-6 font-bold tracking-wider text-xs uppercase opacity-80">
@@ -1124,7 +1124,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
 
                                             if (msg.role === 'assistant') {
                                                 return (
-                                                    <div key={msg.id} className="text-black flex gap-3 group">
+                                                    <div key={msg.id} className="text-black dark:text-white flex gap-3 group">
                                                         <div className="shrink-0 pt-1">
                                                             <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center ring-1 ring-amber-200">
                                                                 <Zap className="w-4 h-4 text-amber-600" />
@@ -1142,10 +1142,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                                     onComplete={() => {
                                                                         if (isAtBottom) scrollToBottom('smooth');
                                                                     }}
-                                                                    className="prose prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-black prose-strong:font-bold"
+                                                                    className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white prose-strong:text-black dark:prose-strong:text-white prose-strong:font-bold prose-code:text-black dark:prose-code:text-white"
                                                                 />
                                                             ) : (
-                                                                <div className="prose prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-strong:text-black prose-strong:font-bold">
+                                                                <div className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white prose-strong:text-black dark:prose-strong:text-white prose-strong:font-bold prose-code:text-black dark:prose-code:text-white">
                                                                     <ReactMarkdown
                                                                         remarkPlugins={[remarkGfm]}
                                                                         rehypePlugins={[rehypeRaw]}
