@@ -17,20 +17,20 @@ const now = new Date().toISOString();
 
 const posts = [
   {
-    title:       'AC Leaking Water Through the Ceiling? Safe Steps Before Calling a 24/7 HVAC Technician',
-    slug:        'ac-leaking-water-ceiling-safe-steps-us',
-    content:     readFileSync('optimized-blogs/usa-emergencycontractors/ac-leaking-water-ceiling-safe-steps-us.md', 'utf8'),
-    excerpt:     'AC dripping through your ceiling? Follow this step-by-step guide to safely shut down your system, drain a ceiling drywall blister, clear a clogged PVC condensate line with a Shop-Vac, and decide whether to repair or replace your unit.',
-    cover_image: '/images/blog/us-ac-leaking-ceiling-hero.png',
+    title:       'Ceiling Fan Humming, Wobbling, or Dead? Safe Fixes Before Calling a 24/7 Electrician',
+    slug:        'ceiling-fan-humming-wobbling-dead-us',
+    content:     readFileSync('optimized-blogs/usa-emergencycontractors/ceiling-fan-humming-wobbling-dead-us.md', 'utf8'),
+    excerpt:     'Ceiling fan humming, wobbling, or completely dead? Follow this step-by-step troubleshooting guide to test circuit breakers, secure blade irons, check remote receiver wire nuts, replace run capacitors, and lubricate cast-iron motor bearings.',
+    cover_image: '/images/blog/us-ceiling-fan-hero.png',
     published:    true,
     published_at: now,
   },
   {
-    title:       'Outside Tap Leaking or Burst After Winter? Quick Fixes Before Calling an Emergency Plumber',
-    slug:        'outside-tap-leaking-burst-winter-gb',
-    content:     readFileSync('optimized-blogs/uk-emergencytradesmen/outside-tap-leaking-burst-winter-gb.md', 'utf8'),
-    excerpt:     'Your outside tap split over winter? Follow this UK step-by-step guide to isolate the water, replace a perished washer or burst bib tap, check for cavity wall leaks, and prevent future frost damage.',
-    cover_image: '/images/blog/uk-outside-tap-leaking-hero.png',
+    title:       'Combi Boiler Losing Pressure in Summer? Quick Fixes Before Calling a Gas Engineer',
+    slug:        'combi-boiler-losing-pressure-summer-gb',
+    content:     readFileSync('optimized-blogs/uk-emergencytradesmen/combi-boiler-losing-pressure-summer-gb.md', 'utf8'),
+    excerpt:     'Is your combi boiler losing pressure during the summer heatwave? Follow this UK DIY guide to inspect lockshield and TRV valves for leaks, check the external PRV safety pipe, top up the filling loop, and bleed air from radiators.',
+    cover_image: '/images/blog/uk-combi-boiler-hero.png',
     published:    true,
     published_at: now,
   },
@@ -56,8 +56,8 @@ async function run() {
   }
 
   console.log('Done! Check your blog pages:');
-  console.log('  🇺🇸 http://localhost:3001/blog/ac-leaking-water-ceiling-safe-steps-us');
-  console.log('  🇬🇧 http://localhost:3000/blog/outside-tap-leaking-burst-winter-gb');
+  console.log('  🇺🇸 http://localhost:3001/blog/ceiling-fan-humming-wobbling-dead-us');
+  console.log('  🇬🇧 http://localhost:3000/blog/combi-boiler-losing-pressure-summer-gb');
 }
 
 run().catch(console.error);

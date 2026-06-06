@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { AdminLayout } from "@/components/admin/AdminLayout";
 import { db } from "@/lib/db";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -151,7 +150,7 @@ export default function QuotesPage() {
     };
 
     return (
-        <AdminLayout>
+        <>
             <div className="space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold text-foreground">Quote Requests</h1>
@@ -290,6 +289,6 @@ export default function QuotesPage() {
                     </div>
                 )}
             </div>
-        </AdminLayout>
+        </>
     );
 }

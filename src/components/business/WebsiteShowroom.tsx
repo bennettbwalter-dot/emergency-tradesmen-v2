@@ -1,16 +1,17 @@
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Eye, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { BusinessEnquiryForm } from "@/components/business/BusinessEnquiryForm";
 
 type BusinessRegion = "UK" | "US";
 
 type WebsiteStyle = {
   title: string;
+  templateName?: string;
+  sourceRepo?: string;
   description: string;
   features: string[];
   headline: string;
@@ -32,14 +33,15 @@ const image = (name: string) => `/images/blog/generated/${name}`;
 const DEFAULT_PREVIEW_IMAGE = image("emergency-repair-contractor-improve-not-move-gb.webp");
 
 const showroomProof = [
-  "Phone-first layouts",
-  "Local service pages",
-  "Trust-led enquiry flow",
+  "Customised business details",
+  "Fast scalable launch flow",
 ];
 
 const ukStyles: WebsiteStyle[] = [
   {
     title: "Emergency Plumber Website",
+    templateName: "Calm Water Systems",
+    sourceRepo: "bennettbwalter-dot/calm-water-systems",
     description: "Built for burst pipes, leaks, blocked toilets, and urgent plumbing callouts.",
     features: ["Call Now first", "Leak and burst pipe service sections", "Local area pages"],
     headline: "Burst pipe? Get help fast.",
@@ -67,6 +69,8 @@ const ukStyles: WebsiteStyle[] = [
   },
   {
     title: "Emergency Locksmith Website",
+    templateName: "v0 Compute Platform",
+    sourceRepo: "bennettbwalter-dot/v0-compute-the-platform-to-build",
     description: "Built for lockouts, broken keys, lock changes, and urgent entry help.",
     features: ["Lockout-focused layout", "Mobile-first Call Now", "Trust and response signals"],
     headline: "Locked out? Get back in.",
@@ -159,6 +163,8 @@ const ukStyles: WebsiteStyle[] = [
   },
   {
     title: "Breakdown Recovery Website",
+    templateName: "Redline Recovery Site",
+    sourceRepo: "bennettbwalter-dot/redline-recovery-site",
     description: "Built for vehicle breakdowns, roadside recovery, towing, and emergency recovery calls.",
     features: ["Roadside recovery CTA", "Location-based service pages", "Mobile-first phone button"],
     headline: "Broken down? Keep moving.",
@@ -173,21 +179,54 @@ const ukStyles: WebsiteStyle[] = [
   },
   {
     title: "Air Conditioning Website",
-    description: "Built for air conditioning repair, installation, servicing, and urgent cooling support.",
-    features: ["Repair and service pages", "Seasonal callout sections", "Clean quote flow"],
-    headline: "Cool air, clear contact.",
-    subhead: "A bright climate layout for repairs, servicing, and seasonal demand.",
-    services: ["AC repairs", "Installation", "Servicing"],
-    trust: ["Clean quote flow", "Seasonal pages", "Call button"],
+    templateName: "Aurora Climate",
+    sourceRepo: "bennettbwalter-dot/v0-hvac-website-design",
+    description: "Built for air conditioning, heating, servicing, and comfort-led enquiries.",
+    features: ["HVAC service sections", "Comfort-led hero", "Quote and call CTAs"],
+    headline: "Comfort, tuned fast.",
+    subhead: "A premium climate template for repairs, installation, maintenance, and seasonal demand.",
+    services: ["AC repairs", "Heating", "Servicing"],
+    trust: ["Comfort-led", "Seasonal pages", "Call button"],
     accent: "#65b7ff",
     accentSoft: "rgba(101, 183, 255, 0.2)",
     surface: "#061521",
-    previewImage: image("ac-blowing-warm-air-capacitor-leak-us.webp"),
+    previewImage: "/showroom-templates/hvac-aurora/images/hero.png",
+    embedUrl: "/showroom-templates/hvac-aurora/index.html",
+  },
+  {
+    title: "Roofing4Women Website",
+    templateName: "Roofing4Women",
+    description: "Built for roofers who want a polished blue-and-white site with services, values, contact, and multi-page navigation.",
+    features: ["Women-led roofing story", "Services and contact pages", "Apache rewrite fallback included"],
+    headline: "Roofing done right.",
+    subhead: "A trust-led roofing template for professional roof repairs, maintenance, and enquiries.",
+    services: ["Roof repairs", "Maintenance", "Emergency help"],
+    trust: ["Fully insured", "Women-led", "5-star service"],
+    accent: "#1d6fd1",
+    accentSoft: "rgba(29, 111, 209, 0.18)",
+    surface: "#0a2540",
+    previewImage: image("emergency-roof-repair-gb.webp"),
+    embedUrl: "/showroom-templates/roofing4women/index.html",
+  },
+  {
+    title: "Master Builder Website",
+    templateName: "Halvorsen & Co.",
+    description: "Built for builders, renovations, commercial work, and high-end residential projects that need a polished project-led website.",
+    features: ["Project gallery", "Process section", "Quote form"],
+    headline: "Build spaces that last.",
+    subhead: "A refined builder template for residential, commercial, and renovation enquiries.",
+    services: ["Custom homes", "Renovations", "Commercial builds"],
+    trust: ["Licensed", "Project-led", "Quote form"],
+    accent: "#d2814a",
+    accentSoft: "rgba(210, 129, 74, 0.2)",
+    surface: "#272420",
+    previewImage: image("emergency-repair-contractor-improve-not-move-gb.webp"),
+    embedUrl: "/showroom-templates/builder-halvorsen/index.html",
   },
 ];
 
 const usStyles: WebsiteStyle[] = [
-  { ...ukStyles[0], description: "Built for burst pipes, leaks, clogged toilets, and urgent plumbing calls.", previewImage: image("emergency-plumber-signs-us-new.webp"), embedUrl: undefined },
+  { ...ukStyles[0], description: "Built for burst pipes, leaks, clogged toilets, and urgent plumbing calls.", previewImage: image("emergency-plumber-signs-us-new.webp") },
   { ...ukStyles[1], description: "Built for power problems, tripped breakers, emergency repairs, and safety-first electrical calls.", services: ["Tripped breakers", "Fault finding", "Repairs"], previewImage: image("commercial-electrician-us-new.webp") },
   { ...ukStyles[2], previewImage: image("smart-lock-emergency-us-new.webp") },
   {
@@ -198,20 +237,39 @@ const usStyles: WebsiteStyle[] = [
     subhead: "A comfort-first HVAC layout for urgent repair calls and seasonal demand.",
     services: ["Heating repair", "Cooling repair", "Emergency service"],
     trust: ["Seasonal CTAs", "City pages", "Fast quote"],
-    previewImage: image("emergency-heat-pump-thaw-us.webp"),
+    templateName: "Aurora Climate",
+    sourceRepo: "bennettbwalter-dot/v0-hvac-website-design",
+    features: ["HVAC service sections", "Comfort-led hero", "Quote and call CTAs"],
+    previewImage: "/showroom-templates/hvac-aurora/images/hero.png",
+    embedUrl: "/showroom-templates/hvac-aurora/index.html",
   },
   { ...ukStyles[4], description: "Built for blocked drains, drain cleaning, sewer line problems, and emergency drainage calls.", services: ["Blocked drains", "Drain cleaning", "Sewer lines"], previewImage: image("emergency-drain-cleaning-us.webp") },
   { ...ukStyles[5], title: "Emergency Glass Repair Website", description: "Built for broken glass, window damage, board-up requests, and urgent glass repair work.", previewImage: image("home-security-safety.webp") },
   { ...ukStyles[6], description: "Built for roof leaks, storm damage, missing shingles, and urgent roof repair enquiries.", services: ["Roof leaks", "Storm damage", "Missing shingles"], previewImage: image("emergency-roof-repair-us.webp") },
   { ...ukStyles[7], title: "Emergency Builder / Construction Website", description: "Built for urgent property repairs, structural issues, storm damage, and construction enquiries.", services: ["Storm damage", "Repairs", "Construction"], previewImage: image("emergency-repair-contractor-improve-not-move-us.webp") },
   { ...ukStyles[8], description: "Built for water damage, drying, flood cleanup, mold prevention, and restoration enquiries.", previewImage: image("mould-remediation-us.webp") },
-  { ...ukStyles[9], title: "Tow Truck / Roadside Recovery Website", description: "Built for breakdowns, towing, roadside help, and emergency recovery calls.", services: ["Towing", "Roadside help", "Vehicle recovery"], trust: ["Phone-first", "City pages", "24/7 response"], previewImage: "/images/blog/auto/uk-car-battery-alternator-tow.webp", embedUrl: undefined },
+  { ...ukStyles[9], title: "Tow Truck / Roadside Recovery Website", description: "Built for breakdowns, towing, roadside help, and emergency recovery calls.", services: ["Towing", "Roadside help", "Vehicle recovery"], trust: ["Phone-first", "City pages", "24/7 response"], previewImage: "/images/blog/auto/uk-car-battery-alternator-tow.webp" },
   { ...ukStyles[10], description: "Built for AC repair, installation, servicing, and urgent cooling support.", services: ["AC repair", "Installation", "Servicing"] },
+  {
+    ...ukStyles[11],
+    description: "Built for roofers who want a polished blue-and-white contractor site with services, values, contact, and multi-page navigation.",
+  },
+  {
+    ...ukStyles[12],
+    description: "Built for builders, remodelers, commercial contractors, and project-led construction businesses.",
+    services: ["Custom homes", "Remodels", "Commercial builds"],
+  },
 ];
 
-const showroomStyleOrder = [0, 2, 9, 1, 3, 4, 5, 6, 7, 8, 10];
-const orderedUkStyles = showroomStyleOrder.map((index) => ukStyles[index]);
-const orderedUsStyles = showroomStyleOrder.map((index) => usStyles[index]);
+const orderedUkStyles = [0, 9, 2, 11, 12, 10].map((index) => ukStyles[index]);
+const orderedUsStyles = [0, 9, 2, 11, 12, 3].map((index) => usStyles[index]);
+
+const templateCountWords: Record<number, string> = {
+  3: "Three",
+  4: "Four",
+  5: "Five",
+  6: "Six",
+};
 
 function previewVars(style: WebsiteStyle) {
   return {
@@ -273,6 +331,44 @@ function WebsitePreviewEmbed({ style }: { style: WebsiteStyle }) {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const fixStaticPreview = (event: SyntheticEvent<HTMLIFrameElement>) => {
+    if (!isStaticV0Export) return;
+
+    try {
+      const doc = event.currentTarget.contentDocument;
+      if (!doc || doc.getElementById("v0-showroom-preview-fix")) return;
+
+      const styleEl = doc.createElement("style");
+      styleEl.id = "v0-showroom-preview-fix";
+      styleEl.textContent = `
+        [class*="opacity-0"],
+        [style*="opacity:0"],
+        [style*="opacity: 0"] {
+          opacity: 1 !important;
+        }
+
+        [class*="translate-y"],
+        [class*="translate-x"],
+        [class*="-translate-y"],
+        [class*="-translate-x"] {
+          transform: none !important;
+          translate: none !important;
+        }
+
+        [style*="blur(20px)"] {
+          filter: none !important;
+        }
+
+        img {
+          opacity: 1 !important;
+        }
+      `;
+      doc.head.appendChild(styleEl);
+    } catch {
+      // Preview enhancement only. If the iframe cannot be accessed, the page still renders normally.
+    }
+  };
+
   return (
     <div className="showroom-template showroom-template--embed" style={previewVars(style)}>
       <div className="showroom-browser-bar" aria-hidden="true">
@@ -288,6 +384,7 @@ function WebsitePreviewEmbed({ style }: { style: WebsiteStyle }) {
           loading="eager"
           sandbox={isStaticV0Export ? "allow-same-origin" : "allow-scripts allow-same-origin"}
           scrolling="yes"
+          onLoad={fixStaticPreview}
           className="showroom-template-iframe"
           style={{
             width: `${EMBED_PREVIEW_WIDTH}px`,
@@ -356,10 +453,12 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
   const brand = isUS ? "EmergencyContractors" : "EmergencyTradesmen";
   const ownerPath = isUS ? "/for-contractors" : "/for-tradesmen";
   const audience = isUS ? "contractors and home service businesses" : "trades businesses";
-  const customizeWord = isUS ? "customize" : "customise";
+  const customizeWord = isUS ? "customized" : "customised";
   const title = isUS
-    ? "Emergency-Ready Website Showroom for Local Contractors"
-    : "Emergency-Ready Website Showroom for Local Tradesmen";
+    ? "Website Template Add-On for Pro Contractors"
+    : "Website Template Add-On for Pro Tradesmen";
+  const templateCount = styles.length;
+  const templateCountWord = templateCountWords[templateCount] || String(templateCount);
 
   const chooseStyle = (style: WebsiteStyle) => {
     setSelectedStyle(style);
@@ -378,28 +477,21 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
         <section className="showroom-hero">
           <div className="container-wide showroom-hero-grid">
             <div>
-              <p className="showroom-pill"><Eye /> Website showroom</p>
+              <p className="showroom-pill"><Eye /> Pro website add-on</p>
               <h1>{title}</h1>
               <p className="showroom-hero-copy">
-                Browse premium website styles built for {audience} that need more local emergency calls. Pick a style you like, then enquire and we'll {customizeWord} it with your business name, services, phone number, reviews, photos, and branding.
+                Sign up to Pro Yearly or Agency / Multi-Location and we can build your emergency-ready website from one of the {templateCount} approved templates. Each example below can be {customizeWord} with your business name, trade, location, phone number, services, logo or image, emergency CTA, contact form, opening hours, and colours where needed.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button className="min-h-12 bg-gold text-black hover:bg-gold-light" onClick={() => document.getElementById("showroom-styles")?.scrollIntoView({ behavior: "smooth" })}>
-                  View Website Styles <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button asChild variant="outline" className="min-h-12 border-white/20 bg-white/5 text-white hover:bg-white/10">
-                  <Link to={ownerPath}>Main Enquiry Page</Link>
+                  View The {templateCount} Templates <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
               <div className="showroom-proof-row" aria-label="Website showroom highlights">
-                {showroomProof.map((item) => (
+                {[`${templateCount} approved template bases`, ...showroomProof].map((item) => (
                   <span key={item}><CheckCircle2 />{item}</span>
                 ))}
               </div>
-            </div>
-            <div className="showroom-hero-previews">
-              <WebsitePreview style={styles[0]} region={region} />
-              <WebsitePreview style={styles[1]} region={region} />
             </div>
           </div>
         </section>
@@ -407,10 +499,10 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
         <section id="showroom-styles" className="showroom-gallery-section">
           <div className="container-wide px-4">
             <div className="mb-10 max-w-4xl">
-              <p className="showroom-kicker">Top 4 first, 11 total website styles</p>
-              <h2 className="showroom-heading font-display">Choose an emergency-ready website style</h2>
+              <p className="showroom-kicker">{templateCount} approved templates</p>
+              <h2 className="showroom-heading font-display">{templateCountWord} examples we can build from</h2>
               <p className="showroom-lede">
-                Start with the four strongest conversion layouts, then browse the full showroom. Every preview is built around emergency CTAs, local service pages, trust sections, and a clear enquiry path.
+                These are not separate website packages. They are fast, professional starting points for the free website included with Pro Yearly and Agency / Multi-Location. Choose the closest fit and we adapt it for the business.
               </p>
             </div>
             <div className="showroom-priority-strip" aria-label="Recommended showroom order">
@@ -426,7 +518,6 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
                 <article key={style.title} className="showroom-style-card">
                   <WebsitePreview style={style} region={region} />
                   <div className="showroom-card-body">
-                    <p className="showroom-card-meta">{String(index + 1).padStart(2, "0")} / Preview style</p>
                     <h3 className="showroom-card-title">{style.title}</h3>
                     <p className="showroom-card-copy">{style.description}</p>
                     <ul className="showroom-feature-list">
@@ -434,7 +525,12 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
                         <li key={feature}><CheckCircle2 /><span>{feature}</span></li>
                       ))}
                     </ul>
-                    <Button className="showroom-cta" onClick={() => chooseStyle(style)}>Enquire About This Style</Button>
+                    <Button className="showroom-cta" onClick={() => chooseStyle(style)}>
+                      Send Website Brief
+                    </Button>
+                    <p className="showroom-contact-note">
+                      Choose this example, then send the details by form or email. GitHub is only for the finished handover if needed.
+                    </p>
                   </div>
                 </article>
               ))}
@@ -443,19 +539,22 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
         </section>
 
         <section ref={formRef} id="showroom-enquiry" className="container-wide px-4 py-16">
-          <div className="mx-auto max-w-3xl">
-            <div className="mb-6 text-center">
-              <h2 className="font-display text-4xl font-semibold">
-                {selectedStyle ? `Enquire About ${selectedStyle.title}` : "Start a Website Enquiry"}
-              </h2>
-              <p className="mt-3 text-muted-foreground">This sends an enquiry only. It does not create, publish, or charge for a website.</p>
+          <div className="mx-auto max-w-3xl rounded-2xl border border-gold/20 bg-card p-8 text-center shadow-xl shadow-gold/5">
+            <p className="showroom-kicker">Included with Pro Yearly and Agency</p>
+            <h2 className="font-display text-3xl font-semibold md:text-4xl">
+              {selectedStyle ? `${selectedStyle.title} can be your starting point` : "Choose a template during signup"}
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              The website brief form is only shown after a Pro Yearly or Agency / Multi-Location plan is active. During signup we ask whether you need a website, then collect the brief after payment.
+            </p>
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button asChild className="bg-gold text-black hover:bg-gold-light">
+                <Link to="/pricing">View Pro Plans</Link>
+              </Button>
+              <Button variant="outline" onClick={() => document.getElementById("showroom-styles")?.scrollIntoView({ behavior: "smooth" })}>
+                Keep Browsing Templates
+              </Button>
             </div>
-            <BusinessEnquiryForm
-              region={region}
-              defaultEnquiryType="Get a website built"
-              defaultPackage="Not sure yet"
-              defaultTradeStyle={selectedStyle?.title}
-            />
           </div>
         </section>
       </main>

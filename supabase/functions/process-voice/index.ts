@@ -32,6 +32,18 @@ serve(async (req) => {
         if (!audioFile) {
             throw new Error('No audio file provided')
         }
+        if (audioFile.size > 8 * 1024 * 1024) {
+            return new Response(JSON.stringify({ error: 'Audio file is too large' }), {
+                headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+                status: 413,
+            })
+        }
+        if (audioFile.type && !audioFile.type.startsWith('audio/')) {
+            return new Response(JSON.stringify({ error: 'Unsupported file type' }), {
+                headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+                status: 415,
+            })
+        }
 
         const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY')
         if (!OPENAI_API_KEY) {

@@ -14,6 +14,8 @@ type LocalAreaBackdropProps = {
   fallbackImage?: string;
   label?: string;
   location?: string;
+  focusLabel?: string;
+  focusDescription?: string;
   interactive?: boolean;
 };
 
@@ -103,12 +105,14 @@ export function LocalAreaBackdrop({
   fallbackImage,
   label,
   location,
+  focusLabel,
+  focusDescription,
   interactive = true
 }: LocalAreaBackdropProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [resolvedCoords, setResolvedCoords] = useState<{ lat: number; lng: number } | null>(() =>
-    getKnownCoords(location || label)
+    getKnownCoords(location || focusLabel || label)
   );
   const explicitCoords = isValidCoord(lat) && isValidCoord(lng);
   const effectiveLat = explicitCoords ? lat : resolvedCoords?.lat;
@@ -119,7 +123,7 @@ export function LocalAreaBackdrop({
     if (explicitCoords) return;
 
     let cancelled = false;
-    const targetLocation = location || label;
+    const targetLocation = location || focusLabel || label;
 
     if (!targetLocation) {
       setResolvedCoords(null);
@@ -133,31 +137,40 @@ export function LocalAreaBackdrop({
     return () => {
       cancelled = true;
     };
-  }, [explicitCoords, label, location]);
+  }, [explicitCoords, focusLabel, label, location]);
+
+  const [webglError, setWebglError] = useState(false);
 
   useEffect(() => {
-    if (!hasCoords || !mapContainerRef.current) return;
+    if (!hasCoords || !mapContainerRef.current || webglError) return;
 
-    const map = new maplibregl.Map({
-      container: mapContainerRef.current,
-      style: buildEarthMapStyle(),
-      center: [effectiveLng!, effectiveLat!],
-      zoom,
-      pitch,
-      bearing,
-      attributionControl: false,
-      interactive,
-      dragPan: interactive,
-      scrollZoom: interactive,
-      boxZoom: interactive,
-      dragRotate: interactive,
-      keyboard: interactive,
-      doubleClickZoom: interactive,
-      touchZoomRotate: interactive,
-      fadeDuration: 350,
-      maxPitch: 85,
-      maxZoom: 19
-    });
+    let map: MapLibreMap | null = null;
+    try {
+      map = new maplibregl.Map({
+        container: mapContainerRef.current,
+        style: buildEarthMapStyle(),
+        center: [effectiveLng!, effectiveLat!],
+        zoom,
+        pitch,
+        bearing,
+        attributionControl: false,
+        interactive,
+        dragPan: interactive,
+        scrollZoom: interactive,
+        boxZoom: interactive,
+        dragRotate: interactive,
+        keyboard: interactive,
+        doubleClickZoom: interactive,
+        touchZoomRotate: interactive,
+        fadeDuration: 350,
+        maxPitch: 85,
+        maxZoom: 19
+      });
+    } catch (err) {
+      console.warn("WebGL is not supported or failed to initialize, falling back to static view:", err);
+      setWebglError(true);
+      return;
+    }
 
     mapRef.current = map;
     const camera = {
@@ -167,8 +180,10 @@ export function LocalAreaBackdrop({
       bearing
     };
     const applyStreetCamera = () => {
-      map.resize();
-      map.jumpTo(camera);
+      if (map) {
+        map.resize();
+        map.jumpTo(camera);
+      }
     };
 
     if (interactive) {
@@ -189,12 +204,18 @@ export function LocalAreaBackdrop({
 
     return () => {
       window.clearTimeout(cameraTimer);
-      map.remove();
+      if (map) {
+        try {
+          map.remove();
+        } catch (e) {
+          // ignore
+        }
+      }
       mapRef.current = null;
     };
-  }, [bearing, effectiveLat, effectiveLng, hasCoords, interactive, pitch, zoom]);
+  }, [bearing, effectiveLat, effectiveLng, hasCoords, interactive, pitch, zoom, webglError]);
 
-  if (!hasCoords) {
+  if (!hasCoords || webglError) {
     return (
       <div className="absolute inset-0 z-0">
         {fallbackImage && (
@@ -215,6 +236,23 @@ export function LocalAreaBackdrop({
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-black">
       <div ref={mapContainerRef} className="local-area-map" />
+      <div className="local-area-focus-reticle" aria-hidden="true">
+        <span />
+      </div>
+      {(focusLabel || focusDescription) && (
+        <div className="pointer-events-none absolute left-4 top-4 z-[12] max-w-[min(28rem,calc(100%-2rem))] rounded-md border border-white/15 bg-black/42 px-4 py-3 text-white shadow-[0_18px_54px_rgba(0,0,0,0.38)] backdrop-blur-md md:left-6 md:top-6">
+          {focusLabel && (
+            <p className="font-display text-sm tracking-wide text-white md:text-base">
+              {focusLabel}
+            </p>
+          )}
+          {focusDescription && (
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold/90">
+              {focusDescription}
+            </p>
+          )}
+        </div>
+      )}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0%,rgba(0,0,0,0.04)_54%,rgba(0,0,0,0.36)_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background/45 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background/70 to-transparent" />

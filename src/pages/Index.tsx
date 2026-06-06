@@ -95,6 +95,42 @@ function FadeInSection({ children }: { children: ReactNode }) {
   );
 }
 
+function LiveAlertsTeaser({
+  displayCity,
+  isUSSite,
+}: {
+  displayCity: string;
+  isUSSite: boolean;
+}) {
+  const sourceLabel = isUSSite ? "Weather, safety, road and recall signals" : "Weather, flood, road and safety signals";
+
+  return (
+    <section className="landing-alerts-teaser" aria-labelledby="landing-alerts-title">
+      <div className="landing-alerts-teaser__copy">
+        <p className="landing-alerts-teaser__eyebrow">
+          <ShieldCheck className="h-4 w-4" />
+          Live Alerts In Your Area
+        </p>
+        <h2 id="landing-alerts-title">Know what is happening locally before you call.</h2>
+        <p>
+          When storms, floods, traffic disruption, or public safety notices affect {displayCity}, the full Live Alerts panel helps you understand what kind of emergency help to call first.
+        </p>
+      </div>
+      <div className="landing-alerts-teaser__panel" aria-label="Live alerts summary">
+        <span>
+          <MapPin className="h-4 w-4" />
+          {displayCity}
+        </span>
+        <strong>{sourceLabel}</strong>
+        <Link to="/alerts" className="landing-alerts-teaser__button">
+          Open Live Alerts
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 const Index = () => {
   const { settings, detectedCity, geoError, detectUserLocation, isLocating } = useLocalization();
 
@@ -225,9 +261,6 @@ const Index = () => {
                   Find emergency help
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link to="/register" className="landing-2026-button">
-                  Sign up your business
-                </Link>
               </div>
 
               <div className="landing-2026-hero__proof" aria-label="Website benefits">
@@ -249,6 +282,10 @@ const Index = () => {
             <LandingHeroCarousel className="landing-2026-hero__visual" />
           </div>
         </section>
+
+        <FadeInSection>
+          <LiveAlertsTeaser displayCity={displayCity} isUSSite={isUSSite} />
+        </FadeInSection>
 
         <FadeInSection>
           <HowItWorksSection />

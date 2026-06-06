@@ -23,6 +23,14 @@ serve(async (req) => {
         if (req.method !== 'POST') {
             return new Response('Method Not Allowed', { status: 405 });
         }
+        const webhookSecret = Deno.env.get('MAILMETEOR_WEBHOOK_SECRET');
+        if (webhookSecret) {
+            const suppliedSecret = req.headers.get('x-webhook-secret') ||
+                req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+            if (suppliedSecret !== webhookSecret) {
+                return new Response('Unauthorized', { status: 401 });
+            }
+        }
 
         const postHogKey = Deno.env.get('VITE_POSTHOG_KEY') || Deno.env.get('NEXT_PUBLIC_POSTHOG_KEY');
         if (!postHogKey) {

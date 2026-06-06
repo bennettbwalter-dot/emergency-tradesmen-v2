@@ -85,8 +85,11 @@ export function validateQuoteForm(data: Partial<QuoteFormData>): {
     const phoneRegex = isUS
         ? /^(\+1|1)?[0-9]{10}$/
         : /^(\+44|0)[0-9]{10}$/;
-    const cleanPhone = data.phone?.replace(/\s/g, "");
-    if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
+    const cleanPhone = data.phone?.replace(/[^\d+]/g, "");
+    const normalizedPhone = isUS && cleanPhone && !cleanPhone.startsWith("+")
+        ? cleanPhone.replace(/^1/, "")
+        : cleanPhone;
+    if (!normalizedPhone || !phoneRegex.test(normalizedPhone)) {
         errors.phone = isUS ? "Please enter a valid US phone number" : "Please enter a valid UK phone number";
     }
 

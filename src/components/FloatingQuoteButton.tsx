@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { trackEvent } from "@/lib/analytics";
 import { useLocalization } from "@/contexts/LocalizationContext";
+import { sendEmail } from "@/lib/email";
+import { getPostcodeLabel, getSiteName, getSupportEmail } from "@/lib/siteConfig";
 
 interface FloatingQuoteButtonProps {
     tradeName: string;
@@ -58,13 +60,30 @@ export function FloatingQuoteButton({ tradeName, city }: FloatingQuoteButtonProp
 
         setIsSubmitting(true);
         try {
-            // TODO: Store in quotes table when backend is ready
-            // For now, track the conversion
+            await sendEmail({
+                to: getSupportEmail(),
+                subject: `General quote request: ${tradeName} in ${city}`,
+                from_name: `${getSiteName()} Quotes`,
+                html: `
+                    <h2>General Quote Request</h2>
+                    <p><strong>Trade:</strong> ${tradeName}</p>
+                    <p><strong>Area:</strong> ${city}</p>
+                    <hr />
+                    <h3>Customer Details</h3>
+                    <p><strong>Name:</strong> ${formData.name}</p>
+                    <p><strong>Phone:</strong> ${formData.phone}</p>
+                    <p><strong>Email:</strong> ${formData.email || "Not provided"}</p>
+                    <p><strong>${getPostcodeLabel()}:</strong> ${formData.postcode || "Not provided"}</p>
+                    <h3>Job Description</h3>
+                    <p>${formData.description}</p>
+                `,
+            });
+
             trackEvent("Conversion", "General Quote Request", `${tradeName} in ${city}`);
 
             toast({
                 title: "Quote request received!",
-                description: `${settings.tradeTerm} in ${city} will contact you shortly.`,
+                description: `We'll review it and help route it to a suitable local ${settings.tradeTerm.toLowerCase()}.`,
             });
 
             // Reset form

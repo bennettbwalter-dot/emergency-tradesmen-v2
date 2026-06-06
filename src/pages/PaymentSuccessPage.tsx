@@ -13,6 +13,7 @@ import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
 import { getUserSubscription } from "@/lib/subscriptionService";
 import { getSupportEmail, getSiteDomain, getSiteName } from "@/lib/siteConfig";
+import { BusinessEnquiryForm } from "@/components/business/BusinessEnquiryForm";
 
 export default function PaymentSuccessPage() {
     const { user, refreshUser } = useAuth();
@@ -20,7 +21,12 @@ export default function PaymentSuccessPage() {
     const navigate = useNavigate();
     const [countdown, setCountdown] = useState(5);
     const [verified, setVerified] = useState(false);
+    const [websiteIntent, setWebsiteIntent] = useState<string | null>(() => {
+        if (typeof window === "undefined") return null;
+        return sessionStorage.getItem("pro_website_build_intent");
+    });
     const hasSentRef = useRef(false);
+    const shouldShowWebsiteBrief = websiteIntent === "yes" || websiteIntent === "not-sure";
 
     useEffect(() => {
         // In dev/test mode webhooks don't reach localhost, so proceed quickly.
@@ -59,6 +65,7 @@ export default function PaymentSuccessPage() {
 
         // Refresh user session to pick up new subscription status immediately
         refreshUser();
+        if (shouldShowWebsiteBrief) return;
 
         // Redirection timer
         const timer = setTimeout(() => {
@@ -74,7 +81,7 @@ export default function PaymentSuccessPage() {
             clearTimeout(timer);
             clearInterval(interval);
         };
-    }, [navigate, verified]);
+    }, [navigate, refreshUser, shouldShowWebsiteBrief, verified]);
 
     useEffect(() => {
         // Fire confetti on load
@@ -141,7 +148,7 @@ export default function PaymentSuccessPage() {
                         <p className="text-slate-400">Verifying your payment...</p>
                     </div>
                 ) : (
-                <div className="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-2xl w-full text-center relative overflow-hidden">
+                <div className={`bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl ${shouldShowWebsiteBrief ? "max-w-4xl" : "max-w-2xl"} w-full text-center relative overflow-hidden`}>
                     {/* Top Decor Line */}
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#D4AF37] to-yellow-600" />
 
@@ -166,8 +173,10 @@ export default function PaymentSuccessPage() {
                         </h2>
                     </div>
 
-                    <p className="text-slate-400 mb-8 max-w-sm mx-auto text-lg leading-relaxed">
-                        We're thrilled to have you with us. Your premium features are now active. Redirecting you to complete your profile in <span className="text-white font-bold">{countdown}</span> seconds...
+                    <p className="text-slate-400 mb-8 max-w-xl mx-auto text-lg leading-relaxed">
+                        {shouldShowWebsiteBrief
+                            ? "Your premium features are now active. Because you asked about the included website build, complete the website brief below and we will follow up by email."
+                            : <>We're thrilled to have you with us. Your premium features are now active. Redirecting you to complete your profile in <span className="text-white font-bold">{countdown}</span> seconds...</>}
                     </p>
 
                     <div className="space-y-4">
@@ -183,6 +192,36 @@ export default function PaymentSuccessPage() {
                             </Link>
                         </div>
                     </div>
+
+                    {shouldShowWebsiteBrief && (
+                        <div className="mt-10 rounded-2xl border border-yellow-500/20 bg-black/30 p-5 text-left">
+                            <div className="mb-5 text-center">
+                                <p className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Included website build</p>
+                                <h3 className="mt-2 font-display text-2xl font-bold text-white">Send your website brief</h3>
+                                <p className="mt-2 text-sm text-slate-400">
+                                    You can also browse the showroom again before choosing a preferred template.
+                                </p>
+                                <Link
+                                    to={settings.countryCode === "US" ? "/for-contractors/website-showroom" : "/for-tradesmen/website-showroom"}
+                                    className="mt-3 inline-flex text-sm font-bold text-[#D4AF37] hover:underline"
+                                >
+                                    View Website Showroom
+                                </Link>
+                            </div>
+                            <div className="rounded-xl bg-slate-950/70 p-4">
+                                <BusinessEnquiryForm
+                                    region={settings.countryCode === "US" ? "US" : "UK"}
+                                    defaultEnquiryType="Get a website built"
+                                    defaultPackage={sessionStorage.getItem("pro_website_build_plan") === "agency" ? "Free website build with Agency / Multi-Location" : "Free website build with Pro Yearly"}
+                                    onSuccess={() => {
+                                        sessionStorage.removeItem("pro_website_build_intent");
+                                        sessionStorage.removeItem("pro_website_build_plan");
+                                        setWebsiteIntent(null);
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    )}
 
                     {/* Subscription Summary */}
                     <div className="mt-10 bg-black/40 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">

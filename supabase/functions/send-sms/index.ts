@@ -23,6 +23,12 @@ serve(async (req) => {
     if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_PHONE_NUMBER) {
       throw new Error('Missing Twilio credentials')
     }
+    if (!phone || !trade || !city || !['GB', 'US'].includes(country)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
 
     const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!)
 
@@ -31,6 +37,28 @@ serve(async (req) => {
     const e164Phone = country === 'GB'
       ? (digits.startsWith('44') ? `+${digits}` : `+44${digits.replace(/^0/, '')}`)
       : (digits.startsWith('1') ? `+${digits}` : `+1${digits}`)
+
+    if (e164Phone.length < 10 || e164Phone.length > 16) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid phone number' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
+
+    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+    const { data: recentRequests } = await supabase
+      .from('pro_confirmation_requests')
+      .select('id')
+      .eq('phone', e164Phone)
+      .gte('created_at', oneDayAgo)
+      .limit(3)
+
+    if ((recentRequests?.length || 0) >= 3) {
+      return new Response(
+        JSON.stringify({ sent: false, rate_limited: true }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 429 }
+      )
+    }
 
     // Persist request
     const { data: request, error: insertErr } = await supabase

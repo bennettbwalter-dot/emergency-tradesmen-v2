@@ -26,27 +26,38 @@ export interface CreateQuoteRequest {
 export async function createQuote(request: CreateQuoteRequest): Promise<Quote | null> {
     const { data: { user } } = await supabase.auth.getUser();
 
-    const { data, error } = await supabase
+    const quoteRow = {
+        business_id: request.businessId,
+        user_id: user?.id || null,
+        customer_name: request.customerName,
+        customer_email: request.customerEmail,
+        customer_phone: request.customerPhone,
+        details: request.details,
+        urgency: request.urgency || 'Standard',
+        status: 'pending',
+    };
+
+    const { error } = await supabase
         .from('quotes')
-        .insert({
-            business_id: request.businessId,
-            user_id: user?.id || null,
-            customer_name: request.customerName,
-            customer_email: request.customerEmail,
-            customer_phone: request.customerPhone,
-            details: request.details,
-            urgency: request.urgency || 'Standard',
-            status: 'pending',
-        })
-        .select()
-        .single();
+        .insert(quoteRow);
 
     if (error) {
         console.error('Error creating quote:', error);
         return null;
     }
 
-    return mapQuote(data);
+    return {
+        id: "",
+        businessId: request.businessId,
+        userId: user?.id,
+        customerName: request.customerName,
+        customerEmail: request.customerEmail,
+        customerPhone: request.customerPhone,
+        details: request.details,
+        urgency: quoteRow.urgency as Quote['urgency'],
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+    };
 }
 
 // Fetch all quotes (admin only)

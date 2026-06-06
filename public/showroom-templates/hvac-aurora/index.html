@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurora Climate — Premium HVAC & Air Conditioning</title>
+<meta name="description" content="Aurora Climate delivers premium HVAC installation, repair, and maintenance. Stay perfectly comfortable all year round." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f9fb;
+    --surface: #ffffff;
+    --ink: #0c2230;
+    --muted: #5a7384;
+    --brand: #0a9cc4;
+    --brand-deep: #0b6e8c;
+    --accent: #f4a23c;
+    --ring: rgba(10,156,196,0.25);
+    --radius: 22px;
+    --shadow: 0 20px 50px -20px rgba(11,110,140,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .display { font-family: 'Sora', sans-serif; line-height: 1.1; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { width: min(1180px, 92%); margin-inline: auto; }
+  section { padding: clamp(60px, 9vw, 130px) 0; }
+
+  /* ---------- Background aurora glow ---------- */
+  .aurora {
+    position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  }
+  .aurora span {
+    position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.5;
+    animation: float 16s ease-in-out infinite;
+  }
+  .aurora span:nth-child(1){ width:480px;height:480px;background:#7fe0f0;top:-120px;left:-80px;}
+  .aurora span:nth-child(2){ width:420px;height:420px;background:#bfe9ff;top:30%;right:-120px;animation-delay:-4s;}
+  .aurora span:nth-child(3){ width:380px;height:380px;background:#ffd9a8;bottom:-100px;left:40%;animation-delay:-8s;}
+  @keyframes float {
+    0%,100%{ transform: translate(0,0) scale(1);}
+    50%{ transform: translate(30px,-40px) scale(1.12);}
+  }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(245,249,251,0.7);
+    border-bottom: 1px solid rgba(11,110,140,0.08);
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: 'Sora'; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; }
+  .logo .mark {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(140deg, var(--brand), var(--brand-deep));
+    display: grid; place-items: center; color: #fff;
+    box-shadow: var(--shadow);
+    animation: spinmark 8s linear infinite;
+  }
+  @keyframes spinmark { to { transform: rotate(360deg);} }
+  .nav-links { display: flex; gap: 30px; font-weight: 500; color: var(--muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: var(--brand); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 24px; border-radius: 100px; font-weight: 600; cursor: pointer;
+    border: none; transition: transform .25s, box-shadow .25s; font-size: .95rem;
+  }
+  .btn-primary { background: linear-gradient(140deg, var(--brand), var(--brand-deep)); color: #fff; box-shadow: var(--shadow); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 26px 50px -18px rgba(11,110,140,.6); }
+  .btn-ghost { background: var(--surface); color: var(--ink); box-shadow: 0 6px 20px -10px rgba(11,110,140,.4); }
+  .btn-ghost:hover { transform: translateY(-3px); }
+  @media (max-width: 760px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 50px; align-items: center; padding-top: clamp(40px,6vw,80px); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 100px;
+    background: rgba(10,156,196,0.1); color: var(--brand-deep); font-weight: 600; font-size: .85rem; margin-bottom: 22px;
+  }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.4; transform:scale(1.5);} }
+  .hero h1 { font-size: clamp(2.5rem, 5.4vw, 4.3rem); font-weight: 800; letter-spacing: -1.5px; }
+  .hero h1 .grad { background: linear-gradient(120deg, var(--brand), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lead { color: var(--muted); font-size: 1.15rem; max-width: 480px; margin: 22px 0 32px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .stats { display: flex; gap: 34px; margin-top: 46px; }
+  .stats .num { font-family:'Sora'; font-weight: 800; font-size: 1.7rem; color: var(--brand-deep); }
+  .stats .lbl { color: var(--muted); font-size: .85rem; }
+
+  .hero-visual { position: relative; }
+  .hero-visual img { width: 100%; border-radius: 28px; box-shadow: var(--shadow); display: block; }
+  .floating-card {
+    position: absolute; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+    border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 12px; animation: bob 5s ease-in-out infinite;
+  }
+  .fc-temp { left: -22px; top: 30px; }
+  .fc-eco { right: -16px; bottom: 40px; animation-delay: -2.5s; }
+  .floating-card .ic { width: 40px; height: 40px; border-radius: 12px; background: rgba(10,156,196,0.12); display:grid; place-items:center; color: var(--brand-deep); }
+  .floating-card .big { font-family:'Sora'; font-weight: 800; font-size: 1.2rem; }
+  .floating-card small { color: var(--muted); }
+  @keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-14px);} }
+  @media (max-width: 880px){ .hero{ grid-template-columns: 1fr; } .floating-card{ display:none; } }
+
+  /* ---------- Section heading ---------- */
+  .head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .head .tag { color: var(--brand); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: .8rem; }
+  .head h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -1px; margin-top: 10px; }
+  .head p { color: var(--muted); margin-top: 14px; font-size: 1.05rem; }
+
+  /* ---------- Services ---------- */
+  .grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; }
+  @media (max-width: 880px){ .grid3{ grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border-radius: var(--radius); padding: 34px 30px;
+    box-shadow: 0 10px 40px -24px rgba(11,110,140,.5); border: 1px solid rgba(11,110,140,.05);
+    transition: transform .35s, box-shadow .35s;
+  }
+  .card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+  .card .ic-lg {
+    width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; color: #fff;
+    background: linear-gradient(140deg, var(--brand), var(--brand-deep)); margin-bottom: 20px;
+  }
+  .card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: .98rem; }
+
+  /* ---------- Feature split ---------- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+  @media (max-width: 880px){ .split{ grid-template-columns: 1fr; } }
+  .check { display: flex; gap: 14px; margin-top: 22px; }
+  .check .tick { flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(10,156,196,.12); color: var(--brand-deep); display: grid; place-items: center; font-weight: 700; }
+  .check strong { display: block; }
+  .check span { color: var(--muted); font-size: .95rem; }
+
+  /* ---------- CTA banner ---------- */
+  .banner {
+    background: linear-gradient(135deg, var(--brand-deep), var(--brand));
+    border-radius: 34px; padding: clamp(40px,6vw,72px); color: #fff; text-align: center;
+    position: relative; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .banner::before, .banner::after {
+    content:''; position:absolute; border-radius:50%; background: rgba(255,255,255,.12);
+  }
+  .banner::before { width:300px;height:300px; top:-120px; left:-60px; }
+  .banner::after { width:260px;height:260px; bottom:-120px; right:-40px; }
+  .banner h2 { font-size: clamp(1.9rem,4vw,2.8rem); font-weight:800; letter-spacing:-1px; position:relative; }
+  .banner p { opacity:.9; max-width:520px; margin:16px auto 30px; position:relative; }
+  .banner .btn-light { background:#fff; color: var(--brand-deep); position: relative; }
+  .banner .btn-light:hover { transform: translateY(-3px); }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: #c5d6df; padding: 64px 0 30px; }
+  .foot-grid { display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:30px; }
+  @media (max-width:760px){ .foot-grid{ grid-template-columns: 1fr 1fr; } }
+  footer h4 { color:#fff; font-family:'Sora'; margin-bottom:16px; font-size:1rem; }
+  footer a { display:block; color:#9fb6c2; margin-bottom:10px; transition:color .2s; font-size:.95rem; }
+  footer a:hover { color: var(--brand); }
+  .foot-bottom { border-top:1px solid rgba(255,255,255,.1); margin-top:46px; padding-top:24px; text-align:center; color:#7f99a6; font-size:.85rem; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.show { opacity: 1; transform: none; }
+
+  svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ic-lg svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="logo">
+          <span class="mark">
+            <svg viewBox="0 0 24 24"><path d="M3 12h2a3 3 0 1 0 0-6"/><path d="M3 16h12a3 3 0 1 1 0 6"/><path d="M3 8h16a3 3 0 1 0 0-6"/></svg>
+          </span>
+          Aurora<span style="color:var(--brand)">Climate</span>
+        </div>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#why">Why Us</a>
+          <a href="#comfort">Comfort</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="btn btn-primary">Book a Visit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="wrap">
+      <div class="hero">
+        <div class="reveal show">
+          <span class="pill"><span class="dot"></span> Trusted comfort since 2009</span>
+          <h1>Perfect air,<br><span class="grad">every season.</span></h1>
+          <p class="lead">Premium heating, ventilation & air conditioning. Whisper-quiet installs, lightning-fast repairs, and energy bills you'll actually love.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Get a Free Quote
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#services" class="btn btn-ghost">Explore Services</a>
+          </div>
+          <div class="stats">
+            <div><div class="num">15k+</div><div class="lbl">Homes cooled</div></div>
+            <div><div class="num">4.9★</div><div class="lbl">Customer rating</div></div>
+            <div><div class="num">24/7</div><div class="lbl">Emergency care</div></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal show">
+          <img src="/showroom-templates/hvac-aurora/images/hero.png" alt="Modern living room with a sleek wall-mounted air conditioning unit" />
+          <div class="floating-card fc-temp">
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2 2 0 0 0-4 0v11.26a4 4 0 1 0 4 0z"/></svg></div>
+            <div><div class="big">21.5°C</div><small>Optimal comfort</small></div>
+          </div>
+          <div class="floating-card fc-eco">
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
+            <div><div class="big">-38%</div><small>Energy saved</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="wrap">
+      <div class="head reveal">
+        <span class="tag">What we do</span>
+        <h2>Complete climate care</h2>
+        <p>From first install to lifelong maintenance — we keep your air fresh, your home cozy, and your system humming.</p>
+      </div>
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="ic-lg"><svg viewBox="0 0 24 24"><path d="M2 8h20v8H2z"/><path d="M6 12h.01M10 12h.01M14 12h.01"/></svg></div>
+          <h3>AC Installation</h3>
+          <p>Expertly sized, beautifully fitted systems that cool fast and run silent — sized perfectly to your space.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic-lg"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1z"/></svg></div>
+          <h3>Repairs & Service</h3>
+          <p>Same-day diagnostics and honest fixes. Our techs arrive prepared to get your comfort back, fast.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic-lg"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <h3>Smart Maintenance</h3>
+          <p>Seasonal tune-ups & smart-thermostat setup that extend system life and slash your energy bills.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY / SPLIT -->
+    <section id="why" class="wrap">
+      <div class="split">
+        <div class="reveal"><img src="/showroom-templates/hvac-aurora/images/technician.png" alt="Friendly HVAC technician servicing an air conditioning unit" /></div>
+        <div class="reveal">
+          <span class="tag" style="color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:.8rem;">Why Aurora</span>
+          <h2 style="font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-1px;margin-top:10px;">Comfort backed by real craftspeople</h2>
+          <div class="check"><div class="tick">✓</div><div><strong>Certified technicians</strong><span>Licensed, background-checked pros who treat your home with care.</span></div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Upfront, fair pricing</strong><span>No surprises — clear quotes before any work begins.</span></div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Eco-smart systems</strong><span>High-efficiency units that cut emissions and monthly costs.</span></div></div>
+          <a href="#contact" class="btn btn-primary" style="margin-top:30px;">Meet the team
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMFORT SPLIT -->
+    <section id="comfort" class="wrap">
+      <div class="split">
+        <div class="reveal" style="order:2;">
+          <span class="tag" style="color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:.8rem;">Year-round comfort</span>
+          <h2 style="font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-1px;margin-top:10px;">A home that feels just right</h2>
+          <p style="color:var(--muted);margin-top:16px;font-size:1.05rem;">Cool in the summer heat, warm through winter nights, and clean air every single day. We design climate systems around how you actually live.</p>
+          <div class="check"><div class="tick">✓</div><div><strong>Whisper-quiet operation</strong><span>Sleep, work and relax without a hum in the background.</span></div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Cleaner, fresher air</strong><span>Advanced filtration that removes dust, allergens & odours.</span></div></div>
+        </div>
+        <div class="reveal" style="order:1;"><img src="/showroom-templates/hvac-aurora/images/comfort.png" alt="Family relaxing in a comfortable climate controlled living room" /></div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section id="contact" class="wrap">
+      <div class="banner reveal">
+        <h2>Ready for perfect air?</h2>
+        <p>Book a free in-home assessment today and discover how comfortable your space can really be.</p>
+        <a href="tel:+18005550199" class="btn btn-light">Call (800) 555-0199</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="color:#fff;margin-bottom:14px;">
+            <span class="mark"><svg viewBox="0 0 24 24"><path d="M3 12h2a3 3 0 1 0 0-6"/><path d="M3 16h12a3 3 0 1 1 0 6"/><path d="M3 8h16a3 3 0 1 0 0-6"/></svg></span>
+            Aurora<span style="color:var(--brand)">Climate</span>
+          </div>
+          <p style="color:#9fb6c2;font-size:.95rem;max-width:280px;">Premium HVAC & air conditioning for homes that deserve perfect comfort.</p>
+        </div>
+        <div><h4>Services</h4><a href="#services">AC Installation</a><a href="#services">Repairs</a><a href="#services">Maintenance</a><a href="#services">Air Quality</a></div>
+        <div><h4>Company</h4><a href="#why">About Us</a><a href="#why">Our Team</a><a href="#contact">Careers</a><a href="#contact">Reviews</a></div>
+        <div><h4>Contact</h4><a href="tel:+18005550199">(800) 555-0199</a><a href="mailto:hello@auroraclimate.co">hello@auroraclimate.co</a><a href="#">Mon–Sat, 7am–9pm</a></div>
+      </div>
+      <div class="foot-bottom">© 2026 Aurora Climate. Crafted for cooler, warmer, better days.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Subtle parallax on hero visual
+    const visual = document.querySelector('.hero-visual');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (visual && y < 700) visual.style.transform = `translateY(${y * 0.06}px)`;
+    });
+  </script>
+</body>
+</html>

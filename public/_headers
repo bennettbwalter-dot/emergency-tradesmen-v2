@@ -1,0 +1,29 @@
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/sitemap*.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/rss.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+
+/auth/*
+  X-Robots-Tag: noindex, nofollow
+
+/user/*
+  X-Robots-Tag: noindex, nofollow
+
+/payment/*
+  X-Robots-Tag: noindex, nofollow
+
+/premium-profile
+  X-Robots-Tag: noindex, nofollow
+
+/verify-documents
+  X-Robots-Tag: noindex, nofollow

@@ -62,6 +62,16 @@ function getEmailTemplate(row) {
 
   <p>→ <strong>Listing your business is completely free to start.</strong></p>
 
+  <p><strong>New bonus:</strong> Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.</p>
+
+  <ul>
+    <li>Pro directory listing</li>
+    <li>Better visibility and priority placement</li>
+    <li>More trust with customers</li>
+    <li>A professional emergency-ready website included at no extra cost</li>
+    <li>No upfront website build fee</li>
+  </ul>
+
   <p>Over 1,000 tradespeople are already receiving enquiries through us. 
   We'd love to add ${city}'s top ${trade} to the platform.</p>
 

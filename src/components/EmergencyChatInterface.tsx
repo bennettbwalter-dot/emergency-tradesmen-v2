@@ -1060,6 +1060,11 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         {isEarthLaunching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                                     </Button>
                                 </div>
+                                {geoError && (
+                                    <p className="mt-2 text-center text-xs font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
+                                        {geoError}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>

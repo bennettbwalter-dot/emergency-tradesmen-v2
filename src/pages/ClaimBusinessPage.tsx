@@ -115,6 +115,12 @@ export default function ClaimBusinessPage() {
                   <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                   <p>Admin may call the number already shown on the listing and check business-domain evidence before approving any future changes.</p>
                 </div>
+                <div className="mt-4 rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-4 text-sm">
+                  <p className="font-semibold text-foreground">Free website with Pro Yearly or Agency</p>
+                  <p className="mt-1 text-muted-foreground">
+                    After claiming your listing, sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free with no upfront build fee.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

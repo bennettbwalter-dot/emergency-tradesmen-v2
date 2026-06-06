@@ -31,14 +31,13 @@ const AnalyticsTracker = lazy(() => import("@/components/AnalyticsTracker").then
 // Lazy Load Pages
 const LandingPage = lazy(() => import("./pages/Index"));
 const HomeSearch = lazy(() => import("./pages/HomeSearch"));
+const AlertsPage = lazy(() => import("./pages/AlertsPage"));
 const TradeCityPage = lazy(() => import("./pages/TradeCityPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const BusinessProfilePage = lazy(() => import("./pages/BusinessProfilePage"));
 const About = lazy(() => import("./pages/About"));
 const PricingPage = lazy(() => import("./pages/PricingPage"));
-const ForTradesmen = lazy(() => import("./pages/ForTradesmen"));
-const ForContractors = lazy(() => import("./pages/ForContractors"));
 const ClaimYourBusiness = lazy(() => import("./pages/ClaimYourBusiness"));
 const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
 const WebsiteShowroomTradesmen = lazy(() => import("./pages/WebsiteShowroomTradesmen"));
@@ -65,6 +64,7 @@ const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const BusinessesPage = lazy(() => import("./pages/admin/Businesses"));
 const PhotosPage = lazy(() => import("./pages/admin/Photos"));
 const ReviewsPage = lazy(() => import("./pages/admin/Reviews"));
+const QuotesPage = lazy(() => import("./pages/admin/Quotes"));
 const SubscriptionsPage = lazy(() => import("./pages/admin/Subscriptions"));
 const AdminAvailability = lazy(() => import("./pages/admin/Availability"));
 const AdminProfileEditor = lazy(() => import("./pages/admin/ProfileEditor"));
@@ -165,14 +165,15 @@ const AppRoutes = () => (
     {/* Core Pages */}
     <Route path="/" element={<LandingPage />} />
     <Route path="/home" element={<HomeSearch />} />
+    <Route path="/alerts" element={<AlertsPage />} />
     <Route path="/landing" element={<LandingPage />} />
     <Route path="/welcome" element={<LandingPage />} />
     <Route path="/about" element={<About />} />
     <Route path="/pricing" element={<PricingPage />} />
     <Route path="/tradesmen" element={<PricingPage />} />
     <Route path="/claim-your-business" element={<ClaimYourBusiness />} />
-    <Route path="/for-tradesmen" element={<ForTradesmen />} />
-    <Route path="/for-contractors" element={<ForContractors />} />
+    <Route path="/for-tradesmen" element={<Navigate to="/for-tradesmen/website-showroom" replace />} />
+    <Route path="/for-contractors" element={<Navigate to="/for-contractors/website-showroom" replace />} />
     <Route path="/for-tradesmen/website-showroom" element={<WebsiteShowroomTradesmen />} />
     <Route path="/for-contractors/website-showroom" element={<WebsiteShowroomContractors />} />
     <Route path="/contact" element={<ContactPage />} />
@@ -201,6 +202,7 @@ const AppRoutes = () => (
       <Route path="availability" element={<AdminAvailability />} />
       <Route path="photos" element={<PhotosPage />} />
       <Route path="reviews" element={<ReviewsPage />} />
+      <Route path="quotes" element={<QuotesPage />} />
       <Route path="subscriptions" element={<SubscriptionsPage />} />
       <Route path="export" element={<DataExportPage />} />
       <Route path="analytics" element={<AnalyticsPage />} />

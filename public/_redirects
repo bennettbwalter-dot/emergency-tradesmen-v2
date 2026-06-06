@@ -1,11 +1,9 @@
-# Cloudflare Pages Redirects
+# Cloudflare Pages redirects
 # Format: from to status
 
-# SPA fallback — all routes serve index.html
-/* /index.html 200
-
-# www to non-www (UK domain)
+# Canonical host redirects must run before the SPA fallback.
 https://www.emergencytradesmen.net/* https://emergencytradesmen.net/:splat 301!
-
-# www to non-www (US domain)
 https://www.emergencycontractors.net/* https://emergencycontractors.net/:splat 301!
+
+# SPA fallback - keep last so host redirects and static files can resolve first.
+/* /index.html 200

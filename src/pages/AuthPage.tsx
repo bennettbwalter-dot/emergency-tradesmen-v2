@@ -1,18 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { AuthModal } from "@/components/AuthModal";
+import { AuthForm } from "@/components/AuthForm";
 import { useAuth } from "@/contexts/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFeatureFlagEnabled } from "posthog-js/react";
 import { SEO } from "@/components/SEO";
+import { Gift } from "lucide-react";
 
 export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login" | "register" }) {
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const redirect = searchParams.get("redirect") || "/user/dashboard";
+    const [mode, setMode] = useState<"login" | "register">(defaultTab);
+    const showProWebsiteBonus = mode === "register" && redirect.includes("pricing");
 
     // Check if the user is in the "new-us-signup-flow" test group
     const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
@@ -29,45 +32,57 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
             <Header />
             <main className="flex-1 flex items-center justify-center p-4">
                 <div className="w-full max-w-md">
-                    {/* Reuse AuthModal internal form logic if possible, 
-                        BUT since AuthModal is a Dialog, we might want to just render it open 
-                        OR refactor. For simplicity now, we can try to render it triggers manually
-                        or just tell user to click.
-                        
-                        Actually, better UX is to extract the form from AuthModal.
-                        For now, to save time/complexity, we'll wrap a "Sign In required" message 
-                        that triggers the modal automatically or presents it nicely.
-                    */}
-
                     <div className="flex justify-center mb-6">
                         <img src="/et-logo-v3.webp" alt="Emergency Trades Logo" loading="lazy" decoding="async" className="w-16 h-16 object-contain transition-transform hover:scale-110 duration-500" />
                     </div>
-                    <Card className="border-gold/20 shadow-lg">
-                        <CardContent className="pt-6 text-center">
-                            <h1 className="text-2xl font-display mb-2">
-                                {isNewSignupFlowEnabled ? "Join Emergency Tradesmen US Preview" : (defaultTab === "login" ? "Welcome Back" : "Join Emergency Tradesmen")}
-                            </h1>
-                            <p className="text-muted-foreground mb-6">
-                                {isNewSignupFlowEnabled ? "You have been selected to preview our new sign-up flow." : "Please sign in to access this page."}
-                            </p>
-
-                            <div className="flex justify-center">
-                                {/* We render the AuthModal but we want it to be 'invoked' 
-                                    Since AuthModal is a Dialog, we can trigger it or just use it.
-                                    Let's use a trick: Render it "open"? No, that's messy.
-                                    
-                                    Ideally we refactor AuthModal to separate Form vs Dialog.
-                                    However, looking at AuthModal usage, it has a trigger.
-                                */}
-                                <AuthModal
-                                    defaultTab={defaultTab}
-                                    trigger={
-                                        <button className="bg-gold text-gold-foreground px-8 py-3 rounded-lg font-medium hover:bg-gold/90 transition-colors w-full">
-                                            {defaultTab === "login" ? "Sign In Now" : "Create Account"}
-                                        </button>
-                                    }
+                    <Card className="overflow-hidden border-gold/20 bg-[#0f172a] text-white shadow-lg">
+                        <div className="relative h-36 overflow-hidden">
+                            <div className="absolute right-0 top-0 h-full w-3/5">
+                                <img
+                                    src="/tradesman-hero-v2.webp"
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="h-full w-full object-cover object-top"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/60 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
                             </div>
+                            <div className="relative z-10 flex h-full max-w-[70%] flex-col justify-center p-6">
+                                <h1 className="font-display text-2xl leading-tight text-white">
+                                    {isNewSignupFlowEnabled ? "Join Emergency Tradesmen US Preview" : (mode === "login" ? "Welcome Back" : "Join Emergency Tradesmen")}
+                                </h1>
+                                <p className="mt-2 text-sm text-gray-300">
+                                    {isNewSignupFlowEnabled
+                                        ? "You have been selected to preview our new sign-up flow."
+                                        : mode === "register"
+                                            ? "Create an account to continue."
+                                            : "Please sign in to access this page."}
+                                </p>
+                            </div>
+                        </div>
+                        <CardContent className="p-6 pt-4">
+                            <h1 className="text-2xl font-display mb-2">
+                                {mode === "login" ? "Sign in" : "Create account"}
+                            </h1>
+                            {showProWebsiteBonus && (
+                                <div className="mb-5 rounded-lg border border-emerald-400/30 bg-emerald-400/10 p-4 text-sm text-emerald-50">
+                                    <div className="mb-2 flex items-center gap-2 font-bold text-emerald-200">
+                                        <Gift className="h-4 w-4" />
+                                        Free website bonus
+                                    </div>
+                                    <p className="text-gray-200">
+                                        Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free, with no upfront website build fee.
+                                    </p>
+                                </div>
+                            )}
+                            <AuthForm
+                                defaultTab={defaultTab}
+                                mode={mode}
+                                onModeChange={setMode}
+                                hideHeader
+                                onSuccess={() => navigate(redirect)}
+                            />
                         </CardContent>
                     </Card>
                 </div>

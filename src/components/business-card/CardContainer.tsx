@@ -5,10 +5,11 @@ import { useSimpleTheme } from "@/components/simple-theme";
 interface CardContainerProps {
     children: React.ReactNode;
     className?: string;
+    contentClassName?: string;
     backgroundImage?: string;
 }
 
-export function CardContainer({ children, className, backgroundImage }: CardContainerProps) {
+export function CardContainer({ children, className, contentClassName, backgroundImage }: CardContainerProps) {
     const { theme } = useSimpleTheme();
 
     return (
@@ -32,7 +33,7 @@ export function CardContainer({ children, className, backgroundImage }: CardCont
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.webp')] pointer-events-none mix-blend-soft-light" />
             </div>
 
-            <div className="relative z-10 flex flex-col gap-3 px-6 pt-5 pb-4">
+            <div className={cn("relative z-10 flex flex-col gap-3 px-6 pt-5 pb-4", contentClassName)}>
                 {children}
             </div>
         </div>

@@ -34,6 +34,48 @@ onIdle(() => {
     import('./lib/posthog').then(({ initPostHog }) => initPostHog()).catch(() => {});
 });
 
+function renderFatalOverlay(title: string, details: Array<[string, unknown]>) {
+    const wrapper = document.createElement('div');
+    wrapper.style.padding = '20px';
+    wrapper.style.fontFamily = 'sans-serif';
+    wrapper.style.color = '#721c24';
+    wrapper.style.background = '#f8d7da';
+    wrapper.style.border = '2px solid #f5c6cb';
+    wrapper.style.margin = '20px';
+    wrapper.style.borderRadius = '8px';
+
+    const heading = document.createElement('h1');
+    heading.style.marginTop = '0';
+    heading.textContent = title;
+    wrapper.appendChild(heading);
+
+    for (const [label, value] of details) {
+        const node = label === 'Stack' ? document.createElement('pre') : document.createElement('p');
+        if (label === 'Stack') {
+            node.style.background = 'rgba(0,0,0,0.05)';
+            node.style.padding = '10px';
+            node.style.borderRadius = '4px';
+            node.style.overflow = 'auto';
+        }
+        node.textContent = `${label}: ${String(value ?? '')}`;
+        wrapper.appendChild(node);
+    }
+
+    const button = document.createElement('button');
+    button.textContent = 'Reload Application';
+    button.style.padding = '8px 16px';
+    button.style.background = '#721c24';
+    button.style.color = 'white';
+    button.style.border = 'none';
+    button.style.borderRadius = '4px';
+    button.style.cursor = 'pointer';
+    button.style.marginTop = '10px';
+    button.addEventListener('click', () => window.location.reload());
+    wrapper.appendChild(button);
+
+    document.body.replaceChildren(wrapper);
+}
+
 // Prevent blank screen of death with immediate error reporting
 window.addEventListener('error', (event) => {
     // Ignore benign ResizeObserver errors that don't actually crash the app
@@ -42,58 +84,40 @@ window.addEventListener('error', (event) => {
         return;
     }
 
-    console.error("🌐 GLOBAL ERROR DETECTED:", event.message, event.error);
+    console.error("Global error detected:", event.message, event.error);
 
-    // Only show the fatal overlay for errors that actually prevent the app from mounting or are likely fatal
-    // If the root element is already populated, we probably shouldn't wipe it
+    // Only show the fatal overlay for errors that actually prevent the app from mounting or are likely fatal.
     const root = document.getElementById('root');
     const isAppMounted = root && root.children.length > 0;
 
     if (!isAppMounted) {
-        document.body.innerHTML = `
-            <div style="padding: 20px; font-family: sans-serif; color: #721c24; background: #f8d7da; border: 2px solid #f5c6cb; margin: 20px; border-radius: 8px;">
-                <h1 style="margin-top: 0;">Application Error</h1>
-                <p><strong>Script Error:</strong> ${event.message}</p>
-                <p>File: ${event.filename}:${event.lineno}</p>
-                <pre style="background: rgba(0,0,0,0.05); padding: 10px; border-radius: 4px; overflow: auto;">${event.error?.stack || 'No stack trace available'}</pre>
-                <button onclick="window.location.reload()" style="padding: 8px 16px; background: #721c24; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Reload Application</button>
-            </div>
-        `;
+        renderFatalOverlay('Application Error', [
+            ['Script Error', event.message],
+            ['File', `${event.filename}:${event.lineno}`],
+            ['Stack', event.error?.stack || 'No stack trace available'],
+        ]);
     }
 });
 
 window.addEventListener('unhandledrejection', (event) => {
     const reason = event.reason;
     const message = reason?.message || reason || 'No reason provided';
-    const stack = reason?.stack || 'No stack trace available';
 
-    console.error("📜 UNHANDLED PROMISE REJECTION:", message, reason);
-
-    // Stop wiping the body for unhandled rejections! 
-    // Most rejections are non-fatal or from third-party scripts.
-    // Instead, we just log it. If it's a critical error, the normal ErrorBoundary will catch it 
-    // or the 'error' event above will handle it if it results in a crash.
-
-    // Optional: We could show a non-intrusive toast here if we had a global toast system 
-    // that works outside of React, but for now, logging is safer than crashing the UI.
+    console.error("Unhandled promise rejection:", message, reason);
 });
 
-devLog("🚀 Application Starting...");
+devLog("Application starting...");
 
 try {
     const rootElement = document.getElementById("root");
     if (!rootElement) throw new Error("Root element 'root' not found in index.html");
 
     createRoot(rootElement).render(<App />);
-    devLog("React App Mounted");
+    devLog("React App mounted");
 } catch (error: any) {
-    console.error("🔥 FATAL APP CRASH:", error);
-    document.body.innerHTML = `
-        <div style="padding: 20px; font-family: monospace; color: red; background: #fff0f0; border: 2px solid red;">
-            <h1>🔥 FATAL APPLICATION ERROR</h1>
-            <p>The app crashed before it could start.</p>
-            <pre style="background: #333; color: #fff; padding: 15px; overflow: auto;">${error?.message || error}</pre>
-            <pre>${error?.stack || ''}</pre>
-        </div>
-    `;
+    console.error("Fatal app crash:", error);
+    renderFatalOverlay('Fatal Application Error', [
+        ['Message', error?.message || error],
+        ['Stack', error?.stack || 'No stack trace available'],
+    ]);
 }

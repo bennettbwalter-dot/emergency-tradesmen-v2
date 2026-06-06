@@ -18,7 +18,8 @@ import {
     BarChart3,
     Mail,
     ShieldCheck,
-    Globe
+    Globe,
+    MessageSquareText
 } from "lucide-react";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -67,6 +68,7 @@ export function AdminLayout() {
         { path: "/admin/profile-editor", icon: Edit3, label: "Profile Editor" },
         { path: "/admin/availability", icon: Calendar, label: "Availability" },
         { path: "/admin/subscriptions", icon: FileText, label: "Subscriptions" },
+        { path: "/admin/quotes", icon: MessageSquareText, label: "Lead Inbox" },
         { path: "/admin/reviews", icon: Star, label: "Reviews" },
         { path: "/admin/photos", icon: Image, label: "Photos" },
         { path: "/admin/analytics", icon: BarChart3, label: "Analytics" },

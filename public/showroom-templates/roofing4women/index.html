@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roofing4Women | Breaking the Barriers in Roofing</title>
+  <meta name="description" content="Roofing4Women — professional roofing services breaking the barriers for women in the trade. Quality roofing you can trust." />
+
+  <!-- Google Fonts: Poppins for headings, Inter for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       DESIGN TOKENS — professional blue & white palette
+       ===================================================== */
+    :root {
+      --blue-900: #0a2540;   /* deepest navy */
+      --blue-700: #14467a;   /* primary brand blue */
+      --blue-500: #1d6fd1;   /* bright accent blue */
+      --blue-300: #6aa9e9;   /* light accent */
+      --blue-50:  #eef5fd;   /* very light blue tint */
+      --white:    #ffffff;
+      --off-white:#f7f9fc;
+      --gray-600: #4a5a6a;   /* body text */
+      --gray-400: #8a99a8;   /* muted text */
+      --shadow:   0 10px 30px rgba(10, 37, 64, 0.10);
+      --shadow-lg:0 20px 50px rgba(10, 37, 64, 0.18);
+      --radius:   16px;
+      --max:      1180px;
+    }
+
+    /* =====================================================
+       RESET & BASE
+       ===================================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--gray-600);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--blue-900);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* =====================================================
+       BUTTONS
+       ===================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.95rem 1.8rem;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+    .btn-primary {
+      background: var(--blue-500);
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(29, 111, 209, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--blue-700);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(20, 70, 122, 0.4);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+    .btn-ghost:hover {
+      background: var(--white);
+      color: var(--blue-700);
+      transform: translateY(-3px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--blue-700);
+      border-color: var(--blue-300);
+    }
+    .btn-outline:hover {
+      background: var(--blue-50);
+      transform: translateY(-3px);
+    }
+
+    /* =====================================================
+       STICKY NAVBAR
+       ===================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--blue-50);
+      box-shadow: 0 2px 12px rgba(10, 37, 64, 0.05);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--blue-900);
+    }
+    .brand .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      color: var(--white);
+    }
+    .brand span.accent { color: var(--blue-500); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      position: relative;
+      font-weight: 500;
+      font-size: 0.97rem;
+      color: var(--gray-600);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--blue-700); background: var(--blue-50); }
+    /* active link highlight */
+    .nav-links a.active {
+      color: var(--white);
+      background: var(--blue-500);
+      box-shadow: 0 6px 14px rgba(29, 111, 209, 0.3);
+    }
+
+    /* mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+    }
+    .menu-toggle span {
+      width: 26px;
+      height: 3px;
+      background: var(--blue-900);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* =====================================================
+       PAGE SECTIONS (only one visible at a time)
+       ===================================================== */
+    .page { display: none; animation: fadeIn 0.45s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-pad { padding: 5rem 0; }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-500);
+      background: var(--blue-50);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+    }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1rem; }
+    .section-lead { max-width: 620px; font-size: 1.08rem; color: var(--gray-600); }
+    .center { text-align: center; }
+    .center .section-lead { margin-left: auto; margin-right: auto; }
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+    .hero {
+      position: relative;
+      min-height: 86vh;
+      display: flex;
+      align-items: center;
+      color: var(--white);
+      background:
+        linear-gradient(115deg, rgba(10,37,64,0.92) 0%, rgba(20,70,122,0.78) 45%, rgba(29,111,209,0.45) 100%),
+        url('https://images.unsplash.com/photo-1632759145351-1d592919f522?w=1200&fit=crop') center/cover no-repeat;
+    }
+    .hero-content { max-width: 680px; padding: 4rem 0; }
+    .hero h1 {
+      color: var(--white);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      margin-bottom: 1.3rem;
+    }
+    .hero h1 .hl {
+      background: linear-gradient(120deg, var(--blue-300), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.92);
+      margin-bottom: 2rem;
+      max-width: 560px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2.4rem;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    /* =====================================================
+       STAT STRIP
+       ===================================================== */
+    .stats {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 3rem 0;
+    }
+    .stat { text-align: center; }
+    .stat .num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      color: var(--blue-300);
+    }
+    .stat .label { font-size: 0.92rem; color: rgba(255, 255, 255, 0.75); }
+
+    /* =====================================================
+       FEATURE / CARD GRIDS
+       ===================================================== */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--blue-50);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-300);
+    }
+    .card .icon-wrap {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      background: var(--blue-50);
+      color: var(--blue-500);
+      margin-bottom: 1.2rem;
+    }
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+    .card .emoji { font-size: 1.6rem; }
+
+    /* =====================================================
+       ABOUT LAYOUT
+       ===================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .mission-card {
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .mission-card h3 { color: var(--white); margin-bottom: 1rem; font-size: 1.6rem; }
+    .mission-card p { color: rgba(255,255,255,0.9); }
+    .value-list { list-style: none; margin-top: 1.6rem; display: grid; gap: 1rem; }
+    .value-list li {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      background: var(--off-white);
+      border: 1px solid var(--blue-50);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      transition: transform 0.2s ease;
+    }
+    .value-list li:hover { transform: translateX(6px); }
+    .value-list .emoji { font-size: 1.5rem; line-height: 1; }
+    .value-list strong { display: block; color: var(--blue-900); font-family: 'Poppins', sans-serif; }
+
+    /* =====================================================
+       SERVICES
+       ===================================================== */
+    .service-card { text-align: left; }
+    .service-card .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--blue-700);
+      background: var(--blue-50);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-top: 1rem;
+    }
+    .service-list { list-style: none; margin-top: 1rem; display: grid; gap: 0.6rem; }
+    .service-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem; }
+    .service-list svg { color: var(--blue-500); flex-shrink: 0; }
+
+    /* =====================================================
+       CONTACT
+       ===================================================== */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+    .contact-card {
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-card h2 { color: var(--white); }
+    .contact-card p { color: rgba(255,255,255,0.92); margin: 1rem 0 2rem; }
+    .contact-info { display: grid; gap: 1.2rem; }
+    .contact-info .row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--off-white);
+      border: 1px solid var(--blue-50);
+      border-radius: 12px;
+      padding: 1.1rem 1.3rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-info .row:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .contact-info .icon-wrap {
+      display: grid; place-items: center;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--blue-50);
+      color: var(--blue-500);
+      flex-shrink: 0;
+    }
+    .contact-info .row small { color: var(--gray-400); display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-info .row strong { color: var(--blue-900); font-family: 'Poppins', sans-serif; font-weight: 600; }
+
+    /* =====================================================
+       CTA BAND
+       ===================================================== */
+    .cta-band {
+      background: var(--blue-50);
+      border-radius: var(--radius);
+      padding: 3rem;
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+    .cta-band h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.7rem; }
+    .cta-band p { margin-bottom: 1.6rem; }
+
+    /* =====================================================
+       FOOTER (always visible)
+       ===================================================== */
+    .footer {
+      background: var(--blue-900);
+      color: rgba(255, 255, 255, 0.75);
+      padding: 3.5rem 0 1.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer .brand { color: var(--white); margin-bottom: 1rem; }
+    .footer h4 { color: var(--white); font-size: 1rem; margin-bottom: 1rem; }
+    .footer ul { list-style: none; display: grid; gap: 0.6rem; }
+    .footer a { color: rgba(255, 255, 255, 0.75); font-size: 0.95rem; transition: color 0.2s ease, padding-left 0.2s ease; }
+    .footer a:hover { color: var(--blue-300); padding-left: 4px; }
+    .footer .muted { font-size: 0.95rem; max-width: 320px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+    @media (max-width: 900px) {
+      .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      /* mobile nav */
+      .menu-toggle { display: flex; }
+      .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.3rem;
+        background: var(--white);
+        padding: 1rem 1.5rem 1.5rem;
+        box-shadow: var(--shadow);
+        border-bottom: 1px solid var(--blue-50);
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-links a { padding: 0.8rem 1rem; }
+
+      .grid-2, .grid-3, .stats-grid, .footer-grid { grid-template-columns: 1fr; }
+      .section-pad { padding: 3.5rem 0; }
+      .cta-band { padding: 2rem 1.5rem; }
+      .hero { min-height: 80vh; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== STICKY NAVBAR ===================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="brand" data-page="home">
+        <span class="logo-mark" aria-hidden="true">
+          <!-- inline roof SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11l9-7 9 7" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" />
+          </svg>
+        </span>
+        Roofing<span class="accent">4</span>Women
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/"        data-page="home"     class="active">Home</a></li>
+          <li><a href="/about"   data-page="about">About</a></li>
+          <li><a href="/services" data-page="services">Services</a></li>
+          <li><a href="/contact" data-page="contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HOME PAGE
+         ============================================================ -->
+    <section class="page active" id="page-home">
+
+      <!-- HERO (the ONE photo on the site) -->
+      <div class="hero">
+        <div class="container hero-content">
+          <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:#fff;">Breaking the Barriers</span>
+          <h1>Roofing Done Right, <span class="hl">By Women Who Care</span></h1>
+          <p>Roofing4Women delivers expert craftsmanship, honest advice, and a fresh perspective on the trade — proving that quality roofing has no limits.</p>
+          <div class="hero-cta">
+            <a href="/contact" class="btn btn-primary" data-page="contact">
+              Get a Free Quote
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="/services" class="btn btn-ghost" data-page="services">View Services</a>
+          </div>
+          <div class="hero-badges">
+            <span class="hero-badge">🛡️ Fully Insured</span>
+            <span class="hero-badge">⭐ 5-Star Service</span>
+            <span class="hero-badge">💪 Women-Led Team</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS STRIP -->
+      <div class="stats">
+        <div class="container stats-grid">
+          <div class="stat"><div class="num">10+</div><div class="label">Years on the Roof</div></div>
+          <div class="stat"><div class="num">500+</div><div class="label">Roofs Completed</div></div>
+          <div class="stat"><div class="num">100%</div><div class="label">Satisfaction Focus</div></div>
+          <div class="stat"><div class="num">24/7</div><div class="label">Support &amp; Care</div></div>
+        </div>
+      </div>
+
+      <!-- WHY CHOOSE US -->
+      <div class="section-pad">
+        <div class="container center">
+          <span class="eyebrow">Why Roofing4Women</span>
+          <h2 class="section-title">Built on trust, skill &amp; a higher standard</h2>
+          <p class="section-lead">We combine technical expertise with genuine care, giving every client a roof — and an experience — they can rely on.</p>
+
+          <div class="grid grid-3">
+            <div class="card">
+              <div class="icon-wrap"><span class="emoji">🔨</span></div>
+              <h3>Expert Craftsmanship</h3>
+              <p>Skilled, detail-driven workmanship on every job, big or small, with materials built to last.</p>
+            </div>
+            <div class="card">
+              <div class="icon-wrap"><span class="emoji">🤝</span></div>
+              <h3>Honest &amp; Transparent</h3>
+              <p>Clear quotes, no hidden costs, and straight talk so you always know exactly what you're paying for.</p>
+            </div>
+            <div class="card">
+              <div class="icon-wrap"><span class="emoji">🚀</span></div>
+              <h3>Breaking Barriers</h3>
+              <p>A women-led team proving that the roofing trade is for everyone — driven by passion and purpose.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA BAND -->
+      <div class="container">
+        <div class="cta-band">
+          <h2>Ready to protect what matters most?</h2>
+          <p>Get in touch today and discover the Roofing4Women difference.</p>
+          <a href="/contact" class="btn btn-primary" data-page="contact">Contact Us Today</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT PAGE
+         ============================================================ -->
+    <section class="page" id="page-about">
+      <div class="section-pad">
+        <div class="container">
+          <div class="center">
+            <span class="eyebrow">About Us</span>
+            <h2 class="section-title">Roofing, Women, Breaking the Barriers</h2>
+            <p class="section-lead">Roofing4Women was founded on a simple belief: exceptional roofing and a more inclusive trade can go hand in hand.</p>
+          </div>
+
+          <div class="about-grid" style="margin-top:3rem;">
+            <div>
+              <h3 style="font-size:1.6rem; margin-bottom:1rem;">Our Story</h3>
+              <p style="margin-bottom:1rem;">Founded by Amelie Rose, Roofing4Women set out to challenge expectations in a traditionally male-dominated industry. What started as a personal mission grew into a trusted roofing business serving homeowners and businesses alike.</p>
+              <p>Every roof we install or repair is a statement: that quality, care, and craftsmanship come in every form. We're proud to lead by example and inspire the next generation of tradespeople.</p>
+
+              <ul class="value-list">
+                <li>
+                  <span class="emoji">🎯</span>
+                  <div><strong>Our Mission</strong>Deliver outstanding roofing while breaking down barriers in the trade.</div>
+                </li>
+                <li>
+                  <span class="emoji">💙</span>
+                  <div><strong>Our Values</strong>Integrity, quality, and genuine care for every client and project.</div>
+                </li>
+                <li>
+                  <span class="emoji">🌟</span>
+                  <div><strong>Our Promise</strong>Reliable work, fair pricing, and a roof you can trust for years.</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mission-card">
+              <h3>Why It Matters</h3>
+              <p>We're more than a roofing company — we're proof that skill and dedication know no boundaries. By championing women in the trade, we're building stronger roofs and a stronger, more inclusive industry.</p>
+              <div class="hero-badges" style="margin-top:2rem;">
+                <span class="hero-badge">🏆 Quality First</span>
+                <span class="hero-badge">♻️ Lasting Materials</span>
+                <span class="hero-badge">📍 Local &amp; Trusted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES PAGE
+         ============================================================ -->
+    <section class="page" id="page-services">
+      <div class="section-pad">
+        <div class="container">
+          <div class="center">
+            <span class="eyebrow">What We Do</span>
+            <h2 class="section-title">Professional Roofing Services</h2>
+            <p class="section-lead">From new installations to repairs and maintenance, our expert roofing service keeps you covered.</p>
+          </div>
+
+          <div class="grid grid-3">
+            <!-- Service card 1 -->
+            <div class="card service-card">
+              <div class="icon-wrap">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+              </div>
+              <h3>Roofer Services 🏠</h3>
+              <p>Complete, professional roofing for residential and commercial properties — built to protect and built to last.</p>
+              <ul class="service-list">
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> New roof installations</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Roof repairs &amp; replacement</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Leak detection &amp; fixes</li>
+              </ul>
+              <span class="tag">Most Popular</span>
+            </div>
+
+            <!-- Service card 2 -->
+            <div class="card service-card">
+              <div class="icon-wrap"><span class="emoji">🛠️</span></div>
+              <h3>Maintenance &amp; Care</h3>
+              <p>Routine inspections and upkeep to extend the life of your roof and catch small issues before they grow.</p>
+              <ul class="service-list">
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Roof inspections</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Gutter cleaning &amp; care</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Preventative upkeep</li>
+              </ul>
+              <span class="tag">Year-Round</span>
+            </div>
+
+            <!-- Service card 3 -->
+            <div class="card service-card">
+              <div class="icon-wrap"><span class="emoji">⚡</span></div>
+              <h3>Emergency Repairs</h3>
+              <p>Storm damage or sudden leaks? We respond quickly to secure your home and restore peace of mind.</p>
+              <ul class="service-list">
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Storm damage repair</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Rapid response</li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Temporary weatherproofing</li>
+              </ul>
+              <span class="tag">Fast Response</span>
+            </div>
+          </div>
+
+          <div class="cta-band">
+            <h2>Not sure what you need? 🤔</h2>
+            <p>Reach out and we'll help you find the right roofing solution for your property.</p>
+            <a href="/contact" class="btn btn-primary" data-page="contact">Ask Us Anything</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT PAGE
+         ============================================================ -->
+    <section class="page" id="page-contact">
+      <div class="section-pad">
+        <div class="container">
+          <div class="center">
+            <span class="eyebrow">Get In Touch</span>
+            <h2 class="section-title">Let's Talk About Your Roof</h2>
+            <p class="section-lead">Have a question or ready to get started? We'd love to hear from you.</p>
+          </div>
+
+          <div class="contact-wrap" style="margin-top:3rem;">
+            <!-- Email CTA card -->
+            <div class="contact-card">
+              <h2>📧 Email Us Directly</h2>
+              <p>Click below to send us an email. Tell us about your project and we'll get back to you as soon as possible.</p>
+              <a href="mailto:amelie.y.rose@gmail.com" class="btn" style="background:#fff; color:var(--blue-700); align-self:flex-start;">
+                Email Us
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              </a>
+            </div>
+
+            <!-- Contact details -->
+            <div class="contact-info">
+              <div class="row">
+                <div class="icon-wrap">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                </div>
+                <div>
+                  <small>Email</small>
+                  <a href="mailto:amelie.y.rose@gmail.com"><strong>amelie.y.rose@gmail.com</strong></a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="icon-wrap"><span class="emoji">🏢</span></div>
+                <div>
+                  <small>Business</small>
+                  <strong>Roofing4Women</strong>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="icon-wrap"><span class="emoji">👷‍♀️</span></div>
+                <div>
+                  <small>Owner</small>
+                  <strong>Amelie Rose</strong>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="icon-wrap"><span class="emoji">🕒</span></div>
+                <div>
+                  <small>Availability</small>
+                  <strong>Mon–Sat · Emergency 24/7</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (always visible) ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand">
+            <span class="logo-mark" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+            </span>
+            Roofing<span class="accent" style="color:var(--blue-300)">4</span>Women
+          </div>
+          <p class="muted">Roofing, Women, Breaking the Barriers. Professional roofing services delivered with skill, honesty and care.</p>
+        </div>
+
+        <div>
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="/"        data-page="home">Home</a></li>
+            <li><a href="/about"   data-page="about">About</a></li>
+            <li><a href="/services" data-page="services">Services</a></li>
+            <li><a href="/contact" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:amelie.y.rose@gmail.com">📧 amelie.y.rose@gmail.com</a></li>
+            <li>👷‍♀️ Amelie Rose</li>
+            <li>🕒 Mon–Sat · 24/7 Emergency</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Roofing4Women. All rights reserved.</span>
+        <span>Breaking the barriers, one roof at a time. 💙</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    /* ============================================================
+       SINGLE-PAGE NAVIGATION
+       Each "page" is a <section>. We show one at a time and update
+       the URL with history.pushState when the environment allows it.
+       ============================================================ */
+
+    // Map clean paths <-> page keys
+    var routes = {
+      '/':        'home',
+      '/index.html': 'home',
+      '/home':    'home',
+      '/about':   'about',
+      '/services':'services',
+      '/contact': 'contact'
+    };
+
+    var navLinksEl = document.getElementById('navLinks');
+    var menuToggle = document.getElementById('menuToggle');
+
+    /**
+     * Show a single page section by key and highlight its nav link.
+     * @param {string} page  one of: home, about, services, contact
+     * @param {boolean} push whether to attempt updating the URL
+     */
+    function showPage(page, push) {
+      // fall back to home if the page key is unknown
+      if (!document.getElementById('page-' + page)) {
+        page = 'home';
+      }
+
+      // 1. Toggle visibility — only one page visible at a time
+      var sections = document.querySelectorAll('.page');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+      }
+      var target = document.getElementById('page-' + page);
+      if (target) target.classList.add('active');
+
+      // 2. Highlight the active nav link
+      var links = document.querySelectorAll('.nav-links a');
+      for (var j = 0; j < links.length; j++) {
+        if (links[j].getAttribute('data-page') === page) {
+          links[j].classList.add('active');
+        } else {
+          links[j].classList.remove('active');
+        }
+      }
+
+      // 3. Update the URL when allowed (wrapped in try/catch so it
+      //    never breaks on local files or sandboxed previews).
+      if (push) {
+        try {
+          var path = (page === 'home') ? '/' : '/' + page;
+          history.pushState({ page: page }, '', path);
+        } catch (e) {
+          /* pushState unavailable (e.g. file://) — silently ignore */
+        }
+      }
+
+      // 4. Scroll to top for a fresh "page" feel
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 5. Close the mobile menu if open
+      navLinksEl.classList.remove('open');
+    }
+
+    /* ---- Intercept clicks on any element with data-page ---- */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-page]');
+      if (!link) return;
+      e.preventDefault();              // no page reload
+      var page = link.getAttribute('data-page');
+      showPage(page, true);
+    });
+
+    /* ---- Back / forward button support (only fires when pushState worked) ---- */
+    window.addEventListener('popstate', function (e) {
+      var page = (e.state && e.state.page) ? e.state.page : pageFromPath();
+      showPage(page, false);           // don't push again
+    });
+
+    /* ---- Mobile menu toggle ---- */
+    menuToggle.addEventListener('click', function () {
+      navLinksEl.classList.toggle('open');
+    });
+
+    /* ---- Resolve the current page from the URL pathname ---- */
+    function pageFromPath() {
+      try {
+        var path = window.location.pathname;
+        // normalize trailing slash
+        if (path.length > 1 && path.charAt(path.length - 1) === '/') {
+          path = path.slice(0, -1);
+        }
+        return routes[path] || 'home';
+      } catch (e) {
+        return 'home';               // pathname unavailable — default home
+      }
+    }
+
+    /* ---- On initial load: show the page matching the URL ---- */
+    (function init() {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      var startPage = pageFromPath();
+      showPage(startPage, false);     // don't push on first load
+    })();
+  </script>
+</body>
+</html>

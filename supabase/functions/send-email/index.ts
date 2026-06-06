@@ -1,5 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { errorResponse, requireAdminOrServiceRole } from "../_shared/auth.ts"
 
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -12,6 +13,8 @@ serve(async (req) => {
     }
 
     try {
+        await requireAdminOrServiceRole(req)
+
         const { to, subject, html, text, from_name } = await req.json()
         const SENDGRID_API_KEY = Deno.env.get('SENDGRID_API_KEY')
         const FROM_EMAIL = Deno.env.get('SENDGRID_FROM_EMAIL') || 'emergencytradesmen@outlook.com'
@@ -67,13 +70,7 @@ serve(async (req) => {
         )
 
     } catch (error) {
-        return new Response(
-            JSON.stringify({ error: error.message }),
-            {
-                headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-                status: 500
-            }
-        )
+        return errorResponse(error, corsHeaders)
     }
 })
 

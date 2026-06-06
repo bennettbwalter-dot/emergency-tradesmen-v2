@@ -100,8 +100,11 @@ export default function About() {
                             <div className="relative animate-fade-up-delay-1">
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/50 aspect-[4/3]">
                                     <img
-                                        src="/images/about/team.webp"
+                                        src="/images/about/emergency-team-hero.webp"
                                         alt={`Our team of professional ${tradeTerm.toLowerCase()}`}
+                                        loading="eager"
+                                        decoding="async"
+                                        fetchPriority="high"
                                         className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -187,7 +190,7 @@ export default function About() {
                             <div className="order-2 md:order-1 relative">
                                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/50 aspect-video">
                                     <img
-                                        src="/images/about/plumber.webp"
+                                        src="/images/about/about-plumber-bathroom.webp"
                                         alt={`Emergency ${termSingular} fixing a pipe`}
                                         className="object-cover w-full h-full"
                                     />
@@ -230,9 +233,9 @@ export default function About() {
                             <div className="relative">
                                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border/50 aspect-video">
                                     <img
-                                        src="/images/about/electrician.webp"
+                                        src="/images/about/about-electrician-panel.webp"
                                         alt={`Certified ${termSingular} working on a panel`}
-                                        className="object-cover w-full h-full"
+                                        className="object-cover object-center w-full h-full"
                                     />
                                 </div>
                             </div>

@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import {
-  HelpCircle,
   Menu,
 } from "lucide-react";
 import { GuestGate } from "@/components/GuestGate";
-import { EmergencyChatInterface } from "@/components/EmergencyChatInterface";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SEO } from "@/components/SEO";
@@ -16,7 +14,13 @@ import { useSimpleTheme } from "@/components/simple-theme";
 import { FloatingTourHub } from "@/components/FloatingTourHub";
 import { SiteSidePanel } from "@/components/SiteSidePanel";
 import { Link } from "react-router-dom";
-import SoftAurora from "./SoftAurora";
+
+const EmergencyChatInterface = lazy(() =>
+  import("@/components/EmergencyChatInterface").then((module) => ({
+    default: module.EmergencyChatInterface,
+  }))
+);
+const SoftAurora = lazy(() => import("./SoftAurora"));
 
 const emergencyTrustSteps = [
   "Tell us the emergency",
@@ -58,7 +62,10 @@ export default function HomeSearch() {
   const sidebar = (
     <SiteSidePanel
       mode="home"
-      onNavigate={() => setDrawerOpen(false)}
+      onNavigate={() => {
+        setDrawerOpen(false);
+        setDesktopSidebarOpen(false);
+      }}
       onClose={() => {
         setDrawerOpen(false);
         setDesktopSidebarOpen(false);
@@ -87,22 +94,24 @@ export default function HomeSearch() {
           <section className="relative min-w-0 flex-1 overflow-hidden">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.16),transparent_30%),radial-gradient(circle_at_50%_70%,rgba(15,23,42,0.08),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.55),transparent_36%)] dark:bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.14),transparent_30%),radial-gradient(circle_at_50%_70%,rgba(18,55,92,0.28),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_30%)]" />
             <div className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-30 z-0">
-              <SoftAurora
-                speed={0.6}
-                scale={1.5}
-                brightness={1}
-                color1={theme === "dark" ? "#f7f7f7" : "#000000"}
-                color2="#EAB308"
-                noiseFrequency={2.5}
-                noiseAmplitude={1}
-                bandHeight={0.5}
-                bandSpread={1}
-                octaveDecay={0.1}
-                layerOffset={0}
-                colorSpeed={1}
-                enableMouseInteraction
-                mouseInfluence={0.25}
-              />
+              <Suspense fallback={null}>
+                <SoftAurora
+                  speed={0.6}
+                  scale={1.5}
+                  brightness={1}
+                  color1={theme === "dark" ? "#f7f7f7" : "#000000"}
+                  color2="#EAB308"
+                  noiseFrequency={2.5}
+                  noiseAmplitude={1}
+                  bandHeight={0.5}
+                  bandSpread={1}
+                  octaveDecay={0.1}
+                  layerOffset={0}
+                  colorSpeed={1}
+                  enableMouseInteraction
+                  mouseInfluence={0.25}
+                />
+              </Suspense>
             </div>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
             <div className="relative mx-auto flex min-h-screen w-full flex-col px-4 py-5 sm:px-6 lg:px-8">
@@ -134,8 +143,14 @@ export default function HomeSearch() {
                         <SheetDescription className="sr-only">Main website navigation, account links, business tools, and emergency search.</SheetDescription>
                         <SiteSidePanel
                           mode="home"
-                          onNavigate={() => setDrawerOpen(false)}
-                          onClose={() => setDrawerOpen(false)}
+                          onNavigate={() => {
+                            setDrawerOpen(false);
+                            setDesktopSidebarOpen(false);
+                          }}
+                          onClose={() => {
+                            setDrawerOpen(false);
+                            setDesktopSidebarOpen(false);
+                          }}
                           showCloseButton={false}
                         />
                       </SheetContent>
@@ -146,29 +161,20 @@ export default function HomeSearch() {
                 <div className="hidden md:flex items-center justify-center flex-1">
                   <Link
                     to={pricingRoute}
-                    className="flex items-center gap-2 px-5 py-2 rounded-full border border-gold/35 bg-gold/5 text-gold hover:bg-gold hover:text-black dark:border-gold/30 dark:bg-gold/10 transition-all duration-300 font-display text-xs font-black uppercase tracking-[0.14em] shadow-[0_0_24px_rgba(212,175,55,0.06)] hover:shadow-[0_0_24px_rgba(212,175,55,0.22)]"
+                    onClick={() => {
+                      setDrawerOpen(false);
+                      setDesktopSidebarOpen(false);
+                    }}
+                    className="rounded-full px-4 py-2 font-display text-[11px] font-black uppercase tracking-[0.16em] text-gold/90 transition-all duration-300 hover:bg-gold/10 hover:text-gold"
                   >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
-                    </span>
                     <span>Pro Sign-Up</span>
                   </Link>
                 </div>
 
                 {/* Quick controls in top right corner */}
-                <div className="flex items-center gap-3">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => window.dispatchEvent(new Event('start-tour'))}
-                    className="border-slate-950/15 bg-white/70 text-slate-950 hover:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 rounded-full"
-                    title="Interactive Help Tour"
-                  >
-                    <HelpCircle className="h-5 w-5 text-gold animate-pulse" />
-                  </Button>
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <UserMenu />
-                  <ModeToggle />
+                  <ModeToggle className="hidden border-transparent bg-transparent sm:inline-flex" />
                 </div>
               </div>
 
@@ -192,7 +198,13 @@ export default function HomeSearch() {
                   </div>
                   <div className="relative mx-auto max-w-[60rem]">
                     <div className="pointer-events-none absolute -inset-x-12 -top-12 h-32 rounded-full bg-gold/10 blur-3xl" />
-                    <EmergencyChatInterface launchMode="direct" surface="search" />
+                    <Suspense
+                      fallback={
+                        <div className="min-h-[360px] rounded-2xl border border-slate-950/10 bg-white/80 shadow-xl dark:border-white/10 dark:bg-white/5" />
+                      }
+                    >
+                      <EmergencyChatInterface launchMode="direct" surface="search" />
+                    </Suspense>
                   </div>
                 </div>
               </div>

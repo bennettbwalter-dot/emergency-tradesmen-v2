@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlassSocialIcon } from "@/components/ui/GlassSocialIcon";
+import { AlertSidebarButton } from "@/components/alerts/AlertSidebarButton";
 import { useChatbot } from "@/contexts/ChatbotContext";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { getSocialUrls, isUSDomain as getIsUSDomain } from "@/lib/siteConfig";
@@ -58,9 +59,9 @@ export function SiteSidePanel({
   const siteTradeTerm = isUS ? "Contractors" : "Tradesmen";
   const findLabel = isUS ? "Find a contractor" : "Find a trade";
   const signupLabel = "Pro Sign-Up";
-  const servicePageLabel = isUS ? "Build a Website" : "Website Services";
+  const servicePageLabel = "Pro Plans";
   const websiteServicesRoute = isUS ? "/for-contractors/website-showroom" : "/for-tradesmen/website-showroom";
-  const serviceRoute = isUS ? "/for-contractors" : "/for-tradesmen";
+  const serviceRoute = `${countryPrefix}/pricing`;
   const contactRoute = isUSDomain ? "/contact" : isUS ? "/us/contact" : "/contact";
   const pricingRoute = `${countryPrefix}/pricing`;
   const resolvedCity = detectedCity || geoCity;
@@ -170,6 +171,7 @@ export function SiteSidePanel({
           <MapPin className={cn(sideIconClass, "text-rose-500 dark:text-rose-300")} />
           Locations
         </Link>
+        <AlertSidebarButton onNavigate={closeForNavigation} />
         <Link to="/landing" className={navItemClass("/landing")} onClick={closeForNavigation}>
           <Globe2 className={cn(sideIconClass, "text-teal-500 dark:text-teal-300")} />
           Landing Page

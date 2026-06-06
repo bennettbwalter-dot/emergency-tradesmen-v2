@@ -30,6 +30,7 @@ import { trackEvent } from "@/lib/analytics";
 import { ShareMenu } from "@/components/ShareMenu";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { getStateForCity } from "@/lib/usCityStates";
+import { LocalAreaBackdrop } from "@/components/earth/LocalAreaBackdrop";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
@@ -283,6 +284,13 @@ export default function BusinessProfilePage() {
     const heroBgImage = business.header_image_url || ((tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default);
 
     const representativeImage = business.vehicle_image_url || ((tradeRepresentativeImages as any)[trade] || tradeRepresentativeImages.default);
+    const businessRegion = isUS ? getStateForCity(city) : countryCode;
+    const businessMapLocation = [
+        business.address,
+        formattedCity,
+        businessRegion
+    ].filter(Boolean).join(", ");
+    const businessMapFocusDescription = `Focused on ${formattedCity}${businessRegion && isUS ? `, ${businessRegion}` : ''}`;
 
     const siteDomain = isUSDomain ? 'https://emergencycontractors.net' : 'https://emergencytradesmen.net';
 
@@ -401,14 +409,18 @@ export default function BusinessProfilePage() {
                 <section className="relative min-h-[500px] md:h-[650px] overflow-hidden flex flex-col justify-end pt-10">
                     {/* Background Overlay */}
                     <div className="absolute inset-0 z-0">
-                        <div className="absolute inset-0 bg-background/95 backdrop-blur-sm"></div>
-                        {/* Moody road background */}
-                        <img
-                            src={heroBgImage}
-                            className="w-full h-full object-cover opacity-30 blur-[2px]"
-                            alt={`${business.name} - ${formattedTrade} services in ${formattedCity} background`}
+                        <LocalAreaBackdrop
+                            lat={business.latitude}
+                            lng={business.longitude}
+                            fallbackImage={heroBgImage}
+                            label={`${business.name} ${formattedCity}`}
+                            location={businessMapLocation}
+                            focusLabel={`${business.name} local area`}
+                            focusDescription={businessMapFocusDescription}
+                            interactive={false}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+                        <div className="absolute inset-0 bg-background/55 backdrop-blur-[1px]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/72 to-background/18"></div>
                     </div>
 
                     <div className="container-wide relative z-10 pb-16">

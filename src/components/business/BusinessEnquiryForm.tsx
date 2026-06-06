@@ -4,10 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { getSupportEmail } from "@/lib/siteConfig";
 
 type Region = "UK" | "US";
 type EnquiryType = "Claim free listing" | "Upgrade listing" | "Get a website built";
-type PackageName = "Starter Website" | "Growth Website" | "Emergency Lead Website" | "Not sure yet";
+type PackageName = "Free website build with Pro Yearly" | "Free website build with Agency / Multi-Location" | "Not sure yet";
+
+const githubTemplateOptions = [
+  "Not sure yet - choose the best website example",
+  "Emergency Plumber Website",
+  "Breakdown Recovery Website",
+  "Emergency Locksmith Website",
+  "Roofing4Women Website",
+  "Master Builder Website",
+  "HVAC Website",
+];
 
 type BusinessEnquiryFormProps = {
   region: Region;
@@ -23,11 +34,12 @@ export function BusinessEnquiryForm({
   region,
   defaultEnquiryType = "Get a website built",
   defaultPackage = "Not sure yet",
-  defaultTradeStyle = "",
+  defaultTradeStyle = githubTemplateOptions[0],
   prefillBusinessName = "",
   prefillListingUrl = "",
   onSuccess,
 }: BusinessEnquiryFormProps) {
+  const supportEmail = getSupportEmail();
   const representativeCopy = region === "US"
     ? "I confirm I am the owner, employee, or authorized representative of this business."
     : "I confirm I am the owner, employee, or authorised representative of this business.";
@@ -71,6 +83,33 @@ export function BusinessEnquiryForm({
     setStatus("submitting");
     setError("");
 
+    const websiteBuildDetails = enquiryType === "Get a website built"
+      ? {
+          trade: String(form.get("trade") || "").trim(),
+          location: String(form.get("location") || "").trim(),
+          services: String(form.get("services") || "").trim(),
+          opening_hours: String(form.get("opening_hours") || "").trim(),
+          emergency_cta: String(form.get("emergency_cta") || "").trim(),
+          brand_colours: String(form.get("brand_colours") || "").trim(),
+          asset_links: String(form.get("asset_links") || "").trim(),
+          github_handover: String(form.get("github_handover") || "").trim(),
+        }
+      : undefined;
+    const websiteDetailsMessage = websiteBuildDetails
+      ? [
+          "Website build brief:",
+          `Trade: ${websiteBuildDetails.trade || "Not provided"}`,
+          `Location / areas covered: ${websiteBuildDetails.location || "Not provided"}`,
+          `Services: ${websiteBuildDetails.services || "Not provided"}`,
+          `Opening hours: ${websiteBuildDetails.opening_hours || "Not provided"}`,
+          `Emergency CTA: ${websiteBuildDetails.emergency_cta || "Not provided"}`,
+          `Colours: ${websiteBuildDetails.brand_colours || "Not provided"}`,
+          `Logo / image links: ${websiteBuildDetails.asset_links || "Not provided"}`,
+          `GitHub handover: ${websiteBuildDetails.github_handover || "Not provided"}`,
+        ].join("\n")
+      : "";
+    const customerMessage = String(form.get("message") || "").trim();
+
     const payload = {
       region,
       business_name: String(form.get("business_name") || "").trim(),
@@ -82,7 +121,8 @@ export function BusinessEnquiryForm({
       enquiry_type: enquiryType,
       interested_package: enquiryType === "Get a website built" ? interestedPackage : undefined,
       selected_trade_style: selectedTradeStyle,
-      message: String(form.get("message") || "").trim(),
+      message: [customerMessage, websiteDetailsMessage].filter(Boolean).join("\n\n"),
+      website_build_details: websiteBuildDetails,
       consent_given: true,
       authorized_representative_confirmed: enquiryType === "Claim free listing" ? form.get("authorized_representative_confirmed") === "on" : false,
       website_url_confirm: "",
@@ -110,7 +150,7 @@ export function BusinessEnquiryForm({
       onSuccess?.();
     } catch {
       setStatus("error");
-      setError("Something went wrong. Please try again or email emergencytradesmen@outlook.com.");
+      setError(`Something went wrong. Please try again or email ${supportEmail}.`);
     }
   };
 
@@ -143,8 +183,10 @@ export function BusinessEnquiryForm({
         <Input id="email" name="email" type="email" required />
       </div>
       <div>
-        <Label htmlFor="phone">Phone</Label>
-        <Input id="phone" name="phone" type="tel" required minLength={5} maxLength={30} />
+        <Label htmlFor="phone">
+          Phone {enquiryType === "Get a website built" && <span className="text-muted-foreground">(optional fallback)</span>}
+        </Label>
+        <Input id="phone" name="phone" type="tel" required={enquiryType !== "Get a website built"} minLength={5} maxLength={30} />
       </div>
       <div>
         <Label htmlFor="website">Website</Label>
@@ -160,19 +202,75 @@ export function BusinessEnquiryForm({
       </div>
       {enquiryType === "Get a website built" && (
         <div>
-          <Label htmlFor="interested_package">Interested package</Label>
+          <Label htmlFor="interested_package">Interested offer</Label>
           <select id="interested_package" value={interestedPackage} onChange={(event) => setInterestedPackage(event.target.value as PackageName)} className="h-10 w-full rounded-sm border border-input bg-background px-3 text-sm">
-            <option>Starter Website</option>
-            <option>Growth Website</option>
-            <option>Emergency Lead Website</option>
+            <option>Free website build with Pro Yearly</option>
+            <option>Free website build with Agency / Multi-Location</option>
             <option>Not sure yet</option>
           </select>
         </div>
       )}
-      {selectedTradeStyle && (
+      {enquiryType === "Get a website built" && (
         <div>
-          <Label htmlFor="selected_style_display">Selected website style</Label>
-          <Input id="selected_style_display" value={selectedTradeStyle} onChange={(event) => setSelectedTradeStyle(event.target.value)} />
+          <Label htmlFor="selected_style_display">Preferred website template</Label>
+          <select
+            id="selected_style_display"
+            value={selectedTradeStyle || githubTemplateOptions[0]}
+            onChange={(event) => setSelectedTradeStyle(event.target.value)}
+            className="h-10 w-full rounded-sm border border-input bg-background px-3 text-sm"
+          >
+            {githubTemplateOptions.map((template) => (
+              <option key={template}>{template}</option>
+            ))}
+          </select>
+        </div>
+      )}
+      {enquiryType === "Get a website built" && (
+        <div className="business-form-wide website-brief-panel">
+          <div>
+            <p className="text-sm font-bold text-foreground">Website build details</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Email is the main contact route. Phone is only a fallback if we cannot reach you by email. Add logo or image links here, or send files when replying to our email.
+            </p>
+          </div>
+          <div className="website-brief-grid">
+            <div>
+              <Label htmlFor="trade">Trade</Label>
+              <Input id="trade" name="trade" placeholder={region === "US" ? "Plumber, HVAC, locksmith..." : "Plumber, electrician, locksmith..."} />
+            </div>
+            <div>
+              <Label htmlFor="location">Location / areas covered</Label>
+              <Input id="location" name="location" placeholder={region === "US" ? "Brooklyn, Queens, Manhattan..." : "Leeds, Bradford, Wakefield..."} />
+            </div>
+            <div>
+              <Label htmlFor="opening_hours">Opening hours</Label>
+              <Input id="opening_hours" name="opening_hours" placeholder="24/7, Mon-Fri 8-6, weekends..." />
+            </div>
+            <div>
+              <Label htmlFor="emergency_cta">Emergency call-to-action</Label>
+              <Input id="emergency_cta" name="emergency_cta" placeholder="Call now for emergency help" />
+            </div>
+            <div>
+              <Label htmlFor="brand_colours">Website colours</Label>
+              <Input id="brand_colours" name="brand_colours" placeholder="Blue and white, black and gold..." />
+            </div>
+            <div>
+              <Label htmlFor="github_handover">Finished website handover</Label>
+              <select id="github_handover" name="github_handover" className="h-10 w-full rounded-sm border border-input bg-background px-3 text-sm">
+                <option>Send the finished website by GitHub repo if needed</option>
+                <option>I do not need GitHub handover</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <Label htmlFor="services">Services to show on the website</Label>
+            <Textarea id="services" name="services" rows={3} maxLength={1200} placeholder="Emergency plumbing, leaks, blocked toilets, boiler repairs..." />
+          </div>
+          <div>
+            <Label htmlFor="asset_links">Logo / image links</Label>
+            <Textarea id="asset_links" name="asset_links" rows={3} maxLength={1200} placeholder="Paste website, Google Drive, Dropbox, image, or logo links here. You can also send files by email after we reply." />
+          </div>
         </div>
       )}
       {listingUrl && (

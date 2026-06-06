@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ArrowRight, CheckCircle2, Globe2, PhoneCall, Server, ShieldCheck, Sparkles, Wrench } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, Gift, GitBranch, Globe2, PhoneCall, Server, ShieldCheck, Sparkles, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,46 +8,75 @@ import { Button } from "@/components/ui/button";
 import { BusinessEnquiryForm } from "@/components/business/BusinessEnquiryForm";
 
 type Region = "UK" | "US";
-type PackageName = "Starter Website" | "Growth Website" | "Emergency Lead Website" | "Not sure yet";
+type PackageName = "Free website build with Pro Yearly" | "Free website build with Agency / Multi-Location" | "Not sure yet";
 type EnquiryType = "Claim free listing" | "Upgrade listing" | "Get a website built";
 
 type BusinessWebsitePageProps = {
   region: Region;
 };
 
-const packages: Array<{
-  name: PackageName;
-  ukPrice: string;
-  usPrice: string;
-  description: string;
-  includes: string[];
-}> = [
+const freeWebsiteIncludes = [
+  "Business name, trade, location, phone number, and opening hours",
+  "Services, emergency call-to-action, and contact form",
+  "Logo, image, and website colours when available",
+  "Local service area and trust sections shaped around urgent customer intent",
+  "No upfront website build fee when you join Pro Yearly or Agency / Multi-Location",
+];
+
+const growthPackageIncludes = [
+  "Pro directory listing",
+  "Better visibility",
+  "Priority placement",
+  "More trust with customers",
+  "Professional website included at no extra cost",
+];
+
+const githubTemplates = [
   {
-    name: "Starter Website",
-    ukPrice: "From \u00a3699 setup + \u00a349/mo",
-    usPrice: "Pricing available on request",
-    description: "Clean, professional, phone-first website, fast to launch.",
-    includes: ["1-3 page website", "Mobile-first design", "Call Now button", "Emergency service section", "Contact form", "Basic SEO setup", "Hosting and care plan"],
+    name: "Calm Water Systems",
+    repo: "bennettbwalter-dot/calm-water-systems",
+    sourceUrl: "https://github.com/bennettbwalter-dot/calm-water-systems",
+    bestFor: "Plumbers, drainage, water damage, heating, and calm emergency repair offers",
   },
   {
-    name: "Growth Website",
-    ukPrice: "From \u00a31,200 setup + \u00a389/mo",
-    usPrice: "Pricing available on request",
-    description: "Stronger local presence, service pages, reviews, and areas covered.",
-    includes: ["Everything in Starter", "5-page website", "Service pages", "Areas covered section", "Reviews section", "Photo gallery", "Google Business Profile checklist"],
+    name: "Redline Recovery Site",
+    repo: "bennettbwalter-dot/redline-recovery-site",
+    sourceUrl: "https://github.com/bennettbwalter-dot/redline-recovery-site",
+    bestFor: "Breakdown recovery, roadside help, urgent dispatch, and high-response trades",
   },
   {
-    name: "Emergency Lead Website",
-    ukPrice: "From \u00a31,800 setup + \u00a3149/mo",
-    usPrice: "Pricing available on request",
-    description: "Full local lead-generation system with emergency landing pages and area pages.",
-    includes: ["Everything in Growth", "Emergency landing pages", "Local area pages", "Lead capture form", "Call tracking-ready layout", "Review request flow", "Monthly content update"],
+    name: "v0 Compute Platform",
+    repo: "bennettbwalter-dot/v0-compute-the-platform-to-build",
+    sourceUrl: "https://github.com/bennettbwalter-dot/v0-compute-the-platform-to-build",
+    bestFor: "Locksmiths, security, access, technical services, and premium emergency pages",
+  },
+  {
+    name: "Roofing4Women",
+    repo: "static showroom template",
+    sourceUrl: "/showroom-templates/roofing4women/index.html",
+    bestFor: "Roofers, women-led trades, values-led service businesses, and clean blue-and-white roofing sites",
+    linkLabel: "View template preview",
+  },
+  {
+    name: "Halvorsen & Co. Master Builder",
+    repo: "static showroom template",
+    sourceUrl: "/showroom-templates/builder-halvorsen/index.html",
+    bestFor: "Builders, remodelers, commercial contractors, and project-led construction businesses",
+    linkLabel: "View template preview",
+  },
+  {
+    name: "Aurora Climate HVAC",
+    repo: "bennettbwalter-dot/v0-hvac-website-design",
+    sourceUrl: "/showroom-templates/hvac-aurora/index.html",
+    bestFor: "HVAC, air conditioning, heating, comfort plans, and seasonal service businesses",
+    linkLabel: "View template preview",
   },
 ];
 
 export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
   const [enquiryType, setEnquiryType] = useState<EnquiryType>("Get a website built");
   const [selectedPackage, setSelectedPackage] = useState<PackageName>("Not sure yet");
+  const [selectedTradeStyle, setSelectedTradeStyle] = useState("");
   const formRef = useRef<HTMLElement>(null);
   const isUS = region === "US";
   const brand = isUS ? "EmergencyContractors" : "EmergencyTradesmen";
@@ -57,9 +86,10 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
   const serviceAudience = isUS ? "contractors and home service businesses" : "local trades and home service businesses";
   const title = isUS ? "Emergency-Ready Websites for Local Contractors" : "Emergency-Ready Websites for Local Tradesmen";
 
-  const scrollToForm = (type: EnquiryType, packageName: PackageName = "Not sure yet") => {
+  const scrollToForm = (type: EnquiryType, packageName: PackageName = "Not sure yet", templateName = "") => {
     setEnquiryType(type);
     setSelectedPackage(packageName);
+    setSelectedTradeStyle(templateName);
     window.setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
 
@@ -81,7 +111,7 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
                 Phone-first websites built for {serviceAudience} who need more phone calls, not just a pretty homepage.
               </p>
               <p className="business-owner-copy">
-                Most websites look fine but do not help when someone needs urgent help. These websites are built around emergency intent, fast trust, direct contact, hosting, care, and manual follow-up.
+                The free website offer uses one of the approved templates already provided, then we customise it with your business name, trade, location, phone number, services, images, emergency CTA, contact form, hours, and colours where needed.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button className="min-h-12 bg-gold text-black hover:bg-gold-light" onClick={() => scrollToForm("Get a website built")}>
@@ -108,12 +138,34 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
           </div>
         </section>
 
+        <section className="container-wide px-4 py-12">
+          <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/10 p-6 md:flex md:items-center md:justify-between md:gap-8">
+            <div className="flex gap-4">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-emerald-500/15">
+                <Gift className="h-6 w-6 text-emerald-500" />
+              </div>
+              <div>
+                <p className="business-owner-kicker">Free website bonus</p>
+                <h2 className="font-display text-2xl font-bold md:text-3xl">
+                  Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  We use one of the approved templates you already provided, then customise it for the business. No random design, no starting from zero.
+                </p>
+              </div>
+            </div>
+            <Button asChild className="mt-5 shrink-0 bg-gold text-black hover:bg-gold-light md:mt-0">
+              <Link to="/pricing">View Pro Plans</Link>
+            </Button>
+          </div>
+        </section>
+
         <section className="container-wide px-4 py-16">
           <div className="grid gap-5 md:grid-cols-3">
             {[
               { title: "Phone-first design", copy: "Call Now and contact options are visible from the first screen.", Icon: PhoneCall },
               { title: isUS ? "Cities and states" : "Towns and cities", copy: "Pages can be structured around your services and local coverage.", Icon: Globe2 },
-              { title: "Hosting and care", copy: "Monthly care covers hosting, maintenance, small edits, and support.", Icon: Server },
+              { title: "Launch support", copy: "We agree the launch, hosting, and upkeep details with you before anything goes live.", Icon: Server },
             ].map(({ title: itemTitle, copy, Icon }) => (
               <div key={itemTitle} className="business-owner-feature">
                 <Icon className="h-6 w-6 text-gold" />
@@ -126,31 +178,84 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
 
         <section className="business-packages-section">
           <div className="container-wide px-4">
-            <div className="mb-10 max-w-3xl">
-              <p className="business-owner-kicker">Website packages</p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold">Built, hosted, and looked after for you</h2>
-              <p className="mt-4 text-muted-foreground">Choose a starting point. We follow up manually before anything is built or charged.</p>
+            <div className="mb-10 max-w-4xl">
+              <p className="business-owner-kicker">Included template build</p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold">Your emergency-ready website starts from one of the approved templates</h2>
+              <p className="mt-4 text-muted-foreground">
+                Sign up to Pro Yearly or Agency / Multi-Location and we will customise one of the GitHub templates below completely free. This keeps the offer fast, professional, and scalable.
+              </p>
             </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {packages.map((pkg) => (
-                <article key={pkg.name} className="business-package-card">
-                  <h3>{pkg.name}</h3>
-                  <p className="business-package-price">{isUS ? pkg.usPrice : pkg.ukPrice}</p>
-                  <p className="business-package-copy">{pkg.description}</p>
-                  <ul>
-                    {pkg.includes.map((item) => (
-                      <li key={item}><CheckCircle2 />{item}</li>
-                    ))}
-                  </ul>
-                  <Button className="mt-auto w-full bg-gold text-black hover:bg-gold-light" onClick={() => scrollToForm("Get a website built", pkg.name)}>
-                    Enquire About {pkg.name.replace(" Website", "")}
+            <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
+              <article className="business-package-card">
+                <h3>What we customise</h3>
+                <p className="business-package-copy">
+                  We do not rebuild the website from scratch each time. We take the closest approved template and swap in the business details that matter.
+                </p>
+                <ul>
+                  {freeWebsiteIncludes.map((item) => (
+                    <li key={item}><CheckCircle2 />{item}</li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-col gap-3 sm:flex-row">
+                  <Button asChild className="bg-gold text-black hover:bg-gold-light">
+                    <Link to="/pricing">View Pro Yearly</Link>
                   </Button>
+                  <Button variant="outline" onClick={() => scrollToForm("Get a website built", "Free website build with Pro Yearly", "Not sure yet - choose the best GitHub template")}>
+                    Ask About the Free Build
+                  </Button>
+                </div>
+              </article>
+
+              <article className="business-package-card border-emerald-500/30 bg-emerald-500/10">
+                <h3>No setup-price menu</h3>
+                <p className="business-package-copy">
+                  The offer is simple: join one of the higher-value plans and the website build is included as part of your visibility package.
+                </p>
+                <ul>
+                  {growthPackageIncludes.map((item) => (
+                    <li key={item}><CheckCircle2 />{item}</li>
+                  ))}
+                </ul>
+                <Button className="mt-auto bg-emerald-500 text-white hover:bg-emerald-600" onClick={() => scrollToForm("Claim free listing")}>
+                  Claim Your Listing First
+                </Button>
+              </article>
+            </div>
+            <div className="mt-8 grid gap-5 lg:grid-cols-3">
+              {githubTemplates.map((template) => (
+                <article key={template.repo} className="business-package-card">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="business-owner-kicker">GitHub template</p>
+                      <h3>{template.name}</h3>
+                    </div>
+                    <GitBranch className="h-5 w-5 shrink-0 text-gold" />
+                  </div>
+                  <p className="business-package-copy">{template.bestFor}</p>
+                  <ul>
+                    <li><CheckCircle2 />Source repo: {template.repo}</li>
+                    <li><CheckCircle2 />Customised with business details, services, CTA, form, hours, and colours</li>
+                    <li><CheckCircle2 />Used for Pro Yearly and Agency / Multi-Location free builds</li>
+                  </ul>
+                  <div className="mt-auto flex flex-col gap-3">
+                    <Button
+                      className="w-full bg-gold text-black hover:bg-gold-light"
+                      onClick={() => scrollToForm("Get a website built", "Free website build with Pro Yearly", template.name)}
+                    >
+                      Use {template.name}
+                    </Button>
+                    <a
+                      href={template.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-gold hover:underline"
+                    >
+                      {template.linkLabel || "View GitHub repo"} <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
                 </article>
               ))}
             </div>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Monthly care covers hosting, maintenance, small edits, and support. Larger redesigns, paid ads, and ongoing SEO campaigns are quoted separately.
-            </p>
           </div>
         </section>
 
@@ -172,9 +277,9 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
         <section className="container-wide px-4 pb-16">
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { title: "Design", copy: "A premium emergency-ready website style matched to your trade.", Icon: Sparkles },
-              { title: "Build", copy: "We write, structure, and assemble the pages around calls and enquiries.", Icon: Wrench },
-              { title: "Launch", copy: "Hosting, support, care, and small edits are included in the monthly plan.", Icon: ShieldCheck },
+              { title: "Template", copy: "We choose the closest approved template as the starting point.", Icon: Sparkles },
+              { title: "Customise", copy: "We swap in business details, services, local proof, images, colours, and emergency calls-to-action.", Icon: Wrench },
+              { title: "Launch", copy: "We get the site ready around your details, service area, and preferred customer contact route.", Icon: ShieldCheck },
             ].map(({ title: itemTitle, copy, Icon }) => (
               <div key={itemTitle} className="business-owner-feature">
                 <Icon className="h-6 w-6 text-gold" />
@@ -189,11 +294,20 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
           <div className="mx-auto max-w-3xl">
             <div className="mb-6 text-center">
               <h2 className="font-display text-4xl font-semibold">
-                {enquiryType === "Claim free listing" ? "Submit a Claim Request" : `Enquire About ${selectedPackage}`}
+                {enquiryType === "Claim free listing"
+                  ? "Submit a Claim Request"
+                  : selectedPackage === "Not sure yet"
+                    ? "Ask About the Free Website Build"
+                    : selectedPackage}
               </h2>
               <p className="mt-3 text-muted-foreground">This starts a manual enquiry. No payment is taken here.</p>
             </div>
-            <BusinessEnquiryForm region={region} defaultEnquiryType={enquiryType} defaultPackage={selectedPackage} />
+            <BusinessEnquiryForm
+              region={region}
+              defaultEnquiryType={enquiryType}
+              defaultPackage={selectedPackage}
+              defaultTradeStyle={selectedTradeStyle}
+            />
           </div>
         </section>
       </main>

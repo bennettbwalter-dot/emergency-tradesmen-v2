@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halvorsen &amp; Co. — Master Builders</title>
+  <meta name="description" content="Halvorsen & Co. is a full-service building contractor crafting bespoke residential and commercial spaces with precision, integrity, and timeless craftsmanship." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#f4f2ec",
+            foreground: "#272420",
+            charcoal: "#272420",
+            cream: "#f4f2ec",
+            card: "#faf8f3",
+            muted: "#75716a",
+            border: "#dcd8cf",
+            accent: "#d2814a",
+          },
+          fontFamily: {
+            sans: ['Archivo', 'system-ui', 'sans-serif'],
+            heading: ['Fraunces', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { background-color: #f4f2ec; }
+    .hero-overlay { background: linear-gradient(to right, rgba(39,36,32,0.85) 0%, rgba(39,36,32,0.55) 45%, rgba(39,36,32,0.2) 100%); }
+  </style>
+</head>
+<body class="bg-background font-sans text-foreground antialiased">
+
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <a href="#top" class="flex items-center gap-2">
+        <span class="flex h-9 w-9 items-center justify-center bg-charcoal font-heading text-lg font-semibold text-cream">H</span>
+        <span class="font-heading text-xl font-semibold tracking-tight">Halvorsen &amp; Co.</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-medium md:flex">
+        <a href="#services" class="text-muted transition-colors hover:text-foreground">Services</a>
+        <a href="#work" class="text-muted transition-colors hover:text-foreground">Our Work</a>
+        <a href="#process" class="text-muted transition-colors hover:text-foreground">Process</a>
+        <a href="#contact" class="text-muted transition-colors hover:text-foreground">Contact</a>
+      </nav>
+      <a href="#contact" class="hidden bg-charcoal px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:bg-accent md:inline-block">Request a Quote</a>
+      <button id="menuBtn" aria-label="Open menu" class="md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden border-t border-border/60 bg-background px-6 py-4 md:hidden">
+      <nav class="flex flex-col gap-4 text-sm font-medium">
+        <a href="#services" class="text-muted hover:text-foreground">Services</a>
+        <a href="#work" class="text-muted hover:text-foreground">Our Work</a>
+        <a href="#process" class="text-muted hover:text-foreground">Process</a>
+        <a href="#contact" class="text-muted hover:text-foreground">Contact</a>
+        <a href="#contact" class="mt-2 bg-charcoal px-5 py-2.5 text-center font-semibold text-cream">Request a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="relative flex min-h-screen items-center">
+    <img src="/showroom-templates/builder-halvorsen/assets/hero.png" alt="Luxury home under construction at golden hour" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative mx-auto w-full max-w-7xl px-6 pt-28 lg:px-10">
+      <div class="max-w-2xl">
+        <span class="inline-flex items-center gap-2 border border-cream/30 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-cream/90">Established 1986</span>
+        <h1 class="mt-6 font-heading text-5xl font-semibold leading-[1.05] text-cream text-balance sm:text-6xl lg:text-7xl">Building spaces that stand the test of time.</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">From custom residences to commercial landmarks, we deliver craftsmanship, integrity, and uncompromising quality on every project we touch.</p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#contact" class="bg-accent px-7 py-3.5 text-sm font-semibold text-charcoal transition-transform hover:-translate-y-0.5">Start Your Project</a>
+          <a href="#work" class="border border-cream/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-cream/10">View Our Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-charcoal text-cream">
+    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-6 py-14 lg:grid-cols-4 lg:px-10">
+      <div class="text-center"><p class="font-heading text-4xl font-semibold text-accent lg:text-5xl">38+</p><p class="mt-2 text-sm uppercase tracking-widest text-cream/70">Years Building</p></div>
+      <div class="text-center"><p class="font-heading text-4xl font-semibold text-accent lg:text-5xl">540</p><p class="mt-2 text-sm uppercase tracking-widest text-cream/70">Projects Delivered</p></div>
+      <div class="text-center"><p class="font-heading text-4xl font-semibold text-accent lg:text-5xl">96%</p><p class="mt-2 text-sm uppercase tracking-widest text-cream/70">Repeat Clients</p></div>
+      <div class="text-center"><p class="font-heading text-4xl font-semibold text-accent lg:text-5xl">42</p><p class="mt-2 text-sm uppercase tracking-widest text-cream/70">Industry Awards</p></div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+    <div class="max-w-2xl">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent">What We Do</span>
+      <h2 class="mt-4 font-heading text-4xl font-semibold leading-tight text-balance lg:text-5xl">Comprehensive building services, end to end.</h2>
+    </div>
+    <div class="mt-14 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      <div class="bg-card p-8 transition-colors hover:bg-background">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d2814a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3 class="mt-5 font-heading text-xl font-semibold">Custom Homes</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">Bespoke residences designed and built around how you live, down to the last detail.</p>
+      </div>
+      <div class="bg-card p-8 transition-colors hover:bg-background">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d2814a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg>
+        <h3 class="mt-5 font-heading text-xl font-semibold">Commercial Build</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">Offices, retail, and mixed-use developments delivered on time and on budget.</p>
+      </div>
+      <div class="bg-card p-8 transition-colors hover:bg-background">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d2814a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <h3 class="mt-5 font-heading text-xl font-semibold">Renovations</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">Kitchens, additions, and full remodels that breathe new life into existing spaces.</p>
+      </div>
+      <div class="bg-card p-8 transition-colors hover:bg-background">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d2814a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <h3 class="mt-5 font-heading text-xl font-semibold">Design &amp; Plan</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">Architectural planning and permitting handled in-house for a seamless process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Craftsmanship -->
+  <section class="bg-charcoal text-cream">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 lg:grid-cols-2 lg:px-10">
+      <div class="relative">
+        <img src="/showroom-templates/builder-halvorsen/assets/craftsmanship.png" alt="Skilled builder measuring and marking timber" class="aspect-[4/5] w-full object-cover" />
+        <div class="absolute -bottom-6 -right-6 hidden bg-accent px-8 py-6 text-charcoal sm:block">
+          <p class="font-heading text-3xl font-semibold">A+</p>
+          <p class="text-xs font-semibold uppercase tracking-widest">Rated &amp; Bonded</p>
+        </div>
+      </div>
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-accent">Our Craft</span>
+        <h2 class="mt-4 font-heading text-4xl font-semibold leading-tight text-balance lg:text-5xl">Every joint, every line, built by hand with intent.</h2>
+        <p class="mt-6 leading-relaxed text-cream/75">We treat each build as a generational investment. Our crews are seasoned tradespeople who take pride in the details others overlook, from structural integrity to the finish you run your hand across.</p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-start gap-3"><span class="mt-1 text-accent">&#10003;</span><span class="text-cream/85">Licensed, insured, and fully bonded crews</span></li>
+          <li class="flex items-start gap-3"><span class="mt-1 text-accent">&#10003;</span><span class="text-cream/85">Transparent fixed-price bidding, no surprises</span></li>
+          <li class="flex items-start gap-3"><span class="mt-1 text-accent">&#10003;</span><span class="text-cream/85">Lifetime workmanship warranty on structural work</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <span class="text-xs font-semibold uppercase tracking-widest text-accent">Selected Work</span>
+        <h2 class="mt-4 font-heading text-4xl font-semibold leading-tight text-balance lg:text-5xl">Projects we&apos;re proud to put our name on.</h2>
+      </div>
+      <a href="#contact" class="text-sm font-semibold text-foreground underline-offset-4 hover:text-accent hover:underline">Discuss your project &rarr;</a>
+    </div>
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <a href="#" class="group relative col-span-1 row-span-2 overflow-hidden lg:col-span-2">
+        <img src="/showroom-templates/builder-halvorsen/assets/project-residential.png" alt="Modern luxury residential home at dusk" class="h-full min-h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent"></div>
+        <div class="absolute bottom-0 p-8"><p class="text-xs font-semibold uppercase tracking-widest text-accent">Residential</p><h3 class="mt-2 font-heading text-2xl font-semibold text-cream">The Ridgeline Residence</h3></div>
+      </a>
+      <a href="#" class="group relative overflow-hidden">
+        <img src="/showroom-templates/builder-halvorsen/assets/project-commercial.png" alt="Modern commercial building facade" class="h-full min-h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent"></div>
+        <div class="absolute bottom-0 p-6"><p class="text-xs font-semibold uppercase tracking-widest text-accent">Commercial</p><h3 class="mt-1 font-heading text-xl font-semibold text-cream">Atrium Office Park</h3></div>
+      </a>
+      <a href="#" class="group relative overflow-hidden">
+        <img src="/showroom-templates/builder-halvorsen/assets/project-renovation.png" alt="Luxury modern kitchen renovation" class="h-full min-h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent"></div>
+        <div class="absolute bottom-0 p-6"><p class="text-xs font-semibold uppercase tracking-widest text-accent">Renovation</p><h3 class="mt-1 font-heading text-xl font-semibold text-cream">Harborview Kitchen</h3></div>
+      </a>
+      <a href="#" class="group relative overflow-hidden sm:col-span-2 lg:col-span-3">
+        <img src="/showroom-templates/builder-halvorsen/assets/project-development.png" alt="Large construction site with steel structure and cranes" class="h-full min-h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent"></div>
+        <div class="absolute bottom-0 p-8"><p class="text-xs font-semibold uppercase tracking-widest text-accent">Development</p><h3 class="mt-2 font-heading text-2xl font-semibold text-cream">Eastside Mixed-Use Tower</h3></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="bg-card">
+    <div class="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div class="max-w-2xl">
+        <span class="text-xs font-semibold uppercase tracking-widest text-accent">How We Work</span>
+        <h2 class="mt-4 font-heading text-4xl font-semibold leading-tight text-balance lg:text-5xl">A clear path from blueprint to handover.</h2>
+      </div>
+      <div class="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-background p-8"><span class="font-heading text-5xl font-semibold text-border">01</span><h3 class="mt-4 font-heading text-xl font-semibold">Consult</h3><p class="mt-3 text-sm leading-relaxed text-muted">We listen to your vision, budget, and timeline to scope the project.</p></div>
+        <div class="bg-background p-8"><span class="font-heading text-5xl font-semibold text-border">02</span><h3 class="mt-4 font-heading text-xl font-semibold">Design</h3><p class="mt-3 text-sm leading-relaxed text-muted">Plans, permits, and a transparent fixed-price bid, all in writing.</p></div>
+        <div class="bg-background p-8"><span class="font-heading text-5xl font-semibold text-border">03</span><h3 class="mt-4 font-heading text-xl font-semibold">Build</h3><p class="mt-3 text-sm leading-relaxed text-muted">Dedicated crews and weekly updates keep you informed throughout.</p></div>
+        <div class="bg-background p-8"><span class="font-heading text-5xl font-semibold text-border">04</span><h3 class="mt-4 font-heading text-xl font-semibold">Handover</h3><p class="mt-3 text-sm leading-relaxed text-muted">A final walkthrough, warranty, and a space built to last for decades.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="bg-accent text-charcoal">
+    <div class="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10">
+      <p class="font-heading text-2xl font-medium leading-relaxed text-balance sm:text-3xl">&ldquo;Halvorsen &amp; Co. delivered our home exactly as promised, on schedule and beyond the quality we imagined. Their crew treated the project like it was their own.&rdquo;</p>
+      <p class="mt-8 text-sm font-semibold uppercase tracking-widest">Margaret &amp; David Lin — Ridgeline Residence</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+    <div class="grid gap-14 lg:grid-cols-2">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-accent">Get In Touch</span>
+        <h2 class="mt-4 font-heading text-4xl font-semibold leading-tight text-balance lg:text-5xl">Let&apos;s build something that lasts.</h2>
+        <p class="mt-6 max-w-md leading-relaxed text-muted">Tell us about your project and we&apos;ll get back to you within one business day to schedule a consultation.</p>
+        <div class="mt-10 space-y-5 text-sm">
+          <p class="flex items-center gap-3"><span class="font-semibold uppercase tracking-widest text-muted">Phone</span> (555) 482-1900</p>
+          <p class="flex items-center gap-3"><span class="font-semibold uppercase tracking-widest text-muted">Email</span> build@halvorsenco.com</p>
+          <p class="flex items-center gap-3"><span class="font-semibold uppercase tracking-widest text-muted">Office</span> 1420 Mill Street, Portland, OR</p>
+        </div>
+      </div>
+      <form class="space-y-5" onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsg').classList.remove('hidden');">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="name" class="text-sm font-medium">Name</label>
+            <input id="name" name="name" type="text" required class="mt-2 w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-accent" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email" class="text-sm font-medium">Email</label>
+            <input id="email" name="email" type="email" required class="mt-2 w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-accent" placeholder="you@email.com" />
+          </div>
+        </div>
+        <div>
+          <label for="type" class="text-sm font-medium">Project Type</label>
+          <select id="type" name="type" class="mt-2 w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-accent">
+            <option>Custom Home</option>
+            <option>Commercial Build</option>
+            <option>Renovation</option>
+            <option>Design &amp; Planning</option>
+          </select>
+        </div>
+        <div>
+          <label for="message" class="text-sm font-medium">Project Details</label>
+          <textarea id="message" name="message" rows="4" class="mt-2 w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-accent" placeholder="Tell us about your vision, budget, and timeline."></textarea>
+        </div>
+        <button type="submit" class="w-full bg-charcoal px-6 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-accent hover:text-charcoal">Request a Quote</button>
+        <p id="formMsg" class="hidden text-sm font-medium text-accent">Thanks — we&apos;ll be in touch within one business day.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-cream">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+      <div class="grid gap-10 md:grid-cols-4">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2">
+            <span class="flex h-9 w-9 items-center justify-center bg-accent font-heading text-lg font-semibold text-charcoal">H</span>
+            <span class="font-heading text-xl font-semibold">Halvorsen &amp; Co.</span>
+          </div>
+          <p class="mt-5 max-w-sm text-sm leading-relaxed text-cream/70">Master builders crafting bespoke residential and commercial spaces with precision and integrity since 1986.</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-cream/60">Company</p>
+          <ul class="mt-4 space-y-3 text-sm text-cream/80">
+            <li><a href="#services" class="hover:text-accent">Services</a></li>
+            <li><a href="#work" class="hover:text-accent">Our Work</a></li>
+            <li><a href="#process" class="hover:text-accent">Process</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-cream/60">Contact</p>
+          <ul class="mt-4 space-y-3 text-sm text-cream/80">
+            <li>(555) 482-1900</li>
+            <li>build@halvorsenco.com</li>
+            <li>Portland, OR</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream/15 pt-8 text-xs text-cream/60 sm:flex-row">
+        <p>&copy; 2026 Halvorsen &amp; Co. Builders. All rights reserved.</p>
+        <p>License #OR-CCB-204881 · Licensed, Bonded &amp; Insured</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.classList.add('hidden')));
+  </script>
+</body>
+</html>

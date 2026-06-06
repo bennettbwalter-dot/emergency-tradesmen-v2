@@ -17,11 +17,14 @@ Disallow: /verify-documents
 User-agent: Googlebot
 Allow: /
 Allow: /blog/
-Allow: /us/blog/
 Allow: /emergency-*
-Allow: /us/emergency-*
 Disallow: /admin
+Disallow: /admin/*
 Disallow: /user/dashboard
+Disallow: /premium-profile
+Disallow: /payment/
+Disallow: /auth/
+Disallow: /verify-documents
 
 # Googlebot-Image Optimized
 User-agent: Googlebot-Image

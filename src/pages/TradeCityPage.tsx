@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import { AdSlot } from "@/components/AdSlot";
 import { AvailabilityCarousel } from "@/components/AvailabilityCarousel";
 import { HomeEmergencyAd } from "@/components/HomeEmergencyAd";
+import { LiveLocalAlerts } from "@/components/alerts/LiveLocalAlerts";
 
 // Lazy load heavy map component
 const InteractiveMap = lazy(() => import("@/components/InteractiveMap").then(module => ({ default: module.InteractiveMap })));
@@ -310,6 +311,34 @@ export default function TradeCityPage() {
   const totalPages = Math.ceil(resultsCount / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentBusinesses = sortedBusinesses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const heroFocusBusiness = (
+    currentBusinesses.find((business) => Number.isFinite(business.latitude) && Number.isFinite(business.longitude)) ||
+    sortedBusinesses.find((business) => Number.isFinite(business.latitude) && Number.isFinite(business.longitude)) ||
+    currentBusinesses[0] ||
+    sortedBusinesses[0]
+  );
+  const heroFocusLat = Number.isFinite(heroFocusBusiness?.latitude)
+    ? heroFocusBusiness?.latitude
+    : earthBackdropLat;
+  const heroFocusLng = Number.isFinite(heroFocusBusiness?.longitude)
+    ? heroFocusBusiness?.longitude
+    : earthBackdropLng;
+  const heroStateCode = actualCountry === 'US'
+    ? ((effectiveState || cityToState[cityName] || '').toUpperCase())
+    : '';
+  const heroFocusLocation = heroFocusBusiness
+    ? [
+      heroFocusBusiness.address,
+      heroFocusBusiness.city || cityName,
+      heroStateCode || actualCountry
+    ].filter(Boolean).join(", ")
+    : (queryParams.get('earthLocation') || cityName);
+  const heroFocusLabel = heroFocusBusiness
+    ? `${heroFocusBusiness.name} local area`
+    : (pageData?.problem ? `${pageData.problem.name} around ${cityName}` : `${cityName} local area`);
+  const heroFocusDescription = heroFocusBusiness
+    ? `Focused on ${heroFocusBusiness.city || cityName}${heroStateCode ? `, ${heroStateCode}` : ''}`
+    : `Focused on ${cityName}${heroStateCode ? `, ${heroStateCode}` : ''}`;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -328,9 +357,7 @@ export default function TradeCityPage() {
 
   // Guard: Only allow known trade slugs — reject non-trade paths like 'blog', 'about', etc.
   const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'roofer', 'breakdown', 'builder', 'water-restoration', 'hvac', 'pest-control', 'handyman', 'joiner', 'default'];
-  if (!validatedTradePath || (!knownTrades.includes(validatedTradePath) && !pageData?.trade)) {
-    return <Navigate to="/" replace />;
-  }
+  const shouldRedirectInvalidTrade = !validatedTradePath || (!knownTrades.includes(validatedTradePath) && !pageData?.trade);
 
   // Extract public review snippets from the listings
   const realReviews = businesses
@@ -504,9 +531,10 @@ export default function TradeCityPage() {
   }), [baseDomain, tradeInfo.slug, cityName, tradeDisplayName, citySlug, isUS, stateCode]);
 
   // FIXED: Ensure coordinates are resolved correctly for map centering
+  const seoTradePath = `emergency-${tradeInfo.slug}`;
   const canonicalPath = isUS
-    ? (isUSDomain ? `/${effectiveTradePath}/${citySlug}` : `/us/${effectiveTradePath}/${citySlug}`)
-    : `/${effectiveTradePath}/${citySlug}`;
+    ? (isUSDomain ? `/${seoTradePath}/${citySlug}` : `/us/${seoTradePath}/${citySlug}`)
+    : `/${seoTradePath}/${citySlug}`;
 
   // --- Enhanced Titles for Long-Tail "Near Me" Ranking ---
   const localTerm = isUS ? 'Contractors' : 'Tradesmen';
@@ -565,6 +593,19 @@ export default function TradeCityPage() {
       ])
     ];
 
+  const listingTradeSingular = tradeDisplayName.toLowerCase();
+  const listingTradePlural = listingTradeSingular.endsWith('s')
+    ? listingTradeSingular
+    : `${listingTradeSingular}s`;
+  const listingTradeLabel = resultsCount === 1 ? listingTradeSingular : listingTradePlural;
+  const localResultsText = totalCount === resultsCount
+    ? `Found ${resultsCount} ${listingTradeLabel} near ${cityName}`
+    : `Found ${resultsCount} of ${totalCount} ${listingTradeLabel} near ${cityName}`;
+
+  if (shouldRedirectInvalidTrade) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <>
       <SEO
@@ -583,9 +624,9 @@ export default function TradeCityPage() {
           }
         } : {})}
         alternates={[
-          { lang: 'en-GB', href: `https://emergencytradesmen.net/${effectiveTradePath}/${citySlug}` },
-          { lang: 'en-US', href: `https://emergencycontractors.net/${effectiveTradePath}/${citySlug}` },
-          { lang: 'x-default', href: `https://emergencytradesmen.net/${effectiveTradePath}/${citySlug}` }
+          { lang: 'en-GB', href: `https://emergencytradesmen.net/${seoTradePath}/${citySlug}` },
+          { lang: 'en-US', href: `https://emergencycontractors.net/${seoTradePath}/${citySlug}` },
+          { lang: 'x-default', href: `https://emergencytradesmen.net/${seoTradePath}/${citySlug}` }
         ]}
       />
 
@@ -597,21 +638,23 @@ export default function TradeCityPage() {
         {/* Interactive local-area header */}
         <section className="relative h-[62svh] min-h-[440px] max-h-[760px] overflow-hidden bg-black">
           <LocalAreaBackdrop
-            lat={Number.isFinite(earthBackdropLat) ? earthBackdropLat : cityCoords?.lat}
-            lng={Number.isFinite(earthBackdropLng) ? earthBackdropLng : cityCoords?.lng}
+            lat={Number.isFinite(heroFocusLat) ? heroFocusLat : cityCoords?.lat}
+            lng={Number.isFinite(heroFocusLng) ? heroFocusLng : cityCoords?.lng}
             zoom={Number.isFinite(earthZoom) ? earthZoom : undefined}
             pitch={Number.isFinite(earthPitch) ? earthPitch : undefined}
             bearing={Number.isFinite(earthBearing) ? earthBearing : undefined}
             fallbackImage={heroImage}
             label={pageData?.problem ? `${pageData.problem.name} ${cityName}` : `Emergency ${tradeDisplayName} ${cityName}`}
-            location={queryParams.get('earthLocation') || cityName}
+            location={heroFocusLocation}
+            focusLabel={heroFocusLabel}
+            focusDescription={heroFocusDescription}
             interactive
           />
           <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-background/90 via-background/30 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-background via-background/45 to-transparent" />
           <div className="pointer-events-none absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-gold/45 bg-background/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold shadow-[0_14px_40px_rgba(0,0,0,0.45)] backdrop-blur-md">
             <Navigation className="h-4 w-4" />
-            Interactive street view: {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
+            Immersive local view: {heroFocusBusiness?.city || cityName}{heroStateCode ? `, ${heroStateCode}` : ''}
           </div>
         </section>
 
@@ -672,6 +715,15 @@ export default function TradeCityPage() {
           </div>
         </section>
 
+        <LiveLocalAlerts
+          city={cityName}
+          stateName={stateCode || effectiveState || null}
+          tradeSlug={tradeInfo.slug}
+          title={`Live ${tradeDisplayName} Alerts`}
+          description={`Official alerts around ${cityName}${isUS && stateCode ? `, ${stateCode}` : ''} that may affect emergency ${tradeDisplayName.toLowerCase()} demand.`}
+          className="border-y border-border/50"
+        />
+
         {/* Listings Section */}
         <section className="container-wide py-16 relative">
           {/* Background Grid */}
@@ -702,7 +754,7 @@ export default function TradeCityPage() {
               Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </h2>
             <p className="text-muted-foreground">
-              Found {totalCount} available experts nearby {resultsCount > ITEMS_PER_PAGE && `(Showing ${ITEMS_PER_PAGE} per page)`}
+              {localResultsText}{resultsCount > ITEMS_PER_PAGE && ` (showing ${ITEMS_PER_PAGE} per page)`}
             </p>
           </div>
 
@@ -721,14 +773,18 @@ export default function TradeCityPage() {
           ) : (
             <>
               <>
-                {businesses.length === 0 ? (
+                {resultsCount === 0 ? (
                   <div className="flex flex-col items-center justify-center py-24 bg-muted/10 rounded-xl border-2 border-dashed border-border/50 text-center px-6">
                     <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-4">
                       <Clock className="w-8 h-8 text-gold" />
                     </div>
-                    <h3 className="text-2xl font-display font-semibold mb-2">No listings yet in {cityName}</h3>
+                    <h3 className="text-2xl font-display font-semibold mb-2">
+                      {businesses.length > 0 ? `No matching listings in ${cityName}` : `No listings yet in ${cityName}`}
+                    </h3>
                     <p className="text-muted-foreground max-w-md mx-auto mb-6">
-                      We're expanding our public {tradeInfo.name.toLowerCase()} listings in this area. Claim or add your business here to get local calls.
+                      {businesses.length > 0
+                        ? "Try clearing the filters to see the local listings available for this area."
+                        : `We're expanding our public ${tradeInfo.name.toLowerCase()} listings in this area. Claim or add your business here to get local calls.`}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link

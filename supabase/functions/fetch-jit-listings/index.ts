@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 import * as cheerio from "https://esm.sh/cheerio@1.0.0-rc.12";
+import { errorResponse, requireAdminOrServiceRole } from "../_shared/auth.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -29,6 +30,8 @@ serve(async (req) => {
   }
 
   try {
+    await requireAdminOrServiceRole(req);
+
     const { city, state, trade, countryCode = 'us' } = await req.json();
 
     if (!city || !state || !trade) {
@@ -202,6 +205,9 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('[JIT] Fatal Error:', error);
+    if (error instanceof Error && 'status' in error) {
+      return errorResponse(error, corsHeaders);
+    }
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500,

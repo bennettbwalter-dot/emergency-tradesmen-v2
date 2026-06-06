@@ -115,7 +115,6 @@ const selectorTrades: SelectorTrade[] = [
   },
 ];
 
-const MAX_ACCEPTED_ACCURACY_METERS = 2500;
 const REVERSE_GEOCODE_TIMEOUT_MS = 2500;
 const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
 const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
@@ -131,15 +130,20 @@ function slugifyLocation(value: string) {
 
 function getBrowserPosition(): Promise<GeolocationPosition> {
   return new Promise((resolve, reject) => {
-    if (!navigator.geolocation) {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
       reject(new Error("Geolocation is not supported"));
+      return;
+    }
+
+    if (typeof window !== "undefined" && !window.isSecureContext && !["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+      reject(new Error("Location needs HTTPS"));
       return;
     }
 
     navigator.geolocation.getCurrentPosition(resolve, reject, {
       enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0,
+      timeout: 15000,
+      maximumAge: 60000,
     });
   });
 }
@@ -162,14 +166,31 @@ async function reverseGeocodeCity(lat: number, lng: number) {
   }
 }
 
-function isUsablePosition(position: GeolocationPosition) {
-  const accuracy = position.coords.accuracy;
-  return !Number.isFinite(accuracy) || accuracy <= MAX_ACCEPTED_ACCURACY_METERS;
-}
-
 function coordsWithinCountry(lat: number, lng: number, countryCode: "GB" | "US") {
   const bounds = countryCode === "US" ? US_BOUNDS : UK_BOUNDS;
   return lat >= bounds.minLat && lat <= bounds.maxLat && lng >= bounds.minLng && lng <= bounds.maxLng;
+}
+
+function getLocationErrorMessage(error: unknown) {
+  if (error instanceof Error && error.message === "Geolocation is not supported") {
+    return "Your browser does not support location. Choose your area manually.";
+  }
+  if (error instanceof Error && error.message === "Location needs HTTPS") {
+    return "Location needs a secure HTTPS connection. Choose your area manually.";
+  }
+  if (typeof error === "object" && error && "code" in error) {
+    const code = Number((error as GeolocationPositionError).code);
+    if (code === 1) {
+      return "Location access was blocked. Choose your area manually.";
+    }
+    if (code === 2) {
+      return "Your device could not provide a location. Check location services or choose your area manually.";
+    }
+    if (code === 3) {
+      return "Location took too long to load. Try again or choose your area manually.";
+    }
+  }
+  return "Unable to find your location right now. Choose your area manually.";
 }
 
 export function SoloTradeSelector() {
@@ -290,12 +311,18 @@ export function SoloTradeSelector() {
 
     try {
       const position = await getBrowserPosition();
-      const { latitude, longitude, accuracy } = position.coords;
+      const { latitude, longitude } = position.coords;
 
-      if (!isUsablePosition(position) || !coordsWithinCountry(latitude, longitude, settings.countryCode)) {
-        setLocationError(Number.isFinite(accuracy) && accuracy > MAX_ACCEPTED_ACCURACY_METERS
-          ? "Your phone only provided an approximate network location. Turn on precise location/GPS or choose your area manually."
-          : "Your phone location is unavailable. Choose your area manually.");
+      if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+        setLocationError("Your browser returned an invalid location. Choose your area manually.");
+        setLocatingSlug(null);
+        return;
+      }
+
+      if (!coordsWithinCountry(latitude, longitude, settings.countryCode)) {
+        setLocationError(settings.countryCode === "GB"
+          ? "This site only covers UK locations. Choose a UK area manually."
+          : "This site only covers USA locations. Choose a US area manually.");
         setLocatingSlug(null);
         return;
       }
@@ -308,7 +335,7 @@ export function SoloTradeSelector() {
         setDetectedCity(resolvedCity);
       }
     } catch (error) {
-      setLocationError("Location permission was denied or unavailable. Choose your area manually.");
+      setLocationError(getLocationErrorMessage(error));
       setLocatingSlug(null);
       return;
     }

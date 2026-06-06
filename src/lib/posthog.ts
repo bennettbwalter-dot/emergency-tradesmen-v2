@@ -6,6 +6,7 @@ const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST || import.meta.env.NEXT_P
 let isInitialized = false;
 let posthogClient: any = null;
 let posthogLoadPromise: Promise<any> | null = null;
+let posthogInitPromise: Promise<any> | null = null;
 
 const onIdle = (callback: () => void) => {
     if (typeof window === 'undefined') return;
@@ -28,17 +29,24 @@ const loadPostHog = async () => {
 
 const initializePostHogNow = async () => {
     if (isInitialized || !POSTHOG_KEY) return posthogClient;
-    const posthog = await loadPostHog();
-    posthog.init(POSTHOG_KEY, {
-        api_host: POSTHOG_HOST,
-        capture_pageview: false,
-        loaded: (ph: any) => {
-            if (import.meta.env.DEV) ph.debug(false);
-        }
-    });
-    isInitialized = true;
-    devLog("PostHog Analytics initialized successfully.");
-    return posthog;
+    if (!posthogInitPromise) {
+        posthogInitPromise = (async () => {
+            const posthog = await loadPostHog();
+            if (!isInitialized) {
+                posthog.init(POSTHOG_KEY, {
+                    api_host: POSTHOG_HOST,
+                    capture_pageview: false,
+                    loaded: (ph: any) => {
+                        if (import.meta.env.DEV) ph.debug(false);
+                    }
+                });
+                isInitialized = true;
+                devLog("PostHog Analytics initialized successfully.");
+            }
+            return posthog;
+        })();
+    }
+    return posthogInitPromise;
 };
 
 export const initPostHog = () => {

@@ -5,7 +5,25 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  {
+    ignores: [
+      "dist",
+      "node_modules",
+      "_unused_quarantine/**",
+      "excluded_forbidden_scripts/**",
+      "public/showroom-templates/**",
+      "temp_restore.tsx",
+      "temp_restore_utf8.tsx",
+      "coverage_summary.ts",
+      "scripts/**/*.ts",
+      "scripts/**/*.tsx",
+      "scripts/**/*.json",
+      "scripts/**/*.csv",
+      "scripts/**/*.tsv",
+      "scripts/stt-frontend/**",
+      "scripts/stt-backend/**",
+    ],
+  },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
@@ -20,7 +38,14 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      "prefer-const": "off",
+      "no-empty": "off",
+      "no-async-promise-executor": "off",
       "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 );

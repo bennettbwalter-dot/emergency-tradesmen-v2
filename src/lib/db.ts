@@ -126,25 +126,40 @@ export const db = {
             }
         }) {
             const userId = await getCurrentUserId();
-            if (!userId) throw new Error("User not logged in");
+            const urgencyLabelMap: Record<string, string> = {
+                emergency: "Emergency",
+                today: "Today",
+                "this-week": "This Week",
+                flexible: "Flexible",
+            };
 
-            const { data, error } = await supabase
+            const quoteRow = {
+                user_id: userId,
+                business_id: request.businessId,
+                customer_name: request.contact.name,
+                customer_email: request.contact.email,
+                customer_phone: request.contact.phone,
+                details: request.description,
+                urgency: urgencyLabelMap[request.urgency] || request.urgency || 'Standard',
+                status: 'pending'
+            };
+
+            const { error } = await supabase
                 .from('quotes')
-                .insert({
-                    user_id: userId,
-                    business_id: request.businessId,
-                    customer_name: request.contact.name,
-                    customer_email: request.contact.email,
-                    customer_phone: request.contact.phone,
-                    details: request.description,
-                    urgency: request.urgency,
-                    status: 'pending'
-                })
-                .select()
-                .single();
+                .insert(quoteRow);
 
             if (error) throw error;
-            return data as QuoteRequest;
+            return {
+                id: "",
+                user_id: userId || "",
+                business_id: request.businessId,
+                business_name: request.businessName,
+                trade_name: request.tradeName,
+                urgency: quoteRow.urgency,
+                description: request.description,
+                status: 'pending',
+                created_at: new Date().toISOString(),
+            } as QuoteRequest;
         },
 
         /**
@@ -178,33 +193,25 @@ export const db = {
         },
 
         /**
-         * Update quote status (scoped to current user's own quotes)
+         * Update quote status. Admin access is enforced by RLS.
          */
         async updateStatus(quoteId: string, status: string) {
-            const userId = await getCurrentUserId();
-            if (!userId) throw new Error("User not logged in");
-
             const { error } = await supabase
                 .from('quotes')
                 .update({ status })
-                .eq('id', quoteId)
-                .eq('user_id', userId);
+                .eq('id', quoteId);
 
             if (error) throw error;
         },
 
         /**
-         * Delete a quote (scoped to current user's own quotes)
+         * Delete a quote. Admin access is enforced by RLS.
          */
         async delete(quoteId: string) {
-            const userId = await getCurrentUserId();
-            if (!userId) throw new Error("User not logged in");
-
             const { error } = await supabase
                 .from('quotes')
                 .delete()
-                .eq('id', quoteId)
-                .eq('user_id', userId);
+                .eq('id', quoteId);
 
             if (error) throw error;
         }

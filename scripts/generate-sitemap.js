@@ -100,6 +100,13 @@ const usProblems = [
 const BASE_URL_GB = 'https://emergencytradesmen.net';
 const BASE_URL_US = 'https://emergencycontractors.net';
 
+const escapeXml = (value = '') => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+
 async function generateSitemap() {
     console.log('🔄 Fetching data from Supabase...');
 
@@ -167,13 +174,13 @@ async function generateSitemap() {
             urls.forEach(u => {
                 xml += `
   <url>
-    <loc>${u.loc}</loc>
-    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
-    ${u.changefreq ? `<changefreq>${u.changefreq}</changefreq>` : ''}
-    ${u.priority ? `<priority>${u.priority}</priority>` : ''}${u.images ? u.images.map(img => `
+    <loc>${escapeXml(u.loc)}</loc>
+    ${u.lastmod ? `<lastmod>${escapeXml(u.lastmod)}</lastmod>` : ''}
+    ${u.changefreq ? `<changefreq>${escapeXml(u.changefreq)}</changefreq>` : ''}
+    ${u.priority ? `<priority>${escapeXml(u.priority)}</priority>` : ''}${u.images ? u.images.map(img => `
     <image:image>
-      <image:loc>${img.loc}</image:loc>${img.title ? `
-      <image:title>${img.title}</image:title>` : ''}
+      <image:loc>${escapeXml(img.loc)}</image:loc>${img.title ? `
+      <image:title>${escapeXml(img.title)}</image:title>` : ''}
     </image:image>`).join('') : ''}
   </url>`;
             });
@@ -336,7 +343,7 @@ async function generateSitemap() {
         sitemapList.forEach(f => {
             indexXml += `
   <sitemap>
-    <loc>${baseUrl}/${f}</loc>
+    <loc>${escapeXml(`${baseUrl}/${f}`)}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
   </sitemap>`;
         });

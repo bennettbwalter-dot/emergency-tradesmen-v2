@@ -5,7 +5,6 @@ import { getSiteCountryCode } from "@/lib/siteConfig";
 
 const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
 const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
-const MAX_ACCEPTED_ACCURACY_METERS = 2500;
 
 interface GeolocationState {
     loading: boolean;
@@ -27,8 +26,19 @@ export function useGeolocation() {
     });
 
     const getLocation = useCallback(() => {
-        if (!navigator.geolocation) {
-            setState((prev) => ({ ...prev, error: "Geolocation is not supported by your browser" }));
+        if (typeof navigator === "undefined" || !navigator.geolocation) {
+            setState((prev) => ({
+                ...prev,
+                error: "Your browser does not support location. Type your town, city, postcode, or ZIP code manually.",
+            }));
+            return;
+        }
+
+        if (typeof window !== "undefined" && !window.isSecureContext && !["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+            setState((prev) => ({
+                ...prev,
+                error: "Location needs a secure HTTPS connection. Type your town, city, postcode, or ZIP code manually.",
+            }));
             return;
         }
 
@@ -36,11 +46,11 @@ export function useGeolocation() {
 
         navigator.geolocation.getCurrentPosition(
             async (position) => {
-                const { latitude, longitude, accuracy } = position.coords;
-                if (Number.isFinite(accuracy) && accuracy > MAX_ACCEPTED_ACCURACY_METERS) {
+                const { latitude, longitude } = position.coords;
+                if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
                     setState({
                         loading: false,
-                        error: "Your phone only provided an approximate network location. Turn on precise location/GPS or choose your area manually.",
+                        error: "Your browser returned an invalid location. Type your town, city, postcode, or ZIP code manually.",
                         place: null,
                     });
                     return;
@@ -60,6 +70,14 @@ export function useGeolocation() {
                 }
 
                 const nearestCity = findNearestCity(latitude, longitude, countryCode);
+                if (!nearestCity) {
+                    setState({
+                        loading: false,
+                        error: "Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.",
+                        place: null,
+                    });
+                    return;
+                }
 
                 devLog(`Nearest city: ${nearestCity.city} (${nearestCity.distance.toFixed(1)}km away)`);
 
@@ -74,13 +92,9 @@ export function useGeolocation() {
                 });
             },
             (error) => {
-                let errorMessage = "Unable to retrieve your location";
-                if (error.code === error.PERMISSION_DENIED) {
-                    errorMessage = "Location permission denied";
-                }
-                setState({ loading: false, error: errorMessage, place: null });
+                setState({ loading: false, error: getGeolocationErrorMessage(error), place: null });
             },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
         );
     }, []);
 
@@ -90,4 +104,17 @@ export function useGeolocation() {
 function coordsWithinCountry(lat: number, lng: number, countryCode: "GB" | "US"): boolean {
     const bounds = countryCode === "US" ? US_BOUNDS : UK_BOUNDS;
     return lat >= bounds.minLat && lat <= bounds.maxLat && lng >= bounds.minLng && lng <= bounds.maxLng;
+}
+
+function getGeolocationErrorMessage(error: GeolocationPositionError): string {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            return "Location access was blocked. Type your town, city, postcode, or ZIP code manually.";
+        case error.POSITION_UNAVAILABLE:
+            return "Your device could not provide a location. Check location services or type your area manually.";
+        case error.TIMEOUT:
+            return "Location took too long to load. Try Locate Me again or type your area manually.";
+        default:
+            return "Unable to find your location right now. Type your town, city, postcode, or ZIP code manually.";
+    }
 }

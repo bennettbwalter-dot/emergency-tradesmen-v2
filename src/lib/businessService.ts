@@ -3,14 +3,40 @@ import { devLog } from "@/lib/devLog";
 import type { Business } from './businesses';
 import { getBusinessById } from './businesses';
 import { usCities, cities } from './trades';
+import { cityCoordinates } from './cityCoordinates';
+import { usCityCoordinates } from './usCityCoordinates';
 import type { TrustEvidenceRow, TrustRegion } from "@/lib/trust/trustBadges";
 import { regionFromCountryCode } from "@/lib/trust/trustBadges";
 
 const PLACEHOLDER_NAMES = ['Pending Verification Profile', 'Your Business Name'];
-const isRealBusiness = (biz: any) => biz?.name && !PLACEHOLDER_NAMES.includes(biz.name) && biz.tier !== 'ghosted';
+const RESERVED_PHONE_PATTERNS = [
+    '0000000',
+    '07700000000',
+    '02079460000',
+    '1234567890',
+    '01234567890',
+];
+const isRealBusiness = (biz: any) =>
+    biz?.name &&
+    !PLACEHOLDER_NAMES.includes(biz.name) &&
+    biz.tier !== 'ghosted' &&
+    biz.verified === true &&
+    hasValidBusinessPhone(biz.phone, biz.country_code);
 const BUSINESS_QUERY_LIMIT = 300;
 const BUSINESS_ORDER = 'is_premium.desc.nullslast,priority_score.desc.nullslast,rating.desc.nullslast';
 const ENABLE_FIELD_EVIDENCE = import.meta.env.VITE_ENABLE_FIELD_EVIDENCE === 'true';
+const UK_NEARBY_RADII_KM = [16, 32, 55];
+const US_NEARBY_RADII_KM = [25, 50, 80];
+const UK_MAX_NEARBY_KM = 80;
+const US_MAX_NEARBY_KM = 120;
+
+type AreaCoords = { lat: number; lng: number };
+type AreaLookup = {
+    displayName: string;
+    cityNames: string[];
+    contextNames: string[];
+    coords: AreaCoords | null;
+};
 
 // Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
 let _fallbackEnrichment: Record<string, any> | null = null;
@@ -42,6 +68,27 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): nu
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
+}
+
+function hasValidBusinessPhone(phone: unknown, countryCode?: string | null): boolean {
+    if (typeof phone !== 'string') return false;
+    const trimmed = phone.trim();
+    if (trimmed.length < 7) return false;
+
+    const digits = trimmed.replace(/\D/g, '');
+    if (digits.length < 10) return false;
+    if (/^(\d)\1+$/.test(digits)) return false;
+    if (RESERVED_PHONE_PATTERNS.some(pattern => digits.includes(pattern))) return false;
+
+    if (String(countryCode || '').toUpperCase() === 'US') {
+        const usDigits = digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : digits;
+        if (usDigits.length !== 10) return false;
+        if (usDigits.slice(3, 6) === '555') return false;
+        return true;
+    }
+
+    const ukDigits = digits.startsWith('44') ? `0${digits.slice(2)}` : digits;
+    return ukDigits.length >= 10 && ukDigits.length <= 11 && ukDigits.startsWith('0');
 }
 
 /**
@@ -203,6 +250,203 @@ async function attachEvidence(businesses: Business[], region: TrustRegion): Prom
     }));
 }
 
+function normalizeAreaKey(value?: string | null): string {
+    return String(value || '')
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]/g, '');
+}
+
+function decodeAreaSlug(value: string): string {
+    try {
+        return decodeURIComponent(value);
+    } catch {
+        return value;
+    }
+}
+
+function toAreaTitle(value: string): string {
+    return decodeAreaSlug(value)
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase()
+        .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+function uniqueNonEmpty(values: Array<string | null | undefined>): string[] {
+    const seen = new Set<string>();
+    const output: string[] = [];
+
+    values.forEach((value) => {
+        const normalized = String(value || '').replace(/\s+/g, ' ').trim();
+        const key = normalizeAreaKey(normalized);
+        if (!normalized || seen.has(key)) return;
+        seen.add(key);
+        output.push(normalized);
+    });
+
+    return output;
+}
+
+function getCoordinateMap(countryCode: string): Record<string, AreaCoords> {
+    return countryCode.toUpperCase() === 'US' ? usCityCoordinates : cityCoordinates;
+}
+
+function findCanonicalCityName(value: string, countryCode: string): string | null {
+    const targetKey = normalizeAreaKey(value);
+    const list = countryCode.toUpperCase() === 'US' ? usCities : cities;
+    return (list as readonly string[]).find(city => normalizeAreaKey(city) === targetKey) || null;
+}
+
+function getKnownCoordsForName(value: string, countryCode: string): AreaCoords | null {
+    const coords = getCoordinateMap(countryCode);
+    const canonical = findCanonicalCityName(value, countryCode) || value;
+    const exact = coords[canonical] || coords[toAreaTitle(value)];
+    if (exact) return exact;
+
+    const key = normalizeAreaKey(value);
+    const match = Object.entries(coords).find(([name]) => normalizeAreaKey(name) === key);
+    return match?.[1] || null;
+}
+
+function buildAreaLookup(city: string, countryCode: string): AreaLookup {
+    const displayName = toAreaTitle(city);
+    const withoutParenthetical = displayName.replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
+    const parentheticalMatches = [...displayName.matchAll(/\(([^)]+)\)/g)].map(match => toAreaTitle(match[1]));
+    const commaParts = displayName.split(',').map(part => toAreaTitle(part));
+
+    const cityCandidates = uniqueNonEmpty([
+        withoutParenthetical,
+        displayName,
+        commaParts[0],
+    ]);
+
+    const canonicalCityNames = uniqueNonEmpty(
+        cityCandidates
+            .map(candidate => findCanonicalCityName(candidate, countryCode) || candidate)
+            .filter(candidate => !!getKnownCoordsForName(candidate, countryCode) || candidate === displayName || candidate === withoutParenthetical)
+    );
+
+    const contextNames = uniqueNonEmpty([
+        ...canonicalCityNames,
+        ...parentheticalMatches,
+        ...commaParts.slice(1),
+    ]);
+
+    const coords = [...canonicalCityNames, ...contextNames]
+        .map(candidate => getKnownCoordsForName(candidate, countryCode))
+        .find(Boolean) || null;
+
+    return {
+        displayName,
+        cityNames: canonicalCityNames.length > 0 ? canonicalCityNames : cityCandidates,
+        contextNames,
+        coords,
+    };
+}
+
+function getNearbyCityNames(coords: AreaCoords, countryCode: string, maxKm: number): string[] {
+    return Object.entries(getCoordinateMap(countryCode))
+        .map(([name, cityCoords]) => ({
+            name,
+            distance: getDistance(coords.lat, coords.lng, cityCoords.lat, cityCoords.lng)
+        }))
+        .filter(item => item.distance <= maxKm)
+        .sort((a, b) => a.distance - b.distance)
+        .map(item => item.name);
+}
+
+function getBusinessAreaDistance(business: Business, targetCoords: AreaCoords | null, countryCode: string): number | undefined {
+    if (!targetCoords) return undefined;
+
+    if (Number.isFinite(business.latitude) && Number.isFinite(business.longitude)) {
+        return getDistance(targetCoords.lat, targetCoords.lng, business.latitude!, business.longitude!);
+    }
+
+    if (business.city) {
+        const cityCoords = getKnownCoordsForName(business.city, countryCode);
+        if (cityCoords) return getDistance(targetCoords.lat, targetCoords.lng, cityCoords.lat, cityCoords.lng);
+    }
+
+    return undefined;
+}
+
+function coverageMatchesArea(business: Business, areaNames: string[]): boolean {
+    const areaKeys = areaNames.map(normalizeAreaKey).filter(Boolean);
+    if (areaKeys.length === 0) return false;
+
+    return (business.coverage_areas || []).some((coverageArea) => {
+        const coverageKey = normalizeAreaKey(coverageArea);
+        return areaKeys.some(areaKey => coverageKey === areaKey || coverageKey.includes(areaKey) || areaKey.includes(coverageKey));
+    });
+}
+
+function filterBusinessesForArea(
+    businesses: Business[],
+    lookup: AreaLookup,
+    countryCode: string,
+    maxKm: number
+): Business[] {
+    const cityKeys = lookup.cityNames.map(normalizeAreaKey);
+    const areaNames = uniqueNonEmpty([...lookup.cityNames, ...lookup.contextNames]);
+
+    return businesses.filter((business) => {
+        if (cityKeys.includes(normalizeAreaKey(business.city))) return true;
+        if (coverageMatchesArea(business, areaNames)) return true;
+
+        const areaDistance = getBusinessAreaDistance(business, lookup.coords, countryCode);
+        return areaDistance !== undefined && areaDistance <= maxKm;
+    });
+}
+
+function sortBusinessesForArea(
+    businesses: Business[],
+    userCoords: { latitude: number, longitude: number } | undefined,
+    targetCoords: AreaCoords | null,
+    countryCode: string
+): Business[] {
+    return [...businesses].sort((a, b) => {
+        if (a.tier === 'paid' && b.tier !== 'paid') return -1;
+        if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+
+        if (userCoords && a.distance !== undefined && b.distance !== undefined) return a.distance - b.distance;
+
+        const areaDistanceA = getBusinessAreaDistance(a, targetCoords, countryCode);
+        const areaDistanceB = getBusinessAreaDistance(b, targetCoords, countryCode);
+        if (areaDistanceA !== undefined && areaDistanceB !== undefined) return areaDistanceA - areaDistanceB;
+        if (areaDistanceA !== undefined) return -1;
+        if (areaDistanceB !== undefined) return 1;
+
+        return (b.priority_score || 0) - (a.priority_score || 0);
+    });
+}
+
+async function mapAttachAndSortBusinesses(
+    rawBusinesses: any[],
+    countryCode: string,
+    userCoords: { latitude: number, longitude: number } | undefined,
+    targetCoords: AreaCoords | null
+): Promise<Business[]> {
+    const mappedBusinesses = await Promise.all((rawBusinesses || []).filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
+    const dedupedBusinesses = Array.from(new Map(mappedBusinesses.map(business => [business.id, business])).values());
+    const withEvidence = await attachEvidence(dedupedBusinesses, regionFromCountryCode(countryCode));
+    return sortBusinessesForArea(withEvidence, userCoords, targetCoords, countryCode);
+}
+
+async function fetchBusinessesByCityNames(
+    cityNames: string[],
+    tradeParams: string,
+    countryCode: string
+): Promise<any[]> {
+    const uniqueCities = uniqueNonEmpty(cityNames);
+    if (uniqueCities.length === 0) return [];
+
+    const url = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=in.(${uniqueCities.map(encodeURIComponent).join(',')})&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
+    const { data } = await supabaseFetch(url);
+    return data || [];
+}
+
 /**
  * Fetch businesses from Supabase (real listing data only)
  */
@@ -217,27 +461,21 @@ export async function fetchBusinesses(
 
     // Normalize trade slug (e.g. "emergency-plumber" -> "plumber")
     const normalizedTrade = normalizeTradeSlug(trade);
+    const areaLookup = buildAreaLookup(city, countryCode);
 
     // Variable to hold the actual city name for Supabase query
-    let searchCity = city;
-
-    if (city) {
-        const normalizedInput = city.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-        // Find matching city in MASTER lists to ensure consistent DB queries
-        const combinedCityListRaw = countryCode.toUpperCase() === 'US' ? usCities : cities;
-        const matchingCityList = (combinedCityListRaw as readonly string[]).find(c =>
-            c.toLowerCase().replace(/[^a-z0-9]/g, '') === normalizedInput
-        );
-        if (matchingCityList) {
-            searchCity = matchingCityList;
-        }
-    }
+    let searchCity = areaLookup.cityNames[0] || city;
 
     // Flexible trade matching: match "plumber" OR "emergency-plumber"
     const tradeVariations = [normalizedTrade, trade.toLowerCase()];
     if (trade.toLowerCase().startsWith('emergency-')) {
         tradeVariations.push(trade.toLowerCase().replace('emergency-', 'emergency '));
+    }
+    if (normalizedTrade === 'hvac') {
+        tradeVariations.push('hvac-engineer');
+    }
+    if (normalizedTrade === 'hvac-engineer') {
+        tradeVariations.push('hvac');
     }
     const uniqueTrades = [...new Set(tradeVariations)];
 
@@ -255,22 +493,13 @@ export async function fetchBusinesses(
     // OPTIMIZATION: Direct City Match First (Fastest)
     if (searchCity && searchCity.trim() !== '') {
         const tradeParams = `trade=in.(${uniqueTrades.map(encodeURIComponent).join(',')})`;
-        const directUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&city=eq.${encodeURIComponent(searchCity)}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
 
         try {
-            const { data: directData } = await supabaseFetch(directUrl);
+            const directData = await fetchBusinessesByCityNames(areaLookup.cityNames, tradeParams, countryCode);
 
             if (directData && directData.length > 0) {
                 devLog(`[fetchBusinesses] Direct city match found: ${directData.length} results`);
-                const businesses = await Promise.all(directData.filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
-                const businessesWithEvidence = await attachEvidence(businesses, regionFromCountryCode(countryCode));
-                return businessesWithEvidence
-                    .sort((a, b) => {
-                        if (a.tier === 'paid' && b.tier !== 'paid') return -1;
-                        if (a.tier !== 'paid' && b.tier === 'paid') return 1;
-                        if (userCoords && a.distance !== undefined && b.distance !== undefined) return a.distance - b.distance;
-                        return (b.priority_score || 0) - (a.priority_score || 0);
-                    });
+                return mapAttachAndSortBusinesses(directData, countryCode, userCoords, areaLookup.coords);
             }
         } catch (err) {
             devLog('[fetchBusinesses] Direct city match query failed:', err);
@@ -317,40 +546,39 @@ export async function fetchBusinesses(
         }
     }
 
-    // FALLBACK: If no results found with city filter, try broader query
+    // FALLBACK: If no exact/coverage results exist, use known nearby towns only.
     let allBusinesses = data || [];
     if (allBusinesses.length === 0 && searchCity) {
-        devLog('[fetchBusinesses] No results for city, trying broader query');
+        const nearbyRadii = countryCode.toUpperCase() === 'US' ? US_NEARBY_RADII_KM : UK_NEARBY_RADII_KM;
+        devLog(`[fetchBusinesses] No exact area results for ${areaLookup.displayName}, trying nearby towns`);
 
-        let fallbackUrl = `/rest/v1/businesses?select=*,business_photos(*)&${tradeParams}&country_code=eq.${countryCode.toUpperCase()}&order=${BUSINESS_ORDER}&limit=${BUSINESS_QUERY_LIMIT}`;
+        if (areaLookup.coords) {
+            for (const radius of nearbyRadii) {
+                const nearbyCities = getNearbyCityNames(areaLookup.coords, countryCode, radius);
+                if (nearbyCities.length === 0) continue;
 
-        if (stateCities.length > 0) {
-            fallbackUrl += `&city=in.(${stateCities.map(encodeURIComponent).join(',')})`;
-        }
-
-        try {
-            const { data: fallbackData } = await supabaseFetch(fallbackUrl);
-            if (fallbackData) {
-                allBusinesses = fallbackData;
+                try {
+                    const nearbyData = await fetchBusinessesByCityNames(nearbyCities, tradeParams, countryCode);
+                    const nearbyBusinesses = await mapAttachAndSortBusinesses(nearbyData, countryCode, userCoords, areaLookup.coords);
+                    const filteredNearby = filterBusinessesForArea(nearbyBusinesses, areaLookup, countryCode, radius);
+                    if (filteredNearby.length > 0) {
+                        return sortBusinessesForArea(filteredNearby, userCoords, areaLookup.coords, countryCode);
+                    }
+                } catch (err) {
+                    devLog(`[fetchBusinesses] Nearby query failed for ${radius}km:`, err);
+                }
             }
-        } catch (err) {
-            devLog('[fetchBusinesses] Fallback broader query failed:', err);
         }
     }
 
-    const mappedBusinesses = await Promise.all((allBusinesses || []).filter(isRealBusiness).map((biz: any) => mapBusinessData(biz, userCoords)));
-    const mappedBusinessesWithEvidence = await attachEvidence(mappedBusinesses, regionFromCountryCode(countryCode));
-    return mappedBusinessesWithEvidence
-        .sort((a, b) => {
-            if (a.tier === 'paid' && b.tier !== 'paid') return -1;
-            if (a.tier !== 'paid' && b.tier === 'paid') return 1;
+    const mappedAreaBusinesses = await mapAttachAndSortBusinesses(allBusinesses, countryCode, userCoords, areaLookup.coords);
 
-            if (userCoords && a.distance !== undefined && b.distance !== undefined) {
-                return a.distance - b.distance;
-            }
+    if (searchCity && stateCities.length === 0) {
+        const maxNearbyKm = countryCode.toUpperCase() === 'US' ? US_MAX_NEARBY_KM : UK_MAX_NEARBY_KM;
+        return filterBusinessesForArea(mappedAreaBusinesses, areaLookup, countryCode, maxNearbyKm);
+    }
 
-            return (b.priority_score || 0) - (a.priority_score || 0);
-        });
+    return mappedAreaBusinesses;
 }
 
 export async function fetchBusinessById(id: string): Promise<Business | null> {

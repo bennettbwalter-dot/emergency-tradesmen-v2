@@ -90,10 +90,12 @@ serve(async (req) => {
                             <p>Hi ${contact.name || 'there'},</p>
                             <p>Your business appears as a public listing for <strong>${contact.trade || 'your business'}</strong> in ${contact.city || 'your area'} on ${brandName}.</p>
                             <p><strong>Claim your free listing</strong> to check, correct, update, or request removal of your business details.</p>
+                            <p><strong>New bonus:</strong> Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.</p>
                             <ul>
                                 <li>✅ Direct phone calls from homeowners in emergencies</li>
                                 <li>✅ WhatsApp integration for instant leads</li>
                                 <li>✅ Pro tier features: priority placement, analytics, and enhanced profile controls</li>
+                                <li>✅ Professional emergency-ready website included at no extra cost with no upfront build fee</li>
                             </ul>
                             <div style="margin: 30px 0; text-align: center;">
                                 <a href="${siteUrl}/business/claim" style="background-color: #FACC15; padding: 14px 28px; text-decoration: none; color: #000; border-radius: 8px; font-weight: bold; font-size: 16px;">Claim Your Free Listing →</a>

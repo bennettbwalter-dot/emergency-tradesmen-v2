@@ -16,6 +16,7 @@ serve(async (req) => {
         const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
         const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
         const resendApiKey = Deno.env.get("RESEND_API_KEY");
+        const webhookSecret = Deno.env.get("QUOTE_WEBHOOK_SECRET");
 
         if (!supabaseUrl || !supabaseKey) {
             throw new Error("Missing Supabase configuration in environment.");
@@ -23,6 +24,13 @@ serve(async (req) => {
 
         if (!resendApiKey) {
             throw new Error("RESEND_API_KEY environment variable is not configured.");
+        }
+        if (webhookSecret) {
+            const suppliedSecret = req.headers.get("x-webhook-secret") ||
+                req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+            if (suppliedSecret !== webhookSecret) {
+                return new Response("Unauthorized", { status: 401, headers: corsHeaders });
+            }
         }
 
         // Fired from Supabase DB Trigger Webhook (containing "record" schema)

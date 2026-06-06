@@ -51,12 +51,9 @@ const REGIONAL_CONFIG: Record<CountryCode, LocalizationSettings> = {
     }
 };
 
-const LIVE_LOCATION_MIN_DISTANCE_METERS = 650;
-const LIVE_LOCATION_MAX_STALE_MS = 90_000;
-const LIVE_LOCATION_REFRESH_THROTTLE_MS = 8_000;
-const MAX_ACCEPTED_ACCURACY_METERS = 2500;
-const MAX_POSITION_AGE_MS = 60_000;
 const REVERSE_GEOCODE_TIMEOUT_MS = 2500;
+const GEOLOCATION_TIMEOUT_MS = 15000;
+const GEOLOCATION_MAX_AGE_MS = 60_000;
 
 const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
 const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
@@ -88,24 +85,30 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     const [geoError, setGeoError] = useState<string | null>(null);
     const lastLiveFixRef = useRef<{ coords: Coords; timestamp: number } | null>(null);
     const lastReverseLookupAtRef = useRef(0);
-    const watchIdRef = useRef<number | null>(null);
     const location = useLocation();
 
     useEffect(() => {
         setCountryCodeState(getLockedSiteCountry(initialCode));
     }, [location.pathname, initialCode]);
 
-    const resolveCoordsToCity = useCallback(async (lat: number, lng: number) => {
+    const resolveCoordsToCity = useCallback(async (lat: number, lng: number): Promise<boolean> => {
         const siteCountry = getLockedSiteCountry(initialCode);
         setCountryCodeState(siteCountry);
 
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+            setDetectedCity(null);
+            setDetectedState(null);
+            setGeoError('Your browser returned an invalid location. Type your town, city, postcode, or ZIP code manually.');
+            return false;
+        }
+
         if (!coordsWithinCountry(lat, lng, siteCountry)) {
             setDetectedCity(null);
-            if (siteCountry === 'GB') setDetectedState(null);
+            setDetectedState(null);
             setGeoError(siteCountry === 'GB'
-                ? 'This site only covers UK locations. Choose a UK area manually if needed.'
-                : 'This site only covers USA locations. Choose a US area manually if needed.');
-            return;
+                ? 'This site only covers UK locations. Type a UK town, city, or postcode manually.'
+                : 'This site only covers USA locations. Type a US city, area, or ZIP code manually.');
+            return false;
         }
 
         try {
@@ -114,8 +117,8 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             const resolvedCity = reverseCity || nearest?.city || null;
 
             if (!resolvedCity) {
-                setGeoError('Unable to identify your nearest area. Choose your area manually if needed.');
-                return;
+                setGeoError('Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.');
+                return false;
             }
 
             setDetectedCity(resolvedCity);
@@ -128,15 +131,22 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             }
 
             devLog(`Resolved coords to area: ${resolvedCity} (locked to ${siteCountry} site)`);
+            return true;
         } catch (error) {
             console.warn('Failed to resolve area from coords', error);
-            setGeoError('Unable to identify your nearest area. Choose your area manually if needed.');
+            setGeoError('Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.');
+            return false;
         }
     }, [initialCode]);
 
     const detectUserLocation = useCallback(() => {
-        if (!navigator.geolocation) {
-            setGeoError('Geolocation is not supported by your browser. Choose your area manually.');
+        if (typeof navigator === 'undefined' || !navigator.geolocation) {
+            setGeoError('Your browser does not support location. Type your town, city, postcode, or ZIP code manually.');
+            return;
+        }
+
+        if (typeof window !== 'undefined' && !window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+            setGeoError('Location needs a secure HTTPS connection. Type your town, city, postcode, or ZIP code manually.');
             return;
         }
 
@@ -145,11 +155,13 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
 
         navigator.geolocation.getCurrentPosition(
             async (position) => {
-                const { latitude, longitude, accuracy } = position.coords;
-                if (!isUsablePhonePosition(position)) {
-                    setDetectedCity(null);
+                const { latitude, longitude } = position.coords;
+
+                if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
                     setIsLocating(false);
-                    setGeoError(getAccuracyMessage(accuracy));
+                    setDetectedCity(null);
+                    setDetectedState(null);
+                    setGeoError('Your browser returned an invalid location. Type your town, city, postcode, or ZIP code manually.');
                     return;
                 }
 
@@ -157,6 +169,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
                 lastLiveFixRef.current = { coords, timestamp: Date.now() };
                 lastReverseLookupAtRef.current = Date.now();
                 setUserCoords(coords);
+
                 try {
                     await resolveCoordsToCity(latitude, longitude);
                 } finally {
@@ -165,86 +178,14 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             },
             (error) => {
                 setIsLocating(false);
-                setGeoError(error.code === error.PERMISSION_DENIED
-                    ? 'Location access is blocked. Choose your area manually to see local results.'
-                    : 'Unable to refresh your location right now. Choose your area manually if needed.');
+                setGeoError(getGeolocationErrorMessage(error));
                 if (error.code !== error.PERMISSION_DENIED) {
                     console.warn('Geolocation error:', error.message);
                 }
             },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+            { enableHighAccuracy: true, timeout: GEOLOCATION_TIMEOUT_MS, maximumAge: GEOLOCATION_MAX_AGE_MS }
         );
     }, [resolveCoordsToCity]);
-
-    useEffect(() => {
-        if (typeof window === 'undefined' || !navigator.geolocation) {
-            setGeoError('Geolocation is not supported by your browser. Choose your area manually.');
-            return;
-        }
-        if (!window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
-            setGeoError('Location needs HTTPS. Choose your area manually.');
-            return;
-        }
-
-        detectUserLocation();
-
-        watchIdRef.current = navigator.geolocation.watchPosition(
-            (position) => {
-                const { latitude, longitude, accuracy } = position.coords;
-                if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return;
-                if (!isUsablePhonePosition(position)) {
-                    setUserCoords(null);
-                    setDetectedCity(null);
-                    setGeoError(getAccuracyMessage(accuracy));
-                    return;
-                }
-
-                const coords = { latitude, longitude };
-                const previous = lastLiveFixRef.current;
-                const movedMeters = previous ? distanceMeters(previous.coords, coords) : Infinity;
-                const staleMs = previous ? Date.now() - previous.timestamp : Infinity;
-                const minMove = Math.max(LIVE_LOCATION_MIN_DISTANCE_METERS, Number.isFinite(accuracy) ? accuracy * 1.25 : 0);
-
-                setUserCoords(coords);
-
-                if (previous && movedMeters < minMove && staleMs < LIVE_LOCATION_MAX_STALE_MS) {
-                    return;
-                }
-
-                const now = Date.now();
-                if (previous && now - lastReverseLookupAtRef.current < LIVE_LOCATION_REFRESH_THROTTLE_MS) {
-                    return;
-                }
-
-                lastLiveFixRef.current = { coords, timestamp: now };
-                lastReverseLookupAtRef.current = now;
-                resolveCoordsToCity(latitude, longitude);
-            },
-            (error) => {
-                setGeoError(error.code === error.PERMISSION_DENIED
-                    ? 'Location access is blocked. Choose your area manually to see local results.'
-                    : 'Unable to refresh your location right now. Choose your area manually if needed.');
-                setIsLocating(false);
-                if (error.code !== error.PERMISSION_DENIED) {
-                    console.warn('Geolocation error:', error.message);
-                }
-            },
-            { enableHighAccuracy: true, timeout: 18000, maximumAge: 12000 }
-        );
-
-        const refreshOnVisible = () => {
-            if (document.visibilityState === 'visible') detectUserLocation();
-        };
-        document.addEventListener('visibilitychange', refreshOnVisible);
-
-        return () => {
-            document.removeEventListener('visibilitychange', refreshOnVisible);
-            if (watchIdRef.current !== null) {
-                navigator.geolocation.clearWatch(watchIdRef.current);
-                watchIdRef.current = null;
-            }
-        };
-    }, [detectUserLocation, resolveCoordsToCity]);
 
     const setCountryCode = (code: CountryCode) => {
         const lockedCountry = getLockedSiteCountry(initialCode);
@@ -295,20 +236,17 @@ function coordsWithinCountry(lat: number, lng: number, countryCode: CountryCode)
     return lat >= bounds.minLat && lat <= bounds.maxLat && lng >= bounds.minLng && lng <= bounds.maxLng;
 }
 
-function isUsablePhonePosition(position: GeolocationPosition): boolean {
-    const accuracy = position.coords.accuracy;
-    const age = Date.now() - position.timestamp;
-    const accurateEnough = !Number.isFinite(accuracy) || accuracy <= MAX_ACCEPTED_ACCURACY_METERS;
-    const freshEnough = !Number.isFinite(age) || age <= MAX_POSITION_AGE_MS;
-    return accurateEnough && freshEnough;
-}
-
-function getAccuracyMessage(accuracy: number | null | undefined): string {
-    if (Number.isFinite(accuracy) && Number(accuracy) > MAX_ACCEPTED_ACCURACY_METERS) {
-        return 'Your phone only provided an approximate network location. Turn on precise location/GPS or choose your area manually.';
+function getGeolocationErrorMessage(error: GeolocationPositionError): string {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            return 'Location access was blocked. Type your town, city, postcode, or ZIP code manually.';
+        case error.POSITION_UNAVAILABLE:
+            return 'Your device could not provide a location. Check location services or type your area manually.';
+        case error.TIMEOUT:
+            return 'Location took too long to load. Try Locate Me again or type your area manually.';
+        default:
+            return 'Unable to find your location right now. Type your town, city, postcode, or ZIP code manually.';
     }
-
-    return 'Your phone location is stale or unavailable. Refresh location or choose your area manually.';
 }
 
 async function reverseGeocodeArea(lat: number, lng: number, countryCode: CountryCode): Promise<string | null> {
@@ -359,17 +297,4 @@ function resolveUSState(city: string, fallbackCity: string | null, setDetectedSt
             if (state) setDetectedState(state.name);
         });
     });
-}
-
-function distanceMeters(a: Coords, b: Coords): number {
-    const radiusMeters = 6371008.8;
-    const toRad = (value: number) => (value * Math.PI) / 180;
-    const lat1 = toRad(a.latitude);
-    const lat2 = toRad(b.latitude);
-    const deltaLat = toRad(b.latitude - a.latitude);
-    const deltaLng = toRad(b.longitude - a.longitude);
-    const h =
-        Math.sin(deltaLat / 2) ** 2 +
-        Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLng / 2) ** 2;
-    return 2 * radiusMeters * Math.asin(Math.sqrt(h));
 }

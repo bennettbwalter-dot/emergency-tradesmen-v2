@@ -182,10 +182,10 @@ export function Footer({ countryCode }: FooterProps) {
               Website Showroom
             </Link>
             <Link
-              to={isUSDomain || isUS ? "/for-contractors" : "/for-tradesmen"}
+              to="/pricing"
               className="text-white/60 hover:text-white transition-colors hover:translate-x-1 inline-block"
             >
-              Websites for {isUS || isUSDomain ? "Contractors" : "Tradespeople"}
+              Pro Plans
             </Link>
           </div>
         </div>

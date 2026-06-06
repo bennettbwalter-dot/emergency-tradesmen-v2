@@ -47,6 +47,15 @@ export default function ClaimYourBusiness() {
                   <li>Recording admin notes before changes are approved</li>
                 </ul>
               </div>
+              <div className="mt-5 rounded-2xl border border-emerald-500/25 bg-emerald-500/10 p-5">
+                <p className="text-sm font-bold uppercase tracking-widest text-emerald-500">Pro Yearly bonus</p>
+                <p className="mt-2 font-display text-xl font-bold text-foreground">
+                  Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Claim your listing first, then upgrade for priority placement, more trust with customers, and a professional website with no upfront build fee.
+                </p>
+              </div>
             </div>
           </div>
         </section>
