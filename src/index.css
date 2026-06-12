@@ -273,7 +273,81 @@
   }
 
   .local-area-map {
+    /* !important so this layered rule beats maplibre-gl.css's unlayered
+       `.maplibregl-map { position: relative }`, which otherwise knocks the
+       map back into normal flow below the fallback image (clipped hero) */
+    position: absolute !important;
     filter: saturate(1.12) contrast(1.08);
+  }
+
+  /* static fallback photo behind the live map */
+  .local-area-fallback {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .local-area-fallback--muted img {
+    opacity: 0.6;
+    filter: saturate(0.75) brightness(0.65);
+  }
+
+  .local-area-fallback__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4, 6, 10, 0.4), rgba(4, 6, 10, 0.12) 38%, rgba(4, 6, 10, 0.52));
+  }
+
+  /* the live map fades in over the fallback once tiles are ready */
+  .local-area-backdrop--loading .local-area-map {
+    opacity: 0;
+  }
+
+  .local-area-backdrop--ready .local-area-map {
+    opacity: 1;
+    transition: opacity 900ms ease;
+  }
+
+  /* gold focus reticle pinned on the searched location */
+  .local-area-focus-reticle {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    z-index: 11;
+    width: 92px;
+    height: 92px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 1px solid rgba(227, 192, 99, 0.55);
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 26px rgba(212, 175, 55, 0.22), inset 0 0 18px rgba(212, 175, 55, 0.12);
+    animation: local-area-reticle-pulse 2.6s ease-in-out infinite;
+  }
+
+  .local-area-focus-reticle span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: rgba(255, 244, 214, 0.95);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+  }
+
+  @keyframes local-area-reticle-pulse {
+    0%,
+    100% {
+      opacity: 0.85;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(1.07);
+    }
   }
 
   .earth-map-active .earth-map-container {
@@ -4404,6 +4478,12 @@ img.product-image {
   overflow: hidden;
   padding-bottom: 0.08em;
   vertical-align: bottom;
+}
+
+/* inline-block collapses the trailing text space inside each shell —
+   restore word gaps explicitly so the headline doesn't render as "Thebeam becomesa…" */
+.l3-journey-word-shell:not(:last-child) {
+  margin-right: 0.28em;
 }
 
 .l3-journey-word-shell > span {

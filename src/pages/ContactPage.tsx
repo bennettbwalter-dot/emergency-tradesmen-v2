@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -38,13 +39,23 @@ export default function ContactPage() {
         ]
     };
 
+    // Prefill subject from ?subject= (e.g. pricing page routes agency enquiries here)
+    const [searchParams] = useSearchParams();
+    const prefilledSubjects: Record<string, string> = {
+        "agency-plan": "Agency / Multi-Location plan enquiry",
+    };
+    const subjectParam = searchParams.get("subject") || "";
+    const initialSubject = prefilledSubjects[subjectParam] || subjectParam.replace(/-/g, " ");
+
     // Form state
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
         phone: "",
-        subject: "",
-        message: "",
+        subject: initialSubject,
+        message: subjectParam === "agency-plan"
+            ? "Hi, I'm interested in the Agency / Multi-Location plan. Please get in touch with next steps."
+            : "",
         consent: false,
         honeypot: "" // Spam protection - hidden field
     });

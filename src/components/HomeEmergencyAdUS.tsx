@@ -1,6 +1,11 @@
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { Link } from "react-router-dom";
 import { USPremiumModelerDialog } from "./USPremiumModelerDialog";
+import { AffiliateDisclosure } from "./AffiliateDisclosure";
+
+// Set in env once a real US home-warranty affiliate deal exists.
+// Without it the ad must NOT render — never ship a placeholder sponsored link.
+const US_AFFILIATE_URL = import.meta.env.VITE_US_HOME_WARRANTY_AFF_URL as string | undefined;
 
 export function HomeEmergencyAdUS() {
     const { settings } = useLocalization();
@@ -10,15 +15,20 @@ export function HomeEmergencyAdUS() {
         return null;
     }
 
+    if (!US_AFFILIATE_URL) {
+        return null;
+    }
+
     return (
         <div className="w-full max-w-4xl mx-auto my-12 p-6 rounded-2xl border border-gold-dark/20 bg-gold/5 dark:bg-gold-dark/10 shadow-sm transition-all duration-300 hover:shadow-glow-gold-dark/10">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Advertisement</p>
             <div className="flex flex-col md:flex-row items-center gap-8">
 
                 {/* Affiliate Image & Link Wrapper */}
                 <div className="w-full md:w-1/2 flex justify-center">
                     <a
                         rel="sponsored"
-                        href="https://homewarranty.com/affiliate-link-placeholder" // Needs actual US affiliate link later
+                        href={US_AFFILIATE_URL}
                         target="_blank"
                         className="hover:opacity-90 transition-opacity block group relative"
                     >
@@ -42,12 +52,12 @@ export function HomeEmergencyAdUS() {
                         Protect Your Home for Less
                     </h3>
                     <p className="text-muted-foreground mb-4">
-                        Get comprehensive HVAC, plumbing, and electrical cover. Avoid unexpected repair bills with a <strong>Top Rated Home Warranty</strong>.
+                        Get comprehensive HVAC, plumbing, and electrical cover. Avoid unexpected repair bills with a <strong>Home Warranty plan</strong>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 mb-6">
                         <a
-                            href="https://homewarranty.com/affiliate-link-placeholder" // Needs actual US affiliate link later
+                            href={US_AFFILIATE_URL}
                             target="_blank"
                             rel="sponsored noopener noreferrer"
                             className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-full bg-gold-dark hover:bg-gold text-white font-bold transition-colors shadow-lg shadow-gold-dark/20"
@@ -69,6 +79,7 @@ export function HomeEmergencyAdUS() {
                         <p className="mt-1">
                             *Exclusions apply: Pre-existing conditions and units beyond useful life may not be covered.
                         </p>
+                        <AffiliateDisclosure className="mt-2" />
                     </div>
                 </div>
             </div>

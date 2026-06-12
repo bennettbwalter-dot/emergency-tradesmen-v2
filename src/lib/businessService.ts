@@ -109,7 +109,8 @@ async function mapBusinessData(biz: any, userCoords?: { latitude: number, longit
     const business: Business = {
         id: biz.id,
         name: biz.name || "Untitled Business",
-        rating: Number(biz.rating) || 5.0,
+        // 0 = unrated; never invent a rating (cards show "New listing" instead)
+        rating: Number(biz.rating) || 0,
         reviewCount: biz.review_count || 0,
         address: biz.address,
         hours: biz.hours || '24/7 Emergency Service',

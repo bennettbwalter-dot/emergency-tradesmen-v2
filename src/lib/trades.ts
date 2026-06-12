@@ -297,18 +297,20 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     breakdown: "$80 – $200",
   };
 
-  const certificationsMap: Record<string, string[]> = {
-    plumber: ["Licensed & Bonded", "Master Plumber Certified", "PHCC Member", "Fully Insured"],
-    electrician: ["NEC Compliant", "Licensed Electrician", "NFPA Member", "Fully Insured"],
-    locksmith: ["ALOA Member", "Background Checked", "Fully Insured"],
-    "gas-engineer": ["HVAC Certified", "EPA Section 608", "Fully Insured"],
-    "drain-specialist": ["IICRC Certified", "Licensed Contractor", "Fully Insured"],
-    glazier: ["NGA Certified", "Safety Glass Qualified", "Fully Insured"],
-    roofer: ["Licensed Roofer", "OSHA Certified", "Fully Insured"],
-    builder: ["Licensed General Contractor", "ICC/IPC Compliant", "Fully Insured"],
-    hvac: ["HVAC Certified", "EPA Section 608", "NATE Certified", "Fully Insured"],
-    "water-restoration": ["IICRC Certified", "Water Damage Specialist", "Fully Insured"],
-    breakdown: ["IVR Certified", "Roadside Assistance Qualified", "Fully Insured"],
+  // Truth-based: checks the customer should make before hiring — NOT claims
+  // about the listed businesses (listings are public and unvetted).
+  const credentialCheckMap: Record<string, { GB: string; US: string }> = {
+    plumber: { GB: "Ask about WaterSafe / CIPHE membership", US: "Verify state plumbing license" },
+    electrician: { GB: "Check NICEIC / NAPIT registration", US: "Verify state electrician license" },
+    locksmith: { GB: "Ask about MLA approval", US: "Ask about ALOA membership" },
+    "gas-engineer": { GB: "Check the Gas Safe Register", US: "Verify state HVAC / gas license" },
+    "drain-specialist": { GB: "Ask for drainage trade accreditation", US: "Verify contractor license" },
+    glazier: { GB: "Ask about FENSA / CERTASS for installs", US: "Verify contractor license" },
+    roofer: { GB: "Ask about NFRC membership", US: "Verify roofing contractor license" },
+    builder: { GB: "Ask about FMB membership", US: "Verify general contractor license" },
+    hvac: { GB: "Check F-Gas certification", US: "Verify EPA 608 / NATE certification" },
+    "water-restoration": { GB: "Ask about IICRC certification", US: "Ask about IICRC certification" },
+    breakdown: { GB: "Confirm recovery insurance", US: "Confirm roadside service coverage" },
   };
 
   return {
@@ -320,7 +322,12 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
       : (ukServiceAreaMap[foundCity || cityName] || ["Surrounding areas", "Nearby suburbs", "Local districts"]),
     averageResponseTime: "30–90 minutes",
     emergencyPriceRange: actualCountryCode === 'US' ? priceRangeMap[trade.slug] : priceRangeMap[trade.slug].replace(/\$/g, '£'),
-    certifications: certificationsMap[trade.slug],
+    certifications: [
+      credentialCheckMap[trade.slug][actualCountryCode === 'US' ? 'US' : 'GB'],
+      "Ask for proof of public liability insurance",
+      "Get the price confirmed before work starts",
+      "Check recent customer reviews",
+    ],
     services: servicesMap[trade.slug],
     faqs: generateFAQs(trade, foundCity || cityName, actualCountryCode === 'US', priceRangeMap[trade.slug], problem),
     localExpertise: actualCountryCode === 'US'

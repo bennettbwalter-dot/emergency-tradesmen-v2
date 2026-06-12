@@ -38,7 +38,7 @@ export const Landing3Services = () => {
             {
               to: "#get-help", icon: Search, accent: "text-sky-500",
               title: "Search By Trade & Area",
-              body: "Tell us what went wrong and where you are - we surface vetted local pros instantly.",
+              body: "Tell us what went wrong and where you are - we surface local pros instantly.",
               cta: "Start a search",
               anchor: true,
             },

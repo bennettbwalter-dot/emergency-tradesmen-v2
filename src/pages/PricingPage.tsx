@@ -95,7 +95,9 @@ export default function PricingPage() {
         : {
               monthly: (isDev ? import.meta.env.VITE_STRIPE_UK_MONTHLY_TEST : null) || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
               yearly: (isDev ? import.meta.env.VITE_STRIPE_UK_YEARLY_TEST : null) || 'https://buy.stripe.com/5kQ28rdI3dR54ey219cQU06',
-              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || null,
+              // Live UK Agency Payment Link comes from env so it can go live without a deploy;
+              // until it's set, the CTA routes to the contact form (prefilled via ?subject=).
+              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || import.meta.env.VITE_STRIPE_UK_AGENCY_LINK || null,
           };
 
 
@@ -369,7 +371,7 @@ export default function PricingPage() {
                                     <span className="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Enterprise</span>
                                 </div>
                                 <p className="text-muted-foreground text-base max-w-lg leading-relaxed">
-                                    Managing multiple vans, branches, or client listings? Get 8 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
+                                    Managing multiple vans, branches, or client listings? Get 5 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
                                 </p>
                                 <p className="mt-3 text-sm font-semibold text-purple-300">
                                     Includes a professional emergency-ready website built completely free for your agency, franchise, or multi-location business.
@@ -392,7 +394,7 @@ export default function PricingPage() {
                                 className="w-full h-12 text-lg bg-purple-600 hover:bg-purple-700 text-white"
                                 onClick={() => startWebsitePlanCheckout(stripeLinks.enterprise, "agency")}
                             >
-                                Get Agency Plan
+                                {stripeLinks.enterprise ? "Get Agency Plan" : "Enquire About Agency Plan"}
                             </Button>
                         </div>
                     </div>

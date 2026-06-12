@@ -312,7 +312,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
             <h3>It cannot wait? Neither can we.</h3>
             <p>Trusted emergency help near you when lights go out, pipes burst, vehicles stop, locks fail, or urgent repairs cannot wait.</p>
             <div className="l3-final-actions">
-              <Link to="/home">
+              <Link to="/home#manual-search">
                 Find Emergency Help
                 <Zap className="h-4 w-4" />
               </Link>

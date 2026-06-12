@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { isUSDomain } from "@/lib/siteConfig";
+import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { useParams, Link } from "react-router-dom";
 import { format, isValid } from "date-fns";
 import { Helmet } from "react-helmet-async";
@@ -7,7 +9,7 @@ import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { AdSlot } from "@/components/AdSlot";
-import { ArrowLeft, Clock, Calendar, User, ChevronRight, AlertTriangle, Sun, Moon, Phone, BookOpen, Zap } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, User, ChevronRight, AlertTriangle, Sun, Moon, Phone, BookOpen } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -1255,27 +1257,17 @@ export default function BlogPostPage() {
               <a
                 href={targetUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="sponsored noopener noreferrer"
                 className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-xl transition-colors text-sm sm:text-base w-full sm:w-auto"
               >
                 View on Amazon
               </a>
+              <AffiliateDisclosure className="mt-3 text-center" />
             </div>
           </div>
           );
         })()}
 
-
-        {/* ── GLOBAL WATCH STAT ──────────────────────────────────── */}
-        <div className={`my-12 flex items-start gap-4 p-5 rounded-2xl border ${isWhiteMode ? 'bg-orange-50 border-orange-200' : 'bg-orange-950/20 border-orange-900/40'}`}>
-          <Zap className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
-          <p className={`text-sm font-semibold leading-relaxed m-0 ${isWhiteMode ? 'text-orange-800' : 'text-orange-200'}`}>
-            <strong className="block text-xs uppercase tracking-widest mb-1 opacity-70">2026 Global Watch</strong>
-            {isUS
-              ? "By late 2026, the US 'Trade-Cloud' initiative will provide technical oversight for over 1 million domestic emergency responses per month."
-              : "National Watch: The 2026 'Repair First' law has led to a 20% reduction in UK structural insurance claims through proactive maintenance."}
-          </p>
-        </div>
 
         {/* ── CTA ───────────────────────────────────────────────── */}
         <div className={`my-14 rounded-2xl p-8 md:p-12 text-center border ${isWhiteMode ? 'bg-white border-orange-200 shadow-lg' : 'bg-neutral-900 border-white/10 shadow-xl'}`}>
@@ -1286,22 +1278,22 @@ export default function BlogPostPage() {
             Need Professional Help?
           </h3>
           <p className={`text-base mb-6 max-w-lg mx-auto leading-relaxed ${isWhiteMode ? 'text-neutral-500' : 'text-neutral-400'}`}>
-            Our certified {isUS ? 'US contractors' : 'UK tradesmen'} are available 24/7. Gas Safe · NICEIC · IICRC certified. Average response: 60 minutes.
+            Browse public listings for local emergency {isUS ? 'contractors' : 'tradesmen'} near you and call them direct — no middlemen, no booking fees.
           </p>
-          <button
+          <Link
+            to={`${isUS && !isUSDomain() ? '/us' : ''}/home#manual-search`}
             className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-orange-300/40 hover:-translate-y-0.5 transition-all text-sm uppercase tracking-widest"
-            onClick={() => window.location.href = `tel:${isUS ? "+18885550199" : "+442079460000"}`}
           >
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
             </span>
-            {isUS ? "Call USA Dispatch 24/7" : "Call UK Response 24/7"}
-          </button>
+            {isUS ? "Find a Local Contractor" : "Find a Local Tradesperson"}
+          </Link>
           <div className={`flex justify-center gap-6 mt-5 text-xs ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-            <span>✓ No call-out fee</span>
-            <span>✓ DBS checked</span>
-            <span>✓ Fully insured</span>
+            <span>✓ No booking fees</span>
+            <span>✓ Speak direct to the business</span>
+            <span>✓ Browse 24/7</span>
           </div>
         </div>
 
@@ -1361,16 +1353,16 @@ export default function BlogPostPage() {
             Need Help Now?
           </h3>
           <p className={`text-sm mb-6 leading-relaxed ${isWhiteMode ? 'text-neutral-500' : 'text-neutral-400'}`}>
-            Our certified {isUS ? 'US contractors' : 'UK tradesmen'} are available 24/7.
+            Browse local emergency {isUS ? 'contractors' : 'tradesmen'} and call them direct.
           </p>
-          <a
-            href={`tel:${isUS ? "+18885550199" : "+442079460000"}`}
+          <Link
+            to={`${isUS && !isUSDomain() ? '/us' : ''}/home#manual-search`}
             className="block w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all text-sm uppercase tracking-widest"
           >
-            Call Dispatch
-          </a>
+            Find a Local Pro
+          </Link>
           <div className={`mt-4 text-xs font-semibold ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-            Average response: &lt; 30 mins
+            No middlemen · No booking fees
           </div>
         </div>
 

@@ -4,7 +4,7 @@ import { trades, ukProblems, usProblems } from "@/lib/trades";
 import { Newsletter } from "./Newsletter";
 import { GlassSocialIcon } from "./ui/GlassSocialIcon";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { getSocialUrls } from "@/lib/siteConfig";
+import { getSocialUrls, getSupportEmail } from "@/lib/siteConfig";
 
 export interface FooterProps {
   countryCode?: string;
@@ -215,7 +215,7 @@ export function Footer({ countryCode }: FooterProps) {
             &copy; {new Date().getFullYear()} {siteName}.
             <span className="hidden md:inline mx-2">•</span>
             <br className="md:hidden" />
-            Built with precision on <span className="text-white/50">Meridian OS</span>.
+            Support: <a href={`mailto:${getSupportEmail()}`} className="text-white/50 hover:text-gold transition-colors">{getSupportEmail()}</a>
           </p>
           <div className="flex gap-8 text-xs font-medium text-white/40">
             <Link to={`${countryPrefix}/privacy`} className="hover:text-gold transition-colors">Privacy Policy</Link>

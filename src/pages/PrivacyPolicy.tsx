@@ -91,6 +91,21 @@ export default function PrivacyPolicy() {
                             <li><strong>Stripe:</strong> Used exclusively for processing subscription payments for business owners joining our directory. Consumer emergency requests are always free to submit and do not require payment details on our site.</li>
                         </ul>
 
+                        <h2>4. Advertising & Affiliate Disclosure</h2>
+                        <p>
+                            Some pages on this website contain affiliate links and sponsored placements — for example links to
+                            home emergency cover, home warranty plans, or products on Amazon. These are always labelled
+                            (e.g. "Advertisement", "Affiliate disclosure", or <em>rel="sponsored"</em>). If you click one of these
+                            links and make a purchase, we may earn a commission from the merchant. This never affects the price
+                            you pay, and it never affects which tradespeople or contractors appear in our directory listings —
+                            directory results are not influenced by affiliate relationships.
+                        </p>
+                        <p>
+                            As an Amazon Associate, we earn from qualifying purchases. Affiliate networks we work with (such as
+                            Amazon Associates and AWIN) may set cookies to attribute purchases; see the cookie section of this
+                            policy and your consent choices for details.
+                        </p>
+
                         <hr className="my-12 border-slate-200" />
 
                         <div className="bg-slate-50 p-8 rounded-xl border border-slate-200" id="uk-residents">
