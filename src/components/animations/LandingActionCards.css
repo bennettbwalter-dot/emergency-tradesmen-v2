@@ -92,11 +92,27 @@
 }
 
 @media (max-width: 767px) {
+  .l3-journey-item {
+    justify-content: flex-end;
+    padding-left: 3.25rem;
+  }
+
+  .l3-journey-marker {
+    left: 1.45rem;
+  }
+
+  .l3-journey-card,
+  .l3-journey-card--flush,
+  .l3-faq-card {
+    width: calc(100% - 3rem);
+    margin-right: 0;
+    margin-left: auto;
+  }
+
   .landing-line-card {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-left: 2.35rem;
   }
 
   .landing-roadside-card__copy,
