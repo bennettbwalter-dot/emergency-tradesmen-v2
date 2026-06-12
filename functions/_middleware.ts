@@ -3,6 +3,15 @@ export const onRequest: PagesFunction = async (context) => {
   const hostname = url.hostname;
   const path = url.pathname;
 
+  if (path === '/ads.txt') {
+    return new Response('google.com, pub-1777113776734777, DIRECT, f08c47fec0942fa0\n', {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  }
+
   // 1. US Domain Routing (emergencycontractors.net)
   if (hostname.includes('emergencycontractors.net')) {
     // Prevent infinite loop if somehow /us or /usa is accessed on this domain
