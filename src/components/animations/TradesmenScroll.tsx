@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { Shield, Star, Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import "./LandingActionCards.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasContainerRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
+    const copyPanelRef = useRef<HTMLDivElement>(null);
+    const visualPanelRef = useRef<HTMLDivElement>(null);
     const videoSequence = useRef({ frame: 0 });
     const imagesRef = useRef<HTMLImageElement[]>([]);
 
@@ -33,6 +36,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
         const context = canvas?.getContext('2d', { willReadFrequently: true });
         const canvasContainer = canvasContainerRef.current;
         const card = cardRef.current;
+        const copyPanel = copyPanelRef.current;
+        const visualPanel = visualPanelRef.current;
         if (!canvas || !context || !canvasContainer || !card) return;
 
         // Preload images
@@ -134,37 +139,61 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
             duration: 10,
         }, 0);
 
+        let revealTl: gsap.core.Timeline | undefined;
+        if (copyPanel && visualPanel) {
+            revealTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 82%",
+                    end: "center 44%",
+                    scrub: 0.65,
+                    refreshPriority: 4,
+                }
+            });
+
+            revealTl
+                .fromTo(
+                    visualPanel,
+                    { autoAlpha: 0.2, x: -54, y: 28, scale: 0.965 },
+                    { autoAlpha: 1, x: 0, y: 0, scale: 1, ease: "power2.out", duration: 1 },
+                    0
+                )
+                .fromTo(
+                    copyPanel,
+                    { autoAlpha: 0.2, x: 54, y: 28, scale: 0.98 },
+                    { autoAlpha: 1, x: 0, y: 0, scale: 1, ease: "power2.out", duration: 1 },
+                    0.08
+                );
+        }
+
         return () => {
             window.removeEventListener('resize', updateCanvasSize);
             tl.kill();
+            revealTl?.kill();
             ScrollTrigger.refresh();
         };
     }, []);
 
     return (
-        <div 
-            ref={cardRef} 
-            className="w-full max-w-5xl mx-auto rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#121316] to-[#070708] p-6 md:p-10 shadow-2xl relative overflow-hidden group hover:border-[#d7c08a]/30 transition-all duration-500"
+        <div
+            ref={cardRef}
+            className="landing-line-card landing-trades-card"
         >
-            {/* Background Ambient Glows */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#d7c08a]/10 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[#50b2d7]/5 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            
-            <div className="relative z-10 grid md:grid-cols-12 gap-8 items-center">
+            <div className="contents">
                 {/* Left Side: Copy, Actions, and Feature List */}
-                <div className="md:col-span-7 flex flex-col items-start text-left">
+                <div ref={copyPanelRef} className="landing-line-card__panel landing-trades-card__copy flex flex-col items-start text-left">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d7c08a]/10 border border-[#d7c08a]/20 text-[#d7c08a] text-xs font-bold uppercase tracking-widest mb-4">
                         <Shield className="w-3.5 h-3.5 animate-pulse" />
                         PRO PLAN LISTINGS
                     </span>
-                    
+
                     <h3 className="font-display text-3xl md:text-4xl font-extrabold text-white leading-tight mb-3">
                         Stop chasing leads.
                     </h3>
                     <p className="text-white/80 text-lg mb-6 leading-relaxed">
                         Claim your listing and get direct calls from customers in your area who are ready to hire.
                     </p>
-                    
+
                     {/* List Items */}
                     <ul className="space-y-3 mb-8 w-full">
                         {listItems.map((item, i) => (
@@ -177,26 +206,26 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
                         ))}
                     </ul>
 
-                    <Link 
-                        to="/claim-your-business" 
+                    <Link
+                        to="/claim-your-business"
                         className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#caa55b] via-[#e2cd97] to-[#caa55b] text-black font-extrabold text-lg shadow-[0_10px_30px_rgba(202,165,91,0.25)] hover:shadow-[0_15px_40px_rgba(202,165,91,0.45)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 w-full sm:w-auto justify-center"
                     >
                         <span>CLAIM YOUR LISTING</span>
                         <ArrowRight className="w-5 h-5" />
                     </Link>
                 </div>
-                
+
                 {/* Right Side: Responsive Canvas Container for the Interactive Scroll Man */}
-                <div className="md:col-span-5 flex flex-col gap-5 w-full">
+                <div ref={visualPanelRef} className="landing-line-card__panel landing-trades-card__visual flex flex-col gap-5 w-full">
                     {/* Visual Card containing the Canvas */}
                     <div className="bg-[#18191e]/60 border border-white/5 rounded-3xl p-4 shadow-xl relative overflow-hidden backdrop-blur-md flex flex-col items-center">
                         {/* Interactive Canvas Frame Container */}
-                        <div 
-                            ref={canvasContainerRef} 
+                        <div
+                            ref={canvasContainerRef}
                             className="w-full aspect-[4/5] max-h-[420px] rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center overflow-hidden relative"
                         >
                             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover z-20 pointer-events-none" />
-                            
+
                             {/* Inner ambient shadows and cues */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent z-30" />
                             <div className="absolute bottom-4 left-4 z-40 bg-black/60 border border-white/10 rounded-full px-3 py-1 flex items-center gap-1.5 backdrop-blur-md">
