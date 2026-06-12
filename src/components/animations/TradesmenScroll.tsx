@@ -175,8 +175,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
     }, []);
 
     return (
-        <div
-            ref={cardRef}
+        <div 
+            ref={cardRef} 
             className="landing-line-card landing-trades-card"
         >
             <div className="contents">
