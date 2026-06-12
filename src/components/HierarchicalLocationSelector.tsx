@@ -1,8 +1,9 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Map, Building2, MapPin, Home, Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { BorderBeamButton } from "@/components/ui/border-beam-button";
+import { BorderBeam } from "@/components/magicui/BorderBeam";
 import {
     Select,
     SelectContent,
@@ -23,7 +24,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import usData from '@/lib/us_cities.json';
+import usData from "@/lib/us_cities.json";
 
 interface HierarchicalLocationSelectorProps {
     className?: string;
@@ -44,27 +45,32 @@ interface City { name: string; slug: string; suburbs?: Suburb[]; }
 interface Metro { name: string; slug: string; cities?: City[]; }
 interface State { name: string; code: string; slug: string; metros?: Metro[]; }
 
-// Internal flattened type for UI
 interface FlattenedCity extends City {
     metroSlug: string;
 }
 
 const US_STATES = (usData as any).states as State[];
 
-export function HierarchicalLocationSelector({ className, onLocationSelect, placeholder, cityPlaceholder = "City / Area", staticStateLabel, staticCityLabel, buttonClassName, onStateSelected, showLabelOnMobile = false, showCityPlaceholder = false }: HierarchicalLocationSelectorProps) {
-    // Selection State
+export function HierarchicalLocationSelector({
+    className,
+    onLocationSelect,
+    placeholder,
+    cityPlaceholder = "City / Area",
+    staticStateLabel,
+    staticCityLabel,
+    buttonClassName,
+    onStateSelected,
+    showLabelOnMobile = false,
+    showCityPlaceholder = false
+}: HierarchicalLocationSelectorProps) {
     const [selectedState, setSelectedState] = useState<State | null>(null);
     const [selectedCity, setSelectedCity] = useState<FlattenedCity | null>(null);
     const [selectedSuburb, setSelectedSuburb] = useState<Suburb | null>(null);
     const [cityOpen, setCityOpen] = useState(false);
-
-    // Derived Lists
     const [availableCities, setAvailableCities] = useState<FlattenedCity[]>([]);
 
-    // Sort states on mount (though JSON is likely sorted, good practice)
     const sortedStates = [...US_STATES].sort((a, b) => a.name.localeCompare(b.name));
 
-    // Handle State Change
     const handleStateChange = (slug: string) => {
         const state = US_STATES.find(s => s.slug === slug) || null;
         setSelectedState(state);
@@ -77,7 +83,6 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
         }
 
         if (state && state.metros) {
-            // Flatten cities from all metros
             const flatCities: FlattenedCity[] = [];
             state.metros.forEach(metro => {
                 if (metro.cities) {
@@ -89,24 +94,21 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                     });
                 }
             });
-            // Sort alphabetically
             flatCities.sort((a, b) => a.name.localeCompare(b.name));
             setAvailableCities(flatCities);
         }
     };
 
-    // Handle City Change
     const handleCityChange = (slug: string) => {
         const city = availableCities.find(c => c.slug === slug) || null;
         setSelectedCity(city);
         setSelectedSuburb(null);
 
-        // If city has no suburbs, trigger selection immediately
         if (city && (!city.suburbs || city.suburbs.length === 0) && selectedState) {
             const record = {
                 id: city.slug,
-                type: 'city',
-                country: 'US',
+                type: "city",
+                country: "US",
                 name: city.name,
                 state: selectedState.slug.toUpperCase(),
                 anchor_city: city.name,
@@ -117,69 +119,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                     state: selectedState.slug,
                     metro: city.metroSlug,
                     city: city.slug,
-                    suburb: ''
-                }
-            };
-            onLocationSelect(record);
-        }
-    };
-
-    // Handle Suburb Change
-    const handleSuburbChange = (slug: string) => {
-        // Special case: "all-city" slug to select just the city
-        if (slug === 'all-city') {
-            if (selectedState && selectedCity) {
-                const record = {
-                    id: selectedCity.slug,
-                    type: 'city',
-                    country: 'US',
-                    name: selectedCity.name,
-                    state: selectedState.slug.toUpperCase(),
-                    anchor_city: selectedCity.name,
-                    anchor_slug: selectedCity.slug,
-                    area_slug: selectedCity.slug, // Generic fallback
-                    metro_slug: selectedCity.metroSlug,
-                    path_slugs: {
-                        state: selectedState.slug,
-                        metro: selectedCity.metroSlug,
-                        city: selectedCity.slug,
-                        suburb: '' // Empty suburb for city-level
-                    }
-                };
-
-                const cleanRecord = {
-                    ...record,
-                    path_slugs: {
-                        state: selectedState.slug,
-                        metro: selectedCity.metroSlug,
-                        city: selectedCity.slug,
-                        suburb: '' // Will need handling in consumer
-                    }
-                };
-                onLocationSelect(cleanRecord); 
-                return;
-            }
-        }
-
-        const suburb = selectedCity?.suburbs?.find(s => s.slug === slug) || null;
-        setSelectedSuburb(suburb);
-
-        if (suburb && selectedState && selectedCity) {
-            const record = {
-                id: suburb.slug,
-                type: 'suburb',
-                country: 'US',
-                name: suburb.name,
-                state: selectedState.slug.toUpperCase(),
-                anchor_city: selectedCity.name,
-                anchor_slug: selectedCity.slug, // Display
-                area_slug: suburb.slug,
-                metro_slug: selectedCity.metroSlug,
-                path_slugs: {
-                    state: selectedState.slug,
-                    metro: selectedCity.metroSlug,
-                    city: selectedCity.slug,
-                    suburb: suburb.slug
+                    suburb: ""
                 }
             };
             onLocationSelect(record);
@@ -187,25 +127,32 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
     };
 
     return (
-        <div className={`flex flex-nowrap gap-2 items-center w-full ${className}`}>
+        <div className={cn("flex flex-nowrap gap-2 items-center w-full", className)}>
             {/* State Select */}
             <Select value={selectedState?.slug || ""} onValueChange={handleStateChange}>
                 <SelectTrigger
                     data-tour="tour-state-button"
                     className={cn(
-                        "h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex",
-                        (selectedCity || selectedSuburb) ? 'hidden md:flex' : 'flex',
-                        selectedState ? 'bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5',
+                        "h-11 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between px-0 md:px-4 focus:ring-0 overflow-visible [&>*:last-child]:hidden md:[&>*:last-child]:flex relative",
+                        (selectedCity || selectedSuburb) ? "hidden md:flex" : "flex",
+                        selectedState ? "bg-transparent text-[#9B7D4F] hover:bg-[#9B7D4F]/5" : "bg-transparent text-[#9B7D4F]/70 hover:bg-[#9B7D4F]/5",
                         buttonClassName
                     )}
                 >
-                    <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
-                    <div className={showLabelOnMobile ? "block min-w-0 truncate" : "hidden md:block"}>
-                        {staticStateLabel ? <span>{staticStateLabel}</span> : <SelectValue placeholder={placeholder || "State"} />}
+                    <div className="flex items-center gap-2 relative z-10 w-full justify-center md:justify-between">
+                        <div className="flex items-center gap-2 min-w-0 truncate">
+                            <MapPin className="w-5 h-5 md:w-4 md:h-4 shrink-0 text-[#9B7D4F]" />
+                            <div className={showLabelOnMobile ? "block min-w-0 truncate" : "hidden md:block"}>
+                                {staticStateLabel ? <span>{staticStateLabel}</span> : <SelectValue placeholder={placeholder || "State"} />}
+                            </div>
+                        </div>
+                        <div className="hidden md:block shrink-0">
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </div>
                     </div>
-                    <div className="hidden md:block">
-                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                    </div>
+                    {(buttonClassName?.includes("is-next") || buttonClassName?.includes("is-active")) && !selectedState && (
+                        <BorderBeam size={45} colorFrom="#ffaa40" colorTo="#9c40ff" borderWidth={1.5} />
+                    )}
                 </SelectTrigger>
                 <SelectContent>
                     {sortedStates.map((s) => (
@@ -218,15 +165,17 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
             {selectedState ? (
                 <Popover open={cityOpen} onOpenChange={setCityOpen}>
                     <PopoverTrigger asChild>
-                        <Button
+                        <BorderBeamButton
                             variant="outline"
                             role="combobox"
                             aria-expanded={cityOpen}
                             data-tour="tour-city-button"
+                            active={(buttonClassName?.includes("is-next") || buttonClassName?.includes("is-active")) && !!selectedState && !selectedCity}
+                            colorVariant="ocean"
                             className={cn(
                                 "h-11 px-0 md:px-4 w-full flex-1 md:w-full md:flex-1 rounded-full border-none transition-all flex items-center justify-center md:justify-between overflow-visible",
-                                selectedSuburb ? 'hidden md:flex' : 'flex',
-                                selectedCity ? 'bg-transparent text-[#9B7D4F] hover:bg-gold/5' : 'bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5',
+                                selectedSuburb ? "hidden md:flex" : "flex",
+                                selectedCity ? "bg-transparent text-[#9B7D4F] hover:bg-gold/5" : "bg-transparent text-[#9B7D4F]/70 hover:bg-gold/5",
                                 buttonClassName
                             )}
                         >
@@ -239,7 +188,7 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                             <div className="hidden md:block">
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </div>
-                        </Button>
+                        </BorderBeamButton>
                     </PopoverTrigger>
                     <PopoverContent className="w-[250px] p-0" align="start">
                         <Command>
@@ -285,9 +234,6 @@ export function HierarchicalLocationSelector({ className, onLocationSelect, plac
                     </div>
                 </Button>
             ) : null}
-
-            {/* Suburb/Area Select REMOVED for US as requested */}
         </div>
     );
 }
-

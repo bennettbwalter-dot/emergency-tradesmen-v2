@@ -1,0 +1,1811 @@
+import { ReactNode, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import * as THREE from "three";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Landing Page 3 — scroll-driven 3D hero (v2).
+ *
+ * A glowing emergency-response beam weaves along a winding suburban street,
+ * past sidewalks, lamps, driveways and gardens, stopping at three detailed
+ * houses and a broken-down car. Repairs trigger the instant the beam head
+ * touches each problem (touch distance is computed against the beam curve),
+ * with an impact shockwave + flash. The camera flies its own CatmullRom path,
+ * scrubbed by GSAP ScrollTrigger with damped smoothing.
+ *
+ * Supports the site's dark/light theme — the scene is rebuilt with a
+ * day-time palette when `mode` is "light".
+ */
+
+interface Hero3DProps {
+  mode: "dark" | "light";
+  headline: ReactNode;
+}
+
+// ---------------------------------------------------------------------------
+// Procedural textures
+// ---------------------------------------------------------------------------
+
+function canvasTexture(size: number, draw: (ctx: CanvasRenderingContext2D, s: number) => void): THREE.Texture {
+  const c = document.createElement("canvas");
+  c.width = c.height = size;
+  const ctx = c.getContext("2d")!;
+  draw(ctx, size);
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// deterministic pseudo-random so re-renders look identical
+function rng(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 16807) % 2147483647;
+    return (s % 10000) / 10000;
+  };
+}
+
+function makeBrickTexture(base: string, mortar: string, seed: number) {
+  return canvasTexture(256, (ctx, s) => {
+    const rand = rng(seed);
+    ctx.fillStyle = mortar;
+    ctx.fillRect(0, 0, s, s);
+    const bh = 16, bw = 42, gap = 3;
+    for (let row = 0; row * (bh + gap) < s; row++) {
+      const offset = row % 2 === 0 ? 0 : -bw / 2;
+      for (let col = -1; col * (bw + gap) + offset < s; col++) {
+        const jitter = (rand() - 0.5) * 26;
+        ctx.fillStyle = base;
+        ctx.globalAlpha = 1;
+        ctx.fillRect(col * (bw + gap) + offset, row * (bh + gap), bw, bh);
+        ctx.fillStyle = jitter > 0 ? "#ffffff" : "#000000";
+        ctx.globalAlpha = Math.abs(jitter) / 100;
+        ctx.fillRect(col * (bw + gap) + offset, row * (bh + gap), bw, bh);
+      }
+    }
+    ctx.globalAlpha = 1;
+  });
+}
+
+function makeShingleTexture(seed: number) {
+  return canvasTexture(256, (ctx, s) => {
+    const rand = rng(seed);
+    ctx.fillStyle = "#34373f";
+    ctx.fillRect(0, 0, s, s);
+    const rh = 20;
+    for (let row = 0; row * rh < s; row++) {
+      const offset = row % 2 === 0 ? 0 : 22;
+      for (let col = -1; col * 44 + offset < s; col++) {
+        const v = 44 + rand() * 26;
+        ctx.fillStyle = `rgb(${v},${v + 2},${v + 8})`;
+        ctx.fillRect(col * 44 + offset + 1, row * rh + 1, 42, rh - 2);
+      }
+      ctx.fillStyle = "rgba(0,0,0,0.45)";
+      ctx.fillRect(0, row * rh, s, 2);
+    }
+  });
+}
+
+function makeAsphaltTexture(seed: number) {
+  return canvasTexture(256, (ctx, s) => {
+    const rand = rng(seed);
+    ctx.fillStyle = "#3b3f48";
+    ctx.fillRect(0, 0, s, s);
+    for (let i = 0; i < 2600; i++) {
+      const v = 40 + rand() * 60;
+      ctx.fillStyle = `rgba(${v},${v},${v + 6},0.5)`;
+      ctx.fillRect(rand() * s, rand() * s, 1.6, 1.6);
+    }
+    // faint patch lines
+    ctx.strokeStyle = "rgba(0,0,0,0.25)";
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.moveTo(rand() * s, rand() * s);
+      ctx.lineTo(rand() * s, rand() * s);
+      ctx.stroke();
+    }
+  });
+}
+
+function makeConcreteTexture(seed: number) {
+  return canvasTexture(256, (ctx, s) => {
+    const rand = rng(seed);
+    ctx.fillStyle = "#9aa0a8";
+    ctx.fillRect(0, 0, s, s);
+    for (let i = 0; i < 1700; i++) {
+      const v = 120 + rand() * 70;
+      ctx.fillStyle = `rgba(${v},${v},${v},0.4)`;
+      ctx.fillRect(rand() * s, rand() * s, 1.4, 1.4);
+    }
+    // expansion joints
+    ctx.strokeStyle = "rgba(40,44,50,0.6)";
+    ctx.lineWidth = 2;
+    for (let x = 0; x <= s; x += 64) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, s);
+      ctx.stroke();
+    }
+  });
+}
+
+function makeGrassTexture(seed: number) {
+  return canvasTexture(256, (ctx, s) => {
+    const rand = rng(seed);
+    ctx.fillStyle = "#4a5d42";
+    ctx.fillRect(0, 0, s, s);
+    for (let i = 0; i < 3200; i++) {
+      const g = 70 + rand() * 70;
+      ctx.fillStyle = `rgba(${g * 0.55},${g},${g * 0.5},0.5)`;
+      ctx.fillRect(rand() * s, rand() * s, 1.6, 2.4);
+    }
+  });
+}
+
+function makeSkyTexture(light: boolean): THREE.Texture {
+  // stormy dusk gradient with soft cloud blotches (matches the reference art)
+  return canvasTexture(512, (ctx, s) => {
+    const rand = rng(41);
+    const grad = ctx.createLinearGradient(0, 0, 0, s);
+    if (light) {
+      grad.addColorStop(0, "#9fb4d6");
+      grad.addColorStop(0.55, "#c2d1e8");
+      grad.addColorStop(1, "#d9e2f0");
+    } else {
+      grad.addColorStop(0, "#15203a");
+      grad.addColorStop(0.4, "#1f2f52");
+      grad.addColorStop(0.75, "#2b3d5e");
+      grad.addColorStop(1, "#37496b");
+    }
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, s, s);
+    // layered cloud blobs
+    for (let i = 0; i < 90; i++) {
+      const x = rand() * s;
+      const y = rand() * s * 0.8;
+      const r = 24 + rand() * 70;
+      const dark = rand() > 0.5;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      const a = 0.05 + rand() * 0.09;
+      if (light) {
+        g.addColorStop(0, dark ? `rgba(120,135,160,${a})` : `rgba(255,255,255,${a})`);
+      } else {
+        g.addColorStop(0, dark ? `rgba(5,8,16,${a + 0.05})` : `rgba(120,150,200,${a})`);
+      }
+      g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+  });
+}
+
+function makeGlowTexture(): THREE.Texture {
+  return canvasTexture(128, (ctx, s) => {
+    const grad = ctx.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+    grad.addColorStop(0, "rgba(255,255,255,1)");
+    grad.addColorStop(0.25, "rgba(255,255,255,0.6)");
+    grad.addColorStop(0.6, "rgba(255,255,255,0.15)");
+    grad.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, s, s);
+  });
+}
+
+function makeFlowTexture(): THREE.Texture {
+  // white-on-black comet streak; black disappears under additive blending
+  const c = document.createElement("canvas");
+  c.width = 128;
+  c.height = 8;
+  const ctx = c.getContext("2d")!;
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, 128, 8);
+  const grad = ctx.createLinearGradient(0, 0, 128, 0);
+  grad.addColorStop(0, "rgba(255,255,255,0)");
+  grad.addColorStop(0.72, "rgba(255,255,255,0.9)");
+  grad.addColorStop(0.8, "rgba(255,255,255,1)");
+  grad.addColorStop(0.82, "rgba(255,255,255,0)");
+  grad.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 128, 8);
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.ClampToEdgeWrapping;
+  return tex;
+}
+
+// ---------------------------------------------------------------------------
+// Geometry helpers
+// ---------------------------------------------------------------------------
+
+/** Flat ribbon following a curve on the ground plane (roads / sidewalks / curbs). */
+function ribbonGeometry(curve: THREE.CatmullRomCurve3, width: number, segments: number, sideOffset = 0): THREE.BufferGeometry {
+  const pos: number[] = [];
+  const uv: number[] = [];
+  const idx: number[] = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const p = curve.getPointAt(t);
+    const tan = curve.getTangentAt(t);
+    let nx = -tan.z, nz = tan.x;
+    const nl = Math.hypot(nx, nz) || 1;
+    nx /= nl; nz /= nl;
+    const cx = p.x + nx * sideOffset;
+    const cz = p.z + nz * sideOffset;
+    pos.push(cx + nx * width / 2, 0, cz + nz * width / 2);
+    pos.push(cx - nx * width / 2, 0, cz - nz * width / 2);
+    uv.push(0, t * 50, 1, t * 50);
+    if (i < segments) {
+      const a = i * 2;
+      idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3);
+    }
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function makeSprite(tex: THREE.Texture, color: number, scale: number, opacity = 1) {
+  const mat = new THREE.SpriteMaterial({
+    map: tex, color, transparent: true, opacity,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.setScalar(scale);
+  return sprite;
+}
+
+/** First curve parameter at which the beam comes within `radius` of `center`. */
+function computeTouchU(curve: THREE.Curve<THREE.Vector3>, center: THREE.Vector3, radius: number): number {
+  let nearestU = 0.5;
+  let nearestD = Infinity;
+  for (let i = 0; i <= 600; i++) {
+    const u = i / 600;
+    const d = curve.getPointAt(u).distanceTo(center);
+    if (d < radius) return u;
+    if (d < nearestD) { nearestD = d; nearestU = u; }
+  }
+  return nearestU;
+}
+
+// ---------------------------------------------------------------------------
+// House factory
+// ---------------------------------------------------------------------------
+
+interface WindowUnit { glass: THREE.MeshStandardMaterial }
+
+interface HouseHandles {
+  group: THREE.Group;
+  windows: WindowUnit[];
+  interiorLights: THREE.PointLight[];
+  porchGlass: THREE.MeshStandardMaterial;
+  alertSprite: THREE.Sprite;
+  flashSprite: THREE.Sprite;
+  facadeGlow: THREE.Sprite;
+  roofPatch?: THREE.Mesh;
+  holeMat?: THREE.MeshBasicMaterial;
+  holeGlow?: THREE.Sprite;
+  crackMat?: THREE.LineBasicMaterial;
+  debris?: THREE.Mesh[];
+  shards?: THREE.Mesh[];
+  pipeCap?: THREE.Mesh;
+}
+
+interface HouseDeps {
+  glowTex: THREE.Texture;
+  brickTex: THREE.Texture;
+  shingleTex: THREE.Texture;
+  concreteTex: THREE.Texture;
+  grassTex: THREE.Texture;
+  light: boolean;
+}
+
+function addWindow(
+  parent: THREE.Group, windows: WindowUnit[],
+  x: number, y: number, z: number, w: number, h: number, rotY: number,
+) {
+  const frameMat = new THREE.MeshStandardMaterial({ color: 0xd8dce2, roughness: 0.6 });
+  const frame = new THREE.Mesh(new THREE.PlaneGeometry(w + 0.16, h + 0.16), frameMat);
+  frame.position.set(x, y, z);
+  frame.rotation.y = rotY;
+  frame.translateZ(0.005);
+  parent.add(frame);
+
+  const glass = new THREE.MeshStandardMaterial({
+    color: 0x141821, roughness: 0.15, metalness: 0.25,
+    emissive: new THREE.Color(0xffb368), emissiveIntensity: 0,
+  });
+  const pane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), glass);
+  pane.position.set(x, y, z);
+  pane.rotation.y = rotY;
+  pane.translateZ(0.015);
+  parent.add(pane);
+
+  const barMat = new THREE.MeshStandardMaterial({ color: 0xc4c9d2, roughness: 0.6 });
+  const vBar = new THREE.Mesh(new THREE.PlaneGeometry(0.045, h), barMat);
+  vBar.position.set(x, y, z); vBar.rotation.y = rotY; vBar.translateZ(0.022);
+  parent.add(vBar);
+  const hBar = new THREE.Mesh(new THREE.PlaneGeometry(w, 0.045), barMat);
+  hBar.position.set(x, y, z); hBar.rotation.y = rotY; hBar.translateZ(0.022);
+  parent.add(hBar);
+
+  // sill
+  const sill = new THREE.Mesh(new THREE.BoxGeometry(w + 0.22, 0.07, 0.12), frameMat);
+  sill.position.set(x, y - h / 2 - 0.05, z);
+  sill.rotation.y = rotY;
+  sill.translateZ(0.04);
+  parent.add(sill);
+
+  windows.push({ glass });
+}
+
+function createHouse(deps: HouseDeps, wallTint: number, variant: 1 | 2 | 3): HouseHandles {
+  const { glowTex, brickTex, shingleTex, concreteTex, grassTex } = deps;
+  const group = new THREE.Group();
+  const windows: WindowUnit[] = [];
+
+  const wallMat = new THREE.MeshStandardMaterial({ map: brickTex, color: wallTint, roughness: 0.95 });
+  const roofMat = new THREE.MeshStandardMaterial({ map: shingleTex, roughness: 0.9 });
+  const trimMat = new THREE.MeshStandardMaterial({ color: 0x20242d, roughness: 0.8 });
+  const fasciaMat = new THREE.MeshStandardMaterial({ color: 0xd8dce2, roughness: 0.7 });
+
+  // -- two-storey body --
+  const W = 4.8, D = 3.7, H = 4.7;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(W, H, D), wallMat);
+  body.position.y = H / 2;
+  group.add(body);
+
+  // plinth + floor band
+  const plinth = new THREE.Mesh(new THREE.BoxGeometry(W + 0.2, 0.3, D + 0.2), trimMat);
+  plinth.position.y = 0.15;
+  group.add(plinth);
+  const band = new THREE.Mesh(new THREE.BoxGeometry(W + 0.08, 0.1, D + 0.08), fasciaMat);
+  band.position.y = 2.5;
+  group.add(band);
+
+  // -- gable roof --
+  const halfW = W / 2 + 0.35;
+  const rise = 1.7;
+  const slope = Math.atan2(rise, W / 2);
+  const slabLen = Math.sqrt((W / 2) ** 2 + rise ** 2) + 0.5;
+  const ridgeY = H + rise;
+  const slabD = D + 0.7;
+  const mkSlab = (lenZ: number) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(slabLen, 0.14, lenZ), roofMat);
+    return m;
+  };
+  const eaveY = H + rise / 2 + 0.07;
+
+  let roofPatch: THREE.Mesh | undefined;
+  let holeMat: THREE.MeshBasicMaterial | undefined;
+
+  if (variant === 3) {
+    // left slab stays whole
+    const left = mkSlab(slabD);
+    left.rotation.z = slope;
+    left.position.set(-W / 4 - 0.1, eaveY, 0);
+    group.add(left);
+
+    // RIGHT slab carries the storm damage — house 3 is rotated so this slab
+    // and the cracked front window both face the camera vantage
+    const segLen = (slabD - 1.5) / 2;
+    const a = mkSlab(segLen);
+    a.rotation.z = -slope;
+    a.position.set(W / 4 + 0.1, eaveY, -(segLen / 2 + 0.75));
+    group.add(a);
+    const b = mkSlab(segLen);
+    b.rotation.z = -slope;
+    b.position.set(W / 4 + 0.1, eaveY, segLen / 2 + 0.75);
+    group.add(b);
+
+    // dark hole + exposed rafters
+    holeMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 1 });
+    const hole = new THREE.Mesh(new THREE.PlaneGeometry(slabLen - 0.3, 1.42), holeMat);
+    hole.rotation.x = -Math.PI / 2;
+    hole.rotation.y = -slope;
+    hole.position.set(W / 4 + 0.1, eaveY - 0.04, 0);
+    group.add(hole);
+    const rafterMat = new THREE.MeshStandardMaterial({ color: 0x5e4a33, roughness: 0.9 });
+    for (let i = -1; i <= 1; i++) {
+      const r = new THREE.Mesh(new THREE.BoxGeometry(slabLen - 0.5, 0.09, 0.09), rafterMat);
+      r.rotation.z = -slope;
+      r.position.set(W / 4 + 0.1, eaveY - 0.1, i * 0.5);
+      group.add(r);
+    }
+
+    roofPatch = mkSlab(1.52);
+    roofPatch.userData.seat = { px: W / 4 + 0.1, py: eaveY, pz: 0, rx: 0, ry: 0, rz: -slope };
+    roofPatch.position.set(W / 4 + 2.0, eaveY + 2.6, 0.7);
+    roofPatch.rotation.set(0.5, 0.55, -slope - 1.0);
+    group.add(roofPatch);
+  } else {
+    const left = mkSlab(slabD);
+    left.rotation.z = slope;
+    left.position.set(-W / 4 - 0.1, eaveY, 0);
+    group.add(left);
+    const right = mkSlab(slabD);
+    right.rotation.z = -slope;
+    right.position.set(W / 4 + 0.1, eaveY, 0);
+    group.add(right);
+  }
+
+  // gable infill
+  const tri = new THREE.Shape();
+  tri.moveTo(-W / 2, 0); tri.lineTo(W / 2, 0); tri.lineTo(0, rise); tri.closePath();
+  const triGeo = new THREE.ShapeGeometry(tri);
+  const gf = new THREE.Mesh(triGeo, wallMat);
+  gf.position.set(0, H, D / 2);
+  group.add(gf);
+  const gb = new THREE.Mesh(triGeo, wallMat);
+  gb.position.set(0, H, -D / 2);
+  gb.rotation.y = Math.PI;
+  group.add(gb);
+
+  // fascia boards along eaves + ridge cap + chimney
+  const fasciaL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.22, slabD), fasciaMat);
+  fasciaL.position.set(-halfW + 0.05, H + 0.05, 0);
+  group.add(fasciaL);
+  const fasciaR = fasciaL.clone();
+  fasciaR.position.x = halfW - 0.05;
+  group.add(fasciaR);
+  const ridge = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.15, slabD + 0.05), trimMat);
+  ridge.position.set(0, ridgeY + 0.04, 0);
+  group.add(ridge);
+  const chimney = new THREE.Mesh(new THREE.BoxGeometry(0.55, 1.5, 0.55), wallMat);
+  chimney.position.set(-W / 4, ridgeY - 0.1, -D / 4);
+  group.add(chimney);
+  const chimneyCap = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.1, 0.68), trimMat);
+  chimneyCap.position.set(-W / 4, ridgeY + 0.62, -D / 4);
+  group.add(chimneyCap);
+
+  // -- door with frame, canopy and step (front face: local +z) --
+  const fz = D / 2;
+  const doorFrame = new THREE.Mesh(new THREE.PlaneGeometry(1.06, 2.06), fasciaMat);
+  doorFrame.position.set(-1.35, 1.03, fz + 0.012);
+  group.add(doorFrame);
+  const door = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.9, 0.07), new THREE.MeshStandardMaterial({ color: 0x37424e, roughness: 0.55 }));
+  door.position.set(-1.35, 0.95, fz + 0.03);
+  group.add(door);
+  const knob = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 8), new THREE.MeshStandardMaterial({ color: 0xd9c089, metalness: 0.9, roughness: 0.3 }));
+  knob.position.set(-1.05, 0.95, fz + 0.08);
+  group.add(knob);
+  const canopy = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.07, 0.65), roofMat);
+  canopy.rotation.x = 0.22;
+  canopy.position.set(-1.35, 2.18, fz + 0.3);
+  group.add(canopy);
+  const step = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.13, 0.55), new THREE.MeshStandardMaterial({ map: concreteTex, roughness: 0.95 }));
+  step.position.set(-1.35, 0.065, fz + 0.32);
+  group.add(step);
+
+  // porch light
+  const porchGlass = new THREE.MeshStandardMaterial({
+    color: 0x14161d, emissive: new THREE.Color(0xffc878), emissiveIntensity: 0, roughness: 0.4,
+  });
+  const porch = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 10), porchGlass);
+  porch.position.set(-1.35, 2.32, fz + 0.12);
+  group.add(porch);
+
+  // -- windows: ground + upper floor, front + sides + gable --
+  addWindow(group, windows, 0.55, 1.55, fz, 1.0, 1.05, 0);
+  addWindow(group, windows, 1.75, 1.55, fz, 0.8, 1.05, 0);
+  addWindow(group, windows, -1.0, 3.7, fz, 0.9, 0.95, 0);
+  addWindow(group, windows, 1.15, 3.7, fz, 0.9, 0.95, 0);
+  addWindow(group, windows, W / 2, 1.55, 0.7, 0.95, 1.0, Math.PI / 2);
+  addWindow(group, windows, W / 2, 3.7, -0.6, 0.95, 0.9, Math.PI / 2);
+  addWindow(group, windows, -W / 2, 1.55, -0.5, 0.95, 1.0, -Math.PI / 2);
+  addWindow(group, windows, -W / 2, 3.7, 0.6, 0.95, 0.9, -Math.PI / 2);
+
+  // interior lights, both floors
+  const il1 = new THREE.PointLight(0xffb368, 0, 10, 2);
+  il1.position.set(0, 1.7, 0);
+  group.add(il1);
+  const il2 = new THREE.PointLight(0xffb368, 0, 10, 2);
+  il2.position.set(0, 3.9, 0);
+  group.add(il2);
+
+  // -- garden: lawn, path, bushes, fence --
+  const lawn = new THREE.Mesh(
+    new THREE.PlaneGeometry(W + 5.5, D + 6),
+    new THREE.MeshStandardMaterial({ map: grassTex, roughness: 1 }),
+  );
+  lawn.rotation.x = -Math.PI / 2;
+  lawn.position.y = 0.005;
+  group.add(lawn);
+
+  const path = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.0, 2.6),
+    new THREE.MeshStandardMaterial({ map: concreteTex, roughness: 0.95 }),
+  );
+  path.rotation.x = -Math.PI / 2;
+  path.position.set(-1.35, 0.015, fz + 1.75);
+  group.add(path);
+
+  const bushMat = new THREE.MeshStandardMaterial({ color: 0x223a26, roughness: 1 });
+  ([[-2.6, fz + 0.45, 0.5], [2.45, fz + 0.45, 0.42], [W / 2 + 0.6, -D / 4, 0.5]] as const).forEach(([bx, bz, s]) => {
+    const bush = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 1), bushMat);
+    bush.position.set(bx, s * 0.75, bz);
+    bush.scale.y = 0.78;
+    group.add(bush);
+  });
+
+  // low picket fence along the front garden edge
+  const fenceMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a8, roughness: 0.85 });
+  const fenceZ = fz + 2.7;
+  for (let i = 0; i < 7; i++) {
+    const px = -W / 2 - 1.6 + i * 1.25;
+    if (px > -2.0 && px < -0.7) continue; // gateway gap by the path
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.6, 0.09), fenceMat);
+    post.position.set(px, 0.3, fenceZ);
+    group.add(post);
+  }
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(W + 3.2, 0.06, 0.06), fenceMat);
+  rail.position.set(0, 0.48, fenceZ);
+  group.add(rail);
+
+  // pulsing emergency alert above the house + repair flash
+  const alertSprite = makeSprite(glowTex, 0xff5238, 2.0, 0);
+  alertSprite.position.set(0, ridgeY + 1.6, 0);
+  group.add(alertSprite);
+  const flashSprite = makeSprite(glowTex, 0xffd27a, 0.1, 0);
+  flashSprite.position.set(0, 2.4, 0);
+  group.add(flashSprite);
+
+  // soft warm spill in front of the house once the windows are lit
+  const facadeGlow = makeSprite(glowTex, 0xffc070, 5.5, 0);
+  facadeGlow.position.set(0, 1.6, D / 2 + 1.0);
+  group.add(facadeGlow);
+
+  const handles: HouseHandles = {
+    group, windows, interiorLights: [il1, il2], porchGlass, alertSprite, flashSprite, facadeGlow, roofPatch, holeMat,
+  };
+
+  if (variant === 3) {
+    // pulsing emergency marker right at the roof hole so the damage reads at night
+    const holeGlow = makeSprite(glowTex, 0xff7a3c, 1.5, 0);
+    holeGlow.position.set(W / 4 + 0.1, eaveY + 0.5, 0);
+    group.add(holeGlow);
+    handles.holeGlow = holeGlow;
+  }
+
+  if (variant === 2) {
+    // burst pipe stub on the front wall + repair cap (scales in when fixed)
+    const pipeMat = new THREE.MeshStandardMaterial({ color: 0x8d949e, metalness: 0.8, roughness: 0.35 });
+    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.5, 10), pipeMat);
+    pipe.rotation.x = Math.PI / 2;
+    pipe.position.set(1.0, 0.75, fz + 0.2);
+    group.add(pipe);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.12, 10), pipeMat);
+    cap.rotation.x = Math.PI / 2;
+    cap.position.set(1.0, 0.75, fz + 0.46);
+    cap.scale.setScalar(0.001);
+    group.add(cap);
+    handles.pipeCap = cap;
+  }
+
+  if (variant === 3) {
+    // broken window cracks (front ground-floor window at 0.55,1.55)
+    const crackMat = new THREE.LineBasicMaterial({ color: 0xbfe0ff, transparent: true, opacity: 1 });
+    const pts: THREE.Vector3[] = [];
+    const rand = rng(11);
+    for (let i = 0; i < 13; i++) {
+      const ang = (i / 13) * Math.PI * 2 + rand() * 0.5;
+      const len = 0.26 + rand() * 0.42;
+      pts.push(new THREE.Vector3(0.55, 1.55, fz + 0.05));
+      pts.push(new THREE.Vector3(0.55 + Math.cos(ang) * len, 1.55 + Math.sin(ang) * len * 0.9, fz + 0.05));
+    }
+    const cracks = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), crackMat);
+    group.add(cracks);
+    handles.crackMat = crackMat;
+
+    // glass shards on the lawn under the window
+    const shardMat = new THREE.MeshStandardMaterial({
+      color: 0xbfd8ee, roughness: 0.1, metalness: 0.3, transparent: true, opacity: 0.85,
+    });
+    const shards: THREE.Mesh[] = [];
+    for (let i = 0; i < 6; i++) {
+      const sh = new THREE.Mesh(new THREE.TetrahedronGeometry(0.12 + rand() * 0.08), shardMat);
+      sh.position.set(0.2 + rand() * 1.2, 0.06, fz + 0.5 + rand() * 1.1);
+      sh.rotation.set(rand() * 3, rand() * 3, rand() * 3);
+      group.add(sh);
+      shards.push(sh);
+    }
+    handles.shards = shards;
+
+    // storm debris
+    const debrisMat = new THREE.MeshStandardMaterial({ color: 0x2b2f3a, roughness: 0.9 });
+    const debris: THREE.Mesh[] = [];
+    ([[3.2, 1.6], [3.6, -0.5], [2.8, 2.6], [-3.2, 2.8]] as const).forEach(([dx, dz], i) => {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.18, 0.3), debrisMat);
+      m.position.set(dx, 0.09, dz);
+      m.rotation.y = i * 1.3;
+      group.add(m);
+      debris.push(m);
+    });
+    handles.debris = debris;
+  }
+
+  return handles;
+}
+
+// ---------------------------------------------------------------------------
+// Broken-down car
+// ---------------------------------------------------------------------------
+
+interface CarHandles {
+  group: THREE.Group;
+  hoodPivot: THREE.Group;
+  headlightMats: THREE.MeshStandardMaterial[];
+  headlightSprites: THREE.Sprite[];
+  tailMats: THREE.MeshStandardMaterial[];
+  hazardMats: THREE.MeshStandardMaterial[];
+  steamState: { level: number };
+  steamPoints: THREE.Points;
+  steamPos: Float32Array;
+  steamSeed: Float32Array;
+  alertSprite: THREE.Sprite;
+  flashSprite: THREE.Sprite;
+}
+
+function createCar(glowTex: THREE.Texture, steamCount: number): CarHandles {
+  const group = new THREE.Group();
+
+  const paint = new THREE.MeshStandardMaterial({ color: 0x7e2730, metalness: 0.65, roughness: 0.35 });
+  const darkTrim = new THREE.MeshStandardMaterial({ color: 0x14161c, roughness: 0.6 });
+  const glassMat = new THREE.MeshStandardMaterial({ color: 0x1d2735, roughness: 0.1, metalness: 0.4 });
+
+  // body shell (front of the car points along local +x)
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.7, 0.62, 1.72), paint);
+  body.position.y = 0.66;
+  group.add(body);
+  const bumperF = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.34, 1.74), darkTrim);
+  bumperF.position.set(1.86, 0.52, 0);
+  group.add(bumperF);
+  const bumperR = bumperF.clone();
+  bumperR.position.x = -1.86;
+  group.add(bumperR);
+
+  // cabin + glass
+  const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.58, 1.58), paint);
+  cabin.position.set(-0.35, 1.22, 0);
+  group.add(cabin);
+  const windshield = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 1.5), glassMat);
+  windshield.rotation.z = -0.45;
+  windshield.position.set(0.62, 1.16, 0);
+  group.add(windshield);
+  const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.46, 1.5), glassMat);
+  rearGlass.rotation.z = 0.5;
+  rearGlass.position.set(-1.32, 1.14, 0);
+  group.add(rearGlass);
+
+  // wheels + hubs
+  const wheelGeo = new THREE.CylinderGeometry(0.36, 0.36, 0.26, 18);
+  const wheelMat = new THREE.MeshStandardMaterial({ color: 0x0c0d10, roughness: 0.9 });
+  const hubGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.27, 12);
+  const hubMat = new THREE.MeshStandardMaterial({ color: 0x9aa2ad, metalness: 0.9, roughness: 0.3 });
+  ([[1.18, 0.78], [1.18, -0.78], [-1.18, 0.78], [-1.18, -0.78]] as const).forEach(([wx, wz]) => {
+    const w = new THREE.Mesh(wheelGeo, wheelMat);
+    w.rotation.x = Math.PI / 2;
+    w.position.set(wx, 0.36, wz);
+    group.add(w);
+    const hub = new THREE.Mesh(hubGeo, hubMat);
+    hub.rotation.x = Math.PI / 2;
+    hub.position.set(wx, 0.36, wz);
+    group.add(hub);
+  });
+
+  // hood, hinged at the windshield edge — starts OPEN
+  const hoodPivot = new THREE.Group();
+  hoodPivot.position.set(0.95, 0.99, 0);
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.07, 1.62), paint);
+  hood.position.x = 0.48;
+  hoodPivot.add(hood);
+  hoodPivot.rotation.z = 0.95; // open
+  group.add(hoodPivot);
+
+  // engine block visible under the open hood
+  const engine = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 1.2), darkTrim);
+  engine.position.set(1.25, 0.92, 0);
+  group.add(engine);
+
+  // lights
+  const headlightMats: THREE.MeshStandardMaterial[] = [];
+  const headlightSprites: THREE.Sprite[] = [];
+  ([0.62, -0.62] as const).forEach((z) => {
+    const m = new THREE.MeshStandardMaterial({ color: 0x20242c, emissive: new THREE.Color(0xfff4cf), emissiveIntensity: 0, roughness: 0.3 });
+    const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 10), m);
+    lamp.position.set(1.9, 0.74, z);
+    group.add(lamp);
+    headlightMats.push(m);
+    const s = makeSprite(glowTex, 0xfff4cf, 1.5, 0);
+    s.position.set(2.05, 0.74, z);
+    group.add(s);
+    headlightSprites.push(s);
+  });
+  const tailMats: THREE.MeshStandardMaterial[] = [];
+  ([0.6, -0.6] as const).forEach((z) => {
+    const m = new THREE.MeshStandardMaterial({ color: 0x2b0a0c, emissive: new THREE.Color(0xff2a2a), emissiveIntensity: 0, roughness: 0.3 });
+    const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.12, 0.26), m);
+    lamp.position.set(-1.88, 0.78, z);
+    group.add(lamp);
+    tailMats.push(m);
+  });
+  // hazard indicators (blink while broken down)
+  const hazardMats: THREE.MeshStandardMaterial[] = [];
+  ([[1.85, 0.78], [1.85, -0.78], [-1.85, 0.78], [-1.85, -0.78]] as const).forEach(([hx, hz]) => {
+    const m = new THREE.MeshStandardMaterial({ color: 0x3a2206, emissive: new THREE.Color(0xffa028), emissiveIntensity: 0, roughness: 0.4 });
+    const ind = new THREE.Mesh(new THREE.SphereGeometry(0.055, 8, 8), m);
+    ind.position.set(hx, 0.6, hz);
+    group.add(ind);
+    hazardMats.push(m);
+  });
+
+  // engine steam
+  const steamPos = new Float32Array(steamCount * 3);
+  const steamSeed = new Float32Array(steamCount);
+  for (let i = 0; i < steamCount; i++) steamSeed[i] = Math.fround(((i * 16807) % 1000) / 1000);
+  const steamGeo = new THREE.BufferGeometry();
+  steamGeo.setAttribute("position", new THREE.BufferAttribute(steamPos, 3));
+  const steamMat = new THREE.PointsMaterial({
+    color: 0xb9c6d4, size: 0.26, sizeAttenuation: true,
+    transparent: true, opacity: 0.5, depthWrite: false,
+  });
+  const steamPoints = new THREE.Points(steamGeo, steamMat);
+  steamPoints.frustumCulled = false;
+  group.add(steamPoints);
+
+  const alertSprite = makeSprite(glowTex, 0xffa028, 1.6, 0);
+  alertSprite.position.set(0.4, 2.6, 0);
+  group.add(alertSprite);
+  const flashSprite = makeSprite(glowTex, 0xffd27a, 0.1, 0);
+  flashSprite.position.set(0.6, 1.1, 0);
+  group.add(flashSprite);
+
+  return {
+    group, hoodPivot, headlightMats, headlightSprites, tailMats, hazardMats,
+    steamState: { level: 1 }, steamPoints, steamPos, steamSeed, alertSprite, flashSprite,
+  };
+}
+
+function createTree(x: number, z: number, s: number, light: boolean) {
+  const g = new THREE.Group();
+  const trunkMat = new THREE.MeshStandardMaterial({ color: light ? 0x4d3d2c : 0x141008, roughness: 1 });
+  const leafMat = new THREE.MeshStandardMaterial({ color: light ? 0x3e5c39 : 0x0d1a12, roughness: 1 });
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.18, 1.3, 6), trunkMat);
+  trunk.position.y = 0.65;
+  g.add(trunk);
+  const c1 = new THREE.Mesh(new THREE.ConeGeometry(1.0, 1.9, 7), leafMat);
+  c1.position.y = 1.9;
+  g.add(c1);
+  const c2 = new THREE.Mesh(new THREE.ConeGeometry(0.72, 1.4, 7), leafMat);
+  c2.position.y = 2.85;
+  g.add(c2);
+  g.position.set(x, 0, z);
+  g.scale.setScalar(s);
+  return g;
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
+export const Hero3D = ({ mode, headline }: Hero3DProps) => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const cap1Ref = useRef<HTMLDivElement>(null);
+  const cap2Ref = useRef<HTMLDivElement>(null);
+  const capCarRef = useRef<HTMLDivElement>(null);
+  const cap3Ref = useRef<HTMLDivElement>(null);
+  const outroRef = useRef<HTMLDivElement>(null);
+
+  const light = mode === "light";
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const stage = stageRef.current;
+    const canvas = canvasRef.current;
+    if (!wrap || !stage || !canvas) return;
+
+    const isMobile = window.innerWidth < 768;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile, powerPreference: "high-performance" });
+    } catch {
+      return;
+    }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.6 : 2));
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    // ---- theme palette ----
+    const pal = light
+      ? {
+          bg: 0xbdcfe9, fogD: 0.0095,
+          hemiSky: 0xeaf2ff, hemiGnd: 0x9aa4b5, hemiI: 1.25,
+          keyColor: 0xfff1d6, keyI: 1.9, keyPos: [20, 32, 14] as const,
+          groundTint: 0xb9c4ad, roadTint: 0xb7bcc6, walkTint: 0xd0d4da,
+          stars: false, windowLit: 1.1, lampGlow: 0.18,
+          beamOuter: 0x1f6dff, beamMid: 0x2da4ff, alertBoost: 1.4,
+        }
+      : {
+          bg: 0x0e1729, fogD: 0.012,
+          hemiSky: 0x3c4f78, hemiGnd: 0x0a0e16, hemiI: 1.05,
+          keyColor: 0x8da3d8, keyI: 0.9, keyPos: [-14, 24, -8] as const,
+          groundTint: 0x3d4a3c, roadTint: 0x4e5560, walkTint: 0x666c75,
+          stars: true, windowLit: 1.9, lampGlow: 0.55,
+          beamOuter: 0x1f7dff, beamMid: 0x57c8ff, alertBoost: 1,
+        };
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(pal.bg);
+    scene.fog = new THREE.FogExp2(pal.bg, pal.fogD);
+
+    // subtle image-based lighting so wet surfaces have something to reflect
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environment = envTex;
+    scene.environmentIntensity = light ? 0.45 : 0.28;
+
+    // stormy sky dome
+    const skyTex = makeSkyTexture(light);
+    const skyDome = new THREE.Mesh(
+      new THREE.SphereGeometry(290, 32, 18),
+      new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false, depthWrite: false }),
+    );
+    skyDome.position.z = -30;
+    scene.add(skyDome);
+
+    const camera = new THREE.PerspectiveCamera(isMobile ? 62 : 52, stage.clientWidth / stage.clientHeight, 0.1, 340);
+
+    scene.add(new THREE.HemisphereLight(pal.hemiSky, pal.hemiGnd, pal.hemiI));
+    const key = new THREE.DirectionalLight(pal.keyColor, pal.keyI);
+    key.position.set(...pal.keyPos);
+    scene.add(key);
+
+    // ---- textures ----
+    const glowTex = makeGlowTexture();
+    const flowTex = makeFlowTexture();
+    const brickTex = makeBrickTexture("#6b5448", "#4a4a4e", 3);
+    const brickTex2 = makeBrickTexture("#5d6470", "#43464e", 17);
+    const brickTex3 = makeBrickTexture("#71604f", "#4c4c52", 29);
+    const shingleTex = makeShingleTexture(7);
+    const asphaltTex = makeAsphaltTexture(5);
+    asphaltTex.repeat.set(1, 1);
+    const concreteTex = makeConcreteTexture(9);
+    const grassTex = makeGrassTexture(13);
+    grassTex.repeat.set(40, 40);
+
+    // ---- ground ----
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(620, 620),
+      new THREE.MeshStandardMaterial({ map: grassTex, color: pal.groundTint, roughness: 1 }),
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.02;
+    scene.add(ground);
+
+    // ---- stars (dark mode only) ----
+    if (pal.stars) {
+      const n = isMobile ? 350 : 700;
+      const pos = new Float32Array(n * 3);
+      const sr = rng(99);
+      for (let i = 0; i < n; i++) {
+        const r = 80 + sr() * 120;
+        const theta = sr() * Math.PI * 2;
+        const phi = sr() * Math.PI * 0.42;
+        pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+        pos[i * 3 + 1] = 10 + r * Math.cos(phi) * 0.55;
+        pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta) - 30;
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+      scene.add(new THREE.Points(geo, new THREE.PointsMaterial({
+        color: 0x9fb4e8, size: 0.55, sizeAttenuation: true, transparent: true, opacity: 0.75, depthWrite: false,
+      })));
+    }
+
+    // ---- the street: road, lane dashes, curbs, sidewalks ----
+    const roadCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 0, 24),
+      new THREE.Vector3(-1.5, 0, 8),
+      new THREE.Vector3(-4, 0, -6),
+      new THREE.Vector3(-2, 0, -18),
+      new THREE.Vector3(4, 0, -28),
+      new THREE.Vector3(4.5, 0, -38),
+      new THREE.Vector3(-1, 0, -48),
+      new THREE.Vector3(-4, 0, -58),
+      new THREE.Vector3(-1, 0, -72),
+      new THREE.Vector3(1.5, 0, -86),
+      new THREE.Vector3(0, 0, -104),
+      // the street keeps winding far into the distance until fog swallows it
+      new THREE.Vector3(-2.5, 0, -130),
+      new THREE.Vector3(2.5, 0, -160),
+      new THREE.Vector3(-1.5, 0, -195),
+      new THREE.Vector3(0, 0, -235),
+    ]);
+    const ROAD_W = 3.8;
+    const ROAD_SEGS = 360;
+
+    // rain-soaked asphalt: low roughness + metalness so it mirrors the sky,
+    // lamps and beam like the wet streets in the reference shots
+    const road = new THREE.Mesh(
+      ribbonGeometry(roadCurve, ROAD_W, ROAD_SEGS),
+      new THREE.MeshStandardMaterial({
+        map: asphaltTex, color: pal.roadTint, roughness: 0.3, metalness: 0.5,
+        envMapIntensity: light ? 1.0 : 1.4, side: THREE.DoubleSide,
+      }),
+    );
+    road.position.y = 0.015;
+    scene.add(road);
+
+    const curbMat = new THREE.MeshStandardMaterial({ color: light ? 0xc8ccd2 : 0x494e58, roughness: 0.7, metalness: 0.1, side: THREE.DoubleSide });
+    const walkMat = new THREE.MeshStandardMaterial({ map: concreteTex, color: pal.walkTint, roughness: 0.55, metalness: 0.15, side: THREE.DoubleSide });
+    ([1, -1] as const).forEach((side) => {
+      const curb = new THREE.Mesh(ribbonGeometry(roadCurve, 0.2, ROAD_SEGS, side * (ROAD_W / 2 + 0.1)), curbMat);
+      curb.position.y = 0.05;
+      scene.add(curb);
+      const walk = new THREE.Mesh(ribbonGeometry(roadCurve, 1.35, ROAD_SEGS, side * (ROAD_W / 2 + 0.2 + 0.675)), walkMat);
+      walk.position.y = 0.035;
+      scene.add(walk);
+    });
+
+    // centre-line dashes (one instanced draw call)
+    {
+      const dashGeo = new THREE.PlaneGeometry(0.13, 1.1);
+      dashGeo.rotateX(-Math.PI / 2);
+      const dashMat = new THREE.MeshBasicMaterial({ color: light ? 0xfafbfd : 0xb9c1cf, transparent: true, opacity: 0.85 });
+      const COUNT = 110;
+      const dashes = new THREE.InstancedMesh(dashGeo, dashMat, COUNT);
+      const m4 = new THREE.Matrix4();
+      for (let i = 0; i < COUNT; i++) {
+        const t = (i + 0.5) / COUNT;
+        const p = roadCurve.getPointAt(t);
+        const tan = roadCurve.getTangentAt(t);
+        m4.makeRotationY(Math.atan2(tan.x, tan.z));
+        m4.setPosition(p.x, 0.03, p.z);
+        dashes.setMatrixAt(i, m4);
+      }
+      dashes.instanceMatrix.needsUpdate = true;
+      scene.add(dashes);
+    }
+
+    // hedgerows lining both sidewalks (one instanced draw call)
+    {
+      const hr = rng(83);
+      const hedgeGeo = new THREE.IcosahedronGeometry(0.85, 1);
+      const hedgeMat = new THREE.MeshStandardMaterial({ color: light ? 0x3c5638 : 0x101e14, roughness: 1 });
+      const COUNT = isMobile ? 84 : 132;
+      const hedges = new THREE.InstancedMesh(hedgeGeo, hedgeMat, COUNT);
+      const m4 = new THREE.Matrix4();
+      const q = new THREE.Quaternion();
+      const sc = new THREE.Vector3();
+      const pos = new THREE.Vector3();
+      for (let i = 0; i < COUNT; i++) {
+        const t = 0.03 + (i / COUNT) * 0.94 + (hr() - 0.5) * 0.008;
+        const side = i % 2 === 0 ? 1 : -1;
+        const p = roadCurve.getPointAt(Math.min(Math.max(t, 0), 1));
+        const tan = roadCurve.getTangentAt(Math.min(Math.max(t, 0), 1));
+        let nx = -tan.z, nz = tan.x;
+        const nl = Math.hypot(nx, nz) || 1;
+        nx /= nl; nz /= nl;
+        const dist = ROAD_W / 2 + 1.9 + hr() * 0.5;
+        pos.set(p.x + nx * side * dist, 0.32, p.z + nz * side * dist);
+        q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), hr() * Math.PI);
+        sc.set(0.9 + hr() * 0.7, 0.55 + hr() * 0.3, 0.9 + hr() * 0.7);
+        m4.compose(pos, q, sc);
+        hedges.setMatrixAt(i, m4);
+      }
+      hedges.instanceMatrix.needsUpdate = true;
+      scene.add(hedges);
+    }
+
+    // ---- houses + car placement ----
+    const housePlacement = [
+      { pos: new THREE.Vector3(-9.6, 0, -14), rotY: Math.PI / 2 - 0.12 },   // faces +x toward road
+      { pos: new THREE.Vector3(11.2, 0, -32), rotY: -Math.PI / 2 + 0.1 },   // faces -x
+      // rotated so the damaged roof slab (+x) and cracked front window (+z)
+      // both face the elevated camera vantage to the north-east
+      { pos: new THREE.Vector3(-10.4, 0, -57.5), rotY: 0.12 },
+    ];
+    const deps: HouseDeps = { glowTex, brickTex, shingleTex, concreteTex, grassTex, light };
+    const houses = [
+      createHouse({ ...deps, brickTex }, 0xffffff, 1),
+      createHouse({ ...deps, brickTex: brickTex2 }, 0xffffff, 2),
+      createHouse({ ...deps, brickTex: brickTex3 }, 0xffffff, 3),
+    ];
+    houses.forEach((h, i) => {
+      h.group.position.copy(housePlacement[i].pos);
+      h.group.rotation.y = housePlacement[i].rotY;
+      h.group.updateMatrixWorld(true);
+      scene.add(h.group);
+    });
+
+    // house 2 starts with cool dim windows (power is fine — water is the problem)
+    houses[1].windows.forEach((w) => {
+      w.glass.emissive.set(0x9ab7d8);
+      w.glass.emissiveIntensity = light ? 0.1 : 0.35;
+    });
+
+    // driveways from the road edge to each house
+    houses.forEach((h) => {
+      let bestT = 0, bestD = Infinity;
+      for (let i = 0; i <= 300; i++) {
+        const t = i / 300;
+        const d = roadCurve.getPointAt(t).distanceTo(h.group.position);
+        if (d < bestD) { bestD = d; bestT = t; }
+      }
+      const pr = roadCurve.getPointAt(bestT);
+      const toHouse = h.group.position.clone().sub(pr);
+      toHouse.y = 0;
+      const len = toHouse.length() - 3.4;
+      const dir = toHouse.normalize();
+      const start = pr.clone().add(dir.clone().multiplyScalar(ROAD_W / 2 - 0.2));
+      const mid = start.clone().add(dir.clone().multiplyScalar(len / 2));
+      const drive = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.6, len),
+        new THREE.MeshStandardMaterial({ map: concreteTex, color: pal.walkTint, roughness: 0.95 }),
+      );
+      drive.rotation.x = -Math.PI / 2;
+      drive.rotation.z = -Math.atan2(dir.x, dir.z);
+      drive.position.set(mid.x, 0.025, mid.z);
+      scene.add(drive);
+    });
+
+    // broken-down car at the roadside (right-hand curb near z=-44)
+    const car = createCar(glowTex, isMobile ? 40 : 70);
+    {
+      let bestT = 0, bestD = Infinity;
+      const carAnchor = new THREE.Vector3(1.5, 0, -44);
+      for (let i = 0; i <= 300; i++) {
+        const t = i / 300;
+        const d = roadCurve.getPointAt(t).distanceTo(carAnchor);
+        if (d < bestD) { bestD = d; bestT = t; }
+      }
+      const p = roadCurve.getPointAt(bestT);
+      const tan = roadCurve.getTangentAt(bestT);
+      let nx = -tan.z, nz = tan.x;
+      const nl = Math.hypot(nx, nz) || 1;
+      nx /= nl; nz /= nl;
+      car.group.position.set(p.x - nx * (ROAD_W / 2 - 0.95), 0, p.z - nz * (ROAD_W / 2 - 0.95));
+      car.group.rotation.y = Math.atan2(tan.x, tan.z) - Math.PI / 2; // car +x = travel direction
+      car.group.updateMatrixWorld(true);
+      scene.add(car.group);
+    }
+    const carWorldPos = car.group.position.clone();
+
+    // trees for depth
+    const treeSpots: [number, number, number][] = [
+      [-15, -6, 1.1], [13, -10, 0.95], [-14, -24, 1.2], [15, -22, 1.0],
+      [-16, -38, 1.05], [14, -46, 1.2], [-15, -66, 0.95], [11, -60, 1.1],
+      [4, -76, 1.3], [-5, -78, 1.0], [18, -34, 1.25], [-18, -46, 1.15],
+    ];
+    treeSpots.forEach(([x, z, s]) => scene.add(createTree(x, z, s, light)));
+
+    // tree-lined road receding far into the distance — both sides, all the way
+    {
+      const tr = rng(57);
+      const TREE_COUNT = isMobile ? 30 : 48;
+      for (let i = 0; i < TREE_COUNT; i++) {
+        const t = 0.4 + (i / TREE_COUNT) * 0.59;
+        const side = i % 2 === 0 ? 1 : -1;
+        const p = roadCurve.getPointAt(t);
+        const tan = roadCurve.getTangentAt(t);
+        let nx = -tan.z, nz = tan.x;
+        const nl = Math.hypot(nx, nz) || 1;
+        nx /= nl; nz /= nl;
+        const dist = ROAD_W / 2 + 2.4 + tr() * 4.5;
+        scene.add(createTree(p.x + nx * side * dist, p.z + nz * side * dist, 0.9 + tr() * 0.6, light));
+      }
+    }
+
+    // street lamps along the sidewalk, lighting up as the beam passes
+    const lampHeads: { mat: THREE.MeshStandardMaterial; sprite: THREE.Sprite; pool: THREE.Mesh; u: number }[] = [];
+    const poleMat = new THREE.MeshStandardMaterial({ color: light ? 0x6f747c : 0x191d26, roughness: 0.7, metalness: 0.4 });
+    const lampTs = [0.05, 0.11, 0.17, 0.23, 0.29, 0.36, 0.43, 0.52, 0.62, 0.72, 0.82, 0.92];
+    lampTs.forEach((t, i) => {
+      const side = i % 2 === 0 ? 1 : -1;
+      const p = roadCurve.getPointAt(t);
+      const tan = roadCurve.getTangentAt(t);
+      let nx = -tan.z, nz = tan.x;
+      const nl = Math.hypot(nx, nz) || 1;
+      nx /= nl; nz /= nl;
+      const lx = p.x + nx * side * (ROAD_W / 2 + 0.85);
+      const lz = p.z + nz * side * (ROAD_W / 2 + 0.85);
+
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.09, 3.6, 8), poleMat);
+      pole.position.set(lx, 1.8, lz);
+      scene.add(pole);
+      // arm bending over the road
+      const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 1.1, 6), poleMat);
+      arm.rotation.z = Math.PI / 2;
+      arm.rotation.y = Math.atan2(nx * -side, nz * -side) + Math.PI / 2;
+      arm.position.set(lx - nx * side * 0.5, 3.55, lz - nz * side * 0.5);
+      scene.add(arm);
+      const headMat = new THREE.MeshStandardMaterial({
+        color: 0x191d26, emissive: new THREE.Color(0xffd9a0), emissiveIntensity: 0, roughness: 0.5,
+      });
+      const head = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.1, 0.2), headMat);
+      head.position.set(lx - nx * side * 1.0, 3.5, lz - nz * side * 1.0);
+      scene.add(head);
+      const s = makeSprite(glowTex, 0xffd9a0, 1.6, 0);
+      s.position.copy(head.position).add(new THREE.Vector3(0, -0.12, 0));
+      scene.add(s);
+      // warm light pool reflecting on the wet tarmac under the lamp
+      const pool = new THREE.Mesh(
+        new THREE.PlaneGeometry(4.2, 4.2),
+        new THREE.MeshBasicMaterial({
+          map: glowTex, color: 0xffc987, transparent: true, opacity: 0,
+          blending: THREE.AdditiveBlending, depthWrite: false,
+        }),
+      );
+      pool.rotation.x = -Math.PI / 2;
+      pool.position.set(lx - nx * side * 1.0, 0.045, lz - nz * side * 1.0);
+      scene.add(pool);
+      lampHeads.push({ mat: headMat, sprite: s, pool, u: t });
+    });
+
+    // ---- the emergency beam ----
+    const beamCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 9, 20),
+      new THREE.Vector3(0, 2.4, 10),
+      new THREE.Vector3(-3.8, 1.6, -4),
+      new THREE.Vector3(-9.6, 2.2, -14),    // house 1
+      new THREE.Vector3(-3.5, 1.5, -20),
+      new THREE.Vector3(4.2, 1.5, -27),
+      new THREE.Vector3(11.2, 2.2, -32),    // house 2
+      new THREE.Vector3(4.6, 1.4, -40),
+      new THREE.Vector3(carWorldPos.x, 1.15, carWorldPos.z), // the car
+      new THREE.Vector3(-2.2, 1.5, -50),
+      new THREE.Vector3(-10.4, 2.2, -57.5), // house 3
+      new THREE.Vector3(-4, 2.4, -63),
+      // finale: the beam soars up over the street, then dives back down and
+      // lands on the road ahead — handing off to the scroll line below the hero
+      new THREE.Vector3(-0.5, 4.5, -70),
+      new THREE.Vector3(0.8, 10.5, -82),
+      new THREE.Vector3(0.4, 7.5, -96),
+      new THREE.Vector3(0, 1.6, -110),
+      new THREE.Vector3(-0.5, 0.5, -126),
+    ]);
+
+    const tubeSegs = isMobile ? 260 : 420;
+    const mkTube = (r: number) => new THREE.TubeGeometry(beamCurve, tubeSegs, r, 8, false);
+    const coreGeo = mkTube(0.065);
+    const midGeo = mkTube(0.19);
+    const outerGeo = mkTube(0.46);
+    const flowGeo = mkTube(0.115);
+    const addMat = (color: number, opacity: number, map?: THREE.Texture) =>
+      new THREE.MeshBasicMaterial({
+        color, transparent: true, opacity, map,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+    const coreMat = addMat(0xffffff, 1);
+    const midMat = addMat(pal.beamMid, 0.55);
+    const outerMat = addMat(pal.beamOuter, light ? 0.3 : 0.18);
+    flowTex.repeat.set(26, 1);
+    const flowMat = addMat(0xcdeeff, 0.9, flowTex);
+
+    const tubes = [
+      new THREE.Mesh(coreGeo, coreMat),
+      new THREE.Mesh(midGeo, midMat),
+      new THREE.Mesh(outerGeo, outerMat),
+      new THREE.Mesh(flowGeo, flowMat),
+    ];
+    const tubeGeos = [coreGeo, midGeo, outerGeo, flowGeo];
+    tubes.forEach((tMesh) => {
+      tMesh.frustumCulled = false;
+      scene.add(tMesh);
+    });
+    const indexCounts = tubeGeos.map((g) => g.index!.count);
+    tubeGeos.forEach((g) => g.setDrawRange(0, 0));
+
+    // the beam's reflection smeared along the wet road surface
+    const beamGroundCurve = new THREE.CatmullRomCurve3(
+      beamCurve.points.map((p) => new THREE.Vector3(p.x, 0.04, p.z)),
+    );
+    const reflSegs = isMobile ? 200 : 300;
+    const reflWide = new THREE.Mesh(
+      ribbonGeometry(beamGroundCurve, 1.5, reflSegs),
+      new THREE.MeshBasicMaterial({
+        color: pal.beamOuter, transparent: true, opacity: light ? 0.16 : 0.2,
+        blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
+      }),
+    );
+    const reflCore = new THREE.Mesh(
+      ribbonGeometry(beamGroundCurve, 0.45, reflSegs),
+      new THREE.MeshBasicMaterial({
+        color: 0x9fd8ff, transparent: true, opacity: light ? 0.2 : 0.3,
+        blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
+      }),
+    );
+    reflWide.frustumCulled = false;
+    reflCore.frustumCulled = false;
+    scene.add(reflWide, reflCore);
+    const reflGeos = [reflWide.geometry, reflCore.geometry];
+    const reflCounts = reflGeos.map((g) => g.index!.count);
+    reflGeos.forEach((g) => g.setDrawRange(0, 0));
+
+    // glow pool travelling with the beam head on the road
+    const headPool = new THREE.Mesh(
+      new THREE.PlaneGeometry(5, 5),
+      new THREE.MeshBasicMaterial({
+        map: glowTex, color: 0x8fd2ff, transparent: true, opacity: 0,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      }),
+    );
+    headPool.rotation.x = -Math.PI / 2;
+    scene.add(headPool);
+
+    // beam head — layered sprites + travelling light
+    const headOuter = makeSprite(glowTex, light ? 0x2da4ff : 0x6fc6ff, 5.2, 0.9);
+    const headMid = makeSprite(glowTex, 0xaee2ff, 2.4, 1);
+    const headCore = makeSprite(glowTex, 0xffffff, 1.2, 1);
+    const headLight = new THREE.PointLight(0x8fd2ff, 0, 22, 2);
+    scene.add(headOuter, headMid, headCore, headLight);
+
+    // comet trail behind the head
+    const TRAIL_N = isMobile ? 10 : 18;
+    const trail: THREE.Sprite[] = [];
+    for (let i = 0; i < TRAIL_N; i++) {
+      const s = makeSprite(glowTex, 0x8fd2ff, 0.8, 0);
+      scene.add(s);
+      trail.push(s);
+    }
+
+    // ---- water burst for house 2 ----
+    const waterState = { level: 1 };
+    const WATER_N = isMobile ? 220 : 420;
+    const waterGeo = new THREE.BufferGeometry();
+    const waterPos = new Float32Array(WATER_N * 3);
+    const waterSeed = new Float32Array(WATER_N);
+    const wr = rng(31);
+    for (let i = 0; i < WATER_N; i++) waterSeed[i] = wr();
+    waterGeo.setAttribute("position", new THREE.BufferAttribute(waterPos, 3));
+    const waterMat = new THREE.PointsMaterial({
+      color: 0x86d4ff, size: 0.17, sizeAttenuation: true,
+      transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const water = new THREE.Points(waterGeo, waterMat);
+    water.frustumCulled = false;
+    scene.add(water);
+    const h2g = houses[1].group;
+    const burstOrigin = h2g.localToWorld(new THREE.Vector3(1.0, 0.78, 3.7 / 2 + 0.45));
+    const burstDir = new THREE.Vector3(0, 0.55, 1).applyQuaternion(h2g.quaternion).normalize();
+
+    const puddle = new THREE.Mesh(
+      new THREE.CircleGeometry(2.4, 26),
+      new THREE.MeshStandardMaterial({
+        color: light ? 0x4d7ba0 : 0x0d2436, roughness: 0.12, metalness: 0.5,
+        transparent: true, opacity: 0.85,
+      }),
+    );
+    puddle.rotation.x = -Math.PI / 2;
+    const puddlePos = burstOrigin.clone().add(burstDir.clone().setY(0).multiplyScalar(1.6));
+    puddle.position.set(puddlePos.x, 0.045, puddlePos.z);
+    scene.add(puddle);
+
+    // ---- light rain, carried along with the camera ----
+    const RAIN_N = isMobile ? 240 : 620;
+    const rainGeo = new THREE.BufferGeometry();
+    const rainPos = new Float32Array(RAIN_N * 3);
+    const rainSeed = new Float32Array(RAIN_N * 2);
+    const rr = rng(67);
+    for (let i = 0; i < RAIN_N; i++) {
+      rainSeed[i * 2] = rr();
+      rainSeed[i * 2 + 1] = rr();
+      rainPos[i * 3] = (rr() - 0.5) * 30;
+      rainPos[i * 3 + 1] = rr() * 13;
+      rainPos[i * 3 + 2] = (rr() - 0.5) * 30;
+    }
+    rainGeo.setAttribute("position", new THREE.BufferAttribute(rainPos, 3));
+    const rainMat = new THREE.PointsMaterial({
+      color: light ? 0x8fa3c0 : 0x9db8e0, size: 0.06, sizeAttenuation: true,
+      transparent: true, opacity: 0.38, depthWrite: false,
+    });
+    const rain = new THREE.Points(rainGeo, rainMat);
+    rain.frustumCulled = false;
+    scene.add(rain);
+
+    // ---- impact shockwave rings (one per target) ----
+    const ringMat = () => new THREE.MeshBasicMaterial({
+      color: 0x9fdcff, transparent: true, opacity: 0,
+      blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
+    });
+    const ringGeo = new THREE.RingGeometry(0.85, 1.0, 48);
+    const impactTargets = [
+      housePlacement[0].pos, housePlacement[1].pos, carWorldPos, housePlacement[2].pos,
+    ];
+    const rings = impactTargets.map((p) => {
+      const r = new THREE.Mesh(ringGeo, ringMat());
+      r.rotation.x = -Math.PI / 2;
+      r.position.set(p.x, 0.06, p.z);
+      r.scale.setScalar(0.001);
+      scene.add(r);
+      return r;
+    });
+
+    // ---- reversible fix timelines ----
+    // order: house1, house2, car, house3
+    const fixed = [false, false, false, false];
+    const oneShots: gsap.core.Tween[] = [];
+
+    const impactFx = (i: number, flashSprite: THREE.Sprite) => {
+      if (reducedMotion) return;
+      const ring = rings[i];
+      oneShots.push(gsap.fromTo(ring.scale, { x: 0.3, y: 0.3, z: 0.3 }, { x: 7, y: 7, z: 7, duration: 1.1, ease: "power2.out" }));
+      oneShots.push(gsap.fromTo(ring.material as THREE.Material, { opacity: 0.85 }, { opacity: 0, duration: 1.1, ease: "power2.out" }));
+      oneShots.push(gsap.fromTo(
+        flashSprite,
+        {},
+        {
+          duration: 1.0,
+          ease: "power2.out",
+          onUpdate() {
+            const p = this.progress();
+            flashSprite.scale.setScalar(0.1 + Math.sin(p * Math.PI) * 6.5);
+            (flashSprite.material as THREE.SpriteMaterial).opacity = Math.sin(p * Math.PI) * 0.95;
+          },
+        },
+      ));
+    };
+
+    const lit = pal.windowLit;
+    const houseFixTl = (h: HouseHandles, variant: 1 | 2 | 3) => {
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut" } });
+      tl.to(h.alertSprite.material, { opacity: 0, duration: 0.35 }, 0);
+      if (h.holeGlow) tl.to(h.holeGlow.material, { opacity: 0, duration: 0.3 }, 0);
+      tl.to(h.facadeGlow.material, { opacity: light ? 0.14 : 0.3, duration: 0.8 }, 0.4);
+      if (variant === 1) {
+        h.windows.forEach((w, wi) => {
+          tl.to(w.glass, { emissiveIntensity: lit, duration: 0.55, delay: wi * 0.07 }, 0);
+        });
+        h.interiorLights.forEach((il) => tl.to(il, { intensity: light ? 2 : 6.5, duration: 0.7 }, 0.1));
+        tl.to(h.porchGlass, { emissiveIntensity: light ? 1 : 2.4, duration: 0.4 }, 0.35);
+      } else if (variant === 2) {
+        tl.to(waterState, { level: 0, duration: 0.5, ease: "power3.out" }, 0);
+        if (h.pipeCap) tl.to(h.pipeCap.scale, { x: 1, y: 1, z: 1, duration: 0.4, ease: "back.out(2)" }, 0.15);
+        tl.to(puddle.scale, { x: 0.1, y: 0.1, z: 0.1, duration: 1.3 }, 0.25);
+        tl.to(puddle.material as THREE.Material, { opacity: 0, duration: 1.1 }, 0.35);
+        h.windows.forEach((w) => {
+          tl.to(w.glass.emissive, { r: 1, g: 0.7, b: 0.41, duration: 0.6 }, 0.3);
+          tl.to(w.glass, { emissiveIntensity: lit * 0.85, duration: 0.6 }, 0.3);
+        });
+        h.interiorLights.forEach((il) => tl.to(il, { intensity: light ? 1.6 : 5, duration: 0.6 }, 0.35));
+      } else {
+        const seat = h.roofPatch!.userData.seat;
+        tl.to(h.roofPatch!.position, { x: seat.px, y: seat.py, z: seat.pz, duration: 0.85, ease: "power3.inOut" }, 0.05);
+        tl.to(h.roofPatch!.rotation, { x: seat.rx, y: seat.ry, z: seat.rz, duration: 0.85, ease: "power3.inOut" }, 0.05);
+        tl.to(h.holeMat!, { opacity: 0, duration: 0.4 }, 0.75);
+        tl.to(h.crackMat!, { opacity: 0, duration: 0.6 }, 0.3);
+        h.shards!.forEach((sh, si) => {
+          tl.to(sh.position, { y: -0.15, duration: 0.5, delay: si * 0.05 }, 0.25);
+          tl.to(sh.material as THREE.Material, { opacity: 0, duration: 0.5, delay: si * 0.05 }, 0.25);
+        });
+        h.debris!.forEach((d, di) => {
+          tl.to(d.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 0.45, delay: di * 0.06 }, 0.25);
+        });
+        h.windows.forEach((w) => {
+          tl.to(w.glass, { emissiveIntensity: lit * 0.9, duration: 0.6 }, 0.7);
+        });
+        h.interiorLights.forEach((il) => tl.to(il, { intensity: light ? 1.8 : 5.5, duration: 0.6 }, 0.7));
+      }
+      return tl;
+    };
+
+    const carFixTl = () => {
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.inOut" } });
+      tl.to(car.alertSprite.material, { opacity: 0, duration: 0.3 }, 0);
+      tl.to(car.hoodPivot.rotation, { z: 0, duration: 0.7 }, 0.05);
+      tl.to(car.steamState, { level: 0, duration: 0.4 }, 0);
+      car.headlightMats.forEach((m) => tl.to(m, { emissiveIntensity: 3.2, duration: 0.35 }, 0.6));
+      car.headlightSprites.forEach((s) => tl.to(s.material, { opacity: light ? 0.35 : 0.7, duration: 0.35 }, 0.6));
+      car.tailMats.forEach((m) => tl.to(m, { emissiveIntensity: 1.6, duration: 0.35 }, 0.65));
+      return tl;
+    };
+
+    const fixTimelines = [
+      houseFixTl(houses[0], 1),
+      houseFixTl(houses[1], 2),
+      carFixTl(),
+      houseFixTl(houses[2], 3),
+    ];
+    const flashSprites = [houses[0].flashSprite, houses[1].flashSprite, car.flashSprite, houses[2].flashSprite];
+
+    const setFixed = (i: number, v: boolean) => {
+      if (fixed[i] === v) return;
+      fixed[i] = v;
+      if (v) {
+        fixTimelines[i].timeScale(1).play();
+        impactFx(i, flashSprites[i]);
+      } else {
+        fixTimelines[i].timeScale(1.7).reverse();
+      }
+    };
+
+    // the beam triggers each repair the INSTANT it touches the target
+    const touchTargets = [
+      { center: housePlacement[0].pos.clone().setY(2.2), r: 3.6 },
+      { center: housePlacement[1].pos.clone().setY(2.2), r: 3.6 },
+      { center: carWorldPos.clone().setY(1.1), r: 2.4 },
+      { center: housePlacement[2].pos.clone().setY(2.2), r: 3.6 },
+    ];
+    const touchU = touchTargets.map((tt) => computeTouchU(beamCurve, tt.center, tt.r));
+
+    // ---- camera path ----
+    const cameraCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 3.6, 26),
+      new THREE.Vector3(2.6, 3.8, 12),
+      new THREE.Vector3(5.2, 4.4, 2),
+      new THREE.Vector3(4.2, 4.6, -9),     // house 1 across the street
+      new THREE.Vector3(-2.5, 4.4, -20),
+      new THREE.Vector3(-5.5, 4.6, -29),   // house 2 across the street
+      new THREE.Vector3(-4.8, 4.0, -38),
+      new THREE.Vector3(-5.2, 3.9, -45.5), // beside the car, slightly back for full framing
+      new THREE.Vector3(3.6, 5.0, -52.5),  // arrive at the house 3 vantage BEFORE the beam touches
+      new THREE.Vector3(4.2, 5.4, -55),    // house 3 across the street, raised to show the roof
+      new THREE.Vector3(1.5, 4.6, -63),
+      new THREE.Vector3(0.5, 4.4, -73),
+      new THREE.Vector3(0, 4.0, -86),      // settles low, watching the beam arc up, dive and land ahead
+    ]);
+
+    // Sync beam to camera: remap scroll progress → beam progress so the beam
+    // touches each target at the exact moment the camera reaches its vantage
+    // point (the two curves have different arc lengths, so a linear mapping
+    // drifts further out of sync at every stop).
+    const vantagePoints = [
+      new THREE.Vector3(4.2, 4.6, -9),     // house 1 view
+      new THREE.Vector3(-5.5, 4.6, -29),   // house 2 view
+      new THREE.Vector3(-5.2, 3.9, -45.5), // car view
+      new THREE.Vector3(4.2, 5.4, -55),    // house 3 view
+    ];
+    const stopP = vantagePoints.map((v) => computeTouchU(cameraCurve, v, 0.001)); // nearest-u
+    const beamStops: [number, number][] = [
+      [0, 0],
+      ...stopP.map((p, i) => [p, touchU[i] + 0.004] as [number, number]),
+      [0.97, 1],
+      [1, 1],
+    ];
+    const beamMap = (p: number) => {
+      for (let i = 1; i < beamStops.length; i++) {
+        if (p <= beamStops[i][0]) {
+          const [p0, u0] = beamStops[i - 1];
+          const [p1, u1] = beamStops[i];
+          const k = p1 === p0 ? 1 : (p - p0) / (p1 - p0);
+          return u0 + (u1 - u0) * k;
+        }
+      }
+      return 1;
+    };
+
+    // ---- scroll plumbing ----
+    const scroll = { target: 0, current: 0 };
+    const driver = ScrollTrigger.create({
+      trigger: wrap,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => { scroll.target = self.progress; },
+    });
+
+    const captionTl = gsap.timeline({
+      scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: 0.5 },
+      defaults: { ease: "none" },
+    });
+    const intro = introRef.current!;
+    const caps = [cap1Ref.current!, cap2Ref.current!, capCarRef.current!, cap3Ref.current!];
+    const outro = outroRef.current!;
+    gsap.set([...caps, outro], { autoAlpha: 0, y: 44 });
+    captionTl
+      .to(intro, { autoAlpha: 0, y: -50, duration: 8 }, 7)
+      .to(caps[0], { autoAlpha: 1, y: 0, duration: 5 }, 16)
+      .to(caps[0], { autoAlpha: 0, y: -34, duration: 4 }, 32)
+      .to(caps[1], { autoAlpha: 1, y: 0, duration: 5 }, 40)
+      .to(caps[1], { autoAlpha: 0, y: -34, duration: 4 }, 54)
+      .to(caps[2], { autoAlpha: 1, y: 0, duration: 5 }, 58)
+      .to(caps[2], { autoAlpha: 0, y: -34, duration: 4 }, 69)
+      .to(caps[3], { autoAlpha: 1, y: 0, duration: 5 }, 73)
+      .to(caps[3], { autoAlpha: 0, y: -34, duration: 4 }, 86)
+      .to(outro, { autoAlpha: 1, y: 0, duration: 6 }, 91)
+      .to({}, { duration: 3 });
+
+    // ---- render loop ----
+    const clock = new THREE.Clock();
+    let raf = 0;
+    let running = true;
+    const camPos = new THREE.Vector3();
+    const lookTarget = new THREE.Vector3();
+    const lookCurrent = new THREE.Vector3(0, 2, 0);
+    const damp = reducedMotion ? 1 : 0.085;
+
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      if (!running) return;
+      const t = clock.getElapsedTime();
+
+      scroll.current += (scroll.target - scroll.current) * damp;
+      const p = scroll.current;
+      const beamP = Math.min(Math.max(beamMap(Math.min(Math.max(p, 0), 1)), 0.0001), 1);
+
+      // beam reveal + flowing energy + wet-road reflection
+      tubeGeos.forEach((g, gi) => {
+        g.setDrawRange(0, Math.floor((indexCounts[gi] * beamP) / 3) * 3);
+      });
+      reflGeos.forEach((g, gi) => {
+        g.setDrawRange(0, Math.floor((reflCounts[gi] * beamP) / 6) * 6);
+      });
+      flowTex.offset.x = -t * 1.35;
+
+      const headPos = beamCurve.getPointAt(beamP);
+      headOuter.position.copy(headPos);
+      headMid.position.copy(headPos);
+      headCore.position.copy(headPos);
+      headLight.position.copy(headPos);
+      headLight.intensity = p < 0.004 ? 0 : (light ? 18 : 42) + Math.sin(t * 7) * 6;
+      const pulse = 1 + Math.sin(t * 5.5) * 0.12;
+      headOuter.scale.setScalar(5.2 * pulse);
+      headMid.scale.setScalar(2.4 * (2 - pulse) * 0.85);
+      headCore.scale.setScalar(1.2);
+      headPool.position.set(headPos.x, 0.05, headPos.z);
+      (headPool.material as THREE.MeshBasicMaterial).opacity =
+        p < 0.004 ? 0 : (light ? 0.28 : 0.45) * pulse;
+
+      // comet trail
+      for (let i = 0; i < TRAIL_N; i++) {
+        const u = beamP - (i + 1) * 0.0045;
+        const s = trail[i];
+        if (u <= 0 || p < 0.004) {
+          (s.material as THREE.SpriteMaterial).opacity = 0;
+          continue;
+        }
+        s.position.copy(beamCurve.getPointAt(u));
+        const k = 1 - i / TRAIL_N;
+        s.scale.setScalar(0.4 + k * 1.4);
+        (s.material as THREE.SpriteMaterial).opacity = k * 0.5;
+      }
+
+      // touch-triggered repairs (reversible on scroll-back)
+      for (let i = 0; i < 4; i++) setFixed(i, beamP >= touchU[i]);
+
+      // alert pulses on anything still broken
+      houses.forEach((h, hi) => {
+        const idx = hi === 2 ? 3 : hi; // map house index → target index
+        const m = h.alertSprite.material as THREE.SpriteMaterial;
+        if (!fixed[idx]) {
+          const pulse2 = 0.35 + Math.sin(t * 3.4 + hi * 1.7) * 0.3;
+          m.opacity = pulse2 * pal.alertBoost;
+          if (h.holeGlow) (h.holeGlow.material as THREE.SpriteMaterial).opacity = pulse2 * pal.alertBoost * 0.9;
+        }
+      });
+      if (!fixed[2]) {
+        (car.alertSprite.material as THREE.SpriteMaterial).opacity = (0.3 + Math.sin(t * 4.2) * 0.28) * pal.alertBoost;
+        // blinking hazards
+        const blink = Math.sin(t * 6) > 0 ? 2.4 : 0.1;
+        car.hazardMats.forEach((m) => { m.emissiveIntensity = blink; });
+      } else {
+        car.hazardMats.forEach((m) => { m.emissiveIntensity = 0; });
+      }
+
+      // street lamps wake up as the beam passes (and pool on the wet road)
+      lampHeads.forEach((l) => {
+        const k = Math.min(Math.max((beamP - l.u) * 10, 0), 1);
+        l.mat.emissiveIntensity = k * (light ? 0.4 : 2.4);
+        (l.sprite.material as THREE.SpriteMaterial).opacity = k * pal.lampGlow;
+        (l.pool.material as THREE.MeshBasicMaterial).opacity = k * (light ? 0.12 : 0.32);
+      });
+
+      // rain falls in a volume around the camera
+      rain.position.set(camera.position.x, 0, camera.position.z);
+      for (let i = 0; i < RAIN_N; i++) {
+        rainPos[i * 3 + 1] = 13 - ((rainSeed[i * 2] * 13 + t * (7 + rainSeed[i * 2 + 1] * 4)) % 13);
+      }
+      rainGeo.attributes.position.needsUpdate = true;
+
+      // water burst
+      const lvl = waterState.level;
+      if (lvl > 0.001) {
+        for (let i = 0; i < WATER_N; i++) {
+          const life = (t * 0.6 + waterSeed[i]) % 1;
+          const spread = 0.6;
+          const sx = (waterSeed[i] - 0.5) * spread;
+          const sz = (waterSeed[(i + 13) % WATER_N] - 0.5) * spread;
+          waterPos[i * 3] = burstOrigin.x + (burstDir.x * 4.6 + sx) * life;
+          waterPos[i * 3 + 1] = Math.max(burstOrigin.y + burstDir.y * 3.6 * life - 4.6 * life * life, 0.04);
+          waterPos[i * 3 + 2] = burstOrigin.z + (burstDir.z * 4.6 + sz) * life;
+        }
+        waterGeo.attributes.position.needsUpdate = true;
+        waterMat.opacity = 0.9 * lvl;
+        water.visible = true;
+      } else {
+        water.visible = false;
+      }
+
+      // engine steam
+      const sl = car.steamState.level;
+      if (sl > 0.001) {
+        const n = car.steamSeed.length;
+        for (let i = 0; i < n; i++) {
+          const life = (t * 0.35 + car.steamSeed[i]) % 1;
+          car.steamPos[i * 3] = 1.25 + Math.sin(t + i) * 0.12 * life;
+          car.steamPos[i * 3 + 1] = 1.0 + life * 1.5;
+          car.steamPos[i * 3 + 2] = (car.steamSeed[(i + 7) % n] - 0.5) * 0.7 * (0.4 + life);
+        }
+        car.steamPoints.geometry.attributes.position.needsUpdate = true;
+        (car.steamPoints.material as THREE.PointsMaterial).opacity = 0.5 * sl;
+        car.steamPoints.visible = true;
+      } else {
+        car.steamPoints.visible = false;
+      }
+
+      // camera
+      cameraCurve.getPointAt(Math.min(p, 1), camPos);
+      camera.position.copy(camPos);
+      lookTarget.copy(beamCurve.getPointAt(Math.min(beamP + 0.012, 1)));
+      lookTarget.y = Math.max(lookTarget.y * 0.6 + 0.9, 1.2);
+      lookCurrent.lerp(lookTarget, reducedMotion ? 1 : 0.12);
+      camera.lookAt(lookCurrent);
+
+      renderer.render(scene, camera);
+    };
+    raf = requestAnimationFrame(tick);
+
+    // pause rendering offscreen / hidden tab
+    const io = new IntersectionObserver(([entry]) => { running = entry.isIntersecting && !document.hidden; }, { threshold: 0 });
+    io.observe(wrap);
+    const onVis = () => { running = !document.hidden; };
+    document.addEventListener("visibilitychange", onVis);
+
+    const onResize = () => {
+      const w = stage.clientWidth;
+      const h = stage.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    const ro = new ResizeObserver(onResize);
+    ro.observe(stage);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      ro.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      driver.kill();
+      captionTl.scrollTrigger?.kill();
+      captionTl.kill();
+      fixTimelines.forEach((tl) => tl.kill());
+      oneShots.forEach((f) => f.kill());
+      scene.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
+        if (mesh.geometry) mesh.geometry.dispose();
+        const mat = mesh.material as THREE.Material | THREE.Material[] | undefined;
+        if (Array.isArray(mat)) mat.forEach((m) => m.dispose());
+        else if (mat) mat.dispose();
+      });
+      [glowTex, flowTex, brickTex, brickTex2, brickTex3, shingleTex, asphaltTex, concreteTex, grassTex, skyTex].forEach((tx) => tx.dispose());
+      envTex.dispose();
+      pmrem.dispose();
+      renderer.dispose();
+    };
+  }, [light]);
+
+  // ---- overlay styling per theme ----
+  const cardBase =
+    "absolute left-1/2 -translate-x-1/2 bottom-[13svh] md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-[90%] md:w-auto md:max-w-md text-center md:text-left pointer-events-none rounded-2xl px-6 py-5 backdrop-blur-md border";
+  const cardTheme = light
+    ? "bg-white/65 border-slate-900/10 shadow-[0_18px_50px_rgba(30,50,90,0.18)]"
+    : "bg-[#060a14]/55 border-white/10 shadow-[0_18px_50px_rgba(0,0,0,0.45)]";
+  const kickerTheme = light ? "" : "";
+  const titleColor = light ? "text-slate-900" : "text-white";
+  const subColor = light ? "text-slate-600" : "text-slate-300/85";
+
+  const captions = [
+    {
+      ref: cap1Ref, side: "md:left-[7%] md:translate-x-0", accent: light ? "text-amber-600" : "text-amber-300",
+      kicker: "House 01 · Power Cut",
+      title: "Power out? We connect you to emergency electricians fast.",
+      sub: "The instant the beam touches the house, every light comes back on.",
+    },
+    {
+      ref: cap2Ref, side: "md:left-auto md:right-[7%] md:translate-x-0", accent: light ? "text-sky-600" : "text-sky-300",
+      kicker: "House 02 · Burst Pipe",
+      title: "Burst pipe or leak? Find an emergency plumber near you.",
+      sub: "On contact, the water stops, the pipe is capped, the home is calm again.",
+    },
+    {
+      ref: capCarRef, side: "md:left-auto md:right-[7%] md:translate-x-0", accent: light ? "text-lime-600" : "text-lime-300",
+      kicker: "Roadside · Breakdown",
+      title: "Broken down? Breakdown recovery and roadside help, fast.",
+      sub: "The hood drops, the lights come on — ready to drive again.",
+    },
+    {
+      ref: cap3Ref, side: "md:left-[7%] md:translate-x-0", accent: light ? "text-orange-600" : "text-orange-300",
+      kicker: "House 03 · Storm Damage",
+      title: "Storm damage, broken windows, or roof repairs? Get help fast.",
+      sub: "Roof sealed, glass replaced — safe, secure and watertight on touch.",
+    },
+  ];
+
+  return (
+    <div ref={wrapRef} className={`relative h-[560vh] ${light ? "bg-[#bdcfe9]" : "bg-[#04060d]"}`}>
+      <div ref={stageRef} className="sticky top-0 h-[100svh] w-full overflow-hidden">
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+
+        {/* cinematic vignette */}
+        <div className={`pointer-events-none absolute inset-0 ${light
+          ? "bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(40,60,100,0.18)_100%)]"
+          : "bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(2,4,10,0.55)_100%)]"}`} />
+
+        {/* Intro — original dynamic headline passed in from the page */}
+        <div ref={introRef} className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
+          <div className="pointer-events-auto w-full">
+            {headline}
+          </div>
+          <div className="pointer-events-auto mt-7 flex flex-col sm:flex-row items-center gap-4">
+            <a
+              href="#get-help"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("get-help")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 px-8 py-3.5 text-sm md:text-base font-bold text-slate-950 shadow-[0_0_30px_rgba(56,150,255,0.45)] transition-transform hover:scale-105"
+            >
+              Find Emergency Help
+            </a>
+            <Link
+              to="/pricing"
+              className={`rounded-full border px-8 py-3.5 text-sm md:text-base font-bold backdrop-blur transition-colors ${light
+                ? "border-amber-500/50 bg-amber-400/10 text-amber-700 hover:bg-amber-400/20"
+                : "border-amber-300/50 bg-amber-300/5 text-amber-200 hover:bg-amber-300/15"}`}
+            >
+              Claim Your Trade
+            </Link>
+          </div>
+          <div className={`absolute bottom-7 flex flex-col items-center gap-2 ${light ? "text-slate-500" : "text-slate-400"}`}>
+            <span className="text-[10px] uppercase tracking-[0.3em]">Scroll to respond</span>
+            <span className={`block h-9 w-[1.5px] overflow-hidden rounded ${light ? "bg-slate-900/10" : "bg-white/10"}`}>
+              <span className="block h-3 w-full animate-bounce bg-sky-400" />
+            </span>
+          </div>
+        </div>
+
+        {/* Story captions */}
+        {captions.map((c) => (
+          <div key={c.kicker} ref={c.ref} className={`${cardBase} ${cardTheme} ${c.side}`}>
+            <p className={`text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] ${c.accent} ${kickerTheme}`}>{c.kicker}</p>
+            <h2 className={`mt-3 text-2xl md:text-[2rem] leading-tight font-extrabold ${titleColor}`}>{c.title}</h2>
+            <p className={`mt-3 text-sm md:text-base ${subColor}`}>{c.sub}</p>
+          </div>
+        ))}
+
+        {/* Outro */}
+        <div ref={outroRef} className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
+          <h2 className={`max-w-3xl text-3xl md:text-5xl font-extrabold ${titleColor}`}>
+            Whatever the emergency,{" "}
+            <span className="bg-gradient-to-r from-sky-400 to-amber-400 bg-clip-text text-transparent">
+              the right local expert is one search away.
+            </span>
+          </h2>
+          <p className={`mt-5 max-w-xl text-sm md:text-lg ${subColor}`}>
+            Electricians, plumbers, roofers, glaziers, locksmiths, gas engineers, breakdown recovery and more — 24/7.
+          </p>
+          <p className={`mt-10 text-[10px] uppercase tracking-[0.3em] ${light ? "text-slate-500" : "text-slate-400"}`}>
+            Keep scrolling — get help now
+          </p>
+        </div>
+
+        {/* blend into the page background */}
+        <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent ${light ? "to-background" : "to-background"}`} />
+      </div>
+    </div>
+  );
+};
+
+export default Hero3D;

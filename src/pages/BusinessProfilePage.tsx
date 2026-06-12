@@ -184,42 +184,25 @@ export default function BusinessProfilePage() {
             "Emergency Repairs", "Installations", "Maintenance", "Safety Inspections", "Upgrades", "Consultations"
         ];
 
+    const tradeProfileDefaultImages = {
+        'builder': '/assets/trade-profile-defaults/builder-hero.webp',
+        'roofer': '/assets/trade-profile-defaults/roofer-hero.webp',
+        'water-restoration': '/assets/trade-profile-defaults/water-restoration-hero.webp',
+        'hvac': '/assets/trade-profile-defaults/hvac-hero.webp',
+        'electrician': '/assets/trade-profile-defaults/electrician-hero.webp',
+        'plumber': '/assets/trade-profile-defaults/plumber-hero.webp',
+        'locksmith': '/assets/trade-profile-defaults/locksmith-hero.webp',
+        'gas-engineer': '/assets/trade-profile-defaults/gas-engineer-hero.webp',
+        'drain-specialist': '/assets/trade-profile-defaults/drain-specialist-hero.webp',
+        'glazier': '/assets/trade-profile-defaults/glazier-hero.webp',
+        'breakdown': '/assets/trade-profile-defaults/breakdown-hero.webp',
+        'default': '/assets/trade-profile-defaults/builder-hero.webp'
+    };
+
     // Trade-specific placeholder images for Recent Work section
     const getPlaceholderImages = (tradeName: string) => {
-        const placeholders = {
-            'electrician': [
-                'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop', // Electrical panel
-                'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&auto=format&fit=crop', // Wiring work
-                'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop', // Light fixtures
-                'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&auto=format&fit=crop', // Electrical tools
-            ],
-            'plumber': [
-                'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&auto=format&fit=crop', // Plumbing pipes
-                'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800&auto=format&fit=crop', // Bathroom fixtures
-                'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop', // Boiler/heating
-                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop', // Kitchen plumbing
-            ],
-            'locksmith': [
-                'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&auto=format&fit=crop', // Door locks
-                'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&auto=format&fit=crop', // Security system
-                'https://images.unsplash.com/photo-1614267119463-8e3e2e57e0a6?w=800&auto=format&fit=crop', // Keys
-                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop', // Door hardware
-            ],
-            'gas-engineer': [
-                'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&auto=format&fit=crop', // Gas meter
-                'https://images.unsplash.com/photo-1581092918484-8313e1f7e8d6?w=800&auto=format&fit=crop', // Boiler
-                'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop', // Heating system
-                'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&auto=format&fit=crop', // Gas appliance
-            ],
-            'default': [
-                'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop',
-            ]
-        };
-
-        return placeholders[tradeName as keyof typeof placeholders] || placeholders.default;
+        const fallbackImage = (tradeProfileDefaultImages as any)[tradeName] || tradeProfileDefaultImages.default;
+        return [fallbackImage, fallbackImage, fallbackImage, fallbackImage];
     };
 
     // Use uploaded photos from business.photos if available, otherwise use fetched photos, then placeholders
@@ -249,36 +232,25 @@ export default function BusinessProfilePage() {
     const countryCode = business.country_code || 'GB';
     const isUS = countryCode === 'US';
 
-    // Map of trade-specific representative images (trucks/vans/technicians)
+    // Map of trade-specific representative images (default only; paid/custom profile images still win above these).
     const tradeRepresentativeImages = {
-        'builder': '/images/builder/emergency-builder-female-worker.webp', // Builder representative image
-        'roofer': '/images/roofer/emergency-roofer-female-worker.webp', // Roofer representative image
-        'water-restoration': '/images/water-restoration/emergency-water-restoration-final-worker.webp', // Water Restoration representative image
-        'hvac': '/images/hvac/emergency-hvac-female-worker.webp', // HVAC representative image
-        'electrician': '/images/electrician/socket-fix.webp', // Electrician at socket
-        'plumber': '/images/plumber/sink-fix.webp', // Plumber under sink
-        'locksmith': '/images/locksmith/lock-repair.webp', // Locksmith repairing lock
-        'gas-engineer': '/images/gas-engineer/engineer-working.webp', // Gas Engineer working on boiler
-        'drain-specialist': '/images/drain-specialist/drain-jetting.webp', // Drainage truck
-        'glazier': '/images/glazier/window-board-up.webp', // Glazier boarding window
-        'breakdown': '/images/breakdown-recovery/jump-start.webp', // Recovery truck
-        'default': 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop'
+        ...tradeProfileDefaultImages
     };
 
-    // Map of trade-specific background hero images
+    // Map of trade-specific background hero images (default only; business.header_image_url is preserved).
     const tradeHeroBgImages = {
-        'builder': '/images/builder/emergency-builder-hero.webp',
-        'roofer': '/images/roofer/emergency-roofer-hero.webp',
-        'water-restoration': '/images/water-restoration/emergency-water-restoration-hero.webp',
-        'hvac': '/images/hvac/emergency-hvac-hero.webp',
-        'plumber': '/images/plumber/boiler-fix.webp',
-        'electrician': '/images/electrician/fusebox-fix.webp',
-        'locksmith': '/images/locksmith/door-lock-pick.webp',
-        'gas-engineer': '/images/gas-engineer/boiler-close-up.webp',
-        'drain-specialist': '/images/drain-specialist/cctv-survey.webp',
-        'glazier': '/images/glazier/glass-install.webp',
-        'breakdown': '/images/breakdown-recovery/tow-truck-night.webp',
-        'default': 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop'
+        'builder': '/assets/landing-hero/hero-03.webp',
+        'roofer': '/assets/landing-hero/hero-24.webp',
+        'water-restoration': '/assets/landing-hero/hero-12.webp',
+        'hvac': '/assets/landing-hero/hero-05.webp',
+        'electrician': '/assets/landing-hero/hero-08.webp',
+        'plumber': '/assets/landing-hero/hero-09.webp',
+        'locksmith': '/assets/landing-hero/hero-16.webp',
+        'gas-engineer': '/assets/landing-hero/hero-07.webp',
+        'drain-specialist': '/assets/landing-hero/hero-04.webp',
+        'glazier': '/assets/landing-hero/hero-14.webp',
+        'breakdown': '/assets/landing-hero/hero-06.webp',
+        'default': '/assets/landing-hero/hero-10.webp'
     };
 
     const heroBgImage = business.header_image_url || ((tradeHeroBgImages as any)[trade] || tradeHeroBgImages.default);
@@ -418,6 +390,7 @@ export default function BusinessProfilePage() {
                             focusLabel={`${business.name} local area`}
                             focusDescription={businessMapFocusDescription}
                             interactive={false}
+                            staticFallback
                         />
                         <div className="absolute inset-0 bg-background/55 backdrop-blur-[1px]"></div>
                         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/72 to-background/18"></div>

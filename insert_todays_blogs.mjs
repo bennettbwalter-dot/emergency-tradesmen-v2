@@ -10,27 +10,27 @@ dotenv.config({ path: '.env.local' });
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL,
-  process.env.VITE_SUPABASE_ANON_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY
 );
 
 const now = new Date().toISOString();
 
 const posts = [
   {
-    title:       'Ceiling Fan Humming, Wobbling, or Dead? Safe Fixes Before Calling a 24/7 Electrician',
-    slug:        'ceiling-fan-humming-wobbling-dead-us',
-    content:     readFileSync('optimized-blogs/usa-emergencycontractors/ceiling-fan-humming-wobbling-dead-us.md', 'utf8'),
-    excerpt:     'Ceiling fan humming, wobbling, or completely dead? Follow this step-by-step troubleshooting guide to test circuit breakers, secure blade irons, check remote receiver wire nuts, replace run capacitors, and lubricate cast-iron motor bearings.',
-    cover_image: '/images/blog/us-ceiling-fan-hero.png',
+    title:       'Outdoor Hose Bibb Leaking or Snapped Off? Safe Fixes Before Calling a 24/7 Plumber',
+    slug:        'outdoor-hose-bibb-leaking-snapped-us',
+    content:     readFileSync('optimized-blogs/usa-emergencycontractors/outdoor-hose-bibb-leaking-snapped-us.md', 'utf8'),
+    excerpt:     'Outdoor hose bibb (spigot) leaking, dripping, or snapped off? Follow this step-by-step troubleshooting guide to shut off the water, identify your faucet type, replace vacuum breakers, repack valve stems, and avoid costly plumber calls.',
+    cover_image: '/images/blog/us-outdoor-hose-bibb-hero.png',
     published:    true,
     published_at: now,
   },
   {
-    title:       'Combi Boiler Losing Pressure in Summer? Quick Fixes Before Calling a Gas Engineer',
-    slug:        'combi-boiler-losing-pressure-summer-gb',
-    content:     readFileSync('optimized-blogs/uk-emergencytradesmen/combi-boiler-losing-pressure-summer-gb.md', 'utf8'),
-    excerpt:     'Is your combi boiler losing pressure during the summer heatwave? Follow this UK DIY guide to inspect lockshield and TRV valves for leaks, check the external PRV safety pipe, top up the filling loop, and bleed air from radiators.',
-    cover_image: '/images/blog/uk-combi-boiler-hero.png',
+    title:       'Loft Water Tank Overflowing or Ball Valve Stuck? Quick Fixes Before Calling an Emergency Plumber',
+    slug:        'loft-water-tank-overflowing-stuck-gb',
+    content:     readFileSync('optimized-blogs/uk-emergencytradesmen/loft-water-tank-overflowing-stuck-gb.md', 'utf8'),
+    excerpt:     'Loft cold water storage tank overflowing or warning pipe dripping? Follow this step-by-step UK DIY guide to isolate the water, clean brass Portsmouth valves, adjust float arms, check shower pumps, and prevent water damage.',
+    cover_image: '/images/blog/uk-loft-water-tank-hero.png',
     published:    true,
     published_at: now,
   },
@@ -56,8 +56,8 @@ async function run() {
   }
 
   console.log('Done! Check your blog pages:');
-  console.log('  🇺🇸 http://localhost:3001/blog/ceiling-fan-humming-wobbling-dead-us');
-  console.log('  🇬🇧 http://localhost:3000/blog/combi-boiler-losing-pressure-summer-gb');
+  console.log('  🇺🇸 http://localhost:3001/blog/outdoor-hose-bibb-leaking-snapped-us');
+  console.log('  🇬🇧 http://localhost:3000/blog/loft-water-tank-overflowing-stuck-gb');
 }
 
 run().catch(console.error);

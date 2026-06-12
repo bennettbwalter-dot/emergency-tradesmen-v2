@@ -39,3 +39,4 @@ STRIPE_CONFIG.json
 .env.production
 sync_log.txt
 orchestrator_log*.txt
+tmp/

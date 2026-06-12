@@ -2,7 +2,7 @@ import React from 'react';
 
 export const SVGTrustBadges = () => {
     return (
-        <div className="flex flex-row items-center justify-center gap-2 md:gap-4 mt-8 w-full px-4">
+        <div className="hidden md:flex flex-row items-center justify-center gap-2 md:gap-4 mt-8 w-full px-4">
             {/* Badge 1: Arrow/QuiverAI */}
             <div className="flex-1 max-w-[250px] transition-transform duration-300 hover:scale-105 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="130" fill="none" viewBox="0 0 250 130" className="drop-shadow-lg">

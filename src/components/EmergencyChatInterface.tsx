@@ -31,6 +31,7 @@ import { UKCityCombobox } from "@/components/UKCityCombobox";
 import { HierarchicalLocationSelector } from "@/components/HierarchicalLocationSelector";
 import { Terminal, TypingAnimation, AnimatedSpan } from "@/registry/magicui/terminal";
 import { BorderBeam } from "@/components/magicui/BorderBeam";
+import { BorderBeamButton, BorderBeamIconButton } from "@/components/ui/border-beam-button";
 import { useWhisper } from "@/hooks/useWhisper";
 import { toast } from "sonner";
 import WhisperWaveform from "@/components/VoiceAssistant/WhisperWaveform";
@@ -731,7 +732,8 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         </Button>
     );
 
-    const isFlowComplete = !!(detectedTrade && (detectedCity || locationRecord));
+    const hasAreaSelection = !!(detectedCity || locationRecord);
+    const isFlowComplete = !!(detectedTrade && hasAreaSelection);
     const shouldFlash = isFlowComplete;
 
     const hasUserIntent = input.trim().length > 0 || !!detectedTrade;
@@ -799,8 +801,13 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         setIsRequestingLocation(false);
     };
 
-    const compactTextButtonClass = "home-search-control-text !h-10 w-full justify-center rounded-xl border-0 px-3 text-[0.72rem] font-semibold leading-none transition sm:text-xs";
-    const compactIconButtonClass = "home-search-control-icon h-9 w-9 rounded-xl border-0 p-0 transition";
+    const compactTextButtonClass = "home-search-control-text home-search-premium-button !h-10 w-full justify-center rounded-xl border-0 px-3 text-[0.72rem] font-semibold leading-none transition sm:text-xs";
+    const compactIconButtonClass = "home-search-control-icon home-search-premium-button h-9 w-9 rounded-xl border-0 p-0 transition";
+
+
+
+    const tradeGuidanceClass = detectedTrade ? "is-active is-success" : "is-next";
+    const areaGuidanceClass = hasAreaSelection ? "is-active is-success" : (detectedTrade ? "is-next" : "");
 
     const compactTradeSelector = (
         <Select
@@ -1010,11 +1017,13 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
 
                             <div className="mt-2 border-t border-slate-950/[0.08] pt-3 dark:!border-white/[0.08]">
                                 <div className="relative flex items-center justify-center">
-                                    <Button
+                                    <BorderBeamIconButton
                                         type="button"
                                         onClick={handleMicToggle}
                                         disabled={isTranscriptionProcessing || isTyping}
                                         data-tour="tour-mic-button"
+                                        colorVariant={isRecording ? "sunset" : "ocean"}
+                                        active={isRecording || isTranscriptionProcessing}
                                         className={cn(
                                             compactIconButtonClass,
                                             "absolute left-0 top-1/2 -translate-y-1/2",
@@ -1024,7 +1033,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         aria-label={isRecording ? "Stop recording" : "Voice search"}
                                     >
                                         {isTranscriptionProcessing ? <Loader2 className="h-4 w-4 animate-spin text-gold" /> : isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4 text-gold" />}
-                                    </Button>
+                                    </BorderBeamIconButton>
 
                                     <div className="home-search-control-grid grid w-[calc(100%-5.5rem)] max-w-[38rem] grid-cols-[2.5rem_minmax(0,1fr)] gap-2 sm:grid-cols-[1fr_2.15fr]">
                                         <div className="min-w-0">
@@ -1035,21 +1044,30 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         </div>
                                     </div>
 
-                                    <Button
+                                    <BorderBeamIconButton
                                         type="button"
                                         onClick={handleActionClick}
                                         disabled={isActionDisabled}
+                                        colorVariant={isFlowComplete ? "colorful" : "ocean"}
+                                        active={isEarthLaunching || geoLoading}
                                         className="home-search-send absolute right-0 top-1/2 h-9 w-9 -translate-y-1/2 rounded-xl border-0 bg-gold p-0 text-black shadow-[0_0_24px_rgba(212,175,55,0.2)] transition hover:bg-gold-light disabled:shadow-none"
                                         title={isFlowComplete ? "Find Help Now" : "Send Message"}
                                         aria-label={isFlowComplete ? "Find help now" : "Send message"}
                                     >
                                         {isEarthLaunching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-                                    </Button>
+                                    </BorderBeamIconButton>
                                 </div>
                                 {geoError && (
-                                    <p className="mt-2 text-center text-xs font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
-                                        {geoError}
-                                    </p>
+                                    <div className="mt-2 text-center text-xs font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
+                                        {geoError}{" "}
+                                        <button
+                                            type="button"
+                                            onClick={detectUserLocation}
+                                            className="underline font-bold text-amber-800 dark:text-amber-300 ml-1 hover:text-amber-900 dark:hover:text-amber-100"
+                                        >
+                                            Retry
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         </div>

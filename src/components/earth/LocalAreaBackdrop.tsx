@@ -3,6 +3,7 @@ import maplibregl, { Map as MapLibreMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { cityCoordinates } from "@/lib/cityCoordinates";
 import { usCityCoordinates } from "@/lib/usCityCoordinates";
+import { InteractiveMap } from "@/components/InteractiveMap";
 import { buildEarthMapStyle, EARTH_FINAL_PITCH, EARTH_FINAL_ZOOM } from "./mapStyle";
 
 type LocalAreaBackdropProps = {
@@ -17,6 +18,7 @@ type LocalAreaBackdropProps = {
   focusLabel?: string;
   focusDescription?: string;
   interactive?: boolean;
+  staticFallback?: boolean;
 };
 
 function isValidCoord(value?: number) {
@@ -65,6 +67,31 @@ function getKnownCoords(value?: string | null) {
   return null;
 }
 
+function LocalAreaFallback({
+  fallbackImage,
+  label,
+  muted = false
+}: {
+  fallbackImage?: string;
+  label?: string;
+  muted?: boolean;
+}) {
+  return (
+    <div className={`local-area-fallback${muted ? " local-area-fallback--muted" : ""}`}>
+      {fallbackImage && (
+        <img
+          src={fallbackImage}
+          alt={label || "Local area"}
+          className="h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      )}
+      <div className="local-area-fallback__shade" />
+    </div>
+  );
+}
+
 async function geocodeLocation(value: string) {
   const query = cleanLocation(value).replace(/[()]/g, " ").replace(/\s+/g, " ").trim();
   if (!query) return null;
@@ -107,20 +134,26 @@ export function LocalAreaBackdrop({
   location,
   focusLabel,
   focusDescription,
-  interactive = true
+  interactive = true,
+  staticFallback = false
 }: LocalAreaBackdropProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
+  const initAttemptsRef = useRef(0);
   const [resolvedCoords, setResolvedCoords] = useState<{ lat: number; lng: number } | null>(() =>
     getKnownCoords(location || focusLabel || label)
   );
+  const [mapReady, setMapReady] = useState(false);
+  const [mapRetryKey, setMapRetryKey] = useState(0);
+  const [webglError, setWebglError] = useState(false);
   const explicitCoords = isValidCoord(lat) && isValidCoord(lng);
   const effectiveLat = explicitCoords ? lat : resolvedCoords?.lat;
   const effectiveLng = explicitCoords ? lng : resolvedCoords?.lng;
   const hasCoords = isValidCoord(effectiveLat) && isValidCoord(effectiveLng);
+  const fallbackCity = cleanLocation(location || focusLabel || label || "Local area");
 
   useEffect(() => {
-    if (explicitCoords) return;
+    if (explicitCoords || staticFallback) return;
 
     let cancelled = false;
     const targetLocation = location || focusLabel || label;
@@ -137,15 +170,38 @@ export function LocalAreaBackdrop({
     return () => {
       cancelled = true;
     };
-  }, [explicitCoords, focusLabel, label, location]);
-
-  const [webglError, setWebglError] = useState(false);
+  }, [explicitCoords, focusLabel, label, location, staticFallback]);
 
   useEffect(() => {
-    if (!hasCoords || !mapContainerRef.current || webglError) return;
+    if (staticFallback) return;
+
+    initAttemptsRef.current = 0;
+    setMapReady(false);
+    setWebglError(false);
+  }, [bearing, effectiveLat, effectiveLng, hasCoords, interactive, pitch, staticFallback, zoom]);
+
+  useEffect(() => {
+    if (staticFallback || !hasCoords || !mapContainerRef.current || webglError) return;
 
     let map: MapLibreMap | null = null;
+    let retryTimer: number | undefined;
+    let resizeObserver: ResizeObserver | undefined;
+    const animationFrames: number[] = [];
+    const resizeTimers: number[] = [];
+
+    const retryInitialization = () => {
+      if (initAttemptsRef.current < 2) {
+        retryTimer = window.setTimeout(() => {
+          setMapRetryKey((key) => key + 1);
+        }, 450);
+        return;
+      }
+
+      setWebglError(true);
+    };
+
     try {
+      initAttemptsRef.current += 1;
       map = new maplibregl.Map({
         container: mapContainerRef.current,
         style: buildEarthMapStyle(),
@@ -168,7 +224,7 @@ export function LocalAreaBackdrop({
       });
     } catch (err) {
       console.warn("WebGL is not supported or failed to initialize, falling back to static view:", err);
-      setWebglError(true);
+      retryInitialization();
       return;
     }
 
@@ -186,6 +242,17 @@ export function LocalAreaBackdrop({
       }
     };
 
+    const scheduleCameraRefresh = (delay = 0) => {
+      if (delay > 0) {
+        resizeTimers.push(window.setTimeout(applyStreetCamera, delay));
+        return;
+      }
+
+      animationFrames.push(window.requestAnimationFrame(() => {
+        animationFrames.push(window.requestAnimationFrame(applyStreetCamera));
+      }));
+    };
+
     if (interactive) {
       map.addControl(
         new maplibregl.NavigationControl({
@@ -198,12 +265,53 @@ export function LocalAreaBackdrop({
     }
 
     applyStreetCamera();
-    map.once("load", applyStreetCamera);
-    map.once("idle", applyStreetCamera);
-    const cameraTimer = window.setTimeout(applyStreetCamera, 500);
+    map.once("load", () => {
+      setMapReady(true);
+      applyStreetCamera();
+    });
+    map.once("idle", () => {
+      setMapReady(true);
+      applyStreetCamera();
+    });
+    map.once("error", (event) => {
+      if (event?.error?.message?.toLowerCase().includes("webgl")) {
+        retryInitialization();
+      }
+    });
+
+    const canvas = map.getCanvas();
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      setMapReady(false);
+      setMapRetryKey((key) => key + 1);
+    };
+    const handleContextRestored = () => {
+      setMapReady(false);
+      setMapRetryKey((key) => key + 1);
+    };
+
+    canvas.addEventListener("webglcontextlost", handleContextLost, false);
+    canvas.addEventListener("webglcontextrestored", handleContextRestored, false);
+
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => scheduleCameraRefresh());
+      resizeObserver.observe(mapContainerRef.current);
+      if (mapContainerRef.current.parentElement) {
+        resizeObserver.observe(mapContainerRef.current.parentElement);
+      }
+    }
+
+    scheduleCameraRefresh();
+    scheduleCameraRefresh(250);
+    scheduleCameraRefresh(900);
 
     return () => {
-      window.clearTimeout(cameraTimer);
+      if (retryTimer) window.clearTimeout(retryTimer);
+      resizeTimers.forEach((timer) => window.clearTimeout(timer));
+      animationFrames.forEach((frame) => window.cancelAnimationFrame(frame));
+      resizeObserver?.disconnect();
+      canvas.removeEventListener("webglcontextlost", handleContextLost);
+      canvas.removeEventListener("webglcontextrestored", handleContextRestored);
       if (map) {
         try {
           map.remove();
@@ -213,28 +321,44 @@ export function LocalAreaBackdrop({
       }
       mapRef.current = null;
     };
-  }, [bearing, effectiveLat, effectiveLng, hasCoords, interactive, pitch, zoom, webglError]);
+  }, [bearing, effectiveLat, effectiveLng, hasCoords, interactive, mapRetryKey, pitch, staticFallback, zoom, webglError]);
 
-  if (!hasCoords || webglError) {
+  if (staticFallback) {
     return (
       <div className="absolute inset-0 z-0">
-        {fallbackImage && (
-          <img
-            src={fallbackImage}
-            alt={label || "Local area"}
-            className="h-full w-full object-cover"
-            loading="eager"
-            decoding="async"
-          />
-        )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
-        <div className="pointer-events-none absolute inset-0 bg-background/35 backdrop-blur-[2px]" />
+        <LocalAreaFallback fallbackImage={fallbackImage} label={label} />
+      </div>
+    );
+  }
+
+  if (!hasCoords) {
+    return (
+      <div className="absolute inset-0 z-0">
+        <LocalAreaFallback fallbackImage={fallbackImage} label={label} />
+      </div>
+    );
+  }
+
+  if (webglError) {
+    return (
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+        <LocalAreaFallback fallbackImage={fallbackImage} label={label} muted />
+        <InteractiveMap
+          city={fallbackCity}
+          latitude={effectiveLat}
+          longitude={effectiveLng}
+          className="local-area-leaflet-fallback absolute inset-0 h-full min-h-0 w-full rounded-none border-0"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0%,rgba(0,0,0,0.08)_54%,rgba(0,0,0,0.42)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background/45 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background/70 to-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+    <div className={`absolute inset-0 z-0 overflow-hidden bg-black ${mapReady ? "local-area-backdrop--ready" : "local-area-backdrop--loading"}`}>
+      <LocalAreaFallback fallbackImage={fallbackImage} label={label} muted />
       <div ref={mapContainerRef} className="local-area-map" />
       <div className="local-area-focus-reticle" aria-hidden="true">
         <span />

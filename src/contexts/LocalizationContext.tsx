@@ -3,6 +3,7 @@ import { devLog } from '@/lib/devLog';
 import { useLocation } from 'react-router-dom';
 import { findNearestCity } from '@/lib/cityCoordinates';
 import { getSiteCountryCode } from '@/lib/siteConfig';
+import { reverseGeocode } from '@/lib/geocoding';
 
 export type CountryCode = 'GB' | 'US';
 
@@ -85,6 +86,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
     const [geoError, setGeoError] = useState<string | null>(null);
     const lastLiveFixRef = useRef<{ coords: Coords; timestamp: number } | null>(null);
     const lastReverseLookupAtRef = useRef(0);
+    const hasAutoLocatedRef = useRef(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -112,12 +114,11 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
         }
 
         try {
-            const reverseCity = await reverseGeocodeArea(lat, lng, siteCountry);
-            const nearest = findNearestCity(lat, lng, siteCountry);
-            const resolvedCity = reverseCity || nearest?.city || null;
+            const resolvedCity = await reverseGeocode(lat, lng, siteCountry === 'GB' ? 'GB' : 'US');
 
             if (!resolvedCity) {
-                setGeoError('Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.');
+                setGeoError("Location detected, but we couldn't resolve the town name. Please select your area manually.");
+                // Retain userCoords to allow distance-based sorting
                 return false;
             }
 
@@ -125,6 +126,7 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             setGeoError(null);
 
             if (siteCountry === 'US') {
+                const nearest = findNearestCity(lat, lng, siteCountry);
                 resolveUSState(resolvedCity, nearest?.city || null, setDetectedState);
             } else {
                 setDetectedState(null);
@@ -134,10 +136,54 @@ export const LocalizationProvider: React.FC<{ children: React.ReactNode; initial
             return true;
         } catch (error) {
             console.warn('Failed to resolve area from coords', error);
-            setGeoError('Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.');
+            setGeoError("Location detected, but we couldn't resolve the town name. Please select your area manually.");
             return false;
         }
     }, [initialCode]);
+
+    useEffect(() => {
+        if (hasAutoLocatedRef.current || detectedCity || userCoords) return;
+        if (typeof navigator === 'undefined' || !navigator.geolocation) return;
+        if (typeof window !== 'undefined' && !window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) return;
+
+        let cancelled = false;
+
+        const tryAutoLocate = async () => {
+            try {
+                const permissions = (navigator as Navigator & { permissions?: Permissions }).permissions;
+                if (!permissions?.query) return;
+
+                const status = await permissions.query({ name: 'geolocation' as PermissionName });
+                if (status.state !== 'granted' || cancelled) return;
+
+                hasAutoLocatedRef.current = true;
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        if (cancelled) return;
+                        const { latitude, longitude } = position.coords;
+                        const coords = { latitude, longitude };
+                        lastLiveFixRef.current = { coords, timestamp: Date.now() };
+                        lastReverseLookupAtRef.current = Date.now();
+                        setUserCoords(coords);
+                        await resolveCoordsToCity(latitude, longitude);
+                    },
+                    (error) => {
+                        if (cancelled || error.code === error.PERMISSION_DENIED) return;
+                        console.warn('Auto-geolocation error:', error.message);
+                    },
+                    { enableHighAccuracy: true, timeout: GEOLOCATION_TIMEOUT_MS, maximumAge: GEOLOCATION_MAX_AGE_MS }
+                );
+            } catch {
+                // Permission querying is not available everywhere; manual Locate Me still works.
+            }
+        };
+
+        tryAutoLocate();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [detectedCity, resolveCoordsToCity, userCoords]);
 
     const detectUserLocation = useCallback(() => {
         if (typeof navigator === 'undefined' || !navigator.geolocation) {
@@ -246,39 +292,6 @@ function getGeolocationErrorMessage(error: GeolocationPositionError): string {
             return 'Location took too long to load. Try Locate Me again or type your area manually.';
         default:
             return 'Unable to find your location right now. Type your town, city, postcode, or ZIP code manually.';
-    }
-}
-
-async function reverseGeocodeArea(lat: number, lng: number, countryCode: CountryCode): Promise<string | null> {
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), REVERSE_GEOCODE_TIMEOUT_MS);
-    try {
-        const res = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&zoom=14`,
-            { headers: { 'Accept-Language': 'en' }, signal: controller.signal }
-        );
-        if (!res.ok) return null;
-        const data = await res.json();
-        const reverseCountry = String(data.address?.country_code || '').toUpperCase();
-        if (reverseCountry && reverseCountry !== countryCode) return null;
-
-        return normalizeAreaName(
-            data.address?.city ||
-            data.address?.town ||
-            data.address?.village ||
-            data.address?.borough ||
-            data.address?.municipality ||
-            data.address?.suburb ||
-            data.address?.city_district ||
-            data.address?.neighbourhood ||
-            data.address?.county ||
-            null
-        );
-    } catch (error) {
-        console.warn('Nominatim geocode failed:', error);
-        return null;
-    } finally {
-        window.clearTimeout(timeoutId);
     }
 }
 

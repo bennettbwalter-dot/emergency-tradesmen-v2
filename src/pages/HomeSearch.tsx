@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect, Component, type ReactNode } from "react";
 import {
   Menu,
 } from "lucide-react";
@@ -20,7 +20,27 @@ const EmergencyChatInterface = lazy(() =>
     default: module.EmergencyChatInterface,
   }))
 );
-const SoftAurora = lazy(() => import("./SoftAurora"));
+
+const SoftAurora = lazy(() =>
+  import("./SoftAurora").catch((err) => {
+    console.warn("Failed to load SoftAurora dynamically, falling back to static background:", err);
+    return { default: () => null };
+  })
+);
+
+class SafeBackgroundBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error: any, errorInfo: any) {
+    console.warn("SoftAurora background error caught:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) return null;
+    return this.props.children;
+  }
+}
 
 const emergencyTrustSteps = [
   "Tell us the emergency",
@@ -94,24 +114,26 @@ export default function HomeSearch() {
           <section className="relative min-w-0 flex-1 overflow-hidden">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.16),transparent_30%),radial-gradient(circle_at_50%_70%,rgba(15,23,42,0.08),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.55),transparent_36%)] dark:bg-[radial-gradient(circle_at_50%_10%,rgba(212,175,55,0.14),transparent_30%),radial-gradient(circle_at_50%_70%,rgba(18,55,92,0.28),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_30%)]" />
             <div className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-30 z-0">
-              <Suspense fallback={null}>
-                <SoftAurora
-                  speed={0.6}
-                  scale={1.5}
-                  brightness={1}
-                  color1={theme === "dark" ? "#f7f7f7" : "#000000"}
-                  color2="#EAB308"
-                  noiseFrequency={2.5}
-                  noiseAmplitude={1}
-                  bandHeight={0.5}
-                  bandSpread={1}
-                  octaveDecay={0.1}
-                  layerOffset={0}
-                  colorSpeed={1}
-                  enableMouseInteraction
-                  mouseInfluence={0.25}
-                />
-              </Suspense>
+              <SafeBackgroundBoundary>
+                <Suspense fallback={null}>
+                  <SoftAurora
+                    speed={0.6}
+                    scale={1.5}
+                    brightness={1}
+                    color1={theme === "dark" ? "#f7f7f7" : "#000000"}
+                    color2="#EAB308"
+                    noiseFrequency={2.5}
+                    noiseAmplitude={1}
+                    bandHeight={0.5}
+                    bandSpread={1}
+                    octaveDecay={0.1}
+                    layerOffset={0}
+                    colorSpeed={1}
+                    enableMouseInteraction
+                    mouseInfluence={0.25}
+                  />
+                </Suspense>
+              </SafeBackgroundBoundary>
             </div>
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
             <div className="relative mx-auto flex min-h-screen w-full flex-col px-4 py-5 sm:px-6 lg:px-8">

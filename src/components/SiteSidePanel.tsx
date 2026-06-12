@@ -239,9 +239,16 @@ export function SiteSidePanel({
             Locate Me
           </Button>
           {geoError && (
-            <p className="mt-1.5 text-center text-[10px] font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
-              {geoError}
-            </p>
+            <div className="mt-1.5 text-center text-[10px] font-medium leading-snug text-amber-700 dark:text-amber-200" role="status">
+              {geoError}{" "}
+              <button
+                type="button"
+                onClick={detectUserLocation}
+                className="underline font-bold text-amber-800 dark:text-amber-300 ml-1 hover:text-amber-900 dark:hover:text-amber-100"
+              >
+                Retry
+              </button>
+            </div>
           )}
         </div>
       </div>

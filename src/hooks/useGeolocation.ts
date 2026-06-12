@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { devLog } from "@/lib/devLog";
 import { findNearestCity } from "@/lib/cityCoordinates";
 import { getSiteCountryCode } from "@/lib/siteConfig";
+import { reverseGeocode } from "@/lib/geocoding";
 
 const UK_BOUNDS = { minLat: 49.8, maxLat: 60.9, minLng: -8.8, maxLng: 2.1 };
 const US_BOUNDS = { minLat: 24.3, maxLat: 49.5, minLng: -125, maxLng: -66.8 };
@@ -69,27 +70,34 @@ export function useGeolocation() {
                     return;
                 }
 
-                const nearestCity = findNearestCity(latitude, longitude, countryCode);
-                if (!nearestCity) {
+                try {
+                    const resolvedCity = await reverseGeocode(latitude, longitude, countryCode);
+                    if (!resolvedCity) {
+                        setState({
+                            loading: false,
+                            error: "Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.",
+                            place: null,
+                        });
+                        return;
+                    }
+
+                    setState({
+                        loading: false,
+                        error: null,
+                        place: {
+                            city: resolvedCity,
+                            postcode: "",
+                            coordinates: { lat: latitude, lng: longitude },
+                        },
+                    });
+                } catch (err) {
+                    console.error("useGeolocation resolution failed", err);
                     setState({
                         loading: false,
                         error: "Unable to identify your nearest area. Type your town, city, postcode, or ZIP code manually.",
                         place: null,
                     });
-                    return;
                 }
-
-                devLog(`Nearest city: ${nearestCity.city} (${nearestCity.distance.toFixed(1)}km away)`);
-
-                setState({
-                    loading: false,
-                    error: null,
-                    place: {
-                        city: nearestCity.city,
-                        postcode: "",
-                        coordinates: { lat: latitude, lng: longitude },
-                    },
-                });
             },
             (error) => {
                 setState({ loading: false, error: getGeolocationErrorMessage(error), place: null });

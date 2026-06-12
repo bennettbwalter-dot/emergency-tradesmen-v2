@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Check, ChevronsUpDown, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { BorderBeamButton } from "@/components/ui/border-beam-button"
 import {
     Command,
     CommandEmpty,
@@ -32,11 +32,13 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button
+                <BorderBeamButton
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
                     data-tour="tour-uk-city-button"
+                    active={className?.includes("is-next") || className?.includes("is-active")}
+                    colorVariant="ocean"
                     className={cn(
                         "h-12 md:h-11 w-full justify-center md:justify-between rounded-full border border-gold/20 md:border-gold/50 bg-white md:bg-white/80 dark:bg-black/40 backdrop-blur-md px-0 md:px-4 hover:bg-gold/10 hover:border-gold transition-all flex items-center shrink-0 overflow-visible text-[#9B7D4F] shadow-[0_0_30px_rgba(0,0,0,0.12)] md:shadow-none",
                         className
@@ -51,7 +53,7 @@ export function UKCityCombobox({ value, onValueChange, placeholder = "Select Cit
                     <div className="hidden md:block">
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </div>
-                </Button>
+                </BorderBeamButton>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] p-0" align="start">
                 <Command>
