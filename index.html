@@ -21,6 +21,25 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    /* Google Consent Mode v2 — default DENIED until the cookie banner grants.
+       Must run before any gtag config / AdSense load. */
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    try {
+      if (localStorage.getItem('cookieConsent') === 'accepted') {
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+          analytics_storage: 'granted'
+        });
+      }
+    } catch (e) { /* storage unavailable — stay denied */ }
     gtag('js', new Date());
     (function(){
       var load = function(){
@@ -130,27 +149,11 @@
     }
   </script>
 
-  <!-- Google AdSense (production only, deferred until after LCP) -->
-  <script>
-    (function() {
-      var h = window.location.hostname;
-      if (h !== 'emergencytradesmen.net' && h !== 'www.emergencytradesmen.net' &&
-          h !== 'emergencycontractors.net' && h !== 'www.emergencycontractors.net') return;
-      var load = function(){
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777";
-        s.crossOrigin = "anonymous";
-        document.head.appendChild(s);
-      };
-      var schedule = function(){
-        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 6000 });
-        else setTimeout(load, 4000);
-      };
-      if (document.readyState === 'complete') schedule();
-      else window.addEventListener('load', schedule, { once: true });
-    })();
-  </script>
+  <!-- Google AdSense — official snippet, static so the AdSense verification
+       crawler can find it. Async (non-blocking); ad rendering is still
+       controlled by the AdSlot components and Consent Mode. -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1777113776734777"
+     crossorigin="anonymous"></script>
 
   <!-- Pinterest Verification -->
   <meta name="p:domain_verify" content="51555145e4baf5bfdefaa25c01cb5d47" />

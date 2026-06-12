@@ -1,4 +1,4 @@
-import { Phone, Clock, ShieldCheck, MessageSquare } from "lucide-react";
+import { Phone, ShieldCheck, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Business } from "@/lib/businesses";
 import { trackEvent } from "@/lib/analytics";
@@ -30,12 +30,12 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                     {/* Top Reassurance Trust Badges Grid */}
                     <div className="flex items-center justify-between text-[10px] font-semibold border-b border-white/5 pb-2 px-1">
                         <div className="flex items-center gap-1 text-gold">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>⚡ Avg Response: ~24m</span>
+                            <Phone className="w-3.5 h-3.5" />
+                            <span>Direct line — no middlemen</span>
                         </div>
                         <div className="flex items-center gap-1 text-emerald-400">
                             <ShieldCheck className="w-3.5 h-3.5" />
-                            <span>✓ 100% Vetted Local Pro</span>
+                            <span>✓ No booking fees</span>
                         </div>
                     </div>
 
@@ -75,10 +75,10 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1.5 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 text-emerald-400 font-bold text-xs">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        <span>LIVE DISPATCH</span>
+                        <span>DIRECT LINE</span>
                     </div>
                     <span className="text-white/90 text-sm font-semibold tracking-wide">
-                        Vetted {tradeLabel} dispatch active in <span className="text-gold capitalize">{cityLabel}</span>
+                        Call a local {tradeLabel} in <span className="text-gold capitalize">{cityLabel}</span> direct
                     </span>
                 </div>
 
@@ -86,8 +86,8 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                 <div className="flex items-center gap-4">
                     {/* Trust indicators */}
                     <div className="hidden lg:flex items-center gap-4 text-xs text-muted-foreground mr-2 border-r border-white/10 pr-6">
-                        <span className="flex items-center gap-1">⏱ Response: ~24m</span>
-                        <span className="flex items-center gap-1 text-emerald-400">✓ Fully Insured</span>
+                        <span className="flex items-center gap-1">No middlemen</span>
+                        <span className="flex items-center gap-1 text-emerald-400">✓ No booking fees</span>
                     </div>
 
                     {/* Dual Action buttons */}

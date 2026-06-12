@@ -37,6 +37,12 @@ const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const BusinessProfilePage = lazy(() => import("./pages/BusinessProfilePage"));
 const About = lazy(() => import("./pages/About"));
 const PricingPage = lazy(() => import("./pages/PricingPage"));
+const ForTradesmen = lazy(() => import("./pages/ForTradesmen"));
+const ForContractors = lazy(() => import("./pages/ForContractors"));
+const ClaimYourBusiness = lazy(() => import("./pages/ClaimYourBusiness"));
+const ClaimBusinessPage = lazy(() => import("./pages/ClaimBusinessPage"));
+const WebsiteShowroomTradesmen = lazy(() => import("./pages/WebsiteShowroomTradesmen"));
+const WebsiteShowroomContractors = lazy(() => import("./pages/WebsiteShowroomContractors"));
 const BillingPage = lazy(() => import("./pages/BillingPage"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -148,6 +154,11 @@ const AppRoutes = () => (
     <Route path="/about" element={<About />} />
     <Route path="/pricing" element={<PricingPage />} />
     <Route path="/tradesmen" element={<PricingPage />} />
+    <Route path="/claim-your-business" element={<ClaimYourBusiness />} />
+    <Route path="/for-tradesmen" element={<ForTradesmen />} />
+    <Route path="/for-contractors" element={<ForContractors />} />
+    <Route path="/for-tradesmen/website-showroom" element={<WebsiteShowroomTradesmen />} />
+    <Route path="/for-contractors/website-showroom" element={<WebsiteShowroomContractors />} />
     <Route path="/contact" element={<ContactPage />} />
     <Route path="/blog" element={<BlogPage />} />
     <Route path="/blog/:slug" element={<BlogPostPage />} />
@@ -162,7 +173,7 @@ const AppRoutes = () => (
     <Route path="/account/billing" element={<BillingPage />} />
     <Route path="/billing" element={<Navigate to="/account/billing" replace />} />
     <Route path="/business/:businessId" element={<BusinessProfilePage />} />
-    <Route path="/business/claim/:businessId" element={<Navigate to="/pricing" replace />} />
+    <Route path="/business/claim/:businessId" element={<ClaimBusinessPage />} />
     <Route path="/premium-profile" element={<ProProfileEditor />} />
     <Route path="/payment/success" element={<PaymentSuccessPage />} />
     <Route path="/payment/cancel" element={<PaymentCancelPage />} />

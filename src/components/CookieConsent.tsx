@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { X, Cookie } from "lucide-react";
 import { Link } from "react-router-dom";
 
+declare function gtag(...args: unknown[]): void;
+
 export function CookieConsent() {
     const [showBanner, setShowBanner] = useState(false);
 
@@ -15,13 +17,29 @@ export function CookieConsent() {
         }
     }, []);
 
+    // Google Consent Mode v2 — keep GA/AdSense in sync with the user's choice.
+    // The default 'denied' state is set in index.html before gtag loads.
+    const updateGoogleConsent = (granted: boolean) => {
+        const value = granted ? "granted" : "denied";
+        if (typeof gtag !== "undefined") {
+            gtag("consent", "update", {
+                ad_storage: value,
+                ad_user_data: value,
+                ad_personalization: value,
+                analytics_storage: value,
+            });
+        }
+    };
+
     const acceptCookies = () => {
         localStorage.setItem("cookieConsent", "accepted");
+        updateGoogleConsent(true);
         setShowBanner(false);
     };
 
     const declineCookies = () => {
         localStorage.setItem("cookieConsent", "declined");
+        updateGoogleConsent(false);
         setShowBanner(false);
     };
 

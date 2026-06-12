@@ -23,6 +23,23 @@ export function ReviewsSection({ reviews, stats, businessName }: ReviewsSectionP
     const [filterRating, setFilterRating] = useState<number | "all">("all");
     const [showCount, setShowCount] = useState(6);
 
+    // Honest empty state — never show fabricated 0.0 stats when there are no reviews yet
+    if (reviews.length === 0 && stats.totalReviews === 0) {
+        return (
+            <div className="space-y-8">
+                <div className="text-center">
+                    <p className="text-gold uppercase tracking-luxury text-sm mb-4">Customer Reviews</p>
+                    <h2 className="font-display text-3xl md:text-5xl tracking-wide text-foreground mb-4">
+                        What Customers Say About {businessName}
+                    </h2>
+                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                        No reviews yet — be the first to share your experience with this business.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     // Filter and sort reviews
     const filteredAndSortedReviews = reviews
         .filter((review) => {

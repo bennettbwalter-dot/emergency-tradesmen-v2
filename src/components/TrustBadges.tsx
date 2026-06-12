@@ -3,13 +3,13 @@ import { Shield, Clock, ListChecks, Phone } from "lucide-react";
 const badges = [
   {
     icon: Clock,
-    title: "24/7 Availability",
-    description: "Round the clock service",
+    title: "Browse 24/7",
+    description: "Search any time, day or night",
   },
   {
     icon: Shield,
-    title: "Fully Insured",
-    description: "Complete peace of mind",
+    title: "No Booking Fees",
+    description: "You pay the pro, not us",
   },
   {
     icon: ListChecks,
@@ -18,8 +18,8 @@ const badges = [
   },
   {
     icon: Phone,
-    title: "Fast Response",
-    description: "30-90 minute arrival",
+    title: "Call Direct",
+    description: "Straight to the business",
   },
 ];
 

@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useLocalization } from "@/contexts/LocalizationContext";
+import { isUSDomain as getIsUSDomain } from "@/lib/siteConfig";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { gsap } from "gsap";
@@ -14,7 +16,9 @@ gsap.registerPlugin(ScrollTrigger);
  * past sidewalks, lamps, driveways and gardens, stopping at three detailed
  * houses and a broken-down car. Repairs trigger the instant the beam head
  * touches each problem (touch distance is computed against the beam curve),
- * with an impact shockwave + flash. The camera flies its own CatmullRom path,
+ * with an impact shockwave + flash. The beam path is built from the road
+ * curve itself (weaving inside the carriageway, darting out to each
+ * emergency), and the camera chases it along the road from behind,
  * scrubbed by GSAP ScrollTrigger with damped smoothing.
  *
  * Supports the site's dark/light theme — the scene is rebuilt with a
@@ -808,6 +812,11 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
 
   const light = mode === "light";
 
+  // same country-prefix logic as the Header's "Find trade" link
+  const { settings } = useLocalization();
+  const countryPrefix = settings.countryCode === "US" && !getIsUSDomain() ? "/us" : "";
+  const findRoute = `${countryPrefix}/home#manual-search`;
+
   useEffect(() => {
     const wrap = wrapRef.current;
     const stage = stageRef.current;
@@ -1155,26 +1164,58 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     });
 
     // ---- the emergency beam ----
+    // The beam path is derived from the road itself: it weaves left/right
+    // inside the carriageway, darts out to each emergency, then returns to
+    // the road — so it always reads as a route through the street network.
+    const nearestRoadT = (v: THREE.Vector3) => {
+      let bestT = 0, bestD = Infinity;
+      for (let i = 0; i <= 400; i++) {
+        const t = i / 400;
+        const d = roadCurve.getPointAt(t).distanceTo(v);
+        if (d < bestD) { bestD = d; bestT = t; }
+      }
+      return bestT;
+    };
+    // point offset sideways from the road centreline at parameter t
+    const roadOffset = (t: number, lateral: number, y: number) => {
+      const p = roadCurve.getPointAt(t);
+      const tan = roadCurve.getTangentAt(t);
+      let nx = -tan.z, nz = tan.x;
+      const nl = Math.hypot(nx, nz) || 1;
+      nx /= nl; nz /= nl;
+      return new THREE.Vector3(p.x + nx * lateral, y, p.z + nz * lateral);
+    };
+    // point most of the way from the road towards an emergency target
+    const approach = (target: THREE.Vector3, y: number) => {
+      const pr = roadCurve.getPointAt(nearestRoadT(target));
+      return new THREE.Vector3(
+        pr.x + (target.x - pr.x) * 0.78,
+        y,
+        pr.z + (target.z - pr.z) * 0.78,
+      );
+    };
+
+    const tH = housePlacement.map((hp) => nearestRoadT(hp.pos));
+    const tCar = nearestRoadT(carWorldPos);
+    const tEnd = nearestRoadT(new THREE.Vector3(0, 0, -112));
+
     const beamCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, 9, 20),
-      new THREE.Vector3(0, 2.4, 10),
-      new THREE.Vector3(-3.8, 1.6, -4),
-      new THREE.Vector3(-9.6, 2.2, -14),    // house 1
-      new THREE.Vector3(-3.5, 1.5, -20),
-      new THREE.Vector3(4.2, 1.5, -27),
-      new THREE.Vector3(11.2, 2.2, -32),    // house 2
-      new THREE.Vector3(4.6, 1.4, -40),
+      roadOffset(0.0001, 0, 9),                          // drops in high over the street
+      roadOffset(tH[0] * 0.35, -0.6, 3.2),
+      roadOffset(tH[0] * 0.7, 0.9, 1.5),
+      approach(housePlacement[0].pos, 2.2),              // house 1
+      roadOffset((tH[0] + tH[1]) / 2, 1.0, 1.35),
+      approach(housePlacement[1].pos, 2.2),              // house 2
+      roadOffset((tH[1] + tCar) / 2, -0.8, 1.3),
       new THREE.Vector3(carWorldPos.x, 1.15, carWorldPos.z), // the car
-      new THREE.Vector3(-2.2, 1.5, -50),
-      new THREE.Vector3(-10.4, 2.2, -57.5), // house 3
-      new THREE.Vector3(-4, 2.4, -63),
-      // finale: the beam soars up over the street, then dives back down and
-      // lands on the road ahead — handing off to the scroll line below the hero
-      new THREE.Vector3(-0.5, 4.5, -70),
-      new THREE.Vector3(0.8, 10.5, -82),
-      new THREE.Vector3(0.4, 7.5, -96),
-      new THREE.Vector3(0, 1.6, -110),
-      new THREE.Vector3(-0.5, 0.5, -126),
+      roadOffset((tCar + tH[2]) / 2, 0.9, 1.35),
+      approach(housePlacement[2].pos, 2.2),              // house 3
+      // finale: the beam keeps weaving down the road, then glides down and
+      // touches down on the centreline — handing off to the scroll line
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.3, 1.1, 1.8),
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.6, -0.9, 1.3),
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.85, 0.35, 0.8),
+      roadOffset(tEnd, 0, 0.28),
     ]);
 
     const tubeSegs = isMobile ? 260 : 420;
@@ -1440,38 +1481,32 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     ];
     const touchU = touchTargets.map((tt) => computeTouchU(beamCurve, tt.center, tt.r));
 
-    // ---- camera path ----
-    const cameraCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, 3.6, 26),
-      new THREE.Vector3(2.6, 3.8, 12),
-      new THREE.Vector3(5.2, 4.4, 2),
-      new THREE.Vector3(4.2, 4.6, -9),     // house 1 across the street
-      new THREE.Vector3(-2.5, 4.4, -20),
-      new THREE.Vector3(-5.5, 4.6, -29),   // house 2 across the street
-      new THREE.Vector3(-4.8, 4.0, -38),
-      new THREE.Vector3(-5.2, 3.9, -45.5), // beside the car, slightly back for full framing
-      new THREE.Vector3(3.6, 5.0, -52.5),  // arrive at the house 3 vantage BEFORE the beam touches
-      new THREE.Vector3(4.2, 5.4, -55),    // house 3 across the street, raised to show the roof
-      new THREE.Vector3(1.5, 4.6, -63),
-      new THREE.Vector3(0.5, 4.4, -73),
-      new THREE.Vector3(0, 4.0, -86),      // settles low, watching the beam arc up, dive and land ahead
-    ]);
+    // ---- chase camera ----
+    // The camera rides the road itself, a fixed distance behind the beam
+    // head, always looking forward at the beam — so the road stays visible
+    // and the viewer travels the street behind the emergency response.
+    const roadLen = roadCurve.getLength();
+    const CAM_LUT_N = 240;
+    const beamRoadT = new Float32Array(CAM_LUT_N + 1);
+    for (let i = 0; i <= CAM_LUT_N; i++) {
+      beamRoadT[i] = nearestRoadT(beamCurve.getPointAt(i / CAM_LUT_N));
+    }
+    // monotonic progress: excursions to houses must never pull the camera back
+    for (let i = 1; i <= CAM_LUT_N; i++) {
+      beamRoadT[i] = Math.max(beamRoadT[i], beamRoadT[i - 1]);
+    }
+    const CAM_BACK = 10 / roadLen; // ~10 world units behind the beam head
+    const CAM_HEIGHT = isMobile ? 3.9 : 3.5;
 
-    // Sync beam to camera: remap scroll progress → beam progress so the beam
-    // touches each target at the exact moment the camera reaches its vantage
-    // point (the two curves have different arc lengths, so a linear mapping
-    // drifts further out of sync at every stop).
-    const vantagePoints = [
-      new THREE.Vector3(4.2, 4.6, -9),     // house 1 view
-      new THREE.Vector3(-5.5, 4.6, -29),   // house 2 view
-      new THREE.Vector3(-5.2, 3.9, -45.5), // car view
-      new THREE.Vector3(4.2, 5.4, -55),    // house 3 view
-    ];
-    const stopP = vantagePoints.map((v) => computeTouchU(cameraCurve, v, 0.001)); // nearest-u
+    // Map scroll progress → beam progress so each repair lands in step with
+    // its caption (the beam pauses at each stop are absorbed by the mapping).
     const beamStops: [number, number][] = [
       [0, 0],
-      ...stopP.map((p, i) => [p, touchU[i] + 0.004] as [number, number]),
-      [0.97, 1],
+      [0.18, touchU[0] + 0.004],
+      [0.42, touchU[1] + 0.004],
+      [0.6, touchU[2] + 0.004],
+      [0.75, touchU[3] + 0.004],
+      [0.95, 1],
       [1, 1],
     ];
     const beamMap = (p: number) => {
@@ -1521,6 +1556,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     let raf = 0;
     let running = true;
     const camPos = new THREE.Vector3();
+    const camCurrent = roadCurve.getPointAt(0.0001).setY(CAM_HEIGHT);
     const lookTarget = new THREE.Vector3();
     const lookCurrent = new THREE.Vector3(0, 2, 0);
     const damp = reducedMotion ? 1 : 0.085;
@@ -1644,11 +1680,24 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
         car.steamPoints.visible = false;
       }
 
-      // camera
-      cameraCurve.getPointAt(Math.min(p, 1), camPos);
-      camera.position.copy(camPos);
+      // camera: chase the beam head along the road from behind
+      const li = beamP * CAM_LUT_N;
+      const li0 = Math.min(Math.floor(li), CAM_LUT_N - 1);
+      const headRoadT = beamRoadT[li0] + (beamRoadT[li0 + 1] - beamRoadT[li0]) * (li - li0);
+      roadCurve.getPointAt(Math.max(headRoadT - CAM_BACK, 0.0001), camPos);
+      camPos.y = CAM_HEIGHT;
+      camCurrent.lerp(camPos, reducedMotion ? 1 : 0.09);
+      camera.position.copy(camCurrent);
+
       lookTarget.copy(beamCurve.getPointAt(Math.min(beamP + 0.012, 1)));
-      lookTarget.y = Math.max(lookTarget.y * 0.6 + 0.9, 1.2);
+      // near the end, ease the gaze down the road so the beam's touch-down
+      // sits low and centred in frame, meeting the scroll line below
+      const endBlend = THREE.MathUtils.smoothstep(p, 0.93, 1);
+      lookTarget.y = THREE.MathUtils.lerp(
+        Math.max(lookTarget.y * 0.6 + 0.9, 1.2),
+        lookTarget.y + 1.6,
+        endBlend,
+      );
       lookCurrent.lerp(lookTarget, reducedMotion ? 1 : 0.12);
       camera.lookAt(lookCurrent);
 
@@ -1749,16 +1798,12 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
             {headline}
           </div>
           <div className="pointer-events-auto mt-7 flex flex-col sm:flex-row items-center gap-4">
-            <a
-              href="#get-help"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("get-help")?.scrollIntoView({ behavior: "smooth" });
-              }}
+            <Link
+              to={findRoute}
               className="rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 px-8 py-3.5 text-sm md:text-base font-bold text-slate-950 shadow-[0_0_30px_rgba(56,150,255,0.45)] transition-transform hover:scale-105"
             >
               Find Emergency Help
-            </a>
+            </Link>
             <Link
               to="/pricing"
               className={`rounded-full border px-8 py-3.5 text-sm md:text-base font-bold backdrop-blur transition-colors ${light

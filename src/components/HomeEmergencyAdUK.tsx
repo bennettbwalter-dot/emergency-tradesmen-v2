@@ -1,6 +1,7 @@
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { Link } from "react-router-dom";
 import { PremiumModelerDialog } from "./PremiumModelerDialog";
+import { AffiliateDisclosure } from "./AffiliateDisclosure";
 
 export function HomeEmergencyAdUK() {
     const { settings } = useLocalization();
@@ -12,6 +13,7 @@ export function HomeEmergencyAdUK() {
 
     return (
         <div className="w-full max-w-4xl mx-auto my-12 p-6 rounded-2xl border border-emerald-500/20 bg-emerald-50/50 dark:bg-emerald-900/10 shadow-sm">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Advertisement</p>
             <div className="flex flex-col md:flex-row items-center gap-8">
 
                 {/* Affiliate Image & Link Wrapper - Using STRICT Awin Logic */}
@@ -72,6 +74,7 @@ export function HomeEmergencyAdUK() {
                         <p className="mt-1">
                             *Exclusions apply: Boilers 15+ years and appliances 10+ years old are not covered.
                         </p>
+                        <AffiliateDisclosure className="mt-2" />
                     </div>
                 </div>
             </div>

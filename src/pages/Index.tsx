@@ -8,31 +8,7 @@ import { useSimpleTheme } from "@/components/simple-theme";
 import { US_STATES } from "@/lib/us_states";
 import { Hero3D } from "@/components/landing3/Hero3D";
 import { GuidedStory } from "@/components/landing3/GuidedStory";
-import { ShieldCheck, MapPin, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
 
-const HowItWorksSection = lazy(() =>
-  import("@/components/sections/HowItWorksSection").then((module) => ({
-    default: module.HowItWorksSection,
-  }))
-);
-
-const GeneralFAQSection = lazy(() =>
-  import("@/components/GeneralFAQSection").then((module) => ({
-    default: module.GeneralFAQSection,
-  }))
-);
-const RoadsideScroll = lazy(() =>
-  import("@/components/animations/RoadsideScroll").then((module) => ({
-    default: module.RoadsideScroll,
-  }))
-);
-const TradesmenScroll = lazy(() =>
-  import("@/components/animations/TradesmenScroll").then((module) => ({
-    default: module.TradesmenScroll,
-  }))
-);
 const Footer = lazy(() =>
   import("@/components/Footer").then((module) => ({ default: module.Footer }))
 );
@@ -72,73 +48,6 @@ function DeferredSection({
         </Suspense>
       ) : null}
     </div>
-  );
-}
-
-function FadeInSection({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -60px 0px", threshold: 0.08 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="landing-fade-in">
-      {children}
-    </div>
-  );
-}
-
-function LiveAlertsTeaser({
-  displayCity,
-  isUSSite,
-  light,
-}: {
-  displayCity: string;
-  isUSSite: boolean;
-  light: boolean;
-}) {
-  const sourceLabel = isUSSite ? "Weather, safety, road and recall signals" : "Weather, flood, road and safety signals";
-
-  return (
-    <section className={cn(
-      "landing-alerts-teaser landing-alerts-teaser--landing3",
-      light ? "landing-alerts-teaser--light" : "landing-alerts-teaser--dark"
-    )} aria-labelledby="landing-alerts-title">
-      <div className="landing-alerts-teaser__copy">
-        <p className="landing-alerts-teaser__eyebrow">
-          <ShieldCheck className="h-4 w-4 text-gold" />
-          Live Alerts In Your Area
-        </p>
-        <h2 id="landing-alerts-title">Know what is happening locally before you call.</h2>
-        <p>
-          When storms, floods, traffic disruption, or public safety notices affect {displayCity}, the full Live Alerts panel helps you understand what kind of emergency help to call first.
-        </p>
-      </div>
-      <div className="landing-alerts-teaser__panel" aria-label="Live alerts summary">
-        <span>
-          <MapPin className="h-4 w-4 text-gold" />
-          {displayCity}
-        </span>
-        <strong>{sourceLabel}</strong>
-        <Link to="/alerts" className="landing-alerts-teaser__button">
-          Open Live Alerts
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-    </section>
   );
 }
 
@@ -281,51 +190,8 @@ const Index = () => {
         {/* Act 1: the emergency beam hero with the original dynamic headline */}
         <Hero3D mode={light ? "light" : "dark"} headline={<OriginalDynamicHeadline light={light} />} />
 
-        {/* Act 2: the beam morphs into the guided scroll line and the page
-            continues — photo deck, typography chapters, supporting text, CTA */}
-        <GuidedStory light={light} />
-
-        {/* Live Alerts Teaser card */}
-        <div className="w-full max-w-7xl mx-auto px-4 mt-8">
-          <FadeInSection>
-            <LiveAlertsTeaser displayCity={displayCity} isUSSite={isUSDomain} light={light} />
-          </FadeInSection>
-        </div>
-
-        {/* 3 Simple Steps - How It Works Spine */}
-        <FadeInSection>
-          <DeferredSection minHeight={400}>
-            <HowItWorksSection variant="spine" />
-          </DeferredSection>
-        </FadeInSection>
-
-        {/* Roadside and Tradesmen card scroll sections */}
-        <div className="py-20 space-y-20 px-4">
-          <FadeInSection>
-            <DeferredSection minHeight={400}>
-              <RoadsideScroll />
-            </DeferredSection>
-          </FadeInSection>
-          <FadeInSection>
-            <DeferredSection minHeight={500}>
-              <TradesmenScroll />
-            </DeferredSection>
-          </FadeInSection>
-        </div>
-
-        {/* FAQ Section — visible by default for SEO and trust */}
-        <FadeInSection>
-          <div className="landing-faq-wrap py-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
-            <div className="w-full max-w-3xl mx-auto">
-              <DeferredSection minHeight={320}>
-                <GeneralFAQSection initiallyOpened={true} />
-              </DeferredSection>
-            </div>
-          </div>
-        </FadeInSection>
+        {/* Act 2: the beam morphs into the guided scroll line under the hero. */}
+        <GuidedStory light={light} displayCity={displayCity} isUSSite={isUSDomain} />
       </main>
 
       <DeferredSection minHeight={520}>

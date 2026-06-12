@@ -29,8 +29,8 @@ export function CardContainer({ children, className, contentClassName, backgroun
                     }}
                 />
 
-                {/* Noise Texture for 'Premium' feel */}
-                <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.webp')] pointer-events-none mix-blend-soft-light" />
+                {/* Noise Texture for 'Premium' feel — self-hosted (external transparenttextures.com URL was blocked by ORB) */}
+                <div className="absolute inset-0 opacity-[0.03] bg-[url('/images/ui/stardust.png')] pointer-events-none mix-blend-soft-light" />
             </div>
 
             <div className={cn("relative z-10 flex flex-col gap-3 px-6 pt-5 pb-4", contentClassName)}>

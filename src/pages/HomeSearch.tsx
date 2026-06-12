@@ -1,6 +1,9 @@
 import { lazy, Suspense, useState, useEffect, Component, type ReactNode } from "react";
 import {
+  MapPinned,
   Menu,
+  MessageSquareText,
+  PhoneCall,
 } from "lucide-react";
 import { GuestGate } from "@/components/GuestGate";
 import { Button } from "@/components/ui/button";
@@ -43,9 +46,21 @@ class SafeBackgroundBoundary extends Component<{ children: ReactNode }, { hasErr
 }
 
 const emergencyTrustSteps = [
-  "Tell us the emergency",
-  "Choose trade and area",
-  "Call the business directly",
+  {
+    title: "Tell us the emergency",
+    desc: "Describe what's happened — a power cut, leak, lockout or breakdown.",
+    Icon: MessageSquareText,
+  },
+  {
+    title: "Choose trade and area",
+    desc: "Pick the trade you need and your town or city to see local listings.",
+    Icon: MapPinned,
+  },
+  {
+    title: "Call the business directly",
+    desc: "Speak straight to a local pro — no middlemen, no booking fees.",
+    Icon: PhoneCall,
+  },
 ];
 
 
@@ -73,6 +88,15 @@ export default function HomeSearch() {
       window.removeEventListener('et-open-sidebar', handleOpenSidebar);
       window.removeEventListener('et-close-sidebar', handleCloseSidebar);
     };
+  }, []);
+
+  // smooth-scroll to the search when arriving via /home#manual-search
+  useEffect(() => {
+    if (window.location.hash === "#manual-search") {
+      window.setTimeout(() => {
+        document.getElementById("manual-search")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    }
   }, []);
 
   const siteTradeTerm = settings.countryCode === "US" ? "Contractors" : "Tradesmen";
@@ -208,12 +232,30 @@ export default function HomeSearch() {
                     </h1>
                     <p className="sr-only">{appTitle} emergency AI search</p>
                   </div>
-                  <div className="mx-auto mb-5 max-w-[48rem]">
-                    <div className="home-search-trust-grid" aria-label="Emergency search steps">
+                  <div className="mx-auto mb-7 max-w-[56rem]">
+                    <p className="mb-4 text-center font-display text-[11px] font-black uppercase tracking-[0.22em] text-gold/90">
+                      How it works — fast help in 3 steps
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-3 sm:gap-4" aria-label="Emergency search steps">
                       {emergencyTrustSteps.map((step, index) => (
-                        <div key={step} className="home-search-trust-pill">
-                          <strong>{index + 1}</strong>
-                          <span>{step}</span>
+                        <div
+                          key={step.title}
+                          className="group relative rounded-2xl border border-slate-950/10 bg-white/85 p-4 shadow-[0_10px_32px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_10px_32px_rgba(0,0,0,0.35)] dark:hover:shadow-[0_16px_44px_rgba(0,0,0,0.5)] sm:p-5"
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold/15 text-gold ring-1 ring-gold/25">
+                              <step.Icon className="h-5 w-5" aria-hidden />
+                            </span>
+                            <span className="font-display text-[10px] font-black uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+                              Step {index + 1}
+                            </span>
+                          </div>
+                          <h2 className="mt-3.5 text-sm font-bold text-slate-950 dark:text-white sm:text-[0.95rem]">
+                            {step.title}
+                          </h2>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-600 dark:text-slate-300/80">
+                            {step.desc}
+                          </p>
                         </div>
                       ))}
                     </div>

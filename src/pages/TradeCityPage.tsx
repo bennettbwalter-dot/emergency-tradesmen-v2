@@ -23,7 +23,7 @@ import { cityCoordinates, findNearestCity } from "@/lib/cityCoordinates";
 import { usCityCoordinates } from "@/lib/usCityCoordinates";
 import { getBusinessListings } from "@/lib/businesses";
 import { fetchBusinesses } from "@/lib/businessService";
-import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
+import { calculateReviewStats } from "@/lib/reviews";
 import { useBusinessFilters } from "@/hooks/useBusinessFilters";
 import { Phone, Clock, CheckCircle, MapPin, PoundSterling, DollarSign, Shield, Navigation, Loader2, ShieldCheck, UserCheck } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -374,7 +374,7 @@ export default function TradeCityPage() {
       comment: b.featuredReview!,
       date: new Date().toISOString(),
       verified: false,
-      helpful: Math.floor(Math.random() * 5),
+      helpful: 0,
       notHelpful: 0,
     }));
 
@@ -432,13 +432,16 @@ export default function TradeCityPage() {
       "opens": "00:00",
       "closes": "23:59"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": reviewStats.averageRating.toFixed(1),
-      "reviewCount": reviewStats.totalReviews,
-      "bestRating": "5",
-      "worstRating": "1"
-    },
+    // Only emit aggregateRating when real review snippets exist — never a fabricated 0/5.
+    ...(reviewStats.totalReviews > 0 ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": reviewStats.averageRating.toFixed(1),
+        "reviewCount": reviewStats.totalReviews,
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    } : {}),
     "review": realReviews.map(review => ({
       "@type": "Review",
       "author": {
@@ -549,12 +552,12 @@ export default function TradeCityPage() {
   // --- Richer Meta Descriptions (question → answer → CTA) ---
   const listingCount = businesses.length;
   const seoDescription = isStatePage
-    ? `Need an emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local listings` : 'Public local listings'} across the state. ${averageResponseTime} avg response. Open 24 hours. Call now for fast help.`
+    ? `Need an emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local listings` : 'Public local listings'} across the state. Typical callout ${averageResponseTime}. Browse 24 hours. Call direct for fast help.`
     : pageData?.problem
-      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Available 24/7 with ${averageResponseTime} response time. Find local emergency contacts now.`
+      ? `${pageData.problem.description} in ${cityName}${stateCode ? ` ${stateCode}` : ''}. Typical callout ${averageResponseTime}. Find local emergency contacts now.`
       : isUS
-        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ${listingCount > 0 ? `${listingCount} public local contractors` : 'Public local contractor listings'}. ${averageResponseTime} avg response. Open 24 hours. Get connected now.`
-        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local tradesmen listings` : 'Public local tradesmen listings'}. ${averageResponseTime} response. 24/7 availability. Call now for fast help.`;
+        ? `Need an emergency ${tradeName} near me in ${cityName} ${stateCode}? ${listingCount > 0 ? `${listingCount} public local contractors` : 'Public local contractor listings'}. Typical callout ${averageResponseTime}. Browse 24 hours. Call direct.`
+        : `Looking for a local emergency ${tradeName} near me in ${cityName}? ${listingCount > 0 ? `${listingCount} public local tradesmen listings` : 'Public local tradesmen listings'}. Typical callout ${averageResponseTime}. Browse 24/7. Call direct for fast help.`;
 
   // --- Expanded Long-Tail Keywords Array ---
   const seoKeywords = pageData?.problem
@@ -614,6 +617,8 @@ export default function TradeCityPage() {
         keywords={seoKeywords}
         canonical={canonicalPath}
         ogImage={heroImage}
+        // Thin-content guard: programmatic trade×city pages with zero listings stay out of the index
+        noIndex={!isLoading && hasLoadedRef.current && businesses.length === 0}
         jsonLd={[serviceSchema, faqSchema, breadcrumbSchema]}
         locale={isUS ? 'en_US' : 'en_GB'}
         {...(cityCoords ? {
@@ -689,8 +694,8 @@ export default function TradeCityPage() {
               </h1>
 
               <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-foreground/80 font-light animate-fade-up-delay-1">
-                Don't panic – help is on the way. Our network of local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} are ready to respond right now.
-                With an average arrival time of {averageResponseTime}, you won't be waiting long. These are public local listings, so confirm availability, credentials, insurance, and pricing directly before booking.
+                Don't panic – help is close by. Browse local emergency {tradeDisplayName.toLowerCase()}s {isStatePage ? `serving ${cityName}` : `in ${cityName}`} and call them direct, with no middlemen or booking fees.
+                Typical emergency callout windows are {averageResponseTime}. These are public local listings, so confirm availability, credentials, insurance, and pricing directly before booking.
               </p>
 
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up-delay-2">
@@ -709,22 +714,13 @@ export default function TradeCityPage() {
                 </Button>
                 <div className="flex items-center gap-3 text-gold border border-gold/30 rounded-full bg-gold/5 px-6 py-3 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                   <Clock className="w-5 h-5 text-gold animate-pulse" />
-                  <span className="uppercase tracking-wider text-sm font-bold font-mono">Response in {averageResponseTime}</span>
+                  <span className="uppercase tracking-wider text-sm font-bold font-mono">Typical callout: {averageResponseTime}</span>
                 </div>
               </div>
           </div>
         </section>
 
-        <LiveLocalAlerts
-          city={cityName}
-          stateName={stateCode || effectiveState || null}
-          tradeSlug={tradeInfo.slug}
-          title={`Live ${tradeDisplayName} Alerts`}
-          description={`Official alerts around ${cityName}${isUS && stateCode ? `, ${stateCode}` : ''} that may affect emergency ${tradeDisplayName.toLowerCase()} demand.`}
-          className="border-y border-border/50"
-        />
-
-        {/* Listings Section */}
+        {/* Listings Section — kept directly after the hero/intro so help is one scroll away */}
         <section className="container-wide py-16 relative">
           {/* Background Grid */}
           {theme === 'dark' && (
@@ -751,7 +747,7 @@ export default function TradeCityPage() {
 
           <div className="mb-6 relative z-10">
             <h2 className="text-2xl font-bold text-foreground">
-              Top Rated Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
+              Local {tradeInfo.name}s near {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}
             </h2>
             <p className="text-muted-foreground">
               {localResultsText}{resultsCount > ITEMS_PER_PAGE && ` (showing ${ITEMS_PER_PAGE} per page)`}
@@ -871,6 +867,15 @@ export default function TradeCityPage() {
           )}
         </section>
 
+        <LiveLocalAlerts
+          city={cityName}
+          stateName={stateCode || effectiveState || null}
+          tradeSlug={tradeInfo.slug}
+          title={`Live ${tradeDisplayName} Alerts`}
+          description={`Official alerts around ${cityName}${isUS && stateCode ? `, ${stateCode}` : ''} that may affect emergency ${tradeDisplayName.toLowerCase()} demand.`}
+          className="border-y border-border/50"
+        />
+
         {/* TL;DR Answer Block — optimized for AI Overviews / featured snippets */}
         <section className="container-wide pt-10" aria-labelledby="quick-answer-heading">
           <div className="max-w-3xl mx-auto bg-secondary/40 backdrop-blur-md border border-gold/30 rounded-2xl p-6 md:p-8 shadow-[0_0_30px_rgba(212,175,55,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] hover:border-gold/50">
@@ -885,7 +890,7 @@ export default function TradeCityPage() {
                   <Clock className="w-5 h-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Arrival Speed</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Typical Callout</p>
                   <p className="text-sm font-semibold text-foreground">{averageResponseTime}</p>
                 </div>
               </div>
@@ -895,8 +900,8 @@ export default function TradeCityPage() {
                   <UserCheck className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Active Listings</p>
-                  <p className="text-sm font-semibold text-foreground">{listingCount} Verified Pro{listingCount === 1 ? '' : 's'}</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Local Listings</p>
+                  <p className="text-sm font-semibold text-foreground">{listingCount} Public Listing{listingCount === 1 ? '' : 's'}</p>
                 </div>
               </div>
 
@@ -905,8 +910,8 @@ export default function TradeCityPage() {
                   <ShieldCheck className="w-5 h-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Vetted Status</p>
-                  <p className="text-sm font-semibold text-foreground">100% Approved</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Booking Fees</p>
+                  <p className="text-sm font-semibold text-foreground">None — Call Direct</p>
                 </div>
               </div>
 
@@ -918,8 +923,8 @@ export default function TradeCityPage() {
                   </span>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Live Coverage</p>
-                  <p className="text-sm font-semibold text-foreground">24/7 Dispatch</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Directory</p>
+                  <p className="text-sm font-semibold text-foreground">Open 24/7</p>
                 </div>
               </div>
             </div>
@@ -927,11 +932,11 @@ export default function TradeCityPage() {
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
               {pageData?.problem ? (
                 <>
-                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? ' is' : 's are'} available` : `Public local ${tradeDisplayName.toLowerCase()} listings are available`} with an average response time of <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
+                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? ' is' : 's are'} available` : `Public local ${tradeDisplayName.toLowerCase()} listings are available`} — typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               ) : (
                 <>
-                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? '' : 's'}` : `Public local ${tradeDisplayName.toLowerCase()} listings`} {listingCount === 1 ? 'is' : 'are'} available with an average response time of <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
+                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? '' : 's'}` : `Public local ${tradeDisplayName.toLowerCase()} listings`} {listingCount === 1 ? 'is' : 'are'} available — typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               )}
             </p>
@@ -984,6 +989,10 @@ export default function TradeCityPage() {
             </Suspense>
           </div>
 
+          <div className="max-w-2xl mb-6">
+            <h3 className="text-xl font-display text-foreground mb-2">Before You Hire — Quick Checks</h3>
+            <p className="text-sm text-muted-foreground">These are public listings, so always confirm credentials yourself:</p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map((cert, index) => (
               <div key={index} className="flex items-center gap-3 p-5 bg-card rounded-lg border border-border/50 hover:border-gold/30 transition-colors">
@@ -1028,6 +1037,14 @@ export default function TradeCityPage() {
         </section>
 
         <section className="container-wide mb-8">
+          {/* Framing line must match the ad's own render conditions (US ad needs an env URL) */}
+          {(actualCountry !== 'US' || !!import.meta.env.VITE_US_HOME_WARRANTY_AFF_URL) && (
+            <div className="max-w-4xl mx-auto text-center mb-2">
+              <p className="text-sm text-muted-foreground">
+                If no one's available right now, cover plans can handle the next emergency for you:
+              </p>
+            </div>
+          )}
           <HomeEmergencyAd />
         </section>
 

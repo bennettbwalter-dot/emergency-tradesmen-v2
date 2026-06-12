@@ -138,6 +138,36 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
           </div>
         </section>
 
+        {/* The one funnel spine: Claim → Verified badge → Pro upgrade */}
+        <section className="container-wide px-4 pt-12">
+          <div className="rounded-2xl border border-gold/25 bg-gold/5 p-6 md:p-8">
+            <p className="business-owner-kicker">How {brand} works for {audience}</p>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              <div className="business-owner-feature">
+                <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 1</span>
+                <h2>Claim your free listing</h2>
+                <p>Already listed? Claim it free, keep your phone number and details accurate, and start taking direct calls.</p>
+                <Button asChild variant="outline" className="mt-3 w-fit">
+                  <Link to="/claim-your-business">Claim free listing</Link>
+                </Button>
+              </div>
+              <div className="business-owner-feature">
+                <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 2</span>
+                <h2>Get the claimed badge</h2>
+                <p>Claims are reviewed manually. Approved profiles show a claimed badge customers can actually trust.</p>
+              </div>
+              <div className="business-owner-feature">
+                <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 3</span>
+                <h2>Upgrade to Pro</h2>
+                <p>Priority placement, richer profile, and the free website build on Pro Yearly or Agency plans.</p>
+                <Button asChild className="mt-3 w-fit bg-gold text-black hover:bg-gold-light">
+                  <Link to="/pricing">View Pro plans</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="container-wide px-4 py-12">
           <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/10 p-6 md:flex md:items-center md:justify-between md:gap-8">
             <div className="flex gap-4">
@@ -223,7 +253,7 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
             </div>
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {githubTemplates.map((template) => (
-                <article key={template.repo} className="business-package-card">
+                <article key={template.name} className="business-package-card">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="business-owner-kicker">GitHub template</p>

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchBusinessById } from "@/lib/businessService";
 import { fetchBusinessPhotos } from "@/lib/photoService";
-import { generateMockReviews, calculateReviewStats } from "@/lib/reviews";
+import { calculateReviewStats } from "@/lib/reviews";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { WriteReviewModal } from "@/components/WriteReviewModal";
 import {
@@ -131,8 +131,8 @@ export default function BusinessProfilePage() {
         else if (nameLc.includes('breakdown') || nameLc.includes('car') || nameLc.includes('tow') || nameLc.includes('recovery')) trade = 'breakdown';
     }
 
-    // Use the real featured review if available
-    const realReviews = business.featuredReview ? [{
+    // Use the real featured review if available (needs a real rating — never show a 0-star review)
+    const realReviews = business.featuredReview && business.rating > 0 ? [{
         id: `review-${business.id}`,
         businessId: business.id,
         userId: 'public-reviewer',
@@ -149,9 +149,10 @@ export default function BusinessProfilePage() {
 
     const reviewStats = calculateReviewStats(realReviews);
 
-    // If we have a real Google rating/count but only 1 review text, 
-    // we should still reflect the aggregate stats in the stats object
-    if (business.reviewCount > 0) {
+    // If we have a real Google rating/count but only 1 review text,
+    // we should still reflect the aggregate stats in the stats object.
+    // Both must exist — a review count with no rating must stay "unrated".
+    if (business.reviewCount > 0 && business.rating > 0) {
         reviewStats.totalReviews = business.reviewCount;
         reviewStats.averageRating = business.rating;
     }
@@ -286,7 +287,7 @@ export default function BusinessProfilePage() {
             postalCode: business.postalCode || (!isUS ? getPostcodeForCity(city) : ""),
             addressCountry: isUS ? "US" : "GB"
         },
-        aggregateRating: business.rating ? {
+        aggregateRating: business.rating > 0 && business.reviewCount > 0 ? {
             "@type": "AggregateRating",
             ratingValue: business.rating,
             reviewCount: business.reviewCount
@@ -311,7 +312,7 @@ export default function BusinessProfilePage() {
         ? `${business.name} offers ${services.slice(0, 6).join(', ')}${services.length > 6 ? ', and more' : ''} in ${formattedCity} and surrounding areas.`
         : `${business.name} provides emergency ${formattedTrade.toLowerCase()} services in ${formattedCity} and surrounding areas.`;
     const areaAnswer = `${business.name} primarily serves ${formattedCity}${isUS && getStateForCity(city) ? `, ${getStateForCity(city)}` : ''} and nearby areas as an emergency ${formattedTrade.toLowerCase()}.`;
-    const reviewsAnswer = business.reviewCount && business.reviewCount > 0
+    const reviewsAnswer = business.reviewCount && business.reviewCount > 0 && business.rating > 0
         ? `${business.name} has ${business.reviewCount} customer review${business.reviewCount === 1 ? '' : 's'} with an average rating of ${business.rating}/5.`
         : `Reviews for ${business.name} are collected on the profile page — be the first to share your experience.`;
 
