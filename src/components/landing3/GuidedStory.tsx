@@ -374,7 +374,7 @@ export const GuidedStory = ({ light }: GuidedStoryProps) => {
             Tell us what went wrong and where you are. We surface trusted local professionals
             with the skills to fix it — fast, transparent, and free to use.
           </p>
-          <Link to="/" className="mt-5 inline-block text-sm font-semibold text-sky-500 hover:underline">
+          <Link to="/home" className="mt-5 inline-block text-sm font-semibold text-sky-500 hover:underline">
             Find emergency help &rarr;
           </Link>
         </div>
@@ -417,7 +417,7 @@ export const GuidedStory = ({ light }: GuidedStoryProps) => {
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            to="/"
+            to="/home"
             className="rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 px-9 py-4 text-base font-bold text-slate-950 shadow-[0_0_30px_rgba(56,150,255,0.45)] transition-transform hover:scale-105"
           >
             Find Emergency Help

@@ -30,6 +30,7 @@ const AnalyticsTracker = lazy(() => import("@/components/AnalyticsTracker").then
 
 // Lazy Load Pages
 const Index = lazy(() => import("./pages/Index"));
+const HomeSearch = lazy(() => import("./pages/HomeSearch"));
 const TradeCityPage = lazy(() => import("./pages/TradeCityPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
@@ -140,6 +141,8 @@ const AppRoutes = () => (
 
     {/* Core Pages */}
     <Route path="/" element={<Index />} />
+    <Route path="/home" element={<HomeSearch />} />
+    <Route path="/us/home" element={<HomeSearch />} />
     <Route path="/landing-3" element={<Navigate to="/" replace />} />
     <Route path="/landing-page-3" element={<Navigate to="/" replace />} />
     <Route path="/about" element={<About />} />
