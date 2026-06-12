@@ -57,32 +57,61 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-ui': [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-select',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-toast',
-            '@radix-ui/react-tooltip',
-          ],
-          'vendor-query': ['@tanstack/react-query'],
-          'vendor-animation': ['framer-motion', 'motion'],
-          'vendor-maps': ['leaflet', 'react-leaflet', 'maplibre-gl'],
-          'vendor-analytics': ['posthog-js'],
-          'vendor-sentry': ['@sentry/react'],
-          'vendor-supabase': ['@supabase/supabase-js'],
-          'vendor-icons': ['lucide-react'],
-          'vendor-forms': ['react-hook-form', 'zod', '@hookform/resolvers'],
-          'vendor-charts': ['recharts'],
-          'vendor-firebase': ['firebase/app', 'firebase/messaging'],
-          'vendor-3d': ['three', 'ogl', 'gsap', 'lenis'],
-          'vendor-carousel': ['embla-carousel-react'],
-          'vendor-speech': ['microsoft-cognitiveservices-speech-sdk'],
-          'vendor-transformers': ['@xenova/transformers'],
-          'vendor-markdown': ['react-markdown', 'rehype-raw', 'remark-gfm', 'dompurify'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'vendor-query';
+            }
+            if (id.includes('framer-motion') || id.includes('motion')) {
+              return 'vendor-animation';
+            }
+            if (id.includes('leaflet') || id.includes('react-leaflet') || id.includes('maplibre-gl')) {
+              return 'vendor-maps';
+            }
+            if (id.includes('posthog-js')) {
+              return 'vendor-analytics';
+            }
+            if (id.includes('@sentry/react')) {
+              return 'vendor-sentry';
+            }
+            if (id.includes('@supabase/supabase-js')) {
+              return 'vendor-supabase';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('react-hook-form') || id.includes('zod') || id.includes('@hookform/resolvers')) {
+              return 'vendor-forms';
+            }
+            if (id.includes('recharts')) {
+              return 'vendor-charts';
+            }
+            if (id.includes('firebase')) {
+              return 'vendor-firebase';
+            }
+            if (id.includes('three') || id.includes('ogl') || id.includes('gsap') || id.includes('lenis')) {
+              return 'vendor-3d';
+            }
+            if (id.includes('embla-carousel-react')) {
+              return 'vendor-carousel';
+            }
+            if (id.includes('microsoft-cognitiveservices-speech-sdk')) {
+              return 'vendor-speech';
+            }
+            if (id.includes('@xenova/transformers') || id.includes('@huggingface/transformers')) {
+              return 'vendor-transformers';
+            }
+            if (id.includes('react-markdown') || id.includes('rehype-raw') || id.includes('remark-gfm') || id.includes('dompurify')) {
+              return 'vendor-markdown';
+            }
+            return 'vendor';
+          }
         },
       },
     },

@@ -3489,3 +3489,32 @@ img.product-image {
     width: 100%;
   }
 }
+
+/* Sidebar navigation items styling (align icons beside text) */
+.home-search-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: inherit;
+}
+
+.home-search-nav-item:hover {
+  background-color: rgba(15, 23, 42, 0.05);
+}
+
+.dark .home-search-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.home-search-nav-item-active {
+  background-color: rgba(15, 23, 42, 0.08);
+  font-weight: 600;
+}
+
+.dark .home-search-nav-item-active {
+  background-color: rgba(255, 255, 255, 0.12);
+}
