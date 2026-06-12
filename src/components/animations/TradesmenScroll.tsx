@@ -17,6 +17,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasContainerRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
+    const copyPanelRef = useRef<HTMLDivElement>(null);
+    const visualPanelRef = useRef<HTMLDivElement>(null);
     const videoSequence = useRef({ frame: 0 });
     const imagesRef = useRef<HTMLImageElement[]>([]);
 
@@ -33,6 +35,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
         const context = canvas?.getContext('2d', { willReadFrequently: true });
         const canvasContainer = canvasContainerRef.current;
         const card = cardRef.current;
+        const copyPanel = copyPanelRef.current;
+        const visualPanel = visualPanelRef.current;
         if (!canvas || !context || !canvasContainer || !card) return;
 
         // Preload images
@@ -134,9 +138,37 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
             duration: 10,
         }, 0);
 
+        let revealTl: gsap.core.Timeline | undefined;
+        if (copyPanel && visualPanel) {
+            revealTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 82%",
+                    end: "center 44%",
+                    scrub: 0.65,
+                    refreshPriority: 4,
+                }
+            });
+
+            revealTl
+                .fromTo(
+                    visualPanel,
+                    { autoAlpha: 0.2, x: -54, y: 28, scale: 0.965 },
+                    { autoAlpha: 1, x: 0, y: 0, scale: 1, ease: "power2.out", duration: 1 },
+                    0
+                )
+                .fromTo(
+                    copyPanel,
+                    { autoAlpha: 0.2, x: 54, y: 28, scale: 0.98 },
+                    { autoAlpha: 1, x: 0, y: 0, scale: 1, ease: "power2.out", duration: 1 },
+                    0.08
+                );
+        }
+
         return () => {
             window.removeEventListener('resize', updateCanvasSize);
             tl.kill();
+            revealTl?.kill();
             ScrollTrigger.refresh();
         };
     }, []);
@@ -144,15 +176,11 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
     return (
         <div 
             ref={cardRef} 
-            className="w-full max-w-5xl mx-auto rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#121316] to-[#070708] p-6 md:p-10 shadow-2xl relative overflow-hidden group hover:border-[#d7c08a]/30 transition-all duration-500"
+            className="landing-line-card landing-trades-card"
         >
-            {/* Background Ambient Glows */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#d7c08a]/10 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[#50b2d7]/5 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            
-            <div className="relative z-10 grid md:grid-cols-12 gap-8 items-center">
+            <div className="contents">
                 {/* Left Side: Copy, Actions, and Feature List */}
-                <div className="md:col-span-7 flex flex-col items-start text-left">
+                <div ref={copyPanelRef} className="landing-line-card__panel landing-trades-card__copy flex flex-col items-start text-left">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d7c08a]/10 border border-[#d7c08a]/20 text-[#d7c08a] text-xs font-bold uppercase tracking-widest mb-4">
                         <Shield className="w-3.5 h-3.5 animate-pulse" />
                         PRO PLAN LISTINGS
@@ -187,7 +215,7 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
                 </div>
                 
                 {/* Right Side: Responsive Canvas Container for the Interactive Scroll Man */}
-                <div className="md:col-span-5 flex flex-col gap-5 w-full">
+                <div ref={visualPanelRef} className="landing-line-card__panel landing-trades-card__visual flex flex-col gap-5 w-full">
                     {/* Visual Card containing the Canvas */}
                     <div className="bg-[#18191e]/60 border border-white/5 rounded-3xl p-4 shadow-xl relative overflow-hidden backdrop-blur-md flex flex-col items-center">
                         {/* Interactive Canvas Frame Container */}

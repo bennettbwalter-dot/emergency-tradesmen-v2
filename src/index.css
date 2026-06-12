@@ -3252,6 +3252,145 @@ img.product-image {
    LANDING PAGE 3 - HOW IT WORKS SPINE & LIVE ALERTS TEASER
    ========================================================================== */
 
+.landing-action-rail {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 7rem) 1rem;
+  background:
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary) / 0.16) 52%, hsl(var(--background)) 100%);
+}
+
+.landing-action-rail::before {
+  content: "";
+  position: absolute;
+  top: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  left: 50%;
+  z-index: 0;
+  width: 3px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0), rgba(56, 189, 248, 0.92) 14%, rgba(34, 211, 238, 0.82) 48%, rgba(240, 196, 104, 0.95) 86%, rgba(240, 196, 104, 0));
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.42), 0 0 28px rgba(240, 196, 104, 0.18);
+  pointer-events: none;
+}
+
+.landing-action-rail__content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(5rem, 9vw, 8rem);
+  width: min(100%, 1180px);
+  margin: 0 auto;
+}
+
+.landing-line-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(4.5rem, 8vw, 7rem) minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+
+.landing-line-card__panel {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(24, 25, 30, 0.94), rgba(7, 7, 8, 0.98));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+
+.landing-line-card__panel:hover {
+  border-color: rgba(215, 192, 138, 0.34);
+  transform: translateY(-2px);
+  box-shadow: 0 34px 96px rgba(0, 0, 0, 0.42);
+}
+
+.landing-panel-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(202, 165, 91, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%);
+}
+
+.landing-panel-sheen--cool {
+  background:
+    linear-gradient(135deg, rgba(80, 178, 215, 0.14), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%);
+}
+
+.landing-roadside-card__copy {
+  grid-column: 1;
+  grid-row: 1;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.landing-roadside-card__visual {
+  grid-column: 3;
+  grid-row: 1;
+  padding: clamp(1.2rem, 2.4vw, 1.75rem);
+}
+
+.landing-trades-card__visual {
+  grid-column: 1;
+  grid-row: 1;
+  padding: clamp(1rem, 2vw, 1.4rem);
+  will-change: transform, opacity;
+}
+
+.landing-trades-card__copy {
+  grid-column: 3;
+  grid-row: 1;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  will-change: transform, opacity;
+}
+
+.light .landing-line-card__panel {
+  border-color: rgba(15, 23, 42, 0.16);
+  background:
+    linear-gradient(180deg, rgba(24, 25, 30, 0.96), rgba(7, 9, 12, 0.98));
+  box-shadow: 0 26px 74px rgba(15, 23, 42, 0.12);
+}
+
+.light .landing-line-card__panel:hover {
+  border-color: rgba(202, 165, 91, 0.38);
+  box-shadow: 0 32px 88px rgba(15, 23, 42, 0.16);
+}
+
+@media (max-width: 767px) {
+  .landing-action-rail {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .landing-action-rail::before {
+    left: 1.6rem;
+  }
+
+  .landing-action-rail__content {
+    gap: 3.5rem;
+    padding-left: 2.35rem;
+  }
+
+  .landing-line-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .landing-roadside-card__copy,
+  .landing-roadside-card__visual,
+  .landing-trades-card__visual,
+  .landing-trades-card__copy {
+    width: 100%;
+  }
+}
+
 /* 1. How It Works Spine Layout */
 .landing-how-spine-grid {
   display: grid;

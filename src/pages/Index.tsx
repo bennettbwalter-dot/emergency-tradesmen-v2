@@ -300,18 +300,20 @@ const Index = () => {
         </FadeInSection>
 
         {/* Roadside and Tradesmen card scroll sections */}
-        <div className="py-20 space-y-20 px-4">
-          <FadeInSection>
-            <DeferredSection minHeight={400}>
-              <RoadsideScroll />
-            </DeferredSection>
-          </FadeInSection>
-          <FadeInSection>
-            <DeferredSection minHeight={500}>
-              <TradesmenScroll />
-            </DeferredSection>
-          </FadeInSection>
-        </div>
+        <section className="landing-action-rail" aria-label="Emergency and trade listing actions">
+          <div className="landing-action-rail__content">
+            <FadeInSection>
+              <DeferredSection minHeight={520}>
+                <RoadsideScroll />
+              </DeferredSection>
+            </FadeInSection>
+            <FadeInSection>
+              <DeferredSection minHeight={620}>
+                <TradesmenScroll />
+              </DeferredSection>
+            </FadeInSection>
+          </div>
+        </section>
 
         {/* FAQ Section — visible by default for SEO and trust */}
         <FadeInSection>

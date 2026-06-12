@@ -97,14 +97,10 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
     ];
 
     return (
-        <div className="w-full max-w-5xl mx-auto rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#121316] to-[#070708] p-6 md:p-10 shadow-2xl relative overflow-hidden group hover:border-[#caa55b]/30 transition-all duration-500">
-            {/* Background Glow */}
-            <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-[#caa55b]/10 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-[#50b2d7]/5 to-transparent blur-[60px] rounded-full pointer-events-none" />
-            
-            <div className="relative z-10 grid md:grid-cols-12 gap-8 items-center">
-                {/* Left Side: Copy and Actions */}
-                <div className="md:col-span-6 flex flex-col items-start text-left">
+        <div className="landing-line-card landing-roadside-card">
+            <div className="landing-line-card__panel landing-roadside-card__copy">
+                <div className="landing-panel-sheen" aria-hidden />
+                <div className="relative z-10 flex flex-col items-start text-left">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#caa55b]/10 border border-[#caa55b]/20 text-[#caa55b] text-xs font-bold uppercase tracking-widest mb-4">
                         <Compass className="w-3.5 h-3.5 animate-[spin_10s_linear_infinite]" />
                         24/7 EMERGENCY HELP
@@ -136,10 +132,11 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
                         )}
                     </Button>
                 </div>
-                
-                {/* Right Side: Feature Cards & Interactive Compass Radar Mockup */}
-                <div className="md:col-span-6 flex flex-col gap-5">
-                    {/* Visual Radar Mockup Card */}
+            </div>
+
+            <div className="landing-line-card__panel landing-roadside-card__visual">
+                <div className="landing-panel-sheen landing-panel-sheen--cool" aria-hidden />
+                <div className="relative z-10 flex flex-col gap-5">
                     <div className="bg-[#18191e]/80 border border-white/5 rounded-2xl p-5 shadow-lg relative overflow-hidden backdrop-blur-md flex items-center justify-between">
                         {/* Radar sweep illustration */}
                         <div className="relative w-28 h-28 rounded-full border border-white/10 flex items-center justify-center bg-black/40 overflow-hidden flex-shrink-0">
@@ -174,7 +171,7 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* List Items */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {features.map((feature, i) => (
