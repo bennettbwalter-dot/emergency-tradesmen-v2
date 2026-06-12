@@ -1,0 +1,108 @@
+.l3-journey-card--flush {
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.l3-journey-item--wide .landing-line-card {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.landing-line-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(4.5rem, 8vw, 7rem) minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+
+.landing-line-card__panel {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(24, 25, 30, 0.94), rgba(7, 7, 8, 0.98));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+
+.landing-line-card__panel:hover {
+  border-color: rgba(215, 192, 138, 0.34);
+  transform: translateY(-2px);
+  box-shadow: 0 34px 96px rgba(0, 0, 0, 0.42);
+}
+
+.landing-panel-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(202, 165, 91, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%);
+}
+
+.landing-panel-sheen--cool {
+  background:
+    linear-gradient(135deg, rgba(80, 178, 215, 0.14), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%);
+}
+
+.landing-roadside-card__copy,
+.landing-trades-card__visual {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.landing-roadside-card__visual,
+.landing-trades-card__copy {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.landing-roadside-card__copy,
+.landing-trades-card__copy {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.landing-roadside-card__visual {
+  padding: clamp(1.2rem, 2.4vw, 1.75rem);
+}
+
+.landing-trades-card__visual {
+  padding: clamp(1rem, 2vw, 1.4rem);
+}
+
+.landing-trades-card__visual,
+.landing-trades-card__copy {
+  will-change: transform, opacity;
+}
+
+.light .landing-line-card__panel {
+  border-color: rgba(15, 23, 42, 0.16);
+  background: linear-gradient(180deg, rgba(24, 25, 30, 0.96), rgba(7, 9, 12, 0.98));
+  box-shadow: 0 26px 74px rgba(15, 23, 42, 0.12);
+}
+
+.light .landing-line-card__panel:hover {
+  border-color: rgba(202, 165, 91, 0.38);
+  box-shadow: 0 32px 88px rgba(15, 23, 42, 0.16);
+}
+
+@media (max-width: 767px) {
+  .landing-line-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 2.35rem;
+  }
+
+  .landing-roadside-card__copy,
+  .landing-roadside-card__visual,
+  .landing-trades-card__visual,
+  .landing-trades-card__copy {
+    width: 100%;
+  }
+}
