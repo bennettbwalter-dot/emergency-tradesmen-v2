@@ -1210,12 +1210,18 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       new THREE.Vector3(carWorldPos.x, 1.15, carWorldPos.z), // the car
       roadOffset((tCar + tH[2]) / 2, 0.9, 1.35),
       approach(housePlacement[2].pos, 2.2),              // house 3
-      // finale: the beam keeps weaving down the road, then glides down and
-      // touches down on the centreline — handing off to the scroll line
-      roadOffset(tH[2] + (tEnd - tH[2]) * 0.3, 1.1, 1.8),
-      roadOffset(tH[2] + (tEnd - tH[2]) * 0.6, -0.9, 1.3),
-      roadOffset(tH[2] + (tEnd - tH[2]) * 0.85, 0.35, 0.8),
-      roadOffset(tEnd, 0, 0.28),
+      // finale: the beam weaves a last stretch down the road, then lifts off
+      // the tarmac and soars smoothly up into the sky — a cinematic "all clear"
+      // that hands the energy off to the page below.
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.35, 1.1, 1.7),
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.62, -0.85, 2.6),
+      roadOffset(tH[2] + (tEnd - tH[2]) * 0.82, 0.3, 5.0),
+      // lift-off: each point keeps a distinct road parameter + slight lateral
+      // drift (so the wet-road reflection curve never degenerates) while the
+      // height climbs steeply — the beam streaks up into the sky.
+      roadOffset(tEnd, 0.2, 9.5),
+      roadOffset(Math.min(tEnd + 0.01, 1), -0.15, 17),
+      roadOffset(Math.min(tEnd + 0.02, 1), 0.1, 27),
     ]);
 
     const tubeSegs = isMobile ? 260 : 420;
@@ -1681,21 +1687,22 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       }
 
       // camera: chase the beam head along the road from behind
+      // near the very end, the beam lifts off and soars upward — crane the
+      // camera up a touch and tilt the gaze to the sky so the ascent reads.
+      const endBlend = THREE.MathUtils.smoothstep(p, 0.88, 1);
       const li = beamP * CAM_LUT_N;
       const li0 = Math.min(Math.floor(li), CAM_LUT_N - 1);
       const headRoadT = beamRoadT[li0] + (beamRoadT[li0 + 1] - beamRoadT[li0]) * (li - li0);
       roadCurve.getPointAt(Math.max(headRoadT - CAM_BACK, 0.0001), camPos);
-      camPos.y = CAM_HEIGHT;
+      camPos.y = CAM_HEIGHT + endBlend * 2.0;
       camCurrent.lerp(camPos, reducedMotion ? 1 : 0.09);
       camera.position.copy(camCurrent);
 
       lookTarget.copy(beamCurve.getPointAt(Math.min(beamP + 0.012, 1)));
-      // near the end, ease the gaze down the road so the beam's touch-down
-      // sits low and centred in frame, meeting the scroll line below
-      const endBlend = THREE.MathUtils.smoothstep(p, 0.93, 1);
+      // tilt the gaze up to follow the beam streaking into the sky
       lookTarget.y = THREE.MathUtils.lerp(
         Math.max(lookTarget.y * 0.6 + 0.9, 1.2),
-        lookTarget.y + 1.6,
+        Math.max(lookTarget.y, 6) + 5.5,
         endBlend,
       );
       lookCurrent.lerp(lookTarget, reducedMotion ? 1 : 0.12);
@@ -1830,24 +1837,31 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
           </div>
         ))}
 
-        {/* Outro */}
-        <div ref={outroRef} className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center pointer-events-none">
-          <h2 className={`max-w-3xl text-3xl md:text-5xl font-extrabold ${titleColor}`}>
-            Whatever the emergency,{" "}
-            <span className="bg-gradient-to-r from-sky-400 to-amber-400 bg-clip-text text-transparent">
-              the right local expert is one search away.
-            </span>
-          </h2>
-          <p className={`mt-5 max-w-xl text-sm md:text-lg ${subColor}`}>
-            Electricians, plumbers, roofers, glaziers, locksmiths, gas engineers, breakdown recovery and more — 24/7.
-          </p>
-          <p className={`mt-10 text-[10px] uppercase tracking-[0.3em] ${light ? "text-slate-500" : "text-slate-400"}`}>
-            Keep scrolling — get help now
-          </p>
+        {/* Outro — wrapped in a readable card matching the story-caption design */}
+        <div ref={outroRef} className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 text-center pointer-events-none">
+          <div className={`pointer-events-none w-[92%] sm:w-auto sm:max-w-2xl rounded-3xl px-6 py-7 sm:px-10 sm:py-9 backdrop-blur-md border ${cardTheme}`}>
+            <h2 className={`text-[1.75rem] leading-tight sm:text-3xl md:text-5xl font-extrabold ${titleColor}`}>
+              Whatever the emergency,{" "}
+              <span className="bg-gradient-to-r from-sky-400 to-amber-400 bg-clip-text text-transparent">
+                the right local expert is one search away.
+              </span>
+            </h2>
+            <p className={`mt-5 mx-auto max-w-xl text-sm md:text-lg ${subColor}`}>
+              Electricians, plumbers, roofers, glaziers, locksmiths, gas engineers, breakdown recovery and more — 24/7.
+            </p>
+            <p className={`mt-8 text-[10px] uppercase tracking-[0.3em] ${light ? "text-slate-500" : "text-slate-400"}`}>
+              Keep scrolling — get help now
+            </p>
+          </div>
         </div>
 
-        {/* blend into the page background */}
-        <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent ${light ? "to-background" : "to-background"}`} />
+        {/* cinematic dissolve into the next section — a soft fade so the 3D
+            scene melts into the page rather than hard-cutting */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34svh] bg-gradient-to-b from-transparent via-background/55 to-background" />
+
+        {/* a thread of light descending into the page, aligned with the guided
+            story's beam below — carries the energy across the section seam */}
+        <div className="pointer-events-none absolute bottom-0 left-1/2 h-44 w-28 -translate-x-1/2 bg-[radial-gradient(ellipse_50%_120%_at_50%_100%,rgba(125,211,252,0.5)_0%,rgba(56,189,248,0.16)_45%,transparent_74%)] blur-[2px]" />
       </div>
     </div>
   );
