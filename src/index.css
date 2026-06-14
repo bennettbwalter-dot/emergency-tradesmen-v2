@@ -4749,13 +4749,15 @@ img.product-image {
   .l3-journey-item {
     min-height: auto;
     padding: clamp(4.5rem, 14vh, 7rem) 0;
+    /* reserve a left gutter so the guided scroll line flows beside the cards */
+    padding-left: 2.6rem;
   }
 
   .l3-journey-card,
   .l3-journey-card--flush,
   .l3-faq-card {
-    width: calc(100% - 1.5rem);
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
   }
 
   .l3-step-card {
@@ -4767,8 +4769,11 @@ img.product-image {
     height: 4.2rem;
   }
 
+  /* node sits in the gutter, vertically centred, so the rail runs cleanly down
+     the side of every card instead of cutting through it */
   .l3-journey-marker {
-    top: 1.4rem;
+    left: 1.15rem;
+    top: 50%;
   }
 }
 

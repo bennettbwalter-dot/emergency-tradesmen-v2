@@ -161,10 +161,11 @@ function makeSkyTexture(light: boolean): THREE.Texture {
       grad.addColorStop(0.55, "#c2d1e8");
       grad.addColorStop(1, "#d9e2f0");
     } else {
-      grad.addColorStop(0, "#15203a");
-      grad.addColorStop(0.4, "#1f2f52");
-      grad.addColorStop(0.75, "#2b3d5e");
-      grad.addColorStop(1, "#37496b");
+      grad.addColorStop(0, "#111d39");
+      grad.addColorStop(0.4, "#21345c");
+      grad.addColorStop(0.72, "#3a4e74");
+      grad.addColorStop(0.88, "#5d5a73");
+      grad.addColorStop(1, "#876059");
     }
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, s, s);
@@ -835,6 +836,11 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.6 : 2));
     renderer.setSize(stage.clientWidth, stage.clientHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    // Filmic tone mapping gives the scene rich contrast, warm highlight rolloff
+    // and a premium cinematic depth instead of the flat, washed-out clamp of
+    // NoToneMapping. Exposure is lifted to compensate for ACES' darker midtones.
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.32;
 
     // ---- theme palette ----
     const pal = light
@@ -863,7 +869,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     const pmrem = new THREE.PMREMGenerator(renderer);
     const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environment = envTex;
-    scene.environmentIntensity = light ? 0.45 : 0.28;
+    scene.environmentIntensity = light ? 0.5 : 0.42;
 
     // stormy sky dome
     const skyTex = makeSkyTexture(light);
@@ -1797,7 +1803,14 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
         {/* cinematic vignette */}
         <div className={`pointer-events-none absolute inset-0 ${light
           ? "bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(40,60,100,0.18)_100%)]"
-          : "bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(2,4,10,0.55)_100%)]"}`} />
+          : "bg-[radial-gradient(ellipse_at_center,transparent_52%,rgba(2,4,10,0.42)_100%)]"}`} />
+
+        {/* premium ambient lighting (colour only, sits over the canvas like the
+            vignette): a cool halo lifts the headline off the sky and a warm dusk
+            glow lifts the horizon, so the scene reads rich and lit, not flat */}
+        {!light && (
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_36%,rgba(96,156,240,0.20),transparent_68%),radial-gradient(ellipse_120%_62%_at_50%_104%,rgba(255,168,92,0.17),transparent_66%)]" />
+        )}
 
         {/* Intro — original dynamic headline passed in from the page */}
         <div ref={introRef} className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">

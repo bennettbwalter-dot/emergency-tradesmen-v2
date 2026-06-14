@@ -92,23 +92,8 @@
 }
 
 @media (max-width: 767px) {
-  .l3-journey-item {
-    justify-content: flex-end;
-    padding-left: 3.25rem;
-  }
-
-  .l3-journey-marker {
-    left: 1.45rem;
-  }
-
-  .l3-journey-card,
-  .l3-journey-card--flush,
-  .l3-faq-card {
-    width: calc(100% - 3rem);
-    margin-right: 0;
-    margin-left: auto;
-  }
-
+  /* journey item/marker/card placement on mobile is owned by index.css
+     (the @900 block) so the guided scroll rail stays in its left gutter */
   .landing-line-card {
     display: flex;
     flex-direction: column;

@@ -4,7 +4,6 @@ import { ArrowRight, Clock, HeartHandshake, MapPin, PhoneCall, Search, ShieldChe
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocalization } from "@/contexts/LocalizationContext";
-import { RoadsideScroll } from "@/components/animations/RoadsideScroll";
 import { TradesmenScroll } from "@/components/animations/TradesmenScroll";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { cn } from "@/lib/utils";
@@ -99,10 +98,15 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         const W = root.clientWidth;
         const H = root.scrollHeight;
         const rootRect = root.getBoundingClientRect();
+        const isMobile = window.innerWidth <= 900;
         const markers = Array.from(root.querySelectorAll<HTMLElement>("[data-line-marker]"));
         markerYs = markers.map((marker) => {
           const markerRect = marker.getBoundingClientRect();
           return markerRect.top - rootRect.top + markerRect.height / 2;
+        });
+        const markerXs = markers.map((marker) => {
+          const markerRect = marker.getBoundingClientRect();
+          return markerRect.left - rootRect.left + markerRect.width / 2;
         });
 
         svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
@@ -113,7 +117,12 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         const pathPoints: [number, number][] = [
           [centerX, 0],
           [centerX, Math.max(120, H * 0.04)],
+          // Desktop: weave gently around the centre, between the left/right cards.
+          // Mobile: cards go full-width, so route the rail through the markers —
+          // which live in a dedicated left gutter — so the line curves beside
+          // every card instead of cutting through it.
           ...markerYs.map((y, index): [number, number] => {
+            if (isMobile) return [markerXs[index], y];
             const drift = index % 2 === 0 ? -W * 0.025 : W * 0.025;
             return [centerX + drift, y];
           }),
@@ -198,7 +207,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
     return () => ctx.revert();
   }, []);
 
-  const intro = "The beam becomes a live route through the emergency journey.";
+  const intro = "A Smarter Way to Find Local Emergency Help";
 
   return (
     <section ref={rootRef} id="guided-story" className={cn("l3-journey", light ? "l3-journey--light" : "l3-journey--dark")}>
@@ -225,15 +234,13 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
 
       <div className="l3-journey-morph" aria-hidden>
         <div className="l3-journey-morph-beam" />
-        <span>The response continues</span>
       </div>
 
       <div data-journey-intro className="l3-journey-intro">
-        <p>Guided emergency flow</p>
         <h2>
           {intro.split(" ").map((word, index) => (
             <span key={`${word}-${index}`} className="l3-journey-word-shell">
-              <span data-journey-word>{["beam", "route", "journey."].includes(word) ? <em>{word}</em> : word}</span>
+              <span data-journey-word>{["Smarter", "Emergency", "Help"].includes(word) ? <em>{word}</em> : word}</span>
               {index < intro.split(" ").length - 1 ? " " : ""}
             </span>
           ))}
@@ -266,16 +273,6 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
 
         <article
           ref={(el) => { itemRefs.current[3] = el; }}
-          className="l3-journey-item l3-journey-item--wide l3-journey-item--emerald"
-        >
-          <span data-line-marker className="l3-journey-marker" aria-hidden />
-          <div className="l3-journey-card l3-journey-card--flush">
-            <RoadsideScroll compact />
-          </div>
-        </article>
-
-        <article
-          ref={(el) => { itemRefs.current[4] = el; }}
           className="l3-journey-item l3-journey-item--wide l3-journey-item--gold"
         >
           <span data-line-marker className="l3-journey-marker" aria-hidden />
@@ -285,7 +282,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         </article>
 
         <article
-          ref={(el) => { itemRefs.current[5] = el; }}
+          ref={(el) => { itemRefs.current[4] = el; }}
           className="l3-journey-item l3-journey-item--right l3-journey-item--sky"
         >
           <span data-line-marker className="l3-journey-marker" aria-hidden />
@@ -302,7 +299,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         </article>
 
         <article
-          ref={(el) => { itemRefs.current[6] = el; }}
+          ref={(el) => { itemRefs.current[5] = el; }}
           className="l3-journey-item l3-journey-item--left l3-journey-item--cyan"
         >
           <span data-line-marker className="l3-journey-marker" aria-hidden />
@@ -325,7 +322,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         </article>
 
         <article
-          ref={(el) => { itemRefs.current[7] = el; }}
+          ref={(el) => { itemRefs.current[6] = el; }}
           className="l3-journey-item l3-journey-item--wide l3-journey-item--gold"
         >
           <span data-line-marker className="l3-journey-marker" aria-hidden />
