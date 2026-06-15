@@ -178,6 +178,19 @@ serve(async (req) => {
                 if (warmCap < dailyLimit) { dailyLimit = warmCap; log(`Warm-up active: today's cap is ${dailyLimit}.`); }
             }
 
+            // Bounce-rate guard (spec: block sending if too many bounces happen).
+            // Protects domain reputation once there's a meaningful sample.
+            const attemptedAll = camp.total_sent || 0;
+            const bouncedAll = camp.total_bounced || 0;
+            if (!dryRun && attemptedAll >= 25 && bouncedAll / attemptedAll > 0.10) {
+                const pct = (100 * bouncedAll / attemptedAll).toFixed(0);
+                log(`Bounce rate ${pct}% exceeds 10% — auto-pausing "${camp.name}" to protect sending reputation. Clean/validate the list before resuming.`, 'error');
+                await supabase.from('email_campaigns').update({ status: 'paused', next_run_at: null }).eq('id', camp.id);
+                await setState('paused', `"${camp.name}" auto-paused: bounce rate ${pct}% (list quality).`, { current_campaign_id: camp.id });
+                results.push({ campaign: camp.name, reason: 'bounce_rate', bounce_pct: pct });
+                continue;
+            }
+
             const { count: sentToday } = await supabase.from('email_send_log')
                 .select('id', { count: 'exact', head: true })
                 .eq('campaign_id', camp.id).eq('status', 'sent').gte('created_at', startOfUtcDay());
