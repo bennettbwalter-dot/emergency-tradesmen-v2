@@ -820,6 +820,73 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
   );
 }
 
+/* ---------------------------------- List validation (DNS/MX + optional mailbox) */
+function ListValidationCard() {
+  const qc = useQueryClient();
+  const [country, setCountry] = useState('GB');
+  const [running, setRunning] = useState(false);
+  const [progress, setProgress] = useState('');
+
+  const { data: v, refetch } = useQuery({
+    queryKey: ['ecc-validation', country],
+    queryFn: async () => {
+      const c = async (build: (q: any) => any) => {
+        const { count } = await build(supabase.from('email_contacts').select('id', { count: 'exact', head: true }).eq('country_code', country));
+        return count || 0;
+      };
+      const [valid_mx, unvalidated, no_mx, dead, mailbox] = await Promise.all([
+        c((q) => q.eq('email_valid', true).eq('validation_status', 'valid_mx')),
+        c((q) => q.eq('email_valid', true).is('validation_status', null)),
+        c((q) => q.eq('validation_status', 'no_mx')),
+        c((q) => q.eq('validation_status', 'dead_domain')),
+        c((q) => q.eq('validation_status', 'mailbox_invalid')),
+      ]);
+      return { valid_mx, unvalidated, no_mx, dead, mailbox };
+    },
+  });
+
+  const run = async () => {
+    setRunning(true);
+    let total = 0, invalid = 0;
+    try {
+      for (let guard = 0; guard < 300; guard++) {
+        const { data, error } = await supabase.functions.invoke('validate-contacts', { body: { country, limit: 300 } });
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+        total += data.checked || 0; invalid += data.invalidated || 0;
+        setProgress(`Checked ${total}… ${data.remaining ?? 0} remaining`);
+        refetch();
+        if (data.done || (data.checked || 0) === 0) break;
+      }
+      toast.success(`Validation complete — checked ${total}, ${invalid} invalid removed.`);
+    } catch (e: any) { toast.error(`Validation failed: ${e.message}`); }
+    finally { setRunning(false); setProgress(''); refetch(); qc.invalidateQueries({ queryKey: ['ecc-contact-stats'] }); }
+  };
+
+  return (
+    <Card>
+      <CardHeader><CardTitle className="text-base flex items-center gap-2"><ShieldCheck className="w-4 h-4" />List validation</CardTitle>
+        <CardDescription>DNS/MX check removes dead &amp; web-only domains (guaranteed bounces). Add an <code>EMAIL_VERIFY_API_KEY</code> secret (ZeroBounce) to also verify mailboxes.</CardDescription></CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex items-end gap-2">
+          <div><Label className="text-xs">Region</Label>
+            <Select value={country} onValueChange={setCountry}><SelectTrigger className="h-9 w-28"><SelectValue /></SelectTrigger>
+              <SelectContent><SelectItem value="GB">UK</SelectItem><SelectItem value="US">USA</SelectItem></SelectContent></Select>
+          </div>
+          <Button disabled={running} onClick={run}>{running ? (progress || 'Validating…') : 'Run DNS validation'}</Button>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          <div><span className="text-muted-foreground">Valid (has mail server): </span><strong className="text-emerald-600">{v?.valid_mx ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">Unvalidated: </span><strong>{v?.unvalidated ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">Dead domain: </span><strong className="text-red-600">{v?.dead ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">No mail server: </span><strong className="text-red-600">{v?.no_mx ?? '—'}</strong></div>
+          {(v?.mailbox ?? 0) > 0 && <div><span className="text-muted-foreground">Bad mailbox: </span><strong className="text-red-600">{v?.mailbox}</strong></div>}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 /* ============================================================ DELIVERABILITY */
 function DeliverabilityTab({ settings, contactStats, onSave, onChanged }: any) {
   const [dns, setDns] = useState<Record<string, boolean>>({ spf: false, dkim: false, dmarc: false });
@@ -866,6 +933,8 @@ function DeliverabilityTab({ settings, contactStats, onSave, onChanged }: any) {
           ))}
         </CardContent>
       </Card>
+
+      <ListValidationCard />
 
       <Card>
         <CardHeader><CardTitle className="text-base">List hygiene</CardTitle></CardHeader>
