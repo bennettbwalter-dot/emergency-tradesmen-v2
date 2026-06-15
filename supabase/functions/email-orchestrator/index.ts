@@ -60,7 +60,7 @@ const oneHourAgo = () => new Date(Date.now() - 3600_000).toISOString();
 const esc = (s: string) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
 
 const EMAIL_RE = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
-const GOOD_TLDS = new Set(['com','net','org','us','co','io','biz','info','edu','gov','me','tv','online','site','app','dev','pro','email','company','services','inc','group','live','agency','team','solutions','llc','ca']);
+const GOOD_TLDS = new Set(['com','net','org','uk','london','us','co','io','biz','info','edu','gov','me','tv','online','site','app','dev','pro','email','company','services','inc','group','live','agency','team','solutions','llc','ca']);
 function looksValid(email: string): boolean {
     if (!email || !EMAIL_RE.test(email)) return false;
     const tld = email.toLowerCase().split('.').pop() || '';
@@ -78,7 +78,7 @@ function render(tpl: string, c: Record<string, any>): string {
         email: c.email || '',
         phone: c.phone || '',
         website: c.website || '',
-        listing_url: c.listing_url || 'https://emergencycontractors.net',
+        listing_url: c.listing_url || 'https://emergencytradesmen.net',
     };
     return (tpl || '').replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k) => esc(map[k] ?? ''));
 }
@@ -226,8 +226,8 @@ serve(async (req) => {
             log(`Queue: ${queue.length} contact(s) this chunk (cap ${cycleCap}; ${blocked.size} suppressed skipped).`);
             await setState('sending', `Sending chunk for "${camp.name}" (${queue.length})…`, { current_campaign_id: camp.id, progress_current: 0, progress_total: queue.length });
 
-            const subjectTpl = camp.subject || `Claim your free Emergency Contractors listing`;
-            const fromName = camp.from_name || settings.from_name || 'Emergency Contractors';
+            const subjectTpl = camp.subject || `Claim your free Emergency Tradesmen listing`;
+            const fromName = camp.from_name || settings.from_name || 'Emergency Tradesmen';
             const fromEmail = camp.from_email || settings.from_email;
             const replyTo = camp.reply_to || settings.reply_to;
             const optOut = camp.opt_out_text || settings.opt_out_text || '';
@@ -354,16 +354,16 @@ function dryRunStateNote(results: any[]): string {
 const DEFAULT_BODY = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#0f172a">
   <h2 style="color:#b91c1c;margin:0 0 8px">Get found for emergency {{trade}} jobs in {{city}}</h2>
   <p>Hi {{first_name}},</p>
-  <p><strong>{{business_name}}</strong> is listed on <strong>Emergency Contractors</strong> — the directory U.S. homeowners use to find emergency contractors fast when they need urgent help.</p>
+  <p><strong>{{business_name}}</strong> is listed on <strong>Emergency Tradesmen</strong> — the directory customers use to find emergency tradespeople fast when they need urgent help.</p>
   <p>Claim your local listing to control your details and start getting calls for urgent jobs in {{city}}:</p>
   <ul>
-    <li>✅ Claim your local emergency contractor listing</li>
-    <li>✅ Get found by customers in your city when they need help now</li>
+    <li>✅ Claim your local emergency listing</li>
+    <li>✅ Get found by customers in your area when they need help now</li>
     <li>✅ More visibility for urgent, high-value jobs</li>
     <li>✅ Early Pro listing opportunity — free emergency-ready website for early Pro sign-ups (while available)</li>
   </ul>
   <p style="text-align:center;margin:28px 0">
-    <a href="{{listing_url}}" style="background:#b91c1c;color:#fff;padding:14px 26px;border-radius:8px;text-decoration:none;font-weight:bold">Claim Your Free Listing →</a>
+    <a href="{{listing_url}}" style="background:#b91c1c;color:#fff;padding:14px 26px;border-radius:8px;text-decoration:none;font-weight:bold">View &amp; Claim Your Listing →</a>
   </p>
   <p>Reply to this email if you have any questions — a real person will get back to you.</p>
 </div>`;

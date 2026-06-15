@@ -24,9 +24,9 @@ import {
 } from '@/lib/emailControl';
 
 const SAMPLE_CONTACT = {
-  contact_name: 'Mike Johnson', business_name: 'Rapid Response Plumbing', trade: 'plumber',
-  city: 'Dallas', state: 'TX', email: 'mike@rapidplumbing.com', phone: '(214) 555-0100',
-  website: 'https://rapidplumbing.com', listing_url: 'https://emergencycontractors.net/rapid-response-plumbing',
+  contact_name: 'Dave Smith', business_name: 'Rapid Response Plumbing', trade: 'plumber',
+  city: 'Manchester', state: '', email: 'dave@rapidplumbing.co.uk', phone: '07700 900123',
+  website: 'https://rapidplumbing.co.uk', listing_url: 'https://emergencytradesmen.net/business/123',
 };
 
 function complianceBlockers(s?: EmailSettings | null, c?: Partial<EmailCampaign> | null, sendable?: number): string[] {
