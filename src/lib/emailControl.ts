@@ -1,4 +1,4 @@
-// Shared types, constants and helpers for the Email Control Centre (USA EmergencyContractors).
+// Shared types, constants and helpers for the Email Control Centre (UK Emergency Tradesmen / US Emergency Contractors).
 
 export interface EmailSettings {
   id: number;
@@ -113,7 +113,7 @@ export const US_TRADES: { slug: string; label: string }[] = [
   { slug: 'water-restoration', label: 'Water Restoration' },
   { slug: 'glazier', label: 'Glaziers' },
   { slug: 'breakdown', label: 'Towing / Breakdown' },
-  { slug: 'builder', label: 'General Contractors' },
+  { slug: 'builder', label: 'Builders / General Contractor' },
   { slug: 'gas-engineer', label: 'Gas Engineers' },
 ];
 
@@ -160,7 +160,7 @@ export function renderTemplate(tpl: string, c: Partial<EmailContact>): string {
     email: c.email || '',
     phone: c.phone || '',
     website: c.website || '',
-    listing_url: c.listing_url || 'https://emergencycontractors.net',
+    listing_url: c.listing_url || 'https://emergencytradesmen.net',
   };
   return (tpl || '').replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k) => map[k] ?? '');
 }

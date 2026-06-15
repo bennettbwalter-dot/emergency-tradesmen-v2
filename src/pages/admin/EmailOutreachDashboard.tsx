@@ -205,7 +205,7 @@ export default function EmailOutreachDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Email Control Centre</h1>
-          <p className="text-muted-foreground mt-1">USA · EmergencyContractors — safe, throttled outreach through Resend.</p>
+          <p className="text-muted-foreground mt-1">{settings?.from_name || 'Emergency Tradesmen'}{settings?.sending_domain ? ` · ${settings.sending_domain}` : ''} — safe, throttled outreach through Resend.</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={() => { invalidateAll(); toast.success('Refreshed'); }}>
@@ -349,7 +349,7 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
           <div><div className="text-muted-foreground">Reply rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.replied) / totals.sent).toFixed(1)}%` : '—'}</div></div>
           <div><div className="text-muted-foreground">Bounce rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.bounced) / totals.sent).toFixed(1)}%` : '—'}</div></div>
           <div><div className="text-muted-foreground">Claims</div><div className="text-lg font-semibold">{totals.converted}</div></div>
-          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `$${(0).toFixed(2)}` : '—'}</div></div>
+          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `£${(0).toFixed(2)}` : '—'}</div></div>
         </CardContent>
       </Card>
     </div>
@@ -385,7 +385,7 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
                     </div>
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                       <span>Trade: <strong>{US_TRADES.find((t) => t.slug === camp.target_trade)?.label || camp.target_trade || 'All'}</strong></span>
-                      <span>Location: <strong>{[camp.target_city, camp.target_state].filter(Boolean).join(', ') || 'All US'}</strong></span>
+                      <span>Region: <strong>{camp.target_country === 'US' ? 'USA' : 'UK'}{[camp.target_city, camp.target_state].filter(Boolean).length ? ' · ' + [camp.target_city, camp.target_state].filter(Boolean).join(', ') : ''}</strong></span>
                       <span>Cooldown: <strong>{camp.cooldown_days}d</strong></span>
                       {camp.scheduled_at && <span>Scheduled: <strong>{new Date(camp.scheduled_at).toLocaleString()}</strong></span>}
                     </div>
@@ -438,7 +438,7 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
           <div className="text-center p-12 bg-muted/30 rounded-lg border border-dashed">
             <Mail className="w-10 h-10 mx-auto text-muted-foreground/40 mb-3" />
             <p className="text-muted-foreground font-medium">No campaigns yet.</p>
-            <p className="text-sm mt-1">Click “New Campaign” to build your first USA EmergencyContractors outreach sequence.</p>
+            <p className="text-sm mt-1">Click “New Campaign” to build your first Emergency Tradesmen outreach sequence.</p>
           </div>
         )}
       </div>
@@ -468,7 +468,7 @@ function CustomSendButton({ onSend, disabled }: { onSend: (n: number) => void; d
 /* ---------------------------------- Campaign builder dialog */
 function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: any) {
   const empty = {
-    name: '', variant: 'soft_sell', target_country: 'US', target_trade: '', target_city: '', target_state: '',
+    name: '', variant: 'soft_sell', target_country: 'GB', target_trade: '', target_city: '', target_state: '',
     subject: DEFAULT_SUBJECT, body_html: DEFAULT_TEMPLATE, batch_size: 50, daily_limit: 50, hourly_limit: 30,
     cooldown_days: 14, scheduled_at: '', status: 'draft',
   };
@@ -480,7 +480,7 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
     if (!form.name?.trim()) { toast.error('Campaign needs a name.'); return; }
     if (!form.subject?.trim()) { toast.error('Campaign needs a subject line.'); return; }
     const payload: any = {
-      name: form.name, variant: form.variant, target_country: 'US',
+      name: form.name, variant: form.variant, target_country: form.target_country || 'GB',
       target_trade: form.target_trade || null, target_city: form.target_city || null, target_state: form.target_state || null,
       subject: form.subject, body_html: form.body_html, batch_size: Number(form.batch_size) || 50,
       daily_limit: Number(form.daily_limit) || null, hourly_limit: Number(form.hourly_limit) || null,
@@ -502,28 +502,36 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle>{campaign?.id ? 'Edit campaign' : 'New campaign'}</DialogTitle><DialogDescription>USA EmergencyContractors outreach. Personalisation tokens: {PERSONALIZATION_FIELDS.map((f) => `{{${f}}}`).join(' ')}</DialogDescription></DialogHeader>
+        <DialogHeader><DialogTitle>{campaign?.id ? 'Edit campaign' : 'New campaign'}</DialogTitle><DialogDescription>Outreach campaign. Personalisation tokens: {PERSONALIZATION_FIELDS.map((f) => `{{${f}}}`).join(' ')}</DialogDescription></DialogHeader>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-3">
-            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="US Plumbers — Claim Listing" /></div>
+            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="UK Plumbers — Claim Listing" /></div>
             <div className="grid grid-cols-2 gap-2">
+              <div><Label>Region</Label>
+                <Select value={form.target_country || 'GB'} onValueChange={(v) => set('target_country', v)}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent><SelectItem value="GB">United Kingdom (Emergency Tradesmen)</SelectItem><SelectItem value="US">United States (Emergency Contractors)</SelectItem></SelectContent>
+                </Select>
+              </div>
               <div><Label>Target trade</Label>
                 <Select value={form.target_trade || 'all'} onValueChange={(v) => set('target_trade', v === 'all' ? '' : v)}>
                   <SelectTrigger><SelectValue placeholder="All trades" /></SelectTrigger>
                   <SelectContent><SelectItem value="all">All trades</SelectItem>{US_TRADES.map((t) => <SelectItem key={t.slug} value={t.slug}>{t.label}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <div><Label>Approach</Label>
                 <Select value={form.variant} onValueChange={(v) => set('variant', v)}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent><SelectItem value="soft_sell">Soft sell</SelectItem><SelectItem value="hard_sell">Hard sell</SelectItem></SelectContent>
                 </Select>
               </div>
+              <div><Label>Target city (optional)</Label><Input value={form.target_city} onChange={(e) => set('target_city', e.target.value)} placeholder={form.target_country === 'US' ? 'e.g. Dallas' : 'e.g. Manchester'} /></div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div><Label>Target city (optional)</Label><Input value={form.target_city} onChange={(e) => set('target_city', e.target.value)} placeholder="e.g. Dallas" /></div>
-              <div><Label>Target state (optional)</Label><Input value={form.target_state} onChange={(e) => set('target_state', e.target.value)} placeholder="e.g. TX" /></div>
+              <div><Label>Target {form.target_country === 'US' ? 'state' : 'county'} (optional)</Label><Input value={form.target_state} onChange={(e) => set('target_state', e.target.value)} placeholder={form.target_country === 'US' ? 'e.g. TX' : 'e.g. Greater Manchester'} /></div>
             </div>
             <div><Label>Subject line</Label><Input value={form.subject} onChange={(e) => set('subject', e.target.value)} /></div>
             <div><Label>Email body (HTML, supports tokens)</Label><Textarea rows={10} value={form.body_html} onChange={(e) => set('body_html', e.target.value)} className="font-mono text-xs" /></div>
@@ -555,7 +563,7 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
 
 /* ============================================================ CONTACTS */
 function ContactsTab({ onChanged }: any) {
-  const [filters, setFilters] = useState({ trade: 'all', status: 'all', city: '', state: '', quick: 'all', search: '' });
+  const [filters, setFilters] = useState({ country: 'GB', trade: 'all', status: 'all', city: '', state: '', quick: 'all', search: '' });
   const [page, setPage] = useState(0);
   const [importOpen, setImportOpen] = useState(false);
 
@@ -563,6 +571,7 @@ function ContactsTab({ onChanged }: any) {
     queryKey: ['ecc-contacts', filters, page],
     queryFn: async () => {
       let q = supabase.from('email_contacts').select('*', { count: 'exact' }).order('created_at', { ascending: false });
+      if (filters.country !== 'all') q = q.eq('country_code', filters.country);
       if (filters.trade !== 'all') q = q.eq('trade', filters.trade);
       if (filters.status !== 'all') q = q.eq('status', filters.status);
       if (filters.city) q = q.ilike('city', `%${filters.city}%`);
@@ -594,6 +603,10 @@ function ContactsTab({ onChanged }: any) {
       <div className="flex flex-wrap gap-2 items-end justify-between">
         <div className="flex flex-wrap gap-2 items-end">
           <div><Label className="text-xs">Search</Label><Input className="h-9 w-44" placeholder="name or email" value={filters.search} onChange={(e) => setF('search', e.target.value)} /></div>
+          <div><Label className="text-xs">Region</Label>
+            <Select value={filters.country} onValueChange={(v) => setF('country', v)}><SelectTrigger className="h-9 w-28"><SelectValue /></SelectTrigger>
+              <SelectContent><SelectItem value="GB">UK</SelectItem><SelectItem value="US">USA</SelectItem><SelectItem value="all">All</SelectItem></SelectContent></Select>
+          </div>
           <div><Label className="text-xs">Trade</Label>
             <Select value={filters.trade} onValueChange={(v) => setF('trade', v)}><SelectTrigger className="h-9 w-40"><SelectValue /></SelectTrigger>
               <SelectContent><SelectItem value="all">All trades</SelectItem>{US_TRADES.map((t) => <SelectItem key={t.slug} value={t.slug}>{t.label}</SelectItem>)}</SelectContent></Select>
@@ -676,7 +689,7 @@ function ImportContactsDialog({ open, onOpenChange, onDone }: any) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader><DialogTitle>Import contacts (CSV)</DialogTitle><DialogDescription>Paste CSV with a header row. Recognised columns: business_name, contact_name, email, phone, website, trade, city, state. Duplicate emails are skipped automatically.</DialogDescription></DialogHeader>
-        <Textarea rows={10} className="font-mono text-xs" placeholder={'business_name,email,trade,city,state\nRapid Plumbing,info@rapid.com,plumber,Dallas,TX'} value={text} onChange={(e) => setText(e.target.value)} />
+        <Textarea rows={10} className="font-mono text-xs" placeholder={'business_name,email,trade,city,state\nRapid Plumbing,info@rapid.co.uk,plumber,Manchester,Greater Manchester'} value={text} onChange={(e) => setText(e.target.value)} />
         <DialogFooter><Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button><Button disabled={busy || !text.trim()} onClick={doImport}>{busy ? 'Importing…' : 'Import'}</Button></DialogFooter>
       </DialogContent>
     </Dialog>
@@ -690,7 +703,7 @@ function TemplatesTab() {
   return (
     <div className="grid md:grid-cols-2 gap-4">
       <Card>
-        <CardHeader><CardTitle className="text-base">Default outreach template</CardTitle><CardDescription>This is the EmergencyContractors “claim your listing” template used when a campaign has no custom body. Tokens: {PERSONALIZATION_FIELDS.map((f) => `{{${f}}}`).join(' ')}</CardDescription></CardHeader>
+        <CardHeader><CardTitle className="text-base">Default outreach template</CardTitle><CardDescription>This is the Emergency Tradesmen “claim your listing” template used when a campaign has no custom body. Tokens: {PERSONALIZATION_FIELDS.map((f) => `{{${f}}}`).join(' ')}</CardDescription></CardHeader>
         <CardContent><Textarea rows={18} className="font-mono text-xs" value={tpl} onChange={(e) => setTpl(e.target.value)} />
           <p className="text-xs text-muted-foreground mt-2">Edit a campaign to save a custom body. This tab is a live scratchpad + reference for the personalisation tokens.</p>
         </CardContent>
@@ -736,7 +749,7 @@ function QueueRow({ campaign, settings }: { campaign: EmailCampaign; settings: a
     queryFn: async () => {
       const day = new Date(); day.setUTCHours(0, 0, 0, 0);
       const { count: sentToday } = await supabase.from('email_send_log').select('id', { count: 'exact', head: true }).eq('campaign_id', campaign.id).eq('status', 'sent').gte('created_at', day.toISOString());
-      let q = supabase.from('email_contacts').select('id', { count: 'exact', head: true }).eq('country_code', 'US').eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false).in('status', ['new', 'queued']);
+      let q = supabase.from('email_contacts').select('id', { count: 'exact', head: true }).eq('country_code', campaign.target_country || 'GB').eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false).in('status', ['new', 'queued']);
       if (campaign.target_trade) q = q.eq('trade', campaign.target_trade);
       if (campaign.target_city) q = q.ilike('city', `%${campaign.target_city}%`);
       const { count: remaining } = await q;
@@ -799,7 +812,7 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
           <CardHeader><CardTitle className="text-base">Send a test email</CardTitle><CardDescription>Verifies Resend end-to-end (uses the From/Reply-To above).</CardDescription></CardHeader>
           <CardContent className="flex gap-2">
             <Input placeholder="you@example.com" value={testTo} onChange={(e) => setTestTo(e.target.value)} />
-            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: 'Emergency Contractors — test email', html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
+            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: `${settings?.from_name || 'Emergency Tradesmen'} — test email`, html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
           </CardContent>
         </Card>
       </div>
@@ -831,7 +844,7 @@ function DeliverabilityTab({ settings, contactStats, onSave, onChanged }: any) {
       <Card className={settings?.domain_verified ? 'border-emerald-300' : 'border-amber-300'}>
         <CardHeader><CardTitle className="text-base flex items-center gap-2">{settings?.domain_verified ? <CheckCircle2 className="w-5 h-5 text-emerald-600" /> : <AlertTriangle className="w-5 h-5 text-amber-600" />} Sending domain</CardTitle><CardDescription>Bulk live sending is blocked until your domain is verified in Resend and marked verified here.</CardDescription></CardHeader>
         <CardContent className="space-y-3">
-          <div><Label>Sending domain</Label><Input placeholder="emergencycontractors.net" value={domain} onChange={(e) => setDomain(e.target.value)} /></div>
+          <div><Label>Sending domain</Label><Input placeholder="emergencytradesmen.net" value={domain} onChange={(e) => setDomain(e.target.value)} /></div>
           <div className="flex items-center justify-between border rounded p-2">
             <div><div className="text-sm font-medium">Domain verified in Resend</div><div className="text-xs text-muted-foreground">Only enable after Resend shows the domain as verified.</div></div>
             <Switch checked={!!settings?.domain_verified} disabled={!allDns} onCheckedChange={(v) => onSave({ domain_verified: v, sending_domain: domain })} />
