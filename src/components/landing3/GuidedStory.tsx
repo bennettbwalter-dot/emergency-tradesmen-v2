@@ -42,6 +42,10 @@ function buildPath(pts: [number, number][]): string {
   return d;
 }
 
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
+}
+
 export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) => {
   const { settings } = useLocalization();
   const rootRef = useRef<HTMLElement>(null);
@@ -116,26 +120,77 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         const centerX = W * 0.5;
         let pathPoints: [number, number][];
         if (isMobile) {
-          // Mobile: cards are full-width with a reserved left gutter. Keep the
-          // rail in that gutter for its whole run so it never cuts through a
-          // card — ease from the centred hero beam into the gutter within the
-          // intro whitespace (above the first card), run straight down past
-          // every card, then curve back to centre only at the very bottom
-          // (across the FAQ, where crossing is allowed) for the terminus dot.
-          const gutterX = markerXs.length ? markerXs[0] : centerX;
-          const cards = Array.from(root.querySelectorAll<HTMLElement>(".l3-journey-card"));
-          const firstCardTop = cards.length
-            ? cards[0].getBoundingClientRect().top - rootRect.top
-            : (markerYs[0] ?? 0);
-          const enterY = Math.max(150, firstCardTop - 28);
-          pathPoints = [
-            [centerX, 0],
-            [centerX, Math.max(110, Math.min(H * 0.04, enterY - 110))],
-            [gutterX, enterY],
-            ...markerYs.map((y): [number, number] => [gutterX, y]),
-            [gutterX, H - 150],
-            [centerX, H - 70],
-          ];
+          // Mobile cards alternate lanes, so the line routes through the open
+          // side of each card and crosses only in the whitespace between them.
+          const clearance = clamp(W * 0.11, 36, 52);
+          const items = Array.from(root.querySelectorAll<HTMLElement>(".l3-journey-item"));
+          const mobileSegments = items.flatMap((item, index) => {
+            const card = item.querySelector<HTMLElement>(".l3-journey-card");
+            const marker = item.querySelector<HTMLElement>("[data-line-marker]");
+            if (!card) return [];
+
+            const cardRect = card.getBoundingClientRect();
+            const markerRect = marker?.getBoundingClientRect();
+            const left = cardRect.left - rootRect.left;
+            const right = cardRect.right - rootRect.left;
+            const top = cardRect.top - rootRect.top;
+            const bottom = cardRect.bottom - rootRect.top;
+            const markerX = markerRect ? markerRect.left - rootRect.left + markerRect.width / 2 : markerXs[index] ?? centerX;
+            const faqPassThrough = card.classList.contains("l3-faq-card");
+
+            let x = centerX;
+            if (!faqPassThrough) {
+              const markerIsLeft = markerX < left;
+              const leftLane = clamp(markerX, 18, Math.max(18, left - clearance));
+              const rightLane = clamp(markerX, Math.min(W - 18, right + clearance), W - 18);
+              x = markerIsLeft ? leftLane : rightLane;
+            }
+
+            return [{
+              x,
+              top: Math.max(0, top - clearance),
+              mid: top + cardRect.height / 2,
+              bottom: Math.min(H - 70, bottom + clearance),
+            }];
+          });
+
+          pathPoints = [[centerX, 0]];
+          if (mobileSegments.length) {
+            const first = mobileSegments[0];
+            const firstTurnY = Math.max(110, Math.min(first.top - 72, H * 0.055));
+            pathPoints.push([centerX, firstTurnY], [first.x, Math.max(120, first.top)]);
+
+            mobileSegments.forEach((segment) => {
+              const last = pathPoints[pathPoints.length - 1];
+              const lastX = last[0];
+              const lastY = last[1];
+              const gap = segment.top - lastY;
+
+              if (Math.abs(lastX - segment.x) > 2 && gap > clearance * 1.4) {
+                const turnY = lastY + gap * 0.5;
+                pathPoints.push([lastX, turnY], [segment.x, turnY]);
+              }
+
+              pathPoints.push(
+                [segment.x, Math.max(segment.top, lastY + 1)],
+                [segment.x, segment.mid],
+                [segment.x, segment.bottom],
+              );
+            });
+
+            const last = pathPoints[pathPoints.length - 1];
+            const exitY = Math.min(H - 96, Math.max(last[1] + 80, H - 170));
+            pathPoints.push([last[0], exitY], [centerX, H - 70]);
+          } else {
+            pathPoints.push(
+              [centerX, H * 0.08],
+              [W * 0.18, H * 0.24],
+              [W * 0.82, H * 0.42],
+              [W * 0.18, H * 0.62],
+              [W * 0.82, H * 0.78],
+              [centerX, H - 70],
+            );
+          }
         } else {
           // Desktop: weave gently around the centre, between the left/right cards.
           pathPoints = [

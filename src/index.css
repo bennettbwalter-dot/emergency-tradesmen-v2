@@ -4898,10 +4898,26 @@ img.product-image {
   }
 
   .l3-journey-item {
+    --l3-mobile-lane: clamp(4.35rem, 18vw, 5.4rem);
+    --l3-mobile-slide: 1.7rem;
     min-height: auto;
     padding: clamp(4.5rem, 14vh, 7rem) 0;
-    /* reserve a left gutter so the guided scroll line flows beside the cards */
-    padding-left: 2.6rem;
+  }
+
+  .l3-journey-item:nth-child(odd):not(:last-child) {
+    justify-content: flex-end;
+    padding-left: var(--l3-mobile-lane);
+  }
+
+  .l3-journey-item:nth-child(even):not(:last-child) {
+    justify-content: flex-start;
+    padding-right: var(--l3-mobile-lane);
+  }
+
+  .l3-journey-item:last-child {
+    justify-content: center;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .l3-journey-card,
@@ -4915,16 +4931,59 @@ img.product-image {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .l3-journey-item:nth-child(odd):not(:last-child) .l3-journey-card {
+    transform: translate3d(var(--l3-mobile-slide), 0.9rem, 0) scale(0.985);
+  }
+
+  .l3-journey-item:nth-child(even):not(:last-child) .l3-journey-card {
+    transform: translate3d(calc(var(--l3-mobile-slide) * -1), 0.9rem, 0) scale(0.985);
+  }
+
+  .l3-journey-item.is-active .l3-journey-card {
+    transform: translate3d(0, -0.45rem, 0) scale(1);
+  }
+
+  .l3-journey-item.is-past .l3-journey-card {
+    transform: translate3d(0, -0.18rem, 0) scale(1);
+  }
+
   .l3-step-icon {
     width: 4.2rem;
     height: 4.2rem;
   }
 
-  /* node sits in the gutter, vertically centred, so the rail runs cleanly down
-     the side of every card instead of cutting through it */
   .l3-journey-marker {
-    left: 1.15rem;
     top: 50%;
+  }
+
+  .l3-journey-item:nth-child(odd):not(:last-child) .l3-journey-marker {
+    right: auto;
+    left: 1.15rem;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  .l3-journey-item:nth-child(even):not(:last-child) .l3-journey-marker {
+    right: 1.15rem;
+    left: auto;
+    transform: translate(50%, -50%) scale(0.7);
+  }
+
+  .l3-journey-item:nth-child(odd):not(:last-child).is-active .l3-journey-marker {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .l3-journey-item:nth-child(even):not(:last-child).is-active .l3-journey-marker {
+    transform: translate(50%, -50%) scale(1);
+  }
+
+  .l3-journey-item:last-child .l3-journey-marker {
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  .l3-journey-item:last-child.is-active .l3-journey-marker {
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
