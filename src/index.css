@@ -4610,6 +4610,10 @@ img.product-image {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* premium glow on the gradient words — drop-shadow follows the painted
+     glyphs so the blue→cyan→gold letters bloom without drawing a box */
+  filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.45))
+    drop-shadow(0 0 30px rgba(56, 189, 248, 0.26));
 }
 
 .l3-journey-word-shell {

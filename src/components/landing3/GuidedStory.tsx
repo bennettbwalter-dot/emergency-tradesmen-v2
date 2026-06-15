@@ -114,20 +114,40 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
         svg.setAttribute("height", String(H));
 
         const centerX = W * 0.5;
-        const pathPoints: [number, number][] = [
-          [centerX, 0],
-          [centerX, Math.max(120, H * 0.04)],
+        let pathPoints: [number, number][];
+        if (isMobile) {
+          // Mobile: cards are full-width with a reserved left gutter. Keep the
+          // rail in that gutter for its whole run so it never cuts through a
+          // card — ease from the centred hero beam into the gutter within the
+          // intro whitespace (above the first card), run straight down past
+          // every card, then curve back to centre only at the very bottom
+          // (across the FAQ, where crossing is allowed) for the terminus dot.
+          const gutterX = markerXs.length ? markerXs[0] : centerX;
+          const cards = Array.from(root.querySelectorAll<HTMLElement>(".l3-journey-card"));
+          const firstCardTop = cards.length
+            ? cards[0].getBoundingClientRect().top - rootRect.top
+            : (markerYs[0] ?? 0);
+          const enterY = Math.max(150, firstCardTop - 28);
+          pathPoints = [
+            [centerX, 0],
+            [centerX, Math.max(110, Math.min(H * 0.04, enterY - 110))],
+            [gutterX, enterY],
+            ...markerYs.map((y): [number, number] => [gutterX, y]),
+            [gutterX, H - 150],
+            [centerX, H - 70],
+          ];
+        } else {
           // Desktop: weave gently around the centre, between the left/right cards.
-          // Mobile: cards go full-width, so route the rail through the markers —
-          // which live in a dedicated left gutter — so the line curves beside
-          // every card instead of cutting through it.
-          ...markerYs.map((y, index): [number, number] => {
-            if (isMobile) return [markerXs[index], y];
-            const drift = index % 2 === 0 ? -W * 0.025 : W * 0.025;
-            return [centerX + drift, y];
-          }),
-          [centerX, H - 80],
-        ];
+          pathPoints = [
+            [centerX, 0],
+            [centerX, Math.max(120, H * 0.04)],
+            ...markerYs.map((y, index): [number, number] => {
+              const drift = index % 2 === 0 ? -W * 0.025 : W * 0.025;
+              return [centerX + drift, y];
+            }),
+            [centerX, H - 80],
+          ];
+        }
 
         const d = buildPath(pathPoints);
         line.setAttribute("d", d);
