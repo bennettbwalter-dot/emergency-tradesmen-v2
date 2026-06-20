@@ -214,6 +214,25 @@ export function parseContactsCsv(text: string): { rows: Partial<EmailContact>[];
   return { rows, errors };
 }
 
+// Single source of truth for the contact lifecycle the spec asks to track:
+// Not contacted · First email sent · Follow-up 1 sent · Follow-up 2 sent ·
+// Replied · Bounced · Unsubscribed · Do not contact · Signed up.
+// Booleans (replied/bounced/unsubscribed) take priority over the text status,
+// then `status`, then the follow-up stage derived from sequence_step.
+export function contactStage(c: Partial<EmailContact>): { key: string; label: string; className: string } {
+  if (c.unsubscribed) return { key: 'unsubscribed', label: 'Unsubscribed', className: 'text-purple-600 border-purple-200' };
+  if (c.bounced) return { key: 'bounced', label: 'Bounced', className: 'text-red-600 border-red-200' };
+  if (c.replied || c.status === 'replied') return { key: 'replied', label: 'Replied', className: 'text-blue-600 border-blue-200' };
+  if (c.status === 'do_not_contact') return { key: 'do_not_contact', label: 'Do not contact', className: 'text-rose-700 border-rose-300 bg-rose-50' };
+  if (c.status === 'converted') return { key: 'converted', label: 'Signed up', className: 'text-emerald-700 border-emerald-300 bg-emerald-50' };
+  const step = c.sequence_step || 0;
+  if (c.status === 'contacted' || step > 0) {
+    if (step <= 1) return { key: 'emailed_1', label: 'First email sent', className: 'text-green-600 border-green-200' };
+    return { key: `followup_${step - 1}`, label: `Follow-up ${step - 1} sent`, className: 'text-teal-600 border-teal-200' };
+  }
+  return { key: 'new', label: 'Not contacted', className: 'text-slate-500 border-slate-200' };
+}
+
 export const ORCH_STATE_META: Record<string, { label: string; color: string }> = {
   idle: { label: 'Idle', color: 'bg-slate-500' },
   checking: { label: 'Checking queue', color: 'bg-blue-500' },
