@@ -243,6 +243,9 @@ export default function EmailOutreachDashboard() {
         </CardContent>
       </Card>
 
+      {/* Hands-free automation (pg_cron) */}
+      <AutomationCard />
+
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="flex flex-wrap h-auto">
           <TabsTrigger value="overview"><Activity className="w-4 h-4 mr-1" />Overview</TabsTrigger>
@@ -300,6 +303,147 @@ export default function EmailOutreachDashboard() {
         </TabsContent>
       </Tabs>
     </div>
+  );
+}
+
+/* ============================================================ AUTOMATION */
+function fmtAgo(iso?: string | null): string {
+  if (!iso) return 'never';
+  const s = Math.round((Date.now() - new Date(iso).getTime()) / 1000);
+  if (s < 0) return 'just now';
+  if (s < 60) return `${s}s ago`;
+  if (s < 3600) return `${Math.round(s / 60)}m ago`;
+  if (s < 86400) return `${Math.round(s / 3600)}h ago`;
+  return `${Math.round(s / 86400)}d ago`;
+}
+
+function AutomationCard() {
+  const qc = useQueryClient();
+  const { data: auto, error, isLoading } = useQuery<any>({
+    queryKey: ['ecc-automation'],
+    refetchInterval: 15000,
+    retry: false,
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc('email_automation_status');
+      if (error) throw error;
+      return data;
+    },
+  });
+  const setEnabled = useMutation({
+    mutationFn: async (enabled: boolean) => {
+      const { error } = await supabase.rpc('email_automation_set_enabled', { p_enabled: enabled });
+      if (error) throw error;
+    },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['ecc-automation'] }); toast.success('Automation updated'); },
+    onError: (e: any) => toast.error(`Automation: ${e.message}`),
+  });
+  const runNow = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase.rpc('email_automation_run_now');
+      if (error) throw error;
+      // pg_net performs the HTTP call asynchronously, so wait and then read the real outcome.
+      await new Promise((r) => setTimeout(r, 4500));
+      const { data } = await supabase.rpc('email_automation_status');
+      return data as any;
+    },
+    onSuccess: (data: any) => {
+      qc.invalidateQueries({ queryKey: ['ecc-automation'] });
+      qc.invalidateQueries({ queryKey: ['ecc-orch'] });
+      const h = data?.last_http;
+      if (h?.status === 200) toast.success('Run complete — orchestrator responded 200 OK.');
+      else if (h?.status) toast.error(`Run failed — HTTP ${h.status}. ${h.body || ''}`.trim());
+      else toast.message('Triggered — result not captured yet. Click Refresh in a moment.');
+    },
+    onError: (e: any) => toast.error(`Run failed: ${e.message}`),
+  });
+
+  const msg = String((error as any)?.message || '');
+  const backendMissing = /does not exist|could not find|schema cache|email_automation_status/i.test(msg);
+  const adminOnly = /admin only|permission denied|jwt|not authorized/i.test(msg);
+
+  return (
+    <Card className="border-blue-200">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2 text-base"><Clock className="w-4 h-4 text-blue-600" /> Hands-free Automation (UK)</CardTitle>
+          {auto && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">{auto.enabled ? 'On' : 'Off'}</span>
+              <Switch checked={!!auto.enabled} disabled={setEnabled.isPending || !(auto.vault_secret_valid ?? auto.vault_secret_present)}
+                onCheckedChange={(v) => setEnabled.mutate(v)} />
+            </div>
+          )}
+        </div>
+        <CardDescription>
+          pg_cron calls the orchestrator on a schedule (service-role auth) so sends keep flowing with nobody logged in.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm">
+        {isLoading && <div className="text-muted-foreground">Loading automation status…</div>}
+        {error && backendMissing && (
+          <div className="text-amber-700">Automation backend isn’t installed yet — run the setup SQL in Supabase, then Refresh.</div>
+        )}
+        {error && !backendMissing && adminOnly && (
+          <div className="text-amber-700">Sign in as the admin account to view and control automation.</div>
+        )}
+        {error && !backendMissing && !adminOnly && (
+          <div className="text-red-600">Couldn’t load automation status: {msg}</div>
+        )}
+        {auto && (
+          <div className="space-y-3">
+            {!auto.vault_secret_present && (
+              <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 p-2 text-amber-800 text-xs">
+                <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>Vault secret <code>email_orchestrator_service_key</code> not set — the toggle stays disabled until you add it (Supabase → Project Settings → Vault).</span>
+              </div>
+            )}
+            {auto.vault_secret_present && auto.vault_secret_valid === false && (
+              <div className="flex items-start gap-2 rounded-md bg-red-50 border border-red-200 p-2 text-red-800 text-xs">
+                <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>The stored key isn’t a valid <code>service_role</code> JWT (must start with <code>eyJ</code>) — it looks like the placeholder or a wrong key. Update it (see the SQL), then click Run now.</span>
+              </div>
+            )}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Status</div>
+                <div className="font-semibold flex items-center gap-1">
+                  {auto.enabled ? <><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Running</> : <><Pause className="w-4 h-4 text-amber-600" /> Paused</>}
+                </div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Schedule</div>
+                <div className="font-mono text-sm">{auto.schedule || '—'}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Last check</div>
+                <div className="flex items-center gap-1">{fmtAgo(auto.last_run?.start_time)}{auto.last_run?.status ? <Badge variant="outline" className="ml-1">{auto.last_run.status}</Badge> : null}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Active campaigns</div>
+                <div className="font-semibold">{auto.active_campaigns ?? 0}</div></div>
+            </div>
+            <div className="text-xs text-muted-foreground">
+              Engine: <span className="font-medium">{auto.orchestrator_state || 'idle'}</span>
+              {auto.orchestrator_message ? ` — ${auto.orchestrator_message}` : ''} · updated {fmtAgo(auto.orchestrator_updated_at)}
+            </div>
+            {auto.last_http && (
+              <div className="text-xs flex items-center gap-1 flex-wrap">
+                <span className="text-muted-foreground">Last automation call:</span>
+                <Badge variant="outline" className={auto.last_http.status === 200 ? 'border-emerald-300 text-emerald-700' : 'border-red-300 text-red-700'}>
+                  HTTP {auto.last_http.status}
+                </Badge>
+                {auto.last_http.status !== 200 && auto.last_http.body ? <span className="text-red-600">{auto.last_http.body}</span> : null}
+                <span className="text-muted-foreground">· {fmtAgo(auto.last_http.created)}</span>
+              </div>
+            )}
+            {auto.active_campaigns === 0 && auto.enabled && (
+              <div className="text-xs text-blue-700">Automation is on, but no campaign is <b>active</b> — nothing sends until you Resume a campaign in the Campaigns tab.</div>
+            )}
+            <div className="flex items-center gap-2 pt-1">
+              <Button size="sm" variant="outline" onClick={() => runNow.mutate()} disabled={runNow.isPending || !(auto.vault_secret_valid ?? auto.vault_secret_present)}>
+                <Play className="w-4 h-4 mr-1" /> {runNow.isPending ? 'Triggering…' : 'Run now'}
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => qc.invalidateQueries({ queryKey: ['ecc-automation'] })}>
+                <RefreshCw className="w-4 h-4 mr-1" /> Refresh
+              </Button>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
