@@ -454,6 +454,71 @@ function AutomationCard() {
   );
 }
 
+/* ---------------------------------- US (Brevo) sending status */
+function BrevoStatusCard() {
+  const qc = useQueryClient();
+  const { data, isLoading, error } = useQuery<any>({
+    queryKey: ['ecc-brevo-status'],
+    refetchInterval: 60000,
+    retry: false,
+    queryFn: async () => {
+      const { data, error } = await supabase.functions.invoke('brevo-status', { body: {} });
+      if (error) throw error;
+      return data;
+    },
+  });
+  const configured = data?.configured;
+  const connected = data?.connected;
+
+  return (
+    <Card className="border-indigo-200">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2 text-base"><Send className="w-4 h-4 text-indigo-600" /> US Sending — Brevo</CardTitle>
+          <div className="flex items-center gap-2">
+            {data && (connected
+              ? <Badge className="bg-emerald-600"><CheckCircle2 className="w-3 h-3 mr-1" />Connected</Badge>
+              : <Badge variant="outline" className="border-red-300 text-red-700"><XCircle className="w-3 h-3 mr-1" />Not sending</Badge>)}
+            <Button size="sm" variant="ghost" onClick={() => qc.invalidateQueries({ queryKey: ['ecc-brevo-status'] })}><RefreshCw className="w-4 h-4" /></Button>
+          </div>
+        </div>
+        <CardDescription>US campaigns send via Brevo (separate from the UK Resend setup). Inbox / reply: emergencycontractor@outlook.com.</CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm">
+        {isLoading && <div className="text-muted-foreground">Checking Brevo…</div>}
+        {error && <div className="text-amber-700 text-xs">Sign in as the admin account to view Brevo status.</div>}
+        {data && !configured && (
+          <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 p-2 text-amber-800 text-xs">
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" /><span><code>BREVO_API_KEY</code> isn’t set on the server yet — US campaigns run as dry runs only.</span>
+          </div>
+        )}
+        {data && configured && !connected && (
+          <div className="flex items-start gap-2 rounded-md bg-red-50 border border-red-200 p-2 text-red-800 text-xs">
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+            <span>{data.ipBlocked
+              ? 'Brevo is blocking this server’s IP. In Brevo → Security → Authorized IPs, click “Deactivate for API keys”.'
+              : `Brevo error: ${data.error || 'not connected'}`}</span>
+          </div>
+        )}
+        {data && connected && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Account</div><div className="font-medium text-xs break-all">{data.accountEmail || '—'}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Daily limit</div><div className="font-semibold">{data.dailyLimit ?? '—'}<span className="text-xs text-muted-foreground">/day</span></div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Sender</div>
+                <div className="font-semibold flex items-center gap-1">{data.senderVerified ? <><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Verified</> : <><XCircle className="w-4 h-4 text-red-600" /> Not verified</>}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">US sent today</div><div className="font-semibold">{data.usSentToday ?? 0}</div></div>
+            </div>
+            {!data.senderVerified && (
+              <div className="text-xs text-amber-700">Add + verify <strong>{data.targetSender}</strong> in Brevo → Senders before live US sends.</div>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 /* ============================================================ OVERVIEW */
 function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
   const totals = useMemo(() => {
@@ -468,6 +533,7 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
   );
   return (
     <div className="space-y-6">
+      <BrevoStatusCard />
       {!settings?.domain_verified && (
         <Card className="border-amber-300 bg-amber-50/50">
           <CardContent className="py-4 flex items-start gap-3">
