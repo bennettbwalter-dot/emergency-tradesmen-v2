@@ -190,7 +190,9 @@ export default function EmailOutreachDashboard() {
   const launchCampaign = async (camp: EmailCampaign, amount: number, live: boolean) => {
     const blockers = complianceBlockers(settings, camp);
     if (blockers.length) { toast.error(blockers[0]); setActiveTab('campaigns'); return; }
-    if (live && !settings?.domain_verified) {
+    // UK (Resend) live-sending is blocked in-browser until the domain is verified.
+    // US (Brevo) gating happens server-side: the orchestrator auto-dry-runs without BREVO_API_KEY.
+    if (live && camp.target_country !== 'US' && !settings?.domain_verified) {
       toast.error('Sending domain not verified — live sending is blocked. Run a Dry Run or verify a domain in Deliverability.');
       return;
     }
@@ -551,6 +553,7 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                       <span>Trade: <strong>{US_TRADES.find((t) => t.slug === camp.target_trade)?.label || camp.target_trade || 'All'}</strong></span>
                       <span>Region: <strong>{camp.target_country === 'US' ? 'USA' : 'UK'}{[camp.target_city, camp.target_state].filter(Boolean).length ? ' · ' + [camp.target_city, camp.target_state].filter(Boolean).join(', ') : ''}</strong></span>
+                      <span>Sends via: <strong>{camp.target_country === 'US' ? 'Brevo (US)' : 'Resend (UK)'}</strong>{camp.reply_to ? <> · reply <strong>{camp.reply_to}</strong></> : null}</span>
                       <span>Cooldown: <strong>{camp.cooldown_days}d</strong></span>
                       {camp.scheduled_at && <span>Scheduled: <strong>{new Date(camp.scheduled_at).toLocaleString()}</strong></span>}
                     </div>
@@ -622,7 +625,11 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
 function LaunchConfirmDialog({ pending, settings, onCancel, onConfirm }: any) {
   const camp: EmailCampaign | undefined = pending?.camp;
   const amount: number = pending?.amount ?? 0;
-  const liveReady = !!settings?.domain_verified;
+  const isUS = camp?.target_country === 'US';
+  // UK live-sending is gated in the browser by the verified Resend domain. US sends via Brevo,
+  // whose key is a server secret the browser can't see — so we attempt live and the orchestrator
+  // automatically falls back to a dry run if BREVO_API_KEY isn't set / the sender isn't verified.
+  const liveReady = isUS ? true : !!settings?.domain_verified;
 
   const { data: counts, isFetching } = useQuery({
     queryKey: ['ecc-presend', camp?.id, amount],
@@ -700,12 +707,19 @@ function LaunchConfirmDialog({ pending, settings, onCancel, onConfirm }: any) {
               </div>
             )}
 
-            <div className={`rounded-lg border p-2.5 text-xs flex items-start gap-2 ${liveReady ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
-              {liveReady ? <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0" /> : <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />}
-              <span>{liveReady
-                ? 'Domain verified — these will be sent as REAL emails, throttled in chunks. Duplicates and suppressed addresses are skipped automatically.'
-                : 'Domain not verified — this runs as a non-destructive DRY RUN (no real emails). Verify a domain in Deliverability to send live.'}</span>
-            </div>
+            {isUS ? (
+              <div className="rounded-lg border p-2.5 text-xs flex items-start gap-2 border-blue-200 bg-blue-50 text-blue-800">
+                <Send className="w-4 h-4 mt-0.5 shrink-0" />
+                <span><strong>US campaign — sends via Brevo</strong> (separate from the UK Resend setup). Reply/admin inbox: <strong>emergencycontractor@outlook.com</strong>. Requires <code>BREVO_API_KEY</code> set on the server and the sender verified in Brevo — until then this safely runs as a DRY RUN (no real emails). Duplicates and suppressed addresses are always skipped.</span>
+              </div>
+            ) : (
+              <div className={`rounded-lg border p-2.5 text-xs flex items-start gap-2 ${liveReady ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
+                {liveReady ? <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0" /> : <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />}
+                <span>{liveReady
+                  ? 'Domain verified — these will be sent as REAL emails via Resend, throttled in chunks. Duplicates and suppressed addresses are skipped automatically.'
+                  : 'Domain not verified — this runs as a non-destructive DRY RUN (no real emails). Verify a domain in Deliverability to send live.'}</span>
+              </div>
+            )}
             {willSend === 0 && !isFetching && (
               <p className="text-xs text-red-600">Nothing to send — no eligible contacts (or the daily cap is reached). Adjust targeting, import contacts, or wait for follow-ups to come due.</p>
             )}
@@ -714,9 +728,11 @@ function LaunchConfirmDialog({ pending, settings, onCancel, onConfirm }: any) {
 
         <DialogFooter className="gap-2">
           <Button variant="outline" onClick={onCancel}>Cancel</Button>
-          {liveReady
-            ? <Button disabled={isFetching || willSend === 0} className="bg-blue-600 hover:bg-blue-700" onClick={() => onConfirm(true)}><Send className="w-4 h-4 mr-2" />Send {willSend} live</Button>
-            : <Button disabled={isFetching} variant="secondary" onClick={() => onConfirm(false)}><Activity className="w-4 h-4 mr-2" />Run dry run</Button>}
+          {isUS
+            ? <Button disabled={isFetching || willSend === 0} className="bg-blue-600 hover:bg-blue-700" onClick={() => onConfirm(true)}><Send className="w-4 h-4 mr-2" />Send {willSend} via Brevo</Button>
+            : liveReady
+              ? <Button disabled={isFetching || willSend === 0} className="bg-blue-600 hover:bg-blue-700" onClick={() => onConfirm(true)}><Send className="w-4 h-4 mr-2" />Send {willSend} live</Button>
+              : <Button disabled={isFetching} variant="secondary" onClick={() => onConfirm(false)}><Activity className="w-4 h-4 mr-2" />Run dry run</Button>}
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -763,7 +779,13 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
       followup_sequence: (form.followup_sequence || [])
         .filter((f: FollowUp) => (f.subject || '').trim() || (f.body_html || '').trim())
         .map((f: FollowUp) => ({ delay_days: Math.max(1, Number(f.delay_days) || 3), subject: (f.subject || '').trim(), body_html: (f.body_html || '').trim() })),
-      from_name: settings?.from_name, reply_to: settings?.reply_to, opt_out_text: settings?.opt_out_text, business_address: settings?.business_address,
+      // US campaigns carry the Outlook inbox + Emergency Contractors identity and send via Brevo
+      // (kept separate from UK Resend). UK campaigns inherit the global UK settings row unchanged.
+      from_name: form.target_country === 'US' ? 'Emergency Contractors' : settings?.from_name,
+      from_email: form.target_country === 'US' ? 'emergencycontractor@outlook.com' : null,
+      reply_to: form.target_country === 'US' ? 'emergencycontractor@outlook.com' : settings?.reply_to,
+      business_address: form.target_country === 'US' ? 'Emergency Contractors, USA' : settings?.business_address,
+      opt_out_text: settings?.opt_out_text,
       scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
       status: launchScheduled && form.scheduled_at ? 'scheduled' : (form.status === 'active' ? 'active' : form.status || 'draft'),
     };
@@ -1124,9 +1146,14 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
   if (!settings) return <div className="p-8 text-muted-foreground">Loading settings…</div>;
 
   return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-blue-200 bg-blue-50 p-3 text-xs text-blue-900 flex items-start gap-2">
+        <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0" />
+        <span>This tab configures the <strong>UK side only</strong> (Resend · {settings?.from_email || 'team@emergencytradesmen.net'} · reply {settings?.reply_to || '—'}). The <strong>US side</strong> is separate: it sends via <strong>Brevo</strong> from/reply <strong>emergencycontractor@outlook.com</strong>, configured per US campaign in the Campaigns tab. Editing here will not affect US.</span>
+      </div>
     <div className="grid md:grid-cols-2 gap-4">
       <Card>
-        <CardHeader><CardTitle className="text-base">Sender configuration</CardTitle><CardDescription>The RESEND_API_KEY lives as a server secret (never in the browser). These control the From/Reply-To and identity.</CardDescription></CardHeader>
+        <CardHeader><CardTitle className="text-base">Sender configuration (UK · Resend)</CardTitle><CardDescription>The RESEND_API_KEY lives as a server secret (never in the browser). These control the UK From/Reply-To and identity. US uses Brevo + Outlook, set per campaign.</CardDescription></CardHeader>
         <CardContent className="space-y-3">
           <div><Label>From name</Label><Input value={f.from_name || ''} onChange={(e) => set('from_name', e.target.value)} /></div>
           <div><Label>From email</Label><Input value={f.from_email || ''} onChange={(e) => set('from_email', e.target.value)} /><p className="text-xs text-muted-foreground mt-1">Use onboarding@resend.dev for testing, or an address on your verified domain for live sending.</p></div>
@@ -1162,6 +1189,7 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
           </CardContent>
         </Card>
       </div>
+    </div>
     </div>
   );
 }

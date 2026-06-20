@@ -109,6 +109,7 @@ serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
     const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    const brevoApiKey = Deno.env.get('BREVO_API_KEY'); // US campaigns send via Brevo, kept separate from Resend
     const supabase = createClient(supabaseUrl, serviceKey);
 
     const logLines: { ts: string; level: string; line: string }[] = [];
@@ -150,11 +151,9 @@ serve(async (req) => {
             return ok({ state: 'setup_required', problems: setupProblems });
         }
 
-        const domainOk = settings.domain_verified === true;
-        const dryRun = requestedDryRun || !domainOk || !resendApiKey;
-        if (dryRun && !requestedDryRun) {
-            log(`Sending domain not verified — running in DRY RUN (no real emails sent). Verify a domain in Resend Settings to send live.`, 'warn');
-        }
+        // NOTE: the live-vs-dry-run gate is now decided PER CAMPAIGN below, because UK
+        // campaigns send via Resend (gated on a verified domain) while US campaigns send
+        // via Brevo (gated on BREVO_API_KEY). The two providers never share config.
 
         let q = supabase.from('email_campaigns').select('*');
         if (onlyCampaignId) q = q.eq('id', onlyCampaignId);
@@ -182,8 +181,19 @@ serve(async (req) => {
             if (Date.now() - t0 > TIME_BUDGET_MS) { log('Time budget reached — will continue next cycle.', 'warn'); break; }
 
             const followups = followupsOf(camp);
-            log(`▶ Processing "${camp.name}" (${camp.target_trade || 'all trades'} · ${camp.target_country})${followups.length ? ` · ${followups.length} follow-up(s) configured` : ''}`);
-            await setState('sending', `Sending "${camp.name}"…`, { current_campaign_id: camp.id });
+            // Provider is decided by region: US → Brevo, everything else → Resend (UK).
+            // This keeps the US and UK email systems completely separate.
+            const provider: 'brevo' | 'resend' = camp.target_country === 'US' ? 'brevo' : 'resend';
+            const providerKey = provider === 'brevo' ? brevoApiKey : resendApiKey;
+            const domainOk = provider === 'brevo' ? !!brevoApiKey : (settings.domain_verified === true);
+            const dryRun = requestedDryRun || !providerKey || (provider === 'resend' && !domainOk);
+            if (dryRun && !requestedDryRun) {
+                log(provider === 'brevo'
+                    ? `US/Brevo not configured yet (no BREVO_API_KEY) — running DRY RUN (no real emails). Add the BREVO_API_KEY secret and verify the sender in Brevo to send live.`
+                    : `Sending domain not verified — running DRY RUN (no real emails). Verify a domain in Resend Settings to send live.`, 'warn');
+            }
+            log(`▶ Processing "${camp.name}" (${camp.target_trade || 'all trades'} · ${camp.target_country}) via ${provider.toUpperCase()}${followups.length ? ` · ${followups.length} follow-up(s) configured` : ''}`);
+            await setState('sending', `Sending "${camp.name}" via ${provider}…`, { current_campaign_id: camp.id });
 
             let dailyLimit = camp.daily_limit ?? settings.daily_limit ?? 200;
             const hourlyLimit = camp.hourly_limit ?? settings.hourly_limit ?? 50;
@@ -307,12 +317,53 @@ serve(async (req) => {
             log(`Queue: ${queue.length} this chunk (${followCount} follow-up, ${queue.length - followCount} first-touch; cap ${cycleCap}; ${blocked.size} suppressed skipped).`);
             await setState('sending', `Sending chunk for "${camp.name}" (${queue.length})…`, { current_campaign_id: camp.id, progress_current: 0, progress_total: queue.length });
 
-            const fromName = camp.from_name || settings.from_name || 'Emergency Tradesmen';
-            const fromEmail = camp.from_email || settings.from_email;
-            const replyTo = camp.reply_to || settings.reply_to;
+            // Sender identity. US/Brevo uses its own defaults (Outlook inbox) and NEVER
+            // falls back to the UK settings row; UK/Resend keeps its existing behaviour.
+            const isUS = provider === 'brevo';
+            const fromName = camp.from_name || (isUS ? 'Emergency Contractors' : (settings.from_name || 'Emergency Tradesmen'));
+            const fromEmail = camp.from_email || (isUS ? 'emergencycontractor@outlook.com' : settings.from_email);
+            const replyTo = camp.reply_to || (isUS ? 'emergencycontractor@outlook.com' : settings.reply_to);
             const optOut = camp.opt_out_text || settings.opt_out_text || '';
-            const bizAddr = camp.business_address || settings.business_address || '';
+            const bizAddr = camp.business_address || (isUS ? 'Emergency Contractors, USA' : (settings.business_address || ''));
             const delayMs = settings.delay_between_emails_ms ?? 2000;
+
+            // One delivery path per provider; both return a normalised result so the
+            // logging / suppression / contact-update code below is provider-agnostic.
+            const deliver = async (toEmail: string, subj: string, html: string): Promise<{ ok: boolean; id?: string; error?: string }> => {
+                const unsubHeaders = { 'List-Unsubscribe': `<mailto:${replyTo}?subject=unsubscribe>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' };
+                if (provider === 'brevo') {
+                    const r = await fetch('https://api.brevo.com/v3/smtp/email', {
+                        method: 'POST',
+                        headers: { 'api-key': providerKey as string, 'content-type': 'application/json', 'accept': 'application/json' },
+                        body: JSON.stringify({
+                            sender: { name: fromName, email: fromEmail },
+                            to: [{ email: toEmail }],
+                            replyTo: { email: replyTo },
+                            subject: subj,
+                            htmlContent: html,
+                            headers: unsubHeaders,
+                            tags: [String(camp.id)],
+                        }),
+                    });
+                    const d = await r.json().catch(() => null);
+                    return r.ok ? { ok: true, id: d?.messageId } : { ok: false, error: (d && (d.message || d.code)) || `HTTP ${r.status}` };
+                }
+                const r = await fetch('https://api.resend.com/emails', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${providerKey}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        from: `${fromName} <${fromEmail}>`,
+                        to: [toEmail],
+                        reply_to: replyTo,
+                        subject: subj,
+                        html,
+                        headers: unsubHeaders,
+                        tags: [{ name: 'campaign_id', value: camp.id }],
+                    }),
+                });
+                const d = await r.json().catch(() => null);
+                return r.ok ? { ok: true, id: d?.id } : { ok: false, error: (d && (d.message || d.name)) || `HTTP ${r.status}` };
+            };
 
             // Resolve the subject/body for a given send stage (0 = initial, N = followups[N-1]).
             const tplFor = (stage: number) => {
@@ -343,25 +394,12 @@ serve(async (req) => {
 
                 try {
                     if (dryRun) {
-                        log(`  [DRY RUN] ${stage > 0 ? `follow-up ${stage}` : 'first email'} → ${contact.email} (${contact.business_name})`);
+                        log(`  [DRY RUN · ${provider}] ${stage > 0 ? `follow-up ${stage}` : 'first email'} → ${contact.email} (${contact.business_name})`);
                     } else {
-                        const res = await fetch('https://api.resend.com/emails', {
-                            method: 'POST',
-                            headers: { 'Authorization': `Bearer ${resendApiKey}`, 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                from: `${fromName} <${fromEmail}>`,
-                                to: [contact.email],
-                                reply_to: replyTo,
-                                subject,
-                                html: bodyHtml,
-                                headers: { 'List-Unsubscribe': `<mailto:${replyTo}?subject=unsubscribe>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
-                                tags: [{ name: 'campaign_id', value: camp.id }],
-                            }),
-                        });
-                        const data = await res.json().catch(() => null);
-                        if (!res.ok) {
+                        const result = await deliver(contact.email, subject, bodyHtml);
+                        if (!result.ok) {
                             failed++; consecutiveErr++;
-                            const msg = (data && (data.message || data.name)) || `HTTP ${res.status}`;
+                            const msg = result.error || 'send failed';
                             log(`  ✖ ${contact.email}: ${msg}`, 'error');
                             await supabase.from('email_send_log').insert({ campaign_id: camp.id, contact_id: contact.id, email: contact.email, subject, sequence_step: newStep, status: 'failed', error: String(msg) });
                             if (/invalid|not a valid|recipient/i.test(String(msg))) {
@@ -378,7 +416,7 @@ serve(async (req) => {
                             continue;
                         }
                         consecutiveErr = 0;
-                        await supabase.from('email_send_log').insert({ campaign_id: camp.id, contact_id: contact.id, email: contact.email, subject, sequence_step: newStep, status: 'sent', resend_id: data?.id });
+                        await supabase.from('email_send_log').insert({ campaign_id: camp.id, contact_id: contact.id, email: contact.email, subject, sequence_step: newStep, status: 'sent', resend_id: result.id });
                         await supabase.from('email_contacts').update({ last_emailed_at: nowIso, status: 'contacted', sequence_step: newStep, next_follow_up_at: nextFollowAt, updated_at: nowIso }).eq('id', contact.id);
                     }
                     sent++;
