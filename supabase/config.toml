@@ -1,4 +1,11 @@
 
+# Admin-only knowledge graph (Graphify). verify_jwt rejects unauthenticated
+# callers at the platform edge; the function itself additionally requires an
+# admin email. The pre-sanitized graph.data.json is bundled via JSON import.
+[functions.knowledge-graph]
+enabled = true
+verify_jwt = true
+
 [functions.fetch-jit-listings]
 enabled = true
 verify_jwt = true

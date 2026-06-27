@@ -73,6 +73,7 @@ const DataExportPage = lazy(() => import("./pages/admin/DataExportPage"));
 const AnalyticsPage = lazy(() => import("./pages/admin/Analytics"));
 const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDashboard"));
 const EvidencePage = lazy(() => import("./pages/admin/Evidence"));
+const KnowledgeGraphPage = lazy(() => import("./pages/admin/KnowledgeGraph"));
 
 const queryClient = new QueryClient();
 
@@ -191,6 +192,7 @@ const AppRoutes = () => (
       <Route path="analytics" element={<AnalyticsPage />} />
       <Route path="email-outreach" element={<EmailOutreachDashboard />} />
       <Route path="evidence" element={<EvidencePage />} />
+      <Route path="knowledge-graph" element={<KnowledgeGraphPage />} />
     </Route>
 
     {/* US Specific Hierarchy Routes */}

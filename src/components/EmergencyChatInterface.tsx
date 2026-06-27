@@ -7,6 +7,7 @@ export const USE_SVG_BUTTONS_ON_DESKTOP = true;
 import { cn } from "@/lib/utils";
 import { processUserMessage, ChatState, ChatMessage } from "@/lib/chat-logic";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -85,6 +86,7 @@ interface EmergencyChatInterfaceProps {
 
 export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' }: EmergencyChatInterfaceProps) {
     const navigate = useNavigate();
+    const { user } = useAuth();
     const { city: urlCity } = useParams();
     const { settings } = useLocalization();
     const { detectedTrade, detectedCity, setDetectedTrade, setDetectedCity, isRequestingLocation, setIsRequestingLocation } = useChatbot();
@@ -388,7 +390,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                     ...currentFreshState,
                     detectedTrade: freshTrade || currentFreshState.detectedTrade,
                     detectedCity: freshCity || currentFreshState.detectedCity,
-                }, freshCountryCode);
+                }, freshCountryCode, {
+                    firstName: user?.name ? user.name.trim().split(/\s+/)[0] : undefined,
+                    postcode: user?.postcode,
+                });
 
                 const finalState = {
                     ...newState,
@@ -933,10 +938,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                                 onComplete={() => {
                                                                     if (isAtBottom) scrollToBottom('smooth');
                                                                 }}
-                                                                className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white"
+                                                                className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-slate-900 dark:prose-p:text-slate-50 prose-headings:text-slate-900 dark:prose-headings:text-white prose-li:text-slate-900 dark:prose-li:text-slate-50 prose-a:text-amber-700 dark:prose-a:text-amber-200 prose-a:underline prose-a:font-medium dark:prose-code:text-white dark:[--tw-prose-invert-body:#eef2f7] dark:[--tw-prose-invert-bullets:#cbd5e1]"
                                                             />
                                                         ) : (
-                                                            <div className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white">
+                                                            <div className="prose dark:prose-invert max-w-none prose-sm prose-p:my-1 prose-strong:text-gold prose-p:text-slate-900 dark:prose-p:text-slate-50 prose-headings:text-slate-900 dark:prose-headings:text-white prose-li:text-slate-900 dark:prose-li:text-slate-50 prose-a:text-amber-700 dark:prose-a:text-amber-200 prose-a:underline prose-a:font-medium dark:prose-code:text-white dark:[--tw-prose-invert-body:#eef2f7] dark:[--tw-prose-invert-bullets:#cbd5e1]">
                                                                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                                                     {msg.content}
                                                                 </ReactMarkdown>
@@ -1146,10 +1151,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                                                     onComplete={() => {
                                                                         if (isAtBottom) scrollToBottom('smooth');
                                                                     }}
-                                                                    className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white prose-strong:text-black dark:prose-strong:text-white prose-strong:font-bold prose-code:text-black dark:prose-code:text-white"
+                                                                    className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-slate-900 dark:prose-p:text-slate-50 prose-headings:text-slate-900 dark:prose-headings:text-white prose-li:text-slate-900 dark:prose-li:text-slate-50 prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-bold prose-code:text-slate-900 dark:prose-code:text-white prose-a:text-amber-700 dark:prose-a:text-amber-200 prose-a:underline prose-a:font-medium dark:[--tw-prose-invert-body:#eef2f7] dark:[--tw-prose-invert-bullets:#cbd5e1]"
                                                                 />
                                                             ) : (
-                                                                <div className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-black dark:prose-p:text-white prose-headings:text-black dark:prose-headings:text-white prose-li:text-black dark:prose-li:text-white prose-strong:text-black dark:prose-strong:text-white prose-strong:font-bold prose-code:text-black dark:prose-code:text-white">
+                                                                <div className="prose dark:prose-invert prose-emerald max-w-none prose-xs md:prose-sm lg:prose-base prose-p:leading-snug prose-p:mb-2 md:prose-p:mb-3 prose-headings:mb-1 prose-headings:mt-3 md:prose-headings:mt-5 first:prose-headings:mt-0 prose-li:my-0 prose-ul:my-1 prose-p:text-slate-900 dark:prose-p:text-slate-50 prose-headings:text-slate-900 dark:prose-headings:text-white prose-li:text-slate-900 dark:prose-li:text-slate-50 prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-bold prose-code:text-slate-900 dark:prose-code:text-white prose-a:text-amber-700 dark:prose-a:text-amber-200 prose-a:underline prose-a:font-medium dark:[--tw-prose-invert-body:#eef2f7] dark:[--tw-prose-invert-bullets:#cbd5e1]">
                                                                     <ReactMarkdown
                                                                         remarkPlugins={[remarkGfm]}
                                                                         rehypePlugins={[rehypeRaw]}

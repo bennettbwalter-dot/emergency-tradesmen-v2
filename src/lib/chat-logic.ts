@@ -89,7 +89,7 @@ const SAFETY_TIPS: Record<string, { uk: string; us: string }> = {
 };
 
 export interface ChatState {
-    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'CONFIRM_LOCATION' | 'ROUTING';
+    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'CONFIRM_LOCATION' | 'ROUTING' | 'GUIDANCE' | 'RESOLVED';
     detectedTrade: string | null;
     detectedCity: string | null;
     suggestedCity: string | null;
@@ -235,7 +235,32 @@ const getReadableTradeName = (slug: string, countryCode: string) => {
     return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
 };
 
-export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
+// Optional signed-in profile, used to personalise the conversation.
+export interface ChatProfile {
+    firstName?: string;
+    postcode?: string;
+    propertyType?: string;
+}
+const namePrefix = (p?: ChatProfile) => (p?.firstName ? `${p.firstName}, ` : '');
+const nameSuffix = (p?: ChatProfile) => (p?.firstName ? `, ${p.firstName}` : '');
+
+// Signals that a power loss is area-wide (utility / DNO), not a home electrics
+// fault — so we route to the network operator, not an electrician.
+const POWER_OUTAGE_AREA = [
+    'whole street', 'whole road', 'neighbour', 'neighbor', 'next door', 'power cut',
+    'powercut', 'power outage', 'outage', 'no power anywhere', 'street is dark',
+    'everyone', 'whole area', 'power line', 'cable down', 'pole down', 'lines down',
+    'whole building', 'whole block', 'whole estate', 'blackout', 'grid'
+];
+
+// Help-first prompt appended after we've given safe guidance. One clear choice:
+// keep helping, get a pro, or close out — we never rush the user to a tradesman.
+function helpFirstOffer(p: ChatProfile | undefined, tradeSlug: string | null, countryCode: string): string {
+    const trade = tradeSlug ? getReadableTradeName(tradeSlug, countryCode).toLowerCase() : 'professional';
+    return `\n\n— — —\nI'm here to guide you through this safely — no rush${nameSuffix(p)}.\n\n- Reply **“more help”** for the next safe step\n- Reply **“find a pro”** and I'll get you a local ${trade}\n- If it's already under control, just say **“sorted”** 🙂`;
+}
+
+export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB', profile?: ChatProfile): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const lowerMsg = message.toLowerCase();
@@ -250,6 +275,57 @@ export async function processUserMessage(message: string, currentState: ChatStat
     const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
 
     const isAwaitingResponse = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION' || currentState.step === 'TRADE_CHECK';
+
+    // ── HELP-FIRST FOLLOW-UP ──────────────────────────────────────────────
+    // We sit in 'GUIDANCE' after giving safe advice. Read the user's reply:
+    //   • sorted/thanks  → close out warmly + gently invite a review
+    //   • wants a pro    → get location then route to a local tradesperson
+    //   • anything else  → keep helping (fall through to RAG/brain below)
+    if (currentState.step === 'GUIDANCE') {
+        const saysFixed = /\b(sorted|fixed|stopped|under control|that worked|it worked|all good|no longer|resolved|managed|all sorted|ok now|okay now|better now|safe now)\b/i.test(lowerMsg)
+            || /\b(thanks|thank you|cheers|brilliant|perfect|amazing|great help)\b/i.test(lowerMsg);
+        const wantsPro = /\b(find|pro|professional|tradesman|tradesperson|someone|engineer|expert|book|quote|send|call out|come out|need (a|help)|get me|yes please|^yes\b|please do)\b/i.test(lowerMsg);
+
+        if (saysFixed && !wantsPro) {
+            newState.step = 'RESOLVED';
+            const trade = newState.detectedTrade ? getReadableTradeName(newState.detectedTrade, countryCode).toLowerCase() : 'professional';
+            return { newState, response: { id: Date.now().toString(), role: 'assistant', content:
+`### 🙌 So glad that helped${nameSuffix(profile)}!\n\nThe main thing is you're safe and it's under control.\n\nIf you have a moment, I'd really appreciate a quick **review or comment** about the help you got today — it genuinely helps other people facing the same emergency. 💬\n\nAnd if you'd like a qualified **${trade}** to double-check everything is fully sound, just say **“find a pro”** and I'll find a trusted local one for you.` } };
+        }
+
+        if (wantsPro && newState.detectedTrade) {
+            if (newState.detectedCity) {
+                newState.step = 'ROUTING';
+                newState.locationConfirmed = true;
+                const city = newState.detectedCity;
+                const trade = getReadableTradeName(newState.detectedTrade, countryCode);
+                return { newState, response: { id: Date.now().toString(), role: 'assistant',
+                    content: `${namePrefix(profile)}I'm taking you to our local **Emergency ${trade}** team in **${city}** now.`,
+                    action: 'navigate', target: `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}` } };
+            }
+            newState.step = 'LOCATION_CHECK';
+            const term = isUSDomain ? 'city or zip code' : 'town or postcode';
+            const trade = getReadableTradeName(newState.detectedTrade, countryCode).toLowerCase();
+            return { newState, response: { id: Date.now().toString(), role: 'assistant',
+                content: `${namePrefix(profile)}of course — what ${term} are you in? I'll find your nearest **${trade}** straight away.` } };
+        }
+        // Otherwise: the user has more to say. Fall through so the RAG/brain layers
+        // give the next piece of safe guidance and we stay in help mode.
+    }
+
+    // ── DNO / UTILITY ROUTING ─────────────────────────────────────────────
+    // Area-wide power loss (street, neighbours, downed lines) is the network
+    // operator's job — NOT an electrician. Route correctly and safely.
+    if (!isAwaitingResponse && currentState.step !== 'GUIDANCE'
+        && /\b(power|electric|electricity|lights?|outage|blackout)\b/i.test(lowerMsg)
+        && POWER_OUTAGE_AREA.some(k => lowerMsg.includes(k))) {
+        newState.detectedTrade = 'electrician';
+        newState.step = 'GUIDANCE';
+        const content = isUSDomain
+            ? `### ⚡ This sounds like a utility power outage${nameSuffix(profile)}\n\nIf the power is out for **more than your home** — your street, your neighbours, or you can see downed lines — this is your **electricity utility**, not an electrician.\n\n**Do this now:**\n- ⚠️ Stay well clear of any **downed power lines** — assume they are live and call **911**.\n- Report the outage to your local **electric utility** (number is on your bill or their app/website).\n- Switch off sensitive electronics to protect them from a surge when power returns.\n- Keep a fridge/freezer closed to hold the cold.\n\nIf only **your** home has lost power and the neighbours are fine, reply **“just my house”** and I'll help you check your panel safely.`
+            : `### ⚡ This sounds like a network power cut${nameSuffix(profile)}\n\nIf the power is out for **more than your home** — your street, your neighbours, or you can see damaged lines — this is the **Distribution Network Operator (DNO)**, not an electrician.\n\n**Do this now:**\n- ☎️ Call **105** (free) — it connects you to your local DNO to report and check the power cut.\n- ⚠️ **Never** approach or touch fallen power lines — call **105**, or **999** if it's dangerous.\n- Check live updates at **powercut105.com** for your area.\n- Switch off sensitive electronics to protect them from a surge when power returns.\n\nIf only **your** home has lost power and the neighbours are fine, reply **“just my house”** and I'll help you check your consumer unit safely.`;
+        return { newState, response: { id: Date.now().toString(), role: 'assistant', content } };
+    }
 
     // Upfront Keyword-based Trade Detection to restrict RAG Vector search context
     let detectedTrade = currentState.detectedTrade;
@@ -319,6 +395,16 @@ export async function processUserMessage(message: string, currentState: ChatStat
                     else {
                         const fuzzyTrade = fuzzyTradeDetect(message);
                         if (fuzzyTrade) detectedTrade = fuzzyTrade;
+                        else {
+                            // Graphify domain-graph fallback. Additive only: this runs
+                            // exclusively when every other detector missed, so it can
+                            // widen coverage but never override an existing match.
+                            try {
+                                const { graphDetectTrade } = await import("@/lib/graph-knowledge");
+                                const g = graphDetectTrade(message);
+                                if (g) detectedTrade = g;
+                            } catch { /* graph layer is optional */ }
+                        }
                     }
                 }
             }
@@ -387,13 +473,19 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 response += `\n\n*Source: [${matchedRule.authority_name}](${matchedRule.authority_url})*`;
             }
 
+            // Graphify: connected-trade grounding so answers feel smarter and more
+            // joined-up (e.g. a burst pipe may also need water restoration). Guarded
+            // so a missing/empty graph simply adds nothing.
+            try {
+                const { buildRelatedHelpNote } = await import("@/lib/graph-knowledge");
+                response += buildRelatedHelpNote(matchedRule.trade, countryCode);
+            } catch { /* graph layer is optional */ }
+
             newState.detectedTrade = matchedRule.trade;
-            
-            if (!newState.detectedCity) {
-                newState.step = 'LOCATION_CHECK';
-                const locationPrompt = isUSDomain ? "What city or zip code are you in?" : "Which city or postcode are you in?";
-                response += `\n\n${locationPrompt}`;
-            }
+
+            // Help-first: guide them through it; offer a pro without rushing.
+            newState.step = 'GUIDANCE';
+            response += helpFirstOffer(profile, matchedRule.trade, countryCode);
 
             return {
                 newState,
@@ -426,15 +518,14 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 }
 
                 let content = brainResponse.message;
-
-                // Ask for location if we don't have it yet
-                if (!newState.detectedCity) {
-                    newState.step = 'LOCATION_CHECK';
-                    const locationPrompt = isUSDomain
-                        ? '\n\nTo find you an emergency professional, what city or zip code are you in?'
-                        : '\n\nTo connect you with an emergency tradesperson, which town, city, or postcode are you in?';
-                    content += locationPrompt;
+                if (profile?.firstName && !currentState.detectedTrade) {
+                    content = `Okay ${profile.firstName} — let's work through this together and keep you safe.\n\n` + content;
                 }
+
+                // Help-first: we've given safe guidance. Offer the next step or a
+                // pro — never rush them straight to a tradesman.
+                newState.step = 'GUIDANCE';
+                content += helpFirstOffer(profile, newState.detectedTrade, countryCode);
 
                 return {
                     newState,
@@ -757,9 +848,9 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
-        const locationTerm = isUSDomain() ? 'zip code' : 'postcode';
-        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Which town or ${locationTerm} are you in? I'll find your nearest **${tradeName3.toLowerCase()}**.`;
-        newState.step = 'LOCATION_CHECK';
+        // Help-first: lead with safe guidance, then offer a pro (no rush).
+        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue${nameSuffix(profile)} — I can help you through this. ` : ""}${tip ? `${tip}` : `Tell me a little more about what's happening and I'll guide you to the safest next step.`}${helpFirstOffer(profile, newState.detectedTrade, countryCode)}`;
+        newState.step = 'GUIDANCE';
     } else {
         responseText = /trade|service|list|cover/i.test(lowerMsg)
             ? "### 🛠️ Our Emergency Contractors\n\nWe provide professional help for the following trades:\n\n- Plumbing & Heating\n- Electrical\n- Gas Engineering\n- Locksmith\n- Drains\n- Glazing\n- Roofing\n- Building & Structural\n- Air Conditioning / HVAC\n- Vehicle Breakdown\n\nWhich of these do you need a contractor for?"

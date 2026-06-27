@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js",
+    "graph:build": "node scripts/graphify/build-graph.mjs",
     "build:all": "npm run generate-sitemap && tsc && vite build"
   },
   "dependencies": {
