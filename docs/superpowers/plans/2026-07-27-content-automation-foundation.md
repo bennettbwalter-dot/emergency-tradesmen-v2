@@ -880,4 +880,3 @@ Confirm from the diff:
 - [ ] **Step 4: Stop before external authorization**
 
 Report the local foundation and request the user’s participation only when an official Meta or TikTok authorization screen is ready. Never ask the user to paste a password or token into chat.
-

@@ -42,4 +42,3 @@ All targets begin in `unverified`. No US social accounts have been supplied, so 
 - Emergency-safety and affiliate campaigns always require human approval.
 - TikTok remains creator-assisted until a compliant audited publishing route is proven.
 - Analytics vendors must remain disabled until the visitor grants analytics consent.
-
