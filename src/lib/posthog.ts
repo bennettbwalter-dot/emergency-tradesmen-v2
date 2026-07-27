@@ -1,4 +1,5 @@
 import { devLog } from "@/lib/devLog";
+import { hasAnalyticsConsent } from "@/lib/trackingConsent";
 
 const POSTHOG_KEY = import.meta.env.VITE_POSTHOG_KEY || import.meta.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = import.meta.env.VITE_POSTHOG_HOST || import.meta.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
@@ -7,6 +8,9 @@ let isInitialized = false;
 let posthogClient: any = null;
 let posthogLoadPromise: Promise<any> | null = null;
 let posthogInitPromise: Promise<any> | null = null;
+
+const analyticsConsentGranted = () =>
+    typeof window !== "undefined" && hasAnalyticsConsent(window.localStorage);
 
 const onIdle = (callback: () => void) => {
     if (typeof window === 'undefined') return;
@@ -28,7 +32,7 @@ const loadPostHog = async () => {
 };
 
 const initializePostHogNow = async () => {
-    if (isInitialized || !POSTHOG_KEY) return posthogClient;
+    if (isInitialized || !POSTHOG_KEY || !analyticsConsentGranted()) return posthogClient;
     if (!posthogInitPromise) {
         posthogInitPromise = (async () => {
             const posthog = await loadPostHog();
@@ -50,7 +54,12 @@ const initializePostHogNow = async () => {
 };
 
 export const initPostHog = () => {
-    if (typeof window === 'undefined' || isInitialized || !POSTHOG_KEY) {
+    if (
+        typeof window === 'undefined'
+        || isInitialized
+        || !POSTHOG_KEY
+        || !analyticsConsentGranted()
+    ) {
         if (import.meta.env.DEV && !POSTHOG_KEY) {
             console.warn("PostHog Analytics: Missing 'VITE_POSTHOG_KEY' in .env. Tracking is disabled.");
         }
@@ -68,7 +77,7 @@ export const initPostHog = () => {
 };
 
 const withPostHog = (callback: (posthog: any) => void) => {
-    if (!POSTHOG_KEY || typeof window === 'undefined') return;
+    if (!POSTHOG_KEY || typeof window === 'undefined' || !analyticsConsentGranted()) return;
     onIdle(async () => {
         try {
             const posthog = await initializePostHogNow();
@@ -80,6 +89,7 @@ const withPostHog = (callback: (posthog: any) => void) => {
 };
 
 export const trackPostHogPageView = (url: string) => {
+    if (!analyticsConsentGranted()) return;
     if (isInitialized && posthogClient) {
         posthogClient.capture('$pageview', { $current_url: url });
         return;
@@ -88,6 +98,7 @@ export const trackPostHogPageView = (url: string) => {
 };
 
 export const trackPostHogEvent = (eventName: string, properties?: Record<string, any>) => {
+    if (!analyticsConsentGranted()) return;
     if (isInitialized && posthogClient) {
         posthogClient.capture(eventName, properties);
         return;

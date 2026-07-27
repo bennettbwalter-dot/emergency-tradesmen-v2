@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { X, Cookie } from "lucide-react";
 import { Link } from "react-router-dom";
+import { initPostHog } from "@/lib/posthog";
 
 declare function gtag(...args: unknown[]): void;
 
@@ -34,6 +35,7 @@ export function CookieConsent() {
     const acceptCookies = () => {
         localStorage.setItem("cookieConsent", "accepted");
         updateGoogleConsent(true);
+        initPostHog();
         setShowBanner(false);
     };
 
