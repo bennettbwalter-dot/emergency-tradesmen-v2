@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js",
-    "build:all": "npm run generate-sitemap && tsc && vite build"
+    "build:all": "npm run generate-sitemap && tsc && vite build",
+    "test:social": "vitest run"
   },
   "dependencies": {
     "@discordjs/rest": "^2.6.0",
@@ -129,6 +130,7 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "vite": "^8.0.13",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.1.10"
   }
 }
