@@ -1,12 +1,23 @@
-export type SocialPlatform = "facebook" | "instagram" | "tiktok";
+export type SocialPlatform =
+  | "facebook"
+  | "instagram"
+  | "tiktok"
+  | "pinterest"
+  | "linkedin"
+  | "x";
 export type Market = "GB" | "US";
-export type ConnectionStatus = "unverified" | "connected" | "action_required";
+export type ConnectionStatus =
+  | "unverified"
+  | "connected"
+  | "action_required"
+  | "revoked";
 export type PublishingMode =
   | "api_after_oauth"
   | "api_after_meta_link"
   | "creator_assisted";
 
 export interface SocialAccountTarget {
+  id?: string;
   platform: SocialPlatform;
   market: Market;
   profileUrl: string;
@@ -15,7 +26,71 @@ export interface SocialAccountTarget {
   connectionStatus: ConnectionStatus;
   publishingMode: PublishingMode;
   verificationNote: string;
+  enabled?: boolean;
+  connectionMetadata?: {
+    available_accounts?: Array<{
+      external_account_id: string;
+      handle: string | null;
+      profile_url: string;
+      display_name: string | null;
+      account_type: string | null;
+    }>;
+    [key: string]: unknown;
+  };
 }
+
+export interface SocialPlatformDefinition {
+  platform: SocialPlatform;
+  label: string;
+  developerUrl: string;
+  connectionSummary: string;
+}
+
+export const SOCIAL_PLATFORM_CATALOG: SocialPlatformDefinition[] = [
+  {
+    platform: "facebook",
+    label: "Facebook",
+    developerUrl: "https://developers.facebook.com/apps/",
+    connectionSummary: "Connect a Facebook Page with Page publishing permission.",
+  },
+  {
+    platform: "instagram",
+    label: "Instagram",
+    developerUrl: "https://developers.facebook.com/apps/",
+    connectionSummary:
+      "Connect a Professional Instagram account linked to a Facebook Page.",
+  },
+  {
+    platform: "tiktok",
+    label: "TikTok",
+    developerUrl: "https://developers.tiktok.com/apps/",
+    connectionSummary:
+      "Connect through Login Kit with an approved Content Posting API app.",
+  },
+  {
+    platform: "pinterest",
+    label: "Pinterest",
+    developerUrl: "https://developers.pinterest.com/apps/",
+    connectionSummary: "Connect with Pinterest OAuth and Pins write access.",
+  },
+  {
+    platform: "linkedin",
+    label: "LinkedIn",
+    developerUrl: "https://www.linkedin.com/developers/apps/",
+    connectionSummary:
+      "Connect a member or approved organisation publishing identity.",
+  },
+  {
+    platform: "x",
+    label: "X",
+    developerUrl: "https://developer.x.com/en/portal/dashboard",
+    connectionSummary: "Connect with OAuth 2.0 PKCE and post write access.",
+  },
+];
+
+export const PLATFORM_LABELS = Object.fromEntries(
+  SOCIAL_PLATFORM_CATALOG.map(({ platform, label }) => [platform, label]),
+) as Record<SocialPlatform, string>;
 
 export const SOCIAL_ACCOUNT_TARGETS: SocialAccountTarget[] = [
   {
@@ -69,6 +144,7 @@ export function summarizeSocialAccountReadiness(targets: SocialAccountTarget[]) 
     actionRequired: targets.filter(
       (target) => target.connectionStatus === "action_required",
     ).length,
+    revoked: targets.filter((target) => target.connectionStatus === "revoked").length,
     platformsByMarket,
     missingMarkets: (["GB", "US"] as Market[]).filter(
       (market) => platformsByMarket[market].length === 0,

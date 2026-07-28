@@ -3,9 +3,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CalendarClock,
   ExternalLink,
+  Link2,
   Loader2,
   RefreshCw,
   ShieldCheck,
+  Unplug,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -13,23 +15,37 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   SOCIAL_ACCOUNT_TARGETS,
+  SOCIAL_PLATFORM_CATALOG,
+  PLATFORM_LABELS,
+  type ConnectionStatus,
+  type Market,
+  type SocialAccountTarget,
   type SocialPlatform,
   summarizeSocialAccountReadiness,
 } from "@/features/social-automation/accounts";
 import { supabase } from "@/lib/supabase";
 import firstBatchReview from "../../../docs/social-pilot/2026-07-combi-boiler-pressure-first-batch.md?raw";
 
-const platformLabels = {
-  facebook: "Facebook",
-  instagram: "Instagram",
-  tiktok: "TikTok",
-} as const;
-
 const statusLabels = {
   connected: "Connected",
   unverified: "Unverified",
   action_required: "Action required",
+  revoked: "Disconnected",
 } as const;
+
+type SocialAccountRow = {
+  id: string;
+  platform: SocialPlatform;
+  market: Market;
+  profile_url: string;
+  external_account_id: string | null;
+  handle: string | null;
+  connection_status: ConnectionStatus;
+  publishing_mode: SocialAccountTarget["publishingMode"];
+  enabled: boolean;
+  connection_error: string | null;
+  connection_metadata: SocialAccountTarget["connectionMetadata"];
+};
 
 type ScheduledPublication = {
   id: string;
@@ -92,11 +108,56 @@ function toLocalInputValue(value: string | null) {
 }
 
 export default function SocialAutomation() {
-  const summary = summarizeSocialAccountReadiness(SOCIAL_ACCOUNT_TARGETS);
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [drafts, setDrafts] = useState<Record<string, PublicationDraft>>({});
   const isLocalReview = import.meta.env.DEV && !user;
+
+  const { data: accountData = [] } = useQuery({
+    queryKey: ["social-account-connections"],
+    enabled: !isLocalReview,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("social_accounts")
+        .select(`
+          id,
+          platform,
+          market,
+          profile_url,
+          external_account_id,
+          handle,
+          connection_status,
+          publishing_mode,
+          enabled,
+          connection_error,
+          connection_metadata
+        `)
+        .order("market")
+        .order("platform");
+      if (error) throw error;
+      return (data ?? []) as SocialAccountRow[];
+    },
+  });
+  const accountTargets: SocialAccountTarget[] = isLocalReview
+    ? SOCIAL_ACCOUNT_TARGETS
+    : accountData.map((account) => ({
+        id: account.id,
+        platform: account.platform,
+        market: account.market,
+        profileUrl: account.profile_url,
+        externalAccountId: account.external_account_id,
+        handle: account.handle,
+        connectionStatus: account.connection_status,
+        publishingMode: account.publishing_mode,
+        enabled: account.enabled,
+        verificationNote:
+          account.connection_error ??
+          (account.connection_status === "connected"
+            ? "OAuth connection verified. Server-side credentials are stored securely."
+            : "Complete the provider authorization to enable publishing."),
+        connectionMetadata: account.connection_metadata,
+      }));
+  const summary = summarizeSocialAccountReadiness(accountTargets);
 
   const {
     data: publicationData,
@@ -259,6 +320,115 @@ export default function SocialAutomation() {
     },
   });
 
+  const connectAccount = useMutation({
+    mutationFn: async ({
+      platform,
+      accountId,
+      market,
+    }: {
+      platform: SocialPlatform;
+      accountId?: string;
+      market: Market;
+    }) => {
+      const { data, error } = await supabase.functions.invoke("social-oauth", {
+        body: {
+          action: "start",
+          platform,
+          market,
+          account_id: accountId ?? null,
+          return_url: window.location.href,
+        },
+      });
+      if (error) throw error;
+      if (!data?.authorize_url) {
+        throw new Error(`${PLATFORM_LABELS[platform]} did not return an authorization link.`);
+      }
+      window.location.assign(data.authorize_url);
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Could not start the social account connection.",
+      );
+    },
+  });
+
+  const disconnectAccount = useMutation({
+    mutationFn: async (accountId: string) => {
+      const { error } = await supabase.functions.invoke("social-oauth", {
+        body: { action: "disconnect", account_id: accountId },
+      });
+      if (error) throw error;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["social-account-connections"] });
+      toast.success("Social account disconnected.");
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Could not disconnect the account.",
+      );
+    },
+  });
+
+  const selectProviderAccount = useMutation({
+    mutationFn: async ({
+      accountId,
+      externalAccountId,
+    }: {
+      accountId: string;
+      externalAccountId: string;
+    }) => {
+      const { error } = await supabase.functions.invoke("social-oauth", {
+        body: {
+          action: "select_target",
+          account_id: accountId,
+          external_account_id: externalAccountId,
+        },
+      });
+      if (error) throw error;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["social-account-connections"] });
+      toast.success("Publishing account connected.");
+    },
+    onError: (error) => {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Could not select the publishing account.",
+      );
+    },
+  });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const outcome = params.get("social_connection");
+    const platform = params.get("platform") as SocialPlatform | null;
+    if (!outcome || !platform) return;
+
+    if (outcome === "success") {
+      toast.success(`${PLATFORM_LABELS[platform]} connected.`);
+      void queryClient.invalidateQueries({ queryKey: ["social-account-connections"] });
+    } else if (outcome === "selection_required") {
+      toast.info(`Choose which ${PLATFORM_LABELS[platform]} account to publish to.`);
+      void queryClient.invalidateQueries({ queryKey: ["social-account-connections"] });
+    } else {
+      toast.error(`${PLATFORM_LABELS[platform]} connection was not completed.`);
+    }
+
+    params.delete("social_connection");
+    params.delete("platform");
+    params.delete("reason");
+    const query = params.toString();
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}${query ? `?${query}` : ""}`,
+    );
+  }, [queryClient]);
+
   return (
     <section className="space-y-6">
       <header>
@@ -284,45 +454,164 @@ export default function SocialAutomation() {
         ))}
       </div>
 
-      <div className="space-y-3">
-        {SOCIAL_ACCOUNT_TARGETS.map((target) => (
-          <article
-            key={`${target.market}-${target.platform}`}
-            className="rounded-xl border border-border bg-card p-5"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold">{platformLabels[target.platform]}</h2>
-                  <span className="rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-600">
-                    {statusLabels[target.connectionStatus]}
-                  </span>
-                  <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium">
-                    {target.market}
-                  </span>
+      <section className="space-y-3">
+        <div>
+          <p className="text-sm font-medium text-gold">Account connections</p>
+          <h2 className="mt-1 text-2xl font-display">Link every publishing platform</h2>
+          <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
+            OAuth credentials stay server-side. Connecting an account never approves or
+            publishes a queued campaign.
+          </p>
+        </div>
+        {SOCIAL_PLATFORM_CATALOG.flatMap((definition) =>
+          (["GB", "US"] as Market[]).map((market) => ({ definition, market })),
+        ).map(({ definition, market }) => {
+          const target = accountTargets.find(
+            (candidate) =>
+              candidate.platform === definition.platform && candidate.market === market,
+          );
+          const status = target?.connectionStatus ?? "unverified";
+          const availableAccounts =
+            target?.connectionMetadata?.available_accounts ?? [];
+
+          return (
+            <article
+              key={`${market}-${definition.platform}`}
+              className="rounded-xl border border-border bg-card p-5"
+            >
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-xl font-semibold">{definition.label}</h3>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+                        status === "connected"
+                          ? "bg-emerald-500/10 text-emerald-600"
+                          : "bg-amber-500/10 text-amber-600"
+                      }`}
+                    >
+                      {target ? statusLabels[status] : "Not configured"}
+                    </span>
+                    <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium">
+                      {market}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {target
+                      ? target.externalAccountId
+                        ? `Account ID ${target.externalAccountId}`
+                        : target.handle
+                          ? `@${target.handle}`
+                          : definition.connectionSummary
+                      : definition.connectionSummary}
+                  </p>
+                  {target && (
+                    <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                      {target.verificationNote}
+                    </p>
+                  )}
+
+                  {target?.id && availableAccounts.length > 0 && (
+                    <div className="mt-4 space-y-2 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
+                      <p className="text-sm font-medium">
+                        Choose the account that should receive scheduled posts
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {availableAccounts.map((account) => (
+                          <Button
+                            key={account.external_account_id}
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            disabled={selectProviderAccount.isPending}
+                            onClick={() =>
+                              selectProviderAccount.mutate({
+                                accountId: target.id!,
+                                externalAccountId: account.external_account_id,
+                              })
+                            }
+                          >
+                            {account.display_name ??
+                              account.handle ??
+                              account.external_account_id}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {target.externalAccountId
-                    ? `Account ID ${target.externalAccountId}`
-                    : `@${target.handle}`}
-                </p>
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                  {target.verificationNote}
-                </p>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  {target && (
+                    <a
+                      href={target.profileUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:underline"
+                    >
+                      Open profile
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                  <a
+                    href={definition.developerUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                  >
+                    Developer setup
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled={isLocalReview || connectAccount.isPending}
+                    title={
+                      isLocalReview
+                        ? "Sign in as an administrator to connect an account."
+                        : undefined
+                    }
+                    onClick={() =>
+                      connectAccount.mutate({
+                        platform: definition.platform,
+                        accountId: target?.id,
+                        market,
+                      })
+                    }
+                  >
+                    {connectAccount.isPending ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Link2 className="mr-2 h-4 w-4" />
+                    )}
+                    {status === "connected" ? "Reconnect" : "Connect"}
+                  </Button>
+                  {target?.id && status === "connected" && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      disabled={disconnectAccount.isPending}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Disconnect ${definition.label}? Scheduled posts will be held until it is connected again.`,
+                          )
+                        ) {
+                          disconnectAccount.mutate(target.id!);
+                        }
+                      }}
+                    >
+                      <Unplug className="mr-2 h-4 w-4" />
+                      Disconnect
+                    </Button>
+                  )}
+                </div>
               </div>
-              <a
-                href={target.profileUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:underline"
-              >
-                Open profile
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
+            </article>
+          );
+        })}
+      </section>
 
       {openAlerts.length > 0 && (
         <section className="space-y-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-5">
@@ -462,7 +751,7 @@ export default function SocialAutomation() {
                     <div className="space-y-3">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="rounded-full bg-gold/10 px-2.5 py-1 text-xs font-medium text-gold">
-                          {platformLabels[platform]}
+                          {PLATFORM_LABELS[platform]}
                         </span>
                         <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium">
                           {publication.status}
@@ -470,7 +759,7 @@ export default function SocialAutomation() {
                       </div>
 
                       <Input
-                        aria-label={`${platformLabels[platform]} headline`}
+                        aria-label={`${PLATFORM_LABELS[platform]} headline`}
                         value={draft.headline}
                         onChange={(event) =>
                           setDrafts((current) => ({
@@ -484,7 +773,7 @@ export default function SocialAutomation() {
                       />
 
                       <textarea
-                        aria-label={`${platformLabels[platform]} caption`}
+                        aria-label={`${PLATFORM_LABELS[platform]} caption`}
                         value={draft.caption}
                         rows={7}
                         onChange={(event) =>

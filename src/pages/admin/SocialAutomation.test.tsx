@@ -14,6 +14,11 @@ describe("SocialAutomation", () => {
     expect(source).toContain("Local first-batch review.");
     expect(source).toContain("firstBatchReview");
     expect(source).toContain("Automation alerts");
+    expect(source).toContain("Link every publishing platform");
+    expect(source).toContain('action: "start"');
+    expect(source).toContain('action: "disconnect"');
+    expect(source).toContain('action: "select_target"');
+    expect(source).toContain('(["GB", "US"] as Market[])');
     expect(source).toContain("quality_score");
     expect(source).toContain("trend_status");
     expect(source).toContain("publicationData ?? emptyScheduledPublications");

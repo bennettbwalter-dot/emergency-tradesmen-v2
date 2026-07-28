@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  SOCIAL_PLATFORM_CATALOG,
   SOCIAL_ACCOUNT_TARGETS,
   summarizeSocialAccountReadiness,
 } from "./accounts";
@@ -39,11 +40,23 @@ describe("social account targets", () => {
       connected: 0,
       unverified: 0,
       actionRequired: 3,
+      revoked: 0,
       platformsByMarket: {
         GB: ["facebook", "instagram", "tiktok"],
         US: [],
       },
       missingMarkets: ["US"],
     });
+  });
+
+  it("offers connection setup for every planned publishing platform", () => {
+    expect(SOCIAL_PLATFORM_CATALOG.map(({ platform }) => platform)).toEqual([
+      "facebook",
+      "instagram",
+      "tiktok",
+      "pinterest",
+      "linkedin",
+      "x",
+    ]);
   });
 });

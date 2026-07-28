@@ -9,3 +9,10 @@ entrypoint = "./functions/fetch-jit-listings/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/fetch-jit-listings/*.html" ]
+
+[functions.social-oauth]
+enabled = true
+# The provider callback has no Supabase JWT. The function validates admin JWTs
+# for start/disconnect actions and validates hashed, expiring state on callback.
+verify_jwt = false
+entrypoint = "./functions/social-oauth/index.ts"

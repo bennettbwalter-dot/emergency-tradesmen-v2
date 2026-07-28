@@ -35,6 +35,9 @@ blog row as the source of truth and never edits older posts or their creative.
 
 The worker refuses to run against any other Supabase project.
 
+Account OAuth setup, provider secrets and approval gates are documented in
+`docs/social-account-connections.md`.
+
 ## Commands
 
 - `npm run social:prepare` researches and prepares queued campaigns.
