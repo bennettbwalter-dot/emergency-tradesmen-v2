@@ -44,18 +44,21 @@ export interface SocialPlatformDefinition {
   label: string;
   developerUrl: string;
   connectionSummary: string;
+  active: boolean;
 }
 
 export const SOCIAL_PLATFORM_CATALOG: SocialPlatformDefinition[] = [
   {
     platform: "facebook",
     label: "Facebook",
+    active: true,
     developerUrl: "https://developers.facebook.com/apps/",
     connectionSummary: "Connect a Facebook Page with Page publishing permission.",
   },
   {
     platform: "instagram",
     label: "Instagram",
+    active: true,
     developerUrl: "https://developers.facebook.com/apps/",
     connectionSummary:
       "Connect a Professional Instagram account linked to a Facebook Page.",
@@ -63,6 +66,7 @@ export const SOCIAL_PLATFORM_CATALOG: SocialPlatformDefinition[] = [
   {
     platform: "tiktok",
     label: "TikTok",
+    active: true,
     developerUrl: "https://developers.tiktok.com/apps/",
     connectionSummary:
       "Connect through Login Kit with an approved Content Posting API app.",
@@ -70,12 +74,14 @@ export const SOCIAL_PLATFORM_CATALOG: SocialPlatformDefinition[] = [
   {
     platform: "pinterest",
     label: "Pinterest",
+    active: true,
     developerUrl: "https://developers.pinterest.com/apps/",
     connectionSummary: "Connect with Pinterest OAuth and Pins write access.",
   },
   {
     platform: "linkedin",
     label: "LinkedIn",
+    active: false,
     developerUrl: "https://www.linkedin.com/developers/apps/",
     connectionSummary:
       "Connect a member or approved organisation publishing identity.",
@@ -83,6 +89,7 @@ export const SOCIAL_PLATFORM_CATALOG: SocialPlatformDefinition[] = [
   {
     platform: "x",
     label: "X",
+    active: true,
     developerUrl: "https://developer.x.com/en/portal/dashboard",
     connectionSummary: "Connect with OAuth 2.0 PKCE and post write access.",
   },
@@ -125,6 +132,28 @@ export const SOCIAL_ACCOUNT_TARGETS: SocialAccountTarget[] = [
     publishingMode: "creator_assisted",
     verificationNote:
       "Profile exists. Log in and use creator-assisted drafts until an audited public-posting route is approved.",
+  },
+  {
+    platform: "pinterest",
+    market: "GB",
+    profileUrl: "https://uk.pinterest.com/emergencytradesmen/",
+    externalAccountId: null,
+    handle: "emergencytradesmen",
+    connectionStatus: "action_required",
+    publishingMode: "api_after_oauth",
+    verificationNote:
+      "Profile supplied. Connect the approved Pinterest developer app before scheduled Pins can publish.",
+  },
+  {
+    platform: "x",
+    market: "GB",
+    profileUrl: "https://x.com/etemergenc26245",
+    externalAccountId: null,
+    handle: "etemergenc26245",
+    connectionStatus: "action_required",
+    publishingMode: "api_after_oauth",
+    verificationNote:
+      "Profile supplied. Connect the X developer app with post and media write access before publishing.",
   },
 ];
 

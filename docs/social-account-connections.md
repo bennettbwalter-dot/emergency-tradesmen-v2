@@ -4,6 +4,14 @@ The Social Automation admin page can start, complete, reconnect and remove
 OAuth connections for Facebook, Instagram, TikTok, Pinterest, LinkedIn and X
 in both the GB and US markets.
 
+The active GB targets currently include:
+
+- Pinterest: `https://uk.pinterest.com/emergencytradesmen/`
+- X: `https://x.com/etemergenc26245`
+
+LinkedIn remains implemented for later use but is inactive and hidden from the
+current connection list.
+
 ## Callback
 
 Register this exact HTTPS callback in every provider developer application:

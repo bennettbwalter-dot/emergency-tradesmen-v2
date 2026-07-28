@@ -11,6 +11,10 @@ describe("social account OAuth", () => {
     "utf8",
   );
   const supabaseConfig = readFileSync("supabase/config.toml", "utf8");
+  const suppliedTargets = readFileSync(
+    "supabase/migrations/20260728131500_add_pinterest_x_social_targets.sql",
+    "utf8",
+  );
 
   it("supports every platform in the publishing roadmap", () => {
     for (const platform of [
@@ -41,5 +45,14 @@ describe("social account OAuth", () => {
     expect(edgeFunction).toContain('body.action === "disconnect"');
     expect(edgeFunction).toContain('body.action === "select_target"');
     expect(edgeFunction).toContain('connection_status: "revoked"');
+  });
+
+  it("registers Pinterest and X while leaving LinkedIn inactive", () => {
+    expect(suppliedTargets).toContain(
+      "https://uk.pinterest.com/emergencytradesmen/",
+    );
+    expect(suppliedTargets).toContain("https://x.com/etemergenc26245");
+    expect(suppliedTargets).toContain("WHERE platform = 'linkedin'");
+    expect(suppliedTargets).toContain("enabled = false");
   });
 });

@@ -19,6 +19,7 @@ describe("SocialAutomation", () => {
     expect(source).toContain('action: "disconnect"');
     expect(source).toContain('action: "select_target"');
     expect(source).toContain('(["GB", "US"] as Market[])');
+    expect(source).toContain("definition.active");
     expect(source).toContain("quality_score");
     expect(source).toContain("trend_status");
     expect(source).toContain("publicationData ?? emptyScheduledPublications");

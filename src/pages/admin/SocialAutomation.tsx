@@ -463,7 +463,7 @@ export default function SocialAutomation() {
             publishes a queued campaign.
           </p>
         </div>
-        {SOCIAL_PLATFORM_CATALOG.flatMap((definition) =>
+        {SOCIAL_PLATFORM_CATALOG.filter((definition) => definition.active).flatMap((definition) =>
           (["GB", "US"] as Market[]).map((market) => ({ definition, market })),
         ).map(({ definition, market }) => {
           const target = accountTargets.find(

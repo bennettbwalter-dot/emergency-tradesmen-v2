@@ -6,7 +6,7 @@ import {
 } from "./accounts";
 
 describe("social account targets", () => {
-  it("registers the three supplied GB accounts without claiming a connection", () => {
+  it("registers the five supplied GB accounts without claiming a connection", () => {
     expect(SOCIAL_ACCOUNT_TARGETS).toEqual([
       expect.objectContaining({
         platform: "facebook",
@@ -29,6 +29,20 @@ describe("social account targets", () => {
         connectionStatus: "action_required",
         publishingMode: "creator_assisted",
       }),
+      expect.objectContaining({
+        platform: "pinterest",
+        market: "GB",
+        handle: "emergencytradesmen",
+        profileUrl: "https://uk.pinterest.com/emergencytradesmen/",
+        connectionStatus: "action_required",
+      }),
+      expect.objectContaining({
+        platform: "x",
+        market: "GB",
+        handle: "etemergenc26245",
+        profileUrl: "https://x.com/etemergenc26245",
+        connectionStatus: "action_required",
+      }),
     ]);
   });
 
@@ -36,13 +50,13 @@ describe("social account targets", () => {
     const summary = summarizeSocialAccountReadiness(SOCIAL_ACCOUNT_TARGETS);
 
     expect(summary).toEqual({
-      configured: 3,
+      configured: 5,
       connected: 0,
       unverified: 0,
-      actionRequired: 3,
+      actionRequired: 5,
       revoked: 0,
       platformsByMarket: {
-        GB: ["facebook", "instagram", "tiktok"],
+        GB: ["facebook", "instagram", "tiktok", "pinterest", "x"],
         US: [],
       },
       missingMarkets: ["US"],
@@ -58,5 +72,10 @@ describe("social account targets", () => {
       "linkedin",
       "x",
     ]);
+    expect(
+      SOCIAL_PLATFORM_CATALOG.filter(({ active }) => active).map(
+        ({ platform }) => platform,
+      ),
+    ).toEqual(["facebook", "instagram", "tiktok", "pinterest", "x"]);
   });
 });
