@@ -37,7 +37,7 @@ function isLocalHost(): boolean {
 
 export function getSupportEmail(): string {
     return isUSDomain()
-        ? 'emergencycontractors@outlook.com'
+        ? 'emergencycontractor@outlook.com'
         : 'emergencytradesmen@outlook.com';
 }
 

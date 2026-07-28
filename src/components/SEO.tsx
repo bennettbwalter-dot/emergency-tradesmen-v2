@@ -86,7 +86,7 @@ export function SEO({
         "openingHours": "Mo-Su 00:00-24:00",
         "contactPoint": {
             "@type": "ContactPoint",
-            "email": isUSDomain ? "emergencycontractors@outlook.com" : "emergencytradesmen@outlook.com",
+            "email": isUSDomain ? "emergencycontractor@outlook.com" : "emergencytradesmen@outlook.com",
             "contactType": "customer support",
             "availableLanguage": "English"
         },
