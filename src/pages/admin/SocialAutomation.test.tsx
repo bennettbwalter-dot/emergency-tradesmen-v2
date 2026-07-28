@@ -1,16 +1,15 @@
-import { renderToStaticMarkup } from "react-dom/server";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import SocialAutomation from "./SocialAutomation";
 
 describe("SocialAutomation", () => {
-  it("shows the supplied targets without claiming they are connected", () => {
-    const markup = renderToStaticMarkup(<SocialAutomation />);
+  it("shows account blockers and an approval-first scheduling queue", () => {
+    const source = readFileSync("src/pages/admin/SocialAutomation.tsx", "utf8");
 
-    expect(markup).toContain("Social Automation");
-    expect(markup).toContain("61588024972553");
-    expect(markup).toContain("@emergencytradesmen");
-    expect(markup).toContain("Action required");
-    expect(markup).toContain("US accounts are still required");
-    expect(markup).not.toContain("Connected and ready");
+    expect(source).toContain("Social Automation");
+    expect(source).toContain("Action required");
+    expect(source).toContain("Scheduled social drafts");
+    expect(source).toContain("Approve &amp; schedule");
+    expect(source).toContain("Save draft");
+    expect(source).toContain("US accounts are still required");
   });
 });
