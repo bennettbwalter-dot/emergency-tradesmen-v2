@@ -85,29 +85,33 @@ DROP POLICY IF EXISTS "Admins manage social accounts" ON public.social_accounts;
 CREATE POLICY "Admins manage social accounts"
 ON public.social_accounts
 FOR ALL
-USING (public.is_admin())
-WITH CHECK (public.is_admin());
+TO authenticated
+USING ((select public.is_admin()))
+WITH CHECK ((select public.is_admin()));
 
 DROP POLICY IF EXISTS "Admins manage social campaigns" ON public.social_campaigns;
 CREATE POLICY "Admins manage social campaigns"
 ON public.social_campaigns
 FOR ALL
-USING (public.is_admin())
-WITH CHECK (public.is_admin());
+TO authenticated
+USING ((select public.is_admin()))
+WITH CHECK ((select public.is_admin()));
 
 DROP POLICY IF EXISTS "Admins manage social publications" ON public.social_publications;
 CREATE POLICY "Admins manage social publications"
 ON public.social_publications
 FOR ALL
-USING (public.is_admin())
-WITH CHECK (public.is_admin());
+TO authenticated
+USING ((select public.is_admin()))
+WITH CHECK ((select public.is_admin()));
 
 DROP POLICY IF EXISTS "Admins manage social approval events" ON public.social_approval_events;
 CREATE POLICY "Admins manage social approval events"
 ON public.social_approval_events
 FOR ALL
-USING (public.is_admin())
-WITH CHECK (public.is_admin());
+TO authenticated
+USING ((select public.is_admin()))
+WITH CHECK ((select public.is_admin()));
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.social_accounts TO authenticated;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.social_campaigns TO authenticated;

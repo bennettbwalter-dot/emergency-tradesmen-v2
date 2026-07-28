@@ -25,6 +25,8 @@ describe("social automation migration", () => {
       "source_post_id uuid NOT NULL REFERENCES public.posts(id) ON DELETE RESTRICT",
     );
     expect(sql.match(/public\.is_admin\(\)/g)?.length).toBeGreaterThanOrEqual(8);
+    expect(sql.match(/FOR ALL\s+TO authenticated/g)).toHaveLength(4);
+    expect(sql.match(/\(select public\.is_admin\(\)\)/g)).toHaveLength(8);
   });
 
   it("enforces market, platform, workflow, status, and idempotency boundaries", () => {
