@@ -46,11 +46,23 @@ type ScheduledPublication = {
   social_campaigns: {
     id: string;
     state: string;
+    trend_status: string;
+    quality_status: string;
+    quality_score: number | null;
+    requires_approval: boolean;
     posts: {
       title: string;
       slug: string;
     };
   };
+};
+
+type AutomationAlert = {
+  id: string;
+  severity: "info" | "warning" | "error";
+  alert_type: string;
+  message: string;
+  created_at: string;
 };
 
 type PublicationDraft = {
@@ -105,7 +117,15 @@ export default function SocialAutomation() {
           scheduled_at,
           schedule_timezone,
           social_accounts!inner(platform, connection_status),
-          social_campaigns!inner(id, state, posts!inner(title, slug))
+          social_campaigns!inner(
+            id,
+            state,
+            trend_status,
+            quality_status,
+            quality_score,
+            requires_approval,
+            posts!inner(title, slug)
+          )
         `)
         .order("scheduled_at", { ascending: true });
 
@@ -114,6 +134,21 @@ export default function SocialAutomation() {
     },
   });
   const publications = publicationData ?? emptyScheduledPublications;
+
+  const { data: openAlerts = [] } = useQuery({
+    queryKey: ["social-automation-alerts"],
+    enabled: !isLocalReview,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("social_automation_alerts")
+        .select("id, severity, alert_type, message, created_at")
+        .eq("status", "open")
+        .order("created_at", { ascending: false })
+        .limit(10);
+      if (error) throw error;
+      return (data ?? []) as AutomationAlert[];
+    },
+  });
 
   useEffect(() => {
     setDrafts(
@@ -289,6 +324,31 @@ export default function SocialAutomation() {
         ))}
       </div>
 
+      {openAlerts.length > 0 && (
+        <section className="space-y-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-5">
+          <div>
+            <p className="text-sm font-medium text-amber-700">Needs attention</p>
+            <h2 className="mt-1 text-2xl font-display">Automation alerts</h2>
+          </div>
+          {openAlerts.map((alert) => (
+            <article
+              key={alert.id}
+              className="rounded-lg border border-amber-500/20 bg-background p-4"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-amber-500/15 px-2.5 py-1 text-xs font-medium uppercase">
+                  {alert.severity}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {alert.alert_type.replaceAll("_", " ")}
+                </span>
+              </div>
+              <p className="mt-2 text-sm">{alert.message}</p>
+            </article>
+          ))}
+        </section>
+      )}
+
       <section className="space-y-4 rounded-xl border border-border bg-card p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
@@ -367,6 +427,14 @@ export default function SocialAutomation() {
                         <h3 className="font-semibold">{campaign.posts.title}</h3>
                         <p className="text-sm text-muted-foreground">
                           Campaign state: {campaign.state.replaceAll("_", " ")}
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Trends: {campaign.trend_status.replaceAll("_", " ")} · Quality:{" "}
+                          {campaign.quality_status.replaceAll("_", " ")}
+                          {campaign.quality_score !== null
+                            ? ` (${campaign.quality_score}/50)`
+                            : ""}
+                          {campaign.requires_approval ? " · Approval required" : ""}
                         </p>
                       </div>
                       {campaign.state !== "scheduled" && campaign.state !== "published" && (

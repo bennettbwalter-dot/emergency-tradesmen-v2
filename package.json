@@ -16,7 +16,12 @@
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "build:all": "npm run generate-sitemap && tsc && vite build",
-    "test:social": "vitest run"
+    "test:social": "vitest run",
+    "content:stop-slop": "node scripts/stop_slop_audit.mjs",
+    "social:run": "node scripts/social_automation_worker.mjs",
+    "social:prepare": "node scripts/social_automation_worker.mjs --prepare-only",
+    "social:publish": "node scripts/social_automation_worker.mjs --publish-only",
+    "social:dry-run": "node scripts/social_automation_worker.mjs --dry-run --skip-research"
   },
   "dependencies": {
     "@discordjs/rest": "^2.6.0",

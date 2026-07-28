@@ -13,6 +13,9 @@ describe("SocialAutomation", () => {
     expect(source).toContain("US accounts are still required");
     expect(source).toContain("Local first-batch review.");
     expect(source).toContain("firstBatchReview");
+    expect(source).toContain("Automation alerts");
+    expect(source).toContain("quality_score");
+    expect(source).toContain("trend_status");
     expect(source).toContain("publicationData ?? emptyScheduledPublications");
     expect(source).not.toContain("data: publications = []");
   });
