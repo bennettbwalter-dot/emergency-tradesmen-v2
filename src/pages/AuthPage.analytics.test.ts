@@ -7,8 +7,10 @@ describe("AuthPage analytics boundary", () => {
 
     expect(source).not.toMatch(/from\s+["']posthog-js(?:\/react)?["']/);
     expect(source).toMatch(
-      /import\s+\{\s*getPostHogFeatureFlag\s*\}\s+from\s+["']@\/lib\/posthog["']/,
+      /import\s+\{\s*subscribePostHogFeatureFlag\s*\}\s+from\s+["']@\/lib\/posthog["']/,
     );
-    expect(source).toMatch(/getPostHogFeatureFlag\(["']new-us-signup-flow["']\)/);
+    expect(source).toMatch(
+      /return\s+subscribePostHogFeatureFlag\(\s*["']new-us-signup-flow["']/,
+    );
   });
 });

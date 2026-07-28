@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { getPostHogFeatureFlag } from "@/lib/posthog";
+import { subscribePostHogFeatureFlag } from "@/lib/posthog";
 import { SEO } from "@/components/SEO";
 import { Gift } from "lucide-react";
 
@@ -21,13 +21,10 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
     const [isNewSignupFlowEnabled, setIsNewSignupFlowEnabled] = useState(false);
 
     useEffect(() => {
-        let isActive = true;
-        getPostHogFeatureFlag("new-us-signup-flow").then((enabled) => {
-            if (isActive) setIsNewSignupFlowEnabled(enabled);
-        });
-        return () => {
-            isActive = false;
-        };
+        return subscribePostHogFeatureFlag(
+            "new-us-signup-flow",
+            setIsNewSignupFlowEnabled,
+        );
     }, []);
 
     useEffect(() => {

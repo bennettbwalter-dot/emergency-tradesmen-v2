@@ -7,6 +7,7 @@ const posthogMock = vi.hoisted(() => ({
     capture: vi.fn(),
     init: vi.fn(),
     isFeatureEnabled: vi.fn(),
+    onFeatureFlags: vi.fn(),
   },
   delayLoad: false,
   moduleLoads: vi.fn(),
@@ -45,6 +46,7 @@ beforeEach(() => {
   posthogMock.delayLoad = false;
   posthogMock.resolveLoad = undefined;
   posthogMock.client.isFeatureEnabled.mockReturnValue(false);
+  posthogMock.client.onFeatureFlags.mockReturnValue(vi.fn());
 
   vi.stubGlobal("window", {
     localStorage: {
@@ -73,6 +75,16 @@ describe("PostHog consent boundary", () => {
 
     expect(posthogMock.client.init).not.toHaveBeenCalled();
     expect(posthogMock.client.capture).not.toHaveBeenCalled();
+
+    consent = "accepted";
+    trackPostHogEvent("captured_after_reacceptance");
+    await runNextIdleCallback();
+
+    expect(posthogMock.client.init).toHaveBeenCalledTimes(1);
+    expect(posthogMock.client.capture).toHaveBeenCalledWith(
+      "captured_after_reacceptance",
+      undefined,
+    );
   });
 
   it("blocks already-initialized capture after consent is no longer accepted", async () => {
@@ -119,5 +131,58 @@ describe("PostHog consent boundary", () => {
 
     expect(posthogMock.client.init).toHaveBeenCalledTimes(1);
     expect(posthogMock.client.isFeatureEnabled).toHaveBeenCalledWith("new-us-signup-flow");
+  });
+
+  it("keeps a mounted feature-flag subscriber ready for later consent and delayed flags", async () => {
+    const values: boolean[] = [];
+    const { initPostHog, subscribePostHogFeatureFlag } = await loadBoundary();
+
+    const unsubscribe = subscribePostHogFeatureFlag(
+      "new-us-signup-flow",
+      (enabled) => values.push(enabled),
+    );
+
+    expect(values).toEqual([false]);
+    expect(posthogMock.moduleLoads).not.toHaveBeenCalled();
+
+    consent = "accepted";
+    initPostHog();
+    await runNextIdleCallback();
+    await vi.waitFor(() =>
+      expect(posthogMock.client.onFeatureFlags).toHaveBeenCalledTimes(1),
+    );
+
+    posthogMock.client.isFeatureEnabled.mockReturnValue(true);
+    const onFlagsReady = posthogMock.client.onFeatureFlags.mock.calls[0]?.[0];
+    onFlagsReady?.();
+
+    expect(values.at(-1)).toBe(true);
+    unsubscribe();
+  });
+
+  it("rechecks consent inside delayed flag callbacks and cleans up the vendor subscription", async () => {
+    consent = "accepted";
+    const values: boolean[] = [];
+    const vendorUnsubscribe = vi.fn();
+    posthogMock.client.onFeatureFlags.mockReturnValue(vendorUnsubscribe);
+    const { subscribePostHogFeatureFlag } = await loadBoundary();
+
+    const unsubscribe = subscribePostHogFeatureFlag(
+      "new-us-signup-flow",
+      (enabled) => values.push(enabled),
+    );
+    await vi.waitFor(() =>
+      expect(posthogMock.client.onFeatureFlags).toHaveBeenCalledTimes(1),
+    );
+
+    consent = "declined";
+    posthogMock.client.isFeatureEnabled.mockReturnValue(true);
+    const onFlagsReady = posthogMock.client.onFeatureFlags.mock.calls[0]?.[0];
+    onFlagsReady?.();
+
+    expect(values).not.toContain(true);
+
+    unsubscribe();
+    expect(vendorUnsubscribe).toHaveBeenCalledTimes(1);
   });
 });

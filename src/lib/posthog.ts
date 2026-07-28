@@ -9,6 +9,12 @@ let posthogClient: any = null;
 let posthogLoadPromise: Promise<any> | null = null;
 let posthogInitPromise: Promise<any> | null = null;
 
+type FeatureFlagSubscriber = {
+    connect: () => Promise<void>;
+};
+
+const featureFlagSubscribers = new Set<FeatureFlagSubscriber>();
+
 const analyticsConsentGranted = () =>
     typeof window !== "undefined" && hasAnalyticsConsent(window.localStorage);
 
@@ -25,7 +31,11 @@ const onIdle = (callback: () => void) => {
 const loadPostHog = async () => {
     if (posthogClient) return posthogClient;
     if (!posthogLoadPromise) {
-        posthogLoadPromise = import('posthog-js').then((module) => module.default || module);
+        const loadAttempt = import('posthog-js').then((module) => module.default || module);
+        posthogLoadPromise = loadAttempt;
+        loadAttempt.catch(() => {
+            if (posthogLoadPromise === loadAttempt) posthogLoadPromise = null;
+        });
     }
     posthogClient = await posthogLoadPromise;
     return posthogClient;
@@ -34,7 +44,7 @@ const loadPostHog = async () => {
 const initializePostHogNow = async () => {
     if (isInitialized || !POSTHOG_KEY || !analyticsConsentGranted()) return posthogClient;
     if (!posthogInitPromise) {
-        posthogInitPromise = (async () => {
+        const initAttempt = (async () => {
             const posthog = await loadPostHog();
             if (!analyticsConsentGranted()) return null;
             if (!isInitialized && analyticsConsentGranted()) {
@@ -50,8 +60,28 @@ const initializePostHogNow = async () => {
             }
             return posthog;
         })();
+        posthogInitPromise = initAttempt;
+        initAttempt.then(
+            (posthog) => {
+                if (!posthog && posthogInitPromise === initAttempt) {
+                    posthogInitPromise = null;
+                }
+            },
+            () => {
+                if (posthogInitPromise === initAttempt) {
+                    posthogInitPromise = null;
+                }
+            },
+        );
     }
     return posthogInitPromise;
+};
+
+const activateFeatureFlagSubscribers = () => {
+    if (!analyticsConsentGranted()) return;
+    featureFlagSubscribers.forEach((subscriber) => {
+        void subscriber.connect();
+    });
 };
 
 export const initPostHog = () => {
@@ -67,6 +97,7 @@ export const initPostHog = () => {
         return;
     }
 
+    activateFeatureFlagSubscribers();
     onIdle(async () => {
         if (isInitialized || !analyticsConsentGranted()) return;
         try {
@@ -105,6 +136,62 @@ export const getPostHogFeatureFlag = async (flagKey: string): Promise<boolean> =
         }
         return false;
     }
+};
+
+export const subscribePostHogFeatureFlag = (
+    flagKey: string,
+    onChange: (enabled: boolean) => void,
+) => {
+    let isActive = true;
+    let isConnected = false;
+    let connectPromise: Promise<void> | null = null;
+    let unsubscribeFromVendor: (() => void) | undefined;
+
+    const connect = () => {
+        if (!isActive || isConnected || !analyticsConsentGranted()) {
+            return Promise.resolve();
+        }
+        if (connectPromise) return connectPromise;
+
+        connectPromise = (async () => {
+            const posthog = await initializePostHogNow();
+            if (!isActive || !posthog || !analyticsConsentGranted()) return;
+
+            const readFlag = () => {
+                if (!isActive) return;
+                if (!analyticsConsentGranted()) {
+                    onChange(false);
+                    return;
+                }
+                onChange(posthog.isFeatureEnabled(flagKey) === true);
+            };
+
+            unsubscribeFromVendor = posthog.onFeatureFlags(readFlag);
+            isConnected = true;
+            readFlag();
+        })()
+            .catch((error) => {
+                if (import.meta.env.DEV) {
+                    console.warn("PostHog feature flag subscription skipped", error);
+                }
+            })
+            .finally(() => {
+                connectPromise = null;
+            });
+
+        return connectPromise;
+    };
+
+    const subscriber = { connect };
+    featureFlagSubscribers.add(subscriber);
+    onChange(false);
+    void connect();
+
+    return () => {
+        isActive = false;
+        featureFlagSubscribers.delete(subscriber);
+        unsubscribeFromVendor?.();
+    };
 };
 
 export const trackPostHogPageView = (url: string) => {
