@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { hasAnalyticsConsent } from "./trackingConsent";
+import { acceptAnalyticsConsent, hasAnalyticsConsent } from "./trackingConsent";
 
 function storageWith(value: string | null) {
   return {
@@ -18,4 +18,22 @@ describe("hasAnalyticsConsent", () => {
       expect(hasAnalyticsConsent(storageWith(value))).toBe(false);
     },
   );
+});
+
+describe("acceptAnalyticsConsent", () => {
+  it("persists acceptance before invoking the accepted callback", () => {
+    const values = new Map<string, string>();
+    let consentSeenByCallback: string | null = null;
+
+    acceptAnalyticsConsent(
+      {
+        setItem: (key, value) => values.set(key, value),
+      },
+      () => {
+        consentSeenByCallback = values.get("cookieConsent") ?? null;
+      },
+    );
+
+    expect(consentSeenByCallback).toBe("accepted");
+  });
 });

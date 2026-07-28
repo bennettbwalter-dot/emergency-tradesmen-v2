@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { useFeatureFlagEnabled } from "posthog-js/react";
+import { getPostHogFeatureFlag } from "@/lib/posthog";
 import { SEO } from "@/components/SEO";
 import { Gift } from "lucide-react";
 
@@ -18,7 +18,17 @@ export default function AuthPage({ defaultTab = "login" }: { defaultTab?: "login
     const showProWebsiteBonus = mode === "register" && redirect.includes("pricing");
 
     // Check if the user is in the "new-us-signup-flow" test group
-    const isNewSignupFlowEnabled = useFeatureFlagEnabled('new-us-signup-flow');
+    const [isNewSignupFlowEnabled, setIsNewSignupFlowEnabled] = useState(false);
+
+    useEffect(() => {
+        let isActive = true;
+        getPostHogFeatureFlag("new-us-signup-flow").then((enabled) => {
+            if (isActive) setIsNewSignupFlowEnabled(enabled);
+        });
+        return () => {
+            isActive = false;
+        };
+    }, []);
 
     useEffect(() => {
         if (isAuthenticated) {

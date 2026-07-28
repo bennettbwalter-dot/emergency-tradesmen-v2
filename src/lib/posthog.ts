@@ -36,7 +36,8 @@ const initializePostHogNow = async () => {
     if (!posthogInitPromise) {
         posthogInitPromise = (async () => {
             const posthog = await loadPostHog();
-            if (!isInitialized) {
+            if (!analyticsConsentGranted()) return null;
+            if (!isInitialized && analyticsConsentGranted()) {
                 posthog.init(POSTHOG_KEY, {
                     api_host: POSTHOG_HOST,
                     capture_pageview: false,
@@ -67,7 +68,7 @@ export const initPostHog = () => {
     }
 
     onIdle(async () => {
-        if (isInitialized) return;
+        if (isInitialized || !analyticsConsentGranted()) return;
         try {
             await initializePostHogNow();
         } catch (error) {
@@ -81,11 +82,29 @@ const withPostHog = (callback: (posthog: any) => void) => {
     onIdle(async () => {
         try {
             const posthog = await initializePostHogNow();
+            if (!posthog || !analyticsConsentGranted()) return;
             callback(posthog);
         } catch (error) {
             if (import.meta.env.DEV) console.warn("PostHog tracking skipped", error);
         }
     });
+};
+
+export const getPostHogFeatureFlag = async (flagKey: string): Promise<boolean> => {
+    if (!POSTHOG_KEY || typeof window === 'undefined' || !analyticsConsentGranted()) {
+        return false;
+    }
+
+    try {
+        const posthog = await initializePostHogNow();
+        if (!posthog || !analyticsConsentGranted()) return false;
+        return posthog.isFeatureEnabled(flagKey) === true;
+    } catch (error) {
+        if (import.meta.env.DEV) {
+            console.warn("PostHog feature flag read skipped", error);
+        }
+        return false;
+    }
 };
 
 export const trackPostHogPageView = (url: string) => {
