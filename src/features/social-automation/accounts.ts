@@ -24,9 +24,10 @@ export const SOCIAL_ACCOUNT_TARGETS: SocialAccountTarget[] = [
     profileUrl: "https://www.facebook.com/profile.php?id=61588024972553",
     externalAccountId: "61588024972553",
     handle: null,
-    connectionStatus: "unverified",
-    publishingMode: "api_after_oauth",
-    verificationNote: "Confirm this is a Page and that the authorizing user has Page access.",
+    connectionStatus: "action_required",
+    publishingMode: "creator_assisted",
+    verificationNote:
+      "Verified as a professional-mode profile, not a Facebook Page. Create or nominate a Page before API publishing can be enabled.",
   },
   {
     platform: "instagram",
@@ -34,9 +35,10 @@ export const SOCIAL_ACCOUNT_TARGETS: SocialAccountTarget[] = [
     profileUrl: "https://www.instagram.com/emergencytradesmen/",
     externalAccountId: null,
     handle: "emergencytradesmen",
-    connectionStatus: "unverified",
+    connectionStatus: "action_required",
     publishingMode: "api_after_meta_link",
-    verificationNote: "Confirm a Professional account linked to the verified Facebook Page.",
+    verificationNote:
+      "Profile exists, but login is required to confirm it is Professional and link it to a verified Facebook Page.",
   },
   {
     platform: "tiktok",
@@ -44,9 +46,10 @@ export const SOCIAL_ACCOUNT_TARGETS: SocialAccountTarget[] = [
     profileUrl: "https://www.tiktok.com/@emergencytradesmen?lang=en-GB",
     externalAccountId: null,
     handle: "emergencytradesmen",
-    connectionStatus: "unverified",
+    connectionStatus: "action_required",
     publishingMode: "creator_assisted",
-    verificationNote: "Use creator-assisted drafts until an audited public-posting route is approved.",
+    verificationNote:
+      "Profile exists. Log in and use creator-assisted drafts until an audited public-posting route is approved.",
   },
 ];
 
@@ -63,6 +66,9 @@ export function summarizeSocialAccountReadiness(targets: SocialAccountTarget[]) 
     configured: targets.length,
     connected: targets.filter((target) => target.connectionStatus === "connected").length,
     unverified: targets.filter((target) => target.connectionStatus === "unverified").length,
+    actionRequired: targets.filter(
+      (target) => target.connectionStatus === "action_required",
+    ).length,
     platformsByMarket,
     missingMarkets: (["GB", "US"] as Market[]).filter(
       (market) => platformsByMarket[market].length === 0,

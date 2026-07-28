@@ -11,21 +11,21 @@ describe("social account targets", () => {
         platform: "facebook",
         market: "GB",
         externalAccountId: "61588024972553",
-        connectionStatus: "unverified",
-        publishingMode: "api_after_oauth",
+        connectionStatus: "action_required",
+        publishingMode: "creator_assisted",
       }),
       expect.objectContaining({
         platform: "instagram",
         market: "GB",
         handle: "emergencytradesmen",
-        connectionStatus: "unverified",
+        connectionStatus: "action_required",
         publishingMode: "api_after_meta_link",
       }),
       expect.objectContaining({
         platform: "tiktok",
         market: "GB",
         handle: "emergencytradesmen",
-        connectionStatus: "unverified",
+        connectionStatus: "action_required",
         publishingMode: "creator_assisted",
       }),
     ]);
@@ -37,7 +37,8 @@ describe("social account targets", () => {
     expect(summary).toEqual({
       configured: 3,
       connected: 0,
-      unverified: 3,
+      unverified: 0,
+      actionRequired: 3,
       platformsByMarket: {
         GB: ["facebook", "instagram", "tiktok"],
         US: [],

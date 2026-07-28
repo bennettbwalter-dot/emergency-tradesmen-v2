@@ -9,7 +9,7 @@ describe("SocialAutomation", () => {
     expect(markup).toContain("Social Automation");
     expect(markup).toContain("61588024972553");
     expect(markup).toContain("@emergencytradesmen");
-    expect(markup).toContain("Unverified");
+    expect(markup).toContain("Action required");
     expect(markup).toContain("US accounts are still required");
     expect(markup).not.toContain("Connected and ready");
   });
