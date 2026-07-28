@@ -160,6 +160,35 @@ describe("PostHog consent boundary", () => {
     unsubscribe();
   });
 
+  it("reconnects a waiting subscriber after re-consent when PostHog is already initialized", async () => {
+    consent = "accepted";
+    posthogMock.client.isFeatureEnabled.mockReturnValue(true);
+    const { initPostHog, subscribePostHogFeatureFlag } = await loadBoundary();
+
+    initPostHog();
+    await runNextIdleCallback();
+    expect(posthogMock.client.init).toHaveBeenCalledTimes(1);
+
+    consent = "declined";
+    const values: boolean[] = [];
+    const unsubscribe = subscribePostHogFeatureFlag(
+      "new-us-signup-flow",
+      (enabled) => values.push(enabled),
+    );
+
+    expect(values).toEqual([false]);
+    expect(posthogMock.client.onFeatureFlags).not.toHaveBeenCalled();
+
+    consent = "accepted";
+    initPostHog();
+    await vi.waitFor(() =>
+      expect(posthogMock.client.onFeatureFlags).toHaveBeenCalledTimes(1),
+    );
+
+    expect(values.at(-1)).toBe(true);
+    unsubscribe();
+  });
+
   it("rechecks consent inside delayed flag callbacks and cleans up the vendor subscription", async () => {
     consent = "accepted";
     const values: boolean[] = [];

@@ -87,7 +87,6 @@ const activateFeatureFlagSubscribers = () => {
 export const initPostHog = () => {
     if (
         typeof window === 'undefined'
-        || isInitialized
         || !POSTHOG_KEY
         || !analyticsConsentGranted()
     ) {
@@ -98,6 +97,8 @@ export const initPostHog = () => {
     }
 
     activateFeatureFlagSubscribers();
+    if (isInitialized) return;
+
     onIdle(async () => {
         if (isInitialized || !analyticsConsentGranted()) return;
         try {
