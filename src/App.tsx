@@ -73,6 +73,7 @@ const DataExportPage = lazy(() => import("./pages/admin/DataExportPage"));
 const AnalyticsPage = lazy(() => import("./pages/admin/Analytics"));
 const EmailOutreachDashboard = lazy(() => import("./pages/admin/EmailOutreachDashboard"));
 const EvidencePage = lazy(() => import("./pages/admin/Evidence"));
+const SocialAutomation = lazy(() => import("./pages/admin/SocialAutomation"));
 
 const queryClient = new QueryClient();
 
@@ -190,6 +191,7 @@ const AppRoutes = () => (
       <Route path="export" element={<DataExportPage />} />
       <Route path="analytics" element={<AnalyticsPage />} />
       <Route path="email-outreach" element={<EmailOutreachDashboard />} />
+      <Route path="social-automation" element={<SocialAutomation />} />
       <Route path="evidence" element={<EvidencePage />} />
     </Route>
 

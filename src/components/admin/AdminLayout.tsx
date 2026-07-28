@@ -19,7 +19,8 @@ import {
     Mail,
     ShieldCheck,
     Globe,
-    MessageSquareText
+    MessageSquareText,
+    Share2
 } from "lucide-react";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -73,6 +74,7 @@ export function AdminLayout() {
         { path: "/admin/photos", icon: Image, label: "Photos" },
         { path: "/admin/analytics", icon: BarChart3, label: "Analytics" },
         { path: "/admin/email-outreach", icon: Mail, label: "Email Campaigns" },
+        { path: "/admin/social-automation", icon: Share2, label: "Social Automation" },
         { path: "/admin/evidence", icon: ShieldCheck, label: "Evidence" },
         { path: "/admin/export", icon: Download, label: "Data Export" },
         { path: "/landing", icon: Globe, label: "Landing Page" },
