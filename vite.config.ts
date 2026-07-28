@@ -59,6 +59,14 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            // Map packages must be matched BEFORE the generic `react` test:
+            // `react-leaflet` contains "react", so it was landing in
+            // vendor-react, which every page loads. That made vendor-react
+            // import leaflet (~322 kB gzipped) on the landing page and every
+            // other route that has no map at all.
+            if (id.includes('leaflet') || id.includes('react-leaflet') || id.includes('maplibre-gl')) {
+              return 'vendor-maps';
+            }
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
               return 'vendor-react';
             }
