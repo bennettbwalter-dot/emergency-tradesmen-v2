@@ -11,5 +11,9 @@ describe("SocialAutomation", () => {
     expect(source).toContain("Approve &amp; schedule");
     expect(source).toContain("Save draft");
     expect(source).toContain("US accounts are still required");
+    expect(source).toContain("Local first-batch review.");
+    expect(source).toContain("firstBatchReview");
+    expect(source).toContain("publicationData ?? emptyScheduledPublications");
+    expect(source).not.toContain("data: publications = []");
   });
 });

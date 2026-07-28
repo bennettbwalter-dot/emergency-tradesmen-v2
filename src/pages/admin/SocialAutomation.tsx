@@ -17,6 +17,7 @@ import {
   summarizeSocialAccountReadiness,
 } from "@/features/social-automation/accounts";
 import { supabase } from "@/lib/supabase";
+import firstBatchReview from "../../../docs/social-pilot/2026-07-combi-boiler-pressure-first-batch.md?raw";
 
 const platformLabels = {
   facebook: "Facebook",
@@ -58,6 +59,19 @@ type PublicationDraft = {
   scheduledAt: string;
 };
 
+const emptyScheduledPublications: ScheduledPublication[] = [];
+const localReviewPlatforms = ["Facebook", "Instagram", "TikTok"] as const;
+
+function extractMarkdownSection(markdown: string, heading: string) {
+  const marker = `## ${heading}`;
+  const start = markdown.indexOf(marker);
+  if (start === -1) return "";
+
+  const section = markdown.slice(start + marker.length).trimStart();
+  const nextHeading = section.search(/\n## /);
+  return (nextHeading === -1 ? section : section.slice(0, nextHeading)).trim();
+}
+
 function toLocalInputValue(value: string | null) {
   if (!value) return "";
   const date = new Date(value);
@@ -70,13 +84,15 @@ export default function SocialAutomation() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [drafts, setDrafts] = useState<Record<string, PublicationDraft>>({});
+  const isLocalReview = import.meta.env.DEV && !user;
 
   const {
-    data: publications = [],
+    data: publicationData,
     isLoading: scheduleLoading,
     refetch,
   } = useQuery({
     queryKey: ["social-publication-schedule"],
+    enabled: !isLocalReview,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("social_publications")
@@ -97,6 +113,7 @@ export default function SocialAutomation() {
       return (data ?? []) as unknown as ScheduledPublication[];
     },
   });
+  const publications = publicationData ?? emptyScheduledPublications;
 
   useEffect(() => {
     setDrafts(
@@ -282,13 +299,44 @@ export default function SocialAutomation() {
               after the campaign is approved.
             </p>
           </div>
-          <Button variant="outline" onClick={() => refetch()} disabled={scheduleLoading}>
+          <Button
+            variant="outline"
+            onClick={() => refetch()}
+            disabled={scheduleLoading || isLocalReview}
+          >
             <RefreshCw className="mr-2 h-4 w-4" />
             Refresh
           </Button>
         </div>
 
-        {scheduleLoading ? (
+        {isLocalReview ? (
+          <div className="space-y-5">
+            <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-4 text-sm">
+              <strong>Local first-batch review.</strong> This preview is read-only.
+              Nothing here can approve, schedule or publish a post.
+            </div>
+            <div className="grid gap-5 xl:grid-cols-[280px_1fr]">
+              <img
+                src="/images/social/combi-boiler-pressure-summer-9x16-v1.png"
+                alt="Colour-block illustration of a combi boiler with safe pressure checks"
+                className="aspect-[9/16] w-full rounded-xl border border-border object-cover"
+              />
+              <div className="space-y-4">
+                {localReviewPlatforms.map((platform) => (
+                  <article
+                    key={platform}
+                    className="rounded-xl border border-border bg-background p-4"
+                  >
+                    <h3 className="font-semibold">{platform}</h3>
+                    <div className="mt-3 whitespace-pre-wrap text-sm leading-6 text-muted-foreground">
+                      {extractMarkdownSection(firstBatchReview, platform)}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : scheduleLoading ? (
           <div className="flex items-center gap-2 py-8 text-muted-foreground">
             <Loader2 className="h-5 w-5 animate-spin" />
             Loading schedule…
