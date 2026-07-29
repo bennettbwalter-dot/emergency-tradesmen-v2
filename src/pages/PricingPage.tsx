@@ -98,9 +98,12 @@ export default function PricingPage() {
         : {
               monthly: (isDev ? import.meta.env.VITE_STRIPE_UK_MONTHLY_TEST : null) || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
               yearly: (isDev ? import.meta.env.VITE_STRIPE_UK_YEARLY_TEST : null) || 'https://buy.stripe.com/5kQ28rdI3dR54ey219cQU06',
-              // Live UK Agency Payment Link comes from env so it can go live without a deploy;
-              // until it's set, the CTA routes to the contact form (prefilled via ?subject=).
-              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || import.meta.env.VITE_STRIPE_UK_AGENCY_LINK || null,
+              // Hardcoded to match the other five tiers. It previously read
+              // VITE_STRIPE_UK_AGENCY_LINK, which was never set in any .env or in
+              // Cloudflare Pages, so this resolved to null and the CTA silently fell
+              // back to the contact form - the Payment Link existed in Stripe the
+              // whole time. The env indirection is deliberately not reintroduced.
+              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
           };
 
 
