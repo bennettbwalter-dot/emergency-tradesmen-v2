@@ -141,8 +141,12 @@ export function BusinessEnquiryForm({
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok && response.status !== 404) {
-          throw new Error("Submission failed");
+        // A 404 was previously treated as success. The submit-business-enquiry
+        // function did not exist, so every enquiry 404'd, showed the customer a
+        // confirmation screen, and was discarded - which is why no listing was
+        // ever claimed. A missing endpoint is a failure, not a success.
+        if (!response.ok) {
+          throw new Error(`Submission failed (${response.status})`);
         }
       }
 
