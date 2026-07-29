@@ -3,7 +3,7 @@ import { geocodeLocation, findNearestSupportedCity, POSTCODE_REGEX } from "@/lib
 import { cityPostcodes } from "@/lib/cityPostcodes";
 import { isUSDomain } from "@/lib/siteConfig";
 
-// FUZZY TRADE MATCHING  -  catches common STT mishearings from Whisper-tiny on mobile
+// FUZZY TRADE MATCHING — catches common STT mishearings from Whisper-tiny on mobile
 const FUZZY_TRADE_MATCHES: Record<string, string> = {
     'election': 'electrician', 'electrition': 'electrician', 'electrishin': 'electrician',
     'electron': 'electrician', 'electriction': 'electrician', 'electrian': 'electrician',
@@ -89,7 +89,7 @@ const SAFETY_TIPS: Record<string, { uk: string; us: string }> = {
 };
 
 export interface ChatState {
-    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'CONFIRM_LOCATION' | 'ROUTING';
+    step: 'INITIAL' | 'DANGER_CHECK' | 'LOCATION_CHECK' | 'TRADE_CHECK' | 'CONFIRM_LOCATION' | 'ROUTING' | 'GUIDANCE' | 'RESOLVED';
     detectedTrade: string | null;
     detectedCity: string | null;
     suggestedCity: string | null;
@@ -235,7 +235,32 @@ const getReadableTradeName = (slug: string, countryCode: string) => {
     return countryCode === 'US' ? (trade as any).usName || trade.name : trade.name;
 };
 
-export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB'): Promise<{ newState: ChatState, response: ChatMessage }> {
+// Optional signed-in profile, used to personalise the conversation.
+export interface ChatProfile {
+    firstName?: string;
+    postcode?: string;
+    propertyType?: string;
+}
+const namePrefix = (p?: ChatProfile) => (p?.firstName ? `${p.firstName}, ` : '');
+const nameSuffix = (p?: ChatProfile) => (p?.firstName ? `, ${p.firstName}` : '');
+
+// Signals that a power loss is area-wide (utility / DNO), not a home electrics
+// fault — so we route to the network operator, not an electrician.
+const POWER_OUTAGE_AREA = [
+    'whole street', 'whole road', 'neighbour', 'neighbor', 'next door', 'power cut',
+    'powercut', 'power outage', 'outage', 'no power anywhere', 'street is dark',
+    'everyone', 'whole area', 'power line', 'cable down', 'pole down', 'lines down',
+    'whole building', 'whole block', 'whole estate', 'blackout', 'grid'
+];
+
+// Help-first prompt appended after we've given safe guidance. One clear choice:
+// keep helping, get a pro, or close out — we never rush the user to a tradesman.
+function helpFirstOffer(p: ChatProfile | undefined, tradeSlug: string | null, countryCode: string): string {
+    const trade = tradeSlug ? getReadableTradeName(tradeSlug, countryCode).toLowerCase() : 'professional';
+    return `\n\n— — —\nI'm here to guide you through this safely — no rush${nameSuffix(p)}.\n\n- Reply **“more help”** for the next safe step\n- Reply **“find a pro”** and I'll get you a local ${trade}\n- If it's already under control, just say **“sorted”** 🙂`;
+}
+
+export async function processUserMessage(message: string, currentState: ChatState, countryCode: string = 'GB', profile?: ChatProfile): Promise<{ newState: ChatState, response: ChatMessage }> {
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
     const lowerMsg = message.toLowerCase();
@@ -250,6 +275,57 @@ export async function processUserMessage(message: string, currentState: ChatStat
     const sortedCities = [...activeCities].sort((a, b) => b.length - a.length);
 
     const isAwaitingResponse = currentState.step === 'LOCATION_CHECK' || currentState.step === 'CONFIRM_LOCATION' || currentState.step === 'TRADE_CHECK';
+
+    // ── HELP-FIRST FOLLOW-UP ──────────────────────────────────────────────
+    // We sit in 'GUIDANCE' after giving safe advice. Read the user's reply:
+    //   • sorted/thanks  → close out warmly + gently invite a review
+    //   • wants a pro    → get location then route to a local tradesperson
+    //   • anything else  → keep helping (fall through to RAG/brain below)
+    if (currentState.step === 'GUIDANCE') {
+        const saysFixed = /\b(sorted|fixed|stopped|under control|that worked|it worked|all good|no longer|resolved|managed|all sorted|ok now|okay now|better now|safe now)\b/i.test(lowerMsg)
+            || /\b(thanks|thank you|cheers|brilliant|perfect|amazing|great help)\b/i.test(lowerMsg);
+        const wantsPro = /\b(find|pro|professional|tradesman|tradesperson|someone|engineer|expert|book|quote|send|call out|come out|need (a|help)|get me|yes please|^yes\b|please do)\b/i.test(lowerMsg);
+
+        if (saysFixed && !wantsPro) {
+            newState.step = 'RESOLVED';
+            const trade = newState.detectedTrade ? getReadableTradeName(newState.detectedTrade, countryCode).toLowerCase() : 'professional';
+            return { newState, response: { id: Date.now().toString(), role: 'assistant', content:
+`### 🙌 So glad that helped${nameSuffix(profile)}!\n\nThe main thing is you're safe and it's under control.\n\nIf you have a moment, I'd really appreciate a quick **review or comment** about the help you got today — it genuinely helps other people facing the same emergency. 💬\n\nAnd if you'd like a qualified **${trade}** to double-check everything is fully sound, just say **“find a pro”** and I'll find a trusted local one for you.` } };
+        }
+
+        if (wantsPro && newState.detectedTrade) {
+            if (newState.detectedCity) {
+                newState.step = 'ROUTING';
+                newState.locationConfirmed = true;
+                const city = newState.detectedCity;
+                const trade = getReadableTradeName(newState.detectedTrade, countryCode);
+                return { newState, response: { id: Date.now().toString(), role: 'assistant',
+                    content: `${namePrefix(profile)}I'm taking you to our local **Emergency ${trade}** team in **${city}** now.`,
+                    action: 'navigate', target: `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}` } };
+            }
+            newState.step = 'LOCATION_CHECK';
+            const term = isUSDomain ? 'city or zip code' : 'town or postcode';
+            const trade = getReadableTradeName(newState.detectedTrade, countryCode).toLowerCase();
+            return { newState, response: { id: Date.now().toString(), role: 'assistant',
+                content: `${namePrefix(profile)}of course — what ${term} are you in? I'll find your nearest **${trade}** straight away.` } };
+        }
+        // Otherwise: the user has more to say. Fall through so the RAG/brain layers
+        // give the next piece of safe guidance and we stay in help mode.
+    }
+
+    // ── DNO / UTILITY ROUTING ─────────────────────────────────────────────
+    // Area-wide power loss (street, neighbours, downed lines) is the network
+    // operator's job — NOT an electrician. Route correctly and safely.
+    if (!isAwaitingResponse && currentState.step !== 'GUIDANCE'
+        && /\b(power|electric|electricity|lights?|outage|blackout)\b/i.test(lowerMsg)
+        && POWER_OUTAGE_AREA.some(k => lowerMsg.includes(k))) {
+        newState.detectedTrade = 'electrician';
+        newState.step = 'GUIDANCE';
+        const content = isUSDomain
+            ? `### ⚡ This sounds like a utility power outage${nameSuffix(profile)}\n\nIf the power is out for **more than your home** — your street, your neighbours, or you can see downed lines — this is your **electricity utility**, not an electrician.\n\n**Do this now:**\n- ⚠️ Stay well clear of any **downed power lines** — assume they are live and call **911**.\n- Report the outage to your local **electric utility** (number is on your bill or their app/website).\n- Switch off sensitive electronics to protect them from a surge when power returns.\n- Keep a fridge/freezer closed to hold the cold.\n\nIf only **your** home has lost power and the neighbours are fine, reply **“just my house”** and I'll help you check your panel safely.`
+            : `### ⚡ This sounds like a network power cut${nameSuffix(profile)}\n\nIf the power is out for **more than your home** — your street, your neighbours, or you can see damaged lines — this is the **Distribution Network Operator (DNO)**, not an electrician.\n\n**Do this now:**\n- ☎️ Call **105** (free) — it connects you to your local DNO to report and check the power cut.\n- ⚠️ **Never** approach or touch fallen power lines — call **105**, or **999** if it's dangerous.\n- Check live updates at **powercut105.com** for your area.\n- Switch off sensitive electronics to protect them from a surge when power returns.\n\nIf only **your** home has lost power and the neighbours are fine, reply **“just my house”** and I'll help you check your consumer unit safely.`;
+        return { newState, response: { id: Date.now().toString(), role: 'assistant', content } };
+    }
 
     // Upfront Keyword-based Trade Detection to restrict RAG Vector search context
     let detectedTrade = currentState.detectedTrade;
@@ -319,6 +395,16 @@ export async function processUserMessage(message: string, currentState: ChatStat
                     else {
                         const fuzzyTrade = fuzzyTradeDetect(message);
                         if (fuzzyTrade) detectedTrade = fuzzyTrade;
+                        else {
+                            // Graphify domain-graph fallback. Additive only: this runs
+                            // exclusively when every other detector missed, so it can
+                            // widen coverage but never override an existing match.
+                            try {
+                                const { graphDetectTrade } = await import("@/lib/graph-knowledge");
+                                const g = graphDetectTrade(message);
+                                if (g) detectedTrade = g;
+                            } catch { /* graph layer is optional */ }
+                        }
                     }
                 }
             }
@@ -387,13 +473,19 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 response += `\n\n*Source: [${matchedRule.authority_name}](${matchedRule.authority_url})*`;
             }
 
+            // Graphify: connected-trade grounding so answers feel smarter and more
+            // joined-up (e.g. a burst pipe may also need water restoration). Guarded
+            // so a missing/empty graph simply adds nothing.
+            try {
+                const { buildRelatedHelpNote } = await import("@/lib/graph-knowledge");
+                response += buildRelatedHelpNote(matchedRule.trade, countryCode);
+            } catch { /* graph layer is optional */ }
+
             newState.detectedTrade = matchedRule.trade;
-            
-            if (!newState.detectedCity) {
-                newState.step = 'LOCATION_CHECK';
-                const locationPrompt = isUSDomain ? "Share your city or zip code." : "Share your city or postcode.";
-                response += `\n\n${locationPrompt}`;
-            }
+
+            // Help-first: guide them through it; offer a pro without rushing.
+            newState.step = 'GUIDANCE';
+            response += helpFirstOffer(profile, matchedRule.trade, countryCode);
 
             return {
                 newState,
@@ -406,7 +498,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
         }
     }
 
-    // 2b. EMERGENCY BRAIN  -  offline knowledge base response
+    // 2b. EMERGENCY BRAIN — offline knowledge base response
     // Fires when: not in a waiting state AND there are trade-related keywords.
     // Provides rich expert advice (safety, diagnostics, faults, standards) while
     // still advancing through the location state machine.
@@ -426,15 +518,14 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 }
 
                 let content = brainResponse.message;
-
-                // Ask for location if we don't have it yet
-                if (!newState.detectedCity) {
-                    newState.step = 'LOCATION_CHECK';
-                    const locationPrompt = isUSDomain
-                        ? '\n\nShare your city or zip code so I can find an emergency professional.'
-                        : '\n\nShare your town, city, or postcode so I can connect you with an emergency tradesperson.';
-                    content += locationPrompt;
+                if (profile?.firstName && !currentState.detectedTrade) {
+                    content = `Okay ${profile.firstName} — let's work through this together and keep you safe.\n\n` + content;
                 }
+
+                // Help-first: we've given safe guidance. Offer the next step or a
+                // pro — never rush them straight to a tradesman.
+                newState.step = 'GUIDANCE';
+                content += helpFirstOffer(profile, newState.detectedTrade, countryCode);
 
                 return {
                     newState,
@@ -489,7 +580,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
                 response: {
                     id: Date.now().toString(),
                     role: 'assistant',
-                    content: "### Emergency Help\n\nI can connect you with an **emergency contractor** for:\n\n- Plumbing & Heating\n- Electrical\n- Gas Engineering\n- Locksmith\n- Drains\n- Glazing\n- Roofing & Building\n- Vehicle Breakdown\n- Air Conditioning\n\nDescribe the problem and I will find the right professional."
+                    content: "### 💬 How I Can Help\n\nI can connect you with an **emergency contractor** immediately. I know about:\n\n- 🔧 Plumbing & Heating\n- ⚡ Electrical\n- 🔥 Gas Engineering\n- 🔒 Locksmith\n- 🚿 Drains\n- 🪟 Glazing\n- 🏠 Roofing & Building\n- 🚗 Vehicle Breakdown\n- ❄️ Air Conditioning\n\nJust tell me what's wrong and I'll find the right professional for you."
                 }
             };
         }
@@ -553,7 +644,7 @@ export async function processUserMessage(message: string, currentState: ChatStat
                             newState.step = 'TRADE_CHECK';
                             return {
                                 newState,
-                                response: { id: Date.now().toString(), role: 'assistant', content: "Choose the closest match: water damage needing drying/restoration, or a plumbing problem like a leak." }
+                                response: { id: Date.now().toString(), role: 'assistant', content: "Is the main issue water damage that needs drying and restoration, or is it a plumbing problem like a leak that needs fixing?" }
                             };
                         }
                     } else if (detectedTrades.includes('breakdown') && (lowerMsg.includes('car') || lowerMsg.includes('vehicle') || lowerMsg.includes('motorway') || lowerMsg.includes('roadside') || lowerMsg.includes('driving'))) {
@@ -721,23 +812,16 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.detectedCity = null;
             newState.suggestedCity = null;
             newState.step = 'LOCATION_CHECK';
-            return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Share your town or city and I'll find your local professional." } };
+            return { newState, response: { id: Date.now().toString(), role: 'assistant', content: "Which town or city are you in? I'll find your local professional." } };
         }
     }
 
     if (newState.detectedTrade && newState.detectedCity && (newState.locationConfirmed || newState.step === 'ROUTING')) {
         const city = newState.detectedCity;
         const tradeName = getReadableTradeName(newState.detectedTrade, countryCode);
-        // UK stays in the chat and waits for the user to tap "Find nearby tradesmen". The
-        // EmergencyChatInterface gates the navigation behind a button instead of auto-redirecting,
-        // so the copy must not claim we're moving them now. US keeps the instant-redirect wording.
-        responseText = countryCode === 'US'
-            ? (cityFallbackUsed
-                ? `Our **${tradeName}** team in **${city}** covers your area. Taking you there now.`
-                : `Taking you to your local **Emergency ${tradeName}** in **${city}** now.`)
-            : (cityFallbackUsed
-                ? `Our **${tradeName}** team covers **${city}**. Tap **Find nearby tradesmen** below to see who's available.`
-                : `I found local **emergency ${tradeName.toLowerCase()}s** in **${city}**. Tap **Find nearby tradesmen** below to view them.`);
+        responseText = cityFallbackUsed
+            ? `Our **${tradeName}** team in **${city}** covers your area. Taking you there now.`
+            : `Taking you to your local **Emergency ${tradeName}** in **${city}** now.`;
         action = 'navigate';
         // US Redirection Fix: Never use /us prefix on US domain. Root level only.
         const countryPrefix = (countryCode === 'US' || isUSDomain) ? '' : ''; 
@@ -754,26 +838,23 @@ export async function processUserMessage(message: string, currentState: ChatStat
             newState.step = 'ROUTING';
             target = `/emergency-${newState.detectedTrade}/${encodeURIComponent(city.toLowerCase())}`;
             action = 'navigate';
-            const tradeNameConfirmed = getReadableTradeName(newState.detectedTrade, countryCode);
-            responseText = countryCode === 'US'
-                ? `${tip ? tip + ' ' : ''}Confirmed. I'm directing you to our emergency ${tradeNameConfirmed} team in ${city} for immediate assistance.`
-                : `${tip ? tip + ' ' : ''}I found emergency **${tradeNameConfirmed.toLowerCase()}** help in **${city}**. Tap **Find nearby tradesmen** below to view them.`;
+            responseText = `${tip ? tip + ' ' : ''}Confirmed. I'm directing you to our emergency ${getReadableTradeName(newState.detectedTrade, countryCode)} team in ${city} for immediate assistance.`;
         } else {
             newState.suggestedCity = city;
             newState.detectedCity = null;
             newState.step = 'CONFIRM_LOCATION';
             const tradeName2 = getReadableTradeName(newState.detectedTrade, countryCode);
-            responseText = `${!currentState.detectedTrade ? `**${tradeName2}** issue detected. ` : ""}${tip ? `${tip} ` : ""}I found **${city}** as your area. Confirm if that is right.`;
+            responseText = `${!currentState.detectedTrade ? `**${tradeName2}** issue detected. ` : ""}${tip ? `${tip} ` : ""}We think you're in **${city}** — is that right?`;
         }
     } else if (newState.detectedTrade && !newState.detectedCity) {
         const tradeName3 = getReadableTradeName(newState.detectedTrade, countryCode);
-        const locationTerm = isUSDomain ? 'zip code' : 'postcode';
-        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue detected. ` : ""}${tip ? `${tip} ` : ""}Share your town or ${locationTerm} and I'll find your nearest **${tradeName3.toLowerCase()}**.`;
-        newState.step = 'LOCATION_CHECK';
+        // Help-first: lead with safe guidance, then offer a pro (no rush).
+        responseText = `${!currentState.detectedTrade ? `**${tradeName3}** issue${nameSuffix(profile)} — I can help you through this. ` : ""}${tip ? `${tip}` : `Tell me a little more about what's happening and I'll guide you to the safest next step.`}${helpFirstOffer(profile, newState.detectedTrade, countryCode)}`;
+        newState.step = 'GUIDANCE';
     } else {
         responseText = /trade|service|list|cover/i.test(lowerMsg)
-            ? "### Emergency Contractors\n\nWe provide professional help for these trades:\n\n- Plumbing & Heating\n- Electrical\n- Gas Engineering\n- Locksmith\n- Drains\n- Glazing\n- Roofing\n- Building & Structural\n- Air Conditioning / HVAC\n- Vehicle Breakdown\n\nTell me which trade you need."
-            : "### More Details Needed\n\nDescribe the issue so I can give the right safety advice.\n\nFor example:\n- *'My boiler is leaking'*\n- *'I've been locked out'*\n- *'There's water coming through the ceiling'*\n- *'My power has gone out'*";
+            ? "### 🛠️ Our Emergency Contractors\n\nWe provide professional help for the following trades:\n\n- Plumbing & Heating\n- Electrical\n- Gas Engineering\n- Locksmith\n- Drains\n- Glazing\n- Roofing\n- Building & Structural\n- Air Conditioning / HVAC\n- Vehicle Breakdown\n\nWhich of these do you need a contractor for?"
+            : "### 🤔 Need More Information\n\nI didn't quite catch that. To give you the right safety advice, could you describe your issue?\n\nFor example:\n- *'My boiler is leaking'*\n- *'I've been locked out'*\n- *'There's water coming through the ceiling'*\n- *'My power has gone out'*";
         newState.step = 'TRADE_CHECK';
     }
 

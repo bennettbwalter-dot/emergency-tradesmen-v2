@@ -47,6 +47,14 @@ serve(async (req) => {
         const campaignId = logRow?.campaign_id;
         const email = (logRow?.email || to || '').toLowerCase();
 
+        // Best-effort extraction of a human-readable bounce reason across Resend payload shapes.
+        const bounceReason = (() => {
+            const b = data.bounce || {};
+            const parts = [b.type || b.subType || data.bounce_type, b.message || data.reason || data.diagnostic_code].filter(Boolean);
+            const s = parts.join(' — ').trim();
+            return s ? s.slice(0, 500) : null;
+        })();
+
         const bumpCampaign = async (col: string) => {
             if (!campaignId) return;
             const { data: c } = await supabase.from('email_campaigns').select(col).eq('id', campaignId).maybeSingle();
@@ -61,7 +69,7 @@ serve(async (req) => {
                 if (logRow && !logRow.clicked_at) { await supabase.from('email_send_log').update({ clicked_at: now }).eq('id', logRow.id); await bumpCampaign('total_clicked'); }
                 break;
             case 'email.bounced':
-                if (logRow) await supabase.from('email_send_log').update({ status: 'bounced', bounced_at: now }).eq('id', logRow.id);
+                if (logRow) await supabase.from('email_send_log').update({ status: 'bounced', bounced_at: now, error: bounceReason || logRow.error || 'bounced' }).eq('id', logRow.id);
                 if (email) {
                     await supabase.from('email_suppression').upsert({ email, reason: 'bounce', source_campaign_id: campaignId ?? null }, { onConflict: 'email' });
                     await supabase.from('email_contacts').update({ bounced: true, status: 'bounced', email_valid: false, updated_at: now }).ilike('email', email);

@@ -19,8 +19,8 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
-  EmailSettings, EmailCampaign, OrchestratorState, US_TRADES, PERSONALIZATION_FIELDS,
-  DEFAULT_SUBJECT, DEFAULT_TEMPLATE, renderTemplate, parseContactsCsv, isValidEmail, ORCH_STATE_META,
+  EmailSettings, EmailCampaign, OrchestratorState, FollowUp, US_TRADES, PERSONALIZATION_FIELDS,
+  DEFAULT_SUBJECT, DEFAULT_TEMPLATE, renderTemplate, parseContactsCsv, isValidEmail, ORCH_STATE_META, contactStage,
 } from '@/lib/emailControl';
 
 const SAMPLE_CONTACT = {
@@ -31,8 +31,8 @@ const SAMPLE_CONTACT = {
 
 function complianceBlockers(s?: EmailSettings | null, c?: Partial<EmailCampaign> | null, sendable?: number): string[] {
   const b: string[] = [];
-  if (!s?.from_email) b.push('No sender (From) email configured  -  set it in Resend Settings.');
-  if (!s?.reply_to) b.push('No reply-to email configured  -  set it in Resend Settings.');
+  if (!s?.from_email) b.push('No sender (From) email configured — set it in Resend Settings.');
+  if (!s?.reply_to) b.push('No reply-to email configured — set it in Resend Settings.');
   if (c && !c.subject?.trim()) b.push('Campaign is missing a subject line.');
   if (!(c?.opt_out_text || s?.opt_out_text)) b.push('No opt-out / unsubscribe text configured.');
   if (!(c?.business_address || s?.business_address)) b.push('No business address configured (required by CAN-SPAM).');
@@ -88,16 +88,21 @@ export default function EmailOutreachDashboard() {
         const { count } = await build(supabase.from('email_contacts').select('id', { count: 'exact', head: true }));
         return count || 0;
       };
-      const [total, valid, sendable, replied, bounced, unsub] = await Promise.all([
+      const nowIso = new Date().toISOString();
+      const [total, valid, sendable, dueFollow, inSequence, replied, bounced, unsub, dnc, signedUp] = await Promise.all([
         head((q) => q),
         head((q) => q.eq('email_valid', true)),
         head((q) => q.eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false).in('status', ['new', 'queued'])),
+        head((q) => q.eq('status', 'contacted').eq('replied', false).eq('bounced', false).eq('unsubscribed', false).not('next_follow_up_at', 'is', null).lte('next_follow_up_at', nowIso)),
+        head((q) => q.eq('status', 'contacted').eq('replied', false).eq('bounced', false).eq('unsubscribed', false).not('next_follow_up_at', 'is', null)),
         head((q) => q.eq('replied', true)),
         head((q) => q.eq('bounced', true)),
         head((q) => q.eq('unsubscribed', true)),
+        head((q) => q.eq('status', 'do_not_contact')),
+        head((q) => q.eq('status', 'converted')),
       ]);
       const { count: suppressed } = await supabase.from('email_suppression').select('email', { count: 'exact', head: true });
-      return { total, valid, invalid: total - valid, sendable, replied, bounced, unsub, suppressed: suppressed || 0 };
+      return { total, valid, invalid: total - valid, sendable, dueFollow, inSequence, replied, bounced, unsub, dnc, signedUp, suppressed: suppressed || 0 };
     },
   });
 
@@ -161,10 +166,10 @@ export default function EmailOutreachDashboard() {
     onSuccess: (data: any) => {
       invalidateAll();
       if (data?.state === 'setup_required') toast.warning(`Setup required: ${data?.problems?.join(' ') || ''}`);
-      else if (data?.dryRun) toast.info('Dry run complete  -  no real emails were sent (domain not verified).');
+      else if (data?.dryRun) toast.info('Dry run complete — no real emails were sent (domain not verified).');
       else {
         const sent = (data?.processed || []).reduce((a: number, r: any) => a + (r.sent || 0), 0);
-        toast.success(`Orchestrator cycle done  -  ${sent} sent.`);
+        toast.success(`Orchestrator cycle done — ${sent} sent.`);
       }
     },
     onError: (e: any) => toast.error(`Orchestrator error: ${e.message}`),
@@ -177,7 +182,7 @@ export default function EmailOutreachDashboard() {
       if (data?.error) throw new Error(data.error);
       return data;
     },
-    onSuccess: () => toast.success('Test email sent  -  check the inbox.'),
+    onSuccess: () => toast.success('Test email sent — check the inbox.'),
     onError: (e: any) => toast.error(`Test failed: ${e.message}`),
   });
 
@@ -185,8 +190,10 @@ export default function EmailOutreachDashboard() {
   const launchCampaign = async (camp: EmailCampaign, amount: number, live: boolean) => {
     const blockers = complianceBlockers(settings, camp);
     if (blockers.length) { toast.error(blockers[0]); setActiveTab('campaigns'); return; }
-    if (live && !settings?.domain_verified) {
-      toast.error('Sending domain not verified  -  live sending is blocked. Run a Dry Run or verify a domain in Deliverability.');
+    // UK (Resend) live-sending is blocked in-browser until the domain is verified.
+    // US (Brevo) gating happens server-side: the orchestrator auto-dry-runs without BREVO_API_KEY.
+    if (live && camp.target_country !== 'US' && !settings?.domain_verified) {
+      toast.error('Sending domain not verified — live sending is blocked. Run a Dry Run or verify a domain in Deliverability.');
       return;
     }
     await supabase.from('email_campaigns').update({ status: 'active', daily_limit: amount, next_run_at: null, scheduled_at: null }).eq('id', camp.id);
@@ -205,7 +212,7 @@ export default function EmailOutreachDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Email Control Centre</h1>
-          <p className="text-muted-foreground mt-1">{settings?.from_name || 'Emergency Tradesmen'}{settings?.sending_domain ? ` · ${settings.sending_domain}` : ''}  -  safe, throttled outreach through Resend.</p>
+          <p className="text-muted-foreground mt-1">{settings?.from_name || 'Emergency Tradesmen'}{settings?.sending_domain ? ` · ${settings.sending_domain}` : ''} — safe, throttled outreach through Resend.</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={() => { invalidateAll(); toast.success('Refreshed'); }}>
@@ -236,12 +243,15 @@ export default function EmailOutreachDashboard() {
           )}
           <div className="flex items-center gap-2 text-xs">
             {!domainVerified && (
-              <Badge variant="outline" className="border-amber-300 text-amber-700"><AlertTriangle className="w-3 h-3 mr-1" /> Test mode  -  domain not verified</Badge>
+              <Badge variant="outline" className="border-amber-300 text-amber-700"><AlertTriangle className="w-3 h-3 mr-1" /> Test mode — domain not verified</Badge>
             )}
             {domainVerified && <Badge className="bg-emerald-600"><ShieldCheck className="w-3 h-3 mr-1" /> Live sending enabled</Badge>}
           </div>
         </CardContent>
       </Card>
+
+      {/* Hands-free automation (pg_cron) */}
+      <AutomationCard />
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="flex flex-wrap h-auto">
@@ -303,6 +313,212 @@ export default function EmailOutreachDashboard() {
   );
 }
 
+/* ============================================================ AUTOMATION */
+function fmtAgo(iso?: string | null): string {
+  if (!iso) return 'never';
+  const s = Math.round((Date.now() - new Date(iso).getTime()) / 1000);
+  if (s < 0) return 'just now';
+  if (s < 60) return `${s}s ago`;
+  if (s < 3600) return `${Math.round(s / 60)}m ago`;
+  if (s < 86400) return `${Math.round(s / 3600)}h ago`;
+  return `${Math.round(s / 86400)}d ago`;
+}
+
+function AutomationCard() {
+  const qc = useQueryClient();
+  const { data: auto, error, isLoading } = useQuery<any>({
+    queryKey: ['ecc-automation'],
+    refetchInterval: 15000,
+    retry: false,
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc('email_automation_status');
+      if (error) throw error;
+      return data;
+    },
+  });
+  const setEnabled = useMutation({
+    mutationFn: async (enabled: boolean) => {
+      const { error } = await supabase.rpc('email_automation_set_enabled', { p_enabled: enabled });
+      if (error) throw error;
+    },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['ecc-automation'] }); toast.success('Automation updated'); },
+    onError: (e: any) => toast.error(`Automation: ${e.message}`),
+  });
+  const runNow = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase.rpc('email_automation_run_now');
+      if (error) throw error;
+      // pg_net performs the HTTP call asynchronously, so wait and then read the real outcome.
+      await new Promise((r) => setTimeout(r, 4500));
+      const { data } = await supabase.rpc('email_automation_status');
+      return data as any;
+    },
+    onSuccess: (data: any) => {
+      qc.invalidateQueries({ queryKey: ['ecc-automation'] });
+      qc.invalidateQueries({ queryKey: ['ecc-orch'] });
+      const h = data?.last_http;
+      if (h?.status === 200) toast.success('Run complete — orchestrator responded 200 OK.');
+      else if (h?.status) toast.error(`Run failed — HTTP ${h.status}. ${h.body || ''}`.trim());
+      else toast.message('Triggered — result not captured yet. Click Refresh in a moment.');
+    },
+    onError: (e: any) => toast.error(`Run failed: ${e.message}`),
+  });
+
+  const msg = String((error as any)?.message || '');
+  const backendMissing = /does not exist|could not find|schema cache|email_automation_status/i.test(msg);
+  const adminOnly = /admin only|permission denied|jwt|not authorized/i.test(msg);
+
+  return (
+    <Card className="border-blue-200">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2 text-base"><Clock className="w-4 h-4 text-blue-600" /> Hands-free Automation (UK)</CardTitle>
+          {auto && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">{auto.enabled ? 'On' : 'Off'}</span>
+              <Switch checked={!!auto.enabled} disabled={setEnabled.isPending || !(auto.vault_secret_valid ?? auto.vault_secret_present)}
+                onCheckedChange={(v) => setEnabled.mutate(v)} />
+            </div>
+          )}
+        </div>
+        <CardDescription>
+          pg_cron calls the orchestrator on a schedule (service-role auth) so sends keep flowing with nobody logged in.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm">
+        {isLoading && <div className="text-muted-foreground">Loading automation status…</div>}
+        {error && backendMissing && (
+          <div className="text-amber-700">Automation backend isn’t installed yet — run the setup SQL in Supabase, then Refresh.</div>
+        )}
+        {error && !backendMissing && adminOnly && (
+          <div className="text-amber-700">Sign in as the admin account to view and control automation.</div>
+        )}
+        {error && !backendMissing && !adminOnly && (
+          <div className="text-red-600">Couldn’t load automation status: {msg}</div>
+        )}
+        {auto && (
+          <div className="space-y-3">
+            {!auto.vault_secret_present && (
+              <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 p-2 text-amber-800 text-xs">
+                <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>Vault secret <code>email_orchestrator_service_key</code> not set — the toggle stays disabled until you add it (Supabase → Project Settings → Vault).</span>
+              </div>
+            )}
+            {auto.vault_secret_present && auto.vault_secret_valid === false && (
+              <div className="flex items-start gap-2 rounded-md bg-red-50 border border-red-200 p-2 text-red-800 text-xs">
+                <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>The stored key isn’t a valid <code>service_role</code> JWT (must start with <code>eyJ</code>) — it looks like the placeholder or a wrong key. Update it (see the SQL), then click Run now.</span>
+              </div>
+            )}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Status</div>
+                <div className="font-semibold flex items-center gap-1">
+                  {auto.enabled ? <><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Running</> : <><Pause className="w-4 h-4 text-amber-600" /> Paused</>}
+                </div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Schedule</div>
+                <div className="font-mono text-sm">{auto.schedule || '—'}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Last check</div>
+                <div className="flex items-center gap-1">{fmtAgo(auto.last_run?.start_time)}{auto.last_run?.status ? <Badge variant="outline" className="ml-1">{auto.last_run.status}</Badge> : null}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Active campaigns</div>
+                <div className="font-semibold">{auto.active_campaigns ?? 0}</div></div>
+            </div>
+            <div className="text-xs text-muted-foreground">
+              Engine: <span className="font-medium">{auto.orchestrator_state || 'idle'}</span>
+              {auto.orchestrator_message ? ` — ${auto.orchestrator_message}` : ''} · updated {fmtAgo(auto.orchestrator_updated_at)}
+            </div>
+            {auto.last_http && (
+              <div className="text-xs flex items-center gap-1 flex-wrap">
+                <span className="text-muted-foreground">Last automation call:</span>
+                <Badge variant="outline" className={auto.last_http.status === 200 ? 'border-emerald-300 text-emerald-700' : 'border-red-300 text-red-700'}>
+                  HTTP {auto.last_http.status}
+                </Badge>
+                {auto.last_http.status !== 200 && auto.last_http.body ? <span className="text-red-600">{auto.last_http.body}</span> : null}
+                <span className="text-muted-foreground">· {fmtAgo(auto.last_http.created)}</span>
+              </div>
+            )}
+            {auto.active_campaigns === 0 && auto.enabled && (
+              <div className="text-xs text-blue-700">Automation is on, but no campaign is <b>active</b> — nothing sends until you Resume a campaign in the Campaigns tab.</div>
+            )}
+            <div className="flex items-center gap-2 pt-1">
+              <Button size="sm" variant="outline" onClick={() => runNow.mutate()} disabled={runNow.isPending || !(auto.vault_secret_valid ?? auto.vault_secret_present)}>
+                <Play className="w-4 h-4 mr-1" /> {runNow.isPending ? 'Triggering…' : 'Run now'}
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => qc.invalidateQueries({ queryKey: ['ecc-automation'] })}>
+                <RefreshCw className="w-4 h-4 mr-1" /> Refresh
+              </Button>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ---------------------------------- US (Brevo) sending status */
+function BrevoStatusCard() {
+  const qc = useQueryClient();
+  const { data, isLoading, error } = useQuery<any>({
+    queryKey: ['ecc-brevo-status'],
+    refetchInterval: 60000,
+    retry: false,
+    queryFn: async () => {
+      const { data, error } = await supabase.functions.invoke('brevo-status', { body: {} });
+      if (error) throw error;
+      return data;
+    },
+  });
+  const configured = data?.configured;
+  const connected = data?.connected;
+
+  return (
+    <Card className="border-indigo-200">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2 text-base"><Send className="w-4 h-4 text-indigo-600" /> US Sending — Brevo</CardTitle>
+          <div className="flex items-center gap-2">
+            {data && (connected
+              ? <Badge className="bg-emerald-600"><CheckCircle2 className="w-3 h-3 mr-1" />Connected</Badge>
+              : <Badge variant="outline" className="border-red-300 text-red-700"><XCircle className="w-3 h-3 mr-1" />Not sending</Badge>)}
+            <Button size="sm" variant="ghost" onClick={() => qc.invalidateQueries({ queryKey: ['ecc-brevo-status'] })}><RefreshCw className="w-4 h-4" /></Button>
+          </div>
+        </div>
+        <CardDescription>US campaigns send via Brevo (separate from the UK Resend setup). Inbox / reply: emergencycontractor@outlook.com.</CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm">
+        {isLoading && <div className="text-muted-foreground">Checking Brevo…</div>}
+        {error && <div className="text-amber-700 text-xs">Sign in as the admin account to view Brevo status.</div>}
+        {data && !configured && (
+          <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 p-2 text-amber-800 text-xs">
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" /><span><code>BREVO_API_KEY</code> isn’t set on the server yet — US campaigns run as dry runs only.</span>
+          </div>
+        )}
+        {data && configured && !connected && (
+          <div className="flex items-start gap-2 rounded-md bg-red-50 border border-red-200 p-2 text-red-800 text-xs">
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+            <span>{data.ipBlocked
+              ? 'Brevo is blocking this server’s IP. In Brevo → Security → Authorized IPs, click “Deactivate for API keys”.'
+              : `Brevo error: ${data.error || 'not connected'}`}</span>
+          </div>
+        )}
+        {data && connected && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Account</div><div className="font-medium text-xs break-all">{data.accountEmail || '—'}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Daily limit</div><div className="font-semibold">{data.dailyLimit ?? '—'}<span className="text-xs text-muted-foreground">/day</span></div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">Sender</div>
+                <div className="font-semibold flex items-center gap-1">{data.senderVerified ? <><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Verified</> : <><XCircle className="w-4 h-4 text-red-600" /> Not verified</>}</div></div>
+              <div><div className="text-xs uppercase tracking-wider text-muted-foreground">US sent today</div><div className="font-semibold">{data.usSentToday ?? 0}</div></div>
+            </div>
+            {!data.senderVerified && (
+              <div className="text-xs text-amber-700">Add + verify <strong>{data.targetSender}</strong> in Brevo → Senders before live US sends.</div>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 /* ============================================================ OVERVIEW */
 function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
   const totals = useMemo(() => {
@@ -317,6 +533,7 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
   );
   return (
     <div className="space-y-6">
+      <BrevoStatusCard />
       {!settings?.domain_verified && (
         <Card className="border-amber-300 bg-amber-50/50">
           <CardContent className="py-4 flex items-start gap-3">
@@ -339,17 +556,32 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {stat('Active campaigns', active)}
-        {stat('Total contacts', contactStats?.total ?? ' - ')}
-        {stat('Sendable now', contactStats?.sendable ?? ' - ', 'valid · not opted-out · not emailed')}
-        {stat('Suppressed', contactStats?.suppressed ?? ' - ', 'unsub + bounce + complaints')}
+        {stat('Total contacts', contactStats?.total ?? '—')}
+        {stat('Sendable now', contactStats?.sendable ?? '—', 'valid · not opted-out · not emailed')}
+        {stat('Suppressed', contactStats?.suppressed ?? '—', 'unsub + bounce + complaints')}
       </div>
+      <Card>
+        <CardHeader className="pb-2"><CardTitle className="text-base">Contact lifecycle</CardTitle><CardDescription>Every contact sits in exactly one stage — nobody is emailed twice except an approved follow-up.</CardDescription></CardHeader>
+        <CardContent className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+          {[
+            ['Not contacted', contactStats?.sendable, 'text-slate-600'],
+            ['In follow-up seq.', contactStats?.inSequence, 'text-teal-600'],
+            ['Due for follow-up', contactStats?.dueFollow, 'text-blue-600'],
+            ['Replied', contactStats?.replied, 'text-blue-700'],
+            ['Do not contact', contactStats?.dnc, 'text-rose-700'],
+            ['Signed up', contactStats?.signedUp, 'text-emerald-700'],
+          ].map(([l, v, c]) => (
+            <div key={l as string} className="bg-muted/40 rounded p-3"><div className={`text-xl font-bold ${c}`}>{(v as number) ?? '—'}</div><div className="text-[11px] uppercase tracking-wide text-muted-foreground">{l}</div></div>
+          ))}
+        </CardContent>
+      </Card>
       <Card>
         <CardHeader><CardTitle className="text-base">Pipeline economics</CardTitle><CardDescription>Cost-per-lead and ROI populate as conversions are tracked. Resend's first 3,000 emails/month are free.</CardDescription></CardHeader>
         <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Reply rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.replied) / totals.sent).toFixed(1)}%` : ' - '}</div></div>
-          <div><div className="text-muted-foreground">Bounce rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.bounced) / totals.sent).toFixed(1)}%` : ' - '}</div></div>
+          <div><div className="text-muted-foreground">Reply rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.replied) / totals.sent).toFixed(1)}%` : '—'}</div></div>
+          <div><div className="text-muted-foreground">Bounce rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.bounced) / totals.sent).toFixed(1)}%` : '—'}</div></div>
           <div><div className="text-muted-foreground">Claims</div><div className="text-lg font-semibold">{totals.converted}</div></div>
-          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `£${(0).toFixed(2)}` : ' - '}</div></div>
+          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `£${(0).toFixed(2)}` : '—'}</div></div>
         </CardContent>
       </Card>
     </div>
@@ -360,6 +592,7 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
 function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaunch, onDryRun, onSaved }: any) {
   const [builderOpen, setBuilderOpen] = useState(false);
   const [editing, setEditing] = useState<EmailCampaign | null>(null);
+  const [pendingLaunch, setPendingLaunch] = useState<{ camp: EmailCampaign; amount: number } | null>(null);
 
   if (loading) return <div className="p-8 text-muted-foreground">Loading campaigns…</div>;
 
@@ -386,6 +619,7 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                       <span>Trade: <strong>{US_TRADES.find((t) => t.slug === camp.target_trade)?.label || camp.target_trade || 'All'}</strong></span>
                       <span>Region: <strong>{camp.target_country === 'US' ? 'USA' : 'UK'}{[camp.target_city, camp.target_state].filter(Boolean).length ? ' · ' + [camp.target_city, camp.target_state].filter(Boolean).join(', ') : ''}</strong></span>
+                      <span>Sends via: <strong>{camp.target_country === 'US' ? 'Brevo (US)' : 'Resend (UK)'}</strong>{camp.reply_to ? <> · reply <strong>{camp.reply_to}</strong></> : null}</span>
                       <span>Cooldown: <strong>{camp.cooldown_days}d</strong></span>
                       {camp.scheduled_at && <span>Scheduled: <strong>{new Date(camp.scheduled_at).toLocaleString()}</strong></span>}
                     </div>
@@ -415,9 +649,9 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
                 {/* Controls */}
                 <div className="flex flex-wrap items-center gap-2 pt-1">
                   <span className="text-xs text-muted-foreground mr-1">Send batch:</span>
-                  <Button size="sm" variant="outline" disabled={blockers.length > 0} onClick={() => onLaunch(camp, 50, settings?.domain_verified)}>50</Button>
-                  <Button size="sm" variant="outline" disabled={blockers.length > 0} onClick={() => onLaunch(camp, 100, settings?.domain_verified)}>100</Button>
-                  <CustomSendButton disabled={blockers.length > 0} onSend={(n) => onLaunch(camp, n, settings?.domain_verified)} />
+                  <Button size="sm" variant="outline" disabled={blockers.length > 0} onClick={() => setPendingLaunch({ camp, amount: 50 })}>50</Button>
+                  <Button size="sm" variant="outline" disabled={blockers.length > 0} onClick={() => setPendingLaunch({ camp, amount: 100 })}>100</Button>
+                  <CustomSendButton disabled={blockers.length > 0} onSend={(n) => setPendingLaunch({ camp, amount: n })} />
                   <Button size="sm" variant="ghost" disabled={blockers.length > 0} onClick={() => onDryRun(camp.id)} title="Simulate a chunk without sending"><Activity className="w-4 h-4 mr-1" />Dry run</Button>
                   <div className="flex-1" />
                   {camp.status === 'active' ? (
@@ -444,7 +678,130 @@ function CampaignsTab({ campaigns, loading, settings, onStatus, onDelete, onLaun
       </div>
 
       <CampaignBuilder open={builderOpen} onOpenChange={setBuilderOpen} campaign={editing} settings={settings} onSaved={() => { setBuilderOpen(false); onSaved(); }} />
+      <LaunchConfirmDialog
+        pending={pendingLaunch} settings={settings}
+        onCancel={() => setPendingLaunch(null)}
+        onConfirm={(live) => { if (pendingLaunch) onLaunch(pendingLaunch.camp, pendingLaunch.amount, live); setPendingLaunch(null); }}
+      />
     </div>
+  );
+}
+
+/* ---------------------------------- Pre-send safety confirmation */
+function LaunchConfirmDialog({ pending, settings, onCancel, onConfirm }: any) {
+  const camp: EmailCampaign | undefined = pending?.camp;
+  const amount: number = pending?.amount ?? 0;
+  const isUS = camp?.target_country === 'US';
+  // UK live-sending is gated in the browser by the verified Resend domain. US sends via Brevo,
+  // whose key is a server secret the browser can't see — so we attempt live and the orchestrator
+  // automatically falls back to a dry run if BREVO_API_KEY isn't set / the sender isn't verified.
+  const liveReady = isUS ? true : !!settings?.domain_verified;
+
+  const { data: counts, isFetching } = useQuery({
+    queryKey: ['ecc-presend', camp?.id, amount],
+    enabled: !!camp,
+    queryFn: async () => {
+      const nowIso = new Date().toISOString();
+      const cooldownCut = new Date(Date.now() - (camp!.cooldown_days ?? 14) * 86_400_000).toISOString();
+      const base = () => {
+        let q = supabase.from('email_contacts').select('id', { count: 'exact', head: true })
+          .eq('country_code', camp!.target_country || 'GB')
+          .eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false);
+        if (camp!.target_trade) q = q.eq('trade', camp!.target_trade);
+        if (camp!.target_city) q = q.ilike('city', `%${camp!.target_city}%`);
+        if (camp!.target_state) q = q.ilike('state', `%${camp!.target_state}%`);
+        return q;
+      };
+      const eligibleNewP = base().in('status', ['new', 'queued']).or(`last_emailed_at.is.null,last_emailed_at.lt.${cooldownCut}`);
+      const dueFollowP = base().eq('status', 'contacted').not('next_follow_up_at', 'is', null).lte('next_follow_up_at', nowIso);
+      const alreadyP = base().eq('status', 'contacted');
+      const day = new Date(); day.setUTCHours(0, 0, 0, 0);
+      const [{ count: eligibleNew }, { count: dueFollow }, { count: already }, { count: suppressed }, { count: sentToday }] = await Promise.all([
+        eligibleNewP, dueFollowP, alreadyP,
+        supabase.from('email_suppression').select('email', { count: 'exact', head: true }),
+        supabase.from('email_send_log').select('id', { count: 'exact', head: true }).eq('campaign_id', camp!.id).eq('status', 'sent').gte('created_at', day.toISOString()),
+      ]);
+      return { eligibleNew: eligibleNew || 0, dueFollow: dueFollow || 0, already: already || 0, suppressed: suppressed || 0, sentToday: sentToday || 0 };
+    },
+  });
+
+  const followCount = Array.isArray(camp?.followup_sequence) ? camp!.followup_sequence.length : 0;
+  const cap = camp?.daily_limit ?? settings?.daily_limit ?? 200;
+  const remainingCap = Math.max(0, cap - (counts?.sentToday || 0));
+  const eligibleTotal = (counts?.eligibleNew || 0) + (counts?.dueFollow || 0);
+  const willSend = Math.min(amount, eligibleTotal, remainingCap);
+
+  const row = (label: string, value: any, hint?: string, tone?: string) => (
+    <div className="flex items-center justify-between py-1.5 border-b last:border-0 text-sm">
+      <span className="text-muted-foreground">{label}{hint && <span className="ml-1 text-xs text-muted-foreground/70">{hint}</span>}</span>
+      <span className={`font-semibold ${tone || ''}`}>{value}</span>
+    </div>
+  );
+
+  return (
+    <Dialog open={!!pending} onOpenChange={(o) => { if (!o) onCancel(); }}>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-blue-600" />Confirm before sending</DialogTitle>
+          <DialogDescription>Review exactly what this batch will do. Nothing is sent until you confirm.</DialogDescription>
+        </DialogHeader>
+
+        {camp && (
+          <div className="space-y-3">
+            <div className="rounded-lg border p-3 bg-muted/30">
+              <div className="font-semibold">{camp.name}</div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                {camp.target_country === 'US' ? 'USA' : 'UK'} · {US_TRADES.find((t) => t.slug === camp.target_trade)?.label || camp.target_trade || 'All trades'}
+                {camp.target_city ? ` · ${camp.target_city}` : ''} · {followCount} follow-up{followCount === 1 ? '' : 's'} configured
+              </div>
+            </div>
+
+            {isFetching ? (
+              <div className="py-6 text-center text-sm text-muted-foreground">Counting contacts…</div>
+            ) : (
+              <div className="rounded-lg border px-3">
+                {row('Batch requested', amount)}
+                {row('Eligible first-time contacts', counts?.eligibleNew ?? 0, '· never emailed')}
+                {row('Follow-ups due now', counts?.dueFollow ?? 0, followCount ? '· no reply yet' : '· none configured', (counts?.dueFollow || 0) > 0 ? 'text-teal-600' : '')}
+                {row('Already contacted', counts?.already ?? 0, '· skipped (kept for follow-ups)')}
+                {row('Suppressed / bounced / unsub', counts?.suppressed ?? 0, '· never emailed', (counts?.suppressed || 0) > 0 ? 'text-red-600' : '')}
+                {row('Sent today (counts to cap)', `${counts?.sentToday ?? 0} / ${cap}`)}
+                <div className="flex items-center justify-between py-2.5 mt-1 border-t-2">
+                  <span className="font-medium">Will send this run</span>
+                  <span className="text-xl font-bold text-blue-600">{willSend}</span>
+                </div>
+              </div>
+            )}
+
+            {isUS ? (
+              <div className="rounded-lg border p-2.5 text-xs flex items-start gap-2 border-blue-200 bg-blue-50 text-blue-800">
+                <Send className="w-4 h-4 mt-0.5 shrink-0" />
+                <span><strong>US campaign — sends via Brevo</strong> (separate from the UK Resend setup). Reply/admin inbox: <strong>emergencycontractor@outlook.com</strong>. Requires <code>BREVO_API_KEY</code> set on the server and the sender verified in Brevo — until then this safely runs as a DRY RUN (no real emails). Duplicates and suppressed addresses are always skipped.</span>
+              </div>
+            ) : (
+              <div className={`rounded-lg border p-2.5 text-xs flex items-start gap-2 ${liveReady ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
+                {liveReady ? <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0" /> : <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />}
+                <span>{liveReady
+                  ? 'Domain verified — these will be sent as REAL emails via Resend, throttled in chunks. Duplicates and suppressed addresses are skipped automatically.'
+                  : 'Domain not verified — this runs as a non-destructive DRY RUN (no real emails). Verify a domain in Deliverability to send live.'}</span>
+              </div>
+            )}
+            {willSend === 0 && !isFetching && (
+              <p className="text-xs text-red-600">Nothing to send — no eligible contacts (or the daily cap is reached). Adjust targeting, import contacts, or wait for follow-ups to come due.</p>
+            )}
+          </div>
+        )}
+
+        <DialogFooter className="gap-2">
+          <Button variant="outline" onClick={onCancel}>Cancel</Button>
+          {isUS
+            ? <Button disabled={isFetching || willSend === 0} className="bg-blue-600 hover:bg-blue-700" onClick={() => onConfirm(true)}><Send className="w-4 h-4 mr-2" />Send {willSend} via Brevo</Button>
+            : liveReady
+              ? <Button disabled={isFetching || willSend === 0} className="bg-blue-600 hover:bg-blue-700" onClick={() => onConfirm(true)}><Send className="w-4 h-4 mr-2" />Send {willSend} live</Button>
+              : <Button disabled={isFetching} variant="secondary" onClick={() => onConfirm(false)}><Activity className="w-4 h-4 mr-2" />Run dry run</Button>}
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -470,7 +827,7 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
   const empty = {
     name: '', variant: 'soft_sell', target_country: 'GB', target_trade: '', target_city: '', target_state: '',
     subject: DEFAULT_SUBJECT, body_html: DEFAULT_TEMPLATE, batch_size: 50, daily_limit: 50, hourly_limit: 30,
-    cooldown_days: 14, scheduled_at: '', status: 'draft',
+    cooldown_days: 14, scheduled_at: '', status: 'draft', followup_sequence: [] as FollowUp[],
   };
   const [form, setForm] = useState<any>(empty);
   useEffect(() => { setForm(campaign ? { ...empty, ...campaign, scheduled_at: campaign.scheduled_at ? campaign.scheduled_at.slice(0, 16) : '' } : empty); /* eslint-disable-next-line */ }, [campaign, open]);
@@ -485,7 +842,16 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
       subject: form.subject, body_html: form.body_html, batch_size: Number(form.batch_size) || 50,
       daily_limit: Number(form.daily_limit) || null, hourly_limit: Number(form.hourly_limit) || null,
       cooldown_days: Number(form.cooldown_days) || 14,
-      from_name: settings?.from_name, reply_to: settings?.reply_to, opt_out_text: settings?.opt_out_text, business_address: settings?.business_address,
+      followup_sequence: (form.followup_sequence || [])
+        .filter((f: FollowUp) => (f.subject || '').trim() || (f.body_html || '').trim())
+        .map((f: FollowUp) => ({ delay_days: Math.max(1, Number(f.delay_days) || 3), subject: (f.subject || '').trim(), body_html: (f.body_html || '').trim() })),
+      // US campaigns carry the Outlook inbox + Emergency Contractors identity and send via Brevo
+      // (kept separate from UK Resend). UK campaigns inherit the global UK settings row unchanged.
+      from_name: form.target_country === 'US' ? 'Emergency Contractors' : settings?.from_name,
+      from_email: form.target_country === 'US' ? 'emergencycontractor@outlook.com' : null,
+      reply_to: form.target_country === 'US' ? 'emergencycontractor@outlook.com' : settings?.reply_to,
+      business_address: form.target_country === 'US' ? 'Emergency Contractors, USA' : settings?.business_address,
+      opt_out_text: settings?.opt_out_text,
       scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
       status: launchScheduled && form.scheduled_at ? 'scheduled' : (form.status === 'active' ? 'active' : form.status || 'draft'),
     };
@@ -506,7 +872,7 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-3">
-            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="UK Plumbers  -  Claim Listing" /></div>
+            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="UK Plumbers — Claim Listing" /></div>
             <div className="grid grid-cols-2 gap-2">
               <div><Label>Region</Label>
                 <Select value={form.target_country || 'GB'} onValueChange={(v) => set('target_country', v)}>
@@ -551,6 +917,8 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
           </div>
         </div>
 
+        <FollowUpEditor value={form.followup_sequence || []} onChange={(v) => set('followup_sequence', v)} />
+
         <DialogFooter className="gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
           {form.scheduled_at && <Button variant="secondary" onClick={() => save(true)}>Save &amp; schedule</Button>}
@@ -558,6 +926,55 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
         </DialogFooter>
       </DialogContent>
     </Dialog>
+  );
+}
+
+/* ---------------------------------- Follow-up sequence editor */
+function FollowUpEditor({ value, onChange }: { value: FollowUp[]; onChange: (v: FollowUp[]) => void }) {
+  const list = Array.isArray(value) ? value : [];
+  const update = (i: number, patch: Partial<FollowUp>) => onChange(list.map((f, idx) => (idx === i ? { ...f, ...patch } : f)));
+  const add = () => {
+    if (list.length >= 2) { toast.message('Two follow-ups is the safe maximum.', { description: 'More than 2 chasers to cold contacts hurts deliverability and reads as spam.' }); return; }
+    const n = list.length + 1;
+    onChange([...list, {
+      delay_days: n === 1 ? 4 : 7,
+      subject: n === 1 ? 'Quick follow-up — your {{city}} emergency listing' : 'Last note about your Emergency Tradesmen listing',
+      body_html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#0f172a">\n  <p>Hi {{first_name}},</p>\n  <p>Just circling back in case my last email got buried — <strong>{{business_name}}</strong> still has an unclaimed emergency listing on Emergency Tradesmen for {{city}}.</p>\n  <p style="text-align:center;margin:24px 0"><a href="{{listing_url}}" style="background:#b91c1c;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold">Claim your listing →</a></p>\n  <p>If now isn't the right time just reply and let me know — no problem at all.</p>\n</div>`,
+    }]);
+  };
+  const remove = (i: number) => onChange(list.filter((_, idx) => idx !== i));
+
+  return (
+    <Card className="border-dashed">
+      <CardHeader className="py-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-sm flex items-center gap-2"><Clock className="w-4 h-4" />Follow-up sequence</CardTitle>
+            <CardDescription className="text-xs">Chasers sent automatically only if there's no reply, bounce or unsubscribe. Timed from the previous email. Max 2.</CardDescription>
+          </div>
+          <Button type="button" size="sm" variant="outline" onClick={add} disabled={list.length >= 2}><Plus className="w-4 h-4 mr-1" />Add follow-up</Button>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {list.length === 0 && <p className="text-xs text-muted-foreground">No follow-ups — only the first email is sent. Add one or two gentle chasers to lift reply rates.</p>}
+        {list.map((f, i) => (
+          <div key={i} className="border rounded-lg p-3 space-y-2 bg-muted/20">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Follow-up {i + 1}</span>
+              <div className="flex items-center gap-2">
+                <Label className="text-xs whitespace-nowrap">Send after</Label>
+                <Input type="number" min={1} max={60} className="h-8 w-16" value={f.delay_days}
+                  onChange={(e) => update(i, { delay_days: Math.max(1, parseInt(e.target.value) || 1) })} />
+                <span className="text-xs text-muted-foreground">days of no reply</span>
+                <Button type="button" size="icon" variant="ghost" className="h-8 w-8" onClick={() => remove(i)}><Trash2 className="w-4 h-4 text-red-500" /></Button>
+              </div>
+            </div>
+            <Input placeholder="Follow-up subject line" value={f.subject || ''} onChange={(e) => update(i, { subject: e.target.value })} />
+            <Textarea rows={5} className="font-mono text-xs" placeholder="Follow-up body (HTML, supports the same {{tokens}})" value={f.body_html || ''} onChange={(e) => update(i, { body_html: e.target.value })} />
+          </div>
+        ))}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -578,9 +995,14 @@ function ContactsTab({ onChanged }: any) {
       if (filters.state) q = q.ilike('state', `%${filters.state}%`);
       if (filters.search) q = q.or(`business_name.ilike.%${filters.search}%,email.ilike.%${filters.search}%`);
       if (filters.quick === 'not_emailed') q = q.is('last_emailed_at', null);
+      if (filters.quick === 'contacted') q = q.eq('status', 'contacted');
+      if (filters.quick === 'due_followup') q = q.eq('status', 'contacted').eq('replied', false).eq('bounced', false).eq('unsubscribed', false).not('next_follow_up_at', 'is', null).lte('next_follow_up_at', new Date().toISOString());
+      if (filters.quick === 'in_sequence') q = q.eq('status', 'contacted').eq('replied', false).eq('bounced', false).eq('unsubscribed', false).not('next_follow_up_at', 'is', null);
       if (filters.quick === 'replied') q = q.eq('replied', true);
       if (filters.quick === 'bounced') q = q.eq('bounced', true);
       if (filters.quick === 'unsubscribed') q = q.eq('unsubscribed', true);
+      if (filters.quick === 'do_not_contact') q = q.eq('status', 'do_not_contact');
+      if (filters.quick === 'signed_up') q = q.eq('status', 'converted');
       if (filters.quick === 'invalid') q = q.eq('email_valid', false);
       q = q.range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
       const { data, count, error } = await q;
@@ -617,10 +1039,15 @@ function ContactsTab({ onChanged }: any) {
             <Select value={filters.quick} onValueChange={(v) => setF('quick', v)}><SelectTrigger className="h-9 w-40"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Everyone</SelectItem>
-                <SelectItem value="not_emailed">Not emailed yet</SelectItem>
+                <SelectItem value="not_emailed">Not contacted</SelectItem>
+                <SelectItem value="contacted">Contacted (any)</SelectItem>
+                <SelectItem value="in_sequence">In follow-up sequence</SelectItem>
+                <SelectItem value="due_followup">Due for follow-up</SelectItem>
                 <SelectItem value="replied">Replied</SelectItem>
                 <SelectItem value="bounced">Bounced</SelectItem>
                 <SelectItem value="unsubscribed">Unsubscribed</SelectItem>
+                <SelectItem value="do_not_contact">Do not contact</SelectItem>
+                <SelectItem value="signed_up">Signed up</SelectItem>
                 <SelectItem value="invalid">Invalid email</SelectItem>
               </SelectContent></Select>
           </div>
@@ -639,15 +1066,16 @@ function ContactsTab({ onChanged }: any) {
                 <TableRow key={c.id} className={!c.email_valid ? 'opacity-60' : ''}>
                   <TableCell className="font-medium">{c.business_name}{c.contact_name && <div className="text-xs text-muted-foreground">{c.contact_name}</div>}</TableCell>
                   <TableCell className="text-sm">{c.email}{!c.email_valid && <Badge variant="outline" className="ml-2 text-red-500 border-red-200">invalid</Badge>}</TableCell>
-                  <TableCell className="text-sm">{US_TRADES.find((t) => t.slug === c.trade)?.label || c.trade || ' - '}</TableCell>
-                  <TableCell className="text-sm">{[c.city, c.state].filter(Boolean).join(', ') || ' - '}</TableCell>
+                  <TableCell className="text-sm">{US_TRADES.find((t) => t.slug === c.trade)?.label || c.trade || '—'}</TableCell>
+                  <TableCell className="text-sm">{[c.city, c.state].filter(Boolean).join(', ') || '—'}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className={c.unsubscribed ? 'text-purple-600 border-purple-200' : c.bounced ? 'text-red-600 border-red-200' : c.replied ? 'text-blue-600 border-blue-200' : c.status === 'contacted' ? 'text-green-600 border-green-200' : ''}>{c.unsubscribed ? 'unsubscribed' : c.bounced ? 'bounced' : c.replied ? 'replied' : c.status}</Badge>
+                    {(() => { const st = contactStage(c); return <Badge variant="outline" className={st.className}>{st.label}</Badge>; })()}
                   </TableCell>
-                  <TableCell className="text-xs text-muted-foreground">{c.last_emailed_at ? new Date(c.last_emailed_at).toLocaleDateString() : ' - '}</TableCell>
+                  <TableCell className="text-xs text-muted-foreground">{c.last_emailed_at ? new Date(c.last_emailed_at).toLocaleDateString() : '—'}</TableCell>
                   <TableCell className="text-right whitespace-nowrap">
-                    {!c.replied && <Button size="sm" variant="ghost" title="Mark replied (stops follow-ups)" onClick={() => act(c.id, { replied: true, status: 'replied' })}>Replied</Button>}
-                    {!c.unsubscribed && <Button size="sm" variant="ghost" className="text-purple-600" title="Unsubscribe + suppress" onClick={() => act(c.id, { unsubscribed: true, status: 'unsubscribed' }, { email: c.email, reason: 'unsubscribe' })}>Unsub</Button>}
+                    {!c.replied && c.status !== 'do_not_contact' && <Button size="sm" variant="ghost" title="Mark replied (stops follow-ups)" onClick={() => act(c.id, { replied: true, status: 'replied' })}>Replied</Button>}
+                    {!c.unsubscribed && c.status !== 'do_not_contact' && <Button size="sm" variant="ghost" className="text-purple-600" title="Unsubscribe + suppress" onClick={() => act(c.id, { unsubscribed: true, status: 'unsubscribed' }, { email: c.email, reason: 'unsubscribe' })}>Unsub</Button>}
+                    {c.status !== 'do_not_contact' && <Button size="sm" variant="ghost" className="text-rose-700" title="Do not contact — never email again (suppresses the address)" onClick={() => { if (confirm(`Never email ${c.email} again? This adds them to the suppression list.`)) act(c.id, { status: 'do_not_contact' }, { email: c.email, reason: 'do_not_contact' }); }}>DNC</Button>}
                   </TableCell>
                 </TableRow>
               ))}
@@ -678,7 +1106,7 @@ function ImportContactsDialog({ open, onOpenChange, onDone }: any) {
     const { rows, errors } = parseContactsCsv(text);
     if (!rows.length) { toast.error(errors[0] || 'No valid rows found.'); return; }
     setBusy(true);
-    // upsert on lower(email)  -  duplicate prevention is enforced by the unique index.
+    // upsert on lower(email) — duplicate prevention is enforced by the unique index.
     const { error } = await supabase.from('email_contacts').upsert(rows as any, { onConflict: 'email', ignoreDuplicates: true });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
@@ -727,11 +1155,11 @@ function SendQueueTab({ campaigns, settings, onForceRun }: any) {
           <Button onClick={onForceRun}><Play className="w-4 h-4 mr-2" />Run next chunk now</Button>
         </CardHeader>
         <CardContent className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Chunk size</div><div className="font-semibold">{settings?.chunk_size ?? ' - '} emails</div></div>
+          <div><div className="text-muted-foreground">Chunk size</div><div className="font-semibold">{settings?.chunk_size ?? '—'} emails</div></div>
           <div><div className="text-muted-foreground">Between emails</div><div className="font-semibold">{((settings?.delay_between_emails_ms ?? 0) / 1000)}s</div></div>
           <div><div className="text-muted-foreground">Between chunks</div><div className="font-semibold">{Math.round((settings?.delay_between_chunks_ms ?? 0) / 1000)}s</div></div>
-          <div><div className="text-muted-foreground">Daily cap</div><div className="font-semibold">{settings?.daily_limit ?? ' - '}</div></div>
-          <div><div className="text-muted-foreground">Hourly cap</div><div className="font-semibold">{settings?.hourly_limit ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Daily cap</div><div className="font-semibold">{settings?.daily_limit ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Hourly cap</div><div className="font-semibold">{settings?.hourly_limit ?? '—'}</div></div>
         </CardContent>
       </Card>
 
@@ -749,11 +1177,17 @@ function QueueRow({ campaign, settings }: { campaign: EmailCampaign; settings: a
     queryFn: async () => {
       const day = new Date(); day.setUTCHours(0, 0, 0, 0);
       const { count: sentToday } = await supabase.from('email_send_log').select('id', { count: 'exact', head: true }).eq('campaign_id', campaign.id).eq('status', 'sent').gte('created_at', day.toISOString());
-      let q = supabase.from('email_contacts').select('id', { count: 'exact', head: true }).eq('country_code', campaign.target_country || 'GB').eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false).in('status', ['new', 'queued']);
-      if (campaign.target_trade) q = q.eq('trade', campaign.target_trade);
-      if (campaign.target_city) q = q.ilike('city', `%${campaign.target_city}%`);
-      const { count: remaining } = await q;
-      return { sentToday: sentToday || 0, remaining: remaining || 0 };
+      const base = () => {
+        let q = supabase.from('email_contacts').select('id', { count: 'exact', head: true }).eq('country_code', campaign.target_country || 'GB').eq('email_valid', true).eq('unsubscribed', false).eq('bounced', false).eq('replied', false);
+        if (campaign.target_trade) q = q.eq('trade', campaign.target_trade);
+        if (campaign.target_city) q = q.ilike('city', `%${campaign.target_city}%`);
+        return q;
+      };
+      const [{ count: remaining }, { count: dueFollow }] = await Promise.all([
+        base().in('status', ['new', 'queued']),
+        base().eq('status', 'contacted').not('next_follow_up_at', 'is', null).lte('next_follow_up_at', new Date().toISOString()),
+      ]);
+      return { sentToday: sentToday || 0, remaining: remaining || 0, dueFollow: dueFollow || 0 };
     },
   });
   const cap = campaign.daily_limit ?? settings?.daily_limit ?? 200;
@@ -761,7 +1195,7 @@ function QueueRow({ campaign, settings }: { campaign: EmailCampaign; settings: a
   return (
     <Card><CardContent className="py-4 flex flex-wrap items-center gap-4">
       <div className="min-w-[180px]"><div className="font-semibold">{campaign.name}</div><Badge className={campaign.status === 'active' ? 'bg-green-500' : 'bg-amber-500'}>{campaign.status}</Badge></div>
-      <div className="flex-1 min-w-[200px]"><Progress value={Math.min(100, Math.round((100 * (data?.sentToday || 0)) / (cap || 1)))} /><div className="text-xs text-muted-foreground mt-1">{data?.sentToday || 0} / {cap} today · {data?.remaining ?? ' - '} eligible remaining</div></div>
+      <div className="flex-1 min-w-[200px]"><Progress value={Math.min(100, Math.round((100 * (data?.sentToday || 0)) / (cap || 1)))} /><div className="text-xs text-muted-foreground mt-1">{data?.sentToday || 0} / {cap} today · {data?.remaining ?? '—'} new eligible{(data?.dueFollow ?? 0) > 0 ? ` · ${data?.dueFollow} follow-up${data?.dueFollow === 1 ? '' : 's'} due` : ''}</div></div>
       {nextIn > 0 && <div className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />Next chunk in {nextIn}s</div>}
     </CardContent></Card>
   );
@@ -778,9 +1212,14 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
   if (!settings) return <div className="p-8 text-muted-foreground">Loading settings…</div>;
 
   return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-blue-200 bg-blue-50 p-3 text-xs text-blue-900 flex items-start gap-2">
+        <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0" />
+        <span>This tab configures the <strong>UK side only</strong> (Resend · {settings?.from_email || 'team@emergencytradesmen.net'} · reply {settings?.reply_to || '—'}). The <strong>US side</strong> is separate: it sends via <strong>Brevo</strong> from/reply <strong>emergencycontractor@outlook.com</strong>, configured per US campaign in the Campaigns tab. Editing here will not affect US.</span>
+      </div>
     <div className="grid md:grid-cols-2 gap-4">
       <Card>
-        <CardHeader><CardTitle className="text-base">Sender configuration</CardTitle><CardDescription>The RESEND_API_KEY lives as a server secret (never in the browser). These control the From/Reply-To and identity.</CardDescription></CardHeader>
+        <CardHeader><CardTitle className="text-base">Sender configuration (UK · Resend)</CardTitle><CardDescription>The RESEND_API_KEY lives as a server secret (never in the browser). These control the UK From/Reply-To and identity. US uses Brevo + Outlook, set per campaign.</CardDescription></CardHeader>
         <CardContent className="space-y-3">
           <div><Label>From name</Label><Input value={f.from_name || ''} onChange={(e) => set('from_name', e.target.value)} /></div>
           <div><Label>From email</Label><Input value={f.from_email || ''} onChange={(e) => set('from_email', e.target.value)} /><p className="text-xs text-muted-foreground mt-1">Use onboarding@resend.dev for testing, or an address on your verified domain for live sending.</p></div>
@@ -812,10 +1251,11 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
           <CardHeader><CardTitle className="text-base">Send a test email</CardTitle><CardDescription>Verifies Resend end-to-end (uses the From/Reply-To above).</CardDescription></CardHeader>
           <CardContent className="flex gap-2">
             <Input placeholder="you@example.com" value={testTo} onChange={(e) => setTestTo(e.target.value)} />
-            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: `${settings?.from_name || 'Emergency Tradesmen'}  -  test email`, html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
+            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: `${settings?.from_name || 'Emergency Tradesmen'} — test email`, html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
           </CardContent>
         </Card>
       </div>
+    </div>
     </div>
   );
 }
@@ -858,7 +1298,7 @@ function ListValidationCard() {
         refetch();
         if (data.done || (data.checked || 0) === 0) break;
       }
-      toast.success(`Validation complete  -  checked ${total}, ${invalid} invalid removed.`);
+      toast.success(`Validation complete — checked ${total}, ${invalid} invalid removed.`);
     } catch (e: any) { toast.error(`Validation failed: ${e.message}`); }
     finally { setRunning(false); setProgress(''); refetch(); qc.invalidateQueries({ queryKey: ['ecc-contact-stats'] }); }
   };
@@ -876,10 +1316,10 @@ function ListValidationCard() {
           <Button disabled={running} onClick={run}>{running ? (progress || 'Validating…') : 'Run DNS validation'}</Button>
         </div>
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div><span className="text-muted-foreground">Valid (has mail server): </span><strong className="text-emerald-600">{v?.valid_mx ?? ' - '}</strong></div>
-          <div><span className="text-muted-foreground">Unvalidated: </span><strong>{v?.unvalidated ?? ' - '}</strong></div>
-          <div><span className="text-muted-foreground">Dead domain: </span><strong className="text-red-600">{v?.dead ?? ' - '}</strong></div>
-          <div><span className="text-muted-foreground">No mail server: </span><strong className="text-red-600">{v?.no_mx ?? ' - '}</strong></div>
+          <div><span className="text-muted-foreground">Valid (has mail server): </span><strong className="text-emerald-600">{v?.valid_mx ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">Unvalidated: </span><strong>{v?.unvalidated ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">Dead domain: </span><strong className="text-red-600">{v?.dead ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">No mail server: </span><strong className="text-red-600">{v?.no_mx ?? '—'}</strong></div>
           {(v?.mailbox ?? 0) > 0 && <div><span className="text-muted-foreground">Bad mailbox: </span><strong className="text-red-600">{v?.mailbox}</strong></div>}
         </div>
       </CardContent>
@@ -939,11 +1379,11 @@ function DeliverabilityTab({ settings, contactStats, onSave, onChanged }: any) {
       <Card>
         <CardHeader><CardTitle className="text-base">List hygiene</CardTitle></CardHeader>
         <CardContent className="grid grid-cols-2 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Valid emails</div><div className="text-lg font-semibold text-emerald-600">{contactStats?.valid ?? ' - '}</div></div>
-          <div><div className="text-muted-foreground">Invalid (skipped)</div><div className="text-lg font-semibold text-red-600">{contactStats?.invalid ?? ' - '}</div></div>
-          <div><div className="text-muted-foreground">Bounced</div><div className="text-lg font-semibold">{contactStats?.bounced ?? ' - '}</div></div>
-          <div><div className="text-muted-foreground">Unsubscribed</div><div className="text-lg font-semibold">{contactStats?.unsub ?? ' - '}</div></div>
-          <div className="col-span-2"><div className="text-muted-foreground">Suppression list size</div><div className="text-lg font-semibold">{contactStats?.suppressed ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Valid emails</div><div className="text-lg font-semibold text-emerald-600">{contactStats?.valid ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Invalid (skipped)</div><div className="text-lg font-semibold text-red-600">{contactStats?.invalid ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Bounced</div><div className="text-lg font-semibold">{contactStats?.bounced ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Unsubscribed</div><div className="text-lg font-semibold">{contactStats?.unsub ?? '—'}</div></div>
+          <div className="col-span-2"><div className="text-muted-foreground">Suppression list size</div><div className="text-lg font-semibold">{contactStats?.suppressed ?? '—'}</div></div>
         </CardContent>
       </Card>
 

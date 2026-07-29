@@ -154,7 +154,7 @@ const Index = () => {
     description: `24/7 ${siteName} in ${displayCity}. Find public listings for local plumbers, electricians, locksmiths, roadside help, and more within minutes.`,
     contactPoint: {
       "@type": "ContactPoint",
-      email: isUSDomain ? "emergencycontractors@outlook.com" : "emergencytradesmen@outlook.com",
+      email: isUSDomain ? "emergencycontractor@outlook.com" : "emergencytradesmen@outlook.com",
       contactType: "emergency",
       availableLanguage: "English",
     },

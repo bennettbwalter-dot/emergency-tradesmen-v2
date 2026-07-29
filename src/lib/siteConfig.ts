@@ -36,8 +36,9 @@ function isLocalHost(): boolean {
 }
 
 export function getSupportEmail(): string {
+    // US inbox/replies/admin = Outlook (separate from the UK Resend setup).
     return isUSDomain()
-        ? 'emergencycontractors@outlook.com'
+        ? 'emergencycontractor@outlook.com'
         : 'emergencytradesmen@outlook.com';
 }
 

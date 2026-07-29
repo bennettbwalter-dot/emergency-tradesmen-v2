@@ -16,6 +16,7 @@
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "content:stop-slop": "node scripts/stop_slop_audit.mjs",
+    "graph:build": "node scripts/graphify/build-graph.mjs",
     "build:all": "npm run generate-sitemap && tsc && vite build"
   },
   "dependencies": {
