@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Landing Page 3 — the guided scroll line (rideradian-style).
+ * Landing Page 3  -  the guided scroll line (rideradian-style).
  *
  * The hero's beam lands at the bottom of the hero and continues here as a
  * glowing SVG path that draws itself with scroll (stroke-dashoffset scrub)

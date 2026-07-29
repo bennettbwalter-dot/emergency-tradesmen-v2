@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 
 /**
- * Landing Page 3 — quick actions + business CTA band.
+ * Landing Page 3  -  quick actions + business CTA band.
  * Theme-aware (uses the site's design tokens) so it adapts to dark/light mode.
  */
 

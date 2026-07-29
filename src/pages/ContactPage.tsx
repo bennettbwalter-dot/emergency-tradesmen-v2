@@ -223,10 +223,10 @@ export default function ContactPage() {
         return (
             <>
                 <SEO
-                    title={isUSDomain ? "Contact Emergency Contractors — Get 24/7 Help Now" : "Contact Emergency Tradesmen — Get 24/7 Help Now"}
+                    title={isUSDomain ? "Contact Emergency Contractors | 24/7 Help" : "Contact Emergency Tradesmen | 24/7 Help"}
                     description={isUSDomain
-                        ? "Need an emergency contractor? Contact us about local plumbers, electricians & HVAC techs listed across the US. Available 24/7."
-                        : "Need an emergency tradesman? Contact us about local plumbers, electricians & locksmiths listed across the UK. Available 24/7."}
+                        ? "Contact us about local plumbers, electricians, HVAC techs, business claims, and emergency contractor listings across the US."
+                        : "Contact us about local plumbers, electricians, locksmiths, business claims, and emergency tradesman listings across the UK."}
                     canonical="/contact"
                     jsonLd={breadcrumbSchema}
                     alternates={[
@@ -246,8 +246,7 @@ export default function ContactPage() {
                                 Get in Touch
                             </h1>
                             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                                Have questions about our services or want to list your business?
-                                We'd love to hear from you.
+                                Ask about emergency listings, business claims, partnerships, or premium plans.
                             </p>
                         </div>
 
@@ -271,7 +270,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                                    <h2 className="font-semibold text-foreground">Why Contact Us?</h2>
+                                    <h2 className="font-semibold text-foreground">Contact Reasons</h2>
                                     <ul className="space-y-3 text-sm text-muted-foreground">
                                         <li className="flex items-start gap-3">
                                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
@@ -383,7 +382,7 @@ export default function ContactPage() {
                                                 name="subject"
                                                 value={formData.subject}
                                                 onChange={handleChange}
-                                                placeholder="How can we help?"
+                                                placeholder="Tell us what you need"
                                                 className={errors.subject ? 'border-red-500' : ''}
                                             />
                                             {errors.subject && (

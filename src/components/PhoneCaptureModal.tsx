@@ -45,13 +45,13 @@ export function PhoneCaptureModal({ trade, city, country, onDismiss }: PhoneCapt
             <MessageSquare className="w-5 h-5 text-yellow-500" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white leading-tight">Want us to confirm a pro for you?</h2>
+            <h2 className="text-lg font-bold text-white leading-tight">We can confirm a pro for you</h2>
           </div>
         </div>
 
         <p className="text-white/60 text-sm mb-6 leading-relaxed">
-          Leave your number and we'll text you when a local expert is confirmed.
-          Optional — skip to browse listings.
+          Leave your number and we will text you when a local expert is confirmed.
+          You can also skip to listings.
         </p>
 
         {status === "sent" ? (
@@ -59,7 +59,7 @@ export function PhoneCaptureModal({ trade, city, country, onDismiss }: PhoneCapt
             <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mx-auto mb-3">
               <Phone className="w-6 h-6 text-green-400" />
             </div>
-            <p className="text-white font-semibold">We'll text you shortly!</p>
+            <p className="text-white font-semibold">We will text you shortly.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -78,7 +78,7 @@ export function PhoneCaptureModal({ trade, city, country, onDismiss }: PhoneCapt
             </div>
 
             {status === "error" && (
-              <p className="text-red-400 text-xs">Something went wrong — please try again.</p>
+              <p className="text-red-400 text-xs">Something went wrong. Please try again.</p>
             )}
 
             <Button

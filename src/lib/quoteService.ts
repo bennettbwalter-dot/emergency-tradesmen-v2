@@ -10,6 +10,8 @@ export interface Quote {
     details: string;
     urgency: 'Emergency' | 'Standard' | 'Flexible';
     status: 'pending' | 'viewed' | 'accepted' | 'rejected';
+    sourceSurface?: string;
+    sourceUrl?: string;
     createdAt: string;
 }
 
@@ -133,6 +135,8 @@ function mapQuote(row: any): Quote {
         details: row.details,
         urgency: row.urgency,
         status: row.status,
+        sourceSurface: row.source_surface || undefined,
+        sourceUrl: row.source_url || undefined,
         createdAt: row.created_at,
     };
 }

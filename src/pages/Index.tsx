@@ -81,7 +81,7 @@ function OriginalDynamicHeadline({ light }: { light: boolean }) {
           L<img src="/et-logo-v3.webp" alt="O" width="64" height="64" decoding="async" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
         </span>
 
-        {/* TRADESMEN / CONTRACTORS — dominant gold */}
+        {/* TRADESMEN / CONTRACTORS  -  dominant gold */}
         <span
           className="hero-trade-title block bg-clip-text text-transparent text-[clamp(2rem,9.2vw,5.25rem)] mt-1"
           style={{

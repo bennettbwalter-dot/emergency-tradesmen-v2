@@ -127,7 +127,7 @@ const VoiceTrigger = () => {
         try {
             devLog("[Voice] starting Whisper session...");
 
-            // Unlock native speech synthesis on iOS
+            // Open native speech synthesis on iOS
             if (window.speechSynthesis) {
                 const utterance = new SpeechSynthesisUtterance('');
                 window.speechSynthesis.speak(utterance);

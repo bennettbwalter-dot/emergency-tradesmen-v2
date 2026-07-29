@@ -250,13 +250,13 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
   };
 
   const ukLocalExpertiseMap: Record<string, string> = {
-    "London": "Our London team understands the unique challenges of the capital's plumbing, from Victorian terraces in Kensington to modern apartments in Canary Wharf. We navigate the Congestion Zone daily to ensure rapid response.",
+    "London": "Our London team understands the capital's plumbing, from Victorian terraces in Kensington to modern apartments in Canary Wharf. Crews cross the Congestion Zone each day for faster response.",
     "Manchester": "Serving Greater Manchester with local knowledge of the area's industrial heritage and modern housing. Our engineers are familiar with the common issues in both red-brick terraces and new city centre developments.",
     "Birmingham (West Midlands)": "Our Birmingham specialists cover the entire West Midlands network. We understand the local housing stock, ensuring efficient repairs for brum's diverse properties.",
   };
 
   const usLocalExpertiseMap: Record<string, string> = {
-    "Los Angeles": "Our local LA contractors expertly navigate the city's complex geography from Downtown to the San Fernando Valley. We understand strict California building codes, seismic/earthquake retrofit requirements across LA County, and the heavy demands placed on HVAC systems during year-round heatwaves and Santa Ana winds.",
+    "Los Angeles": "Our local LA contractors cover the city from Downtown to the San Fernando Valley. We understand strict California building codes, seismic retrofit requirements across LA County, and the heavy demands placed on HVAC systems during year-round heatwaves and Santa Ana winds.",
     "San Diego": "Serving America's Finest City, our San Diego tradesmen understand the unique effects of coastal salt air on HVAC units and plumbing fixtures. From historic Gaslamp Quarter buildings to modern Pacific Beach homes, we handle everything from emergency water damage to solar-ready electrical panel upgrades.",
     "San Francisco": "Navigating the steep hills and dense neighborhoods of SF requires experts who know the Bay Area inside out. Our San Francisco contractors specialize in updating Victorian-era plumbing, strengthening structures for earthquake readiness, and addressing the Bay's microclimate moisture issues.",
     "Sacramento": "In the heart of the Central Valley, Sacramento homes face intense dry summers and sudden winter atmospheric rivers. Our local experts prioritize energy-efficient HVAC cooling setups, rapid flood water extraction, and dependable roofing repairs built to withstand severe weather swings.",
@@ -297,7 +297,7 @@ export function generateTradePageData(tradeSlug: string, cityName: string, count
     breakdown: "$80 – $200",
   };
 
-  // Truth-based: checks the customer should make before hiring — NOT claims
+  // Truth-based: checks the customer should make before hiring  -  NOT claims
   // about the listed businesses (listings are public and unvetted).
   const credentialCheckMap: Record<string, { GB: string; US: string }> = {
     plumber: { GB: "Ask about WaterSafe / CIPHE membership", US: "Verify state plumbing license" },
@@ -346,25 +346,25 @@ const problemFAQMap: Record<string, { question: string; answer: (city: string) =
   "no-hot-water": [
     { question: "Why is my hot water suddenly not working?", answer: (c) => `Common causes include a tripped boiler or water heater, a pilot light that has gone out, a faulty thermostat, a broken heating element, or low system pressure. An emergency plumber in ${c} can diagnose and fix most issues in a single visit.` },
     { question: "Should I call an emergency plumber or wait until morning?", answer: (c) => `If the outage is in winter, you have young children, elderly residents, or anyone vulnerable in the home, call an emergency plumber in ${c} right away. Otherwise, same-day daytime booking is often cheaper if you can manage a few hours without hot water.` },
-    { question: "Can a plumber fix a broken water heater the same day?", answer: (c) => `Most common failures — thermostats, heating elements, pressure valves, pilot assemblies — are fixed on the first visit by ${c} emergency plumbers. Full water heater replacement may take 24–48 hours depending on model availability.` },
+    { question: "Can a plumber fix a broken water heater the same day?", answer: (c) => `Most common failures  -  thermostats, heating elements, pressure valves, pilot assemblies  -  are fixed on the first visit by ${c} emergency plumbers. Full water heater replacement may take 24–48 hours depending on model availability.` },
   ],
   "boiler-breakdown": [
     { question: "Is a boiler breakdown an emergency?", answer: (c) => `A boiler breakdown is treated as an emergency if it happens in cold weather, if there is a gas smell, if there are vulnerable occupants, or if water is leaking from the unit. In these cases call a Gas Safe engineer in ${c} immediately.` },
     { question: "Can a gas engineer fix my boiler on the first visit?", answer: (c) => `Around 80% of boiler faults (pressure loss, frozen condensate, faulty diverter valves, thermostat issues) are fixed on the first call-out in ${c}. Major part replacements may need a follow-up visit.` },
-    { question: "Is it safe to stay in my home if my boiler has broken down?", answer: (c) => `Yes, provided there is no gas smell, no carbon monoxide alarm sounding, and no visible water damage. Turn the boiler off at the fused spur and call a Gas Safe engineer in ${c} — never attempt boiler repairs yourself.` },
+    { question: "Is it safe to stay in my home if my boiler has broken down?", answer: (c) => `Yes, provided there is no gas smell, no carbon monoxide alarm sounding, and no visible water damage. Turn the boiler off at the fused spur and call a Gas Safe engineer in ${c}  -  never attempt boiler repairs yourself.` },
   ],
   "power-cut-fault": [
     { question: "How do I tell if a power cut is my fault or the grid?", answer: (c) => `Check whether your neighbours have power, then check your consumer unit (fuse box) for tripped breakers. If only your property is affected and resetting the breaker doesn't work, call an emergency electrician in ${c}.` },
-    { question: "Is it safe to reset a tripped breaker myself?", answer: (c) => `Resetting a tripped breaker once is safe. If it trips again immediately, do not keep resetting it — there is a fault that needs a qualified electrician in ${c}. Continuous resets can cause fire or damage to appliances.` },
+    { question: "Is it safe to reset a tripped breaker myself?", answer: (c) => `Resetting a tripped breaker once is safe. If it trips again immediately, do not keep resetting it  -  there is a fault that needs a qualified electrician in ${c}. Continuous resets can cause fire or damage to appliances.` },
     { question: "How quickly can an electrician restore power?", answer: (c) => `Most domestic power faults in ${c} are diagnosed within 30–60 minutes of the electrician arriving. Complex rewiring or consumer unit replacement may take longer but the electrician will usually restore partial power first.` },
   ],
   "lockout": [
     { question: "Will an emergency locksmith damage my lock?", answer: (c) => `Professional ${c} locksmiths use non-destructive entry techniques (picking, bumping, bypass tools) in over 95% of lockouts. Destructive entry is only used as a last resort and the lock is replaced at the same visit.` },
     { question: "How much does an emergency lockout cost at night?", answer: (c) => `Nighttime and weekend lockout call-outs in ${c} typically cost 20–40% more than daytime rates, reflecting out-of-hours work. Always ask for the total price before the locksmith starts.` },
-    { question: "How do I prove I own the property to the locksmith?", answer: (c) => `${c} locksmiths will ask for photo ID with the property address, or a utility bill if the ID doesn't match. This protects you and the locksmith against illegal entry — it's a standard check, not a delay.` },
+    { question: "How do I prove I own the property to the locksmith?", answer: (c) => `${c} locksmiths will ask for photo ID with the property address, or a utility bill if the ID doesn't match. This protects you and the locksmith against illegal entry  -  it's a standard check, not a delay.` },
   ],
   "broken-window": [
-    { question: "Can a glazier board up my window tonight?", answer: (c) => `Yes — emergency glaziers in ${c} offer same-night boarding with timber or polycarbonate to secure your property. Full glass replacement is usually scheduled for the next working day once the correct pane is ordered.` },
+    { question: "Can a glazier board up my window tonight?", answer: (c) => `Yes  -  emergency glaziers in ${c} offer same-night boarding with timber or polycarbonate to secure your property. Full glass replacement is usually scheduled for the next working day once the correct pane is ordered.` },
     { question: "Does home insurance cover broken window repairs?", answer: (c) => `Most home insurance policies cover accidental and break-in window damage minus the excess. Get a written quote from the ${c} glazier, keep the broken glass as evidence, and file a police report if it was a break-in.` },
     { question: "How long does glass replacement take?", answer: (c) => `Standard window replacement in ${c} takes 1–2 hours once the glass arrives. Toughened, laminated, or specialist double-glazed units can take 2–5 working days to manufacture, during which a board-up keeps the property secure.` },
   ],
@@ -374,18 +374,18 @@ const problemFAQMap: Record<string, { question: string; answer: (city: string) =
     { question: "How much does emergency drain unblocking cost?", answer: (c) => `A standard drain unblocking call-out in ${c} ranges from £80–£250 (US $150–$450), depending on access and severity. A CCTV survey adds roughly £100 / $150 and is strongly recommended for recurring blockages.` },
   ],
   "water-damage": [
-    { question: "How fast do I need to act after water damage?", answer: (c) => `Start extraction within 24–48 hours — mold begins to grow after that window. Call a ${c} water restoration specialist immediately, shut off the source, and start documenting damage with photos for insurance.` },
+    { question: "How fast do I need to act after water damage?", answer: (c) => `Start extraction within 24–48 hours  -  mold begins to grow after that window. Call a ${c} water restoration specialist immediately, shut off the source, and start documenting damage with photos for insurance.` },
     { question: "Will insurance cover water damage restoration?", answer: (c) => `Sudden accidental water damage (burst pipe, appliance failure) is usually covered; gradual leaks and flood water often require separate flood insurance in the US. Get the ${c} restoration company's assessment in writing for your claim.` },
     { question: "How long does water damage restoration take?", answer: (c) => `Extraction and drying typically takes 3–5 days in ${c}, followed by mold testing and any structural repairs. Full restoration of significantly damaged properties can take 2–6 weeks.` },
   ],
   "gas-leak": [
     { question: "What should I do if I smell gas?", answer: (c) => `Do not switch any lights or electrics on or off. Open windows and doors, leave the property, and call the National Gas Emergency Service on 0800 111 999 immediately. Then book a Gas Safe engineer in ${c} to make the repair.` },
     { question: "How will a gas engineer find the leak?", answer: (c) => `${c} Gas Safe engineers use electronic leak detectors, soapy water tests on joints, and pressure tests on the gas line. Most leaks are isolated within 15–30 minutes of arrival.` },
-    { question: "Is a gas leak always dangerous?", answer: (c) => `Yes — even small leaks can accumulate into explosive concentrations and cause carbon monoxide poisoning. Never ignore the smell of gas in ${c}; always evacuate and call the emergency gas line first.` },
+    { question: "Is a gas leak always dangerous?", answer: (c) => `Yes  -  even small leaks can accumulate into explosive concentrations and cause carbon monoxide poisoning. Never ignore the smell of gas in ${c}; always evacuate and call the emergency gas line first.` },
   ],
   "toilet-overflow": [
     { question: "How do I stop a toilet from overflowing?", answer: (c) => `Remove the cistern lid and push the flapper or float down to stop water refilling, then shut off the isolation valve behind the toilet. Call an emergency plumber in ${c} to clear the blockage before using the toilet again.` },
-    { question: "Can I unblock the toilet myself before calling a plumber?", answer: (c) => `A plunger or toilet auger clears around 70% of simple blockages. If water keeps rising, if multiple fixtures are affected, or if you see sewage backup, stop and call a ${c} emergency plumber — it may be a mainline blockage.` },
+    { question: "Can I unblock the toilet myself before calling a plumber?", answer: (c) => `A plunger or toilet auger clears around 70% of simple blockages. If water keeps rising, if multiple fixtures are affected, or if you see sewage backup, stop and call a ${c} emergency plumber  -  it may be a mainline blockage.` },
     { question: "How much does emergency toilet unblocking cost?", answer: (c) => `A standard toilet unblocking call-out in ${c} ranges from £90–£200 (US $120–$350). Mainline sewer blockages or drain jetting cost more but clear the root cause.` },
   ],
   "frozen-pipes": [
@@ -400,11 +400,11 @@ const problemFAQMap: Record<string, { question: string; answer: (city: string) =
   ],
   "furnace-breakdown": [
     { question: "Why has my furnace stopped heating?", answer: (c) => `Typical causes include a tripped pilot or ignitor, a dirty flame sensor, a failed blower motor, low gas pressure, or a thermostat fault. An emergency HVAC technician in ${c} can diagnose most issues within an hour.` },
-    { question: "Is it safe to keep running a struggling furnace?", answer: (c) => `No — short-cycling, strange noises, or a carbon monoxide alarm mean you should shut the furnace off at the power switch and call a ${c} HVAC pro immediately. Running a faulty furnace risks CO poisoning and total failure.` },
+    { question: "Is it safe to keep running a struggling furnace?", answer: (c) => `No  -  short-cycling, strange noises, or a carbon monoxide alarm mean you should shut the furnace off at the power switch and call a ${c} HVAC pro immediately. Running a faulty furnace risks CO poisoning and total failure.` },
     { question: "How much does an emergency furnace repair cost?", answer: (c) => `Typical ${c} emergency furnace repairs range from $150 for an ignitor to $600+ for blower motor or control board replacement. Full replacement is $3,500–$8,000 depending on efficiency and size.` },
   ],
   "water-heater-failure": [
-    { question: "Should I turn off a leaking water heater?", answer: (c) => `Yes — shut off the cold-water supply at the top of the tank, switch the breaker off (electric) or turn the gas control to Pilot (gas), then call an emergency plumber in ${c}. Continuous leaking can cause severe water damage fast.` },
+    { question: "Should I turn off a leaking water heater?", answer: (c) => `Yes  -  shut off the cold-water supply at the top of the tank, switch the breaker off (electric) or turn the gas control to Pilot (gas), then call an emergency plumber in ${c}. Continuous leaking can cause severe water damage fast.` },
     { question: "How long does a water heater last?", answer: (c) => `Tank water heaters last 8–12 years, tankless units 15–20 years. If yours is over 10 years old and has failed, replacement usually makes more financial sense than repair. A ${c} plumber can recommend correctly sized replacements.` },
     { question: "Why is there no hot water even though the heater is on?", answer: (c) => `Electric units typically need a new heating element or thermostat; gas units need a new thermocouple, pilot assembly, or gas valve. Sediment build-up also causes slow heating. A ${c} plumber diagnoses in under 30 minutes.` },
   ],

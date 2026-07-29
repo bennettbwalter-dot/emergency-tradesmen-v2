@@ -93,11 +93,11 @@ export default function PrivacyPolicy() {
 
                         <h2>4. Advertising & Affiliate Disclosure</h2>
                         <p>
-                            Some pages on this website contain affiliate links and sponsored placements — for example links to
+                            Some pages on this website contain affiliate links and sponsored placements  -  for example links to
                             home emergency cover, home warranty plans, or products on Amazon. These are always labelled
                             (e.g. "Advertisement", "Affiliate disclosure", or <em>rel="sponsored"</em>). If you click one of these
                             links and make a purchase, we may earn a commission from the merchant. This never affects the price
-                            you pay, and it never affects which tradespeople or contractors appear in our directory listings —
+                            you pay, and it never affects which tradespeople or contractors appear in our directory listings  - 
                             directory results are not influenced by affiliate relationships.
                         </p>
                         <p>
@@ -135,7 +135,7 @@ export default function PrivacyPolicy() {
                                 <span className="absolute -left-4 top-1 text-2xl">🇺🇸</span>
                                 <span className="ml-6">Information for US Residents (CCPA / CPRA)</span>
                             </h2>
-                            <p>For individuals residing in the United States—specifically those in states with comprehensive privacy laws such as California (CCPA/CPRA), Virginia (VCDPA), Texas (TDPSA), and Colorado (CPA)—the following disclosures apply.</p>
+                            <p>For individuals residing in the United States - specifically those in states with comprehensive privacy laws such as California (CCPA/CPRA), Virginia (VCDPA), Texas (TDPSA), and Colorado (CPA) - the following disclosures apply.</p>
 
                             <h4>Notice at Collection</h4>
                             <p>We collect Identifiers (Name, Phone, Email, Address) and Geolocation Data specifically to dispatch emergency home repair services to your location. We retain this data only as long as necessary to facilitate the service, handle customer service inquiries relating to the job, and maintain legal business records.</p>

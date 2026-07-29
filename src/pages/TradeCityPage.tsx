@@ -201,7 +201,7 @@ export default function TradeCityPage() {
     return userCoords;
   }, [urlLat, urlLng, userCoords]);
 
-  // Fetch real businesses from Supabase — does NOT depend on userCoords
+  // Fetch real businesses from Supabase  -  does NOT depend on userCoords
   // userCoords is only used for sorting (handled in a separate effect below)
   const prevContextRef = useRef<string>("");
 
@@ -299,7 +299,7 @@ export default function TradeCityPage() {
   const { filters, setFilters, filteredBusinesses, totalCount, resultsCount } =
     useBusinessFilters(businesses);
 
-  // Pagination Logic — sort favorites to top first
+  // Pagination Logic  -  sort favorites to top first
   const sortedBusinesses = useMemo(() => {
     return [...filteredBusinesses].sort((a, b) => {
       const aFav = isFavorite(a.id) ? 1 : 0;
@@ -350,12 +350,12 @@ export default function TradeCityPage() {
     setCurrentPage(1);
   }, [filters, city, tradePath]);
 
-  // No redirect on empty results — render in-place so the URL is preserved for SEO
+  // No redirect on empty results  -  render in-place so the URL is preserved for SEO
 
   // Early returns must happen AFTER hooks
   const validatedTradePath = tradeInfo.slug;
 
-  // Guard: Only allow known trade slugs — reject non-trade paths like 'blog', 'about', etc.
+  // Guard: Only allow known trade slugs  -  reject non-trade paths like 'blog', 'about', etc.
   const knownTrades = ['plumber', 'electrician', 'locksmith', 'gas-engineer', 'drain-specialist', 'glazier', 'roofer', 'breakdown', 'builder', 'water-restoration', 'hvac', 'pest-control', 'handyman', 'joiner', 'default'];
   const shouldRedirectInvalidTrade = !validatedTradePath || (!knownTrades.includes(validatedTradePath) && !pageData?.trade);
 
@@ -432,7 +432,7 @@ export default function TradeCityPage() {
       "opens": "00:00",
       "closes": "23:59"
     },
-    // Only emit aggregateRating when real review snippets exist — never a fabricated 0/5.
+    // Only emit aggregateRating when real review snippets exist  -  never a fabricated 0/5.
     ...(reviewStats.totalReviews > 0 ? {
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -720,7 +720,7 @@ export default function TradeCityPage() {
           </div>
         </section>
 
-        {/* Listings Section — kept directly after the hero/intro so help is one scroll away */}
+        {/* Listings Section  -  kept directly after the hero/intro so help is one scroll away */}
         <section className="container-wide py-16 relative">
           {/* Background Grid */}
           {theme === 'dark' && (
@@ -876,7 +876,7 @@ export default function TradeCityPage() {
           className="border-y border-border/50"
         />
 
-        {/* TL;DR Answer Block — optimized for AI Overviews / featured snippets */}
+        {/* TL;DR Answer Block  -  optimized for AI Overviews / featured snippets */}
         <section className="container-wide pt-10" aria-labelledby="quick-answer-heading">
           <div className="max-w-3xl mx-auto bg-secondary/40 backdrop-blur-md border border-gold/30 rounded-2xl p-6 md:p-8 shadow-[0_0_30px_rgba(212,175,55,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] hover:border-gold/50">
             <h2 id="quick-answer-heading" className="text-sm font-bold uppercase tracking-wider text-gold mb-4">
@@ -911,7 +911,7 @@ export default function TradeCityPage() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Booking Fees</p>
-                  <p className="text-sm font-semibold text-foreground">None — Call Direct</p>
+                  <p className="text-sm font-semibold text-foreground">None  -  Call Direct</p>
                 </div>
               </div>
 
@@ -932,11 +932,11 @@ export default function TradeCityPage() {
             <p className="text-base md:text-lg text-foreground/90 leading-relaxed">
               {pageData?.problem ? (
                 <>
-                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? ' is' : 's are'} available` : `Public local ${tradeDisplayName.toLowerCase()} listings are available`} — typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
+                  For <strong>{pageData.problem.name.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>, contact a local emergency {tradeDisplayName.toLowerCase()} immediately. {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? ' is' : 's are'} available` : `Public local ${tradeDisplayName.toLowerCase()} listings are available`}  -  typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               ) : (
                 <>
-                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? '' : 's'}` : `Public local ${tradeDisplayName.toLowerCase()} listings`} {listingCount === 1 ? 'is' : 'are'} available — typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
+                  Need an <strong>emergency {tradeDisplayName.toLowerCase()} in {cityName}{isUS && stateCode ? `, ${stateCode}` : ''}</strong>? {listingCount > 0 ? `${listingCount} public local ${tradeDisplayName.toLowerCase()} listing${listingCount === 1 ? '' : 's'}` : `Public local ${tradeDisplayName.toLowerCase()} listings`} {listingCount === 1 ? 'is' : 'are'} available  -  typical emergency callout windows are <strong>{averageResponseTime}</strong>. Call directly and confirm details before booking.
                 </>
               )}
             </p>
@@ -990,7 +990,7 @@ export default function TradeCityPage() {
           </div>
 
           <div className="max-w-2xl mb-6">
-            <h3 className="text-xl font-display text-foreground mb-2">Before You Hire — Quick Checks</h3>
+            <h3 className="text-xl font-display text-foreground mb-2">Before You Hire  -  Quick Checks</h3>
             <p className="text-sm text-muted-foreground">These are public listings, so always confirm credentials yourself:</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1182,7 +1182,7 @@ export default function TradeCityPage() {
           </div>
         </section>
 
-        {/* Related Pages — internal link graph for problem/trade/city cross-linking */}
+        {/* Related Pages  -  internal link graph for problem/trade/city cross-linking */}
         {!isStatePage && (
           <section className="container-wide py-16 border-t border-border/30">
             <div className="grid md:grid-cols-3 gap-10">

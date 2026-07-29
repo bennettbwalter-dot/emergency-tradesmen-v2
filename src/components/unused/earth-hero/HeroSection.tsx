@@ -134,7 +134,7 @@ export function HeroSection({
                         </div>
                     </motion.div>
 
-                    {/* Main headline — matches reference: LOCAL / TRADESMEN|CONTRACTORS (gold, dominant) / near CITY */}
+                    {/* Main headline  -  matches reference: LOCAL / TRADESMEN|CONTRACTORS (gold, dominant) / near CITY */}
                     <div className="hero-title-arch relative flex flex-col items-center justify-center mb-3 px-1 sm:px-4 w-full overflow-visible md:mb-6">
                         <h1
                             aria-label={`Local ${siteTradeTerm} near ${displayCity}`}
@@ -148,7 +148,7 @@ export function HeroSection({
                                 L<img src="/et-logo-v3.webp" alt="" aria-hidden="true" width="64" height="64" decoding="async" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
                             </span>
 
-                            {/* TRADESMEN / CONTRACTORS — dominant, rich gold */}
+                            {/* TRADESMEN / CONTRACTORS  -  dominant, rich gold */}
                             <span
                                 className="block bg-clip-text text-transparent text-[clamp(2rem,9.2vw,5.25rem)] drop-shadow-[0_3px_8px_rgba(0,0,0,0.25)] mt-1"
                                 style={{
@@ -161,7 +161,7 @@ export function HeroSection({
                                 {siteTradeTerm.toUpperCase()}
                             </span>
 
-                            {/* near [CITY] — stays on one line, scales with viewport and shrinks for long names */}
+                            {/* near [CITY]  -  stays on one line, scales with viewport and shrinks for long names */}
                             <span className="flex items-end justify-center gap-[0.3em] mt-2 whitespace-nowrap">
                                 <span className="relative inline-block">
                                     <span

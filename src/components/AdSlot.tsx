@@ -84,7 +84,7 @@ export function AdSlot({ slot, format, className = '', client }: AdSlotProps) {
         if (!isVisible || !adsEnabled || hasInitialized.current) return;
 
         try {
-            // @ts-ignore — adsbygoogle is injected by the script tag
+            // @ts-ignore  -  adsbygoogle is injected by the script tag
             (window.adsbygoogle = window.adsbygoogle || []).push({});
             hasInitialized.current = true;
         } catch (err) {

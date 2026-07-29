@@ -29,8 +29,8 @@ import {
 import { db } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
 import { trackEvent } from "@/lib/analytics";
-import { sendEmail } from "@/lib/email";
-import { getSupportEmail, getSiteName, getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
+import { getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
+import { recordBusinessLeadEvent } from "@/lib/leadTracking";
 
 interface QuoteRequestModalProps {
     businessName: string;
@@ -39,6 +39,7 @@ interface QuoteRequestModalProps {
     variant?: "default" | "hero" | "outline";
     className?: string;
     triggerText?: string;
+    sourceSurface?: string;
 }
 
 export function QuoteRequestModal({
@@ -48,6 +49,7 @@ export function QuoteRequestModal({
     variant = "default",
     className = "",
     triggerText = "Request Quote",
+    sourceSurface = "business_profile",
 }: QuoteRequestModalProps) {
     const [open, setOpen] = useState(false);
     const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -58,6 +60,14 @@ export function QuoteRequestModal({
     const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { toast } = useToast();
+
+    const handleOpenChange = (nextOpen: boolean) => {
+        setOpen(nextOpen);
+        if (nextOpen) {
+            void recordBusinessLeadEvent({ businessId, eventType: "quote_started", sourceSurface });
+            trackEvent("Conversion", "Quote Request Started", `${businessName} (${businessId})`);
+        }
+    };
 
     const updateField = (field: keyof QuoteFormData, value: string) => {
         setFormData({ ...formData, [field]: value });
@@ -124,33 +134,16 @@ export function QuoteRequestModal({
                     phone: formData.phone || "",
                     email: formData.email || "",
                     postcode: formData.postcode || "",
-                }
+                },
+                sourceSurface,
+                sourceUrl: window.location.href,
             });
 
-            // Send notification email to admin
-            await sendEmail({
-                to: getSupportEmail(),
-                subject: `New Quote Request for ${businessName}`,
-                html: `
-                    <h2>New Quote Request</h2>
-                    <p><strong>Business:</strong> ${businessName} (${businessId})</p>
-                    <p><strong>Urgency:</strong> ${formData.urgency}</p>
-                    <p><strong>Service Type:</strong> ${formData.serviceType || "Not specified"}</p>
-                    <hr />
-                    <h3>Customer Details</h3>
-                    <p><strong>Name:</strong> ${formData.name}</p>
-                    <p><strong>Phone:</strong> ${formData.phone}</p>
-                    <p><strong>Email:</strong> ${formData.email}</p>
-                    <p><strong>${getPostcodeLabel()}:</strong> ${formData.postcode}</p>
-                    <h3>Description</h3>
-                    <p>${formData.description}</p>
-                `,
-                from_name: `${getSiteName()} Quotes`
-            });
+            void recordBusinessLeadEvent({ businessId, eventType: "quote_submitted", sourceSurface });
 
             toast({
                 title: "Quote request sent!",
-                description: "The business will contact you shortly with a quote.",
+                description: `${businessName} has received your request.`,
             });
             trackEvent("Conversion", "Quote Request", `${businessName} (${businessId})`);
 
@@ -177,7 +170,7 @@ export function QuoteRequestModal({
     const selectedUrgency = urgencyOptions.find((opt) => opt.value === formData.urgency);
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
                 <Button variant={variant} className={className}>
                     <FileText className="w-4 h-4 mr-2" />
@@ -190,7 +183,7 @@ export function QuoteRequestModal({
                         Request a Quote from {businessName}
                     </DialogTitle>
                     <DialogDescription>
-                        Fill in the details below and we'll get you a quote as soon as possible
+                        Send your job details to {businessName}. They will use your preferred contact method to reply.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -500,8 +493,7 @@ export function QuoteRequestModal({
 
                             <div className="bg-gold/10 border border-gold/30 rounded-lg p-4">
                                 <p className="text-sm text-foreground">
-                                    <strong>What happens next?</strong> {businessName} will review your request
-                                    and contact you within {formData.urgency === "emergency" ? "30 minutes" : formData.urgency === "today" ? "2 hours" : "24 hours"} with a quote.
+                                    Submitting shares your name, phone number, email address, and job details with {businessName} so they can contact you about this request.
                                 </p>
                             </div>
                         </div>

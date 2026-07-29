@@ -328,7 +328,7 @@ export default function NewProfileEditor() {
 
             if (error) throw error;
 
-            // Only ghost basic (free-tier, unowned) duplicate listings — never paid or editor-created profiles.
+            // Only ghost basic (free-tier, unowned) duplicate listings  -  never paid or editor-created profiles.
             if (formData.trade && formData.selected_locations?.length > 0) {
                 for (const loc of formData.selected_locations) {
                     await supabase

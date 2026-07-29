@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function AffiliateDisclosure({ className }: { className?: string }) {
     return (
         <p className={cn("text-[11px] text-muted-foreground/70 leading-snug", className)}>
-            Affiliate disclosure: this is an affiliate placement — we may earn a commission if you
+            Affiliate disclosure: this is an affiliate placement  -  we may earn a commission if you
             buy through this link, at no extra cost to you. See our{" "}
             <a href="/privacy" className="underline hover:text-foreground">privacy policy</a> for details.
         </p>

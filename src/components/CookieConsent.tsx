@@ -17,7 +17,7 @@ export function CookieConsent() {
         }
     }, []);
 
-    // Google Consent Mode v2 — keep GA/AdSense in sync with the user's choice.
+    // Google Consent Mode v2  -  keep GA/AdSense in sync with the user's choice.
     // The default 'denied' state is set in index.html before gtag loads.
     const updateGoogleConsent = (granted: boolean) => {
         const value = granted ? "granted" : "denied";

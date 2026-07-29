@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Safety net: never let isLoading stay true forever
         const authTimeout = setTimeout(() => setIsLoading(false), 8000);
 
-        // onAuthStateChange fires INITIAL_SESSION on mount — no separate getSession() needed
+        // onAuthStateChange fires INITIAL_SESSION on mount  -  no separate getSession() needed
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 try {

@@ -21,7 +21,7 @@ interface SEOProps {
     }[];
 }
 
-const DEFAULT_DESCRIPTION = "Need a tradesman near you? Find public emergency business listings for plumbers, electricians, locksmiths and gas engineers. Confirm details directly before booking.";
+const DEFAULT_DESCRIPTION = "Find public emergency business listings for plumbers, electricians, locksmiths and gas engineers near you. Confirm details directly before booking.";
 const DEFAULT_IMAGE = "https://emergencytradesmen.net/tradesman-hero-v2.webp";
 const SITE_URL_GB = "https://emergencytradesmen.net";
 const SITE_URL_US = "https://emergencycontractors.net";
@@ -66,7 +66,7 @@ export function SEO({
         ? (effectiveCanonical.startsWith('http') ? effectiveCanonical : `${SITE_URL}${effectiveCanonical}`)
         : SITE_URL;
 
-    // Default Organization Schema — applied to all pages to reinforce brand identity
+    // Default Organization Schema  -  applied to all pages to reinforce brand identity
     const defaultSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",

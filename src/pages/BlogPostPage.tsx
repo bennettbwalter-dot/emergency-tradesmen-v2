@@ -148,7 +148,7 @@ const AMAZON_PRODUCTS: Record<string, AmazonProduct> = {
 };
 
 // ---------------------------------------------------------------------------
-// Inline styles for the SEO template — injected once per page
+// Inline styles for the SEO template  -  injected once per page
 // ---------------------------------------------------------------------------
 const BLOG_STYLES = `
   /* ── TYPOGRAPHY SYSTEM ─────────────────────────── */
@@ -1125,7 +1125,7 @@ export default function BlogPostPage() {
               {hasExcerpt && (
                 <div className={`rounded-xl border-l-4 border-orange-400 p-4 mb-2 ${isWhiteMode ? 'bg-orange-50' : 'bg-orange-950/20'}`}>
                   <p className={`text-xs font-black uppercase tracking-widest mb-2 ${isWhiteMode ? 'text-orange-600' : 'text-orange-400'}`}>
-                    ⚡ TL;DR — Key Takeaway
+                    ⚡ TL;DR  -  Key Takeaway
                   </p>
                   <p className={`text-sm leading-relaxed font-medium m-0 ${isWhiteMode ? 'text-neutral-700' : 'text-neutral-200'}`}>
                     {post.excerpt}
@@ -1134,13 +1134,13 @@ export default function BlogPostPage() {
               )}
             </div>
 
-            {/* Featured image — responsive, full width on mobile */}
-            {post.cover_image && (
-              <div className="mt-6 md:mt-0 md:shrink-0 w-full md:w-auto min-w-0">
-                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[4/3] md:aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] mx-auto md:mx-0 min-h-[200px]">
+            {/* Featured image  -  responsive, full width on mobile */}
+            <div className="mt-6 md:mt-0 md:shrink-0 w-full md:w-auto min-w-0">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 aspect-[4/3] md:aspect-[9/16] w-full max-w-[280px] md:max-w-[320px] mx-auto md:mx-0 min-h-[200px]">
+                {post.cover_image ? (
                   <img
                     src={getImageUrl(post.cover_image)}
-                    alt={`${post.title} — ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
+                    alt={`${post.title}  -  ${isUS ? 'Emergency Contractors US' : 'Emergency Tradesmen UK'} expert guide`}
                     className="w-full h-full object-cover"
                     loading="eager"
                     decoding="async"
@@ -1152,13 +1152,26 @@ export default function BlogPostPage() {
                       }
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                ) : (
+                  <div
+                    className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${
+                      isWhiteMode
+                        ? 'from-orange-50 via-amber-100 to-neutral-100'
+                        : 'from-orange-950/40 via-amber-900/30 to-neutral-900'
+                    }`}
+                    aria-label={`${post.title} image pending`}
+                  >
+                    <span className={`text-5xl font-display font-black ${isWhiteMode ? 'text-orange-900/20' : 'text-orange-100/20'}`}>
+                      {isUS ? 'EC' : 'ET'}
+                    </span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
                 <p className={`text-xs text-center mt-2 font-medium ${isWhiteMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
                   {isUS ? '24/7 Emergency Contractors' : '24/7 Emergency Tradesmen'} · Certified Professionals
                 </p>
               </div>
-            )}
           </div>
         </header>
 
@@ -1278,7 +1291,7 @@ export default function BlogPostPage() {
             Need Professional Help?
           </h3>
           <p className={`text-base mb-6 max-w-lg mx-auto leading-relaxed ${isWhiteMode ? 'text-neutral-500' : 'text-neutral-400'}`}>
-            Browse public listings for local emergency {isUS ? 'contractors' : 'tradesmen'} near you and call them direct — no middlemen, no booking fees.
+            Browse public listings for local emergency {isUS ? 'contractors' : 'tradesmen'} near you and call them direct  -  no middlemen, no booking fees.
           </p>
           <Link
             to={`${isUS && !isUSDomain() ? '/us' : ''}/home#manual-search`}

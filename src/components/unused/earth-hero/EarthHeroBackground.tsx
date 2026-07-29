@@ -562,7 +562,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
             </defs>
             {siteKey === "GB" ? (
               <g filter="url(#earth-country-glow-outer)">
-                {/* Great Britain — hand-fitted to the GB photo */}
+                {/* Great Britain  -  hand-fitted to the GB photo */}
                 <path
                   d="M 540 198 L 552 195 L 565 200 L 575 215 L 580 235 L 590 252 L 600 275 L 605 295 L 615 315 L 630 335 L 650 350 L 665 370 L 680 385 L 678 405 L 660 420 L 645 432 L 650 445 L 635 452 L 605 458 L 575 462 L 545 460 L 520 455 L 500 450 L 482 442 L 478 425 L 488 412 L 510 405 L 502 392 L 482 380 L 470 368 L 472 350 L 462 335 L 470 320 L 478 305 L 472 290 L 462 275 L 470 258 L 460 240 L 470 225 L 478 215 L 480 200 L 495 195 L 515 198 L 530 198 Z"
                   fill="none"
@@ -583,7 +583,7 @@ export function EarthHeroBackground({ countryCode = "GB" }: EarthHeroBackgroundP
               </g>
             ) : (
               <g filter="url(#earth-country-glow-outer)">
-                {/* Contiguous-48 — hand-fitted to the US photo */}
+                {/* Contiguous-48  -  hand-fitted to the US photo */}
                 <path
                   d="M 145 200 L 160 220 L 165 240 L 155 265 L 145 290 L 142 320 L 155 345 L 175 365 L 220 372 L 260 378 L 305 380 L 340 388 L 355 400 L 370 408 L 385 405 L 395 415 L 408 420 L 420 415 L 432 425 L 425 445 L 442 440 L 450 425 L 458 410 L 460 392 L 465 372 L 470 350 L 462 332 L 472 315 L 478 298 L 472 280 L 465 265 L 450 248 L 430 235 L 400 222 L 365 215 L 330 205 L 295 200 L 265 195 L 230 188 L 195 185 L 165 192 L 145 195 Z"
                   fill="none"

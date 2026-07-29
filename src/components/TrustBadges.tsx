@@ -34,7 +34,7 @@ export function TrustBadges() {
           {/* Subtle reflection effect */}
           <div className="absolute inset-0 rounded-xl md:rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-          {/* Icon — compact on mobile, larger on desktop */}
+          {/* Icon  -  compact on mobile, larger on desktop */}
           <div className="relative shrink-0">
             <div className="w-8 h-8 md:w-14 md:h-14 md:mb-4 rounded-full bg-gold/5 border border-gold/20 flex items-center justify-center group-hover:bg-gold/10 group-hover:border-gold/40 transition-all duration-500 group-hover:scale-110">
               <badge.icon className="w-4 h-4 md:w-6 md:h-6 text-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" strokeWidth={1.5} />
@@ -44,7 +44,7 @@ export function TrustBadges() {
             <div className="absolute inset-0 rounded-full bg-gold/20 blur-xl opacity-0 group-hover:opacity-40 transition-opacity" />
           </div>
 
-          {/* Text — centered for all sizes to fit 4-in-a-row */}
+          {/* Text  -  centered for all sizes to fit 4-in-a-row */}
           <div className="text-center relative z-10 w-full px-0.5">
             <h3 className="font-display font-bold text-[9px] sm:text-[10px] md:text-lg text-foreground leading-[1.1] tracking-tight group-hover:text-gold transition-colors">{badge.title}</h3>
             <p className="hidden md:block text-[11px] text-muted-foreground uppercase tracking-[0.15em] font-semibold opacity-70 leading-tight mt-1 group-hover:opacity-100 transition-all">{badge.description}</p>

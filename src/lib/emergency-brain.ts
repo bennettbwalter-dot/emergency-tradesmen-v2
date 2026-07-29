@@ -1,5 +1,5 @@
 /**
- * EMERGENCY BRAIN — Internal Knowledge Base & Offline Decision Layer
+ * EMERGENCY BRAIN  -  Internal Knowledge Base & Offline Decision Layer
  * ─────────────────────────────────────────────────────────────────
  * Operates WITHOUT any external API calls.
  * Uses stored knowledge, rules, and safety guidance to generate
@@ -152,22 +152,22 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     ],
     diagnostics: {
       uk: [
-        { symptom: 'RCD trips repeatedly', likely: 'Earth fault on a circuit — faulty appliance or wiring', urgency: 'URGENT' },
+        { symptom: 'RCD trips repeatedly', likely: 'Earth fault on a circuit  -  faulty appliance or wiring', urgency: 'URGENT' },
         { symptom: 'Burning or fishy smell from outlet', likely: 'Overheating wiring, melting insulation', urgency: 'EMERGENCY' },
         { symptom: 'Lights flicker in one room', likely: 'Loose connection in lighting circuit', urgency: 'URGENT' },
         { symptom: 'Entire house lost power', likely: 'Main fuse blown or supply fault', urgency: 'URGENT' },
         { symptom: 'Socket feels warm or hot', likely: 'Overloaded circuit or loose terminal', urgency: 'EMERGENCY' },
         { symptom: 'Buzzing from consumer unit', likely: 'Loose MCB or arcing connection', urgency: 'EMERGENCY' },
-        { symptom: 'Light switch gives tingle or shock', likely: 'Earth fault — isolate immediately', urgency: 'EMERGENCY' },
+        { symptom: 'Light switch gives tingle or shock', likely: 'Earth fault  -  isolate immediately', urgency: 'EMERGENCY' },
       ],
       us: [
-        { symptom: 'GFCI/AFCI breaker trips repeatedly', likely: 'Ground fault or arc fault — faulty appliance or wiring', urgency: 'URGENT' },
+        { symptom: 'GFCI/AFCI breaker trips repeatedly', likely: 'Ground fault or arc fault  -  faulty appliance or wiring', urgency: 'URGENT' },
         { symptom: 'Burning or fishy smell from outlet', likely: 'Overheating wiring or loose connection at screw terminal', urgency: 'EMERGENCY' },
         { symptom: 'Lights flicker in one room', likely: 'Loose neutral or poor connection at terminal screw', urgency: 'URGENT' },
         { symptom: 'Entire house lost power', likely: 'Main breaker tripped or utility supply fault', urgency: 'URGENT' },
         { symptom: 'Socket feels warm or hot', likely: 'Loose wire at the outlet or overloaded circuit', urgency: 'EMERGENCY' },
         { symptom: 'Buzzing from electrical panel', likely: 'Loose circuit breaker or arcing connection', urgency: 'EMERGENCY' },
-        { symptom: 'Light switch gives buzz or shock', likely: 'Ungrounded switch or wiring fault — isolate power', urgency: 'EMERGENCY' },
+        { symptom: 'Light switch gives buzz or shock', likely: 'Ungrounded switch or wiring fault  -  isolate power', urgency: 'EMERGENCY' },
       ],
     },
     typicalFaults: {
@@ -187,7 +187,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     safetyGuidance: {
       emergency: {
         uk: '🚨 Turn off the MAIN SWITCH on your **consumer unit** immediately. Do NOT touch sparking or hot fittings. If someone has had a shock, isolate the supply before touching them. Call **999**. Never use water on an electrical fire. Contact a qualified **electrician** immediately.',
-        us: '🚨 Turn off the MAIN BREAKER in your **electrical panel** immediately. Do NOT touch any sparking, smoking, or hot outlets. If someone has received a shock, cut power first — do not touch them while energised. Call **911**. Never use water on an electrical fire. Contact a licensed **electrician** immediately.',
+        us: '🚨 Turn off the MAIN BREAKER in your **electrical panel** immediately. Do NOT touch any sparking, smoking, or hot outlets. If someone has received a shock, cut power first  -  do not touch them while energised. Call **911**. Never use water on an electrical fire. Contact a licensed **electrician** immediately.',
       },
       general: {
         uk: 'Never overload sockets. Test your RCD every 3 months. Have an EICR (Electrical Installation Condition Report) every 10 years (5 years for rentals). Do not attempt DIY work on your consumer unit. Only use NICEIC or NAPIT registered electricians.',
@@ -227,20 +227,20 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       uk: [
         { symptom: 'Smell of gas indoors', likely: 'Gas leak from pipe, fitting or appliance', urgency: 'EMERGENCY' },
         { symptom: 'CO alarm sounding', likely: 'Carbon monoxide from faulty flue or combustion', urgency: 'EMERGENCY' },
-        { symptom: 'Yellow or orange boiler flame (should be blue)', likely: 'Incomplete combustion — CO risk', urgency: 'EMERGENCY' },
+        { symptom: 'Yellow or orange boiler flame (should be blue)', likely: 'Incomplete combustion  -  CO risk', urgency: 'EMERGENCY' },
         { symptom: 'Boiler losing pressure repeatedly', likely: 'Internal leak, expansion vessel, or PRV fault', urgency: 'GENERAL' },
-        { symptom: 'Radiators cold at bottom', likely: 'Sludge/magnetite buildup — needs power flush', urgency: 'GENERAL' },
+        { symptom: 'Radiators cold at bottom', likely: 'Sludge/magnetite buildup  -  needs power flush', urgency: 'GENERAL' },
         { symptom: 'Boiler fires then cuts out', likely: 'Faulty thermistor, pump, or PCB', urgency: 'URGENT' },
-        { symptom: 'Boiler showing error code', likely: 'Various — check manufacturer code chart', urgency: 'URGENT' },
+        { symptom: 'Boiler showing error code', likely: 'Various  -  check manufacturer code chart', urgency: 'URGENT' },
       ],
       us: [
         { symptom: 'Smell of gas indoors', likely: 'Natural gas or propane leak from line or furnace', urgency: 'EMERGENCY' },
         { symptom: 'CO alarm sounding', likely: 'Carbon monoxide from cracked heat exchanger or blocked flue', urgency: 'EMERGENCY' },
-        { symptom: 'Yellow or orange furnace flame', likely: 'Incomplete combustion — high CO risk', urgency: 'EMERGENCY' },
+        { symptom: 'Yellow or orange furnace flame', likely: 'Incomplete combustion  -  high CO risk', urgency: 'EMERGENCY' },
         { symptom: 'Boiler/Furnace pressure issues', likely: 'Expansion tank or relief valve failure', urgency: 'GENERAL' },
         { symptom: 'Forced air vents blowing cold', likely: 'Failed igniter, flame sensor, or limited fuel flow', urgency: 'URGENT' },
         { symptom: 'Furnace rapidly cycling', likely: 'Dirty filter, restricted airflow, or thermostat fault', urgency: 'URGENT' },
-        { symptom: 'Furnace showing error code', likely: 'Diagnostic blink codes — check manufacture manual', urgency: 'URGENT' },
+        { symptom: 'Furnace showing error code', likely: 'Diagnostic blink codes  -  check manufacture manual', urgency: 'URGENT' },
       ],
     },
     typicalFaults: {
@@ -295,16 +295,16 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     diagnostics: {
       uk: [
         { symptom: "Key turns but door won't open", likely: 'Misaligned latch or broken gearbox mechanism', urgency: 'URGENT' },
-        { symptom: 'Key snapped in lock', likely: 'Worn key or cylinder — extraction and possible replacement', urgency: 'URGENT' },
+        { symptom: 'Key snapped in lock', likely: 'Worn key or cylinder  -  extraction and possible replacement', urgency: 'URGENT' },
         { symptom: 'Lock spinning freely', likely: 'Broken tailpiece or cam inside cylinder', urgency: 'URGENT' },
-        { symptom: 'Door locked after burglary', likely: 'Frame/lock damage — needs boarding and upgrade', urgency: 'EMERGENCY' },
+        { symptom: 'Door locked after burglary', likely: 'Frame/lock damage  -  needs boarding and upgrade', urgency: 'EMERGENCY' },
         { symptom: "Deadbolt won't retract", likely: 'Internal mechanism seized or misaligned strike plate', urgency: 'GENERAL' },
       ],
       us: [
         { symptom: "Key turns but bolt doesn't move", likely: 'Broken tailpiece or damaged cylinder mechanism', urgency: 'URGENT' },
-        { symptom: 'Key snapped in the cylinder', likely: 'Worn key or dry lock — needs extraction and lubrication', urgency: 'URGENT' },
+        { symptom: 'Key snapped in the cylinder', likely: 'Worn key or dry lock  -  needs extraction and lubrication', urgency: 'URGENT' },
         { symptom: 'Cylinder spinning loosely', likely: 'Set screw came loose or cam is broken', urgency: 'URGENT' },
-        { symptom: 'Entry door damaged after break-in', likely: 'Jamb or strike plate failure — needs reinforcement', urgency: 'EMERGENCY' },
+        { symptom: 'Entry door damaged after break-in', likely: 'Jamb or strike plate failure  -  needs reinforcement', urgency: 'EMERGENCY' },
         { symptom: "Key won't go into the lock", likely: 'Internal obstruction or damaged tumblers', urgency: 'GENERAL' },
       ],
     },
@@ -312,7 +312,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       uk: [
         'Snapped euro cylinder (snap attack)', 'Worn lever mortice lock',
         'Multipoint lock gearbox failure', 'Misaligned door causing binding',
-        'Night latch slam lock — locked out', 'Frozen lock mechanism', 'Broken patio door lock',
+        'Night latch slam lock  -  locked out', 'Frozen lock mechanism', 'Broken patio door lock',
       ],
       us: [
         'Failed deadbolt internal linkage', 'Worn pin tumblers in Schlage/Kwikset cylinder',
@@ -322,11 +322,11 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     },
     safetyGuidance: {
       emergency: {
-        uk: '🚨 If locked out, stay in a well-lit, safe area. If a burglary occurred, do NOT enter — call **999** first. Only use **MLA (Master Locksmiths Association)** registered locksmiths. Have proof of residency ready.',
-        us: '🚨 If locked out, stay in a well-lit, safe area. If a break-in occurred, do NOT enter — call **911** first. Only use **ALOA (Associated Locksmiths of America)** certified locksmiths. Have photo ID and proof of residency ready.',
+        uk: '🚨 If locked out, stay in a well-lit, safe area. If a burglary occurred, do NOT enter  -  call **999** first. Only use **MLA (Master Locksmiths Association)** registered locksmiths. Have proof of residency ready.',
+        us: '🚨 If locked out, stay in a well-lit, safe area. If a break-in occurred, do NOT enter  -  call **911** first. Only use **ALOA (Associated Locksmiths of America)** certified locksmiths. Have photo ID and proof of residency ready.',
       },
       general: {
-        uk: 'Upgrade to **anti-snap cylinders** meeting **TS007 / SS 312** standards. Ensure locks are **BS 3621** compliant for home insurance. Lubricate locks with graphite — never WD-40. Keep a spare key with a trusted neighbour.',
+        uk: 'Upgrade to **anti-snap cylinders** meeting **TS007 / SS 312** standards. Ensure locks are **BS 3621** compliant for home insurance. Lubricate locks with graphite  -  never WD-40. Keep a spare key with a trusted neighbour.',
         us: 'Upgrade to **ANSI Grade 1** deadbolts for home security. Check your insurance policy for minimum lock requirements. Use **UL 437** rated cylinders for high-security applications. Store a spare key in a secure key safe, not under a doormat.',
       },
     },
@@ -359,15 +359,15 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     diagnostics: {
       uk: [
         { symptom: 'Multiple drains blocking simultaneously', likely: 'Main sewer line blockage or collapse', urgency: 'EMERGENCY' },
-        { symptom: 'Sewage backing up into home', likely: 'Category 3 biohazard — main line blocked', urgency: 'EMERGENCY' },
+        { symptom: 'Sewage backing up into home', likely: 'Category 3 biohazard  -  main line blocked', urgency: 'EMERGENCY' },
         { symptom: 'Single slow-draining sink', likely: 'Localised trap or waste pipe blockage', urgency: 'GENERAL' },
         { symptom: 'Gurgling sounds from drains', likely: 'Partial blockage or venting issue', urgency: 'GENERAL' },
-        { symptom: 'Ground sinking near drain run', likely: 'Collapsed drain — CCTV survey needed', urgency: 'URGENT' },
+        { symptom: 'Ground sinking near drain run', likely: 'Collapsed drain  -  CCTV survey needed', urgency: 'URGENT' },
         { symptom: 'Persistent foul smell outdoors', likely: 'Broken or disconnected drain', urgency: 'URGENT' },
       ],
       us: [
         { symptom: 'Multiple drains backup at once', likely: 'Main sewer line blockage (roots or grease)', urgency: 'EMERGENCY' },
-        { symptom: 'Sewage coming up through basement drains', likely: 'Main line stopped — biohazard risk', urgency: 'EMERGENCY' },
+        { symptom: 'Sewage coming up through basement drains', likely: 'Main line stopped  -  biohazard risk', urgency: 'EMERGENCY' },
         { symptom: 'Sink or tub draining slowly', likely: 'Local clog in P-trap or fixture drain branch', urgency: 'GENERAL' },
         { symptom: 'Gurgling noises in pipes when flushing', likely: 'Venting problem or partial main line clog', urgency: 'GENERAL' },
         { symptom: 'Wet patch in yard near sewer line', likely: 'Sewer line break or root intrusion', urgency: 'URGENT' },
@@ -386,8 +386,8 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     },
     safetyGuidance: {
       emergency: {
-        uk: '🚨 SEWAGE BACKUP? Stop using ALL water immediately (taps, toilets, machines). Sewage is a Category 3 biohazard — wear PPE if near it. Keep children and pets away. Open windows. Call a **drain specialist** immediately. Do NOT attempt to clear yourself.',
-        us: '🚨 SEWAGE BACKUP? Stop using all plumbing fixtures immediately. Sewage is a **Category 3 biohazard** — do NOT clean without proper PPE. Keep children and pets out of the area. Open windows for ventilation. Call a licensed **drain/sewer specialist** immediately.',
+        uk: '🚨 SEWAGE BACKUP? Stop using ALL water immediately (taps, toilets, machines). Sewage is a Category 3 biohazard  -  wear PPE if near it. Keep children and pets away. Open windows. Call a **drain specialist** immediately. Do NOT attempt to clear yourself.',
+        us: '🚨 SEWAGE BACKUP? Stop using all plumbing fixtures immediately. Sewage is a **Category 3 biohazard**  -  do NOT clean without proper PPE. Keep children and pets out of the area. Open windows for ventilation. Call a licensed **drain/sewer specialist** immediately.',
       },
       general: {
         uk: 'Never pour cooking fat down drains. Use drain guards. Know where your external **inspection chambers** are. Water companies own shared drains outside your property boundary (Water Industry Act 1991). Flush drains monthly with hot water.',
@@ -423,15 +423,15 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     diagnostics: {
       uk: [
         { symptom: 'Window completely shattered', likely: 'Impact damage or thermal stress fracture', urgency: 'EMERGENCY' },
-        { symptom: 'Mist or condensation between panes', likely: 'Blown sealed unit — seal failure', urgency: 'GENERAL' },
-        { symptom: 'Crack spreading across pane', likely: 'Stress crack — will fail, replace urgently', urgency: 'URGENT' },
+        { symptom: 'Mist or condensation between panes', likely: 'Blown sealed unit  -  seal failure', urgency: 'GENERAL' },
+        { symptom: 'Crack spreading across pane', likely: 'Stress crack  -  will fail, replace urgently', urgency: 'URGENT' },
         { symptom: 'Glass cracked without impact', likely: 'Nickel sulphide inclusion or thermal stress', urgency: 'GENERAL' },
         { symptom: 'Shop front glass smashed', likely: 'Needs emergency boarding then toughened replacement', urgency: 'EMERGENCY' },
       ],
       us: [
         { symptom: 'Window completely shattered', likely: 'Impact damage or thermal stress fracture', urgency: 'EMERGENCY' },
         { symptom: 'Foggy or hazy double-pane glass', likely: 'Failed seal in the insulated glass unit (IGU)', urgency: 'GENERAL' },
-        { symptom: 'Crack spreading through window', likely: 'Stress fracture — requires replacement for safety', urgency: 'URGENT' },
+        { symptom: 'Crack spreading through window', likely: 'Stress fracture  -  requires replacement for safety', urgency: 'URGENT' },
         { symptom: 'Glass cracked spontaneously', likely: 'Thermal shock or improper installation', urgency: 'GENERAL' },
         { symptom: 'Storefront glass broken', likely: 'Needs immediate boarding and tempered/laminated replacement', urgency: 'EMERGENCY' },
       ],
@@ -487,7 +487,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     diagnostics: {
       uk: [
         { symptom: 'Water stain on ceiling', likely: 'Slipped tile, failed flashing, or flat roof breach', urgency: 'URGENT' },
-        { symptom: 'Multiple tiles missing after storm', likely: 'Wind damage — exposed membrane at risk', urgency: 'EMERGENCY' },
+        { symptom: 'Multiple tiles missing after storm', likely: 'Wind damage  -  exposed membrane at risk', urgency: 'EMERGENCY' },
         { symptom: 'Water running down chimney breast', likely: 'Failed chimney flashing or cracked stack', urgency: 'URGENT' },
         { symptom: 'Sagging roof section', likely: 'Structural timber failure (rot or overload)', urgency: 'EMERGENCY' },
         { symptom: 'Gutter overflowing in rain', likely: 'Blocked gutter/downpipe or inadequate fall', urgency: 'GENERAL' },
@@ -495,7 +495,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       ],
       us: [
         { symptom: 'Ceiling discoloration or spotting', likely: 'Damaged shingles, failed flashing, or valley leak', urgency: 'URGENT' },
-        { symptom: 'Shingles blown off after high winds', likely: 'Storm damage — potential for water infiltration', urgency: 'EMERGENCY' },
+        { symptom: 'Shingles blown off after high winds', likely: 'Storm damage  -  potential for water infiltration', urgency: 'EMERGENCY' },
         { symptom: 'Water leaking near chimney/vent', likely: 'Failed step flashing or rubber boot around pipe', urgency: 'URGENT' },
         { symptom: 'Roof line appears sagging', likely: 'Structural failure or overloaded rafters/trusses', urgency: 'EMERGENCY' },
         { symptom: 'Gutters pulling away or overflowing', likely: 'Facia rot, clogged gutters, or improper pitch', urgency: 'GENERAL' },
@@ -516,8 +516,8 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     },
     safetyGuidance: {
       emergency: {
-        uk: '🚨 NEVER go onto a roof yourself — falls from height are the #1 cause of construction deaths (**Work at Height Regulations 2005**). Stay clear of falling debris. Place buckets under leaks. Call an emergency **roofer** for tarping and temporary weatherproofing.',
-        us: '🚨 NEVER go onto a roof yourself — falls are the leading cause of construction fatalities (**OSHA 29 CFR 1926.501**). Stay away from areas below damage. Place buckets under active leaks if safe to do so. Call an emergency **roofer** for tarping.',
+        uk: '🚨 NEVER go onto a roof yourself  -  falls from height are the #1 cause of construction deaths (**Work at Height Regulations 2005**). Stay clear of falling debris. Place buckets under leaks. Call an emergency **roofer** for tarping and temporary weatherproofing.',
+        us: '🚨 NEVER go onto a roof yourself  -  falls are the leading cause of construction fatalities (**OSHA 29 CFR 1926.501**). Stay away from areas below damage. Place buckets under active leaks if safe to do so. Call an emergency **roofer** for tarping.',
       },
       general: {
         uk: 'Inspect your roof every 2-3 years and after storms. Keep gutters clear of debris. Check loft for daylight ingress twice a year. Re-point ridge tiles when mortar deteriorates. Flat roofs need annual inspection. Use **NFRC** registered roofers for guarantees.',
@@ -554,15 +554,15 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     diagnostics: {
       uk: [
         { symptom: 'Diagonal crack from corner of window', likely: 'Lintel failure or subsidence', urgency: 'URGENT' },
-        { symptom: 'Ceiling plaster bulging downward', likely: 'Water damage to plasterboard — collapse risk', urgency: 'EMERGENCY' },
+        { symptom: 'Ceiling plaster bulging downward', likely: 'Water damage to plasterboard  -  collapse risk', urgency: 'EMERGENCY' },
         { symptom: 'Floors noticeably uneven or bouncy', likely: 'Joist failure, rot, or insufficient support', urgency: 'URGENT' },
-        { symptom: 'Doors and windows sticking', likely: 'Building movement — subsidence or heave', urgency: 'URGENT' },
+        { symptom: 'Doors and windows sticking', likely: 'Building movement  -  subsidence or heave', urgency: 'URGENT' },
         { symptom: 'External wall bowing outward', likely: 'Wall tie failure or structural instability', urgency: 'EMERGENCY' },
         { symptom: 'Horizontal crack along mortar line', likely: 'Lateral movement or thermal expansion', urgency: 'GENERAL' },
       ],
       us: [
         { symptom: 'Diagonal crack in drywall above window', likely: 'Header failure or foundation settling', urgency: 'URGENT' },
-        { symptom: 'Ceiling drywall sagging or bulging', likely: 'Water intrusion — immediate collapse risk', urgency: 'EMERGENCY' },
+        { symptom: 'Ceiling drywall sagging or bulging', likely: 'Water intrusion  -  immediate collapse risk', urgency: 'EMERGENCY' },
         { symptom: 'Floors feel uneven or soft', likely: 'Joist rot, termite damage, or pier failure', urgency: 'URGENT' },
         { symptom: 'Interior doors sticking in frames', likely: 'Foundation movement or soil expansion', urgency: 'URGENT' },
         { symptom: 'Foundation wall bowing or leaning', likely: 'Hydrostatic pressure or structural failure', urgency: 'EMERGENCY' },
@@ -587,8 +587,8 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
         us: '🚨 STRUCTURAL DAMAGE? Evacuate the affected area immediately. Do NOT attempt to brace or support collapsing structures yourself. For rapidly widening cracks, evacuate the building. Call **911** if collapse is imminent. Contact a **licensed structural engineer** and emergency **contractor** immediately.',
       },
       general: {
-        uk: 'Monitor cracks with pencil marks and dates. Hairline cracks (<1mm) are usually cosmetic. Cracks wider than 5mm may be structural — get a **RICS structural survey**. Keep trees 10m+ from foundations (**Building Regs Part A**). Check the **Party Wall Act 1996** for work near neighbour boundaries.',
-        us: 'Monitor cracks with pencil marks and dates. Hairline cracks are usually cosmetic. Cracking wider than ¼ inch may be structural — get a licensed **structural engineer** assessment. Keep large trees away from foundations. Check **local building codes** and permit requirements before any structural repairs.',
+        uk: 'Monitor cracks with pencil marks and dates. Hairline cracks (<1mm) are usually cosmetic. Cracks wider than 5mm may be structural  -  get a **RICS structural survey**. Keep trees 10m+ from foundations (**Building Regs Part A**). Check the **Party Wall Act 1996** for work near neighbour boundaries.',
+        us: 'Monitor cracks with pencil marks and dates. Hairline cracks are usually cosmetic. Cracking wider than ¼ inch may be structural  -  get a licensed **structural engineer** assessment. Keep large trees away from foundations. Check **local building codes** and permit requirements before any structural repairs.',
       },
     },
     regulations: {
@@ -619,18 +619,18 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     ],
     diagnostics: {
       uk: [
-        { symptom: 'Standing water throughout ground floor', likely: 'Category 1-3 flooding — extraction needed', urgency: 'EMERGENCY' },
+        { symptom: 'Standing water throughout ground floor', likely: 'Category 1-3 flooding  -  extraction needed', urgency: 'EMERGENCY' },
         { symptom: 'Damp patches appearing days after leak', likely: 'Residual moisture wicking through masonry', urgency: 'URGENT' },
         { symptom: 'Musty smell after water event', likely: 'Mould growth starting behind walls', urgency: 'URGENT' },
-        { symptom: 'Laminate or wood floor buckling', likely: 'Subfloor saturated — drying needed before replacement', urgency: 'URGENT' },
-        { symptom: 'Black spots on walls or ceiling', likely: 'Active mould colony — remediation required', urgency: 'URGENT' },
+        { symptom: 'Laminate or wood floor buckling', likely: 'Subfloor saturated  -  drying needed before replacement', urgency: 'URGENT' },
+        { symptom: 'Black spots on walls or ceiling', likely: 'Active mould colony  -  remediation required', urgency: 'URGENT' },
       ],
       us: [
-        { symptom: 'Standing water on the first floor/basement', likely: 'Category 1-3 flooding — professional extraction required', urgency: 'EMERGENCY' },
+        { symptom: 'Standing water on the first floor/basement', likely: 'Category 1-3 flooding  -  professional extraction required', urgency: 'EMERGENCY' },
         { symptom: 'Wet spots appearing on drywall', likely: 'Lingering moisture in the wall cavity', urgency: 'URGENT' },
         { symptom: 'Musty or sour odor', likely: 'Mold growth initiated in hidden areas', urgency: 'URGENT' },
-        { symptom: 'Cupping or crowning wood floors', likely: 'Slab or subfloor saturation — requires controlled drying', urgency: 'URGENT' },
-        { symptom: 'Visible mold growth on surfaces', likely: 'Active microbial colonization — remediation needed', urgency: 'URGENT' },
+        { symptom: 'Cupping or crowning wood floors', likely: 'Slab or subfloor saturation  -  requires controlled drying', urgency: 'URGENT' },
+        { symptom: 'Visible mold growth on surfaces', likely: 'Active microbial colonization  -  remediation needed', urgency: 'URGENT' },
       ],
     },
     typicalFaults: {
@@ -647,12 +647,12 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     },
     safetyGuidance: {
       emergency: {
-        uk: '🚨 FLOODING? Turn off electricity if you can reach the **consumer unit** safely without standing in water. Stop the water source (stopcock, appliance valve). Do NOT wade through flood water near sockets. Sewage water is a biohazard — full PPE needed. Call a **water restoration specialist** immediately.',
-        us: '🚨 FLOODING? Turn off electricity at the **main breaker** only if you can do so without standing in water. Shut off the main water valve. Do NOT wade through flood water near electrical outlets. Sewage-contaminated water is a **Category 3 biohazard** — full PPE required. Call a **water damage restoration company** immediately.',
+        uk: '🚨 FLOODING? Turn off electricity if you can reach the **consumer unit** safely without standing in water. Stop the water source (stopcock, appliance valve). Do NOT wade through flood water near sockets. Sewage water is a biohazard  -  full PPE needed. Call a **water restoration specialist** immediately.',
+        us: '🚨 FLOODING? Turn off electricity at the **main breaker** only if you can do so without standing in water. Shut off the main water valve. Do NOT wade through flood water near electrical outlets. Sewage-contaminated water is a **Category 3 biohazard**  -  full PPE required. Call a **water damage restoration company** immediately.',
       },
       general: {
-        uk: 'Document all damage with photos for insurance before cleanup. Check your policy covers **escape of water**. Professional dehumidifiers remove 50-100 litres/day. Mould starts within 24-48 hours — act fast. Contact the **BDMA** for certified restorers. Make a flood plan if in a flood-risk area.',
-        us: 'Document all damage with photos and video before cleanup. Check your homeowner policy for **sudden & accidental discharge** coverage. Professional dehumidifiers run continuously — don\'t rely on household units. Mold starts within 24-48 hours — act quickly. Use **IICRC S500-certified** water restoration companies.',
+        uk: 'Document all damage with photos for insurance before cleanup. Check your policy covers **escape of water**. Professional dehumidifiers remove 50-100 litres/day. Mould starts within 24-48 hours  -  act fast. Contact the **BDMA** for certified restorers. Make a flood plan if in a flood-risk area.',
+        us: 'Document all damage with photos and video before cleanup. Check your homeowner policy for **sudden & accidental discharge** coverage. Professional dehumidifiers run continuously  -  don\'t rely on household units. Mold starts within 24-48 hours  -  act quickly. Use **IICRC S500-certified** water restoration companies.',
       },
     },
     regulations: {
@@ -687,17 +687,17 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
       uk: [
         { symptom: "Engine cranks but won't start", likely: 'Fuel system, ignition, or immobiliser fault', urgency: 'URGENT' },
         { symptom: 'Nothing happens when turning key', likely: 'Dead battery, starter motor, or loose terminal', urgency: 'URGENT' },
-        { symptom: 'Red oil pressure warning light', likely: 'Low oil or oil pump failure — STOP immediately', urgency: 'EMERGENCY' },
+        { symptom: 'Red oil pressure warning light', likely: 'Low oil or oil pump failure  -  STOP immediately', urgency: 'EMERGENCY' },
         { symptom: 'Temperature gauge in red', likely: 'Coolant loss, thermostat, or head gasket', urgency: 'EMERGENCY' },
-        { symptom: 'Put wrong fuel in', likely: 'Fuel contamination — do NOT start engine', urgency: 'URGENT' },
-        { symptom: 'Tyre blowout on road', likely: 'Rim damage possible — needs safe jacking on level ground', urgency: 'EMERGENCY' },
+        { symptom: 'Put wrong fuel in', likely: 'Fuel contamination  -  do NOT start engine', urgency: 'URGENT' },
+        { symptom: 'Tyre blowout on road', likely: 'Rim damage possible  -  needs safe jacking on level ground', urgency: 'EMERGENCY' },
       ],
       us: [
         { symptom: "Engine turns over but won't fire", likely: 'Fuel pump, spark plugs, or security/immobilizer issue', urgency: 'URGENT' },
         { symptom: 'Dash lights come on but car won\'t crank', likely: 'Dead battery, failed starter, or neutral safety switch', urgency: 'URGENT' },
-        { symptom: 'Oil pressure light is on', likely: 'Dangerously low oil levels or pump failure — PULL OVER', urgency: 'EMERGENCY' },
+        { symptom: 'Oil pressure light is on', likely: 'Dangerously low oil levels or pump failure  -  PULL OVER', urgency: 'EMERGENCY' },
         { symptom: 'Temp gauge climbing into the red', likely: 'Cooling system failure or low coolant', urgency: 'EMERGENCY' },
-        { symptom: 'Incorrect fuel put in tank', likely: 'Fuel system contamination — DO NOT CRANK ENGINE', urgency: 'URGENT' },
+        { symptom: 'Incorrect fuel put in tank', likely: 'Fuel system contamination  -  DO NOT CRANK ENGINE', urgency: 'URGENT' },
         { symptom: 'Flat tire or blowout', likely: 'Requires tire change or tow to a shop', urgency: 'EMERGENCY' },
       ],
     },
@@ -730,7 +730,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     repairPractices: {
       uk: [
         'Jump start: positive-to-positive, negative-to-engine-earth',
-        'Wrong fuel: do NOT start — drain and flush required',
+        'Wrong fuel: do NOT start  -  drain and flush required',
         'Tyre change: only on firm, level ground away from traffic',
         'Overheating: cool 30+ mins before opening cap',
         'EV: never touch orange high-voltage cables',
@@ -757,7 +757,7 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
         { symptom: 'AC blowing warm air', likely: 'Low refrigerant, compressor fault, or blocked condenser', urgency: 'URGENT' },
         { symptom: 'AC unit iced up or frozen', likely: 'Low refrigerant, poor airflow, or faulty expansion valve', urgency: 'URGENT' },
         { symptom: 'Water leaking from indoor unit', likely: 'Blocked condensate drain or frozen evaporator thawing', urgency: 'URGENT' },
-        { symptom: 'Chemical smell from AC', likely: 'Refrigerant leak — potential health hazard', urgency: 'EMERGENCY' },
+        { symptom: 'Chemical smell from AC', likely: 'Refrigerant leak  -  potential health hazard', urgency: 'EMERGENCY' },
         { symptom: 'AC making grinding noise', likely: 'Fan motor bearing failure or debris in unit', urgency: 'URGENT' },
         { symptom: 'Furnace cycles on and off rapidly', likely: 'Faulty flame sensor, thermostat, or airflow restriction', urgency: 'GENERAL' },
         { symptom: 'No response from thermostat', likely: 'Dead batteries, wiring fault, or blown transformer', urgency: 'GENERAL' },
@@ -786,12 +786,12 @@ export const INTERNAL_KNOWLEDGE: Record<string, TradeKnowledge> = {
     },
     safetyGuidance: {
       emergency: {
-        uk: '🚨 REFRIGERANT SMELL? Turn off the AC unit at the **fuse spur or consumer unit**. Open all windows and doors. Leave the area — refrigerant can cause dizziness, breathing difficulties, and frostbite. Call a **REFCOM or F-Gas certified** HVAC/refrigeration engineer immediately. Do NOT attempt to fix refrigerant leaks yourself.',
+        uk: '🚨 REFRIGERANT SMELL? Turn off the AC unit at the **fuse spur or consumer unit**. Open all windows and doors. Leave the area  -  refrigerant can cause dizziness, breathing difficulties, and frostbite. Call a **REFCOM or F-Gas certified** HVAC/refrigeration engineer immediately. Do NOT attempt to fix refrigerant leaks yourself.',
         us: '🚨 REFRIGERANT SMELL? Turn off the AC/HVAC at the **electrical breaker**. Open all doors and windows and ventilate fully. Refrigerant exposure can cause dizziness, breathing problems, and frostbite on contact. Call an **EPA 608 certified HVAC technician** immediately. Do NOT attempt refrigerant repairs yourself.',
       },
       general: {
-        uk: 'Change or clean air filters every 1-3 months. Service your **air conditioning unit** annually (REFCOM/F-Gas certified). Keep outdoor units clear of debris. Do not close vents — it increases system pressure. Check **F-Gas Regulations** for refrigerant compliance.',
-        us: 'Replace air filters every 1-3 months. Service your **HVAC system** twice yearly — spring for AC, fall for heating. Keep outdoor condenser units clear of leaves and debris (2ft clearance). Do not block supply vents. Check for **NATE-certified** technicians for quality assurance.',
+        uk: 'Change or clean air filters every 1-3 months. Service your **air conditioning unit** annually (REFCOM/F-Gas certified). Keep outdoor units clear of debris. Do not close vents  -  it increases system pressure. Check **F-Gas Regulations** for refrigerant compliance.',
+        us: 'Replace air filters every 1-3 months. Service your **HVAC system** twice yearly  -  spring for AC, fall for heating. Keep outdoor condenser units clear of leaves and debris (2ft clearance). Do not block supply vents. Check for **NATE-certified** technicians for quality assurance.',
       },
     },
     regulations: {

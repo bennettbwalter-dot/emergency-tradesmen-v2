@@ -17,12 +17,12 @@ const ukFaqData = [
     },
     {
         question: "How does the service work?",
-        answer: "You can either use the chatbot to describe your emergency, or search manually by trade and location. We’ll guide you to the right local tradesperson so you can call and get help immediately.",
+        answer: "Use the chatbot to describe your emergency, or search by trade and location. The site routes you to local tradespeople so you can call for help.",
         icon: <Search className="w-5 h-5 text-gold" />
     },
     {
         question: "What does the AI chatbot do?",
-        answer: "Our AI assistant helps you: Understand what to do (and what not to do) in an emergency, follow basic safety guidance and regulations, identify the correct trade for your situation, and navigate the site and connect you to the right local tradesperson. You can simply talk to the bot — no searching required.",
+        answer: "Our AI assistant helps you understand urgent safety steps, identify the right trade, and reach a local tradesperson. You can talk to the bot instead of searching by hand.",
         icon: <MessageSquare className="w-5 h-5 text-gold" />
     },
     {
@@ -32,7 +32,7 @@ const ukFaqData = [
     },
     {
         question: "Does the chatbot replace calling a tradesperson?",
-        answer: "No. The chatbot helps guide and route you, but the final step is always direct contact with a professional. Once the right tradesperson is found, you simply tap to call.",
+        answer: "No. The chatbot helps route you, but you still contact the professional directly. Once the right tradesperson is found, tap to call.",
         icon: <Zap className="w-5 h-5 text-gold" />
     },
     {
@@ -42,7 +42,7 @@ const ukFaqData = [
     },
     {
         question: "Do I need to fill in forms or create an account?",
-        answer: "No. There are no long forms and no required sign-ups. The goal is speed — find help and call straight away.",
+        answer: "No. There are no long forms and no required sign-ups. Find help and call straight away.",
         icon: <UserCheck className="w-5 h-5 text-gold" />
     },
     {
@@ -75,12 +75,12 @@ const usFaqData = [
     },
     {
         question: "How does the service work?",
-        answer: "You can either use the chatbot to describe your emergency, or search manually by trade and location. We'll guide you to the right local contractor so you can call and get help immediately.",
+        answer: "Use the chatbot to describe your emergency, or search by trade and location. The site routes you to local contractors so you can call for help.",
         icon: <Search className="w-5 h-5 text-gold" />
     },
     {
         question: "What does the AI chatbot do?",
-        answer: "Our AI assistant helps you understand what to do (and what not to do) in an emergency, follow basic safety guidance and US code best practices, identify the correct trade for your situation, and connect you to the right local contractor. You can simply talk to the bot — no searching required.",
+        answer: "Our AI assistant helps you understand urgent safety steps, follow US code best practices, identify the right trade, and reach a local contractor. You can talk to the bot instead of searching by hand.",
         icon: <MessageSquare className="w-5 h-5 text-gold" />
     },
     {
@@ -90,7 +90,7 @@ const usFaqData = [
     },
     {
         question: "Does the chatbot replace calling a contractor?",
-        answer: "No. The chatbot guides and routes you, but the final step is always direct contact with a licensed professional. Once the right contractor is found, you simply tap to call.",
+        answer: "No. The chatbot routes you, but you still contact the licensed professional directly. Once the right contractor is found, tap to call.",
         icon: <Zap className="w-5 h-5 text-gold" />
     },
     {
@@ -100,7 +100,7 @@ const usFaqData = [
     },
     {
         question: "Do I need to fill in forms or create an account?",
-        answer: "No. There are no long forms and no required sign-ups. The goal is speed — find help and call straight away.",
+        answer: "No. There are no long forms and no required sign-ups. Find help and call straight away.",
         icon: <UserCheck className="w-5 h-5 text-gold" />
     },
     {

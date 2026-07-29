@@ -163,7 +163,7 @@ export function Footer({ countryCode }: FooterProps) {
           </div>
         </div>
 
-        {/* For Pros — claim, showroom, and websites for tradespeople */}
+        {/* For Pros  -  claim, showroom, and websites for tradespeople */}
         <div className="pt-10 pb-8 border-t border-white/10">
           <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-6">
             For {isUS || isUSDomain ? "Contractors" : "Tradespeople"}
@@ -190,7 +190,7 @@ export function Footer({ countryCode }: FooterProps) {
           </div>
         </div>
 
-        {/* Common Emergencies Hub — internal links to problem pages */}
+        {/* Common Emergencies Hub  -  internal links to problem pages */}
         <div className="pt-10 pb-8 border-t border-white/10">
           <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-gold mb-6">Common Emergencies</h4>
           <div className="flex flex-wrap gap-x-5 gap-y-3">

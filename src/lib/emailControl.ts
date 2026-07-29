@@ -126,18 +126,18 @@ export const DEFAULT_SUBJECT = 'Claim your free Emergency Tradesmen listing in {
 export const DEFAULT_TEMPLATE = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#0f172a">
   <h2 style="color:#b91c1c;margin:0 0 8px">Get found for emergency {{trade}} jobs in {{city}}</h2>
   <p>Hi {{first_name}},</p>
-  <p><strong>{{business_name}}</strong> is listed on <strong>Emergency Tradesmen</strong> — the directory customers use to find emergency tradespeople fast when they need urgent help.</p>
+  <p><strong>{{business_name}}</strong> is listed on <strong>Emergency Tradesmen</strong>  -  the directory customers use to find emergency tradespeople fast when they need urgent help.</p>
   <p>Claim your local listing to control your details and start getting calls for urgent jobs in {{city}}:</p>
   <ul>
     <li>✅ Claim your local emergency listing</li>
     <li>✅ Get found by customers in your area when they need help now</li>
     <li>✅ More visibility for urgent, high-value jobs</li>
-    <li>✅ Early Pro listing opportunity — free emergency-ready website for early Pro sign-ups (while available)</li>
+    <li>✅ Early Pro listing opportunity  -  free emergency-ready website for early Pro sign-ups (while available)</li>
   </ul>
   <p style="text-align:center;margin:28px 0">
     <a href="{{listing_url}}" style="background:#b91c1c;color:#fff;padding:14px 26px;border-radius:8px;text-decoration:none;font-weight:bold">View &amp; Claim Your Listing →</a>
   </p>
-  <p>Reply to this email if you have any questions — a real person will get back to you.</p>
+  <p>Reply to this email if you have any questions  -  a real person will get back to you.</p>
 </div>`;
 
 const EMAIL_RE = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
@@ -195,7 +195,7 @@ export function parseContactsCsv(text: string): { rows: Partial<EmailContact>[];
     const cells = split(lines[i]);
     const row: Record<string, string> = {};
     headers.forEach((h, idx) => { row[alias[h] || h] = cells[idx] ?? ''; });
-    if (!row.email) { errors.push(`Row ${i + 1}: missing email — skipped.`); continue; }
+    if (!row.email) { errors.push(`Row ${i + 1}: missing email  -  skipped.`); continue; }
     rows.push({
       business_name: row.business_name || row.email,
       contact_name: row.contact_name || null,
