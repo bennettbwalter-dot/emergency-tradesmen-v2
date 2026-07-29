@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c2d12"/>
+      <stop offset="100%" style="stop-color:#be123c"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)" rx="0"/>
+  <circle cx="200" cy="174" r="66" fill="none" stroke="#fed7aa" stroke-width="8" opacity="0.32"/>
+  <circle cx="200" cy="174" r="38" fill="#fed7aa" opacity="0.22"/>
+  <path d="M 137 302 C 158 270 176 281 191 252 C 199 279 226 276 247 306" fill="none" stroke="#fed7aa" stroke-width="7" opacity="0.42"/>
+  <path d="M 156 324 H 244" stroke="#fed7aa" stroke-width="8" opacity="0.34"/>
+  <path d="M 0 0 L 64 0 L 40 24 L 0 24 Z" fill="#fed7aa" opacity="0.38"/>
+  <path d="M 400 500 L 336 500 L 360 476 L 400 476 Z" fill="#fed7aa" opacity="0.38"/>
+  <g filter="url(#shadow)">
+    <text x="200" y="236" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">Dryer Burning</text>
+    <text x="200" y="276" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">RCD Trip</text>
+  </g>
+  <text x="200" y="345" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#fed7aa" text-anchor="middle" letter-spacing="2" opacity="0.82">EMERGENCY GUIDE 2026</text>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#312e81"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)" rx="0"/>
+  <circle cx="200" cy="178" r="52" fill="none" stroke="#fca5a5" stroke-width="8" opacity="0.34"/>
+  <rect x="185" y="150" width="30" height="72" rx="15" fill="#fca5a5" opacity="0.26"/>
+  <path d="M 150 312 L 190 272 L 210 292 L 250 252" stroke="#fca5a5" stroke-width="5" fill="none" opacity="0.38"/>
+  <path d="M 0 0 L 60 0 L 40 20 L 0 20 Z" fill="#fca5a5" opacity="0.4"/>
+  <path d="M 400 500 L 340 500 L 360 480 L 400 480 Z" fill="#fca5a5" opacity="0.4"/>
+  <g filter="url(#shadow)">
+    <text x="200" y="245" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">Key Snapped</text>
+    <text x="200" y="285" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">In Lock</text>
+  </g>
+  <text x="200" y="345" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#fca5a5" text-anchor="middle" letter-spacing="2" opacity="0.8">EMERGENCY GUIDE 2026</text>
+</svg>
