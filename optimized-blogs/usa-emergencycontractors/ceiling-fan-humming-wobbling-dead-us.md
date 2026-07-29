@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Ceiling Fan Humming, Wobbling, or Dead? Safe Fixes Before Calling a 24/7 Electrician</title>
-    <meta name="description" content="Ceiling fan humming, wobbling, or completely dead? Learn safe, step-by-step DIY fixes for batteries, loose screws, capacitors, and when to call a pro.">
+    <meta name="description" content="Ceiling fan humming, wobbling, or completely dead? Follow this step-by-step troubleshooting guide to test circuit breakers, secure blade irons, check remote receiver wire nuts, replace run capacitors, and lubricate cast-iron motor bearings.">
 </head>
 <body>
 
 <header>
     <h1>Ceiling Fan Humming, Wobbling, or Dead? Safe Fixes Before Calling a 24/7 Electrician</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Contractors US Team</span> | 
-        <span class="date-updated">Updated: June 6, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Contractors US Team</span> |
+        <span class="date-updated">Updated: 6 June 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/images/blog/us-ceiling-fan-hero.png" alt="A modern ceiling fan with wooden blades spinning slowly in a cozy bedroom with warm light, premium visual aesthetic" width="1200" height="630">
 </header>
 
-<main>
-    <p class="blog-intro">There is a very specific kind of summer betrayal that happens at 2:00 AM. The house is stuffy, you reach over and pull the ceiling fan chain, expecting a gentle, cooling breeze. Instead, you get a violent, rhythmic wub-wub-wub-wub that sounds like a helicopter landing on your roof, followed by an angry electrical hum. Or worse, you flip the wall switch and absolutely nothing happens. At this point, you’re not just hot; you’re staring at the ceiling wondering if the whole fixture is about to detach and take out your dresser. I’ve stood in that exact sweltering bedroom, holding a broom handle to steady a wobbling fan, wondering if I should just sleep in the bathtub. But before you start ripping wires out of the ceiling or frantically searching “24/7 emergency electrician near me,” take a slow breath. Ceiling fan issues are incredibly common in the summer when they run 24/7, and they are rarely a house-wiring emergency. Nine times out of ten, it’s a loose screw, a dead remote receiver, or a cheap $15 capacitor. With a few safe checks, you can restore the breeze and avoid a $150 service call. Let’s walk through it.</p>
+<main class="blog-magazine-wrap">
+<p class="blog-intro">There is a very specific kind of summer betrayal that happens at 2:00 AM. The house is stuffy, you reach over and pull the ceiling fan chain, expecting a gentle, cooling breeze. Instead, you get a violent, rhythmic wub-wub-wub-wub that sounds like a helicopter landing on your roof, followed by an angry electrical hum. Or worse, you flip the wall switch and absolutely nothing happens. At this point, you’re not just hot; you’re staring at the ceiling wondering if the whole fixture is about to detach and take out your dresser. I’ve stood in that exact sweltering bedroom, holding a broom handle to steady a wobbling fan, wondering if I should just sleep in the bathtub. But before you start ripping wires out of the ceiling or frantically searching “24/7 emergency electrician near me,” take a slow breath. Ceiling fan issues are incredibly common in the summer when they run 24/7, and they are rarely a house-wiring emergency. Nine times out of ten, it’s a loose screw, a dead remote receiver, or a cheap $15 capacitor. With a few safe checks, you can restore the breeze and avoid a $150 service call. Let’s walk through it.</p>
 
     <h2>1. Ceiling Fan Troubleshooting: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -189,33 +188,6 @@
         <a href="/us/emergency-electrician" class="blog-cta-btn">Connect With Local Electricians 24/7</a>
     </div>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/us/emergency-electrician" class="sticky-cta" id="emergency-call-btn">
-            <span>24/7 Emergency Electrical Service: Call Now</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related US Electrical Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/us/blog/electrical/us-electrical-panel-burning-smell">
-                    <img src="/placeholder.svg" alt="Electrical Panel Burning Smell">
-                    <span>Electrical Panel Burning Smell? What to Do Immediately</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/us/blog/electrical/emergency-ev-charger-repair-us">
-                    <img src="/placeholder.svg" alt="EV Charger Repair">
-                    <span>Emergency EV Charger Repair: Pro Tips for EV Owners</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

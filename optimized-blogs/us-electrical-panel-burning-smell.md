@@ -4,7 +4,7 @@
 
 If your electrical panel or a wall outlet smells like "fish," ozone, or burning plastic, you are likely minutes away from an attic or wall fire. This specific odor is the sign of electrical arcing or overheating insulation. In the US, electrical failures cause over 50,000 home fires annually, resulting in $1.3 billion in property damage.
 
-When the scent of burning hits your nose, the clock is ticking. You are no longer in "maintenance mode"—you are in a life-safety emergency. Searching for an **emergency electrician near me** is your second step; your first step is immediate de-energization.
+When the scent of burning hits your nose, the clock is ticking. You are no longer in "maintenance mode" - you are in a life-safety emergency. Searching for an **emergency electrician near me** is your second step; your first step is immediate de-energization.
 
 In this master guide, we cover the 5 things you should NEVER do during an electrical crisis and what your local technician needs to do to keep your family safe.
 
@@ -13,7 +13,7 @@ In this master guide, we cover the 5 things you should NEVER do during an electr
 <!-- .capsule-box (Red Accent) -->
 ### ⚡ Why This Is Dangerous
 Electrical emergencies are unique because the fuel source is constant until manually disconnected.
-*   **Arc Flashes:** An electrical arc can reach temperatures of 35,000°F—four times hotter than the surface of the sun.
+*   **Arc Flashes:** An electrical arc can reach temperatures of 35,000°F - four times hotter than the surface of the sun.
 *   **Electrocution:** A "buzzing" panel suggests current is leaping across damaged components. Touching the panel door can be fatal.
 *   **Silent Spread:** Most electrical fires start inside walls. By the time you see smoke, the fire is already well-established.
 *   **Total Loss:** Using an un-licensed local contractor to fix a panel can lead to insurance claims being denied.

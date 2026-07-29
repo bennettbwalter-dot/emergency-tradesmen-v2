@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Outside Tap Leaking or Burst After Winter? Quick Fixes Before Calling an Emergency Plumber</title>
-    <meta name="description" content="Is your outside tap dripping or spraying water after the winter frost? Learn the step-by-step UK DIY guide to replace internal washers, swap a split bib tap body, detect cavity wall leaks, and prevent frost damage.">
+    <meta name="description" content="Your outside tap split over winter? Follow this UK step-by-step guide to isolate the water, replace a perished washer or burst bib tap, check for cavity wall leaks, and prevent future frost damage.">
 </head>
 <body>
 
 <header>
     <h1>Outside Tap Leaking or Burst After Winter? Quick Fixes Before Calling an Emergency Plumber</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Tradesmen UK Team</span> | 
-        <span class="date-updated">Updated: May 22, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Tradesmen UK Team</span> |
+        <span class="date-updated">Updated: 22 May 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/images/blog/uk-outside-tap-leaking-hero.png" alt="A brass garden tap fitted onto a red brick wall with water spraying violently from a hairline crack in its metal body, premium aesthetic" width="1200" height="630">
 </header>
 
-<main>
-    <p class="blog-intro">There is a very specific, uniquely British kind of seasonal optimism that occurs on the first properly warm Saturday of spring. You drag the hosepipe out of the garden shed, untangle it, screw the plastic connector onto the outside tap, and turn the brass handle, ready to wash the car or water the borders. But instead of a steady, satisfying stream of water, you are met with a violent, high-pressure spray directly to the chest, followed by a geyser erupting from the brickwork behind the tap. The pipe has split over the winter. I’ve stood in that exact driveway, soaked to the bone, wondering if I should just leave the hose running and pretend I’m playing in a sprinkler. But before you start wrestling with rusty spanners or ringing an emergency plumber in a panic, take a steady breath. Outside tap leaks and frost-damaged garden plumbing are incredibly common during the spring thaw, and they are usually a cheap, straightforward fix. With a few safe, logical checks, you can stop the flooding, save your water bill, and avoid paying a hefty callout fee for a simple washer or tap replacement. Let’s walk through the repair step by step.</p>
+<main class="blog-magazine-wrap">
+<p class="blog-intro">There is a very specific, uniquely British kind of seasonal optimism that occurs on the first properly warm Saturday of spring. You drag the hosepipe out of the garden shed, untangle it, screw the plastic connector onto the outside tap, and turn the brass handle, ready to wash the car or water the borders. But instead of a steady, satisfying stream of water, you are met with a violent, high-pressure spray directly to the chest, followed by a geyser erupting from the brickwork behind the tap. The pipe has split over the winter. I’ve stood in that exact driveway, soaked to the bone, wondering if I should just leave the hose running and pretend I’m playing in a sprinkler. But before you start wrestling with rusty spanners or ringing an emergency plumber in a panic, take a steady breath. Outside tap leaks and frost-damaged garden plumbing are incredibly common during the spring thaw, and they are usually a cheap, straightforward fix. With a few safe, logical checks, you can stop the flooding, save your water bill, and avoid paying a hefty callout fee for a simple washer or tap replacement. Let’s walk through the repair step by step.</p>
 
     <h2>1. UK Outside Tap Leak: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
         <ul>
             <li><strong>Isolation First:</strong> Locate your indoor isolation valve (usually under the kitchen sink) to stop the water spray instantly.</li>
-            <li><strong>Frost Expansion:</strong> Water expands by 9% when freezing, producing up to 114,000 PSI of mechanical force—enough to split solid brass.</li>
+            <li><strong>Frost Expansion:</strong> Water expands by 9% when freezing, producing up to 114,000 PSI of mechanical force - enough to split solid brass.</li>
             <li><strong>The Washer Swap:</strong> Taps dripping from the spout usually only need a new 1/2-inch or 3/4-inch internal rubber washer.</li>
             <li><strong>PTFE Tape Secret:</strong> Wrap a new tap's thread at least 10 times clockwise with PTFE tape to ensure a watertight seal against the wall elbow.</li>
             <li><strong>Water Regulations:</strong> Modern UK standards require a double check valve to prevent dirty garden water from back-siphoning into your drinking supply.</li>
@@ -87,7 +86,7 @@
             <h2>Swap Out a Cracked Tap Body Safely</h2>
         </div>
         <div class="blog-step-body">
-            <p>If the brass body of the tap has cracked from frost, it cannot be repaired; it must be completely replaced. Fortunately, standard UK brass bib taps are incredibly cheap, costing between £10 and £20 at any hardware store. With the water supply isolated, use two spanners—grip the wall plate elbow behind the tap firmly with one spanner to hold it steady, and use the other spanner to unscrew the tap body anti-clockwise.</p>
+            <p>If the brass body of the tap has cracked from frost, it cannot be repaired; it must be completely replaced. Fortunately, standard UK brass bib taps are incredibly cheap, costing between £10 and £20 at any hardware store. With the water supply isolated, use two spanners - grip the wall plate elbow behind the tap firmly with one spanner to hold it steady, and use the other spanner to unscrew the tap body anti-clockwise.</p>
             <p>Clean the old thread tape off the copper pipe connection. Wrap the threads of your new tap with PTFE thread seal tape (about 10 wraps wrapped in a clockwise direction). Screw the new tap into the wall elbow by hand, then use your spanner to tighten it until it sits perfectly upright. Do not overtighten, or you risk twisting and snapping the copper pipe inside your cavity wall.</p>
         </div>
     </div>
@@ -200,33 +199,6 @@
         <a href="/emergency-plumber" class="blog-cta-btn">Connect With Local Plumbers 24/7</a>
     </div>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/emergency-plumber" class="sticky-cta" id="emergency-call-btn">
-            <span>Call a 24/7 Verified Plumber</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related UK Plumbing Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/blog/plumbing/spring-thaw-burst-pipe-prevention-gb">
-                    <img src="/blog/plumbing/spring-thaw-featured-gb.webp" alt="Spring Thaw Burst Pipe">
-                    <span>Spring Thaw: Why March is the Most Dangerous Month for UK Plumbing 2026</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/blog/plumbing/emergency-pipe-burst-protocol-gb">
-                    <img src="/blog/plumbing/related-post-stopcock-gb.webp" alt="Emergency Pipe Burst">
-                    <span>The UK Homeowner's Emergency Pipe Burst Protocol</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

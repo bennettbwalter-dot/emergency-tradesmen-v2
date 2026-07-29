@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Refrigerator Warm but Freezer Cold (or Vice Versa)? Safe Fixes Before Calling a 24/7 Appliance Tech</title>
-    <meta name="description" content="Is your refrigerator warm but freezer freezing cold? Learn the step-by-step DIY guide to check air vents, vacuum condenser coils, test fans, check door seals, and inspect the start relay.">
+    <meta name="description" content="Refrigerator warm but freezer freezing cold? Follow this step-by-step troubleshooting guide to check vents, vacuum dusty coils, check evaporator/condenser fans, test rubber door seals, and inspect the compressor start relay.">
 </head>
 <body>
 
 <header>
     <h1>Refrigerator Warm but Freezer Cold (or Vice Versa)? Safe Fixes Before Calling a 24/7 Appliance Tech</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Contractors US Team</span> | 
-        <span class="date-updated">Updated: June 1, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Contractors US Team</span> |
+        <span class="date-updated">Updated: 1 June 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/images/blog/us-refrigerator-warm-freezer-cold-hero.png" alt="A modern kitchen with a stainless steel refrigerator showing its doors slightly open with a warm interior glow and melting ice cream, premium aesthetic" width="1200" height="630">
 </header>
 
-<main>
-    <p class="blog-intro">There is a very specific kind of kitchen heartbreak that happens when you open the fridge door anticipating an ice-cold drink or leftover pizza, and instead, you are greeted by a wave of lukewarm, sad-smelling air. You check the freezer, and the ice cream is the consistency of a milkshake. At this point, you’re doing the frantic mental math: Is all this groceries ruined? Am I about to spend $2,500 on a new stainless-steel French door fridge? I’ve stood in that exact kitchen, holding a melting pint of Ben & Jerry’s, wondering if I should start dragging the appliance to the curb. But before you start measuring your cabinet space or frantically searching “24/7 appliance repair near me,” take a slow breath. A fridge that stops cooling is rarely a total loss. Nine times out of ten, it’s a clogged vent, dirty coils, or a cheap $30 relay switch. With a few safe checks, you can often restore the chill and save your groceries. Let’s walk through it step by step.</p>
+<main class="blog-magazine-wrap">
+<p class="blog-intro">There is a very specific kind of kitchen heartbreak that happens when you open the fridge door anticipating an ice-cold drink or leftover pizza, and instead, you are greeted by a wave of lukewarm, sad-smelling air. You check the freezer, and the ice cream is the consistency of a milkshake. At this point, you’re doing the frantic mental math: Is all this groceries ruined? Am I about to spend $2,500 on a new stainless-steel French door fridge? I’ve stood in that exact kitchen, holding a melting pint of Ben & Jerry’s, wondering if I should start dragging the appliance to the curb. But before you start measuring your cabinet space or frantically searching “24/7 appliance repair near me,” take a slow breath. A fridge that stops cooling is rarely a total loss. Nine times out of ten, it’s a clogged vent, dirty coils, or a cheap $30 relay switch. With a few safe checks, you can often restore the chill and save your groceries. Let’s walk through it step by step.</p>
 
     <h2>1. Refrigerator Cooling Failure: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -192,33 +191,6 @@
         <a href="/us/emergency-appliance-repair" class="blog-cta-btn">Connect With Local Appliance Techs 24/7</a>
     </div>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/us/emergency-appliance-repair" class="sticky-cta" id="emergency-call-btn">
-            <span>24/7 Emergency Appliance Repair: Call Now</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related US Appliance & HVAC Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/us/blog/hvac/ac-blowing-warm-air-capacitor-leak-us">
-                    <img src="/images/blog/us-ac-blowing-warm-air-thumbnail.png" alt="AC Blowing Warm Air">
-                    <span>AC Blowing Warm Air? How to Troubleshoot the Capacitor and Fan</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/us/blog/hvac/ac-leaking-water-ceiling-safe-steps-us">
-                    <img src="/images/blog/us-ac-leaking-ceiling-hero.png" alt="AC Leaking Ceiling">
-                    <span>AC Leaking Water Through the Ceiling? Safe Steps Before Calling a 24/7 HVAC Technician</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

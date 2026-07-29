@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Combi Boiler Losing Pressure in Summer? Quick Fixes Before Calling a Gas Engineer</title>
-    <meta name="description" content="Is your combi boiler losing pressure during the summer? Learn the step-by-step DIY guide to check for radiator leaks, find the PRV, top up the filling loop, and bleed air.">
+    <meta name="description" content="Is your combi boiler losing pressure during the summer heatwave? Follow this UK DIY guide to inspect lockshield and TRV valves for leaks, check the external PRV safety pipe, top up the filling loop, and bleed air from radiators.">
 </head>
 <body>
 
 <header>
     <h1>Combi Boiler Losing Pressure in Summer? Quick Fixes Before Calling a Gas Engineer</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Tradesmen UK Team</span> | 
-        <span class="date-updated">Updated: June 6, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Tradesmen UK Team</span> |
+        <span class="date-updated">Updated: 6 June 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/images/blog/uk-combi-boiler-hero.png" alt="A modern wall-mounted combi boiler with digital display showing system pressure gauge, premium visual aesthetic" width="1200" height="630">
 </header>
 
-<main>
-    <p class="blog-intro">There is a very specific kind of British confusion that happens in the middle of a July heatwave. The central heating has been switched off since April. The house is 28 degrees. You step into the shower, expecting a refreshing blast of cold water, but instead, the shower sputters, goes freezing cold, and the digital display in the hallway starts flashing an angry red error code. You march down to the kitchen, look at the boiler, and see the pressure gauge has dropped to 0.2 bar. I’ve stood in that exact kitchen, sweating in a towel, wondering why on earth a boiler is breaking down when it’s hotter outside than the radiators. But before you start hitting the pipes with a spanner or ringing an emergency Gas Safe engineer in a panic, take a steady breath. Summer boiler pressure drops are incredibly common. When you stop using the heating, micro-leaks that were previously sealed by hot, expanded metal can open up, or the expansion vessel loses its charge. With a few safe checks, you can often top the system up, find the culprit, and get your hot water back without paying a summer weekend callout fee. Let’s walk through it.</p>
+<main class="blog-magazine-wrap">
+<p class="blog-intro">There is a very specific kind of British confusion that happens in the middle of a July heatwave. The central heating has been switched off since April. The house is 28 degrees. You step into the shower, expecting a refreshing blast of cold water, but instead, the shower sputters, goes freezing cold, and the digital display in the hallway starts flashing an angry red error code. You march down to the kitchen, look at the boiler, and see the pressure gauge has dropped to 0.2 bar. I’ve stood in that exact kitchen, sweating in a towel, wondering why on earth a boiler is breaking down when it’s hotter outside than the radiators. But before you start hitting the pipes with a spanner or ringing an emergency Gas Safe engineer in a panic, take a steady breath. Summer boiler pressure drops are incredibly common. When you stop using the heating, micro-leaks that were previously sealed by hot, expanded metal can open up, or the expansion vessel loses its charge. With a few safe checks, you can often top the system up, find the culprit, and get your hot water back without paying a summer weekend callout fee. Let’s walk through it.</p>
 
     <h2>1. Combi Boiler Pressure Drops: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -197,33 +196,6 @@
         <a href="/uk/emergency-gas-engineer" class="blog-cta-btn">Connect With Gas Safe Engineers 24/7</a>
     </div>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/uk/emergency-gas-engineer" class="sticky-cta" id="emergency-call-btn">
-            <span>24/7 Emergency Gas Safe Engineer: Call Now</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related UK Heating & Plumbing Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/blog/outside-tap-leaking-burst-winter-gb">
-                    <img src="/placeholder.svg" alt="Outside Tap Leaking">
-                    <span>Outside Tap Leaking or Burst? Quick Fixes</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/blog/emergency-plumber-london-guide">
-                    <img src="/placeholder.svg" alt="Emergency Plumber London">
-                    <span>Emergency Plumber in London: Complete Guide</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>The Hollow Frame Trap: Why Your UK uPVC Door Frame is the 2026 Security Gap</title>
-    <meta name="description" content="Is your uPVC door frame a security risk? Learn about the 'Hollow Frame Trap' and how PAS 24:2026 standards are evolving to stop frame spreading and glass removal.">
+    <meta name="description" content="Expert UK homeowners guide to The Hollow Frame Trap: Why Your UK uPVC Door Frame is the  Security Gap. Get expert help 24/7.">
 </head>
 <body>
 
 <header>
     <h1>The Hollow Frame Trap: Why Your UK uPVC Door Frame is the 2026 Security Gap</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Tradesmen Team</span> | 
-        <span class="date-updated">Updated: March 21, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Tradesmen UK Team</span> |
+        <span class="date-updated">Updated: 21 March 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/blog/security/frame-uk.webp" alt="Matte flat-vector illustration of a door frame cross-section showing hollow chambers vs steel-reinforced ones, with 'PAS 24:2026 Approved' technical callouts" width="1200" height="630">
 </header>
 
-<main>
-    <p>In the UK residential security audit of 2026, a disturbing trend has emerged: homeowners are installing world-class anti-snap locks into structurally inferior door frames. While the lock remains unbreachable, the frame itself is being exploited. Known as "Frame Spreading," this technique involves using a simple lever or air-wedge to pull the lock's bolts out of the plastic frame. With 45% of UK burglaries now involving direct damage to the door or frame, the "Hollow Frame Trap" is the \#1 security oversight for properties using 1990s or early 2000s uPVC technology. As we align with the PAS 24:2026 standards, understanding how to reinforce the "Soft Underbelly" of your doorway is essential. This guide outlines the structural upgrades required to make your uPVC or composite door truly secure.</p>
+<main class="blog-magazine-wrap">
+<p>In the UK residential security audit of 2026, a disturbing trend has emerged: homeowners are installing world-class anti-snap locks into structurally inferior door frames. While the lock remains unbreachable, the frame itself is being exploited. Known as "Frame Spreading," this technique involves using a simple lever or air-wedge to pull the lock's bolts out of the plastic frame. With 45% of UK burglaries now involving direct damage to the door or frame, the "Hollow Frame Trap" is the \#1 security oversight for properties using 1990s or early 2000s uPVC technology. As we align with the PAS 24:2026 standards, understanding how to reinforce the "Soft Underbelly" of your doorway is essential. This guide outlines the structural upgrades required to make your uPVC or composite door truly secure.</p>
 
     <h2>1. The "Knowledge Capsule" Summary: UK Frame Defense 2026</h2>
     <div class="capsule-box">
@@ -35,7 +34,7 @@
     <div class="capsule-box">
         <ul>
             <li><strong>The Leverage Point:</strong> Burglars insert a crowbar or a heavy-duty inflatable wedge between the door and the frame near a locking point.</li>
-            <li><strong>The Flex:</strong> Unreinforced uPVC can flex up to 30mm—enough for the locking bolts to disengage from the metal strike plate.</li>
+            <li><strong>The Flex:</strong> Unreinforced uPVC can flex up to 30mm-enough for the locking bolts to disengage from the metal strike plate.</li>
             <li><strong>The Entry:</strong> The door swings open without a single lock being broken, often leaving very little visual evidence of the crime.</li>
         </ul>
     </div>
@@ -53,7 +52,7 @@
             <li><strong>Installation accountability:</strong> 2026 standards demand that the frame's performance as tested is maintained by the qualified installer on-site.</li>
         </ul>
     </div>
-    <p>PAS 24 is no longer just a "Minimum Requirement"—in 2026, it is the primary defense against evolving criminal tools. The shift toward PAS 24:2022+A1:2024 (enforced in 2026) recognizes that burglars are no longer just using hammers; they are using chemistry and hydraulics. When we install a 2026-spec door, we are installing a system that has been "Lab-Tortured" to resist these exact scenarios. If your door lacks a PAS 24 certificate, you are relying on luck, not engineering.</p>
+    <p>PAS 24 is no longer just a "Minimum Requirement"-in 2026, it is the primary defense against evolving criminal tools. The shift toward PAS 24:2022+A1:2024 (enforced in 2026) recognizes that burglars are no longer just using hammers; they are using chemistry and hydraulics. When we install a 2026-spec door, we are installing a system that has been "Lab-Tortured" to resist these exact scenarios. If your door lacks a PAS 24 certificate, you are relying on luck, not engineering.</p>
 
     <h2>4. uPVC vs. Timber vs. Composite: Structural Integrity Compared</h2>
     <div class="capsule-box">
@@ -79,7 +78,7 @@
     </div>
     <p>Many homeowners focus entirely on the lock side and forget the hinges. The hinges are a major pivot point that can be smashed or unscrewed. In 2026, the "Dog Bolt" is the silent protector of the hinge side. It transforms the door from a "Flap" into a "Planted Barrier." These inexpensive additions are the single most effective "Bang-for-your-Buck" security upgrade we offer for legacy uPVC frames.</p>
 
-    <img src="/blog/security/glazing-bead-uk.webp" alt="Matte flat-vector illustration of a UK window bead being checked from the inside; a cross-mark is shown over a person trying to pry it from the outside" width="800" height="450">
+
 
     <h2>6. Internal Glazing vs. External Beads: Preventing Glass Removal</h2>
     <div class="capsule-box">
@@ -109,13 +108,13 @@
             <li><strong>The "Anti-Bypass" Lip:</strong> Modern strike plates have an angled lip that prevents a credit card or "Shove Knife" from reaching the latch.</li>
         </ul>
     </div>
-    <p>The strike plate is the "Anchor" of your security. If it is shaky, your door is shaky. In 2026, we specialize in "Strike Plate Hardening"—replacing weak, legacy keeps with heavy-duty steel variants that are designed to absorb the kinetic energy of a forced entry attempt. This minor technical upgrade can increase a frame's resistance to "Direct Force" attacks by up to 200%.</p>
+    <p>The strike plate is the "Anchor" of your security. If it is shaky, your door is shaky. In 2026, we specialize in "Strike Plate Hardening"-replacing weak, legacy keeps with heavy-duty steel variants that are designed to absorb the kinetic energy of a forced entry attempt. This minor technical upgrade can increase a frame's resistance to "Direct Force" attacks by up to 200%.</p>
 
     <div class="dos-donts">
         <h3>UK Door Security: Frame Safety CANs and CANNOTs</h3>
         <ul>
             <li><strong>CAN:</strong> Retrofit "Dog Bolts" to any uPVC or timber door to secure the hinge side instantly.</li>
-            <li><strong>CANNOT:</strong> Paint over the "Glazing Beads"—if they are external, painting makes them easier to grip and pry.</li>
+            <li><strong>CANNOT:</strong> Paint over the "Glazing Beads"-if they are external, painting makes them easier to grip and pry.</li>
             <li><strong>CAN:</strong> Verify that your door matches the **PAS 24:2026** specification for all new builds or commercial conversions.</li>
             <li><strong>CANNOT:</strong> Tighten strike plate screws too hard on hollow frames; you risk crushing the plastic and making the gap wider.</li>
         </ul>
@@ -149,42 +148,8 @@
             <li><strong>Certified Upgrades:</strong> All our frame-hardening work is backed by a technical guarantee and meets active PAS 24 recommendations.</li>
         </ul>
     </div>
-    <p>If your door frame has been spread, or if you suspect it is vulnerable, don't wait for a "Quiet Professional" to find your soft spot. 60 minutes is all we need to audit your frame and provide a hardening plan. Our 24/7 emergency network is designed for one thing: **Structural Integrity.** We move beyond the lock to ensure your entire doorway is an impenetrable shield for your family. Don't be trapped by a legacy frame—trust the verified UK experts. Call us now for an immediate professional response.</p>
-
+    <p>If your door frame has been spread, or if you suspect it is vulnerable, don't wait for a "Quiet Professional" to find your soft spot. 60 minutes is all we need to audit your frame and provide a hardening plan. Our 24/7 emergency network is designed for one thing: **Structural Integrity.** We move beyond the lock to ensure your entire doorway is an impenetrable shield for your family. Don't be trapped by a legacy frame-trust the verified UK experts. Call us now for an immediate professional response.</p>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/emergency-locksmith" class="sticky-cta" id="emergency-call-btn">
-            <span>24/7 Frame Hardening: Get a Resilience Audit</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related UK Door Security Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/blog/security/anti-snap-lockdown">
-                    <img src="/blog/security/related-post-lock-uk.webp" alt="Lock icon, matte flat-vector">
-                    <span>The Anti-Snap Lockdown: Stopping 9-Second Break-Ins 2026</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/blog/security/composite-vs-upvc">
-                    <img src="/blog/security/related-post-composite-uk.webp" alt="Composite door icon, matte flat-vector">
-                    <span>Composite vs. uPVC in 2026: The Security-to-Cost ROI Breakdown</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/blog/emergency/post-burglary-repair">
-                    <img src="/blog/security/related-post-repair-uk.webp" alt="Repair icon, matte flat-vector">
-                    <span>Breached Door? The 5-Step UK Protocol for Post-Burglary Resilience</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

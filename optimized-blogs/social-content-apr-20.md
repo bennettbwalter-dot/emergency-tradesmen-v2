@@ -15,7 +15,7 @@ Don't wait for the damp to set in. Read our full guide on how to spot a failing 
 ### Instagram
 Hook: Your windows are lying to you. 🪟💨
 
-That "mist" between your glass panes? 
+That "mist" between your glass panes?
 It’s not just weather.
 It’s a broken seal.
 It means your argon gas is gone.
@@ -35,7 +35,7 @@ Check the link in our bio for a local glazier. 🔗
 
 2/4 The most obvious sign is condensation *inside* the double glazing. If you can't wipe it off, the desiccant is saturated and the insulating gas has escaped. Your U-value has just plummeted.
 
-3/4 Why it's an emergency: Blown units lead to "hidden" damp in wall cavities. By the time you see the black mould on your wallpaper, the structural timber may already be at risk. 
+3/4 Why it's an emergency: Blown units lead to "hidden" damp in wall cavities. By the time you see the black mould on your wallpaper, the structural timber may already be at risk.
 
 4/4 Don't let your energy bills skyrocket. Read our full guide on 2026 window safety and find a vetted glazier near you: [Link to Blog] #UKHome #HomeMaintenance #PropertyTips
 
@@ -55,7 +55,7 @@ Check the link in our bio for a local glazier. 🔗
 Professional Insight: The 2026 'Thermal Gap'.
 Following the extreme temperature fluctuations of the past winter, we are seeing a significant increase in Building Regulations Part L non-compliance due to widespread window seal failure across UK residential portfolios.
 
-For property managers and homeowners alike, a "misted" unit is more than a cosmetic defect—it is a failure of the building's thermal envelope. Proactive replacement of failed glazing units is critical to maintaining energy efficiency targets and preventing long-term interstitial condensation.
+For property managers and homeowners alike, a "misted" unit is more than a cosmetic defect - it is a failure of the building's thermal envelope. Proactive replacement of failed glazing units is critical to maintaining energy efficiency targets and preventing long-term interstitial condensation.
 
 Read our technical analysis on window seal integrity: [Link to Blog]
 #PropertyManagement #EnergyEfficiency #BuildingRegulations #UKRealEstate
@@ -84,7 +84,7 @@ Lukewarm air?
 These aren't just quirks.
 They are warnings.
 
-The US is facing a major technician shortage. 
+The US is facing a major technician shortage.
 If you wait until June to call...
 You're going to be waiting a long time. 🥵
 
@@ -97,7 +97,7 @@ Link in bio to find a licensed pro today! 🔗
 
 2/4 Notice your AC turning on and off every 5 minutes? That’s "Short Cycling." It’s an efficiency killer and a compressor destroyer. Check your filters, but it could be a refrigerant leak.
 
-3/4 WARNING: If you smell "burning" or see smoke, pull the breaker! Electrical failures in HVAC units are a leading cause of early-season house fires. Never DIY high-voltage repairs. 
+3/4 WARNING: If you smell "burning" or see smoke, pull the breaker! Electrical failures in HVAC units are a leading cause of early-season house fires. Never DIY high-voltage repairs.
 
 4/4 Stay cool and save your wallet. Get the full 2026 HVAC checklist and find a licensed tech in your ZIP code: [Link to Blog] #HVAC #HomeSafety #SummerReady #ACRepair
 
@@ -115,9 +115,9 @@ Link in bio to find a licensed pro today! 🔗
 
 ### LinkedIn
 Technical Update: HVAC Resilience in 2026.
-With the ongoing transition to new refrigerant standards and a persistent shortage of skilled technicians, the U.S. HVAC market is facing significant pressure heading into the 2026 cooling season. 
+With the ongoing transition to new refrigerant standards and a persistent shortage of skilled technicians, the U.S. HVAC market is facing significant pressure heading into the 2026 cooling season.
 
-Early-season diagnostics (A-coil inspections, contactor testing, and charge verification) are no longer "optional" maintenance—they are essential risk mitigation strategies for homeowners and facility managers. 
+Early-season diagnostics (A-coil inspections, contactor testing, and charge verification) are no longer "optional" maintenance - they are essential risk mitigation strategies for homeowners and facility managers.
 
 Read our full report on identifying high-risk HVAC failure points: [Link to Blog]
 #HVAC #FacilityManagement #RiskMitigation #EnergyEfficiency #EPA608

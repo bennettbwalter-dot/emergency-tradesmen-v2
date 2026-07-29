@@ -1,5 +1,5 @@
 <!-- .funky-offset-header -->
-# Smart Lock Dead or Key Broken? 
+# Smart Lock Dead or Key Broken?
 ## How to Get Back In Without Damage
 
 It’s a modern nightmare: you walk up to your front door, tap your phone or key fob, and nothing happens. The battery is dead, the app is glitching, or worse, your physical key snaps off in the lock. In the US, where smart home technology is booming, these digital failures are becoming as common as lost keys. And when you’re locked out in the heat or cold, frustration sets in fast.
@@ -11,7 +11,7 @@ Before you kick the door or call a pricey locksmith, there are smart, safe steps
 <!-- .capsule-box (Yellow/Gold Accent) -->
 ### 🔋 Emergency Power Hacks
 *   **9V Battery Trick:** Most smart locks have a backup power source. Look for a 9V battery terminal on the exterior keypad.
-*   **Contact Sync:** Touching a fresh 9V battery to these contacts can often provide enough juice to unlock the door one last time.
+*   **Contact Sync:** Touching a fresh 9V battery to these contacts can often provide enough juice to Open the door one last time.
 *   **USB Override:** If your lock uses internal AA batteries, check for an external USB-C or micro-USB port for emergency charging.
 *   **Power Banks:** A portable power bank can save the day here.
 
@@ -20,7 +20,7 @@ Before you kick the door or call a pricey locksmith, there are smart, safe steps
 ## Crisis Management: 5 Steps to Regain Entry
 
 ### Step 1: Check for Backup Power Options
-Look for a 9V battery terminal on the exterior keypad. Touching a fresh 9V battery to these contacts can often provide enough juice to unlock the door one last time. If your lock uses AA batteries inside, check if there’s an external USB-C or micro-USB port for emergency charging. A portable power bank can save the day here.
+Look for a 9V battery terminal on the exterior keypad. Touching a fresh 9V battery to these contacts can often provide enough juice to Open the door one last time. If your lock uses AA batteries inside, check if there’s an external USB-C or micro-USB port for emergency charging. A portable power bank can save the day here.
 
 ### Step 2: Use the Physical Key Override
 Even smart locks usually have a traditional keyhole hidden under a cover plate. Locate this slot. If you have your physical key, try it gently. If the key is stiff, do not force it. Jiggle it slightly while turning. If the key breaks off, stop immediately. Do not try to dig it out with tweezers or glue-you’ll likely push it deeper or damage the cylinder. This is a job for a pro.
@@ -29,7 +29,7 @@ Even smart locks usually have a traditional keyhole hidden under a cover plate. 
 > **💡 Fun Fact #1:** The first pin-tumbler lock was invented by Linus Yale Jr. in 1861. His design is still the basis for most modern mechanical locks.
 
 ### Step 3: Check Your App and Wi-Fi
-Sometimes the lock is fine, but your phone isn’t connecting. Toggle your Bluetooth and Wi-Fi off and on. Restart your phone. Check if other family members can unlock the door via their apps. If the lock is offline, it may still work with a code or key. If the app shows an error, note it down for the technician.
+Sometimes the lock is fine, but your phone isn’t connecting. Toggle your Bluetooth and Wi-Fi off and on. Restart your phone. Check if other family members can Open the door via their apps. If the lock is offline, it may still work with a code or key. If the app shows an error, note it down for the technician.
 
 ### Step 4: Look for Alternative Entry Points
 Is a back door or garage door unlocked? Check windows that might be accessible (safely). If you have a trusted neighbour with a spare key, now is the time to call them. Avoid climbing through windows unless absolutely necessary and safe-falls are a leading cause of home injury.
@@ -69,16 +69,16 @@ If backups fail, you need a professional. Look for a licensed locksmith who spec
 <!-- .capsule-box (Q&A Style) -->
 ### 🔍 Quick Q&A: Real Questions Homeowners Ask
 
-**Q: Why did my smart lock battery die so fast?**  
+**Q: Why did my smart lock battery die so fast?**
 Extreme temperatures (hot/cold) drain batteries faster. Frequent use or poor Wi-Fi signal increases power consumption. Old or low-quality batteries may not hold charge well.
 
-**Q: Can a locksmith open a smart lock without damaging it?**  
+**Q: Can a locksmith open a smart lock without damaging it?**
 Yes, most pros have specialized tools for non-destructive entry. They can decode cylinders or use bypass tools. Drilling is only used if other methods fail.
 
-**Q: What should I do if I lose my phone and can’t unlock the door?**  
-Use your physical key or backup code. Ask a family member to unlock it via their app. Contact customer support for remote assistance if available.
+**Q: What should I do if I lose my phone and can’t Open the door?**
+Use your physical key or backup code. Ask a family member to Open it via their app. Contact customer support for remote assistance if available.
 
-**Q: Are smart locks secure against hacking?**  
+**Q: Are smart locks secure against hacking?**
 Modern locks use encryption similar to online banking. Keep firmware updated to patch security vulnerabilities. Use strong, unique passwords for your app account.
 
 ---

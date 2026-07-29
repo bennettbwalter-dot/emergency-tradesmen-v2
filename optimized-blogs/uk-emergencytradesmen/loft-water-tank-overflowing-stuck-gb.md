@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Loft Water Tank Overflowing or Ball Valve Stuck? Quick Fixes Before Calling an Emergency Plumber</title>
-    <meta name="description" content="Is your loft water tank overflowing or warning pipe dripping? Learn the step-by-step UK DIY guide to tie up float arms, clean Portsmouth valves, replace washers, and prevent ceiling collapses.">
+    <meta name="description" content="Loft cold water storage tank overflowing or warning pipe dripping? Follow this step-by-step UK DIY guide to isolate the water, clean brass Portsmouth valves, adjust float arms, check shower pumps, and prevent water damage.">
 </head>
 <body>
 
 <header>
     <h1>Loft Water Tank Overflowing or Ball Valve Stuck? Quick Fixes Before Calling an Emergency Plumber</h1>
     <div class="meta-bar">
-        <span class="author">By Emergency Tradesmen UK Team</span> | 
-        <span class="date-updated">Updated: June 8, 2026</span> | 
-        <span class="rating">⭐⭐⭐⭐⭐ 5-Star Service</span>
+        <span class="author">By Emergency Tradesmen UK Team</span> |
+        <span class="date-updated">Updated: 8 June 2026</span> |
+        <span class="rating">5-Star Service</span>
     </div>
-    <img src="/images/blog/uk-loft-water-tank-hero.png" alt="A large black plastic cold water storage tank situated in a house loft space with copper piping, a yellow float arm and ball valve, premium visual aesthetic" width="1200" height="630">
 </header>
 
-<main>
-    <p class="blog-intro">There is a very specific kind of British dread that happens on a quiet summer evening. You’re watching telly, and you notice a steady, rhythmic drip-drip-drip coming from the outside overflow pipe near the roofline. You head up to the loft with a torch, lift the lid off the large black cold water storage tank, and your heart sinks. The water level is right at the brim, pouring relentlessly down the warning pipe, and the float valve is jammed wide open. At this point, you’re not just wasting water; you’re praying the tank doesn’t split and send 50 gallons of stagnant loft water crashing through the hallway ceiling. I’ve stood in that exact sweltering loft, balancing on the joists, wondering if I should just hold the float up with a broom handle until Monday morning. But before you start wrestling with the mains stopcock or ringing an emergency plumber in a panic, take a steady breath. Loft tanks overflowing in the summer is incredibly common. Mains pressure fluctuates, and older brass float valves get clogged with limescale or debris. With a few safe checks, you can stop the flooding, secure the tank, and avoid a hefty weekend callout fee. Let’s walk through it step by step.</p>
+<main class="blog-magazine-wrap">
+<p class="blog-intro">There is a very specific kind of British dread that happens on a quiet summer evening. You’re watching telly, and you notice a steady, rhythmic drip-drip-drip coming from the outside overflow pipe near the roofline. You head up to the loft with a torch, lift the lid off the large black cold water storage tank, and your heart sinks. The water level is right at the brim, pouring relentlessly down the warning pipe, and the float valve is jammed wide open. At this point, you’re not just wasting water; you’re praying the tank doesn’t split and send 50 gallons of stagnant loft water crashing through the hallway ceiling. I’ve stood in that exact sweltering loft, balancing on the joists, wondering if I should just hold the float up with a broom handle until Monday morning. But before you start wrestling with the mains stopcock or ringing an emergency plumber in a panic, take a steady breath. Loft tanks overflowing in the summer is incredibly common. Mains pressure fluctuates, and older brass float valves get clogged with limescale or debris. With a few safe checks, you can stop the flooding, secure the tank, and avoid a hefty weekend callout fee. Let’s walk through it step by step.</p>
 
     <h2>1. UK Loft Water Tank Overflow: The "Knowledge Capsule" Summary</h2>
     <div class="capsule-box">
@@ -186,33 +185,6 @@
         <a href="/emergency-plumber" class="blog-cta-btn">Connect With Local Plumbers 24/7</a>
     </div>
 </main>
-
-<footer>
-    <div class="sticky-cta-container">
-        <a href="/emergency-plumber" class="sticky-cta" id="emergency-call-btn">
-            <span>Call a 24/7 Verified Plumber</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-        </a>
-    </div>
-
-    <section class="related-posts">
-        <h3>Related UK Plumbing Guides</h3>
-        <div class="related-grid">
-            <div class="related-item">
-                <a href="/blog/outside-tap-leaking-burst-winter-gb">
-                    <img src="/placeholder.svg" alt="Outside Tap Leaking">
-                    <span>Outside Tap Leaking or Burst? Quick Fixes</span>
-                </a>
-            </div>
-            <div class="related-item">
-                <a href="/blog/emergency-plumber-london-guide">
-                    <img src="/placeholder.svg" alt="Emergency Plumber London">
-                    <span>Emergency Plumber in London: Complete Guide</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</footer>
 
 </body>
 </html>

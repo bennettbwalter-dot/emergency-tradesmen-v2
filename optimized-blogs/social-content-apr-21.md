@@ -3,20 +3,20 @@
 ## 🇬🇧 UK SOCIAL CONTENT (Builder / Subsidence)
 
 ### 📘 Facebook
-**Copy:** Is your home trying to tell you something? 🏠 Zig-zag cracks or sticking doors aren't just quirks—they can be early warning signs of structural subsidence. As the spring rains of 2026 arrive, ground movement risks are peaking across the UK. ⛈️
+**Copy:** Is your home trying to tell you something? 🏠 Zig-zag cracks or sticking doors aren't just quirks - they can be early warning signs of structural subsidence. As the spring rains of 2026 arrive, ground movement risks are peaking across the UK. ⛈️
 Don't ignore the "invisible threat." Check out our master guide on the 7 best ways to prevent structural emergencies before they become a £20k repair bill. 🧱
 **Link:** https://emergencytradesmen.net/blog/prevent-structural-damage-subsidence-uk
 **Image:** [uk-structural-subsidence-prevention.png]
 **Tags:** #HomeMaintenance #UKProperty #Subsidence #EmergencyBuilder #LondonProperty
 
 ### 📸 Instagram
-**Caption:** 🧱 Cracks in the masonry? Sticking windows? 🛑 These are the red flags of subsidence you can't afford to ignore. 
+**Caption:** 🧱 Cracks in the masonry? Sticking windows? 🛑 These are the red flags of subsidence you can't afford to ignore.
 UK ground conditions are shifting this spring. Swipe left to see the 5 warning signs every homeowner needs to know! 👈
 protect your biggest investment. Full prevention guide in bio! 🔗
 **Tags:** #UKHome #Subsidence #PropertyCare #LondonHomes #BuilderLife #HomeSafety
 
 ### 🐦 X (Twitter)
-**Copy:** 🧱 UK Homeowners: That hairline crack above your window might be more than cosmetic. Spring 2026 ground heave is real. ⛈️ 
+**Copy:** 🧱 UK Homeowners: That hairline crack above your window might be more than cosmetic. Spring 2026 ground heave is real. ⛈️
 Learn the 7 best ways to prevent structural emergencies and protect your home’s value. 🏠👇
 https://emergencytradesmen.net/blog/prevent-structural-damage-subsidence-uk
 #PropertyHealth #UKHomes #Subsidence
@@ -48,13 +48,13 @@ In the US, electrical failures cause over 50,000 home fires annually. Don't beco
 **Tags:** #ElectricalSafety #FirePrevention #HomeEmergency #USHome #Electrician
 
 ### 📸 Instagram
-**Caption:** ⚡ The scent of an imminent fire... 🐟💨 If your electrical panel smells "fishy" or like burning plastic, the clock is ticking. 
-Arc flashes can reach 35,000°F—hotter than the sun. ☀️ DO NOT reach inside that panel! 🛑
+**Caption:** ⚡ The scent of an imminent fire... 🐟💨 If your electrical panel smells "fishy" or like burning plastic, the clock is ticking.
+Arc flashes can reach 35,000°F - hotter than the sun. ☀️ DO NOT reach inside that panel! 🛑
 Swipe for the 5 electrical emergency "NEVERs". 👈 full guide in link in bio! 🏠
 **Tags:** #SafetyFirst #ElectricalPanel #FireHazard #HomeSafetyUS #LicensedElectrician
 
 ### 🐦 X (Twitter)
-**Copy:** ⚡ Smelling something "fishy" near your breaker box? 🐟 It’s likely melting PVC insulation, not your lunch. You are minutes away from a wall fire. 🛑 
+**Copy:** ⚡ Smelling something "fishy" near your breaker box? 🐟 It’s likely melting PVC insulation, not your lunch. You are minutes away from a wall fire. 🛑
 Whatever you do, DON'T use water. Read the 5 critical electrical safety "NEVERs": 👇
 https://emergencytradesmen.net/blog/electrical-panel-burning-smell-us
 #Electrician #FireSafety #HomeOwnerTips
@@ -69,7 +69,7 @@ https://emergencytradesmen.net/blog/electrical-panel-burning-smell-us
 **Audio:** High-tension background beats.
 
 ### 💼 LinkedIn
-**Copy:** Electrical safety compliance isn't just about codes—it's about life safety. ⚡ With over $1.3 billion in annual property damage caused by electrical failures in the US, understanding early warning signs like insulation arcing is essential for every property owner.
+**Copy:** Electrical safety compliance isn't just about codes - it's about life safety. ⚡ With over $1.3 billion in annual property damage caused by electrical failures in the US, understanding early warning signs like insulation arcing is essential for every property owner.
 Our latest emergency guide details the critical protocols for managing electrical panel failures and the non-negotiable safety standards (NEC/NFPA 70) required for professional remediation. 🛡️
 **Critical Safety Guide:** https://emergencytradesmen.net/blog/electrical-panel-burning-smell-us
 **Tags:** #ElectricalEngineering #FireSafety #PropertyManagementUS #NFPA #EmergencyTradesmen
