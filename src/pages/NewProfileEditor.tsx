@@ -323,6 +323,15 @@ export default function NewProfileEditor() {
                 vehicle_image_url: urls.vehicle,
                 photos: urls.gallery,
                 country_code: isUSDomain() ? 'US' : 'GB',
+                // Promote to premium on save. BUSINESS_ORDER in businessService.ts
+                // sorts on is_premium first, so this is what actually puts a paid
+                // listing at the top. The Tier 2 insert path above already sets it
+                // for brand-new businesses, but the update path did not - so a
+                // subscriber who already had a claimed listing paid and never
+                // ranked. Reaching handleSave requires an active paid plan; the
+                // effect above bounces non-subscribers to /pricing.
+                is_premium: true,
+                tier: 'paid',
                 updated_at: new Date().toISOString()
             }).eq('id', businessId);
 
