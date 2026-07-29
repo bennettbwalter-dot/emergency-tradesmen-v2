@@ -344,13 +344,12 @@ export default function NewProfileEditor() {
 
             toast({ title: "Profile Saved", description: "Your changes are now live!", className: "bg-green-600 text-white" });
 
-            // After save, redirect to the listings page
-            const tradePath = (formData.trade || 'tradesmen').toLowerCase().replace(/\s+/g, '-');
-            const city = formData.selected_locations?.[0] || 'london';
-            const cityPath = city.toLowerCase().replace(/\s+/g, '-');
-
+            // After save, send them to their own profile so they can see what
+            // they have paid for. This previously dropped them on the public
+            // trade/city listings page, which shows every business in the area
+            // rather than the profile they just built.
             setTimeout(() => {
-                window.location.href = `/${tradePath}/${cityPath}`;
+                window.location.href = `/business/${businessId}`;
             }, 1500);
 
             // Track operational update in PostHog
