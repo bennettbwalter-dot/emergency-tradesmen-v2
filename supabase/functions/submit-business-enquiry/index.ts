@@ -12,6 +12,12 @@
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// Public support addresses, not secrets. Defaulted in code on purpose: the
+// env-var indirection on the UK Agency Stripe link silently swallowed that
+// work for months. Env still wins if SUPPORT_EMAIL_UK / _US are ever set.
+const DEFAULT_SUPPORT_UK = "emergencytradesmen@outlook.com";
+const DEFAULT_SUPPORT_US = "emergencycontractors@outlook.com";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -87,10 +93,10 @@ serve(async (req) => {
 
     // Notify. Never fail the request on a mail error - the lead is already safe.
     const supportEmail = region === "US"
-      ? Deno.env.get("SUPPORT_EMAIL_US") ?? Deno.env.get("SUPPORT_EMAIL") ?? ""
-      : Deno.env.get("SUPPORT_EMAIL_UK") ?? Deno.env.get("SUPPORT_EMAIL") ?? "";
+      ? Deno.env.get("SUPPORT_EMAIL_US") ?? DEFAULT_SUPPORT_US
+      : Deno.env.get("SUPPORT_EMAIL_UK") ?? DEFAULT_SUPPORT_UK;
 
-    if (supportEmail) {
+    {
       const lines = [
         `Type: ${enquiryType}`,
         `Region: ${region}`,
