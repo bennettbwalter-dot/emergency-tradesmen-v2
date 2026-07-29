@@ -4,7 +4,7 @@ export function CustomCursor() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isMoving, setIsMoving] = useState(false);
 
-    // iOS / touch devices: skip the cursor entirely — mousemove is unreliable
+    // iOS / touch devices: skip the cursor entirely  -  mousemove is unreliable
     // on touch screens and wastes event listener cycles.
     const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 

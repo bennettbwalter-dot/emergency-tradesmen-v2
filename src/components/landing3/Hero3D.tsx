@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { isUSDomain as getIsUSDomain } from "@/lib/siteConfig";
 import * as THREE from "three";
-import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
+import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass.js";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Landing Page 3 — scroll-driven 3D hero (v2).
+ * Landing Page 3  -  scroll-driven 3D hero (v2).
  *
  * A glowing emergency-response beam weaves along a winding suburban street,
  * past sidewalks, lamps, driveways and gardens, stopping at three detailed
@@ -21,7 +25,7 @@ gsap.registerPlugin(ScrollTrigger);
  * emergency), and the camera chases it along the road from behind,
  * scrubbed by GSAP ScrollTrigger with damped smoothing.
  *
- * Supports the site's dark/light theme — the scene is rebuilt with a
+ * Supports the site's dark/light theme  -  the scene is rebuilt with a
  * day-time palette when `mode` is "light".
  */
 
@@ -43,6 +47,81 @@ function canvasTexture(size: number, draw: (ctx: CanvasRenderingContext2D, s: nu
   tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
   tex.colorSpace = THREE.SRGBColorSpace;
   return tex;
+}
+
+/**
+ * Every surface here was albedo-only: a flat picture of brick that light could
+ * not catch. This treats the albedo's luminance as a height field and runs a
+ * Sobel operator over it to derive a real tangent-space normal map, plus a
+ * roughness map where recessed pixels (mortar, tile gaps, asphalt grain) stay
+ * rough and raised faces polish up. Same idea as a downloaded PBR set, built
+ * from the textures already in the file. 256x256 sources, so it is a few ms.
+ */
+const derivedMaps = new WeakMap<THREE.Texture, { normalMap: THREE.Texture; roughnessMap: THREE.Texture }>();
+
+function deriveSurfaceMaps(src: THREE.Texture, relief: number, roughLo: number, roughHi: number) {
+  const img = src.image as HTMLCanvasElement;
+  const s = img.width;
+  const data = img.getContext("2d")!.getImageData(0, 0, s, s).data;
+
+  const h = new Float32Array(s * s);
+  for (let i = 0; i < s * s; i++) {
+    h[i] = (0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2]) / 255;
+  }
+  const at = (x: number, y: number) => h[((y + s) % s) * s + ((x + s) % s)];
+
+  const nC = document.createElement("canvas");
+  const rC = document.createElement("canvas");
+  nC.width = nC.height = rC.width = rC.height = s;
+  const nCtx = nC.getContext("2d")!;
+  const rCtx = rC.getContext("2d")!;
+  const nImg = nCtx.createImageData(s, s);
+  const rImg = rCtx.createImageData(s, s);
+
+  for (let y = 0; y < s; y++) {
+    for (let x = 0; x < s; x++) {
+      const tl = at(x - 1, y - 1), t = at(x, y - 1), tr = at(x + 1, y - 1);
+      const l = at(x - 1, y), r = at(x + 1, y);
+      const bl = at(x - 1, y + 1), b = at(x, y + 1), br = at(x + 1, y + 1);
+      const dx = (tr + 2 * r + br) - (tl + 2 * l + bl);
+      const dy = (bl + 2 * b + br) - (tl + 2 * t + tr);
+      const nx = -dx * relief, ny = -dy * relief;
+      const len = Math.hypot(nx, ny, 1) || 1;
+      const i = (y * s + x) * 4;
+      nImg.data[i] = ((nx / len) * 0.5 + 0.5) * 255;
+      nImg.data[i + 1] = ((ny / len) * 0.5 + 0.5) * 255;
+      nImg.data[i + 2] = ((1 / len) * 0.5 + 0.5) * 255;
+      nImg.data[i + 3] = 255;
+      const rough = Math.max(0, Math.min(1, roughLo + (roughHi - roughLo) * (1 - at(x, y)))) * 255;
+      rImg.data[i] = rImg.data[i + 1] = rImg.data[i + 2] = rough;
+      rImg.data[i + 3] = 255;
+    }
+  }
+  nCtx.putImageData(nImg, 0, 0);
+  rCtx.putImageData(rImg, 0, 0);
+
+  const mk = (c: HTMLCanvasElement) => {
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    // data maps, not colour - they must not be sRGB-decoded
+    tex.colorSpace = THREE.NoColorSpace;
+    tex.repeat.copy(src.repeat);
+    return tex;
+  };
+  const maps = { normalMap: mk(nC), roughnessMap: mk(rC) };
+  derivedMaps.set(src, maps);
+  return maps;
+}
+
+/** Spread into a material to pick up the relief derived from its albedo map. */
+function pbr(tex: THREE.Texture, relief = 1, withRoughness = true) {
+  const d = derivedMaps.get(tex);
+  if (!d) return {};
+  return {
+    normalMap: d.normalMap,
+    normalScale: new THREE.Vector2(relief, relief),
+    ...(withRoughness ? { roughnessMap: d.roughnessMap } : {}),
+  };
 }
 
 // deterministic pseudo-random so re-renders look identical
@@ -356,8 +435,9 @@ function createHouse(deps: HouseDeps, wallTint: number, variant: 1 | 2 | 3): Hou
   const group = new THREE.Group();
   const windows: WindowUnit[] = [];
 
-  const wallMat = new THREE.MeshStandardMaterial({ map: brickTex, color: wallTint, roughness: 0.95 });
-  const roofMat = new THREE.MeshStandardMaterial({ map: shingleTex, roughness: 0.9 });
+  // roughness rides the derived map now, so the base multiplier goes to 1
+  const wallMat = new THREE.MeshStandardMaterial({ map: brickTex, color: wallTint, roughness: 1, ...pbr(brickTex, 1.15) });
+  const roofMat = new THREE.MeshStandardMaterial({ map: shingleTex, roughness: 1, ...pbr(shingleTex, 1.35) });
   const trimMat = new THREE.MeshStandardMaterial({ color: 0x20242d, roughness: 0.8 });
   const fasciaMat = new THREE.MeshStandardMaterial({ color: 0xd8dce2, roughness: 0.7 });
 
@@ -398,7 +478,7 @@ function createHouse(deps: HouseDeps, wallTint: number, variant: 1 | 2 | 3): Hou
     left.position.set(-W / 4 - 0.1, eaveY, 0);
     group.add(left);
 
-    // RIGHT slab carries the storm damage — house 3 is rotated so this slab
+    // RIGHT slab carries the storm damage  -  house 3 is rotated so this slab
     // and the cracked front window both face the camera vantage
     const segLen = (slabD - 1.5) / 2;
     const a = mkSlab(segLen);
@@ -705,7 +785,7 @@ function createCar(glowTex: THREE.Texture, steamCount: number): CarHandles {
     group.add(hub);
   });
 
-  // hood, hinged at the windshield edge — starts OPEN
+  // hood, hinged at the windshield edge  -  starts OPEN
   const hoodPivot = new THREE.Group();
   hoodPivot.position.set(0.95, 0.99, 0);
   const hood = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.07, 1.62), paint);
@@ -841,13 +921,20 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     // NoToneMapping. Exposure is lifted to compensate for ACES' darker midtones.
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.32;
+    // Contact shadows are what stop the houses and cars reading as stickers on
+    // a flat lawn. PCF-soft on a tight ortho frustum around the visible stretch
+    // of street keeps the map resolution usable at 2048.
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     // ---- theme palette ----
     const pal = light
       ? {
           bg: 0xbdcfe9, fogD: 0.0095,
           hemiSky: 0xeaf2ff, hemiGnd: 0x9aa4b5, hemiI: 1.25,
-          keyColor: 0xfff1d6, keyI: 1.9, keyPos: [20, 32, 14] as const,
+          // low golden-hour sun: long raking shadows instead of the short ones a
+          // near-overhead key threw, which the geometry simply hid behind itself
+          keyColor: 0xffe0b0, keyI: 2.5, keyPos: [22, 9, 15] as const,
           groundTint: 0xb9c4ad, roadTint: 0xb7bcc6, walkTint: 0xd0d4da,
           stars: false, windowLit: 1.1, lampGlow: 0.18,
           beamOuter: 0x1f6dff, beamMid: 0x2da4ff, alertBoost: 1.4,
@@ -855,7 +942,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       : {
           bg: 0x0e1729, fogD: 0.012,
           hemiSky: 0x3c4f78, hemiGnd: 0x0a0e16, hemiI: 1.05,
-          keyColor: 0x8da3d8, keyI: 0.9, keyPos: [-14, 24, -8] as const,
+          keyColor: 0x8da3d8, keyI: 1.35, keyPos: [-16, 8, -7] as const,
           groundTint: 0x3d4a3c, roadTint: 0x4e5560, walkTint: 0x666c75,
           stars: true, windowLit: 1.9, lampGlow: 0.55,
           beamOuter: 0x1f7dff, beamMid: 0x57c8ff, alertBoost: 1,
@@ -865,20 +952,34 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     scene.background = new THREE.Color(pal.bg);
     scene.fog = new THREE.FogExp2(pal.bg, pal.fogD);
 
-    // subtle image-based lighting so wet surfaces have something to reflect
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environment = envTex;
-    scene.environmentIntensity = light ? 0.5 : 0.42;
-
     // stormy sky dome
     const skyTex = makeSkyTexture(light);
-    const skyDome = new THREE.Mesh(
-      new THREE.SphereGeometry(290, 32, 18),
-      new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false, depthWrite: false }),
-    );
+    const skyMat = new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, fog: false, depthWrite: false });
+    const skyDome = new THREE.Mesh(new THREE.SphereGeometry(290, 32, 18), skyMat);
     skyDome.position.z = -30;
     scene.add(skyDome);
+
+    // Image-based lighting captured from the ACTUAL sky above this scene plus a
+    // sun disc on the key-light axis. The previous RoomEnvironment made the wet
+    // road mirror a synthetic indoor box, which is what read as plasticky - now
+    // it reflects the dusk sky and picks up a real sun streak.
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.Scene();
+    const envSky = new THREE.Mesh(new THREE.SphereGeometry(10, 24, 14), skyMat);
+    envScene.add(envSky);
+    const sunDir = new THREE.Vector3(...pal.keyPos).normalize();
+    const sunDisc = new THREE.Mesh(
+      new THREE.SphereGeometry(light ? 1.5 : 1.1, 16, 12),
+      new THREE.MeshBasicMaterial({ color: pal.keyColor, fog: false }),
+    );
+    sunDisc.position.copy(sunDir).multiplyScalar(8);
+    envScene.add(sunDisc);
+    const envTex = pmrem.fromScene(envScene, 0.02).texture;
+    scene.environment = envTex;
+    scene.environmentIntensity = light ? 0.75 : 0.6;
+    envSky.geometry.dispose();
+    sunDisc.geometry.dispose();
+    (sunDisc.material as THREE.Material).dispose();
 
     const camera = new THREE.PerspectiveCamera(isMobile ? 62 : 52, stage.clientWidth / stage.clientHeight, 0.1, 340);
 
@@ -886,6 +987,24 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     const key = new THREE.DirectionalLight(pal.keyColor, pal.keyI);
     key.position.set(...pal.keyPos);
     scene.add(key);
+    // The street runs ~260 units into fog, so a static shadow frustum covering
+    // it all would be far too coarse. Instead the shadow camera is small and
+    // rides along with the beam head each frame (see `shadowFocus` in the tick).
+    key.castShadow = true;
+    key.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
+    key.shadow.camera.near = 1;
+    key.shadow.camera.far = 120;
+    key.shadow.camera.left = -26;
+    key.shadow.camera.right = 26;
+    key.shadow.camera.top = 26;
+    key.shadow.camera.bottom = -26;
+    key.shadow.bias = -0.0006;
+    key.shadow.normalBias = 0.035;
+    // LightShadow.updateMatrices does not rebuild the ortho projection, so the
+    // frustum bounds above only take effect once this is called explicitly
+    key.shadow.camera.updateProjectionMatrix();
+    scene.add(key.target);
+    const shadowOffset = new THREE.Vector3(...pal.keyPos).normalize().multiplyScalar(48);
 
     // ---- textures ----
     const glowTex = makeGlowTexture();
@@ -899,6 +1018,19 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     const concreteTex = makeConcreteTexture(9);
     const grassTex = makeGrassTexture(13);
     grassTex.repeat.set(40, 40);
+
+    // derive relief for the surfaces the camera actually gets close to
+    // (repeats are already final above, so the derived maps inherit them)
+    // collected so cleanup can free them - this effect re-runs on every theme
+    // toggle, and disposing a material does not dispose the textures it binds
+    const derivedTex = [
+      deriveSurfaceMaps(brickTex, 2.6, 0.72, 1.0),
+      deriveSurfaceMaps(brickTex2, 2.6, 0.72, 1.0),
+      deriveSurfaceMaps(brickTex3, 2.6, 0.72, 1.0),
+      deriveSurfaceMaps(shingleTex, 3.2, 0.6, 0.95),
+      deriveSurfaceMaps(asphaltTex, 1.6, 0.3, 1.0),
+      deriveSurfaceMaps(concreteTex, 1.4, 0.7, 1.0),
+    ].flatMap((d) => [d.normalMap, d.roughnessMap]);
 
     // ---- ground ----
     const ground = new THREE.Mesh(
@@ -956,8 +1088,11 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     const road = new THREE.Mesh(
       ribbonGeometry(roadCurve, ROAD_W, ROAD_SEGS),
       new THREE.MeshStandardMaterial({
-        map: asphaltTex, color: pal.roadTint, roughness: 0.3, metalness: 0.5,
+        // the roughness map varies the wetness across the surface instead of one
+        // uniform sheen, so puddles and dry patches read separately
+        map: asphaltTex, color: pal.roadTint, roughness: 0.62, metalness: 0.5,
         envMapIntensity: light ? 1.0 : 1.4, side: THREE.DoubleSide,
+        ...pbr(asphaltTex, 0.85),
       }),
     );
     road.position.y = 0.015;
@@ -1045,7 +1180,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       scene.add(h.group);
     });
 
-    // house 2 starts with cool dim windows (power is fine — water is the problem)
+    // house 2 starts with cool dim windows (power is fine  -  water is the problem)
     houses[1].windows.forEach((w) => {
       w.glass.emissive.set(0x9ab7d8);
       w.glass.emissiveIntensity = light ? 0.1 : 0.35;
@@ -1106,7 +1241,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     ];
     treeSpots.forEach(([x, z, s]) => scene.add(createTree(x, z, s, light)));
 
-    // tree-lined road receding far into the distance — both sides, all the way
+    // tree-lined road receding far into the distance  -  both sides, all the way
     {
       const tr = rng(57);
       const TREE_COUNT = isMobile ? 30 : 48;
@@ -1172,7 +1307,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     // ---- the emergency beam ----
     // The beam path is derived from the road itself: it weaves left/right
     // inside the carriageway, darts out to each emergency, then returns to
-    // the road — so it always reads as a route through the street network.
+    // the road  -  so it always reads as a route through the street network.
     const nearestRoadT = (v: THREE.Vector3) => {
       let bestT = 0, bestD = Infinity;
       for (let i = 0; i <= 400; i++) {
@@ -1217,14 +1352,14 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       roadOffset((tCar + tH[2]) / 2, 0.9, 1.35),
       approach(housePlacement[2].pos, 2.2),              // house 3
       // finale: the beam weaves a last stretch down the road, then lifts off
-      // the tarmac and soars smoothly up into the sky — a cinematic "all clear"
+      // the tarmac and soars smoothly up into the sky  -  a cinematic "all clear"
       // that hands the energy off to the page below.
       roadOffset(tH[2] + (tEnd - tH[2]) * 0.35, 1.1, 1.7),
       roadOffset(tH[2] + (tEnd - tH[2]) * 0.62, -0.85, 2.6),
       roadOffset(tH[2] + (tEnd - tH[2]) * 0.82, 0.3, 5.0),
       // lift-off: each point keeps a distinct road parameter + slight lateral
       // drift (so the wet-road reflection curve never degenerates) while the
-      // height climbs steeply — the beam streaks up into the sky.
+      // height climbs steeply  -  the beam streaks up into the sky.
       roadOffset(tEnd, 0.2, 9.5),
       roadOffset(Math.min(tEnd + 0.01, 1), -0.15, 17),
       roadOffset(Math.min(tEnd + 0.02, 1), 0.1, 27),
@@ -1298,7 +1433,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     headPool.rotation.x = -Math.PI / 2;
     scene.add(headPool);
 
-    // beam head — layered sprites + travelling light
+    // beam head  -  layered sprites + travelling light
     const headOuter = makeSprite(glowTex, light ? 0x2da4ff : 0x6fc6ff, 5.2, 0.9);
     const headMid = makeSprite(glowTex, 0xaee2ff, 2.4, 1);
     const headCore = makeSprite(glowTex, 0xffffff, 1.2, 1);
@@ -1495,7 +1630,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
 
     // ---- chase camera ----
     // The camera rides the road itself, a fixed distance behind the beam
-    // head, always looking forward at the beam — so the road stays visible
+    // head, always looking forward at the beam  -  so the road stays visible
     // and the viewer travels the street behind the emergency response.
     const roadLen = roadCurve.getLength();
     const CAM_LUT_N = 240;
@@ -1562,6 +1697,50 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       .to(caps[3], { autoAlpha: 0, y: -34, duration: 4 }, 86)
       .to(outro, { autoAlpha: 1, y: 0, duration: 6 }, 91)
       .to({}, { duration: 3 });
+
+    // ---- shadow casting ----
+    // Everything lit by the scene casts and receives. Unlit MeshBasicMaterial
+    // meshes are the sky dome, the additive beam tubes and the glow ribbons -
+    // they must stay out of the shadow pass or they punch black holes in it.
+    scene.traverse((obj) => {
+      const mesh = obj as THREE.Mesh;
+      if (!mesh.isMesh) return;
+      const mat = mesh.material;
+      const unlit = Array.isArray(mat)
+        ? mat.every((m) => (m as THREE.Material).type === "MeshBasicMaterial")
+        : (mat as THREE.Material | undefined)?.type === "MeshBasicMaterial";
+      if (unlit) return;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+    // the 620x620 ground and the road ribbon only receive - casting from them
+    // costs a full extra pass over geometry that can never occlude anything
+    ground.castShadow = false;
+    road.castShadow = false;
+
+    // ---- post-processing ----
+    // Additive geometry alone cannot read as light. Bloom is what turns the
+    // beam and the lit windows into emitted energy rather than bright paint.
+    // OutputPass does the ACES tone map + sRGB convert once, at the end.
+    const composer = new EffectComposer(renderer);
+    composer.setSize(stage.clientWidth, stage.clientHeight);
+    composer.setPixelRatio(renderer.getPixelRatio());
+    composer.addPass(new RenderPass(scene, camera));
+    // The scene was already full of large additive glow sprites, so the bloom
+    // threshold has to sit above them (they read ~1.0 linear after exposure) or
+    // every impact flash smears across the whole frame. Strength stays modest -
+    // the job is to make the beam feel emissive, not to fog the street.
+    const bloom = new UnrealBloomPass(
+      new THREE.Vector2(stage.clientWidth, stage.clientHeight),
+      isMobile ? 0.32 : 0.48,
+      0.4,
+      light ? 1.15 : 1.0,
+    );
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+    // the composer renders to a target, so the renderer's own MSAA never runs -
+    // SMAA replaces it on desktop, mobile eats the aliasing to save the pass
+    if (!isMobile) composer.addPass(new SMAAPass());
 
     // ---- render loop ----
     const clock = new THREE.Clock();
@@ -1693,7 +1872,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       }
 
       // camera: chase the beam head along the road from behind
-      // near the very end, the beam lifts off and soars upward — crane the
+      // near the very end, the beam lifts off and soars upward  -  crane the
       // camera up a touch and tilt the gaze to the sky so the ascent reads.
       const endBlend = THREE.MathUtils.smoothstep(p, 0.88, 1);
       const li = beamP * CAM_LUT_N;
@@ -1714,7 +1893,13 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       lookCurrent.lerp(lookTarget, reducedMotion ? 1 : 0.12);
       camera.lookAt(lookCurrent);
 
-      renderer.render(scene, camera);
+      // ride the tight shadow frustum along with whatever the camera is on, so
+      // 2048px of shadow map is spent on the ~50 units actually in frame
+      key.target.position.copy(lookCurrent);
+      key.position.copy(lookCurrent).add(shadowOffset);
+      key.target.updateMatrixWorld();
+
+      composer.render();
     };
     raf = requestAnimationFrame(tick);
 
@@ -1730,6 +1915,8 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+      composer.setSize(w, h);
+      bloom.setSize(w, h);
     };
     const ro = new ResizeObserver(onResize);
     ro.observe(stage);
@@ -1752,8 +1939,10 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
         else if (mat) mat.dispose();
       });
       [glowTex, flowTex, brickTex, brickTex2, brickTex3, shingleTex, asphaltTex, concreteTex, grassTex, skyTex].forEach((tx) => tx.dispose());
+      derivedTex.forEach((tx) => tx.dispose());
       envTex.dispose();
       pmrem.dispose();
+      composer.dispose();
       renderer.dispose();
     };
   }, [light]);
@@ -1772,26 +1961,26 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
     {
       ref: cap1Ref, side: "md:left-[7%] md:translate-x-0", accent: light ? "text-amber-600" : "text-amber-300",
       kicker: "House 01 · Power Cut",
-      title: "Power out? We connect you to emergency electricians fast.",
+      title: "Find emergency electricians for power faults.",
       sub: "The instant the beam touches the house, every light comes back on.",
     },
     {
       ref: cap2Ref, side: "md:left-auto md:right-[7%] md:translate-x-0", accent: light ? "text-sky-600" : "text-sky-300",
       kicker: "House 02 · Burst Pipe",
-      title: "Burst pipe or leak? Find an emergency plumber near you.",
+      title: "Find an emergency plumber near you.",
       sub: "On contact, the water stops, the pipe is capped, the home is calm again.",
     },
     {
       ref: capCarRef, side: "md:left-auto md:right-[7%] md:translate-x-0", accent: light ? "text-lime-600" : "text-lime-300",
       kicker: "Roadside · Breakdown",
-      title: "Broken down? Breakdown recovery and roadside help, fast.",
-      sub: "The hood drops, the lights come on — ready to drive again.",
+      title: "Find breakdown recovery and roadside help.",
+      sub: "The hood drops and the lights come on, ready to drive again.",
     },
     {
       ref: cap3Ref, side: "md:left-[7%] md:translate-x-0", accent: light ? "text-orange-600" : "text-orange-300",
       kicker: "House 03 · Storm Damage",
-      title: "Storm damage, broken windows, or roof repairs? Get help fast.",
-      sub: "Roof sealed, glass replaced — safe, secure and watertight on touch.",
+      title: "Find help for storm damage, broken windows, and roof repairs.",
+      sub: "Roof sealed, glass replaced, safe, secure and watertight on touch.",
     },
   ];
 
@@ -1812,7 +2001,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_36%,rgba(96,156,240,0.20),transparent_68%),radial-gradient(ellipse_120%_62%_at_50%_104%,rgba(255,168,92,0.17),transparent_66%)]" />
         )}
 
-        {/* Intro — original dynamic headline passed in from the page */}
+        {/* Intro  -  original dynamic headline passed in from the page */}
         <div ref={introRef} className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
           <div className="pointer-events-auto w-full">
             {headline}
@@ -1850,7 +2039,7 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
           </div>
         ))}
 
-        {/* Outro — wrapped in a readable card matching the story-caption design */}
+        {/* Outro  -  wrapped in a readable card matching the story-caption design */}
         <div ref={outroRef} className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 text-center pointer-events-none">
           <div className={`pointer-events-none w-[92%] sm:w-auto sm:max-w-2xl rounded-3xl px-6 py-7 sm:px-10 sm:py-9 backdrop-blur-md border ${cardTheme}`}>
             <h2 className={`text-[1.75rem] leading-tight sm:text-3xl md:text-5xl font-extrabold ${titleColor}`}>
@@ -1860,20 +2049,20 @@ export const Hero3D = ({ mode, headline }: Hero3DProps) => {
               </span>
             </h2>
             <p className={`mt-5 mx-auto max-w-xl text-sm md:text-lg ${subColor}`}>
-              Electricians, plumbers, roofers, glaziers, locksmiths, gas engineers, breakdown recovery and more — 24/7.
+              Electricians, plumbers, roofers, glaziers, locksmiths, gas engineers, breakdown recovery and more, 24/7.
             </p>
             <p className={`mt-8 text-[10px] uppercase tracking-[0.3em] ${light ? "text-slate-500" : "text-slate-400"}`}>
-              Keep scrolling — get help now
+              Keep scrolling to get help now
             </p>
           </div>
         </div>
 
-        {/* cinematic dissolve into the next section — a soft fade so the 3D
+        {/* cinematic dissolve into the next section  -  a soft fade so the 3D
             scene melts into the page rather than hard-cutting */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34svh] bg-gradient-to-b from-transparent via-background/55 to-background" />
 
         {/* a thread of light descending into the page, aligned with the guided
-            story's beam below — carries the energy across the section seam */}
+            story's beam below  -  carries the energy across the section seam */}
         <div className="pointer-events-none absolute bottom-0 left-1/2 h-44 w-28 -translate-x-1/2 bg-[radial-gradient(ellipse_50%_120%_at_50%_100%,rgba(125,211,252,0.5)_0%,rgba(56,189,248,0.16)_45%,transparent_74%)] blur-[2px]" />
       </div>
     </div>

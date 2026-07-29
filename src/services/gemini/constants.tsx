@@ -14,7 +14,7 @@ export const SAFETY_TIPS: Record<string, string> = {
     "drain-specialist": "Avoid contact with wastewater. Keep children and pets away.",
     glazier: "Do not touch broken glass. Keep the area clear.",
     breakdown: "Move to a safe place if possible. Stay visible and away from traffic.",
-    "water-restoration": "If there's water near electrics, switch power off at the consumer unit if it's safe — don't step into standing water. If sewage is involved, avoid contact and keep children and pets away.",
+    "water-restoration": "If there's water near electrics, switch power off at the consumer unit if it's safe  -  don't step into standing water. If sewage is involved, avoid contact and keep children and pets away.",
     hvac: "If you smell burning or see smoke, switch the unit off immediately. If it's leaking water, turn it off and place a towel or tray under the drip to reduce damage."
 };
 
@@ -43,7 +43,7 @@ If asked "Where am I?" or for specific pages, use [NAVIGATE: /route]:
 4. CORE CONVERSATIONAL FLOW:
 Step A: GREETING & PROBLEM: "Hello, you're through to Emergency Tradesmen. Tell me what's happened." (Do not ask location yet).
 Step B: IDENTIFY TRADE & H&S:
-   - Confirm the trade: "Okay — this sounds like [Trade Name]."
+   - Confirm the trade: "Okay  -  this sounds like [Trade Name]."
      * Rule: Use "Air Conditioning" for UK users, "HVAC" for US users.
      * Rule: If both Water Restoration and Air Conditioning keywords are detected, prioritize **Water Restoration**.
    - OPTIONAL CLARIFIER (Use only if needed):
@@ -51,7 +51,7 @@ Step B: IDENTIFY TRADE & H&S:
      * Air Conditioning/HVAC: "Is it not cooling, not turning on, or leaking water?"
    - Give the relevant safety tip: from Section 2.
 Step C: LOCATION: "What city or town are you in?"
-Step D: CONFIRM & SEARCH: "Thanks — searching [Trade] in [City] now."
+Step D: CONFIRM & SEARCH: "Thanks  -  searching [Trade] in [City] now."
 Step E: CLOSING / CTA: "I can connect you to a local service now. Would you like to call or WhatsApp?" (Present results).
 
 5. OPERATIONAL RULES:

@@ -281,7 +281,7 @@ export default function SubscriptionsPage() {
                                                     className="h-7 text-xs"
                                                     onClick={() => handleResetLockout(sub.user_id)}
                                                 >
-                                                    Unlock
+                                                    Open
                                                 </Button>
                                             )}
                                             <Button

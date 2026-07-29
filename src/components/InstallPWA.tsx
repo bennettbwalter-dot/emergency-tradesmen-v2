@@ -19,7 +19,7 @@ export function InstallPWA() {
         }
 
         // Check if recently dismissed
-        // NOTE: localStorage throws QuotaExceededError in iOS Safari Private Mode —
+        // NOTE: localStorage throws QuotaExceededError in iOS Safari Private Mode  - 
         // always wrap in try/catch to prevent propagating to the error boundary.
         try {
             const dismissed = localStorage.getItem('pwa-install-dismissed');
@@ -28,7 +28,7 @@ export function InstallPWA() {
                 return;
             }
         } catch (e) {
-            // Private browsing or storage quota exceeded — silently skip
+            // Private browsing or storage quota exceeded  -  silently skip
             return;
         }
 

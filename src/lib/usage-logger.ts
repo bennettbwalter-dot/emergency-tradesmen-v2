@@ -2,7 +2,7 @@ import { supabase } from './supabase';
 
 type ServiceType = 'azure_tts_chars' | 'sendgrid_emails' | 'email_octopus_emails' | 'leaflet_map_loads';
 
-// Once we know the table doesn't exist, stop hitting the API —
+// Once we know the table doesn't exist, stop hitting the API  - 
 // otherwise every map load fires a 404 against PostgREST.
 let usageTableMissing = false;
 

@@ -1,5 +1,5 @@
 /**
- * Site configuration utility — provides domain-aware branding,
+ * Site configuration utility  -  provides domain-aware branding,
  * support emails, social handles, and URLs for UK/US deployments.
  */
 

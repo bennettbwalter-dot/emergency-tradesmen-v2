@@ -31,6 +31,8 @@ import { ShareMenu } from "@/components/ShareMenu";
 import { getPostcodeForCity } from "@/lib/cityPostcodes";
 import { getStateForCity } from "@/lib/usCityStates";
 import { LocalAreaBackdrop } from "@/components/earth/LocalAreaBackdrop";
+import { QuoteRequestModal } from "@/components/QuoteRequestModal";
+import { recordBusinessLeadEvent } from "@/lib/leadTracking";
 
 export default function BusinessProfilePage() {
     const { businessId } = useParams<{ businessId: string }>();
@@ -131,7 +133,7 @@ export default function BusinessProfilePage() {
         else if (nameLc.includes('breakdown') || nameLc.includes('car') || nameLc.includes('tow') || nameLc.includes('recovery')) trade = 'breakdown';
     }
 
-    // Use the real featured review if available (needs a real rating — never show a 0-star review)
+    // Use the real featured review if available (needs a real rating  -  never show a 0-star review)
     const realReviews = business.featuredReview && business.rating > 0 ? [{
         id: `review-${business.id}`,
         businessId: business.id,
@@ -151,7 +153,7 @@ export default function BusinessProfilePage() {
 
     // If we have a real Google rating/count but only 1 review text,
     // we should still reflect the aggregate stats in the stats object.
-    // Both must exist — a review count with no rating must stay "unrated".
+    // Both must exist  -  a review count with no rating must stay "unrated".
     if (business.reviewCount > 0 && business.rating > 0) {
         reviewStats.totalReviews = business.reviewCount;
         reviewStats.averageRating = business.rating;
@@ -161,6 +163,12 @@ export default function BusinessProfilePage() {
     const trustScore = calculateTrustScore(business);
     const listingStatus = getListingDisplayStatus(business);
     const isVerifiedListing = listingStatus === 'verified';
+    const hasProLeadTools = business.is_premium || business.tier === 'paid';
+
+    const trackLeadAction = (eventType: "call_click" | "website_click" | "whatsapp_click", action: string) => {
+        trackEvent("Business", action, `${business.name} (${business.id})`);
+        void recordBusinessLeadEvent({ businessId: business.id, eventType, sourceSurface: "business_profile_sidebar" });
+    };
 
     const formattedTrade = trade.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
@@ -306,7 +314,7 @@ export default function BusinessProfilePage() {
         ? `Yes. ${business.name} operates 24 hours a day, 7 days a week for emergency ${formattedTrade.toLowerCase()} call-outs in ${formattedCity}.`
         : `${business.name} operates during the following hours: ${business.hours || 'please call to confirm availability'}.`;
     const contactAnswer = business.phone
-        ? `You can contact ${business.name} directly by phone at ${business.phone}. No forms or sign-up required — simply call to speak with a local ${formattedTrade.toLowerCase()}.`
+        ? `You can contact ${business.name} directly by phone at ${business.phone}. No forms or sign-up required  -  simply call to speak with a local ${formattedTrade.toLowerCase()}.`
         : `Visit the profile page to find ${business.name}'s contact details.`;
     const servicesAnswer = services.length > 0
         ? `${business.name} offers ${services.slice(0, 6).join(', ')}${services.length > 6 ? ', and more' : ''} in ${formattedCity} and surrounding areas.`
@@ -314,7 +322,7 @@ export default function BusinessProfilePage() {
     const areaAnswer = `${business.name} primarily serves ${formattedCity}${isUS && getStateForCity(city) ? `, ${getStateForCity(city)}` : ''} and nearby areas as an emergency ${formattedTrade.toLowerCase()}.`;
     const reviewsAnswer = business.reviewCount && business.reviewCount > 0 && business.rating > 0
         ? `${business.name} has ${business.reviewCount} customer review${business.reviewCount === 1 ? '' : 's'} with an average rating of ${business.rating}/5.`
-        : `Reviews for ${business.name} are collected on the profile page — be the first to share your experience.`;
+        : `Reviews for ${business.name} are collected on the profile page  -  be the first to share your experience.`;
 
     const faqItems = [
         { question: `Is ${business.name} available 24/7?`, answer: availabilityAnswer },
@@ -350,7 +358,7 @@ export default function BusinessProfilePage() {
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
             <SEO
-                title={`${business.name} — ${formattedTrade} in ${formattedCity} | Public Listing`}
+                title={`${business.name}  -  ${formattedTrade} in ${formattedCity} | Public Listing`}
                 description={`Need a ${formattedTrade} in ${formattedCity}? ${business.name} appears as a public business listing. Check contact details, confirm availability, or claim this listing to request updates.`}
                 canonical={`/business/${business.id}`}
                 jsonLd={[businessSchema, faqSchema, breadcrumbSchema]}
@@ -745,13 +753,24 @@ export default function BusinessProfilePage() {
                                             asChild
                                             size="lg"
                                             className="w-full bg-gold hover:bg-gold-light text-black font-bold h-16 rounded-xl shadow-lg shadow-gold/10"
-                                            onClick={() => trackEvent("Business", "Call Now Sidebar", `${business.name} (${business.id})`)}
+                                            onClick={() => trackLeadAction("call_click", "Call Now Sidebar")}
                                         >
                                             <a href={`tel:${business.phone}`} className="flex items-center justify-center gap-2">
                                                 <Phone className="w-5 h-5" />
                                                 Call Now
                                             </a>
                                         </Button>
+
+                                        {hasProLeadTools && (
+                                            <QuoteRequestModal
+                                                businessName={business.name}
+                                                businessId={business.id}
+                                                tradeName={formattedTrade}
+                                                triggerText="Request a Quote"
+                                                sourceSurface="business_profile_sidebar"
+                                                className="h-16 w-full rounded-xl border border-gold/35 bg-gold/10 text-foreground hover:bg-gold/20"
+                                            />
+                                        )}
 
                                         {(() => {
                                             const domainName = typeof window !== "undefined" ? window.location.hostname : "emergencytradesmen.net";
@@ -765,7 +784,7 @@ export default function BusinessProfilePage() {
                                                     asChild
                                                     size="lg"
                                                     className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-16 rounded-xl shadow-lg shadow-emerald-600/10"
-                                                    onClick={() => trackEvent("Business", "WhatsApp Click Sidebar", `${business.name} (${business.id})`)}
+                                                    onClick={() => trackLeadAction("whatsapp_click", "WhatsApp Click Sidebar")}
                                                 >
                                                     <a href={waHref} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                                                         <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-black shrink-0">W</div>
@@ -781,7 +800,7 @@ export default function BusinessProfilePage() {
                                                 variant="outline"
                                                 size="lg"
                                                 className="w-full h-16 rounded-xl border-border bg-transparent text-foreground hover:bg-secondary"
-                                                onClick={() => trackEvent("Business", "Website Click", `${business.name} (${business.id})`)}
+                                                onClick={() => trackLeadAction("website_click", "Website Click")}
                                             >
                                                 <a
                                                     href={business.website}
@@ -852,7 +871,7 @@ export default function BusinessProfilePage() {
                     </div>
                 </div >
 
-                {/* FAQ Section — direct-answer content + FAQPage schema for AI Overviews */}
+                {/* FAQ Section  -  direct-answer content + FAQPage schema for AI Overviews */}
                 <section className="container-wide py-16" aria-labelledby="business-faq-heading">
                     <div className="max-w-3xl mx-auto">
                         <h2 id="business-faq-heading" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">

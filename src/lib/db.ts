@@ -118,6 +118,8 @@ export const db = {
             tradeName: string;
             urgency: string;
             description: string;
+            sourceSurface?: string;
+            sourceUrl?: string;
             contact: {
                 name: string;
                 phone: string;
@@ -141,12 +143,20 @@ export const db = {
                 customer_phone: request.contact.phone,
                 details: request.description,
                 urgency: urgencyLabelMap[request.urgency] || request.urgency || 'Standard',
-                status: 'pending'
+                status: 'pending',
+                source_surface: request.sourceSurface || null,
+                source_url: request.sourceUrl || null,
             };
 
-            const { error } = await supabase
+            let { error } = await supabase
                 .from('quotes')
                 .insert(quoteRow);
+
+            // Keep quote requests working while older deployments receive the lead-tracking migration.
+            if (error?.code === 'PGRST204') {
+                const { source_surface: _sourceSurface, source_url: _sourceUrl, ...legacyQuoteRow } = quoteRow;
+                ({ error } = await supabase.from('quotes').insert(legacyQuoteRow));
+            }
 
             if (error) throw error;
             return {

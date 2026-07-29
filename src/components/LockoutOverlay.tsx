@@ -94,7 +94,7 @@ export function LockoutOverlay({ onRetry }: LockoutOverlayProps) {
                 </CardContent>
                 <CardFooter className="flex flex-col gap-3 pt-2">
                     <Button variant="ghost" onClick={onRetry} className="w-full text-muted-foreground">
-                        I've updated my payment—recheck status
+                        I've updated my payment - recheck status
                     </Button>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground pt-4 border-t w-full justify-center">
                         <Mail className="w-4 h-4" />

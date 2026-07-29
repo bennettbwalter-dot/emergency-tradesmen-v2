@@ -29,7 +29,7 @@ export function CardContainer({ children, className, contentClassName, backgroun
                     }}
                 />
 
-                {/* Noise Texture for 'Premium' feel — self-hosted (external transparenttextures.com URL was blocked by ORB) */}
+                {/* Noise Texture for 'Premium' feel  -  self-hosted (external transparenttextures.com URL was blocked by ORB) */}
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('/images/ui/stardust.png')] pointer-events-none mix-blend-soft-light" />
             </div>
 

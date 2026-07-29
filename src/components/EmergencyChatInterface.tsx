@@ -75,7 +75,15 @@ function findTypedTrade(message: string) {
 function findTypedCity(message: string, countryCode: string = 'GB') {
     const text = message.toLowerCase();
     const allCities = (countryCode === 'US' ? usCities : cities).sort((a, b) => b.length - a.length);
-    return allCities.find((city) => text.includes(city.toLowerCase())) || null;
+    // Match whole words only (same word-boundary rule as processUserMessage). A naive
+    // substring check falsely detects short UK towns inside ordinary words  -  e.g. "Ely"
+    // inside "completely"/"barely"  -  which would auto-navigate the user to listings
+    // before the bot has asked for their location.
+    return allCities.find((city) => {
+        const cityLower = city.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(?:^|\\s|,|\\.)${cityLower}(?:$|\\s|,|\\.)`, 'i');
+        return regex.test(text);
+    }) || null;
 }
 
 interface EmergencyChatInterfaceProps {
@@ -91,6 +99,10 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const [pendingNav, setPendingNav] = useState<string | null>(null);
+    // UK only: a navigation the user has NOT triggered yet. We hold it here and render a
+    // "Find nearby tradesmen" button so the user reads the answer and opens the listings
+    // on their own terms, instead of being auto-redirected out of the chat.
+    const [readyNav, setReadyNav] = useState<{ target: string; label: string; locationLabel: string } | null>(null);
     const [isEarthLaunching, setIsEarthLaunching] = useState(false);
     const [callbackPhone, setCallbackPhone] = useState("");
     const [locationRecord, setLocationRecord] = useState<{ name?: string; path_slugs?: { state: string; metro: string; city: string; suburb?: string } } | null>(null);
@@ -183,7 +195,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         try {
             devLog('[Voice] Auto-restarting mic for follow-up question...');
             await startRecording();
-            toast.success("Listening — speak your answer.", { id: 'stt-status', duration: 3000 });
+            toast.success("Listening  -  speak your answer.", { id: 'stt-status', duration: 3000 });
         } catch (err) {
             console.error('[Voice] Failed to auto-restart recording:', err);
             isVoiceSessionRef.current = false;
@@ -199,7 +211,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
     }, []);
 
     // Handle transcription from Whisper
-    // CRITICAL: Use ref to avoid stale closure — without this, follow-up voice
+    // CRITICAL: Use ref to avoid stale closure  -  without this, follow-up voice
     // responses (e.g. stating location after trade was detected) would use the
     // old handleUserMessage with stale chatState/detectedTrade/detectedCity.
     useEffect(() => {
@@ -211,7 +223,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
             isVoiceSessionRef.current = true;
             handleUserMessageRef.current(transcription, true);
             resetTranscription();
-            // Don't stop volume monitor here — it'll be stopped when recording stops
+            // Don't stop volume monitor here  -  it'll be stopped when recording stops
             // and restarted after TTS finishes
         }
     }, [transcription, resetTranscription]);
@@ -223,7 +235,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         }
     }, [whisperError]);
 
-    // Real-time audio visualization when recording — single RAF loop
+    // Real-time audio visualization when recording  -  single RAF loop
     // samples every ~50ms, so the waveform scrolls one slot per sample.
     useEffect(() => {
         if (!isRecording) {
@@ -352,6 +364,9 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         setChatState(stagedState);
         chatStateRef.current = stagedState;
 
+        // A new message makes the previous "ready to open listings" prompt stale.
+        setReadyNav(null);
+
         setInput("");
         setIsTyping(true);
 
@@ -408,7 +423,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                     detectedCityRef.current = newState.detectedCity;
                 }
 
-                // Voice TTS playback removed — AzureVoiceService is no longer in use.
+                // Voice TTS playback removed  -  AzureVoiceService is no longer in use.
 
                 setIsRequestingLocation(newState.step === 'LOCATION_CHECK' && !newState.detectedCity && !newState.suggestedCity);
                 clearTimeout(safetyRef);
@@ -426,14 +441,32 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                     detectedCityRef.current = inferredCity;
                 }
 
+                // UK: never auto-redirect. The user reads the answer and taps a button when
+                // ready (request: "give the user time to read... stay in control"). US keeps the
+                // existing snappy auto-launch behaviour, which the user confirmed works as intended.
+                const isUKRegion = freshCountryCode !== 'US';
+
+                // Only the local listings pages (/emergency-<trade>/<city>) get the UK button-gate.
+                // Utility navigations (blog, about, contact, pricing, home…) still go immediately.
+                const isListingsNav = !!response.target && response.target.startsWith('/emergency-');
+
                 if (response.action === 'navigate' && response.target) {
                     isVoiceSessionRef.current = false;
-                    const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
-                    devLog(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
-                    setTimeout(() => {
-                        startEarthLaunch(response.target!, inferredCity || msgText);
-                    }, navDelay);
-                } else if (inferredTrade && inferredCity) {
+                    if (isUKRegion && isListingsNav) {
+                        const label = inferredCity ? `Find nearby tradesmen in ${inferredCity}` : 'Find nearby tradesmen';
+                        devLog(`[handleUserMessage] UK holding for user to open listings: ${response.target}`);
+                        setReadyNav({ target: response.target, label, locationLabel: inferredCity || msgText });
+                    } else {
+                        const navDelay = isVoice ? 1000 : (1000 + (response.content.length * 10));
+                        devLog(`[handleUserMessage] Navigating in ${navDelay}ms to: ${response.target}`);
+                        setTimeout(() => {
+                            startEarthLaunch(response.target!, inferredCity || msgText);
+                        }, navDelay);
+                    }
+                } else if (!isUKRegion && inferredTrade && inferredCity) {
+                    // US only: when both trade and area are already known, launch straight away.
+                    // UK deliberately skips this so it asks for/confirms location first and never
+                    // teleports the user out of the chat before they've read the reply.
                     isVoiceSessionRef.current = false;
                     const target = buildEmergencyTarget(inferredTrade, inferredCity);
                     const navDelay = isVoice ? 900 : 1200;
@@ -442,7 +475,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                         startEarthLaunch(target, inferredCity);
                     }, navDelay);
                 } else if (isVoice) {
-                    // Not navigating — auto-restart mic for voice follow-up
+                    // Not navigating  -  auto-restart mic for voice follow-up
                     // Small delay to let TTS audio finish cleanly
                     setTimeout(() => {
                         restartRecordingForVoice();
@@ -796,10 +829,34 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
         });
         setInput("");
         isVoiceSessionRef.current = false;
+        setReadyNav(null);
         setDetectedTrade(null);
         setDetectedCity(null);
         setIsRequestingLocation(false);
     };
+
+    const openReadyNav = () => {
+        if (!readyNav) return;
+        const { target, locationLabel } = readyNav;
+        trackEvent('Chat', 'find_nearby_click', target);
+        setReadyNav(null);
+        startEarthLaunch(target, locationLabel);
+    };
+
+    // UK: explicit "open the listings" control so the user stays in charge of when they leave the chat.
+    const readyNavCta = readyNav ? (
+        <div className="mt-3 flex flex-col items-center gap-1.5 px-2" role="group" aria-label="Open listings">
+            <Button
+                onClick={openReadyNav}
+                disabled={isEarthLaunching}
+                className="h-11 rounded-full bg-gold px-6 text-white font-semibold shadow-[0_0_24px_rgba(212,175,55,0.45)] hover:bg-gold/90 animate-glow-bottom ring-2 ring-yellow-400/70"
+            >
+                {isEarthLaunching ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Search className="w-4 h-4 mr-2" />}
+                {readyNav.label}
+            </Button>
+            <span className="text-[11px] text-muted-foreground text-center">Open the listings when you are ready.</span>
+        </div>
+    ) : null;
 
     const compactTextButtonClass = "home-search-control-text home-search-premium-button !h-10 w-full justify-center rounded-xl border-0 px-3 text-[0.72rem] font-semibold leading-none transition sm:text-xs";
     const compactIconButtonClass = "home-search-control-icon home-search-premium-button h-9 w-9 rounded-xl border-0 p-0 transition";
@@ -867,8 +924,8 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                     <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                         <Phone className="w-6 h-6 text-emerald-400" />
                     </div>
-                    <h3 className="text-white font-bold text-lg mb-1">Want us to confirm a pro for you?</h3>
-                    <p className="text-emerald-300/70 text-sm mb-6">Leave your number and we'll text you when a local expert is confirmed. Optional — skip to browse listings.</p>
+                    <h3 className="text-white font-bold text-lg mb-1">We can confirm a pro for you</h3>
+                    <p className="text-emerald-300/70 text-sm mb-6">Leave your number and we will text you when a local expert is confirmed. You can also skip to listings.</p>
                     <div className="flex gap-2 max-w-sm mx-auto mb-4">
                         <input
                             type="tel"
@@ -960,6 +1017,8 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                         )}
                     </AnimatePresence>
 
+                    {readyNavCta && <div className="mb-3">{readyNavCta}</div>}
+
                     <div className="home-search-chatbox group/searchbox relative overflow-hidden rounded-[1.45rem] bg-white shadow-[0_18px_44px_rgba(15,23,42,0.12)] ring-1 ring-slate-950/10 transition duration-300 dark:bg-[#080c14] dark:shadow-[0_18px_44px_rgba(0,0,0,0.38)] dark:ring-white/10">
                         <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-slate-950/10 to-transparent dark:via-white/18" />
 
@@ -1008,7 +1067,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         }}
                                         onFocus={() => setIsFocused(true)}
                                         onBlur={() => setIsFocused(false)}
-                                        placeholder={chatState.history.length === 0 ? (placeholderText || "What emergency do you need help with?") : "Type your reply..."}
+                                        placeholder={chatState.history.length === 0 ? (placeholderText || "Describe the emergency you need help with") : "Type your reply..."}
                                         data-tour="tour-chat-input"
                                         className="h-full min-h-[5rem] w-full resize-none bg-transparent text-[15px] font-light leading-relaxed text-slate-950 outline-none placeholder:text-slate-950/70 focus:ring-0 sm:text-base dark:text-slate-50 dark:placeholder:text-white/80"
                                     />
@@ -1200,6 +1259,8 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                     )}
                 </div>
 
+                {readyNavCta}
+
                 {/* INPUT CARD - Fixed structure: textarea slot + controls always at bottom */}
                 <div className="hero-chat-shell w-full bg-transparent flex justify-center pt-2 pb-4 relative z-30">
                     <div className={`hero-chat-card relative z-40 flex flex-col w-[95%] md:w-[90%] bg-white dark:bg-[#0a0a0a] rounded-2xl border overflow-hidden group
@@ -1207,13 +1268,13 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                             ? 'border-gold/80 shadow-[0_0_40px_rgba(215,160,66,0.3)] ring-1 ring-gold/30'
                             : 'border-gold/30 shadow-[0_0_20px_rgba(0,0,0,0.4)] hover:border-gold/50'}`}>
 
-                        {/* Quick action chips — only shown before first message, disappears after user engages */}
+                        {/* Quick action chips  -  only shown before first message, disappears after user engages */}
                         {chatState.history.length === 0 && !isRecording && (
                             <div className="w-full px-3 md:px-6 pt-2 pb-0 flex flex-nowrap md:flex-wrap items-center justify-center md:justify-start gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                                 {[
-                                    { label: 'Burst pipe', message: 'I need a plumber — burst pipe' },
-                                    { label: 'Power outage', message: 'I need an electrician — power outage' },
-                                    { label: 'Locked out', message: 'I need a locksmith — locked out' },
+                                    { label: 'Burst pipe', message: 'I need a plumber  -  burst pipe' },
+                                    { label: 'Power outage', message: 'I need an electrician  -  power outage' },
+                                    { label: 'Locked out', message: 'I need a locksmith  -  locked out' },
                                 ].map((chip) => (
                                     <button
                                         key={chip.label}
@@ -1254,7 +1315,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                 </div>
                             ) : (
                                 <>
-                                    {/* AI avatar badge — nestled inside textarea left padding */}
+                                    {/* AI avatar badge  -  nestled inside textarea left padding */}
                                     <div
                                         aria-hidden="true"
                                         className="pointer-events-none absolute left-3 md:left-5 top-3 md:top-4 z-10 w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center bg-gradient-to-br from-gold/25 to-gold/5 border border-gold/40 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-glow-pulse"
@@ -1269,7 +1330,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                             className="w-4 h-4 md:w-6 md:h-6 brightness-125 drop-shadow-[0_0_4px_rgba(212,175,55,0.6)]"
                                         />
                                     </div>
-                                    {/* Blinking cursor hint — signals "you can type here" when idle */}
+                                    {/* Blinking cursor hint  -  signals "you can type here" when idle */}
                                     {!input && !isFocused && chatState.history.length === 0 && (
                                         <span
                                             aria-hidden="true"
@@ -1288,7 +1349,7 @@ export function EmergencyChatInterface({ launchMode = 'earth', surface = 'hero' 
                                         }}
                                         onFocus={() => setIsFocused(true)}
                                         onBlur={() => setIsFocused(false)}
-                                        placeholder={chatState.history.length === 0 ? (placeholderText || "Hi, how can we help?") : "Type your reply..."}
+                                        placeholder={chatState.history.length === 0 ? (placeholderText || "Describe the help you need") : "Type your reply..."}
                                         data-tour="tour-chat-input"
                                         className="w-full bg-transparent border-none outline-none focus:outline-none focus:border-none pl-12 md:pl-20 pr-4 md:pr-8 py-4 md:py-6 text-sm md:text-2xl focus:ring-0 focus-visible:ring-0 text-slate-950 dark:text-white placeholder:text-slate-950/70 dark:placeholder:text-white/80 resize-none font-light tracking-wide"
                                         style={{ minHeight: '80px' }}

@@ -31,8 +31,8 @@ const SAMPLE_CONTACT = {
 
 function complianceBlockers(s?: EmailSettings | null, c?: Partial<EmailCampaign> | null, sendable?: number): string[] {
   const b: string[] = [];
-  if (!s?.from_email) b.push('No sender (From) email configured — set it in Resend Settings.');
-  if (!s?.reply_to) b.push('No reply-to email configured — set it in Resend Settings.');
+  if (!s?.from_email) b.push('No sender (From) email configured  -  set it in Resend Settings.');
+  if (!s?.reply_to) b.push('No reply-to email configured  -  set it in Resend Settings.');
   if (c && !c.subject?.trim()) b.push('Campaign is missing a subject line.');
   if (!(c?.opt_out_text || s?.opt_out_text)) b.push('No opt-out / unsubscribe text configured.');
   if (!(c?.business_address || s?.business_address)) b.push('No business address configured (required by CAN-SPAM).');
@@ -161,10 +161,10 @@ export default function EmailOutreachDashboard() {
     onSuccess: (data: any) => {
       invalidateAll();
       if (data?.state === 'setup_required') toast.warning(`Setup required: ${data?.problems?.join(' ') || ''}`);
-      else if (data?.dryRun) toast.info('Dry run complete — no real emails were sent (domain not verified).');
+      else if (data?.dryRun) toast.info('Dry run complete  -  no real emails were sent (domain not verified).');
       else {
         const sent = (data?.processed || []).reduce((a: number, r: any) => a + (r.sent || 0), 0);
-        toast.success(`Orchestrator cycle done — ${sent} sent.`);
+        toast.success(`Orchestrator cycle done  -  ${sent} sent.`);
       }
     },
     onError: (e: any) => toast.error(`Orchestrator error: ${e.message}`),
@@ -177,7 +177,7 @@ export default function EmailOutreachDashboard() {
       if (data?.error) throw new Error(data.error);
       return data;
     },
-    onSuccess: () => toast.success('Test email sent — check the inbox.'),
+    onSuccess: () => toast.success('Test email sent  -  check the inbox.'),
     onError: (e: any) => toast.error(`Test failed: ${e.message}`),
   });
 
@@ -186,7 +186,7 @@ export default function EmailOutreachDashboard() {
     const blockers = complianceBlockers(settings, camp);
     if (blockers.length) { toast.error(blockers[0]); setActiveTab('campaigns'); return; }
     if (live && !settings?.domain_verified) {
-      toast.error('Sending domain not verified — live sending is blocked. Run a Dry Run or verify a domain in Deliverability.');
+      toast.error('Sending domain not verified  -  live sending is blocked. Run a Dry Run or verify a domain in Deliverability.');
       return;
     }
     await supabase.from('email_campaigns').update({ status: 'active', daily_limit: amount, next_run_at: null, scheduled_at: null }).eq('id', camp.id);
@@ -205,7 +205,7 @@ export default function EmailOutreachDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Email Control Centre</h1>
-          <p className="text-muted-foreground mt-1">{settings?.from_name || 'Emergency Tradesmen'}{settings?.sending_domain ? ` · ${settings.sending_domain}` : ''} — safe, throttled outreach through Resend.</p>
+          <p className="text-muted-foreground mt-1">{settings?.from_name || 'Emergency Tradesmen'}{settings?.sending_domain ? ` · ${settings.sending_domain}` : ''}  -  safe, throttled outreach through Resend.</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={() => { invalidateAll(); toast.success('Refreshed'); }}>
@@ -236,7 +236,7 @@ export default function EmailOutreachDashboard() {
           )}
           <div className="flex items-center gap-2 text-xs">
             {!domainVerified && (
-              <Badge variant="outline" className="border-amber-300 text-amber-700"><AlertTriangle className="w-3 h-3 mr-1" /> Test mode — domain not verified</Badge>
+              <Badge variant="outline" className="border-amber-300 text-amber-700"><AlertTriangle className="w-3 h-3 mr-1" /> Test mode  -  domain not verified</Badge>
             )}
             {domainVerified && <Badge className="bg-emerald-600"><ShieldCheck className="w-3 h-3 mr-1" /> Live sending enabled</Badge>}
           </div>
@@ -339,17 +339,17 @@ function OverviewTab({ campaigns, contactStats, settings, orch, setTab }: any) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {stat('Active campaigns', active)}
-        {stat('Total contacts', contactStats?.total ?? '—')}
-        {stat('Sendable now', contactStats?.sendable ?? '—', 'valid · not opted-out · not emailed')}
-        {stat('Suppressed', contactStats?.suppressed ?? '—', 'unsub + bounce + complaints')}
+        {stat('Total contacts', contactStats?.total ?? ' - ')}
+        {stat('Sendable now', contactStats?.sendable ?? ' - ', 'valid · not opted-out · not emailed')}
+        {stat('Suppressed', contactStats?.suppressed ?? ' - ', 'unsub + bounce + complaints')}
       </div>
       <Card>
         <CardHeader><CardTitle className="text-base">Pipeline economics</CardTitle><CardDescription>Cost-per-lead and ROI populate as conversions are tracked. Resend's first 3,000 emails/month are free.</CardDescription></CardHeader>
         <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Reply rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.replied) / totals.sent).toFixed(1)}%` : '—'}</div></div>
-          <div><div className="text-muted-foreground">Bounce rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.bounced) / totals.sent).toFixed(1)}%` : '—'}</div></div>
+          <div><div className="text-muted-foreground">Reply rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.replied) / totals.sent).toFixed(1)}%` : ' - '}</div></div>
+          <div><div className="text-muted-foreground">Bounce rate</div><div className="text-lg font-semibold">{totals.sent ? `${((100 * totals.bounced) / totals.sent).toFixed(1)}%` : ' - '}</div></div>
           <div><div className="text-muted-foreground">Claims</div><div className="text-lg font-semibold">{totals.converted}</div></div>
-          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `£${(0).toFixed(2)}` : '—'}</div></div>
+          <div><div className="text-muted-foreground">Cost / lead</div><div className="text-lg font-semibold">{totals.converted ? `£${(0).toFixed(2)}` : ' - '}</div></div>
         </CardContent>
       </Card>
     </div>
@@ -506,7 +506,7 @@ function CampaignBuilder({ open, onOpenChange, campaign, settings, onSaved }: an
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-3">
-            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="UK Plumbers — Claim Listing" /></div>
+            <div><Label>Campaign name</Label><Input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="UK Plumbers  -  Claim Listing" /></div>
             <div className="grid grid-cols-2 gap-2">
               <div><Label>Region</Label>
                 <Select value={form.target_country || 'GB'} onValueChange={(v) => set('target_country', v)}>
@@ -639,12 +639,12 @@ function ContactsTab({ onChanged }: any) {
                 <TableRow key={c.id} className={!c.email_valid ? 'opacity-60' : ''}>
                   <TableCell className="font-medium">{c.business_name}{c.contact_name && <div className="text-xs text-muted-foreground">{c.contact_name}</div>}</TableCell>
                   <TableCell className="text-sm">{c.email}{!c.email_valid && <Badge variant="outline" className="ml-2 text-red-500 border-red-200">invalid</Badge>}</TableCell>
-                  <TableCell className="text-sm">{US_TRADES.find((t) => t.slug === c.trade)?.label || c.trade || '—'}</TableCell>
-                  <TableCell className="text-sm">{[c.city, c.state].filter(Boolean).join(', ') || '—'}</TableCell>
+                  <TableCell className="text-sm">{US_TRADES.find((t) => t.slug === c.trade)?.label || c.trade || ' - '}</TableCell>
+                  <TableCell className="text-sm">{[c.city, c.state].filter(Boolean).join(', ') || ' - '}</TableCell>
                   <TableCell>
                     <Badge variant="outline" className={c.unsubscribed ? 'text-purple-600 border-purple-200' : c.bounced ? 'text-red-600 border-red-200' : c.replied ? 'text-blue-600 border-blue-200' : c.status === 'contacted' ? 'text-green-600 border-green-200' : ''}>{c.unsubscribed ? 'unsubscribed' : c.bounced ? 'bounced' : c.replied ? 'replied' : c.status}</Badge>
                   </TableCell>
-                  <TableCell className="text-xs text-muted-foreground">{c.last_emailed_at ? new Date(c.last_emailed_at).toLocaleDateString() : '—'}</TableCell>
+                  <TableCell className="text-xs text-muted-foreground">{c.last_emailed_at ? new Date(c.last_emailed_at).toLocaleDateString() : ' - '}</TableCell>
                   <TableCell className="text-right whitespace-nowrap">
                     {!c.replied && <Button size="sm" variant="ghost" title="Mark replied (stops follow-ups)" onClick={() => act(c.id, { replied: true, status: 'replied' })}>Replied</Button>}
                     {!c.unsubscribed && <Button size="sm" variant="ghost" className="text-purple-600" title="Unsubscribe + suppress" onClick={() => act(c.id, { unsubscribed: true, status: 'unsubscribed' }, { email: c.email, reason: 'unsubscribe' })}>Unsub</Button>}
@@ -678,7 +678,7 @@ function ImportContactsDialog({ open, onOpenChange, onDone }: any) {
     const { rows, errors } = parseContactsCsv(text);
     if (!rows.length) { toast.error(errors[0] || 'No valid rows found.'); return; }
     setBusy(true);
-    // upsert on lower(email) — duplicate prevention is enforced by the unique index.
+    // upsert on lower(email)  -  duplicate prevention is enforced by the unique index.
     const { error } = await supabase.from('email_contacts').upsert(rows as any, { onConflict: 'email', ignoreDuplicates: true });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
@@ -727,11 +727,11 @@ function SendQueueTab({ campaigns, settings, onForceRun }: any) {
           <Button onClick={onForceRun}><Play className="w-4 h-4 mr-2" />Run next chunk now</Button>
         </CardHeader>
         <CardContent className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Chunk size</div><div className="font-semibold">{settings?.chunk_size ?? '—'} emails</div></div>
+          <div><div className="text-muted-foreground">Chunk size</div><div className="font-semibold">{settings?.chunk_size ?? ' - '} emails</div></div>
           <div><div className="text-muted-foreground">Between emails</div><div className="font-semibold">{((settings?.delay_between_emails_ms ?? 0) / 1000)}s</div></div>
           <div><div className="text-muted-foreground">Between chunks</div><div className="font-semibold">{Math.round((settings?.delay_between_chunks_ms ?? 0) / 1000)}s</div></div>
-          <div><div className="text-muted-foreground">Daily cap</div><div className="font-semibold">{settings?.daily_limit ?? '—'}</div></div>
-          <div><div className="text-muted-foreground">Hourly cap</div><div className="font-semibold">{settings?.hourly_limit ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Daily cap</div><div className="font-semibold">{settings?.daily_limit ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Hourly cap</div><div className="font-semibold">{settings?.hourly_limit ?? ' - '}</div></div>
         </CardContent>
       </Card>
 
@@ -761,7 +761,7 @@ function QueueRow({ campaign, settings }: { campaign: EmailCampaign; settings: a
   return (
     <Card><CardContent className="py-4 flex flex-wrap items-center gap-4">
       <div className="min-w-[180px]"><div className="font-semibold">{campaign.name}</div><Badge className={campaign.status === 'active' ? 'bg-green-500' : 'bg-amber-500'}>{campaign.status}</Badge></div>
-      <div className="flex-1 min-w-[200px]"><Progress value={Math.min(100, Math.round((100 * (data?.sentToday || 0)) / (cap || 1)))} /><div className="text-xs text-muted-foreground mt-1">{data?.sentToday || 0} / {cap} today · {data?.remaining ?? '—'} eligible remaining</div></div>
+      <div className="flex-1 min-w-[200px]"><Progress value={Math.min(100, Math.round((100 * (data?.sentToday || 0)) / (cap || 1)))} /><div className="text-xs text-muted-foreground mt-1">{data?.sentToday || 0} / {cap} today · {data?.remaining ?? ' - '} eligible remaining</div></div>
       {nextIn > 0 && <div className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />Next chunk in {nextIn}s</div>}
     </CardContent></Card>
   );
@@ -812,7 +812,7 @@ function ResendSettingsTab({ settings, onSave, onTest, testing }: any) {
           <CardHeader><CardTitle className="text-base">Send a test email</CardTitle><CardDescription>Verifies Resend end-to-end (uses the From/Reply-To above).</CardDescription></CardHeader>
           <CardContent className="flex gap-2">
             <Input placeholder="you@example.com" value={testTo} onChange={(e) => setTestTo(e.target.value)} />
-            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: `${settings?.from_name || 'Emergency Tradesmen'} — test email`, html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
+            <Button disabled={testing || !isValidEmail(testTo)} onClick={() => onTest({ to: testTo, subject: `${settings?.from_name || 'Emergency Tradesmen'}  -  test email`, html: '<p>✅ Your Resend integration works. This is a test from the Email Control Centre.</p>' })}><Send className="w-4 h-4 mr-2" />{testing ? 'Sending…' : 'Send test'}</Button>
           </CardContent>
         </Card>
       </div>
@@ -858,7 +858,7 @@ function ListValidationCard() {
         refetch();
         if (data.done || (data.checked || 0) === 0) break;
       }
-      toast.success(`Validation complete — checked ${total}, ${invalid} invalid removed.`);
+      toast.success(`Validation complete  -  checked ${total}, ${invalid} invalid removed.`);
     } catch (e: any) { toast.error(`Validation failed: ${e.message}`); }
     finally { setRunning(false); setProgress(''); refetch(); qc.invalidateQueries({ queryKey: ['ecc-contact-stats'] }); }
   };
@@ -876,10 +876,10 @@ function ListValidationCard() {
           <Button disabled={running} onClick={run}>{running ? (progress || 'Validating…') : 'Run DNS validation'}</Button>
         </div>
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div><span className="text-muted-foreground">Valid (has mail server): </span><strong className="text-emerald-600">{v?.valid_mx ?? '—'}</strong></div>
-          <div><span className="text-muted-foreground">Unvalidated: </span><strong>{v?.unvalidated ?? '—'}</strong></div>
-          <div><span className="text-muted-foreground">Dead domain: </span><strong className="text-red-600">{v?.dead ?? '—'}</strong></div>
-          <div><span className="text-muted-foreground">No mail server: </span><strong className="text-red-600">{v?.no_mx ?? '—'}</strong></div>
+          <div><span className="text-muted-foreground">Valid (has mail server): </span><strong className="text-emerald-600">{v?.valid_mx ?? ' - '}</strong></div>
+          <div><span className="text-muted-foreground">Unvalidated: </span><strong>{v?.unvalidated ?? ' - '}</strong></div>
+          <div><span className="text-muted-foreground">Dead domain: </span><strong className="text-red-600">{v?.dead ?? ' - '}</strong></div>
+          <div><span className="text-muted-foreground">No mail server: </span><strong className="text-red-600">{v?.no_mx ?? ' - '}</strong></div>
           {(v?.mailbox ?? 0) > 0 && <div><span className="text-muted-foreground">Bad mailbox: </span><strong className="text-red-600">{v?.mailbox}</strong></div>}
         </div>
       </CardContent>
@@ -939,11 +939,11 @@ function DeliverabilityTab({ settings, contactStats, onSave, onChanged }: any) {
       <Card>
         <CardHeader><CardTitle className="text-base">List hygiene</CardTitle></CardHeader>
         <CardContent className="grid grid-cols-2 gap-3 text-sm">
-          <div><div className="text-muted-foreground">Valid emails</div><div className="text-lg font-semibold text-emerald-600">{contactStats?.valid ?? '—'}</div></div>
-          <div><div className="text-muted-foreground">Invalid (skipped)</div><div className="text-lg font-semibold text-red-600">{contactStats?.invalid ?? '—'}</div></div>
-          <div><div className="text-muted-foreground">Bounced</div><div className="text-lg font-semibold">{contactStats?.bounced ?? '—'}</div></div>
-          <div><div className="text-muted-foreground">Unsubscribed</div><div className="text-lg font-semibold">{contactStats?.unsub ?? '—'}</div></div>
-          <div className="col-span-2"><div className="text-muted-foreground">Suppression list size</div><div className="text-lg font-semibold">{contactStats?.suppressed ?? '—'}</div></div>
+          <div><div className="text-muted-foreground">Valid emails</div><div className="text-lg font-semibold text-emerald-600">{contactStats?.valid ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Invalid (skipped)</div><div className="text-lg font-semibold text-red-600">{contactStats?.invalid ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Bounced</div><div className="text-lg font-semibold">{contactStats?.bounced ?? ' - '}</div></div>
+          <div><div className="text-muted-foreground">Unsubscribed</div><div className="text-lg font-semibold">{contactStats?.unsub ?? ' - '}</div></div>
+          <div className="col-span-2"><div className="text-muted-foreground">Suppression list size</div><div className="text-lg font-semibold">{contactStats?.suppressed ?? ' - '}</div></div>
         </CardContent>
       </Card>
 

@@ -11,7 +11,7 @@ import { sendEmail } from "@/lib/email";
 import { trackConversion } from "@/lib/analytics";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
-import { getUserSubscription } from "@/lib/subscriptionService";
+import { getUserSubscription, PLANS, type Subscription } from "@/lib/subscriptionService";
 import { getSupportEmail, getSiteDomain, getSiteName } from "@/lib/siteConfig";
 import { BusinessEnquiryForm } from "@/components/business/BusinessEnquiryForm";
 
@@ -21,6 +21,7 @@ export default function PaymentSuccessPage() {
     const navigate = useNavigate();
     const [countdown, setCountdown] = useState(5);
     const [verified, setVerified] = useState(false);
+    const [subscription, setSubscription] = useState<Subscription | null>(null);
     const [websiteIntent, setWebsiteIntent] = useState<string | null>(() => {
         if (typeof window === "undefined") return null;
         return sessionStorage.getItem("pro_website_build_intent");
@@ -34,7 +35,7 @@ export default function PaymentSuccessPage() {
         const maxWait = import.meta.env.DEV ? 2000 : 8000;
         const pollInterval = 1000;
 
-        // Hard fallback — always show success page after maxWait regardless of DB state
+        // Hard fallback  -  always show success page after maxWait regardless of DB state
         const fallback = setTimeout(() => setVerified(true), maxWait);
 
         let stopped = false;
@@ -43,13 +44,14 @@ export default function PaymentSuccessPage() {
             try {
                 const s = await getUserSubscription();
                 if (s && s.status === 'active' && s.plan !== 'free') {
+                    setSubscription(s);
                     stopped = true;
                     clearInterval(poll);
                     clearTimeout(fallback);
                     setVerified(true);
                 }
             } catch {
-                // ignore — fallback timer will resolve
+                // ignore  -  fallback timer will resolve
             }
         }, pollInterval);
 
@@ -122,19 +124,42 @@ export default function PaymentSuccessPage() {
                     text: `Hi ${(user as any)?.user_metadata?.name || user?.email?.split('@')[0] || 'there'},\n\nThank you for upgrading to Pro! Your payment was successful.\n\nYou now have access to:\n- Priority Ranking\n- Featured Badge\n- Lead Notifications\n\nGo to your dashboard to set up your profile: ${baseDomain}/user/dashboard`
                 });
 
-                // 3. Track Conversion
-                const isGB = settings.countryCode === 'GB';
-                trackConversion(isGB ? 29 : 29, isGB ? 'GBP' : 'USD');
-                (window as any).posthog?.capture('Plan Purchased', {
-                    region: isGB ? 'UK' : 'US',
-                    trade_category: (user as any)?.trade || 'unknown',
-                    plan_tier: 'pro'
-                });
             }
         }
 
         return () => clearInterval(interval);
     }, [user, settings.countryCode]);
+
+    // Conversion tracking is deliberately separate from the email block above:
+    // it must not depend on the user having an email, and it is keyed to the
+    // transaction rather than the date, so an upgrade on the same day still
+    // reports and a page refresh does not double-count.
+    useEffect(() => {
+        if (!verified || !subscription) return;
+
+        const txId = subscription.paymentSubscriptionId || subscription.id;
+        const dedupeKey = `conversion_tracked_${txId}`;
+        if (localStorage.getItem(dedupeKey)) return;
+        localStorage.setItem(dedupeKey, '1');
+
+        const isGB = settings.countryCode === 'GB';
+        const currency = isGB ? 'GBP' : 'USD';
+        // Real plan price, not a flat 29. `agency` has no entry in PLANS, so its
+        // value is reported as undefined rather than guessed - see note to Nick.
+        const price = PLANS[subscription.plan as keyof typeof PLANS]?.price;
+
+        if (typeof price === 'number') {
+            trackConversion(price, currency, txId);
+        }
+        (window as any).posthog?.capture('Plan Purchased', {
+            region: isGB ? 'UK' : 'US',
+            trade_category: (user as any)?.trade || 'unknown',
+            plan_tier: subscription.plan,
+            value: price,
+            currency,
+            transaction_id: txId,
+        });
+    }, [verified, subscription, user, settings.countryCode]);
 
     return (
         <div className="min-h-screen flex flex-col bg-slate-950 text-white">

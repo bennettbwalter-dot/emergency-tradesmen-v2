@@ -160,7 +160,7 @@ export default function BlogPage() {
             <div className="min-h-screen bg-background text-foreground selection:bg-gold/30">
                 <Header />
                 <SEO
-                    title={`Emergency ${settings.tradeTerm} Blog — Safety Guides & Expert Tips`}
+                    title={`Emergency ${settings.tradeTerm} Blog  -  Safety Guides & Expert Tips`}
                     description={`Expert home safety guides, emergency repair tips, and maintenance advice for UK homeowners. Learn how to handle plumbing, electrical & HVAC emergencies. Read now.`}
                     canonical={`${countryPrefix}/blog`}
                     alternates={[

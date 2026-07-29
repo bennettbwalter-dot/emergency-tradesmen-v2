@@ -30,7 +30,7 @@ const GB_MATCHMAKER_STEPS: TourStep[] = [
     {
         id: 'tour-trade-button',
         title: 'Step 1: Pick Your Trade',
-        description: "Click the Trade button to choose the type of professional you need — plumber, electrician, locksmith, or any of our specialist trades.",
+        description: "Click the Trade button to choose the professional you need: plumber, electrician, locksmith, or one of our specialist trades.",
         icon: <Wrench className="w-6 h-6 text-gold" />,
     },
     {
@@ -42,7 +42,7 @@ const GB_MATCHMAKER_STEPS: TourStep[] = [
     {
         id: 'tour-locate-button',
         title: 'Step 3: Locate Me',
-        description: "Click the Locate Me button for instant GPS matching. We'll detect your position and connect you with the nearest available tradesperson.",
+        description: "Click the Locate Me button for GPS matching. We detect your position and show nearby tradespeople.",
         icon: <MapPin className="w-6 h-6 text-gold" />,
     },
 ];
@@ -52,19 +52,19 @@ const US_MATCHMAKER_STEPS: TourStep[] = [
     {
         id: 'tour-trade-button',
         title: 'Step 1: Pick Your Trade',
-        description: "Click the Trade button to choose the type of contractor you need — plumber, electrician, locksmith, HVAC tech, or any of our specialist trades.",
+        description: "Click the Trade button to choose the contractor you need: plumber, electrician, locksmith, HVAC tech, or one of our specialist trades.",
         icon: <Wrench className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-state-button',
         title: 'Step 2: State & City',
-        description: "Start by selecting your State. Once you do, a City selector will appear right beside it — pick your city or metro area and we'll zero in on licensed contractors in your neighborhood.",
+        description: "Select your state first. Then pick your city or metro area to see contractors in your neighborhood.",
         icon: <Map className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-locate-button',
         title: 'Step 3: Locate Me',
-        description: "Click the Locate Me button for instant GPS matching. We'll detect your position and connect you with the nearest available contractor.",
+        description: "Click the Locate Me button for GPS matching. We detect your position and show nearby contractors.",
         icon: <MapPin className="w-6 h-6 text-gold" />,
     },
 ];
@@ -73,7 +73,7 @@ const COMMON_STEPS_BEFORE: TourStep[] = [
     {
         id: 'tour-chat-input',
         title: 'Describe Your Emergency',
-        description: "Start here. Tell us what's happening in plain English — \"My boiler is leaking\" or \"Power cut in my kitchen.\" Our AI dispatcher will take it from there.",
+        description: "Start here. Tell us what happened, such as \"My boiler is leaking\" or \"Power cut in my kitchen.\" Our AI dispatcher asks the next question.",
         icon: <MessageSquare className="w-6 h-6 text-gold" />,
     },
 ];
@@ -82,24 +82,24 @@ const COMMON_STEPS_AFTER: TourStep[] = [
     {
         id: 'tour-mic-button',
         title: 'Hands-Free Help',
-        description: "Working with your hands? Tap the Microphone to speak your request. We'll transcribe it instantly so you don't have to type while handling a leak.",
+        description: "Tap the Microphone to speak your request while you handle a leak, lockout, or power issue.",
         icon: <Mic className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-signup',
         title: 'Join Our Network',
-        description: "Are you a qualified professional? Claim or upgrade your public listing, keep details updated, and grow your business.",
+        description: "Qualified professionals can claim or upgrade a public listing and keep details updated.",
         icon: <Users className="w-6 h-6 text-gold" />,
     },
     {
         id: 'tour-blog-link',
         title: 'The Knowledge Hub',
-        description: "Knowledge is power. Browse 'The Dispatch' for DIY safety tips, trade secrets, and preventative maintenance guides to keep your home running smoothly.",
+        description: "Browse The Dispatch for safety tips and maintenance guides for urgent home problems.",
         icon: <Newspaper className="w-6 h-6 text-gold" />,
     },
 ];
 
-// Steps that are in the hero / above-fold — page must NOT scroll during these
+// Steps that are in the hero / above-fold  -  page must NOT scroll during these
 const ABOVE_FOLD_STEP_IDS = new Set([
     'tour-chat-input',
     'tour-trade-button',
@@ -133,7 +133,7 @@ export function FloatingTourHub() {
         return [...COMMON_STEPS_BEFORE, ...matchmakerSteps, ...COMMON_STEPS_AFTER];
     }, [settings.countryCode]);
 
-    // Filter steps based on device — desktop-only steps are excluded on mobile
+    // Filter steps based on device  -  desktop-only steps are excluded on mobile
     const activeSteps = React.useMemo(() => {
         if (isMobile) return allSteps.filter(s => !s.desktopOnly);
         return allSteps;
@@ -278,7 +278,7 @@ export function FloatingTourHub() {
                 document.body.style.overflow = '';
             };
         } else {
-            // Tour closed — always restore scroll and close sidebar drawer
+            // Tour closed  -  always restore scroll and close sidebar drawer
             document.body.style.overflow = '';
             window.dispatchEvent(new Event('et-close-sidebar'));
         }

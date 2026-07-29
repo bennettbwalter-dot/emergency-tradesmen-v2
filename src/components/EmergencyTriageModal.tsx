@@ -57,11 +57,11 @@ const VERIFICATION_QUESTIONS: Record<string, { question: string; options: string
     },
     glazier: {
         question: "Is the glass broken or cracked?",
-        options: ["Completely broken", "Large crack", "Small crack", "Just stuck/jammed"],
+        options: ["Completely broken", "Large crack", "Small crack", "Stuck or jammed"],
     },
     breakdown: {
         question: "Is your vehicle completely immobile?",
-        options: ["Yes - won't start at all", "Starts but unsafe to drive", "Can drive but issue present", "Just need inspection"],
+        options: ["Yes - won't start at all", "Starts but unsafe to drive", "Can drive but issue present", "Inspection only"],
     },
 };
 

@@ -151,7 +151,7 @@ export function FairPriceCalculator({ countryCode }: FairPriceCalculatorProps) {
             >
                 <span className="flex items-center gap-3">
                     <Calculator className="w-5 h-5" />
-                    <span>🧮 Fair Price Calculator — Am I Being Overcharged?</span>
+                    <span>Fair Price Calculator: Check an Emergency Quote</span>
                 </span>
                 {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
             </button>
@@ -276,7 +276,7 @@ export function FairPriceCalculator({ countryCode }: FairPriceCalculatorProps) {
                     <div className="p-6 border-t border-border">
                         <h4 className="text-base font-bold text-foreground mb-3 flex items-center gap-2">
                             <span className="w-1 h-5 rounded-full bg-orange-500 inline-block"></span>
-                            {isUK ? 'Standard Emergency Benchmarks — All 11 Trades (2026 UK)' : 'Standard Emergency Benchmarks — All 11 Trades (2026 US)'}
+                            {isUK ? 'Standard Emergency Benchmarks: All 11 Trades (2026 UK)' : 'Standard Emergency Benchmarks: All 11 Trades (2026 US)'}
                         </h4>
                         <div className="overflow-x-auto -mx-2">
                             <table className="min-w-full text-sm border-collapse">
@@ -316,7 +316,7 @@ export function FairPriceCalculator({ countryCode }: FairPriceCalculatorProps) {
                             {isUK ? (
                                 <>
                                     <p className="font-bold text-foreground mb-1">🛡️ Your Consumer Rights (UK)</p>
-                                    <p className="text-muted-foreground">Under the <strong>Consumer Rights Act 2015</strong>, if a price isn't agreed upfront, you are only legally required to pay a "reasonable price." Always request a written quote before work begins.</p>
+                                    <p className="text-muted-foreground">Under the <strong>Consumer Rights Act 2015</strong>, if you do not agree a price upfront, you are only required to pay a "reasonable price." Always request a written quote before work begins.</p>
                                 </>
                             ) : (
                                 <>

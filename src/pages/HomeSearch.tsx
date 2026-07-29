@@ -49,7 +49,7 @@ const emergencyTrustSteps = [
   {
     title: "Tell us the emergency",
     short: "Tell us",
-    desc: "Describe what's happened — a power cut, leak, lockout or breakdown.",
+    desc: "Describe what's happened  -  a power cut, leak, lockout or breakdown.",
     Icon: MessageSquareText,
   },
   {
@@ -61,7 +61,7 @@ const emergencyTrustSteps = [
   {
     title: "Call the business directly",
     short: "Call direct",
-    desc: "Speak straight to a local pro — no middlemen, no booking fees.",
+    desc: "Speak straight to a local pro  -  no middlemen, no booking fees.",
     Icon: PhoneCall,
   },
 ];
@@ -239,7 +239,7 @@ export default function HomeSearch() {
                   </div>
                   <div className="mx-auto mb-7 max-w-[56rem]">
                     <p className="mb-4 text-center font-display text-[11px] font-black uppercase tracking-[0.22em] text-gold/90">
-                      How it works — fast help in 3 steps
+                      How it works  -  fast help in 3 steps
                     </p>
                     {/* Mobile: compact side-by-side tiles, full details reveal on tap */}
                     <div className="sm:hidden">

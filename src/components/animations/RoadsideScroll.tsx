@@ -82,7 +82,7 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
         },
         {
             title: "Always Online",
-            description: "24/7 support because vehicle trouble doesn't stick to business hours.",
+            description: "Breakdown help stays available after garages close.",
             Icon: Clock
         },
         {
@@ -92,7 +92,7 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
         },
         {
             title: "Rapid Response",
-            description: "Just a tap away, whether you're stuck at home or on the roadside.",
+            description: "Find recovery contacts whether you are at home or on the roadside.",
             Icon: MapPin
         }
     ];
@@ -111,7 +111,7 @@ export function RoadsideScroll({ compact = false }: RoadsideScrollProps) {
                         GET ROADSIDE HELP
                     </h3>
                     <p className="text-white/80 text-lg mb-6 leading-relaxed">
-                        Stranded on the highway or in your driveway? We connect you instantly to nearby recovery services.
+                        Enter your location to find nearby recovery services for roadside or driveway breakdowns.
                     </p>
                     
                     <Button 

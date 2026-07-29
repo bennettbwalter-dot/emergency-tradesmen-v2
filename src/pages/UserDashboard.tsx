@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown, ShieldCheck, Globe, CheckCircle } from "lucide-react";
+import { User, Heart, History, Settings, Loader2, MapPin, Calendar, Clock, Phone, Mail, Zap, Crown, ShieldCheck, Globe, CheckCircle, FileText, MessageCircle, MousePointerClick, PhoneCall } from "lucide-react";
 import { getFavorites, getQuoteHistory, removeFavorite, User as UserType } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { getPostcodeLabel, getPostcodePlaceholder } from "@/lib/siteConfig";
@@ -18,6 +18,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { ChatSystem } from "@/components/ChatSystem";
 import { supabase } from "@/lib/supabase";
 import { SEO } from "@/components/SEO";
+import { fetchQuotesByBusiness, type Quote } from "@/lib/quoteService";
+import { getLeadMetrics, type LeadMetrics } from "@/lib/leadTracking";
 
 export default function UserDashboard() {
     const { user, isAuthenticated, isLoading, updateUser } = useAuth();
@@ -49,7 +51,7 @@ export default function UserDashboard() {
         const { data: businesses } = await supabase
             .from('businesses')
             .select('*')
-            .eq('owner_id', user?.id);
+            .or(`owner_user_id.eq.${user?.id},owner_id.eq.${user?.id}`);
 
         const data = businesses?.[0];
 
@@ -216,10 +218,11 @@ export default function UserDashboard() {
                             )}
 
                             <Tabs value={defaultTab} onValueChange={(tab) => navigate(`?tab=${tab}`, { replace: true })} className="w-full">
-                                <TabsList className="grid w-full grid-cols-5 mb-8">
+                                <TabsList className={`grid w-full ${isPremium ? "grid-cols-3 md:grid-cols-6" : "grid-cols-3 md:grid-cols-5"} mb-8`}>
                                     <TabsTrigger value="profile"><User className="w-4 h-4 mr-2" />Profile</TabsTrigger>
                                     <TabsTrigger value="location"><MapPin className="w-4 h-4 mr-2" />Location</TabsTrigger>
                                     <TabsTrigger value="vetting"><ShieldCheck className="w-4 h-4 mr-2" />Vetting</TabsTrigger>
+                                    {isPremium && <TabsTrigger value="leads"><FileText className="w-4 h-4 mr-2" />Leads</TabsTrigger>}
                                     <TabsTrigger value="favorites"><Heart className="w-4 h-4 mr-2" />Favorites</TabsTrigger>
                                     <TabsTrigger value="settings"><Settings className="w-4 h-4 mr-2" />Settings</TabsTrigger>
                                 </TabsList>
@@ -238,6 +241,12 @@ export default function UserDashboard() {
                                     <VettingTab />
                                 </TabsContent>
 
+                                {isPremium && (
+                                    <TabsContent value="leads" className="animate-fade-up">
+                                        <LeadsTab business={businessProfile} />
+                                    </TabsContent>
+                                )}
+
                                 <TabsContent value="favorites" className="animate-fade-up">
                                     <FavoritesTab />
                                 </TabsContent>
@@ -252,6 +261,99 @@ export default function UserDashboard() {
             </main>
             <Footer />
         </>
+    );
+}
+
+function LeadsTab({ business }: { business: { id: string; name: string } | null }) {
+    const [quotes, setQuotes] = useState<Quote[]>([]);
+    const [metrics, setMetrics] = useState<LeadMetrics | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!business?.id) {
+            setLoading(false);
+            return;
+        }
+
+        Promise.all([fetchQuotesByBusiness(business.id), getLeadMetrics(business.id)])
+            .then(([nextQuotes, nextMetrics]) => {
+                setQuotes(nextQuotes);
+                setMetrics(nextMetrics);
+            })
+            .finally(() => setLoading(false));
+    }, [business?.id]);
+
+    if (!business) {
+        return (
+            <Card>
+                <CardHeader>
+                    <CardTitle>Set up your Pro listing</CardTitle>
+                    <CardDescription>Finish your business profile to start receiving and measuring customer leads.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Button className="bg-gold text-gold-foreground hover:bg-gold/90" onClick={() => window.location.href = "/premium-profile"}>
+                        Open Profile Editor
+                    </Button>
+                </CardContent>
+            </Card>
+        );
+    }
+
+    if (loading) {
+        return <div className="flex justify-center py-14"><Loader2 className="h-7 w-7 animate-spin text-gold" /></div>;
+    }
+
+    const totalActions = (metrics?.call_click || 0) + (metrics?.whatsapp_click || 0) + (metrics?.website_click || 0);
+
+    return (
+        <div className="space-y-6">
+            <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Pro lead report</p>
+                <h2 className="mt-1 font-display text-3xl font-bold">Customer activity for {business.name}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Last 30 days. Quote requests contain customer contact details. Contact actions record intent, not completed calls.</p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                    { label: "Quote requests", value: quotes.length, Icon: FileText },
+                    { label: "Call clicks", value: metrics?.call_click || 0, Icon: PhoneCall },
+                    { label: "WhatsApp clicks", value: metrics?.whatsapp_click || 0, Icon: MessageCircle },
+                    { label: "Website clicks", value: metrics?.website_click || 0, Icon: MousePointerClick },
+                ].map(({ label, value, Icon }) => (
+                    <Card key={label} className="border-gold/15 bg-card/70">
+                        <CardContent className="flex items-center justify-between p-5">
+                            <div><p className="text-2xl font-bold">{value}</p><p className="text-xs text-muted-foreground">{label}</p></div>
+                            <Icon className="h-5 w-5 text-gold" />
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+
+            <Card className="border-border/80">
+                <CardHeader>
+                    <CardTitle>Recent quote requests</CardTitle>
+                    <CardDescription>{totalActions} tracked contact action{totalActions === 1 ? "" : "s"} alongside these requests.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    {quotes.length === 0 ? (
+                        <p className="rounded-xl border border-dashed border-border px-5 py-8 text-center text-sm text-muted-foreground">Quote requests from your Pro profile will appear here.</p>
+                    ) : (
+                        <div className="space-y-3">
+                            {quotes.slice(0, 10).map((quote) => (
+                                <article key={quote.id} className="rounded-xl border border-border bg-secondary/15 p-4">
+                                    <div className="flex flex-col justify-between gap-2 sm:flex-row">
+                                        <div><p className="font-semibold">{quote.customerName}</p><p className="text-sm text-muted-foreground">{quote.customerPhone} · {quote.customerEmail}</p></div>
+                                        <Badge variant="outline" className="h-fit w-fit">{quote.urgency}</Badge>
+                                    </div>
+                                    <p className="mt-3 text-sm leading-relaxed text-foreground/85">{quote.details}</p>
+                                    <p className="mt-3 text-xs text-muted-foreground">Received {new Date(quote.createdAt).toLocaleString()}</p>
+                                </article>
+                            ))}
+                        </div>
+                    )}
+                </CardContent>
+            </Card>
+        </div>
     );
 }
 

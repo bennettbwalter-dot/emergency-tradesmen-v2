@@ -20,6 +20,17 @@ EmergencyTradesmen must use UK towns, cities, counties, tradesmen wording, and U
 
 EmergencyContractors must use USA cities, states, counties, contractors wording, and USA emergency contractor logic.
 
+## Content Quality Gate
+
+All public copy changes for both websites must pass the stop-slop gate before publishing or deployment.
+
+Use:
+
+- `C:\Users\Nick\.codex\skills\stop-slop\SKILL.md`
+- `docs/stop-slop-content-gate.md`
+
+Apply this to blog posts, landing pages, hero copy, CTAs, pricing pages, FAQs, service descriptions, forms, modals, SEO titles, meta descriptions, and outreach/email copy. Cut filler, remove formulaic AI phrasing, use active voice, keep regional wording locked, and keep internal publishing notes out of public website text.
+
 ## First Inspection
 
 Before making changes, inspect both apps and report:

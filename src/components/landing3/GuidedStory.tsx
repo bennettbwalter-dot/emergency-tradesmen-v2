@@ -81,7 +81,7 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
       align: "left",
       kicker: "03 / Problem solved",
       title: "Help reaches the door",
-      body: "Your local expert arrives, provides a clear quote, and resolves the emergency safely and professionally.",
+      body: "Your local expert arrives, gives a clear quote, and handles the emergency.",
       Icon: HeartHandshake,
     },
   ];
@@ -381,8 +381,8 @@ export const GuidedStory = ({ displayCity, isUSSite, light }: GuidedStoryProps) 
           <div className="l3-journey-card l3-final-card">
             <ShieldCheck className="h-7 w-7" />
             <p className="l3-journey-kicker">Final routing</p>
-            <h3>It cannot wait? Neither can we.</h3>
-            <p>Trusted emergency help near you when lights go out, pipes burst, vehicles stop, locks fail, or urgent repairs cannot wait.</p>
+            <h3>Urgent repairs need a fast call.</h3>
+            <p>Find emergency help near you when lights go out, pipes burst, vehicles stop, locks fail, or repairs cannot wait.</p>
             <div className="l3-final-actions">
               <Link to="/home#manual-search">
                 Find Emergency Help

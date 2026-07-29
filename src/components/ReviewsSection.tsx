@@ -23,7 +23,7 @@ export function ReviewsSection({ reviews, stats, businessName }: ReviewsSectionP
     const [filterRating, setFilterRating] = useState<number | "all">("all");
     const [showCount, setShowCount] = useState(6);
 
-    // Honest empty state — never show fabricated 0.0 stats when there are no reviews yet
+    // Honest empty state  -  never show fabricated 0.0 stats when there are no reviews yet
     if (reviews.length === 0 && stats.totalReviews === 0) {
         return (
             <div className="space-y-8">
@@ -33,7 +33,7 @@ export function ReviewsSection({ reviews, stats, businessName }: ReviewsSectionP
                         What Customers Say About {businessName}
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        No reviews yet — be the first to share your experience with this business.
+                        No reviews yet  -  be the first to share your experience with this business.
                     </p>
                 </div>
             </div>

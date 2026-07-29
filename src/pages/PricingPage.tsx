@@ -5,12 +5,13 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Shield, Star, Zap, TrendingUp, Crown, Gift, Globe2 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useLocalization } from "@/contexts/LocalizationContext";
 import { SEO } from "@/components/SEO";
 import { useAuth } from "@/contexts/AuthContext";
 import { GeneralFAQSection } from "@/components/GeneralFAQSection";
 import { getUserSubscription } from "@/lib/subscriptionService";
+import { trackEvent } from "@/lib/analytics";
 import {
     Dialog,
     DialogContent,
@@ -27,6 +28,7 @@ export default function PricingPage() {
     const { settings } = useLocalization();
     const { user } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const isUS = settings.countryCode === 'US';
     const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
     const port = typeof window !== 'undefined' ? window.location.port : '';
@@ -36,6 +38,7 @@ export default function PricingPage() {
     const [websiteChoiceOpen, setWebsiteChoiceOpen] = useState(false);
     const [selectedWebsiteChoice, setSelectedWebsiteChoice] = useState("yes");
     const [pendingCheckout, setPendingCheckout] = useState<{ url?: string | null; plan: "pro-yearly" | "agency" } | null>(null);
+    const arrivedFromWebsiteOffer = searchParams.get("offer") === "website";
 
     // When user returns to this tab after completing Stripe payment, check if they now have an active subscription
     // and automatically redirect them to the profile editor
@@ -46,7 +49,7 @@ export default function PricingPage() {
             if (sub && sub.status === 'active' && sub.plan !== 'free') {
                 navigate('/premium-profile');
             }
-        } catch { /* ignore — user hasn't paid yet */ }
+        } catch { /* ignore  -  user hasn't paid yet */ }
     }, [user, navigate]);
 
     useEffect(() => {
@@ -84,7 +87,7 @@ export default function PricingPage() {
         ]
     };
 
-    // Stripe Payment Links — separate links for US vs UK; test links used in dev
+    // Stripe Payment Links  -  separate links for US vs UK; test links used in dev
     const isDev = import.meta.env.DEV;
     const stripeLinks = isUSDomain
         ? {
@@ -95,9 +98,12 @@ export default function PricingPage() {
         : {
               monthly: (isDev ? import.meta.env.VITE_STRIPE_UK_MONTHLY_TEST : null) || 'https://buy.stripe.com/fZu5kD5bx00feTcfRZcQU00',
               yearly: (isDev ? import.meta.env.VITE_STRIPE_UK_YEARLY_TEST : null) || 'https://buy.stripe.com/5kQ28rdI3dR54ey219cQU06',
-              // Live UK Agency Payment Link comes from env so it can go live without a deploy;
-              // until it's set, the CTA routes to the contact form (prefilled via ?subject=).
-              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || import.meta.env.VITE_STRIPE_UK_AGENCY_LINK || null,
+              // Hardcoded to match the other five tiers. It previously read
+              // VITE_STRIPE_UK_AGENCY_LINK, which was never set in any .env or in
+              // Cloudflare Pages, so this resolved to null and the CTA silently fell
+              // back to the contact form - the Payment Link existed in Stripe the
+              // whole time. The env indirection is deliberately not reintroduced.
+              enterprise: (isDev ? import.meta.env.VITE_STRIPE_UK_AGENCY_TEST : null) || 'https://buy.stripe.com/8x2fZh33p7sH9ySgW3cQU02',
           };
 
 
@@ -137,11 +143,22 @@ export default function PricingPage() {
         startStripeCheckout(pendingUrl === "agency-contact" ? null : pendingUrl);
     }, [startStripeCheckout, user]);
 
+    useEffect(() => {
+        if (arrivedFromWebsiteOffer) {
+            trackEvent("Business owner", "Website offer pricing viewed", isUSDomain ? "US" : "UK");
+        }
+    }, [arrivedFromWebsiteOffer, isUSDomain]);
+
     const handleCheckout = (url?: string | null) => {
         startStripeCheckout(url);
     };
 
     const startWebsitePlanCheckout = (url: string | null | undefined, plan: "pro-yearly" | "agency") => {
+        trackEvent(
+            "Business owner",
+            "Website plan checkout started",
+            `${isUSDomain ? "US" : "UK"}: ${plan}${arrivedFromWebsiteOffer ? ": website offer" : ""}`
+        );
         setPendingCheckout({ url, plan });
         setSelectedWebsiteChoice("yes");
         setWebsiteChoiceOpen(true);
@@ -169,7 +186,7 @@ export default function PricingPage() {
     return (
         <>
             <SEO
-                title={`Pro Pricing Plans for ${isUS ? 'Contractors' : 'Tradesmen'} — Boost Your Business`}
+                title={`Pro Pricing Plans for ${isUS ? 'Contractors' : 'Tradesmen'} | Emergency ${isUS ? 'Contractors' : 'Tradesmen'}`}
                 description={`Boost your business with Emergency ${isUS ? 'Contractors' : 'Tradesmen'} Pro. Get priority ranking, enhanced trust signals & 3x more leads. Sign up today from ${settings.currencySymbol}0/month.`}
                 canonical={`${countryPrefix}/pricing`}
                 jsonLd={breadcrumbSchema}
@@ -208,7 +225,7 @@ export default function PricingPage() {
                         <h2 className="text-3xl font-display mb-6">Why Join Emergency {isUS ? 'Contractors' : 'Tradesmen'}?</h2>
                         <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                             <p>
-                                When emergencies happen, customers don’t shop around — they call the first relevant local contact they see.
+                                When emergencies happen, customers don’t shop around  -  they call the first relevant local contact they see.
                             </p>
                             <p>
                                 Emergency {isUS ? 'Contractors' : 'Tradesmen'} puts your business front and centre at the exact moment people need help, turning urgent searches into real call-outs.
@@ -225,7 +242,7 @@ export default function PricingPage() {
                             <div className="flex-1">
                                 <p className="mb-2 text-sm font-bold uppercase tracking-widest text-emerald-500">Free website bonus</p>
                                 <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
-                                    Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.
+                                    Sign up to Pro Yearly or Agency / Multi-Location and we will build your emergency-ready website with no build fee.
                                 </h2>
                                 <p className="mt-3 text-muted-foreground">
                                     During Pro Yearly or Agency signup, we ask whether you need the website. If you do, the brief form appears after payment so only active members complete it.
@@ -233,6 +250,14 @@ export default function PricingPage() {
                             </div>
                         </div>
                     </div>
+
+                    {arrivedFromWebsiteOffer && (
+                        <div className="mx-auto mb-10 max-w-5xl rounded-2xl border border-gold/25 bg-gold/5 px-6 py-5 text-center">
+                            <p className="font-display text-xl font-bold text-foreground">
+                                Choose Pro Yearly or Agency, then select a template and send your website brief after payment.
+                            </p>
+                        </div>
+                    )}
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {/* Free Tier */}
@@ -371,10 +396,10 @@ export default function PricingPage() {
                                     <span className="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Enterprise</span>
                                 </div>
                                 <p className="text-muted-foreground text-base max-w-lg leading-relaxed">
-                                    Managing multiple vans, branches, or client listings? Get 5 Pro locations, a dedicated account manager, and priority support — at a fixed monthly rate.
+                                    Manage multiple vans, branches, or client listings with 5 Pro locations, a dedicated account manager, and priority support at a fixed monthly rate.
                                 </p>
                                 <p className="mt-3 text-sm font-semibold text-purple-300">
-                                    Includes a professional emergency-ready website built completely free for your agency, franchise, or multi-location business.
+                                    Includes a professional emergency-ready website built with no build fee for your agency, franchise, or multi-location business.
                                 </p>
                                 <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-muted-foreground">
                                     <li className="flex items-center gap-2 font-medium"><Check className="w-4 h-4 text-purple-500" /> 5 Pro listings included</li>
@@ -403,7 +428,7 @@ export default function PricingPage() {
                         <p>Secure payment processing via Stripe. Get listed and start receiving leads today.</p>
                     </div>
 
-                    {/* Social Proof — Network Stats */}
+                    {/* Social Proof  -  Network Stats */}
                     <div className="mt-20 max-w-4xl mx-auto">
                         <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-16">
                             <div className="text-center">
@@ -427,7 +452,7 @@ export default function PricingPage() {
                                 Be Among Our First Pro Members
                             </h3>
                             <p className="text-muted-foreground max-w-lg mx-auto mb-6 leading-relaxed">
-                                We're building the go-to emergency {isUS ? 'contractor' : 'tradesman'} network for {isUS ? 'the US' : 'the UK'}. Early Pro members get locked-in pricing and front-of-queue placement as the network grows.
+                                We are building the emergency {isUS ? 'contractor' : 'tradesman'} network for {isUS ? 'the US' : 'the UK'}. Early Pro members get locked-in pricing and front-of-queue placement as the network grows.
                             </p>
                             <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto text-center">
                                 <div>
@@ -468,9 +493,9 @@ export default function PricingPage() {
                             </div>
                             <h3 className="font-display text-xl font-bold mb-2">Claim Your Business</h3>
                             <p className="text-sm text-muted-foreground mb-4 flex-1">
-                                Already listed? Send a manual claim request so we can verify ownership before any listing changes are made.
+                                Send a manual claim request so we can verify ownership before any listing changes are made.
                             </p>
-                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Start claim →</span>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Start claim</span>
                         </Link>
                         <Link
                             to={isUSDomain || isUS ? "/for-contractors/website-showroom" : "/for-tradesmen/website-showroom"}
@@ -483,7 +508,7 @@ export default function PricingPage() {
                             <p className="text-sm text-muted-foreground mb-4 flex-1">
                                 Browse the approved emergency-ready website templates that Pro Yearly and Agency members can build from.
                             </p>
-                            <span className="text-gold text-sm font-bold uppercase tracking-wider">View showroom →</span>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">View showroom</span>
                         </Link>
                         <button
                             type="button"
@@ -495,9 +520,9 @@ export default function PricingPage() {
                             </div>
                             <h3 className="font-display text-xl font-bold mb-2 text-left">Pro Website Option</h3>
                             <p className="text-sm text-muted-foreground mb-4 flex-1">
-                                Full-service website design, hosting, and setup — we build it, you go live with a working enquiry form.
+                                Full-service website design, hosting, and setup. We build it, you go live with a working enquiry form.
                             </p>
-                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Learn more →</span>
+                            <span className="text-gold text-sm font-bold uppercase tracking-wider">Learn more</span>
                         </button>
                     </div>
                 </div>

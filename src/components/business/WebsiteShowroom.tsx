@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/analytics";
 
 type BusinessRegion = "UK" | "US";
 
@@ -44,7 +45,7 @@ const ukStyles: WebsiteStyle[] = [
     sourceRepo: "bennettbwalter-dot/calm-water-systems",
     description: "Built for burst pipes, leaks, blocked toilets, and urgent plumbing callouts.",
     features: ["Call Now first", "Leak and burst pipe service sections", "Local area pages"],
-    headline: "Burst pipe? Get help fast.",
+    headline: "Fast help for burst pipes.",
     subhead: "Emergency plumbing pages built around fast calls and clear trust.",
     services: ["Leaks", "Blocked toilets", "Burst pipes"],
     trust: ["24/7 calls", "WhatsApp ready", "Local pages"],
@@ -58,7 +59,7 @@ const ukStyles: WebsiteStyle[] = [
     title: "Emergency Electrician Website",
     description: "Built for power problems, tripped electrics, emergency repairs, and safety-first electrical callouts.",
     features: ["Urgent fault callouts", "Safety-first service copy", "Fast contact flow"],
-    headline: "Power problem? We respond.",
+    headline: "Urgent electrical response.",
     subhead: "High-contrast electrical pages for urgent faults and safe repairs.",
     services: ["Tripped electrics", "Fault finding", "Repairs"],
     trust: ["Fast contact", "Safety copy", "Service pages"],
@@ -73,7 +74,7 @@ const ukStyles: WebsiteStyle[] = [
     sourceRepo: "bennettbwalter-dot/v0-compute-the-platform-to-build",
     description: "Built for lockouts, broken keys, lock changes, and urgent entry help.",
     features: ["Lockout-focused layout", "Mobile-first Call Now", "Trust and response signals"],
-    headline: "Locked out? Get back in.",
+    headline: "Fast help for lockouts.",
     subhead: "Security-led pages for urgent access and lock repairs.",
     services: ["Lockouts", "Broken keys", "Lock changes"],
     trust: ["Mobile-first", "Trust signals", "Clear fees"],
@@ -87,7 +88,7 @@ const ukStyles: WebsiteStyle[] = [
     title: "Emergency Gas Engineer Website",
     description: "Built for boiler breakdowns, heating problems, gas-safe repair enquiries, and urgent heating support.",
     features: ["Boiler repair sections", "Heating emergency pages", "Trust-led layout"],
-    headline: "Heating down? Help is close.",
+    headline: "Heating help is close.",
     subhead: "Warm trust-led pages for boiler breakdowns and heating support.",
     services: ["Boiler repairs", "Heating faults", "Urgent callouts"],
     trust: ["Trust blocks", "Repair pages", "Quick enquiry"],
@@ -126,7 +127,7 @@ const ukStyles: WebsiteStyle[] = [
     title: "Emergency Roofer Website",
     description: "Built for roof leaks, storm damage, slipped tiles, and urgent roof repair enquiries.",
     features: ["Storm damage sections", "Roof leak landing pages", "Review and trust blocks"],
-    headline: "Roof leak? Stop the damage.",
+    headline: "Stop roof leak damage.",
     subhead: "Storm-ready roof repair pages for urgent calls and trust.",
     services: ["Roof leaks", "Storm damage", "Slipped tiles"],
     trust: ["Review blocks", "Leak pages", "Weather-ready"],
@@ -167,7 +168,7 @@ const ukStyles: WebsiteStyle[] = [
     sourceRepo: "bennettbwalter-dot/redline-recovery-site",
     description: "Built for vehicle breakdowns, roadside recovery, towing, and emergency recovery calls.",
     features: ["Roadside recovery CTA", "Location-based service pages", "Mobile-first phone button"],
-    headline: "Broken down? Keep moving.",
+    headline: "Roadside recovery that moves.",
     subhead: "Roadside pages built around fast phone calls and location coverage.",
     services: ["Roadside recovery", "Towing", "Vehicle help"],
     trust: ["Phone-first", "Location pages", "24/7 response"],
@@ -233,7 +234,7 @@ const usStyles: WebsiteStyle[] = [
     ...ukStyles[3],
     title: "Emergency HVAC Website",
     description: "Built for heating and cooling problems, emergency repairs, and fast comfort calls.",
-    headline: "No heat? No cool air?",
+    headline: "Heating and cooling repair.",
     subhead: "A comfort-first HVAC layout for urgent repair calls and seasonal demand.",
     services: ["Heating repair", "Cooling repair", "Emergency service"],
     trust: ["Seasonal CTAs", "City pages", "Fast quote"],
@@ -459,6 +460,11 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
     : "Website Template Add-On for Pro Tradesmen";
   const templateCount = styles.length;
   const templateCountWord = templateCountWords[templateCount] || String(templateCount);
+  const websiteOfferPricingPath = "/pricing?offer=website";
+
+  const trackWebsiteOfferClick = (placement: string) => {
+    trackEvent("Business owner", "Website showroom pricing click", `${region}: ${placement}`);
+  };
 
   const chooseStyle = (style: WebsiteStyle) => {
     setSelectedStyle(style);
@@ -502,7 +508,7 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
               <p className="showroom-kicker">{templateCount} approved templates</p>
               <h2 className="showroom-heading font-display">{templateCountWord} examples we can build from</h2>
               <p className="showroom-lede">
-                These are not separate website packages. They are fast, professional starting points for the free website included with Pro Yearly and Agency / Multi-Location. Choose the closest fit and we adapt it for the business.
+                These templates start the free website included with Pro Yearly and Agency / Multi-Location. Choose the closest fit and we adapt it for the business.
               </p>
             </div>
             <div className="showroom-priority-strip" aria-label="Recommended showroom order">
@@ -526,7 +532,7 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
                       ))}
                     </ul>
                     <Button className="showroom-cta" onClick={() => chooseStyle(style)}>
-                      Send Website Brief
+                      Choose This Template
                     </Button>
                     <p className="showroom-contact-note">
                       Choose this example, then send the details by form or email. GitHub is only for the finished handover if needed.
@@ -545,11 +551,13 @@ export function WebsiteShowroom({ region }: WebsiteShowroomProps) {
               {selectedStyle ? `${selectedStyle.title} can be your starting point` : "Choose a template during signup"}
             </h2>
             <p className="mt-3 text-muted-foreground">
-              The website brief form is only shown after a Pro Yearly or Agency / Multi-Location plan is active. During signup we ask whether you need a website, then collect the brief after payment.
+              The website brief opens after a Pro Yearly or Agency / Multi-Location plan is active. Choose the plan first, then tell us which template you want.
             </p>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
               <Button asChild className="bg-gold text-black hover:bg-gold-light">
-                <Link to="/pricing">View Pro Plans</Link>
+                <Link to={websiteOfferPricingPath} onClick={() => trackWebsiteOfferClick(selectedStyle ? `selected ${selectedStyle.title}` : "showroom footer")}>
+                  Get Pro Yearly + Website
+                </Link>
               </Button>
               <Button variant="outline" onClick={() => document.getElementById("showroom-styles")?.scrollIntoView({ behavior: "smooth" })}>
                 Keep Browsing Templates

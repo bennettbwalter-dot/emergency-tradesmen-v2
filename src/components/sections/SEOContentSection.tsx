@@ -24,7 +24,7 @@ export function SEOContentSection() {
                     </span>
 
                     <h2 className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight">
-                        Why Choose Our <span className="text-gold">{settings.tradeTerm} Near Me?</span>
+                        Local <span className="text-gold">{settings.tradeTerm} Near Me</span>
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -44,7 +44,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Our network connects you instantly with the closest available <strong>local {tradeTerm}</strong> in your area. Finding reliable help in an emergency shouldn't be a gamble.
+                                Search your area for available <strong>local {tradeTerm}</strong> and confirm details before you book.
                             </p>
                         </div>
 
@@ -54,7 +54,7 @@ export function SEOContentSection() {
                                 <Zap className="w-4 h-4 text-gold" />
                             </div>
                             <p className="text-sm text-foreground/90 leading-relaxed">
-                                Whether it's a <strong>{us ? '24/7 emergency plumber' : '24/7 emergency plumber'}</strong>, a certified electrician, or a locksmith nearby, get the help you need, <strong>near you</strong>, right now.
+                                Find a <strong>{us ? '24/7 emergency plumber' : '24/7 emergency plumber'}</strong>, certified electrician, or nearby locksmith when you need help now.
                             </p>
                         </div>
                     </div>

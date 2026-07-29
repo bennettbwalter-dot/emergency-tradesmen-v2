@@ -261,7 +261,7 @@ export default function VoiceReporter() {
             );
             // Use reverse geocoding or just proceed with coords
             // For now, let the user still pick from the selector
-            toast.info('Location detected — please confirm your city below.');
+            toast.info('Location detected  -  please confirm your city below.');
         } catch {
             toast.error('Could not detect location. Please select your city manually.');
         } finally {
@@ -463,7 +463,7 @@ export default function VoiceReporter() {
                                 className="flex-1 py-3 rounded-xl bg-gradient-to-r from-gold to-amber-500 text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-gold/25 flex items-center justify-center gap-2"
                             >
                                 <MapPin className="w-4 h-4" />
-                                Continue — Set Location
+                                Continue  -  Set Location
                             </button>
                             <button
                                 onClick={reset}
@@ -526,7 +526,7 @@ export default function VoiceReporter() {
                             )}
                         </div>
 
-                        {/* Find tradesmen — only enabled when city is set */}
+                        {/* Find tradesmen  -  only enabled when city is set */}
                         <div className="flex gap-3">
                             <button
                                 onClick={handleFindTradesman}

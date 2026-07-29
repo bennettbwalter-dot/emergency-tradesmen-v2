@@ -27,8 +27,8 @@ export function TradesmenScroll({ compact = false }: TradesmenScrollProps) {
         "Get seen first with priority ranking in your area",
         "Build a clearer profile with a 'Featured' badge and reviews",
         "Receive direct calls, not messages or time-wasters",
-        "Reach customers ready to act, not just browsing",
-        "No ads to manage. No chasing leads. Just calls."
+        "Reach customers ready to book a job",
+        "Skip ad management and lead chasing"
     ];
 
     useEffect(() => {

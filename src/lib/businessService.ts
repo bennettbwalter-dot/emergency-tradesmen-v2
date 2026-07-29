@@ -38,7 +38,7 @@ type AreaLookup = {
     coords: AreaCoords | null;
 };
 
-// Lazy-loaded enrichment data — avoids bundling 3.3 MB JSON
+// Lazy-loaded enrichment data  -  avoids bundling 3.3 MB JSON
 let _fallbackEnrichment: Record<string, any> | null = null;
 async function getFallbackEnrichment(): Promise<Record<string, any>> {
     if (_fallbackEnrichment) return _fallbackEnrichment;

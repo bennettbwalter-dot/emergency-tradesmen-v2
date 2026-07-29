@@ -21,7 +21,7 @@ const GeneralFAQSection = lazy(() => import("@/components/GeneralFAQSection").th
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 /**
- * Landing Page 3 — experimental cinematic landing page (preview at /landing-3).
+ * Landing Page 3  -  experimental cinematic landing page (preview at /landing-3).
  * Does NOT replace the live landing page (/). noindex'd until approved.
  */
 
@@ -72,7 +72,7 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
 
 /**
  * Exact replica of the original landing page's dynamic headline:
- * L[logo]CAL / TRADESMEN|CONTRACTORS / near {CITY[, ST]} — same localization
+ * L[logo]CAL / TRADESMEN|CONTRACTORS / near {CITY[, ST]}  -  same localization
  * logic as components/sections/HeroSection.tsx.
  */
 function OriginalDynamicHeadline({ light }: { light: boolean }) {
@@ -105,7 +105,7 @@ function OriginalDynamicHeadline({ light }: { light: boolean }) {
           L<img src="/et-logo-v3.webp" alt="O" width="64" height="64" decoding="async" className="inline-block h-[0.88em] w-auto align-middle -translate-y-[0.06em] mx-[0.02em] brightness-125 drop-shadow-lg" />CAL
         </span>
 
-        {/* TRADESMEN / CONTRACTORS — dominant gold */}
+        {/* TRADESMEN / CONTRACTORS  -  dominant gold */}
         <span
           className="hero-trade-title block bg-clip-text text-transparent text-[clamp(2rem,9.2vw,5.25rem)] mt-1"
           style={{
@@ -177,7 +177,7 @@ const LandingPage3 = () => {
           name="description"
           content={`Find local ${siteTradeTerm.toLowerCase()} in ${displayCity} for emergency repairs. Public listings are available 24/7 for plumbing, electrical, locksmith & HVAC.`}
         />
-        {/* experimental preview page — keep out of search until approved */}
+        {/* experimental preview page  -  keep out of search until approved */}
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -187,7 +187,7 @@ const LandingPage3 = () => {
       {/* Act 1: the emergency beam hero with the original dynamic headline */}
       <Hero3D mode={light ? "light" : "dark"} headline={<OriginalDynamicHeadline light={light} />} />
 
-      {/* Act 2: get help now — the original emergency search */}
+      {/* Act 2: get help now  -  the original emergency search */}
       <section id="get-help" className="relative scroll-mt-20 bg-background pb-20 pt-0">
         {/* the beam lands at the end of the hero and continues as this scroll line */}
         <div aria-hidden className="flex flex-col items-center pb-12">

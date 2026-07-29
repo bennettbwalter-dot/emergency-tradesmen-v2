@@ -4,6 +4,12 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
+## Content Copy Gate
+
+For any public prose change, including blog posts, landing page copy, CTAs, pricing text, FAQs, forms, modals, SEO titles, meta descriptions, and outreach/email copy, apply the stop-slop rules before finalising.
+
+Use `C:\Users\Nick\.codex\skills\stop-slop\SKILL.md` and `docs/stop-slop-content-gate.md`. Public copy should be direct, active, specific, region-locked, and free of formulaic AI phrasing. Keep internal publishing notes out of public website text.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**

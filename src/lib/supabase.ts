@@ -11,7 +11,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-        // Bypass Web Locks API — prevents "lock stolen" errors when multiple
+        // Bypass Web Locks API  -  prevents "lock stolen" errors when multiple
         // auth calls fire concurrently (e.g. refreshUser + initBusiness).
         // Supabase handles concurrent token refreshes gracefully.
         lock: <R>(_name: string, _acquireTimeout: number, fn: () => Promise<R>): Promise<R> => fn(),

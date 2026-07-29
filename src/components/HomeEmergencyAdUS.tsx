@@ -4,7 +4,7 @@ import { USPremiumModelerDialog } from "./USPremiumModelerDialog";
 import { AffiliateDisclosure } from "./AffiliateDisclosure";
 
 // Set in env once a real US home-warranty affiliate deal exists.
-// Without it the ad must NOT render — never ship a placeholder sponsored link.
+// Without it the ad must NOT render  -  never ship a placeholder sponsored link.
 const US_AFFILIATE_URL = import.meta.env.VITE_US_HOME_WARRANTY_AFF_URL as string | undefined;
 
 export function HomeEmergencyAdUS() {

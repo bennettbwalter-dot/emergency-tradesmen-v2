@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { BusinessEnquiryForm } from "@/components/business/BusinessEnquiryForm";
+import { trackEvent } from "@/lib/analytics";
 
 type Region = "UK" | "US";
 type PackageName = "Free website build with Pro Yearly" | "Free website build with Agency / Multi-Location" | "Not sure yet";
@@ -85,6 +86,11 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
   const audience = isUS ? "local contractors" : "local tradesmen";
   const serviceAudience = isUS ? "contractors and home service businesses" : "local trades and home service businesses";
   const title = isUS ? "Emergency-Ready Websites for Local Contractors" : "Emergency-Ready Websites for Local Tradesmen";
+  const websiteOfferPricingPath = "/pricing?offer=website";
+
+  const trackWebsiteOfferClick = (placement: string) => {
+    trackEvent("Business owner", "Website offer pricing click", `${region}: ${placement}`);
+  };
 
   const scrollToForm = (type: EnquiryType, packageName: PackageName = "Not sure yet", templateName = "") => {
     setEnquiryType(type);
@@ -108,17 +114,19 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <p className="business-owner-kicker">Done-for-you websites</p>
               <h1>{title}</h1>
               <p className="business-owner-lede">
-                Phone-first websites built for {serviceAudience} who need more phone calls, not just a pretty homepage.
+                Phone-first websites built for {serviceAudience} who need more emergency calls.
               </p>
               <p className="business-owner-copy">
                 The free website offer uses one of the approved templates already provided, then we customise it with your business name, trade, location, phone number, services, images, emergency CTA, contact form, hours, and colours where needed.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button className="min-h-12 bg-gold text-black hover:bg-gold-light" onClick={() => scrollToForm("Get a website built")}>
-                  Get a Website Built <ArrowRight className="ml-2 h-4 w-4" />
+                <Button asChild className="min-h-12 bg-gold text-black hover:bg-gold-light">
+                  <Link to={websiteOfferPricingPath} onClick={() => trackWebsiteOfferClick("owner page hero")}>
+                    Get Pro Yearly + Website <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
-                <Button variant="outline" className="min-h-12" onClick={() => scrollToForm("Claim free listing")}>
-                  Claim Your Listing
+                <Button variant="outline" className="min-h-12" onClick={() => scrollToForm("Get a website built")}>
+                  Ask a Question
                 </Button>
                 <Button asChild variant="ghost" className="min-h-12">
                   <Link to={showroomPath}>View Website Showroom</Link>
@@ -146,7 +154,7 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <div className="business-owner-feature">
                 <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 1</span>
                 <h2>Claim your free listing</h2>
-                <p>Already listed? Claim it free, keep your phone number and details accurate, and start taking direct calls.</p>
+                <p>Claim your free listing, keep your phone number and details accurate, and start taking direct calls.</p>
                 <Button asChild variant="outline" className="mt-3 w-fit">
                   <Link to="/claim-your-business">Claim free listing</Link>
                 </Button>
@@ -154,14 +162,16 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <div className="business-owner-feature">
                 <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 2</span>
                 <h2>Get the claimed badge</h2>
-                <p>Claims are reviewed manually. Approved profiles show a claimed badge customers can actually trust.</p>
+                <p>Our team reviews each claim. Approved profiles show a claimed badge customers can trust.</p>
               </div>
               <div className="business-owner-feature">
                 <span className="font-mono text-xs font-black uppercase tracking-widest text-gold">Step 3</span>
                 <h2>Upgrade to Pro</h2>
                 <p>Priority placement, richer profile, and the free website build on Pro Yearly or Agency plans.</p>
                 <Button asChild className="mt-3 w-fit bg-gold text-black hover:bg-gold-light">
-                  <Link to="/pricing">View Pro plans</Link>
+                  <Link to={websiteOfferPricingPath} onClick={() => trackWebsiteOfferClick("owner page journey")}>
+                    Get Pro Yearly + Website
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -177,15 +187,17 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <div>
                 <p className="business-owner-kicker">Free website bonus</p>
                 <h2 className="font-display text-2xl font-bold md:text-3xl">
-                  Sign up to Pro Yearly or Agency / Multi-Location and we'll build your emergency-ready website completely free.
+                  Sign up to Pro Yearly or Agency / Multi-Location and we will build your emergency-ready website with no build fee.
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  We use one of the approved templates you already provided, then customise it for the business. No random design, no starting from zero.
+                  We use one approved template and customise it for the business.
                 </p>
               </div>
             </div>
             <Button asChild className="mt-5 shrink-0 bg-gold text-black hover:bg-gold-light md:mt-0">
-              <Link to="/pricing">View Pro Plans</Link>
+              <Link to={websiteOfferPricingPath} onClick={() => trackWebsiteOfferClick("owner page bonus")}>
+                See Pro Yearly
+              </Link>
             </Button>
           </div>
         </section>
@@ -212,7 +224,7 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <p className="business-owner-kicker">Included template build</p>
               <h2 className="font-display text-4xl md:text-5xl font-bold">Your emergency-ready website starts from one of the approved templates</h2>
               <p className="mt-4 text-muted-foreground">
-                Sign up to Pro Yearly or Agency / Multi-Location and we will customise one of the GitHub templates below completely free. This keeps the offer fast, professional, and scalable.
+                Sign up to Pro Yearly or Agency / Multi-Location and we will customise one of the GitHub templates below with no build fee.
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
@@ -228,7 +240,9 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
                 </ul>
                 <div className="mt-auto flex flex-col gap-3 sm:flex-row">
                   <Button asChild className="bg-gold text-black hover:bg-gold-light">
-                    <Link to="/pricing">View Pro Yearly</Link>
+                    <Link to={websiteOfferPricingPath} onClick={() => trackWebsiteOfferClick("owner page package")}>
+                      Get Pro Yearly + Website
+                    </Link>
                   </Button>
                   <Button variant="outline" onClick={() => scrollToForm("Get a website built", "Free website build with Pro Yearly", "Not sure yet - choose the best GitHub template")}>
                     Ask About the Free Build
@@ -295,7 +309,7 @@ export function BusinessWebsitePage({ region }: BusinessWebsitePageProps) {
               <p className="business-owner-kicker">Already listed?</p>
               <h2>Claim your business listing</h2>
               <p>
-                If your business is already listed on {brand}, submit a claim request. Claims are reviewed manually before any listing changes are made.
+                Submit a claim request for an existing {brand} listing. Our team reviews ownership before any listing changes are made.
               </p>
             </div>
             <Button className="bg-gold text-black hover:bg-gold-light" onClick={() => scrollToForm("Claim free listing")}>

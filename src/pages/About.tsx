@@ -55,7 +55,7 @@ export default function About() {
     return (
         <>
             <SEO
-                title={`About Emergency ${tradeTerm} — 24/7 Local Emergency Directory`}
+                title={`About Emergency ${tradeTerm}  -  24/7 Local Emergency Directory`}
                 description={`Find public emergency ${tradeTerm.toLowerCase()} listings in your area for plumbing, electrical & HVAC repairs. Check details directly before booking.`}
                 canonical={`${countryPrefix}/about`}
                 jsonLd={[orgSchema, breadcrumbSchema]}

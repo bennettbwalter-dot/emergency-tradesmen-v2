@@ -31,7 +31,7 @@ export function FloatingEmergencyCTA({ business, trade, city, countryCode }: Flo
                     <div className="flex items-center justify-between text-[10px] font-semibold border-b border-white/5 pb-2 px-1">
                         <div className="flex items-center gap-1 text-gold">
                             <Phone className="w-3.5 h-3.5" />
-                            <span>Direct line — no middlemen</span>
+                            <span>Direct line  -  no middlemen</span>
                         </div>
                         <div className="flex items-center gap-1 text-emerald-400">
                             <ShieldCheck className="w-3.5 h-3.5" />

@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js",
+    "content:stop-slop": "node scripts/stop_slop_audit.mjs",
     "build:all": "npm run generate-sitemap && tsc && vite build"
   },
   "dependencies": {
