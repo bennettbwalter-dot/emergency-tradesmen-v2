@@ -9,7 +9,7 @@ Currently, this is implemented as a **Text-First** interface with simulated inte
 - `systemPrompt.txt`: instructions for the future LLM-based agent.
 
 ## Future Voice Integration
-To add real voice capabilities (e.g., Vapi, OpenAI Realtime API, or ElevenLabs):
+To add real voice capabilities (e.g., Vapi or OpenAI Realtime API):
 
 1. **Select a Provider**: Choose a WebRTC-based voice provider.
 2. **Client Integration**:
